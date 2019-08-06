@@ -1,0 +1,37 @@
+{
+  "name": "telnyx/telnyx-php",
+  "description": "Telnyx PHP Library",
+  "keywords": [
+    "telnyx",
+    "payment processing",
+    "api"
+  ],
+  "homepage": "https://telnyx.com/",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Telnyx and contributors",
+      "homepage": "https://github.com/telnyx/telnyx-php/contributors"
+    }
+  ],
+  "require": {
+    "php": ">=5.4.0",
+    "ext-curl": "*",
+    "ext-json": "*",
+    "ext-mbstring": "*"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~4.0",
+    "php-coveralls/php-coveralls": "1.*",
+    "squizlabs/php_codesniffer": "~2.0",
+    "symfony/process": "~2.8"
+  },
+  "autoload": {
+    "psr-4": { "Telnyx\\" : "lib/" }
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "2.0-dev"
+    }
+  }
+}
