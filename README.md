@@ -50,35 +50,33 @@ Simple usage looks like:
 
 ```php
 \Telnyx\Telnyx::setApiKey('sk_test_BQokikJOvBiI2HlWgH4olfQ2');
-$charge = \Telnyx\Charge::create(['amount' => 2000, 'currency' => 'usd', 'source' => 'tok_189fqt2eZvKYlo2CTGBeg6Uq']);
-echo $charge;
+$order = \Telnyx\NumberOrder::create(['phone_number' => '+18665552368']);
+echo $order;
 ```
 
 ## Documentation
 
-Please see https://telnyx.com/docs/api for up-to-date documentation.
+Please see https://telnyx.com/docs/api/v2/overview for up-to-date documentation.
 
 ## Legacy Version Support
 
 ### PHP 5.3
 
-If you are using PHP 5.3, you can download v5.9.2 ([zip](https://github.com/telnyx/telnyx-php/archive/v5.9.2.zip), [tar.gz](https://github.com/telnyx/telnyx-php/archive/v5.9.2.tar.gz)) from our [releases page](https://github.com/telnyx/telnyx-php/releases). This version will continue to work with new versions of the Telnyx API for all common uses.
+If you are using PHP 5.3, you can download v5.9.2 ([zip](https://github.com/team-telnyx/telnyx-php/archive/v5.9.2.zip), [tar.gz](https://github.com/team-telnyx/telnyx-php/archive/v5.9.2.tar.gz)) from our [releases page](https://github.com/team-telnyx/telnyx-php/releases). This version will continue to work with new versions of the Telnyx API for all common uses.
 
 ### PHP 5.2
 
-If you are using PHP 5.2, you can download v1.18.0 ([zip](https://github.com/telnyx/telnyx-php/archive/v1.18.0.zip), [tar.gz](https://github.com/telnyx/telnyx-php/archive/v1.18.0.tar.gz)) from our [releases page](https://github.com/telnyx/telnyx-php/releases). This version will continue to work with new versions of the Telnyx API for all common uses.
+If you are using PHP 5.2, you can download v1.18.0 ([zip](https://github.com/team-telnyx/telnyx-php/archive/v1.18.0.zip), [tar.gz](https://github.com/team-telnyx/telnyx-php/archive/v1.18.0.tar.gz)) from our [releases page](https://github.com/team-telnyx/telnyx-php/releases). This version will continue to work with new versions of the Telnyx API for all common uses.
 
 This legacy version may be included via `require_once("/path/to/telnyx-php/lib/Telnyx.php");`, and used like:
 
 ```php
 Telnyx::setApiKey('d8e8fca2dc0f896fd7cb4cb0031ba249');
-$charge = Telnyx_Charge::create(array('source' => 'tok_XXXXXXXX', 'amount' => 2000, 'currency' => 'usd'));
-echo $charge;
+$order = Telnyx_Number_Order::create(array('phone_number' => '+18665552368'));
+echo $order;
 ```
 
 ## Custom Request Timeouts
-
-*NOTE:* We do not recommend decreasing the timeout for non-read-only calls (e.g. charge creation), since even if you locally timeout, the request on Telnyx's side can still complete. If you are decreasing timeouts on these calls, make sure to use [idempotency tokens](https://telnyx.com/docs/api/php#idempotent_requests) to avoid executing the same transaction twice as a result of timeout retry logic.
 
 To modify request timeouts (connect or total, in seconds) you'll need to tell the API client to use a CurlClient other than its default. You'll set the timeouts in that CurlClient.
 
@@ -125,15 +123,15 @@ end up there instead of `error_log`:
 You can access the data from the last API response on any object via `getLastResponse()`.
 
 ```php
-$charge = \Telnyx\Charge::create(['amount' => 2000, 'currency' => 'usd', 'source' => 'tok_visa']);
-echo $charge->getLastResponse()->headers['Request-Id'];
+$order = \Telnyx\NumberOrder::create(['phone_number' => '+18665552368']);
+echo $order->getLastResponse()->headers['Request-Id'];
 ```
 
 ### SSL / TLS compatibility issues
 
-Telnyx's API now requires that [all connections use TLS 1.2](https://telnyx.com/blog/upgrading-tls). Some systems (most notably some older CentOS and RHEL versions) are capable of using TLS 1.2 but will use TLS 1.0 or 1.1 by default. In this case, you'd get an `invalid_request_error` with the following error message: "Telnyx no longer supports API requests made with TLS 1.0. Please initiate HTTPS connections with TLS 1.2 or later. You can learn more about this at [https://telnyx.com/blog/upgrading-tls](https://telnyx.com/blog/upgrading-tls).".
+Telnyx's API now requires that all connections use TLS 1.2. Some systems (most notably some older CentOS and RHEL versions) are capable of using TLS 1.2 but will use TLS 1.0 or 1.1 by default.
 
-The recommended course of action is to [upgrade your cURL and OpenSSL packages](https://support.telnyx.com/questions/how-do-i-upgrade-my-telnyx-integration-from-tls-1-0-to-tls-1-2#php) so that TLS 1.2 is used by default, but if that is not possible, you might be able to solve the issue by setting the `CURLOPT_SSLVERSION` option to either `CURL_SSLVERSION_TLSv1` or `CURL_SSLVERSION_TLSv1_2`:
+The recommended course of action is to upgrade your cURL and OpenSSL packages so that TLS 1.2 is used by default, but if that is not possible, you might be able to solve the issue by setting the `CURLOPT_SSLVERSION` option to either `CURL_SSLVERSION_TLSv1` or `CURL_SSLVERSION_TLSv1_2`:
 
 ```php
 $curl = new \Telnyx\HttpClient\CurlClient([CURLOPT_SSLVERSION => CURL_SSLVERSION_TLSv1]);
@@ -142,29 +140,17 @@ $curl = new \Telnyx\HttpClient\CurlClient([CURLOPT_SSLVERSION => CURL_SSLVERSION
 
 ### Per-request Configuration
 
-For apps that need to use multiple keys during the lifetime of a process, like
-one that uses [Telnyx Connect][connect], it's also possible to set a
+For apps that need to use multiple keys during the lifetime of a process it's also possible to set a
 per-request key and/or account:
 
 ```php
-\Telnyx\Charge::all([], [
-    'api_key' => 'sk_test_...',
-    'telnyx_account' => 'acct_...'
+\Telnyx\NumberOrder::all([], [
+    'api_key' => 'sk_test_...'
 ]);
 
-\Telnyx\Charge::retrieve("ch_18atAXCdGbJFKhCuBAa4532Z", [
-    'api_key' => 'sk_test_...',
-    'telnyx_account' => 'acct_...'
+\Telnyx\NumberOrder::retrieve("ch_18atAXCdGbJFKhCuBAa4532Z", [
+    'api_key' => 'sk_test_...'
 ]);
-```
-
-### Configuring CA Bundles
-
-By default, the library will use its own internal bundle of known CA
-certificates, but it's possible to configure your own:
-
-```php
-\Telnyx\Telnyx::setCABundlePath("path/to/ca/bundle");
 ```
 
 ### Configuring Automatic Retries
@@ -176,7 +162,7 @@ an intermittent network problem:
 \Telnyx\Telnyx::setMaxNetworkRetries(2);
 ```
 
-[Idempotency keys][idempotency-keys] are added to requests to guarantee that
+Idempotency keys are added to requests to guarantee that
 retries are safe.
 
 ## Development
@@ -198,7 +184,7 @@ background terminal ([telnyx-mock's README][telnyx-mock] also contains
 instructions for installing via Homebrew and other methods):
 
 ```bash
-go get -u github.com/telnyx/telnyx-mock
+go get -u github.com/team-telnyx/telnyx-mock
 telnyx-mock
 ```
 
@@ -235,8 +221,6 @@ The method should be called once, before any request is sent to the API. The sec
 See the "SSL / TLS compatibility issues" paragraph above for full context. If you want to ensure that your plugin can be used on all systems, you should add a configuration option to let your users choose between different values for `CURLOPT_SSLVERSION`: none (default), `CURL_SSLVERSION_TLSv1` and `CURL_SSLVERSION_TLSv1_2`.
 
 [composer]: https://getcomposer.org/
-[connect]: https://telnyx.com/connect
 [curl]: http://curl.haxx.se/docs/caextract.html
 [psr3]: http://www.php-fig.org/psr/psr-3/
-[idempotency-keys]: https://telnyx.com/docs/api/php#idempotent_requests
 [telnyx-mock]: https://github.com/telnyx/telnyx-mock
