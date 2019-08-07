@@ -3,7 +3,6 @@
   "description": "Telnyx PHP Library",
   "keywords": [
     "telnyx",
-    "payment processing",
     "api"
   ],
   "homepage": "https://telnyx.com/",
@@ -31,7 +30,7 @@
   },
   "extra": {
     "branch-alias": {
-      "dev-master": "2.0-dev"
+      "dev-master": "0.0.1"
     }
   }
 }
