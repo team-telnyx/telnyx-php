@@ -50,7 +50,7 @@ class Telnyx
     // @var float Initial delay between retries, in seconds
     private static $initialNetworkRetryDelay = 0.5;
 
-    const VERSION = '2.00.0';
+    const VERSION = '0.0.1';
 
     /**
      * @return string The API key used for requests.
