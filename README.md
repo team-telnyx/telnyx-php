@@ -220,6 +220,11 @@ The method should be called once, before any request is sent to the API. The sec
 
 See the "SSL / TLS compatibility issues" paragraph above for full context. If you want to ensure that your plugin can be used on all systems, you should add a configuration option to let your users choose between different values for `CURLOPT_SSLVERSION`: none (default), `CURL_SSLVERSION_TLSv1` and `CURL_SSLVERSION_TLSv1_2`.
 
+## Acknowledgments
+
+The contributors and maintainers of Telnyx PHP would like to extend their deep gratitude to the authors of [Stripe PHP][stripe-php], upon which this project is based. Thank you for developing such elegant, usable, and extensible code and for sharing it with the community.
+
+[stripe-php]: https://github.com/stripe/stripe-php
 [composer]: https://getcomposer.org/
 [curl]: http://curl.haxx.se/docs/caextract.html
 [psr3]: http://www.php-fig.org/psr/psr-3/
