@@ -18,6 +18,20 @@ trait All
     public static function all($params = null, $opts = null)
     {
         self::_validateParams($params);
+
+        // Convert filter[] pararms
+        if (is_array($params)) {
+            foreach ($params as $name=>$val) {
+                // Make sure this isn't a page[] param
+                if (strpos($name, '[') === false && strpos($name, ']') === false) {
+
+                    // Enclose param in filter[] and remove old param
+                    $params['filter[' . $name . ']'] = $val;
+                    unset($params[$name]);
+                }
+            }
+        }
+
         $url = static::classUrl();
 
         list($response, $opts) = static::_staticRequest('get', $url, $params, $opts);
@@ -33,6 +47,9 @@ trait All
         }
         $obj->setLastResponse($response);
         $obj->setRequestParams($params);
+
+        // This was a temporary field for convertToTelnyxObject. Remove it.
+        unset($obj['record_type']);
         return $obj;
     }
 }
