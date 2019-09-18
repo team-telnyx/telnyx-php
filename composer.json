@@ -20,10 +20,11 @@
     "ext-mbstring": "*"
   },
   "require-dev": {
-    "phpunit/phpunit": "~4.0",
-    "php-coveralls/php-coveralls": "1.*",
+    "phpunit/phpunit": "^5.7",
+    "php-coveralls/php-coveralls": "^2.1",
     "squizlabs/php_codesniffer": "~2.0",
-    "symfony/process": "~2.8"
+    "symfony/process": "~2.8",
+    "friendsofphp/php-cs-fixer": "^2.15"
   },
   "autoload": {
     "psr-4": { "Telnyx\\" : "lib/" }
