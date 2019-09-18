@@ -14,7 +14,6 @@ namespace Telnyx;
  */
 class Collection extends TelnyxObject implements \IteratorAggregate
 {
-
     const OBJECT_NAME = "list";
 
     use ApiOperations\Request;

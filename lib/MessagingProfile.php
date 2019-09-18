@@ -9,7 +9,6 @@ namespace Telnyx;
  */
 class MessagingProfile extends ApiResource
 {
-
     const OBJECT_NAME = "messaging_profile";
 
     use ApiOperations\All;

@@ -21,7 +21,8 @@ trait All
 
         // Convert filter[] pararms
         if (is_array($params)) {
-            foreach ($params as $name=>$val) {
+            foreach ($params as $name => $val) {
+
                 // Make sure this isn't a page[] param
                 if (strpos($name, '[') === false && strpos($name, ']') === false) {
 

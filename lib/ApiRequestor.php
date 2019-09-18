@@ -193,6 +193,7 @@ class ApiRequestor
                 }
 
                 // intentional fall-through
+                // no break
             case 404:
                 return new Error\InvalidRequest($msg, $param, $rcode, $rbody, $resp, $rheaders);
             case 401:

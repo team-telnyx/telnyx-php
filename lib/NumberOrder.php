@@ -9,7 +9,6 @@ namespace Telnyx;
  */
 class NumberOrder extends ApiResource
 {
-
     const OBJECT_NAME = "number_order";
 
     use ApiOperations\All;

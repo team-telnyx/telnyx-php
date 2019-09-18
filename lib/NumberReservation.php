@@ -9,7 +9,6 @@ namespace Telnyx;
  */
 class NumberReservation extends ApiResource
 {
-
     const OBJECT_NAME = "number_reservation";
 
     use ApiOperations\All;
