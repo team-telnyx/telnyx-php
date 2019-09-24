@@ -1,5 +1,4 @@
 <?php
-
 namespace Telnyx;
 
 /**
@@ -36,7 +35,7 @@ class TestCase extends \PHPUnit_Framework_TestCase
 
         // Set up host and credentials for telnyx-mock
         Telnyx::$apiBase = MOCK_URL;
-        Telnyx::setApiKey("sk_test_123");
+        Telnyx::setApiKey("KEYSUPERSECRET");
         Telnyx::setClientId("ca_123");
         Telnyx::setApiVersion(null);
         Telnyx::setAccountId(null);
