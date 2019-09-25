@@ -52,9 +52,9 @@ class MessagingProfile extends ApiResource
      *
      * @return List all sender IDs associated with a messaging profile.
      */
-    public function sender_ids($params = null, $options = null)
+    public function alphanumeric_sender_ids($params = null, $options = null)
     {
-        $url = $this->instanceUrl() . '/sender_ids';
+        $url = $this->instanceUrl() . '/alphanumeric_sender_ids';
         list($response, $opts) = $this->_request('get', $url, $params, $options);
         $this->refreshFrom($response, $opts);
         return $this;

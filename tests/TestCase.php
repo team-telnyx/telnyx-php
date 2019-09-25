@@ -1,4 +1,5 @@
 <?php
+
 namespace Telnyx;
 
 /**
@@ -33,7 +34,7 @@ class TestCase extends \PHPUnit_Framework_TestCase
         $this->origApiVersion = Telnyx::getApiVersion();
         $this->origAccountId = Telnyx::getAccountId();
 
-        // Set up host and credentials for telnyx-mock
+        // Set up host and credentials for Telnyx-mock
         Telnyx::$apiBase = MOCK_URL;
         Telnyx::setApiKey("KEYSUPERSECRET");
         Telnyx::setClientId("ca_123");
@@ -41,7 +42,7 @@ class TestCase extends \PHPUnit_Framework_TestCase
         Telnyx::setAccountId(null);
 
         // Set up the HTTP client mocker
-        $this->clientMock = $this->getMock('\Telnyx\HttpClient\ClientInterface');
+        $this->clientMock = $this->createMock('\Telnyx\HttpClient\ClientInterface');
 
         // By default, use the real HTTP client
         ApiRequestor::setHttpClient(HttpClient\CurlClient::instance());
@@ -63,7 +64,7 @@ class TestCase extends \PHPUnit_Framework_TestCase
      * will actually go through and be emitted.
      *
      * @param string $method HTTP method (e.g. 'post', 'get', etc.)
-     * @param string $path relative path (e.g. '/v2/charges')
+     * @param string $path relative path (e.g. '/v1/charges')
      * @param array|null $params array of parameters. If null, parameters will
      *   not be checked.
      * @param string[]|null $headers array of headers. Does not need to be
@@ -96,7 +97,7 @@ class TestCase extends \PHPUnit_Framework_TestCase
      * will be returned.
      *
      * @param string $method HTTP method (e.g. 'post', 'get', etc.)
-     * @param string $path relative path (e.g. '/v2/charges')
+     * @param string $path relative path (e.g. '/v1/charges')
      * @param array|null $params array of parameters. If null, parameters will
      *   not be checked.
      * @param string[]|null $headers array of headers. Does not need to be
@@ -130,7 +131,7 @@ class TestCase extends \PHPUnit_Framework_TestCase
      * with the provided arguments.
      *
      * @param string $method HTTP method (e.g. 'post', 'get', etc.)
-     * @param string $path relative path (e.g. '/v2/charges')
+     * @param string $path relative path (e.g. '/v1/charges')
      * @param array|null $params array of parameters. If null, parameters will
      *   not be checked.
      * @param string[]|null $headers array of headers. Does not need to be

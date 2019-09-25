@@ -7,9 +7,9 @@ namespace Telnyx;
  *
  * @package Telnyx
  */
-class MessagingSenderID extends ApiResource
+class AlphanumericSenderID extends ApiResource
 {
-    const OBJECT_NAME = "messaging_sender_id";
+    const OBJECT_NAME = "alphanumeric_sender_id";
 
     use ApiOperations\All;
     use ApiOperations\Retrieve;

@@ -78,8 +78,8 @@ abstract class Util
             \Telnyx\Message::OBJECT_NAME => 'Telnyx\\Message',
             \Telnyx\MessagingProfile::OBJECT_NAME => 'Telnyx\\MessagingProfile',
             \Telnyx\MessagingPhoneNumber::OBJECT_NAME => 'Telnyx\\MessagingPhoneNumber',
-            \Telnyx\MessagingSenderID::OBJECT_NAME => 'Telnyx\\MessagingSenderID',
-            \Telnyx\MessagingShortCode::OBJECT_NAME => 'Telnyx\\MessagingShortCode',
+            \Telnyx\AlphanumericSenderID::OBJECT_NAME => 'Telnyx\\AlphanumericSenderID',
+            \Telnyx\ShortCode::OBJECT_NAME => 'Telnyx\\ShortCode',
         ];
         if (self::isList($resp)) {
             $mapped = [];

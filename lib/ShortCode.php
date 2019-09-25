@@ -7,9 +7,9 @@ namespace Telnyx;
  *
  * @package Telnyx
  */
-class MessagingShortCode extends ApiResource
+class ShortCode extends ApiResource
 {
-    const OBJECT_NAME = "messaging_short_code";
+    const OBJECT_NAME = "short_code";
 
     use ApiOperations\All;
     use ApiOperations\Retrieve;
