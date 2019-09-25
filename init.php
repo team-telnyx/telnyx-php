@@ -54,8 +54,8 @@ require(dirname(__FILE__) . '/lib/NumberReservation.php');
 require(dirname(__FILE__) . '/lib/Message.php');
 require(dirname(__FILE__) . '/lib/MessagingProfile.php');
 require(dirname(__FILE__) . '/lib/MessagingPhoneNumber.php');
-require(dirname(__FILE__) . '/lib/MessagingSenderID.php');
-require(dirname(__FILE__) . '/lib/MessagingShortCode.php');
+require(dirname(__FILE__) . '/lib/AlphanumericSenderID.php');
+require(dirname(__FILE__) . '/lib/ShortCode.php');
 
 // Old resources
 require(dirname(__FILE__) . '/lib/Collection.php');

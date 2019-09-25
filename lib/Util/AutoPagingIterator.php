@@ -54,6 +54,7 @@ class AutoPagingIterator implements \Iterator
 
     public function valid()
     {
+        fwrite(STDERR, print_r($this->page, TRUE));
         $key = key($this->page->data);
         $valid = ($key !== null && $key !== false);
         return $valid;

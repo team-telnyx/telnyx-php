@@ -83,19 +83,19 @@ class MessagingProfileTest extends TestCase
         );
         $resources = $messaging_profile->short_codes();
         $this->assertInstanceOf(\Telnyx\MessagingProfile::class, $resources);
-        $this->assertInstanceOf(\Telnyx\MessagingShortCode::class, $resources[0]);
+        $this->assertInstanceOf(\Telnyx\ShortCode::class, $resources[0]);
     }
 
 
-    public function testCanCallSenderIds()
+    public function testCanCallAlphanumericSenderIds()
     {
         $messaging_profile = MessagingProfile::retrieve(self::TEST_RESOURCE_ID);
         $this->expectsRequest(
             'get',
-            '/v2/messaging_profiles/' . urlencode(self::TEST_RESOURCE_ID) . '/sender_ids'
+            '/v2/messaging_profiles/' . urlencode(self::TEST_RESOURCE_ID) . '/alphanumeric_sender_ids'
         );
-        $resources = $messaging_profile->sender_ids();
+        $resources = $messaging_profile->alphanumeric_sender_ids();
         $this->assertInstanceOf(\Telnyx\MessagingProfile::class, $resources);
-        $this->assertInstanceOf(\Telnyx\MessagingSenderId::class, $resources[0]);
+        $this->assertInstanceOf(\Telnyx\AlphanumericSenderId::class, $resources[0]);
     }
 }

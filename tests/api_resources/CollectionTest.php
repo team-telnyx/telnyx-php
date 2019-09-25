@@ -1,5 +1,5 @@
 <?php
-
+#https://raw.githubusercontent.com/stripe/stripe-php/v6.40.0/tests/Stripe/CollectionTest.php
 namespace Telnyx;
 
 class CollectionTest extends TestCase
@@ -16,15 +16,6 @@ class CollectionTest extends TestCase
         ]);
     }
 
-    /**
-     * @expectedException \Telnyx\Exception\InvalidArgumentException
-     * @expectedExceptionMessageRegExp /You tried to access the \d index/
-     */
-    public function testOffsetGetNumericIndex()
-    {
-        $this->fixture[0];
-    }
-
     public function testCanList()
     {
         $this->stubRequest(
@@ -34,7 +25,6 @@ class CollectionTest extends TestCase
             null,
             false,
             [
-                'object' => 'list',
                 'data' => [['id' => 1]],
                 'has_more' => true,
                 'url' => '/things',
@@ -112,7 +102,6 @@ class CollectionTest extends TestCase
             null,
             false,
             [
-                'object' => 'list',
                 'data' => [['id' => 2], ['id' => 3]],
                 'has_more' => false,
             ]
@@ -137,7 +126,6 @@ class CollectionTest extends TestCase
             null,
             false,
             [
-                'object' => 'list',
                 'data' => [['id' => 2], ['id' => 3]],
                 'has_more' => false,
             ]
@@ -175,66 +163,5 @@ class CollectionTest extends TestCase
             'telnyx_account' => 'acct_foo',
             'idempotency_key' => 'qwertyuiop',
         ]);
-    }
-
-    public function testEmptyCollection()
-    {
-        $emptyCollection = Collection::emptyCollection();
-        $this->assertEquals([], $emptyCollection->data);
-    }
-
-    public function testIsEmpty()
-    {
-        $empty = Collection::constructFrom(['data' => []]);
-        $this->assertTrue($empty->isEmpty());
-
-        $notEmpty = Collection::constructFrom(['data' => [['id' => 1]]]);
-        $this->assertFalse($notEmpty->isEmpty());
-    }
-
-    public function testNextPage()
-    {
-        $this->stubRequest(
-            'GET',
-            '/things',
-            [
-                'starting_after' => 1,
-            ],
-            null,
-            false,
-            [
-                'object' => 'list',
-                'data' => [['id' => 2], ['id' => 3]],
-                'has_more' => false,
-            ]
-        );
-
-        $nextPage = $this->fixture->nextPage();
-        $ids = [];
-        foreach ($nextPage->data as $element) {
-            array_push($ids, $element['id']);
-        }
-        $this->assertEquals([2, 3], $ids);
-    }
-
-    public function testPreviousPage()
-    {
-        $this->stubRequest(
-            'GET',
-            '/things',
-            [
-                'ending_before' => 1,
-            ],
-            null,
-            false,
-            [
-                'object' => 'list',
-                'data' => [],
-                'has_more' => false,
-            ]
-        );
-
-        $previousPage = $this->fixture->previousPage();
-        $this->assertEquals([], $previousPage->data);
     }
 }
