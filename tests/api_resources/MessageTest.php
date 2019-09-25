@@ -2,7 +2,6 @@
 
 namespace Telnyx;
 
-
 class MessageTest extends TestCase
 {
     const TEST_MESSAGING_PROFILE_ID = "d120432d-2e77-4583-87f8-1db837cee559";
@@ -26,24 +25,4 @@ class MessageTest extends TestCase
 
         $this->assertInstanceOf(\Telnyx\Message::class, $resource);
     }
-
-    // Not implemented yet
-    /*
-    public function testCanCreateAlphanumericSenderIdMessage()
-    {
-        $this->expectsRequest(
-            'post',
-            '/v2/messages/alphanumeric_sender_id'
-        );
-
-        $resource = \Telnyx\Message::Create([
-            "from" => TEST_SRC_LONG_CODE,
-            "to" => TEST_DST,
-            "text" => TEST_MESSAGE_BODY
-        ]);
-        
-        $this->assertInstanceOf(\Telnyx\Message::class, $resource);
-    }
-    */
-
 }

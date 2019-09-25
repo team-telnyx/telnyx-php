@@ -26,5 +26,4 @@ class NumberReservationTest extends TestCase
         $resource = NumberReservation::retrieve(self::NUMBER_RESERVATION_ID);
         $this->assertInstanceOf(\Telnyx\NumberReservation::class, $resource);
     }
-
 }

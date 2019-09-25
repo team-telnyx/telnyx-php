@@ -2,7 +2,6 @@
 
 namespace Telnyx;
 
-
 class MessagingProfileTest extends TestCase
 {
     const TEST_RESOURCE_ID = '123';
@@ -99,5 +98,4 @@ class MessagingProfileTest extends TestCase
         $this->assertInstanceOf(\Telnyx\MessagingProfile::class, $resources);
         $this->assertInstanceOf(\Telnyx\MessagingSenderId::class, $resources[0]);
     }
-
 }

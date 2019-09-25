@@ -2,7 +2,6 @@
 
 namespace Telnyx;
 
-
 class MessagingPhoneNumberTest extends TestCase
 {
     const TEST_RESOURCE_ID = '+18005554000';

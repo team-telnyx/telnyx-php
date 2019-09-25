@@ -2,7 +2,6 @@
 
 namespace Telnyx;
 
-
 class MessagingSenderIDTest extends TestCase
 {
     const TEST_RESOURCE_ID = '123';
@@ -28,5 +27,4 @@ class MessagingSenderIDTest extends TestCase
         $resource = MessagingSenderID::retrieve(self::TEST_RESOURCE_ID);
         $this->assertInstanceOf(\Telnyx\MessagingSenderID::class, $resource);
     }
-
 }

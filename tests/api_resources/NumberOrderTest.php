@@ -2,7 +2,6 @@
 
 namespace Telnyx;
 
-
 class NumberOrderTest extends TestCase
 {
     const TEST_RESOURCE_ID = "12ade33a-21c0-473b-b055-b3c836e1c292";

@@ -2,7 +2,6 @@
 
 namespace Telnyx;
 
-
 class MessagingShortCodeTest extends TestCase
 {
     const TEST_RESOURCE_ID = '123';
@@ -27,5 +26,4 @@ class MessagingShortCodeTest extends TestCase
         $resource = MessagingShortCode::retrieve(self::TEST_RESOURCE_ID);
         $this->assertInstanceOf(\Telnyx\MessagingShortCode::class, $resource);
     }
-
 }
