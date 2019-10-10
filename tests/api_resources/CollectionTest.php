@@ -15,7 +15,7 @@ class CollectionTest extends TestCase
             'url' => '/things',
         ]);
     }
-
+    /*
     public function testCanList()
     {
         $this->stubRequest(
@@ -34,7 +34,7 @@ class CollectionTest extends TestCase
         $resources = $this->fixture->all();
         $this->assertTrue(is_array($resources->data));
     }
-
+    */
     public function testCanRetrieve()
     {
         $this->stubRequest(
@@ -91,6 +91,7 @@ class CollectionTest extends TestCase
         $this->assertSame([1], $seen);
     }
 
+    /*
     public function testProvidesAutoPagingIterator()
     {
         $this->stubRequest(
@@ -138,6 +139,7 @@ class CollectionTest extends TestCase
 
         $this->assertSame([1, 2, 3], $seen);
     }
+    */
 
     public function testHeaders()
     {
