@@ -27,20 +27,6 @@ class MessagingPhoneNumberTest extends TestCase
         $this->assertInstanceOf(\Telnyx\MessagingPhoneNumber::class, $resource);
     }
 
-    /*
-    public function testIsSaveable()
-    {
-        $resource = MessagingPhoneNumber::retrieve(self::TEST_RESOURCE_ID);
-        $resource->name = "value";
-        $this->expectsRequest(
-            'patch',
-            '/v2/messaging_phone_numbers/' . urlencode(self::TEST_RESOURCE_ID)
-        );
-        $resource->save();
-        $this->assertInstanceOf(\Telnyx\MessagingPhoneNumber::class, $resource);
-    }
-    */
-
     public function testIsUpdatable()
     {
         $this->expectsRequest(

@@ -44,21 +44,6 @@ class NumberOrderTest extends TestCase
         $this->assertInstanceOf(\Telnyx\NumberOrder::class, $resource);
     }
 
-    // Not implemented
-    /*
-    public function testIsSaveable()
-    {
-        $resource = NumberOrder::retrieve(self::TEST_RESOURCE_ID);
-        $resource->name = "value";
-        $this->expectsRequest(
-            'patch',
-            '/v2/messaging_phone_numbers/' . urlencode(self::TEST_RESOURCE_ID)
-        );
-        $resource->save();
-        $this->assertInstanceOf(\Telnyx\NumberOrder::class, $resource);
-    }
-    */
-
     public function testIsUpdatable()
     {
         $this->expectsRequest(
