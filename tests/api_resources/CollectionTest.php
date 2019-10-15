@@ -1,5 +1,4 @@
 <?php
-#https://raw.githubusercontent.com/stripe/stripe-php/v6.40.0/tests/Stripe/CollectionTest.php
 namespace Telnyx;
 
 class CollectionTest extends TestCase
@@ -15,26 +14,7 @@ class CollectionTest extends TestCase
             'url' => '/things',
         ]);
     }
-    /*
-    public function testCanList()
-    {
-        $this->stubRequest(
-            'GET',
-            '/things',
-            [],
-            null,
-            false,
-            [
-                'data' => [['id' => 1]],
-                'has_more' => true,
-                'url' => '/things',
-            ]
-        );
 
-        $resources = $this->fixture->all();
-        $this->assertTrue(is_array($resources->data));
-    }
-    */
     public function testCanRetrieve()
     {
         $this->stubRequest(
@@ -90,56 +70,6 @@ class CollectionTest extends TestCase
 
         $this->assertSame([1], $seen);
     }
-
-    /*
-    public function testProvidesAutoPagingIterator()
-    {
-        $this->stubRequest(
-            'GET',
-            '/things',
-            [
-                'starting_after' => 1,
-            ],
-            null,
-            false,
-            [
-                'data' => [['id' => 2], ['id' => 3]],
-                'has_more' => false,
-            ]
-        );
-
-        $seen = [];
-        foreach ($this->fixture->autoPagingIterator() as $item) {
-            array_push($seen, $item['id']);
-        }
-
-        $this->assertSame([1, 2, 3], $seen);
-    }
-
-    public function testAutoPagingIteratorSupportsIteratorToArray()
-    {
-        $this->stubRequest(
-            'GET',
-            '/things',
-            [
-                'starting_after' => 1,
-            ],
-            null,
-            false,
-            [
-                'data' => [['id' => 2], ['id' => 3]],
-                'has_more' => false,
-            ]
-        );
-
-        $seen = [];
-        foreach (iterator_to_array($this->fixture->autoPagingIterator()) as $item) {
-            array_push($seen, $item['id']);
-        }
-
-        $this->assertSame([1, 2, 3], $seen);
-    }
-    */
 
     public function testHeaders()
     {

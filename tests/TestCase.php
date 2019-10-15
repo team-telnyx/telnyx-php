@@ -64,7 +64,7 @@ class TestCase extends \PHPUnit_Framework_TestCase
      * will actually go through and be emitted.
      *
      * @param string $method HTTP method (e.g. 'post', 'get', etc.)
-     * @param string $path relative path (e.g. '/v1/charges')
+     * @param string $path relative path
      * @param array|null $params array of parameters. If null, parameters will
      *   not be checked.
      * @param string[]|null $headers array of headers. Does not need to be
@@ -97,7 +97,7 @@ class TestCase extends \PHPUnit_Framework_TestCase
      * will be returned.
      *
      * @param string $method HTTP method (e.g. 'post', 'get', etc.)
-     * @param string $path relative path (e.g. '/v1/charges')
+     * @param string $path relative path
      * @param array|null $params array of parameters. If null, parameters will
      *   not be checked.
      * @param string[]|null $headers array of headers. Does not need to be
@@ -131,7 +131,7 @@ class TestCase extends \PHPUnit_Framework_TestCase
      * with the provided arguments.
      *
      * @param string $method HTTP method (e.g. 'post', 'get', etc.)
-     * @param string $path relative path (e.g. '/v1/charges')
+     * @param string $path relative path
      * @param array|null $params array of parameters. If null, parameters will
      *   not be checked.
      * @param string[]|null $headers array of headers. Does not need to be
