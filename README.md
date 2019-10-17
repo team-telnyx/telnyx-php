@@ -56,7 +56,7 @@ echo $order;
 
 ## Documentation
 
-Please see https://telnyx.com/docs/api/v2/overview for up-to-date documentation.
+Please see https://developers.telnyx.com/docs/api/v2/overview for up-to-date documentation.
 
 ## Legacy Version Support
 
