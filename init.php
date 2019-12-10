@@ -57,5 +57,8 @@ require(dirname(__FILE__) . '/lib/MessagingPhoneNumber.php');
 require(dirname(__FILE__) . '/lib/AlphanumericSenderID.php');
 require(dirname(__FILE__) . '/lib/ShortCode.php');
 
+// Telnyx API: Billing
+require(dirname(__FILE__) . '/lib/BillingGroup.php');
+
 // Old resources
 require(dirname(__FILE__) . '/lib/Collection.php');

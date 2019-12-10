@@ -80,6 +80,9 @@ abstract class Util
             \Telnyx\MessagingPhoneNumber::OBJECT_NAME => 'Telnyx\\MessagingPhoneNumber',
             \Telnyx\AlphanumericSenderID::OBJECT_NAME => 'Telnyx\\AlphanumericSenderID',
             \Telnyx\ShortCode::OBJECT_NAME => 'Telnyx\\ShortCode',
+
+            // Telnyx API: Billing
+            \Telnyx\BillingGroup::OBJECT_NAME => 'Telnyx\\BillingGroup',
         ];
         if (self::isList($resp)) {
             $mapped = [];
