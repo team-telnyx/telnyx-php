@@ -73,6 +73,8 @@ abstract class Util
             \Telnyx\AvailablePhoneNumber::OBJECT_NAME => 'Telnyx\\AvailablePhoneNumber',
             \Telnyx\NumberOrder::OBJECT_NAME => 'Telnyx\\NumberOrder',
             \Telnyx\NumberReservation::OBJECT_NAME => 'Telnyx\\NumberReservation',
+            \Telnyx\RegulatoryRequirement::OBJECT_NAME => 'Telnyx\\RegulatoryRequirement',
+            \Telnyx\NumberOrderDocument::OBJECT_NAME => 'Telnyx\\NumberOrderDocument',
 
             // Telnyx API: Messaging
             \Telnyx\Message::OBJECT_NAME => 'Telnyx\\Message',
