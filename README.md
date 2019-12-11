@@ -205,3 +205,4 @@ for developing such elegant, usable, and extensible code and for sharing it with
 [composer]: https://getcomposer.org/
 [curl]: http://curl.haxx.se/docs/caextract.html
 [psr3]: http://www.php-fig.org/psr/psr-3/
+
