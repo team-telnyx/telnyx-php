@@ -49,6 +49,8 @@ require(dirname(__FILE__) . '/lib/SingletonApiResource.php');
 require(dirname(__FILE__) . '/lib/AvailablePhoneNumber.php');
 require(dirname(__FILE__) . '/lib/NumberOrder.php');
 require(dirname(__FILE__) . '/lib/NumberReservation.php');
+require(dirname(__FILE__) . '/lib/RegulatoryRequirement.php');
+require(dirname(__FILE__) . '/lib/NumberOrderDocument.php');
 
 // Telnyx API: Messaging
 require(dirname(__FILE__) . '/lib/Message.php');
@@ -59,6 +61,7 @@ require(dirname(__FILE__) . '/lib/ShortCode.php');
 
 // Telnyx API: Billing
 require(dirname(__FILE__) . '/lib/BillingGroup.php');
+
 
 // Old resources
 require(dirname(__FILE__) . '/lib/Collection.php');
