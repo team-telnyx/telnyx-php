@@ -14,7 +14,7 @@ services:
       - mock
 
   mock:
-    image: tomanderson/telnyx-mock:init
+    image: telnyx/telnyx-mock:latest
     ports:
       - "12111:12111"
       - "12112:12112"
