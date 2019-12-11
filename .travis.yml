@@ -1,72 +1,77 @@
 sudo: false
-
-dist: bionic
-
 language: php
-
-matrix:
-  include:
-    # - php: 5.6
-    #   env: AUTOLOAD=1
-    #   dist: xenial
-    - php: 5.6
-      env: AUTOLOAD=0
-      dist: xenial
-    # - php: 7.0
-    #   env: AUTOLOAD=1
-    #   dist: xenial
-    - php: 7.0
-      env: AUTOLOAD=0
-      dist: xenial
-    # - php: 7.1
-    #   env: AUTOLOAD=1
-    - php: 7.1
-      env: AUTOLOAD=0
-    # - php: 7.2
-    #   env: AUTOLOAD=1
-    - php: 7.2
-      env: AUTOLOAD=0
-    # - php: 7.3
-    #   env: AUTOLOAD=1
-    - php: 7.3
-      env: AUTOLOAD=0
-    # - php: 7.4snapshot
-    #   env: AUTOLOAD=1
-    # - php: 7.4snapshot
-    #   env: AUTOLOAD=0
-  allow_failures:
-    # - php: 7.4snapshot
-    #   env: AUTOLOAD=1
-    - php: 7.3
-      env: AUTOLOAD=0
 
 env:
   global:
-    - TELNYX_MOCK_VERSION=0.4.0
-cache:
-  directories:
-    - $HOME/.composer/cache/files
-    - telnyx-mock
+    - COVERAGE_DEPS="php-coveralls/php-coveralls"
+    - COMPOSER_ARGS="--no-interaction"
+
+matrix:
+  include:
+    - php: 5.6
+      env:
+        - DEPS=lowest
+    - php: 5.6
+      env:
+        - DEPS=locked
+    - php: 5.6
+      env:
+        - DEPS=latest
+    - php: 7
+      env:
+        - DEPS=lowest
+    - php: 7
+      env:
+        - DEPS=locked
+    - php: 7
+      env:
+        - DEPS=latest
+    - php: 7.1
+      env:
+        - DEPS=lowest
+    - php: 7.1
+      env:
+        - DEPS=locked
+    - php: 7.1
+      env:
+        - DEPS=latest
+    - php: 7.2
+      env:
+        - DEPS=lowest
+    - php: 7.2
+      env:
+        - DEPS=locked
+        - CS_CHECK=true
+        - TEST_COVERAGE=true
+    - php: 7.2
+      env:
+        - DEPS=latest
 
 before_install:
-  # Install various build dependencies. We use `travis_retry` because Composer
-  # will occasionally fail intermittently.
-  - travis_retry composer install
+  - shopt -s expand_aliases
+  - alias composer="travis_retry docker-compose run --rm php composer"
+  - alias php="travis_retry docker-compose run --rm php php"
+  - docker-compose build --build-arg PHP_VERSION=${TRAVIS_PHP_VERSION} --build-arg XDEBUG=${TEST_COVERAGE:+1} --no-cache php
+  - composer --version
+  - php -v
+  - php -m
 
-  # Unpack and start telnyx-mock so that the test suite can talk to it
-  - |
-    if [ ! -d "telnyx-mock/${TELNYX_MOCK_VERSION}" ]; then
-      mkdir -p telnyx-mock/${TELNYX_MOCK_VERSION}
-      curl -L "https://github.com/team-telnyx/telnyx-mock/releases/download/v${TELNYX_MOCK_VERSION}/telnyx-mock_${TELNYX_MOCK_VERSION}_linux_amd64.tar.gz" -o "telnyx-mock/${TELNYX_MOCK_VERSION}_linux_amd64.tar.gz"
-      tar -zxf "telnyx-mock/${TELNYX_MOCK_VERSION}_linux_amd64.tar.gz" -C "telnyx-mock/${TELNYX_MOCK_VERSION}/"
-    fi
-  - |
-    telnyx-mock/${TELNYX_MOCK_VERSION}/telnyx-mock > /dev/null &
-    TELNYX_MOCK_PID=$!
-  - export PATH="${PATH}:${PWD}/telnyx-mock/${TELNYX_MOCK_VERSION}"
+install:
+  - composer install $COMPOSER_ARGS --ignore-platform-reqs
+  - if [[ $LEGACY_DEPS != '' ]]; then composer update $COMPOSER_ARGS --with-dependencies $LEGACY_DEPS ; fi
+  - if [[ $DEPS == 'latest' ]]; then composer update $COMPOSER_ARGS ; fi
+  - if [[ $DEPS == 'lowest' ]]; then composer update --prefer-lowest --prefer-stable $COMPOSER_ARGS ; fi
+  - if [[ $TRAVIS_PHP_VERSION != "5.6" ]] ; then composer require --dev $COMPOSER_ARGS $ADAPTER_DEPS ; fi
+  - if [[ $TEST_COVERAGE == 'true' ]]; then composer require --dev $COMPOSER_ARGS $COVERAGE_DEPS ; fi
+  - stty cols 120 && composer show
+  - composer show
 
 script:
-  - ./build.php ${AUTOLOAD}
-  - ./vendor/bin/php-cs-fixer fix -v --dry-run --using-cache=no .
+  - if [[ $TEST_COVERAGE == 'true' ]]; then composer test-coverage ; else composer test ; fi
+  - if [[ $CS_CHECK == 'true' ]]; then composer cs-check ; fi
 
-after_script: ./vendor/bin/coveralls -v
+after_script:
+  - if [[ $TEST_COVERAGE == 'true' ]]; then php vendor/bin/php-coveralls -v ; fi
+
+notifications:
+  email: false
