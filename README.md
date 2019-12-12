@@ -168,6 +168,19 @@ Unit tests rely on a mock server so all unit tests are ran through
 docker.  To run all unit tests execute:
 
 ```
+docker-compose run --rm php composer test
+```
+
+Running unit tests with code coverage requires you build the docker
+composer with XDEBUG=1
+
+```
+docker-compose build --build-arg XDEBUG=1
+```
+
+then run the unit tests as 
+
+```
 docker-compose run --rm php composer test-coverage
 ```
 
