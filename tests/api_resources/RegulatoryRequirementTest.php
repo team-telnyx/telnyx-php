@@ -11,7 +11,7 @@ class RegulatoryRequirementTest extends TestCase
     {
         $this->expectsRequest(
             'get',
-            '/v2/regulatory_requirement'
+            '/v2/regulatory_requirements'
         );
         $resources = RegulatoryRequirement::all();
         $this->assertInstanceOf(\Telnyx\Collection::class, $resources);
@@ -22,7 +22,7 @@ class RegulatoryRequirementTest extends TestCase
     {
         $this->expectsRequest(
             'get',
-            '/v2/regulatory_requirement/' . urlencode(self::TEST_RESOURCE_ID)
+            '/v2/regulatory_requirements/' . urlencode(self::TEST_RESOURCE_ID)
         );
         $resource = RegulatoryRequirement::retrieve(self::TEST_RESOURCE_ID);
         $this->assertInstanceOf(\Telnyx\RegulatoryRequirement::class, $resource);
