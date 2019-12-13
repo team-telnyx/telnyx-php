@@ -11,7 +11,7 @@ class NumberOrderDocumentTest extends TestCase
     {
         $this->expectsRequest(
             'get',
-            '/v2/number_order_document'
+            '/v2/number_order_documents'
         );
         $resources = NumberOrderDocument::all();
         $this->assertInstanceOf(\Telnyx\Collection::class, $resources);
@@ -22,7 +22,7 @@ class NumberOrderDocumentTest extends TestCase
     {
         $this->expectsRequest(
             'post',
-            '/v2/number_order_document'
+            '/v2/number_order_documents'
         );
         $resource = NumberOrderDocument::create(["country" => "US", "type" => "custom"]);
         $this->assertInstanceOf(\Telnyx\NumberOrderDocument::class, $resource);
@@ -32,7 +32,7 @@ class NumberOrderDocumentTest extends TestCase
     {
         $this->expectsRequest(
             'get',
-            '/v2/number_order_document/' . urlencode(self::TEST_RESOURCE_ID)
+            '/v2/number_order_documents/' . urlencode(self::TEST_RESOURCE_ID)
         );
         $resource = NumberOrderDocument::retrieve(self::TEST_RESOURCE_ID);
         $this->assertInstanceOf(\Telnyx\NumberOrderDocument::class, $resource);
@@ -42,7 +42,7 @@ class NumberOrderDocumentTest extends TestCase
     {
         $this->expectsRequest(
             'patch',
-            '/v2/number_order_document/' . urlencode(self::TEST_RESOURCE_ID)
+            '/v2/number_order_documents/' . urlencode(self::TEST_RESOURCE_ID)
         );
         $resource = NumberOrderDocument::update(self::TEST_RESOURCE_ID, [
             "name" => "Test",
