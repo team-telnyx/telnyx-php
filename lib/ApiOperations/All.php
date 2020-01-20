@@ -19,20 +19,6 @@ trait All
     {
         self::_validateParams($params);
 
-        // Convert filter[] pararms
-        if (is_array($params)) {
-            foreach ($params as $name => $val) {
-
-                // Make sure this isn't a page[] param
-                if (strpos($name, '[') === false && strpos($name, ']') === false) {
-
-                    // Enclose param in filter[] and remove old param
-                    $params['filter[' . $name . ']'] = $val;
-                    unset($params[$name]);
-                }
-            }
-        }
-
         $url = static::classUrl();
 
         list($response, $opts) = static::_staticRequest('get', $url, $params, $opts);
