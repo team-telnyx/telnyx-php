@@ -1,0 +1,19 @@
+<?php
+
+namespace Telnyx\PhoneNumber;
+
+class VoiceTest extends \Telnyx\TestCase
+{
+
+    public function testIsListable()
+    {
+        $this->expectsRequest(
+            'get',
+            '/v2/phone_numbers/voice'
+        );
+        $resources = Voice::all();
+        $this->assertInstanceOf(\Telnyx\Collection::class, $resources);
+        $this->assertInstanceOf(\Telnyx\PhoneNumber\Voice::class, $resources[0]);
+    }
+
+}

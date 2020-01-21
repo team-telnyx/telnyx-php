@@ -51,6 +51,9 @@ require(dirname(__FILE__) . '/lib/NumberOrder.php');
 require(dirname(__FILE__) . '/lib/NumberReservation.php');
 require(dirname(__FILE__) . '/lib/RegulatoryRequirement.php');
 require(dirname(__FILE__) . '/lib/NumberOrderDocument.php');
+require(dirname(__FILE__) . '/lib/PhoneNumber.php');
+require(dirname(__FILE__) . '/lib/PhoneNumber/Voice.php');
+require(dirname(__FILE__) . '/lib/PhoneNumber/Messaging.php');
 
 // Telnyx API: Messaging
 require(dirname(__FILE__) . '/lib/Message.php');
