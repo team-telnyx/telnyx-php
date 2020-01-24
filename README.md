@@ -19,7 +19,7 @@ Installation of this module uses composer. For composer documentation, please re
 [getcomposer.org](http://getcomposer.org/).
 
 ```bash
-$ composer require team-telnyx/telnyx-php
+$ composer require telnyx/telnyx-php
 ```
 
 
