@@ -7,8 +7,8 @@
 # Ignore the /vendor/ directory for people using composer
 /vendor/
 
-# Ignore PHPUnit coverage file
-clover.xml
+# Ignore build directory
+build
 
 # Ignore IDE's configuration files
 .idea
