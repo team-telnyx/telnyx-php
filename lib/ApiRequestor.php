@@ -306,6 +306,10 @@ class ApiRequestor
         }
 
         $absUrl = $this->_apiBase.$url;
+
+
+        echo "\r\n\r\n" . $absUrl . "\r\n\r\n";
+
         $params = self::_encodeObjects($params);
         $defaultHeaders = $this->_defaultHeaders($myApiKey, $clientUAInfo);
         if (Telnyx::$apiVersion) {

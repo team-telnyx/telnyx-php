@@ -23,7 +23,6 @@ trait NestedResource
 
         list($response, $opts) = static::_staticRequest($method, $url, $params, $options);
         $obj = \Telnyx\Util\Util::convertToTelnyxObject($response->json, $opts);
-        print_r($obj);
         $obj->setLastResponse($response);
         return $obj;
     }

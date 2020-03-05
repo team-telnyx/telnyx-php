@@ -78,6 +78,7 @@ abstract class Util
             \Telnyx\PhoneNumber::OBJECT_NAME => 'Telnyx\\PhoneNumber',
             \Telnyx\PhoneNumber\Voice::OBJECT_NAME => \Telnyx\PhoneNumber\Voice::class,
             \Telnyx\PhoneNumber\Messaging::OBJECT_NAME => \Telnyx\PhoneNumber\Messaging::class,
+            \Telnyx\Call::OBJECT_NAME => 'Telnyx\\Call',
 
             // Telnyx API: Messaging
             \Telnyx\Message::OBJECT_NAME => 'Telnyx\\Message',
