@@ -1,0 +1,30 @@
+<?php
+
+namespace Telnyx;
+
+class ConnectionTest extends TestCase
+{
+    const TEST_RESOURCE_ID = '123';
+
+    public function testIsListable()
+    {
+        $this->expectsRequest(
+            'get',
+            '/v2/connections'
+        );
+        $resources = Connection::all();
+        $this->assertInstanceOf(\Telnyx\Collection::class, $resources);
+        $this->assertInstanceOf(\Telnyx\Connection::class, $resources[0]);
+    }
+
+    public function testIsRetrievable()
+    {
+        $this->expectsRequest(
+            'get',
+            '/v2/connections/' . urlencode(self::TEST_RESOURCE_ID)
+        );
+        $resource = Connection::retrieve(self::TEST_RESOURCE_ID);
+        $this->assertInstanceOf(\Telnyx\Connection::class, $resource);
+    }
+
+}
