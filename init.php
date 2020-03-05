@@ -44,6 +44,7 @@ require(dirname(__FILE__) . '/lib/TelnyxObject.php');
 require(dirname(__FILE__) . '/lib/ApiRequestor.php');
 require(dirname(__FILE__) . '/lib/ApiResource.php');
 require(dirname(__FILE__) . '/lib/SingletonApiResource.php');
+require(dirname(__FILE__) . '/lib/Collection.php');
 
 // Telnyx API: Numbers
 require(dirname(__FILE__) . '/lib/AvailablePhoneNumber.php');
@@ -65,5 +66,10 @@ require(dirname(__FILE__) . '/lib/ShortCode.php');
 // Telnyx API: Billing
 require(dirname(__FILE__) . '/lib/BillingGroup.php');
 
-// Old resources
-require(dirname(__FILE__) . '/lib/Collection.php');
+// Telnyx API: Connections
+require(dirname(__FILE__) . '/lib/Connection.php');
+require(dirname(__FILE__) . '/lib/IPConnection.php');
+require(dirname(__FILE__) . '/lib/CredentialConnection.php');
+require(dirname(__FILE__) . '/lib/IP.php');
+require(dirname(__FILE__) . '/lib/FQDNConnection.php');
+require(dirname(__FILE__) . '/lib/FQDN.php');
