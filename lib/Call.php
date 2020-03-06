@@ -15,21 +15,6 @@ class Call extends ApiResource
     use ApiOperations\Retrieve;
     use ApiOperations\NestedResource;
 
-    public function instanceUrl()
-    {
-        if (isset($this['call_control_id'])) {
-            print_r($this);
-            $id = Util\Util::utf8($this['call_control_id']);
-            $base = static::classUrl();
-            $extn = urlencode($id);
-            return "$base/$extn";
-
-        	return parent::instanceUrl($this['call_control_id']);
-        } else {
-            return parent::instanceUrl();
-        }
-    }
-
     /**
      * @param array|null $params
      * @param array|string|null $options
@@ -239,4 +224,5 @@ class Call extends ApiResource
         $this->refreshFrom($response, $opts);
         return $this;
     }
+    
 }
