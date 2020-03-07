@@ -79,6 +79,7 @@ abstract class Util
             \Telnyx\PhoneNumber\Voice::OBJECT_NAME => \Telnyx\PhoneNumber\Voice::class,
             \Telnyx\PhoneNumber\Messaging::OBJECT_NAME => \Telnyx\PhoneNumber\Messaging::class,
             \Telnyx\Call::OBJECT_NAME => 'Telnyx\\Call',
+            \Telnyx\Conference::OBJECT_NAME => 'Telnyx\\Conference',
 
             // Telnyx API: Messaging
             \Telnyx\Message::OBJECT_NAME => 'Telnyx\\Message',
@@ -89,6 +90,14 @@ abstract class Util
 
             // Telnyx API: Billing
             \Telnyx\BillingGroup::OBJECT_NAME => 'Telnyx\\BillingGroup',
+
+            // Telnyx API: Connections
+            \Telnyx\Connection::OBJECT_NAME => 'Telnyx\\Connection',
+            \Telnyx\IPConnection::OBJECT_NAME => 'Telnyx\\IPConnection',
+            \Telnyx\CredentialConnection::OBJECT_NAME => 'Telnyx\\CredentialConnection',
+            \Telnyx\IP::OBJECT_NAME => 'Telnyx\\IP',
+            \Telnyx\FQDNConnection::OBJECT_NAME => 'Telnyx\\FQDNConnection',
+            \Telnyx\FQDN::OBJECT_NAME => 'Telnyx\\FQDN',
         ];
         if (self::isList($resp)) {
             $mapped = [];
