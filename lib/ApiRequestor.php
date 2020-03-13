@@ -355,7 +355,7 @@ class ApiRequestor
             $hasFile
         );
 
-        if (isset('request-id', $rheaders)) {
+        if (isset($rheaders['request-id'])) {
             self::$requestTelemetry = new RequestTelemetry(
                 $rheaders['request-id'],
                 Util\Util::currentTimeMillis() - $requestStartMs
