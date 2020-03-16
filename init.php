@@ -64,6 +64,7 @@ require(dirname(__FILE__) . '/lib/MessagingProfile.php');
 require(dirname(__FILE__) . '/lib/MessagingPhoneNumber.php');
 require(dirname(__FILE__) . '/lib/AlphanumericSenderID.php');
 require(dirname(__FILE__) . '/lib/ShortCode.php');
+require(dirname(__FILE__) . '/lib/OutboundVoiceProfile.php');
 
 // Telnyx API: Billing
 require(dirname(__FILE__) . '/lib/BillingGroup.php');
