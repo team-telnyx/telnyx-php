@@ -14,9 +14,7 @@ class TestAvailablePhoneNumber extends TestCase
         );
         $resources = AvailablePhoneNumber::all([
             'filter' => [
-                "limit" => 1,
-                "features" => ["sms", "mms"],
-                "phone_number" => ["contains" => "555"],
+                "phone_number" => ["starts_with" => "555"],
             ]
         ]);
         $this->assertInstanceOf(\Telnyx\Collection::class, $resources);

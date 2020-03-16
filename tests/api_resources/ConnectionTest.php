@@ -14,7 +14,7 @@ class ConnectionTest extends TestCase
         );
         $resources = Connection::all();
         $this->assertInstanceOf(\Telnyx\Collection::class, $resources);
-        $this->assertInstanceOf(\Telnyx\Connection::class, $resources[0]);
+        $this->assertInstanceOf(\Telnyx\IPConnection::class, $resources[0]);
     }
 
     public function testIsRetrievable()

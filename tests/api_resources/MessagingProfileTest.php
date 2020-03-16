@@ -35,7 +35,7 @@ class MessagingProfileTest extends TestCase
             'post',
             '/v2/messaging_profiles'
         );
-        $resource = MessagingProfile::create(["country" => "US", "type" => "custom"]);
+        $resource = MessagingProfile::create(["name" => "Summer Campaign"]);
         $this->assertInstanceOf(\Telnyx\MessagingProfile::class, $resource);
     }
 
@@ -86,16 +86,4 @@ class MessagingProfileTest extends TestCase
         $this->assertInstanceOf(\Telnyx\ShortCode::class, $resources[0]);
     }
 
-
-    public function testCanCallAlphanumericSenderIds()
-    {
-        $messaging_profile = MessagingProfile::retrieve(self::TEST_RESOURCE_ID);
-        $this->expectsRequest(
-            'get',
-            '/v2/messaging_profiles/' . urlencode(self::TEST_RESOURCE_ID) . '/alphanumeric_sender_ids'
-        );
-        $resources = $messaging_profile->alphanumeric_sender_ids();
-        $this->assertInstanceOf(\Telnyx\MessagingProfile::class, $resources);
-        $this->assertInstanceOf(\Telnyx\AlphanumericSenderId::class, $resources[0]);
-    }
 }
