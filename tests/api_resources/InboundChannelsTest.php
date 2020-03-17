@@ -11,7 +11,7 @@ class InboundChannelTest extends TestCase
             'get',
             '/v2/phone_numbers/inbound_channels'
         );
-        $resource = InboundChannel::retrieve(self::TEST_RESOURCE_ID);
+        $resource = InboundChannel::retrieve();
         $this->assertInstanceOf(\Telnyx\InboundChannel::class, $resource);
     }
 
@@ -21,7 +21,7 @@ class InboundChannelTest extends TestCase
             'patch',
             '/v2/phone_numbers/inbound_channels'
         );
-        $resource = InboundChannel::update(self::TEST_RESOURCE_ID, [
+        $resource = InboundChannel::update([
             "channels" => 10,
         ]);
         $this->assertInstanceOf(\Telnyx\InboundChannel::class, $resource);
