@@ -10,7 +10,7 @@ if (\Telnyx\TelnyxMock::start()) {
     define("MOCK_HOST", "localhost");
     define("MOCK_PORT", \Telnyx\TelnyxMock::getPort());
 } else {
-    define("MOCK_HOST", "localhost");
+    define("MOCK_HOST", getenv("TELNYX_MOCK_HOST") ?: "mock");
     define("MOCK_PORT", getenv("TELNYX_MOCK_PORT") ?: 12111);
 }
 
