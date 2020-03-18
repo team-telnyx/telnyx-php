@@ -66,8 +66,10 @@ require(dirname(__FILE__) . '/lib/AlphanumericSenderID.php');
 require(dirname(__FILE__) . '/lib/ShortCode.php');
 require(dirname(__FILE__) . '/lib/OutboundVoiceProfile.php');
 
-// Telnyx API: Billing
+// Telnyx API: Misc
+require(dirname(__FILE__) . '/lib/Address.php');
 require(dirname(__FILE__) . '/lib/BillingGroup.php');
+require(dirname(__FILE__) . '/lib/InboundChannel.php');
 
 // Telnyx API: Connections
 require(dirname(__FILE__) . '/lib/Connection.php');

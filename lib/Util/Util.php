@@ -89,8 +89,10 @@ abstract class Util
             \Telnyx\ShortCode::OBJECT_NAME => 'Telnyx\\ShortCode',
             \Telnyx\OutboundVoiceProfile::OBJECT_NAME => 'Telnyx\\OutboundVoiceProfile',
 
-            // Telnyx API: Billing
+            // Telnyx API: Misc
+            \Telnyx\Address::OBJECT_NAME => 'Telnyx\\Address',
             \Telnyx\BillingGroup::OBJECT_NAME => 'Telnyx\\BillingGroup',
+            \Telnyx\InboundChannel::OBJECT_NAME => 'Telnyx\\InboundChannel',
 
             // Telnyx API: Connections
             \Telnyx\Connection::OBJECT_NAME => 'Telnyx\\Connection',
