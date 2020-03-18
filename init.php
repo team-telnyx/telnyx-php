@@ -70,6 +70,8 @@ require(dirname(__FILE__) . '/lib/OutboundVoiceProfile.php');
 require(dirname(__FILE__) . '/lib/Address.php');
 require(dirname(__FILE__) . '/lib/BillingGroup.php');
 require(dirname(__FILE__) . '/lib/InboundChannel.php');
+require(dirname(__FILE__) . '/lib/SimCard.php');
+require(dirname(__FILE__) . '/lib/Portout.php');
 
 // Telnyx API: Connections
 require(dirname(__FILE__) . '/lib/Connection.php');
