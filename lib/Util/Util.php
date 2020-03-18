@@ -93,6 +93,8 @@ abstract class Util
             \Telnyx\Address::OBJECT_NAME => 'Telnyx\\Address',
             \Telnyx\BillingGroup::OBJECT_NAME => 'Telnyx\\BillingGroup',
             \Telnyx\InboundChannel::OBJECT_NAME => 'Telnyx\\InboundChannel',
+            \Telnyx\SimCard::OBJECT_NAME => 'Telnyx\\SimCard',
+            \Telnyx\Portout::OBJECT_NAME => 'Telnyx\\Portout',
 
             // Telnyx API: Connections
             \Telnyx\Connection::OBJECT_NAME => 'Telnyx\\Connection',
