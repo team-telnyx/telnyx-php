@@ -6,7 +6,6 @@ class NumberOrderDocumentTest extends TestCase
 {
     const TEST_RESOURCE_ID = '123';
 
-
     public function testIsListable()
     {
         $this->expectsRequest(
@@ -15,7 +14,7 @@ class NumberOrderDocumentTest extends TestCase
         );
         $resources = NumberOrderDocument::all();
         $this->assertInstanceOf(\Telnyx\Collection::class, $resources);
-        $this->assertInstanceOf(\Telnyx\NumberOrderDocument::class, $resources[0]);
+        $this->assertInstanceOf(\Telnyx\NumberOrderDocument::class, $resources['data'][0]);
     }
 
     public function testIsCreatable()

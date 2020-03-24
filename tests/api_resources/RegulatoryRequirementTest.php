@@ -6,7 +6,6 @@ class RegulatoryRequirementTest extends TestCase
 {
     const TEST_RESOURCE_ID = '123';
 
-
     public function testIsListable()
     {
         $this->expectsRequest(
@@ -15,7 +14,7 @@ class RegulatoryRequirementTest extends TestCase
         );
         $resources = RegulatoryRequirement::all();
         $this->assertInstanceOf(\Telnyx\Collection::class, $resources);
-        $this->assertInstanceOf(\Telnyx\RegulatoryRequirement::class, $resources[0]);
+        $this->assertInstanceOf(\Telnyx\RegulatoryRequirement::class, $resources['data'][0]);
     }
 
     public function testIsRetrievable()

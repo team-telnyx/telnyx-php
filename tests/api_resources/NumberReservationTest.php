@@ -14,7 +14,7 @@ class NumberReservationTest extends TestCase
         );
         $resources = NumberReservation::all();
         $this->assertInstanceOf(\Telnyx\Collection::class, $resources);
-        $this->assertInstanceOf(\Telnyx\NumberReservation::class, $resources[0]);
+        $this->assertInstanceOf(\Telnyx\NumberReservation::class, $resources['data'][0]);
     }
 
     public function testIsRetrievable()

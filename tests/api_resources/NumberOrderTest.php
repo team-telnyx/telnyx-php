@@ -14,7 +14,7 @@ class NumberOrderTest extends TestCase
         );
         $resources = NumberOrder::all();
         $this->assertInstanceOf(\Telnyx\Collection::class, $resources);
-        $this->assertInstanceOf(\Telnyx\NumberOrder::class, $resources[0]);
+        $this->assertInstanceOf(\Telnyx\NumberOrder::class, $resources['data'][0]);
     }
 
     public function testIsRetrievable()

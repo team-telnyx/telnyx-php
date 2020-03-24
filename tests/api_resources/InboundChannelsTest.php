@@ -26,5 +26,4 @@ class InboundChannelTest extends TestCase
         ]);
         $this->assertInstanceOf(\Telnyx\InboundChannel::class, $resource);
     }
-
 }

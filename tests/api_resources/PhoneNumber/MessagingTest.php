@@ -13,7 +13,7 @@ class MessagingTest extends \Telnyx\TestCase
         );
         $resources = Messaging::all();
         $this->assertInstanceOf(\Telnyx\Collection::class, $resources);
-        $this->assertInstanceOf(\Telnyx\PhoneNumber\Messaging::class, $resources[0]);
+        $this->assertInstanceOf(\Telnyx\PhoneNumber\Messaging::class, $resources['data'][0]);
     }
 
 }

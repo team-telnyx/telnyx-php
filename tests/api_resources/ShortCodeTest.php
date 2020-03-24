@@ -14,7 +14,7 @@ class ShortCodeTest extends TestCase
         );
         $resources = ShortCode::all();
         $this->assertInstanceOf(\Telnyx\Collection::class, $resources);
-        $this->assertInstanceOf(\Telnyx\ShortCode::class, $resources[0]);
+        $this->assertInstanceOf(\Telnyx\ShortCode::class, $resources['data'][0]);
     }
 
     public function testIsRetrievable()
