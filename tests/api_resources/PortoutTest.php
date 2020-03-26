@@ -6,7 +6,6 @@ class PortoutTest extends TestCase
 {
     const TEST_RESOURCE_ID = '123';
 
-
     public function testIsListable()
     {
         $this->expectsRequest(
@@ -15,7 +14,7 @@ class PortoutTest extends TestCase
         );
         $resources = Portout::all();
         $this->assertInstanceOf(\Telnyx\Collection::class, $resources);
-        $this->assertInstanceOf(\Telnyx\Portout::class, $resources[0]);
+        $this->assertInstanceOf(\Telnyx\Portout::class, $resources['data'][0]);
     }
 
     public function testIsRetrievable()
@@ -49,7 +48,7 @@ class PortoutTest extends TestCase
         );
         $resources = $portout->list_comments();
         $this->assertInstanceOf(\Telnyx\Collection::class, $resources);
-        $this->assertInstanceOf(\Telnyx\Portout::class, $resources[0]);
+        $this->assertInstanceOf(\Telnyx\Portout::class, $resources['data'][0]);
     }
 
     public function testCreateComments()
@@ -62,5 +61,4 @@ class PortoutTest extends TestCase
         $resources = $portout->list_comments();
         $this->assertInstanceOf(\Telnyx\Portout::class, $resources);
     }
-
 }

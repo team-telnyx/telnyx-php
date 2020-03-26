@@ -4,7 +4,6 @@ namespace Telnyx;
 
 class SimCardTest extends TestCase
 {
-    
     const TEST_RESOURCE_ID = '6a09cdc3-8948-47f0-aa62-74ac943d6c58';
 
     public function testIsListable()
@@ -15,7 +14,7 @@ class SimCardTest extends TestCase
         );
         $resources = SimCard::all();
         $this->assertInstanceOf(\Telnyx\Collection::class, $resources);
-        $this->assertInstanceOf(\Telnyx\SimCard::class, $resources[0]);
+        $this->assertInstanceOf(\Telnyx\SimCard::class, $resources['data'][0]);
     }
 
     public function testIsRetrievable()
@@ -71,5 +70,4 @@ class SimCardTest extends TestCase
         $resources = SimCard::register(["registration_codes" => ["1234567890, 123456332601"]]);
         $this->assertInstanceOf(\Telnyx\SimCard::class, $resources);
     }
-
 }

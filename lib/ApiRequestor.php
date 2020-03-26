@@ -413,9 +413,13 @@ class ApiRequestor
     {
         $resp = json_decode($rbody, true);
 
-        // Move [data] to the parent node
+
         if (isset($resp['data'])) {
-            $resp = $resp['data'];
+            // If this is not a collection, then 'record_type' should be present
+            if (isset($resp['data']['record_type']) || !isset($resp['meta'])) {
+                // then move [data] to the parent node
+                $resp = $resp['data'];
+            }
         }
 
         $jsonError = json_last_error();

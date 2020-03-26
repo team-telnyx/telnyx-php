@@ -15,7 +15,7 @@ class MessagingProfileTest extends TestCase
         );
         $resources = MessagingProfile::all();
         $this->assertInstanceOf(\Telnyx\Collection::class, $resources);
-        $this->assertInstanceOf(\Telnyx\MessagingProfile::class, $resources[0]);
+        $this->assertInstanceOf(\Telnyx\MessagingProfile::class, $resources['data'][0]);
     }
 
     public function testIsRetrievable()
@@ -71,7 +71,7 @@ class MessagingProfileTest extends TestCase
         );
         $resources = $messaging_profile->phone_numbers();
         $this->assertInstanceOf(\Telnyx\MessagingProfile::class, $resources);
-        $this->assertInstanceOf(\Telnyx\MessagingPhoneNumber::class, $resources[0]);
+        $this->assertInstanceOf(\Telnyx\MessagingPhoneNumber::class, $resources['data'][0]);
     }
 
     public function testCanCallShortCodes()
@@ -83,7 +83,6 @@ class MessagingProfileTest extends TestCase
         );
         $resources = $messaging_profile->short_codes();
         $this->assertInstanceOf(\Telnyx\MessagingProfile::class, $resources);
-        $this->assertInstanceOf(\Telnyx\ShortCode::class, $resources[0]);
+        $this->assertInstanceOf(\Telnyx\ShortCode::class, $resources['data'][0]);
     }
-
 }

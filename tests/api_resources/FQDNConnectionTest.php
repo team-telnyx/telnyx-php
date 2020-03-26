@@ -14,7 +14,7 @@ class FQDNConnectionTest extends TestCase
         );
         $resources = FQDNConnection::all();
         $this->assertInstanceOf(\Telnyx\Collection::class, $resources);
-        $this->assertInstanceOf(\Telnyx\FQDNConnection::class, $resources[0]);
+        $this->assertInstanceOf(\Telnyx\FQDNConnection::class, $resources['data'][0]);
     }
 
     public function testIsCreatable()
@@ -59,5 +59,4 @@ class FQDNConnectionTest extends TestCase
         ]);
         $this->assertInstanceOf(\Telnyx\FQDNConnection::class, $resource);
     }
-    
 }

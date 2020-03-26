@@ -18,6 +18,6 @@ class TestAvailablePhoneNumber extends TestCase
             ]
         ]);
         $this->assertInstanceOf(\Telnyx\Collection::class, $resources);
-        $this->assertInstanceOf(\Telnyx\AvailablePhoneNumber::class, $resources[0]);
+        $this->assertInstanceOf(\Telnyx\AvailablePhoneNumber::class, $resources['data'][0]);
     }
 }

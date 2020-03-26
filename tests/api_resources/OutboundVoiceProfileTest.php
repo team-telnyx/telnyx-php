@@ -14,7 +14,7 @@ class OutboundVoiceProfileTest extends TestCase
         );
         $resources = OutboundVoiceProfile::all();
         $this->assertInstanceOf(\Telnyx\Collection::class, $resources);
-        $this->assertInstanceOf(\Telnyx\OutboundVoiceProfile::class, $resources[0]);
+        $this->assertInstanceOf(\Telnyx\OutboundVoiceProfile::class, $resources['data'][0]);
     }
 
     public function testIsCreatable()
@@ -59,5 +59,4 @@ class OutboundVoiceProfileTest extends TestCase
         ]);
         $this->assertInstanceOf(\Telnyx\OutboundVoiceProfile::class, $resource);
     }
-    
 }

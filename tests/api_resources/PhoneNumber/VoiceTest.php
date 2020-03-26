@@ -13,7 +13,7 @@ class VoiceTest extends \Telnyx\TestCase
         );
         $resources = Voice::all();
         $this->assertInstanceOf(\Telnyx\Collection::class, $resources);
-        $this->assertInstanceOf(\Telnyx\PhoneNumber\Voice::class, $resources[0]);
+        $this->assertInstanceOf(\Telnyx\PhoneNumber\Voice::class, $resources['data'][0]);
     }
 
 }

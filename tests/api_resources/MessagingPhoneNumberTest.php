@@ -14,7 +14,7 @@ class MessagingPhoneNumberTest extends TestCase
         );
         $resources = MessagingPhoneNumber::all();
         $this->assertInstanceOf(\Telnyx\Collection::class, $resources);
-        $this->assertInstanceOf(\Telnyx\MessagingPhoneNumber::class, $resources[0]);
+        $this->assertInstanceOf(\Telnyx\MessagingPhoneNumber::class, $resources['data'][0]);
     }
 
     public function testIsRetrievable()

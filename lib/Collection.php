@@ -87,6 +87,79 @@ class Collection extends TelnyxObject implements \IteratorAggregate
         return new Util\AutoPagingIterator($this, $this->_requestParams);
     }
 
+    /**
+     * Returns an empty collection. This is returned from {@see nextPage()}
+     * when we know that there isn't a next page in order to replicate the
+     * behavior of the API when it attempts to return a page beyond the last.
+     *
+     * @param array|string|null $opts
+     * @return Collection
+     */
+    public static function emptyCollection($opts = null)
+    {
+        return Collection::constructFrom(['data' => []], $opts);
+    }
+
+    /**
+     * Returns true if the page object contains no element.
+     *
+     * @return boolean
+     */
+    public function isEmpty()
+    {
+        return empty($this->data);
+    }
+
+    /**
+     * Fetches the next page in the resource list (if there is one).
+     *
+     * This method will try to respect the limit of the current page. If none
+     * was given, the default limit will be fetched again.
+     *
+     * @param array|null $params
+     * @param array|string|null $opts
+     * @return Collection
+     */
+    public function nextPage($params = null, $opts = null)
+    {
+        if (!$this->has_more) {
+            return static::emptyCollection($opts);
+        }
+
+        $lastId = end($this->data)->id;
+
+        $params = array_merge(
+            $this->_requestParams,
+            ['starting_after' => $lastId],
+            $params ?: []
+        );
+
+        return $this->all($params, $opts);
+    }
+
+    /**
+     * Fetches the previous page in the resource list (if there is one).
+     *
+     * This method will try to respect the limit of the current page. If none
+     * was given, the default limit will be fetched again.
+     *
+     * @param array|null $params
+     * @param array|string|null $opts
+     * @return Collection
+     */
+    public function previousPage($params = null, $opts = null)
+    {
+        $firstId = $this->data[0]->id;
+
+        $params = array_merge(
+            $this->_requestParams,
+            ['ending_before' => $firstId],
+            $params ?: []
+        );
+
+        return $this->all($params, $opts);
+    }
+
     private function extractPathAndUpdateParams($params)
     {
         $url = parse_url($this->url);

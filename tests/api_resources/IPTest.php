@@ -14,7 +14,7 @@ class IPTest extends TestCase
         );
         $resources = IP::all();
         $this->assertInstanceOf(\Telnyx\Collection::class, $resources);
-        $this->assertInstanceOf(\Telnyx\IP::class, $resources[0]);
+        $this->assertInstanceOf(\Telnyx\IP::class, $resources['data'][0]);
     }
 
     public function testIsCreatable()
@@ -60,5 +60,4 @@ class IPTest extends TestCase
         ]);
         $this->assertInstanceOf(\Telnyx\IP::class, $resource);
     }
-    
 }

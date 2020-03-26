@@ -6,7 +6,6 @@ class AddressTest extends TestCase
 {
     const TEST_RESOURCE_ID = '123';
 
-
     public function testIsListable()
     {
         $this->expectsRequest(
@@ -15,7 +14,7 @@ class AddressTest extends TestCase
         );
         $resources = Address::all();
         $this->assertInstanceOf(\Telnyx\Collection::class, $resources);
-        $this->assertInstanceOf(\Telnyx\Address::class, $resources[0]);
+        $this->assertInstanceOf(\Telnyx\Address::class, $resources['data'][0]);
     }
 
     public function testIsCreatable()
@@ -48,5 +47,4 @@ class AddressTest extends TestCase
         $resource = Address::retrieve(self::TEST_RESOURCE_ID);
         $this->assertInstanceOf(\Telnyx\Address::class, $resource);
     }
-
 }

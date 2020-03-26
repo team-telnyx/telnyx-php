@@ -6,7 +6,6 @@ class BillingGroupTest extends TestCase
 {
     const TEST_RESOURCE_ID = '123';
 
-
     public function testIsListable()
     {
         $this->expectsRequest(
@@ -15,7 +14,7 @@ class BillingGroupTest extends TestCase
         );
         $resources = BillingGroup::all();
         $this->assertInstanceOf(\Telnyx\Collection::class, $resources);
-        $this->assertInstanceOf(\Telnyx\BillingGroup::class, $resources[0]);
+        $this->assertInstanceOf(\Telnyx\BillingGroup::class, $resources['data'][0]);
     }
 
     public function testIsCreatable()

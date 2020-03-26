@@ -14,7 +14,7 @@ class CredentialConnectionTest extends TestCase
         );
         $resources = CredentialConnection::all();
         $this->assertInstanceOf(\Telnyx\Collection::class, $resources);
-        $this->assertInstanceOf(\Telnyx\CredentialConnection::class, $resources[0]);
+        $this->assertInstanceOf(\Telnyx\CredentialConnection::class, $resources['data'][0]);
     }
 
     public function testIsCreatable()
@@ -59,5 +59,4 @@ class CredentialConnectionTest extends TestCase
         ]);
         $this->assertInstanceOf(\Telnyx\CredentialConnection::class, $resource);
     }
-    
 }
