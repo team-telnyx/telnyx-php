@@ -80,6 +80,7 @@ abstract class Util
             \Telnyx\PhoneNumber\Messaging::OBJECT_NAME => \Telnyx\PhoneNumber\Messaging::class,
             \Telnyx\Call::OBJECT_NAME => 'Telnyx\\Call',
             \Telnyx\Conference::OBJECT_NAME => 'Telnyx\\Conference',
+            \Telnyx\CallControlApplication::OBJECT_NAME => 'Telnyx\\CallControlApplication',
 
             // Telnyx API: Messaging
             \Telnyx\Message::OBJECT_NAME => 'Telnyx\\Message',
