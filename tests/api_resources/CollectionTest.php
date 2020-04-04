@@ -10,9 +10,18 @@ class CollectionTest extends TestCase
     public function setUpFixture()
     {
         $this->fixture = Collection::constructFrom([
-            'data' => [['id' => 1]],
-            'has_more' => true,
             'url' => '/things',
+            'data' => [
+                ['id' => 1],
+                ['id' => 2],
+                ['id' => 3]
+            ],
+            'meta' => [
+                'page_size' => 3,
+                'page_number' => 2,
+                'total_results' => 6,
+                'total_pages' => 4
+            ]
         ]);
     }
 
@@ -25,15 +34,22 @@ class CollectionTest extends TestCase
             null,
             false,
             [
-                'object' => 'list',
-                'data' => [['id' => 1]],
-                'has_more' => true,
-                'url' => '/things',
+                'data' => [
+                    ['id' => 1],
+                    ['id' => 2],
+                    ['id' => 3]
+                ],
+                'meta' => [
+                    'page_size' => 3,
+                    'page_number' => 2,
+                    'total_results' => 6,
+                    'total_pages' => 4
+                ]
             ]
         );
 
         $resources = $this->fixture->all();
-        $this->assertTrue(is_array($resources->data));
+        $this->assertTrue(is_array($resources['data']));
     }
 
     public function testCanRetrieve()
@@ -75,67 +91,17 @@ class CollectionTest extends TestCase
     public function testCanIterate()
     {
         $seen = [];
-        foreach ($this->fixture as $item) {
-            array_push($seen, $item['id']);
-        }
-
-        $this->assertSame([1], $seen);
-    }
-
-    public function testSupportsIteratorToArray()
-    {
-        $seen = [];
-        foreach (iterator_to_array($this->fixture) as $item) {
-            array_push($seen, $item['id']);
-        }
-
-        $this->assertSame([1], $seen);
-    }
-
-    public function testProvidesAutoPagingIterator()
-    {
-        $this->stubRequest(
-            'GET',
-            '/things',
-            [
-                'starting_after' => 1,
-            ],
-            null,
-            false,
-            [
-                'object' => 'list',
-                'data' => [['id' => 2], ['id' => 3]],
-                'has_more' => false,
-            ]
-        );
-
-        $seen = [];
-        foreach ($this->fixture->autoPagingIterator() as $item) {
+        foreach ($this->fixture['data'] as $item) {
             array_push($seen, $item['id']);
         }
 
         $this->assertSame([1, 2, 3], $seen);
     }
 
-    public function testAutoPagingIteratorSupportsIteratorToArray()
+    public function testSupportsIteratorToArray()
     {
-        $this->stubRequest(
-            'GET',
-            '/things',
-            [
-                'starting_after' => 1,
-            ],
-            null,
-            false,
-            [
-                'object' => 'list',
-                'data' => [['id' => 2], ['id' => 3]],
-                'has_more' => false,
-            ]
-        );
-
         $seen = [];
-        foreach (iterator_to_array($this->fixture->autoPagingIterator()) as $item) {
+        foreach (iterator_to_array($this->fixture) as $item) {
             array_push($seen, $item['id']);
         }
 
@@ -189,14 +155,22 @@ class CollectionTest extends TestCase
             'GET',
             '/things',
             [
-                'starting_after' => 1,
+                'page[number]' => 3
             ],
             null,
             false,
             [
-                'object' => 'list',
-                'data' => [['id' => 2], ['id' => 3]],
-                'has_more' => false,
+                'data' => [
+                    ['id' => 1],
+                    ['id' => 2],
+                    ['id' => 3]
+                ],
+                'meta' => [
+                    'page_size' => 3,
+                    'page_number' => 2,
+                    'total_results' => 6,
+                    'total_pages' => 4
+                ]
             ]
         );
 
@@ -205,7 +179,7 @@ class CollectionTest extends TestCase
         foreach ($nextPage->data as $element) {
             array_push($ids, $element['id']);
         }
-        $this->assertEquals([2, 3], $ids);
+        $this->assertEquals([1, 2, 3], $ids);
     }
 
     public function testPreviousPage()
@@ -214,18 +188,30 @@ class CollectionTest extends TestCase
             'GET',
             '/things',
             [
-                'ending_before' => 1,
+                'page[number]' => 1
             ],
             null,
             false,
             [
-                'object' => 'list',
-                'data' => [],
-                'has_more' => false,
+                'data' => [
+                    ['id' => 1],
+                    ['id' => 2],
+                    ['id' => 3]
+                ],
+                'meta' => [
+                    'page_size' => 3,
+                    'page_number' => 2,
+                    'total_results' => 6,
+                    'total_pages' => 4
+                ]
             ]
         );
 
         $previousPage = $this->fixture->previousPage();
-        $this->assertEquals([], $previousPage->data);
+        $ids = [];
+        foreach ($previousPage->data as $element) {
+            array_push($ids, $element['id']);
+        }
+        $this->assertEquals([1, 2, 3], $ids);
     }
 }

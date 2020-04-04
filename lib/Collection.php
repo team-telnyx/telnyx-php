@@ -7,7 +7,6 @@ namespace Telnyx;
  *
  * @property string $object
  * @property string $url
- * @property bool $has_more
  * @property mixed $data
  *
  * @package Telnyx
@@ -111,6 +110,34 @@ class Collection extends TelnyxObject implements \IteratorAggregate
     }
 
     /**
+     * See if there are more results
+     *
+     * @return boolean
+     */
+    public function hasMore() {
+        if (isset($this->meta)) {
+            if ($this->meta['page_number'] < $this->meta['total_pages']) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * See if there are previous results
+     *
+     * @return boolean
+     */
+    public function hasPrev() {
+        if (isset($this->meta)) {
+            if ($this->meta['page_number'] > 1) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Fetches the next page in the resource list (if there is one).
      *
      * This method will try to respect the limit of the current page. If none
@@ -122,15 +149,15 @@ class Collection extends TelnyxObject implements \IteratorAggregate
      */
     public function nextPage($params = null, $opts = null)
     {
-        if (!$this->has_more) {
+        if (!$this->hasMore()) {
             return static::emptyCollection($opts);
         }
 
-        $lastId = end($this->data)->id;
-
         $params = array_merge(
             $this->_requestParams,
-            ['starting_after' => $lastId],
+            [
+                'page[number]'=> $this->meta['page_number'] + 1
+            ],
             $params ?: []
         );
 
@@ -149,11 +176,15 @@ class Collection extends TelnyxObject implements \IteratorAggregate
      */
     public function previousPage($params = null, $opts = null)
     {
-        $firstId = $this->data[0]->id;
+        if (!$this->hasPrev()) {
+            return static::emptyCollection($opts);
+        }
 
         $params = array_merge(
             $this->_requestParams,
-            ['ending_before' => $firstId],
+            [
+                'page[number]'=> $this->meta['page_number'] - 1
+            ],
             $params ?: []
         );
 
