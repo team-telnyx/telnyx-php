@@ -38,7 +38,13 @@ class Collection extends TelnyxObject implements \IteratorAggregate
 
         list($response, $opts) = $this->_request('get', $url, $params, $opts);
         $this->_requestParams = $params;
-        return Util\Util::convertToTelnyxObject($response, $opts);
+
+        // This is needed for nextPage() and previousPage()
+        $response['url'] = $url;
+
+        $obj = Util\Util::convertToTelnyxObject($response, $opts);
+
+        return $obj;
     }
 
     public function create($params = null, $opts = null)

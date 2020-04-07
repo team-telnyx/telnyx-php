@@ -114,6 +114,8 @@ abstract class Util
         } elseif (is_array($resp)) {
             if (isset($resp['record_type']) && is_string($resp['record_type']) && isset($types[$resp['record_type']])) {
                 $class = $types[$resp['record_type']];
+            } elseif (isset($resp['meta'])) { // Only Collections will have 'meta' and this is how we detect collections
+                $class = 'Telnyx\\Collection';
             } else {
                 $class = 'Telnyx\\TelnyxObject';
             }

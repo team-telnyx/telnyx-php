@@ -23,8 +23,8 @@ trait All
 
         list($response, $opts) = static::_staticRequest('get', $url, $params, $opts);
 
-        // Convert this response to a list or collection object
-        $response->json['record_type'] = 'list';
+        // This is needed for nextPage() and previousPage()
+        $response->json['url'] = $url;
 
         $obj = \Telnyx\Util\Util::convertToTelnyxObject($response->json, $opts);
         if (!is_a($obj, 'Telnyx\\Collection')) {
@@ -34,12 +34,7 @@ trait All
         }
         $obj->setLastResponse($response);
         $obj->setRequestParams($params);
-
-        // This is needed for nextPage() and previousPage()
-        $obj['url'] = $url;
-
-        // This was a temporary field for convertToTelnyxObject. Remove it.
-        unset($obj['record_type']);
+        
         return $obj;
     }
 }
