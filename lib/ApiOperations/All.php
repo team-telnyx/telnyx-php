@@ -35,6 +35,9 @@ trait All
         $obj->setLastResponse($response);
         $obj->setRequestParams($params);
 
+        // This is needed for nextPage() and previousPage()
+        $obj['url'] = $url;
+
         // This was a temporary field for convertToTelnyxObject. Remove it.
         unset($obj['record_type']);
         return $obj;
