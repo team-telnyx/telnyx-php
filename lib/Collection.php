@@ -43,6 +43,7 @@ class Collection extends TelnyxObject implements \IteratorAggregate
         $response['url'] = $url;
 
         $obj = Util\Util::convertToTelnyxObject($response, $opts);
+        $obj->setRequestParams($params);
 
         return $obj;
     }
@@ -161,11 +162,19 @@ class Collection extends TelnyxObject implements \IteratorAggregate
 
         $params = array_merge(
             $this->_requestParams,
-            [
-                'page[number]'=> $this->meta['page_number'] + 1
-            ],
             $params ?: []
         );
+
+        // Remove page number from the next request. Detect both syntaxes
+        if (isset($params['page']) && isset($params['page']['number'])) {
+            unset($params['page']['number']);
+        }
+        elseif (isset($params['page[number]'])) {
+            unset($params['page[number]']);
+        }
+
+        // Set a new page number
+        $params['page[number]'] = $this->meta['page_number'] + 1;
 
         return $this->all($params, $opts);
     }
@@ -188,11 +197,19 @@ class Collection extends TelnyxObject implements \IteratorAggregate
 
         $params = array_merge(
             $this->_requestParams,
-            [
-                'page[number]'=> $this->meta['page_number'] - 1
-            ],
             $params ?: []
         );
+
+        // Remove page number from the next request. Detect both syntaxes
+        if (isset($params['page']) && isset($params['page']['number'])) {
+            unset($params['page']['number']);
+        }
+        elseif (isset($params['page[number]'])) {
+            unset($params['page[number]']);
+        }
+
+        // Set a new page number
+        $params['page[number]'] = $this->meta['page_number'] - 1;
 
         return $this->all($params, $opts);
     }
