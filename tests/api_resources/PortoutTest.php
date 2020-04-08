@@ -58,7 +58,7 @@ class PortoutTest extends TestCase
             'post',
             '/v2/portouts/' . urlencode(self::TEST_RESOURCE_ID) . '/comments'
         );
-        $resources = $portout->list_comments();
+        $resources = $portout->create_comment(['body'=>'comment']);
         $this->assertInstanceOf(\Telnyx\Portout::class, $resources);
     }
 }

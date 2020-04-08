@@ -53,7 +53,7 @@ class SimCard extends ApiResource
     public static function register($params = null, $options = null)
     {
         self::_validateParams($params);
-        $url = '/v2/register/sim_cards';
+        $url = '/v2/actions/register/sim_cards';
 
         list($response, $opts) = static::_staticRequest('post', $url, $params, null);
         $obj = \Telnyx\Util\Util::convertToTelnyxObject($response->json, $opts);
