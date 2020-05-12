@@ -6,6 +6,7 @@ Telnyx PHP SDK
 [![Total Downloads](https://poser.pugx.org/telnyx/telnyx-php/downloads.svg)](https://packagist.org/packages/telnyx/telnyx-php)
 [![License](https://poser.pugx.org/telnyx/telnyx-php/license.svg)](https://packagist.org/packages/telnyx/telnyx-php)
 [![Code Coverage](https://coveralls.io/repos/github/team-telnyx/telnyx-php/badge.svg?branch=master&)](https://coveralls.io/github/team-telnyx/telnyx-php?branch=master&)
+[![Join Slack](https://img.shields.io/badge/join-slack-infomational)](https://joinslack.telnyx.com/)
 
 You can sign up for a Telnyx account at [telnyx.com](https://telnyx.com).
 
