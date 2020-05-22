@@ -115,8 +115,7 @@ class ApiRequestor
     {
         $params = $params ?: [];
         $headers = $headers ?: [];
-        list($rbody, $rcode, $rheaders, $myApiKey) =
-        $this->_requestRaw($method, $url, $params, $headers);
+        list($rbody, $rcode, $rheaders, $myApiKey) = $this->_requestRaw($method, $url, $params, $headers);
         $json = $this->_interpretResponse($rbody, $rcode, $rheaders);
         $resp = new ApiResponse($rbody, $rcode, $rheaders, $json);
         return [$resp, $myApiKey];
@@ -152,8 +151,6 @@ class ApiRequestor
         }
 
         $errorData = $resp['error'];
-
-        #echo $rbody;exit;
 
         $error = null;
         if (!$error) {
@@ -413,12 +410,10 @@ class ApiRequestor
     {
         $resp = json_decode($rbody, true);
 
-
         if (isset($resp['data'])) {
-            // If this is not a collection, then 'record_type' should be present
-            if (isset($resp['data']['record_type']) || !isset($resp['meta'])) {
-                // then move [data] to the parent node
-                $resp = $resp['data'];
+            // See if this is NOT a \Telnyx\Collection because Collections are not explicitly specified by the API
+            if (isset($resp['data']['record_type']) && !isset($resp['data'][0])) {
+                $resp = $resp['data']; // Move [data] to the parent node because it is a single entry, not a collection
             }
         }
 

@@ -68,6 +68,7 @@ class SimCardTest extends TestCase
             '/v2/actions/register/sim_cards'
         );
         $resources = SimCard::register(["registration_codes" => ["1234567890, 123456332601"]]);
-        $this->assertInstanceOf(\Telnyx\SimCard::class, $resources);
+        $this->assertInstanceOf(\Telnyx\Collection::class, $resources);
+        $this->assertInstanceOf(\Telnyx\SimCard::class, $resources['data'][0]);
     }
 }
