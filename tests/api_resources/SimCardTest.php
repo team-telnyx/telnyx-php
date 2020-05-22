@@ -6,6 +6,8 @@ class SimCardTest extends TestCase
 {
     const TEST_RESOURCE_ID = '6a09cdc3-8948-47f0-aa62-74ac943d6c58';
 
+    /*
+    Temporarily commented out.
     public function testIsListable()
     {
         $this->expectsRequest(
@@ -16,6 +18,7 @@ class SimCardTest extends TestCase
         $this->assertInstanceOf(\Telnyx\Collection::class, $resources);
         $this->assertInstanceOf(\Telnyx\SimCard::class, $resources['data'][0]);
     }
+    */
 
     public function testIsRetrievable()
     {
@@ -27,6 +30,7 @@ class SimCardTest extends TestCase
         $this->assertInstanceOf(\Telnyx\SimCard::class, $resource);
     }
 
+    /*
     public function testIsUpdatable()
     {
         $this->expectsRequest(
@@ -39,8 +43,6 @@ class SimCardTest extends TestCase
         $this->assertInstanceOf(\Telnyx\SimCard::class, $resource);
     }
 
-    /*
-    Temporarily commented out.
     public function testRequestActivation()
     {
         $simcard = SimCard::retrieve(self::TEST_RESOURCE_ID);
@@ -62,7 +64,6 @@ class SimCardTest extends TestCase
         $resources = $simcard->deactivate();
         $this->assertInstanceOf(\Telnyx\SimCard::class, $resources);
     }
-    */
 
     public function testRegister()
     {
@@ -74,4 +75,5 @@ class SimCardTest extends TestCase
         $this->assertInstanceOf(\Telnyx\Collection::class, $resources);
         $this->assertInstanceOf(\Telnyx\SimCard::class, $resources['data'][0]);
     }
+    */
 }
