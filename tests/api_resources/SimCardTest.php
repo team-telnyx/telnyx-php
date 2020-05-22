@@ -39,6 +39,8 @@ class SimCardTest extends TestCase
         $this->assertInstanceOf(\Telnyx\SimCard::class, $resource);
     }
 
+    /*
+    Temporarily commented out.
     public function testRequestActivation()
     {
         $simcard = SimCard::retrieve(self::TEST_RESOURCE_ID);
@@ -60,6 +62,7 @@ class SimCardTest extends TestCase
         $resources = $simcard->deactivate();
         $this->assertInstanceOf(\Telnyx\SimCard::class, $resources);
     }
+    */
 
     public function testRegister()
     {

@@ -81,6 +81,7 @@ abstract class Util
             \Telnyx\Call::OBJECT_NAME => 'Telnyx\\Call',
             \Telnyx\Conference::OBJECT_NAME => 'Telnyx\\Conference',
             \Telnyx\CallControlApplication::OBJECT_NAME => 'Telnyx\\CallControlApplication',
+            \Telnyx\NumberLookup::OBJECT_NAME => 'Telnyx\\NumberLookup',
 
             // Telnyx API: Messaging
             \Telnyx\Message::OBJECT_NAME => 'Telnyx\\Message',
