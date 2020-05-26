@@ -8,6 +8,7 @@ class SimCardTest extends TestCase
 
     /*
     Temporarily commented out.
+    
     public function testIsListable()
     {
         $this->expectsRequest(
