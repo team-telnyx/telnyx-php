@@ -39,8 +39,12 @@ class Portout extends ApiResource
     {
         $url = $this->instanceUrl() . '/comments';
         list($response, $opts) = $this->_request('get', $url, null, null);
-        $this->refreshFrom($response, $opts);
-        return $this;
+
+        // This is needed for nextPage() and previousPage()
+        $response['url'] = $url;
+
+        $obj = Util\Util::convertToTelnyxObject($response, $opts);
+        return $obj;
     }
 
     /**

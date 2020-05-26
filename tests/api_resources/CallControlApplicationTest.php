@@ -24,8 +24,8 @@ class CallControlApplicationTest extends TestCase
             '/v2/call_control_applications'
         );
         $resource = CallControlApplication::create([
-            'connection_name' => 'office-connection',
-            'webhook_event_url' => 'https://example.com/'
+            'application_name' => 'call-router',
+            'webhook_event_url' => 'https://example.com'
         ]);
         $this->assertInstanceOf(\Telnyx\CallControlApplication::class, $resource);
     }
@@ -58,8 +58,8 @@ class CallControlApplicationTest extends TestCase
             '/v2/call_control_applications/' . urlencode(self::TEST_RESOURCE_ID)
         );
         $resource = CallControlApplication::update(self::TEST_RESOURCE_ID, [
-            'connection_name' => 'office-connection',
-            'webhook_event_url' => 'https://example.com/'
+            'application_name' => 'call-router',
+            'webhook_event_url' => 'https://example.com'
         ]);
         $this->assertInstanceOf(\Telnyx\CallControlApplication::class, $resource);
     }
