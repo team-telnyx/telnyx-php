@@ -195,6 +195,9 @@ class CurlClient implements ClientInterface
         } elseif ($method == 'patch') {
             $opts[CURLOPT_CUSTOMREQUEST] = 'PATCH';
             $opts[CURLOPT_POSTFIELDS] = $hasFile ? $params : json_encode($params);
+        } elseif ($method == 'put') {
+            $opts[CURLOPT_CUSTOMREQUEST] = 'PUT';
+            $opts[CURLOPT_POSTFIELDS] = $hasFile ? $params : json_encode($params);
         } elseif ($method == 'delete') {
             $opts[CURLOPT_CUSTOMREQUEST] = 'DELETE';
             if (count($params) > 0) {

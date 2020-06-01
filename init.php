@@ -74,6 +74,8 @@ require(dirname(__FILE__) . '/lib/BillingGroup.php');
 require(dirname(__FILE__) . '/lib/InboundChannel.php');
 require(dirname(__FILE__) . '/lib/SimCard.php');
 require(dirname(__FILE__) . '/lib/Portout.php');
+require(dirname(__FILE__) . '/lib/OtaUpdate.php');
+require(dirname(__FILE__) . '/lib/MobileOperatorNetwork.php');
 
 // Telnyx API: Connections
 require(dirname(__FILE__) . '/lib/Connection.php');

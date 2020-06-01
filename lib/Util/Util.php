@@ -97,6 +97,8 @@ abstract class Util
             \Telnyx\InboundChannel::OBJECT_NAME => 'Telnyx\\InboundChannel',
             \Telnyx\SimCard::OBJECT_NAME => 'Telnyx\\SimCard',
             \Telnyx\Portout::OBJECT_NAME => 'Telnyx\\Portout',
+            \Telnyx\OtaUpdate::OBJECT_NAME => 'Telnyx\\OtaUpdate',
+            \Telnyx\MobileOperatorNetwork::OBJECT_NAME => 'Telnyx\\MobileOperatorNetwork',
 
             // Telnyx API: Connections
             \Telnyx\Connection::OBJECT_NAME => 'Telnyx\\Connection',
