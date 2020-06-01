@@ -4,7 +4,7 @@ namespace Telnyx;
 
 class MobileOperatorNetworkTest extends TestCase
 {
-    public const TEST_RESOURCE_ID = '123';
+    const TEST_RESOURCE_ID = '123';
 
     public function testIsListable()
     {
