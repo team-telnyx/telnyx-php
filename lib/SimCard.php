@@ -59,4 +59,46 @@ class SimCard extends ApiResource
         $obj = \Telnyx\Util\Util::convertToTelnyxObject($response->json, $opts);
         return $obj;
     }
+
+    /**
+     * @param string|null $id
+     *
+     * @return It deletes the network preferences currently applied in the SIM card.
+     */
+    public static function delete_network_preferences($id)
+    {
+        $url = '/v2/sim_cards/' . $id . '/network_preferences';
+
+        list($response, $opts) = static::_staticRequest('delete', $url, null, null);
+        $obj = \Telnyx\Util\Util::convertToTelnyxObject($response->json, $opts);
+        return $obj;
+    }
+
+    /**
+     * @param string|null $id
+     *
+     * @return It sets the network preferences currently applied in the SIM card.
+     */
+    public static function get_network_preferences($id)
+    {
+        $url = '/v2/sim_cards/' . $id . '/network_preferences';
+
+        list($response, $opts) = static::_staticRequest('get', $url, null, null);
+        $obj = \Telnyx\Util\Util::convertToTelnyxObject($response->json, $opts);
+        return $obj;
+    }
+
+    /**
+     * @param string|null $id
+     *
+     * @return It returns the network preferences currently applied in the SIM card.
+     */
+    public static function set_network_preferences($id, $params = null, $options = null)
+    {
+        $url = '/v2/sim_cards/' . $id . '/network_preferences';
+
+        list($response, $opts) = static::_staticRequest('put', $url, $params, $options);
+        $obj = \Telnyx\Util\Util::convertToTelnyxObject($response->json, $opts);
+        return $obj;
+    }
 }

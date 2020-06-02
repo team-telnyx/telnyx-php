@@ -77,4 +77,38 @@ class SimCardTest extends TestCase
         $this->assertInstanceOf(\Telnyx\SimCard::class, $resources['data'][0]);
     }
     */
+
+    public function testDeleteNetworkPreferences()
+    {
+        $this->expectsRequest(
+            'delete',
+            '/v2/sim_cards/' . urlencode(self::TEST_RESOURCE_ID) . '/network_preferences'
+        );
+        $resource = SimCard::delete_network_preferences(self::TEST_RESOURCE_ID);
+        $this->assertInstanceOf(\Telnyx\TelnyxObject::class, $resource);
+    }
+
+    public function testGetNetworkPreferences()
+    {
+        $this->expectsRequest(
+            'get',
+            '/v2/sim_cards/' . urlencode(self::TEST_RESOURCE_ID) . '/network_preferences'
+        );
+        $resource = SimCard::get_network_preferences(self::TEST_RESOURCE_ID);
+        $this->assertInstanceOf(\Telnyx\TelnyxObject::class, $resource);
+    }
+
+    /*
+    public function testSetNetworkPreferences()
+    {
+        $this->expectsRequest(
+            'put',
+            '/v2/sim_cards/' . urlencode(self::TEST_RESOURCE_ID) . '/network_preferences'
+        );
+        $resource = SimCard::set_network_preferences(self::TEST_RESOURCE_ID, [
+            'mobile_operator_networks_preferences' => 'array'
+        ]);
+        $this->assertInstanceOf(\Telnyx\TelnyxObject::class, $resource);
+    }
+    */
 }
