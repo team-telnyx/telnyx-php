@@ -76,6 +76,7 @@ require(dirname(__FILE__) . '/lib/SimCard.php');
 require(dirname(__FILE__) . '/lib/Portout.php');
 require(dirname(__FILE__) . '/lib/OtaUpdate.php');
 require(dirname(__FILE__) . '/lib/MobileOperatorNetwork.php');
+require(dirname(__FILE__) . '/lib/Balance.php');
 
 // Telnyx API: Connections
 require(dirname(__FILE__) . '/lib/Connection.php');
@@ -84,3 +85,4 @@ require(dirname(__FILE__) . '/lib/CredentialConnection.php');
 require(dirname(__FILE__) . '/lib/IP.php');
 require(dirname(__FILE__) . '/lib/FQDNConnection.php');
 require(dirname(__FILE__) . '/lib/FQDN.php');
+require(dirname(__FILE__) . '/lib/Fax.php');
