@@ -99,6 +99,7 @@ abstract class Util
             \Telnyx\Portout::OBJECT_NAME => 'Telnyx\\Portout',
             \Telnyx\OtaUpdate::OBJECT_NAME => 'Telnyx\\OtaUpdate',
             \Telnyx\MobileOperatorNetwork::OBJECT_NAME => 'Telnyx\\MobileOperatorNetwork',
+            \Telnyx\Balance::OBJECT_NAME => 'Telnyx\\Balance',
 
             // Telnyx API: Connections
             \Telnyx\Connection::OBJECT_NAME => 'Telnyx\\Connection',
@@ -107,6 +108,7 @@ abstract class Util
             \Telnyx\IP::OBJECT_NAME => 'Telnyx\\IP',
             \Telnyx\FQDNConnection::OBJECT_NAME => 'Telnyx\\FQDNConnection',
             \Telnyx\FQDN::OBJECT_NAME => 'Telnyx\\FQDN',
+            \Telnyx\Fax::OBJECT_NAME => 'Telnyx\\Fax',
         ];
         if (self::isList($resp)) {
             $mapped = [];
