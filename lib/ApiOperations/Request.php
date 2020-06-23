@@ -12,16 +12,16 @@ trait Request
     /**
      * @param array|null|mixed $params The list of parameters to validate
      *
-     * @throws \Telnyx\Error\Api if $params exists and is not an array
+     * @throws \Telnyx\Exception\InvalidArgumentException if $params exists and is not an array
      */
     protected static function _validateParams($params = null)
     {
         if ($params && !is_array($params)) {
             $message = "You must pass an array as the first argument to Telnyx API "
-               . "method calls.  (HINT: an example call to create a charge "
-               . "would be: \"Telnyx\\Charge::create(['amount' => 100, "
-               . "'currency' => 'usd', 'source' => 'tok_1234'])\")";
-            throw new \Telnyx\Error\Api($message);
+               . "method calls.  (HINT: an example call to create a call "
+               . "would be: \"Telnyx\\Call::create(['connection_id' => 'uuid', 'to'"
+               . "=> '+18005550199', 'from' => '+18005550100'])\")";
+            throw new \Telnyx\Exception\InvalidArgumentException($message);
         }
     }
 

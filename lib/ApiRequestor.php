@@ -97,19 +97,12 @@ class ApiRequestor
     /**
      * @param string     $method
      * @param string     $url
-     * @param array|null $params
-     * @param array|null $headers
+     * @param null|array $params
+     * @param null|array $headers
      *
-     * @return array An array whose first element is an API response and second
-     *    element is the API key used to make the request.
-     * @throws Error\Api
-     * @throws Error\Authentication
-     * @throws Error\Card
-     * @throws Error\InvalidRequest
-     * @throws Error\Permission
-     * @throws Error\RateLimit
-     * @throws Error\Idempotency
-     * @throws Error\ApiConnection
+     * @throws Exception\ApiErrorException
+     *
+     * @return array tuple containing (ApiReponse, API key)
      */
     public function request($method, $url, $params = null, $headers = null)
     {
@@ -118,39 +111,29 @@ class ApiRequestor
         list($rbody, $rcode, $rheaders, $myApiKey) = $this->_requestRaw($method, $url, $params, $headers);
         $json = $this->_interpretResponse($rbody, $rcode, $rheaders);
         $resp = new ApiResponse($rbody, $rcode, $rheaders, $json);
+
         return [$resp, $myApiKey];
     }
 
     /**
-     * @param string $rbody A JSON string.
+     * @param string $rbody a JSON string
      * @param int $rcode
      * @param array $rheaders
      * @param array $resp
      *
-     * @throws Error\InvalidRequest if the error is caused by the user.
-     * @throws Error\Authentication if the error is caused by a lack of
-     *    permissions.
-     * @throws Error\Permission if the error is caused by insufficient
-     *    permissions.
-     * @throws Error\Card if the error is the error code is 402 (payment
-     *    required)
-     * @throws Error\InvalidRequest if the error is caused by the user.
-     * @throws Error\Idempotency if the error is caused by an idempotency key.
-     * @throws Error\Permission if the error is caused by insufficient
-     *    permissions.
-     * @throws Error\RateLimit if the error is caused by too many requests
-     *    hitting the API.
-     * @throws Error\Api otherwise.
+     * @throws Exception\UnexpectedValueException
+     * @throws Exception\ApiErrorException
      */
     public function handleErrorResponse($rbody, $rcode, $rheaders, $resp)
     {
-        if (!is_array($resp) || !isset($resp['error'])) {
-            $msg = "Invalid response object from API: $rbody "
-              . "(HTTP response code was $rcode)";
-            throw new Error\Api($msg, $rcode, $rbody, $resp, $rheaders);
+        if (!\is_array($resp) || !isset($resp['errors'])) {
+            $msg = "Invalid response object from API: {$rbody} "
+              . "(HTTP response code was {$rcode})";
+
+            throw new Exception\UnexpectedValueException($msg);
         }
 
-        $errorData = $resp['error'];
+        $errorData = $resp['errors'];
 
         $error = null;
         if (!$error) {
@@ -169,40 +152,32 @@ class ApiRequestor
      * @param array  $resp
      * @param array  $errorData
      *
-     * @return Error\RateLimit|Error\Idempotency|Error\InvalidRequest|Error\Authentication|Error\Card|Error\Permission|Error\Api
+     * @return Exception\ApiErrorException
      */
     private static function _specificAPIError($rbody, $rcode, $rheaders, $resp, $errorData)
     {
-        $msg = isset($errorData['message']) ? $errorData['message'] : null;
-        $param = isset($errorData['param']) ? $errorData['param'] : null;
-        $code = isset($errorData['code']) ? $errorData['code'] : null;
-        $type = isset($errorData['type']) ? $errorData['type'] : null;
+        $msg = isset($errorData[0]['detail']) ? $errorData[0]['detail'] : null;
+        $param = isset($errorData[0]['param']) ? $errorData[0]['param'] : null;
+        $code = isset($errorData[0]['code']) ? $errorData[0]['code'] : null;
+        $type = isset($errorData[0]['type']) ? $errorData[0]['type'] : null;
 
         switch ($rcode) {
             case 400:
-                // 'rate_limit' code is deprecated, but left here for backwards compatibility
-                // for API versions earlier than 2015-09-08
-                if ($code == 'rate_limit') {
-                    return new Error\RateLimit($msg, $param, $rcode, $rbody, $resp, $rheaders);
-                }
-                if ($type == 'idempotency_error') {
-                    return new Error\Idempotency($msg, $rcode, $rbody, $resp, $rheaders);
+                if ('idempotency_error' === $type) {
+                    return Exception\IdempotencyException::factory($msg, $rcode, $rbody, $resp, $rheaders, $code);
                 }
 
-                // intentional fall-through
                 // no break
             case 404:
-                return new Error\InvalidRequest($msg, $param, $rcode, $rbody, $resp, $rheaders);
+                return Exception\InvalidRequestException::factory($msg, $rcode, $rbody, $resp, $rheaders, $code, $param);
             case 401:
-                return new Error\Authentication($msg, $rcode, $rbody, $resp, $rheaders);
-            case 402:
-                return new Error\Card($msg, $param, $code, $rcode, $rbody, $resp, $rheaders);
+                return Exception\AuthenticationException::factory($msg, $rcode, $rbody, $resp, $rheaders, $code);
             case 403:
-                return new Error\Permission($msg, $rcode, $rbody, $resp, $rheaders);
+                return Exception\PermissionException::factory($msg, $rcode, $rbody, $resp, $rheaders, $code);
             case 429:
-                return new Error\RateLimit($msg, $param, $rcode, $rbody, $resp, $rheaders);
+                return Exception\RateLimitException::factory($msg, $rcode, $rbody, $resp, $rheaders, $code, $param);
             default:
-                return new Error\Api($msg, $rcode, $rbody, $resp, $rheaders);
+                return Exception\UnknownApiErrorException::factory($msg, $rcode, $rbody, $resp, $rheaders, $code);
         }
     }
 
@@ -274,10 +249,10 @@ class ApiRequestor
      * @param array  $params
      * @param array  $headers
      *
+     * @throws Exception\AuthenticationException
+     * @throws Exception\ApiConnectionException
+     *
      * @return array
-     * @throws Error\Api
-     * @throws Error\ApiConnection
-     * @throws Error\Authentication
      */
     private function _requestRaw($method, $url, $params, $headers)
     {
@@ -291,7 +266,7 @@ class ApiRequestor
               . '"Telnyx::setApiKey(<API-KEY>)".  You can generate API keys from '
               . 'the Telnyx web interface.  See https://developers.telnyx.com/docs/v2/development/authentication '
               . 'for details, or email support@telnyx.com if you have any questions.';
-            throw new Error\Authentication($msg);
+            throw new Exception\AuthenticationException($msg);
         }
 
         // Clients can supply arbitrary additional keys to be included in the
@@ -366,20 +341,21 @@ class ApiRequestor
      * @param resource $resource
      * @param bool     $hasCurlFile
      *
+     * @throws Exception\InvalidArgumentException
+     *
      * @return \CURLFile|string
-     * @throws Error\Api
      */
     private function _processResourceParam($resource, $hasCurlFile)
     {
         if (get_resource_type($resource) !== 'stream') {
-            throw new Error\Api(
+            throw new Exception\InvalidArgumentException(
                 'Attempted to upload a resource that is not a stream'
             );
         }
 
         $metaData = stream_get_meta_data($resource);
         if ($metaData['wrapper_type'] !== 'plainfile') {
-            throw new Error\Api(
+            throw new Exception\InvalidArgumentException(
                 'Only plainfile resource streams are supported'
             );
         }
@@ -397,14 +373,10 @@ class ApiRequestor
      * @param int    $rcode
      * @param array  $rheaders
      *
-     * @return mixed
-     * @throws Error\Api
-     * @throws Error\Authentication
-     * @throws Error\Card
-     * @throws Error\InvalidRequest
-     * @throws Error\Permission
-     * @throws Error\RateLimit
-     * @throws Error\Idempotency
+     * @throws Exception\UnexpectedValueException
+     * @throws Exception\ApiErrorException
+     *
+     * @return array
      */
     private function _interpretResponse($rbody, $rcode, $rheaders)
     {
@@ -421,12 +393,14 @@ class ApiRequestor
         if ($resp === null && $jsonError !== JSON_ERROR_NONE) {
             $msg = "Invalid response body from API: $rbody "
               . "(HTTP response code was $rcode, json_last_error() was $jsonError)";
-            throw new Error\Api($msg, $rcode, $rbody);
+
+            throw new Exception\UnexpectedValueException($msg, $rcode);
         }
 
         if ($rcode < 200 || $rcode >= 300) {
             $this->handleErrorResponse($rbody, $rcode, $rheaders, $resp);
         }
+        
         return $resp;
     }
 
