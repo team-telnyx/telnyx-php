@@ -201,10 +201,10 @@ abstract class ApiErrorException extends \Exception implements ExceptionInterfac
      */
     public function __toString()
     {
-        $statusStr = ($this->getHttpStatus() == null) ? "" : "(HTTP Status {$this->getHttpStatus()}) ";
+        $statusStr = ($this->getHttpStatus() == null) ? "" : "(HTTP {$this->getHttpStatus()}) ";
         $idStr = ($this->getRequestId() == null) ? "" : "(Request {$this->getRequestId()}) ";
-        $codeStr = ($this->getTelnyxCode() == null) ? "" : "(TelnyxCode {$this->getTelnyxCode()}) ";
-        return "{$statusStr}{$codeStr}{$idStr}{$this->getMessage()}";
+        $codeStr = ($this->getTelnyxCode() == null) ? "" : "(Code {$this->getTelnyxCode()}) ";
+        return "Telnyx API Exception {$statusStr}{$codeStr}{$idStr}{$this->getMessage()}";
     }
 
     protected function constructErrorObject()
