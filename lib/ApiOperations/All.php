@@ -28,9 +28,9 @@ trait All
 
         $obj = \Telnyx\Util\Util::convertToTelnyxObject($response->json, $opts);
         if (!is_a($obj, 'Telnyx\\Collection')) {
-            $class = get_class($obj);
-            $message = "Expected type \"Telnyx\\Collection\", got \"$class\" instead";
-            throw new \Telnyx\Error\Api($message);
+            throw new \Telnyx\Exception\UnexpectedValueException(
+                'Expected type ' . \Telnyx\Collection::class . ', got "' . \get_class($obj) . '" instead.'
+            );
         }
         $obj->setLastResponse($response);
         $obj->setRequestParams($params);
