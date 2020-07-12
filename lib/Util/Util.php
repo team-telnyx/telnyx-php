@@ -15,45 +15,22 @@ abstract class Util
      * integers starting at 0. Empty arrays are considered to be lists.
      *
      * @param array|mixed $array
-     * @return boolean true if the given object is a list.
+     *
+     * @return bool true if the given object is a list
      */
     public static function isList($array)
     {
-        if (!is_array($array)) {
+        if (!\is_array($array)) {
             return false;
         }
         if ($array === []) {
             return true;
         }
-        if (array_keys($array) !== range(0, count($array) - 1)) {
+        if (\array_keys($array) !== \range(0, \count($array) - 1)) {
             return false;
         }
+        
         return true;
-    }
-
-    /**
-     * Recursively converts the PHP Telnyx object to an array.
-     *
-     * @param array $values The PHP Telnyx object to convert.
-     * @return array
-     */
-    public static function convertTelnyxObjectToArray($values)
-    {
-        $results = [];
-        foreach ($values as $k => $v) {
-            // FIXME: this is an encapsulation violation
-            if ($k[0] == '_') {
-                continue;
-            }
-            if ($v instanceof TelnyxObject) {
-                $results[$k] = $v->__toArray(true);
-            } elseif (is_array($v)) {
-                $results[$k] = self::convertTelnyxObjectToArray($v);
-            } else {
-                $results[$k] = $v;
-            }
-        }
-        return $results;
     }
 
     /**
@@ -65,69 +42,28 @@ abstract class Util
      */
     public static function convertToTelnyxObject($resp, $opts)
     {
-        $types = [
-            // data structures
-            \Telnyx\Collection::OBJECT_NAME => 'Telnyx\\Collection',
-
-            // Telnyx API: Numbers
-            \Telnyx\AvailablePhoneNumber::OBJECT_NAME => 'Telnyx\\AvailablePhoneNumber',
-            \Telnyx\NumberOrder::OBJECT_NAME => 'Telnyx\\NumberOrder',
-            \Telnyx\NumberReservation::OBJECT_NAME => 'Telnyx\\NumberReservation',
-            \Telnyx\RegulatoryRequirement::OBJECT_NAME => 'Telnyx\\RegulatoryRequirement',
-            \Telnyx\NumberOrderDocument::OBJECT_NAME => 'Telnyx\\NumberOrderDocument',
-            \Telnyx\PhoneNumber::OBJECT_NAME => 'Telnyx\\PhoneNumber',
-            \Telnyx\PhoneNumber\Voice::OBJECT_NAME => \Telnyx\PhoneNumber\Voice::class,
-            \Telnyx\PhoneNumber\Messaging::OBJECT_NAME => \Telnyx\PhoneNumber\Messaging::class,
-            \Telnyx\Call::OBJECT_NAME => 'Telnyx\\Call',
-            \Telnyx\Conference::OBJECT_NAME => 'Telnyx\\Conference',
-            \Telnyx\CallControlApplication::OBJECT_NAME => 'Telnyx\\CallControlApplication',
-            \Telnyx\NumberLookup::OBJECT_NAME => 'Telnyx\\NumberLookup',
-
-            // Telnyx API: Messaging
-            \Telnyx\Message::OBJECT_NAME => 'Telnyx\\Message',
-            \Telnyx\MessagingProfile::OBJECT_NAME => 'Telnyx\\MessagingProfile',
-            \Telnyx\MessagingPhoneNumber::OBJECT_NAME => 'Telnyx\\MessagingPhoneNumber',
-            \Telnyx\AlphanumericSenderID::OBJECT_NAME => 'Telnyx\\AlphanumericSenderID',
-            \Telnyx\ShortCode::OBJECT_NAME => 'Telnyx\\ShortCode',
-            \Telnyx\OutboundVoiceProfile::OBJECT_NAME => 'Telnyx\\OutboundVoiceProfile',
-
-            // Telnyx API: Misc
-            \Telnyx\Address::OBJECT_NAME => 'Telnyx\\Address',
-            \Telnyx\BillingGroup::OBJECT_NAME => 'Telnyx\\BillingGroup',
-            \Telnyx\InboundChannel::OBJECT_NAME => 'Telnyx\\InboundChannel',
-            \Telnyx\SimCard::OBJECT_NAME => 'Telnyx\\SimCard',
-            \Telnyx\Portout::OBJECT_NAME => 'Telnyx\\Portout',
-            \Telnyx\OtaUpdate::OBJECT_NAME => 'Telnyx\\OtaUpdate',
-            \Telnyx\MobileOperatorNetwork::OBJECT_NAME => 'Telnyx\\MobileOperatorNetwork',
-            \Telnyx\Balance::OBJECT_NAME => 'Telnyx\\Balance',
-
-            // Telnyx API: Connections
-            \Telnyx\Connection::OBJECT_NAME => 'Telnyx\\Connection',
-            \Telnyx\IPConnection::OBJECT_NAME => 'Telnyx\\IPConnection',
-            \Telnyx\CredentialConnection::OBJECT_NAME => 'Telnyx\\CredentialConnection',
-            \Telnyx\IP::OBJECT_NAME => 'Telnyx\\IP',
-            \Telnyx\FQDNConnection::OBJECT_NAME => 'Telnyx\\FQDNConnection',
-            \Telnyx\FQDN::OBJECT_NAME => 'Telnyx\\FQDN',
-            \Telnyx\Fax::OBJECT_NAME => 'Telnyx\\Fax',
-        ];
+        $types = \Telnyx\Util\ObjectTypes::mapping;
         if (self::isList($resp)) {
             $mapped = [];
             foreach ($resp as $i) {
-                array_push($mapped, self::convertToTelnyxObject($i, $opts));
+                \array_push($mapped, self::convertToTelnyxObject($i, $opts));
             }
+
             return $mapped;
-        } elseif (is_array($resp)) {
-            if (isset($resp['record_type']) && is_string($resp['record_type']) && isset($types[$resp['record_type']])) {
+        }
+        if (\is_array($resp)) {
+            if (isset($resp['record_type']) && \is_string($resp['record_type']) && isset($types[$resp['record_type']])) {
                 $class = $types[$resp['record_type']];
             } elseif (isset($resp['meta']) || isset($resp['metadata']) || isset($resp['data'][0])) { // Only Collections will have 'meta' and this is how we detect collections
-                $class = 'Telnyx\\Collection';
+                $class = \Telnyx\Collection::class;
             } else {
-                $class = 'Telnyx\\TelnyxObject';
+                $class = \Telnyx\TelnyxObject::class;
             }
+
             return $class::constructFrom($resp, $opts);
-        } else {
-            return $resp;
         }
+
+        return $resp;
     }
 
     /**
