@@ -27,7 +27,7 @@ trait All
         $response->json['url'] = $url;
 
         $obj = \Telnyx\Util\Util::convertToTelnyxObject($response->json, $opts);
-        if (!is_a($obj, 'Telnyx\\Collection')) {
+        if (!is_a($obj, \Telnyx\Collection::class)) {
             throw new \Telnyx\Exception\UnexpectedValueException(
                 'Expected type ' . \Telnyx\Collection::class . ', got "' . \get_class($obj) . '" instead.'
             );
