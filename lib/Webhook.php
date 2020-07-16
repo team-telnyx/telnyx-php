@@ -22,7 +22,8 @@ abstract class Webhook
      *
      * @return Event the Event instance
      */
-    public static function constructFromRequest($public_key, $tolerance = self::DEFAULT_TOLERANCE) {
+    public static function constructFromRequest($public_key, $tolerance = self::DEFAULT_TOLERANCE)
+    {
         $payload = @file_get_contents('php://input');
         $sig_header = $_SERVER['HTTP_TELNYX_SIGNATURE_ED25519'];
         $timestamp_header = $replay_headers['HTTP_TELNYX_TIMESTAMP'];
