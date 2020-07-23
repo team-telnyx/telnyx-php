@@ -26,7 +26,7 @@ abstract class Webhook
     {
         $payload = @file_get_contents('php://input');
         $sig_header = $_SERVER['HTTP_TELNYX_SIGNATURE_ED25519'];
-        $timestamp_header = $replay_headers['HTTP_TELNYX_TIMESTAMP'];
+        $timestamp_header = $_SERVER['HTTP_TELNYX_TIMESTAMP'];
 
         return \Telnyx\Webhook::constructEvent(
             $payload, $sig_header, $timestamp_header, $public_key
