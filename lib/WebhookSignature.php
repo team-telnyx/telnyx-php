@@ -20,13 +20,21 @@ abstract class WebhookSignature
      *
      * @return bool
      */
-    public static function verifyHeader($payload, $signature_header, $timestamp, $public_key, $tolerance = null)
+    public static function verifyHeader($payload, $signature_header, $timestamp, $public_key = '', $tolerance = null)
     {
         // Typecast timestamp to int for comparisons
         $timestamp = (int)$timestamp;
 
+        // If it is empty, then maybe we need to get the $public_key from the Telnyx object.
+        if (empty($public_key)) {
+            $my_public_key = Telnyx::$publicKey;
+        }
+        else {
+            $my_public_key = $public_key;
+        }
+
         // Convert base64 string to bytes for sodium crypto functions
-        $public_key_bytes = base64_decode($public_key);
+        $public_key_bytes = base64_decode($my_public_key);
 
         // Check if timestamp is within tolerance
         if (($tolerance > 0) && (\abs(\time() - $timestamp) > $tolerance)) {

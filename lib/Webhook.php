@@ -22,7 +22,7 @@ abstract class Webhook
      *
      * @return Event the Event instance
      */
-    public static function constructFromRequest($public_key, $tolerance = self::DEFAULT_TOLERANCE)
+    public static function constructFromRequest($public_key = '', $tolerance = self::DEFAULT_TOLERANCE)
     {
         $payload = @file_get_contents('php://input');
         $sig_header = $_SERVER['HTTP_TELNYX_SIGNATURE_ED25519'];
@@ -51,7 +51,7 @@ abstract class Webhook
      *
      * @return Event the Event instance
      */
-    public static function constructEvent($payload, $signature_header, $timestamp, $public_key, $tolerance = self::DEFAULT_TOLERANCE)
+    public static function constructEvent($payload, $signature_header, $timestamp, $public_key = '', $tolerance = self::DEFAULT_TOLERANCE)
     {
         WebhookSignature::verifyHeader($payload, $signature_header, $timestamp, $public_key, $tolerance);
 
