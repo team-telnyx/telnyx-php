@@ -12,6 +12,9 @@ class Telnyx
     // @var string The Telnyx API key to be used for requests.
     public static $apiKey;
 
+    // @var string The Telnyx Public key to be used for webhooks.
+    public static $publicKey;
+
     // @var string The Telnyx client_id to be used for Connect requests.
     public static $clientId;
 
@@ -96,6 +99,16 @@ class Telnyx
     public static function setApiKey($apiKey)
     {
         self::$apiKey = $apiKey;
+    }
+
+    /**
+     * Sets the Public key to be used for webhooks.
+     *
+     * @param string $apiKey
+     */
+    public static function setPublicKey($publicKey)
+    {
+        self::$publicKey = $publicKey;
     }
 
     /**
