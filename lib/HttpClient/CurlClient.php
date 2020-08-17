@@ -3,7 +3,7 @@
 namespace Telnyx\HttpClient;
 
 use Telnyx\Telnyx;
-use Telnyx\Error;
+use Telnyx\Exception;
 use Telnyx\Util;
 
 // cURL constants are not defined in PHP < 5.5

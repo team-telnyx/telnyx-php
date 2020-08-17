@@ -2,7 +2,7 @@
 
 namespace Telnyx\Util;
 
-use Telnyx\Error;
+use Telnyx\Exception;
 
 class RequestOptions
 {
