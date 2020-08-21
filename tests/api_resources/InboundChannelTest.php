@@ -2,7 +2,11 @@
 
 namespace Telnyx;
 
-class InboundChannelTest extends TestCase
+/**
+ * @internal
+ * @covers \Telnyx\InboundChannel
+ */
+final class InboundChannelTest extends \Telnyx\TestCase
 {
 
     public function testIsRetrievable()

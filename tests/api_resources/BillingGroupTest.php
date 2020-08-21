@@ -2,7 +2,11 @@
 
 namespace Telnyx;
 
-class BillingGroupTest extends TestCase
+/**
+ * @internal
+ * @covers \Telnyx\BillingGroup
+ */
+final class BillingGroupTest extends \Telnyx\TestCase
 {
     const TEST_RESOURCE_ID = '123';
 

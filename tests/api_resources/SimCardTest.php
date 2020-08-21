@@ -2,12 +2,13 @@
 
 namespace Telnyx;
 
-class SimCardTest extends TestCase
+/**
+ * @internal
+ * @covers \Telnyx\SimCard
+ */
+final class SimCardTest extends \Telnyx\TestCase
 {
     const TEST_RESOURCE_ID = '6a09cdc3-8948-47f0-aa62-74ac943d6c58';
-
-    /*
-    Temporarily commented out.
     
     public function testIsListable()
     {
@@ -19,7 +20,6 @@ class SimCardTest extends TestCase
         $this->assertInstanceOf(\Telnyx\Collection::class, $resources);
         $this->assertInstanceOf(\Telnyx\SimCard::class, $resources['data'][0]);
     }
-    */
 
     public function testIsRetrievable()
     {
@@ -31,7 +31,6 @@ class SimCardTest extends TestCase
         $this->assertInstanceOf(\Telnyx\SimCard::class, $resource);
     }
 
-    /*
     public function testIsUpdatable()
     {
         $this->expectsRequest(
@@ -44,7 +43,8 @@ class SimCardTest extends TestCase
         $this->assertInstanceOf(\Telnyx\SimCard::class, $resource);
     }
 
-    public function testRequestActivation()
+    /*
+    public function testActivate()
     {
         $simcard = SimCard::retrieve(self::TEST_RESOURCE_ID);
         $this->expectsRequest(
@@ -55,7 +55,7 @@ class SimCardTest extends TestCase
         $this->assertInstanceOf(\Telnyx\SimCard::class, $resources);
     }
 
-    public function testRequestDeactivation()
+    public function testDeactivate()
     {
         $simcard = SimCard::retrieve(self::TEST_RESOURCE_ID);
         $this->expectsRequest(
@@ -65,6 +65,7 @@ class SimCardTest extends TestCase
         $resources = $simcard->deactivate();
         $this->assertInstanceOf(\Telnyx\SimCard::class, $resources);
     }
+    */
 
     public function testRegister()
     {
@@ -76,7 +77,6 @@ class SimCardTest extends TestCase
         $this->assertInstanceOf(\Telnyx\Collection::class, $resources);
         $this->assertInstanceOf(\Telnyx\SimCard::class, $resources['data'][0]);
     }
-    */
 
     public function testDeleteNetworkPreferences()
     {
@@ -98,7 +98,6 @@ class SimCardTest extends TestCase
         $this->assertInstanceOf(\Telnyx\TelnyxObject::class, $resource);
     }
 
-    /*
     public function testSetNetworkPreferences()
     {
         $this->expectsRequest(
@@ -106,9 +105,8 @@ class SimCardTest extends TestCase
             '/v2/sim_cards/' . urlencode(self::TEST_RESOURCE_ID) . '/network_preferences'
         );
         $resource = SimCard::set_network_preferences(self::TEST_RESOURCE_ID, [
-            'mobile_operator_networks_preferences' => 'array'
+            'mobile_operator_network_id' => '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         ]);
         $this->assertInstanceOf(\Telnyx\TelnyxObject::class, $resource);
     }
-    */
 }

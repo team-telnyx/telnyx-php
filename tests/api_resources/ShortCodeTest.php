@@ -2,7 +2,11 @@
 
 namespace Telnyx;
 
-class ShortCodeTest extends TestCase
+/**
+ * @internal
+ * @covers \Telnyx\ShortCode
+ */
+final class ShortCodeTest extends \Telnyx\TestCase
 {
     const TEST_RESOURCE_ID = '123';
 

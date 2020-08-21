@@ -49,6 +49,9 @@ class Telnyx
     // @var float Maximum delay between retries, in seconds
     private static $maxNetworkRetryDelay = 2.0;
 
+    /** @var float Maximum delay between retries, in seconds, that will be respected from the Telnyx API */
+    private static $maxRetryAfter = 60.0;
+
     // @var float Initial delay between retries, in seconds
     private static $initialNetworkRetryDelay = 0.5;
 
@@ -240,6 +243,14 @@ class Telnyx
     public static function getMaxNetworkRetryDelay()
     {
         return self::$maxNetworkRetryDelay;
+    }
+
+    /**
+     * @return float Maximum delay between retries, in seconds, that will be respected from the Stripe API
+     */
+    public static function getMaxRetryAfter()
+    {
+        return self::$maxRetryAfter;
     }
 
     /**

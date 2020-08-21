@@ -2,7 +2,11 @@
 
 namespace Telnyx;
 
-class CollectionTest extends TestCase
+/**
+ * @internal
+ * @covers \Telnyx\Collection
+ */
+final class CollectionTest extends \Telnyx\TestCase
 {
     /**
      * @before

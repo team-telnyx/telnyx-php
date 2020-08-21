@@ -2,7 +2,11 @@
 
 namespace Telnyx;
 
-class MessagingProfileTest extends TestCase
+/**
+ * @internal
+ * @covers \Telnyx\MessagingProfile
+ */
+final class MessagingProfileTest extends \Telnyx\TestCase
 {
     const TEST_RESOURCE_ID = '123';
 
@@ -62,7 +66,7 @@ class MessagingProfileTest extends TestCase
         $this->assertInstanceOf(\Telnyx\MessagingProfile::class, $resource);
     }
 
-    public function testCanCallPhoneNumbers()
+    public function testPhoneNumbers()
     {
         $messaging_profile = MessagingProfile::retrieve(self::TEST_RESOURCE_ID);
         $this->expectsRequest(
@@ -74,7 +78,7 @@ class MessagingProfileTest extends TestCase
         $this->assertInstanceOf(\Telnyx\MessagingPhoneNumber::class, $resources['data'][0]);
     }
 
-    public function testCanCallShortCodes()
+    public function testShortCodes()
     {
         $messaging_profile = MessagingProfile::retrieve(self::TEST_RESOURCE_ID);
         $this->expectsRequest(

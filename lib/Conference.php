@@ -17,10 +17,14 @@ class Conference extends ApiResource
 
 
     /**
+     * Join an existing call leg to a conference. Issue the Join Conference command
+     * with the conference ID in the path and the call_control_id of the leg you 
+     * wish to join to the conference as an attribute.
+     *
      * @param array|null $params
      * @param array|string|null $options
      *
-     * @return Join an existing call leg to a conference. Issue the Join Conference command with the conference ID in the path and the call_control_id of the leg you wish to join to the conference as an attribute.
+     * @return 
      */
     public function join($params = null, $options = null)
     {
@@ -31,10 +35,12 @@ class Conference extends ApiResource
     }
 
     /**
+     * Mute a list of participants in a conference call
+     *
      * @param array|null $params
      * @param array|string|null $options
      *
-     * @return Mute a list of participants in a conference call
+     * @return 
      */
     public function mute($params = null, $options = null)
     {
@@ -45,10 +51,12 @@ class Conference extends ApiResource
     }
 
     /**
+     * Unmute a list of participants in a conference call
+     *
      * @param array|null $params
      * @param array|string|null $options
      *
-     * @return Unmute a list of participants in a conference call
+     * @return 
      */
     public function unmute($params = null, $options = null)
     {
@@ -59,10 +67,12 @@ class Conference extends ApiResource
     }
 
     /**
+     * Hold a list of participants in a conference call
+     *
      * @param array|null $params
      * @param array|string|null $options
      *
-     * @return Hold a list of participants in a conference call
+     * @return 
      */
     public function hold($params = null, $options = null)
     {
@@ -73,10 +83,12 @@ class Conference extends ApiResource
     }
 
     /**
+     * Unhold a list of participants in a conference call
+     *
      * @param array|null $params
      * @param array|string|null $options
      *
-     * @return Unhold a list of participants in a conference call
+     * @return 
      */
     public function unhold($params = null, $options = null)
     {

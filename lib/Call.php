@@ -16,10 +16,31 @@ class Call extends ApiResource
     use ApiOperations\NestedResource;
 
     /**
+     * This override allows us to reassign the 'call_control_id' param to 'id'
+     *
+     * @param array $values
+     * @param null|string|array|Util\RequestOptions $opts
+     *
+     * @return static The object constructed from the given values.
+     */
+    public static function constructFrom($values, $opts = null)
+    {
+        $obj = new static(isset($values['id']) ? $values['id'] : null);
+        $obj->refreshFrom($values, $opts);
+
+        // This is the id parameter for this class
+        $obj->reassignId('call_control_id');
+        
+        return $obj;
+    }
+
+    /**
+     * Answer an incoming call.
+     *
      * @param array|null $params
      * @param array|string|null $options
      *
-     * @return Answer an incoming call.
+     * @return 
      */
     public function answer($params = null, $options = null)
     {
@@ -30,10 +51,12 @@ class Call extends ApiResource
     }
 
     /**
+     * Bridge two call control calls.
+     *
      * @param array|null $params
      * @param array|string|null $options
      *
-     * @return Bridge two call control calls.
+     * @return 
      */
     public function bridge($params = null, $options = null)
     {
@@ -58,10 +81,12 @@ class Call extends ApiResource
     }
 
     /**
+     * Stop forking a call.
+     *
      * @param array|null $params
      * @param array|string|null $options
      *
-     * @return Stop forking a call.
+     * @return
      */
     public function fork_stop()
     {
@@ -72,10 +97,13 @@ class Call extends ApiResource
     }
 
     /**
+     * Play an audio file on the call until the required DTMF signals are
+     * gathered to build interactive menus.
+     *
      * @param array|null $params
      * @param array|string|null $options
      *
-     * @return Play an audio file on the call until the required DTMF signals are gathered to build interactive menus.
+     * @return
      */
     public function gather_using_audio($params = null, $options = null)
     {
@@ -86,10 +114,13 @@ class Call extends ApiResource
     }
 
     /**
+     * Convert text to speech and play it on the call until the required DTMF
+     * signals are gathered to build interactive menus.
+     *
      * @param array|null $params
      * @param array|string|null $options
      *
-     * @return Convert text to speech and play it on the call until the required DTMF signals are gathered to build interactive menus.
+     * @return
      */
     public function gather_using_speak($params = null, $options = null)
     {
@@ -100,10 +131,12 @@ class Call extends ApiResource
     }
 
     /**
+     * Hang up the call.
+     *
      * @param array|null $params
      * @param array|string|null $options
      *
-     * @return Hang up the call.
+     * @return
      */
     public function hangup($params = null, $options = null)
     {
@@ -114,10 +147,14 @@ class Call extends ApiResource
     }
 
     /**
+     * Play an audio file on the call. If multiple play audio commands are 
+     * issued consecutively, the audio files will be placed in a queue awaiting
+     * playback.
+     *
      * @param array|null $params
      * @param array|string|null $options
      *
-     * @return Play an audio file on the call. If multiple play audio commands are issued consecutively, the audio files will be placed in a queue awaiting playback.
+     * @return
      */
     public function playback_start($params = null, $options = null)
     {
@@ -128,10 +165,12 @@ class Call extends ApiResource
     }
 
     /**
+     * Stop audio being played on the call.
+     *
      * @param array|null $params
      * @param array|string|null $options
      *
-     * @return Stop audio being played on the call.
+     * @return
      */
     public function playback_stop($params = null, $options = null)
     {
@@ -142,10 +181,13 @@ class Call extends ApiResource
     }
 
     /**
+     * Start recording the call. Recording will stop on call hang-up, or can be
+     * initiated via the Stop Recording command.
+     *
      * @param array|null $params
      * @param array|string|null $options
      *
-     * @return Start recording the call. Recording will stop on call hang-up, or can be initiated via the Stop Recording command.
+     * @return
      */
     public function record_start($params = null, $options = null)
     {
@@ -156,10 +198,12 @@ class Call extends ApiResource
     }
 
     /**
+     * Stop recording the call.
+     *
      * @param array|null $params
      * @param array|string|null $options
      *
-     * @return Stop recording the call.
+     * @return
      */
     public function record_stop($params = null, $options = null)
     {
@@ -170,10 +214,12 @@ class Call extends ApiResource
     }
 
     /**
+     * Reject an incoming call.
+     *
      * @param array|null $params
      * @param array|string|null $options
      *
-     * @return Reject an incoming call.
+     * @return
      */
     public function reject($params = null, $options = null)
     {
@@ -184,10 +230,13 @@ class Call extends ApiResource
     }
 
     /**
+     * Sends DTMF tones from this leg. DTMF tones will be heard by the other 
+     * end of the call.
+     *
      * @param array|null $params
      * @param array|string|null $options
      *
-     * @return Sends DTMF tones from this leg. DTMF tones will be heard by the other end of the call.
+     * @return
      */
     public function send_dtmf($params = null, $options = null)
     {
@@ -198,10 +247,14 @@ class Call extends ApiResource
     }
 
     /**
+     * Convert text to speech and play it back on the call. If multiple speak 
+     * text commands are issued consecutively, the audio files will be placed 
+     * in a queue awaiting playback.
+     *
      * @param array|null $params
      * @param array|string|null $options
      *
-     * @return Convert text to speech and play it back on the call. If multiple speak text commands are issued consecutively, the audio files will be placed in a queue awaiting playback.
+     * @return
      */
     public function speak($params = null, $options = null)
     {
@@ -212,10 +265,16 @@ class Call extends ApiResource
     }
 
     /**
+     * Transfer a call to a new destination. If the transfer is unsuccessful,
+     * a call.hangup webhook will be sent indicating that the transfer could 
+     * not be completed. The original call will remain active and may be issued
+     * additional commands, potentially transfering the call to an alternate 
+     * destination.
+     *
      * @param array|null $params
      * @param array|string|null $options
      *
-     * @return Transfer a call to a new destination. If the transfer is unsuccessful, a call.hangup webhook will be sent indicating that the transfer could not be completed. The original call will remain active and may be issued additional commands, potentially transfering the call to an alternate destination.
+     * @return 
      */
     public function transfer($params = null, $options = null)
     {

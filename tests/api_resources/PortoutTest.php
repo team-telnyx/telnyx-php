@@ -2,7 +2,11 @@
 
 namespace Telnyx;
 
-class PortoutTest extends TestCase
+/**
+ * @internal
+ * @covers \Telnyx\Portout
+ */
+final class PortoutTest extends \Telnyx\TestCase
 {
     const TEST_RESOURCE_ID = '123';
 
@@ -54,7 +58,7 @@ class PortoutTest extends TestCase
         $this->assertInstanceOf(\Telnyx\Portout::class, $resources['data'][0]);
     }
 
-    public function testCreateComments()
+    public function testCreateComment()
     {
         $portout = Portout::retrieve(self::TEST_RESOURCE_ID);
         $this->expectsRequest(

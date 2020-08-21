@@ -2,7 +2,11 @@
 
 namespace Telnyx;
 
-class BalanceTest extends TestCase
+/**
+ * @internal
+ * @covers \Telnyx\Balance
+ */
+final class BalanceTest extends \Telnyx\TestCase
 {
     public function testIsRetrievable()
     {

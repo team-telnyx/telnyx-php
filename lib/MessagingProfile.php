@@ -19,10 +19,12 @@ class MessagingProfile extends ApiResource
 
 
     /**
+     * List all phone numbers associated with a messaging profile.
+     *
      * @param array|null $params
      * @param array|string|null $options
      *
-     * @return List all phone numbers associated with a messaging profile.
+     * @return
      */
     public function phone_numbers($params = null, $options = null)
     {
@@ -33,10 +35,12 @@ class MessagingProfile extends ApiResource
     }
 
     /**
+     * List all short codes associated with a messaging profile.
+     *
      * @param array|null $params
      * @param array|string|null $options
      *
-     * @return List all short codes associated with a messaging profile.
+     * @return
      */
     public function short_codes($params = null, $options = null)
     {
@@ -47,10 +51,11 @@ class MessagingProfile extends ApiResource
     }
 
     /**
+     * List all sender IDs associated with a messaging profile.
      * @param array|null $params
      * @param array|string|null $options
      *
-     * @return List all sender IDs associated with a messaging profile.
+     * @return
      */
     public function alphanumeric_sender_ids($params = null, $options = null)
     {

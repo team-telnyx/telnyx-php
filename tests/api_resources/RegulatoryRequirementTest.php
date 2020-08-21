@@ -2,7 +2,11 @@
 
 namespace Telnyx;
 
-class RegulatoryRequirementTest extends TestCase
+/**
+ * @internal
+ * @covers \Telnyx\RegulatoryRequirement
+ */
+final class RegulatoryRequirementTest extends \Telnyx\TestCase
 {
     const TEST_RESOURCE_ID = '123';
 
