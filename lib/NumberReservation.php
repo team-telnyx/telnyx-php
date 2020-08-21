@@ -14,7 +14,6 @@ class NumberReservation extends ApiResource
     use ApiOperations\All;
     use ApiOperations\Create;
     use ApiOperations\Retrieve;
-    use ApiOperations\Update; // 2020-08-20 NOTE: Does this capability still exist?
 
     /**
      * List all phone numbers associated with a messaging profile.

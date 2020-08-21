@@ -65,6 +65,28 @@ final class SimCardTest extends \Telnyx\TestCase
         $resources = $simcard->deactivate();
         $this->assertInstanceOf(\Telnyx\SimCard::class, $resources);
     }
+
+    public function testEnable()
+    {
+        $simcard = SimCard::retrieve(self::TEST_RESOURCE_ID);
+        $this->expectsRequest(
+            'post',
+            '/v2/sim_cards/' . urlencode(self::TEST_RESOURCE_ID) . '/actions/enable'
+        );
+        $resources = $simcard->enable();
+        $this->assertInstanceOf(\Telnyx\SimCard::class, $resources);
+    }
+
+    public function testDisable()
+    {
+        $simcard = SimCard::retrieve(self::TEST_RESOURCE_ID);
+        $this->expectsRequest(
+            'post',
+            '/v2/sim_cards/' . urlencode(self::TEST_RESOURCE_ID) . '/actions/disable'
+        );
+        $resources = $simcard->disable();
+        $this->assertInstanceOf(\Telnyx\SimCard::class, $resources);
+    }
     */
 
     public function testRegister()

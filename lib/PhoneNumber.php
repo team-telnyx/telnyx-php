@@ -12,7 +12,6 @@ class PhoneNumber extends ApiResource
     const OBJECT_NAME = "phone_number";
 
     use ApiOperations\All;
-    use ApiOperations\Create;
     use ApiOperations\Delete;
     use ApiOperations\Retrieve;
     use ApiOperations\Update;

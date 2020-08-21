@@ -89,7 +89,7 @@ final class ApiRequestorTest extends \Telnyx\TestCase
         $this->expectExceptionMessageRegExp('#No API key provided#');
 
         Telnyx::setApiKey(null);
-        PhoneNumber::create();
+        Call::create();
     }
 
     public function testHeaderTelnyxVersionGlobal()
@@ -97,7 +97,7 @@ final class ApiRequestorTest extends \Telnyx\TestCase
         Telnyx::setApiVersion('2222-22-22');
         $this->stubRequest(
             'POST',
-            '/v2/phone_numbers',
+            '/v2/calls',
             [],
             [
                 'Telnyx-Version: 2222-22-22',
@@ -108,14 +108,14 @@ final class ApiRequestorTest extends \Telnyx\TestCase
                 'object' => 'charge',
             ]
         );
-        PhoneNumber::create();
+        Call::create();
     }
 
     public function testHeaderTelnyxVersionRequestOptions()
     {
         $this->stubRequest(
             'POST',
-            '/v2/phone_numbers',
+            '/v2/calls',
             [],
             [
                 'Telnyx-Version: 2222-22-22',
@@ -126,7 +126,7 @@ final class ApiRequestorTest extends \Telnyx\TestCase
                 'object' => 'charge',
             ]
         );
-        PhoneNumber::create([], ['telnyx_version' => '2222-22-22']);
+        Call::create([], ['telnyx_version' => '2222-22-22']);
     }
 
     public function testHeaderTelnyxAccountGlobal()
@@ -134,7 +134,7 @@ final class ApiRequestorTest extends \Telnyx\TestCase
         Telnyx::setAccountId('acct_123');
         $this->stubRequest(
             'POST',
-            '/v2/phone_numbers',
+            '/v2/calls',
             [],
             [
                 'Telnyx-Account: acct_123',
@@ -145,14 +145,14 @@ final class ApiRequestorTest extends \Telnyx\TestCase
                 'object' => 'charge',
             ]
         );
-        PhoneNumber::create();
+        Call::create();
     }
 
     public function testHeaderTelnyxAccountRequestOptions()
     {
         $this->stubRequest(
             'POST',
-            '/v2/phone_numbers',
+            '/v2/calls',
             [],
             [
                 'Telnyx-Account: acct_123',
@@ -163,6 +163,6 @@ final class ApiRequestorTest extends \Telnyx\TestCase
                 'object' => 'charge',
             ]
         );
-        PhoneNumber::create([], ['telnyx_account' => 'acct_123']);
+        Call::create([], ['telnyx_account' => 'acct_123']);
     }
 }
