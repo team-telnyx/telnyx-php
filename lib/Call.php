@@ -10,29 +10,11 @@ namespace Telnyx;
 class Call extends ApiResource
 {
     const OBJECT_NAME = "call";
+    const OBJECT_ID = "call_control_id";
 
     use ApiOperations\Create;
     use ApiOperations\Retrieve;
-    use ApiOperations\NestedResource;
-
-    /**
-     * This override allows us to reassign the 'call_control_id' param to 'id'
-     *
-     * @param array $values
-     * @param null|string|array|Util\RequestOptions $opts
-     *
-     * @return static The object constructed from the given values.
-     */
-    public static function constructFrom($values, $opts = null)
-    {
-        $obj = new static(isset($values['id']) ? $values['id'] : null);
-        $obj->refreshFrom($values, $opts);
-
-        // This is the id parameter for this class
-        $obj->reassignId('call_control_id');
-        
-        return $obj;
-    }
+    use ApiOperations\NestedResource; // NOTE: This might be unused.
 
     /**
      * Answer an incoming call.

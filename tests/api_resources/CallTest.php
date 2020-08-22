@@ -8,7 +8,7 @@ namespace Telnyx;
  */
 final class CallTest extends \Telnyx\TestCase
 {
-    const CALL_CONTROL_ID = 'AgDIxmoRX6QMuaIj_uXRXnPAXP0QlNfXczRrZvZakpWxBlpw48KyZQ==';
+    const CALL_CONTROL_ID = '428c31b6-7af4-4bcb-b7f5-5013ef9657c1';
 
     public function testIsCreatable()
     {
@@ -37,8 +37,7 @@ final class CallTest extends \Telnyx\TestCase
     /*
     public function testAnswer()
     {
-        // "Pick up" the call
-        $call = new \Telnyx\Call(self::CALL_CONTROL_ID);
+        $call = Call::retrieve(self::CALL_CONTROL_ID);
 
         $this->expectsRequest(
             'post',
@@ -50,8 +49,7 @@ final class CallTest extends \Telnyx\TestCase
 
     public function testBridge()
     {
-        // "Pick up" the call
-        $call = new \Telnyx\Call(self::CALL_CONTROL_ID);
+        $call = Call::retrieve(self::CALL_CONTROL_ID);
 
         $this->expectsRequest(
             'post',
@@ -63,8 +61,7 @@ final class CallTest extends \Telnyx\TestCase
 
     public function testForkStart()
     {
-        // "Pick up" the call
-        $call = new \Telnyx\Call(self::CALL_CONTROL_ID);
+        $call = Call::retrieve(self::CALL_CONTROL_ID);
 
         $this->expectsRequest(
             'post',
@@ -76,8 +73,7 @@ final class CallTest extends \Telnyx\TestCase
 
     public function testForkStop()
     {
-        // "Pick up" the call
-        $call = new \Telnyx\Call(self::CALL_CONTROL_ID);
+        $call = Call::retrieve(self::CALL_CONTROL_ID);
 
         $this->expectsRequest(
             'post',
@@ -90,8 +86,7 @@ final class CallTest extends \Telnyx\TestCase
 
     public function testGatherUsingAudio()
     {
-        // "Pick up" the call
-        $call = new \Telnyx\Call(self::CALL_CONTROL_ID);
+        $call = Call::retrieve(self::CALL_CONTROL_ID);
 
         $this->expectsRequest(
             'post',
@@ -105,8 +100,7 @@ final class CallTest extends \Telnyx\TestCase
 
     public function testGatherUsingSpeak()
     {
-        // "Pick up" the call
-        $call = new \Telnyx\Call(self::CALL_CONTROL_ID);
+        $call = Call::retrieve(self::CALL_CONTROL_ID);
 
         $this->expectsRequest(
             'post',
@@ -119,4 +113,104 @@ final class CallTest extends \Telnyx\TestCase
         ]);
         $this->assertInstanceOf(\Telnyx\TelnyxObject::class, $resource);
     }
+
+    /*
+    public function testHangup()
+    {
+        $call = Call::retrieve(self::CALL_CONTROL_ID);
+
+        $this->expectsRequest(
+            'post',
+            '/v2/calls/' . urlencode(self::CALL_CONTROL_ID) . '/actions/hangup'
+        );
+        $resource = $call->hangup();
+        $this->assertInstanceOf(\Telnyx\TelnyxObject::class, $resource);
+    }
+
+    public function testPlaybackStart()
+    {
+        $call = Call::retrieve(self::CALL_CONTROL_ID);
+
+        $this->expectsRequest(
+            'post',
+            '/v2/calls/' . urlencode(self::CALL_CONTROL_ID) . '/actions/playback_start'
+        );
+        $resource = $call->playback_start();
+        $this->assertInstanceOf(\Telnyx\TelnyxObject::class, $resource);
+    }
+
+    public function testPlaybackStop()
+    {
+        $call = Call::retrieve(self::CALL_CONTROL_ID);
+
+        $this->expectsRequest(
+            'post',
+            '/v2/calls/' . urlencode(self::CALL_CONTROL_ID) . '/actions/playback_stop'
+        );
+        $resource = $call->playback_stop();
+        $this->assertInstanceOf(\Telnyx\TelnyxObject::class, $resource);
+    }
+
+    public function testRecordStart()
+    {
+        $call = Call::retrieve(self::CALL_CONTROL_ID);
+
+        $this->expectsRequest(
+            'post',
+            '/v2/calls/' . urlencode(self::CALL_CONTROL_ID) . '/actions/record_start'
+        );
+        $resource = $call->record_start();
+        $this->assertInstanceOf(\Telnyx\TelnyxObject::class, $resource);
+    }
+
+    public function testRecordStop()
+    {
+        $call = Call::retrieve(self::CALL_CONTROL_ID);
+
+        $this->expectsRequest(
+            'post',
+            '/v2/calls/' . urlencode(self::CALL_CONTROL_ID) . '/actions/record_stop'
+        );
+        $resource = $call->record_stop();
+        $this->assertInstanceOf(\Telnyx\TelnyxObject::class, $resource);
+    }
+
+    public function testReject()
+    {
+        $call = Call::retrieve(self::CALL_CONTROL_ID);
+
+        $this->expectsRequest(
+            'post',
+            '/v2/calls/' . urlencode(self::CALL_CONTROL_ID) . '/actions/reject'
+        );
+        $resource = $call->reject();
+        $this->assertInstanceOf(\Telnyx\TelnyxObject::class, $resource);
+    }
+    */
+
+    public function testSendDTMF()
+    {
+        $call = Call::retrieve(self::CALL_CONTROL_ID);
+
+        $this->expectsRequest(
+            'post',
+            '/v2/calls/' . urlencode(self::CALL_CONTROL_ID) . '/actions/send_dtmf'
+        );
+        $resource = $call->send_dtmf(['digits' => '1www2WABCDw9']);
+        $this->assertInstanceOf(\Telnyx\TelnyxObject::class, $resource);
+    }
+
+    /*
+    public function testSpeak()
+    {
+        $call = Call::retrieve(self::CALL_CONTROL_ID);
+
+        $this->expectsRequest(
+            'post',
+            '/v2/calls/' . urlencode(self::CALL_CONTROL_ID) . '/actions/speak'
+        );
+        $resource = $call->speak(['digits' => '1www2WABCDw9']);
+        $this->assertInstanceOf(\Telnyx\TelnyxObject::class, $resource);
+    }
+    */
 }

@@ -226,6 +226,13 @@ class TelnyxObject implements \ArrayAccess, \Countable, \JsonSerializable
     {
         $obj = new static(isset($values['id']) ? $values['id'] : null);
         $obj->refreshFrom($values, $opts);
+
+        // If 'id' is called something else like 'call_control_id'
+        $class = get_class($obj);
+        if (defined($class . '::OBJECT_ID')) {
+            $obj->reassignId(static::OBJECT_ID);
+        }
+
         return $obj;
     }
 
@@ -436,9 +443,9 @@ class TelnyxObject implements \ArrayAccess, \Countable, \JsonSerializable
     }
 
     /**
-     * Returns a pretty JSON representation of the Telnyx object.
+     * Returns a pretty JSON representation of the Stripe object.
      *
-     * @return string the JSON representation of the Telnyx object
+     * @return string the JSON representation of the Stripe object
      */
     public function toJSON()
     {
@@ -447,7 +454,8 @@ class TelnyxObject implements \ArrayAccess, \Countable, \JsonSerializable
 
     public function __toString()
     {
-        $class = get_class($this);
+        $class = \get_class($this);
+
         return $class . ' JSON: ' . $this->toJSON();
     }
 

@@ -53,15 +53,15 @@ class UtilTest extends \PHPUnit\Framework\TestCase
         static::assertSame(Util::utf8($x), $x);
     }
 
-    /*
+
     public function testObjectsToIds()
     {
         $params = [
             'foo' => 'bar',
-            'customer' => Util::convertToTelnyxObject(
+            'phone_number' => Util::convertToTelnyxObject(
                 [
                     'id' => 'cus_123',
-                    'object' => 'customer',
+                    'record_type' => 'phone_number',
                 ],
                 null
             ),
@@ -71,12 +71,11 @@ class UtilTest extends \PHPUnit\Framework\TestCase
         static::assertSame(
             [
                 'foo' => 'bar',
-                'customer' => 'cus_123',
+                'phone_number' => 'cus_123',
             ],
             Util::objectsToIds($params)
         );
     }
-    */
 
     public function testEncodeParameters()
     {

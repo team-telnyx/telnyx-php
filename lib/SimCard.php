@@ -26,8 +26,6 @@ class SimCard extends ApiResource
      */
     public function activate($params = null, $options = null)
     {
-        trigger_error('\Telnyx\SimCard::activate() is deprecated. Please use \Telnyx\SimCard::enable() instead', E_USER_WARNING);
-
         $url = $this->instanceUrl() . '/actions/activate';
         list($response, $opts) = $this->_request('post', $url, $params, $options);
         $this->refreshFrom($response, $opts);
@@ -44,8 +42,6 @@ class SimCard extends ApiResource
      */
     public function deactivate($params = null, $options = null)
     {
-        trigger_error('\Telnyx\SimCard::deactivate() is deprecated. Please use \Telnyx\SimCard::disable() instead', E_USER_WARNING);
-
         $url = $this->instanceUrl() . '/actions/deactivate';
         list($response, $opts) = $this->_request('post', $url, $params, $options);
         $this->refreshFrom($response, $opts);
