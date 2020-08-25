@@ -156,17 +156,16 @@ class ApiRequestor
      */
     private static function _specificAPIError($rbody, $rcode, $rheaders, $resp, $errorData)
     {
-        $msg = isset($errorData[0]['detail']) ? $errorData[0]['detail'] : null;
+        $msg = isset($errorData[0]['detail']) ? $errorData[0]['detail'] : (isset($errorData[0]['title']) ? $errorData[0]['title'] : null) ;
         $param = isset($errorData[0]['param']) ? $errorData[0]['param'] : null;
         $code = isset($errorData[0]['code']) ? $errorData[0]['code'] : null;
         $type = isset($errorData[0]['type']) ? $errorData[0]['type'] : null;
 
         switch ($rcode) {
-            case 400:
-                if ('idempotency_error' === $type) {
-                    return Exception\IdempotencyException::factory($msg, $rcode, $rbody, $resp, $rheaders, $code);
-                }
-
+            //case 400:
+            //    if ('idempotency_error' === $type) {
+            //        return Exception\IdempotencyException::factory($msg, $rcode, $rbody, $resp, $rheaders, $code);
+            //    }
                 // no break
             case 404:
                 return Exception\InvalidRequestException::factory($msg, $rcode, $rbody, $resp, $rheaders, $code, $param);

@@ -4,6 +4,13 @@ namespace Telnyx;
 
 use Telnyx\HttpClient\CurlClient;
 
+class DummyApiRequestor404 extends ApiResource
+{
+    const OBJECT_NAME = 'foo';
+
+    use \Telnyx\ApiOperations\All;
+}
+
 /**
  * @internal
  * @covers \Telnyx\ApiRequestor
@@ -164,5 +171,70 @@ final class ApiRequestorTest extends \Telnyx\TestCase
             ]
         );
         Call::create([], ['telnyx_account' => 'acct_123']);
+    }
+
+    /*
+    // Mock isn't returning a valid result here
+    public function testRaisesInvalidRequestErrorOn404()
+    {
+        try {
+            DummyApiRequestor404::all();
+            static::fail('Did not raise error');
+        } catch (Exception\InvalidRequestException $e) {
+            static::assertSame(404, $e->getHttpStatus());
+            static::assertInternalType('array', $e->getJsonBody());
+            static::assertSame('No such charge: foo', $e->getMessage());
+            static::assertSame('id', $e->getStripeParam());
+        } catch (\Exception $e) {
+            static::fail('Unexpected exception: ' . \get_class($e));
+        }
+    }
+    */
+
+    // Tests if we pick either the detail or title for the message
+    public function testTitleDetailMessage()
+    {
+        // Test 1
+        $rbody1 = '{"errors":[{"code":"1234","title":"title"}]}';
+        $rbody2 = '{"errors":[{"code":"1234","detail":"detail"}]}';
+
+        $this->expectException('Telnyx\Exception\AuthenticationException');
+        $this->expectExceptionMessage('title');
+
+        $class = new ApiRequestor();
+        $class->handleErrorResponse($rbody1, 401, [], json_decode($rbody1, true));
+
+        // Test 2
+        $this->expectException('Telnyx\Exception\AuthenticationException');
+        $this->expectExceptionMessage('detail');
+
+        $class = new ApiRequestor();
+        $class->handleErrorResponse($rbody2, 401, [], json_decode($rbody2, true));
+    }
+
+    public function testErrorOn401()
+    {
+        $rbody = '{"errors":[{"code":"1234","title":"error"}]}';
+
+        $this->expectException('Telnyx\Exception\AuthenticationException');
+
+        $class = new ApiRequestor();
+        $class->handleErrorResponse($rbody, 401, [], json_decode($rbody, true));
+    }
+
+    public function testErrorOn404()
+    {
+        $rbody = '{"errors":[{"code":"1234","title":"error"}]}';
+
+        $this->expectException('Telnyx\Exception\InvalidRequestException');
+
+        $class = new ApiRequestor();
+        $class->handleErrorResponse($rbody, 404, [], json_decode($rbody, true));
+    }
+
+    public function testResetTelemetry()
+    {
+        $class = new ApiRequestor();
+        static::assertNull($class->resetTelemetry());
     }
 }
