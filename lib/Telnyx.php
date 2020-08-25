@@ -115,6 +115,14 @@ class Telnyx
     }
 
     /**
+     * @return string The Public key used for webhooks.
+     */
+    public static function getPublicKey()
+    {
+        return self::$publicKey;
+    }
+
+    /**
      * Sets the client_id to be used for Connect requests.
      *
      * @param string $clientId

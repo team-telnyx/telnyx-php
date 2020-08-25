@@ -4,7 +4,7 @@ namespace Telnyx;
 
 /**
  * @internal
- * @covers \Telnyx\Telnyx
+ * @covers \Telnyx\TelnyxObject
  */
 final class TelnyxObjectTest extends \Telnyx\TestCase
 {
