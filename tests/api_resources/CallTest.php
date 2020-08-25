@@ -34,7 +34,6 @@ final class CallTest extends \Telnyx\TestCase
         $this->assertInstanceOf(\Telnyx\Call::class, $resource);
     }
 
-    /*
     public function testAnswer()
     {
         $call = Call::retrieve(self::CALL_CONTROL_ID);
@@ -82,7 +81,6 @@ final class CallTest extends \Telnyx\TestCase
         $resource = $call->fork_stop();
         $this->assertInstanceOf(\Telnyx\TelnyxObject::class, $resource);
     }
-    */
 
     public function testGatherUsingAudio()
     {
@@ -114,7 +112,6 @@ final class CallTest extends \Telnyx\TestCase
         $this->assertInstanceOf(\Telnyx\TelnyxObject::class, $resource);
     }
 
-    /*
     public function testHangup()
     {
         $call = Call::retrieve(self::CALL_CONTROL_ID);
@@ -186,7 +183,6 @@ final class CallTest extends \Telnyx\TestCase
         $resource = $call->reject();
         $this->assertInstanceOf(\Telnyx\TelnyxObject::class, $resource);
     }
-    */
 
     public function testSendDTMF()
     {
@@ -200,7 +196,6 @@ final class CallTest extends \Telnyx\TestCase
         $this->assertInstanceOf(\Telnyx\TelnyxObject::class, $resource);
     }
 
-    /*
     public function testSpeak()
     {
         $call = Call::retrieve(self::CALL_CONTROL_ID);
@@ -212,5 +207,4 @@ final class CallTest extends \Telnyx\TestCase
         $resource = $call->speak(['digits' => '1www2WABCDw9']);
         $this->assertInstanceOf(\Telnyx\TelnyxObject::class, $resource);
     }
-    */
 }

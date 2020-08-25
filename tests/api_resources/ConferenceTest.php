@@ -44,7 +44,6 @@ final class ConferenceTest extends \Telnyx\TestCase
         $this->assertInstanceOf(\Telnyx\Conference::class, $resource);
     }
 
-    /*
     public function testJoin()
     {
         $conference = Conference::retrieve(self::TEST_RESOURCE_ID);
@@ -104,6 +103,5 @@ final class ConferenceTest extends \Telnyx\TestCase
         $resource = $conference->unhold();
         $this->assertInstanceOf(\Telnyx\TelnyxObject::class, $resource);
     }
-    */
 
 }

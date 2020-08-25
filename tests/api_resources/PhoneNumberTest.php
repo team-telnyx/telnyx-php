@@ -21,19 +21,6 @@ final class PhoneNumberTest extends \Telnyx\TestCase
         $this->assertInstanceOf(\Telnyx\PhoneNumber::class, $resources['data'][0]);
     }
 
-    /*
-    NOTE: Does this capability exist?
-    public function testIsCreatable()
-    {
-        $this->expectsRequest(
-            'post',
-            '/v2/phone_numbers'
-        );
-        $resource = PhoneNumber::create();
-        $this->assertInstanceOf(\Telnyx\PhoneNumber::class, $resource);
-    }
-    */
-
     public function testIsDeletable()
     {
         $resource = PhoneNumber::retrieve(self::TEST_RESOURCE_ID);
@@ -78,7 +65,6 @@ final class PhoneNumberTest extends \Telnyx\TestCase
         $this->assertInstanceOf(\Telnyx\TelnyxObject::class, $resource); // record_type: voice_settings
     }
 
-    /*
     public function testUpdateVoice()
     {
         $phone_number = PhoneNumber::retrieve(self::TEST_RESOURCE_ID);
@@ -89,7 +75,6 @@ final class PhoneNumberTest extends \Telnyx\TestCase
         $resource = $phone_number->update_voice();
         $this->assertInstanceOf(\Telnyx\TelnyxObject::class, $resource); // record_type: voice_settings
     }
-    */
 
     public function testMessaging()
     {
@@ -102,7 +87,6 @@ final class PhoneNumberTest extends \Telnyx\TestCase
         $this->assertInstanceOf(\Telnyx\TelnyxObject::class, $resource); // record_type: voice_settings
     }
 
-    /*
     public function testUpdateMessaging()
     {
         $phone_number = PhoneNumber::retrieve(self::TEST_RESOURCE_ID);
@@ -113,5 +97,4 @@ final class PhoneNumberTest extends \Telnyx\TestCase
         $resource = $phone_number->update_messaging();
         $this->assertInstanceOf(\Telnyx\TelnyxObject::class, $resource); // record_type: voice_settings
     }
-    */
 }
