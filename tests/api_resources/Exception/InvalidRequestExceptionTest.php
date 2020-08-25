@@ -4,9 +4,9 @@ namespace Telnyx\Exception;
 
 /**
  * @internal
- * @covers \Telnyx\Exception\ApiErrorException
+ * @covers \Telnyx\Exception\InvalidRequestException
  */
-final class ApiErrorExceptionTest extends \Telnyx\TestCase
+final class InvalidRequestExceptionTest extends \Telnyx\TestCase
 {
     public function createFixture()
     {

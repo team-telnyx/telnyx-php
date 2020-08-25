@@ -6,7 +6,7 @@ namespace Telnyx\Exception;
  * @internal
  * @covers \Telnyx\Exception\SignatureVerificationException
  */
-final class SignatureVerificationExceptionTest extends \PHPUnit\Framework\TestCase
+final class SignatureVerificationExceptionTest extends \Telnyx\TestCase
 {
 
     public function testGetters()

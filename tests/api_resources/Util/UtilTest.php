@@ -6,7 +6,7 @@ namespace Telnyx\Util;
  * @internal
  * @covers \Telnyx\Util\Util
  */
-class UtilTest extends \PHPUnit\Framework\TestCase
+final class UtilTest extends \Telnyx\TestCase
 {
     public function testIsList()
     {
@@ -135,5 +135,29 @@ class UtilTest extends \PHPUnit\Framework\TestCase
             ],
             Util::flattenParams($params)
         );
+    }
+    
+    public function testNormalizeId()
+    {
+        // Test array version
+        $result1 = Util::normalizeId(['id'=>'123', 'a'=>'b', 'c'=>'d']);
+
+        static::assertSame('123', $result1[0]);
+        static::assertSame(['a'=>'b', 'c'=>'d'], $result1[1]);
+
+        // Test flat version
+        $result2 = Util::normalizeId('123');
+
+        static::assertSame('123', $result2[0]);
+        static::assertSame([], $result2[1]);
+    }
+    
+    public function testSecureCompare()
+    {
+        $expected  = crypt('12345', '$2a$07$usesomesillystringforsalt$');
+        $correct   = crypt('12345', '$2a$07$usesomesillystringforsalt$');
+
+        $result1 = Util::secureCompare($expected, $correct);
+        static::assertSame(true, $result1);
     }
 }
