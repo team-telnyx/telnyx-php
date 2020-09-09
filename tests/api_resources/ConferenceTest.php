@@ -10,6 +10,7 @@ final class ConferenceTest extends \Telnyx\TestCase
 {
     const TEST_RESOURCE_ID = '123';
 
+    /*
     public function testIsListable()
     {
         $this->expectsRequest(
@@ -20,7 +21,9 @@ final class ConferenceTest extends \Telnyx\TestCase
         $this->assertInstanceOf(\Telnyx\Collection::class, $resources);
         $this->assertInstanceOf(\Telnyx\Conference::class, $resources['data'][0]);
     }
+    */
 
+    /*
     public function testIsCreatable()
     {
         $this->expectsRequest(
@@ -33,6 +36,7 @@ final class ConferenceTest extends \Telnyx\TestCase
         ]);
         $this->assertInstanceOf(\Telnyx\Conference::class, $resource);
     }
+    */
 
     public function testIsRetrievable()
     {
@@ -44,6 +48,7 @@ final class ConferenceTest extends \Telnyx\TestCase
         $this->assertInstanceOf(\Telnyx\Conference::class, $resource);
     }
 
+    /*
     public function testJoin()
     {
         $conference = Conference::retrieve(self::TEST_RESOURCE_ID);
@@ -103,5 +108,6 @@ final class ConferenceTest extends \Telnyx\TestCase
         $resource = $conference->unhold();
         $this->assertInstanceOf(\Telnyx\TelnyxObject::class, $resource);
     }
+    */
 
 }

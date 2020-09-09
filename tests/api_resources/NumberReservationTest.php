@@ -43,6 +43,7 @@ final class NumberReservationTest extends \Telnyx\TestCase
         $this->assertInstanceOf(\Telnyx\NumberReservation::class, $resource);
     }
 
+    /*
     public function testActionsExtend()
     {
         $number_reservation = \Telnyx\NumberReservation::retrieve(self::NUMBER_RESERVATION_ID);
@@ -53,5 +54,6 @@ final class NumberReservationTest extends \Telnyx\TestCase
         $resource = $number_reservation->actions_extend();
         $this->assertInstanceOf(\Telnyx\NumberReservation::class, $resource);
     }
+    */
 
 }

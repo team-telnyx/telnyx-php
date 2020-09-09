@@ -349,4 +349,27 @@ final class CurlClientTest extends \Telnyx\TestCase
             \Telnyx\ApiRequestor::setHttpClient(null);
         }
     }
+
+    public function testInvalidMethod() {
+        $curl = new CurlClient();
+
+        $this->expectException('Telnyx\Exception\UnexpectedValueException');
+        $this->expectExceptionMessage('Unrecognized method invalidmethod');
+
+        $curl->request('invalidmethod', 'https://httpbin.org/status/200', [], [], false);
+
+    }
+    public function testGetSets() {
+        $curl = new CurlClient();
+
+        $curl->setEnablePersistentConnections(false);
+        static::assertSame(false, $curl->getEnablePersistentConnections());
+        $curl->setEnablePersistentConnections(true);
+        static::assertSame(true, $curl->getEnablePersistentConnections());
+
+        $curl->setEnableHttp2(false);
+        static::assertSame(false, $curl->getEnableHttp2());
+        $curl->setEnableHttp2(true);
+        static::assertSame(true, $curl->getEnableHttp2());
+    }
 }

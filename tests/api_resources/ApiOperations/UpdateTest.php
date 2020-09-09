@@ -22,16 +22,16 @@ final class UpdateTest extends \Telnyx\TestCase
     {
         $result = DummyUpdate::update(self::TEST_RESOURCE_ID, ['customer_reference'=>'MY REF 001']);
         $this->assertInstanceOf(\Telnyx\PhoneNumber::class, $result);
+        $this->assertNotNull($result['connection_id']);
+        $this->assertNotNull($result['id']);
     }
 
-    /*
-    // NOTE: do we use the save() function?
     public function testTraitSave()
     {
         $class = new DummyUpdate(self::TEST_RESOURCE_ID);
         $class->customer_reference = 'MY REF 001';
         $result = $class->save();
-        $this->assertInstanceOf(\Telnyx\PhoneNumber::class, $result);
+        $this->assertNotNull($result['connection_id']);
+        $this->assertNotNull($result['id']);
     }
-    */
 }

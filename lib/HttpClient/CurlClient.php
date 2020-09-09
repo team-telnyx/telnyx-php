@@ -239,14 +239,6 @@ class CurlClient implements ClientInterface
             throw new Exception\UnexpectedValueException("Unrecognized method {$method}");
         }
 
-        // It is only safe to retry network failures on POST requests if we
-        // add an Idempotency-Key header
-        if (('post' === $method) && (Telnyx::$maxNetworkRetries > 0)) {
-            if (!$this->hasHeader($headers, 'Idempotency-Key')) {
-                \array_push($headers, 'Idempotency-Key: ' . $this->randomGenerator->uuid());
-            }
-        }
-
         // By default for large request body sizes (> 1024 bytes), cURL will
         // send a request without a body and with a `Expect: 100-continue`
         // header, which gives the server a chance to respond with an error

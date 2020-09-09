@@ -569,11 +569,11 @@ class TelnyxObject implements \ArrayAccess, \Countable, \JsonSerializable
 
     /**
      * Reassigns another parameter as the id. Used for endpoints that return id in a different param such as /v2/calls
-     * @return string
+     * @return void
      */
     public function reassignId($new_id) {
-        $this->_values['id'] = $this->_values[$new_id];
-        
-        return $this->_values[$new_id];
+        if (isset($this->_values[$new_id])) {
+            $this->_values['id'] = $this->_values[$new_id];
+        }
     }
 }

@@ -36,6 +36,7 @@ final class FaxTest extends \Telnyx\TestCase
         $this->assertInstanceOf(\Telnyx\Fax::class, $resource);
     }
 
+    /*
     public function testIsDeletable()
     {
         $resource = Fax::retrieve(self::TEST_RESOURCE_ID);
@@ -46,6 +47,7 @@ final class FaxTest extends \Telnyx\TestCase
         $resource->delete();
         $this->assertInstanceOf(\Telnyx\Fax::class, $resource);
     }
+    */
 
     public function testIsRetrievable()
     {
