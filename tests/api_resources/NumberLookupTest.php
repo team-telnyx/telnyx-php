@@ -2,7 +2,11 @@
 
 namespace Telnyx;
 
-class NumberLookupTest extends TestCase
+/**
+ * @internal
+ * @covers \Telnyx\NumberLookup
+ */
+final class NumberLookupTest extends \Telnyx\TestCase
 {
     const TEST_RESOURCE_ID = '123';
 

@@ -3,7 +3,7 @@
 namespace Telnyx;
 
 /**
- * Class RegulatoryRequirements
+ * Class RegulatoryRequirement
  *
  * @package Telnyx
  */

@@ -2,11 +2,14 @@
 
 namespace Telnyx;
 
-class FaxTest extends TestCase
+/**
+ * @internal
+ * @covers \Telnyx\Fax
+ */
+final class FaxTest extends \Telnyx\TestCase
 {
     const TEST_RESOURCE_ID = '123';
 
-    /*
     public function testIsListable()
     {
         $this->expectsRequest(
@@ -33,6 +36,7 @@ class FaxTest extends TestCase
         $this->assertInstanceOf(\Telnyx\Fax::class, $resource);
     }
 
+    /*
     public function testIsDeletable()
     {
         $resource = Fax::retrieve(self::TEST_RESOURCE_ID);
@@ -44,7 +48,6 @@ class FaxTest extends TestCase
         $this->assertInstanceOf(\Telnyx\Fax::class, $resource);
     }
     */
-
 
     public function testIsRetrievable()
     {

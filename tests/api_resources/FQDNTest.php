@@ -2,7 +2,11 @@
 
 namespace Telnyx;
 
-class FQDNTest extends TestCase
+/**
+ * @internal
+ * @covers \Telnyx\FQDN
+ */
+final class FQDNTest extends \Telnyx\TestCase
 {
     const TEST_RESOURCE_ID = '123';
 

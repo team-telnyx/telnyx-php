@@ -38,7 +38,7 @@ trait Update
         $params = $this->serializeParameters();
         if (count($params) > 0) {
             $url = $this->instanceUrl();
-            list($response, $opts) = $this->_request('post', $url, $params, $opts);
+            list($response, $opts) = $this->_request('patch', $url, $params, $opts);
             $this->refreshFrom($response, $opts);
         }
         return $this;

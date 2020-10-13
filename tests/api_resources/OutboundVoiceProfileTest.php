@@ -2,7 +2,11 @@
 
 namespace Telnyx;
 
-class OutboundVoiceProfileTest extends TestCase
+/**
+ * @internal
+ * @covers \Telnyx\OutboundVoiceProfile
+ */
+final class OutboundVoiceProfileTest extends \Telnyx\TestCase
 {
     const TEST_RESOURCE_ID = '123';
 

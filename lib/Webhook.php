@@ -24,6 +24,12 @@ abstract class Webhook
      */
     public static function constructFromRequest($public_key = '', $tolerance = self::DEFAULT_TOLERANCE)
     {
+        if (!isset($_SERVER['HTTP_TELNYX_SIGNATURE_ED25519']) || !isset($_SERVER['HTTP_TELNYX_TIMESTAMP'])) {
+            throw Exception\SignatureVerificationException::factory(
+                'Unable to extract timestamp and signatures from header'
+            );
+        }
+
         $payload = @file_get_contents('php://input');
         $sig_header = $_SERVER['HTTP_TELNYX_SIGNATURE_ED25519'];
         $timestamp_header = $_SERVER['HTTP_TELNYX_TIMESTAMP'];

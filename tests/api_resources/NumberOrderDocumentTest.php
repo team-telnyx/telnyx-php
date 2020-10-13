@@ -2,7 +2,11 @@
 
 namespace Telnyx;
 
-class NumberOrderDocumentTest extends TestCase
+/**
+ * @internal
+ * @covers \Telnyx\NumberOrderDocument
+ */
+final class NumberOrderDocumentTest extends \Telnyx\TestCase
 {
     const TEST_RESOURCE_ID = '123';
 

@@ -2,7 +2,11 @@
 
 namespace Telnyx;
 
-class CredentialConnectionTest extends TestCase
+/**
+ * @internal
+ * @covers \Telnyx\CredentialConnection
+ */
+final class CredentialConnectionTest extends \Telnyx\TestCase
 {
     const TEST_RESOURCE_ID = '123';
 

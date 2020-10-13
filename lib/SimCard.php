@@ -17,10 +17,12 @@ class SimCard extends ApiResource
     use ApiOperations\Update;
 
     /**
+     * Request a SIM card activation (DEPRECATED)
+     *
      * @param array|null $params
      * @param array|string|null $options
      *
-     * @return Request a SIM card activation
+     * @return
      */
     public function activate($params = null, $options = null)
     {
@@ -31,10 +33,12 @@ class SimCard extends ApiResource
     }
 
     /**
+     * Request a SIM card deactivation (DEPRECATED)
+     *
      * @param array|null $params
      * @param array|string|null $options
      *
-     * @return Request a SIM card deactivation
+     * @return
      */
     public function deactivate($params = null, $options = null)
     {
@@ -45,10 +49,45 @@ class SimCard extends ApiResource
     }
 
     /**
+     * Request a SIM card enable
+     *
      * @param array|null $params
      * @param array|string|null $options
      *
-     * @return Register the SIM cards associated with the provided registration codes to the current user's account.
+     * @return
+     */
+    public function enable($params = null, $options = null)
+    {
+        $url = $this->instanceUrl() . '/actions/enable';
+        list($response, $opts) = $this->_request('post', $url, $params, $options);
+        $this->refreshFrom($response, $opts);
+        return $this;
+    }
+
+    /**
+     * Request a SIM card disable
+     *
+     * @param array|null $params
+     * @param array|string|null $options
+     *
+     * @return
+     */
+    public function disable($params = null, $options = null)
+    {
+        $url = $this->instanceUrl() . '/actions/disable';
+        list($response, $opts) = $this->_request('post', $url, $params, $options);
+        $this->refreshFrom($response, $opts);
+        return $this;
+    }
+
+    /**
+     * Register the SIM cards associated with the provided registration codes to
+     * the current user's account.
+     *
+     * @param array|null $params
+     * @param array|string|null $options
+     *
+     * @return
      */
     public static function register($params = null, $options = null)
     {
@@ -61,9 +100,11 @@ class SimCard extends ApiResource
     }
 
     /**
+     * Deletes the network preferences currently applied in the SIM card.
+     *
      * @param string|null $id
      *
-     * @return It deletes the network preferences currently applied in the SIM card.
+     * @return
      */
     public static function delete_network_preferences($id)
     {
@@ -75,9 +116,11 @@ class SimCard extends ApiResource
     }
 
     /**
+     * Sets the network preferences currently applied in the SIM card.
+     *
      * @param string|null $id
      *
-     * @return It sets the network preferences currently applied in the SIM card.
+     * @return
      */
     public static function get_network_preferences($id)
     {
@@ -89,9 +132,11 @@ class SimCard extends ApiResource
     }
 
     /**
+     * Returns the network preferences currently applied in the SIM card.
+     *
      * @param string|null $id
      *
-     * @return It returns the network preferences currently applied in the SIM card.
+     * @return
      */
     public static function set_network_preferences($id, $params = null, $options = null)
     {

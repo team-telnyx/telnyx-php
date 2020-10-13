@@ -2,7 +2,11 @@
 
 namespace Telnyx;
 
-class IPConnectionTest extends TestCase
+/**
+ * @internal
+ * @covers \Telnyx\IPConnection
+ */
+final class IPConnectionTest extends \Telnyx\TestCase
 {
     const TEST_RESOURCE_ID = '123';
 

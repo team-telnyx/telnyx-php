@@ -33,9 +33,6 @@ abstract class WebhookSignature
             $my_public_key = $public_key;
         }
 
-        // Convert base64 string to bytes for sodium crypto functions
-        $public_key_bytes = base64_decode($my_public_key);
-
         // Check if timestamp is within tolerance
         if (($tolerance > 0) && (\abs(\time() - $timestamp) > $tolerance)) {
             throw Exception\SignatureVerificationException::factory(
@@ -45,11 +42,14 @@ abstract class WebhookSignature
             );
         }
 
-        // Generate the Message Authentication Code
-        $mac = \sodium_crypto_auth($payload, $public_key_bytes);
+        // Convert base64 string to bytes for sodium crypto functions
+        $public_key_bytes = base64_decode($my_public_key);
+        $signature_header_bytes = base64_decode($signature_header);
 
-        // Now verify the code against the $mac
-        if (!\sodium_crypto_auth_verify($mac, $payload, $public_key_bytes)) {
+        // Construct a message to test against the signature header using the timestamp and payload
+        $signed_payload = $timestamp . '|' . $payload;
+
+        if (!\sodium_crypto_sign_verify_detached($signature_header_bytes, $signed_payload, $public_key_bytes)) {
             throw Exception\SignatureVerificationException::factory(
                 'Signature is invalid and does not match the payload',
                 $payload,

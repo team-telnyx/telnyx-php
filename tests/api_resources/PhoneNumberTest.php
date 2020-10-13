@@ -2,7 +2,11 @@
 
 namespace Telnyx;
 
-class PhoneNumberTest extends TestCase
+/**
+ * @internal
+ * @covers \Telnyx\PhoneNumber
+ */
+final class PhoneNumberTest extends \Telnyx\TestCase
 {
     const TEST_RESOURCE_ID = '123';
 
@@ -17,15 +21,14 @@ class PhoneNumberTest extends TestCase
         $this->assertInstanceOf(\Telnyx\PhoneNumber::class, $resources['data'][0]);
     }
 
-    public function testIsUpdatable()
+    public function testIsDeletable()
     {
+        $resource = PhoneNumber::retrieve(self::TEST_RESOURCE_ID);
         $this->expectsRequest(
-            'patch',
+            'delete',
             '/v2/phone_numbers/' . urlencode(self::TEST_RESOURCE_ID)
         );
-        $resource = PhoneNumber::update(self::TEST_RESOURCE_ID, [
-            "name" => "Test",
-        ]);
+        $resource->delete();
         $this->assertInstanceOf(\Telnyx\PhoneNumber::class, $resource);
     }
 
@@ -39,14 +42,63 @@ class PhoneNumberTest extends TestCase
         $this->assertInstanceOf(\Telnyx\PhoneNumber::class, $resource);
     }
 
-    public function testIsDeletable()
+    public function testIsUpdatable()
     {
-        $resource = PhoneNumber::retrieve(self::TEST_RESOURCE_ID);
         $this->expectsRequest(
-            'delete',
+            'patch',
             '/v2/phone_numbers/' . urlencode(self::TEST_RESOURCE_ID)
         );
-        $resource->delete();
+        $resource = PhoneNumber::update(self::TEST_RESOURCE_ID, [
+            "name" => "Test",
+        ]);
         $this->assertInstanceOf(\Telnyx\PhoneNumber::class, $resource);
     }
+
+    public function testVoice()
+    {
+        $phone_number = PhoneNumber::retrieve(self::TEST_RESOURCE_ID);
+        $this->expectsRequest(
+            'get',
+            '/v2/phone_numbers/' . urlencode(self::TEST_RESOURCE_ID) . '/voice'
+        );
+        $resource = $phone_number->voice();
+        $this->assertInstanceOf(\Telnyx\TelnyxObject::class, $resource); // record_type: voice_settings
+    }
+
+    /*
+    public function testUpdateVoice()
+    {
+        $phone_number = PhoneNumber::retrieve(self::TEST_RESOURCE_ID);
+        $this->expectsRequest(
+            'patch',
+            '/v2/phone_numbers/' . urlencode(self::TEST_RESOURCE_ID) . '/voice'
+        );
+        $resource = $phone_number->update_voice();
+        $this->assertInstanceOf(\Telnyx\TelnyxObject::class, $resource); // record_type: voice_settings
+    }
+    */
+
+    public function testMessaging()
+    {
+        $phone_number = PhoneNumber::retrieve(self::TEST_RESOURCE_ID);
+        $this->expectsRequest(
+            'get',
+            '/v2/phone_numbers/' . urlencode(self::TEST_RESOURCE_ID) . '/messaging'
+        );
+        $resource = $phone_number->messaging();
+        $this->assertInstanceOf(\Telnyx\TelnyxObject::class, $resource); // record_type: voice_settings
+    }
+
+    /*
+    public function testUpdateMessaging()
+    {
+        $phone_number = PhoneNumber::retrieve(self::TEST_RESOURCE_ID);
+        $this->expectsRequest(
+            'patch',
+            '/v2/phone_numbers/' . urlencode(self::TEST_RESOURCE_ID) . '/messaging'
+        );
+        $resource = $phone_number->update_messaging();
+        $this->assertInstanceOf(\Telnyx\TelnyxObject::class, $resource); // record_type: voice_settings
+    }
+    */
 }

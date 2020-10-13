@@ -2,7 +2,11 @@
 
 namespace Telnyx;
 
-class AddressTest extends TestCase
+/**
+ * @internal
+ * @covers \Telnyx\Address
+ */
+final class AddressTest extends \Telnyx\TestCase
 {
     const TEST_RESOURCE_ID = '1293384261075731499';
 

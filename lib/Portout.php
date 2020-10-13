@@ -16,10 +16,12 @@ class Portout extends ApiResource
     use ApiOperations\Retrieve;
 
     /**
+     * Authorize or reject portout request
+     *
      * @param array|null $params
      * @param array|string|null $options
      *
-     * @return Authorize or reject portout request
+     * @return
      */
     public function update_status($status)
     {
@@ -30,10 +32,12 @@ class Portout extends ApiResource
     }
 
     /**
+     * List all comments for a portout request
+     *
      * @param array|null $params
      * @param array|string|null $options
      *
-     * @return List all comments for a portout request
+     * @return
      */
     public function list_comments()
     {
@@ -48,10 +52,12 @@ class Portout extends ApiResource
     }
 
     /**
+     * Create a comment on a portout request
+     *
      * @param array|null $params
      * @param array|string|null $options
      *
-     * @return List all comments for a portout request
+     * @return
      */
     public function create_comment($params = null, $options = null)
     {

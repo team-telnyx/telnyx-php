@@ -12,13 +12,13 @@ class PhoneNumber extends ApiResource
     const OBJECT_NAME = "phone_number";
 
     use ApiOperations\All;
-    use ApiOperations\Create;
     use ApiOperations\Delete;
     use ApiOperations\Retrieve;
     use ApiOperations\Update;
 
     /**
-     * @return Retrieve the voice settings for a phone number
+     * Retrieve the voice settings for a phone number
+     * @return 
      */
     public function voice()
     {
@@ -29,10 +29,12 @@ class PhoneNumber extends ApiResource
     }
 
     /**
+     * Update the voice settings for a phone number
+     *
      * @param array|null $params
      * @param array|string|null $options
      *
-     * @return Update the voice settings for a phone number
+     * @return
      */
     public function update_voice($params = null, $options = null)
     {
@@ -43,7 +45,9 @@ class PhoneNumber extends ApiResource
     }
 
     /**
-     * @return Retrieve the messaging settings for a phone number
+     * Retrieve the messaging settings for a phone number
+     *
+     * @return
      */
     public function messaging()
     {
@@ -54,10 +58,12 @@ class PhoneNumber extends ApiResource
     }
 
     /**
+     * Update the messaging settings for a phone number
+     *
      * @param array|null $params
      * @param array|string|null $options
      *
-     * @return Update the messaging settings for a phone number
+     * @return
      */
     public function update_messaging($params = null, $options = null)
     {

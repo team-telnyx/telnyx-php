@@ -2,7 +2,11 @@
 
 namespace Telnyx;
 
-class CallControlApplicationTest extends TestCase
+/**
+ * @internal
+ * @covers \Telnyx\CallControlApplication
+ */
+final class CallControlApplicationTest extends \Telnyx\TestCase
 {
     const TEST_RESOURCE_ID = '123';
 

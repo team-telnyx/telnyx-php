@@ -2,7 +2,11 @@
 
 namespace Telnyx;
 
-class MessagingPhoneNumberTest extends TestCase
+/**
+ * @internal
+ * @covers \Telnyx\MessagingPhoneNumber
+ */
+final class MessagingPhoneNumberTest extends \Telnyx\TestCase
 {
     const TEST_RESOURCE_ID = '+18005554000';
 

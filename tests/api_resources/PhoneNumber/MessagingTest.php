@@ -2,7 +2,11 @@
 
 namespace Telnyx\PhoneNumber;
 
-class MessagingTest extends \Telnyx\TestCase
+/**
+ * @internal
+ * @covers \Telnyx\PhoneNumber\Messaging
+ */
+final class MessagingTest extends \Telnyx\TestCase
 {
 
     public function testIsListable()

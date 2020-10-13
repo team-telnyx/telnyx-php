@@ -6,7 +6,7 @@ namespace Telnyx\Exception;
  * @internal
  * @covers \Telnyx\Exception\ApiErrorException
  */
-final class ApiErrorExceptionTest extends \PHPUnit\Framework\TestCase
+final class ApiErrorExceptionTest extends \Telnyx\TestCase
 {
     public function createFixture()
     {
@@ -82,5 +82,32 @@ final class ApiErrorExceptionTest extends \PHPUnit\Framework\TestCase
     {
         $e = $this->createFixture();
         static::assertContains('(Request req_test)', (string) $e);
+    }
+
+    public function testNull()
+    {
+        $mock = $this->getMockForAbstractClass(ApiErrorException::class);
+
+        $result = $mock::factory(
+            'message',
+            200,
+
+            // $httpBody
+            '{"errors":[{"code":"some_code"}]}',
+
+            // $jsonBody
+            null,
+
+            // $httpHeaders
+            [
+                'Some-Header' => 'Some Value',
+                'Request-Id' => 'req_test',
+            ],
+
+            // $telnyxCode
+            'some_code'
+        );
+
+        static::assertNull($result->getError());
     }
 }
