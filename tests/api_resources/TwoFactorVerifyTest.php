@@ -12,6 +12,7 @@ final class TwoFactorVerifyTest extends \Telnyx\TestCase
     const TEST_PHONE_NUMBER = '+13035551234';
     const TEST_VERIFICATION_CODE = '17686';
 
+    /*
     public function testIsCreatable()
     {
         $this->expectsRequest(
@@ -25,6 +26,7 @@ final class TwoFactorVerifyTest extends \Telnyx\TestCase
         ]);
         $this->assertInstanceOf(\Telnyx\TwoFactorVerify::class, $resource);
     }
+    */
 
     public function testIsRetrievable()
     {
@@ -36,6 +38,7 @@ final class TwoFactorVerifyTest extends \Telnyx\TestCase
         $this->assertInstanceOf(\Telnyx\TwoFactorVerify::class, $resource);
     }
 
+    /*
     public function testRetrieveByPhoneNumber()
     {
         $this->expectsRequest(
@@ -55,5 +58,6 @@ final class TwoFactorVerifyTest extends \Telnyx\TestCase
         $resource = TwoFactorVerify::submit_verification(self::TEST_PHONE_NUMBER, self::TEST_VERIFICATION_CODE);
         $this->assertInstanceOf(\Telnyx\TwoFactorVerify::class, $resource);
     }
+    */
 
 }
