@@ -66,6 +66,7 @@ final class MessagingProfileTest extends \Telnyx\TestCase
         $this->assertInstanceOf(\Telnyx\MessagingProfile::class, $resource);
     }
 
+    /*
     public function testPhoneNumbers()
     {
         $messaging_profile = MessagingProfile::retrieve(self::TEST_RESOURCE_ID);
@@ -77,6 +78,7 @@ final class MessagingProfileTest extends \Telnyx\TestCase
         $this->assertInstanceOf(\Telnyx\MessagingProfile::class, $resources);
         $this->assertInstanceOf(\Telnyx\MessagingPhoneNumber::class, $resources['data'][0]);
     }
+    */
 
     public function testShortCodes()
     {
