@@ -21,8 +21,7 @@ class Address extends ApiResource
      */
     public static function classUrl()
     {
-        // Replace dots with slashes for namespaced resources, e.g. if the object's name is
-        // "foo.bar", then its URL will be "/v2/foo/bar".
+        // Use a custom URL for this resource
         // NOTE: This endpoint is special because object name is "address" and endpoint is "addresses"
         return "/v2/addresses";
     }
