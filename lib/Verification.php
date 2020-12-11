@@ -3,29 +3,19 @@
 namespace Telnyx;
 
 /**
- * Class TwoFactorProfile
+ * Class Verification
  *
  * @package Telnyx
  */
-class TwoFactorVerify extends ApiResource
+class Verification extends ApiResource
 {
-    const OBJECT_NAME = "twofa_verification";
+    const OBJECT_NAME = "verification";
 
     use ApiOperations\Create;
     use ApiOperations\Retrieve;
 
     /**
-     * @return string The endpoint associated with this singleton class.
-     */
-    public static function classUrl()
-    {
-        // Use a custom URL for this resource
-        // NOTE: This endpoint is special because object name is "twofa_verification" and endpoint is "2fa_verifications"
-        return "/v2/2fa_verifications";
-    }
-
-    /**
-     * Retrieve a 2FA verification by phone number.
+     * Retrieve a verification by phone number
      *
      * @param string $phone_number
      * @param array|string|null $options
@@ -34,7 +24,7 @@ class TwoFactorVerify extends ApiResource
      */
     public static function retrieve_by_phone_number($phone_number, $options = null)
     {
-        $url = '/v2/2fa_verifications/by_tn/' . urlencode($phone_number);
+        $url = '/v2/verifications/by_phone_number/' . urlencode($phone_number);
 
         list($response, $opts) = static::_staticRequest('get', $url, null, $options);
         $obj = \Telnyx\Util\Util::convertToTelnyxObject($response->json, $opts);
@@ -42,7 +32,7 @@ class TwoFactorVerify extends ApiResource
     }
 
     /**
-     * Submit a 2FA verification code
+     * Submit a verification code
      *
      * @param string $phone_number
      * @param string $verification_code
@@ -54,7 +44,7 @@ class TwoFactorVerify extends ApiResource
     {
         $params = ['code' => $verification_code];
         self::_validateParams($params);
-        $url = '/v2/2fa_verifications/by_tn/' . urlencode($phone_number) . '/actions/verify';
+        $url = '/v2/verifications/by_phone_number/' . urlencode($phone_number) . '/actions/verify';
 
         list($response, $opts) = static::_staticRequest('post', $url, $params, $options);
         $obj = \Telnyx\Util\Util::convertToTelnyxObject($response->json, $opts);

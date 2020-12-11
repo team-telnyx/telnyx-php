@@ -42,6 +42,9 @@ class ObjectTypes
         \Telnyx\OtaUpdate::OBJECT_NAME => \Telnyx\OtaUpdate::class,
         \Telnyx\MobileOperatorNetwork::OBJECT_NAME => \Telnyx\MobileOperatorNetwork::class,
         \Telnyx\Balance::OBJECT_NAME => \Telnyx\Balance::class,
+        \Telnyx\VerifyProfile::OBJECT_NAME => \Telnyx\VerifyProfile::class,
+        \Telnyx\Verification::OBJECT_NAME => \Telnyx\Verification::class,
+        \Telnyx\VerifyVerification::OBJECT_NAME => \Telnyx\VerifyVerification::class,
 
         // Telnyx API: Connections
         \Telnyx\Connection::OBJECT_NAME => \Telnyx\Connection::class,

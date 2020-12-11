@@ -27,7 +27,14 @@ final class AddressTest extends \Telnyx\TestCase
             'post',
             '/v2/addresses'
         );
-        $resource = Address::create(['administrative_area'=>'IL']);
+        $resource = Address::create([
+            "first_name" => "Alfred",
+            "last_name" => "Foster",
+            "business_name" => "Company",
+            "country_code" => "US",
+            "locality" => "Chicago",
+            "street_address" => "311 W Superior Street"
+        ]);
         $this->assertInstanceOf(\Telnyx\Address::class, $resource);
     }
 
