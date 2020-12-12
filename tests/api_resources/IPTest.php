@@ -33,12 +33,11 @@ final class IPTest extends \Telnyx\TestCase
 
     public function testIsDeletable()
     {
-        $resource = IP::retrieve(self::TEST_RESOURCE_ID);
         $this->expectsRequest(
             'delete',
             '/v2/ips/' . urlencode(self::TEST_RESOURCE_ID)
         );
-        $resource->delete();
+        $resource = IP::delete(self::TEST_RESOURCE_ID);
         $this->assertInstanceOf(\Telnyx\IP::class, $resource);
     }
 

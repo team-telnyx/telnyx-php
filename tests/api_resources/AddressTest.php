@@ -40,12 +40,11 @@ final class AddressTest extends \Telnyx\TestCase
 
     public function testIsDeletable()
     {
-        $resource = Address::retrieve(self::TEST_RESOURCE_ID);
         $this->expectsRequest(
             'delete',
             '/v2/addresses/' . urlencode(self::TEST_RESOURCE_ID)
         );
-        $resource->delete();
+        $resource = Address::delete(self::TEST_RESOURCE_ID);
         $this->assertInstanceOf(\Telnyx\Address::class, $resource);
     }
 

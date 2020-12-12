@@ -36,12 +36,11 @@ final class CallControlApplicationTest extends \Telnyx\TestCase
 
     public function testIsDeletable()
     {
-        $resource = CallControlApplication::retrieve(self::TEST_RESOURCE_ID);
         $this->expectsRequest(
             'delete',
             '/v2/call_control_applications/' . urlencode(self::TEST_RESOURCE_ID)
         );
-        $resource->delete();
+        $resource = CallControlApplication::delete(self::TEST_RESOURCE_ID);
         $this->assertInstanceOf(\Telnyx\CallControlApplication::class, $resource);
     }
 

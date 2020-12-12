@@ -23,12 +23,11 @@ final class PhoneNumberTest extends \Telnyx\TestCase
 
     public function testIsDeletable()
     {
-        $resource = PhoneNumber::retrieve(self::TEST_RESOURCE_ID);
         $this->expectsRequest(
             'delete',
             '/v2/phone_numbers/' . urlencode(self::TEST_RESOURCE_ID)
         );
-        $resource->delete();
+        $resource = PhoneNumber::delete(self::TEST_RESOURCE_ID);
         $this->assertInstanceOf(\Telnyx\PhoneNumber::class, $resource);
     }
 

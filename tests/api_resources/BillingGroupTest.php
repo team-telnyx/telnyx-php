@@ -33,12 +33,11 @@ final class BillingGroupTest extends \Telnyx\TestCase
 
     public function testIsDeletable()
     {
-        $resource = BillingGroup::retrieve(self::TEST_RESOURCE_ID);
         $this->expectsRequest(
             'delete',
             '/v2/billing_groups/' . urlencode(self::TEST_RESOURCE_ID)
         );
-        $resource->delete();
+        $resource = BillingGroup::delete(self::TEST_RESOURCE_ID);
         $this->assertInstanceOf(\Telnyx\BillingGroup::class, $resource);
     }
 

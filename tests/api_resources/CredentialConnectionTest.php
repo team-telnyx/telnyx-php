@@ -33,12 +33,11 @@ final class CredentialConnectionTest extends \Telnyx\TestCase
 
     public function testIsDeletable()
     {
-        $resource = CredentialConnection::retrieve(self::TEST_RESOURCE_ID);
         $this->expectsRequest(
             'delete',
             '/v2/credential_connections/' . urlencode(self::TEST_RESOURCE_ID)
         );
-        $resource->delete();
+        $resource = CredentialConnection::delete(self::TEST_RESOURCE_ID);
         $this->assertInstanceOf(\Telnyx\CredentialConnection::class, $resource);
     }
 

@@ -27,20 +27,4 @@ trait Update
         $obj->setLastResponse($response);
         return $obj;
     }
-
-    /**
-     * @param array|string|null $opts
-     *
-     * @return \Telnyx\ApiResource The saved resource.
-     */
-    public function save($opts = null)
-    {
-        $params = $this->serializeParameters();
-        if (count($params) > 0) {
-            $url = $this->instanceUrl();
-            list($response, $opts) = $this->_request('patch', $url, $params, $opts);
-            $this->refreshFrom($response, $opts);
-        }
-        return $this;
-    }
 }

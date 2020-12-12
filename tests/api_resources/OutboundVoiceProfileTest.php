@@ -33,12 +33,11 @@ final class OutboundVoiceProfileTest extends \Telnyx\TestCase
 
     public function testIsDeletable()
     {
-        $resource = OutboundVoiceProfile::retrieve(self::TEST_RESOURCE_ID);
         $this->expectsRequest(
             'delete',
             '/v2/outbound_voice_profiles/' . urlencode(self::TEST_RESOURCE_ID)
         );
-        $resource->delete();
+        $resource = OutboundVoiceProfile::delete(self::TEST_RESOURCE_ID);
         $this->assertInstanceOf(\Telnyx\OutboundVoiceProfile::class, $resource);
     }
 

@@ -20,8 +20,7 @@ final class DeleteTest extends \Telnyx\TestCase
 
     public function testTraitDelete()
     {
-        $class = new DummyDelete(self::TEST_RESOURCE_ID);
-        $result = $class->delete();
+        $result = DummyDelete::delete(self::TEST_RESOURCE_ID);
         $this->assertInstanceOf(\Telnyx\TelnyxObject::class, $result);
     }
 }
