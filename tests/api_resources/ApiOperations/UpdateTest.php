@@ -25,4 +25,13 @@ final class UpdateTest extends \Telnyx\TestCase
         $this->assertNotNull($result['connection_id']);
         $this->assertNotNull($result['id']);
     }
+
+    public function testTraitSave()
+    {
+        $class = new DummyUpdate(self::TEST_RESOURCE_ID);
+        $class->customer_reference = 'MY REF 001';
+        $result = $class->save();
+        $this->assertNotNull($result['connection_id']);
+        $this->assertNotNull($result['id']);
+    }
 }

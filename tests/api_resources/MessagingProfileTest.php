@@ -57,14 +57,16 @@ final class MessagingProfileTest extends \Telnyx\TestCase
 
     public function testIsDeletable()
     {
+        $resource = MessagingProfile::retrieve(self::TEST_RESOURCE_ID);
         $this->expectsRequest(
             'delete',
             '/v2/messaging_profiles/' . urlencode(self::TEST_RESOURCE_ID)
         );
-        $resource = MessagingProfile::delete(self::TEST_RESOURCE_ID);
+        $resource->delete();
         $this->assertInstanceOf(\Telnyx\MessagingProfile::class, $resource);
     }
 
+    /*
     public function testPhoneNumbers()
     {
         $messaging_profile = MessagingProfile::retrieve(self::TEST_RESOURCE_ID);
@@ -74,8 +76,9 @@ final class MessagingProfileTest extends \Telnyx\TestCase
         );
         $resources = $messaging_profile->phone_numbers();
         $this->assertInstanceOf(\Telnyx\MessagingProfile::class, $resources);
-        $this->assertInstanceOf(\Telnyx\PhoneNumber\Messaging::class, $resources['data'][0]);
+        $this->assertInstanceOf(\Telnyx\MessagingPhoneNumber::class, $resources['data'][0]);
     }
+    */
 
     public function testShortCodes()
     {

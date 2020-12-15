@@ -46,11 +46,12 @@ final class VerifyProfileTest extends \Telnyx\TestCase
 
     public function testIsDeletable()
     {
+        $resource = VerifyProfile::retrieve(self::TEST_RESOURCE_ID);
         $this->expectsRequest(
             'delete',
             '/v2/verify_profiles/' . urlencode(self::TEST_RESOURCE_ID)
         );
-        $resource = VerifyProfile::delete(self::TEST_RESOURCE_ID);
+        $resource->delete();
         $this->assertInstanceOf(\Telnyx\VerifyProfile::class, $resource);
     }
 

@@ -33,11 +33,12 @@ final class FQDNConnectionTest extends \Telnyx\TestCase
 
     public function testIsDeletable()
     {
+        $resource = FQDNConnection::retrieve(self::TEST_RESOURCE_ID);
         $this->expectsRequest(
             'delete',
             '/v2/fqdn_connections/' . urlencode(self::TEST_RESOURCE_ID)
         );
-        $resource = FQDNConnection::delete(self::TEST_RESOURCE_ID);
+        $resource->delete();
         $this->assertInstanceOf(\Telnyx\FQDNConnection::class, $resource);
     }
 
