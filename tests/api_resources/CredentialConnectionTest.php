@@ -27,7 +27,12 @@ final class CredentialConnectionTest extends \Telnyx\TestCase
             'post',
             '/v2/credential_connections'
         );
-        $resource = CredentialConnection::create(["connection_name" => "Test Connection"]);
+        $resource = CredentialConnection::create([
+            'user_name' => 'test_user',
+            'password' => 'iloveyou',
+            'connection_name' => 'Test Connection',
+            "anchorsite_override" => "Latency"
+        ]);
         $this->assertInstanceOf(\Telnyx\CredentialConnection::class, $resource);
     }
 

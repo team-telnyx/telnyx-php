@@ -82,6 +82,9 @@ require __DIR__ . '/lib/Portout.php';
 require __DIR__ . '/lib/OtaUpdate.php';
 require __DIR__ . '/lib/MobileOperatorNetwork.php';
 require __DIR__ . '/lib/Balance.php';
+require __DIR__ . '/lib/VerifyProfile.php';
+require __DIR__ . '/lib/Verification.php';
+require __DIR__ . '/lib/VerifyVerification.php';
 
 // Telnyx API: Connections
 require __DIR__ . '/lib/Connection.php';

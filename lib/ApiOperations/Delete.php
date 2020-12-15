@@ -24,4 +24,24 @@ trait Delete
         $this->refreshFrom($response, $opts);
         return $this;
     }
+    
+    /**
+     * @param string $id The ID of the resource to delete.
+     * @param array|null $params
+     * @param array|string|null $opts
+     *
+     * @return \Telnyx\ApiResource The updated resource.
+     */
+    public static function remove($id, $params = null, $opts = null)
+    {
+        self::_validateParams($params);
+
+        $url = static::resourceUrl($id);
+
+        list($response, $opts) = static::_staticRequest('delete', $url, $params, $opts);
+        $obj = \Telnyx\Util\Util::convertToTelnyxObject($response->json, $opts);
+        $obj->setLastResponse($response);
+
+        return $obj;
+    }
 }
