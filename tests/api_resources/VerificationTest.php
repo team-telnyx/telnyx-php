@@ -23,7 +23,7 @@ final class VerificationTest extends \Telnyx\TestCase
             "phone_number" => self::TEST_PHONE_NUMBER,
             "type" => "sms"
         ]);
-        $this->assertInstanceOf(\Telnyx\VerifyVerification::class, $resource);
+        $this->assertInstanceOf(\Telnyx\Verification::class, $resource);
     }
 
     public function testIsRetrievable()
@@ -44,7 +44,7 @@ final class VerificationTest extends \Telnyx\TestCase
         );
         $resource = Verification::retrieve_by_phone_number(self::TEST_PHONE_NUMBER);
         $this->assertInstanceOf(\Telnyx\Collection::class, $resource);
-        $this->assertInstanceOf(\Telnyx\VerifyVerification::class, $resource['data'][0]);
+        $this->assertInstanceOf(\Telnyx\Verification::class, $resource['data'][0]);
     }
 
     public function testSubmitVerification()

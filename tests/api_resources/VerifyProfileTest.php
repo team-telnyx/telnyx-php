@@ -55,7 +55,6 @@ final class VerifyProfileTest extends \Telnyx\TestCase
         $this->assertInstanceOf(\Telnyx\VerifyProfile::class, $resource);
     }
 
-    /*
     public function testIsUpdatable()
     {
         $this->expectsRequest(
@@ -63,11 +62,10 @@ final class VerifyProfileTest extends \Telnyx\TestCase
             '/v2/verify_profiles/' . urlencode(self::TEST_RESOURCE_ID)
         );
 
-        VerifyProfile::update(self::TEST_RESOURCE_ID, [
+        $resource = VerifyProfile::update(self::TEST_RESOURCE_ID, [
             "name" => "Test Profile",
             "default_timeout_secs" => 300
         ]);
         $this->assertInstanceOf(\Telnyx\VerifyProfile::class, $resource);
     }
-    */
 }
