@@ -27,7 +27,11 @@ final class FQDNTest extends \Telnyx\TestCase
             'post',
             '/v2/fqdns'
         );
-        $resource = FQDN::create(["fqdn" => "example.com"]);
+        $resource = FQDN::create([
+            "fqdn" => "example.com",
+            "dns_record_type" => "a",
+            "connection_id" => "935728936"
+        ]);
         $this->assertInstanceOf(\Telnyx\FQDN::class, $resource);
     }
 
