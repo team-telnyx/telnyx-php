@@ -1,6 +1,6 @@
 # Telnyx PHP SDK
 
-[![Build Status](https://travis-ci.org/team-telnyx/telnyx-php.svg?branch=master)](https://travis-ci.org/team-telnyx/telnyx-php)
+[![Build Status](https://github.com/team-telnyx/telnyx-php/workflows/Composer/badge.svg)](https://github.com/team-telnyx/telnyx-php/actions)
 [![Latest Stable Version](https://poser.pugx.org/telnyx/telnyx-php/v/stable.svg)](https://packagist.org/packages/telnyx/telnyx-php)
 [![Total Downloads](https://poser.pugx.org/telnyx/telnyx-php/downloads.svg)](https://packagist.org/packages/telnyx/telnyx-php)
 [![License](https://poser.pugx.org/telnyx/telnyx-php/license.svg)](https://packagist.org/packages/telnyx/telnyx-php)
@@ -169,7 +169,7 @@ an intermittent network problem:
 
 ## Development
 
-Unit tests rely on a mock server so all unit tests are ran through 
+Unit tests rely on a mock server so all unit tests are ran through
 docker.  To run all unit tests execute:
 
 ```
@@ -183,7 +183,7 @@ container with XDEBUG=1
 docker-compose build --build-arg XDEBUG=1
 ```
 
-then run the unit tests as 
+then run the unit tests as
 
 ```
 docker-compose run --rm php composer test-coverage
@@ -203,16 +203,16 @@ The method should be called once before any request is sent to the API. The seco
 
 ## SSL / TLS Configuration Option
 
-See the "SSL / TLS compatibility issues" paragraph above for full context. If you want to 
-ensure that your plugin can be used on all systems, you should add a configuration option 
-to let your users choose between different values for 
+See the "SSL / TLS compatibility issues" paragraph above for full context. If you want to
+ensure that your plugin can be used on all systems, you should add a configuration option
+to let your users choose between different values for
 `CURLOPT_SSLVERSION`: none (default), `CURL_SSLVERSION_TLSv1` and `CURL_SSLVERSION_TLSv1_2`.
 
 
 ## Acknowledgments
 
-The contributors and maintainers of Telnyx PHP would like to extend their deep gratitude 
-to the authors of [Stripe PHP][stripe-php], upon which this project is based. Thank you 
+The contributors and maintainers of Telnyx PHP would like to extend their deep gratitude
+to the authors of [Stripe PHP][stripe-php], upon which this project is based. Thank you
 for developing such elegant, usable, and extensible code and for sharing it with the community.
 
 [stripe-php]: https://github.com/stripe/stripe-php
