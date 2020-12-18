@@ -1,6 +1,6 @@
 # Telnyx PHP SDK
 
-[![Build Status](https://github.com/team-telnyx/telnyx-python/workflows/Python/badge.svg)](https://github.com/team-telnyx/telnyx-php/actions)
+[![Build Status](https://github.com/team-telnyx/telnyx-php/workflows/Composer/badge.svg)](https://github.com/team-telnyx/telnyx-php/actions)
 [![Latest Stable Version](https://poser.pugx.org/telnyx/telnyx-php/v/stable.svg)](https://packagist.org/packages/telnyx/telnyx-php)
 [![Total Downloads](https://poser.pugx.org/telnyx/telnyx-php/downloads.svg)](https://packagist.org/packages/telnyx/telnyx-php)
 [![License](https://poser.pugx.org/telnyx/telnyx-php/license.svg)](https://packagist.org/packages/telnyx/telnyx-php)
