@@ -14,13 +14,14 @@ jobs:
       TELNYX_MOCK_HOST: localhost
       COMPOSER_ARGS: --no-interaction
     runs-on: ubuntu-latest
-    with:
-      php-version: '7.4'
+
     steps:
     - uses: actions/checkout@v2
 
     - name: Validate composer.json and composer.lock
       run: composer validate
+      with:
+        php-version: '7.4'
     - name: setup-telnyx-mock
       run: source ./.github/scripts/before_install.sh
     - name: Cache Composer packages
@@ -31,9 +32,13 @@ jobs:
         key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
         restore-keys: |
           ${{ runner.os }}-php-
-
+        php-version: '7.4'
     - name: Install dependencies
       if: steps.composer-cache.outputs.cache-hit != 'true'
       run: composer install --prefer-dist --no-progress --no-suggest
+      with:
+        php-version: '7.4'
     - name: Run test suite
       run: composer test
+      with:
+        php-version: '7.4'
