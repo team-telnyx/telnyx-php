@@ -7,7 +7,7 @@ abstract class Webhook
     const DEFAULT_TOLERANCE = 300;
 
     /**
-     * Alias for constructEvent(). 
+     * Alias for constructEvent().
      * Returns an Event instance using the current HTTPS request. Throws an
      * Exception\UnexpectedValueException if the payload is not valid JSON, and
      * an Exception\SignatureVerificationException if the signature
@@ -35,8 +35,8 @@ abstract class Webhook
         $timestamp_header = $_SERVER['HTTP_TELNYX_TIMESTAMP'];
 
         return \Telnyx\Webhook::constructEvent(
-            $payload, $sig_header, $timestamp_header, $public_key
-        );        
+            $payload, $sig_header, $timestamp_header, $public_key, $tolerance
+        );
     }
 
     /**
