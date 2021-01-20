@@ -6,6 +6,7 @@
 [![License](https://poser.pugx.org/telnyx/telnyx-php/license.svg)](https://packagist.org/packages/telnyx/telnyx-php)
 [![Code Coverage](https://coveralls.io/repos/github/team-telnyx/telnyx-php/badge.svg?branch=master&)](https://coveralls.io/github/team-telnyx/telnyx-php?branch=master&)
 [![Join Slack](https://img.shields.io/badge/join-slack-infomational)](https://joinslack.telnyx.com/)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fteam-telnyx%2Ftelnyx-php.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fteam-telnyx%2Ftelnyx-php?ref=badge_shield)
 
 The Telnyx PHP library provides convenient access to the Telnyx API from
 applications written in PHP. It includes a pre-defined set of
@@ -220,3 +221,7 @@ for developing such elegant, usable, and extensible code and for sharing it with
 [curl]: http://curl.haxx.se/docs/caextract.html
 [psr3]: http://www.php-fig.org/psr/psr-3/
 
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fteam-telnyx%2Ftelnyx-php.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fteam-telnyx%2Ftelnyx-php?ref=badge_large)
