@@ -94,6 +94,7 @@ require __DIR__ . '/lib/IP.php';
 require __DIR__ . '/lib/FQDNConnection.php';
 require __DIR__ . '/lib/FQDN.php';
 require __DIR__ . '/lib/Fax.php';
+require __DIR__ . '/lib/FaxApplication.php';
 
 // Webhooks
 require __DIR__ . '/lib/Webhook.php';

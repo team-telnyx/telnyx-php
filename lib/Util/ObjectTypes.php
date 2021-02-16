@@ -54,5 +54,6 @@ class ObjectTypes
         \Telnyx\FQDNConnection::OBJECT_NAME => \Telnyx\FQDNConnection::class,
         \Telnyx\FQDN::OBJECT_NAME => \Telnyx\FQDN::class,
         \Telnyx\Fax::OBJECT_NAME => \Telnyx\Fax::class,
+        \Telnyx\FaxApplication::OBJECT_NAME => \Telnyx\FaxApplication::class,
     ];
 }
