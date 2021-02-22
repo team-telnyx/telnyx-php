@@ -32,6 +32,7 @@ class ObjectTypes
         \Telnyx\AlphanumericSenderID::OBJECT_NAME => \Telnyx\AlphanumericSenderID::class,
         \Telnyx\ShortCode::OBJECT_NAME => \Telnyx\ShortCode::class,
         \Telnyx\OutboundVoiceProfile::OBJECT_NAME => \Telnyx\OutboundVoiceProfile::class,
+        \Telnyx\MessagingHostedNumberOrder::OBJECT_NAME => \Telnyx\MessagingHostedNumberOrder::class,
 
         // Telnyx API: Misc
         \Telnyx\Address::OBJECT_NAME => \Telnyx\Address::class,

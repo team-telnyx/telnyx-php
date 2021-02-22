@@ -72,6 +72,7 @@ require __DIR__ . '/lib/MessagingPhoneNumber.php';
 require __DIR__ . '/lib/AlphanumericSenderID.php';
 require __DIR__ . '/lib/ShortCode.php';
 require __DIR__ . '/lib/OutboundVoiceProfile.php';
+require __DIR__ . '/lib/MessagingHostedNumberOrder.php';
 
 // Telnyx API: Misc
 require __DIR__ . '/lib/Address.php';
