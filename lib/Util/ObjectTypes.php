@@ -32,6 +32,7 @@ class ObjectTypes
         \Telnyx\AlphanumericSenderID::OBJECT_NAME => \Telnyx\AlphanumericSenderID::class,
         \Telnyx\ShortCode::OBJECT_NAME => \Telnyx\ShortCode::class,
         \Telnyx\OutboundVoiceProfile::OBJECT_NAME => \Telnyx\OutboundVoiceProfile::class,
+        \Telnyx\MessagingHostedNumberOrder::OBJECT_NAME => \Telnyx\MessagingHostedNumberOrder::class,
 
         // Telnyx API: Misc
         \Telnyx\Address::OBJECT_NAME => \Telnyx\Address::class,
@@ -54,5 +55,6 @@ class ObjectTypes
         \Telnyx\FQDNConnection::OBJECT_NAME => \Telnyx\FQDNConnection::class,
         \Telnyx\FQDN::OBJECT_NAME => \Telnyx\FQDN::class,
         \Telnyx\Fax::OBJECT_NAME => \Telnyx\Fax::class,
+        \Telnyx\FaxApplication::OBJECT_NAME => \Telnyx\FaxApplication::class,
     ];
 }

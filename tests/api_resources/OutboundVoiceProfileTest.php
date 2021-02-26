@@ -27,7 +27,7 @@ final class OutboundVoiceProfileTest extends \Telnyx\TestCase
             'post',
             '/v2/outbound_voice_profiles'
         );
-        $resource = OutboundVoiceProfile::create(["daily_spend_limit" => "1", "name" => "name"]);
+        $resource = OutboundVoiceProfile::create(["name" => "office"]);
         $this->assertInstanceOf(\Telnyx\OutboundVoiceProfile::class, $resource);
     }
 
@@ -59,8 +59,7 @@ final class OutboundVoiceProfileTest extends \Telnyx\TestCase
             '/v2/outbound_voice_profiles/' . urlencode(self::TEST_RESOURCE_ID)
         );
         $resource = OutboundVoiceProfile::update(self::TEST_RESOURCE_ID, [
-            "daily_spend_limit" => "1",
-            "name" => "name"
+            "name" => "office"
         ]);
         $this->assertInstanceOf(\Telnyx\OutboundVoiceProfile::class, $resource);
     }
