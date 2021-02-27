@@ -10,7 +10,6 @@ final class CallTest extends \Telnyx\TestCase
 {
     const CALL_CONTROL_ID = '428c31b6-7af4-4bcb-b7f5-5013ef9657c1';
 
-    /*
     public function testIsCreatable()
     {
         $this->expectsRequest(
@@ -24,7 +23,6 @@ final class CallTest extends \Telnyx\TestCase
         ]);
         $this->assertInstanceOf(\Telnyx\Call::class, $resource);
     }
-    */
 
     public function testIsRetrievable()
     {
