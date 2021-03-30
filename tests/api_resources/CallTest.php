@@ -42,7 +42,9 @@ final class CallTest extends \Telnyx\TestCase
             'post',
             '/v2/calls/' . urlencode(self::CALL_CONTROL_ID) . '/actions/answer'
         );
-        $resource = $call->answer();
+        $resource = $call->answer([
+            'client_state' => 'aGF2ZSBhIG5pY2UgZGF5ID1d'
+        ]);
         $this->assertInstanceOf(\Telnyx\TelnyxObject::class, $resource);
     }
 
@@ -54,7 +56,9 @@ final class CallTest extends \Telnyx\TestCase
             'post',
             '/v2/calls/' . urlencode(self::CALL_CONTROL_ID) . '/actions/bridge'
         );
-        $resource = $call->bridge();
+        $resource = $call->bridge([
+            'client_state' => 'aGF2ZSBhIG5pY2UgZGF5ID1d'
+        ]);
         $this->assertInstanceOf(\Telnyx\TelnyxObject::class, $resource);
     }
 
@@ -66,7 +70,9 @@ final class CallTest extends \Telnyx\TestCase
             'post',
             '/v2/calls/' . urlencode(self::CALL_CONTROL_ID) . '/actions/fork_start'
         );
-        $resource = $call->fork_start();
+        $resource = $call->fork_start([
+            'client_state' => 'aGF2ZSBhIG5pY2UgZGF5ID1d'
+        ]);
         $this->assertInstanceOf(\Telnyx\TelnyxObject::class, $resource);
     }
 
@@ -78,7 +84,9 @@ final class CallTest extends \Telnyx\TestCase
             'post',
             '/v2/calls/' . urlencode(self::CALL_CONTROL_ID) . '/actions/fork_stop'
         );
-        $resource = $call->fork_stop();
+        $resource = $call->fork_stop([
+            'client_state' => 'aGF2ZSBhIG5pY2UgZGF5ID1d'
+        ]);
         $this->assertInstanceOf(\Telnyx\TelnyxObject::class, $resource);
     }
 
@@ -91,7 +99,7 @@ final class CallTest extends \Telnyx\TestCase
             '/v2/calls/' . urlencode(self::CALL_CONTROL_ID) . '/actions/gather_using_audio'
         );
         $resource = $call->gather_using_audio([
-            "audio_url" => "http://example.com/message.wav"
+            'audio_url' => 'http://example.com/message.wav'
         ]);
         $this->assertInstanceOf(\Telnyx\TelnyxObject::class, $resource);
     }
@@ -105,9 +113,9 @@ final class CallTest extends \Telnyx\TestCase
             '/v2/calls/' . urlencode(self::CALL_CONTROL_ID) . '/actions/gather_using_speak'
         );
         $resource = $call->gather_using_speak([
-            "language" => "en-US",
-            "voice" => "female",
-            "payload" => "Telnyx call control test"
+            'language' => 'en-US',
+            'voice' => 'female',
+            'payload' => 'Telnyx call control test'
         ]);
         $this->assertInstanceOf(\Telnyx\TelnyxObject::class, $resource);
     }
@@ -120,7 +128,9 @@ final class CallTest extends \Telnyx\TestCase
             'post',
             '/v2/calls/' . urlencode(self::CALL_CONTROL_ID) . '/actions/hangup'
         );
-        $resource = $call->hangup();
+        $resource = $call->hangup([
+            'client_state' => 'aGF2ZSBhIG5pY2UgZGF5ID1d'
+        ]);
         $this->assertInstanceOf(\Telnyx\TelnyxObject::class, $resource);
     }
 
@@ -132,7 +142,9 @@ final class CallTest extends \Telnyx\TestCase
             'post',
             '/v2/calls/' . urlencode(self::CALL_CONTROL_ID) . '/actions/playback_start'
         );
-        $resource = $call->playback_start();
+        $resource = $call->playback_start([
+            'audio_url' => 'http://www.example.com/sounds/greeting.wav'
+        ]);
         $this->assertInstanceOf(\Telnyx\TelnyxObject::class, $resource);
     }
 
@@ -144,7 +156,9 @@ final class CallTest extends \Telnyx\TestCase
             'post',
             '/v2/calls/' . urlencode(self::CALL_CONTROL_ID) . '/actions/playback_stop'
         );
-        $resource = $call->playback_stop();
+        $resource = $call->playback_stop([
+            'client_state' => 'aGF2ZSBhIG5pY2UgZGF5ID1d'
+        ]);
         $this->assertInstanceOf(\Telnyx\TelnyxObject::class, $resource);
     }
 
@@ -156,7 +170,10 @@ final class CallTest extends \Telnyx\TestCase
             'post',
             '/v2/calls/' . urlencode(self::CALL_CONTROL_ID) . '/actions/record_start'
         );
-        $resource = $call->record_start();
+        $resource = $call->record_start([
+            'channels' => 'single',
+            'format' => 'mp3'
+        ]);
         $this->assertInstanceOf(\Telnyx\TelnyxObject::class, $resource);
     }
 
@@ -168,7 +185,9 @@ final class CallTest extends \Telnyx\TestCase
             'post',
             '/v2/calls/' . urlencode(self::CALL_CONTROL_ID) . '/actions/record_stop'
         );
-        $resource = $call->record_stop();
+        $resource = $call->record_stop([
+            'client_state' => 'aGF2ZSBhIG5pY2UgZGF5ID1d'
+        ]);
         $this->assertInstanceOf(\Telnyx\TelnyxObject::class, $resource);
     }
 
@@ -180,7 +199,9 @@ final class CallTest extends \Telnyx\TestCase
             'post',
             '/v2/calls/' . urlencode(self::CALL_CONTROL_ID) . '/actions/reject'
         );
-        $resource = $call->reject();
+        $resource = $call->reject([
+            'cause' => 'USER_BUSY'
+        ]);
         $this->assertInstanceOf(\Telnyx\TelnyxObject::class, $resource);
     }
 
@@ -204,7 +225,12 @@ final class CallTest extends \Telnyx\TestCase
             'post',
             '/v2/calls/' . urlencode(self::CALL_CONTROL_ID) . '/actions/speak'
         );
-        $resource = $call->speak(['digits' => '1www2WABCDw9']);
+        $resource = $call->speak([
+            'digits' => '1www2WABCDw9',
+            'language' => 'en-US',
+            'voice' => 'female',
+            'payload' => 'Say this on the call'
+        ]);
         $this->assertInstanceOf(\Telnyx\TelnyxObject::class, $resource);
     }
 
@@ -216,7 +242,9 @@ final class CallTest extends \Telnyx\TestCase
             'post',
             '/v2/calls/' . urlencode(self::CALL_CONTROL_ID) . '/actions/transcription_start'
         );
-        $resource = $call->transcription_start();
+        $resource = $call->transcription_start([
+            'client_state' => 'aGF2ZSBhIG5pY2UgZGF5ID1d'
+        ]);
         $this->assertInstanceOf(\Telnyx\TelnyxObject::class, $resource);
     }
     public function testTranscriptionStop()
@@ -227,7 +255,9 @@ final class CallTest extends \Telnyx\TestCase
             'post',
             '/v2/calls/' . urlencode(self::CALL_CONTROL_ID) . '/actions/transcription_stop'
         );
-        $resource = $call->transcription_stop();
+        $resource = $call->transcription_stop([
+            'client_state' => 'aGF2ZSBhIG5pY2UgZGF5ID1d'
+        ]);
         $this->assertInstanceOf(\Telnyx\TelnyxObject::class, $resource);
     }
     public function testRecordPause()
@@ -238,7 +268,9 @@ final class CallTest extends \Telnyx\TestCase
             'post',
             '/v2/calls/' . urlencode(self::CALL_CONTROL_ID) . '/actions/record_pause'
         );
-        $resource = $call->record_pause();
+        $resource = $call->record_pause([
+            'client_state' => 'aGF2ZSBhIG5pY2UgZGF5ID1d'
+        ]);
         $this->assertInstanceOf(\Telnyx\TelnyxObject::class, $resource);
     }
     public function testRecordResume()
@@ -249,7 +281,9 @@ final class CallTest extends \Telnyx\TestCase
             'post',
             '/v2/calls/' . urlencode(self::CALL_CONTROL_ID) . '/actions/record_resume'
         );
-        $resource = $call->record_resume();
+        $resource = $call->record_resume([
+            'client_state' => 'aGF2ZSBhIG5pY2UgZGF5ID1d'
+        ]);
         $this->assertInstanceOf(\Telnyx\TelnyxObject::class, $resource);
     }
     public function testGatherStop()
@@ -260,7 +294,9 @@ final class CallTest extends \Telnyx\TestCase
             'post',
             '/v2/calls/' . urlencode(self::CALL_CONTROL_ID) . '/actions/gather_stop'
         );
-        $resource = $call->gather_stop();
+        $resource = $call->gather_stop([
+            'client_state' => 'aGF2ZSBhIG5pY2UgZGF5ID1d'
+        ]);
         $this->assertInstanceOf(\Telnyx\TelnyxObject::class, $resource);
     }
     public function testRefer()
@@ -271,7 +307,9 @@ final class CallTest extends \Telnyx\TestCase
             'post',
             '/v2/calls/' . urlencode(self::CALL_CONTROL_ID) . '/actions/refer'
         );
-        $resource = $call->refer();
+        $resource = $call->refer([
+            'sip_address' => 'sip:username@sip.non-telnyx-address.com'
+        ]);
         $this->assertInstanceOf(\Telnyx\TelnyxObject::class, $resource);
     }
 }
