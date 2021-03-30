@@ -57,7 +57,7 @@ final class CallTest extends \Telnyx\TestCase
             '/v2/calls/' . urlencode(self::CALL_CONTROL_ID) . '/actions/bridge'
         );
         $resource = $call->bridge([
-            'client_state' => 'aGF2ZSBhIG5pY2UgZGF5ID1d'
+            'call_control_id' => self::CALL_CONTROL_ID
         ]);
         $this->assertInstanceOf(\Telnyx\TelnyxObject::class, $resource);
     }

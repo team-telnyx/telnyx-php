@@ -70,10 +70,10 @@ class Call extends ApiResource
      *
      * @return
      */
-    public function fork_stop()
+    public function fork_stop($params = null, $options = null)
     {
         $url = $this->instanceUrl() . '/actions/fork_stop';
-        list($response, $opts) = $this->_request('post', $url, null, null);
+        list($response, $opts) = $this->_request('post', $url, $params, $options);
         $this->refreshFrom($response, $opts);
         return $this;
     }
