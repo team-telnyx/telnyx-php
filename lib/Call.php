@@ -22,7 +22,7 @@ class Call extends ApiResource
      * @param array|null $params
      * @param array|string|null $options
      *
-     * @return 
+     * @return
      */
     public function answer($params = null, $options = null)
     {
@@ -38,7 +38,7 @@ class Call extends ApiResource
      * @param array|null $params
      * @param array|string|null $options
      *
-     * @return 
+     * @return
      */
     public function bridge($params = null, $options = null)
     {
@@ -70,10 +70,10 @@ class Call extends ApiResource
      *
      * @return
      */
-    public function fork_stop()
+    public function fork_stop($params = null, $options = null)
     {
         $url = $this->instanceUrl() . '/actions/fork_stop';
-        list($response, $opts) = $this->_request('post', $url, null, null);
+        list($response, $opts) = $this->_request('post', $url, $params, $options);
         $this->refreshFrom($response, $opts);
         return $this;
     }
@@ -129,7 +129,7 @@ class Call extends ApiResource
     }
 
     /**
-     * Play an audio file on the call. If multiple play audio commands are 
+     * Play an audio file on the call. If multiple play audio commands are
      * issued consecutively, the audio files will be placed in a queue awaiting
      * playback.
      *
@@ -212,7 +212,7 @@ class Call extends ApiResource
     }
 
     /**
-     * Sends DTMF tones from this leg. DTMF tones will be heard by the other 
+     * Sends DTMF tones from this leg. DTMF tones will be heard by the other
      * end of the call.
      *
      * @param array|null $params
@@ -229,8 +229,8 @@ class Call extends ApiResource
     }
 
     /**
-     * Convert text to speech and play it back on the call. If multiple speak 
-     * text commands are issued consecutively, the audio files will be placed 
+     * Convert text to speech and play it back on the call. If multiple speak
+     * text commands are issued consecutively, the audio files will be placed
      * in a queue awaiting playback.
      *
      * @param array|null $params
@@ -248,15 +248,15 @@ class Call extends ApiResource
 
     /**
      * Transfer a call to a new destination. If the transfer is unsuccessful,
-     * a call.hangup webhook will be sent indicating that the transfer could 
+     * a call.hangup webhook will be sent indicating that the transfer could
      * not be completed. The original call will remain active and may be issued
-     * additional commands, potentially transfering the call to an alternate 
+     * additional commands, potentially transfering the call to an alternate
      * destination.
      *
      * @param array|null $params
      * @param array|string|null $options
      *
-     * @return 
+     * @return
      */
     public function transfer($params = null, $options = null)
     {
@@ -265,5 +265,105 @@ class Call extends ApiResource
         $this->refreshFrom($response, $opts);
         return $this;
     }
-    
+
+    /**
+     * Start real-time transcription. Transcription will stop on call hang-up,
+     * or can be initiated via the Transcription stop command.
+     *
+     * @param array|null $params
+     * @param array|string|null $options
+     *
+     * @return
+     */
+    public function transcription_start($params = null, $options = null)
+    {
+        $url = $this->instanceUrl() . '/actions/transcription_start';
+        list($response, $opts) = $this->_request('post', $url, $params, $options);
+        $this->refreshFrom($response, $opts);
+        return $this;
+    }
+
+    /**
+     * Stop real-time transcription.
+     *
+     * @param array|null $params
+     * @param array|string|null $options
+     *
+     * @return
+     */
+    public function transcription_stop($params = null, $options = null)
+    {
+        $url = $this->instanceUrl() . '/actions/transcription_stop';
+        list($response, $opts) = $this->_request('post', $url, $params, $options);
+        $this->refreshFrom($response, $opts);
+        return $this;
+    }
+
+    /**
+     * Pause recording the call. Recording can be resumed via Resume recording command.
+     *
+     * @param array|null $params
+     * @param array|string|null $options
+     *
+     * @return
+     */
+    public function record_pause($params = null, $options = null)
+    {
+        $url = $this->instanceUrl() . '/actions/record_pause';
+        list($response, $opts) = $this->_request('post', $url, $params, $options);
+        $this->refreshFrom($response, $opts);
+        return $this;
+    }
+
+    /**
+     * Resume recording the call.
+     *
+     * @param array|null $params
+     * @param array|string|null $options
+     *
+     * @return
+     */
+    public function record_resume($params = null, $options = null)
+    {
+        $url = $this->instanceUrl() . '/actions/record_resume';
+        list($response, $opts) = $this->_request('post', $url, $params, $options);
+        $this->refreshFrom($response, $opts);
+        return $this;
+    }
+
+    /**
+     * Stop current gather.
+     *
+     * @param array|null $params
+     * @param array|string|null $options
+     *
+     * @return
+     */
+    public function gather_stop($params = null, $options = null)
+    {
+        $url = $this->instanceUrl() . '/actions/gather_stop';
+        list($response, $opts) = $this->_request('post', $url, $params, $options);
+        $this->refreshFrom($response, $opts);
+        return $this;
+    }
+
+    /**
+     * SIP Refer a call
+     *
+     * Initiate a SIP Refer on a Call Control call. You can initiate a SIP Refer
+     * at any point in the duration of a call.
+     *
+     * @param array|null $params
+     * @param array|string|null $options
+     *
+     * @return
+     */
+    public function refer($params = null, $options = null)
+    {
+        $url = $this->instanceUrl() . '/actions/refer';
+        list($response, $opts) = $this->_request('post', $url, $params, $options);
+        $this->refreshFrom($response, $opts);
+        return $this;
+    }
+
 }
