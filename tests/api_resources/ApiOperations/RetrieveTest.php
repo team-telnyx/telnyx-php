@@ -31,7 +31,6 @@ final class RetrieveTest extends \Telnyx\TestCase
         $this->assertInstanceOf(\Telnyx\TelnyxObject::class, $result);
         $this->assertNotNull($result['id']);
     }
-    /*
     public function testTraitWithId()
     {
         $result = DummyRetrieveWithId::retrieve(self::TEST_RESOURCE_ID);
@@ -39,5 +38,4 @@ final class RetrieveTest extends \Telnyx\TestCase
         $this->assertNotNull($result['id']);
         $this->assertNotNull($result['call_control_id']);
     }
-    */
 }

@@ -31,7 +31,6 @@ final class PortoutTest extends \Telnyx\TestCase
         $this->assertInstanceOf(\Telnyx\Portout::class, $resource);
     }
 
-    /*
     public function testUpdateStatus()
     {
         $portout_status = 'authorized';
@@ -43,7 +42,6 @@ final class PortoutTest extends \Telnyx\TestCase
         $resources = $portout->update_status($portout_status);
         $this->assertInstanceOf(\Telnyx\Portout::class, $resources);
     }
-    */
 
     public function testListComments()
     {

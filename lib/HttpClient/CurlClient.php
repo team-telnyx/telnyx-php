@@ -193,6 +193,16 @@ class CurlClient implements ClientInterface
 
     // END OF USER DEFINED TIMEOUTS
 
+    // Simple workaround for mock quirks. Forces json_encode to return {} instead of [] for empty objects.
+    private function json_encode_params($params) {
+        if (is_array($params) && count($params) == 0) {
+            return '{}';
+        }
+        else {
+            return json_encode($params);
+        }
+    }
+
     public function request($method, $absUrl, $headers, $params, $hasFile)
     {
         $method = \strtolower($method);
@@ -222,13 +232,13 @@ class CurlClient implements ClientInterface
             }
         } elseif ($method == 'post') {
             $opts[CURLOPT_POST] = 1;
-            $opts[CURLOPT_POSTFIELDS] = $hasFile ? $params : json_encode($params);
+            $opts[CURLOPT_POSTFIELDS] = $hasFile ? $params : $this->json_encode_params($params);
         } elseif ($method == 'patch') {
             $opts[CURLOPT_CUSTOMREQUEST] = 'PATCH';
-            $opts[CURLOPT_POSTFIELDS] = $hasFile ? $params : json_encode($params);
+            $opts[CURLOPT_POSTFIELDS] = $hasFile ? $params : $this->json_encode_params($params);
         } elseif ($method == 'put') {
             $opts[CURLOPT_CUSTOMREQUEST] = 'PUT';
-            $opts[CURLOPT_POSTFIELDS] = $hasFile ? $params : json_encode($params);
+            $opts[CURLOPT_POSTFIELDS] = $hasFile ? $params : $this->json_encode_params($params);
         } elseif ($method == 'delete') {
             $opts[\CURLOPT_CUSTOMREQUEST] = 'DELETE';
             if (\count($params) > 0) {
