@@ -116,7 +116,6 @@ final class ConferenceTest extends \Telnyx\TestCase
         $this->assertInstanceOf(\Telnyx\TelnyxObject::class, $resource);
     }
     
-    /*
     public function testParticipants()
     {
         $conference = Conference::retrieve(self::TEST_RESOURCE_ID);
@@ -126,10 +125,10 @@ final class ConferenceTest extends \Telnyx\TestCase
             '/v2/conferences/' . urlencode(self::TEST_RESOURCE_ID) . '/participants'
         );
         $resources = $conference->participants();
-        $this->assertInstanceOf(\Telnyx\Collection::class, $resources);
-        $this->assertInstanceOf(\Telnyx\Conference::class, $resources['data'][0]);
+        $this->assertInstanceOf(\Telnyx\Conference::class, $resources);
     }
 
+    /*
     public function testDialParticipant()
     {
         $conference = Conference::retrieve(self::TEST_RESOURCE_ID);

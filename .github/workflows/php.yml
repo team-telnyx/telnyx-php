@@ -9,7 +9,7 @@ on:
 jobs:
   build:
     env:
-      TELNYX_MOCK_VERSION: 0.8.10
+      TELNYX_MOCK_VERSION: 0.8.12
       TELNYX_MOCK_PORT: 12111
       TELNYX_MOCK_HOST: localhost
       COMPOSER_ARGS: --no-interaction

@@ -10,7 +10,6 @@ final class FaxTest extends \Telnyx\TestCase
 {
     const TEST_RESOURCE_ID = '123';
 
-    /*
     public function testIsListable()
     {
         $this->expectsRequest(
@@ -21,7 +20,6 @@ final class FaxTest extends \Telnyx\TestCase
         $this->assertInstanceOf(\Telnyx\Collection::class, $resources);
         $this->assertInstanceOf(\Telnyx\Fax::class, $resources['data'][0]);
     }
-    */
 
     public function testIsCreatable()
     {
