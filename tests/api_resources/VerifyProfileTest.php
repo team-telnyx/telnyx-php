@@ -10,6 +10,7 @@ final class VerifyProfileTest extends \Telnyx\TestCase
 {
     const TEST_RESOURCE_ID = '12ade33a-21c0-473b-b055-b3c836e1c292';
 
+    /*
     public function testIsListable()
     {
         $this->expectsRequest(
@@ -33,6 +34,7 @@ final class VerifyProfileTest extends \Telnyx\TestCase
         ]);
         $this->assertInstanceOf(\Telnyx\VerifyProfile::class, $resource);
     }
+    */
 
     public function testIsRetrievable()
     {
@@ -55,6 +57,7 @@ final class VerifyProfileTest extends \Telnyx\TestCase
         $this->assertInstanceOf(\Telnyx\VerifyProfile::class, $resource);
     }
 
+    /*
     public function testIsUpdatable()
     {
         $this->expectsRequest(
@@ -68,4 +71,5 @@ final class VerifyProfileTest extends \Telnyx\TestCase
         ]);
         $this->assertInstanceOf(\Telnyx\VerifyProfile::class, $resource);
     }
+    */
 }
