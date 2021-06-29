@@ -247,6 +247,7 @@ final class CallTest extends \Telnyx\TestCase
         ]);
         $this->assertInstanceOf(\Telnyx\TelnyxObject::class, $resource);
     }
+
     public function testTranscriptionStop()
     {
         $call = new Call(self::CALL_CONTROL_ID);
@@ -260,6 +261,7 @@ final class CallTest extends \Telnyx\TestCase
         ]);
         $this->assertInstanceOf(\Telnyx\TelnyxObject::class, $resource);
     }
+
     public function testRecordPause()
     {
         $call = new Call(self::CALL_CONTROL_ID);
@@ -273,6 +275,7 @@ final class CallTest extends \Telnyx\TestCase
         ]);
         $this->assertInstanceOf(\Telnyx\TelnyxObject::class, $resource);
     }
+
     public function testRecordResume()
     {
         $call = new Call(self::CALL_CONTROL_ID);
@@ -286,6 +289,7 @@ final class CallTest extends \Telnyx\TestCase
         ]);
         $this->assertInstanceOf(\Telnyx\TelnyxObject::class, $resource);
     }
+
     public function testGatherStop()
     {
         $call = new Call(self::CALL_CONTROL_ID);
@@ -299,6 +303,7 @@ final class CallTest extends \Telnyx\TestCase
         ]);
         $this->assertInstanceOf(\Telnyx\TelnyxObject::class, $resource);
     }
+
     public function testRefer()
     {
         $call = new Call(self::CALL_CONTROL_ID);
@@ -309,6 +314,36 @@ final class CallTest extends \Telnyx\TestCase
         );
         $resource = $call->refer([
             'sip_address' => 'sip:username@sip.non-telnyx-address.com'
+        ]);
+        $this->assertInstanceOf(\Telnyx\TelnyxObject::class, $resource);
+    }
+
+    public function testEnqueue()
+    {
+        $call = new Call(self::CALL_CONTROL_ID);
+
+        $this->expectsRequest(
+            'post',
+            '/v2/calls/' . urlencode(self::CALL_CONTROL_ID) . '/actions/enqueue'
+        );
+        $resource = $call->enqueue([
+            'client_state' => 'aGF2ZSBhIG5pY2UgZGF5ID1d',
+            'command_id' => '891510ac-f3e4-11e8-af5b-de00688a4901'
+        ]);
+        $this->assertInstanceOf(\Telnyx\TelnyxObject::class, $resource);
+    }
+
+    public function testLeaveQueue()
+    {
+        $call = new Call(self::CALL_CONTROL_ID);
+
+        $this->expectsRequest(
+            'post',
+            '/v2/calls/' . urlencode(self::CALL_CONTROL_ID) . '/actions/leave_queue'
+        );
+        $resource = $call->leave_queue([
+            'client_state' => 'aGF2ZSBhIG5pY2UgZGF5ID1d',
+            'command_id' => '891510ac-f3e4-11e8-af5b-de00688a4901'
         ]);
         $this->assertInstanceOf(\Telnyx\TelnyxObject::class, $resource);
     }
