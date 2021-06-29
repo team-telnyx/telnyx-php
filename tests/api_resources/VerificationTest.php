@@ -12,6 +12,7 @@ final class VerificationTest extends \Telnyx\TestCase
     const TEST_PHONE_NUMBER = '+13035551234';
     const TEST_VERIFICATION_CODE = '17686';
 
+    /*
     public function testIsCreatable()
     {
         $this->expectsRequest(
@@ -25,6 +26,7 @@ final class VerificationTest extends \Telnyx\TestCase
         ]);
         $this->assertInstanceOf(\Telnyx\Verification::class, $resource);
     }
+    */
 
     public function testIsRetrievable()
     {
