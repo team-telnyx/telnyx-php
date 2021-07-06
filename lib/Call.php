@@ -366,4 +366,40 @@ class Call extends ApiResource
         return $this;
     }
 
+    /**
+     * Enqueue call
+     *
+     * Put the call in a queue.
+     *
+     * @param array|null $params
+     * @param array|string|null $options
+     *
+     * @return
+     */
+    public function enqueue($params = null, $options = null)
+    {
+        $url = $this->instanceUrl() . '/actions/enqueue';
+        list($response, $opts) = $this->_request('post', $url, $params, $options);
+        $this->refreshFrom($response, $opts);
+        return $this;
+    }
+
+    /**
+     * Remove call from a queue
+     *
+     * Removes the call from a queue.
+     *
+     * @param array|null $params
+     * @param array|string|null $options
+     *
+     * @return
+     */
+    public function leave_queue($params = null, $options = null)
+    {
+        $url = $this->instanceUrl() . '/actions/leave_queue';
+        list($response, $opts) = $this->_request('post', $url, $params, $options);
+        $this->refreshFrom($response, $opts);
+        return $this;
+    }
+
 }
