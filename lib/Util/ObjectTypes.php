@@ -56,5 +56,10 @@ class ObjectTypes
         \Telnyx\FQDN::OBJECT_NAME => \Telnyx\FQDN::class,
         \Telnyx\Fax::OBJECT_NAME => \Telnyx\Fax::class,
         \Telnyx\FaxApplication::OBJECT_NAME => \Telnyx\FaxApplication::class,
+
+        
+        \Telnyx\TelephonyCredential::OBJECT_NAME => \Telnyx\TelephonyCredential::class,
+        \Telnyx\PortingOrder::OBJECT_NAME => \Telnyx\PortingOrder::class,
+        \Telnyx\PortingPhoneNumber::OBJECT_NAME => \Telnyx\PortingPhoneNumber::class,
     ];
 }
