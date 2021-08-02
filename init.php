@@ -100,3 +100,8 @@ require __DIR__ . '/lib/FaxApplication.php';
 // Webhooks
 require __DIR__ . '/lib/Webhook.php';
 require __DIR__ . '/lib/WebhookSignature.php';
+
+
+require __DIR__ . '/lib/TelephonyCredential.php';
+require __DIR__ . '/lib/PortingOrder.php';
+require __DIR__ . '/lib/PortingPhoneNumber.php';
