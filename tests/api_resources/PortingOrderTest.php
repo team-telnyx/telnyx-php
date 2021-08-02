@@ -27,8 +27,9 @@ final class PortingOrderTest extends \Telnyx\TestCase
             'post',
             '/v2/porting_orders'
         );
-        $resource = PortingOrder::create(["phone_numbers" => ["+13035550000","+13035550001","+13035550002"]]);
-        $this->assertInstanceOf(\Telnyx\PortingOrder::class, $resource);
+        $resources = PortingOrder::create(["phone_numbers" => ["+13035550000","+13035550001","+13035550002"]]);
+        $this->assertInstanceOf(\Telnyx\Collection::class, $resources);
+        $this->assertInstanceOf(\Telnyx\PortingOrder::class, $resources['data'][0]);
     }
 
     public function testIsRetrievable()
@@ -62,6 +63,8 @@ final class PortingOrderTest extends \Telnyx\TestCase
         $this->assertInstanceOf(\Telnyx\PortingOrder::class, $resource);
     }
 
+    /*
+    Note: Currently in beta
     public function testLoaTemplate()
     {
         $PortingOrder = PortingOrder::retrieve(self::TEST_RESOURCE_ID);
@@ -72,6 +75,7 @@ final class PortingOrderTest extends \Telnyx\TestCase
         $resources = $PortingOrder->loa_template();
         $this->assertInstanceOf(\Telnyx\PortingOrder::class, $resources);
     }
+    */
 
     public function testConfirm()
     {
