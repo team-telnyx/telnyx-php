@@ -253,7 +253,7 @@ class ApiRequestor
      *
      * @return array
      */
-    private function _requestRaw($method, $url, $params, $headers)
+    public function _requestRaw($method, $url, $params, $headers) // Note: this is currently only public for TelephonyCredential's token() request
     {
         $myApiKey = $this->_apiKey;
         if (!$myApiKey) {
