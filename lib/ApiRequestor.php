@@ -377,7 +377,7 @@ class ApiRequestor
      *
      * @return array
      */
-    private function _interpretResponse($rbody, $rcode, $rheaders)
+    public function _interpretResponse($rbody, $rcode, $rheaders)
     {
         $resp = json_decode($rbody, true);
 
