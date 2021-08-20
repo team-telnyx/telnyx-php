@@ -12,6 +12,7 @@ jobs:
       TELNYX_MOCK_VERSION: 0.8.14
       TELNYX_MOCK_PORT: 12111
       TELNYX_MOCK_HOST: localhost
+      TELNYX_MOCK_OPEN_API_URI: https://github.com/team-telnyx/openapi/blob/fd9b0c3e9939cf58beb6990a050cef6334e3ae68/openapi/spec3.json?raw=true
       COMPOSER_ARGS: --no-interaction
     runs-on: ubuntu-latest
 
