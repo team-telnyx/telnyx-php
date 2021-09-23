@@ -101,7 +101,16 @@ require __DIR__ . '/lib/FaxApplication.php';
 require __DIR__ . '/lib/Webhook.php';
 require __DIR__ . '/lib/WebhookSignature.php';
 
-
 require __DIR__ . '/lib/TelephonyCredential.php';
 require __DIR__ . '/lib/PortingOrder.php';
 require __DIR__ . '/lib/PortingPhoneNumber.php';
+
+require __DIR__ . '/lib/DetailRecord.php';
+require __DIR__ . '/lib/Document.php';
+require __DIR__ . '/lib/DocumentLink.php';
+require __DIR__ . '/lib/Media.php';
+require __DIR__ . '/lib/WebhookDelivery.php';
+require __DIR__ . '/lib/WhatsAppContact.php';
+require __DIR__ . '/lib/WhatsAppMedia.php';
+require __DIR__ . '/lib/WhatsAppMessage.php';
+require __DIR__ . '/lib/WhatsAppUser.php';

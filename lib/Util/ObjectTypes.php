@@ -15,7 +15,6 @@ class ObjectTypes
         \Telnyx\AvailablePhoneNumber::OBJECT_NAME => \Telnyx\AvailablePhoneNumber::class,
         \Telnyx\NumberOrder::OBJECT_NAME => \Telnyx\NumberOrder::class,
         \Telnyx\NumberReservation::OBJECT_NAME => \Telnyx\NumberReservation::class,
-        \Telnyx\RegulatoryRequirement::OBJECT_NAME => \Telnyx\RegulatoryRequirement::class,
         \Telnyx\NumberOrderDocument::OBJECT_NAME => \Telnyx\NumberOrderDocument::class,
         \Telnyx\PhoneNumber::OBJECT_NAME => \Telnyx\PhoneNumber::class,
         \Telnyx\PhoneNumber\Voice::OBJECT_NAME => \Telnyx\PhoneNumber\Voice::class,
@@ -57,9 +56,19 @@ class ObjectTypes
         \Telnyx\Fax::OBJECT_NAME => \Telnyx\Fax::class,
         \Telnyx\FaxApplication::OBJECT_NAME => \Telnyx\FaxApplication::class,
 
-        
         \Telnyx\TelephonyCredential::OBJECT_NAME => \Telnyx\TelephonyCredential::class,
         \Telnyx\PortingOrder::OBJECT_NAME => \Telnyx\PortingOrder::class,
         \Telnyx\PortingPhoneNumber::OBJECT_NAME => \Telnyx\PortingPhoneNumber::class,
+
+        \Telnyx\DetailRecord::OBJECT_NAME => \Telnyx\DetailRecord::class,
+        \Telnyx\Document::OBJECT_NAME => \Telnyx\Document::class,
+        \Telnyx\DocumentLink::OBJECT_NAME => \Telnyx\DocumentLink::class,
+        \Telnyx\Media::OBJECT_NAME => \Telnyx\Media::class,
+        \Telnyx\WebhookDelivery::OBJECT_NAME => \Telnyx\WebhookDelivery::class,
+        \Telnyx\WhatsAppContact::OBJECT_NAME => \Telnyx\WhatsAppContact::class,
+        \Telnyx\WhatsAppMedia::OBJECT_NAME => \Telnyx\WhatsAppMedia::class,
+        \Telnyx\WhatsAppMessage::OBJECT_NAME => \Telnyx\WhatsAppMessage::class,
+        \Telnyx\WhatsAppUser::OBJECT_NAME => \Telnyx\WhatsAppUser::class,
+
     ];
 }
