@@ -58,4 +58,38 @@ trait Request
         $opts->discardNonPersistentHeaders();
         return [$response, $opts];
     }
+
+    /**
+     * Same as _staticRequest(), but returns a raw String for success or an ApiResponse object on failure
+     * 
+     * @param string $method HTTP method ('get', 'post', etc.)
+     * @param string $url URL for the request
+     * @param array $params list of parameters for the request
+     * @param array|string|null $options
+     *
+     * @return array tuple containing (Response String, Success, HTTP Response Code, Headers, Options)
+     */
+    protected static function _staticRequestRaw($method, $url, $params, $options)
+    {
+        $opts = \Telnyx\Util\RequestOptions::parse($options);
+        $baseUrl = isset($opts->apiBase) ? $opts->apiBase : static::baseUrl();
+        $requestor = new \Telnyx\ApiRequestor($opts->apiKey, $baseUrl);
+
+        // Instead of calling the neatly packaged request() function, we're calling _requestRaw()
+        list($rbody, $rcode, $rheaders, $myApiKey) = $requestor->_requestRaw($method, $url, $params, $opts->headers);
+
+        // Remove headers that don't need to be persistent across other requests
+        $opts->discardNonPersistentHeaders();
+
+        if ($rcode < 200 || $rcode >= 300) { // If there is an error then we need to interpret as a json and return the error object
+            $json = $requestor->_interpretResponse($rbody, $rcode, $rheaders);
+            $resp = new ApiResponse($rbody, $rcode, $rheaders, $json);
+            $rsuccess = false;
+        }
+        else { // Default response: raw download as string
+            $resp = $rbody;
+            $rsuccess = true;
+        }
+        return [$resp, $rsuccess, $rcode, $rheaders, $opts];
+    }
 }
