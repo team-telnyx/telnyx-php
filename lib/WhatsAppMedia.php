@@ -9,21 +9,12 @@ namespace Telnyx;
  */
 class WhatsAppMedia extends ApiResource
 {
-    const OBJECT_NAME = "whatsapp_media_id"; // The record_type is 'whatsapp_media_id' and the endpoint is 'whatsapp_media' which is changed in classUrl() below
+    const OBJECT_NAME = "whatsapp_media_id";
+    const OBJECT_URL = "/v2/whatsapp_media";
 
     use ApiOperations\Create{
         create as upload; // Alias for upload()
     }
-
-    /**
-     * @return string The endpoint URL for the given class.
-     */
-    public static function classUrl()
-    {
-        // Original function inside ApiResource.php
-        return "/v2/whatsapp_media";
-    }
-    
 
     /**
      * Download Media

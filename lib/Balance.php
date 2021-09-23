@@ -10,18 +10,9 @@ namespace Telnyx;
 class Balance extends ApiResource
 {
     const OBJECT_NAME = "balance";
+    const OBJECT_URL = "/v2/balance";
 
     use ApiOperations\Retrieve;
-    
-    /**
-     * @return string The endpoint URL for the given class.
-     */
-    public static function classUrl()
-    {
-        // NOTE: This function override compensates for the lack of an S at the end of this endpoint.
-        // Original function inside ApiResource.php
-        return "/v2/balance";
-    }
 
     /**
      * @param string|null $id

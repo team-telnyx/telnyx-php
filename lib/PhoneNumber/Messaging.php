@@ -10,15 +10,7 @@ namespace Telnyx\PhoneNumber;
 class Messaging extends \Telnyx\ApiResource
 {
     const OBJECT_NAME = "messaging_settings";
+    const OBJECT_URL = "/v2/phone_numbers/messaging";
 
     use \Telnyx\ApiOperations\All;
-    
-    /**
-     * @return string The endpoint URL for the given class.
-     */
-    public static function classUrl()
-    {
-        // NOTE: This comes from ApiResource.php, but we override this because it is an endpoint with a singular ending.
-        return "/v2/phone_numbers/messaging";
-    }
 }

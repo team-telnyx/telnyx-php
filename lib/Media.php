@@ -10,6 +10,7 @@ namespace Telnyx;
 class Media extends ApiResource
 {
     const OBJECT_NAME = "media";
+    const OBJECT_URL = "/v2/media";
 
     use ApiOperations\All;
     use ApiOperations\Create{
@@ -18,15 +19,6 @@ class Media extends ApiResource
     use ApiOperations\Retrieve;
     use ApiOperations\Update;
     use ApiOperations\Delete;
-
-    /**
-     * @return string The endpoint URL for the given class.
-     */
-    public static function classUrl()
-    {
-        // Original function inside ApiResource.php
-        return "/v2/media";
-    }
     
     /**
      * Download Media
