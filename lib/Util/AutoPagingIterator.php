@@ -15,7 +15,7 @@ class AutoPagingIterator implements \Iterator
         $this->params = $params;
     }
 
-    public function rewind()
+    public function rewind(): void
     {
         // Actually rewinding would require making a copy of the original page.
     }
@@ -33,6 +33,10 @@ class AutoPagingIterator implements \Iterator
         return key($this->page->data) + $this->pageOffset;
     }
 
+    /**
+     * @return void|false This will only return void in the future due to https://wiki.php.net/rfc/internal_method_return_types.
+     */
+    #[\ReturnTypeWillChange]
     public function next()
     {
         $item = next($this->page->data);
@@ -52,7 +56,7 @@ class AutoPagingIterator implements \Iterator
         }
     }
 
-    public function valid()
+    public function valid(): bool
     {
         $key = key($this->page->data);
         $valid = ($key !== null && $key !== false);
