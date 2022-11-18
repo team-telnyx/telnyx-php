@@ -80,9 +80,9 @@ class ApiRequestor
         if ($d instanceof ApiResource) {
             return Util\Util::utf8($d->id);
         } elseif ($d === true) {
-            return 'true';
+            return true;
         } elseif ($d === false) {
-            return 'false';
+            return false;
         } elseif (is_array($d)) {
             $res = [];
             foreach ($d as $k => $v) {
@@ -109,7 +109,9 @@ class ApiRequestor
         $params = $params ?: [];
         $headers = $headers ?: [];
         list($rbody, $rcode, $rheaders, $myApiKey) = $this->_requestRaw($method, $url, $params, $headers);
+        print_r($rbody); die;
         $json = $this->_interpretResponse($rbody, $rcode, $rheaders);
+        
         $resp = new ApiResponse($rbody, $rcode, $rheaders, $json);
 
         return [$resp, $myApiKey];
