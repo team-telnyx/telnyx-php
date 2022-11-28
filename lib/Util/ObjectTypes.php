@@ -24,6 +24,7 @@ class ObjectTypes
         \Telnyx\Conference::OBJECT_NAME => \Telnyx\Conference::class,
         \Telnyx\CallControlApplication::OBJECT_NAME => \Telnyx\CallControlApplication::class,
         \Telnyx\NumberLookup::OBJECT_NAME => \Telnyx\NumberLookup::class,
+        \Telnyx\NumberSearch::OBJECT_NAME => \Telnyx\NumberSearch::class,
 
         // Telnyx API: Messaging
         \Telnyx\Message::OBJECT_NAME => \Telnyx\Message::class,

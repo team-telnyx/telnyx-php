@@ -64,6 +64,7 @@ require __DIR__ . '/lib/Call.php';
 require __DIR__ . '/lib/Conference.php';
 require __DIR__ . '/lib/CallControlApplication.php';
 require __DIR__ . '/lib/NumberLookup.php';
+require __DIR__ . '/lib/NumberSearch.php';
 
 // Telnyx API: Messaging
 require __DIR__ . '/lib/Message.php';
