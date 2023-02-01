@@ -1,11 +1,7 @@
-# Telnyx PHP SDK
+# Telnyx PHP SDK from Hipcall
 
-[![Build Status](https://github.com/team-telnyx/telnyx-php/workflows/Composer/badge.svg)](https://github.com/team-telnyx/telnyx-php/actions)
-[![Latest Stable Version](https://poser.pugx.org/telnyx/telnyx-php/v/stable.svg)](https://packagist.org/packages/telnyx/telnyx-php)
-[![Total Downloads](https://poser.pugx.org/telnyx/telnyx-php/downloads.svg)](https://packagist.org/packages/telnyx/telnyx-php)
-[![License](https://poser.pugx.org/telnyx/telnyx-php/license.svg)](https://packagist.org/packages/telnyx/telnyx-php)
-[![Code Coverage](https://coveralls.io/repos/github/team-telnyx/telnyx-php/badge.svg?branch=master&)](https://coveralls.io/github/team-telnyx/telnyx-php?branch=master&)
-[![Join Slack](https://img.shields.io/badge/join-slack-infomational)](https://joinslack.telnyx.com/)
+We (Hipcall) need to extend Telnyx PHP SDK for some reason. If you are
+Telnyx user please use their official [PHP SDK](https://packagist.org/packages/telnyx/telnyx-php).
 
 The Telnyx PHP library provides convenient access to the Telnyx API from
 applications written in PHP. It includes a pre-defined set of
@@ -24,7 +20,7 @@ You can sign up for a Telnyx account at [telnyx.com](https://telnyx.com).
 
 ## Requirements
 
-PHP 5.6.0 and later.
+PHP 8.1.0 and later.
 
 ## Composer
 
