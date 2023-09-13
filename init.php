@@ -74,6 +74,12 @@ require __DIR__ . '/lib/ShortCode.php';
 require __DIR__ . '/lib/OutboundVoiceProfile.php';
 require __DIR__ . '/lib/MessagingHostedNumberOrder.php';
 
+// Telnyx API: 10DLC
+require __DIR__ . '/lib/PhoneNumberAssignmentByProfile.php';
+require __DIR__ . '/lib/Campaign.php';
+require __DIR__ . '/lib/Brand.php';
+require __DIR__ . '/lib/PhoneNumberCampaign.php';
+
 // Telnyx API: Misc
 require __DIR__ . '/lib/Address.php';
 require __DIR__ . '/lib/BillingGroup.php';
