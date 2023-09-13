@@ -178,28 +178,28 @@ class TelnyxObject implements \ArrayAccess, \Countable, \JsonSerializable
     }
 
     // ArrayAccess methods
-    public function offsetSet(mixed $k, mixed $v): void
+    public function offsetSet($k, $v)
     {
         $this->$k = $v;
     }
 
-    public function offsetExists(mixed $k): bool
+    public function offsetExists($k)
     {
         return array_key_exists($k, $this->_values);
     }
 
-    public function offsetUnset(mixed $k): void
+    public function offsetUnset($k)
     {
         unset($this->$k);
     }
 
-    public function offsetGet(mixed $k): mixed
+    public function offsetGet($k)
     {
         return array_key_exists($k, $this->_values) ? $this->_values[$k] : null;
     }
 
     // Countable method
-    public function count(): int
+    public function count()
     {
         return count($this->_values);
     }
@@ -406,7 +406,7 @@ class TelnyxObject implements \ArrayAccess, \Countable, \JsonSerializable
         }
     }
 
-    public function jsonSerialize(): array
+    public function jsonSerialize()
     {
         return $this->toArray(true);
     }
@@ -417,7 +417,7 @@ class TelnyxObject implements \ArrayAccess, \Countable, \JsonSerializable
      *
      * @return array the associative array
      */
-    public function toArray(): array
+    public function toArray()
     {
         $maybeToArray = function ($value) {
             if (null === $value) {
