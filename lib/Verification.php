@@ -43,6 +43,11 @@ class Verification extends ApiResource
     public static function submit_verification($phone_number, $verification_code, $options = null)
     {
         $params = ['code' => $verification_code];
+
+        if (!empty($options['verify_profile_id'])) {
+            $params['verify_profile_id'] = $options['verify_profile_id'];
+        }
+
         self::_validateParams($params);
         $url = '/v2/verifications/by_phone_number/' . urlencode($phone_number) . '/actions/verify';
 
