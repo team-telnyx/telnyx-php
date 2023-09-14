@@ -3,11 +3,11 @@
 namespace Telnyx;
 
 /**
- * Class Address
+ * Class PhoneNumberCampaign
  *
  * @package Telnyx
  */
-class Address extends ApiResource
+class PhoneNumberCampaign extends ApiResource
 {
     const OBJECT_NAME = "phone_number_campaign";
 

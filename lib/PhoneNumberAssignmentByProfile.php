@@ -3,11 +3,11 @@
 namespace Telnyx;
 
 /**
- * Class Address
+ * Class PhoneNumberAssignmentByProfile
  *
  * @package Telnyx
  */
-class Address extends ApiResource
+class PhoneNumberAssignmentByProfile extends ApiResource
 {
     const OBJECT_NAME = "phone_number_assignment_by_profile";
 

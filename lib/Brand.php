@@ -3,11 +3,11 @@
 namespace Telnyx;
 
 /**
- * Class Address
+ * Class Brand
  *
  * @package Telnyx
  */
-class Address extends ApiResource
+class Brand extends ApiResource
 {
     const OBJECT_NAME = "brand";
 
