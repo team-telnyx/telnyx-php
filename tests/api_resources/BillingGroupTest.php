@@ -2,13 +2,13 @@
 
 namespace Telnyx;
 
-/**
- * @internal
- * @covers \Telnyx\BillingGroup
- */
+use PHPUnit\Framework\Attributes\CoversClass;
+
+#[CoversClass(\Telnyx\BillingGroup::class)]
+
 final class BillingGroupTest extends \Telnyx\TestCase
 {
-    const TEST_RESOURCE_ID = '123';
+    const TEST_RESOURCE_ID = 'f5586561-8ff0-4291-a0ac-84fe544797bd';
 
     public function testIsListable()
     {
@@ -33,6 +33,7 @@ final class BillingGroupTest extends \Telnyx\TestCase
 
     public function testIsDeletable()
     {
+         
         $resource = BillingGroup::retrieve(self::TEST_RESOURCE_ID);
         $this->expectsRequest(
             'delete',

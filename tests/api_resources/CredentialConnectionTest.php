@@ -2,10 +2,10 @@
 
 namespace Telnyx;
 
-/**
- * @internal
- * @covers \Telnyx\CredentialConnection
- */
+use PHPUnit\Framework\Attributes\CoversClass;
+
+#[CoversClass(\Telnyx\CredentialConnection::class)]
+
 final class CredentialConnectionTest extends \Telnyx\TestCase
 {
     const TEST_RESOURCE_ID = '123';

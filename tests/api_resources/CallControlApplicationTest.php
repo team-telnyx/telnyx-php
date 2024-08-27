@@ -2,10 +2,10 @@
 
 namespace Telnyx;
 
-/**
- * @internal
- * @covers \Telnyx\CallControlApplication
- */
+use PHPUnit\Framework\Attributes\CoversClass;
+
+#[CoversClass(\Telnyx\CallControlApplication::class)]
+
 final class CallControlApplicationTest extends \Telnyx\TestCase
 {
     const TEST_RESOURCE_ID = '123';
@@ -36,6 +36,7 @@ final class CallControlApplicationTest extends \Telnyx\TestCase
 
     public function testIsDeletable()
     {
+       
         $resource = CallControlApplication::retrieve(self::TEST_RESOURCE_ID);
         $this->expectsRequest(
             'delete',

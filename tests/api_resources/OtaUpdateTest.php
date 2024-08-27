@@ -2,10 +2,12 @@
 
 namespace Telnyx;
 
-/**
- * @internal
- * @covers \Telnyx\OtaUpdate
- */
+ 
+use PHPUnit\Framework\Attributes\CoversClass;
+
+ 
+#[CoversClass(\Telnyx\OtaUpdate::class)]
+
 final class OtaUpdateTest extends \Telnyx\TestCase
 {
     const TEST_RESOURCE_ID = '6a09cdc3-8948-47f0-aa62-74ac943d6c58';

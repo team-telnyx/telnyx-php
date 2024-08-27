@@ -1,11 +1,10 @@
 <?php
 
 namespace Telnyx;
+use PHPUnit\Framework\Attributes\CoversClass;
+ 
+#[CoversClass(\Telnyx\SimCard::class)]
 
-/**
- * @internal
- * @covers \Telnyx\SimCard
- */
 final class SimCardTest extends \Telnyx\TestCase
 {
     const TEST_RESOURCE_ID = '6a09cdc3-8948-47f0-aa62-74ac943d6c58';
@@ -67,16 +66,7 @@ final class SimCardTest extends \Telnyx\TestCase
     }
     */
 
-    public function testEnable()
-    {
-        $simcard = SimCard::retrieve(self::TEST_RESOURCE_ID);
-        $this->expectsRequest(
-            'post',
-            '/v2/sim_cards/' . urlencode(self::TEST_RESOURCE_ID) . '/actions/enable'
-        );
-        $resources = $simcard->enable();
-        $this->assertInstanceOf(\Telnyx\SimCard::class, $resources);
-    }
+   
 
     public function testDisable()
     {
@@ -86,6 +76,18 @@ final class SimCardTest extends \Telnyx\TestCase
             '/v2/sim_cards/' . urlencode(self::TEST_RESOURCE_ID) . '/actions/disable'
         );
         $resources = $simcard->disable();
+        $this->assertInstanceOf(\Telnyx\SimCard::class, $resources);
+    }
+
+    public function testEnable()
+    {
+        $simcard = SimCard::retrieve(self::TEST_RESOURCE_ID);
+       
+        $this->expectsRequest(
+            'post',
+            '/v2/sim_cards/' . urlencode(self::TEST_RESOURCE_ID) . '/actions/enable'
+        );
+        $resources = $simcard->enable();
         $this->assertInstanceOf(\Telnyx\SimCard::class, $resources);
     }
 

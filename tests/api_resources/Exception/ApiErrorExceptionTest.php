@@ -2,23 +2,22 @@
 
 namespace Telnyx\Exception;
 
-/**
- * @internal
- * @covers \Telnyx\Exception\ApiErrorException
- */
+
+use PHPUnit\Framework\Attributes\CoversClass;
+
+#[CoversClass(\Telnyx\Exception\ApiErrorException::class)]
+ 
 final class ApiErrorExceptionTest extends \Telnyx\TestCase
 {
     public function createFixture()
     {
-        $mock = $this->getMockForAbstractClass(ApiErrorException::class);
+        $mock = $this->createMock(ApiErrorException::class);
 
         return $mock::factory(
             'message',
-            200,
-
+            200, 
             // $httpBody
-            '{"errors":[{"code":"some_code"}]}',
-
+            '{"errors":[{"code":"some_code"}]}', 
             // $jsonBody
             [
                 "errors" => [
@@ -86,7 +85,7 @@ final class ApiErrorExceptionTest extends \Telnyx\TestCase
 
     public function testNull()
     {
-        $mock = $this->getMockForAbstractClass(ApiErrorException::class);
+        $mock = $this->createMock(ApiErrorException::class);
 
         $result = $mock::factory(
             'message',

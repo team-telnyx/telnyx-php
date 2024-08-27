@@ -1,11 +1,10 @@
 <?php
 
 namespace Telnyx;
-
-/**
- * @internal
- * @covers \Telnyx\Verification
- */
+ 
+use PHPUnit\Framework\Attributes\CoversClass;
+ 
+#[CoversClass(\Telnyx\Verification::class)]
 final class VerificationTest extends \Telnyx\TestCase
 {
     const TEST_RESOURCE_ID = '12ade33a-21c0-473b-b055-b3c836e1c292';

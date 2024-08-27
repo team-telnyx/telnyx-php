@@ -1,11 +1,9 @@
 <?php
 
 namespace Telnyx;
-
-/**
- * @internal
- * @covers \Telnyx\VerifyProfile
- */
+use PHPUnit\Framework\Attributes\CoversClass;
+ 
+#[CoversClass(\Telnyx\VerifyProfile::class)]
 final class VerifyProfileTest extends \Telnyx\TestCase
 {
     const TEST_RESOURCE_ID = '12ade33a-21c0-473b-b055-b3c836e1c292';
@@ -43,6 +41,7 @@ final class VerifyProfileTest extends \Telnyx\TestCase
             '/v2/verify_profiles/' . urlencode(self::TEST_RESOURCE_ID)
         );
         $resource = VerifyProfile::retrieve(self::TEST_RESOURCE_ID);
+
         $this->assertInstanceOf(\Telnyx\VerifyProfile::class, $resource);
     }
 

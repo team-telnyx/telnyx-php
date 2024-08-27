@@ -2,13 +2,13 @@
 
 namespace Telnyx;
 
-/**
- * @internal
- * @covers \Telnyx\FQDNConnection
- */
+use PHPUnit\Framework\Attributes\CoversClass;
+
+#[CoversClass(\Telnyx\FQDNConnection::class)]
+
 final class FQDNConnectionTest extends \Telnyx\TestCase
 {
-    const TEST_RESOURCE_ID = '123';
+    const TEST_RESOURCE_ID = '7069b206-3e2a-c44e-206f-981c20f8d569';
 
     public function testIsListable()
     {

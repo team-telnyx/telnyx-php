@@ -1,11 +1,11 @@
 <?php
 
-namespace Telnyx;
+namespace Telnyx;  
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Before;
+ 
+#[CoversClass(\Telnyx\TelnyxObject::class)]
 
-/**
- * @internal
- * @covers \Telnyx\TelnyxObject
- */
 final class TelnyxObjectTest extends \Telnyx\TestCase
 {
     /** @var \ReflectionMethod */
@@ -14,9 +14,7 @@ final class TelnyxObjectTest extends \Telnyx\TestCase
     /** @var \ReflectionMethod */
     private $optsReflector;
 
-    /**
-     * @before
-     */
+    #[Before]
     public function setUpReflectors()
     {
         // Sets up reflectors needed by some tests to access protected or
@@ -105,7 +103,7 @@ final class TelnyxObjectTest extends \Telnyx\TestCase
 
         $converted = $s->toArray();
 
-        static::assertInternalType('array', $converted);
+        static::assertIsArray($converted);
         static::assertSame($array, $converted);
     }
 
@@ -142,7 +140,7 @@ final class TelnyxObjectTest extends \Telnyx\TestCase
             $s = new TelnyxObject();
             static::assertNull($s->nonexistent);
 
-            static::assertRegExp(
+            static::assertMatchesRegularExpression(
                 '/Telnyx Notice: Undefined property of Telnyx\\\\TelnyxObject instance: nonexistent/',
                 \stream_get_contents($capture)
             );
@@ -454,13 +452,14 @@ final class TelnyxObjectTest extends \Telnyx\TestCase
 
         // likewise, the Util\RequestOptions instance in _opts should have
         // copied values but be a new instance
+        
         static::assertSame(
-            $this->optsReflector->getValue($values['arr'][0])->apiKey,
-            $this->optsReflector->getValue($copyValues['arr'][0])->apiKey
+            $values['arr'][0]->apiKey,
+            $copyValues['arr'][0]->apiKey
         );
         static::assertNotSame(
-            $this->optsReflector->getValue($values['arr'][0]),
-            $this->optsReflector->getValue($copyValues['arr'][0])
+            $values['arr'][0],
+            $copyValues['arr'][0]
         );
 
         // scalars however, can be compared
@@ -471,16 +470,16 @@ final class TelnyxObjectTest extends \Telnyx\TestCase
         static::assertSame($values['map']['0']['id'], $copyValues['map']['0']['id']);
         static::assertNotSame($values['map']['0'], $copyValues['map']['0']);
         static::assertNotSame(
-            $this->optsReflector->getValue($values['arr'][0]),
-            $this->optsReflector->getValue($copyValues['arr'][0])
+            $values['arr'][0],
+            $copyValues['arr'][0]
         );
         static::assertSame(
-            $this->optsReflector->getValue($values['map']['0'])->apiKey,
-            $this->optsReflector->getValue($copyValues['map']['0'])->apiKey
+            $values['map']['0']->apiKey,
+            $copyValues['map']['0']->apiKey
         );
         static::assertNotSame(
-            $this->optsReflector->getValue($values['map']['0']),
-            $this->optsReflector->getValue($copyValues['map']['0'])
+            $values['map']['0'],
+            $copyValues['map']['0']
         );
         static::assertSame($values['map']['1'], $copyValues['map']['1']);
         static::assertSame($values['map']['2'], $copyValues['map']['2']);

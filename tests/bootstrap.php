@@ -14,18 +14,25 @@ if (\Telnyx\TelnyxMock::start()) {
     define("MOCK_PORT", getenv("TELNYX_MOCK_PORT") ?: 12111);
 }
 
-define("MOCK_URL", "http://" . MOCK_HOST . ":" . MOCK_PORT);
-
+define("MOCK_URL", "http://" . MOCK_HOST . ":" . MOCK_PORT."/v2/balance");
+$token = getenv('TELNYX_MOCK_API_KEY');
 // Send a request to telnyx-mock
 $ch = curl_init(MOCK_URL);
 curl_setopt($ch, CURLOPT_HEADER, 1);
 curl_setopt($ch, CURLOPT_NOBODY, 1);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+curl_setopt($ch, CURLOPT_VERBOSE, true);
+$headers = [
+    'Authorization: Bearer ' . $token
+];
+curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
 $resp = curl_exec($ch);
 
 if (curl_errno($ch)) {
+    $error = curl_error($ch);
     echo "Couldn't reach telnyx-mock at `" . MOCK_HOST . ":" . MOCK_PORT . "`. Is " .
-         "it running? Please see README for setup instructions.\n";
+         "it running? Please see README for setup instructions.\n Error".$error;
     exit(1);
 }
 

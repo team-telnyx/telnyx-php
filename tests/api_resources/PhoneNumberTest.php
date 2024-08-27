@@ -1,14 +1,14 @@
 <?php
 
-namespace Telnyx;
+namespace Telnyx; 
+use PHPUnit\Framework\Attributes\CoversClass;
 
-/**
- * @internal
- * @covers \Telnyx\PhoneNumber
- */
+ 
+#[CoversClass(\Telnyx\PhoneNumber::class)]
+
 final class PhoneNumberTest extends \Telnyx\TestCase
 {
-    const TEST_RESOURCE_ID = '123';
+    const TEST_RESOURCE_ID = '1293384261075731499';    
 
     public function testIsListable()
     {
@@ -23,6 +23,7 @@ final class PhoneNumberTest extends \Telnyx\TestCase
 
     public function testIsDeletable()
     {
+         
         $resource = PhoneNumber::retrieve(self::TEST_RESOURCE_ID);
         $this->expectsRequest(
             'delete',
@@ -56,6 +57,7 @@ final class PhoneNumberTest extends \Telnyx\TestCase
 
     public function testVoice()
     {
+         
         $phone_number = PhoneNumber::retrieve(self::TEST_RESOURCE_ID);
         $this->expectsRequest(
             'get',
@@ -67,6 +69,7 @@ final class PhoneNumberTest extends \Telnyx\TestCase
 
     public function testUpdateVoice()
     {
+        
         $phone_number = PhoneNumber::retrieve(self::TEST_RESOURCE_ID);
         $this->expectsRequest(
             'patch',
@@ -78,6 +81,7 @@ final class PhoneNumberTest extends \Telnyx\TestCase
 
     public function testMessaging()
     {
+        
         $phone_number = PhoneNumber::retrieve(self::TEST_RESOURCE_ID);
         $this->expectsRequest(
             'get',
@@ -89,12 +93,14 @@ final class PhoneNumberTest extends \Telnyx\TestCase
 
     public function testUpdateMessaging()
     {
+         
         $phone_number = PhoneNumber::retrieve(self::TEST_RESOURCE_ID);
         $this->expectsRequest(
             'patch',
             '/v2/phone_numbers/' . urlencode(self::TEST_RESOURCE_ID) . '/messaging'
         );
         $resource = $phone_number->update_messaging();
+       
         $this->assertInstanceOf(\Telnyx\TelnyxObject::class, $resource); // record_type: voice_settings
     }
 }

@@ -5,7 +5,7 @@ namespace Telnyx;
 /**
  * Base class for Telnyx test cases.
  */
-class TestCase extends \PHPUnit_Framework_TestCase
+class TestCase extends \PHPUnit\Framework\TestCase
 {
     /** @var string original API base URL */
     protected $origApiBase;
@@ -25,7 +25,7 @@ class TestCase extends \PHPUnit_Framework_TestCase
     /** @var object HTTP client mocker */
     protected $clientMock;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         // Save original values so that we can restore them after running tests
         $this->origApiBase = Telnyx::$apiBase;
@@ -35,7 +35,8 @@ class TestCase extends \PHPUnit_Framework_TestCase
         $this->origAccountId = Telnyx::getAccountId();
 
         // Set up host and credentials for Telnyx-mock
-        Telnyx::$apiBase = MOCK_URL;
+        
+        Telnyx::$apiBase = "http://localhost:12111";
         Telnyx::setApiKey("KEYSUPERSECRET");
         Telnyx::setClientId("ca_123");
         Telnyx::setApiVersion(null);
@@ -46,9 +47,10 @@ class TestCase extends \PHPUnit_Framework_TestCase
 
         // By default, use the real HTTP client
         ApiRequestor::setHttpClient(HttpClient\CurlClient::instance());
+         
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         // Restore original values
         Telnyx::$apiBase = $this->origApiBase;
@@ -81,14 +83,23 @@ class TestCase extends \PHPUnit_Framework_TestCase
         $hasFile = false,
         $base = null
     ) {
+        // $this->prepareRequestMock($method, $path, $params, $headers, $hasFile, $base)
+        //     ->will($this->returnCallback(
+        //         function ($method, $absUrl, $headers, $params, $hasFile) {
+        //             $curlClient = HttpClient\CurlClient::instance();
+        //             ApiRequestor::setHttpClient($curlClient);
+        //             return $curlClient->request($method, $absUrl, $headers, $params, $hasFile);
+        //         }
+        //     ));
         $this->prepareRequestMock($method, $path, $params, $headers, $hasFile, $base)
-            ->will($this->returnCallback(
-                function ($method, $absUrl, $headers, $params, $hasFile) {
-                    $curlClient = HttpClient\CurlClient::instance();
-                    ApiRequestor::setHttpClient($curlClient);
-                    return $curlClient->request($method, $absUrl, $headers, $params, $hasFile);
-                }
-            ));
+        ->willReturnCallback(
+            function ($method, $absUrl, $headers, $params, $hasFile) {
+                $curlClient = HttpClient\CurlClient::instance();
+                ApiRequestor::setHttpClient($curlClient);
+                return $curlClient->request($method, $absUrl, $headers, $params, $hasFile);
+            }
+        );
+
     }
 
     /**

@@ -1,11 +1,11 @@
 <?php
 
-namespace Telnyx;
+namespace Telnyx; 
+use PHPUnit\Framework\Attributes\CoversClass;
 
-/**
- * @internal
- * @covers \Telnyx\OutboundVoiceProfile
- */
+ 
+#[CoversClass(\Telnyx\OutboundVoiceProfile::class)]
+
 final class OutboundVoiceProfileTest extends \Telnyx\TestCase
 {
     const TEST_RESOURCE_ID = '123';

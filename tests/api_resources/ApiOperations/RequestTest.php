@@ -1,11 +1,10 @@
 <?php
 
 namespace Telnyx;
+use PHPUnit\Framework\Attributes\CoversClass;
 
-/**
- * @internal
- * @covers \Telnyx\ApiOperations\Request
- */
+#[CoversClass(\Telnyx\ApiOperations\Request::class)]
+
 
 class DummyRequest extends ApiResource
 {

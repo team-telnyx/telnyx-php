@@ -1,14 +1,14 @@
 <?php
 
-namespace Telnyx;
+namespace Telnyx; 
+use PHPUnit\Framework\Attributes\CoversClass;
 
-/**
- * @internal
- * @covers \Telnyx\NumberReservation
- */
+ 
+#[CoversClass(\Telnyx\NumberReservation::class)]
+
 final class NumberReservationTest extends \Telnyx\TestCase
 {
-    const NUMBER_RESERVATION_ID = "f7964e2b-a9f9-4eb6-ab16-e570ffc4bc83";
+    const NUMBER_RESERVATION_ID = "12ade33a-21c0-473b-b055-b3c836e1c292";
 
     public function testIsListable()
     {
@@ -28,7 +28,7 @@ final class NumberReservationTest extends \Telnyx\TestCase
             '/v2/number_reservations'
         );
         $resource = \Telnyx\NumberReservation::create([
-            "phone_number" => "+18665552368"
+            "phone_number" => "+19705555098"
         ]);
         $this->assertInstanceOf(\Telnyx\NumberReservation::class, $resource);
     }
@@ -45,6 +45,7 @@ final class NumberReservationTest extends \Telnyx\TestCase
 
     public function testActionsExtend()
     {
+         
         $number_reservation = \Telnyx\NumberReservation::retrieve(self::NUMBER_RESERVATION_ID);
         $this->expectsRequest(
             'post',

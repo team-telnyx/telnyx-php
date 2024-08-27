@@ -2,21 +2,21 @@
 
 namespace Telnyx\Exception;
 
-/**
- * @internal
- * @covers \Telnyx\Exception\InvalidRequestException
- */
+use PHPUnit\Framework\Attributes\CoversClass;
+
+#[CoversClass(\Telnyx\Exception\InvalidRequestException::class)]
+
 final class InvalidRequestExceptionTest extends \Telnyx\TestCase
 {
     public function createFixture()
     {
-        $mock = $this->getMockForAbstractClass(ApiErrorException::class);
+        $mock = $this->createMock(ApiErrorException::class);
 
-        return $mock::factory(
+        return ApiErrorException::factory(
             'message',
             200,
 
-            // $httpBody
+            // $httpBody    
             '{"errors":[{"code":"some_code"}]}',
 
             // $jsonBody

@@ -2,10 +2,10 @@
 
 namespace Telnyx;
 
-/**
- * @internal
- * @covers \Telnyx\FaxApplication
- */
+use PHPUnit\Framework\Attributes\CoversClass;
+
+#[CoversClass(\Telnyx\FaxApplication::class)]
+
 final class FaxApplicationTest extends \Telnyx\TestCase
 {
     const TEST_RESOURCE_ID = '1293384261075731499';

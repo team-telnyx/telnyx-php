@@ -1,19 +1,16 @@
 <?php
 
-namespace Telnyx;
-
-/**
- * @internal
- * @covers \Telnyx\Telnyx
- */
+namespace Telnyx; 
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Before;
+use PHPUnit\Framework\Attributes\After;
+#[CoversClass(\Telnyx\Telnyx::class)]
 final class TelnyxTest extends \Telnyx\TestCase
 {
     /** @var array */
     protected $orig;
 
-    /**
-     * @before
-     */
+    #[Before]
     public function saveOriginalValues()
     {
         $this->orig = [
@@ -21,9 +18,7 @@ final class TelnyxTest extends \Telnyx\TestCase
         ];
     }
 
-    /**
-     * @after
-     */
+    #[After]
     public function restoreOriginalValues()
     {
         Telnyx::$caBundlePath = $this->orig['caBundlePath'];

@@ -2,11 +2,11 @@
 
 namespace Telnyx\Util;
 
-/**
- * @internal
- * @covers \Telnyx\Util\ObjectTypes
- */
-final class ObjectTypesTest extends \PHPUnit\Framework\TestCase
+use PHPUnit\Framework\Attributes\CoversClass;
+
+#[CoversClass(\Telnyx\Util\ObjectTypes::class)]
+
+final class ObjectTypesTest extends \Telnyx\TestCase
 {
 
     public function testMapping()

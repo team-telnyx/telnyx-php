@@ -2,10 +2,10 @@
 
 namespace Telnyx;
 
-/**
- * @internal
- * @covers \Telnyx\ApiOperations\Create
- */
+use PHPUnit\Framework\Attributes\CoversClass;
+
+#[CoversClass(\Telnyx\ApiOperations\Create::class)]
+
 
 class DummyCreate extends ApiResource
 {

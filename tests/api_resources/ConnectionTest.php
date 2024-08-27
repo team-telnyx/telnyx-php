@@ -2,10 +2,10 @@
 
 namespace Telnyx;
 
-/**
- * @internal
- * @covers \Telnyx\Connection
- */
+use PHPUnit\Framework\Attributes\CoversClass;
+
+#[CoversClass(\Telnyx\Connection::class)]
+
 final class ConnectionTest extends \Telnyx\TestCase
 {
     const TEST_RESOURCE_ID = '123';

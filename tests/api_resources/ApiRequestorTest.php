@@ -11,10 +11,10 @@ class DummyApiRequestor404 extends ApiResource
     use \Telnyx\ApiOperations\All;
 }
 
-/**
- * @internal
- * @covers \Telnyx\ApiRequestor
- */
+use PHPUnit\Framework\Attributes\CoversClass;
+
+#[CoversClass(\Telnyx\ApiRequestor::class)]
+
 final class ApiRequestorTest extends \Telnyx\TestCase
 {
     public function testEncodeObjects()
@@ -91,12 +91,16 @@ final class ApiRequestorTest extends \Telnyx\TestCase
     }
 
     public function testRaisesAuthenticationErrorWhenNoApiKey()
-    {
+    {  
         $this->expectException(\Telnyx\Exception\AuthenticationException::class);
-        $this->expectExceptionMessageRegExp('#No API key provided#');
-
-        Telnyx::setApiKey(null);
-        Call::create();
+    
+        try {
+            Telnyx::setApiKey(null);
+            Call::create();
+        } catch (\Telnyx\Exception\AuthenticationException $e) {
+            $this->assertStringContainsString('No API key provided', $e->getMessage());
+            throw $e; // Re-throw to ensure PHPUnit still sees it as an expected exception
+        }
     }
 
     public function testHeaderTelnyxVersionGlobal()

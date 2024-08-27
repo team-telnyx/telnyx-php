@@ -2,10 +2,10 @@
 
 namespace Telnyx;
 
-/**
- * @internal
- * @covers \Telnyx\Balance
- */
+use PHPUnit\Framework\Attributes\CoversClass;
+
+#[CoversClass(\Telnyx\Balance::class)]
+
 final class BalanceTest extends \Telnyx\TestCase
 {
     public function testIsRetrievable()

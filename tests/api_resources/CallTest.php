@@ -2,13 +2,13 @@
 
 namespace Telnyx;
 
-/**
- * @internal
- * @covers \Telnyx\Call
- */
+use PHPUnit\Framework\Attributes\CoversClass;
+
+#[CoversClass(\Telnyx\Call::class)]
+
 final class CallTest extends \Telnyx\TestCase
 {
-    const CALL_CONTROL_ID = 'v2:T02llQxIyaRkhfRKxgAP8nY511EhFLizdvdUKJiSw8d6A9BborherQ';
+    const CALL_CONTROL_ID = 'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg';
 
     public function testIsCreatable()
     {
@@ -36,6 +36,7 @@ final class CallTest extends \Telnyx\TestCase
 
     public function testAnswer()
     {
+         
         $call = Call::retrieve(self::CALL_CONTROL_ID);
 
         $this->expectsRequest(
@@ -64,6 +65,7 @@ final class CallTest extends \Telnyx\TestCase
 
     public function testForkStart()
     {
+         
         $call = Call::retrieve(self::CALL_CONTROL_ID);
 
         $this->expectsRequest(
@@ -78,6 +80,7 @@ final class CallTest extends \Telnyx\TestCase
 
     public function testForkStop()
     {
+        
         $call = Call::retrieve(self::CALL_CONTROL_ID);
 
         $this->expectsRequest(

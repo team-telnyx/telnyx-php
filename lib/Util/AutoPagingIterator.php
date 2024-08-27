@@ -15,12 +15,12 @@ class AutoPagingIterator implements \Iterator
         $this->params = $params;
     }
 
-    public function rewind()
+    public function rewind(): void
     {
         // Actually rewinding would require making a copy of the original page.
     }
 
-    public function current()
+    public function current(): ?array
     {
         $item = current($this->page->data);
         $this->lastId = $item !== false ? $item['id'] : null;
@@ -28,12 +28,12 @@ class AutoPagingIterator implements \Iterator
         return $item;
     }
 
-    public function key()
+    public function key(): ?int
     {
         return key($this->page->data) + $this->pageOffset;
     }
 
-    public function next()
+    public function next(): void
     {
         $item = next($this->page->data);
         if ($item === false) {
@@ -46,13 +46,15 @@ class AutoPagingIterator implements \Iterator
                     ['starting_after' => $this->lastId]
                 );
                 $this->page = $this->page->all($this->params);
-            } else {
-                return false;
-            }
+                 
+            } 
+            // else {
+            //     return false;
+            // }
         }
     }
 
-    public function valid()
+    public function valid(): bool
     {
         $key = key($this->page->data);
         $valid = ($key !== null && $key !== false);

@@ -1,12 +1,12 @@
 <?php
 
 namespace Telnyx;
+ 
+use PHPUnit\Framework\Attributes\CoversClass;
 
-/**
- * @internal
- * @covers \Telnyx\Webhook
- * @covers \Telnyx\WebhookSignature
- */
+
+#[CoversClass(\Telnyx\Webhook::class)]
+#[CoversClass(\Telnyx\WebhookSignature::class)]
 final class WebhookTest extends \Telnyx\TestCase
 {
     const EVENT_PAYLOAD = '{

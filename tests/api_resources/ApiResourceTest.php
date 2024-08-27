@@ -1,6 +1,7 @@
 <?php
 
 namespace Telnyx;
+use PHPUnit\Framework\Attributes\CoversClass;
 
 class DummyApiResource extends ApiResource
 {
@@ -20,10 +21,9 @@ class DummyApiResource extends ApiResource
     }
 }
 
-/**
- * @internal
- * @covers \Telnyx\ApiResource
- */
+
+#[CoversClass(\Telnyx\ApiResource::class)]
+
 class ApiResourceTest extends \Telnyx\TestCase
 {
     public function testGetSavedNestedResources()

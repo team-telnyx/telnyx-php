@@ -1,11 +1,11 @@
 <?php
 
-namespace Telnyx;
+namespace Telnyx; 
 
-/**
- * @internal
- * @covers \Telnyx\AvailablePhoneNumber
- */
+use PHPUnit\Framework\Attributes\CoversClass;
+
+#[CoversClass(\Telnyx\AvailablePhoneNumber::class)]
+
 final class TestAvailablePhoneNumber extends \Telnyx\TestCase
 {
     const TEST_RESOURCE_ID = '+18005554000';

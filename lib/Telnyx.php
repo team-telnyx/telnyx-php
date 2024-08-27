@@ -19,7 +19,8 @@ class Telnyx
     public static $clientId;
 
     // @var string The base URL for the Telnyx API.
-    public static $apiBase = 'https://api.telnyx.com';
+    // public static $apiBase = 'https://api.telnyx.com';
+    public static $apiBase = 'http://localhost:12111';
 
     // @var string|null The version of the Telnyx API to use for requests.
     public static $apiVersion = null;

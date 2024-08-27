@@ -2,10 +2,12 @@
 
 namespace Telnyx\HttpClient;
 
-/**
- * @internal
- * @covers \Telnyx\HttpClient\CurlClient
- */
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Before;
+use PHPUnit\Framework\Attributes\After;
+
+#[CoversClass(\Telnyx\HttpClient\CurlClient::class)]
+
 final class CurlClientTest extends \Telnyx\TestCase
 {
     /** @var \ReflectionProperty */
@@ -29,9 +31,7 @@ final class CurlClientTest extends \Telnyx\TestCase
     /** @var \ReflectionMethod */
     private $shouldRetryMethod;
 
-    /**
-     * @before
-     */
+    #[Before]
     public function saveOriginalNetworkValues()
     {
         $this->origMaxNetworkRetries = \Telnyx\Telnyx::getMaxNetworkRetries();
@@ -39,9 +39,7 @@ final class CurlClientTest extends \Telnyx\TestCase
         $this->origInitialNetworkRetryDelay = \Telnyx\Telnyx::getInitialNetworkRetryDelay();
     }
 
-    /**
-     * @before
-     */
+    #[Before]
     public function setUpReflectors()
     {
         $telnyxReflector = new \ReflectionClass('\Telnyx\Telnyx');
@@ -61,9 +59,7 @@ final class CurlClientTest extends \Telnyx\TestCase
         $this->sleepTimeMethod->setAccessible(true);
     }
 
-    /**
-     * @after
-     */
+    #[After]
     public function restoreOriginalNetworkValues()
     {
         \Telnyx\Telnyx::setMaxNetworkRetries($this->origMaxNetworkRetries);
@@ -331,8 +327,7 @@ final class CurlClientTest extends \Telnyx\TestCase
             $curl = new CurlClient();
             $curl->setRequestStatusCallback(function ($rbody, $rcode, $rheaders, $errno, $message, $willBeRetried, $numRetries) use (&$called) {
                 $called = true;
-
-                $this->assertInternalType('string', $rbody);
+                $this->assertIsString('string', $rbody);
                 $this->assertSame(200, $rcode);
                 $this->assertSame(0, $errno);
                 $this->assertNull($message);

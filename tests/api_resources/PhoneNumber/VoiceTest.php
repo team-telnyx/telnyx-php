@@ -2,10 +2,10 @@
 
 namespace Telnyx\PhoneNumber;
 
-/**
- * @internal
- * @covers \Telnyx\PhoneNumber\Voice
- */
+use PHPUnit\Framework\Attributes\CoversClass;
+
+#[CoversClass(\Telnyx\PhoneNumber\Voice::class)]
+
 final class VoiceTest extends \Telnyx\TestCase
 {
 
