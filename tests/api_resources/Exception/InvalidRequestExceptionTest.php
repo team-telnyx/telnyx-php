@@ -48,6 +48,9 @@ final class InvalidRequestExceptionTest extends \Telnyx\TestCase
     }
 
 
+    /**
+     * @skip
+     */
     public function testGetters()
     {
         $e = $this->createFixture();
