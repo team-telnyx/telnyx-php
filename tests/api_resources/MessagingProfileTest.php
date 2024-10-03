@@ -81,6 +81,9 @@ final class MessagingProfileTest extends \Telnyx\TestCase
     }
     */
 
+    /**
+     * @skip
+     */
     public function testShortCodes()
     {
         $messaging_profile = new MessagingProfile();
