@@ -10,9 +10,7 @@ final class InvalidRequestExceptionTest extends \Telnyx\TestCase
 {
     public function createFixture()
     {
-        $mock = $this->createMock(ApiErrorException::class);
-
-        return ApiErrorException::factory(
+        return TestApiErrorException::factory(
             'message',
             200,
 

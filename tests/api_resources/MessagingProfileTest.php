@@ -89,7 +89,7 @@ final class MessagingProfileTest extends \Telnyx\TestCase
      */
     public function testShortCodes()
     {
-        $messaging_profile = new MessagingProfile();
+        $messaging_profile = MessagingProfile::retrieve(self::TEST_RESOURCE_ID);
         $this->expectsRequest(
             'get',
             '/v2/messaging_profiles/' . urlencode(self::TEST_RESOURCE_ID) . '/short_codes'

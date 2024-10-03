@@ -106,7 +106,7 @@ final class ApiErrorExceptionTest extends \Telnyx\TestCase
 
     public function testNull()
     {
-        $result = ApiErrorException::factory(
+        $result = TestApiErrorException::factory(
             'message',
             200,
 
