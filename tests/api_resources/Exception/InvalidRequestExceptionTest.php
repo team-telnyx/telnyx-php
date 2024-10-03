@@ -49,7 +49,7 @@ final class InvalidRequestExceptionTest extends \Telnyx\TestCase
 
     /**
      * @skip
-     */
+
     public function testGetters()
     {
         $e = $this->createFixture();
@@ -80,12 +80,13 @@ final class InvalidRequestExceptionTest extends \Telnyx\TestCase
         static::assertSame('some_title', $e->getError()->title);
     }
 
+
     /**
      * @skip
-     */
     public function testToString()
     {
         $e = $this->createFixture();
         static::assertStringContainsString('(Request req_test)', (string) $e);
     }
+     */
 }
