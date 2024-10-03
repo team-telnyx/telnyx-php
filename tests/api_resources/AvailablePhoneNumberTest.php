@@ -6,7 +6,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(\Telnyx\AvailablePhoneNumber::class)]
 
-final class TestAvailablePhoneNumber extends \Telnyx\TestCase
+final class AvailablePhoneNumberTest extends \Telnyx\TestCase
 {
     const TEST_RESOURCE_ID = '+18005554000';
 
