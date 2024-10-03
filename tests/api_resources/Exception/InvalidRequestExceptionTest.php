@@ -10,7 +10,7 @@ final class InvalidRequestExceptionTest extends \Telnyx\TestCase
 {
     public function createFixture()
     {
-        $instance = TestApiErrorException::factory(
+        $instance = InvalidRequestException::factory(
             'message',
             200,
 
