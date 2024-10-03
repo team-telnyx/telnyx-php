@@ -84,5 +84,4 @@ final class InvalidRequestExceptionTest extends \Telnyx\TestCase
         $e = $this->createFixture();
         static::assertStringContainsString('(Request req_test)', (string) $e);
     }
-     */
 }
