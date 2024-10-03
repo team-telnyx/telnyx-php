@@ -78,23 +78,15 @@ final class ApiErrorExceptionTest extends \Telnyx\TestCase
         static::assertSame('some_title', $e->getError()->title);
     }
 
-    /**
-     * @skip
-     */
     public function testToString()
     {
         $e = $this->createFixture();
-        static::assertContains('(Request req_test)', (string) $e);
+        static::assertStringContainsString('(Request req_test)', (string) $e);
     }
 
-    /**
-     * @skip
-     */
     public function testNull()
     {
-        $mock = $this->createMock(ApiErrorException::class);
-
-        $result = $mock::factory(
+        $result = ApiErrorException::factory(
             'message',
             200,
 
