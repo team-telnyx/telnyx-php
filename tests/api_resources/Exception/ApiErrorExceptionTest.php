@@ -21,6 +21,7 @@ class TestApiErrorException extends ApiErrorException
         $instance->setJsonBody($jsonBody);
         $instance->setHttpHeaders($httpHeaders);
         $instance->setTelnyxCode($telnyxCode);
+        $instance->constructErrorObject();
         return $instance;
     }
 }
@@ -101,6 +102,7 @@ final class ApiErrorExceptionTest extends \Telnyx\TestCase
     public function testToString()
     {
         $e = $this->createFixture();
+        $e->setRequestId('req_test');
         static::assertStringContainsString('(Request req_test)', (string) $e);
     }
 
