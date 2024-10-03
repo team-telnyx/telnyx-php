@@ -2,10 +2,10 @@
 
 namespace Telnyx\Util;
 
-/**
- * @internal
- * @covers \Telnyx\Util\RequestOptions
- */
+use PHPUnit\Framework\Attributes\CoversClass;
+
+#[CoversClass(\Telnyx\Util\RequestOptions::class)]
+
 final class RequestOptionsTest extends \Telnyx\TestCase
 {
     public function testParseString()
@@ -19,7 +19,7 @@ final class RequestOptionsTest extends \Telnyx\TestCase
     public function testParseStringStrict()
     {
         $this->expectException(\Telnyx\Exception\InvalidArgumentException::class);
-        $this->expectExceptionMessageRegExp('#Do not pass a string for request options.#');
+        $this->expectExceptionMessageMatches('#Do not pass a string for request options.#');
 
         $opts = RequestOptions::parse('foo', true);
     }
@@ -154,15 +154,23 @@ final class RequestOptionsTest extends \Telnyx\TestCase
     public function testDebugInfo()
     {
         $opts = RequestOptions::parse(['api_key' => 'sk_test_1234567890abcdefghijklmn']);
-        $debugInfo = \print_r($opts, true);
-        static::assertContains('[apiKey] => sk_test_********************klmn', $debugInfo);
+        $debugInfo = print_r($opts, true);
+        $debugLines = explode("\n", $debugInfo);
+        $debugLines = array_map('trim', $debugLines);
+        static::assertContains('[apiKey] => sk_test_********************klmn', $debugLines);
 
         $opts = RequestOptions::parse(['api_key' => 'sk_1234567890abcdefghijklmn']);
-        $debugInfo = \print_r($opts, true);
+        $debugInfo = print_r($opts, true);
+        $debugInfo = explode("\n", $debugInfo);
+        $debugInfo = array_map('trim', $debugInfo);
         static::assertContains('[apiKey] => sk_********************klmn', $debugInfo);
 
         $opts = RequestOptions::parse(['api_key' => '1234567890abcdefghijklmn']);
-        $debugInfo = \print_r($opts, true);
+        $debugInfo = print_r($opts, true);
+        $debugInfo = explode("\n", $debugInfo);
+        $debugInfo = array_map('trim', $debugInfo); 
         static::assertContains('[apiKey] => ********************klmn', $debugInfo);
     }
+     
+
 }

@@ -2,10 +2,10 @@
 
 namespace Telnyx;
 
-/**
- * @internal
- * @covers \Telnyx\ApiResponse
- */
+use PHPUnit\Framework\Attributes\CoversClass;
+
+#[CoversClass(\Telnyx\ApiResponse::class)]
+
 final class ApiResponseTest extends \Telnyx\TestCase
 {
     public function testConstruct()

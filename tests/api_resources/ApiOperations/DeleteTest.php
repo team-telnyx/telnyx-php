@@ -2,10 +2,10 @@
 
 namespace Telnyx;
 
-/**
- * @internal
- * @covers \Telnyx\ApiOperations\Delete
- */
+use PHPUnit\Framework\Attributes\CoversClass;
+
+#[CoversClass(\Telnyx\ApiOperations\Delete::class)]
+
 
 class DummyDelete extends ApiResource
 {

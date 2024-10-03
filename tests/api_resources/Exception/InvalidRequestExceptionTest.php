@@ -2,21 +2,19 @@
 
 namespace Telnyx\Exception;
 
-/**
- * @internal
- * @covers \Telnyx\Exception\InvalidRequestException
- */
+use PHPUnit\Framework\Attributes\CoversClass;
+
+#[CoversClass(\Telnyx\Exception\InvalidRequestException::class)]
+
 final class InvalidRequestExceptionTest extends \Telnyx\TestCase
 {
     public function createFixture()
     {
-        $mock = $this->getMockForAbstractClass(ApiErrorException::class);
-
-        return $mock::factory(
+        $instance = InvalidRequestException::factory(
             'message',
             200,
 
-            // $httpBody
+            // $httpBody    
             '{"errors":[{"code":"some_code"}]}',
 
             // $jsonBody
@@ -46,7 +44,9 @@ final class InvalidRequestExceptionTest extends \Telnyx\TestCase
             'some_code'
         );
         
+        return $instance;
     }
+
 
     public function testGetters()
     {
@@ -72,15 +72,18 @@ final class InvalidRequestExceptionTest extends \Telnyx\TestCase
 
         static::assertSame('Some Value', $e->getHttpHeaders()['Some-Header']);
         static::assertSame('some_code', $e->getTelnyxCode());
+        $e->setRequestId('req_test');
         static::assertNotNull($e->getError());
         static::assertSame('some_code', $e->getError()->code);
         static::assertSame('some_detail', $e->getError()->detail);
         static::assertSame('some_title', $e->getError()->title);
     }
 
+
     public function testToString()
     {
         $e = $this->createFixture();
-        static::assertContains('(Request req_test)', (string) $e);
+        $e->setRequestId('req_test');
+        static::assertStringContainsString('(Request req_test)', (string) $e);
     }
 }

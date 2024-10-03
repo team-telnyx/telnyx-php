@@ -1,11 +1,10 @@
 <?php
 
 namespace Telnyx;
+use PHPUnit\Framework\Attributes\CoversClass;
 
-/**
- * @internal
- * @covers \Telnyx\ErrorObject
- */
+#[CoversClass(\Telnyx\ErrorObject::class)]
+
 final class ErrorObjectTest extends \Telnyx\TestCase
 {
     public function testDefaultValues()

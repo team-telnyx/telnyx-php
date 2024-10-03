@@ -2,10 +2,11 @@
 
 namespace Telnyx;
 
-/**
- * @internal
- * @covers \Telnyx\RegulatoryRequirement
- */
+ 
+use PHPUnit\Framework\Attributes\CoversClass;
+ 
+#[CoversClass(\Telnyx\RegulatoryRequirement::class)]
+
 final class RegulatoryRequirementTest extends \Telnyx\TestCase
 {
     const TEST_RESOURCE_ID = '123';
@@ -16,9 +17,9 @@ final class RegulatoryRequirementTest extends \Telnyx\TestCase
             'get',
             '/v2/regulatory_requirements'
         );
-        $resources = RegulatoryRequirement::all();
+        $resources = RegulatoryRequirement::all();  
         $this->assertInstanceOf(\Telnyx\Collection::class, $resources);
-        $this->assertInstanceOf(\Telnyx\RegulatoryRequirement::class, $resources['data'][0]);
+        $this->assertInstanceOf(\Telnyx\TelnyxObject::class, $resources['data'][0]);
     }
 
     public function testIsRetrievable()

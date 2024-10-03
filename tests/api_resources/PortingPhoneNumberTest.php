@@ -1,11 +1,10 @@
 <?php
 
-namespace Telnyx;
+namespace Telnyx; 
+use PHPUnit\Framework\Attributes\CoversClass;
+ 
+#[CoversClass(\Telnyx\PortingPhoneNumber::class)]
 
-/**
- * @internal
- * @covers \Telnyx\PortingPhoneNumber
- */
 final class PortingPhoneNumberTest extends \Telnyx\TestCase
 {
     public function testIsListable()

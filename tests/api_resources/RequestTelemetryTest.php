@@ -1,11 +1,10 @@
 <?php
 
-namespace Telnyx;
+namespace Telnyx; 
+use PHPUnit\Framework\Attributes\CoversClass;
 
-/**
- * @internal
- * @covers \Telnyx\RequestTelemetry
- */
+ 
+#[CoversClass(\Telnyx\RequestTelemetry::class)]
 final class RequestTelemetryTest extends \Telnyx\TestCase
 {
     public function testRequestTelemetry()

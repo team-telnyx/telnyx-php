@@ -1,11 +1,10 @@
 <?php
 
-namespace Telnyx;
+namespace Telnyx; 
+use PHPUnit\Framework\Attributes\CoversClass;
+ 
+#[CoversClass(\Telnyx\Portout::class)]
 
-/**
- * @internal
- * @covers \Telnyx\Portout
- */
 final class PortoutTest extends \Telnyx\TestCase
 {
     const TEST_RESOURCE_ID = '123';

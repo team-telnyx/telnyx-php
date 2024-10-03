@@ -1,11 +1,10 @@
 <?php
 
 namespace Telnyx\Util;
+use PHPUnit\Framework\Attributes\CoversClass;
 
-/**
- * @internal
- * @covers \Telnyx\Util\Set
- */
+#[CoversClass(\Telnyx\Util\Set::class)]
+
 final class SetTest extends \Telnyx\TestCase
 {
     public function testSet()

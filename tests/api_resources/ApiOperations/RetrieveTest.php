@@ -2,10 +2,10 @@
 
 namespace Telnyx;
 
-/**
- * @internal
- * @covers \Telnyx\ApiOperations\Retrieve
- */
+use PHPUnit\Framework\Attributes\CoversClass;
+
+#[CoversClass(\Telnyx\ApiOperations\Retrieve::class)]
+
 
 class DummyRetrieve extends ApiResource
 {

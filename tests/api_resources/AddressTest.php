@@ -1,17 +1,18 @@
 <?php
 
 namespace Telnyx;
+ 
+use PHPUnit\Framework\Attributes\CoversClass;
 
-/**
- * @internal
- * @covers \Telnyx\Address
- */
+#[CoversClass(\Telnyx\Address::class)]
+
 final class AddressTest extends \Telnyx\TestCase
 {
     const TEST_RESOURCE_ID = '1293384261075731499';
 
     public function testIsListable()
     {
+         
         $this->expectsRequest(
             'get',
             '/v2/addresses'
@@ -40,12 +41,14 @@ final class AddressTest extends \Telnyx\TestCase
 
     public function testIsDeletable()
     {
-        $resource = Address::retrieve(self::TEST_RESOURCE_ID);
+        
+        $resource = Address::retrieve('1293384261075731499');
+        print_r($resource);
         $this->expectsRequest(
             'delete',
             '/v2/addresses/' . urlencode(self::TEST_RESOURCE_ID)
         );
-        $resource->delete();
+        $resource->delete(); 
         $this->assertInstanceOf(\Telnyx\Address::class, $resource);
     }
 

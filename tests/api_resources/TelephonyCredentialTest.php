@@ -1,11 +1,10 @@
 <?php
 
-namespace Telnyx;
+namespace Telnyx; 
+use PHPUnit\Framework\Attributes\CoversClass;
+ 
+#[CoversClass(\Telnyx\TelephonyCredential::class)]
 
-/**
- * @internal
- * @covers \Telnyx\TelephonyCredential
- */
 final class TelephonyCredentialTest extends \Telnyx\TestCase
 {
     const TEST_RESOURCE_ID = 'c215ade3-0d39-418e-94be-c5f780760199';

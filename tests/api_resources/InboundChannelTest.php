@@ -2,11 +2,11 @@
 
 namespace Telnyx;
 
-/**
- * @internal
- * @covers \Telnyx\InboundChannel
- */
-final class InboundChannelTest extends \Telnyx\TestCase
+use PHPUnit\Framework\Attributes\CoversClass;
+
+#[CoversClass(\Telnyx\InboundChannel::class)]
+
+final class InboundChannelTest extends TestCase
 {
 
     public function testIsRetrievable()

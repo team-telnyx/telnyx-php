@@ -17,12 +17,12 @@ class Set implements IteratorAggregate
         }
     }
 
-    public function includes($elt)
+    public function includes($elt): bool
     {
         return isset($this->_elts[$elt]);
     }
 
-    public function add($elt)
+    public function add($elt): void
     {
         $this->_elts[$elt] = true;
     }
@@ -32,12 +32,12 @@ class Set implements IteratorAggregate
         unset($this->_elts[$elt]);
     }
 
-    public function toArray()
+    public function toArray(): array
     {
         return \array_keys($this->_elts);
     }
 
-    public function getIterator()
+    public function getIterator(): \Traversable
     {
         return new ArrayIterator($this->toArray());
     }

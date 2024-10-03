@@ -2,10 +2,10 @@
 
 namespace Telnyx;
 
-/**
- * @internal
- * @covers \Telnyx\IPConnection
- */
+use PHPUnit\Framework\Attributes\CoversClass;
+
+#[CoversClass(\Telnyx\IPConnection::class)]
+
 final class IPConnectionTest extends \Telnyx\TestCase
 {
     const TEST_RESOURCE_ID = '123';
@@ -33,6 +33,7 @@ final class IPConnectionTest extends \Telnyx\TestCase
 
     public function testIsDeletable()
     {
+         
         $resource = IPConnection::retrieve(self::TEST_RESOURCE_ID);
         $this->expectsRequest(
             'delete',

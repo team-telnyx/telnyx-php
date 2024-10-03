@@ -2,10 +2,10 @@
 
 namespace Telnyx;
 
-/**
- * @internal
- * @covers \Telnyx\Util\CaseInsensitiveArray
- */
+use PHPUnit\Framework\Attributes\CoversClass;
+
+#[CoversClass(\Telnyx\Util\CaseInsensitiveArray::class)]
+
 class CaseInsensitiveArrayTest extends TestCase
 {
     public function testArrayAccess()

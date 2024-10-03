@@ -1,14 +1,13 @@
 <?php
 
-namespace Telnyx;
+namespace Telnyx; 
+use PHPUnit\Framework\Attributes\CoversClass;
+ 
+#[CoversClass(\Telnyx\IP::class)]
 
-/**
- * @internal
- * @covers \Telnyx\IP
- */
 final class IPTest extends \Telnyx\TestCase
 {
-    const TEST_RESOURCE_ID = '123';
+    const TEST_RESOURCE_ID = '6a09cdc3-8948-47f0-aa62-74ac943d6c58';
 
     public function testIsListable()
     {

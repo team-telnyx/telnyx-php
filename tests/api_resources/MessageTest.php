@@ -1,11 +1,11 @@
 <?php
 
-namespace Telnyx;
+namespace Telnyx; 
+use PHPUnit\Framework\Attributes\CoversClass;
 
-/**
- * @internal
- * @covers \Telnyx\Message
- */
+ 
+#[CoversClass(\Telnyx\Message::class)]
+
 final class MessageTest extends \Telnyx\TestCase
 {
     const TEST_RESOURCE_ID = '3fa85f64-5717-4562-b3fc-2c963f66afa6';

@@ -2,10 +2,10 @@
 
 namespace Telnyx\Util;
 
-/**
- * @internal
- * @covers \Telnyx\Util\Util
- */
+use PHPUnit\Framework\Attributes\CoversClass;
+
+#[CoversClass(\Telnyx\Util\Util::class)]
+
 final class UtilTest extends \Telnyx\TestCase
 {
     public function testIsList()

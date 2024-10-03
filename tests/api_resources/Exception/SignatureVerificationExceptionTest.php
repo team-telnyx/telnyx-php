@@ -2,10 +2,10 @@
 
 namespace Telnyx\Exception;
 
-/**
- * @internal
- * @covers \Telnyx\Exception\SignatureVerificationException
- */
+use PHPUnit\Framework\Attributes\CoversClass;
+
+#[CoversClass(\Telnyx\Exception\SignatureVerificationException::class)]
+
 final class SignatureVerificationExceptionTest extends \Telnyx\TestCase
 {
 

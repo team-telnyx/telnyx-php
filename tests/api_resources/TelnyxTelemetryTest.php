@@ -1,11 +1,9 @@
 <?php
 
-namespace Telnyx;
+namespace Telnyx; 
+use PHPUnit\Framework\Attributes\CoversNothing; 
 
-/**
- * @internal
- * @coversNothing
- */
+#[CoversNothing]
 final class TelnyxTelemetryTest extends \Telnyx\TestCase
 {
     const TEST_API_KEY = 'KEY123';
@@ -20,7 +18,7 @@ final class TelnyxTelemetryTest extends \Telnyx\TestCase
       "url": "/v2/phone_numbers"
     }';
 
-    protected function setUp()
+    protected function setUp(): void
     {
         // clear static telemetry data
         ApiRequestor::resetTelemetry();
@@ -29,11 +27,11 @@ final class TelnyxTelemetryTest extends \Telnyx\TestCase
     public function testNoTelemetrySentIfNotEnabled()
     {
         Telnyx::setApiKey(self::TEST_API_KEY);
-        $requestheaders = null;
+        $requestheaders = [];
 
         $stub = $this
-            ->getMockBuilder('HttpClient\\ClientInterface')
-            ->setMethods(['request'])
+            ->getMockBuilder('Telnyx\HttpClient\ClientInterface')
+            ->onlyMethods(['request'])
             ->getMock()
         ;
 
@@ -73,11 +71,11 @@ final class TelnyxTelemetryTest extends \Telnyx\TestCase
         Telnyx::setApiKey(self::TEST_API_KEY);
         Telnyx::setEnableTelemetry(true);
 
-        $requestheaders = null;
+        $requestheaders = [];
 
         $stub = $this
-            ->getMockBuilder('HttpClient\\ClientInterface')
-            ->setMethods(['request'])
+            ->getMockBuilder('Telnyx\HttpClient\ClientInterface')
+            ->onlyMethods(['request'])
             ->getMock()
         ;
 

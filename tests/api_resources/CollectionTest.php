@@ -2,15 +2,16 @@
 
 namespace Telnyx;
 
-/**
- * @internal
- * @covers \Telnyx\Collection
- */
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Before;
+#[CoversClass(\Telnyx\Collection::class)]
+
 final class CollectionTest extends \Telnyx\TestCase
 {
-    /**
-     * @before
-     */
+    
+
+    #[Before]
+
     public function setUpFixture()
     {
         $this->fixture = Collection::constructFrom([

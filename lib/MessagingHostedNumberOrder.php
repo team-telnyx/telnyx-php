@@ -27,9 +27,10 @@ class MessagingHostedNumberOrder extends ApiResource
      */
     public function file_upload($params = null, $options = null)
     {
+ 
         $url = $this->instanceUrl() . '/actions/file_upload';
         list($response, $opts) = $this->_request('post', $url, $params, $options);
-        $this->refreshFrom($response, $opts);
+        $this->refreshFrom($response, $opts); 
         return $this;
     }
 

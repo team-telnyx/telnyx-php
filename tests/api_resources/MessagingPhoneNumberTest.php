@@ -1,12 +1,11 @@
 <?php
 
-namespace Telnyx;
+namespace Telnyx; 
+use PHPUnit\Framework\Attributes\CoversClass; 
+ 
+#[CoversClass(\Telnyx\MessagingPhoneNumber::class)]
 
-/**
- * @internal
- * @covers \Telnyx\MessagingPhoneNumber
- * @deprecated Tests are expected to fail even though this endpoint currently is working in production.
- */
+
 final class MessagingPhoneNumberTest extends \Telnyx\TestCase
 {
     const TEST_RESOURCE_ID = '+18005554000';

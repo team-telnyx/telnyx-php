@@ -1,11 +1,10 @@
 <?php
 
-namespace Telnyx;
+namespace Telnyx; 
+use PHPUnit\Framework\Attributes\CoversClass;
+ 
+#[CoversClass(\Telnyx\MobileOperatorNetwork::class)]
 
-/**
- * @internal
- * @covers \Telnyx\MobileOperatorNetwork
- */
 final class MobileOperatorNetworkTest extends \Telnyx\TestCase
 {
     const TEST_RESOURCE_ID = '123';

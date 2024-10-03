@@ -2,10 +2,12 @@
 
 namespace Telnyx;
 
-/**
- * @internal
- * @covers \Telnyx\NumberLookup
- */
+ 
+use PHPUnit\Framework\Attributes\CoversClass;
+
+ 
+#[CoversClass(\Telnyx\NumberLookup::class)]
+
 final class NumberLookupTest extends \Telnyx\TestCase
 {
     const TEST_RESOURCE_ID = '123';

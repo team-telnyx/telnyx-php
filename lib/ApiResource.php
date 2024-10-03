@@ -52,6 +52,7 @@ abstract class ApiResource extends TelnyxObject
      */
     public function refresh()
     {
+        
         $requestor = new ApiRequestor($this->_opts->apiKey, static::baseUrl());
         $url = $this->instanceUrl();
 
@@ -82,7 +83,7 @@ abstract class ApiResource extends TelnyxObject
         // Replace dots with slashes for namespaced resources, e.g. if the object's name is
         // "foo.bar", then its URL will be "/v2/foo/bars".
         $base = str_replace('.', '/', static::OBJECT_NAME);
-        return "/v2/${base}s";
+        return "/v2/{$base}s";
     }
 
     /**

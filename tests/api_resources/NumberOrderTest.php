@@ -1,11 +1,11 @@
 <?php
 
-namespace Telnyx;
+namespace Telnyx; 
+use PHPUnit\Framework\Attributes\CoversClass;
 
-/**
- * @internal
- * @covers \Telnyx\NumberOrder
- */
+ 
+#[CoversClass(\Telnyx\NumberOrder::class)]
+
 final class NumberOrderTest extends \Telnyx\TestCase
 {
     const TEST_RESOURCE_ID = "12ade33a-21c0-473b-b055-b3c836e1c292";

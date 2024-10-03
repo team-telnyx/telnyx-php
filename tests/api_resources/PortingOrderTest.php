@@ -1,11 +1,11 @@
 <?php
 
-namespace Telnyx;
+namespace Telnyx; 
+use PHPUnit\Framework\Attributes\CoversClass;
 
-/**
- * @internal
- * @covers \Telnyx\PortingOrder
- */
+ 
+#[CoversClass(\Telnyx\PortingOrder::class)]
+
 final class PortingOrderTest extends \Telnyx\TestCase
 {
     const TEST_RESOURCE_ID = 'f1486bae-f067-460c-ad43-73a92848f902';

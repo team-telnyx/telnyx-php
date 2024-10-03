@@ -2,10 +2,10 @@
 
 namespace Telnyx;
 
-/**
- * @internal
- * @covers \Telnyx\ShortCode
- */
+ 
+use PHPUnit\Framework\Attributes\CoversClass;
+ 
+#[CoversClass(\Telnyx\ShortCode::class)]
 final class ShortCodeTest extends \Telnyx\TestCase
 {
     const TEST_RESOURCE_ID = '123';

@@ -1,11 +1,10 @@
 <?php
 
-namespace Telnyx;
+namespace Telnyx; 
+use PHPUnit\Framework\Attributes\CoversClass;
 
-/**
- * @internal
- * @covers \Telnyx\ApiOperations\All
- */
+#[CoversClass(\Telnyx\ApiOperations\All::class)]
+
 
 class DummyAll extends ApiResource
 {
@@ -35,6 +34,7 @@ final class AllTest extends \Telnyx\TestCase
     {
         try {
             $result = DummyInvalidAll::all();
+            
             static::fail('Did not raise error');
         } catch (\Telnyx\Exception\UnexpectedValueException $e) {
             static::assertSame(

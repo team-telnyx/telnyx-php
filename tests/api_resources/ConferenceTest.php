@@ -2,13 +2,13 @@
 
 namespace Telnyx;
 
-/**
- * @internal
- * @covers \Telnyx\Conference
- */
+use PHPUnit\Framework\Attributes\CoversClass;
+
+#[CoversClass(\Telnyx\Conference::class)]
+
 final class ConferenceTest extends \Telnyx\TestCase
 {
-    const TEST_RESOURCE_ID = '123';
+    const TEST_RESOURCE_ID = '3fa85f64-5717-4562-b3fc-2c963f66afa6';
     const TEST_CALL_CONTROL_ID = '891510ac-f3e4-11e8-af5b-de00688a4931';
 
     public function testIsListable()
@@ -47,6 +47,7 @@ final class ConferenceTest extends \Telnyx\TestCase
 
     public function testJoin()
     {
+         
         $conference = Conference::retrieve(self::TEST_RESOURCE_ID);
 
         $this->expectsRequest(
@@ -61,6 +62,7 @@ final class ConferenceTest extends \Telnyx\TestCase
     
     public function testMute()
     {
+        
         $conference = Conference::retrieve(self::TEST_RESOURCE_ID);
 
         $this->expectsRequest(
@@ -75,6 +77,7 @@ final class ConferenceTest extends \Telnyx\TestCase
     
     public function testUnute()
     {
+         
         $conference = Conference::retrieve(self::TEST_RESOURCE_ID);
 
         $this->expectsRequest(
@@ -89,6 +92,7 @@ final class ConferenceTest extends \Telnyx\TestCase
     
     public function testHold()
     {
+         
         $conference = Conference::retrieve(self::TEST_RESOURCE_ID);
 
         $this->expectsRequest(
@@ -104,6 +108,7 @@ final class ConferenceTest extends \Telnyx\TestCase
     
     public function testUnhold()
     {
+         
         $conference = Conference::retrieve(self::TEST_RESOURCE_ID);
 
         $this->expectsRequest(
@@ -118,6 +123,7 @@ final class ConferenceTest extends \Telnyx\TestCase
     
     public function testParticipants()
     {
+         
         $conference = Conference::retrieve(self::TEST_RESOURCE_ID);
 
         $this->expectsRequest(
@@ -144,6 +150,7 @@ final class ConferenceTest extends \Telnyx\TestCase
     
     public function testSpeak()
     {
+        
         $conference = Conference::retrieve(self::TEST_RESOURCE_ID);
 
         $this->expectsRequest(

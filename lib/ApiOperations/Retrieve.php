@@ -19,12 +19,15 @@ trait Retrieve
      */
     public static function retrieve($id, $opts = null)
     {
+
         $opts = \Telnyx\Util\RequestOptions::parse($opts);
         $instance = new static($id, $opts);
+       
         $instance->refresh();
+     
 
         // If 'id' is called something else like 'call_control_id'
-        $class = get_class($instance);
+        $class = get_class($instance); 
         if (defined($class . '::OBJECT_ID')) {
             $instance->reassignId(static::OBJECT_ID);
         }
