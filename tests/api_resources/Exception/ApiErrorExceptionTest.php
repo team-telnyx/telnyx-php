@@ -5,13 +5,33 @@ namespace Telnyx\Exception;
 
 use PHPUnit\Framework\Attributes\CoversClass;
 
+class TestApiErrorException extends ApiErrorException
+{
+    public static function factory(
+        $message,
+        $httpStatus = null,
+        $httpBody = null,
+        $jsonBody = null,
+        $httpHeaders = null,
+        $telnyxCode = null
+    ) {
+        $instance = new self($message);
+        $instance->setHttpStatus($httpStatus);
+        $instance->setHttpBody($httpBody);
+        $instance->setJsonBody($jsonBody);
+        $instance->setHttpHeaders($httpHeaders);
+        $instance->setTelnyxCode($telnyxCode);
+        return $instance;
+    }
+}
+
 #[CoversClass(\Telnyx\Exception\ApiErrorException::class)]
  
 final class ApiErrorExceptionTest extends \Telnyx\TestCase
 {
-    public function createFixture(): ApiErrorException
+    public function createFixture(): TestApiErrorException
     {
-        return ApiErrorException::factory(
+        return TestApiErrorException::factory(
             'message',
             200, 
             // $httpBody
