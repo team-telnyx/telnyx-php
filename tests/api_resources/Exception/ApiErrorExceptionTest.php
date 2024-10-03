@@ -21,6 +21,7 @@ class TestApiErrorException extends ApiErrorException
         $instance->setJsonBody($jsonBody);
         $instance->setHttpHeaders($httpHeaders);
         $instance->setTelnyxCode($telnyxCode);
+        $instance->constructErrorObject();
         return $instance;
     }
 }
