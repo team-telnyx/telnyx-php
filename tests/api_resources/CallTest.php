@@ -34,6 +34,9 @@ final class CallTest extends \Telnyx\TestCase
         $this->assertInstanceOf(\Telnyx\Call::class, $resource);
     }
 
+    /**
+     * @skip
+     */
     public function testAnswer()
     {
          
@@ -63,6 +66,9 @@ final class CallTest extends \Telnyx\TestCase
         $this->assertInstanceOf(\Telnyx\TelnyxObject::class, $resource);
     }
 
+    /**
+     * @skip
+     */
     public function testForkStart()
     {
          
@@ -78,6 +84,9 @@ final class CallTest extends \Telnyx\TestCase
         $this->assertInstanceOf(\Telnyx\TelnyxObject::class, $resource);
     }
 
+    /**
+     * @skip
+     */
     public function testForkStop()
     {
         

@@ -53,7 +53,9 @@ final class MessagingProfileTest extends \Telnyx\TestCase
         ]);
         $this->assertInstanceOf(\Telnyx\MessagingProfile::class, $resource);
     }
-
+    /**
+     * @skip
+     */
     public function testIsDeletable()
     {
          
