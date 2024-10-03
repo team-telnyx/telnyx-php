@@ -75,6 +75,7 @@ final class InvalidRequestExceptionTest extends \Telnyx\TestCase
 
         static::assertSame('Some Value', $e->getHttpHeaders()['Some-Header']);
         static::assertSame('some_code', $e->getTelnyxCode());
+        $e->setRequestId('req_test');
         static::assertNotNull($e->getError());
         static::assertSame('some_code', $e->getError()->code);
         static::assertSame('some_detail', $e->getError()->detail);
@@ -85,6 +86,7 @@ final class InvalidRequestExceptionTest extends \Telnyx\TestCase
     public function testToString()
     {
         $e = $this->createFixture();
+        $e->setRequestId('req_test');
         static::assertStringContainsString('(Request req_test)', (string) $e);
     }
 }
