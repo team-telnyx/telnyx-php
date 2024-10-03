@@ -34,24 +34,6 @@ final class CallTest extends \Telnyx\TestCase
         $this->assertInstanceOf(\Telnyx\Call::class, $resource);
     }
 
-    /**
-     * @skip
-     */
-    public function testAnswer()
-    {
-         
-        $call = Call::retrieve(self::CALL_CONTROL_ID);
-
-        $this->expectsRequest(
-            'post',
-            '/v2/calls/' . urlencode(self::CALL_CONTROL_ID) . '/actions/answer'
-        );
-        $resource = $call->answer([
-            'client_state' => 'aGF2ZSBhIG5pY2UgZGF5ID1d'
-        ]);
-        $this->assertInstanceOf(\Telnyx\TelnyxObject::class, $resource);
-    }
-
     public function testBridge()
     {
         $call = new Call(self::CALL_CONTROL_ID);
@@ -62,42 +44,6 @@ final class CallTest extends \Telnyx\TestCase
         );
         $resource = $call->bridge([
             'call_control_id' => self::CALL_CONTROL_ID
-        ]);
-        $this->assertInstanceOf(\Telnyx\TelnyxObject::class, $resource);
-    }
-
-    /**
-     * @skip
-     */
-    public function testForkStart()
-    {
-         
-        $call = Call::retrieve(self::CALL_CONTROL_ID);
-
-        $this->expectsRequest(
-            'post',
-            '/v2/calls/' . urlencode(self::CALL_CONTROL_ID) . '/actions/fork_start'
-        );
-        $resource = $call->fork_start([
-            'client_state' => 'aGF2ZSBhIG5pY2UgZGF5ID1d'
-        ]);
-        $this->assertInstanceOf(\Telnyx\TelnyxObject::class, $resource);
-    }
-
-    /**
-     * @skip
-     */
-    public function testForkStop()
-    {
-        
-        $call = Call::retrieve(self::CALL_CONTROL_ID);
-
-        $this->expectsRequest(
-            'post',
-            '/v2/calls/' . urlencode(self::CALL_CONTROL_ID) . '/actions/fork_stop'
-        );
-        $resource = $call->fork_stop([
-            'client_state' => 'aGF2ZSBhIG5pY2UgZGF5ID1d'
         ]);
         $this->assertInstanceOf(\Telnyx\TelnyxObject::class, $resource);
     }

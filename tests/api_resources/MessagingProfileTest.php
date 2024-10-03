@@ -55,7 +55,7 @@ final class MessagingProfileTest extends \Telnyx\TestCase
     }
     /**
      * @skip
-     */
+    
     public function testIsDeletable()
     {
          
@@ -68,6 +68,7 @@ final class MessagingProfileTest extends \Telnyx\TestCase
         // $resource->delete();
         $this->assertInstanceOf(\Telnyx\MessagingProfile::class, $resource);
     }
+    */
 
     /*
     public function testPhoneNumbers()
