@@ -9,11 +9,9 @@ use PHPUnit\Framework\Attributes\CoversClass;
  
 final class ApiErrorExceptionTest extends \Telnyx\TestCase
 {
-    public function createFixture()
+    public function createFixture(): ApiErrorException
     {
-        $mock = $this->createMock(ApiErrorException::class);
-
-        return $mock::factory(
+        return ApiErrorException::factory(
             'message',
             200, 
             // $httpBody
