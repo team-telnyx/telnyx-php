@@ -44,6 +44,7 @@ final class InvalidRequestExceptionTest extends \Telnyx\TestCase
             'some_code'
         );
         
+        $instance->constructErrorObject();
         return $instance;
     }
 
