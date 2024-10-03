@@ -49,8 +49,6 @@ final class InvalidRequestExceptionTest extends \Telnyx\TestCase
 
 
     /**
-     * @skip
-     * @skip
     public function testGetters()
     {
         $e = $this->createFixture();
@@ -75,6 +73,7 @@ final class InvalidRequestExceptionTest extends \Telnyx\TestCase
 
         static::assertSame('Some Value', $e->getHttpHeaders()['Some-Header']);
         static::assertSame('some_code', $e->getTelnyxCode());
+        $e->constructErrorObject();
         $e->setRequestId('req_test');
         static::assertNotNull($e->getError());
         static::assertSame('some_code', $e->getError()->code);
