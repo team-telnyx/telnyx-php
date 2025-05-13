@@ -22,7 +22,7 @@ class PhoneNumberAssignmentByProfile extends ApiResource
     {
         // Use a custom URL for this resource
         // NOTE: This endpoint is special because object name and endpoint are both not plural 
-        return "/v2/phoneNumberAssignmnetByProfile";
+        return "/v2/10dlc/phoneNumberAssignmnetByProfile";
     }
     public function phone_numbers($params = null, $options = null)
     {
