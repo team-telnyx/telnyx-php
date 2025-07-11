@@ -19,8 +19,8 @@ class Telnyx
     public static $clientId;
 
     // @var string The base URL for the Telnyx API.
-    // public static $apiBase = 'https://api.telnyx.com';
-    public static $apiBase = 'http://localhost:12111';
+    public static $apiBase = 'https://api.telnyx.com';
+    //public static $apiBase = 'http://localhost:12111
 
     // @var string|null The version of the Telnyx API to use for requests.
     public static $apiVersion = null;
@@ -56,7 +56,7 @@ class Telnyx
     // @var float Initial delay between retries, in seconds
     private static $initialNetworkRetryDelay = 0.5;
 
-    const VERSION = '3.0.0';
+    const VERSION = '3.0.1';
 
     /**
      * @return string The API key used for requests.
