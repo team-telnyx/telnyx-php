@@ -24,6 +24,7 @@ trait Update
 
         list($response, $opts) = static::_staticRequest('patch', $url, $params, $opts);
         $obj = \Telnyx\Util\Util::convertToTelnyxObject($response->json, $opts);
+
         $obj->setLastResponse($response);
         return $obj;
     }
