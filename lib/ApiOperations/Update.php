@@ -22,7 +22,7 @@ trait Update
         self::_validateParams($params);
         $url = static::resourceUrl($id);
 
-        list($response, $opts) = static::_staticRequest('patch', $url, $params, $opts);
+        list($response, $opts) = static::_staticRequest($params['method'] ?? 'patch', $url, $params, $opts);
         $obj = \Telnyx\Util\Util::convertToTelnyxObject($response->json, $opts);
         $obj->setLastResponse($response);
         return $obj;

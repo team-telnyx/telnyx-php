@@ -24,6 +24,6 @@ class PhoneNumberCampaign extends ApiResource
     {
         // Use a custom URL for this resource
         // NOTE: This endpoint is special because object name and endpoint are not plural
-        return "/v2/phoneNumberCampaign";
+        return "/v2/10dlc/phone_number_campaigns";
     }
 }
