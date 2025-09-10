@@ -1,0 +1,17 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Telnyx\Calls\CallDialParams;
+
+/**
+ * Audio sampling rate.
+ */
+enum StreamBidirectionalSamplingRate: int
+{
+    case STREAM_BIDIRECTIONAL_SAMPLING_RATE_8000 = 8000;
+
+    case STREAM_BIDIRECTIONAL_SAMPLING_RATE_16000 = 16000;
+
+    case STREAM_BIDIRECTIONAL_SAMPLING_RATE_48000 = 48000;
+}

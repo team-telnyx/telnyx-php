@@ -1,42 +1,51 @@
 {
-    "name": "telnyx\/telnyx-php",
-    "description": "Telnyx PHP Library",
-    "keywords": [
-        "telnyx",
-        "api"
-    ],
-    "homepage": "https:\/\/telnyx.com\/",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Telnyx and contributors",
-            "homepage": "https:\/\/github.com\/telnyx\/telnyx-php\/contributors"
-        }
-    ],
-    "require": {
-        "php": ">=7.4",
-        "ext-curl": "*",
-        "ext-json": "*",
-        "ext-mbstring": "*",
-        "paragonie/sodium_compat": "^1.13"
-    },
-    "require-dev": {
-      "phpunit/phpunit": "^11",
-      "squizlabs/php_codesniffer": "^3.3",
-      "symfony/process": "~3.4",
-      "friendsofphp/php-cs-fixer": "^2.15"
-    },
-    "autoload": {
-      "psr-4": { "Telnyx\\" : "lib/" }
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "2.0-dev"
-        }
-    },
-    "scripts": {
-        "test": "phpunit --colors=always",
-        "test-coverage": "phpunit --colors=always --coverage-clover build/logs/clover.xml",
-        "cs-check": "phpcs"
+  "$schema": "https://getcomposer.org/schema.json",
+  "autoload": {
+    "files": ["src/Core.php", "src/Client.php"],
+    "psr-4": {
+      "Telnyx\\": "src/"
     }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  },
+  "config": {
+    "allow-plugins": {
+      "pestphp/pest-plugin": true,
+      "php-http/discovery": false,
+      "phpstan/extension-installer": true
+    },
+    "platform": {
+      "php": "8.3"
+    },
+    "preferred-install": "dist",
+    "sort-packages": true
+  },
+  "description": "Telnyx PHP SDK",
+  "name": "org-placeholder/telnyx",
+  "require": {
+    "php": "^8.1",
+    "php-http/discovery": "^1",
+    "psr/http-client": "^1",
+    "psr/http-client-implementation": "^1",
+    "psr/http-factory-implementation": "^1",
+    "psr/http-message": "^1|^2"
+  },
+  "require-dev": {
+    "friendsofphp/php-cs-fixer": "^3",
+    "nyholm/psr7": "^1",
+    "pestphp/pest": "^3",
+    "phpstan/extension-installer": "^1",
+    "phpstan/phpstan": "^2",
+    "phpstan/phpstan-phpunit": "^2",
+    "phpunit/phpunit": "^11",
+    "symfony/http-client": "^7"
+  },
+  "scripts": {
+    "build:docs": "curl --etag-save ./vendor/ag.etags --etag-compare ./vendor/ag.etags --create-dirs --remote-name --output-dir ./vendor/bin --no-progress-meter -- https://github.com/ApiGen/ApiGen/releases/latest/download/apigen.phar && php ./vendor/bin/apigen.phar --output docs -- src",
+    "lint": "./scripts/lint",
+    "test": "./scripts/test"
+  }
 }

@@ -1,0 +1,70 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Telnyx\AuditEvents;
+
+use Telnyx\AuditEvents\AuditEventListResponse\Data;
+use Telnyx\AuditEvents\AuditEventListResponse\Meta;
+use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Contracts\BaseModel;
+
+/**
+ * @phpstan-type audit_event_list_response = array{
+ *   data?: list<Data>|null, meta?: Meta|null
+ * }
+ */
+final class AuditEventListResponse implements BaseModel
+{
+    /** @use SdkModel<audit_event_list_response> */
+    use SdkModel;
+
+    /** @var list<Data>|null $data */
+    #[Api(list: Data::class, optional: true)]
+    public ?array $data;
+
+    #[Api(optional: true)]
+    public ?Meta $meta;
+
+    public function __construct()
+    {
+        $this->initialize();
+    }
+
+    /**
+     * Construct an instance from the required parameters.
+     *
+     * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param list<Data> $data
+     */
+    public static function with(?array $data = null, ?Meta $meta = null): self
+    {
+        $obj = new self;
+
+        null !== $data && $obj->data = $data;
+        null !== $meta && $obj->meta = $meta;
+
+        return $obj;
+    }
+
+    /**
+     * @param list<Data> $data
+     */
+    public function withData(array $data): self
+    {
+        $obj = clone $this;
+        $obj->data = $data;
+
+        return $obj;
+    }
+
+    public function withMeta(Meta $meta): self
+    {
+        $obj = clone $this;
+        $obj->meta = $meta;
+
+        return $obj;
+    }
+}
