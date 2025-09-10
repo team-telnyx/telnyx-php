@@ -6,7 +6,6 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Tests\UnsupportedMockTests;
 
 /**
  * @internal
@@ -29,10 +28,6 @@ final class AssistantsTest extends TestCase
     #[Test]
     public function testCreate(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->ai->assistants->create(
             instructions: 'instructions',
             model: 'model',
@@ -45,10 +40,6 @@ final class AssistantsTest extends TestCase
     #[Test]
     public function testCreateWithOptionalParams(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->ai->assistants->create(
             instructions: 'instructions',
             model: 'model',
@@ -61,10 +52,6 @@ final class AssistantsTest extends TestCase
     #[Test]
     public function testRetrieve(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->ai->assistants->retrieve('assistant_id');
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -73,10 +60,6 @@ final class AssistantsTest extends TestCase
     #[Test]
     public function testUpdate(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->ai->assistants->update('assistant_id');
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -85,10 +68,6 @@ final class AssistantsTest extends TestCase
     #[Test]
     public function testList(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->ai->assistants->list();
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -97,10 +76,6 @@ final class AssistantsTest extends TestCase
     #[Test]
     public function testDelete(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->ai->assistants->delete('assistant_id');
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -109,10 +84,6 @@ final class AssistantsTest extends TestCase
     #[Test]
     public function testChat(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->ai->assistants->chat(
             'assistant_id',
             content: 'Tell me a joke about cats',
@@ -125,10 +96,6 @@ final class AssistantsTest extends TestCase
     #[Test]
     public function testChatWithOptionalParams(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->ai->assistants->chat(
             'assistant_id',
             content: 'Tell me a joke about cats',
@@ -141,10 +108,6 @@ final class AssistantsTest extends TestCase
     #[Test]
     public function testClone(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->ai->assistants->clone('assistant_id');
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -153,10 +116,6 @@ final class AssistantsTest extends TestCase
     #[Test]
     public function testGetTexml(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->ai->assistants->getTexml('assistant_id');
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -165,10 +124,6 @@ final class AssistantsTest extends TestCase
     #[Test]
     public function testImport(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->ai->assistants->import(
             apiKeyRef: 'api_key_ref',
             provider: 'elevenlabs'
@@ -180,10 +135,6 @@ final class AssistantsTest extends TestCase
     #[Test]
     public function testImportWithOptionalParams(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->ai->assistants->import(
             apiKeyRef: 'api_key_ref',
             provider: 'elevenlabs'

@@ -6,7 +6,6 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Tests\UnsupportedMockTests;
 
 /**
  * @internal
@@ -29,10 +28,6 @@ final class CallsTest extends TestCase
     #[Test]
     public function testRetrieve(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->texml->accounts->calls->retrieve(
             'call_sid',
             'account_sid'
@@ -44,10 +39,6 @@ final class CallsTest extends TestCase
     #[Test]
     public function testRetrieveWithOptionalParams(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->texml->accounts->calls->retrieve(
             'call_sid',
             'account_sid'
@@ -59,10 +50,6 @@ final class CallsTest extends TestCase
     #[Test]
     public function testUpdate(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->texml->accounts->calls->update(
             'call_sid',
             accountSid: 'account_sid'
@@ -74,10 +61,6 @@ final class CallsTest extends TestCase
     #[Test]
     public function testUpdateWithOptionalParams(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->texml->accounts->calls->update(
             'call_sid',
             accountSid: 'account_sid'
@@ -89,10 +72,6 @@ final class CallsTest extends TestCase
     #[Test]
     public function testCalls(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->texml->accounts->calls->calls(
             'account_sid',
             applicationSid: 'ApplicationSid',
@@ -106,10 +85,6 @@ final class CallsTest extends TestCase
     #[Test]
     public function testCallsWithOptionalParams(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->texml->accounts->calls->calls(
             'account_sid',
             applicationSid: 'ApplicationSid',
@@ -123,10 +98,6 @@ final class CallsTest extends TestCase
     #[Test]
     public function testRetrieveCalls(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->texml->accounts->calls->retrieveCalls(
             'account_sid'
         );
@@ -137,10 +108,6 @@ final class CallsTest extends TestCase
     #[Test]
     public function testSiprecJson(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->texml->accounts->calls->siprecJson(
             'call_sid',
             accountSid: 'account_sid'
@@ -152,10 +119,6 @@ final class CallsTest extends TestCase
     #[Test]
     public function testSiprecJsonWithOptionalParams(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->texml->accounts->calls->siprecJson(
             'call_sid',
             accountSid: 'account_sid'
@@ -167,10 +130,6 @@ final class CallsTest extends TestCase
     #[Test]
     public function testStreamsJson(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->texml->accounts->calls->streamsJson(
             'call_sid',
             accountSid: 'account_sid'
@@ -182,10 +141,6 @@ final class CallsTest extends TestCase
     #[Test]
     public function testStreamsJsonWithOptionalParams(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->texml->accounts->calls->streamsJson(
             'call_sid',
             accountSid: 'account_sid'

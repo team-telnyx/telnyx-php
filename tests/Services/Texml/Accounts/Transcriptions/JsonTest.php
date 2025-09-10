@@ -6,7 +6,6 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Tests\UnsupportedMockTests;
 
 /**
  * @internal
@@ -29,10 +28,6 @@ final class JsonTest extends TestCase
     #[Test]
     public function testDeleteRecordingTranscriptionSidJson(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this
             ->client
             ->texml
@@ -51,10 +46,6 @@ final class JsonTest extends TestCase
     #[Test]
     public function testDeleteRecordingTranscriptionSidJsonWithOptionalParams(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this
             ->client
             ->texml
@@ -73,10 +64,6 @@ final class JsonTest extends TestCase
     #[Test]
     public function testRetrieveRecordingTranscriptionSidJson(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this
             ->client
             ->texml
@@ -95,10 +82,6 @@ final class JsonTest extends TestCase
     #[Test]
     public function testRetrieveRecordingTranscriptionSidJsonWithOptionalParams(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this
             ->client
             ->texml

@@ -6,7 +6,6 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Tests\UnsupportedMockTests;
 
 /**
  * @internal
@@ -29,10 +28,6 @@ final class ReleasesTest extends TestCase
     #[Test]
     public function testRetrieve(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->externalConnections->releases->retrieve(
             '7b6a6449-b055-45a6-81f6-f6f0dffa4cc6',
             'id'
@@ -44,10 +39,6 @@ final class ReleasesTest extends TestCase
     #[Test]
     public function testRetrieveWithOptionalParams(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->externalConnections->releases->retrieve(
             '7b6a6449-b055-45a6-81f6-f6f0dffa4cc6',
             'id'
@@ -59,10 +50,6 @@ final class ReleasesTest extends TestCase
     #[Test]
     public function testList(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->externalConnections->releases->list('id');
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType

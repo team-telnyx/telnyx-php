@@ -6,7 +6,6 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Tests\UnsupportedMockTests;
 
 /**
  * @internal
@@ -29,10 +28,6 @@ final class UsecaseTest extends TestCase
     #[Test]
     public function testGetCost(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->campaign->usecase->getCost('usecase');
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -41,10 +36,6 @@ final class UsecaseTest extends TestCase
     #[Test]
     public function testGetCostWithOptionalParams(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->campaign->usecase->getCost('usecase');
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType

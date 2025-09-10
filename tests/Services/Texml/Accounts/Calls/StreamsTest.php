@@ -6,7 +6,6 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Tests\UnsupportedMockTests;
 
 /**
  * @internal
@@ -29,10 +28,6 @@ final class StreamsTest extends TestCase
     #[Test]
     public function testStreamingSidJson(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->texml->accounts->calls->streams->streamingSidJson(
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
             accountSid: 'account_sid',
@@ -45,10 +40,6 @@ final class StreamsTest extends TestCase
     #[Test]
     public function testStreamingSidJsonWithOptionalParams(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->texml->accounts->calls->streams->streamingSidJson(
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
             accountSid: 'account_sid',

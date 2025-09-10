@@ -7,7 +7,6 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Storage\Buckets\Usage\UsageGetAPIUsageParams\Filter;
-use Tests\UnsupportedMockTests;
 
 /**
  * @internal
@@ -30,10 +29,6 @@ final class UsageTest extends TestCase
     #[Test]
     public function testGetAPIUsage(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->storage->buckets->usage->getAPIUsage(
             '',
             Filter::with(
@@ -48,10 +43,6 @@ final class UsageTest extends TestCase
     #[Test]
     public function testGetAPIUsageWithOptionalParams(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->storage->buckets->usage->getAPIUsage(
             '',
             Filter::with(
@@ -66,10 +57,6 @@ final class UsageTest extends TestCase
     #[Test]
     public function testGetBucketUsage(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->storage->buckets->usage->getBucketUsage('');
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType

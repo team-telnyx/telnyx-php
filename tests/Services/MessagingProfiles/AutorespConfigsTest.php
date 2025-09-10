@@ -6,7 +6,6 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Tests\UnsupportedMockTests;
 
 /**
  * @internal
@@ -29,10 +28,6 @@ final class AutorespConfigsTest extends TestCase
     #[Test]
     public function testCreate(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->messagingProfiles->autorespConfigs->create(
             'profile_id',
             countryCode: 'US',
@@ -46,10 +41,6 @@ final class AutorespConfigsTest extends TestCase
     #[Test]
     public function testCreateWithOptionalParams(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->messagingProfiles->autorespConfigs->create(
             'profile_id',
             countryCode: 'US',
@@ -63,10 +54,6 @@ final class AutorespConfigsTest extends TestCase
     #[Test]
     public function testRetrieve(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->messagingProfiles->autorespConfigs->retrieve(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -78,10 +65,6 @@ final class AutorespConfigsTest extends TestCase
     #[Test]
     public function testRetrieveWithOptionalParams(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->messagingProfiles->autorespConfigs->retrieve(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -93,10 +76,6 @@ final class AutorespConfigsTest extends TestCase
     #[Test]
     public function testUpdate(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->messagingProfiles->autorespConfigs->update(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
             profileID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -111,10 +90,6 @@ final class AutorespConfigsTest extends TestCase
     #[Test]
     public function testUpdateWithOptionalParams(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->messagingProfiles->autorespConfigs->update(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
             profileID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -129,10 +104,6 @@ final class AutorespConfigsTest extends TestCase
     #[Test]
     public function testList(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->messagingProfiles->autorespConfigs->list(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
@@ -143,10 +114,6 @@ final class AutorespConfigsTest extends TestCase
     #[Test]
     public function testDelete(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->messagingProfiles->autorespConfigs->delete(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -158,10 +125,6 @@ final class AutorespConfigsTest extends TestCase
     #[Test]
     public function testDeleteWithOptionalParams(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->messagingProfiles->autorespConfigs->delete(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',

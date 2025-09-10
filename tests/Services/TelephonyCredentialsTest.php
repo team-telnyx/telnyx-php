@@ -6,7 +6,6 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Tests\UnsupportedMockTests;
 
 /**
  * @internal
@@ -29,10 +28,6 @@ final class TelephonyCredentialsTest extends TestCase
     #[Test]
     public function testCreate(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->telephonyCredentials->create(
             connectionID: '1234567890'
         );
@@ -43,10 +38,6 @@ final class TelephonyCredentialsTest extends TestCase
     #[Test]
     public function testCreateWithOptionalParams(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->telephonyCredentials->create(
             connectionID: '1234567890'
         );
@@ -57,10 +48,6 @@ final class TelephonyCredentialsTest extends TestCase
     #[Test]
     public function testRetrieve(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->telephonyCredentials->retrieve('id');
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -69,10 +56,6 @@ final class TelephonyCredentialsTest extends TestCase
     #[Test]
     public function testUpdate(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->telephonyCredentials->update('id');
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -81,10 +64,6 @@ final class TelephonyCredentialsTest extends TestCase
     #[Test]
     public function testList(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->telephonyCredentials->list();
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -93,10 +72,6 @@ final class TelephonyCredentialsTest extends TestCase
     #[Test]
     public function testDelete(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->telephonyCredentials->delete('id');
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -105,10 +80,6 @@ final class TelephonyCredentialsTest extends TestCase
     #[Test]
     public function testCreateToken(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->telephonyCredentials->createToken('id');
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType

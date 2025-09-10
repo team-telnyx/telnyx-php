@@ -6,7 +6,6 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Tests\UnsupportedMockTests;
 
 /**
  * @internal
@@ -29,10 +28,6 @@ final class AccessIPAddressTest extends TestCase
     #[Test]
     public function testCreate(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->accessIPAddress->create(ipAddress: 'ip_address');
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -41,10 +36,6 @@ final class AccessIPAddressTest extends TestCase
     #[Test]
     public function testCreateWithOptionalParams(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->accessIPAddress->create(ipAddress: 'ip_address');
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -53,10 +44,6 @@ final class AccessIPAddressTest extends TestCase
     #[Test]
     public function testRetrieve(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->accessIPAddress->retrieve('access_ip_address_id');
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -65,10 +52,6 @@ final class AccessIPAddressTest extends TestCase
     #[Test]
     public function testList(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->accessIPAddress->list();
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -77,10 +60,6 @@ final class AccessIPAddressTest extends TestCase
     #[Test]
     public function testDelete(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->accessIPAddress->delete('access_ip_address_id');
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType

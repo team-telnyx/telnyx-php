@@ -6,7 +6,6 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Tests\UnsupportedMockTests;
 
 /**
  * @internal
@@ -29,10 +28,6 @@ final class ActionsTest extends TestCase
     #[Test]
     public function testRetrieve(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->simCards->actions->retrieve(
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
@@ -43,10 +38,6 @@ final class ActionsTest extends TestCase
     #[Test]
     public function testList(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->simCards->actions->list();
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -55,10 +46,6 @@ final class ActionsTest extends TestCase
     #[Test]
     public function testBulkSetPublicIPs(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->simCards->actions->bulkSetPublicIPs(
             ['6b14e151-8493-4fa1-8664-1cc4e6d14158']
         );
@@ -69,10 +56,6 @@ final class ActionsTest extends TestCase
     #[Test]
     public function testBulkSetPublicIPsWithOptionalParams(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->simCards->actions->bulkSetPublicIPs(
             ['6b14e151-8493-4fa1-8664-1cc4e6d14158']
         );
@@ -83,10 +66,6 @@ final class ActionsTest extends TestCase
     #[Test]
     public function testDisable(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->simCards->actions->disable(
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
@@ -97,10 +76,6 @@ final class ActionsTest extends TestCase
     #[Test]
     public function testEnable(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->simCards->actions->enable(
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
@@ -111,10 +86,6 @@ final class ActionsTest extends TestCase
     #[Test]
     public function testRemovePublicIP(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->simCards->actions->removePublicIP(
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
@@ -125,10 +96,6 @@ final class ActionsTest extends TestCase
     #[Test]
     public function testSetPublicIP(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->simCards->actions->setPublicIP(
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
@@ -139,10 +106,6 @@ final class ActionsTest extends TestCase
     #[Test]
     public function testSetStandby(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->simCards->actions->setStandby(
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
@@ -153,10 +116,6 @@ final class ActionsTest extends TestCase
     #[Test]
     public function testValidateRegistrationCodes(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->simCards->actions->validateRegistrationCodes();
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType

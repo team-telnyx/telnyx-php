@@ -6,7 +6,6 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Tests\UnsupportedMockTests;
 
 /**
  * @internal
@@ -29,10 +28,6 @@ final class DialogflowConnectionsTest extends TestCase
     #[Test]
     public function testCreate(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->dialogflowConnections->create(
             'connection_id',
             serviceAccount: [
@@ -445,10 +440,6 @@ final class DialogflowConnectionsTest extends TestCase
     #[Test]
     public function testCreateWithOptionalParams(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->dialogflowConnections->create(
             'connection_id',
             serviceAccount: [
@@ -861,10 +852,6 @@ final class DialogflowConnectionsTest extends TestCase
     #[Test]
     public function testRetrieve(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->dialogflowConnections->retrieve('connection_id');
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -873,10 +860,6 @@ final class DialogflowConnectionsTest extends TestCase
     #[Test]
     public function testUpdate(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->dialogflowConnections->update(
             'connection_id',
             serviceAccount: [
@@ -1289,10 +1272,6 @@ final class DialogflowConnectionsTest extends TestCase
     #[Test]
     public function testUpdateWithOptionalParams(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->dialogflowConnections->update(
             'connection_id',
             serviceAccount: [
@@ -1705,10 +1684,6 @@ final class DialogflowConnectionsTest extends TestCase
     #[Test]
     public function testDelete(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->dialogflowConnections->delete('connection_id');
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
