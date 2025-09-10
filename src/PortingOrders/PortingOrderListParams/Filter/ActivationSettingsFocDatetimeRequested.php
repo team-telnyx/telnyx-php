@@ -1,0 +1,76 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Telnyx\PortingOrders\PortingOrderListParams\Filter;
+
+use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Contracts\BaseModel;
+
+/**
+ * FOC datetime range filtering operations.
+ *
+ * @phpstan-type activation_settings_foc_datetime_requested = array{
+ *   gt?: string|null, lt?: string|null
+ * }
+ */
+final class ActivationSettingsFocDatetimeRequested implements BaseModel
+{
+    /** @use SdkModel<activation_settings_foc_datetime_requested> */
+    use SdkModel;
+
+    /**
+     * Filter results by foc date later than this value.
+     */
+    #[Api(optional: true)]
+    public ?string $gt;
+
+    /**
+     * Filter results by foc date earlier than this value.
+     */
+    #[Api(optional: true)]
+    public ?string $lt;
+
+    public function __construct()
+    {
+        $this->initialize();
+    }
+
+    /**
+     * Construct an instance from the required parameters.
+     *
+     * You must use named parameters to construct any parameters with a default value.
+     */
+    public static function with(?string $gt = null, ?string $lt = null): self
+    {
+        $obj = new self;
+
+        null !== $gt && $obj->gt = $gt;
+        null !== $lt && $obj->lt = $lt;
+
+        return $obj;
+    }
+
+    /**
+     * Filter results by foc date later than this value.
+     */
+    public function withGt(string $gt): self
+    {
+        $obj = clone $this;
+        $obj->gt = $gt;
+
+        return $obj;
+    }
+
+    /**
+     * Filter results by foc date earlier than this value.
+     */
+    public function withLt(string $lt): self
+    {
+        $obj = clone $this;
+        $obj->lt = $lt;
+
+        return $obj;
+    }
+}

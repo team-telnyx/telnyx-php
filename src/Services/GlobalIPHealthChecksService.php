@@ -1,0 +1,122 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Telnyx\Services;
+
+use Telnyx\Client;
+use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckCreateParams;
+use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckDeleteResponse;
+use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckGetResponse;
+use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckListParams;
+use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckListParams\Page;
+use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckListResponse;
+use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckNewResponse;
+use Telnyx\RequestOptions;
+use Telnyx\ServiceContracts\GlobalIPHealthChecksContract;
+
+use const Telnyx\Core\OMIT as omit;
+
+final class GlobalIPHealthChecksService implements GlobalIPHealthChecksContract
+{
+    /**
+     * @internal
+     */
+    public function __construct(private Client $client) {}
+
+    /**
+     * @api
+     *
+     * Create a Global IP health check.
+     *
+     * @param string $globalIPID global IP ID
+     * @param array<string, mixed> $healthCheckParams a Global IP health check params
+     * @param string $healthCheckType the Global IP health check type
+     */
+    public function create(
+        $globalIPID = omit,
+        $healthCheckParams = omit,
+        $healthCheckType = omit,
+        ?RequestOptions $requestOptions = null,
+    ): GlobalIPHealthCheckNewResponse {
+        [$parsed, $options] = GlobalIPHealthCheckCreateParams::parseRequest(
+            [
+                'globalIPID' => $globalIPID,
+                'healthCheckParams' => $healthCheckParams,
+                'healthCheckType' => $healthCheckType,
+            ],
+            $requestOptions,
+        );
+
+        // @phpstan-ignore-next-line;
+        return $this->client->request(
+            method: 'post',
+            path: 'global_ip_health_checks',
+            body: (object) $parsed,
+            options: $options,
+            convert: GlobalIPHealthCheckNewResponse::class,
+        );
+    }
+
+    /**
+     * @api
+     *
+     * Retrieve a Global IP health check.
+     */
+    public function retrieve(
+        string $id,
+        ?RequestOptions $requestOptions = null
+    ): GlobalIPHealthCheckGetResponse {
+        // @phpstan-ignore-next-line;
+        return $this->client->request(
+            method: 'get',
+            path: ['global_ip_health_checks/%1$s', $id],
+            options: $requestOptions,
+            convert: GlobalIPHealthCheckGetResponse::class,
+        );
+    }
+
+    /**
+     * @api
+     *
+     * List all Global IP health checks.
+     *
+     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     */
+    public function list(
+        $page = omit,
+        ?RequestOptions $requestOptions = null
+    ): GlobalIPHealthCheckListResponse {
+        [$parsed, $options] = GlobalIPHealthCheckListParams::parseRequest(
+            ['page' => $page],
+            $requestOptions
+        );
+
+        // @phpstan-ignore-next-line;
+        return $this->client->request(
+            method: 'get',
+            path: 'global_ip_health_checks',
+            query: $parsed,
+            options: $options,
+            convert: GlobalIPHealthCheckListResponse::class,
+        );
+    }
+
+    /**
+     * @api
+     *
+     * Delete a Global IP health check.
+     */
+    public function delete(
+        string $id,
+        ?RequestOptions $requestOptions = null
+    ): GlobalIPHealthCheckDeleteResponse {
+        // @phpstan-ignore-next-line;
+        return $this->client->request(
+            method: 'delete',
+            path: ['global_ip_health_checks/%1$s', $id],
+            options: $requestOptions,
+            convert: GlobalIPHealthCheckDeleteResponse::class,
+        );
+    }
+}

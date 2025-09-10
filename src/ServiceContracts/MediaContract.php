@@ -1,0 +1,78 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Telnyx\ServiceContracts;
+
+use Telnyx\Media\MediaGetResponse;
+use Telnyx\Media\MediaListParams\Filter;
+use Telnyx\Media\MediaListResponse;
+use Telnyx\Media\MediaUpdateResponse;
+use Telnyx\Media\MediaUploadResponse;
+use Telnyx\RequestOptions;
+
+use const Telnyx\Core\OMIT as omit;
+
+interface MediaContract
+{
+    /**
+     * @api
+     */
+    public function retrieve(
+        string $mediaName,
+        ?RequestOptions $requestOptions = null
+    ): MediaGetResponse;
+
+    /**
+     * @api
+     *
+     * @param string $mediaURL The URL where the media to be stored in Telnyx network is currently hosted. The maximum allowed size is 20 MB.
+     * @param int $ttlSecs The number of seconds after which the media resource will be deleted, defaults to 2 days. The maximum allowed vale is 630720000, which translates to 20 years.
+     */
+    public function update(
+        string $mediaName,
+        $mediaURL = omit,
+        $ttlSecs = omit,
+        ?RequestOptions $requestOptions = null,
+    ): MediaUpdateResponse;
+
+    /**
+     * @api
+     *
+     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[content_type][]
+     */
+    public function list(
+        $filter = omit,
+        ?RequestOptions $requestOptions = null
+    ): MediaListResponse;
+
+    /**
+     * @api
+     */
+    public function delete(
+        string $mediaName,
+        ?RequestOptions $requestOptions = null
+    ): mixed;
+
+    /**
+     * @api
+     */
+    public function download(
+        string $mediaName,
+        ?RequestOptions $requestOptions = null
+    ): string;
+
+    /**
+     * @api
+     *
+     * @param string $mediaURL The URL where the media to be stored in Telnyx network is currently hosted. The maximum allowed size is 20 MB.
+     * @param string $mediaName the unique identifier of a file
+     * @param int $ttlSecs The number of seconds after which the media resource will be deleted, defaults to 2 days. The maximum allowed vale is 630720000, which translates to 20 years.
+     */
+    public function upload(
+        $mediaURL,
+        $mediaName = omit,
+        $ttlSecs = omit,
+        ?RequestOptions $requestOptions = null,
+    ): MediaUploadResponse;
+}

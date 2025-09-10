@@ -1,0 +1,13 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Telnyx\PhoneNumberBlocks\Jobs\JobListParams\Filter;
+
+/**
+ * Identifies the type of the background job.
+ */
+enum Type: string
+{
+    case DELETE_PHONE_NUMBER_BLOCK = 'delete_phone_number_block';
+}
