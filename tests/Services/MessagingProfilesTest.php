@@ -6,7 +6,6 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Tests\UnsupportedMockTests;
 
 /**
  * @internal
@@ -29,10 +28,6 @@ final class MessagingProfilesTest extends TestCase
     #[Test]
     public function testCreate(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->messagingProfiles->create(
             name: 'My name',
             whitelistedDestinations: ['US']
@@ -44,10 +39,6 @@ final class MessagingProfilesTest extends TestCase
     #[Test]
     public function testCreateWithOptionalParams(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->messagingProfiles->create(
             name: 'My name',
             whitelistedDestinations: ['US']
@@ -59,10 +50,6 @@ final class MessagingProfilesTest extends TestCase
     #[Test]
     public function testRetrieve(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->messagingProfiles->retrieve(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
@@ -73,10 +60,6 @@ final class MessagingProfilesTest extends TestCase
     #[Test]
     public function testUpdate(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->messagingProfiles->update(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
@@ -87,10 +70,6 @@ final class MessagingProfilesTest extends TestCase
     #[Test]
     public function testList(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->messagingProfiles->list();
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -99,10 +78,6 @@ final class MessagingProfilesTest extends TestCase
     #[Test]
     public function testDelete(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->messagingProfiles->delete(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
@@ -113,10 +88,6 @@ final class MessagingProfilesTest extends TestCase
     #[Test]
     public function testListPhoneNumbers(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->messagingProfiles->listPhoneNumbers(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
@@ -127,10 +98,6 @@ final class MessagingProfilesTest extends TestCase
     #[Test]
     public function testListShortCodes(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->messagingProfiles->listShortCodes(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );

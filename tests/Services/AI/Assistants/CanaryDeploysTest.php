@@ -7,7 +7,6 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\AI\Assistants\CanaryDeploys\VersionConfig;
 use Telnyx\Client;
-use Tests\UnsupportedMockTests;
 
 /**
  * @internal
@@ -30,10 +29,6 @@ final class CanaryDeploysTest extends TestCase
     #[Test]
     public function testCreate(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->ai->assistants->canaryDeploys->create(
             'assistant_id',
             [VersionConfig::with(percentage: 1, versionID: 'version_id')],
@@ -45,10 +40,6 @@ final class CanaryDeploysTest extends TestCase
     #[Test]
     public function testCreateWithOptionalParams(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->ai->assistants->canaryDeploys->create(
             'assistant_id',
             [VersionConfig::with(percentage: 1, versionID: 'version_id')],
@@ -60,10 +51,6 @@ final class CanaryDeploysTest extends TestCase
     #[Test]
     public function testRetrieve(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->ai->assistants->canaryDeploys->retrieve(
             'assistant_id'
         );
@@ -74,10 +61,6 @@ final class CanaryDeploysTest extends TestCase
     #[Test]
     public function testUpdate(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->ai->assistants->canaryDeploys->update(
             'assistant_id',
             [VersionConfig::with(percentage: 1, versionID: 'version_id')],
@@ -89,10 +72,6 @@ final class CanaryDeploysTest extends TestCase
     #[Test]
     public function testUpdateWithOptionalParams(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->ai->assistants->canaryDeploys->update(
             'assistant_id',
             [VersionConfig::with(percentage: 1, versionID: 'version_id')],
@@ -104,10 +83,6 @@ final class CanaryDeploysTest extends TestCase
     #[Test]
     public function testDelete(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->ai->assistants->canaryDeploys->delete(
             'assistant_id'
         );

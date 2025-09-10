@@ -6,7 +6,6 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Tests\UnsupportedMockTests;
 
 /**
  * @internal
@@ -29,10 +28,6 @@ final class ExternalVettingTest extends TestCase
     #[Test]
     public function testList(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->brand->externalVetting->list('brandId');
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -41,10 +36,6 @@ final class ExternalVettingTest extends TestCase
     #[Test]
     public function testImport(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->brand->externalVetting->import(
             'brandId',
             evpID: 'evpId',
@@ -57,10 +48,6 @@ final class ExternalVettingTest extends TestCase
     #[Test]
     public function testImportWithOptionalParams(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->brand->externalVetting->import(
             'brandId',
             evpID: 'evpId',
@@ -73,10 +60,6 @@ final class ExternalVettingTest extends TestCase
     #[Test]
     public function testOrder(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->brand->externalVetting->order(
             'brandId',
             evpID: 'evpId',
@@ -89,10 +72,6 @@ final class ExternalVettingTest extends TestCase
     #[Test]
     public function testOrderWithOptionalParams(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->brand->externalVetting->order(
             'brandId',
             evpID: 'evpId',

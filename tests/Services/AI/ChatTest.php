@@ -7,7 +7,6 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\AI\Chat\ChatCreateCompletionParams\Message;
 use Telnyx\Client;
-use Tests\UnsupportedMockTests;
 
 /**
  * @internal
@@ -30,10 +29,6 @@ final class ChatTest extends TestCase
     #[Test]
     public function testCreateCompletion(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->ai->chat->createCompletion(
             messages: [
                 Message::with(content: 'You are a friendly chatbot.', role: 'system'),
@@ -47,10 +42,6 @@ final class ChatTest extends TestCase
     #[Test]
     public function testCreateCompletionWithOptionalParams(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->ai->chat->createCompletion(
             messages: [
                 Message::with(content: 'You are a friendly chatbot.', role: 'system'),

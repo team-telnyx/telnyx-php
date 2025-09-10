@@ -6,7 +6,6 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Tests\UnsupportedMockTests;
 
 /**
  * @internal
@@ -29,10 +28,6 @@ final class PhoneNumbersTest extends TestCase
     #[Test]
     public function testRetrieve(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->externalConnections->phoneNumbers->retrieve(
             '1234567889',
             'id'
@@ -44,10 +39,6 @@ final class PhoneNumbersTest extends TestCase
     #[Test]
     public function testRetrieveWithOptionalParams(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->externalConnections->phoneNumbers->retrieve(
             '1234567889',
             'id'
@@ -59,10 +50,6 @@ final class PhoneNumbersTest extends TestCase
     #[Test]
     public function testUpdate(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->externalConnections->phoneNumbers->update(
             '1234567889',
             id: 'id'
@@ -74,10 +61,6 @@ final class PhoneNumbersTest extends TestCase
     #[Test]
     public function testUpdateWithOptionalParams(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->externalConnections->phoneNumbers->update(
             '1234567889',
             id: 'id'
@@ -89,10 +72,6 @@ final class PhoneNumbersTest extends TestCase
     #[Test]
     public function testList(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->externalConnections->phoneNumbers->list('id');
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType

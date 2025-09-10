@@ -38,10 +38,6 @@ final class LoaConfigurationsTest extends TestCase
     #[Test]
     public function testCreate(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->porting->loaConfigurations->create(
             address: Address::with(
                 city: 'Austin',
@@ -65,10 +61,6 @@ final class LoaConfigurationsTest extends TestCase
     #[Test]
     public function testCreateWithOptionalParams(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->porting->loaConfigurations->create(
             address: Address::with(
                 city: 'Austin',
@@ -93,10 +85,6 @@ final class LoaConfigurationsTest extends TestCase
     #[Test]
     public function testRetrieve(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->porting->loaConfigurations->retrieve(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
@@ -107,10 +95,6 @@ final class LoaConfigurationsTest extends TestCase
     #[Test]
     public function testUpdate(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->porting->loaConfigurations->update(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
             address: Address1::with(
@@ -135,10 +119,6 @@ final class LoaConfigurationsTest extends TestCase
     #[Test]
     public function testUpdateWithOptionalParams(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->porting->loaConfigurations->update(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
             address: Address1::with(
@@ -164,10 +144,6 @@ final class LoaConfigurationsTest extends TestCase
     #[Test]
     public function testList(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->porting->loaConfigurations->list();
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -176,10 +152,6 @@ final class LoaConfigurationsTest extends TestCase
     #[Test]
     public function testDelete(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->porting->loaConfigurations->delete(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );

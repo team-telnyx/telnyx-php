@@ -29,10 +29,6 @@ final class DocumentsTest extends TestCase
     #[Test]
     public function testRetrieve(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->documents->retrieve(
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
@@ -43,10 +39,6 @@ final class DocumentsTest extends TestCase
     #[Test]
     public function testUpdate(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->documents->update(
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
@@ -57,10 +49,6 @@ final class DocumentsTest extends TestCase
     #[Test]
     public function testList(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->documents->list();
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -69,10 +57,6 @@ final class DocumentsTest extends TestCase
     #[Test]
     public function testDelete(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->documents->delete(
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
@@ -97,10 +81,6 @@ final class DocumentsTest extends TestCase
     #[Test]
     public function testGenerateDownloadLink(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->documents->generateDownloadLink(
             '550e8400-e29b-41d4-a716-446655440000'
         );
@@ -111,10 +91,6 @@ final class DocumentsTest extends TestCase
     #[Test]
     public function testUpload(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->documents->upload(
             url: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
             file: 'U3RhaW5sZXNzIHJvY2tz',
@@ -126,10 +102,6 @@ final class DocumentsTest extends TestCase
     #[Test]
     public function testUploadWithOptionalParams(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->documents->upload(
             url: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
             file: 'U3RhaW5sZXNzIHJvY2tz',

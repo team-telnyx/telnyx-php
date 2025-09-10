@@ -6,7 +6,6 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Tests\UnsupportedMockTests;
 
 /**
  * @internal
@@ -29,10 +28,6 @@ final class SiprecConnectorsTest extends TestCase
     #[Test]
     public function testCreate(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->siprecConnectors->create(
             host: 'siprec.telnyx.com',
             name: 'my-siprec-connector',
@@ -45,10 +40,6 @@ final class SiprecConnectorsTest extends TestCase
     #[Test]
     public function testCreateWithOptionalParams(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->siprecConnectors->create(
             host: 'siprec.telnyx.com',
             name: 'my-siprec-connector',
@@ -61,10 +52,6 @@ final class SiprecConnectorsTest extends TestCase
     #[Test]
     public function testRetrieve(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->siprecConnectors->retrieve('connector_name');
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -73,10 +60,6 @@ final class SiprecConnectorsTest extends TestCase
     #[Test]
     public function testUpdate(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->siprecConnectors->update(
             'connector_name',
             host: 'siprec.telnyx.com',
@@ -90,10 +73,6 @@ final class SiprecConnectorsTest extends TestCase
     #[Test]
     public function testUpdateWithOptionalParams(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->siprecConnectors->update(
             'connector_name',
             host: 'siprec.telnyx.com',
@@ -107,10 +86,6 @@ final class SiprecConnectorsTest extends TestCase
     #[Test]
     public function testDelete(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->siprecConnectors->delete('connector_name');
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType

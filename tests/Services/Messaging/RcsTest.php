@@ -6,7 +6,6 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Tests\UnsupportedMockTests;
 
 /**
  * @internal
@@ -29,10 +28,6 @@ final class RcsTest extends TestCase
     #[Test]
     public function testInviteTestNumber(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->messaging->rcs->inviteTestNumber(
             'phone_number',
             'id'
@@ -44,10 +39,6 @@ final class RcsTest extends TestCase
     #[Test]
     public function testInviteTestNumberWithOptionalParams(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->messaging->rcs->inviteTestNumber(
             'phone_number',
             'id'
@@ -59,10 +50,6 @@ final class RcsTest extends TestCase
     #[Test]
     public function testListBulkCapabilities(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->messaging->rcs->listBulkCapabilities(
             agentID: 'TestAgent',
             phoneNumbers: ['+13125551234']
@@ -74,10 +61,6 @@ final class RcsTest extends TestCase
     #[Test]
     public function testListBulkCapabilitiesWithOptionalParams(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->messaging->rcs->listBulkCapabilities(
             agentID: 'TestAgent',
             phoneNumbers: ['+13125551234']
@@ -89,10 +72,6 @@ final class RcsTest extends TestCase
     #[Test]
     public function testRetrieveCapabilities(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->messaging->rcs->retrieveCapabilities(
             'phone_number',
             'agent_id'
@@ -104,10 +83,6 @@ final class RcsTest extends TestCase
     #[Test]
     public function testRetrieveCapabilitiesWithOptionalParams(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->messaging->rcs->retrieveCapabilities(
             'phone_number',
             'agent_id'

@@ -6,7 +6,6 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Tests\UnsupportedMockTests;
 
 /**
  * @internal
@@ -29,10 +28,6 @@ final class AudioTest extends TestCase
     #[Test]
     public function testTranscribe(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->ai->audio->transcribe(
             model: 'distil-whisper/distil-large-v2'
         );
@@ -43,10 +38,6 @@ final class AudioTest extends TestCase
     #[Test]
     public function testTranscribeWithOptionalParams(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->ai->audio->transcribe(
             model: 'distil-whisper/distil-large-v2'
         );

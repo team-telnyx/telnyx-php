@@ -6,7 +6,6 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Tests\UnsupportedMockTests;
 
 /**
  * @internal
@@ -29,10 +28,6 @@ final class VoiceTest extends TestCase
     #[Test]
     public function testRetrieve(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->phoneNumbers->voice->retrieve(
             '1293384261075731499'
         );
@@ -43,10 +38,6 @@ final class VoiceTest extends TestCase
     #[Test]
     public function testUpdate(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->phoneNumbers->voice->update('1293384261075731499');
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -55,10 +46,6 @@ final class VoiceTest extends TestCase
     #[Test]
     public function testList(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->phoneNumbers->voice->list();
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
