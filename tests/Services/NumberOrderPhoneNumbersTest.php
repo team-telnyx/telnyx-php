@@ -6,7 +6,6 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Tests\UnsupportedMockTests;
 
 /**
  * @internal
@@ -29,10 +28,6 @@ final class NumberOrderPhoneNumbersTest extends TestCase
     #[Test]
     public function testRetrieve(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->numberOrderPhoneNumbers->retrieve(
             'number_order_phone_number_id'
         );
@@ -43,10 +38,6 @@ final class NumberOrderPhoneNumbersTest extends TestCase
     #[Test]
     public function testList(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->numberOrderPhoneNumbers->list();
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -55,10 +46,6 @@ final class NumberOrderPhoneNumbersTest extends TestCase
     #[Test]
     public function testUpdateRequirementGroup(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->numberOrderPhoneNumbers->updateRequirementGroup(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -70,10 +57,6 @@ final class NumberOrderPhoneNumbersTest extends TestCase
     #[Test]
     public function testUpdateRequirementGroupWithOptionalParams(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->numberOrderPhoneNumbers->updateRequirementGroup(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -85,10 +68,6 @@ final class NumberOrderPhoneNumbersTest extends TestCase
     #[Test]
     public function testUpdateRequirements(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->numberOrderPhoneNumbers->updateRequirements(
             'number_order_phone_number_id'
         );

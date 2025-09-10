@@ -6,7 +6,6 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Tests\UnsupportedMockTests;
 
 /**
  * @internal
@@ -29,10 +28,6 @@ final class MessagesTest extends TestCase
     #[Test]
     public function testRetrieve(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->messages->retrieve(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
@@ -43,10 +38,6 @@ final class MessagesTest extends TestCase
     #[Test]
     public function testCancelScheduled(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->messages->cancelScheduled(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
@@ -57,10 +48,6 @@ final class MessagesTest extends TestCase
     #[Test]
     public function testSchedule(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->messages->schedule(to: '+18445550001');
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -69,10 +56,6 @@ final class MessagesTest extends TestCase
     #[Test]
     public function testScheduleWithOptionalParams(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->messages->schedule(to: '+18445550001');
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -81,10 +64,6 @@ final class MessagesTest extends TestCase
     #[Test]
     public function testSend(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->messages->send(to: '+18445550001');
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -93,10 +72,6 @@ final class MessagesTest extends TestCase
     #[Test]
     public function testSendWithOptionalParams(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->messages->send(to: '+18445550001');
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -105,10 +80,6 @@ final class MessagesTest extends TestCase
     #[Test]
     public function testSendGroupMms(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->messages->sendGroupMms(
             from: '+13125551234',
             to: ['+18655551234', '+14155551234']
@@ -120,10 +91,6 @@ final class MessagesTest extends TestCase
     #[Test]
     public function testSendGroupMmsWithOptionalParams(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->messages->sendGroupMms(
             from: '+13125551234',
             to: ['+18655551234', '+14155551234']
@@ -135,10 +102,6 @@ final class MessagesTest extends TestCase
     #[Test]
     public function testSendLongCode(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->messages->sendLongCode(
             from: '+18445550001',
             to: '+13125550002'
@@ -150,10 +113,6 @@ final class MessagesTest extends TestCase
     #[Test]
     public function testSendLongCodeWithOptionalParams(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->messages->sendLongCode(
             from: '+18445550001',
             to: '+13125550002'
@@ -165,10 +124,6 @@ final class MessagesTest extends TestCase
     #[Test]
     public function testSendNumberPool(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->messages->sendNumberPool(
             messagingProfileID: 'abc85f64-5717-4562-b3fc-2c9600000000',
             to: 'to'
@@ -180,10 +135,6 @@ final class MessagesTest extends TestCase
     #[Test]
     public function testSendNumberPoolWithOptionalParams(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->messages->sendNumberPool(
             messagingProfileID: 'abc85f64-5717-4562-b3fc-2c9600000000',
             to: 'to'
@@ -195,10 +146,6 @@ final class MessagesTest extends TestCase
     #[Test]
     public function testSendShortCode(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->messages->sendShortCode(
             from: '+18445550001',
             to: '+18445550001'
@@ -210,10 +157,6 @@ final class MessagesTest extends TestCase
     #[Test]
     public function testSendShortCodeWithOptionalParams(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->messages->sendShortCode(
             from: '+18445550001',
             to: '+18445550001'

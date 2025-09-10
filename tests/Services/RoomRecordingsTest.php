@@ -6,7 +6,6 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Tests\UnsupportedMockTests;
 
 /**
  * @internal
@@ -29,10 +28,6 @@ final class RoomRecordingsTest extends TestCase
     #[Test]
     public function testRetrieve(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->roomRecordings->retrieve(
             '0ccc7b54-4df3-4bca-a65a-3da1ecc777f0'
         );
@@ -43,10 +38,6 @@ final class RoomRecordingsTest extends TestCase
     #[Test]
     public function testList(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->roomRecordings->list();
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -55,10 +46,6 @@ final class RoomRecordingsTest extends TestCase
     #[Test]
     public function testDelete(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->roomRecordings->delete(
             '0ccc7b54-4df3-4bca-a65a-3da1ecc777f0'
         );
@@ -69,10 +56,6 @@ final class RoomRecordingsTest extends TestCase
     #[Test]
     public function testDeleteBulk(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->roomRecordings->deleteBulk();
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType

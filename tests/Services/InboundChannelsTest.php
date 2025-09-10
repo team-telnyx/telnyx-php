@@ -6,7 +6,6 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Tests\UnsupportedMockTests;
 
 /**
  * @internal
@@ -29,10 +28,6 @@ final class InboundChannelsTest extends TestCase
     #[Test]
     public function testUpdate(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->inboundChannels->update(7);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -41,10 +36,6 @@ final class InboundChannelsTest extends TestCase
     #[Test]
     public function testUpdateWithOptionalParams(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->inboundChannels->update(7);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -53,10 +44,6 @@ final class InboundChannelsTest extends TestCase
     #[Test]
     public function testList(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->inboundChannels->list();
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType

@@ -6,7 +6,6 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Tests\UnsupportedMockTests;
 
 /**
  * @internal
@@ -29,10 +28,6 @@ final class VerificationsTest extends TestCase
     #[Test]
     public function testRetrieve(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->verifications->retrieve(
             '12ade33a-21c0-473b-b055-b3c836e1c292'
         );
@@ -43,10 +38,6 @@ final class VerificationsTest extends TestCase
     #[Test]
     public function testTriggerCall(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->verifications->triggerCall(
             phoneNumber: '+13035551234',
             verifyProfileID: '12ade33a-21c0-473b-b055-b3c836e1c292',
@@ -58,10 +49,6 @@ final class VerificationsTest extends TestCase
     #[Test]
     public function testTriggerCallWithOptionalParams(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->verifications->triggerCall(
             phoneNumber: '+13035551234',
             verifyProfileID: '12ade33a-21c0-473b-b055-b3c836e1c292',
@@ -73,10 +60,6 @@ final class VerificationsTest extends TestCase
     #[Test]
     public function testTriggerFlashcall(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->verifications->triggerFlashcall(
             phoneNumber: '+13035551234',
             verifyProfileID: '12ade33a-21c0-473b-b055-b3c836e1c292',
@@ -88,10 +71,6 @@ final class VerificationsTest extends TestCase
     #[Test]
     public function testTriggerFlashcallWithOptionalParams(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->verifications->triggerFlashcall(
             phoneNumber: '+13035551234',
             verifyProfileID: '12ade33a-21c0-473b-b055-b3c836e1c292',
@@ -103,10 +82,6 @@ final class VerificationsTest extends TestCase
     #[Test]
     public function testTriggerSMS(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->verifications->triggerSMS(
             phoneNumber: '+13035551234',
             verifyProfileID: '12ade33a-21c0-473b-b055-b3c836e1c292',
@@ -118,10 +93,6 @@ final class VerificationsTest extends TestCase
     #[Test]
     public function testTriggerSMSWithOptionalParams(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->verifications->triggerSMS(
             phoneNumber: '+13035551234',
             verifyProfileID: '12ade33a-21c0-473b-b055-b3c836e1c292',

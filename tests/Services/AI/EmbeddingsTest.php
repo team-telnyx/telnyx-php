@@ -6,7 +6,6 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Tests\UnsupportedMockTests;
 
 /**
  * @internal
@@ -29,10 +28,6 @@ final class EmbeddingsTest extends TestCase
     #[Test]
     public function testCreate(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->ai->embeddings->create(bucketName: 'bucket_name');
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -41,10 +36,6 @@ final class EmbeddingsTest extends TestCase
     #[Test]
     public function testCreateWithOptionalParams(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->ai->embeddings->create(bucketName: 'bucket_name');
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -53,10 +44,6 @@ final class EmbeddingsTest extends TestCase
     #[Test]
     public function testRetrieve(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->ai->embeddings->retrieve('task_id');
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -65,10 +52,6 @@ final class EmbeddingsTest extends TestCase
     #[Test]
     public function testList(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->ai->embeddings->list();
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -77,10 +60,6 @@ final class EmbeddingsTest extends TestCase
     #[Test]
     public function testSimilaritySearch(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->ai->embeddings->similaritySearch(
             bucketName: 'bucket_name',
             query: 'query'
@@ -92,10 +71,6 @@ final class EmbeddingsTest extends TestCase
     #[Test]
     public function testSimilaritySearchWithOptionalParams(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->ai->embeddings->similaritySearch(
             bucketName: 'bucket_name',
             query: 'query'
@@ -107,10 +82,6 @@ final class EmbeddingsTest extends TestCase
     #[Test]
     public function testURL(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->ai->embeddings->url(
             bucketName: 'bucket_name',
             url: 'url'
@@ -122,10 +93,6 @@ final class EmbeddingsTest extends TestCase
     #[Test]
     public function testURLWithOptionalParams(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->ai->embeddings->url(
             bucketName: 'bucket_name',
             url: 'url'

@@ -8,7 +8,6 @@ use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\ExternalConnections\ExternalConnectionCreateParams\Outbound;
 use Telnyx\ExternalConnections\ExternalConnectionUpdateParams\Outbound as Outbound1;
-use Tests\UnsupportedMockTests;
 
 /**
  * @internal
@@ -31,10 +30,6 @@ final class ExternalConnectionsTest extends TestCase
     #[Test]
     public function testCreate(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->externalConnections->create(
             externalSipConnection: 'zoom',
             outbound: (new Outbound)
@@ -46,10 +41,6 @@ final class ExternalConnectionsTest extends TestCase
     #[Test]
     public function testCreateWithOptionalParams(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->externalConnections->create(
             externalSipConnection: 'zoom',
             outbound: (new Outbound)
@@ -63,10 +54,6 @@ final class ExternalConnectionsTest extends TestCase
     #[Test]
     public function testRetrieve(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->externalConnections->retrieve('id');
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -75,10 +62,6 @@ final class ExternalConnectionsTest extends TestCase
     #[Test]
     public function testUpdate(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->externalConnections->update(
             'id',
             outbound: Outbound1::with(
@@ -92,10 +75,6 @@ final class ExternalConnectionsTest extends TestCase
     #[Test]
     public function testUpdateWithOptionalParams(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->externalConnections->update(
             'id',
             outbound: Outbound1::with(
@@ -110,10 +89,6 @@ final class ExternalConnectionsTest extends TestCase
     #[Test]
     public function testList(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->externalConnections->list();
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -122,10 +97,6 @@ final class ExternalConnectionsTest extends TestCase
     #[Test]
     public function testDelete(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->externalConnections->delete('id');
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -134,10 +105,6 @@ final class ExternalConnectionsTest extends TestCase
     #[Test]
     public function testUpdateLocation(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->externalConnections->updateLocation(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
             id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -150,10 +117,6 @@ final class ExternalConnectionsTest extends TestCase
     #[Test]
     public function testUpdateLocationWithOptionalParams(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->externalConnections->updateLocation(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
             id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',

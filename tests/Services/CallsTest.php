@@ -6,7 +6,6 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Tests\UnsupportedMockTests;
 
 /**
  * @internal
@@ -29,10 +28,6 @@ final class CallsTest extends TestCase
     #[Test]
     public function testDial(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->calls->dial(
             connectionID: '7267xxxxxxxxxxxxxx',
             from: '+18005550101',
@@ -45,10 +40,6 @@ final class CallsTest extends TestCase
     #[Test]
     public function testDialWithOptionalParams(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->calls->dial(
             connectionID: '7267xxxxxxxxxxxxxx',
             from: '+18005550101',
@@ -61,10 +52,6 @@ final class CallsTest extends TestCase
     #[Test]
     public function testRetrieveStatus(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->calls->retrieveStatus('call_control_id');
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType

@@ -7,7 +7,6 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentUpdateParams\Body;
-use Tests\UnsupportedMockTests;
 
 /**
  * @internal
@@ -30,10 +29,6 @@ final class GlobalIPAssignmentsTest extends TestCase
     #[Test]
     public function testCreate(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->globalIPAssignments->create();
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -42,10 +37,6 @@ final class GlobalIPAssignmentsTest extends TestCase
     #[Test]
     public function testRetrieve(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->globalIPAssignments->retrieve(
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
@@ -56,10 +47,6 @@ final class GlobalIPAssignmentsTest extends TestCase
     #[Test]
     public function testUpdate(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->globalIPAssignments->update(
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
             new Body
@@ -71,10 +58,6 @@ final class GlobalIPAssignmentsTest extends TestCase
     #[Test]
     public function testUpdateWithOptionalParams(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->globalIPAssignments->update(
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
             (new Body)
@@ -88,10 +71,6 @@ final class GlobalIPAssignmentsTest extends TestCase
     #[Test]
     public function testList(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->globalIPAssignments->list();
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -100,10 +79,6 @@ final class GlobalIPAssignmentsTest extends TestCase
     #[Test]
     public function testDelete(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->globalIPAssignments->delete(
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );

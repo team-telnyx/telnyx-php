@@ -6,7 +6,6 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Tests\UnsupportedMockTests;
 
 /**
  * @internal
@@ -29,10 +28,6 @@ final class JobsTest extends TestCase
     #[Test]
     public function testRetrieve(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->phoneNumbers->jobs->retrieve('id');
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -41,10 +36,6 @@ final class JobsTest extends TestCase
     #[Test]
     public function testList(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->phoneNumbers->jobs->list();
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -53,10 +44,6 @@ final class JobsTest extends TestCase
     #[Test]
     public function testDeleteBatch(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->phoneNumbers->jobs->deleteBatch(
             ['+19705555098', '+19715555098', '32873127836']
         );
@@ -67,10 +54,6 @@ final class JobsTest extends TestCase
     #[Test]
     public function testDeleteBatchWithOptionalParams(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->phoneNumbers->jobs->deleteBatch(
             ['+19705555098', '+19715555098', '32873127836']
         );
@@ -81,10 +64,6 @@ final class JobsTest extends TestCase
     #[Test]
     public function testUpdateBatch(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->phoneNumbers->jobs->updateBatch(
             phoneNumbers: ['1583466971586889004', '+13127367254']
         );
@@ -95,10 +74,6 @@ final class JobsTest extends TestCase
     #[Test]
     public function testUpdateBatchWithOptionalParams(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->phoneNumbers->jobs->updateBatch(
             phoneNumbers: ['1583466971586889004', '+13127367254']
         );
@@ -109,10 +84,6 @@ final class JobsTest extends TestCase
     #[Test]
     public function testUpdateEmergencySettingsBatch(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->phoneNumbers->jobs->updateEmergencySettingsBatch(
             emergencyEnabled: true,
             phoneNumbers: ['+19705555098', '+19715555098', '32873127836'],
@@ -124,10 +95,6 @@ final class JobsTest extends TestCase
     #[Test]
     public function testUpdateEmergencySettingsBatchWithOptionalParams(): void
     {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
         $result = $this->client->phoneNumbers->jobs->updateEmergencySettingsBatch(
             emergencyEnabled: true,
             phoneNumbers: ['+19705555098', '+19715555098', '32873127836'],
