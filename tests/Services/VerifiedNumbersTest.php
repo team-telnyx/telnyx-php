@@ -6,6 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Tests\UnsupportedMockTests;
 
 /**
  * @internal
@@ -28,6 +29,10 @@ final class VerifiedNumbersTest extends TestCase
     #[Test]
     public function testCreate(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->verifiedNumbers->create(
             phoneNumber: '+15551234567',
             verificationMethod: 'sms'
@@ -39,6 +44,10 @@ final class VerifiedNumbersTest extends TestCase
     #[Test]
     public function testCreateWithOptionalParams(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->verifiedNumbers->create(
             phoneNumber: '+15551234567',
             verificationMethod: 'sms'
@@ -50,6 +59,10 @@ final class VerifiedNumbersTest extends TestCase
     #[Test]
     public function testRetrieve(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->verifiedNumbers->retrieve('+15551234567');
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -58,6 +71,10 @@ final class VerifiedNumbersTest extends TestCase
     #[Test]
     public function testList(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->verifiedNumbers->list();
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -66,6 +83,10 @@ final class VerifiedNumbersTest extends TestCase
     #[Test]
     public function testDelete(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->verifiedNumbers->delete('+15551234567');
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType

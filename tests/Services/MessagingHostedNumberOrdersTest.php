@@ -7,6 +7,7 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderValidateCodesParams\VerificationCode;
+use Tests\UnsupportedMockTests;
 
 /**
  * @internal
@@ -29,6 +30,10 @@ final class MessagingHostedNumberOrdersTest extends TestCase
     #[Test]
     public function testCreate(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->messagingHostedNumberOrders->create();
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -37,6 +42,10 @@ final class MessagingHostedNumberOrdersTest extends TestCase
     #[Test]
     public function testRetrieve(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->messagingHostedNumberOrders->retrieve('id');
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -45,6 +54,10 @@ final class MessagingHostedNumberOrdersTest extends TestCase
     #[Test]
     public function testList(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->messagingHostedNumberOrders->list();
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -53,6 +66,10 @@ final class MessagingHostedNumberOrdersTest extends TestCase
     #[Test]
     public function testDelete(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->messagingHostedNumberOrders->delete('id');
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -61,6 +78,10 @@ final class MessagingHostedNumberOrdersTest extends TestCase
     #[Test]
     public function testCheckEligibility(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->messagingHostedNumberOrders->checkEligibility(
             ['string']
         );
@@ -71,6 +92,10 @@ final class MessagingHostedNumberOrdersTest extends TestCase
     #[Test]
     public function testCheckEligibilityWithOptionalParams(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->messagingHostedNumberOrders->checkEligibility(
             ['string']
         );
@@ -81,6 +106,10 @@ final class MessagingHostedNumberOrdersTest extends TestCase
     #[Test]
     public function testCreateVerificationCodes(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this
             ->client
             ->messagingHostedNumberOrders
@@ -97,6 +126,10 @@ final class MessagingHostedNumberOrdersTest extends TestCase
     #[Test]
     public function testCreateVerificationCodesWithOptionalParams(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this
             ->client
             ->messagingHostedNumberOrders
@@ -113,6 +146,10 @@ final class MessagingHostedNumberOrdersTest extends TestCase
     #[Test]
     public function testValidateCodes(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->messagingHostedNumberOrders->validateCodes(
             'id',
             [VerificationCode::with(code: 'code', phoneNumber: 'phone_number')]
@@ -124,6 +161,10 @@ final class MessagingHostedNumberOrdersTest extends TestCase
     #[Test]
     public function testValidateCodesWithOptionalParams(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->messagingHostedNumberOrders->validateCodes(
             'id',
             [VerificationCode::with(code: 'code', phoneNumber: 'phone_number')]

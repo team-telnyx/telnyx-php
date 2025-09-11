@@ -6,6 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Tests\UnsupportedMockTests;
 
 /**
  * @internal
@@ -28,6 +29,10 @@ final class BrandTest extends TestCase
     #[Test]
     public function testQualifyByUsecase(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->campaignBuilder->brand->qualifyByUsecase(
             'usecase',
             'brandId'
@@ -39,6 +44,10 @@ final class BrandTest extends TestCase
     #[Test]
     public function testQualifyByUsecaseWithOptionalParams(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->campaignBuilder->brand->qualifyByUsecase(
             'usecase',
             'brandId'

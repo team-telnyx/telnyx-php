@@ -6,6 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Tests\UnsupportedMockTests;
 
 /**
  * @internal
@@ -28,6 +29,10 @@ final class CustomerServiceRecordsTest extends TestCase
     #[Test]
     public function testCreate(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->customerServiceRecords->create(
             phoneNumber: '+1234567890'
         );
@@ -38,6 +43,10 @@ final class CustomerServiceRecordsTest extends TestCase
     #[Test]
     public function testCreateWithOptionalParams(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->customerServiceRecords->create(
             phoneNumber: '+1234567890'
         );
@@ -48,6 +57,10 @@ final class CustomerServiceRecordsTest extends TestCase
     #[Test]
     public function testRetrieve(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->customerServiceRecords->retrieve(
             'customer_service_record_id'
         );
@@ -58,6 +71,10 @@ final class CustomerServiceRecordsTest extends TestCase
     #[Test]
     public function testList(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->customerServiceRecords->list();
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -66,6 +83,10 @@ final class CustomerServiceRecordsTest extends TestCase
     #[Test]
     public function testVerifyPhoneNumberCoverage(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->customerServiceRecords->verifyPhoneNumberCoverage(
             ['+1234567890']
         );
@@ -76,6 +97,10 @@ final class CustomerServiceRecordsTest extends TestCase
     #[Test]
     public function testVerifyPhoneNumberCoverageWithOptionalParams(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->customerServiceRecords->verifyPhoneNumberCoverage(
             ['+1234567890']
         );

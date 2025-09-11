@@ -7,6 +7,7 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\AI\Assistants\ScheduledEvents\ConversationChannelType;
 use Telnyx\Client;
+use Tests\UnsupportedMockTests;
 
 /**
  * @internal
@@ -29,6 +30,10 @@ final class ScheduledEventsTest extends TestCase
     #[Test]
     public function testCreate(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->ai->assistants->scheduledEvents->create(
             'assistant_id',
             scheduledAtFixedDatetime: new \DateTimeImmutable(
@@ -45,6 +50,10 @@ final class ScheduledEventsTest extends TestCase
     #[Test]
     public function testCreateWithOptionalParams(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->ai->assistants->scheduledEvents->create(
             'assistant_id',
             scheduledAtFixedDatetime: new \DateTimeImmutable(
@@ -61,6 +70,10 @@ final class ScheduledEventsTest extends TestCase
     #[Test]
     public function testRetrieve(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->ai->assistants->scheduledEvents->retrieve(
             'event_id',
             'assistant_id'
@@ -72,6 +85,10 @@ final class ScheduledEventsTest extends TestCase
     #[Test]
     public function testRetrieveWithOptionalParams(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->ai->assistants->scheduledEvents->retrieve(
             'event_id',
             'assistant_id'
@@ -83,6 +100,10 @@ final class ScheduledEventsTest extends TestCase
     #[Test]
     public function testList(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->ai->assistants->scheduledEvents->list(
             'assistant_id'
         );
@@ -93,6 +114,10 @@ final class ScheduledEventsTest extends TestCase
     #[Test]
     public function testDelete(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->ai->assistants->scheduledEvents->delete(
             'event_id',
             'assistant_id'
@@ -104,6 +129,10 @@ final class ScheduledEventsTest extends TestCase
     #[Test]
     public function testDeleteWithOptionalParams(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->ai->assistants->scheduledEvents->delete(
             'event_id',
             'assistant_id'

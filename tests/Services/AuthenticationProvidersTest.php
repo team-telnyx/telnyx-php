@@ -7,6 +7,7 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\AuthenticationProviders\Settings;
 use Telnyx\Client;
+use Tests\UnsupportedMockTests;
 
 /**
  * @internal
@@ -29,6 +30,10 @@ final class AuthenticationProvidersTest extends TestCase
     #[Test]
     public function testCreate(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->authenticationProviders->create(
             name: 'Okta',
             settings: Settings::with(
@@ -45,6 +50,10 @@ final class AuthenticationProvidersTest extends TestCase
     #[Test]
     public function testCreateWithOptionalParams(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->authenticationProviders->create(
             name: 'Okta',
             settings: Settings::with(
@@ -62,6 +71,10 @@ final class AuthenticationProvidersTest extends TestCase
     #[Test]
     public function testRetrieve(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->authenticationProviders->retrieve('id');
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -70,6 +83,10 @@ final class AuthenticationProvidersTest extends TestCase
     #[Test]
     public function testUpdate(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->authenticationProviders->update('id');
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -78,6 +95,10 @@ final class AuthenticationProvidersTest extends TestCase
     #[Test]
     public function testList(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->authenticationProviders->list();
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -86,6 +107,10 @@ final class AuthenticationProvidersTest extends TestCase
     #[Test]
     public function testDelete(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->authenticationProviders->delete('id');
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType

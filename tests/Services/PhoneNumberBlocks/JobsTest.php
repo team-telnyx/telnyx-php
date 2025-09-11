@@ -6,6 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Tests\UnsupportedMockTests;
 
 /**
  * @internal
@@ -28,6 +29,10 @@ final class JobsTest extends TestCase
     #[Test]
     public function testRetrieve(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->phoneNumberBlocks->jobs->retrieve('id');
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -36,6 +41,10 @@ final class JobsTest extends TestCase
     #[Test]
     public function testList(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->phoneNumberBlocks->jobs->list();
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -44,6 +53,10 @@ final class JobsTest extends TestCase
     #[Test]
     public function testDeletePhoneNumberBlock(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->phoneNumberBlocks->jobs->deletePhoneNumberBlock(
             'f3946371-7199-4261-9c3d-81a0d7935146'
         );
@@ -54,6 +67,10 @@ final class JobsTest extends TestCase
     #[Test]
     public function testDeletePhoneNumberBlockWithOptionalParams(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->phoneNumberBlocks->jobs->deletePhoneNumberBlock(
             'f3946371-7199-4261-9c3d-81a0d7935146'
         );

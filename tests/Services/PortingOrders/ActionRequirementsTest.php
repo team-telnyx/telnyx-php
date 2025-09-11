@@ -7,6 +7,7 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateParams\Params;
+use Tests\UnsupportedMockTests;
 
 /**
  * @internal
@@ -29,6 +30,10 @@ final class ActionRequirementsTest extends TestCase
     #[Test]
     public function testList(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->portingOrders->actionRequirements->list(
             'porting_order_id'
         );
@@ -39,6 +44,10 @@ final class ActionRequirementsTest extends TestCase
     #[Test]
     public function testInitiate(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->portingOrders->actionRequirements->initiate(
             'id',
             portingOrderID: 'porting_order_id',
@@ -51,6 +60,10 @@ final class ActionRequirementsTest extends TestCase
     #[Test]
     public function testInitiateWithOptionalParams(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->portingOrders->actionRequirements->initiate(
             'id',
             portingOrderID: 'porting_order_id',

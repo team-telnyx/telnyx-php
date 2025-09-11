@@ -6,6 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Tests\UnsupportedMockTests;
 
 /**
  * @internal
@@ -28,6 +29,10 @@ final class PartnerCampaignsTest extends TestCase
     #[Test]
     public function testRetrieve(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->partnerCampaigns->retrieve('campaignId');
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -36,6 +41,10 @@ final class PartnerCampaignsTest extends TestCase
     #[Test]
     public function testUpdate(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->partnerCampaigns->update('campaignId');
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -44,6 +53,10 @@ final class PartnerCampaignsTest extends TestCase
     #[Test]
     public function testList(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->partnerCampaigns->list();
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -52,6 +65,10 @@ final class PartnerCampaignsTest extends TestCase
     #[Test]
     public function testListSharedByMe(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->partnerCampaigns->listSharedByMe();
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -60,6 +77,10 @@ final class PartnerCampaignsTest extends TestCase
     #[Test]
     public function testRetrieveSharingStatus(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->partnerCampaigns->retrieveSharingStatus(
             'campaignId'
         );

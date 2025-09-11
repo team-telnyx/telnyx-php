@@ -6,6 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Tests\UnsupportedMockTests;
 
 /**
  * @internal
@@ -28,6 +29,10 @@ final class ActionsTest extends TestCase
     #[Test]
     public function testDelete(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->recordings->actions->delete(
             [
                 '428c31b6-7af4-4bcb-b7f5-5013ef9657c1',
@@ -41,6 +46,10 @@ final class ActionsTest extends TestCase
     #[Test]
     public function testDeleteWithOptionalParams(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->recordings->actions->delete(
             [
                 '428c31b6-7af4-4bcb-b7f5-5013ef9657c1',

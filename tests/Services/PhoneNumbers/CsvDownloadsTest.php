@@ -6,6 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Tests\UnsupportedMockTests;
 
 /**
  * @internal
@@ -28,6 +29,10 @@ final class CsvDownloadsTest extends TestCase
     #[Test]
     public function testCreate(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->phoneNumbers->csvDownloads->create();
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -36,6 +41,10 @@ final class CsvDownloadsTest extends TestCase
     #[Test]
     public function testRetrieve(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->phoneNumbers->csvDownloads->retrieve('id');
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -44,6 +53,10 @@ final class CsvDownloadsTest extends TestCase
     #[Test]
     public function testList(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->phoneNumbers->csvDownloads->list();
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
