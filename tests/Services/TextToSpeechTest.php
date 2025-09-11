@@ -59,6 +59,10 @@ final class TextToSpeechTest extends TestCase
     #[Test]
     public function testListVoices(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->textToSpeech->listVoices();
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType

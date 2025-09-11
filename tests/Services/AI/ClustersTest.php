@@ -6,6 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Tests\UnsupportedMockTests;
 
 /**
  * @internal
@@ -28,6 +29,10 @@ final class ClustersTest extends TestCase
     #[Test]
     public function testRetrieve(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->ai->clusters->retrieve('task_id');
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -36,6 +41,10 @@ final class ClustersTest extends TestCase
     #[Test]
     public function testList(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->ai->clusters->list();
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -44,6 +53,10 @@ final class ClustersTest extends TestCase
     #[Test]
     public function testDelete(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->ai->clusters->delete('task_id');
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -52,6 +65,10 @@ final class ClustersTest extends TestCase
     #[Test]
     public function testCompute(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->ai->clusters->compute(bucket: 'bucket');
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -60,6 +77,10 @@ final class ClustersTest extends TestCase
     #[Test]
     public function testComputeWithOptionalParams(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->ai->clusters->compute(bucket: 'bucket');
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -68,6 +89,10 @@ final class ClustersTest extends TestCase
     #[Test]
     public function testFetchGraph(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->ai->clusters->fetchGraph('task_id');
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType

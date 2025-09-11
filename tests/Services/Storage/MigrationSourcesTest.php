@@ -7,6 +7,7 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Storage\MigrationSources\MigrationSourceCreateParams\ProviderAuth;
+use Tests\UnsupportedMockTests;
 
 /**
  * @internal
@@ -29,6 +30,10 @@ final class MigrationSourcesTest extends TestCase
     #[Test]
     public function testCreate(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->storage->migrationSources->create(
             bucketName: 'bucket_name',
             provider: 'aws',
@@ -41,6 +46,10 @@ final class MigrationSourcesTest extends TestCase
     #[Test]
     public function testCreateWithOptionalParams(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->storage->migrationSources->create(
             bucketName: 'bucket_name',
             provider: 'aws',
@@ -55,6 +64,10 @@ final class MigrationSourcesTest extends TestCase
     #[Test]
     public function testRetrieve(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->storage->migrationSources->retrieve('');
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -63,6 +76,10 @@ final class MigrationSourcesTest extends TestCase
     #[Test]
     public function testList(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->storage->migrationSources->list();
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -71,6 +88,10 @@ final class MigrationSourcesTest extends TestCase
     #[Test]
     public function testDelete(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->storage->migrationSources->delete('');
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType

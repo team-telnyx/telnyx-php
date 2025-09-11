@@ -7,6 +7,7 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\CustomStorageCredentials\GcsConfigurationData;
+use Tests\UnsupportedMockTests;
 
 /**
  * @internal
@@ -29,6 +30,10 @@ final class CustomStorageCredentialsTest extends TestCase
     #[Test]
     public function testCreate(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->customStorageCredentials->create(
             'connection_id',
             backend: 'gcs',
@@ -41,6 +46,10 @@ final class CustomStorageCredentialsTest extends TestCase
     #[Test]
     public function testCreateWithOptionalParams(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->customStorageCredentials->create(
             'connection_id',
             backend: 'gcs',
@@ -55,6 +64,10 @@ final class CustomStorageCredentialsTest extends TestCase
     #[Test]
     public function testRetrieve(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->customStorageCredentials->retrieve(
             'connection_id'
         );
@@ -65,6 +78,10 @@ final class CustomStorageCredentialsTest extends TestCase
     #[Test]
     public function testUpdate(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->customStorageCredentials->update(
             'connection_id',
             backend: 'gcs',
@@ -77,6 +94,10 @@ final class CustomStorageCredentialsTest extends TestCase
     #[Test]
     public function testUpdateWithOptionalParams(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->customStorageCredentials->update(
             'connection_id',
             backend: 'gcs',
@@ -91,6 +112,10 @@ final class CustomStorageCredentialsTest extends TestCase
     #[Test]
     public function testDelete(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->customStorageCredentials->delete('connection_id');
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType

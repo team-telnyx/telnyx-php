@@ -8,6 +8,7 @@ use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Porting\Reports\ExportPortingOrdersCsvReport;
 use Telnyx\Porting\Reports\ExportPortingOrdersCsvReport\Filters;
+use Tests\UnsupportedMockTests;
 
 /**
  * @internal
@@ -30,6 +31,10 @@ final class ReportsTest extends TestCase
     #[Test]
     public function testCreate(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->porting->reports->create(
             params: ExportPortingOrdersCsvReport::with(filters: (new Filters)),
             reportType: 'export_porting_orders_csv',
@@ -41,6 +46,10 @@ final class ReportsTest extends TestCase
     #[Test]
     public function testCreateWithOptionalParams(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->porting->reports->create(
             params: ExportPortingOrdersCsvReport::with(
                 filters: (new Filters)
@@ -58,6 +67,10 @@ final class ReportsTest extends TestCase
     #[Test]
     public function testRetrieve(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->porting->reports->retrieve(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
@@ -68,6 +81,10 @@ final class ReportsTest extends TestCase
     #[Test]
     public function testList(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->porting->reports->list();
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType

@@ -6,6 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Tests\UnsupportedMockTests;
 
 /**
  * @internal
@@ -28,6 +29,10 @@ final class UploadsTest extends TestCase
     #[Test]
     public function testCreate(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->externalConnections->uploads->create(
             'id',
             numberIDs: [
@@ -44,6 +49,10 @@ final class UploadsTest extends TestCase
     #[Test]
     public function testCreateWithOptionalParams(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->externalConnections->uploads->create(
             'id',
             numberIDs: [
@@ -60,6 +69,10 @@ final class UploadsTest extends TestCase
     #[Test]
     public function testRetrieve(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->externalConnections->uploads->retrieve(
             '7b6a6449-b055-45a6-81f6-f6f0dffa4cc6',
             'id'
@@ -71,6 +84,10 @@ final class UploadsTest extends TestCase
     #[Test]
     public function testRetrieveWithOptionalParams(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->externalConnections->uploads->retrieve(
             '7b6a6449-b055-45a6-81f6-f6f0dffa4cc6',
             'id'
@@ -82,6 +99,10 @@ final class UploadsTest extends TestCase
     #[Test]
     public function testList(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->externalConnections->uploads->list('id');
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -90,6 +111,10 @@ final class UploadsTest extends TestCase
     #[Test]
     public function testPendingCount(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->externalConnections->uploads->pendingCount('id');
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -98,6 +123,10 @@ final class UploadsTest extends TestCase
     #[Test]
     public function testRefreshStatus(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->externalConnections->uploads->refreshStatus('id');
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -106,6 +135,10 @@ final class UploadsTest extends TestCase
     #[Test]
     public function testRetry(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->externalConnections->uploads->retry(
             '7b6a6449-b055-45a6-81f6-f6f0dffa4cc6',
             'id'
@@ -117,6 +150,10 @@ final class UploadsTest extends TestCase
     #[Test]
     public function testRetryWithOptionalParams(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->externalConnections->uploads->retry(
             '7b6a6449-b055-45a6-81f6-f6f0dffa4cc6',
             'id'

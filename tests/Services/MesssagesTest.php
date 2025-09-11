@@ -23,6 +23,7 @@ use Telnyx\Messsages\RcsSuggestion\Action\OpenURLAction;
 use Telnyx\Messsages\RcsSuggestion\Action\ViewLocationAction;
 use Telnyx\Messsages\RcsSuggestion\Action\ViewLocationAction\LatLong;
 use Telnyx\Messsages\RcsSuggestion\Reply;
+use Tests\UnsupportedMockTests;
 
 /**
  * @internal
@@ -45,6 +46,10 @@ final class MesssagesTest extends TestCase
     #[Test]
     public function testRcs(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->messsages->rcs(
             agentID: 'Agent007',
             agentMessage: (new RcsAgentMessage),
@@ -58,6 +63,10 @@ final class MesssagesTest extends TestCase
     #[Test]
     public function testRcsWithOptionalParams(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->messsages->rcs(
             agentID: 'Agent007',
             agentMessage: (new RcsAgentMessage)

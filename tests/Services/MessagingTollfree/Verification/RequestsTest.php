@@ -10,6 +10,7 @@ use Telnyx\MessagingTollfree\Verification\Requests\TfPhoneNumber;
 use Telnyx\MessagingTollfree\Verification\Requests\URL;
 use Telnyx\MessagingTollfree\Verification\Requests\UseCaseCategories;
 use Telnyx\MessagingTollfree\Verification\Requests\Volume;
+use Tests\UnsupportedMockTests;
 
 /**
  * @internal
@@ -32,6 +33,10 @@ final class RequestsTest extends TestCase
     #[Test]
     public function testCreate(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->messagingTollfree->verification->requests->create(
             additionalInformation: 'additionalInformation',
             businessAddr1: '600 Congress Avenue',
@@ -66,6 +71,10 @@ final class RequestsTest extends TestCase
     #[Test]
     public function testCreateWithOptionalParams(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->messagingTollfree->verification->requests->create(
             additionalInformation: 'additionalInformation',
             businessAddr1: '600 Congress Avenue',
@@ -100,6 +109,10 @@ final class RequestsTest extends TestCase
     #[Test]
     public function testRetrieve(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this
             ->client
             ->messagingTollfree
@@ -114,6 +127,10 @@ final class RequestsTest extends TestCase
     #[Test]
     public function testUpdate(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->messagingTollfree->verification->requests->update(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
             additionalInformation: 'additionalInformation',
@@ -149,6 +166,10 @@ final class RequestsTest extends TestCase
     #[Test]
     public function testUpdateWithOptionalParams(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->messagingTollfree->verification->requests->update(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
             additionalInformation: 'additionalInformation',
@@ -184,6 +205,10 @@ final class RequestsTest extends TestCase
     #[Test]
     public function testList(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->messagingTollfree->verification->requests->list(
             page: 1,
             pageSize: 1
@@ -195,6 +220,10 @@ final class RequestsTest extends TestCase
     #[Test]
     public function testListWithOptionalParams(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->messagingTollfree->verification->requests->list(
             page: 1,
             pageSize: 1
@@ -206,6 +235,10 @@ final class RequestsTest extends TestCase
     #[Test]
     public function testDelete(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->messagingTollfree->verification->requests->delete(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );

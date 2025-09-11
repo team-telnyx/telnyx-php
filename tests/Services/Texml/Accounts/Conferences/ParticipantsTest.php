@@ -6,6 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Tests\UnsupportedMockTests;
 
 /**
  * @internal
@@ -28,6 +29,10 @@ final class ParticipantsTest extends TestCase
     #[Test]
     public function testRetrieve(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this
             ->client
             ->texml
@@ -47,6 +52,10 @@ final class ParticipantsTest extends TestCase
     #[Test]
     public function testRetrieveWithOptionalParams(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this
             ->client
             ->texml
@@ -66,6 +75,10 @@ final class ParticipantsTest extends TestCase
     #[Test]
     public function testUpdate(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->texml->accounts->conferences->participants->update(
             'call_sid_or_participant_label',
             accountSid: 'account_sid',
@@ -78,6 +91,10 @@ final class ParticipantsTest extends TestCase
     #[Test]
     public function testUpdateWithOptionalParams(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->texml->accounts->conferences->participants->update(
             'call_sid_or_participant_label',
             accountSid: 'account_sid',
@@ -90,6 +107,10 @@ final class ParticipantsTest extends TestCase
     #[Test]
     public function testDelete(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->texml->accounts->conferences->participants->delete(
             'call_sid_or_participant_label',
             accountSid: 'account_sid',
@@ -102,6 +123,10 @@ final class ParticipantsTest extends TestCase
     #[Test]
     public function testDeleteWithOptionalParams(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->texml->accounts->conferences->participants->delete(
             'call_sid_or_participant_label',
             accountSid: 'account_sid',
@@ -114,6 +139,10 @@ final class ParticipantsTest extends TestCase
     #[Test]
     public function testParticipants(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this
             ->client
             ->texml
@@ -129,6 +158,10 @@ final class ParticipantsTest extends TestCase
     #[Test]
     public function testParticipantsWithOptionalParams(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this
             ->client
             ->texml
@@ -144,6 +177,10 @@ final class ParticipantsTest extends TestCase
     #[Test]
     public function testRetrieveParticipants(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this
             ->client
             ->texml
@@ -159,6 +196,10 @@ final class ParticipantsTest extends TestCase
     #[Test]
     public function testRetrieveParticipantsWithOptionalParams(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this
             ->client
             ->texml

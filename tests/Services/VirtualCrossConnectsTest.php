@@ -6,6 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Tests\UnsupportedMockTests;
 
 /**
  * @internal
@@ -28,6 +29,10 @@ final class VirtualCrossConnectsTest extends TestCase
     #[Test]
     public function testCreate(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->virtualCrossConnects->create(
             bgpAsn: 1234,
             cloudProvider: 'aws',
@@ -43,6 +48,10 @@ final class VirtualCrossConnectsTest extends TestCase
     #[Test]
     public function testCreateWithOptionalParams(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->virtualCrossConnects->create(
             bgpAsn: 1234,
             cloudProvider: 'aws',
@@ -58,6 +67,10 @@ final class VirtualCrossConnectsTest extends TestCase
     #[Test]
     public function testRetrieve(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->virtualCrossConnects->retrieve(
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
@@ -68,6 +81,10 @@ final class VirtualCrossConnectsTest extends TestCase
     #[Test]
     public function testUpdate(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->virtualCrossConnects->update(
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
@@ -78,6 +95,10 @@ final class VirtualCrossConnectsTest extends TestCase
     #[Test]
     public function testList(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->virtualCrossConnects->list();
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -86,6 +107,10 @@ final class VirtualCrossConnectsTest extends TestCase
     #[Test]
     public function testDelete(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->virtualCrossConnects->delete(
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );

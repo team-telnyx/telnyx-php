@@ -6,6 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Tests\UnsupportedMockTests;
 
 /**
  * @internal
@@ -28,6 +29,10 @@ final class CampaignTest extends TestCase
     #[Test]
     public function testRetrieve(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->campaign->retrieve('campaignId');
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -36,6 +41,10 @@ final class CampaignTest extends TestCase
     #[Test]
     public function testUpdate(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->campaign->update('campaignId');
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -44,6 +53,10 @@ final class CampaignTest extends TestCase
     #[Test]
     public function testList(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->campaign->list(brandID: 'brandId');
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -52,6 +65,10 @@ final class CampaignTest extends TestCase
     #[Test]
     public function testListWithOptionalParams(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->campaign->list(brandID: 'brandId');
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -60,6 +77,10 @@ final class CampaignTest extends TestCase
     #[Test]
     public function testAcceptSharing(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->campaign->acceptSharing('C26F1KLZN');
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -68,6 +89,10 @@ final class CampaignTest extends TestCase
     #[Test]
     public function testDeactivate(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->campaign->deactivate('campaignId');
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -76,6 +101,10 @@ final class CampaignTest extends TestCase
     #[Test]
     public function testGetMnoMetadata(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->campaign->getMnoMetadata('campaignId');
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -84,6 +113,10 @@ final class CampaignTest extends TestCase
     #[Test]
     public function testGetOperationStatus(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->campaign->getOperationStatus('campaignId');
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -92,6 +125,10 @@ final class CampaignTest extends TestCase
     #[Test]
     public function testGetSharingStatus(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->campaign->getSharingStatus('campaignId');
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -100,6 +137,10 @@ final class CampaignTest extends TestCase
     #[Test]
     public function testSubmitAppeal(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->campaign->submitAppeal(
             '5eb13888-32b7-4cab-95e6-d834dde21d64',
             'The website has been updated to include the required privacy policy and terms of service.',
@@ -111,6 +152,10 @@ final class CampaignTest extends TestCase
     #[Test]
     public function testSubmitAppealWithOptionalParams(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->campaign->submitAppeal(
             '5eb13888-32b7-4cab-95e6-d834dde21d64',
             'The website has been updated to include the required privacy policy and terms of service.',

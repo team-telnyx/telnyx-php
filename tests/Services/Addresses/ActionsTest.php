@@ -6,6 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Tests\UnsupportedMockTests;
 
 /**
  * @internal
@@ -28,6 +29,10 @@ final class ActionsTest extends TestCase
     #[Test]
     public function testAcceptSuggestions(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->addresses->actions->acceptSuggestions(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
@@ -38,6 +43,10 @@ final class ActionsTest extends TestCase
     #[Test]
     public function testValidate(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->addresses->actions->validate(
             countryCode: 'US',
             postalCode: '78701',
@@ -50,6 +59,10 @@ final class ActionsTest extends TestCase
     #[Test]
     public function testValidateWithOptionalParams(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->addresses->actions->validate(
             countryCode: 'US',
             postalCode: '78701',

@@ -6,6 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Tests\UnsupportedMockTests;
 
 /**
  * @internal
@@ -28,6 +29,10 @@ final class PhoneNumberAssignmentByProfileTest extends TestCase
     #[Test]
     public function testAssign(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->phoneNumberAssignmentByProfile->assign(
             messagingProfileID: '4001767e-ce0f-4cae-9d5f-0d5e636e7809'
         );
@@ -38,6 +43,10 @@ final class PhoneNumberAssignmentByProfileTest extends TestCase
     #[Test]
     public function testAssignWithOptionalParams(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->phoneNumberAssignmentByProfile->assign(
             messagingProfileID: '4001767e-ce0f-4cae-9d5f-0d5e636e7809'
         );
@@ -48,6 +57,10 @@ final class PhoneNumberAssignmentByProfileTest extends TestCase
     #[Test]
     public function testRetrievePhoneNumberStatus(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this
             ->client
             ->phoneNumberAssignmentByProfile
@@ -60,6 +73,10 @@ final class PhoneNumberAssignmentByProfileTest extends TestCase
     #[Test]
     public function testRetrieveStatus(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->phoneNumberAssignmentByProfile->retrieveStatus(
             'taskId'
         );

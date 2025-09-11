@@ -8,6 +8,7 @@ use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockCreateParams\ActivationRange;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockCreateParams\PhoneNumberRange;
+use Tests\UnsupportedMockTests;
 
 /**
  * @internal
@@ -30,6 +31,10 @@ final class PhoneNumberBlocksTest extends TestCase
     #[Test]
     public function testCreate(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->portingOrders->phoneNumberBlocks->create(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
             activationRanges: [
@@ -50,6 +55,10 @@ final class PhoneNumberBlocksTest extends TestCase
     #[Test]
     public function testCreateWithOptionalParams(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->portingOrders->phoneNumberBlocks->create(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
             activationRanges: [
@@ -70,6 +79,10 @@ final class PhoneNumberBlocksTest extends TestCase
     #[Test]
     public function testList(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->portingOrders->phoneNumberBlocks->list(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
@@ -80,6 +93,10 @@ final class PhoneNumberBlocksTest extends TestCase
     #[Test]
     public function testDelete(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->portingOrders->phoneNumberBlocks->delete(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -91,6 +108,10 @@ final class PhoneNumberBlocksTest extends TestCase
     #[Test]
     public function testDeleteWithOptionalParams(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->portingOrders->phoneNumberBlocks->delete(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
