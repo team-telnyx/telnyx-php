@@ -6,6 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Tests\UnsupportedMockTests;
 
 /**
  * @internal
@@ -28,6 +29,10 @@ final class CallsTest extends TestCase
     #[Test]
     public function testRetrieve(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->queues->calls->retrieve(
             'call_control_id',
             'queue_name'
@@ -39,6 +44,10 @@ final class CallsTest extends TestCase
     #[Test]
     public function testRetrieveWithOptionalParams(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->queues->calls->retrieve(
             'call_control_id',
             'queue_name'
@@ -50,6 +59,10 @@ final class CallsTest extends TestCase
     #[Test]
     public function testList(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->queues->calls->list('queue_name');
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType

@@ -29,6 +29,10 @@ final class MediaTest extends TestCase
     #[Test]
     public function testRetrieve(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->media->retrieve('media_name');
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -37,6 +41,10 @@ final class MediaTest extends TestCase
     #[Test]
     public function testUpdate(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->media->update('media_name');
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -45,6 +53,10 @@ final class MediaTest extends TestCase
     #[Test]
     public function testList(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->media->list();
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -53,6 +65,10 @@ final class MediaTest extends TestCase
     #[Test]
     public function testDelete(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->media->delete('media_name');
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -73,6 +89,10 @@ final class MediaTest extends TestCase
     #[Test]
     public function testUpload(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->media->upload(
             mediaURL: 'http://www.example.com/audio.mp3'
         );
@@ -83,6 +103,10 @@ final class MediaTest extends TestCase
     #[Test]
     public function testUploadWithOptionalParams(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->media->upload(
             mediaURL: 'http://www.example.com/audio.mp3'
         );

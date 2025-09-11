@@ -6,6 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Tests\UnsupportedMockTests;
 
 /**
  * @internal
@@ -28,6 +29,10 @@ final class ToolsTest extends TestCase
     #[Test]
     public function testTest(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->ai->assistants->tools->test(
             'tool_id',
             assistantID: 'assistant_id'
@@ -39,6 +44,10 @@ final class ToolsTest extends TestCase
     #[Test]
     public function testTestWithOptionalParams(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->ai->assistants->tools->test(
             'tool_id',
             assistantID: 'assistant_id'

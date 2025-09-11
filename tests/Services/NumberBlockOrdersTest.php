@@ -6,6 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Tests\UnsupportedMockTests;
 
 /**
  * @internal
@@ -28,6 +29,10 @@ final class NumberBlockOrdersTest extends TestCase
     #[Test]
     public function testCreate(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->numberBlockOrders->create(
             range: 10,
             startingNumber: '+19705555000'
@@ -39,6 +44,10 @@ final class NumberBlockOrdersTest extends TestCase
     #[Test]
     public function testCreateWithOptionalParams(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->numberBlockOrders->create(
             range: 10,
             startingNumber: '+19705555000'
@@ -50,6 +59,10 @@ final class NumberBlockOrdersTest extends TestCase
     #[Test]
     public function testRetrieve(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->numberBlockOrders->retrieve(
             'number_block_order_id'
         );
@@ -60,6 +73,10 @@ final class NumberBlockOrdersTest extends TestCase
     #[Test]
     public function testList(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->numberBlockOrders->list();
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType

@@ -6,6 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Tests\UnsupportedMockTests;
 
 /**
  * @internal
@@ -28,6 +29,10 @@ final class SiprecTest extends TestCase
     #[Test]
     public function testSiprecSidJson(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->texml->accounts->calls->siprec->siprecSidJson(
             'siprec_sid',
             accountSid: 'account_sid',
@@ -40,6 +45,10 @@ final class SiprecTest extends TestCase
     #[Test]
     public function testSiprecSidJsonWithOptionalParams(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->texml->accounts->calls->siprec->siprecSidJson(
             'siprec_sid',
             accountSid: 'account_sid',

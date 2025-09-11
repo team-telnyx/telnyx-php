@@ -6,6 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Tests\UnsupportedMockTests;
 
 /**
  * @internal
@@ -28,6 +29,10 @@ final class CdrUsageReportsTest extends TestCase
     #[Test]
     public function testFetchSync(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->reports->cdrUsageReports->fetchSync(
             aggregationType: 'NO_AGGREGATION',
             productBreakdown: 'NO_BREAKDOWN'
@@ -39,6 +44,10 @@ final class CdrUsageReportsTest extends TestCase
     #[Test]
     public function testFetchSyncWithOptionalParams(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->reports->cdrUsageReports->fetchSync(
             aggregationType: 'NO_AGGREGATION',
             productBreakdown: 'NO_BREAKDOWN'

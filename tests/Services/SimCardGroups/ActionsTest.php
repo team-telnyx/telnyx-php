@@ -6,6 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Tests\UnsupportedMockTests;
 
 /**
  * @internal
@@ -28,6 +29,10 @@ final class ActionsTest extends TestCase
     #[Test]
     public function testRetrieve(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->simCardGroups->actions->retrieve(
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
@@ -38,6 +43,10 @@ final class ActionsTest extends TestCase
     #[Test]
     public function testList(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->simCardGroups->actions->list();
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -46,6 +55,10 @@ final class ActionsTest extends TestCase
     #[Test]
     public function testRemovePrivateWirelessGateway(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this
             ->client
             ->simCardGroups
@@ -59,6 +72,10 @@ final class ActionsTest extends TestCase
     #[Test]
     public function testRemoveWirelessBlocklist(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->simCardGroups->actions->removeWirelessBlocklist(
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
@@ -69,6 +86,10 @@ final class ActionsTest extends TestCase
     #[Test]
     public function testSetPrivateWirelessGateway(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->simCardGroups->actions->setPrivateWirelessGateway(
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
@@ -80,6 +101,10 @@ final class ActionsTest extends TestCase
     #[Test]
     public function testSetPrivateWirelessGatewayWithOptionalParams(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->simCardGroups->actions->setPrivateWirelessGateway(
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
@@ -91,6 +116,10 @@ final class ActionsTest extends TestCase
     #[Test]
     public function testSetWirelessBlocklist(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->simCardGroups->actions->setWirelessBlocklist(
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
@@ -102,6 +131,10 @@ final class ActionsTest extends TestCase
     #[Test]
     public function testSetWirelessBlocklistWithOptionalParams(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->simCardGroups->actions->setWirelessBlocklist(
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58',

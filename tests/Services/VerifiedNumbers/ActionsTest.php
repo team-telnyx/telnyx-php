@@ -6,6 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Tests\UnsupportedMockTests;
 
 /**
  * @internal
@@ -28,6 +29,10 @@ final class ActionsTest extends TestCase
     #[Test]
     public function testSubmitVerificationCode(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->verifiedNumbers->actions->submitVerificationCode(
             '+15551234567',
             '123456'
@@ -39,6 +44,10 @@ final class ActionsTest extends TestCase
     #[Test]
     public function testSubmitVerificationCodeWithOptionalParams(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->verifiedNumbers->actions->submitVerificationCode(
             '+15551234567',
             '123456'

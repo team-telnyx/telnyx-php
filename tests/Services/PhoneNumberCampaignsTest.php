@@ -6,6 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Tests\UnsupportedMockTests;
 
 /**
  * @internal
@@ -28,6 +29,10 @@ final class PhoneNumberCampaignsTest extends TestCase
     #[Test]
     public function testCreate(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->phoneNumberCampaigns->create(
             campaignID: '4b300178-131c-d902-d54e-72d90ba1620j',
             phoneNumber: '+18005550199',
@@ -39,6 +44,10 @@ final class PhoneNumberCampaignsTest extends TestCase
     #[Test]
     public function testCreateWithOptionalParams(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->phoneNumberCampaigns->create(
             campaignID: '4b300178-131c-d902-d54e-72d90ba1620j',
             phoneNumber: '+18005550199',
@@ -50,6 +59,10 @@ final class PhoneNumberCampaignsTest extends TestCase
     #[Test]
     public function testRetrieve(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->phoneNumberCampaigns->retrieve('phoneNumber');
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -58,6 +71,10 @@ final class PhoneNumberCampaignsTest extends TestCase
     #[Test]
     public function testUpdate(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->phoneNumberCampaigns->update(
             'phoneNumber',
             campaignID: '4b300178-131c-d902-d54e-72d90ba1620j',
@@ -70,6 +87,10 @@ final class PhoneNumberCampaignsTest extends TestCase
     #[Test]
     public function testUpdateWithOptionalParams(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->phoneNumberCampaigns->update(
             'phoneNumber',
             campaignID: '4b300178-131c-d902-d54e-72d90ba1620j',
@@ -82,6 +103,10 @@ final class PhoneNumberCampaignsTest extends TestCase
     #[Test]
     public function testList(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->phoneNumberCampaigns->list();
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -90,6 +115,10 @@ final class PhoneNumberCampaignsTest extends TestCase
     #[Test]
     public function testDelete(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->phoneNumberCampaigns->delete('phoneNumber');
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType

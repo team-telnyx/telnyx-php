@@ -6,6 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Tests\UnsupportedMockTests;
 
 /**
  * @internal
@@ -28,6 +29,10 @@ final class ActionsTest extends TestCase
     #[Test]
     public function testActivate(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->portingOrders->actions->activate(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
@@ -38,6 +43,10 @@ final class ActionsTest extends TestCase
     #[Test]
     public function testCancel(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->portingOrders->actions->cancel(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
@@ -48,6 +57,10 @@ final class ActionsTest extends TestCase
     #[Test]
     public function testConfirm(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->portingOrders->actions->confirm(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
@@ -58,6 +71,10 @@ final class ActionsTest extends TestCase
     #[Test]
     public function testShare(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->portingOrders->actions->share(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );

@@ -6,6 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Tests\UnsupportedMockTests;
 
 /**
  * @internal
@@ -28,6 +29,10 @@ final class MigrationsTest extends TestCase
     #[Test]
     public function testCreate(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->storage->migrations->create(
             sourceID: 'source_id',
             targetBucketName: 'target_bucket_name',
@@ -40,6 +45,10 @@ final class MigrationsTest extends TestCase
     #[Test]
     public function testCreateWithOptionalParams(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->storage->migrations->create(
             sourceID: 'source_id',
             targetBucketName: 'target_bucket_name',
@@ -52,6 +61,10 @@ final class MigrationsTest extends TestCase
     #[Test]
     public function testRetrieve(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->storage->migrations->retrieve('');
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -60,6 +73,10 @@ final class MigrationsTest extends TestCase
     #[Test]
     public function testList(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->storage->migrations->list();
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType

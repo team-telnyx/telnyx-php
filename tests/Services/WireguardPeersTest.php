@@ -6,6 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Tests\UnsupportedMockTests;
 
 /**
  * @internal
@@ -28,6 +29,10 @@ final class WireguardPeersTest extends TestCase
     #[Test]
     public function testCreate(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->wireguardPeers->create(
             wireguardInterfaceID: '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
@@ -38,6 +43,10 @@ final class WireguardPeersTest extends TestCase
     #[Test]
     public function testCreateWithOptionalParams(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->wireguardPeers->create(
             wireguardInterfaceID: '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
@@ -48,6 +57,10 @@ final class WireguardPeersTest extends TestCase
     #[Test]
     public function testRetrieve(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->wireguardPeers->retrieve(
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
@@ -58,6 +71,10 @@ final class WireguardPeersTest extends TestCase
     #[Test]
     public function testUpdate(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->wireguardPeers->update(
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
@@ -68,6 +85,10 @@ final class WireguardPeersTest extends TestCase
     #[Test]
     public function testList(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->wireguardPeers->list();
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -76,6 +97,10 @@ final class WireguardPeersTest extends TestCase
     #[Test]
     public function testDelete(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->wireguardPeers->delete(
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
@@ -86,6 +111,10 @@ final class WireguardPeersTest extends TestCase
     #[Test]
     public function testRetrieveConfig(): void
     {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
         $result = $this->client->wireguardPeers->retrieveConfig(
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
