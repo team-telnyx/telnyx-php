@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\VerificationsContract;
 use Telnyx\Services\Verifications\ActionsService;
@@ -34,14 +35,16 @@ final class VerificationsService implements VerificationsContract
      */
     public function __construct(private Client $client)
     {
-        $this->byPhoneNumber = new ByPhoneNumberService($this->client);
-        $this->actions = new ActionsService($this->client);
+        $this->byPhoneNumber = new ByPhoneNumberService($client);
+        $this->actions = new ActionsService($client);
     }
 
     /**
      * @api
      *
      * Retrieve verification
+     *
+     * @return VerificationGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $verificationID,
@@ -65,6 +68,8 @@ final class VerificationsService implements VerificationsContract
      * @param string $verifyProfileID the identifier of the associated Verify profile
      * @param string|null $customCode Send a self-generated numeric code to the end-user
      * @param int $timeoutSecs the number of seconds the verification code is valid for
+     *
+     * @return CreateVerificationResponse<HasRawResponse>
      */
     public function triggerCall(
         $phoneNumber,
@@ -101,6 +106,8 @@ final class VerificationsService implements VerificationsContract
      * @param string $phoneNumber +E164 formatted phone number
      * @param string $verifyProfileID the identifier of the associated Verify profile
      * @param int $timeoutSecs the number of seconds the verification code is valid for
+     *
+     * @return CreateVerificationResponse<HasRawResponse>
      */
     public function triggerFlashcall(
         $phoneNumber,
@@ -136,6 +143,8 @@ final class VerificationsService implements VerificationsContract
      * @param string $verifyProfileID the identifier of the associated Verify profile
      * @param string|null $customCode Send a self-generated numeric code to the end-user
      * @param int $timeoutSecs the number of seconds the verification code is valid for
+     *
+     * @return CreateVerificationResponse<HasRawResponse>
      */
     public function triggerSMS(
         $phoneNumber,

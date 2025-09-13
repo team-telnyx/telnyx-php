@@ -10,7 +10,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type client_list_buckets_response = array{buckets?: list<Bucket>|null}
+ * @phpstan-type client_list_buckets_response = array{buckets?: list<Bucket>}
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class ClientListBucketsResponse implements BaseModel
 {

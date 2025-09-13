@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Texml\Accounts\Conferences;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\Accounts\Conferences\ParticipantsContract;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantDeleteParams;
@@ -47,6 +48,8 @@ final class ParticipantsService implements ParticipantsContract
      *
      * @param string $accountSid
      * @param string $conferenceSid
+     *
+     * @return ParticipantGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $callSidOrParticipantLabel,
@@ -95,6 +98,8 @@ final class ParticipantsService implements ParticipantsContract
      * @param string $holdURL The URL to be called using the `HoldMethod` for music that plays when the participant is on hold. The URL may return an MP3 file, a WAV file, or a TwiML document that contains `<Play>`, `<Say>`, `<Pause>`, or `<Redirect>` verbs.
      * @param bool $muted whether the participant should be muted
      * @param string $waitURL the URL to call for an audio file to play while the participant is waiting for the conference to start
+     *
+     * @return ParticipantUpdateResponse<HasRawResponse>
      */
     public function update(
         string $callSidOrParticipantLabel,
@@ -243,6 +248,8 @@ final class ParticipantsService implements ParticipantsContract
      * @param string $to The phone number of the called party. Phone numbers are formatted with a `+` and country code.
      * @param Trim|value-of<Trim> $trim Whether to trim any leading and trailing silence from the recording. Defaults to `trim-silence`.
      * @param string $waitURL the URL to call for an audio file to play while the participant is waiting for the conference to start
+     *
+     * @return ParticipantParticipantsResponse<HasRawResponse>
      */
     public function participants(
         string $conferenceSid,
@@ -369,6 +376,8 @@ final class ParticipantsService implements ParticipantsContract
      * Lists conference participants
      *
      * @param string $accountSid
+     *
+     * @return ParticipantGetParticipantsResponse<HasRawResponse>
      */
     public function retrieveParticipants(
         string $conferenceSid,

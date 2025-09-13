@@ -10,10 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type pagination_meta_simple = array{
- *   pageNumber?: int|null,
- *   pageSize?: int|null,
- *   totalPages?: int|null,
- *   totalResults?: int|null,
+ *   pageNumber?: int, pageSize?: int, totalPages?: int, totalResults?: int
  * }
  */
 final class PaginationMetaSimple implements BaseModel

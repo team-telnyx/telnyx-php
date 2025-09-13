@@ -9,7 +9,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type ssl_certificate_new_response = array{data?: SslCertificate|null}
+ * @phpstan-type ssl_certificate_new_response = array{data?: SslCertificate}
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class SslCertificateNewResponse implements BaseModel
 {

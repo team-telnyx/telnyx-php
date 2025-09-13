@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\GlobalIPs\GlobalIPCreateParams;
 use Telnyx\GlobalIPs\GlobalIPDeleteResponse;
 use Telnyx\GlobalIPs\GlobalIPGetResponse;
@@ -32,6 +33,8 @@ final class GlobalIPsService implements GlobalIPsContract
      * @param string $description a user specified description for the address
      * @param string $name a user specified name for the address
      * @param array<string, mixed> $ports a Global IP ports grouped by protocol code
+     *
+     * @return GlobalIPNewResponse<HasRawResponse>
      */
     public function create(
         $description = omit,
@@ -58,6 +61,8 @@ final class GlobalIPsService implements GlobalIPsContract
      * @api
      *
      * Retrieve a Global IP.
+     *
+     * @return GlobalIPGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -78,6 +83,8 @@ final class GlobalIPsService implements GlobalIPsContract
      * List all Global IPs.
      *
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     *
+     * @return GlobalIPListResponse<HasRawResponse>
      */
     public function list(
         $page = omit,
@@ -102,6 +109,8 @@ final class GlobalIPsService implements GlobalIPsContract
      * @api
      *
      * Delete a Global IP.
+     *
+     * @return GlobalIPDeleteResponse<HasRawResponse>
      */
     public function delete(
         string $id,

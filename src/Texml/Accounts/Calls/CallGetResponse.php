@@ -13,25 +13,29 @@ use Telnyx\Texml\Accounts\Calls\CallGetResponse\Status;
 
 /**
  * @phpstan-type call_get_response = array{
- *   accountSid?: string|null,
- *   answeredBy?: value-of<AnsweredBy>|null,
- *   callerName?: string|null,
- *   dateCreated?: string|null,
- *   dateUpdated?: string|null,
- *   direction?: value-of<Direction>|null,
- *   duration?: string|null,
- *   endTime?: string|null,
- *   from?: string|null,
- *   fromFormatted?: string|null,
- *   price?: string|null,
- *   priceUnit?: string|null,
- *   sid?: string|null,
- *   startTime?: string|null,
- *   status?: value-of<Status>|null,
- *   to?: string|null,
- *   toFormatted?: string|null,
- *   uri?: string|null,
+ *   accountSid?: string,
+ *   answeredBy?: value-of<AnsweredBy>,
+ *   callerName?: string,
+ *   dateCreated?: string,
+ *   dateUpdated?: string,
+ *   direction?: value-of<Direction>,
+ *   duration?: string,
+ *   endTime?: string,
+ *   from?: string,
+ *   fromFormatted?: string,
+ *   price?: string,
+ *   priceUnit?: string,
+ *   sid?: string,
+ *   startTime?: string,
+ *   status?: value-of<Status>,
+ *   to?: string,
+ *   toFormatted?: string,
+ *   uri?: string,
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class CallGetResponse implements BaseModel
 {

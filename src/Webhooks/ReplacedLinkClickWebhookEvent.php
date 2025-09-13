@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\ReplacedLinkClickWebhookEvent\Data;
 
 /**
- * @phpstan-type replaced_link_click_webhook_event = array{data?: Data|null}
+ * @phpstan-type replaced_link_click_webhook_event = array{data?: Data}
  */
 final class ReplacedLinkClickWebhookEvent implements BaseModel
 {

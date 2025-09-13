@@ -11,14 +11,14 @@ use Telnyx\CredentialConnections\Actions\ActionCheckRegistrationStatusResponse\D
 
 /**
  * @phpstan-type data_alias = array{
- *   ipAddress?: string|null,
- *   lastRegistration?: string|null,
- *   port?: int|null,
- *   recordType?: string|null,
- *   sipUsername?: string|null,
- *   status?: value-of<Status>|null,
- *   transport?: string|null,
- *   userAgent?: string|null,
+ *   ipAddress?: string,
+ *   lastRegistration?: string,
+ *   port?: int,
+ *   recordType?: string,
+ *   sipUsername?: string,
+ *   status?: value-of<Status>,
+ *   transport?: string,
+ *   userAgent?: string,
  * }
  */
 final class Data implements BaseModel

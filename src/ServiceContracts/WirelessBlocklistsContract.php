@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\WirelessBlocklists\WirelessBlocklistCreateParams\Type;
 use Telnyx\WirelessBlocklists\WirelessBlocklistDeleteResponse;
@@ -23,6 +24,8 @@ interface WirelessBlocklistsContract
      * @param string $name the name of the Wireless Blocklist
      * @param Type|value-of<Type> $type the type of wireless blocklist
      * @param list<string> $values Values to block. The values here depend on the `type` of Wireless Blocklist.
+     *
+     * @return WirelessBlocklistNewResponse<HasRawResponse>
      */
     public function create(
         $name,
@@ -33,6 +36,8 @@ interface WirelessBlocklistsContract
 
     /**
      * @api
+     *
+     * @return WirelessBlocklistGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -45,6 +50,8 @@ interface WirelessBlocklistsContract
      * @param string $name the name of the Wireless Blocklist
      * @param Type1|value-of<Type1> $type the type of wireless blocklist
      * @param list<string> $values Values to block. The values here depend on the `type` of Wireless Blocklist.
+     *
+     * @return WirelessBlocklistUpdateResponse<HasRawResponse>
      */
     public function update(
         $name = omit,
@@ -61,6 +68,8 @@ interface WirelessBlocklistsContract
      * @param string $filterValues values to filter on (inclusive)
      * @param int $pageNumber the page number to load
      * @param int $pageSize the size of the page
+     *
+     * @return WirelessBlocklistListResponse<HasRawResponse>
      */
     public function list(
         $filterName = omit,
@@ -73,6 +82,8 @@ interface WirelessBlocklistsContract
 
     /**
      * @api
+     *
+     * @return WirelessBlocklistDeleteResponse<HasRawResponse>
      */
     public function delete(
         string $id,

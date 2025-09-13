@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Portouts;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Portouts\Events\EventGetResponse;
 use Telnyx\Portouts\Events\EventListParams;
 use Telnyx\Portouts\Events\EventListParams\Filter;
@@ -26,6 +27,8 @@ final class EventsService implements EventsContract
      * @api
      *
      * Show a specific port-out event.
+     *
+     * @return EventGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -47,6 +50,8 @@ final class EventsService implements EventsContract
      *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[event_type], filter[portout_id], filter[created_at]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     *
+     * @return EventListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,

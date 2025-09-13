@@ -14,6 +14,7 @@ use Telnyx\Brand\EntityType;
 use Telnyx\Brand\StockExchange;
 use Telnyx\Brand\TelnyxBrand;
 use Telnyx\Brand\Vertical;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 
 use const Telnyx\Core\OMIT as omit;
@@ -49,6 +50,8 @@ interface BrandContract
      * @param string $webhookFailoverURL webhook failover URL for brand status updates
      * @param string $webhookURL webhook URL for brand status updates
      * @param string $website brand website URL
+     *
+     * @return TelnyxBrand<HasRawResponse>
      */
     public function create(
         $country,
@@ -80,6 +83,8 @@ interface BrandContract
 
     /**
      * @api
+     *
+     * @return BrandGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $brandID,
@@ -116,6 +121,8 @@ interface BrandContract
      * @param string $webhookFailoverURL webhook failover URL for brand status updates
      * @param string $webhookURL webhook URL for brand status updates
      * @param string $website brand website URL
+     *
+     * @return TelnyxBrand<HasRawResponse>
      */
     public function update(
         string $brandID,
@@ -159,6 +166,8 @@ interface BrandContract
      * @param Sort|value-of<Sort> $sort Specifies the sort order for results. If not given, results are sorted by createdAt in descending order.
      * @param string $state
      * @param string $tcrBrandID Filter results by the TCR Brand id
+     *
+     * @return BrandListResponse<HasRawResponse>
      */
     public function list(
         $brandID = omit,
@@ -183,6 +192,8 @@ interface BrandContract
 
     /**
      * @api
+     *
+     * @return BrandGetFeedbackResponse<HasRawResponse>
      */
     public function getFeedback(
         string $brandID,

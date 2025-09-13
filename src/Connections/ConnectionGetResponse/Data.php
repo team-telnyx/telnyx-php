@@ -12,16 +12,16 @@ use Telnyx\CredentialConnections\AnchorsiteOverride;
 
 /**
  * @phpstan-type data_alias = array{
- *   id?: string|null,
- *   active?: bool|null,
- *   anchorsiteOverride?: value-of<AnchorsiteOverride>|null,
- *   connectionName?: string|null,
- *   createdAt?: string|null,
- *   outboundVoiceProfileID?: string|null,
- *   recordType?: string|null,
- *   tags?: list<string>|null,
- *   updatedAt?: string|null,
- *   webhookAPIVersion?: value-of<WebhookAPIVersion>|null,
+ *   id?: string,
+ *   active?: bool,
+ *   anchorsiteOverride?: value-of<AnchorsiteOverride>,
+ *   connectionName?: string,
+ *   createdAt?: string,
+ *   outboundVoiceProfileID?: string,
+ *   recordType?: string,
+ *   tags?: list<string>,
+ *   updatedAt?: string,
+ *   webhookAPIVersion?: value-of<WebhookAPIVersion>,
  *   webhookEventFailoverURL?: string|null,
  *   webhookEventURL?: string|null,
  * }

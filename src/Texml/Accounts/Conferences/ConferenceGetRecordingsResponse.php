@@ -11,15 +11,19 @@ use Telnyx\Texml\Accounts\Conferences\ConferenceGetRecordingsResponse\Recording;
 
 /**
  * @phpstan-type conference_get_recordings_response = array{
- *   end?: int|null,
- *   firstPageUri?: string|null,
- *   nextPageUri?: string|null,
- *   page?: int|null,
- *   pageSize?: int|null,
- *   recordings?: list<Recording>|null,
- *   start?: int|null,
- *   uri?: string|null,
+ *   end?: int,
+ *   firstPageUri?: string,
+ *   nextPageUri?: string,
+ *   page?: int,
+ *   pageSize?: int,
+ *   recordings?: list<Recording>,
+ *   start?: int,
+ *   uri?: string,
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class ConferenceGetRecordingsResponse implements BaseModel
 {

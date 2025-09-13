@@ -10,11 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type media_resource = array{
- *   contentType?: string|null,
- *   createdAt?: string|null,
- *   expiresAt?: string|null,
- *   mediaName?: string|null,
- *   updatedAt?: string|null,
+ *   contentType?: string,
+ *   createdAt?: string,
+ *   expiresAt?: string,
+ *   mediaName?: string,
+ *   updatedAt?: string,
  * }
  */
 final class MediaResource implements BaseModel

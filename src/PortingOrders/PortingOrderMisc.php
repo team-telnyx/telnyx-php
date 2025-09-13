@@ -11,9 +11,9 @@ use Telnyx\PortingOrders\PortingOrderMisc\RemainingNumbersAction;
 
 /**
  * @phpstan-type porting_order_misc = array{
- *   newBillingPhoneNumber?: string|null,
- *   remainingNumbersAction?: value-of<RemainingNumbersAction>|null,
- *   type?: value-of<PortingOrderType>|null,
+ *   newBillingPhoneNumber?: string,
+ *   remainingNumbersAction?: value-of<RemainingNumbersAction>,
+ *   type?: value-of<PortingOrderType>,
  * }
  */
 final class PortingOrderMisc implements BaseModel

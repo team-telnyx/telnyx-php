@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Rooms\Sessions;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\Rooms\Sessions\Actions\ActionEndResponse;
 use Telnyx\Rooms\Sessions\Actions\ActionKickParams;
@@ -31,6 +32,8 @@ final class ActionsService implements ActionsContract
      * @api
      *
      * Note: this will also kick all participants currently present in the room
+     *
+     * @return ActionEndResponse<HasRawResponse>
      */
     public function end(
         string $roomSessionID,
@@ -52,6 +55,8 @@ final class ActionsService implements ActionsContract
      *
      * @param list<string> $exclude list of participant id to exclude from the action
      * @param UnionMember0|list<string>|value-of<UnionMember0> $participants either a list of participant id to perform the action on, or the keyword "all" to perform the action on all participant
+     *
+     * @return ActionKickResponse<HasRawResponse>
      */
     public function kick(
         string $roomSessionID,
@@ -81,6 +86,8 @@ final class ActionsService implements ActionsContract
      *
      * @param list<string> $exclude list of participant id to exclude from the action
      * @param UnionMember01|list<string>|value-of<UnionMember01> $participants either a list of participant id to perform the action on, or the keyword "all" to perform the action on all participant
+     *
+     * @return ActionMuteResponse<HasRawResponse>
      */
     public function mute(
         string $roomSessionID,
@@ -110,6 +117,8 @@ final class ActionsService implements ActionsContract
      *
      * @param list<string> $exclude list of participant id to exclude from the action
      * @param UnionMember02|list<string>|value-of<UnionMember02> $participants either a list of participant id to perform the action on, or the keyword "all" to perform the action on all participant
+     *
+     * @return ActionUnmuteResponse<HasRawResponse>
      */
     public function unmute(
         string $roomSessionID,

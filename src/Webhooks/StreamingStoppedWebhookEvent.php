@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\StreamingStoppedWebhookEvent\Data;
 
 /**
- * @phpstan-type streaming_stopped_webhook_event = array{data?: Data|null}
+ * @phpstan-type streaming_stopped_webhook_event = array{data?: Data}
  */
 final class StreamingStoppedWebhookEvent implements BaseModel
 {

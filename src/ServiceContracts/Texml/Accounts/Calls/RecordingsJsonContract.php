@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\Texml\Accounts\Calls;
 
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\Texml\Accounts\Calls\RecordingsJson\RecordingsJsonGetRecordingsJsonResponse;
 use Telnyx\Texml\Accounts\Calls\RecordingsJson\RecordingsJsonRecordingsJsonParams\RecordingChannels;
@@ -26,6 +27,8 @@ interface RecordingsJsonContract
      * @param RecordingStatusCallbackMethod|value-of<RecordingStatusCallbackMethod> $recordingStatusCallbackMethod HTTP method used to send status callbacks
      * @param RecordingTrack|value-of<RecordingTrack> $recordingTrack The audio track to record for the call. The default is `both`.
      * @param bool $sendRecordingURL whether to send RecordingUrl in webhooks
+     *
+     * @return RecordingsJsonRecordingsJsonResponse<HasRawResponse>
      */
     public function recordingsJson(
         string $callSid,
@@ -44,6 +47,8 @@ interface RecordingsJsonContract
      * @api
      *
      * @param string $accountSid
+     *
+     * @return RecordingsJsonGetRecordingsJsonResponse<HasRawResponse>
      */
     public function retrieveRecordingsJson(
         string $callSid,

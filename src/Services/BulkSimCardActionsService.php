@@ -9,6 +9,7 @@ use Telnyx\BulkSimCardActions\BulkSimCardActionListParams;
 use Telnyx\BulkSimCardActions\BulkSimCardActionListParams\FilterActionType;
 use Telnyx\BulkSimCardActions\BulkSimCardActionListResponse;
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\BulkSimCardActionsContract;
 
@@ -25,6 +26,8 @@ final class BulkSimCardActionsService implements BulkSimCardActionsContract
      * @api
      *
      * This API fetches information about a bulk SIM card action. A bulk SIM card action contains details about a collection of individual SIM card actions.
+     *
+     * @return BulkSimCardActionGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -47,6 +50,8 @@ final class BulkSimCardActionsService implements BulkSimCardActionsContract
      * @param FilterActionType|value-of<FilterActionType> $filterActionType filter by action type
      * @param int $pageNumber the page number to load
      * @param int $pageSize the size of the page
+     *
+     * @return BulkSimCardActionListResponse<HasRawResponse>
      */
     public function list(
         $filterActionType = omit,

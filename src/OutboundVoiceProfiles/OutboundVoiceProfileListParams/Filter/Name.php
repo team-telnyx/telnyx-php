@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Name filtering operations.
  *
- * @phpstan-type name_alias = array{contains?: string|null}
+ * @phpstan-type name_alias = array{contains?: string}
  */
 final class Name implements BaseModel
 {

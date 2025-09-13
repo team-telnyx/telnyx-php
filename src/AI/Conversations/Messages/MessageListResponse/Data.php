@@ -14,9 +14,9 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type data_alias = array{
  *   role: value-of<Role>,
  *   text: string,
- *   createdAt?: \DateTimeInterface|null,
- *   sentAt?: \DateTimeInterface|null,
- *   toolCalls?: list<ToolCall>|null,
+ *   createdAt?: \DateTimeInterface,
+ *   sentAt?: \DateTimeInterface,
+ *   toolCalls?: list<ToolCall>,
  * }
  */
 final class Data implements BaseModel

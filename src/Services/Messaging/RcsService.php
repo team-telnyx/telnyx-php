@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Messaging;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Messaging\Rcs\RcGetCapabilitiesResponse;
 use Telnyx\Messaging\Rcs\RcInviteTestNumberParams;
 use Telnyx\Messaging\Rcs\RcInviteTestNumberResponse;
@@ -27,7 +28,7 @@ final class RcsService implements RcsContract
      */
     public function __construct(private Client $client)
     {
-        $this->agents = new AgentsService($this->client);
+        $this->agents = new AgentsService($client);
     }
 
     /**
@@ -36,6 +37,8 @@ final class RcsService implements RcsContract
      * Adds a test phone number to an RCS agent for testing purposes.
      *
      * @param string $id
+     *
+     * @return RcInviteTestNumberResponse<HasRawResponse>
      */
     public function inviteTestNumber(
         string $phoneNumber,
@@ -65,6 +68,8 @@ final class RcsService implements RcsContract
      *
      * @param string $agentID RCS Agent ID
      * @param list<string> $phoneNumbers List of phone numbers to check
+     *
+     * @return RcListBulkCapabilitiesResponse<HasRawResponse>
      */
     public function listBulkCapabilities(
         $agentID,
@@ -92,6 +97,8 @@ final class RcsService implements RcsContract
      * List RCS capabilities of a phone number
      *
      * @param string $agentID
+     *
+     * @return RcGetCapabilitiesResponse<HasRawResponse>
      */
     public function retrieveCapabilities(
         string $phoneNumber,

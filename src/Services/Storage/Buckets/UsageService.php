@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Storage\Buckets;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Storage\Buckets\UsageContract;
 use Telnyx\Storage\Buckets\Usage\UsageGetAPIUsageParams;
@@ -25,6 +26,8 @@ final class UsageService implements UsageContract
      * Returns the detail on API usage on a bucket of a particular time period, group by method category.
      *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[start_time], filter[end_time]
+     *
+     * @return UsageGetAPIUsageResponse<HasRawResponse>
      */
     public function getAPIUsage(
         string $bucketName,
@@ -50,6 +53,8 @@ final class UsageService implements UsageContract
      * @api
      *
      * Returns the amount of storage space and number of files a bucket takes up.
+     *
+     * @return UsageGetBucketUsageResponse<HasRawResponse>
      */
     public function getBucketUsage(
         string $bucketName,

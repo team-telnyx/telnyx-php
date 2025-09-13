@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\PortingOrders;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockCreateParams;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockCreateParams\ActivationRange;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockCreateParams\PhoneNumberRange;
@@ -35,6 +36,8 @@ final class PhoneNumberBlocksService implements PhoneNumberBlocksContract
      *
      * @param list<ActivationRange> $activationRanges Specifies the activation ranges for this porting phone number block. The activation range must be within the block range and should not overlap with other activation ranges.
      * @param PhoneNumberRange $phoneNumberRange
+     *
+     * @return PhoneNumberBlockNewResponse<HasRawResponse>
      */
     public function create(
         string $portingOrderID,
@@ -68,6 +71,8 @@ final class PhoneNumberBlocksService implements PhoneNumberBlocksContract
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[porting_order_id], filter[support_key], filter[status], filter[phone_number], filter[activation_status], filter[portability_status]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param Sort $sort Consolidated sort parameter (deepObject style). Originally: sort[value]
+     *
+     * @return PhoneNumberBlockListResponse<HasRawResponse>
      */
     public function list(
         string $portingOrderID,
@@ -97,6 +102,8 @@ final class PhoneNumberBlocksService implements PhoneNumberBlocksContract
      * Deletes a phone number block.
      *
      * @param string $portingOrderID
+     *
+     * @return PhoneNumberBlockDeleteResponse<HasRawResponse>
      */
     public function delete(
         string $id,

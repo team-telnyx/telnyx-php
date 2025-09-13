@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[content_type][].
  *
- * @phpstan-type filter_alias = array{contentType?: list<string>|null}
+ * @phpstan-type filter_alias = array{contentType?: list<string>}
  */
 final class Filter implements BaseModel
 {

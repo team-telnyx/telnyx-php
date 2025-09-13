@@ -10,8 +10,12 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type associated_phone_number_new_response = array{
- *   data?: PortingAssociatedPhoneNumber|null
+ *   data?: PortingAssociatedPhoneNumber
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class AssociatedPhoneNumberNewResponse implements BaseModel
 {

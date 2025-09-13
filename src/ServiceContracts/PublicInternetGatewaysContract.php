@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayDeleteResponse;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayGetResponse;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayListParams\Filter;
@@ -22,6 +23,8 @@ interface PublicInternetGatewaysContract
      * @param string $name a user specified name for the interface
      * @param string $networkID the id of the network associated with the interface
      * @param string $regionCode the region the interface should be deployed to
+     *
+     * @return PublicInternetGatewayNewResponse<HasRawResponse>
      */
     public function create(
         $name = omit,
@@ -32,6 +35,8 @@ interface PublicInternetGatewaysContract
 
     /**
      * @api
+     *
+     * @return PublicInternetGatewayGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -43,6 +48,8 @@ interface PublicInternetGatewaysContract
      *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[network_id]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     *
+     * @return PublicInternetGatewayListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,
@@ -52,6 +59,8 @@ interface PublicInternetGatewaysContract
 
     /**
      * @api
+     *
+     * @return PublicInternetGatewayDeleteResponse<HasRawResponse>
      */
     public function delete(
         string $id,

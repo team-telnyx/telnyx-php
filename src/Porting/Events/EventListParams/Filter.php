@@ -14,9 +14,7 @@ use Telnyx\Porting\Events\EventListParams\Filter\Type;
  * Consolidated filter parameter (deepObject style). Originally: filter[type], filter[porting_order_id], filter[created_at][gte], filter[created_at][lte].
  *
  * @phpstan-type filter_alias = array{
- *   createdAt?: CreatedAt|null,
- *   portingOrderID?: string|null,
- *   type?: value-of<Type>|null,
+ *   createdAt?: CreatedAt, portingOrderID?: string, type?: value-of<Type>
  * }
  */
 final class Filter implements BaseModel

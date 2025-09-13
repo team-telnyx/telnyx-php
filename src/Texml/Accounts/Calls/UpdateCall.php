@@ -13,14 +13,14 @@ use Telnyx\Texml\Accounts\Calls\UpdateCall\StatusCallbackMethod;
 
 /**
  * @phpstan-type update_call = array{
- *   fallbackMethod?: value-of<FallbackMethod>|null,
- *   fallbackURL?: string|null,
- *   method?: value-of<Method>|null,
- *   status?: string|null,
- *   statusCallback?: string|null,
- *   statusCallbackMethod?: value-of<StatusCallbackMethod>|null,
- *   texml?: string|null,
- *   url?: string|null,
+ *   fallbackMethod?: value-of<FallbackMethod>,
+ *   fallbackURL?: string,
+ *   method?: value-of<Method>,
+ *   status?: string,
+ *   statusCallback?: string,
+ *   statusCallbackMethod?: value-of<StatusCallbackMethod>,
+ *   texml?: string,
+ *   url?: string,
  * }
  */
 final class UpdateCall implements BaseModel

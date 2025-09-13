@@ -17,7 +17,7 @@ use Telnyx\MessagingProfiles\AutorespConfigs\AutoRespConfig\Op;
  *   keywords: list<string>,
  *   op: value-of<Op>,
  *   updatedAt: \DateTimeInterface,
- *   respText?: string|null,
+ *   respText?: string,
  * }
  */
 final class AutoRespConfig implements BaseModel

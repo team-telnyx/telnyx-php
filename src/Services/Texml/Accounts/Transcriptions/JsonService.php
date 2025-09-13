@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Texml\Accounts\Transcriptions;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\Accounts\Transcriptions\JsonContract;
 use Telnyx\Texml\Accounts\Transcriptions\Json\JsonDeleteRecordingTranscriptionSidJsonParams;
@@ -58,6 +59,8 @@ final class JsonService implements JsonContract
      * Returns the recording transcription resource identified by its ID.
      *
      * @param string $accountSid
+     *
+     * @return JsonGetRecordingTranscriptionSidJsonResponse<HasRawResponse>
      */
     public function retrieveRecordingTranscriptionSidJson(
         string $recordingTranscriptionSid,

@@ -14,11 +14,11 @@ use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\ProberLocation;
 
 /**
  * @phpstan-type data_alias = array{
- *   globalIP?: GlobalIP|null,
- *   meanLatency?: MeanLatency|null,
- *   percentileLatency?: PercentileLatency|null,
- *   proberLocation?: ProberLocation|null,
- *   timestamp?: \DateTimeInterface|null,
+ *   globalIP?: GlobalIP,
+ *   meanLatency?: MeanLatency,
+ *   percentileLatency?: PercentileLatency,
+ *   proberLocation?: ProberLocation,
+ *   timestamp?: \DateTimeInterface,
  * }
  */
 final class Data implements BaseModel

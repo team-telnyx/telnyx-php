@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\CustomStorageCredentials\AzureConfigurationData;
 use Telnyx\CustomStorageCredentials\CustomStorageCredentialCreateParams\Backend;
 use Telnyx\CustomStorageCredentials\CustomStorageCredentialGetResponse;
@@ -21,6 +22,8 @@ interface CustomStorageCredentialsContract
      *
      * @param Backend|value-of<Backend> $backend
      * @param GcsConfigurationData|S3ConfigurationData|AzureConfigurationData $configuration
+     *
+     * @return CustomStorageCredentialNewResponse<HasRawResponse>
      */
     public function create(
         string $connectionID,
@@ -31,6 +34,8 @@ interface CustomStorageCredentialsContract
 
     /**
      * @api
+     *
+     * @return CustomStorageCredentialGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $connectionID,
@@ -42,6 +47,8 @@ interface CustomStorageCredentialsContract
      *
      * @param Backend1|value-of<Backend1> $backend
      * @param GcsConfigurationData|S3ConfigurationData|AzureConfigurationData $configuration
+     *
+     * @return CustomStorageCredentialUpdateResponse<HasRawResponse>
      */
     public function update(
         string $connectionID,

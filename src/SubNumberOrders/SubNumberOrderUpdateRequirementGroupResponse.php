@@ -11,8 +11,12 @@ use Telnyx\SubNumberOrders\SubNumberOrderUpdateRequirementGroupResponse\Data;
 
 /**
  * @phpstan-type sub_number_order_update_requirement_group_response = array{
- *   data?: Data|null
+ *   data?: Data
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class SubNumberOrderUpdateRequirementGroupResponse implements BaseModel
 {

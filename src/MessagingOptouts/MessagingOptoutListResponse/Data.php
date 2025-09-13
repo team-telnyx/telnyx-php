@@ -10,11 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type data_alias = array{
- *   createdAt?: \DateTimeInterface|null,
- *   from?: string|null,
+ *   createdAt?: \DateTimeInterface,
+ *   from?: string,
  *   keyword?: string|null,
  *   messagingProfileID?: string|null,
- *   to?: string|null,
+ *   to?: string,
  * }
  */
 final class Data implements BaseModel

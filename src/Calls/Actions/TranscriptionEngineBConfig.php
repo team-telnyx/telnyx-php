@@ -13,9 +13,9 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type transcription_engine_b_config = array{
- *   language?: value-of<Language>|null,
- *   transcriptionEngine?: value-of<TranscriptionEngine>|null,
- *   transcriptionModel?: value-of<TranscriptionModel>|null,
+ *   language?: value-of<Language>,
+ *   transcriptionEngine?: value-of<TranscriptionEngine>,
+ *   transcriptionModel?: value-of<TranscriptionModel>,
  * }
  */
 final class TranscriptionEngineBConfig implements BaseModel

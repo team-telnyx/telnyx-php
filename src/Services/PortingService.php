@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Porting\PortingListUkCarriersResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PortingContract;
@@ -34,15 +35,17 @@ final class PortingService implements PortingContract
      */
     public function __construct(private Client $client)
     {
-        $this->events = new EventsService($this->client);
-        $this->reports = new ReportsService($this->client);
-        $this->loaConfigurations = new LoaConfigurationsService($this->client);
+        $this->events = new EventsService($client);
+        $this->reports = new ReportsService($client);
+        $this->loaConfigurations = new LoaConfigurationsService($client);
     }
 
     /**
      * @api
      *
      * List available carriers in the UK.
+     *
+     * @return PortingListUkCarriersResponse<HasRawResponse>
      */
     public function listUkCarriers(
         ?RequestOptions $requestOptions = null

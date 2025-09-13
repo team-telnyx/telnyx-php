@@ -13,10 +13,10 @@ use Telnyx\Messsages\RcsSuggestion;
 
 /**
  * @phpstan-type content_message = array{
- *   contentInfo?: RcsContentInfo|null,
- *   richCard?: RichCard|null,
- *   suggestions?: list<RcsSuggestion>|null,
- *   text?: string|null,
+ *   contentInfo?: RcsContentInfo,
+ *   richCard?: RichCard,
+ *   suggestions?: list<RcsSuggestion>,
+ *   text?: string,
  * }
  */
 final class ContentMessage implements BaseModel

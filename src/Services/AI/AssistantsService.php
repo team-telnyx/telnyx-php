@@ -31,6 +31,7 @@ use Telnyx\AI\Assistants\TransferTool;
 use Telnyx\AI\Assistants\VoiceSettings;
 use Telnyx\AI\Assistants\WebhookTool;
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\AssistantsContract;
 use Telnyx\Services\AI\Assistants\CanaryDeploysService;
@@ -73,11 +74,11 @@ final class AssistantsService implements AssistantsContract
      */
     public function __construct(private Client $client)
     {
-        $this->tests = new TestsService($this->client);
-        $this->canaryDeploys = new CanaryDeploysService($this->client);
-        $this->scheduledEvents = new ScheduledEventsService($this->client);
-        $this->tools = new ToolsService($this->client);
-        $this->versions = new VersionsService($this->client);
+        $this->tests = new TestsService($client);
+        $this->canaryDeploys = new CanaryDeploysService($client);
+        $this->scheduledEvents = new ScheduledEventsService($client);
+        $this->tools = new ToolsService($client);
+        $this->versions = new VersionsService($client);
     }
 
     /**
@@ -102,6 +103,8 @@ final class AssistantsService implements AssistantsContract
      * @param list<WebhookTool|RetrievalTool|HandoffTool|HangupTool|TransferTool|SipReferTool|DtmfTool> $tools The tools that the assistant can use. These may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables)
      * @param TranscriptionSettings $transcription
      * @param VoiceSettings $voiceSettings
+     *
+     * @return AssistantNewResponse<HasRawResponse>
      */
     public function create(
         $instructions,
@@ -163,6 +166,8 @@ final class AssistantsService implements AssistantsContract
      * @param bool $fetchDynamicVariablesFromWebhook
      * @param string $from
      * @param string $to
+     *
+     * @return AssistantGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $assistantID,
@@ -274,6 +279,8 @@ final class AssistantsService implements AssistantsContract
      * @api
      *
      * Retrieve a list of all AI Assistants configured by the user.
+     *
+     * @return AssistantsList<HasRawResponse>
      */
     public function list(?RequestOptions $requestOptions = null): AssistantsList
     {
@@ -290,6 +297,8 @@ final class AssistantsService implements AssistantsContract
      * @api
      *
      * Delete an AI Assistant by `assistant_id`.
+     *
+     * @return AssistantDeleteResponse<HasRawResponse>
      */
     public function delete(
         string $assistantID,
@@ -312,6 +321,8 @@ final class AssistantsService implements AssistantsContract
      * @param string $content The message content sent by the client to the assistant
      * @param string $conversationID A unique identifier for the conversation thread, used to maintain context
      * @param string $name The optional display name of the user sending the message
+     *
+     * @return AssistantChatResponse<HasRawResponse>
      */
     public function chat(
         string $assistantID,
@@ -343,6 +354,8 @@ final class AssistantsService implements AssistantsContract
      * @api
      *
      * Clone an existing assistant, excluding telephony and messaging settings.
+     *
+     * @return AssistantCloneResponse<HasRawResponse>
      */
     public function clone(
         string $assistantID,
@@ -382,6 +395,8 @@ final class AssistantsService implements AssistantsContract
      *
      * @param string $apiKeyRef Integration secret pointer that refers to the API key for the external provider. This should be an identifier for an integration secret created via /v2/integration_secrets.
      * @param Provider|value-of<Provider> $provider the external provider to import assistants from
+     *
+     * @return AssistantsList<HasRawResponse>
      */
     public function import(
         $apiKeyRef,

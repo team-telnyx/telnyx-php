@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type email_alias = array{contains?: string|null, eq?: string|null}
+ * @phpstan-type email_alias = array{contains?: string, eq?: string}
  */
 final class Email implements BaseModel
 {

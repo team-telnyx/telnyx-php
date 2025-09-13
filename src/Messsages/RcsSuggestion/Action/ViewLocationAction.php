@@ -13,7 +13,7 @@ use Telnyx\Messsages\RcsSuggestion\Action\ViewLocationAction\LatLong;
  * Opens the user's default map app and selects the agent-specified location.
  *
  * @phpstan-type view_location_action = array{
- *   label?: string|null, latLong?: LatLong|null, query?: string|null
+ *   label?: string, latLong?: LatLong, query?: string
  * }
  */
 final class ViewLocationAction implements BaseModel

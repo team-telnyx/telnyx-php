@@ -13,17 +13,17 @@ use Telnyx\Messsages\RcsAgentMessage;
 
 /**
  * @phpstan-type data_alias = array{
- *   id?: string|null,
- *   body?: RcsAgentMessage|null,
- *   direction?: string|null,
- *   encoding?: string|null,
- *   from?: From|null,
- *   messagingProfileID?: string|null,
- *   organizationID?: string|null,
- *   receivedAt?: \DateTimeInterface|null,
- *   recordType?: string|null,
- *   to?: list<To>|null,
- *   type?: string|null,
+ *   id?: string,
+ *   body?: RcsAgentMessage,
+ *   direction?: string,
+ *   encoding?: string,
+ *   from?: From,
+ *   messagingProfileID?: string,
+ *   organizationID?: string,
+ *   receivedAt?: \DateTimeInterface,
+ *   recordType?: string,
+ *   to?: list<To>,
+ *   type?: string,
  * }
  */
 final class Data implements BaseModel

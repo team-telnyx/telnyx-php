@@ -9,16 +9,16 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type data_alias = array{
- *   globalIPID?: string|null,
- *   healthCheckParams?: array<string, mixed>|null,
- *   healthCheckType?: string|null,
- *   recordType?: string|null,
+ * @phpstan-type unnamed_type_with_intersection_parent5 = array{
+ *   globalIPID?: string,
+ *   healthCheckParams?: array<string, mixed>,
+ *   healthCheckType?: string,
+ *   recordType?: string,
  * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<unnamed_type_with_intersection_parent5> */
     use SdkModel;
 
     /**

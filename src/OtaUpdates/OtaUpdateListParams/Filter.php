@@ -14,9 +14,7 @@ use Telnyx\OtaUpdates\OtaUpdateListParams\Filter\Type;
  * Consolidated filter parameter for OTA updates (deepObject style). Originally: filter[status], filter[sim_card_id], filter[type].
  *
  * @phpstan-type filter_alias = array{
- *   simCardID?: string|null,
- *   status?: value-of<Status>|null,
- *   type?: value-of<Type>|null,
+ *   simCardID?: string, status?: value-of<Status>, type?: value-of<Type>
  * }
  */
 final class Filter implements BaseModel

@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type source_alias = array{pointer?: string|null}
+ * @phpstan-type source_alias = array{pointer?: string}
  */
 final class Source implements BaseModel
 {

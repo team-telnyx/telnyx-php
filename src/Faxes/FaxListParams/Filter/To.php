@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * To number filtering operations.
  *
- * @phpstan-type to_alias = array{eq?: string|null}
+ * @phpstan-type to_alias = array{eq?: string}
  */
 final class To implements BaseModel
 {

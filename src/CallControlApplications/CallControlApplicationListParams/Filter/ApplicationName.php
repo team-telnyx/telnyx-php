@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Application name filters.
  *
- * @phpstan-type application_name = array{contains?: string|null}
+ * @phpstan-type application_name = array{contains?: string}
  */
 final class ApplicationName implements BaseModel
 {

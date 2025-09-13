@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\ExternalConnections\Uploads\UploadListParams\Filter\Status\Eq;
 
 /**
- * @phpstan-type status_alias = array{eq?: list<value-of<Eq>>|null}
+ * @phpstan-type status_alias = array{eq?: list<value-of<Eq>>}
  */
 final class Status implements BaseModel
 {

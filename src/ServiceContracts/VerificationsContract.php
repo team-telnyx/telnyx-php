@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\Verifications\CreateVerificationResponse;
 use Telnyx\Verifications\VerificationGetResponse;
@@ -14,6 +15,8 @@ interface VerificationsContract
 {
     /**
      * @api
+     *
+     * @return VerificationGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $verificationID,
@@ -27,6 +30,8 @@ interface VerificationsContract
      * @param string $verifyProfileID the identifier of the associated Verify profile
      * @param string|null $customCode Send a self-generated numeric code to the end-user
      * @param int $timeoutSecs the number of seconds the verification code is valid for
+     *
+     * @return CreateVerificationResponse<HasRawResponse>
      */
     public function triggerCall(
         $phoneNumber,
@@ -42,6 +47,8 @@ interface VerificationsContract
      * @param string $phoneNumber +E164 formatted phone number
      * @param string $verifyProfileID the identifier of the associated Verify profile
      * @param int $timeoutSecs the number of seconds the verification code is valid for
+     *
+     * @return CreateVerificationResponse<HasRawResponse>
      */
     public function triggerFlashcall(
         $phoneNumber,
@@ -57,6 +64,8 @@ interface VerificationsContract
      * @param string $verifyProfileID the identifier of the associated Verify profile
      * @param string|null $customCode Send a self-generated numeric code to the end-user
      * @param int $timeoutSecs the number of seconds the verification code is valid for
+     *
+     * @return CreateVerificationResponse<HasRawResponse>
      */
     public function triggerSMS(
         $phoneNumber,

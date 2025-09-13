@@ -12,9 +12,7 @@ use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentListParams\Filter
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[document_type].
  *
- * @phpstan-type filter_alias = array{
- *   documentType?: list<value-of<DocumentType>>|null
- * }
+ * @phpstan-type filter_alias = array{documentType?: list<value-of<DocumentType>>}
  */
 final class Filter implements BaseModel
 {

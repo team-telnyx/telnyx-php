@@ -20,6 +20,6 @@ final class OperatorConnectService implements OperatorConnectContract
      */
     public function __construct(private Client $client)
     {
-        $this->actions = new ActionsService($this->client);
+        $this->actions = new ActionsService($client);
     }
 }

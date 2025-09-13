@@ -12,13 +12,13 @@ use Telnyx\LedgerBillingGroupReports\LedgerBillingGroupReport\Status;
 
 /**
  * @phpstan-type ledger_billing_group_report = array{
- *   id?: string|null,
- *   createdAt?: \DateTimeInterface|null,
- *   organizationID?: string|null,
- *   recordType?: value-of<RecordType>|null,
+ *   id?: string,
+ *   createdAt?: \DateTimeInterface,
+ *   organizationID?: string,
+ *   recordType?: value-of<RecordType>,
  *   reportURL?: string|null,
- *   status?: value-of<Status>|null,
- *   updatedAt?: \DateTimeInterface|null,
+ *   status?: value-of<Status>,
+ *   updatedAt?: \DateTimeInterface,
  * }
  */
 final class LedgerBillingGroupReport implements BaseModel

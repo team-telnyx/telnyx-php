@@ -13,8 +13,12 @@ use Telnyx\Core\Contracts\BaseModel;
  * Mobile mobile push credentials.
  *
  * @phpstan-type mobile_push_credential_list_response = array{
- *   data?: list<PushCredential>|null, meta?: PaginationMeta|null
+ *   data?: list<PushCredential>, meta?: PaginationMeta
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class MobilePushCredentialListResponse implements BaseModel
 {

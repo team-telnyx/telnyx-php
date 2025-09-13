@@ -12,20 +12,20 @@ use Telnyx\CountryCoverage\CountryCoverageGetResponse\Data\TollFree;
 
 /**
  * @phpstan-type data_alias = array{
- *   code?: string|null,
- *   features?: list<string>|null,
- *   internationalSMS?: bool|null,
- *   inventoryCoverage?: bool|null,
- *   local?: Local|null,
- *   mobile?: array<string, mixed>|null,
- *   national?: array<string, mixed>|null,
- *   numbers?: bool|null,
- *   p2p?: bool|null,
- *   phoneNumberType?: list<string>|null,
- *   quickship?: bool|null,
- *   reservable?: bool|null,
- *   sharedCost?: array<string, mixed>|null,
- *   tollFree?: TollFree|null,
+ *   code?: string,
+ *   features?: list<string>,
+ *   internationalSMS?: bool,
+ *   inventoryCoverage?: bool,
+ *   local?: Local,
+ *   mobile?: array<string, mixed>,
+ *   national?: array<string, mixed>,
+ *   numbers?: bool,
+ *   p2p?: bool,
+ *   phoneNumberType?: list<string>,
+ *   quickship?: bool,
+ *   reservable?: bool,
+ *   sharedCost?: array<string, mixed>,
+ *   tollFree?: TollFree,
  * }
  */
 final class Data implements BaseModel

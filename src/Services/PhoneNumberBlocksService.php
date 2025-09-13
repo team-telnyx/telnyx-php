@@ -20,6 +20,6 @@ final class PhoneNumberBlocksService implements PhoneNumberBlocksContract
      */
     public function __construct(private Client $client)
     {
-        $this->jobs = new JobsService($this->client);
+        $this->jobs = new JobsService($client);
     }
 }

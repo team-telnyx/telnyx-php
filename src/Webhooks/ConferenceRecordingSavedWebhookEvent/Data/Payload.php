@@ -14,18 +14,18 @@ use Telnyx\Webhooks\ConferenceRecordingSavedWebhookEvent\Data\Payload\RecordingU
 
 /**
  * @phpstan-type payload_alias = array{
- *   callControlID?: string|null,
- *   callSessionID?: string|null,
- *   channels?: value-of<Channels>|null,
- *   clientState?: string|null,
- *   conferenceID?: string|null,
- *   connectionID?: string|null,
- *   format?: value-of<Format>|null,
- *   publicRecordingURLs?: PublicRecordingURLs|null,
- *   recordingEndedAt?: \DateTimeInterface|null,
- *   recordingID?: string|null,
- *   recordingStartedAt?: \DateTimeInterface|null,
- *   recordingURLs?: RecordingURLs|null,
+ *   callControlID?: string,
+ *   callSessionID?: string,
+ *   channels?: value-of<Channels>,
+ *   clientState?: string,
+ *   conferenceID?: string,
+ *   connectionID?: string,
+ *   format?: value-of<Format>,
+ *   publicRecordingURLs?: PublicRecordingURLs,
+ *   recordingEndedAt?: \DateTimeInterface,
+ *   recordingID?: string,
+ *   recordingStartedAt?: \DateTimeInterface,
+ *   recordingURLs?: RecordingURLs,
  * }
  */
 final class Payload implements BaseModel

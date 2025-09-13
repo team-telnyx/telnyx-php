@@ -11,12 +11,12 @@ use Telnyx\Webhooks\CallSpeakEndedWebhookEvent\Data\Payload\Status;
 
 /**
  * @phpstan-type payload_alias = array{
- *   callControlID?: string|null,
- *   callLegID?: string|null,
- *   callSessionID?: string|null,
- *   clientState?: string|null,
- *   connectionID?: string|null,
- *   status?: value-of<Status>|null,
+ *   callControlID?: string,
+ *   callLegID?: string,
+ *   callSessionID?: string,
+ *   clientState?: string,
+ *   connectionID?: string,
+ *   status?: value-of<Status>,
  * }
  */
 final class Payload implements BaseModel

@@ -10,7 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\ExternalConnections\Releases\ReleaseGetResponse\Data;
 
 /**
- * @phpstan-type release_get_response = array{data?: Data|null}
+ * @phpstan-type release_get_response = array{data?: Data}
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class ReleaseGetResponse implements BaseModel
 {

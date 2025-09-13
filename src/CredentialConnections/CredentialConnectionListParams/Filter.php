@@ -13,9 +13,9 @@ use Telnyx\CredentialConnections\CredentialConnectionListParams\Filter\Connectio
  * Consolidated filter parameter (deepObject style). Originally: filter[connection_name], filter[fqdn], filter[outbound_voice_profile_id], filter[outbound.outbound_voice_profile_id].
  *
  * @phpstan-type filter_alias = array{
- *   connectionName?: ConnectionName|null,
- *   fqdn?: string|null,
- *   outboundVoiceProfileID?: string|null,
+ *   connectionName?: ConnectionName,
+ *   fqdn?: string,
+ *   outboundVoiceProfileID?: string,
  * }
  */
 final class Filter implements BaseModel

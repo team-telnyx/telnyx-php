@@ -12,18 +12,18 @@ use Telnyx\Webhooks\FaxDeliveredWebhookEvent\Payload\Status;
 
 /**
  * @phpstan-type payload_alias = array{
- *   callDurationSecs?: int|null,
- *   clientState?: string|null,
- *   connectionID?: string|null,
- *   direction?: value-of<Direction>|null,
- *   faxID?: string|null,
- *   from?: string|null,
- *   mediaName?: string|null,
- *   originalMediaURL?: string|null,
- *   pageCount?: int|null,
- *   status?: value-of<Status>|null,
- *   to?: string|null,
- *   userID?: string|null,
+ *   callDurationSecs?: int,
+ *   clientState?: string,
+ *   connectionID?: string,
+ *   direction?: value-of<Direction>,
+ *   faxID?: string,
+ *   from?: string,
+ *   mediaName?: string,
+ *   originalMediaURL?: string,
+ *   pageCount?: int,
+ *   status?: value-of<Status>,
+ *   to?: string,
+ *   userID?: string,
  * }
  */
 final class Payload implements BaseModel

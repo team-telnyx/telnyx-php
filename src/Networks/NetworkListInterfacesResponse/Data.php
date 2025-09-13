@@ -10,16 +10,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Networks\NetworkListInterfacesResponse\Data\Region;
 
 /**
- * @phpstan-type data_alias = array{
- *   recordType?: string|null,
- *   region?: Region|null,
- *   regionCode?: string|null,
- *   type?: string|null,
+ * @phpstan-type unnamed_type_with_intersection_parent16 = array{
+ *   recordType?: string, region?: Region, regionCode?: string, type?: string
  * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<unnamed_type_with_intersection_parent16> */
     use SdkModel;
 
     /**

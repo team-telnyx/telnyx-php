@@ -14,9 +14,9 @@ use Telnyx\Core\Contracts\BaseModel;
  *   clusterID: string,
  *   clusterSummary: string,
  *   totalNumberOfNodes: int,
- *   clusterHeader?: string|null,
- *   nodes?: list<Node>|null,
- *   subclusters?: list<RecursiveCluster>|null,
+ *   clusterHeader?: string,
+ *   nodes?: list<Node>,
+ *   subclusters?: list<RecursiveCluster>,
  * }
  */
 final class RecursiveCluster implements BaseModel

@@ -15,24 +15,24 @@ use Telnyx\FqdnConnections\InboundFqdn\SipSubdomainReceiveSettings;
 
 /**
  * @phpstan-type inbound_fqdn = array{
- *   aniNumberFormat?: value-of<AniNumberFormat>|null,
+ *   aniNumberFormat?: value-of<AniNumberFormat>,
  *   channelLimit?: int|null,
- *   codecs?: list<string>|null,
+ *   codecs?: list<string>,
  *   defaultPrimaryFqdnID?: string|null,
  *   defaultRoutingMethod?: value-of<DefaultRoutingMethod>|null,
  *   defaultSecondaryFqdnID?: string|null,
  *   defaultTertiaryFqdnID?: string|null,
- *   dnisNumberFormat?: value-of<DnisNumberFormat>|null,
- *   generateRingbackTone?: bool|null,
- *   isupHeadersEnabled?: bool|null,
- *   prackEnabled?: bool|null,
- *   shakenStirEnabled?: bool|null,
- *   sipCompactHeadersEnabled?: bool|null,
- *   sipRegion?: value-of<SipRegion>|null,
+ *   dnisNumberFormat?: value-of<DnisNumberFormat>,
+ *   generateRingbackTone?: bool,
+ *   isupHeadersEnabled?: bool,
+ *   prackEnabled?: bool,
+ *   shakenStirEnabled?: bool,
+ *   sipCompactHeadersEnabled?: bool,
+ *   sipRegion?: value-of<SipRegion>,
  *   sipSubdomain?: string|null,
- *   sipSubdomainReceiveSettings?: value-of<SipSubdomainReceiveSettings>|null,
- *   timeout1xxSecs?: int|null,
- *   timeout2xxSecs?: int|null,
+ *   sipSubdomainReceiveSettings?: value-of<SipSubdomainReceiveSettings>,
+ *   timeout1xxSecs?: int,
+ *   timeout2xxSecs?: int,
  * }
  */
 final class InboundFqdn implements BaseModel

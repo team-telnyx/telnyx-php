@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * A JSON object representation of the action params.
  *
- * @phpstan-type settings_alias = array{privateWirelessGatewayID?: string|null}
+ * @phpstan-type settings_alias = array{privateWirelessGatewayID?: string}
  */
 final class Settings implements BaseModel
 {

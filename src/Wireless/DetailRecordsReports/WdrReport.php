@@ -11,14 +11,14 @@ use Telnyx\Wireless\DetailRecordsReports\WdrReport\Status;
 
 /**
  * @phpstan-type wdr_report = array{
- *   id?: string|null,
- *   createdAt?: string|null,
- *   endTime?: string|null,
- *   recordType?: string|null,
- *   reportURL?: string|null,
- *   startTime?: string|null,
- *   status?: value-of<Status>|null,
- *   updatedAt?: string|null,
+ *   id?: string,
+ *   createdAt?: string,
+ *   endTime?: string,
+ *   recordType?: string,
+ *   reportURL?: string,
+ *   startTime?: string,
+ *   status?: value-of<Status>,
+ *   updatedAt?: string,
  * }
  */
 final class WdrReport implements BaseModel

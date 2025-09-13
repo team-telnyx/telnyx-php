@@ -12,10 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * Filter by voice connection name pattern matching.
  *
  * @phpstan-type voice_connection_name = array{
- *   contains?: string|null,
- *   endsWith?: string|null,
- *   eq?: string|null,
- *   startsWith?: string|null,
+ *   contains?: string, endsWith?: string, eq?: string, startsWith?: string
  * }
  */
 final class VoiceConnectionName implements BaseModel

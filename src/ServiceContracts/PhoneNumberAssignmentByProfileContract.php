@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileAssignResponse\AssignProfileToCampaignResponse;
 use Telnyx\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileAssignResponse\SettingsDataErrorMessage;
 use Telnyx\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileGetPhoneNumberStatusResponse;
@@ -33,6 +34,10 @@ interface PhoneNumberAssignmentByProfileContract
      *
      * @param int $page
      * @param int $recordsPerPage
+     *
+     * @return PhoneNumberAssignmentByProfileGetPhoneNumberStatusResponse<
+     *   HasRawResponse
+     * >
      */
     public function retrievePhoneNumberStatus(
         string $taskID,
@@ -43,6 +48,8 @@ interface PhoneNumberAssignmentByProfileContract
 
     /**
      * @api
+     *
+     * @return PhoneNumberAssignmentByProfileGetStatusResponse<HasRawResponse>
      */
     public function retrieveStatus(
         string $taskID,

@@ -13,12 +13,12 @@ use Telnyx\NotificationChannels\NotificationChannel\ChannelTypeID;
  * A Notification Channel.
  *
  * @phpstan-type notification_channel = array{
- *   id?: string|null,
- *   channelDestination?: string|null,
- *   channelTypeID?: value-of<ChannelTypeID>|null,
- *   createdAt?: \DateTimeInterface|null,
- *   notificationProfileID?: string|null,
- *   updatedAt?: \DateTimeInterface|null,
+ *   id?: string,
+ *   channelDestination?: string,
+ *   channelTypeID?: value-of<ChannelTypeID>,
+ *   createdAt?: \DateTimeInterface,
+ *   notificationProfileID?: string,
+ *   updatedAt?: \DateTimeInterface,
  * }
  */
 final class NotificationChannel implements BaseModel

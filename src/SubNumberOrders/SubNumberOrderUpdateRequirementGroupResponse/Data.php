@@ -12,20 +12,20 @@ use Telnyx\SubNumberOrders\SubNumberOrderUpdateRequirementGroupResponse\Data\Reg
 
 /**
  * @phpstan-type data_alias = array{
- *   id?: string|null,
- *   countryCode?: string|null,
- *   createdAt?: \DateTimeInterface|null,
- *   customerReference?: string|null,
- *   isBlockSubNumberOrder?: bool|null,
- *   orderRequestID?: string|null,
- *   phoneNumberType?: string|null,
- *   phoneNumbers?: list<PhoneNumber>|null,
- *   phoneNumbersCount?: int|null,
- *   recordType?: string|null,
- *   regulatoryRequirements?: list<RegulatoryRequirement>|null,
- *   requirementsMet?: bool|null,
- *   status?: string|null,
- *   updatedAt?: \DateTimeInterface|null,
+ *   id?: string,
+ *   countryCode?: string,
+ *   createdAt?: \DateTimeInterface,
+ *   customerReference?: string,
+ *   isBlockSubNumberOrder?: bool,
+ *   orderRequestID?: string,
+ *   phoneNumberType?: string,
+ *   phoneNumbers?: list<PhoneNumber>,
+ *   phoneNumbersCount?: int,
+ *   recordType?: string,
+ *   regulatoryRequirements?: list<RegulatoryRequirement>,
+ *   requirementsMet?: bool,
+ *   status?: string,
+ *   updatedAt?: \DateTimeInterface,
  * }
  */
 final class Data implements BaseModel

@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type bucket_alias = array{
- *   creationDate?: \DateTimeInterface|null, name?: string|null
+ *   creationDate?: \DateTimeInterface, name?: string
  * }
  */
 final class Bucket implements BaseModel

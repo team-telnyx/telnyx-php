@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Rooms;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\Rooms\Sessions\SessionGetParticipantsResponse;
 use Telnyx\Rooms\Sessions\SessionGetResponse;
@@ -37,7 +38,7 @@ final class SessionsService implements SessionsContract
      */
     public function __construct(private Client $client)
     {
-        $this->actions = new ActionsService($this->client);
+        $this->actions = new ActionsService($client);
     }
 
     /**
@@ -46,6 +47,8 @@ final class SessionsService implements SessionsContract
      * View a room session.
      *
      * @param bool $includeParticipants to decide if room participants should be included in the response
+     *
+     * @return SessionGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $roomSessionID,
@@ -75,6 +78,8 @@ final class SessionsService implements SessionsContract
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[date_created_at][eq], filter[date_created_at][gte], filter[date_created_at][lte], filter[date_updated_at][eq], filter[date_updated_at][gte], filter[date_updated_at][lte], filter[date_ended_at][eq], filter[date_ended_at][gte], filter[date_ended_at][lte], filter[room_id], filter[active]
      * @param bool $includeParticipants to decide if room participants should be included in the response
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     *
+     * @return SessionList0Response<HasRawResponse>
      */
     public function list0(
         $filter = omit,
@@ -109,6 +114,8 @@ final class SessionsService implements SessionsContract
      * @param Filter1 $filter Consolidated filter parameter (deepObject style). Originally: filter[date_created_at][eq], filter[date_created_at][gte], filter[date_created_at][lte], filter[date_updated_at][eq], filter[date_updated_at][gte], filter[date_updated_at][lte], filter[date_ended_at][eq], filter[date_ended_at][gte], filter[date_ended_at][lte], filter[active]
      * @param bool $includeParticipants to decide if room participants should be included in the response
      * @param Page1 $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     *
+     * @return SessionList1Response<HasRawResponse>
      */
     public function list1(
         string $roomID,
@@ -143,6 +150,8 @@ final class SessionsService implements SessionsContract
      *
      * @param Filter2 $filter Consolidated filter parameter (deepObject style). Originally: filter[date_joined_at][eq], filter[date_joined_at][gte], filter[date_joined_at][lte], filter[date_updated_at][eq], filter[date_updated_at][gte], filter[date_updated_at][lte], filter[date_left_at][eq], filter[date_left_at][gte], filter[date_left_at][lte], filter[context]
      * @param Page2 $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     *
+     * @return SessionGetParticipantsResponse<HasRawResponse>
      */
     public function retrieveParticipants(
         string $roomSessionID,

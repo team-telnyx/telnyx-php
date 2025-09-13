@@ -11,6 +11,7 @@ use Telnyx\AI\Conversations\InsightGroups\InsightGroupRetrieveInsightGroupsParam
 use Telnyx\AI\Conversations\InsightGroups\InsightGroupUpdateParams;
 use Telnyx\AI\Conversations\InsightGroups\InsightTemplateGroupDetail;
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Conversations\InsightGroupsContract;
 use Telnyx\Services\AI\Conversations\InsightGroups\InsightsService;
@@ -29,13 +30,15 @@ final class InsightGroupsService implements InsightGroupsContract
      */
     public function __construct(private Client $client)
     {
-        $this->insights = new InsightsService($this->client);
+        $this->insights = new InsightsService($client);
     }
 
     /**
      * @api
      *
      * Get insight group by ID
+     *
+     * @return InsightTemplateGroupDetail<HasRawResponse>
      */
     public function retrieve(
         string $groupID,
@@ -58,6 +61,8 @@ final class InsightGroupsService implements InsightGroupsContract
      * @param string $description
      * @param string $name
      * @param string $webhook
+     *
+     * @return InsightTemplateGroupDetail<HasRawResponse>
      */
     public function update(
         string $groupID,
@@ -107,6 +112,8 @@ final class InsightGroupsService implements InsightGroupsContract
      * @param string $name
      * @param string $description
      * @param string $webhook
+     *
+     * @return InsightTemplateGroupDetail<HasRawResponse>
      */
     public function insightGroups(
         $name,
@@ -135,6 +142,8 @@ final class InsightGroupsService implements InsightGroupsContract
      * Get all insight groups
      *
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     *
+     * @return InsightGroupGetInsightGroupsResponse<HasRawResponse>
      */
     public function retrieveInsightGroups(
         $page = omit,

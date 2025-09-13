@@ -12,11 +12,11 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type transcription_start_request = array{
- *   clientState?: string|null,
- *   commandID?: string|null,
- *   transcriptionEngine?: value-of<TranscriptionEngine>|null,
- *   transcriptionEngineConfig?: null|TranscriptionEngineAConfig|TranscriptionEngineBConfig,
- *   transcriptionTracks?: string|null,
+ *   clientState?: string,
+ *   commandID?: string,
+ *   transcriptionEngine?: value-of<TranscriptionEngine>,
+ *   transcriptionEngineConfig?: TranscriptionEngineAConfig|TranscriptionEngineBConfig,
+ *   transcriptionTracks?: string,
  * }
  */
 final class TranscriptionStartRequest implements BaseModel

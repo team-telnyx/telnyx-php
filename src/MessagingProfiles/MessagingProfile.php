@@ -12,24 +12,24 @@ use Telnyx\MessagingProfiles\MessagingProfile\WebhookAPIVersion;
 
 /**
  * @phpstan-type messaging_profile = array{
- *   id?: string|null,
+ *   id?: string,
  *   alphaSender?: string|null,
- *   createdAt?: \DateTimeInterface|null,
- *   dailySpendLimit?: string|null,
- *   dailySpendLimitEnabled?: bool|null,
- *   enabled?: bool|null,
- *   mmsFallBackToSMS?: bool|null,
- *   mmsTranscoding?: bool|null,
- *   name?: string|null,
+ *   createdAt?: \DateTimeInterface,
+ *   dailySpendLimit?: string,
+ *   dailySpendLimitEnabled?: bool,
+ *   enabled?: bool,
+ *   mmsFallBackToSMS?: bool,
+ *   mmsTranscoding?: bool,
+ *   name?: string,
  *   numberPoolSettings?: NumberPoolSettings|null,
- *   recordType?: value-of<RecordType>|null,
- *   updatedAt?: \DateTimeInterface|null,
+ *   recordType?: value-of<RecordType>,
+ *   updatedAt?: \DateTimeInterface,
  *   urlShortenerSettings?: URLShortenerSettings|null,
- *   v1Secret?: string|null,
- *   webhookAPIVersion?: value-of<WebhookAPIVersion>|null,
+ *   v1Secret?: string,
+ *   webhookAPIVersion?: value-of<WebhookAPIVersion>,
  *   webhookFailoverURL?: string|null,
  *   webhookURL?: string|null,
- *   whitelistedDestinations?: list<string>|null,
+ *   whitelistedDestinations?: list<string>,
  * }
  */
 final class MessagingProfile implements BaseModel

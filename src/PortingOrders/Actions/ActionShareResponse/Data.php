@@ -11,14 +11,14 @@ use Telnyx\PortingOrders\Actions\ActionShareResponse\Data\Permission;
 
 /**
  * @phpstan-type data_alias = array{
- *   id?: string|null,
- *   token?: string|null,
- *   createdAt?: \DateTimeInterface|null,
- *   expiresAt?: \DateTimeInterface|null,
- *   expiresInSeconds?: int|null,
- *   permissions?: list<value-of<Permission>>|null,
- *   portingOrderID?: string|null,
- *   recordType?: string|null,
+ *   id?: string,
+ *   token?: string,
+ *   createdAt?: \DateTimeInterface,
+ *   expiresAt?: \DateTimeInterface,
+ *   expiresInSeconds?: int,
+ *   permissions?: list<value-of<Permission>>,
+ *   portingOrderID?: string,
+ *   recordType?: string,
  * }
  */
 final class Data implements BaseModel

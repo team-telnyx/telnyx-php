@@ -7,6 +7,7 @@ namespace Telnyx\Services\AI\Assistants;
 use Telnyx\AI\Assistants\Tools\ToolTestParams;
 use Telnyx\AI\Assistants\Tools\ToolTestResponse;
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\ToolsContract;
 
@@ -29,6 +30,8 @@ final class ToolsService implements ToolsContract
      * mixed,> $arguments Key-value arguments to use for the webhook test
      * @param array<string,
      * mixed,> $dynamicVariables Key-value dynamic variables to use for the webhook test
+     *
+     * @return ToolTestResponse<HasRawResponse>
      */
     public function test(
         string $toolID,

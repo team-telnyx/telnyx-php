@@ -10,8 +10,12 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type number_order_phone_number_get_response = array{
- *   data?: NumberOrderPhoneNumber|null
+ *   data?: NumberOrderPhoneNumber
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class NumberOrderPhoneNumberGetResponse implements BaseModel
 {

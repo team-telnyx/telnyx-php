@@ -10,8 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type messaging_settings = array{
- *   defaultMessagingProfileID?: string|null,
- *   deliveryStatusWebhookURL?: string|null,
+ *   defaultMessagingProfileID?: string, deliveryStatusWebhookURL?: string
  * }
  */
 final class MessagingSettings implements BaseModel

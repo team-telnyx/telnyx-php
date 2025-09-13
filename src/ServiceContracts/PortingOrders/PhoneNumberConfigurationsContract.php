@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\PortingOrders;
 
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationCreateParams\PhoneNumberConfiguration;
 use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListParams\Filter;
 use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListParams\Page;
@@ -20,6 +21,8 @@ interface PhoneNumberConfigurationsContract
      * @api
      *
      * @param list<PhoneNumberConfiguration> $phoneNumberConfigurations
+     *
+     * @return PhoneNumberConfigurationNewResponse<HasRawResponse>
      */
     public function create(
         $phoneNumberConfigurations = omit,
@@ -32,6 +35,8 @@ interface PhoneNumberConfigurationsContract
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[porting_order.status][in][], filter[porting_phone_number][in][], filter[user_bundle_id][in][]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param Sort $sort Consolidated sort parameter (deepObject style). Originally: sort[value]
+     *
+     * @return PhoneNumberConfigurationListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,

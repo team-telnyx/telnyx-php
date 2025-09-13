@@ -10,11 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type data_alias = array{
- *   fastPortable?: bool|null,
- *   notPortableReason?: string|null,
- *   phoneNumber?: string|null,
- *   portable?: bool|null,
- *   recordType?: string|null,
+ *   fastPortable?: bool,
+ *   notPortableReason?: string,
+ *   phoneNumber?: string,
+ *   portable?: bool,
+ *   recordType?: string,
  * }
  */
 final class Data implements BaseModel

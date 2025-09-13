@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\MessagingURLDomains\MessagingURLDomainListParams\Page;
 use Telnyx\MessagingURLDomains\MessagingURLDomainListResponse;
 use Telnyx\RequestOptions;
@@ -16,6 +17,8 @@ interface MessagingURLDomainsContract
      * @api
      *
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     *
+     * @return MessagingURLDomainListResponse<HasRawResponse>
      */
     public function list(
         $page = omit,

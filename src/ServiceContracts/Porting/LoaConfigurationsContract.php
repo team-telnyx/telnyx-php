@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\Porting;
 
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationCreateParams\Address;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationCreateParams\Contact;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationCreateParams\Logo;
@@ -32,6 +33,8 @@ interface LoaConfigurationsContract
      * @param Contact $contact the contact information of the company
      * @param Logo $logo The logo of the LOA configuration
      * @param string $name The name of the LOA configuration
+     *
+     * @return LoaConfigurationNewResponse<HasRawResponse>
      */
     public function create(
         $address,
@@ -44,6 +47,8 @@ interface LoaConfigurationsContract
 
     /**
      * @api
+     *
+     * @return LoaConfigurationGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -58,6 +63,8 @@ interface LoaConfigurationsContract
      * @param Contact1 $contact the contact information of the company
      * @param Logo1 $logo The logo of the LOA configuration
      * @param string $name The name of the LOA configuration
+     *
+     * @return LoaConfigurationUpdateResponse<HasRawResponse>
      */
     public function update(
         string $id,
@@ -73,6 +80,8 @@ interface LoaConfigurationsContract
      * @api
      *
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     *
+     * @return LoaConfigurationListResponse<HasRawResponse>
      */
     public function list(
         $page = omit,

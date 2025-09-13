@@ -11,31 +11,31 @@ use Telnyx\VirtualCrossConnects\VirtualCrossConnectGetResponse\Data\CloudProvide
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectGetResponse\Data\Region;
 
 /**
- * @phpstan-type data_alias = array{
+ * @phpstan-type unnamed_type_with_intersection_parent25 = array{
  *   bgpAsn: float,
  *   cloudProvider: value-of<CloudProvider>,
  *   cloudProviderRegion: string,
  *   primaryCloudAccountID: string,
  *   regionCode: string,
- *   bandwidthMbps?: float|null,
- *   primaryBgpKey?: string|null,
- *   primaryCloudIP?: string|null,
- *   primaryEnabled?: bool|null,
- *   primaryRoutingAnnouncement?: bool|null,
- *   primaryTelnyxIP?: string|null,
- *   recordType?: string|null,
- *   region?: Region|null,
- *   secondaryBgpKey?: string|null,
- *   secondaryCloudAccountID?: string|null,
- *   secondaryCloudIP?: string|null,
- *   secondaryEnabled?: bool|null,
- *   secondaryRoutingAnnouncement?: bool|null,
- *   secondaryTelnyxIP?: string|null,
+ *   bandwidthMbps?: float,
+ *   primaryBgpKey?: string,
+ *   primaryCloudIP?: string,
+ *   primaryEnabled?: bool,
+ *   primaryRoutingAnnouncement?: bool,
+ *   primaryTelnyxIP?: string,
+ *   recordType?: string,
+ *   region?: Region,
+ *   secondaryBgpKey?: string,
+ *   secondaryCloudAccountID?: string,
+ *   secondaryCloudIP?: string,
+ *   secondaryEnabled?: bool,
+ *   secondaryRoutingAnnouncement?: bool,
+ *   secondaryTelnyxIP?: string,
  * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<unnamed_type_with_intersection_parent25> */
     use SdkModel;
 
     /**

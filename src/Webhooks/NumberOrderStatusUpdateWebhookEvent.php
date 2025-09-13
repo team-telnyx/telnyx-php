@@ -11,7 +11,7 @@ use Telnyx\NumberBlockOrders\NumberBlockOrder;
 
 /**
  * @phpstan-type number_order_status_update_webhook_event = array{
- *   data?: NumberBlockOrder|null
+ *   data?: NumberBlockOrder
  * }
  */
 final class NumberOrderStatusUpdateWebhookEvent implements BaseModel

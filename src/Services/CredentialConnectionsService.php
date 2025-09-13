@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\CredentialConnections\ConnectionRtcpSettings;
 use Telnyx\CredentialConnections\CredentialConnectionCreateParams;
@@ -44,7 +45,7 @@ final class CredentialConnectionsService implements CredentialConnectionsContrac
      */
     public function __construct(private Client $client)
     {
-        $this->actions = new ActionsService($this->client);
+        $this->actions = new ActionsService($client);
     }
 
     /**
@@ -73,6 +74,8 @@ final class CredentialConnectionsService implements CredentialConnectionsContrac
      * @param string|null $webhookEventFailoverURL The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      * @param string $webhookEventURL The URL where webhooks related to this connection will be sent. Must include a scheme, such as 'https'.
      * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
+     *
+     * @return CredentialConnectionNewResponse<HasRawResponse>
      */
     public function create(
         $connectionName,
@@ -139,6 +142,8 @@ final class CredentialConnectionsService implements CredentialConnectionsContrac
      * @api
      *
      * Retrieves the details of an existing credential connection.
+     *
+     * @return CredentialConnectionGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -179,6 +184,8 @@ final class CredentialConnectionsService implements CredentialConnectionsContrac
      * @param string|null $webhookEventFailoverURL The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      * @param string $webhookEventURL The URL where webhooks related to this connection will be sent. Must include a scheme, such as 'https'.
      * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
+     *
+     * @return CredentialConnectionUpdateResponse<HasRawResponse>
      */
     public function update(
         string $id,
@@ -261,6 +268,8 @@ final class CredentialConnectionsService implements CredentialConnectionsContrac
      *     <code>connection_name</code> field in descending order.
      *   </li>
      * </ul> <br/> If not given, results are sorted by <code>created_at</code> in descending order.
+     *
+     * @return CredentialConnectionListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,
@@ -287,6 +296,8 @@ final class CredentialConnectionsService implements CredentialConnectionsContrac
      * @api
      *
      * Deletes an existing credential connection.
+     *
+     * @return CredentialConnectionDeleteResponse<HasRawResponse>
      */
     public function delete(
         string $id,

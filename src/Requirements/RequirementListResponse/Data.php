@@ -13,15 +13,15 @@ use Telnyx\Requirements\RequirementListResponse\Data\PhoneNumberType;
 
 /**
  * @phpstan-type data_alias = array{
- *   id?: string|null,
- *   action?: value-of<Action>|null,
- *   countryCode?: string|null,
- *   createdAt?: string|null,
- *   locality?: string|null,
- *   phoneNumberType?: value-of<PhoneNumberType>|null,
- *   recordType?: string|null,
- *   requirementsTypes?: list<DocReqsRequirementType>|null,
- *   updatedAt?: string|null,
+ *   id?: string,
+ *   action?: value-of<Action>,
+ *   countryCode?: string,
+ *   createdAt?: string,
+ *   locality?: string,
+ *   phoneNumberType?: value-of<PhoneNumberType>,
+ *   recordType?: string,
+ *   requirementsTypes?: list<DocReqsRequirementType>,
+ *   updatedAt?: string,
  * }
  */
 final class Data implements BaseModel

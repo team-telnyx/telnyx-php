@@ -12,10 +12,10 @@ use Telnyx\Core\Contracts\BaseModel;
  * Consolidated filter parameter (deepObject style). Originally: filter[location.region], filter[location.site], filter[location.pop], filter[location.code].
  *
  * @phpstan-type filter_alias = array{
- *   locationCode?: string|null,
- *   locationPop?: string|null,
- *   locationRegion?: string|null,
- *   locationSite?: string|null,
+ *   locationCode?: string,
+ *   locationPop?: string,
+ *   locationRegion?: string,
+ *   locationSite?: string,
  * }
  */
 final class Filter implements BaseModel

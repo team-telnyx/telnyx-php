@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\GlobalIPProtocols\GlobalIPProtocolListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\GlobalIPProtocolsContract;
@@ -20,6 +21,8 @@ final class GlobalIPProtocolsService implements GlobalIPProtocolsContract
      * @api
      *
      * List all Global IP Protocols
+     *
+     * @return GlobalIPProtocolListResponse<HasRawResponse>
      */
     public function list(
         ?RequestOptions $requestOptions = null

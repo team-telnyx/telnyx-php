@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PhoneNumbers\PhoneNumberDeleteResponse;
 use Telnyx\PhoneNumbers\PhoneNumberGetResponse;
 use Telnyx\PhoneNumbers\PhoneNumberListParams\Filter;
@@ -23,6 +24,8 @@ interface PhoneNumbersContract
 {
     /**
      * @api
+     *
+     * @return PhoneNumberGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -38,6 +41,8 @@ interface PhoneNumbersContract
      * @param string $externalPin If someone attempts to port your phone number away from Telnyx and your phone number has an external PIN set, we will attempt to verify that you provided the correct external PIN to the winning carrier. Note that not all carriers cooperate with this security mechanism.
      * @param bool $hdVoiceEnabled indicates whether HD voice is enabled for this number
      * @param list<string> $tags a list of user-assigned tags to help organize phone numbers
+     *
+     * @return PhoneNumberUpdateResponse<HasRawResponse>
      */
     public function update(
         string $id,
@@ -56,6 +61,8 @@ interface PhoneNumbersContract
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[tag], filter[phone_number], filter[status], filter[country_iso_alpha2], filter[connection_id], filter[voice.connection_name], filter[voice.usage_payment_method], filter[billing_group_id], filter[emergency_address_id], filter[customer_reference], filter[number_type], filter[source]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param Sort|value-of<Sort> $sort Specifies the sort order for results. If not given, results are sorted by created_at in descending order.
+     *
+     * @return PhoneNumberListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,
@@ -66,6 +73,8 @@ interface PhoneNumbersContract
 
     /**
      * @api
+     *
+     * @return PhoneNumberDeleteResponse<HasRawResponse>
      */
     public function delete(
         string $id,
@@ -80,6 +89,8 @@ interface PhoneNumbersContract
      * @param bool $includeTags include the tags associated with the phone number
      * @param Page1 $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param Sort1|value-of<Sort1> $sort Specifies the sort order for results. If not given, results are sorted by created_at in descending order.
+     *
+     * @return PhoneNumberSlimListResponse<HasRawResponse>
      */
     public function slimList(
         $filter = omit,

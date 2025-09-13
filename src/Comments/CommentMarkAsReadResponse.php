@@ -10,7 +10,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type comment_mark_as_read_response = array{data?: Data|null}
+ * @phpstan-type comment_mark_as_read_response = array{data?: Data}
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class CommentMarkAsReadResponse implements BaseModel
 {

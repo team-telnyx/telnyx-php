@@ -12,19 +12,23 @@ use Telnyx\Texml\Accounts\Conferences\ConferenceUpdateResponse\Status;
 
 /**
  * @phpstan-type conference_update_response = array{
- *   accountSid?: string|null,
- *   apiVersion?: string|null,
- *   callSidEndingConference?: string|null,
- *   dateCreated?: string|null,
- *   dateUpdated?: string|null,
- *   friendlyName?: string|null,
- *   reasonConferenceEnded?: value-of<ReasonConferenceEnded>|null,
- *   region?: string|null,
- *   sid?: string|null,
- *   status?: value-of<Status>|null,
- *   subresourceUris?: array<string, mixed>|null,
- *   uri?: string|null,
+ *   accountSid?: string,
+ *   apiVersion?: string,
+ *   callSidEndingConference?: string,
+ *   dateCreated?: string,
+ *   dateUpdated?: string,
+ *   friendlyName?: string,
+ *   reasonConferenceEnded?: value-of<ReasonConferenceEnded>,
+ *   region?: string,
+ *   sid?: string,
+ *   status?: value-of<Status>,
+ *   subresourceUris?: array<string, mixed>,
+ *   uri?: string,
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class ConferenceUpdateResponse implements BaseModel
 {

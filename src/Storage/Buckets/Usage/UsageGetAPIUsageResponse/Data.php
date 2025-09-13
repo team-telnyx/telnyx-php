@@ -12,9 +12,7 @@ use Telnyx\Storage\Buckets\Usage\UsageGetAPIUsageResponse\Data\Total;
 
 /**
  * @phpstan-type data_alias = array{
- *   categories?: list<Category>|null,
- *   timestamp?: \DateTimeInterface|null,
- *   total?: Total|null,
+ *   categories?: list<Category>, timestamp?: \DateTimeInterface, total?: Total
  * }
  */
 final class Data implements BaseModel

@@ -13,16 +13,16 @@ use Telnyx\Verifications\Verification\Type;
 
 /**
  * @phpstan-type verification_alias = array{
- *   id?: string|null,
- *   createdAt?: string|null,
+ *   id?: string,
+ *   createdAt?: string,
  *   customCode?: string|null,
- *   phoneNumber?: string|null,
- *   recordType?: value-of<RecordType>|null,
- *   status?: value-of<Status>|null,
- *   timeoutSecs?: int|null,
- *   type?: value-of<Type>|null,
- *   updatedAt?: string|null,
- *   verifyProfileID?: string|null,
+ *   phoneNumber?: string,
+ *   recordType?: value-of<RecordType>,
+ *   status?: value-of<Status>,
+ *   timeoutSecs?: int,
+ *   type?: value-of<Type>,
+ *   updatedAt?: string,
+ *   verifyProfileID?: string,
  * }
  */
 final class Verification implements BaseModel

@@ -11,7 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Success response with details about a push credential.
  *
- * @phpstan-type push_credential_response = array{data?: PushCredential|null}
+ * @phpstan-type push_credential_response = array{data?: PushCredential}
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class PushCredentialResponse implements BaseModel
 {

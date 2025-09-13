@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type dialogflow_config = array{
- *   analyzeSentiment?: bool|null, partialAutomatedAgentReply?: bool|null
+ *   analyzeSentiment?: bool, partialAutomatedAgentReply?: bool
  * }
  */
 final class DialogflowConfig implements BaseModel

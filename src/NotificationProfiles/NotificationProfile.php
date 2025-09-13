@@ -12,10 +12,10 @@ use Telnyx\Core\Contracts\BaseModel;
  * A Collection of Notification Channels.
  *
  * @phpstan-type notification_profile = array{
- *   id?: string|null,
- *   createdAt?: \DateTimeInterface|null,
- *   name?: string|null,
- *   updatedAt?: \DateTimeInterface|null,
+ *   id?: string,
+ *   createdAt?: \DateTimeInterface,
+ *   name?: string,
+ *   updatedAt?: \DateTimeInterface,
  * }
  */
 final class NotificationProfile implements BaseModel

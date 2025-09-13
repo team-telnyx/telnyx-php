@@ -9,7 +9,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type phone_number_get_response = array{data?: PhoneNumberDetailed|null}
+ * @phpstan-type phone_number_get_response = array{data?: PhoneNumberDetailed}
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class PhoneNumberGetResponse implements BaseModel
 {

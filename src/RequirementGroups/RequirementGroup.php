@@ -12,17 +12,21 @@ use Telnyx\RequirementGroups\RequirementGroup\Status;
 
 /**
  * @phpstan-type requirement_group = array{
- *   id?: string|null,
- *   action?: string|null,
- *   countryCode?: string|null,
- *   createdAt?: \DateTimeInterface|null,
- *   customerReference?: string|null,
- *   phoneNumberType?: string|null,
- *   recordType?: string|null,
- *   regulatoryRequirements?: list<RegulatoryRequirement>|null,
- *   status?: value-of<Status>|null,
- *   updatedAt?: \DateTimeInterface|null,
+ *   id?: string,
+ *   action?: string,
+ *   countryCode?: string,
+ *   createdAt?: \DateTimeInterface,
+ *   customerReference?: string,
+ *   phoneNumberType?: string,
+ *   recordType?: string,
+ *   regulatoryRequirements?: list<RegulatoryRequirement>,
+ *   status?: value-of<Status>,
+ *   updatedAt?: \DateTimeInterface,
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class RequirementGroup implements BaseModel
 {

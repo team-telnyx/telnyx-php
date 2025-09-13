@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type telephony_settings = array{
- *   defaultTexmlAppID?: string|null, supportsUnauthenticatedWebCalls?: bool|null
+ *   defaultTexmlAppID?: string, supportsUnauthenticatedWebCalls?: bool
  * }
  */
 final class TelephonySettings implements BaseModel

@@ -13,10 +13,10 @@ use Telnyx\OutboundVoiceProfiles\OutboundCallRecording\CallRecordingType;
 
 /**
  * @phpstan-type outbound_call_recording = array{
- *   callRecordingCallerPhoneNumbers?: list<string>|null,
- *   callRecordingChannels?: value-of<CallRecordingChannels>|null,
- *   callRecordingFormat?: value-of<CallRecordingFormat>|null,
- *   callRecordingType?: value-of<CallRecordingType>|null,
+ *   callRecordingCallerPhoneNumbers?: list<string>,
+ *   callRecordingChannels?: value-of<CallRecordingChannels>,
+ *   callRecordingFormat?: value-of<CallRecordingFormat>,
+ *   callRecordingType?: value-of<CallRecordingType>,
  * }
  */
 final class OutboundCallRecording implements BaseModel

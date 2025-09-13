@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * AI Assistant configuration.
  *
  * @phpstan-type assistant_alias = array{
- *   id?: string|null, instructions?: string|null, openaiAPIKeyRef?: string|null
+ *   id?: string, instructions?: string, openaiAPIKeyRef?: string
  * }
  */
 final class Assistant implements BaseModel

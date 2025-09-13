@@ -12,14 +12,14 @@ use Telnyx\RecordingTranscriptions\RecordingTranscription\Status;
 
 /**
  * @phpstan-type recording_transcription = array{
- *   id?: string|null,
- *   createdAt?: string|null,
- *   durationMillis?: int|null,
- *   recordType?: value-of<RecordType>|null,
- *   recordingID?: string|null,
- *   status?: value-of<Status>|null,
- *   transcriptionText?: string|null,
- *   updatedAt?: string|null,
+ *   id?: string,
+ *   createdAt?: string,
+ *   durationMillis?: int,
+ *   recordType?: value-of<RecordType>,
+ *   recordingID?: string,
+ *   status?: value-of<Status>,
+ *   transcriptionText?: string,
+ *   updatedAt?: string,
  * }
  */
 final class RecordingTranscription implements BaseModel

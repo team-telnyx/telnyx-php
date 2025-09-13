@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\Storage;
 
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\Storage\Buckets\BucketNewPresignedURLResponse;
 
@@ -16,6 +17,8 @@ interface BucketsContract
      *
      * @param string $bucketName
      * @param int $ttl The time to live of the token in seconds
+     *
+     * @return BucketNewPresignedURLResponse<HasRawResponse>
      */
     public function createPresignedURL(
         string $objectName,

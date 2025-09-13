@@ -12,6 +12,7 @@ use Telnyx\AuthenticationProviders\AuthenticationProviderListResponse;
 use Telnyx\AuthenticationProviders\AuthenticationProviderNewResponse;
 use Telnyx\AuthenticationProviders\AuthenticationProviderUpdateResponse;
 use Telnyx\AuthenticationProviders\Settings;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 
 use const Telnyx\Core\OMIT as omit;
@@ -26,6 +27,8 @@ interface AuthenticationProvidersContract
      * @param string $shortName The short name associated with the authentication provider. This must be unique and URL-friendly, as it's going to be part of the login URL.
      * @param bool $active The active status of the authentication provider
      * @param string $settingsURL The URL for the identity provider metadata file to populate the settings automatically. If the settings attribute is provided, that will be used instead.
+     *
+     * @return AuthenticationProviderNewResponse<HasRawResponse>
      */
     public function create(
         $name,
@@ -38,6 +41,8 @@ interface AuthenticationProvidersContract
 
     /**
      * @api
+     *
+     * @return AuthenticationProviderGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -52,6 +57,8 @@ interface AuthenticationProvidersContract
      * @param Settings $settings the settings associated with the authentication provider
      * @param string $settingsURL The URL for the identity provider metadata file to populate the settings automatically. If the settings attribute is provided, that will be used instead.
      * @param string $shortName The short name associated with the authentication provider. This must be unique and URL-friendly, as it's going to be part of the login URL.
+     *
+     * @return AuthenticationProviderUpdateResponse<HasRawResponse>
      */
     public function update(
         string $id,
@@ -78,6 +85,8 @@ interface AuthenticationProvidersContract
      *     <code>name</code> field in descending order.
      *   </li>
      * </ul><br/>If not given, results are sorted by <code>created_at</code> in descending order.
+     *
+     * @return AuthenticationProviderListResponse<HasRawResponse>
      */
     public function list(
         $page = omit,
@@ -87,6 +96,8 @@ interface AuthenticationProvidersContract
 
     /**
      * @api
+     *
+     * @return AuthenticationProviderDeleteResponse<HasRawResponse>
      */
     public function delete(
         string $id,

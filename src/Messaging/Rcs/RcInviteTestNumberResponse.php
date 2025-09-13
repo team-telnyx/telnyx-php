@@ -11,6 +11,10 @@ use Telnyx\Messaging\Rcs\RcInviteTestNumberResponse\Data;
 
 /**
  * @phpstan-type rc_invite_test_number_response = array{data: Data}
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class RcInviteTestNumberResponse implements BaseModel
 {

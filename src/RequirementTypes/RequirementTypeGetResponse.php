@@ -11,8 +11,12 @@ use Telnyx\DocReqsRequirementType;
 
 /**
  * @phpstan-type requirement_type_get_response = array{
- *   data?: DocReqsRequirementType|null
+ *   data?: DocReqsRequirementType
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class RequirementTypeGetResponse implements BaseModel
 {

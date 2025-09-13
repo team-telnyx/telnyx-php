@@ -14,11 +14,11 @@ use Telnyx\GlobalIPAssignmentsUsage\GlobalIPAssignmentsUsageGetResponse\Data\Tra
 
 /**
  * @phpstan-type data_alias = array{
- *   globalIP?: GlobalIP|null,
- *   globalIPAssignment?: GlobalIPAssignment|null,
- *   received?: Received|null,
- *   timestamp?: \DateTimeInterface|null,
- *   transmitted?: Transmitted|null,
+ *   globalIP?: GlobalIP,
+ *   globalIPAssignment?: GlobalIPAssignment,
+ *   received?: Received,
+ *   timestamp?: \DateTimeInterface,
+ *   transmitted?: Transmitted,
  * }
  */
 final class Data implements BaseModel

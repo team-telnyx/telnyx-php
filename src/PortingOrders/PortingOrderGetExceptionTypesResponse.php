@@ -11,8 +11,12 @@ use Telnyx\PortingOrdersExceptionType;
 
 /**
  * @phpstan-type porting_order_get_exception_types_response = array{
- *   data?: list<PortingOrdersExceptionType>|null
+ *   data?: list<PortingOrdersExceptionType>
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class PortingOrderGetExceptionTypesResponse implements BaseModel
 {

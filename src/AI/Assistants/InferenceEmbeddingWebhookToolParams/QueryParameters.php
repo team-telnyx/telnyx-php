@@ -13,9 +13,9 @@ use Telnyx\Core\Contracts\BaseModel;
  * The query parameters the webhook tool accepts, described as a JSON Schema object. These parameters will be passed to the webhook as the query of the request. See the [JSON Schema reference](https://json-schema.org/understanding-json-schema) for documentation about the format.
  *
  * @phpstan-type query_parameters = array{
- *   properties?: array<string, mixed>|null,
- *   required?: list<string>|null,
- *   type?: value-of<Type>|null,
+ *   properties?: array<string, mixed>,
+ *   required?: list<string>,
+ *   type?: value-of<Type>,
  * }
  */
 final class QueryParameters implements BaseModel

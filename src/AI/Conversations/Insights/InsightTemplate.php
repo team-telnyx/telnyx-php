@@ -15,10 +15,10 @@ use Telnyx\Core\Contracts\BaseModel;
  *   id: string,
  *   createdAt: \DateTimeInterface,
  *   instructions: string,
- *   insightType?: value-of<InsightType>|null,
- *   jsonSchema?: mixed|string|null,
- *   name?: string|null,
- *   webhook?: string|null,
+ *   insightType?: value-of<InsightType>,
+ *   jsonSchema?: mixed|string,
+ *   name?: string,
+ *   webhook?: string,
  * }
  */
 final class InsightTemplate implements BaseModel

@@ -15,10 +15,10 @@ use Telnyx\Core\Contracts\BaseModel;
  * Assistant configuration including choice of LLM, custom instructions, and tools.
  *
  * @phpstan-type assistant_alias = array{
- *   instructions?: string|null,
- *   model?: string|null,
- *   openaiAPIKeyRef?: string|null,
- *   tools?: list<BookAppointmentTool|CheckAvailabilityTool|WebhookTool|HangupTool|TransferTool|RetrievalTool>|null,
+ *   instructions?: string,
+ *   model?: string,
+ *   openaiAPIKeyRef?: string,
+ *   tools?: list<BookAppointmentTool|CheckAvailabilityTool|WebhookTool|HangupTool|TransferTool|RetrievalTool>,
  * }
  */
 final class Assistant implements BaseModel

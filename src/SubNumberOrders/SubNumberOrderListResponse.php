@@ -11,8 +11,12 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type sub_number_order_list_response = array{
- *   data?: list<SubNumberOrder>|null, meta?: PaginationMeta|null
+ *   data?: list<SubNumberOrder>, meta?: PaginationMeta
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class SubNumberOrderListResponse implements BaseModel
 {

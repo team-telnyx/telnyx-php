@@ -13,19 +13,19 @@ use Telnyx\Reports\ReportListMdrsResponse\Data\Status;
 
 /**
  * @phpstan-type data_alias = array{
- *   id?: string|null,
- *   cld?: string|null,
- *   cli?: string|null,
- *   cost?: string|null,
- *   createdAt?: \DateTimeInterface|null,
- *   currency?: value-of<Currency>|null,
- *   direction?: string|null,
- *   messageType?: value-of<MessageType>|null,
- *   parts?: float|null,
- *   profileName?: string|null,
- *   rate?: string|null,
- *   recordType?: string|null,
- *   status?: value-of<Status>|null,
+ *   id?: string,
+ *   cld?: string,
+ *   cli?: string,
+ *   cost?: string,
+ *   createdAt?: \DateTimeInterface,
+ *   currency?: value-of<Currency>,
+ *   direction?: string,
+ *   messageType?: value-of<MessageType>,
+ *   parts?: float,
+ *   profileName?: string,
+ *   rate?: string,
+ *   recordType?: string,
+ *   status?: value-of<Status>,
  * }
  */
 final class Data implements BaseModel

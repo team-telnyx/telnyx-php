@@ -11,9 +11,7 @@ use Telnyx\VerifiedNumbers\VerifiedNumber\RecordType;
 
 /**
  * @phpstan-type verified_number = array{
- *   phoneNumber?: string|null,
- *   recordType?: value-of<RecordType>|null,
- *   verifiedAt?: string|null,
+ *   phoneNumber?: string, recordType?: value-of<RecordType>, verifiedAt?: string
  * }
  */
 final class VerifiedNumber implements BaseModel

@@ -13,9 +13,7 @@ use Telnyx\PrivateWirelessGateways\PrivateWirelessGatewayStatus\Value;
  * The current status or failure details of the Private Wireless Gateway.
  *
  * @phpstan-type private_wireless_gateway_status = array{
- *   errorCode?: string|null,
- *   errorDescription?: string|null,
- *   value?: value-of<Value>|null,
+ *   errorCode?: string, errorDescription?: string, value?: value-of<Value>
  * }
  */
 final class PrivateWirelessGatewayStatus implements BaseModel

@@ -11,9 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Specifies the phone number range for this associated phone number.
  *
- * @phpstan-type phone_number_range = array{
- *   endAt?: string|null, startAt?: string|null
- * }
+ * @phpstan-type phone_number_range = array{endAt?: string, startAt?: string}
  */
 final class PhoneNumberRange implements BaseModel
 {

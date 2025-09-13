@@ -10,16 +10,16 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type private_wireless_gateway = array{
- *   id?: string|null,
- *   assignedResources?: list<PwgAssignedResourcesSummary>|null,
- *   createdAt?: string|null,
- *   ipRange?: string|null,
- *   name?: string|null,
- *   networkID?: string|null,
- *   recordType?: string|null,
- *   regionCode?: string|null,
- *   status?: PrivateWirelessGatewayStatus|null,
- *   updatedAt?: string|null,
+ *   id?: string,
+ *   assignedResources?: list<PwgAssignedResourcesSummary>,
+ *   createdAt?: string,
+ *   ipRange?: string,
+ *   name?: string,
+ *   networkID?: string,
+ *   recordType?: string,
+ *   regionCode?: string,
+ *   status?: PrivateWirelessGatewayStatus,
+ *   updatedAt?: string,
  * }
  */
 final class PrivateWirelessGateway implements BaseModel

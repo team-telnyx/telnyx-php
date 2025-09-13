@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type data_alias = array{
- *   numberTags?: list<string>|null, outboundProfileTags?: list<string>|null
+ *   numberTags?: list<string>, outboundProfileTags?: list<string>
  * }
  */
 final class Data implements BaseModel

@@ -13,9 +13,9 @@ use Telnyx\PhoneNumbers\Actions\PhoneNumberWithVoiceSettings\Emergency\Emergency
  * The emergency services settings for a phone number.
  *
  * @phpstan-type emergency_alias = array{
- *   emergencyAddressID?: string|null,
- *   emergencyEnabled?: bool|null,
- *   emergencyStatus?: value-of<EmergencyStatus>|null,
+ *   emergencyAddressID?: string,
+ *   emergencyEnabled?: bool,
+ *   emergencyStatus?: value-of<EmergencyStatus>,
  * }
  */
 final class Emergency implements BaseModel

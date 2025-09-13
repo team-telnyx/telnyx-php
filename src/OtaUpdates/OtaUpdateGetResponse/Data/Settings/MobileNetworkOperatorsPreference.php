@@ -10,9 +10,9 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type mobile_network_operators_preference = array{
- *   mobileNetworkOperatorID?: string|null,
- *   mobileNetworkOperatorName?: string|null,
- *   priority?: int|null,
+ *   mobileNetworkOperatorID?: string,
+ *   mobileNetworkOperatorName?: string,
+ *   priority?: int,
  * }
  */
 final class MobileNetworkOperatorsPreference implements BaseModel

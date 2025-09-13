@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\IPs\IPCreateParams;
 use Telnyx\IPs\IPDeleteResponse;
 use Telnyx\IPs\IPGetResponse;
@@ -35,6 +36,8 @@ final class IPsService implements IPsContract
      * @param string $ipAddress IP adddress represented by this resource
      * @param string $connectionID ID of the IP Connection to which this IP should be attached
      * @param int $port port to use when connecting to this IP
+     *
+     * @return IPNewResponse<HasRawResponse>
      */
     public function create(
         $ipAddress,
@@ -65,6 +68,8 @@ final class IPsService implements IPsContract
      * @api
      *
      * Return the details regarding a specific IP.
+     *
+     * @return IPGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -87,6 +92,8 @@ final class IPsService implements IPsContract
      * @param string $ipAddress IP adddress represented by this resource
      * @param string $connectionID ID of the IP Connection to which this IP should be attached
      * @param int $port port to use when connecting to this IP
+     *
+     * @return IPUpdateResponse<HasRawResponse>
      */
     public function update(
         string $id,
@@ -121,6 +128,8 @@ final class IPsService implements IPsContract
      *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[connection_id], filter[ip_address], filter[port]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     *
+     * @return IPListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,
@@ -146,6 +155,8 @@ final class IPsService implements IPsContract
      * @api
      *
      * Delete an IP.
+     *
+     * @return IPDeleteResponse<HasRawResponse>
      */
     public function delete(
         string $id,

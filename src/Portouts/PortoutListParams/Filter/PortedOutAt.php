@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * Filter by ported_out_at date range using nested operations.
  *
  * @phpstan-type ported_out_at = array{
- *   gte?: \DateTimeInterface|null, lte?: \DateTimeInterface|null
+ *   gte?: \DateTimeInterface, lte?: \DateTimeInterface
  * }
  */
 final class PortedOutAt implements BaseModel

@@ -16,10 +16,7 @@ use Telnyx\Faxes\FaxListParams\Filter\To;
  * Consolidated filter parameter (deepObject style). Originally: filter[created_at][gte], filter[created_at][gt], filter[created_at][lte], filter[created_at][lt], filter[direction][eq], filter[from][eq], filter[to][eq].
  *
  * @phpstan-type filter_alias = array{
- *   createdAt?: CreatedAt|null,
- *   direction?: Direction|null,
- *   from?: From|null,
- *   to?: To|null,
+ *   createdAt?: CreatedAt, direction?: Direction, from?: From, to?: To
  * }
  */
 final class Filter implements BaseModel

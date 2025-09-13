@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\ExternalConnections;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\ExternalConnections\Uploads\UploadCreateParams;
 use Telnyx\ExternalConnections\Uploads\UploadCreateParams\AdditionalUsage;
 use Telnyx\ExternalConnections\Uploads\UploadCreateParams\Usage;
@@ -41,6 +42,8 @@ final class UploadsService implements UploadsContract
      * @param string $civicAddressID identifies the civic address to assign all phone numbers to
      * @param string $locationID identifies the location to assign all phone numbers to
      * @param Usage|value-of<Usage> $usage The use case of the upload request. NOTE: `calling_user_assignment` is not supported for toll free numbers.
+     *
+     * @return UploadNewResponse<HasRawResponse>
      */
     public function create(
         string $id,
@@ -78,6 +81,8 @@ final class UploadsService implements UploadsContract
      * Return the details of an Upload request and its phone numbers.
      *
      * @param string $id
+     *
+     * @return UploadGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $ticketID,
@@ -107,6 +112,8 @@ final class UploadsService implements UploadsContract
      *
      * @param Filter $filter Filter parameter for uploads (deepObject style). Supports filtering by status, civic_address_id, location_id, and phone_number with eq/contains operations.
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     *
+     * @return UploadListResponse<HasRawResponse>
      */
     public function list(
         string $id,
@@ -133,6 +140,8 @@ final class UploadsService implements UploadsContract
      * @api
      *
      * Returns the count of all pending upload requests for the given external connection.
+     *
+     * @return UploadPendingCountResponse<HasRawResponse>
      */
     public function pendingCount(
         string $id,
@@ -151,6 +160,8 @@ final class UploadsService implements UploadsContract
      * @api
      *
      * Forces a recheck of the status of all pending Upload requests for the given external connection in the background.
+     *
+     * @return UploadRefreshStatusResponse<HasRawResponse>
      */
     public function refreshStatus(
         string $id,
@@ -171,6 +182,8 @@ final class UploadsService implements UploadsContract
      * If there were any errors during the upload process, this endpoint will retry the upload request. In some cases this will reattempt the existing upload request, in other cases it may create a new upload request. Please check the ticket_id in the response to determine if a new upload request was created.
      *
      * @param string $id
+     *
+     * @return UploadRetryResponse<HasRawResponse>
      */
     public function retry(
         string $ticketID,

@@ -10,11 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type porting_order_phone_number_configuration = array{
- *   billingGroupID?: string|null,
- *   connectionID?: string|null,
- *   emergencyAddressID?: string|null,
- *   messagingProfileID?: string|null,
- *   tags?: list<string>|null,
+ *   billingGroupID?: string,
+ *   connectionID?: string,
+ *   emergencyAddressID?: string,
+ *   messagingProfileID?: string,
+ *   tags?: list<string>,
  * }
  */
 final class PortingOrderPhoneNumberConfiguration implements BaseModel

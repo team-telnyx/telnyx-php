@@ -10,14 +10,14 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type voice_alias = array{
- *   id?: string|null,
- *   accent?: string|null,
- *   age?: string|null,
- *   gender?: string|null,
- *   label?: string|null,
- *   language?: string|null,
- *   name?: string|null,
- *   provider?: string|null,
+ *   id?: string,
+ *   accent?: string,
+ *   age?: string,
+ *   gender?: string,
+ *   label?: string,
+ *   language?: string,
+ *   name?: string,
+ *   provider?: string,
  * }
  */
 final class Voice implements BaseModel

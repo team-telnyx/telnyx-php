@@ -13,9 +13,13 @@ use Telnyx\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileGetStatu
  * @phpstan-type phone_number_assignment_by_profile_get_status_response = array{
  *   status: value-of<Status>,
  *   taskID: string,
- *   createdAt?: \DateTimeInterface|null,
- *   updatedAt?: \DateTimeInterface|null,
+ *   createdAt?: \DateTimeInterface,
+ *   updatedAt?: \DateTimeInterface,
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class PhoneNumberAssignmentByProfileGetStatusResponse implements BaseModel
 {

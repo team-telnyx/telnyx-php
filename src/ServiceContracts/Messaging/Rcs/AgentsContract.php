@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\Messaging\Rcs;
 
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Messaging\Rcs\Agents\AgentListParams\Page;
 use Telnyx\Messaging\Rcs\Agents\AgentListResponse;
 use Telnyx\RcsAgents\RcsAgentResponse;
@@ -40,6 +41,8 @@ interface AgentsContract
      * @api
      *
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     *
+     * @return AgentListResponse<HasRawResponse>
      */
     public function list(
         $page = omit,

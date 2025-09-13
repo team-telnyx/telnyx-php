@@ -12,12 +12,12 @@ use Telnyx\Core\Contracts\BaseModel;
  * Provides normalized address when available.
  *
  * @phpstan-type suggested_alias = array{
- *   administrativeArea?: string|null,
- *   countryCode?: string|null,
- *   extendedAddress?: string|null,
- *   locality?: string|null,
- *   postalCode?: string|null,
- *   streetAddress?: string|null,
+ *   administrativeArea?: string,
+ *   countryCode?: string,
+ *   extendedAddress?: string,
+ *   locality?: string,
+ *   postalCode?: string,
+ *   streetAddress?: string,
  * }
  */
 final class Suggested implements BaseModel

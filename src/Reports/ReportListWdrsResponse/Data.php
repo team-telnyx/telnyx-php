@@ -14,21 +14,21 @@ use Telnyx\Reports\ReportListWdrsResponse\Data\UplinkData;
 
 /**
  * @phpstan-type data_alias = array{
- *   id?: string|null,
- *   cost?: Cost|null,
- *   createdAt?: \DateTimeInterface|null,
- *   downlinkData?: DownlinkData|null,
- *   durationSeconds?: float|null,
- *   imsi?: string|null,
- *   mcc?: string|null,
- *   mnc?: string|null,
- *   phoneNumber?: string|null,
- *   rate?: Rate|null,
- *   recordType?: string|null,
- *   simCardID?: string|null,
- *   simGroupID?: string|null,
- *   simGroupName?: string|null,
- *   uplinkData?: UplinkData|null,
+ *   id?: string,
+ *   cost?: Cost,
+ *   createdAt?: \DateTimeInterface,
+ *   downlinkData?: DownlinkData,
+ *   durationSeconds?: float,
+ *   imsi?: string,
+ *   mcc?: string,
+ *   mnc?: string,
+ *   phoneNumber?: string,
+ *   rate?: Rate,
+ *   recordType?: string,
+ *   simCardID?: string,
+ *   simGroupID?: string,
+ *   simGroupName?: string,
+ *   uplinkData?: UplinkData,
  * }
  */
 final class Data implements BaseModel

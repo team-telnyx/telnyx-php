@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\DialogflowConnections\DialogflowConnectionCreateParams\DialogflowAPI;
 use Telnyx\DialogflowConnections\DialogflowConnectionGetResponse;
 use Telnyx\DialogflowConnections\DialogflowConnectionNewResponse;
@@ -24,6 +25,8 @@ interface DialogflowConnectionsContract
      * @param DialogflowAPI|value-of<DialogflowAPI> $dialogflowAPI determine which Dialogflow will be used
      * @param string $environment which Dialogflow environment will be used
      * @param string $location The region of your agent is. (If you use Dialogflow CX, this param is required)
+     *
+     * @return DialogflowConnectionNewResponse<HasRawResponse>
      */
     public function create(
         string $connectionID,
@@ -37,6 +40,8 @@ interface DialogflowConnectionsContract
 
     /**
      * @api
+     *
+     * @return DialogflowConnectionGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $connectionID,
@@ -52,6 +57,8 @@ interface DialogflowConnectionsContract
      * @param DialogflowAPI1|value-of<DialogflowAPI1> $dialogflowAPI determine which Dialogflow will be used
      * @param string $environment which Dialogflow environment will be used
      * @param string $location The region of your agent is. (If you use Dialogflow CX, this param is required)
+     *
+     * @return DialogflowConnectionUpdateResponse<HasRawResponse>
      */
     public function update(
         string $connectionID,

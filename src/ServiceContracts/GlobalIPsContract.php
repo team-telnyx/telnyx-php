@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\GlobalIPs\GlobalIPDeleteResponse;
 use Telnyx\GlobalIPs\GlobalIPGetResponse;
 use Telnyx\GlobalIPs\GlobalIPListParams\Page;
@@ -21,6 +22,8 @@ interface GlobalIPsContract
      * @param string $description a user specified description for the address
      * @param string $name a user specified name for the address
      * @param array<string, mixed> $ports a Global IP ports grouped by protocol code
+     *
+     * @return GlobalIPNewResponse<HasRawResponse>
      */
     public function create(
         $description = omit,
@@ -31,6 +34,8 @@ interface GlobalIPsContract
 
     /**
      * @api
+     *
+     * @return GlobalIPGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -41,6 +46,8 @@ interface GlobalIPsContract
      * @api
      *
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     *
+     * @return GlobalIPListResponse<HasRawResponse>
      */
     public function list(
         $page = omit,
@@ -49,6 +56,8 @@ interface GlobalIPsContract
 
     /**
      * @api
+     *
+     * @return GlobalIPDeleteResponse<HasRawResponse>
      */
     public function delete(
         string $id,

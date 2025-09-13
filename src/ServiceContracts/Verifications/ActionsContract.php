@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\Verifications;
 
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\Verifications\Actions\ActionVerifyParams\Status;
 use Telnyx\Verifications\ByPhoneNumber\Actions\VerifyVerificationCodeResponse;
@@ -17,6 +18,8 @@ interface ActionsContract
      *
      * @param string $code this is the code the user submits for verification
      * @param Status|value-of<Status> $status Identifies if the verification code has been accepted or rejected. Only permitted if custom_code was used for the verification.
+     *
+     * @return VerifyVerificationCodeResponse<HasRawResponse>
      */
     public function verify(
         string $verificationID,

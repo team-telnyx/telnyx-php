@@ -10,7 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\GlobalIPs\GlobalIPNewResponse\Data;
 
 /**
- * @phpstan-type global_ip_new_response = array{data?: Data|null}
+ * @phpstan-type global_ip_new_response = array{data?: STAINLESS_FIXME_data_alias}
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class GlobalIPNewResponse implements BaseModel
 {

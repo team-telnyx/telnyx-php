@@ -15,10 +15,10 @@ use Telnyx\Core\Contracts\BaseModel;
  *   createdAt: \DateTimeInterface,
  *   isPublic: bool,
  *   name: string,
- *   currency?: string|null,
- *   mrcPrice?: float|null,
- *   slug?: string|null,
- *   specs?: list<string>|null,
+ *   currency?: string,
+ *   mrcPrice?: float,
+ *   slug?: string,
+ *   specs?: list<string>,
  * }
  */
 final class BillingBundleSummary implements BaseModel

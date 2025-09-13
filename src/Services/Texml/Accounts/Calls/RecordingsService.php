@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Texml\Accounts\Calls;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\Accounts\Calls\RecordingsContract;
 use Telnyx\Texml\Accounts\Calls\Recordings\RecordingRecordingSidJsonParams;
@@ -28,6 +29,8 @@ final class RecordingsService implements RecordingsContract
      * @param string $accountSid
      * @param string $callSid
      * @param Status|value-of<Status> $status
+     *
+     * @return RecordingRecordingSidJsonResponse<HasRawResponse>
      */
     public function recordingSidJson(
         string $recordingSid,

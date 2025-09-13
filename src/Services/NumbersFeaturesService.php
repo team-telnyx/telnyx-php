@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\NumbersFeatures\NumbersFeatureCreateParams;
 use Telnyx\NumbersFeatures\NumbersFeatureNewResponse;
 use Telnyx\RequestOptions;
@@ -23,6 +24,8 @@ final class NumbersFeaturesService implements NumbersFeaturesContract
      * Retrieve the features for a list of numbers
      *
      * @param list<string> $phoneNumbers
+     *
+     * @return NumbersFeatureNewResponse<HasRawResponse>
      */
     public function create(
         $phoneNumbers,

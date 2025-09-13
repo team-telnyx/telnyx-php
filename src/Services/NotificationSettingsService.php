@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\NotificationSettings\NotificationSettingCreateParams;
 use Telnyx\NotificationSettings\NotificationSettingCreateParams\Parameter;
 use Telnyx\NotificationSettings\NotificationSettingDeleteResponse;
@@ -35,6 +36,8 @@ final class NotificationSettingsService implements NotificationSettingsContract
      * @param string $notificationEventConditionID a UUID reference to the associated Notification Event Condition
      * @param string $notificationProfileID a UUID reference to the associated Notification Profile
      * @param list<Parameter> $parameters
+     *
+     * @return NotificationSettingNewResponse<HasRawResponse>
      */
     public function create(
         $notificationChannelID = omit,
@@ -67,6 +70,8 @@ final class NotificationSettingsService implements NotificationSettingsContract
      * @api
      *
      * Get a notification setting.
+     *
+     * @return NotificationSettingGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -88,6 +93,8 @@ final class NotificationSettingsService implements NotificationSettingsContract
      *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[associated_record_type][eq], filter[channel_type_id][eq], filter[notification_profile_id][eq], filter[notification_channel][eq], filter[notification_event_condition_id][eq], filter[status][eq]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     *
+     * @return NotificationSettingListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,
@@ -113,6 +120,8 @@ final class NotificationSettingsService implements NotificationSettingsContract
      * @api
      *
      * Delete a notification setting.
+     *
+     * @return NotificationSettingDeleteResponse<HasRawResponse>
      */
     public function delete(
         string $id,

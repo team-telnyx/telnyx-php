@@ -10,9 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\CallAIGatherPartialResultsWebhookEvent\Data;
 
 /**
- * @phpstan-type call_ai_gather_partial_results_webhook_event = array{
- *   data?: Data|null
- * }
+ * @phpstan-type call_ai_gather_partial_results_webhook_event = array{data?: Data}
  */
 final class CallAIGatherPartialResultsWebhookEvent implements BaseModel
 {

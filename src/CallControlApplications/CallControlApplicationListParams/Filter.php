@@ -17,19 +17,19 @@ use Telnyx\Core\Contracts\BaseModel;
  * Consolidated filter parameter (deepObject style). Originally: filter[application_name][contains], filter[outbound.outbound_voice_profile_id], filter[leg_id], filter[application_session_id], filter[connection_id], filter[product], filter[failed], filter[from], filter[to], filter[name], filter[type], filter[occurred_at][eq/gt/gte/lt/lte], filter[status].
  *
  * @phpstan-type filter_alias = array{
- *   applicationName?: ApplicationName|null,
- *   applicationSessionID?: string|null,
- *   connectionID?: string|null,
- *   failed?: bool|null,
- *   from?: string|null,
- *   legID?: string|null,
- *   name?: string|null,
- *   occurredAt?: OccurredAt|null,
- *   outboundOutboundVoiceProfileID?: string|null,
- *   product?: value-of<Product>|null,
- *   status?: value-of<Status>|null,
- *   to?: string|null,
- *   type?: value-of<Type>|null,
+ *   applicationName?: ApplicationName,
+ *   applicationSessionID?: string,
+ *   connectionID?: string,
+ *   failed?: bool,
+ *   from?: string,
+ *   legID?: string,
+ *   name?: string,
+ *   occurredAt?: OccurredAt,
+ *   outboundOutboundVoiceProfileID?: string,
+ *   product?: value-of<Product>,
+ *   status?: value-of<Status>,
+ *   to?: string,
+ *   type?: value-of<Type>,
  * }
  */
 final class Filter implements BaseModel

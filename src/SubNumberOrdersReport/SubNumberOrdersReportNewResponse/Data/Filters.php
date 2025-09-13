@@ -12,12 +12,12 @@ use Telnyx\Core\Contracts\BaseModel;
  * The filters that were applied to generate this report.
  *
  * @phpstan-type filters_alias = array{
- *   countryCode?: string|null,
- *   createdAtGt?: \DateTimeInterface|null,
- *   createdAtLt?: \DateTimeInterface|null,
- *   customerReference?: string|null,
- *   orderRequestID?: string|null,
- *   status?: string|null,
+ *   countryCode?: string,
+ *   createdAtGt?: \DateTimeInterface,
+ *   createdAtLt?: \DateTimeInterface,
+ *   customerReference?: string,
+ *   orderRequestID?: string,
+ *   status?: string,
  * }
  */
 final class Filters implements BaseModel

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PortingOrders\PortingOrderCreateParams;
 use Telnyx\PortingOrders\PortingOrderDocuments;
 use Telnyx\PortingOrders\PortingOrderEndUser;
@@ -103,22 +104,16 @@ final class PortingOrdersService implements PortingOrdersContract
      */
     public function __construct(private Client $client)
     {
-        $this->phoneNumberConfigurations = new PhoneNumberConfigurationsService(
-            $this->client
-        );
-        $this->actions = new ActionsService($this->client);
-        $this->activationJobs = new ActivationJobsService($this->client);
-        $this->additionalDocuments = new AdditionalDocumentsService($this->client);
-        $this->comments = new CommentsService($this->client);
-        $this->verificationCodes = new VerificationCodesService($this->client);
-        $this->actionRequirements = new ActionRequirementsService($this->client);
-        $this->associatedPhoneNumbers = new AssociatedPhoneNumbersService(
-            $this->client
-        );
-        $this->phoneNumberBlocks = new PhoneNumberBlocksService($this->client);
-        $this->phoneNumberExtensions = new PhoneNumberExtensionsService(
-            $this->client
-        );
+        $this->phoneNumberConfigurations = new PhoneNumberConfigurationsService($client);
+        $this->actions = new ActionsService($client);
+        $this->activationJobs = new ActivationJobsService($client);
+        $this->additionalDocuments = new AdditionalDocumentsService($client);
+        $this->comments = new CommentsService($client);
+        $this->verificationCodes = new VerificationCodesService($client);
+        $this->actionRequirements = new ActionRequirementsService($client);
+        $this->associatedPhoneNumbers = new AssociatedPhoneNumbersService($client);
+        $this->phoneNumberBlocks = new PhoneNumberBlocksService($client);
+        $this->phoneNumberExtensions = new PhoneNumberExtensionsService($client);
     }
 
     /**
@@ -128,6 +123,8 @@ final class PortingOrdersService implements PortingOrdersContract
      *
      * @param list<string> $phoneNumbers The list of +E.164 formatted phone numbers
      * @param string $customerReference A customer-specified reference number for customer bookkeeping purposes
+     *
+     * @return PortingOrderNewResponse<HasRawResponse>
      */
     public function create(
         $phoneNumbers,
@@ -158,6 +155,8 @@ final class PortingOrdersService implements PortingOrdersContract
      * Retrieves the details of an existing porting order.
      *
      * @param bool $includePhoneNumbers Include the first 50 phone number objects in the results
+     *
+     * @return PortingOrderGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -199,6 +198,8 @@ final class PortingOrdersService implements PortingOrdersContract
      * @param list<Requirement> $requirements list of requirements for porting numbers
      * @param PortingOrderUserFeedback $userFeedback
      * @param string $webhookURL
+     *
+     * @return PortingOrderUpdateResponse<HasRawResponse>
      */
     public function update(
         string $id,
@@ -251,6 +252,8 @@ final class PortingOrdersService implements PortingOrdersContract
      * @param bool $includePhoneNumbers Include the first 50 phone number objects in the results
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param Sort $sort Consolidated sort parameter (deepObject style). Originally: sort[value]
+     *
+     * @return PortingOrderListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,
@@ -301,6 +304,8 @@ final class PortingOrdersService implements PortingOrdersContract
      * @api
      *
      * Returns a list of allowed FOC dates for a porting order.
+     *
+     * @return PortingOrderGetAllowedFocWindowsResponse<HasRawResponse>
      */
     public function retrieveAllowedFocWindows(
         string $id,
@@ -319,6 +324,8 @@ final class PortingOrdersService implements PortingOrdersContract
      * @api
      *
      * Returns a list of all possible exception types for a porting order.
+     *
+     * @return PortingOrderGetExceptionTypesResponse<HasRawResponse>
      */
     public function retrieveExceptionTypes(
         ?RequestOptions $requestOptions = null
@@ -366,6 +373,8 @@ final class PortingOrdersService implements PortingOrdersContract
      * Returns a list of all requirements based on country/number type for this porting order.
      *
      * @param Page1 $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     *
+     * @return PortingOrderGetRequirementsResponse<HasRawResponse>
      */
     public function retrieveRequirements(
         string $id,
@@ -391,6 +400,8 @@ final class PortingOrdersService implements PortingOrdersContract
      * @api
      *
      * Retrieve the associated V1 sub_request_id and port_request_id
+     *
+     * @return PortingOrderGetSubRequestResponse<HasRawResponse>
      */
     public function retrieveSubRequest(
         string $id,

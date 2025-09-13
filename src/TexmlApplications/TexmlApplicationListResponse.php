@@ -11,8 +11,12 @@ use Telnyx\TexmlApplications\TexmlApplicationListResponse\Meta;
 
 /**
  * @phpstan-type texml_application_list_response = array{
- *   data?: list<TexmlApplication>|null, meta?: Meta|null
+ *   data?: list<TexmlApplication>, meta?: Meta
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class TexmlApplicationListResponse implements BaseModel
 {

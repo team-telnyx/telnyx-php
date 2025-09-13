@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\ExternalConnections;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberGetResponse;
 use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberListParams;
 use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberListParams\Filter;
@@ -31,6 +32,8 @@ final class PhoneNumbersService implements PhoneNumbersContract
      * Return the details of a phone number associated with the given external connection.
      *
      * @param string $id
+     *
+     * @return PhoneNumberGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $phoneNumberID,
@@ -62,6 +65,8 @@ final class PhoneNumbersService implements PhoneNumbersContract
      *
      * @param string $id
      * @param string $locationID identifies the location to assign the phone number to
+     *
+     * @return PhoneNumberUpdateResponse<HasRawResponse>
      */
     public function update(
         string $phoneNumberID,
@@ -95,6 +100,8 @@ final class PhoneNumbersService implements PhoneNumbersContract
      *
      * @param Filter $filter Filter parameter for phone numbers (deepObject style). Supports filtering by phone_number, civic_address_id, and location_id with eq/contains operations.
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     *
+     * @return PhoneNumberListResponse<HasRawResponse>
      */
     public function list(
         string $id,

@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[wireguard_interface_id].
  *
- * @phpstan-type filter_alias = array{wireguardInterfaceID?: string|null}
+ * @phpstan-type filter_alias = array{wireguardInterfaceID?: string}
  */
 final class Filter implements BaseModel
 {

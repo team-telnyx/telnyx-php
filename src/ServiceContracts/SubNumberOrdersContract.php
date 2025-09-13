@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\NumberOrderPhoneNumbers\UpdateRegulatoryRequirement;
 use Telnyx\RequestOptions;
 use Telnyx\SubNumberOrders\SubNumberOrderCancelResponse;
@@ -22,6 +23,8 @@ interface SubNumberOrdersContract
      * @api
      *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[include_phone_numbers]
+     *
+     * @return SubNumberOrderGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $subNumberOrderID,
@@ -33,6 +36,8 @@ interface SubNumberOrdersContract
      * @api
      *
      * @param list<UpdateRegulatoryRequirement> $regulatoryRequirements
+     *
+     * @return SubNumberOrderUpdateResponse<HasRawResponse>
      */
     public function update(
         string $subNumberOrderID,
@@ -44,6 +49,8 @@ interface SubNumberOrdersContract
      * @api
      *
      * @param Filter1 $filter Consolidated filter parameter (deepObject style). Originally: filter[status], filter[order_request_id], filter[country_code], filter[phone_number_type], filter[phone_numbers_count]
+     *
+     * @return SubNumberOrderListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,
@@ -52,6 +59,8 @@ interface SubNumberOrdersContract
 
     /**
      * @api
+     *
+     * @return SubNumberOrderCancelResponse<HasRawResponse>
      */
     public function cancel(
         string $subNumberOrderID,
@@ -62,6 +71,8 @@ interface SubNumberOrdersContract
      * @api
      *
      * @param string $requirementGroupID The ID of the requirement group to associate
+     *
+     * @return SubNumberOrderUpdateRequirementGroupResponse<HasRawResponse>
      */
     public function updateRequirementGroup(
         string $id,

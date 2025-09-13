@@ -9,16 +9,16 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type data_alias = array{
- *   lastSeen?: string|null,
- *   privateKey?: string|null,
- *   recordType?: string|null,
- *   wireguardInterfaceID?: string|null,
+ * @phpstan-type unnamed_type_with_intersection_parent34 = array{
+ *   lastSeen?: string,
+ *   privateKey?: string,
+ *   recordType?: string,
+ *   wireguardInterfaceID?: string,
  * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<unnamed_type_with_intersection_parent34> */
     use SdkModel;
 
     /**

@@ -11,13 +11,13 @@ use Telnyx\ExternalConnections\PhoneNumbers\ExternalConnectionPhoneNumber\Acquir
 
 /**
  * @phpstan-type external_connection_phone_number = array{
- *   acquiredCapabilities?: list<value-of<AcquiredCapability>>|null,
- *   civicAddressID?: string|null,
- *   displayedCountryCode?: string|null,
- *   locationID?: string|null,
- *   numberID?: string|null,
- *   telephoneNumber?: string|null,
- *   ticketID?: string|null,
+ *   acquiredCapabilities?: list<value-of<AcquiredCapability>>,
+ *   civicAddressID?: string,
+ *   displayedCountryCode?: string,
+ *   locationID?: string,
+ *   numberID?: string,
+ *   telephoneNumber?: string,
+ *   ticketID?: string,
  * }
  */
 final class ExternalConnectionPhoneNumber implements BaseModel

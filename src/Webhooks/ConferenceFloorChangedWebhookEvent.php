@@ -13,10 +13,10 @@ use Telnyx\Webhooks\ConferenceFloorChangedWebhookEvent\RecordType;
 
 /**
  * @phpstan-type conference_floor_changed_webhook_event = array{
- *   id?: string|null,
- *   eventType?: value-of<EventType>|null,
- *   payload?: Payload|null,
- *   recordType?: value-of<RecordType>|null,
+ *   id?: string,
+ *   eventType?: value-of<EventType>,
+ *   payload?: Payload,
+ *   recordType?: value-of<RecordType>,
  * }
  */
 final class ConferenceFloorChangedWebhookEvent implements BaseModel

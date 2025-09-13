@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Regions\RegionListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\RegionsContract;
@@ -20,6 +21,8 @@ final class RegionsService implements RegionsContract
      * @api
      *
      * List all regions and the interfaces that region supports
+     *
+     * @return RegionListResponse<HasRawResponse>
      */
     public function list(
         ?RequestOptions $requestOptions = null

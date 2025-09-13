@@ -16,14 +16,14 @@ use Telnyx\Messsages\RcsSuggestion\Action\ViewLocationAction;
  * When tapped, initiates the corresponding native action on the device.
  *
  * @phpstan-type action_alias = array{
- *   createCalendarEventAction?: CreateCalendarEventAction|null,
- *   dialAction?: DialAction|null,
- *   fallbackURL?: string|null,
- *   openURLAction?: OpenURLAction|null,
- *   postbackData?: string|null,
+ *   createCalendarEventAction?: CreateCalendarEventAction,
+ *   dialAction?: DialAction,
+ *   fallbackURL?: string,
+ *   openURLAction?: OpenURLAction,
+ *   postbackData?: string,
  *   shareLocationAction?: mixed,
- *   text?: string|null,
- *   viewLocationAction?: ViewLocationAction|null,
+ *   text?: string,
+ *   viewLocationAction?: ViewLocationAction,
  * }
  */
 final class Action implements BaseModel

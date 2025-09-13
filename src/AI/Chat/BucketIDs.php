@@ -9,9 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type bucket_ids = array{
- *   bucketIDs: list<string>, maxNumResults?: int|null
- * }
+ * @phpstan-type bucket_ids = array{bucketIDs: list<string>, maxNumResults?: int}
  */
 final class BucketIDs implements BaseModel
 {

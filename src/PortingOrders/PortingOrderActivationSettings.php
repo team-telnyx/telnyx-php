@@ -11,10 +11,10 @@ use Telnyx\PortingOrders\PortingOrderActivationSettings\ActivationStatus;
 
 /**
  * @phpstan-type porting_order_activation_settings = array{
- *   activationStatus?: value-of<ActivationStatus>|null,
- *   fastPortEligible?: bool|null,
- *   focDatetimeActual?: \DateTimeInterface|null,
- *   focDatetimeRequested?: \DateTimeInterface|null,
+ *   activationStatus?: value-of<ActivationStatus>,
+ *   fastPortEligible?: bool,
+ *   focDatetimeActual?: \DateTimeInterface,
+ *   focDatetimeRequested?: \DateTimeInterface,
  * }
  */
 final class PortingOrderActivationSettings implements BaseModel

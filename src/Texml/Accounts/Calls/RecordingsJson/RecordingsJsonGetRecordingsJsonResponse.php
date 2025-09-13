@@ -11,16 +11,20 @@ use Telnyx\Texml\Accounts\TexmlGetCallRecordingResponseBody;
 
 /**
  * @phpstan-type recordings_json_get_recordings_json_response = array{
- *   end?: int|null,
- *   firstPageUri?: string|null,
- *   nextPageUri?: string|null,
- *   page?: int|null,
- *   pageSize?: int|null,
- *   previousPageUri?: string|null,
- *   recordings?: list<TexmlGetCallRecordingResponseBody>|null,
- *   start?: int|null,
- *   uri?: string|null,
+ *   end?: int,
+ *   firstPageUri?: string,
+ *   nextPageUri?: string,
+ *   page?: int,
+ *   pageSize?: int,
+ *   previousPageUri?: string,
+ *   recordings?: list<TexmlGetCallRecordingResponseBody>,
+ *   start?: int,
+ *   uri?: string,
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class RecordingsJsonGetRecordingsJsonResponse implements BaseModel
 {

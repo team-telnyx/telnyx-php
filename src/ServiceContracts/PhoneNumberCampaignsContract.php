@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PhoneNumberCampaigns\PhoneNumberCampaign;
 use Telnyx\PhoneNumberCampaigns\PhoneNumberCampaignListParams\Filter;
 use Telnyx\PhoneNumberCampaigns\PhoneNumberCampaignListParams\Sort;
@@ -19,6 +20,8 @@ interface PhoneNumberCampaignsContract
      *
      * @param string $campaignID the ID of the campaign you want to link to the specified phone number
      * @param string $phoneNumber the phone number you want to link to a specified campaign
+     *
+     * @return PhoneNumberCampaign<HasRawResponse>
      */
     public function create(
         $campaignID,
@@ -28,6 +31,8 @@ interface PhoneNumberCampaignsContract
 
     /**
      * @api
+     *
+     * @return PhoneNumberCampaign<HasRawResponse>
      */
     public function retrieve(
         string $phoneNumber,
@@ -39,6 +44,8 @@ interface PhoneNumberCampaignsContract
      *
      * @param string $campaignID the ID of the campaign you want to link to the specified phone number
      * @param string $phoneNumber1 the phone number you want to link to a specified campaign
+     *
+     * @return PhoneNumberCampaign<HasRawResponse>
      */
     public function update(
         string $phoneNumber,
@@ -54,6 +61,8 @@ interface PhoneNumberCampaignsContract
      * @param int $page
      * @param int $recordsPerPage
      * @param Sort|value-of<Sort> $sort Specifies the sort order for results. If not given, results are sorted by createdAt in descending order.
+     *
+     * @return PhoneNumberCampaignListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,
@@ -65,6 +74,8 @@ interface PhoneNumberCampaignsContract
 
     /**
      * @api
+     *
+     * @return PhoneNumberCampaign<HasRawResponse>
      */
     public function delete(
         string $phoneNumber,

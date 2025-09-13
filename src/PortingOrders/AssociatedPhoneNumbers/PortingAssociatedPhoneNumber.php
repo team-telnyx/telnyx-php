@@ -13,15 +13,15 @@ use Telnyx\PortingOrders\AssociatedPhoneNumbers\PortingAssociatedPhoneNumber\Pho
 
 /**
  * @phpstan-type porting_associated_phone_number = array{
- *   id?: string|null,
- *   action?: value-of<Action>|null,
- *   countryCode?: string|null,
- *   createdAt?: \DateTimeInterface|null,
- *   phoneNumberRange?: PhoneNumberRange|null,
- *   phoneNumberType?: value-of<PhoneNumberType>|null,
- *   portingOrderID?: string|null,
- *   recordType?: string|null,
- *   updatedAt?: \DateTimeInterface|null,
+ *   id?: string,
+ *   action?: value-of<Action>,
+ *   countryCode?: string,
+ *   createdAt?: \DateTimeInterface,
+ *   phoneNumberRange?: PhoneNumberRange,
+ *   phoneNumberType?: value-of<PhoneNumberType>,
+ *   portingOrderID?: string,
+ *   recordType?: string,
+ *   updatedAt?: \DateTimeInterface,
  * }
  */
 final class PortingAssociatedPhoneNumber implements BaseModel

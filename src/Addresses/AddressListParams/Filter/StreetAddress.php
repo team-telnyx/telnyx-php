@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type street_address = array{contains?: string|null}
+ * @phpstan-type street_address = array{contains?: string}
  */
 final class StreetAddress implements BaseModel
 {

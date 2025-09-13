@@ -10,19 +10,19 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Networks\InterfaceStatus;
 
 /**
- * @phpstan-type global_ip_assignment = array{
- *   globalIPID?: string|null,
- *   isAnnounced?: bool|null,
- *   isConnected?: bool|null,
- *   isInMaintenance?: bool|null,
- *   recordType?: string|null,
- *   status?: value-of<InterfaceStatus>|null,
- *   wireguardPeerID?: string|null,
+ * @phpstan-type unnamed_type_with_intersection_parent0 = array{
+ *   globalIPID?: string,
+ *   isAnnounced?: bool,
+ *   isConnected?: bool,
+ *   isInMaintenance?: bool,
+ *   recordType?: string,
+ *   status?: value-of<InterfaceStatus>,
+ *   wireguardPeerID?: string,
  * }
  */
 final class GlobalIPAssignment implements BaseModel
 {
-    /** @use SdkModel<global_ip_assignment> */
+    /** @use SdkModel<unnamed_type_with_intersection_parent0> */
     use SdkModel;
 
     /**

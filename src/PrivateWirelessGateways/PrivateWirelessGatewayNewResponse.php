@@ -10,8 +10,12 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type private_wireless_gateway_new_response = array{
- *   data?: PrivateWirelessGateway|null
+ *   data?: PrivateWirelessGateway
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class PrivateWirelessGatewayNewResponse implements BaseModel
 {

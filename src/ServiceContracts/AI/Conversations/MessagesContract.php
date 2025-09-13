@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\AI\Conversations;
 
 use Telnyx\AI\Conversations\Messages\MessageListResponse;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 
 use const Telnyx\Core\OMIT as omit;
@@ -38,6 +39,8 @@ interface MessagesContract
 
     /**
      * @api
+     *
+     * @return MessageListResponse<HasRawResponse>
      */
     public function list(
         string $conversationID,

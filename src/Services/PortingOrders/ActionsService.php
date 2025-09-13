@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\PortingOrders;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PortingOrders\Actions\ActionActivateResponse;
 use Telnyx\PortingOrders\Actions\ActionCancelResponse;
 use Telnyx\PortingOrders\Actions\ActionConfirmResponse;
@@ -27,6 +28,8 @@ final class ActionsService implements ActionsContract
      * @api
      *
      * Activate each number in a porting order asynchronously. This operation is limited to US FastPort orders only.
+     *
+     * @return ActionActivateResponse<HasRawResponse>
      */
     public function activate(
         string $id,
@@ -45,6 +48,8 @@ final class ActionsService implements ActionsContract
      * @api
      *
      * Cancel a porting order
+     *
+     * @return ActionCancelResponse<HasRawResponse>
      */
     public function cancel(
         string $id,
@@ -63,6 +68,8 @@ final class ActionsService implements ActionsContract
      * @api
      *
      * Confirm and submit your porting order.
+     *
+     * @return ActionConfirmResponse<HasRawResponse>
      */
     public function confirm(
         string $id,
@@ -84,6 +91,8 @@ final class ActionsService implements ActionsContract
      *
      * @param int $expiresInSeconds The number of seconds the token will be valid for
      * @param Permissions|value-of<Permissions> $permissions The permissions the token will have
+     *
+     * @return ActionShareResponse<HasRawResponse>
      */
     public function share(
         string $id,

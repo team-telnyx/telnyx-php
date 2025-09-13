@@ -12,14 +12,14 @@ use Telnyx\CustomerServiceRecords\CustomerServiceRecord\Status;
 
 /**
  * @phpstan-type customer_service_record = array{
- *   id?: string|null,
- *   createdAt?: \DateTimeInterface|null,
- *   errorMessage?: string|null,
- *   phoneNumber?: string|null,
- *   recordType?: string|null,
- *   result?: Result|null,
- *   status?: value-of<Status>|null,
- *   updatedAt?: \DateTimeInterface|null,
+ *   id?: string,
+ *   createdAt?: \DateTimeInterface,
+ *   errorMessage?: string,
+ *   phoneNumber?: string,
+ *   recordType?: string,
+ *   result?: Result,
+ *   status?: value-of<Status>,
+ *   updatedAt?: \DateTimeInterface,
  * }
  */
 final class CustomerServiceRecord implements BaseModel

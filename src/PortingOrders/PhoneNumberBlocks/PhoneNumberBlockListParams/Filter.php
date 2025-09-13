@@ -18,12 +18,12 @@ use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter\Sup
  * Consolidated filter parameter (deepObject style). Originally: filter[porting_order_id], filter[support_key], filter[status], filter[phone_number], filter[activation_status], filter[portability_status].
  *
  * @phpstan-type filter_alias = array{
- *   activationStatus?: value-of<ActivationStatus>|null,
- *   phoneNumber?: list<string>|null,
- *   portabilityStatus?: value-of<PortabilityStatus>|null,
- *   portingOrderID?: list<string>|null,
- *   status?: null|list<value-of<UnionMember1>>|value-of<UnionMember0>,
- *   supportKey?: string|null|list<string>,
+ *   activationStatus?: value-of<ActivationStatus>,
+ *   phoneNumber?: list<string>,
+ *   portabilityStatus?: value-of<PortabilityStatus>,
+ *   portingOrderID?: list<string>,
+ *   status?: list<value-of<UnionMember1>>|value-of<UnionMember0>,
+ *   supportKey?: string|list<string>,
  * }
  */
 final class Filter implements BaseModel

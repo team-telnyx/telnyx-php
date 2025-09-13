@@ -11,9 +11,7 @@ use Telnyx\PhoneNumbers\Actions\ActionVerifyOwnershipResponse\Data\Found;
 
 /**
  * @phpstan-type data_alias = array{
- *   found?: list<Found>|null,
- *   notFound?: list<string>|null,
- *   recordType?: string|null,
+ *   found?: list<Found>, notFound?: list<string>, recordType?: string
  * }
  */
 final class Data implements BaseModel

@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * Filter phone numbers by pattern matching.
  *
  * @phpstan-type phone_number = array{
- *   contains?: string|null, endsWith?: string|null, startsWith?: string|null
+ *   contains?: string, endsWith?: string, startsWith?: string
  * }
  */
 final class PhoneNumber implements BaseModel

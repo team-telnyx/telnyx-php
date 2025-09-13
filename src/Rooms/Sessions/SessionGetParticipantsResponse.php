@@ -12,8 +12,12 @@ use Telnyx\RoomParticipant;
 
 /**
  * @phpstan-type session_get_participants_response = array{
- *   data?: list<RoomParticipant>|null, meta?: PaginationMeta|null
+ *   data?: list<RoomParticipant>, meta?: PaginationMeta
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class SessionGetParticipantsResponse implements BaseModel
 {

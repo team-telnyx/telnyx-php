@@ -14,9 +14,9 @@ use Telnyx\Core\Contracts\BaseModel;
  *   id: string,
  *   createdAt: \DateTimeInterface,
  *   name: string,
- *   description?: string|null,
- *   insights?: list<InsightTemplate>|null,
- *   webhook?: string|null,
+ *   description?: string,
+ *   insights?: list<InsightTemplate>,
+ *   webhook?: string,
  * }
  */
 final class InsightTemplateGroup implements BaseModel

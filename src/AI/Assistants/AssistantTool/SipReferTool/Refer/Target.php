@@ -12,8 +12,8 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type target_alias = array{
  *   name: string,
  *   sipAddress: string,
- *   sipAuthPassword?: string|null,
- *   sipAuthUsername?: string|null,
+ *   sipAuthPassword?: string,
+ *   sipAuthUsername?: string,
  * }
  */
 final class Target implements BaseModel

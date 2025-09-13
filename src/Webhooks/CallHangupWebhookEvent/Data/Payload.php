@@ -16,22 +16,22 @@ use Telnyx\Webhooks\CallHangupWebhookEvent\Data\Payload\State;
 
 /**
  * @phpstan-type payload_alias = array{
- *   callControlID?: string|null,
- *   callLegID?: string|null,
+ *   callControlID?: string,
+ *   callLegID?: string,
  *   callQualityStats?: CallQualityStats|null,
- *   callSessionID?: string|null,
- *   clientState?: string|null,
- *   connectionID?: string|null,
- *   customHeaders?: list<CustomSipHeader>|null,
- *   from?: string|null,
- *   hangupCause?: value-of<HangupCause>|null,
- *   hangupSource?: value-of<HangupSource>|null,
- *   sipHangupCause?: string|null,
- *   sipHeaders?: list<SipHeader>|null,
- *   startTime?: \DateTimeInterface|null,
- *   state?: value-of<State>|null,
- *   tags?: list<string>|null,
- *   to?: string|null,
+ *   callSessionID?: string,
+ *   clientState?: string,
+ *   connectionID?: string,
+ *   customHeaders?: list<CustomSipHeader>,
+ *   from?: string,
+ *   hangupCause?: value-of<HangupCause>,
+ *   hangupSource?: value-of<HangupSource>,
+ *   sipHangupCause?: string,
+ *   sipHeaders?: list<SipHeader>,
+ *   startTime?: \DateTimeInterface,
+ *   state?: value-of<State>,
+ *   tags?: list<string>,
+ *   to?: string,
  * }
  */
 final class Payload implements BaseModel

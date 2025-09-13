@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileAssignParams;
 use Telnyx\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileAssignResponse;
 use Telnyx\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileAssignResponse\AssignProfileToCampaignResponse;
@@ -67,6 +68,10 @@ final class PhoneNumberAssignmentByProfileService implements PhoneNumberAssignme
      *
      * @param int $page
      * @param int $recordsPerPage
+     *
+     * @return PhoneNumberAssignmentByProfileGetPhoneNumberStatusResponse<
+     *   HasRawResponse
+     * >
      */
     public function retrievePhoneNumberStatus(
         string $taskID,
@@ -95,6 +100,8 @@ final class PhoneNumberAssignmentByProfileService implements PhoneNumberAssignme
      * @api
      *
      * Check the status of the task associated with assigning all phone numbers on a messaging profile to a campaign by `taskId`.
+     *
+     * @return PhoneNumberAssignmentByProfileGetStatusResponse<HasRawResponse>
      */
     public function retrieveStatus(
         string $taskID,

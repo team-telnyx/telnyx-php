@@ -12,9 +12,9 @@ use Telnyx\Core\Contracts\BaseModel;
  * The media features settings for a phone number.
  *
  * @phpstan-type media_features = array{
- *   acceptAnyRtpPacketsEnabled?: bool|null,
- *   rtpAutoAdjustEnabled?: bool|null,
- *   t38FaxGatewayEnabled?: bool|null,
+ *   acceptAnyRtpPacketsEnabled?: bool,
+ *   rtpAutoAdjustEnabled?: bool,
+ *   t38FaxGatewayEnabled?: bool,
  * }
  */
 final class MediaFeatures implements BaseModel

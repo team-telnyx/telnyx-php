@@ -12,9 +12,12 @@ use Telnyx\ExternalConnections\LogMessages\LogMessageListResponse\LogMessage;
 
 /**
  * @phpstan-type log_message_list_response = array{
- *   logMessages?: list<LogMessage>|null,
- *   meta?: ExternalVoiceIntegrationsPaginationMeta|null,
+ *   logMessages?: list<LogMessage>, meta?: ExternalVoiceIntegrationsPaginationMeta
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class LogMessageListResponse implements BaseModel
 {

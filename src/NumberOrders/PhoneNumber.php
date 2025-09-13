@@ -14,17 +14,17 @@ use Telnyx\SubNumberOrderRegulatoryRequirementWithValue;
 
 /**
  * @phpstan-type phone_number = array{
- *   id?: string|null,
- *   bundleID?: string|null,
- *   countryCode?: string|null,
- *   countryISOAlpha2?: string|null,
- *   phoneNumber?: string|null,
- *   phoneNumberType?: value-of<PhoneNumberType>|null,
- *   recordType?: string|null,
- *   regulatoryRequirements?: list<SubNumberOrderRegulatoryRequirementWithValue>|null,
- *   requirementsMet?: bool|null,
- *   requirementsStatus?: value-of<RequirementsStatus>|null,
- *   status?: value-of<Status>|null,
+ *   id?: string,
+ *   bundleID?: string,
+ *   countryCode?: string,
+ *   countryISOAlpha2?: string,
+ *   phoneNumber?: string,
+ *   phoneNumberType?: value-of<PhoneNumberType>,
+ *   recordType?: string,
+ *   regulatoryRequirements?: list<SubNumberOrderRegulatoryRequirementWithValue>,
+ *   requirementsMet?: bool,
+ *   requirementsStatus?: value-of<RequirementsStatus>,
+ *   status?: value-of<Status>,
  * }
  */
 final class PhoneNumber implements BaseModel

@@ -10,9 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type meta_alias = array{
- *   externalConnectionID?: string|null,
- *   telephoneNumber?: string|null,
- *   ticketID?: string|null,
+ *   externalConnectionID?: string, telephoneNumber?: string, ticketID?: string
  * }
  */
 final class Meta implements BaseModel

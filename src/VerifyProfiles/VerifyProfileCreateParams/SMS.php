@@ -12,10 +12,10 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type sms_alias = array{
  *   whitelistedDestinations: list<string>,
  *   alphaSender?: string|null,
- *   appName?: string|null,
- *   codeLength?: int|null,
- *   defaultVerificationTimeoutSecs?: int|null,
- *   messagingTemplateID?: string|null,
+ *   appName?: string,
+ *   codeLength?: int,
+ *   defaultVerificationTimeoutSecs?: int,
+ *   messagingTemplateID?: string,
  * }
  */
 final class SMS implements BaseModel

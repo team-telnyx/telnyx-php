@@ -11,6 +11,7 @@ use Telnyx\Campaign\CampaignListParams\Sort;
 use Telnyx\Campaign\CampaignListResponse;
 use Telnyx\Campaign\CampaignSubmitAppealResponse;
 use Telnyx\Campaign\TelnyxCampaignCsp;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 
 use const Telnyx\Core\OMIT as omit;
@@ -19,6 +20,8 @@ interface CampaignContract
 {
     /**
      * @api
+     *
+     * @return TelnyxCampaignCsp<HasRawResponse>
      */
     public function retrieve(
         string $campaignID,
@@ -39,6 +42,8 @@ interface CampaignContract
      * @param string $sample5 Message sample. Some campaign tiers require 5 or more message samples.
      * @param string $webhookFailoverURL webhook failover to which campaign status updates are sent
      * @param string $webhookURL webhook to which campaign status updates are sent
+     *
+     * @return TelnyxCampaignCsp<HasRawResponse>
      */
     public function update(
         string $campaignID,
@@ -63,6 +68,8 @@ interface CampaignContract
      * @param int $page The 1-indexed page number to get. The default value is `1`.
      * @param int $recordsPerPage The amount of records per page, limited to between 1 and 500 inclusive. The default value is `10`.
      * @param Sort|value-of<Sort> $sort Specifies the sort order for results. If not given, results are sorted by createdAt in descending order.
+     *
+     * @return CampaignListResponse<HasRawResponse>
      */
     public function list(
         $brandID,
@@ -82,6 +89,8 @@ interface CampaignContract
 
     /**
      * @api
+     *
+     * @return CampaignDeactivateResponse<HasRawResponse>
      */
     public function deactivate(
         string $campaignID,
@@ -90,6 +99,8 @@ interface CampaignContract
 
     /**
      * @api
+     *
+     * @return CampaignGetMnoMetadataResponse<HasRawResponse>
      */
     public function getMnoMetadata(
         string $campaignID,
@@ -106,6 +117,8 @@ interface CampaignContract
 
     /**
      * @api
+     *
+     * @return CampaignGetSharingStatusResponse<HasRawResponse>
      */
     public function getSharingStatus(
         string $campaignID,
@@ -116,6 +129,8 @@ interface CampaignContract
      * @api
      *
      * @param string $appealReason detailed explanation of why the campaign should be reconsidered and what changes have been made to address the rejection reason
+     *
+     * @return CampaignSubmitAppealResponse<HasRawResponse>
      */
     public function submitAppeal(
         string $campaignID,

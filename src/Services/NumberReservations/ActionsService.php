@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\NumberReservations;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\NumberReservations\Actions\ActionExtendResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\NumberReservations\ActionsContract;
@@ -20,6 +21,8 @@ final class ActionsService implements ActionsContract
      * @api
      *
      * Extends reservation expiry time on all phone numbers.
+     *
+     * @return ActionExtendResponse<HasRawResponse>
      */
     public function extend(
         string $numberReservationID,

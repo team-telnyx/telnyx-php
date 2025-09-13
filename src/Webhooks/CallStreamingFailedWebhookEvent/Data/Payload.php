@@ -12,15 +12,15 @@ use Telnyx\Webhooks\CallStreamingFailedWebhookEvent\Data\Payload\StreamType;
 
 /**
  * @phpstan-type payload_alias = array{
- *   callControlID?: string|null,
- *   callLegID?: string|null,
- *   callSessionID?: string|null,
- *   clientState?: string|null,
- *   connectionID?: string|null,
- *   failureReason?: string|null,
- *   streamID?: string|null,
- *   streamParams?: StreamParams|null,
- *   streamType?: value-of<StreamType>|null,
+ *   callControlID?: string,
+ *   callLegID?: string,
+ *   callSessionID?: string,
+ *   clientState?: string,
+ *   connectionID?: string,
+ *   failureReason?: string,
+ *   streamID?: string,
+ *   streamParams?: StreamParams,
+ *   streamType?: value-of<StreamType>,
  * }
  */
 final class Payload implements BaseModel

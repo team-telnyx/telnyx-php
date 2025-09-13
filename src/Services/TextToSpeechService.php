@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\TextToSpeechContract;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams;
@@ -65,6 +66,8 @@ final class TextToSpeechService implements TextToSpeechContract
      *
      * @param string $elevenlabsAPIKeyRef Reference to your ElevenLabs API key stored in the Telnyx Portal
      * @param Provider|value-of<Provider> $provider Filter voices by provider
+     *
+     * @return TextToSpeechListVoicesResponse<HasRawResponse>
      */
     public function listVoices(
         $elevenlabsAPIKeyRef = omit,

@@ -19,9 +19,9 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-type url_shortener_settings = array{
  *   domain: string,
- *   prefix?: string|null,
- *   replaceBlacklistOnly?: bool|null,
- *   sendWebhooks?: bool|null,
+ *   prefix?: string,
+ *   replaceBlacklistOnly?: bool,
+ *   sendWebhooks?: bool,
  * }
  */
 final class URLShortenerSettings implements BaseModel

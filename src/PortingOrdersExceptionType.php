@@ -11,7 +11,7 @@ use Telnyx\PortingOrdersExceptionType\Code;
 
 /**
  * @phpstan-type porting_orders_exception_type = array{
- *   code?: value-of<Code>|null, description?: string|null
+ *   code?: value-of<Code>, description?: string
  * }
  */
 final class PortingOrdersExceptionType implements BaseModel

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\MessagingProfiles;
 
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigCreateParams\Op;
 use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigListParams\CreatedAt;
 use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigListParams\UpdatedAt;
@@ -23,6 +24,8 @@ interface AutorespConfigsContract
      * @param list<string> $keywords
      * @param Op|value-of<Op> $op
      * @param string $respText
+     *
+     * @return AutoRespConfigResponse<HasRawResponse>
      */
     public function create(
         string $profileID,
@@ -37,6 +40,8 @@ interface AutorespConfigsContract
      * @api
      *
      * @param string $profileID
+     *
+     * @return AutoRespConfigResponse<HasRawResponse>
      */
     public function retrieve(
         string $autorespCfgID,
@@ -52,6 +57,8 @@ interface AutorespConfigsContract
      * @param list<string> $keywords
      * @param Op1|value-of<Op1> $op
      * @param string $respText
+     *
+     * @return AutoRespConfigResponse<HasRawResponse>
      */
     public function update(
         string $autorespCfgID,
@@ -69,6 +76,8 @@ interface AutorespConfigsContract
      * @param string $countryCode
      * @param CreatedAt $createdAt Consolidated created_at parameter (deepObject style). Originally: created_at[gte], created_at[lte]
      * @param UpdatedAt $updatedAt Consolidated updated_at parameter (deepObject style). Originally: updated_at[gte], updated_at[lte]
+     *
+     * @return AutorespConfigListResponse<HasRawResponse>
      */
     public function list(
         string $profileID,

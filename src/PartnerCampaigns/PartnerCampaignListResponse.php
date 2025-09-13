@@ -10,10 +10,12 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type partner_campaign_list_response = array{
- *   page?: int|null,
- *   records?: list<TelnyxDownstreamCampaign>|null,
- *   totalRecords?: int|null,
+ *   page?: int, records?: list<TelnyxDownstreamCampaign>, totalRecords?: int
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class PartnerCampaignListResponse implements BaseModel
 {

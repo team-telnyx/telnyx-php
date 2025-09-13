@@ -13,10 +13,10 @@ use Telnyx\Porting\Events\EventListResponse\Data\Payload\WebhookPortingOrderMess
  * The messaging portability status of the porting order.
  *
  * @phpstan-type messaging_alias = array{
- *   enableMessaging?: bool|null,
- *   messagingCapable?: bool|null,
- *   messagingPortCompleted?: bool|null,
- *   messagingPortStatus?: value-of<MessagingPortStatus>|null,
+ *   enableMessaging?: bool,
+ *   messagingCapable?: bool,
+ *   messagingPortCompleted?: bool,
+ *   messagingPortStatus?: value-of<MessagingPortStatus>,
  * }
  */
 final class Messaging implements BaseModel

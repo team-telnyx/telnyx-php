@@ -19,12 +19,12 @@ use Telnyx\Core\Contracts\BaseModel;
  *   expiresAt: string,
  *   name: string,
  *   recordType: value-of<RecordType>,
- *   connectionID?: string|null,
- *   endReason?: value-of<EndReason>|null,
- *   endedBy?: EndedBy|null,
- *   region?: string|null,
- *   status?: value-of<Status>|null,
- *   updatedAt?: string|null,
+ *   connectionID?: string,
+ *   endReason?: value-of<EndReason>,
+ *   endedBy?: EndedBy,
+ *   region?: string,
+ *   status?: value-of<Status>,
+ *   updatedAt?: string,
  * }
  */
 final class Conference implements BaseModel

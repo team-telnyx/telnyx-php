@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Filter number reservations by date range.
  *
- * @phpstan-type created_at = array{gt?: string|null, lt?: string|null}
+ * @phpstan-type created_at = array{gt?: string, lt?: string}
  */
 final class CreatedAt implements BaseModel
 {

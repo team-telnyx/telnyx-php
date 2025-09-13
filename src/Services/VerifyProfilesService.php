@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\VerifyProfilesContract;
 use Telnyx\VerifyProfiles\VerifyProfileCreateParams;
@@ -43,6 +44,8 @@ final class VerifyProfilesService implements VerifyProfilesContract
      * @param SMS $sms
      * @param string $webhookFailoverURL
      * @param string $webhookURL
+     *
+     * @return VerifyProfileData<HasRawResponse>
      */
     public function create(
         $name,
@@ -81,6 +84,8 @@ final class VerifyProfilesService implements VerifyProfilesContract
      * @api
      *
      * Gets a single Verify profile.
+     *
+     * @return VerifyProfileData<HasRawResponse>
      */
     public function retrieve(
         string $verifyProfileID,
@@ -107,6 +112,8 @@ final class VerifyProfilesService implements VerifyProfilesContract
      * @param SMS1 $sms
      * @param string $webhookFailoverURL
      * @param string $webhookURL
+     *
+     * @return VerifyProfileData<HasRawResponse>
      */
     public function update(
         string $verifyProfileID,
@@ -149,6 +156,8 @@ final class VerifyProfilesService implements VerifyProfilesContract
      *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[name]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     *
+     * @return VerifyProfileListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,
@@ -174,6 +183,8 @@ final class VerifyProfilesService implements VerifyProfilesContract
      * @api
      *
      * Delete Verify profile
+     *
+     * @return VerifyProfileData<HasRawResponse>
      */
     public function delete(
         string $verifyProfileID,
@@ -192,6 +203,8 @@ final class VerifyProfilesService implements VerifyProfilesContract
      * @api
      *
      * List all Verify profile message templates.
+     *
+     * @return VerifyProfileGetTemplatesResponse<HasRawResponse>
      */
     public function retrieveTemplates(
         ?RequestOptions $requestOptions = null

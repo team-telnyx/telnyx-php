@@ -20,6 +20,6 @@ final class MessagingService implements MessagingContract
      */
     public function __construct(private Client $client)
     {
-        $this->rcs = new RcsService($this->client);
+        $this->rcs = new RcsService($client);
     }
 }

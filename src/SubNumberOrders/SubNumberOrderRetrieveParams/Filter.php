@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[include_phone_numbers].
  *
- * @phpstan-type filter_alias = array{includePhoneNumbers?: bool|null}
+ * @phpstan-type filter_alias = array{includePhoneNumbers?: bool}
  */
 final class Filter implements BaseModel
 {

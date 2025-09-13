@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Telephone number filter operations for log messages. Use 'eq' for exact matches or 'contains' for partial matches.
  *
- * @phpstan-type telephone_number = array{contains?: string|null, eq?: string|null}
+ * @phpstan-type telephone_number = array{contains?: string, eq?: string}
  */
 final class TelephoneNumber implements BaseModel
 {

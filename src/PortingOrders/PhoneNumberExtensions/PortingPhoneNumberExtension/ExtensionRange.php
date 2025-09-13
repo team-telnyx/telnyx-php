@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Specifies the extension range for this porting phone number extension.
  *
- * @phpstan-type extension_range = array{endAt?: int|null, startAt?: int|null}
+ * @phpstan-type extension_range = array{endAt?: int, startAt?: int}
  */
 final class ExtensionRange implements BaseModel
 {

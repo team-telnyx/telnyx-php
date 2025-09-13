@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Storage\Migrations;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Storage\Migrations\ActionsContract;
 use Telnyx\Storage\Migrations\Actions\ActionStopResponse;
@@ -20,6 +21,8 @@ final class ActionsService implements ActionsContract
      * @api
      *
      * Stop a Migration
+     *
+     * @return ActionStopResponse<HasRawResponse>
      */
     public function stop(
         string $id,

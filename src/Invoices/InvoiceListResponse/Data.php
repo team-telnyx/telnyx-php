@@ -10,12 +10,12 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type data_alias = array{
- *   fileID?: string|null,
- *   invoiceID?: string|null,
- *   paid?: bool|null,
- *   periodEnd?: \DateTimeInterface|null,
- *   periodStart?: \DateTimeInterface|null,
- *   url?: string|null,
+ *   fileID?: string,
+ *   invoiceID?: string,
+ *   paid?: bool,
+ *   periodEnd?: \DateTimeInterface,
+ *   periodStart?: \DateTimeInterface,
+ *   url?: string,
  * }
  */
 final class Data implements BaseModel

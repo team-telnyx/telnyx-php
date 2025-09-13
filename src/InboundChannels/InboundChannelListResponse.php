@@ -10,7 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\InboundChannels\InboundChannelListResponse\Data;
 
 /**
- * @phpstan-type inbound_channel_list_response = array{data?: Data|null}
+ * @phpstan-type inbound_channel_list_response = array{data?: Data}
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class InboundChannelListResponse implements BaseModel
 {

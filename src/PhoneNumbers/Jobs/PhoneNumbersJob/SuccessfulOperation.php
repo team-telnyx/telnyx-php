@@ -11,9 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * The phone numbers successfully updated.
  *
- * @phpstan-type successful_operation = array{
- *   id?: string|null, phoneNumber?: string|null
- * }
+ * @phpstan-type successful_operation = array{id?: string, phoneNumber?: string}
  */
 final class SuccessfulOperation implements BaseModel
 {

@@ -20,6 +20,6 @@ final class VerificationService implements VerificationContract
      */
     public function __construct(private Client $client)
     {
-        $this->requests = new RequestsService($this->client);
+        $this->requests = new RequestsService($client);
     }
 }

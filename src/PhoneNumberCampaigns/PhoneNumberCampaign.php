@@ -15,13 +15,17 @@ use Telnyx\PhoneNumberCampaigns\PhoneNumberCampaign\AssignmentStatus;
  *   createdAt: string,
  *   phoneNumber: string,
  *   updatedAt: string,
- *   assignmentStatus?: value-of<AssignmentStatus>|null,
- *   brandID?: string|null,
- *   failureReasons?: string|null,
- *   tcrBrandID?: string|null,
- *   tcrCampaignID?: string|null,
- *   telnyxCampaignID?: string|null,
+ *   assignmentStatus?: value-of<AssignmentStatus>,
+ *   brandID?: string,
+ *   failureReasons?: string,
+ *   tcrBrandID?: string,
+ *   tcrCampaignID?: string,
+ *   telnyxCampaignID?: string,
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class PhoneNumberCampaign implements BaseModel
 {

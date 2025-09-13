@@ -11,12 +11,12 @@ use Telnyx\Webhooks\TranscriptionWebhookEvent\Data\Payload\TranscriptionData;
 
 /**
  * @phpstan-type payload_alias = array{
- *   callControlID?: string|null,
- *   callLegID?: string|null,
- *   callSessionID?: string|null,
- *   clientState?: string|null,
- *   connectionID?: string|null,
- *   transcriptionData?: TranscriptionData|null,
+ *   callControlID?: string,
+ *   callLegID?: string,
+ *   callSessionID?: string,
+ *   clientState?: string,
+ *   connectionID?: string,
+ *   transcriptionData?: TranscriptionData,
  * }
  */
 final class Payload implements BaseModel

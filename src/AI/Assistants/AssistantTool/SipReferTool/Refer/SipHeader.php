@@ -10,9 +10,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type sip_header = array{
- *   name?: value-of<Name>|null, value?: string|null
- * }
+ * @phpstan-type sip_header = array{name?: value-of<Name>, value?: string}
  */
 final class SipHeader implements BaseModel
 {

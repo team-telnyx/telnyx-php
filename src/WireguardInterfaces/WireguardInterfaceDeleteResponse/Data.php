@@ -10,18 +10,18 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\WireguardInterfaces\WireguardInterfaceDeleteResponse\Data\Region;
 
 /**
- * @phpstan-type data_alias = array{
- *   enableSipTrunking?: bool|null,
- *   endpoint?: string|null,
- *   publicKey?: string|null,
- *   recordType?: string|null,
- *   region?: Region|null,
- *   regionCode?: string|null,
+ * @phpstan-type unnamed_type_with_intersection_parent32 = array{
+ *   enableSipTrunking?: bool,
+ *   endpoint?: string,
+ *   publicKey?: string,
+ *   recordType?: string,
+ *   region?: Region,
+ *   regionCode?: string,
  * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<unnamed_type_with_intersection_parent32> */
     use SdkModel;
 
     /**

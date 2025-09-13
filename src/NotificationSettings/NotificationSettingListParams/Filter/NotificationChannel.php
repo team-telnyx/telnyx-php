@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type notification_channel = array{eq?: string|null}
+ * @phpstan-type notification_channel = array{eq?: string}
  */
 final class NotificationChannel implements BaseModel
 {

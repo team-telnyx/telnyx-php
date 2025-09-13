@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Queues;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Queues\Calls\CallGetResponse;
 use Telnyx\Queues\Calls\CallListParams;
 use Telnyx\Queues\Calls\CallListParams\Page;
@@ -28,6 +29,8 @@ final class CallsService implements CallsContract
      * Retrieve an existing call from an existing queue
      *
      * @param string $queueName
+     *
+     * @return CallGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $callControlID,
@@ -56,6 +59,8 @@ final class CallsService implements CallsContract
      * Retrieve the list of calls in an existing queue
      *
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number]
+     *
+     * @return CallListResponse<HasRawResponse>
      */
     public function list(
         string $queueName,

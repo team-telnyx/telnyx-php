@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\MessagingProfiles\MessagingProfileCreateParams\WebhookAPIVersion;
 use Telnyx\MessagingProfiles\MessagingProfileDeleteResponse;
 use Telnyx\MessagingProfiles\MessagingProfileGetResponse;
@@ -51,6 +52,8 @@ interface MessagingProfilesContract
      * @param WebhookAPIVersion|value-of<WebhookAPIVersion> $webhookAPIVersion determines which webhook format will be used, Telnyx API v1, v2, or a legacy 2010-04-01 format
      * @param string|null $webhookFailoverURL the failover URL where webhooks related to this messaging profile will be sent if sending to the primary URL fails
      * @param string|null $webhookURL the URL where webhooks related to this messaging profile will be sent
+     *
+     * @return MessagingProfileNewResponse<HasRawResponse>
      */
     public function create(
         $name,
@@ -71,6 +74,8 @@ interface MessagingProfilesContract
 
     /**
      * @api
+     *
+     * @return MessagingProfileGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -106,6 +111,8 @@ interface MessagingProfilesContract
      * @param list<string> $whitelistedDestinations Destinations to which the messaging profile is allowed to send. The elements in the list must be valid ISO 3166-1 alpha-2 country codes. If set to `["*"]`, all destinations will be allowed.
      *
      * This field is required if the messaging profile doesn't have it defined yet.
+     *
+     * @return MessagingProfileUpdateResponse<HasRawResponse>
      */
     public function update(
         string $id,
@@ -131,6 +138,8 @@ interface MessagingProfilesContract
      *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[name]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     *
+     * @return MessagingProfileListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,
@@ -140,6 +149,8 @@ interface MessagingProfilesContract
 
     /**
      * @api
+     *
+     * @return MessagingProfileDeleteResponse<HasRawResponse>
      */
     public function delete(
         string $id,
@@ -150,6 +161,8 @@ interface MessagingProfilesContract
      * @api
      *
      * @param Page1 $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     *
+     * @return MessagingProfileListPhoneNumbersResponse<HasRawResponse>
      */
     public function listPhoneNumbers(
         string $id,
@@ -161,6 +174,8 @@ interface MessagingProfilesContract
      * @api
      *
      * @param Page2 $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     *
+     * @return MessagingProfileListShortCodesResponse<HasRawResponse>
      */
     public function listShortCodes(
         string $id,

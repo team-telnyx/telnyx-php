@@ -12,12 +12,12 @@ use Telnyx\Core\Contracts\BaseModel;
  * Identifies the requirement type that meets this requirement.
  *
  * @phpstan-type requirement_type = array{
- *   id?: string|null,
- *   acceptanceCriteria?: array<string, mixed>|null,
- *   description?: string|null,
- *   example?: string|null,
- *   name?: string|null,
- *   type?: string|null,
+ *   id?: string,
+ *   acceptanceCriteria?: array<string, mixed>,
+ *   description?: string,
+ *   example?: string,
+ *   name?: string,
+ *   type?: string,
  * }
  */
 final class RequirementType implements BaseModel

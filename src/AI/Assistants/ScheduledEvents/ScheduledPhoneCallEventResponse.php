@@ -16,14 +16,14 @@ use Telnyx\Core\Contracts\BaseModel;
  *   telnyxAgentTarget: string,
  *   telnyxConversationChannel: value-of<ConversationChannelType>,
  *   telnyxEndUserTarget: string,
- *   conversationID?: string|null,
- *   conversationMetadata?: array<string, string|int|bool>|null,
- *   createdAt?: \DateTimeInterface|null,
- *   errors?: list<string>|null,
- *   retryAttempts?: int|null,
- *   retryCount?: int|null,
- *   scheduledEventID?: string|null,
- *   status?: value-of<EventStatus>|null,
+ *   conversationID?: string,
+ *   conversationMetadata?: array<string, string|int|bool>,
+ *   createdAt?: \DateTimeInterface,
+ *   errors?: list<string>,
+ *   retryAttempts?: int,
+ *   retryCount?: int,
+ *   scheduledEventID?: string,
+ *   status?: value-of<EventStatus>,
  * }
  */
 final class ScheduledPhoneCallEventResponse implements BaseModel

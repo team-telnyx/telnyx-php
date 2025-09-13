@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type rcs_content_info = array{
- *   fileURL: string, forceRefresh?: bool|null, thumbnailURL?: string|null
+ *   fileURL: string, forceRefresh?: bool, thumbnailURL?: string
  * }
  */
 final class RcsContentInfo implements BaseModel

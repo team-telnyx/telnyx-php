@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\WirelessBlocklistsContract;
 use Telnyx\WirelessBlocklists\WirelessBlocklistCreateParams;
@@ -35,6 +36,8 @@ final class WirelessBlocklistsService implements WirelessBlocklistsContract
      * @param string $name the name of the Wireless Blocklist
      * @param Type|value-of<Type> $type the type of wireless blocklist
      * @param list<string> $values Values to block. The values here depend on the `type` of Wireless Blocklist.
+     *
+     * @return WirelessBlocklistNewResponse<HasRawResponse>
      */
     public function create(
         $name,
@@ -61,6 +64,8 @@ final class WirelessBlocklistsService implements WirelessBlocklistsContract
      * @api
      *
      * Retrieve information about a Wireless Blocklist.
+     *
+     * @return WirelessBlocklistGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -83,6 +88,8 @@ final class WirelessBlocklistsService implements WirelessBlocklistsContract
      * @param string $name the name of the Wireless Blocklist
      * @param Type1|value-of<Type1> $type the type of wireless blocklist
      * @param list<string> $values Values to block. The values here depend on the `type` of Wireless Blocklist.
+     *
+     * @return WirelessBlocklistUpdateResponse<HasRawResponse>
      */
     public function update(
         $name = omit,
@@ -115,6 +122,8 @@ final class WirelessBlocklistsService implements WirelessBlocklistsContract
      * @param string $filterValues values to filter on (inclusive)
      * @param int $pageNumber the page number to load
      * @param int $pageSize the size of the page
+     *
+     * @return WirelessBlocklistListResponse<HasRawResponse>
      */
     public function list(
         $filterName = omit,
@@ -149,6 +158,8 @@ final class WirelessBlocklistsService implements WirelessBlocklistsContract
      * @api
      *
      * Deletes the Wireless Blocklist.
+     *
+     * @return WirelessBlocklistDeleteResponse<HasRawResponse>
      */
     public function delete(
         string $id,

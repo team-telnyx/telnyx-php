@@ -7,6 +7,7 @@ namespace Telnyx\Services;
 use Telnyx\Campaign\CampaignSharingStatus;
 use Telnyx\Client;
 use Telnyx\Core\Conversion\MapOf;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PartnerCampaigns\PartnerCampaignListParams;
 use Telnyx\PartnerCampaigns\PartnerCampaignListParams\Sort;
 use Telnyx\PartnerCampaigns\PartnerCampaignListResponse;
@@ -30,6 +31,8 @@ final class PartnerCampaignsService implements PartnerCampaignsContract
      * @api
      *
      * Retrieve campaign details by `campaignId`.
+     *
+     * @return TelnyxDownstreamCampaign<HasRawResponse>
      */
     public function retrieve(
         string $campaignID,
@@ -51,6 +54,8 @@ final class PartnerCampaignsService implements PartnerCampaignsContract
      *
      * @param string $webhookFailoverURL webhook failover to which campaign status updates are sent
      * @param string $webhookURL webhook to which campaign status updates are sent
+     *
+     * @return TelnyxDownstreamCampaign<HasRawResponse>
      */
     public function update(
         string $campaignID,
@@ -85,6 +90,8 @@ final class PartnerCampaignsService implements PartnerCampaignsContract
      * @param int $page The 1-indexed page number to get. The default value is `1`.
      * @param int $recordsPerPage The amount of records per page, limited to between 1 and 500 inclusive. The default value is `10`.
      * @param Sort|value-of<Sort> $sort Specifies the sort order for results. If not given, results are sorted by createdAt in descending order.
+     *
+     * @return PartnerCampaignListResponse<HasRawResponse>
      */
     public function list(
         $page = omit,
@@ -118,6 +125,8 @@ final class PartnerCampaignsService implements PartnerCampaignsContract
      *
      * @param int $page The 1-indexed page number to get. The default value is `1`.
      * @param int $recordsPerPage The amount of records per page, limited to between 1 and 500 inclusive. The default value is `10`.
+     *
+     * @return PartnerCampaignListSharedByMeResponse<HasRawResponse>
      */
     public function listSharedByMe(
         $page = omit,

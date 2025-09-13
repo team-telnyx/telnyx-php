@@ -10,10 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type total_alias = array{
- *   bytesReceived?: int|null,
- *   bytesSent?: int|null,
- *   ops?: int|null,
- *   successfulOps?: int|null,
+ *   bytesReceived?: int, bytesSent?: int, ops?: int, successfulOps?: int
  * }
  */
 final class Total implements BaseModel

@@ -9,6 +9,7 @@ use Telnyx\AI\FineTuning\Jobs\JobCreateParams;
 use Telnyx\AI\FineTuning\Jobs\JobCreateParams\Hyperparameters;
 use Telnyx\AI\FineTuning\Jobs\JobListResponse;
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\FineTuning\JobsContract;
 
@@ -30,6 +31,8 @@ final class JobsService implements JobsContract
      * @param string $trainingFile the storage bucket or object used for training
      * @param Hyperparameters $hyperparameters the hyperparameters used for the fine-tuning job
      * @param string $suffix optional suffix to append to the fine tuned model's name
+     *
+     * @return FineTuningJob<HasRawResponse>
      */
     public function create(
         $model,
@@ -62,6 +65,8 @@ final class JobsService implements JobsContract
      * @api
      *
      * Retrieve a fine tuning job by `job_id`.
+     *
+     * @return FineTuningJob<HasRawResponse>
      */
     public function retrieve(
         string $jobID,
@@ -80,6 +85,8 @@ final class JobsService implements JobsContract
      * @api
      *
      * Retrieve a list of all fine tuning jobs created by the user.
+     *
+     * @return JobListResponse<HasRawResponse>
      */
     public function list(
         ?RequestOptions $requestOptions = null
@@ -97,6 +104,8 @@ final class JobsService implements JobsContract
      * @api
      *
      * Cancel a fine tuning job.
+     *
+     * @return FineTuningJob<HasRawResponse>
      */
     public function cancel(
         string $jobID,

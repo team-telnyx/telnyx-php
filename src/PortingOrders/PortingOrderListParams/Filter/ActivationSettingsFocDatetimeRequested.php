@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * FOC datetime range filtering operations.
  *
  * @phpstan-type activation_settings_foc_datetime_requested = array{
- *   gt?: string|null, lt?: string|null
+ *   gt?: string, lt?: string
  * }
  */
 final class ActivationSettingsFocDatetimeRequested implements BaseModel

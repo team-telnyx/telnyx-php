@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Phone number filtering operations.
  *
- * @phpstan-type phone_numbers_phone_number = array{contains?: string|null}
+ * @phpstan-type phone_numbers_phone_number = array{contains?: string}
  */
 final class PhoneNumbersPhoneNumber implements BaseModel
 {

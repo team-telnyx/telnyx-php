@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type porting_order_user_feedback = array{
- *   userComment?: string|null, userRating?: int|null
+ *   userComment?: string, userRating?: int
  * }
  */
 final class PortingOrderUserFeedback implements BaseModel

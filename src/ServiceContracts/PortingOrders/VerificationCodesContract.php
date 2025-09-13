@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\PortingOrders;
 
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams\Filter;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams\Page;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams\Sort;
@@ -23,6 +24,8 @@ interface VerificationCodesContract
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[verified]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param Sort $sort Consolidated sort parameter (deepObject style). Originally: sort[value]
+     *
+     * @return VerificationCodeListResponse<HasRawResponse>
      */
     public function list(
         string $id,
@@ -49,6 +52,8 @@ interface VerificationCodesContract
      * @api
      *
      * @param list<VerificationCode> $verificationCodes
+     *
+     * @return VerificationCodeVerifyResponse<HasRawResponse>
      */
     public function verify(
         string $id,

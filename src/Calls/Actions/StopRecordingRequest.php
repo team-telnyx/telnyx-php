@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type stop_recording_request = array{
- *   clientState?: string|null, commandID?: string|null, recordingID?: string|null
+ *   clientState?: string, commandID?: string, recordingID?: string
  * }
  */
 final class StopRecordingRequest implements BaseModel

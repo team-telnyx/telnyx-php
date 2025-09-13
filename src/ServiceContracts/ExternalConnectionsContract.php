@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\ExternalConnections\ExternalConnectionCreateParams\ExternalSipConnection;
 use Telnyx\ExternalConnections\ExternalConnectionCreateParams\Inbound;
 use Telnyx\ExternalConnections\ExternalConnectionCreateParams\Outbound;
@@ -34,6 +35,8 @@ interface ExternalConnectionsContract
      * @param string|null $webhookEventFailoverURL The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      * @param string $webhookEventURL The URL where webhooks related to this connection will be sent. Must include a scheme, such as 'https'.
      * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
+     *
+     * @return ExternalConnectionNewResponse<HasRawResponse>
      */
     public function create(
         $externalSipConnection = 'zoom',
@@ -49,6 +52,8 @@ interface ExternalConnectionsContract
 
     /**
      * @api
+     *
+     * @return ExternalConnectionGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -65,6 +70,8 @@ interface ExternalConnectionsContract
      * @param string|null $webhookEventFailoverURL The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      * @param string $webhookEventURL The URL where webhooks related to this connection will be sent. Must include a scheme, such as 'https'.
      * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
+     *
+     * @return ExternalConnectionUpdateResponse<HasRawResponse>
      */
     public function update(
         string $id,
@@ -83,6 +90,8 @@ interface ExternalConnectionsContract
      *
      * @param Filter $filter Filter parameter for external connections (deepObject style). Supports filtering by connection_name, external_sip_connection, id, created_at, and phone_number.
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     *
+     * @return ExternalConnectionListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,
@@ -92,6 +101,8 @@ interface ExternalConnectionsContract
 
     /**
      * @api
+     *
+     * @return ExternalConnectionDeleteResponse<HasRawResponse>
      */
     public function delete(
         string $id,
@@ -103,6 +114,8 @@ interface ExternalConnectionsContract
      *
      * @param string $id
      * @param string $staticEmergencyAddressID A new static emergency address ID to update the location with
+     *
+     * @return ExternalConnectionUpdateLocationResponse<HasRawResponse>
      */
     public function updateLocation(
         string $locationID,

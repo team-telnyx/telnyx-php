@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * The webhook payload for the portout.foc_date_changed event.
  *
  * @phpstan-type webhook_portout_foc_date_changed_payload = array{
- *   id?: string|null, focDate?: \DateTimeInterface|null, userID?: string|null
+ *   id?: string, focDate?: \DateTimeInterface, userID?: string
  * }
  */
 final class WebhookPortoutFocDateChangedPayload implements BaseModel

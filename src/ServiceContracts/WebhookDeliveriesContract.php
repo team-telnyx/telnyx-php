@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\WebhookDeliveries\WebhookDeliveryGetResponse;
 use Telnyx\WebhookDeliveries\WebhookDeliveryListParams\Filter;
@@ -16,6 +17,8 @@ interface WebhookDeliveriesContract
 {
     /**
      * @api
+     *
+     * @return WebhookDeliveryGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -27,6 +30,8 @@ interface WebhookDeliveriesContract
      *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[status][eq], filter[event_type], filter[webhook][contains], filter[attempts][contains], filter[started_at][gte], filter[started_at][lte], filter[finished_at][gte], filter[finished_at][lte]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     *
+     * @return WebhookDeliveryListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,

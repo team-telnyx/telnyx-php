@@ -10,7 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Rooms\Sessions\Actions\ActionEndResponse\Data;
 
 /**
- * @phpstan-type action_end_response = array{data?: Data|null}
+ * @phpstan-type action_end_response = array{data?: Data}
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class ActionEndResponse implements BaseModel
 {

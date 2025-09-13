@@ -14,8 +14,12 @@ use Telnyx\Core\Contracts\BaseModel;
  *   createdAt: \DateTimeInterface,
  *   lastMessageAt: \DateTimeInterface,
  *   metadata: array<string, string>,
- *   name?: string|null,
+ *   name?: string,
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class Conversation implements BaseModel
 {

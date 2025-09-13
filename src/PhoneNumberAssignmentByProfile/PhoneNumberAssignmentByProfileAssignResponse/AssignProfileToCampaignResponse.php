@@ -12,8 +12,8 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type assign_profile_to_campaign_response = array{
  *   messagingProfileID: string,
  *   taskID: string,
- *   campaignID?: string|null,
- *   tcrCampaignID?: string|null,
+ *   campaignID?: string,
+ *   tcrCampaignID?: string,
  * }
  */
 final class AssignProfileToCampaignResponse implements BaseModel

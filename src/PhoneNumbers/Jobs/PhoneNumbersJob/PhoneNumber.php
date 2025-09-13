@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * The unique phone numbers given as arguments in the job creation.
  *
- * @phpstan-type phone_number = array{id?: string|null, phoneNumber?: string|null}
+ * @phpstan-type phone_number = array{id?: string, phoneNumber?: string}
  */
 final class PhoneNumber implements BaseModel
 {

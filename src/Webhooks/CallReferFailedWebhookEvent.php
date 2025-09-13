@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\CallReferFailedWebhookEvent\Data;
 
 /**
- * @phpstan-type call_refer_failed_webhook_event = array{data?: Data|null}
+ * @phpstan-type call_refer_failed_webhook_event = array{data?: Data}
  */
 final class CallReferFailedWebhookEvent implements BaseModel
 {

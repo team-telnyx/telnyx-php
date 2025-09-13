@@ -10,8 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type flashcall_alias = array{
- *   defaultVerificationTimeoutSecs?: int|null,
- *   whitelistedDestinations?: list<string>|null,
+ *   defaultVerificationTimeoutSecs?: int, whitelistedDestinations?: list<string>
  * }
  */
 final class Flashcall implements BaseModel

@@ -11,12 +11,12 @@ use Telnyx\RegulatoryRequirements\RegulatoryRequirementGetResponse\Data\Regulato
 
 /**
  * @phpstan-type regulatory_requirement = array{
- *   id?: string|null,
- *   acceptanceCriteria?: AcceptanceCriteria|null,
- *   description?: string|null,
- *   example?: string|null,
- *   fieldType?: string|null,
- *   name?: string|null,
+ *   id?: string,
+ *   acceptanceCriteria?: AcceptanceCriteria,
+ *   description?: string,
+ *   example?: string,
+ *   fieldType?: string,
+ *   name?: string,
  * }
  */
 final class RegulatoryRequirement implements BaseModel

@@ -11,16 +11,20 @@ use Telnyx\Texml\Accounts\AccountGetTranscriptionsJsonResponse\Transcription;
 
 /**
  * @phpstan-type account_get_transcriptions_json_response = array{
- *   end?: int|null,
- *   firstPageUri?: string|null,
- *   nextPageUri?: string|null,
- *   page?: int|null,
- *   pageSize?: int|null,
- *   previousPageUri?: string|null,
- *   start?: int|null,
- *   transcriptions?: list<Transcription>|null,
- *   uri?: string|null,
+ *   end?: int,
+ *   firstPageUri?: string,
+ *   nextPageUri?: string,
+ *   page?: int,
+ *   pageSize?: int,
+ *   previousPageUri?: string,
+ *   start?: int,
+ *   transcriptions?: list<Transcription>,
+ *   uri?: string,
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class AccountGetTranscriptionsJsonResponse implements BaseModel
 {

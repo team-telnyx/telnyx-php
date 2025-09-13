@@ -14,6 +14,7 @@ use Telnyx\BundlePricing\UserBundles\UserBundleListResponse;
 use Telnyx\BundlePricing\UserBundles\UserBundleListUnusedParams\Filter as Filter1;
 use Telnyx\BundlePricing\UserBundles\UserBundleListUnusedResponse;
 use Telnyx\BundlePricing\UserBundles\UserBundleNewResponse;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 
 use const Telnyx\Core\OMIT as omit;
@@ -26,6 +27,8 @@ interface UserBundlesContract
      * @param string $idempotencyKey Idempotency key for the request. Can be any UUID, but should always be unique for each request.
      * @param list<Item> $items
      * @param string $authorizationBearer Authenticates the request with your Telnyx API V2 KEY
+     *
+     * @return UserBundleNewResponse<HasRawResponse>
      */
     public function create(
         $idempotencyKey = omit,
@@ -38,6 +41,8 @@ interface UserBundlesContract
      * @api
      *
      * @param string $authorizationBearer Authenticates the request with your Telnyx API V2 KEY
+     *
+     * @return UserBundleGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $userBundleID,
@@ -51,6 +56,8 @@ interface UserBundlesContract
      * @param Filter $filter Consolidated filter parameter (deepObject style). Supports filtering by country_iso and resource. Examples: filter[country_iso]=US or filter[resource]=+15617819942
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param string $authorizationBearer Authenticates the request with your Telnyx API V2 KEY
+     *
+     * @return UserBundleListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,
@@ -63,6 +70,8 @@ interface UserBundlesContract
      * @api
      *
      * @param string $authorizationBearer Authenticates the request with your Telnyx API V2 KEY
+     *
+     * @return UserBundleDeactivateResponse<HasRawResponse>
      */
     public function deactivate(
         string $userBundleID,
@@ -74,6 +83,8 @@ interface UserBundlesContract
      * @api
      *
      * @param string $authorizationBearer Authenticates the request with your Telnyx API V2 KEY
+     *
+     * @return UserBundleListResourcesResponse<HasRawResponse>
      */
     public function listResources(
         string $userBundleID,
@@ -86,6 +97,8 @@ interface UserBundlesContract
      *
      * @param Filter1 $filter Consolidated filter parameter (deepObject style). Supports filtering by country_iso and resource. Examples: filter[country_iso]=US or filter[resource]=+15617819942
      * @param string $authorizationBearer Authenticates the request with your Telnyx API V2 KEY
+     *
+     * @return UserBundleListUnusedResponse<HasRawResponse>
      */
     public function listUnused(
         $filter = omit,

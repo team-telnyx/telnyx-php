@@ -13,7 +13,7 @@ use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberListParams\
  * Consolidated filter parameter (deepObject style). Originally: filter[phone_number], filter[action].
  *
  * @phpstan-type filter_alias = array{
- *   action?: value-of<Action>|null, phoneNumber?: string|null
+ *   action?: value-of<Action>, phoneNumber?: string
  * }
  */
 final class Filter implements BaseModel

@@ -15,6 +15,10 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type assistant_delete_response = array{
  *   id: string, deleted: bool, object1: string
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class AssistantDeleteResponse implements BaseModel
 {

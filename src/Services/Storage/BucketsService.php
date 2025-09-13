@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Storage;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Storage\BucketsContract;
 use Telnyx\Services\Storage\Buckets\SslCertificateService;
@@ -31,8 +32,8 @@ final class BucketsService implements BucketsContract
      */
     public function __construct(private Client $client)
     {
-        $this->sslCertificate = new SslCertificateService($this->client);
-        $this->usage = new UsageService($this->client);
+        $this->sslCertificate = new SslCertificateService($client);
+        $this->usage = new UsageService($client);
     }
 
     /**
@@ -44,6 +45,8 @@ final class BucketsService implements BucketsContract
      *
      * @param string $bucketName
      * @param int $ttl The time to live of the token in seconds
+     *
+     * @return BucketNewPresignedURLResponse<HasRawResponse>
      */
     public function createPresignedURL(
         string $objectName,

@@ -10,8 +10,12 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type call_control_application_get_response = array{
- *   data?: CallControlApplication|null
+ *   data?: CallControlApplication
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class CallControlApplicationGetResponse implements BaseModel
 {

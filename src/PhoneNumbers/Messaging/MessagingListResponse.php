@@ -12,8 +12,12 @@ use Telnyx\PhoneNumberWithMessagingSettings;
 
 /**
  * @phpstan-type messaging_list_response = array{
- *   data?: list<PhoneNumberWithMessagingSettings>|null, meta?: PaginationMeta|null
+ *   data?: list<PhoneNumberWithMessagingSettings>, meta?: PaginationMeta
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class MessagingListResponse implements BaseModel
 {

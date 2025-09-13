@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * Details of the changes made to a resource.
  *
  * @phpstan-type change_alias = array{
- *   field?: string|null,
+ *   field?: string,
  *   from?: string|float|bool|null|list<mixed>|array<string, mixed>,
  *   to?: string|float|bool|null|list<mixed>|array<string, mixed>,
  * }

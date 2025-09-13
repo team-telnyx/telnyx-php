@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SetiContract;
 use Telnyx\Seti\SetiGetBlackBoxTestResultsResponse;
@@ -26,6 +27,8 @@ final class SetiService implements SetiContract
      * Returns the results of the various black box tests
      *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[product]
+     *
+     * @return SetiGetBlackBoxTestResultsResponse<HasRawResponse>
      */
     public function retrieveBlackBoxTestResults(
         $filter = omit,

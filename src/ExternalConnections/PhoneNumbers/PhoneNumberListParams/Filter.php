@@ -15,9 +15,9 @@ use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberListParams\Filter\PhoneNu
  * Filter parameter for phone numbers (deepObject style). Supports filtering by phone_number, civic_address_id, and location_id with eq/contains operations.
  *
  * @phpstan-type filter_alias = array{
- *   civicAddressID?: CivicAddressID|null,
- *   locationID?: LocationID|null,
- *   phoneNumber?: PhoneNumber|null,
+ *   civicAddressID?: CivicAddressID,
+ *   locationID?: LocationID,
+ *   phoneNumber?: PhoneNumber,
  * }
  */
 final class Filter implements BaseModel

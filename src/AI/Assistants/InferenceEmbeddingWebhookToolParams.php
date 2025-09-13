@@ -18,11 +18,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *   description: string,
  *   name: string,
  *   url: string,
- *   bodyParameters?: BodyParameters|null,
- *   headers?: list<Header>|null,
- *   method?: value-of<Method>|null,
- *   pathParameters?: PathParameters|null,
- *   queryParameters?: QueryParameters|null,
+ *   bodyParameters?: BodyParameters,
+ *   headers?: list<Header>,
+ *   method?: value-of<Method>,
+ *   pathParameters?: PathParameters,
+ *   queryParameters?: QueryParameters,
  * }
  */
 final class InferenceEmbeddingWebhookToolParams implements BaseModel

@@ -10,10 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type meta_alias = array{
- *   pageNumber?: int|null,
- *   pageSize?: int|null,
- *   totalPages?: int|null,
- *   totalResults?: int|null,
+ *   pageNumber?: int, pageSize?: int, totalPages?: int, totalResults?: int
  * }
  */
 final class Meta implements BaseModel

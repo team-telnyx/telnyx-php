@@ -16,6 +16,7 @@ use Telnyx\AuthenticationProviders\AuthenticationProviderUpdateParams;
 use Telnyx\AuthenticationProviders\AuthenticationProviderUpdateResponse;
 use Telnyx\AuthenticationProviders\Settings;
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AuthenticationProvidersContract;
 
@@ -38,6 +39,8 @@ final class AuthenticationProvidersService implements AuthenticationProvidersCon
      * @param string $shortName The short name associated with the authentication provider. This must be unique and URL-friendly, as it's going to be part of the login URL.
      * @param bool $active The active status of the authentication provider
      * @param string $settingsURL The URL for the identity provider metadata file to populate the settings automatically. If the settings attribute is provided, that will be used instead.
+     *
+     * @return AuthenticationProviderNewResponse<HasRawResponse>
      */
     public function create(
         $name,
@@ -72,6 +75,8 @@ final class AuthenticationProvidersService implements AuthenticationProvidersCon
      * @api
      *
      * Retrieves the details of an existing authentication provider.
+     *
+     * @return AuthenticationProviderGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -96,6 +101,8 @@ final class AuthenticationProvidersService implements AuthenticationProvidersCon
      * @param Settings $settings the settings associated with the authentication provider
      * @param string $settingsURL The URL for the identity provider metadata file to populate the settings automatically. If the settings attribute is provided, that will be used instead.
      * @param string $shortName The short name associated with the authentication provider. This must be unique and URL-friendly, as it's going to be part of the login URL.
+     *
+     * @return AuthenticationProviderUpdateResponse<HasRawResponse>
      */
     public function update(
         string $id,
@@ -144,6 +151,8 @@ final class AuthenticationProvidersService implements AuthenticationProvidersCon
      *     <code>name</code> field in descending order.
      *   </li>
      * </ul><br/>If not given, results are sorted by <code>created_at</code> in descending order.
+     *
+     * @return AuthenticationProviderListResponse<HasRawResponse>
      */
     public function list(
         $page = omit,
@@ -169,6 +178,8 @@ final class AuthenticationProvidersService implements AuthenticationProvidersCon
      * @api
      *
      * Deletes an existing authentication provider.
+     *
+     * @return AuthenticationProviderDeleteResponse<HasRawResponse>
      */
     public function delete(
         string $id,

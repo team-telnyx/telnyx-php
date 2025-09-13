@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\Texml\Accounts;
 
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\Texml\Accounts\Conferences\ConferenceGetConferencesResponse;
 use Telnyx\Texml\Accounts\Conferences\ConferenceGetRecordingsJsonResponse;
@@ -21,6 +22,8 @@ interface ConferencesContract
      * @api
      *
      * @param string $accountSid
+     *
+     * @return ConferenceGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $conferenceSid,
@@ -35,6 +38,8 @@ interface ConferencesContract
      * @param AnnounceMethod|value-of<AnnounceMethod> $announceMethod The HTTP method used to call the `AnnounceUrl`. Defaults to `POST`.
      * @param string $announceURL The URL we should call to announce something into the conference. The URL may return an MP3 file, a WAV file, or a TwiML document that contains `<Play>`, `<Say>`, `<Pause>`, or `<Redirect>` verbs.
      * @param string $status The new status of the resource. Specifying `completed` will end the conference and hang up all participants.
+     *
+     * @return ConferenceUpdateResponse<HasRawResponse>
      */
     public function update(
         string $conferenceSid,
@@ -55,6 +60,8 @@ interface ConferencesContract
      * @param int $pageSize The number of records to be displayed on a page
      * @param string $pageToken used to request the next page of results
      * @param Status|value-of<Status> $status filters conferences by status
+     *
+     * @return ConferenceGetConferencesResponse<HasRawResponse>
      */
     public function retrieveConferences(
         string $accountSid,
@@ -72,6 +79,8 @@ interface ConferencesContract
      * @api
      *
      * @param string $accountSid
+     *
+     * @return ConferenceGetRecordingsResponse<HasRawResponse>
      */
     public function retrieveRecordings(
         string $conferenceSid,
@@ -83,6 +92,8 @@ interface ConferencesContract
      * @api
      *
      * @param string $accountSid
+     *
+     * @return ConferenceGetRecordingsJsonResponse<HasRawResponse>
      */
     public function retrieveRecordingsJson(
         string $conferenceSid,

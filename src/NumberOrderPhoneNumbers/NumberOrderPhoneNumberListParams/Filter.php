@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[country_code].
  *
- * @phpstan-type filter_alias = array{countryCode?: string|null}
+ * @phpstan-type filter_alias = array{countryCode?: string}
  */
 final class Filter implements BaseModel
 {

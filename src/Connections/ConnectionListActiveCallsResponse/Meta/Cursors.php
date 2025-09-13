@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type cursors_alias = array{after?: string|null, before?: string|null}
+ * @phpstan-type cursors_alias = array{after?: string, before?: string}
  */
 final class Cursors implements BaseModel
 {

@@ -11,9 +11,7 @@ use Telnyx\Messages\OutboundMessagePayload\From\LineType;
 
 /**
  * @phpstan-type from_alias = array{
- *   carrier?: string|null,
- *   lineType?: value-of<LineType>|null,
- *   phoneNumber?: string|null,
+ *   carrier?: string, lineType?: value-of<LineType>, phoneNumber?: string
  * }
  */
 final class From implements BaseModel

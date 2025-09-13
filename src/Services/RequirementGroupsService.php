@@ -6,6 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Conversion\ListOf;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\RequirementGroups\RequirementGroup;
 use Telnyx\RequirementGroups\RequirementGroupCreateParams;
@@ -37,6 +38,8 @@ final class RequirementGroupsService implements RequirementGroupsContract
      * @param PhoneNumberType|value-of<PhoneNumberType> $phoneNumberType
      * @param string $customerReference
      * @param list<RegulatoryRequirement> $regulatoryRequirements
+     *
+     * @return RequirementGroup<HasRawResponse>
      */
     public function create(
         $action,
@@ -71,6 +74,8 @@ final class RequirementGroupsService implements RequirementGroupsContract
      * @api
      *
      * Get a single requirement group by ID
+     *
+     * @return RequirementGroup<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -92,6 +97,8 @@ final class RequirementGroupsService implements RequirementGroupsContract
      *
      * @param string $customerReference Reference for the customer
      * @param list<RegulatoryRequirement1> $regulatoryRequirements
+     *
+     * @return RequirementGroup<HasRawResponse>
      */
     public function update(
         string $id,
@@ -149,6 +156,8 @@ final class RequirementGroupsService implements RequirementGroupsContract
      * @api
      *
      * Delete a requirement group by ID
+     *
+     * @return RequirementGroup<HasRawResponse>
      */
     public function delete(
         string $id,
@@ -167,6 +176,8 @@ final class RequirementGroupsService implements RequirementGroupsContract
      * @api
      *
      * Submit a Requirement Group for Approval
+     *
+     * @return RequirementGroup<HasRawResponse>
      */
     public function submitForApproval(
         string $id,

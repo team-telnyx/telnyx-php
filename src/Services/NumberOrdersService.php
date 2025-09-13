@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\NumberOrderPhoneNumbers\UpdateRegulatoryRequirement;
 use Telnyx\NumberOrders\NumberOrderCreateParams;
 use Telnyx\NumberOrders\NumberOrderCreateParams\PhoneNumber;
@@ -38,6 +39,8 @@ final class NumberOrdersService implements NumberOrdersContract
      * @param string $customerReference a customer reference string for customer look ups
      * @param string $messagingProfileID identifies the messaging profile associated with the phone number
      * @param list<PhoneNumber> $phoneNumbers
+     *
+     * @return NumberOrderNewResponse<HasRawResponse>
      */
     public function create(
         $billingGroupID = omit,
@@ -72,6 +75,8 @@ final class NumberOrdersService implements NumberOrdersContract
      * @api
      *
      * Get an existing phone number order.
+     *
+     * @return NumberOrderGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $numberOrderID,
@@ -93,6 +98,8 @@ final class NumberOrdersService implements NumberOrdersContract
      *
      * @param string $customerReference a customer reference string for customer look ups
      * @param list<UpdateRegulatoryRequirement> $regulatoryRequirements
+     *
+     * @return NumberOrderUpdateResponse<HasRawResponse>
      */
     public function update(
         string $numberOrderID,
@@ -125,6 +132,8 @@ final class NumberOrdersService implements NumberOrdersContract
      *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[status], filter[created_at], filter[phone_numbers_count], filter[customer_reference], filter[requirements_met]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     *
+     * @return NumberOrderListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,

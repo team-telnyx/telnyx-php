@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type acceptance_criteria = array{
- *   fieldType?: string|null, fieldValue?: string|null, localityLimit?: string|null
+ *   fieldType?: string, fieldValue?: string, localityLimit?: string
  * }
  */
 final class AcceptanceCriteria implements BaseModel

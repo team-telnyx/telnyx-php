@@ -10,7 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Storage\Buckets\Usage\UsageGetAPIUsageResponse\Data;
 
 /**
- * @phpstan-type usage_get_api_usage_response = array{data?: list<Data>|null}
+ * @phpstan-type usage_get_api_usage_response = array{data?: list<Data>}
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class UsageGetAPIUsageResponse implements BaseModel
 {

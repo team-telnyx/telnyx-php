@@ -12,16 +12,16 @@ use Telnyx\Core\Contracts\BaseModel;
  * An object representing the address information from when the order was submitted.
  *
  * @phpstan-type order_address = array{
- *   id?: string|null,
- *   administrativeArea?: string|null,
- *   businessName?: string|null,
- *   countryCode?: string|null,
- *   extendedAddress?: string|null,
- *   firstName?: string|null,
- *   lastName?: string|null,
- *   locality?: string|null,
- *   postalCode?: string|null,
- *   streetAddress?: string|null,
+ *   id?: string,
+ *   administrativeArea?: string,
+ *   businessName?: string,
+ *   countryCode?: string,
+ *   extendedAddress?: string,
+ *   firstName?: string,
+ *   lastName?: string,
+ *   locality?: string,
+ *   postalCode?: string,
+ *   streetAddress?: string,
  * }
  */
 final class OrderAddress implements BaseModel

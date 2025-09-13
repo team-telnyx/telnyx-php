@@ -11,12 +11,12 @@ use Telnyx\Webhooks\CallRecordingErrorWebhookEvent\Data\Payload\Reason;
 
 /**
  * @phpstan-type payload_alias = array{
- *   callControlID?: string|null,
- *   callLegID?: string|null,
- *   callSessionID?: string|null,
- *   clientState?: string|null,
- *   connectionID?: string|null,
- *   reason?: value-of<Reason>|null,
+ *   callControlID?: string,
+ *   callLegID?: string,
+ *   callSessionID?: string,
+ *   clientState?: string,
+ *   connectionID?: string,
+ *   reason?: value-of<Reason>,
  * }
  */
 final class Payload implements BaseModel

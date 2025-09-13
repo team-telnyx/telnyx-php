@@ -11,13 +11,13 @@ use Telnyx\WirelessBlocklists\WirelessBlocklist\Type;
 
 /**
  * @phpstan-type wireless_blocklist = array{
- *   id?: string|null,
- *   createdAt?: string|null,
- *   name?: string|null,
- *   recordType?: string|null,
- *   type?: value-of<Type>|null,
- *   updatedAt?: string|null,
- *   values?: list<string>|null,
+ *   id?: string,
+ *   createdAt?: string,
+ *   name?: string,
+ *   recordType?: string,
+ *   type?: value-of<Type>,
+ *   updatedAt?: string,
+ *   values?: list<string>,
  * }
  */
 final class WirelessBlocklist implements BaseModel

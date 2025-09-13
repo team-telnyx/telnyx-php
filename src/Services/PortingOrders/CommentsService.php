@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\PortingOrders;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PortingOrders\Comments\CommentCreateParams;
 use Telnyx\PortingOrders\Comments\CommentListParams;
 use Telnyx\PortingOrders\Comments\CommentListParams\Page;
@@ -28,6 +29,8 @@ final class CommentsService implements CommentsContract
      * Creates a new comment for a porting order.
      *
      * @param string $body
+     *
+     * @return CommentNewResponse<HasRawResponse>
      */
     public function create(
         string $id,
@@ -55,6 +58,8 @@ final class CommentsService implements CommentsContract
      * Returns a list of all comments of a porting order.
      *
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     *
+     * @return CommentListResponse<HasRawResponse>
      */
     public function list(
         string $id,

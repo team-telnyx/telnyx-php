@@ -14,8 +14,8 @@ use Telnyx\Core\Contracts\BaseModel;
  * Consolidated filter parameter (deepObject style). Originally: filter[cidr_block], filter[cidr_block][startswith], filter[cidr_block][endswith], filter[cidr_block][contains], filter[created_at]. Supports complex bracket operations for dynamic filtering.
  *
  * @phpstan-type filter_alias = array{
- *   cidrBlock?: string|null|CidrBlockPatternFilter,
- *   createdAt?: null|\DateTimeInterface|DateRangeFilter,
+ *   cidrBlock?: string|CidrBlockPatternFilter,
+ *   createdAt?: \DateTimeInterface|DateRangeFilter,
  * }
  */
 final class Filter implements BaseModel

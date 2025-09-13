@@ -13,18 +13,18 @@ use Telnyx\Reports\CdrUsageReports\CdrUsageReportFetchSyncResponse\Data\Status;
 
 /**
  * @phpstan-type data_alias = array{
- *   id?: string|null,
- *   aggregationType?: value-of<AggregationType>|null,
- *   connections?: list<int>|null,
- *   createdAt?: \DateTimeInterface|null,
- *   endTime?: \DateTimeInterface|null,
- *   productBreakdown?: value-of<ProductBreakdown>|null,
- *   recordType?: string|null,
- *   reportURL?: string|null,
- *   result?: array<string, mixed>|null,
- *   startTime?: \DateTimeInterface|null,
- *   status?: value-of<Status>|null,
- *   updatedAt?: \DateTimeInterface|null,
+ *   id?: string,
+ *   aggregationType?: value-of<AggregationType>,
+ *   connections?: list<int>,
+ *   createdAt?: \DateTimeInterface,
+ *   endTime?: \DateTimeInterface,
+ *   productBreakdown?: value-of<ProductBreakdown>,
+ *   recordType?: string,
+ *   reportURL?: string,
+ *   result?: array<string, mixed>,
+ *   startTime?: \DateTimeInterface,
+ *   status?: value-of<Status>,
+ *   updatedAt?: \DateTimeInterface,
  * }
  */
 final class Data implements BaseModel

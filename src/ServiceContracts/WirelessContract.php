@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\Wireless\WirelessGetRegionsResponse;
 
@@ -13,6 +14,8 @@ interface WirelessContract
      * @api
      *
      * @param string $product The product for which to list regions (e.g., 'public_ips', 'private_wireless_gateways').
+     *
+     * @return WirelessGetRegionsResponse<HasRawResponse>
      */
     public function retrieveRegions(
         $product,

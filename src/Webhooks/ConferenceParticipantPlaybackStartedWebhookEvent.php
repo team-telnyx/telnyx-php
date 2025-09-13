@@ -11,7 +11,7 @@ use Telnyx\Webhooks\ConferenceParticipantPlaybackStartedWebhookEvent\Data;
 
 /**
  * @phpstan-type conference_participant_playback_started_webhook_event = array{
- *   data?: Data|null
+ *   data?: Data
  * }
  */
 final class ConferenceParticipantPlaybackStartedWebhookEvent implements BaseModel

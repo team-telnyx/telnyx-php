@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type privacy_settings = array{dataRetention?: bool|null}
+ * @phpstan-type privacy_settings = array{dataRetention?: bool}
  */
 final class PrivacySettings implements BaseModel
 {

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentCreateParams;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentDeleteResponse;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentGetResponse;
@@ -35,6 +36,8 @@ final class GlobalIPAssignmentsService implements GlobalIPAssignmentsContract
      * @param string $globalIPID global IP ID
      * @param bool $isInMaintenance enable/disable BGP announcement
      * @param string $wireguardPeerID wireguard peer ID
+     *
+     * @return GlobalIPAssignmentNewResponse<HasRawResponse>
      */
     public function create(
         $globalIPID = omit,
@@ -65,6 +68,8 @@ final class GlobalIPAssignmentsService implements GlobalIPAssignmentsContract
      * @api
      *
      * Retrieve a Global IP assignment.
+     *
+     * @return GlobalIPAssignmentGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -85,6 +90,8 @@ final class GlobalIPAssignmentsService implements GlobalIPAssignmentsContract
      * Update a Global IP assignment.
      *
      * @param Body $body
+     *
+     * @return GlobalIPAssignmentUpdateResponse<HasRawResponse>
      */
     public function update(
         string $id,
@@ -112,6 +119,8 @@ final class GlobalIPAssignmentsService implements GlobalIPAssignmentsContract
      * List all Global IP assignments.
      *
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     *
+     * @return GlobalIPAssignmentListResponse<HasRawResponse>
      */
     public function list(
         $page = omit,
@@ -136,6 +145,8 @@ final class GlobalIPAssignmentsService implements GlobalIPAssignmentsContract
      * @api
      *
      * Delete a Global IP assignment.
+     *
+     * @return GlobalIPAssignmentDeleteResponse<HasRawResponse>
      */
     public function delete(
         string $id,

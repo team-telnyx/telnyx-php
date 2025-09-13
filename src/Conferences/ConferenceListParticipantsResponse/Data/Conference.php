@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Info about the conference that the participant is in.
  *
- * @phpstan-type conference_alias = array{id?: string|null, name?: string|null}
+ * @phpstan-type conference_alias = array{id?: string, name?: string}
  */
 final class Conference implements BaseModel
 {

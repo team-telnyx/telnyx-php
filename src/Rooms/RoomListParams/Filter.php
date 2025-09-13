@@ -14,9 +14,9 @@ use Telnyx\Rooms\RoomListParams\Filter\DateUpdatedAt;
  * Consolidated filter parameter (deepObject style). Originally: filter[date_created_at][eq], filter[date_created_at][gte], filter[date_created_at][lte], filter[date_updated_at][eq], filter[date_updated_at][gte], filter[date_updated_at][lte], filter[unique_name].
  *
  * @phpstan-type filter_alias = array{
- *   dateCreatedAt?: DateCreatedAt|null,
- *   dateUpdatedAt?: DateUpdatedAt|null,
- *   uniqueName?: string|null,
+ *   dateCreatedAt?: DateCreatedAt,
+ *   dateUpdatedAt?: DateUpdatedAt,
+ *   uniqueName?: string,
  * }
  */
 final class Filter implements BaseModel

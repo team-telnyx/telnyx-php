@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\PortingOrders;
 
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PortingOrders\ActivationJobs\ActivationJobGetResponse;
 use Telnyx\PortingOrders\ActivationJobs\ActivationJobListParams\Page;
 use Telnyx\PortingOrders\ActivationJobs\ActivationJobListResponse;
@@ -18,6 +19,8 @@ interface ActivationJobsContract
      * @api
      *
      * @param string $id
+     *
+     * @return ActivationJobGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $activationJobID,
@@ -30,6 +33,8 @@ interface ActivationJobsContract
      *
      * @param string $id
      * @param \DateTimeInterface $activateAt The desired activation time. The activation time should be between any of the activation windows.
+     *
+     * @return ActivationJobUpdateResponse<HasRawResponse>
      */
     public function update(
         string $activationJobID,
@@ -42,6 +47,8 @@ interface ActivationJobsContract
      * @api
      *
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     *
+     * @return ActivationJobListResponse<HasRawResponse>
      */
     public function list(
         string $id,

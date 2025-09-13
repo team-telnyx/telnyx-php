@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type from_alias = array{
- *   agentID?: string|null, agentName?: string|null, carrier?: string|null
+ *   agentID?: string, agentName?: string, carrier?: string
  * }
  */
 final class From implements BaseModel

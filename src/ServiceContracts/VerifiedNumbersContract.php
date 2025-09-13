@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\VerifiedNumbers\VerifiedNumberCreateParams\VerificationMethod;
 use Telnyx\VerifiedNumbers\VerifiedNumberDataWrapper;
@@ -20,6 +21,8 @@ interface VerifiedNumbersContract
      *
      * @param string $phoneNumber
      * @param VerificationMethod|value-of<VerificationMethod> $verificationMethod verification method
+     *
+     * @return VerifiedNumberNewResponse<HasRawResponse>
      */
     public function create(
         $phoneNumber,
@@ -29,6 +32,8 @@ interface VerifiedNumbersContract
 
     /**
      * @api
+     *
+     * @return VerifiedNumberDataWrapper<HasRawResponse>
      */
     public function retrieve(
         string $phoneNumber,
@@ -39,6 +44,8 @@ interface VerifiedNumbersContract
      * @api
      *
      * @param Page $page Consolidated page parameter (deepObject style). Use page[size] and page[number] in the query string. Originally: page[size], page[number]
+     *
+     * @return VerifiedNumberListResponse<HasRawResponse>
      */
     public function list(
         $page = omit,
@@ -47,6 +54,8 @@ interface VerifiedNumbersContract
 
     /**
      * @api
+     *
+     * @return VerifiedNumberDataWrapper<HasRawResponse>
      */
     public function delete(
         string $phoneNumber,

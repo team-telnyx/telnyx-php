@@ -10,9 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type function1_alias = array{
- *   name: string,
- *   description?: string|null,
- *   parameters?: array<string, mixed>|null,
+ *   name: string, description?: string, parameters?: array<string, mixed>
  * }
  */
 final class Function1 implements BaseModel

@@ -12,9 +12,7 @@ use Telnyx\Core\Conversion\ListOf;
 /**
  * Request details.
  *
- * @phpstan-type request_alias = array{
- *   headers?: list<list<string>>|null, url?: string|null
- * }
+ * @phpstan-type request_alias = array{headers?: list<list<string>>, url?: string}
  */
 final class Request implements BaseModel
 {

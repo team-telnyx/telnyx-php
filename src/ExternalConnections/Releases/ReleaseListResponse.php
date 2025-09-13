@@ -12,8 +12,12 @@ use Telnyx\ExternalConnections\Releases\ReleaseListResponse\Data;
 
 /**
  * @phpstan-type release_list_response = array{
- *   data?: list<Data>|null, meta?: ExternalVoiceIntegrationsPaginationMeta|null
+ *   data?: list<Data>, meta?: ExternalVoiceIntegrationsPaginationMeta
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class ReleaseListResponse implements BaseModel
 {

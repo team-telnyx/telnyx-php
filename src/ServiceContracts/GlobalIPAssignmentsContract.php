@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentDeleteResponse;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentGetResponse;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentListParams\Page;
@@ -23,6 +24,8 @@ interface GlobalIPAssignmentsContract
      * @param string $globalIPID global IP ID
      * @param bool $isInMaintenance enable/disable BGP announcement
      * @param string $wireguardPeerID wireguard peer ID
+     *
+     * @return GlobalIPAssignmentNewResponse<HasRawResponse>
      */
     public function create(
         $globalIPID = omit,
@@ -33,6 +36,8 @@ interface GlobalIPAssignmentsContract
 
     /**
      * @api
+     *
+     * @return GlobalIPAssignmentGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -43,6 +48,8 @@ interface GlobalIPAssignmentsContract
      * @api
      *
      * @param Body $body
+     *
+     * @return GlobalIPAssignmentUpdateResponse<HasRawResponse>
      */
     public function update(
         string $id,
@@ -54,6 +61,8 @@ interface GlobalIPAssignmentsContract
      * @api
      *
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     *
+     * @return GlobalIPAssignmentListResponse<HasRawResponse>
      */
     public function list(
         $page = omit,
@@ -62,6 +71,8 @@ interface GlobalIPAssignmentsContract
 
     /**
      * @api
+     *
+     * @return GlobalIPAssignmentDeleteResponse<HasRawResponse>
      */
     public function delete(
         string $id,

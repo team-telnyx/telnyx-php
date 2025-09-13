@@ -11,15 +11,15 @@ use Telnyx\Webhooks\CallAIGatherPartialResultsWebhookEvent\Data\Payload\MessageH
 
 /**
  * @phpstan-type payload_alias = array{
- *   callControlID?: string|null,
- *   callLegID?: string|null,
- *   callSessionID?: string|null,
- *   clientState?: string|null,
- *   connectionID?: string|null,
- *   from?: string|null,
- *   messageHistory?: list<MessageHistory>|null,
+ *   callControlID?: string,
+ *   callLegID?: string,
+ *   callSessionID?: string,
+ *   clientState?: string,
+ *   connectionID?: string,
+ *   from?: string,
+ *   messageHistory?: list<MessageHistory>,
  *   partialResults?: mixed,
- *   to?: string|null,
+ *   to?: string,
  * }
  */
 final class Payload implements BaseModel

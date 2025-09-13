@@ -11,12 +11,12 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type data_alias = array{
- *   availableCredit?: string|null,
- *   balance?: string|null,
- *   creditLimit?: string|null,
- *   currency?: string|null,
- *   pending?: string|null,
- *   recordType?: value-of<RecordType>|null,
+ *   availableCredit?: string,
+ *   balance?: string,
+ *   creditLimit?: string,
+ *   currency?: string,
+ *   pending?: string,
+ *   recordType?: value-of<RecordType>,
  * }
  */
 final class Data implements BaseModel

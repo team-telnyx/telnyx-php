@@ -11,8 +11,12 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type document_list_response = array{
- *   data?: list<DocServiceDocument>|null, meta?: PaginationMeta|null
+ *   data?: list<DocServiceDocument>, meta?: PaginationMeta
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class DocumentListResponse implements BaseModel
 {

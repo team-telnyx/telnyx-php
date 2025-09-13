@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\Porting;
 
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Porting\Events\EventGetResponse;
 use Telnyx\Porting\Events\EventListParams\Filter;
 use Telnyx\Porting\Events\EventListParams\Page;
@@ -16,6 +17,8 @@ interface EventsContract
 {
     /**
      * @api
+     *
+     * @return EventGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -27,6 +30,8 @@ interface EventsContract
      *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[type], filter[porting_order_id], filter[created_at][gte], filter[created_at][lte]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     *
+     * @return EventListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,

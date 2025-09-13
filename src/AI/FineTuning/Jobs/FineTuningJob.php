@@ -24,6 +24,10 @@ use Telnyx\Core\Contracts\BaseModel;
  *   trainedTokens: int|null,
  *   trainingFile: string,
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class FineTuningJob implements BaseModel
 {

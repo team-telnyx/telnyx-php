@@ -11,13 +11,13 @@ use Telnyx\PhoneNumbersRegulatoryRequirements\PhoneNumbersRegulatoryRequirementG
 
 /**
  * @phpstan-type regulatory_requirement = array{
- *   id?: string|null,
- *   acceptanceCriteria?: AcceptanceCriteria|null,
- *   description?: string|null,
- *   example?: string|null,
- *   fieldType?: string|null,
- *   label?: string|null,
- *   recordType?: string|null,
+ *   id?: string,
+ *   acceptanceCriteria?: AcceptanceCriteria,
+ *   description?: string,
+ *   example?: string,
+ *   fieldType?: string,
+ *   label?: string,
+ *   recordType?: string,
  * }
  */
 final class RegulatoryRequirement implements BaseModel

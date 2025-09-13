@@ -12,13 +12,13 @@ use Telnyx\SubNumberOrdersReport\SubNumberOrdersReportGetResponse\Data\Status;
 
 /**
  * @phpstan-type data_alias = array{
- *   id?: string|null,
- *   createdAt?: \DateTimeInterface|null,
- *   filters?: Filters|null,
- *   orderType?: string|null,
- *   status?: value-of<Status>|null,
- *   updatedAt?: \DateTimeInterface|null,
- *   userID?: string|null,
+ *   id?: string,
+ *   createdAt?: \DateTimeInterface,
+ *   filters?: Filters,
+ *   orderType?: string,
+ *   status?: value-of<Status>,
+ *   updatedAt?: \DateTimeInterface,
+ *   userID?: string,
  * }
  */
 final class Data implements BaseModel

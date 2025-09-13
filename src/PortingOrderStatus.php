@@ -13,7 +13,7 @@ use Telnyx\PortingOrderStatus\Value;
  * Porting order status.
  *
  * @phpstan-type porting_order_status = array{
- *   details?: list<PortingOrdersExceptionType>|null, value?: value-of<Value>|null
+ *   details?: list<PortingOrdersExceptionType>, value?: value-of<Value>
  * }
  */
 final class PortingOrderStatus implements BaseModel

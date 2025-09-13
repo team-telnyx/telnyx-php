@@ -14,11 +14,11 @@ use Telnyx\WebhookDeliveries\WebhookDeliveryListResponse\Data\Attempt\Status;
  * Webhook delivery attempt details.
  *
  * @phpstan-type attempt_alias = array{
- *   errors?: list<int>|null,
- *   finishedAt?: \DateTimeInterface|null,
- *   http?: HTTP|null,
- *   startedAt?: \DateTimeInterface|null,
- *   status?: value-of<Status>|null,
+ *   errors?: list<int>,
+ *   finishedAt?: \DateTimeInterface,
+ *   http?: HTTP,
+ *   startedAt?: \DateTimeInterface,
+ *   status?: value-of<Status>,
  * }
  */
 final class Attempt implements BaseModel

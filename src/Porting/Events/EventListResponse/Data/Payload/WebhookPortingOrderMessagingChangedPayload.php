@@ -13,10 +13,10 @@ use Telnyx\Porting\Events\EventListResponse\Data\Payload\WebhookPortingOrderMess
  * The webhook payload for the porting_order.messaging_changed event.
  *
  * @phpstan-type webhook_porting_order_messaging_changed_payload = array{
- *   id?: string|null,
- *   customerReference?: string|null,
- *   messaging?: Messaging|null,
- *   supportKey?: string|null,
+ *   id?: string,
+ *   customerReference?: string,
+ *   messaging?: Messaging,
+ *   supportKey?: string,
  * }
  */
 final class WebhookPortingOrderMessagingChangedPayload implements BaseModel

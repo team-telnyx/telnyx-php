@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type attempts_alias = array{contains?: string|null}
+ * @phpstan-type attempts_alias = array{contains?: string}
  */
 final class Attempts implements BaseModel
 {

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Portouts\PortoutGetResponse;
 use Telnyx\Portouts\PortoutListParams\Filter;
 use Telnyx\Portouts\PortoutListParams\Page;
@@ -20,6 +21,8 @@ interface PortoutsContract
 {
     /**
      * @api
+     *
+     * @return PortoutGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -31,6 +34,8 @@ interface PortoutsContract
      *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[carrier_name], filter[country_code], filter[country_code_in], filter[foc_date], filter[inserted_at], filter[phone_number], filter[pon], filter[ported_out_at], filter[spid], filter[status], filter[status_in], filter[support_key]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     *
+     * @return PortoutListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,
@@ -42,6 +47,8 @@ interface PortoutsContract
      * @api
      *
      * @param Filter1 $filter Consolidated filter parameter (deepObject style). Originally: filter[code], filter[code][in]
+     *
+     * @return PortoutListRejectionCodesResponse<HasRawResponse>
      */
     public function listRejectionCodes(
         string $portoutID,
@@ -56,6 +63,8 @@ interface PortoutsContract
      * @param string $id
      * @param string $reason Provide a reason if rejecting the port out request
      * @param bool $hostMessaging Indicates whether messaging services should be maintained with Telnyx after the port out completes
+     *
+     * @return PortoutUpdateStatusResponse<HasRawResponse>
      */
     public function updateStatus(
         Status|string $status,

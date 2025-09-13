@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Fqdns\FqdnDeleteResponse;
 use Telnyx\Fqdns\FqdnGetResponse;
 use Telnyx\Fqdns\FqdnListParams\Filter;
@@ -24,6 +25,8 @@ interface FqdnsContract
      * @param string $dnsRecordType The DNS record type for the FQDN. For cases where a port is not set, the DNS record type must be 'srv'. For cases where a port is set, the DNS record type must be 'a'. If the DNS record type is 'a' and a port is not specified, 5060 will be used.
      * @param string $fqdn FQDN represented by this resource
      * @param int|null $port port to use when connecting to this FQDN
+     *
+     * @return FqdnNewResponse<HasRawResponse>
      */
     public function create(
         $connectionID,
@@ -35,6 +38,8 @@ interface FqdnsContract
 
     /**
      * @api
+     *
+     * @return FqdnGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -48,6 +53,8 @@ interface FqdnsContract
      * @param string $dnsRecordType The DNS record type for the FQDN. For cases where a port is not set, the DNS record type must be 'srv'. For cases where a port is set, the DNS record type must be 'a'. If the DNS record type is 'a' and a port is not specified, 5060 will be used.
      * @param string $fqdn FQDN represented by this resource
      * @param int|null $port port to use when connecting to this FQDN
+     *
+     * @return FqdnUpdateResponse<HasRawResponse>
      */
     public function update(
         string $id,
@@ -63,6 +70,8 @@ interface FqdnsContract
      *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[connection_id], filter[fqdn], filter[port], filter[dns_record_type]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     *
+     * @return FqdnListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,
@@ -72,6 +81,8 @@ interface FqdnsContract
 
     /**
      * @api
+     *
+     * @return FqdnDeleteResponse<HasRawResponse>
      */
     public function delete(
         string $id,

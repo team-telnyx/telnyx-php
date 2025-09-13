@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\VerifiedNumbersContract;
 use Telnyx\Services\VerifiedNumbers\ActionsService;
@@ -30,7 +31,7 @@ final class VerifiedNumbersService implements VerifiedNumbersContract
      */
     public function __construct(private Client $client)
     {
-        $this->actions = new ActionsService($this->client);
+        $this->actions = new ActionsService($client);
     }
 
     /**
@@ -40,6 +41,8 @@ final class VerifiedNumbersService implements VerifiedNumbersContract
      *
      * @param string $phoneNumber
      * @param VerificationMethod|value-of<VerificationMethod> $verificationMethod verification method
+     *
+     * @return VerifiedNumberNewResponse<HasRawResponse>
      */
     public function create(
         $phoneNumber,
@@ -68,6 +71,8 @@ final class VerifiedNumbersService implements VerifiedNumbersContract
      * @api
      *
      * Retrieve a verified number
+     *
+     * @return VerifiedNumberDataWrapper<HasRawResponse>
      */
     public function retrieve(
         string $phoneNumber,
@@ -88,6 +93,8 @@ final class VerifiedNumbersService implements VerifiedNumbersContract
      * Gets a paginated list of Verified Numbers.
      *
      * @param Page $page Consolidated page parameter (deepObject style). Use page[size] and page[number] in the query string. Originally: page[size], page[number]
+     *
+     * @return VerifiedNumberListResponse<HasRawResponse>
      */
     public function list(
         $page = omit,
@@ -112,6 +119,8 @@ final class VerifiedNumbersService implements VerifiedNumbersContract
      * @api
      *
      * Delete a verified number
+     *
+     * @return VerifiedNumberDataWrapper<HasRawResponse>
      */
     public function delete(
         string $phoneNumber,

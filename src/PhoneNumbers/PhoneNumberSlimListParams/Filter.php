@@ -18,18 +18,18 @@ use Telnyx\PhoneNumbers\PhoneNumberSlimListParams\Filter\VoiceUsagePaymentMethod
  * Consolidated filter parameter (deepObject style). Originally: filter[tag], filter[phone_number], filter[status], filter[country_iso_alpha2], filter[connection_id], filter[voice.connection_name], filter[voice.usage_payment_method], filter[billing_group_id], filter[emergency_address_id], filter[customer_reference], filter[number_type], filter[source].
  *
  * @phpstan-type filter_alias = array{
- *   billingGroupID?: string|null,
- *   connectionID?: string|null,
- *   countryISOAlpha2?: string|null|list<string>,
- *   customerReference?: string|null,
- *   emergencyAddressID?: string|null,
- *   numberType?: NumberType|null,
- *   phoneNumber?: string|null,
- *   source?: value-of<Source>|null,
- *   status?: value-of<Status>|null,
- *   tag?: string|null,
- *   voiceConnectionName?: VoiceConnectionName|null,
- *   voiceUsagePaymentMethod?: value-of<VoiceUsagePaymentMethod>|null,
+ *   billingGroupID?: string,
+ *   connectionID?: string,
+ *   countryISOAlpha2?: string|list<string>,
+ *   customerReference?: string,
+ *   emergencyAddressID?: string,
+ *   numberType?: NumberType,
+ *   phoneNumber?: string,
+ *   source?: value-of<Source>,
+ *   status?: value-of<Status>,
+ *   tag?: string,
+ *   voiceConnectionName?: VoiceConnectionName,
+ *   voiceUsagePaymentMethod?: value-of<VoiceUsagePaymentMethod>,
  * }
  */
 final class Filter implements BaseModel

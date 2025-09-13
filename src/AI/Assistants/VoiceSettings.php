@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type voice_settings = array{
- *   voice: string, apiKeyRef?: string|null, voiceSpeed?: float|null
+ *   voice: string, apiKeyRef?: string, voiceSpeed?: float
  * }
  */
 final class VoiceSettings implements BaseModel

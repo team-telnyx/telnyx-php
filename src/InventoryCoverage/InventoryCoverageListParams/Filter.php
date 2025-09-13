@@ -16,14 +16,14 @@ use Telnyx\InventoryCoverage\InventoryCoverageListParams\Filter\PhoneNumberType;
  * Consolidated filter parameter (deepObject style). Originally: filter[npa], filter[nxx], filter[administrative_area], filter[phone_number_type], filter[country_code], filter[count], filter[features], filter[groupBy].
  *
  * @phpstan-type filter_alias = array{
- *   administrativeArea?: string|null,
- *   count?: bool|null,
- *   countryCode?: value-of<CountryCode>|null,
- *   features?: list<value-of<Feature>>|null,
- *   groupBy?: value-of<GroupBy>|null,
- *   npa?: int|null,
- *   nxx?: int|null,
- *   phoneNumberType?: value-of<PhoneNumberType>|null,
+ *   administrativeArea?: string,
+ *   count?: bool,
+ *   countryCode?: value-of<CountryCode>,
+ *   features?: list<value-of<Feature>>,
+ *   groupBy?: value-of<GroupBy>,
+ *   npa?: int,
+ *   nxx?: int,
+ *   phoneNumberType?: value-of<PhoneNumberType>,
  * }
  */
 final class Filter implements BaseModel

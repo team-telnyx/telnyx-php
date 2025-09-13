@@ -13,11 +13,11 @@ use Telnyx\NumberOrders\NumberOrderListParams\Filter\CreatedAt;
  * Consolidated filter parameter (deepObject style). Originally: filter[status], filter[created_at], filter[phone_numbers_count], filter[customer_reference], filter[requirements_met].
  *
  * @phpstan-type filter_alias = array{
- *   createdAt?: CreatedAt|null,
- *   customerReference?: string|null,
- *   phoneNumbersCount?: string|null,
- *   requirementsMet?: bool|null,
- *   status?: string|null,
+ *   createdAt?: CreatedAt,
+ *   customerReference?: string,
+ *   phoneNumbersCount?: string,
+ *   requirementsMet?: bool,
+ *   status?: string,
  * }
  */
 final class Filter implements BaseModel

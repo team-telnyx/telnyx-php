@@ -11,6 +11,7 @@ use Telnyx\Connections\ConnectionListParams\Filter;
 use Telnyx\Connections\ConnectionListParams\Page;
 use Telnyx\Connections\ConnectionListParams\Sort;
 use Telnyx\Connections\ConnectionListResponse;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 
 use const Telnyx\Core\OMIT as omit;
@@ -19,6 +20,8 @@ interface ConnectionsContract
 {
     /**
      * @api
+     *
+     * @return ConnectionGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -42,6 +45,8 @@ interface ConnectionsContract
      *     <code>connection_name</code> field in descending order.
      *   </li>
      * </ul> <br/> If not given, results are sorted by <code>created_at</code> in descending order.
+     *
+     * @return ConnectionListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,
@@ -54,6 +59,8 @@ interface ConnectionsContract
      * @api
      *
      * @param Page1 $page Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number]
+     *
+     * @return ConnectionListActiveCallsResponse<HasRawResponse>
      */
     public function listActiveCalls(
         string $connectionID,

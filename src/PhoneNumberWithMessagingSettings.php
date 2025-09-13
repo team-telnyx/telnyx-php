@@ -13,19 +13,19 @@ use Telnyx\PhoneNumberWithMessagingSettings\Type;
 
 /**
  * @phpstan-type phone_number_with_messaging_settings = array{
- *   id?: string|null,
- *   countryCode?: string|null,
- *   createdAt?: \DateTimeInterface|null,
- *   eligibleMessagingProducts?: list<string>|null,
- *   features?: Features|null,
- *   health?: NumberHealthMetrics|null,
- *   messagingProduct?: string|null,
+ *   id?: string,
+ *   countryCode?: string,
+ *   createdAt?: \DateTimeInterface,
+ *   eligibleMessagingProducts?: list<string>,
+ *   features?: Features,
+ *   health?: NumberHealthMetrics,
+ *   messagingProduct?: string,
  *   messagingProfileID?: string|null,
- *   phoneNumber?: string|null,
- *   recordType?: value-of<RecordType>|null,
- *   trafficType?: string|null,
- *   type?: value-of<Type>|null,
- *   updatedAt?: \DateTimeInterface|null,
+ *   phoneNumber?: string,
+ *   recordType?: value-of<RecordType>,
+ *   trafficType?: string,
+ *   type?: value-of<Type>,
+ *   updatedAt?: \DateTimeInterface,
  * }
  */
 final class PhoneNumberWithMessagingSettings implements BaseModel

@@ -13,9 +13,9 @@ use Telnyx\Core\Contracts\BaseModel;
  * Consolidated filter parameter (deepObject style). Originally: filter[ip_source], filter[ip_address], filter[created_at]. Supports complex bracket operations for dynamic filtering.
  *
  * @phpstan-type filter_alias = array{
- *   createdAt?: null|\DateTimeInterface|DateRangeFilter,
- *   ipAddress?: string|null,
- *   ipSource?: string|null,
+ *   createdAt?: \DateTimeInterface|DateRangeFilter,
+ *   ipAddress?: string,
+ *   ipSource?: string,
  * }
  */
 final class Filter implements BaseModel

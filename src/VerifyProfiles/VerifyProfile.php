@@ -14,17 +14,17 @@ use Telnyx\VerifyProfiles\VerifyProfile\SMS;
 
 /**
  * @phpstan-type verify_profile = array{
- *   id?: string|null,
- *   call?: Call|null,
- *   createdAt?: string|null,
- *   flashcall?: Flashcall|null,
- *   language?: string|null,
- *   name?: string|null,
- *   recordType?: value-of<RecordType>|null,
- *   sms?: SMS|null,
- *   updatedAt?: string|null,
- *   webhookFailoverURL?: string|null,
- *   webhookURL?: string|null,
+ *   id?: string,
+ *   call?: Call,
+ *   createdAt?: string,
+ *   flashcall?: Flashcall,
+ *   language?: string,
+ *   name?: string,
+ *   recordType?: value-of<RecordType>,
+ *   sms?: SMS,
+ *   updatedAt?: string,
+ *   webhookFailoverURL?: string,
+ *   webhookURL?: string,
  * }
  */
 final class VerifyProfile implements BaseModel

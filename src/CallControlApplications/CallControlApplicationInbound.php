@@ -11,10 +11,10 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type call_control_application_inbound = array{
- *   channelLimit?: int|null,
- *   shakenStirEnabled?: bool|null,
- *   sipSubdomain?: string|null,
- *   sipSubdomainReceiveSettings?: value-of<SipSubdomainReceiveSettings>|null,
+ *   channelLimit?: int,
+ *   shakenStirEnabled?: bool,
+ *   sipSubdomain?: string,
+ *   sipSubdomainReceiveSettings?: value-of<SipSubdomainReceiveSettings>,
  * }
  */
 final class CallControlApplicationInbound implements BaseModel

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PortabilityChecks\PortabilityCheckRunParams;
 use Telnyx\PortabilityChecks\PortabilityCheckRunResponse;
 use Telnyx\RequestOptions;
@@ -25,6 +26,8 @@ final class PortabilityChecksService implements PortabilityChecksContract
      * Runs a portability check, returning the results immediately.
      *
      * @param list<string> $phoneNumbers The list of +E.164 formatted phone numbers to check for portability
+     *
+     * @return PortabilityCheckRunResponse<HasRawResponse>
      */
     public function run(
         $phoneNumbers = omit,

@@ -18,33 +18,37 @@ use Telnyx\Messages\MessageCancelScheduledResponse\Type;
 
 /**
  * @phpstan-type message_cancel_scheduled_response = array{
- *   id?: string|null,
- *   completedAt?: \DateTimeInterface|null,
+ *   id?: string,
+ *   completedAt?: \DateTimeInterface,
  *   cost?: Cost|null,
  *   costBreakdown?: CostBreakdown|null,
- *   direction?: value-of<Direction>|null,
- *   encoding?: string|null,
- *   errors?: list<MessagingError>|null,
- *   from?: From|null,
- *   media?: list<Media>|null,
- *   messagingProfileID?: string|null,
- *   organizationID?: string|null,
- *   parts?: int|null,
- *   receivedAt?: \DateTimeInterface|null,
- *   recordType?: value-of<RecordType>|null,
- *   sentAt?: \DateTimeInterface|null,
+ *   direction?: value-of<Direction>,
+ *   encoding?: string,
+ *   errors?: list<MessagingError>,
+ *   from?: From,
+ *   media?: list<Media>,
+ *   messagingProfileID?: string,
+ *   organizationID?: string,
+ *   parts?: int,
+ *   receivedAt?: \DateTimeInterface,
+ *   recordType?: value-of<RecordType>,
+ *   sentAt?: \DateTimeInterface,
  *   subject?: string|null,
- *   tags?: list<string>|null,
- *   tcrCampaignBillable?: bool|null,
+ *   tags?: list<string>,
+ *   tcrCampaignBillable?: bool,
  *   tcrCampaignID?: string|null,
  *   tcrCampaignRegistered?: string|null,
- *   text?: string|null,
- *   to?: list<To>|null,
- *   type?: value-of<Type>|null,
+ *   text?: string,
+ *   to?: list<To>,
+ *   type?: value-of<Type>,
  *   validUntil?: \DateTimeInterface|null,
  *   webhookFailoverURL?: string|null,
  *   webhookURL?: string|null,
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class MessageCancelScheduledResponse implements BaseModel
 {

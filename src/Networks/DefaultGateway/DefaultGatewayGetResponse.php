@@ -12,8 +12,12 @@ use Telnyx\Networks\DefaultGateway\DefaultGatewayGetResponse\Data;
 
 /**
  * @phpstan-type default_gateway_get_response = array{
- *   data?: list<Data>|null, meta?: PaginationMeta|null
+ *   data?: list<STAINLESS_FIXME_data_alias>, meta?: PaginationMeta
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class DefaultGatewayGetResponse implements BaseModel
 {

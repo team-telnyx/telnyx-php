@@ -12,11 +12,11 @@ use Telnyx\PortingOrders\PortingOrderGetRequirementsResponse\Data\RequirementTyp
 
 /**
  * @phpstan-type data_alias = array{
- *   fieldType?: value-of<FieldType>|null,
- *   fieldValue?: string|null,
- *   recordType?: string|null,
- *   requirementStatus?: string|null,
- *   requirementType?: RequirementType|null,
+ *   fieldType?: value-of<FieldType>,
+ *   fieldValue?: string,
+ *   recordType?: string,
+ *   requirementStatus?: string,
+ *   requirementType?: RequirementType,
  * }
  */
 final class Data implements BaseModel

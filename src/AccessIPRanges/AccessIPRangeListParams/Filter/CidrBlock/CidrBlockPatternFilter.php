@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * CIDR block pattern matching operations.
  *
  * @phpstan-type cidr_block_pattern_filter = array{
- *   contains?: string|null, endswith?: string|null, startswith?: string|null
+ *   contains?: string, endswith?: string, startswith?: string
  * }
  */
 final class CidrBlockPatternFilter implements BaseModel

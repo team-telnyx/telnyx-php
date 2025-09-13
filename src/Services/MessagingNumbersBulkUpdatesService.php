@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\MessagingNumbersBulkUpdates\MessagingNumbersBulkUpdateCreateParams;
 use Telnyx\MessagingNumbersBulkUpdates\MessagingNumbersBulkUpdateGetResponse;
 use Telnyx\MessagingNumbersBulkUpdates\MessagingNumbersBulkUpdateNewResponse;
@@ -28,6 +29,8 @@ final class MessagingNumbersBulkUpdatesService implements MessagingNumbersBulkUp
      * * Set this field to `""` to unassign each number from their respective messaging profile
      * * Set this field to a quoted UUID of a messaging profile to assign these numbers to that messaging profile
      * @param list<string> $numbers the list of phone numbers to update
+     *
+     * @return MessagingNumbersBulkUpdateNewResponse<HasRawResponse>
      */
     public function create(
         $messagingProfileID,
@@ -53,6 +56,8 @@ final class MessagingNumbersBulkUpdatesService implements MessagingNumbersBulkUp
      * @api
      *
      * Retrieve bulk update status
+     *
+     * @return MessagingNumbersBulkUpdateGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $orderID,

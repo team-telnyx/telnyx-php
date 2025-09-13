@@ -12,11 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number].
  *
  * @phpstan-type page_alias = array{
- *   after?: string|null,
- *   before?: string|null,
- *   limit?: int|null,
- *   number?: int|null,
- *   size?: int|null,
+ *   after?: string, before?: string, limit?: int, number?: int, size?: int
  * }
  */
 final class Page implements BaseModel

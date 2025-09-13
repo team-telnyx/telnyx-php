@@ -12,12 +12,12 @@ use Telnyx\Core\Contracts\BaseModel;
  * An object representing the available notifications.
  *
  * @phpstan-type data_alias = array{
- *   id?: string|null,
- *   createdAt?: \DateTimeInterface|null,
- *   enabled?: bool|null,
- *   name?: string|null,
- *   notificationCategory?: string|null,
- *   updatedAt?: \DateTimeInterface|null,
+ *   id?: string,
+ *   createdAt?: \DateTimeInterface,
+ *   enabled?: bool,
+ *   name?: string,
+ *   notificationCategory?: string,
+ *   updatedAt?: \DateTimeInterface,
  * }
  */
 final class Data implements BaseModel

@@ -13,10 +13,10 @@ use Telnyx\NumberReservations\NumberReservationListParams\Filter\CreatedAt;
  * Consolidated filter parameter (deepObject style). Originally: filter[status], filter[created_at], filter[phone_numbers.phone_number], filter[customer_reference].
  *
  * @phpstan-type filter_alias = array{
- *   createdAt?: CreatedAt|null,
- *   customerReference?: string|null,
- *   phoneNumbersPhoneNumber?: string|null,
- *   status?: string|null,
+ *   createdAt?: CreatedAt,
+ *   customerReference?: string,
+ *   phoneNumbersPhoneNumber?: string,
+ *   status?: string,
  * }
  */
 final class Filter implements BaseModel

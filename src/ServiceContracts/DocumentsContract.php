@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Documents\DocumentDeleteResponse;
 use Telnyx\Documents\DocumentGenerateDownloadLinkResponse;
 use Telnyx\Documents\DocumentGetResponse;
@@ -21,6 +22,8 @@ interface DocumentsContract
 {
     /**
      * @api
+     *
+     * @return DocumentGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -32,6 +35,8 @@ interface DocumentsContract
      *
      * @param string $customerReference optional reference string for customer tracking
      * @param string $filename the filename of the document
+     *
+     * @return DocumentUpdateResponse<HasRawResponse>
      */
     public function update(
         string $id,
@@ -46,6 +51,8 @@ interface DocumentsContract
      * @param Filter $filter Consolidated filter parameter for documents (deepObject style). Originally: filter[filename][contains], filter[customer_reference][eq], filter[customer_reference][in][], filter[created_at][gt], filter[created_at][lt]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param list<Sort|value-of<Sort>> $sort Consolidated sort parameter for documents (deepObject style). Originally: sort[]
+     *
+     * @return DocumentListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,
@@ -56,6 +63,8 @@ interface DocumentsContract
 
     /**
      * @api
+     *
+     * @return DocumentDeleteResponse<HasRawResponse>
      */
     public function delete(
         string $id,
@@ -72,6 +81,8 @@ interface DocumentsContract
 
     /**
      * @api
+     *
+     * @return DocumentGenerateDownloadLinkResponse<HasRawResponse>
      */
     public function generateDownloadLink(
         string $id,
@@ -85,6 +96,8 @@ interface DocumentsContract
      * @param string $customerReference a customer reference string for customer look ups
      * @param string $filename the filename of the document
      * @param string $file the Base64 encoded contents of the file you are uploading
+     *
+     * @return DocumentUploadResponse<HasRawResponse>
      */
     public function upload(
         $url,

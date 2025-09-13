@@ -11,9 +11,11 @@ use Telnyx\Invoices\InvoiceListResponse\Data;
 use Telnyx\Invoices\InvoiceListResponse\Meta;
 
 /**
- * @phpstan-type invoice_list_response = array{
- *   data?: list<Data>|null, meta?: Meta|null
- * }
+ * @phpstan-type invoice_list_response = array{data?: list<Data>, meta?: Meta}
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class InvoiceListResponse implements BaseModel
 {

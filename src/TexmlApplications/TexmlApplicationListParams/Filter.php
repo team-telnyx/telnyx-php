@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * Consolidated filter parameter (deepObject style). Originally: filter[outbound_voice_profile_id], filter[friendly_name].
  *
  * @phpstan-type filter_alias = array{
- *   friendlyName?: string|null, outboundVoiceProfileID?: string|null
+ *   friendlyName?: string, outboundVoiceProfileID?: string
  * }
  */
 final class Filter implements BaseModel

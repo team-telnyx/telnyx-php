@@ -15,21 +15,21 @@ use Telnyx\Recordings\RecordingResponseData\Status;
 
 /**
  * @phpstan-type recording_response_data = array{
- *   id?: string|null,
- *   callControlID?: string|null,
- *   callLegID?: string|null,
- *   callSessionID?: string|null,
- *   channels?: value-of<Channels>|null,
- *   conferenceID?: string|null,
- *   createdAt?: string|null,
- *   downloadURLs?: DownloadURLs|null,
- *   durationMillis?: int|null,
- *   recordType?: value-of<RecordType>|null,
- *   recordingEndedAt?: string|null,
- *   recordingStartedAt?: string|null,
- *   source?: value-of<Source>|null,
- *   status?: value-of<Status>|null,
- *   updatedAt?: string|null,
+ *   id?: string,
+ *   callControlID?: string,
+ *   callLegID?: string,
+ *   callSessionID?: string,
+ *   channels?: value-of<Channels>,
+ *   conferenceID?: string,
+ *   createdAt?: string,
+ *   downloadURLs?: DownloadURLs,
+ *   durationMillis?: int,
+ *   recordType?: value-of<RecordType>,
+ *   recordingEndedAt?: string,
+ *   recordingStartedAt?: string,
+ *   source?: value-of<Source>,
+ *   status?: value-of<Status>,
+ *   updatedAt?: string,
  * }
  */
 final class RecordingResponseData implements BaseModel
