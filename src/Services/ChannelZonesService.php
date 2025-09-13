@@ -10,6 +10,7 @@ use Telnyx\ChannelZones\ChannelZoneListResponse;
 use Telnyx\ChannelZones\ChannelZoneUpdateParams;
 use Telnyx\ChannelZones\ChannelZoneUpdateResponse;
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ChannelZonesContract;
@@ -31,14 +32,35 @@ final class ChannelZonesService implements ChannelZonesContract
      * @param int $channels The number of reserved channels
      *
      * @return ChannelZoneUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function update(
         string $channelZoneID,
         $channels,
         ?RequestOptions $requestOptions = null
     ): ChannelZoneUpdateResponse {
+        $params = ['channels' => $channels];
+
+        return $this->updateRaw($channelZoneID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ChannelZoneUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $channelZoneID,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): ChannelZoneUpdateResponse {
         [$parsed, $options] = ChannelZoneUpdateParams::parseRequest(
-            ['channels' => $channels],
+            $params,
             $requestOptions
         );
 
@@ -60,13 +82,33 @@ final class ChannelZonesService implements ChannelZonesContract
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @return ChannelZoneListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $page = omit,
         ?RequestOptions $requestOptions = null
     ): ChannelZoneListResponse {
+        $params = ['page' => $page];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ChannelZoneListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): ChannelZoneListResponse {
         [$parsed, $options] = ChannelZoneListParams::parseRequest(
-            ['page' => $page],
+            $params,
             $requestOptions
         );
 

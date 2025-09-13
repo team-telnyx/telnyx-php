@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\CredentialConnections\ConnectionRtcpSettings;
@@ -66,6 +67,8 @@ final class IPConnectionsService implements IPConnectionsContract
      * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
      *
      * @return IPConnectionNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $active = omit,
@@ -89,29 +92,47 @@ final class IPConnectionsService implements IPConnectionsContract
         $webhookTimeoutSecs = omit,
         ?RequestOptions $requestOptions = null,
     ): IPConnectionNewResponse {
+        $params = [
+            'active' => $active,
+            'anchorsiteOverride' => $anchorsiteOverride,
+            'androidPushCredentialID' => $androidPushCredentialID,
+            'connectionName' => $connectionName,
+            'defaultOnHoldComfortNoiseEnabled' => $defaultOnHoldComfortNoiseEnabled,
+            'dtmfType' => $dtmfType,
+            'encodeContactHeaderEnabled' => $encodeContactHeaderEnabled,
+            'encryptedMedia' => $encryptedMedia,
+            'inbound' => $inbound,
+            'iosPushCredentialID' => $iosPushCredentialID,
+            'onnetT38PassthroughEnabled' => $onnetT38PassthroughEnabled,
+            'outbound' => $outbound,
+            'rtcpSettings' => $rtcpSettings,
+            'tags' => $tags,
+            'transportProtocol' => $transportProtocol,
+            'webhookAPIVersion' => $webhookAPIVersion,
+            'webhookEventFailoverURL' => $webhookEventFailoverURL,
+            'webhookEventURL' => $webhookEventURL,
+            'webhookTimeoutSecs' => $webhookTimeoutSecs,
+        ];
+
+        return $this->createRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return IPConnectionNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): IPConnectionNewResponse {
         [$parsed, $options] = IPConnectionCreateParams::parseRequest(
-            [
-                'active' => $active,
-                'anchorsiteOverride' => $anchorsiteOverride,
-                'androidPushCredentialID' => $androidPushCredentialID,
-                'connectionName' => $connectionName,
-                'defaultOnHoldComfortNoiseEnabled' => $defaultOnHoldComfortNoiseEnabled,
-                'dtmfType' => $dtmfType,
-                'encodeContactHeaderEnabled' => $encodeContactHeaderEnabled,
-                'encryptedMedia' => $encryptedMedia,
-                'inbound' => $inbound,
-                'iosPushCredentialID' => $iosPushCredentialID,
-                'onnetT38PassthroughEnabled' => $onnetT38PassthroughEnabled,
-                'outbound' => $outbound,
-                'rtcpSettings' => $rtcpSettings,
-                'tags' => $tags,
-                'transportProtocol' => $transportProtocol,
-                'webhookAPIVersion' => $webhookAPIVersion,
-                'webhookEventFailoverURL' => $webhookEventFailoverURL,
-                'webhookEventURL' => $webhookEventURL,
-                'webhookTimeoutSecs' => $webhookTimeoutSecs,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -130,9 +151,28 @@ final class IPConnectionsService implements IPConnectionsContract
      * Retrieves the details of an existing ip connection.
      *
      * @return IPConnectionGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): IPConnectionGetResponse {
+        $params = [];
+
+        return $this->retrieveRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return IPConnectionGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): IPConnectionGetResponse {
         // @phpstan-ignore-next-line;
@@ -170,6 +210,8 @@ final class IPConnectionsService implements IPConnectionsContract
      * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
      *
      * @return IPConnectionUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function update(
         string $id,
@@ -194,29 +236,48 @@ final class IPConnectionsService implements IPConnectionsContract
         $webhookTimeoutSecs = omit,
         ?RequestOptions $requestOptions = null,
     ): IPConnectionUpdateResponse {
+        $params = [
+            'active' => $active,
+            'anchorsiteOverride' => $anchorsiteOverride,
+            'androidPushCredentialID' => $androidPushCredentialID,
+            'connectionName' => $connectionName,
+            'defaultOnHoldComfortNoiseEnabled' => $defaultOnHoldComfortNoiseEnabled,
+            'dtmfType' => $dtmfType,
+            'encodeContactHeaderEnabled' => $encodeContactHeaderEnabled,
+            'encryptedMedia' => $encryptedMedia,
+            'inbound' => $inbound,
+            'iosPushCredentialID' => $iosPushCredentialID,
+            'onnetT38PassthroughEnabled' => $onnetT38PassthroughEnabled,
+            'outbound' => $outbound,
+            'rtcpSettings' => $rtcpSettings,
+            'tags' => $tags,
+            'transportProtocol' => $transportProtocol,
+            'webhookAPIVersion' => $webhookAPIVersion,
+            'webhookEventFailoverURL' => $webhookEventFailoverURL,
+            'webhookEventURL' => $webhookEventURL,
+            'webhookTimeoutSecs' => $webhookTimeoutSecs,
+        ];
+
+        return $this->updateRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return IPConnectionUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): IPConnectionUpdateResponse {
         [$parsed, $options] = IPConnectionUpdateParams::parseRequest(
-            [
-                'active' => $active,
-                'anchorsiteOverride' => $anchorsiteOverride,
-                'androidPushCredentialID' => $androidPushCredentialID,
-                'connectionName' => $connectionName,
-                'defaultOnHoldComfortNoiseEnabled' => $defaultOnHoldComfortNoiseEnabled,
-                'dtmfType' => $dtmfType,
-                'encodeContactHeaderEnabled' => $encodeContactHeaderEnabled,
-                'encryptedMedia' => $encryptedMedia,
-                'inbound' => $inbound,
-                'iosPushCredentialID' => $iosPushCredentialID,
-                'onnetT38PassthroughEnabled' => $onnetT38PassthroughEnabled,
-                'outbound' => $outbound,
-                'rtcpSettings' => $rtcpSettings,
-                'tags' => $tags,
-                'transportProtocol' => $transportProtocol,
-                'webhookAPIVersion' => $webhookAPIVersion,
-                'webhookEventFailoverURL' => $webhookEventFailoverURL,
-                'webhookEventURL' => $webhookEventURL,
-                'webhookTimeoutSecs' => $webhookTimeoutSecs,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -250,6 +311,8 @@ final class IPConnectionsService implements IPConnectionsContract
      * </ul> <br/> If not given, results are sorted by <code>created_at</code> in descending order.
      *
      * @return IPConnectionListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
@@ -257,8 +320,26 @@ final class IPConnectionsService implements IPConnectionsContract
         $sort = omit,
         ?RequestOptions $requestOptions = null,
     ): IPConnectionListResponse {
+        $params = ['filter' => $filter, 'page' => $page, 'sort' => $sort];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return IPConnectionListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): IPConnectionListResponse {
         [$parsed, $options] = IPConnectionListParams::parseRequest(
-            ['filter' => $filter, 'page' => $page, 'sort' => $sort],
+            $params,
             $requestOptions
         );
 
@@ -278,9 +359,28 @@ final class IPConnectionsService implements IPConnectionsContract
      * Deletes an existing IP connection.
      *
      * @return IPConnectionDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function delete(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): IPConnectionDeleteResponse {
+        $params = [];
+
+        return $this->deleteRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return IPConnectionDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): IPConnectionDeleteResponse {
         // @phpstan-ignore-next-line;

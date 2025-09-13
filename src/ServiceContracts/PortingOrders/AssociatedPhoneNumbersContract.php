@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\PortingOrders;
 
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberCreateParams\Action;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberCreateParams\PhoneNumberRange;
@@ -26,6 +27,8 @@ interface AssociatedPhoneNumbersContract
      * @param PhoneNumberRange $phoneNumberRange
      *
      * @return AssociatedPhoneNumberNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         string $portingOrderID,
@@ -37,11 +40,28 @@ interface AssociatedPhoneNumbersContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return AssociatedPhoneNumberNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        string $portingOrderID,
+        array $params,
+        ?RequestOptions $requestOptions = null,
+    ): AssociatedPhoneNumberNewResponse;
+
+    /**
+     * @api
+     *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[phone_number], filter[action]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param Sort $sort Consolidated sort parameter (deepObject style). Originally: sort[value]
      *
      * @return AssociatedPhoneNumberListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         string $portingOrderID,
@@ -54,13 +74,45 @@ interface AssociatedPhoneNumbersContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return AssociatedPhoneNumberListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        string $portingOrderID,
+        array $params,
+        ?RequestOptions $requestOptions = null,
+    ): AssociatedPhoneNumberListResponse;
+
+    /**
+     * @api
+     *
      * @param string $portingOrderID
      *
      * @return AssociatedPhoneNumberDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function delete(
         string $id,
         $portingOrderID,
+        ?RequestOptions $requestOptions = null
+    ): AssociatedPhoneNumberDeleteResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return AssociatedPhoneNumberDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $id,
+        array $params,
         ?RequestOptions $requestOptions = null
     ): AssociatedPhoneNumberDeleteResponse;
 }

@@ -20,6 +20,7 @@ use Telnyx\CallControlApplications\CallControlApplicationUpdateParams\Anchorsite
 use Telnyx\CallControlApplications\CallControlApplicationUpdateParams\DtmfType as DtmfType1;
 use Telnyx\CallControlApplications\CallControlApplicationUpdateParams\WebhookAPIVersion as WebhookAPIVersion1;
 use Telnyx\CallControlApplications\CallControlApplicationUpdateResponse;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 
@@ -45,6 +46,8 @@ interface CallControlApplicationsContract
      * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
      *
      * @return CallControlApplicationNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $applicationName,
@@ -66,10 +69,39 @@ interface CallControlApplicationsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return CallControlApplicationNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): CallControlApplicationNewResponse;
+
+    /**
+     * @api
+     *
      * @return CallControlApplicationGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): CallControlApplicationGetResponse;
+
+    /**
+     * @api
+     *
+     * @return CallControlApplicationGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): CallControlApplicationGetResponse;
 
@@ -92,6 +124,8 @@ interface CallControlApplicationsContract
      * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
      *
      * @return CallControlApplicationUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function update(
         string $id,
@@ -115,6 +149,21 @@ interface CallControlApplicationsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return CallControlApplicationUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): CallControlApplicationUpdateResponse;
+
+    /**
+     * @api
+     *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[application_name][contains], filter[outbound.outbound_voice_profile_id], filter[leg_id], filter[application_session_id], filter[connection_id], filter[product], filter[failed], filter[from], filter[to], filter[name], filter[type], filter[occurred_at][eq/gt/gte/lt/lte], filter[status]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number]
      * @param Sort|value-of<Sort> $sort Specifies the sort order for results. By default sorting direction is ascending. To have the results sorted in descending order add the <code> -</code> prefix.<br/><br/>
@@ -131,6 +180,8 @@ interface CallControlApplicationsContract
      * </ul> <br/> If not given, results are sorted by <code>created_at</code> in descending order.
      *
      * @return CallControlApplicationListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
@@ -142,10 +193,39 @@ interface CallControlApplicationsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return CallControlApplicationListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): CallControlApplicationListResponse;
+
+    /**
+     * @api
+     *
      * @return CallControlApplicationDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function delete(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): CallControlApplicationDeleteResponse;
+
+    /**
+     * @api
+     *
+     * @return CallControlApplicationDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): CallControlApplicationDeleteResponse;
 }

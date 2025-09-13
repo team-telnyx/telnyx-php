@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\Reports;
 
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReportCreateParams\AggregationType;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReportDeleteResponse;
@@ -28,6 +29,8 @@ interface MdrUsageReportsContract
      * @param string $profiles
      *
      * @return MdrUsageReportNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $aggregationType,
@@ -40,7 +43,23 @@ interface MdrUsageReportsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return MdrUsageReportNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): MdrUsageReportNewResponse;
+
+    /**
+     * @api
+     *
      * @return MdrUsageReportGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
@@ -50,9 +69,24 @@ interface MdrUsageReportsContract
     /**
      * @api
      *
+     * @return MdrUsageReportGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        mixed $params,
+        ?RequestOptions $requestOptions = null
+    ): MdrUsageReportGetResponse;
+
+    /**
+     * @api
+     *
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
      * @return MdrUsageReportListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $page = omit,
@@ -62,10 +96,39 @@ interface MdrUsageReportsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return MdrUsageReportListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): MdrUsageReportListResponse;
+
+    /**
+     * @api
+     *
      * @return MdrUsageReportDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function delete(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): MdrUsageReportDeleteResponse;
+
+    /**
+     * @api
+     *
+     * @return MdrUsageReportDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): MdrUsageReportDeleteResponse;
 
@@ -78,6 +141,8 @@ interface MdrUsageReportsContract
      * @param \DateTimeInterface $startDate
      *
      * @return MdrUsageReportFetchSyncResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function fetchSync(
         $aggregationType,
@@ -85,5 +150,19 @@ interface MdrUsageReportsContract
         $profiles = omit,
         $startDate = omit,
         ?RequestOptions $requestOptions = null,
+    ): MdrUsageReportFetchSyncResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return MdrUsageReportFetchSyncResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function fetchSyncRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
     ): MdrUsageReportFetchSyncResponse;
 }

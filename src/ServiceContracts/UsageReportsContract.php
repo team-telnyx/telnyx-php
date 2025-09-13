@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\UsageReports\UsageReportGetOptionsResponse;
@@ -32,6 +33,8 @@ interface UsageReportsContract
      * @param string $authorizationBearer Authenticates the request with your Telnyx API V2 KEY
      *
      * @return UsageReportListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $dimensions,
@@ -52,14 +55,44 @@ interface UsageReportsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return UsageReportListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): UsageReportListResponse;
+
+    /**
+     * @api
+     *
      * @param string $product Options (dimensions and metrics) for a given product. If none specified, all products will be returned.
      * @param string $authorizationBearer Authenticates the request with your Telnyx API V2 KEY
      *
      * @return UsageReportGetOptionsResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function getOptions(
         $product = omit,
         $authorizationBearer = omit,
         ?RequestOptions $requestOptions = null,
+    ): UsageReportGetOptionsResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return UsageReportGetOptionsResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function getOptionsRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
     ): UsageReportGetOptionsResponse;
 }

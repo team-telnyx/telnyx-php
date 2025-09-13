@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PhoneNumbers\PhoneNumberDeleteResponse;
 use Telnyx\PhoneNumbers\PhoneNumberGetResponse;
@@ -82,9 +83,28 @@ final class PhoneNumbersService implements PhoneNumbersContract
      * Retrieve a phone number
      *
      * @return PhoneNumberGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): PhoneNumberGetResponse {
+        $params = [];
+
+        return $this->retrieveRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return PhoneNumberGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): PhoneNumberGetResponse {
         // @phpstan-ignore-next-line;
@@ -109,6 +129,8 @@ final class PhoneNumbersService implements PhoneNumbersContract
      * @param list<string> $tags a list of user-assigned tags to help organize phone numbers
      *
      * @return PhoneNumberUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function update(
         string $id,
@@ -120,16 +142,35 @@ final class PhoneNumbersService implements PhoneNumbersContract
         $tags = omit,
         ?RequestOptions $requestOptions = null,
     ): PhoneNumberUpdateResponse {
+        $params = [
+            'billingGroupID' => $billingGroupID,
+            'connectionID' => $connectionID,
+            'customerReference' => $customerReference,
+            'externalPin' => $externalPin,
+            'hdVoiceEnabled' => $hdVoiceEnabled,
+            'tags' => $tags,
+        ];
+
+        return $this->updateRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return PhoneNumberUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): PhoneNumberUpdateResponse {
         [$parsed, $options] = PhoneNumberUpdateParams::parseRequest(
-            [
-                'billingGroupID' => $billingGroupID,
-                'connectionID' => $connectionID,
-                'customerReference' => $customerReference,
-                'externalPin' => $externalPin,
-                'hdVoiceEnabled' => $hdVoiceEnabled,
-                'tags' => $tags,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -152,6 +193,8 @@ final class PhoneNumbersService implements PhoneNumbersContract
      * @param Sort|value-of<Sort> $sort Specifies the sort order for results. If not given, results are sorted by created_at in descending order.
      *
      * @return PhoneNumberListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
@@ -159,8 +202,26 @@ final class PhoneNumbersService implements PhoneNumbersContract
         $sort = omit,
         ?RequestOptions $requestOptions = null,
     ): PhoneNumberListResponse {
+        $params = ['filter' => $filter, 'page' => $page, 'sort' => $sort];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return PhoneNumberListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): PhoneNumberListResponse {
         [$parsed, $options] = PhoneNumberListParams::parseRequest(
-            ['filter' => $filter, 'page' => $page, 'sort' => $sort],
+            $params,
             $requestOptions
         );
 
@@ -180,9 +241,28 @@ final class PhoneNumbersService implements PhoneNumbersContract
      * Delete a phone number
      *
      * @return PhoneNumberDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function delete(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): PhoneNumberDeleteResponse {
+        $params = [];
+
+        return $this->deleteRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return PhoneNumberDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): PhoneNumberDeleteResponse {
         // @phpstan-ignore-next-line;
@@ -206,6 +286,8 @@ final class PhoneNumbersService implements PhoneNumbersContract
      * @param Sort1|value-of<Sort1> $sort Specifies the sort order for results. If not given, results are sorted by created_at in descending order.
      *
      * @return PhoneNumberSlimListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function slimList(
         $filter = omit,
@@ -215,15 +297,33 @@ final class PhoneNumbersService implements PhoneNumbersContract
         $sort = omit,
         ?RequestOptions $requestOptions = null,
     ): PhoneNumberSlimListResponse {
+        $params = [
+            'filter' => $filter,
+            'includeConnection' => $includeConnection,
+            'includeTags' => $includeTags,
+            'page' => $page,
+            'sort' => $sort,
+        ];
+
+        return $this->slimListRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return PhoneNumberSlimListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function slimListRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): PhoneNumberSlimListResponse {
         [$parsed, $options] = PhoneNumberSlimListParams::parseRequest(
-            [
-                'filter' => $filter,
-                'includeConnection' => $includeConnection,
-                'includeTags' => $includeTags,
-                'page' => $page,
-                'sort' => $sort,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;

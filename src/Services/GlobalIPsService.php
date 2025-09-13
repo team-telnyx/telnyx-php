@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\GlobalIPs\GlobalIPCreateParams;
 use Telnyx\GlobalIPs\GlobalIPDeleteResponse;
@@ -35,6 +36,8 @@ final class GlobalIPsService implements GlobalIPsContract
      * @param array<string, mixed> $ports a Global IP ports grouped by protocol code
      *
      * @return GlobalIPNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $description = omit,
@@ -42,9 +45,29 @@ final class GlobalIPsService implements GlobalIPsContract
         $ports = omit,
         ?RequestOptions $requestOptions = null,
     ): GlobalIPNewResponse {
+        $params = [
+            'description' => $description, 'name' => $name, 'ports' => $ports,
+        ];
+
+        return $this->createRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return GlobalIPNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): GlobalIPNewResponse {
         [$parsed, $options] = GlobalIPCreateParams::parseRequest(
-            ['description' => $description, 'name' => $name, 'ports' => $ports],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -63,9 +86,28 @@ final class GlobalIPsService implements GlobalIPsContract
      * Retrieve a Global IP.
      *
      * @return GlobalIPGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): GlobalIPGetResponse {
+        $params = [];
+
+        return $this->retrieveRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return GlobalIPGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): GlobalIPGetResponse {
         // @phpstan-ignore-next-line;
@@ -85,13 +127,33 @@ final class GlobalIPsService implements GlobalIPsContract
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
      * @return GlobalIPListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $page = omit,
         ?RequestOptions $requestOptions = null
     ): GlobalIPListResponse {
+        $params = ['page' => $page];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return GlobalIPListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): GlobalIPListResponse {
         [$parsed, $options] = GlobalIPListParams::parseRequest(
-            ['page' => $page],
+            $params,
             $requestOptions
         );
 
@@ -111,9 +173,28 @@ final class GlobalIPsService implements GlobalIPsContract
      * Delete a Global IP.
      *
      * @return GlobalIPDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function delete(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): GlobalIPDeleteResponse {
+        $params = [];
+
+        return $this->deleteRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return GlobalIPDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): GlobalIPDeleteResponse {
         // @phpstan-ignore-next-line;

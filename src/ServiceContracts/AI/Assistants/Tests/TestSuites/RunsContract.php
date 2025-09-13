@@ -7,6 +7,7 @@ namespace Telnyx\ServiceContracts\AI\Assistants\Tests\TestSuites;
 use Telnyx\AI\Assistants\Tests\Runs\TestRunResponse;
 use Telnyx\AI\Assistants\Tests\TestSuites\Runs\PaginatedTestRunList;
 use Telnyx\AI\Assistants\Tests\TestSuites\Runs\RunListParams\Page;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 
@@ -22,6 +23,8 @@ interface RunsContract
      * @param string $testSuiteRunID Filter runs by specific suite execution batch ID
      *
      * @return PaginatedTestRunList<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         string $suiteName,
@@ -34,13 +37,45 @@ interface RunsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return PaginatedTestRunList<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        string $suiteName,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): PaginatedTestRunList;
+
+    /**
+     * @api
+     *
      * @param string $destinationVersionID Optional assistant version ID to use for all test runs in this suite. If provided, the version must exist or a 400 error will be returned. If not provided, test will run on main version
      *
      * @return list<TestRunResponse>
+     *
+     * @throws APIException
      */
     public function trigger(
         string $suiteName,
         $destinationVersionID = omit,
         ?RequestOptions $requestOptions = null,
+    ): array;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return list<TestRunResponse>
+     *
+     * @throws APIException
+     */
+    public function triggerRaw(
+        string $suiteName,
+        array $params,
+        ?RequestOptions $requestOptions = null
     ): array;
 }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\PortingOrders;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberCreateParams;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberCreateParams\Action;
@@ -38,6 +39,8 @@ final class AssociatedPhoneNumbersService implements AssociatedPhoneNumbersContr
      * @param PhoneNumberRange $phoneNumberRange
      *
      * @return AssociatedPhoneNumberNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         string $portingOrderID,
@@ -45,9 +48,28 @@ final class AssociatedPhoneNumbersService implements AssociatedPhoneNumbersContr
         $phoneNumberRange,
         ?RequestOptions $requestOptions = null,
     ): AssociatedPhoneNumberNewResponse {
+        $params = ['action' => $action, 'phoneNumberRange' => $phoneNumberRange];
+
+        return $this->createRaw($portingOrderID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return AssociatedPhoneNumberNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        string $portingOrderID,
+        array $params,
+        ?RequestOptions $requestOptions = null,
+    ): AssociatedPhoneNumberNewResponse {
         [$parsed, $options] = AssociatedPhoneNumberCreateParams::parseRequest(
-            ['action' => $action, 'phoneNumberRange' => $phoneNumberRange],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -70,6 +92,8 @@ final class AssociatedPhoneNumbersService implements AssociatedPhoneNumbersContr
      * @param Sort $sort Consolidated sort parameter (deepObject style). Originally: sort[value]
      *
      * @return AssociatedPhoneNumberListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         string $portingOrderID,
@@ -78,8 +102,27 @@ final class AssociatedPhoneNumbersService implements AssociatedPhoneNumbersContr
         $sort = omit,
         ?RequestOptions $requestOptions = null,
     ): AssociatedPhoneNumberListResponse {
+        $params = ['filter' => $filter, 'page' => $page, 'sort' => $sort];
+
+        return $this->listRaw($portingOrderID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return AssociatedPhoneNumberListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        string $portingOrderID,
+        array $params,
+        ?RequestOptions $requestOptions = null,
+    ): AssociatedPhoneNumberListResponse {
         [$parsed, $options] = AssociatedPhoneNumberListParams::parseRequest(
-            ['filter' => $filter, 'page' => $page, 'sort' => $sort],
+            $params,
             $requestOptions
         );
 
@@ -101,14 +144,35 @@ final class AssociatedPhoneNumbersService implements AssociatedPhoneNumbersContr
      * @param string $portingOrderID
      *
      * @return AssociatedPhoneNumberDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function delete(
         string $id,
         $portingOrderID,
         ?RequestOptions $requestOptions = null
     ): AssociatedPhoneNumberDeleteResponse {
+        $params = ['portingOrderID' => $portingOrderID];
+
+        return $this->deleteRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return AssociatedPhoneNumberDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): AssociatedPhoneNumberDeleteResponse {
         [$parsed, $options] = AssociatedPhoneNumberDeleteParams::parseRequest(
-            ['portingOrderID' => $portingOrderID],
+            $params,
             $requestOptions
         );
         $portingOrderID = $parsed['portingOrderID'];

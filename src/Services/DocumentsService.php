@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Documents\DocumentDeleteResponse;
 use Telnyx\Documents\DocumentGenerateDownloadLinkResponse;
@@ -36,9 +37,28 @@ final class DocumentsService implements DocumentsContract
      * Retrieve a document.
      *
      * @return DocumentGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): DocumentGetResponse {
+        $params = [];
+
+        return $this->retrieveRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return DocumentGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): DocumentGetResponse {
         // @phpstan-ignore-next-line;
@@ -59,6 +79,8 @@ final class DocumentsService implements DocumentsContract
      * @param string $filename the filename of the document
      *
      * @return DocumentUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function update(
         string $id,
@@ -66,9 +88,30 @@ final class DocumentsService implements DocumentsContract
         $filename = omit,
         ?RequestOptions $requestOptions = null,
     ): DocumentUpdateResponse {
+        $params = [
+            'customerReference' => $customerReference, 'filename' => $filename,
+        ];
+
+        return $this->updateRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return DocumentUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): DocumentUpdateResponse {
         [$parsed, $options] = DocumentUpdateParams::parseRequest(
-            ['customerReference' => $customerReference, 'filename' => $filename],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -91,6 +134,8 @@ final class DocumentsService implements DocumentsContract
      * @param list<Sort|value-of<Sort>> $sort Consolidated sort parameter for documents (deepObject style). Originally: sort[]
      *
      * @return DocumentListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
@@ -98,8 +143,26 @@ final class DocumentsService implements DocumentsContract
         $sort = omit,
         ?RequestOptions $requestOptions = null,
     ): DocumentListResponse {
+        $params = ['filter' => $filter, 'page' => $page, 'sort' => $sort];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return DocumentListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): DocumentListResponse {
         [$parsed, $options] = DocumentListParams::parseRequest(
-            ['filter' => $filter, 'page' => $page, 'sort' => $sort],
+            $params,
             $requestOptions
         );
 
@@ -119,9 +182,28 @@ final class DocumentsService implements DocumentsContract
      * Delete a document.<br /><br />A document can only be deleted if it's not linked to a service. If it is linked to a service, it must be unlinked prior to deleting.
      *
      * @return DocumentDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function delete(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): DocumentDeleteResponse {
+        $params = [];
+
+        return $this->deleteRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return DocumentDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): DocumentDeleteResponse {
         // @phpstan-ignore-next-line;
@@ -137,9 +219,26 @@ final class DocumentsService implements DocumentsContract
      * @api
      *
      * Download a document.
+     *
+     * @throws APIException
      */
     public function download(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): string {
+        $params = [];
+
+        return $this->downloadRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @throws APIException
+     */
+    public function downloadRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): string {
         // @phpstan-ignore-next-line;
@@ -158,9 +257,28 @@ final class DocumentsService implements DocumentsContract
      * Generates a temporary pre-signed URL that can be used to download the document directly from the storage backend without authentication.
      *
      * @return DocumentGenerateDownloadLinkResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function generateDownloadLink(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): DocumentGenerateDownloadLinkResponse {
+        $params = [];
+
+        return $this->generateDownloadLinkRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return DocumentGenerateDownloadLinkResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function generateDownloadLinkRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): DocumentGenerateDownloadLinkResponse {
         // @phpstan-ignore-next-line;
@@ -183,6 +301,8 @@ final class DocumentsService implements DocumentsContract
      * @param string $file the Base64 encoded contents of the file you are uploading
      *
      * @return DocumentUploadResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function upload(
         $url,
@@ -191,14 +311,32 @@ final class DocumentsService implements DocumentsContract
         $file,
         ?RequestOptions $requestOptions = null,
     ): DocumentUploadResponse {
+        $params = [
+            'url' => $url,
+            'customerReference' => $customerReference,
+            'filename' => $filename,
+            'file' => $file,
+        ];
+
+        return $this->uploadRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return DocumentUploadResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function uploadRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): DocumentUploadResponse {
         [$parsed, $options] = DocumentUploadParams::parseRequest(
-            [
-                'url' => $url,
-                'customerReference' => $customerReference,
-                'filename' => $filename,
-                'file' => $file,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;

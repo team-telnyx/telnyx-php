@@ -8,6 +8,7 @@ use Telnyx\Brand\ExternalVetting\ExternalVettingImportParams;
 use Telnyx\Brand\ExternalVetting\ExternalVettingImportResponse;
 use Telnyx\Brand\ExternalVetting\ExternalVettingOrderParams;
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Brand\ExternalVettingContract;
@@ -25,9 +26,26 @@ final class ExternalVettingService implements ExternalVettingContract
      * @api
      *
      * Get list of valid external vetting record for a given brand
+     *
+     * @throws APIException
      */
     public function list(
         string $brandID,
+        ?RequestOptions $requestOptions = null
+    ): mixed {
+        $params = [];
+
+        return $this->listRaw($brandID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        string $brandID,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): mixed {
         // @phpstan-ignore-next-line;
@@ -51,6 +69,8 @@ final class ExternalVettingService implements ExternalVettingContract
      * @param string $vettingToken required by some providers for vetting record confirmation
      *
      * @return ExternalVettingImportResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function import(
         string $brandID,
@@ -59,13 +79,32 @@ final class ExternalVettingService implements ExternalVettingContract
         $vettingToken = omit,
         ?RequestOptions $requestOptions = null,
     ): ExternalVettingImportResponse {
+        $params = [
+            'evpID' => $evpID,
+            'vettingID' => $vettingID,
+            'vettingToken' => $vettingToken,
+        ];
+
+        return $this->importRaw($brandID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ExternalVettingImportResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function importRaw(
+        string $brandID,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): ExternalVettingImportResponse {
         [$parsed, $options] = ExternalVettingImportParams::parseRequest(
-            [
-                'evpID' => $evpID,
-                'vettingID' => $vettingID,
-                'vettingToken' => $vettingToken,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -85,6 +124,8 @@ final class ExternalVettingService implements ExternalVettingContract
      *
      * @param string $evpID external vetting provider ID for the brand
      * @param string $vettingClass identifies the vetting classification
+     *
+     * @throws APIException
      */
     public function order(
         string $brandID,
@@ -92,8 +133,25 @@ final class ExternalVettingService implements ExternalVettingContract
         $vettingClass,
         ?RequestOptions $requestOptions = null,
     ): mixed {
+        $params = ['evpID' => $evpID, 'vettingClass' => $vettingClass];
+
+        return $this->orderRaw($brandID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @throws APIException
+     */
+    public function orderRaw(
+        string $brandID,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): mixed {
         [$parsed, $options] = ExternalVettingOrderParams::parseRequest(
-            ['evpID' => $evpID, 'vettingClass' => $vettingClass],
+            $params,
             $requestOptions
         );
 

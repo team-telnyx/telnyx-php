@@ -11,7 +11,7 @@ use Telnyx\PhoneNumbers\Actions\PhoneNumberWithVoiceSettings;
 
 /**
  * @phpstan-type voice_update_response = array{data?: PhoneNumberWithVoiceSettings}
- * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * When used in a response, this type parameter can define a $rawResponse property.
  * @template TRawResponse of object = object{}
  *
  * @mixin TRawResponse

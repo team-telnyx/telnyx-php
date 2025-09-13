@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\Verifications;
 
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\Verifications\Actions\ActionVerifyParams\Status;
@@ -20,11 +21,28 @@ interface ActionsContract
      * @param Status|value-of<Status> $status Identifies if the verification code has been accepted or rejected. Only permitted if custom_code was used for the verification.
      *
      * @return VerifyVerificationCodeResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function verify(
         string $verificationID,
         $code = omit,
         $status = omit,
+        ?RequestOptions $requestOptions = null,
+    ): VerifyVerificationCodeResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return VerifyVerificationCodeResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function verifyRaw(
+        string $verificationID,
+        array $params,
         ?RequestOptions $requestOptions = null,
     ): VerifyVerificationCodeResponse;
 }

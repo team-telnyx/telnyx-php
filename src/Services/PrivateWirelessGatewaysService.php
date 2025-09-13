@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PrivateWirelessGateways\PrivateWirelessGatewayCreateParams;
 use Telnyx\PrivateWirelessGateways\PrivateWirelessGatewayDeleteResponse;
@@ -34,6 +35,8 @@ final class PrivateWirelessGatewaysService implements PrivateWirelessGatewaysCon
      * @param string $regionCode The code of the region where the private wireless gateway will be assigned. A list of available regions can be found at the regions endpoint
      *
      * @return PrivateWirelessGatewayNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $name,
@@ -41,9 +44,29 @@ final class PrivateWirelessGatewaysService implements PrivateWirelessGatewaysCon
         $regionCode = omit,
         ?RequestOptions $requestOptions = null,
     ): PrivateWirelessGatewayNewResponse {
+        $params = [
+            'name' => $name, 'networkID' => $networkID, 'regionCode' => $regionCode,
+        ];
+
+        return $this->createRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return PrivateWirelessGatewayNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): PrivateWirelessGatewayNewResponse {
         [$parsed, $options] = PrivateWirelessGatewayCreateParams::parseRequest(
-            ['name' => $name, 'networkID' => $networkID, 'regionCode' => $regionCode],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -62,9 +85,28 @@ final class PrivateWirelessGatewaysService implements PrivateWirelessGatewaysCon
      * Retrieve information about a Private Wireless Gateway.
      *
      * @return PrivateWirelessGatewayGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): PrivateWirelessGatewayGetResponse {
+        $params = [];
+
+        return $this->retrieveRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return PrivateWirelessGatewayGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): PrivateWirelessGatewayGetResponse {
         // @phpstan-ignore-next-line;
@@ -90,6 +132,8 @@ final class PrivateWirelessGatewaysService implements PrivateWirelessGatewaysCon
      * @param int $pageSize the size of the page
      *
      * @return PrivateWirelessGatewayListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filterCreatedAt = omit,
@@ -101,17 +145,35 @@ final class PrivateWirelessGatewaysService implements PrivateWirelessGatewaysCon
         $pageSize = omit,
         ?RequestOptions $requestOptions = null,
     ): PrivateWirelessGatewayListResponse {
+        $params = [
+            'filterCreatedAt' => $filterCreatedAt,
+            'filterIPRange' => $filterIPRange,
+            'filterName' => $filterName,
+            'filterRegionCode' => $filterRegionCode,
+            'filterUpdatedAt' => $filterUpdatedAt,
+            'pageNumber' => $pageNumber,
+            'pageSize' => $pageSize,
+        ];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return PrivateWirelessGatewayListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): PrivateWirelessGatewayListResponse {
         [$parsed, $options] = PrivateWirelessGatewayListParams::parseRequest(
-            [
-                'filterCreatedAt' => $filterCreatedAt,
-                'filterIPRange' => $filterIPRange,
-                'filterName' => $filterName,
-                'filterRegionCode' => $filterRegionCode,
-                'filterUpdatedAt' => $filterUpdatedAt,
-                'pageNumber' => $pageNumber,
-                'pageSize' => $pageSize,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -130,9 +192,28 @@ final class PrivateWirelessGatewaysService implements PrivateWirelessGatewaysCon
      * Deletes the Private Wireless Gateway.
      *
      * @return PrivateWirelessGatewayDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function delete(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): PrivateWirelessGatewayDeleteResponse {
+        $params = [];
+
+        return $this->deleteRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return PrivateWirelessGatewayDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): PrivateWirelessGatewayDeleteResponse {
         // @phpstan-ignore-next-line;

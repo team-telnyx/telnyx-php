@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\VirtualCrossConnectsCoverageContract;
@@ -33,6 +34,8 @@ final class VirtualCrossConnectsCoverageService implements VirtualCrossConnectsC
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
      * @return VirtualCrossConnectsCoverageListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
@@ -40,9 +43,27 @@ final class VirtualCrossConnectsCoverageService implements VirtualCrossConnectsC
         $page = omit,
         ?RequestOptions $requestOptions = null,
     ): VirtualCrossConnectsCoverageListResponse {
+        $params = ['filter' => $filter, 'filters' => $filters, 'page' => $page];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return VirtualCrossConnectsCoverageListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): VirtualCrossConnectsCoverageListResponse {
         [$parsed, $options] = VirtualCrossConnectsCoverageListParams::parseRequest(
-            ['filter' => $filter, 'filters' => $filters, 'page' => $page],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;

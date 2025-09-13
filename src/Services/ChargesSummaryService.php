@@ -7,6 +7,7 @@ namespace Telnyx\Services;
 use Telnyx\ChargesSummary\ChargesSummaryGetResponse;
 use Telnyx\ChargesSummary\ChargesSummaryRetrieveParams;
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ChargesSummaryContract;
@@ -27,14 +28,34 @@ final class ChargesSummaryService implements ChargesSummaryContract
      * @param \DateTimeInterface $startDate Start date for the charges summary in ISO date format (YYYY-MM-DD)
      *
      * @return ChargesSummaryGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         $endDate,
         $startDate,
         ?RequestOptions $requestOptions = null
     ): ChargesSummaryGetResponse {
+        $params = ['endDate' => $endDate, 'startDate' => $startDate];
+
+        return $this->retrieveRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ChargesSummaryGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): ChargesSummaryGetResponse {
         [$parsed, $options] = ChargesSummaryRetrieveParams::parseRequest(
-            ['endDate' => $endDate, 'startDate' => $startDate],
+            $params,
             $requestOptions
         );
 

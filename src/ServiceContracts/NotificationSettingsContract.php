@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\NotificationSettings\NotificationSettingCreateParams\Parameter;
 use Telnyx\NotificationSettings\NotificationSettingDeleteResponse;
@@ -27,6 +28,8 @@ interface NotificationSettingsContract
      * @param list<Parameter> $parameters
      *
      * @return NotificationSettingNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $notificationChannelID = omit,
@@ -39,10 +42,39 @@ interface NotificationSettingsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return NotificationSettingNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): NotificationSettingNewResponse;
+
+    /**
+     * @api
+     *
      * @return NotificationSettingGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): NotificationSettingGetResponse;
+
+    /**
+     * @api
+     *
+     * @return NotificationSettingGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): NotificationSettingGetResponse;
 
@@ -53,6 +85,8 @@ interface NotificationSettingsContract
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
      * @return NotificationSettingListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
@@ -63,10 +97,39 @@ interface NotificationSettingsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return NotificationSettingListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): NotificationSettingListResponse;
+
+    /**
+     * @api
+     *
      * @return NotificationSettingDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function delete(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): NotificationSettingDeleteResponse;
+
+    /**
+     * @api
+     *
+     * @return NotificationSettingDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): NotificationSettingDeleteResponse;
 }

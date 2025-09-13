@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\DetailRecords\DetailRecordListParams;
 use Telnyx\DetailRecords\DetailRecordListParams\Filter;
@@ -32,6 +33,8 @@ final class DetailRecordsService implements DetailRecordsContract
      * @param list<string> $sort Specifies the sort order for results. <br/>Example: sort=-created_at
      *
      * @return DetailRecordListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
@@ -39,8 +42,26 @@ final class DetailRecordsService implements DetailRecordsContract
         $sort = omit,
         ?RequestOptions $requestOptions = null,
     ): DetailRecordListResponse {
+        $params = ['filter' => $filter, 'page' => $page, 'sort' => $sort];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return DetailRecordListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): DetailRecordListResponse {
         [$parsed, $options] = DetailRecordListParams::parseRequest(
-            ['filter' => $filter, 'page' => $page, 'sort' => $sort],
+            $params,
             $requestOptions
         );
 

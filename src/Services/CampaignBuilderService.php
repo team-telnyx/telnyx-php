@@ -8,6 +8,7 @@ use Telnyx\Campaign\TelnyxCampaignCsp;
 use Telnyx\CampaignBuilder\CampaignBuilderCreateParams;
 use Telnyx\CampaignBuilder\CampaignBuilderNewResponse;
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\CampaignBuilderContract;
 use Telnyx\Services\CampaignBuilder\BrandService;
@@ -71,6 +72,8 @@ final class CampaignBuilderService implements CampaignBuilderContract
      * @param string $webhookURL webhook to which campaign status updates are sent
      *
      * @return mixed|TelnyxCampaignCsp
+     *
+     * @throws APIException
      */
     public function create(
         $brandID,
@@ -110,45 +113,63 @@ final class CampaignBuilderService implements CampaignBuilderContract
         $webhookURL = omit,
         ?RequestOptions $requestOptions = null,
     ): mixed {
+        $params = [
+            'brandID' => $brandID,
+            'description' => $description,
+            'usecase' => $usecase,
+            'ageGated' => $ageGated,
+            'autoRenewal' => $autoRenewal,
+            'directLending' => $directLending,
+            'embeddedLink' => $embeddedLink,
+            'embeddedLinkSample' => $embeddedLinkSample,
+            'embeddedPhone' => $embeddedPhone,
+            'helpKeywords' => $helpKeywords,
+            'helpMessage' => $helpMessage,
+            'messageFlow' => $messageFlow,
+            'mnoIDs' => $mnoIDs,
+            'numberPool' => $numberPool,
+            'optinKeywords' => $optinKeywords,
+            'optinMessage' => $optinMessage,
+            'optoutKeywords' => $optoutKeywords,
+            'optoutMessage' => $optoutMessage,
+            'privacyPolicyLink' => $privacyPolicyLink,
+            'referenceID' => $referenceID,
+            'resellerID' => $resellerID,
+            'sample1' => $sample1,
+            'sample2' => $sample2,
+            'sample3' => $sample3,
+            'sample4' => $sample4,
+            'sample5' => $sample5,
+            'subscriberHelp' => $subscriberHelp,
+            'subscriberOptin' => $subscriberOptin,
+            'subscriberOptout' => $subscriberOptout,
+            'subUsecases' => $subUsecases,
+            'tag' => $tag,
+            'termsAndConditions' => $termsAndConditions,
+            'termsAndConditionsLink' => $termsAndConditionsLink,
+            'webhookFailoverURL' => $webhookFailoverURL,
+            'webhookURL' => $webhookURL,
+        ];
+
+        return $this->createRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return mixed|TelnyxCampaignCsp
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): mixed {
         [$parsed, $options] = CampaignBuilderCreateParams::parseRequest(
-            [
-                'brandID' => $brandID,
-                'description' => $description,
-                'usecase' => $usecase,
-                'ageGated' => $ageGated,
-                'autoRenewal' => $autoRenewal,
-                'directLending' => $directLending,
-                'embeddedLink' => $embeddedLink,
-                'embeddedLinkSample' => $embeddedLinkSample,
-                'embeddedPhone' => $embeddedPhone,
-                'helpKeywords' => $helpKeywords,
-                'helpMessage' => $helpMessage,
-                'messageFlow' => $messageFlow,
-                'mnoIDs' => $mnoIDs,
-                'numberPool' => $numberPool,
-                'optinKeywords' => $optinKeywords,
-                'optinMessage' => $optinMessage,
-                'optoutKeywords' => $optoutKeywords,
-                'optoutMessage' => $optoutMessage,
-                'privacyPolicyLink' => $privacyPolicyLink,
-                'referenceID' => $referenceID,
-                'resellerID' => $resellerID,
-                'sample1' => $sample1,
-                'sample2' => $sample2,
-                'sample3' => $sample3,
-                'sample4' => $sample4,
-                'sample5' => $sample5,
-                'subscriberHelp' => $subscriberHelp,
-                'subscriberOptin' => $subscriberOptin,
-                'subscriberOptout' => $subscriberOptout,
-                'subUsecases' => $subUsecases,
-                'tag' => $tag,
-                'termsAndConditions' => $termsAndConditions,
-                'termsAndConditionsLink' => $termsAndConditionsLink,
-                'webhookFailoverURL' => $webhookFailoverURL,
-                'webhookURL' => $webhookURL,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;

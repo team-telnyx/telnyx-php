@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\Texml;
 
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\Texml\Accounts\AccountGetRecordingsJsonResponse;
@@ -21,6 +22,8 @@ interface AccountsContract
      * @param int $pageSize The number of records to be displayed on a page
      *
      * @return AccountGetRecordingsJsonResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieveRecordingsJson(
         string $accountSid,
@@ -33,15 +36,47 @@ interface AccountsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return AccountGetRecordingsJsonResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRecordingsJsonRaw(
+        string $accountSid,
+        array $params,
+        ?RequestOptions $requestOptions = null,
+    ): AccountGetRecordingsJsonResponse;
+
+    /**
+     * @api
+     *
      * @param int $pageSize The number of records to be displayed on a page
      * @param string $pageToken used to request the next page of results
      *
      * @return AccountGetTranscriptionsJsonResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieveTranscriptionsJson(
         string $accountSid,
         $pageSize = omit,
         $pageToken = omit,
+        ?RequestOptions $requestOptions = null,
+    ): AccountGetTranscriptionsJsonResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return AccountGetTranscriptionsJsonResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveTranscriptionsJsonRaw(
+        string $accountSid,
+        array $params,
         ?RequestOptions $requestOptions = null,
     ): AccountGetTranscriptionsJsonResponse;
 }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectCreateParams\CloudProvider;
@@ -39,6 +40,8 @@ interface VirtualCrossConnectsContract
      * @param string $secondaryTelnyxIP The IP address assigned to the Telnyx side of the Virtual Cross Connect.<br /><br />If none is provided, one will be generated for you.<br /><br />This value should be null for GCE as Google will only inform you of your assigned IP once the connection has been accepted.
      *
      * @return VirtualCrossConnectNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $bgpAsn,
@@ -62,10 +65,39 @@ interface VirtualCrossConnectsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return VirtualCrossConnectNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): VirtualCrossConnectNewResponse;
+
+    /**
+     * @api
+     *
      * @return VirtualCrossConnectGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): VirtualCrossConnectGetResponse;
+
+    /**
+     * @api
+     *
+     * @return VirtualCrossConnectGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): VirtualCrossConnectGetResponse;
 
@@ -80,6 +112,8 @@ interface VirtualCrossConnectsContract
      * @param bool $secondaryRoutingAnnouncement whether the secondary BGP route is being announced
      *
      * @return VirtualCrossConnectUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function update(
         string $id,
@@ -95,10 +129,27 @@ interface VirtualCrossConnectsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return VirtualCrossConnectUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): VirtualCrossConnectUpdateResponse;
+
+    /**
+     * @api
+     *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[network_id]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
      * @return VirtualCrossConnectListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
@@ -109,10 +160,39 @@ interface VirtualCrossConnectsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return VirtualCrossConnectListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): VirtualCrossConnectListResponse;
+
+    /**
+     * @api
+     *
      * @return VirtualCrossConnectDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function delete(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): VirtualCrossConnectDeleteResponse;
+
+    /**
+     * @api
+     *
+     * @return VirtualCrossConnectDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): VirtualCrossConnectDeleteResponse;
 }

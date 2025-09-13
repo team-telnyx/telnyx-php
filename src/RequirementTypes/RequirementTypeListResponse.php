@@ -14,7 +14,7 @@ use Telnyx\DocReqsRequirementType;
  * @phpstan-type requirement_type_list_response = array{
  *   data?: list<DocReqsRequirementType>, meta?: PaginationMeta
  * }
- * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * When used in a response, this type parameter can define a $rawResponse property.
  * @template TRawResponse of object = object{}
  *
  * @mixin TRawResponse

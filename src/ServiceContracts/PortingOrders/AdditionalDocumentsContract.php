@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\PortingOrders;
 
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentCreateParams\AdditionalDocument;
 use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentListParams\Filter;
@@ -23,6 +24,8 @@ interface AdditionalDocumentsContract
      * @param list<AdditionalDocument> $additionalDocuments
      *
      * @return AdditionalDocumentNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         string $id,
@@ -33,11 +36,28 @@ interface AdditionalDocumentsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return AdditionalDocumentNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): AdditionalDocumentNewResponse;
+
+    /**
+     * @api
+     *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[document_type]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param Sort $sort Consolidated sort parameter (deepObject style). Originally: sort[value]
      *
      * @return AdditionalDocumentListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         string $id,
@@ -50,11 +70,41 @@ interface AdditionalDocumentsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return AdditionalDocumentListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): AdditionalDocumentListResponse;
+
+    /**
+     * @api
+     *
      * @param string $id
+     *
+     * @throws APIException
      */
     public function delete(
         string $additionalDocumentID,
         $id,
+        ?RequestOptions $requestOptions = null,
+    ): mixed;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $additionalDocumentID,
+        array $params,
         ?RequestOptions $requestOptions = null,
     ): mixed;
 }

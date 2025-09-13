@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\Rooms;
 
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\Rooms\Actions\ActionGenerateJoinClientTokenResponse;
@@ -20,6 +21,8 @@ interface ActionsContract
      * @param int $tokenTtlSecs the time to live in seconds of the Client Token, after that time the Client Token is invalid and can't be used to join a Room
      *
      * @return ActionGenerateJoinClientTokenResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function generateJoinClientToken(
         string $roomID,
@@ -31,15 +34,47 @@ interface ActionsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return ActionGenerateJoinClientTokenResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function generateJoinClientTokenRaw(
+        string $roomID,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): ActionGenerateJoinClientTokenResponse;
+
+    /**
+     * @api
+     *
      * @param string $refreshToken
      * @param int $tokenTtlSecs the time to live in seconds of the Client Token, after that time the Client Token is invalid and can't be used to join a Room
      *
      * @return ActionRefreshClientTokenResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function refreshClientToken(
         string $roomID,
         $refreshToken,
         $tokenTtlSecs = omit,
         ?RequestOptions $requestOptions = null,
+    ): ActionRefreshClientTokenResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ActionRefreshClientTokenResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function refreshClientTokenRaw(
+        string $roomID,
+        array $params,
+        ?RequestOptions $requestOptions = null
     ): ActionRefreshClientTokenResponse;
 }

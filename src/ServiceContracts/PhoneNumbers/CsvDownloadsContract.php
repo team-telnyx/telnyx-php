@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\PhoneNumbers;
 
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadCreateParams\CsvFormat;
 use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadCreateParams\Filter;
@@ -24,6 +25,8 @@ interface CsvDownloadsContract
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[has_bundle], filter[tag], filter[connection_id], filter[phone_number], filter[status], filter[voice.connection_name], filter[voice.usage_payment_method], filter[billing_group_id], filter[emergency_address_id], filter[customer_reference]
      *
      * @return CsvDownloadNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $csvFormat = omit,
@@ -34,7 +37,23 @@ interface CsvDownloadsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return CsvDownloadNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): CsvDownloadNewResponse;
+
+    /**
+     * @api
+     *
      * @return CsvDownloadGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
@@ -44,12 +63,41 @@ interface CsvDownloadsContract
     /**
      * @api
      *
+     * @return CsvDownloadGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        mixed $params,
+        ?RequestOptions $requestOptions = null
+    ): CsvDownloadGetResponse;
+
+    /**
+     * @api
+     *
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @return CsvDownloadListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $page = omit,
+        ?RequestOptions $requestOptions = null
+    ): CsvDownloadListResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return CsvDownloadListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
         ?RequestOptions $requestOptions = null
     ): CsvDownloadListResponse;
 }

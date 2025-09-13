@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\Texml\Accounts;
 
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\AsyncAmdStatusCallbackMethod;
@@ -44,10 +45,27 @@ interface CallsContract
      * @param string $accountSid
      *
      * @return CallGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $callSid,
         $accountSid,
+        ?RequestOptions $requestOptions = null
+    ): CallGetResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return CallGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $callSid,
+        array $params,
         ?RequestOptions $requestOptions = null
     ): CallGetResponse;
 
@@ -65,6 +83,8 @@ interface CallsContract
      * @param string $url the URL where TeXML will make a request to retrieve a new set of TeXML instructions to continue the call flow
      *
      * @return CallUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function update(
         string $callSid,
@@ -78,6 +98,21 @@ interface CallsContract
         $texml = omit,
         $url = omit,
         ?RequestOptions $requestOptions = null,
+    ): CallUpdateResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return CallUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $callSid,
+        array $params,
+        ?RequestOptions $requestOptions = null
     ): CallUpdateResponse;
 
     /**
@@ -118,6 +153,8 @@ interface CallsContract
      * @param URLMethod|value-of<URLMethod> $urlMethod HTTP request type used for `Url`. The default value is inherited from TeXML Application setting.
      *
      * @return CallCallsResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function calls(
         string $accountSid,
@@ -160,6 +197,21 @@ interface CallsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return CallCallsResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function callsRaw(
+        string $accountSid,
+        array $params,
+        ?RequestOptions $requestOptions = null,
+    ): CallCallsResponse;
+
+    /**
+     * @api
+     *
      * @param string $endTime Filters calls by their end date. Expected format is YYYY-MM-DD
      * @param string $endTimeGt Filters calls by their end date (after). Expected format is YYYY-MM-DD
      * @param string $endTimeLt Filters calls by their end date (before). Expected format is YYYY-MM-DD
@@ -174,6 +226,8 @@ interface CallsContract
      * @param string $to filters calls by the to number
      *
      * @return CallGetCallsResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieveCalls(
         string $accountSid,
@@ -195,6 +249,21 @@ interface CallsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return CallGetCallsResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveCallsRaw(
+        string $accountSid,
+        array $params,
+        ?RequestOptions $requestOptions = null,
+    ): CallGetCallsResponse;
+
+    /**
+     * @api
+     *
      * @param string $accountSid
      * @param string $connectorName the name of the connector to use for the SIPREC session
      * @param bool $includeMetadataCustomHeaders When set, custom parameters will be added as metadata (recording.session.ExtensionParameters). Otherwise, they’ll be added to sip headers.
@@ -207,6 +276,8 @@ interface CallsContract
      * @param Track|value-of<Track> $track The track to be used for siprec session. Can be `both_tracks`, `inbound_track` or `outbound_track`. Defaults to `both_tracks`.
      *
      * @return CallSiprecJsonResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function siprecJson(
         string $callSid,
@@ -226,6 +297,21 @@ interface CallsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return CallSiprecJsonResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function siprecJsonRaw(
+        string $callSid,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): CallSiprecJsonResponse;
+
+    /**
+     * @api
+     *
      * @param string $accountSid
      * @param BidirectionalCodec|value-of<BidirectionalCodec> $bidirectionalCodec Indicates codec for bidirectional streaming RTP payloads. Used only with stream_bidirectional_mode=rtp. Case sensitive.
      * @param BidirectionalMode|value-of<BidirectionalMode> $bidirectionalMode configures method of bidirectional streaming (mp3, rtp)
@@ -236,6 +322,8 @@ interface CallsContract
      * @param string $url the destination WebSocket address where the stream is going to be delivered
      *
      * @return CallStreamsJsonResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function streamsJson(
         string $callSid,
@@ -248,5 +336,20 @@ interface CallsContract
         $track = omit,
         $url = omit,
         ?RequestOptions $requestOptions = null,
+    ): CallStreamsJsonResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return CallStreamsJsonResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function streamsJsonRaw(
+        string $callSid,
+        array $params,
+        ?RequestOptions $requestOptions = null
     ): CallStreamsJsonResponse;
 }

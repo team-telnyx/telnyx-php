@@ -14,6 +14,7 @@ use Telnyx\Addresses\AddressListParams\Sort;
 use Telnyx\Addresses\AddressListResponse;
 use Telnyx\Addresses\AddressNewResponse;
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AddressesContract;
@@ -58,6 +59,8 @@ final class AddressesService implements AddressesContract
      * @param bool $validateAddress Indicates whether or not the address should be validated for emergency use upon creation or not. This should be left with the default value of `true` unless you have used the `/addresses/actions/validate` endpoint to validate the address separately prior to creation. If an address is not validated for emergency use upon creation and it is not valid, it will not be able to be used for emergency services.
      *
      * @return AddressNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $businessName,
@@ -77,25 +80,43 @@ final class AddressesService implements AddressesContract
         $validateAddress = omit,
         ?RequestOptions $requestOptions = null,
     ): AddressNewResponse {
+        $params = [
+            'businessName' => $businessName,
+            'countryCode' => $countryCode,
+            'firstName' => $firstName,
+            'lastName' => $lastName,
+            'locality' => $locality,
+            'streetAddress' => $streetAddress,
+            'addressBook' => $addressBook,
+            'administrativeArea' => $administrativeArea,
+            'borough' => $borough,
+            'customerReference' => $customerReference,
+            'extendedAddress' => $extendedAddress,
+            'neighborhood' => $neighborhood,
+            'phoneNumber' => $phoneNumber,
+            'postalCode' => $postalCode,
+            'validateAddress' => $validateAddress,
+        ];
+
+        return $this->createRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return AddressNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): AddressNewResponse {
         [$parsed, $options] = AddressCreateParams::parseRequest(
-            [
-                'businessName' => $businessName,
-                'countryCode' => $countryCode,
-                'firstName' => $firstName,
-                'lastName' => $lastName,
-                'locality' => $locality,
-                'streetAddress' => $streetAddress,
-                'addressBook' => $addressBook,
-                'administrativeArea' => $administrativeArea,
-                'borough' => $borough,
-                'customerReference' => $customerReference,
-                'extendedAddress' => $extendedAddress,
-                'neighborhood' => $neighborhood,
-                'phoneNumber' => $phoneNumber,
-                'postalCode' => $postalCode,
-                'validateAddress' => $validateAddress,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -114,9 +135,28 @@ final class AddressesService implements AddressesContract
      * Retrieves the details of an existing address.
      *
      * @return AddressGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): AddressGetResponse {
+        $params = [];
+
+        return $this->retrieveRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return AddressGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): AddressGetResponse {
         // @phpstan-ignore-next-line;
@@ -149,6 +189,8 @@ final class AddressesService implements AddressesContract
      * </ul> <br/> If not given, results are sorted by <code>created_at</code> in descending order.
      *
      * @return AddressListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
@@ -156,8 +198,26 @@ final class AddressesService implements AddressesContract
         $sort = omit,
         ?RequestOptions $requestOptions = null,
     ): AddressListResponse {
+        $params = ['filter' => $filter, 'page' => $page, 'sort' => $sort];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return AddressListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): AddressListResponse {
         [$parsed, $options] = AddressListParams::parseRequest(
-            ['filter' => $filter, 'page' => $page, 'sort' => $sort],
+            $params,
             $requestOptions
         );
 
@@ -177,9 +237,28 @@ final class AddressesService implements AddressesContract
      * Deletes an existing address.
      *
      * @return AddressDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function delete(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): AddressDeleteResponse {
+        $params = [];
+
+        return $this->deleteRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return AddressDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): AddressDeleteResponse {
         // @phpstan-ignore-next-line;

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\InboundChannels\InboundChannelListResponse;
 use Telnyx\InboundChannels\InboundChannelUpdateParams;
@@ -27,13 +28,33 @@ final class InboundChannelsService implements InboundChannelsContract
      * @param int $channels The new number of concurrent channels for the account
      *
      * @return InboundChannelUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function update(
         $channels,
         ?RequestOptions $requestOptions = null
     ): InboundChannelUpdateResponse {
+        $params = ['channels' => $channels];
+
+        return $this->updateRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return InboundChannelUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): InboundChannelUpdateResponse {
         [$parsed, $options] = InboundChannelUpdateParams::parseRequest(
-            ['channels' => $channels],
+            $params,
             $requestOptions
         );
 
@@ -53,8 +74,26 @@ final class InboundChannelsService implements InboundChannelsContract
      * Returns the US Zone voice channels for your account. voice channels allows you to use Channel Billing for calls to your Telnyx phone numbers. Please check the <a href="https://support.telnyx.com/en/articles/8428806-global-channel-billing">Telnyx Support Articles</a> section for full information and examples of how to utilize Channel Billing.
      *
      * @return InboundChannelListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
+        ?RequestOptions $requestOptions = null
+    ): InboundChannelListResponse {
+        $params = [];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return InboundChannelListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): InboundChannelListResponse {
         // @phpstan-ignore-next-line;

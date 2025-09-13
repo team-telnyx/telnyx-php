@@ -10,29 +10,50 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Networks\InterfaceStatus;
 
 /**
- * @phpstan-type unnamed_type_with_intersection_parent19 = array{
- *   networkID?: string,
+ * @phpstan-type data_alias = array{
+ *   id?: string,
+ *   createdAt?: string,
  *   recordType?: string,
+ *   updatedAt?: string,
+ *   networkID?: string,
  *   status?: value-of<InterfaceStatus>,
  *   wireguardPeerID?: string,
  * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<unnamed_type_with_intersection_parent19> */
+    /** @use SdkModel<data_alias> */
     use SdkModel;
 
     /**
-     * Network ID.
+     * Identifies the resource.
      */
-    #[Api('network_id', optional: true)]
-    public ?string $networkID;
+    #[Api(optional: true)]
+    public ?string $id;
+
+    /**
+     * ISO 8601 formatted date-time indicating when the resource was created.
+     */
+    #[Api('created_at', optional: true)]
+    public ?string $createdAt;
 
     /**
      * Identifies the type of the resource.
      */
     #[Api('record_type', optional: true)]
     public ?string $recordType;
+
+    /**
+     * ISO 8601 formatted date-time indicating when the resource was updated.
+     */
+    #[Api('updated_at', optional: true)]
+    public ?string $updatedAt;
+
+    /**
+     * Network ID.
+     */
+    #[Api('network_id', optional: true)]
+    public ?string $networkID;
 
     /**
      * The current status of the interface deployment.
@@ -61,15 +82,21 @@ final class Data implements BaseModel
      * @param InterfaceStatus|value-of<InterfaceStatus> $status
      */
     public static function with(
-        ?string $networkID = null,
+        ?string $id = null,
+        ?string $createdAt = null,
         ?string $recordType = null,
+        ?string $updatedAt = null,
+        ?string $networkID = null,
         InterfaceStatus|string|null $status = null,
         ?string $wireguardPeerID = null,
     ): self {
         $obj = new self;
 
-        null !== $networkID && $obj->networkID = $networkID;
+        null !== $id && $obj->id = $id;
+        null !== $createdAt && $obj->createdAt = $createdAt;
         null !== $recordType && $obj->recordType = $recordType;
+        null !== $updatedAt && $obj->updatedAt = $updatedAt;
+        null !== $networkID && $obj->networkID = $networkID;
         null !== $status && $obj->status = $status instanceof InterfaceStatus ? $status->value : $status;
         null !== $wireguardPeerID && $obj->wireguardPeerID = $wireguardPeerID;
 
@@ -77,12 +104,23 @@ final class Data implements BaseModel
     }
 
     /**
-     * Network ID.
+     * Identifies the resource.
      */
-    public function withNetworkID(string $networkID): self
+    public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->networkID = $networkID;
+        $obj->id = $id;
+
+        return $obj;
+    }
+
+    /**
+     * ISO 8601 formatted date-time indicating when the resource was created.
+     */
+    public function withCreatedAt(string $createdAt): self
+    {
+        $obj = clone $this;
+        $obj->createdAt = $createdAt;
 
         return $obj;
     }
@@ -94,6 +132,28 @@ final class Data implements BaseModel
     {
         $obj = clone $this;
         $obj->recordType = $recordType;
+
+        return $obj;
+    }
+
+    /**
+     * ISO 8601 formatted date-time indicating when the resource was updated.
+     */
+    public function withUpdatedAt(string $updatedAt): self
+    {
+        $obj = clone $this;
+        $obj->updatedAt = $updatedAt;
+
+        return $obj;
+    }
+
+    /**
+     * Network ID.
+     */
+    public function withNetworkID(string $networkID): self
+    {
+        $obj = clone $this;
+        $obj->networkID = $networkID;
 
         return $obj;
     }

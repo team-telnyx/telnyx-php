@@ -13,6 +13,7 @@ use Telnyx\AI\Conversations\ConversationListResponse;
 use Telnyx\AI\Conversations\ConversationUpdateParams;
 use Telnyx\AI\Conversations\ConversationUpdateResponse;
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\ConversationsContract;
@@ -59,14 +60,34 @@ final class ConversationsService implements ConversationsContract
      * @param string $name
      *
      * @return Conversation<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $metadata = omit,
         $name = omit,
         ?RequestOptions $requestOptions = null
     ): Conversation {
+        $params = ['metadata' => $metadata, 'name' => $name];
+
+        return $this->createRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return Conversation<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): Conversation {
         [$parsed, $options] = ConversationCreateParams::parseRequest(
-            ['metadata' => $metadata, 'name' => $name],
+            $params,
             $requestOptions
         );
 
@@ -86,10 +107,29 @@ final class ConversationsService implements ConversationsContract
      * Retrieve a specific AI conversation by its ID.
      *
      * @return ConversationGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $conversationID,
         ?RequestOptions $requestOptions = null
+    ): ConversationGetResponse {
+        $params = [];
+
+        return $this->retrieveRaw($conversationID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return ConversationGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $conversationID,
+        mixed $params,
+        ?RequestOptions $requestOptions = null,
     ): ConversationGetResponse {
         // @phpstan-ignore-next-line;
         return $this->client->request(
@@ -109,14 +149,35 @@ final class ConversationsService implements ConversationsContract
      * string,> $metadata Metadata associated with the conversation
      *
      * @return ConversationUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function update(
         string $conversationID,
         $metadata = omit,
         ?RequestOptions $requestOptions = null,
     ): ConversationUpdateResponse {
+        $params = ['metadata' => $metadata];
+
+        return $this->updateRaw($conversationID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ConversationUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $conversationID,
+        array $params,
+        ?RequestOptions $requestOptions = null,
+    ): ConversationUpdateResponse {
         [$parsed, $options] = ConversationUpdateParams::parseRequest(
-            ['metadata' => $metadata],
+            $params,
             $requestOptions
         );
 
@@ -149,6 +210,8 @@ final class ConversationsService implements ConversationsContract
      * @param string $order Order the results by specific fields (e.g., `order=created_at.desc` or `order=last_message_at.asc`)
      *
      * @return ConversationListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $id = omit,
@@ -165,22 +228,40 @@ final class ConversationsService implements ConversationsContract
         $order = omit,
         ?RequestOptions $requestOptions = null,
     ): ConversationListResponse {
+        $params = [
+            'id' => $id,
+            'createdAt' => $createdAt,
+            'lastMessageAt' => $lastMessageAt,
+            'limit' => $limit,
+            'metadataAssistantID' => $metadataAssistantID,
+            'metadataCallControlID' => $metadataCallControlID,
+            'metadataTelnyxAgentTarget' => $metadataTelnyxAgentTarget,
+            'metadataTelnyxConversationChannel' => $metadataTelnyxConversationChannel,
+            'metadataTelnyxEndUserTarget' => $metadataTelnyxEndUserTarget,
+            'name' => $name,
+            'or' => $or,
+            'order' => $order,
+        ];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ConversationListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): ConversationListResponse {
         [$parsed, $options] = ConversationListParams::parseRequest(
-            [
-                'id' => $id,
-                'createdAt' => $createdAt,
-                'lastMessageAt' => $lastMessageAt,
-                'limit' => $limit,
-                'metadataAssistantID' => $metadataAssistantID,
-                'metadataCallControlID' => $metadataCallControlID,
-                'metadataTelnyxAgentTarget' => $metadataTelnyxAgentTarget,
-                'metadataTelnyxConversationChannel' => $metadataTelnyxConversationChannel,
-                'metadataTelnyxEndUserTarget' => $metadataTelnyxEndUserTarget,
-                'name' => $name,
-                'or' => $or,
-                'order' => $order,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -197,10 +278,27 @@ final class ConversationsService implements ConversationsContract
      * @api
      *
      * Delete a specific conversation by its ID.
+     *
+     * @throws APIException
      */
     public function delete(
         string $conversationID,
         ?RequestOptions $requestOptions = null
+    ): mixed {
+        $params = [];
+
+        return $this->deleteRaw($conversationID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $conversationID,
+        mixed $params,
+        ?RequestOptions $requestOptions = null,
     ): mixed {
         // @phpstan-ignore-next-line;
         return $this->client->request(
@@ -217,10 +315,33 @@ final class ConversationsService implements ConversationsContract
      * Retrieve insights for a specific conversation
      *
      * @return ConversationGetConversationsInsightsResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieveConversationsInsights(
         string $conversationID,
         ?RequestOptions $requestOptions = null
+    ): ConversationGetConversationsInsightsResponse {
+        $params = [];
+
+        return $this->retrieveConversationsInsightsRaw(
+            $conversationID,
+            $params,
+            $requestOptions
+        );
+    }
+
+    /**
+     * @api
+     *
+     * @return ConversationGetConversationsInsightsResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveConversationsInsightsRaw(
+        string $conversationID,
+        mixed $params,
+        ?RequestOptions $requestOptions = null,
     ): ConversationGetConversationsInsightsResponse {
         // @phpstan-ignore-next-line;
         return $this->client->request(

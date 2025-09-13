@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\VerifyProfilesContract;
@@ -46,6 +47,8 @@ final class VerifyProfilesService implements VerifyProfilesContract
      * @param string $webhookURL
      *
      * @return VerifyProfileData<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $name,
@@ -57,17 +60,35 @@ final class VerifyProfilesService implements VerifyProfilesContract
         $webhookURL = omit,
         ?RequestOptions $requestOptions = null,
     ): VerifyProfileData {
+        $params = [
+            'name' => $name,
+            'call' => $call,
+            'flashcall' => $flashcall,
+            'language' => $language,
+            'sms' => $sms,
+            'webhookFailoverURL' => $webhookFailoverURL,
+            'webhookURL' => $webhookURL,
+        ];
+
+        return $this->createRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return VerifyProfileData<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): VerifyProfileData {
         [$parsed, $options] = VerifyProfileCreateParams::parseRequest(
-            [
-                'name' => $name,
-                'call' => $call,
-                'flashcall' => $flashcall,
-                'language' => $language,
-                'sms' => $sms,
-                'webhookFailoverURL' => $webhookFailoverURL,
-                'webhookURL' => $webhookURL,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -86,10 +107,29 @@ final class VerifyProfilesService implements VerifyProfilesContract
      * Gets a single Verify profile.
      *
      * @return VerifyProfileData<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $verifyProfileID,
         ?RequestOptions $requestOptions = null
+    ): VerifyProfileData {
+        $params = [];
+
+        return $this->retrieveRaw($verifyProfileID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return VerifyProfileData<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $verifyProfileID,
+        mixed $params,
+        ?RequestOptions $requestOptions = null,
     ): VerifyProfileData {
         // @phpstan-ignore-next-line;
         return $this->client->request(
@@ -114,6 +154,8 @@ final class VerifyProfilesService implements VerifyProfilesContract
      * @param string $webhookURL
      *
      * @return VerifyProfileData<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function update(
         string $verifyProfileID,
@@ -126,17 +168,36 @@ final class VerifyProfilesService implements VerifyProfilesContract
         $webhookURL = omit,
         ?RequestOptions $requestOptions = null,
     ): VerifyProfileData {
+        $params = [
+            'call' => $call,
+            'flashcall' => $flashcall,
+            'language' => $language,
+            'name' => $name,
+            'sms' => $sms,
+            'webhookFailoverURL' => $webhookFailoverURL,
+            'webhookURL' => $webhookURL,
+        ];
+
+        return $this->updateRaw($verifyProfileID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return VerifyProfileData<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $verifyProfileID,
+        array $params,
+        ?RequestOptions $requestOptions = null,
+    ): VerifyProfileData {
         [$parsed, $options] = VerifyProfileUpdateParams::parseRequest(
-            [
-                'call' => $call,
-                'flashcall' => $flashcall,
-                'language' => $language,
-                'name' => $name,
-                'sms' => $sms,
-                'webhookFailoverURL' => $webhookFailoverURL,
-                'webhookURL' => $webhookURL,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -158,14 +219,34 @@ final class VerifyProfilesService implements VerifyProfilesContract
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @return VerifyProfileListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
         $page = omit,
         ?RequestOptions $requestOptions = null
     ): VerifyProfileListResponse {
+        $params = ['filter' => $filter, 'page' => $page];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return VerifyProfileListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): VerifyProfileListResponse {
         [$parsed, $options] = VerifyProfileListParams::parseRequest(
-            ['filter' => $filter, 'page' => $page],
+            $params,
             $requestOptions
         );
 
@@ -185,10 +266,29 @@ final class VerifyProfilesService implements VerifyProfilesContract
      * Delete Verify profile
      *
      * @return VerifyProfileData<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function delete(
         string $verifyProfileID,
         ?RequestOptions $requestOptions = null
+    ): VerifyProfileData {
+        $params = [];
+
+        return $this->deleteRaw($verifyProfileID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return VerifyProfileData<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $verifyProfileID,
+        mixed $params,
+        ?RequestOptions $requestOptions = null,
     ): VerifyProfileData {
         // @phpstan-ignore-next-line;
         return $this->client->request(
@@ -205,8 +305,26 @@ final class VerifyProfilesService implements VerifyProfilesContract
      * List all Verify profile message templates.
      *
      * @return VerifyProfileGetTemplatesResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieveTemplates(
+        ?RequestOptions $requestOptions = null
+    ): VerifyProfileGetTemplatesResponse {
+        $params = [];
+
+        return $this->retrieveTemplatesRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return VerifyProfileGetTemplatesResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveTemplatesRaw(
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): VerifyProfileGetTemplatesResponse {
         // @phpstan-ignore-next-line;

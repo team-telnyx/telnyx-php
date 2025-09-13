@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\ExternalConnections;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberGetResponse;
 use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberListParams;
@@ -34,14 +35,35 @@ final class PhoneNumbersService implements PhoneNumbersContract
      * @param string $id
      *
      * @return PhoneNumberGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $phoneNumberID,
         $id,
         ?RequestOptions $requestOptions = null
     ): PhoneNumberGetResponse {
+        $params = ['id' => $id];
+
+        return $this->retrieveRaw($phoneNumberID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return PhoneNumberGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $phoneNumberID,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): PhoneNumberGetResponse {
         [$parsed, $options] = PhoneNumberRetrieveParams::parseRequest(
-            ['id' => $id],
+            $params,
             $requestOptions
         );
         $id = $parsed['id'];
@@ -67,6 +89,8 @@ final class PhoneNumbersService implements PhoneNumbersContract
      * @param string $locationID identifies the location to assign the phone number to
      *
      * @return PhoneNumberUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function update(
         string $phoneNumberID,
@@ -74,8 +98,27 @@ final class PhoneNumbersService implements PhoneNumbersContract
         $locationID = omit,
         ?RequestOptions $requestOptions = null,
     ): PhoneNumberUpdateResponse {
+        $params = ['id' => $id, 'locationID' => $locationID];
+
+        return $this->updateRaw($phoneNumberID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return PhoneNumberUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $phoneNumberID,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): PhoneNumberUpdateResponse {
         [$parsed, $options] = PhoneNumberUpdateParams::parseRequest(
-            ['id' => $id, 'locationID' => $locationID],
+            $params,
             $requestOptions
         );
         $id = $parsed['id'];
@@ -102,6 +145,8 @@ final class PhoneNumbersService implements PhoneNumbersContract
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @return PhoneNumberListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         string $id,
@@ -109,8 +154,27 @@ final class PhoneNumbersService implements PhoneNumbersContract
         $page = omit,
         ?RequestOptions $requestOptions = null,
     ): PhoneNumberListResponse {
+        $params = ['filter' => $filter, 'page' => $page];
+
+        return $this->listRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return PhoneNumberListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): PhoneNumberListResponse {
         [$parsed, $options] = PhoneNumberListParams::parseRequest(
-            ['filter' => $filter, 'page' => $page],
+            $params,
             $requestOptions
         );
 

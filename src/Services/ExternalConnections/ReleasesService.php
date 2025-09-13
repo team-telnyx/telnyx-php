@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\ExternalConnections;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\ExternalConnections\Releases\ReleaseGetResponse;
 use Telnyx\ExternalConnections\Releases\ReleaseListParams;
@@ -32,14 +33,35 @@ final class ReleasesService implements ReleasesContract
      * @param string $id
      *
      * @return ReleaseGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $releaseID,
         $id,
         ?RequestOptions $requestOptions = null
     ): ReleaseGetResponse {
+        $params = ['id' => $id];
+
+        return $this->retrieveRaw($releaseID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ReleaseGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $releaseID,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): ReleaseGetResponse {
         [$parsed, $options] = ReleaseRetrieveParams::parseRequest(
-            ['id' => $id],
+            $params,
             $requestOptions
         );
         $id = $parsed['id'];
@@ -63,6 +85,8 @@ final class ReleasesService implements ReleasesContract
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @return ReleaseListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         string $id,
@@ -70,8 +94,27 @@ final class ReleasesService implements ReleasesContract
         $page = omit,
         ?RequestOptions $requestOptions = null,
     ): ReleaseListResponse {
+        $params = ['filter' => $filter, 'page' => $page];
+
+        return $this->listRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ReleaseListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): ReleaseListResponse {
         [$parsed, $options] = ReleaseListParams::parseRequest(
-            ['filter' => $filter, 'page' => $page],
+            $params,
             $requestOptions
         );
 

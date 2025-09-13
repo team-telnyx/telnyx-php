@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\PortingOrders;
 
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateParams\Params;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateResponse;
@@ -25,6 +26,8 @@ interface ActionRequirementsContract
      * @param Sort $sort Consolidated sort parameter (deepObject style). Originally: sort[value]
      *
      * @return ActionRequirementListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         string $portingOrderID,
@@ -37,15 +40,47 @@ interface ActionRequirementsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return ActionRequirementListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        string $portingOrderID,
+        array $params,
+        ?RequestOptions $requestOptions = null,
+    ): ActionRequirementListResponse;
+
+    /**
+     * @api
+     *
      * @param string $portingOrderID
      * @param Params $params required information for initiating the action requirement for AU ID verification
      *
      * @return ActionRequirementInitiateResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function initiate(
         string $id,
         $portingOrderID,
         $params,
         ?RequestOptions $requestOptions = null,
+    ): ActionRequirementInitiateResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ActionRequirementInitiateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function initiateRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
     ): ActionRequirementInitiateResponse;
 }

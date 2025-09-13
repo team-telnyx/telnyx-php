@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\PortingOrders;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionCreateParams;
 use Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionCreateParams\ActivationRange;
@@ -39,6 +40,8 @@ final class PhoneNumberExtensionsService implements PhoneNumberExtensionsContrac
      * @param string $portingPhoneNumberID identifies the porting phone number associated with this porting phone number extension
      *
      * @return PhoneNumberExtensionNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         string $portingOrderID,
@@ -47,13 +50,32 @@ final class PhoneNumberExtensionsService implements PhoneNumberExtensionsContrac
         $portingPhoneNumberID,
         ?RequestOptions $requestOptions = null,
     ): PhoneNumberExtensionNewResponse {
+        $params = [
+            'activationRanges' => $activationRanges,
+            'extensionRange' => $extensionRange,
+            'portingPhoneNumberID' => $portingPhoneNumberID,
+        ];
+
+        return $this->createRaw($portingOrderID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return PhoneNumberExtensionNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        string $portingOrderID,
+        array $params,
+        ?RequestOptions $requestOptions = null,
+    ): PhoneNumberExtensionNewResponse {
         [$parsed, $options] = PhoneNumberExtensionCreateParams::parseRequest(
-            [
-                'activationRanges' => $activationRanges,
-                'extensionRange' => $extensionRange,
-                'portingPhoneNumberID' => $portingPhoneNumberID,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -76,6 +98,8 @@ final class PhoneNumberExtensionsService implements PhoneNumberExtensionsContrac
      * @param Sort $sort Consolidated sort parameter (deepObject style). Originally: sort[value]
      *
      * @return PhoneNumberExtensionListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         string $portingOrderID,
@@ -84,8 +108,27 @@ final class PhoneNumberExtensionsService implements PhoneNumberExtensionsContrac
         $sort = omit,
         ?RequestOptions $requestOptions = null,
     ): PhoneNumberExtensionListResponse {
+        $params = ['filter' => $filter, 'page' => $page, 'sort' => $sort];
+
+        return $this->listRaw($portingOrderID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return PhoneNumberExtensionListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        string $portingOrderID,
+        array $params,
+        ?RequestOptions $requestOptions = null,
+    ): PhoneNumberExtensionListResponse {
         [$parsed, $options] = PhoneNumberExtensionListParams::parseRequest(
-            ['filter' => $filter, 'page' => $page, 'sort' => $sort],
+            $params,
             $requestOptions
         );
 
@@ -107,14 +150,35 @@ final class PhoneNumberExtensionsService implements PhoneNumberExtensionsContrac
      * @param string $portingOrderID
      *
      * @return PhoneNumberExtensionDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function delete(
         string $id,
         $portingOrderID,
         ?RequestOptions $requestOptions = null
     ): PhoneNumberExtensionDeleteResponse {
+        $params = ['portingOrderID' => $portingOrderID];
+
+        return $this->deleteRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return PhoneNumberExtensionDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): PhoneNumberExtensionDeleteResponse {
         [$parsed, $options] = PhoneNumberExtensionDeleteParams::parseRequest(
-            ['portingOrderID' => $portingOrderID],
+            $params,
             $requestOptions
         );
         $portingOrderID = $parsed['portingOrderID'];

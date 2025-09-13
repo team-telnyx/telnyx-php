@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Faxes\FaxCreateParams;
 use Telnyx\Faxes\FaxCreateParams\PreviewFormat;
@@ -65,6 +66,8 @@ final class FaxesService implements FaxesContract
      * @param string $webhookURL use this field to override the URL to which Telnyx will send subsequent webhooks for this fax
      *
      * @return FaxNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $connectionID,
@@ -83,24 +86,42 @@ final class FaxesService implements FaxesContract
         $webhookURL = omit,
         ?RequestOptions $requestOptions = null,
     ): FaxNewResponse {
+        $params = [
+            'connectionID' => $connectionID,
+            'from' => $from,
+            'to' => $to,
+            'clientState' => $clientState,
+            'fromDisplayName' => $fromDisplayName,
+            'mediaName' => $mediaName,
+            'mediaURL' => $mediaURL,
+            'monochrome' => $monochrome,
+            'previewFormat' => $previewFormat,
+            'quality' => $quality,
+            'storeMedia' => $storeMedia,
+            'storePreview' => $storePreview,
+            't38Enabled' => $t38Enabled,
+            'webhookURL' => $webhookURL,
+        ];
+
+        return $this->createRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return FaxNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): FaxNewResponse {
         [$parsed, $options] = FaxCreateParams::parseRequest(
-            [
-                'connectionID' => $connectionID,
-                'from' => $from,
-                'to' => $to,
-                'clientState' => $clientState,
-                'fromDisplayName' => $fromDisplayName,
-                'mediaName' => $mediaName,
-                'mediaURL' => $mediaURL,
-                'monochrome' => $monochrome,
-                'previewFormat' => $previewFormat,
-                'quality' => $quality,
-                'storeMedia' => $storeMedia,
-                'storePreview' => $storePreview,
-                't38Enabled' => $t38Enabled,
-                'webhookURL' => $webhookURL,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -119,9 +140,28 @@ final class FaxesService implements FaxesContract
      * View a fax
      *
      * @return FaxGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): FaxGetResponse {
+        $params = [];
+
+        return $this->retrieveRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return FaxGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): FaxGetResponse {
         // @phpstan-ignore-next-line;
@@ -142,16 +182,33 @@ final class FaxesService implements FaxesContract
      * @param Page $page Consolidated pagination parameter (deepObject style). Originally: page[size], page[number]
      *
      * @return FaxListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
         $page = omit,
         ?RequestOptions $requestOptions = null
     ): FaxListResponse {
-        [$parsed, $options] = FaxListParams::parseRequest(
-            ['filter' => $filter, 'page' => $page],
-            $requestOptions
-        );
+        $params = ['filter' => $filter, 'page' => $page];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return FaxListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): FaxListResponse {
+        [$parsed, $options] = FaxListParams::parseRequest($params, $requestOptions);
 
         // @phpstan-ignore-next-line;
         return $this->client->request(
@@ -167,9 +224,26 @@ final class FaxesService implements FaxesContract
      * @api
      *
      * Delete a fax
+     *
+     * @throws APIException
      */
     public function delete(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): mixed {
+        $params = [];
+
+        return $this->deleteRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): mixed {
         // @phpstan-ignore-next-line;

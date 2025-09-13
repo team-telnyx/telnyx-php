@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Faxes\FaxCreateParams\PreviewFormat;
 use Telnyx\Faxes\FaxCreateParams\Quality;
@@ -37,6 +38,8 @@ interface FaxesContract
      * @param string $webhookURL use this field to override the URL to which Telnyx will send subsequent webhooks for this fax
      *
      * @return FaxNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $connectionID,
@@ -59,10 +62,39 @@ interface FaxesContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return FaxNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): FaxNewResponse;
+
+    /**
+     * @api
+     *
      * @return FaxGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): FaxGetResponse;
+
+    /**
+     * @api
+     *
+     * @return FaxGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): FaxGetResponse;
 
@@ -73,6 +105,8 @@ interface FaxesContract
      * @param Page $page Consolidated pagination parameter (deepObject style). Originally: page[size], page[number]
      *
      * @return FaxListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
@@ -82,9 +116,36 @@ interface FaxesContract
 
     /**
      * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return FaxListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): FaxListResponse;
+
+    /**
+     * @api
+     *
+     * @throws APIException
      */
     public function delete(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): mixed;
+
+    /**
+     * @api
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): mixed;
 }

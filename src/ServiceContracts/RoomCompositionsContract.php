@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\RoomCompositions\RoomCompositionGetResponse;
@@ -30,6 +31,8 @@ interface RoomCompositionsContract
      * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
      *
      * @return RoomCompositionNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $format = omit,
@@ -45,7 +48,23 @@ interface RoomCompositionsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return RoomCompositionNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): RoomCompositionNewResponse;
+
+    /**
+     * @api
+     *
      * @return RoomCompositionGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $roomCompositionID,
@@ -55,10 +74,25 @@ interface RoomCompositionsContract
     /**
      * @api
      *
+     * @return RoomCompositionGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $roomCompositionID,
+        mixed $params,
+        ?RequestOptions $requestOptions = null,
+    ): RoomCompositionGetResponse;
+
+    /**
+     * @api
+     *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[date_created_at][eq], filter[date_created_at][gte], filter[date_created_at][lte], filter[session_id], filter[status]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @return RoomCompositionListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
@@ -68,9 +102,36 @@ interface RoomCompositionsContract
 
     /**
      * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return RoomCompositionListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): RoomCompositionListResponse;
+
+    /**
+     * @api
+     *
+     * @throws APIException
      */
     public function delete(
         string $roomCompositionID,
         ?RequestOptions $requestOptions = null
+    ): mixed;
+
+    /**
+     * @api
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $roomCompositionID,
+        mixed $params,
+        ?RequestOptions $requestOptions = null,
     ): mixed;
 }

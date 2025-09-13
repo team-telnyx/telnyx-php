@@ -8,6 +8,7 @@ use Telnyx\AccessIPAddress\AccessIPAddressListParams\Filter;
 use Telnyx\AccessIPAddress\AccessIPAddressListParams\Page;
 use Telnyx\AccessIPAddress\AccessIPAddressListResponse;
 use Telnyx\AccessIPAddress\AccessIPAddressResponse;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 
@@ -22,6 +23,8 @@ interface AccessIPAddressContract
      * @param string $description
      *
      * @return AccessIPAddressResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $ipAddress,
@@ -32,7 +35,23 @@ interface AccessIPAddressContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
      * @return AccessIPAddressResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): AccessIPAddressResponse;
+
+    /**
+     * @api
+     *
+     * @return AccessIPAddressResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $accessIPAddressID,
@@ -42,10 +61,25 @@ interface AccessIPAddressContract
     /**
      * @api
      *
+     * @return AccessIPAddressResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $accessIPAddressID,
+        mixed $params,
+        ?RequestOptions $requestOptions = null,
+    ): AccessIPAddressResponse;
+
+    /**
+     * @api
+     *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[ip_source], filter[ip_address], filter[created_at]. Supports complex bracket operations for dynamic filtering.
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
      * @return AccessIPAddressListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
@@ -56,10 +90,39 @@ interface AccessIPAddressContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return AccessIPAddressListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): AccessIPAddressListResponse;
+
+    /**
+     * @api
+     *
      * @return AccessIPAddressResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function delete(
         string $accessIPAddressID,
         ?RequestOptions $requestOptions = null
+    ): AccessIPAddressResponse;
+
+    /**
+     * @api
+     *
+     * @return AccessIPAddressResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $accessIPAddressID,
+        mixed $params,
+        ?RequestOptions $requestOptions = null,
     ): AccessIPAddressResponse;
 }

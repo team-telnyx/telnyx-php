@@ -9,6 +9,7 @@ use Telnyx\BulkSimCardActions\BulkSimCardActionListParams;
 use Telnyx\BulkSimCardActions\BulkSimCardActionListParams\FilterActionType;
 use Telnyx\BulkSimCardActions\BulkSimCardActionListResponse;
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\BulkSimCardActionsContract;
@@ -28,9 +29,28 @@ final class BulkSimCardActionsService implements BulkSimCardActionsContract
      * This API fetches information about a bulk SIM card action. A bulk SIM card action contains details about a collection of individual SIM card actions.
      *
      * @return BulkSimCardActionGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): BulkSimCardActionGetResponse {
+        $params = [];
+
+        return $this->retrieveRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return BulkSimCardActionGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): BulkSimCardActionGetResponse {
         // @phpstan-ignore-next-line;
@@ -52,6 +72,8 @@ final class BulkSimCardActionsService implements BulkSimCardActionsContract
      * @param int $pageSize the size of the page
      *
      * @return BulkSimCardActionListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filterActionType = omit,
@@ -59,13 +81,31 @@ final class BulkSimCardActionsService implements BulkSimCardActionsContract
         $pageSize = omit,
         ?RequestOptions $requestOptions = null,
     ): BulkSimCardActionListResponse {
+        $params = [
+            'filterActionType' => $filterActionType,
+            'pageNumber' => $pageNumber,
+            'pageSize' => $pageSize,
+        ];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return BulkSimCardActionListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): BulkSimCardActionListResponse {
         [$parsed, $options] = BulkSimCardActionListParams::parseRequest(
-            [
-                'filterActionType' => $filterActionType,
-                'pageNumber' => $pageNumber,
-                'pageSize' => $pageSize,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;

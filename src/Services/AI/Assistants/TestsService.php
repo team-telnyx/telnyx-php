@@ -14,6 +14,7 @@ use Telnyx\AI\Assistants\Tests\TestListResponse;
 use Telnyx\AI\Assistants\Tests\TestUpdateParams;
 use Telnyx\AI\Assistants\Tests\TestUpdateParams\Rubric as Rubric1;
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\TestsContract;
@@ -58,6 +59,8 @@ final class TestsService implements TestsContract
      * @param string $testSuite Optional test suite name to group related tests together. Useful for organizing tests by feature, team, or release cycle.
      *
      * @return AssistantTest<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $destination,
@@ -70,18 +73,36 @@ final class TestsService implements TestsContract
         $testSuite = omit,
         ?RequestOptions $requestOptions = null,
     ): AssistantTest {
+        $params = [
+            'destination' => $destination,
+            'instructions' => $instructions,
+            'name' => $name,
+            'rubric' => $rubric,
+            'description' => $description,
+            'maxDurationSeconds' => $maxDurationSeconds,
+            'telnyxConversationChannel' => $telnyxConversationChannel,
+            'testSuite' => $testSuite,
+        ];
+
+        return $this->createRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return AssistantTest<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): AssistantTest {
         [$parsed, $options] = TestCreateParams::parseRequest(
-            [
-                'destination' => $destination,
-                'instructions' => $instructions,
-                'name' => $name,
-                'rubric' => $rubric,
-                'description' => $description,
-                'maxDurationSeconds' => $maxDurationSeconds,
-                'telnyxConversationChannel' => $telnyxConversationChannel,
-                'testSuite' => $testSuite,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -100,9 +121,28 @@ final class TestsService implements TestsContract
      * Retrieves detailed information about a specific assistant test
      *
      * @return AssistantTest<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $testID,
+        ?RequestOptions $requestOptions = null
+    ): AssistantTest {
+        $params = [];
+
+        return $this->retrieveRaw($testID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return AssistantTest<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $testID,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): AssistantTest {
         // @phpstan-ignore-next-line;
@@ -129,6 +169,8 @@ final class TestsService implements TestsContract
      * @param string $testSuite updated test suite assignment for better organization
      *
      * @return AssistantTest<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function update(
         string $testID,
@@ -142,18 +184,37 @@ final class TestsService implements TestsContract
         $testSuite = omit,
         ?RequestOptions $requestOptions = null,
     ): AssistantTest {
+        $params = [
+            'description' => $description,
+            'destination' => $destination,
+            'instructions' => $instructions,
+            'maxDurationSeconds' => $maxDurationSeconds,
+            'name' => $name,
+            'rubric' => $rubric,
+            'telnyxConversationChannel' => $telnyxConversationChannel,
+            'testSuite' => $testSuite,
+        ];
+
+        return $this->updateRaw($testID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return AssistantTest<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $testID,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): AssistantTest {
         [$parsed, $options] = TestUpdateParams::parseRequest(
-            [
-                'description' => $description,
-                'destination' => $destination,
-                'instructions' => $instructions,
-                'maxDurationSeconds' => $maxDurationSeconds,
-                'name' => $name,
-                'rubric' => $rubric,
-                'telnyxConversationChannel' => $telnyxConversationChannel,
-                'testSuite' => $testSuite,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -177,6 +238,8 @@ final class TestsService implements TestsContract
      * @param string $testSuite Filter tests by test suite name
      *
      * @return TestListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $destination = omit,
@@ -185,14 +248,32 @@ final class TestsService implements TestsContract
         $testSuite = omit,
         ?RequestOptions $requestOptions = null,
     ): TestListResponse {
+        $params = [
+            'destination' => $destination,
+            'page' => $page,
+            'telnyxConversationChannel' => $telnyxConversationChannel,
+            'testSuite' => $testSuite,
+        ];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return TestListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): TestListResponse {
         [$parsed, $options] = TestListParams::parseRequest(
-            [
-                'destination' => $destination,
-                'page' => $page,
-                'telnyxConversationChannel' => $telnyxConversationChannel,
-                'testSuite' => $testSuite,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -209,9 +290,26 @@ final class TestsService implements TestsContract
      * @api
      *
      * Permanently removes an assistant test and all associated data
+     *
+     * @throws APIException
      */
     public function delete(
         string $testID,
+        ?RequestOptions $requestOptions = null
+    ): mixed {
+        $params = [];
+
+        return $this->deleteRaw($testID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $testID,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): mixed {
         // @phpstan-ignore-next-line;

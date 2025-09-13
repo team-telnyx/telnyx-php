@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckCreateParams;
 use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckDeleteResponse;
@@ -35,6 +36,8 @@ final class GlobalIPHealthChecksService implements GlobalIPHealthChecksContract
      * @param string $healthCheckType the Global IP health check type
      *
      * @return GlobalIPHealthCheckNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $globalIPID = omit,
@@ -42,13 +45,31 @@ final class GlobalIPHealthChecksService implements GlobalIPHealthChecksContract
         $healthCheckType = omit,
         ?RequestOptions $requestOptions = null,
     ): GlobalIPHealthCheckNewResponse {
+        $params = [
+            'globalIPID' => $globalIPID,
+            'healthCheckParams' => $healthCheckParams,
+            'healthCheckType' => $healthCheckType,
+        ];
+
+        return $this->createRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return GlobalIPHealthCheckNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): GlobalIPHealthCheckNewResponse {
         [$parsed, $options] = GlobalIPHealthCheckCreateParams::parseRequest(
-            [
-                'globalIPID' => $globalIPID,
-                'healthCheckParams' => $healthCheckParams,
-                'healthCheckType' => $healthCheckType,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -67,9 +88,28 @@ final class GlobalIPHealthChecksService implements GlobalIPHealthChecksContract
      * Retrieve a Global IP health check.
      *
      * @return GlobalIPHealthCheckGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): GlobalIPHealthCheckGetResponse {
+        $params = [];
+
+        return $this->retrieveRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return GlobalIPHealthCheckGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): GlobalIPHealthCheckGetResponse {
         // @phpstan-ignore-next-line;
@@ -89,13 +129,33 @@ final class GlobalIPHealthChecksService implements GlobalIPHealthChecksContract
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
      * @return GlobalIPHealthCheckListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $page = omit,
         ?RequestOptions $requestOptions = null
     ): GlobalIPHealthCheckListResponse {
+        $params = ['page' => $page];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return GlobalIPHealthCheckListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): GlobalIPHealthCheckListResponse {
         [$parsed, $options] = GlobalIPHealthCheckListParams::parseRequest(
-            ['page' => $page],
+            $params,
             $requestOptions
         );
 
@@ -115,9 +175,28 @@ final class GlobalIPHealthChecksService implements GlobalIPHealthChecksContract
      * Delete a Global IP health check.
      *
      * @return GlobalIPHealthCheckDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function delete(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): GlobalIPHealthCheckDeleteResponse {
+        $params = [];
+
+        return $this->deleteRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return GlobalIPHealthCheckDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): GlobalIPHealthCheckDeleteResponse {
         // @phpstan-ignore-next-line;

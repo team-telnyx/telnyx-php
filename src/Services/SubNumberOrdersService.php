@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\NumberOrderPhoneNumbers\UpdateRegulatoryRequirement;
 use Telnyx\RequestOptions;
@@ -38,14 +39,35 @@ final class SubNumberOrdersService implements SubNumberOrdersContract
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[include_phone_numbers]
      *
      * @return SubNumberOrderGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $subNumberOrderID,
         $filter = omit,
         ?RequestOptions $requestOptions = null,
     ): SubNumberOrderGetResponse {
+        $params = ['filter' => $filter];
+
+        return $this->retrieveRaw($subNumberOrderID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return SubNumberOrderGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $subNumberOrderID,
+        array $params,
+        ?RequestOptions $requestOptions = null,
+    ): SubNumberOrderGetResponse {
         [$parsed, $options] = SubNumberOrderRetrieveParams::parseRequest(
-            ['filter' => $filter],
+            $params,
             $requestOptions
         );
 
@@ -67,14 +89,35 @@ final class SubNumberOrdersService implements SubNumberOrdersContract
      * @param list<UpdateRegulatoryRequirement> $regulatoryRequirements
      *
      * @return SubNumberOrderUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function update(
         string $subNumberOrderID,
         $regulatoryRequirements = omit,
         ?RequestOptions $requestOptions = null,
     ): SubNumberOrderUpdateResponse {
+        $params = ['regulatoryRequirements' => $regulatoryRequirements];
+
+        return $this->updateRaw($subNumberOrderID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return SubNumberOrderUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $subNumberOrderID,
+        array $params,
+        ?RequestOptions $requestOptions = null,
+    ): SubNumberOrderUpdateResponse {
         [$parsed, $options] = SubNumberOrderUpdateParams::parseRequest(
-            ['regulatoryRequirements' => $regulatoryRequirements],
+            $params,
             $requestOptions
         );
 
@@ -96,13 +139,33 @@ final class SubNumberOrdersService implements SubNumberOrdersContract
      * @param Filter1 $filter Consolidated filter parameter (deepObject style). Originally: filter[status], filter[order_request_id], filter[country_code], filter[phone_number_type], filter[phone_numbers_count]
      *
      * @return SubNumberOrderListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
         ?RequestOptions $requestOptions = null
     ): SubNumberOrderListResponse {
+        $params = ['filter' => $filter];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return SubNumberOrderListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): SubNumberOrderListResponse {
         [$parsed, $options] = SubNumberOrderListParams::parseRequest(
-            ['filter' => $filter],
+            $params,
             $requestOptions
         );
 
@@ -122,10 +185,29 @@ final class SubNumberOrdersService implements SubNumberOrdersContract
      * Allows you to cancel a sub number order in 'pending' status.
      *
      * @return SubNumberOrderCancelResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function cancel(
         string $subNumberOrderID,
         ?RequestOptions $requestOptions = null
+    ): SubNumberOrderCancelResponse {
+        $params = [];
+
+        return $this->cancelRaw($subNumberOrderID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return SubNumberOrderCancelResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function cancelRaw(
+        string $subNumberOrderID,
+        mixed $params,
+        ?RequestOptions $requestOptions = null,
     ): SubNumberOrderCancelResponse {
         // @phpstan-ignore-next-line;
         return $this->client->request(
@@ -144,16 +226,37 @@ final class SubNumberOrdersService implements SubNumberOrdersContract
      * @param string $requirementGroupID The ID of the requirement group to associate
      *
      * @return SubNumberOrderUpdateRequirementGroupResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function updateRequirementGroup(
         string $id,
         $requirementGroupID,
         ?RequestOptions $requestOptions = null
     ): SubNumberOrderUpdateRequirementGroupResponse {
+        $params = ['requirementGroupID' => $requirementGroupID];
+
+        return $this->updateRequirementGroupRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return SubNumberOrderUpdateRequirementGroupResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRequirementGroupRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): SubNumberOrderUpdateRequirementGroupResponse {
         [
             $parsed, $options,
         ] = SubNumberOrderUpdateRequirementGroupParams::parseRequest(
-            ['requirementGroupID' => $requirementGroupID],
+            $params,
             $requestOptions
         );
 

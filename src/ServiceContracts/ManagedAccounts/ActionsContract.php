@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\ManagedAccounts;
 
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\ManagedAccounts\Actions\ActionDisableResponse;
 use Telnyx\ManagedAccounts\Actions\ActionEnableResponse;
@@ -17,6 +18,8 @@ interface ActionsContract
      * @api
      *
      * @return ActionDisableResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function disable(
         string $id,
@@ -26,13 +29,43 @@ interface ActionsContract
     /**
      * @api
      *
+     * @return ActionDisableResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function disableRaw(
+        string $id,
+        mixed $params,
+        ?RequestOptions $requestOptions = null
+    ): ActionDisableResponse;
+
+    /**
+     * @api
+     *
      * @param bool $reenableAllConnections When true, all connections owned by this managed account will automatically be re-enabled. Note: Any connections that do not pass validations will not be re-enabled.
      *
      * @return ActionEnableResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function enable(
         string $id,
         $reenableAllConnections = omit,
         ?RequestOptions $requestOptions = null,
+    ): ActionEnableResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ActionEnableResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function enableRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
     ): ActionEnableResponse;
 }

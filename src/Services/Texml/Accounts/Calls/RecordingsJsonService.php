@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Texml\Accounts\Calls;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\Accounts\Calls\RecordingsJsonContract;
@@ -40,6 +41,8 @@ final class RecordingsJsonService implements RecordingsJsonContract
      * @param bool $sendRecordingURL whether to send RecordingUrl in webhooks
      *
      * @return RecordingsJsonRecordingsJsonResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function recordingsJson(
         string $callSid,
@@ -53,18 +56,37 @@ final class RecordingsJsonService implements RecordingsJsonContract
         $sendRecordingURL = omit,
         ?RequestOptions $requestOptions = null,
     ): RecordingsJsonRecordingsJsonResponse {
+        $params = [
+            'accountSid' => $accountSid,
+            'playBeep' => $playBeep,
+            'recordingChannels' => $recordingChannels,
+            'recordingStatusCallback' => $recordingStatusCallback,
+            'recordingStatusCallbackEvent' => $recordingStatusCallbackEvent,
+            'recordingStatusCallbackMethod' => $recordingStatusCallbackMethod,
+            'recordingTrack' => $recordingTrack,
+            'sendRecordingURL' => $sendRecordingURL,
+        ];
+
+        return $this->recordingsJsonRaw($callSid, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return RecordingsJsonRecordingsJsonResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function recordingsJsonRaw(
+        string $callSid,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): RecordingsJsonRecordingsJsonResponse {
         [$parsed, $options] = RecordingsJsonRecordingsJsonParams::parseRequest(
-            [
-                'accountSid' => $accountSid,
-                'playBeep' => $playBeep,
-                'recordingChannels' => $recordingChannels,
-                'recordingStatusCallback' => $recordingStatusCallback,
-                'recordingStatusCallbackEvent' => $recordingStatusCallbackEvent,
-                'recordingStatusCallbackMethod' => $recordingStatusCallbackMethod,
-                'recordingTrack' => $recordingTrack,
-                'sendRecordingURL' => $sendRecordingURL,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
         $accountSid = $parsed['accountSid'];
         unset($parsed['accountSid']);
@@ -90,16 +112,37 @@ final class RecordingsJsonService implements RecordingsJsonContract
      * @param string $accountSid
      *
      * @return RecordingsJsonGetRecordingsJsonResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieveRecordingsJson(
         string $callSid,
         $accountSid,
         ?RequestOptions $requestOptions = null
     ): RecordingsJsonGetRecordingsJsonResponse {
+        $params = ['accountSid' => $accountSid];
+
+        return $this->retrieveRecordingsJsonRaw($callSid, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return RecordingsJsonGetRecordingsJsonResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRecordingsJsonRaw(
+        string $callSid,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): RecordingsJsonGetRecordingsJsonResponse {
         [
             $parsed, $options,
         ] = RecordingsJsonRetrieveRecordingsJsonParams::parseRequest(
-            ['accountSid' => $accountSid],
+            $params,
             $requestOptions
         );
         $accountSid = $parsed['accountSid'];

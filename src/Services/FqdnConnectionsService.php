@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\CredentialConnections\ConnectionRtcpSettings;
@@ -64,6 +65,8 @@ final class FqdnConnectionsService implements FqdnConnectionsContract
      * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
      *
      * @return FqdnConnectionNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $connectionName,
@@ -88,30 +91,48 @@ final class FqdnConnectionsService implements FqdnConnectionsContract
         $webhookTimeoutSecs = omit,
         ?RequestOptions $requestOptions = null,
     ): FqdnConnectionNewResponse {
+        $params = [
+            'connectionName' => $connectionName,
+            'active' => $active,
+            'anchorsiteOverride' => $anchorsiteOverride,
+            'androidPushCredentialID' => $androidPushCredentialID,
+            'defaultOnHoldComfortNoiseEnabled' => $defaultOnHoldComfortNoiseEnabled,
+            'dtmfType' => $dtmfType,
+            'encodeContactHeaderEnabled' => $encodeContactHeaderEnabled,
+            'encryptedMedia' => $encryptedMedia,
+            'inbound' => $inbound,
+            'iosPushCredentialID' => $iosPushCredentialID,
+            'microsoftTeamsSbc' => $microsoftTeamsSbc,
+            'onnetT38PassthroughEnabled' => $onnetT38PassthroughEnabled,
+            'outbound' => $outbound,
+            'rtcpSettings' => $rtcpSettings,
+            'tags' => $tags,
+            'transportProtocol' => $transportProtocol,
+            'webhookAPIVersion' => $webhookAPIVersion,
+            'webhookEventFailoverURL' => $webhookEventFailoverURL,
+            'webhookEventURL' => $webhookEventURL,
+            'webhookTimeoutSecs' => $webhookTimeoutSecs,
+        ];
+
+        return $this->createRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return FqdnConnectionNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): FqdnConnectionNewResponse {
         [$parsed, $options] = FqdnConnectionCreateParams::parseRequest(
-            [
-                'connectionName' => $connectionName,
-                'active' => $active,
-                'anchorsiteOverride' => $anchorsiteOverride,
-                'androidPushCredentialID' => $androidPushCredentialID,
-                'defaultOnHoldComfortNoiseEnabled' => $defaultOnHoldComfortNoiseEnabled,
-                'dtmfType' => $dtmfType,
-                'encodeContactHeaderEnabled' => $encodeContactHeaderEnabled,
-                'encryptedMedia' => $encryptedMedia,
-                'inbound' => $inbound,
-                'iosPushCredentialID' => $iosPushCredentialID,
-                'microsoftTeamsSbc' => $microsoftTeamsSbc,
-                'onnetT38PassthroughEnabled' => $onnetT38PassthroughEnabled,
-                'outbound' => $outbound,
-                'rtcpSettings' => $rtcpSettings,
-                'tags' => $tags,
-                'transportProtocol' => $transportProtocol,
-                'webhookAPIVersion' => $webhookAPIVersion,
-                'webhookEventFailoverURL' => $webhookEventFailoverURL,
-                'webhookEventURL' => $webhookEventURL,
-                'webhookTimeoutSecs' => $webhookTimeoutSecs,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -130,9 +151,28 @@ final class FqdnConnectionsService implements FqdnConnectionsContract
      * Retrieves the details of an existing FQDN connection.
      *
      * @return FqdnConnectionGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): FqdnConnectionGetResponse {
+        $params = [];
+
+        return $this->retrieveRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return FqdnConnectionGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): FqdnConnectionGetResponse {
         // @phpstan-ignore-next-line;
@@ -170,6 +210,8 @@ final class FqdnConnectionsService implements FqdnConnectionsContract
      * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
      *
      * @return FqdnConnectionUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function update(
         string $id,
@@ -194,29 +236,48 @@ final class FqdnConnectionsService implements FqdnConnectionsContract
         $webhookTimeoutSecs = omit,
         ?RequestOptions $requestOptions = null,
     ): FqdnConnectionUpdateResponse {
+        $params = [
+            'active' => $active,
+            'anchorsiteOverride' => $anchorsiteOverride,
+            'androidPushCredentialID' => $androidPushCredentialID,
+            'connectionName' => $connectionName,
+            'defaultOnHoldComfortNoiseEnabled' => $defaultOnHoldComfortNoiseEnabled,
+            'dtmfType' => $dtmfType,
+            'encodeContactHeaderEnabled' => $encodeContactHeaderEnabled,
+            'encryptedMedia' => $encryptedMedia,
+            'inbound' => $inbound,
+            'iosPushCredentialID' => $iosPushCredentialID,
+            'onnetT38PassthroughEnabled' => $onnetT38PassthroughEnabled,
+            'outbound' => $outbound,
+            'rtcpSettings' => $rtcpSettings,
+            'tags' => $tags,
+            'transportProtocol' => $transportProtocol,
+            'webhookAPIVersion' => $webhookAPIVersion,
+            'webhookEventFailoverURL' => $webhookEventFailoverURL,
+            'webhookEventURL' => $webhookEventURL,
+            'webhookTimeoutSecs' => $webhookTimeoutSecs,
+        ];
+
+        return $this->updateRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return FqdnConnectionUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): FqdnConnectionUpdateResponse {
         [$parsed, $options] = FqdnConnectionUpdateParams::parseRequest(
-            [
-                'active' => $active,
-                'anchorsiteOverride' => $anchorsiteOverride,
-                'androidPushCredentialID' => $androidPushCredentialID,
-                'connectionName' => $connectionName,
-                'defaultOnHoldComfortNoiseEnabled' => $defaultOnHoldComfortNoiseEnabled,
-                'dtmfType' => $dtmfType,
-                'encodeContactHeaderEnabled' => $encodeContactHeaderEnabled,
-                'encryptedMedia' => $encryptedMedia,
-                'inbound' => $inbound,
-                'iosPushCredentialID' => $iosPushCredentialID,
-                'onnetT38PassthroughEnabled' => $onnetT38PassthroughEnabled,
-                'outbound' => $outbound,
-                'rtcpSettings' => $rtcpSettings,
-                'tags' => $tags,
-                'transportProtocol' => $transportProtocol,
-                'webhookAPIVersion' => $webhookAPIVersion,
-                'webhookEventFailoverURL' => $webhookEventFailoverURL,
-                'webhookEventURL' => $webhookEventURL,
-                'webhookTimeoutSecs' => $webhookTimeoutSecs,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -250,6 +311,8 @@ final class FqdnConnectionsService implements FqdnConnectionsContract
      * </ul> <br/> If not given, results are sorted by <code>created_at</code> in descending order.
      *
      * @return FqdnConnectionListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
@@ -257,8 +320,26 @@ final class FqdnConnectionsService implements FqdnConnectionsContract
         $sort = omit,
         ?RequestOptions $requestOptions = null,
     ): FqdnConnectionListResponse {
+        $params = ['filter' => $filter, 'page' => $page, 'sort' => $sort];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return FqdnConnectionListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): FqdnConnectionListResponse {
         [$parsed, $options] = FqdnConnectionListParams::parseRequest(
-            ['filter' => $filter, 'page' => $page, 'sort' => $sort],
+            $params,
             $requestOptions
         );
 
@@ -278,9 +359,28 @@ final class FqdnConnectionsService implements FqdnConnectionsContract
      * Deletes an FQDN connection.
      *
      * @return FqdnConnectionDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function delete(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): FqdnConnectionDeleteResponse {
+        $params = [];
+
+        return $this->deleteRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return FqdnConnectionDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): FqdnConnectionDeleteResponse {
         // @phpstan-ignore-next-line;

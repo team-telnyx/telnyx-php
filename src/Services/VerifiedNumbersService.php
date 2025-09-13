@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\VerifiedNumbersContract;
@@ -43,18 +44,37 @@ final class VerifiedNumbersService implements VerifiedNumbersContract
      * @param VerificationMethod|value-of<VerificationMethod> $verificationMethod verification method
      *
      * @return VerifiedNumberNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $phoneNumber,
         $verificationMethod,
         ?RequestOptions $requestOptions = null
     ): VerifiedNumberNewResponse {
+        $params = [
+            'phoneNumber' => $phoneNumber, 'verificationMethod' => $verificationMethod,
+        ];
+
+        return $this->createRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return VerifiedNumberNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): VerifiedNumberNewResponse {
         [$parsed, $options] = VerifiedNumberCreateParams::parseRequest(
-            [
-                'phoneNumber' => $phoneNumber,
-                'verificationMethod' => $verificationMethod,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -73,9 +93,28 @@ final class VerifiedNumbersService implements VerifiedNumbersContract
      * Retrieve a verified number
      *
      * @return VerifiedNumberDataWrapper<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $phoneNumber,
+        ?RequestOptions $requestOptions = null
+    ): VerifiedNumberDataWrapper {
+        $params = [];
+
+        return $this->retrieveRaw($phoneNumber, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return VerifiedNumberDataWrapper<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $phoneNumber,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): VerifiedNumberDataWrapper {
         // @phpstan-ignore-next-line;
@@ -95,13 +134,33 @@ final class VerifiedNumbersService implements VerifiedNumbersContract
      * @param Page $page Consolidated page parameter (deepObject style). Use page[size] and page[number] in the query string. Originally: page[size], page[number]
      *
      * @return VerifiedNumberListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $page = omit,
         ?RequestOptions $requestOptions = null
     ): VerifiedNumberListResponse {
+        $params = ['page' => $page];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return VerifiedNumberListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): VerifiedNumberListResponse {
         [$parsed, $options] = VerifiedNumberListParams::parseRequest(
-            ['page' => $page],
+            $params,
             $requestOptions
         );
 
@@ -121,9 +180,28 @@ final class VerifiedNumbersService implements VerifiedNumbersContract
      * Delete a verified number
      *
      * @return VerifiedNumberDataWrapper<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function delete(
         string $phoneNumber,
+        ?RequestOptions $requestOptions = null
+    ): VerifiedNumberDataWrapper {
+        $params = [];
+
+        return $this->deleteRaw($phoneNumber, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return VerifiedNumberDataWrapper<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $phoneNumber,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): VerifiedNumberDataWrapper {
         // @phpstan-ignore-next-line;

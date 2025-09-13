@@ -14,6 +14,7 @@ use Telnyx\BundlePricing\UserBundles\UserBundleListResponse;
 use Telnyx\BundlePricing\UserBundles\UserBundleListUnusedParams\Filter as Filter1;
 use Telnyx\BundlePricing\UserBundles\UserBundleListUnusedResponse;
 use Telnyx\BundlePricing\UserBundles\UserBundleNewResponse;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 
@@ -29,6 +30,8 @@ interface UserBundlesContract
      * @param string $authorizationBearer Authenticates the request with your Telnyx API V2 KEY
      *
      * @return UserBundleNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $idempotencyKey = omit,
@@ -40,13 +43,44 @@ interface UserBundlesContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return UserBundleNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): UserBundleNewResponse;
+
+    /**
+     * @api
+     *
      * @param string $authorizationBearer Authenticates the request with your Telnyx API V2 KEY
      *
      * @return UserBundleGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $userBundleID,
         $authorizationBearer = omit,
+        ?RequestOptions $requestOptions = null,
+    ): UserBundleGetResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return UserBundleGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $userBundleID,
+        array $params,
         ?RequestOptions $requestOptions = null,
     ): UserBundleGetResponse;
 
@@ -58,6 +92,8 @@ interface UserBundlesContract
      * @param string $authorizationBearer Authenticates the request with your Telnyx API V2 KEY
      *
      * @return UserBundleListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
@@ -69,9 +105,25 @@ interface UserBundlesContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return UserBundleListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): UserBundleListResponse;
+
+    /**
+     * @api
+     *
      * @param string $authorizationBearer Authenticates the request with your Telnyx API V2 KEY
      *
      * @return UserBundleDeactivateResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function deactivate(
         string $userBundleID,
@@ -82,9 +134,26 @@ interface UserBundlesContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return UserBundleDeactivateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function deactivateRaw(
+        string $userBundleID,
+        array $params,
+        ?RequestOptions $requestOptions = null,
+    ): UserBundleDeactivateResponse;
+
+    /**
+     * @api
+     *
      * @param string $authorizationBearer Authenticates the request with your Telnyx API V2 KEY
      *
      * @return UserBundleListResourcesResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function listResources(
         string $userBundleID,
@@ -95,14 +164,45 @@ interface UserBundlesContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return UserBundleListResourcesResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listResourcesRaw(
+        string $userBundleID,
+        array $params,
+        ?RequestOptions $requestOptions = null,
+    ): UserBundleListResourcesResponse;
+
+    /**
+     * @api
+     *
      * @param Filter1 $filter Consolidated filter parameter (deepObject style). Supports filtering by country_iso and resource. Examples: filter[country_iso]=US or filter[resource]=+15617819942
      * @param string $authorizationBearer Authenticates the request with your Telnyx API V2 KEY
      *
      * @return UserBundleListUnusedResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function listUnused(
         $filter = omit,
         $authorizationBearer = omit,
         ?RequestOptions $requestOptions = null,
+    ): UserBundleListUnusedResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return UserBundleListUnusedResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listUnusedRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
     ): UserBundleListUnusedResponse;
 }

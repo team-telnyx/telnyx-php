@@ -8,6 +8,7 @@ use Telnyx\AI\Clusters\ClusterComputeResponse;
 use Telnyx\AI\Clusters\ClusterGetResponse;
 use Telnyx\AI\Clusters\ClusterListParams\Page;
 use Telnyx\AI\Clusters\ClusterListResponse;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 
@@ -22,6 +23,8 @@ interface ClustersContract
      * @param int $topNNodes The number of nodes in the cluster to return in the response. Nodes will be sorted by their centrality within the cluster.
      *
      * @return ClusterGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $taskID,
@@ -33,9 +36,26 @@ interface ClustersContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return ClusterGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $taskID,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): ClusterGetResponse;
+
+    /**
+     * @api
+     *
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
      * @return ClusterListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $page = omit,
@@ -44,9 +64,36 @@ interface ClustersContract
 
     /**
      * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ClusterListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): ClusterListResponse;
+
+    /**
+     * @api
+     *
+     * @throws APIException
      */
     public function delete(
         string $taskID,
+        ?RequestOptions $requestOptions = null
+    ): mixed;
+
+    /**
+     * @api
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $taskID,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): mixed;
 
@@ -60,6 +107,8 @@ interface ClustersContract
      * @param string $prefix prefix to filter whcih files in the buckets are included
      *
      * @return ClusterComputeResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function compute(
         $bucket,
@@ -73,11 +122,40 @@ interface ClustersContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return ClusterComputeResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function computeRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): ClusterComputeResponse;
+
+    /**
+     * @api
+     *
      * @param int $clusterID
+     *
+     * @throws APIException
      */
     public function fetchGraph(
         string $taskID,
         $clusterID = omit,
         ?RequestOptions $requestOptions = null,
+    ): mixed;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @throws APIException
+     */
+    public function fetchGraphRaw(
+        string $taskID,
+        array $params,
+        ?RequestOptions $requestOptions = null
     ): mixed;
 }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PrivateWirelessGateways\PrivateWirelessGatewayDeleteResponse;
 use Telnyx\PrivateWirelessGateways\PrivateWirelessGatewayGetResponse;
@@ -23,6 +24,8 @@ interface PrivateWirelessGatewaysContract
      * @param string $regionCode The code of the region where the private wireless gateway will be assigned. A list of available regions can be found at the regions endpoint
      *
      * @return PrivateWirelessGatewayNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $name,
@@ -34,10 +37,39 @@ interface PrivateWirelessGatewaysContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return PrivateWirelessGatewayNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): PrivateWirelessGatewayNewResponse;
+
+    /**
+     * @api
+     *
      * @return PrivateWirelessGatewayGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): PrivateWirelessGatewayGetResponse;
+
+    /**
+     * @api
+     *
+     * @return PrivateWirelessGatewayGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): PrivateWirelessGatewayGetResponse;
 
@@ -53,6 +85,8 @@ interface PrivateWirelessGatewaysContract
      * @param int $pageSize the size of the page
      *
      * @return PrivateWirelessGatewayListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filterCreatedAt = omit,
@@ -68,10 +102,39 @@ interface PrivateWirelessGatewaysContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return PrivateWirelessGatewayListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): PrivateWirelessGatewayListResponse;
+
+    /**
+     * @api
+     *
      * @return PrivateWirelessGatewayDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function delete(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): PrivateWirelessGatewayDeleteResponse;
+
+    /**
+     * @api
+     *
+     * @return PrivateWirelessGatewayDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): PrivateWirelessGatewayDeleteResponse;
 }

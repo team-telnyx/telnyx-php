@@ -13,7 +13,7 @@ use Telnyx\Core\Contracts\BaseModel;
   * @phpstan-type campaign_get_mno_metadata_response = array{10999?: 109991}
   * 
   * 
-  * When used in a response, this type parameter can be used to define a $rawResponse property.
+  * When used in a response, this type parameter can define a $rawResponse property.
   * @template TRawResponse of object = object{}
   * @mixin TRawResponse
   * 

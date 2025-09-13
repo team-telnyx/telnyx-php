@@ -25,6 +25,7 @@ use Telnyx\AI\Assistants\TranscriptionSettings;
 use Telnyx\AI\Assistants\TransferTool;
 use Telnyx\AI\Assistants\VoiceSettings;
 use Telnyx\AI\Assistants\WebhookTool;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 
@@ -54,6 +55,8 @@ interface AssistantsContract
      * @param VoiceSettings $voiceSettings
      *
      * @return AssistantNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $instructions,
@@ -78,12 +81,28 @@ interface AssistantsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return AssistantNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): AssistantNewResponse;
+
+    /**
+     * @api
+     *
      * @param string $callControlID
      * @param bool $fetchDynamicVariablesFromWebhook
      * @param string $from
      * @param string $to
      *
      * @return AssistantGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $assistantID,
@@ -91,6 +110,21 @@ interface AssistantsContract
         $fetchDynamicVariablesFromWebhook = omit,
         $from = omit,
         $to = omit,
+        ?RequestOptions $requestOptions = null,
+    ): AssistantGetResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return AssistantGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $assistantID,
+        array $params,
         ?RequestOptions $requestOptions = null,
     ): AssistantGetResponse;
 
@@ -115,6 +149,8 @@ interface AssistantsContract
      * @param list<WebhookTool|RetrievalTool|HandoffTool|HangupTool|TransferTool|SipReferTool|DtmfTool> $tools The tools that the assistant can use. These may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables)
      * @param TranscriptionSettings $transcription
      * @param VoiceSettings $voiceSettings
+     *
+     * @throws APIException
      */
     public function update(
         string $assistantID,
@@ -141,7 +177,22 @@ interface AssistantsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $assistantID,
+        array $params,
+        ?RequestOptions $requestOptions = null,
+    ): mixed;
+
+    /**
+     * @api
+     *
      * @return AssistantsList<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         ?RequestOptions $requestOptions = null
@@ -150,11 +201,38 @@ interface AssistantsContract
     /**
      * @api
      *
+     * @return AssistantsList<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        mixed $params,
+        ?RequestOptions $requestOptions = null
+    ): AssistantsList;
+
+    /**
+     * @api
+     *
      * @return AssistantDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function delete(
         string $assistantID,
         ?RequestOptions $requestOptions = null
+    ): AssistantDeleteResponse;
+
+    /**
+     * @api
+     *
+     * @return AssistantDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $assistantID,
+        mixed $params,
+        ?RequestOptions $requestOptions = null,
     ): AssistantDeleteResponse;
 
     /**
@@ -165,6 +243,8 @@ interface AssistantsContract
      * @param string $name The optional display name of the user sending the message
      *
      * @return AssistantChatResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function chat(
         string $assistantID,
@@ -177,7 +257,24 @@ interface AssistantsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return AssistantChatResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function chatRaw(
+        string $assistantID,
+        array $params,
+        ?RequestOptions $requestOptions = null,
+    ): AssistantChatResponse;
+
+    /**
+     * @api
+     *
      * @return AssistantCloneResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function clone(
         string $assistantID,
@@ -186,6 +283,21 @@ interface AssistantsContract
 
     /**
      * @api
+     *
+     * @return AssistantCloneResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function cloneRaw(
+        string $assistantID,
+        mixed $params,
+        ?RequestOptions $requestOptions = null,
+    ): AssistantCloneResponse;
+
+    /**
+     * @api
+     *
+     * @throws APIException
      */
     public function getTexml(
         string $assistantID,
@@ -195,14 +307,41 @@ interface AssistantsContract
     /**
      * @api
      *
+     * @throws APIException
+     */
+    public function getTexmlRaw(
+        string $assistantID,
+        mixed $params,
+        ?RequestOptions $requestOptions = null,
+    ): string;
+
+    /**
+     * @api
+     *
      * @param string $apiKeyRef Integration secret pointer that refers to the API key for the external provider. This should be an identifier for an integration secret created via /v2/integration_secrets.
      * @param Provider|value-of<Provider> $provider the external provider to import assistants from
      *
      * @return AssistantsList<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function import(
         $apiKeyRef,
         $provider,
+        ?RequestOptions $requestOptions = null
+    ): AssistantsList;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return AssistantsList<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function importRaw(
+        array $params,
         ?RequestOptions $requestOptions = null
     ): AssistantsList;
 }

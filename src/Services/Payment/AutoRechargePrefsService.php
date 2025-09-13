@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Payment;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Payment\AutoRechargePrefs\AutoRechargePrefListResponse;
 use Telnyx\Payment\AutoRechargePrefs\AutoRechargePrefUpdateParams;
@@ -34,6 +35,8 @@ final class AutoRechargePrefsService implements AutoRechargePrefsContract
      * @param string $thresholdAmount the threshold amount at which the account will be recharged
      *
      * @return AutoRechargePrefUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function update(
         $enabled = omit,
@@ -43,15 +46,33 @@ final class AutoRechargePrefsService implements AutoRechargePrefsContract
         $thresholdAmount = omit,
         ?RequestOptions $requestOptions = null,
     ): AutoRechargePrefUpdateResponse {
+        $params = [
+            'enabled' => $enabled,
+            'invoiceEnabled' => $invoiceEnabled,
+            'preference' => $preference,
+            'rechargeAmount' => $rechargeAmount,
+            'thresholdAmount' => $thresholdAmount,
+        ];
+
+        return $this->updateRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return AutoRechargePrefUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): AutoRechargePrefUpdateResponse {
         [$parsed, $options] = AutoRechargePrefUpdateParams::parseRequest(
-            [
-                'enabled' => $enabled,
-                'invoiceEnabled' => $invoiceEnabled,
-                'preference' => $preference,
-                'rechargeAmount' => $rechargeAmount,
-                'thresholdAmount' => $thresholdAmount,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -70,8 +91,26 @@ final class AutoRechargePrefsService implements AutoRechargePrefsContract
      * Returns the payment auto recharge preferences.
      *
      * @return AutoRechargePrefListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
+        ?RequestOptions $requestOptions = null
+    ): AutoRechargePrefListResponse {
+        $params = [];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return AutoRechargePrefListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): AutoRechargePrefListResponse {
         // @phpstan-ignore-next-line;

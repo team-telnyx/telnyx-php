@@ -9,26 +9,48 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type unnamed_type_with_intersection_parent1 = array{
- *   name: string, recordType?: string
+ * @phpstan-type network_create = array{
+ *   id?: string,
+ *   createdAt?: string,
+ *   recordType?: string,
+ *   updatedAt?: string,
+ *   name: string,
  * }
  */
 final class NetworkCreate implements BaseModel
 {
-    /** @use SdkModel<unnamed_type_with_intersection_parent1> */
+    /** @use SdkModel<network_create> */
     use SdkModel;
 
     /**
-     * A user specified name for the network.
+     * Identifies the resource.
      */
-    #[Api]
-    public string $name;
+    #[Api(optional: true)]
+    public ?string $id;
+
+    /**
+     * ISO 8601 formatted date-time indicating when the resource was created.
+     */
+    #[Api('created_at', optional: true)]
+    public ?string $createdAt;
 
     /**
      * Identifies the type of the resource.
      */
     #[Api('record_type', optional: true)]
     public ?string $recordType;
+
+    /**
+     * ISO 8601 formatted date-time indicating when the resource was updated.
+     */
+    #[Api('updated_at', optional: true)]
+    public ?string $updatedAt;
+
+    /**
+     * A user specified name for the network.
+     */
+    #[Api]
+    public string $name;
 
     /**
      * `new NetworkCreate()` is missing required properties by the API.
@@ -54,24 +76,43 @@ final class NetworkCreate implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(string $name, ?string $recordType = null): self
-    {
+    public static function with(
+        string $name,
+        ?string $id = null,
+        ?string $createdAt = null,
+        ?string $recordType = null,
+        ?string $updatedAt = null,
+    ): self {
         $obj = new self;
 
         $obj->name = $name;
 
+        null !== $id && $obj->id = $id;
+        null !== $createdAt && $obj->createdAt = $createdAt;
         null !== $recordType && $obj->recordType = $recordType;
+        null !== $updatedAt && $obj->updatedAt = $updatedAt;
 
         return $obj;
     }
 
     /**
-     * A user specified name for the network.
+     * Identifies the resource.
      */
-    public function withName(string $name): self
+    public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj->id = $id;
+
+        return $obj;
+    }
+
+    /**
+     * ISO 8601 formatted date-time indicating when the resource was created.
+     */
+    public function withCreatedAt(string $createdAt): self
+    {
+        $obj = clone $this;
+        $obj->createdAt = $createdAt;
 
         return $obj;
     }
@@ -83,6 +124,28 @@ final class NetworkCreate implements BaseModel
     {
         $obj = clone $this;
         $obj->recordType = $recordType;
+
+        return $obj;
+    }
+
+    /**
+     * ISO 8601 formatted date-time indicating when the resource was updated.
+     */
+    public function withUpdatedAt(string $updatedAt): self
+    {
+        $obj = clone $this;
+        $obj->updatedAt = $updatedAt;
+
+        return $obj;
+    }
+
+    /**
+     * A user specified name for the network.
+     */
+    public function withName(string $name): self
+    {
+        $obj = clone $this;
+        $obj->name = $name;
 
         return $obj;
     }

@@ -14,6 +14,7 @@ use Telnyx\Brand\EntityType;
 use Telnyx\Brand\StockExchange;
 use Telnyx\Brand\TelnyxBrand;
 use Telnyx\Brand\Vertical;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 
@@ -52,6 +53,8 @@ interface BrandContract
      * @param string $website brand website URL
      *
      * @return TelnyxBrand<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $country,
@@ -84,10 +87,39 @@ interface BrandContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return TelnyxBrand<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): TelnyxBrand;
+
+    /**
+     * @api
+     *
      * @return BrandGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $brandID,
+        ?RequestOptions $requestOptions = null
+    ): BrandGetResponse;
+
+    /**
+     * @api
+     *
+     * @return BrandGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $brandID,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): BrandGetResponse;
 
@@ -123,6 +155,8 @@ interface BrandContract
      * @param string $website brand website URL
      *
      * @return TelnyxBrand<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function update(
         string $brandID,
@@ -157,6 +191,21 @@ interface BrandContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return TelnyxBrand<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $brandID,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): TelnyxBrand;
+
+    /**
+     * @api
+     *
      * @param string $brandID Filter results by the Telnyx Brand id
      * @param string $country
      * @param string $displayName
@@ -168,6 +217,8 @@ interface BrandContract
      * @param string $tcrBrandID Filter results by the TCR Brand id
      *
      * @return BrandListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $brandID = omit,
@@ -184,6 +235,22 @@ interface BrandContract
 
     /**
      * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return BrandListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): BrandListResponse;
+
+    /**
+     * @api
+     *
+     * @throws APIException
      */
     public function delete(
         string $brandID,
@@ -193,7 +260,20 @@ interface BrandContract
     /**
      * @api
      *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $brandID,
+        mixed $params,
+        ?RequestOptions $requestOptions = null
+    ): mixed;
+
+    /**
+     * @api
+     *
      * @return BrandGetFeedbackResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function getFeedback(
         string $brandID,
@@ -202,6 +282,21 @@ interface BrandContract
 
     /**
      * @api
+     *
+     * @return BrandGetFeedbackResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function getFeedbackRaw(
+        string $brandID,
+        mixed $params,
+        ?RequestOptions $requestOptions = null
+    ): BrandGetFeedbackResponse;
+
+    /**
+     * @api
+     *
+     * @throws APIException
      */
     public function resend2faEmail(
         string $brandID,
@@ -210,9 +305,33 @@ interface BrandContract
 
     /**
      * @api
+     *
+     * @throws APIException
+     */
+    public function resend2faEmailRaw(
+        string $brandID,
+        mixed $params,
+        ?RequestOptions $requestOptions = null
+    ): mixed;
+
+    /**
+     * @api
+     *
+     * @throws APIException
      */
     public function revet(
         string $brandID,
+        ?RequestOptions $requestOptions = null
+    ): mixed;
+
+    /**
+     * @api
+     *
+     * @throws APIException
+     */
+    public function revetRaw(
+        string $brandID,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): mixed;
 }

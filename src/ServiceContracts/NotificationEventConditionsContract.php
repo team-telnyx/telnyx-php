@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\NotificationEventConditions\NotificationEventConditionListParams\Filter;
 use Telnyx\NotificationEventConditions\NotificationEventConditionListParams\Page;
@@ -21,10 +22,26 @@ interface NotificationEventConditionsContract
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
      * @return NotificationEventConditionListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
         $page = omit,
+        ?RequestOptions $requestOptions = null
+    ): NotificationEventConditionListResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return NotificationEventConditionListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
         ?RequestOptions $requestOptions = null
     ): NotificationEventConditionListResponse;
 }

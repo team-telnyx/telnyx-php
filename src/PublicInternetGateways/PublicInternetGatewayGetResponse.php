@@ -10,10 +10,8 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayGetResponse\Data;
 
 /**
- * @phpstan-type public_internet_gateway_get_response = array{
- *   data?: STAINLESS_FIXME_data_alias
- * }
- * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @phpstan-type public_internet_gateway_get_response = array{data?: data_alias}
+ * When used in a response, this type parameter can define a $rawResponse property.
  * @template TRawResponse of object = object{}
  *
  * @mixin TRawResponse

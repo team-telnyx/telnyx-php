@@ -9,6 +9,7 @@ use Telnyx\AI\Assistants\ScheduledEvents\ScheduledEventListParams\Page;
 use Telnyx\AI\Assistants\ScheduledEvents\ScheduledEventListResponse;
 use Telnyx\AI\Assistants\ScheduledEvents\ScheduledPhoneCallEventResponse;
 use Telnyx\AI\Assistants\ScheduledEvents\ScheduledSMSEventResponse;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 
@@ -26,6 +27,8 @@ interface ScheduledEventsContract
      * @param array<string,
      * string|int|bool,> $conversationMetadata Metadata associated with the conversation. Telnyx provides several pieces of metadata, but customers can also add their own.
      * @param string $text Required for sms scheduled events. The text to be sent to the end user.
+     *
+     * @throws APIException
      */
     public function create(
         string $assistantID,
@@ -41,11 +44,39 @@ interface ScheduledEventsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        string $assistantID,
+        array $params,
+        ?RequestOptions $requestOptions = null,
+    ): ScheduledPhoneCallEventResponse|ScheduledSMSEventResponse;
+
+    /**
+     * @api
+     *
      * @param string $assistantID
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $eventID,
         $assistantID,
+        ?RequestOptions $requestOptions = null
+    ): ScheduledPhoneCallEventResponse|ScheduledSMSEventResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $eventID,
+        array $params,
         ?RequestOptions $requestOptions = null
     ): ScheduledPhoneCallEventResponse|ScheduledSMSEventResponse;
 
@@ -58,6 +89,8 @@ interface ScheduledEventsContract
      * @param \DateTimeInterface $toDate
      *
      * @return ScheduledEventListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         string $assistantID,
@@ -71,11 +104,41 @@ interface ScheduledEventsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return ScheduledEventListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        string $assistantID,
+        array $params,
+        ?RequestOptions $requestOptions = null,
+    ): ScheduledEventListResponse;
+
+    /**
+     * @api
+     *
      * @param string $assistantID
+     *
+     * @throws APIException
      */
     public function delete(
         string $eventID,
         $assistantID,
+        ?RequestOptions $requestOptions = null
+    ): mixed;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $eventID,
+        array $params,
         ?RequestOptions $requestOptions = null
     ): mixed;
 }

@@ -11,6 +11,7 @@ use Telnyx\AI\Chat\ChatCreateCompletionParams\Tool\ChatCompletionToolParam;
 use Telnyx\AI\Chat\ChatCreateCompletionParams\Tool\Retrieval;
 use Telnyx\AI\Chat\ChatCreateCompletionParams\ToolChoice;
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\ChatContract;
 
@@ -52,6 +53,8 @@ final class ChatService implements ChatContract
      * @param int $topLogprobs This is used with `logprobs`. An integer between 0 and 20 specifying the number of most likely tokens to return at each token position, each with an associated log probability.
      * @param float $topP An alternative or complement to `temperature`. This adjusts how many of the top possibilities to consider.
      * @param bool $useBeamSearch Setting this to `true` will allow the model to [explore more completion options](https://huggingface.co/blog/how-to-generate#beam-search). This is not supported by OpenAI.
+     *
+     * @throws APIException
      */
     public function createCompletion(
         $messages,
@@ -79,33 +82,49 @@ final class ChatService implements ChatContract
         $useBeamSearch = omit,
         ?RequestOptions $requestOptions = null,
     ): mixed {
+        $params = [
+            'messages' => $messages,
+            'apiKeyRef' => $apiKeyRef,
+            'bestOf' => $bestOf,
+            'earlyStopping' => $earlyStopping,
+            'frequencyPenalty' => $frequencyPenalty,
+            'guidedChoice' => $guidedChoice,
+            'guidedJson' => $guidedJson,
+            'guidedRegex' => $guidedRegex,
+            'lengthPenalty' => $lengthPenalty,
+            'logprobs' => $logprobs,
+            'maxTokens' => $maxTokens,
+            'minP' => $minP,
+            'model' => $model,
+            'n' => $n,
+            'presencePenalty' => $presencePenalty,
+            'responseFormat' => $responseFormat,
+            'stream' => $stream,
+            'temperature' => $temperature,
+            'toolChoice' => $toolChoice,
+            'tools' => $tools,
+            'topLogprobs' => $topLogprobs,
+            'topP' => $topP,
+            'useBeamSearch' => $useBeamSearch,
+        ];
+
+        return $this->createCompletionRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @throws APIException
+     */
+    public function createCompletionRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): mixed {
         [$parsed, $options] = ChatCreateCompletionParams::parseRequest(
-            [
-                'messages' => $messages,
-                'apiKeyRef' => $apiKeyRef,
-                'bestOf' => $bestOf,
-                'earlyStopping' => $earlyStopping,
-                'frequencyPenalty' => $frequencyPenalty,
-                'guidedChoice' => $guidedChoice,
-                'guidedJson' => $guidedJson,
-                'guidedRegex' => $guidedRegex,
-                'lengthPenalty' => $lengthPenalty,
-                'logprobs' => $logprobs,
-                'maxTokens' => $maxTokens,
-                'minP' => $minP,
-                'model' => $model,
-                'n' => $n,
-                'presencePenalty' => $presencePenalty,
-                'responseFormat' => $responseFormat,
-                'stream' => $stream,
-                'temperature' => $temperature,
-                'toolChoice' => $toolChoice,
-                'tools' => $tools,
-                'topLogprobs' => $topLogprobs,
-                'topP' => $topP,
-                'useBeamSearch' => $useBeamSearch,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;

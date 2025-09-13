@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\SimCards;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SimCards\ActionsContract;
@@ -39,9 +40,28 @@ final class ActionsService implements ActionsContract
      * This API fetches detailed information about a SIM card action to follow-up on an existing asynchronous operation.
      *
      * @return ActionGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): ActionGetResponse {
+        $params = [];
+
+        return $this->retrieveRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return ActionGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): ActionGetResponse {
         // @phpstan-ignore-next-line;
@@ -62,14 +82,34 @@ final class ActionsService implements ActionsContract
      * @param Page $page Consolidated pagination parameter (deepObject style). Originally: page[number], page[size]
      *
      * @return ActionListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
         $page = omit,
         ?RequestOptions $requestOptions = null
     ): ActionListResponse {
+        $params = ['filter' => $filter, 'page' => $page];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ActionListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): ActionListResponse {
         [$parsed, $options] = ActionListParams::parseRequest(
-            ['filter' => $filter, 'page' => $page],
+            $params,
             $requestOptions
         );
 
@@ -92,13 +132,33 @@ final class ActionsService implements ActionsContract
      * @param list<string> $simCardIDs
      *
      * @return ActionBulkSetPublicIPsResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function bulkSetPublicIPs(
         $simCardIDs,
         ?RequestOptions $requestOptions = null
     ): ActionBulkSetPublicIPsResponse {
+        $params = ['simCardIDs' => $simCardIDs];
+
+        return $this->bulkSetPublicIPsRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ActionBulkSetPublicIPsResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function bulkSetPublicIPsRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): ActionBulkSetPublicIPsResponse {
         [$parsed, $options] = ActionBulkSetPublicIPsParams::parseRequest(
-            ['simCardIDs' => $simCardIDs],
+            $params,
             $requestOptions
         );
 
@@ -119,9 +179,28 @@ final class ActionsService implements ActionsContract
      * The API will trigger an asynchronous operation called a SIM Card Action. Transitioning to the disabled state may take a period of time. The status of the SIM Card Action can be followed through the [List SIM Card Action](https://developersdev.telnyx.com/docs/api/v2/wireless/SIM-Card-Actions#ListSIMCardActions) API.
      *
      * @return ActionDisableResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function disable(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): ActionDisableResponse {
+        $params = [];
+
+        return $this->disableRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return ActionDisableResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function disableRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): ActionDisableResponse {
         // @phpstan-ignore-next-line;
@@ -141,9 +220,28 @@ final class ActionsService implements ActionsContract
      * The API will trigger an asynchronous operation called a SIM Card Action. Transitioning to the enabled state may take a period of time. The status of the SIM Card Action can be followed through the [List SIM Card Action](https://developersdev.telnyx.com/docs/api/v2/wireless/SIM-Card-Actions#ListSIMCardActions) API.
      *
      * @return ActionEnableResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function enable(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): ActionEnableResponse {
+        $params = [];
+
+        return $this->enableRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return ActionEnableResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function enableRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): ActionEnableResponse {
         // @phpstan-ignore-next-line;
@@ -162,9 +260,28 @@ final class ActionsService implements ActionsContract
      *  The API will trigger an asynchronous operation called a SIM Card Action. The status of the SIM Card Action can be followed through the [List SIM Card Action](https://developersdev.telnyx.com/docs/api/v2/wireless/SIM-Card-Actions#ListSIMCardActions) API.
      *
      * @return ActionRemovePublicIPResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function removePublicIP(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): ActionRemovePublicIPResponse {
+        $params = [];
+
+        return $this->removePublicIPRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return ActionRemovePublicIPResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function removePublicIPRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): ActionRemovePublicIPResponse {
         // @phpstan-ignore-next-line;
@@ -186,14 +303,35 @@ final class ActionsService implements ActionsContract
      * @param string $regionCode The code of the region where the public IP should be assigned. A list of available regions can be found at the regions endpoint
      *
      * @return ActionSetPublicIPResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function setPublicIP(
         string $id,
         $regionCode = omit,
         ?RequestOptions $requestOptions = null
     ): ActionSetPublicIPResponse {
+        $params = ['regionCode' => $regionCode];
+
+        return $this->setPublicIPRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ActionSetPublicIPResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function setPublicIPRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): ActionSetPublicIPResponse {
         [$parsed, $options] = ActionSetPublicIPParams::parseRequest(
-            ['regionCode' => $regionCode],
+            $params,
             $requestOptions
         );
 
@@ -215,9 +353,28 @@ final class ActionsService implements ActionsContract
      * The API will trigger an asynchronous operation called a SIM Card Action. Transitioning to the standby state may take a period of time. The status of the SIM Card Action can be followed through the [List SIM Card Action](https://developersdev.telnyx.com/docs/api/v2/wireless/SIM-Card-Actions#ListSIMCardActions) API.
      *
      * @return ActionSetStandbyResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function setStandby(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): ActionSetStandbyResponse {
+        $params = [];
+
+        return $this->setStandbyRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return ActionSetStandbyResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function setStandbyRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): ActionSetStandbyResponse {
         // @phpstan-ignore-next-line;
@@ -237,13 +394,33 @@ final class ActionsService implements ActionsContract
      * @param list<string> $registrationCodes
      *
      * @return ActionValidateRegistrationCodesResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function validateRegistrationCodes(
         $registrationCodes = omit,
         ?RequestOptions $requestOptions = null
     ): ActionValidateRegistrationCodesResponse {
+        $params = ['registrationCodes' => $registrationCodes];
+
+        return $this->validateRegistrationCodesRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ActionValidateRegistrationCodesResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function validateRegistrationCodesRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): ActionValidateRegistrationCodesResponse {
         [$parsed, $options] = ActionValidateRegistrationCodesParams::parseRequest(
-            ['registrationCodes' => $registrationCodes],
+            $params,
             $requestOptions
         );
 

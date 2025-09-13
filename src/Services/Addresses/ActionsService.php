@@ -9,6 +9,7 @@ use Telnyx\Addresses\Actions\ActionAcceptSuggestionsResponse;
 use Telnyx\Addresses\Actions\ActionValidateParams;
 use Telnyx\Addresses\Actions\ActionValidateResponse;
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Addresses\ActionsContract;
@@ -30,14 +31,35 @@ final class ActionsService implements ActionsContract
      * @param string $id1 the ID of the address
      *
      * @return ActionAcceptSuggestionsResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function acceptSuggestions(
         string $id,
         $id1 = omit,
         ?RequestOptions $requestOptions = null
     ): ActionAcceptSuggestionsResponse {
+        $params = ['id' => $id1];
+
+        return $this->acceptSuggestionsRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ActionAcceptSuggestionsResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function acceptSuggestionsRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): ActionAcceptSuggestionsResponse {
         [$parsed, $options] = ActionAcceptSuggestionsParams::parseRequest(
-            ['id' => $id1],
+            $params,
             $requestOptions
         );
 
@@ -64,6 +86,8 @@ final class ActionsService implements ActionsContract
      * @param string $locality The locality of the address. For US addresses, this corresponds to the city of the address.
      *
      * @return ActionValidateResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function validate(
         $countryCode,
@@ -74,16 +98,34 @@ final class ActionsService implements ActionsContract
         $locality = omit,
         ?RequestOptions $requestOptions = null,
     ): ActionValidateResponse {
+        $params = [
+            'countryCode' => $countryCode,
+            'postalCode' => $postalCode,
+            'streetAddress' => $streetAddress,
+            'administrativeArea' => $administrativeArea,
+            'extendedAddress' => $extendedAddress,
+            'locality' => $locality,
+        ];
+
+        return $this->validateRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ActionValidateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function validateRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): ActionValidateResponse {
         [$parsed, $options] = ActionValidateParams::parseRequest(
-            [
-                'countryCode' => $countryCode,
-                'postalCode' => $postalCode,
-                'streetAddress' => $streetAddress,
-                'administrativeArea' => $administrativeArea,
-                'extendedAddress' => $extendedAddress,
-                'locality' => $locality,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;

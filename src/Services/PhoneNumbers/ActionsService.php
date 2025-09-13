@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\PhoneNumbers;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PhoneNumbers\Actions\ActionChangeBundleStatusParams;
 use Telnyx\PhoneNumbers\Actions\ActionChangeBundleStatusResponse;
@@ -30,14 +31,35 @@ final class ActionsService implements ActionsContract
      * @param string $bundleID The new bundle_id setting for the number. If you are assigning the number to a bundle, this is the unique ID of the bundle you wish to use. If you are removing the number from a bundle, this must be null. You cannot assign a number from one bundle to another directly. You must first remove it from a bundle, and then assign it to a new bundle.
      *
      * @return ActionChangeBundleStatusResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function changeBundleStatus(
         string $id,
         $bundleID,
         ?RequestOptions $requestOptions = null
     ): ActionChangeBundleStatusResponse {
+        $params = ['bundleID' => $bundleID];
+
+        return $this->changeBundleStatusRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ActionChangeBundleStatusResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function changeBundleStatusRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): ActionChangeBundleStatusResponse {
         [$parsed, $options] = ActionChangeBundleStatusParams::parseRequest(
-            ['bundleID' => $bundleID],
+            $params,
             $requestOptions
         );
 
@@ -60,6 +82,8 @@ final class ActionsService implements ActionsContract
      * @param bool $emergencyEnabled indicates whether to enable emergency services on this number
      *
      * @return ActionEnableEmergencyResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function enableEmergency(
         string $id,
@@ -67,12 +91,31 @@ final class ActionsService implements ActionsContract
         $emergencyEnabled,
         ?RequestOptions $requestOptions = null,
     ): ActionEnableEmergencyResponse {
+        $params = [
+            'emergencyAddressID' => $emergencyAddressID,
+            'emergencyEnabled' => $emergencyEnabled,
+        ];
+
+        return $this->enableEmergencyRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ActionEnableEmergencyResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function enableEmergencyRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): ActionEnableEmergencyResponse {
         [$parsed, $options] = ActionEnableEmergencyParams::parseRequest(
-            [
-                'emergencyAddressID' => $emergencyAddressID,
-                'emergencyEnabled' => $emergencyEnabled,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -93,13 +136,33 @@ final class ActionsService implements ActionsContract
      * @param list<string> $phoneNumbers Array of phone numbers to verify ownership for
      *
      * @return ActionVerifyOwnershipResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function verifyOwnership(
         $phoneNumbers,
         ?RequestOptions $requestOptions = null
     ): ActionVerifyOwnershipResponse {
+        $params = ['phoneNumbers' => $phoneNumbers];
+
+        return $this->verifyOwnershipRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ActionVerifyOwnershipResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function verifyOwnershipRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): ActionVerifyOwnershipResponse {
         [$parsed, $options] = ActionVerifyOwnershipParams::parseRequest(
-            ['phoneNumbers' => $phoneNumbers],
+            $params,
             $requestOptions
         );
 

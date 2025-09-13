@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\NotificationChannels\NotificationChannelCreateParams\ChannelTypeID;
 use Telnyx\NotificationChannels\NotificationChannelDeleteResponse;
@@ -28,6 +29,8 @@ interface NotificationChannelsContract
      * @param string $notificationProfileID a UUID reference to the associated Notification Profile
      *
      * @return NotificationChannelNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $channelDestination = omit,
@@ -39,10 +42,39 @@ interface NotificationChannelsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return NotificationChannelNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): NotificationChannelNewResponse;
+
+    /**
+     * @api
+     *
      * @return NotificationChannelGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): NotificationChannelGetResponse;
+
+    /**
+     * @api
+     *
+     * @return NotificationChannelGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): NotificationChannelGetResponse;
 
@@ -54,6 +86,8 @@ interface NotificationChannelsContract
      * @param string $notificationProfileID a UUID reference to the associated Notification Profile
      *
      * @return NotificationChannelUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function update(
         string $id,
@@ -66,10 +100,27 @@ interface NotificationChannelsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return NotificationChannelUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): NotificationChannelUpdateResponse;
+
+    /**
+     * @api
+     *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[associated_record_type][eq], filter[channel_type_id][eq], filter[notification_profile_id][eq], filter[notification_channel][eq], filter[notification_event_condition_id][eq], filter[status][eq]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
      * @return NotificationChannelListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
@@ -80,10 +131,39 @@ interface NotificationChannelsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return NotificationChannelListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): NotificationChannelListResponse;
+
+    /**
+     * @api
+     *
      * @return NotificationChannelDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function delete(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): NotificationChannelDeleteResponse;
+
+    /**
+     * @api
+     *
+     * @return NotificationChannelDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): NotificationChannelDeleteResponse;
 }

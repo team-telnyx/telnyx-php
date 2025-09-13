@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\PortingOrders;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateParams;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateParams\Params;
@@ -36,6 +37,8 @@ final class ActionRequirementsService implements ActionRequirementsContract
      * @param Sort $sort Consolidated sort parameter (deepObject style). Originally: sort[value]
      *
      * @return ActionRequirementListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         string $portingOrderID,
@@ -44,8 +47,27 @@ final class ActionRequirementsService implements ActionRequirementsContract
         $sort = omit,
         ?RequestOptions $requestOptions = null,
     ): ActionRequirementListResponse {
+        $params = ['filter' => $filter, 'page' => $page, 'sort' => $sort];
+
+        return $this->listRaw($portingOrderID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ActionRequirementListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        string $portingOrderID,
+        array $params,
+        ?RequestOptions $requestOptions = null,
+    ): ActionRequirementListResponse {
         [$parsed, $options] = ActionRequirementListParams::parseRequest(
-            ['filter' => $filter, 'page' => $page, 'sort' => $sort],
+            $params,
             $requestOptions
         );
 
@@ -68,6 +90,8 @@ final class ActionRequirementsService implements ActionRequirementsContract
      * @param Params $params required information for initiating the action requirement for AU ID verification
      *
      * @return ActionRequirementInitiateResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function initiate(
         string $id,
@@ -75,9 +99,28 @@ final class ActionRequirementsService implements ActionRequirementsContract
         $params,
         ?RequestOptions $requestOptions = null
     ): ActionRequirementInitiateResponse {
+        $params1 = ['portingOrderID' => $portingOrderID, 'params' => $params];
+
+        return $this->initiateRaw($id, $params1, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ActionRequirementInitiateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function initiateRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): ActionRequirementInitiateResponse {
         [$parsed, $options] = ActionRequirementInitiateParams::parseRequest(
-            ['portingOrderID' => $portingOrderID, 'params' => $params],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
         $portingOrderID = $parsed['portingOrderID'];
         unset($parsed['portingOrderID']);

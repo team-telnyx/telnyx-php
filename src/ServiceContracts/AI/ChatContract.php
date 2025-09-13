@@ -9,6 +9,7 @@ use Telnyx\AI\Chat\ChatCreateCompletionParams\ResponseFormat;
 use Telnyx\AI\Chat\ChatCreateCompletionParams\Tool\ChatCompletionToolParam;
 use Telnyx\AI\Chat\ChatCreateCompletionParams\Tool\Retrieval;
 use Telnyx\AI\Chat\ChatCreateCompletionParams\ToolChoice;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 
 use const Telnyx\Core\OMIT as omit;
@@ -42,6 +43,8 @@ interface ChatContract
      * @param int $topLogprobs This is used with `logprobs`. An integer between 0 and 20 specifying the number of most likely tokens to return at each token position, each with an associated log probability.
      * @param float $topP An alternative or complement to `temperature`. This adjusts how many of the top possibilities to consider.
      * @param bool $useBeamSearch Setting this to `true` will allow the model to [explore more completion options](https://huggingface.co/blog/how-to-generate#beam-search). This is not supported by OpenAI.
+     *
+     * @throws APIException
      */
     public function createCompletion(
         $messages,
@@ -68,5 +71,17 @@ interface ChatContract
         $topP = omit,
         $useBeamSearch = omit,
         ?RequestOptions $requestOptions = null,
+    ): mixed;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @throws APIException
+     */
+    public function createCompletionRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
     ): mixed;
 }

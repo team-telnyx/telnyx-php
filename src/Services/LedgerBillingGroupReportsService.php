@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\LedgerBillingGroupReports\LedgerBillingGroupReportCreateParams;
 use Telnyx\LedgerBillingGroupReports\LedgerBillingGroupReportGetResponse;
@@ -30,14 +31,34 @@ final class LedgerBillingGroupReportsService implements LedgerBillingGroupReport
      * @param int $year Year of the ledger billing group report
      *
      * @return LedgerBillingGroupReportNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $month = omit,
         $year = omit,
         ?RequestOptions $requestOptions = null
     ): LedgerBillingGroupReportNewResponse {
+        $params = ['month' => $month, 'year' => $year];
+
+        return $this->createRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return LedgerBillingGroupReportNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): LedgerBillingGroupReportNewResponse {
         [$parsed, $options] = LedgerBillingGroupReportCreateParams::parseRequest(
-            ['month' => $month, 'year' => $year],
+            $params,
             $requestOptions
         );
 
@@ -57,9 +78,28 @@ final class LedgerBillingGroupReportsService implements LedgerBillingGroupReport
      * Get a ledger billing group report
      *
      * @return LedgerBillingGroupReportGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): LedgerBillingGroupReportGetResponse {
+        $params = [];
+
+        return $this->retrieveRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return LedgerBillingGroupReportGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): LedgerBillingGroupReportGetResponse {
         // @phpstan-ignore-next-line;

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\ManagedAccounts\ManagedAccountCreateParams;
 use Telnyx\ManagedAccounts\ManagedAccountGetAllocatableGlobalOutboundChannelsResponse;
@@ -52,6 +53,8 @@ final class ManagedAccountsService implements ManagedAccountsContract
      * @param bool $rollupBilling Boolean value that indicates if the billing information and charges to the managed account "roll up" to the manager account. If true, the managed account will not have its own balance and will use the shared balance with the manager account. This value cannot be changed after account creation without going through Telnyx support as changes require manual updates to the account ledger. Defaults to false.
      *
      * @return ManagedAccountNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $businessName,
@@ -61,15 +64,33 @@ final class ManagedAccountsService implements ManagedAccountsContract
         $rollupBilling = omit,
         ?RequestOptions $requestOptions = null,
     ): ManagedAccountNewResponse {
+        $params = [
+            'businessName' => $businessName,
+            'email' => $email,
+            'managedAccountAllowCustomPricing' => $managedAccountAllowCustomPricing,
+            'password' => $password,
+            'rollupBilling' => $rollupBilling,
+        ];
+
+        return $this->createRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ManagedAccountNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): ManagedAccountNewResponse {
         [$parsed, $options] = ManagedAccountCreateParams::parseRequest(
-            [
-                'businessName' => $businessName,
-                'email' => $email,
-                'managedAccountAllowCustomPricing' => $managedAccountAllowCustomPricing,
-                'password' => $password,
-                'rollupBilling' => $rollupBilling,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -88,9 +109,28 @@ final class ManagedAccountsService implements ManagedAccountsContract
      * Retrieves the details of a single managed account.
      *
      * @return ManagedAccountGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): ManagedAccountGetResponse {
+        $params = [];
+
+        return $this->retrieveRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return ManagedAccountGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): ManagedAccountGetResponse {
         // @phpstan-ignore-next-line;
@@ -110,15 +150,38 @@ final class ManagedAccountsService implements ManagedAccountsContract
      * @param bool $managedAccountAllowCustomPricing Boolean value that indicates if the managed account is able to have custom pricing set for it or not. If false, uses the pricing of the manager account. Defaults to false. This value may be changed, but there may be time lag between when the value is changed and pricing changes take effect.
      *
      * @return ManagedAccountUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function update(
         string $id,
         $managedAccountAllowCustomPricing = omit,
         ?RequestOptions $requestOptions = null,
     ): ManagedAccountUpdateResponse {
+        $params = [
+            'managedAccountAllowCustomPricing' => $managedAccountAllowCustomPricing,
+        ];
+
+        return $this->updateRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ManagedAccountUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): ManagedAccountUpdateResponse {
         [$parsed, $options] = ManagedAccountUpdateParams::parseRequest(
-            ['managedAccountAllowCustomPricing' => $managedAccountAllowCustomPricing],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -153,6 +216,8 @@ final class ManagedAccountsService implements ManagedAccountsContract
      * </ul> <br/> If not given, results are sorted by <code>created_at</code> in descending order.
      *
      * @return ManagedAccountListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
@@ -161,14 +226,32 @@ final class ManagedAccountsService implements ManagedAccountsContract
         $sort = omit,
         ?RequestOptions $requestOptions = null,
     ): ManagedAccountListResponse {
+        $params = [
+            'filter' => $filter,
+            'includeCancelledAccounts' => $includeCancelledAccounts,
+            'page' => $page,
+            'sort' => $sort,
+        ];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ManagedAccountListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): ManagedAccountListResponse {
         [$parsed, $options] = ManagedAccountListParams::parseRequest(
-            [
-                'filter' => $filter,
-                'includeCancelledAccounts' => $includeCancelledAccounts,
-                'page' => $page,
-                'sort' => $sort,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -189,8 +272,31 @@ final class ManagedAccountsService implements ManagedAccountsContract
      * @return ManagedAccountGetAllocatableGlobalOutboundChannelsResponse<
      *   HasRawResponse
      * >
+     *
+     * @throws APIException
      */
     public function getAllocatableGlobalOutboundChannels(
+        ?RequestOptions $requestOptions = null
+    ): ManagedAccountGetAllocatableGlobalOutboundChannelsResponse {
+        $params = [];
+
+        return $this->getAllocatableGlobalOutboundChannelsRaw(
+            $params,
+            $requestOptions
+        );
+    }
+
+    /**
+     * @api
+     *
+     * @return ManagedAccountGetAllocatableGlobalOutboundChannelsResponse<
+     *   HasRawResponse
+     * >
+     *
+     * @throws APIException
+     */
+    public function getAllocatableGlobalOutboundChannelsRaw(
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): ManagedAccountGetAllocatableGlobalOutboundChannelsResponse {
         // @phpstan-ignore-next-line;
@@ -210,16 +316,37 @@ final class ManagedAccountsService implements ManagedAccountsContract
      * @param int $channelLimit Integer value that indicates the number of allocatable global outbound channels that should be allocated to the managed account. Must be 0 or more. If the value is 0 then the account will have no usable channels and will not be able to perform outbound calling.
      *
      * @return ManagedAccountUpdateGlobalChannelLimitResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function updateGlobalChannelLimit(
         string $id,
         $channelLimit = omit,
         ?RequestOptions $requestOptions = null
     ): ManagedAccountUpdateGlobalChannelLimitResponse {
+        $params = ['channelLimit' => $channelLimit];
+
+        return $this->updateGlobalChannelLimitRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ManagedAccountUpdateGlobalChannelLimitResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateGlobalChannelLimitRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): ManagedAccountUpdateGlobalChannelLimitResponse {
         [
             $parsed, $options,
         ] = ManagedAccountUpdateGlobalChannelLimitParams::parseRequest(
-            ['channelLimit' => $channelLimit],
+            $params,
             $requestOptions
         );
 

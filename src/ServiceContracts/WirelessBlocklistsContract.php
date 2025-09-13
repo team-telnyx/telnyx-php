@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\WirelessBlocklists\WirelessBlocklistCreateParams\Type;
@@ -26,6 +27,8 @@ interface WirelessBlocklistsContract
      * @param list<string> $values Values to block. The values here depend on the `type` of Wireless Blocklist.
      *
      * @return WirelessBlocklistNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $name,
@@ -37,10 +40,39 @@ interface WirelessBlocklistsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return WirelessBlocklistNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): WirelessBlocklistNewResponse;
+
+    /**
+     * @api
+     *
      * @return WirelessBlocklistGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): WirelessBlocklistGetResponse;
+
+    /**
+     * @api
+     *
+     * @return WirelessBlocklistGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): WirelessBlocklistGetResponse;
 
@@ -52,12 +84,28 @@ interface WirelessBlocklistsContract
      * @param list<string> $values Values to block. The values here depend on the `type` of Wireless Blocklist.
      *
      * @return WirelessBlocklistUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function update(
         $name = omit,
         $type = omit,
         $values = omit,
         ?RequestOptions $requestOptions = null,
+    ): WirelessBlocklistUpdateResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return WirelessBlocklistUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
     ): WirelessBlocklistUpdateResponse;
 
     /**
@@ -70,6 +118,8 @@ interface WirelessBlocklistsContract
      * @param int $pageSize the size of the page
      *
      * @return WirelessBlocklistListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filterName = omit,
@@ -83,10 +133,39 @@ interface WirelessBlocklistsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return WirelessBlocklistListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): WirelessBlocklistListResponse;
+
+    /**
+     * @api
+     *
      * @return WirelessBlocklistDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function delete(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): WirelessBlocklistDeleteResponse;
+
+    /**
+     * @api
+     *
+     * @return WirelessBlocklistDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): WirelessBlocklistDeleteResponse;
 }

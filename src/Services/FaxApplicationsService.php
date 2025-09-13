@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\FaxApplications\FaxApplicationCreateParams;
@@ -50,6 +51,8 @@ final class FaxApplicationsService implements FaxApplicationsContract
      * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
      *
      * @return FaxApplicationNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $applicationName,
@@ -63,19 +66,37 @@ final class FaxApplicationsService implements FaxApplicationsContract
         $webhookTimeoutSecs = omit,
         ?RequestOptions $requestOptions = null,
     ): FaxApplicationNewResponse {
+        $params = [
+            'applicationName' => $applicationName,
+            'webhookEventURL' => $webhookEventURL,
+            'active' => $active,
+            'anchorsiteOverride' => $anchorsiteOverride,
+            'inbound' => $inbound,
+            'outbound' => $outbound,
+            'tags' => $tags,
+            'webhookEventFailoverURL' => $webhookEventFailoverURL,
+            'webhookTimeoutSecs' => $webhookTimeoutSecs,
+        ];
+
+        return $this->createRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return FaxApplicationNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): FaxApplicationNewResponse {
         [$parsed, $options] = FaxApplicationCreateParams::parseRequest(
-            [
-                'applicationName' => $applicationName,
-                'webhookEventURL' => $webhookEventURL,
-                'active' => $active,
-                'anchorsiteOverride' => $anchorsiteOverride,
-                'inbound' => $inbound,
-                'outbound' => $outbound,
-                'tags' => $tags,
-                'webhookEventFailoverURL' => $webhookEventFailoverURL,
-                'webhookTimeoutSecs' => $webhookTimeoutSecs,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -94,9 +115,28 @@ final class FaxApplicationsService implements FaxApplicationsContract
      * Return the details of an existing Fax Application inside the 'data' attribute of the response.
      *
      * @return FaxApplicationGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): FaxApplicationGetResponse {
+        $params = [];
+
+        return $this->retrieveRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return FaxApplicationGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): FaxApplicationGetResponse {
         // @phpstan-ignore-next-line;
@@ -125,6 +165,8 @@ final class FaxApplicationsService implements FaxApplicationsContract
      * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
      *
      * @return FaxApplicationUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function update(
         string $id,
@@ -140,20 +182,39 @@ final class FaxApplicationsService implements FaxApplicationsContract
         $webhookTimeoutSecs = omit,
         ?RequestOptions $requestOptions = null,
     ): FaxApplicationUpdateResponse {
+        $params = [
+            'applicationName' => $applicationName,
+            'webhookEventURL' => $webhookEventURL,
+            'active' => $active,
+            'anchorsiteOverride' => $anchorsiteOverride,
+            'faxEmailRecipient' => $faxEmailRecipient,
+            'inbound' => $inbound,
+            'outbound' => $outbound,
+            'tags' => $tags,
+            'webhookEventFailoverURL' => $webhookEventFailoverURL,
+            'webhookTimeoutSecs' => $webhookTimeoutSecs,
+        ];
+
+        return $this->updateRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return FaxApplicationUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): FaxApplicationUpdateResponse {
         [$parsed, $options] = FaxApplicationUpdateParams::parseRequest(
-            [
-                'applicationName' => $applicationName,
-                'webhookEventURL' => $webhookEventURL,
-                'active' => $active,
-                'anchorsiteOverride' => $anchorsiteOverride,
-                'faxEmailRecipient' => $faxEmailRecipient,
-                'inbound' => $inbound,
-                'outbound' => $outbound,
-                'tags' => $tags,
-                'webhookEventFailoverURL' => $webhookEventFailoverURL,
-                'webhookTimeoutSecs' => $webhookTimeoutSecs,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -187,6 +248,8 @@ final class FaxApplicationsService implements FaxApplicationsContract
      * </ul> <br/> If not given, results are sorted by <code>created_at</code> in descending order.
      *
      * @return FaxApplicationListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
@@ -194,8 +257,26 @@ final class FaxApplicationsService implements FaxApplicationsContract
         $sort = omit,
         ?RequestOptions $requestOptions = null,
     ): FaxApplicationListResponse {
+        $params = ['filter' => $filter, 'page' => $page, 'sort' => $sort];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return FaxApplicationListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): FaxApplicationListResponse {
         [$parsed, $options] = FaxApplicationListParams::parseRequest(
-            ['filter' => $filter, 'page' => $page, 'sort' => $sort],
+            $params,
             $requestOptions
         );
 
@@ -215,9 +296,28 @@ final class FaxApplicationsService implements FaxApplicationsContract
      * Permanently deletes a Fax Application. Deletion may be prevented if the application is in use by phone numbers.
      *
      * @return FaxApplicationDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function delete(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): FaxApplicationDeleteResponse {
+        $params = [];
+
+        return $this->deleteRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return FaxApplicationDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): FaxApplicationDeleteResponse {
         // @phpstan-ignore-next-line;

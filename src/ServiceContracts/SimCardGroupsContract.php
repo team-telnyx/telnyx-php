@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\SimCardGroups\SimCardGroupCreateParams\DataLimit;
@@ -25,6 +26,8 @@ interface SimCardGroupsContract
      * @param DataLimit $dataLimit upper limit on the amount of data the SIM cards, within the group, can use
      *
      * @return SimCardGroupNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $name,
@@ -35,9 +38,25 @@ interface SimCardGroupsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return SimCardGroupNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): SimCardGroupNewResponse;
+
+    /**
+     * @api
+     *
      * @param bool $includeIccids it includes a list of associated ICCIDs
      *
      * @return SimCardGroupGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
@@ -48,16 +67,48 @@ interface SimCardGroupsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return SimCardGroupGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): SimCardGroupGetResponse;
+
+    /**
+     * @api
+     *
      * @param DataLimit1 $dataLimit upper limit on the amount of data the SIM cards, within the group, can use
      * @param string $name a user friendly name for the SIM card group
      *
      * @return SimCardGroupUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function update(
         string $id,
         $dataLimit = omit,
         $name = omit,
         ?RequestOptions $requestOptions = null,
+    ): SimCardGroupUpdateResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return SimCardGroupUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
     ): SimCardGroupUpdateResponse;
 
     /**
@@ -70,6 +121,8 @@ interface SimCardGroupsContract
      * @param int $pageSize the size of the page
      *
      * @return SimCardGroupListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filterName = omit,
@@ -83,10 +136,39 @@ interface SimCardGroupsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return SimCardGroupListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): SimCardGroupListResponse;
+
+    /**
+     * @api
+     *
      * @return SimCardGroupDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function delete(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): SimCardGroupDeleteResponse;
+
+    /**
+     * @api
+     *
+     * @return SimCardGroupDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): SimCardGroupDeleteResponse;
 }

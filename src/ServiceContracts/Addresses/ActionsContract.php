@@ -6,6 +6,7 @@ namespace Telnyx\ServiceContracts\Addresses;
 
 use Telnyx\Addresses\Actions\ActionAcceptSuggestionsResponse;
 use Telnyx\Addresses\Actions\ActionValidateResponse;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 
@@ -19,10 +20,27 @@ interface ActionsContract
      * @param string $id1 the ID of the address
      *
      * @return ActionAcceptSuggestionsResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function acceptSuggestions(
         string $id,
         $id1 = omit,
+        ?RequestOptions $requestOptions = null
+    ): ActionAcceptSuggestionsResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ActionAcceptSuggestionsResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function acceptSuggestionsRaw(
+        string $id,
+        array $params,
         ?RequestOptions $requestOptions = null
     ): ActionAcceptSuggestionsResponse;
 
@@ -37,6 +55,8 @@ interface ActionsContract
      * @param string $locality The locality of the address. For US addresses, this corresponds to the city of the address.
      *
      * @return ActionValidateResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function validate(
         $countryCode,
@@ -46,5 +66,19 @@ interface ActionsContract
         $extendedAddress = omit,
         $locality = omit,
         ?RequestOptions $requestOptions = null,
+    ): ActionValidateResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ActionValidateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function validateRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
     ): ActionValidateResponse;
 }
