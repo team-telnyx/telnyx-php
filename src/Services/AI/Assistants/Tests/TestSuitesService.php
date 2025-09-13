@@ -6,6 +6,7 @@ namespace Telnyx\Services\AI\Assistants\Tests;
 
 use Telnyx\AI\Assistants\Tests\TestSuites\TestSuiteListResponse;
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\Tests\TestSuitesContract;
 use Telnyx\Services\AI\Assistants\Tests\TestSuites\RunsService;
@@ -22,13 +23,15 @@ final class TestSuitesService implements TestSuitesContract
      */
     public function __construct(private Client $client)
     {
-        $this->runs = new RunsService($this->client);
+        $this->runs = new RunsService($client);
     }
 
     /**
      * @api
      *
      * Retrieves a list of all distinct test suite names available to the current user
+     *
+     * @return TestSuiteListResponse<HasRawResponse>
      */
     public function list(
         ?RequestOptions $requestOptions = null

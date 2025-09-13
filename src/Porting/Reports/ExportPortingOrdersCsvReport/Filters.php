@@ -13,10 +13,10 @@ use Telnyx\Porting\Reports\ExportPortingOrdersCsvReport\Filters\StatusIn;
  * The filters to apply to the export porting order CSV report.
  *
  * @phpstan-type filters_alias = array{
- *   createdAtGt?: \DateTimeInterface|null,
- *   createdAtLt?: \DateTimeInterface|null,
- *   customerReferenceIn?: list<string>|null,
- *   statusIn?: list<value-of<StatusIn>>|null,
+ *   createdAtGt?: \DateTimeInterface,
+ *   createdAtLt?: \DateTimeInterface,
+ *   customerReferenceIn?: list<string>,
+ *   statusIn?: list<value-of<StatusIn>>,
  * }
  */
 final class Filters implements BaseModel

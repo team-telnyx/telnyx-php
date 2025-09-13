@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type prober_location = array{
- *   id?: string|null, lat?: float|null, lon?: float|null, name?: string|null
+ *   id?: string, lat?: float, lon?: float, name?: string
  * }
  */
 final class ProberLocation implements BaseModel

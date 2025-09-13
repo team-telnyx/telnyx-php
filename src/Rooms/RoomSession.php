@@ -11,14 +11,14 @@ use Telnyx\RoomParticipant;
 
 /**
  * @phpstan-type room_session = array{
- *   id?: string|null,
- *   active?: bool|null,
- *   createdAt?: \DateTimeInterface|null,
- *   endedAt?: \DateTimeInterface|null,
- *   participants?: list<RoomParticipant>|null,
- *   recordType?: string|null,
- *   roomID?: string|null,
- *   updatedAt?: \DateTimeInterface|null,
+ *   id?: string,
+ *   active?: bool,
+ *   createdAt?: \DateTimeInterface,
+ *   endedAt?: \DateTimeInterface,
+ *   participants?: list<RoomParticipant>,
+ *   recordType?: string,
+ *   roomID?: string,
+ *   updatedAt?: \DateTimeInterface,
  * }
  */
 final class RoomSession implements BaseModel

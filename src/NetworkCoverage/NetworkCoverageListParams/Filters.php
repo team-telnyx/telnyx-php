@@ -15,7 +15,7 @@ use Telnyx\NetworkCoverage\NetworkCoverageListParams\Filters\AvailableServices\C
  * Consolidated filters parameter (deepObject style). Originally: filters[available_services][contains].
  *
  * @phpstan-type filters_alias = array{
- *   availableServices?: null|Contains|value-of<AvailableService>
+ *   availableServices?: Contains|value-of<AvailableService>
  * }
  */
 final class Filters implements BaseModel

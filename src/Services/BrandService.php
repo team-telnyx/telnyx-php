@@ -18,6 +18,7 @@ use Telnyx\Brand\StockExchange;
 use Telnyx\Brand\TelnyxBrand;
 use Telnyx\Brand\Vertical;
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\BrandContract;
 use Telnyx\Services\Brand\ExternalVettingService;
@@ -36,7 +37,7 @@ final class BrandService implements BrandContract
      */
     public function __construct(private Client $client)
     {
-        $this->externalVetting = new ExternalVettingService($this->client);
+        $this->externalVetting = new ExternalVettingService($client);
     }
 
     /**
@@ -70,6 +71,8 @@ final class BrandService implements BrandContract
      * @param string $webhookFailoverURL webhook failover URL for brand status updates
      * @param string $webhookURL webhook URL for brand status updates
      * @param string $website brand website URL
+     *
+     * @return TelnyxBrand<HasRawResponse>
      */
     public function create(
         $country,
@@ -142,6 +145,8 @@ final class BrandService implements BrandContract
      * @api
      *
      * Retrieve a brand by `brandId`.
+     *
+     * @return BrandGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $brandID,
@@ -188,6 +193,8 @@ final class BrandService implements BrandContract
      * @param string $webhookFailoverURL webhook failover URL for brand status updates
      * @param string $webhookURL webhook URL for brand status updates
      * @param string $website brand website URL
+     *
+     * @return TelnyxBrand<HasRawResponse>
      */
     public function update(
         string $brandID,
@@ -273,6 +280,8 @@ final class BrandService implements BrandContract
      * @param Sort|value-of<Sort> $sort Specifies the sort order for results. If not given, results are sorted by createdAt in descending order.
      * @param string $state
      * @param string $tcrBrandID Filter results by the TCR Brand id
+     *
+     * @return BrandListResponse<HasRawResponse>
      */
     public function list(
         $brandID = omit,
@@ -345,6 +354,8 @@ final class BrandService implements BrandContract
      * * `NONPROFIT` - Not a recognized non-profit entity. No IRS tax-exempt status
      *   found.
      * * `OTHERS` - Details of the data misrepresentation if any.
+     *
+     * @return BrandGetFeedbackResponse<HasRawResponse>
      */
     public function getFeedback(
         string $brandID,

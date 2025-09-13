@@ -8,6 +8,7 @@ use Telnyx\AccessIPAddress\AccessIPAddressListParams\Filter;
 use Telnyx\AccessIPAddress\AccessIPAddressListParams\Page;
 use Telnyx\AccessIPAddress\AccessIPAddressListResponse;
 use Telnyx\AccessIPAddress\AccessIPAddressResponse;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 
 use const Telnyx\Core\OMIT as omit;
@@ -19,6 +20,8 @@ interface AccessIPAddressContract
      *
      * @param string $ipAddress
      * @param string $description
+     *
+     * @return AccessIPAddressResponse<HasRawResponse>
      */
     public function create(
         $ipAddress,
@@ -28,6 +31,8 @@ interface AccessIPAddressContract
 
     /**
      * @api
+     *
+     * @return AccessIPAddressResponse<HasRawResponse>
      */
     public function retrieve(
         string $accessIPAddressID,
@@ -39,6 +44,8 @@ interface AccessIPAddressContract
      *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[ip_source], filter[ip_address], filter[created_at]. Supports complex bracket operations for dynamic filtering.
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     *
+     * @return AccessIPAddressListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,
@@ -48,6 +55,8 @@ interface AccessIPAddressContract
 
     /**
      * @api
+     *
+     * @return AccessIPAddressResponse<HasRawResponse>
      */
     public function delete(
         string $accessIPAddressID,

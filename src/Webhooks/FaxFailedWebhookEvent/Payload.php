@@ -13,17 +13,17 @@ use Telnyx\Webhooks\FaxFailedWebhookEvent\Payload\Status;
 
 /**
  * @phpstan-type payload_alias = array{
- *   clientState?: string|null,
- *   connectionID?: string|null,
- *   direction?: value-of<Direction>|null,
- *   failureReason?: value-of<FailureReason>|null,
- *   faxID?: string|null,
- *   from?: string|null,
- *   mediaName?: string|null,
- *   originalMediaURL?: string|null,
- *   status?: value-of<Status>|null,
- *   to?: string|null,
- *   userID?: string|null,
+ *   clientState?: string,
+ *   connectionID?: string,
+ *   direction?: value-of<Direction>,
+ *   failureReason?: value-of<FailureReason>,
+ *   faxID?: string,
+ *   from?: string,
+ *   mediaName?: string,
+ *   originalMediaURL?: string,
+ *   status?: value-of<Status>,
+ *   to?: string,
+ *   userID?: string,
  * }
  */
 final class Payload implements BaseModel

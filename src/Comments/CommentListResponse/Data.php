@@ -12,15 +12,15 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type data_alias = array{
- *   id?: string|null,
- *   body?: string|null,
- *   commentRecordID?: string|null,
- *   commentRecordType?: value-of<CommentRecordType>|null,
- *   commenter?: string|null,
- *   commenterType?: value-of<CommenterType>|null,
- *   createdAt?: \DateTimeInterface|null,
- *   readAt?: \DateTimeInterface|null,
- *   updatedAt?: \DateTimeInterface|null,
+ *   id?: string,
+ *   body?: string,
+ *   commentRecordID?: string,
+ *   commentRecordType?: value-of<CommentRecordType>,
+ *   commenter?: string,
+ *   commenterType?: value-of<CommenterType>,
+ *   createdAt?: \DateTimeInterface,
+ *   readAt?: \DateTimeInterface,
+ *   updatedAt?: \DateTimeInterface,
  * }
  */
 final class Data implements BaseModel

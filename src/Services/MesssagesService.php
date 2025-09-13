@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Messsages\MesssageRcsParams;
 use Telnyx\Messsages\MesssageRcsParams\MmsFallback;
 use Telnyx\Messsages\MesssageRcsParams\SMSFallback;
@@ -36,6 +37,8 @@ final class MesssagesService implements MesssagesContract
      * @param SMSFallback $smsFallback
      * @param Type|value-of<Type> $type Message type - must be set to "RCS"
      * @param string $webhookURL the URL where webhooks related to this message will be sent
+     *
+     * @return MesssageRcsResponse<HasRawResponse>
      */
     public function rcs(
         $agentID,

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Messages\MessageCancelScheduledResponse;
 use Telnyx\Messages\MessageGetResponse;
 use Telnyx\Messages\MessageScheduleParams\Type;
@@ -25,6 +26,8 @@ interface MessagesContract
 {
     /**
      * @api
+     *
+     * @return MessageGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -33,6 +36,8 @@ interface MessagesContract
 
     /**
      * @api
+     *
+     * @return MessageCancelScheduledResponse<HasRawResponse>
      */
     public function cancelScheduled(
         string $id,
@@ -62,6 +67,8 @@ interface MessagesContract
      * @param bool $useProfileWebhooks If the profile this number is associated with has webhooks, use them for delivery notifications. If webhooks are also specified on the message itself, they will be attempted first, then those on the profile.
      * @param string $webhookFailoverURL the failover URL where webhooks related to this message will be sent if sending to the primary URL fails
      * @param string $webhookURL the URL where webhooks related to this message will be sent
+     *
+     * @return MessageScheduleResponse<HasRawResponse>
      */
     public function schedule(
         $to,
@@ -102,6 +109,8 @@ interface MessagesContract
      * @param bool $useProfileWebhooks If the profile this number is associated with has webhooks, use them for delivery notifications. If webhooks are also specified on the message itself, they will be attempted first, then those on the profile.
      * @param string $webhookFailoverURL the failover URL where webhooks related to this message will be sent if sending to the primary URL fails
      * @param string $webhookURL the URL where webhooks related to this message will be sent
+     *
+     * @return MessageSendResponse<HasRawResponse>
      */
     public function send(
         $to,
@@ -130,6 +139,8 @@ interface MessagesContract
      * @param bool $useProfileWebhooks If the profile this number is associated with has webhooks, use them for delivery notifications. If webhooks are also specified on the message itself, they will be attempted first, then those on the profile.
      * @param string $webhookFailoverURL the failover URL where webhooks related to this message will be sent if sending to the primary URL fails
      * @param string $webhookURL the URL where webhooks related to this message will be sent
+     *
+     * @return MessageSendGroupMmsResponse<HasRawResponse>
      */
     public function sendGroupMms(
         $from,
@@ -160,6 +171,8 @@ interface MessagesContract
      * @param bool $useProfileWebhooks If the profile this number is associated with has webhooks, use them for delivery notifications. If webhooks are also specified on the message itself, they will be attempted first, then those on the profile.
      * @param string $webhookFailoverURL the failover URL where webhooks related to this message will be sent if sending to the primary URL fails
      * @param string $webhookURL the URL where webhooks related to this message will be sent
+     *
+     * @return MessageSendLongCodeResponse<HasRawResponse>
      */
     public function sendLongCode(
         $from,
@@ -192,6 +205,8 @@ interface MessagesContract
      * @param bool $useProfileWebhooks If the profile this number is associated with has webhooks, use them for delivery notifications. If webhooks are also specified on the message itself, they will be attempted first, then those on the profile.
      * @param string $webhookFailoverURL the failover URL where webhooks related to this message will be sent if sending to the primary URL fails
      * @param string $webhookURL the URL where webhooks related to this message will be sent
+     *
+     * @return MessageSendNumberPoolResponse<HasRawResponse>
      */
     public function sendNumberPool(
         $messagingProfileID,
@@ -224,6 +239,8 @@ interface MessagesContract
      * @param bool $useProfileWebhooks If the profile this number is associated with has webhooks, use them for delivery notifications. If webhooks are also specified on the message itself, they will be attempted first, then those on the profile.
      * @param string $webhookFailoverURL the failover URL where webhooks related to this message will be sent if sending to the primary URL fails
      * @param string $webhookURL the URL where webhooks related to this message will be sent
+     *
+     * @return MessageSendShortCodeResponse<HasRawResponse>
      */
     public function sendShortCode(
         $from,

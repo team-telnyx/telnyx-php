@@ -11,19 +11,19 @@ use Telnyx\NumberLookup\NumberLookupGetResponse\Data\Portability\PortedStatus;
 
 /**
  * @phpstan-type portability_alias = array{
- *   altspid?: string|null,
- *   altspidCarrierName?: string|null,
- *   altspidCarrierType?: string|null,
- *   city?: string|null,
- *   lineType?: string|null,
- *   lrn?: string|null,
- *   ocn?: string|null,
- *   portedDate?: string|null,
- *   portedStatus?: value-of<PortedStatus>|null,
- *   spid?: string|null,
- *   spidCarrierName?: string|null,
- *   spidCarrierType?: string|null,
- *   state?: string|null,
+ *   altspid?: string,
+ *   altspidCarrierName?: string,
+ *   altspidCarrierType?: string,
+ *   city?: string,
+ *   lineType?: string,
+ *   lrn?: string,
+ *   ocn?: string,
+ *   portedDate?: string,
+ *   portedStatus?: value-of<PortedStatus>,
+ *   spid?: string,
+ *   spidCarrierName?: string,
+ *   spidCarrierType?: string,
+ *   state?: string,
  * }
  */
 final class Portability implements BaseModel

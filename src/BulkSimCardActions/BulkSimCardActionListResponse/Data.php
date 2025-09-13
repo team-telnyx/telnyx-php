@@ -12,13 +12,13 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type data_alias = array{
- *   id?: string|null,
- *   actionType?: value-of<ActionType>|null,
- *   createdAt?: string|null,
- *   recordType?: string|null,
- *   settings?: array<string, mixed>|null,
- *   simCardActionsSummary?: list<SimCardActionsSummary>|null,
- *   updatedAt?: string|null,
+ *   id?: string,
+ *   actionType?: value-of<ActionType>,
+ *   createdAt?: string,
+ *   recordType?: string,
+ *   settings?: array<string, mixed>,
+ *   simCardActionsSummary?: list<SimCardActionsSummary>,
+ *   updatedAt?: string,
  * }
  */
 final class Data implements BaseModel

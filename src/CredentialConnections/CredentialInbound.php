@@ -12,17 +12,17 @@ use Telnyx\CredentialConnections\CredentialInbound\DnisNumberFormat;
 
 /**
  * @phpstan-type credential_inbound = array{
- *   aniNumberFormat?: value-of<AniNumberFormat>|null,
- *   channelLimit?: int|null,
- *   codecs?: list<string>|null,
- *   dnisNumberFormat?: value-of<DnisNumberFormat>|null,
- *   generateRingbackTone?: bool|null,
- *   isupHeadersEnabled?: bool|null,
- *   prackEnabled?: bool|null,
- *   shakenStirEnabled?: bool|null,
- *   sipCompactHeadersEnabled?: bool|null,
- *   timeout1xxSecs?: int|null,
- *   timeout2xxSecs?: int|null,
+ *   aniNumberFormat?: value-of<AniNumberFormat>,
+ *   channelLimit?: int,
+ *   codecs?: list<string>,
+ *   dnisNumberFormat?: value-of<DnisNumberFormat>,
+ *   generateRingbackTone?: bool,
+ *   isupHeadersEnabled?: bool,
+ *   prackEnabled?: bool,
+ *   shakenStirEnabled?: bool,
+ *   sipCompactHeadersEnabled?: bool,
+ *   timeout1xxSecs?: int,
+ *   timeout2xxSecs?: int,
  * }
  */
 final class CredentialInbound implements BaseModel

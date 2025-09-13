@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type data_alias = array{
- *   id?: string|null, accepted?: bool|null, recordType?: value-of<RecordType>|null
+ *   id?: string, accepted?: bool, recordType?: value-of<RecordType>
  * }
  */
 final class Data implements BaseModel

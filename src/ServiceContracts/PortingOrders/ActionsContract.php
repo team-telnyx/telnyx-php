@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\PortingOrders;
 
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PortingOrders\Actions\ActionActivateResponse;
 use Telnyx\PortingOrders\Actions\ActionCancelResponse;
 use Telnyx\PortingOrders\Actions\ActionConfirmResponse;
@@ -17,6 +18,8 @@ interface ActionsContract
 {
     /**
      * @api
+     *
+     * @return ActionActivateResponse<HasRawResponse>
      */
     public function activate(
         string $id,
@@ -25,6 +28,8 @@ interface ActionsContract
 
     /**
      * @api
+     *
+     * @return ActionCancelResponse<HasRawResponse>
      */
     public function cancel(
         string $id,
@@ -33,6 +38,8 @@ interface ActionsContract
 
     /**
      * @api
+     *
+     * @return ActionConfirmResponse<HasRawResponse>
      */
     public function confirm(
         string $id,
@@ -44,6 +51,8 @@ interface ActionsContract
      *
      * @param int $expiresInSeconds The number of seconds the token will be valid for
      * @param Permissions|value-of<Permissions> $permissions The permissions the token will have
+     *
+     * @return ActionShareResponse<HasRawResponse>
      */
     public function share(
         string $id,

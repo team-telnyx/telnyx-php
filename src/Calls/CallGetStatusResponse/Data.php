@@ -16,10 +16,10 @@ use Telnyx\Core\Contracts\BaseModel;
  *   callSessionID: string,
  *   isAlive: bool,
  *   recordType: value-of<RecordType>,
- *   callDuration?: int|null,
- *   clientState?: string|null,
- *   endTime?: string|null,
- *   startTime?: string|null,
+ *   callDuration?: int,
+ *   clientState?: string,
+ *   endTime?: string,
+ *   startTime?: string,
  * }
  */
 final class Data implements BaseModel

@@ -10,13 +10,13 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type porting_order_end_user_admin = array{
- *   accountNumber?: string|null,
- *   authPersonName?: string|null,
- *   billingPhoneNumber?: string|null,
- *   businessIdentifier?: string|null,
- *   entityName?: string|null,
- *   pinPasscode?: string|null,
- *   taxIdentifier?: string|null,
+ *   accountNumber?: string,
+ *   authPersonName?: string,
+ *   billingPhoneNumber?: string,
+ *   businessIdentifier?: string,
+ *   entityName?: string,
+ *   pinPasscode?: string,
+ *   taxIdentifier?: string,
  * }
  */
 final class PortingOrderEndUserAdmin implements BaseModel

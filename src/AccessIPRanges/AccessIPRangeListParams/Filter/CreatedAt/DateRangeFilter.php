@@ -12,10 +12,10 @@ use Telnyx\Core\Contracts\BaseModel;
  * Date range filtering operations.
  *
  * @phpstan-type date_range_filter = array{
- *   gt?: \DateTimeInterface|null,
- *   gte?: \DateTimeInterface|null,
- *   lt?: \DateTimeInterface|null,
- *   lte?: \DateTimeInterface|null,
+ *   gt?: \DateTimeInterface,
+ *   gte?: \DateTimeInterface,
+ *   lt?: \DateTimeInterface,
+ *   lte?: \DateTimeInterface,
  * }
  */
 final class DateRangeFilter implements BaseModel

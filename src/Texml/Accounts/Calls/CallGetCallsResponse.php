@@ -11,15 +11,19 @@ use Telnyx\Texml\Accounts\Calls\CallGetCallsResponse\Call;
 
 /**
  * @phpstan-type call_get_calls_response = array{
- *   calls?: list<Call>|null,
- *   end?: int|null,
- *   firstPageUri?: string|null,
- *   nextPageUri?: string|null,
- *   page?: int|null,
- *   pageSize?: int|null,
- *   start?: int|null,
- *   uri?: string|null,
+ *   calls?: list<Call>,
+ *   end?: int,
+ *   firstPageUri?: string,
+ *   nextPageUri?: string,
+ *   page?: int,
+ *   pageSize?: int,
+ *   start?: int,
+ *   uri?: string,
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class CallGetCallsResponse implements BaseModel
 {

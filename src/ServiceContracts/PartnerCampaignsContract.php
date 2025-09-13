@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Campaign\CampaignSharingStatus;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PartnerCampaigns\PartnerCampaignListParams\Sort;
 use Telnyx\PartnerCampaigns\PartnerCampaignListResponse;
 use Telnyx\PartnerCampaigns\PartnerCampaignListSharedByMeResponse;
@@ -17,6 +18,8 @@ interface PartnerCampaignsContract
 {
     /**
      * @api
+     *
+     * @return TelnyxDownstreamCampaign<HasRawResponse>
      */
     public function retrieve(
         string $campaignID,
@@ -28,6 +31,8 @@ interface PartnerCampaignsContract
      *
      * @param string $webhookFailoverURL webhook failover to which campaign status updates are sent
      * @param string $webhookURL webhook to which campaign status updates are sent
+     *
+     * @return TelnyxDownstreamCampaign<HasRawResponse>
      */
     public function update(
         string $campaignID,
@@ -42,6 +47,8 @@ interface PartnerCampaignsContract
      * @param int $page The 1-indexed page number to get. The default value is `1`.
      * @param int $recordsPerPage The amount of records per page, limited to between 1 and 500 inclusive. The default value is `10`.
      * @param Sort|value-of<Sort> $sort Specifies the sort order for results. If not given, results are sorted by createdAt in descending order.
+     *
+     * @return PartnerCampaignListResponse<HasRawResponse>
      */
     public function list(
         $page = omit,
@@ -55,6 +62,8 @@ interface PartnerCampaignsContract
      *
      * @param int $page The 1-indexed page number to get. The default value is `1`.
      * @param int $recordsPerPage The amount of records per page, limited to between 1 and 500 inclusive. The default value is `10`.
+     *
+     * @return PartnerCampaignListSharedByMeResponse<HasRawResponse>
      */
     public function listSharedByMe(
         $page = omit,

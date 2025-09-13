@@ -12,10 +12,10 @@ use Telnyx\Webhooks\InboundMessageWebhookEvent\Data\Payload\Cc\Status;
 
 /**
  * @phpstan-type cc_alias = array{
- *   carrier?: string|null,
- *   lineType?: value-of<LineType>|null,
- *   phoneNumber?: string|null,
- *   status?: value-of<Status>|null,
+ *   carrier?: string,
+ *   lineType?: value-of<LineType>,
+ *   phoneNumber?: string,
+ *   status?: value-of<Status>,
  * }
  */
 final class Cc implements BaseModel

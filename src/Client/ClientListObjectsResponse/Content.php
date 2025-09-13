@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type content_alias = array{
- *   key?: string|null, lastModified?: \DateTimeInterface|null, size?: float|null
+ *   key?: string, lastModified?: \DateTimeInterface, size?: float
  * }
  */
 final class Content implements BaseModel

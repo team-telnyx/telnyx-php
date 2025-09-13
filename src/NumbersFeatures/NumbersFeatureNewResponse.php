@@ -10,7 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NumbersFeatures\NumbersFeatureNewResponse\Data;
 
 /**
- * @phpstan-type numbers_feature_new_response = array{data?: list<Data>|null}
+ * @phpstan-type numbers_feature_new_response = array{data?: list<Data>}
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class NumbersFeatureNewResponse implements BaseModel
 {

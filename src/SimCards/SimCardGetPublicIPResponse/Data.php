@@ -11,13 +11,13 @@ use Telnyx\SimCards\SimCardGetPublicIPResponse\Data\Type;
 
 /**
  * @phpstan-type data_alias = array{
- *   createdAt?: string|null,
- *   ip?: string|null,
- *   recordType?: string|null,
- *   regionCode?: string|null,
- *   simCardID?: string|null,
- *   type?: value-of<Type>|null,
- *   updatedAt?: string|null,
+ *   createdAt?: string,
+ *   ip?: string,
+ *   recordType?: string,
+ *   regionCode?: string,
+ *   simCardID?: string,
+ *   type?: value-of<Type>,
+ *   updatedAt?: string,
  * }
  */
 final class Data implements BaseModel

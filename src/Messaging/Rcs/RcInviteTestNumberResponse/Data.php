@@ -11,10 +11,10 @@ use Telnyx\Messaging\Rcs\RcInviteTestNumberResponse\Data\RecordType;
 
 /**
  * @phpstan-type data_alias = array{
- *   agentID?: string|null,
- *   phoneNumber?: string|null,
- *   recordType?: value-of<RecordType>|null,
- *   status?: string|null,
+ *   agentID?: string,
+ *   phoneNumber?: string,
+ *   recordType?: value-of<RecordType>,
+ *   status?: string,
  * }
  */
 final class Data implements BaseModel

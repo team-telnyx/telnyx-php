@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\VerifyProfiles\VerifyProfileCreateParams\Call;
 use Telnyx\VerifyProfiles\VerifyProfileCreateParams\Flashcall;
@@ -31,6 +32,8 @@ interface VerifyProfilesContract
      * @param SMS $sms
      * @param string $webhookFailoverURL
      * @param string $webhookURL
+     *
+     * @return VerifyProfileData<HasRawResponse>
      */
     public function create(
         $name,
@@ -45,6 +48,8 @@ interface VerifyProfilesContract
 
     /**
      * @api
+     *
+     * @return VerifyProfileData<HasRawResponse>
      */
     public function retrieve(
         string $verifyProfileID,
@@ -61,6 +66,8 @@ interface VerifyProfilesContract
      * @param SMS1 $sms
      * @param string $webhookFailoverURL
      * @param string $webhookURL
+     *
+     * @return VerifyProfileData<HasRawResponse>
      */
     public function update(
         string $verifyProfileID,
@@ -79,6 +86,8 @@ interface VerifyProfilesContract
      *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[name]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     *
+     * @return VerifyProfileListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,
@@ -88,6 +97,8 @@ interface VerifyProfilesContract
 
     /**
      * @api
+     *
+     * @return VerifyProfileData<HasRawResponse>
      */
     public function delete(
         string $verifyProfileID,
@@ -96,6 +107,8 @@ interface VerifyProfilesContract
 
     /**
      * @api
+     *
+     * @return VerifyProfileGetTemplatesResponse<HasRawResponse>
      */
     public function retrieveTemplates(
         ?RequestOptions $requestOptions = null

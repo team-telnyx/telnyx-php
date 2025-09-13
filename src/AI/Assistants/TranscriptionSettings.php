@@ -9,9 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type transcription_settings = array{
- *   language?: string|null, model?: string|null
- * }
+ * @phpstan-type transcription_settings = array{language?: string, model?: string}
  */
 final class TranscriptionSettings implements BaseModel
 {

@@ -15,19 +15,19 @@ use Telnyx\Core\Contracts\BaseModel;
  * Consolidated filter parameter (deepObject style). Originally: filter[phone_number], filter[locality], filter[administrative_area], filter[country_code], filter[national_destination_code], filter[rate_center], filter[phone_number_type], filter[features], filter[limit], filter[best_effort], filter[quickship], filter[reservable], filter[exclude_held_numbers].
  *
  * @phpstan-type filter_alias = array{
- *   administrativeArea?: string|null,
- *   bestEffort?: bool|null,
- *   countryCode?: string|null,
- *   excludeHeldNumbers?: bool|null,
- *   features?: list<value-of<Feature>>|null,
- *   limit?: int|null,
- *   locality?: string|null,
- *   nationalDestinationCode?: string|null,
- *   phoneNumber?: PhoneNumber|null,
- *   phoneNumberType?: value-of<PhoneNumberType>|null,
- *   quickship?: bool|null,
- *   rateCenter?: string|null,
- *   reservable?: bool|null,
+ *   administrativeArea?: string,
+ *   bestEffort?: bool,
+ *   countryCode?: string,
+ *   excludeHeldNumbers?: bool,
+ *   features?: list<value-of<Feature>>,
+ *   limit?: int,
+ *   locality?: string,
+ *   nationalDestinationCode?: string,
+ *   phoneNumber?: PhoneNumber,
+ *   phoneNumberType?: value-of<PhoneNumberType>,
+ *   quickship?: bool,
+ *   rateCenter?: string,
+ *   reservable?: bool,
  * }
  */
 final class Filter implements BaseModel

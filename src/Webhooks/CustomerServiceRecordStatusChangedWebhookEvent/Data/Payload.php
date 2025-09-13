@@ -11,10 +11,10 @@ use Telnyx\Webhooks\CustomerServiceRecordStatusChangedWebhookEvent\Data\Payload\
 
 /**
  * @phpstan-type payload_alias = array{
- *   id?: string|null,
- *   phoneNumber?: string|null,
- *   status?: value-of<Status>|null,
- *   updatedAt?: \DateTimeInterface|null,
+ *   id?: string,
+ *   phoneNumber?: string,
+ *   status?: value-of<Status>,
+ *   updatedAt?: \DateTimeInterface,
  * }
  */
 final class Payload implements BaseModel

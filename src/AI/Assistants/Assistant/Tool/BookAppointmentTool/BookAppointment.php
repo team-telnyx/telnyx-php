@@ -12,8 +12,8 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type book_appointment = array{
  *   apiKeyRef: string,
  *   eventTypeID: int,
- *   attendeeName?: string|null,
- *   attendeeTimezone?: string|null,
+ *   attendeeName?: string,
+ *   attendeeTimezone?: string,
  * }
  */
 final class BookAppointment implements BaseModel

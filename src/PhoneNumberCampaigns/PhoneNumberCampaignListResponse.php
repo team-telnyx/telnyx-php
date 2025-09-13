@@ -12,6 +12,10 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type phone_number_campaign_list_response = array{
  *   page: int, records: list<PhoneNumberCampaign>, totalRecords: int
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class PhoneNumberCampaignListResponse implements BaseModel
 {

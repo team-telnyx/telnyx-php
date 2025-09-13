@@ -14,14 +14,14 @@ use Telnyx\RoomRecordings\RoomRecordingListParams\Filter\DateStartedAt;
  * Consolidated filter parameter (deepObject style). Originally: filter[date_ended_at][eq], filter[date_ended_at][gte], filter[date_ended_at][lte], filter[date_started_at][eq], filter[date_started_at][gte], filter[date_started_at][lte], filter[room_id], filter[participant_id], filter[session_id], filter[status], filter[type], filter[duration_secs].
  *
  * @phpstan-type filter_alias = array{
- *   dateEndedAt?: DateEndedAt|null,
- *   dateStartedAt?: DateStartedAt|null,
- *   durationSecs?: int|null,
- *   participantID?: string|null,
- *   roomID?: string|null,
- *   sessionID?: string|null,
- *   status?: string|null,
- *   type?: string|null,
+ *   dateEndedAt?: DateEndedAt,
+ *   dateStartedAt?: DateStartedAt,
+ *   durationSecs?: int,
+ *   participantID?: string,
+ *   roomID?: string,
+ *   sessionID?: string,
+ *   status?: string,
+ *   type?: string,
  * }
  */
 final class Filter implements BaseModel

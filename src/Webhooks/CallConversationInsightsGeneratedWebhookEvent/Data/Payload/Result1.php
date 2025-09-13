@@ -10,9 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\CallConversationInsightsGeneratedWebhookEvent\Data\Payload\Result1\Result;
 
 /**
- * @phpstan-type result1_alias = array{
- *   insightID?: string|null, result?: mixed|string|null
- * }
+ * @phpstan-type result1_alias = array{insightID?: string, result?: mixed|string}
  */
 final class Result1 implements BaseModel
 {

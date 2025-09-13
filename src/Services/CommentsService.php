@@ -13,6 +13,7 @@ use Telnyx\Comments\CommentListParams\Filter;
 use Telnyx\Comments\CommentListResponse;
 use Telnyx\Comments\CommentMarkAsReadResponse;
 use Telnyx\Comments\CommentNewResponse;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\CommentsContract;
 
@@ -33,6 +34,8 @@ final class CommentsService implements CommentsContract
      * @param string $body
      * @param string $commentRecordID
      * @param CommentRecordType|value-of<CommentRecordType> $commentRecordType
+     *
+     * @return CommentNewResponse<HasRawResponse>
      */
     public function create(
         $body = omit,
@@ -63,6 +66,8 @@ final class CommentsService implements CommentsContract
      * @api
      *
      * Retrieve a comment
+     *
+     * @return CommentGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -83,6 +88,8 @@ final class CommentsService implements CommentsContract
      * Retrieve all comments
      *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[comment_record_type], filter[comment_record_id]
+     *
+     * @return CommentListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,
@@ -107,6 +114,8 @@ final class CommentsService implements CommentsContract
      * @api
      *
      * Mark a comment as read
+     *
+     * @return CommentMarkAsReadResponse<HasRawResponse>
      */
     public function markAsRead(
         string $id,

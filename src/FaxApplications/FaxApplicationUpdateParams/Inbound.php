@@ -11,9 +11,9 @@ use Telnyx\FaxApplications\FaxApplicationUpdateParams\Inbound\SipSubdomainReceiv
 
 /**
  * @phpstan-type inbound_alias = array{
- *   channelLimit?: int|null,
- *   sipSubdomain?: string|null,
- *   sipSubdomainReceiveSettings?: value-of<SipSubdomainReceiveSettings>|null,
+ *   channelLimit?: int,
+ *   sipSubdomain?: string,
+ *   sipSubdomainReceiveSettings?: value-of<SipSubdomainReceiveSettings>,
  * }
  */
 final class Inbound implements BaseModel

@@ -12,9 +12,9 @@ use Telnyx\NetworkCoverage\NetworkCoverageListResponse\Data\Location;
 
 /**
  * @phpstan-type data_alias = array{
- *   availableServices?: list<value-of<AvailableService>>|null,
- *   location?: Location|null,
- *   recordType?: string|null,
+ *   availableServices?: list<value-of<AvailableService>>,
+ *   location?: Location,
+ *   recordType?: string,
  * }
  */
 final class Data implements BaseModel

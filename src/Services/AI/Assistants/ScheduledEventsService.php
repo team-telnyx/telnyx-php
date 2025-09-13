@@ -15,6 +15,7 @@ use Telnyx\AI\Assistants\ScheduledEvents\ScheduledEventRetrieveParams;
 use Telnyx\AI\Assistants\ScheduledEvents\ScheduledPhoneCallEventResponse;
 use Telnyx\AI\Assistants\ScheduledEvents\ScheduledSMSEventResponse;
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\ScheduledEventsContract;
 
@@ -111,6 +112,8 @@ final class ScheduledEventsService implements ScheduledEventsContract
      * @param \DateTimeInterface $fromDate
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param \DateTimeInterface $toDate
+     *
+     * @return ScheduledEventListResponse<HasRawResponse>
      */
     public function list(
         string $assistantID,

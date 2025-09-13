@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\MessagingHostedNumberOrders;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\MessagingHostedNumberOrders\Actions\ActionUploadFileParams;
 use Telnyx\MessagingHostedNumberOrders\Actions\ActionUploadFileResponse;
 use Telnyx\RequestOptions;
@@ -26,6 +27,8 @@ final class ActionsService implements ActionsContract
      *
      * @param string $bill must be the last month's bill with proof of ownership of all of the numbers in the order in PDF format
      * @param string $loa must be a signed LOA for the numbers in the order in PDF format
+     *
+     * @return ActionUploadFileResponse<HasRawResponse>
      */
     public function uploadFile(
         string $id,

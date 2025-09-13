@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\WireguardInterfacesContract;
 use Telnyx\WireguardInterfaces\WireguardInterfaceCreateParams;
@@ -34,6 +35,8 @@ final class WireguardInterfacesService implements WireguardInterfacesContract
      * @param string $regionCode the region the interface should be deployed to
      * @param bool $enableSipTrunking enable SIP traffic forwarding over VPN interface
      * @param string $name a user specified name for the interface
+     *
+     * @return WireguardInterfaceNewResponse<HasRawResponse>
      */
     public function create(
         $networkID,
@@ -66,6 +69,8 @@ final class WireguardInterfacesService implements WireguardInterfacesContract
      * @api
      *
      * Retrieve a WireGuard Interfaces.
+     *
+     * @return WireguardInterfaceGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -87,6 +92,8 @@ final class WireguardInterfacesService implements WireguardInterfacesContract
      *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[network_id]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     *
+     * @return WireguardInterfaceListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,
@@ -112,6 +119,8 @@ final class WireguardInterfacesService implements WireguardInterfacesContract
      * @api
      *
      * Delete a WireGuard Interface.
+     *
+     * @return WireguardInterfaceDeleteResponse<HasRawResponse>
      */
     public function delete(
         string $id,

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\SimCardGroups;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SimCardGroups\ActionsContract;
 use Telnyx\SimCardGroups\Actions\ActionGetResponse;
@@ -32,6 +33,8 @@ final class ActionsService implements ActionsContract
      * @api
      *
      * This API allows fetching detailed information about a SIM card group action resource to make follow-ups in an existing asynchronous operation.
+     *
+     * @return ActionGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -56,6 +59,8 @@ final class ActionsService implements ActionsContract
      * @param FilterType|value-of<FilterType> $filterType filter by action type
      * @param int $pageNumber the page number to load
      * @param int $pageSize the size of the page
+     *
+     * @return ActionListResponse<HasRawResponse>
      */
     public function list(
         $filterSimCardGroupID = omit,
@@ -90,6 +95,8 @@ final class ActionsService implements ActionsContract
      * @api
      *
      * This action will asynchronously remove an existing Private Wireless Gateway definition from a SIM card group. Completing this operation defines that all SIM cards in the SIM card group will get their traffic handled by Telnyx's default mobile network configuration.
+     *
+     * @return ActionRemovePrivateWirelessGatewayResponse<HasRawResponse>
      */
     public function removePrivateWirelessGateway(
         string $id,
@@ -110,6 +117,8 @@ final class ActionsService implements ActionsContract
      * @api
      *
      * This action will asynchronously remove an existing Wireless Blocklist to all the SIMs in the SIM card group.
+     *
+     * @return ActionRemoveWirelessBlocklistResponse<HasRawResponse>
      */
     public function removeWirelessBlocklist(
         string $id,
@@ -130,6 +139,8 @@ final class ActionsService implements ActionsContract
      * This action will asynchronously assign a provisioned Private Wireless Gateway to the SIM card group. Completing this operation defines that all SIM cards in the SIM card group will get their traffic controlled by the associated Private Wireless Gateway. This operation will also imply that new SIM cards assigned to a group will inherit its network definitions. If it's moved to a different group that doesn't have a Private Wireless Gateway, it'll use Telnyx's default mobile network configuration.
      *
      * @param string $privateWirelessGatewayID the identification of the related Private Wireless Gateway resource
+     *
+     * @return ActionSetPrivateWirelessGatewayResponse<HasRawResponse>
      */
     public function setPrivateWirelessGateway(
         string $id,
@@ -157,6 +168,8 @@ final class ActionsService implements ActionsContract
      * This action will asynchronously assign a Wireless Blocklist to all the SIMs in the SIM card group.
      *
      * @param string $wirelessBlocklistID the identification of the related Wireless Blocklist resource
+     *
+     * @return ActionSetWirelessBlocklistResponse<HasRawResponse>
      */
     public function setWirelessBlocklist(
         string $id,

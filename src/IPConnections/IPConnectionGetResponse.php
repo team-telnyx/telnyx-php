@@ -9,7 +9,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type ip_connection_get_response = array{data?: IPConnection|null}
+ * @phpstan-type ip_connection_get_response = array{data?: IPConnection}
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class IPConnectionGetResponse implements BaseModel
 {

@@ -11,8 +11,12 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type outbound_voice_profile_list_response = array{
- *   data?: list<OutboundVoiceProfile>|null, meta?: PaginationMeta|null
+ *   data?: list<OutboundVoiceProfile>, meta?: PaginationMeta
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class OutboundVoiceProfileListResponse implements BaseModel
 {

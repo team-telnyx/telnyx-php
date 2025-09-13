@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
  *
- * @phpstan-type page_alias = array{number?: int|null, size?: int|null}
+ * @phpstan-type page_alias = array{number?: int, size?: int}
  */
 final class Page implements BaseModel
 {

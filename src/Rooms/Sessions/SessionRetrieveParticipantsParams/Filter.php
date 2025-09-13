@@ -15,10 +15,10 @@ use Telnyx\Rooms\Sessions\SessionRetrieveParticipantsParams\Filter\DateUpdatedAt
  * Consolidated filter parameter (deepObject style). Originally: filter[date_joined_at][eq], filter[date_joined_at][gte], filter[date_joined_at][lte], filter[date_updated_at][eq], filter[date_updated_at][gte], filter[date_updated_at][lte], filter[date_left_at][eq], filter[date_left_at][gte], filter[date_left_at][lte], filter[context].
  *
  * @phpstan-type filter_alias = array{
- *   context?: string|null,
- *   dateJoinedAt?: DateJoinedAt|null,
- *   dateLeftAt?: DateLeftAt|null,
- *   dateUpdatedAt?: DateUpdatedAt|null,
+ *   context?: string,
+ *   dateJoinedAt?: DateJoinedAt,
+ *   dateLeftAt?: DateLeftAt,
+ *   dateUpdatedAt?: DateUpdatedAt,
  * }
  */
 final class Filter implements BaseModel

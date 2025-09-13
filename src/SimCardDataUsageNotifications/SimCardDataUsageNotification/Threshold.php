@@ -12,9 +12,7 @@ use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotification\Threshold\
 /**
  * Data usage threshold that will trigger the notification.
  *
- * @phpstan-type threshold_alias = array{
- *   amount?: string|null, unit?: value-of<Unit>|null
- * }
+ * @phpstan-type threshold_alias = array{amount?: string, unit?: value-of<Unit>}
  */
 final class Threshold implements BaseModel
 {

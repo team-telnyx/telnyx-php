@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * The hyperparameters used for the fine-tuning job.
  *
- * @phpstan-type hyperparameters_alias = array{nEpochs?: int|null}
+ * @phpstan-type hyperparameters_alias = array{nEpochs?: int}
  */
 final class Hyperparameters implements BaseModel
 {

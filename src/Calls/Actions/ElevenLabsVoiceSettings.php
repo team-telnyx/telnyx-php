@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type eleven_labs_voice_settings = array{apiKeyRef?: string|null}
+ * @phpstan-type eleven_labs_voice_settings = array{apiKeyRef?: string}
  */
 final class ElevenLabsVoiceSettings implements BaseModel
 {

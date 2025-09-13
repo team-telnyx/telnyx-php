@@ -12,10 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * The webhook payload for the portout.new_comment event.
  *
  * @phpstan-type webhook_portout_new_comment_payload = array{
- *   id?: string|null,
- *   comment?: string|null,
- *   portoutID?: string|null,
- *   userID?: string|null,
+ *   id?: string, comment?: string, portoutID?: string, userID?: string
  * }
  */
 final class WebhookPortoutNewCommentPayload implements BaseModel

@@ -13,10 +13,10 @@ use Telnyx\Core\Contracts\BaseModel;
  * Consolidated filter parameter (deepObject style). Originally: filter[locality], filter[country_code], filter[national_destination_code], filter[phone_number_type].
  *
  * @phpstan-type filter_alias = array{
- *   countryCode?: string|null,
- *   locality?: string|null,
- *   nationalDestinationCode?: string|null,
- *   phoneNumberType?: value-of<PhoneNumberType>|null,
+ *   countryCode?: string,
+ *   locality?: string,
+ *   nationalDestinationCode?: string,
+ *   phoneNumberType?: value-of<PhoneNumberType>,
  * }
  */
 final class Filter implements BaseModel

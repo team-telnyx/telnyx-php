@@ -11,18 +11,18 @@ use Telnyx\NumberBlockOrders\NumberBlockOrder\Status;
 
 /**
  * @phpstan-type number_block_order = array{
- *   id?: string|null,
- *   connectionID?: string|null,
- *   createdAt?: \DateTimeInterface|null,
- *   customerReference?: string|null,
- *   messagingProfileID?: string|null,
- *   phoneNumbersCount?: int|null,
- *   range?: int|null,
- *   recordType?: string|null,
- *   requirementsMet?: bool|null,
- *   startingNumber?: string|null,
- *   status?: value-of<Status>|null,
- *   updatedAt?: \DateTimeInterface|null,
+ *   id?: string,
+ *   connectionID?: string,
+ *   createdAt?: \DateTimeInterface,
+ *   customerReference?: string,
+ *   messagingProfileID?: string,
+ *   phoneNumbersCount?: int,
+ *   range?: int,
+ *   recordType?: string,
+ *   requirementsMet?: bool,
+ *   startingNumber?: string,
+ *   status?: value-of<Status>,
+ *   updatedAt?: \DateTimeInterface,
  * }
  */
 final class NumberBlockOrder implements BaseModel

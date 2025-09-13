@@ -11,8 +11,12 @@ use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderCheckEligibilit
 
 /**
  * @phpstan-type messaging_hosted_number_order_check_eligibility_response = array{
- *   phoneNumbers?: list<PhoneNumber>|null
+ *   phoneNumbers?: list<PhoneNumber>
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class MessagingHostedNumberOrderCheckEligibilityResponse implements BaseModel
 {

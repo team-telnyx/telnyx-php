@@ -12,10 +12,10 @@ use Telnyx\Core\Contracts\BaseModel;
  * The admin of the customer service record.
  *
  * @phpstan-type admin_alias = array{
- *   accountNumber?: string|null,
- *   authorizedPersonName?: string|null,
- *   billingPhoneNumber?: string|null,
- *   name?: string|null,
+ *   accountNumber?: string,
+ *   authorizedPersonName?: string,
+ *   billingPhoneNumber?: string,
+ *   name?: string,
  * }
  */
 final class Admin implements BaseModel

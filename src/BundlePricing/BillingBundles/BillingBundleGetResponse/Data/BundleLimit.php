@@ -16,14 +16,14 @@ use Telnyx\Core\Contracts\BaseModel;
  *   metric: string,
  *   service: string,
  *   updatedAt: \DateTimeInterface,
- *   billingService?: string|null,
- *   country?: string|null,
- *   countryCode?: int|null,
- *   countryISO?: string|null,
- *   direction?: value-of<Direction>|null,
- *   limit?: int|null,
- *   rate?: string|null,
- *   types?: list<string>|null,
+ *   billingService?: string,
+ *   country?: string,
+ *   countryCode?: int,
+ *   countryISO?: string,
+ *   direction?: value-of<Direction>,
+ *   limit?: int,
+ *   rate?: string,
+ *   types?: list<string>,
  * }
  */
 final class BundleLimit implements BaseModel

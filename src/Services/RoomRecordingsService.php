@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\RoomRecordings\RoomRecordingDeleteBulkParams;
 use Telnyx\RoomRecordings\RoomRecordingDeleteBulkParams\Filter as Filter1;
@@ -30,6 +31,8 @@ final class RoomRecordingsService implements RoomRecordingsContract
      * @api
      *
      * View a room recording.
+     *
+     * @return RoomRecordingGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $roomRecordingID,
@@ -51,6 +54,8 @@ final class RoomRecordingsService implements RoomRecordingsContract
      *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[date_ended_at][eq], filter[date_ended_at][gte], filter[date_ended_at][lte], filter[date_started_at][eq], filter[date_started_at][gte], filter[date_started_at][lte], filter[room_id], filter[participant_id], filter[session_id], filter[status], filter[type], filter[duration_secs]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     *
+     * @return RoomRecordingListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,
@@ -97,6 +102,8 @@ final class RoomRecordingsService implements RoomRecordingsContract
      *
      * @param Filter1 $filter Consolidated filter parameter (deepObject style). Originally: filter[date_ended_at][eq], filter[date_ended_at][gte], filter[date_ended_at][lte], filter[date_started_at][eq], filter[date_started_at][gte], filter[date_started_at][lte], filter[room_id], filter[participant_id], filter[session_id], filter[status], filter[type], filter[duration_secs]
      * @param Page1 $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     *
+     * @return RoomRecordingDeleteBulkResponse<HasRawResponse>
      */
     public function deleteBulk(
         $filter = omit,

@@ -13,15 +13,15 @@ use Telnyx\Portouts\Events\EventGetResponse\Data\Payload\WebhookPortoutStatusCha
  * The webhook payload for the portout.status_changed event.
  *
  * @phpstan-type webhook_portout_status_changed_payload = array{
- *   id?: string|null,
- *   attemptedPin?: string|null,
- *   carrierName?: string|null,
- *   phoneNumbers?: list<string>|null,
- *   rejectionReason?: string|null,
- *   spid?: string|null,
- *   status?: value-of<Status>|null,
- *   subscriberName?: string|null,
- *   userID?: string|null,
+ *   id?: string,
+ *   attemptedPin?: string,
+ *   carrierName?: string,
+ *   phoneNumbers?: list<string>,
+ *   rejectionReason?: string,
+ *   spid?: string,
+ *   status?: value-of<Status>,
+ *   subscriberName?: string,
+ *   userID?: string,
  * }
  */
 final class WebhookPortoutStatusChangedPayload implements BaseModel

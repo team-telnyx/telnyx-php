@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberGetResponse;
 use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberListParams;
 use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberListParams\Filter;
@@ -30,6 +31,8 @@ final class NumberOrderPhoneNumbersService implements NumberOrderPhoneNumbersCon
      * @api
      *
      * Get an existing phone number in number order.
+     *
+     * @return NumberOrderPhoneNumberGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $numberOrderPhoneNumberID,
@@ -50,6 +53,8 @@ final class NumberOrderPhoneNumbersService implements NumberOrderPhoneNumbersCon
      * Get a list of phone numbers associated to orders.
      *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[country_code]
+     *
+     * @return NumberOrderPhoneNumberListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,
@@ -76,6 +81,8 @@ final class NumberOrderPhoneNumbersService implements NumberOrderPhoneNumbersCon
      * Update requirement group for a phone number order
      *
      * @param string $requirementGroupID The ID of the requirement group to associate
+     *
+     * @return NumberOrderPhoneNumberUpdateRequirementGroupResponse<HasRawResponse>
      */
     public function updateRequirementGroup(
         string $id,
@@ -105,6 +112,8 @@ final class NumberOrderPhoneNumbersService implements NumberOrderPhoneNumbersCon
      * Updates requirements for a single phone number within a number order.
      *
      * @param list<UpdateRegulatoryRequirement> $regulatoryRequirements
+     *
+     * @return NumberOrderPhoneNumberUpdateRequirementsResponse<HasRawResponse>
      */
     public function updateRequirements(
         string $numberOrderPhoneNumberID,

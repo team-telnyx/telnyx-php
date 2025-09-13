@@ -9,7 +9,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type voicemail_get_response = array{data?: VoicemailPrefResponse|null}
+ * @phpstan-type voicemail_get_response = array{data?: VoicemailPrefResponse}
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class VoicemailGetResponse implements BaseModel
 {

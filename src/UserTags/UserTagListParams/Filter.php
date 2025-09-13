@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[starts_with].
  *
- * @phpstan-type filter_alias = array{startsWith?: string|null}
+ * @phpstan-type filter_alias = array{startsWith?: string}
  */
 final class Filter implements BaseModel
 {

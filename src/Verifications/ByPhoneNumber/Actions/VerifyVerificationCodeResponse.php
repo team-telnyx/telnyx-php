@@ -11,6 +11,10 @@ use Telnyx\Verifications\ByPhoneNumber\Actions\VerifyVerificationCodeResponse\Da
 
 /**
  * @phpstan-type verify_verification_code_response = array{data: Data}
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class VerifyVerificationCodeResponse implements BaseModel
 {

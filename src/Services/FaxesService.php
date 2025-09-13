@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Faxes\FaxCreateParams;
 use Telnyx\Faxes\FaxCreateParams\PreviewFormat;
 use Telnyx\Faxes\FaxCreateParams\Quality;
@@ -32,7 +33,7 @@ final class FaxesService implements FaxesContract
      */
     public function __construct(private Client $client)
     {
-        $this->actions = new ActionsService($this->client);
+        $this->actions = new ActionsService($client);
     }
 
     /**
@@ -62,6 +63,8 @@ final class FaxesService implements FaxesContract
      * @param bool $storePreview should fax preview be stored on temporary URL
      * @param bool $t38Enabled The flag to disable the T.38 protocol.
      * @param string $webhookURL use this field to override the URL to which Telnyx will send subsequent webhooks for this fax
+     *
+     * @return FaxNewResponse<HasRawResponse>
      */
     public function create(
         $connectionID,
@@ -114,6 +117,8 @@ final class FaxesService implements FaxesContract
      * @api
      *
      * View a fax
+     *
+     * @return FaxGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -135,6 +140,8 @@ final class FaxesService implements FaxesContract
      *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[created_at][gte], filter[created_at][gt], filter[created_at][lte], filter[created_at][lt], filter[direction][eq], filter[from][eq], filter[to][eq]
      * @param Page $page Consolidated pagination parameter (deepObject style). Originally: page[size], page[number]
+     *
+     * @return FaxListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,

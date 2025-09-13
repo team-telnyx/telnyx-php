@@ -9,7 +9,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type billing_group_update_response = array{data?: BillingGroup|null}
+ * @phpstan-type billing_group_update_response = array{data?: BillingGroup}
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class BillingGroupUpdateResponse implements BaseModel
 {

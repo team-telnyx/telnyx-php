@@ -9,9 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type data_alias = array{
- *   from?: string|null, status?: string|null, to?: string|null
- * }
+ * @phpstan-type data_alias = array{from?: string, status?: string, to?: string}
  */
 final class Data implements BaseModel
 {

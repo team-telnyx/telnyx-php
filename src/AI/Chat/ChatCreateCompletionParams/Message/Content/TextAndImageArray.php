@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type text_and_image_array = array{
- *   type: value-of<Type>, imageURL?: string|null, text?: string|null
+ *   type: value-of<Type>, imageURL?: string, text?: string
  * }
  */
 final class TextAndImageArray implements BaseModel

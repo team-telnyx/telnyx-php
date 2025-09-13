@@ -13,15 +13,15 @@ use Telnyx\SimCardOrders\SimCardOrder\Status;
 
 /**
  * @phpstan-type sim_card_order = array{
- *   id?: string|null,
- *   cost?: Cost|null,
- *   createdAt?: string|null,
- *   orderAddress?: OrderAddress|null,
- *   quantity?: int|null,
- *   recordType?: string|null,
- *   status?: value-of<Status>|null,
- *   trackingURL?: string|null,
- *   updatedAt?: string|null,
+ *   id?: string,
+ *   cost?: Cost,
+ *   createdAt?: string,
+ *   orderAddress?: OrderAddress,
+ *   quantity?: int,
+ *   recordType?: string,
+ *   status?: value-of<Status>,
+ *   trackingURL?: string,
+ *   updatedAt?: string,
  * }
  */
 final class SimCardOrder implements BaseModel

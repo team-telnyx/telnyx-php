@@ -10,10 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type to_alias = array{
- *   carrier?: string|null,
- *   lineType?: string|null,
- *   phoneNumber?: string|null,
- *   status?: string|null,
+ *   carrier?: string, lineType?: string, phoneNumber?: string, status?: string
  * }
  */
 final class To implements BaseModel

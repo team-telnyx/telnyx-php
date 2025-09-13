@@ -14,7 +14,7 @@ use Telnyx\Messsages\RcsContentInfo;
  * A media file within a rich card.
  *
  * @phpstan-type media_alias = array{
- *   contentInfo?: RcsContentInfo|null, height?: value-of<Height>|null
+ *   contentInfo?: RcsContentInfo, height?: value-of<Height>
  * }
  */
 final class Media implements BaseModel

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\CredentialConnections;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\CredentialConnections\Actions\ActionCheckRegistrationStatusResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\CredentialConnections\ActionsContract;
@@ -20,6 +21,8 @@ final class ActionsService implements ActionsContract
      * @api
      *
      * Checks the registration_status for a credential connection, (`registration_status`) as well as the timestamp for the last SIP registration event (`registration_status_updated_at`)
+     *
+     * @return ActionCheckRegistrationStatusResponse<HasRawResponse>
      */
     public function checkRegistrationStatus(
         string $id,

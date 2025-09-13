@@ -10,7 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\GlobalIPProtocols\GlobalIPProtocolListResponse\Data;
 
 /**
- * @phpstan-type global_ip_protocol_list_response = array{data?: list<Data>|null}
+ * @phpstan-type global_ip_protocol_list_response = array{data?: list<Data>}
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class GlobalIPProtocolListResponse implements BaseModel
 {

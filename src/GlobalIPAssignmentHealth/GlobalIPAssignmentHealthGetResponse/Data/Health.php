@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type health_alias = array{fail?: float|null, pass?: float|null}
+ * @phpstan-type health_alias = array{fail?: float, pass?: float}
  */
 final class Health implements BaseModel
 {

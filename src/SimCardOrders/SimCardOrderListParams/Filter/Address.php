@@ -10,13 +10,13 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type address_alias = array{
- *   id?: string|null,
- *   administrativeArea?: string|null,
- *   countryCode?: string|null,
- *   extendedAddress?: string|null,
- *   locality?: string|null,
- *   postalCode?: string|null,
- *   streetAddress?: string|null,
+ *   id?: string,
+ *   administrativeArea?: string,
+ *   countryCode?: string,
+ *   extendedAddress?: string,
+ *   locality?: string,
+ *   postalCode?: string,
+ *   streetAddress?: string,
  * }
  */
 final class Address implements BaseModel

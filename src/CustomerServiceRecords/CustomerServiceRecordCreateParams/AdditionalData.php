@@ -10,16 +10,16 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type additional_data = array{
- *   accountNumber?: string|null,
- *   addressLine1?: string|null,
- *   authorizedPersonName?: string|null,
- *   billingPhoneNumber?: string|null,
- *   city?: string|null,
- *   customerCode?: string|null,
- *   name?: string|null,
- *   pin?: string|null,
- *   state?: string|null,
- *   zipCode?: string|null,
+ *   accountNumber?: string,
+ *   addressLine1?: string,
+ *   authorizedPersonName?: string,
+ *   billingPhoneNumber?: string,
+ *   city?: string,
+ *   customerCode?: string,
+ *   name?: string,
+ *   pin?: string,
+ *   state?: string,
+ *   zipCode?: string,
  * }
  */
 final class AdditionalData implements BaseModel

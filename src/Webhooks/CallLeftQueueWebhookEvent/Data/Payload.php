@@ -11,15 +11,15 @@ use Telnyx\Webhooks\CallLeftQueueWebhookEvent\Data\Payload\Reason;
 
 /**
  * @phpstan-type payload_alias = array{
- *   callControlID?: string|null,
- *   callLegID?: string|null,
- *   callSessionID?: string|null,
- *   clientState?: string|null,
- *   connectionID?: string|null,
- *   queue?: string|null,
- *   queuePosition?: int|null,
- *   reason?: value-of<Reason>|null,
- *   waitTimeSecs?: int|null,
+ *   callControlID?: string,
+ *   callLegID?: string,
+ *   callSessionID?: string,
+ *   clientState?: string,
+ *   connectionID?: string,
+ *   queue?: string,
+ *   queuePosition?: int,
+ *   reason?: value-of<Reason>,
+ *   waitTimeSecs?: int,
  * }
  */
 final class Payload implements BaseModel

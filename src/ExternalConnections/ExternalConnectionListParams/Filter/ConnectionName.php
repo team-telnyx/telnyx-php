@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type connection_name = array{contains?: string|null}
+ * @phpstan-type connection_name = array{contains?: string}
  */
 final class ConnectionName implements BaseModel
 {

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\RoomCompositions\RoomCompositionGetResponse;
 use Telnyx\RoomCompositions\RoomCompositionListParams\Filter;
@@ -27,6 +28,8 @@ interface RoomCompositionsContract
      * @param string|null $webhookEventFailoverURL The failover URL where webhooks related to this room composition will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      * @param string $webhookEventURL The URL where webhooks related to this room composition will be sent. Must include a scheme, such as 'https'.
      * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
+     *
+     * @return RoomCompositionNewResponse<HasRawResponse>
      */
     public function create(
         $format = omit,
@@ -41,6 +44,8 @@ interface RoomCompositionsContract
 
     /**
      * @api
+     *
+     * @return RoomCompositionGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $roomCompositionID,
@@ -52,6 +57,8 @@ interface RoomCompositionsContract
      *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[date_created_at][eq], filter[date_created_at][gte], filter[date_created_at][lte], filter[session_id], filter[status]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     *
+     * @return RoomCompositionListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,

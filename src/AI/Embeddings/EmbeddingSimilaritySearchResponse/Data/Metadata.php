@@ -14,8 +14,8 @@ use Telnyx\Core\Contracts\BaseModel;
  *   embedding: string,
  *   filename: string,
  *   source: string,
- *   certainty?: float|null,
- *   loaderMetadata?: array<string, mixed>|null,
+ *   certainty?: float,
+ *   loaderMetadata?: array<string, mixed>,
  * }
  */
 final class Metadata implements BaseModel

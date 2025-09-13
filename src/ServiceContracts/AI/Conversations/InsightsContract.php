@@ -7,6 +7,7 @@ namespace Telnyx\ServiceContracts\AI\Conversations;
 use Telnyx\AI\Conversations\Insights\InsightListParams\Page;
 use Telnyx\AI\Conversations\Insights\InsightListResponse;
 use Telnyx\AI\Conversations\Insights\InsightTemplateDetail;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 
 use const Telnyx\Core\OMIT as omit;
@@ -20,6 +21,8 @@ interface InsightsContract
      * @param string $name
      * @param mixed|string $jsonSchema if specified, the output will follow the JSON schema
      * @param string $webhook
+     *
+     * @return InsightTemplateDetail<HasRawResponse>
      */
     public function create(
         $instructions,
@@ -31,6 +34,8 @@ interface InsightsContract
 
     /**
      * @api
+     *
+     * @return InsightTemplateDetail<HasRawResponse>
      */
     public function retrieve(
         string $insightID,
@@ -44,6 +49,8 @@ interface InsightsContract
      * @param mixed|string $jsonSchema
      * @param string $name
      * @param string $webhook
+     *
+     * @return InsightTemplateDetail<HasRawResponse>
      */
     public function update(
         string $insightID,
@@ -58,6 +65,8 @@ interface InsightsContract
      * @api
      *
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     *
+     * @return InsightListResponse<HasRawResponse>
      */
     public function list(
         $page = omit,

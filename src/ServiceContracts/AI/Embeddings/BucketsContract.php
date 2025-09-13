@@ -6,12 +6,15 @@ namespace Telnyx\ServiceContracts\AI\Embeddings;
 
 use Telnyx\AI\Embeddings\Buckets\BucketGetResponse;
 use Telnyx\AI\Embeddings\Buckets\BucketListResponse;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 
 interface BucketsContract
 {
     /**
      * @api
+     *
+     * @return BucketGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $bucketName,
@@ -20,6 +23,8 @@ interface BucketsContract
 
     /**
      * @api
+     *
+     * @return BucketListResponse<HasRawResponse>
      */
     public function list(
         ?RequestOptions $requestOptions = null

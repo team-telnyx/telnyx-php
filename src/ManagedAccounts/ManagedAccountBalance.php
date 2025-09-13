@@ -11,11 +11,11 @@ use Telnyx\ManagedAccounts\ManagedAccountBalance\RecordType;
 
 /**
  * @phpstan-type managed_account_balance = array{
- *   availableCredit?: string|null,
- *   balance?: string|null,
- *   creditLimit?: string|null,
- *   currency?: string|null,
- *   recordType?: value-of<RecordType>|null,
+ *   availableCredit?: string,
+ *   balance?: string,
+ *   creditLimit?: string,
+ *   currency?: string,
+ *   recordType?: value-of<RecordType>,
  * }
  */
 final class ManagedAccountBalance implements BaseModel

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\MessagingOptouts\MessagingOptoutListParams\CreatedAt;
 use Telnyx\MessagingOptouts\MessagingOptoutListParams\Filter;
 use Telnyx\MessagingOptouts\MessagingOptoutListParams\Page;
@@ -21,6 +22,8 @@ interface MessagingOptoutsContract
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[messaging_profile_id], filter[from]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      * @param string $redactionEnabled If receiving address (+E.164 formatted phone number) should be redacted
+     *
+     * @return MessagingOptoutListResponse<HasRawResponse>
      */
     public function list(
         $createdAt = omit,

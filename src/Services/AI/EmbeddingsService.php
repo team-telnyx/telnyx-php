@@ -15,6 +15,7 @@ use Telnyx\AI\Embeddings\EmbeddingSimilaritySearchParams;
 use Telnyx\AI\Embeddings\EmbeddingSimilaritySearchResponse;
 use Telnyx\AI\Embeddings\EmbeddingURLParams;
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\EmbeddingsContract;
 use Telnyx\Services\AI\Embeddings\BucketsService;
@@ -33,7 +34,7 @@ final class EmbeddingsService implements EmbeddingsContract
      */
     public function __construct(private Client $client)
     {
-        $this->buckets = new BucketsService($this->client);
+        $this->buckets = new BucketsService($client);
     }
 
     /**
@@ -65,6 +66,8 @@ final class EmbeddingsService implements EmbeddingsContract
      * @param int $documentChunkSize
      * @param EmbeddingModel|value-of<EmbeddingModel> $embeddingModel supported models to vectorize and embed documents
      * @param Loader|value-of<Loader> $loader supported types of custom document loaders for embeddings
+     *
+     * @return EmbeddingResponse<HasRawResponse>
      */
     public function create(
         $bucketName,
@@ -104,6 +107,8 @@ final class EmbeddingsService implements EmbeddingsContract
      * - `success` - Task completed successfully and the bucket is embedded
      * - `failure` - Task failed and no files were embedded successfully
      * - `partial_success` - Some files were embedded successfully, but at least one failed
+     *
+     * @return EmbeddingGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $taskID,
@@ -124,6 +129,8 @@ final class EmbeddingsService implements EmbeddingsContract
      * Retrieve tasks for the user that are either `queued`, `processing`, `failed`, `success` or `partial_success` based on the query string. Defaults to `queued` and `processing`.
      *
      * @param list<string> $status List of task statuses i.e. `status=queued&status=processing`
+     *
+     * @return EmbeddingListResponse<HasRawResponse>
      */
     public function list(
         $status = omit,
@@ -160,6 +167,8 @@ final class EmbeddingsService implements EmbeddingsContract
      * @param string $bucketName
      * @param string $query
      * @param int $numOfDocs
+     *
+     * @return EmbeddingSimilaritySearchResponse<HasRawResponse>
      */
     public function similaritySearch(
         $bucketName,
@@ -193,6 +202,8 @@ final class EmbeddingsService implements EmbeddingsContract
      *
      * @param string $bucketName Name of the bucket to store the embeddings. This bucket must already exist.
      * @param string $url The URL of the webpage to embed
+     *
+     * @return EmbeddingResponse<HasRawResponse>
      */
     public function url(
         $bucketName,

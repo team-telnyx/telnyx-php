@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\TelephonyCredentialsContract;
 use Telnyx\TelephonyCredentials\TelephonyCredentialCreateParams;
@@ -36,6 +37,8 @@ final class TelephonyCredentialsService implements TelephonyCredentialsContract
      * @param string $expiresAt ISO-8601 formatted date indicating when the credential will expire
      * @param string $name
      * @param string $tag Tags a credential. A single tag can hold at maximum 1000 credentials.
+     *
+     * @return TelephonyCredentialNewResponse<HasRawResponse>
      */
     public function create(
         $connectionID,
@@ -68,6 +71,8 @@ final class TelephonyCredentialsService implements TelephonyCredentialsContract
      * @api
      *
      * Get the details of an existing On-demand Credential.
+     *
+     * @return TelephonyCredentialGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -91,6 +96,8 @@ final class TelephonyCredentialsService implements TelephonyCredentialsContract
      * @param string $expiresAt ISO-8601 formatted date indicating when the credential will expire
      * @param string $name
      * @param string $tag Tags a credential. A single tag can hold at maximum 1000 credentials.
+     *
+     * @return TelephonyCredentialUpdateResponse<HasRawResponse>
      */
     public function update(
         string $id,
@@ -127,6 +134,8 @@ final class TelephonyCredentialsService implements TelephonyCredentialsContract
      *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[tag], filter[name], filter[status], filter[resource_id], filter[sip_username]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     *
+     * @return TelephonyCredentialListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,
@@ -152,6 +161,8 @@ final class TelephonyCredentialsService implements TelephonyCredentialsContract
      * @api
      *
      * Delete an existing credential.
+     *
+     * @return TelephonyCredentialDeleteResponse<HasRawResponse>
      */
     public function delete(
         string $id,

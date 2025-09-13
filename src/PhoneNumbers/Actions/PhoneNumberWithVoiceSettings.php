@@ -17,20 +17,20 @@ use Telnyx\PhoneNumbers\Voice\MediaFeatures;
 
 /**
  * @phpstan-type phone_number_with_voice_settings = array{
- *   id?: string|null,
- *   callForwarding?: CallForwarding|null,
- *   callRecording?: CallRecording|null,
- *   cnamListing?: CnamListing|null,
- *   connectionID?: string|null,
- *   customerReference?: string|null,
- *   emergency?: Emergency|null,
- *   inboundCallScreening?: value-of<InboundCallScreening>|null,
- *   mediaFeatures?: MediaFeatures|null,
- *   phoneNumber?: string|null,
- *   recordType?: string|null,
- *   techPrefixEnabled?: bool|null,
- *   translatedNumber?: string|null,
- *   usagePaymentMethod?: value-of<UsagePaymentMethod>|null,
+ *   id?: string,
+ *   callForwarding?: CallForwarding,
+ *   callRecording?: CallRecording,
+ *   cnamListing?: CnamListing,
+ *   connectionID?: string,
+ *   customerReference?: string,
+ *   emergency?: Emergency,
+ *   inboundCallScreening?: value-of<InboundCallScreening>,
+ *   mediaFeatures?: MediaFeatures,
+ *   phoneNumber?: string,
+ *   recordType?: string,
+ *   techPrefixEnabled?: bool,
+ *   translatedNumber?: string,
+ *   usagePaymentMethod?: value-of<UsagePaymentMethod>,
  * }
  */
 final class PhoneNumberWithVoiceSettings implements BaseModel

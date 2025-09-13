@@ -11,9 +11,7 @@ use Telnyx\Seti\SetiGetBlackBoxTestResultsResponse\Data\BlackBoxTest;
 
 /**
  * @phpstan-type data_alias = array{
- *   blackBoxTests?: list<BlackBoxTest>|null,
- *   product?: string|null,
- *   recordType?: string|null,
+ *   blackBoxTests?: list<BlackBoxTest>, product?: string, recordType?: string
  * }
  */
 final class Data implements BaseModel

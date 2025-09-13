@@ -6,6 +6,7 @@ namespace Telnyx\ServiceContracts\Actions;
 
 use Telnyx\Actions\Purchase\PurchaseCreateParams\Status;
 use Telnyx\Actions\Purchase\PurchaseNewResponse;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 
 use const Telnyx\Core\OMIT as omit;
@@ -21,6 +22,8 @@ interface PurchaseContract
      * @param Status|value-of<Status> $status status on which the SIM cards will be set after being successfully registered
      * @param list<string> $tags Searchable tags associated with the SIM cards
      * @param string $whitelabelName Service Provider Name (SPN) for the Whitelabel eSIM product. It will be displayed as the mobile service name by operating systems of smartphones. This parameter must only contain letters, numbers and whitespaces.
+     *
+     * @return PurchaseNewResponse<HasRawResponse>
      */
     public function create(
         $amount,

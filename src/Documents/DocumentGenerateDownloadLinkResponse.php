@@ -11,6 +11,10 @@ use Telnyx\Documents\DocumentGenerateDownloadLinkResponse\Data;
 
 /**
  * @phpstan-type document_generate_download_link_response = array{data: Data}
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class DocumentGenerateDownloadLinkResponse implements BaseModel
 {

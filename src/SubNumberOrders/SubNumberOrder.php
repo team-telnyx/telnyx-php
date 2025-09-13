@@ -12,20 +12,20 @@ use Telnyx\SubNumberOrders\SubNumberOrder\Status;
 
 /**
  * @phpstan-type sub_number_order = array{
- *   id?: string|null,
- *   countryCode?: string|null,
- *   createdAt?: \DateTimeInterface|null,
- *   customerReference?: string|null,
- *   isBlockSubNumberOrder?: bool|null,
- *   orderRequestID?: string|null,
- *   phoneNumberType?: value-of<PhoneNumberType>|null,
- *   phoneNumbersCount?: int|null,
- *   recordType?: string|null,
- *   regulatoryRequirements?: list<SubNumberOrderRegulatoryRequirement>|null,
- *   requirementsMet?: bool|null,
- *   status?: value-of<Status>|null,
- *   updatedAt?: \DateTimeInterface|null,
- *   userID?: string|null,
+ *   id?: string,
+ *   countryCode?: string,
+ *   createdAt?: \DateTimeInterface,
+ *   customerReference?: string,
+ *   isBlockSubNumberOrder?: bool,
+ *   orderRequestID?: string,
+ *   phoneNumberType?: value-of<PhoneNumberType>,
+ *   phoneNumbersCount?: int,
+ *   recordType?: string,
+ *   regulatoryRequirements?: list<SubNumberOrderRegulatoryRequirement>,
+ *   requirementsMet?: bool,
+ *   status?: value-of<Status>,
+ *   updatedAt?: \DateTimeInterface,
+ *   userID?: string,
  * }
  */
 final class SubNumberOrder implements BaseModel

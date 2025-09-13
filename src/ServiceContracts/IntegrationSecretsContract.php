@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\IntegrationSecrets\IntegrationSecretCreateParams\Type;
 use Telnyx\IntegrationSecrets\IntegrationSecretListParams\Filter;
 use Telnyx\IntegrationSecrets\IntegrationSecretListParams\Page;
@@ -23,6 +24,8 @@ interface IntegrationSecretsContract
      * @param string $token The token for the secret. Required for bearer type secrets, ignored otherwise.
      * @param string $password The password for the secret. Required for basic type secrets, ignored otherwise.
      * @param string $username The username for the secret. Required for basic type secrets, ignored otherwise.
+     *
+     * @return IntegrationSecretNewResponse<HasRawResponse>
      */
     public function create(
         $identifier,
@@ -38,6 +41,8 @@ interface IntegrationSecretsContract
      *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[type]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     *
+     * @return IntegrationSecretListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,

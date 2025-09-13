@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\OutboundVoiceProfiles\OutboundCallRecording;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileCreateParams;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileDeleteResponse;
@@ -50,6 +51,8 @@ final class OutboundVoiceProfilesService implements OutboundVoiceProfilesContrac
      * @param TrafficType|value-of<TrafficType> $trafficType specifies the type of traffic allowed in this profile
      * @param UsagePaymentMethod|value-of<UsagePaymentMethod> $usagePaymentMethod setting for how costs for outbound profile are calculated
      * @param list<string> $whitelistedDestinations the list of destinations you want to be able to call using this outbound voice profile formatted in alpha2
+     *
+     * @return OutboundVoiceProfileNewResponse<HasRawResponse>
      */
     public function create(
         $name,
@@ -100,6 +103,8 @@ final class OutboundVoiceProfilesService implements OutboundVoiceProfilesContrac
      * @api
      *
      * Retrieves the details of an existing outbound voice profile.
+     *
+     * @return OutboundVoiceProfileGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -132,6 +137,8 @@ final class OutboundVoiceProfilesService implements OutboundVoiceProfilesContrac
      * @param TrafficType|value-of<TrafficType> $trafficType specifies the type of traffic allowed in this profile
      * @param UsagePaymentMethod|value-of<UsagePaymentMethod> $usagePaymentMethod setting for how costs for outbound profile are calculated
      * @param list<string> $whitelistedDestinations the list of destinations you want to be able to call using this outbound voice profile formatted in alpha2
+     *
+     * @return OutboundVoiceProfileUpdateResponse<HasRawResponse>
      */
     public function update(
         string $id,
@@ -198,6 +205,8 @@ final class OutboundVoiceProfilesService implements OutboundVoiceProfilesContrac
      *     <code>name</code> field in descending order.
      *   </li>
      * </ul> <br/>
+     *
+     * @return OutboundVoiceProfileListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,
@@ -224,6 +233,8 @@ final class OutboundVoiceProfilesService implements OutboundVoiceProfilesContrac
      * @api
      *
      * Deletes an existing outbound voice profile.
+     *
+     * @return OutboundVoiceProfileDeleteResponse<HasRawResponse>
      */
     public function delete(
         string $id,

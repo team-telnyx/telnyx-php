@@ -13,9 +13,7 @@ use Telnyx\WebhookDeliveries\WebhookDeliveryListResponse\Data\Attempt\HTTP\Respo
 /**
  * HTTP request and response information.
  *
- * @phpstan-type http_alias = array{
- *   request?: Request|null, response?: Response|null
- * }
+ * @phpstan-type http_alias = array{request?: Request, response?: Response|null}
  */
 final class HTTP implements BaseModel
 {

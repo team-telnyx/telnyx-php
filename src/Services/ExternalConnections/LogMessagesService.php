@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\ExternalConnections;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\ExternalConnections\LogMessages\LogMessageDismissResponse;
 use Telnyx\ExternalConnections\LogMessages\LogMessageGetResponse;
 use Telnyx\ExternalConnections\LogMessages\LogMessageListParams;
@@ -27,6 +28,8 @@ final class LogMessagesService implements LogMessagesContract
      * @api
      *
      * Retrieve a log message for an external connection associated with your account.
+     *
+     * @return LogMessageGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -48,6 +51,8 @@ final class LogMessagesService implements LogMessagesContract
      *
      * @param Filter $filter Filter parameter for log messages (deepObject style). Supports filtering by external_connection_id and telephone_number with eq/contains operations.
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     *
+     * @return LogMessageListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,
@@ -73,6 +78,8 @@ final class LogMessagesService implements LogMessagesContract
      * @api
      *
      * Dismiss a log message for an external connection associated with your account.
+     *
+     * @return LogMessageDismissResponse<HasRawResponse>
      */
     public function dismiss(
         string $id,

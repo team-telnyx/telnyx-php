@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\StorageContract;
 use Telnyx\Services\Storage\BucketsService;
@@ -34,15 +35,17 @@ final class StorageService implements StorageContract
      */
     public function __construct(private Client $client)
     {
-        $this->buckets = new BucketsService($this->client);
-        $this->migrationSources = new MigrationSourcesService($this->client);
-        $this->migrations = new MigrationsService($this->client);
+        $this->buckets = new BucketsService($client);
+        $this->migrationSources = new MigrationSourcesService($client);
+        $this->migrations = new MigrationsService($client);
     }
 
     /**
      * @api
      *
      * List Migration Source coverage
+     *
+     * @return StorageListMigrationSourceCoverageResponse<HasRawResponse>
      */
     public function listMigrationSourceCoverage(
         ?RequestOptions $requestOptions = null

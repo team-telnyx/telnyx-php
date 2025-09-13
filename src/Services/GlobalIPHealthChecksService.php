@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckCreateParams;
 use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckDeleteResponse;
 use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckGetResponse;
@@ -32,6 +33,8 @@ final class GlobalIPHealthChecksService implements GlobalIPHealthChecksContract
      * @param string $globalIPID global IP ID
      * @param array<string, mixed> $healthCheckParams a Global IP health check params
      * @param string $healthCheckType the Global IP health check type
+     *
+     * @return GlobalIPHealthCheckNewResponse<HasRawResponse>
      */
     public function create(
         $globalIPID = omit,
@@ -62,6 +65,8 @@ final class GlobalIPHealthChecksService implements GlobalIPHealthChecksContract
      * @api
      *
      * Retrieve a Global IP health check.
+     *
+     * @return GlobalIPHealthCheckGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -82,6 +87,8 @@ final class GlobalIPHealthChecksService implements GlobalIPHealthChecksContract
      * List all Global IP health checks.
      *
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     *
+     * @return GlobalIPHealthCheckListResponse<HasRawResponse>
      */
     public function list(
         $page = omit,
@@ -106,6 +113,8 @@ final class GlobalIPHealthChecksService implements GlobalIPHealthChecksContract
      * @api
      *
      * Delete a Global IP health check.
+     *
+     * @return GlobalIPHealthCheckDeleteResponse<HasRawResponse>
      */
     public function delete(
         string $id,

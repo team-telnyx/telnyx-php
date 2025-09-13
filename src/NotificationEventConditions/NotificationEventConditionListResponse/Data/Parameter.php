@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type parameter_alias = array{
- *   dataType?: string|null, name?: string|null, optional?: bool|null
+ *   dataType?: string, name?: string, optional?: bool
  * }
  */
 final class Parameter implements BaseModel

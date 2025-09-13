@@ -13,19 +13,19 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type record_alias = array{
- *   assignedCampaingsCount?: int|null,
- *   brandID?: string|null,
- *   companyName?: string|null,
- *   createdAt?: string|null,
- *   displayName?: string|null,
- *   email?: string|null,
- *   entityType?: value-of<EntityType>|null,
- *   failureReasons?: string|null,
- *   identityStatus?: value-of<BrandIdentityStatus>|null,
- *   status?: value-of<Status>|null,
- *   tcrBrandID?: string|null,
- *   updatedAt?: string|null,
- *   website?: string|null,
+ *   assignedCampaingsCount?: int,
+ *   brandID?: string,
+ *   companyName?: string,
+ *   createdAt?: string,
+ *   displayName?: string,
+ *   email?: string,
+ *   entityType?: value-of<EntityType>,
+ *   failureReasons?: string,
+ *   identityStatus?: value-of<BrandIdentityStatus>,
+ *   status?: value-of<Status>,
+ *   tcrBrandID?: string,
+ *   updatedAt?: string,
+ *   website?: string,
  * }
  */
 final class Record implements BaseModel

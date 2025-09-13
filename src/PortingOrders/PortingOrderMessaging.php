@@ -13,10 +13,10 @@ use Telnyx\PortingOrders\PortingOrderMessaging\MessagingPortStatus;
  * Information about messaging porting process.
  *
  * @phpstan-type porting_order_messaging = array{
- *   enableMessaging?: bool|null,
- *   messagingCapable?: bool|null,
- *   messagingPortCompleted?: bool|null,
- *   messagingPortStatus?: value-of<MessagingPortStatus>|null,
+ *   enableMessaging?: bool,
+ *   messagingCapable?: bool,
+ *   messagingPortCompleted?: bool,
+ *   messagingPortStatus?: value-of<MessagingPortStatus>,
  * }
  */
 final class PortingOrderMessaging implements BaseModel

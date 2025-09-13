@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Phone number filter for connections. Note: Despite the 'contains' name, this requires a full E164 match per the original specification.
  *
- * @phpstan-type phone_number = array{contains?: string|null}
+ * @phpstan-type phone_number = array{contains?: string}
  */
 final class PhoneNumber implements BaseModel
 {

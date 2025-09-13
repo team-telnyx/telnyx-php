@@ -10,14 +10,14 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type data_alias = array{
- *   id?: string|null,
- *   countryCode?: string|null,
- *   mcc?: string|null,
- *   mnc?: string|null,
- *   name?: string|null,
- *   networkPreferencesEnabled?: bool|null,
- *   recordType?: string|null,
- *   tadig?: string|null,
+ *   id?: string,
+ *   countryCode?: string,
+ *   mcc?: string,
+ *   mnc?: string,
+ *   name?: string,
+ *   networkPreferencesEnabled?: bool,
+ *   recordType?: string,
+ *   tadig?: string,
  * }
  */
 final class Data implements BaseModel

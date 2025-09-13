@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type provider_auth = array{
- *   accessKey?: string|null, secretAccessKey?: string|null
+ *   accessKey?: string, secretAccessKey?: string
  * }
  */
 final class ProviderAuth implements BaseModel

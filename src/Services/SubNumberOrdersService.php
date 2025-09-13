@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\NumberOrderPhoneNumbers\UpdateRegulatoryRequirement;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SubNumberOrdersContract;
@@ -35,6 +36,8 @@ final class SubNumberOrdersService implements SubNumberOrdersContract
      * Get an existing sub number order.
      *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[include_phone_numbers]
+     *
+     * @return SubNumberOrderGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $subNumberOrderID,
@@ -62,6 +65,8 @@ final class SubNumberOrdersService implements SubNumberOrdersContract
      * Updates a sub number order.
      *
      * @param list<UpdateRegulatoryRequirement> $regulatoryRequirements
+     *
+     * @return SubNumberOrderUpdateResponse<HasRawResponse>
      */
     public function update(
         string $subNumberOrderID,
@@ -89,6 +94,8 @@ final class SubNumberOrdersService implements SubNumberOrdersContract
      * Get a paginated list of sub number orders.
      *
      * @param Filter1 $filter Consolidated filter parameter (deepObject style). Originally: filter[status], filter[order_request_id], filter[country_code], filter[phone_number_type], filter[phone_numbers_count]
+     *
+     * @return SubNumberOrderListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,
@@ -113,6 +120,8 @@ final class SubNumberOrdersService implements SubNumberOrdersContract
      * @api
      *
      * Allows you to cancel a sub number order in 'pending' status.
+     *
+     * @return SubNumberOrderCancelResponse<HasRawResponse>
      */
     public function cancel(
         string $subNumberOrderID,
@@ -133,6 +142,8 @@ final class SubNumberOrdersService implements SubNumberOrdersContract
      * Update requirement group for a sub number order
      *
      * @param string $requirementGroupID The ID of the requirement group to associate
+     *
+     * @return SubNumberOrderUpdateRequirementGroupResponse<HasRawResponse>
      */
     public function updateRequirementGroup(
         string $id,

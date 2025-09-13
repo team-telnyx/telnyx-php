@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Links to download the recording files.
  *
- * @phpstan-type download_urls = array{mp3?: string|null, wav?: string|null}
+ * @phpstan-type download_urls = array{mp3?: string, wav?: string}
  */
 final class DownloadURLs implements BaseModel
 {

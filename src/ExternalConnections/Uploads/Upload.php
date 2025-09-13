@@ -12,14 +12,14 @@ use Telnyx\ExternalConnections\Uploads\Upload\Status;
 
 /**
  * @phpstan-type upload_alias = array{
- *   availableUsages?: list<value-of<AvailableUsage>>|null,
- *   errorCode?: string|null,
- *   errorMessage?: string|null,
- *   locationID?: string|null,
- *   status?: value-of<Status>|null,
- *   tenantID?: string|null,
- *   ticketID?: string|null,
- *   tnUploadEntries?: list<TnUploadEntry>|null,
+ *   availableUsages?: list<value-of<AvailableUsage>>,
+ *   errorCode?: string,
+ *   errorMessage?: string,
+ *   locationID?: string,
+ *   status?: value-of<Status>,
+ *   tenantID?: string,
+ *   ticketID?: string,
+ *   tnUploadEntries?: list<TnUploadEntry>,
  * }
  */
 final class Upload implements BaseModel

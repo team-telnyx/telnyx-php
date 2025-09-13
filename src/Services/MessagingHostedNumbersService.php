@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\MessagingHostedNumbers\MessagingHostedNumberDeleteResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MessagingHostedNumbersContract;
@@ -20,6 +21,8 @@ final class MessagingHostedNumbersService implements MessagingHostedNumbersContr
      * @api
      *
      * Delete a messaging hosted number
+     *
+     * @return MessagingHostedNumberDeleteResponse<HasRawResponse>
      */
     public function delete(
         string $id,

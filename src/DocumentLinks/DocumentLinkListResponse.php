@@ -12,8 +12,12 @@ use Telnyx\DocumentLinks\DocumentLinkListResponse\Data;
 
 /**
  * @phpstan-type document_link_list_response = array{
- *   data?: list<Data>|null, meta?: PaginationMeta|null
+ *   data?: list<Data>, meta?: PaginationMeta
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class DocumentLinkListResponse implements BaseModel
 {

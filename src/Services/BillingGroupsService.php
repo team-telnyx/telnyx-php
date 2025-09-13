@@ -14,6 +14,7 @@ use Telnyx\BillingGroups\BillingGroupNewResponse;
 use Telnyx\BillingGroups\BillingGroupUpdateParams;
 use Telnyx\BillingGroups\BillingGroupUpdateResponse;
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\BillingGroupsContract;
 
@@ -32,6 +33,8 @@ final class BillingGroupsService implements BillingGroupsContract
      * Create a billing group
      *
      * @param string $name A name for the billing group
+     *
+     * @return BillingGroupNewResponse<HasRawResponse>
      */
     public function create(
         $name = omit,
@@ -56,6 +59,8 @@ final class BillingGroupsService implements BillingGroupsContract
      * @api
      *
      * Get a billing group
+     *
+     * @return BillingGroupGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -76,6 +81,8 @@ final class BillingGroupsService implements BillingGroupsContract
      * Update a billing group
      *
      * @param string $name A name for the billing group
+     *
+     * @return BillingGroupUpdateResponse<HasRawResponse>
      */
     public function update(
         string $id,
@@ -103,6 +110,8 @@ final class BillingGroupsService implements BillingGroupsContract
      * List all billing groups
      *
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     *
+     * @return BillingGroupListResponse<HasRawResponse>
      */
     public function list(
         $page = omit,
@@ -127,6 +136,8 @@ final class BillingGroupsService implements BillingGroupsContract
      * @api
      *
      * Delete a billing group
+     *
+     * @return BillingGroupDeleteResponse<HasRawResponse>
      */
     public function delete(
         string $id,

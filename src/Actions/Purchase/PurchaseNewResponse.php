@@ -12,8 +12,12 @@ use Telnyx\SimpleSimCard;
 
 /**
  * @phpstan-type purchase_new_response = array{
- *   data?: list<SimpleSimCard>|null, errors?: list<Error>|null
+ *   data?: list<SimpleSimCard>, errors?: list<Error>
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class PurchaseNewResponse implements BaseModel
 {

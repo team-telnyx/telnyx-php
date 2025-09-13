@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * Consolidated filter parameter (deepObject style). Originally: filter[connection_id], filter[ip_address], filter[port].
  *
  * @phpstan-type filter_alias = array{
- *   connectionID?: string|null, ipAddress?: string|null, port?: int|null
+ *   connectionID?: string, ipAddress?: string, port?: int
  * }
  */
 final class Filter implements BaseModel

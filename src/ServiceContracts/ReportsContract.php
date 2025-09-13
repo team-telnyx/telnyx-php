@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Reports\ReportListMdrsParams\Direction;
 use Telnyx\Reports\ReportListMdrsParams\MessageType;
 use Telnyx\Reports\ReportListMdrsParams\Status;
@@ -28,6 +29,8 @@ interface ReportsContract
      * @param string $profile Name of the profile
      * @param string $startDate Pagination start date
      * @param Status|value-of<Status> $status Message status
+     *
+     * @return ReportListMdrsResponse<HasRawResponse>
      */
     public function listMdrs(
         $id = omit,
@@ -57,6 +60,8 @@ interface ReportsContract
      * @param string $simGroupName Sim group name
      * @param list<string> $sort Field used to order the data. If no field is specified, default value is 'created_at'
      * @param string $startDate Start date
+     *
+     * @return ReportListWdrsResponse<HasRawResponse>
      */
     public function listWdrs(
         $id = omit,

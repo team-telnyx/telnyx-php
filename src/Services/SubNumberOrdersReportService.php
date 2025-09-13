@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SubNumberOrdersReportContract;
 use Telnyx\SubNumberOrdersReport\SubNumberOrdersReportCreateParams;
@@ -32,6 +33,8 @@ final class SubNumberOrdersReportService implements SubNumberOrdersReportContrac
      * @param string $customerReference Filter by customer reference
      * @param string $orderRequestID Filter by specific order request ID
      * @param Status|value-of<Status> $status Filter by order status
+     *
+     * @return SubNumberOrdersReportNewResponse<HasRawResponse>
      */
     public function create(
         $countryCode = omit,
@@ -68,6 +71,8 @@ final class SubNumberOrdersReportService implements SubNumberOrdersReportContrac
      * @api
      *
      * Get the status and details of a sub number orders report.
+     *
+     * @return SubNumberOrdersReportGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $reportID,

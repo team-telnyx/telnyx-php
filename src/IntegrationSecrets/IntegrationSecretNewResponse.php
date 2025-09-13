@@ -10,6 +10,10 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type integration_secret_new_response = array{data: IntegrationSecret}
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class IntegrationSecretNewResponse implements BaseModel
 {

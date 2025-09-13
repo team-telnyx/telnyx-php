@@ -13,12 +13,12 @@ use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListParams\F
  * Consolidated filter parameter (deepObject style). Originally: filter[cloud_provider], filter[cloud_provider_region], filter[location.region], filter[location.site], filter[location.pop], filter[location.code].
  *
  * @phpstan-type filter_alias = array{
- *   cloudProvider?: value-of<CloudProvider>|null,
- *   cloudProviderRegion?: string|null,
- *   locationCode?: string|null,
- *   locationPop?: string|null,
- *   locationRegion?: string|null,
- *   locationSite?: string|null,
+ *   cloudProvider?: value-of<CloudProvider>,
+ *   cloudProviderRegion?: string,
+ *   locationCode?: string,
+ *   locationPop?: string,
+ *   locationRegion?: string,
+ *   locationSite?: string,
  * }
  */
 final class Filter implements BaseModel

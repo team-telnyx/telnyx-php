@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Invoices\InvoiceGetResponse;
 use Telnyx\Invoices\InvoiceListParams;
 use Telnyx\Invoices\InvoiceListParams\Page;
@@ -30,6 +31,8 @@ final class InvoicesService implements InvoicesContract
      * Retrieve a single invoice by its unique identifier.
      *
      * @param Action|value-of<Action> $action Invoice action
+     *
+     * @return InvoiceGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -58,6 +61,8 @@ final class InvoicesService implements InvoicesContract
      *
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      * @param Sort|value-of<Sort> $sort specifies the sort order for results
+     *
+     * @return InvoiceListResponse<HasRawResponse>
      */
     public function list(
         $page = omit,

@@ -11,8 +11,12 @@ use Telnyx\PortingOrders\PortingOrderGetResponse\Meta;
 
 /**
  * @phpstan-type porting_order_get_response = array{
- *   data?: PortingOrder|null, meta?: Meta|null
+ *   data?: PortingOrder, meta?: Meta
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class PortingOrderGetResponse implements BaseModel
 {

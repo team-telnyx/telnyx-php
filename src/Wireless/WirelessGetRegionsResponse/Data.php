@@ -12,8 +12,8 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type data_alias = array{
  *   code: string,
  *   name: string,
- *   insertedAt?: \DateTimeInterface|null,
- *   updatedAt?: \DateTimeInterface|null,
+ *   insertedAt?: \DateTimeInterface,
+ *   updatedAt?: \DateTimeInterface,
  * }
  */
 final class Data implements BaseModel

@@ -11,10 +11,10 @@ use Telnyx\SubNumberOrderRegulatoryRequirementWithValue\FieldType;
 
 /**
  * @phpstan-type sub_number_order_regulatory_requirement_with_value = array{
- *   fieldType?: value-of<FieldType>|null,
- *   fieldValue?: string|null,
- *   recordType?: string|null,
- *   requirementID?: string|null,
+ *   fieldType?: value-of<FieldType>,
+ *   fieldValue?: string,
+ *   recordType?: string,
+ *   requirementID?: string,
  * }
  */
 final class SubNumberOrderRegulatoryRequirementWithValue implements BaseModel

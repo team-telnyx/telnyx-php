@@ -12,16 +12,16 @@ use Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateResponse\Da
 
 /**
  * @phpstan-type data_alias = array{
- *   id?: string|null,
- *   actionType?: string|null,
+ *   id?: string,
+ *   actionType?: string,
  *   actionURL?: string|null,
  *   cancelReason?: string|null,
- *   createdAt?: \DateTimeInterface|null,
- *   portingOrderID?: string|null,
- *   recordType?: value-of<RecordType>|null,
- *   requirementTypeID?: string|null,
- *   status?: value-of<Status>|null,
- *   updatedAt?: \DateTimeInterface|null,
+ *   createdAt?: \DateTimeInterface,
+ *   portingOrderID?: string,
+ *   recordType?: value-of<RecordType>,
+ *   requirementTypeID?: string,
+ *   status?: value-of<Status>,
+ *   updatedAt?: \DateTimeInterface,
  * }
  */
 final class Data implements BaseModel

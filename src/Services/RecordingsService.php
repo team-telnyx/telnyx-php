@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Recordings\RecordingDeleteResponse;
 use Telnyx\Recordings\RecordingGetResponse;
 use Telnyx\Recordings\RecordingListParams;
@@ -29,13 +30,15 @@ final class RecordingsService implements RecordingsContract
      */
     public function __construct(private Client $client)
     {
-        $this->actions = new ActionsService($this->client);
+        $this->actions = new ActionsService($client);
     }
 
     /**
      * @api
      *
      * Retrieves the details of an existing call recording.
+     *
+     * @return RecordingGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $recordingID,
@@ -57,6 +60,8 @@ final class RecordingsService implements RecordingsContract
      *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[conference_id], filter[created_at][gte], filter[created_at][lte], filter[call_leg_id], filter[call_session_id], filter[from], filter[to], filter[connection_id]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     *
+     * @return RecordingListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,
@@ -82,6 +87,8 @@ final class RecordingsService implements RecordingsContract
      * @api
      *
      * Permanently deletes a call recording.
+     *
+     * @return RecordingDeleteResponse<HasRawResponse>
      */
     public function delete(
         string $recordingID,

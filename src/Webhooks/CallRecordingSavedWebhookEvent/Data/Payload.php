@@ -13,15 +13,15 @@ use Telnyx\Webhooks\CallRecordingSavedWebhookEvent\Data\Payload\RecordingURLs;
 
 /**
  * @phpstan-type payload_alias = array{
- *   callLegID?: string|null,
- *   callSessionID?: string|null,
- *   channels?: value-of<Channels>|null,
- *   clientState?: string|null,
- *   connectionID?: string|null,
- *   publicRecordingURLs?: PublicRecordingURLs|null,
- *   recordingEndedAt?: \DateTimeInterface|null,
- *   recordingStartedAt?: \DateTimeInterface|null,
- *   recordingURLs?: RecordingURLs|null,
+ *   callLegID?: string,
+ *   callSessionID?: string,
+ *   channels?: value-of<Channels>,
+ *   clientState?: string,
+ *   connectionID?: string,
+ *   publicRecordingURLs?: PublicRecordingURLs,
+ *   recordingEndedAt?: \DateTimeInterface,
+ *   recordingStartedAt?: \DateTimeInterface,
+ *   recordingURLs?: RecordingURLs,
  * }
  */
 final class Payload implements BaseModel

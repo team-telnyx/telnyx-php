@@ -11,8 +11,12 @@ use Telnyx\PhoneNumberWithMessagingSettings;
 
 /**
  * @phpstan-type messaging_update_response = array{
- *   data?: PhoneNumberWithMessagingSettings|null
+ *   data?: PhoneNumberWithMessagingSettings
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class MessagingUpdateResponse implements BaseModel
 {

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Verifications;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Verifications\ByPhoneNumberContract;
 use Telnyx\Services\Verifications\ByPhoneNumber\ActionsService;
@@ -22,13 +23,15 @@ final class ByPhoneNumberService implements ByPhoneNumberContract
      */
     public function __construct(private Client $client)
     {
-        $this->actions = new ActionsService($this->client);
+        $this->actions = new ActionsService($client);
     }
 
     /**
      * @api
      *
      * List verifications by phone number
+     *
+     * @return ByPhoneNumberListResponse<HasRawResponse>
      */
     public function list(
         string $phoneNumber,

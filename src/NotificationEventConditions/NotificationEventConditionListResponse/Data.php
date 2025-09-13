@@ -12,18 +12,18 @@ use Telnyx\NotificationEventConditions\NotificationEventConditionListResponse\Da
 
 /**
  * @phpstan-type data_alias = array{
- *   id?: string|null,
- *   allowMultipleChannels?: bool|null,
- *   associatedRecordType?: value-of<AssociatedRecordType>|null,
- *   asynchronous?: bool|null,
- *   createdAt?: \DateTimeInterface|null,
- *   description?: string|null,
- *   enabled?: bool|null,
- *   name?: string|null,
- *   notificationEventID?: string|null,
- *   parameters?: list<Parameter>|null,
- *   supportedChannels?: list<string>|null,
- *   updatedAt?: \DateTimeInterface|null,
+ *   id?: string,
+ *   allowMultipleChannels?: bool,
+ *   associatedRecordType?: value-of<AssociatedRecordType>,
+ *   asynchronous?: bool,
+ *   createdAt?: \DateTimeInterface,
+ *   description?: string,
+ *   enabled?: bool,
+ *   name?: string,
+ *   notificationEventID?: string,
+ *   parameters?: list<Parameter>,
+ *   supportedChannels?: list<string>,
+ *   updatedAt?: \DateTimeInterface,
  * }
  */
 final class Data implements BaseModel

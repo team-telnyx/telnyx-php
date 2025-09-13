@@ -10,17 +10,17 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type room_alias = array{
- *   id?: string|null,
- *   activeSessionID?: string|null,
- *   createdAt?: \DateTimeInterface|null,
- *   enableRecording?: bool|null,
- *   maxParticipants?: int|null,
- *   recordType?: string|null,
- *   sessions?: list<RoomSession>|null,
- *   uniqueName?: string|null,
- *   updatedAt?: \DateTimeInterface|null,
+ *   id?: string,
+ *   activeSessionID?: string,
+ *   createdAt?: \DateTimeInterface,
+ *   enableRecording?: bool,
+ *   maxParticipants?: int,
+ *   recordType?: string,
+ *   sessions?: list<RoomSession>,
+ *   uniqueName?: string,
+ *   updatedAt?: \DateTimeInterface,
  *   webhookEventFailoverURL?: string|null,
- *   webhookEventURL?: string|null,
+ *   webhookEventURL?: string,
  *   webhookTimeoutSecs?: int|null,
  * }
  */

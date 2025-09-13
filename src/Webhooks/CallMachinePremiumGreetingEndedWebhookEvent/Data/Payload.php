@@ -11,14 +11,14 @@ use Telnyx\Webhooks\CallMachinePremiumGreetingEndedWebhookEvent\Data\Payload\Res
 
 /**
  * @phpstan-type payload_alias = array{
- *   callControlID?: string|null,
- *   callLegID?: string|null,
- *   callSessionID?: string|null,
- *   clientState?: string|null,
- *   connectionID?: string|null,
- *   from?: string|null,
- *   result?: value-of<Result>|null,
- *   to?: string|null,
+ *   callControlID?: string,
+ *   callLegID?: string,
+ *   callSessionID?: string,
+ *   clientState?: string,
+ *   connectionID?: string,
+ *   from?: string,
+ *   result?: value-of<Result>,
+ *   to?: string,
  * }
  */
 final class Payload implements BaseModel

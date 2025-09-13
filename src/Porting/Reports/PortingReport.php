@@ -12,14 +12,14 @@ use Telnyx\Porting\Reports\PortingReport\Status;
 
 /**
  * @phpstan-type porting_report = array{
- *   id?: string|null,
- *   createdAt?: \DateTimeInterface|null,
- *   documentID?: string|null,
- *   params?: ExportPortingOrdersCsvReport|null,
- *   recordType?: string|null,
- *   reportType?: value-of<ReportType>|null,
- *   status?: value-of<Status>|null,
- *   updatedAt?: \DateTimeInterface|null,
+ *   id?: string,
+ *   createdAt?: \DateTimeInterface,
+ *   documentID?: string,
+ *   params?: ExportPortingOrdersCsvReport,
+ *   recordType?: string,
+ *   reportType?: value-of<ReportType>,
+ *   status?: value-of<Status>,
+ *   updatedAt?: \DateTimeInterface,
  * }
  */
 final class PortingReport implements BaseModel

@@ -9,9 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type reply_alias = array{
- *   postbackData?: string|null, text?: string|null
- * }
+ * @phpstan-type reply_alias = array{postbackData?: string, text?: string}
  */
 final class Reply implements BaseModel
 {

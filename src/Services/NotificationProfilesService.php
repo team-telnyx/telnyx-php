@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\NotificationProfiles\NotificationProfileCreateParams;
 use Telnyx\NotificationProfiles\NotificationProfileDeleteResponse;
 use Telnyx\NotificationProfiles\NotificationProfileGetResponse;
@@ -32,6 +33,8 @@ final class NotificationProfilesService implements NotificationProfilesContract
      * Create a notification profile.
      *
      * @param string $name a human readable name
+     *
+     * @return NotificationProfileNewResponse<HasRawResponse>
      */
     public function create(
         $name = omit,
@@ -56,6 +59,8 @@ final class NotificationProfilesService implements NotificationProfilesContract
      * @api
      *
      * Get a notification profile.
+     *
+     * @return NotificationProfileGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -76,6 +81,8 @@ final class NotificationProfilesService implements NotificationProfilesContract
      * Update a notification profile.
      *
      * @param string $name a human readable name
+     *
+     * @return NotificationProfileUpdateResponse<HasRawResponse>
      */
     public function update(
         string $id,
@@ -103,6 +110,8 @@ final class NotificationProfilesService implements NotificationProfilesContract
      * Returns a list of your notifications profiles.
      *
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     *
+     * @return NotificationProfileListResponse<HasRawResponse>
      */
     public function list(
         $page = omit,
@@ -127,6 +136,8 @@ final class NotificationProfilesService implements NotificationProfilesContract
      * @api
      *
      * Delete a notification profile.
+     *
+     * @return NotificationProfileDeleteResponse<HasRawResponse>
      */
     public function delete(
         string $id,

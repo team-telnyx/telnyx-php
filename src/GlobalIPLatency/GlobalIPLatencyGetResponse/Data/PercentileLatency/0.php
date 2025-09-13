@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
-  * @phpstan-type 0_alias = array{amount?: float|null, unit?: string|null}
+  * @phpstan-type 0_alias = array{amount?: float, unit?: string}
   * 
  */
 final class 0 implements BaseModel

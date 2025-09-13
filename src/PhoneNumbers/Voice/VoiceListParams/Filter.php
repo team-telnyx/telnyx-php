@@ -14,10 +14,10 @@ use Telnyx\PhoneNumbers\Voice\VoiceListParams\Filter\VoiceUsagePaymentMethod;
  * Consolidated filter parameter (deepObject style). Originally: filter[phone_number], filter[connection_name], filter[customer_reference], filter[voice.usage_payment_method].
  *
  * @phpstan-type filter_alias = array{
- *   connectionName?: ConnectionName|null,
- *   customerReference?: string|null,
- *   phoneNumber?: string|null,
- *   voiceUsagePaymentMethod?: value-of<VoiceUsagePaymentMethod>|null,
+ *   connectionName?: ConnectionName,
+ *   customerReference?: string,
+ *   phoneNumber?: string,
+ *   voiceUsagePaymentMethod?: value-of<VoiceUsagePaymentMethod>,
  * }
  */
 final class Filter implements BaseModel

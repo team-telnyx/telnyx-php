@@ -14,8 +14,8 @@ use Telnyx\Core\Contracts\BaseModel;
  *   body: string,
  *   createdAt: string,
  *   userID: string,
- *   portoutID?: string|null,
- *   recordType?: string|null,
+ *   portoutID?: string,
+ *   recordType?: string,
  * }
  */
 final class Data implements BaseModel

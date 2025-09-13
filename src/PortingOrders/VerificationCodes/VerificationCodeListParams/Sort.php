@@ -12,7 +12,7 @@ use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams\Sort\Value
 /**
  * Consolidated sort parameter (deepObject style). Originally: sort[value].
  *
- * @phpstan-type sort_alias = array{value?: value-of<Value>|null}
+ * @phpstan-type sort_alias = array{value?: value-of<Value>}
  */
 final class Sort implements BaseModel
 {

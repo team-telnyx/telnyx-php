@@ -11,10 +11,10 @@ use Telnyx\TexmlApplications\TexmlApplicationUpdateParams\Inbound\SipSubdomainRe
 
 /**
  * @phpstan-type inbound_alias = array{
- *   channelLimit?: int|null,
- *   shakenStirEnabled?: bool|null,
- *   sipSubdomain?: string|null,
- *   sipSubdomainReceiveSettings?: value-of<SipSubdomainReceiveSettings>|null,
+ *   channelLimit?: int,
+ *   shakenStirEnabled?: bool,
+ *   sipSubdomain?: string,
+ *   sipSubdomainReceiveSettings?: value-of<SipSubdomainReceiveSettings>,
  * }
  */
 final class Inbound implements BaseModel

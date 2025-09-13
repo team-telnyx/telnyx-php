@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\WebhookDeliveriesContract;
 use Telnyx\WebhookDeliveries\WebhookDeliveryGetResponse;
@@ -26,6 +27,8 @@ final class WebhookDeliveriesService implements WebhookDeliveriesContract
      * @api
      *
      * Provides webhook_delivery debug data, such as timestamps, delivery status and attempts.
+     *
+     * @return WebhookDeliveryGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -47,6 +50,8 @@ final class WebhookDeliveriesService implements WebhookDeliveriesContract
      *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[status][eq], filter[event_type], filter[webhook][contains], filter[attempts][contains], filter[started_at][gte], filter[started_at][lte], filter[finished_at][gte], filter[finished_at][lte]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     *
+     * @return WebhookDeliveryListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,

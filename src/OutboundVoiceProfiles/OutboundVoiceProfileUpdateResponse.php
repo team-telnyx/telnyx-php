@@ -10,8 +10,12 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type outbound_voice_profile_update_response = array{
- *   data?: OutboundVoiceProfile|null
+ *   data?: OutboundVoiceProfile
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class OutboundVoiceProfileUpdateResponse implements BaseModel
 {

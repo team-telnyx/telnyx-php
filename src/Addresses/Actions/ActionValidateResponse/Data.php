@@ -15,8 +15,8 @@ use Telnyx\Messages\Error;
  * @phpstan-type data_alias = array{
  *   result: value-of<Result>,
  *   suggested: Suggested,
- *   errors?: list<Error>|null,
- *   recordType?: string|null,
+ *   errors?: list<Error>,
+ *   recordType?: string,
  * }
  */
 final class Data implements BaseModel

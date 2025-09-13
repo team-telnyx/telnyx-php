@@ -12,7 +12,7 @@ use Telnyx\Messsages\RcsAgentMessage\Event\EventType;
 /**
  * RCS Event to send to the recipient.
  *
- * @phpstan-type event_alias = array{eventType?: value-of<EventType>|null}
+ * @phpstan-type event_alias = array{eventType?: value-of<EventType>}
  */
 final class Event implements BaseModel
 {

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Storage\Buckets;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Storage\Buckets\SslCertificateContract;
 use Telnyx\Storage\Buckets\SslCertificate\SslCertificateCreateParams;
@@ -28,6 +29,8 @@ final class SslCertificateService implements SslCertificateContract
      *
      * @param string $certificate The SSL certificate file
      * @param string $privateKey The private key file
+     *
+     * @return SslCertificateNewResponse<HasRawResponse>
      */
     public function create(
         string $bucketName,
@@ -55,6 +58,8 @@ final class SslCertificateService implements SslCertificateContract
      * @api
      *
      * Returns the stored certificate detail of a bucket, if applicable.
+     *
+     * @return SslCertificateGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $bucketName,
@@ -73,6 +78,8 @@ final class SslCertificateService implements SslCertificateContract
      * @api
      *
      * Deletes an SSL certificate and its matching secret.
+     *
+     * @return SslCertificateDeleteResponse<HasRawResponse>
      */
     public function delete(
         string $bucketName,

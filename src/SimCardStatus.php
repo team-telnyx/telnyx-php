@@ -10,9 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SimCardStatus\Value;
 
 /**
- * @phpstan-type sim_card_status = array{
- *   reason?: string|null, value?: value-of<Value>|null
- * }
+ * @phpstan-type sim_card_status = array{reason?: string, value?: value-of<Value>}
  */
 final class SimCardStatus implements BaseModel
 {

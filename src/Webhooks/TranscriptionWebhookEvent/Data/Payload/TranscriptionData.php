@@ -11,10 +11,10 @@ use Telnyx\Webhooks\TranscriptionWebhookEvent\Data\Payload\TranscriptionData\Tra
 
 /**
  * @phpstan-type transcription_data = array{
- *   confidence?: float|null,
- *   isFinal?: bool|null,
- *   transcript?: string|null,
- *   transcriptionTrack?: value-of<TranscriptionTrack>|null,
+ *   confidence?: float,
+ *   isFinal?: bool,
+ *   transcript?: string,
+ *   transcriptionTrack?: value-of<TranscriptionTrack>,
  * }
  */
 final class TranscriptionData implements BaseModel

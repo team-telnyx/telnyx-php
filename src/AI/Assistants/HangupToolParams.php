@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type hangup_tool_params = array{description?: string|null}
+ * @phpstan-type hangup_tool_params = array{description?: string}
  */
 final class HangupToolParams implements BaseModel
 {

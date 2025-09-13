@@ -10,9 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationNewResponse\Data;
 
 /**
- * @phpstan-type phone_number_configuration_new_response = array{
- *   data?: list<Data>|null
- * }
+ * @phpstan-type phone_number_configuration_new_response = array{data?: list<Data>}
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class PhoneNumberConfigurationNewResponse implements BaseModel
 {

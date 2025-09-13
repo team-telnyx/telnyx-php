@@ -14,19 +14,19 @@ use Telnyx\ExternalConnections\ExternalConnection\WebhookAPIVersion;
 
 /**
  * @phpstan-type external_connection = array{
- *   id?: string|null,
- *   active?: bool|null,
- *   createdAt?: string|null,
- *   credentialActive?: bool|null,
- *   externalSipConnection?: value-of<ExternalSipConnection>|null,
- *   inbound?: Inbound|null,
- *   outbound?: Outbound|null,
- *   recordType?: string|null,
- *   tags?: list<string>|null,
- *   updatedAt?: string|null,
- *   webhookAPIVersion?: value-of<WebhookAPIVersion>|null,
+ *   id?: string,
+ *   active?: bool,
+ *   createdAt?: string,
+ *   credentialActive?: bool,
+ *   externalSipConnection?: value-of<ExternalSipConnection>,
+ *   inbound?: Inbound,
+ *   outbound?: Outbound,
+ *   recordType?: string,
+ *   tags?: list<string>,
+ *   updatedAt?: string,
+ *   webhookAPIVersion?: value-of<WebhookAPIVersion>,
  *   webhookEventFailoverURL?: string|null,
- *   webhookEventURL?: string|null,
+ *   webhookEventURL?: string,
  *   webhookTimeoutSecs?: int|null,
  * }
  */

@@ -13,12 +13,12 @@ use Telnyx\Portouts\Reports\ExportPortoutsCsvReport\Filters\StatusIn;
  * The filters to apply to the export port-out CSV report.
  *
  * @phpstan-type filters_alias = array{
- *   createdAtGt?: \DateTimeInterface|null,
- *   createdAtLt?: \DateTimeInterface|null,
- *   customerReferenceIn?: list<string>|null,
- *   endUserName?: string|null,
- *   phoneNumbersOverlaps?: list<string>|null,
- *   statusIn?: list<value-of<StatusIn>>|null,
+ *   createdAtGt?: \DateTimeInterface,
+ *   createdAtLt?: \DateTimeInterface,
+ *   customerReferenceIn?: list<string>,
+ *   endUserName?: string,
+ *   phoneNumbersOverlaps?: list<string>,
+ *   statusIn?: list<value-of<StatusIn>>,
  * }
  */
 final class Filters implements BaseModel

@@ -11,8 +11,12 @@ use Telnyx\Storage\Buckets\Usage\UsageGetBucketUsageResponse\Data;
 
 /**
  * @phpstan-type usage_get_bucket_usage_response = array{
- *   data?: list<Data>|null, meta?: PaginationMetaSimple|null
+ *   data?: list<Data>, meta?: PaginationMetaSimple
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class UsageGetBucketUsageResponse implements BaseModel
 {

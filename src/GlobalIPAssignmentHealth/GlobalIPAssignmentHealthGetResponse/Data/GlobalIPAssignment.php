@@ -11,9 +11,7 @@ use Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthGetResponse\Data\Glo
 
 /**
  * @phpstan-type global_ip_assignment = array{
- *   id?: string|null,
- *   wireguardPeer?: WireguardPeer|null,
- *   wireguardPeerID?: string|null,
+ *   id?: string, wireguardPeer?: WireguardPeer, wireguardPeerID?: string
  * }
  */
 final class GlobalIPAssignment implements BaseModel

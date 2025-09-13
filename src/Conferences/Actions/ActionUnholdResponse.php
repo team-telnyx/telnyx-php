@@ -9,9 +9,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type action_unhold_response = array{
- *   data?: ConferenceCommandResult|null
- * }
+ * @phpstan-type action_unhold_response = array{data?: ConferenceCommandResult}
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class ActionUnholdResponse implements BaseModel
 {

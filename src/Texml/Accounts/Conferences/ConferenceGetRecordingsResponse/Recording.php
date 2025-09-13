@@ -12,21 +12,21 @@ use Telnyx\Texml\Accounts\Conferences\ConferenceGetRecordingsResponse\Recording\
 
 /**
  * @phpstan-type recording_alias = array{
- *   accountSid?: string|null,
- *   callSid?: string|null,
- *   channels?: int|null,
- *   conferenceSid?: string|null,
- *   dateCreated?: string|null,
- *   dateUpdated?: string|null,
- *   duration?: int|null,
- *   errorCode?: string|null,
- *   mediaURL?: string|null,
- *   sid?: string|null,
- *   source?: value-of<Source>|null,
- *   startTime?: string|null,
- *   status?: value-of<Status>|null,
- *   subresourceUris?: array<string, mixed>|null,
- *   uri?: string|null,
+ *   accountSid?: string,
+ *   callSid?: string,
+ *   channels?: int,
+ *   conferenceSid?: string,
+ *   dateCreated?: string,
+ *   dateUpdated?: string,
+ *   duration?: int,
+ *   errorCode?: string,
+ *   mediaURL?: string,
+ *   sid?: string,
+ *   source?: value-of<Source>,
+ *   startTime?: string,
+ *   status?: value-of<Status>,
+ *   subresourceUris?: array<string, mixed>,
+ *   uri?: string,
  * }
  */
 final class Recording implements BaseModel

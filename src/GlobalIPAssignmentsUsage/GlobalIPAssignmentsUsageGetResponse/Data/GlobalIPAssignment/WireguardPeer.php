@@ -9,9 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type wireguard_peer = array{
- *   ipAddress?: string|null, name?: string|null
- * }
+ * @phpstan-type wireguard_peer = array{ipAddress?: string, name?: string}
  */
 final class WireguardPeer implements BaseModel
 {

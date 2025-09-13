@@ -27,6 +27,7 @@ use Telnyx\AI\Assistants\Versions\VersionUpdateResponse;
 use Telnyx\AI\Assistants\VoiceSettings;
 use Telnyx\AI\Assistants\WebhookTool;
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\VersionsContract;
 
@@ -46,6 +47,8 @@ final class VersionsService implements VersionsContract
      *
      * @param string $assistantID
      * @param bool $includeMcpServers
+     *
+     * @return VersionGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $versionID,
@@ -95,6 +98,8 @@ final class VersionsService implements VersionsContract
      * @param list<WebhookTool|RetrievalTool|HandoffTool|HangupTool|TransferTool|SipReferTool|DtmfTool> $tools The tools that the assistant can use. These may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables)
      * @param TranscriptionSettings $transcription
      * @param VoiceSettings $voiceSettings
+     *
+     * @return VersionUpdateResponse<HasRawResponse>
      */
     public function update(
         string $versionID,
@@ -156,6 +161,8 @@ final class VersionsService implements VersionsContract
      * @api
      *
      * Retrieves all versions of a specific assistant with complete configuration and metadata
+     *
+     * @return AssistantsList<HasRawResponse>
      */
     public function list(
         string $assistantID,
@@ -204,6 +211,8 @@ final class VersionsService implements VersionsContract
      * Promotes a specific version to be the main/current version of the assistant. This will delete any existing canary deploy configuration and send all live production traffic to this version.
      *
      * @param string $assistantID
+     *
+     * @return VersionPromoteResponse<HasRawResponse>
      */
     public function promote(
         string $versionID,

@@ -11,13 +11,17 @@ use Telnyx\Texml\Accounts\Calls\Streams\StreamStreamingSidJsonResponse\Status;
 
 /**
  * @phpstan-type stream_streaming_sid_json_response = array{
- *   accountSid?: string|null,
- *   callSid?: string|null,
- *   dateUpdated?: \DateTimeInterface|null,
- *   sid?: string|null,
- *   status?: value-of<Status>|null,
- *   uri?: string|null,
+ *   accountSid?: string,
+ *   callSid?: string,
+ *   dateUpdated?: \DateTimeInterface,
+ *   sid?: string,
+ *   status?: value-of<Status>,
+ *   uri?: string,
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class StreamStreamingSidJsonResponse implements BaseModel
 {

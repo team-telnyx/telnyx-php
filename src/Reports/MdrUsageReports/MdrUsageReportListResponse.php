@@ -11,8 +11,12 @@ use Telnyx\Reports\MdrUsageReports\MdrUsageReportListResponse\Meta;
 
 /**
  * @phpstan-type mdr_usage_report_list_response = array{
- *   data?: list<MdrUsageReport>|null, meta?: Meta|null
+ *   data?: list<MdrUsageReport>, meta?: Meta
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class MdrUsageReportListResponse implements BaseModel
 {

@@ -12,12 +12,12 @@ use Telnyx\Core\Contracts\BaseModel;
  * The address of the company.
  *
  * @phpstan-type address_alias = array{
- *   city?: string|null,
- *   countryCode?: string|null,
- *   extendedAddress?: string|null,
- *   state?: string|null,
- *   streetAddress?: string|null,
- *   zipCode?: string|null,
+ *   city?: string,
+ *   countryCode?: string,
+ *   extendedAddress?: string,
+ *   state?: string,
+ *   streetAddress?: string,
+ *   zipCode?: string,
  * }
  */
 final class Address implements BaseModel

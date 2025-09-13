@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\DetailRecords\DetailRecordListParams\Filter;
 use Telnyx\DetailRecords\DetailRecordListParams\Page;
 use Telnyx\DetailRecords\DetailRecordListResponse;
@@ -19,6 +20,8 @@ interface DetailRecordsContract
      * @param Filter $filter Filter records on a given record attribute and value. <br/>Example: filter[status]=delivered. <br/>Required: filter[record_type] must be specified.
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      * @param list<string> $sort Specifies the sort order for results. <br/>Example: sort=-created_at
+     *
+     * @return DetailRecordListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,

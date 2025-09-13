@@ -9,11 +9,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type data_alias = array{name?: string|null, recordType?: string|null}
+ * @phpstan-type unnamed_type_with_intersection_parent12 = array{
+ *   name?: string, recordType?: string
+ * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<unnamed_type_with_intersection_parent12> */
     use SdkModel;
 
     /**

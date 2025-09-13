@@ -11,22 +11,22 @@ use Telnyx\Webhooks\CallConversationEndedWebhookEvent\Data\Payload\CallingPartyT
 
 /**
  * @phpstan-type payload_alias = array{
- *   assistantID?: string|null,
- *   callControlID?: string|null,
- *   callLegID?: string|null,
- *   callSessionID?: string|null,
- *   callingPartyType?: value-of<CallingPartyType>|null,
- *   clientState?: string|null,
- *   connectionID?: string|null,
- *   conversationID?: string|null,
- *   durationSec?: int|null,
- *   from?: string|null,
- *   llmModel?: string|null,
- *   sttModel?: string|null,
- *   to?: string|null,
- *   ttsModelID?: string|null,
- *   ttsProvider?: string|null,
- *   ttsVoiceID?: string|null,
+ *   assistantID?: string,
+ *   callControlID?: string,
+ *   callLegID?: string,
+ *   callSessionID?: string,
+ *   callingPartyType?: value-of<CallingPartyType>,
+ *   clientState?: string,
+ *   connectionID?: string,
+ *   conversationID?: string,
+ *   durationSec?: int,
+ *   from?: string,
+ *   llmModel?: string,
+ *   sttModel?: string,
+ *   to?: string,
+ *   ttsModelID?: string,
+ *   ttsProvider?: string,
+ *   ttsVoiceID?: string,
  * }
  */
 final class Payload implements BaseModel

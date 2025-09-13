@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type porting_phone_number = array{id?: string|null}
+ * @phpstan-type porting_phone_number = array{id?: string}
  */
 final class PortingPhoneNumber implements BaseModel
 {

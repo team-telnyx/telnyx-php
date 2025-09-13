@@ -7,6 +7,7 @@ namespace Telnyx\Services\AI\Embeddings;
 use Telnyx\AI\Embeddings\Buckets\BucketGetResponse;
 use Telnyx\AI\Embeddings\Buckets\BucketListResponse;
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Embeddings\BucketsContract;
 
@@ -21,6 +22,8 @@ final class BucketsService implements BucketsContract
      * @api
      *
      * Get all embedded files for a given user bucket, including their processing status.
+     *
+     * @return BucketGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $bucketName,
@@ -39,6 +42,8 @@ final class BucketsService implements BucketsContract
      * @api
      *
      * Get all embedding buckets for a user.
+     *
+     * @return BucketListResponse<HasRawResponse>
      */
     public function list(
         ?RequestOptions $requestOptions = null

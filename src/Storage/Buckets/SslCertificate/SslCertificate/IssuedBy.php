@@ -10,9 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type issued_by = array{
- *   commonName?: string|null,
- *   organization?: string|null,
- *   organizationUnit?: string|null,
+ *   commonName?: string, organization?: string, organizationUnit?: string
  * }
  */
 final class IssuedBy implements BaseModel

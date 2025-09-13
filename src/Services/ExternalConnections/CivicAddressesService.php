@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\ExternalConnections;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\ExternalConnections\CivicAddresses\CivicAddressGetResponse;
 use Telnyx\ExternalConnections\CivicAddresses\CivicAddressListParams;
 use Telnyx\ExternalConnections\CivicAddresses\CivicAddressListParams\Filter;
@@ -28,6 +29,8 @@ final class CivicAddressesService implements CivicAddressesContract
      * Return the details of an existing Civic Address with its Locations inside the 'data' attribute of the response.
      *
      * @param string $id
+     *
+     * @return CivicAddressGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $addressID,
@@ -56,6 +59,8 @@ final class CivicAddressesService implements CivicAddressesContract
      * Returns the civic addresses and locations from Microsoft Teams.
      *
      * @param Filter $filter Filter parameter for civic addresses (deepObject style). Supports filtering by country.
+     *
+     * @return CivicAddressListResponse<HasRawResponse>
      */
     public function list(
         string $id,

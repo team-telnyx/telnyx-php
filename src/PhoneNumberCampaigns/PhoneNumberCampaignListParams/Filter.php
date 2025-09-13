@@ -12,10 +12,10 @@ use Telnyx\Core\Contracts\BaseModel;
  * Consolidated filter parameter (deepObject style). Originally: filter[telnyx_campaign_id], filter[telnyx_brand_id], filter[tcr_campaign_id], filter[tcr_brand_id].
  *
  * @phpstan-type filter_alias = array{
- *   tcrBrandID?: string|null,
- *   tcrCampaignID?: string|null,
- *   telnyxBrandID?: string|null,
- *   telnyxCampaignID?: string|null,
+ *   tcrBrandID?: string,
+ *   tcrCampaignID?: string,
+ *   telnyxBrandID?: string,
+ *   telnyxCampaignID?: string,
  * }
  */
 final class Filter implements BaseModel

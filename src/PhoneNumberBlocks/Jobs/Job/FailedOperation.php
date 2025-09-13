@@ -11,7 +11,7 @@ use Telnyx\PhoneNumberBlocks\Jobs\Job\FailedOperation\Error;
 
 /**
  * @phpstan-type failed_operation = array{
- *   id?: string|null, errors?: list<Error>|null, phoneNumber?: string|null
+ *   id?: string, errors?: list<Error>, phoneNumber?: string
  * }
  */
 final class FailedOperation implements BaseModel

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\CredentialConnections\ConnectionRtcpSettings;
 use Telnyx\CredentialConnections\CredentialConnectionCreateParams\SipUriCallingPreference;
@@ -52,6 +53,8 @@ interface CredentialConnectionsContract
      * @param string|null $webhookEventFailoverURL The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      * @param string $webhookEventURL The URL where webhooks related to this connection will be sent. Must include a scheme, such as 'https'.
      * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
+     *
+     * @return CredentialConnectionNewResponse<HasRawResponse>
      */
     public function create(
         $connectionName,
@@ -80,6 +83,8 @@ interface CredentialConnectionsContract
 
     /**
      * @api
+     *
+     * @return CredentialConnectionGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -110,6 +115,8 @@ interface CredentialConnectionsContract
      * @param string|null $webhookEventFailoverURL The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      * @param string $webhookEventURL The URL where webhooks related to this connection will be sent. Must include a scheme, such as 'https'.
      * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
+     *
+     * @return CredentialConnectionUpdateResponse<HasRawResponse>
      */
     public function update(
         string $id,
@@ -154,6 +161,8 @@ interface CredentialConnectionsContract
      *     <code>connection_name</code> field in descending order.
      *   </li>
      * </ul> <br/> If not given, results are sorted by <code>created_at</code> in descending order.
+     *
+     * @return CredentialConnectionListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,
@@ -164,6 +173,8 @@ interface CredentialConnectionsContract
 
     /**
      * @api
+     *
+     * @return CredentialConnectionDeleteResponse<HasRawResponse>
      */
     public function delete(
         string $id,

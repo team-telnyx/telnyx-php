@@ -11,11 +11,11 @@ use Telnyx\MessagingNumbersBulkUpdates\MessagingNumbersBulkUpdateGetResponse\Dat
 
 /**
  * @phpstan-type data_alias = array{
- *   failed?: list<string>|null,
- *   orderID?: string|null,
- *   pending?: list<string>|null,
- *   recordType?: value-of<RecordType>|null,
- *   success?: list<string>|null,
+ *   failed?: list<string>,
+ *   orderID?: string,
+ *   pending?: list<string>,
+ *   recordType?: value-of<RecordType>,
+ *   success?: list<string>,
  * }
  */
 final class Data implements BaseModel

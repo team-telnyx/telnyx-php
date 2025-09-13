@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\GlobalIPAllowedPorts\GlobalIPAllowedPortListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\GlobalIPAllowedPortsContract;
@@ -20,6 +21,8 @@ final class GlobalIPAllowedPortsService implements GlobalIPAllowedPortsContract
      * @api
      *
      * List all Global IP Allowed Ports
+     *
+     * @return GlobalIPAllowedPortListResponse<HasRawResponse>
      */
     public function list(
         ?RequestOptions $requestOptions = null

@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type sim_card_actions_summary = array{
- *   count?: int|null, status?: value-of<Status>|null
+ *   count?: int, status?: value-of<Status>
  * }
  */
 final class SimCardActionsSummary implements BaseModel

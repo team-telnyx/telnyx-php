@@ -11,9 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * The phone numbers pending confirmation on update results. Entries in this list are transient, and will be moved to either successful_operations or failed_operations once the processing is done.
  *
- * @phpstan-type pending_operation = array{
- *   id?: string|null, phoneNumber?: string|null
- * }
+ * @phpstan-type pending_operation = array{id?: string, phoneNumber?: string}
  */
 final class PendingOperation implements BaseModel
 {

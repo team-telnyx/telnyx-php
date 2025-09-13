@@ -12,8 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * Consolidated filter parameter (deepObject style). Originally: filter[created_before], filter[created_after].
  *
  * @phpstan-type filter_alias = array{
- *   createdAfter?: \DateTimeInterface|null,
- *   createdBefore?: \DateTimeInterface|null,
+ *   createdAfter?: \DateTimeInterface, createdBefore?: \DateTimeInterface
  * }
  */
 final class Filter implements BaseModel

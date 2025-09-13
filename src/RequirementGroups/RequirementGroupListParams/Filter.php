@@ -15,11 +15,11 @@ use Telnyx\RequirementGroups\RequirementGroupListParams\Filter\Status;
  * Consolidated filter parameter (deepObject style). Originally: filter[country_code], filter[phone_number_type], filter[action], filter[status], filter[customer_reference].
  *
  * @phpstan-type filter_alias = array{
- *   action?: value-of<Action>|null,
- *   countryCode?: string|null,
- *   customerReference?: string|null,
- *   phoneNumberType?: value-of<PhoneNumberType>|null,
- *   status?: value-of<Status>|null,
+ *   action?: value-of<Action>,
+ *   countryCode?: string,
+ *   customerReference?: string,
+ *   phoneNumberType?: value-of<PhoneNumberType>,
+ *   status?: value-of<Status>,
  * }
  */
 final class Filter implements BaseModel

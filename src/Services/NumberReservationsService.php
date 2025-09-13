@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\NumberReservations\NumberReservationCreateParams;
 use Telnyx\NumberReservations\NumberReservationGetResponse;
 use Telnyx\NumberReservations\NumberReservationListParams;
@@ -31,7 +32,7 @@ final class NumberReservationsService implements NumberReservationsContract
      */
     public function __construct(private Client $client)
     {
-        $this->actions = new ActionsService($this->client);
+        $this->actions = new ActionsService($client);
     }
 
     /**
@@ -41,6 +42,8 @@ final class NumberReservationsService implements NumberReservationsContract
      *
      * @param string $customerReference a customer reference string for customer look ups
      * @param list<ReservedPhoneNumber> $phoneNumbers
+     *
+     * @return NumberReservationNewResponse<HasRawResponse>
      */
     public function create(
         $customerReference = omit,
@@ -69,6 +72,8 @@ final class NumberReservationsService implements NumberReservationsContract
      * @api
      *
      * Gets a single phone number reservation.
+     *
+     * @return NumberReservationGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $numberReservationID,
@@ -90,6 +95,8 @@ final class NumberReservationsService implements NumberReservationsContract
      *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[status], filter[created_at], filter[phone_numbers.phone_number], filter[customer_reference]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     *
+     * @return NumberReservationListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,

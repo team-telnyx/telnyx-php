@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * Advanced name filtering operations.
  *
  * @phpstan-type name_alias = array{
- *   contains?: string|null, endsWith?: string|null, startsWith?: string|null
+ *   contains?: string, endsWith?: string, startsWith?: string
  * }
  */
 final class Name implements BaseModel

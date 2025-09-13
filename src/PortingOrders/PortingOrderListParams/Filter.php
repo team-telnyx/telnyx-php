@@ -15,16 +15,16 @@ use Telnyx\PortingOrders\PortingOrderType;
  * Consolidated filter parameter (deepObject style). Originally: filter[customer_reference], filter[parent_support_key], filter[phone_numbers.country_code], filter[phone_numbers.carrier_name], filter[misc.type], filter[end_user.admin.entity_name], filter[end_user.admin.auth_person_name], filter[activation_settings.fast_port_eligible], filter[activation_settings.foc_datetime_requested][gt], filter[activation_settings.foc_datetime_requested][lt], filter[phone_numbers.phone_number][contains].
  *
  * @phpstan-type filter_alias = array{
- *   activationSettingsFastPortEligible?: bool|null,
- *   activationSettingsFocDatetimeRequested?: ActivationSettingsFocDatetimeRequested|null,
- *   customerReference?: string|null,
- *   endUserAdminAuthPersonName?: string|null,
- *   endUserAdminEntityName?: string|null,
- *   miscType?: value-of<PortingOrderType>|null,
- *   parentSupportKey?: string|null,
- *   phoneNumbersCarrierName?: string|null,
- *   phoneNumbersCountryCode?: string|null,
- *   phoneNumbersPhoneNumber?: PhoneNumbersPhoneNumber|null,
+ *   activationSettingsFastPortEligible?: bool,
+ *   activationSettingsFocDatetimeRequested?: ActivationSettingsFocDatetimeRequested,
+ *   customerReference?: string,
+ *   endUserAdminAuthPersonName?: string,
+ *   endUserAdminEntityName?: string,
+ *   miscType?: value-of<PortingOrderType>,
+ *   parentSupportKey?: string,
+ *   phoneNumbersCarrierName?: string,
+ *   phoneNumbersCountryCode?: string,
+ *   phoneNumbersPhoneNumber?: PhoneNumbersPhoneNumber,
  * }
  */
 final class Filter implements BaseModel

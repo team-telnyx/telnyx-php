@@ -12,12 +12,12 @@ use Telnyx\Storage\Buckets\SslCertificate\SslCertificate\IssuedTo;
 
 /**
  * @phpstan-type ssl_certificate = array{
- *   id?: string|null,
- *   createdAt?: \DateTimeInterface|null,
- *   issuedBy?: IssuedBy|null,
- *   issuedTo?: IssuedTo|null,
- *   validFrom?: \DateTimeInterface|null,
- *   validTo?: \DateTimeInterface|null,
+ *   id?: string,
+ *   createdAt?: \DateTimeInterface,
+ *   issuedBy?: IssuedBy,
+ *   issuedTo?: IssuedTo,
+ *   validFrom?: \DateTimeInterface,
+ *   validTo?: \DateTimeInterface,
  * }
  */
 final class SslCertificate implements BaseModel

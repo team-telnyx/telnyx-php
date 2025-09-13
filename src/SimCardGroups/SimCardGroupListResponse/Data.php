@@ -12,17 +12,17 @@ use Telnyx\SimCardGroups\SimCardGroupListResponse\Data\DataLimit;
 
 /**
  * @phpstan-type data_alias = array{
- *   id?: string|null,
- *   consumedData?: ConsumedData|null,
- *   createdAt?: string|null,
- *   dataLimit?: DataLimit|null,
- *   default?: bool|null,
- *   name?: string|null,
- *   privateWirelessGatewayID?: string|null,
- *   recordType?: string|null,
- *   simCardCount?: int|null,
- *   updatedAt?: string|null,
- *   wirelessBlocklistID?: string|null,
+ *   id?: string,
+ *   consumedData?: ConsumedData,
+ *   createdAt?: string,
+ *   dataLimit?: DataLimit,
+ *   default?: bool,
+ *   name?: string,
+ *   privateWirelessGatewayID?: string,
+ *   recordType?: string,
+ *   simCardCount?: int,
+ *   updatedAt?: string,
+ *   wirelessBlocklistID?: string,
  * }
  */
 final class Data implements BaseModel

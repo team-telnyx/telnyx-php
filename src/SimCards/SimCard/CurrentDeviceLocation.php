@@ -12,10 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * Current physical location data of a given SIM card. Accuracy is given in meters.
  *
  * @phpstan-type current_device_location = array{
- *   accuracy?: int|null,
- *   accuracyUnit?: string|null,
- *   latitude?: string|null,
- *   longitude?: string|null,
+ *   accuracy?: int, accuracyUnit?: string, latitude?: string, longitude?: string
  * }
  */
 final class CurrentDeviceLocation implements BaseModel

@@ -13,18 +13,18 @@ use Telnyx\Webhooks\CallAnsweredWebhookEvent\Data\Payload\State;
 
 /**
  * @phpstan-type payload_alias = array{
- *   callControlID?: string|null,
- *   callLegID?: string|null,
- *   callSessionID?: string|null,
- *   clientState?: string|null,
- *   connectionID?: string|null,
- *   customHeaders?: list<CustomSipHeader>|null,
- *   from?: string|null,
- *   sipHeaders?: list<SipHeader>|null,
- *   startTime?: \DateTimeInterface|null,
- *   state?: value-of<State>|null,
- *   tags?: list<string>|null,
- *   to?: string|null,
+ *   callControlID?: string,
+ *   callLegID?: string,
+ *   callSessionID?: string,
+ *   clientState?: string,
+ *   connectionID?: string,
+ *   customHeaders?: list<CustomSipHeader>,
+ *   from?: string,
+ *   sipHeaders?: list<SipHeader>,
+ *   startTime?: \DateTimeInterface,
+ *   state?: value-of<State>,
+ *   tags?: list<string>,
+ *   to?: string,
  * }
  */
 final class Payload implements BaseModel

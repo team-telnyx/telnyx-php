@@ -14,6 +14,7 @@ use Telnyx\AI\Assistants\Tests\TestListResponse;
 use Telnyx\AI\Assistants\Tests\TestUpdateParams;
 use Telnyx\AI\Assistants\Tests\TestUpdateParams\Rubric as Rubric1;
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\TestsContract;
 use Telnyx\Services\AI\Assistants\Tests\RunsService;
@@ -38,8 +39,8 @@ final class TestsService implements TestsContract
      */
     public function __construct(private Client $client)
     {
-        $this->testSuites = new TestSuitesService($this->client);
-        $this->runs = new RunsService($this->client);
+        $this->testSuites = new TestSuitesService($client);
+        $this->runs = new RunsService($client);
     }
 
     /**
@@ -55,6 +56,8 @@ final class TestsService implements TestsContract
      * @param int $maxDurationSeconds Maximum duration in seconds that the test conversation should run before timing out. If not specified, uses system default timeout.
      * @param TelnyxConversationChannel|value-of<TelnyxConversationChannel> $telnyxConversationChannel The communication channel through which the test will be conducted. Determines how the assistant will receive and respond to test messages.
      * @param string $testSuite Optional test suite name to group related tests together. Useful for organizing tests by feature, team, or release cycle.
+     *
+     * @return AssistantTest<HasRawResponse>
      */
     public function create(
         $destination,
@@ -95,6 +98,8 @@ final class TestsService implements TestsContract
      * @api
      *
      * Retrieves detailed information about a specific assistant test
+     *
+     * @return AssistantTest<HasRawResponse>
      */
     public function retrieve(
         string $testID,
@@ -122,6 +127,8 @@ final class TestsService implements TestsContract
      * @param list<Rubric1> $rubric updated evaluation criteria for assessing assistant performance
      * @param TelnyxConversationChannel|value-of<TelnyxConversationChannel> $telnyxConversationChannel updated communication channel for the test execution
      * @param string $testSuite updated test suite assignment for better organization
+     *
+     * @return AssistantTest<HasRawResponse>
      */
     public function update(
         string $testID,
@@ -168,6 +175,8 @@ final class TestsService implements TestsContract
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param string $telnyxConversationChannel Filter tests by communication channel (e.g., 'web_chat', 'sms')
      * @param string $testSuite Filter tests by test suite name
+     *
+     * @return TestListResponse<HasRawResponse>
      */
     public function list(
         $destination = omit,

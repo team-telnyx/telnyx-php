@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[verified].
  *
- * @phpstan-type filter_alias = array{verified?: bool|null}
+ * @phpstan-type filter_alias = array{verified?: bool}
  */
 final class Filter implements BaseModel
 {

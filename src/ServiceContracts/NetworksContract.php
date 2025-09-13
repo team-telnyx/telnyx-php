@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Networks\NetworkDeleteResponse;
 use Telnyx\Networks\NetworkGetResponse;
 use Telnyx\Networks\NetworkListInterfacesParams\Filter as Filter1;
@@ -24,6 +25,8 @@ interface NetworksContract
      * @api
      *
      * @param string $name a user specified name for the network
+     *
+     * @return NetworkNewResponse<HasRawResponse>
      */
     public function create(
         $name,
@@ -32,6 +35,8 @@ interface NetworksContract
 
     /**
      * @api
+     *
+     * @return NetworkGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -42,6 +47,8 @@ interface NetworksContract
      * @api
      *
      * @param string $name a user specified name for the network
+     *
+     * @return NetworkUpdateResponse<HasRawResponse>
      */
     public function update(
         string $id,
@@ -54,6 +61,8 @@ interface NetworksContract
      *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[name]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     *
+     * @return NetworkListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,
@@ -63,6 +72,8 @@ interface NetworksContract
 
     /**
      * @api
+     *
+     * @return NetworkDeleteResponse<HasRawResponse>
      */
     public function delete(
         string $id,
@@ -74,6 +85,8 @@ interface NetworksContract
      *
      * @param Filter1 $filter Consolidated filter parameter (deepObject style). Originally: filter[name], filter[type], filter[status]
      * @param Page1 $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     *
+     * @return NetworkListInterfacesResponse<HasRawResponse>
      */
     public function listInterfaces(
         string $id,

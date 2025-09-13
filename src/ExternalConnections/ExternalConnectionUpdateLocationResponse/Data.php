@@ -10,9 +10,9 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type data_alias = array{
- *   acceptedAddressSuggestions?: bool|null,
- *   locationID?: string|null,
- *   staticEmergencyAddressID?: string|null,
+ *   acceptedAddressSuggestions?: bool,
+ *   locationID?: string,
+ *   staticEmergencyAddressID?: string,
  * }
  */
 final class Data implements BaseModel

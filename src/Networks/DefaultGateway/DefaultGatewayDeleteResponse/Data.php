@@ -10,16 +10,16 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Networks\InterfaceStatus;
 
 /**
- * @phpstan-type data_alias = array{
- *   networkID?: string|null,
- *   recordType?: string|null,
- *   status?: value-of<InterfaceStatus>|null,
- *   wireguardPeerID?: string|null,
+ * @phpstan-type unnamed_type_with_intersection_parent19 = array{
+ *   networkID?: string,
+ *   recordType?: string,
+ *   status?: value-of<InterfaceStatus>,
+ *   wireguardPeerID?: string,
  * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<unnamed_type_with_intersection_parent19> */
     use SdkModel;
 
     /**

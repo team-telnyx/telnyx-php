@@ -13,8 +13,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * Consolidated filter parameter (deepObject style). Originally: filter[comment_record_type], filter[comment_record_id].
  *
  * @phpstan-type filter_alias = array{
- *   commentRecordID?: string|null,
- *   commentRecordType?: value-of<CommentRecordType>|null,
+ *   commentRecordID?: string, commentRecordType?: value-of<CommentRecordType>
  * }
  */
 final class Filter implements BaseModel

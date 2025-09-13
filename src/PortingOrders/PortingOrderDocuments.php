@@ -11,9 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Can be specified directly or via the `requirement_group_id` parameter.
  *
- * @phpstan-type porting_order_documents = array{
- *   invoice?: string|null, loa?: string|null
- * }
+ * @phpstan-type porting_order_documents = array{invoice?: string, loa?: string}
  */
 final class PortingOrderDocuments implements BaseModel
 {

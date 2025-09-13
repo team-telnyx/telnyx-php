@@ -11,7 +11,7 @@ use Telnyx\Webhooks\CallAIGatherMessageHistoryUpdatedWebhookEvent\Data;
 
 /**
  * @phpstan-type call_ai_gather_message_history_updated_webhook_event = array{
- *   data?: Data|null
+ *   data?: Data
  * }
  */
 final class CallAIGatherMessageHistoryUpdatedWebhookEvent implements BaseModel

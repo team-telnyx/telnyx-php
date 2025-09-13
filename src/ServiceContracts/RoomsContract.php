@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\Rooms\RoomGetResponse;
 use Telnyx\Rooms\RoomListParams\Filter;
@@ -25,6 +26,8 @@ interface RoomsContract
      * @param string|null $webhookEventFailoverURL The failover URL where webhooks related to this room will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      * @param string $webhookEventURL The URL where webhooks related to this room will be sent. Must include a scheme, such as 'https'.
      * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
+     *
+     * @return RoomNewResponse<HasRawResponse>
      */
     public function create(
         $enableRecording = omit,
@@ -40,6 +43,8 @@ interface RoomsContract
      * @api
      *
      * @param bool $includeSessions to decide if room sessions should be included in the response
+     *
+     * @return RoomGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $roomID,
@@ -56,6 +61,8 @@ interface RoomsContract
      * @param string|null $webhookEventFailoverURL The failover URL where webhooks related to this room will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      * @param string $webhookEventURL The URL where webhooks related to this room will be sent. Must include a scheme, such as 'https'.
      * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
+     *
+     * @return RoomUpdateResponse<HasRawResponse>
      */
     public function update(
         string $roomID,
@@ -74,6 +81,8 @@ interface RoomsContract
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[date_created_at][eq], filter[date_created_at][gte], filter[date_created_at][lte], filter[date_updated_at][eq], filter[date_updated_at][gte], filter[date_updated_at][lte], filter[unique_name]
      * @param bool $includeSessions to decide if room sessions should be included in the response
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     *
+     * @return RoomListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,

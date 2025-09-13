@@ -13,12 +13,12 @@ use Telnyx\PortingOrderStatus;
  * The webhook payload for the porting_order.status_changed event.
  *
  * @phpstan-type webhook_porting_order_status_changed_payload = array{
- *   id?: string|null,
- *   customerReference?: string|null,
- *   status?: PortingOrderStatus|null,
- *   supportKey?: string|null,
- *   updatedAt?: \DateTimeInterface|null,
- *   webhookURL?: string|null,
+ *   id?: string,
+ *   customerReference?: string,
+ *   status?: PortingOrderStatus,
+ *   supportKey?: string,
+ *   updatedAt?: \DateTimeInterface,
+ *   webhookURL?: string,
  * }
  */
 final class WebhookPortingOrderStatusChangedPayload implements BaseModel

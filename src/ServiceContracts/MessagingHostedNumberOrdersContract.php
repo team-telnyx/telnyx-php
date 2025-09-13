@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderCheckEligibilityResponse;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderCreateVerificationCodesParams\VerificationMethod;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderDeleteResponse;
@@ -25,6 +26,8 @@ interface MessagingHostedNumberOrdersContract
      *
      * @param string $messagingProfileID automatically associate the number with this messaging profile ID when the order is complete
      * @param list<string> $phoneNumbers phone numbers to be used for hosted messaging
+     *
+     * @return MessagingHostedNumberOrderNewResponse<HasRawResponse>
      */
     public function create(
         $messagingProfileID = omit,
@@ -34,6 +37,8 @@ interface MessagingHostedNumberOrdersContract
 
     /**
      * @api
+     *
+     * @return MessagingHostedNumberOrderGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -44,6 +49,8 @@ interface MessagingHostedNumberOrdersContract
      * @api
      *
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     *
+     * @return MessagingHostedNumberOrderListResponse<HasRawResponse>
      */
     public function list(
         $page = omit,
@@ -52,6 +59,8 @@ interface MessagingHostedNumberOrdersContract
 
     /**
      * @api
+     *
+     * @return MessagingHostedNumberOrderDeleteResponse<HasRawResponse>
      */
     public function delete(
         string $id,
@@ -62,6 +71,8 @@ interface MessagingHostedNumberOrdersContract
      * @api
      *
      * @param list<string> $phoneNumbers List of phone numbers to check eligibility
+     *
+     * @return MessagingHostedNumberOrderCheckEligibilityResponse<HasRawResponse>
      */
     public function checkEligibility(
         $phoneNumbers,
@@ -73,6 +84,8 @@ interface MessagingHostedNumberOrdersContract
      *
      * @param list<string> $phoneNumbers
      * @param VerificationMethod|value-of<VerificationMethod> $verificationMethod
+     *
+     * @return MessagingHostedNumberOrderNewVerificationCodesResponse<HasRawResponse>
      */
     public function createVerificationCodes(
         string $id,
@@ -85,6 +98,8 @@ interface MessagingHostedNumberOrdersContract
      * @api
      *
      * @param list<VerificationCode> $verificationCodes
+     *
+     * @return MessagingHostedNumberOrderValidateCodesResponse<HasRawResponse>
      */
     public function validateCodes(
         string $id,

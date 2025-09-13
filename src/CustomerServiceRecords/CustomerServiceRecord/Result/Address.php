@@ -12,11 +12,11 @@ use Telnyx\Core\Contracts\BaseModel;
  * The address of the customer service record.
  *
  * @phpstan-type address_alias = array{
- *   administrativeArea?: string|null,
- *   fullAddress?: string|null,
- *   locality?: string|null,
- *   postalCode?: string|null,
- *   streetAddress?: string|null,
+ *   administrativeArea?: string,
+ *   fullAddress?: string,
+ *   locality?: string,
+ *   postalCode?: string,
+ *   streetAddress?: string,
  * }
  */
 final class Address implements BaseModel

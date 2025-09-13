@@ -25,22 +25,22 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type update_assistant = array{
- *   description?: string|null,
- *   dynamicVariables?: array<string, mixed>|null,
- *   dynamicVariablesWebhookURL?: string|null,
- *   enabledFeatures?: list<value-of<EnabledFeatures>>|null,
- *   greeting?: string|null,
- *   insightSettings?: InsightSettings|null,
- *   instructions?: string|null,
- *   llmAPIKeyRef?: string|null,
- *   messagingSettings?: MessagingSettings|null,
- *   model?: string|null,
- *   name?: string|null,
- *   privacySettings?: PrivacySettings|null,
- *   telephonySettings?: TelephonySettings|null,
- *   tools?: list<WebhookTool|RetrievalTool|HandoffTool|HangupTool|TransferTool|SipReferTool|DtmfTool>|null,
- *   transcription?: TranscriptionSettings|null,
- *   voiceSettings?: VoiceSettings|null,
+ *   description?: string,
+ *   dynamicVariables?: array<string, mixed>,
+ *   dynamicVariablesWebhookURL?: string,
+ *   enabledFeatures?: list<value-of<EnabledFeatures>>,
+ *   greeting?: string,
+ *   insightSettings?: InsightSettings,
+ *   instructions?: string,
+ *   llmAPIKeyRef?: string,
+ *   messagingSettings?: MessagingSettings,
+ *   model?: string,
+ *   name?: string,
+ *   privacySettings?: PrivacySettings,
+ *   telephonySettings?: TelephonySettings,
+ *   tools?: list<WebhookTool|RetrievalTool|HandoffTool|HangupTool|TransferTool|SipReferTool|DtmfTool>,
+ *   transcription?: TranscriptionSettings,
+ *   voiceSettings?: VoiceSettings,
  * }
  */
 final class UpdateAssistant implements BaseModel

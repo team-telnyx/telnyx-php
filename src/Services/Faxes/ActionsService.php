@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Faxes;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Faxes\Actions\ActionCancelResponse;
 use Telnyx\Faxes\Actions\ActionRefreshResponse;
 use Telnyx\RequestOptions;
@@ -21,6 +22,8 @@ final class ActionsService implements ActionsContract
      * @api
      *
      * Cancel the outbound fax that is in one of the following states: `queued`, `media.processed`, `originated` or `sending`
+     *
+     * @return ActionCancelResponse<HasRawResponse>
      */
     public function cancel(
         string $id,
@@ -39,6 +42,8 @@ final class ActionsService implements ActionsContract
      * @api
      *
      * Refreshes the inbound fax's media_url when it has expired
+     *
+     * @return ActionRefreshResponse<HasRawResponse>
      */
     public function refresh(
         string $id,

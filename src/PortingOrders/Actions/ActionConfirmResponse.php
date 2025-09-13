@@ -11,9 +11,11 @@ use Telnyx\PortingOrders\Actions\ActionConfirmResponse\Meta;
 use Telnyx\PortingOrders\PortingOrder;
 
 /**
- * @phpstan-type action_confirm_response = array{
- *   data?: PortingOrder|null, meta?: Meta|null
- * }
+ * @phpstan-type action_confirm_response = array{data?: PortingOrder, meta?: Meta}
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class ActionConfirmResponse implements BaseModel
 {

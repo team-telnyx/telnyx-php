@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Networks;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Networks\DefaultGateway\DefaultGatewayCreateParams;
 use Telnyx\Networks\DefaultGateway\DefaultGatewayDeleteResponse;
 use Telnyx\Networks\DefaultGateway\DefaultGatewayGetResponse;
@@ -27,6 +28,8 @@ final class DefaultGatewayService implements DefaultGatewayContract
      * Create Default Gateway.
      *
      * @param string $wireguardPeerID wireguard peer ID
+     *
+     * @return DefaultGatewayNewResponse<HasRawResponse>
      */
     public function create(
         string $id,
@@ -52,6 +55,8 @@ final class DefaultGatewayService implements DefaultGatewayContract
      * @api
      *
      * Get Default Gateway status.
+     *
+     * @return DefaultGatewayGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -70,6 +75,8 @@ final class DefaultGatewayService implements DefaultGatewayContract
      * @api
      *
      * Delete Default Gateway.
+     *
+     * @return DefaultGatewayDeleteResponse<HasRawResponse>
      */
     public function delete(
         string $id,

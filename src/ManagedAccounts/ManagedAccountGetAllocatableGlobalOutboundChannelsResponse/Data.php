@@ -10,10 +10,10 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type data_alias = array{
- *   allocatableGlobalOutboundChannels?: int|null,
- *   managedAccountAllowCustomPricing?: bool|null,
- *   recordType?: string|null,
- *   totalGlobalChannelsAllocated?: int|null,
+ *   allocatableGlobalOutboundChannels?: int,
+ *   managedAccountAllowCustomPricing?: bool,
+ *   recordType?: string,
+ *   totalGlobalChannelsAllocated?: int,
  * }
  */
 final class Data implements BaseModel

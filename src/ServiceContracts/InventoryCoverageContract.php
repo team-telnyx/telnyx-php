@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\InventoryCoverage\InventoryCoverageListParams\Filter;
 use Telnyx\InventoryCoverage\InventoryCoverageListResponse;
 use Telnyx\RequestOptions;
@@ -16,6 +17,8 @@ interface InventoryCoverageContract
      * @api
      *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[npa], filter[nxx], filter[administrative_area], filter[phone_number_type], filter[country_code], filter[count], filter[features], filter[groupBy]
+     *
+     * @return InventoryCoverageListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,

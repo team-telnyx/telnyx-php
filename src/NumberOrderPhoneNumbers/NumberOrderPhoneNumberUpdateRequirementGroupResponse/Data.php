@@ -11,21 +11,21 @@ use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberUpdateRequirementGroupR
 
 /**
  * @phpstan-type data_alias = array{
- *   id?: string|null,
+ *   id?: string,
  *   bundleID?: string|null,
- *   countryCode?: string|null,
- *   deadline?: \DateTimeInterface|null,
- *   isBlockNumber?: bool|null,
- *   locality?: string|null,
- *   orderRequestID?: string|null,
- *   phoneNumber?: string|null,
- *   phoneNumberType?: string|null,
- *   recordType?: string|null,
- *   regulatoryRequirements?: list<RegulatoryRequirement>|null,
- *   requirementsMet?: bool|null,
- *   requirementsStatus?: string|null,
- *   status?: string|null,
- *   subNumberOrderID?: string|null,
+ *   countryCode?: string,
+ *   deadline?: \DateTimeInterface,
+ *   isBlockNumber?: bool,
+ *   locality?: string,
+ *   orderRequestID?: string,
+ *   phoneNumber?: string,
+ *   phoneNumberType?: string,
+ *   recordType?: string,
+ *   regulatoryRequirements?: list<RegulatoryRequirement>,
+ *   requirementsMet?: bool,
+ *   requirementsStatus?: string,
+ *   status?: string,
+ *   subNumberOrderID?: string,
  * }
  */
 final class Data implements BaseModel

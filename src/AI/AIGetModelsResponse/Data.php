@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type data_alias = array{
- *   id: string, created: int, ownedBy: string, object1?: string|null
+ *   id: string, created: int, ownedBy: string, object1?: string
  * }
  */
 final class Data implements BaseModel

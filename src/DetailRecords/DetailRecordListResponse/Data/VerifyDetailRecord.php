@@ -12,19 +12,19 @@ use Telnyx\DetailRecords\DetailRecordListResponse\Data\VerifyDetailRecord\Verify
 /**
  * @phpstan-type verify_detail_record = array{
  *   recordType: string,
- *   id?: string|null,
- *   createdAt?: \DateTimeInterface|null,
- *   currency?: string|null,
- *   deliveryStatus?: string|null,
- *   destinationPhoneNumber?: string|null,
- *   rate?: string|null,
- *   rateMeasuredIn?: string|null,
- *   updatedAt?: \DateTimeInterface|null,
- *   verificationStatus?: string|null,
- *   verifyChannelID?: string|null,
- *   verifyChannelType?: value-of<VerifyChannelType>|null,
- *   verifyProfileID?: string|null,
- *   verifyUsageFee?: string|null,
+ *   id?: string,
+ *   createdAt?: \DateTimeInterface,
+ *   currency?: string,
+ *   deliveryStatus?: string,
+ *   destinationPhoneNumber?: string,
+ *   rate?: string,
+ *   rateMeasuredIn?: string,
+ *   updatedAt?: \DateTimeInterface,
+ *   verificationStatus?: string,
+ *   verifyChannelID?: string,
+ *   verifyChannelType?: value-of<VerifyChannelType>,
+ *   verifyProfileID?: string,
+ *   verifyUsageFee?: string,
  * }
  */
 final class VerifyDetailRecord implements BaseModel

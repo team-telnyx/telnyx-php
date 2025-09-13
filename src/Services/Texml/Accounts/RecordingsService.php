@@ -20,6 +20,6 @@ final class RecordingsService implements RecordingsContract
      */
     public function __construct(private Client $client)
     {
-        $this->json = new JsonService($this->client);
+        $this->json = new JsonService($client);
     }
 }

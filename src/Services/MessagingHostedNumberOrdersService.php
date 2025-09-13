@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderCheckEligibilityParams;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderCheckEligibilityResponse;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderCreateParams;
@@ -38,7 +39,7 @@ final class MessagingHostedNumberOrdersService implements MessagingHostedNumberO
      */
     public function __construct(private Client $client)
     {
-        $this->actions = new ActionsService($this->client);
+        $this->actions = new ActionsService($client);
     }
 
     /**
@@ -48,6 +49,8 @@ final class MessagingHostedNumberOrdersService implements MessagingHostedNumberO
      *
      * @param string $messagingProfileID automatically associate the number with this messaging profile ID when the order is complete
      * @param list<string> $phoneNumbers phone numbers to be used for hosted messaging
+     *
+     * @return MessagingHostedNumberOrderNewResponse<HasRawResponse>
      */
     public function create(
         $messagingProfileID = omit,
@@ -76,6 +79,8 @@ final class MessagingHostedNumberOrdersService implements MessagingHostedNumberO
      * @api
      *
      * Retrieve a messaging hosted number order
+     *
+     * @return MessagingHostedNumberOrderGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -96,6 +101,8 @@ final class MessagingHostedNumberOrdersService implements MessagingHostedNumberO
      * List messaging hosted number orders
      *
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     *
+     * @return MessagingHostedNumberOrderListResponse<HasRawResponse>
      */
     public function list(
         $page = omit,
@@ -120,6 +127,8 @@ final class MessagingHostedNumberOrdersService implements MessagingHostedNumberO
      * @api
      *
      * Delete a messaging hosted number order and all associated phone numbers.
+     *
+     * @return MessagingHostedNumberOrderDeleteResponse<HasRawResponse>
      */
     public function delete(
         string $id,
@@ -140,6 +149,8 @@ final class MessagingHostedNumberOrdersService implements MessagingHostedNumberO
      * Check eligibility of phone numbers for hosted messaging
      *
      * @param list<string> $phoneNumbers List of phone numbers to check eligibility
+     *
+     * @return MessagingHostedNumberOrderCheckEligibilityResponse<HasRawResponse>
      */
     public function checkEligibility(
         $phoneNumbers,
@@ -169,6 +180,8 @@ final class MessagingHostedNumberOrdersService implements MessagingHostedNumberO
      *
      * @param list<string> $phoneNumbers
      * @param VerificationMethod|value-of<VerificationMethod> $verificationMethod
+     *
+     * @return MessagingHostedNumberOrderNewVerificationCodesResponse<HasRawResponse>
      */
     public function createVerificationCodes(
         string $id,
@@ -202,6 +215,8 @@ final class MessagingHostedNumberOrdersService implements MessagingHostedNumberO
      * Validate the verification codes sent to the numbers of the hosted order. The verification codes must be created in the verification codes endpoint.
      *
      * @param list<VerificationCode> $verificationCodes
+     *
+     * @return MessagingHostedNumberOrderValidateCodesResponse<HasRawResponse>
      */
     public function validateCodes(
         string $id,

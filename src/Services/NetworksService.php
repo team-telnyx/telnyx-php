@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Networks\NetworkCreateParams;
 use Telnyx\Networks\NetworkDeleteResponse;
 use Telnyx\Networks\NetworkGetResponse;
@@ -37,7 +38,7 @@ final class NetworksService implements NetworksContract
      */
     public function __construct(private Client $client)
     {
-        $this->defaultGateway = new DefaultGatewayService($this->client);
+        $this->defaultGateway = new DefaultGatewayService($client);
     }
 
     /**
@@ -46,6 +47,8 @@ final class NetworksService implements NetworksContract
      * Create a new Network.
      *
      * @param string $name a user specified name for the network
+     *
+     * @return NetworkNewResponse<HasRawResponse>
      */
     public function create(
         $name,
@@ -70,6 +73,8 @@ final class NetworksService implements NetworksContract
      * @api
      *
      * Retrieve a Network.
+     *
+     * @return NetworkGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -90,6 +95,8 @@ final class NetworksService implements NetworksContract
      * Update a Network.
      *
      * @param string $name a user specified name for the network
+     *
+     * @return NetworkUpdateResponse<HasRawResponse>
      */
     public function update(
         string $id,
@@ -118,6 +125,8 @@ final class NetworksService implements NetworksContract
      *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[name]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     *
+     * @return NetworkListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,
@@ -143,6 +152,8 @@ final class NetworksService implements NetworksContract
      * @api
      *
      * Delete a Network.
+     *
+     * @return NetworkDeleteResponse<HasRawResponse>
      */
     public function delete(
         string $id,
@@ -164,6 +175,8 @@ final class NetworksService implements NetworksContract
      *
      * @param Filter1 $filter Consolidated filter parameter (deepObject style). Originally: filter[name], filter[type], filter[status]
      * @param Page1 $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     *
+     * @return NetworkListInterfacesResponse<HasRawResponse>
      */
     public function listInterfaces(
         string $id,

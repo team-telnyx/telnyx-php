@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordCreateParams;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordCreateParams\AdditionalData;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordGetResponse;
@@ -36,6 +37,8 @@ final class CustomerServiceRecordsService implements CustomerServiceRecordsContr
      * @param string $phoneNumber a valid US phone number in E164 format
      * @param AdditionalData $additionalData
      * @param string $webhookURL callback URL to receive webhook notifications
+     *
+     * @return CustomerServiceRecordNewResponse<HasRawResponse>
      */
     public function create(
         $phoneNumber,
@@ -66,6 +69,8 @@ final class CustomerServiceRecordsService implements CustomerServiceRecordsContr
      * @api
      *
      * Get a specific customer service record.
+     *
+     * @return CustomerServiceRecordGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $customerServiceRecordID,
@@ -88,6 +93,8 @@ final class CustomerServiceRecordsService implements CustomerServiceRecordsContr
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[phone_number][eq], filter[phone_number][in][], filter[status][eq], filter[status][in][], filter[created_at][lt], filter[created_at][gt]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param Sort $sort Consolidated sort parameter (deepObject style). Originally: sort[value]
+     *
+     * @return CustomerServiceRecordListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,
@@ -116,6 +123,8 @@ final class CustomerServiceRecordsService implements CustomerServiceRecordsContr
      * Verify the coverage for a list of phone numbers.
      *
      * @param list<string> $phoneNumbers the phone numbers list to be verified
+     *
+     * @return CustomerServiceRecordVerifyPhoneNumberCoverageResponse<HasRawResponse>
      */
     public function verifyPhoneNumberCoverage(
         $phoneNumbers,

@@ -11,6 +11,7 @@ use Telnyx\Addresses\AddressListParams\Page;
 use Telnyx\Addresses\AddressListParams\Sort;
 use Telnyx\Addresses\AddressListResponse;
 use Telnyx\Addresses\AddressNewResponse;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 
 use const Telnyx\Core\OMIT as omit;
@@ -35,6 +36,8 @@ interface AddressesContract
      * @param string $phoneNumber the phone number associated with the address
      * @param string $postalCode the postal code of the address
      * @param bool $validateAddress Indicates whether or not the address should be validated for emergency use upon creation or not. This should be left with the default value of `true` unless you have used the `/addresses/actions/validate` endpoint to validate the address separately prior to creation. If an address is not validated for emergency use upon creation and it is not valid, it will not be able to be used for emergency services.
+     *
+     * @return AddressNewResponse<HasRawResponse>
      */
     public function create(
         $businessName,
@@ -57,6 +60,8 @@ interface AddressesContract
 
     /**
      * @api
+     *
+     * @return AddressGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -80,6 +85,8 @@ interface AddressesContract
      *     <code>street_address</code> field in descending order.
      *   </li>
      * </ul> <br/> If not given, results are sorted by <code>created_at</code> in descending order.
+     *
+     * @return AddressListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,
@@ -90,6 +97,8 @@ interface AddressesContract
 
     /**
      * @api
+     *
+     * @return AddressDeleteResponse<HasRawResponse>
      */
     public function delete(
         string $id,

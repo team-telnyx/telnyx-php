@@ -11,22 +11,22 @@ use Telnyx\ExternalConnections\CivicAddresses\CivicAddressGetResponse\Data\Locat
 
 /**
  * @phpstan-type data_alias = array{
- *   id?: string|null,
- *   cityOrTown?: string|null,
- *   cityOrTownAlias?: string|null,
- *   companyName?: string|null,
- *   country?: string|null,
- *   countryOrDistrict?: string|null,
- *   defaultLocationID?: string|null,
- *   description?: string|null,
- *   houseNumber?: string|null,
- *   houseNumberSuffix?: string|null,
- *   locations?: list<Location>|null,
- *   postalOrZipCode?: string|null,
- *   recordType?: string|null,
- *   stateOrProvince?: string|null,
- *   streetName?: string|null,
- *   streetSuffix?: string|null,
+ *   id?: string,
+ *   cityOrTown?: string,
+ *   cityOrTownAlias?: string,
+ *   companyName?: string,
+ *   country?: string,
+ *   countryOrDistrict?: string,
+ *   defaultLocationID?: string,
+ *   description?: string,
+ *   houseNumber?: string,
+ *   houseNumberSuffix?: string,
+ *   locations?: list<Location>,
+ *   postalOrZipCode?: string,
+ *   recordType?: string,
+ *   stateOrProvince?: string,
+ *   streetName?: string,
+ *   streetSuffix?: string,
  * }
  */
 final class Data implements BaseModel

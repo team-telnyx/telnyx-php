@@ -10,7 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Porting\PortingListUkCarriersResponse\Data;
 
 /**
- * @phpstan-type porting_list_uk_carriers_response = array{data?: list<Data>|null}
+ * @phpstan-type porting_list_uk_carriers_response = array{data?: list<Data>}
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class PortingListUkCarriersResponse implements BaseModel
 {

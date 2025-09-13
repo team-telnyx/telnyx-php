@@ -12,12 +12,12 @@ use Telnyx\ExternalConnections\Releases\ReleaseListResponse\Data\TelephoneNumber
 
 /**
  * @phpstan-type data_alias = array{
- *   createdAt?: string|null,
- *   errorMessage?: string|null,
- *   status?: value-of<Status>|null,
- *   telephoneNumbers?: list<TelephoneNumber>|null,
- *   tenantID?: string|null,
- *   ticketID?: string|null,
+ *   createdAt?: string,
+ *   errorMessage?: string,
+ *   status?: value-of<Status>,
+ *   telephoneNumbers?: list<TelephoneNumber>,
+ *   tenantID?: string,
+ *   ticketID?: string,
  * }
  */
 final class Data implements BaseModel

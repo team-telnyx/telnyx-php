@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Verifications\ByPhoneNumber;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Verifications\ByPhoneNumber\ActionsContract;
 use Telnyx\Verifications\ByPhoneNumber\Actions\ActionVerifyParams;
@@ -24,6 +25,8 @@ final class ActionsService implements ActionsContract
      *
      * @param string $code this is the code the user submits for verification
      * @param string $verifyProfileID the identifier of the associated Verify profile
+     *
+     * @return VerifyVerificationCodeResponse<HasRawResponse>
      */
     public function verify(
         string $phoneNumber,

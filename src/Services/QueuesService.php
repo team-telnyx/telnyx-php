@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Queues\QueueGetResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\QueuesContract;
@@ -22,13 +23,15 @@ final class QueuesService implements QueuesContract
      */
     public function __construct(private Client $client)
     {
-        $this->calls = new CallsService($this->client);
+        $this->calls = new CallsService($client);
     }
 
     /**
      * @api
      *
      * Retrieve an existing call queue
+     *
+     * @return QueueGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $queueName,

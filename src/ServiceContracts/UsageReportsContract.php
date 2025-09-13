@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\UsageReports\UsageReportGetOptionsResponse;
 use Telnyx\UsageReports\UsageReportListParams\Format;
@@ -29,6 +30,8 @@ interface UsageReportsContract
      * @param list<string> $sort Specifies the sort order for results
      * @param string $startDate The start date for the time range you are interested in. The maximum time range is 31 days. Format: YYYY-MM-DDTHH:mm:ssZ
      * @param string $authorizationBearer Authenticates the request with your Telnyx API V2 KEY
+     *
+     * @return UsageReportListResponse<HasRawResponse>
      */
     public function list(
         $dimensions,
@@ -51,6 +54,8 @@ interface UsageReportsContract
      *
      * @param string $product Options (dimensions and metrics) for a given product. If none specified, all products will be returned.
      * @param string $authorizationBearer Authenticates the request with your Telnyx API V2 KEY
+     *
+     * @return UsageReportGetOptionsResponse<HasRawResponse>
      */
     public function getOptions(
         $product = omit,

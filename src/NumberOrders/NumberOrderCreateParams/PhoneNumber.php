@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type phone_number = array{
- *   phoneNumber: string, bundleID?: string|null, requirementGroupID?: string|null
+ *   phoneNumber: string, bundleID?: string, requirementGroupID?: string
  * }
  */
 final class PhoneNumber implements BaseModel

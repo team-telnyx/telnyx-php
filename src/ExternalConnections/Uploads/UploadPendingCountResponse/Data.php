@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type data_alias = array{
- *   pendingNumbersCount?: int|null, pendingOrdersCount?: int|null
+ *   pendingNumbersCount?: int, pendingOrdersCount?: int
  * }
  */
 final class Data implements BaseModel

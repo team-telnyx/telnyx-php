@@ -13,20 +13,20 @@ use Telnyx\SimpleSimCard\Type;
 
 /**
  * @phpstan-type simple_sim_card = array{
- *   id?: string|null,
- *   actionsInProgress?: bool|null,
- *   createdAt?: string|null,
- *   currentBillingPeriodConsumedData?: CurrentBillingPeriodConsumedData|null,
- *   dataLimit?: DataLimit|null,
- *   iccid?: string|null,
- *   imsi?: string|null,
- *   msisdn?: string|null,
- *   recordType?: string|null,
- *   simCardGroupID?: string|null,
- *   status?: SimCardStatus|null,
- *   tags?: list<string>|null,
- *   type?: value-of<Type>|null,
- *   updatedAt?: string|null,
+ *   id?: string,
+ *   actionsInProgress?: bool,
+ *   createdAt?: string,
+ *   currentBillingPeriodConsumedData?: CurrentBillingPeriodConsumedData,
+ *   dataLimit?: DataLimit,
+ *   iccid?: string,
+ *   imsi?: string,
+ *   msisdn?: string,
+ *   recordType?: string,
+ *   simCardGroupID?: string,
+ *   status?: SimCardStatus,
+ *   tags?: list<string>,
+ *   type?: value-of<Type>,
+ *   updatedAt?: string,
  * }
  */
 final class SimpleSimCard implements BaseModel

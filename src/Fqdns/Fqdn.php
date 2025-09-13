@@ -10,14 +10,14 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type fqdn_alias = array{
- *   id?: string|null,
- *   connectionID?: string|null,
- *   createdAt?: string|null,
- *   dnsRecordType?: string|null,
- *   fqdn?: string|null,
- *   port?: int|null,
- *   recordType?: string|null,
- *   updatedAt?: string|null,
+ *   id?: string,
+ *   connectionID?: string,
+ *   createdAt?: string,
+ *   dnsRecordType?: string,
+ *   fqdn?: string,
+ *   port?: int,
+ *   recordType?: string,
+ *   updatedAt?: string,
  * }
  */
 final class Fqdn implements BaseModel

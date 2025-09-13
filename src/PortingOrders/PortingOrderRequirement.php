@@ -11,10 +11,10 @@ use Telnyx\PortingOrders\PortingOrderRequirement\FieldType;
 
 /**
  * @phpstan-type porting_order_requirement = array{
- *   fieldType?: value-of<FieldType>|null,
- *   fieldValue?: string|null,
- *   recordType?: string|null,
- *   requirementTypeID?: string|null,
+ *   fieldType?: value-of<FieldType>,
+ *   fieldValue?: string,
+ *   recordType?: string,
+ *   requirementTypeID?: string,
  * }
  */
 final class PortingOrderRequirement implements BaseModel

@@ -10,14 +10,18 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type external_vetting_import_response = array{
- *   createDate?: string|null,
- *   evpID?: string|null,
- *   vettedDate?: string|null,
- *   vettingClass?: string|null,
- *   vettingID?: string|null,
- *   vettingScore?: int|null,
- *   vettingToken?: string|null,
+ *   createDate?: string,
+ *   evpID?: string,
+ *   vettedDate?: string,
+ *   vettingClass?: string,
+ *   vettingID?: string,
+ *   vettingScore?: int,
+ *   vettingToken?: string,
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class ExternalVettingImportResponse implements BaseModel
 {

@@ -17,7 +17,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   state: string,
  *   streetAddress: string,
  *   zipCode: string,
- *   extendedAddress?: string|null,
+ *   extendedAddress?: string,
  * }
  */
 final class Address implements BaseModel

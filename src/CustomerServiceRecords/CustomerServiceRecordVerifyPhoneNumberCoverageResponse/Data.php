@@ -11,11 +11,11 @@ use Telnyx\CustomerServiceRecords\CustomerServiceRecordVerifyPhoneNumberCoverage
 
 /**
  * @phpstan-type data_alias = array{
- *   additionalDataRequired?: list<value-of<AdditionalDataRequired>>|null,
- *   hasCsrCoverage?: bool|null,
- *   phoneNumber?: string|null,
- *   reason?: string|null,
- *   recordType?: string|null,
+ *   additionalDataRequired?: list<value-of<AdditionalDataRequired>>,
+ *   hasCsrCoverage?: bool,
+ *   phoneNumber?: string,
+ *   reason?: string,
+ *   recordType?: string,
  * }
  */
 final class Data implements BaseModel

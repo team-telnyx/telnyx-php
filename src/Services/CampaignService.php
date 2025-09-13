@@ -15,6 +15,7 @@ use Telnyx\Campaign\CampaignSubmitAppealResponse;
 use Telnyx\Campaign\CampaignUpdateParams;
 use Telnyx\Campaign\TelnyxCampaignCsp;
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\CampaignContract;
 use Telnyx\Services\Campaign\OsrService;
@@ -39,14 +40,16 @@ final class CampaignService implements CampaignContract
      */
     public function __construct(private Client $client)
     {
-        $this->usecase = new UsecaseService($this->client);
-        $this->osr = new OsrService($this->client);
+        $this->usecase = new UsecaseService($client);
+        $this->osr = new OsrService($client);
     }
 
     /**
      * @api
      *
      * Retrieve campaign details by `campaignId`.
+     *
+     * @return TelnyxCampaignCsp<HasRawResponse>
      */
     public function retrieve(
         string $campaignID,
@@ -77,6 +80,8 @@ final class CampaignService implements CampaignContract
      * @param string $sample5 Message sample. Some campaign tiers require 5 or more message samples.
      * @param string $webhookFailoverURL webhook failover to which campaign status updates are sent
      * @param string $webhookURL webhook to which campaign status updates are sent
+     *
+     * @return TelnyxCampaignCsp<HasRawResponse>
      */
     public function update(
         string $campaignID,
@@ -129,6 +134,8 @@ final class CampaignService implements CampaignContract
      * @param int $page The 1-indexed page number to get. The default value is `1`.
      * @param int $recordsPerPage The amount of records per page, limited to between 1 and 500 inclusive. The default value is `10`.
      * @param Sort|value-of<Sort> $sort Specifies the sort order for results. If not given, results are sorted by createdAt in descending order.
+     *
+     * @return CampaignListResponse<HasRawResponse>
      */
     public function list(
         $brandID,
@@ -179,6 +186,8 @@ final class CampaignService implements CampaignContract
      * @api
      *
      * Terminate a campaign. Note that once deactivated, a campaign cannot be restored.
+     *
+     * @return CampaignDeactivateResponse<HasRawResponse>
      */
     public function deactivate(
         string $campaignID,
@@ -197,6 +206,8 @@ final class CampaignService implements CampaignContract
      * @api
      *
      * Get the campaign metadata for each MNO it was submitted to.
+     *
+     * @return CampaignGetMnoMetadataResponse<HasRawResponse>
      */
     public function getMnoMetadata(
         string $campaignID,
@@ -233,6 +244,8 @@ final class CampaignService implements CampaignContract
      * @api
      *
      * Get Sharing Status
+     *
+     * @return CampaignGetSharingStatusResponse<HasRawResponse>
      */
     public function getSharingStatus(
         string $campaignID,
@@ -253,6 +266,8 @@ final class CampaignService implements CampaignContract
      * Submits an appeal for rejected native campaigns in TELNYX_FAILED or MNO_REJECTED status. The appeal is recorded for manual compliance team review and the campaign status is reset to TCR_ACCEPTED. Note: Appeal forwarding is handled manually to allow proper review before incurring upstream charges.
      *
      * @param string $appealReason detailed explanation of why the campaign should be reconsidered and what changes have been made to address the rejection reason
+     *
+     * @return CampaignSubmitAppealResponse<HasRawResponse>
      */
     public function submitAppeal(
         string $campaignID,

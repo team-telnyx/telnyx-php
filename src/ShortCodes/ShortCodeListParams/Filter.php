@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[messaging_profile_id].
  *
- * @phpstan-type filter_alias = array{messagingProfileID?: string|null}
+ * @phpstan-type filter_alias = array{messagingProfileID?: string}
  */
 final class Filter implements BaseModel
 {

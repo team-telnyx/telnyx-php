@@ -11,14 +11,14 @@ use Telnyx\Webhooks\ConferenceEndedWebhookEvent\Data\Payload\Reason;
 
 /**
  * @phpstan-type payload_alias = array{
- *   callControlID?: string|null,
- *   callLegID?: string|null,
- *   callSessionID?: string|null,
- *   clientState?: string|null,
- *   conferenceID?: string|null,
- *   connectionID?: string|null,
- *   occurredAt?: \DateTimeInterface|null,
- *   reason?: value-of<Reason>|null,
+ *   callControlID?: string,
+ *   callLegID?: string,
+ *   callSessionID?: string,
+ *   clientState?: string,
+ *   conferenceID?: string,
+ *   connectionID?: string,
+ *   occurredAt?: \DateTimeInterface,
+ *   reason?: value-of<Reason>,
  * }
  */
 final class Payload implements BaseModel

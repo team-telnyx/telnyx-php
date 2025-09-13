@@ -14,14 +14,14 @@ use Telnyx\SimCards\Actions\SimCardAction\Status;
  * This object represents a SIM card action. It allows tracking the current status of an operation that impacts the SIM card.
  *
  * @phpstan-type sim_card_action = array{
- *   id?: string|null,
- *   actionType?: value-of<ActionType>|null,
- *   createdAt?: string|null,
- *   recordType?: string|null,
+ *   id?: string,
+ *   actionType?: value-of<ActionType>,
+ *   createdAt?: string,
+ *   recordType?: string,
  *   settings?: array<string, mixed>|null,
- *   simCardID?: string|null,
- *   status?: Status|null,
- *   updatedAt?: string|null,
+ *   simCardID?: string,
+ *   status?: Status,
+ *   updatedAt?: string,
  * }
  */
 final class SimCardAction implements BaseModel

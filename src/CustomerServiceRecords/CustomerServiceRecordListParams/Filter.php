@@ -15,9 +15,7 @@ use Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams\Filter\Status;
  * Consolidated filter parameter (deepObject style). Originally: filter[phone_number][eq], filter[phone_number][in][], filter[status][eq], filter[status][in][], filter[created_at][lt], filter[created_at][gt].
  *
  * @phpstan-type filter_alias = array{
- *   createdAt?: CreatedAt|null,
- *   phoneNumber?: PhoneNumber|null,
- *   status?: Status|null,
+ *   createdAt?: CreatedAt, phoneNumber?: PhoneNumber, status?: Status
  * }
  */
 final class Filter implements BaseModel

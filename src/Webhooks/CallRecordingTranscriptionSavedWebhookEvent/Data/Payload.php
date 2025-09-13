@@ -12,16 +12,16 @@ use Telnyx\Webhooks\CallRecordingTranscriptionSavedWebhookEvent\Data\Payload\Sta
 
 /**
  * @phpstan-type payload_alias = array{
- *   callControlID?: string|null,
- *   callLegID?: string|null,
- *   callSessionID?: string|null,
- *   callingPartyType?: value-of<CallingPartyType>|null,
- *   clientState?: string|null,
- *   connectionID?: string|null,
- *   recordingID?: string|null,
- *   recordingTranscriptionID?: string|null,
- *   status?: value-of<Status>|null,
- *   transcriptionText?: string|null,
+ *   callControlID?: string,
+ *   callLegID?: string,
+ *   callSessionID?: string,
+ *   callingPartyType?: value-of<CallingPartyType>,
+ *   clientState?: string,
+ *   connectionID?: string,
+ *   recordingID?: string,
+ *   recordingTranscriptionID?: string,
+ *   status?: value-of<Status>,
+ *   transcriptionText?: string,
  * }
  */
 final class Payload implements BaseModel

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Wireless;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Wireless\DetailRecordsReportsContract;
 use Telnyx\Wireless\DetailRecordsReports\DetailRecordsReportCreateParams;
@@ -30,6 +31,8 @@ final class DetailRecordsReportsService implements DetailRecordsReportsContract
      *
      * @param string $endTime ISO 8601 formatted date-time indicating the end time
      * @param string $startTime ISO 8601 formatted date-time indicating the start time
+     *
+     * @return DetailRecordsReportNewResponse<HasRawResponse>
      */
     public function create(
         $endTime = omit,
@@ -55,6 +58,8 @@ final class DetailRecordsReportsService implements DetailRecordsReportsContract
      * @api
      *
      * Returns one specific WDR report
+     *
+     * @return DetailRecordsReportGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -76,6 +81,8 @@ final class DetailRecordsReportsService implements DetailRecordsReportsContract
      *
      * @param int $pageNumber the page number to load
      * @param int $pageSize the size of the page
+     *
+     * @return DetailRecordsReportListResponse<HasRawResponse>
      */
     public function list(
         $pageNumber = omit,
@@ -101,6 +108,8 @@ final class DetailRecordsReportsService implements DetailRecordsReportsContract
      * @api
      *
      * Deletes one specific WDR report.
+     *
+     * @return DetailRecordsReportDeleteResponse<HasRawResponse>
      */
     public function delete(
         string $id,

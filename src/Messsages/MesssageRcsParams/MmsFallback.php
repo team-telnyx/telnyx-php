@@ -10,10 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type mms_fallback = array{
- *   from?: string|null,
- *   mediaURLs?: list<string>|null,
- *   subject?: string|null,
- *   text?: string|null,
+ *   from?: string, mediaURLs?: list<string>, subject?: string, text?: string
  * }
  */
 final class MmsFallback implements BaseModel

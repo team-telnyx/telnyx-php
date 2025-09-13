@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type update_regulatory_requirement = array{
- *   fieldValue?: string|null, requirementID?: string|null
+ *   fieldValue?: string, requirementID?: string
  * }
  */
 final class UpdateRegulatoryRequirement implements BaseModel

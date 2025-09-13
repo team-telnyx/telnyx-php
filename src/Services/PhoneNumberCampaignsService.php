@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PhoneNumberCampaigns\PhoneNumberCampaign;
 use Telnyx\PhoneNumberCampaigns\PhoneNumberCampaignCreateParams;
 use Telnyx\PhoneNumberCampaigns\PhoneNumberCampaignListParams;
@@ -31,6 +32,8 @@ final class PhoneNumberCampaignsService implements PhoneNumberCampaignsContract
      *
      * @param string $campaignID the ID of the campaign you want to link to the specified phone number
      * @param string $phoneNumber the phone number you want to link to a specified campaign
+     *
+     * @return PhoneNumberCampaign<HasRawResponse>
      */
     public function create(
         $campaignID,
@@ -56,6 +59,8 @@ final class PhoneNumberCampaignsService implements PhoneNumberCampaignsContract
      * @api
      *
      * Retrieve an individual phone number/campaign assignment by `phoneNumber`.
+     *
+     * @return PhoneNumberCampaign<HasRawResponse>
      */
     public function retrieve(
         string $phoneNumber,
@@ -77,6 +82,8 @@ final class PhoneNumberCampaignsService implements PhoneNumberCampaignsContract
      *
      * @param string $campaignID the ID of the campaign you want to link to the specified phone number
      * @param string $phoneNumber1 the phone number you want to link to a specified campaign
+     *
+     * @return PhoneNumberCampaign<HasRawResponse>
      */
     public function update(
         string $phoneNumber,
@@ -108,6 +115,8 @@ final class PhoneNumberCampaignsService implements PhoneNumberCampaignsContract
      * @param int $page
      * @param int $recordsPerPage
      * @param Sort|value-of<Sort> $sort Specifies the sort order for results. If not given, results are sorted by createdAt in descending order.
+     *
+     * @return PhoneNumberCampaignListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,
@@ -140,6 +149,8 @@ final class PhoneNumberCampaignsService implements PhoneNumberCampaignsContract
      * @api
      *
      * This endpoint allows you to remove a campaign assignment from the supplied `phoneNumber`.
+     *
+     * @return PhoneNumberCampaign<HasRawResponse>
      */
     public function delete(
         string $phoneNumber,

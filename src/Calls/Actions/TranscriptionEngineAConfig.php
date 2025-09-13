@@ -13,17 +13,17 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type transcription_engine_a_config = array{
- *   enableSpeakerDiarization?: bool|null,
- *   hints?: list<string>|null,
- *   interimResults?: bool|null,
- *   language?: value-of<GoogleTranscriptionLanguage>|null,
- *   maxSpeakerCount?: int|null,
- *   minSpeakerCount?: int|null,
- *   model?: value-of<Model>|null,
- *   profanityFilter?: bool|null,
- *   speechContext?: list<SpeechContext>|null,
- *   transcriptionEngine?: value-of<TranscriptionEngine>|null,
- *   useEnhanced?: bool|null,
+ *   enableSpeakerDiarization?: bool,
+ *   hints?: list<string>,
+ *   interimResults?: bool,
+ *   language?: value-of<GoogleTranscriptionLanguage>,
+ *   maxSpeakerCount?: int,
+ *   minSpeakerCount?: int,
+ *   model?: value-of<Model>,
+ *   profanityFilter?: bool,
+ *   speechContext?: list<SpeechContext>,
+ *   transcriptionEngine?: value-of<TranscriptionEngine>,
+ *   useEnhanced?: bool,
  * }
  */
 final class TranscriptionEngineAConfig implements BaseModel

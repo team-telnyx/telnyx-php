@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Reports\ReportListMdrsParams;
 use Telnyx\Reports\ReportListMdrsParams\Direction;
 use Telnyx\Reports\ReportListMdrsParams\MessageType;
@@ -37,8 +38,8 @@ final class ReportsService implements ReportsContract
      */
     public function __construct(private Client $client)
     {
-        $this->cdrUsageReports = new CdrUsageReportsService($this->client);
-        $this->mdrUsageReports = new MdrUsageReportsService($this->client);
+        $this->cdrUsageReports = new CdrUsageReportsService($client);
+        $this->mdrUsageReports = new MdrUsageReportsService($client);
     }
 
     /**
@@ -55,6 +56,8 @@ final class ReportsService implements ReportsContract
      * @param string $profile Name of the profile
      * @param string $startDate Pagination start date
      * @param Status|value-of<Status> $status Message status
+     *
+     * @return ReportListMdrsResponse<HasRawResponse>
      */
     public function listMdrs(
         $id = omit,
@@ -110,6 +113,8 @@ final class ReportsService implements ReportsContract
      * @param string $simGroupName Sim group name
      * @param list<string> $sort Field used to order the data. If no field is specified, default value is 'created_at'
      * @param string $startDate Start date
+     *
+     * @return ReportListWdrsResponse<HasRawResponse>
      */
     public function listWdrs(
         $id = omit,

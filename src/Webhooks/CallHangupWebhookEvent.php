@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\CallHangupWebhookEvent\Data;
 
 /**
- * @phpstan-type call_hangup_webhook_event = array{data?: Data|null}
+ * @phpstan-type call_hangup_webhook_event = array{data?: Data}
  */
 final class CallHangupWebhookEvent implements BaseModel
 {

@@ -17,7 +17,7 @@ use Telnyx\Messsages\RcsSuggestion\Action\OpenURLAction\WebviewViewMode;
  *   application: value-of<Application>,
  *   url: string,
  *   webviewViewMode: value-of<WebviewViewMode>,
- *   description?: string|null,
+ *   description?: string,
  * }
  */
 final class OpenURLAction implements BaseModel

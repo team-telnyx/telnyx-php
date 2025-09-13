@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthGetResponse;
 use Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthRetrieveParams\Filter;
 use Telnyx\RequestOptions;
@@ -16,6 +17,8 @@ interface GlobalIPAssignmentHealthContract
      * @api
      *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[global_ip_id][in], filter[global_ip_assignment_id][in]
+     *
+     * @return GlobalIPAssignmentHealthGetResponse<HasRawResponse>
      */
     public function retrieve(
         $filter = omit,

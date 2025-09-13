@@ -10,11 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type campaign_status_update_webhook_event = array{
- *   brandID?: string|null,
- *   campaignID?: string|null,
- *   createDate?: string|null,
- *   cspID?: string|null,
- *   isTMobileRegistered?: bool|null,
+ *   brandID?: string,
+ *   campaignID?: string,
+ *   createDate?: string,
+ *   cspID?: string,
+ *   isTMobileRegistered?: bool,
  * }
  */
 final class CampaignStatusUpdateWebhookEvent implements BaseModel

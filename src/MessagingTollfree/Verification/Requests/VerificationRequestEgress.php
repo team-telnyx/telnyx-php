@@ -33,10 +33,14 @@ use Telnyx\Core\Contracts\BaseModel;
  *   useCase: value-of<UseCaseCategories>,
  *   useCaseSummary: string,
  *   verificationRequestID: string,
- *   businessAddr2?: string|null,
- *   verificationStatus?: value-of<TfVerificationStatus>|null,
- *   webhookURL?: string|null,
+ *   businessAddr2?: string,
+ *   verificationStatus?: value-of<TfVerificationStatus>,
+ *   webhookURL?: string,
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class VerificationRequestEgress implements BaseModel
 {

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\Storage;
 
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\Storage\Migrations\MigrationGetResponse;
 use Telnyx\Storage\Migrations\MigrationListResponse;
@@ -20,6 +21,8 @@ interface MigrationsContract
      * @param string $targetBucketName Bucket name to migrate the data into. Will default to the same name as the `source_bucket_name`.
      * @param string $targetRegion telnyx Cloud Storage region to migrate the data to
      * @param bool $refresh if true, will continue to poll the source bucket to ensure new data is continually migrated over
+     *
+     * @return MigrationNewResponse<HasRawResponse>
      */
     public function create(
         $sourceID,
@@ -31,6 +34,8 @@ interface MigrationsContract
 
     /**
      * @api
+     *
+     * @return MigrationGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -39,6 +44,8 @@ interface MigrationsContract
 
     /**
      * @api
+     *
+     * @return MigrationListResponse<HasRawResponse>
      */
     public function list(
         ?RequestOptions $requestOptions = null

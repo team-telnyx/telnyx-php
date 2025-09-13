@@ -17,13 +17,7 @@ use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\99 
 
 /**
   * @phpstan-type percentile_latency = array{
-  *   0?: 01|null,
-  *   100?: 1001|null,
-  *   25?: 251|null,
-  *   50?: 501|null,
-  *   75?: 751|null,
-  *   90?: 901|null,
-  *   99?: 991|null,
+  *   0?: 01, 100?: 1001, 25?: 251, 50?: 501, 75?: 751, 90?: 901, 99?: 991
   * }
   * 
  */

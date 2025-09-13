@@ -9,7 +9,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type verify_profile_data = array{data?: VerifyProfile|null}
+ * @phpstan-type verify_profile_data = array{data?: VerifyProfile}
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class VerifyProfileData implements BaseModel
 {

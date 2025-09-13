@@ -10,12 +10,12 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type porting_order_end_user_location = array{
- *   administrativeArea?: string|null,
- *   countryCode?: string|null,
- *   extendedAddress?: string|null,
- *   locality?: string|null,
- *   postalCode?: string|null,
- *   streetAddress?: string|null,
+ *   administrativeArea?: string,
+ *   countryCode?: string,
+ *   extendedAddress?: string,
+ *   locality?: string,
+ *   postalCode?: string,
+ *   streetAddress?: string,
  * }
  */
 final class PortingOrderEndUserLocation implements BaseModel

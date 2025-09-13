@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointCreateParams;
 use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointDeleteResponse;
 use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointGetResponse;
@@ -33,6 +34,8 @@ final class DynamicEmergencyEndpointsService implements DynamicEmergencyEndpoint
      * @param string $callbackNumber
      * @param string $callerName
      * @param string $dynamicEmergencyAddressID an id of a currently active dynamic emergency location
+     *
+     * @return DynamicEmergencyEndpointNewResponse<HasRawResponse>
      */
     public function create(
         $callbackNumber,
@@ -63,6 +66,8 @@ final class DynamicEmergencyEndpointsService implements DynamicEmergencyEndpoint
      * @api
      *
      * Returns the dynamic emergency endpoint based on the ID provided
+     *
+     * @return DynamicEmergencyEndpointGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -84,6 +89,8 @@ final class DynamicEmergencyEndpointsService implements DynamicEmergencyEndpoint
      *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[status], filter[country_code]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     *
+     * @return DynamicEmergencyEndpointListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,
@@ -109,6 +116,8 @@ final class DynamicEmergencyEndpointsService implements DynamicEmergencyEndpoint
      * @api
      *
      * Deletes the dynamic emergency endpoint based on the ID provided
+     *
+     * @return DynamicEmergencyEndpointDeleteResponse<HasRawResponse>
      */
     public function delete(
         string $id,

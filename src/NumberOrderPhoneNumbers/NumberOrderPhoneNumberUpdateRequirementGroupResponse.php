@@ -11,8 +11,12 @@ use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberUpdateRequirementGroupR
 
 /**
  * @phpstan-type number_order_phone_number_update_requirement_group_response = array{
- *   data?: Data|null
+ *   data?: Data
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class NumberOrderPhoneNumberUpdateRequirementGroupResponse implements BaseModel
 {

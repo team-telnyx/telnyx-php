@@ -13,18 +13,18 @@ use Telnyx\FaxApplications\FaxApplication\Outbound;
 
 /**
  * @phpstan-type fax_application = array{
- *   id?: string|null,
- *   active?: bool|null,
- *   anchorsiteOverride?: value-of<AnchorsiteOverride>|null,
- *   applicationName?: string|null,
- *   createdAt?: string|null,
- *   inbound?: Inbound|null,
- *   outbound?: Outbound|null,
- *   recordType?: string|null,
- *   tags?: list<string>|null,
- *   updatedAt?: string|null,
+ *   id?: string,
+ *   active?: bool,
+ *   anchorsiteOverride?: value-of<AnchorsiteOverride>,
+ *   applicationName?: string,
+ *   createdAt?: string,
+ *   inbound?: Inbound,
+ *   outbound?: Outbound,
+ *   recordType?: string,
+ *   tags?: list<string>,
+ *   updatedAt?: string,
  *   webhookEventFailoverURL?: string|null,
- *   webhookEventURL?: string|null,
+ *   webhookEventURL?: string,
  *   webhookTimeoutSecs?: int|null,
  * }
  */

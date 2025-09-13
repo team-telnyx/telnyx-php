@@ -15,10 +15,10 @@ use Telnyx\Core\Contracts\BaseModel;
  * Consolidated filter parameter (deepObject style). Originally: filter[customer_reference][eq], filter[customer_reference][contains], filter[used_as_emergency], filter[street_address][contains], filter[address_book][eq].
  *
  * @phpstan-type filter_alias = array{
- *   addressBook?: AddressBook|null,
- *   customerReference?: string|null|UnionMember1,
- *   streetAddress?: StreetAddress|null,
- *   usedAsEmergency?: string|null,
+ *   addressBook?: AddressBook,
+ *   customerReference?: string|UnionMember1,
+ *   streetAddress?: StreetAddress,
+ *   usedAsEmergency?: string,
  * }
  */
 final class Filter implements BaseModel

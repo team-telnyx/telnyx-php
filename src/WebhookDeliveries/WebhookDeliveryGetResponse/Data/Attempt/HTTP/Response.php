@@ -13,7 +13,7 @@ use Telnyx\Core\Conversion\ListOf;
  * Response details, optional.
  *
  * @phpstan-type response_alias = array{
- *   body?: string|null, headers?: list<list<string>>|null, status?: int|null
+ *   body?: string, headers?: list<list<string>>, status?: int
  * }
  */
 final class Response implements BaseModel

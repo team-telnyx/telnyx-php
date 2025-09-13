@@ -12,10 +12,10 @@ use Telnyx\Messsages\RcsAgentMessage\Event;
 
 /**
  * @phpstan-type rcs_agent_message = array{
- *   contentMessage?: ContentMessage|null,
- *   event?: Event|null,
- *   expireTime?: \DateTimeInterface|null,
- *   ttl?: string|null,
+ *   contentMessage?: ContentMessage,
+ *   event?: Event,
+ *   expireTime?: \DateTimeInterface,
+ *   ttl?: string,
  * }
  */
 final class RcsAgentMessage implements BaseModel

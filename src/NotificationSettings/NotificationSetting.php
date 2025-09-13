@@ -12,16 +12,16 @@ use Telnyx\NotificationSettings\NotificationSetting\Status;
 
 /**
  * @phpstan-type notification_setting = array{
- *   id?: string|null,
- *   associatedRecordType?: string|null,
- *   associatedRecordTypeValue?: string|null,
- *   createdAt?: \DateTimeInterface|null,
- *   notificationChannelID?: string|null,
- *   notificationEventConditionID?: string|null,
- *   notificationProfileID?: string|null,
- *   parameters?: list<Parameter>|null,
- *   status?: value-of<Status>|null,
- *   updatedAt?: \DateTimeInterface|null,
+ *   id?: string,
+ *   associatedRecordType?: string,
+ *   associatedRecordTypeValue?: string,
+ *   createdAt?: \DateTimeInterface,
+ *   notificationChannelID?: string,
+ *   notificationEventConditionID?: string,
+ *   notificationProfileID?: string,
+ *   parameters?: list<Parameter>,
+ *   status?: value-of<Status>,
+ *   updatedAt?: \DateTimeInterface,
  * }
  */
 final class NotificationSetting implements BaseModel

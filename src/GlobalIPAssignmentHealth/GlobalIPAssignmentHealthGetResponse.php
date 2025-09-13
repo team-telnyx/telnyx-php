@@ -11,8 +11,12 @@ use Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthGetResponse\Data;
 
 /**
  * @phpstan-type global_ip_assignment_health_get_response = array{
- *   data?: list<Data>|null
+ *   data?: list<Data>
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class GlobalIPAssignmentHealthGetResponse implements BaseModel
 {

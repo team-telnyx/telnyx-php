@@ -10,9 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Reports\ReportListWdrsResponse\Data\Cost\Currency;
 
 /**
- * @phpstan-type cost_alias = array{
- *   amount?: string|null, currency?: value-of<Currency>|null
- * }
+ * @phpstan-type cost_alias = array{amount?: string, currency?: value-of<Currency>}
  */
 final class Cost implements BaseModel
 {

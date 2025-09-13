@@ -11,9 +11,7 @@ use Telnyx\Networks\InterfaceStatus;
 
 /**
   * @phpstan-type interface_alias = array{
-  *   name?: string|null,
-  *   networkID?: string|null,
-  *   status?: value-of<InterfaceStatus>|null,
+  *   name?: string, networkID?: string, status?: value-of<InterfaceStatus>
   * }
   * 
  */

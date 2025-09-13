@@ -18,15 +18,15 @@ use Telnyx\Porting\Events\EventListResponse\Data\PayloadStatus;
 
 /**
  * @phpstan-type data_alias = array{
- *   id?: string|null,
- *   availableNotificationMethods?: list<value-of<AvailableNotificationMethod>>|null,
- *   createdAt?: \DateTimeInterface|null,
- *   eventType?: value-of<EventType>|null,
- *   payload?: null|WebhookPortingOrderDeletedPayload|WebhookPortingOrderMessagingChangedPayload|WebhookPortingOrderStatusChangedPayload|WebhookPortingOrderNewCommentPayload|WebhookPortingOrderSplitPayload,
- *   payloadStatus?: value-of<PayloadStatus>|null,
- *   portingOrderID?: string|null,
- *   recordType?: string|null,
- *   updatedAt?: \DateTimeInterface|null,
+ *   id?: string,
+ *   availableNotificationMethods?: list<value-of<AvailableNotificationMethod>>,
+ *   createdAt?: \DateTimeInterface,
+ *   eventType?: value-of<EventType>,
+ *   payload?: WebhookPortingOrderDeletedPayload|WebhookPortingOrderMessagingChangedPayload|WebhookPortingOrderStatusChangedPayload|WebhookPortingOrderNewCommentPayload|WebhookPortingOrderSplitPayload,
+ *   payloadStatus?: value-of<PayloadStatus>,
+ *   portingOrderID?: string,
+ *   recordType?: string,
+ *   updatedAt?: \DateTimeInterface,
  * }
  */
 final class Data implements BaseModel

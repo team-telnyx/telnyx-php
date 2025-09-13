@@ -16,8 +16,8 @@ use Telnyx\Core\Contracts\BaseModel;
  *   countries: list<string>,
  *   name: string,
  *   recordType: value-of<RecordType>,
- *   createdAt?: string|null,
- *   updatedAt?: string|null,
+ *   createdAt?: string,
+ *   updatedAt?: string,
  * }
  */
 final class Data implements BaseModel

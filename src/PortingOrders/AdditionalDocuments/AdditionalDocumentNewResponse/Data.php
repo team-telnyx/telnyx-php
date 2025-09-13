@@ -11,15 +11,15 @@ use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentNewResponse\Data\
 
 /**
  * @phpstan-type data_alias = array{
- *   id?: string|null,
- *   contentType?: string|null,
- *   createdAt?: \DateTimeInterface|null,
- *   documentID?: string|null,
- *   documentType?: value-of<DocumentType>|null,
- *   filename?: string|null,
- *   portingOrderID?: string|null,
- *   recordType?: string|null,
- *   updatedAt?: \DateTimeInterface|null,
+ *   id?: string,
+ *   contentType?: string,
+ *   createdAt?: \DateTimeInterface,
+ *   documentID?: string,
+ *   documentType?: value-of<DocumentType>,
+ *   filename?: string,
+ *   portingOrderID?: string,
+ *   recordType?: string,
+ *   updatedAt?: \DateTimeInterface,
  * }
  */
 final class Data implements BaseModel

@@ -12,16 +12,16 @@ use Telnyx\Core\Contracts\BaseModel;
  * Optional configuration parameters to modify 'answering_machine_detection' performance.
  *
  * @phpstan-type answering_machine_detection_config = array{
- *   afterGreetingSilenceMillis?: int|null,
- *   betweenWordsSilenceMillis?: int|null,
- *   greetingDurationMillis?: int|null,
- *   greetingSilenceDurationMillis?: int|null,
- *   greetingTotalAnalysisTimeMillis?: int|null,
- *   initialSilenceMillis?: int|null,
- *   maximumNumberOfWords?: int|null,
- *   maximumWordLengthMillis?: int|null,
- *   silenceThreshold?: int|null,
- *   totalAnalysisTimeMillis?: int|null,
+ *   afterGreetingSilenceMillis?: int,
+ *   betweenWordsSilenceMillis?: int,
+ *   greetingDurationMillis?: int,
+ *   greetingSilenceDurationMillis?: int,
+ *   greetingTotalAnalysisTimeMillis?: int,
+ *   initialSilenceMillis?: int,
+ *   maximumNumberOfWords?: int,
+ *   maximumWordLengthMillis?: int,
+ *   silenceThreshold?: int,
+ *   totalAnalysisTimeMillis?: int,
  * }
  */
 final class AnsweringMachineDetectionConfig implements BaseModel

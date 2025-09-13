@@ -12,7 +12,7 @@ use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListParams\F
 /**
  * Consolidated filters parameter (deepObject style). Originally: filters[available_bandwidth][contains].
  *
- * @phpstan-type filters_alias = array{availableBandwidth?: int|null|Contains}
+ * @phpstan-type filters_alias = array{availableBandwidth?: int|Contains}
  */
 final class Filters implements BaseModel
 {

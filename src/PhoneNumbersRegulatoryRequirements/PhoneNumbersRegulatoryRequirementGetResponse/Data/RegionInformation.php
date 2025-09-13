@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type region_information = array{
- *   regionName?: string|null, regionType?: string|null
+ *   regionName?: string, regionType?: string
  * }
  */
 final class RegionInformation implements BaseModel

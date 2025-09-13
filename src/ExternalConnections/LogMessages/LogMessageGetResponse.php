@@ -10,9 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\ExternalConnections\LogMessages\LogMessageGetResponse\LogMessage;
 
 /**
- * @phpstan-type log_message_get_response = array{
- *   logMessages?: list<LogMessage>|null
- * }
+ * @phpstan-type log_message_get_response = array{logMessages?: list<LogMessage>}
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class LogMessageGetResponse implements BaseModel
 {

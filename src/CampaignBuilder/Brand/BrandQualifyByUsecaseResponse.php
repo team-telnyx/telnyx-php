@@ -10,14 +10,18 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type brand_qualify_by_usecase_response = array{
- *   annualFee?: float|null,
- *   maxSubUsecases?: int|null,
- *   minSubUsecases?: int|null,
- *   mnoMetadata?: array<string, mixed>|null,
- *   monthlyFee?: float|null,
- *   quarterlyFee?: float|null,
- *   usecase?: string|null,
+ *   annualFee?: float,
+ *   maxSubUsecases?: int,
+ *   minSubUsecases?: int,
+ *   mnoMetadata?: array<string, mixed>,
+ *   monthlyFee?: float,
+ *   quarterlyFee?: float,
+ *   usecase?: string,
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class BrandQualifyByUsecaseResponse implements BaseModel
 {

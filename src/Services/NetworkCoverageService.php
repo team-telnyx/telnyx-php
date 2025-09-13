@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\NetworkCoverage\NetworkCoverageListParams;
 use Telnyx\NetworkCoverage\NetworkCoverageListParams\Filter;
 use Telnyx\NetworkCoverage\NetworkCoverageListParams\Filters;
@@ -30,6 +31,8 @@ final class NetworkCoverageService implements NetworkCoverageContract
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[location.region], filter[location.site], filter[location.pop], filter[location.code]
      * @param Filters $filters Consolidated filters parameter (deepObject style). Originally: filters[available_services][contains]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     *
+     * @return NetworkCoverageListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,

@@ -10,8 +10,12 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type action_send_sip_info_response = array{
- *   data?: CallControlCommandResult|null
+ *   data?: CallControlCommandResult
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class ActionSendSipInfoResponse implements BaseModel
 {

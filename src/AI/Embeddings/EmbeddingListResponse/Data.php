@@ -16,8 +16,8 @@ use Telnyx\Core\Contracts\BaseModel;
  *   taskID: string,
  *   taskName: string,
  *   userID: string,
- *   bucket?: string|null,
- *   finishedAt?: \DateTimeInterface|null,
+ *   bucket?: string,
+ *   finishedAt?: \DateTimeInterface,
  * }
  */
 final class Data implements BaseModel

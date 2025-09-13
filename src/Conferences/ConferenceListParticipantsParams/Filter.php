@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * Consolidated filter parameter (deepObject style). Originally: filter[muted], filter[on_hold], filter[whispering].
  *
  * @phpstan-type filter_alias = array{
- *   muted?: bool|null, onHold?: bool|null, whispering?: bool|null
+ *   muted?: bool, onHold?: bool, whispering?: bool
  * }
  */
 final class Filter implements BaseModel

@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type activation_window = array{
- *   endAt?: \DateTimeInterface|null, startAt?: \DateTimeInterface|null
+ *   endAt?: \DateTimeInterface, startAt?: \DateTimeInterface
  * }
  */
 final class ActivationWindow implements BaseModel

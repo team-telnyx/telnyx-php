@@ -11,19 +11,19 @@ use Telnyx\NumberOrders\NumberOrderWithPhoneNumbers\Status;
 
 /**
  * @phpstan-type number_order_with_phone_numbers = array{
- *   id?: string|null,
- *   billingGroupID?: string|null,
- *   connectionID?: string|null,
- *   createdAt?: \DateTimeInterface|null,
- *   customerReference?: string|null,
- *   messagingProfileID?: string|null,
- *   phoneNumbers?: list<PhoneNumber>|null,
- *   phoneNumbersCount?: int|null,
- *   recordType?: string|null,
- *   requirementsMet?: bool|null,
- *   status?: value-of<Status>|null,
- *   subNumberOrdersIDs?: list<string>|null,
- *   updatedAt?: \DateTimeInterface|null,
+ *   id?: string,
+ *   billingGroupID?: string,
+ *   connectionID?: string,
+ *   createdAt?: \DateTimeInterface,
+ *   customerReference?: string,
+ *   messagingProfileID?: string,
+ *   phoneNumbers?: list<PhoneNumber>,
+ *   phoneNumbersCount?: int,
+ *   recordType?: string,
+ *   requirementsMet?: bool,
+ *   status?: value-of<Status>,
+ *   subNumberOrdersIDs?: list<string>,
+ *   updatedAt?: \DateTimeInterface,
  * }
  */
 final class NumberOrderWithPhoneNumbers implements BaseModel

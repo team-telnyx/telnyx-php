@@ -12,11 +12,11 @@ use Telnyx\PhoneNumbersRegulatoryRequirements\PhoneNumbersRegulatoryRequirementG
 
 /**
  * @phpstan-type data_alias = array{
- *   phoneNumber?: string|null,
- *   phoneNumberType?: string|null,
- *   recordType?: string|null,
- *   regionInformation?: list<RegionInformation>|null,
- *   regulatoryRequirements?: list<RegulatoryRequirement>|null,
+ *   phoneNumber?: string,
+ *   phoneNumberType?: string,
+ *   recordType?: string,
+ *   regionInformation?: list<RegionInformation>,
+ *   regulatoryRequirements?: list<RegulatoryRequirement>,
  * }
  */
 final class Data implements BaseModel

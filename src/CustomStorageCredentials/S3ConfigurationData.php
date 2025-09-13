@@ -10,10 +10,10 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type s3_configuration_data = array{
- *   awsAccessKeyID?: string|null,
- *   awsSecretAccessKey?: string|null,
- *   bucket?: string|null,
- *   region?: string|null,
+ *   awsAccessKeyID?: string,
+ *   awsSecretAccessKey?: string,
+ *   bucket?: string,
+ *   region?: string,
  * }
  */
 final class S3ConfigurationData implements BaseModel

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PrivateWirelessGateways\PrivateWirelessGatewayCreateParams;
 use Telnyx\PrivateWirelessGateways\PrivateWirelessGatewayDeleteResponse;
 use Telnyx\PrivateWirelessGateways\PrivateWirelessGatewayGetResponse;
@@ -31,6 +32,8 @@ final class PrivateWirelessGatewaysService implements PrivateWirelessGatewaysCon
      * @param string $name the private wireless gateway name
      * @param string $networkID the identification of the related network resource
      * @param string $regionCode The code of the region where the private wireless gateway will be assigned. A list of available regions can be found at the regions endpoint
+     *
+     * @return PrivateWirelessGatewayNewResponse<HasRawResponse>
      */
     public function create(
         $name,
@@ -57,6 +60,8 @@ final class PrivateWirelessGatewaysService implements PrivateWirelessGatewaysCon
      * @api
      *
      * Retrieve information about a Private Wireless Gateway.
+     *
+     * @return PrivateWirelessGatewayGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -83,6 +88,8 @@ final class PrivateWirelessGatewaysService implements PrivateWirelessGatewaysCon
      * @param string $filterUpdatedAt when the Private Wireless Gateway was last updated
      * @param int $pageNumber the page number to load
      * @param int $pageSize the size of the page
+     *
+     * @return PrivateWirelessGatewayListResponse<HasRawResponse>
      */
     public function list(
         $filterCreatedAt = omit,
@@ -121,6 +128,8 @@ final class PrivateWirelessGatewaysService implements PrivateWirelessGatewaysCon
      * @api
      *
      * Deletes the Private Wireless Gateway.
+     *
+     * @return PrivateWirelessGatewayDeleteResponse<HasRawResponse>
      */
     public function delete(
         string $id,

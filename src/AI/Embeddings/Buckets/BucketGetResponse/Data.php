@@ -13,9 +13,9 @@ use Telnyx\Core\Contracts\BaseModel;
  *   createdAt: \DateTimeInterface,
  *   filename: string,
  *   status: string,
- *   errorReason?: string|null,
- *   lastEmbeddedAt?: \DateTimeInterface|null,
- *   updatedAt?: \DateTimeInterface|null,
+ *   errorReason?: string,
+ *   lastEmbeddedAt?: \DateTimeInterface,
+ *   updatedAt?: \DateTimeInterface,
  * }
  */
 final class Data implements BaseModel

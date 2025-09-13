@@ -11,8 +11,12 @@ use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderValidateCodesRe
 
 /**
  * @phpstan-type messaging_hosted_number_order_validate_codes_response = array{
- *   data?: Data|null
+ *   data?: Data
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class MessagingHostedNumberOrderValidateCodesResponse implements BaseModel
 {

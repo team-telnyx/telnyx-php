@@ -13,9 +13,7 @@ use Telnyx\Messages\MessageCancelScheduledResponse\CostBreakdown\Rate;
 /**
  * Detailed breakdown of the message cost components.
  *
- * @phpstan-type cost_breakdown = array{
- *   carrierFee?: CarrierFee|null, rate?: Rate|null
- * }
+ * @phpstan-type cost_breakdown = array{carrierFee?: CarrierFee, rate?: Rate}
  */
 final class CostBreakdown implements BaseModel
 {

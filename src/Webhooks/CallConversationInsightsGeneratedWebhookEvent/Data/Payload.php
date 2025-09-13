@@ -12,14 +12,14 @@ use Telnyx\Webhooks\CallConversationInsightsGeneratedWebhookEvent\Data\Payload\R
 
 /**
  * @phpstan-type payload_alias = array{
- *   callControlID?: string|null,
- *   callLegID?: string|null,
- *   callSessionID?: string|null,
- *   callingPartyType?: value-of<CallingPartyType>|null,
- *   clientState?: string|null,
- *   connectionID?: string|null,
- *   insightGroupID?: string|null,
- *   results?: list<Result>|null,
+ *   callControlID?: string,
+ *   callLegID?: string,
+ *   callSessionID?: string,
+ *   callingPartyType?: value-of<CallingPartyType>,
+ *   clientState?: string,
+ *   connectionID?: string,
+ *   insightGroupID?: string,
+ *   results?: list<Result>,
  * }
  */
 final class Payload implements BaseModel

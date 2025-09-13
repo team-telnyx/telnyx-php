@@ -10,11 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type call_alias = array{
- *   appName?: string|null,
- *   codeLength?: int|null,
- *   defaultVerificationTimeoutSecs?: int|null,
- *   messagingTemplateID?: string|null,
- *   whitelistedDestinations?: list<string>|null,
+ *   appName?: string,
+ *   codeLength?: int,
+ *   defaultVerificationTimeoutSecs?: int,
+ *   messagingTemplateID?: string,
+ *   whitelistedDestinations?: list<string>,
  * }
  */
 final class Call implements BaseModel

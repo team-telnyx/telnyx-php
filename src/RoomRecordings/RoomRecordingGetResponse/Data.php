@@ -12,22 +12,22 @@ use Telnyx\RoomRecordings\RoomRecordingGetResponse\Data\Type;
 
 /**
  * @phpstan-type data_alias = array{
- *   id?: string|null,
- *   codec?: string|null,
- *   completedAt?: \DateTimeInterface|null,
- *   createdAt?: \DateTimeInterface|null,
- *   downloadURL?: string|null,
- *   durationSecs?: int|null,
- *   endedAt?: \DateTimeInterface|null,
- *   participantID?: string|null,
- *   recordType?: string|null,
- *   roomID?: string|null,
- *   sessionID?: string|null,
- *   sizeMB?: float|null,
- *   startedAt?: \DateTimeInterface|null,
- *   status?: value-of<Status>|null,
- *   type?: value-of<Type>|null,
- *   updatedAt?: \DateTimeInterface|null,
+ *   id?: string,
+ *   codec?: string,
+ *   completedAt?: \DateTimeInterface,
+ *   createdAt?: \DateTimeInterface,
+ *   downloadURL?: string,
+ *   durationSecs?: int,
+ *   endedAt?: \DateTimeInterface,
+ *   participantID?: string,
+ *   recordType?: string,
+ *   roomID?: string,
+ *   sessionID?: string,
+ *   sizeMB?: float,
+ *   startedAt?: \DateTimeInterface,
+ *   status?: value-of<Status>,
+ *   type?: value-of<Type>,
+ *   updatedAt?: \DateTimeInterface,
  * }
  */
 final class Data implements BaseModel

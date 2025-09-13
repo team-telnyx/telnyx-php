@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Portouts;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Portouts\SupportingDocuments\SupportingDocumentCreateParams;
 use Telnyx\Portouts\SupportingDocuments\SupportingDocumentCreateParams\Document;
 use Telnyx\Portouts\SupportingDocuments\SupportingDocumentListResponse;
@@ -27,6 +28,8 @@ final class SupportingDocumentsService implements SupportingDocumentsContract
      * Creates a list of supporting documents on a portout request.
      *
      * @param list<Document> $documents List of supporting documents parameters
+     *
+     * @return SupportingDocumentNewResponse<HasRawResponse>
      */
     public function create(
         string $id,
@@ -52,6 +55,8 @@ final class SupportingDocumentsService implements SupportingDocumentsContract
      * @api
      *
      * List every supporting documents for a portout request.
+     *
+     * @return SupportingDocumentListResponse<HasRawResponse>
      */
     public function list(
         string $id,

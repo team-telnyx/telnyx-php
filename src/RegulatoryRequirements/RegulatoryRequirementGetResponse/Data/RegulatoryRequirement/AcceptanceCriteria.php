@@ -10,14 +10,14 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type acceptance_criteria = array{
- *   acceptableCharacters?: string|null,
- *   acceptableValues?: list<string>|null,
- *   caseSensitive?: string|null,
- *   localityLimit?: string|null,
- *   maxLength?: string|null,
- *   minLength?: string|null,
- *   regex?: string|null,
- *   timeLimit?: string|null,
+ *   acceptableCharacters?: string,
+ *   acceptableValues?: list<string>,
+ *   caseSensitive?: string,
+ *   localityLimit?: string,
+ *   maxLength?: string,
+ *   minLength?: string,
+ *   regex?: string,
+ *   timeLimit?: string,
  * }
  */
 final class AcceptanceCriteria implements BaseModel

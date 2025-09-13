@@ -11,16 +11,16 @@ use Telnyx\SubNumberOrders\SubNumberOrderUpdateRequirementGroupResponse\Data\Pho
 
 /**
  * @phpstan-type phone_number = array{
- *   id?: string|null,
- *   bundleID?: string|null,
- *   countryCode?: string|null,
- *   phoneNumber?: string|null,
- *   phoneNumberType?: string|null,
- *   recordType?: string|null,
- *   regulatoryRequirements?: list<RegulatoryRequirement>|null,
- *   requirementsMet?: bool|null,
- *   requirementsStatus?: string|null,
- *   status?: string|null,
+ *   id?: string,
+ *   bundleID?: string,
+ *   countryCode?: string,
+ *   phoneNumber?: string,
+ *   phoneNumberType?: string,
+ *   recordType?: string,
+ *   regulatoryRequirements?: list<RegulatoryRequirement>,
+ *   requirementsMet?: bool,
+ *   requirementsStatus?: string,
+ *   status?: string,
  * }
  */
 final class PhoneNumber implements BaseModel

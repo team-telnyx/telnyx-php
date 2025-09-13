@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type created_at = array{gte?: string|null, lte?: string|null}
+ * @phpstan-type created_at = array{gte?: string, lte?: string}
  */
 final class CreatedAt implements BaseModel
 {

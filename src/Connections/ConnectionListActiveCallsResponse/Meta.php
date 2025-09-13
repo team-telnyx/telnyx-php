@@ -11,10 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type meta_alias = array{
- *   cursors?: Cursors|null,
- *   next?: string|null,
- *   previous?: string|null,
- *   totalItems?: int|null,
+ *   cursors?: Cursors, next?: string, previous?: string, totalItems?: int
  * }
  */
 final class Meta implements BaseModel

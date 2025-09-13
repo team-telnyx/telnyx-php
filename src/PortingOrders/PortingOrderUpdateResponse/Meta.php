@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type meta_alias = array{phoneNumbersURL?: string|null}
+ * @phpstan-type meta_alias = array{phoneNumbersURL?: string}
  */
 final class Meta implements BaseModel
 {

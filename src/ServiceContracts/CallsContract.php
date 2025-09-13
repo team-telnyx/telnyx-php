@@ -29,6 +29,7 @@ use Telnyx\Calls\StreamBidirectionalCodec;
 use Telnyx\Calls\StreamBidirectionalMode;
 use Telnyx\Calls\StreamBidirectionalTargetLegs;
 use Telnyx\Calls\StreamCodec;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 
 use const Telnyx\Core\OMIT as omit;
@@ -88,6 +89,8 @@ interface CallsContract
      * @param TranscriptionStartRequest $transcriptionConfig
      * @param string $webhookURL use this field to override the URL for which Telnyx will send subsequent webhooks to for this call
      * @param WebhookURLMethod|value-of<WebhookURLMethod> $webhookURLMethod HTTP request type used for `webhook_url`
+     *
+     * @return CallDialResponse<HasRawResponse>
      */
     public function dial(
         $connectionID,
@@ -145,6 +148,8 @@ interface CallsContract
 
     /**
      * @api
+     *
+     * @return CallGetStatusResponse<HasRawResponse>
      */
     public function retrieveStatus(
         string $callControlID,

@@ -13,13 +13,13 @@ use Telnyx\Core\Contracts\BaseModel;
  * The settings associated with the authentication provider.
  *
  * @phpstan-type settings_alias = array{
- *   assertionConsumerServiceURL?: string|null,
- *   idpCertFingerprint?: string|null,
- *   idpCertFingerprintAlgorithm?: value-of<IdpCertFingerprintAlgorithm>|null,
- *   idpEntityID?: string|null,
- *   idpSSOTargetURL?: string|null,
- *   nameIdentifierFormat?: string|null,
- *   serviceProviderEntityID?: string|null,
+ *   assertionConsumerServiceURL?: string,
+ *   idpCertFingerprint?: string,
+ *   idpCertFingerprintAlgorithm?: value-of<IdpCertFingerprintAlgorithm>,
+ *   idpEntityID?: string,
+ *   idpSSOTargetURL?: string,
+ *   nameIdentifierFormat?: string,
+ *   serviceProviderEntityID?: string,
  * }
  */
 final class Settings implements BaseModel

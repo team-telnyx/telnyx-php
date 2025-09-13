@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Texml\Accounts;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\Accounts\CallsContract;
 use Telnyx\Services\Texml\Accounts\Calls\RecordingsJsonService;
@@ -74,10 +75,10 @@ final class CallsService implements CallsContract
      */
     public function __construct(private Client $client)
     {
-        $this->recordingsJson = new RecordingsJsonService($this->client);
-        $this->recordings = new RecordingsService($this->client);
-        $this->siprec = new SiprecService($this->client);
-        $this->streams = new StreamsService($this->client);
+        $this->recordingsJson = new RecordingsJsonService($client);
+        $this->recordings = new RecordingsService($client);
+        $this->siprec = new SiprecService($client);
+        $this->streams = new StreamsService($client);
     }
 
     /**
@@ -86,6 +87,8 @@ final class CallsService implements CallsContract
      * Returns an individual call identified by its CallSid. This endpoint is eventually consistent.
      *
      * @param string $accountSid
+     *
+     * @return CallGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $callSid,
@@ -122,6 +125,8 @@ final class CallsService implements CallsContract
      * @param StatusCallbackMethod|value-of<StatusCallbackMethod> $statusCallbackMethod HTTP request type used for `StatusCallback`
      * @param string $texml teXML to replace the current one with
      * @param string $url the URL where TeXML will make a request to retrieve a new set of TeXML instructions to continue the call flow
+     *
+     * @return CallUpdateResponse<HasRawResponse>
      */
     public function update(
         string $callSid,
@@ -202,6 +207,8 @@ final class CallsService implements CallsContract
      * @param Trim|value-of<Trim> $trim Whether to trim any leading and trailing silence from the recording. Defaults to `trim-silence`.
      * @param string $url the URL from which Telnyx will retrieve the TeXML call instructions
      * @param URLMethod|value-of<URLMethod> $urlMethod HTTP request type used for `Url`. The default value is inherited from TeXML Application setting.
+     *
+     * @return CallCallsResponse<HasRawResponse>
      */
     public function calls(
         string $accountSid,
@@ -306,6 +313,8 @@ final class CallsService implements CallsContract
      * @param string $startTimeLt Filters calls by their start date (before). Expected format is YYYY-MM-DD
      * @param Status|value-of<Status> $status filters calls by status
      * @param string $to filters calls by the to number
+     *
+     * @return CallGetCallsResponse<HasRawResponse>
      */
     public function retrieveCalls(
         string $accountSid,
@@ -366,6 +375,8 @@ final class CallsService implements CallsContract
      * @param string $statusCallback URL destination for Telnyx to send status callback events to for the siprec session
      * @param StatusCallbackMethod2|value-of<StatusCallbackMethod2> $statusCallbackMethod HTTP request type used for `StatusCallback`
      * @param Track|value-of<Track> $track The track to be used for siprec session. Can be `both_tracks`, `inbound_track` or `outbound_track`. Defaults to `both_tracks`.
+     *
+     * @return CallSiprecJsonResponse<HasRawResponse>
      */
     public function siprecJson(
         string $callSid,
@@ -425,6 +436,8 @@ final class CallsService implements CallsContract
      * @param StatusCallbackMethod3|value-of<StatusCallbackMethod3> $statusCallbackMethod HTTP method used to send status callbacks
      * @param Track1|value-of<Track1> $track Tracks to be included in the stream
      * @param string $url the destination WebSocket address where the stream is going to be delivered
+     *
+     * @return CallStreamsJsonResponse<HasRawResponse>
      */
     public function streamsJson(
         string $callSid,

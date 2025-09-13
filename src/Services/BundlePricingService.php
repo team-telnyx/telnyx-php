@@ -26,7 +26,7 @@ final class BundlePricingService implements BundlePricingContract
      */
     public function __construct(private Client $client)
     {
-        $this->billingBundles = new BillingBundlesService($this->client);
-        $this->userBundles = new UserBundlesService($this->client);
+        $this->billingBundles = new BillingBundlesService($client);
+        $this->userBundles = new UserBundlesService($client);
     }
 }

@@ -9,9 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type meta_alias = array{
- *   bestEffortResults?: int|null, totalResults?: int|null
- * }
+ * @phpstan-type meta_alias = array{bestEffortResults?: int, totalResults?: int}
  */
 final class Meta implements BaseModel
 {

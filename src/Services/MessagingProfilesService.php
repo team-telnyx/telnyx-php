@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\MessagingProfiles\MessagingProfileCreateParams;
 use Telnyx\MessagingProfiles\MessagingProfileCreateParams\WebhookAPIVersion;
 use Telnyx\MessagingProfiles\MessagingProfileDeleteResponse;
@@ -43,7 +44,7 @@ final class MessagingProfilesService implements MessagingProfilesContract
      */
     public function __construct(private Client $client)
     {
-        $this->autorespConfigs = new AutorespConfigsService($this->client);
+        $this->autorespConfigs = new AutorespConfigsService($client);
     }
 
     /**
@@ -74,6 +75,8 @@ final class MessagingProfilesService implements MessagingProfilesContract
      * @param WebhookAPIVersion|value-of<WebhookAPIVersion> $webhookAPIVersion determines which webhook format will be used, Telnyx API v1, v2, or a legacy 2010-04-01 format
      * @param string|null $webhookFailoverURL the failover URL where webhooks related to this messaging profile will be sent if sending to the primary URL fails
      * @param string|null $webhookURL the URL where webhooks related to this messaging profile will be sent
+     *
+     * @return MessagingProfileNewResponse<HasRawResponse>
      */
     public function create(
         $name,
@@ -124,6 +127,8 @@ final class MessagingProfilesService implements MessagingProfilesContract
      * @api
      *
      * Retrieve a messaging profile
+     *
+     * @return MessagingProfileGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -169,6 +174,8 @@ final class MessagingProfilesService implements MessagingProfilesContract
      * @param list<string> $whitelistedDestinations Destinations to which the messaging profile is allowed to send. The elements in the list must be valid ISO 3166-1 alpha-2 country codes. If set to `["*"]`, all destinations will be allowed.
      *
      * This field is required if the messaging profile doesn't have it defined yet.
+     *
+     * @return MessagingProfileUpdateResponse<HasRawResponse>
      */
     public function update(
         string $id,
@@ -225,6 +232,8 @@ final class MessagingProfilesService implements MessagingProfilesContract
      *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[name]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     *
+     * @return MessagingProfileListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,
@@ -250,6 +259,8 @@ final class MessagingProfilesService implements MessagingProfilesContract
      * @api
      *
      * Delete a messaging profile
+     *
+     * @return MessagingProfileDeleteResponse<HasRawResponse>
      */
     public function delete(
         string $id,
@@ -270,6 +281,8 @@ final class MessagingProfilesService implements MessagingProfilesContract
      * List phone numbers associated with a messaging profile
      *
      * @param Page1 $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     *
+     * @return MessagingProfileListPhoneNumbersResponse<HasRawResponse>
      */
     public function listPhoneNumbers(
         string $id,
@@ -297,6 +310,8 @@ final class MessagingProfilesService implements MessagingProfilesContract
      * List short codes associated with a messaging profile
      *
      * @param Page2 $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     *
+     * @return MessagingProfileListShortCodesResponse<HasRawResponse>
      */
     public function listShortCodes(
         string $id,

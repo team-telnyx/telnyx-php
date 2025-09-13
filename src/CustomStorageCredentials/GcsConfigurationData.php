@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type gcs_configuration_data = array{
- *   bucket?: string|null, credentials?: string|null
+ *   bucket?: string, credentials?: string
  * }
  */
 final class GcsConfigurationData implements BaseModel

@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type location_id = array{eq?: string|null}
+ * @phpstan-type location_id = array{eq?: string}
  */
 final class LocationID implements BaseModel
 {

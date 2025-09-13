@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Reports;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReportCreateParams;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReportCreateParams\AggregationType;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReportDeleteResponse;
@@ -37,6 +38,8 @@ final class MdrUsageReportsService implements MdrUsageReportsContract
      * @param \DateTimeInterface $endDate
      * @param \DateTimeInterface $startDate
      * @param string $profiles
+     *
+     * @return MdrUsageReportNewResponse<HasRawResponse>
      */
     public function create(
         $aggregationType,
@@ -70,6 +73,8 @@ final class MdrUsageReportsService implements MdrUsageReportsContract
      * @api
      *
      * Fetch a single messaging usage report by id
+     *
+     * @return MdrUsageReportGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -90,6 +95,8 @@ final class MdrUsageReportsService implements MdrUsageReportsContract
      * Fetch all messaging usage reports. Usage reports are aggregated messaging data for specified time period and breakdown
      *
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     *
+     * @return MdrUsageReportListResponse<HasRawResponse>
      */
     public function list(
         $page = omit,
@@ -114,6 +121,8 @@ final class MdrUsageReportsService implements MdrUsageReportsContract
      * @api
      *
      * Delete messaging usage report by id
+     *
+     * @return MdrUsageReportDeleteResponse<HasRawResponse>
      */
     public function delete(
         string $id,
@@ -137,6 +146,8 @@ final class MdrUsageReportsService implements MdrUsageReportsContract
      * @param \DateTimeInterface $endDate
      * @param list<string> $profiles
      * @param \DateTimeInterface $startDate
+     *
+     * @return MdrUsageReportFetchSyncResponse<HasRawResponse>
      */
     public function fetchSync(
         $aggregationType,
