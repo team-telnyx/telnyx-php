@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Storage\Buckets;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Storage\Buckets\UsageContract;
@@ -28,14 +29,35 @@ final class UsageService implements UsageContract
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[start_time], filter[end_time]
      *
      * @return UsageGetAPIUsageResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function getAPIUsage(
         string $bucketName,
         $filter,
         ?RequestOptions $requestOptions = null
     ): UsageGetAPIUsageResponse {
+        $params = ['filter' => $filter];
+
+        return $this->getAPIUsageRaw($bucketName, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return UsageGetAPIUsageResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function getAPIUsageRaw(
+        string $bucketName,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): UsageGetAPIUsageResponse {
         [$parsed, $options] = UsageGetAPIUsageParams::parseRequest(
-            ['filter' => $filter],
+            $params,
             $requestOptions
         );
 
@@ -55,9 +77,28 @@ final class UsageService implements UsageContract
      * Returns the amount of storage space and number of files a bucket takes up.
      *
      * @return UsageGetBucketUsageResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function getBucketUsage(
         string $bucketName,
+        ?RequestOptions $requestOptions = null
+    ): UsageGetBucketUsageResponse {
+        $params = [];
+
+        return $this->getBucketUsageRaw($bucketName, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return UsageGetBucketUsageResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function getBucketUsageRaw(
+        string $bucketName,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): UsageGetBucketUsageResponse {
         // @phpstan-ignore-next-line;

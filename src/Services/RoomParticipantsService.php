@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\RoomParticipants\RoomParticipantGetResponse;
@@ -29,10 +30,29 @@ final class RoomParticipantsService implements RoomParticipantsContract
      * View a room participant.
      *
      * @return RoomParticipantGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $roomParticipantID,
         ?RequestOptions $requestOptions = null
+    ): RoomParticipantGetResponse {
+        $params = [];
+
+        return $this->retrieveRaw($roomParticipantID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return RoomParticipantGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $roomParticipantID,
+        mixed $params,
+        ?RequestOptions $requestOptions = null,
     ): RoomParticipantGetResponse {
         // @phpstan-ignore-next-line;
         return $this->client->request(
@@ -52,14 +72,34 @@ final class RoomParticipantsService implements RoomParticipantsContract
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @return RoomParticipantListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
         $page = omit,
         ?RequestOptions $requestOptions = null
     ): RoomParticipantListResponse {
+        $params = ['filter' => $filter, 'page' => $page];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return RoomParticipantListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): RoomParticipantListResponse {
         [$parsed, $options] = RoomParticipantListParams::parseRequest(
-            ['filter' => $filter, 'page' => $page],
+            $params,
             $requestOptions
         );
 

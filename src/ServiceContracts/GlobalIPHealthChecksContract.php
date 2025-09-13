@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckDeleteResponse;
 use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckGetResponse;
@@ -24,6 +25,8 @@ interface GlobalIPHealthChecksContract
      * @param string $healthCheckType the Global IP health check type
      *
      * @return GlobalIPHealthCheckNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $globalIPID = omit,
@@ -35,7 +38,23 @@ interface GlobalIPHealthChecksContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return GlobalIPHealthCheckNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): GlobalIPHealthCheckNewResponse;
+
+    /**
+     * @api
+     *
      * @return GlobalIPHealthCheckGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
@@ -45,9 +64,24 @@ interface GlobalIPHealthChecksContract
     /**
      * @api
      *
+     * @return GlobalIPHealthCheckGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        mixed $params,
+        ?RequestOptions $requestOptions = null
+    ): GlobalIPHealthCheckGetResponse;
+
+    /**
+     * @api
+     *
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
      * @return GlobalIPHealthCheckListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $page = omit,
@@ -57,10 +91,39 @@ interface GlobalIPHealthChecksContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return GlobalIPHealthCheckListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): GlobalIPHealthCheckListResponse;
+
+    /**
+     * @api
+     *
      * @return GlobalIPHealthCheckDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function delete(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): GlobalIPHealthCheckDeleteResponse;
+
+    /**
+     * @api
+     *
+     * @return GlobalIPHealthCheckDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): GlobalIPHealthCheckDeleteResponse;
 }

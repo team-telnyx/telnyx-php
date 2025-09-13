@@ -15,6 +15,7 @@ use Telnyx\AI\Assistants\ScheduledEvents\ScheduledEventRetrieveParams;
 use Telnyx\AI\Assistants\ScheduledEvents\ScheduledPhoneCallEventResponse;
 use Telnyx\AI\Assistants\ScheduledEvents\ScheduledSMSEventResponse;
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\ScheduledEventsContract;
@@ -40,6 +41,8 @@ final class ScheduledEventsService implements ScheduledEventsContract
      * @param array<string,
      * string|int|bool,> $conversationMetadata Metadata associated with the conversation. Telnyx provides several pieces of metadata, but customers can also add their own.
      * @param string $text Required for sms scheduled events. The text to be sent to the end user.
+     *
+     * @throws APIException
      */
     public function create(
         string $assistantID,
@@ -51,16 +54,33 @@ final class ScheduledEventsService implements ScheduledEventsContract
         $text = omit,
         ?RequestOptions $requestOptions = null,
     ): ScheduledPhoneCallEventResponse|ScheduledSMSEventResponse {
+        $params = [
+            'scheduledAtFixedDatetime' => $scheduledAtFixedDatetime,
+            'telnyxAgentTarget' => $telnyxAgentTarget,
+            'telnyxConversationChannel' => $telnyxConversationChannel,
+            'telnyxEndUserTarget' => $telnyxEndUserTarget,
+            'conversationMetadata' => $conversationMetadata,
+            'text' => $text,
+        ];
+
+        return $this->createRaw($assistantID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        string $assistantID,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): ScheduledPhoneCallEventResponse|ScheduledSMSEventResponse {
         [$parsed, $options] = ScheduledEventCreateParams::parseRequest(
-            [
-                'scheduledAtFixedDatetime' => $scheduledAtFixedDatetime,
-                'telnyxAgentTarget' => $telnyxAgentTarget,
-                'telnyxConversationChannel' => $telnyxConversationChannel,
-                'telnyxEndUserTarget' => $telnyxEndUserTarget,
-                'conversationMetadata' => $conversationMetadata,
-                'text' => $text,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -79,14 +99,33 @@ final class ScheduledEventsService implements ScheduledEventsContract
      * Retrieve a scheduled event by event ID
      *
      * @param string $assistantID
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $eventID,
         $assistantID,
         ?RequestOptions $requestOptions = null
     ): ScheduledPhoneCallEventResponse|ScheduledSMSEventResponse {
+        $params = ['assistantID' => $assistantID];
+
+        return $this->retrieveRaw($eventID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $eventID,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): ScheduledPhoneCallEventResponse|ScheduledSMSEventResponse {
         [$parsed, $options] = ScheduledEventRetrieveParams::parseRequest(
-            ['assistantID' => $assistantID],
+            $params,
             $requestOptions
         );
         $assistantID = $parsed['assistantID'];
@@ -114,6 +153,8 @@ final class ScheduledEventsService implements ScheduledEventsContract
      * @param \DateTimeInterface $toDate
      *
      * @return ScheduledEventListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         string $assistantID,
@@ -123,14 +164,33 @@ final class ScheduledEventsService implements ScheduledEventsContract
         $toDate = omit,
         ?RequestOptions $requestOptions = null,
     ): ScheduledEventListResponse {
+        $params = [
+            'conversationChannel' => $conversationChannel,
+            'fromDate' => $fromDate,
+            'page' => $page,
+            'toDate' => $toDate,
+        ];
+
+        return $this->listRaw($assistantID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ScheduledEventListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        string $assistantID,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): ScheduledEventListResponse {
         [$parsed, $options] = ScheduledEventListParams::parseRequest(
-            [
-                'conversationChannel' => $conversationChannel,
-                'fromDate' => $fromDate,
-                'page' => $page,
-                'toDate' => $toDate,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -149,14 +209,33 @@ final class ScheduledEventsService implements ScheduledEventsContract
      * If the event is pending, this will cancel the event. Otherwise, this will simply remove the record of the event.
      *
      * @param string $assistantID
+     *
+     * @throws APIException
      */
     public function delete(
         string $eventID,
         $assistantID,
         ?RequestOptions $requestOptions = null
     ): mixed {
+        $params = ['assistantID' => $assistantID];
+
+        return $this->deleteRaw($eventID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $eventID,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): mixed {
         [$parsed, $options] = ScheduledEventDeleteParams::parseRequest(
-            ['assistantID' => $assistantID],
+            $params,
             $requestOptions
         );
         $assistantID = $parsed['assistantID'];

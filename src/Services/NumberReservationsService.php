@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\NumberReservations\NumberReservationCreateParams;
 use Telnyx\NumberReservations\NumberReservationGetResponse;
@@ -44,18 +45,37 @@ final class NumberReservationsService implements NumberReservationsContract
      * @param list<ReservedPhoneNumber> $phoneNumbers
      *
      * @return NumberReservationNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $customerReference = omit,
         $phoneNumbers = omit,
         ?RequestOptions $requestOptions = null,
     ): NumberReservationNewResponse {
+        $params = [
+            'customerReference' => $customerReference, 'phoneNumbers' => $phoneNumbers,
+        ];
+
+        return $this->createRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return NumberReservationNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): NumberReservationNewResponse {
         [$parsed, $options] = NumberReservationCreateParams::parseRequest(
-            [
-                'customerReference' => $customerReference,
-                'phoneNumbers' => $phoneNumbers,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -74,10 +94,29 @@ final class NumberReservationsService implements NumberReservationsContract
      * Gets a single phone number reservation.
      *
      * @return NumberReservationGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $numberReservationID,
         ?RequestOptions $requestOptions = null
+    ): NumberReservationGetResponse {
+        $params = [];
+
+        return $this->retrieveRaw($numberReservationID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return NumberReservationGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $numberReservationID,
+        mixed $params,
+        ?RequestOptions $requestOptions = null,
     ): NumberReservationGetResponse {
         // @phpstan-ignore-next-line;
         return $this->client->request(
@@ -97,14 +136,34 @@ final class NumberReservationsService implements NumberReservationsContract
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @return NumberReservationListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
         $page = omit,
         ?RequestOptions $requestOptions = null
     ): NumberReservationListResponse {
+        $params = ['filter' => $filter, 'page' => $page];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return NumberReservationListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): NumberReservationListResponse {
         [$parsed, $options] = NumberReservationListParams::parseRequest(
-            ['filter' => $filter, 'page' => $page],
+            $params,
             $requestOptions
         );
 

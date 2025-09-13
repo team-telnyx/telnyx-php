@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Texml;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\CallsContract;
@@ -50,6 +51,8 @@ final class CallsService implements CallsContract
      * @param string $url the URL where TeXML will make a request to retrieve a new set of TeXML instructions to continue the call flow
      *
      * @return CallUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function update(
         string $callSid,
@@ -63,18 +66,37 @@ final class CallsService implements CallsContract
         $url = omit,
         ?RequestOptions $requestOptions = null,
     ): CallUpdateResponse {
+        $params = [
+            'fallbackMethod' => $fallbackMethod,
+            'fallbackURL' => $fallbackURL,
+            'method' => $method,
+            'status' => $status,
+            'statusCallback' => $statusCallback,
+            'statusCallbackMethod' => $statusCallbackMethod,
+            'texml' => $texml,
+            'url' => $url,
+        ];
+
+        return $this->updateRaw($callSid, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return CallUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $callSid,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): CallUpdateResponse {
         [$parsed, $options] = CallUpdateParams::parseRequest(
-            [
-                'fallbackMethod' => $fallbackMethod,
-                'fallbackURL' => $fallbackURL,
-                'method' => $method,
-                'status' => $status,
-                'statusCallback' => $statusCallback,
-                'statusCallbackMethod' => $statusCallbackMethod,
-                'texml' => $texml,
-                'url' => $url,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -125,6 +147,8 @@ final class CallsService implements CallsContract
      * @param URLMethod|value-of<URLMethod> $urlMethod HTTP request type used for `Url`. The default value is inherited from TeXML Application setting.
      *
      * @return CallInitiateResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function initiate(
         string $applicationID,
@@ -161,41 +185,60 @@ final class CallsService implements CallsContract
         $urlMethod = omit,
         ?RequestOptions $requestOptions = null,
     ): CallInitiateResponse {
+        $params = [
+            'from' => $from,
+            'to' => $to,
+            'asyncAmd' => $asyncAmd,
+            'asyncAmdStatusCallback' => $asyncAmdStatusCallback,
+            'asyncAmdStatusCallbackMethod' => $asyncAmdStatusCallbackMethod,
+            'callerID' => $callerID,
+            'cancelPlaybackOnDetectMessageEnd' => $cancelPlaybackOnDetectMessageEnd,
+            'cancelPlaybackOnMachineDetection' => $cancelPlaybackOnMachineDetection,
+            'detectionMode' => $detectionMode,
+            'fallbackURL' => $fallbackURL,
+            'machineDetection' => $machineDetection,
+            'machineDetectionSilenceTimeout' => $machineDetectionSilenceTimeout,
+            'machineDetectionSpeechEndThreshold' => $machineDetectionSpeechEndThreshold,
+            'machineDetectionSpeechThreshold' => $machineDetectionSpeechThreshold,
+            'machineDetectionTimeout' => $machineDetectionTimeout,
+            'preferredCodecs' => $preferredCodecs,
+            'record' => $record,
+            'recordingChannels' => $recordingChannels,
+            'recordingStatusCallback' => $recordingStatusCallback,
+            'recordingStatusCallbackEvent' => $recordingStatusCallbackEvent,
+            'recordingStatusCallbackMethod' => $recordingStatusCallbackMethod,
+            'recordingTimeout' => $recordingTimeout,
+            'recordingTrack' => $recordingTrack,
+            'sipAuthPassword' => $sipAuthPassword,
+            'sipAuthUsername' => $sipAuthUsername,
+            'statusCallback' => $statusCallback,
+            'statusCallbackEvent' => $statusCallbackEvent,
+            'statusCallbackMethod' => $statusCallbackMethod,
+            'trim' => $trim,
+            'url' => $url,
+            'urlMethod' => $urlMethod,
+        ];
+
+        return $this->initiateRaw($applicationID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return CallInitiateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function initiateRaw(
+        string $applicationID,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): CallInitiateResponse {
         [$parsed, $options] = CallInitiateParams::parseRequest(
-            [
-                'from' => $from,
-                'to' => $to,
-                'asyncAmd' => $asyncAmd,
-                'asyncAmdStatusCallback' => $asyncAmdStatusCallback,
-                'asyncAmdStatusCallbackMethod' => $asyncAmdStatusCallbackMethod,
-                'callerID' => $callerID,
-                'cancelPlaybackOnDetectMessageEnd' => $cancelPlaybackOnDetectMessageEnd,
-                'cancelPlaybackOnMachineDetection' => $cancelPlaybackOnMachineDetection,
-                'detectionMode' => $detectionMode,
-                'fallbackURL' => $fallbackURL,
-                'machineDetection' => $machineDetection,
-                'machineDetectionSilenceTimeout' => $machineDetectionSilenceTimeout,
-                'machineDetectionSpeechEndThreshold' => $machineDetectionSpeechEndThreshold,
-                'machineDetectionSpeechThreshold' => $machineDetectionSpeechThreshold,
-                'machineDetectionTimeout' => $machineDetectionTimeout,
-                'preferredCodecs' => $preferredCodecs,
-                'record' => $record,
-                'recordingChannels' => $recordingChannels,
-                'recordingStatusCallback' => $recordingStatusCallback,
-                'recordingStatusCallbackEvent' => $recordingStatusCallbackEvent,
-                'recordingStatusCallbackMethod' => $recordingStatusCallbackMethod,
-                'recordingTimeout' => $recordingTimeout,
-                'recordingTrack' => $recordingTrack,
-                'sipAuthPassword' => $sipAuthPassword,
-                'sipAuthUsername' => $sipAuthUsername,
-                'statusCallback' => $statusCallback,
-                'statusCallbackEvent' => $statusCallbackEvent,
-                'statusCallbackMethod' => $statusCallbackMethod,
-                'trim' => $trim,
-                'url' => $url,
-                'urlMethod' => $urlMethod,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Portouts;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Portouts\Events\EventGetResponse;
 use Telnyx\Portouts\Events\EventListParams;
@@ -29,9 +30,28 @@ final class EventsService implements EventsContract
      * Show a specific port-out event.
      *
      * @return EventGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): EventGetResponse {
+        $params = [];
+
+        return $this->retrieveRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return EventGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): EventGetResponse {
         // @phpstan-ignore-next-line;
@@ -52,14 +72,34 @@ final class EventsService implements EventsContract
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
      * @return EventListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
         $page = omit,
         ?RequestOptions $requestOptions = null
     ): EventListResponse {
+        $params = ['filter' => $filter, 'page' => $page];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return EventListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): EventListResponse {
         [$parsed, $options] = EventListParams::parseRequest(
-            ['filter' => $filter, 'page' => $page],
+            $params,
             $requestOptions
         );
 
@@ -77,9 +117,26 @@ final class EventsService implements EventsContract
      * @api
      *
      * Republish a specific port-out event.
+     *
+     * @throws APIException
      */
     public function republish(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): mixed {
+        $params = [];
+
+        return $this->republishRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @throws APIException
+     */
+    public function republishRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): mixed {
         // @phpstan-ignore-next-line;

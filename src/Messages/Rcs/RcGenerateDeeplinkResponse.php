@@ -11,7 +11,7 @@ use Telnyx\Messages\Rcs\RcGenerateDeeplinkResponse\Data;
 
 /**
  * @phpstan-type rc_generate_deeplink_response = array{data: Data}
- * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * When used in a response, this type parameter can define a $rawResponse property.
  * @template TRawResponse of object = object{}
  *
  * @mixin TRawResponse

@@ -31,6 +31,7 @@ use Telnyx\AI\Assistants\TransferTool;
 use Telnyx\AI\Assistants\VoiceSettings;
 use Telnyx\AI\Assistants\WebhookTool;
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\AssistantsContract;
@@ -105,6 +106,8 @@ final class AssistantsService implements AssistantsContract
      * @param VoiceSettings $voiceSettings
      *
      * @return AssistantNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $instructions,
@@ -125,26 +128,44 @@ final class AssistantsService implements AssistantsContract
         $voiceSettings = omit,
         ?RequestOptions $requestOptions = null,
     ): AssistantNewResponse {
+        $params = [
+            'instructions' => $instructions,
+            'model' => $model,
+            'name' => $name,
+            'description' => $description,
+            'dynamicVariables' => $dynamicVariables,
+            'dynamicVariablesWebhookURL' => $dynamicVariablesWebhookURL,
+            'enabledFeatures' => $enabledFeatures,
+            'greeting' => $greeting,
+            'insightSettings' => $insightSettings,
+            'llmAPIKeyRef' => $llmAPIKeyRef,
+            'messagingSettings' => $messagingSettings,
+            'privacySettings' => $privacySettings,
+            'telephonySettings' => $telephonySettings,
+            'tools' => $tools,
+            'transcription' => $transcription,
+            'voiceSettings' => $voiceSettings,
+        ];
+
+        return $this->createRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return AssistantNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): AssistantNewResponse {
         [$parsed, $options] = AssistantCreateParams::parseRequest(
-            [
-                'instructions' => $instructions,
-                'model' => $model,
-                'name' => $name,
-                'description' => $description,
-                'dynamicVariables' => $dynamicVariables,
-                'dynamicVariablesWebhookURL' => $dynamicVariablesWebhookURL,
-                'enabledFeatures' => $enabledFeatures,
-                'greeting' => $greeting,
-                'insightSettings' => $insightSettings,
-                'llmAPIKeyRef' => $llmAPIKeyRef,
-                'messagingSettings' => $messagingSettings,
-                'privacySettings' => $privacySettings,
-                'telephonySettings' => $telephonySettings,
-                'tools' => $tools,
-                'transcription' => $transcription,
-                'voiceSettings' => $voiceSettings,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -168,6 +189,8 @@ final class AssistantsService implements AssistantsContract
      * @param string $to
      *
      * @return AssistantGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $assistantID,
@@ -177,14 +200,33 @@ final class AssistantsService implements AssistantsContract
         $to = omit,
         ?RequestOptions $requestOptions = null,
     ): AssistantGetResponse {
+        $params = [
+            'callControlID' => $callControlID,
+            'fetchDynamicVariablesFromWebhook' => $fetchDynamicVariablesFromWebhook,
+            'from' => $from,
+            'to' => $to,
+        ];
+
+        return $this->retrieveRaw($assistantID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return AssistantGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $assistantID,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): AssistantGetResponse {
         [$parsed, $options] = AssistantRetrieveParams::parseRequest(
-            [
-                'callControlID' => $callControlID,
-                'fetchDynamicVariablesFromWebhook' => $fetchDynamicVariablesFromWebhook,
-                'from' => $from,
-                'to' => $to,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -220,6 +262,8 @@ final class AssistantsService implements AssistantsContract
      * @param list<WebhookTool|RetrievalTool|HandoffTool|HangupTool|TransferTool|SipReferTool|DtmfTool> $tools The tools that the assistant can use. These may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables)
      * @param TranscriptionSettings $transcription
      * @param VoiceSettings $voiceSettings
+     *
+     * @throws APIException
      */
     public function update(
         string $assistantID,
@@ -242,27 +286,44 @@ final class AssistantsService implements AssistantsContract
         $voiceSettings = omit,
         ?RequestOptions $requestOptions = null,
     ): mixed {
+        $params = [
+            'description' => $description,
+            'dynamicVariables' => $dynamicVariables,
+            'dynamicVariablesWebhookURL' => $dynamicVariablesWebhookURL,
+            'enabledFeatures' => $enabledFeatures,
+            'greeting' => $greeting,
+            'insightSettings' => $insightSettings,
+            'instructions' => $instructions,
+            'llmAPIKeyRef' => $llmAPIKeyRef,
+            'messagingSettings' => $messagingSettings,
+            'model' => $model,
+            'name' => $name,
+            'privacySettings' => $privacySettings,
+            'promoteToMain' => $promoteToMain,
+            'telephonySettings' => $telephonySettings,
+            'tools' => $tools,
+            'transcription' => $transcription,
+            'voiceSettings' => $voiceSettings,
+        ];
+
+        return $this->updateRaw($assistantID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $assistantID,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): mixed {
         [$parsed, $options] = AssistantUpdateParams::parseRequest(
-            [
-                'description' => $description,
-                'dynamicVariables' => $dynamicVariables,
-                'dynamicVariablesWebhookURL' => $dynamicVariablesWebhookURL,
-                'enabledFeatures' => $enabledFeatures,
-                'greeting' => $greeting,
-                'insightSettings' => $insightSettings,
-                'instructions' => $instructions,
-                'llmAPIKeyRef' => $llmAPIKeyRef,
-                'messagingSettings' => $messagingSettings,
-                'model' => $model,
-                'name' => $name,
-                'privacySettings' => $privacySettings,
-                'promoteToMain' => $promoteToMain,
-                'telephonySettings' => $telephonySettings,
-                'tools' => $tools,
-                'transcription' => $transcription,
-                'voiceSettings' => $voiceSettings,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -281,9 +342,27 @@ final class AssistantsService implements AssistantsContract
      * Retrieve a list of all AI Assistants configured by the user.
      *
      * @return AssistantsList<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(?RequestOptions $requestOptions = null): AssistantsList
     {
+        $params = [];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return AssistantsList<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        mixed $params,
+        ?RequestOptions $requestOptions = null
+    ): AssistantsList {
         // @phpstan-ignore-next-line;
         return $this->client->request(
             method: 'get',
@@ -299,9 +378,28 @@ final class AssistantsService implements AssistantsContract
      * Delete an AI Assistant by `assistant_id`.
      *
      * @return AssistantDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function delete(
         string $assistantID,
+        ?RequestOptions $requestOptions = null
+    ): AssistantDeleteResponse {
+        $params = [];
+
+        return $this->deleteRaw($assistantID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return AssistantDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $assistantID,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): AssistantDeleteResponse {
         // @phpstan-ignore-next-line;
@@ -323,6 +421,8 @@ final class AssistantsService implements AssistantsContract
      * @param string $name The optional display name of the user sending the message
      *
      * @return AssistantChatResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function chat(
         string $assistantID,
@@ -331,13 +431,32 @@ final class AssistantsService implements AssistantsContract
         $name = omit,
         ?RequestOptions $requestOptions = null,
     ): AssistantChatResponse {
+        $params = [
+            'content' => $content,
+            'conversationID' => $conversationID,
+            'name' => $name,
+        ];
+
+        return $this->chatRaw($assistantID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return AssistantChatResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function chatRaw(
+        string $assistantID,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): AssistantChatResponse {
         [$parsed, $options] = AssistantChatParams::parseRequest(
-            [
-                'content' => $content,
-                'conversationID' => $conversationID,
-                'name' => $name,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -356,9 +475,28 @@ final class AssistantsService implements AssistantsContract
      * Clone an existing assistant, excluding telephony and messaging settings.
      *
      * @return AssistantCloneResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function clone(
         string $assistantID,
+        ?RequestOptions $requestOptions = null
+    ): AssistantCloneResponse {
+        $params = [];
+
+        return $this->cloneRaw($assistantID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return AssistantCloneResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function cloneRaw(
+        string $assistantID,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): AssistantCloneResponse {
         // @phpstan-ignore-next-line;
@@ -374,9 +512,26 @@ final class AssistantsService implements AssistantsContract
      * @api
      *
      * Get an assistant texml by `assistant_id`.
+     *
+     * @throws APIException
      */
     public function getTexml(
         string $assistantID,
+        ?RequestOptions $requestOptions = null
+    ): string {
+        $params = [];
+
+        return $this->getTexmlRaw($assistantID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @throws APIException
+     */
+    public function getTexmlRaw(
+        string $assistantID,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): string {
         // @phpstan-ignore-next-line;
@@ -397,14 +552,34 @@ final class AssistantsService implements AssistantsContract
      * @param Provider|value-of<Provider> $provider the external provider to import assistants from
      *
      * @return AssistantsList<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function import(
         $apiKeyRef,
         $provider,
         ?RequestOptions $requestOptions = null
     ): AssistantsList {
+        $params = ['apiKeyRef' => $apiKeyRef, 'provider' => $provider];
+
+        return $this->importRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return AssistantsList<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function importRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): AssistantsList {
         [$parsed, $options] = AssistantImportParams::parseRequest(
-            ['apiKeyRef' => $apiKeyRef, 'provider' => $provider],
+            $params,
             $requestOptions
         );
 

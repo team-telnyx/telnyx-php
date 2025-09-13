@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\DocumentLinks\DocumentLinkListParams;
 use Telnyx\DocumentLinks\DocumentLinkListParams\Filter;
@@ -31,14 +32,34 @@ final class DocumentLinksService implements DocumentLinksContract
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @return DocumentLinkListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
         $page = omit,
         ?RequestOptions $requestOptions = null
     ): DocumentLinkListResponse {
+        $params = ['filter' => $filter, 'page' => $page];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return DocumentLinkListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): DocumentLinkListResponse {
         [$parsed, $options] = DocumentLinkListParams::parseRequest(
-            ['filter' => $filter, 'page' => $page],
+            $params,
             $requestOptions
         );
 

@@ -13,6 +13,7 @@ use Telnyx\AI\Clusters\ClusterListParams\Page;
 use Telnyx\AI\Clusters\ClusterListResponse;
 use Telnyx\AI\Clusters\ClusterRetrieveParams;
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\ClustersContract;
@@ -35,6 +36,8 @@ final class ClustersService implements ClustersContract
      * @param int $topNNodes The number of nodes in the cluster to return in the response. Nodes will be sorted by their centrality within the cluster.
      *
      * @return ClusterGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $taskID,
@@ -42,9 +45,30 @@ final class ClustersService implements ClustersContract
         $topNNodes = omit,
         ?RequestOptions $requestOptions = null,
     ): ClusterGetResponse {
+        $params = [
+            'showSubclusters' => $showSubclusters, 'topNNodes' => $topNNodes,
+        ];
+
+        return $this->retrieveRaw($taskID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ClusterGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $taskID,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): ClusterGetResponse {
         [$parsed, $options] = ClusterRetrieveParams::parseRequest(
-            ['showSubclusters' => $showSubclusters, 'topNNodes' => $topNNodes],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -65,13 +89,33 @@ final class ClustersService implements ClustersContract
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
      * @return ClusterListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $page = omit,
         ?RequestOptions $requestOptions = null
     ): ClusterListResponse {
+        $params = ['page' => $page];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ClusterListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): ClusterListResponse {
         [$parsed, $options] = ClusterListParams::parseRequest(
-            ['page' => $page],
+            $params,
             $requestOptions
         );
 
@@ -89,9 +133,26 @@ final class ClustersService implements ClustersContract
      * @api
      *
      * Delete a cluster
+     *
+     * @throws APIException
      */
     public function delete(
         string $taskID,
+        ?RequestOptions $requestOptions = null
+    ): mixed {
+        $params = [];
+
+        return $this->deleteRaw($taskID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $taskID,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): mixed {
         // @phpstan-ignore-next-line;
@@ -115,6 +176,8 @@ final class ClustersService implements ClustersContract
      * @param string $prefix prefix to filter whcih files in the buckets are included
      *
      * @return ClusterComputeResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function compute(
         $bucket,
@@ -124,15 +187,33 @@ final class ClustersService implements ClustersContract
         $prefix = omit,
         ?RequestOptions $requestOptions = null,
     ): ClusterComputeResponse {
+        $params = [
+            'bucket' => $bucket,
+            'files' => $files,
+            'minClusterSize' => $minClusterSize,
+            'minSubclusterSize' => $minSubclusterSize,
+            'prefix' => $prefix,
+        ];
+
+        return $this->computeRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ClusterComputeResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function computeRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): ClusterComputeResponse {
         [$parsed, $options] = ClusterComputeParams::parseRequest(
-            [
-                'bucket' => $bucket,
-                'files' => $files,
-                'minClusterSize' => $minClusterSize,
-                'minSubclusterSize' => $minSubclusterSize,
-                'prefix' => $prefix,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -151,14 +232,33 @@ final class ClustersService implements ClustersContract
      * Fetch a cluster visualization
      *
      * @param int $clusterID
+     *
+     * @throws APIException
      */
     public function fetchGraph(
         string $taskID,
         $clusterID = omit,
         ?RequestOptions $requestOptions = null
     ): mixed {
+        $params = ['clusterID' => $clusterID];
+
+        return $this->fetchGraphRaw($taskID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @throws APIException
+     */
+    public function fetchGraphRaw(
+        string $taskID,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): mixed {
         [$parsed, $options] = ClusterFetchGraphParams::parseRequest(
-            ['clusterID' => $clusterID],
+            $params,
             $requestOptions
         );
 

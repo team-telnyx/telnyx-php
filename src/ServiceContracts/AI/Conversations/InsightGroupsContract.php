@@ -7,6 +7,7 @@ namespace Telnyx\ServiceContracts\AI\Conversations;
 use Telnyx\AI\Conversations\InsightGroups\InsightGroupGetInsightGroupsResponse;
 use Telnyx\AI\Conversations\InsightGroups\InsightGroupRetrieveInsightGroupsParams\Page;
 use Telnyx\AI\Conversations\InsightGroups\InsightTemplateGroupDetail;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 
@@ -18,9 +19,24 @@ interface InsightGroupsContract
      * @api
      *
      * @return InsightTemplateGroupDetail<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $groupID,
+        ?RequestOptions $requestOptions = null
+    ): InsightTemplateGroupDetail;
+
+    /**
+     * @api
+     *
+     * @return InsightTemplateGroupDetail<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $groupID,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): InsightTemplateGroupDetail;
 
@@ -32,6 +48,8 @@ interface InsightGroupsContract
      * @param string $webhook
      *
      * @return InsightTemplateGroupDetail<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function update(
         string $groupID,
@@ -43,9 +61,37 @@ interface InsightGroupsContract
 
     /**
      * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return InsightTemplateGroupDetail<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $groupID,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): InsightTemplateGroupDetail;
+
+    /**
+     * @api
+     *
+     * @throws APIException
      */
     public function delete(
         string $groupID,
+        ?RequestOptions $requestOptions = null
+    ): mixed;
+
+    /**
+     * @api
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $groupID,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): mixed;
 
@@ -57,6 +103,8 @@ interface InsightGroupsContract
      * @param string $webhook
      *
      * @return InsightTemplateGroupDetail<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function insightGroups(
         $name,
@@ -68,12 +116,42 @@ interface InsightGroupsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return InsightTemplateGroupDetail<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function insightGroupsRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): InsightTemplateGroupDetail;
+
+    /**
+     * @api
+     *
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
      * @return InsightGroupGetInsightGroupsResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieveInsightGroups(
         $page = omit,
+        ?RequestOptions $requestOptions = null
+    ): InsightGroupGetInsightGroupsResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return InsightGroupGetInsightGroupsResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveInsightGroupsRaw(
+        array $params,
         ?RequestOptions $requestOptions = null
     ): InsightGroupGetInsightGroupsResponse;
 }

@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type telephony_credential_delete_response = array{
  *   data?: TelephonyCredential
  * }
- * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * When used in a response, this type parameter can define a $rawResponse property.
  * @template TRawResponse of object = object{}
  *
  * @mixin TRawResponse

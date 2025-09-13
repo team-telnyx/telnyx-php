@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\VerifyProfiles\VerifyProfileCreateParams\Call;
@@ -34,6 +35,8 @@ interface VerifyProfilesContract
      * @param string $webhookURL
      *
      * @return VerifyProfileData<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $name,
@@ -49,11 +52,40 @@ interface VerifyProfilesContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
      * @return VerifyProfileData<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): VerifyProfileData;
+
+    /**
+     * @api
+     *
+     * @return VerifyProfileData<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $verifyProfileID,
         ?RequestOptions $requestOptions = null
+    ): VerifyProfileData;
+
+    /**
+     * @api
+     *
+     * @return VerifyProfileData<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $verifyProfileID,
+        mixed $params,
+        ?RequestOptions $requestOptions = null,
     ): VerifyProfileData;
 
     /**
@@ -68,6 +100,8 @@ interface VerifyProfilesContract
      * @param string $webhookURL
      *
      * @return VerifyProfileData<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function update(
         string $verifyProfileID,
@@ -84,10 +118,27 @@ interface VerifyProfilesContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return VerifyProfileData<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $verifyProfileID,
+        array $params,
+        ?RequestOptions $requestOptions = null,
+    ): VerifyProfileData;
+
+    /**
+     * @api
+     *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[name]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @return VerifyProfileListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
@@ -98,7 +149,23 @@ interface VerifyProfilesContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return VerifyProfileListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): VerifyProfileListResponse;
+
+    /**
+     * @api
+     *
      * @return VerifyProfileData<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function delete(
         string $verifyProfileID,
@@ -108,9 +175,36 @@ interface VerifyProfilesContract
     /**
      * @api
      *
+     * @return VerifyProfileData<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $verifyProfileID,
+        mixed $params,
+        ?RequestOptions $requestOptions = null,
+    ): VerifyProfileData;
+
+    /**
+     * @api
+     *
      * @return VerifyProfileGetTemplatesResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieveTemplates(
+        ?RequestOptions $requestOptions = null
+    ): VerifyProfileGetTemplatesResponse;
+
+    /**
+     * @api
+     *
+     * @return VerifyProfileGetTemplatesResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveTemplatesRaw(
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): VerifyProfileGetTemplatesResponse;
 }

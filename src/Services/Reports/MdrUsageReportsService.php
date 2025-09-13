@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Reports;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReportCreateParams;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReportCreateParams\AggregationType;
@@ -40,6 +41,8 @@ final class MdrUsageReportsService implements MdrUsageReportsContract
      * @param string $profiles
      *
      * @return MdrUsageReportNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $aggregationType,
@@ -48,14 +51,32 @@ final class MdrUsageReportsService implements MdrUsageReportsContract
         $profiles = omit,
         ?RequestOptions $requestOptions = null,
     ): MdrUsageReportNewResponse {
+        $params = [
+            'aggregationType' => $aggregationType,
+            'endDate' => $endDate,
+            'startDate' => $startDate,
+            'profiles' => $profiles,
+        ];
+
+        return $this->createRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return MdrUsageReportNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): MdrUsageReportNewResponse {
         [$parsed, $options] = MdrUsageReportCreateParams::parseRequest(
-            [
-                'aggregationType' => $aggregationType,
-                'endDate' => $endDate,
-                'startDate' => $startDate,
-                'profiles' => $profiles,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -75,9 +96,28 @@ final class MdrUsageReportsService implements MdrUsageReportsContract
      * Fetch a single messaging usage report by id
      *
      * @return MdrUsageReportGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): MdrUsageReportGetResponse {
+        $params = [];
+
+        return $this->retrieveRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return MdrUsageReportGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): MdrUsageReportGetResponse {
         // @phpstan-ignore-next-line;
@@ -97,13 +137,33 @@ final class MdrUsageReportsService implements MdrUsageReportsContract
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
      * @return MdrUsageReportListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $page = omit,
         ?RequestOptions $requestOptions = null
     ): MdrUsageReportListResponse {
+        $params = ['page' => $page];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return MdrUsageReportListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): MdrUsageReportListResponse {
         [$parsed, $options] = MdrUsageReportListParams::parseRequest(
-            ['page' => $page],
+            $params,
             $requestOptions
         );
 
@@ -123,9 +183,28 @@ final class MdrUsageReportsService implements MdrUsageReportsContract
      * Delete messaging usage report by id
      *
      * @return MdrUsageReportDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function delete(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): MdrUsageReportDeleteResponse {
+        $params = [];
+
+        return $this->deleteRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return MdrUsageReportDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): MdrUsageReportDeleteResponse {
         // @phpstan-ignore-next-line;
@@ -148,6 +227,8 @@ final class MdrUsageReportsService implements MdrUsageReportsContract
      * @param \DateTimeInterface $startDate
      *
      * @return MdrUsageReportFetchSyncResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function fetchSync(
         $aggregationType,
@@ -156,14 +237,32 @@ final class MdrUsageReportsService implements MdrUsageReportsContract
         $startDate = omit,
         ?RequestOptions $requestOptions = null,
     ): MdrUsageReportFetchSyncResponse {
+        $params = [
+            'aggregationType' => $aggregationType,
+            'endDate' => $endDate,
+            'profiles' => $profiles,
+            'startDate' => $startDate,
+        ];
+
+        return $this->fetchSyncRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return MdrUsageReportFetchSyncResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function fetchSyncRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): MdrUsageReportFetchSyncResponse {
         [$parsed, $options] = MdrUsageReportFetchSyncParams::parseRequest(
-            [
-                'aggregationType' => $aggregationType,
-                'endDate' => $endDate,
-                'profiles' => $profiles,
-                'startDate' => $startDate,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;

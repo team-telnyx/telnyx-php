@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\Texml;
 
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\Texml\Calls\CallInitiateParams\AsyncAmdStatusCallbackMethod;
@@ -39,6 +40,8 @@ interface CallsContract
      * @param string $url the URL where TeXML will make a request to retrieve a new set of TeXML instructions to continue the call flow
      *
      * @return CallUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function update(
         string $callSid,
@@ -51,6 +54,21 @@ interface CallsContract
         $texml = omit,
         $url = omit,
         ?RequestOptions $requestOptions = null,
+    ): CallUpdateResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return CallUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $callSid,
+        array $params,
+        ?RequestOptions $requestOptions = null
     ): CallUpdateResponse;
 
     /**
@@ -89,6 +107,8 @@ interface CallsContract
      * @param URLMethod|value-of<URLMethod> $urlMethod HTTP request type used for `Url`. The default value is inherited from TeXML Application setting.
      *
      * @return CallInitiateResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function initiate(
         string $applicationID,
@@ -123,6 +143,21 @@ interface CallsContract
         $trim = omit,
         $url = omit,
         $urlMethod = omit,
+        ?RequestOptions $requestOptions = null,
+    ): CallInitiateResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return CallInitiateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function initiateRaw(
+        string $applicationID,
+        array $params,
         ?RequestOptions $requestOptions = null,
     ): CallInitiateResponse;
 }

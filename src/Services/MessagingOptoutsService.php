@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\MessagingOptouts\MessagingOptoutListParams;
 use Telnyx\MessagingOptouts\MessagingOptoutListParams\CreatedAt;
@@ -34,6 +35,8 @@ final class MessagingOptoutsService implements MessagingOptoutsContract
      * @param string $redactionEnabled If receiving address (+E.164 formatted phone number) should be redacted
      *
      * @return MessagingOptoutListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $createdAt = omit,
@@ -42,14 +45,32 @@ final class MessagingOptoutsService implements MessagingOptoutsContract
         $redactionEnabled = omit,
         ?RequestOptions $requestOptions = null,
     ): MessagingOptoutListResponse {
+        $params = [
+            'createdAt' => $createdAt,
+            'filter' => $filter,
+            'page' => $page,
+            'redactionEnabled' => $redactionEnabled,
+        ];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return MessagingOptoutListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): MessagingOptoutListResponse {
         [$parsed, $options] = MessagingOptoutListParams::parseRequest(
-            [
-                'createdAt' => $createdAt,
-                'filter' => $filter,
-                'page' => $page,
-                'redactionEnabled' => $redactionEnabled,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;

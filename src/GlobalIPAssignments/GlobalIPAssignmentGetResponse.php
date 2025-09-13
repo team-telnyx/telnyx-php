@@ -10,9 +10,9 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type global_ip_assignment_get_response = array{
- *   data?: STAINLESS_FIXME_global_ip_assignment
+ *   data?: global_ip_assignment
  * }
- * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * When used in a response, this type parameter can define a $rawResponse property.
  * @template TRawResponse of object = object{}
  *
  * @mixin TRawResponse

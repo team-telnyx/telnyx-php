@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Reports\ReportListMdrsParams\Direction;
 use Telnyx\Reports\ReportListMdrsParams\MessageType;
@@ -31,6 +32,8 @@ interface ReportsContract
      * @param Status|value-of<Status> $status Message status
      *
      * @return ReportListMdrsResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function listMdrs(
         $id = omit,
@@ -43,6 +46,20 @@ interface ReportsContract
         $startDate = omit,
         $status = omit,
         ?RequestOptions $requestOptions = null,
+    ): ReportListMdrsResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ReportListMdrsResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listMdrsRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
     ): ReportListMdrsResponse;
 
     /**
@@ -62,6 +79,8 @@ interface ReportsContract
      * @param string $startDate Start date
      *
      * @return ReportListWdrsResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function listWdrs(
         $id = omit,
@@ -77,5 +96,19 @@ interface ReportsContract
         $sort = omit,
         $startDate = omit,
         ?RequestOptions $requestOptions = null,
+    ): ReportListWdrsResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ReportListWdrsResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listWdrsRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
     ): ReportListWdrsResponse;
 }

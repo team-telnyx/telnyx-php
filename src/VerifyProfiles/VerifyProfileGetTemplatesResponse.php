@@ -13,7 +13,7 @@ use Telnyx\VerifyProfiles\VerifyProfileGetTemplatesResponse\Data;
  * A list of Verify profile message templates.
  *
  * @phpstan-type verify_profile_get_templates_response = array{data: list<Data>}
- * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * When used in a response, this type parameter can define a $rawResponse property.
  * @template TRawResponse of object = object{}
  *
  * @mixin TRawResponse

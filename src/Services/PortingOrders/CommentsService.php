@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\PortingOrders;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PortingOrders\Comments\CommentCreateParams;
 use Telnyx\PortingOrders\Comments\CommentListParams;
@@ -31,14 +32,35 @@ final class CommentsService implements CommentsContract
      * @param string $body
      *
      * @return CommentNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         string $id,
         $body = omit,
         ?RequestOptions $requestOptions = null
     ): CommentNewResponse {
+        $params = ['body' => $body];
+
+        return $this->createRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return CommentNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): CommentNewResponse {
         [$parsed, $options] = CommentCreateParams::parseRequest(
-            ['body' => $body],
+            $params,
             $requestOptions
         );
 
@@ -60,14 +82,35 @@ final class CommentsService implements CommentsContract
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @return CommentListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         string $id,
         $page = omit,
         ?RequestOptions $requestOptions = null
     ): CommentListResponse {
+        $params = ['page' => $page];
+
+        return $this->listRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return CommentListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): CommentListResponse {
         [$parsed, $options] = CommentListParams::parseRequest(
-            ['page' => $page],
+            $params,
             $requestOptions
         );
 

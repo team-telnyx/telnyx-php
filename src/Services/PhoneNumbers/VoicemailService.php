@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\PhoneNumbers;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PhoneNumbers\Voicemail\VoicemailCreateParams;
 use Telnyx\PhoneNumbers\Voicemail\VoicemailGetResponse;
@@ -32,6 +33,8 @@ final class VoicemailService implements VoicemailContract
      * @param string $pin The pin used for voicemail
      *
      * @return VoicemailNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         string $phoneNumberID,
@@ -39,8 +42,27 @@ final class VoicemailService implements VoicemailContract
         $pin = omit,
         ?RequestOptions $requestOptions = null,
     ): VoicemailNewResponse {
+        $params = ['enabled' => $enabled, 'pin' => $pin];
+
+        return $this->createRaw($phoneNumberID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return VoicemailNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        string $phoneNumberID,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): VoicemailNewResponse {
         [$parsed, $options] = VoicemailCreateParams::parseRequest(
-            ['enabled' => $enabled, 'pin' => $pin],
+            $params,
             $requestOptions
         );
 
@@ -60,9 +82,28 @@ final class VoicemailService implements VoicemailContract
      * Returns the voicemail settings for a phone number
      *
      * @return VoicemailGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $phoneNumberID,
+        ?RequestOptions $requestOptions = null
+    ): VoicemailGetResponse {
+        $params = [];
+
+        return $this->retrieveRaw($phoneNumberID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return VoicemailGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $phoneNumberID,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): VoicemailGetResponse {
         // @phpstan-ignore-next-line;
@@ -83,6 +124,8 @@ final class VoicemailService implements VoicemailContract
      * @param string $pin The pin used for voicemail
      *
      * @return VoicemailUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function update(
         string $phoneNumberID,
@@ -90,8 +133,27 @@ final class VoicemailService implements VoicemailContract
         $pin = omit,
         ?RequestOptions $requestOptions = null,
     ): VoicemailUpdateResponse {
+        $params = ['enabled' => $enabled, 'pin' => $pin];
+
+        return $this->updateRaw($phoneNumberID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return VoicemailUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $phoneNumberID,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): VoicemailUpdateResponse {
         [$parsed, $options] = VoicemailUpdateParams::parseRequest(
-            ['enabled' => $enabled, 'pin' => $pin],
+            $params,
             $requestOptions
         );
 

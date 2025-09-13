@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\PhoneNumbers;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadCreateParams;
 use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadCreateParams\CsvFormat;
@@ -35,14 +36,34 @@ final class CsvDownloadsService implements CsvDownloadsContract
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[has_bundle], filter[tag], filter[connection_id], filter[phone_number], filter[status], filter[voice.connection_name], filter[voice.usage_payment_method], filter[billing_group_id], filter[emergency_address_id], filter[customer_reference]
      *
      * @return CsvDownloadNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $csvFormat = omit,
         $filter = omit,
         ?RequestOptions $requestOptions = null
     ): CsvDownloadNewResponse {
+        $params = ['csvFormat' => $csvFormat, 'filter' => $filter];
+
+        return $this->createRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return CsvDownloadNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): CsvDownloadNewResponse {
         [$parsed, $options] = CsvDownloadCreateParams::parseRequest(
-            ['csvFormat' => $csvFormat, 'filter' => $filter],
+            $params,
             $requestOptions
         );
 
@@ -62,9 +83,28 @@ final class CsvDownloadsService implements CsvDownloadsContract
      * Retrieve a CSV download
      *
      * @return CsvDownloadGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): CsvDownloadGetResponse {
+        $params = [];
+
+        return $this->retrieveRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return CsvDownloadGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): CsvDownloadGetResponse {
         // @phpstan-ignore-next-line;
@@ -84,13 +124,33 @@ final class CsvDownloadsService implements CsvDownloadsContract
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @return CsvDownloadListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $page = omit,
         ?RequestOptions $requestOptions = null
     ): CsvDownloadListResponse {
+        $params = ['page' => $page];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return CsvDownloadListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): CsvDownloadListResponse {
         [$parsed, $options] = CsvDownloadListParams::parseRequest(
-            ['page' => $page],
+            $params,
             $requestOptions
         );
 

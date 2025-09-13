@@ -7,6 +7,7 @@ namespace Telnyx\Services\AI\Assistants;
 use Telnyx\AI\Assistants\Tools\ToolTestParams;
 use Telnyx\AI\Assistants\Tools\ToolTestResponse;
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\ToolsContract;
@@ -32,6 +33,8 @@ final class ToolsService implements ToolsContract
      * mixed,> $dynamicVariables Key-value dynamic variables to use for the webhook test
      *
      * @return ToolTestResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function test(
         string $toolID,
@@ -40,13 +43,32 @@ final class ToolsService implements ToolsContract
         $dynamicVariables = omit,
         ?RequestOptions $requestOptions = null,
     ): ToolTestResponse {
+        $params = [
+            'assistantID' => $assistantID,
+            'arguments' => $arguments,
+            'dynamicVariables' => $dynamicVariables,
+        ];
+
+        return $this->testRaw($toolID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ToolTestResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function testRaw(
+        string $toolID,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): ToolTestResponse {
         [$parsed, $options] = ToolTestParams::parseRequest(
-            [
-                'assistantID' => $assistantID,
-                'arguments' => $arguments,
-                'dynamicVariables' => $dynamicVariables,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
         $assistantID = $parsed['assistantID'];
         unset($parsed['assistantID']);

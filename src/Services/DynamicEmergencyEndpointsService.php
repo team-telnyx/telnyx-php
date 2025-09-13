@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointCreateParams;
 use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointDeleteResponse;
@@ -36,6 +37,8 @@ final class DynamicEmergencyEndpointsService implements DynamicEmergencyEndpoint
      * @param string $dynamicEmergencyAddressID an id of a currently active dynamic emergency location
      *
      * @return DynamicEmergencyEndpointNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $callbackNumber,
@@ -43,13 +46,31 @@ final class DynamicEmergencyEndpointsService implements DynamicEmergencyEndpoint
         $dynamicEmergencyAddressID,
         ?RequestOptions $requestOptions = null,
     ): DynamicEmergencyEndpointNewResponse {
+        $params = [
+            'callbackNumber' => $callbackNumber,
+            'callerName' => $callerName,
+            'dynamicEmergencyAddressID' => $dynamicEmergencyAddressID,
+        ];
+
+        return $this->createRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return DynamicEmergencyEndpointNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): DynamicEmergencyEndpointNewResponse {
         [$parsed, $options] = DynamicEmergencyEndpointCreateParams::parseRequest(
-            [
-                'callbackNumber' => $callbackNumber,
-                'callerName' => $callerName,
-                'dynamicEmergencyAddressID' => $dynamicEmergencyAddressID,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -68,9 +89,28 @@ final class DynamicEmergencyEndpointsService implements DynamicEmergencyEndpoint
      * Returns the dynamic emergency endpoint based on the ID provided
      *
      * @return DynamicEmergencyEndpointGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): DynamicEmergencyEndpointGetResponse {
+        $params = [];
+
+        return $this->retrieveRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return DynamicEmergencyEndpointGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): DynamicEmergencyEndpointGetResponse {
         // @phpstan-ignore-next-line;
@@ -91,14 +131,34 @@ final class DynamicEmergencyEndpointsService implements DynamicEmergencyEndpoint
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @return DynamicEmergencyEndpointListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
         $page = omit,
         ?RequestOptions $requestOptions = null
     ): DynamicEmergencyEndpointListResponse {
+        $params = ['filter' => $filter, 'page' => $page];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return DynamicEmergencyEndpointListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): DynamicEmergencyEndpointListResponse {
         [$parsed, $options] = DynamicEmergencyEndpointListParams::parseRequest(
-            ['filter' => $filter, 'page' => $page],
+            $params,
             $requestOptions
         );
 
@@ -118,9 +178,28 @@ final class DynamicEmergencyEndpointsService implements DynamicEmergencyEndpoint
      * Deletes the dynamic emergency endpoint based on the ID provided
      *
      * @return DynamicEmergencyEndpointDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function delete(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): DynamicEmergencyEndpointDeleteResponse {
+        $params = [];
+
+        return $this->deleteRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return DynamicEmergencyEndpointDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): DynamicEmergencyEndpointDeleteResponse {
         // @phpstan-ignore-next-line;

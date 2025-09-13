@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Campaign\TelnyxCampaignCsp;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 
 use const Telnyx\Core\OMIT as omit;
@@ -51,6 +52,8 @@ interface CampaignBuilderContract
      * @param string $webhookURL webhook to which campaign status updates are sent
      *
      * @return mixed|TelnyxCampaignCsp
+     *
+     * @throws APIException
      */
     public function create(
         $brandID,
@@ -89,5 +92,19 @@ interface CampaignBuilderContract
         $webhookFailoverURL = omit,
         $webhookURL = omit,
         ?RequestOptions $requestOptions = null,
+    ): mixed;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return mixed|TelnyxCampaignCsp
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
     ): mixed;
 }

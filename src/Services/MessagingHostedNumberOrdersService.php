@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderCheckEligibilityParams;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderCheckEligibilityResponse;
@@ -51,18 +52,38 @@ final class MessagingHostedNumberOrdersService implements MessagingHostedNumberO
      * @param list<string> $phoneNumbers phone numbers to be used for hosted messaging
      *
      * @return MessagingHostedNumberOrderNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $messagingProfileID = omit,
         $phoneNumbers = omit,
         ?RequestOptions $requestOptions = null,
     ): MessagingHostedNumberOrderNewResponse {
+        $params = [
+            'messagingProfileID' => $messagingProfileID,
+            'phoneNumbers' => $phoneNumbers,
+        ];
+
+        return $this->createRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return MessagingHostedNumberOrderNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): MessagingHostedNumberOrderNewResponse {
         [$parsed, $options] = MessagingHostedNumberOrderCreateParams::parseRequest(
-            [
-                'messagingProfileID' => $messagingProfileID,
-                'phoneNumbers' => $phoneNumbers,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -81,9 +102,28 @@ final class MessagingHostedNumberOrdersService implements MessagingHostedNumberO
      * Retrieve a messaging hosted number order
      *
      * @return MessagingHostedNumberOrderGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): MessagingHostedNumberOrderGetResponse {
+        $params = [];
+
+        return $this->retrieveRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return MessagingHostedNumberOrderGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): MessagingHostedNumberOrderGetResponse {
         // @phpstan-ignore-next-line;
@@ -103,13 +143,33 @@ final class MessagingHostedNumberOrdersService implements MessagingHostedNumberO
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
      * @return MessagingHostedNumberOrderListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $page = omit,
         ?RequestOptions $requestOptions = null
     ): MessagingHostedNumberOrderListResponse {
+        $params = ['page' => $page];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return MessagingHostedNumberOrderListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): MessagingHostedNumberOrderListResponse {
         [$parsed, $options] = MessagingHostedNumberOrderListParams::parseRequest(
-            ['page' => $page],
+            $params,
             $requestOptions
         );
 
@@ -129,9 +189,28 @@ final class MessagingHostedNumberOrdersService implements MessagingHostedNumberO
      * Delete a messaging hosted number order and all associated phone numbers.
      *
      * @return MessagingHostedNumberOrderDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function delete(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): MessagingHostedNumberOrderDeleteResponse {
+        $params = [];
+
+        return $this->deleteRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return MessagingHostedNumberOrderDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): MessagingHostedNumberOrderDeleteResponse {
         // @phpstan-ignore-next-line;
@@ -151,15 +230,35 @@ final class MessagingHostedNumberOrdersService implements MessagingHostedNumberO
      * @param list<string> $phoneNumbers List of phone numbers to check eligibility
      *
      * @return MessagingHostedNumberOrderCheckEligibilityResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function checkEligibility(
         $phoneNumbers,
         ?RequestOptions $requestOptions = null
     ): MessagingHostedNumberOrderCheckEligibilityResponse {
+        $params = ['phoneNumbers' => $phoneNumbers];
+
+        return $this->checkEligibilityRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return MessagingHostedNumberOrderCheckEligibilityResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function checkEligibilityRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): MessagingHostedNumberOrderCheckEligibilityResponse {
         [
             $parsed, $options,
         ] = MessagingHostedNumberOrderCheckEligibilityParams::parseRequest(
-            ['phoneNumbers' => $phoneNumbers],
+            $params,
             $requestOptions
         );
 
@@ -182,6 +281,8 @@ final class MessagingHostedNumberOrdersService implements MessagingHostedNumberO
      * @param VerificationMethod|value-of<VerificationMethod> $verificationMethod
      *
      * @return MessagingHostedNumberOrderNewVerificationCodesResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function createVerificationCodes(
         string $id,
@@ -189,14 +290,33 @@ final class MessagingHostedNumberOrdersService implements MessagingHostedNumberO
         $verificationMethod,
         ?RequestOptions $requestOptions = null,
     ): MessagingHostedNumberOrderNewVerificationCodesResponse {
+        $params = [
+            'phoneNumbers' => $phoneNumbers,
+            'verificationMethod' => $verificationMethod,
+        ];
+
+        return $this->createVerificationCodesRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return MessagingHostedNumberOrderNewVerificationCodesResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createVerificationCodesRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): MessagingHostedNumberOrderNewVerificationCodesResponse {
         [
             $parsed, $options,
         ] = MessagingHostedNumberOrderCreateVerificationCodesParams::parseRequest(
-            [
-                'phoneNumbers' => $phoneNumbers,
-                'verificationMethod' => $verificationMethod,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -217,16 +337,37 @@ final class MessagingHostedNumberOrdersService implements MessagingHostedNumberO
      * @param list<VerificationCode> $verificationCodes
      *
      * @return MessagingHostedNumberOrderValidateCodesResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function validateCodes(
         string $id,
         $verificationCodes,
         ?RequestOptions $requestOptions = null
     ): MessagingHostedNumberOrderValidateCodesResponse {
+        $params = ['verificationCodes' => $verificationCodes];
+
+        return $this->validateCodesRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return MessagingHostedNumberOrderValidateCodesResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function validateCodesRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): MessagingHostedNumberOrderValidateCodesResponse {
         [
             $parsed, $options,
         ] = MessagingHostedNumberOrderValidateCodesParams::parseRequest(
-            ['verificationCodes' => $verificationCodes],
+            $params,
             $requestOptions
         );
 

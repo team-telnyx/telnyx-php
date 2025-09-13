@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\MessagingProfiles\MessagingProfileCreateParams;
 use Telnyx\MessagingProfiles\MessagingProfileCreateParams\WebhookAPIVersion;
@@ -77,6 +78,8 @@ final class MessagingProfilesService implements MessagingProfilesContract
      * @param string|null $webhookURL the URL where webhooks related to this messaging profile will be sent
      *
      * @return MessagingProfileNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $name,
@@ -94,23 +97,41 @@ final class MessagingProfilesService implements MessagingProfilesContract
         $webhookURL = omit,
         ?RequestOptions $requestOptions = null,
     ): MessagingProfileNewResponse {
+        $params = [
+            'name' => $name,
+            'whitelistedDestinations' => $whitelistedDestinations,
+            'alphaSender' => $alphaSender,
+            'dailySpendLimit' => $dailySpendLimit,
+            'dailySpendLimitEnabled' => $dailySpendLimitEnabled,
+            'enabled' => $enabled,
+            'mmsFallBackToSMS' => $mmsFallBackToSMS,
+            'mmsTranscoding' => $mmsTranscoding,
+            'numberPoolSettings' => $numberPoolSettings,
+            'urlShortenerSettings' => $urlShortenerSettings,
+            'webhookAPIVersion' => $webhookAPIVersion,
+            'webhookFailoverURL' => $webhookFailoverURL,
+            'webhookURL' => $webhookURL,
+        ];
+
+        return $this->createRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return MessagingProfileNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): MessagingProfileNewResponse {
         [$parsed, $options] = MessagingProfileCreateParams::parseRequest(
-            [
-                'name' => $name,
-                'whitelistedDestinations' => $whitelistedDestinations,
-                'alphaSender' => $alphaSender,
-                'dailySpendLimit' => $dailySpendLimit,
-                'dailySpendLimitEnabled' => $dailySpendLimitEnabled,
-                'enabled' => $enabled,
-                'mmsFallBackToSMS' => $mmsFallBackToSMS,
-                'mmsTranscoding' => $mmsTranscoding,
-                'numberPoolSettings' => $numberPoolSettings,
-                'urlShortenerSettings' => $urlShortenerSettings,
-                'webhookAPIVersion' => $webhookAPIVersion,
-                'webhookFailoverURL' => $webhookFailoverURL,
-                'webhookURL' => $webhookURL,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -129,9 +150,28 @@ final class MessagingProfilesService implements MessagingProfilesContract
      * Retrieve a messaging profile
      *
      * @return MessagingProfileGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): MessagingProfileGetResponse {
+        $params = [];
+
+        return $this->retrieveRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return MessagingProfileGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): MessagingProfileGetResponse {
         // @phpstan-ignore-next-line;
@@ -176,6 +216,8 @@ final class MessagingProfilesService implements MessagingProfilesContract
      * This field is required if the messaging profile doesn't have it defined yet.
      *
      * @return MessagingProfileUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function update(
         string $id,
@@ -195,24 +237,43 @@ final class MessagingProfilesService implements MessagingProfilesContract
         $whitelistedDestinations = omit,
         ?RequestOptions $requestOptions = null,
     ): MessagingProfileUpdateResponse {
+        $params = [
+            'alphaSender' => $alphaSender,
+            'dailySpendLimit' => $dailySpendLimit,
+            'dailySpendLimitEnabled' => $dailySpendLimitEnabled,
+            'enabled' => $enabled,
+            'mmsFallBackToSMS' => $mmsFallBackToSMS,
+            'mmsTranscoding' => $mmsTranscoding,
+            'name' => $name,
+            'numberPoolSettings' => $numberPoolSettings,
+            'urlShortenerSettings' => $urlShortenerSettings,
+            'v1Secret' => $v1Secret,
+            'webhookAPIVersion' => $webhookAPIVersion,
+            'webhookFailoverURL' => $webhookFailoverURL,
+            'webhookURL' => $webhookURL,
+            'whitelistedDestinations' => $whitelistedDestinations,
+        ];
+
+        return $this->updateRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return MessagingProfileUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): MessagingProfileUpdateResponse {
         [$parsed, $options] = MessagingProfileUpdateParams::parseRequest(
-            [
-                'alphaSender' => $alphaSender,
-                'dailySpendLimit' => $dailySpendLimit,
-                'dailySpendLimitEnabled' => $dailySpendLimitEnabled,
-                'enabled' => $enabled,
-                'mmsFallBackToSMS' => $mmsFallBackToSMS,
-                'mmsTranscoding' => $mmsTranscoding,
-                'name' => $name,
-                'numberPoolSettings' => $numberPoolSettings,
-                'urlShortenerSettings' => $urlShortenerSettings,
-                'v1Secret' => $v1Secret,
-                'webhookAPIVersion' => $webhookAPIVersion,
-                'webhookFailoverURL' => $webhookFailoverURL,
-                'webhookURL' => $webhookURL,
-                'whitelistedDestinations' => $whitelistedDestinations,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -234,14 +295,34 @@ final class MessagingProfilesService implements MessagingProfilesContract
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
      * @return MessagingProfileListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
         $page = omit,
         ?RequestOptions $requestOptions = null
     ): MessagingProfileListResponse {
+        $params = ['filter' => $filter, 'page' => $page];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return MessagingProfileListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): MessagingProfileListResponse {
         [$parsed, $options] = MessagingProfileListParams::parseRequest(
-            ['filter' => $filter, 'page' => $page],
+            $params,
             $requestOptions
         );
 
@@ -261,9 +342,28 @@ final class MessagingProfilesService implements MessagingProfilesContract
      * Delete a messaging profile
      *
      * @return MessagingProfileDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function delete(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): MessagingProfileDeleteResponse {
+        $params = [];
+
+        return $this->deleteRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return MessagingProfileDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): MessagingProfileDeleteResponse {
         // @phpstan-ignore-next-line;
@@ -283,14 +383,35 @@ final class MessagingProfilesService implements MessagingProfilesContract
      * @param Page1 $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
      * @return MessagingProfileListPhoneNumbersResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function listPhoneNumbers(
         string $id,
         $page = omit,
         ?RequestOptions $requestOptions = null
     ): MessagingProfileListPhoneNumbersResponse {
+        $params = ['page' => $page];
+
+        return $this->listPhoneNumbersRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return MessagingProfileListPhoneNumbersResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listPhoneNumbersRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): MessagingProfileListPhoneNumbersResponse {
         [$parsed, $options] = MessagingProfileListPhoneNumbersParams::parseRequest(
-            ['page' => $page],
+            $params,
             $requestOptions
         );
 
@@ -312,14 +433,35 @@ final class MessagingProfilesService implements MessagingProfilesContract
      * @param Page2 $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
      * @return MessagingProfileListShortCodesResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function listShortCodes(
         string $id,
         $page = omit,
         ?RequestOptions $requestOptions = null
     ): MessagingProfileListShortCodesResponse {
+        $params = ['page' => $page];
+
+        return $this->listShortCodesRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return MessagingProfileListShortCodesResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listShortCodesRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): MessagingProfileListShortCodesResponse {
         [$parsed, $options] = MessagingProfileListShortCodesParams::parseRequest(
-            ['page' => $page],
+            $params,
             $requestOptions
         );
 

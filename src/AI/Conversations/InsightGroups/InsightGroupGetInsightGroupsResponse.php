@@ -13,7 +13,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type insight_group_get_insight_groups_response = array{
  *   data: list<InsightTemplateGroup>, meta: Meta
  * }
- * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * When used in a response, this type parameter can define a $rawResponse property.
  * @template TRawResponse of object = object{}
  *
  * @mixin TRawResponse

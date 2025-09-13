@@ -13,7 +13,7 @@ use Telnyx\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileGetPhone
  * @phpstan-type phone_number_assignment_by_profile_get_phone_number_status_response = array{
  *   records: list<Record>
  * }
- * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * When used in a response, this type parameter can define a $rawResponse property.
  * @template TRawResponse of object = object{}
  *
  * @mixin TRawResponse

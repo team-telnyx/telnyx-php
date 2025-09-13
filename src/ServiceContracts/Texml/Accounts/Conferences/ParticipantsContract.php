@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\Texml\Accounts\Conferences;
 
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantGetParticipantsResponse;
@@ -36,11 +37,28 @@ interface ParticipantsContract
      * @param string $conferenceSid
      *
      * @return ParticipantGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $callSidOrParticipantLabel,
         $accountSid,
         $conferenceSid,
+        ?RequestOptions $requestOptions = null,
+    ): ParticipantGetResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ParticipantGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $callSidOrParticipantLabel,
+        array $params,
         ?RequestOptions $requestOptions = null,
     ): ParticipantGetResponse;
 
@@ -62,6 +80,8 @@ interface ParticipantsContract
      * @param string $waitURL the URL to call for an audio file to play while the participant is waiting for the conference to start
      *
      * @return ParticipantUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function update(
         string $callSidOrParticipantLabel,
@@ -84,13 +104,43 @@ interface ParticipantsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return ParticipantUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $callSidOrParticipantLabel,
+        array $params,
+        ?RequestOptions $requestOptions = null,
+    ): ParticipantUpdateResponse;
+
+    /**
+     * @api
+     *
      * @param string $accountSid
      * @param string $conferenceSid
+     *
+     * @throws APIException
      */
     public function delete(
         string $callSidOrParticipantLabel,
         $accountSid,
         $conferenceSid,
+        ?RequestOptions $requestOptions = null,
+    ): mixed;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $callSidOrParticipantLabel,
+        array $params,
         ?RequestOptions $requestOptions = null,
     ): mixed;
 
@@ -145,6 +195,8 @@ interface ParticipantsContract
      * @param string $waitURL the URL to call for an audio file to play while the participant is waiting for the conference to start
      *
      * @return ParticipantParticipantsResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function participants(
         string $conferenceSid,
@@ -200,13 +252,45 @@ interface ParticipantsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return ParticipantParticipantsResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function participantsRaw(
+        string $conferenceSid,
+        array $params,
+        ?RequestOptions $requestOptions = null,
+    ): ParticipantParticipantsResponse;
+
+    /**
+     * @api
+     *
      * @param string $accountSid
      *
      * @return ParticipantGetParticipantsResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieveParticipants(
         string $conferenceSid,
         $accountSid,
+        ?RequestOptions $requestOptions = null,
+    ): ParticipantGetParticipantsResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ParticipantGetParticipantsResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveParticipantsRaw(
+        string $conferenceSid,
+        array $params,
         ?RequestOptions $requestOptions = null,
     ): ParticipantGetParticipantsResponse;
 }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\CredentialConnections\DtmfType;
@@ -48,6 +49,8 @@ interface TexmlApplicationsContract
      * @param VoiceMethod|value-of<VoiceMethod> $voiceMethod HTTP request method Telnyx will use to interact with your XML Translator webhooks. Either 'get' or 'post'.
      *
      * @return TexmlApplicationNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $friendlyName,
@@ -70,10 +73,39 @@ interface TexmlApplicationsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return TexmlApplicationNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): TexmlApplicationNewResponse;
+
+    /**
+     * @api
+     *
      * @return TexmlApplicationGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): TexmlApplicationGetResponse;
+
+    /**
+     * @api
+     *
+     * @return TexmlApplicationGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): TexmlApplicationGetResponse;
 
@@ -96,6 +128,8 @@ interface TexmlApplicationsContract
      * @param VoiceMethod1|value-of<VoiceMethod1> $voiceMethod HTTP request method Telnyx will use to interact with your XML Translator webhooks. Either 'get' or 'post'.
      *
      * @return TexmlApplicationUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function update(
         string $id,
@@ -119,6 +153,21 @@ interface TexmlApplicationsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return TexmlApplicationUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): TexmlApplicationUpdateResponse;
+
+    /**
+     * @api
+     *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[outbound_voice_profile_id], filter[friendly_name]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param Sort|value-of<Sort> $sort Specifies the sort order for results. By default sorting direction is ascending. To have the results sorted in descending order add the <code> -</code> prefix.<br/><br/>
@@ -135,6 +184,8 @@ interface TexmlApplicationsContract
      * </ul> <br/> If not given, results are sorted by <code>created_at</code> in descending order.
      *
      * @return TexmlApplicationListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
@@ -146,10 +197,39 @@ interface TexmlApplicationsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return TexmlApplicationListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): TexmlApplicationListResponse;
+
+    /**
+     * @api
+     *
      * @return TexmlApplicationDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function delete(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): TexmlApplicationDeleteResponse;
+
+    /**
+     * @api
+     *
+     * @return TexmlApplicationDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): TexmlApplicationDeleteResponse;
 }

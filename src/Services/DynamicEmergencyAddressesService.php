@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressCreateParams;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressCreateParams\CountryCode;
@@ -45,6 +46,8 @@ final class DynamicEmergencyAddressesService implements DynamicEmergencyAddresse
      * @param string $streetSuffix
      *
      * @return DynamicEmergencyAddressNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $administrativeArea,
@@ -60,21 +63,39 @@ final class DynamicEmergencyAddressesService implements DynamicEmergencyAddresse
         $streetSuffix = omit,
         ?RequestOptions $requestOptions = null,
     ): DynamicEmergencyAddressNewResponse {
+        $params = [
+            'administrativeArea' => $administrativeArea,
+            'countryCode' => $countryCode,
+            'houseNumber' => $houseNumber,
+            'locality' => $locality,
+            'postalCode' => $postalCode,
+            'streetName' => $streetName,
+            'extendedAddress' => $extendedAddress,
+            'houseSuffix' => $houseSuffix,
+            'streetPostDirectional' => $streetPostDirectional,
+            'streetPreDirectional' => $streetPreDirectional,
+            'streetSuffix' => $streetSuffix,
+        ];
+
+        return $this->createRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return DynamicEmergencyAddressNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): DynamicEmergencyAddressNewResponse {
         [$parsed, $options] = DynamicEmergencyAddressCreateParams::parseRequest(
-            [
-                'administrativeArea' => $administrativeArea,
-                'countryCode' => $countryCode,
-                'houseNumber' => $houseNumber,
-                'locality' => $locality,
-                'postalCode' => $postalCode,
-                'streetName' => $streetName,
-                'extendedAddress' => $extendedAddress,
-                'houseSuffix' => $houseSuffix,
-                'streetPostDirectional' => $streetPostDirectional,
-                'streetPreDirectional' => $streetPreDirectional,
-                'streetSuffix' => $streetSuffix,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -93,9 +114,28 @@ final class DynamicEmergencyAddressesService implements DynamicEmergencyAddresse
      * Returns the dynamic emergency address based on the ID provided
      *
      * @return DynamicEmergencyAddressGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): DynamicEmergencyAddressGetResponse {
+        $params = [];
+
+        return $this->retrieveRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return DynamicEmergencyAddressGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): DynamicEmergencyAddressGetResponse {
         // @phpstan-ignore-next-line;
@@ -116,14 +156,34 @@ final class DynamicEmergencyAddressesService implements DynamicEmergencyAddresse
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @return DynamicEmergencyAddressListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
         $page = omit,
         ?RequestOptions $requestOptions = null
     ): DynamicEmergencyAddressListResponse {
+        $params = ['filter' => $filter, 'page' => $page];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return DynamicEmergencyAddressListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): DynamicEmergencyAddressListResponse {
         [$parsed, $options] = DynamicEmergencyAddressListParams::parseRequest(
-            ['filter' => $filter, 'page' => $page],
+            $params,
             $requestOptions
         );
 
@@ -143,9 +203,28 @@ final class DynamicEmergencyAddressesService implements DynamicEmergencyAddresse
      * Deletes the dynamic emergency address based on the ID provided
      *
      * @return DynamicEmergencyAddressDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function delete(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): DynamicEmergencyAddressDeleteResponse {
+        $params = [];
+
+        return $this->deleteRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return DynamicEmergencyAddressDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): DynamicEmergencyAddressDeleteResponse {
         // @phpstan-ignore-next-line;

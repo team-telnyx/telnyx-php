@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type conversation_get_conversations_insights_response = array{
  *   data: list<Data>, meta: Meta
  * }
- * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * When used in a response, this type parameter can define a $rawResponse property.
  * @template TRawResponse of object = object{}
  *
  * @mixin TRawResponse

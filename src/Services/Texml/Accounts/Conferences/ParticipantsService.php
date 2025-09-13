@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Texml\Accounts\Conferences;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\Accounts\Conferences\ParticipantsContract;
@@ -50,6 +51,8 @@ final class ParticipantsService implements ParticipantsContract
      * @param string $conferenceSid
      *
      * @return ParticipantGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $callSidOrParticipantLabel,
@@ -57,9 +60,32 @@ final class ParticipantsService implements ParticipantsContract
         $conferenceSid,
         ?RequestOptions $requestOptions = null,
     ): ParticipantGetResponse {
+        $params = ['accountSid' => $accountSid, 'conferenceSid' => $conferenceSid];
+
+        return $this->retrieveRaw(
+            $callSidOrParticipantLabel,
+            $params,
+            $requestOptions
+        );
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ParticipantGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $callSidOrParticipantLabel,
+        array $params,
+        ?RequestOptions $requestOptions = null,
+    ): ParticipantGetResponse {
         [$parsed, $options] = ParticipantRetrieveParams::parseRequest(
-            ['accountSid' => $accountSid, 'conferenceSid' => $conferenceSid],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
         $accountSid = $parsed['accountSid'];
         unset($parsed['accountSid']);
@@ -100,6 +126,8 @@ final class ParticipantsService implements ParticipantsContract
      * @param string $waitURL the URL to call for an audio file to play while the participant is waiting for the conference to start
      *
      * @return ParticipantUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function update(
         string $callSidOrParticipantLabel,
@@ -118,23 +146,46 @@ final class ParticipantsService implements ParticipantsContract
         $waitURL = omit,
         ?RequestOptions $requestOptions = null,
     ): ParticipantUpdateResponse {
+        $params = [
+            'accountSid' => $accountSid,
+            'conferenceSid' => $conferenceSid,
+            'announceMethod' => $announceMethod,
+            'announceURL' => $announceURL,
+            'beepOnExit' => $beepOnExit,
+            'callSidToCoach' => $callSidToCoach,
+            'coaching' => $coaching,
+            'endConferenceOnExit' => $endConferenceOnExit,
+            'hold' => $hold,
+            'holdMethod' => $holdMethod,
+            'holdURL' => $holdURL,
+            'muted' => $muted,
+            'waitURL' => $waitURL,
+        ];
+
+        return $this->updateRaw(
+            $callSidOrParticipantLabel,
+            $params,
+            $requestOptions
+        );
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ParticipantUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $callSidOrParticipantLabel,
+        array $params,
+        ?RequestOptions $requestOptions = null,
+    ): ParticipantUpdateResponse {
         [$parsed, $options] = ParticipantUpdateParams::parseRequest(
-            [
-                'accountSid' => $accountSid,
-                'conferenceSid' => $conferenceSid,
-                'announceMethod' => $announceMethod,
-                'announceURL' => $announceURL,
-                'beepOnExit' => $beepOnExit,
-                'callSidToCoach' => $callSidToCoach,
-                'coaching' => $coaching,
-                'endConferenceOnExit' => $endConferenceOnExit,
-                'hold' => $hold,
-                'holdMethod' => $holdMethod,
-                'holdURL' => $holdURL,
-                'muted' => $muted,
-                'waitURL' => $waitURL,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
         $accountSid = $parsed['accountSid'];
         unset($parsed['accountSid']);
@@ -167,6 +218,8 @@ final class ParticipantsService implements ParticipantsContract
      *
      * @param string $accountSid
      * @param string $conferenceSid
+     *
+     * @throws APIException
      */
     public function delete(
         string $callSidOrParticipantLabel,
@@ -174,9 +227,30 @@ final class ParticipantsService implements ParticipantsContract
         $conferenceSid,
         ?RequestOptions $requestOptions = null,
     ): mixed {
+        $params = ['accountSid' => $accountSid, 'conferenceSid' => $conferenceSid];
+
+        return $this->deleteRaw(
+            $callSidOrParticipantLabel,
+            $params,
+            $requestOptions
+        );
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $callSidOrParticipantLabel,
+        array $params,
+        ?RequestOptions $requestOptions = null,
+    ): mixed {
         [$parsed, $options] = ParticipantDeleteParams::parseRequest(
-            ['accountSid' => $accountSid, 'conferenceSid' => $conferenceSid],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
         $accountSid = $parsed['accountSid'];
         unset($parsed['accountSid']);
@@ -250,6 +324,8 @@ final class ParticipantsService implements ParticipantsContract
      * @param string $waitURL the URL to call for an audio file to play while the participant is waiting for the conference to start
      *
      * @return ParticipantParticipantsResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function participants(
         string $conferenceSid,
@@ -301,56 +377,75 @@ final class ParticipantsService implements ParticipantsContract
         $waitURL = omit,
         ?RequestOptions $requestOptions = null,
     ): ParticipantParticipantsResponse {
+        $params = [
+            'accountSid' => $accountSid,
+            'amdStatusCallback' => $amdStatusCallback,
+            'amdStatusCallbackMethod' => $amdStatusCallbackMethod,
+            'beep' => $beep,
+            'callerID' => $callerID,
+            'callSidToCoach' => $callSidToCoach,
+            'cancelPlaybackOnDetectMessageEnd' => $cancelPlaybackOnDetectMessageEnd,
+            'cancelPlaybackOnMachineDetection' => $cancelPlaybackOnMachineDetection,
+            'coaching' => $coaching,
+            'conferenceRecord' => $conferenceRecord,
+            'conferenceRecordingStatusCallback' => $conferenceRecordingStatusCallback,
+            'conferenceRecordingStatusCallbackEvent' => $conferenceRecordingStatusCallbackEvent,
+            'conferenceRecordingStatusCallbackMethod' => $conferenceRecordingStatusCallbackMethod,
+            'conferenceRecordingTimeout' => $conferenceRecordingTimeout,
+            'conferenceStatusCallback' => $conferenceStatusCallback,
+            'conferenceStatusCallbackEvent' => $conferenceStatusCallbackEvent,
+            'conferenceStatusCallbackMethod' => $conferenceStatusCallbackMethod,
+            'conferenceTrim' => $conferenceTrim,
+            'earlyMedia' => $earlyMedia,
+            'endConferenceOnExit' => $endConferenceOnExit,
+            'from' => $from,
+            'machineDetection' => $machineDetection,
+            'machineDetectionSilenceTimeout' => $machineDetectionSilenceTimeout,
+            'machineDetectionSpeechEndThreshold' => $machineDetectionSpeechEndThreshold,
+            'machineDetectionSpeechThreshold' => $machineDetectionSpeechThreshold,
+            'machineDetectionTimeout' => $machineDetectionTimeout,
+            'maxParticipants' => $maxParticipants,
+            'muted' => $muted,
+            'preferredCodecs' => $preferredCodecs,
+            'record' => $record,
+            'recordingChannels' => $recordingChannels,
+            'recordingStatusCallback' => $recordingStatusCallback,
+            'recordingStatusCallbackEvent' => $recordingStatusCallbackEvent,
+            'recordingStatusCallbackMethod' => $recordingStatusCallbackMethod,
+            'recordingTrack' => $recordingTrack,
+            'sipAuthPassword' => $sipAuthPassword,
+            'sipAuthUsername' => $sipAuthUsername,
+            'startConferenceOnEnter' => $startConferenceOnEnter,
+            'statusCallback' => $statusCallback,
+            'statusCallbackEvent' => $statusCallbackEvent,
+            'statusCallbackMethod' => $statusCallbackMethod,
+            'timeLimit' => $timeLimit,
+            'timeoutSeconds' => $timeoutSeconds,
+            'to' => $to,
+            'trim' => $trim,
+            'waitURL' => $waitURL,
+        ];
+
+        return $this->participantsRaw($conferenceSid, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ParticipantParticipantsResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function participantsRaw(
+        string $conferenceSid,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): ParticipantParticipantsResponse {
         [$parsed, $options] = ParticipantParticipantsParams::parseRequest(
-            [
-                'accountSid' => $accountSid,
-                'amdStatusCallback' => $amdStatusCallback,
-                'amdStatusCallbackMethod' => $amdStatusCallbackMethod,
-                'beep' => $beep,
-                'callerID' => $callerID,
-                'callSidToCoach' => $callSidToCoach,
-                'cancelPlaybackOnDetectMessageEnd' => $cancelPlaybackOnDetectMessageEnd,
-                'cancelPlaybackOnMachineDetection' => $cancelPlaybackOnMachineDetection,
-                'coaching' => $coaching,
-                'conferenceRecord' => $conferenceRecord,
-                'conferenceRecordingStatusCallback' => $conferenceRecordingStatusCallback,
-                'conferenceRecordingStatusCallbackEvent' => $conferenceRecordingStatusCallbackEvent,
-                'conferenceRecordingStatusCallbackMethod' => $conferenceRecordingStatusCallbackMethod,
-                'conferenceRecordingTimeout' => $conferenceRecordingTimeout,
-                'conferenceStatusCallback' => $conferenceStatusCallback,
-                'conferenceStatusCallbackEvent' => $conferenceStatusCallbackEvent,
-                'conferenceStatusCallbackMethod' => $conferenceStatusCallbackMethod,
-                'conferenceTrim' => $conferenceTrim,
-                'earlyMedia' => $earlyMedia,
-                'endConferenceOnExit' => $endConferenceOnExit,
-                'from' => $from,
-                'machineDetection' => $machineDetection,
-                'machineDetectionSilenceTimeout' => $machineDetectionSilenceTimeout,
-                'machineDetectionSpeechEndThreshold' => $machineDetectionSpeechEndThreshold,
-                'machineDetectionSpeechThreshold' => $machineDetectionSpeechThreshold,
-                'machineDetectionTimeout' => $machineDetectionTimeout,
-                'maxParticipants' => $maxParticipants,
-                'muted' => $muted,
-                'preferredCodecs' => $preferredCodecs,
-                'record' => $record,
-                'recordingChannels' => $recordingChannels,
-                'recordingStatusCallback' => $recordingStatusCallback,
-                'recordingStatusCallbackEvent' => $recordingStatusCallbackEvent,
-                'recordingStatusCallbackMethod' => $recordingStatusCallbackMethod,
-                'recordingTrack' => $recordingTrack,
-                'sipAuthPassword' => $sipAuthPassword,
-                'sipAuthUsername' => $sipAuthUsername,
-                'startConferenceOnEnter' => $startConferenceOnEnter,
-                'statusCallback' => $statusCallback,
-                'statusCallbackEvent' => $statusCallbackEvent,
-                'statusCallbackMethod' => $statusCallbackMethod,
-                'timeLimit' => $timeLimit,
-                'timeoutSeconds' => $timeoutSeconds,
-                'to' => $to,
-                'trim' => $trim,
-                'waitURL' => $waitURL,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
         $accountSid = $parsed['accountSid'];
         unset($parsed['accountSid']);
@@ -378,14 +473,39 @@ final class ParticipantsService implements ParticipantsContract
      * @param string $accountSid
      *
      * @return ParticipantGetParticipantsResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieveParticipants(
         string $conferenceSid,
         $accountSid,
         ?RequestOptions $requestOptions = null
     ): ParticipantGetParticipantsResponse {
+        $params = ['accountSid' => $accountSid];
+
+        return $this->retrieveParticipantsRaw(
+            $conferenceSid,
+            $params,
+            $requestOptions
+        );
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ParticipantGetParticipantsResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveParticipantsRaw(
+        string $conferenceSid,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): ParticipantGetParticipantsResponse {
         [$parsed, $options] = ParticipantRetrieveParticipantsParams::parseRequest(
-            ['accountSid' => $accountSid],
+            $params,
             $requestOptions
         );
         $accountSid = $parsed['accountSid'];

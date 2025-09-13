@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\PhoneNumbers;
 
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PhoneNumbers\Jobs\JobDeleteBatchResponse;
 use Telnyx\PhoneNumbers\Jobs\JobGetResponse;
@@ -25,9 +26,24 @@ interface JobsContract
      * @api
      *
      * @return JobGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): JobGetResponse;
+
+    /**
+     * @api
+     *
+     * @return JobGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): JobGetResponse;
 
@@ -39,6 +55,8 @@ interface JobsContract
      * @param Sort|value-of<Sort> $sort Specifies the sort order for results. If not given, results are sorted by created_at in descending order.
      *
      * @return JobListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
@@ -50,12 +68,42 @@ interface JobsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return JobListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): JobListResponse;
+
+    /**
+     * @api
+     *
      * @param list<string> $phoneNumbers
      *
      * @return JobDeleteBatchResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function deleteBatch(
         $phoneNumbers,
+        ?RequestOptions $requestOptions = null
+    ): JobDeleteBatchResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return JobDeleteBatchResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function deleteBatchRaw(
+        array $params,
         ?RequestOptions $requestOptions = null
     ): JobDeleteBatchResponse;
 
@@ -73,6 +121,8 @@ interface JobsContract
      * @param UpdateVoiceSettings $voice
      *
      * @return JobUpdateBatchResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function updateBatch(
         $phoneNumbers,
@@ -90,16 +140,46 @@ interface JobsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return JobUpdateBatchResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateBatchRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): JobUpdateBatchResponse;
+
+    /**
+     * @api
+     *
      * @param bool $emergencyEnabled indicates whether to enable or disable emergency services on the numbers
      * @param list<string> $phoneNumbers
      * @param string|null $emergencyAddressID Identifies the address to be used with emergency services. Required if emergency_enabled is true, must be null or omitted if emergency_enabled is false.
      *
      * @return JobUpdateEmergencySettingsBatchResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function updateEmergencySettingsBatch(
         $emergencyEnabled,
         $phoneNumbers,
         $emergencyAddressID = omit,
         ?RequestOptions $requestOptions = null,
+    ): JobUpdateEmergencySettingsBatchResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return JobUpdateEmergencySettingsBatchResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateEmergencySettingsBatchRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
     ): JobUpdateEmergencySettingsBatchResponse;
 }

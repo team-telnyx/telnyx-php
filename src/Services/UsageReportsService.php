@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\UsageReportsContract;
@@ -43,6 +44,8 @@ final class UsageReportsService implements UsageReportsContract
      * @param string $authorizationBearer Authenticates the request with your Telnyx API V2 KEY
      *
      * @return UsageReportListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $dimensions,
@@ -59,22 +62,40 @@ final class UsageReportsService implements UsageReportsContract
         $authorizationBearer = omit,
         ?RequestOptions $requestOptions = null,
     ): UsageReportListResponse {
+        $params = [
+            'dimensions' => $dimensions,
+            'metrics' => $metrics,
+            'product' => $product,
+            'dateRange' => $dateRange,
+            'endDate' => $endDate,
+            'filter' => $filter,
+            'format' => $format,
+            'managedAccounts' => $managedAccounts,
+            'page' => $page,
+            'sort' => $sort,
+            'startDate' => $startDate,
+            'authorizationBearer' => $authorizationBearer,
+        ];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return UsageReportListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): UsageReportListResponse {
         [$parsed, $options] = UsageReportListParams::parseRequest(
-            [
-                'dimensions' => $dimensions,
-                'metrics' => $metrics,
-                'product' => $product,
-                'dateRange' => $dateRange,
-                'endDate' => $endDate,
-                'filter' => $filter,
-                'format' => $format,
-                'managedAccounts' => $managedAccounts,
-                'page' => $page,
-                'sort' => $sort,
-                'startDate' => $startDate,
-                'authorizationBearer' => $authorizationBearer,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
         $query_params = array_flip(
             [
@@ -115,15 +136,37 @@ final class UsageReportsService implements UsageReportsContract
      * @param string $authorizationBearer Authenticates the request with your Telnyx API V2 KEY
      *
      * @return UsageReportGetOptionsResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function getOptions(
         $product = omit,
         $authorizationBearer = omit,
         ?RequestOptions $requestOptions = null,
     ): UsageReportGetOptionsResponse {
+        $params = [
+            'product' => $product, 'authorizationBearer' => $authorizationBearer,
+        ];
+
+        return $this->getOptionsRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return UsageReportGetOptionsResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function getOptionsRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): UsageReportGetOptionsResponse {
         [$parsed, $options] = UsageReportGetOptionsParams::parseRequest(
-            ['product' => $product, 'authorizationBearer' => $authorizationBearer],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
         $query_params = array_flip(['product']);
 

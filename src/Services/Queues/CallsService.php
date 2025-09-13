@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Queues;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Queues\Calls\CallGetResponse;
 use Telnyx\Queues\Calls\CallListParams;
@@ -31,14 +32,35 @@ final class CallsService implements CallsContract
      * @param string $queueName
      *
      * @return CallGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $callControlID,
         $queueName,
         ?RequestOptions $requestOptions = null
     ): CallGetResponse {
+        $params = ['queueName' => $queueName];
+
+        return $this->retrieveRaw($callControlID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return CallGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $callControlID,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): CallGetResponse {
         [$parsed, $options] = CallRetrieveParams::parseRequest(
-            ['queueName' => $queueName],
+            $params,
             $requestOptions
         );
         $queueName = $parsed['queueName'];
@@ -61,14 +83,35 @@ final class CallsService implements CallsContract
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number]
      *
      * @return CallListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         string $queueName,
         $page = omit,
         ?RequestOptions $requestOptions = null
     ): CallListResponse {
+        $params = ['page' => $page];
+
+        return $this->listRaw($queueName, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return CallListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        string $queueName,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): CallListResponse {
         [$parsed, $options] = CallListParams::parseRequest(
-            ['page' => $page],
+            $params,
             $requestOptions
         );
 

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Portouts;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Portouts\SupportingDocuments\SupportingDocumentCreateParams;
 use Telnyx\Portouts\SupportingDocuments\SupportingDocumentCreateParams\Document;
@@ -30,14 +31,35 @@ final class SupportingDocumentsService implements SupportingDocumentsContract
      * @param list<Document> $documents List of supporting documents parameters
      *
      * @return SupportingDocumentNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         string $id,
         $documents = omit,
         ?RequestOptions $requestOptions = null
     ): SupportingDocumentNewResponse {
+        $params = ['documents' => $documents];
+
+        return $this->createRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return SupportingDocumentNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): SupportingDocumentNewResponse {
         [$parsed, $options] = SupportingDocumentCreateParams::parseRequest(
-            ['documents' => $documents],
+            $params,
             $requestOptions
         );
 
@@ -57,9 +79,28 @@ final class SupportingDocumentsService implements SupportingDocumentsContract
      * List every supporting documents for a portout request.
      *
      * @return SupportingDocumentListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): SupportingDocumentListResponse {
+        $params = [];
+
+        return $this->listRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return SupportingDocumentListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): SupportingDocumentListResponse {
         // @phpstan-ignore-next-line;

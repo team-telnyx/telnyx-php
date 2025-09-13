@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\NumberBlockOrders\NumberBlockOrderCreateParams;
 use Telnyx\NumberBlockOrders\NumberBlockOrderGetResponse;
@@ -37,6 +38,8 @@ final class NumberBlockOrdersService implements NumberBlockOrdersContract
      * @param string $messagingProfileID identifies the messaging profile associated with the phone number
      *
      * @return NumberBlockOrderNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $range,
@@ -46,15 +49,33 @@ final class NumberBlockOrdersService implements NumberBlockOrdersContract
         $messagingProfileID = omit,
         ?RequestOptions $requestOptions = null,
     ): NumberBlockOrderNewResponse {
+        $params = [
+            'range' => $range,
+            'startingNumber' => $startingNumber,
+            'connectionID' => $connectionID,
+            'customerReference' => $customerReference,
+            'messagingProfileID' => $messagingProfileID,
+        ];
+
+        return $this->createRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return NumberBlockOrderNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): NumberBlockOrderNewResponse {
         [$parsed, $options] = NumberBlockOrderCreateParams::parseRequest(
-            [
-                'range' => $range,
-                'startingNumber' => $startingNumber,
-                'connectionID' => $connectionID,
-                'customerReference' => $customerReference,
-                'messagingProfileID' => $messagingProfileID,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -73,10 +94,29 @@ final class NumberBlockOrdersService implements NumberBlockOrdersContract
      * Get an existing phone number block order.
      *
      * @return NumberBlockOrderGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $numberBlockOrderID,
         ?RequestOptions $requestOptions = null
+    ): NumberBlockOrderGetResponse {
+        $params = [];
+
+        return $this->retrieveRaw($numberBlockOrderID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return NumberBlockOrderGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $numberBlockOrderID,
+        mixed $params,
+        ?RequestOptions $requestOptions = null,
     ): NumberBlockOrderGetResponse {
         // @phpstan-ignore-next-line;
         return $this->client->request(
@@ -96,14 +136,34 @@ final class NumberBlockOrdersService implements NumberBlockOrdersContract
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @return NumberBlockOrderListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
         $page = omit,
         ?RequestOptions $requestOptions = null
     ): NumberBlockOrderListResponse {
+        $params = ['filter' => $filter, 'page' => $page];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return NumberBlockOrderListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): NumberBlockOrderListResponse {
         [$parsed, $options] = NumberBlockOrderListParams::parseRequest(
-            ['filter' => $filter, 'page' => $page],
+            $params,
             $requestOptions
         );
 

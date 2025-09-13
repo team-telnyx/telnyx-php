@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Messages\MessageCancelScheduledResponse;
 use Telnyx\Messages\MessageGetResponse;
@@ -28,6 +29,8 @@ interface MessagesContract
      * @api
      *
      * @return MessageGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
@@ -37,10 +40,38 @@ interface MessagesContract
     /**
      * @api
      *
+     * @return MessageGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        mixed $params,
+        ?RequestOptions $requestOptions = null
+    ): MessageGetResponse;
+
+    /**
+     * @api
+     *
      * @return MessageCancelScheduledResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function cancelScheduled(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): MessageCancelScheduledResponse;
+
+    /**
+     * @api
+     *
+     * @return MessageCancelScheduledResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function cancelScheduledRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): MessageCancelScheduledResponse;
 
@@ -69,6 +100,8 @@ interface MessagesContract
      * @param string $webhookURL the URL where webhooks related to this message will be sent
      *
      * @return MessageScheduleResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function schedule(
         $to,
@@ -84,6 +117,20 @@ interface MessagesContract
         $webhookFailoverURL = omit,
         $webhookURL = omit,
         ?RequestOptions $requestOptions = null,
+    ): MessageScheduleResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return MessageScheduleResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function scheduleRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
     ): MessageScheduleResponse;
 
     /**
@@ -111,6 +158,8 @@ interface MessagesContract
      * @param string $webhookURL the URL where webhooks related to this message will be sent
      *
      * @return MessageSendResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function send(
         $to,
@@ -131,6 +180,20 @@ interface MessagesContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return MessageSendResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function sendRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): MessageSendResponse;
+
+    /**
+     * @api
+     *
      * @param string $from Phone number, in +E.164 format, used to send the message.
      * @param list<string> $to A list of destinations. No more than 8 destinations are allowed.
      * @param list<string> $mediaURLs A list of media URLs. The total media size must be less than 1 MB.
@@ -141,6 +204,8 @@ interface MessagesContract
      * @param string $webhookURL the URL where webhooks related to this message will be sent
      *
      * @return MessageSendGroupMmsResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function sendGroupMms(
         $from,
@@ -152,6 +217,20 @@ interface MessagesContract
         $webhookFailoverURL = omit,
         $webhookURL = omit,
         ?RequestOptions $requestOptions = null,
+    ): MessageSendGroupMmsResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return MessageSendGroupMmsResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function sendGroupMmsRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
     ): MessageSendGroupMmsResponse;
 
     /**
@@ -173,6 +252,8 @@ interface MessagesContract
      * @param string $webhookURL the URL where webhooks related to this message will be sent
      *
      * @return MessageSendLongCodeResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function sendLongCode(
         $from,
@@ -186,6 +267,20 @@ interface MessagesContract
         $webhookFailoverURL = omit,
         $webhookURL = omit,
         ?RequestOptions $requestOptions = null,
+    ): MessageSendLongCodeResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return MessageSendLongCodeResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function sendLongCodeRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
     ): MessageSendLongCodeResponse;
 
     /**
@@ -207,6 +302,8 @@ interface MessagesContract
      * @param string $webhookURL the URL where webhooks related to this message will be sent
      *
      * @return MessageSendNumberPoolResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function sendNumberPool(
         $messagingProfileID,
@@ -220,6 +317,20 @@ interface MessagesContract
         $webhookFailoverURL = omit,
         $webhookURL = omit,
         ?RequestOptions $requestOptions = null,
+    ): MessageSendNumberPoolResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return MessageSendNumberPoolResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function sendNumberPoolRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
     ): MessageSendNumberPoolResponse;
 
     /**
@@ -241,6 +352,8 @@ interface MessagesContract
      * @param string $webhookURL the URL where webhooks related to this message will be sent
      *
      * @return MessageSendShortCodeResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function sendShortCode(
         $from,
@@ -254,5 +367,19 @@ interface MessagesContract
         $webhookFailoverURL = omit,
         $webhookURL = omit,
         ?RequestOptions $requestOptions = null,
+    ): MessageSendShortCodeResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return MessageSendShortCodeResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function sendShortCodeRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
     ): MessageSendShortCodeResponse;
 }

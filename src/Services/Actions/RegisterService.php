@@ -8,6 +8,7 @@ use Telnyx\Actions\Register\RegisterCreateParams;
 use Telnyx\Actions\Register\RegisterCreateParams\Status;
 use Telnyx\Actions\Register\RegisterNewResponse;
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Actions\RegisterContract;
@@ -33,6 +34,8 @@ final class RegisterService implements RegisterContract
      * @param list<string> $tags Searchable tags associated with the SIM card
      *
      * @return RegisterNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $registrationCodes,
@@ -41,14 +44,32 @@ final class RegisterService implements RegisterContract
         $tags = omit,
         ?RequestOptions $requestOptions = null,
     ): RegisterNewResponse {
+        $params = [
+            'registrationCodes' => $registrationCodes,
+            'simCardGroupID' => $simCardGroupID,
+            'status' => $status,
+            'tags' => $tags,
+        ];
+
+        return $this->createRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return RegisterNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): RegisterNewResponse {
         [$parsed, $options] = RegisterCreateParams::parseRequest(
-            [
-                'registrationCodes' => $registrationCodes,
-                'simCardGroupID' => $simCardGroupID,
-                'status' => $status,
-                'tags' => $tags,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\OutboundVoiceProfiles\OutboundCallRecording;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileDeleteResponse;
@@ -41,6 +42,8 @@ interface OutboundVoiceProfilesContract
      * @param list<string> $whitelistedDestinations the list of destinations you want to be able to call using this outbound voice profile formatted in alpha2
      *
      * @return OutboundVoiceProfileNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $name,
@@ -62,10 +65,39 @@ interface OutboundVoiceProfilesContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return OutboundVoiceProfileNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): OutboundVoiceProfileNewResponse;
+
+    /**
+     * @api
+     *
      * @return OutboundVoiceProfileGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): OutboundVoiceProfileGetResponse;
+
+    /**
+     * @api
+     *
+     * @return OutboundVoiceProfileGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): OutboundVoiceProfileGetResponse;
 
@@ -87,6 +119,8 @@ interface OutboundVoiceProfilesContract
      * @param list<string> $whitelistedDestinations the list of destinations you want to be able to call using this outbound voice profile formatted in alpha2
      *
      * @return OutboundVoiceProfileUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function update(
         string $id,
@@ -109,6 +143,21 @@ interface OutboundVoiceProfilesContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return OutboundVoiceProfileUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): OutboundVoiceProfileUpdateResponse;
+
+    /**
+     * @api
+     *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[name][contains]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      * @param Sort|value-of<Sort> $sort Specifies the sort order for results. By default sorting direction is ascending. To have the results sorted in descending order add the <code>-</code> prefix.<br/><br/>
@@ -125,6 +174,8 @@ interface OutboundVoiceProfilesContract
      * </ul> <br/>
      *
      * @return OutboundVoiceProfileListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
@@ -136,10 +187,39 @@ interface OutboundVoiceProfilesContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return OutboundVoiceProfileListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): OutboundVoiceProfileListResponse;
+
+    /**
+     * @api
+     *
      * @return OutboundVoiceProfileDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function delete(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): OutboundVoiceProfileDeleteResponse;
+
+    /**
+     * @api
+     *
+     * @return OutboundVoiceProfileDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): OutboundVoiceProfileDeleteResponse;
 }

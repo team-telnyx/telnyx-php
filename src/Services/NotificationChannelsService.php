@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\NotificationChannels\NotificationChannelCreateParams;
 use Telnyx\NotificationChannels\NotificationChannelCreateParams\ChannelTypeID;
@@ -40,6 +41,8 @@ final class NotificationChannelsService implements NotificationChannelsContract
      * @param string $notificationProfileID a UUID reference to the associated Notification Profile
      *
      * @return NotificationChannelNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $channelDestination = omit,
@@ -47,13 +50,31 @@ final class NotificationChannelsService implements NotificationChannelsContract
         $notificationProfileID = omit,
         ?RequestOptions $requestOptions = null,
     ): NotificationChannelNewResponse {
+        $params = [
+            'channelDestination' => $channelDestination,
+            'channelTypeID' => $channelTypeID,
+            'notificationProfileID' => $notificationProfileID,
+        ];
+
+        return $this->createRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return NotificationChannelNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): NotificationChannelNewResponse {
         [$parsed, $options] = NotificationChannelCreateParams::parseRequest(
-            [
-                'channelDestination' => $channelDestination,
-                'channelTypeID' => $channelTypeID,
-                'notificationProfileID' => $notificationProfileID,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -72,9 +93,28 @@ final class NotificationChannelsService implements NotificationChannelsContract
      * Get a notification channel.
      *
      * @return NotificationChannelGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): NotificationChannelGetResponse {
+        $params = [];
+
+        return $this->retrieveRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return NotificationChannelGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): NotificationChannelGetResponse {
         // @phpstan-ignore-next-line;
@@ -96,6 +136,8 @@ final class NotificationChannelsService implements NotificationChannelsContract
      * @param string $notificationProfileID a UUID reference to the associated Notification Profile
      *
      * @return NotificationChannelUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function update(
         string $id,
@@ -104,13 +146,32 @@ final class NotificationChannelsService implements NotificationChannelsContract
         $notificationProfileID = omit,
         ?RequestOptions $requestOptions = null,
     ): NotificationChannelUpdateResponse {
+        $params = [
+            'channelDestination' => $channelDestination,
+            'channelTypeID' => $channelTypeID,
+            'notificationProfileID' => $notificationProfileID,
+        ];
+
+        return $this->updateRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return NotificationChannelUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): NotificationChannelUpdateResponse {
         [$parsed, $options] = NotificationChannelUpdateParams::parseRequest(
-            [
-                'channelDestination' => $channelDestination,
-                'channelTypeID' => $channelTypeID,
-                'notificationProfileID' => $notificationProfileID,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -132,14 +193,34 @@ final class NotificationChannelsService implements NotificationChannelsContract
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
      * @return NotificationChannelListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
         $page = omit,
         ?RequestOptions $requestOptions = null
     ): NotificationChannelListResponse {
+        $params = ['filter' => $filter, 'page' => $page];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return NotificationChannelListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): NotificationChannelListResponse {
         [$parsed, $options] = NotificationChannelListParams::parseRequest(
-            ['filter' => $filter, 'page' => $page],
+            $params,
             $requestOptions
         );
 
@@ -159,9 +240,28 @@ final class NotificationChannelsService implements NotificationChannelsContract
      * Delete a notification channel.
      *
      * @return NotificationChannelDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function delete(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): NotificationChannelDeleteResponse {
+        $params = [];
+
+        return $this->deleteRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return NotificationChannelDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): NotificationChannelDeleteResponse {
         // @phpstan-ignore-next-line;

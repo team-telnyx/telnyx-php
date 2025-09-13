@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentDeleteResponse;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentGetResponse;
@@ -26,6 +27,8 @@ interface GlobalIPAssignmentsContract
      * @param string $wireguardPeerID wireguard peer ID
      *
      * @return GlobalIPAssignmentNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $globalIPID = omit,
@@ -37,7 +40,23 @@ interface GlobalIPAssignmentsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return GlobalIPAssignmentNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): GlobalIPAssignmentNewResponse;
+
+    /**
+     * @api
+     *
      * @return GlobalIPAssignmentGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
@@ -47,9 +66,24 @@ interface GlobalIPAssignmentsContract
     /**
      * @api
      *
+     * @return GlobalIPAssignmentGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        mixed $params,
+        ?RequestOptions $requestOptions = null
+    ): GlobalIPAssignmentGetResponse;
+
+    /**
+     * @api
+     *
      * @param Body $body
      *
      * @return GlobalIPAssignmentUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function update(
         string $id,
@@ -60,9 +94,26 @@ interface GlobalIPAssignmentsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return GlobalIPAssignmentUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): GlobalIPAssignmentUpdateResponse;
+
+    /**
+     * @api
+     *
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
      * @return GlobalIPAssignmentListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $page = omit,
@@ -72,10 +123,39 @@ interface GlobalIPAssignmentsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return GlobalIPAssignmentListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): GlobalIPAssignmentListResponse;
+
+    /**
+     * @api
+     *
      * @return GlobalIPAssignmentDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function delete(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): GlobalIPAssignmentDeleteResponse;
+
+    /**
+     * @api
+     *
+     * @return GlobalIPAssignmentDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): GlobalIPAssignmentDeleteResponse;
 }

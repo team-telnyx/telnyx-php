@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Texml;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\AccountsContract;
@@ -62,6 +63,8 @@ final class AccountsService implements AccountsContract
      * @param int $pageSize The number of records to be displayed on a page
      *
      * @return AccountGetRecordingsJsonResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieveRecordingsJson(
         string $accountSid,
@@ -70,9 +73,34 @@ final class AccountsService implements AccountsContract
         $pageSize = omit,
         ?RequestOptions $requestOptions = null,
     ): AccountGetRecordingsJsonResponse {
+        $params = [
+            'dateCreated' => $dateCreated, 'page' => $page, 'pageSize' => $pageSize,
+        ];
+
+        return $this->retrieveRecordingsJsonRaw(
+            $accountSid,
+            $params,
+            $requestOptions
+        );
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return AccountGetRecordingsJsonResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRecordingsJsonRaw(
+        string $accountSid,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): AccountGetRecordingsJsonResponse {
         [$parsed, $options] = AccountRetrieveRecordingsJsonParams::parseRequest(
-            ['dateCreated' => $dateCreated, 'page' => $page, 'pageSize' => $pageSize],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -94,6 +122,8 @@ final class AccountsService implements AccountsContract
      * @param string $pageToken used to request the next page of results
      *
      * @return AccountGetTranscriptionsJsonResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieveTranscriptionsJson(
         string $accountSid,
@@ -101,8 +131,31 @@ final class AccountsService implements AccountsContract
         $pageToken = omit,
         ?RequestOptions $requestOptions = null,
     ): AccountGetTranscriptionsJsonResponse {
+        $params = ['pageSize' => $pageSize, 'pageToken' => $pageToken];
+
+        return $this->retrieveTranscriptionsJsonRaw(
+            $accountSid,
+            $params,
+            $requestOptions
+        );
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return AccountGetTranscriptionsJsonResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveTranscriptionsJsonRaw(
+        string $accountSid,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): AccountGetTranscriptionsJsonResponse {
         [$parsed, $options] = AccountRetrieveTranscriptionsJsonParams::parseRequest(
-            ['pageSize' => $pageSize, 'pageToken' => $pageToken],
+            $params,
             $requestOptions
         );
 

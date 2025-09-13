@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Portouts\PortoutGetResponse;
 use Telnyx\Portouts\PortoutListParams;
@@ -65,9 +66,28 @@ final class PortoutsService implements PortoutsContract
      * Returns the portout request based on the ID provided
      *
      * @return PortoutGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): PortoutGetResponse {
+        $params = [];
+
+        return $this->retrieveRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return PortoutGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): PortoutGetResponse {
         // @phpstan-ignore-next-line;
@@ -88,14 +108,34 @@ final class PortoutsService implements PortoutsContract
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
      * @return PortoutListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
         $page = omit,
         ?RequestOptions $requestOptions = null
     ): PortoutListResponse {
+        $params = ['filter' => $filter, 'page' => $page];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return PortoutListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): PortoutListResponse {
         [$parsed, $options] = PortoutListParams::parseRequest(
-            ['filter' => $filter, 'page' => $page],
+            $params,
             $requestOptions
         );
 
@@ -117,14 +157,35 @@ final class PortoutsService implements PortoutsContract
      * @param Filter1 $filter Consolidated filter parameter (deepObject style). Originally: filter[code], filter[code][in]
      *
      * @return PortoutListRejectionCodesResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function listRejectionCodes(
         string $portoutID,
         $filter = omit,
         ?RequestOptions $requestOptions = null
     ): PortoutListRejectionCodesResponse {
+        $params = ['filter' => $filter];
+
+        return $this->listRejectionCodesRaw($portoutID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return PortoutListRejectionCodesResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRejectionCodesRaw(
+        string $portoutID,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): PortoutListRejectionCodesResponse {
         [$parsed, $options] = PortoutListRejectionCodesParams::parseRequest(
-            ['filter' => $filter],
+            $params,
             $requestOptions
         );
 
@@ -149,6 +210,8 @@ final class PortoutsService implements PortoutsContract
      * @param bool $hostMessaging Indicates whether messaging services should be maintained with Telnyx after the port out completes
      *
      * @return PortoutUpdateStatusResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function updateStatus(
         Status|string $status,
@@ -157,9 +220,31 @@ final class PortoutsService implements PortoutsContract
         $hostMessaging = omit,
         ?RequestOptions $requestOptions = null,
     ): PortoutUpdateStatusResponse {
+        $params = [
+            'id' => $id, 'reason' => $reason, 'hostMessaging' => $hostMessaging,
+        ];
+
+        return $this->updateStatusRaw($status, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param Status|value-of<Status> $status
+     * @param array<string, mixed> $params
+     *
+     * @return PortoutUpdateStatusResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateStatusRaw(
+        Status|string $status,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): PortoutUpdateStatusResponse {
         [$parsed, $options] = PortoutUpdateStatusParams::parseRequest(
-            ['id' => $id, 'reason' => $reason, 'hostMessaging' => $hostMessaging],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
         $id = $parsed['id'];
         unset($parsed['id']);

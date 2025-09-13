@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\CredentialConnections\ConnectionRtcpSettings;
@@ -54,6 +55,8 @@ interface IPConnectionsContract
      * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
      *
      * @return IPConnectionNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $active = omit,
@@ -81,10 +84,39 @@ interface IPConnectionsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return IPConnectionNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): IPConnectionNewResponse;
+
+    /**
+     * @api
+     *
      * @return IPConnectionGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): IPConnectionGetResponse;
+
+    /**
+     * @api
+     *
+     * @return IPConnectionGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): IPConnectionGetResponse;
 
@@ -112,6 +144,8 @@ interface IPConnectionsContract
      * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
      *
      * @return IPConnectionUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function update(
         string $id,
@@ -140,6 +174,21 @@ interface IPConnectionsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return IPConnectionUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): IPConnectionUpdateResponse;
+
+    /**
+     * @api
+     *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[connection_name], filter[fqdn], filter[outbound_voice_profile_id], filter[outbound.outbound_voice_profile_id]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param Sort|value-of<Sort> $sort Specifies the sort order for results. By default sorting direction is ascending. To have the results sorted in descending order add the <code> -</code> prefix.<br/><br/>
@@ -156,6 +205,8 @@ interface IPConnectionsContract
      * </ul> <br/> If not given, results are sorted by <code>created_at</code> in descending order.
      *
      * @return IPConnectionListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
@@ -167,10 +218,39 @@ interface IPConnectionsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return IPConnectionListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): IPConnectionListResponse;
+
+    /**
+     * @api
+     *
      * @return IPConnectionDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function delete(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): IPConnectionDeleteResponse;
+
+    /**
+     * @api
+     *
+     * @return IPConnectionDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): IPConnectionDeleteResponse;
 }

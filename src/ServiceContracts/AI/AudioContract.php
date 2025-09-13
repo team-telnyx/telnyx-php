@@ -8,6 +8,7 @@ use Telnyx\AI\Audio\AudioTranscribeParams\Model;
 use Telnyx\AI\Audio\AudioTranscribeParams\ResponseFormat;
 use Telnyx\AI\Audio\AudioTranscribeParams\TimestampGranularities;
 use Telnyx\AI\Audio\AudioTranscribeResponse;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 
@@ -25,6 +26,8 @@ interface AudioContract
      * @param TimestampGranularities|value-of<TimestampGranularities> $timestampGranularities The timestamp granularities to populate for this transcription. `response_format` must be set verbose_json to use timestamp granularities. Currently `segment` is supported.
      *
      * @return AudioTranscribeResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function transcribe(
         $model = 'distil-whisper/distil-large-v2',
@@ -33,5 +36,19 @@ interface AudioContract
         $responseFormat = omit,
         $timestampGranularities = omit,
         ?RequestOptions $requestOptions = null,
+    ): AudioTranscribeResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return AudioTranscribeResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function transcribeRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
     ): AudioTranscribeResponse;
 }

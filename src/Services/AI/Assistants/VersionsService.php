@@ -27,6 +27,7 @@ use Telnyx\AI\Assistants\Versions\VersionUpdateResponse;
 use Telnyx\AI\Assistants\VoiceSettings;
 use Telnyx\AI\Assistants\WebhookTool;
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\VersionsContract;
@@ -49,6 +50,8 @@ final class VersionsService implements VersionsContract
      * @param bool $includeMcpServers
      *
      * @return VersionGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $versionID,
@@ -56,11 +59,30 @@ final class VersionsService implements VersionsContract
         $includeMcpServers = omit,
         ?RequestOptions $requestOptions = null,
     ): VersionGetResponse {
+        $params = [
+            'assistantID' => $assistantID, 'includeMcpServers' => $includeMcpServers,
+        ];
+
+        return $this->retrieveRaw($versionID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return VersionGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $versionID,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): VersionGetResponse {
         [$parsed, $options] = VersionRetrieveParams::parseRequest(
-            [
-                'assistantID' => $assistantID, 'includeMcpServers' => $includeMcpServers,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
         $assistantID = $parsed['assistantID'];
         unset($parsed['assistantID']);
@@ -100,6 +122,8 @@ final class VersionsService implements VersionsContract
      * @param VoiceSettings $voiceSettings
      *
      * @return VersionUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function update(
         string $versionID,
@@ -122,27 +146,46 @@ final class VersionsService implements VersionsContract
         $voiceSettings = omit,
         ?RequestOptions $requestOptions = null,
     ): VersionUpdateResponse {
+        $params = [
+            'assistantID' => $assistantID,
+            'description' => $description,
+            'dynamicVariables' => $dynamicVariables,
+            'dynamicVariablesWebhookURL' => $dynamicVariablesWebhookURL,
+            'enabledFeatures' => $enabledFeatures,
+            'greeting' => $greeting,
+            'insightSettings' => $insightSettings,
+            'instructions' => $instructions,
+            'llmAPIKeyRef' => $llmAPIKeyRef,
+            'messagingSettings' => $messagingSettings,
+            'model' => $model,
+            'name' => $name,
+            'privacySettings' => $privacySettings,
+            'telephonySettings' => $telephonySettings,
+            'tools' => $tools,
+            'transcription' => $transcription,
+            'voiceSettings' => $voiceSettings,
+        ];
+
+        return $this->updateRaw($versionID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return VersionUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $versionID,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): VersionUpdateResponse {
         [$parsed, $options] = VersionUpdateParams::parseRequest(
-            [
-                'assistantID' => $assistantID,
-                'description' => $description,
-                'dynamicVariables' => $dynamicVariables,
-                'dynamicVariablesWebhookURL' => $dynamicVariablesWebhookURL,
-                'enabledFeatures' => $enabledFeatures,
-                'greeting' => $greeting,
-                'insightSettings' => $insightSettings,
-                'instructions' => $instructions,
-                'llmAPIKeyRef' => $llmAPIKeyRef,
-                'messagingSettings' => $messagingSettings,
-                'model' => $model,
-                'name' => $name,
-                'privacySettings' => $privacySettings,
-                'telephonySettings' => $telephonySettings,
-                'tools' => $tools,
-                'transcription' => $transcription,
-                'voiceSettings' => $voiceSettings,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
         $assistantID = $parsed['assistantID'];
         unset($parsed['assistantID']);
@@ -163,9 +206,28 @@ final class VersionsService implements VersionsContract
      * Retrieves all versions of a specific assistant with complete configuration and metadata
      *
      * @return AssistantsList<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         string $assistantID,
+        ?RequestOptions $requestOptions = null
+    ): AssistantsList {
+        $params = [];
+
+        return $this->listRaw($assistantID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return AssistantsList<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        string $assistantID,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): AssistantsList {
         // @phpstan-ignore-next-line;
@@ -183,14 +245,33 @@ final class VersionsService implements VersionsContract
      * Permanently removes a specific version of an assistant. Can not delete main version
      *
      * @param string $assistantID
+     *
+     * @throws APIException
      */
     public function delete(
         string $versionID,
         $assistantID,
         ?RequestOptions $requestOptions = null
     ): mixed {
+        $params = ['assistantID' => $assistantID];
+
+        return $this->deleteRaw($versionID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $versionID,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): mixed {
         [$parsed, $options] = VersionDeleteParams::parseRequest(
-            ['assistantID' => $assistantID],
+            $params,
             $requestOptions
         );
         $assistantID = $parsed['assistantID'];
@@ -213,14 +294,35 @@ final class VersionsService implements VersionsContract
      * @param string $assistantID
      *
      * @return VersionPromoteResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function promote(
         string $versionID,
         $assistantID,
         ?RequestOptions $requestOptions = null
     ): VersionPromoteResponse {
+        $params = ['assistantID' => $assistantID];
+
+        return $this->promoteRaw($versionID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return VersionPromoteResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function promoteRaw(
+        string $versionID,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): VersionPromoteResponse {
         [$parsed, $options] = VersionPromoteParams::parseRequest(
-            ['assistantID' => $assistantID],
+            $params,
             $requestOptions
         );
         $assistantID = $parsed['assistantID'];

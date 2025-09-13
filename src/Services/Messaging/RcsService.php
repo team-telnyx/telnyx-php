@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Messaging;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Messaging\Rcs\RcGetCapabilitiesResponse;
 use Telnyx\Messaging\Rcs\RcInviteTestNumberParams;
@@ -39,14 +40,35 @@ final class RcsService implements RcsContract
      * @param string $id
      *
      * @return RcInviteTestNumberResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function inviteTestNumber(
         string $phoneNumber,
         $id,
         ?RequestOptions $requestOptions = null
     ): RcInviteTestNumberResponse {
+        $params = ['id' => $id];
+
+        return $this->inviteTestNumberRaw($phoneNumber, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return RcInviteTestNumberResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function inviteTestNumberRaw(
+        string $phoneNumber,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): RcInviteTestNumberResponse {
         [$parsed, $options] = RcInviteTestNumberParams::parseRequest(
-            ['id' => $id],
+            $params,
             $requestOptions
         );
         $id = $parsed['id'];
@@ -70,14 +92,34 @@ final class RcsService implements RcsContract
      * @param list<string> $phoneNumbers List of phone numbers to check
      *
      * @return RcListBulkCapabilitiesResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function listBulkCapabilities(
         $agentID,
         $phoneNumbers,
         ?RequestOptions $requestOptions = null
     ): RcListBulkCapabilitiesResponse {
+        $params = ['agentID' => $agentID, 'phoneNumbers' => $phoneNumbers];
+
+        return $this->listBulkCapabilitiesRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return RcListBulkCapabilitiesResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listBulkCapabilitiesRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): RcListBulkCapabilitiesResponse {
         [$parsed, $options] = RcListBulkCapabilitiesParams::parseRequest(
-            ['agentID' => $agentID, 'phoneNumbers' => $phoneNumbers],
+            $params,
             $requestOptions
         );
 
@@ -99,14 +141,39 @@ final class RcsService implements RcsContract
      * @param string $agentID
      *
      * @return RcGetCapabilitiesResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieveCapabilities(
         string $phoneNumber,
         $agentID,
         ?RequestOptions $requestOptions = null
     ): RcGetCapabilitiesResponse {
+        $params = ['agentID' => $agentID];
+
+        return $this->retrieveCapabilitiesRaw(
+            $phoneNumber,
+            $params,
+            $requestOptions
+        );
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return RcGetCapabilitiesResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveCapabilitiesRaw(
+        string $phoneNumber,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): RcGetCapabilitiesResponse {
         [$parsed, $options] = RcRetrieveCapabilitiesParams::parseRequest(
-            ['agentID' => $agentID],
+            $params,
             $requestOptions
         );
         $agentID = $parsed['agentID'];

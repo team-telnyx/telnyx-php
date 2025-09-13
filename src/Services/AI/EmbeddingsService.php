@@ -15,6 +15,7 @@ use Telnyx\AI\Embeddings\EmbeddingSimilaritySearchParams;
 use Telnyx\AI\Embeddings\EmbeddingSimilaritySearchResponse;
 use Telnyx\AI\Embeddings\EmbeddingURLParams;
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\EmbeddingsContract;
@@ -68,6 +69,8 @@ final class EmbeddingsService implements EmbeddingsContract
      * @param Loader|value-of<Loader> $loader supported types of custom document loaders for embeddings
      *
      * @return EmbeddingResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $bucketName,
@@ -77,15 +80,33 @@ final class EmbeddingsService implements EmbeddingsContract
         $loader = omit,
         ?RequestOptions $requestOptions = null,
     ): EmbeddingResponse {
+        $params = [
+            'bucketName' => $bucketName,
+            'documentChunkOverlapSize' => $documentChunkOverlapSize,
+            'documentChunkSize' => $documentChunkSize,
+            'embeddingModel' => $embeddingModel,
+            'loader' => $loader,
+        ];
+
+        return $this->createRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return EmbeddingResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): EmbeddingResponse {
         [$parsed, $options] = EmbeddingCreateParams::parseRequest(
-            [
-                'bucketName' => $bucketName,
-                'documentChunkOverlapSize' => $documentChunkOverlapSize,
-                'documentChunkSize' => $documentChunkSize,
-                'embeddingModel' => $embeddingModel,
-                'loader' => $loader,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -109,9 +130,28 @@ final class EmbeddingsService implements EmbeddingsContract
      * - `partial_success` - Some files were embedded successfully, but at least one failed
      *
      * @return EmbeddingGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $taskID,
+        ?RequestOptions $requestOptions = null
+    ): EmbeddingGetResponse {
+        $params = [];
+
+        return $this->retrieveRaw($taskID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return EmbeddingGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $taskID,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): EmbeddingGetResponse {
         // @phpstan-ignore-next-line;
@@ -131,13 +171,33 @@ final class EmbeddingsService implements EmbeddingsContract
      * @param list<string> $status List of task statuses i.e. `status=queued&status=processing`
      *
      * @return EmbeddingListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $status = omit,
         ?RequestOptions $requestOptions = null
     ): EmbeddingListResponse {
+        $params = ['status' => $status];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return EmbeddingListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): EmbeddingListResponse {
         [$parsed, $options] = EmbeddingListParams::parseRequest(
-            ['status' => $status],
+            $params,
             $requestOptions
         );
 
@@ -169,6 +229,8 @@ final class EmbeddingsService implements EmbeddingsContract
      * @param int $numOfDocs
      *
      * @return EmbeddingSimilaritySearchResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function similaritySearch(
         $bucketName,
@@ -176,13 +238,29 @@ final class EmbeddingsService implements EmbeddingsContract
         $numOfDocs = omit,
         ?RequestOptions $requestOptions = null,
     ): EmbeddingSimilaritySearchResponse {
+        $params = [
+            'bucketName' => $bucketName, 'query' => $query, 'numOfDocs' => $numOfDocs,
+        ];
+
+        return $this->similaritySearchRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return EmbeddingSimilaritySearchResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function similaritySearchRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): EmbeddingSimilaritySearchResponse {
         [$parsed, $options] = EmbeddingSimilaritySearchParams::parseRequest(
-            [
-                'bucketName' => $bucketName,
-                'query' => $query,
-                'numOfDocs' => $numOfDocs,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -204,14 +282,34 @@ final class EmbeddingsService implements EmbeddingsContract
      * @param string $url The URL of the webpage to embed
      *
      * @return EmbeddingResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function url(
         $bucketName,
         $url,
         ?RequestOptions $requestOptions = null
     ): EmbeddingResponse {
+        $params = ['bucketName' => $bucketName, 'url' => $url];
+
+        return $this->urlRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return EmbeddingResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function urlRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): EmbeddingResponse {
         [$parsed, $options] = EmbeddingURLParams::parseRequest(
-            ['bucketName' => $bucketName, 'url' => $url],
+            $params,
             $requestOptions
         );
 

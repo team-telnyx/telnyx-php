@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SimCardOrderPreviewContract;
@@ -27,14 +28,34 @@ final class SimCardOrderPreviewService implements SimCardOrderPreviewContract
      * @param int $quantity the amount of SIM cards that the user would like to purchase in the SIM card order
      *
      * @return SimCardOrderPreviewPreviewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function preview(
         $addressID,
         $quantity,
         ?RequestOptions $requestOptions = null
     ): SimCardOrderPreviewPreviewResponse {
+        $params = ['addressID' => $addressID, 'quantity' => $quantity];
+
+        return $this->previewRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return SimCardOrderPreviewPreviewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function previewRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): SimCardOrderPreviewPreviewResponse {
         [$parsed, $options] = SimCardOrderPreviewPreviewParams::parseRequest(
-            ['addressID' => $addressID, 'quantity' => $quantity],
+            $params,
             $requestOptions
         );
 

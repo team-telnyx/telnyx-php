@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\VirtualCrossConnectsContract;
@@ -51,6 +52,8 @@ final class VirtualCrossConnectsService implements VirtualCrossConnectsContract
      * @param string $secondaryTelnyxIP The IP address assigned to the Telnyx side of the Virtual Cross Connect.<br /><br />If none is provided, one will be generated for you.<br /><br />This value should be null for GCE as Google will only inform you of your assigned IP once the connection has been accepted.
      *
      * @return VirtualCrossConnectNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $bgpAsn,
@@ -70,25 +73,43 @@ final class VirtualCrossConnectsService implements VirtualCrossConnectsContract
         $secondaryTelnyxIP = omit,
         ?RequestOptions $requestOptions = null,
     ): VirtualCrossConnectNewResponse {
+        $params = [
+            'bgpAsn' => $bgpAsn,
+            'cloudProvider' => $cloudProvider,
+            'cloudProviderRegion' => $cloudProviderRegion,
+            'networkID' => $networkID,
+            'primaryCloudAccountID' => $primaryCloudAccountID,
+            'regionCode' => $regionCode,
+            'bandwidthMbps' => $bandwidthMbps,
+            'name' => $name,
+            'primaryBgpKey' => $primaryBgpKey,
+            'primaryCloudIP' => $primaryCloudIP,
+            'primaryTelnyxIP' => $primaryTelnyxIP,
+            'secondaryBgpKey' => $secondaryBgpKey,
+            'secondaryCloudAccountID' => $secondaryCloudAccountID,
+            'secondaryCloudIP' => $secondaryCloudIP,
+            'secondaryTelnyxIP' => $secondaryTelnyxIP,
+        ];
+
+        return $this->createRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return VirtualCrossConnectNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): VirtualCrossConnectNewResponse {
         [$parsed, $options] = VirtualCrossConnectCreateParams::parseRequest(
-            [
-                'bgpAsn' => $bgpAsn,
-                'cloudProvider' => $cloudProvider,
-                'cloudProviderRegion' => $cloudProviderRegion,
-                'networkID' => $networkID,
-                'primaryCloudAccountID' => $primaryCloudAccountID,
-                'regionCode' => $regionCode,
-                'bandwidthMbps' => $bandwidthMbps,
-                'name' => $name,
-                'primaryBgpKey' => $primaryBgpKey,
-                'primaryCloudIP' => $primaryCloudIP,
-                'primaryTelnyxIP' => $primaryTelnyxIP,
-                'secondaryBgpKey' => $secondaryBgpKey,
-                'secondaryCloudAccountID' => $secondaryCloudAccountID,
-                'secondaryCloudIP' => $secondaryCloudIP,
-                'secondaryTelnyxIP' => $secondaryTelnyxIP,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -107,9 +128,28 @@ final class VirtualCrossConnectsService implements VirtualCrossConnectsContract
      * Retrieve a Virtual Cross Connect.
      *
      * @return VirtualCrossConnectGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): VirtualCrossConnectGetResponse {
+        $params = [];
+
+        return $this->retrieveRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return VirtualCrossConnectGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): VirtualCrossConnectGetResponse {
         // @phpstan-ignore-next-line;
@@ -134,6 +174,8 @@ final class VirtualCrossConnectsService implements VirtualCrossConnectsContract
      * @param bool $secondaryRoutingAnnouncement whether the secondary BGP route is being announced
      *
      * @return VirtualCrossConnectUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function update(
         string $id,
@@ -145,16 +187,35 @@ final class VirtualCrossConnectsService implements VirtualCrossConnectsContract
         $secondaryRoutingAnnouncement = omit,
         ?RequestOptions $requestOptions = null,
     ): VirtualCrossConnectUpdateResponse {
+        $params = [
+            'primaryCloudIP' => $primaryCloudIP,
+            'primaryEnabled' => $primaryEnabled,
+            'primaryRoutingAnnouncement' => $primaryRoutingAnnouncement,
+            'secondaryCloudIP' => $secondaryCloudIP,
+            'secondaryEnabled' => $secondaryEnabled,
+            'secondaryRoutingAnnouncement' => $secondaryRoutingAnnouncement,
+        ];
+
+        return $this->updateRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return VirtualCrossConnectUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): VirtualCrossConnectUpdateResponse {
         [$parsed, $options] = VirtualCrossConnectUpdateParams::parseRequest(
-            [
-                'primaryCloudIP' => $primaryCloudIP,
-                'primaryEnabled' => $primaryEnabled,
-                'primaryRoutingAnnouncement' => $primaryRoutingAnnouncement,
-                'secondaryCloudIP' => $secondaryCloudIP,
-                'secondaryEnabled' => $secondaryEnabled,
-                'secondaryRoutingAnnouncement' => $secondaryRoutingAnnouncement,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -176,14 +237,34 @@ final class VirtualCrossConnectsService implements VirtualCrossConnectsContract
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
      * @return VirtualCrossConnectListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
         $page = omit,
         ?RequestOptions $requestOptions = null
     ): VirtualCrossConnectListResponse {
+        $params = ['filter' => $filter, 'page' => $page];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return VirtualCrossConnectListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): VirtualCrossConnectListResponse {
         [$parsed, $options] = VirtualCrossConnectListParams::parseRequest(
-            ['filter' => $filter, 'page' => $page],
+            $params,
             $requestOptions
         );
 
@@ -203,9 +284,28 @@ final class VirtualCrossConnectsService implements VirtualCrossConnectsContract
      * Delete a Virtual Cross Connect.
      *
      * @return VirtualCrossConnectDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function delete(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): VirtualCrossConnectDeleteResponse {
+        $params = [];
+
+        return $this->deleteRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return VirtualCrossConnectDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): VirtualCrossConnectDeleteResponse {
         // @phpstan-ignore-next-line;

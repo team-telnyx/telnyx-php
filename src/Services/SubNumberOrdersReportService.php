@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SubNumberOrdersReportContract;
@@ -35,6 +36,8 @@ final class SubNumberOrdersReportService implements SubNumberOrdersReportContrac
      * @param Status|value-of<Status> $status Filter by order status
      *
      * @return SubNumberOrdersReportNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $countryCode = omit,
@@ -45,16 +48,34 @@ final class SubNumberOrdersReportService implements SubNumberOrdersReportContrac
         $status = omit,
         ?RequestOptions $requestOptions = null,
     ): SubNumberOrdersReportNewResponse {
+        $params = [
+            'countryCode' => $countryCode,
+            'createdAtGt' => $createdAtGt,
+            'createdAtLt' => $createdAtLt,
+            'customerReference' => $customerReference,
+            'orderRequestID' => $orderRequestID,
+            'status' => $status,
+        ];
+
+        return $this->createRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return SubNumberOrdersReportNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): SubNumberOrdersReportNewResponse {
         [$parsed, $options] = SubNumberOrdersReportCreateParams::parseRequest(
-            [
-                'countryCode' => $countryCode,
-                'createdAtGt' => $createdAtGt,
-                'createdAtLt' => $createdAtLt,
-                'customerReference' => $customerReference,
-                'orderRequestID' => $orderRequestID,
-                'status' => $status,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -73,9 +94,28 @@ final class SubNumberOrdersReportService implements SubNumberOrdersReportContrac
      * Get the status and details of a sub number orders report.
      *
      * @return SubNumberOrdersReportGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $reportID,
+        ?RequestOptions $requestOptions = null
+    ): SubNumberOrdersReportGetResponse {
+        $params = [];
+
+        return $this->retrieveRaw($reportID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return SubNumberOrdersReportGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $reportID,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): SubNumberOrdersReportGetResponse {
         // @phpstan-ignore-next-line;
@@ -91,9 +131,26 @@ final class SubNumberOrdersReportService implements SubNumberOrdersReportContrac
      * @api
      *
      * Download the CSV file for a completed sub number orders report. The report status must be 'success' before the file can be downloaded.
+     *
+     * @throws APIException
      */
     public function download(
         string $reportID,
+        ?RequestOptions $requestOptions = null
+    ): string {
+        $params = [];
+
+        return $this->downloadRaw($reportID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @throws APIException
+     */
+    public function downloadRaw(
+        string $reportID,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): string {
         // @phpstan-ignore-next-line;

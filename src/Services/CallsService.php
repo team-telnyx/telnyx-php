@@ -31,6 +31,7 @@ use Telnyx\Calls\StreamBidirectionalMode;
 use Telnyx\Calls\StreamBidirectionalTargetLegs;
 use Telnyx\Calls\StreamCodec;
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\CallsContract;
@@ -122,6 +123,8 @@ final class CallsService implements CallsContract
      * @param WebhookURLMethod|value-of<WebhookURLMethod> $webhookURLMethod HTTP request type used for `webhook_url`
      *
      * @return CallDialResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function dial(
         $connectionID,
@@ -176,60 +179,78 @@ final class CallsService implements CallsContract
         $webhookURLMethod = omit,
         ?RequestOptions $requestOptions = null,
     ): CallDialResponse {
+        $params = [
+            'connectionID' => $connectionID,
+            'from' => $from,
+            'to' => $to,
+            'answeringMachineDetection' => $answeringMachineDetection,
+            'answeringMachineDetectionConfig' => $answeringMachineDetectionConfig,
+            'audioURL' => $audioURL,
+            'billingGroupID' => $billingGroupID,
+            'bridgeIntent' => $bridgeIntent,
+            'bridgeOnAnswer' => $bridgeOnAnswer,
+            'clientState' => $clientState,
+            'commandID' => $commandID,
+            'conferenceConfig' => $conferenceConfig,
+            'customHeaders' => $customHeaders,
+            'dialogflowConfig' => $dialogflowConfig,
+            'enableDialogflow' => $enableDialogflow,
+            'fromDisplayName' => $fromDisplayName,
+            'linkTo' => $linkTo,
+            'mediaEncryption' => $mediaEncryption,
+            'mediaName' => $mediaName,
+            'preferredCodecs' => $preferredCodecs,
+            'record' => $record,
+            'recordChannels' => $recordChannels,
+            'recordCustomFileName' => $recordCustomFileName,
+            'recordFormat' => $recordFormat,
+            'recordMaxLength' => $recordMaxLength,
+            'recordTimeoutSecs' => $recordTimeoutSecs,
+            'recordTrack' => $recordTrack,
+            'recordTrim' => $recordTrim,
+            'sendSilenceWhenIdle' => $sendSilenceWhenIdle,
+            'sipAuthPassword' => $sipAuthPassword,
+            'sipAuthUsername' => $sipAuthUsername,
+            'sipHeaders' => $sipHeaders,
+            'sipTransportProtocol' => $sipTransportProtocol,
+            'soundModifications' => $soundModifications,
+            'streamBidirectionalCodec' => $streamBidirectionalCodec,
+            'streamBidirectionalMode' => $streamBidirectionalMode,
+            'streamBidirectionalSamplingRate' => $streamBidirectionalSamplingRate,
+            'streamBidirectionalTargetLegs' => $streamBidirectionalTargetLegs,
+            'streamCodec' => $streamCodec,
+            'streamEstablishBeforeCallOriginate' => $streamEstablishBeforeCallOriginate,
+            'streamTrack' => $streamTrack,
+            'streamURL' => $streamURL,
+            'superviseCallControlID' => $superviseCallControlID,
+            'supervisorRole' => $supervisorRole,
+            'timeLimitSecs' => $timeLimitSecs,
+            'timeoutSecs' => $timeoutSecs,
+            'transcription' => $transcription,
+            'transcriptionConfig' => $transcriptionConfig,
+            'webhookURL' => $webhookURL,
+            'webhookURLMethod' => $webhookURLMethod,
+        ];
+
+        return $this->dialRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return CallDialResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function dialRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): CallDialResponse {
         [$parsed, $options] = CallDialParams::parseRequest(
-            [
-                'connectionID' => $connectionID,
-                'from' => $from,
-                'to' => $to,
-                'answeringMachineDetection' => $answeringMachineDetection,
-                'answeringMachineDetectionConfig' => $answeringMachineDetectionConfig,
-                'audioURL' => $audioURL,
-                'billingGroupID' => $billingGroupID,
-                'bridgeIntent' => $bridgeIntent,
-                'bridgeOnAnswer' => $bridgeOnAnswer,
-                'clientState' => $clientState,
-                'commandID' => $commandID,
-                'conferenceConfig' => $conferenceConfig,
-                'customHeaders' => $customHeaders,
-                'dialogflowConfig' => $dialogflowConfig,
-                'enableDialogflow' => $enableDialogflow,
-                'fromDisplayName' => $fromDisplayName,
-                'linkTo' => $linkTo,
-                'mediaEncryption' => $mediaEncryption,
-                'mediaName' => $mediaName,
-                'preferredCodecs' => $preferredCodecs,
-                'record' => $record,
-                'recordChannels' => $recordChannels,
-                'recordCustomFileName' => $recordCustomFileName,
-                'recordFormat' => $recordFormat,
-                'recordMaxLength' => $recordMaxLength,
-                'recordTimeoutSecs' => $recordTimeoutSecs,
-                'recordTrack' => $recordTrack,
-                'recordTrim' => $recordTrim,
-                'sendSilenceWhenIdle' => $sendSilenceWhenIdle,
-                'sipAuthPassword' => $sipAuthPassword,
-                'sipAuthUsername' => $sipAuthUsername,
-                'sipHeaders' => $sipHeaders,
-                'sipTransportProtocol' => $sipTransportProtocol,
-                'soundModifications' => $soundModifications,
-                'streamBidirectionalCodec' => $streamBidirectionalCodec,
-                'streamBidirectionalMode' => $streamBidirectionalMode,
-                'streamBidirectionalSamplingRate' => $streamBidirectionalSamplingRate,
-                'streamBidirectionalTargetLegs' => $streamBidirectionalTargetLegs,
-                'streamCodec' => $streamCodec,
-                'streamEstablishBeforeCallOriginate' => $streamEstablishBeforeCallOriginate,
-                'streamTrack' => $streamTrack,
-                'streamURL' => $streamURL,
-                'superviseCallControlID' => $superviseCallControlID,
-                'supervisorRole' => $supervisorRole,
-                'timeLimitSecs' => $timeLimitSecs,
-                'timeoutSecs' => $timeoutSecs,
-                'transcription' => $transcription,
-                'transcriptionConfig' => $transcriptionConfig,
-                'webhookURL' => $webhookURL,
-                'webhookURLMethod' => $webhookURLMethod,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -248,9 +269,28 @@ final class CallsService implements CallsContract
      * Returns the status of a call (data is available 10 minutes after call ended).
      *
      * @return CallGetStatusResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieveStatus(
         string $callControlID,
+        ?RequestOptions $requestOptions = null
+    ): CallGetStatusResponse {
+        $params = [];
+
+        return $this->retrieveStatusRaw($callControlID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return CallGetStatusResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveStatusRaw(
+        string $callControlID,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): CallGetStatusResponse {
         // @phpstan-ignore-next-line;

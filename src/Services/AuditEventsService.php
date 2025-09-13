@@ -10,6 +10,7 @@ use Telnyx\AuditEvents\AuditEventListParams\Page;
 use Telnyx\AuditEvents\AuditEventListParams\Sort;
 use Telnyx\AuditEvents\AuditEventListResponse;
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AuditEventsContract;
@@ -33,6 +34,8 @@ final class AuditEventsService implements AuditEventsContract
      * @param Sort|value-of<Sort> $sort set the order of the results by the creation date
      *
      * @return AuditEventListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
@@ -40,8 +43,26 @@ final class AuditEventsService implements AuditEventsContract
         $sort = omit,
         ?RequestOptions $requestOptions = null,
     ): AuditEventListResponse {
+        $params = ['filter' => $filter, 'page' => $page, 'sort' => $sort];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return AuditEventListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): AuditEventListResponse {
         [$parsed, $options] = AuditEventListParams::parseRequest(
-            ['filter' => $filter, 'page' => $page, 'sort' => $sort],
+            $params,
             $requestOptions
         );
 

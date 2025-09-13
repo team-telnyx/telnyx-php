@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\PhoneNumbers;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PhoneNumbers\Voice\CallForwarding;
 use Telnyx\PhoneNumbers\Voice\CallRecording;
@@ -38,9 +39,28 @@ final class VoiceService implements VoiceContract
      * Retrieve a phone number with voice settings
      *
      * @return VoiceGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): VoiceGetResponse {
+        $params = [];
+
+        return $this->retrieveRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return VoiceGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): VoiceGetResponse {
         // @phpstan-ignore-next-line;
@@ -68,6 +88,8 @@ final class VoiceService implements VoiceContract
      * @param UsagePaymentMethod|value-of<UsagePaymentMethod> $usagePaymentMethod controls whether a number is billed per minute or uses your concurrent channels
      *
      * @return VoiceUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function update(
         string $id,
@@ -82,19 +104,38 @@ final class VoiceService implements VoiceContract
         $usagePaymentMethod = omit,
         ?RequestOptions $requestOptions = null,
     ): VoiceUpdateResponse {
+        $params = [
+            'callForwarding' => $callForwarding,
+            'callRecording' => $callRecording,
+            'callerIDNameEnabled' => $callerIDNameEnabled,
+            'cnamListing' => $cnamListing,
+            'inboundCallScreening' => $inboundCallScreening,
+            'mediaFeatures' => $mediaFeatures,
+            'techPrefixEnabled' => $techPrefixEnabled,
+            'translatedNumber' => $translatedNumber,
+            'usagePaymentMethod' => $usagePaymentMethod,
+        ];
+
+        return $this->updateRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return VoiceUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): VoiceUpdateResponse {
         [$parsed, $options] = VoiceUpdateParams::parseRequest(
-            [
-                'callForwarding' => $callForwarding,
-                'callRecording' => $callRecording,
-                'callerIDNameEnabled' => $callerIDNameEnabled,
-                'cnamListing' => $cnamListing,
-                'inboundCallScreening' => $inboundCallScreening,
-                'mediaFeatures' => $mediaFeatures,
-                'techPrefixEnabled' => $techPrefixEnabled,
-                'translatedNumber' => $translatedNumber,
-                'usagePaymentMethod' => $usagePaymentMethod,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -117,6 +158,8 @@ final class VoiceService implements VoiceContract
      * @param Sort|value-of<Sort> $sort Specifies the sort order for results. If not given, results are sorted by created_at in descending order.
      *
      * @return VoiceListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
@@ -124,8 +167,26 @@ final class VoiceService implements VoiceContract
         $sort = omit,
         ?RequestOptions $requestOptions = null,
     ): VoiceListResponse {
+        $params = ['filter' => $filter, 'page' => $page, 'sort' => $sort];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return VoiceListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): VoiceListResponse {
         [$parsed, $options] = VoiceListParams::parseRequest(
-            ['filter' => $filter, 'page' => $page, 'sort' => $sort],
+            $params,
             $requestOptions
         );
 

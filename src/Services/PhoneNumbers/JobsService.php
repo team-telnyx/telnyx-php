@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\PhoneNumbers;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PhoneNumbers\Jobs\JobDeleteBatchParams;
 use Telnyx\PhoneNumbers\Jobs\JobDeleteBatchResponse;
@@ -38,9 +39,28 @@ final class JobsService implements JobsContract
      * Retrieve a phone numbers job
      *
      * @return JobGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): JobGetResponse {
+        $params = [];
+
+        return $this->retrieveRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return JobGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): JobGetResponse {
         // @phpstan-ignore-next-line;
@@ -62,6 +82,8 @@ final class JobsService implements JobsContract
      * @param Sort|value-of<Sort> $sort Specifies the sort order for results. If not given, results are sorted by created_at in descending order.
      *
      * @return JobListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
@@ -69,10 +91,25 @@ final class JobsService implements JobsContract
         $sort = omit,
         ?RequestOptions $requestOptions = null,
     ): JobListResponse {
-        [$parsed, $options] = JobListParams::parseRequest(
-            ['filter' => $filter, 'page' => $page, 'sort' => $sort],
-            $requestOptions
-        );
+        $params = ['filter' => $filter, 'page' => $page, 'sort' => $sort];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return JobListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): JobListResponse {
+        [$parsed, $options] = JobListParams::parseRequest($params, $requestOptions);
 
         // @phpstan-ignore-next-line;
         return $this->client->request(
@@ -92,13 +129,33 @@ final class JobsService implements JobsContract
      * @param list<string> $phoneNumbers
      *
      * @return JobDeleteBatchResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function deleteBatch(
         $phoneNumbers,
         ?RequestOptions $requestOptions = null
     ): JobDeleteBatchResponse {
+        $params = ['phoneNumbers' => $phoneNumbers];
+
+        return $this->deleteBatchRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return JobDeleteBatchResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function deleteBatchRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): JobDeleteBatchResponse {
         [$parsed, $options] = JobDeleteBatchParams::parseRequest(
-            ['phoneNumbers' => $phoneNumbers],
+            $params,
             $requestOptions
         );
 
@@ -128,6 +185,8 @@ final class JobsService implements JobsContract
      * @param UpdateVoiceSettings $voice
      *
      * @return JobUpdateBatchResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function updateBatch(
         $phoneNumbers,
@@ -141,19 +200,37 @@ final class JobsService implements JobsContract
         $voice = omit,
         ?RequestOptions $requestOptions = null,
     ): JobUpdateBatchResponse {
+        $params = [
+            'phoneNumbers' => $phoneNumbers,
+            'filter' => $filter,
+            'billingGroupID' => $billingGroupID,
+            'connectionID' => $connectionID,
+            'customerReference' => $customerReference,
+            'externalPin' => $externalPin,
+            'hdVoiceEnabled' => $hdVoiceEnabled,
+            'tags' => $tags,
+            'voice' => $voice,
+        ];
+
+        return $this->updateBatchRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return JobUpdateBatchResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateBatchRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): JobUpdateBatchResponse {
         [$parsed, $options] = JobUpdateBatchParams::parseRequest(
-            [
-                'phoneNumbers' => $phoneNumbers,
-                'filter' => $filter,
-                'billingGroupID' => $billingGroupID,
-                'connectionID' => $connectionID,
-                'customerReference' => $customerReference,
-                'externalPin' => $externalPin,
-                'hdVoiceEnabled' => $hdVoiceEnabled,
-                'tags' => $tags,
-                'voice' => $voice,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
         $query_params = array_flip(['filter']);
 
@@ -178,6 +255,8 @@ final class JobsService implements JobsContract
      * @param string|null $emergencyAddressID Identifies the address to be used with emergency services. Required if emergency_enabled is true, must be null or omitted if emergency_enabled is false.
      *
      * @return JobUpdateEmergencySettingsBatchResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function updateEmergencySettingsBatch(
         $emergencyEnabled,
@@ -185,13 +264,31 @@ final class JobsService implements JobsContract
         $emergencyAddressID = omit,
         ?RequestOptions $requestOptions = null,
     ): JobUpdateEmergencySettingsBatchResponse {
+        $params = [
+            'emergencyEnabled' => $emergencyEnabled,
+            'phoneNumbers' => $phoneNumbers,
+            'emergencyAddressID' => $emergencyAddressID,
+        ];
+
+        return $this->updateEmergencySettingsBatchRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return JobUpdateEmergencySettingsBatchResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateEmergencySettingsBatchRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): JobUpdateEmergencySettingsBatchResponse {
         [$parsed, $options] = JobUpdateEmergencySettingsBatchParams::parseRequest(
-            [
-                'emergencyEnabled' => $emergencyEnabled,
-                'phoneNumbers' => $phoneNumbers,
-                'emergencyAddressID' => $emergencyAddressID,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;

@@ -13,6 +13,7 @@ use Telnyx\Conferences\ConferenceListParticipantsParams\Page as Page1;
 use Telnyx\Conferences\ConferenceListParticipantsResponse;
 use Telnyx\Conferences\ConferenceListResponse;
 use Telnyx\Conferences\ConferenceNewResponse;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 
@@ -36,6 +37,8 @@ interface ConferencesContract
      * @param bool $startConferenceOnCreate Whether the conference should be started on creation. If the conference isn't started all participants that join are automatically put on hold. Defaults to "true".
      *
      * @return ConferenceNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $callControlID,
@@ -55,10 +58,39 @@ interface ConferencesContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return ConferenceNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): ConferenceNewResponse;
+
+    /**
+     * @api
+     *
      * @return ConferenceGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): ConferenceGetResponse;
+
+    /**
+     * @api
+     *
+     * @return ConferenceGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): ConferenceGetResponse;
 
@@ -69,6 +101,8 @@ interface ConferencesContract
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number]
      *
      * @return ConferenceListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
@@ -79,15 +113,46 @@ interface ConferencesContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return ConferenceListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): ConferenceListResponse;
+
+    /**
+     * @api
+     *
      * @param Filter1 $filter Consolidated filter parameter (deepObject style). Originally: filter[muted], filter[on_hold], filter[whispering]
      * @param Page1 $page Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number]
      *
      * @return ConferenceListParticipantsResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function listParticipants(
         string $conferenceID,
         $filter = omit,
         $page = omit,
+        ?RequestOptions $requestOptions = null,
+    ): ConferenceListParticipantsResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ConferenceListParticipantsResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listParticipantsRaw(
+        string $conferenceID,
+        array $params,
         ?RequestOptions $requestOptions = null,
     ): ConferenceListParticipantsResponse;
 }

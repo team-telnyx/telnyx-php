@@ -8,6 +8,7 @@ use Telnyx\ChargesBreakdown\ChargesBreakdownGetResponse;
 use Telnyx\ChargesBreakdown\ChargesBreakdownRetrieveParams;
 use Telnyx\ChargesBreakdown\ChargesBreakdownRetrieveParams\Format;
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ChargesBreakdownContract;
@@ -31,6 +32,8 @@ final class ChargesBreakdownService implements ChargesBreakdownContract
      * @param Format|value-of<Format> $format Response format
      *
      * @return ChargesBreakdownGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         $startDate,
@@ -38,9 +41,29 @@ final class ChargesBreakdownService implements ChargesBreakdownContract
         $format = omit,
         ?RequestOptions $requestOptions = null,
     ): ChargesBreakdownGetResponse {
+        $params = [
+            'startDate' => $startDate, 'endDate' => $endDate, 'format' => $format,
+        ];
+
+        return $this->retrieveRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ChargesBreakdownGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): ChargesBreakdownGetResponse {
         [$parsed, $options] = ChargesBreakdownRetrieveParams::parseRequest(
-            ['startDate' => $startDate, 'endDate' => $endDate, 'format' => $format],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;

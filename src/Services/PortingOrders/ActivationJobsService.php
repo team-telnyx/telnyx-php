@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\PortingOrders;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PortingOrders\ActivationJobs\ActivationJobGetResponse;
 use Telnyx\PortingOrders\ActivationJobs\ActivationJobListParams;
@@ -33,14 +34,35 @@ final class ActivationJobsService implements ActivationJobsContract
      * @param string $id
      *
      * @return ActivationJobGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $activationJobID,
         $id,
         ?RequestOptions $requestOptions = null
     ): ActivationJobGetResponse {
+        $params = ['id' => $id];
+
+        return $this->retrieveRaw($activationJobID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ActivationJobGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $activationJobID,
+        array $params,
+        ?RequestOptions $requestOptions = null,
+    ): ActivationJobGetResponse {
         [$parsed, $options] = ActivationJobRetrieveParams::parseRequest(
-            ['id' => $id],
+            $params,
             $requestOptions
         );
         $id = $parsed['id'];
@@ -64,6 +86,8 @@ final class ActivationJobsService implements ActivationJobsContract
      * @param \DateTimeInterface $activateAt The desired activation time. The activation time should be between any of the activation windows.
      *
      * @return ActivationJobUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function update(
         string $activationJobID,
@@ -71,8 +95,27 @@ final class ActivationJobsService implements ActivationJobsContract
         $activateAt = omit,
         ?RequestOptions $requestOptions = null,
     ): ActivationJobUpdateResponse {
+        $params = ['id' => $id, 'activateAt' => $activateAt];
+
+        return $this->updateRaw($activationJobID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ActivationJobUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $activationJobID,
+        array $params,
+        ?RequestOptions $requestOptions = null,
+    ): ActivationJobUpdateResponse {
         [$parsed, $options] = ActivationJobUpdateParams::parseRequest(
-            ['id' => $id, 'activateAt' => $activateAt],
+            $params,
             $requestOptions
         );
         $id = $parsed['id'];
@@ -96,14 +139,35 @@ final class ActivationJobsService implements ActivationJobsContract
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @return ActivationJobListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         string $id,
         $page = omit,
         ?RequestOptions $requestOptions = null
     ): ActivationJobListResponse {
+        $params = ['page' => $page];
+
+        return $this->listRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ActivationJobListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): ActivationJobListResponse {
         [$parsed, $options] = ActivationJobListParams::parseRequest(
-            ['page' => $page],
+            $params,
             $requestOptions
         );
 

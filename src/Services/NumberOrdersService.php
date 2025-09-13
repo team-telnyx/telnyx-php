@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\NumberOrderPhoneNumbers\UpdateRegulatoryRequirement;
 use Telnyx\NumberOrders\NumberOrderCreateParams;
@@ -41,6 +42,8 @@ final class NumberOrdersService implements NumberOrdersContract
      * @param list<PhoneNumber> $phoneNumbers
      *
      * @return NumberOrderNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $billingGroupID = omit,
@@ -50,15 +53,33 @@ final class NumberOrdersService implements NumberOrdersContract
         $phoneNumbers = omit,
         ?RequestOptions $requestOptions = null,
     ): NumberOrderNewResponse {
+        $params = [
+            'billingGroupID' => $billingGroupID,
+            'connectionID' => $connectionID,
+            'customerReference' => $customerReference,
+            'messagingProfileID' => $messagingProfileID,
+            'phoneNumbers' => $phoneNumbers,
+        ];
+
+        return $this->createRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return NumberOrderNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): NumberOrderNewResponse {
         [$parsed, $options] = NumberOrderCreateParams::parseRequest(
-            [
-                'billingGroupID' => $billingGroupID,
-                'connectionID' => $connectionID,
-                'customerReference' => $customerReference,
-                'messagingProfileID' => $messagingProfileID,
-                'phoneNumbers' => $phoneNumbers,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -77,9 +98,28 @@ final class NumberOrdersService implements NumberOrdersContract
      * Get an existing phone number order.
      *
      * @return NumberOrderGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $numberOrderID,
+        ?RequestOptions $requestOptions = null
+    ): NumberOrderGetResponse {
+        $params = [];
+
+        return $this->retrieveRaw($numberOrderID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return NumberOrderGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $numberOrderID,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): NumberOrderGetResponse {
         // @phpstan-ignore-next-line;
@@ -100,6 +140,8 @@ final class NumberOrdersService implements NumberOrdersContract
      * @param list<UpdateRegulatoryRequirement> $regulatoryRequirements
      *
      * @return NumberOrderUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function update(
         string $numberOrderID,
@@ -107,12 +149,31 @@ final class NumberOrdersService implements NumberOrdersContract
         $regulatoryRequirements = omit,
         ?RequestOptions $requestOptions = null,
     ): NumberOrderUpdateResponse {
+        $params = [
+            'customerReference' => $customerReference,
+            'regulatoryRequirements' => $regulatoryRequirements,
+        ];
+
+        return $this->updateRaw($numberOrderID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return NumberOrderUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $numberOrderID,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): NumberOrderUpdateResponse {
         [$parsed, $options] = NumberOrderUpdateParams::parseRequest(
-            [
-                'customerReference' => $customerReference,
-                'regulatoryRequirements' => $regulatoryRequirements,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -134,14 +195,34 @@ final class NumberOrdersService implements NumberOrdersContract
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @return NumberOrderListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
         $page = omit,
         ?RequestOptions $requestOptions = null
     ): NumberOrderListResponse {
+        $params = ['filter' => $filter, 'page' => $page];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return NumberOrderListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): NumberOrderListResponse {
         [$parsed, $options] = NumberOrderListParams::parseRequest(
-            ['filter' => $filter, 'page' => $page],
+            $params,
             $requestOptions
         );
 

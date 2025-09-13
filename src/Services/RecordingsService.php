@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Recordings\RecordingDeleteResponse;
 use Telnyx\Recordings\RecordingGetResponse;
@@ -39,9 +40,28 @@ final class RecordingsService implements RecordingsContract
      * Retrieves the details of an existing call recording.
      *
      * @return RecordingGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $recordingID,
+        ?RequestOptions $requestOptions = null
+    ): RecordingGetResponse {
+        $params = [];
+
+        return $this->retrieveRaw($recordingID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return RecordingGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $recordingID,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): RecordingGetResponse {
         // @phpstan-ignore-next-line;
@@ -62,14 +82,34 @@ final class RecordingsService implements RecordingsContract
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @return RecordingListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
         $page = omit,
         ?RequestOptions $requestOptions = null
     ): RecordingListResponse {
+        $params = ['filter' => $filter, 'page' => $page];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return RecordingListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): RecordingListResponse {
         [$parsed, $options] = RecordingListParams::parseRequest(
-            ['filter' => $filter, 'page' => $page],
+            $params,
             $requestOptions
         );
 
@@ -89,9 +129,28 @@ final class RecordingsService implements RecordingsContract
      * Permanently deletes a call recording.
      *
      * @return RecordingDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function delete(
         string $recordingID,
+        ?RequestOptions $requestOptions = null
+    ): RecordingDeleteResponse {
+        $params = [];
+
+        return $this->deleteRaw($recordingID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return RecordingDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $recordingID,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): RecordingDeleteResponse {
         // @phpstan-ignore-next-line;

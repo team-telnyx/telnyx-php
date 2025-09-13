@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\RoomRecordings\RoomRecordingDeleteBulkParams;
@@ -33,10 +34,29 @@ final class RoomRecordingsService implements RoomRecordingsContract
      * View a room recording.
      *
      * @return RoomRecordingGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $roomRecordingID,
         ?RequestOptions $requestOptions = null
+    ): RoomRecordingGetResponse {
+        $params = [];
+
+        return $this->retrieveRaw($roomRecordingID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return RoomRecordingGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $roomRecordingID,
+        mixed $params,
+        ?RequestOptions $requestOptions = null,
     ): RoomRecordingGetResponse {
         // @phpstan-ignore-next-line;
         return $this->client->request(
@@ -56,14 +76,34 @@ final class RoomRecordingsService implements RoomRecordingsContract
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @return RoomRecordingListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
         $page = omit,
         ?RequestOptions $requestOptions = null
     ): RoomRecordingListResponse {
+        $params = ['filter' => $filter, 'page' => $page];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return RoomRecordingListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): RoomRecordingListResponse {
         [$parsed, $options] = RoomRecordingListParams::parseRequest(
-            ['filter' => $filter, 'page' => $page],
+            $params,
             $requestOptions
         );
 
@@ -81,10 +121,27 @@ final class RoomRecordingsService implements RoomRecordingsContract
      * @api
      *
      * Synchronously delete a Room Recording.
+     *
+     * @throws APIException
      */
     public function delete(
         string $roomRecordingID,
         ?RequestOptions $requestOptions = null
+    ): mixed {
+        $params = [];
+
+        return $this->deleteRaw($roomRecordingID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $roomRecordingID,
+        mixed $params,
+        ?RequestOptions $requestOptions = null,
     ): mixed {
         // @phpstan-ignore-next-line;
         return $this->client->request(
@@ -104,14 +161,34 @@ final class RoomRecordingsService implements RoomRecordingsContract
      * @param Page1 $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @return RoomRecordingDeleteBulkResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function deleteBulk(
         $filter = omit,
         $page = omit,
         ?RequestOptions $requestOptions = null
     ): RoomRecordingDeleteBulkResponse {
+        $params = ['filter' => $filter, 'page' => $page];
+
+        return $this->deleteBulkRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return RoomRecordingDeleteBulkResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function deleteBulkRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): RoomRecordingDeleteBulkResponse {
         [$parsed, $options] = RoomRecordingDeleteBulkParams::parseRequest(
-            ['filter' => $filter, 'page' => $page],
+            $params,
             $requestOptions
         );
 

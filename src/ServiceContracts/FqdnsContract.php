@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Fqdns\FqdnDeleteResponse;
 use Telnyx\Fqdns\FqdnGetResponse;
@@ -27,6 +28,8 @@ interface FqdnsContract
      * @param int|null $port port to use when connecting to this FQDN
      *
      * @return FqdnNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $connectionID,
@@ -39,10 +42,39 @@ interface FqdnsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return FqdnNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): FqdnNewResponse;
+
+    /**
+     * @api
+     *
      * @return FqdnGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): FqdnGetResponse;
+
+    /**
+     * @api
+     *
+     * @return FqdnGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): FqdnGetResponse;
 
@@ -55,6 +87,8 @@ interface FqdnsContract
      * @param int|null $port port to use when connecting to this FQDN
      *
      * @return FqdnUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function update(
         string $id,
@@ -68,10 +102,27 @@ interface FqdnsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return FqdnUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): FqdnUpdateResponse;
+
+    /**
+     * @api
+     *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[connection_id], filter[fqdn], filter[port], filter[dns_record_type]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @return FqdnListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
@@ -82,10 +133,39 @@ interface FqdnsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return FqdnListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): FqdnListResponse;
+
+    /**
+     * @api
+     *
      * @return FqdnDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function delete(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): FqdnDeleteResponse;
+
+    /**
+     * @api
+     *
+     * @return FqdnDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): FqdnDeleteResponse;
 }

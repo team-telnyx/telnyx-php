@@ -10,6 +10,7 @@ use Telnyx\AI\Assistants\Tests\TestCreateParams\Rubric;
 use Telnyx\AI\Assistants\Tests\TestListParams\Page;
 use Telnyx\AI\Assistants\Tests\TestListResponse;
 use Telnyx\AI\Assistants\Tests\TestUpdateParams\Rubric as Rubric1;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 
@@ -30,6 +31,8 @@ interface TestsContract
      * @param string $testSuite Optional test suite name to group related tests together. Useful for organizing tests by feature, team, or release cycle.
      *
      * @return AssistantTest<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $destination,
@@ -46,10 +49,39 @@ interface TestsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
      * @return AssistantTest<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): AssistantTest;
+
+    /**
+     * @api
+     *
+     * @return AssistantTest<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $testID,
+        ?RequestOptions $requestOptions = null
+    ): AssistantTest;
+
+    /**
+     * @api
+     *
+     * @return AssistantTest<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $testID,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): AssistantTest;
 
@@ -66,6 +98,8 @@ interface TestsContract
      * @param string $testSuite updated test suite assignment for better organization
      *
      * @return AssistantTest<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function update(
         string $testID,
@@ -83,12 +117,29 @@ interface TestsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return AssistantTest<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $testID,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): AssistantTest;
+
+    /**
+     * @api
+     *
      * @param string $destination Filter tests by destination (phone number, webhook URL, etc.)
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param string $telnyxConversationChannel Filter tests by communication channel (e.g., 'web_chat', 'sms')
      * @param string $testSuite Filter tests by test suite name
      *
      * @return TestListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $destination = omit,
@@ -100,9 +151,36 @@ interface TestsContract
 
     /**
      * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return TestListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): TestListResponse;
+
+    /**
+     * @api
+     *
+     * @throws APIException
      */
     public function delete(
         string $testID,
+        ?RequestOptions $requestOptions = null
+    ): mixed;
+
+    /**
+     * @api
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $testID,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): mixed;
 }

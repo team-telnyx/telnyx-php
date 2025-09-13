@@ -11,7 +11,7 @@ use Telnyx\PortingOrders\PortingOrderGetSubRequestResponse\Data;
 
 /**
  * @phpstan-type porting_order_get_sub_request_response = array{data?: Data}
- * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * When used in a response, this type parameter can define a $rawResponse property.
  * @template TRawResponse of object = object{}
  *
  * @mixin TRawResponse

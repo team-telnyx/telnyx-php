@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Media\MediaGetResponse;
 use Telnyx\Media\MediaListParams\Filter;
@@ -20,9 +21,24 @@ interface MediaContract
      * @api
      *
      * @return MediaGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $mediaName,
+        ?RequestOptions $requestOptions = null
+    ): MediaGetResponse;
+
+    /**
+     * @api
+     *
+     * @return MediaGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $mediaName,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): MediaGetResponse;
 
@@ -33,6 +49,8 @@ interface MediaContract
      * @param int $ttlSecs The number of seconds after which the media resource will be deleted, defaults to 2 days. The maximum allowed vale is 630720000, which translates to 20 years.
      *
      * @return MediaUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function update(
         string $mediaName,
@@ -44,9 +62,26 @@ interface MediaContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return MediaUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $mediaName,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): MediaUpdateResponse;
+
+    /**
+     * @api
+     *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[content_type][]
      *
      * @return MediaListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
@@ -55,6 +90,22 @@ interface MediaContract
 
     /**
      * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return MediaListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): MediaListResponse;
+
+    /**
+     * @api
+     *
+     * @throws APIException
      */
     public function delete(
         string $mediaName,
@@ -63,9 +114,33 @@ interface MediaContract
 
     /**
      * @api
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $mediaName,
+        mixed $params,
+        ?RequestOptions $requestOptions = null
+    ): mixed;
+
+    /**
+     * @api
+     *
+     * @throws APIException
      */
     public function download(
         string $mediaName,
+        ?RequestOptions $requestOptions = null
+    ): string;
+
+    /**
+     * @api
+     *
+     * @throws APIException
+     */
+    public function downloadRaw(
+        string $mediaName,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): string;
 
@@ -77,11 +152,27 @@ interface MediaContract
      * @param int $ttlSecs The number of seconds after which the media resource will be deleted, defaults to 2 days. The maximum allowed vale is 630720000, which translates to 20 years.
      *
      * @return MediaUploadResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function upload(
         $mediaURL,
         $mediaName = omit,
         $ttlSecs = omit,
         ?RequestOptions $requestOptions = null,
+    ): MediaUploadResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return MediaUploadResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function uploadRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
     ): MediaUploadResponse;
 }

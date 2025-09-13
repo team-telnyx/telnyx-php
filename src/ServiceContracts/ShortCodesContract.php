@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ShortCodes\ShortCodeGetResponse;
@@ -20,6 +21,8 @@ interface ShortCodesContract
      * @api
      *
      * @return ShortCodeGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
@@ -29,9 +32,24 @@ interface ShortCodesContract
     /**
      * @api
      *
+     * @return ShortCodeGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        mixed $params,
+        ?RequestOptions $requestOptions = null
+    ): ShortCodeGetResponse;
+
+    /**
+     * @api
+     *
      * @param string $messagingProfileID unique identifier for a messaging profile
      *
      * @return ShortCodeUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function update(
         string $id,
@@ -42,14 +60,45 @@ interface ShortCodesContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return ShortCodeUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): ShortCodeUpdateResponse;
+
+    /**
+     * @api
+     *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[messaging_profile_id]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
      * @return ShortCodeListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
         $page = omit,
+        ?RequestOptions $requestOptions = null
+    ): ShortCodeListResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ShortCodeListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
         ?RequestOptions $requestOptions = null
     ): ShortCodeListResponse;
 }

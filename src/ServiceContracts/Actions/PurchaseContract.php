@@ -6,6 +6,7 @@ namespace Telnyx\ServiceContracts\Actions;
 
 use Telnyx\Actions\Purchase\PurchaseCreateParams\Status;
 use Telnyx\Actions\Purchase\PurchaseNewResponse;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 
@@ -24,6 +25,8 @@ interface PurchaseContract
      * @param string $whitelabelName Service Provider Name (SPN) for the Whitelabel eSIM product. It will be displayed as the mobile service name by operating systems of smartphones. This parameter must only contain letters, numbers and whitespaces.
      *
      * @return PurchaseNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $amount,
@@ -33,5 +36,19 @@ interface PurchaseContract
         $tags = omit,
         $whitelabelName = omit,
         ?RequestOptions $requestOptions = null,
+    ): PurchaseNewResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return PurchaseNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
     ): PurchaseNewResponse;
 }

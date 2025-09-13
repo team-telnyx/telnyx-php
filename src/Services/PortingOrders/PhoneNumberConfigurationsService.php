@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\PortingOrders;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationCreateParams;
 use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationCreateParams\PhoneNumberConfiguration;
@@ -34,14 +35,34 @@ final class PhoneNumberConfigurationsService implements PhoneNumberConfiguration
      * @param list<PhoneNumberConfiguration> $phoneNumberConfigurations
      *
      * @return PhoneNumberConfigurationNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $phoneNumberConfigurations = omit,
         ?RequestOptions $requestOptions = null
     ): PhoneNumberConfigurationNewResponse {
+        $params = ['phoneNumberConfigurations' => $phoneNumberConfigurations];
+
+        return $this->createRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return PhoneNumberConfigurationNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): PhoneNumberConfigurationNewResponse {
         [$parsed, $options] = PhoneNumberConfigurationCreateParams::parseRequest(
-            ['phoneNumberConfigurations' => $phoneNumberConfigurations],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -64,6 +85,8 @@ final class PhoneNumberConfigurationsService implements PhoneNumberConfiguration
      * @param Sort $sort Consolidated sort parameter (deepObject style). Originally: sort[value]
      *
      * @return PhoneNumberConfigurationListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
@@ -71,8 +94,26 @@ final class PhoneNumberConfigurationsService implements PhoneNumberConfiguration
         $sort = omit,
         ?RequestOptions $requestOptions = null,
     ): PhoneNumberConfigurationListResponse {
+        $params = ['filter' => $filter, 'page' => $page, 'sort' => $sort];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return PhoneNumberConfigurationListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): PhoneNumberConfigurationListResponse {
         [$parsed, $options] = PhoneNumberConfigurationListParams::parseRequest(
-            ['filter' => $filter, 'page' => $page, 'sort' => $sort],
+            $params,
             $requestOptions
         );
 

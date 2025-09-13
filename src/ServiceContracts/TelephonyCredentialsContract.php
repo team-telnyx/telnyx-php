@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\TelephonyCredentials\TelephonyCredentialDeleteResponse;
@@ -27,6 +28,8 @@ interface TelephonyCredentialsContract
      * @param string $tag Tags a credential. A single tag can hold at maximum 1000 credentials.
      *
      * @return TelephonyCredentialNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $connectionID,
@@ -39,10 +42,39 @@ interface TelephonyCredentialsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return TelephonyCredentialNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): TelephonyCredentialNewResponse;
+
+    /**
+     * @api
+     *
      * @return TelephonyCredentialGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): TelephonyCredentialGetResponse;
+
+    /**
+     * @api
+     *
+     * @return TelephonyCredentialGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): TelephonyCredentialGetResponse;
 
@@ -55,6 +87,8 @@ interface TelephonyCredentialsContract
      * @param string $tag Tags a credential. A single tag can hold at maximum 1000 credentials.
      *
      * @return TelephonyCredentialUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function update(
         string $id,
@@ -68,10 +102,27 @@ interface TelephonyCredentialsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return TelephonyCredentialUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): TelephonyCredentialUpdateResponse;
+
+    /**
+     * @api
+     *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[tag], filter[name], filter[status], filter[resource_id], filter[sip_username]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
      * @return TelephonyCredentialListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
@@ -82,7 +133,23 @@ interface TelephonyCredentialsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return TelephonyCredentialListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): TelephonyCredentialListResponse;
+
+    /**
+     * @api
+     *
      * @return TelephonyCredentialDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function delete(
         string $id,
@@ -91,9 +158,35 @@ interface TelephonyCredentialsContract
 
     /**
      * @api
+     *
+     * @return TelephonyCredentialDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $id,
+        mixed $params,
+        ?RequestOptions $requestOptions = null
+    ): TelephonyCredentialDeleteResponse;
+
+    /**
+     * @api
+     *
+     * @throws APIException
      */
     public function createToken(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): string;
+
+    /**
+     * @api
+     *
+     * @throws APIException
+     */
+    public function createTokenRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): string;
 }

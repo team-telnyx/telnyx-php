@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressCreateParams\CountryCode;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressDeleteResponse;
@@ -34,6 +35,8 @@ interface DynamicEmergencyAddressesContract
      * @param string $streetSuffix
      *
      * @return DynamicEmergencyAddressNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $administrativeArea,
@@ -53,10 +56,39 @@ interface DynamicEmergencyAddressesContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return DynamicEmergencyAddressNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): DynamicEmergencyAddressNewResponse;
+
+    /**
+     * @api
+     *
      * @return DynamicEmergencyAddressGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): DynamicEmergencyAddressGetResponse;
+
+    /**
+     * @api
+     *
+     * @return DynamicEmergencyAddressGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): DynamicEmergencyAddressGetResponse;
 
@@ -67,6 +99,8 @@ interface DynamicEmergencyAddressesContract
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @return DynamicEmergencyAddressListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
@@ -77,10 +111,39 @@ interface DynamicEmergencyAddressesContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return DynamicEmergencyAddressListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): DynamicEmergencyAddressListResponse;
+
+    /**
+     * @api
+     *
      * @return DynamicEmergencyAddressDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function delete(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): DynamicEmergencyAddressDeleteResponse;
+
+    /**
+     * @api
+     *
+     * @return DynamicEmergencyAddressDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): DynamicEmergencyAddressDeleteResponse;
 }

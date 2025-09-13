@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\ExternalConnections;
 
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\ExternalConnections\Uploads\UploadCreateParams\AdditionalUsage;
 use Telnyx\ExternalConnections\Uploads\UploadCreateParams\Usage;
@@ -31,6 +32,8 @@ interface UploadsContract
      * @param Usage|value-of<Usage> $usage The use case of the upload request. NOTE: `calling_user_assignment` is not supported for toll free numbers.
      *
      * @return UploadNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         string $id,
@@ -45,9 +48,26 @@ interface UploadsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return UploadNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): UploadNewResponse;
+
+    /**
+     * @api
+     *
      * @param string $id
      *
      * @return UploadGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $ticketID,
@@ -58,10 +78,27 @@ interface UploadsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return UploadGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $ticketID,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): UploadGetResponse;
+
+    /**
+     * @api
+     *
      * @param Filter $filter Filter parameter for uploads (deepObject style). Supports filtering by status, civic_address_id, location_id, and phone_number with eq/contains operations.
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @return UploadListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         string $id,
@@ -73,7 +110,24 @@ interface UploadsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return UploadListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): UploadListResponse;
+
+    /**
+     * @api
+     *
      * @return UploadPendingCountResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function pendingCount(
         string $id,
@@ -83,7 +137,22 @@ interface UploadsContract
     /**
      * @api
      *
+     * @return UploadPendingCountResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function pendingCountRaw(
+        string $id,
+        mixed $params,
+        ?RequestOptions $requestOptions = null
+    ): UploadPendingCountResponse;
+
+    /**
+     * @api
+     *
      * @return UploadRefreshStatusResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function refreshStatus(
         string $id,
@@ -93,13 +162,43 @@ interface UploadsContract
     /**
      * @api
      *
+     * @return UploadRefreshStatusResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function refreshStatusRaw(
+        string $id,
+        mixed $params,
+        ?RequestOptions $requestOptions = null
+    ): UploadRefreshStatusResponse;
+
+    /**
+     * @api
+     *
      * @param string $id
      *
      * @return UploadRetryResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retry(
         string $ticketID,
         $id,
+        ?RequestOptions $requestOptions = null
+    ): UploadRetryResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return UploadRetryResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retryRaw(
+        string $ticketID,
+        array $params,
         ?RequestOptions $requestOptions = null
     ): UploadRetryResponse;
 }

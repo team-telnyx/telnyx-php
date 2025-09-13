@@ -20,7 +20,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   start?: int,
  *   uri?: string,
  * }
- * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * When used in a response, this type parameter can define a $rawResponse property.
  * @template TRawResponse of object = object{}
  *
  * @mixin TRawResponse

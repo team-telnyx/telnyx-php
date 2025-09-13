@@ -9,6 +9,7 @@ use Telnyx\AI\Conversations\ConversationGetConversationsInsightsResponse;
 use Telnyx\AI\Conversations\ConversationGetResponse;
 use Telnyx\AI\Conversations\ConversationListResponse;
 use Telnyx\AI\Conversations\ConversationUpdateResponse;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 
@@ -24,6 +25,8 @@ interface ConversationsContract
      * @param string $name
      *
      * @return Conversation<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $metadata = omit,
@@ -34,7 +37,23 @@ interface ConversationsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return Conversation<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): Conversation;
+
+    /**
+     * @api
+     *
      * @return ConversationGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $conversationID,
@@ -44,14 +63,44 @@ interface ConversationsContract
     /**
      * @api
      *
+     * @return ConversationGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $conversationID,
+        mixed $params,
+        ?RequestOptions $requestOptions = null,
+    ): ConversationGetResponse;
+
+    /**
+     * @api
+     *
      * @param array<string,
      * string,> $metadata Metadata associated with the conversation
      *
      * @return ConversationUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function update(
         string $conversationID,
         $metadata = omit,
+        ?RequestOptions $requestOptions = null,
+    ): ConversationUpdateResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ConversationUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $conversationID,
+        array $params,
         ?RequestOptions $requestOptions = null,
     ): ConversationUpdateResponse;
 
@@ -72,6 +121,8 @@ interface ConversationsContract
      * @param string $order Order the results by specific fields (e.g., `order=created_at.desc` or `order=last_message_at.asc`)
      *
      * @return ConversationListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $id = omit,
@@ -91,6 +142,22 @@ interface ConversationsContract
 
     /**
      * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ConversationListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): ConversationListResponse;
+
+    /**
+     * @api
+     *
+     * @throws APIException
      */
     public function delete(
         string $conversationID,
@@ -100,10 +167,36 @@ interface ConversationsContract
     /**
      * @api
      *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $conversationID,
+        mixed $params,
+        ?RequestOptions $requestOptions = null,
+    ): mixed;
+
+    /**
+     * @api
+     *
      * @return ConversationGetConversationsInsightsResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieveConversationsInsights(
         string $conversationID,
         ?RequestOptions $requestOptions = null
+    ): ConversationGetConversationsInsightsResponse;
+
+    /**
+     * @api
+     *
+     * @return ConversationGetConversationsInsightsResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveConversationsInsightsRaw(
+        string $conversationID,
+        mixed $params,
+        ?RequestOptions $requestOptions = null,
     ): ConversationGetConversationsInsightsResponse;
 }

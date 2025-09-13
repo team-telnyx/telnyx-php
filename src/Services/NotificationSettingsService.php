@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\NotificationSettings\NotificationSettingCreateParams;
 use Telnyx\NotificationSettings\NotificationSettingCreateParams\Parameter;
@@ -38,6 +39,8 @@ final class NotificationSettingsService implements NotificationSettingsContract
      * @param list<Parameter> $parameters
      *
      * @return NotificationSettingNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $notificationChannelID = omit,
@@ -46,14 +49,32 @@ final class NotificationSettingsService implements NotificationSettingsContract
         $parameters = omit,
         ?RequestOptions $requestOptions = null,
     ): NotificationSettingNewResponse {
+        $params = [
+            'notificationChannelID' => $notificationChannelID,
+            'notificationEventConditionID' => $notificationEventConditionID,
+            'notificationProfileID' => $notificationProfileID,
+            'parameters' => $parameters,
+        ];
+
+        return $this->createRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return NotificationSettingNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): NotificationSettingNewResponse {
         [$parsed, $options] = NotificationSettingCreateParams::parseRequest(
-            [
-                'notificationChannelID' => $notificationChannelID,
-                'notificationEventConditionID' => $notificationEventConditionID,
-                'notificationProfileID' => $notificationProfileID,
-                'parameters' => $parameters,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -72,9 +93,28 @@ final class NotificationSettingsService implements NotificationSettingsContract
      * Get a notification setting.
      *
      * @return NotificationSettingGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): NotificationSettingGetResponse {
+        $params = [];
+
+        return $this->retrieveRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return NotificationSettingGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): NotificationSettingGetResponse {
         // @phpstan-ignore-next-line;
@@ -95,14 +135,34 @@ final class NotificationSettingsService implements NotificationSettingsContract
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
      * @return NotificationSettingListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
         $page = omit,
         ?RequestOptions $requestOptions = null
     ): NotificationSettingListResponse {
+        $params = ['filter' => $filter, 'page' => $page];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return NotificationSettingListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): NotificationSettingListResponse {
         [$parsed, $options] = NotificationSettingListParams::parseRequest(
-            ['filter' => $filter, 'page' => $page],
+            $params,
             $requestOptions
         );
 
@@ -122,9 +182,28 @@ final class NotificationSettingsService implements NotificationSettingsContract
      * Delete a notification setting.
      *
      * @return NotificationSettingDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function delete(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): NotificationSettingDeleteResponse {
+        $params = [];
+
+        return $this->deleteRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return NotificationSettingDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): NotificationSettingDeleteResponse {
         // @phpstan-ignore-next-line;

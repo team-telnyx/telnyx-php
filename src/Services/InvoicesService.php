@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Invoices\InvoiceGetResponse;
 use Telnyx\Invoices\InvoiceListParams;
@@ -33,14 +34,35 @@ final class InvoicesService implements InvoicesContract
      * @param Action|value-of<Action> $action Invoice action
      *
      * @return InvoiceGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
         $action = omit,
         ?RequestOptions $requestOptions = null
     ): InvoiceGetResponse {
+        $params = ['action' => $action];
+
+        return $this->retrieveRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return InvoiceGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): InvoiceGetResponse {
         [$parsed, $options] = InvoiceRetrieveParams::parseRequest(
-            ['action' => $action],
+            $params,
             $requestOptions
         );
 
@@ -63,14 +85,34 @@ final class InvoicesService implements InvoicesContract
      * @param Sort|value-of<Sort> $sort specifies the sort order for results
      *
      * @return InvoiceListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $page = omit,
         $sort = omit,
         ?RequestOptions $requestOptions = null
     ): InvoiceListResponse {
+        $params = ['page' => $page, 'sort' => $sort];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return InvoiceListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): InvoiceListResponse {
         [$parsed, $options] = InvoiceListParams::parseRequest(
-            ['page' => $page, 'sort' => $sort],
+            $params,
             $requestOptions
         );
 

@@ -21,6 +21,7 @@ use Telnyx\BundlePricing\UserBundles\UserBundleListUnusedResponse;
 use Telnyx\BundlePricing\UserBundles\UserBundleNewResponse;
 use Telnyx\BundlePricing\UserBundles\UserBundleRetrieveParams;
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\BundlePricing\UserBundlesContract;
@@ -44,6 +45,8 @@ final class UserBundlesService implements UserBundlesContract
      * @param string $authorizationBearer Authenticates the request with your Telnyx API V2 KEY
      *
      * @return UserBundleNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $idempotencyKey = omit,
@@ -51,13 +54,31 @@ final class UserBundlesService implements UserBundlesContract
         $authorizationBearer = omit,
         ?RequestOptions $requestOptions = null,
     ): UserBundleNewResponse {
+        $params = [
+            'idempotencyKey' => $idempotencyKey,
+            'items' => $items,
+            'authorizationBearer' => $authorizationBearer,
+        ];
+
+        return $this->createRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return UserBundleNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): UserBundleNewResponse {
         [$parsed, $options] = UserBundleCreateParams::parseRequest(
-            [
-                'idempotencyKey' => $idempotencyKey,
-                'items' => $items,
-                'authorizationBearer' => $authorizationBearer,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
         $header_params = ['authorization_bearer' => 'authorization_bearer'];
 
@@ -80,14 +101,35 @@ final class UserBundlesService implements UserBundlesContract
      * @param string $authorizationBearer Authenticates the request with your Telnyx API V2 KEY
      *
      * @return UserBundleGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $userBundleID,
         $authorizationBearer = omit,
         ?RequestOptions $requestOptions = null,
     ): UserBundleGetResponse {
+        $params = ['authorizationBearer' => $authorizationBearer];
+
+        return $this->retrieveRaw($userBundleID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return UserBundleGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $userBundleID,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): UserBundleGetResponse {
         [$parsed, $options] = UserBundleRetrieveParams::parseRequest(
-            ['authorizationBearer' => $authorizationBearer],
+            $params,
             $requestOptions
         );
 
@@ -111,6 +153,8 @@ final class UserBundlesService implements UserBundlesContract
      * @param string $authorizationBearer Authenticates the request with your Telnyx API V2 KEY
      *
      * @return UserBundleListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
@@ -118,13 +162,31 @@ final class UserBundlesService implements UserBundlesContract
         $authorizationBearer = omit,
         ?RequestOptions $requestOptions = null,
     ): UserBundleListResponse {
+        $params = [
+            'filter' => $filter,
+            'page' => $page,
+            'authorizationBearer' => $authorizationBearer,
+        ];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return UserBundleListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): UserBundleListResponse {
         [$parsed, $options] = UserBundleListParams::parseRequest(
-            [
-                'filter' => $filter,
-                'page' => $page,
-                'authorizationBearer' => $authorizationBearer,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
         $query_params = array_flip(['filter', 'page']);
 
@@ -150,14 +212,35 @@ final class UserBundlesService implements UserBundlesContract
      * @param string $authorizationBearer Authenticates the request with your Telnyx API V2 KEY
      *
      * @return UserBundleDeactivateResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function deactivate(
         string $userBundleID,
         $authorizationBearer = omit,
         ?RequestOptions $requestOptions = null,
     ): UserBundleDeactivateResponse {
+        $params = ['authorizationBearer' => $authorizationBearer];
+
+        return $this->deactivateRaw($userBundleID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return UserBundleDeactivateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function deactivateRaw(
+        string $userBundleID,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): UserBundleDeactivateResponse {
         [$parsed, $options] = UserBundleDeactivateParams::parseRequest(
-            ['authorizationBearer' => $authorizationBearer],
+            $params,
             $requestOptions
         );
 
@@ -179,14 +262,35 @@ final class UserBundlesService implements UserBundlesContract
      * @param string $authorizationBearer Authenticates the request with your Telnyx API V2 KEY
      *
      * @return UserBundleListResourcesResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function listResources(
         string $userBundleID,
         $authorizationBearer = omit,
         ?RequestOptions $requestOptions = null,
     ): UserBundleListResourcesResponse {
+        $params = ['authorizationBearer' => $authorizationBearer];
+
+        return $this->listResourcesRaw($userBundleID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return UserBundleListResourcesResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listResourcesRaw(
+        string $userBundleID,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): UserBundleListResourcesResponse {
         [$parsed, $options] = UserBundleListResourcesParams::parseRequest(
-            ['authorizationBearer' => $authorizationBearer],
+            $params,
             $requestOptions
         );
 
@@ -209,15 +313,37 @@ final class UserBundlesService implements UserBundlesContract
      * @param string $authorizationBearer Authenticates the request with your Telnyx API V2 KEY
      *
      * @return UserBundleListUnusedResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function listUnused(
         $filter = omit,
         $authorizationBearer = omit,
         ?RequestOptions $requestOptions = null,
     ): UserBundleListUnusedResponse {
+        $params = [
+            'filter' => $filter, 'authorizationBearer' => $authorizationBearer,
+        ];
+
+        return $this->listUnusedRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return UserBundleListUnusedResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listUnusedRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): UserBundleListUnusedResponse {
         [$parsed, $options] = UserBundleListUnusedParams::parseRequest(
-            ['filter' => $filter, 'authorizationBearer' => $authorizationBearer],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
         $query_params = array_flip(['filter']);
 

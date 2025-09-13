@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ShortCodesContract;
@@ -31,9 +32,28 @@ final class ShortCodesService implements ShortCodesContract
      * Retrieve a short code
      *
      * @return ShortCodeGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): ShortCodeGetResponse {
+        $params = [];
+
+        return $this->retrieveRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return ShortCodeGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): ShortCodeGetResponse {
         // @phpstan-ignore-next-line;
@@ -53,14 +73,35 @@ final class ShortCodesService implements ShortCodesContract
      * @param string $messagingProfileID unique identifier for a messaging profile
      *
      * @return ShortCodeUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function update(
         string $id,
         $messagingProfileID,
         ?RequestOptions $requestOptions = null
     ): ShortCodeUpdateResponse {
+        $params = ['messagingProfileID' => $messagingProfileID];
+
+        return $this->updateRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ShortCodeUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): ShortCodeUpdateResponse {
         [$parsed, $options] = ShortCodeUpdateParams::parseRequest(
-            ['messagingProfileID' => $messagingProfileID],
+            $params,
             $requestOptions
         );
 
@@ -83,14 +124,34 @@ final class ShortCodesService implements ShortCodesContract
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
      * @return ShortCodeListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
         $page = omit,
         ?RequestOptions $requestOptions = null
     ): ShortCodeListResponse {
+        $params = ['filter' => $filter, 'page' => $page];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ShortCodeListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): ShortCodeListResponse {
         [$parsed, $options] = ShortCodeListParams::parseRequest(
-            ['filter' => $filter, 'page' => $page],
+            $params,
             $requestOptions
         );
 

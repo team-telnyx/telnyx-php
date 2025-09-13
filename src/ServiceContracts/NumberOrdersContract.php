@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\NumberOrderPhoneNumbers\UpdateRegulatoryRequirement;
 use Telnyx\NumberOrders\NumberOrderCreateParams\PhoneNumber;
@@ -29,6 +30,8 @@ interface NumberOrdersContract
      * @param list<PhoneNumber> $phoneNumbers
      *
      * @return NumberOrderNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $billingGroupID = omit,
@@ -42,7 +45,23 @@ interface NumberOrdersContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return NumberOrderNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): NumberOrderNewResponse;
+
+    /**
+     * @api
+     *
      * @return NumberOrderGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $numberOrderID,
@@ -52,10 +71,25 @@ interface NumberOrdersContract
     /**
      * @api
      *
+     * @return NumberOrderGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $numberOrderID,
+        mixed $params,
+        ?RequestOptions $requestOptions = null,
+    ): NumberOrderGetResponse;
+
+    /**
+     * @api
+     *
      * @param string $customerReference a customer reference string for customer look ups
      * @param list<UpdateRegulatoryRequirement> $regulatoryRequirements
      *
      * @return NumberOrderUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function update(
         string $numberOrderID,
@@ -67,14 +101,45 @@ interface NumberOrdersContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return NumberOrderUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $numberOrderID,
+        array $params,
+        ?RequestOptions $requestOptions = null,
+    ): NumberOrderUpdateResponse;
+
+    /**
+     * @api
+     *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[status], filter[created_at], filter[phone_numbers_count], filter[customer_reference], filter[requirements_met]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @return NumberOrderListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
         $page = omit,
+        ?RequestOptions $requestOptions = null
+    ): NumberOrderListResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return NumberOrderListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
         ?RequestOptions $requestOptions = null
     ): NumberOrderListResponse;
 }

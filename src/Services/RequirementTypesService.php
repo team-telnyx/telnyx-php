@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\RequirementTypes\RequirementTypeGetResponse;
@@ -29,9 +30,28 @@ final class RequirementTypesService implements RequirementTypesContract
      * Retrieve a requirement type by id
      *
      * @return RequirementTypeGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): RequirementTypeGetResponse {
+        $params = [];
+
+        return $this->retrieveRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return RequirementTypeGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): RequirementTypeGetResponse {
         // @phpstan-ignore-next-line;
@@ -52,14 +72,34 @@ final class RequirementTypesService implements RequirementTypesContract
      * @param list<Sort|value-of<Sort>> $sort Consolidated sort parameter for requirement types (deepObject style). Originally: sort[]
      *
      * @return RequirementTypeListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
         $sort = omit,
         ?RequestOptions $requestOptions = null
     ): RequirementTypeListResponse {
+        $params = ['filter' => $filter, 'sort' => $sort];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return RequirementTypeListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): RequirementTypeListResponse {
         [$parsed, $options] = RequirementTypeListParams::parseRequest(
-            ['filter' => $filter, 'sort' => $sort],
+            $params,
             $requestOptions
         );
 

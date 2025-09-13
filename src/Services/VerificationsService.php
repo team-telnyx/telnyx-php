@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\VerificationsContract;
@@ -45,10 +46,29 @@ final class VerificationsService implements VerificationsContract
      * Retrieve verification
      *
      * @return VerificationGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $verificationID,
         ?RequestOptions $requestOptions = null
+    ): VerificationGetResponse {
+        $params = [];
+
+        return $this->retrieveRaw($verificationID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return VerificationGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $verificationID,
+        mixed $params,
+        ?RequestOptions $requestOptions = null,
     ): VerificationGetResponse {
         // @phpstan-ignore-next-line;
         return $this->client->request(
@@ -70,6 +90,8 @@ final class VerificationsService implements VerificationsContract
      * @param int $timeoutSecs the number of seconds the verification code is valid for
      *
      * @return CreateVerificationResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function triggerCall(
         $phoneNumber,
@@ -78,14 +100,32 @@ final class VerificationsService implements VerificationsContract
         $timeoutSecs = omit,
         ?RequestOptions $requestOptions = null,
     ): CreateVerificationResponse {
+        $params = [
+            'phoneNumber' => $phoneNumber,
+            'verifyProfileID' => $verifyProfileID,
+            'customCode' => $customCode,
+            'timeoutSecs' => $timeoutSecs,
+        ];
+
+        return $this->triggerCallRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return CreateVerificationResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function triggerCallRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): CreateVerificationResponse {
         [$parsed, $options] = VerificationTriggerCallParams::parseRequest(
-            [
-                'phoneNumber' => $phoneNumber,
-                'verifyProfileID' => $verifyProfileID,
-                'customCode' => $customCode,
-                'timeoutSecs' => $timeoutSecs,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -108,6 +148,8 @@ final class VerificationsService implements VerificationsContract
      * @param int $timeoutSecs the number of seconds the verification code is valid for
      *
      * @return CreateVerificationResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function triggerFlashcall(
         $phoneNumber,
@@ -115,13 +157,31 @@ final class VerificationsService implements VerificationsContract
         $timeoutSecs = omit,
         ?RequestOptions $requestOptions = null,
     ): CreateVerificationResponse {
+        $params = [
+            'phoneNumber' => $phoneNumber,
+            'verifyProfileID' => $verifyProfileID,
+            'timeoutSecs' => $timeoutSecs,
+        ];
+
+        return $this->triggerFlashcallRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return CreateVerificationResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function triggerFlashcallRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): CreateVerificationResponse {
         [$parsed, $options] = VerificationTriggerFlashcallParams::parseRequest(
-            [
-                'phoneNumber' => $phoneNumber,
-                'verifyProfileID' => $verifyProfileID,
-                'timeoutSecs' => $timeoutSecs,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -145,6 +205,8 @@ final class VerificationsService implements VerificationsContract
      * @param int $timeoutSecs the number of seconds the verification code is valid for
      *
      * @return CreateVerificationResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function triggerSMS(
         $phoneNumber,
@@ -153,14 +215,32 @@ final class VerificationsService implements VerificationsContract
         $timeoutSecs = omit,
         ?RequestOptions $requestOptions = null,
     ): CreateVerificationResponse {
+        $params = [
+            'phoneNumber' => $phoneNumber,
+            'verifyProfileID' => $verifyProfileID,
+            'customCode' => $customCode,
+            'timeoutSecs' => $timeoutSecs,
+        ];
+
+        return $this->triggerSMSRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return CreateVerificationResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function triggerSMSRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): CreateVerificationResponse {
         [$parsed, $options] = VerificationTriggerSMSParams::parseRequest(
-            [
-                'phoneNumber' => $phoneNumber,
-                'verifyProfileID' => $verifyProfileID,
-                'customCode' => $customCode,
-                'timeoutSecs' => $timeoutSecs,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;

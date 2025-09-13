@@ -11,6 +11,7 @@ use Telnyx\AccessIPAddress\AccessIPAddressListParams\Page;
 use Telnyx\AccessIPAddress\AccessIPAddressListResponse;
 use Telnyx\AccessIPAddress\AccessIPAddressResponse;
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AccessIPAddressContract;
@@ -33,15 +34,35 @@ final class AccessIPAddressService implements AccessIPAddressContract
      * @param string $description
      *
      * @return AccessIPAddressResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $ipAddress,
         $description = omit,
         ?RequestOptions $requestOptions = null
     ): AccessIPAddressResponse {
+        $params = ['ipAddress' => $ipAddress, 'description' => $description];
+
+        return $this->createRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return AccessIPAddressResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): AccessIPAddressResponse {
         [$parsed, $options] = AccessIPAddressCreateParams::parseRequest(
-            ['ipAddress' => $ipAddress, 'description' => $description],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -60,10 +81,29 @@ final class AccessIPAddressService implements AccessIPAddressContract
      * Retrieve an access IP address
      *
      * @return AccessIPAddressResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $accessIPAddressID,
         ?RequestOptions $requestOptions = null
+    ): AccessIPAddressResponse {
+        $params = [];
+
+        return $this->retrieveRaw($accessIPAddressID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return AccessIPAddressResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $accessIPAddressID,
+        mixed $params,
+        ?RequestOptions $requestOptions = null,
     ): AccessIPAddressResponse {
         // @phpstan-ignore-next-line;
         return $this->client->request(
@@ -83,14 +123,34 @@ final class AccessIPAddressService implements AccessIPAddressContract
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
      * @return AccessIPAddressListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
         $page = omit,
         ?RequestOptions $requestOptions = null
     ): AccessIPAddressListResponse {
+        $params = ['filter' => $filter, 'page' => $page];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return AccessIPAddressListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): AccessIPAddressListResponse {
         [$parsed, $options] = AccessIPAddressListParams::parseRequest(
-            ['filter' => $filter, 'page' => $page],
+            $params,
             $requestOptions
         );
 
@@ -110,10 +170,29 @@ final class AccessIPAddressService implements AccessIPAddressContract
      * Delete access IP address
      *
      * @return AccessIPAddressResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function delete(
         string $accessIPAddressID,
         ?RequestOptions $requestOptions = null
+    ): AccessIPAddressResponse {
+        $params = [];
+
+        return $this->deleteRaw($accessIPAddressID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return AccessIPAddressResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $accessIPAddressID,
+        mixed $params,
+        ?RequestOptions $requestOptions = null,
     ): AccessIPAddressResponse {
         // @phpstan-ignore-next-line;
         return $this->client->request(
