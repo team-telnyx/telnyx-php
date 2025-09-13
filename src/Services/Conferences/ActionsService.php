@@ -43,6 +43,7 @@ use Telnyx\Conferences\Actions\ActionUnmuteResponse;
 use Telnyx\Conferences\Actions\ActionUpdateParams;
 use Telnyx\Conferences\Actions\ActionUpdateParams\SupervisorRole;
 use Telnyx\Conferences\Actions\ActionUpdateResponse;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Conferences\ActionsContract;
@@ -67,6 +68,8 @@ final class ActionsService implements ActionsContract
      * @param list<string> $whisperCallControlIDs Array of unique call_control_ids the supervisor can whisper to. If none provided, the supervisor will join the conference as a monitoring participant only.
      *
      * @return ActionUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function update(
         string $id,
@@ -76,14 +79,33 @@ final class ActionsService implements ActionsContract
         $whisperCallControlIDs = omit,
         ?RequestOptions $requestOptions = null,
     ): ActionUpdateResponse {
+        $params = [
+            'callControlID' => $callControlID,
+            'supervisorRole' => $supervisorRole,
+            'commandID' => $commandID,
+            'whisperCallControlIDs' => $whisperCallControlIDs,
+        ];
+
+        return $this->updateRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ActionUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): ActionUpdateResponse {
         [$parsed, $options] = ActionUpdateParams::parseRequest(
-            [
-                'callControlID' => $callControlID,
-                'supervisorRole' => $supervisorRole,
-                'commandID' => $commandID,
-                'whisperCallControlIDs' => $whisperCallControlIDs,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -106,6 +128,8 @@ final class ActionsService implements ActionsContract
      * @param string $mediaName The media_name of a file to be played to the participants when they are put on hold. The media_name must point to a file previously uploaded to api.telnyx.com/v2/media by the same user/organization. The file must either be a WAV or MP3 file.
      *
      * @return ActionHoldResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function hold(
         string $id,
@@ -114,13 +138,32 @@ final class ActionsService implements ActionsContract
         $mediaName = omit,
         ?RequestOptions $requestOptions = null,
     ): ActionHoldResponse {
+        $params = [
+            'audioURL' => $audioURL,
+            'callControlIDs' => $callControlIDs,
+            'mediaName' => $mediaName,
+        ];
+
+        return $this->holdRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ActionHoldResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function holdRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): ActionHoldResponse {
         [$parsed, $options] = ActionHoldParams::parseRequest(
-            [
-                'audioURL' => $audioURL,
-                'callControlIDs' => $callControlIDs,
-                'mediaName' => $mediaName,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -158,6 +201,8 @@ final class ActionsService implements ActionsContract
      * @param list<string> $whisperCallControlIDs Array of unique call_control_ids the joining supervisor can whisper to. If none provided, the supervisor will join the conference as a monitoring participant only.
      *
      * @return ActionJoinResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function join(
         string $id,
@@ -176,23 +221,42 @@ final class ActionsService implements ActionsContract
         $whisperCallControlIDs = omit,
         ?RequestOptions $requestOptions = null,
     ): ActionJoinResponse {
+        $params = [
+            'callControlID' => $callControlID,
+            'beepEnabled' => $beepEnabled,
+            'clientState' => $clientState,
+            'commandID' => $commandID,
+            'endConferenceOnExit' => $endConferenceOnExit,
+            'hold' => $hold,
+            'holdAudioURL' => $holdAudioURL,
+            'holdMediaName' => $holdMediaName,
+            'mute' => $mute,
+            'softEndConferenceOnExit' => $softEndConferenceOnExit,
+            'startConferenceOnEnter' => $startConferenceOnEnter,
+            'supervisorRole' => $supervisorRole,
+            'whisperCallControlIDs' => $whisperCallControlIDs,
+        ];
+
+        return $this->joinRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ActionJoinResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function joinRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): ActionJoinResponse {
         [$parsed, $options] = ActionJoinParams::parseRequest(
-            [
-                'callControlID' => $callControlID,
-                'beepEnabled' => $beepEnabled,
-                'clientState' => $clientState,
-                'commandID' => $commandID,
-                'endConferenceOnExit' => $endConferenceOnExit,
-                'hold' => $hold,
-                'holdAudioURL' => $holdAudioURL,
-                'holdMediaName' => $holdMediaName,
-                'mute' => $mute,
-                'softEndConferenceOnExit' => $softEndConferenceOnExit,
-                'startConferenceOnEnter' => $startConferenceOnEnter,
-                'supervisorRole' => $supervisorRole,
-                'whisperCallControlIDs' => $whisperCallControlIDs,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -219,6 +283,8 @@ final class ActionsService implements ActionsContract
      * @param string $commandID Use this field to avoid execution of duplicate commands. Telnyx will ignore subsequent commands with the same `command_id` as one that has already been executed.
      *
      * @return ActionLeaveResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function leave(
         string $id,
@@ -227,13 +293,32 @@ final class ActionsService implements ActionsContract
         $commandID = omit,
         ?RequestOptions $requestOptions = null,
     ): ActionLeaveResponse {
+        $params = [
+            'callControlID' => $callControlID,
+            'beepEnabled' => $beepEnabled,
+            'commandID' => $commandID,
+        ];
+
+        return $this->leaveRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ActionLeaveResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function leaveRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): ActionLeaveResponse {
         [$parsed, $options] = ActionLeaveParams::parseRequest(
-            [
-                'callControlID' => $callControlID,
-                'beepEnabled' => $beepEnabled,
-                'commandID' => $commandID,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -254,14 +339,35 @@ final class ActionsService implements ActionsContract
      * @param list<string> $callControlIDs Array of unique identifiers and tokens for controlling the call. When empty all participants will be muted.
      *
      * @return ActionMuteResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function mute(
         string $id,
         $callControlIDs = omit,
         ?RequestOptions $requestOptions = null
     ): ActionMuteResponse {
+        $params = ['callControlIDs' => $callControlIDs];
+
+        return $this->muteRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ActionMuteResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function muteRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): ActionMuteResponse {
         [$parsed, $options] = ActionMuteParams::parseRequest(
-            ['callControlIDs' => $callControlIDs],
+            $params,
             $requestOptions
         );
 
@@ -286,6 +392,8 @@ final class ActionsService implements ActionsContract
      * @param string $mediaName The media_name of a file to be played back in the conference. The media_name must point to a file previously uploaded to api.telnyx.com/v2/media by the same user/organization. The file must either be a WAV or MP3 file.
      *
      * @return ActionPlayResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function play(
         string $id,
@@ -295,14 +403,33 @@ final class ActionsService implements ActionsContract
         $mediaName = omit,
         ?RequestOptions $requestOptions = null,
     ): ActionPlayResponse {
+        $params = [
+            'audioURL' => $audioURL,
+            'callControlIDs' => $callControlIDs,
+            'loop' => $loop,
+            'mediaName' => $mediaName,
+        ];
+
+        return $this->playRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ActionPlayResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function playRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): ActionPlayResponse {
         [$parsed, $options] = ActionPlayParams::parseRequest(
-            [
-                'audioURL' => $audioURL,
-                'callControlIDs' => $callControlIDs,
-                'loop' => $loop,
-                'mediaName' => $mediaName,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -324,6 +451,8 @@ final class ActionsService implements ActionsContract
      * @param string $recordingID use this field to pause specific recording
      *
      * @return ActionRecordPauseResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function recordPause(
         string $id,
@@ -331,9 +460,28 @@ final class ActionsService implements ActionsContract
         $recordingID = omit,
         ?RequestOptions $requestOptions = null,
     ): ActionRecordPauseResponse {
+        $params = ['commandID' => $commandID, 'recordingID' => $recordingID];
+
+        return $this->recordPauseRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ActionRecordPauseResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function recordPauseRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): ActionRecordPauseResponse {
         [$parsed, $options] = ActionRecordPauseParams::parseRequest(
-            ['commandID' => $commandID, 'recordingID' => $recordingID],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -355,6 +503,8 @@ final class ActionsService implements ActionsContract
      * @param string $recordingID use this field to resume specific recording
      *
      * @return ActionRecordResumeResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function recordResume(
         string $id,
@@ -362,9 +512,28 @@ final class ActionsService implements ActionsContract
         $recordingID = omit,
         ?RequestOptions $requestOptions = null,
     ): ActionRecordResumeResponse {
+        $params = ['commandID' => $commandID, 'recordingID' => $recordingID];
+
+        return $this->recordResumeRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ActionRecordResumeResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function recordResumeRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): ActionRecordResumeResponse {
         [$parsed, $options] = ActionRecordResumeParams::parseRequest(
-            ['commandID' => $commandID, 'recordingID' => $recordingID],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -393,6 +562,8 @@ final class ActionsService implements ActionsContract
      * @param Trim|value-of<Trim> $trim when set to `trim-silence`, silence will be removed from the beginning and end of the recording
      *
      * @return ActionRecordStartResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function recordStart(
         string $id,
@@ -403,15 +574,34 @@ final class ActionsService implements ActionsContract
         $trim = omit,
         ?RequestOptions $requestOptions = null,
     ): ActionRecordStartResponse {
+        $params = [
+            'format' => $format,
+            'commandID' => $commandID,
+            'customFileName' => $customFileName,
+            'playBeep' => $playBeep,
+            'trim' => $trim,
+        ];
+
+        return $this->recordStartRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ActionRecordStartResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function recordStartRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): ActionRecordStartResponse {
         [$parsed, $options] = ActionRecordStartParams::parseRequest(
-            [
-                'format' => $format,
-                'commandID' => $commandID,
-                'customFileName' => $customFileName,
-                'playBeep' => $playBeep,
-                'trim' => $trim,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -438,6 +628,8 @@ final class ActionsService implements ActionsContract
      * @param string $recordingID uniquely identifies the resource
      *
      * @return ActionRecordStopResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function recordStop(
         string $id,
@@ -446,13 +638,32 @@ final class ActionsService implements ActionsContract
         $recordingID = omit,
         ?RequestOptions $requestOptions = null,
     ): ActionRecordStopResponse {
+        $params = [
+            'clientState' => $clientState,
+            'commandID' => $commandID,
+            'recordingID' => $recordingID,
+        ];
+
+        return $this->recordStopRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ActionRecordStopResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function recordStopRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): ActionRecordStopResponse {
         [$parsed, $options] = ActionRecordStopParams::parseRequest(
-            [
-                'clientState' => $clientState,
-                'commandID' => $commandID,
-                'recordingID' => $recordingID,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -489,6 +700,8 @@ final class ActionsService implements ActionsContract
      * @param mixed|ElevenLabsVoiceSettings|TelnyxVoiceSettings $voiceSettings The settings associated with the voice selected
      *
      * @return ActionSpeakResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function speak(
         string $id,
@@ -501,17 +714,36 @@ final class ActionsService implements ActionsContract
         $voiceSettings = omit,
         ?RequestOptions $requestOptions = null,
     ): ActionSpeakResponse {
+        $params = [
+            'payload' => $payload,
+            'voice' => $voice,
+            'callControlIDs' => $callControlIDs,
+            'commandID' => $commandID,
+            'language' => $language,
+            'payloadType' => $payloadType,
+            'voiceSettings' => $voiceSettings,
+        ];
+
+        return $this->speakRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ActionSpeakResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function speakRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): ActionSpeakResponse {
         [$parsed, $options] = ActionSpeakParams::parseRequest(
-            [
-                'payload' => $payload,
-                'voice' => $voice,
-                'callControlIDs' => $callControlIDs,
-                'commandID' => $commandID,
-                'language' => $language,
-                'payloadType' => $payloadType,
-                'voiceSettings' => $voiceSettings,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -532,14 +764,35 @@ final class ActionsService implements ActionsContract
      * @param list<string> $callControlIDs List of call control ids identifying participants the audio file should stop be played to. If not given, the audio will be stoped to the entire conference.
      *
      * @return ActionStopResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function stop(
         string $id,
         $callControlIDs = omit,
         ?RequestOptions $requestOptions = null
     ): ActionStopResponse {
+        $params = ['callControlIDs' => $callControlIDs];
+
+        return $this->stopRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ActionStopResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function stopRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): ActionStopResponse {
         [$parsed, $options] = ActionStopParams::parseRequest(
-            ['callControlIDs' => $callControlIDs],
+            $params,
             $requestOptions
         );
 
@@ -561,14 +814,35 @@ final class ActionsService implements ActionsContract
      * @param list<string> $callControlIDs List of unique identifiers and tokens for controlling the call. Enter each call control ID to be unheld.
      *
      * @return ActionUnholdResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function unhold(
         string $id,
         $callControlIDs,
         ?RequestOptions $requestOptions = null
     ): ActionUnholdResponse {
+        $params = ['callControlIDs' => $callControlIDs];
+
+        return $this->unholdRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ActionUnholdResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function unholdRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): ActionUnholdResponse {
         [$parsed, $options] = ActionUnholdParams::parseRequest(
-            ['callControlIDs' => $callControlIDs],
+            $params,
             $requestOptions
         );
 
@@ -590,14 +864,35 @@ final class ActionsService implements ActionsContract
      * @param list<string> $callControlIDs List of unique identifiers and tokens for controlling the call. Enter each call control ID to be unmuted. When empty all participants will be unmuted.
      *
      * @return ActionUnmuteResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function unmute(
         string $id,
         $callControlIDs = omit,
         ?RequestOptions $requestOptions = null
     ): ActionUnmuteResponse {
+        $params = ['callControlIDs' => $callControlIDs];
+
+        return $this->unmuteRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ActionUnmuteResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function unmuteRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): ActionUnmuteResponse {
         [$parsed, $options] = ActionUnmuteParams::parseRequest(
-            ['callControlIDs' => $callControlIDs],
+            $params,
             $requestOptions
         );
 

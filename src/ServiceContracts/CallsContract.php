@@ -29,6 +29,7 @@ use Telnyx\Calls\StreamBidirectionalCodec;
 use Telnyx\Calls\StreamBidirectionalMode;
 use Telnyx\Calls\StreamBidirectionalTargetLegs;
 use Telnyx\Calls\StreamCodec;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 
@@ -91,6 +92,8 @@ interface CallsContract
      * @param WebhookURLMethod|value-of<WebhookURLMethod> $webhookURLMethod HTTP request type used for `webhook_url`
      *
      * @return CallDialResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function dial(
         $connectionID,
@@ -149,10 +152,39 @@ interface CallsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return CallDialResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function dialRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): CallDialResponse;
+
+    /**
+     * @api
+     *
      * @return CallGetStatusResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieveStatus(
         string $callControlID,
         ?RequestOptions $requestOptions = null
+    ): CallGetStatusResponse;
+
+    /**
+     * @api
+     *
+     * @return CallGetStatusResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveStatusRaw(
+        string $callControlID,
+        mixed $params,
+        ?RequestOptions $requestOptions = null,
     ): CallGetStatusResponse;
 }

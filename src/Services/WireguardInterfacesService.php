@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\WireguardInterfacesContract;
@@ -37,6 +38,8 @@ final class WireguardInterfacesService implements WireguardInterfacesContract
      * @param string $name a user specified name for the interface
      *
      * @return WireguardInterfaceNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $networkID,
@@ -45,14 +48,32 @@ final class WireguardInterfacesService implements WireguardInterfacesContract
         $name = omit,
         ?RequestOptions $requestOptions = null,
     ): WireguardInterfaceNewResponse {
+        $params = [
+            'networkID' => $networkID,
+            'regionCode' => $regionCode,
+            'enableSipTrunking' => $enableSipTrunking,
+            'name' => $name,
+        ];
+
+        return $this->createRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return WireguardInterfaceNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): WireguardInterfaceNewResponse {
         [$parsed, $options] = WireguardInterfaceCreateParams::parseRequest(
-            [
-                'networkID' => $networkID,
-                'regionCode' => $regionCode,
-                'enableSipTrunking' => $enableSipTrunking,
-                'name' => $name,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -71,9 +92,28 @@ final class WireguardInterfacesService implements WireguardInterfacesContract
      * Retrieve a WireGuard Interfaces.
      *
      * @return WireguardInterfaceGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): WireguardInterfaceGetResponse {
+        $params = [];
+
+        return $this->retrieveRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return WireguardInterfaceGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): WireguardInterfaceGetResponse {
         // @phpstan-ignore-next-line;
@@ -94,14 +134,34 @@ final class WireguardInterfacesService implements WireguardInterfacesContract
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
      * @return WireguardInterfaceListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
         $page = omit,
         ?RequestOptions $requestOptions = null
     ): WireguardInterfaceListResponse {
+        $params = ['filter' => $filter, 'page' => $page];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return WireguardInterfaceListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): WireguardInterfaceListResponse {
         [$parsed, $options] = WireguardInterfaceListParams::parseRequest(
-            ['filter' => $filter, 'page' => $page],
+            $params,
             $requestOptions
         );
 
@@ -121,9 +181,28 @@ final class WireguardInterfacesService implements WireguardInterfacesContract
      * Delete a WireGuard Interface.
      *
      * @return WireguardInterfaceDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function delete(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): WireguardInterfaceDeleteResponse {
+        $params = [];
+
+        return $this->deleteRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return WireguardInterfaceDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): WireguardInterfaceDeleteResponse {
         // @phpstan-ignore-next-line;

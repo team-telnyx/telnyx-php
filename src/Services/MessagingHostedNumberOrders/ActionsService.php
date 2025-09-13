@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\MessagingHostedNumberOrders;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\MessagingHostedNumberOrders\Actions\ActionUploadFileParams;
 use Telnyx\MessagingHostedNumberOrders\Actions\ActionUploadFileResponse;
@@ -29,6 +30,8 @@ final class ActionsService implements ActionsContract
      * @param string $loa must be a signed LOA for the numbers in the order in PDF format
      *
      * @return ActionUploadFileResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function uploadFile(
         string $id,
@@ -36,8 +39,27 @@ final class ActionsService implements ActionsContract
         $loa = omit,
         ?RequestOptions $requestOptions = null,
     ): ActionUploadFileResponse {
+        $params = ['bill' => $bill, 'loa' => $loa];
+
+        return $this->uploadFileRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ActionUploadFileResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function uploadFileRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): ActionUploadFileResponse {
         [$parsed, $options] = ActionUploadFileParams::parseRequest(
-            ['bill' => $bill, 'loa' => $loa],
+            $params,
             $requestOptions
         );
 

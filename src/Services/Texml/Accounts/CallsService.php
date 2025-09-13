@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Texml\Accounts;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\Accounts\CallsContract;
@@ -89,14 +90,35 @@ final class CallsService implements CallsContract
      * @param string $accountSid
      *
      * @return CallGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $callSid,
         $accountSid,
         ?RequestOptions $requestOptions = null
     ): CallGetResponse {
+        $params = ['accountSid' => $accountSid];
+
+        return $this->retrieveRaw($callSid, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return CallGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $callSid,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): CallGetResponse {
         [$parsed, $options] = CallRetrieveParams::parseRequest(
-            ['accountSid' => $accountSid],
+            $params,
             $requestOptions
         );
         $accountSid = $parsed['accountSid'];
@@ -127,6 +149,8 @@ final class CallsService implements CallsContract
      * @param string $url the URL where TeXML will make a request to retrieve a new set of TeXML instructions to continue the call flow
      *
      * @return CallUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function update(
         string $callSid,
@@ -141,19 +165,38 @@ final class CallsService implements CallsContract
         $url = omit,
         ?RequestOptions $requestOptions = null,
     ): CallUpdateResponse {
+        $params = [
+            'accountSid' => $accountSid,
+            'fallbackMethod' => $fallbackMethod,
+            'fallbackURL' => $fallbackURL,
+            'method' => $method,
+            'status' => $status,
+            'statusCallback' => $statusCallback,
+            'statusCallbackMethod' => $statusCallbackMethod,
+            'texml' => $texml,
+            'url' => $url,
+        ];
+
+        return $this->updateRaw($callSid, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return CallUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $callSid,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): CallUpdateResponse {
         [$parsed, $options] = CallUpdateParams::parseRequest(
-            [
-                'accountSid' => $accountSid,
-                'fallbackMethod' => $fallbackMethod,
-                'fallbackURL' => $fallbackURL,
-                'method' => $method,
-                'status' => $status,
-                'statusCallback' => $statusCallback,
-                'statusCallbackMethod' => $statusCallbackMethod,
-                'texml' => $texml,
-                'url' => $url,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
         $accountSid = $parsed['accountSid'];
         unset($parsed['accountSid']);
@@ -209,6 +252,8 @@ final class CallsService implements CallsContract
      * @param URLMethod|value-of<URLMethod> $urlMethod HTTP request type used for `Url`. The default value is inherited from TeXML Application setting.
      *
      * @return CallCallsResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function calls(
         string $accountSid,
@@ -247,43 +292,62 @@ final class CallsService implements CallsContract
         $urlMethod = omit,
         ?RequestOptions $requestOptions = null,
     ): CallCallsResponse {
+        $params = [
+            'applicationSid' => $applicationSid,
+            'from' => $from,
+            'to' => $to,
+            'asyncAmd' => $asyncAmd,
+            'asyncAmdStatusCallback' => $asyncAmdStatusCallback,
+            'asyncAmdStatusCallbackMethod' => $asyncAmdStatusCallbackMethod,
+            'callerID' => $callerID,
+            'cancelPlaybackOnDetectMessageEnd' => $cancelPlaybackOnDetectMessageEnd,
+            'cancelPlaybackOnMachineDetection' => $cancelPlaybackOnMachineDetection,
+            'detectionMode' => $detectionMode,
+            'fallbackURL' => $fallbackURL,
+            'machineDetection' => $machineDetection,
+            'machineDetectionSilenceTimeout' => $machineDetectionSilenceTimeout,
+            'machineDetectionSpeechEndThreshold' => $machineDetectionSpeechEndThreshold,
+            'machineDetectionSpeechThreshold' => $machineDetectionSpeechThreshold,
+            'machineDetectionTimeout' => $machineDetectionTimeout,
+            'preferredCodecs' => $preferredCodecs,
+            'record' => $record,
+            'recordingChannels' => $recordingChannels,
+            'recordingStatusCallback' => $recordingStatusCallback,
+            'recordingStatusCallbackEvent' => $recordingStatusCallbackEvent,
+            'recordingStatusCallbackMethod' => $recordingStatusCallbackMethod,
+            'recordingTimeout' => $recordingTimeout,
+            'recordingTrack' => $recordingTrack,
+            'sendRecordingURL' => $sendRecordingURL,
+            'sipAuthPassword' => $sipAuthPassword,
+            'sipAuthUsername' => $sipAuthUsername,
+            'statusCallback' => $statusCallback,
+            'statusCallbackEvent' => $statusCallbackEvent,
+            'statusCallbackMethod' => $statusCallbackMethod,
+            'trim' => $trim,
+            'url' => $url,
+            'urlMethod' => $urlMethod,
+        ];
+
+        return $this->callsRaw($accountSid, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return CallCallsResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function callsRaw(
+        string $accountSid,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): CallCallsResponse {
         [$parsed, $options] = CallCallsParams::parseRequest(
-            [
-                'applicationSid' => $applicationSid,
-                'from' => $from,
-                'to' => $to,
-                'asyncAmd' => $asyncAmd,
-                'asyncAmdStatusCallback' => $asyncAmdStatusCallback,
-                'asyncAmdStatusCallbackMethod' => $asyncAmdStatusCallbackMethod,
-                'callerID' => $callerID,
-                'cancelPlaybackOnDetectMessageEnd' => $cancelPlaybackOnDetectMessageEnd,
-                'cancelPlaybackOnMachineDetection' => $cancelPlaybackOnMachineDetection,
-                'detectionMode' => $detectionMode,
-                'fallbackURL' => $fallbackURL,
-                'machineDetection' => $machineDetection,
-                'machineDetectionSilenceTimeout' => $machineDetectionSilenceTimeout,
-                'machineDetectionSpeechEndThreshold' => $machineDetectionSpeechEndThreshold,
-                'machineDetectionSpeechThreshold' => $machineDetectionSpeechThreshold,
-                'machineDetectionTimeout' => $machineDetectionTimeout,
-                'preferredCodecs' => $preferredCodecs,
-                'record' => $record,
-                'recordingChannels' => $recordingChannels,
-                'recordingStatusCallback' => $recordingStatusCallback,
-                'recordingStatusCallbackEvent' => $recordingStatusCallbackEvent,
-                'recordingStatusCallbackMethod' => $recordingStatusCallbackMethod,
-                'recordingTimeout' => $recordingTimeout,
-                'recordingTrack' => $recordingTrack,
-                'sendRecordingURL' => $sendRecordingURL,
-                'sipAuthPassword' => $sipAuthPassword,
-                'sipAuthUsername' => $sipAuthUsername,
-                'statusCallback' => $statusCallback,
-                'statusCallbackEvent' => $statusCallbackEvent,
-                'statusCallbackMethod' => $statusCallbackMethod,
-                'trim' => $trim,
-                'url' => $url,
-                'urlMethod' => $urlMethod,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -315,6 +379,8 @@ final class CallsService implements CallsContract
      * @param string $to filters calls by the to number
      *
      * @return CallGetCallsResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieveCalls(
         string $accountSid,
@@ -332,22 +398,41 @@ final class CallsService implements CallsContract
         $to = omit,
         ?RequestOptions $requestOptions = null,
     ): CallGetCallsResponse {
+        $params = [
+            'endTime' => $endTime,
+            'endTimeGt' => $endTimeGt,
+            'endTimeLt' => $endTimeLt,
+            'from' => $from,
+            'page' => $page,
+            'pageSize' => $pageSize,
+            'pageToken' => $pageToken,
+            'startTime' => $startTime,
+            'startTimeGt' => $startTimeGt,
+            'startTimeLt' => $startTimeLt,
+            'status' => $status,
+            'to' => $to,
+        ];
+
+        return $this->retrieveCallsRaw($accountSid, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return CallGetCallsResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveCallsRaw(
+        string $accountSid,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): CallGetCallsResponse {
         [$parsed, $options] = CallRetrieveCallsParams::parseRequest(
-            [
-                'endTime' => $endTime,
-                'endTimeGt' => $endTimeGt,
-                'endTimeLt' => $endTimeLt,
-                'from' => $from,
-                'page' => $page,
-                'pageSize' => $pageSize,
-                'pageToken' => $pageToken,
-                'startTime' => $startTime,
-                'startTimeGt' => $startTimeGt,
-                'startTimeLt' => $startTimeLt,
-                'status' => $status,
-                'to' => $to,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -377,6 +462,8 @@ final class CallsService implements CallsContract
      * @param Track|value-of<Track> $track The track to be used for siprec session. Can be `both_tracks`, `inbound_track` or `outbound_track`. Defaults to `both_tracks`.
      *
      * @return CallSiprecJsonResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function siprecJson(
         string $callSid,
@@ -392,20 +479,39 @@ final class CallsService implements CallsContract
         $track = omit,
         ?RequestOptions $requestOptions = null,
     ): CallSiprecJsonResponse {
+        $params = [
+            'accountSid' => $accountSid,
+            'connectorName' => $connectorName,
+            'includeMetadataCustomHeaders' => $includeMetadataCustomHeaders,
+            'name' => $name,
+            'secure' => $secure,
+            'sessionTimeoutSecs' => $sessionTimeoutSecs,
+            'sipTransport' => $sipTransport,
+            'statusCallback' => $statusCallback,
+            'statusCallbackMethod' => $statusCallbackMethod,
+            'track' => $track,
+        ];
+
+        return $this->siprecJsonRaw($callSid, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return CallSiprecJsonResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function siprecJsonRaw(
+        string $callSid,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): CallSiprecJsonResponse {
         [$parsed, $options] = CallSiprecJsonParams::parseRequest(
-            [
-                'accountSid' => $accountSid,
-                'connectorName' => $connectorName,
-                'includeMetadataCustomHeaders' => $includeMetadataCustomHeaders,
-                'name' => $name,
-                'secure' => $secure,
-                'sessionTimeoutSecs' => $sessionTimeoutSecs,
-                'sipTransport' => $sipTransport,
-                'statusCallback' => $statusCallback,
-                'statusCallbackMethod' => $statusCallbackMethod,
-                'track' => $track,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
         $accountSid = $parsed['accountSid'];
         unset($parsed['accountSid']);
@@ -438,6 +544,8 @@ final class CallsService implements CallsContract
      * @param string $url the destination WebSocket address where the stream is going to be delivered
      *
      * @return CallStreamsJsonResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function streamsJson(
         string $callSid,
@@ -451,18 +559,37 @@ final class CallsService implements CallsContract
         $url = omit,
         ?RequestOptions $requestOptions = null,
     ): CallStreamsJsonResponse {
+        $params = [
+            'accountSid' => $accountSid,
+            'bidirectionalCodec' => $bidirectionalCodec,
+            'bidirectionalMode' => $bidirectionalMode,
+            'name' => $name,
+            'statusCallback' => $statusCallback,
+            'statusCallbackMethod' => $statusCallbackMethod,
+            'track' => $track,
+            'url' => $url,
+        ];
+
+        return $this->streamsJsonRaw($callSid, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return CallStreamsJsonResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function streamsJsonRaw(
+        string $callSid,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): CallStreamsJsonResponse {
         [$parsed, $options] = CallStreamsJsonParams::parseRequest(
-            [
-                'accountSid' => $accountSid,
-                'bidirectionalCodec' => $bidirectionalCodec,
-                'bidirectionalMode' => $bidirectionalMode,
-                'name' => $name,
-                'statusCallback' => $statusCallback,
-                'statusCallbackMethod' => $statusCallbackMethod,
-                'track' => $track,
-                'url' => $url,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
         $accountSid = $parsed['accountSid'];
         unset($parsed['accountSid']);

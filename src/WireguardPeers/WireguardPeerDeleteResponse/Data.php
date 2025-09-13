@@ -9,17 +9,51 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type unnamed_type_with_intersection_parent37 = array{
+ * @phpstan-type data_alias = array{
+ *   id?: string,
+ *   createdAt?: string,
+ *   recordType?: string,
+ *   updatedAt?: string,
+ *   publicKey?: string,
  *   lastSeen?: string,
  *   privateKey?: string,
- *   recordType?: string,
  *   wireguardInterfaceID?: string,
  * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<unnamed_type_with_intersection_parent37> */
+    /** @use SdkModel<data_alias> */
     use SdkModel;
+
+    /**
+     * Identifies the resource.
+     */
+    #[Api(optional: true)]
+    public ?string $id;
+
+    /**
+     * ISO 8601 formatted date-time indicating when the resource was created.
+     */
+    #[Api('created_at', optional: true)]
+    public ?string $createdAt;
+
+    /**
+     * Identifies the type of the resource.
+     */
+    #[Api('record_type', optional: true)]
+    public ?string $recordType;
+
+    /**
+     * ISO 8601 formatted date-time indicating when the resource was updated.
+     */
+    #[Api('updated_at', optional: true)]
+    public ?string $updatedAt;
+
+    /**
+     * The WireGuard `PublicKey`.<br /><br />If you do not provide a Public Key, a new Public and Private key pair will be generated for you.
+     */
+    #[Api('public_key', optional: true)]
+    public ?string $publicKey;
 
     /**
      * ISO 8601 formatted date-time indicating when peer sent traffic last time.
@@ -32,12 +66,6 @@ final class Data implements BaseModel
      */
     #[Api('private_key', optional: true)]
     public ?string $privateKey;
-
-    /**
-     * Identifies the type of the resource.
-     */
-    #[Api('record_type', optional: true)]
-    public ?string $recordType;
 
     /**
      * The id of the wireguard interface associated with the peer.
@@ -56,17 +84,80 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
+        ?string $id = null,
+        ?string $createdAt = null,
+        ?string $recordType = null,
+        ?string $updatedAt = null,
+        ?string $publicKey = null,
         ?string $lastSeen = null,
         ?string $privateKey = null,
-        ?string $recordType = null,
         ?string $wireguardInterfaceID = null,
     ): self {
         $obj = new self;
 
+        null !== $id && $obj->id = $id;
+        null !== $createdAt && $obj->createdAt = $createdAt;
+        null !== $recordType && $obj->recordType = $recordType;
+        null !== $updatedAt && $obj->updatedAt = $updatedAt;
+        null !== $publicKey && $obj->publicKey = $publicKey;
         null !== $lastSeen && $obj->lastSeen = $lastSeen;
         null !== $privateKey && $obj->privateKey = $privateKey;
-        null !== $recordType && $obj->recordType = $recordType;
         null !== $wireguardInterfaceID && $obj->wireguardInterfaceID = $wireguardInterfaceID;
+
+        return $obj;
+    }
+
+    /**
+     * Identifies the resource.
+     */
+    public function withID(string $id): self
+    {
+        $obj = clone $this;
+        $obj->id = $id;
+
+        return $obj;
+    }
+
+    /**
+     * ISO 8601 formatted date-time indicating when the resource was created.
+     */
+    public function withCreatedAt(string $createdAt): self
+    {
+        $obj = clone $this;
+        $obj->createdAt = $createdAt;
+
+        return $obj;
+    }
+
+    /**
+     * Identifies the type of the resource.
+     */
+    public function withRecordType(string $recordType): self
+    {
+        $obj = clone $this;
+        $obj->recordType = $recordType;
+
+        return $obj;
+    }
+
+    /**
+     * ISO 8601 formatted date-time indicating when the resource was updated.
+     */
+    public function withUpdatedAt(string $updatedAt): self
+    {
+        $obj = clone $this;
+        $obj->updatedAt = $updatedAt;
+
+        return $obj;
+    }
+
+    /**
+     * The WireGuard `PublicKey`.<br /><br />If you do not provide a Public Key, a new Public and Private key pair will be generated for you.
+     */
+    public function withPublicKey(string $publicKey): self
+    {
+        $obj = clone $this;
+        $obj->publicKey = $publicKey;
 
         return $obj;
     }
@@ -89,17 +180,6 @@ final class Data implements BaseModel
     {
         $obj = clone $this;
         $obj->privateKey = $privateKey;
-
-        return $obj;
-    }
-
-    /**
-     * Identifies the type of the resource.
-     */
-    public function withRecordType(string $recordType): self
-    {
-        $obj = clone $this;
-        $obj->recordType = $recordType;
 
         return $obj;
     }

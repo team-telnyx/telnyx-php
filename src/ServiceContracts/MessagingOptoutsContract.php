@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\MessagingOptouts\MessagingOptoutListParams\CreatedAt;
 use Telnyx\MessagingOptouts\MessagingOptoutListParams\Filter;
@@ -24,6 +25,8 @@ interface MessagingOptoutsContract
      * @param string $redactionEnabled If receiving address (+E.164 formatted phone number) should be redacted
      *
      * @return MessagingOptoutListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $createdAt = omit,
@@ -31,5 +34,19 @@ interface MessagingOptoutsContract
         $page = omit,
         $redactionEnabled = omit,
         ?RequestOptions $requestOptions = null,
+    ): MessagingOptoutListResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return MessagingOptoutListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
     ): MessagingOptoutListResponse;
 }

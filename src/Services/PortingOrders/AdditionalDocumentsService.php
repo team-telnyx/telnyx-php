@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\PortingOrders;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentCreateParams;
 use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentCreateParams\AdditionalDocument;
@@ -35,14 +36,35 @@ final class AdditionalDocumentsService implements AdditionalDocumentsContract
      * @param list<AdditionalDocument> $additionalDocuments
      *
      * @return AdditionalDocumentNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         string $id,
         $additionalDocuments = omit,
         ?RequestOptions $requestOptions = null,
     ): AdditionalDocumentNewResponse {
+        $params = ['additionalDocuments' => $additionalDocuments];
+
+        return $this->createRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return AdditionalDocumentNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): AdditionalDocumentNewResponse {
         [$parsed, $options] = AdditionalDocumentCreateParams::parseRequest(
-            ['additionalDocuments' => $additionalDocuments],
+            $params,
             $requestOptions
         );
 
@@ -66,6 +88,8 @@ final class AdditionalDocumentsService implements AdditionalDocumentsContract
      * @param Sort $sort Consolidated sort parameter (deepObject style). Originally: sort[value]
      *
      * @return AdditionalDocumentListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         string $id,
@@ -74,8 +98,27 @@ final class AdditionalDocumentsService implements AdditionalDocumentsContract
         $sort = omit,
         ?RequestOptions $requestOptions = null,
     ): AdditionalDocumentListResponse {
+        $params = ['filter' => $filter, 'page' => $page, 'sort' => $sort];
+
+        return $this->listRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return AdditionalDocumentListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): AdditionalDocumentListResponse {
         [$parsed, $options] = AdditionalDocumentListParams::parseRequest(
-            ['filter' => $filter, 'page' => $page, 'sort' => $sort],
+            $params,
             $requestOptions
         );
 
@@ -95,14 +138,33 @@ final class AdditionalDocumentsService implements AdditionalDocumentsContract
      * Deletes an additional document for a porting order.
      *
      * @param string $id
+     *
+     * @throws APIException
      */
     public function delete(
         string $additionalDocumentID,
         $id,
         ?RequestOptions $requestOptions = null
     ): mixed {
+        $params = ['id' => $id];
+
+        return $this->deleteRaw($additionalDocumentID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $additionalDocumentID,
+        array $params,
+        ?RequestOptions $requestOptions = null,
+    ): mixed {
         [$parsed, $options] = AdditionalDocumentDeleteParams::parseRequest(
-            ['id' => $id],
+            $params,
             $requestOptions
         );
         $id = $parsed['id'];

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PortabilityChecks\PortabilityCheckRunParams;
 use Telnyx\PortabilityChecks\PortabilityCheckRunResponse;
@@ -28,13 +29,33 @@ final class PortabilityChecksService implements PortabilityChecksContract
      * @param list<string> $phoneNumbers The list of +E.164 formatted phone numbers to check for portability
      *
      * @return PortabilityCheckRunResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function run(
         $phoneNumbers = omit,
         ?RequestOptions $requestOptions = null
     ): PortabilityCheckRunResponse {
+        $params = ['phoneNumbers' => $phoneNumbers];
+
+        return $this->runRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return PortabilityCheckRunResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function runRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): PortabilityCheckRunResponse {
         [$parsed, $options] = PortabilityCheckRunParams::parseRequest(
-            ['phoneNumbers' => $phoneNumbers],
+            $params,
             $requestOptions
         );
 

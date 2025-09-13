@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\DialogflowConnections\DialogflowConnectionCreateParams\DialogflowAPI;
 use Telnyx\DialogflowConnections\DialogflowConnectionGetResponse;
@@ -27,6 +28,8 @@ interface DialogflowConnectionsContract
      * @param string $location The region of your agent is. (If you use Dialogflow CX, this param is required)
      *
      * @return DialogflowConnectionNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         string $connectionID,
@@ -41,11 +44,41 @@ interface DialogflowConnectionsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return DialogflowConnectionNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        string $connectionID,
+        array $params,
+        ?RequestOptions $requestOptions = null,
+    ): DialogflowConnectionNewResponse;
+
+    /**
+     * @api
+     *
      * @return DialogflowConnectionGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $connectionID,
         ?RequestOptions $requestOptions = null
+    ): DialogflowConnectionGetResponse;
+
+    /**
+     * @api
+     *
+     * @return DialogflowConnectionGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $connectionID,
+        mixed $params,
+        ?RequestOptions $requestOptions = null,
     ): DialogflowConnectionGetResponse;
 
     /**
@@ -59,6 +92,8 @@ interface DialogflowConnectionsContract
      * @param string $location The region of your agent is. (If you use Dialogflow CX, this param is required)
      *
      * @return DialogflowConnectionUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function update(
         string $connectionID,
@@ -72,9 +107,37 @@ interface DialogflowConnectionsContract
 
     /**
      * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return DialogflowConnectionUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $connectionID,
+        array $params,
+        ?RequestOptions $requestOptions = null,
+    ): DialogflowConnectionUpdateResponse;
+
+    /**
+     * @api
+     *
+     * @throws APIException
      */
     public function delete(
         string $connectionID,
         ?RequestOptions $requestOptions = null
+    ): mixed;
+
+    /**
+     * @api
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $connectionID,
+        mixed $params,
+        ?RequestOptions $requestOptions = null,
     ): mixed;
 }

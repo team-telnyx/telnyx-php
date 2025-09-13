@@ -6,6 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Conversion\ListOf;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\RequirementGroups\RequirementGroup;
@@ -40,6 +41,8 @@ final class RequirementGroupsService implements RequirementGroupsContract
      * @param list<RegulatoryRequirement> $regulatoryRequirements
      *
      * @return RequirementGroup<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $action,
@@ -49,15 +52,33 @@ final class RequirementGroupsService implements RequirementGroupsContract
         $regulatoryRequirements = omit,
         ?RequestOptions $requestOptions = null,
     ): RequirementGroup {
+        $params = [
+            'action' => $action,
+            'countryCode' => $countryCode,
+            'phoneNumberType' => $phoneNumberType,
+            'customerReference' => $customerReference,
+            'regulatoryRequirements' => $regulatoryRequirements,
+        ];
+
+        return $this->createRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return RequirementGroup<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): RequirementGroup {
         [$parsed, $options] = RequirementGroupCreateParams::parseRequest(
-            [
-                'action' => $action,
-                'countryCode' => $countryCode,
-                'phoneNumberType' => $phoneNumberType,
-                'customerReference' => $customerReference,
-                'regulatoryRequirements' => $regulatoryRequirements,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -76,9 +97,28 @@ final class RequirementGroupsService implements RequirementGroupsContract
      * Get a single requirement group by ID
      *
      * @return RequirementGroup<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): RequirementGroup {
+        $params = [];
+
+        return $this->retrieveRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return RequirementGroup<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): RequirementGroup {
         // @phpstan-ignore-next-line;
@@ -99,6 +139,8 @@ final class RequirementGroupsService implements RequirementGroupsContract
      * @param list<RegulatoryRequirement1> $regulatoryRequirements
      *
      * @return RequirementGroup<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function update(
         string $id,
@@ -106,12 +148,31 @@ final class RequirementGroupsService implements RequirementGroupsContract
         $regulatoryRequirements = omit,
         ?RequestOptions $requestOptions = null,
     ): RequirementGroup {
+        $params = [
+            'customerReference' => $customerReference,
+            'regulatoryRequirements' => $regulatoryRequirements,
+        ];
+
+        return $this->updateRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return RequirementGroup<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): RequirementGroup {
         [$parsed, $options] = RequirementGroupUpdateParams::parseRequest(
-            [
-                'customerReference' => $customerReference,
-                'regulatoryRequirements' => $regulatoryRequirements,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -132,13 +193,33 @@ final class RequirementGroupsService implements RequirementGroupsContract
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[country_code], filter[phone_number_type], filter[action], filter[status], filter[customer_reference]
      *
      * @return list<RequirementGroup>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
         ?RequestOptions $requestOptions = null
     ): array {
+        $params = ['filter' => $filter];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return list<RequirementGroup>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): array {
         [$parsed, $options] = RequirementGroupListParams::parseRequest(
-            ['filter' => $filter],
+            $params,
             $requestOptions
         );
 
@@ -158,9 +239,28 @@ final class RequirementGroupsService implements RequirementGroupsContract
      * Delete a requirement group by ID
      *
      * @return RequirementGroup<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function delete(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): RequirementGroup {
+        $params = [];
+
+        return $this->deleteRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return RequirementGroup<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): RequirementGroup {
         // @phpstan-ignore-next-line;
@@ -178,9 +278,28 @@ final class RequirementGroupsService implements RequirementGroupsContract
      * Submit a Requirement Group for Approval
      *
      * @return RequirementGroup<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function submitForApproval(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): RequirementGroup {
+        $params = [];
+
+        return $this->submitForApprovalRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return RequirementGroup<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function submitForApprovalRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): RequirementGroup {
         // @phpstan-ignore-next-line;

@@ -9,6 +9,7 @@ use Telnyx\AI\Assistants\CanaryDeploys\CanaryDeployResponse;
 use Telnyx\AI\Assistants\CanaryDeploys\CanaryDeployUpdateParams;
 use Telnyx\AI\Assistants\CanaryDeploys\VersionConfig;
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\CanaryDeploysContract;
@@ -31,14 +32,35 @@ final class CanaryDeploysService implements CanaryDeploysContract
      * @param list<VersionConfig> $versions List of version configurations
      *
      * @return CanaryDeployResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         string $assistantID,
         $versions,
         ?RequestOptions $requestOptions = null
     ): CanaryDeployResponse {
+        $params = ['versions' => $versions];
+
+        return $this->createRaw($assistantID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return CanaryDeployResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        string $assistantID,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): CanaryDeployResponse {
         [$parsed, $options] = CanaryDeployCreateParams::parseRequest(
-            ['versions' => $versions],
+            $params,
             $requestOptions
         );
 
@@ -61,9 +83,28 @@ final class CanaryDeploysService implements CanaryDeploysContract
      * traffic percentages for the specified assistant.
      *
      * @return CanaryDeployResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $assistantID,
+        ?RequestOptions $requestOptions = null
+    ): CanaryDeployResponse {
+        $params = [];
+
+        return $this->retrieveRaw($assistantID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return CanaryDeployResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $assistantID,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): CanaryDeployResponse {
         // @phpstan-ignore-next-line;
@@ -86,14 +127,35 @@ final class CanaryDeploysService implements CanaryDeploysContract
      * @param list<VersionConfig> $versions List of version configurations
      *
      * @return CanaryDeployResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function update(
         string $assistantID,
         $versions,
         ?RequestOptions $requestOptions = null
     ): CanaryDeployResponse {
+        $params = ['versions' => $versions];
+
+        return $this->updateRaw($assistantID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return CanaryDeployResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $assistantID,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): CanaryDeployResponse {
         [$parsed, $options] = CanaryDeployUpdateParams::parseRequest(
-            ['versions' => $versions],
+            $params,
             $requestOptions
         );
 
@@ -113,9 +175,26 @@ final class CanaryDeploysService implements CanaryDeploysContract
      * Endpoint to delete a canary deploy configuration for an assistant.
      *
      * Removes all canary deploy configurations for the specified assistant.
+     *
+     * @throws APIException
      */
     public function delete(
         string $assistantID,
+        ?RequestOptions $requestOptions = null
+    ): mixed {
+        $params = [];
+
+        return $this->deleteRaw($assistantID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $assistantID,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): mixed {
         // @phpstan-ignore-next-line;

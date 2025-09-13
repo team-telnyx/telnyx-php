@@ -6,6 +6,7 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\ChargesBreakdown\ChargesBreakdownGetResponse;
 use Telnyx\ChargesBreakdown\ChargesBreakdownRetrieveParams\Format;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 
@@ -21,11 +22,27 @@ interface ChargesBreakdownContract
      * @param Format|value-of<Format> $format Response format
      *
      * @return ChargesBreakdownGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         $startDate,
         $endDate = omit,
         $format = omit,
         ?RequestOptions $requestOptions = null,
+    ): ChargesBreakdownGetResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ChargesBreakdownGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
     ): ChargesBreakdownGetResponse;
 }

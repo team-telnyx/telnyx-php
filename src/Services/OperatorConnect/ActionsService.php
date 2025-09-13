@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\OperatorConnect;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\OperatorConnect\Actions\ActionRefreshResponse;
 use Telnyx\RequestOptions;
@@ -23,8 +24,26 @@ final class ActionsService implements ActionsContract
      * This endpoint will make an asynchronous request to refresh the Operator Connect integration with Microsoft Teams for the current user. This will create new external connections on the user's account if needed, and/or report the integration results as [log messages](https://developers.telnyx.com/api/external-voice-integrations/list-external-connection-log-messages).
      *
      * @return ActionRefreshResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function refresh(
+        ?RequestOptions $requestOptions = null
+    ): ActionRefreshResponse {
+        $params = [];
+
+        return $this->refreshRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return ActionRefreshResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function refreshRaw(
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): ActionRefreshResponse {
         // @phpstan-ignore-next-line;

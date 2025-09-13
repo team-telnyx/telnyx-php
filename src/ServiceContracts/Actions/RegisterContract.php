@@ -6,6 +6,7 @@ namespace Telnyx\ServiceContracts\Actions;
 
 use Telnyx\Actions\Register\RegisterCreateParams\Status;
 use Telnyx\Actions\Register\RegisterNewResponse;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 
@@ -22,6 +23,8 @@ interface RegisterContract
      * @param list<string> $tags Searchable tags associated with the SIM card
      *
      * @return RegisterNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $registrationCodes,
@@ -29,5 +32,19 @@ interface RegisterContract
         $status = omit,
         $tags = omit,
         ?RequestOptions $requestOptions = null,
+    ): RegisterNewResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return RegisterNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
     ): RegisterNewResponse;
 }

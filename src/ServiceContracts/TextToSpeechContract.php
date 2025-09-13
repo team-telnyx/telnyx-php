@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\TextToSpeech\TextToSpeechListVoicesParams\Provider;
@@ -26,6 +27,8 @@ interface TextToSpeechContract
      * - Telnyx.KokoroTTS.af
      *
      * Use the `GET /text-to-speech/voices` endpoint to get a complete list of available voices.
+     *
+     * @throws APIException
      */
     public function generateSpeech(
         $text,
@@ -36,14 +39,42 @@ interface TextToSpeechContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @throws APIException
+     */
+    public function generateSpeechRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): string;
+
+    /**
+     * @api
+     *
      * @param string $elevenlabsAPIKeyRef Reference to your ElevenLabs API key stored in the Telnyx Portal
      * @param Provider|value-of<Provider> $provider Filter voices by provider
      *
      * @return TextToSpeechListVoicesResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function listVoices(
         $elevenlabsAPIKeyRef = omit,
         $provider = omit,
         ?RequestOptions $requestOptions = null,
+    ): TextToSpeechListVoicesResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return TextToSpeechListVoicesResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listVoicesRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
     ): TextToSpeechListVoicesResponse;
 }

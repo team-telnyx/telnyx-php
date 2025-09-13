@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\MessagingProfiles;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigCreateParams;
 use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigCreateParams\Op;
@@ -40,6 +41,8 @@ final class AutorespConfigsService implements AutorespConfigsContract
      * @param string $respText
      *
      * @return AutoRespConfigResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         string $profileID,
@@ -49,14 +52,33 @@ final class AutorespConfigsService implements AutorespConfigsContract
         $respText = omit,
         ?RequestOptions $requestOptions = null,
     ): AutoRespConfigResponse {
+        $params = [
+            'countryCode' => $countryCode,
+            'keywords' => $keywords,
+            'op' => $op,
+            'respText' => $respText,
+        ];
+
+        return $this->createRaw($profileID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return AutoRespConfigResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        string $profileID,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): AutoRespConfigResponse {
         [$parsed, $options] = AutorespConfigCreateParams::parseRequest(
-            [
-                'countryCode' => $countryCode,
-                'keywords' => $keywords,
-                'op' => $op,
-                'respText' => $respText,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -77,14 +99,35 @@ final class AutorespConfigsService implements AutorespConfigsContract
      * @param string $profileID
      *
      * @return AutoRespConfigResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $autorespCfgID,
         $profileID,
         ?RequestOptions $requestOptions = null
     ): AutoRespConfigResponse {
+        $params = ['profileID' => $profileID];
+
+        return $this->retrieveRaw($autorespCfgID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return AutoRespConfigResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $autorespCfgID,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): AutoRespConfigResponse {
         [$parsed, $options] = AutorespConfigRetrieveParams::parseRequest(
-            ['profileID' => $profileID],
+            $params,
             $requestOptions
         );
         $profileID = $parsed['profileID'];
@@ -115,6 +158,8 @@ final class AutorespConfigsService implements AutorespConfigsContract
      * @param string $respText
      *
      * @return AutoRespConfigResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function update(
         string $autorespCfgID,
@@ -125,15 +170,34 @@ final class AutorespConfigsService implements AutorespConfigsContract
         $respText = omit,
         ?RequestOptions $requestOptions = null,
     ): AutoRespConfigResponse {
+        $params = [
+            'profileID' => $profileID,
+            'countryCode' => $countryCode,
+            'keywords' => $keywords,
+            'op' => $op,
+            'respText' => $respText,
+        ];
+
+        return $this->updateRaw($autorespCfgID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return AutoRespConfigResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $autorespCfgID,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): AutoRespConfigResponse {
         [$parsed, $options] = AutorespConfigUpdateParams::parseRequest(
-            [
-                'profileID' => $profileID,
-                'countryCode' => $countryCode,
-                'keywords' => $keywords,
-                'op' => $op,
-                'respText' => $respText,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
         $profileID = $parsed['profileID'];
         unset($parsed['profileID']);
@@ -162,6 +226,8 @@ final class AutorespConfigsService implements AutorespConfigsContract
      * @param UpdatedAt $updatedAt Consolidated updated_at parameter (deepObject style). Originally: updated_at[gte], updated_at[lte]
      *
      * @return AutorespConfigListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         string $profileID,
@@ -170,13 +236,32 @@ final class AutorespConfigsService implements AutorespConfigsContract
         $updatedAt = omit,
         ?RequestOptions $requestOptions = null,
     ): AutorespConfigListResponse {
+        $params = [
+            'countryCode' => $countryCode,
+            'createdAt' => $createdAt,
+            'updatedAt' => $updatedAt,
+        ];
+
+        return $this->listRaw($profileID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return AutorespConfigListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        string $profileID,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): AutorespConfigListResponse {
         [$parsed, $options] = AutorespConfigListParams::parseRequest(
-            [
-                'countryCode' => $countryCode,
-                'createdAt' => $createdAt,
-                'updatedAt' => $updatedAt,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -195,14 +280,33 @@ final class AutorespConfigsService implements AutorespConfigsContract
      * Delete Auto-Response Setting
      *
      * @param string $profileID
+     *
+     * @throws APIException
      */
     public function delete(
         string $autorespCfgID,
         $profileID,
         ?RequestOptions $requestOptions = null
     ): mixed {
+        $params = ['profileID' => $profileID];
+
+        return $this->deleteRaw($autorespCfgID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $autorespCfgID,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): mixed {
         [$parsed, $options] = AutorespConfigDeleteParams::parseRequest(
-            ['profileID' => $profileID],
+            $params,
             $requestOptions
         );
         $profileID = $parsed['profileID'];

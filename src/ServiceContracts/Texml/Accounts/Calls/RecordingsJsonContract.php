@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\Texml\Accounts\Calls;
 
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\Texml\Accounts\Calls\RecordingsJson\RecordingsJsonGetRecordingsJsonResponse;
@@ -29,6 +30,8 @@ interface RecordingsJsonContract
      * @param bool $sendRecordingURL whether to send RecordingUrl in webhooks
      *
      * @return RecordingsJsonRecordingsJsonResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function recordingsJson(
         string $callSid,
@@ -46,13 +49,45 @@ interface RecordingsJsonContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return RecordingsJsonRecordingsJsonResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function recordingsJsonRaw(
+        string $callSid,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): RecordingsJsonRecordingsJsonResponse;
+
+    /**
+     * @api
+     *
      * @param string $accountSid
      *
      * @return RecordingsJsonGetRecordingsJsonResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieveRecordingsJson(
         string $callSid,
         $accountSid,
+        ?RequestOptions $requestOptions = null
+    ): RecordingsJsonGetRecordingsJsonResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return RecordingsJsonGetRecordingsJsonResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRecordingsJsonRaw(
+        string $callSid,
+        array $params,
         ?RequestOptions $requestOptions = null
     ): RecordingsJsonGetRecordingsJsonResponse;
 }

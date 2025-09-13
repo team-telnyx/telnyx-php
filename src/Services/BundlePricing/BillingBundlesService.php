@@ -11,6 +11,7 @@ use Telnyx\BundlePricing\BillingBundles\BillingBundleListParams\Page;
 use Telnyx\BundlePricing\BillingBundles\BillingBundleListResponse;
 use Telnyx\BundlePricing\BillingBundles\BillingBundleRetrieveParams;
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\BundlePricing\BillingBundlesContract;
@@ -32,14 +33,35 @@ final class BillingBundlesService implements BillingBundlesContract
      * @param string $authorizationBearer Authenticates the request with your Telnyx API V2 KEY
      *
      * @return BillingBundleGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $bundleID,
         $authorizationBearer = omit,
         ?RequestOptions $requestOptions = null,
     ): BillingBundleGetResponse {
+        $params = ['authorizationBearer' => $authorizationBearer];
+
+        return $this->retrieveRaw($bundleID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return BillingBundleGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $bundleID,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): BillingBundleGetResponse {
         [$parsed, $options] = BillingBundleRetrieveParams::parseRequest(
-            ['authorizationBearer' => $authorizationBearer],
+            $params,
             $requestOptions
         );
 
@@ -63,6 +85,8 @@ final class BillingBundlesService implements BillingBundlesContract
      * @param string $authorizationBearer Authenticates the request with your Telnyx API V2 KEY
      *
      * @return BillingBundleListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
@@ -70,13 +94,31 @@ final class BillingBundlesService implements BillingBundlesContract
         $authorizationBearer = omit,
         ?RequestOptions $requestOptions = null,
     ): BillingBundleListResponse {
+        $params = [
+            'filter' => $filter,
+            'page' => $page,
+            'authorizationBearer' => $authorizationBearer,
+        ];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return BillingBundleListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): BillingBundleListResponse {
         [$parsed, $options] = BillingBundleListParams::parseRequest(
-            [
-                'filter' => $filter,
-                'page' => $page,
-                'authorizationBearer' => $authorizationBearer,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
         $query_params = array_flip(['filter', 'page']);
 

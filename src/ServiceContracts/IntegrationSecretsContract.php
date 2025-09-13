@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\IntegrationSecrets\IntegrationSecretCreateParams\Type;
 use Telnyx\IntegrationSecrets\IntegrationSecretListParams\Filter;
@@ -26,6 +27,8 @@ interface IntegrationSecretsContract
      * @param string $username The username for the secret. Required for basic type secrets, ignored otherwise.
      *
      * @return IntegrationSecretNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $identifier,
@@ -39,10 +42,26 @@ interface IntegrationSecretsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return IntegrationSecretNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): IntegrationSecretNewResponse;
+
+    /**
+     * @api
+     *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[type]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @return IntegrationSecretListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
@@ -52,9 +71,36 @@ interface IntegrationSecretsContract
 
     /**
      * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return IntegrationSecretListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): IntegrationSecretListResponse;
+
+    /**
+     * @api
+     *
+     * @throws APIException
      */
     public function delete(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): mixed;
+
+    /**
+     * @api
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): mixed;
 }

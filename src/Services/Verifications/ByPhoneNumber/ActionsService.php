@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Verifications\ByPhoneNumber;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Verifications\ByPhoneNumber\ActionsContract;
@@ -27,6 +28,8 @@ final class ActionsService implements ActionsContract
      * @param string $verifyProfileID the identifier of the associated Verify profile
      *
      * @return VerifyVerificationCodeResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function verify(
         string $phoneNumber,
@@ -34,8 +37,27 @@ final class ActionsService implements ActionsContract
         $verifyProfileID,
         ?RequestOptions $requestOptions = null,
     ): VerifyVerificationCodeResponse {
+        $params = ['code' => $code, 'verifyProfileID' => $verifyProfileID];
+
+        return $this->verifyRaw($phoneNumber, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return VerifyVerificationCodeResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function verifyRaw(
+        string $phoneNumber,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): VerifyVerificationCodeResponse {
         [$parsed, $options] = ActionVerifyParams::parseRequest(
-            ['code' => $code, 'verifyProfileID' => $verifyProfileID],
+            $params,
             $requestOptions
         );
 

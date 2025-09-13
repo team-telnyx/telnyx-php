@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Documents\DocumentDeleteResponse;
 use Telnyx\Documents\DocumentGenerateDownloadLinkResponse;
@@ -24,9 +25,24 @@ interface DocumentsContract
      * @api
      *
      * @return DocumentGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): DocumentGetResponse;
+
+    /**
+     * @api
+     *
+     * @return DocumentGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): DocumentGetResponse;
 
@@ -37,6 +53,8 @@ interface DocumentsContract
      * @param string $filename the filename of the document
      *
      * @return DocumentUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function update(
         string $id,
@@ -48,11 +66,28 @@ interface DocumentsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return DocumentUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): DocumentUpdateResponse;
+
+    /**
+     * @api
+     *
      * @param Filter $filter Consolidated filter parameter for documents (deepObject style). Originally: filter[filename][contains], filter[customer_reference][eq], filter[customer_reference][in][], filter[created_at][gt], filter[created_at][lt]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param list<Sort|value-of<Sort>> $sort Consolidated sort parameter for documents (deepObject style). Originally: sort[]
      *
      * @return DocumentListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
@@ -64,7 +99,23 @@ interface DocumentsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return DocumentListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): DocumentListResponse;
+
+    /**
+     * @api
+     *
      * @return DocumentDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function delete(
         string $id,
@@ -73,6 +124,21 @@ interface DocumentsContract
 
     /**
      * @api
+     *
+     * @return DocumentDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $id,
+        mixed $params,
+        ?RequestOptions $requestOptions = null
+    ): DocumentDeleteResponse;
+
+    /**
+     * @api
+     *
+     * @throws APIException
      */
     public function download(
         string $id,
@@ -82,10 +148,36 @@ interface DocumentsContract
     /**
      * @api
      *
+     * @throws APIException
+     */
+    public function downloadRaw(
+        string $id,
+        mixed $params,
+        ?RequestOptions $requestOptions = null
+    ): string;
+
+    /**
+     * @api
+     *
      * @return DocumentGenerateDownloadLinkResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function generateDownloadLink(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): DocumentGenerateDownloadLinkResponse;
+
+    /**
+     * @api
+     *
+     * @return DocumentGenerateDownloadLinkResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function generateDownloadLinkRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): DocumentGenerateDownloadLinkResponse;
 
@@ -98,6 +190,8 @@ interface DocumentsContract
      * @param string $file the Base64 encoded contents of the file you are uploading
      *
      * @return DocumentUploadResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function upload(
         $url,
@@ -105,5 +199,19 @@ interface DocumentsContract
         $filename = omit,
         $file,
         ?RequestOptions $requestOptions = null,
+    ): DocumentUploadResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return DocumentUploadResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function uploadRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
     ): DocumentUploadResponse;
 }

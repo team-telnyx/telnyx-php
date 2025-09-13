@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\NumbersFeatures\NumbersFeatureCreateParams;
 use Telnyx\NumbersFeatures\NumbersFeatureNewResponse;
@@ -26,13 +27,33 @@ final class NumbersFeaturesService implements NumbersFeaturesContract
      * @param list<string> $phoneNumbers
      *
      * @return NumbersFeatureNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $phoneNumbers,
         ?RequestOptions $requestOptions = null
     ): NumbersFeatureNewResponse {
+        $params = ['phoneNumbers' => $phoneNumbers];
+
+        return $this->createRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return NumbersFeatureNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): NumbersFeatureNewResponse {
         [$parsed, $options] = NumbersFeatureCreateParams::parseRequest(
-            ['phoneNumbers' => $phoneNumbers],
+            $params,
             $requestOptions
         );
 

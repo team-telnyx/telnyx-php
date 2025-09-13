@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Porting;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationCreateParams;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationCreateParams\Address;
@@ -48,6 +49,8 @@ final class LoaConfigurationsService implements LoaConfigurationsContract
      * @param string $name The name of the LOA configuration
      *
      * @return LoaConfigurationNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $address,
@@ -57,15 +60,33 @@ final class LoaConfigurationsService implements LoaConfigurationsContract
         $name,
         ?RequestOptions $requestOptions = null,
     ): LoaConfigurationNewResponse {
+        $params = [
+            'address' => $address,
+            'companyName' => $companyName,
+            'contact' => $contact,
+            'logo' => $logo,
+            'name' => $name,
+        ];
+
+        return $this->createRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return LoaConfigurationNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): LoaConfigurationNewResponse {
         [$parsed, $options] = LoaConfigurationCreateParams::parseRequest(
-            [
-                'address' => $address,
-                'companyName' => $companyName,
-                'contact' => $contact,
-                'logo' => $logo,
-                'name' => $name,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -84,9 +105,28 @@ final class LoaConfigurationsService implements LoaConfigurationsContract
      * Retrieve a specific LOA configuration.
      *
      * @return LoaConfigurationGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): LoaConfigurationGetResponse {
+        $params = [];
+
+        return $this->retrieveRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return LoaConfigurationGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): LoaConfigurationGetResponse {
         // @phpstan-ignore-next-line;
@@ -110,6 +150,8 @@ final class LoaConfigurationsService implements LoaConfigurationsContract
      * @param string $name The name of the LOA configuration
      *
      * @return LoaConfigurationUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function update(
         string $id,
@@ -120,15 +162,34 @@ final class LoaConfigurationsService implements LoaConfigurationsContract
         $name,
         ?RequestOptions $requestOptions = null,
     ): LoaConfigurationUpdateResponse {
+        $params = [
+            'address' => $address,
+            'companyName' => $companyName,
+            'contact' => $contact,
+            'logo' => $logo,
+            'name' => $name,
+        ];
+
+        return $this->updateRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return LoaConfigurationUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): LoaConfigurationUpdateResponse {
         [$parsed, $options] = LoaConfigurationUpdateParams::parseRequest(
-            [
-                'address' => $address,
-                'companyName' => $companyName,
-                'contact' => $contact,
-                'logo' => $logo,
-                'name' => $name,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -149,13 +210,33 @@ final class LoaConfigurationsService implements LoaConfigurationsContract
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @return LoaConfigurationListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $page = omit,
         ?RequestOptions $requestOptions = null
     ): LoaConfigurationListResponse {
+        $params = ['page' => $page];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return LoaConfigurationListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): LoaConfigurationListResponse {
         [$parsed, $options] = LoaConfigurationListParams::parseRequest(
-            ['page' => $page],
+            $params,
             $requestOptions
         );
 
@@ -173,9 +254,26 @@ final class LoaConfigurationsService implements LoaConfigurationsContract
      * @api
      *
      * Delete a specific LOA configuration.
+     *
+     * @throws APIException
      */
     public function delete(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): mixed {
+        $params = [];
+
+        return $this->deleteRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): mixed {
         // @phpstan-ignore-next-line;
@@ -197,6 +295,8 @@ final class LoaConfigurationsService implements LoaConfigurationsContract
      * @param Contact2 $contact the contact information of the company
      * @param Logo2 $logo The logo of the LOA configuration
      * @param string $name The name of the LOA configuration
+     *
+     * @throws APIException
      */
     public function preview0(
         $address,
@@ -206,15 +306,31 @@ final class LoaConfigurationsService implements LoaConfigurationsContract
         $name,
         ?RequestOptions $requestOptions = null,
     ): string {
+        $params = [
+            'address' => $address,
+            'companyName' => $companyName,
+            'contact' => $contact,
+            'logo' => $logo,
+            'name' => $name,
+        ];
+
+        return $this->preview0Raw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @throws APIException
+     */
+    public function preview0Raw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): string {
         [$parsed, $options] = LoaConfigurationPreview0Params::parseRequest(
-            [
-                'address' => $address,
-                'companyName' => $companyName,
-                'contact' => $contact,
-                'logo' => $logo,
-                'name' => $name,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -232,9 +348,26 @@ final class LoaConfigurationsService implements LoaConfigurationsContract
      * @api
      *
      * Preview a specific LOA configuration.
+     *
+     * @throws APIException
      */
     public function preview1(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): string {
+        $params = [];
+
+        return $this->preview1Raw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @throws APIException
+     */
+    public function preview1Raw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): string {
         // @phpstan-ignore-next-line;

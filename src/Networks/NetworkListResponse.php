@@ -12,9 +12,9 @@ use Telnyx\Networks\NetworkListResponse\Data;
 
 /**
  * @phpstan-type network_list_response = array{
- *   data?: list<STAINLESS_FIXME_data_alias>, meta?: PaginationMeta
+ *   data?: list<data_alias>, meta?: PaginationMeta
  * }
- * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * When used in a response, this type parameter can define a $rawResponse property.
  * @template TRawResponse of object = object{}
  *
  * @mixin TRawResponse

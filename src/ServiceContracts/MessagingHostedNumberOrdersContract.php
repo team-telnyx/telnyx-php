@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderCheckEligibilityResponse;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderCreateVerificationCodesParams\VerificationMethod;
@@ -28,6 +29,8 @@ interface MessagingHostedNumberOrdersContract
      * @param list<string> $phoneNumbers phone numbers to be used for hosted messaging
      *
      * @return MessagingHostedNumberOrderNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $messagingProfileID = omit,
@@ -38,7 +41,23 @@ interface MessagingHostedNumberOrdersContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return MessagingHostedNumberOrderNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): MessagingHostedNumberOrderNewResponse;
+
+    /**
+     * @api
+     *
      * @return MessagingHostedNumberOrderGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
@@ -48,9 +67,24 @@ interface MessagingHostedNumberOrdersContract
     /**
      * @api
      *
+     * @return MessagingHostedNumberOrderGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        mixed $params,
+        ?RequestOptions $requestOptions = null
+    ): MessagingHostedNumberOrderGetResponse;
+
+    /**
+     * @api
+     *
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
      * @return MessagingHostedNumberOrderListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $page = omit,
@@ -60,7 +94,23 @@ interface MessagingHostedNumberOrdersContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return MessagingHostedNumberOrderListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): MessagingHostedNumberOrderListResponse;
+
+    /**
+     * @api
+     *
      * @return MessagingHostedNumberOrderDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function delete(
         string $id,
@@ -70,12 +120,41 @@ interface MessagingHostedNumberOrdersContract
     /**
      * @api
      *
+     * @return MessagingHostedNumberOrderDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $id,
+        mixed $params,
+        ?RequestOptions $requestOptions = null
+    ): MessagingHostedNumberOrderDeleteResponse;
+
+    /**
+     * @api
+     *
      * @param list<string> $phoneNumbers List of phone numbers to check eligibility
      *
      * @return MessagingHostedNumberOrderCheckEligibilityResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function checkEligibility(
         $phoneNumbers,
+        ?RequestOptions $requestOptions = null
+    ): MessagingHostedNumberOrderCheckEligibilityResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return MessagingHostedNumberOrderCheckEligibilityResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function checkEligibilityRaw(
+        array $params,
         ?RequestOptions $requestOptions = null
     ): MessagingHostedNumberOrderCheckEligibilityResponse;
 
@@ -86,6 +165,8 @@ interface MessagingHostedNumberOrdersContract
      * @param VerificationMethod|value-of<VerificationMethod> $verificationMethod
      *
      * @return MessagingHostedNumberOrderNewVerificationCodesResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function createVerificationCodes(
         string $id,
@@ -97,13 +178,45 @@ interface MessagingHostedNumberOrdersContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return MessagingHostedNumberOrderNewVerificationCodesResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createVerificationCodesRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): MessagingHostedNumberOrderNewVerificationCodesResponse;
+
+    /**
+     * @api
+     *
      * @param list<VerificationCode> $verificationCodes
      *
      * @return MessagingHostedNumberOrderValidateCodesResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function validateCodes(
         string $id,
         $verificationCodes,
+        ?RequestOptions $requestOptions = null
+    ): MessagingHostedNumberOrderValidateCodesResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return MessagingHostedNumberOrderValidateCodesResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function validateCodesRaw(
+        string $id,
+        array $params,
         ?RequestOptions $requestOptions = null
     ): MessagingHostedNumberOrderValidateCodesResponse;
 }

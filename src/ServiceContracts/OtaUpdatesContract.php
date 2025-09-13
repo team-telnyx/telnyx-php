@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\OtaUpdates\OtaUpdateGetResponse;
 use Telnyx\OtaUpdates\OtaUpdateListParams\Filter;
@@ -19,9 +20,24 @@ interface OtaUpdatesContract
      * @api
      *
      * @return OtaUpdateGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): OtaUpdateGetResponse;
+
+    /**
+     * @api
+     *
+     * @return OtaUpdateGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): OtaUpdateGetResponse;
 
@@ -32,10 +48,26 @@ interface OtaUpdatesContract
      * @param Page $page Consolidated pagination parameter (deepObject style). Originally: page[number], page[size]
      *
      * @return OtaUpdateListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
         $page = omit,
+        ?RequestOptions $requestOptions = null
+    ): OtaUpdateListResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return OtaUpdateListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
         ?RequestOptions $requestOptions = null
     ): OtaUpdateListResponse;
 }

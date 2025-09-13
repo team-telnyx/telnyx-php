@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\SimCardGroups;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SimCardGroups\ActionsContract;
@@ -35,9 +36,28 @@ final class ActionsService implements ActionsContract
      * This API allows fetching detailed information about a SIM card group action resource to make follow-ups in an existing asynchronous operation.
      *
      * @return ActionGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): ActionGetResponse {
+        $params = [];
+
+        return $this->retrieveRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return ActionGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): ActionGetResponse {
         // @phpstan-ignore-next-line;
@@ -61,6 +81,8 @@ final class ActionsService implements ActionsContract
      * @param int $pageSize the size of the page
      *
      * @return ActionListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filterSimCardGroupID = omit,
@@ -70,15 +92,33 @@ final class ActionsService implements ActionsContract
         $pageSize = omit,
         ?RequestOptions $requestOptions = null,
     ): ActionListResponse {
+        $params = [
+            'filterSimCardGroupID' => $filterSimCardGroupID,
+            'filterStatus' => $filterStatus,
+            'filterType' => $filterType,
+            'pageNumber' => $pageNumber,
+            'pageSize' => $pageSize,
+        ];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ActionListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): ActionListResponse {
         [$parsed, $options] = ActionListParams::parseRequest(
-            [
-                'filterSimCardGroupID' => $filterSimCardGroupID,
-                'filterStatus' => $filterStatus,
-                'filterType' => $filterType,
-                'pageNumber' => $pageNumber,
-                'pageSize' => $pageSize,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -97,9 +137,32 @@ final class ActionsService implements ActionsContract
      * This action will asynchronously remove an existing Private Wireless Gateway definition from a SIM card group. Completing this operation defines that all SIM cards in the SIM card group will get their traffic handled by Telnyx's default mobile network configuration.
      *
      * @return ActionRemovePrivateWirelessGatewayResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function removePrivateWirelessGateway(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): ActionRemovePrivateWirelessGatewayResponse {
+        $params = [];
+
+        return $this->removePrivateWirelessGatewayRaw(
+            $id,
+            $params,
+            $requestOptions
+        );
+    }
+
+    /**
+     * @api
+     *
+     * @return ActionRemovePrivateWirelessGatewayResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function removePrivateWirelessGatewayRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): ActionRemovePrivateWirelessGatewayResponse {
         // @phpstan-ignore-next-line;
@@ -119,9 +182,28 @@ final class ActionsService implements ActionsContract
      * This action will asynchronously remove an existing Wireless Blocklist to all the SIMs in the SIM card group.
      *
      * @return ActionRemoveWirelessBlocklistResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function removeWirelessBlocklist(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): ActionRemoveWirelessBlocklistResponse {
+        $params = [];
+
+        return $this->removeWirelessBlocklistRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return ActionRemoveWirelessBlocklistResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function removeWirelessBlocklistRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): ActionRemoveWirelessBlocklistResponse {
         // @phpstan-ignore-next-line;
@@ -141,14 +223,35 @@ final class ActionsService implements ActionsContract
      * @param string $privateWirelessGatewayID the identification of the related Private Wireless Gateway resource
      *
      * @return ActionSetPrivateWirelessGatewayResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function setPrivateWirelessGateway(
         string $id,
         $privateWirelessGatewayID,
         ?RequestOptions $requestOptions = null,
     ): ActionSetPrivateWirelessGatewayResponse {
+        $params = ['privateWirelessGatewayID' => $privateWirelessGatewayID];
+
+        return $this->setPrivateWirelessGatewayRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ActionSetPrivateWirelessGatewayResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function setPrivateWirelessGatewayRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): ActionSetPrivateWirelessGatewayResponse {
         [$parsed, $options] = ActionSetPrivateWirelessGatewayParams::parseRequest(
-            ['privateWirelessGatewayID' => $privateWirelessGatewayID],
+            $params,
             $requestOptions
         );
 
@@ -170,14 +273,35 @@ final class ActionsService implements ActionsContract
      * @param string $wirelessBlocklistID the identification of the related Wireless Blocklist resource
      *
      * @return ActionSetWirelessBlocklistResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function setWirelessBlocklist(
         string $id,
         $wirelessBlocklistID,
         ?RequestOptions $requestOptions = null
     ): ActionSetWirelessBlocklistResponse {
+        $params = ['wirelessBlocklistID' => $wirelessBlocklistID];
+
+        return $this->setWirelessBlocklistRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ActionSetWirelessBlocklistResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function setWirelessBlocklistRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): ActionSetWirelessBlocklistResponse {
         [$parsed, $options] = ActionSetWirelessBlocklistParams::parseRequest(
-            ['wirelessBlocklistID' => $wirelessBlocklistID],
+            $params,
             $requestOptions
         );
 

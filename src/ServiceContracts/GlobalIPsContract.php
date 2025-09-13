@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\GlobalIPs\GlobalIPDeleteResponse;
 use Telnyx\GlobalIPs\GlobalIPGetResponse;
@@ -24,6 +25,8 @@ interface GlobalIPsContract
      * @param array<string, mixed> $ports a Global IP ports grouped by protocol code
      *
      * @return GlobalIPNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $description = omit,
@@ -35,7 +38,23 @@ interface GlobalIPsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return GlobalIPNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): GlobalIPNewResponse;
+
+    /**
+     * @api
+     *
      * @return GlobalIPGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
@@ -45,9 +64,24 @@ interface GlobalIPsContract
     /**
      * @api
      *
+     * @return GlobalIPGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        mixed $params,
+        ?RequestOptions $requestOptions = null
+    ): GlobalIPGetResponse;
+
+    /**
+     * @api
+     *
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
      * @return GlobalIPListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $page = omit,
@@ -57,10 +91,39 @@ interface GlobalIPsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return GlobalIPListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): GlobalIPListResponse;
+
+    /**
+     * @api
+     *
      * @return GlobalIPDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function delete(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): GlobalIPDeleteResponse;
+
+    /**
+     * @api
+     *
+     * @return GlobalIPDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): GlobalIPDeleteResponse;
 }

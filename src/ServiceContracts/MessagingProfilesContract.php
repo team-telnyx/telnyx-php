@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\MessagingProfiles\MessagingProfileCreateParams\WebhookAPIVersion;
 use Telnyx\MessagingProfiles\MessagingProfileDeleteResponse;
@@ -54,6 +55,8 @@ interface MessagingProfilesContract
      * @param string|null $webhookURL the URL where webhooks related to this messaging profile will be sent
      *
      * @return MessagingProfileNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $name,
@@ -75,10 +78,39 @@ interface MessagingProfilesContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return MessagingProfileNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): MessagingProfileNewResponse;
+
+    /**
+     * @api
+     *
      * @return MessagingProfileGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): MessagingProfileGetResponse;
+
+    /**
+     * @api
+     *
+     * @return MessagingProfileGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): MessagingProfileGetResponse;
 
@@ -113,6 +145,8 @@ interface MessagingProfilesContract
      * This field is required if the messaging profile doesn't have it defined yet.
      *
      * @return MessagingProfileUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function update(
         string $id,
@@ -136,10 +170,27 @@ interface MessagingProfilesContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return MessagingProfileUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): MessagingProfileUpdateResponse;
+
+    /**
+     * @api
+     *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[name]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
      * @return MessagingProfileListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
@@ -150,7 +201,23 @@ interface MessagingProfilesContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return MessagingProfileListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): MessagingProfileListResponse;
+
+    /**
+     * @api
+     *
      * @return MessagingProfileDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function delete(
         string $id,
@@ -160,9 +227,24 @@ interface MessagingProfilesContract
     /**
      * @api
      *
+     * @return MessagingProfileDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $id,
+        mixed $params,
+        ?RequestOptions $requestOptions = null
+    ): MessagingProfileDeleteResponse;
+
+    /**
+     * @api
+     *
      * @param Page1 $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
      * @return MessagingProfileListPhoneNumbersResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function listPhoneNumbers(
         string $id,
@@ -173,13 +255,45 @@ interface MessagingProfilesContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return MessagingProfileListPhoneNumbersResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listPhoneNumbersRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): MessagingProfileListPhoneNumbersResponse;
+
+    /**
+     * @api
+     *
      * @param Page2 $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
      * @return MessagingProfileListShortCodesResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function listShortCodes(
         string $id,
         $page = omit,
+        ?RequestOptions $requestOptions = null
+    ): MessagingProfileListShortCodesResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return MessagingProfileListShortCodesResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listShortCodesRaw(
+        string $id,
+        array $params,
         ?RequestOptions $requestOptions = null
     ): MessagingProfileListShortCodesResponse;
 }

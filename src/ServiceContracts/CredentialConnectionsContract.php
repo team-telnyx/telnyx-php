@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\CredentialConnections\ConnectionRtcpSettings;
@@ -55,6 +56,8 @@ interface CredentialConnectionsContract
      * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
      *
      * @return CredentialConnectionNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $connectionName,
@@ -84,10 +87,39 @@ interface CredentialConnectionsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return CredentialConnectionNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): CredentialConnectionNewResponse;
+
+    /**
+     * @api
+     *
      * @return CredentialConnectionGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): CredentialConnectionGetResponse;
+
+    /**
+     * @api
+     *
+     * @return CredentialConnectionGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): CredentialConnectionGetResponse;
 
@@ -117,6 +149,8 @@ interface CredentialConnectionsContract
      * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
      *
      * @return CredentialConnectionUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function update(
         string $id,
@@ -147,6 +181,21 @@ interface CredentialConnectionsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return CredentialConnectionUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): CredentialConnectionUpdateResponse;
+
+    /**
+     * @api
+     *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[connection_name], filter[fqdn], filter[outbound_voice_profile_id], filter[outbound.outbound_voice_profile_id]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param Sort|value-of<Sort> $sort Specifies the sort order for results. By default sorting direction is ascending. To have the results sorted in descending order add the <code> -</code> prefix.<br/><br/>
@@ -163,6 +212,8 @@ interface CredentialConnectionsContract
      * </ul> <br/> If not given, results are sorted by <code>created_at</code> in descending order.
      *
      * @return CredentialConnectionListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
@@ -174,10 +225,39 @@ interface CredentialConnectionsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return CredentialConnectionListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): CredentialConnectionListResponse;
+
+    /**
+     * @api
+     *
      * @return CredentialConnectionDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function delete(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): CredentialConnectionDeleteResponse;
+
+    /**
+     * @api
+     *
+     * @return CredentialConnectionDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): CredentialConnectionDeleteResponse;
 }

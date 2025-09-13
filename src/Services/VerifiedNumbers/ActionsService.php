@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\VerifiedNumbers;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\VerifiedNumbers\ActionsContract;
@@ -26,14 +27,39 @@ final class ActionsService implements ActionsContract
      * @param string $verificationCode
      *
      * @return VerifiedNumberDataWrapper<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function submitVerificationCode(
         string $phoneNumber,
         $verificationCode,
         ?RequestOptions $requestOptions = null,
     ): VerifiedNumberDataWrapper {
+        $params = ['verificationCode' => $verificationCode];
+
+        return $this->submitVerificationCodeRaw(
+            $phoneNumber,
+            $params,
+            $requestOptions
+        );
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return VerifiedNumberDataWrapper<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function submitVerificationCodeRaw(
+        string $phoneNumber,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): VerifiedNumberDataWrapper {
         [$parsed, $options] = ActionSubmitVerificationCodeParams::parseRequest(
-            ['verificationCode' => $verificationCode],
+            $params,
             $requestOptions
         );
 

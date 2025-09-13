@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Messsages\MesssageRcsParams;
 use Telnyx\Messsages\MesssageRcsParams\MmsFallback;
@@ -39,6 +40,8 @@ final class MesssagesService implements MesssagesContract
      * @param string $webhookURL the URL where webhooks related to this message will be sent
      *
      * @return MesssageRcsResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function rcs(
         $agentID,
@@ -51,18 +54,36 @@ final class MesssagesService implements MesssagesContract
         $webhookURL = omit,
         ?RequestOptions $requestOptions = null,
     ): MesssageRcsResponse {
+        $params = [
+            'agentID' => $agentID,
+            'agentMessage' => $agentMessage,
+            'messagingProfileID' => $messagingProfileID,
+            'to' => $to,
+            'mmsFallback' => $mmsFallback,
+            'smsFallback' => $smsFallback,
+            'type' => $type,
+            'webhookURL' => $webhookURL,
+        ];
+
+        return $this->rcsRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return MesssageRcsResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function rcsRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): MesssageRcsResponse {
         [$parsed, $options] = MesssageRcsParams::parseRequest(
-            [
-                'agentID' => $agentID,
-                'agentMessage' => $agentMessage,
-                'messagingProfileID' => $messagingProfileID,
-                'to' => $to,
-                'mmsFallback' => $mmsFallback,
-                'smsFallback' => $smsFallback,
-                'type' => $type,
-                'webhookURL' => $webhookURL,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;

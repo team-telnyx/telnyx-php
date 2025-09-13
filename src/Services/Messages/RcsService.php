@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Messages;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Messages\Rcs\RcGenerateDeeplinkParams;
 use Telnyx\Messages\Rcs\RcGenerateDeeplinkResponse;
@@ -29,6 +30,8 @@ final class RcsService implements RcsContract
      * @param string $phoneNumber Phone number in E164 format (URL encoded)
      *
      * @return RcGenerateDeeplinkResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function generateDeeplink(
         string $agentID,
@@ -36,8 +39,27 @@ final class RcsService implements RcsContract
         $phoneNumber = omit,
         ?RequestOptions $requestOptions = null,
     ): RcGenerateDeeplinkResponse {
+        $params = ['body' => $body, 'phoneNumber' => $phoneNumber];
+
+        return $this->generateDeeplinkRaw($agentID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return RcGenerateDeeplinkResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function generateDeeplinkRaw(
+        string $agentID,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): RcGenerateDeeplinkResponse {
         [$parsed, $options] = RcGenerateDeeplinkParams::parseRequest(
-            ['body' => $body, 'phoneNumber' => $phoneNumber],
+            $params,
             $requestOptions
         );
 

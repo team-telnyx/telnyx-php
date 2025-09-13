@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Media\MediaGetResponse;
 use Telnyx\Media\MediaListParams;
@@ -32,9 +33,28 @@ final class MediaService implements MediaContract
      * Returns the information about a stored media file.
      *
      * @return MediaGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $mediaName,
+        ?RequestOptions $requestOptions = null
+    ): MediaGetResponse {
+        $params = [];
+
+        return $this->retrieveRaw($mediaName, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return MediaGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $mediaName,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): MediaGetResponse {
         // @phpstan-ignore-next-line;
@@ -55,6 +75,8 @@ final class MediaService implements MediaContract
      * @param int $ttlSecs The number of seconds after which the media resource will be deleted, defaults to 2 days. The maximum allowed vale is 630720000, which translates to 20 years.
      *
      * @return MediaUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function update(
         string $mediaName,
@@ -62,8 +84,27 @@ final class MediaService implements MediaContract
         $ttlSecs = omit,
         ?RequestOptions $requestOptions = null,
     ): MediaUpdateResponse {
+        $params = ['mediaURL' => $mediaURL, 'ttlSecs' => $ttlSecs];
+
+        return $this->updateRaw($mediaName, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return MediaUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $mediaName,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): MediaUpdateResponse {
         [$parsed, $options] = MediaUpdateParams::parseRequest(
-            ['mediaURL' => $mediaURL, 'ttlSecs' => $ttlSecs],
+            $params,
             $requestOptions
         );
 
@@ -85,13 +126,33 @@ final class MediaService implements MediaContract
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[content_type][]
      *
      * @return MediaListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
         ?RequestOptions $requestOptions = null
     ): MediaListResponse {
+        $params = ['filter' => $filter];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return MediaListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): MediaListResponse {
         [$parsed, $options] = MediaListParams::parseRequest(
-            ['filter' => $filter],
+            $params,
             $requestOptions
         );
 
@@ -109,9 +170,26 @@ final class MediaService implements MediaContract
      * @api
      *
      * Deletes a stored media file.
+     *
+     * @throws APIException
      */
     public function delete(
         string $mediaName,
+        ?RequestOptions $requestOptions = null
+    ): mixed {
+        $params = [];
+
+        return $this->deleteRaw($mediaName, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $mediaName,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): mixed {
         // @phpstan-ignore-next-line;
@@ -127,9 +205,26 @@ final class MediaService implements MediaContract
      * @api
      *
      * Downloads a stored media file.
+     *
+     * @throws APIException
      */
     public function download(
         string $mediaName,
+        ?RequestOptions $requestOptions = null
+    ): string {
+        $params = [];
+
+        return $this->downloadRaw($mediaName, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @throws APIException
+     */
+    public function downloadRaw(
+        string $mediaName,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): string {
         // @phpstan-ignore-next-line;
@@ -152,6 +247,8 @@ final class MediaService implements MediaContract
      * @param int $ttlSecs The number of seconds after which the media resource will be deleted, defaults to 2 days. The maximum allowed vale is 630720000, which translates to 20 years.
      *
      * @return MediaUploadResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function upload(
         $mediaURL,
@@ -159,13 +256,29 @@ final class MediaService implements MediaContract
         $ttlSecs = omit,
         ?RequestOptions $requestOptions = null,
     ): MediaUploadResponse {
+        $params = [
+            'mediaURL' => $mediaURL, 'mediaName' => $mediaName, 'ttlSecs' => $ttlSecs,
+        ];
+
+        return $this->uploadRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return MediaUploadResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function uploadRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): MediaUploadResponse {
         [$parsed, $options] = MediaUploadParams::parseRequest(
-            [
-                'mediaURL' => $mediaURL,
-                'mediaName' => $mediaName,
-                'ttlSecs' => $ttlSecs,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;

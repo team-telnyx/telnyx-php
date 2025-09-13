@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\MobilePushCredentials\MobilePushCredentialCreateParams;
 use Telnyx\MobilePushCredentials\MobilePushCredentialCreateParams\Type;
@@ -38,6 +39,8 @@ final class MobilePushCredentialsService implements MobilePushCredentialsContrac
      * mixed,> $projectAccountJsonFile Private key file in JSON format
      *
      * @return PushCredentialResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $alias,
@@ -47,15 +50,33 @@ final class MobilePushCredentialsService implements MobilePushCredentialsContrac
         $projectAccountJsonFile,
         ?RequestOptions $requestOptions = null,
     ): PushCredentialResponse {
+        $params = [
+            'alias' => $alias,
+            'certificate' => $certificate,
+            'privateKey' => $privateKey,
+            'type' => $type,
+            'projectAccountJsonFile' => $projectAccountJsonFile,
+        ];
+
+        return $this->createRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return PushCredentialResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): PushCredentialResponse {
         [$parsed, $options] = MobilePushCredentialCreateParams::parseRequest(
-            [
-                'alias' => $alias,
-                'certificate' => $certificate,
-                'privateKey' => $privateKey,
-                'type' => $type,
-                'projectAccountJsonFile' => $projectAccountJsonFile,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -74,10 +95,29 @@ final class MobilePushCredentialsService implements MobilePushCredentialsContrac
      * Retrieves mobile push credential based on the given `push_credential_id`
      *
      * @return PushCredentialResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $pushCredentialID,
         ?RequestOptions $requestOptions = null
+    ): PushCredentialResponse {
+        $params = [];
+
+        return $this->retrieveRaw($pushCredentialID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return PushCredentialResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $pushCredentialID,
+        mixed $params,
+        ?RequestOptions $requestOptions = null,
     ): PushCredentialResponse {
         // @phpstan-ignore-next-line;
         return $this->client->request(
@@ -97,14 +137,34 @@ final class MobilePushCredentialsService implements MobilePushCredentialsContrac
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @return MobilePushCredentialListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
         $page = omit,
         ?RequestOptions $requestOptions = null
     ): MobilePushCredentialListResponse {
+        $params = ['filter' => $filter, 'page' => $page];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return MobilePushCredentialListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): MobilePushCredentialListResponse {
         [$parsed, $options] = MobilePushCredentialListParams::parseRequest(
-            ['filter' => $filter, 'page' => $page],
+            $params,
             $requestOptions
         );
 
@@ -122,10 +182,27 @@ final class MobilePushCredentialsService implements MobilePushCredentialsContrac
      * @api
      *
      * Deletes a mobile push credential based on the given `push_credential_id`
+     *
+     * @throws APIException
      */
     public function delete(
         string $pushCredentialID,
         ?RequestOptions $requestOptions = null
+    ): mixed {
+        $params = [];
+
+        return $this->deleteRaw($pushCredentialID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $pushCredentialID,
+        mixed $params,
+        ?RequestOptions $requestOptions = null,
     ): mixed {
         // @phpstan-ignore-next-line;
         return $this->client->request(

@@ -10,6 +10,7 @@ use Telnyx\AI\Audio\AudioTranscribeParams\ResponseFormat;
 use Telnyx\AI\Audio\AudioTranscribeParams\TimestampGranularities;
 use Telnyx\AI\Audio\AudioTranscribeResponse;
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\AudioContract;
@@ -35,6 +36,8 @@ final class AudioService implements AudioContract
      * @param TimestampGranularities|value-of<TimestampGranularities> $timestampGranularities The timestamp granularities to populate for this transcription. `response_format` must be set verbose_json to use timestamp granularities. Currently `segment` is supported.
      *
      * @return AudioTranscribeResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function transcribe(
         $model = 'distil-whisper/distil-large-v2',
@@ -44,15 +47,33 @@ final class AudioService implements AudioContract
         $timestampGranularities = omit,
         ?RequestOptions $requestOptions = null,
     ): AudioTranscribeResponse {
+        $params = [
+            'model' => $model,
+            'file' => $file,
+            'fileURL' => $fileURL,
+            'responseFormat' => $responseFormat,
+            'timestampGranularities' => $timestampGranularities,
+        ];
+
+        return $this->transcribeRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return AudioTranscribeResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function transcribeRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): AudioTranscribeResponse {
         [$parsed, $options] = AudioTranscribeParams::parseRequest(
-            [
-                'model' => $model,
-                'file' => $file,
-                'fileURL' => $fileURL,
-                'responseFormat' => $responseFormat,
-                'timestampGranularities' => $timestampGranularities,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;

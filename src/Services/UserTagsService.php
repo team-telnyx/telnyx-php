@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\UserTagsContract;
@@ -29,13 +30,33 @@ final class UserTagsService implements UserTagsContract
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[starts_with]
      *
      * @return UserTagListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
         ?RequestOptions $requestOptions = null
     ): UserTagListResponse {
+        $params = ['filter' => $filter];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return UserTagListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): UserTagListResponse {
         [$parsed, $options] = UserTagListParams::parseRequest(
-            ['filter' => $filter],
+            $params,
             $requestOptions
         );
 

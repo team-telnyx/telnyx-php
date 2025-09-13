@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Storage;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Storage\BucketsContract;
@@ -47,6 +48,8 @@ final class BucketsService implements BucketsContract
      * @param int $ttl The time to live of the token in seconds
      *
      * @return BucketNewPresignedURLResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function createPresignedURL(
         string $objectName,
@@ -54,8 +57,27 @@ final class BucketsService implements BucketsContract
         $ttl = omit,
         ?RequestOptions $requestOptions = null,
     ): BucketNewPresignedURLResponse {
+        $params = ['bucketName' => $bucketName, 'ttl' => $ttl];
+
+        return $this->createPresignedURLRaw($objectName, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return BucketNewPresignedURLResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createPresignedURLRaw(
+        string $objectName,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): BucketNewPresignedURLResponse {
         [$parsed, $options] = BucketCreatePresignedURLParams::parseRequest(
-            ['bucketName' => $bucketName, 'ttl' => $ttl],
+            $params,
             $requestOptions
         );
         $bucketName = $parsed['bucketName'];

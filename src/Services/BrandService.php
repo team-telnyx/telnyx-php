@@ -18,6 +18,7 @@ use Telnyx\Brand\StockExchange;
 use Telnyx\Brand\TelnyxBrand;
 use Telnyx\Brand\Vertical;
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\BrandContract;
@@ -73,6 +74,8 @@ final class BrandService implements BrandContract
      * @param string $website brand website URL
      *
      * @return TelnyxBrand<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $country,
@@ -101,34 +104,52 @@ final class BrandService implements BrandContract
         $website = omit,
         ?RequestOptions $requestOptions = null,
     ): TelnyxBrand {
+        $params = [
+            'country' => $country,
+            'displayName' => $displayName,
+            'email' => $email,
+            'entityType' => $entityType,
+            'vertical' => $vertical,
+            'businessContactEmail' => $businessContactEmail,
+            'city' => $city,
+            'companyName' => $companyName,
+            'ein' => $ein,
+            'firstName' => $firstName,
+            'ipAddress' => $ipAddress,
+            'isReseller' => $isReseller,
+            'lastName' => $lastName,
+            'mobilePhone' => $mobilePhone,
+            'mock' => $mock,
+            'phone' => $phone,
+            'postalCode' => $postalCode,
+            'state' => $state,
+            'stockExchange' => $stockExchange,
+            'stockSymbol' => $stockSymbol,
+            'street' => $street,
+            'webhookFailoverURL' => $webhookFailoverURL,
+            'webhookURL' => $webhookURL,
+            'website' => $website,
+        ];
+
+        return $this->createRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return TelnyxBrand<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): TelnyxBrand {
         [$parsed, $options] = BrandCreateParams::parseRequest(
-            [
-                'country' => $country,
-                'displayName' => $displayName,
-                'email' => $email,
-                'entityType' => $entityType,
-                'vertical' => $vertical,
-                'businessContactEmail' => $businessContactEmail,
-                'city' => $city,
-                'companyName' => $companyName,
-                'ein' => $ein,
-                'firstName' => $firstName,
-                'ipAddress' => $ipAddress,
-                'isReseller' => $isReseller,
-                'lastName' => $lastName,
-                'mobilePhone' => $mobilePhone,
-                'mock' => $mock,
-                'phone' => $phone,
-                'postalCode' => $postalCode,
-                'state' => $state,
-                'stockExchange' => $stockExchange,
-                'stockSymbol' => $stockSymbol,
-                'street' => $street,
-                'webhookFailoverURL' => $webhookFailoverURL,
-                'webhookURL' => $webhookURL,
-                'website' => $website,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -147,9 +168,28 @@ final class BrandService implements BrandContract
      * Retrieve a brand by `brandId`.
      *
      * @return BrandGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $brandID,
+        ?RequestOptions $requestOptions = null
+    ): BrandGetResponse {
+        $params = [];
+
+        return $this->retrieveRaw($brandID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return BrandGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $brandID,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): BrandGetResponse {
         // @phpstan-ignore-next-line;
@@ -195,6 +235,8 @@ final class BrandService implements BrandContract
      * @param string $website brand website URL
      *
      * @return TelnyxBrand<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function update(
         string $brandID,
@@ -225,35 +267,54 @@ final class BrandService implements BrandContract
         $website = omit,
         ?RequestOptions $requestOptions = null,
     ): TelnyxBrand {
+        $params = [
+            'country' => $country,
+            'displayName' => $displayName,
+            'email' => $email,
+            'entityType' => $entityType,
+            'vertical' => $vertical,
+            'altBusinessID' => $altBusinessID,
+            'altBusinessIDType' => $altBusinessIDType,
+            'businessContactEmail' => $businessContactEmail,
+            'city' => $city,
+            'companyName' => $companyName,
+            'ein' => $ein,
+            'firstName' => $firstName,
+            'identityStatus' => $identityStatus,
+            'ipAddress' => $ipAddress,
+            'isReseller' => $isReseller,
+            'lastName' => $lastName,
+            'phone' => $phone,
+            'postalCode' => $postalCode,
+            'state' => $state,
+            'stockExchange' => $stockExchange,
+            'stockSymbol' => $stockSymbol,
+            'street' => $street,
+            'webhookFailoverURL' => $webhookFailoverURL,
+            'webhookURL' => $webhookURL,
+            'website' => $website,
+        ];
+
+        return $this->updateRaw($brandID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return TelnyxBrand<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $brandID,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): TelnyxBrand {
         [$parsed, $options] = BrandUpdateParams::parseRequest(
-            [
-                'country' => $country,
-                'displayName' => $displayName,
-                'email' => $email,
-                'entityType' => $entityType,
-                'vertical' => $vertical,
-                'altBusinessID' => $altBusinessID,
-                'altBusinessIDType' => $altBusinessIDType,
-                'businessContactEmail' => $businessContactEmail,
-                'city' => $city,
-                'companyName' => $companyName,
-                'ein' => $ein,
-                'firstName' => $firstName,
-                'identityStatus' => $identityStatus,
-                'ipAddress' => $ipAddress,
-                'isReseller' => $isReseller,
-                'lastName' => $lastName,
-                'phone' => $phone,
-                'postalCode' => $postalCode,
-                'state' => $state,
-                'stockExchange' => $stockExchange,
-                'stockSymbol' => $stockSymbol,
-                'street' => $street,
-                'webhookFailoverURL' => $webhookFailoverURL,
-                'webhookURL' => $webhookURL,
-                'website' => $website,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -282,6 +343,8 @@ final class BrandService implements BrandContract
      * @param string $tcrBrandID Filter results by the TCR Brand id
      *
      * @return BrandListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $brandID = omit,
@@ -295,19 +358,37 @@ final class BrandService implements BrandContract
         $tcrBrandID = omit,
         ?RequestOptions $requestOptions = null,
     ): BrandListResponse {
+        $params = [
+            'brandID' => $brandID,
+            'country' => $country,
+            'displayName' => $displayName,
+            'entityType' => $entityType,
+            'page' => $page,
+            'recordsPerPage' => $recordsPerPage,
+            'sort' => $sort,
+            'state' => $state,
+            'tcrBrandID' => $tcrBrandID,
+        ];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return BrandListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): BrandListResponse {
         [$parsed, $options] = BrandListParams::parseRequest(
-            [
-                'brandID' => $brandID,
-                'country' => $country,
-                'displayName' => $displayName,
-                'entityType' => $entityType,
-                'page' => $page,
-                'recordsPerPage' => $recordsPerPage,
-                'sort' => $sort,
-                'state' => $state,
-                'tcrBrandID' => $tcrBrandID,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -324,9 +405,26 @@ final class BrandService implements BrandContract
      * @api
      *
      * Delete Brand. This endpoint is used to delete a brand. Note the brand cannot be deleted if it contains one or more active campaigns, the campaigns need to be inactive and at least 3 months old due to billing purposes.
+     *
+     * @throws APIException
      */
     public function delete(
         string $brandID,
+        ?RequestOptions $requestOptions = null
+    ): mixed {
+        $params = [];
+
+        return $this->deleteRaw($brandID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $brandID,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): mixed {
         // @phpstan-ignore-next-line;
@@ -356,9 +454,28 @@ final class BrandService implements BrandContract
      * * `OTHERS` - Details of the data misrepresentation if any.
      *
      * @return BrandGetFeedbackResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function getFeedback(
         string $brandID,
+        ?RequestOptions $requestOptions = null
+    ): BrandGetFeedbackResponse {
+        $params = [];
+
+        return $this->getFeedbackRaw($brandID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return BrandGetFeedbackResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function getFeedbackRaw(
+        string $brandID,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): BrandGetFeedbackResponse {
         // @phpstan-ignore-next-line;
@@ -374,9 +491,26 @@ final class BrandService implements BrandContract
      * @api
      *
      * Resend brand 2FA email
+     *
+     * @throws APIException
      */
     public function resend2faEmail(
         string $brandID,
+        ?RequestOptions $requestOptions = null
+    ): mixed {
+        $params = [];
+
+        return $this->resend2faEmailRaw($brandID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @throws APIException
+     */
+    public function resend2faEmailRaw(
+        string $brandID,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): mixed {
         // @phpstan-ignore-next-line;
@@ -392,9 +526,26 @@ final class BrandService implements BrandContract
      * @api
      *
      * This operation allows you to revet the brand. However, revetting is allowed once after the successful brand registration and thereafter limited to once every 3 months.
+     *
+     * @throws APIException
      */
     public function revet(
         string $brandID,
+        ?RequestOptions $requestOptions = null
+    ): mixed {
+        $params = [];
+
+        return $this->revetRaw($brandID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @throws APIException
+     */
+    public function revetRaw(
+        string $brandID,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): mixed {
         // @phpstan-ignore-next-line;

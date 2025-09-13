@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\MessagingNumbersBulkUpdates\MessagingNumbersBulkUpdateCreateParams;
 use Telnyx\MessagingNumbersBulkUpdates\MessagingNumbersBulkUpdateGetResponse;
@@ -31,15 +32,37 @@ final class MessagingNumbersBulkUpdatesService implements MessagingNumbersBulkUp
      * @param list<string> $numbers the list of phone numbers to update
      *
      * @return MessagingNumbersBulkUpdateNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $messagingProfileID,
         $numbers,
         ?RequestOptions $requestOptions = null
     ): MessagingNumbersBulkUpdateNewResponse {
+        $params = [
+            'messagingProfileID' => $messagingProfileID, 'numbers' => $numbers,
+        ];
+
+        return $this->createRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return MessagingNumbersBulkUpdateNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): MessagingNumbersBulkUpdateNewResponse {
         [$parsed, $options] = MessagingNumbersBulkUpdateCreateParams::parseRequest(
-            ['messagingProfileID' => $messagingProfileID, 'numbers' => $numbers],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -58,9 +81,28 @@ final class MessagingNumbersBulkUpdatesService implements MessagingNumbersBulkUp
      * Retrieve bulk update status
      *
      * @return MessagingNumbersBulkUpdateGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $orderID,
+        ?RequestOptions $requestOptions = null
+    ): MessagingNumbersBulkUpdateGetResponse {
+        $params = [];
+
+        return $this->retrieveRaw($orderID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return MessagingNumbersBulkUpdateGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $orderID,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): MessagingNumbersBulkUpdateGetResponse {
         // @phpstan-ignore-next-line;

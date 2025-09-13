@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\ExternalConnections\ExternalConnectionCreateParams\ExternalSipConnection;
 use Telnyx\ExternalConnections\ExternalConnectionCreateParams\Inbound;
@@ -37,6 +38,8 @@ interface ExternalConnectionsContract
      * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
      *
      * @return ExternalConnectionNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $externalSipConnection = 'zoom',
@@ -53,10 +56,39 @@ interface ExternalConnectionsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return ExternalConnectionNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): ExternalConnectionNewResponse;
+
+    /**
+     * @api
+     *
      * @return ExternalConnectionGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): ExternalConnectionGetResponse;
+
+    /**
+     * @api
+     *
+     * @return ExternalConnectionGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): ExternalConnectionGetResponse;
 
@@ -72,6 +104,8 @@ interface ExternalConnectionsContract
      * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
      *
      * @return ExternalConnectionUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function update(
         string $id,
@@ -88,10 +122,27 @@ interface ExternalConnectionsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return ExternalConnectionUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): ExternalConnectionUpdateResponse;
+
+    /**
+     * @api
+     *
      * @param Filter $filter Filter parameter for external connections (deepObject style). Supports filtering by connection_name, external_sip_connection, id, created_at, and phone_number.
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @return ExternalConnectionListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
@@ -102,10 +153,39 @@ interface ExternalConnectionsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return ExternalConnectionListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): ExternalConnectionListResponse;
+
+    /**
+     * @api
+     *
      * @return ExternalConnectionDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function delete(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): ExternalConnectionDeleteResponse;
+
+    /**
+     * @api
+     *
+     * @return ExternalConnectionDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): ExternalConnectionDeleteResponse;
 
@@ -116,11 +196,28 @@ interface ExternalConnectionsContract
      * @param string $staticEmergencyAddressID A new static emergency address ID to update the location with
      *
      * @return ExternalConnectionUpdateLocationResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function updateLocation(
         string $locationID,
         $id,
         $staticEmergencyAddressID,
+        ?RequestOptions $requestOptions = null,
+    ): ExternalConnectionUpdateLocationResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ExternalConnectionUpdateLocationResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateLocationRaw(
+        string $locationID,
+        array $params,
         ?RequestOptions $requestOptions = null,
     ): ExternalConnectionUpdateLocationResponse;
 }

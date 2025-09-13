@@ -8,6 +8,7 @@ use Telnyx\AI\AIGetModelsResponse;
 use Telnyx\AI\AISummarizeParams;
 use Telnyx\AI\AISummarizeResponse;
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AIContract;
@@ -78,8 +79,26 @@ final class AIService implements AIContract
      * This endpoint returns a list of Open Source and OpenAI models that are available for use. <br /><br /> **Note**: Model `id`'s will be in the form `{source}/{model_name}`. For example `openai/gpt-4` or `mistralai/Mistral-7B-Instruct-v0.1` consistent with HuggingFace naming conventions.
      *
      * @return AIGetModelsResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieveModels(
+        ?RequestOptions $requestOptions = null
+    ): AIGetModelsResponse {
+        $params = [];
+
+        return $this->retrieveModelsRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return AIGetModelsResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveModelsRaw(
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): AIGetModelsResponse {
         // @phpstan-ignore-next-line;
@@ -108,6 +127,8 @@ final class AIService implements AIContract
      * @param string $systemPrompt a system prompt to guide the summary generation
      *
      * @return AISummarizeResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function summarize(
         $bucket,
@@ -115,13 +136,31 @@ final class AIService implements AIContract
         $systemPrompt = omit,
         ?RequestOptions $requestOptions = null,
     ): AISummarizeResponse {
+        $params = [
+            'bucket' => $bucket,
+            'filename' => $filename,
+            'systemPrompt' => $systemPrompt,
+        ];
+
+        return $this->summarizeRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return AISummarizeResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function summarizeRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): AISummarizeResponse {
         [$parsed, $options] = AISummarizeParams::parseRequest(
-            [
-                'bucket' => $bucket,
-                'filename' => $filename,
-                'systemPrompt' => $systemPrompt,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;

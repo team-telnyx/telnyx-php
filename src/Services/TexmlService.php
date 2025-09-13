@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\TexmlContract;
@@ -43,14 +44,34 @@ final class TexmlService implements TexmlContract
      * @param string $value Secret value which will be used when rendering the TeXML template
      *
      * @return TexmlSecretsResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function secrets(
         $name,
         $value,
         ?RequestOptions $requestOptions = null
     ): TexmlSecretsResponse {
+        $params = ['name' => $name, 'value' => $value];
+
+        return $this->secretsRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return TexmlSecretsResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function secretsRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): TexmlSecretsResponse {
         [$parsed, $options] = TexmlSecretsParams::parseRequest(
-            ['name' => $name, 'value' => $value],
+            $params,
             $requestOptions
         );
 

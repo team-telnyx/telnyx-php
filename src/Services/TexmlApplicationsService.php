@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\CredentialConnections\DtmfType;
@@ -60,6 +61,8 @@ final class TexmlApplicationsService implements TexmlApplicationsContract
      * @param VoiceMethod|value-of<VoiceMethod> $voiceMethod HTTP request method Telnyx will use to interact with your XML Translator webhooks. Either 'get' or 'post'.
      *
      * @return TexmlApplicationNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $friendlyName,
@@ -78,24 +81,42 @@ final class TexmlApplicationsService implements TexmlApplicationsContract
         $voiceMethod = omit,
         ?RequestOptions $requestOptions = null,
     ): TexmlApplicationNewResponse {
+        $params = [
+            'friendlyName' => $friendlyName,
+            'voiceURL' => $voiceURL,
+            'active' => $active,
+            'anchorsiteOverride' => $anchorsiteOverride,
+            'dtmfType' => $dtmfType,
+            'firstCommandTimeout' => $firstCommandTimeout,
+            'firstCommandTimeoutSecs' => $firstCommandTimeoutSecs,
+            'inbound' => $inbound,
+            'outbound' => $outbound,
+            'statusCallback' => $statusCallback,
+            'statusCallbackMethod' => $statusCallbackMethod,
+            'tags' => $tags,
+            'voiceFallbackURL' => $voiceFallbackURL,
+            'voiceMethod' => $voiceMethod,
+        ];
+
+        return $this->createRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return TexmlApplicationNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): TexmlApplicationNewResponse {
         [$parsed, $options] = TexmlApplicationCreateParams::parseRequest(
-            [
-                'friendlyName' => $friendlyName,
-                'voiceURL' => $voiceURL,
-                'active' => $active,
-                'anchorsiteOverride' => $anchorsiteOverride,
-                'dtmfType' => $dtmfType,
-                'firstCommandTimeout' => $firstCommandTimeout,
-                'firstCommandTimeoutSecs' => $firstCommandTimeoutSecs,
-                'inbound' => $inbound,
-                'outbound' => $outbound,
-                'statusCallback' => $statusCallback,
-                'statusCallbackMethod' => $statusCallbackMethod,
-                'tags' => $tags,
-                'voiceFallbackURL' => $voiceFallbackURL,
-                'voiceMethod' => $voiceMethod,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -114,9 +135,28 @@ final class TexmlApplicationsService implements TexmlApplicationsContract
      * Retrieves the details of an existing TeXML Application.
      *
      * @return TexmlApplicationGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): TexmlApplicationGetResponse {
+        $params = [];
+
+        return $this->retrieveRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return TexmlApplicationGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): TexmlApplicationGetResponse {
         // @phpstan-ignore-next-line;
@@ -149,6 +189,8 @@ final class TexmlApplicationsService implements TexmlApplicationsContract
      * @param VoiceMethod1|value-of<VoiceMethod1> $voiceMethod HTTP request method Telnyx will use to interact with your XML Translator webhooks. Either 'get' or 'post'.
      *
      * @return TexmlApplicationUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function update(
         string $id,
@@ -168,24 +210,43 @@ final class TexmlApplicationsService implements TexmlApplicationsContract
         $voiceMethod = omit,
         ?RequestOptions $requestOptions = null,
     ): TexmlApplicationUpdateResponse {
+        $params = [
+            'friendlyName' => $friendlyName,
+            'voiceURL' => $voiceURL,
+            'active' => $active,
+            'anchorsiteOverride' => $anchorsiteOverride,
+            'dtmfType' => $dtmfType,
+            'firstCommandTimeout' => $firstCommandTimeout,
+            'firstCommandTimeoutSecs' => $firstCommandTimeoutSecs,
+            'inbound' => $inbound,
+            'outbound' => $outbound,
+            'statusCallback' => $statusCallback,
+            'statusCallbackMethod' => $statusCallbackMethod,
+            'tags' => $tags,
+            'voiceFallbackURL' => $voiceFallbackURL,
+            'voiceMethod' => $voiceMethod,
+        ];
+
+        return $this->updateRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return TexmlApplicationUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): TexmlApplicationUpdateResponse {
         [$parsed, $options] = TexmlApplicationUpdateParams::parseRequest(
-            [
-                'friendlyName' => $friendlyName,
-                'voiceURL' => $voiceURL,
-                'active' => $active,
-                'anchorsiteOverride' => $anchorsiteOverride,
-                'dtmfType' => $dtmfType,
-                'firstCommandTimeout' => $firstCommandTimeout,
-                'firstCommandTimeoutSecs' => $firstCommandTimeoutSecs,
-                'inbound' => $inbound,
-                'outbound' => $outbound,
-                'statusCallback' => $statusCallback,
-                'statusCallbackMethod' => $statusCallbackMethod,
-                'tags' => $tags,
-                'voiceFallbackURL' => $voiceFallbackURL,
-                'voiceMethod' => $voiceMethod,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -219,6 +280,8 @@ final class TexmlApplicationsService implements TexmlApplicationsContract
      * </ul> <br/> If not given, results are sorted by <code>created_at</code> in descending order.
      *
      * @return TexmlApplicationListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
@@ -226,8 +289,26 @@ final class TexmlApplicationsService implements TexmlApplicationsContract
         $sort = omit,
         ?RequestOptions $requestOptions = null,
     ): TexmlApplicationListResponse {
+        $params = ['filter' => $filter, 'page' => $page, 'sort' => $sort];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return TexmlApplicationListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): TexmlApplicationListResponse {
         [$parsed, $options] = TexmlApplicationListParams::parseRequest(
-            ['filter' => $filter, 'page' => $page, 'sort' => $sort],
+            $params,
             $requestOptions
         );
 
@@ -247,9 +328,28 @@ final class TexmlApplicationsService implements TexmlApplicationsContract
      * Deletes a TeXML Application.
      *
      * @return TexmlApplicationDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function delete(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): TexmlApplicationDeleteResponse {
+        $params = [];
+
+        return $this->deleteRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return TexmlApplicationDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): TexmlApplicationDeleteResponse {
         // @phpstan-ignore-next-line;

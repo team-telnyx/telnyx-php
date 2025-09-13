@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Rooms;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\Rooms\Sessions\SessionGetParticipantsResponse;
@@ -49,14 +50,35 @@ final class SessionsService implements SessionsContract
      * @param bool $includeParticipants to decide if room participants should be included in the response
      *
      * @return SessionGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $roomSessionID,
         $includeParticipants = omit,
         ?RequestOptions $requestOptions = null,
     ): SessionGetResponse {
+        $params = ['includeParticipants' => $includeParticipants];
+
+        return $this->retrieveRaw($roomSessionID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return SessionGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $roomSessionID,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): SessionGetResponse {
         [$parsed, $options] = SessionRetrieveParams::parseRequest(
-            ['includeParticipants' => $includeParticipants],
+            $params,
             $requestOptions
         );
 
@@ -80,6 +102,8 @@ final class SessionsService implements SessionsContract
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @return SessionList0Response<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list0(
         $filter = omit,
@@ -87,13 +111,31 @@ final class SessionsService implements SessionsContract
         $page = omit,
         ?RequestOptions $requestOptions = null,
     ): SessionList0Response {
+        $params = [
+            'filter' => $filter,
+            'includeParticipants' => $includeParticipants,
+            'page' => $page,
+        ];
+
+        return $this->list0Raw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return SessionList0Response<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function list0Raw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): SessionList0Response {
         [$parsed, $options] = SessionList0Params::parseRequest(
-            [
-                'filter' => $filter,
-                'includeParticipants' => $includeParticipants,
-                'page' => $page,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -116,6 +158,8 @@ final class SessionsService implements SessionsContract
      * @param Page1 $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @return SessionList1Response<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list1(
         string $roomID,
@@ -124,13 +168,32 @@ final class SessionsService implements SessionsContract
         $page = omit,
         ?RequestOptions $requestOptions = null,
     ): SessionList1Response {
+        $params = [
+            'filter' => $filter,
+            'includeParticipants' => $includeParticipants,
+            'page' => $page,
+        ];
+
+        return $this->list1Raw($roomID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return SessionList1Response<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function list1Raw(
+        string $roomID,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): SessionList1Response {
         [$parsed, $options] = SessionList1Params::parseRequest(
-            [
-                'filter' => $filter,
-                'includeParticipants' => $includeParticipants,
-                'page' => $page,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -152,6 +215,8 @@ final class SessionsService implements SessionsContract
      * @param Page2 $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @return SessionGetParticipantsResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieveParticipants(
         string $roomSessionID,
@@ -159,8 +224,31 @@ final class SessionsService implements SessionsContract
         $page = omit,
         ?RequestOptions $requestOptions = null,
     ): SessionGetParticipantsResponse {
+        $params = ['filter' => $filter, 'page' => $page];
+
+        return $this->retrieveParticipantsRaw(
+            $roomSessionID,
+            $params,
+            $requestOptions
+        );
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return SessionGetParticipantsResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveParticipantsRaw(
+        string $roomSessionID,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): SessionGetParticipantsResponse {
         [$parsed, $options] = SessionRetrieveParticipantsParams::parseRequest(
-            ['filter' => $filter, 'page' => $page],
+            $params,
             $requestOptions
         );
 

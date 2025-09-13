@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse;
 use Telnyx\GlobalIPLatency\GlobalIPLatencyRetrieveParams;
@@ -29,13 +30,33 @@ final class GlobalIPLatencyService implements GlobalIPLatencyContract
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[global_ip_id][in]
      *
      * @return GlobalIPLatencyGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         $filter = omit,
         ?RequestOptions $requestOptions = null
     ): GlobalIPLatencyGetResponse {
+        $params = ['filter' => $filter];
+
+        return $this->retrieveRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return GlobalIPLatencyGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): GlobalIPLatencyGetResponse {
         [$parsed, $options] = GlobalIPLatencyRetrieveParams::parseRequest(
-            ['filter' => $filter],
+            $params,
             $requestOptions
         );
 

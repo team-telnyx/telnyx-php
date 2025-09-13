@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\Texml\Accounts;
 
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\Texml\Accounts\Conferences\ConferenceGetConferencesResponse;
@@ -24,10 +25,27 @@ interface ConferencesContract
      * @param string $accountSid
      *
      * @return ConferenceGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $conferenceSid,
         $accountSid,
+        ?RequestOptions $requestOptions = null,
+    ): ConferenceGetResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ConferenceGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $conferenceSid,
+        array $params,
         ?RequestOptions $requestOptions = null,
     ): ConferenceGetResponse;
 
@@ -40,6 +58,8 @@ interface ConferencesContract
      * @param string $status The new status of the resource. Specifying `completed` will end the conference and hang up all participants.
      *
      * @return ConferenceUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function update(
         string $conferenceSid,
@@ -47,6 +67,21 @@ interface ConferencesContract
         $announceMethod = omit,
         $announceURL = omit,
         $status = omit,
+        ?RequestOptions $requestOptions = null,
+    ): ConferenceUpdateResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ConferenceUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $conferenceSid,
+        array $params,
         ?RequestOptions $requestOptions = null,
     ): ConferenceUpdateResponse;
 
@@ -62,6 +97,8 @@ interface ConferencesContract
      * @param Status|value-of<Status> $status filters conferences by status
      *
      * @return ConferenceGetConferencesResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieveConferences(
         string $accountSid,
@@ -78,9 +115,26 @@ interface ConferencesContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return ConferenceGetConferencesResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveConferencesRaw(
+        string $accountSid,
+        array $params,
+        ?RequestOptions $requestOptions = null,
+    ): ConferenceGetConferencesResponse;
+
+    /**
+     * @api
+     *
      * @param string $accountSid
      *
      * @return ConferenceGetRecordingsResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieveRecordings(
         string $conferenceSid,
@@ -91,13 +145,45 @@ interface ConferencesContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return ConferenceGetRecordingsResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRecordingsRaw(
+        string $conferenceSid,
+        array $params,
+        ?RequestOptions $requestOptions = null,
+    ): ConferenceGetRecordingsResponse;
+
+    /**
+     * @api
+     *
      * @param string $accountSid
      *
      * @return ConferenceGetRecordingsJsonResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieveRecordingsJson(
         string $conferenceSid,
         $accountSid,
+        ?RequestOptions $requestOptions = null,
+    ): ConferenceGetRecordingsJsonResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ConferenceGetRecordingsJsonResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRecordingsJsonRaw(
+        string $conferenceSid,
+        array $params,
         ?RequestOptions $requestOptions = null,
     ): ConferenceGetRecordingsJsonResponse;
 }

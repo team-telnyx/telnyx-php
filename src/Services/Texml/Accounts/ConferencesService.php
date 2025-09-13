@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Texml\Accounts;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\Accounts\ConferencesContract;
@@ -47,14 +48,35 @@ final class ConferencesService implements ConferencesContract
      * @param string $accountSid
      *
      * @return ConferenceGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $conferenceSid,
         $accountSid,
         ?RequestOptions $requestOptions = null
     ): ConferenceGetResponse {
+        $params = ['accountSid' => $accountSid];
+
+        return $this->retrieveRaw($conferenceSid, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ConferenceGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $conferenceSid,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): ConferenceGetResponse {
         [$parsed, $options] = ConferenceRetrieveParams::parseRequest(
-            ['accountSid' => $accountSid],
+            $params,
             $requestOptions
         );
         $accountSid = $parsed['accountSid'];
@@ -82,6 +104,8 @@ final class ConferencesService implements ConferencesContract
      * @param string $status The new status of the resource. Specifying `completed` will end the conference and hang up all participants.
      *
      * @return ConferenceUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function update(
         string $conferenceSid,
@@ -91,14 +115,33 @@ final class ConferencesService implements ConferencesContract
         $status = omit,
         ?RequestOptions $requestOptions = null,
     ): ConferenceUpdateResponse {
+        $params = [
+            'accountSid' => $accountSid,
+            'announceMethod' => $announceMethod,
+            'announceURL' => $announceURL,
+            'status' => $status,
+        ];
+
+        return $this->updateRaw($conferenceSid, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ConferenceUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $conferenceSid,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): ConferenceUpdateResponse {
         [$parsed, $options] = ConferenceUpdateParams::parseRequest(
-            [
-                'accountSid' => $accountSid,
-                'announceMethod' => $announceMethod,
-                'announceURL' => $announceURL,
-                'status' => $status,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
         $accountSid = $parsed['accountSid'];
         unset($parsed['accountSid']);
@@ -130,6 +173,8 @@ final class ConferencesService implements ConferencesContract
      * @param Status|value-of<Status> $status filters conferences by status
      *
      * @return ConferenceGetConferencesResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieveConferences(
         string $accountSid,
@@ -142,17 +187,36 @@ final class ConferencesService implements ConferencesContract
         $status = omit,
         ?RequestOptions $requestOptions = null,
     ): ConferenceGetConferencesResponse {
+        $params = [
+            'dateCreated' => $dateCreated,
+            'dateUpdated' => $dateUpdated,
+            'friendlyName' => $friendlyName,
+            'page' => $page,
+            'pageSize' => $pageSize,
+            'pageToken' => $pageToken,
+            'status' => $status,
+        ];
+
+        return $this->retrieveConferencesRaw($accountSid, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ConferenceGetConferencesResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveConferencesRaw(
+        string $accountSid,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): ConferenceGetConferencesResponse {
         [$parsed, $options] = ConferenceRetrieveConferencesParams::parseRequest(
-            [
-                'dateCreated' => $dateCreated,
-                'dateUpdated' => $dateUpdated,
-                'friendlyName' => $friendlyName,
-                'page' => $page,
-                'pageSize' => $pageSize,
-                'pageToken' => $pageToken,
-                'status' => $status,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -173,14 +237,39 @@ final class ConferencesService implements ConferencesContract
      * @param string $accountSid
      *
      * @return ConferenceGetRecordingsResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieveRecordings(
         string $conferenceSid,
         $accountSid,
         ?RequestOptions $requestOptions = null
     ): ConferenceGetRecordingsResponse {
+        $params = ['accountSid' => $accountSid];
+
+        return $this->retrieveRecordingsRaw(
+            $conferenceSid,
+            $params,
+            $requestOptions
+        );
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ConferenceGetRecordingsResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRecordingsRaw(
+        string $conferenceSid,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): ConferenceGetRecordingsResponse {
         [$parsed, $options] = ConferenceRetrieveRecordingsParams::parseRequest(
-            ['accountSid' => $accountSid],
+            $params,
             $requestOptions
         );
         $accountSid = $parsed['accountSid'];
@@ -207,14 +296,39 @@ final class ConferencesService implements ConferencesContract
      * @param string $accountSid
      *
      * @return ConferenceGetRecordingsJsonResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieveRecordingsJson(
         string $conferenceSid,
         $accountSid,
         ?RequestOptions $requestOptions = null
     ): ConferenceGetRecordingsJsonResponse {
+        $params = ['accountSid' => $accountSid];
+
+        return $this->retrieveRecordingsJsonRaw(
+            $conferenceSid,
+            $params,
+            $requestOptions
+        );
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ConferenceGetRecordingsJsonResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRecordingsJsonRaw(
+        string $conferenceSid,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): ConferenceGetRecordingsJsonResponse {
         [$parsed, $options] = ConferenceRetrieveRecordingsJsonParams::parseRequest(
-            ['accountSid' => $accountSid],
+            $params,
             $requestOptions
         );
         $accountSid = $parsed['accountSid'];

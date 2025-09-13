@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PhoneNumbers\PhoneNumberDeleteResponse;
 use Telnyx\PhoneNumbers\PhoneNumberGetResponse;
@@ -26,9 +27,24 @@ interface PhoneNumbersContract
      * @api
      *
      * @return PhoneNumberGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): PhoneNumberGetResponse;
+
+    /**
+     * @api
+     *
+     * @return PhoneNumberGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): PhoneNumberGetResponse;
 
@@ -43,6 +59,8 @@ interface PhoneNumbersContract
      * @param list<string> $tags a list of user-assigned tags to help organize phone numbers
      *
      * @return PhoneNumberUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function update(
         string $id,
@@ -58,11 +76,28 @@ interface PhoneNumbersContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return PhoneNumberUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): PhoneNumberUpdateResponse;
+
+    /**
+     * @api
+     *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[tag], filter[phone_number], filter[status], filter[country_iso_alpha2], filter[connection_id], filter[voice.connection_name], filter[voice.usage_payment_method], filter[billing_group_id], filter[emergency_address_id], filter[customer_reference], filter[number_type], filter[source]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param Sort|value-of<Sort> $sort Specifies the sort order for results. If not given, results are sorted by created_at in descending order.
      *
      * @return PhoneNumberListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
@@ -74,10 +109,39 @@ interface PhoneNumbersContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return PhoneNumberListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): PhoneNumberListResponse;
+
+    /**
+     * @api
+     *
      * @return PhoneNumberDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function delete(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): PhoneNumberDeleteResponse;
+
+    /**
+     * @api
+     *
+     * @return PhoneNumberDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): PhoneNumberDeleteResponse;
 
@@ -91,6 +155,8 @@ interface PhoneNumbersContract
      * @param Sort1|value-of<Sort1> $sort Specifies the sort order for results. If not given, results are sorted by created_at in descending order.
      *
      * @return PhoneNumberSlimListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function slimList(
         $filter = omit,
@@ -99,5 +165,19 @@ interface PhoneNumbersContract
         $page = omit,
         $sort = omit,
         ?RequestOptions $requestOptions = null,
+    ): PhoneNumberSlimListResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return PhoneNumberSlimListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function slimListRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
     ): PhoneNumberSlimListResponse;
 }

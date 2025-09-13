@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\SimCardOrders\SimCardOrderGetResponse;
@@ -23,6 +24,8 @@ interface SimCardOrdersContract
      * @param int $quantity the amount of SIM cards to order
      *
      * @return SimCardOrderNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $addressID,
@@ -33,10 +36,39 @@ interface SimCardOrdersContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return SimCardOrderNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): SimCardOrderNewResponse;
+
+    /**
+     * @api
+     *
      * @return SimCardOrderGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): SimCardOrderGetResponse;
+
+    /**
+     * @api
+     *
+     * @return SimCardOrderGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): SimCardOrderGetResponse;
 
@@ -47,10 +79,26 @@ interface SimCardOrdersContract
      * @param Page $page Consolidated pagination parameter (deepObject style). Originally: page[number], page[size]
      *
      * @return SimCardOrderListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
         $page = omit,
+        ?RequestOptions $requestOptions = null
+    ): SimCardOrderListResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return SimCardOrderListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
         ?RequestOptions $requestOptions = null
     ): SimCardOrderListResponse;
 }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\NetworkCoverage\NetworkCoverageListParams;
 use Telnyx\NetworkCoverage\NetworkCoverageListParams\Filter;
@@ -33,6 +34,8 @@ final class NetworkCoverageService implements NetworkCoverageContract
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
      * @return NetworkCoverageListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
@@ -40,9 +43,27 @@ final class NetworkCoverageService implements NetworkCoverageContract
         $page = omit,
         ?RequestOptions $requestOptions = null,
     ): NetworkCoverageListResponse {
+        $params = ['filter' => $filter, 'filters' => $filters, 'page' => $page];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return NetworkCoverageListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): NetworkCoverageListResponse {
         [$parsed, $options] = NetworkCoverageListParams::parseRequest(
-            ['filter' => $filter, 'filters' => $filters, 'page' => $page],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;

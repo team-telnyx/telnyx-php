@@ -7,6 +7,7 @@ namespace Telnyx\ServiceContracts;
 use Telnyx\CallEvents\CallEventListParams\Filter;
 use Telnyx\CallEvents\CallEventListParams\Page;
 use Telnyx\CallEvents\CallEventListResponse;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 
@@ -21,10 +22,26 @@ interface CallEventsContract
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number]
      *
      * @return CallEventListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
         $page = omit,
+        ?RequestOptions $requestOptions = null
+    ): CallEventListResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return CallEventListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
         ?RequestOptions $requestOptions = null
     ): CallEventListResponse;
 }

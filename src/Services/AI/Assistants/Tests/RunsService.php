@@ -11,6 +11,7 @@ use Telnyx\AI\Assistants\Tests\Runs\RunTriggerParams;
 use Telnyx\AI\Assistants\Tests\Runs\TestRunResponse;
 use Telnyx\AI\Assistants\Tests\TestSuites\Runs\PaginatedTestRunList;
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\Tests\RunsContract;
@@ -32,14 +33,35 @@ final class RunsService implements RunsContract
      * @param string $testID
      *
      * @return TestRunResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $runID,
         $testID,
         ?RequestOptions $requestOptions = null
     ): TestRunResponse {
+        $params = ['testID' => $testID];
+
+        return $this->retrieveRaw($runID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return TestRunResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $runID,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): TestRunResponse {
         [$parsed, $options] = RunRetrieveParams::parseRequest(
-            ['testID' => $testID],
+            $params,
             $requestOptions
         );
         $testID = $parsed['testID'];
@@ -63,6 +85,8 @@ final class RunsService implements RunsContract
      * @param string $status Filter runs by execution status (pending, running, completed, failed, timeout)
      *
      * @return PaginatedTestRunList<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         string $testID,
@@ -70,10 +94,26 @@ final class RunsService implements RunsContract
         $status = omit,
         ?RequestOptions $requestOptions = null,
     ): PaginatedTestRunList {
-        [$parsed, $options] = RunListParams::parseRequest(
-            ['page' => $page, 'status' => $status],
-            $requestOptions
-        );
+        $params = ['page' => $page, 'status' => $status];
+
+        return $this->listRaw($testID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return PaginatedTestRunList<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        string $testID,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): PaginatedTestRunList {
+        [$parsed, $options] = RunListParams::parseRequest($params, $requestOptions);
 
         // @phpstan-ignore-next-line;
         return $this->client->request(
@@ -93,14 +133,35 @@ final class RunsService implements RunsContract
      * @param string $destinationVersionID Optional assistant version ID to use for this test run. If provided, the version must exist or a 400 error will be returned. If not provided, test will run on main version
      *
      * @return TestRunResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function trigger(
         string $testID,
         $destinationVersionID = omit,
         ?RequestOptions $requestOptions = null,
     ): TestRunResponse {
+        $params = ['destinationVersionID' => $destinationVersionID];
+
+        return $this->triggerRaw($testID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return TestRunResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function triggerRaw(
+        string $testID,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): TestRunResponse {
         [$parsed, $options] = RunTriggerParams::parseRequest(
-            ['destinationVersionID' => $destinationVersionID],
+            $params,
             $requestOptions
         );
 

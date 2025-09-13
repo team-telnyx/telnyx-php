@@ -17,6 +17,7 @@ use Telnyx\Conferences\ConferenceListParticipantsParams\Page as Page1;
 use Telnyx\Conferences\ConferenceListParticipantsResponse;
 use Telnyx\Conferences\ConferenceListResponse;
 use Telnyx\Conferences\ConferenceNewResponse;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ConferencesContract;
@@ -66,6 +67,8 @@ final class ConferencesService implements ConferencesContract
      * @param bool $startConferenceOnCreate Whether the conference should be started on creation. If the conference isn't started all participants that join are automatically put on hold. Defaults to "true".
      *
      * @return ConferenceNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $callControlID,
@@ -81,21 +84,39 @@ final class ConferencesService implements ConferencesContract
         $startConferenceOnCreate = omit,
         ?RequestOptions $requestOptions = null,
     ): ConferenceNewResponse {
+        $params = [
+            'callControlID' => $callControlID,
+            'name' => $name,
+            'beepEnabled' => $beepEnabled,
+            'clientState' => $clientState,
+            'comfortNoise' => $comfortNoise,
+            'commandID' => $commandID,
+            'durationMinutes' => $durationMinutes,
+            'holdAudioURL' => $holdAudioURL,
+            'holdMediaName' => $holdMediaName,
+            'maxParticipants' => $maxParticipants,
+            'startConferenceOnCreate' => $startConferenceOnCreate,
+        ];
+
+        return $this->createRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ConferenceNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): ConferenceNewResponse {
         [$parsed, $options] = ConferenceCreateParams::parseRequest(
-            [
-                'callControlID' => $callControlID,
-                'name' => $name,
-                'beepEnabled' => $beepEnabled,
-                'clientState' => $clientState,
-                'comfortNoise' => $comfortNoise,
-                'commandID' => $commandID,
-                'durationMinutes' => $durationMinutes,
-                'holdAudioURL' => $holdAudioURL,
-                'holdMediaName' => $holdMediaName,
-                'maxParticipants' => $maxParticipants,
-                'startConferenceOnCreate' => $startConferenceOnCreate,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -114,9 +135,28 @@ final class ConferencesService implements ConferencesContract
      * Retrieve an existing conference
      *
      * @return ConferenceGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): ConferenceGetResponse {
+        $params = [];
+
+        return $this->retrieveRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return ConferenceGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): ConferenceGetResponse {
         // @phpstan-ignore-next-line;
@@ -137,14 +177,34 @@ final class ConferencesService implements ConferencesContract
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number]
      *
      * @return ConferenceListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
         $page = omit,
         ?RequestOptions $requestOptions = null
     ): ConferenceListResponse {
+        $params = ['filter' => $filter, 'page' => $page];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ConferenceListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): ConferenceListResponse {
         [$parsed, $options] = ConferenceListParams::parseRequest(
-            ['filter' => $filter, 'page' => $page],
+            $params,
             $requestOptions
         );
 
@@ -167,6 +227,8 @@ final class ConferencesService implements ConferencesContract
      * @param Page1 $page Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number]
      *
      * @return ConferenceListParticipantsResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function listParticipants(
         string $conferenceID,
@@ -174,8 +236,27 @@ final class ConferencesService implements ConferencesContract
         $page = omit,
         ?RequestOptions $requestOptions = null,
     ): ConferenceListParticipantsResponse {
+        $params = ['filter' => $filter, 'page' => $page];
+
+        return $this->listParticipantsRaw($conferenceID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ConferenceListParticipantsResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listParticipantsRaw(
+        string $conferenceID,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): ConferenceListParticipantsResponse {
         [$parsed, $options] = ConferenceListParticipantsParams::parseRequest(
-            ['filter' => $filter, 'page' => $page],
+            $params,
             $requestOptions
         );
 

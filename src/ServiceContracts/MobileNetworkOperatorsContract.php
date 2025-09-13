@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\MobileNetworkOperators\MobileNetworkOperatorListParams\Filter;
 use Telnyx\MobileNetworkOperators\MobileNetworkOperatorListParams\Page;
@@ -21,10 +22,26 @@ interface MobileNetworkOperatorsContract
      * @param Page $page Consolidated pagination parameter (deepObject style). Originally: page[number], page[size]
      *
      * @return MobileNetworkOperatorListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
         $page = omit,
+        ?RequestOptions $requestOptions = null
+    ): MobileNetworkOperatorListResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return MobileNetworkOperatorListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
         ?RequestOptions $requestOptions = null
     ): MobileNetworkOperatorListResponse;
 }

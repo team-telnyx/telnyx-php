@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\PortingOrders;
 
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PortingOrders\Actions\ActionActivateResponse;
 use Telnyx\PortingOrders\Actions\ActionCancelResponse;
@@ -20,6 +21,8 @@ interface ActionsContract
      * @api
      *
      * @return ActionActivateResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function activate(
         string $id,
@@ -29,7 +32,22 @@ interface ActionsContract
     /**
      * @api
      *
+     * @return ActionActivateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function activateRaw(
+        string $id,
+        mixed $params,
+        ?RequestOptions $requestOptions = null
+    ): ActionActivateResponse;
+
+    /**
+     * @api
+     *
      * @return ActionCancelResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function cancel(
         string $id,
@@ -39,10 +57,38 @@ interface ActionsContract
     /**
      * @api
      *
+     * @return ActionCancelResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function cancelRaw(
+        string $id,
+        mixed $params,
+        ?RequestOptions $requestOptions = null
+    ): ActionCancelResponse;
+
+    /**
+     * @api
+     *
      * @return ActionConfirmResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function confirm(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): ActionConfirmResponse;
+
+    /**
+     * @api
+     *
+     * @return ActionConfirmResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function confirmRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): ActionConfirmResponse;
 
@@ -53,11 +99,28 @@ interface ActionsContract
      * @param Permissions|value-of<Permissions> $permissions The permissions the token will have
      *
      * @return ActionShareResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function share(
         string $id,
         $expiresInSeconds = omit,
         $permissions = omit,
         ?RequestOptions $requestOptions = null,
+    ): ActionShareResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ActionShareResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function shareRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
     ): ActionShareResponse;
 }

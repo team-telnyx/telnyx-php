@@ -12,6 +12,7 @@ use Telnyx\AuthenticationProviders\AuthenticationProviderListResponse;
 use Telnyx\AuthenticationProviders\AuthenticationProviderNewResponse;
 use Telnyx\AuthenticationProviders\AuthenticationProviderUpdateResponse;
 use Telnyx\AuthenticationProviders\Settings;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 
@@ -29,6 +30,8 @@ interface AuthenticationProvidersContract
      * @param string $settingsURL The URL for the identity provider metadata file to populate the settings automatically. If the settings attribute is provided, that will be used instead.
      *
      * @return AuthenticationProviderNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $name,
@@ -42,10 +45,39 @@ interface AuthenticationProvidersContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return AuthenticationProviderNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): AuthenticationProviderNewResponse;
+
+    /**
+     * @api
+     *
      * @return AuthenticationProviderGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): AuthenticationProviderGetResponse;
+
+    /**
+     * @api
+     *
+     * @return AuthenticationProviderGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): AuthenticationProviderGetResponse;
 
@@ -59,6 +91,8 @@ interface AuthenticationProvidersContract
      * @param string $shortName The short name associated with the authentication provider. This must be unique and URL-friendly, as it's going to be part of the login URL.
      *
      * @return AuthenticationProviderUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function update(
         string $id,
@@ -68,6 +102,21 @@ interface AuthenticationProvidersContract
         $settingsURL = omit,
         $shortName = omit,
         ?RequestOptions $requestOptions = null,
+    ): AuthenticationProviderUpdateResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return AuthenticationProviderUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
     ): AuthenticationProviderUpdateResponse;
 
     /**
@@ -87,6 +136,8 @@ interface AuthenticationProvidersContract
      * </ul><br/>If not given, results are sorted by <code>created_at</code> in descending order.
      *
      * @return AuthenticationProviderListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $page = omit,
@@ -97,10 +148,39 @@ interface AuthenticationProvidersContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return AuthenticationProviderListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): AuthenticationProviderListResponse;
+
+    /**
+     * @api
+     *
      * @return AuthenticationProviderDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function delete(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): AuthenticationProviderDeleteResponse;
+
+    /**
+     * @api
+     *
+     * @return AuthenticationProviderDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): AuthenticationProviderDeleteResponse;
 }

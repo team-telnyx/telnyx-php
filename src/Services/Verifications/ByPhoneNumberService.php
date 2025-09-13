@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Verifications;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Verifications\ByPhoneNumberContract;
@@ -32,9 +33,28 @@ final class ByPhoneNumberService implements ByPhoneNumberContract
      * List verifications by phone number
      *
      * @return ByPhoneNumberListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         string $phoneNumber,
+        ?RequestOptions $requestOptions = null
+    ): ByPhoneNumberListResponse {
+        $params = [];
+
+        return $this->listRaw($phoneNumber, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return ByPhoneNumberListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        string $phoneNumber,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): ByPhoneNumberListResponse {
         // @phpstan-ignore-next-line;

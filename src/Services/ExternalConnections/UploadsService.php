@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\ExternalConnections;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\ExternalConnections\Uploads\UploadCreateParams;
 use Telnyx\ExternalConnections\Uploads\UploadCreateParams\AdditionalUsage;
@@ -44,6 +45,8 @@ final class UploadsService implements UploadsContract
      * @param Usage|value-of<Usage> $usage The use case of the upload request. NOTE: `calling_user_assignment` is not supported for toll free numbers.
      *
      * @return UploadNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         string $id,
@@ -54,15 +57,34 @@ final class UploadsService implements UploadsContract
         $usage = omit,
         ?RequestOptions $requestOptions = null,
     ): UploadNewResponse {
+        $params = [
+            'numberIDs' => $numberIDs,
+            'additionalUsages' => $additionalUsages,
+            'civicAddressID' => $civicAddressID,
+            'locationID' => $locationID,
+            'usage' => $usage,
+        ];
+
+        return $this->createRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return UploadNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): UploadNewResponse {
         [$parsed, $options] = UploadCreateParams::parseRequest(
-            [
-                'numberIDs' => $numberIDs,
-                'additionalUsages' => $additionalUsages,
-                'civicAddressID' => $civicAddressID,
-                'locationID' => $locationID,
-                'usage' => $usage,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -83,14 +105,35 @@ final class UploadsService implements UploadsContract
      * @param string $id
      *
      * @return UploadGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $ticketID,
         $id,
         ?RequestOptions $requestOptions = null
     ): UploadGetResponse {
+        $params = ['id' => $id];
+
+        return $this->retrieveRaw($ticketID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return UploadGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $ticketID,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): UploadGetResponse {
         [$parsed, $options] = UploadRetrieveParams::parseRequest(
-            ['id' => $id],
+            $params,
             $requestOptions
         );
         $id = $parsed['id'];
@@ -114,6 +157,8 @@ final class UploadsService implements UploadsContract
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @return UploadListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         string $id,
@@ -121,8 +166,27 @@ final class UploadsService implements UploadsContract
         $page = omit,
         ?RequestOptions $requestOptions = null,
     ): UploadListResponse {
+        $params = ['filter' => $filter, 'page' => $page];
+
+        return $this->listRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return UploadListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): UploadListResponse {
         [$parsed, $options] = UploadListParams::parseRequest(
-            ['filter' => $filter, 'page' => $page],
+            $params,
             $requestOptions
         );
 
@@ -142,9 +206,28 @@ final class UploadsService implements UploadsContract
      * Returns the count of all pending upload requests for the given external connection.
      *
      * @return UploadPendingCountResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function pendingCount(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): UploadPendingCountResponse {
+        $params = [];
+
+        return $this->pendingCountRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return UploadPendingCountResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function pendingCountRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): UploadPendingCountResponse {
         // @phpstan-ignore-next-line;
@@ -162,9 +245,28 @@ final class UploadsService implements UploadsContract
      * Forces a recheck of the status of all pending Upload requests for the given external connection in the background.
      *
      * @return UploadRefreshStatusResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function refreshStatus(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): UploadRefreshStatusResponse {
+        $params = [];
+
+        return $this->refreshStatusRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return UploadRefreshStatusResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function refreshStatusRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): UploadRefreshStatusResponse {
         // @phpstan-ignore-next-line;
@@ -184,14 +286,35 @@ final class UploadsService implements UploadsContract
      * @param string $id
      *
      * @return UploadRetryResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retry(
         string $ticketID,
         $id,
         ?RequestOptions $requestOptions = null
     ): UploadRetryResponse {
+        $params = ['id' => $id];
+
+        return $this->retryRaw($ticketID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return UploadRetryResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retryRaw(
+        string $ticketID,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): UploadRetryResponse {
         [$parsed, $options] = UploadRetryParams::parseRequest(
-            ['id' => $id],
+            $params,
             $requestOptions
         );
         $id = $parsed['id'];

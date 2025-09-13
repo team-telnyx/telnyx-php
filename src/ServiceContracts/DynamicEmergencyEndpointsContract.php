@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointDeleteResponse;
 use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointGetResponse;
@@ -25,6 +26,8 @@ interface DynamicEmergencyEndpointsContract
      * @param string $dynamicEmergencyAddressID an id of a currently active dynamic emergency location
      *
      * @return DynamicEmergencyEndpointNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $callbackNumber,
@@ -36,10 +39,39 @@ interface DynamicEmergencyEndpointsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return DynamicEmergencyEndpointNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): DynamicEmergencyEndpointNewResponse;
+
+    /**
+     * @api
+     *
      * @return DynamicEmergencyEndpointGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): DynamicEmergencyEndpointGetResponse;
+
+    /**
+     * @api
+     *
+     * @return DynamicEmergencyEndpointGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): DynamicEmergencyEndpointGetResponse;
 
@@ -50,6 +82,8 @@ interface DynamicEmergencyEndpointsContract
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @return DynamicEmergencyEndpointListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
@@ -60,10 +94,39 @@ interface DynamicEmergencyEndpointsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return DynamicEmergencyEndpointListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): DynamicEmergencyEndpointListResponse;
+
+    /**
+     * @api
+     *
      * @return DynamicEmergencyEndpointDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function delete(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): DynamicEmergencyEndpointDeleteResponse;
+
+    /**
+     * @api
+     *
+     * @return DynamicEmergencyEndpointDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): DynamicEmergencyEndpointDeleteResponse;
 }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\TextToSpeechContract;
@@ -37,14 +38,32 @@ final class TextToSpeechService implements TextToSpeechContract
      * - Telnyx.KokoroTTS.af
      *
      * Use the `GET /text-to-speech/voices` endpoint to get a complete list of available voices.
+     *
+     * @throws APIException
      */
     public function generateSpeech(
         $text,
         $voice,
         ?RequestOptions $requestOptions = null
     ): string {
+        $params = ['text' => $text, 'voice' => $voice];
+
+        return $this->generateSpeechRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @throws APIException
+     */
+    public function generateSpeechRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): string {
         [$parsed, $options] = TextToSpeechGenerateSpeechParams::parseRequest(
-            ['text' => $text, 'voice' => $voice],
+            $params,
             $requestOptions
         );
 
@@ -68,15 +87,37 @@ final class TextToSpeechService implements TextToSpeechContract
      * @param Provider|value-of<Provider> $provider Filter voices by provider
      *
      * @return TextToSpeechListVoicesResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function listVoices(
         $elevenlabsAPIKeyRef = omit,
         $provider = omit,
         ?RequestOptions $requestOptions = null,
     ): TextToSpeechListVoicesResponse {
+        $params = [
+            'elevenlabsAPIKeyRef' => $elevenlabsAPIKeyRef, 'provider' => $provider,
+        ];
+
+        return $this->listVoicesRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return TextToSpeechListVoicesResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listVoicesRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): TextToSpeechListVoicesResponse {
         [$parsed, $options] = TextToSpeechListVoicesParams::parseRequest(
-            ['elevenlabsAPIKeyRef' => $elevenlabsAPIKeyRef, 'provider' => $provider],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Texml\Accounts\Calls;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\Accounts\Calls\StreamsContract;
@@ -31,6 +32,8 @@ final class StreamsService implements StreamsContract
      * @param Status|value-of<Status> $status the status of the Stream you wish to update
      *
      * @return StreamStreamingSidJsonResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function streamingSidJson(
         string $streamingSid,
@@ -39,9 +42,30 @@ final class StreamsService implements StreamsContract
         $status = omit,
         ?RequestOptions $requestOptions = null,
     ): StreamStreamingSidJsonResponse {
+        $params = [
+            'accountSid' => $accountSid, 'callSid' => $callSid, 'status' => $status,
+        ];
+
+        return $this->streamingSidJsonRaw($streamingSid, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return StreamStreamingSidJsonResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function streamingSidJsonRaw(
+        string $streamingSid,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): StreamStreamingSidJsonResponse {
         [$parsed, $options] = StreamStreamingSidJsonParams::parseRequest(
-            ['accountSid' => $accountSid, 'callSid' => $callSid, 'status' => $status],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
         $accountSid = $parsed['accountSid'];
         unset($parsed['accountSid']);

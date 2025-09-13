@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\IntegrationSecrets\IntegrationSecretCreateParams;
 use Telnyx\IntegrationSecrets\IntegrationSecretCreateParams\Type;
@@ -37,6 +38,8 @@ final class IntegrationSecretsService implements IntegrationSecretsContract
      * @param string $username The username for the secret. Required for basic type secrets, ignored otherwise.
      *
      * @return IntegrationSecretNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $identifier,
@@ -46,15 +49,33 @@ final class IntegrationSecretsService implements IntegrationSecretsContract
         $username = omit,
         ?RequestOptions $requestOptions = null,
     ): IntegrationSecretNewResponse {
+        $params = [
+            'identifier' => $identifier,
+            'type' => $type,
+            'token' => $token,
+            'password' => $password,
+            'username' => $username,
+        ];
+
+        return $this->createRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return IntegrationSecretNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): IntegrationSecretNewResponse {
         [$parsed, $options] = IntegrationSecretCreateParams::parseRequest(
-            [
-                'identifier' => $identifier,
-                'type' => $type,
-                'token' => $token,
-                'password' => $password,
-                'username' => $username,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -76,14 +97,34 @@ final class IntegrationSecretsService implements IntegrationSecretsContract
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @return IntegrationSecretListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
         $page = omit,
         ?RequestOptions $requestOptions = null
     ): IntegrationSecretListResponse {
+        $params = ['filter' => $filter, 'page' => $page];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return IntegrationSecretListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): IntegrationSecretListResponse {
         [$parsed, $options] = IntegrationSecretListParams::parseRequest(
-            ['filter' => $filter, 'page' => $page],
+            $params,
             $requestOptions
         );
 
@@ -101,9 +142,26 @@ final class IntegrationSecretsService implements IntegrationSecretsContract
      * @api
      *
      * Delete an integration secret given its ID.
+     *
+     * @throws APIException
      */
     public function delete(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): mixed {
+        $params = [];
+
+        return $this->deleteRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): mixed {
         // @phpstan-ignore-next-line;

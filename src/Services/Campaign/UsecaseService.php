@@ -7,6 +7,7 @@ namespace Telnyx\Services\Campaign;
 use Telnyx\Campaign\Usecase\UsecaseGetCostParams;
 use Telnyx\Campaign\Usecase\UsecaseGetCostResponse;
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Campaign\UsecaseContract;
@@ -26,13 +27,33 @@ final class UsecaseService implements UsecaseContract
      * @param string $usecase
      *
      * @return UsecaseGetCostResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function getCost(
         $usecase,
         ?RequestOptions $requestOptions = null
     ): UsecaseGetCostResponse {
+        $params = ['usecase' => $usecase];
+
+        return $this->getCostRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return UsecaseGetCostResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function getCostRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): UsecaseGetCostResponse {
         [$parsed, $options] = UsecaseGetCostParams::parseRequest(
-            ['usecase' => $usecase],
+            $params,
             $requestOptions
         );
 

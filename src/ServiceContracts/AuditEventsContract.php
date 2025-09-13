@@ -8,6 +8,7 @@ use Telnyx\AuditEvents\AuditEventListParams\Filter;
 use Telnyx\AuditEvents\AuditEventListParams\Page;
 use Telnyx\AuditEvents\AuditEventListParams\Sort;
 use Telnyx\AuditEvents\AuditEventListResponse;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 
@@ -23,11 +24,27 @@ interface AuditEventsContract
      * @param Sort|value-of<Sort> $sort set the order of the results by the creation date
      *
      * @return AuditEventListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
         $page = omit,
         $sort = omit,
         ?RequestOptions $requestOptions = null,
+    ): AuditEventListResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return AuditEventListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
     ): AuditEventListResponse;
 }

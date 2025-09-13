@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\FaxApplications\FaxApplicationCreateParams\Inbound;
@@ -38,6 +39,8 @@ interface FaxApplicationsContract
      * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
      *
      * @return FaxApplicationNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $applicationName,
@@ -55,10 +58,39 @@ interface FaxApplicationsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return FaxApplicationNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): FaxApplicationNewResponse;
+
+    /**
+     * @api
+     *
      * @return FaxApplicationGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): FaxApplicationGetResponse;
+
+    /**
+     * @api
+     *
+     * @return FaxApplicationGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): FaxApplicationGetResponse;
 
@@ -77,6 +109,8 @@ interface FaxApplicationsContract
      * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
      *
      * @return FaxApplicationUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function update(
         string $id,
@@ -91,6 +125,21 @@ interface FaxApplicationsContract
         $webhookEventFailoverURL = omit,
         $webhookTimeoutSecs = omit,
         ?RequestOptions $requestOptions = null,
+    ): FaxApplicationUpdateResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return FaxApplicationUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
     ): FaxApplicationUpdateResponse;
 
     /**
@@ -112,6 +161,8 @@ interface FaxApplicationsContract
      * </ul> <br/> If not given, results are sorted by <code>created_at</code> in descending order.
      *
      * @return FaxApplicationListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
@@ -123,10 +174,39 @@ interface FaxApplicationsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return FaxApplicationListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): FaxApplicationListResponse;
+
+    /**
+     * @api
+     *
      * @return FaxApplicationDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function delete(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): FaxApplicationDeleteResponse;
+
+    /**
+     * @api
+     *
+     * @return FaxApplicationDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): FaxApplicationDeleteResponse;
 }

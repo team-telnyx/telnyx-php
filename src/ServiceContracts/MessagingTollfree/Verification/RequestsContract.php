@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\MessagingTollfree\Verification;
 
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\MessagingTollfree\Verification\Requests\RequestListResponse;
 use Telnyx\MessagingTollfree\Verification\Requests\TfPhoneNumber;
@@ -45,6 +46,8 @@ interface RequestsContract
      * @param string $webhookURL URL that should receive webhooks relating to this verification request
      *
      * @return VerificationRequestEgress<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $additionalInformation,
@@ -74,10 +77,39 @@ interface RequestsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return VerificationRequestEgress<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): VerificationRequestEgress;
+
+    /**
+     * @api
+     *
      * @return VerificationRequestStatus<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): VerificationRequestStatus;
+
+    /**
+     * @api
+     *
+     * @return VerificationRequestStatus<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): VerificationRequestStatus;
 
@@ -107,6 +139,8 @@ interface RequestsContract
      * @param string $webhookURL URL that should receive webhooks relating to this verification request
      *
      * @return VerificationRequestEgress<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function update(
         string $id,
@@ -137,6 +171,21 @@ interface RequestsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return VerificationRequestEgress<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): VerificationRequestEgress;
+
+    /**
+     * @api
+     *
      * @param int $page
      * @param int $pageSize
      *         Request this many records per page
@@ -148,6 +197,8 @@ interface RequestsContract
      * @param TfVerificationStatus|value-of<TfVerificationStatus> $status Tollfree verification status
      *
      * @return RequestListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $page,
@@ -161,9 +212,36 @@ interface RequestsContract
 
     /**
      * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return RequestListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): RequestListResponse;
+
+    /**
+     * @api
+     *
+     * @throws APIException
      */
     public function delete(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): mixed;
+
+    /**
+     * @api
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): mixed;
 }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Texml\Accounts\Transcriptions;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\Accounts\Transcriptions\JsonContract;
@@ -25,16 +26,39 @@ final class JsonService implements JsonContract
      * Permanently deletes a recording transcription.
      *
      * @param string $accountSid
+     *
+     * @throws APIException
      */
     public function deleteRecordingTranscriptionSidJson(
         string $recordingTranscriptionSid,
         $accountSid,
         ?RequestOptions $requestOptions = null,
     ): mixed {
+        $params = ['accountSid' => $accountSid];
+
+        return $this->deleteRecordingTranscriptionSidJsonRaw(
+            $recordingTranscriptionSid,
+            $params,
+            $requestOptions
+        );
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @throws APIException
+     */
+    public function deleteRecordingTranscriptionSidJsonRaw(
+        string $recordingTranscriptionSid,
+        array $params,
+        ?RequestOptions $requestOptions = null,
+    ): mixed {
         [
             $parsed, $options,
         ] = JsonDeleteRecordingTranscriptionSidJsonParams::parseRequest(
-            ['accountSid' => $accountSid],
+            $params,
             $requestOptions
         );
         $accountSid = $parsed['accountSid'];
@@ -61,16 +85,41 @@ final class JsonService implements JsonContract
      * @param string $accountSid
      *
      * @return JsonGetRecordingTranscriptionSidJsonResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieveRecordingTranscriptionSidJson(
         string $recordingTranscriptionSid,
         $accountSid,
         ?RequestOptions $requestOptions = null,
     ): JsonGetRecordingTranscriptionSidJsonResponse {
+        $params = ['accountSid' => $accountSid];
+
+        return $this->retrieveRecordingTranscriptionSidJsonRaw(
+            $recordingTranscriptionSid,
+            $params,
+            $requestOptions
+        );
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return JsonGetRecordingTranscriptionSidJsonResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRecordingTranscriptionSidJsonRaw(
+        string $recordingTranscriptionSid,
+        array $params,
+        ?RequestOptions $requestOptions = null,
+    ): JsonGetRecordingTranscriptionSidJsonResponse {
         [
             $parsed, $options,
         ] = JsonRetrieveRecordingTranscriptionSidJsonParams::parseRequest(
-            ['accountSid' => $accountSid],
+            $params,
             $requestOptions
         );
         $accountSid = $parsed['accountSid'];

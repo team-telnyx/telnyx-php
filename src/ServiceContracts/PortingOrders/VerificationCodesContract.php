@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\PortingOrders;
 
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams\Filter;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams\Page;
@@ -26,6 +27,8 @@ interface VerificationCodesContract
      * @param Sort $sort Consolidated sort parameter (deepObject style). Originally: sort[value]
      *
      * @return VerificationCodeListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         string $id,
@@ -38,8 +41,25 @@ interface VerificationCodesContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return VerificationCodeListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): VerificationCodeListResponse;
+
+    /**
+     * @api
+     *
      * @param list<string> $phoneNumbers
      * @param VerificationMethod|value-of<VerificationMethod> $verificationMethod
+     *
+     * @throws APIException
      */
     public function send(
         string $id,
@@ -51,13 +71,43 @@ interface VerificationCodesContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @throws APIException
+     */
+    public function sendRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): mixed;
+
+    /**
+     * @api
+     *
      * @param list<VerificationCode> $verificationCodes
      *
      * @return VerificationCodeVerifyResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function verify(
         string $id,
         $verificationCodes = omit,
         ?RequestOptions $requestOptions = null,
+    ): VerificationCodeVerifyResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return VerificationCodeVerifyResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function verifyRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
     ): VerificationCodeVerifyResponse;
 }

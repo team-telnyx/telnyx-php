@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Texml\Accounts\Calls;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\Accounts\Calls\RecordingsContract;
@@ -31,6 +32,8 @@ final class RecordingsService implements RecordingsContract
      * @param Status|value-of<Status> $status
      *
      * @return RecordingRecordingSidJsonResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function recordingSidJson(
         string $recordingSid,
@@ -39,9 +42,30 @@ final class RecordingsService implements RecordingsContract
         $status = omit,
         ?RequestOptions $requestOptions = null,
     ): RecordingRecordingSidJsonResponse {
+        $params = [
+            'accountSid' => $accountSid, 'callSid' => $callSid, 'status' => $status,
+        ];
+
+        return $this->recordingSidJsonRaw($recordingSid, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return RecordingRecordingSidJsonResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function recordingSidJsonRaw(
+        string $recordingSid,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): RecordingRecordingSidJsonResponse {
         [$parsed, $options] = RecordingRecordingSidJsonParams::parseRequest(
-            ['accountSid' => $accountSid, 'callSid' => $callSid, 'status' => $status],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
         $accountSid = $parsed['accountSid'];
         unset($parsed['accountSid']);

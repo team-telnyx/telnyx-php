@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\TelephonyCredentialsContract;
@@ -39,6 +40,8 @@ final class TelephonyCredentialsService implements TelephonyCredentialsContract
      * @param string $tag Tags a credential. A single tag can hold at maximum 1000 credentials.
      *
      * @return TelephonyCredentialNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $connectionID,
@@ -47,14 +50,32 @@ final class TelephonyCredentialsService implements TelephonyCredentialsContract
         $tag = omit,
         ?RequestOptions $requestOptions = null,
     ): TelephonyCredentialNewResponse {
+        $params = [
+            'connectionID' => $connectionID,
+            'expiresAt' => $expiresAt,
+            'name' => $name,
+            'tag' => $tag,
+        ];
+
+        return $this->createRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return TelephonyCredentialNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): TelephonyCredentialNewResponse {
         [$parsed, $options] = TelephonyCredentialCreateParams::parseRequest(
-            [
-                'connectionID' => $connectionID,
-                'expiresAt' => $expiresAt,
-                'name' => $name,
-                'tag' => $tag,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -73,9 +94,28 @@ final class TelephonyCredentialsService implements TelephonyCredentialsContract
      * Get the details of an existing On-demand Credential.
      *
      * @return TelephonyCredentialGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): TelephonyCredentialGetResponse {
+        $params = [];
+
+        return $this->retrieveRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return TelephonyCredentialGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): TelephonyCredentialGetResponse {
         // @phpstan-ignore-next-line;
@@ -98,6 +138,8 @@ final class TelephonyCredentialsService implements TelephonyCredentialsContract
      * @param string $tag Tags a credential. A single tag can hold at maximum 1000 credentials.
      *
      * @return TelephonyCredentialUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function update(
         string $id,
@@ -107,14 +149,33 @@ final class TelephonyCredentialsService implements TelephonyCredentialsContract
         $tag = omit,
         ?RequestOptions $requestOptions = null,
     ): TelephonyCredentialUpdateResponse {
+        $params = [
+            'connectionID' => $connectionID,
+            'expiresAt' => $expiresAt,
+            'name' => $name,
+            'tag' => $tag,
+        ];
+
+        return $this->updateRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return TelephonyCredentialUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): TelephonyCredentialUpdateResponse {
         [$parsed, $options] = TelephonyCredentialUpdateParams::parseRequest(
-            [
-                'connectionID' => $connectionID,
-                'expiresAt' => $expiresAt,
-                'name' => $name,
-                'tag' => $tag,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -136,14 +197,34 @@ final class TelephonyCredentialsService implements TelephonyCredentialsContract
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
      * @return TelephonyCredentialListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
         $page = omit,
         ?RequestOptions $requestOptions = null
     ): TelephonyCredentialListResponse {
+        $params = ['filter' => $filter, 'page' => $page];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return TelephonyCredentialListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): TelephonyCredentialListResponse {
         [$parsed, $options] = TelephonyCredentialListParams::parseRequest(
-            ['filter' => $filter, 'page' => $page],
+            $params,
             $requestOptions
         );
 
@@ -163,9 +244,28 @@ final class TelephonyCredentialsService implements TelephonyCredentialsContract
      * Delete an existing credential.
      *
      * @return TelephonyCredentialDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function delete(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): TelephonyCredentialDeleteResponse {
+        $params = [];
+
+        return $this->deleteRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return TelephonyCredentialDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): TelephonyCredentialDeleteResponse {
         // @phpstan-ignore-next-line;
@@ -181,9 +281,26 @@ final class TelephonyCredentialsService implements TelephonyCredentialsContract
      * @api
      *
      * Create an Access Token (JWT) for the credential.
+     *
+     * @throws APIException
      */
     public function createToken(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): string {
+        $params = [];
+
+        return $this->createTokenRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @throws APIException
+     */
+    public function createTokenRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): string {
         // @phpstan-ignore-next-line;

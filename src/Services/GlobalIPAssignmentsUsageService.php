@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\GlobalIPAssignmentsUsage\GlobalIPAssignmentsUsageGetResponse;
 use Telnyx\GlobalIPAssignmentsUsage\GlobalIPAssignmentsUsageRetrieveParams;
@@ -29,13 +30,33 @@ final class GlobalIPAssignmentsUsageService implements GlobalIPAssignmentsUsageC
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[global_ip_assignment_id][in], filter[global_ip_id][in]
      *
      * @return GlobalIPAssignmentsUsageGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         $filter = omit,
         ?RequestOptions $requestOptions = null
     ): GlobalIPAssignmentsUsageGetResponse {
+        $params = ['filter' => $filter];
+
+        return $this->retrieveRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return GlobalIPAssignmentsUsageGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): GlobalIPAssignmentsUsageGetResponse {
         [$parsed, $options] = GlobalIPAssignmentsUsageRetrieveParams::parseRequest(
-            ['filter' => $filter],
+            $params,
             $requestOptions
         );
 

@@ -7,6 +7,7 @@ namespace Telnyx\Services;
 use Telnyx\Campaign\CampaignSharingStatus;
 use Telnyx\Client;
 use Telnyx\Core\Conversion\MapOf;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PartnerCampaigns\PartnerCampaignListParams;
 use Telnyx\PartnerCampaigns\PartnerCampaignListParams\Sort;
@@ -33,9 +34,28 @@ final class PartnerCampaignsService implements PartnerCampaignsContract
      * Retrieve campaign details by `campaignId`.
      *
      * @return TelnyxDownstreamCampaign<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $campaignID,
+        ?RequestOptions $requestOptions = null
+    ): TelnyxDownstreamCampaign {
+        $params = [];
+
+        return $this->retrieveRaw($campaignID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return TelnyxDownstreamCampaign<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $campaignID,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): TelnyxDownstreamCampaign {
         // @phpstan-ignore-next-line;
@@ -56,6 +76,8 @@ final class PartnerCampaignsService implements PartnerCampaignsContract
      * @param string $webhookURL webhook to which campaign status updates are sent
      *
      * @return TelnyxDownstreamCampaign<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function update(
         string $campaignID,
@@ -63,11 +85,30 @@ final class PartnerCampaignsService implements PartnerCampaignsContract
         $webhookURL = omit,
         ?RequestOptions $requestOptions = null,
     ): TelnyxDownstreamCampaign {
+        $params = [
+            'webhookFailoverURL' => $webhookFailoverURL, 'webhookURL' => $webhookURL,
+        ];
+
+        return $this->updateRaw($campaignID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return TelnyxDownstreamCampaign<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $campaignID,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): TelnyxDownstreamCampaign {
         [$parsed, $options] = PartnerCampaignUpdateParams::parseRequest(
-            [
-                'webhookFailoverURL' => $webhookFailoverURL, 'webhookURL' => $webhookURL,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -92,6 +133,8 @@ final class PartnerCampaignsService implements PartnerCampaignsContract
      * @param Sort|value-of<Sort> $sort Specifies the sort order for results. If not given, results are sorted by createdAt in descending order.
      *
      * @return PartnerCampaignListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $page = omit,
@@ -99,9 +142,29 @@ final class PartnerCampaignsService implements PartnerCampaignsContract
         $sort = omit,
         ?RequestOptions $requestOptions = null,
     ): PartnerCampaignListResponse {
+        $params = [
+            'page' => $page, 'recordsPerPage' => $recordsPerPage, 'sort' => $sort,
+        ];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return PartnerCampaignListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): PartnerCampaignListResponse {
         [$parsed, $options] = PartnerCampaignListParams::parseRequest(
-            ['page' => $page, 'recordsPerPage' => $recordsPerPage, 'sort' => $sort],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -127,14 +190,34 @@ final class PartnerCampaignsService implements PartnerCampaignsContract
      * @param int $recordsPerPage The amount of records per page, limited to between 1 and 500 inclusive. The default value is `10`.
      *
      * @return PartnerCampaignListSharedByMeResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function listSharedByMe(
         $page = omit,
         $recordsPerPage = omit,
         ?RequestOptions $requestOptions = null
     ): PartnerCampaignListSharedByMeResponse {
+        $params = ['page' => $page, 'recordsPerPage' => $recordsPerPage];
+
+        return $this->listSharedByMeRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return PartnerCampaignListSharedByMeResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listSharedByMeRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): PartnerCampaignListSharedByMeResponse {
         [$parsed, $options] = PartnerCampaignListSharedByMeParams::parseRequest(
-            ['page' => $page, 'recordsPerPage' => $recordsPerPage],
+            $params,
             $requestOptions
         );
 
@@ -154,9 +237,32 @@ final class PartnerCampaignsService implements PartnerCampaignsContract
      * Get Sharing Status
      *
      * @return array<string, CampaignSharingStatus>
+     *
+     * @throws APIException
      */
     public function retrieveSharingStatus(
         string $campaignID,
+        ?RequestOptions $requestOptions = null
+    ): array {
+        $params = [];
+
+        return $this->retrieveSharingStatusRaw(
+            $campaignID,
+            $params,
+            $requestOptions
+        );
+    }
+
+    /**
+     * @api
+     *
+     * @return array<string, CampaignSharingStatus>
+     *
+     * @throws APIException
+     */
+    public function retrieveSharingStatusRaw(
+        string $campaignID,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): array {
         // @phpstan-ignore-next-line;

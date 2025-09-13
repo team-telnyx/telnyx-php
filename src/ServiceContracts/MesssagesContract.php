@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Messsages\MesssageRcsParams\MmsFallback;
 use Telnyx\Messsages\MesssageRcsParams\SMSFallback;
@@ -29,6 +30,8 @@ interface MesssagesContract
      * @param string $webhookURL the URL where webhooks related to this message will be sent
      *
      * @return MesssageRcsResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function rcs(
         $agentID,
@@ -40,5 +43,19 @@ interface MesssagesContract
         $type = omit,
         $webhookURL = omit,
         ?RequestOptions $requestOptions = null,
+    ): MesssageRcsResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return MesssageRcsResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function rcsRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
     ): MesssageRcsResponse;
 }

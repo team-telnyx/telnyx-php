@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\ExternalConnections;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\ExternalConnections\LogMessages\LogMessageDismissResponse;
 use Telnyx\ExternalConnections\LogMessages\LogMessageGetResponse;
@@ -30,9 +31,28 @@ final class LogMessagesService implements LogMessagesContract
      * Retrieve a log message for an external connection associated with your account.
      *
      * @return LogMessageGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): LogMessageGetResponse {
+        $params = [];
+
+        return $this->retrieveRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return LogMessageGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): LogMessageGetResponse {
         // @phpstan-ignore-next-line;
@@ -53,14 +73,34 @@ final class LogMessagesService implements LogMessagesContract
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @return LogMessageListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
         $page = omit,
         ?RequestOptions $requestOptions = null
     ): LogMessageListResponse {
+        $params = ['filter' => $filter, 'page' => $page];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return LogMessageListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): LogMessageListResponse {
         [$parsed, $options] = LogMessageListParams::parseRequest(
-            ['filter' => $filter, 'page' => $page],
+            $params,
             $requestOptions
         );
 
@@ -80,9 +120,28 @@ final class LogMessagesService implements LogMessagesContract
      * Dismiss a log message for an external connection associated with your account.
      *
      * @return LogMessageDismissResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function dismiss(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): LogMessageDismissResponse {
+        $params = [];
+
+        return $this->dismissRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return LogMessageDismissResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function dismissRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): LogMessageDismissResponse {
         // @phpstan-ignore-next-line;

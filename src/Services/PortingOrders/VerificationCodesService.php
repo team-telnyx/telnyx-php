@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\PortingOrders;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams\Filter;
@@ -38,6 +39,8 @@ final class VerificationCodesService implements VerificationCodesContract
      * @param Sort $sort Consolidated sort parameter (deepObject style). Originally: sort[value]
      *
      * @return VerificationCodeListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         string $id,
@@ -46,8 +49,27 @@ final class VerificationCodesService implements VerificationCodesContract
         $sort = omit,
         ?RequestOptions $requestOptions = null,
     ): VerificationCodeListResponse {
+        $params = ['filter' => $filter, 'page' => $page, 'sort' => $sort];
+
+        return $this->listRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return VerificationCodeListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): VerificationCodeListResponse {
         [$parsed, $options] = VerificationCodeListParams::parseRequest(
-            ['filter' => $filter, 'page' => $page, 'sort' => $sort],
+            $params,
             $requestOptions
         );
 
@@ -68,6 +90,8 @@ final class VerificationCodesService implements VerificationCodesContract
      *
      * @param list<string> $phoneNumbers
      * @param VerificationMethod|value-of<VerificationMethod> $verificationMethod
+     *
+     * @throws APIException
      */
     public function send(
         string $id,
@@ -75,12 +99,29 @@ final class VerificationCodesService implements VerificationCodesContract
         $verificationMethod = omit,
         ?RequestOptions $requestOptions = null,
     ): mixed {
+        $params = [
+            'phoneNumbers' => $phoneNumbers,
+            'verificationMethod' => $verificationMethod,
+        ];
+
+        return $this->sendRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @throws APIException
+     */
+    public function sendRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): mixed {
         [$parsed, $options] = VerificationCodeSendParams::parseRequest(
-            [
-                'phoneNumbers' => $phoneNumbers,
-                'verificationMethod' => $verificationMethod,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -101,14 +142,35 @@ final class VerificationCodesService implements VerificationCodesContract
      * @param list<VerificationCode> $verificationCodes
      *
      * @return VerificationCodeVerifyResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function verify(
         string $id,
         $verificationCodes = omit,
         ?RequestOptions $requestOptions = null,
     ): VerificationCodeVerifyResponse {
+        $params = ['verificationCodes' => $verificationCodes];
+
+        return $this->verifyRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return VerificationCodeVerifyResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function verifyRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): VerificationCodeVerifyResponse {
         [$parsed, $options] = VerificationCodeVerifyParams::parseRequest(
-            ['verificationCodes' => $verificationCodes],
+            $params,
             $requestOptions
         );
 

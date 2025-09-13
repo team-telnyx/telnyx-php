@@ -11,6 +11,7 @@ use Telnyx\AI\Assistants\Tests\TestSuites\Runs\RunListParams\Page;
 use Telnyx\AI\Assistants\Tests\TestSuites\Runs\RunTriggerParams;
 use Telnyx\Client;
 use Telnyx\Core\Conversion\ListOf;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\Tests\TestSuites\RunsContract;
@@ -34,6 +35,8 @@ final class RunsService implements RunsContract
      * @param string $testSuiteRunID Filter runs by specific suite execution batch ID
      *
      * @return PaginatedTestRunList<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         string $suiteName,
@@ -42,14 +45,28 @@ final class RunsService implements RunsContract
         $testSuiteRunID = omit,
         ?RequestOptions $requestOptions = null,
     ): PaginatedTestRunList {
-        [$parsed, $options] = RunListParams::parseRequest(
-            [
-                'page' => $page,
-                'status' => $status,
-                'testSuiteRunID' => $testSuiteRunID,
-            ],
-            $requestOptions,
-        );
+        $params = [
+            'page' => $page, 'status' => $status, 'testSuiteRunID' => $testSuiteRunID,
+        ];
+
+        return $this->listRaw($suiteName, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return PaginatedTestRunList<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        string $suiteName,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): PaginatedTestRunList {
+        [$parsed, $options] = RunListParams::parseRequest($params, $requestOptions);
 
         // @phpstan-ignore-next-line;
         return $this->client->request(
@@ -69,14 +86,35 @@ final class RunsService implements RunsContract
      * @param string $destinationVersionID Optional assistant version ID to use for all test runs in this suite. If provided, the version must exist or a 400 error will be returned. If not provided, test will run on main version
      *
      * @return list<TestRunResponse>
+     *
+     * @throws APIException
      */
     public function trigger(
         string $suiteName,
         $destinationVersionID = omit,
         ?RequestOptions $requestOptions = null,
     ): array {
+        $params = ['destinationVersionID' => $destinationVersionID];
+
+        return $this->triggerRaw($suiteName, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return list<TestRunResponse>
+     *
+     * @throws APIException
+     */
+    public function triggerRaw(
+        string $suiteName,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): array {
         [$parsed, $options] = RunTriggerParams::parseRequest(
-            ['destinationVersionID' => $destinationVersionID],
+            $params,
             $requestOptions
         );
 

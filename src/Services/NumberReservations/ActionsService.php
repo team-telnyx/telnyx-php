@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\NumberReservations;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\NumberReservations\Actions\ActionExtendResponse;
 use Telnyx\RequestOptions;
@@ -23,10 +24,29 @@ final class ActionsService implements ActionsContract
      * Extends reservation expiry time on all phone numbers.
      *
      * @return ActionExtendResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function extend(
         string $numberReservationID,
         ?RequestOptions $requestOptions = null
+    ): ActionExtendResponse {
+        $params = [];
+
+        return $this->extendRaw($numberReservationID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return ActionExtendResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function extendRaw(
+        string $numberReservationID,
+        mixed $params,
+        ?RequestOptions $requestOptions = null,
     ): ActionExtendResponse {
         // @phpstan-ignore-next-line;
         return $this->client->request(

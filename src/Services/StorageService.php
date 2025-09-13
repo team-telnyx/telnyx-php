@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\StorageContract;
@@ -46,8 +47,26 @@ final class StorageService implements StorageContract
      * List Migration Source coverage
      *
      * @return StorageListMigrationSourceCoverageResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function listMigrationSourceCoverage(
+        ?RequestOptions $requestOptions = null
+    ): StorageListMigrationSourceCoverageResponse {
+        $params = [];
+
+        return $this->listMigrationSourceCoverageRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return StorageListMigrationSourceCoverageResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listMigrationSourceCoverageRaw(
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): StorageListMigrationSourceCoverageResponse {
         // @phpstan-ignore-next-line;

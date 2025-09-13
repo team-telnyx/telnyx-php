@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberGetResponse;
 use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberListParams;
@@ -33,10 +34,33 @@ final class NumberOrderPhoneNumbersService implements NumberOrderPhoneNumbersCon
      * Get an existing phone number in number order.
      *
      * @return NumberOrderPhoneNumberGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $numberOrderPhoneNumberID,
         ?RequestOptions $requestOptions = null
+    ): NumberOrderPhoneNumberGetResponse {
+        $params = [];
+
+        return $this->retrieveRaw(
+            $numberOrderPhoneNumberID,
+            $params,
+            $requestOptions
+        );
+    }
+
+    /**
+     * @api
+     *
+     * @return NumberOrderPhoneNumberGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $numberOrderPhoneNumberID,
+        mixed $params,
+        ?RequestOptions $requestOptions = null,
     ): NumberOrderPhoneNumberGetResponse {
         // @phpstan-ignore-next-line;
         return $this->client->request(
@@ -55,13 +79,33 @@ final class NumberOrderPhoneNumbersService implements NumberOrderPhoneNumbersCon
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[country_code]
      *
      * @return NumberOrderPhoneNumberListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
         ?RequestOptions $requestOptions = null
     ): NumberOrderPhoneNumberListResponse {
+        $params = ['filter' => $filter];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return NumberOrderPhoneNumberListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): NumberOrderPhoneNumberListResponse {
         [$parsed, $options] = NumberOrderPhoneNumberListParams::parseRequest(
-            ['filter' => $filter],
+            $params,
             $requestOptions
         );
 
@@ -83,16 +127,37 @@ final class NumberOrderPhoneNumbersService implements NumberOrderPhoneNumbersCon
      * @param string $requirementGroupID The ID of the requirement group to associate
      *
      * @return NumberOrderPhoneNumberUpdateRequirementGroupResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function updateRequirementGroup(
         string $id,
         $requirementGroupID,
         ?RequestOptions $requestOptions = null
     ): NumberOrderPhoneNumberUpdateRequirementGroupResponse {
+        $params = ['requirementGroupID' => $requirementGroupID];
+
+        return $this->updateRequirementGroupRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return NumberOrderPhoneNumberUpdateRequirementGroupResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRequirementGroupRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): NumberOrderPhoneNumberUpdateRequirementGroupResponse {
         [
             $parsed, $options,
         ] = NumberOrderPhoneNumberUpdateRequirementGroupParams::parseRequest(
-            ['requirementGroupID' => $requirementGroupID],
+            $params,
             $requestOptions
         );
 
@@ -114,16 +179,41 @@ final class NumberOrderPhoneNumbersService implements NumberOrderPhoneNumbersCon
      * @param list<UpdateRegulatoryRequirement> $regulatoryRequirements
      *
      * @return NumberOrderPhoneNumberUpdateRequirementsResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function updateRequirements(
         string $numberOrderPhoneNumberID,
         $regulatoryRequirements = omit,
         ?RequestOptions $requestOptions = null,
     ): NumberOrderPhoneNumberUpdateRequirementsResponse {
+        $params = ['regulatoryRequirements' => $regulatoryRequirements];
+
+        return $this->updateRequirementsRaw(
+            $numberOrderPhoneNumberID,
+            $params,
+            $requestOptions
+        );
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return NumberOrderPhoneNumberUpdateRequirementsResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRequirementsRaw(
+        string $numberOrderPhoneNumberID,
+        array $params,
+        ?RequestOptions $requestOptions = null,
+    ): NumberOrderPhoneNumberUpdateRequirementsResponse {
         [
             $parsed, $options,
         ] = NumberOrderPhoneNumberUpdateRequirementsParams::parseRequest(
-            ['regulatoryRequirements' => $regulatoryRequirements],
+            $params,
             $requestOptions
         );
 

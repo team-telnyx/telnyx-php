@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SetiContract;
@@ -29,13 +30,33 @@ final class SetiService implements SetiContract
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[product]
      *
      * @return SetiGetBlackBoxTestResultsResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieveBlackBoxTestResults(
         $filter = omit,
         ?RequestOptions $requestOptions = null
     ): SetiGetBlackBoxTestResultsResponse {
+        $params = ['filter' => $filter];
+
+        return $this->retrieveBlackBoxTestResultsRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return SetiGetBlackBoxTestResultsResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveBlackBoxTestResultsRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): SetiGetBlackBoxTestResultsResponse {
         [$parsed, $options] = SetiRetrieveBlackBoxTestResultsParams::parseRequest(
-            ['filter' => $filter],
+            $params,
             $requestOptions
         );
 

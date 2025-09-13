@@ -11,6 +11,7 @@ use Telnyx\AccessIPRanges\AccessIPRangeListParams\Filter;
 use Telnyx\AccessIPRanges\AccessIPRangeListParams\Page;
 use Telnyx\AccessIPRanges\AccessIPRangeListResponse;
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AccessIPRangesContract;
@@ -33,15 +34,35 @@ final class AccessIPRangesService implements AccessIPRangesContract
      * @param string $description
      *
      * @return AccessIPRange<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $cidrBlock,
         $description = omit,
         ?RequestOptions $requestOptions = null
     ): AccessIPRange {
+        $params = ['cidrBlock' => $cidrBlock, 'description' => $description];
+
+        return $this->createRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return AccessIPRange<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): AccessIPRange {
         [$parsed, $options] = AccessIPRangeCreateParams::parseRequest(
-            ['cidrBlock' => $cidrBlock, 'description' => $description],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -63,14 +84,34 @@ final class AccessIPRangesService implements AccessIPRangesContract
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
      * @return AccessIPRangeListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
         $page = omit,
         ?RequestOptions $requestOptions = null
     ): AccessIPRangeListResponse {
+        $params = ['filter' => $filter, 'page' => $page];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return AccessIPRangeListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): AccessIPRangeListResponse {
         [$parsed, $options] = AccessIPRangeListParams::parseRequest(
-            ['filter' => $filter, 'page' => $page],
+            $params,
             $requestOptions
         );
 
@@ -90,10 +131,29 @@ final class AccessIPRangesService implements AccessIPRangesContract
      * Delete access IP ranges
      *
      * @return AccessIPRange<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function delete(
         string $accessIPRangeID,
         ?RequestOptions $requestOptions = null
+    ): AccessIPRange {
+        $params = [];
+
+        return $this->deleteRaw($accessIPRangeID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return AccessIPRange<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $accessIPRangeID,
+        mixed $params,
+        ?RequestOptions $requestOptions = null,
     ): AccessIPRange {
         // @phpstan-ignore-next-line;
         return $this->client->request(

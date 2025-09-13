@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PhoneNumberCampaigns\PhoneNumberCampaign;
 use Telnyx\PhoneNumberCampaigns\PhoneNumberCampaignCreateParams;
@@ -34,15 +35,35 @@ final class PhoneNumberCampaignsService implements PhoneNumberCampaignsContract
      * @param string $phoneNumber the phone number you want to link to a specified campaign
      *
      * @return PhoneNumberCampaign<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $campaignID,
         $phoneNumber,
         ?RequestOptions $requestOptions = null
     ): PhoneNumberCampaign {
+        $params = ['campaignID' => $campaignID, 'phoneNumber' => $phoneNumber];
+
+        return $this->createRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return PhoneNumberCampaign<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): PhoneNumberCampaign {
         [$parsed, $options] = PhoneNumberCampaignCreateParams::parseRequest(
-            ['campaignID' => $campaignID, 'phoneNumber' => $phoneNumber],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -61,9 +82,28 @@ final class PhoneNumberCampaignsService implements PhoneNumberCampaignsContract
      * Retrieve an individual phone number/campaign assignment by `phoneNumber`.
      *
      * @return PhoneNumberCampaign<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $phoneNumber,
+        ?RequestOptions $requestOptions = null
+    ): PhoneNumberCampaign {
+        $params = [];
+
+        return $this->retrieveRaw($phoneNumber, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return PhoneNumberCampaign<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $phoneNumber,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): PhoneNumberCampaign {
         // @phpstan-ignore-next-line;
@@ -84,6 +124,8 @@ final class PhoneNumberCampaignsService implements PhoneNumberCampaignsContract
      * @param string $phoneNumber1 the phone number you want to link to a specified campaign
      *
      * @return PhoneNumberCampaign<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function update(
         string $phoneNumber,
@@ -91,9 +133,28 @@ final class PhoneNumberCampaignsService implements PhoneNumberCampaignsContract
         $phoneNumber1,
         ?RequestOptions $requestOptions = null,
     ): PhoneNumberCampaign {
+        $params = ['campaignID' => $campaignID, 'phoneNumber' => $phoneNumber1];
+
+        return $this->updateRaw($phoneNumber, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return PhoneNumberCampaign<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $phoneNumber,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): PhoneNumberCampaign {
         [$parsed, $options] = PhoneNumberCampaignUpdateParams::parseRequest(
-            ['campaignID' => $campaignID, 'phoneNumber' => $phoneNumber1],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -117,6 +178,8 @@ final class PhoneNumberCampaignsService implements PhoneNumberCampaignsContract
      * @param Sort|value-of<Sort> $sort Specifies the sort order for results. If not given, results are sorted by createdAt in descending order.
      *
      * @return PhoneNumberCampaignListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
@@ -125,14 +188,32 @@ final class PhoneNumberCampaignsService implements PhoneNumberCampaignsContract
         $sort = omit,
         ?RequestOptions $requestOptions = null,
     ): PhoneNumberCampaignListResponse {
+        $params = [
+            'filter' => $filter,
+            'page' => $page,
+            'recordsPerPage' => $recordsPerPage,
+            'sort' => $sort,
+        ];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return PhoneNumberCampaignListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): PhoneNumberCampaignListResponse {
         [$parsed, $options] = PhoneNumberCampaignListParams::parseRequest(
-            [
-                'filter' => $filter,
-                'page' => $page,
-                'recordsPerPage' => $recordsPerPage,
-                'sort' => $sort,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -151,9 +232,28 @@ final class PhoneNumberCampaignsService implements PhoneNumberCampaignsContract
      * This endpoint allows you to remove a campaign assignment from the supplied `phoneNumber`.
      *
      * @return PhoneNumberCampaign<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function delete(
         string $phoneNumber,
+        ?RequestOptions $requestOptions = null
+    ): PhoneNumberCampaign {
+        $params = [];
+
+        return $this->deleteRaw($phoneNumber, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return PhoneNumberCampaign<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $phoneNumber,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): PhoneNumberCampaign {
         // @phpstan-ignore-next-line;

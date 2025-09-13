@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\PortingOrders;
 
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationCreateParams\PhoneNumberConfiguration;
 use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListParams\Filter;
@@ -23,10 +24,26 @@ interface PhoneNumberConfigurationsContract
      * @param list<PhoneNumberConfiguration> $phoneNumberConfigurations
      *
      * @return PhoneNumberConfigurationNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $phoneNumberConfigurations = omit,
         ?RequestOptions $requestOptions = null,
+    ): PhoneNumberConfigurationNewResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return PhoneNumberConfigurationNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
     ): PhoneNumberConfigurationNewResponse;
 
     /**
@@ -37,11 +54,27 @@ interface PhoneNumberConfigurationsContract
      * @param Sort $sort Consolidated sort parameter (deepObject style). Originally: sort[value]
      *
      * @return PhoneNumberConfigurationListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
         $page = omit,
         $sort = omit,
         ?RequestOptions $requestOptions = null,
+    ): PhoneNumberConfigurationListResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return PhoneNumberConfigurationListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
     ): PhoneNumberConfigurationListResponse;
 }

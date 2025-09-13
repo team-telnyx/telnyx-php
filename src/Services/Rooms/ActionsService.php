@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Rooms;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\Rooms\Actions\ActionGenerateJoinClientTokenParams;
@@ -31,6 +32,8 @@ final class ActionsService implements ActionsContract
      * @param int $tokenTtlSecs the time to live in seconds of the Client Token, after that time the Client Token is invalid and can't be used to join a Room
      *
      * @return ActionGenerateJoinClientTokenResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function generateJoinClientToken(
         string $roomID,
@@ -38,12 +41,31 @@ final class ActionsService implements ActionsContract
         $tokenTtlSecs = omit,
         ?RequestOptions $requestOptions = null,
     ): ActionGenerateJoinClientTokenResponse {
+        $params = [
+            'refreshTokenTtlSecs' => $refreshTokenTtlSecs,
+            'tokenTtlSecs' => $tokenTtlSecs,
+        ];
+
+        return $this->generateJoinClientTokenRaw($roomID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ActionGenerateJoinClientTokenResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function generateJoinClientTokenRaw(
+        string $roomID,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): ActionGenerateJoinClientTokenResponse {
         [$parsed, $options] = ActionGenerateJoinClientTokenParams::parseRequest(
-            [
-                'refreshTokenTtlSecs' => $refreshTokenTtlSecs,
-                'tokenTtlSecs' => $tokenTtlSecs,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -65,6 +87,8 @@ final class ActionsService implements ActionsContract
      * @param int $tokenTtlSecs the time to live in seconds of the Client Token, after that time the Client Token is invalid and can't be used to join a Room
      *
      * @return ActionRefreshClientTokenResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function refreshClientToken(
         string $roomID,
@@ -72,9 +96,30 @@ final class ActionsService implements ActionsContract
         $tokenTtlSecs = omit,
         ?RequestOptions $requestOptions = null,
     ): ActionRefreshClientTokenResponse {
+        $params = [
+            'refreshToken' => $refreshToken, 'tokenTtlSecs' => $tokenTtlSecs,
+        ];
+
+        return $this->refreshClientTokenRaw($roomID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ActionRefreshClientTokenResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function refreshClientTokenRaw(
+        string $roomID,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): ActionRefreshClientTokenResponse {
         [$parsed, $options] = ActionRefreshClientTokenParams::parseRequest(
-            ['refreshToken' => $refreshToken, 'tokenTtlSecs' => $tokenTtlSecs],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;

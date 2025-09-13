@@ -24,6 +24,7 @@ use Telnyx\CallControlApplications\CallControlApplicationUpdateParams\DtmfType a
 use Telnyx\CallControlApplications\CallControlApplicationUpdateParams\WebhookAPIVersion as WebhookAPIVersion1;
 use Telnyx\CallControlApplications\CallControlApplicationUpdateResponse;
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\CallControlApplicationsContract;
@@ -57,6 +58,8 @@ final class CallControlApplicationsService implements CallControlApplicationsCon
      * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
      *
      * @return CallControlApplicationNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $applicationName,
@@ -74,23 +77,41 @@ final class CallControlApplicationsService implements CallControlApplicationsCon
         $webhookTimeoutSecs = omit,
         ?RequestOptions $requestOptions = null,
     ): CallControlApplicationNewResponse {
+        $params = [
+            'applicationName' => $applicationName,
+            'webhookEventURL' => $webhookEventURL,
+            'active' => $active,
+            'anchorsiteOverride' => $anchorsiteOverride,
+            'dtmfType' => $dtmfType,
+            'firstCommandTimeout' => $firstCommandTimeout,
+            'firstCommandTimeoutSecs' => $firstCommandTimeoutSecs,
+            'inbound' => $inbound,
+            'outbound' => $outbound,
+            'redactDtmfDebugLogging' => $redactDtmfDebugLogging,
+            'webhookAPIVersion' => $webhookAPIVersion,
+            'webhookEventFailoverURL' => $webhookEventFailoverURL,
+            'webhookTimeoutSecs' => $webhookTimeoutSecs,
+        ];
+
+        return $this->createRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return CallControlApplicationNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): CallControlApplicationNewResponse {
         [$parsed, $options] = CallControlApplicationCreateParams::parseRequest(
-            [
-                'applicationName' => $applicationName,
-                'webhookEventURL' => $webhookEventURL,
-                'active' => $active,
-                'anchorsiteOverride' => $anchorsiteOverride,
-                'dtmfType' => $dtmfType,
-                'firstCommandTimeout' => $firstCommandTimeout,
-                'firstCommandTimeoutSecs' => $firstCommandTimeoutSecs,
-                'inbound' => $inbound,
-                'outbound' => $outbound,
-                'redactDtmfDebugLogging' => $redactDtmfDebugLogging,
-                'webhookAPIVersion' => $webhookAPIVersion,
-                'webhookEventFailoverURL' => $webhookEventFailoverURL,
-                'webhookTimeoutSecs' => $webhookTimeoutSecs,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -109,9 +130,28 @@ final class CallControlApplicationsService implements CallControlApplicationsCon
      * Retrieves the details of an existing call control application.
      *
      * @return CallControlApplicationGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): CallControlApplicationGetResponse {
+        $params = [];
+
+        return $this->retrieveRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return CallControlApplicationGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): CallControlApplicationGetResponse {
         // @phpstan-ignore-next-line;
@@ -144,6 +184,8 @@ final class CallControlApplicationsService implements CallControlApplicationsCon
      * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
      *
      * @return CallControlApplicationUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function update(
         string $id,
@@ -163,24 +205,43 @@ final class CallControlApplicationsService implements CallControlApplicationsCon
         $webhookTimeoutSecs = omit,
         ?RequestOptions $requestOptions = null,
     ): CallControlApplicationUpdateResponse {
+        $params = [
+            'applicationName' => $applicationName,
+            'webhookEventURL' => $webhookEventURL,
+            'active' => $active,
+            'anchorsiteOverride' => $anchorsiteOverride,
+            'dtmfType' => $dtmfType,
+            'firstCommandTimeout' => $firstCommandTimeout,
+            'firstCommandTimeoutSecs' => $firstCommandTimeoutSecs,
+            'inbound' => $inbound,
+            'outbound' => $outbound,
+            'redactDtmfDebugLogging' => $redactDtmfDebugLogging,
+            'tags' => $tags,
+            'webhookAPIVersion' => $webhookAPIVersion,
+            'webhookEventFailoverURL' => $webhookEventFailoverURL,
+            'webhookTimeoutSecs' => $webhookTimeoutSecs,
+        ];
+
+        return $this->updateRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return CallControlApplicationUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): CallControlApplicationUpdateResponse {
         [$parsed, $options] = CallControlApplicationUpdateParams::parseRequest(
-            [
-                'applicationName' => $applicationName,
-                'webhookEventURL' => $webhookEventURL,
-                'active' => $active,
-                'anchorsiteOverride' => $anchorsiteOverride,
-                'dtmfType' => $dtmfType,
-                'firstCommandTimeout' => $firstCommandTimeout,
-                'firstCommandTimeoutSecs' => $firstCommandTimeoutSecs,
-                'inbound' => $inbound,
-                'outbound' => $outbound,
-                'redactDtmfDebugLogging' => $redactDtmfDebugLogging,
-                'tags' => $tags,
-                'webhookAPIVersion' => $webhookAPIVersion,
-                'webhookEventFailoverURL' => $webhookEventFailoverURL,
-                'webhookTimeoutSecs' => $webhookTimeoutSecs,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -214,6 +275,8 @@ final class CallControlApplicationsService implements CallControlApplicationsCon
      * </ul> <br/> If not given, results are sorted by <code>created_at</code> in descending order.
      *
      * @return CallControlApplicationListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
@@ -221,8 +284,26 @@ final class CallControlApplicationsService implements CallControlApplicationsCon
         $sort = omit,
         ?RequestOptions $requestOptions = null,
     ): CallControlApplicationListResponse {
+        $params = ['filter' => $filter, 'page' => $page, 'sort' => $sort];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return CallControlApplicationListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): CallControlApplicationListResponse {
         [$parsed, $options] = CallControlApplicationListParams::parseRequest(
-            ['filter' => $filter, 'page' => $page, 'sort' => $sort],
+            $params,
             $requestOptions
         );
 
@@ -242,9 +323,28 @@ final class CallControlApplicationsService implements CallControlApplicationsCon
      * Deletes a call control application.
      *
      * @return CallControlApplicationDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function delete(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): CallControlApplicationDeleteResponse {
+        $params = [];
+
+        return $this->deleteRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return CallControlApplicationDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): CallControlApplicationDeleteResponse {
         // @phpstan-ignore-next-line;

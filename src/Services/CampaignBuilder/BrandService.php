@@ -7,6 +7,7 @@ namespace Telnyx\Services\CampaignBuilder;
 use Telnyx\CampaignBuilder\Brand\BrandQualifyByUsecaseParams;
 use Telnyx\CampaignBuilder\Brand\BrandQualifyByUsecaseResponse;
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\CampaignBuilder\BrandContract;
@@ -26,14 +27,35 @@ final class BrandService implements BrandContract
      * @param string $brandID
      *
      * @return BrandQualifyByUsecaseResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function qualifyByUsecase(
         string $usecase,
         $brandID,
         ?RequestOptions $requestOptions = null
     ): BrandQualifyByUsecaseResponse {
+        $params = ['brandID' => $brandID];
+
+        return $this->qualifyByUsecaseRaw($usecase, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return BrandQualifyByUsecaseResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function qualifyByUsecaseRaw(
+        string $usecase,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): BrandQualifyByUsecaseResponse {
         [$parsed, $options] = BrandQualifyByUsecaseParams::parseRequest(
-            ['brandID' => $brandID],
+            $params,
             $requestOptions
         );
         $brandID = $parsed['brandID'];

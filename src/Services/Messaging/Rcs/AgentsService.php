@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Messaging\Rcs;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Messaging\Rcs\Agents\AgentListParams;
 use Telnyx\Messaging\Rcs\Agents\AgentListParams\Page;
@@ -27,9 +28,26 @@ final class AgentsService implements AgentsContract
      * @api
      *
      * Retrieve an RCS agent
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): RcsAgentResponse {
+        $params = [];
+
+        return $this->retrieveRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): RcsAgentResponse {
         // @phpstan-ignore-next-line;
@@ -49,6 +67,8 @@ final class AgentsService implements AgentsContract
      * @param string|null $profileID Messaging profile ID associated with the RCS Agent
      * @param string|null $webhookFailoverURL Failover URL to receive RCS events
      * @param string|null $webhookURL URL to receive RCS events
+     *
+     * @throws APIException
      */
     public function update(
         string $id,
@@ -57,13 +77,30 @@ final class AgentsService implements AgentsContract
         $webhookURL = omit,
         ?RequestOptions $requestOptions = null,
     ): RcsAgentResponse {
+        $params = [
+            'profileID' => $profileID,
+            'webhookFailoverURL' => $webhookFailoverURL,
+            'webhookURL' => $webhookURL,
+        ];
+
+        return $this->updateRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): RcsAgentResponse {
         [$parsed, $options] = AgentUpdateParams::parseRequest(
-            [
-                'profileID' => $profileID,
-                'webhookFailoverURL' => $webhookFailoverURL,
-                'webhookURL' => $webhookURL,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -84,13 +121,33 @@ final class AgentsService implements AgentsContract
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
      * @return AgentListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $page = omit,
         ?RequestOptions $requestOptions = null
     ): AgentListResponse {
+        $params = ['page' => $page];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return AgentListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): AgentListResponse {
         [$parsed, $options] = AgentListParams::parseRequest(
-            ['page' => $page],
+            $params,
             $requestOptions
         );
 

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\ExternalConnections;
 
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\ExternalConnections\CivicAddresses\CivicAddressGetResponse;
 use Telnyx\ExternalConnections\CivicAddresses\CivicAddressListParams\Filter;
@@ -20,6 +21,8 @@ interface CivicAddressesContract
      * @param string $id
      *
      * @return CivicAddressGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $addressID,
@@ -30,13 +33,45 @@ interface CivicAddressesContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return CivicAddressGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $addressID,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): CivicAddressGetResponse;
+
+    /**
+     * @api
+     *
      * @param Filter $filter Filter parameter for civic addresses (deepObject style). Supports filtering by country.
      *
      * @return CivicAddressListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         string $id,
         $filter = omit,
+        ?RequestOptions $requestOptions = null
+    ): CivicAddressListResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return CivicAddressListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        string $id,
+        array $params,
         ?RequestOptions $requestOptions = null
     ): CivicAddressListResponse;
 }

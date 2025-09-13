@@ -13,7 +13,7 @@ use Telnyx\SimCards\Actions\ActionValidateRegistrationCodesResponse\Data;
  * @phpstan-type action_validate_registration_codes_response = array{
  *   data?: list<Data>
  * }
- * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * When used in a response, this type parameter can define a $rawResponse property.
  * @template TRawResponse of object = object{}
  *
  * @mixin TRawResponse

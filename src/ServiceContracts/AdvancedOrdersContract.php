@@ -8,6 +8,7 @@ use Telnyx\AdvancedOrders\AdvancedOrderCreateParams\Feature;
 use Telnyx\AdvancedOrders\AdvancedOrderCreateParams\PhoneNumberType;
 use Telnyx\AdvancedOrders\AdvancedOrderUpdateParams\Feature as Feature1;
 use Telnyx\AdvancedOrders\AdvancedOrderUpdateParams\PhoneNumberType as PhoneNumberType1;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 
 use const Telnyx\Core\OMIT as omit;
@@ -25,6 +26,8 @@ interface AdvancedOrdersContract
      * @param PhoneNumberType|value-of<PhoneNumberType> $phoneNumberType
      * @param int $quantity
      * @param string $requirementGroupID The ID of the requirement group to associate with this advanced order
+     *
+     * @throws APIException
      */
     public function create(
         $areaCode = omit,
@@ -40,9 +43,34 @@ interface AdvancedOrdersContract
 
     /**
      * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): mixed;
+
+    /**
+     * @api
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $orderID,
+        ?RequestOptions $requestOptions = null
+    ): mixed;
+
+    /**
+     * @api
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $orderID,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): mixed;
 
@@ -57,6 +85,8 @@ interface AdvancedOrdersContract
      * @param PhoneNumberType1|value-of<PhoneNumberType1> $phoneNumberType
      * @param int $quantity
      * @param string $requirementGroupID The ID of the requirement group to associate with this advanced order
+     *
+     * @throws APIException
      */
     public function update(
         string $orderID,
@@ -73,8 +103,33 @@ interface AdvancedOrdersContract
 
     /**
      * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $orderID,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): mixed;
+
+    /**
+     * @api
+     *
+     * @throws APIException
      */
     public function list(
+        ?RequestOptions $requestOptions = null
+    ): mixed;
+
+    /**
+     * @api
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): mixed;
 }

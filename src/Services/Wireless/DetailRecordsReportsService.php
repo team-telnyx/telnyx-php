@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Wireless;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Wireless\DetailRecordsReportsContract;
@@ -33,14 +34,34 @@ final class DetailRecordsReportsService implements DetailRecordsReportsContract
      * @param string $startTime ISO 8601 formatted date-time indicating the start time
      *
      * @return DetailRecordsReportNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $endTime = omit,
         $startTime = omit,
         ?RequestOptions $requestOptions = null
     ): DetailRecordsReportNewResponse {
+        $params = ['endTime' => $endTime, 'startTime' => $startTime];
+
+        return $this->createRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return DetailRecordsReportNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): DetailRecordsReportNewResponse {
         [$parsed, $options] = DetailRecordsReportCreateParams::parseRequest(
-            ['endTime' => $endTime, 'startTime' => $startTime],
+            $params,
             $requestOptions
         );
 
@@ -60,9 +81,28 @@ final class DetailRecordsReportsService implements DetailRecordsReportsContract
      * Returns one specific WDR report
      *
      * @return DetailRecordsReportGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): DetailRecordsReportGetResponse {
+        $params = [];
+
+        return $this->retrieveRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return DetailRecordsReportGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): DetailRecordsReportGetResponse {
         // @phpstan-ignore-next-line;
@@ -83,14 +123,34 @@ final class DetailRecordsReportsService implements DetailRecordsReportsContract
      * @param int $pageSize the size of the page
      *
      * @return DetailRecordsReportListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $pageNumber = omit,
         $pageSize = omit,
         ?RequestOptions $requestOptions = null
     ): DetailRecordsReportListResponse {
+        $params = ['pageNumber' => $pageNumber, 'pageSize' => $pageSize];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return DetailRecordsReportListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): DetailRecordsReportListResponse {
         [$parsed, $options] = DetailRecordsReportListParams::parseRequest(
-            ['pageNumber' => $pageNumber, 'pageSize' => $pageSize],
+            $params,
             $requestOptions
         );
 
@@ -110,9 +170,28 @@ final class DetailRecordsReportsService implements DetailRecordsReportsContract
      * Deletes one specific WDR report.
      *
      * @return DetailRecordsReportDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function delete(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): DetailRecordsReportDeleteResponse {
+        $params = [];
+
+        return $this->deleteRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return DetailRecordsReportDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): DetailRecordsReportDeleteResponse {
         // @phpstan-ignore-next-line;

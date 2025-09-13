@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\RoomCompositions\RoomCompositionCreateParams;
@@ -41,6 +42,8 @@ final class RoomCompositionsService implements RoomCompositionsContract
      * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
      *
      * @return RoomCompositionNewResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $format = omit,
@@ -52,17 +55,35 @@ final class RoomCompositionsService implements RoomCompositionsContract
         $webhookTimeoutSecs = omit,
         ?RequestOptions $requestOptions = null,
     ): RoomCompositionNewResponse {
+        $params = [
+            'format' => $format,
+            'resolution' => $resolution,
+            'sessionID' => $sessionID,
+            'videoLayout' => $videoLayout,
+            'webhookEventFailoverURL' => $webhookEventFailoverURL,
+            'webhookEventURL' => $webhookEventURL,
+            'webhookTimeoutSecs' => $webhookTimeoutSecs,
+        ];
+
+        return $this->createRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return RoomCompositionNewResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): RoomCompositionNewResponse {
         [$parsed, $options] = RoomCompositionCreateParams::parseRequest(
-            [
-                'format' => $format,
-                'resolution' => $resolution,
-                'sessionID' => $sessionID,
-                'videoLayout' => $videoLayout,
-                'webhookEventFailoverURL' => $webhookEventFailoverURL,
-                'webhookEventURL' => $webhookEventURL,
-                'webhookTimeoutSecs' => $webhookTimeoutSecs,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -81,10 +102,29 @@ final class RoomCompositionsService implements RoomCompositionsContract
      * View a room composition.
      *
      * @return RoomCompositionGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $roomCompositionID,
         ?RequestOptions $requestOptions = null
+    ): RoomCompositionGetResponse {
+        $params = [];
+
+        return $this->retrieveRaw($roomCompositionID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return RoomCompositionGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $roomCompositionID,
+        mixed $params,
+        ?RequestOptions $requestOptions = null,
     ): RoomCompositionGetResponse {
         // @phpstan-ignore-next-line;
         return $this->client->request(
@@ -104,14 +144,34 @@ final class RoomCompositionsService implements RoomCompositionsContract
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @return RoomCompositionListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
         $page = omit,
         ?RequestOptions $requestOptions = null
     ): RoomCompositionListResponse {
+        $params = ['filter' => $filter, 'page' => $page];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return RoomCompositionListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): RoomCompositionListResponse {
         [$parsed, $options] = RoomCompositionListParams::parseRequest(
-            ['filter' => $filter, 'page' => $page],
+            $params,
             $requestOptions
         );
 
@@ -129,10 +189,27 @@ final class RoomCompositionsService implements RoomCompositionsContract
      * @api
      *
      * Synchronously delete a room composition.
+     *
+     * @throws APIException
      */
     public function delete(
         string $roomCompositionID,
         ?RequestOptions $requestOptions = null
+    ): mixed {
+        $params = [];
+
+        return $this->deleteRaw($roomCompositionID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $roomCompositionID,
+        mixed $params,
+        ?RequestOptions $requestOptions = null,
     ): mixed {
         // @phpstan-ignore-next-line;
         return $this->client->request(

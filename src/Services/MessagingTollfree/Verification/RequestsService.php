@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\MessagingTollfree\Verification;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\MessagingTollfree\Verification\Requests\RequestCreateParams;
 use Telnyx\MessagingTollfree\Verification\Requests\RequestListParams;
@@ -57,6 +58,8 @@ final class RequestsService implements RequestsContract
      * @param string $webhookURL URL that should receive webhooks relating to this verification request
      *
      * @return VerificationRequestEgress<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         $additionalInformation,
@@ -82,31 +85,49 @@ final class RequestsService implements RequestsContract
         $webhookURL = omit,
         ?RequestOptions $requestOptions = null,
     ): VerificationRequestEgress {
+        $params = [
+            'additionalInformation' => $additionalInformation,
+            'businessAddr1' => $businessAddr1,
+            'businessCity' => $businessCity,
+            'businessContactEmail' => $businessContactEmail,
+            'businessContactFirstName' => $businessContactFirstName,
+            'businessContactLastName' => $businessContactLastName,
+            'businessContactPhone' => $businessContactPhone,
+            'businessName' => $businessName,
+            'businessState' => $businessState,
+            'businessZip' => $businessZip,
+            'corporateWebsite' => $corporateWebsite,
+            'isvReseller' => $isvReseller,
+            'messageVolume' => $messageVolume,
+            'optInWorkflow' => $optInWorkflow,
+            'optInWorkflowImageURLs' => $optInWorkflowImageURLs,
+            'phoneNumbers' => $phoneNumbers,
+            'productionMessageContent' => $productionMessageContent,
+            'useCase' => $useCase,
+            'useCaseSummary' => $useCaseSummary,
+            'businessAddr2' => $businessAddr2,
+            'webhookURL' => $webhookURL,
+        ];
+
+        return $this->createRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return VerificationRequestEgress<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): VerificationRequestEgress {
         [$parsed, $options] = RequestCreateParams::parseRequest(
-            [
-                'additionalInformation' => $additionalInformation,
-                'businessAddr1' => $businessAddr1,
-                'businessCity' => $businessCity,
-                'businessContactEmail' => $businessContactEmail,
-                'businessContactFirstName' => $businessContactFirstName,
-                'businessContactLastName' => $businessContactLastName,
-                'businessContactPhone' => $businessContactPhone,
-                'businessName' => $businessName,
-                'businessState' => $businessState,
-                'businessZip' => $businessZip,
-                'corporateWebsite' => $corporateWebsite,
-                'isvReseller' => $isvReseller,
-                'messageVolume' => $messageVolume,
-                'optInWorkflow' => $optInWorkflow,
-                'optInWorkflowImageURLs' => $optInWorkflowImageURLs,
-                'phoneNumbers' => $phoneNumbers,
-                'productionMessageContent' => $productionMessageContent,
-                'useCase' => $useCase,
-                'useCaseSummary' => $useCaseSummary,
-                'businessAddr2' => $businessAddr2,
-                'webhookURL' => $webhookURL,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -125,9 +146,28 @@ final class RequestsService implements RequestsContract
      * Get a single verification request by its ID.
      *
      * @return VerificationRequestStatus<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): VerificationRequestStatus {
+        $params = [];
+
+        return $this->retrieveRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return VerificationRequestStatus<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): VerificationRequestStatus {
         // @phpstan-ignore-next-line;
@@ -167,6 +207,8 @@ final class RequestsService implements RequestsContract
      * @param string $webhookURL URL that should receive webhooks relating to this verification request
      *
      * @return VerificationRequestEgress<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function update(
         string $id,
@@ -193,31 +235,50 @@ final class RequestsService implements RequestsContract
         $webhookURL = omit,
         ?RequestOptions $requestOptions = null,
     ): VerificationRequestEgress {
+        $params = [
+            'additionalInformation' => $additionalInformation,
+            'businessAddr1' => $businessAddr1,
+            'businessCity' => $businessCity,
+            'businessContactEmail' => $businessContactEmail,
+            'businessContactFirstName' => $businessContactFirstName,
+            'businessContactLastName' => $businessContactLastName,
+            'businessContactPhone' => $businessContactPhone,
+            'businessName' => $businessName,
+            'businessState' => $businessState,
+            'businessZip' => $businessZip,
+            'corporateWebsite' => $corporateWebsite,
+            'isvReseller' => $isvReseller,
+            'messageVolume' => $messageVolume,
+            'optInWorkflow' => $optInWorkflow,
+            'optInWorkflowImageURLs' => $optInWorkflowImageURLs,
+            'phoneNumbers' => $phoneNumbers,
+            'productionMessageContent' => $productionMessageContent,
+            'useCase' => $useCase,
+            'useCaseSummary' => $useCaseSummary,
+            'businessAddr2' => $businessAddr2,
+            'webhookURL' => $webhookURL,
+        ];
+
+        return $this->updateRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return VerificationRequestEgress<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): VerificationRequestEgress {
         [$parsed, $options] = RequestUpdateParams::parseRequest(
-            [
-                'additionalInformation' => $additionalInformation,
-                'businessAddr1' => $businessAddr1,
-                'businessCity' => $businessCity,
-                'businessContactEmail' => $businessContactEmail,
-                'businessContactFirstName' => $businessContactFirstName,
-                'businessContactLastName' => $businessContactLastName,
-                'businessContactPhone' => $businessContactPhone,
-                'businessName' => $businessName,
-                'businessState' => $businessState,
-                'businessZip' => $businessZip,
-                'corporateWebsite' => $corporateWebsite,
-                'isvReseller' => $isvReseller,
-                'messageVolume' => $messageVolume,
-                'optInWorkflow' => $optInWorkflow,
-                'optInWorkflowImageURLs' => $optInWorkflowImageURLs,
-                'phoneNumbers' => $phoneNumbers,
-                'productionMessageContent' => $productionMessageContent,
-                'useCase' => $useCase,
-                'useCaseSummary' => $useCaseSummary,
-                'businessAddr2' => $businessAddr2,
-                'webhookURL' => $webhookURL,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -246,6 +307,8 @@ final class RequestsService implements RequestsContract
      * @param TfVerificationStatus|value-of<TfVerificationStatus> $status Tollfree verification status
      *
      * @return RequestListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $page,
@@ -256,16 +319,34 @@ final class RequestsService implements RequestsContract
         $status = omit,
         ?RequestOptions $requestOptions = null,
     ): RequestListResponse {
+        $params = [
+            'page' => $page,
+            'pageSize' => $pageSize,
+            'dateEnd' => $dateEnd,
+            'dateStart' => $dateStart,
+            'phoneNumber' => $phoneNumber,
+            'status' => $status,
+        ];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return RequestListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): RequestListResponse {
         [$parsed, $options] = RequestListParams::parseRequest(
-            [
-                'page' => $page,
-                'pageSize' => $pageSize,
-                'dateEnd' => $dateEnd,
-                'dateStart' => $dateStart,
-                'phoneNumber' => $phoneNumber,
-                'status' => $status,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -288,9 +369,26 @@ final class RequestsService implements RequestsContract
      * * `HTTP 200`: request successfully deleted
      * * `HTTP 400`: request exists but can't be deleted (i.e. not rejected)
      * * `HTTP 404`: request unknown or already deleted
+     *
+     * @throws APIException
      */
     public function delete(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): mixed {
+        $params = [];
+
+        return $this->deleteRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): mixed {
         // @phpstan-ignore-next-line;

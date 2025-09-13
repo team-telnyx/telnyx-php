@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\MessagingProfiles;
 
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigCreateParams\Op;
 use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigListParams\CreatedAt;
@@ -26,6 +27,8 @@ interface AutorespConfigsContract
      * @param string $respText
      *
      * @return AutoRespConfigResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function create(
         string $profileID,
@@ -39,13 +42,45 @@ interface AutorespConfigsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return AutoRespConfigResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        string $profileID,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): AutoRespConfigResponse;
+
+    /**
+     * @api
+     *
      * @param string $profileID
      *
      * @return AutoRespConfigResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $autorespCfgID,
         $profileID,
+        ?RequestOptions $requestOptions = null,
+    ): AutoRespConfigResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return AutoRespConfigResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $autorespCfgID,
+        array $params,
         ?RequestOptions $requestOptions = null,
     ): AutoRespConfigResponse;
 
@@ -59,6 +94,8 @@ interface AutorespConfigsContract
      * @param string $respText
      *
      * @return AutoRespConfigResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function update(
         string $autorespCfgID,
@@ -73,11 +110,28 @@ interface AutorespConfigsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return AutoRespConfigResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $autorespCfgID,
+        array $params,
+        ?RequestOptions $requestOptions = null,
+    ): AutoRespConfigResponse;
+
+    /**
+     * @api
+     *
      * @param string $countryCode
      * @param CreatedAt $createdAt Consolidated created_at parameter (deepObject style). Originally: created_at[gte], created_at[lte]
      * @param UpdatedAt $updatedAt Consolidated updated_at parameter (deepObject style). Originally: updated_at[gte], updated_at[lte]
      *
      * @return AutorespConfigListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         string $profileID,
@@ -90,11 +144,41 @@ interface AutorespConfigsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return AutorespConfigListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        string $profileID,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): AutorespConfigListResponse;
+
+    /**
+     * @api
+     *
      * @param string $profileID
+     *
+     * @throws APIException
      */
     public function delete(
         string $autorespCfgID,
         $profileID,
+        ?RequestOptions $requestOptions = null,
+    ): mixed;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $autorespCfgID,
+        array $params,
         ?RequestOptions $requestOptions = null,
     ): mixed;
 }

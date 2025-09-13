@@ -22,6 +22,7 @@ use Telnyx\AI\Assistants\Versions\VersionPromoteResponse;
 use Telnyx\AI\Assistants\Versions\VersionUpdateResponse;
 use Telnyx\AI\Assistants\VoiceSettings;
 use Telnyx\AI\Assistants\WebhookTool;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 
@@ -36,12 +37,29 @@ interface VersionsContract
      * @param bool $includeMcpServers
      *
      * @return VersionGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $versionID,
         $assistantID,
         $includeMcpServers = omit,
         ?RequestOptions $requestOptions = null,
+    ): VersionGetResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return VersionGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $versionID,
+        array $params,
+        ?RequestOptions $requestOptions = null
     ): VersionGetResponse;
 
     /**
@@ -67,6 +85,8 @@ interface VersionsContract
      * @param VoiceSettings $voiceSettings
      *
      * @return VersionUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function update(
         string $versionID,
@@ -93,7 +113,24 @@ interface VersionsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @return VersionUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $versionID,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): VersionUpdateResponse;
+
+    /**
+     * @api
+     *
      * @return AssistantsList<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         string $assistantID,
@@ -103,7 +140,22 @@ interface VersionsContract
     /**
      * @api
      *
+     * @return AssistantsList<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        string $assistantID,
+        mixed $params,
+        ?RequestOptions $requestOptions = null,
+    ): AssistantsList;
+
+    /**
+     * @api
+     *
      * @param string $assistantID
+     *
+     * @throws APIException
      */
     public function delete(
         string $versionID,
@@ -114,13 +166,43 @@ interface VersionsContract
     /**
      * @api
      *
+     * @param array<string, mixed> $params
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $versionID,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): mixed;
+
+    /**
+     * @api
+     *
      * @param string $assistantID
      *
      * @return VersionPromoteResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function promote(
         string $versionID,
         $assistantID,
+        ?RequestOptions $requestOptions = null
+    ): VersionPromoteResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return VersionPromoteResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function promoteRaw(
+        string $versionID,
+        array $params,
         ?RequestOptions $requestOptions = null
     ): VersionPromoteResponse;
 }

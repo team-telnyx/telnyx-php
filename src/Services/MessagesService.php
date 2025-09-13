@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Messages\MessageCancelScheduledResponse;
 use Telnyx\Messages\MessageGetResponse;
@@ -52,9 +53,28 @@ final class MessagesService implements MessagesContract
      * Note: This API endpoint can only retrieve messages that are no older than 10 days since their creation. If you require messages older than this, please generate an [MDR report.](https://developers.telnyx.com/api/v1/mission-control/add-mdr-request)
      *
      * @return MessageGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): MessageGetResponse {
+        $params = [];
+
+        return $this->retrieveRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return MessageGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): MessageGetResponse {
         // @phpstan-ignore-next-line;
@@ -72,9 +92,28 @@ final class MessagesService implements MessagesContract
      * Cancel a scheduled message that has not yet been sent. Only messages with `status=scheduled` and `send_at` more than a minute from now can be cancelled.
      *
      * @return MessageCancelScheduledResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function cancelScheduled(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): MessageCancelScheduledResponse {
+        $params = [];
+
+        return $this->cancelScheduledRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return MessageCancelScheduledResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function cancelScheduledRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): MessageCancelScheduledResponse {
         // @phpstan-ignore-next-line;
@@ -117,6 +156,8 @@ final class MessagesService implements MessagesContract
      * @param string $webhookURL the URL where webhooks related to this message will be sent
      *
      * @return MessageScheduleResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function schedule(
         $to,
@@ -133,22 +174,40 @@ final class MessagesService implements MessagesContract
         $webhookURL = omit,
         ?RequestOptions $requestOptions = null,
     ): MessageScheduleResponse {
+        $params = [
+            'to' => $to,
+            'autoDetect' => $autoDetect,
+            'from' => $from,
+            'mediaURLs' => $mediaURLs,
+            'messagingProfileID' => $messagingProfileID,
+            'sendAt' => $sendAt,
+            'subject' => $subject,
+            'text' => $text,
+            'type' => $type,
+            'useProfileWebhooks' => $useProfileWebhooks,
+            'webhookFailoverURL' => $webhookFailoverURL,
+            'webhookURL' => $webhookURL,
+        ];
+
+        return $this->scheduleRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return MessageScheduleResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function scheduleRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): MessageScheduleResponse {
         [$parsed, $options] = MessageScheduleParams::parseRequest(
-            [
-                'to' => $to,
-                'autoDetect' => $autoDetect,
-                'from' => $from,
-                'mediaURLs' => $mediaURLs,
-                'messagingProfileID' => $messagingProfileID,
-                'sendAt' => $sendAt,
-                'subject' => $subject,
-                'text' => $text,
-                'type' => $type,
-                'useProfileWebhooks' => $useProfileWebhooks,
-                'webhookFailoverURL' => $webhookFailoverURL,
-                'webhookURL' => $webhookURL,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -192,6 +251,8 @@ final class MessagesService implements MessagesContract
      * @param string $webhookURL the URL where webhooks related to this message will be sent
      *
      * @return MessageSendResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function send(
         $to,
@@ -208,22 +269,40 @@ final class MessagesService implements MessagesContract
         $webhookURL = omit,
         ?RequestOptions $requestOptions = null,
     ): MessageSendResponse {
+        $params = [
+            'to' => $to,
+            'autoDetect' => $autoDetect,
+            'from' => $from,
+            'mediaURLs' => $mediaURLs,
+            'messagingProfileID' => $messagingProfileID,
+            'sendAt' => $sendAt,
+            'subject' => $subject,
+            'text' => $text,
+            'type' => $type,
+            'useProfileWebhooks' => $useProfileWebhooks,
+            'webhookFailoverURL' => $webhookFailoverURL,
+            'webhookURL' => $webhookURL,
+        ];
+
+        return $this->sendRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return MessageSendResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function sendRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): MessageSendResponse {
         [$parsed, $options] = MessageSendParams::parseRequest(
-            [
-                'to' => $to,
-                'autoDetect' => $autoDetect,
-                'from' => $from,
-                'mediaURLs' => $mediaURLs,
-                'messagingProfileID' => $messagingProfileID,
-                'sendAt' => $sendAt,
-                'subject' => $subject,
-                'text' => $text,
-                'type' => $type,
-                'useProfileWebhooks' => $useProfileWebhooks,
-                'webhookFailoverURL' => $webhookFailoverURL,
-                'webhookURL' => $webhookURL,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -251,6 +330,8 @@ final class MessagesService implements MessagesContract
      * @param string $webhookURL the URL where webhooks related to this message will be sent
      *
      * @return MessageSendGroupMmsResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function sendGroupMms(
         $from,
@@ -263,18 +344,36 @@ final class MessagesService implements MessagesContract
         $webhookURL = omit,
         ?RequestOptions $requestOptions = null,
     ): MessageSendGroupMmsResponse {
+        $params = [
+            'from' => $from,
+            'to' => $to,
+            'mediaURLs' => $mediaURLs,
+            'subject' => $subject,
+            'text' => $text,
+            'useProfileWebhooks' => $useProfileWebhooks,
+            'webhookFailoverURL' => $webhookFailoverURL,
+            'webhookURL' => $webhookURL,
+        ];
+
+        return $this->sendGroupMmsRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return MessageSendGroupMmsResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function sendGroupMmsRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): MessageSendGroupMmsResponse {
         [$parsed, $options] = MessageSendGroupMmsParams::parseRequest(
-            [
-                'from' => $from,
-                'to' => $to,
-                'mediaURLs' => $mediaURLs,
-                'subject' => $subject,
-                'text' => $text,
-                'useProfileWebhooks' => $useProfileWebhooks,
-                'webhookFailoverURL' => $webhookFailoverURL,
-                'webhookURL' => $webhookURL,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -308,6 +407,8 @@ final class MessagesService implements MessagesContract
      * @param string $webhookURL the URL where webhooks related to this message will be sent
      *
      * @return MessageSendLongCodeResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function sendLongCode(
         $from,
@@ -322,20 +423,38 @@ final class MessagesService implements MessagesContract
         $webhookURL = omit,
         ?RequestOptions $requestOptions = null,
     ): MessageSendLongCodeResponse {
+        $params = [
+            'from' => $from,
+            'to' => $to,
+            'autoDetect' => $autoDetect,
+            'mediaURLs' => $mediaURLs,
+            'subject' => $subject,
+            'text' => $text,
+            'type' => $type,
+            'useProfileWebhooks' => $useProfileWebhooks,
+            'webhookFailoverURL' => $webhookFailoverURL,
+            'webhookURL' => $webhookURL,
+        ];
+
+        return $this->sendLongCodeRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return MessageSendLongCodeResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function sendLongCodeRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): MessageSendLongCodeResponse {
         [$parsed, $options] = MessageSendLongCodeParams::parseRequest(
-            [
-                'from' => $from,
-                'to' => $to,
-                'autoDetect' => $autoDetect,
-                'mediaURLs' => $mediaURLs,
-                'subject' => $subject,
-                'text' => $text,
-                'type' => $type,
-                'useProfileWebhooks' => $useProfileWebhooks,
-                'webhookFailoverURL' => $webhookFailoverURL,
-                'webhookURL' => $webhookURL,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -369,6 +488,8 @@ final class MessagesService implements MessagesContract
      * @param string $webhookURL the URL where webhooks related to this message will be sent
      *
      * @return MessageSendNumberPoolResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function sendNumberPool(
         $messagingProfileID,
@@ -383,20 +504,38 @@ final class MessagesService implements MessagesContract
         $webhookURL = omit,
         ?RequestOptions $requestOptions = null,
     ): MessageSendNumberPoolResponse {
+        $params = [
+            'messagingProfileID' => $messagingProfileID,
+            'to' => $to,
+            'autoDetect' => $autoDetect,
+            'mediaURLs' => $mediaURLs,
+            'subject' => $subject,
+            'text' => $text,
+            'type' => $type,
+            'useProfileWebhooks' => $useProfileWebhooks,
+            'webhookFailoverURL' => $webhookFailoverURL,
+            'webhookURL' => $webhookURL,
+        ];
+
+        return $this->sendNumberPoolRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return MessageSendNumberPoolResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function sendNumberPoolRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): MessageSendNumberPoolResponse {
         [$parsed, $options] = MessageSendNumberPoolParams::parseRequest(
-            [
-                'messagingProfileID' => $messagingProfileID,
-                'to' => $to,
-                'autoDetect' => $autoDetect,
-                'mediaURLs' => $mediaURLs,
-                'subject' => $subject,
-                'text' => $text,
-                'type' => $type,
-                'useProfileWebhooks' => $useProfileWebhooks,
-                'webhookFailoverURL' => $webhookFailoverURL,
-                'webhookURL' => $webhookURL,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -430,6 +569,8 @@ final class MessagesService implements MessagesContract
      * @param string $webhookURL the URL where webhooks related to this message will be sent
      *
      * @return MessageSendShortCodeResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function sendShortCode(
         $from,
@@ -444,20 +585,38 @@ final class MessagesService implements MessagesContract
         $webhookURL = omit,
         ?RequestOptions $requestOptions = null,
     ): MessageSendShortCodeResponse {
+        $params = [
+            'from' => $from,
+            'to' => $to,
+            'autoDetect' => $autoDetect,
+            'mediaURLs' => $mediaURLs,
+            'subject' => $subject,
+            'text' => $text,
+            'type' => $type,
+            'useProfileWebhooks' => $useProfileWebhooks,
+            'webhookFailoverURL' => $webhookFailoverURL,
+            'webhookURL' => $webhookURL,
+        ];
+
+        return $this->sendShortCodeRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return MessageSendShortCodeResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function sendShortCodeRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): MessageSendShortCodeResponse {
         [$parsed, $options] = MessageSendShortCodeParams::parseRequest(
-            [
-                'from' => $from,
-                'to' => $to,
-                'autoDetect' => $autoDetect,
-                'mediaURLs' => $mediaURLs,
-                'subject' => $subject,
-                'text' => $text,
-                'type' => $type,
-                'useProfileWebhooks' => $useProfileWebhooks,
-                'webhookFailoverURL' => $webhookFailoverURL,
-                'webhookURL' => $webhookURL,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;

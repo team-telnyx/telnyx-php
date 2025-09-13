@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Reports\ReportListMdrsParams;
 use Telnyx\Reports\ReportListMdrsParams\Direction;
@@ -58,6 +59,8 @@ final class ReportsService implements ReportsContract
      * @param Status|value-of<Status> $status Message status
      *
      * @return ReportListMdrsResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function listMdrs(
         $id = omit,
@@ -71,19 +74,37 @@ final class ReportsService implements ReportsContract
         $status = omit,
         ?RequestOptions $requestOptions = null,
     ): ReportListMdrsResponse {
+        $params = [
+            'id' => $id,
+            'cld' => $cld,
+            'cli' => $cli,
+            'direction' => $direction,
+            'endDate' => $endDate,
+            'messageType' => $messageType,
+            'profile' => $profile,
+            'startDate' => $startDate,
+            'status' => $status,
+        ];
+
+        return $this->listMdrsRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ReportListMdrsResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listMdrsRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): ReportListMdrsResponse {
         [$parsed, $options] = ReportListMdrsParams::parseRequest(
-            [
-                'id' => $id,
-                'cld' => $cld,
-                'cli' => $cli,
-                'direction' => $direction,
-                'endDate' => $endDate,
-                'messageType' => $messageType,
-                'profile' => $profile,
-                'startDate' => $startDate,
-                'status' => $status,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -115,6 +136,8 @@ final class ReportsService implements ReportsContract
      * @param string $startDate Start date
      *
      * @return ReportListWdrsResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function listWdrs(
         $id = omit,
@@ -131,22 +154,40 @@ final class ReportsService implements ReportsContract
         $startDate = omit,
         ?RequestOptions $requestOptions = null,
     ): ReportListWdrsResponse {
+        $params = [
+            'id' => $id,
+            'endDate' => $endDate,
+            'imsi' => $imsi,
+            'mcc' => $mcc,
+            'mnc' => $mnc,
+            'page' => $page,
+            'phoneNumber' => $phoneNumber,
+            'simCardID' => $simCardID,
+            'simGroupID' => $simGroupID,
+            'simGroupName' => $simGroupName,
+            'sort' => $sort,
+            'startDate' => $startDate,
+        ];
+
+        return $this->listWdrsRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return ReportListWdrsResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listWdrsRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): ReportListWdrsResponse {
         [$parsed, $options] = ReportListWdrsParams::parseRequest(
-            [
-                'id' => $id,
-                'endDate' => $endDate,
-                'imsi' => $imsi,
-                'mcc' => $mcc,
-                'mnc' => $mnc,
-                'page' => $page,
-                'phoneNumber' => $phoneNumber,
-                'simCardID' => $simCardID,
-                'simGroupID' => $simGroupID,
-                'simGroupName' => $simGroupName,
-                'sort' => $sort,
-                'startDate' => $startDate,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;

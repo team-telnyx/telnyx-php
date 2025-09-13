@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SimCardsContract;
@@ -54,6 +55,8 @@ final class SimCardsService implements SimCardsContract
      * @param bool $includeSimCardGroup it includes the associated SIM card group object in the response when present
      *
      * @return SimCardGetResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function retrieve(
         string $id,
@@ -61,12 +64,31 @@ final class SimCardsService implements SimCardsContract
         $includeSimCardGroup = omit,
         ?RequestOptions $requestOptions = null,
     ): SimCardGetResponse {
+        $params = [
+            'includePinPukCodes' => $includePinPukCodes,
+            'includeSimCardGroup' => $includeSimCardGroup,
+        ];
+
+        return $this->retrieveRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return SimCardGetResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): SimCardGetResponse {
         [$parsed, $options] = SimCardRetrieveParams::parseRequest(
-            [
-                'includePinPukCodes' => $includePinPukCodes,
-                'includeSimCardGroup' => $includeSimCardGroup,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -91,6 +113,8 @@ final class SimCardsService implements SimCardsContract
      * @param list<string> $tags Searchable tags associated with the SIM card
      *
      * @return SimCardUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function update(
         string $id,
@@ -101,15 +125,34 @@ final class SimCardsService implements SimCardsContract
         $tags = omit,
         ?RequestOptions $requestOptions = null,
     ): SimCardUpdateResponse {
+        $params = [
+            'authorizedImeis' => $authorizedImeis,
+            'dataLimit' => $dataLimit,
+            'simCardGroupID' => $simCardGroupID,
+            'status' => $status,
+            'tags' => $tags,
+        ];
+
+        return $this->updateRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return SimCardUpdateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): SimCardUpdateResponse {
         [$parsed, $options] = SimCardUpdateParams::parseRequest(
-            [
-                'authorizedImeis' => $authorizedImeis,
-                'dataLimit' => $dataLimit,
-                'simCardGroupID' => $simCardGroupID,
-                'status' => $status,
-                'tags' => $tags,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -134,6 +177,8 @@ final class SimCardsService implements SimCardsContract
      * @param Sort|value-of<Sort> $sort Sorts SIM cards by the given field. Defaults to ascending order unless field is prefixed with a minus sign.
      *
      * @return SimCardListResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function list(
         $filter = omit,
@@ -143,15 +188,33 @@ final class SimCardsService implements SimCardsContract
         $sort = omit,
         ?RequestOptions $requestOptions = null,
     ): SimCardListResponse {
+        $params = [
+            'filter' => $filter,
+            'filterSimCardGroupID' => $filterSimCardGroupID,
+            'includeSimCardGroup' => $includeSimCardGroup,
+            'page' => $page,
+            'sort' => $sort,
+        ];
+
+        return $this->listRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return SimCardListResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): SimCardListResponse {
         [$parsed, $options] = SimCardListParams::parseRequest(
-            [
-                'filter' => $filter,
-                'filterSimCardGroupID' => $filterSimCardGroupID,
-                'includeSimCardGroup' => $includeSimCardGroup,
-                'page' => $page,
-                'sort' => $sort,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -174,14 +237,35 @@ final class SimCardsService implements SimCardsContract
      * @param bool $reportLost Enables deletion of disabled eSIMs that can't be uninstalled from a device. This is irreversible and the eSIM cannot be re-registered.
      *
      * @return SimCardDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function delete(
         string $id,
         $reportLost = omit,
         ?RequestOptions $requestOptions = null
     ): SimCardDeleteResponse {
+        $params = ['reportLost' => $reportLost];
+
+        return $this->deleteRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return SimCardDeleteResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function deleteRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): SimCardDeleteResponse {
         [$parsed, $options] = SimCardDeleteParams::parseRequest(
-            ['reportLost' => $reportLost],
+            $params,
             $requestOptions
         );
 
@@ -202,9 +286,28 @@ final class SimCardsService implements SimCardsContract
      *  This API is only available for eSIMs. If the given SIM is a physical SIM card, or has already been installed, an error will be returned.
      *
      * @return SimCardGetActivationCodeResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function getActivationCode(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): SimCardGetActivationCodeResponse {
+        $params = [];
+
+        return $this->getActivationCodeRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return SimCardGetActivationCodeResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function getActivationCodeRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): SimCardGetActivationCodeResponse {
         // @phpstan-ignore-next-line;
@@ -222,9 +325,28 @@ final class SimCardsService implements SimCardsContract
      * It returns the device details where a SIM card is currently being used.
      *
      * @return SimCardGetDeviceDetailsResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function getDeviceDetails(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): SimCardGetDeviceDetailsResponse {
+        $params = [];
+
+        return $this->getDeviceDetailsRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return SimCardGetDeviceDetailsResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function getDeviceDetailsRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): SimCardGetDeviceDetailsResponse {
         // @phpstan-ignore-next-line;
@@ -242,9 +364,28 @@ final class SimCardsService implements SimCardsContract
      * It returns the public IP requested for a SIM card.
      *
      * @return SimCardGetPublicIPResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function getPublicIP(
         string $id,
+        ?RequestOptions $requestOptions = null
+    ): SimCardGetPublicIPResponse {
+        $params = [];
+
+        return $this->getPublicIPRaw($id, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return SimCardGetPublicIPResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function getPublicIPRaw(
+        string $id,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): SimCardGetPublicIPResponse {
         // @phpstan-ignore-next-line;
@@ -265,6 +406,8 @@ final class SimCardsService implements SimCardsContract
      * @param int $pageSize the size of the page
      *
      * @return SimCardListWirelessConnectivityLogsResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function listWirelessConnectivityLogs(
         string $id,
@@ -272,10 +415,33 @@ final class SimCardsService implements SimCardsContract
         $pageSize = omit,
         ?RequestOptions $requestOptions = null,
     ): SimCardListWirelessConnectivityLogsResponse {
+        $params = ['pageNumber' => $pageNumber, 'pageSize' => $pageSize];
+
+        return $this->listWirelessConnectivityLogsRaw(
+            $id,
+            $params,
+            $requestOptions
+        );
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return SimCardListWirelessConnectivityLogsResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function listWirelessConnectivityLogsRaw(
+        string $id,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): SimCardListWirelessConnectivityLogsResponse {
         [
             $parsed, $options,
         ] = SimCardListWirelessConnectivityLogsParams::parseRequest(
-            ['pageNumber' => $pageNumber, 'pageSize' => $pageSize],
+            $params,
             $requestOptions
         );
 
