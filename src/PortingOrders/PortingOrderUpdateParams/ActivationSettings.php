@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type activation_settings = array{
- *   focDatetimeRequested?: \DateTimeInterface|null
+ *   focDatetimeRequested?: \DateTimeInterface
  * }
  */
 final class ActivationSettings implements BaseModel

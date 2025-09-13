@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\FaxApplications\FaxApplicationCreateParams\Inbound;
 use Telnyx\FaxApplications\FaxApplicationCreateParams\Outbound;
@@ -35,6 +36,8 @@ interface FaxApplicationsContract
      * @param list<string> $tags tags associated with the Fax Application
      * @param string|null $webhookEventFailoverURL The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
+     *
+     * @return FaxApplicationNewResponse<HasRawResponse>
      */
     public function create(
         $applicationName,
@@ -51,6 +54,8 @@ interface FaxApplicationsContract
 
     /**
      * @api
+     *
+     * @return FaxApplicationGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -70,6 +75,8 @@ interface FaxApplicationsContract
      * @param list<string> $tags tags associated with the Fax Application
      * @param string|null $webhookEventFailoverURL The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
+     *
+     * @return FaxApplicationUpdateResponse<HasRawResponse>
      */
     public function update(
         string $id,
@@ -103,6 +110,8 @@ interface FaxApplicationsContract
      *     <code>application_name</code> field in descending order.
      *   </li>
      * </ul> <br/> If not given, results are sorted by <code>created_at</code> in descending order.
+     *
+     * @return FaxApplicationListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,
@@ -113,6 +122,8 @@ interface FaxApplicationsContract
 
     /**
      * @api
+     *
+     * @return FaxApplicationDeleteResponse<HasRawResponse>
      */
     public function delete(
         string $id,

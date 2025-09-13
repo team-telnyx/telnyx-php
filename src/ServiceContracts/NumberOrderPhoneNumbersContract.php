@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberGetResponse;
 use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberListParams\Filter;
 use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberListResponse;
@@ -18,6 +19,8 @@ interface NumberOrderPhoneNumbersContract
 {
     /**
      * @api
+     *
+     * @return NumberOrderPhoneNumberGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $numberOrderPhoneNumberID,
@@ -28,6 +31,8 @@ interface NumberOrderPhoneNumbersContract
      * @api
      *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[country_code]
+     *
+     * @return NumberOrderPhoneNumberListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,
@@ -38,6 +43,8 @@ interface NumberOrderPhoneNumbersContract
      * @api
      *
      * @param string $requirementGroupID The ID of the requirement group to associate
+     *
+     * @return NumberOrderPhoneNumberUpdateRequirementGroupResponse<HasRawResponse>
      */
     public function updateRequirementGroup(
         string $id,
@@ -49,6 +56,8 @@ interface NumberOrderPhoneNumbersContract
      * @api
      *
      * @param list<UpdateRegulatoryRequirement> $regulatoryRequirements
+     *
+     * @return NumberOrderPhoneNumberUpdateRequirementsResponse<HasRawResponse>
      */
     public function updateRequirements(
         string $numberOrderPhoneNumberID,

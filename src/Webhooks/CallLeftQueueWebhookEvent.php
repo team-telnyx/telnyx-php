@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\CallLeftQueueWebhookEvent\Data;
 
 /**
- * @phpstan-type call_left_queue_webhook_event = array{data?: Data|null}
+ * @phpstan-type call_left_queue_webhook_event = array{data?: Data}
  */
 final class CallLeftQueueWebhookEvent implements BaseModel
 {

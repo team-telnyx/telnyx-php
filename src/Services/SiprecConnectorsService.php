@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SiprecConnectorsContract;
 use Telnyx\SiprecConnectors\SiprecConnectorCreateParams;
@@ -31,6 +32,8 @@ final class SiprecConnectorsService implements SiprecConnectorsContract
      * @param string $name name for the SIPREC connector resource
      * @param int $port port for the SIPREC SRS
      * @param string $appSubdomain subdomain to route the call when using Telnyx SRS (optional for non-Telnyx SRS)
+     *
+     * @return SiprecConnectorNewResponse<HasRawResponse>
      */
     public function create(
         $host,
@@ -63,6 +66,8 @@ final class SiprecConnectorsService implements SiprecConnectorsContract
      * @api
      *
      * Returns details of a stored SIPREC connector.
+     *
+     * @return SiprecConnectorGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $connectorName,
@@ -86,6 +91,8 @@ final class SiprecConnectorsService implements SiprecConnectorsContract
      * @param string $name name for the SIPREC connector resource
      * @param int $port port for the SIPREC SRS
      * @param string $appSubdomain subdomain to route the call when using Telnyx SRS (optional for non-Telnyx SRS)
+     *
+     * @return SiprecConnectorUpdateResponse<HasRawResponse>
      */
     public function update(
         string $connectorName,

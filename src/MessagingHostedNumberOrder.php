@@ -11,11 +11,11 @@ use Telnyx\MessagingHostedNumberOrder\Status;
 
 /**
  * @phpstan-type messaging_hosted_number_order = array{
- *   id?: string|null,
+ *   id?: string,
  *   messagingProfileID?: string|null,
- *   phoneNumbers?: list<HostedNumber>|null,
- *   recordType?: string|null,
- *   status?: value-of<Status>|null,
+ *   phoneNumbers?: list<HostedNumber>,
+ *   recordType?: string,
+ *   status?: value-of<Status>,
  * }
  */
 final class MessagingHostedNumberOrder implements BaseModel

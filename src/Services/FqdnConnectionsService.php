@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\CredentialConnections\ConnectionRtcpSettings;
 use Telnyx\CredentialConnections\DtmfType;
@@ -61,6 +62,8 @@ final class FqdnConnectionsService implements FqdnConnectionsContract
      * @param string|null $webhookEventFailoverURL The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      * @param string $webhookEventURL The URL where webhooks related to this connection will be sent. Must include a scheme, such as 'https'.
      * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
+     *
+     * @return FqdnConnectionNewResponse<HasRawResponse>
      */
     public function create(
         $connectionName,
@@ -125,6 +128,8 @@ final class FqdnConnectionsService implements FqdnConnectionsContract
      * @api
      *
      * Retrieves the details of an existing FQDN connection.
+     *
+     * @return FqdnConnectionGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -163,6 +168,8 @@ final class FqdnConnectionsService implements FqdnConnectionsContract
      * @param string|null $webhookEventFailoverURL The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      * @param string $webhookEventURL The URL where webhooks related to this connection will be sent. Must include a scheme, such as 'https'.
      * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
+     *
+     * @return FqdnConnectionUpdateResponse<HasRawResponse>
      */
     public function update(
         string $id,
@@ -241,6 +248,8 @@ final class FqdnConnectionsService implements FqdnConnectionsContract
      *     <code>connection_name</code> field in descending order.
      *   </li>
      * </ul> <br/> If not given, results are sorted by <code>created_at</code> in descending order.
+     *
+     * @return FqdnConnectionListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,
@@ -267,6 +276,8 @@ final class FqdnConnectionsService implements FqdnConnectionsContract
      * @api
      *
      * Deletes an FQDN connection.
+     *
+     * @return FqdnConnectionDeleteResponse<HasRawResponse>
      */
     public function delete(
         string $id,

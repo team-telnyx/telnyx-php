@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Media\MediaGetResponse;
 use Telnyx\Media\MediaListParams\Filter;
 use Telnyx\Media\MediaListResponse;
@@ -17,6 +18,8 @@ interface MediaContract
 {
     /**
      * @api
+     *
+     * @return MediaGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $mediaName,
@@ -28,6 +31,8 @@ interface MediaContract
      *
      * @param string $mediaURL The URL where the media to be stored in Telnyx network is currently hosted. The maximum allowed size is 20 MB.
      * @param int $ttlSecs The number of seconds after which the media resource will be deleted, defaults to 2 days. The maximum allowed vale is 630720000, which translates to 20 years.
+     *
+     * @return MediaUpdateResponse<HasRawResponse>
      */
     public function update(
         string $mediaName,
@@ -40,6 +45,8 @@ interface MediaContract
      * @api
      *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[content_type][]
+     *
+     * @return MediaListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,
@@ -68,6 +75,8 @@ interface MediaContract
      * @param string $mediaURL The URL where the media to be stored in Telnyx network is currently hosted. The maximum allowed size is 20 MB.
      * @param string $mediaName the unique identifier of a file
      * @param int $ttlSecs The number of seconds after which the media resource will be deleted, defaults to 2 days. The maximum allowed vale is 630720000, which translates to 20 years.
+     *
+     * @return MediaUploadResponse<HasRawResponse>
      */
     public function upload(
         $mediaURL,

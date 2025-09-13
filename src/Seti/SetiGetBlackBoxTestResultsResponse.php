@@ -11,8 +11,12 @@ use Telnyx\Seti\SetiGetBlackBoxTestResultsResponse\Data;
 
 /**
  * @phpstan-type seti_get_black_box_test_results_response = array{
- *   data?: list<Data>|null
+ *   data?: list<Data>
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class SetiGetBlackBoxTestResultsResponse implements BaseModel
 {

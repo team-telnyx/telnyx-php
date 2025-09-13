@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressCreateParams;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressCreateParams\CountryCode;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressDeleteResponse;
@@ -42,6 +43,8 @@ final class DynamicEmergencyAddressesService implements DynamicEmergencyAddresse
      * @param string $streetPostDirectional
      * @param string $streetPreDirectional
      * @param string $streetSuffix
+     *
+     * @return DynamicEmergencyAddressNewResponse<HasRawResponse>
      */
     public function create(
         $administrativeArea,
@@ -88,6 +91,8 @@ final class DynamicEmergencyAddressesService implements DynamicEmergencyAddresse
      * @api
      *
      * Returns the dynamic emergency address based on the ID provided
+     *
+     * @return DynamicEmergencyAddressGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -109,6 +114,8 @@ final class DynamicEmergencyAddressesService implements DynamicEmergencyAddresse
      *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[status], filter[country_code]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     *
+     * @return DynamicEmergencyAddressListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,
@@ -134,6 +141,8 @@ final class DynamicEmergencyAddressesService implements DynamicEmergencyAddresse
      * @api
      *
      * Deletes the dynamic emergency address based on the ID provided
+     *
+     * @return DynamicEmergencyAddressDeleteResponse<HasRawResponse>
      */
     public function delete(
         string $id,

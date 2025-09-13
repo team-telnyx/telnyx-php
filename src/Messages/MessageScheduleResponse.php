@@ -9,9 +9,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type message_schedule_response = array{
- *   data?: OutboundMessagePayload|null
- * }
+ * @phpstan-type message_schedule_response = array{data?: OutboundMessagePayload}
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class MessageScheduleResponse implements BaseModel
 {

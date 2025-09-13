@@ -10,9 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type content_alias = array{
- *   token?: string|null,
- *   expiresAt?: \DateTimeInterface|null,
- *   presignedURL?: string|null,
+ *   token?: string, expiresAt?: \DateTimeInterface, presignedURL?: string
  * }
  */
 final class Content implements BaseModel

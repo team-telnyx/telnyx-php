@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type inbound_alias = array{channelLimit?: int|null}
+ * @phpstan-type inbound_alias = array{channelLimit?: int}
  */
 final class Inbound implements BaseModel
 {

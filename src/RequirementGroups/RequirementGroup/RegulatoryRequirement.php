@@ -11,13 +11,13 @@ use Telnyx\RequirementGroups\RequirementGroup\RegulatoryRequirement\Status;
 
 /**
  * @phpstan-type regulatory_requirement = array{
- *   createdAt?: \DateTimeInterface|null,
- *   expiresAt?: \DateTimeInterface|null,
- *   fieldType?: string|null,
- *   fieldValue?: string|null,
- *   requirementID?: string|null,
- *   status?: value-of<Status>|null,
- *   updatedAt?: \DateTimeInterface|null,
+ *   createdAt?: \DateTimeInterface,
+ *   expiresAt?: \DateTimeInterface,
+ *   fieldType?: string,
+ *   fieldValue?: string,
+ *   requirementID?: string,
+ *   status?: value-of<Status>,
+ *   updatedAt?: \DateTimeInterface,
  * }
  */
 final class RegulatoryRequirement implements BaseModel

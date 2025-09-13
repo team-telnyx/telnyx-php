@@ -15,10 +15,14 @@ use Telnyx\Core\Contracts\BaseModel;
  *   source: string,
  *   status: value-of<CloudflareSyncStatus>,
  *   userID: string,
- *   createdAt?: \DateTimeInterface|null,
- *   description?: string|null,
- *   updatedAt?: \DateTimeInterface|null,
+ *   createdAt?: \DateTimeInterface,
+ *   description?: string,
+ *   updatedAt?: \DateTimeInterface,
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class AccessIPAddressResponse implements BaseModel
 {

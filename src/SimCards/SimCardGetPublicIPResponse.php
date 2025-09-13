@@ -10,7 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SimCards\SimCardGetPublicIPResponse\Data;
 
 /**
- * @phpstan-type sim_card_get_public_ip_response = array{data?: Data|null}
+ * @phpstan-type sim_card_get_public_ip_response = array{data?: Data}
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class SimCardGetPublicIPResponse implements BaseModel
 {

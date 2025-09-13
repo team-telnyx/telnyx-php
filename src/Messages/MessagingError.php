@@ -11,11 +11,7 @@ use Telnyx\Messages\MessagingError\Source;
 
 /**
  * @phpstan-type messaging_error = array{
- *   code: string,
- *   title: string,
- *   detail?: string|null,
- *   meta?: mixed,
- *   source?: Source|null,
+ *   code: string, title: string, detail?: string, meta?: mixed, source?: Source
  * }
  */
 final class MessagingError implements BaseModel

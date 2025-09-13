@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\WirelessContract;
 use Telnyx\Services\Wireless\DetailRecordsReportsService;
@@ -23,9 +24,7 @@ final class WirelessService implements WirelessContract
      */
     public function __construct(private Client $client)
     {
-        $this->detailRecordsReports = new DetailRecordsReportsService(
-            $this->client
-        );
+        $this->detailRecordsReports = new DetailRecordsReportsService($client);
     }
 
     /**
@@ -34,6 +33,8 @@ final class WirelessService implements WirelessContract
      * Retrieve all wireless regions for the given product.
      *
      * @param string $product The product for which to list regions (e.g., 'public_ips', 'private_wireless_gateways').
+     *
+     * @return WirelessGetRegionsResponse<HasRawResponse>
      */
     public function retrieveRegions(
         $product,

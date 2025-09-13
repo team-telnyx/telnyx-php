@@ -12,8 +12,12 @@ use Telnyx\Networks\NetworkListInterfacesResponse\Data;
 
 /**
  * @phpstan-type network_list_interfaces_response = array{
- *   data?: list<Data>|null, meta?: PaginationMeta|null
+ *   data?: list<STAINLESS_FIXME_data_alias>, meta?: PaginationMeta
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class NetworkListInterfacesResponse implements BaseModel
 {

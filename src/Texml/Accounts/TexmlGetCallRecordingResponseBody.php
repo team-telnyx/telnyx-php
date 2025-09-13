@@ -13,21 +13,21 @@ use Telnyx\Texml\Accounts\TexmlGetCallRecordingResponseBody\Status;
 
 /**
  * @phpstan-type texml_get_call_recording_response_body = array{
- *   accountSid?: string|null,
- *   callSid?: string|null,
- *   channels?: value-of<Channels>|null,
+ *   accountSid?: string,
+ *   callSid?: string,
+ *   channels?: value-of<Channels>,
  *   conferenceSid?: string|null,
- *   dateCreated?: \DateTimeInterface|null,
- *   dateUpdated?: \DateTimeInterface|null,
+ *   dateCreated?: \DateTimeInterface,
+ *   dateUpdated?: \DateTimeInterface,
  *   duration?: string|null,
  *   errorCode?: string|null,
- *   mediaURL?: string|null,
- *   sid?: string|null,
- *   source?: value-of<Source>|null,
- *   startTime?: \DateTimeInterface|null,
- *   status?: value-of<Status>|null,
- *   subresourcesUris?: TexmlRecordingSubresourcesUris|null,
- *   uri?: string|null,
+ *   mediaURL?: string,
+ *   sid?: string,
+ *   source?: value-of<Source>,
+ *   startTime?: \DateTimeInterface,
+ *   status?: value-of<Status>,
+ *   subresourcesUris?: TexmlRecordingSubresourcesUris,
+ *   uri?: string,
  * }
  */
 final class TexmlGetCallRecordingResponseBody implements BaseModel

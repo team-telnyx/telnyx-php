@@ -10,9 +10,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type message_history = array{
- *   content?: string|null, role?: value-of<Role>|null
- * }
+ * @phpstan-type message_history = array{content?: string, role?: value-of<Role>}
  */
 final class MessageHistory implements BaseModel
 {

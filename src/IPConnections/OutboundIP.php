@@ -13,18 +13,18 @@ use Telnyx\IPConnections\OutboundIP\T38ReinviteSource;
 
 /**
  * @phpstan-type outbound_ip = array{
- *   aniOverride?: string|null,
- *   aniOverrideType?: value-of<AniOverrideType>|null,
+ *   aniOverride?: string,
+ *   aniOverrideType?: value-of<AniOverrideType>,
  *   callParkingEnabled?: bool|null,
- *   channelLimit?: int|null,
- *   generateRingbackTone?: bool|null,
- *   instantRingbackEnabled?: bool|null,
- *   ipAuthenticationMethod?: value-of<IPAuthenticationMethod>|null,
- *   ipAuthenticationToken?: string|null,
- *   localization?: string|null,
- *   outboundVoiceProfileID?: string|null,
- *   t38ReinviteSource?: value-of<T38ReinviteSource>|null,
- *   techPrefix?: string|null,
+ *   channelLimit?: int,
+ *   generateRingbackTone?: bool,
+ *   instantRingbackEnabled?: bool,
+ *   ipAuthenticationMethod?: value-of<IPAuthenticationMethod>,
+ *   ipAuthenticationToken?: string,
+ *   localization?: string,
+ *   outboundVoiceProfileID?: string,
+ *   t38ReinviteSource?: value-of<T38ReinviteSource>,
+ *   techPrefix?: string,
  * }
  */
 final class OutboundIP implements BaseModel

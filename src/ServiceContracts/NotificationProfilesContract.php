@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\NotificationProfiles\NotificationProfileDeleteResponse;
 use Telnyx\NotificationProfiles\NotificationProfileGetResponse;
 use Telnyx\NotificationProfiles\NotificationProfileListParams\Page;
@@ -20,6 +21,8 @@ interface NotificationProfilesContract
      * @api
      *
      * @param string $name a human readable name
+     *
+     * @return NotificationProfileNewResponse<HasRawResponse>
      */
     public function create(
         $name = omit,
@@ -28,6 +31,8 @@ interface NotificationProfilesContract
 
     /**
      * @api
+     *
+     * @return NotificationProfileGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -38,6 +43,8 @@ interface NotificationProfilesContract
      * @api
      *
      * @param string $name a human readable name
+     *
+     * @return NotificationProfileUpdateResponse<HasRawResponse>
      */
     public function update(
         string $id,
@@ -49,6 +56,8 @@ interface NotificationProfilesContract
      * @api
      *
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     *
+     * @return NotificationProfileListResponse<HasRawResponse>
      */
     public function list(
         $page = omit,
@@ -57,6 +66,8 @@ interface NotificationProfilesContract
 
     /**
      * @api
+     *
+     * @return NotificationProfileDeleteResponse<HasRawResponse>
      */
     public function delete(
         string $id,

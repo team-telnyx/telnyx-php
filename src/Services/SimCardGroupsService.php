@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SimCardGroupsContract;
 use Telnyx\Services\SimCardGroups\ActionsService;
@@ -34,7 +35,7 @@ final class SimCardGroupsService implements SimCardGroupsContract
      */
     public function __construct(private Client $client)
     {
-        $this->actions = new ActionsService($this->client);
+        $this->actions = new ActionsService($client);
     }
 
     /**
@@ -44,6 +45,8 @@ final class SimCardGroupsService implements SimCardGroupsContract
      *
      * @param string $name a user friendly name for the SIM card group
      * @param DataLimit $dataLimit upper limit on the amount of data the SIM cards, within the group, can use
+     *
+     * @return SimCardGroupNewResponse<HasRawResponse>
      */
     public function create(
         $name,
@@ -71,6 +74,8 @@ final class SimCardGroupsService implements SimCardGroupsContract
      * Returns the details regarding a specific SIM card group
      *
      * @param bool $includeIccids it includes a list of associated ICCIDs
+     *
+     * @return SimCardGroupGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -99,6 +104,8 @@ final class SimCardGroupsService implements SimCardGroupsContract
      *
      * @param DataLimit1 $dataLimit upper limit on the amount of data the SIM cards, within the group, can use
      * @param string $name a user friendly name for the SIM card group
+     *
+     * @return SimCardGroupUpdateResponse<HasRawResponse>
      */
     public function update(
         string $id,
@@ -131,6 +138,8 @@ final class SimCardGroupsService implements SimCardGroupsContract
      * @param string $filterWirelessBlocklistID a Wireless Blocklist ID associated with the group
      * @param int $pageNumber the page number to load
      * @param int $pageSize the size of the page
+     *
+     * @return SimCardGroupListResponse<HasRawResponse>
      */
     public function list(
         $filterName = omit,
@@ -165,6 +174,8 @@ final class SimCardGroupsService implements SimCardGroupsContract
      * @api
      *
      * Permanently deletes a SIM card group
+     *
+     * @return SimCardGroupDeleteResponse<HasRawResponse>
      */
     public function delete(
         string $id,

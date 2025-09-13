@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NotificationEventConditions\NotificationEventConditionListParams\Filter\ChannelTypeID\Eq;
 
 /**
- * @phpstan-type channel_type_id = array{eq?: value-of<Eq>|null}
+ * @phpstan-type channel_type_id = array{eq?: value-of<Eq>}
  */
 final class ChannelTypeID implements BaseModel
 {

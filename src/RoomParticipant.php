@@ -10,13 +10,13 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type room_participant = array{
- *   id?: string|null,
- *   context?: string|null,
- *   joinedAt?: \DateTimeInterface|null,
- *   leftAt?: \DateTimeInterface|null,
- *   recordType?: string|null,
- *   sessionID?: string|null,
- *   updatedAt?: \DateTimeInterface|null,
+ *   id?: string,
+ *   context?: string,
+ *   joinedAt?: \DateTimeInterface,
+ *   leftAt?: \DateTimeInterface,
+ *   recordType?: string,
+ *   sessionID?: string,
+ *   updatedAt?: \DateTimeInterface,
  * }
  */
 final class RoomParticipant implements BaseModel

@@ -13,10 +13,10 @@ use Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthGetResponse\Data\Hea
 
 /**
  * @phpstan-type data_alias = array{
- *   globalIP?: GlobalIP|null,
- *   globalIPAssignment?: GlobalIPAssignment|null,
- *   health?: Health|null,
- *   timestamp?: \DateTimeInterface|null,
+ *   globalIP?: GlobalIP,
+ *   globalIPAssignment?: GlobalIPAssignment,
+ *   health?: Health,
+ *   timestamp?: \DateTimeInterface,
  * }
  */
 final class Data implements BaseModel

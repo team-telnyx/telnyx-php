@@ -9,7 +9,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type detail_records_report_new_response = array{data?: WdrReport|null}
+ * @phpstan-type detail_records_report_new_response = array{data?: WdrReport}
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class DetailRecordsReportNewResponse implements BaseModel
 {

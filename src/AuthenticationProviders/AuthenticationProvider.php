@@ -11,15 +11,15 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type authentication_provider = array{
- *   id?: string|null,
- *   active?: bool|null,
- *   createdAt?: \DateTimeInterface|null,
- *   name?: string|null,
- *   organizationID?: string|null,
- *   recordType?: string|null,
- *   settings?: Settings|null,
- *   shortName?: string|null,
- *   updatedAt?: \DateTimeInterface|null,
+ *   id?: string,
+ *   active?: bool,
+ *   createdAt?: \DateTimeInterface,
+ *   name?: string,
+ *   organizationID?: string,
+ *   recordType?: string,
+ *   settings?: Settings,
+ *   shortName?: string,
+ *   updatedAt?: \DateTimeInterface,
  * }
  */
 final class AuthenticationProvider implements BaseModel

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\CountryCoverage\CountryCoverageGetCountryResponse;
 use Telnyx\CountryCoverage\CountryCoverageGetResponse;
 use Telnyx\RequestOptions;
@@ -21,6 +22,8 @@ final class CountryCoverageService implements CountryCoverageContract
      * @api
      *
      * Get country coverage
+     *
+     * @return CountryCoverageGetResponse<HasRawResponse>
      */
     public function retrieve(
         ?RequestOptions $requestOptions = null
@@ -38,6 +41,8 @@ final class CountryCoverageService implements CountryCoverageContract
      * @api
      *
      * Get coverage for a specific country
+     *
+     * @return CountryCoverageGetCountryResponse<HasRawResponse>
      */
     public function retrieveCountry(
         string $countryCode,

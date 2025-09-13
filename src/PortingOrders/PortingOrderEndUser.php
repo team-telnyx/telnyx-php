@@ -10,8 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type porting_order_end_user = array{
- *   admin?: PortingOrderEndUserAdmin|null,
- *   location?: PortingOrderEndUserLocation|null,
+ *   admin?: PortingOrderEndUserAdmin, location?: PortingOrderEndUserLocation
  * }
  */
 final class PortingOrderEndUser implements BaseModel

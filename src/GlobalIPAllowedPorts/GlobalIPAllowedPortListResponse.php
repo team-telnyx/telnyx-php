@@ -10,9 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\GlobalIPAllowedPorts\GlobalIPAllowedPortListResponse\Data;
 
 /**
- * @phpstan-type global_ip_allowed_port_list_response = array{
- *   data?: list<Data>|null
- * }
+ * @phpstan-type global_ip_allowed_port_list_response = array{data?: list<Data>}
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class GlobalIPAllowedPortListResponse implements BaseModel
 {

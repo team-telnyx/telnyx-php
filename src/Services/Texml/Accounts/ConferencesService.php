@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Texml\Accounts;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\Accounts\ConferencesContract;
 use Telnyx\Services\Texml\Accounts\Conferences\ParticipantsService;
@@ -35,7 +36,7 @@ final class ConferencesService implements ConferencesContract
      */
     public function __construct(private Client $client)
     {
-        $this->participants = new ParticipantsService($this->client);
+        $this->participants = new ParticipantsService($client);
     }
 
     /**
@@ -44,6 +45,8 @@ final class ConferencesService implements ConferencesContract
      * Returns a conference resource.
      *
      * @param string $accountSid
+     *
+     * @return ConferenceGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $conferenceSid,
@@ -77,6 +80,8 @@ final class ConferencesService implements ConferencesContract
      * @param AnnounceMethod|value-of<AnnounceMethod> $announceMethod The HTTP method used to call the `AnnounceUrl`. Defaults to `POST`.
      * @param string $announceURL The URL we should call to announce something into the conference. The URL may return an MP3 file, a WAV file, or a TwiML document that contains `<Play>`, `<Say>`, `<Pause>`, or `<Redirect>` verbs.
      * @param string $status The new status of the resource. Specifying `completed` will end the conference and hang up all participants.
+     *
+     * @return ConferenceUpdateResponse<HasRawResponse>
      */
     public function update(
         string $conferenceSid,
@@ -123,6 +128,8 @@ final class ConferencesService implements ConferencesContract
      * @param int $pageSize The number of records to be displayed on a page
      * @param string $pageToken used to request the next page of results
      * @param Status|value-of<Status> $status filters conferences by status
+     *
+     * @return ConferenceGetConferencesResponse<HasRawResponse>
      */
     public function retrieveConferences(
         string $accountSid,
@@ -164,6 +171,8 @@ final class ConferencesService implements ConferencesContract
      * Lists conference recordings
      *
      * @param string $accountSid
+     *
+     * @return ConferenceGetRecordingsResponse<HasRawResponse>
      */
     public function retrieveRecordings(
         string $conferenceSid,
@@ -196,6 +205,8 @@ final class ConferencesService implements ConferencesContract
      * Returns recordings for a conference identified by conference_sid.
      *
      * @param string $accountSid
+     *
+     * @return ConferenceGetRecordingsJsonResponse<HasRawResponse>
      */
     public function retrieveRecordingsJson(
         string $conferenceSid,

@@ -11,10 +11,10 @@ use Telnyx\HostedNumber\Status;
 
 /**
  * @phpstan-type hosted_number = array{
- *   id?: string|null,
- *   phoneNumber?: string|null,
- *   recordType?: string|null,
- *   status?: value-of<Status>|null,
+ *   id?: string,
+ *   phoneNumber?: string,
+ *   recordType?: string,
+ *   status?: value-of<Status>,
  * }
  */
 final class HostedNumber implements BaseModel

@@ -10,10 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type metadata_alias = array{
- *   pageNumber?: float|null,
- *   pageSize?: float|null,
- *   totalPages?: float|null,
- *   totalResults?: float|null,
+ *   pageNumber?: float, pageSize?: float, totalPages?: float, totalResults?: float
  * }
  */
 final class Metadata implements BaseModel

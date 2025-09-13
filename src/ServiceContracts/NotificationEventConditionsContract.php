@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\NotificationEventConditions\NotificationEventConditionListParams\Filter;
 use Telnyx\NotificationEventConditions\NotificationEventConditionListParams\Page;
 use Telnyx\NotificationEventConditions\NotificationEventConditionListResponse;
@@ -18,6 +19,8 @@ interface NotificationEventConditionsContract
      *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[associated_record_type][eq], filter[channel_type_id][eq], filter[notification_profile_id][eq], filter[notification_channel][eq], filter[notification_event_condition_id][eq], filter[status][eq]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     *
+     * @return NotificationEventConditionListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,

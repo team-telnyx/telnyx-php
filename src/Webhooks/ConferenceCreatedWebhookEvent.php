@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\ConferenceCreatedWebhookEvent\Data;
 
 /**
- * @phpstan-type conference_created_webhook_event = array{data?: Data|null}
+ * @phpstan-type conference_created_webhook_event = array{data?: Data}
  */
 final class ConferenceCreatedWebhookEvent implements BaseModel
 {

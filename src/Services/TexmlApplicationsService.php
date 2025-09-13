@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\CredentialConnections\DtmfType;
 use Telnyx\RequestOptions;
@@ -57,6 +58,8 @@ final class TexmlApplicationsService implements TexmlApplicationsContract
      * @param list<string> $tags tags associated with the Texml Application
      * @param string $voiceFallbackURL URL to which Telnyx will deliver your XML Translator webhooks if we get an error response from your voice_url
      * @param VoiceMethod|value-of<VoiceMethod> $voiceMethod HTTP request method Telnyx will use to interact with your XML Translator webhooks. Either 'get' or 'post'.
+     *
+     * @return TexmlApplicationNewResponse<HasRawResponse>
      */
     public function create(
         $friendlyName,
@@ -109,6 +112,8 @@ final class TexmlApplicationsService implements TexmlApplicationsContract
      * @api
      *
      * Retrieves the details of an existing TeXML Application.
+     *
+     * @return TexmlApplicationGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -142,6 +147,8 @@ final class TexmlApplicationsService implements TexmlApplicationsContract
      * @param list<string> $tags tags associated with the Texml Application
      * @param string $voiceFallbackURL URL to which Telnyx will deliver your XML Translator webhooks if we get an error response from your voice_url
      * @param VoiceMethod1|value-of<VoiceMethod1> $voiceMethod HTTP request method Telnyx will use to interact with your XML Translator webhooks. Either 'get' or 'post'.
+     *
+     * @return TexmlApplicationUpdateResponse<HasRawResponse>
      */
     public function update(
         string $id,
@@ -210,6 +217,8 @@ final class TexmlApplicationsService implements TexmlApplicationsContract
      *     <code>friendly_name</code> field in descending order.
      *   </li>
      * </ul> <br/> If not given, results are sorted by <code>created_at</code> in descending order.
+     *
+     * @return TexmlApplicationListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,
@@ -236,6 +245,8 @@ final class TexmlApplicationsService implements TexmlApplicationsContract
      * @api
      *
      * Deletes a TeXML Application.
+     *
+     * @return TexmlApplicationDeleteResponse<HasRawResponse>
      */
     public function delete(
         string $id,

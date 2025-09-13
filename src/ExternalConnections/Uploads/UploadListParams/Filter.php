@@ -16,10 +16,10 @@ use Telnyx\ExternalConnections\Uploads\UploadListParams\Filter\Status;
  * Filter parameter for uploads (deepObject style). Supports filtering by status, civic_address_id, location_id, and phone_number with eq/contains operations.
  *
  * @phpstan-type filter_alias = array{
- *   civicAddressID?: CivicAddressID|null,
- *   locationID?: LocationID|null,
- *   phoneNumber?: PhoneNumber|null,
- *   status?: Status|null,
+ *   civicAddressID?: CivicAddressID,
+ *   locationID?: LocationID,
+ *   phoneNumber?: PhoneNumber,
+ *   status?: Status,
  * }
  */
 final class Filter implements BaseModel

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressCreateParams\CountryCode;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressDeleteResponse;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressGetResponse;
@@ -31,6 +32,8 @@ interface DynamicEmergencyAddressesContract
      * @param string $streetPostDirectional
      * @param string $streetPreDirectional
      * @param string $streetSuffix
+     *
+     * @return DynamicEmergencyAddressNewResponse<HasRawResponse>
      */
     public function create(
         $administrativeArea,
@@ -49,6 +52,8 @@ interface DynamicEmergencyAddressesContract
 
     /**
      * @api
+     *
+     * @return DynamicEmergencyAddressGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -60,6 +65,8 @@ interface DynamicEmergencyAddressesContract
      *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[status], filter[country_code]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     *
+     * @return DynamicEmergencyAddressListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,
@@ -69,6 +76,8 @@ interface DynamicEmergencyAddressesContract
 
     /**
      * @api
+     *
+     * @return DynamicEmergencyAddressDeleteResponse<HasRawResponse>
      */
     public function delete(
         string $id,

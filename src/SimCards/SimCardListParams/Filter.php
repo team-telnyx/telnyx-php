@@ -13,9 +13,7 @@ use Telnyx\SimCards\SimCardListParams\Filter\Status;
  * Consolidated filter parameter for SIM cards (deepObject style). Originally: filter[tags], filter[iccid], filter[status].
  *
  * @phpstan-type filter_alias = array{
- *   iccid?: string|null,
- *   status?: list<value-of<Status>>|null,
- *   tags?: list<string>|null,
+ *   iccid?: string, status?: list<value-of<Status>>, tags?: list<string>
  * }
  */
 final class Filter implements BaseModel

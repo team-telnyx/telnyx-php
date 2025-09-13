@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Messages\MessageCancelScheduledResponse;
 use Telnyx\Messages\MessageGetResponse;
 use Telnyx\Messages\MessageScheduleParams;
@@ -42,13 +43,15 @@ final class MessagesService implements MessagesContract
      */
     public function __construct(private Client $client)
     {
-        $this->rcs = new RcsService($this->client);
+        $this->rcs = new RcsService($client);
     }
 
     /**
      * @api
      *
      * Note: This API endpoint can only retrieve messages that are no older than 10 days since their creation. If you require messages older than this, please generate an [MDR report.](https://developers.telnyx.com/api/v1/mission-control/add-mdr-request)
+     *
+     * @return MessageGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -67,6 +70,8 @@ final class MessagesService implements MessagesContract
      * @api
      *
      * Cancel a scheduled message that has not yet been sent. Only messages with `status=scheduled` and `send_at` more than a minute from now can be cancelled.
+     *
+     * @return MessageCancelScheduledResponse<HasRawResponse>
      */
     public function cancelScheduled(
         string $id,
@@ -110,6 +115,8 @@ final class MessagesService implements MessagesContract
      * @param bool $useProfileWebhooks If the profile this number is associated with has webhooks, use them for delivery notifications. If webhooks are also specified on the message itself, they will be attempted first, then those on the profile.
      * @param string $webhookFailoverURL the failover URL where webhooks related to this message will be sent if sending to the primary URL fails
      * @param string $webhookURL the URL where webhooks related to this message will be sent
+     *
+     * @return MessageScheduleResponse<HasRawResponse>
      */
     public function schedule(
         $to,
@@ -183,6 +190,8 @@ final class MessagesService implements MessagesContract
      * @param bool $useProfileWebhooks If the profile this number is associated with has webhooks, use them for delivery notifications. If webhooks are also specified on the message itself, they will be attempted first, then those on the profile.
      * @param string $webhookFailoverURL the failover URL where webhooks related to this message will be sent if sending to the primary URL fails
      * @param string $webhookURL the URL where webhooks related to this message will be sent
+     *
+     * @return MessageSendResponse<HasRawResponse>
      */
     public function send(
         $to,
@@ -240,6 +249,8 @@ final class MessagesService implements MessagesContract
      * @param bool $useProfileWebhooks If the profile this number is associated with has webhooks, use them for delivery notifications. If webhooks are also specified on the message itself, they will be attempted first, then those on the profile.
      * @param string $webhookFailoverURL the failover URL where webhooks related to this message will be sent if sending to the primary URL fails
      * @param string $webhookURL the URL where webhooks related to this message will be sent
+     *
+     * @return MessageSendGroupMmsResponse<HasRawResponse>
      */
     public function sendGroupMms(
         $from,
@@ -295,6 +306,8 @@ final class MessagesService implements MessagesContract
      * @param bool $useProfileWebhooks If the profile this number is associated with has webhooks, use them for delivery notifications. If webhooks are also specified on the message itself, they will be attempted first, then those on the profile.
      * @param string $webhookFailoverURL the failover URL where webhooks related to this message will be sent if sending to the primary URL fails
      * @param string $webhookURL the URL where webhooks related to this message will be sent
+     *
+     * @return MessageSendLongCodeResponse<HasRawResponse>
      */
     public function sendLongCode(
         $from,
@@ -354,6 +367,8 @@ final class MessagesService implements MessagesContract
      * @param bool $useProfileWebhooks If the profile this number is associated with has webhooks, use them for delivery notifications. If webhooks are also specified on the message itself, they will be attempted first, then those on the profile.
      * @param string $webhookFailoverURL the failover URL where webhooks related to this message will be sent if sending to the primary URL fails
      * @param string $webhookURL the URL where webhooks related to this message will be sent
+     *
+     * @return MessageSendNumberPoolResponse<HasRawResponse>
      */
     public function sendNumberPool(
         $messagingProfileID,
@@ -413,6 +428,8 @@ final class MessagesService implements MessagesContract
      * @param bool $useProfileWebhooks If the profile this number is associated with has webhooks, use them for delivery notifications. If webhooks are also specified on the message itself, they will be attempted first, then those on the profile.
      * @param string $webhookFailoverURL the failover URL where webhooks related to this message will be sent if sending to the primary URL fails
      * @param string $webhookURL the URL where webhooks related to this message will be sent
+     *
+     * @return MessageSendShortCodeResponse<HasRawResponse>
      */
     public function sendShortCode(
         $from,

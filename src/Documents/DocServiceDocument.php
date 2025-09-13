@@ -12,16 +12,16 @@ use Telnyx\Documents\DocServiceDocument\Status;
 
 /**
  * @phpstan-type doc_service_document = array{
- *   id?: string|null,
- *   contentType?: string|null,
- *   createdAt?: string|null,
- *   customerReference?: string|null,
- *   filename?: string|null,
- *   recordType?: string|null,
- *   sha256?: string|null,
- *   size?: Size|null,
- *   status?: value-of<Status>|null,
- *   updatedAt?: string|null,
+ *   id?: string,
+ *   contentType?: string,
+ *   createdAt?: string,
+ *   customerReference?: string,
+ *   filename?: string,
+ *   recordType?: string,
+ *   sha256?: string,
+ *   size?: Size,
+ *   status?: value-of<Status>,
+ *   updatedAt?: string,
  * }
  */
 final class DocServiceDocument implements BaseModel

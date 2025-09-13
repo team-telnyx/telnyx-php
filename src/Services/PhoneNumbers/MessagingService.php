@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\PhoneNumbers;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PhoneNumbers\Messaging\MessagingGetResponse;
 use Telnyx\PhoneNumbers\Messaging\MessagingListParams;
 use Telnyx\PhoneNumbers\Messaging\MessagingListParams\Page;
@@ -27,6 +28,8 @@ final class MessagingService implements MessagingContract
      * @api
      *
      * Retrieve a phone number with messaging settings
+     *
+     * @return MessagingGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -55,6 +58,8 @@ final class MessagingService implements MessagingContract
      * * Omit this field or set its value to `null` to keep the current value.
      * * Set this field to `""` to unassign the number from its messaging profile
      * * Set this field to a quoted UUID of a messaging profile to assign this number to that messaging profile
+     *
+     * @return MessagingUpdateResponse<HasRawResponse>
      */
     public function update(
         string $id,
@@ -86,6 +91,8 @@ final class MessagingService implements MessagingContract
      * List phone numbers with messaging settings
      *
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     *
+     * @return MessagingListResponse<HasRawResponse>
      */
     public function list(
         $page = omit,

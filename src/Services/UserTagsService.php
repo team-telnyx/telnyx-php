@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\UserTagsContract;
 use Telnyx\UserTags\UserTagListParams;
@@ -26,6 +27,8 @@ final class UserTagsService implements UserTagsContract
      * List all user tags.
      *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[starts_with]
+     *
+     * @return UserTagListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,

@@ -10,8 +10,12 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type sim_card_data_usage_notification_get_response = array{
- *   data?: SimCardDataUsageNotification|null
+ *   data?: SimCardDataUsageNotification
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class SimCardDataUsageNotificationGetResponse implements BaseModel
 {

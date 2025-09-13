@@ -20,10 +20,10 @@ use Telnyx\ManagedAccounts\ManagedAccount\RecordType;
  *   managerAccountID: string,
  *   recordType: value-of<RecordType>,
  *   updatedAt: string,
- *   balance?: ManagedAccountBalance|null,
- *   managedAccountAllowCustomPricing?: bool|null,
- *   organizationName?: string|null,
- *   rollupBilling?: bool|null,
+ *   balance?: ManagedAccountBalance,
+ *   managedAccountAllowCustomPricing?: bool,
+ *   organizationName?: string,
+ *   rollupBilling?: bool,
  * }
  */
 final class ManagedAccount implements BaseModel

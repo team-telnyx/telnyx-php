@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectCreateParams\CloudProvider;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectDeleteResponse;
@@ -36,6 +37,8 @@ interface VirtualCrossConnectsContract
      * @param string $secondaryCloudAccountID The identifier for your Virtual Private Cloud. The number will be different based upon your Cloud provider.<br /><br />This attribute is only necessary for GCE.
      * @param string $secondaryCloudIP The IP address assigned for your side of the Virtual Cross Connect.<br /><br />If none is provided, one will be generated for you.<br /><br />This value should be null for GCE as Google will only inform you of your assigned IP once the connection has been accepted.
      * @param string $secondaryTelnyxIP The IP address assigned to the Telnyx side of the Virtual Cross Connect.<br /><br />If none is provided, one will be generated for you.<br /><br />This value should be null for GCE as Google will only inform you of your assigned IP once the connection has been accepted.
+     *
+     * @return VirtualCrossConnectNewResponse<HasRawResponse>
      */
     public function create(
         $bgpAsn,
@@ -58,6 +61,8 @@ interface VirtualCrossConnectsContract
 
     /**
      * @api
+     *
+     * @return VirtualCrossConnectGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -73,6 +78,8 @@ interface VirtualCrossConnectsContract
      * @param string $secondaryCloudIP The IP address assigned for your side of the Virtual Cross Connect.<br /><br />If none is provided, one will be generated for you.<br /><br />This value can not be patched once the VXC has bene provisioned.
      * @param bool $secondaryEnabled Indicates whether the secondary circuit is enabled. Setting this to `false` will disable the circuit.
      * @param bool $secondaryRoutingAnnouncement whether the secondary BGP route is being announced
+     *
+     * @return VirtualCrossConnectUpdateResponse<HasRawResponse>
      */
     public function update(
         string $id,
@@ -90,6 +97,8 @@ interface VirtualCrossConnectsContract
      *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[network_id]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     *
+     * @return VirtualCrossConnectListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,
@@ -99,6 +108,8 @@ interface VirtualCrossConnectsContract
 
     /**
      * @api
+     *
+     * @return VirtualCrossConnectDeleteResponse<HasRawResponse>
      */
     public function delete(
         string $id,

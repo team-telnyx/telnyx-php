@@ -13,11 +13,11 @@ use Telnyx\Porting\Events\EventListResponse\Data\Payload\WebhookPortingOrderNewC
  * The comment that was added to the porting order.
  *
  * @phpstan-type comment_alias = array{
- *   id?: string|null,
- *   body?: string|null,
- *   insertedAt?: \DateTimeInterface|null,
- *   userID?: string|null,
- *   userType?: value-of<UserType>|null,
+ *   id?: string,
+ *   body?: string,
+ *   insertedAt?: \DateTimeInterface,
+ *   userID?: string,
+ *   userType?: value-of<UserType>,
  * }
  */
 final class Comment implements BaseModel

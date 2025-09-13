@@ -15,14 +15,14 @@ use Telnyx\WebhookDeliveries\WebhookDeliveryListResponse\Data\Webhook;
  * Record of all attempts to deliver a webhook.
  *
  * @phpstan-type data_alias = array{
- *   id?: string|null,
- *   attempts?: list<Attempt>|null,
- *   finishedAt?: \DateTimeInterface|null,
- *   recordType?: string|null,
- *   startedAt?: \DateTimeInterface|null,
- *   status?: value-of<Status>|null,
- *   userID?: string|null,
- *   webhook?: Webhook|null,
+ *   id?: string,
+ *   attempts?: list<Attempt>,
+ *   finishedAt?: \DateTimeInterface,
+ *   recordType?: string,
+ *   startedAt?: \DateTimeInterface,
+ *   status?: value-of<Status>,
+ *   userID?: string,
+ *   webhook?: Webhook,
  * }
  */
 final class Data implements BaseModel

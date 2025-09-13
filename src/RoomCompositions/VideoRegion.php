@@ -13,7 +13,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   height?: int|null,
  *   maxColumns?: int|null,
  *   maxRows?: int|null,
- *   videoSources?: list<string>|null,
+ *   videoSources?: list<string>,
  *   width?: int|null,
  *   xPos?: int|null,
  *   yPos?: int|null,

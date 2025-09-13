@@ -15,9 +15,7 @@ use Telnyx\Porting\Events\EventListResponse\Data\Payload\WebhookPortingOrderSpli
  * The webhook payload for the porting_order.split event.
  *
  * @phpstan-type webhook_porting_order_split_payload = array{
- *   from?: From|null,
- *   portingPhoneNumbers?: list<PortingPhoneNumber>|null,
- *   to?: To|null,
+ *   from?: From, portingPhoneNumbers?: list<PortingPhoneNumber>, to?: To
  * }
  */
 final class WebhookPortingOrderSplitPayload implements BaseModel

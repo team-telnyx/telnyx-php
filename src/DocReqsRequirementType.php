@@ -12,15 +12,15 @@ use Telnyx\DocReqsRequirementType\Type;
 
 /**
  * @phpstan-type doc_reqs_requirement_type = array{
- *   id?: string|null,
- *   acceptanceCriteria?: AcceptanceCriteria|null,
- *   createdAt?: string|null,
- *   description?: string|null,
- *   example?: string|null,
- *   name?: string|null,
- *   recordType?: string|null,
- *   type?: value-of<Type>|null,
- *   updatedAt?: string|null,
+ *   id?: string,
+ *   acceptanceCriteria?: AcceptanceCriteria,
+ *   createdAt?: string,
+ *   description?: string,
+ *   example?: string,
+ *   name?: string,
+ *   recordType?: string,
+ *   type?: value-of<Type>,
+ *   updatedAt?: string,
  * }
  */
 final class DocReqsRequirementType implements BaseModel

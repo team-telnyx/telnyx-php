@@ -9,13 +9,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type body_alias = array{
- *   globalIPID?: string|null, wireguardPeerID?: string|null
+ * @phpstan-type unnamed_type_with_intersection_parent38 = array{
+ *   globalIPID?: string, wireguardPeerID?: string
  * }
  */
 final class Body implements BaseModel
 {
-    /** @use SdkModel<body_alias> */
+    /** @use SdkModel<unnamed_type_with_intersection_parent38> */
     use SdkModel;
 
     #[Api('global_ip_id', optional: true)]

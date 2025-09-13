@@ -12,10 +12,10 @@ use Telnyx\Core\Contracts\BaseModel;
  * Date range filtering operations for fax creation timestamp.
  *
  * @phpstan-type created_at = array{
- *   gt?: \DateTimeInterface|null,
- *   gte?: \DateTimeInterface|null,
- *   lt?: \DateTimeInterface|null,
- *   lte?: \DateTimeInterface|null,
+ *   gt?: \DateTimeInterface,
+ *   gte?: \DateTimeInterface,
+ *   lt?: \DateTimeInterface,
+ *   lte?: \DateTimeInterface,
  * }
  */
 final class CreatedAt implements BaseModel

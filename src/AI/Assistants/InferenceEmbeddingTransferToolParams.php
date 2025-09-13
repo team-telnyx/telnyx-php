@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type inference_embedding_transfer_tool_params = array{
- *   from: string, targets: list<Target>, customHeaders?: list<CustomHeader>|null
+ *   from: string, targets: list<Target>, customHeaders?: list<CustomHeader>
  * }
  */
 final class InferenceEmbeddingTransferToolParams implements BaseModel

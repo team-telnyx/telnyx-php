@@ -10,9 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\CredentialConnections\Actions\ActionCheckRegistrationStatusResponse\Data;
 
 /**
- * @phpstan-type action_check_registration_status_response = array{
- *   data?: Data|null
- * }
+ * @phpstan-type action_check_registration_status_response = array{data?: Data}
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class ActionCheckRegistrationStatusResponse implements BaseModel
 {

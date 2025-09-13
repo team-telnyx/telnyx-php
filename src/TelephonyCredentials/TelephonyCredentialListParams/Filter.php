@@ -12,11 +12,11 @@ use Telnyx\Core\Contracts\BaseModel;
  * Consolidated filter parameter (deepObject style). Originally: filter[tag], filter[name], filter[status], filter[resource_id], filter[sip_username].
  *
  * @phpstan-type filter_alias = array{
- *   name?: string|null,
- *   resourceID?: string|null,
- *   sipUsername?: string|null,
- *   status?: string|null,
- *   tag?: string|null,
+ *   name?: string,
+ *   resourceID?: string,
+ *   sipUsername?: string,
+ *   status?: string,
+ *   tag?: string,
  * }
  */
 final class Filter implements BaseModel

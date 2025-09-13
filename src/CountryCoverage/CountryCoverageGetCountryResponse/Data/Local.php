@@ -10,11 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type local_alias = array{
- *   features?: list<string>|null,
- *   internationalSMS?: bool|null,
- *   p2p?: bool|null,
- *   quickship?: bool|null,
- *   reservable?: bool|null,
+ *   features?: list<string>,
+ *   internationalSMS?: bool,
+ *   p2p?: bool,
+ *   quickship?: bool,
+ *   reservable?: bool,
  * }
  */
 final class Local implements BaseModel

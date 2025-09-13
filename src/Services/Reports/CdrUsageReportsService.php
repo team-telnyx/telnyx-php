@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Reports;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Reports\CdrUsageReports\CdrUsageReportFetchSyncParams;
 use Telnyx\Reports\CdrUsageReports\CdrUsageReportFetchSyncParams\AggregationType;
 use Telnyx\Reports\CdrUsageReports\CdrUsageReportFetchSyncParams\ProductBreakdown;
@@ -31,6 +32,8 @@ final class CdrUsageReportsService implements CdrUsageReportsContract
      * @param list<float> $connections
      * @param \DateTimeInterface $endDate
      * @param \DateTimeInterface $startDate
+     *
+     * @return CdrUsageReportFetchSyncResponse<HasRawResponse>
      */
     public function fetchSync(
         $aggregationType,

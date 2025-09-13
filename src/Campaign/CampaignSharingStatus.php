@@ -10,11 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type campaign_sharing_status = array{
- *   downstreamCnpID?: string|null,
- *   sharedDate?: string|null,
- *   sharingStatus?: string|null,
- *   statusDate?: string|null,
- *   upstreamCnpID?: string|null,
+ *   downstreamCnpID?: string,
+ *   sharedDate?: string,
+ *   sharingStatus?: string,
+ *   statusDate?: string,
+ *   upstreamCnpID?: string,
  * }
  */
 final class CampaignSharingStatus implements BaseModel

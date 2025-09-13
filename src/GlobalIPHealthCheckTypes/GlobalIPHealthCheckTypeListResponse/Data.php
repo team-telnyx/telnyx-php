@@ -10,9 +10,9 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type data_alias = array{
- *   healthCheckParams?: array<string, mixed>|null,
- *   healthCheckType?: string|null,
- *   recordType?: string|null,
+ *   healthCheckParams?: array<string, mixed>,
+ *   healthCheckType?: string,
+ *   recordType?: string,
  * }
  */
 final class Data implements BaseModel

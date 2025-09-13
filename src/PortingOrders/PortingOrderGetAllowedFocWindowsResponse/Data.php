@@ -10,9 +10,9 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type data_alias = array{
- *   endedAt?: \DateTimeInterface|null,
- *   recordType?: string|null,
- *   startedAt?: \DateTimeInterface|null,
+ *   endedAt?: \DateTimeInterface,
+ *   recordType?: string,
+ *   startedAt?: \DateTimeInterface,
  * }
  */
 final class Data implements BaseModel

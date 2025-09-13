@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type inference_embedding_bucket_ids = array{
- *   bucketIDs: list<string>, maxNumResults?: int|null
+ *   bucketIDs: list<string>, maxNumResults?: int
  * }
  */
 final class InferenceEmbeddingBucketIDs implements BaseModel

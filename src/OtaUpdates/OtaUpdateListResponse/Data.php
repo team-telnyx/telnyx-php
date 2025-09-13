@@ -14,13 +14,13 @@ use Telnyx\OtaUpdates\OtaUpdateListResponse\Data\Type;
  * This object represents an Over the Air (OTA) update request. It allows tracking the current status of a operation that apply settings in a particular SIM card. <br/><br/>.
  *
  * @phpstan-type data_alias = array{
- *   id?: string|null,
- *   createdAt?: string|null,
- *   recordType?: string|null,
- *   simCardID?: string|null,
- *   status?: value-of<Status>|null,
- *   type?: value-of<Type>|null,
- *   updatedAt?: string|null,
+ *   id?: string,
+ *   createdAt?: string,
+ *   recordType?: string,
+ *   simCardID?: string,
+ *   status?: value-of<Status>,
+ *   type?: value-of<Type>,
+ *   updatedAt?: string,
  * }
  */
 final class Data implements BaseModel

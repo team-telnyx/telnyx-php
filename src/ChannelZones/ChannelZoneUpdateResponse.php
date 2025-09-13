@@ -16,9 +16,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *   countries: list<string>,
  *   name: string,
  *   recordType: value-of<RecordType>,
- *   createdAt?: string|null,
- *   updatedAt?: string|null,
+ *   createdAt?: string,
+ *   updatedAt?: string,
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class ChannelZoneUpdateResponse implements BaseModel
 {

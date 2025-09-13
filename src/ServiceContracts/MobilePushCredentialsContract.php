@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\MobilePushCredentials\MobilePushCredentialCreateParams\Type;
 use Telnyx\MobilePushCredentials\MobilePushCredentialListParams\Filter;
 use Telnyx\MobilePushCredentials\MobilePushCredentialListParams\Page;
@@ -24,6 +25,8 @@ interface MobilePushCredentialsContract
      * @param Type|value-of<Type> $type Type of mobile push credential. Should be <code>android</code> here
      * @param array<string,
      * mixed,> $projectAccountJsonFile Private key file in JSON format
+     *
+     * @return PushCredentialResponse<HasRawResponse>
      */
     public function create(
         $alias,
@@ -36,6 +39,8 @@ interface MobilePushCredentialsContract
 
     /**
      * @api
+     *
+     * @return PushCredentialResponse<HasRawResponse>
      */
     public function retrieve(
         string $pushCredentialID,
@@ -47,6 +52,8 @@ interface MobilePushCredentialsContract
      *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[type], filter[alias]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     *
+     * @return MobilePushCredentialListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,

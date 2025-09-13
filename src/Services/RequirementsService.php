@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\Requirements\RequirementGetResponse;
 use Telnyx\Requirements\RequirementListParams;
@@ -27,6 +28,8 @@ final class RequirementsService implements RequirementsContract
      * @api
      *
      * Retrieve a document requirement record
+     *
+     * @return RequirementGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -49,6 +52,8 @@ final class RequirementsService implements RequirementsContract
      * @param Filter $filter Consolidated filter parameter for requirements (deepObject style). Originally: filter[country_code], filter[phone_number_type], filter[action]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param list<Sort|value-of<Sort>> $sort Consolidated sort parameter for requirements (deepObject style). Originally: sort[]
+     *
+     * @return RequirementListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,

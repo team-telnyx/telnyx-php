@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * The new porting order that the phone numbers was moved to.
  *
- * @phpstan-type to_alias = array{id?: string|null}
+ * @phpstan-type to_alias = array{id?: string}
  */
 final class To implements BaseModel
 {

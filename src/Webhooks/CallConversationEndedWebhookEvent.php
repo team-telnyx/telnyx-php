@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\CallConversationEndedWebhookEvent\Data;
 
 /**
- * @phpstan-type call_conversation_ended_webhook_event = array{data?: Data|null}
+ * @phpstan-type call_conversation_ended_webhook_event = array{data?: Data}
  */
 final class CallConversationEndedWebhookEvent implements BaseModel
 {

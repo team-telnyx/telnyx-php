@@ -11,6 +11,7 @@ use Telnyx\AI\Assistants\Tests\TestSuites\Runs\RunListParams\Page;
 use Telnyx\AI\Assistants\Tests\TestSuites\Runs\RunTriggerParams;
 use Telnyx\Client;
 use Telnyx\Core\Conversion\ListOf;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\Tests\TestSuites\RunsContract;
 
@@ -31,6 +32,8 @@ final class RunsService implements RunsContract
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param string $status Filter runs by execution status (pending, running, completed, failed, timeout)
      * @param string $testSuiteRunID Filter runs by specific suite execution batch ID
+     *
+     * @return PaginatedTestRunList<HasRawResponse>
      */
     public function list(
         string $suiteName,

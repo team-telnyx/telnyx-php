@@ -20,6 +20,6 @@ final class MessagingTollfreeService implements MessagingTollfreeContract
      */
     public function __construct(private Client $client)
     {
-        $this->verification = new VerificationService($this->client);
+        $this->verification = new VerificationService($client);
     }
 }

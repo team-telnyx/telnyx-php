@@ -12,16 +12,16 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type data_alias = array{
- *   id?: string|null,
+ *   id?: string,
  *   alternateResourceID?: string|null,
- *   changeMadeBy?: value-of<ChangeMadeBy>|null,
- *   changeType?: string|null,
+ *   changeMadeBy?: value-of<ChangeMadeBy>,
+ *   changeType?: string,
  *   changes?: list<Change>|null,
- *   createdAt?: \DateTimeInterface|null,
- *   organizationID?: string|null,
- *   recordType?: string|null,
- *   resourceID?: string|null,
- *   userID?: string|null,
+ *   createdAt?: \DateTimeInterface,
+ *   organizationID?: string,
+ *   recordType?: string,
+ *   resourceID?: string,
+ *   userID?: string,
  * }
  */
 final class Data implements BaseModel

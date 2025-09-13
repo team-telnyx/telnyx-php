@@ -12,8 +12,12 @@ use Telnyx\WireguardInterfaces\WireguardInterfaceListResponse\Data;
 
 /**
  * @phpstan-type wireguard_interface_list_response = array{
- *   data?: list<Data>|null, meta?: PaginationMeta|null
+ *   data?: list<STAINLESS_FIXME_data_alias>, meta?: PaginationMeta
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class WireguardInterfaceListResponse implements BaseModel
 {

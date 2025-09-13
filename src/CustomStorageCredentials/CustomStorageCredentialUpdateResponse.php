@@ -15,6 +15,10 @@ use Telnyx\CustomStorageCredentials\CustomStorageCredentialUpdateResponse\Record
  *   data: CustomStorageConfiguration,
  *   recordType: value-of<RecordType>,
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class CustomStorageCredentialUpdateResponse implements BaseModel
 {

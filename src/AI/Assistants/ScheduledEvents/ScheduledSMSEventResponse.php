@@ -17,13 +17,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *   telnyxConversationChannel: value-of<ConversationChannelType>,
  *   telnyxEndUserTarget: string,
  *   text: string,
- *   conversationID?: string|null,
- *   conversationMetadata?: array<string, string|int|bool>|null,
- *   createdAt?: \DateTimeInterface|null,
- *   errors?: list<string>|null,
- *   retryCount?: int|null,
- *   scheduledEventID?: string|null,
- *   status?: value-of<EventStatus>|null,
+ *   conversationID?: string,
+ *   conversationMetadata?: array<string, string|int|bool>,
+ *   createdAt?: \DateTimeInterface,
+ *   errors?: list<string>,
+ *   retryCount?: int,
+ *   scheduledEventID?: string,
+ *   status?: value-of<EventStatus>,
  * }
  */
 final class ScheduledSMSEventResponse implements BaseModel

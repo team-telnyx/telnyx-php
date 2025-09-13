@@ -11,14 +11,14 @@ use Telnyx\Webhooks\CallAIGatherMessageHistoryUpdatedWebhookEvent\Data\Payload\M
 
 /**
  * @phpstan-type payload_alias = array{
- *   callControlID?: string|null,
- *   callLegID?: string|null,
- *   callSessionID?: string|null,
- *   clientState?: string|null,
- *   connectionID?: string|null,
- *   from?: string|null,
- *   messageHistory?: list<MessageHistory>|null,
- *   to?: string|null,
+ *   callControlID?: string,
+ *   callLegID?: string,
+ *   callSessionID?: string,
+ *   clientState?: string,
+ *   connectionID?: string,
+ *   from?: string,
+ *   messageHistory?: list<MessageHistory>,
+ *   to?: string,
  * }
  */
 final class Payload implements BaseModel

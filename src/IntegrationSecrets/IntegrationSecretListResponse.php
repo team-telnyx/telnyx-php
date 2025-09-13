@@ -13,6 +13,10 @@ use Telnyx\IntegrationSecrets\IntegrationSecretListResponse\Meta;
  * @phpstan-type integration_secret_list_response = array{
  *   data: list<IntegrationSecret>, meta: Meta
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class IntegrationSecretListResponse implements BaseModel
 {

@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type billing_group = array{
- *   id?: string|null,
- *   createdAt?: \DateTimeInterface|null,
+ *   id?: string,
+ *   createdAt?: \DateTimeInterface,
  *   deletedAt?: \DateTimeInterface|null,
- *   name?: string|null,
- *   organizationID?: string|null,
- *   recordType?: value-of<RecordType>|null,
- *   updatedAt?: \DateTimeInterface|null,
+ *   name?: string,
+ *   organizationID?: string,
+ *   recordType?: value-of<RecordType>,
+ *   updatedAt?: \DateTimeInterface,
  * }
  */
 final class BillingGroup implements BaseModel

@@ -11,10 +11,10 @@ use Telnyx\List\ListGetByZoneResponse\Data\Number;
 
 /**
  * @phpstan-type data_alias = array{
- *   numberOfChannels?: int|null,
- *   numbers?: list<Number>|null,
- *   zoneID?: string|null,
- *   zoneName?: string|null,
+ *   numberOfChannels?: int,
+ *   numbers?: list<Number>,
+ *   zoneID?: string,
+ *   zoneName?: string,
  * }
  */
 final class Data implements BaseModel

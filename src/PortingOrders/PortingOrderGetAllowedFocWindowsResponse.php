@@ -12,8 +12,12 @@ use Telnyx\PortingOrders\PortingOrderGetAllowedFocWindowsResponse\Data;
 
 /**
  * @phpstan-type porting_order_get_allowed_foc_windows_response = array{
- *   data?: list<Data>|null, meta?: PaginationMeta|null
+ *   data?: list<Data>, meta?: PaginationMeta
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class PortingOrderGetAllowedFocWindowsResponse implements BaseModel
 {

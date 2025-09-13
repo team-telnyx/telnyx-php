@@ -13,14 +13,14 @@ use Telnyx\PortingOrders\PhoneNumberBlocks\PortingPhoneNumberBlock\PhoneNumberTy
 
 /**
  * @phpstan-type porting_phone_number_block = array{
- *   id?: string|null,
- *   activationRanges?: list<ActivationRange>|null,
- *   countryCode?: string|null,
- *   createdAt?: \DateTimeInterface|null,
- *   phoneNumberRange?: PhoneNumberRange|null,
- *   phoneNumberType?: value-of<PhoneNumberType>|null,
- *   recordType?: string|null,
- *   updatedAt?: \DateTimeInterface|null,
+ *   id?: string,
+ *   activationRanges?: list<ActivationRange>,
+ *   countryCode?: string,
+ *   createdAt?: \DateTimeInterface,
+ *   phoneNumberRange?: PhoneNumberRange,
+ *   phoneNumberType?: value-of<PhoneNumberType>,
+ *   recordType?: string,
+ *   updatedAt?: \DateTimeInterface,
  * }
  */
 final class PortingPhoneNumberBlock implements BaseModel

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\PortingOrders;
 
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionCreateParams\ActivationRange;
 use Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionCreateParams\ExtensionRange;
 use Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionDeleteResponse;
@@ -24,6 +25,8 @@ interface PhoneNumberExtensionsContract
      * @param list<ActivationRange> $activationRanges Specifies the activation ranges for this porting phone number extension. The activation range must be within the extension range and should not overlap with other activation ranges.
      * @param ExtensionRange $extensionRange
      * @param string $portingPhoneNumberID identifies the porting phone number associated with this porting phone number extension
+     *
+     * @return PhoneNumberExtensionNewResponse<HasRawResponse>
      */
     public function create(
         string $portingOrderID,
@@ -39,6 +42,8 @@ interface PhoneNumberExtensionsContract
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[porting_phone_number_id]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param Sort $sort Consolidated sort parameter (deepObject style). Originally: sort[value]
+     *
+     * @return PhoneNumberExtensionListResponse<HasRawResponse>
      */
     public function list(
         string $portingOrderID,
@@ -52,6 +57,8 @@ interface PhoneNumberExtensionsContract
      * @api
      *
      * @param string $portingOrderID
+     *
+     * @return PhoneNumberExtensionDeleteResponse<HasRawResponse>
      */
     public function delete(
         string $id,

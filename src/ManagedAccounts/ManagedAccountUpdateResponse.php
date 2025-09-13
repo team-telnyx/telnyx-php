@@ -9,9 +9,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type managed_account_update_response = array{
- *   data?: ManagedAccount|null
- * }
+ * @phpstan-type managed_account_update_response = array{data?: ManagedAccount}
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class ManagedAccountUpdateResponse implements BaseModel
 {

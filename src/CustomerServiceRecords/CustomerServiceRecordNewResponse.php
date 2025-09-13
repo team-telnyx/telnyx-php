@@ -10,8 +10,12 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type customer_service_record_new_response = array{
- *   data?: CustomerServiceRecord|null
+ *   data?: CustomerServiceRecord
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class CustomerServiceRecordNewResponse implements BaseModel
 {

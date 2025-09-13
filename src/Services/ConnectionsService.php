@@ -14,6 +14,7 @@ use Telnyx\Connections\ConnectionListParams\Filter;
 use Telnyx\Connections\ConnectionListParams\Page;
 use Telnyx\Connections\ConnectionListParams\Sort;
 use Telnyx\Connections\ConnectionListResponse;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ConnectionsContract;
 
@@ -30,6 +31,8 @@ final class ConnectionsService implements ConnectionsContract
      * @api
      *
      * Retrieves the high-level details of an existing connection. To retrieve specific authentication information, use the endpoint for the specific connection type.
+     *
+     * @return ConnectionGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -63,6 +66,8 @@ final class ConnectionsService implements ConnectionsContract
      *     <code>connection_name</code> field in descending order.
      *   </li>
      * </ul> <br/> If not given, results are sorted by <code>created_at</code> in descending order.
+     *
+     * @return ConnectionListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,
@@ -91,6 +96,8 @@ final class ConnectionsService implements ConnectionsContract
      * Lists all active calls for given connection. Acceptable connections are either SIP connections with webhook_url or xml_request_url, call control or texml. Returned results are cursor paginated.
      *
      * @param Page1 $page Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number]
+     *
+     * @return ConnectionListActiveCallsResponse<HasRawResponse>
      */
     public function listActiveCalls(
         string $connectionID,

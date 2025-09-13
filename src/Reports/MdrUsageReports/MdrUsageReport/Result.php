@@ -10,20 +10,20 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type result_alias = array{
- *   carrierPassthroughFee?: string|null,
- *   connection?: string|null,
- *   cost?: string|null,
- *   currency?: string|null,
- *   delivered?: string|null,
- *   direction?: string|null,
- *   messageType?: string|null,
- *   parts?: string|null,
- *   product?: string|null,
- *   profileID?: string|null,
- *   received?: string|null,
- *   sent?: string|null,
- *   tags?: string|null,
- *   tnType?: string|null,
+ *   carrierPassthroughFee?: string,
+ *   connection?: string,
+ *   cost?: string,
+ *   currency?: string,
+ *   delivered?: string,
+ *   direction?: string,
+ *   messageType?: string,
+ *   parts?: string,
+ *   product?: string,
+ *   profileID?: string,
+ *   received?: string,
+ *   sent?: string,
+ *   tags?: string,
+ *   tnType?: string,
  * }
  */
 final class Result implements BaseModel

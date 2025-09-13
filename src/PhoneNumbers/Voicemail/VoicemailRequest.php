@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type voicemail_request = array{enabled?: bool|null, pin?: string|null}
+ * @phpstan-type voicemail_request = array{enabled?: bool, pin?: string}
  */
 final class VoicemailRequest implements BaseModel
 {

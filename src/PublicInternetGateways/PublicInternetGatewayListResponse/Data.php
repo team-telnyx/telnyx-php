@@ -10,16 +10,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayListResponse\Data\Region;
 
 /**
- * @phpstan-type data_alias = array{
- *   publicIP?: string|null,
- *   recordType?: string|null,
- *   region?: Region|null,
- *   regionCode?: string|null,
+ * @phpstan-type unnamed_type_with_intersection_parent22 = array{
+ *   publicIP?: string, recordType?: string, region?: Region, regionCode?: string
  * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<unnamed_type_with_intersection_parent22> */
     use SdkModel;
 
     /**

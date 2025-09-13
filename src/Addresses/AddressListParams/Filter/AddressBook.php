@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type address_book = array{eq?: string|null}
+ * @phpstan-type address_book = array{eq?: string}
  */
 final class AddressBook implements BaseModel
 {

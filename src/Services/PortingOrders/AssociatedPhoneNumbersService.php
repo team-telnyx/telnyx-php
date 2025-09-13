@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\PortingOrders;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberCreateParams;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberCreateParams\Action;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberCreateParams\PhoneNumberRange;
@@ -35,6 +36,8 @@ final class AssociatedPhoneNumbersService implements AssociatedPhoneNumbersContr
      *
      * @param Action|value-of<Action> $action specifies the action to take with this phone number during partial porting
      * @param PhoneNumberRange $phoneNumberRange
+     *
+     * @return AssociatedPhoneNumberNewResponse<HasRawResponse>
      */
     public function create(
         string $portingOrderID,
@@ -65,6 +68,8 @@ final class AssociatedPhoneNumbersService implements AssociatedPhoneNumbersContr
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[phone_number], filter[action]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param Sort $sort Consolidated sort parameter (deepObject style). Originally: sort[value]
+     *
+     * @return AssociatedPhoneNumberListResponse<HasRawResponse>
      */
     public function list(
         string $portingOrderID,
@@ -94,6 +99,8 @@ final class AssociatedPhoneNumbersService implements AssociatedPhoneNumbersContr
      * Deletes an associated phone number from a porting order.
      *
      * @param string $portingOrderID
+     *
+     * @return AssociatedPhoneNumberDeleteResponse<HasRawResponse>
      */
     public function delete(
         string $id,

@@ -18,7 +18,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   createdAt: \DateTimeInterface,
  *   isPublic: bool,
  *   name: string,
- *   slug?: string|null,
+ *   slug?: string,
  * }
  */
 final class Data implements BaseModel

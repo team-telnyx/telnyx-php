@@ -14,12 +14,12 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type data_alias = array{
- *   costInformation?: CostInformation|null,
- *   features?: list<Feature>|null,
- *   range?: int|null,
- *   recordType?: value-of<RecordType>|null,
- *   regionInformation?: list<RegionInformation>|null,
- *   startingNumber?: string|null,
+ *   costInformation?: CostInformation,
+ *   features?: list<Feature>,
+ *   range?: int,
+ *   recordType?: value-of<RecordType>,
+ *   regionInformation?: list<RegionInformation>,
+ *   startingNumber?: string,
  * }
  */
 final class Data implements BaseModel

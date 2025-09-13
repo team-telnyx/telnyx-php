@@ -13,10 +13,10 @@ use Telnyx\Webhooks\FaxSendingStartedWebhookEvent\RecordType;
 
 /**
  * @phpstan-type fax_sending_started_webhook_event = array{
- *   id?: string|null,
- *   eventType?: value-of<EventType>|null,
- *   payload?: Payload|null,
- *   recordType?: value-of<RecordType>|null,
+ *   id?: string,
+ *   eventType?: value-of<EventType>,
+ *   payload?: Payload,
+ *   recordType?: value-of<RecordType>,
  * }
  */
 final class FaxSendingStartedWebhookEvent implements BaseModel

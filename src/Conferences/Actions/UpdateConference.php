@@ -13,8 +13,8 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type update_conference = array{
  *   callControlID: string,
  *   supervisorRole: value-of<SupervisorRole>,
- *   commandID?: string|null,
- *   whisperCallControlIDs?: list<string>|null,
+ *   commandID?: string,
+ *   whisperCallControlIDs?: list<string>,
  * }
  */
 final class UpdateConference implements BaseModel

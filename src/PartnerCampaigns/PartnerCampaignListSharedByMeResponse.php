@@ -11,8 +11,12 @@ use Telnyx\PartnerCampaigns\PartnerCampaignListSharedByMeResponse\Record;
 
 /**
  * @phpstan-type partner_campaign_list_shared_by_me_response = array{
- *   page?: int|null, records?: list<Record>|null, totalRecords?: int|null
+ *   page?: int, records?: list<Record>, totalRecords?: int
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class PartnerCampaignListSharedByMeResponse implements BaseModel
 {

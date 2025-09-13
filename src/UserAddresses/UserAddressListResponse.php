@@ -11,8 +11,12 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type user_address_list_response = array{
- *   data?: list<UserAddress>|null, meta?: PaginationMeta|null
+ *   data?: list<UserAddress>, meta?: PaginationMeta
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class UserAddressListResponse implements BaseModel
 {

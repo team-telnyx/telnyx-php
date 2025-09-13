@@ -22,6 +22,7 @@ use Telnyx\AI\Assistants\Versions\VersionPromoteResponse;
 use Telnyx\AI\Assistants\Versions\VersionUpdateResponse;
 use Telnyx\AI\Assistants\VoiceSettings;
 use Telnyx\AI\Assistants\WebhookTool;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 
 use const Telnyx\Core\OMIT as omit;
@@ -33,6 +34,8 @@ interface VersionsContract
      *
      * @param string $assistantID
      * @param bool $includeMcpServers
+     *
+     * @return VersionGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $versionID,
@@ -62,6 +65,8 @@ interface VersionsContract
      * @param list<WebhookTool|RetrievalTool|HandoffTool|HangupTool|TransferTool|SipReferTool|DtmfTool> $tools The tools that the assistant can use. These may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables)
      * @param TranscriptionSettings $transcription
      * @param VoiceSettings $voiceSettings
+     *
+     * @return VersionUpdateResponse<HasRawResponse>
      */
     public function update(
         string $versionID,
@@ -87,6 +92,8 @@ interface VersionsContract
 
     /**
      * @api
+     *
+     * @return AssistantsList<HasRawResponse>
      */
     public function list(
         string $assistantID,
@@ -108,6 +115,8 @@ interface VersionsContract
      * @api
      *
      * @param string $assistantID
+     *
+     * @return VersionPromoteResponse<HasRawResponse>
      */
     public function promote(
         string $versionID,

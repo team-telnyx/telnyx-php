@@ -11,10 +11,10 @@ use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderCheckEligibilit
 
 /**
  * @phpstan-type phone_number = array{
- *   detail?: string|null,
- *   eligible?: bool|null,
- *   eligibleStatus?: value-of<EligibleStatus>|null,
- *   phoneNumber?: string|null,
+ *   detail?: string,
+ *   eligible?: bool,
+ *   eligibleStatus?: value-of<EligibleStatus>,
+ *   phoneNumber?: string,
  * }
  */
 final class PhoneNumber implements BaseModel

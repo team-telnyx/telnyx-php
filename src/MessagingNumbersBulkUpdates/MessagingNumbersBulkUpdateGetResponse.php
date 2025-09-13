@@ -10,9 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\MessagingNumbersBulkUpdates\MessagingNumbersBulkUpdateGetResponse\Data;
 
 /**
- * @phpstan-type messaging_numbers_bulk_update_get_response = array{
- *   data?: Data|null
- * }
+ * @phpstan-type messaging_numbers_bulk_update_get_response = array{data?: Data}
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class MessagingNumbersBulkUpdateGetResponse implements BaseModel
 {

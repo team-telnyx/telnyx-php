@@ -7,6 +7,7 @@ namespace Telnyx\Services\CampaignBuilder;
 use Telnyx\CampaignBuilder\Brand\BrandQualifyByUsecaseParams;
 use Telnyx\CampaignBuilder\Brand\BrandQualifyByUsecaseResponse;
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\CampaignBuilder\BrandContract;
 
@@ -23,6 +24,8 @@ final class BrandService implements BrandContract
      * This endpoint allows you to see whether or not the supplied brand is suitable for your desired campaign use case.
      *
      * @param string $brandID
+     *
+     * @return BrandQualifyByUsecaseResponse<HasRawResponse>
      */
     public function qualifyByUsecase(
         string $usecase,

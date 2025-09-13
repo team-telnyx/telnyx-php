@@ -10,10 +10,10 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type payload_alias = array{
- *   conferenceID?: string|null,
- *   connectionID?: string|null,
- *   creatorCallSessionID?: string|null,
- *   occurredAt?: \DateTimeInterface|null,
+ *   conferenceID?: string,
+ *   connectionID?: string,
+ *   creatorCallSessionID?: string,
+ *   occurredAt?: \DateTimeInterface,
  * }
  */
 final class Payload implements BaseModel

@@ -12,12 +12,12 @@ use Telnyx\Core\Contracts\BaseModel;
  * Specifies objective criteria for acceptance.
  *
  * @phpstan-type acceptance_criteria = array{
- *   acceptableCharacters?: string|null,
- *   acceptableValues?: list<string>|null,
- *   localityLimit?: string|null,
- *   maxLength?: int|null,
- *   minLength?: int|null,
- *   timeLimit?: string|null,
+ *   acceptableCharacters?: string,
+ *   acceptableValues?: list<string>,
+ *   localityLimit?: string,
+ *   maxLength?: int,
+ *   minLength?: int,
+ *   timeLimit?: string,
  * }
  */
 final class AcceptanceCriteria implements BaseModel

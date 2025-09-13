@@ -13,9 +13,9 @@ use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListP
  * Consolidated filter parameter (deepObject style). Originally: filter[porting_order.status][in][], filter[porting_phone_number][in][], filter[user_bundle_id][in][].
  *
  * @phpstan-type filter_alias = array{
- *   portingOrderStatus?: list<value-of<PortingOrderStatus>>|null,
- *   portingPhoneNumber?: list<string>|null,
- *   userBundleID?: list<string>|null,
+ *   portingOrderStatus?: list<value-of<PortingOrderStatus>>,
+ *   portingPhoneNumber?: list<string>,
+ *   userBundleID?: list<string>,
  * }
  */
 final class Filter implements BaseModel

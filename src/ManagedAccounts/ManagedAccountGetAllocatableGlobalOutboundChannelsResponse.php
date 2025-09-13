@@ -11,8 +11,12 @@ use Telnyx\ManagedAccounts\ManagedAccountGetAllocatableGlobalOutboundChannelsRes
 
 /**
  * @phpstan-type managed_account_get_allocatable_global_outbound_channels_response = array{
- *   data?: Data|null
+ *   data?: Data
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class ManagedAccountGetAllocatableGlobalOutboundChannelsResponse implements BaseModel
 {

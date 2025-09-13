@@ -12,11 +12,7 @@ use Telnyx\PhoneNumberBlocks\Jobs\Job\FailedOperation\Error\Source;
 
 /**
  * @phpstan-type error_alias = array{
- *   code: string,
- *   title: string,
- *   detail?: string|null,
- *   meta?: Meta|null,
- *   source?: Source|null,
+ *   code: string, title: string, detail?: string, meta?: Meta, source?: Source
  * }
  */
 final class Error implements BaseModel

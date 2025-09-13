@@ -15,9 +15,9 @@ use Telnyx\Documents\DocumentListParams\Filter\Filename;
  * Consolidated filter parameter for documents (deepObject style). Originally: filter[filename][contains], filter[customer_reference][eq], filter[customer_reference][in][], filter[created_at][gt], filter[created_at][lt].
  *
  * @phpstan-type filter_alias = array{
- *   createdAt?: CreatedAt|null,
- *   customerReference?: CustomerReference|null,
- *   filename?: Filename|null,
+ *   createdAt?: CreatedAt,
+ *   customerReference?: CustomerReference,
+ *   filename?: Filename,
  * }
  */
 final class Filter implements BaseModel

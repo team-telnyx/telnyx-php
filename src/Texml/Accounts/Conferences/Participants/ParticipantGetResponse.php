@@ -11,21 +11,25 @@ use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantGetResponse\Status
 
 /**
  * @phpstan-type participant_get_response = array{
- *   accountSid?: string|null,
- *   apiVersion?: string|null,
- *   callSid?: string|null,
- *   callSidLegacy?: string|null,
- *   coaching?: bool|null,
- *   coachingCallSid?: string|null,
- *   coachingCallSidLegacy?: string|null,
- *   dateCreated?: string|null,
- *   dateUpdated?: string|null,
- *   endConferenceOnExit?: bool|null,
- *   hold?: bool|null,
- *   muted?: bool|null,
- *   status?: value-of<Status>|null,
- *   uri?: string|null,
+ *   accountSid?: string,
+ *   apiVersion?: string,
+ *   callSid?: string,
+ *   callSidLegacy?: string,
+ *   coaching?: bool,
+ *   coachingCallSid?: string,
+ *   coachingCallSidLegacy?: string,
+ *   dateCreated?: string,
+ *   dateUpdated?: string,
+ *   endConferenceOnExit?: bool,
+ *   hold?: bool,
+ *   muted?: bool,
+ *   status?: value-of<Status>,
+ *   uri?: string,
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class ParticipantGetResponse implements BaseModel
 {

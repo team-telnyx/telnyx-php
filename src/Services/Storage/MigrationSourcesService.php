@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Storage;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Storage\MigrationSourcesContract;
 use Telnyx\Storage\MigrationSources\MigrationSourceCreateParams;
@@ -33,6 +34,8 @@ final class MigrationSourcesService implements MigrationSourcesContract
      * @param Provider|value-of<Provider> $provider Cloud provider from which to migrate data. Use 'telnyx' if you want to migrate data from one Telnyx bucket to another.
      * @param ProviderAuth $providerAuth
      * @param string $sourceRegion for intra-Telnyx buckets migration, specify the source bucket region in this field
+     *
+     * @return MigrationSourceNewResponse<HasRawResponse>
      */
     public function create(
         $bucketName,
@@ -65,6 +68,8 @@ final class MigrationSourcesService implements MigrationSourcesContract
      * @api
      *
      * Get a Migration Source
+     *
+     * @return MigrationSourceGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -83,6 +88,8 @@ final class MigrationSourcesService implements MigrationSourcesContract
      * @api
      *
      * List all Migration Sources
+     *
+     * @return MigrationSourceListResponse<HasRawResponse>
      */
     public function list(
         ?RequestOptions $requestOptions = null
@@ -100,6 +107,8 @@ final class MigrationSourcesService implements MigrationSourcesContract
      * @api
      *
      * Delete a Migration Source
+     *
+     * @return MigrationSourceDeleteResponse<HasRawResponse>
      */
     public function delete(
         string $id,

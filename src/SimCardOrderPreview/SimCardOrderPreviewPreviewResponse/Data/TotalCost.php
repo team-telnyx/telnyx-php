@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type total_cost = array{amount?: string|null, currency?: string|null}
+ * @phpstan-type total_cost = array{amount?: string, currency?: string}
  */
 final class TotalCost implements BaseModel
 {

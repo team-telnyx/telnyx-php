@@ -12,12 +12,12 @@ use Telnyx\ShortCode\RecordType;
 /**
  * @phpstan-type short_code = array{
  *   messagingProfileID: string|null,
- *   id?: string|null,
- *   countryCode?: string|null,
- *   createdAt?: \DateTimeInterface|null,
- *   recordType?: value-of<RecordType>|null,
- *   shortCode?: string|null,
- *   updatedAt?: \DateTimeInterface|null,
+ *   id?: string,
+ *   countryCode?: string,
+ *   createdAt?: \DateTimeInterface,
+ *   recordType?: value-of<RecordType>,
+ *   shortCode?: string,
+ *   updatedAt?: \DateTimeInterface,
  * }
  */
 final class ShortCode implements BaseModel

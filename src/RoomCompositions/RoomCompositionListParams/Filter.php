@@ -14,9 +14,7 @@ use Telnyx\RoomCompositions\RoomCompositionListParams\Filter\Status;
  * Consolidated filter parameter (deepObject style). Originally: filter[date_created_at][eq], filter[date_created_at][gte], filter[date_created_at][lte], filter[session_id], filter[status].
  *
  * @phpstan-type filter_alias = array{
- *   dateCreatedAt?: DateCreatedAt|null,
- *   sessionID?: string|null,
- *   status?: value-of<Status>|null,
+ *   dateCreatedAt?: DateCreatedAt, sessionID?: string, status?: value-of<Status>
  * }
  */
 final class Filter implements BaseModel

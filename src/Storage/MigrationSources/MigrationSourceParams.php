@@ -15,8 +15,8 @@ use Telnyx\Storage\MigrationSources\MigrationSourceParams\ProviderAuth;
  *   bucketName: string,
  *   provider: value-of<Provider>,
  *   providerAuth: ProviderAuth,
- *   id?: string|null,
- *   sourceRegion?: string|null,
+ *   id?: string,
+ *   sourceRegion?: string,
  * }
  */
 final class MigrationSourceParams implements BaseModel

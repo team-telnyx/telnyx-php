@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RecordingTranscriptions\RecordingTranscriptionDeleteResponse;
 use Telnyx\RecordingTranscriptions\RecordingTranscriptionGetResponse;
 use Telnyx\RecordingTranscriptions\RecordingTranscriptionListResponse;
@@ -22,6 +23,8 @@ final class RecordingTranscriptionsService implements RecordingTranscriptionsCon
      * @api
      *
      * Retrieves the details of an existing recording transcription.
+     *
+     * @return RecordingTranscriptionGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $recordingTranscriptionID,
@@ -40,6 +43,8 @@ final class RecordingTranscriptionsService implements RecordingTranscriptionsCon
      * @api
      *
      * Returns a list of your recording transcriptions.
+     *
+     * @return RecordingTranscriptionListResponse<HasRawResponse>
      */
     public function list(
         ?RequestOptions $requestOptions = null
@@ -57,6 +62,8 @@ final class RecordingTranscriptionsService implements RecordingTranscriptionsCon
      * @api
      *
      * Permanently deletes a recording transcription.
+     *
+     * @return RecordingTranscriptionDeleteResponse<HasRawResponse>
      */
     public function delete(
         string $recordingTranscriptionID,

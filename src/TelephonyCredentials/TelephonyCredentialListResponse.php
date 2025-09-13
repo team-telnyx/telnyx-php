@@ -11,8 +11,12 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type telephony_credential_list_response = array{
- *   data?: list<TelephonyCredential>|null, meta?: PaginationMeta|null
+ *   data?: list<TelephonyCredential>, meta?: PaginationMeta
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class TelephonyCredentialListResponse implements BaseModel
 {

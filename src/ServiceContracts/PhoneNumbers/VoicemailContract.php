@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\PhoneNumbers;
 
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PhoneNumbers\Voicemail\VoicemailGetResponse;
 use Telnyx\PhoneNumbers\Voicemail\VoicemailNewResponse;
 use Telnyx\PhoneNumbers\Voicemail\VoicemailUpdateResponse;
@@ -18,6 +19,8 @@ interface VoicemailContract
      *
      * @param bool $enabled whether voicemail is enabled
      * @param string $pin The pin used for voicemail
+     *
+     * @return VoicemailNewResponse<HasRawResponse>
      */
     public function create(
         string $phoneNumberID,
@@ -28,6 +31,8 @@ interface VoicemailContract
 
     /**
      * @api
+     *
+     * @return VoicemailGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $phoneNumberID,
@@ -39,6 +44,8 @@ interface VoicemailContract
      *
      * @param bool $enabled whether voicemail is enabled
      * @param string $pin The pin used for voicemail
+     *
+     * @return VoicemailUpdateResponse<HasRawResponse>
      */
     public function update(
         string $phoneNumberID,

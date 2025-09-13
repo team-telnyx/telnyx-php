@@ -7,6 +7,7 @@ namespace Telnyx\Services\Campaign;
 use Telnyx\Campaign\Usecase\UsecaseGetCostParams;
 use Telnyx\Campaign\Usecase\UsecaseGetCostResponse;
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Campaign\UsecaseContract;
 
@@ -23,6 +24,8 @@ final class UsecaseService implements UsecaseContract
      * Get Campaign Cost
      *
      * @param string $usecase
+     *
+     * @return UsecaseGetCostResponse<HasRawResponse>
      */
     public function getCost(
         $usecase,

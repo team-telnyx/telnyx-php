@@ -12,7 +12,7 @@ use Telnyx\Messsages\RcsAgentMessage\ContentMessage\RichCard\StandaloneCard;
 
 /**
  * @phpstan-type rich_card = array{
- *   carouselCard?: CarouselCard|null, standaloneCard?: StandaloneCard|null
+ *   carouselCard?: CarouselCard, standaloneCard?: StandaloneCard
  * }
  */
 final class RichCard implements BaseModel

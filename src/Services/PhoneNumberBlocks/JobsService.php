@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\PhoneNumberBlocks;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PhoneNumberBlocks\Jobs\JobDeletePhoneNumberBlockParams;
 use Telnyx\PhoneNumberBlocks\Jobs\JobDeletePhoneNumberBlockResponse;
 use Telnyx\PhoneNumberBlocks\Jobs\JobGetResponse;
@@ -29,6 +30,8 @@ final class JobsService implements JobsContract
      * @api
      *
      * Retrieves a phone number blocks job
+     *
+     * @return JobGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -51,6 +54,8 @@ final class JobsService implements JobsContract
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[type], filter[status]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param Sort|value-of<Sort> $sort Specifies the sort order for results. If not given, results are sorted by created_at in descending order.
+     *
+     * @return JobListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,
@@ -79,6 +84,8 @@ final class JobsService implements JobsContract
      * Creates a new background job to delete all the phone numbers associated with the given block. We will only consider the phone number block as deleted after all phone numbers associated with it are removed, so multiple executions of this job may be necessary in case some of the phone numbers present errors during the deletion process.
      *
      * @param string $phoneNumberBlockID
+     *
+     * @return JobDeletePhoneNumberBlockResponse<HasRawResponse>
      */
     public function deletePhoneNumberBlock(
         $phoneNumberBlockID,

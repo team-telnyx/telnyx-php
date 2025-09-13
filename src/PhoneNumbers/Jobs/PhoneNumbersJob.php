@@ -16,17 +16,17 @@ use Telnyx\PhoneNumbers\Jobs\PhoneNumbersJob\Type;
 
 /**
  * @phpstan-type phone_numbers_job = array{
- *   id?: string|null,
- *   createdAt?: string|null,
- *   etc?: \DateTimeInterface|null,
- *   failedOperations?: list<FailedOperation>|null,
- *   pendingOperations?: list<PendingOperation>|null,
- *   phoneNumbers?: list<PhoneNumber>|null,
- *   recordType?: string|null,
- *   status?: value-of<Status>|null,
- *   successfulOperations?: list<SuccessfulOperation>|null,
- *   type?: value-of<Type>|null,
- *   updatedAt?: string|null,
+ *   id?: string,
+ *   createdAt?: string,
+ *   etc?: \DateTimeInterface,
+ *   failedOperations?: list<FailedOperation>,
+ *   pendingOperations?: list<PendingOperation>,
+ *   phoneNumbers?: list<PhoneNumber>,
+ *   recordType?: string,
+ *   status?: value-of<Status>,
+ *   successfulOperations?: list<SuccessfulOperation>,
+ *   type?: value-of<Type>,
+ *   updatedAt?: string,
  * }
  */
 final class PhoneNumbersJob implements BaseModel

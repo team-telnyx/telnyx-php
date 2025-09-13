@@ -10,8 +10,12 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type migration_source_get_response = array{
- *   data?: MigrationSourceParams|null
+ *   data?: MigrationSourceParams
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class MigrationSourceGetResponse implements BaseModel
 {

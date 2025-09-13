@@ -9,9 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type caller_name = array{
- *   callerName?: string|null, errorCode?: string|null
- * }
+ * @phpstan-type caller_name = array{callerName?: string, errorCode?: string}
  */
 final class CallerName implements BaseModel
 {

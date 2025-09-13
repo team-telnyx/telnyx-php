@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type azure_configuration_data = array{
- *   accountKey?: string|null, accountName?: string|null, bucket?: string|null
+ *   accountKey?: string, accountName?: string, bucket?: string
  * }
  */
 final class AzureConfigurationData implements BaseModel

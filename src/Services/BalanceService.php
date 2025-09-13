@@ -6,6 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Balance\BalanceGetResponse;
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\BalanceContract;
 
@@ -20,6 +21,8 @@ final class BalanceService implements BalanceContract
      * @api
      *
      * Get user balance details
+     *
+     * @return BalanceGetResponse<HasRawResponse>
      */
     public function retrieve(
         ?RequestOptions $requestOptions = null

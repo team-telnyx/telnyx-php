@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type handoff_alias = array{
- *   aiAssistants: list<AIAssistant>, voiceMode?: value-of<VoiceMode>|null
+ *   aiAssistants: list<AIAssistant>, voiceMode?: value-of<VoiceMode>
  * }
  */
 final class Handoff implements BaseModel

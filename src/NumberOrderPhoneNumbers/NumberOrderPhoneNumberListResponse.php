@@ -11,8 +11,12 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type number_order_phone_number_list_response = array{
- *   data?: list<NumberOrderPhoneNumber>|null, meta?: PaginationMeta|null
+ *   data?: list<NumberOrderPhoneNumber>, meta?: PaginationMeta
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class NumberOrderPhoneNumberListResponse implements BaseModel
 {

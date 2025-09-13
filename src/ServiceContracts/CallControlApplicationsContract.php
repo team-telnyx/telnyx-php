@@ -20,6 +20,7 @@ use Telnyx\CallControlApplications\CallControlApplicationUpdateParams\Anchorsite
 use Telnyx\CallControlApplications\CallControlApplicationUpdateParams\DtmfType as DtmfType1;
 use Telnyx\CallControlApplications\CallControlApplicationUpdateParams\WebhookAPIVersion as WebhookAPIVersion1;
 use Telnyx\CallControlApplications\CallControlApplicationUpdateResponse;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 
 use const Telnyx\Core\OMIT as omit;
@@ -42,6 +43,8 @@ interface CallControlApplicationsContract
      * @param WebhookAPIVersion|value-of<WebhookAPIVersion> $webhookAPIVersion determines which webhook format will be used, Telnyx API v1 or v2
      * @param string|null $webhookEventFailoverURL The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
+     *
+     * @return CallControlApplicationNewResponse<HasRawResponse>
      */
     public function create(
         $applicationName,
@@ -62,6 +65,8 @@ interface CallControlApplicationsContract
 
     /**
      * @api
+     *
+     * @return CallControlApplicationGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -85,6 +90,8 @@ interface CallControlApplicationsContract
      * @param WebhookAPIVersion1|value-of<WebhookAPIVersion1> $webhookAPIVersion determines which webhook format will be used, Telnyx API v1 or v2
      * @param string|null $webhookEventFailoverURL The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
+     *
+     * @return CallControlApplicationUpdateResponse<HasRawResponse>
      */
     public function update(
         string $id,
@@ -122,6 +129,8 @@ interface CallControlApplicationsContract
      *     <code>connection_name</code> field in descending order.
      *   </li>
      * </ul> <br/> If not given, results are sorted by <code>created_at</code> in descending order.
+     *
+     * @return CallControlApplicationListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,
@@ -132,6 +141,8 @@ interface CallControlApplicationsContract
 
     /**
      * @api
+     *
+     * @return CallControlApplicationDeleteResponse<HasRawResponse>
      */
     public function delete(
         string $id,

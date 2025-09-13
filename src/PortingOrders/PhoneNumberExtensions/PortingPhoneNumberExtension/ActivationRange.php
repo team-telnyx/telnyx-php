@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type activation_range = array{endAt?: int|null, startAt?: int|null}
+ * @phpstan-type activation_range = array{endAt?: int, startAt?: int}
  */
 final class ActivationRange implements BaseModel
 {

@@ -11,11 +11,11 @@ use Telnyx\Storage\Buckets\Usage\UsageGetAPIUsageResponse\Data\Category1\Categor
 
 /**
  * @phpstan-type category1_alias = array{
- *   bytesReceived?: int|null,
- *   bytesSent?: int|null,
- *   category?: value-of<Category>|null,
- *   ops?: int|null,
- *   successfulOps?: int|null,
+ *   bytesReceived?: int,
+ *   bytesSent?: int,
+ *   category?: value-of<Category>,
+ *   ops?: int,
+ *   successfulOps?: int,
  * }
  */
 final class Category1 implements BaseModel

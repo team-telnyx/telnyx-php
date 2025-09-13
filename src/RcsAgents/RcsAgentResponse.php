@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type rcs_agent_response = array{data?: RcsAgent|null}
+ * @phpstan-type rcs_agent_response = array{data?: RcsAgent}
  */
 final class RcsAgentResponse implements BaseModel
 {

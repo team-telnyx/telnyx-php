@@ -9,9 +9,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type wireless_blocklist_get_response = array{
- *   data?: WirelessBlocklist|null
- * }
+ * @phpstan-type wireless_blocklist_get_response = array{data?: WirelessBlocklist}
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class WirelessBlocklistGetResponse implements BaseModel
 {

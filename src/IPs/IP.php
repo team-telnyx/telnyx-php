@@ -10,13 +10,13 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type ip_alias = array{
- *   id?: string|null,
- *   connectionID?: string|null,
- *   createdAt?: string|null,
- *   ipAddress?: string|null,
- *   port?: int|null,
- *   recordType?: string|null,
- *   updatedAt?: string|null,
+ *   id?: string,
+ *   connectionID?: string,
+ *   createdAt?: string,
+ *   ipAddress?: string,
+ *   port?: int,
+ *   recordType?: string,
+ *   updatedAt?: string,
  * }
  */
 final class IP implements BaseModel

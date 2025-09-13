@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Portouts;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Portouts\Comments\CommentCreateParams;
 use Telnyx\Portouts\Comments\CommentListResponse;
 use Telnyx\Portouts\Comments\CommentNewResponse;
@@ -26,6 +27,8 @@ final class CommentsService implements CommentsContract
      * Creates a comment on a portout request.
      *
      * @param string $body Comment to post on this portout request
+     *
+     * @return CommentNewResponse<HasRawResponse>
      */
     public function create(
         string $id,
@@ -51,6 +54,8 @@ final class CommentsService implements CommentsContract
      * @api
      *
      * Returns a list of comments for a portout request.
+     *
+     * @return CommentListResponse<HasRawResponse>
      */
     public function list(
         string $id,

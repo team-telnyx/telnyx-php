@@ -15,15 +15,15 @@ use Telnyx\PortingPhoneNumbers\PortingPhoneNumberListResponse\Data\RequirementsS
 
 /**
  * @phpstan-type data_alias = array{
- *   activationStatus?: value-of<ActivationStatus>|null,
- *   phoneNumber?: string|null,
- *   phoneNumberType?: value-of<PhoneNumberType>|null,
- *   portabilityStatus?: value-of<PortabilityStatus>|null,
- *   portingOrderID?: string|null,
- *   portingOrderStatus?: value-of<PortingOrderStatus>|null,
- *   recordType?: string|null,
- *   requirementsStatus?: value-of<RequirementsStatus>|null,
- *   supportKey?: string|null,
+ *   activationStatus?: value-of<ActivationStatus>,
+ *   phoneNumber?: string,
+ *   phoneNumberType?: value-of<PhoneNumberType>,
+ *   portabilityStatus?: value-of<PortabilityStatus>,
+ *   portingOrderID?: string,
+ *   portingOrderStatus?: value-of<PortingOrderStatus>,
+ *   recordType?: string,
+ *   requirementsStatus?: value-of<RequirementsStatus>,
+ *   supportKey?: string,
  * }
  */
 final class Data implements BaseModel

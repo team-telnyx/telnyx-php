@@ -6,6 +6,7 @@ namespace Telnyx\ServiceContracts\Addresses;
 
 use Telnyx\Addresses\Actions\ActionAcceptSuggestionsResponse;
 use Telnyx\Addresses\Actions\ActionValidateResponse;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 
 use const Telnyx\Core\OMIT as omit;
@@ -16,6 +17,8 @@ interface ActionsContract
      * @api
      *
      * @param string $id1 the ID of the address
+     *
+     * @return ActionAcceptSuggestionsResponse<HasRawResponse>
      */
     public function acceptSuggestions(
         string $id,
@@ -32,6 +35,8 @@ interface ActionsContract
      * @param string $administrativeArea The locality of the address. For US addresses, this corresponds to the state of the address.
      * @param string $extendedAddress additional street address information about the address such as, but not limited to, unit number or apartment number
      * @param string $locality The locality of the address. For US addresses, this corresponds to the city of the address.
+     *
+     * @return ActionValidateResponse<HasRawResponse>
      */
     public function validate(
         $countryCode,

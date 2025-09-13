@@ -15,21 +15,21 @@ use Telnyx\IPConnections\IPConnectionCreateParams\Inbound\SipSubdomainReceiveSet
 
 /**
  * @phpstan-type inbound_alias = array{
- *   aniNumberFormat?: value-of<AniNumberFormat>|null,
- *   channelLimit?: int|null,
- *   codecs?: list<string>|null,
- *   defaultRoutingMethod?: value-of<DefaultRoutingMethod>|null,
- *   dnisNumberFormat?: value-of<DnisNumberFormat>|null,
- *   generateRingbackTone?: bool|null,
- *   isupHeadersEnabled?: bool|null,
- *   prackEnabled?: bool|null,
- *   shakenStirEnabled?: bool|null,
- *   sipCompactHeadersEnabled?: bool|null,
- *   sipRegion?: value-of<SipRegion>|null,
- *   sipSubdomain?: string|null,
- *   sipSubdomainReceiveSettings?: value-of<SipSubdomainReceiveSettings>|null,
- *   timeout1xxSecs?: int|null,
- *   timeout2xxSecs?: int|null,
+ *   aniNumberFormat?: value-of<AniNumberFormat>,
+ *   channelLimit?: int,
+ *   codecs?: list<string>,
+ *   defaultRoutingMethod?: value-of<DefaultRoutingMethod>,
+ *   dnisNumberFormat?: value-of<DnisNumberFormat>,
+ *   generateRingbackTone?: bool,
+ *   isupHeadersEnabled?: bool,
+ *   prackEnabled?: bool,
+ *   shakenStirEnabled?: bool,
+ *   sipCompactHeadersEnabled?: bool,
+ *   sipRegion?: value-of<SipRegion>,
+ *   sipSubdomain?: string,
+ *   sipSubdomainReceiveSettings?: value-of<SipSubdomainReceiveSettings>,
+ *   timeout1xxSecs?: int,
+ *   timeout2xxSecs?: int,
  * }
  */
 final class Inbound implements BaseModel

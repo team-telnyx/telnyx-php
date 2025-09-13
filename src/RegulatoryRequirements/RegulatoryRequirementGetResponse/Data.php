@@ -11,10 +11,10 @@ use Telnyx\RegulatoryRequirements\RegulatoryRequirementGetResponse\Data\Regulato
 
 /**
  * @phpstan-type data_alias = array{
- *   action?: string|null,
- *   countryCode?: string|null,
- *   phoneNumberType?: string|null,
- *   regulatoryRequirements?: list<RegulatoryRequirement>|null,
+ *   action?: string,
+ *   countryCode?: string,
+ *   phoneNumberType?: string,
+ *   regulatoryRequirements?: list<RegulatoryRequirement>,
  * }
  */
 final class Data implements BaseModel

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\OtaUpdates\OtaUpdateGetResponse;
 use Telnyx\OtaUpdates\OtaUpdateListParams;
 use Telnyx\OtaUpdates\OtaUpdateListParams\Filter;
@@ -26,6 +27,8 @@ final class OtaUpdatesService implements OtaUpdatesContract
      * @api
      *
      * This API returns the details of an Over the Air (OTA) update.
+     *
+     * @return OtaUpdateGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -47,6 +50,8 @@ final class OtaUpdatesService implements OtaUpdatesContract
      *
      * @param Filter $filter Consolidated filter parameter for OTA updates (deepObject style). Originally: filter[status], filter[sim_card_id], filter[type]
      * @param Page $page Consolidated pagination parameter (deepObject style). Originally: page[number], page[size]
+     *
+     * @return OtaUpdateListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,

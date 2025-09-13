@@ -11,7 +11,7 @@ use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentCreateParams\Addi
 
 /**
  * @phpstan-type additional_document = array{
- *   documentID?: string|null, documentType?: value-of<DocumentType>|null
+ *   documentID?: string, documentType?: value-of<DocumentType>
  * }
  */
 final class AdditionalDocument implements BaseModel

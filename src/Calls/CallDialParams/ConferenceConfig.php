@@ -14,20 +14,20 @@ use Telnyx\Core\Contracts\BaseModel;
  * Optional configuration parameters to dial new participant into a conference.
  *
  * @phpstan-type conference_config = array{
- *   id?: string|null,
- *   beepEnabled?: value-of<BeepEnabled>|null,
- *   conferenceName?: string|null,
- *   earlyMedia?: bool|null,
- *   endConferenceOnExit?: bool|null,
- *   hold?: bool|null,
- *   holdAudioURL?: string|null,
- *   holdMediaName?: string|null,
- *   mute?: bool|null,
- *   softEndConferenceOnExit?: bool|null,
- *   startConferenceOnCreate?: bool|null,
- *   startConferenceOnEnter?: bool|null,
- *   supervisorRole?: value-of<SupervisorRole>|null,
- *   whisperCallControlIDs?: list<string>|null,
+ *   id?: string,
+ *   beepEnabled?: value-of<BeepEnabled>,
+ *   conferenceName?: string,
+ *   earlyMedia?: bool,
+ *   endConferenceOnExit?: bool,
+ *   hold?: bool,
+ *   holdAudioURL?: string,
+ *   holdMediaName?: string,
+ *   mute?: bool,
+ *   softEndConferenceOnExit?: bool,
+ *   startConferenceOnCreate?: bool,
+ *   startConferenceOnEnter?: bool,
+ *   supervisorRole?: value-of<SupervisorRole>,
+ *   whisperCallControlIDs?: list<string>,
  * }
  */
 final class ConferenceConfig implements BaseModel

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\WirelessBlocklistValuesContract;
 use Telnyx\WirelessBlocklistValues\WirelessBlocklistValueListParams;
@@ -24,6 +25,8 @@ final class WirelessBlocklistValuesService implements WirelessBlocklistValuesCon
      * Retrieve all wireless blocklist values for a given blocklist type.
      *
      * @param Type|value-of<Type> $type The Wireless Blocklist type for which to list possible values (e.g., `country`, `mcc`, `plmn`).
+     *
+     * @return WirelessBlocklistValueListResponse<HasRawResponse>
      */
     public function list(
         $type,

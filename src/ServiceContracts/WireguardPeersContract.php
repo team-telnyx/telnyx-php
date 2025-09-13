@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\WireguardPeers\WireguardPeerDeleteResponse;
 use Telnyx\WireguardPeers\WireguardPeerGetResponse;
@@ -22,6 +23,8 @@ interface WireguardPeersContract
      *
      * @param string $wireguardInterfaceID the id of the wireguard interface associated with the peer
      * @param string $publicKey The WireGuard `PublicKey`.<br /><br />If you do not provide a Public Key, a new Public and Private key pair will be generated for you.
+     *
+     * @return WireguardPeerNewResponse<HasRawResponse>
      */
     public function create(
         $wireguardInterfaceID,
@@ -31,6 +34,8 @@ interface WireguardPeersContract
 
     /**
      * @api
+     *
+     * @return WireguardPeerGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -41,6 +46,8 @@ interface WireguardPeersContract
      * @api
      *
      * @param string $publicKey The WireGuard `PublicKey`.<br /><br />If you do not provide a Public Key, a new Public and Private key pair will be generated for you.
+     *
+     * @return WireguardPeerUpdateResponse<HasRawResponse>
      */
     public function update(
         string $id,
@@ -53,6 +60,8 @@ interface WireguardPeersContract
      *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[wireguard_interface_id]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     *
+     * @return WireguardPeerListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,
@@ -62,6 +71,8 @@ interface WireguardPeersContract
 
     /**
      * @api
+     *
+     * @return WireguardPeerDeleteResponse<HasRawResponse>
      */
     public function delete(
         string $id,

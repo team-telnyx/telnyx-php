@@ -15,8 +15,8 @@ use Telnyx\Core\Contracts\BaseModel;
  *   brandID: string,
  *   campaignID: string,
  *   usecase: string,
- *   createDate?: string|null,
- *   status?: string|null,
+ *   createDate?: string,
+ *   status?: string,
  * }
  */
 final class Record implements BaseModel

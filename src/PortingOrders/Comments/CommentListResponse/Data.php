@@ -11,12 +11,12 @@ use Telnyx\PortingOrders\Comments\CommentListResponse\Data\UserType;
 
 /**
  * @phpstan-type data_alias = array{
- *   id?: string|null,
- *   body?: string|null,
- *   createdAt?: \DateTimeInterface|null,
- *   portingOrderID?: string|null,
- *   recordType?: string|null,
- *   userType?: value-of<UserType>|null,
+ *   id?: string,
+ *   body?: string,
+ *   createdAt?: \DateTimeInterface,
+ *   portingOrderID?: string,
+ *   recordType?: string,
+ *   userType?: value-of<UserType>,
  * }
  */
 final class Data implements BaseModel

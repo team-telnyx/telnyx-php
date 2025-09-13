@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * The CNAM listing settings for a phone number.
  *
  * @phpstan-type cnam_listing = array{
- *   cnamListingDetails?: string|null, cnamListingEnabled?: bool|null
+ *   cnamListingDetails?: string, cnamListingEnabled?: bool
  * }
  */
 final class CnamListing implements BaseModel

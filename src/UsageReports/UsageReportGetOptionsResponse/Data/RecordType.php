@@ -12,9 +12,9 @@ use Telnyx\Core\Contracts\BaseModel;
  * An object following one of the schemas published in https://developers.telnyx.com/docs/api/v2/detail-records.
  *
  * @phpstan-type record_type = array{
- *   productDimensions?: list<string>|null,
- *   productMetrics?: list<string>|null,
- *   recordType?: string|null,
+ *   productDimensions?: list<string>,
+ *   productMetrics?: list<string>,
+ *   recordType?: string,
  * }
  */
 final class RecordType implements BaseModel

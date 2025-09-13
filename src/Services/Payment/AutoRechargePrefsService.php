@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Payment;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Payment\AutoRechargePrefs\AutoRechargePrefListResponse;
 use Telnyx\Payment\AutoRechargePrefs\AutoRechargePrefUpdateParams;
 use Telnyx\Payment\AutoRechargePrefs\AutoRechargePrefUpdateParams\Preference;
@@ -31,6 +32,8 @@ final class AutoRechargePrefsService implements AutoRechargePrefsContract
      * @param Preference|value-of<Preference> $preference the payment preference for auto recharge
      * @param string $rechargeAmount the amount to recharge the account, the actual recharge amount will be the amount necessary to reach the threshold amount plus the recharge amount
      * @param string $thresholdAmount the threshold amount at which the account will be recharged
+     *
+     * @return AutoRechargePrefUpdateResponse<HasRawResponse>
      */
     public function update(
         $enabled = omit,
@@ -65,6 +68,8 @@ final class AutoRechargePrefsService implements AutoRechargePrefsContract
      * @api
      *
      * Returns the payment auto recharge preferences.
+     *
+     * @return AutoRechargePrefListResponse<HasRawResponse>
      */
     public function list(
         ?RequestOptions $requestOptions = null

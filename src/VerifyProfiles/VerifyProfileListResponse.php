@@ -15,6 +15,10 @@ use Telnyx\VerifyProfiles\VerifyProfileListResponse\Meta;
  * @phpstan-type verify_profile_list_response = array{
  *   data: list<VerifyProfile>, meta: Meta
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class VerifyProfileListResponse implements BaseModel
 {

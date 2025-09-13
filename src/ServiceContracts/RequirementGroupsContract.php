@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\RequirementGroups\RequirementGroup;
 use Telnyx\RequirementGroups\RequirementGroupCreateParams\Action;
@@ -24,6 +25,8 @@ interface RequirementGroupsContract
      * @param PhoneNumberType|value-of<PhoneNumberType> $phoneNumberType
      * @param string $customerReference
      * @param list<RegulatoryRequirement> $regulatoryRequirements
+     *
+     * @return RequirementGroup<HasRawResponse>
      */
     public function create(
         $action,
@@ -36,6 +39,8 @@ interface RequirementGroupsContract
 
     /**
      * @api
+     *
+     * @return RequirementGroup<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -47,6 +52,8 @@ interface RequirementGroupsContract
      *
      * @param string $customerReference Reference for the customer
      * @param list<RegulatoryRequirement1> $regulatoryRequirements
+     *
+     * @return RequirementGroup<HasRawResponse>
      */
     public function update(
         string $id,
@@ -69,6 +76,8 @@ interface RequirementGroupsContract
 
     /**
      * @api
+     *
+     * @return RequirementGroup<HasRawResponse>
      */
     public function delete(
         string $id,
@@ -77,6 +86,8 @@ interface RequirementGroupsContract
 
     /**
      * @api
+     *
+     * @return RequirementGroup<HasRawResponse>
      */
     public function submitForApproval(
         string $id,

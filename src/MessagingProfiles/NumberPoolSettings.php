@@ -19,8 +19,8 @@ use Telnyx\Core\Contracts\BaseModel;
  *   longCodeWeight: float,
  *   skipUnhealthy: bool,
  *   tollFreeWeight: float,
- *   geomatch?: bool|null,
- *   stickySender?: bool|null,
+ *   geomatch?: bool,
+ *   stickySender?: bool,
  * }
  */
 final class NumberPoolSettings implements BaseModel

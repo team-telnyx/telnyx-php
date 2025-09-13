@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordCreateParams\AdditionalData;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordGetResponse;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams\Filter;
@@ -24,6 +25,8 @@ interface CustomerServiceRecordsContract
      * @param string $phoneNumber a valid US phone number in E164 format
      * @param AdditionalData $additionalData
      * @param string $webhookURL callback URL to receive webhook notifications
+     *
+     * @return CustomerServiceRecordNewResponse<HasRawResponse>
      */
     public function create(
         $phoneNumber,
@@ -34,6 +37,8 @@ interface CustomerServiceRecordsContract
 
     /**
      * @api
+     *
+     * @return CustomerServiceRecordGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $customerServiceRecordID,
@@ -46,6 +51,8 @@ interface CustomerServiceRecordsContract
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[phone_number][eq], filter[phone_number][in][], filter[status][eq], filter[status][in][], filter[created_at][lt], filter[created_at][gt]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param Sort $sort Consolidated sort parameter (deepObject style). Originally: sort[value]
+     *
+     * @return CustomerServiceRecordListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,
@@ -58,6 +65,8 @@ interface CustomerServiceRecordsContract
      * @api
      *
      * @param list<string> $phoneNumbers the phone numbers list to be verified
+     *
+     * @return CustomerServiceRecordVerifyPhoneNumberCoverageResponse<HasRawResponse>
      */
     public function verifyPhoneNumberCoverage(
         $phoneNumbers,

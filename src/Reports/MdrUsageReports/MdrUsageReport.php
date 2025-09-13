@@ -13,18 +13,18 @@ use Telnyx\Reports\MdrUsageReports\MdrUsageReport\Status;
 
 /**
  * @phpstan-type mdr_usage_report = array{
- *   id?: string|null,
- *   aggregationType?: value-of<AggregationType>|null,
- *   connections?: list<int>|null,
- *   createdAt?: \DateTimeInterface|null,
- *   endDate?: \DateTimeInterface|null,
- *   profiles?: string|null,
- *   recordType?: string|null,
- *   reportURL?: string|null,
- *   result?: list<Result>|null,
- *   startDate?: \DateTimeInterface|null,
- *   status?: value-of<Status>|null,
- *   updatedAt?: \DateTimeInterface|null,
+ *   id?: string,
+ *   aggregationType?: value-of<AggregationType>,
+ *   connections?: list<int>,
+ *   createdAt?: \DateTimeInterface,
+ *   endDate?: \DateTimeInterface,
+ *   profiles?: string,
+ *   recordType?: string,
+ *   reportURL?: string,
+ *   result?: list<Result>,
+ *   startDate?: \DateTimeInterface,
+ *   status?: value-of<Status>,
+ *   updatedAt?: \DateTimeInterface,
  * }
  */
 final class MdrUsageReport implements BaseModel

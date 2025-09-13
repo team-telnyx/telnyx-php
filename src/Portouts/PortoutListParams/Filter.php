@@ -16,18 +16,18 @@ use Telnyx\Portouts\PortoutListParams\Filter\StatusIn;
  * Consolidated filter parameter (deepObject style). Originally: filter[carrier_name], filter[country_code], filter[country_code_in], filter[foc_date], filter[inserted_at], filter[phone_number], filter[pon], filter[ported_out_at], filter[spid], filter[status], filter[status_in], filter[support_key].
  *
  * @phpstan-type filter_alias = array{
- *   carrierName?: string|null,
- *   countryCode?: string|null,
- *   countryCodeIn?: list<string>|null,
- *   focDate?: \DateTimeInterface|null,
- *   insertedAt?: InsertedAt|null,
- *   phoneNumber?: string|null,
- *   pon?: string|null,
- *   portedOutAt?: PortedOutAt|null,
- *   spid?: string|null,
- *   status?: value-of<Status>|null,
- *   statusIn?: list<value-of<StatusIn>>|null,
- *   supportKey?: string|null,
+ *   carrierName?: string,
+ *   countryCode?: string,
+ *   countryCodeIn?: list<string>,
+ *   focDate?: \DateTimeInterface,
+ *   insertedAt?: InsertedAt,
+ *   phoneNumber?: string,
+ *   pon?: string,
+ *   portedOutAt?: PortedOutAt,
+ *   spid?: string,
+ *   status?: value-of<Status>,
+ *   statusIn?: list<value-of<StatusIn>>,
+ *   supportKey?: string,
  * }
  */
 final class Filter implements BaseModel

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PortingOrders\PortingOrderDocuments;
 use Telnyx\PortingOrders\PortingOrderEndUser;
 use Telnyx\PortingOrders\PortingOrderGetAllowedFocWindowsResponse;
@@ -35,6 +36,8 @@ interface PortingOrdersContract
      *
      * @param list<string> $phoneNumbers The list of +E.164 formatted phone numbers
      * @param string $customerReference A customer-specified reference number for customer bookkeeping purposes
+     *
+     * @return PortingOrderNewResponse<HasRawResponse>
      */
     public function create(
         $phoneNumbers,
@@ -46,6 +49,8 @@ interface PortingOrdersContract
      * @api
      *
      * @param bool $includePhoneNumbers Include the first 50 phone number objects in the results
+     *
+     * @return PortingOrderGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -67,6 +72,8 @@ interface PortingOrdersContract
      * @param list<Requirement> $requirements list of requirements for porting numbers
      * @param PortingOrderUserFeedback $userFeedback
      * @param string $webhookURL
+     *
+     * @return PortingOrderUpdateResponse<HasRawResponse>
      */
     public function update(
         string $id,
@@ -91,6 +98,8 @@ interface PortingOrdersContract
      * @param bool $includePhoneNumbers Include the first 50 phone number objects in the results
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param Sort $sort Consolidated sort parameter (deepObject style). Originally: sort[value]
+     *
+     * @return PortingOrderListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,
@@ -110,6 +119,8 @@ interface PortingOrdersContract
 
     /**
      * @api
+     *
+     * @return PortingOrderGetAllowedFocWindowsResponse<HasRawResponse>
      */
     public function retrieveAllowedFocWindows(
         string $id,
@@ -118,6 +129,8 @@ interface PortingOrdersContract
 
     /**
      * @api
+     *
+     * @return PortingOrderGetExceptionTypesResponse<HasRawResponse>
      */
     public function retrieveExceptionTypes(
         ?RequestOptions $requestOptions = null
@@ -138,6 +151,8 @@ interface PortingOrdersContract
      * @api
      *
      * @param Page1 $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     *
+     * @return PortingOrderGetRequirementsResponse<HasRawResponse>
      */
     public function retrieveRequirements(
         string $id,
@@ -147,6 +162,8 @@ interface PortingOrdersContract
 
     /**
      * @api
+     *
+     * @return PortingOrderGetSubRequestResponse<HasRawResponse>
      */
     public function retrieveSubRequest(
         string $id,

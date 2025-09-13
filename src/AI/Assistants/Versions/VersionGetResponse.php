@@ -31,21 +31,25 @@ use Telnyx\Core\Contracts\BaseModel;
  *   instructions: string,
  *   model: string,
  *   name: string,
- *   description?: string|null,
- *   dynamicVariables?: array<string, mixed>|null,
- *   dynamicVariablesWebhookURL?: string|null,
- *   enabledFeatures?: list<value-of<EnabledFeatures>>|null,
- *   greeting?: string|null,
- *   importMetadata?: ImportMetadata|null,
- *   insightSettings?: InsightSettings|null,
- *   llmAPIKeyRef?: string|null,
- *   messagingSettings?: MessagingSettings|null,
- *   privacySettings?: PrivacySettings|null,
- *   telephonySettings?: TelephonySettings|null,
- *   tools?: list<WebhookTool|RetrievalTool|HandoffTool|HangupTool|TransferTool|SipReferTool|DtmfTool>|null,
- *   transcription?: TranscriptionSettings|null,
- *   voiceSettings?: VoiceSettings|null,
+ *   description?: string,
+ *   dynamicVariables?: array<string, mixed>,
+ *   dynamicVariablesWebhookURL?: string,
+ *   enabledFeatures?: list<value-of<EnabledFeatures>>,
+ *   greeting?: string,
+ *   importMetadata?: ImportMetadata,
+ *   insightSettings?: InsightSettings,
+ *   llmAPIKeyRef?: string,
+ *   messagingSettings?: MessagingSettings,
+ *   privacySettings?: PrivacySettings,
+ *   telephonySettings?: TelephonySettings,
+ *   tools?: list<WebhookTool|RetrievalTool|HandoffTool|HangupTool|TransferTool|SipReferTool|DtmfTool>,
+ *   transcription?: TranscriptionSettings,
+ *   voiceSettings?: VoiceSettings,
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class VersionGetResponse implements BaseModel
 {

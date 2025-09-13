@@ -11,12 +11,12 @@ use Telnyx\NumberLookup\NumberLookupGetResponse\Data\Carrier\Type;
 
 /**
  * @phpstan-type carrier_alias = array{
- *   errorCode?: string|null,
- *   mobileCountryCode?: string|null,
- *   mobileNetworkCode?: string|null,
- *   name?: string|null,
- *   normalizedCarrier?: string|null,
- *   type?: value-of<Type>|null,
+ *   errorCode?: string,
+ *   mobileCountryCode?: string,
+ *   mobileNetworkCode?: string,
+ *   name?: string,
+ *   normalizedCarrier?: string,
+ *   type?: value-of<Type>,
  * }
  */
 final class Carrier implements BaseModel

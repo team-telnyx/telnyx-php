@@ -8,6 +8,7 @@ use Telnyx\AI\AIGetModelsResponse;
 use Telnyx\AI\AISummarizeParams;
 use Telnyx\AI\AISummarizeResponse;
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AIContract;
 use Telnyx\Services\AI\AssistantsService;
@@ -62,19 +63,21 @@ final class AIService implements AIContract
      */
     public function __construct(private Client $client)
     {
-        $this->assistants = new AssistantsService($this->client);
-        $this->audio = new AudioService($this->client);
-        $this->chat = new ChatService($this->client);
-        $this->clusters = new ClustersService($this->client);
-        $this->conversations = new ConversationsService($this->client);
-        $this->embeddings = new EmbeddingsService($this->client);
-        $this->fineTuning = new FineTuningService($this->client);
+        $this->assistants = new AssistantsService($client);
+        $this->audio = new AudioService($client);
+        $this->chat = new ChatService($client);
+        $this->clusters = new ClustersService($client);
+        $this->conversations = new ConversationsService($client);
+        $this->embeddings = new EmbeddingsService($client);
+        $this->fineTuning = new FineTuningService($client);
     }
 
     /**
      * @api
      *
      * This endpoint returns a list of Open Source and OpenAI models that are available for use. <br /><br /> **Note**: Model `id`'s will be in the form `{source}/{model_name}`. For example `openai/gpt-4` or `mistralai/Mistral-7B-Instruct-v0.1` consistent with HuggingFace naming conventions.
+     *
+     * @return AIGetModelsResponse<HasRawResponse>
      */
     public function retrieveModels(
         ?RequestOptions $requestOptions = null
@@ -103,6 +106,8 @@ final class AIService implements AIContract
      * @param string $bucket the name of the bucket that contains the file to be summarized
      * @param string $filename the name of the file to be summarized
      * @param string $systemPrompt a system prompt to guide the summary generation
+     *
+     * @return AISummarizeResponse<HasRawResponse>
      */
     public function summarize(
         $bucket,

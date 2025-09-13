@@ -10,11 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type data_alias = array{
- *   connectionID?: string|null,
- *   conversationProfileID?: string|null,
- *   environment?: string|null,
- *   recordType?: string|null,
- *   serviceAccount?: string|null,
+ *   connectionID?: string,
+ *   conversationProfileID?: string,
+ *   environment?: string,
+ *   recordType?: string,
+ *   serviceAccount?: string,
  * }
  */
 final class Data implements BaseModel

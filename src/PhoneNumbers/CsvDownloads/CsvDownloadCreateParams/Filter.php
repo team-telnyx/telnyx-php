@@ -15,16 +15,16 @@ use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadCreateParams\Filter\VoiceUsagePa
  * Consolidated filter parameter (deepObject style). Originally: filter[has_bundle], filter[tag], filter[connection_id], filter[phone_number], filter[status], filter[voice.connection_name], filter[voice.usage_payment_method], filter[billing_group_id], filter[emergency_address_id], filter[customer_reference].
  *
  * @phpstan-type filter_alias = array{
- *   billingGroupID?: string|null,
- *   connectionID?: string|null,
- *   customerReference?: string|null,
- *   emergencyAddressID?: string|null,
- *   hasBundle?: string|null,
- *   phoneNumber?: string|null,
- *   status?: value-of<Status>|null,
- *   tag?: string|null,
- *   voiceConnectionName?: VoiceConnectionName|null,
- *   voiceUsagePaymentMethod?: value-of<VoiceUsagePaymentMethod>|null,
+ *   billingGroupID?: string,
+ *   connectionID?: string,
+ *   customerReference?: string,
+ *   emergencyAddressID?: string,
+ *   hasBundle?: string,
+ *   phoneNumber?: string,
+ *   status?: value-of<Status>,
+ *   tag?: string,
+ *   voiceConnectionName?: VoiceConnectionName,
+ *   voiceUsagePaymentMethod?: value-of<VoiceUsagePaymentMethod>,
  * }
  */
 final class Filter implements BaseModel

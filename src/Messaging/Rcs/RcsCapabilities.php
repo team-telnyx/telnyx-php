@@ -11,11 +11,11 @@ use Telnyx\Messaging\Rcs\RcsCapabilities\RecordType;
 
 /**
  * @phpstan-type rcs_capabilities = array{
- *   agentID?: string|null,
- *   agentName?: string|null,
- *   features?: list<string>|null,
- *   phoneNumber?: string|null,
- *   recordType?: value-of<RecordType>|null,
+ *   agentID?: string,
+ *   agentName?: string,
+ *   features?: list<string>,
+ *   phoneNumber?: string,
+ *   recordType?: value-of<RecordType>,
  * }
  */
 final class RcsCapabilities implements BaseModel

@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   createdAt: \DateTimeInterface,
  *   identifier: string,
  *   recordType: string,
- *   updatedAt?: \DateTimeInterface|null,
+ *   updatedAt?: \DateTimeInterface,
  * }
  */
 final class IntegrationSecret implements BaseModel

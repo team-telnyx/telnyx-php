@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type header_alias = array{name?: string|null, value?: string|null}
+ * @phpstan-type header_alias = array{name?: string, value?: string}
  */
 final class Header implements BaseModel
 {

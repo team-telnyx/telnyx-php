@@ -12,18 +12,18 @@ use Telnyx\Texml\Accounts\Conferences\ConferenceGetConferencesResponse\Conferenc
 
 /**
  * @phpstan-type conference_alias = array{
- *   accountSid?: string|null,
- *   apiVersion?: string|null,
- *   callSidEndingConference?: string|null,
- *   dateCreated?: string|null,
- *   dateUpdated?: string|null,
- *   friendlyName?: string|null,
- *   reasonConferenceEnded?: value-of<ReasonConferenceEnded>|null,
- *   region?: string|null,
- *   sid?: string|null,
- *   status?: value-of<Status>|null,
- *   subresourceUris?: array<string, mixed>|null,
- *   uri?: string|null,
+ *   accountSid?: string,
+ *   apiVersion?: string,
+ *   callSidEndingConference?: string,
+ *   dateCreated?: string,
+ *   dateUpdated?: string,
+ *   friendlyName?: string,
+ *   reasonConferenceEnded?: value-of<ReasonConferenceEnded>,
+ *   region?: string,
+ *   sid?: string,
+ *   status?: value-of<Status>,
+ *   subresourceUris?: array<string, mixed>,
+ *   uri?: string,
  * }
  */
 final class Conference implements BaseModel

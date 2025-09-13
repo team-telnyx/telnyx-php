@@ -13,9 +13,9 @@ use Telnyx\Messages\Error\Source;
  * @phpstan-type error_alias = array{
  *   code: string,
  *   title: string,
- *   detail?: string|null,
- *   meta?: array<string, mixed>|null,
- *   source?: Source|null,
+ *   detail?: string,
+ *   meta?: array<string, mixed>,
+ *   source?: Source,
  * }
  */
 final class Error implements BaseModel

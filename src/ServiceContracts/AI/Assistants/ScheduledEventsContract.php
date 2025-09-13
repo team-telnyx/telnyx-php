@@ -9,6 +9,7 @@ use Telnyx\AI\Assistants\ScheduledEvents\ScheduledEventListParams\Page;
 use Telnyx\AI\Assistants\ScheduledEvents\ScheduledEventListResponse;
 use Telnyx\AI\Assistants\ScheduledEvents\ScheduledPhoneCallEventResponse;
 use Telnyx\AI\Assistants\ScheduledEvents\ScheduledSMSEventResponse;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 
 use const Telnyx\Core\OMIT as omit;
@@ -55,6 +56,8 @@ interface ScheduledEventsContract
      * @param \DateTimeInterface $fromDate
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param \DateTimeInterface $toDate
+     *
+     * @return ScheduledEventListResponse<HasRawResponse>
      */
     public function list(
         string $assistantID,

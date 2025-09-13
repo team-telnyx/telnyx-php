@@ -11,12 +11,12 @@ use Telnyx\Webhooks\CallForkStartedWebhookEvent\Data\Payload\StreamType;
 
 /**
  * @phpstan-type payload_alias = array{
- *   callControlID?: string|null,
- *   callLegID?: string|null,
- *   callSessionID?: string|null,
- *   clientState?: string|null,
- *   connectionID?: string|null,
- *   streamType?: value-of<StreamType>|null,
+ *   callControlID?: string,
+ *   callLegID?: string,
+ *   callSessionID?: string,
+ *   clientState?: string,
+ *   connectionID?: string,
+ *   streamType?: value-of<StreamType>,
  * }
  */
 final class Payload implements BaseModel

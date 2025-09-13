@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\StreamingFailedWebhookEvent\Data;
 
 /**
- * @phpstan-type streaming_failed_webhook_event = array{data?: Data|null}
+ * @phpstan-type streaming_failed_webhook_event = array{data?: Data}
  */
 final class StreamingFailedWebhookEvent implements BaseModel
 {

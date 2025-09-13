@@ -10,10 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type external_voice_integrations_pagination_meta = array{
- *   pageNumber?: int|null,
- *   pageSize?: int|null,
- *   totalPages?: int|null,
- *   totalResults?: int|null,
+ *   pageNumber?: int, pageSize?: int, totalPages?: int, totalResults?: int
  * }
  */
 final class ExternalVoiceIntegrationsPaginationMeta implements BaseModel

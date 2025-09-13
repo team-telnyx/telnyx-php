@@ -11,8 +11,12 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type report_list_response = array{
- *   data?: list<PortoutReport>|null, meta?: PaginationMeta|null
+ *   data?: list<PortoutReport>, meta?: PaginationMeta
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class ReportListResponse implements BaseModel
 {

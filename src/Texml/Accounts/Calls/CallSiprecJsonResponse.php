@@ -12,17 +12,21 @@ use Telnyx\Texml\Accounts\Calls\CallSiprecJsonResponse\Track;
 
 /**
  * @phpstan-type call_siprec_json_response = array{
- *   accountSid?: string|null,
- *   callSid?: string|null,
- *   dateCreated?: string|null,
- *   dateUpdated?: string|null,
- *   errorCode?: string|null,
- *   sid?: string|null,
- *   startTime?: string|null,
- *   status?: value-of<Status>|null,
- *   track?: value-of<Track>|null,
- *   uri?: string|null,
+ *   accountSid?: string,
+ *   callSid?: string,
+ *   dateCreated?: string,
+ *   dateUpdated?: string,
+ *   errorCode?: string,
+ *   sid?: string,
+ *   startTime?: string,
+ *   status?: value-of<Status>,
+ *   track?: value-of<Track>,
+ *   uri?: string,
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class CallSiprecJsonResponse implements BaseModel
 {

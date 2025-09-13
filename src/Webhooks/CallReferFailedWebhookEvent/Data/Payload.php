@@ -10,14 +10,14 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type payload_alias = array{
- *   callControlID?: string|null,
- *   callLegID?: string|null,
- *   callSessionID?: string|null,
- *   clientState?: string|null,
- *   connectionID?: string|null,
- *   from?: string|null,
- *   sipNotifyResponse?: int|null,
- *   to?: string|null,
+ *   callControlID?: string,
+ *   callLegID?: string,
+ *   callSessionID?: string,
+ *   clientState?: string,
+ *   connectionID?: string,
+ *   from?: string,
+ *   sipNotifyResponse?: int,
+ *   to?: string,
  * }
  */
 final class Payload implements BaseModel

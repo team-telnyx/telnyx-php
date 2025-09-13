@@ -12,11 +12,11 @@ use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListResponse
 
 /**
  * @phpstan-type data_alias = array{
- *   availableBandwidth?: list<float>|null,
- *   cloudProvider?: value-of<CloudProvider>|null,
- *   cloudProviderRegion?: string|null,
- *   location?: Location|null,
- *   recordType?: string|null,
+ *   availableBandwidth?: list<float>,
+ *   cloudProvider?: value-of<CloudProvider>,
+ *   cloudProviderRegion?: string,
+ *   location?: Location,
+ *   recordType?: string,
  * }
  */
 final class Data implements BaseModel

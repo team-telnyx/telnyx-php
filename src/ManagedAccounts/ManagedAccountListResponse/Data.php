@@ -18,9 +18,9 @@ use Telnyx\ManagedAccounts\ManagedAccountListResponse\Data\RecordType;
  *   managerAccountID: string,
  *   recordType: value-of<RecordType>,
  *   updatedAt: string,
- *   managedAccountAllowCustomPricing?: bool|null,
- *   organizationName?: string|null,
- *   rollupBilling?: bool|null,
+ *   managedAccountAllowCustomPricing?: bool,
+ *   organizationName?: string,
+ *   rollupBilling?: bool,
  * }
  */
 final class Data implements BaseModel

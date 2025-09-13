@@ -26,7 +26,7 @@ final class CampaignBuilderService implements CampaignBuilderContract
      */
     public function __construct(private Client $client)
     {
-        $this->brand = new BrandService($this->client);
+        $this->brand = new BrandService($client);
     }
 
     /**

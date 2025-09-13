@@ -10,8 +10,12 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type loa_configuration_new_response = array{
- *   data?: PortingLoaConfiguration|null
+ *   data?: PortingLoaConfiguration
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class LoaConfigurationNewResponse implements BaseModel
 {

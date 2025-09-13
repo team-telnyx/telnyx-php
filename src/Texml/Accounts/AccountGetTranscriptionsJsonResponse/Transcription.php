@@ -11,17 +11,17 @@ use Telnyx\Texml\Accounts\AccountGetTranscriptionsJsonResponse\Transcription\Sta
 
 /**
  * @phpstan-type transcription_alias = array{
- *   accountSid?: string|null,
- *   apiVersion?: string|null,
- *   callSid?: string|null,
- *   dateCreated?: \DateTimeInterface|null,
- *   dateUpdated?: \DateTimeInterface|null,
+ *   accountSid?: string,
+ *   apiVersion?: string,
+ *   callSid?: string,
+ *   dateCreated?: \DateTimeInterface,
+ *   dateUpdated?: \DateTimeInterface,
  *   duration?: string|null,
- *   recordingSid?: string|null,
- *   sid?: string|null,
- *   status?: value-of<Status>|null,
- *   transcriptionText?: string|null,
- *   uri?: string|null,
+ *   recordingSid?: string,
+ *   sid?: string,
+ *   status?: value-of<Status>,
+ *   transcriptionText?: string,
+ *   uri?: string,
  * }
  */
 final class Transcription implements BaseModel

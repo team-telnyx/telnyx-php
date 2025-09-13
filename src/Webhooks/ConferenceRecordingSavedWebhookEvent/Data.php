@@ -13,10 +13,10 @@ use Telnyx\Webhooks\ConferenceRecordingSavedWebhookEvent\Data\RecordType;
 
 /**
  * @phpstan-type data_alias = array{
- *   id?: string|null,
- *   eventType?: value-of<EventType>|null,
- *   payload?: Payload|null,
- *   recordType?: value-of<RecordType>|null,
+ *   id?: string,
+ *   eventType?: value-of<EventType>,
+ *   payload?: Payload,
+ *   recordType?: value-of<RecordType>,
  * }
  */
 final class Data implements BaseModel

@@ -7,6 +7,7 @@ namespace Telnyx\Services\AI\Conversations;
 use Telnyx\AI\Conversations\Messages\MessageCreateParams;
 use Telnyx\AI\Conversations\Messages\MessageListResponse;
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Conversations\MessagesContract;
 
@@ -73,6 +74,8 @@ final class MessagesService implements MessagesContract
      * @api
      *
      * Retrieve messages for a specific conversation, including tool calls made by the assistant.
+     *
+     * @return MessageListResponse<HasRawResponse>
      */
     public function list(
         string $conversationID,

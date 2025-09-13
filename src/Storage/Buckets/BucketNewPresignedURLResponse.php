@@ -10,7 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Storage\Buckets\BucketNewPresignedURLResponse\Content;
 
 /**
- * @phpstan-type bucket_new_presigned_url_response = array{content?: Content|null}
+ * @phpstan-type bucket_new_presigned_url_response = array{content?: Content}
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class BucketNewPresignedURLResponse implements BaseModel
 {

@@ -25,6 +25,7 @@ use Telnyx\AI\Assistants\TranscriptionSettings;
 use Telnyx\AI\Assistants\TransferTool;
 use Telnyx\AI\Assistants\VoiceSettings;
 use Telnyx\AI\Assistants\WebhookTool;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 
 use const Telnyx\Core\OMIT as omit;
@@ -51,6 +52,8 @@ interface AssistantsContract
      * @param list<WebhookTool|RetrievalTool|HandoffTool|HangupTool|TransferTool|SipReferTool|DtmfTool> $tools The tools that the assistant can use. These may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables)
      * @param TranscriptionSettings $transcription
      * @param VoiceSettings $voiceSettings
+     *
+     * @return AssistantNewResponse<HasRawResponse>
      */
     public function create(
         $instructions,
@@ -79,6 +82,8 @@ interface AssistantsContract
      * @param bool $fetchDynamicVariablesFromWebhook
      * @param string $from
      * @param string $to
+     *
+     * @return AssistantGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $assistantID,
@@ -135,6 +140,8 @@ interface AssistantsContract
 
     /**
      * @api
+     *
+     * @return AssistantsList<HasRawResponse>
      */
     public function list(
         ?RequestOptions $requestOptions = null
@@ -142,6 +149,8 @@ interface AssistantsContract
 
     /**
      * @api
+     *
+     * @return AssistantDeleteResponse<HasRawResponse>
      */
     public function delete(
         string $assistantID,
@@ -154,6 +163,8 @@ interface AssistantsContract
      * @param string $content The message content sent by the client to the assistant
      * @param string $conversationID A unique identifier for the conversation thread, used to maintain context
      * @param string $name The optional display name of the user sending the message
+     *
+     * @return AssistantChatResponse<HasRawResponse>
      */
     public function chat(
         string $assistantID,
@@ -165,6 +176,8 @@ interface AssistantsContract
 
     /**
      * @api
+     *
+     * @return AssistantCloneResponse<HasRawResponse>
      */
     public function clone(
         string $assistantID,
@@ -184,6 +197,8 @@ interface AssistantsContract
      *
      * @param string $apiKeyRef Integration secret pointer that refers to the API key for the external provider. This should be an identifier for an integration secret created via /v2/integration_secrets.
      * @param Provider|value-of<Provider> $provider the external provider to import assistants from
+     *
+     * @return AssistantsList<HasRawResponse>
      */
     public function import(
         $apiKeyRef,

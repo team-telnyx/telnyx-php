@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\GlobalIPAssignmentsUsage\GlobalIPAssignmentsUsageGetResponse;
 use Telnyx\GlobalIPAssignmentsUsage\GlobalIPAssignmentsUsageRetrieveParams;
 use Telnyx\GlobalIPAssignmentsUsage\GlobalIPAssignmentsUsageRetrieveParams\Filter;
@@ -26,6 +27,8 @@ final class GlobalIPAssignmentsUsageService implements GlobalIPAssignmentsUsageC
      * Global IP Assignment Usage Metrics
      *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[global_ip_assignment_id][in], filter[global_ip_id][in]
+     *
+     * @return GlobalIPAssignmentsUsageGetResponse<HasRawResponse>
      */
     public function retrieve(
         $filter = omit,

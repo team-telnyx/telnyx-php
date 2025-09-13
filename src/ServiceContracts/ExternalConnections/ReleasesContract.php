@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\ExternalConnections;
 
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\ExternalConnections\Releases\ReleaseGetResponse;
 use Telnyx\ExternalConnections\Releases\ReleaseListParams\Filter;
 use Telnyx\ExternalConnections\Releases\ReleaseListParams\Page;
@@ -18,6 +19,8 @@ interface ReleasesContract
      * @api
      *
      * @param string $id
+     *
+     * @return ReleaseGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $releaseID,
@@ -30,6 +33,8 @@ interface ReleasesContract
      *
      * @param Filter $filter Filter parameter for releases (deepObject style). Supports filtering by status, civic_address_id, location_id, and phone_number with eq/contains operations.
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     *
+     * @return ReleaseListResponse<HasRawResponse>
      */
     public function list(
         string $id,

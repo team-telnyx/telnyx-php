@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PhoneNumbersRegulatoryRequirements\PhoneNumbersRegulatoryRequirementGetResponse;
 use Telnyx\PhoneNumbersRegulatoryRequirements\PhoneNumbersRegulatoryRequirementRetrieveParams;
 use Telnyx\PhoneNumbersRegulatoryRequirements\PhoneNumbersRegulatoryRequirementRetrieveParams\Filter;
@@ -26,6 +27,8 @@ final class PhoneNumbersRegulatoryRequirementsService implements PhoneNumbersReg
      * Retrieve regulatory requirements for a list of phone numbers
      *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[phone_number]
+     *
+     * @return PhoneNumbersRegulatoryRequirementGetResponse<HasRawResponse>
      */
     public function retrieve(
         $filter = omit,

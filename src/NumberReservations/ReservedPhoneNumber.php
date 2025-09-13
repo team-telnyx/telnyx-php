@@ -11,13 +11,13 @@ use Telnyx\NumberReservations\ReservedPhoneNumber\Status;
 
 /**
  * @phpstan-type reserved_phone_number = array{
- *   id?: string|null,
- *   createdAt?: \DateTimeInterface|null,
- *   expiredAt?: \DateTimeInterface|null,
- *   phoneNumber?: string|null,
- *   recordType?: string|null,
- *   status?: value-of<Status>|null,
- *   updatedAt?: \DateTimeInterface|null,
+ *   id?: string,
+ *   createdAt?: \DateTimeInterface,
+ *   expiredAt?: \DateTimeInterface,
+ *   phoneNumber?: string,
+ *   recordType?: string,
+ *   status?: value-of<Status>,
+ *   updatedAt?: \DateTimeInterface,
  * }
  */
 final class ReservedPhoneNumber implements BaseModel

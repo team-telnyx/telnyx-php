@@ -10,16 +10,16 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type telephony_credential = array{
- *   id?: string|null,
- *   createdAt?: string|null,
- *   expired?: bool|null,
- *   expiresAt?: string|null,
- *   name?: string|null,
- *   recordType?: string|null,
- *   resourceID?: string|null,
- *   sipPassword?: string|null,
- *   sipUsername?: string|null,
- *   updatedAt?: string|null,
+ *   id?: string,
+ *   createdAt?: string,
+ *   expired?: bool,
+ *   expiresAt?: string,
+ *   name?: string,
+ *   recordType?: string,
+ *   resourceID?: string,
+ *   sipPassword?: string,
+ *   sipUsername?: string,
+ *   updatedAt?: string,
  * }
  */
 final class TelephonyCredential implements BaseModel

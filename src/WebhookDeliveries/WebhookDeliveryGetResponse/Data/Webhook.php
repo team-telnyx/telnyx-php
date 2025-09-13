@@ -13,11 +13,11 @@ use Telnyx\WebhookDeliveries\WebhookDeliveryGetResponse\Data\Webhook\RecordType;
  * Original webhook JSON data. Payload fields vary according to event type.
  *
  * @phpstan-type webhook_alias = array{
- *   id?: string|null,
- *   eventType?: string|null,
- *   occurredAt?: \DateTimeInterface|null,
+ *   id?: string,
+ *   eventType?: string,
+ *   occurredAt?: \DateTimeInterface,
  *   payload?: mixed,
- *   recordType?: value-of<RecordType>|null,
+ *   recordType?: value-of<RecordType>,
  * }
  */
 final class Webhook implements BaseModel

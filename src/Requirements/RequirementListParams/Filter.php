@@ -14,9 +14,9 @@ use Telnyx\Requirements\RequirementListParams\Filter\PhoneNumberType;
  * Consolidated filter parameter for requirements (deepObject style). Originally: filter[country_code], filter[phone_number_type], filter[action].
  *
  * @phpstan-type filter_alias = array{
- *   action?: value-of<Action>|null,
- *   countryCode?: string|null,
- *   phoneNumberType?: value-of<PhoneNumberType>|null,
+ *   action?: value-of<Action>,
+ *   countryCode?: string,
+ *   phoneNumberType?: value-of<PhoneNumberType>,
  * }
  */
 final class Filter implements BaseModel

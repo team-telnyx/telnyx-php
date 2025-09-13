@@ -9,7 +9,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type rc_get_capabilities_response = array{data?: RcsCapabilities|null}
+ * @phpstan-type rc_get_capabilities_response = array{data?: RcsCapabilities}
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class RcGetCapabilitiesResponse implements BaseModel
 {

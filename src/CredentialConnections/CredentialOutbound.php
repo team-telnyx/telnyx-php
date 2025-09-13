@@ -12,15 +12,15 @@ use Telnyx\CredentialConnections\CredentialOutbound\T38ReinviteSource;
 
 /**
  * @phpstan-type credential_outbound = array{
- *   aniOverride?: string|null,
- *   aniOverrideType?: value-of<AniOverrideType>|null,
+ *   aniOverride?: string,
+ *   aniOverrideType?: value-of<AniOverrideType>,
  *   callParkingEnabled?: bool|null,
- *   channelLimit?: int|null,
- *   generateRingbackTone?: bool|null,
- *   instantRingbackEnabled?: bool|null,
- *   localization?: string|null,
- *   outboundVoiceProfileID?: string|null,
- *   t38ReinviteSource?: value-of<T38ReinviteSource>|null,
+ *   channelLimit?: int,
+ *   generateRingbackTone?: bool,
+ *   instantRingbackEnabled?: bool,
+ *   localization?: string,
+ *   outboundVoiceProfileID?: string,
+ *   t38ReinviteSource?: value-of<T38ReinviteSource>,
  * }
  */
 final class CredentialOutbound implements BaseModel

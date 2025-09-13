@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type outbound_alias = array{
- *   channelLimit?: int|null, outboundVoiceProfileID?: string|null
+ *   channelLimit?: int, outboundVoiceProfileID?: string
  * }
  */
 final class Outbound implements BaseModel

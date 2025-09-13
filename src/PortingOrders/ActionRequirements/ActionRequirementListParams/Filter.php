@@ -14,10 +14,10 @@ use Telnyx\PortingOrders\ActionRequirements\ActionRequirementListParams\Filter\S
  * Consolidated filter parameter (deepObject style). Originally: filter[id][in][], filter[requirement_type_id], filter[action_type], filter[status].
  *
  * @phpstan-type filter_alias = array{
- *   id?: list<string>|null,
- *   actionType?: value-of<ActionType>|null,
- *   requirementTypeID?: string|null,
- *   status?: value-of<Status>|null,
+ *   id?: list<string>,
+ *   actionType?: value-of<ActionType>,
+ *   requirementTypeID?: string,
+ *   status?: value-of<Status>,
  * }
  */
 final class Filter implements BaseModel

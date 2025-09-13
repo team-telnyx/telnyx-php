@@ -12,15 +12,15 @@ use Telnyx\PhoneNumbers\Voice\UpdateVoiceSettings\UsagePaymentMethod;
 
 /**
  * @phpstan-type update_voice_settings = array{
- *   callForwarding?: CallForwarding|null,
- *   callRecording?: CallRecording|null,
- *   callerIDNameEnabled?: bool|null,
- *   cnamListing?: CnamListing|null,
- *   inboundCallScreening?: value-of<InboundCallScreening>|null,
- *   mediaFeatures?: MediaFeatures|null,
- *   techPrefixEnabled?: bool|null,
- *   translatedNumber?: string|null,
- *   usagePaymentMethod?: value-of<UsagePaymentMethod>|null,
+ *   callForwarding?: CallForwarding,
+ *   callRecording?: CallRecording,
+ *   callerIDNameEnabled?: bool,
+ *   cnamListing?: CnamListing,
+ *   inboundCallScreening?: value-of<InboundCallScreening>,
+ *   mediaFeatures?: MediaFeatures,
+ *   techPrefixEnabled?: bool,
+ *   translatedNumber?: string,
+ *   usagePaymentMethod?: value-of<UsagePaymentMethod>,
  * }
  */
 final class UpdateVoiceSettings implements BaseModel

@@ -10,10 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type media_alias = array{
- *   contentType?: string|null,
- *   sha256?: string|null,
- *   size?: int|null,
- *   url?: string|null,
+ *   contentType?: string|null, sha256?: string|null, size?: int|null, url?: string
  * }
  */
 final class Media implements BaseModel

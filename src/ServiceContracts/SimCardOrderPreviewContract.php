@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\SimCardOrderPreview\SimCardOrderPreviewPreviewResponse;
 
@@ -14,6 +15,8 @@ interface SimCardOrderPreviewContract
      *
      * @param string $addressID uniquely identifies the address for the order
      * @param int $quantity the amount of SIM cards that the user would like to purchase in the SIM card order
+     *
+     * @return SimCardOrderPreviewPreviewResponse<HasRawResponse>
      */
     public function preview(
         $addressID,

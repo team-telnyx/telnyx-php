@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\FaxApplications\FaxApplicationCreateParams;
 use Telnyx\FaxApplications\FaxApplicationCreateParams\Inbound;
@@ -47,6 +48,8 @@ final class FaxApplicationsService implements FaxApplicationsContract
      * @param list<string> $tags tags associated with the Fax Application
      * @param string|null $webhookEventFailoverURL The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
+     *
+     * @return FaxApplicationNewResponse<HasRawResponse>
      */
     public function create(
         $applicationName,
@@ -89,6 +92,8 @@ final class FaxApplicationsService implements FaxApplicationsContract
      * @api
      *
      * Return the details of an existing Fax Application inside the 'data' attribute of the response.
+     *
+     * @return FaxApplicationGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -118,6 +123,8 @@ final class FaxApplicationsService implements FaxApplicationsContract
      * @param list<string> $tags tags associated with the Fax Application
      * @param string|null $webhookEventFailoverURL The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
+     *
+     * @return FaxApplicationUpdateResponse<HasRawResponse>
      */
     public function update(
         string $id,
@@ -178,6 +185,8 @@ final class FaxApplicationsService implements FaxApplicationsContract
      *     <code>application_name</code> field in descending order.
      *   </li>
      * </ul> <br/> If not given, results are sorted by <code>created_at</code> in descending order.
+     *
+     * @return FaxApplicationListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,
@@ -204,6 +213,8 @@ final class FaxApplicationsService implements FaxApplicationsContract
      * @api
      *
      * Permanently deletes a Fax Application. Deletion may be prevented if the application is in use by phone numbers.
+     *
+     * @return FaxApplicationDeleteResponse<HasRawResponse>
      */
     public function delete(
         string $id,

@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type cost_information = array{
- *   currency?: string|null, monthlyCost?: string|null, upfrontCost?: string|null
+ *   currency?: string, monthlyCost?: string, upfrontCost?: string
  * }
  */
 final class CostInformation implements BaseModel

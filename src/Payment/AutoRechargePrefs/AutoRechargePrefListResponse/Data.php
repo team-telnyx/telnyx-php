@@ -11,13 +11,13 @@ use Telnyx\Payment\AutoRechargePrefs\AutoRechargePrefListResponse\Data\Preferenc
 
 /**
  * @phpstan-type data_alias = array{
- *   id?: string|null,
- *   enabled?: bool|null,
- *   invoiceEnabled?: bool|null,
- *   preference?: value-of<Preference>|null,
- *   rechargeAmount?: string|null,
- *   recordType?: string|null,
- *   thresholdAmount?: string|null,
+ *   id?: string,
+ *   enabled?: bool,
+ *   invoiceEnabled?: bool,
+ *   preference?: value-of<Preference>,
+ *   rechargeAmount?: string,
+ *   recordType?: string,
+ *   thresholdAmount?: string,
  * }
  */
 final class Data implements BaseModel

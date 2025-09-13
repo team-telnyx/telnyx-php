@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\LedgerBillingGroupReports\LedgerBillingGroupReportGetResponse;
 use Telnyx\LedgerBillingGroupReports\LedgerBillingGroupReportNewResponse;
 use Telnyx\RequestOptions;
@@ -17,6 +18,8 @@ interface LedgerBillingGroupReportsContract
      *
      * @param int $month Month of the ledger billing group report
      * @param int $year Year of the ledger billing group report
+     *
+     * @return LedgerBillingGroupReportNewResponse<HasRawResponse>
      */
     public function create(
         $month = omit,
@@ -26,6 +29,8 @@ interface LedgerBillingGroupReportsContract
 
     /**
      * @api
+     *
+     * @return LedgerBillingGroupReportGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,

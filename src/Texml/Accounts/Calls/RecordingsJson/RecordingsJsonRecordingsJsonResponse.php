@@ -13,22 +13,26 @@ use Telnyx\Texml\Accounts\Calls\RecordingsJson\RecordingsJsonRecordingsJsonRespo
 
 /**
  * @phpstan-type recordings_json_recordings_json_response = array{
- *   accountSid?: string|null,
- *   callSid?: string|null,
- *   channels?: value-of<Channels>|null,
+ *   accountSid?: string,
+ *   callSid?: string,
+ *   channels?: value-of<Channels>,
  *   conferenceSid?: string|null,
- *   dateCreated?: \DateTimeInterface|null,
- *   dateUpdated?: \DateTimeInterface|null,
+ *   dateCreated?: \DateTimeInterface,
+ *   dateUpdated?: \DateTimeInterface,
  *   duration?: string|null,
  *   errorCode?: string|null,
  *   price?: string|null,
  *   priceUnit?: string|null,
- *   sid?: string|null,
- *   source?: value-of<Source>|null,
- *   startTime?: \DateTimeInterface|null,
- *   track?: value-of<Track>|null,
- *   uri?: string|null,
+ *   sid?: string,
+ *   source?: value-of<Source>,
+ *   startTime?: \DateTimeInterface,
+ *   track?: value-of<Track>,
+ *   uri?: string,
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class RecordingsJsonRecordingsJsonResponse implements BaseModel
 {

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\WireguardPeersContract;
 use Telnyx\WireguardPeers\WireguardPeerCreateParams;
@@ -34,6 +35,8 @@ final class WireguardPeersService implements WireguardPeersContract
      *
      * @param string $wireguardInterfaceID the id of the wireguard interface associated with the peer
      * @param string $publicKey The WireGuard `PublicKey`.<br /><br />If you do not provide a Public Key, a new Public and Private key pair will be generated for you.
+     *
+     * @return WireguardPeerNewResponse<HasRawResponse>
      */
     public function create(
         $wireguardInterfaceID,
@@ -62,6 +65,8 @@ final class WireguardPeersService implements WireguardPeersContract
      * @api
      *
      * Retrieve the WireGuard peer.
+     *
+     * @return WireguardPeerGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -82,6 +87,8 @@ final class WireguardPeersService implements WireguardPeersContract
      * Update the WireGuard peer.
      *
      * @param string $publicKey The WireGuard `PublicKey`.<br /><br />If you do not provide a Public Key, a new Public and Private key pair will be generated for you.
+     *
+     * @return WireguardPeerUpdateResponse<HasRawResponse>
      */
     public function update(
         string $id,
@@ -110,6 +117,8 @@ final class WireguardPeersService implements WireguardPeersContract
      *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[wireguard_interface_id]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     *
+     * @return WireguardPeerListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,
@@ -135,6 +144,8 @@ final class WireguardPeersService implements WireguardPeersContract
      * @api
      *
      * Delete the WireGuard peer.
+     *
+     * @return WireguardPeerDeleteResponse<HasRawResponse>
      */
     public function delete(
         string $id,

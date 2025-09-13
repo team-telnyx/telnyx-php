@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\SimCards;
 
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\SimCards\Actions\ActionBulkSetPublicIPsResponse;
 use Telnyx\SimCards\Actions\ActionDisableResponse;
@@ -23,6 +24,8 @@ interface ActionsContract
 {
     /**
      * @api
+     *
+     * @return ActionGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -34,6 +37,8 @@ interface ActionsContract
      *
      * @param Filter $filter Consolidated filter parameter for SIM card actions (deepObject style). Originally: filter[sim_card_id], filter[status], filter[bulk_sim_card_action_id], filter[action_type]
      * @param Page $page Consolidated pagination parameter (deepObject style). Originally: page[number], page[size]
+     *
+     * @return ActionListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,
@@ -45,6 +50,8 @@ interface ActionsContract
      * @api
      *
      * @param list<string> $simCardIDs
+     *
+     * @return ActionBulkSetPublicIPsResponse<HasRawResponse>
      */
     public function bulkSetPublicIPs(
         $simCardIDs,
@@ -53,6 +60,8 @@ interface ActionsContract
 
     /**
      * @api
+     *
+     * @return ActionDisableResponse<HasRawResponse>
      */
     public function disable(
         string $id,
@@ -61,6 +70,8 @@ interface ActionsContract
 
     /**
      * @api
+     *
+     * @return ActionEnableResponse<HasRawResponse>
      */
     public function enable(
         string $id,
@@ -69,6 +80,8 @@ interface ActionsContract
 
     /**
      * @api
+     *
+     * @return ActionRemovePublicIPResponse<HasRawResponse>
      */
     public function removePublicIP(
         string $id,
@@ -79,6 +92,8 @@ interface ActionsContract
      * @api
      *
      * @param string $regionCode The code of the region where the public IP should be assigned. A list of available regions can be found at the regions endpoint
+     *
+     * @return ActionSetPublicIPResponse<HasRawResponse>
      */
     public function setPublicIP(
         string $id,
@@ -88,6 +103,8 @@ interface ActionsContract
 
     /**
      * @api
+     *
+     * @return ActionSetStandbyResponse<HasRawResponse>
      */
     public function setStandby(
         string $id,
@@ -98,6 +115,8 @@ interface ActionsContract
      * @api
      *
      * @param list<string> $registrationCodes
+     *
+     * @return ActionValidateRegistrationCodesResponse<HasRawResponse>
      */
     public function validateRegistrationCodes(
         $registrationCodes = omit,

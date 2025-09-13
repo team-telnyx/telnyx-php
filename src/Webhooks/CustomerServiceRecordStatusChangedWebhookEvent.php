@@ -12,7 +12,7 @@ use Telnyx\Webhooks\CustomerServiceRecordStatusChangedWebhookEvent\Meta;
 
 /**
  * @phpstan-type customer_service_record_status_changed_webhook_event = array{
- *   data?: Data|null, meta?: Meta|null
+ *   data?: Data, meta?: Meta
  * }
  */
 final class CustomerServiceRecordStatusChangedWebhookEvent implements BaseModel

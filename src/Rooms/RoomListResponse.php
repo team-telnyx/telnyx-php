@@ -11,8 +11,12 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type room_list_response = array{
- *   data?: list<Room>|null, meta?: PaginationMeta|null
+ *   data?: list<Room>, meta?: PaginationMeta
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class RoomListResponse implements BaseModel
 {

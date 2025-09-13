@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Messages;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Messages\Rcs\RcGenerateDeeplinkParams;
 use Telnyx\Messages\Rcs\RcGenerateDeeplinkResponse;
 use Telnyx\RequestOptions;
@@ -26,6 +27,8 @@ final class RcsService implements RcsContract
      *
      * @param string $body Pre-filled message body (URL encoded)
      * @param string $phoneNumber Phone number in E164 format (URL encoded)
+     *
+     * @return RcGenerateDeeplinkResponse<HasRawResponse>
      */
     public function generateDeeplink(
         string $agentID,

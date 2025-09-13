@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * Outbound call quality statistics.
  *
  * @phpstan-type outbound_alias = array{
- *   packetCount?: string|null, skipPacketCount?: string|null
+ *   packetCount?: string, skipPacketCount?: string
  * }
  */
 final class Outbound implements BaseModel

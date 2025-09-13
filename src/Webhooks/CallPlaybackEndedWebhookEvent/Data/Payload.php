@@ -11,16 +11,16 @@ use Telnyx\Webhooks\CallPlaybackEndedWebhookEvent\Data\Payload\Status;
 
 /**
  * @phpstan-type payload_alias = array{
- *   callControlID?: string|null,
- *   callLegID?: string|null,
- *   callSessionID?: string|null,
- *   clientState?: string|null,
- *   connectionID?: string|null,
- *   mediaName?: string|null,
- *   mediaURL?: string|null,
- *   overlay?: bool|null,
- *   status?: value-of<Status>|null,
- *   statusDetail?: string|null,
+ *   callControlID?: string,
+ *   callLegID?: string,
+ *   callSessionID?: string,
+ *   clientState?: string,
+ *   connectionID?: string,
+ *   mediaName?: string,
+ *   mediaURL?: string,
+ *   overlay?: bool,
+ *   status?: value-of<Status>,
+ *   statusDetail?: string,
  * }
  */
 final class Payload implements BaseModel

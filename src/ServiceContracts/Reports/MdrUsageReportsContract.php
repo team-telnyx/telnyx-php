@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\Reports;
 
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReportCreateParams\AggregationType;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReportDeleteResponse;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReportFetchSyncParams\AggregationType as AggregationType1;
@@ -25,6 +26,8 @@ interface MdrUsageReportsContract
      * @param \DateTimeInterface $endDate
      * @param \DateTimeInterface $startDate
      * @param string $profiles
+     *
+     * @return MdrUsageReportNewResponse<HasRawResponse>
      */
     public function create(
         $aggregationType,
@@ -36,6 +39,8 @@ interface MdrUsageReportsContract
 
     /**
      * @api
+     *
+     * @return MdrUsageReportGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -46,6 +51,8 @@ interface MdrUsageReportsContract
      * @api
      *
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     *
+     * @return MdrUsageReportListResponse<HasRawResponse>
      */
     public function list(
         $page = omit,
@@ -54,6 +61,8 @@ interface MdrUsageReportsContract
 
     /**
      * @api
+     *
+     * @return MdrUsageReportDeleteResponse<HasRawResponse>
      */
     public function delete(
         string $id,
@@ -67,6 +76,8 @@ interface MdrUsageReportsContract
      * @param \DateTimeInterface $endDate
      * @param list<string> $profiles
      * @param \DateTimeInterface $startDate
+     *
+     * @return MdrUsageReportFetchSyncResponse<HasRawResponse>
      */
     public function fetchSync(
         $aggregationType,

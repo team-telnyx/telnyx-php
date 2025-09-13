@@ -11,9 +11,7 @@ use Telnyx\CredentialConnections\ConnectionRtcpSettings\Port;
 
 /**
  * @phpstan-type connection_rtcp_settings = array{
- *   captureEnabled?: bool|null,
- *   port?: value-of<Port>|null,
- *   reportFrequencySecs?: int|null,
+ *   captureEnabled?: bool, port?: value-of<Port>, reportFrequencySecs?: int
  * }
  */
 final class ConnectionRtcpSettings implements BaseModel

@@ -15,14 +15,14 @@ use Telnyx\SimCardGroups\Actions\SimCardGroupAction\Type;
  * This object represents a SIM card group action request. It allows tracking the current status of an operation that impacts the SIM card group and SIM card in it.
  *
  * @phpstan-type sim_card_group_action = array{
- *   id?: string|null,
- *   createdAt?: string|null,
- *   recordType?: string|null,
- *   settings?: Settings|null,
- *   simCardGroupID?: string|null,
- *   status?: value-of<Status>|null,
- *   type?: value-of<Type>|null,
- *   updatedAt?: string|null,
+ *   id?: string,
+ *   createdAt?: string,
+ *   recordType?: string,
+ *   settings?: Settings,
+ *   simCardGroupID?: string,
+ *   status?: value-of<Status>,
+ *   type?: value-of<Type>,
+ *   updatedAt?: string,
  * }
  */
 final class SimCardGroupAction implements BaseModel

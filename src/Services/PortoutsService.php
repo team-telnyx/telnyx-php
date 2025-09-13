@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Portouts\PortoutGetResponse;
 use Telnyx\Portouts\PortoutListParams;
 use Telnyx\Portouts\PortoutListParams\Filter;
@@ -52,16 +53,18 @@ final class PortoutsService implements PortoutsContract
      */
     public function __construct(private Client $client)
     {
-        $this->events = new EventsService($this->client);
-        $this->reports = new ReportsService($this->client);
-        $this->comments = new CommentsService($this->client);
-        $this->supportingDocuments = new SupportingDocumentsService($this->client);
+        $this->events = new EventsService($client);
+        $this->reports = new ReportsService($client);
+        $this->comments = new CommentsService($client);
+        $this->supportingDocuments = new SupportingDocumentsService($client);
     }
 
     /**
      * @api
      *
      * Returns the portout request based on the ID provided
+     *
+     * @return PortoutGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -83,6 +86,8 @@ final class PortoutsService implements PortoutsContract
      *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[carrier_name], filter[country_code], filter[country_code_in], filter[foc_date], filter[inserted_at], filter[phone_number], filter[pon], filter[ported_out_at], filter[spid], filter[status], filter[status_in], filter[support_key]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     *
+     * @return PortoutListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,
@@ -110,6 +115,8 @@ final class PortoutsService implements PortoutsContract
      * Given a port-out ID, list rejection codes that are eligible for that port-out
      *
      * @param Filter1 $filter Consolidated filter parameter (deepObject style). Originally: filter[code], filter[code][in]
+     *
+     * @return PortoutListRejectionCodesResponse<HasRawResponse>
      */
     public function listRejectionCodes(
         string $portoutID,
@@ -140,6 +147,8 @@ final class PortoutsService implements PortoutsContract
      * @param string $id
      * @param string $reason Provide a reason if rejecting the port out request
      * @param bool $hostMessaging Indicates whether messaging services should be maintained with Telnyx after the port out completes
+     *
+     * @return PortoutUpdateStatusResponse<HasRawResponse>
      */
     public function updateStatus(
         Status|string $status,

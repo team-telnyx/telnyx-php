@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\InboundMessageWebhookEvent\Data;
 
 /**
- * @phpstan-type inbound_message_webhook_event = array{data?: Data|null}
+ * @phpstan-type inbound_message_webhook_event = array{data?: Data}
  */
 final class InboundMessageWebhookEvent implements BaseModel
 {

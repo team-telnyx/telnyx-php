@@ -12,13 +12,13 @@ use Telnyx\PortingOrders\PhoneNumberExtensions\PortingPhoneNumberExtension\Exten
 
 /**
  * @phpstan-type porting_phone_number_extension = array{
- *   id?: string|null,
- *   activationRanges?: list<ActivationRange>|null,
- *   createdAt?: \DateTimeInterface|null,
- *   extensionRange?: ExtensionRange|null,
- *   portingPhoneNumberID?: string|null,
- *   recordType?: string|null,
- *   updatedAt?: \DateTimeInterface|null,
+ *   id?: string,
+ *   activationRanges?: list<ActivationRange>,
+ *   createdAt?: \DateTimeInterface,
+ *   extensionRange?: ExtensionRange,
+ *   portingPhoneNumberID?: string,
+ *   recordType?: string,
+ *   updatedAt?: \DateTimeInterface,
  * }
  */
 final class PortingPhoneNumberExtension implements BaseModel

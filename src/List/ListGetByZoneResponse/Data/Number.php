@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type number_alias = array{country?: string|null, number?: string|null}
+ * @phpstan-type number_alias = array{country?: string, number?: string}
  */
 final class Number implements BaseModel
 {

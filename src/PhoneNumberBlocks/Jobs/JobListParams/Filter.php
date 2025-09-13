@@ -14,7 +14,7 @@ use Telnyx\PhoneNumberBlocks\Jobs\JobListParams\Filter\Type;
  * Consolidated filter parameter (deepObject style). Originally: filter[type], filter[status].
  *
  * @phpstan-type filter_alias = array{
- *   status?: value-of<Status>|null, type?: value-of<Type>|null
+ *   status?: value-of<Status>, type?: value-of<Type>
  * }
  */
 final class Filter implements BaseModel

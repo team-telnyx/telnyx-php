@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\List\ListGetAllResponse;
 use Telnyx\List\ListGetByZoneResponse;
 use Telnyx\RequestOptions;
@@ -21,6 +22,8 @@ final class ListService implements ListContract
      * @api
      *
      * Retrieve a list of all phone numbers using Channel Billing, grouped by Zone.
+     *
+     * @return ListGetAllResponse<HasRawResponse>
      */
     public function retrieveAll(
         ?RequestOptions $requestOptions = null
@@ -38,6 +41,8 @@ final class ListService implements ListContract
      * @api
      *
      * Retrieve a list of phone numbers using Channel Billing for a specific Zone.
+     *
+     * @return ListGetByZoneResponse<HasRawResponse>
      */
     public function retrieveByZone(
         string $channelZoneID,

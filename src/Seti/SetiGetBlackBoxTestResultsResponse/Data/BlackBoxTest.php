@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type black_box_test = array{
- *   id?: string|null, recordType?: string|null, result?: float|null
+ *   id?: string, recordType?: string, result?: float
  * }
  */
 final class BlackBoxTest implements BaseModel

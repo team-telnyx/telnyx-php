@@ -13,14 +13,14 @@ use Telnyx\NumberLookup\NumberLookupGetResponse\Data\Portability;
 
 /**
  * @phpstan-type data_alias = array{
- *   callerName?: CallerName|null,
- *   carrier?: Carrier|null,
- *   countryCode?: string|null,
- *   fraud?: string|null,
- *   nationalFormat?: string|null,
- *   phoneNumber?: string|null,
- *   portability?: Portability|null,
- *   recordType?: string|null,
+ *   callerName?: CallerName,
+ *   carrier?: Carrier,
+ *   countryCode?: string,
+ *   fraud?: string,
+ *   nationalFormat?: string,
+ *   phoneNumber?: string,
+ *   portability?: Portability,
+ *   recordType?: string,
  * }
  */
 final class Data implements BaseModel

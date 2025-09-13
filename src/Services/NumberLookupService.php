@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\NumberLookup\NumberLookupGetResponse;
 use Telnyx\NumberLookup\NumberLookupRetrieveParams;
 use Telnyx\NumberLookup\NumberLookupRetrieveParams\Type;
@@ -26,6 +27,8 @@ final class NumberLookupService implements NumberLookupContract
      * Returns information about the provided phone number.
      *
      * @param Type|value-of<Type> $type Specifies the type of number lookup to be performed
+     *
+     * @return NumberLookupGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $phoneNumber,

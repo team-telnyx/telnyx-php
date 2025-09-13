@@ -13,10 +13,10 @@ use Telnyx\GlobalIPUsage\GlobalIPUsageGetResponse\Data\Transmitted;
 
 /**
  * @phpstan-type data_alias = array{
- *   globalIP?: GlobalIP|null,
- *   received?: Received|null,
- *   timestamp?: \DateTimeInterface|null,
- *   transmitted?: Transmitted|null,
+ *   globalIP?: GlobalIP,
+ *   received?: Received,
+ *   timestamp?: \DateTimeInterface,
+ *   transmitted?: Transmitted,
  * }
  */
 final class Data implements BaseModel

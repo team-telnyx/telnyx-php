@@ -13,7 +13,7 @@ use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressListParams\Filter\St
  * Consolidated filter parameter (deepObject style). Originally: filter[status], filter[country_code].
  *
  * @phpstan-type filter_alias = array{
- *   countryCode?: string|null, status?: value-of<Status>|null
+ *   countryCode?: string, status?: value-of<Status>
  * }
  */
 final class Filter implements BaseModel

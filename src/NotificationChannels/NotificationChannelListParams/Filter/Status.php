@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NotificationChannels\NotificationChannelListParams\Filter\Status\Eq;
 
 /**
- * @phpstan-type status_alias = array{eq?: value-of<Eq>|null}
+ * @phpstan-type status_alias = array{eq?: value-of<Eq>}
  */
 final class Status implements BaseModel
 {

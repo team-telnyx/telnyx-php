@@ -10,7 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Rooms\Sessions\Actions\ActionMuteResponse\Data;
 
 /**
- * @phpstan-type action_mute_response = array{data?: Data|null}
+ * @phpstan-type action_mute_response = array{data?: Data}
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class ActionMuteResponse implements BaseModel
 {

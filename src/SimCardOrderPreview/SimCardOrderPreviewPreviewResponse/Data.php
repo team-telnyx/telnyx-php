@@ -13,11 +13,11 @@ use Telnyx\SimCardOrderPreview\SimCardOrderPreviewPreviewResponse\Data\TotalCost
 
 /**
  * @phpstan-type data_alias = array{
- *   quantity?: int|null,
- *   recordType?: string|null,
- *   shippingCost?: ShippingCost|null,
- *   simCardsCost?: SimCardsCost|null,
- *   totalCost?: TotalCost|null,
+ *   quantity?: int,
+ *   recordType?: string,
+ *   shippingCost?: ShippingCost,
+ *   simCardsCost?: SimCardsCost,
+ *   totalCost?: TotalCost,
  * }
  */
 final class Data implements BaseModel

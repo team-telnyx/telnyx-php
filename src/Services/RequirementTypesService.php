@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\RequirementTypes\RequirementTypeGetResponse;
 use Telnyx\RequirementTypes\RequirementTypeListParams;
@@ -26,6 +27,8 @@ final class RequirementTypesService implements RequirementTypesContract
      * @api
      *
      * Retrieve a requirement type by id
+     *
+     * @return RequirementTypeGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -47,6 +50,8 @@ final class RequirementTypesService implements RequirementTypesContract
      *
      * @param Filter $filter Consolidated filter parameter for requirement types (deepObject style). Originally: filter[name]
      * @param list<Sort|value-of<Sort>> $sort Consolidated sort parameter for requirement types (deepObject style). Originally: sort[]
+     *
+     * @return RequirementTypeListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,

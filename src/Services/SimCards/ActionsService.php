@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\SimCards;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SimCards\ActionsContract;
 use Telnyx\SimCards\Actions\ActionBulkSetPublicIPsParams;
@@ -36,6 +37,8 @@ final class ActionsService implements ActionsContract
      * @api
      *
      * This API fetches detailed information about a SIM card action to follow-up on an existing asynchronous operation.
+     *
+     * @return ActionGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -57,6 +60,8 @@ final class ActionsService implements ActionsContract
      *
      * @param Filter $filter Consolidated filter parameter for SIM card actions (deepObject style). Originally: filter[sim_card_id], filter[status], filter[bulk_sim_card_action_id], filter[action_type]
      * @param Page $page Consolidated pagination parameter (deepObject style). Originally: page[number], page[size]
+     *
+     * @return ActionListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,
@@ -85,6 +90,8 @@ final class ActionsService implements ActionsContract
      * For each SIM Card a SIM Card Action will be generated. The status of the SIM Card Action can be followed through the [List SIM Card Action](https://developersdev.telnyx.com/docs/api/v2/wireless/SIM-Card-Actions#ListSIMCardActions) API.
      *
      * @param list<string> $simCardIDs
+     *
+     * @return ActionBulkSetPublicIPsResponse<HasRawResponse>
      */
     public function bulkSetPublicIPs(
         $simCardIDs,
@@ -110,6 +117,8 @@ final class ActionsService implements ActionsContract
      *
      * This API disables a SIM card, disconnecting it from the network and making it impossible to consume data.<br/>
      * The API will trigger an asynchronous operation called a SIM Card Action. Transitioning to the disabled state may take a period of time. The status of the SIM Card Action can be followed through the [List SIM Card Action](https://developersdev.telnyx.com/docs/api/v2/wireless/SIM-Card-Actions#ListSIMCardActions) API.
+     *
+     * @return ActionDisableResponse<HasRawResponse>
      */
     public function disable(
         string $id,
@@ -130,6 +139,8 @@ final class ActionsService implements ActionsContract
      * This API enables a SIM card, connecting it to the network and making it possible to consume data.<br/>
      * To enable a SIM card, it must be associated with a SIM card group.<br/>
      * The API will trigger an asynchronous operation called a SIM Card Action. Transitioning to the enabled state may take a period of time. The status of the SIM Card Action can be followed through the [List SIM Card Action](https://developersdev.telnyx.com/docs/api/v2/wireless/SIM-Card-Actions#ListSIMCardActions) API.
+     *
+     * @return ActionEnableResponse<HasRawResponse>
      */
     public function enable(
         string $id,
@@ -149,6 +160,8 @@ final class ActionsService implements ActionsContract
      *
      * This API removes an existing public IP from a SIM card. <br/><br/>
      *  The API will trigger an asynchronous operation called a SIM Card Action. The status of the SIM Card Action can be followed through the [List SIM Card Action](https://developersdev.telnyx.com/docs/api/v2/wireless/SIM-Card-Actions#ListSIMCardActions) API.
+     *
+     * @return ActionRemovePublicIPResponse<HasRawResponse>
      */
     public function removePublicIP(
         string $id,
@@ -171,6 +184,8 @@ final class ActionsService implements ActionsContract
      *  Setting a Public IP to a SIM Card incurs a charge and will only succeed if the account has sufficient funds.
      *
      * @param string $regionCode The code of the region where the public IP should be assigned. A list of available regions can be found at the regions endpoint
+     *
+     * @return ActionSetPublicIPResponse<HasRawResponse>
      */
     public function setPublicIP(
         string $id,
@@ -198,6 +213,8 @@ final class ActionsService implements ActionsContract
      * The SIM card will be able to connect to the network once the process to set it to standby has been completed, thus making it possible to consume data.<br/>
      * To set a SIM card to standby, it must be associated with SIM card group.<br/>
      * The API will trigger an asynchronous operation called a SIM Card Action. Transitioning to the standby state may take a period of time. The status of the SIM Card Action can be followed through the [List SIM Card Action](https://developersdev.telnyx.com/docs/api/v2/wireless/SIM-Card-Actions#ListSIMCardActions) API.
+     *
+     * @return ActionSetStandbyResponse<HasRawResponse>
      */
     public function setStandby(
         string $id,
@@ -218,6 +235,8 @@ final class ActionsService implements ActionsContract
      * It validates whether SIM card registration codes are valid or not.
      *
      * @param list<string> $registrationCodes
+     *
+     * @return ActionValidateRegistrationCodesResponse<HasRawResponse>
      */
     public function validateRegistrationCodes(
         $registrationCodes = omit,

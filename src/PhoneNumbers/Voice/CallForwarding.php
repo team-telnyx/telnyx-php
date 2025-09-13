@@ -13,9 +13,9 @@ use Telnyx\PhoneNumbers\Voice\CallForwarding\ForwardingType;
  * The call forwarding settings for a phone number.
  *
  * @phpstan-type call_forwarding = array{
- *   callForwardingEnabled?: bool|null,
- *   forwardingType?: value-of<ForwardingType>|null,
- *   forwardsTo?: string|null,
+ *   callForwardingEnabled?: bool,
+ *   forwardingType?: value-of<ForwardingType>,
+ *   forwardsTo?: string,
  * }
  */
 final class CallForwarding implements BaseModel

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\MessagingTollfree\Verification;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\MessagingTollfree\Verification\Requests\RequestCreateParams;
 use Telnyx\MessagingTollfree\Verification\Requests\RequestListParams;
 use Telnyx\MessagingTollfree\Verification\Requests\RequestListResponse;
@@ -54,6 +55,8 @@ final class RequestsService implements RequestsContract
      * @param string $useCaseSummary Human-readable summary of the desired use-case
      * @param string $businessAddr2 Line 2 of the business address
      * @param string $webhookURL URL that should receive webhooks relating to this verification request
+     *
+     * @return VerificationRequestEgress<HasRawResponse>
      */
     public function create(
         $additionalInformation,
@@ -120,6 +123,8 @@ final class RequestsService implements RequestsContract
      * @api
      *
      * Get a single verification request by its ID.
+     *
+     * @return VerificationRequestStatus<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -160,6 +165,8 @@ final class RequestsService implements RequestsContract
      * @param string $useCaseSummary Human-readable summary of the desired use-case
      * @param string $businessAddr2 Line 2 of the business address
      * @param string $webhookURL URL that should receive webhooks relating to this verification request
+     *
+     * @return VerificationRequestEgress<HasRawResponse>
      */
     public function update(
         string $id,
@@ -237,6 +244,8 @@ final class RequestsService implements RequestsContract
      * @param \DateTimeInterface $dateStart
      * @param string $phoneNumber
      * @param TfVerificationStatus|value-of<TfVerificationStatus> $status Tollfree verification status
+     *
+     * @return RequestListResponse<HasRawResponse>
      */
     public function list(
         $page,

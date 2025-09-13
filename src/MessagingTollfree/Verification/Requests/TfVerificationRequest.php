@@ -31,8 +31,8 @@ use Telnyx\Core\Contracts\BaseModel;
  *   productionMessageContent: string,
  *   useCase: value-of<UseCaseCategories>,
  *   useCaseSummary: string,
- *   businessAddr2?: string|null,
- *   webhookURL?: string|null,
+ *   businessAddr2?: string,
+ *   webhookURL?: string,
  * }
  */
 final class TfVerificationRequest implements BaseModel

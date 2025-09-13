@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Direction filtering operations.
  *
- * @phpstan-type direction_alias = array{eq?: string|null}
+ * @phpstan-type direction_alias = array{eq?: string}
  */
 final class Direction implements BaseModel
 {

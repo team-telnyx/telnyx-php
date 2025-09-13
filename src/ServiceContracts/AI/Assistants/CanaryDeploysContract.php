@@ -6,6 +6,7 @@ namespace Telnyx\ServiceContracts\AI\Assistants;
 
 use Telnyx\AI\Assistants\CanaryDeploys\CanaryDeployResponse;
 use Telnyx\AI\Assistants\CanaryDeploys\VersionConfig;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 
 interface CanaryDeploysContract
@@ -14,6 +15,8 @@ interface CanaryDeploysContract
      * @api
      *
      * @param list<VersionConfig> $versions List of version configurations
+     *
+     * @return CanaryDeployResponse<HasRawResponse>
      */
     public function create(
         string $assistantID,
@@ -23,6 +26,8 @@ interface CanaryDeploysContract
 
     /**
      * @api
+     *
+     * @return CanaryDeployResponse<HasRawResponse>
      */
     public function retrieve(
         string $assistantID,
@@ -33,6 +38,8 @@ interface CanaryDeploysContract
      * @api
      *
      * @param list<VersionConfig> $versions List of version configurations
+     *
+     * @return CanaryDeployResponse<HasRawResponse>
      */
     public function update(
         string $assistantID,

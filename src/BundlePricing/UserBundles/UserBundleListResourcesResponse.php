@@ -12,6 +12,10 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type user_bundle_list_resources_response = array{
  *   data: list<UserBundleResource>
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class UserBundleListResourcesResponse implements BaseModel
 {

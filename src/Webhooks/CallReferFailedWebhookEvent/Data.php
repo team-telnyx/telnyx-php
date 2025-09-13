@@ -13,11 +13,11 @@ use Telnyx\Webhooks\CallReferFailedWebhookEvent\Data\RecordType;
 
 /**
  * @phpstan-type data_alias = array{
- *   id?: string|null,
- *   eventType?: value-of<EventType>|null,
- *   occurredAt?: \DateTimeInterface|null,
- *   payload?: Payload|null,
- *   recordType?: value-of<RecordType>|null,
+ *   id?: string,
+ *   eventType?: value-of<EventType>,
+ *   occurredAt?: \DateTimeInterface,
+ *   payload?: Payload,
+ *   recordType?: value-of<RecordType>,
  * }
  */
 final class Data implements BaseModel

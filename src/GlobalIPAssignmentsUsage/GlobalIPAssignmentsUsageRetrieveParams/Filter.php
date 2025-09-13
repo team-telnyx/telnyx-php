@@ -14,7 +14,7 @@ use Telnyx\GlobalIPAssignmentsUsage\GlobalIPAssignmentsUsageRetrieveParams\Filte
  * Consolidated filter parameter (deepObject style). Originally: filter[global_ip_assignment_id][in], filter[global_ip_id][in].
  *
  * @phpstan-type filter_alias = array{
- *   globalIPAssignmentID?: string|null|In, globalIPID?: string|null|In1
+ *   globalIPAssignmentID?: string|In, globalIPID?: string|In1
  * }
  */
 final class Filter implements BaseModel

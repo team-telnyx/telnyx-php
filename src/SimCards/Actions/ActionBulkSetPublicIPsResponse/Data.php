@@ -13,12 +13,12 @@ use Telnyx\SimCards\Actions\ActionBulkSetPublicIPsResponse\Data\ActionType;
  * This object represents a bulk SIM card action. It groups SIM card actions created through a bulk endpoint under a single resource for further lookup.
  *
  * @phpstan-type data_alias = array{
- *   id?: string|null,
- *   actionType?: value-of<ActionType>|null,
- *   createdAt?: string|null,
- *   recordType?: string|null,
- *   settings?: array<string, mixed>|null,
- *   updatedAt?: string|null,
+ *   id?: string,
+ *   actionType?: value-of<ActionType>,
+ *   createdAt?: string,
+ *   recordType?: string,
+ *   settings?: array<string, mixed>,
+ *   updatedAt?: string,
  * }
  */
 final class Data implements BaseModel

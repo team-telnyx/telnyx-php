@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\PhoneNumbers;
 
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PhoneNumbers\Actions\ActionChangeBundleStatusParams;
 use Telnyx\PhoneNumbers\Actions\ActionChangeBundleStatusResponse;
 use Telnyx\PhoneNumbers\Actions\ActionEnableEmergencyParams;
@@ -27,6 +28,8 @@ final class ActionsService implements ActionsContract
      * Change the bundle status for a phone number (set to being in a bundle or remove from a bundle)
      *
      * @param string $bundleID The new bundle_id setting for the number. If you are assigning the number to a bundle, this is the unique ID of the bundle you wish to use. If you are removing the number from a bundle, this must be null. You cannot assign a number from one bundle to another directly. You must first remove it from a bundle, and then assign it to a new bundle.
+     *
+     * @return ActionChangeBundleStatusResponse<HasRawResponse>
      */
     public function changeBundleStatus(
         string $id,
@@ -55,6 +58,8 @@ final class ActionsService implements ActionsContract
      *
      * @param string $emergencyAddressID identifies the address to be used with emergency services
      * @param bool $emergencyEnabled indicates whether to enable emergency services on this number
+     *
+     * @return ActionEnableEmergencyResponse<HasRawResponse>
      */
     public function enableEmergency(
         string $id,
@@ -86,6 +91,8 @@ final class ActionsService implements ActionsContract
      * Verifies ownership of the provided phone numbers and returns a mapping of numbers to their IDs, plus a list of numbers not found in the account.
      *
      * @param list<string> $phoneNumbers Array of phone numbers to verify ownership for
+     *
+     * @return ActionVerifyOwnershipResponse<HasRawResponse>
      */
     public function verifyOwnership(
         $phoneNumbers,

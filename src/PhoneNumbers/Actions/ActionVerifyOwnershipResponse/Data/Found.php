@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type found_alias = array{id?: string|null, numberValE164?: string|null}
+ * @phpstan-type found_alias = array{id?: string, numberValE164?: string}
  */
 final class Found implements BaseModel
 {

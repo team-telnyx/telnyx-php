@@ -31,6 +31,7 @@ use Telnyx\Calls\StreamBidirectionalMode;
 use Telnyx\Calls\StreamBidirectionalTargetLegs;
 use Telnyx\Calls\StreamCodec;
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\CallsContract;
 use Telnyx\Services\Calls\ActionsService;
@@ -49,7 +50,7 @@ final class CallsService implements CallsContract
      */
     public function __construct(private Client $client)
     {
-        $this->actions = new ActionsService($this->client);
+        $this->actions = new ActionsService($client);
     }
 
     /**
@@ -119,6 +120,8 @@ final class CallsService implements CallsContract
      * @param TranscriptionStartRequest $transcriptionConfig
      * @param string $webhookURL use this field to override the URL for which Telnyx will send subsequent webhooks to for this call
      * @param WebhookURLMethod|value-of<WebhookURLMethod> $webhookURLMethod HTTP request type used for `webhook_url`
+     *
+     * @return CallDialResponse<HasRawResponse>
      */
     public function dial(
         $connectionID,
@@ -243,6 +246,8 @@ final class CallsService implements CallsContract
      * @api
      *
      * Returns the status of a call (data is available 10 minutes after call ended).
+     *
+     * @return CallGetStatusResponse<HasRawResponse>
      */
     public function retrieveStatus(
         string $callControlID,

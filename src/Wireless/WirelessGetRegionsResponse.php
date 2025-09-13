@@ -10,7 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Wireless\WirelessGetRegionsResponse\Data;
 
 /**
- * @phpstan-type wireless_get_regions_response = array{data?: list<Data>|null}
+ * @phpstan-type wireless_get_regions_response = array{data?: list<Data>}
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class WirelessGetRegionsResponse implements BaseModel
 {

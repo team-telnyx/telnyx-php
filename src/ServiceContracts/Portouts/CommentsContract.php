@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\Portouts;
 
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Portouts\Comments\CommentListResponse;
 use Telnyx\Portouts\Comments\CommentNewResponse;
 use Telnyx\RequestOptions;
@@ -16,6 +17,8 @@ interface CommentsContract
      * @api
      *
      * @param string $body Comment to post on this portout request
+     *
+     * @return CommentNewResponse<HasRawResponse>
      */
     public function create(
         string $id,
@@ -25,6 +28,8 @@ interface CommentsContract
 
     /**
      * @api
+     *
+     * @return CommentListResponse<HasRawResponse>
      */
     public function list(
         string $id,

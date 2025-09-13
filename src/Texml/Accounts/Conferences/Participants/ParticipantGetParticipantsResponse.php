@@ -11,15 +11,19 @@ use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantGetParticipantsRes
 
 /**
  * @phpstan-type participant_get_participants_response = array{
- *   end?: int|null,
- *   firstPageUri?: string|null,
- *   nextPageUri?: string|null,
- *   page?: int|null,
- *   pageSize?: int|null,
- *   participants?: list<Participant>|null,
- *   start?: int|null,
- *   uri?: string|null,
+ *   end?: int,
+ *   firstPageUri?: string,
+ *   nextPageUri?: string,
+ *   page?: int,
+ *   pageSize?: int,
+ *   participants?: list<Participant>,
+ *   start?: int,
+ *   uri?: string,
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class ParticipantGetParticipantsResponse implements BaseModel
 {

@@ -10,13 +10,13 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type rcs_agent = array{
- *   agentID?: string|null,
- *   agentName?: string|null,
- *   createdAt?: \DateTimeInterface|null,
- *   enabled?: bool|null,
+ *   agentID?: string,
+ *   agentName?: string,
+ *   createdAt?: \DateTimeInterface,
+ *   enabled?: bool,
  *   profileID?: string|null,
- *   updatedAt?: \DateTimeInterface|null,
- *   userID?: string|null,
+ *   updatedAt?: \DateTimeInterface,
+ *   userID?: string,
  *   webhookFailoverURL?: string|null,
  *   webhookURL?: string|null,
  * }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\NumberBlockOrders\NumberBlockOrderGetResponse;
 use Telnyx\NumberBlockOrders\NumberBlockOrderListParams\Filter;
 use Telnyx\NumberBlockOrders\NumberBlockOrderListParams\Page;
@@ -23,6 +24,8 @@ interface NumberBlockOrdersContract
      * @param string $connectionID identifies the connection associated with this phone number
      * @param string $customerReference a customer reference string for customer look ups
      * @param string $messagingProfileID identifies the messaging profile associated with the phone number
+     *
+     * @return NumberBlockOrderNewResponse<HasRawResponse>
      */
     public function create(
         $range,
@@ -35,6 +38,8 @@ interface NumberBlockOrdersContract
 
     /**
      * @api
+     *
+     * @return NumberBlockOrderGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $numberBlockOrderID,
@@ -46,6 +51,8 @@ interface NumberBlockOrdersContract
      *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[status], filter[created_at], filter[phone_numbers.starting_number]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     *
+     * @return NumberBlockOrderListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,

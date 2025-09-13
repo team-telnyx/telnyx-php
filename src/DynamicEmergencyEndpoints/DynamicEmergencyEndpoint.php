@@ -14,12 +14,12 @@ use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpoint\Status;
  *   callbackNumber: string,
  *   callerName: string,
  *   dynamicEmergencyAddressID: string,
- *   id?: string|null,
- *   createdAt?: string|null,
- *   recordType?: string|null,
- *   sipFromID?: string|null,
- *   status?: value-of<Status>|null,
- *   updatedAt?: string|null,
+ *   id?: string,
+ *   createdAt?: string,
+ *   recordType?: string,
+ *   sipFromID?: string,
+ *   status?: value-of<Status>,
+ *   updatedAt?: string,
  * }
  */
 final class DynamicEmergencyEndpoint implements BaseModel

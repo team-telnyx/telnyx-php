@@ -11,7 +11,7 @@ use Telnyx\Webhooks\CallMachinePremiumGreetingEndedWebhookEvent\Data;
 
 /**
  * @phpstan-type call_machine_premium_greeting_ended_webhook_event = array{
- *   data?: Data|null
+ *   data?: Data
  * }
  */
 final class CallMachinePremiumGreetingEndedWebhookEvent implements BaseModel

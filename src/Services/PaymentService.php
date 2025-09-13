@@ -20,6 +20,6 @@ final class PaymentService implements PaymentContract
      */
     public function __construct(private Client $client)
     {
-        $this->autoRechargePrefs = new AutoRechargePrefsService($this->client);
+        $this->autoRechargePrefs = new AutoRechargePrefsService($client);
     }
 }

@@ -26,7 +26,7 @@ final class ActionsService implements ActionsContract
      */
     public function __construct(private Client $client)
     {
-        $this->purchase = new PurchaseService($this->client);
-        $this->register = new RegisterService($this->client);
+        $this->purchase = new PurchaseService($client);
+        $this->register = new RegisterService($client);
     }
 }

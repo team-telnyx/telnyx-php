@@ -10,7 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\ShortCode;
 
 /**
- * @phpstan-type short_code_update_response = array{data?: ShortCode|null}
+ * @phpstan-type short_code_update_response = array{data?: ShortCode}
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class ShortCodeUpdateResponse implements BaseModel
 {

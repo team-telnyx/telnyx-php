@@ -13,16 +13,16 @@ use Telnyx\Porting\LoaConfigurations\PortingLoaConfiguration\Logo;
 
 /**
  * @phpstan-type porting_loa_configuration = array{
- *   id?: string|null,
- *   address?: Address|null,
- *   companyName?: string|null,
- *   contact?: Contact|null,
- *   createdAt?: \DateTimeInterface|null,
- *   logo?: Logo|null,
- *   name?: string|null,
- *   organizationID?: string|null,
- *   recordType?: string|null,
- *   updatedAt?: \DateTimeInterface|null,
+ *   id?: string,
+ *   address?: Address,
+ *   companyName?: string,
+ *   contact?: Contact,
+ *   createdAt?: \DateTimeInterface,
+ *   logo?: Logo,
+ *   name?: string,
+ *   organizationID?: string,
+ *   recordType?: string,
+ *   updatedAt?: \DateTimeInterface,
  * }
  */
 final class PortingLoaConfiguration implements BaseModel

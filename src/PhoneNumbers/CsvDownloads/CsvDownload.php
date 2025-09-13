@@ -11,10 +11,7 @@ use Telnyx\PhoneNumbers\CsvDownloads\CsvDownload\Status;
 
 /**
  * @phpstan-type csv_download = array{
- *   id?: string|null,
- *   recordType?: string|null,
- *   status?: value-of<Status>|null,
- *   url?: string|null,
+ *   id?: string, recordType?: string, status?: value-of<Status>, url?: string
  * }
  */
 final class CsvDownload implements BaseModel

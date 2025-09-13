@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\PhoneNumbers;
 
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PhoneNumbers\Voice\CallForwarding;
 use Telnyx\PhoneNumbers\Voice\CallRecording;
 use Telnyx\PhoneNumbers\Voice\CnamListing;
@@ -24,6 +25,8 @@ interface VoiceContract
 {
     /**
      * @api
+     *
+     * @return VoiceGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -42,6 +45,8 @@ interface VoiceContract
      * @param bool $techPrefixEnabled controls whether a tech prefix is enabled for this phone number
      * @param string $translatedNumber This field allows you to rewrite the destination number of an inbound call before the call is routed to you. The value of this field may be any alphanumeric value, and the value will replace the number originally dialed.
      * @param UsagePaymentMethod|value-of<UsagePaymentMethod> $usagePaymentMethod controls whether a number is billed per minute or uses your concurrent channels
+     *
+     * @return VoiceUpdateResponse<HasRawResponse>
      */
     public function update(
         string $id,
@@ -63,6 +68,8 @@ interface VoiceContract
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[phone_number], filter[connection_name], filter[customer_reference], filter[voice.usage_payment_method]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param Sort|value-of<Sort> $sort Specifies the sort order for results. If not given, results are sorted by created_at in descending order.
+     *
+     * @return VoiceListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,

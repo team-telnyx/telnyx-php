@@ -10,7 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\ManagedAccounts\ManagedAccount;
 
 /**
- * @phpstan-type action_enable_response = array{data?: ManagedAccount|null}
+ * @phpstan-type action_enable_response = array{data?: ManagedAccount}
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class ActionEnableResponse implements BaseModel
 {

@@ -11,18 +11,22 @@ use Telnyx\Texml\Accounts\Transcriptions\Json\JsonGetRecordingTranscriptionSidJs
 
 /**
  * @phpstan-type json_get_recording_transcription_sid_json_response = array{
- *   accountSid?: string|null,
- *   apiVersion?: string|null,
- *   callSid?: string|null,
- *   dateCreated?: \DateTimeInterface|null,
- *   dateUpdated?: \DateTimeInterface|null,
+ *   accountSid?: string,
+ *   apiVersion?: string,
+ *   callSid?: string,
+ *   dateCreated?: \DateTimeInterface,
+ *   dateUpdated?: \DateTimeInterface,
  *   duration?: string|null,
- *   recordingSid?: string|null,
- *   sid?: string|null,
- *   status?: value-of<Status>|null,
- *   transcriptionText?: string|null,
- *   uri?: string|null,
+ *   recordingSid?: string,
+ *   sid?: string,
+ *   status?: value-of<Status>,
+ *   transcriptionText?: string,
+ *   uri?: string,
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class JsonGetRecordingTranscriptionSidJsonResponse implements BaseModel
 {

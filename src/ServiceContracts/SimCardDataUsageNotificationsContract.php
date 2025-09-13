@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationCreateParams\Threshold;
 use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationDeleteResponse;
@@ -22,6 +23,8 @@ interface SimCardDataUsageNotificationsContract
      *
      * @param string $simCardID the identification UUID of the related SIM card resource
      * @param Threshold $threshold data usage threshold that will trigger the notification
+     *
+     * @return SimCardDataUsageNotificationNewResponse<HasRawResponse>
      */
     public function create(
         $simCardID,
@@ -31,6 +34,8 @@ interface SimCardDataUsageNotificationsContract
 
     /**
      * @api
+     *
+     * @return SimCardDataUsageNotificationGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -42,6 +47,8 @@ interface SimCardDataUsageNotificationsContract
      *
      * @param string $simCardID the identification UUID of the related SIM card resource
      * @param Threshold1 $threshold data usage threshold that will trigger the notification
+     *
+     * @return SimCardDataUsageNotificationUpdateResponse<HasRawResponse>
      */
     public function update(
         string $id,
@@ -56,6 +63,8 @@ interface SimCardDataUsageNotificationsContract
      * @param string $filterSimCardID a valid SIM card ID
      * @param int $pageNumber the page number to load
      * @param int $pageSize the size of the page
+     *
+     * @return SimCardDataUsageNotificationListResponse<HasRawResponse>
      */
     public function list(
         $filterSimCardID = omit,
@@ -66,6 +75,8 @@ interface SimCardDataUsageNotificationsContract
 
     /**
      * @api
+     *
+     * @return SimCardDataUsageNotificationDeleteResponse<HasRawResponse>
      */
     public function delete(
         string $id,

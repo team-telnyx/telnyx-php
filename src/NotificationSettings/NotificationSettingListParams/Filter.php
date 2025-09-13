@@ -18,12 +18,12 @@ use Telnyx\NotificationSettings\NotificationSettingListParams\Filter\Status;
  * Consolidated filter parameter (deepObject style). Originally: filter[associated_record_type][eq], filter[channel_type_id][eq], filter[notification_profile_id][eq], filter[notification_channel][eq], filter[notification_event_condition_id][eq], filter[status][eq].
  *
  * @phpstan-type filter_alias = array{
- *   associatedRecordType?: AssociatedRecordType|null,
- *   channelTypeID?: ChannelTypeID|null,
- *   notificationChannel?: NotificationChannel|null,
- *   notificationEventConditionID?: NotificationEventConditionID|null,
- *   notificationProfileID?: NotificationProfileID|null,
- *   status?: Status|null,
+ *   associatedRecordType?: AssociatedRecordType,
+ *   channelTypeID?: ChannelTypeID,
+ *   notificationChannel?: NotificationChannel,
+ *   notificationEventConditionID?: NotificationEventConditionID,
+ *   notificationProfileID?: NotificationProfileID,
+ *   status?: Status,
  * }
  */
 final class Filter implements BaseModel

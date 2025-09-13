@@ -12,11 +12,11 @@ use Telnyx\Core\Contracts\BaseModel;
  * Inbound call quality statistics.
  *
  * @phpstan-type inbound_alias = array{
- *   jitterMaxVariance?: string|null,
- *   jitterPacketCount?: string|null,
- *   mos?: string|null,
- *   packetCount?: string|null,
- *   skipPacketCount?: string|null,
+ *   jitterMaxVariance?: string,
+ *   jitterPacketCount?: string,
+ *   mos?: string,
+ *   packetCount?: string,
+ *   skipPacketCount?: string,
  * }
  */
 final class Inbound implements BaseModel

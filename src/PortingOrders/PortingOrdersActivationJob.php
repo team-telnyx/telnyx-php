@@ -13,14 +13,14 @@ use Telnyx\PortingOrders\PortingOrdersActivationJob\Status;
 
 /**
  * @phpstan-type porting_orders_activation_job = array{
- *   id?: string|null,
- *   activateAt?: \DateTimeInterface|null,
- *   activationType?: value-of<ActivationType>|null,
- *   activationWindows?: list<ActivationWindow>|null,
- *   createdAt?: \DateTimeInterface|null,
- *   recordType?: string|null,
- *   status?: value-of<Status>|null,
- *   updatedAt?: \DateTimeInterface|null,
+ *   id?: string,
+ *   activateAt?: \DateTimeInterface,
+ *   activationType?: value-of<ActivationType>,
+ *   activationWindows?: list<ActivationWindow>,
+ *   createdAt?: \DateTimeInterface,
+ *   recordType?: string,
+ *   status?: value-of<Status>,
+ *   updatedAt?: \DateTimeInterface,
  * }
  */
 final class PortingOrdersActivationJob implements BaseModel

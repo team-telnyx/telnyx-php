@@ -22,12 +22,16 @@ use Telnyx\Core\Contracts\BaseModel;
  *   rubric: list<Rubric>,
  *   telnyxConversationChannel: value-of<TelnyxConversationChannel>,
  *   testID: string,
- *   description?: string|null,
- *   destination?: string|null,
- *   instructions?: string|null,
- *   maxDurationSeconds?: int|null,
- *   testSuite?: string|null,
+ *   description?: string,
+ *   destination?: string,
+ *   instructions?: string,
+ *   maxDurationSeconds?: int,
+ *   testSuite?: string,
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class AssistantTest implements BaseModel
 {

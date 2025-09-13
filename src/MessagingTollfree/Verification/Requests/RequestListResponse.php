@@ -12,8 +12,12 @@ use Telnyx\Core\Contracts\BaseModel;
  * A paginated response.
  *
  * @phpstan-type request_list_response = array{
- *   records?: list<VerificationRequestStatus>|null, totalRecords?: int|null
+ *   records?: list<VerificationRequestStatus>, totalRecords?: int
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class RequestListResponse implements BaseModel
 {

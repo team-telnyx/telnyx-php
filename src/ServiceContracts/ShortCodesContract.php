@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ShortCodes\ShortCodeGetResponse;
 use Telnyx\ShortCodes\ShortCodeListParams\Filter;
@@ -17,6 +18,8 @@ interface ShortCodesContract
 {
     /**
      * @api
+     *
+     * @return ShortCodeGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -27,6 +30,8 @@ interface ShortCodesContract
      * @api
      *
      * @param string $messagingProfileID unique identifier for a messaging profile
+     *
+     * @return ShortCodeUpdateResponse<HasRawResponse>
      */
     public function update(
         string $id,
@@ -39,6 +44,8 @@ interface ShortCodesContract
      *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[messaging_profile_id]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     *
+     * @return ShortCodeListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,

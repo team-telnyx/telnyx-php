@@ -12,8 +12,12 @@ use Telnyx\PhoneNumbers\Actions\PhoneNumberWithVoiceSettings;
 
 /**
  * @phpstan-type voice_list_response = array{
- *   data?: list<PhoneNumberWithVoiceSettings>|null, meta?: PaginationMeta|null
+ *   data?: list<PhoneNumberWithVoiceSettings>, meta?: PaginationMeta
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class VoiceListResponse implements BaseModel
 {

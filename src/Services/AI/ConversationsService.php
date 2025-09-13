@@ -13,6 +13,7 @@ use Telnyx\AI\Conversations\ConversationListResponse;
 use Telnyx\AI\Conversations\ConversationUpdateParams;
 use Telnyx\AI\Conversations\ConversationUpdateResponse;
 use Telnyx\Client;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\ConversationsContract;
 use Telnyx\Services\AI\Conversations\InsightGroupsService;
@@ -43,9 +44,9 @@ final class ConversationsService implements ConversationsContract
      */
     public function __construct(private Client $client)
     {
-        $this->insightGroups = new InsightGroupsService($this->client);
-        $this->insights = new InsightsService($this->client);
-        $this->messages = new MessagesService($this->client);
+        $this->insightGroups = new InsightGroupsService($client);
+        $this->insights = new InsightsService($client);
+        $this->messages = new MessagesService($client);
     }
 
     /**
@@ -56,6 +57,8 @@ final class ConversationsService implements ConversationsContract
      * @param array<string,
      * string,> $metadata Metadata associated with the conversation
      * @param string $name
+     *
+     * @return Conversation<HasRawResponse>
      */
     public function create(
         $metadata = omit,
@@ -81,6 +84,8 @@ final class ConversationsService implements ConversationsContract
      * @api
      *
      * Retrieve a specific AI conversation by its ID.
+     *
+     * @return ConversationGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $conversationID,
@@ -102,6 +107,8 @@ final class ConversationsService implements ConversationsContract
      *
      * @param array<string,
      * string,> $metadata Metadata associated with the conversation
+     *
+     * @return ConversationUpdateResponse<HasRawResponse>
      */
     public function update(
         string $conversationID,
@@ -140,6 +147,8 @@ final class ConversationsService implements ConversationsContract
      * @param string $name Filter by conversation Name (e.g. `name=like.Voice%`)
      * @param string $or Apply OR conditions using PostgREST syntax (e.g., `or=(created_at.gte.2025-04-01,last_message_at.gte.2025-04-01)`)
      * @param string $order Order the results by specific fields (e.g., `order=created_at.desc` or `order=last_message_at.asc`)
+     *
+     * @return ConversationListResponse<HasRawResponse>
      */
     public function list(
         $id = omit,
@@ -206,6 +215,8 @@ final class ConversationsService implements ConversationsContract
      * @api
      *
      * Retrieve insights for a specific conversation
+     *
+     * @return ConversationGetConversationsInsightsResponse<HasRawResponse>
      */
     public function retrieveConversationsInsights(
         string $conversationID,

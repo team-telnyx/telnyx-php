@@ -10,6 +10,7 @@ use Telnyx\Comments\CommentListParams\Filter;
 use Telnyx\Comments\CommentListResponse;
 use Telnyx\Comments\CommentMarkAsReadResponse;
 use Telnyx\Comments\CommentNewResponse;
+use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 
 use const Telnyx\Core\OMIT as omit;
@@ -22,6 +23,8 @@ interface CommentsContract
      * @param string $body
      * @param string $commentRecordID
      * @param CommentRecordType|value-of<CommentRecordType> $commentRecordType
+     *
+     * @return CommentNewResponse<HasRawResponse>
      */
     public function create(
         $body = omit,
@@ -32,6 +35,8 @@ interface CommentsContract
 
     /**
      * @api
+     *
+     * @return CommentGetResponse<HasRawResponse>
      */
     public function retrieve(
         string $id,
@@ -42,6 +47,8 @@ interface CommentsContract
      * @api
      *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[comment_record_type], filter[comment_record_id]
+     *
+     * @return CommentListResponse<HasRawResponse>
      */
     public function list(
         $filter = omit,
@@ -50,6 +57,8 @@ interface CommentsContract
 
     /**
      * @api
+     *
+     * @return CommentMarkAsReadResponse<HasRawResponse>
      */
     public function markAsRead(
         string $id,

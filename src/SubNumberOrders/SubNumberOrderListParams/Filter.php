@@ -12,11 +12,11 @@ use Telnyx\Core\Contracts\BaseModel;
  * Consolidated filter parameter (deepObject style). Originally: filter[status], filter[order_request_id], filter[country_code], filter[phone_number_type], filter[phone_numbers_count].
  *
  * @phpstan-type filter_alias = array{
- *   countryCode?: string|null,
- *   orderRequestID?: string|null,
- *   phoneNumberType?: string|null,
- *   phoneNumbersCount?: int|null,
- *   status?: string|null,
+ *   countryCode?: string,
+ *   orderRequestID?: string,
+ *   phoneNumberType?: string,
+ *   phoneNumbersCount?: int,
+ *   status?: string,
  * }
  */
 final class Filter implements BaseModel

@@ -11,8 +11,12 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type audio_transcribe_response = array{
- *   text: string, duration?: float|null, segments?: list<Segment>|null
+ *   text: string, duration?: float, segments?: list<Segment>
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class AudioTranscribeResponse implements BaseModel
 {

@@ -10,8 +10,12 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type call_calls_response = array{
- *   from?: string|null, status?: string|null, to?: string|null
+ *   from?: string, status?: string, to?: string
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class CallCallsResponse implements BaseModel
 {

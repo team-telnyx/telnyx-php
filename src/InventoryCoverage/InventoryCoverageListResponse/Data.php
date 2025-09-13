@@ -13,16 +13,16 @@ use Telnyx\InventoryCoverage\InventoryCoverageListResponse\Data\PhoneNumberType;
 
 /**
  * @phpstan-type data_alias = array{
- *   administrativeArea?: string|null,
- *   advanceRequirements?: bool|null,
- *   count?: int|null,
- *   coverageType?: value-of<CoverageType>|null,
- *   group?: string|null,
- *   groupType?: string|null,
- *   numberRange?: int|null,
- *   numberType?: value-of<NumberType>|null,
- *   phoneNumberType?: value-of<PhoneNumberType>|null,
- *   recordType?: string|null,
+ *   administrativeArea?: string,
+ *   advanceRequirements?: bool,
+ *   count?: int,
+ *   coverageType?: value-of<CoverageType>,
+ *   group?: string,
+ *   groupType?: string,
+ *   numberRange?: int,
+ *   numberType?: value-of<NumberType>,
+ *   phoneNumberType?: value-of<PhoneNumberType>,
+ *   recordType?: string,
  * }
  */
 final class Data implements BaseModel

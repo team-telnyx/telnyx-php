@@ -14,8 +14,8 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * @phpstan-type refer_alias = array{
  *   targets: list<Target>,
- *   customHeaders?: list<CustomHeader>|null,
- *   sipHeaders?: list<SipHeader>|null,
+ *   customHeaders?: list<CustomHeader>,
+ *   sipHeaders?: list<SipHeader>,
  * }
  */
 final class Refer implements BaseModel

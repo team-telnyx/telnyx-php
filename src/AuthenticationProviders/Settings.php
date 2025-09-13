@@ -16,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   idpCertFingerprint: string,
  *   idpEntityID: string,
  *   idpSSOTargetURL: string,
- *   idpCertFingerprintAlgorithm?: value-of<IdpCertFingerprintAlgorithm>|null,
+ *   idpCertFingerprintAlgorithm?: value-of<IdpCertFingerprintAlgorithm>,
  * }
  */
 final class Settings implements BaseModel

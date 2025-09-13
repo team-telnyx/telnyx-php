@@ -10,8 +10,12 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type action_enable_emergency_response = array{
- *   data?: PhoneNumberWithVoiceSettings|null
+ *   data?: PhoneNumberWithVoiceSettings
  * }
+ * When used in a response, this type parameter can be used to define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class ActionEnableEmergencyResponse implements BaseModel
 {

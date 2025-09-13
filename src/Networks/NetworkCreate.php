@@ -9,11 +9,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type network_create = array{name: string, recordType?: string|null}
+ * @phpstan-type unnamed_type_with_intersection_parent1 = array{
+ *   name: string, recordType?: string
+ * }
  */
 final class NetworkCreate implements BaseModel
 {
-    /** @use SdkModel<network_create> */
+    /** @use SdkModel<unnamed_type_with_intersection_parent1> */
     use SdkModel;
 
     /**
