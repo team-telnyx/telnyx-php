@@ -11,18 +11,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ClientDeleteObjectsParams); // set properties as needed
- * $client->STAINLESS_FIXME_client->STAINLESS_FIXME_deleteObjects(...$params->toArray());
- * ```
  * Deletes one or multiple objects from a given bucket.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->STAINLESS_FIXME_client->STAINLESS_FIXME_deleteObjects(...$params->toArray());`
  *
  * @see Telnyx->deleteObjects
  *
@@ -36,7 +25,7 @@ final class ClientDeleteObjectsParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    #[Api(enum: STAINLESS_FIXME_Delete::class)]
+    #[Api]
     public bool $delete;
 
     /** @var list<Body> $body */
