@@ -59,11 +59,7 @@ final class CallSiprecJsonParams implements BaseModel
     /**
      * When set, custom parameters will be added as metadata (recording.session.ExtensionParameters). Otherwise, they’ll be added to sip headers.
      */
-    #[Api(
-        'IncludeMetadataCustomHeaders',
-        enum: STAINLESS_FIXME_IncludeMetadataCustomHeaders::class,
-        optional: true,
-    )]
+    #[Api('IncludeMetadataCustomHeaders', optional: true)]
     public ?bool $includeMetadataCustomHeaders;
 
     /**
@@ -75,7 +71,7 @@ final class CallSiprecJsonParams implements BaseModel
     /**
      * Controls whether to encrypt media sent to your SRS using SRTP and TLS. When set you need to configure SRS port in your connector to 5061.
      */
-    #[Api('Secure', enum: STAINLESS_FIXME_Secure::class, optional: true)]
+    #[Api('Secure', optional: true)]
     public ?bool $secure;
 
     /**

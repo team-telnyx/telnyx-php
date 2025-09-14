@@ -64,17 +64,13 @@ final class ActionStartSiprecParams implements BaseModel
     /**
      * When set, custom parameters will be added as metadata (recording.session.ExtensionParameters). Otherwise, they’ll be added to sip headers.
      */
-    #[Api(
-        'include_metadata_custom_headers',
-        enum: STAINLESS_FIXME_IncludeMetadataCustomHeaders::class,
-        optional: true,
-    )]
+    #[Api('include_metadata_custom_headers', optional: true)]
     public ?bool $includeMetadataCustomHeaders;
 
     /**
      * Controls whether to encrypt media sent to your SRS using SRTP and TLS. When set you need to configure SRS port in your connector to 5061.
      */
-    #[Api(enum: STAINLESS_FIXME_Secure::class, optional: true)]
+    #[Api(optional: true)]
     public ?bool $secure;
 
     /**

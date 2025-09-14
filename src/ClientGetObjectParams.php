@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ClientGetObjectParams); // set properties as needed
- * $client->STAINLESS_FIXME_client->STAINLESS_FIXME_getObject(...$params->toArray());
- * ```
  * Retrieves an object from a given bucket.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->STAINLESS_FIXME_client->STAINLESS_FIXME_getObject(...$params->toArray());`
  *
  * @see Telnyx->getObject
  *
