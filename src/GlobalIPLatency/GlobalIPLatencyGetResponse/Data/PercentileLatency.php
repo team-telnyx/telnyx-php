@@ -7,17 +7,17 @@ namespace Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\0 as 01;
-use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\100 as 1001;
-use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\25 as 251;
-use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\50 as 501;
-use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\75 as 751;
-use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\90 as 901;
-use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\99 as 991;
+use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\0;
+use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\100;
+use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\25;
+use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\50;
+use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\75;
+use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\90;
+use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\99;
 
 /**
   * @phpstan-type percentile_latency = array{
-  *   0?: 01, 100?: 1001, 25?: 251, 50?: 501, 75?: 751, 90?: 901, 99?: 991
+  *   p0?: 0, p100?: 100, p25?: 25, p50?: 50, p75?: 75, p90?: 90, p99?: 99
   * }
   * 
  */
@@ -26,33 +26,33 @@ final class PercentileLatency implements BaseModel
   /** @use SdkModel<percentile_latency> */
   use SdkModel;
 
-  /** @var 01|null $0 */
-  #[Api(optional: true)]
-  public ?01 $0;
+  /** @var 0|null $p0 */
+  #[Api("0", optional: true)]
+  public ?0 $p0;
 
-  /** @var 1001|null $100 */
-  #[Api(optional: true)]
-  public ?1001 $100;
+  /** @var 100|null $p100 */
+  #[Api("100", optional: true)]
+  public ?100 $p100;
 
-  /** @var 251|null $25 */
-  #[Api(optional: true)]
-  public ?251 $25;
+  /** @var 25|null $p25 */
+  #[Api("25", optional: true)]
+  public ?25 $p25;
 
-  /** @var 501|null $50 */
-  #[Api(optional: true)]
-  public ?501 $50;
+  /** @var 50|null $p50 */
+  #[Api("50", optional: true)]
+  public ?50 $p50;
 
-  /** @var 751|null $75 */
-  #[Api(optional: true)]
-  public ?751 $75;
+  /** @var 75|null $p75 */
+  #[Api("75", optional: true)]
+  public ?75 $p75;
 
-  /** @var 901|null $90 */
-  #[Api(optional: true)]
-  public ?901 $90;
+  /** @var 90|null $p90 */
+  #[Api("90", optional: true)]
+  public ?90 $p90;
 
-  /** @var 991|null $99 */
-  #[Api(optional: true)]
-  public ?991 $99;
+  /** @var 99|null $p99 */
+  #[Api("99", optional: true)]
+  public ?99 $p99;
 
   /**  */
   public function __construct(){$this->initialize();}
@@ -62,112 +62,112 @@ final class PercentileLatency implements BaseModel
   * 
   * You must use named parameters to construct any parameters with a default value.
   * 
-  * @param 01 $0
-  * @param 1001 $100
-  * @param 251 $25
-  * @param 501 $50
-  * @param 751 $75
-  * @param 901 $90
-  * @param 991 $99
+  * @param 0 $p0
+  * @param 100 $p100
+  * @param 25 $p25
+  * @param 50 $p50
+  * @param 75 $p75
+  * @param 90 $p90
+  * @param 99 $p99
   * 
   * @return self
  */
   public static function with(
-    01 $0 = null,
-    1001 $100 = null,
-    251 $25 = null,
-    501 $50 = null,
-    751 $75 = null,
-    901 $90 = null,
-    991 $99 = null,
+    0 $p0 = null,
+    100 $p100 = null,
+    25 $p25 = null,
+    50 $p50 = null,
+    75 $p75 = null,
+    90 $p90 = null,
+    99 $p99 = null,
   ): self {
     $obj = new self;
 
-    null !== $0 && $obj->0 = $0;
-    null !== $100 && $obj->100 = $100;
-    null !== $25 && $obj->25 = $25;
-    null !== $50 && $obj->50 = $50;
-    null !== $75 && $obj->75 = $75;
-    null !== $90 && $obj->90 = $90;
-    null !== $99 && $obj->99 = $99;
+    null !== $p0 && $obj->p0 = $p0;
+    null !== $p100 && $obj->p100 = $p100;
+    null !== $p25 && $obj->p25 = $p25;
+    null !== $p50 && $obj->p50 = $p50;
+    null !== $p75 && $obj->p75 = $p75;
+    null !== $p90 && $obj->p90 = $p90;
+    null !== $p99 && $obj->p99 = $p99;
 
     return $obj;
   }
 
   /**
-  * @param 01 $0
+  * @param 0 $p0
   * 
   * @return self
  */
-  public function with0(01 $0): self {
+  public function withP0(0 $p0): self {
     $obj = clone $this;
-    $obj->0 = $0;
+    $obj->p0 = $p0;
     return $obj;
   }
 
   /**
-  * @param 1001 $100
+  * @param 100 $p100
   * 
   * @return self
  */
-  public function with100(1001 $100): self {
+  public function withP100(100 $p100): self {
     $obj = clone $this;
-    $obj->100 = $100;
+    $obj->p100 = $p100;
     return $obj;
   }
 
   /**
-  * @param 251 $25
+  * @param 25 $p25
   * 
   * @return self
  */
-  public function with25(251 $25): self {
+  public function withP25(25 $p25): self {
     $obj = clone $this;
-    $obj->25 = $25;
+    $obj->p25 = $p25;
     return $obj;
   }
 
   /**
-  * @param 501 $50
+  * @param 50 $p50
   * 
   * @return self
  */
-  public function with50(501 $50): self {
+  public function withP50(50 $p50): self {
     $obj = clone $this;
-    $obj->50 = $50;
+    $obj->p50 = $p50;
     return $obj;
   }
 
   /**
-  * @param 751 $75
+  * @param 75 $p75
   * 
   * @return self
  */
-  public function with75(751 $75): self {
+  public function withP75(75 $p75): self {
     $obj = clone $this;
-    $obj->75 = $75;
+    $obj->p75 = $p75;
     return $obj;
   }
 
   /**
-  * @param 901 $90
+  * @param 90 $p90
   * 
   * @return self
  */
-  public function with90(901 $90): self {
+  public function withP90(90 $p90): self {
     $obj = clone $this;
-    $obj->90 = $90;
+    $obj->p90 = $p90;
     return $obj;
   }
 
   /**
-  * @param 991 $99
+  * @param 99 $p99
   * 
   * @return self
  */
-  public function with99(991 $99): self {
+  public function withP99(99 $p99): self {
     $obj = clone $this;
-    $obj->99 = $99;
+    $obj->p99 = $p99;
     return $obj;
   }
 }

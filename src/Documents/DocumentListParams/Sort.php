@@ -4,19 +4,17 @@ declare(strict_types=1);
 
 namespace Telnyx\Documents\DocumentListParams;
 
-enum Sort : string
+enum Sort: string
 {
+    case FILENAME = 'filename';
 
-    case FILENAME = "filename";
+    case CREATED_AT = 'created_at';
 
-    case CREATED_AT = "created_at";
+    case UPDATED_AT = 'updated_at';
 
-    case UPDATED_AT = "updated_at";
+    case FILENAME_DESC = '-filename';
 
-    case SORT_-FILENAME = "-filename";
+    case CREATED_AT_DESC = '-created_at';
 
-    case SORT_-CREATED_AT = "-created_at";
-
-    case SORT_-UPDATED_AT = "-updated_at";
-
+    case UPDATED_AT_DESC = '-updated_at';
 }
