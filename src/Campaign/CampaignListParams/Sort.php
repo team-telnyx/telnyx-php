@@ -5,30 +5,27 @@ declare(strict_types=1);
 namespace Telnyx\Campaign\CampaignListParams;
 
 /**
-  * Specifies the sort order for results. If not given, results are sorted by createdAt in descending order.
-  * 
+ * Specifies the sort order for results. If not given, results are sorted by createdAt in descending order.
  */
-enum Sort : string
+enum Sort: string
 {
+    case ASSIGNED_PHONE_NUMBERS_COUNT = 'assignedPhoneNumbersCount';
 
-    case ASSIGNED_PHONE_NUMBERS_COUNT = "assignedPhoneNumbersCount";
+    case ASSIGNED_PHONE_NUMBERS_COUNT_DESC = '-assignedPhoneNumbersCount';
 
-    case SORT_-ASSIGNED_PHONE_NUMBERS_COUNT = "-assignedPhoneNumbersCount";
+    case CAMPAIGN_ID = 'campaignId';
 
-    case CAMPAIGN_ID = "campaignId";
+    case CAMPAIGN_ID_DESC = '-campaignId';
 
-    case SORT_-CAMPAIGN_ID = "-campaignId";
+    case CREATED_AT = 'createdAt';
 
-    case CREATED_AT = "createdAt";
+    case CREATED_AT_DESC = '-createdAt';
 
-    case SORT_-CREATED_AT = "-createdAt";
+    case STATUS = 'status';
 
-    case STATUS = "status";
+    case STATUS_DESC = '-status';
 
-    case SORT_-STATUS = "-status";
+    case TCR_CAMPAIGN_ID = 'tcrCampaignId';
 
-    case TCR_CAMPAIGN_ID = "tcrCampaignId";
-
-    case SORT_-TCR_CAMPAIGN_ID = "-tcrCampaignId";
-
+    case TCR_CAMPAIGN_ID_DESC = '-tcrCampaignId';
 }

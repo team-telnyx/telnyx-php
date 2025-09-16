@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Telnyx\Campaign;
 
-use Telnyx\Campaign\CampaignGetMnoMetadataResponse\10999 as 109991;
+use Telnyx\Campaign\CampaignGetMnoMetadataResponse\10999;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
-  * @phpstan-type campaign_get_mno_metadata_response = array{10999?: 109991}
+  * @phpstan-type campaign_get_mno_metadata_response = array{_10999?: 10999}
   * 
   * 
   * When used in a response, this type parameter can define a $rawResponse property.
@@ -23,9 +23,9 @@ final class CampaignGetMnoMetadataResponse implements BaseModel
   /** @use SdkModel<campaign_get_mno_metadata_response> */
   use SdkModel;
 
-  /** @var 109991|null $10999 */
-  #[Api(optional: true)]
-  public ?109991 $10999;
+  /** @var 10999|null $_10999 */
+  #[Api("10999", optional: true)]
+  public ?10999 $_10999;
 
   /**  */
   public function __construct(){$this->initialize();}
@@ -35,26 +35,26 @@ final class CampaignGetMnoMetadataResponse implements BaseModel
   * 
   * You must use named parameters to construct any parameters with a default value.
   * 
-  * @param 109991 $10999
+  * @param 10999 $_10999
   * 
   * @return self
  */
-  public static function with(109991 $10999 = null): self {
+  public static function with(10999 $_10999 = null): self {
     $obj = new self;
 
-    null !== $10999 && $obj->10999 = $10999;
+    null !== $_10999 && $obj->_10999 = $_10999;
 
     return $obj;
   }
 
   /**
-  * @param 109991 $10999
+  * @param 10999 $_10999
   * 
   * @return self
  */
-  public function with10999(109991 $10999): self {
+  public function with10999(10999 $_10999): self {
     $obj = clone $this;
-    $obj->10999 = $10999;
+    $obj->_10999 = $_10999;
     return $obj;
   }
 }
