@@ -4,15 +4,13 @@ declare(strict_types=1);
 
 namespace Telnyx\IPConnections\InboundIP;
 
-enum DnisNumberFormat : string
+enum DnisNumberFormat: string
 {
+    case PLUS_E164 = '+e164';
 
-    case DNIS_NUMBER_FORMAT_+E164 = "+e164";
+    case E164 = 'e164';
 
-    case E164 = "e164";
+    case NATIONAL = 'national';
 
-    case NATIONAL = "national";
-
-    case SIP_USERNAME = "sip_username";
-
+    case SIP_USERNAME = 'sip_username';
 }

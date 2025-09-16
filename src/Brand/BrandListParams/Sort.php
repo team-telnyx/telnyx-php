@@ -5,38 +5,35 @@ declare(strict_types=1);
 namespace Telnyx\Brand\BrandListParams;
 
 /**
-  * Specifies the sort order for results. If not given, results are sorted by createdAt in descending order.
-  * 
+ * Specifies the sort order for results. If not given, results are sorted by createdAt in descending order.
  */
-enum Sort : string
+enum Sort: string
 {
+    case ASSIGNED_CAMPAIGNS_COUNT = 'assignedCampaignsCount';
 
-    case ASSIGNED_CAMPAIGNS_COUNT = "assignedCampaignsCount";
+    case ASSIGNED_CAMPAIGNS_COUNT_DESC = '-assignedCampaignsCount';
 
-    case SORT_-ASSIGNED_CAMPAIGNS_COUNT = "-assignedCampaignsCount";
+    case BRAND_ID = 'brandId';
 
-    case BRAND_ID = "brandId";
+    case BRAND_ID_DESC = '-brandId';
 
-    case SORT_-BRAND_ID = "-brandId";
+    case CREATED_AT = 'createdAt';
 
-    case CREATED_AT = "createdAt";
+    case CREATED_AT_DESC = '-createdAt';
 
-    case SORT_-CREATED_AT = "-createdAt";
+    case DISPLAY_NAME = 'displayName';
 
-    case DISPLAY_NAME = "displayName";
+    case DISPLAY_NAME_DESC = '-displayName';
 
-    case SORT_-DISPLAY_NAME = "-displayName";
+    case IDENTITY_STATUS = 'identityStatus';
 
-    case IDENTITY_STATUS = "identityStatus";
+    case IDENTITY_STATUS_DESC = '-identityStatus';
 
-    case SORT_-IDENTITY_STATUS = "-identityStatus";
+    case STATUS = 'status';
 
-    case STATUS = "status";
+    case STATUS_DESC = '-status';
 
-    case SORT_-STATUS = "-status";
+    case TCR_BRAND_ID = 'tcrBrandId';
 
-    case TCR_BRAND_ID = "tcrBrandId";
-
-    case SORT_-TCR_BRAND_ID = "-tcrBrandId";
-
+    case TCR_BRAND_ID_DESC = '-tcrBrandId';
 }
