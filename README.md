@@ -56,40 +56,10 @@ var_dump($response->data);
 
 ### Value Objects
 
-It is recommended to use the static `with` constructor `HangupTool::with(hangup: {
-  type: 'formatting',
-  kind: 'group',
-  shouldBreak: false,
-  code: [
-    '[',
-    {
-      type: 'formatting',
-      kind: 'indent',
-      code: { type: 'formatting', kind: 'group', shouldBreak: false },
-      leadingBreak: 'soft',
-      trailingBreak: 'soft'
-    },
-    ']'
-  ]
-}, ...)`
+It is recommended to use the static `with` constructor `HangupTool::with(hangup: [], ...)`
 and named parameters to initialize value objects.
 
-However, builders are also provided `(new HangupTool)->withHangup({
-  type: 'formatting',
-  kind: 'group',
-  shouldBreak: false,
-  code: [
-    '[',
-    {
-      type: 'formatting',
-      kind: 'indent',
-      code: { type: 'formatting', kind: 'group', shouldBreak: false },
-      leadingBreak: 'soft',
-      trailingBreak: 'soft'
-    },
-    ']'
-  ]
-})`.
+However, builders are also provided `(new HangupTool)->withHangup([])`.
 
 ### Handling errors
 
