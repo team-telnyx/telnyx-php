@@ -1,0 +1,86 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Telnyx\Client\WellKnown;
+
+use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Contracts\BaseModel;
+
+/**
+ * @phpstan-type well_known_get_protected_resource_metadata_response = array{
+ *   authorizationServers?: list<string>, resource?: string
+ * }
+ * When used in a response, this type parameter can define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
+ */
+final class WellKnownGetProtectedResourceMetadataResponse implements BaseModel
+{
+    /** @use SdkModel<well_known_get_protected_resource_metadata_response> */
+    use SdkModel;
+
+    /**
+     * List of authorization server URLs.
+     *
+     * @var list<string>|null $authorizationServers
+     */
+    #[Api('authorization_servers', list: 'string', optional: true)]
+    public ?array $authorizationServers;
+
+    /**
+     * Protected resource URL.
+     */
+    #[Api(optional: true)]
+    public ?string $resource;
+
+    public function __construct()
+    {
+        $this->initialize();
+    }
+
+    /**
+     * Construct an instance from the required parameters.
+     *
+     * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param list<string> $authorizationServers
+     */
+    public static function with(
+        ?array $authorizationServers = null,
+        ?string $resource = null
+    ): self {
+        $obj = new self;
+
+        null !== $authorizationServers && $obj->authorizationServers = $authorizationServers;
+        null !== $resource && $obj->resource = $resource;
+
+        return $obj;
+    }
+
+    /**
+     * List of authorization server URLs.
+     *
+     * @param list<string> $authorizationServers
+     */
+    public function withAuthorizationServers(array $authorizationServers): self
+    {
+        $obj = clone $this;
+        $obj->authorizationServers = $authorizationServers;
+
+        return $obj;
+    }
+
+    /**
+     * Protected resource URL.
+     */
+    public function withResource(string $resource): self
+    {
+        $obj = clone $this;
+        $obj->resource = $resource;
+
+        return $obj;
+    }
+}

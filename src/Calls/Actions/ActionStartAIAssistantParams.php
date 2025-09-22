@@ -20,7 +20,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * ```
  * Start an AI assistant on the call.
  *
- * **Expected Webhooks (see [callback schema](https://developers.telnyx.com/api/call-control/call-start-ai-assistant#callbacks) below):**
+ * **Expected Webhooks:**
  *
  * - `call.conversation.ended`
  * - `call.conversation_insights.generated`

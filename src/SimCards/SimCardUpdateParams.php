@@ -28,7 +28,7 @@ use Telnyx\SimCardStatus;
  * @see Telnyx\SimCards->update
  *
  * @phpstan-type sim_card_update_params = array{
- *   authorizedImeis?: list<string>,
+ *   authorizedImeis?: list<string>|null,
  *   dataLimit?: DataLimit,
  *   simCardGroupID?: string,
  *   status?: SimCardStatus,
@@ -46,7 +46,7 @@ final class SimCardUpdateParams implements BaseModel
      *
      * @var list<string>|null $authorizedImeis
      */
-    #[Api('authorized_imeis', list: 'string', optional: true)]
+    #[Api('authorized_imeis', list: 'string', nullable: true, optional: true)]
     public ?array $authorizedImeis;
 
     /**
@@ -82,7 +82,7 @@ final class SimCardUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $authorizedImeis
+     * @param list<string>|null $authorizedImeis
      * @param list<string> $tags
      */
     public static function with(
@@ -106,9 +106,9 @@ final class SimCardUpdateParams implements BaseModel
     /**
      * List of IMEIs authorized to use a given SIM card.
      *
-     * @param list<string> $authorizedImeis
+     * @param list<string>|null $authorizedImeis
      */
-    public function withAuthorizedImeis(array $authorizedImeis): self
+    public function withAuthorizedImeis(?array $authorizedImeis): self
     {
         $obj = clone $this;
         $obj->authorizedImeis = $authorizedImeis;

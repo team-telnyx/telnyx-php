@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Calls\Actions;
 
+use Telnyx\Calls\Actions\ActionStartStreamingParams\StreamBidirectionalSamplingRate;
 use Telnyx\Calls\Actions\ActionStartStreamingParams\StreamTrack;
 use Telnyx\Calls\DialogflowConfig;
 use Telnyx\Calls\StreamBidirectionalCodec;
@@ -40,6 +41,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   enableDialogflow?: bool,
  *   streamBidirectionalCodec?: StreamBidirectionalCodec|value-of<StreamBidirectionalCodec>,
  *   streamBidirectionalMode?: StreamBidirectionalMode|value-of<StreamBidirectionalMode>,
+ *   streamBidirectionalSamplingRate?: StreamBidirectionalSamplingRate|value-of<StreamBidirectionalSamplingRate>,
  *   streamBidirectionalTargetLegs?: StreamBidirectionalTargetLegs|value-of<StreamBidirectionalTargetLegs>,
  *   streamCodec?: StreamCodec|value-of<StreamCodec>,
  *   streamTrack?: StreamTrack|value-of<StreamTrack>,
@@ -98,6 +100,18 @@ final class ActionStartStreamingParams implements BaseModel
     public ?string $streamBidirectionalMode;
 
     /**
+     * Audio sampling rate.
+     *
+     * @var value-of<StreamBidirectionalSamplingRate>|null $streamBidirectionalSamplingRate
+     */
+    #[Api(
+        'stream_bidirectional_sampling_rate',
+        enum: StreamBidirectionalSamplingRate::class,
+        optional: true,
+    )]
+    public ?int $streamBidirectionalSamplingRate;
+
+    /**
      * Specifies which call legs should receive the bidirectional stream audio.
      *
      * @var value-of<StreamBidirectionalTargetLegs>|null $streamBidirectionalTargetLegs
@@ -110,7 +124,7 @@ final class ActionStartStreamingParams implements BaseModel
     public ?string $streamBidirectionalTargetLegs;
 
     /**
-     * Specifies the codec to be used for the streamed audio. When set to 'default' or when transcoding is not possible, the codec from the call will be used. Currently, transcoding is only supported between PCMU and PCMA codecs.
+     * Specifies the codec to be used for the streamed audio. When set to 'default' or when transcoding is not possible, the codec from the call will be used.
      *
      * @var value-of<StreamCodec>|null $streamCodec
      */
@@ -143,6 +157,7 @@ final class ActionStartStreamingParams implements BaseModel
      *
      * @param StreamBidirectionalCodec|value-of<StreamBidirectionalCodec> $streamBidirectionalCodec
      * @param StreamBidirectionalMode|value-of<StreamBidirectionalMode> $streamBidirectionalMode
+     * @param StreamBidirectionalSamplingRate|value-of<StreamBidirectionalSamplingRate> $streamBidirectionalSamplingRate
      * @param StreamBidirectionalTargetLegs|value-of<StreamBidirectionalTargetLegs> $streamBidirectionalTargetLegs
      * @param StreamCodec|value-of<StreamCodec> $streamCodec
      * @param StreamTrack|value-of<StreamTrack> $streamTrack
@@ -154,6 +169,7 @@ final class ActionStartStreamingParams implements BaseModel
         ?bool $enableDialogflow = null,
         StreamBidirectionalCodec|string|null $streamBidirectionalCodec = null,
         StreamBidirectionalMode|string|null $streamBidirectionalMode = null,
+        StreamBidirectionalSamplingRate|int|null $streamBidirectionalSamplingRate = null,
         StreamBidirectionalTargetLegs|string|null $streamBidirectionalTargetLegs = null,
         StreamCodec|string|null $streamCodec = null,
         StreamTrack|string|null $streamTrack = null,
@@ -167,6 +183,7 @@ final class ActionStartStreamingParams implements BaseModel
         null !== $enableDialogflow && $obj->enableDialogflow = $enableDialogflow;
         null !== $streamBidirectionalCodec && $obj->streamBidirectionalCodec = $streamBidirectionalCodec instanceof StreamBidirectionalCodec ? $streamBidirectionalCodec->value : $streamBidirectionalCodec;
         null !== $streamBidirectionalMode && $obj->streamBidirectionalMode = $streamBidirectionalMode instanceof StreamBidirectionalMode ? $streamBidirectionalMode->value : $streamBidirectionalMode;
+        null !== $streamBidirectionalSamplingRate && $obj->streamBidirectionalSamplingRate = $streamBidirectionalSamplingRate instanceof StreamBidirectionalSamplingRate ? $streamBidirectionalSamplingRate->value : $streamBidirectionalSamplingRate;
         null !== $streamBidirectionalTargetLegs && $obj->streamBidirectionalTargetLegs = $streamBidirectionalTargetLegs instanceof StreamBidirectionalTargetLegs ? $streamBidirectionalTargetLegs->value : $streamBidirectionalTargetLegs;
         null !== $streamCodec && $obj->streamCodec = $streamCodec instanceof StreamCodec ? $streamCodec->value : $streamCodec;
         null !== $streamTrack && $obj->streamTrack = $streamTrack instanceof StreamTrack ? $streamTrack->value : $streamTrack;
@@ -246,6 +263,20 @@ final class ActionStartStreamingParams implements BaseModel
     }
 
     /**
+     * Audio sampling rate.
+     *
+     * @param StreamBidirectionalSamplingRate|value-of<StreamBidirectionalSamplingRate> $streamBidirectionalSamplingRate
+     */
+    public function withStreamBidirectionalSamplingRate(
+        StreamBidirectionalSamplingRate|int $streamBidirectionalSamplingRate
+    ): self {
+        $obj = clone $this;
+        $obj->streamBidirectionalSamplingRate = $streamBidirectionalSamplingRate instanceof StreamBidirectionalSamplingRate ? $streamBidirectionalSamplingRate->value : $streamBidirectionalSamplingRate;
+
+        return $obj;
+    }
+
+    /**
      * Specifies which call legs should receive the bidirectional stream audio.
      *
      * @param StreamBidirectionalTargetLegs|value-of<StreamBidirectionalTargetLegs> $streamBidirectionalTargetLegs
@@ -260,7 +291,7 @@ final class ActionStartStreamingParams implements BaseModel
     }
 
     /**
-     * Specifies the codec to be used for the streamed audio. When set to 'default' or when transcoding is not possible, the codec from the call will be used. Currently, transcoding is only supported between PCMU and PCMA codecs.
+     * Specifies the codec to be used for the streamed audio. When set to 'default' or when transcoding is not possible, the codec from the call will be used.
      *
      * @param StreamCodec|value-of<StreamCodec> $streamCodec
      */

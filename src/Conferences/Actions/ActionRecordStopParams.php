@@ -18,7 +18,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * ```
  * Stop recording the conference.
  *
- * **Expected Webhooks (see [callback schema](https://developers.telnyx.com/api/call-control/stop-conference-recording#callbacks) below):**
+ * **Expected Webhooks:**
  *
  * - `conference.recording.saved`
  *

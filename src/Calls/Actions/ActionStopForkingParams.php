@@ -19,7 +19,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * ```
  * Stop forking a call.
  *
- * **Expected Webhooks (see [callback schema](https://developers.telnyx.com/api/call-control/stop-call-fork#callbacks) below):**
+ * **Expected Webhooks:**
  *
  * - `call.fork.stopped`
  *

@@ -19,7 +19,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * ```
  * Removes a call leg from a conference and moves it back to parked state.
  *
- * **Expected Webhooks (see [callback schema](https://developers.telnyx.com/api/call-control/leave-conference#callbacks) below):**
+ * **Expected Webhooks:**
  *
  * - `conference.participant.left`
  *

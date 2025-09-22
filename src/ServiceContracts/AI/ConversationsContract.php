@@ -178,6 +178,46 @@ interface ConversationsContract
     /**
      * @api
      *
+     * @param string $role
+     * @param string $content
+     * @param array<string, string|int|bool|list<string|int|bool>> $metadata
+     * @param string $name
+     * @param \DateTimeInterface $sentAt
+     * @param string $toolCallID
+     * @param list<array<string, mixed>> $toolCalls
+     * @param mixed|string $toolChoice
+     *
+     * @throws APIException
+     */
+    public function addMessage(
+        string $conversationID,
+        $role,
+        $content = omit,
+        $metadata = omit,
+        $name = omit,
+        $sentAt = omit,
+        $toolCallID = omit,
+        $toolCalls = omit,
+        $toolChoice = omit,
+        ?RequestOptions $requestOptions = null,
+    ): mixed;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @throws APIException
+     */
+    public function addMessageRaw(
+        string $conversationID,
+        array $params,
+        ?RequestOptions $requestOptions = null,
+    ): mixed;
+
+    /**
+     * @api
+     *
      * @return ConversationGetConversationsInsightsResponse<HasRawResponse>
      *
      * @throws APIException

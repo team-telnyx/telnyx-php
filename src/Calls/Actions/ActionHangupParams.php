@@ -18,7 +18,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * ```
  * Hang up the call.
  *
- * **Expected Webhooks (see [callback schema](https://developers.telnyx.com/api/call-control/hangup-call#callbacks) below):**
+ * **Expected Webhooks:**
  *
  * - `call.hangup`
  * - `call.recording.saved`

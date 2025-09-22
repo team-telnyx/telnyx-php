@@ -20,7 +20,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * ```
  * Join an existing call leg to a conference. Issue the Join Conference command with the conference ID in the path and the `call_control_id` of the leg you wish to join to the conference as an attribute. The conference can have up to a certain amount of active participants, as set by the `max_participants` parameter in conference creation request.
  *
- * **Expected Webhooks (see [callback schema](https://developers.telnyx.com/api/call-control/join-conference#callbacks) below):**
+ * **Expected Webhooks:**
  *
  * - `conference.participant.joined`
  * - `conference.participant.left`

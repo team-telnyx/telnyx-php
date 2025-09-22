@@ -20,7 +20,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * You can pass a list of valid digits along with an 'invalid_audio_url', which will be played back at the beginning of each prompt. Playback will be interrupted when a DTMF signal is received. The `Answer command must be issued before the `gather_using_audio` command.
  *
- * **Expected Webhooks (see [callback schema](https://developers.telnyx.com/api/call-control/gather-using-audio#callbacks) below):**
+ * **Expected Webhooks:**
  *
  * - `call.playback.started`
  * - `call.playback.ended`

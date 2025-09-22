@@ -60,7 +60,7 @@ interface SimCardsContract
     /**
      * @api
      *
-     * @param list<string> $authorizedImeis list of IMEIs authorized to use a given SIM card
+     * @param list<string>|null $authorizedImeis list of IMEIs authorized to use a given SIM card
      * @param DataLimit $dataLimit the SIM card individual data limit configuration
      * @param string $simCardGroupID The group SIMCardGroup identification. This attribute can be <code>null</code> when it's present in an associated resource.
      * @param SimCardStatus $status

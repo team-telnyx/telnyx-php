@@ -59,7 +59,7 @@ final class CallsService implements CallsContract
      *
      * Dial a number or SIP URI from a given connection. A successful response will include a `call_leg_id` which can be used to correlate the command with subsequent webhooks.
      *
-     * **Expected Webhooks (see [schema](https://developers.telnyx.com/api/call-control/dial-call#callbacks) below):**
+     * **Expected Webhooks:**
      *
      * - `call.initiated`
      * - `call.answered` or `call.hangup`
@@ -109,7 +109,7 @@ final class CallsService implements CallsContract
      * @param StreamBidirectionalMode|value-of<StreamBidirectionalMode> $streamBidirectionalMode configures method of bidirectional streaming (mp3, rtp)
      * @param StreamBidirectionalSamplingRate|value-of<StreamBidirectionalSamplingRate> $streamBidirectionalSamplingRate audio sampling rate
      * @param StreamBidirectionalTargetLegs|value-of<StreamBidirectionalTargetLegs> $streamBidirectionalTargetLegs specifies which call legs should receive the bidirectional stream audio
-     * @param StreamCodec|value-of<StreamCodec> $streamCodec Specifies the codec to be used for the streamed audio. When set to 'default' or when transcoding is not possible, the codec from the call will be used. Currently, transcoding is only supported between PCMU and PCMA codecs.
+     * @param StreamCodec|value-of<StreamCodec> $streamCodec Specifies the codec to be used for the streamed audio. When set to 'default' or when transcoding is not possible, the codec from the call will be used.
      * @param bool $streamEstablishBeforeCallOriginate Establish websocket connection before dialing the destination. This is useful for cases where the websocket connection takes a long time to establish.
      * @param StreamTrack|value-of<StreamTrack> $streamTrack specifies which track should be streamed
      * @param string $streamURL the destination WebSocket address where the stream is going to be delivered

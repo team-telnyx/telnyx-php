@@ -30,6 +30,7 @@ use Telnyx\Services\CampaignService;
 use Telnyx\Services\ChannelZonesService;
 use Telnyx\Services\ChargesBreakdownService;
 use Telnyx\Services\ChargesSummaryService;
+use Telnyx\Services\ClientService;
 use Telnyx\Services\CommentsService;
 use Telnyx\Services\ConferencesService;
 use Telnyx\Services\ConnectionsService;
@@ -159,6 +160,8 @@ use Telnyx\Services\WirelessService;
 class Client extends BaseClient
 {
     public string $apiKey;
+
+    public bool $baseUrlOverridden;
 
     /**
      * @api
@@ -900,9 +903,16 @@ class Client extends BaseClient
      */
     public PartnerCampaignsService $partnerCampaigns;
 
+    /**
+     * @api
+     */
+    public ClientService $client;
+
     public function __construct(?string $apiKey = null, ?string $baseUrl = null)
     {
         $this->apiKey = (string) ($apiKey ?? getenv('TELNYX_API_KEY'));
+
+        $this->baseUrlOverridden = !is_null($baseUrl);
 
         $base = $baseUrl ?? getenv(
             'TELNYX_BASE_URL'
@@ -1071,6 +1081,7 @@ class Client extends BaseClient
         $this->wirelessBlocklistValues = new WirelessBlocklistValuesService($this);
         $this->wirelessBlocklists = new WirelessBlocklistsService($this);
         $this->partnerCampaigns = new PartnerCampaignsService($this);
+        $this->client = new ClientService($this);
     }
 
     /** @return array<string, string> */

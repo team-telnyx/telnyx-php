@@ -45,6 +45,7 @@ interface VerificationsContract
      * @param string $phoneNumber +E164 formatted phone number
      * @param string $verifyProfileID the identifier of the associated Verify profile
      * @param string|null $customCode Send a self-generated numeric code to the end-user
+     * @param string|null $extension Optional extension to dial after call is answered using DTMF digits. Valid digits are 0-9, A-D, *, and #. Pauses can be added using w (0.5s) and W (1s).
      * @param int $timeoutSecs the number of seconds the verification code is valid for
      *
      * @return CreateVerificationResponse<HasRawResponse>
@@ -55,6 +56,7 @@ interface VerificationsContract
         $phoneNumber,
         $verifyProfileID,
         $customCode = omit,
+        $extension = omit,
         $timeoutSecs = omit,
         ?RequestOptions $requestOptions = null,
     ): CreateVerificationResponse;

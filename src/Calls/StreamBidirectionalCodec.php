@@ -18,4 +18,6 @@ enum StreamBidirectionalCodec: string
     case OPUS = 'OPUS';
 
     case AMR_WB = 'AMR-WB';
+
+    case L16 = 'L16';
 }

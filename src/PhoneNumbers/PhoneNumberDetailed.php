@@ -26,6 +26,7 @@ use Telnyx\PhoneNumbers\PhoneNumberDetailed\Status;
  *   countryISOAlpha2?: string,
  *   createdAt?: string,
  *   customerReference?: string,
+ *   deletionLockEnabled?: bool,
  *   emergencyAddressID?: string,
  *   emergencyEnabled?: bool,
  *   emergencyStatus?: value-of<EmergencyStatus>,
@@ -113,6 +114,12 @@ final class PhoneNumberDetailed implements BaseModel
      */
     #[Api('customer_reference', optional: true)]
     public ?string $customerReference;
+
+    /**
+     * Indicates whether deletion lock is enabled for this number. When enabled, this prevents the phone number from being deleted via the API or Telnyx portal.
+     */
+    #[Api('deletion_lock_enabled', optional: true)]
+    public ?bool $deletionLockEnabled;
 
     /**
      * Identifies the emergency address associated with the phone number.
@@ -250,6 +257,7 @@ final class PhoneNumberDetailed implements BaseModel
         ?string $countryISOAlpha2 = null,
         ?string $createdAt = null,
         ?string $customerReference = null,
+        ?bool $deletionLockEnabled = null,
         ?string $emergencyAddressID = null,
         ?bool $emergencyEnabled = null,
         EmergencyStatus|string|null $emergencyStatus = null,
@@ -279,6 +287,7 @@ final class PhoneNumberDetailed implements BaseModel
         null !== $countryISOAlpha2 && $obj->countryISOAlpha2 = $countryISOAlpha2;
         null !== $createdAt && $obj->createdAt = $createdAt;
         null !== $customerReference && $obj->customerReference = $customerReference;
+        null !== $deletionLockEnabled && $obj->deletionLockEnabled = $deletionLockEnabled;
         null !== $emergencyAddressID && $obj->emergencyAddressID = $emergencyAddressID;
         null !== $emergencyEnabled && $obj->emergencyEnabled = $emergencyEnabled;
         null !== $emergencyStatus && $obj->emergencyStatus = $emergencyStatus instanceof EmergencyStatus ? $emergencyStatus->value : $emergencyStatus;
@@ -415,6 +424,17 @@ final class PhoneNumberDetailed implements BaseModel
     {
         $obj = clone $this;
         $obj->customerReference = $customerReference;
+
+        return $obj;
+    }
+
+    /**
+     * Indicates whether deletion lock is enabled for this number. When enabled, this prevents the phone number from being deleted via the API or Telnyx portal.
+     */
+    public function withDeletionLockEnabled(bool $deletionLockEnabled): self
+    {
+        $obj = clone $this;
+        $obj->deletionLockEnabled = $deletionLockEnabled;
 
         return $obj;
     }

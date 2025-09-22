@@ -34,6 +34,7 @@ use Telnyx\PortingOrders\PortingOrderUpdateParams\Requirement;
  *
  * @phpstan-type porting_order_update_params = array{
  *   activationSettings?: ActivationSettings,
+ *   customerGroupReference?: string,
  *   customerReference?: string,
  *   documents?: PortingOrderDocuments,
  *   endUser?: PortingOrderEndUser,
@@ -54,6 +55,9 @@ final class PortingOrderUpdateParams implements BaseModel
 
     #[Api('activation_settings', optional: true)]
     public ?ActivationSettings $activationSettings;
+
+    #[Api('customer_group_reference', optional: true)]
+    public ?string $customerGroupReference;
 
     #[Api('customer_reference', optional: true)]
     public ?string $customerReference;
@@ -110,6 +114,7 @@ final class PortingOrderUpdateParams implements BaseModel
      */
     public static function with(
         ?ActivationSettings $activationSettings = null,
+        ?string $customerGroupReference = null,
         ?string $customerReference = null,
         ?PortingOrderDocuments $documents = null,
         ?PortingOrderEndUser $endUser = null,
@@ -124,6 +129,7 @@ final class PortingOrderUpdateParams implements BaseModel
         $obj = new self;
 
         null !== $activationSettings && $obj->activationSettings = $activationSettings;
+        null !== $customerGroupReference && $obj->customerGroupReference = $customerGroupReference;
         null !== $customerReference && $obj->customerReference = $customerReference;
         null !== $documents && $obj->documents = $documents;
         null !== $endUser && $obj->endUser = $endUser;
@@ -143,6 +149,15 @@ final class PortingOrderUpdateParams implements BaseModel
     ): self {
         $obj = clone $this;
         $obj->activationSettings = $activationSettings;
+
+        return $obj;
+    }
+
+    public function withCustomerGroupReference(
+        string $customerGroupReference
+    ): self {
+        $obj = clone $this;
+        $obj->customerGroupReference = $customerGroupReference;
 
         return $obj;
     }

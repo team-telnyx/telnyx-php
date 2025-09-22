@@ -25,7 +25,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * ```
  * Bridge two call control calls.
  *
- * **Expected Webhooks (see [callback schema](https://developers.telnyx.com/api/call-control/bridge-call#callbacks) below):**
+ * **Expected Webhooks:**
  *
  * - `call.bridged` for Leg A
  * - `call.bridged` for Leg B

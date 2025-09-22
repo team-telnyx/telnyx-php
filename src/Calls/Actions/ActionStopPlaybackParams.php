@@ -18,7 +18,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * ```
  * Stop audio being played on the call.
  *
- * **Expected Webhooks (see [callback schema](https://developers.telnyx.com/api/call-control/stop-call-playback#callbacks) below):**
+ * **Expected Webhooks:**
  *
  * - `call.playback.ended` or `call.speak.ended`
  *

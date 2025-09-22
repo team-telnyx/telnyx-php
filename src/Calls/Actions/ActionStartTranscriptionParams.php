@@ -20,7 +20,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * ```
  * Start real-time transcription. Transcription will stop on call hang-up, or can be initiated via the Transcription stop command.
  *
- * **Expected Webhooks (see [callback schema](https://developers.telnyx.com/api/call-control/start-call-transcription#callbacks) below):**
+ * **Expected Webhooks:**
  *
  * - `call.transcription`
  *

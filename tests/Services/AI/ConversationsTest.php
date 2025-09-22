@@ -87,6 +87,36 @@ final class ConversationsTest extends TestCase
     }
 
     #[Test]
+    public function testAddMessage(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
+        $result = $this->client->ai->conversations->addMessage(
+            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+            role: 'role'
+        );
+
+        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+    }
+
+    #[Test]
+    public function testAddMessageWithOptionalParams(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
+        $result = $this->client->ai->conversations->addMessage(
+            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+            role: 'role'
+        );
+
+        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+    }
+
+    #[Test]
     public function testRetrieveConversationsInsights(): void
     {
         if (UnsupportedMockTests::$skip) {
