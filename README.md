@@ -147,7 +147,6 @@ use Telnyx\RequestOptions;
 $client = new Client(maxRetries: 0);
 
 // Or, configure per-request:
-
 $result = $client->numberOrders->create(
   requestOptions: RequestOptions::with(maxRetries: 5)
 );
