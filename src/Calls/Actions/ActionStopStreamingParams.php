@@ -18,7 +18,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * ```
  * Stop streaming a call to a WebSocket.
  *
- * **Expected Webhooks (see [callback schema](https://developers.telnyx.com/api/call-control/stop-call-streaming#callbacks) below):**
+ * **Expected Webhooks:**
  *
  * - `streaming.stopped`
  *

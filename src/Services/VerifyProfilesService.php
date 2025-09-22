@@ -13,16 +13,20 @@ use Telnyx\VerifyProfiles\VerifyProfileCreateParams;
 use Telnyx\VerifyProfiles\VerifyProfileCreateParams\Call;
 use Telnyx\VerifyProfiles\VerifyProfileCreateParams\Flashcall;
 use Telnyx\VerifyProfiles\VerifyProfileCreateParams\SMS;
+use Telnyx\VerifyProfiles\VerifyProfileCreateTemplateParams;
 use Telnyx\VerifyProfiles\VerifyProfileData;
 use Telnyx\VerifyProfiles\VerifyProfileGetTemplatesResponse;
 use Telnyx\VerifyProfiles\VerifyProfileListParams;
 use Telnyx\VerifyProfiles\VerifyProfileListParams\Filter;
 use Telnyx\VerifyProfiles\VerifyProfileListParams\Page;
 use Telnyx\VerifyProfiles\VerifyProfileListResponse;
+use Telnyx\VerifyProfiles\VerifyProfileNewTemplateResponse;
 use Telnyx\VerifyProfiles\VerifyProfileUpdateParams;
 use Telnyx\VerifyProfiles\VerifyProfileUpdateParams\Call as Call1;
 use Telnyx\VerifyProfiles\VerifyProfileUpdateParams\Flashcall as Flashcall1;
 use Telnyx\VerifyProfiles\VerifyProfileUpdateParams\SMS as SMS1;
+use Telnyx\VerifyProfiles\VerifyProfileUpdateTemplateParams;
+use Telnyx\VerifyProfiles\VerifyProfileUpdateTemplateResponse;
 
 use const Telnyx\Core\OMIT as omit;
 
@@ -302,6 +306,54 @@ final class VerifyProfilesService implements VerifyProfilesContract
     /**
      * @api
      *
+     * Create a new Verify profile message template.
+     *
+     * @param string $text the text content of the message template
+     *
+     * @return VerifyProfileNewTemplateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createTemplate(
+        $text,
+        ?RequestOptions $requestOptions = null
+    ): VerifyProfileNewTemplateResponse {
+        $params = ['text' => $text];
+
+        return $this->createTemplateRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return VerifyProfileNewTemplateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createTemplateRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): VerifyProfileNewTemplateResponse {
+        [$parsed, $options] = VerifyProfileCreateTemplateParams::parseRequest(
+            $params,
+            $requestOptions
+        );
+
+        // @phpstan-ignore-next-line;
+        return $this->client->request(
+            method: 'post',
+            path: 'verify_profiles/templates',
+            body: (object) $parsed,
+            options: $options,
+            convert: VerifyProfileNewTemplateResponse::class,
+        );
+    }
+
+    /**
+     * @api
+     *
      * List all Verify profile message templates.
      *
      * @return VerifyProfileGetTemplatesResponse<HasRawResponse>
@@ -333,6 +385,56 @@ final class VerifyProfilesService implements VerifyProfilesContract
             path: 'verify_profiles/templates',
             options: $requestOptions,
             convert: VerifyProfileGetTemplatesResponse::class,
+        );
+    }
+
+    /**
+     * @api
+     *
+     * Update an existing Verify profile message template.
+     *
+     * @param string $text the text content of the message template
+     *
+     * @return VerifyProfileUpdateTemplateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateTemplate(
+        string $templateID,
+        $text,
+        ?RequestOptions $requestOptions = null
+    ): VerifyProfileUpdateTemplateResponse {
+        $params = ['text' => $text];
+
+        return $this->updateTemplateRaw($templateID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return VerifyProfileUpdateTemplateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateTemplateRaw(
+        string $templateID,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): VerifyProfileUpdateTemplateResponse {
+        [$parsed, $options] = VerifyProfileUpdateTemplateParams::parseRequest(
+            $params,
+            $requestOptions
+        );
+
+        // @phpstan-ignore-next-line;
+        return $this->client->request(
+            method: 'patch',
+            path: ['verify_profiles/templates/%1$s', $templateID],
+            body: (object) $parsed,
+            options: $options,
+            convert: VerifyProfileUpdateTemplateResponse::class,
         );
     }
 }

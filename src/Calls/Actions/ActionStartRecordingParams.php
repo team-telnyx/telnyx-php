@@ -23,7 +23,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * ```
  * Start recording the call. Recording will stop on call hang-up, or can be initiated via the Stop Recording command.
  *
- * **Expected Webhooks (see [callback schema](https://developers.telnyx.com/api/call-control/start-call-record#callbacks) below):**
+ * **Expected Webhooks:**
  *
  * - `call.recording.saved`
  * - `call.recording.transcription.saved`

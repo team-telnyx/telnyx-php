@@ -13,6 +13,7 @@ use Telnyx\PhoneNumbers\PhoneNumberListParams\Filter\Source;
 use Telnyx\PhoneNumbers\PhoneNumberListParams\Filter\Status;
 use Telnyx\PhoneNumbers\PhoneNumberListParams\Filter\VoiceConnectionName;
 use Telnyx\PhoneNumbers\PhoneNumberListParams\Filter\VoiceUsagePaymentMethod;
+use Telnyx\PhoneNumbers\PhoneNumberListParams\Filter\WithoutTags;
 
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[tag], filter[phone_number], filter[status], filter[country_iso_alpha2], filter[connection_id], filter[voice.connection_name], filter[voice.usage_payment_method], filter[billing_group_id], filter[emergency_address_id], filter[customer_reference], filter[number_type], filter[source].
@@ -30,6 +31,7 @@ use Telnyx\PhoneNumbers\PhoneNumberListParams\Filter\VoiceUsagePaymentMethod;
  *   tag?: string,
  *   voiceConnectionName?: VoiceConnectionName,
  *   voiceUsagePaymentMethod?: value-of<VoiceUsagePaymentMethod>,
+ *   withoutTags?: value-of<WithoutTags>,
  * }
  */
 final class Filter implements BaseModel
@@ -122,6 +124,14 @@ final class Filter implements BaseModel
     )]
     public ?string $voiceUsagePaymentMethod;
 
+    /**
+     * When set to 'true', filters for phone numbers that do not have any tags applied. All other values are ignored.
+     *
+     * @var value-of<WithoutTags>|null $withoutTags
+     */
+    #[Api('without_tags', enum: WithoutTags::class, optional: true)]
+    public ?string $withoutTags;
+
     public function __construct()
     {
         $this->initialize();
@@ -136,6 +146,7 @@ final class Filter implements BaseModel
      * @param Source|value-of<Source> $source
      * @param Status|value-of<Status> $status
      * @param VoiceUsagePaymentMethod|value-of<VoiceUsagePaymentMethod> $voiceUsagePaymentMethod
+     * @param WithoutTags|value-of<WithoutTags> $withoutTags
      */
     public static function with(
         ?string $billingGroupID = null,
@@ -150,6 +161,7 @@ final class Filter implements BaseModel
         ?string $tag = null,
         ?VoiceConnectionName $voiceConnectionName = null,
         VoiceUsagePaymentMethod|string|null $voiceUsagePaymentMethod = null,
+        WithoutTags|string|null $withoutTags = null,
     ): self {
         $obj = new self;
 
@@ -165,6 +177,7 @@ final class Filter implements BaseModel
         null !== $tag && $obj->tag = $tag;
         null !== $voiceConnectionName && $obj->voiceConnectionName = $voiceConnectionName;
         null !== $voiceUsagePaymentMethod && $obj->voiceUsagePaymentMethod = $voiceUsagePaymentMethod instanceof VoiceUsagePaymentMethod ? $voiceUsagePaymentMethod->value : $voiceUsagePaymentMethod;
+        null !== $withoutTags && $obj->withoutTags = $withoutTags instanceof WithoutTags ? $withoutTags->value : $withoutTags;
 
         return $obj;
     }
@@ -308,6 +321,19 @@ final class Filter implements BaseModel
     ): self {
         $obj = clone $this;
         $obj->voiceUsagePaymentMethod = $voiceUsagePaymentMethod instanceof VoiceUsagePaymentMethod ? $voiceUsagePaymentMethod->value : $voiceUsagePaymentMethod;
+
+        return $obj;
+    }
+
+    /**
+     * When set to 'true', filters for phone numbers that do not have any tags applied. All other values are ignored.
+     *
+     * @param WithoutTags|value-of<WithoutTags> $withoutTags
+     */
+    public function withWithoutTags(WithoutTags|string $withoutTags): self
+    {
+        $obj = clone $this;
+        $obj->withoutTags = $withoutTags instanceof WithoutTags ? $withoutTags->value : $withoutTags;
 
         return $obj;
     }

@@ -12,11 +12,12 @@ use Telnyx\PortingOrders\PortingOrderListParams\Filter\PhoneNumbersPhoneNumber;
 use Telnyx\PortingOrders\PortingOrderType;
 
 /**
- * Consolidated filter parameter (deepObject style). Originally: filter[customer_reference], filter[parent_support_key], filter[phone_numbers.country_code], filter[phone_numbers.carrier_name], filter[misc.type], filter[end_user.admin.entity_name], filter[end_user.admin.auth_person_name], filter[activation_settings.fast_port_eligible], filter[activation_settings.foc_datetime_requested][gt], filter[activation_settings.foc_datetime_requested][lt], filter[phone_numbers.phone_number][contains].
+ * Consolidated filter parameter (deepObject style). Originally: filter[customer_reference], filter[customer_group_reference], filter[parent_support_key], filter[phone_numbers.country_code], filter[phone_numbers.carrier_name], filter[misc.type], filter[end_user.admin.entity_name], filter[end_user.admin.auth_person_name], filter[activation_settings.fast_port_eligible], filter[activation_settings.foc_datetime_requested][gt], filter[activation_settings.foc_datetime_requested][lt], filter[phone_numbers.phone_number][contains].
  *
  * @phpstan-type filter_alias = array{
  *   activationSettingsFastPortEligible?: bool,
  *   activationSettingsFocDatetimeRequested?: ActivationSettingsFocDatetimeRequested,
+ *   customerGroupReference?: string,
  *   customerReference?: string,
  *   endUserAdminAuthPersonName?: string,
  *   endUserAdminEntityName?: string,
@@ -43,6 +44,12 @@ final class Filter implements BaseModel
      */
     #[Api('activation_settings.foc_datetime_requested', optional: true)]
     public ?ActivationSettingsFocDatetimeRequested $activationSettingsFocDatetimeRequested;
+
+    /**
+     * Filter results by customer_group_reference.
+     */
+    #[Api('customer_group_reference', optional: true)]
+    public ?string $customerGroupReference;
 
     /**
      * Filter results by customer_reference.
@@ -109,6 +116,7 @@ final class Filter implements BaseModel
     public static function with(
         ?bool $activationSettingsFastPortEligible = null,
         ?ActivationSettingsFocDatetimeRequested $activationSettingsFocDatetimeRequested = null,
+        ?string $customerGroupReference = null,
         ?string $customerReference = null,
         ?string $endUserAdminAuthPersonName = null,
         ?string $endUserAdminEntityName = null,
@@ -122,6 +130,7 @@ final class Filter implements BaseModel
 
         null !== $activationSettingsFastPortEligible && $obj->activationSettingsFastPortEligible = $activationSettingsFastPortEligible;
         null !== $activationSettingsFocDatetimeRequested && $obj->activationSettingsFocDatetimeRequested = $activationSettingsFocDatetimeRequested;
+        null !== $customerGroupReference && $obj->customerGroupReference = $customerGroupReference;
         null !== $customerReference && $obj->customerReference = $customerReference;
         null !== $endUserAdminAuthPersonName && $obj->endUserAdminAuthPersonName = $endUserAdminAuthPersonName;
         null !== $endUserAdminEntityName && $obj->endUserAdminEntityName = $endUserAdminEntityName;
@@ -154,6 +163,18 @@ final class Filter implements BaseModel
     ): self {
         $obj = clone $this;
         $obj->activationSettingsFocDatetimeRequested = $activationSettingsFocDatetimeRequested;
+
+        return $obj;
+    }
+
+    /**
+     * Filter results by customer_group_reference.
+     */
+    public function withCustomerGroupReference(
+        string $customerGroupReference
+    ): self {
+        $obj = clone $this;
+        $obj->customerGroupReference = $customerGroupReference;
 
         return $obj;
     }

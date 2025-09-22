@@ -181,7 +181,7 @@ final class ActionsService implements ActionsContract
      *
      * Join an existing call leg to a conference. Issue the Join Conference command with the conference ID in the path and the `call_control_id` of the leg you wish to join to the conference as an attribute. The conference can have up to a certain amount of active participants, as set by the `max_participants` parameter in conference creation request.
      *
-     * **Expected Webhooks (see [callback schema](https://developers.telnyx.com/api/call-control/join-conference#callbacks) below):**
+     * **Expected Webhooks:**
      *
      * - `conference.participant.joined`
      * - `conference.participant.left`
@@ -274,7 +274,7 @@ final class ActionsService implements ActionsContract
      *
      * Removes a call leg from a conference and moves it back to parked state.
      *
-     * **Expected Webhooks (see [callback schema](https://developers.telnyx.com/api/call-control/leave-conference#callbacks) below):**
+     * **Expected Webhooks:**
      *
      * - `conference.participant.left`
      *
@@ -551,7 +551,7 @@ final class ActionsService implements ActionsContract
      *
      * Start recording the conference. Recording will stop on conference end, or via the Stop Recording command.
      *
-     * **Expected Webhooks (see [callback schema](https://developers.telnyx.com/api/call-control/start-conference-recording#callbacks) below):**
+     * **Expected Webhooks:**
      *
      * - `conference.recording.saved`
      *
@@ -619,7 +619,7 @@ final class ActionsService implements ActionsContract
      *
      * Stop recording the conference.
      *
-     * **Expected Webhooks (see [callback schema](https://developers.telnyx.com/api/call-control/stop-conference-recording#callbacks) below):**
+     * **Expected Webhooks:**
      *
      * - `conference.recording.saved`
      *

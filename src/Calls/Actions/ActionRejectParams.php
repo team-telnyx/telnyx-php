@@ -19,7 +19,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * ```
  * Reject an incoming call.
  *
- * **Expected Webhooks (see [callback schema](https://developers.telnyx.com/api/call-control/reject-call#callbacks) below):**
+ * **Expected Webhooks:**
  *
  * - `call.hangup`
  *

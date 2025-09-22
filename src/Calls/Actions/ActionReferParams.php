@@ -20,7 +20,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * ```
  * Initiate a SIP Refer on a Call Control call. You can initiate a SIP Refer at any point in the duration of a call.
  *
- * **Expected Webhooks (see [callback schema](https://developers.telnyx.com/api/call-control/refer-call#callbacks) below):**
+ * **Expected Webhooks:**
  *
  * - `call.refer.started`
  * - `call.refer.completed`

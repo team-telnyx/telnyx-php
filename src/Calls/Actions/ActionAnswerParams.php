@@ -33,7 +33,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * ```
  * Answer an incoming call. You must issue this command before executing subsequent commands on an incoming call.
  *
- * **Expected Webhooks (see [callback schema](https://developers.telnyx.com/api/call-control/answer-call#callbacks) below):**
+ * **Expected Webhooks:**
  *
  * - `call.answered`
  * - `streaming.started`, `streaming.stopped` or `streaming.failed` if `stream_url` was set
@@ -231,7 +231,7 @@ final class ActionAnswerParams implements BaseModel
     public ?string $streamBidirectionalTargetLegs;
 
     /**
-     * Specifies the codec to be used for the streamed audio. When set to 'default' or when transcoding is not possible, the codec from the call will be used. Currently, transcoding is only supported between PCMU and PCMA codecs.
+     * Specifies the codec to be used for the streamed audio. When set to 'default' or when transcoding is not possible, the codec from the call will be used.
      *
      * @var value-of<StreamCodec>|null $streamCodec
      */
@@ -598,7 +598,7 @@ final class ActionAnswerParams implements BaseModel
     }
 
     /**
-     * Specifies the codec to be used for the streamed audio. When set to 'default' or when transcoding is not possible, the codec from the call will be used. Currently, transcoding is only supported between PCMU and PCMA codecs.
+     * Specifies the codec to be used for the streamed audio. When set to 'default' or when transcoding is not possible, the codec from the call will be used.
      *
      * @param StreamCodec|value-of<StreamCodec> $streamCodec
      */

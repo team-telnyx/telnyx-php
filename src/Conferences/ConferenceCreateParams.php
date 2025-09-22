@@ -19,7 +19,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * ```
  * Create a conference from an existing call leg using a `call_control_id` and a conference name. Upon creating the conference, the call will be automatically bridged to the conference. Conferences will expire after all participants have left the conference or after 4 hours regardless of the number of active participants.
  *
- * **Expected Webhooks (see [callback schema](https://developers.telnyx.com/api/call-control/create-conference#callbacks) below):**
+ * **Expected Webhooks:**
  *
  * - `conference.created`
  * - `conference.participant.joined`

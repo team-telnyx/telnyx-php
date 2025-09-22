@@ -26,7 +26,9 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\PortingOrders->create
  *
  * @phpstan-type porting_order_create_params = array{
- *   phoneNumbers: list<string>, customerReference?: string
+ *   phoneNumbers: list<string>,
+ *   customerGroupReference?: string,
+ *   customerReference?: string,
  * }
  */
 final class PortingOrderCreateParams implements BaseModel
@@ -42,6 +44,12 @@ final class PortingOrderCreateParams implements BaseModel
      */
     #[Api('phone_numbers', list: 'string')]
     public array $phoneNumbers;
+
+    /**
+     * A customer-specified group reference for customer bookkeeping purposes.
+     */
+    #[Api('customer_group_reference', optional: true)]
+    public ?string $customerGroupReference;
 
     /**
      * A customer-specified reference number for customer bookkeeping purposes.
@@ -77,12 +85,14 @@ final class PortingOrderCreateParams implements BaseModel
      */
     public static function with(
         array $phoneNumbers,
-        ?string $customerReference = null
+        ?string $customerGroupReference = null,
+        ?string $customerReference = null,
     ): self {
         $obj = new self;
 
         $obj->phoneNumbers = $phoneNumbers;
 
+        null !== $customerGroupReference && $obj->customerGroupReference = $customerGroupReference;
         null !== $customerReference && $obj->customerReference = $customerReference;
 
         return $obj;
@@ -97,6 +107,18 @@ final class PortingOrderCreateParams implements BaseModel
     {
         $obj = clone $this;
         $obj->phoneNumbers = $phoneNumbers;
+
+        return $obj;
+    }
+
+    /**
+     * A customer-specified group reference for customer bookkeeping purposes.
+     */
+    public function withCustomerGroupReference(
+        string $customerGroupReference
+    ): self {
+        $obj = clone $this;
+        $obj->customerGroupReference = $customerGroupReference;
 
         return $obj;
     }

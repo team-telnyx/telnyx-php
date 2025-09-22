@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type campaign_submit_appeal_response = array{
- *   appealedAt?: \DateTimeInterface, previousStatus?: string|null
+ *   appealedAt?: \DateTimeInterface
  * }
  * When used in a response, this type parameter can define a $rawResponse property.
  * @template TRawResponse of object = object{}
@@ -28,12 +28,6 @@ final class CampaignSubmitAppealResponse implements BaseModel
     #[Api('appealed_at', optional: true)]
     public ?\DateTimeInterface $appealedAt;
 
-    /**
-     * Previous campaign status (currently always null).
-     */
-    #[Api('previous_status', nullable: true, optional: true)]
-    public ?string $previousStatus;
-
     public function __construct()
     {
         $this->initialize();
@@ -44,14 +38,11 @@ final class CampaignSubmitAppealResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(
-        ?\DateTimeInterface $appealedAt = null,
-        ?string $previousStatus = null
-    ): self {
+    public static function with(?\DateTimeInterface $appealedAt = null): self
+    {
         $obj = new self;
 
         null !== $appealedAt && $obj->appealedAt = $appealedAt;
-        null !== $previousStatus && $obj->previousStatus = $previousStatus;
 
         return $obj;
     }
@@ -63,17 +54,6 @@ final class CampaignSubmitAppealResponse implements BaseModel
     {
         $obj = clone $this;
         $obj->appealedAt = $appealedAt;
-
-        return $obj;
-    }
-
-    /**
-     * Previous campaign status (currently always null).
-     */
-    public function withPreviousStatus(?string $previousStatus): self
-    {
-        $obj = clone $this;
-        $obj->previousStatus = $previousStatus;
 
         return $obj;
     }

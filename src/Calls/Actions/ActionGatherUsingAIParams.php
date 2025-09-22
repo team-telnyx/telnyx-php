@@ -23,7 +23,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  *  You can pass parameters described as a JSON Schema object and the voice assistant will attempt to gather these informations.
  *
- * **Expected Webhooks (see [callback schema](https://developers.telnyx.com/api/call-control/call-gather-using-ai#callbacks) below):**
+ * **Expected Webhooks:**
  *
  * - `call.ai_gather.ended`
  * - `call.conversation.ended`
@@ -113,13 +113,13 @@ final class ActionGatherUsingAIParams implements BaseModel
     public ?array $messageHistory;
 
     /**
-     * Default is `false`. If set to `true`, the voice assistant will send updates to the message history via the `call.ai_gather.message_history_updated` [callback](https://developers.telnyx.com/api/call-control/call-gather-using-ai#callbacks) in real time as the message history is updated.
+     * Default is `false`. If set to `true`, the voice assistant will send updates to the message history via the `call.ai_gather.message_history_updated` callback in real time as the message history is updated.
      */
     #[Api('send_message_history_updates', optional: true)]
     public ?bool $sendMessageHistoryUpdates;
 
     /**
-     * Default is `false`. If set to `true`, the voice assistant will send partial results via the `call.ai_gather.partial_results` [callback](https://developers.telnyx.com/api/call-control/call-gather-using-ai#callbacks) in real time as individual fields are gathered. If set to `false`, the voice assistant will only send the final result via the `call.ai_gather.ended` callback.
+     * Default is `false`. If set to `true`, the voice assistant will send partial results via the `call.ai_gather.partial_results` callback in real time as individual fields are gathered. If set to `false`, the voice assistant will only send the final result via the `call.ai_gather.ended` callback.
      */
     #[Api('send_partial_results', optional: true)]
     public ?bool $sendPartialResults;
@@ -316,7 +316,7 @@ final class ActionGatherUsingAIParams implements BaseModel
     }
 
     /**
-     * Default is `false`. If set to `true`, the voice assistant will send updates to the message history via the `call.ai_gather.message_history_updated` [callback](https://developers.telnyx.com/api/call-control/call-gather-using-ai#callbacks) in real time as the message history is updated.
+     * Default is `false`. If set to `true`, the voice assistant will send updates to the message history via the `call.ai_gather.message_history_updated` callback in real time as the message history is updated.
      */
     public function withSendMessageHistoryUpdates(
         bool $sendMessageHistoryUpdates
@@ -328,7 +328,7 @@ final class ActionGatherUsingAIParams implements BaseModel
     }
 
     /**
-     * Default is `false`. If set to `true`, the voice assistant will send partial results via the `call.ai_gather.partial_results` [callback](https://developers.telnyx.com/api/call-control/call-gather-using-ai#callbacks) in real time as individual fields are gathered. If set to `false`, the voice assistant will only send the final result via the `call.ai_gather.ended` callback.
+     * Default is `false`. If set to `true`, the voice assistant will send partial results via the `call.ai_gather.partial_results` callback in real time as individual fields are gathered. If set to `false`, the voice assistant will only send the final result via the `call.ai_gather.ended` callback.
      */
     public function withSendPartialResults(bool $sendPartialResults): self
     {

@@ -34,7 +34,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * ```
  * Dial a number or SIP URI from a given connection. A successful response will include a `call_leg_id` which can be used to correlate the command with subsequent webhooks.
  *
- * **Expected Webhooks (see [schema](https://developers.telnyx.com/api/call-control/dial-call#callbacks) below):**
+ * **Expected Webhooks:**
  *
  * - `call.initiated`
  * - `call.answered` or `call.hangup`
@@ -392,7 +392,7 @@ final class CallDialParams implements BaseModel
     public ?string $streamBidirectionalTargetLegs;
 
     /**
-     * Specifies the codec to be used for the streamed audio. When set to 'default' or when transcoding is not possible, the codec from the call will be used. Currently, transcoding is only supported between PCMU and PCMA codecs.
+     * Specifies the codec to be used for the streamed audio. When set to 'default' or when transcoding is not possible, the codec from the call will be used.
      *
      * @var value-of<StreamCodec>|null $streamCodec
      */
@@ -1079,7 +1079,7 @@ final class CallDialParams implements BaseModel
     }
 
     /**
-     * Specifies the codec to be used for the streamed audio. When set to 'default' or when transcoding is not possible, the codec from the call will be used. Currently, transcoding is only supported between PCMU and PCMA codecs.
+     * Specifies the codec to be used for the streamed audio. When set to 'default' or when transcoding is not possible, the codec from the call will be used.
      *
      * @param StreamCodec|value-of<StreamCodec> $streamCodec
      */

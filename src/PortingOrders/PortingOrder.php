@@ -17,6 +17,7 @@ use Telnyx\PortingOrderStatus;
  *   activationSettings?: PortingOrderActivationSettings,
  *   additionalSteps?: list<value-of<AdditionalStep>>,
  *   createdAt?: \DateTimeInterface,
+ *   customerGroupReference?: string,
  *   customerReference?: string,
  *   description?: string,
  *   documents?: PortingOrderDocuments,
@@ -66,6 +67,12 @@ final class PortingOrder implements BaseModel
      */
     #[Api('created_at', optional: true)]
     public ?\DateTimeInterface $createdAt;
+
+    /**
+     * A customer-specified group reference for customer bookkeeping purposes.
+     */
+    #[Api('customer_group_reference', optional: true)]
+    public ?string $customerGroupReference;
 
     /**
      * A customer-specified reference number for customer bookkeeping purposes.
@@ -195,6 +202,7 @@ final class PortingOrder implements BaseModel
         ?PortingOrderActivationSettings $activationSettings = null,
         ?array $additionalSteps = null,
         ?\DateTimeInterface $createdAt = null,
+        ?string $customerGroupReference = null,
         ?string $customerReference = null,
         ?string $description = null,
         ?PortingOrderDocuments $documents = null,
@@ -222,6 +230,7 @@ final class PortingOrder implements BaseModel
         null !== $activationSettings && $obj->activationSettings = $activationSettings;
         null !== $additionalSteps && $obj->additionalSteps = array_map(fn ($v) => $v instanceof AdditionalStep ? $v->value : $v, $additionalSteps);
         null !== $createdAt && $obj->createdAt = $createdAt;
+        null !== $customerGroupReference && $obj->customerGroupReference = $customerGroupReference;
         null !== $customerReference && $obj->customerReference = $customerReference;
         null !== $description && $obj->description = $description;
         null !== $documents && $obj->documents = $documents;
@@ -286,6 +295,18 @@ final class PortingOrder implements BaseModel
     {
         $obj = clone $this;
         $obj->createdAt = $createdAt;
+
+        return $obj;
+    }
+
+    /**
+     * A customer-specified group reference for customer bookkeeping purposes.
+     */
+    public function withCustomerGroupReference(
+        string $customerGroupReference
+    ): self {
+        $obj = clone $this;
+        $obj->customerGroupReference = $customerGroupReference;
 
         return $obj;
     }

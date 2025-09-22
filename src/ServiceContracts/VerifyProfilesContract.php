@@ -15,9 +15,11 @@ use Telnyx\VerifyProfiles\VerifyProfileGetTemplatesResponse;
 use Telnyx\VerifyProfiles\VerifyProfileListParams\Filter;
 use Telnyx\VerifyProfiles\VerifyProfileListParams\Page;
 use Telnyx\VerifyProfiles\VerifyProfileListResponse;
+use Telnyx\VerifyProfiles\VerifyProfileNewTemplateResponse;
 use Telnyx\VerifyProfiles\VerifyProfileUpdateParams\Call as Call1;
 use Telnyx\VerifyProfiles\VerifyProfileUpdateParams\Flashcall as Flashcall1;
 use Telnyx\VerifyProfiles\VerifyProfileUpdateParams\SMS as SMS1;
+use Telnyx\VerifyProfiles\VerifyProfileUpdateTemplateResponse;
 
 use const Telnyx\Core\OMIT as omit;
 
@@ -188,6 +190,34 @@ interface VerifyProfilesContract
     /**
      * @api
      *
+     * @param string $text the text content of the message template
+     *
+     * @return VerifyProfileNewTemplateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createTemplate(
+        $text,
+        ?RequestOptions $requestOptions = null
+    ): VerifyProfileNewTemplateResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return VerifyProfileNewTemplateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createTemplateRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): VerifyProfileNewTemplateResponse;
+
+    /**
+     * @api
+     *
      * @return VerifyProfileGetTemplatesResponse<HasRawResponse>
      *
      * @throws APIException
@@ -207,4 +237,34 @@ interface VerifyProfilesContract
         mixed $params,
         ?RequestOptions $requestOptions = null
     ): VerifyProfileGetTemplatesResponse;
+
+    /**
+     * @api
+     *
+     * @param string $text the text content of the message template
+     *
+     * @return VerifyProfileUpdateTemplateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateTemplate(
+        string $templateID,
+        $text,
+        ?RequestOptions $requestOptions = null
+    ): VerifyProfileUpdateTemplateResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return VerifyProfileUpdateTemplateResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function updateTemplateRaw(
+        string $templateID,
+        array $params,
+        ?RequestOptions $requestOptions = null,
+    ): VerifyProfileUpdateTemplateResponse;
 }

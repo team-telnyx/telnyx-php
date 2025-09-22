@@ -179,6 +179,7 @@ final class JobsService implements JobsContract
      * @param string $billingGroupID identifies the billing group associated with the phone number
      * @param string $connectionID identifies the connection associated with the phone number
      * @param string $customerReference a customer reference string for customer look ups
+     * @param bool $deletionLockEnabled Indicates whether to enable or disable the deletion lock on each phone number. When enabled, this prevents the phone number from being deleted via the API or Telnyx portal.
      * @param string $externalPin If someone attempts to port your phone number away from Telnyx and your phone number has an external PIN set, we will attempt to verify that you provided the correct external PIN to the winning carrier. Note that not all carriers cooperate with this security mechanism.
      * @param bool $hdVoiceEnabled Indicates whether to enable or disable HD Voice on each phone number. HD Voice is a paid feature and may not be available for all phone numbers, more details about it can be found in the Telnyx support documentation.
      * @param list<string> $tags a list of user-assigned tags to help organize phone numbers
@@ -194,6 +195,7 @@ final class JobsService implements JobsContract
         $billingGroupID = omit,
         $connectionID = omit,
         $customerReference = omit,
+        $deletionLockEnabled = omit,
         $externalPin = omit,
         $hdVoiceEnabled = omit,
         $tags = omit,
@@ -206,6 +208,7 @@ final class JobsService implements JobsContract
             'billingGroupID' => $billingGroupID,
             'connectionID' => $connectionID,
             'customerReference' => $customerReference,
+            'deletionLockEnabled' => $deletionLockEnabled,
             'externalPin' => $externalPin,
             'hdVoiceEnabled' => $hdVoiceEnabled,
             'tags' => $tags,

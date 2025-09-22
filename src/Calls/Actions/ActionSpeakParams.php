@@ -22,7 +22,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * ```
  * Convert text to speech and play it back on the call. If multiple speak text commands are issued consecutively, the audio files will be placed in a queue awaiting playback.
  *
- * **Expected Webhooks (see [callback schema](https://developers.telnyx.com/api/call-control/speak-call#callbacks) below):**
+ * **Expected Webhooks:**
  *
  * - `call.speak.started`
  * - `call.speak.ended`
