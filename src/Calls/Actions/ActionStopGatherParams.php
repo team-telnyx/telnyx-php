@@ -18,7 +18,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * ```
  * Stop current gather.
  *
- * **Expected Webhooks (see [callback schema](https://developers.telnyx.com/api/call-control/stop-call-gather#callbacks) below):**
+ * **Expected Webhooks:**
  *
  * - `call.gather.ended`
  *

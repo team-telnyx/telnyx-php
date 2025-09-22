@@ -22,7 +22,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * variety of use cases, including fraud detection, or the creation of AI-generated audio responses.
  * Requests must specify either the `target` attribute or the `rx` and `tx` attributes.
  *
- * **Expected Webhooks (see [callback schema](https://developers.telnyx.com/api/call-control/start-call-fork#callbacks) below):**
+ * **Expected Webhooks:**
  *
  * - `call.fork.started`
  * - `call.fork.stopped`

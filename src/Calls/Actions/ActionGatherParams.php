@@ -20,7 +20,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * You can pass a list of valid digits. The `Answer` command must be issued before the `gather` command.
  *
- * **Expected Webhooks (see [callback schema](https://developers.telnyx.com/api/call-control/gather-call#callbacks) below):**
+ * **Expected Webhooks:**
  *
  * - `call.dtmf.received` (you may receive many of these webhooks)
  * - `call.gather.ended`

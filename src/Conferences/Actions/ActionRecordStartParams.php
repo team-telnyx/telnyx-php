@@ -20,7 +20,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * ```
  * Start recording the conference. Recording will stop on conference end, or via the Stop Recording command.
  *
- * **Expected Webhooks (see [callback schema](https://developers.telnyx.com/api/call-control/start-conference-recording#callbacks) below):**
+ * **Expected Webhooks:**
  *
  * - `conference.recording.saved`
  *

@@ -25,7 +25,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * - When `overlay` is enabled, `target_legs` is limited to `self`.
  * - A customer cannot Play Audio with `overlay=true` unless there is a Play Audio with `overlay=false` actively playing.
  *
- * **Expected Webhooks (see [callback schema](https://developers.telnyx.com/api/call-control/start-call-playback#callbacks) below):**
+ * **Expected Webhooks:**
  *
  * - `call.playback.started`
  * - `call.playback.ended`

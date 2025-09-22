@@ -36,6 +36,7 @@ interface PortingOrdersContract
      * @api
      *
      * @param list<string> $phoneNumbers The list of +E.164 formatted phone numbers
+     * @param string $customerGroupReference A customer-specified group reference for customer bookkeeping purposes
      * @param string $customerReference A customer-specified reference number for customer bookkeeping purposes
      *
      * @return PortingOrderNewResponse<HasRawResponse>
@@ -44,6 +45,7 @@ interface PortingOrdersContract
      */
     public function create(
         $phoneNumbers,
+        $customerGroupReference = omit,
         $customerReference = omit,
         ?RequestOptions $requestOptions = null,
     ): PortingOrderNewResponse;
@@ -96,6 +98,7 @@ interface PortingOrdersContract
      * @api
      *
      * @param ActivationSettings $activationSettings
+     * @param string $customerGroupReference
      * @param string $customerReference
      * @param PortingOrderDocuments $documents can be specified directly or via the `requirement_group_id` parameter
      * @param PortingOrderEndUser $endUser
@@ -114,6 +117,7 @@ interface PortingOrdersContract
     public function update(
         string $id,
         $activationSettings = omit,
+        $customerGroupReference = omit,
         $customerReference = omit,
         $documents = omit,
         $endUser = omit,
@@ -145,7 +149,7 @@ interface PortingOrdersContract
     /**
      * @api
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[customer_reference], filter[parent_support_key], filter[phone_numbers.country_code], filter[phone_numbers.carrier_name], filter[misc.type], filter[end_user.admin.entity_name], filter[end_user.admin.auth_person_name], filter[activation_settings.fast_port_eligible], filter[activation_settings.foc_datetime_requested][gt], filter[activation_settings.foc_datetime_requested][lt], filter[phone_numbers.phone_number][contains]
+     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[customer_reference], filter[customer_group_reference], filter[parent_support_key], filter[phone_numbers.country_code], filter[phone_numbers.carrier_name], filter[misc.type], filter[end_user.admin.entity_name], filter[end_user.admin.auth_person_name], filter[activation_settings.fast_port_eligible], filter[activation_settings.foc_datetime_requested][gt], filter[activation_settings.foc_datetime_requested][lt], filter[phone_numbers.phone_number][contains]
      * @param bool $includePhoneNumbers Include the first 50 phone number objects in the results
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param Sort $sort Consolidated sort parameter (deepObject style). Originally: sort[value]

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\AI;
 
 use Telnyx\AI\Conversations\Conversation;
+use Telnyx\AI\Conversations\ConversationAddMessageParams;
 use Telnyx\AI\Conversations\ConversationCreateParams;
 use Telnyx\AI\Conversations\ConversationGetConversationsInsightsResponse;
 use Telnyx\AI\Conversations\ConversationGetResponse;
@@ -306,6 +307,75 @@ final class ConversationsService implements ConversationsContract
             path: ['ai/conversations/%1$s', $conversationID],
             options: $requestOptions,
             convert: null,
+        );
+    }
+
+    /**
+     * @api
+     *
+     * Add a new message to the conversation. Used to insert a new messages to a conversation manually ( without using chat endpoint )
+     *
+     * @param string $role
+     * @param string $content
+     * @param array<string, string|int|bool|list<string|int|bool>> $metadata
+     * @param string $name
+     * @param \DateTimeInterface $sentAt
+     * @param string $toolCallID
+     * @param list<array<string, mixed>> $toolCalls
+     * @param mixed|string $toolChoice
+     *
+     * @throws APIException
+     */
+    public function addMessage(
+        string $conversationID,
+        $role,
+        $content = omit,
+        $metadata = omit,
+        $name = omit,
+        $sentAt = omit,
+        $toolCallID = omit,
+        $toolCalls = omit,
+        $toolChoice = omit,
+        ?RequestOptions $requestOptions = null,
+    ): mixed {
+        $params = [
+            'role' => $role,
+            'content' => $content,
+            'metadata' => $metadata,
+            'name' => $name,
+            'sentAt' => $sentAt,
+            'toolCallID' => $toolCallID,
+            'toolCalls' => $toolCalls,
+            'toolChoice' => $toolChoice,
+        ];
+
+        return $this->addMessageRaw($conversationID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @throws APIException
+     */
+    public function addMessageRaw(
+        string $conversationID,
+        array $params,
+        ?RequestOptions $requestOptions = null,
+    ): mixed {
+        [$parsed, $options] = ConversationAddMessageParams::parseRequest(
+            $params,
+            $requestOptions
+        );
+
+        // @phpstan-ignore-next-line;
+        return $this->client->request(
+            method: 'post',
+            path: ['ai/conversations/%1$s/message', $conversationID],
+            body: (object) $parsed,
+            options: $options,
+            convert: 'mixed',
         );
     }
 

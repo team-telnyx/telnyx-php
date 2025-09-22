@@ -24,7 +24,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * You can pass a list of valid digits along with an 'invalid_payload', which will be played back at the beginning of each prompt. Speech will be interrupted when a DTMF signal is received. The `Answer` command must be issued before the `gather_using_speak` command.
  *
- * **Expected Webhooks (see [callback schema](https://developers.telnyx.com/api/call-control/gather-using-speak#callbacks) below):**
+ * **Expected Webhooks:**
  *
  * - `call.dtmf.received` (you may receive many of these webhooks)
  * - `call.gather.ended`

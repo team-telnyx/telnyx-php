@@ -105,6 +105,34 @@ final class VerifyProfilesTest extends TestCase
     }
 
     #[Test]
+    public function testCreateTemplate(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
+        $result = $this->client->verifyProfiles->createTemplate(
+            'Your {{app_name}} verification code is: {{code}}.'
+        );
+
+        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+    }
+
+    #[Test]
+    public function testCreateTemplateWithOptionalParams(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
+        $result = $this->client->verifyProfiles->createTemplate(
+            'Your {{app_name}} verification code is: {{code}}.'
+        );
+
+        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+    }
+
+    #[Test]
     public function testRetrieveTemplates(): void
     {
         if (UnsupportedMockTests::$skip) {
@@ -112,6 +140,36 @@ final class VerifyProfilesTest extends TestCase
         }
 
         $result = $this->client->verifyProfiles->retrieveTemplates();
+
+        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+    }
+
+    #[Test]
+    public function testUpdateTemplate(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
+        $result = $this->client->verifyProfiles->updateTemplate(
+            '12ade33a-21c0-473b-b055-b3c836e1c292',
+            'Your {{app_name}} verification code is: {{code}}.',
+        );
+
+        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+    }
+
+    #[Test]
+    public function testUpdateTemplateWithOptionalParams(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
+        $result = $this->client->verifyProfiles->updateTemplate(
+            '12ade33a-21c0-473b-b055-b3c836e1c292',
+            'Your {{app_name}} verification code is: {{code}}.',
+        );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

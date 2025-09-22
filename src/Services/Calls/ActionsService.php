@@ -85,6 +85,7 @@ use Telnyx\Calls\Actions\ActionStartSiprecParams\SiprecTrack;
 use Telnyx\Calls\Actions\ActionStartSiprecParams\SipTransport;
 use Telnyx\Calls\Actions\ActionStartSiprecResponse;
 use Telnyx\Calls\Actions\ActionStartStreamingParams;
+use Telnyx\Calls\Actions\ActionStartStreamingParams\StreamBidirectionalSamplingRate;
 use Telnyx\Calls\Actions\ActionStartStreamingParams\StreamTrack as StreamTrack1;
 use Telnyx\Calls\Actions\ActionStartStreamingResponse;
 use Telnyx\Calls\Actions\ActionStartTranscriptionParams;
@@ -117,6 +118,11 @@ use Telnyx\Calls\Actions\ActionTransferParams\AnsweringMachineDetection;
 use Telnyx\Calls\Actions\ActionTransferParams\AnsweringMachineDetectionConfig;
 use Telnyx\Calls\Actions\ActionTransferParams\MediaEncryption;
 use Telnyx\Calls\Actions\ActionTransferParams\MuteDtmf as MuteDtmf1;
+use Telnyx\Calls\Actions\ActionTransferParams\Record as Record2;
+use Telnyx\Calls\Actions\ActionTransferParams\RecordChannels as RecordChannels2;
+use Telnyx\Calls\Actions\ActionTransferParams\RecordFormat as RecordFormat2;
+use Telnyx\Calls\Actions\ActionTransferParams\RecordTrack as RecordTrack2;
+use Telnyx\Calls\Actions\ActionTransferParams\RecordTrim as RecordTrim2;
 use Telnyx\Calls\Actions\ActionTransferParams\SipTransportProtocol;
 use Telnyx\Calls\Actions\ActionTransferParams\WebhookURLMethod as WebhookURLMethod1;
 use Telnyx\Calls\Actions\ActionTransferResponse;
@@ -158,7 +164,7 @@ final class ActionsService implements ActionsContract
      *
      * Answer an incoming call. You must issue this command before executing subsequent commands on an incoming call.
      *
-     * **Expected Webhooks (see [callback schema](https://developers.telnyx.com/api/call-control/answer-call#callbacks) below):**
+     * **Expected Webhooks:**
      *
      * - `call.answered`
      * - `streaming.started`, `streaming.stopped` or `streaming.failed` if `stream_url` was set
@@ -184,7 +190,7 @@ final class ActionsService implements ActionsContract
      * @param StreamBidirectionalCodec|value-of<StreamBidirectionalCodec> $streamBidirectionalCodec Indicates codec for bidirectional streaming RTP payloads. Used only with stream_bidirectional_mode=rtp. Case sensitive.
      * @param StreamBidirectionalMode|value-of<StreamBidirectionalMode> $streamBidirectionalMode configures method of bidirectional streaming (mp3, rtp)
      * @param StreamBidirectionalTargetLegs|value-of<StreamBidirectionalTargetLegs> $streamBidirectionalTargetLegs specifies which call legs should receive the bidirectional stream audio
-     * @param StreamCodec|value-of<StreamCodec> $streamCodec Specifies the codec to be used for the streamed audio. When set to 'default' or when transcoding is not possible, the codec from the call will be used. Currently, transcoding is only supported between PCMU and PCMA codecs.
+     * @param StreamCodec|value-of<StreamCodec> $streamCodec Specifies the codec to be used for the streamed audio. When set to 'default' or when transcoding is not possible, the codec from the call will be used.
      * @param StreamTrack|value-of<StreamTrack> $streamTrack specifies which track should be streamed
      * @param string $streamURL the destination WebSocket address where the stream is going to be delivered
      * @param bool $transcription Enable transcription upon call answer. The default value is false.
@@ -292,7 +298,7 @@ final class ActionsService implements ActionsContract
      *
      * Bridge two call control calls.
      *
-     * **Expected Webhooks (see [callback schema](https://developers.telnyx.com/api/call-control/bridge-call#callbacks) below):**
+     * **Expected Webhooks:**
      *
      * - `call.bridged` for Leg A
      * - `call.bridged` for Leg B
@@ -466,7 +472,7 @@ final class ActionsService implements ActionsContract
      *
      * You can pass a list of valid digits. The `Answer` command must be issued before the `gather` command.
      *
-     * **Expected Webhooks (see [callback schema](https://developers.telnyx.com/api/call-control/gather-call#callbacks) below):**
+     * **Expected Webhooks:**
      *
      * - `call.dtmf.received` (you may receive many of these webhooks)
      * - `call.gather.ended`
@@ -552,7 +558,7 @@ final class ActionsService implements ActionsContract
      *
      *  You can pass parameters described as a JSON Schema object and the voice assistant will attempt to gather these informations.
      *
-     * **Expected Webhooks (see [callback schema](https://developers.telnyx.com/api/call-control/call-gather-using-ai#callbacks) below):**
+     * **Expected Webhooks:**
      *
      * - `call.ai_gather.ended`
      * - `call.conversation.ended`
@@ -567,8 +573,8 @@ final class ActionsService implements ActionsContract
      * @param InterruptionSettings $interruptionSettings Settings for handling user interruptions during assistant speech
      * @param GoogleTranscriptionLanguage|value-of<GoogleTranscriptionLanguage> $language Language to use for speech recognition
      * @param list<MessageHistory> $messageHistory the message history you want the voice assistant to be aware of, this can be useful to keep the context of the conversation, or to pass additional information to the voice assistant
-     * @param bool $sendMessageHistoryUpdates Default is `false`. If set to `true`, the voice assistant will send updates to the message history via the `call.ai_gather.message_history_updated` [callback](https://developers.telnyx.com/api/call-control/call-gather-using-ai#callbacks) in real time as the message history is updated.
-     * @param bool $sendPartialResults Default is `false`. If set to `true`, the voice assistant will send partial results via the `call.ai_gather.partial_results` [callback](https://developers.telnyx.com/api/call-control/call-gather-using-ai#callbacks) in real time as individual fields are gathered. If set to `false`, the voice assistant will only send the final result via the `call.ai_gather.ended` callback.
+     * @param bool $sendMessageHistoryUpdates Default is `false`. If set to `true`, the voice assistant will send updates to the message history via the `call.ai_gather.message_history_updated` callback in real time as the message history is updated.
+     * @param bool $sendPartialResults Default is `false`. If set to `true`, the voice assistant will send partial results via the `call.ai_gather.partial_results` callback in real time as individual fields are gathered. If set to `false`, the voice assistant will only send the final result via the `call.ai_gather.ended` callback.
      * @param TranscriptionConfig $transcription The settings associated with speech to text for the voice assistant. This is only relevant if the assistant uses a text-to-text language model. Any assistant using a model with native audio support (e.g. `fixie-ai/ultravox-v0_4`) will ignore this field.
      * @param int $userResponseTimeoutMs the number of milliseconds to wait for a user response before the voice assistant times out and check if the user is still there
      * @param string $voice The voice to be used by the voice assistant. Currently we support ElevenLabs, Telnyx and AWS voices.
@@ -658,7 +664,7 @@ final class ActionsService implements ActionsContract
      *
      * You can pass a list of valid digits along with an 'invalid_audio_url', which will be played back at the beginning of each prompt. Playback will be interrupted when a DTMF signal is received. The `Answer command must be issued before the `gather_using_audio` command.
      *
-     * **Expected Webhooks (see [callback schema](https://developers.telnyx.com/api/call-control/gather-using-audio#callbacks) below):**
+     * **Expected Webhooks:**
      *
      * - `call.playback.started`
      * - `call.playback.ended`
@@ -755,7 +761,7 @@ final class ActionsService implements ActionsContract
      *
      * You can pass a list of valid digits along with an 'invalid_payload', which will be played back at the beginning of each prompt. Speech will be interrupted when a DTMF signal is received. The `Answer` command must be issued before the `gather_using_speak` command.
      *
-     * **Expected Webhooks (see [callback schema](https://developers.telnyx.com/api/call-control/gather-using-speak#callbacks) below):**
+     * **Expected Webhooks:**
      *
      * - `call.dtmf.received` (you may receive many of these webhooks)
      * - `call.gather.ended`
@@ -867,7 +873,7 @@ final class ActionsService implements ActionsContract
      *
      * Hang up the call.
      *
-     * **Expected Webhooks (see [callback schema](https://developers.telnyx.com/api/call-control/hangup-call#callbacks) below):**
+     * **Expected Webhooks:**
      *
      * - `call.hangup`
      * - `call.recording.saved`
@@ -1038,7 +1044,7 @@ final class ActionsService implements ActionsContract
      *
      * Initiate a SIP Refer on a Call Control call. You can initiate a SIP Refer at any point in the duration of a call.
      *
-     * **Expected Webhooks (see [callback schema](https://developers.telnyx.com/api/call-control/refer-call#callbacks) below):**
+     * **Expected Webhooks:**
      *
      * - `call.refer.started`
      * - `call.refer.completed`
@@ -1114,7 +1120,7 @@ final class ActionsService implements ActionsContract
      *
      * Reject an incoming call.
      *
-     * **Expected Webhooks (see [callback schema](https://developers.telnyx.com/api/call-control/reject-call#callbacks) below):**
+     * **Expected Webhooks:**
      *
      * - `call.hangup`
      *
@@ -1368,7 +1374,7 @@ final class ActionsService implements ActionsContract
      *
      * Convert text to speech and play it back on the call. If multiple speak text commands are issued consecutively, the audio files will be placed in a queue awaiting playback.
      *
-     * **Expected Webhooks (see [callback schema](https://developers.telnyx.com/api/call-control/speak-call#callbacks) below):**
+     * **Expected Webhooks:**
      *
      * - `call.speak.started`
      * - `call.speak.ended`
@@ -1459,7 +1465,7 @@ final class ActionsService implements ActionsContract
      *
      * Start an AI assistant on the call.
      *
-     * **Expected Webhooks (see [callback schema](https://developers.telnyx.com/api/call-control/call-start-ai-assistant#callbacks) below):**
+     * **Expected Webhooks:**
      *
      * - `call.conversation.ended`
      * - `call.conversation_insights.generated`
@@ -1546,7 +1552,7 @@ final class ActionsService implements ActionsContract
      * variety of use cases, including fraud detection, or the creation of AI-generated audio responses.
      * Requests must specify either the `target` attribute or the `rx` and `tx` attributes.
      *
-     * **Expected Webhooks (see [callback schema](https://developers.telnyx.com/api/call-control/start-call-fork#callbacks) below):**
+     * **Expected Webhooks:**
      *
      * - `call.fork.started`
      * - `call.fork.stopped`
@@ -1688,7 +1694,7 @@ final class ActionsService implements ActionsContract
      * - When `overlay` is enabled, `target_legs` is limited to `self`.
      * - A customer cannot Play Audio with `overlay=true` unless there is a Play Audio with `overlay=false` actively playing.
      *
-     * **Expected Webhooks (see [callback schema](https://developers.telnyx.com/api/call-control/start-call-playback#callbacks) below):**
+     * **Expected Webhooks:**
      *
      * - `call.playback.started`
      * - `call.playback.ended`
@@ -1775,7 +1781,7 @@ final class ActionsService implements ActionsContract
      *
      * Start recording the call. Recording will stop on call hang-up, or can be initiated via the Stop Recording command.
      *
-     * **Expected Webhooks (see [callback schema](https://developers.telnyx.com/api/call-control/start-call-record#callbacks) below):**
+     * **Expected Webhooks:**
      *
      * - `call.recording.saved`
      * - `call.recording.transcription.saved`
@@ -1965,8 +1971,9 @@ final class ActionsService implements ActionsContract
      * @param bool $enableDialogflow Enables Dialogflow for the current call. The default value is false.
      * @param StreamBidirectionalCodec|value-of<StreamBidirectionalCodec> $streamBidirectionalCodec Indicates codec for bidirectional streaming RTP payloads. Used only with stream_bidirectional_mode=rtp. Case sensitive.
      * @param StreamBidirectionalMode|value-of<StreamBidirectionalMode> $streamBidirectionalMode configures method of bidirectional streaming (mp3, rtp)
+     * @param StreamBidirectionalSamplingRate|value-of<StreamBidirectionalSamplingRate> $streamBidirectionalSamplingRate audio sampling rate
      * @param StreamBidirectionalTargetLegs|value-of<StreamBidirectionalTargetLegs> $streamBidirectionalTargetLegs specifies which call legs should receive the bidirectional stream audio
-     * @param StreamCodec|value-of<StreamCodec> $streamCodec Specifies the codec to be used for the streamed audio. When set to 'default' or when transcoding is not possible, the codec from the call will be used. Currently, transcoding is only supported between PCMU and PCMA codecs.
+     * @param StreamCodec|value-of<StreamCodec> $streamCodec Specifies the codec to be used for the streamed audio. When set to 'default' or when transcoding is not possible, the codec from the call will be used.
      * @param StreamTrack1|value-of<StreamTrack1> $streamTrack specifies which track should be streamed
      * @param string $streamURL the destination WebSocket address where the stream is going to be delivered
      *
@@ -1982,6 +1989,7 @@ final class ActionsService implements ActionsContract
         $enableDialogflow = omit,
         $streamBidirectionalCodec = omit,
         $streamBidirectionalMode = omit,
+        $streamBidirectionalSamplingRate = omit,
         $streamBidirectionalTargetLegs = omit,
         $streamCodec = omit,
         $streamTrack = omit,
@@ -1995,6 +2003,7 @@ final class ActionsService implements ActionsContract
             'enableDialogflow' => $enableDialogflow,
             'streamBidirectionalCodec' => $streamBidirectionalCodec,
             'streamBidirectionalMode' => $streamBidirectionalMode,
+            'streamBidirectionalSamplingRate' => $streamBidirectionalSamplingRate,
             'streamBidirectionalTargetLegs' => $streamBidirectionalTargetLegs,
             'streamCodec' => $streamCodec,
             'streamTrack' => $streamTrack,
@@ -2038,7 +2047,7 @@ final class ActionsService implements ActionsContract
      *
      * Start real-time transcription. Transcription will stop on call hang-up, or can be initiated via the Transcription stop command.
      *
-     * **Expected Webhooks (see [callback schema](https://developers.telnyx.com/api/call-control/start-call-transcription#callbacks) below):**
+     * **Expected Webhooks:**
      *
      * - `call.transcription`
      *
@@ -2162,7 +2171,7 @@ final class ActionsService implements ActionsContract
      *
      * Stop forking a call.
      *
-     * **Expected Webhooks (see [callback schema](https://developers.telnyx.com/api/call-control/stop-call-fork#callbacks) below):**
+     * **Expected Webhooks:**
      *
      * - `call.fork.stopped`
      *
@@ -2224,7 +2233,7 @@ final class ActionsService implements ActionsContract
      *
      * Stop current gather.
      *
-     * **Expected Webhooks (see [callback schema](https://developers.telnyx.com/api/call-control/stop-call-gather#callbacks) below):**
+     * **Expected Webhooks:**
      *
      * - `call.gather.ended`
      *
@@ -2336,7 +2345,7 @@ final class ActionsService implements ActionsContract
      *
      * Stop audio being played on the call.
      *
-     * **Expected Webhooks (see [callback schema](https://developers.telnyx.com/api/call-control/stop-call-playback#callbacks) below):**
+     * **Expected Webhooks:**
      *
      * - `call.playback.ended` or `call.speak.ended`
      *
@@ -2401,7 +2410,7 @@ final class ActionsService implements ActionsContract
      *
      * Stop recording the call.
      *
-     * **Expected Webhooks (see [callback schema](https://developers.telnyx.com/api/call-control/stop-call-recording#callbacks) below):**
+     * **Expected Webhooks:**
      *
      * - `call.recording.saved`
      *
@@ -2519,7 +2528,7 @@ final class ActionsService implements ActionsContract
      *
      * Stop streaming a call to a WebSocket.
      *
-     * **Expected Webhooks (see [callback schema](https://developers.telnyx.com/api/call-control/stop-call-streaming#callbacks) below):**
+     * **Expected Webhooks:**
      *
      * - `streaming.stopped`
      *
@@ -2691,7 +2700,7 @@ final class ActionsService implements ActionsContract
      *
      * Transfer a call to a new destination. If the transfer is unsuccessful, a `call.hangup` webhook for the other call (Leg B) will be sent indicating that the transfer could not be completed. The original call will remain active and may be issued additional commands, potentially transfering the call to an alternate destination.
      *
-     * **Expected Webhooks (see [callback schema](https://developers.telnyx.com/api/call-control/transfer-call#callbacks) below):**
+     * **Expected Webhooks:**
      *
      * - `call.initiated`
      * - `call.bridged` to Leg B
@@ -2715,6 +2724,14 @@ final class ActionsService implements ActionsContract
      * @param string $mediaName The media_name of a file to be played back when the transfer destination answers before bridging the call. The media_name must point to a file previously uploaded to api.telnyx.com/v2/media by the same user/organization. The file must either be a WAV or MP3 file.
      * @param MuteDtmf1|value-of<MuteDtmf1> $muteDtmf When enabled, DTMF tones are not passed to the call participant. The webhooks containing the DTMF information will be sent.
      * @param string $parkAfterUnbridge Specifies behavior after the bridge ends (i.e. the opposite leg either hangs up or is transferred). If supplied with the value `self`, the current leg will be parked after unbridge. If not set, the default behavior is to hang up the leg.
+     * @param Record2|value-of<Record2> $record Start recording automatically after an event. Disabled by default.
+     * @param RecordChannels2|value-of<RecordChannels2> $recordChannels defines which channel should be recorded ('single' or 'dual') when `record` is specified
+     * @param string $recordCustomFileName The custom recording file name to be used instead of the default `call_leg_id`. Telnyx will still add a Unix timestamp suffix.
+     * @param RecordFormat2|value-of<RecordFormat2> $recordFormat defines the format of the recording ('wav' or 'mp3') when `record` is specified
+     * @param int $recordMaxLength Defines the maximum length for the recording in seconds when `record` is specified. The minimum value is 0. The maximum value is 43200. The default value is 0 (infinite).
+     * @param int $recordTimeoutSecs The number of seconds that Telnyx will wait for the recording to be stopped if silence is detected when `record` is specified. The timer only starts when the speech is detected. Please note that call transcription is used to detect silence and the related charge will be applied. The minimum value is 0. The default value is 0 (infinite).
+     * @param RecordTrack2|value-of<RecordTrack2> $recordTrack The audio track to be recorded. Can be either `both`, `inbound` or `outbound`. If only single track is specified (`inbound`, `outbound`), `channels` configuration is ignored and it will be recorded as mono (single channel).
+     * @param RecordTrim2|value-of<RecordTrim2> $recordTrim when set to `trim-silence`, silence will be removed from the beginning and end of the recording
      * @param string $sipAuthPassword SIP Authentication password used for SIP challenges
      * @param string $sipAuthUsername SIP Authentication username used for SIP challenges
      * @param list<SipHeader> $sipHeaders SIP headers to be added to the SIP INVITE. Currently only User-to-User header is supported.
@@ -2746,6 +2763,14 @@ final class ActionsService implements ActionsContract
         $mediaName = omit,
         $muteDtmf = omit,
         $parkAfterUnbridge = omit,
+        $record = omit,
+        $recordChannels = omit,
+        $recordCustomFileName = omit,
+        $recordFormat = omit,
+        $recordMaxLength = omit,
+        $recordTimeoutSecs = omit,
+        $recordTrack = omit,
+        $recordTrim = omit,
         $sipAuthPassword = omit,
         $sipAuthUsername = omit,
         $sipHeaders = omit,
@@ -2773,6 +2798,14 @@ final class ActionsService implements ActionsContract
             'mediaName' => $mediaName,
             'muteDtmf' => $muteDtmf,
             'parkAfterUnbridge' => $parkAfterUnbridge,
+            'record' => $record,
+            'recordChannels' => $recordChannels,
+            'recordCustomFileName' => $recordCustomFileName,
+            'recordFormat' => $recordFormat,
+            'recordMaxLength' => $recordMaxLength,
+            'recordTimeoutSecs' => $recordTimeoutSecs,
+            'recordTrack' => $recordTrack,
+            'recordTrim' => $recordTrim,
             'sipAuthPassword' => $sipAuthPassword,
             'sipAuthUsername' => $sipAuthUsername,
             'sipHeaders' => $sipHeaders,

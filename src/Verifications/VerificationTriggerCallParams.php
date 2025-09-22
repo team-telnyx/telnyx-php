@@ -29,6 +29,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   phoneNumber: string,
  *   verifyProfileID: string,
  *   customCode?: string|null,
+ *   extension?: string|null,
  *   timeoutSecs?: int,
  * }
  */
@@ -55,6 +56,12 @@ final class VerificationTriggerCallParams implements BaseModel
      */
     #[Api('custom_code', nullable: true, optional: true)]
     public ?string $customCode;
+
+    /**
+     * Optional extension to dial after call is answered using DTMF digits. Valid digits are 0-9, A-D, *, and #. Pauses can be added using w (0.5s) and W (1s).
+     */
+    #[Api(nullable: true, optional: true)]
+    public ?string $extension;
 
     /**
      * The number of seconds the verification code is valid for.
@@ -92,6 +99,7 @@ final class VerificationTriggerCallParams implements BaseModel
         string $phoneNumber,
         string $verifyProfileID,
         ?string $customCode = null,
+        ?string $extension = null,
         ?int $timeoutSecs = null,
     ): self {
         $obj = new self;
@@ -100,6 +108,7 @@ final class VerificationTriggerCallParams implements BaseModel
         $obj->verifyProfileID = $verifyProfileID;
 
         null !== $customCode && $obj->customCode = $customCode;
+        null !== $extension && $obj->extension = $extension;
         null !== $timeoutSecs && $obj->timeoutSecs = $timeoutSecs;
 
         return $obj;
@@ -134,6 +143,17 @@ final class VerificationTriggerCallParams implements BaseModel
     {
         $obj = clone $this;
         $obj->customCode = $customCode;
+
+        return $obj;
+    }
+
+    /**
+     * Optional extension to dial after call is answered using DTMF digits. Valid digits are 0-9, A-D, *, and #. Pauses can be added using w (0.5s) and W (1s).
+     */
+    public function withExtension(?string $extension): self
+    {
+        $obj = clone $this;
+        $obj->extension = $extension;
 
         return $obj;
     }

@@ -8,6 +8,11 @@ use Telnyx\Calls\Actions\ActionTransferParams\AnsweringMachineDetection;
 use Telnyx\Calls\Actions\ActionTransferParams\AnsweringMachineDetectionConfig;
 use Telnyx\Calls\Actions\ActionTransferParams\MediaEncryption;
 use Telnyx\Calls\Actions\ActionTransferParams\MuteDtmf;
+use Telnyx\Calls\Actions\ActionTransferParams\Record;
+use Telnyx\Calls\Actions\ActionTransferParams\RecordChannels;
+use Telnyx\Calls\Actions\ActionTransferParams\RecordFormat;
+use Telnyx\Calls\Actions\ActionTransferParams\RecordTrack;
+use Telnyx\Calls\Actions\ActionTransferParams\RecordTrim;
 use Telnyx\Calls\Actions\ActionTransferParams\SipTransportProtocol;
 use Telnyx\Calls\Actions\ActionTransferParams\WebhookURLMethod;
 use Telnyx\Calls\CustomSipHeader;
@@ -27,7 +32,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * ```
  * Transfer a call to a new destination. If the transfer is unsuccessful, a `call.hangup` webhook for the other call (Leg B) will be sent indicating that the transfer could not be completed. The original call will remain active and may be issued additional commands, potentially transfering the call to an alternate destination.
  *
- * **Expected Webhooks (see [callback schema](https://developers.telnyx.com/api/call-control/transfer-call#callbacks) below):**
+ * **Expected Webhooks:**
  *
  * - `call.initiated`
  * - `call.bridged` to Leg B
@@ -59,6 +64,14 @@ use Telnyx\Core\Contracts\BaseModel;
  *   mediaName?: string,
  *   muteDtmf?: MuteDtmf|value-of<MuteDtmf>,
  *   parkAfterUnbridge?: string,
+ *   record?: Record|value-of<Record>,
+ *   recordChannels?: RecordChannels|value-of<RecordChannels>,
+ *   recordCustomFileName?: string,
+ *   recordFormat?: RecordFormat|value-of<RecordFormat>,
+ *   recordMaxLength?: int,
+ *   recordTimeoutSecs?: int,
+ *   recordTrack?: RecordTrack|value-of<RecordTrack>,
+ *   recordTrim?: RecordTrim|value-of<RecordTrim>,
  *   sipAuthPassword?: string,
  *   sipAuthUsername?: string,
  *   sipHeaders?: list<SipHeader>,
@@ -174,6 +187,64 @@ final class ActionTransferParams implements BaseModel
     public ?string $parkAfterUnbridge;
 
     /**
+     * Start recording automatically after an event. Disabled by default.
+     *
+     * @var value-of<Record>|null $record
+     */
+    #[Api(enum: Record::class, optional: true)]
+    public ?string $record;
+
+    /**
+     * Defines which channel should be recorded ('single' or 'dual') when `record` is specified.
+     *
+     * @var value-of<RecordChannels>|null $recordChannels
+     */
+    #[Api('record_channels', enum: RecordChannels::class, optional: true)]
+    public ?string $recordChannels;
+
+    /**
+     * The custom recording file name to be used instead of the default `call_leg_id`. Telnyx will still add a Unix timestamp suffix.
+     */
+    #[Api('record_custom_file_name', optional: true)]
+    public ?string $recordCustomFileName;
+
+    /**
+     * Defines the format of the recording ('wav' or 'mp3') when `record` is specified.
+     *
+     * @var value-of<RecordFormat>|null $recordFormat
+     */
+    #[Api('record_format', enum: RecordFormat::class, optional: true)]
+    public ?string $recordFormat;
+
+    /**
+     * Defines the maximum length for the recording in seconds when `record` is specified. The minimum value is 0. The maximum value is 43200. The default value is 0 (infinite).
+     */
+    #[Api('record_max_length', optional: true)]
+    public ?int $recordMaxLength;
+
+    /**
+     * The number of seconds that Telnyx will wait for the recording to be stopped if silence is detected when `record` is specified. The timer only starts when the speech is detected. Please note that call transcription is used to detect silence and the related charge will be applied. The minimum value is 0. The default value is 0 (infinite).
+     */
+    #[Api('record_timeout_secs', optional: true)]
+    public ?int $recordTimeoutSecs;
+
+    /**
+     * The audio track to be recorded. Can be either `both`, `inbound` or `outbound`. If only single track is specified (`inbound`, `outbound`), `channels` configuration is ignored and it will be recorded as mono (single channel).
+     *
+     * @var value-of<RecordTrack>|null $recordTrack
+     */
+    #[Api('record_track', enum: RecordTrack::class, optional: true)]
+    public ?string $recordTrack;
+
+    /**
+     * When set to `trim-silence`, silence will be removed from the beginning and end of the recording.
+     *
+     * @var value-of<RecordTrim>|null $recordTrim
+     */
+    #[Api('record_trim', enum: RecordTrim::class, optional: true)]
+    public ?string $recordTrim;
+
+    /**
      * SIP Authentication password used for SIP challenges.
      */
     #[Api('sip_auth_password', optional: true)]
@@ -271,6 +342,11 @@ final class ActionTransferParams implements BaseModel
      * @param list<CustomSipHeader> $customHeaders
      * @param MediaEncryption|value-of<MediaEncryption> $mediaEncryption
      * @param MuteDtmf|value-of<MuteDtmf> $muteDtmf
+     * @param Record|value-of<Record> $record
+     * @param RecordChannels|value-of<RecordChannels> $recordChannels
+     * @param RecordFormat|value-of<RecordFormat> $recordFormat
+     * @param RecordTrack|value-of<RecordTrack> $recordTrack
+     * @param RecordTrim|value-of<RecordTrim> $recordTrim
      * @param list<SipHeader> $sipHeaders
      * @param SipTransportProtocol|value-of<SipTransportProtocol> $sipTransportProtocol
      * @param WebhookURLMethod|value-of<WebhookURLMethod> $webhookURLMethod
@@ -290,6 +366,14 @@ final class ActionTransferParams implements BaseModel
         ?string $mediaName = null,
         MuteDtmf|string|null $muteDtmf = null,
         ?string $parkAfterUnbridge = null,
+        Record|string|null $record = null,
+        RecordChannels|string|null $recordChannels = null,
+        ?string $recordCustomFileName = null,
+        RecordFormat|string|null $recordFormat = null,
+        ?int $recordMaxLength = null,
+        ?int $recordTimeoutSecs = null,
+        RecordTrack|string|null $recordTrack = null,
+        RecordTrim|string|null $recordTrim = null,
         ?string $sipAuthPassword = null,
         ?string $sipAuthUsername = null,
         ?array $sipHeaders = null,
@@ -318,6 +402,14 @@ final class ActionTransferParams implements BaseModel
         null !== $mediaName && $obj->mediaName = $mediaName;
         null !== $muteDtmf && $obj->muteDtmf = $muteDtmf instanceof MuteDtmf ? $muteDtmf->value : $muteDtmf;
         null !== $parkAfterUnbridge && $obj->parkAfterUnbridge = $parkAfterUnbridge;
+        null !== $record && $obj->record = $record instanceof Record ? $record->value : $record;
+        null !== $recordChannels && $obj->recordChannels = $recordChannels instanceof RecordChannels ? $recordChannels->value : $recordChannels;
+        null !== $recordCustomFileName && $obj->recordCustomFileName = $recordCustomFileName;
+        null !== $recordFormat && $obj->recordFormat = $recordFormat instanceof RecordFormat ? $recordFormat->value : $recordFormat;
+        null !== $recordMaxLength && $obj->recordMaxLength = $recordMaxLength;
+        null !== $recordTimeoutSecs && $obj->recordTimeoutSecs = $recordTimeoutSecs;
+        null !== $recordTrack && $obj->recordTrack = $recordTrack instanceof RecordTrack ? $recordTrack->value : $recordTrack;
+        null !== $recordTrim && $obj->recordTrim = $recordTrim instanceof RecordTrim ? $recordTrim->value : $recordTrim;
         null !== $sipAuthPassword && $obj->sipAuthPassword = $sipAuthPassword;
         null !== $sipAuthUsername && $obj->sipAuthUsername = $sipAuthUsername;
         null !== $sipHeaders && $obj->sipHeaders = $sipHeaders;
@@ -493,6 +585,105 @@ final class ActionTransferParams implements BaseModel
     {
         $obj = clone $this;
         $obj->parkAfterUnbridge = $parkAfterUnbridge;
+
+        return $obj;
+    }
+
+    /**
+     * Start recording automatically after an event. Disabled by default.
+     *
+     * @param Record|value-of<Record> $record
+     */
+    public function withRecord(Record|string $record): self
+    {
+        $obj = clone $this;
+        $obj->record = $record instanceof Record ? $record->value : $record;
+
+        return $obj;
+    }
+
+    /**
+     * Defines which channel should be recorded ('single' or 'dual') when `record` is specified.
+     *
+     * @param RecordChannels|value-of<RecordChannels> $recordChannels
+     */
+    public function withRecordChannels(
+        RecordChannels|string $recordChannels
+    ): self {
+        $obj = clone $this;
+        $obj->recordChannels = $recordChannels instanceof RecordChannels ? $recordChannels->value : $recordChannels;
+
+        return $obj;
+    }
+
+    /**
+     * The custom recording file name to be used instead of the default `call_leg_id`. Telnyx will still add a Unix timestamp suffix.
+     */
+    public function withRecordCustomFileName(string $recordCustomFileName): self
+    {
+        $obj = clone $this;
+        $obj->recordCustomFileName = $recordCustomFileName;
+
+        return $obj;
+    }
+
+    /**
+     * Defines the format of the recording ('wav' or 'mp3') when `record` is specified.
+     *
+     * @param RecordFormat|value-of<RecordFormat> $recordFormat
+     */
+    public function withRecordFormat(RecordFormat|string $recordFormat): self
+    {
+        $obj = clone $this;
+        $obj->recordFormat = $recordFormat instanceof RecordFormat ? $recordFormat->value : $recordFormat;
+
+        return $obj;
+    }
+
+    /**
+     * Defines the maximum length for the recording in seconds when `record` is specified. The minimum value is 0. The maximum value is 43200. The default value is 0 (infinite).
+     */
+    public function withRecordMaxLength(int $recordMaxLength): self
+    {
+        $obj = clone $this;
+        $obj->recordMaxLength = $recordMaxLength;
+
+        return $obj;
+    }
+
+    /**
+     * The number of seconds that Telnyx will wait for the recording to be stopped if silence is detected when `record` is specified. The timer only starts when the speech is detected. Please note that call transcription is used to detect silence and the related charge will be applied. The minimum value is 0. The default value is 0 (infinite).
+     */
+    public function withRecordTimeoutSecs(int $recordTimeoutSecs): self
+    {
+        $obj = clone $this;
+        $obj->recordTimeoutSecs = $recordTimeoutSecs;
+
+        return $obj;
+    }
+
+    /**
+     * The audio track to be recorded. Can be either `both`, `inbound` or `outbound`. If only single track is specified (`inbound`, `outbound`), `channels` configuration is ignored and it will be recorded as mono (single channel).
+     *
+     * @param RecordTrack|value-of<RecordTrack> $recordTrack
+     */
+    public function withRecordTrack(RecordTrack|string $recordTrack): self
+    {
+        $obj = clone $this;
+        $obj->recordTrack = $recordTrack instanceof RecordTrack ? $recordTrack->value : $recordTrack;
+
+        return $obj;
+    }
+
+    /**
+     * When set to `trim-silence`, silence will be removed from the beginning and end of the recording.
+     *
+     * @param RecordTrim|value-of<RecordTrim> $recordTrim
+     */
+    public function withRecordTrim(RecordTrim|string $recordTrim): self
+    {
+        $obj = clone $this;
+        $obj->recordTrim = $recordTrim instanceof RecordTrim ? $recordTrim->value : $recordTrim;
 
         return $obj;
     }
