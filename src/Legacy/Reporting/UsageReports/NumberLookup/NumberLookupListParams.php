@@ -14,14 +14,14 @@ use Telnyx\Core\Contracts\BaseModel;
  * Example usage:
  * ```
  * $params = (new NumberLookupListParams); // set properties as needed
- * $client->STAINLESS_FIXME_legacy.reporting.usageReports.numberLookup->list(...$params->toArray());
+ * $client->legacy.reporting.usageReports.numberLookup->list(...$params->toArray());
  * ```
  * Retrieve a paginated list of telco data usage reports.
  *
  * @method toArray()
  *   Returns the parameters as an associative array suitable for passing to the client method.
  *
- *   `$client->STAINLESS_FIXME_legacy.reporting.usageReports.numberLookup->list(...$params->toArray());`
+ *   `$client->legacy.reporting.usageReports.numberLookup->list(...$params->toArray());`
  *
  * @see Telnyx\Legacy\Reporting\UsageReports\NumberLookup->list
  *

@@ -15,14 +15,14 @@ use Telnyx\Legacy\Reporting\BatchDetailRecords\Voice\VoiceCreateParams\Filter;
  * Example usage:
  * ```
  * $params = (new VoiceCreateParams); // set properties as needed
- * $client->STAINLESS_FIXME_legacy.reporting.batchDetailRecords.voice->create(...$params->toArray());
+ * $client->legacy.reporting.batchDetailRecords.voice->create(...$params->toArray());
  * ```
  * Creates a new CDR report request with the specified filters.
  *
  * @method toArray()
  *   Returns the parameters as an associative array suitable for passing to the client method.
  *
- *   `$client->STAINLESS_FIXME_legacy.reporting.batchDetailRecords.voice->create(...$params->toArray());`
+ *   `$client->legacy.reporting.batchDetailRecords.voice->create(...$params->toArray());`
  *
  * @see Telnyx\Legacy\Reporting\BatchDetailRecords\Voice->create
  *

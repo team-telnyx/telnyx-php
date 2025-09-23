@@ -14,14 +14,14 @@ use Telnyx\Core\Contracts\BaseModel;
  * Example usage:
  * ```
  * $params = (new UsageReportRetrieveSpeechToTextParams); // set properties as needed
- * $client->STAINLESS_FIXME_legacy.reporting.usageReports->retrieveSpeechToText(...$params->toArray());
+ * $client->legacy.reporting.usageReports->retrieveSpeechToText(...$params->toArray());
  * ```
  * Generate and fetch speech to text usage report synchronously. This endpoint will both generate and fetch the speech to text report over a specified time period.
  *
  * @method toArray()
  *   Returns the parameters as an associative array suitable for passing to the client method.
  *
- *   `$client->STAINLESS_FIXME_legacy.reporting.usageReports->retrieveSpeechToText(...$params->toArray());`
+ *   `$client->legacy.reporting.usageReports->retrieveSpeechToText(...$params->toArray());`
  *
  * @see Telnyx\Legacy\Reporting\UsageReports->retrieveSpeechToText
  *

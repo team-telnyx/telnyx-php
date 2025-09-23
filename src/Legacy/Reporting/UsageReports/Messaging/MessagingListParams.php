@@ -14,14 +14,14 @@ use Telnyx\Core\Contracts\BaseModel;
  * Example usage:
  * ```
  * $params = (new MessagingListParams); // set properties as needed
- * $client->STAINLESS_FIXME_legacy.reporting.usageReports.messaging->list(...$params->toArray());
+ * $client->legacy.reporting.usageReports.messaging->list(...$params->toArray());
  * ```
  * Fetch all previous requests for MDR usage reports.
  *
  * @method toArray()
  *   Returns the parameters as an associative array suitable for passing to the client method.
  *
- *   `$client->STAINLESS_FIXME_legacy.reporting.usageReports.messaging->list(...$params->toArray());`
+ *   `$client->legacy.reporting.usageReports.messaging->list(...$params->toArray());`
  *
  * @see Telnyx\Legacy\Reporting\UsageReports\Messaging->list
  *

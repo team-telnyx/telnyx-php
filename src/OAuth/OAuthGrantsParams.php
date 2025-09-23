@@ -14,14 +14,14 @@ use Telnyx\Core\Contracts\BaseModel;
  * Example usage:
  * ```
  * $params = (new OAuthGrantsParams); // set properties as needed
- * $client->STAINLESS_FIXME_oauth->grants(...$params->toArray());
+ * $client->oauth->grants(...$params->toArray());
  * ```
  * Create an OAuth authorization grant.
  *
  * @method toArray()
  *   Returns the parameters as an associative array suitable for passing to the client method.
  *
- *   `$client->STAINLESS_FIXME_oauth->grants(...$params->toArray());`
+ *   `$client->oauth->grants(...$params->toArray());`
  *
  * @see Telnyx\OAuth->grants
  *

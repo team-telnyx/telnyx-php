@@ -67,6 +67,7 @@ use Telnyx\Services\InvoicesService;
 use Telnyx\Services\IPConnectionsService;
 use Telnyx\Services\IPsService;
 use Telnyx\Services\LedgerBillingGroupReportsService;
+use Telnyx\Services\LegacyService;
 use Telnyx\Services\ListService;
 use Telnyx\Services\ManagedAccountsService;
 use Telnyx\Services\MediaService;
@@ -95,6 +96,9 @@ use Telnyx\Services\NumberOrderPhoneNumbersService;
 use Telnyx\Services\NumberOrdersService;
 use Telnyx\Services\NumberReservationsService;
 use Telnyx\Services\NumbersFeaturesService;
+use Telnyx\Services\OAuthClientsService;
+use Telnyx\Services\OAuthGrantsService;
+use Telnyx\Services\OAuthService;
 use Telnyx\Services\OperatorConnectService;
 use Telnyx\Services\OtaUpdatesService;
 use Telnyx\Services\OutboundVoiceProfilesService;
@@ -162,6 +166,26 @@ class Client extends BaseClient
     public string $apiKey;
 
     public bool $baseUrlOverridden;
+
+    /**
+     * @api
+     */
+    public LegacyService $legacy;
+
+    /**
+     * @api
+     */
+    public OAuthService $oauth;
+
+    /**
+     * @api
+     */
+    public OAuthClientsService $oauthClients;
+
+    /**
+     * @api
+     */
+    public OAuthGrantsService $oauthGrants;
 
     /**
      * @api
@@ -933,6 +957,10 @@ class Client extends BaseClient
             options: $options,
         );
 
+        $this->legacy = new LegacyService($this);
+        $this->oauth = new OAuthService($this);
+        $this->oauthClients = new OAuthClientsService($this);
+        $this->oauthGrants = new OAuthGrantsService($this);
         $this->webhooks = new WebhooksService($this);
         $this->accessIPAddress = new AccessIPAddressService($this);
         $this->accessIPRanges = new AccessIPRangesService($this);
