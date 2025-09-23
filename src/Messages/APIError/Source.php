@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Messages\Error;
+namespace Telnyx\Messages\APIError;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
