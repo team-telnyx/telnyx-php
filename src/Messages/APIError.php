@@ -7,10 +7,10 @@ namespace Telnyx\Messages;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Messages\Error\Source;
+use Telnyx\Messages\APIError\Source;
 
 /**
- * @phpstan-type error_alias = array{
+ * @phpstan-type api_error = array{
  *   code: string,
  *   title: string,
  *   detail?: string,
@@ -18,9 +18,9 @@ use Telnyx\Messages\Error\Source;
  *   source?: Source,
  * }
  */
-final class Error implements BaseModel
+final class APIError implements BaseModel
 {
-    /** @use SdkModel<error_alias> */
+    /** @use SdkModel<api_error> */
     use SdkModel;
 
     #[Api]
@@ -40,17 +40,17 @@ final class Error implements BaseModel
     public ?Source $source;
 
     /**
-     * `new Error()` is missing required properties by the API.
+     * `new APIError()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Error::with(code: ..., title: ...)
+     * APIError::with(code: ..., title: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new Error)->withCode(...)->withTitle(...)
+     * (new APIError)->withCode(...)->withTitle(...)
      * ```
      */
     public function __construct()
