@@ -9,13 +9,13 @@ use Telnyx\Addresses\Actions\ActionValidateResponse\Data\Suggested;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Messages\Error;
+use Telnyx\Messages\APIError;
 
 /**
  * @phpstan-type data_alias = array{
  *   result: value-of<Result>,
  *   suggested: Suggested,
- *   errors?: list<Error>,
+ *   errors?: list<APIError>,
  *   recordType?: string,
  * }
  */
@@ -38,8 +38,8 @@ final class Data implements BaseModel
     #[Api]
     public Suggested $suggested;
 
-    /** @var list<Error>|null $errors */
-    #[Api(list: Error::class, optional: true)]
+    /** @var list<APIError>|null $errors */
+    #[Api(list: APIError::class, optional: true)]
     public ?array $errors;
 
     /**
@@ -73,7 +73,7 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Result|value-of<Result> $result
-     * @param list<Error> $errors
+     * @param list<APIError> $errors
      */
     public static function with(
         Result|string $result,
@@ -117,7 +117,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param list<Error> $errors
+     * @param list<APIError> $errors
      */
     public function withErrors(array $errors): self
     {
