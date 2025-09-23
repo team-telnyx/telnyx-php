@@ -16,14 +16,14 @@ use Telnyx\OAuth\OAuthRegisterParams\TokenEndpointAuthMethod;
  * Example usage:
  * ```
  * $params = (new OAuthRegisterParams); // set properties as needed
- * $client->STAINLESS_FIXME_oauth->register(...$params->toArray());
+ * $client->oauth->register(...$params->toArray());
  * ```
  * Register a new OAuth client dynamically (RFC 7591).
  *
  * @method toArray()
  *   Returns the parameters as an associative array suitable for passing to the client method.
  *
- *   `$client->STAINLESS_FIXME_oauth->register(...$params->toArray());`
+ *   `$client->oauth->register(...$params->toArray());`
  *
  * @see Telnyx\OAuth->register
  *

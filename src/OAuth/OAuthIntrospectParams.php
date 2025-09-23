@@ -14,14 +14,14 @@ use Telnyx\Core\Contracts\BaseModel;
  * Example usage:
  * ```
  * $params = (new OAuthIntrospectParams); // set properties as needed
- * $client->STAINLESS_FIXME_oauth->introspect(...$params->toArray());
+ * $client->oauth->introspect(...$params->toArray());
  * ```
  * Introspect an OAuth access token to check its validity and metadata.
  *
  * @method toArray()
  *   Returns the parameters as an associative array suitable for passing to the client method.
  *
- *   `$client->STAINLESS_FIXME_oauth->introspect(...$params->toArray());`
+ *   `$client->oauth->introspect(...$params->toArray());`
  *
  * @see Telnyx\OAuth->introspect
  *

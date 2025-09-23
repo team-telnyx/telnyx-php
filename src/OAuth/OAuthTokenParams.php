@@ -15,14 +15,14 @@ use Telnyx\OAuth\OAuthTokenParams\GrantType;
  * Example usage:
  * ```
  * $params = (new OAuthTokenParams); // set properties as needed
- * $client->STAINLESS_FIXME_oauth->token(...$params->toArray());
+ * $client->oauth->token(...$params->toArray());
  * ```
  * Exchange authorization code, client credentials, or refresh token for access token.
  *
  * @method toArray()
  *   Returns the parameters as an associative array suitable for passing to the client method.
  *
- *   `$client->STAINLESS_FIXME_oauth->token(...$params->toArray());`
+ *   `$client->oauth->token(...$params->toArray());`
  *
  * @see Telnyx\OAuth->token
  *

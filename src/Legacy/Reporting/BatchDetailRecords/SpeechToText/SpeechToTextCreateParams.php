@@ -14,14 +14,14 @@ use Telnyx\Core\Contracts\BaseModel;
  * Example usage:
  * ```
  * $params = (new SpeechToTextCreateParams); // set properties as needed
- * $client->STAINLESS_FIXME_legacy.reporting.batchDetailRecords.speechToText->create(...$params->toArray());
+ * $client->legacy.reporting.batchDetailRecords.speechToText->create(...$params->toArray());
  * ```
  * Creates a new Speech to Text batch report request with the specified filters.
  *
  * @method toArray()
  *   Returns the parameters as an associative array suitable for passing to the client method.
  *
- *   `$client->STAINLESS_FIXME_legacy.reporting.batchDetailRecords.speechToText->create(...$params->toArray());`
+ *   `$client->legacy.reporting.batchDetailRecords.speechToText->create(...$params->toArray());`
  *
  * @see Telnyx\Legacy\Reporting\BatchDetailRecords\SpeechToText->create
  *

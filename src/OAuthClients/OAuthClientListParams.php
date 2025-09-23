@@ -16,14 +16,14 @@ use Telnyx\OAuthClients\OAuthClientListParams\FilterClientType;
  * Example usage:
  * ```
  * $params = (new OAuthClientListParams); // set properties as needed
- * $client->STAINLESS_FIXME_oauthClients->list(...$params->toArray());
+ * $client->oauthClients->list(...$params->toArray());
  * ```
  * Retrieve a paginated list of OAuth clients for the authenticated user.
  *
  * @method toArray()
  *   Returns the parameters as an associative array suitable for passing to the client method.
  *
- *   `$client->STAINLESS_FIXME_oauthClients->list(...$params->toArray());`
+ *   `$client->oauthClients->list(...$params->toArray());`
  *
  * @see Telnyx\OAuthClients->list
  *

@@ -16,14 +16,14 @@ use Telnyx\OAuth\OAuthRetrieveAuthorizeParams\ResponseType;
  * Example usage:
  * ```
  * $params = (new OAuthRetrieveAuthorizeParams); // set properties as needed
- * $client->STAINLESS_FIXME_oauth->retrieveAuthorize(...$params->toArray());
+ * $client->oauth->retrieveAuthorize(...$params->toArray());
  * ```
  * OAuth 2.0 authorization endpoint for the authorization code flow.
  *
  * @method toArray()
  *   Returns the parameters as an associative array suitable for passing to the client method.
  *
- *   `$client->STAINLESS_FIXME_oauth->retrieveAuthorize(...$params->toArray());`
+ *   `$client->oauth->retrieveAuthorize(...$params->toArray());`
  *
  * @see Telnyx\OAuth->retrieveAuthorize
  *
