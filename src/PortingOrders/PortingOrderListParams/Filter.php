@@ -7,25 +7,22 @@ namespace Telnyx\PortingOrders\PortingOrderListParams;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\PortingOrders\PortingOrderListParams\Filter\ActivationSettingsFocDatetimeRequested;
-use Telnyx\PortingOrders\PortingOrderListParams\Filter\PhoneNumbersPhoneNumber;
-use Telnyx\PortingOrders\PortingOrderType;
+use Telnyx\PortingOrders\PortingOrderListParams\Filter\ActivationSettings;
+use Telnyx\PortingOrders\PortingOrderListParams\Filter\EndUser;
+use Telnyx\PortingOrders\PortingOrderListParams\Filter\Misc;
+use Telnyx\PortingOrders\PortingOrderListParams\Filter\PhoneNumbers;
 
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[customer_reference], filter[customer_group_reference], filter[parent_support_key], filter[phone_numbers.country_code], filter[phone_numbers.carrier_name], filter[misc.type], filter[end_user.admin.entity_name], filter[end_user.admin.auth_person_name], filter[activation_settings.fast_port_eligible], filter[activation_settings.foc_datetime_requested][gt], filter[activation_settings.foc_datetime_requested][lt], filter[phone_numbers.phone_number][contains].
  *
  * @phpstan-type filter_alias = array{
- *   activationSettingsFastPortEligible?: bool,
- *   activationSettingsFocDatetimeRequested?: ActivationSettingsFocDatetimeRequested,
+ *   activationSettings?: ActivationSettings,
  *   customerGroupReference?: string,
  *   customerReference?: string,
- *   endUserAdminAuthPersonName?: string,
- *   endUserAdminEntityName?: string,
- *   miscType?: value-of<PortingOrderType>,
+ *   endUser?: EndUser,
+ *   misc?: Misc,
  *   parentSupportKey?: string,
- *   phoneNumbersCarrierName?: string,
- *   phoneNumbersCountryCode?: string,
- *   phoneNumbersPhoneNumber?: PhoneNumbersPhoneNumber,
+ *   phoneNumbers?: PhoneNumbers,
  * }
  */
 final class Filter implements BaseModel
@@ -33,17 +30,8 @@ final class Filter implements BaseModel
     /** @use SdkModel<filter_alias> */
     use SdkModel;
 
-    /**
-     * Filter results by fast port eligible.
-     */
-    #[Api('activation_settings.fast_port_eligible', optional: true)]
-    public ?bool $activationSettingsFastPortEligible;
-
-    /**
-     * FOC datetime range filtering operations.
-     */
-    #[Api('activation_settings.foc_datetime_requested', optional: true)]
-    public ?ActivationSettingsFocDatetimeRequested $activationSettingsFocDatetimeRequested;
+    #[Api('activation_settings', optional: true)]
+    public ?ActivationSettings $activationSettings;
 
     /**
      * Filter results by customer_group_reference.
@@ -57,25 +45,11 @@ final class Filter implements BaseModel
     #[Api('customer_reference', optional: true)]
     public ?string $customerReference;
 
-    /**
-     * Filter results by authorized person.
-     */
-    #[Api('end_user.admin.auth_person_name', optional: true)]
-    public ?string $endUserAdminAuthPersonName;
+    #[Api('end_user', optional: true)]
+    public ?EndUser $endUser;
 
-    /**
-     * Filter results by person or company name.
-     */
-    #[Api('end_user.admin.entity_name', optional: true)]
-    public ?string $endUserAdminEntityName;
-
-    /**
-     * Filter results by porting order type.
-     *
-     * @var value-of<PortingOrderType>|null $miscType
-     */
-    #[Api('misc.type', enum: PortingOrderType::class, optional: true)]
-    public ?string $miscType;
+    #[Api(optional: true)]
+    public ?Misc $misc;
 
     /**
      * Filter results by parent_support_key.
@@ -83,23 +57,8 @@ final class Filter implements BaseModel
     #[Api('parent_support_key', optional: true)]
     public ?string $parentSupportKey;
 
-    /**
-     * Filter results by old service provider.
-     */
-    #[Api('phone_numbers.carrier_name', optional: true)]
-    public ?string $phoneNumbersCarrierName;
-
-    /**
-     * Filter results by country ISO 3166-1 alpha-2 code.
-     */
-    #[Api('phone_numbers.country_code', optional: true)]
-    public ?string $phoneNumbersCountryCode;
-
-    /**
-     * Phone number filtering operations.
-     */
-    #[Api('phone_numbers.phone_number', optional: true)]
-    public ?PhoneNumbersPhoneNumber $phoneNumbersPhoneNumber;
+    #[Api('phone_numbers', optional: true)]
+    public ?PhoneNumbers $phoneNumbers;
 
     public function __construct()
     {
@@ -110,59 +69,34 @@ final class Filter implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
-     *
-     * @param PortingOrderType|value-of<PortingOrderType> $miscType
      */
     public static function with(
-        ?bool $activationSettingsFastPortEligible = null,
-        ?ActivationSettingsFocDatetimeRequested $activationSettingsFocDatetimeRequested = null,
+        ?ActivationSettings $activationSettings = null,
         ?string $customerGroupReference = null,
         ?string $customerReference = null,
-        ?string $endUserAdminAuthPersonName = null,
-        ?string $endUserAdminEntityName = null,
-        PortingOrderType|string|null $miscType = null,
+        ?EndUser $endUser = null,
+        ?Misc $misc = null,
         ?string $parentSupportKey = null,
-        ?string $phoneNumbersCarrierName = null,
-        ?string $phoneNumbersCountryCode = null,
-        ?PhoneNumbersPhoneNumber $phoneNumbersPhoneNumber = null,
+        ?PhoneNumbers $phoneNumbers = null,
     ): self {
         $obj = new self;
 
-        null !== $activationSettingsFastPortEligible && $obj->activationSettingsFastPortEligible = $activationSettingsFastPortEligible;
-        null !== $activationSettingsFocDatetimeRequested && $obj->activationSettingsFocDatetimeRequested = $activationSettingsFocDatetimeRequested;
+        null !== $activationSettings && $obj->activationSettings = $activationSettings;
         null !== $customerGroupReference && $obj->customerGroupReference = $customerGroupReference;
         null !== $customerReference && $obj->customerReference = $customerReference;
-        null !== $endUserAdminAuthPersonName && $obj->endUserAdminAuthPersonName = $endUserAdminAuthPersonName;
-        null !== $endUserAdminEntityName && $obj->endUserAdminEntityName = $endUserAdminEntityName;
-        null !== $miscType && $obj->miscType = $miscType instanceof PortingOrderType ? $miscType->value : $miscType;
+        null !== $endUser && $obj->endUser = $endUser;
+        null !== $misc && $obj->misc = $misc;
         null !== $parentSupportKey && $obj->parentSupportKey = $parentSupportKey;
-        null !== $phoneNumbersCarrierName && $obj->phoneNumbersCarrierName = $phoneNumbersCarrierName;
-        null !== $phoneNumbersCountryCode && $obj->phoneNumbersCountryCode = $phoneNumbersCountryCode;
-        null !== $phoneNumbersPhoneNumber && $obj->phoneNumbersPhoneNumber = $phoneNumbersPhoneNumber;
+        null !== $phoneNumbers && $obj->phoneNumbers = $phoneNumbers;
 
         return $obj;
     }
 
-    /**
-     * Filter results by fast port eligible.
-     */
-    public function withActivationSettingsFastPortEligible(
-        bool $activationSettingsFastPortEligible
+    public function withActivationSettings(
+        ActivationSettings $activationSettings
     ): self {
         $obj = clone $this;
-        $obj->activationSettingsFastPortEligible = $activationSettingsFastPortEligible;
-
-        return $obj;
-    }
-
-    /**
-     * FOC datetime range filtering operations.
-     */
-    public function withActivationSettingsFocDatetimeRequested(
-        ActivationSettingsFocDatetimeRequested $activationSettingsFocDatetimeRequested,
-    ): self {
-        $obj = clone $this;
-        $obj->activationSettingsFocDatetimeRequested = $activationSettingsFocDatetimeRequested;
+        $obj->activationSettings = $activationSettings;
 
         return $obj;
     }
@@ -190,39 +124,18 @@ final class Filter implements BaseModel
         return $obj;
     }
 
-    /**
-     * Filter results by authorized person.
-     */
-    public function withEndUserAdminAuthPersonName(
-        string $endUserAdminAuthPersonName
-    ): self {
-        $obj = clone $this;
-        $obj->endUserAdminAuthPersonName = $endUserAdminAuthPersonName;
-
-        return $obj;
-    }
-
-    /**
-     * Filter results by person or company name.
-     */
-    public function withEndUserAdminEntityName(
-        string $endUserAdminEntityName
-    ): self {
-        $obj = clone $this;
-        $obj->endUserAdminEntityName = $endUserAdminEntityName;
-
-        return $obj;
-    }
-
-    /**
-     * Filter results by porting order type.
-     *
-     * @param PortingOrderType|value-of<PortingOrderType> $miscType
-     */
-    public function withMiscType(PortingOrderType|string $miscType): self
+    public function withEndUser(EndUser $endUser): self
     {
         $obj = clone $this;
-        $obj->miscType = $miscType instanceof PortingOrderType ? $miscType->value : $miscType;
+        $obj->endUser = $endUser;
+
+        return $obj;
+    }
+
+    public function withMisc(Misc $misc): self
+    {
+        $obj = clone $this;
+        $obj->misc = $misc;
 
         return $obj;
     }
@@ -238,38 +151,10 @@ final class Filter implements BaseModel
         return $obj;
     }
 
-    /**
-     * Filter results by old service provider.
-     */
-    public function withPhoneNumbersCarrierName(
-        string $phoneNumbersCarrierName
-    ): self {
+    public function withPhoneNumbers(PhoneNumbers $phoneNumbers): self
+    {
         $obj = clone $this;
-        $obj->phoneNumbersCarrierName = $phoneNumbersCarrierName;
-
-        return $obj;
-    }
-
-    /**
-     * Filter results by country ISO 3166-1 alpha-2 code.
-     */
-    public function withPhoneNumbersCountryCode(
-        string $phoneNumbersCountryCode
-    ): self {
-        $obj = clone $this;
-        $obj->phoneNumbersCountryCode = $phoneNumbersCountryCode;
-
-        return $obj;
-    }
-
-    /**
-     * Phone number filtering operations.
-     */
-    public function withPhoneNumbersPhoneNumber(
-        PhoneNumbersPhoneNumber $phoneNumbersPhoneNumber
-    ): self {
-        $obj = clone $this;
-        $obj->phoneNumbersPhoneNumber = $phoneNumbersPhoneNumber;
+        $obj->phoneNumbers = $phoneNumbers;
 
         return $obj;
     }

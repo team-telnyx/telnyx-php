@@ -7,22 +7,18 @@ namespace Telnyx\PortingOrders\PortingOrderListParams\Filter;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\PortingOrders\PortingOrderListParams\Filter\EndUser\Admin;
 
 /**
- * Phone number filtering operations.
- *
- * @phpstan-type phone_numbers_phone_number = array{contains?: string}
+ * @phpstan-type end_user = array{admin?: Admin}
  */
-final class PhoneNumbersPhoneNumber implements BaseModel
+final class EndUser implements BaseModel
 {
-    /** @use SdkModel<phone_numbers_phone_number> */
+    /** @use SdkModel<end_user> */
     use SdkModel;
 
-    /**
-     * Filter results by full or partial phone_number.
-     */
     #[Api(optional: true)]
-    public ?string $contains;
+    public ?Admin $admin;
 
     public function __construct()
     {
@@ -34,22 +30,19 @@ final class PhoneNumbersPhoneNumber implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?string $contains = null): self
+    public static function with(?Admin $admin = null): self
     {
         $obj = new self;
 
-        null !== $contains && $obj->contains = $contains;
+        null !== $admin && $obj->admin = $admin;
 
         return $obj;
     }
 
-    /**
-     * Filter results by full or partial phone_number.
-     */
-    public function withContains(string $contains): self
+    public function withAdmin(Admin $admin): self
     {
         $obj = clone $this;
-        $obj->contains = $contains;
+        $obj->admin = $admin;
 
         return $obj;
     }

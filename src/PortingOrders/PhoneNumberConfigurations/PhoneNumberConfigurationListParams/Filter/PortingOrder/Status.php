@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListParams\Filter;
+namespace Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListParams\Filter\PortingOrder;
 
-enum PortingOrderStatus: string
+enum Status: string
 {
     case ACTIVATION_IN_PROGRESS = 'activation-in-progress';
 
