@@ -7,13 +7,13 @@ namespace Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfiguratio
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListParams\Filter\PortingOrderStatus;
+use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListParams\Filter\PortingOrder;
 
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[porting_order.status][in][], filter[porting_phone_number][in][], filter[user_bundle_id][in][].
  *
  * @phpstan-type filter_alias = array{
- *   portingOrderStatus?: list<value-of<PortingOrderStatus>>,
+ *   portingOrder?: PortingOrder,
  *   portingPhoneNumber?: list<string>,
  *   userBundleID?: list<string>,
  * }
@@ -23,17 +23,8 @@ final class Filter implements BaseModel
     /** @use SdkModel<filter_alias> */
     use SdkModel;
 
-    /**
-     * Filter results by specific porting order statuses.
-     *
-     * @var list<value-of<PortingOrderStatus>>|null $portingOrderStatus
-     */
-    #[Api(
-        'porting_order.status',
-        list: PortingOrderStatus::class,
-        optional: true
-    )]
-    public ?array $portingOrderStatus;
+    #[Api('porting_order', optional: true)]
+    public ?PortingOrder $portingOrder;
 
     /**
      * Filter results by a list of porting phone number IDs.
@@ -61,33 +52,27 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<PortingOrderStatus|value-of<PortingOrderStatus>> $portingOrderStatus
      * @param list<string> $portingPhoneNumber
      * @param list<string> $userBundleID
      */
     public static function with(
-        ?array $portingOrderStatus = null,
+        ?PortingOrder $portingOrder = null,
         ?array $portingPhoneNumber = null,
         ?array $userBundleID = null,
     ): self {
         $obj = new self;
 
-        null !== $portingOrderStatus && $obj->portingOrderStatus = array_map(fn ($v) => $v instanceof PortingOrderStatus ? $v->value : $v, $portingOrderStatus);
+        null !== $portingOrder && $obj->portingOrder = $portingOrder;
         null !== $portingPhoneNumber && $obj->portingPhoneNumber = $portingPhoneNumber;
         null !== $userBundleID && $obj->userBundleID = $userBundleID;
 
         return $obj;
     }
 
-    /**
-     * Filter results by specific porting order statuses.
-     *
-     * @param list<PortingOrderStatus|value-of<PortingOrderStatus>> $portingOrderStatus
-     */
-    public function withPortingOrderStatus(array $portingOrderStatus): self
+    public function withPortingOrder(PortingOrder $portingOrder): self
     {
         $obj = clone $this;
-        $obj->portingOrderStatus = array_map(fn ($v) => $v instanceof PortingOrderStatus ? $v->value : $v, $portingOrderStatus);
+        $obj->portingOrder = $portingOrder;
 
         return $obj;
     }

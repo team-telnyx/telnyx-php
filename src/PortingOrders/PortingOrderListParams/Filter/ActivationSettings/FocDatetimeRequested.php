@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\PortingOrders\PortingOrderListParams\Filter;
+namespace Telnyx\PortingOrders\PortingOrderListParams\Filter\ActivationSettings;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
@@ -11,13 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * FOC datetime range filtering operations.
  *
- * @phpstan-type activation_settings_foc_datetime_requested = array{
- *   gt?: string, lt?: string
- * }
+ * @phpstan-type foc_datetime_requested = array{gt?: string, lt?: string}
  */
-final class ActivationSettingsFocDatetimeRequested implements BaseModel
+final class FocDatetimeRequested implements BaseModel
 {
-    /** @use SdkModel<activation_settings_foc_datetime_requested> */
+    /** @use SdkModel<foc_datetime_requested> */
     use SdkModel;
 
     /**
