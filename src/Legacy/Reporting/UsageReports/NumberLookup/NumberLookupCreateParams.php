@@ -15,14 +15,14 @@ use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupCreateParams\A
  * Example usage:
  * ```
  * $params = (new NumberLookupCreateParams); // set properties as needed
- * $client->STAINLESS_FIXME_legacy.reporting.usageReports.numberLookup->create(...$params->toArray());
+ * $client->legacy.reporting.usageReports.numberLookup->create(...$params->toArray());
  * ```
  * Submit a new telco data usage report.
  *
  * @method toArray()
  *   Returns the parameters as an associative array suitable for passing to the client method.
  *
- *   `$client->STAINLESS_FIXME_legacy.reporting.usageReports.numberLookup->create(...$params->toArray());`
+ *   `$client->legacy.reporting.usageReports.numberLookup->create(...$params->toArray());`
  *
  * @see Telnyx\Legacy\Reporting\UsageReports\NumberLookup->create
  *

@@ -15,14 +15,14 @@ use Telnyx\OAuthClients\OAuthClientUpdateParams\AllowedGrantType;
  * Example usage:
  * ```
  * $params = (new OAuthClientUpdateParams); // set properties as needed
- * $client->STAINLESS_FIXME_oauthClients->update(...$params->toArray());
+ * $client->oauthClients->update(...$params->toArray());
  * ```
  * Update an existing OAuth client.
  *
  * @method toArray()
  *   Returns the parameters as an associative array suitable for passing to the client method.
  *
- *   `$client->STAINLESS_FIXME_oauthClients->update(...$params->toArray());`
+ *   `$client->oauthClients->update(...$params->toArray());`
  *
  * @see Telnyx\OAuthClients->update
  *

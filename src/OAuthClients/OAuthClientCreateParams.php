@@ -16,14 +16,14 @@ use Telnyx\OAuthClients\OAuthClientCreateParams\ClientType;
  * Example usage:
  * ```
  * $params = (new OAuthClientCreateParams); // set properties as needed
- * $client->STAINLESS_FIXME_oauthClients->create(...$params->toArray());
+ * $client->oauthClients->create(...$params->toArray());
  * ```
  * Create a new OAuth client.
  *
  * @method toArray()
  *   Returns the parameters as an associative array suitable for passing to the client method.
  *
- *   `$client->STAINLESS_FIXME_oauthClients->create(...$params->toArray());`
+ *   `$client->oauthClients->create(...$params->toArray());`
  *
  * @see Telnyx\OAuthClients->create
  *
