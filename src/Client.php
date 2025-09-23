@@ -30,7 +30,6 @@ use Telnyx\Services\CampaignService;
 use Telnyx\Services\ChannelZonesService;
 use Telnyx\Services\ChargesBreakdownService;
 use Telnyx\Services\ChargesSummaryService;
-use Telnyx\Services\ClientService;
 use Telnyx\Services\CommentsService;
 use Telnyx\Services\ConferencesService;
 use Telnyx\Services\ConnectionsService;
@@ -155,6 +154,7 @@ use Telnyx\Services\VirtualCrossConnectsCoverageService;
 use Telnyx\Services\VirtualCrossConnectsService;
 use Telnyx\Services\WebhookDeliveriesService;
 use Telnyx\Services\WebhooksService;
+use Telnyx\Services\WellKnownService;
 use Telnyx\Services\WireguardInterfacesService;
 use Telnyx\Services\WireguardPeersService;
 use Telnyx\Services\WirelessBlocklistsService;
@@ -930,7 +930,7 @@ class Client extends BaseClient
     /**
      * @api
      */
-    public ClientService $client;
+    public WellKnownService $wellKnown;
 
     public function __construct(?string $apiKey = null, ?string $baseUrl = null)
     {
@@ -1109,7 +1109,7 @@ class Client extends BaseClient
         $this->wirelessBlocklistValues = new WirelessBlocklistValuesService($this);
         $this->wirelessBlocklists = new WirelessBlocklistsService($this);
         $this->partnerCampaigns = new PartnerCampaignsService($this);
-        $this->client = new ClientService($this);
+        $this->wellKnown = new WellKnownService($this);
     }
 
     /** @return array<string, string> */

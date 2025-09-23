@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Services\Client;
+namespace Tests\Services;
 
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
@@ -33,12 +33,7 @@ final class WellKnownTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this
-            ->client
-            ->client
-            ->wellKnown
-            ->retrieveAuthorizationServerMetadata()
-        ;
+        $result = $this->client->wellKnown->retrieveAuthorizationServerMetadata();
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -50,12 +45,7 @@ final class WellKnownTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this
-            ->client
-            ->client
-            ->wellKnown
-            ->retrieveProtectedResourceMetadata()
-        ;
+        $result = $this->client->wellKnown->retrieveProtectedResourceMetadata();
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
