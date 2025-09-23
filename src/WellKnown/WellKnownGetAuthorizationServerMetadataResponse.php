@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Client\WellKnown;
+namespace Telnyx\WellKnown;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;

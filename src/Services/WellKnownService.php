@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Services\Client;
+namespace Telnyx\Services;
 
 use Telnyx\Client;
-use Telnyx\Client\WellKnown\WellKnownGetAuthorizationServerMetadataResponse;
-use Telnyx\Client\WellKnown\WellKnownGetProtectedResourceMetadataResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
-use Telnyx\ServiceContracts\Client\WellKnownContract;
+use Telnyx\ServiceContracts\WellKnownContract;
+use Telnyx\WellKnown\WellKnownGetAuthorizationServerMetadataResponse;
+use Telnyx\WellKnown\WellKnownGetProtectedResourceMetadataResponse;
 
 final class WellKnownService implements WellKnownContract
 {
