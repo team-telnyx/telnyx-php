@@ -6,10 +6,10 @@ namespace Telnyx\Addresses\Actions\ActionValidateResponse;
 
 use Telnyx\Addresses\Actions\ActionValidateResponse\Data\Result;
 use Telnyx\Addresses\Actions\ActionValidateResponse\Data\Suggested;
+use Telnyx\APIError;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Messages\APIError;
 
 /**
  * @phpstan-type data_alias = array{

@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Messages;
+namespace Telnyx;
 
+use Telnyx\APIError\Source;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Messages\APIError\Source;
 
 /**
  * @phpstan-type api_error = array{
