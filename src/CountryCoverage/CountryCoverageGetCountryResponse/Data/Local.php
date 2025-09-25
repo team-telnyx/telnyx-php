@@ -11,6 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * @phpstan-type local_alias = array{
  *   features?: list<string>,
+ *   fullPstnReplacement?: bool,
  *   internationalSMS?: bool,
  *   p2p?: bool,
  *   quickship?: bool,
@@ -25,6 +26,9 @@ final class Local implements BaseModel
     /** @var list<string>|null $features */
     #[Api(list: 'string', optional: true)]
     public ?array $features;
+
+    #[Api('full_pstn_replacement', optional: true)]
+    public ?bool $fullPstnReplacement;
 
     #[Api('international_sms', optional: true)]
     public ?bool $internationalSMS;
@@ -52,6 +56,7 @@ final class Local implements BaseModel
      */
     public static function with(
         ?array $features = null,
+        ?bool $fullPstnReplacement = null,
         ?bool $internationalSMS = null,
         ?bool $p2p = null,
         ?bool $quickship = null,
@@ -60,6 +65,7 @@ final class Local implements BaseModel
         $obj = new self;
 
         null !== $features && $obj->features = $features;
+        null !== $fullPstnReplacement && $obj->fullPstnReplacement = $fullPstnReplacement;
         null !== $internationalSMS && $obj->internationalSMS = $internationalSMS;
         null !== $p2p && $obj->p2p = $p2p;
         null !== $quickship && $obj->quickship = $quickship;
@@ -75,6 +81,14 @@ final class Local implements BaseModel
     {
         $obj = clone $this;
         $obj->features = $features;
+
+        return $obj;
+    }
+
+    public function withFullPstnReplacement(bool $fullPstnReplacement): self
+    {
+        $obj = clone $this;
+        $obj->fullPstnReplacement = $fullPstnReplacement;
 
         return $obj;
     }

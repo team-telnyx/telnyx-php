@@ -23,6 +23,7 @@ use Telnyx\CountryCoverage\CountryCoverageGetCountryResponse\Data\TollFree;
  *   p2p?: bool,
  *   phoneNumberType?: list<string>,
  *   quickship?: bool,
+ *   region?: string|null,
  *   reservable?: bool,
  *   sharedCost?: array<string, mixed>,
  *   tollFree?: TollFree,
@@ -88,6 +89,12 @@ final class Data implements BaseModel
     public ?bool $quickship;
 
     /**
+     * Geographic region (e.g., AMER, EMEA, APAC).
+     */
+    #[Api(nullable: true, optional: true)]
+    public ?string $region;
+
+    /**
      * Supports reservable.
      */
     #[Api(optional: true)]
@@ -128,6 +135,7 @@ final class Data implements BaseModel
         ?bool $p2p = null,
         ?array $phoneNumberType = null,
         ?bool $quickship = null,
+        ?string $region = null,
         ?bool $reservable = null,
         ?array $sharedCost = null,
         ?TollFree $tollFree = null,
@@ -145,6 +153,7 @@ final class Data implements BaseModel
         null !== $p2p && $obj->p2p = $p2p;
         null !== $phoneNumberType && $obj->phoneNumberType = $phoneNumberType;
         null !== $quickship && $obj->quickship = $quickship;
+        null !== $region && $obj->region = $region;
         null !== $reservable && $obj->reservable = $reservable;
         null !== $sharedCost && $obj->sharedCost = $sharedCost;
         null !== $tollFree && $obj->tollFree = $tollFree;
@@ -261,6 +270,17 @@ final class Data implements BaseModel
     {
         $obj = clone $this;
         $obj->quickship = $quickship;
+
+        return $obj;
+    }
+
+    /**
+     * Geographic region (e.g., AMER, EMEA, APAC).
+     */
+    public function withRegion(?string $region): self
+    {
+        $obj = clone $this;
+        $obj->region = $region;
 
         return $obj;
     }
