@@ -17,7 +17,7 @@ use Telnyx\VerifiedNumbers\VerifiedNumberCreateParams\VerificationMethod;
  * $params = (new VerifiedNumberCreateParams); // set properties as needed
  * $client->verifiedNumbers->create(...$params->toArray());
  * ```
- * Initiates phone number verification procedure.
+ * Initiates phone number verification procedure. Supports DTMF extension dialing for voice calls to numbers behind IVR systems.
  *
  * @method toArray()
  *   Returns the parameters as an associative array suitable for passing to the client method.
@@ -29,6 +29,7 @@ use Telnyx\VerifiedNumbers\VerifiedNumberCreateParams\VerificationMethod;
  * @phpstan-type verified_number_create_params = array{
  *   phoneNumber: string,
  *   verificationMethod: VerificationMethod|value-of<VerificationMethod>,
+ *   extension?: string|null,
  * }
  */
 final class VerifiedNumberCreateParams implements BaseModel
@@ -47,6 +48,12 @@ final class VerifiedNumberCreateParams implements BaseModel
      */
     #[Api('verification_method', enum: VerificationMethod::class)]
     public string $verificationMethod;
+
+    /**
+     * Optional DTMF extension sequence to dial after the call is answered. This parameter enables verification of phone numbers behind IVR systems that require extension dialing. Valid characters: digits 0-9, letters A-D, symbols * and #. Pauses: w = 0.5 second pause, W = 1 second pause. Maximum length: 50 characters. Only works with 'call' verification method.
+     */
+    #[Api(nullable: true, optional: true)]
+    public ?string $extension;
 
     /**
      * `new VerifiedNumberCreateParams()` is missing required properties by the API.
@@ -78,12 +85,15 @@ final class VerifiedNumberCreateParams implements BaseModel
      */
     public static function with(
         string $phoneNumber,
-        VerificationMethod|string $verificationMethod
+        VerificationMethod|string $verificationMethod,
+        ?string $extension = null,
     ): self {
         $obj = new self;
 
         $obj->phoneNumber = $phoneNumber;
         $obj->verificationMethod = $verificationMethod instanceof VerificationMethod ? $verificationMethod->value : $verificationMethod;
+
+        null !== $extension && $obj->extension = $extension;
 
         return $obj;
     }
@@ -106,6 +116,17 @@ final class VerifiedNumberCreateParams implements BaseModel
     ): self {
         $obj = clone $this;
         $obj->verificationMethod = $verificationMethod instanceof VerificationMethod ? $verificationMethod->value : $verificationMethod;
+
+        return $obj;
+    }
+
+    /**
+     * Optional DTMF extension sequence to dial after the call is answered. This parameter enables verification of phone numbers behind IVR systems that require extension dialing. Valid characters: digits 0-9, letters A-D, symbols * and #. Pauses: w = 0.5 second pause, W = 1 second pause. Maximum length: 50 characters. Only works with 'call' verification method.
+     */
+    public function withExtension(?string $extension): self
+    {
+        $obj = clone $this;
+        $obj->extension = $extension;
 
         return $obj;
     }

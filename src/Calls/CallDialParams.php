@@ -73,6 +73,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   linkTo?: string,
  *   mediaEncryption?: MediaEncryption|value-of<MediaEncryption>,
  *   mediaName?: string,
+ *   parkAfterUnbridge?: string,
  *   preferredCodecs?: string,
  *   record?: Record|value-of<Record>,
  *   recordChannels?: RecordChannels|value-of<RecordChannels>,
@@ -234,6 +235,12 @@ final class CallDialParams implements BaseModel
      */
     #[Api('media_name', optional: true)]
     public ?string $mediaName;
+
+    /**
+     * If supplied with the value `self`, the current leg will be parked after unbridge. If not set, the default behavior is to hang up the leg. When park_after_unbridge is set, link_to becomes required.
+     */
+    #[Api('park_after_unbridge', optional: true)]
+    public ?string $parkAfterUnbridge;
 
     /**
      * The list of comma-separated codecs in a preferred order for the forked media to be received.
@@ -532,6 +539,7 @@ final class CallDialParams implements BaseModel
         ?string $linkTo = null,
         MediaEncryption|string|null $mediaEncryption = null,
         ?string $mediaName = null,
+        ?string $parkAfterUnbridge = null,
         ?string $preferredCodecs = null,
         Record|string|null $record = null,
         RecordChannels|string|null $recordChannels = null,
@@ -586,6 +594,7 @@ final class CallDialParams implements BaseModel
         null !== $linkTo && $obj->linkTo = $linkTo;
         null !== $mediaEncryption && $obj->mediaEncryption = $mediaEncryption instanceof MediaEncryption ? $mediaEncryption->value : $mediaEncryption;
         null !== $mediaName && $obj->mediaName = $mediaName;
+        null !== $parkAfterUnbridge && $obj->parkAfterUnbridge = $parkAfterUnbridge;
         null !== $preferredCodecs && $obj->preferredCodecs = $preferredCodecs;
         null !== $record && $obj->record = $record instanceof Record ? $record->value : $record;
         null !== $recordChannels && $obj->recordChannels = $recordChannels instanceof RecordChannels ? $recordChannels->value : $recordChannels;
@@ -836,6 +845,17 @@ final class CallDialParams implements BaseModel
     {
         $obj = clone $this;
         $obj->mediaName = $mediaName;
+
+        return $obj;
+    }
+
+    /**
+     * If supplied with the value `self`, the current leg will be parked after unbridge. If not set, the default behavior is to hang up the leg. When park_after_unbridge is set, link_to becomes required.
+     */
+    public function withParkAfterUnbridge(string $parkAfterUnbridge): self
+    {
+        $obj = clone $this;
+        $obj->parkAfterUnbridge = $parkAfterUnbridge;
 
         return $obj;
     }
