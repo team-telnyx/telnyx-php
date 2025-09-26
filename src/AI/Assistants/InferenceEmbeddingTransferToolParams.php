@@ -12,7 +12,10 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type inference_embedding_transfer_tool_params = array{
- *   from: string, targets: list<Target>, customHeaders?: list<CustomHeader>
+ *   from: string,
+ *   targets: list<Target>,
+ *   customHeaders?: list<CustomHeader>,
+ *   warmTransferInstructions?: string,
  * }
  */
 final class InferenceEmbeddingTransferToolParams implements BaseModel
@@ -41,6 +44,12 @@ final class InferenceEmbeddingTransferToolParams implements BaseModel
      */
     #[Api('custom_headers', list: CustomHeader::class, optional: true)]
     public ?array $customHeaders;
+
+    /**
+     * Natural language instructions for your agent for how to provide context for the transfer recipient.
+     */
+    #[Api('warm_transfer_instructions', optional: true)]
+    public ?string $warmTransferInstructions;
 
     /**
      * `new InferenceEmbeddingTransferToolParams()` is missing required properties by the API.
@@ -72,7 +81,8 @@ final class InferenceEmbeddingTransferToolParams implements BaseModel
     public static function with(
         string $from,
         array $targets,
-        ?array $customHeaders = null
+        ?array $customHeaders = null,
+        ?string $warmTransferInstructions = null,
     ): self {
         $obj = new self;
 
@@ -80,6 +90,7 @@ final class InferenceEmbeddingTransferToolParams implements BaseModel
         $obj->targets = $targets;
 
         null !== $customHeaders && $obj->customHeaders = $customHeaders;
+        null !== $warmTransferInstructions && $obj->warmTransferInstructions = $warmTransferInstructions;
 
         return $obj;
     }
@@ -117,6 +128,18 @@ final class InferenceEmbeddingTransferToolParams implements BaseModel
     {
         $obj = clone $this;
         $obj->customHeaders = $customHeaders;
+
+        return $obj;
+    }
+
+    /**
+     * Natural language instructions for your agent for how to provide context for the transfer recipient.
+     */
+    public function withWarmTransferInstructions(
+        string $warmTransferInstructions
+    ): self {
+        $obj = clone $this;
+        $obj->warmTransferInstructions = $warmTransferInstructions;
 
         return $obj;
     }
