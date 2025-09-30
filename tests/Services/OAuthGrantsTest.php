@@ -53,13 +53,13 @@ final class OAuthGrantsTest extends TestCase
     }
 
     #[Test]
-    public function testRevoke(): void
+    public function testDelete(): void
     {
         if (UnsupportedMockTests::$skip) {
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->oauthGrants->revoke(
+        $result = $this->client->oauthGrants->delete(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
