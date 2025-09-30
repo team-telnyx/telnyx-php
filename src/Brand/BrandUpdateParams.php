@@ -110,7 +110,7 @@ final class BrandUpdateParams implements BaseModel
     /**
      * Business contact email.
      *
-     * Required if `entityType` will be changed to `PUBLIC_PROFIT`.
+     * Required if `entityType` will be changed to `PUBLIC_PROFIT`. Otherwise, it is recommended to either omit this field or set it to `null`.
      */
     #[Api(optional: true)]
     public ?string $businessContactEmail;
@@ -401,7 +401,7 @@ final class BrandUpdateParams implements BaseModel
     /**
      * Business contact email.
      *
-     * Required if `entityType` will be changed to `PUBLIC_PROFIT`.
+     * Required if `entityType` will be changed to `PUBLIC_PROFIT`. Otherwise, it is recommended to either omit this field or set it to `null`.
      */
     public function withBusinessContactEmail(string $businessContactEmail): self
     {

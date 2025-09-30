@@ -6,9 +6,9 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
-use Telnyx\OAuthGrants\OAuthGrantDeleteResponse;
 use Telnyx\OAuthGrants\OAuthGrantGetResponse;
 use Telnyx\OAuthGrants\OAuthGrantListResponse;
+use Telnyx\OAuthGrants\OAuthGrantRevokeResponse;
 use Telnyx\RequestOptions;
 
 use const Telnyx\Core\OMIT as omit;
@@ -73,25 +73,25 @@ interface OAuthGrantsContract
     /**
      * @api
      *
-     * @return OAuthGrantDeleteResponse<HasRawResponse>
+     * @return OAuthGrantRevokeResponse<HasRawResponse>
      *
      * @throws APIException
      */
-    public function delete(
+    public function revoke(
         string $id,
         ?RequestOptions $requestOptions = null
-    ): OAuthGrantDeleteResponse;
+    ): OAuthGrantRevokeResponse;
 
     /**
      * @api
      *
-     * @return OAuthGrantDeleteResponse<HasRawResponse>
+     * @return OAuthGrantRevokeResponse<HasRawResponse>
      *
      * @throws APIException
      */
-    public function deleteRaw(
+    public function revokeRaw(
         string $id,
         mixed $params,
         ?RequestOptions $requestOptions = null
-    ): OAuthGrantDeleteResponse;
+    ): OAuthGrantRevokeResponse;
 }
