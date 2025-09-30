@@ -32,7 +32,7 @@ interface BrandContract
      * @param Vertical|value-of<Vertical> $vertical vertical or industry segment of the brand or campaign
      * @param string $businessContactEmail Business contact email.
      *
-     * Required if `entityType` is `PUBLIC_PROFIT`.
+     * Required if `entityType` is `PUBLIC_PROFIT`. Otherwise, it is recommended to either omit this field or set it to `null`.
      * @param string $city City name
      * @param string $companyName (Required for Non-profit/private/public) Legal company name
      * @param string $ein (Required for Non-profit) Government assigned corporate tax ID. EIN is 9-digits in U.S.
@@ -135,7 +135,7 @@ interface BrandContract
      * @param AltBusinessIDType|value-of<AltBusinessIDType> $altBusinessIDType an enumeration
      * @param string $businessContactEmail Business contact email.
      *
-     * Required if `entityType` will be changed to `PUBLIC_PROFIT`.
+     * Required if `entityType` will be changed to `PUBLIC_PROFIT`. Otherwise, it is recommended to either omit this field or set it to `null`.
      * @param string $city City name
      * @param string $companyName (Required for Non-profit/private/public) Legal company name
      * @param string $ein (Required for Non-profit) Government assigned corporate tax ID. EIN is 9-digits in U.S.

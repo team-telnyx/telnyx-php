@@ -7,10 +7,10 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
-use Telnyx\OAuthGrants\OAuthGrantDeleteResponse;
 use Telnyx\OAuthGrants\OAuthGrantGetResponse;
 use Telnyx\OAuthGrants\OAuthGrantListParams;
 use Telnyx\OAuthGrants\OAuthGrantListResponse;
+use Telnyx\OAuthGrants\OAuthGrantRevokeResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\OAuthGrantsContract;
 
@@ -117,37 +117,37 @@ final class OAuthGrantsService implements OAuthGrantsContract
      *
      * Revoke an OAuth grant
      *
-     * @return OAuthGrantDeleteResponse<HasRawResponse>
+     * @return OAuthGrantRevokeResponse<HasRawResponse>
      *
      * @throws APIException
      */
-    public function delete(
+    public function revoke(
         string $id,
         ?RequestOptions $requestOptions = null
-    ): OAuthGrantDeleteResponse {
+    ): OAuthGrantRevokeResponse {
         $params = [];
 
-        return $this->deleteRaw($id, $params, $requestOptions);
+        return $this->revokeRaw($id, $params, $requestOptions);
     }
 
     /**
      * @api
      *
-     * @return OAuthGrantDeleteResponse<HasRawResponse>
+     * @return OAuthGrantRevokeResponse<HasRawResponse>
      *
      * @throws APIException
      */
-    public function deleteRaw(
+    public function revokeRaw(
         string $id,
         mixed $params,
         ?RequestOptions $requestOptions = null
-    ): OAuthGrantDeleteResponse {
+    ): OAuthGrantRevokeResponse {
         // @phpstan-ignore-next-line;
         return $this->client->request(
             method: 'delete',
             path: ['oauth_grants/%1$s', $id],
             options: $requestOptions,
-            convert: OAuthGrantDeleteResponse::class,
+            convert: OAuthGrantRevokeResponse::class,
         );
     }
 }
