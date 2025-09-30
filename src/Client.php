@@ -170,26 +170,6 @@ class Client extends BaseClient
     /**
      * @api
      */
-    public LegacyService $legacy;
-
-    /**
-     * @api
-     */
-    public OAuthService $oauth;
-
-    /**
-     * @api
-     */
-    public OAuthClientsService $oauthClients;
-
-    /**
-     * @api
-     */
-    public OAuthGrantsService $oauthGrants;
-
-    /**
-     * @api
-     */
     public WebhooksService $webhooks;
 
     /**
@@ -932,6 +912,26 @@ class Client extends BaseClient
      */
     public WellKnownService $wellKnown;
 
+    /**
+     * @api
+     */
+    public LegacyService $legacy;
+
+    /**
+     * @api
+     */
+    public OAuthService $oauth;
+
+    /**
+     * @api
+     */
+    public OAuthClientsService $oauthClients;
+
+    /**
+     * @api
+     */
+    public OAuthGrantsService $oauthGrants;
+
     public function __construct(?string $apiKey = null, ?string $baseUrl = null)
     {
         $this->apiKey = (string) ($apiKey ?? getenv('TELNYX_API_KEY'));
@@ -957,10 +957,6 @@ class Client extends BaseClient
             options: $options,
         );
 
-        $this->legacy = new LegacyService($this);
-        $this->oauth = new OAuthService($this);
-        $this->oauthClients = new OAuthClientsService($this);
-        $this->oauthGrants = new OAuthGrantsService($this);
         $this->webhooks = new WebhooksService($this);
         $this->accessIPAddress = new AccessIPAddressService($this);
         $this->accessIPRanges = new AccessIPRangesService($this);
@@ -1110,6 +1106,10 @@ class Client extends BaseClient
         $this->wirelessBlocklists = new WirelessBlocklistsService($this);
         $this->partnerCampaigns = new PartnerCampaignsService($this);
         $this->wellKnown = new WellKnownService($this);
+        $this->legacy = new LegacyService($this);
+        $this->oauth = new OAuthService($this);
+        $this->oauthClients = new OAuthClientsService($this);
+        $this->oauthGrants = new OAuthGrantsService($this);
     }
 
     /** @return array<string, string> */

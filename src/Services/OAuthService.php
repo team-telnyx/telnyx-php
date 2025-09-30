@@ -7,22 +7,22 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
+use Telnyx\OAuth\OAuthAuthorizeParams;
+use Telnyx\OAuth\OAuthAuthorizeParams\CodeChallengeMethod;
+use Telnyx\OAuth\OAuthAuthorizeParams\ResponseType;
+use Telnyx\OAuth\OAuthCreateGrantParams;
+use Telnyx\OAuth\OAuthExchangeTokenParams;
+use Telnyx\OAuth\OAuthExchangeTokenParams\GrantType;
+use Telnyx\OAuth\OAuthExchangeTokenResponse;
+use Telnyx\OAuth\OAuthGetConsentResponse;
 use Telnyx\OAuth\OAuthGetJwksResponse;
-use Telnyx\OAuth\OAuthGetResponse;
-use Telnyx\OAuth\OAuthGrantsParams;
-use Telnyx\OAuth\OAuthGrantsResponse;
-use Telnyx\OAuth\OAuthIntrospectParams;
-use Telnyx\OAuth\OAuthIntrospectResponse;
-use Telnyx\OAuth\OAuthRegisterParams;
-use Telnyx\OAuth\OAuthRegisterParams\GrantType as GrantType1;
-use Telnyx\OAuth\OAuthRegisterParams\TokenEndpointAuthMethod;
-use Telnyx\OAuth\OAuthRegisterResponse;
-use Telnyx\OAuth\OAuthRetrieveAuthorizeParams;
-use Telnyx\OAuth\OAuthRetrieveAuthorizeParams\CodeChallengeMethod;
-use Telnyx\OAuth\OAuthRetrieveAuthorizeParams\ResponseType;
-use Telnyx\OAuth\OAuthTokenParams;
-use Telnyx\OAuth\OAuthTokenParams\GrantType;
-use Telnyx\OAuth\OAuthTokenResponse;
+use Telnyx\OAuth\OAuthIntrospectTokenParams;
+use Telnyx\OAuth\OAuthIntrospectTokenResponse;
+use Telnyx\OAuth\OAuthNewGrantResponse;
+use Telnyx\OAuth\OAuthRegisterClientParams;
+use Telnyx\OAuth\OAuthRegisterClientParams\GrantType as GrantType1;
+use Telnyx\OAuth\OAuthRegisterClientParams\TokenEndpointAuthMethod;
+use Telnyx\OAuth\OAuthRegisterClientResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\OAuthContract;
 
@@ -34,218 +34,6 @@ final class OAuthService implements OAuthContract
      * @internal
      */
     public function __construct(private Client $client) {}
-
-    /**
-     * @api
-     *
-     * Retrieve details about an OAuth consent token
-     *
-     * @return OAuthGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieve(
-        string $consentToken,
-        ?RequestOptions $requestOptions = null
-    ): OAuthGetResponse {
-        $params = [];
-
-        return $this->retrieveRaw($consentToken, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return OAuthGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $consentToken,
-        mixed $params,
-        ?RequestOptions $requestOptions = null
-    ): OAuthGetResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: ['oauth/consent/%1$s', $consentToken],
-            options: $requestOptions,
-            convert: OAuthGetResponse::class,
-        );
-    }
-
-    /**
-     * @api
-     *
-     * Create an OAuth authorization grant
-     *
-     * @param bool $allowed Whether the grant is allowed
-     * @param string $consentToken Consent token
-     *
-     * @return OAuthGrantsResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function grants(
-        $allowed,
-        $consentToken,
-        ?RequestOptions $requestOptions = null
-    ): OAuthGrantsResponse {
-        $params = ['allowed' => $allowed, 'consentToken' => $consentToken];
-
-        return $this->grantsRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @return OAuthGrantsResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function grantsRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): OAuthGrantsResponse {
-        [$parsed, $options] = OAuthGrantsParams::parseRequest(
-            $params,
-            $requestOptions
-        );
-
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: 'oauth/grants',
-            body: (object) $parsed,
-            options: $options,
-            convert: OAuthGrantsResponse::class,
-        );
-    }
-
-    /**
-     * @api
-     *
-     * Introspect an OAuth access token to check its validity and metadata
-     *
-     * @param string $token The token to introspect
-     *
-     * @return OAuthIntrospectResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function introspect(
-        $token,
-        ?RequestOptions $requestOptions = null
-    ): OAuthIntrospectResponse {
-        $params = ['token' => $token];
-
-        return $this->introspectRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @return OAuthIntrospectResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function introspectRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): OAuthIntrospectResponse {
-        [$parsed, $options] = OAuthIntrospectParams::parseRequest(
-            $params,
-            $requestOptions
-        );
-
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: 'oauth/introspect',
-            headers: ['Content-Type' => 'application/x-www-form-urlencoded'],
-            body: (object) $parsed,
-            options: $options,
-            convert: OAuthIntrospectResponse::class,
-        );
-    }
-
-    /**
-     * @api
-     *
-     * Register a new OAuth client dynamically (RFC 7591)
-     *
-     * @param string $clientName Human-readable string name of the client to be presented to the end-user
-     * @param list<GrantType1|value-of<GrantType1>> $grantTypes Array of OAuth 2.0 grant type strings that the client may use
-     * @param string $logoUri URL of the client logo
-     * @param string $policyUri URL of the client's privacy policy
-     * @param list<string> $redirectUris Array of redirection URI strings for use in redirect-based flows
-     * @param list<string> $responseTypes Array of the OAuth 2.0 response type strings that the client may use
-     * @param string $scope Space-separated string of scope values that the client may use
-     * @param TokenEndpointAuthMethod|value-of<TokenEndpointAuthMethod> $tokenEndpointAuthMethod Authentication method for the token endpoint
-     * @param string $tosUri URL of the client's terms of service
-     *
-     * @return OAuthRegisterResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function register(
-        $clientName = omit,
-        $grantTypes = omit,
-        $logoUri = omit,
-        $policyUri = omit,
-        $redirectUris = omit,
-        $responseTypes = omit,
-        $scope = omit,
-        $tokenEndpointAuthMethod = omit,
-        $tosUri = omit,
-        ?RequestOptions $requestOptions = null,
-    ): OAuthRegisterResponse {
-        $params = [
-            'clientName' => $clientName,
-            'grantTypes' => $grantTypes,
-            'logoUri' => $logoUri,
-            'policyUri' => $policyUri,
-            'redirectUris' => $redirectUris,
-            'responseTypes' => $responseTypes,
-            'scope' => $scope,
-            'tokenEndpointAuthMethod' => $tokenEndpointAuthMethod,
-            'tosUri' => $tosUri,
-        ];
-
-        return $this->registerRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @return OAuthRegisterResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function registerRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): OAuthRegisterResponse {
-        [$parsed, $options] = OAuthRegisterParams::parseRequest(
-            $params,
-            $requestOptions
-        );
-
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: 'oauth/register',
-            body: (object) $parsed,
-            options: $options,
-            convert: OAuthRegisterResponse::class,
-        );
-    }
 
     /**
      * @api
@@ -262,7 +50,7 @@ final class OAuthService implements OAuthContract
      *
      * @throws APIException
      */
-    public function retrieveAuthorize(
+    public function authorize(
         $clientID,
         $redirectUri,
         $responseType,
@@ -282,7 +70,7 @@ final class OAuthService implements OAuthContract
             'state' => $state,
         ];
 
-        return $this->retrieveAuthorizeRaw($params, $requestOptions);
+        return $this->authorizeRaw($params, $requestOptions);
     }
 
     /**
@@ -292,11 +80,11 @@ final class OAuthService implements OAuthContract
      *
      * @throws APIException
      */
-    public function retrieveAuthorizeRaw(
+    public function authorizeRaw(
         array $params,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        [$parsed, $options] = OAuthRetrieveAuthorizeParams::parseRequest(
+        [$parsed, $options] = OAuthAuthorizeParams::parseRequest(
             $params,
             $requestOptions
         );
@@ -308,6 +96,290 @@ final class OAuthService implements OAuthContract
             query: $parsed,
             options: $options,
             convert: null,
+        );
+    }
+
+    /**
+     * @api
+     *
+     * Create an OAuth authorization grant
+     *
+     * @param bool $allowed Whether the grant is allowed
+     * @param string $consentToken Consent token
+     *
+     * @return OAuthNewGrantResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createGrant(
+        $allowed,
+        $consentToken,
+        ?RequestOptions $requestOptions = null
+    ): OAuthNewGrantResponse {
+        $params = ['allowed' => $allowed, 'consentToken' => $consentToken];
+
+        return $this->createGrantRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return OAuthNewGrantResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function createGrantRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): OAuthNewGrantResponse {
+        [$parsed, $options] = OAuthCreateGrantParams::parseRequest(
+            $params,
+            $requestOptions
+        );
+
+        // @phpstan-ignore-next-line;
+        return $this->client->request(
+            method: 'post',
+            path: 'oauth/grants',
+            body: (object) $parsed,
+            options: $options,
+            convert: OAuthNewGrantResponse::class,
+        );
+    }
+
+    /**
+     * @api
+     *
+     * Exchange authorization code, client credentials, or refresh token for access token
+     *
+     * @param GrantType|value-of<GrantType> $grantType OAuth 2.0 grant type
+     * @param string $clientID OAuth client ID (if not using HTTP Basic auth)
+     * @param string $clientSecret OAuth client secret (if not using HTTP Basic auth)
+     * @param string $code Authorization code (for authorization_code flow)
+     * @param string $codeVerifier PKCE code verifier (for authorization_code flow)
+     * @param string $redirectUri Redirect URI (for authorization_code flow)
+     * @param string $refreshToken Refresh token (for refresh_token flow)
+     * @param string $scope Space-separated list of requested scopes (for client_credentials)
+     *
+     * @return OAuthExchangeTokenResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function exchangeToken(
+        $grantType,
+        $clientID = omit,
+        $clientSecret = omit,
+        $code = omit,
+        $codeVerifier = omit,
+        $redirectUri = omit,
+        $refreshToken = omit,
+        $scope = omit,
+        ?RequestOptions $requestOptions = null,
+    ): OAuthExchangeTokenResponse {
+        $params = [
+            'grantType' => $grantType,
+            'clientID' => $clientID,
+            'clientSecret' => $clientSecret,
+            'code' => $code,
+            'codeVerifier' => $codeVerifier,
+            'redirectUri' => $redirectUri,
+            'refreshToken' => $refreshToken,
+            'scope' => $scope,
+        ];
+
+        return $this->exchangeTokenRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return OAuthExchangeTokenResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function exchangeTokenRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): OAuthExchangeTokenResponse {
+        [$parsed, $options] = OAuthExchangeTokenParams::parseRequest(
+            $params,
+            $requestOptions
+        );
+
+        // @phpstan-ignore-next-line;
+        return $this->client->request(
+            method: 'post',
+            path: 'oauth/token',
+            headers: ['Content-Type' => 'application/x-www-form-urlencoded'],
+            body: (object) $parsed,
+            options: $options,
+            convert: OAuthExchangeTokenResponse::class,
+        );
+    }
+
+    /**
+     * @api
+     *
+     * Introspect an OAuth access token to check its validity and metadata
+     *
+     * @param string $token The token to introspect
+     *
+     * @return OAuthIntrospectTokenResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function introspectToken(
+        $token,
+        ?RequestOptions $requestOptions = null
+    ): OAuthIntrospectTokenResponse {
+        $params = ['token' => $token];
+
+        return $this->introspectTokenRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return OAuthIntrospectTokenResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function introspectTokenRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): OAuthIntrospectTokenResponse {
+        [$parsed, $options] = OAuthIntrospectTokenParams::parseRequest(
+            $params,
+            $requestOptions
+        );
+
+        // @phpstan-ignore-next-line;
+        return $this->client->request(
+            method: 'post',
+            path: 'oauth/introspect',
+            headers: ['Content-Type' => 'application/x-www-form-urlencoded'],
+            body: (object) $parsed,
+            options: $options,
+            convert: OAuthIntrospectTokenResponse::class,
+        );
+    }
+
+    /**
+     * @api
+     *
+     * Register a new OAuth client dynamically (RFC 7591)
+     *
+     * @param string $clientName Human-readable string name of the client to be presented to the end-user
+     * @param list<GrantType1|value-of<GrantType1>> $grantTypes Array of OAuth 2.0 grant type strings that the client may use
+     * @param string $logoUri URL of the client logo
+     * @param string $policyUri URL of the client's privacy policy
+     * @param list<string> $redirectUris Array of redirection URI strings for use in redirect-based flows
+     * @param list<string> $responseTypes Array of the OAuth 2.0 response type strings that the client may use
+     * @param string $scope Space-separated string of scope values that the client may use
+     * @param TokenEndpointAuthMethod|value-of<TokenEndpointAuthMethod> $tokenEndpointAuthMethod Authentication method for the token endpoint
+     * @param string $tosUri URL of the client's terms of service
+     *
+     * @return OAuthRegisterClientResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function registerClient(
+        $clientName = omit,
+        $grantTypes = omit,
+        $logoUri = omit,
+        $policyUri = omit,
+        $redirectUris = omit,
+        $responseTypes = omit,
+        $scope = omit,
+        $tokenEndpointAuthMethod = omit,
+        $tosUri = omit,
+        ?RequestOptions $requestOptions = null,
+    ): OAuthRegisterClientResponse {
+        $params = [
+            'clientName' => $clientName,
+            'grantTypes' => $grantTypes,
+            'logoUri' => $logoUri,
+            'policyUri' => $policyUri,
+            'redirectUris' => $redirectUris,
+            'responseTypes' => $responseTypes,
+            'scope' => $scope,
+            'tokenEndpointAuthMethod' => $tokenEndpointAuthMethod,
+            'tosUri' => $tosUri,
+        ];
+
+        return $this->registerClientRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return OAuthRegisterClientResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function registerClientRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): OAuthRegisterClientResponse {
+        [$parsed, $options] = OAuthRegisterClientParams::parseRequest(
+            $params,
+            $requestOptions
+        );
+
+        // @phpstan-ignore-next-line;
+        return $this->client->request(
+            method: 'post',
+            path: 'oauth/register',
+            body: (object) $parsed,
+            options: $options,
+            convert: OAuthRegisterClientResponse::class,
+        );
+    }
+
+    /**
+     * @api
+     *
+     * Retrieve details about an OAuth consent token
+     *
+     * @return OAuthGetConsentResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveConsent(
+        string $consentToken,
+        ?RequestOptions $requestOptions = null
+    ): OAuthGetConsentResponse {
+        $params = [];
+
+        return $this->retrieveConsentRaw($consentToken, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @return OAuthGetConsentResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveConsentRaw(
+        string $consentToken,
+        mixed $params,
+        ?RequestOptions $requestOptions = null
+    ): OAuthGetConsentResponse {
+        // @phpstan-ignore-next-line;
+        return $this->client->request(
+            method: 'get',
+            path: ['oauth/consent/%1$s', $consentToken],
+            options: $requestOptions,
+            convert: OAuthGetConsentResponse::class,
         );
     }
 
@@ -345,78 +417,6 @@ final class OAuthService implements OAuthContract
             path: 'oauth/jwks',
             options: $requestOptions,
             convert: OAuthGetJwksResponse::class,
-        );
-    }
-
-    /**
-     * @api
-     *
-     * Exchange authorization code, client credentials, or refresh token for access token
-     *
-     * @param GrantType|value-of<GrantType> $grantType OAuth 2.0 grant type
-     * @param string $clientID OAuth client ID (if not using HTTP Basic auth)
-     * @param string $clientSecret OAuth client secret (if not using HTTP Basic auth)
-     * @param string $code Authorization code (for authorization_code flow)
-     * @param string $codeVerifier PKCE code verifier (for authorization_code flow)
-     * @param string $redirectUri Redirect URI (for authorization_code flow)
-     * @param string $refreshToken Refresh token (for refresh_token flow)
-     * @param string $scope Space-separated list of requested scopes (for client_credentials)
-     *
-     * @return OAuthTokenResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function token(
-        $grantType,
-        $clientID = omit,
-        $clientSecret = omit,
-        $code = omit,
-        $codeVerifier = omit,
-        $redirectUri = omit,
-        $refreshToken = omit,
-        $scope = omit,
-        ?RequestOptions $requestOptions = null,
-    ): OAuthTokenResponse {
-        $params = [
-            'grantType' => $grantType,
-            'clientID' => $clientID,
-            'clientSecret' => $clientSecret,
-            'code' => $code,
-            'codeVerifier' => $codeVerifier,
-            'redirectUri' => $redirectUri,
-            'refreshToken' => $refreshToken,
-            'scope' => $scope,
-        ];
-
-        return $this->tokenRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @return OAuthTokenResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function tokenRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): OAuthTokenResponse {
-        [$parsed, $options] = OAuthTokenParams::parseRequest(
-            $params,
-            $requestOptions
-        );
-
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: 'oauth/token',
-            headers: ['Content-Type' => 'application/x-www-form-urlencoded'],
-            body: (object) $parsed,
-            options: $options,
-            convert: OAuthTokenResponse::class,
         );
     }
 }
