@@ -7,9 +7,9 @@ namespace Telnyx\Services;
 use Telnyx\AdvancedOrders\AdvancedOrderCreateParams;
 use Telnyx\AdvancedOrders\AdvancedOrderCreateParams\Feature;
 use Telnyx\AdvancedOrders\AdvancedOrderCreateParams\PhoneNumberType;
-use Telnyx\AdvancedOrders\AdvancedOrderUpdateParams;
-use Telnyx\AdvancedOrders\AdvancedOrderUpdateParams\Feature as Feature1;
-use Telnyx\AdvancedOrders\AdvancedOrderUpdateParams\PhoneNumberType as PhoneNumberType1;
+use Telnyx\AdvancedOrders\AdvancedOrderUpdateRequirementGroupParams;
+use Telnyx\AdvancedOrders\AdvancedOrderUpdateRequirementGroupParams\Feature as Feature1;
+use Telnyx\AdvancedOrders\AdvancedOrderUpdateRequirementGroupParams\PhoneNumberType as PhoneNumberType1;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
@@ -129,75 +129,6 @@ final class AdvancedOrdersService implements AdvancedOrdersContract
     /**
      * @api
      *
-     * Update Advanced Order
-     *
-     * @param string $areaCode
-     * @param string $comments
-     * @param string $countryCode
-     * @param string $customerReference
-     * @param list<Feature1|value-of<Feature1>> $features
-     * @param PhoneNumberType1|value-of<PhoneNumberType1> $phoneNumberType
-     * @param int $quantity
-     * @param string $requirementGroupID The ID of the requirement group to associate with this advanced order
-     *
-     * @throws APIException
-     */
-    public function update(
-        string $orderID,
-        $areaCode = omit,
-        $comments = omit,
-        $countryCode = omit,
-        $customerReference = omit,
-        $features = omit,
-        $phoneNumberType = omit,
-        $quantity = omit,
-        $requirementGroupID = omit,
-        ?RequestOptions $requestOptions = null,
-    ): mixed {
-        $params = [
-            'areaCode' => $areaCode,
-            'comments' => $comments,
-            'countryCode' => $countryCode,
-            'customerReference' => $customerReference,
-            'features' => $features,
-            'phoneNumberType' => $phoneNumberType,
-            'quantity' => $quantity,
-            'requirementGroupID' => $requirementGroupID,
-        ];
-
-        return $this->updateRaw($orderID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $orderID,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): mixed {
-        [$parsed, $options] = AdvancedOrderUpdateParams::parseRequest(
-            $params,
-            $requestOptions
-        );
-
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'patch',
-            path: ['advanced_orders/%1$s', $orderID],
-            body: (object) $parsed,
-            options: $options,
-            convert: 'mixed',
-        );
-    }
-
-    /**
-     * @api
-     *
      * List Advanced Orders
      *
      * @throws APIException
@@ -223,6 +154,81 @@ final class AdvancedOrdersService implements AdvancedOrdersContract
             method: 'get',
             path: 'advanced_orders',
             options: $requestOptions,
+            convert: 'mixed',
+        );
+    }
+
+    /**
+     * @api
+     *
+     * Update Advanced Order
+     *
+     * @param string $areaCode
+     * @param string $comments
+     * @param string $countryCode
+     * @param string $customerReference
+     * @param list<Feature1|value-of<Feature1>> $features
+     * @param PhoneNumberType1|value-of<PhoneNumberType1> $phoneNumberType
+     * @param int $quantity
+     * @param string $requirementGroupID The ID of the requirement group to associate with this advanced order
+     *
+     * @throws APIException
+     */
+    public function updateRequirementGroup(
+        string $advancedOrderID,
+        $areaCode = omit,
+        $comments = omit,
+        $countryCode = omit,
+        $customerReference = omit,
+        $features = omit,
+        $phoneNumberType = omit,
+        $quantity = omit,
+        $requirementGroupID = omit,
+        ?RequestOptions $requestOptions = null,
+    ): mixed {
+        $params = [
+            'areaCode' => $areaCode,
+            'comments' => $comments,
+            'countryCode' => $countryCode,
+            'customerReference' => $customerReference,
+            'features' => $features,
+            'phoneNumberType' => $phoneNumberType,
+            'quantity' => $quantity,
+            'requirementGroupID' => $requirementGroupID,
+        ];
+
+        return $this->updateRequirementGroupRaw(
+            $advancedOrderID,
+            $params,
+            $requestOptions
+        );
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @throws APIException
+     */
+    public function updateRequirementGroupRaw(
+        string $advancedOrderID,
+        array $params,
+        ?RequestOptions $requestOptions = null,
+    ): mixed {
+        [
+            $parsed, $options,
+        ] = AdvancedOrderUpdateRequirementGroupParams::parseRequest(
+            $params,
+            $requestOptions
+        );
+
+        // @phpstan-ignore-next-line;
+        return $this->client->request(
+            method: 'patch',
+            path: ['advanced_orders/%1$s/requirement_group', $advancedOrderID],
+            body: (object) $parsed,
+            options: $options,
             convert: 'mixed',
         );
     }

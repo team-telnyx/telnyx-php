@@ -53,20 +53,6 @@ final class AdvancedOrdersTest extends TestCase
     }
 
     #[Test]
-    public function testUpdate(): void
-    {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
-        $result = $this->client->advancedOrders->update(
-            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
-        );
-
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
-    }
-
-    #[Test]
     public function testList(): void
     {
         if (UnsupportedMockTests::$skip) {
@@ -74,6 +60,20 @@ final class AdvancedOrdersTest extends TestCase
         }
 
         $result = $this->client->advancedOrders->list();
+
+        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+    }
+
+    #[Test]
+    public function testUpdateRequirementGroup(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
+        $result = $this->client->advancedOrders->updateRequirementGroup(
+            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
+        );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

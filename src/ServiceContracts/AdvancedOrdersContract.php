@@ -6,8 +6,8 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\AdvancedOrders\AdvancedOrderCreateParams\Feature;
 use Telnyx\AdvancedOrders\AdvancedOrderCreateParams\PhoneNumberType;
-use Telnyx\AdvancedOrders\AdvancedOrderUpdateParams\Feature as Feature1;
-use Telnyx\AdvancedOrders\AdvancedOrderUpdateParams\PhoneNumberType as PhoneNumberType1;
+use Telnyx\AdvancedOrders\AdvancedOrderUpdateRequirementGroupParams\Feature as Feature1;
+use Telnyx\AdvancedOrders\AdvancedOrderUpdateRequirementGroupParams\PhoneNumberType as PhoneNumberType1;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 
@@ -77,6 +77,25 @@ interface AdvancedOrdersContract
     /**
      * @api
      *
+     * @throws APIException
+     */
+    public function list(
+        ?RequestOptions $requestOptions = null
+    ): mixed;
+
+    /**
+     * @api
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        mixed $params,
+        ?RequestOptions $requestOptions = null
+    ): mixed;
+
+    /**
+     * @api
+     *
      * @param string $areaCode
      * @param string $comments
      * @param string $countryCode
@@ -88,8 +107,8 @@ interface AdvancedOrdersContract
      *
      * @throws APIException
      */
-    public function update(
-        string $orderID,
+    public function updateRequirementGroup(
+        string $advancedOrderID,
         $areaCode = omit,
         $comments = omit,
         $countryCode = omit,
@@ -108,28 +127,9 @@ interface AdvancedOrdersContract
      *
      * @throws APIException
      */
-    public function updateRaw(
-        string $orderID,
+    public function updateRequirementGroupRaw(
+        string $advancedOrderID,
         array $params,
-        ?RequestOptions $requestOptions = null
-    ): mixed;
-
-    /**
-     * @api
-     *
-     * @throws APIException
-     */
-    public function list(
-        ?RequestOptions $requestOptions = null
-    ): mixed;
-
-    /**
-     * @api
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        mixed $params,
-        ?RequestOptions $requestOptions = null
+        ?RequestOptions $requestOptions = null,
     ): mixed;
 }

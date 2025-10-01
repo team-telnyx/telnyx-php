@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\AdvancedOrders;
 
-use Telnyx\AdvancedOrders\AdvancedOrderUpdateParams\Feature;
-use Telnyx\AdvancedOrders\AdvancedOrderUpdateParams\PhoneNumberType;
+use Telnyx\AdvancedOrders\AdvancedOrderUpdateRequirementGroupParams\Feature;
+use Telnyx\AdvancedOrders\AdvancedOrderUpdateRequirementGroupParams\PhoneNumberType;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
@@ -15,19 +15,19 @@ use Telnyx\Core\Contracts\BaseModel;
  * An object containing the method's parameters.
  * Example usage:
  * ```
- * $params = (new AdvancedOrderUpdateParams); // set properties as needed
- * $client->advancedOrders->update(...$params->toArray());
+ * $params = (new AdvancedOrderUpdateRequirementGroupParams); // set properties as needed
+ * $client->advancedOrders->updateRequirementGroup(...$params->toArray());
  * ```
  * Update Advanced Order.
  *
  * @method toArray()
  *   Returns the parameters as an associative array suitable for passing to the client method.
  *
- *   `$client->advancedOrders->update(...$params->toArray());`
+ *   `$client->advancedOrders->updateRequirementGroup(...$params->toArray());`
  *
- * @see Telnyx\AdvancedOrders->update
+ * @see Telnyx\AdvancedOrders->updateRequirementGroup
  *
- * @phpstan-type advanced_order_update_params = array{
+ * @phpstan-type advanced_order_update_requirement_group_params = array{
  *   areaCode?: string,
  *   comments?: string,
  *   countryCode?: string,
@@ -38,9 +38,9 @@ use Telnyx\Core\Contracts\BaseModel;
  *   requirementGroupID?: string,
  * }
  */
-final class AdvancedOrderUpdateParams implements BaseModel
+final class AdvancedOrderUpdateRequirementGroupParams implements BaseModel
 {
-    /** @use SdkModel<advanced_order_update_params> */
+    /** @use SdkModel<advanced_order_update_requirement_group_params> */
     use SdkModel;
     use SdkParams;
 
