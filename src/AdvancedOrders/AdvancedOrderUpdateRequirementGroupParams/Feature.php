@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\AdvancedOrders\AdvancedOrderUpdateParams;
+namespace Telnyx\AdvancedOrders\AdvancedOrderUpdateRequirementGroupParams;
 
 enum Feature: string
 {
