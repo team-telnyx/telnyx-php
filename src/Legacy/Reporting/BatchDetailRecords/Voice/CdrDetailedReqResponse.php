@@ -6,62 +6,45 @@ namespace Telnyx\Legacy\Reporting\BatchDetailRecords\Voice;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new VoiceCreateParams); // set properties as needed
- * $client->legacy.reporting.batchDetailRecords.voice->create(...$params->toArray());
- * ```
- * Creates a new CDR report request with the specified filters.
+ * Response object for CDR detailed report.
  *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->legacy.reporting.batchDetailRecords.voice->create(...$params->toArray());`
- *
- * @see Telnyx\Legacy\Reporting\BatchDetailRecords\Voice->create
- *
- * @phpstan-type voice_create_params = array{
- *   endTime: \DateTimeInterface,
- *   startTime: \DateTimeInterface,
+ * @phpstan-type cdr_detailed_req_response = array{
+ *   id?: string,
  *   callTypes?: list<int>,
  *   connections?: list<int>,
- *   fields?: list<string>,
+ *   createdAt?: string,
+ *   endTime?: string,
  *   filters?: list<Filter>,
- *   includeAllMetadata?: bool,
  *   managedAccounts?: list<string>,
+ *   recordType?: string,
  *   recordTypes?: list<int>,
  *   reportName?: string,
- *   selectAllManagedAccounts?: bool,
+ *   reportURL?: string,
+ *   retry?: int,
  *   source?: string,
+ *   startTime?: string,
+ *   status?: int,
  *   timezone?: string,
+ *   updatedAt?: string,
  * }
  */
-final class VoiceCreateParams implements BaseModel
+final class CdrDetailedReqResponse implements BaseModel
 {
-    /** @use SdkModel<voice_create_params> */
+    /** @use SdkModel<cdr_detailed_req_response> */
     use SdkModel;
-    use SdkParams;
 
     /**
-     * End time in ISO format.
+     * Unique identifier for the report.
      */
-    #[Api('end_time')]
-    public \DateTimeInterface $endTime;
+    #[Api(optional: true)]
+    public ?string $id;
 
     /**
-     * Start time in ISO format.
-     */
-    #[Api('start_time')]
-    public \DateTimeInterface $startTime;
-
-    /**
-     * List of call types to filter by (Inbound = 1, Outbound = 2).
+     * List of call types (Inbound = 1, Outbound = 2).
      *
      * @var list<int>|null $callTypes
      */
@@ -69,7 +52,7 @@ final class VoiceCreateParams implements BaseModel
     public ?array $callTypes;
 
     /**
-     * List of connections to filter by.
+     * List of connections.
      *
      * @var list<int>|null $connections
      */
@@ -77,15 +60,19 @@ final class VoiceCreateParams implements BaseModel
     public ?array $connections;
 
     /**
-     * Set of fields to include in the report.
-     *
-     * @var list<string>|null $fields
+     * Creation date of the report.
      */
-    #[Api(list: 'string', optional: true)]
-    public ?array $fields;
+    #[Api('created_at', optional: true)]
+    public ?string $createdAt;
 
     /**
-     * List of filters to apply.
+     * End time in ISO format.
+     */
+    #[Api('end_time', optional: true)]
+    public ?string $endTime;
+
+    /**
+     * List of filters.
      *
      * @var list<Filter>|null $filters
      */
@@ -93,21 +80,18 @@ final class VoiceCreateParams implements BaseModel
     public ?array $filters;
 
     /**
-     * Whether to include all metadata.
-     */
-    #[Api('include_all_metadata', optional: true)]
-    public ?bool $includeAllMetadata;
-
-    /**
-     * List of managed accounts to include.
+     * List of managed accounts.
      *
      * @var list<string>|null $managedAccounts
      */
     #[Api('managed_accounts', list: 'string', optional: true)]
     public ?array $managedAccounts;
 
+    #[Api('record_type', optional: true)]
+    public ?string $recordType;
+
     /**
-     * List of record types to filter by (Complete = 1, Incomplete = 2, Errors = 3).
+     * List of record types (Complete = 1, Incomplete = 2, Errors = 3).
      *
      * @var list<int>|null $recordTypes
      */
@@ -121,10 +105,16 @@ final class VoiceCreateParams implements BaseModel
     public ?string $reportName;
 
     /**
-     * Whether to select all managed accounts.
+     * URL to download the report.
      */
-    #[Api('select_all_managed_accounts', optional: true)]
-    public ?bool $selectAllManagedAccounts;
+    #[Api('report_url', optional: true)]
+    public ?string $reportURL;
+
+    /**
+     * Number of retries.
+     */
+    #[Api(optional: true)]
+    public ?int $retry;
 
     /**
      * Source of the report. Valid values: calls (default), call-control, fax-api, webrtc.
@@ -133,25 +123,29 @@ final class VoiceCreateParams implements BaseModel
     public ?string $source;
 
     /**
+     * Start time in ISO format.
+     */
+    #[Api('start_time', optional: true)]
+    public ?string $startTime;
+
+    /**
+     * Status of the report (Pending = 1, Complete = 2, Failed = 3, Expired = 4).
+     */
+    #[Api(optional: true)]
+    public ?int $status;
+
+    /**
      * Timezone for the report.
      */
     #[Api(optional: true)]
     public ?string $timezone;
 
     /**
-     * `new VoiceCreateParams()` is missing required properties by the API.
-     *
-     * To enforce required parameters use
-     * ```
-     * VoiceCreateParams::with(endTime: ..., startTime: ...)
-     * ```
-     *
-     * Otherwise ensure the following setters are called
-     *
-     * ```
-     * (new VoiceCreateParams)->withEndTime(...)->withStartTime(...)
-     * ```
+     * Last update date of the report.
      */
+    #[Api('updated_at', optional: true)]
+    public ?string $updatedAt;
+
     public function __construct()
     {
         $this->initialize();
@@ -164,70 +158,65 @@ final class VoiceCreateParams implements BaseModel
      *
      * @param list<int> $callTypes
      * @param list<int> $connections
-     * @param list<string> $fields
      * @param list<Filter> $filters
      * @param list<string> $managedAccounts
      * @param list<int> $recordTypes
      */
     public static function with(
-        \DateTimeInterface $endTime,
-        \DateTimeInterface $startTime,
+        ?string $id = null,
         ?array $callTypes = null,
         ?array $connections = null,
-        ?array $fields = null,
+        ?string $createdAt = null,
+        ?string $endTime = null,
         ?array $filters = null,
-        ?bool $includeAllMetadata = null,
         ?array $managedAccounts = null,
+        ?string $recordType = null,
         ?array $recordTypes = null,
         ?string $reportName = null,
-        ?bool $selectAllManagedAccounts = null,
+        ?string $reportURL = null,
+        ?int $retry = null,
         ?string $source = null,
+        ?string $startTime = null,
+        ?int $status = null,
         ?string $timezone = null,
+        ?string $updatedAt = null,
     ): self {
         $obj = new self;
 
-        $obj->endTime = $endTime;
-        $obj->startTime = $startTime;
-
+        null !== $id && $obj->id = $id;
         null !== $callTypes && $obj->callTypes = $callTypes;
         null !== $connections && $obj->connections = $connections;
-        null !== $fields && $obj->fields = $fields;
+        null !== $createdAt && $obj->createdAt = $createdAt;
+        null !== $endTime && $obj->endTime = $endTime;
         null !== $filters && $obj->filters = $filters;
-        null !== $includeAllMetadata && $obj->includeAllMetadata = $includeAllMetadata;
         null !== $managedAccounts && $obj->managedAccounts = $managedAccounts;
+        null !== $recordType && $obj->recordType = $recordType;
         null !== $recordTypes && $obj->recordTypes = $recordTypes;
         null !== $reportName && $obj->reportName = $reportName;
-        null !== $selectAllManagedAccounts && $obj->selectAllManagedAccounts = $selectAllManagedAccounts;
+        null !== $reportURL && $obj->reportURL = $reportURL;
+        null !== $retry && $obj->retry = $retry;
         null !== $source && $obj->source = $source;
+        null !== $startTime && $obj->startTime = $startTime;
+        null !== $status && $obj->status = $status;
         null !== $timezone && $obj->timezone = $timezone;
+        null !== $updatedAt && $obj->updatedAt = $updatedAt;
 
         return $obj;
     }
 
     /**
-     * End time in ISO format.
+     * Unique identifier for the report.
      */
-    public function withEndTime(\DateTimeInterface $endTime): self
+    public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->endTime = $endTime;
+        $obj->id = $id;
 
         return $obj;
     }
 
     /**
-     * Start time in ISO format.
-     */
-    public function withStartTime(\DateTimeInterface $startTime): self
-    {
-        $obj = clone $this;
-        $obj->startTime = $startTime;
-
-        return $obj;
-    }
-
-    /**
-     * List of call types to filter by (Inbound = 1, Outbound = 2).
+     * List of call types (Inbound = 1, Outbound = 2).
      *
      * @param list<int> $callTypes
      */
@@ -240,7 +229,7 @@ final class VoiceCreateParams implements BaseModel
     }
 
     /**
-     * List of connections to filter by.
+     * List of connections.
      *
      * @param list<int> $connections
      */
@@ -253,20 +242,29 @@ final class VoiceCreateParams implements BaseModel
     }
 
     /**
-     * Set of fields to include in the report.
-     *
-     * @param list<string> $fields
+     * Creation date of the report.
      */
-    public function withFields(array $fields): self
+    public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->fields = $fields;
+        $obj->createdAt = $createdAt;
 
         return $obj;
     }
 
     /**
-     * List of filters to apply.
+     * End time in ISO format.
+     */
+    public function withEndTime(string $endTime): self
+    {
+        $obj = clone $this;
+        $obj->endTime = $endTime;
+
+        return $obj;
+    }
+
+    /**
+     * List of filters.
      *
      * @param list<Filter> $filters
      */
@@ -279,18 +277,7 @@ final class VoiceCreateParams implements BaseModel
     }
 
     /**
-     * Whether to include all metadata.
-     */
-    public function withIncludeAllMetadata(bool $includeAllMetadata): self
-    {
-        $obj = clone $this;
-        $obj->includeAllMetadata = $includeAllMetadata;
-
-        return $obj;
-    }
-
-    /**
-     * List of managed accounts to include.
+     * List of managed accounts.
      *
      * @param list<string> $managedAccounts
      */
@@ -302,8 +289,16 @@ final class VoiceCreateParams implements BaseModel
         return $obj;
     }
 
+    public function withRecordType(string $recordType): self
+    {
+        $obj = clone $this;
+        $obj->recordType = $recordType;
+
+        return $obj;
+    }
+
     /**
-     * List of record types to filter by (Complete = 1, Incomplete = 2, Errors = 3).
+     * List of record types (Complete = 1, Incomplete = 2, Errors = 3).
      *
      * @param list<int> $recordTypes
      */
@@ -327,13 +322,23 @@ final class VoiceCreateParams implements BaseModel
     }
 
     /**
-     * Whether to select all managed accounts.
+     * URL to download the report.
      */
-    public function withSelectAllManagedAccounts(
-        bool $selectAllManagedAccounts
-    ): self {
+    public function withReportURL(string $reportURL): self
+    {
         $obj = clone $this;
-        $obj->selectAllManagedAccounts = $selectAllManagedAccounts;
+        $obj->reportURL = $reportURL;
+
+        return $obj;
+    }
+
+    /**
+     * Number of retries.
+     */
+    public function withRetry(int $retry): self
+    {
+        $obj = clone $this;
+        $obj->retry = $retry;
 
         return $obj;
     }
@@ -350,12 +355,45 @@ final class VoiceCreateParams implements BaseModel
     }
 
     /**
+     * Start time in ISO format.
+     */
+    public function withStartTime(string $startTime): self
+    {
+        $obj = clone $this;
+        $obj->startTime = $startTime;
+
+        return $obj;
+    }
+
+    /**
+     * Status of the report (Pending = 1, Complete = 2, Failed = 3, Expired = 4).
+     */
+    public function withStatus(int $status): self
+    {
+        $obj = clone $this;
+        $obj->status = $status;
+
+        return $obj;
+    }
+
+    /**
      * Timezone for the report.
      */
     public function withTimezone(string $timezone): self
     {
         $obj = clone $this;
         $obj->timezone = $timezone;
+
+        return $obj;
+    }
+
+    /**
+     * Last update date of the report.
+     */
+    public function withUpdatedAt(string $updatedAt): self
+    {
+        $obj = clone $this;
+        $obj->updatedAt = $updatedAt;
 
         return $obj;
     }

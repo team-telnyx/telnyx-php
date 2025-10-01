@@ -7,10 +7,11 @@ namespace Telnyx\Legacy\Reporting\UsageReports\Messaging;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Legacy\Reporting\UsageReports\Messaging\MessagingGetResponse\Data;
 
 /**
- * @phpstan-type messaging_get_response = array{data?: Data}
+ * @phpstan-type messaging_get_response = array{
+ *   data?: MdrUsageReportResponseLegacy
+ * }
  * When used in a response, this type parameter can define a $rawResponse property.
  * @template TRawResponse of object = object{}
  *
@@ -25,7 +26,7 @@ final class MessagingGetResponse implements BaseModel
      * Legacy V2 MDR usage report response.
      */
     #[Api(optional: true)]
-    public ?Data $data;
+    public ?MdrUsageReportResponseLegacy $data;
 
     public function __construct()
     {
@@ -37,7 +38,7 @@ final class MessagingGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?Data $data = null): self
+    public static function with(?MdrUsageReportResponseLegacy $data = null): self
     {
         $obj = new self;
 
@@ -49,7 +50,7 @@ final class MessagingGetResponse implements BaseModel
     /**
      * Legacy V2 MDR usage report response.
      */
-    public function withData(Data $data): self
+    public function withData(MdrUsageReportResponseLegacy $data): self
     {
         $obj = clone $this;
         $obj->data = $data;

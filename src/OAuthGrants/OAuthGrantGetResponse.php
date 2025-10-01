@@ -7,10 +7,9 @@ namespace Telnyx\OAuthGrants;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\OAuthGrants\OAuthGrantGetResponse\Data;
 
 /**
- * @phpstan-type oauth_grant_get_response = array{data?: Data}
+ * @phpstan-type oauth_grant_get_response = array{data?: OAuthGrant}
  * When used in a response, this type parameter can define a $rawResponse property.
  * @template TRawResponse of object = object{}
  *
@@ -22,7 +21,7 @@ final class OAuthGrantGetResponse implements BaseModel
     use SdkModel;
 
     #[Api(optional: true)]
-    public ?Data $data;
+    public ?OAuthGrant $data;
 
     public function __construct()
     {
@@ -34,7 +33,7 @@ final class OAuthGrantGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?Data $data = null): self
+    public static function with(?OAuthGrant $data = null): self
     {
         $obj = new self;
 
@@ -43,7 +42,7 @@ final class OAuthGrantGetResponse implements BaseModel
         return $obj;
     }
 
-    public function withData(Data $data): self
+    public function withData(OAuthGrant $data): self
     {
         $obj = clone $this;
         $obj->data = $data;
