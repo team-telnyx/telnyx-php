@@ -7,10 +7,9 @@ namespace Telnyx\Legacy\Reporting\BatchDetailRecords\Voice;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Legacy\Reporting\BatchDetailRecords\Voice\VoiceNewResponse\Data;
 
 /**
- * @phpstan-type voice_new_response = array{data?: Data}
+ * @phpstan-type voice_new_response = array{data?: CdrDetailedReqResponse}
  * When used in a response, this type parameter can define a $rawResponse property.
  * @template TRawResponse of object = object{}
  *
@@ -25,7 +24,7 @@ final class VoiceNewResponse implements BaseModel
      * Response object for CDR detailed report.
      */
     #[Api(optional: true)]
-    public ?Data $data;
+    public ?CdrDetailedReqResponse $data;
 
     public function __construct()
     {
@@ -37,7 +36,7 @@ final class VoiceNewResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?Data $data = null): self
+    public static function with(?CdrDetailedReqResponse $data = null): self
     {
         $obj = new self;
 
@@ -49,7 +48,7 @@ final class VoiceNewResponse implements BaseModel
     /**
      * Response object for CDR detailed report.
      */
-    public function withData(Data $data): self
+    public function withData(CdrDetailedReqResponse $data): self
     {
         $obj = clone $this;
         $obj->data = $data;
