@@ -6,6 +6,9 @@ namespace Telnyx\Calls\Actions;
 
 use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngine;
 use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig;
+use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\Google;
+use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\Telnyx;
+use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\TranscriptionEngineDeepgramConfig;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
@@ -35,7 +38,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   clientState?: string,
  *   commandID?: string,
  *   transcriptionEngine?: TranscriptionEngine|value-of<TranscriptionEngine>,
- *   transcriptionEngineConfig?: TranscriptionEngineAConfig|TranscriptionEngineBConfig,
+ *   transcriptionEngineConfig?: Google|Telnyx|TranscriptionEngineDeepgramConfig|TranscriptionEngineAConfig|TranscriptionEngineBConfig,
  *   transcriptionTracks?: string,
  * }
  */
@@ -58,7 +61,7 @@ final class ActionStartTranscriptionParams implements BaseModel
     public ?string $commandID;
 
     /**
-     * Engine to use for speech recognition. `A` - `Google`, `B` - `Telnyx`.
+     * Engine to use for speech recognition. Legacy values `A` - `Google`, `B` - `Telnyx` are supported for backward compatibility.
      *
      * @var value-of<TranscriptionEngine>|null $transcriptionEngine
      */
@@ -74,7 +77,7 @@ final class ActionStartTranscriptionParams implements BaseModel
         union: TranscriptionEngineConfig::class,
         optional: true,
     )]
-    public TranscriptionEngineAConfig|TranscriptionEngineBConfig|null $transcriptionEngineConfig;
+    public Google|Telnyx|TranscriptionEngineDeepgramConfig|TranscriptionEngineAConfig|TranscriptionEngineBConfig|null $transcriptionEngineConfig;
 
     /**
      * Indicates which leg of the call will be transcribed. Use `inbound` for the leg that requested the transcription, `outbound` for the other leg, and `both` for both legs of the call. Will default to `inbound`.
@@ -98,7 +101,7 @@ final class ActionStartTranscriptionParams implements BaseModel
         ?string $clientState = null,
         ?string $commandID = null,
         TranscriptionEngine|string|null $transcriptionEngine = null,
-        TranscriptionEngineAConfig|TranscriptionEngineBConfig|null $transcriptionEngineConfig = null,
+        Google|Telnyx|TranscriptionEngineDeepgramConfig|TranscriptionEngineAConfig|TranscriptionEngineBConfig|null $transcriptionEngineConfig = null,
         ?string $transcriptionTracks = null,
     ): self {
         $obj = new self;
@@ -135,7 +138,7 @@ final class ActionStartTranscriptionParams implements BaseModel
     }
 
     /**
-     * Engine to use for speech recognition. `A` - `Google`, `B` - `Telnyx`.
+     * Engine to use for speech recognition. Legacy values `A` - `Google`, `B` - `Telnyx` are supported for backward compatibility.
      *
      * @param TranscriptionEngine|value-of<TranscriptionEngine> $transcriptionEngine
      */
@@ -149,7 +152,7 @@ final class ActionStartTranscriptionParams implements BaseModel
     }
 
     public function withTranscriptionEngineConfig(
-        TranscriptionEngineAConfig|TranscriptionEngineBConfig $transcriptionEngineConfig,
+        Google|Telnyx|TranscriptionEngineDeepgramConfig|TranscriptionEngineAConfig|TranscriptionEngineBConfig $transcriptionEngineConfig,
     ): self {
         $obj = clone $this;
         $obj->transcriptionEngineConfig = $transcriptionEngineConfig;

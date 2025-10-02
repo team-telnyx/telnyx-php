@@ -7,11 +7,10 @@ namespace Telnyx\VerifyProfiles;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\VerifyProfiles\VerifyProfileUpdateTemplateResponse\Data;
 
 /**
- * @phpstan-type verify_profile_update_template_response = array{
- *   data?: VerifyProfileMessageTemplateResponse
- * }
+ * @phpstan-type verify_profile_update_template_response = array{data?: Data}
  * When used in a response, this type parameter can define a $rawResponse property.
  * @template TRawResponse of object = object{}
  *
@@ -23,7 +22,7 @@ final class VerifyProfileUpdateTemplateResponse implements BaseModel
     use SdkModel;
 
     #[Api(optional: true)]
-    public ?VerifyProfileMessageTemplateResponse $data;
+    public ?Data $data;
 
     public function __construct()
     {
@@ -35,9 +34,8 @@ final class VerifyProfileUpdateTemplateResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(
-        ?VerifyProfileMessageTemplateResponse $data = null
-    ): self {
+    public static function with(?Data $data = null): self
+    {
         $obj = new self;
 
         null !== $data && $obj->data = $data;
@@ -45,7 +43,7 @@ final class VerifyProfileUpdateTemplateResponse implements BaseModel
         return $obj;
     }
 
-    public function withData(VerifyProfileMessageTemplateResponse $data): self
+    public function withData(Data $data): self
     {
         $obj = clone $this;
         $obj->data = $data;

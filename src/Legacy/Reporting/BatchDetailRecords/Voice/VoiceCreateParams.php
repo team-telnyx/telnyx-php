@@ -8,7 +8,7 @@ use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter;
+use Telnyx\Legacy\Reporting\BatchDetailRecords\Voice\VoiceCreateParams\Filter;
 
 /**
  * An object containing the method's parameters.

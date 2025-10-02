@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Telnyx\Calls\Actions\ActionStartTranscriptionParams;
 
+use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\Google;
+use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\Telnyx;
+use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\TranscriptionEngineDeepgramConfig;
 use Telnyx\Calls\Actions\TranscriptionEngineAConfig;
 use Telnyx\Calls\Actions\TranscriptionEngineBConfig;
 use Telnyx\Core\Concerns\SdkUnion;
@@ -26,6 +29,9 @@ final class TranscriptionEngineConfig implements ConverterSource
     public static function variants(): array
     {
         return [
+            TranscriptionEngineDeepgramConfig::class,
+            'Google' => Google::class,
+            'Telnyx' => Telnyx::class,
             'A' => TranscriptionEngineAConfig::class,
             'B' => TranscriptionEngineBConfig::class,
         ];

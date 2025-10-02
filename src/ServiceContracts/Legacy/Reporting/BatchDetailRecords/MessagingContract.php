@@ -6,7 +6,7 @@ namespace Telnyx\ServiceContracts\Legacy\Reporting\BatchDetailRecords;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
-use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter;
+use Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging\MessagingCreateParams\Filter;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging\MessagingDeleteResponse;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging\MessagingGetResponse;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging\MessagingListResponse;
