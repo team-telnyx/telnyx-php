@@ -13,10 +13,8 @@ use Telnyx\Rooms\Sessions\Actions\ActionKickParams;
 use Telnyx\Rooms\Sessions\Actions\ActionKickParams\Participants\UnionMember0;
 use Telnyx\Rooms\Sessions\Actions\ActionKickResponse;
 use Telnyx\Rooms\Sessions\Actions\ActionMuteParams;
-use Telnyx\Rooms\Sessions\Actions\ActionMuteParams\Participants\UnionMember0 as UnionMember01;
 use Telnyx\Rooms\Sessions\Actions\ActionMuteResponse;
 use Telnyx\Rooms\Sessions\Actions\ActionUnmuteParams;
-use Telnyx\Rooms\Sessions\Actions\ActionUnmuteParams\Participants\UnionMember0 as UnionMember02;
 use Telnyx\Rooms\Sessions\Actions\ActionUnmuteResponse;
 use Telnyx\ServiceContracts\Rooms\Sessions\ActionsContract;
 
@@ -126,7 +124,7 @@ final class ActionsService implements ActionsContract
      * Mute participants in room session.
      *
      * @param list<string> $exclude list of participant id to exclude from the action
-     * @param UnionMember01|list<string>|value-of<UnionMember01> $participants either a list of participant id to perform the action on, or the keyword "all" to perform the action on all participant
+     * @param Telnyx\Rooms\Sessions\Actions\ActionMuteParams\Participants\UnionMember0|list<string>|value-of<Telnyx\Rooms\Sessions\Actions\ActionMuteParams\Participants\UnionMember0> $participants either a list of participant id to perform the action on, or the keyword "all" to perform the action on all participant
      *
      * @return ActionMuteResponse<HasRawResponse>
      *
@@ -178,7 +176,7 @@ final class ActionsService implements ActionsContract
      * Unmute participants in room session.
      *
      * @param list<string> $exclude list of participant id to exclude from the action
-     * @param UnionMember02|list<string>|value-of<UnionMember02> $participants either a list of participant id to perform the action on, or the keyword "all" to perform the action on all participant
+     * @param Telnyx\Rooms\Sessions\Actions\ActionUnmuteParams\Participants\UnionMember0|list<string>|value-of<Telnyx\Rooms\Sessions\Actions\ActionUnmuteParams\Participants\UnionMember0> $participants either a list of participant id to perform the action on, or the keyword "all" to perform the action on all participant
      *
      * @return ActionUnmuteResponse<HasRawResponse>
      *

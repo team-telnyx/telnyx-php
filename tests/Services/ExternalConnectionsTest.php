@@ -7,7 +7,6 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\ExternalConnections\ExternalConnectionCreateParams\Outbound;
-use Telnyx\ExternalConnections\ExternalConnectionUpdateParams\Outbound as Outbound1;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -81,7 +80,7 @@ final class ExternalConnectionsTest extends TestCase
 
         $result = $this->client->externalConnections->update(
             'id',
-            outbound: Outbound1::with(
+            outbound: Telnyx\ExternalConnections\ExternalConnectionUpdateParams\Outbound::with(
                 outboundVoiceProfileID: 'outbound_voice_profile_id'
             ),
         );
@@ -98,7 +97,7 @@ final class ExternalConnectionsTest extends TestCase
 
         $result = $this->client->externalConnections->update(
             'id',
-            outbound: Outbound1::with(
+            outbound: Telnyx\ExternalConnections\ExternalConnectionUpdateParams\Outbound::with(
                 outboundVoiceProfileID: 'outbound_voice_profile_id'
             )
                 ->withChannelLimit(10),

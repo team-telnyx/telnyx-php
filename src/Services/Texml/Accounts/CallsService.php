@@ -21,7 +21,6 @@ use Telnyx\Texml\Accounts\Calls\CallCallsParams\RecordingChannels;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\RecordingStatusCallbackMethod;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\RecordingTrack;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\StatusCallbackEvent;
-use Telnyx\Texml\Accounts\Calls\CallCallsParams\StatusCallbackMethod as StatusCallbackMethod1;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\Trim;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\URLMethod;
 use Telnyx\Texml\Accounts\Calls\CallCallsResponse;
@@ -32,14 +31,11 @@ use Telnyx\Texml\Accounts\Calls\CallRetrieveCallsParams\Status;
 use Telnyx\Texml\Accounts\Calls\CallRetrieveParams;
 use Telnyx\Texml\Accounts\Calls\CallSiprecJsonParams;
 use Telnyx\Texml\Accounts\Calls\CallSiprecJsonParams\SipTransport;
-use Telnyx\Texml\Accounts\Calls\CallSiprecJsonParams\StatusCallbackMethod as StatusCallbackMethod2;
 use Telnyx\Texml\Accounts\Calls\CallSiprecJsonParams\Track;
 use Telnyx\Texml\Accounts\Calls\CallSiprecJsonResponse;
 use Telnyx\Texml\Accounts\Calls\CallStreamsJsonParams;
 use Telnyx\Texml\Accounts\Calls\CallStreamsJsonParams\BidirectionalCodec;
 use Telnyx\Texml\Accounts\Calls\CallStreamsJsonParams\BidirectionalMode;
-use Telnyx\Texml\Accounts\Calls\CallStreamsJsonParams\StatusCallbackMethod as StatusCallbackMethod3;
-use Telnyx\Texml\Accounts\Calls\CallStreamsJsonParams\Track as Track1;
 use Telnyx\Texml\Accounts\Calls\CallStreamsJsonResponse;
 use Telnyx\Texml\Accounts\Calls\CallUpdateParams;
 use Telnyx\Texml\Accounts\Calls\CallUpdateParams\FallbackMethod;
@@ -246,7 +242,7 @@ final class CallsService implements CallsContract
      * @param string $sipAuthUsername the username to use for SIP authentication
      * @param string $statusCallback URL destination for Telnyx to send status callback events to for the call
      * @param StatusCallbackEvent|value-of<StatusCallbackEvent> $statusCallbackEvent The call events for which Telnyx should send a webhook. Multiple events can be defined when separated by a space.
-     * @param StatusCallbackMethod1|value-of<StatusCallbackMethod1> $statusCallbackMethod HTTP request type used for `StatusCallback`
+     * @param telnyx\Texml\Accounts\Calls\CallCallsParams\StatusCallbackMethod|value-of<Telnyx\Texml\Accounts\Calls\CallCallsParams\StatusCallbackMethod> $statusCallbackMethod HTTP request type used for `StatusCallback`
      * @param Trim|value-of<Trim> $trim Whether to trim any leading and trailing silence from the recording. Defaults to `trim-silence`.
      * @param string $url the URL from which Telnyx will retrieve the TeXML call instructions
      * @param URLMethod|value-of<URLMethod> $urlMethod HTTP request type used for `Url`. The default value is inherited from TeXML Application setting.
@@ -458,7 +454,7 @@ final class CallsService implements CallsContract
      * @param int $sessionTimeoutSecs Sets `Session-Expires` header to the INVITE. A reinvite is sent every half the value set. Usefull for session keep alive. Minimum value is 90, set to 0 to disable.
      * @param SipTransport|value-of<SipTransport> $sipTransport specifies SIP transport protocol
      * @param string $statusCallback URL destination for Telnyx to send status callback events to for the siprec session
-     * @param StatusCallbackMethod2|value-of<StatusCallbackMethod2> $statusCallbackMethod HTTP request type used for `StatusCallback`
+     * @param telnyx\Texml\Accounts\Calls\CallSiprecJsonParams\StatusCallbackMethod|value-of<Telnyx\Texml\Accounts\Calls\CallSiprecJsonParams\StatusCallbackMethod> $statusCallbackMethod HTTP request type used for `StatusCallback`
      * @param Track|value-of<Track> $track The track to be used for siprec session. Can be `both_tracks`, `inbound_track` or `outbound_track`. Defaults to `both_tracks`.
      *
      * @return CallSiprecJsonResponse<HasRawResponse>
@@ -539,8 +535,8 @@ final class CallsService implements CallsContract
      * @param BidirectionalMode|value-of<BidirectionalMode> $bidirectionalMode configures method of bidirectional streaming (mp3, rtp)
      * @param string $name the user specified name of Stream
      * @param string $statusCallback url where status callbacks will be sent
-     * @param StatusCallbackMethod3|value-of<StatusCallbackMethod3> $statusCallbackMethod HTTP method used to send status callbacks
-     * @param Track1|value-of<Track1> $track Tracks to be included in the stream
+     * @param telnyx\Texml\Accounts\Calls\CallStreamsJsonParams\StatusCallbackMethod|value-of<Telnyx\Texml\Accounts\Calls\CallStreamsJsonParams\StatusCallbackMethod> $statusCallbackMethod HTTP method used to send status callbacks
+     * @param Telnyx\Texml\Accounts\Calls\CallStreamsJsonParams\Track|value-of<Telnyx\Texml\Accounts\Calls\CallStreamsJsonParams\Track> $track Tracks to be included in the stream
      * @param string $url the destination WebSocket address where the stream is going to be delivered
      *
      * @return CallStreamsJsonResponse<HasRawResponse>

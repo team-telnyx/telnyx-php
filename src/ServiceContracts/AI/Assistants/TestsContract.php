@@ -9,7 +9,6 @@ use Telnyx\AI\Assistants\Tests\TelnyxConversationChannel;
 use Telnyx\AI\Assistants\Tests\TestCreateParams\Rubric;
 use Telnyx\AI\Assistants\Tests\TestListParams\Page;
 use Telnyx\AI\Assistants\Tests\TestListResponse;
-use Telnyx\AI\Assistants\Tests\TestUpdateParams\Rubric as Rubric1;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
@@ -93,7 +92,7 @@ interface TestsContract
      * @param string $instructions updated test scenario instructions and objectives
      * @param int $maxDurationSeconds updated maximum test duration in seconds
      * @param string $name Updated name for the assistant test. Must be unique and descriptive.
-     * @param list<Rubric1> $rubric updated evaluation criteria for assessing assistant performance
+     * @param list<Telnyx\AI\Assistants\Tests\TestUpdateParams\Rubric> $rubric updated evaluation criteria for assessing assistant performance
      * @param TelnyxConversationChannel|value-of<TelnyxConversationChannel> $telnyxConversationChannel updated communication channel for the test execution
      * @param string $testSuite updated test suite assignment for better organization
      *

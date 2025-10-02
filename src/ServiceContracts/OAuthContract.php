@@ -10,7 +10,6 @@ use Telnyx\OAuth\OAuthGetJwksResponse;
 use Telnyx\OAuth\OAuthGetResponse;
 use Telnyx\OAuth\OAuthGrantsResponse;
 use Telnyx\OAuth\OAuthIntrospectResponse;
-use Telnyx\OAuth\OAuthRegisterParams\GrantType as GrantType1;
 use Telnyx\OAuth\OAuthRegisterParams\TokenEndpointAuthMethod;
 use Telnyx\OAuth\OAuthRegisterResponse;
 use Telnyx\OAuth\OAuthRetrieveAuthorizeParams\CodeChallengeMethod;
@@ -110,7 +109,7 @@ interface OAuthContract
      * @api
      *
      * @param string $clientName Human-readable string name of the client to be presented to the end-user
-     * @param list<GrantType1|value-of<GrantType1>> $grantTypes Array of OAuth 2.0 grant type strings that the client may use
+     * @param list<Telnyx\OAuth\OAuthRegisterParams\GrantType|value-of<Telnyx\OAuth\OAuthRegisterParams\GrantType>> $grantTypes Array of OAuth 2.0 grant type strings that the client may use
      * @param string $logoUri URL of the client logo
      * @param string $policyUri URL of the client's privacy policy
      * @param list<string> $redirectUris Array of redirection URI strings for use in redirect-based flows

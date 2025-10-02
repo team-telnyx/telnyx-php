@@ -13,7 +13,6 @@ use Telnyx\NotificationChannels\NotificationChannelListParams\Filter;
 use Telnyx\NotificationChannels\NotificationChannelListParams\Page;
 use Telnyx\NotificationChannels\NotificationChannelListResponse;
 use Telnyx\NotificationChannels\NotificationChannelNewResponse;
-use Telnyx\NotificationChannels\NotificationChannelUpdateParams\ChannelTypeID as ChannelTypeID1;
 use Telnyx\NotificationChannels\NotificationChannelUpdateResponse;
 use Telnyx\RequestOptions;
 
@@ -82,7 +81,7 @@ interface NotificationChannelsContract
      * @api
      *
      * @param string $channelDestination the destination associated with the channel type
-     * @param ChannelTypeID1|value-of<ChannelTypeID1> $channelTypeID A Channel Type ID
+     * @param Telnyx\NotificationChannels\NotificationChannelUpdateParams\ChannelTypeID|value-of<Telnyx\NotificationChannels\NotificationChannelUpdateParams\ChannelTypeID> $channelTypeID A Channel Type ID
      * @param string $notificationProfileID a UUID reference to the associated Notification Profile
      *
      * @return NotificationChannelUpdateResponse<HasRawResponse>

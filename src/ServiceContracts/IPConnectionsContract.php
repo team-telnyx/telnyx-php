@@ -21,8 +21,6 @@ use Telnyx\IPConnections\IPConnectionListParams\Page;
 use Telnyx\IPConnections\IPConnectionListParams\Sort;
 use Telnyx\IPConnections\IPConnectionListResponse;
 use Telnyx\IPConnections\IPConnectionNewResponse;
-use Telnyx\IPConnections\IPConnectionUpdateParams\TransportProtocol as TransportProtocol1;
-use Telnyx\IPConnections\IPConnectionUpdateParams\WebhookAPIVersion as WebhookAPIVersion1;
 use Telnyx\IPConnections\IPConnectionUpdateResponse;
 use Telnyx\IPConnections\OutboundIP;
 use Telnyx\RequestOptions;
@@ -137,8 +135,8 @@ interface IPConnectionsContract
      * @param OutboundIP $outbound
      * @param ConnectionRtcpSettings $rtcpSettings
      * @param list<string> $tags tags associated with the connection
-     * @param TransportProtocol1|value-of<TransportProtocol1> $transportProtocol One of UDP, TLS, or TCP. Applies only to connections with IP authentication or FQDN authentication.
-     * @param WebhookAPIVersion1|value-of<WebhookAPIVersion1> $webhookAPIVersion determines which webhook format will be used, Telnyx API v1 or v2
+     * @param Telnyx\IPConnections\IPConnectionUpdateParams\TransportProtocol|value-of<Telnyx\IPConnections\IPConnectionUpdateParams\TransportProtocol> $transportProtocol One of UDP, TLS, or TCP. Applies only to connections with IP authentication or FQDN authentication.
+     * @param Telnyx\IPConnections\IPConnectionUpdateParams\WebhookAPIVersion|value-of<Telnyx\IPConnections\IPConnectionUpdateParams\WebhookAPIVersion> $webhookAPIVersion determines which webhook format will be used, Telnyx API v1 or v2
      * @param string|null $webhookEventFailoverURL The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      * @param string $webhookEventURL The URL where webhooks related to this connection will be sent. Must include a scheme, such as 'https'.
      * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook

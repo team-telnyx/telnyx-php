@@ -20,7 +20,6 @@ use Telnyx\PortingOrders\PortingOrderListResponse;
 use Telnyx\PortingOrders\PortingOrderMisc;
 use Telnyx\PortingOrders\PortingOrderNewResponse;
 use Telnyx\PortingOrders\PortingOrderPhoneNumberConfiguration;
-use Telnyx\PortingOrders\PortingOrderRetrieveRequirementsParams\Page as Page1;
 use Telnyx\PortingOrders\PortingOrderUpdateParams\ActivationSettings;
 use Telnyx\PortingOrders\PortingOrderUpdateParams\Messaging;
 use Telnyx\PortingOrders\PortingOrderUpdateParams\Requirement;
@@ -278,7 +277,7 @@ interface PortingOrdersContract
     /**
      * @api
      *
-     * @param Page1 $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param Telnyx\PortingOrders\PortingOrderRetrieveRequirementsParams\Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @return PortingOrderGetRequirementsResponse<HasRawResponse>
      *

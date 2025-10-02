@@ -8,13 +8,13 @@ use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthRetrieveParams\Filter\GlobalIPAssignmentID\In;
-use Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthRetrieveParams\Filter\GlobalIPID\In as In1;
 
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[global_ip_id][in], filter[global_ip_assignment_id][in].
  *
  * @phpstan-type filter_alias = array{
- *   globalIPAssignmentID?: string|In, globalIPID?: string|In1
+ *   globalIPAssignmentID?: string|In,
+ *   globalIPID?: string|Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthRetrieveParams\Filter\GlobalIPID\In,
  * }
  */
 final class Filter implements BaseModel
@@ -32,7 +32,7 @@ final class Filter implements BaseModel
      * Filter by exact Global IP ID.
      */
     #[Api('global_ip_id', optional: true)]
-    public string|In1|null $globalIPID;
+    public string|Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthRetrieveParams\Filter\GlobalIPID\In|null $globalIPID;
 
     public function __construct()
     {
@@ -46,7 +46,7 @@ final class Filter implements BaseModel
      */
     public static function with(
         string|In|null $globalIPAssignmentID = null,
-        string|In1|null $globalIPID = null
+        string|Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthRetrieveParams\Filter\GlobalIPID\In|null $globalIPID = null,
     ): self {
         $obj = new self;
 
@@ -71,8 +71,9 @@ final class Filter implements BaseModel
     /**
      * Filter by exact Global IP ID.
      */
-    public function withGlobalIPID(string|In1 $globalIPID): self
-    {
+    public function withGlobalIPID(
+        string|Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthRetrieveParams\Filter\GlobalIPID\In $globalIPID,
+    ): self {
         $obj = clone $this;
         $obj->globalIPID = $globalIPID;
 

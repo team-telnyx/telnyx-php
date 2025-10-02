@@ -11,8 +11,6 @@ use Telnyx\Networks\NetworkCreateParams;
 use Telnyx\Networks\NetworkDeleteResponse;
 use Telnyx\Networks\NetworkGetResponse;
 use Telnyx\Networks\NetworkListInterfacesParams;
-use Telnyx\Networks\NetworkListInterfacesParams\Filter as Filter1;
-use Telnyx\Networks\NetworkListInterfacesParams\Page as Page1;
 use Telnyx\Networks\NetworkListInterfacesResponse;
 use Telnyx\Networks\NetworkListParams;
 use Telnyx\Networks\NetworkListParams\Filter;
@@ -273,8 +271,8 @@ final class NetworksService implements NetworksContract
      *
      * List all Interfaces for a Network.
      *
-     * @param Filter1 $filter Consolidated filter parameter (deepObject style). Originally: filter[name], filter[type], filter[status]
-     * @param Page1 $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param Telnyx\Networks\NetworkListInterfacesParams\Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[name], filter[type], filter[status]
+     * @param Telnyx\Networks\NetworkListInterfacesParams\Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
      * @return NetworkListInterfacesResponse<HasRawResponse>
      *

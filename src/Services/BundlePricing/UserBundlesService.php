@@ -16,7 +16,6 @@ use Telnyx\BundlePricing\UserBundles\UserBundleListResourcesParams;
 use Telnyx\BundlePricing\UserBundles\UserBundleListResourcesResponse;
 use Telnyx\BundlePricing\UserBundles\UserBundleListResponse;
 use Telnyx\BundlePricing\UserBundles\UserBundleListUnusedParams;
-use Telnyx\BundlePricing\UserBundles\UserBundleListUnusedParams\Filter as Filter1;
 use Telnyx\BundlePricing\UserBundles\UserBundleListUnusedResponse;
 use Telnyx\BundlePricing\UserBundles\UserBundleNewResponse;
 use Telnyx\BundlePricing\UserBundles\UserBundleRetrieveParams;
@@ -309,7 +308,7 @@ final class UserBundlesService implements UserBundlesContract
      *
      * Returns all user bundles that aren't in use.
      *
-     * @param Filter1 $filter Consolidated filter parameter (deepObject style). Supports filtering by country_iso and resource. Examples: filter[country_iso]=US or filter[resource]=+15617819942
+     * @param Telnyx\BundlePricing\UserBundles\UserBundleListUnusedParams\Filter $filter Consolidated filter parameter (deepObject style). Supports filtering by country_iso and resource. Examples: filter[country_iso]=US or filter[resource]=+15617819942
      * @param string $authorizationBearer Authenticates the request with your Telnyx API V2 KEY
      *
      * @return UserBundleListUnusedResponse<HasRawResponse>

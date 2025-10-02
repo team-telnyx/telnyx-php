@@ -8,8 +8,6 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Networks\NetworkDeleteResponse;
 use Telnyx\Networks\NetworkGetResponse;
-use Telnyx\Networks\NetworkListInterfacesParams\Filter as Filter1;
-use Telnyx\Networks\NetworkListInterfacesParams\Page as Page1;
 use Telnyx\Networks\NetworkListInterfacesResponse;
 use Telnyx\Networks\NetworkListParams\Filter;
 use Telnyx\Networks\NetworkListParams\Page;
@@ -163,8 +161,8 @@ interface NetworksContract
     /**
      * @api
      *
-     * @param Filter1 $filter Consolidated filter parameter (deepObject style). Originally: filter[name], filter[type], filter[status]
-     * @param Page1 $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param Telnyx\Networks\NetworkListInterfacesParams\Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[name], filter[type], filter[status]
+     * @param Telnyx\Networks\NetworkListInterfacesParams\Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
      * @return NetworkListInterfacesResponse<HasRawResponse>
      *

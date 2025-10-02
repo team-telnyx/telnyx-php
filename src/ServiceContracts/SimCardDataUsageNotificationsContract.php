@@ -12,7 +12,6 @@ use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationDeleteRespo
 use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationGetResponse;
 use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationListResponse;
 use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationNewResponse;
-use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationUpdateParams\Threshold as Threshold1;
 use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationUpdateResponse;
 
 use const Telnyx\Core\OMIT as omit;
@@ -78,7 +77,7 @@ interface SimCardDataUsageNotificationsContract
      * @api
      *
      * @param string $simCardID the identification UUID of the related SIM card resource
-     * @param Threshold1 $threshold data usage threshold that will trigger the notification
+     * @param Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationUpdateParams\Threshold $threshold data usage threshold that will trigger the notification
      *
      * @return SimCardDataUsageNotificationUpdateResponse<HasRawResponse>
      *

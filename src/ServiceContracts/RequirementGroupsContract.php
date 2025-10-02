@@ -12,7 +12,6 @@ use Telnyx\RequirementGroups\RequirementGroupCreateParams\Action;
 use Telnyx\RequirementGroups\RequirementGroupCreateParams\PhoneNumberType;
 use Telnyx\RequirementGroups\RequirementGroupCreateParams\RegulatoryRequirement;
 use Telnyx\RequirementGroups\RequirementGroupListParams\Filter;
-use Telnyx\RequirementGroups\RequirementGroupUpdateParams\RegulatoryRequirement as RegulatoryRequirement1;
 
 use const Telnyx\Core\OMIT as omit;
 
@@ -83,7 +82,7 @@ interface RequirementGroupsContract
      * @api
      *
      * @param string $customerReference Reference for the customer
-     * @param list<RegulatoryRequirement1> $regulatoryRequirements
+     * @param list<Telnyx\RequirementGroups\RequirementGroupUpdateParams\RegulatoryRequirement> $regulatoryRequirements
      *
      * @return RequirementGroup<HasRawResponse>
      *
