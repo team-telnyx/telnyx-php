@@ -12,8 +12,6 @@ use Telnyx\Conferences\ConferenceListParams;
 use Telnyx\Conferences\ConferenceListParams\Filter;
 use Telnyx\Conferences\ConferenceListParams\Page;
 use Telnyx\Conferences\ConferenceListParticipantsParams;
-use Telnyx\Conferences\ConferenceListParticipantsParams\Filter as Filter1;
-use Telnyx\Conferences\ConferenceListParticipantsParams\Page as Page1;
 use Telnyx\Conferences\ConferenceListParticipantsResponse;
 use Telnyx\Conferences\ConferenceListResponse;
 use Telnyx\Conferences\ConferenceNewResponse;
@@ -223,8 +221,8 @@ final class ConferencesService implements ConferencesContract
      *
      * Lists conference participants
      *
-     * @param Filter1 $filter Consolidated filter parameter (deepObject style). Originally: filter[muted], filter[on_hold], filter[whispering]
-     * @param Page1 $page Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number]
+     * @param Telnyx\Conferences\ConferenceListParticipantsParams\Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[muted], filter[on_hold], filter[whispering]
+     * @param Telnyx\Conferences\ConferenceListParticipantsParams\Page $page Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number]
      *
      * @return ConferenceListParticipantsResponse<HasRawResponse>
      *

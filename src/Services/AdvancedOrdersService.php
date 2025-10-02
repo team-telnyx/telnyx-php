@@ -8,8 +8,6 @@ use Telnyx\AdvancedOrders\AdvancedOrderCreateParams;
 use Telnyx\AdvancedOrders\AdvancedOrderCreateParams\Feature;
 use Telnyx\AdvancedOrders\AdvancedOrderCreateParams\PhoneNumberType;
 use Telnyx\AdvancedOrders\AdvancedOrderUpdateRequirementGroupParams;
-use Telnyx\AdvancedOrders\AdvancedOrderUpdateRequirementGroupParams\Feature as Feature1;
-use Telnyx\AdvancedOrders\AdvancedOrderUpdateRequirementGroupParams\PhoneNumberType as PhoneNumberType1;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
@@ -167,8 +165,8 @@ final class AdvancedOrdersService implements AdvancedOrdersContract
      * @param string $comments
      * @param string $countryCode
      * @param string $customerReference
-     * @param list<Feature1|value-of<Feature1>> $features
-     * @param PhoneNumberType1|value-of<PhoneNumberType1> $phoneNumberType
+     * @param list<Telnyx\AdvancedOrders\AdvancedOrderUpdateRequirementGroupParams\Feature|value-of<Telnyx\AdvancedOrders\AdvancedOrderUpdateRequirementGroupParams\Feature>> $features
+     * @param Telnyx\AdvancedOrders\AdvancedOrderUpdateRequirementGroupParams\PhoneNumberType|value-of<Telnyx\AdvancedOrders\AdvancedOrderUpdateRequirementGroupParams\PhoneNumberType> $phoneNumberType
      * @param int $quantity
      * @param string $requirementGroupID The ID of the requirement group to associate with this advanced order
      *

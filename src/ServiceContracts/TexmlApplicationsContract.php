@@ -20,10 +20,6 @@ use Telnyx\TexmlApplications\TexmlApplicationListParams\Page;
 use Telnyx\TexmlApplications\TexmlApplicationListParams\Sort;
 use Telnyx\TexmlApplications\TexmlApplicationListResponse;
 use Telnyx\TexmlApplications\TexmlApplicationNewResponse;
-use Telnyx\TexmlApplications\TexmlApplicationUpdateParams\Inbound as Inbound1;
-use Telnyx\TexmlApplications\TexmlApplicationUpdateParams\Outbound as Outbound1;
-use Telnyx\TexmlApplications\TexmlApplicationUpdateParams\StatusCallbackMethod as StatusCallbackMethod1;
-use Telnyx\TexmlApplications\TexmlApplicationUpdateParams\VoiceMethod as VoiceMethod1;
 use Telnyx\TexmlApplications\TexmlApplicationUpdateResponse;
 
 use const Telnyx\Core\OMIT as omit;
@@ -119,13 +115,13 @@ interface TexmlApplicationsContract
      * @param DtmfType|value-of<DtmfType> $dtmfType Sets the type of DTMF digits sent from Telnyx to this Connection. Note that DTMF digits sent to Telnyx will be accepted in all formats.
      * @param bool $firstCommandTimeout specifies whether calls to phone numbers associated with this connection should hangup after timing out
      * @param int $firstCommandTimeoutSecs specifies how many seconds to wait before timing out a dial command
-     * @param Inbound1 $inbound
-     * @param Outbound1 $outbound
+     * @param Telnyx\TexmlApplications\TexmlApplicationUpdateParams\Inbound $inbound
+     * @param Telnyx\TexmlApplications\TexmlApplicationUpdateParams\Outbound $outbound
      * @param string $statusCallback URL for Telnyx to send requests to containing information about call progress events
-     * @param StatusCallbackMethod1|value-of<StatusCallbackMethod1> $statusCallbackMethod HTTP request method Telnyx should use when requesting the status_callback URL
+     * @param telnyx\TexmlApplications\TexmlApplicationUpdateParams\StatusCallbackMethod|value-of<Telnyx\TexmlApplications\TexmlApplicationUpdateParams\StatusCallbackMethod> $statusCallbackMethod HTTP request method Telnyx should use when requesting the status_callback URL
      * @param list<string> $tags tags associated with the Texml Application
      * @param string $voiceFallbackURL URL to which Telnyx will deliver your XML Translator webhooks if we get an error response from your voice_url
-     * @param VoiceMethod1|value-of<VoiceMethod1> $voiceMethod HTTP request method Telnyx will use to interact with your XML Translator webhooks. Either 'get' or 'post'.
+     * @param Telnyx\TexmlApplications\TexmlApplicationUpdateParams\VoiceMethod|value-of<Telnyx\TexmlApplications\TexmlApplicationUpdateParams\VoiceMethod> $voiceMethod HTTP request method Telnyx will use to interact with your XML Translator webhooks. Either 'get' or 'post'.
      *
      * @return TexmlApplicationUpdateResponse<HasRawResponse>
      *

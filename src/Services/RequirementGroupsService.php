@@ -17,7 +17,6 @@ use Telnyx\RequirementGroups\RequirementGroupCreateParams\RegulatoryRequirement;
 use Telnyx\RequirementGroups\RequirementGroupListParams;
 use Telnyx\RequirementGroups\RequirementGroupListParams\Filter;
 use Telnyx\RequirementGroups\RequirementGroupUpdateParams;
-use Telnyx\RequirementGroups\RequirementGroupUpdateParams\RegulatoryRequirement as RegulatoryRequirement1;
 use Telnyx\ServiceContracts\RequirementGroupsContract;
 
 use const Telnyx\Core\OMIT as omit;
@@ -136,7 +135,7 @@ final class RequirementGroupsService implements RequirementGroupsContract
      * Update requirement values in requirement group
      *
      * @param string $customerReference Reference for the customer
-     * @param list<RegulatoryRequirement1> $regulatoryRequirements
+     * @param list<Telnyx\RequirementGroups\RequirementGroupUpdateParams\RegulatoryRequirement> $regulatoryRequirements
      *
      * @return RequirementGroup<HasRawResponse>
      *

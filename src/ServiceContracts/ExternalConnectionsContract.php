@@ -16,8 +16,6 @@ use Telnyx\ExternalConnections\ExternalConnectionListParams\Page;
 use Telnyx\ExternalConnections\ExternalConnectionListResponse;
 use Telnyx\ExternalConnections\ExternalConnectionNewResponse;
 use Telnyx\ExternalConnections\ExternalConnectionUpdateLocationResponse;
-use Telnyx\ExternalConnections\ExternalConnectionUpdateParams\Inbound as Inbound1;
-use Telnyx\ExternalConnections\ExternalConnectionUpdateParams\Outbound as Outbound1;
 use Telnyx\ExternalConnections\ExternalConnectionUpdateResponse;
 use Telnyx\RequestOptions;
 
@@ -95,9 +93,9 @@ interface ExternalConnectionsContract
     /**
      * @api
      *
-     * @param Outbound1 $outbound
+     * @param Telnyx\ExternalConnections\ExternalConnectionUpdateParams\Outbound $outbound
      * @param bool $active specifies whether the connection can be used
-     * @param Inbound1 $inbound
+     * @param Telnyx\ExternalConnections\ExternalConnectionUpdateParams\Inbound $inbound
      * @param list<string> $tags tags associated with the connection
      * @param string|null $webhookEventFailoverURL The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      * @param string $webhookEventURL The URL where webhooks related to this connection will be sent. Must include a scheme, such as 'https'.

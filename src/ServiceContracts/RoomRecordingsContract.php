@@ -7,8 +7,6 @@ namespace Telnyx\ServiceContracts;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
-use Telnyx\RoomRecordings\RoomRecordingDeleteBulkParams\Filter as Filter1;
-use Telnyx\RoomRecordings\RoomRecordingDeleteBulkParams\Page as Page1;
 use Telnyx\RoomRecordings\RoomRecordingDeleteBulkResponse;
 use Telnyx\RoomRecordings\RoomRecordingGetResponse;
 use Telnyx\RoomRecordings\RoomRecordingListParams\Filter;
@@ -98,8 +96,8 @@ interface RoomRecordingsContract
     /**
      * @api
      *
-     * @param Filter1 $filter Consolidated filter parameter (deepObject style). Originally: filter[date_ended_at][eq], filter[date_ended_at][gte], filter[date_ended_at][lte], filter[date_started_at][eq], filter[date_started_at][gte], filter[date_started_at][lte], filter[room_id], filter[participant_id], filter[session_id], filter[status], filter[type], filter[duration_secs]
-     * @param Page1 $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param Telnyx\RoomRecordings\RoomRecordingDeleteBulkParams\Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[date_ended_at][eq], filter[date_ended_at][gte], filter[date_ended_at][lte], filter[date_started_at][eq], filter[date_started_at][gte], filter[date_started_at][lte], filter[room_id], filter[participant_id], filter[session_id], filter[status], filter[type], filter[duration_secs]
+     * @param Telnyx\RoomRecordings\RoomRecordingDeleteBulkParams\Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @return RoomRecordingDeleteBulkResponse<HasRawResponse>
      *

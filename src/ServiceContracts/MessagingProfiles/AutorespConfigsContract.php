@@ -11,7 +11,6 @@ use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigListParams\CreatedAt;
 use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigListParams\UpdatedAt;
 use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigListResponse;
 use Telnyx\MessagingProfiles\AutorespConfigs\AutoRespConfigResponse;
-use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigUpdateParams\Op as Op1;
 use Telnyx\RequestOptions;
 
 use const Telnyx\Core\OMIT as omit;
@@ -90,7 +89,7 @@ interface AutorespConfigsContract
      * @param string $profileID
      * @param string $countryCode
      * @param list<string> $keywords
-     * @param Op1|value-of<Op1> $op
+     * @param Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigUpdateParams\Op|value-of<Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigUpdateParams\Op> $op
      * @param string $respText
      *
      * @return AutoRespConfigResponse<HasRawResponse>

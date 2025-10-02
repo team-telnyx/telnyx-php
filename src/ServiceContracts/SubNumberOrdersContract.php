@@ -10,7 +10,6 @@ use Telnyx\NumberOrderPhoneNumbers\UpdateRegulatoryRequirement;
 use Telnyx\RequestOptions;
 use Telnyx\SubNumberOrders\SubNumberOrderCancelResponse;
 use Telnyx\SubNumberOrders\SubNumberOrderGetResponse;
-use Telnyx\SubNumberOrders\SubNumberOrderListParams\Filter as Filter1;
 use Telnyx\SubNumberOrders\SubNumberOrderListResponse;
 use Telnyx\SubNumberOrders\SubNumberOrderRetrieveParams\Filter;
 use Telnyx\SubNumberOrders\SubNumberOrderUpdateRequirementGroupResponse;
@@ -83,7 +82,7 @@ interface SubNumberOrdersContract
     /**
      * @api
      *
-     * @param Filter1 $filter Consolidated filter parameter (deepObject style). Originally: filter[status], filter[order_request_id], filter[country_code], filter[phone_number_type], filter[phone_numbers_count]
+     * @param Telnyx\SubNumberOrders\SubNumberOrderListParams\Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[status], filter[order_request_id], filter[country_code], filter[phone_number_type], filter[phone_numbers_count]
      *
      * @return SubNumberOrderListResponse<HasRawResponse>
      *

@@ -17,7 +17,6 @@ use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigListResponse;
 use Telnyx\MessagingProfiles\AutorespConfigs\AutoRespConfigResponse;
 use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigRetrieveParams;
 use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigUpdateParams;
-use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigUpdateParams\Op as Op1;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MessagingProfiles\AutorespConfigsContract;
 
@@ -154,7 +153,7 @@ final class AutorespConfigsService implements AutorespConfigsContract
      * @param string $profileID
      * @param string $countryCode
      * @param list<string> $keywords
-     * @param Op1|value-of<Op1> $op
+     * @param Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigUpdateParams\Op|value-of<Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigUpdateParams\Op> $op
      * @param string $respText
      *
      * @return AutoRespConfigResponse<HasRawResponse>

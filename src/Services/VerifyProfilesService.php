@@ -22,9 +22,6 @@ use Telnyx\VerifyProfiles\VerifyProfileListParams\Page;
 use Telnyx\VerifyProfiles\VerifyProfileListResponse;
 use Telnyx\VerifyProfiles\VerifyProfileNewTemplateResponse;
 use Telnyx\VerifyProfiles\VerifyProfileUpdateParams;
-use Telnyx\VerifyProfiles\VerifyProfileUpdateParams\Call as Call1;
-use Telnyx\VerifyProfiles\VerifyProfileUpdateParams\Flashcall as Flashcall1;
-use Telnyx\VerifyProfiles\VerifyProfileUpdateParams\SMS as SMS1;
 use Telnyx\VerifyProfiles\VerifyProfileUpdateTemplateParams;
 use Telnyx\VerifyProfiles\VerifyProfileUpdateTemplateResponse;
 
@@ -149,11 +146,11 @@ final class VerifyProfilesService implements VerifyProfilesContract
      *
      * Update Verify profile
      *
-     * @param Call1 $call
-     * @param Flashcall1 $flashcall
+     * @param Telnyx\VerifyProfiles\VerifyProfileUpdateParams\Call $call
+     * @param Telnyx\VerifyProfiles\VerifyProfileUpdateParams\Flashcall $flashcall
      * @param string $language
      * @param string $name
-     * @param SMS1 $sms
+     * @param Telnyx\VerifyProfiles\VerifyProfileUpdateParams\SMS $sms
      * @param string $webhookFailoverURL
      * @param string $webhookURL
      *

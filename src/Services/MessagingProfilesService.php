@@ -15,15 +15,12 @@ use Telnyx\MessagingProfiles\MessagingProfileListParams;
 use Telnyx\MessagingProfiles\MessagingProfileListParams\Filter;
 use Telnyx\MessagingProfiles\MessagingProfileListParams\Page;
 use Telnyx\MessagingProfiles\MessagingProfileListPhoneNumbersParams;
-use Telnyx\MessagingProfiles\MessagingProfileListPhoneNumbersParams\Page as Page1;
 use Telnyx\MessagingProfiles\MessagingProfileListPhoneNumbersResponse;
 use Telnyx\MessagingProfiles\MessagingProfileListResponse;
 use Telnyx\MessagingProfiles\MessagingProfileListShortCodesParams;
-use Telnyx\MessagingProfiles\MessagingProfileListShortCodesParams\Page as Page2;
 use Telnyx\MessagingProfiles\MessagingProfileListShortCodesResponse;
 use Telnyx\MessagingProfiles\MessagingProfileNewResponse;
 use Telnyx\MessagingProfiles\MessagingProfileUpdateParams;
-use Telnyx\MessagingProfiles\MessagingProfileUpdateParams\WebhookAPIVersion as WebhookAPIVersion1;
 use Telnyx\MessagingProfiles\MessagingProfileUpdateResponse;
 use Telnyx\MessagingProfiles\NumberPoolSettings;
 use Telnyx\MessagingProfiles\URLShortenerSettings;
@@ -208,7 +205,7 @@ final class MessagingProfilesService implements MessagingProfilesContract
      *
      * To disable this feature, set the object field to `null`.
      * @param string $v1Secret secret used to authenticate with v1 endpoints
-     * @param WebhookAPIVersion1|value-of<WebhookAPIVersion1> $webhookAPIVersion determines which webhook format will be used, Telnyx API v1, v2, or a legacy 2010-04-01 format
+     * @param Telnyx\MessagingProfiles\MessagingProfileUpdateParams\WebhookAPIVersion|value-of<Telnyx\MessagingProfiles\MessagingProfileUpdateParams\WebhookAPIVersion> $webhookAPIVersion determines which webhook format will be used, Telnyx API v1, v2, or a legacy 2010-04-01 format
      * @param string|null $webhookFailoverURL the failover URL where webhooks related to this messaging profile will be sent if sending to the primary URL fails
      * @param string|null $webhookURL the URL where webhooks related to this messaging profile will be sent
      * @param list<string> $whitelistedDestinations Destinations to which the messaging profile is allowed to send. The elements in the list must be valid ISO 3166-1 alpha-2 country codes. If set to `["*"]`, all destinations will be allowed.
@@ -380,7 +377,7 @@ final class MessagingProfilesService implements MessagingProfilesContract
      *
      * List phone numbers associated with a messaging profile
      *
-     * @param Page1 $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param Telnyx\MessagingProfiles\MessagingProfileListPhoneNumbersParams\Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
      * @return MessagingProfileListPhoneNumbersResponse<HasRawResponse>
      *
@@ -430,7 +427,7 @@ final class MessagingProfilesService implements MessagingProfilesContract
      *
      * List short codes associated with a messaging profile
      *
-     * @param Page2 $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param Telnyx\MessagingProfiles\MessagingProfileListShortCodesParams\Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
      * @return MessagingProfileListShortCodesResponse<HasRawResponse>
      *

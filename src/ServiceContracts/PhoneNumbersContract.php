@@ -12,9 +12,6 @@ use Telnyx\PhoneNumbers\PhoneNumberListParams\Filter;
 use Telnyx\PhoneNumbers\PhoneNumberListParams\Page;
 use Telnyx\PhoneNumbers\PhoneNumberListParams\Sort;
 use Telnyx\PhoneNumbers\PhoneNumberListResponse;
-use Telnyx\PhoneNumbers\PhoneNumberSlimListParams\Filter as Filter1;
-use Telnyx\PhoneNumbers\PhoneNumberSlimListParams\Page as Page1;
-use Telnyx\PhoneNumbers\PhoneNumberSlimListParams\Sort as Sort1;
 use Telnyx\PhoneNumbers\PhoneNumberSlimListResponse;
 use Telnyx\PhoneNumbers\PhoneNumberUpdateResponse;
 use Telnyx\RequestOptions;
@@ -148,11 +145,11 @@ interface PhoneNumbersContract
     /**
      * @api
      *
-     * @param Filter1 $filter Consolidated filter parameter (deepObject style). Originally: filter[tag], filter[phone_number], filter[status], filter[country_iso_alpha2], filter[connection_id], filter[voice.connection_name], filter[voice.usage_payment_method], filter[billing_group_id], filter[emergency_address_id], filter[customer_reference], filter[number_type], filter[source]
+     * @param Telnyx\PhoneNumbers\PhoneNumberSlimListParams\Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[tag], filter[phone_number], filter[status], filter[country_iso_alpha2], filter[connection_id], filter[voice.connection_name], filter[voice.usage_payment_method], filter[billing_group_id], filter[emergency_address_id], filter[customer_reference], filter[number_type], filter[source]
      * @param bool $includeConnection include the connection associated with the phone number
      * @param bool $includeTags include the tags associated with the phone number
-     * @param Page1 $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
-     * @param Sort1|value-of<Sort1> $sort Specifies the sort order for results. If not given, results are sorted by created_at in descending order.
+     * @param Telnyx\PhoneNumbers\PhoneNumberSlimListParams\Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param Telnyx\PhoneNumbers\PhoneNumberSlimListParams\Sort|value-of<Telnyx\PhoneNumbers\PhoneNumberSlimListParams\Sort> $sort Specifies the sort order for results. If not given, results are sorted by created_at in descending order.
      *
      * @return PhoneNumberSlimListResponse<HasRawResponse>
      *

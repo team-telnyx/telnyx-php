@@ -15,11 +15,6 @@ use Telnyx\Calls\Actions\ActionAnswerParams\StreamTrack;
 use Telnyx\Calls\Actions\ActionAnswerParams\WebhookURLMethod;
 use Telnyx\Calls\Actions\ActionAnswerResponse;
 use Telnyx\Calls\Actions\ActionBridgeParams\MuteDtmf;
-use Telnyx\Calls\Actions\ActionBridgeParams\Record as Record1;
-use Telnyx\Calls\Actions\ActionBridgeParams\RecordChannels as RecordChannels1;
-use Telnyx\Calls\Actions\ActionBridgeParams\RecordFormat as RecordFormat1;
-use Telnyx\Calls\Actions\ActionBridgeParams\RecordTrack as RecordTrack1;
-use Telnyx\Calls\Actions\ActionBridgeParams\RecordTrim as RecordTrim1;
 use Telnyx\Calls\Actions\ActionBridgeParams\Ringtone;
 use Telnyx\Calls\Actions\ActionBridgeResponse;
 use Telnyx\Calls\Actions\ActionEnqueueResponse;
@@ -40,11 +35,7 @@ use Telnyx\Calls\Actions\ActionRejectResponse;
 use Telnyx\Calls\Actions\ActionResumeRecordingResponse;
 use Telnyx\Calls\Actions\ActionSendDtmfResponse;
 use Telnyx\Calls\Actions\ActionSendSipInfoResponse;
-use Telnyx\Calls\Actions\ActionSpeakParams\Language as Language1;
-use Telnyx\Calls\Actions\ActionSpeakParams\PayloadType as PayloadType1;
-use Telnyx\Calls\Actions\ActionSpeakParams\ServiceLevel as ServiceLevel1;
 use Telnyx\Calls\Actions\ActionSpeakResponse;
-use Telnyx\Calls\Actions\ActionStartAIAssistantParams\Assistant as Assistant1;
 use Telnyx\Calls\Actions\ActionStartAIAssistantResponse;
 use Telnyx\Calls\Actions\ActionStartForkingParams\StreamType;
 use Telnyx\Calls\Actions\ActionStartForkingResponse;
@@ -63,7 +54,6 @@ use Telnyx\Calls\Actions\ActionStartSiprecParams\SiprecTrack;
 use Telnyx\Calls\Actions\ActionStartSiprecParams\SipTransport;
 use Telnyx\Calls\Actions\ActionStartSiprecResponse;
 use Telnyx\Calls\Actions\ActionStartStreamingParams\StreamBidirectionalSamplingRate;
-use Telnyx\Calls\Actions\ActionStartStreamingParams\StreamTrack as StreamTrack1;
 use Telnyx\Calls\Actions\ActionStartStreamingResponse;
 use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngine;
 use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\Deepgram;
@@ -71,7 +61,6 @@ use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfi
 use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\Telnyx;
 use Telnyx\Calls\Actions\ActionStartTranscriptionResponse;
 use Telnyx\Calls\Actions\ActionStopAIAssistantResponse;
-use Telnyx\Calls\Actions\ActionStopForkingParams\StreamType as StreamType1;
 use Telnyx\Calls\Actions\ActionStopForkingResponse;
 use Telnyx\Calls\Actions\ActionStopGatherResponse;
 use Telnyx\Calls\Actions\ActionStopNoiseSuppressionResponse;
@@ -85,14 +74,7 @@ use Telnyx\Calls\Actions\ActionSwitchSupervisorRoleResponse;
 use Telnyx\Calls\Actions\ActionTransferParams\AnsweringMachineDetection;
 use Telnyx\Calls\Actions\ActionTransferParams\AnsweringMachineDetectionConfig;
 use Telnyx\Calls\Actions\ActionTransferParams\MediaEncryption;
-use Telnyx\Calls\Actions\ActionTransferParams\MuteDtmf as MuteDtmf1;
-use Telnyx\Calls\Actions\ActionTransferParams\Record as Record2;
-use Telnyx\Calls\Actions\ActionTransferParams\RecordChannels as RecordChannels2;
-use Telnyx\Calls\Actions\ActionTransferParams\RecordFormat as RecordFormat2;
-use Telnyx\Calls\Actions\ActionTransferParams\RecordTrack as RecordTrack2;
-use Telnyx\Calls\Actions\ActionTransferParams\RecordTrim as RecordTrim2;
 use Telnyx\Calls\Actions\ActionTransferParams\SipTransportProtocol;
-use Telnyx\Calls\Actions\ActionTransferParams\WebhookURLMethod as WebhookURLMethod1;
 use Telnyx\Calls\Actions\ActionTransferResponse;
 use Telnyx\Calls\Actions\ActionUpdateClientStateResponse;
 use Telnyx\Calls\Actions\ElevenLabsVoiceSettings;
@@ -209,14 +191,14 @@ interface ActionsContract
      * @param string $parkAfterUnbridge Specifies behavior after the bridge ends (i.e. the opposite leg either hangs up or is transferred). If supplied with the value `self`, the current leg will be parked after unbridge. If not set, the default behavior is to hang up the leg.
      * @param bool $playRingtone specifies whether to play a ringtone if the call you want to bridge with has not yet been answered
      * @param string $queue The name of the queue you want to bridge with, can't be used together with call_control_id parameter or video_room_id parameter. Bridging with a queue means bridging with the first call in the queue. The call will always be removed from the queue regardless of whether bridging succeeds. Returns an error when the queue is empty.
-     * @param Record1|value-of<Record1> $record Start recording automatically after an event. Disabled by default.
-     * @param RecordChannels1|value-of<RecordChannels1> $recordChannels defines which channel should be recorded ('single' or 'dual') when `record` is specified
+     * @param Telnyx\Calls\Actions\ActionBridgeParams\Record|value-of<Telnyx\Calls\Actions\ActionBridgeParams\Record> $record Start recording automatically after an event. Disabled by default.
+     * @param Telnyx\Calls\Actions\ActionBridgeParams\RecordChannels|value-of<Telnyx\Calls\Actions\ActionBridgeParams\RecordChannels> $recordChannels defines which channel should be recorded ('single' or 'dual') when `record` is specified
      * @param string $recordCustomFileName The custom recording file name to be used instead of the default `call_leg_id`. Telnyx will still add a Unix timestamp suffix.
-     * @param RecordFormat1|value-of<RecordFormat1> $recordFormat defines the format of the recording ('wav' or 'mp3') when `record` is specified
+     * @param Telnyx\Calls\Actions\ActionBridgeParams\RecordFormat|value-of<Telnyx\Calls\Actions\ActionBridgeParams\RecordFormat> $recordFormat defines the format of the recording ('wav' or 'mp3') when `record` is specified
      * @param int $recordMaxLength Defines the maximum length for the recording in seconds when `record` is specified. The minimum value is 0. The maximum value is 43200. The default value is 0 (infinite).
      * @param int $recordTimeoutSecs The number of seconds that Telnyx will wait for the recording to be stopped if silence is detected when `record` is specified. The timer only starts when the speech is detected. Please note that call transcription is used to detect silence and the related charge will be applied. The minimum value is 0. The default value is 0 (infinite).
-     * @param RecordTrack1|value-of<RecordTrack1> $recordTrack The audio track to be recorded. Can be either `both`, `inbound` or `outbound`. If only single track is specified (`inbound`, `outbound`), `channels` configuration is ignored and it will be recorded as mono (single channel).
-     * @param RecordTrim1|value-of<RecordTrim1> $recordTrim when set to `trim-silence`, silence will be removed from the beginning and end of the recording
+     * @param Telnyx\Calls\Actions\ActionBridgeParams\RecordTrack|value-of<Telnyx\Calls\Actions\ActionBridgeParams\RecordTrack> $recordTrack The audio track to be recorded. Can be either `both`, `inbound` or `outbound`. If only single track is specified (`inbound`, `outbound`), `channels` configuration is ignored and it will be recorded as mono (single channel).
+     * @param Telnyx\Calls\Actions\ActionBridgeParams\RecordTrim|value-of<Telnyx\Calls\Actions\ActionBridgeParams\RecordTrim> $recordTrim when set to `trim-silence`, silence will be removed from the beginning and end of the recording
      * @param Ringtone|value-of<Ringtone> $ringtone Specifies which country ringtone to play when `play_ringtone` is set to `true`. If not set, the US ringtone will be played.
      * @param string $videoRoomContext The additional parameter that will be passed to the video conference. It is a text field and the user can decide how to use it. For example, you can set the participant name or pass JSON text. It can be used only with video_room_id parameter.
      * @param string $videoRoomID the ID of the video room you want to bridge with, can't be used together with call_control_id parameter or queue parameter
@@ -832,9 +814,9 @@ interface ActionsContract
      * For service_level basic, you may define the gender of the speaker (male or female).
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
-     * @param Language1|value-of<Language1> $language The language you want spoken. This parameter is ignored when a `Polly.*` voice is specified.
-     * @param PayloadType1|value-of<PayloadType1> $payloadType The type of the provided payload. The payload can either be plain text, or Speech Synthesis Markup Language (SSML).
-     * @param ServiceLevel1|value-of<ServiceLevel1> $serviceLevel This parameter impacts speech quality, language options and payload types. When using `basic`, only the `en-US` language and payload type `text` are allowed.
+     * @param Telnyx\Calls\Actions\ActionSpeakParams\Language|value-of<Telnyx\Calls\Actions\ActionSpeakParams\Language> $language The language you want spoken. This parameter is ignored when a `Polly.*` voice is specified.
+     * @param Telnyx\Calls\Actions\ActionSpeakParams\PayloadType|value-of<Telnyx\Calls\Actions\ActionSpeakParams\PayloadType> $payloadType The type of the provided payload. The payload can either be plain text, or Speech Synthesis Markup Language (SSML).
+     * @param Telnyx\Calls\Actions\ActionSpeakParams\ServiceLevel|value-of<Telnyx\Calls\Actions\ActionSpeakParams\ServiceLevel> $serviceLevel This parameter impacts speech quality, language options and payload types. When using `basic`, only the `en-US` language and payload type `text` are allowed.
      * @param string $stop When specified, it stops the current audio being played. Specify `current` to stop the current audio being played, and to play the next file in the queue. Specify `all` to stop the current audio file being played and to also clear all audio files from the queue.
      * @param mixed|ElevenLabsVoiceSettings|TelnyxVoiceSettings $voiceSettings The settings associated with the voice selected
      *
@@ -874,7 +856,7 @@ interface ActionsContract
     /**
      * @api
      *
-     * @param Assistant1 $assistant AI Assistant configuration
+     * @param Telnyx\Calls\Actions\ActionStartAIAssistantParams\Assistant $assistant AI Assistant configuration
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      * @param string $greeting Text that will be played when the assistant starts, if none then nothing will be played when the assistant starts. The greeting can be text for any voice or SSML for `AWS.Polly.<voice_id>` voices. There is a 3,000 character limit.
@@ -1163,7 +1145,7 @@ interface ActionsContract
      * @param StreamBidirectionalSamplingRate|value-of<StreamBidirectionalSamplingRate> $streamBidirectionalSamplingRate audio sampling rate
      * @param StreamBidirectionalTargetLegs|value-of<StreamBidirectionalTargetLegs> $streamBidirectionalTargetLegs specifies which call legs should receive the bidirectional stream audio
      * @param StreamCodec|value-of<StreamCodec> $streamCodec Specifies the codec to be used for the streamed audio. When set to 'default' or when transcoding is not possible, the codec from the call will be used.
-     * @param StreamTrack1|value-of<StreamTrack1> $streamTrack specifies which track should be streamed
+     * @param Telnyx\Calls\Actions\ActionStartStreamingParams\StreamTrack|value-of<Telnyx\Calls\Actions\ActionStartStreamingParams\StreamTrack> $streamTrack specifies which track should be streamed
      * @param string $streamURL the destination WebSocket address where the stream is going to be delivered
      *
      * @return ActionStartStreamingResponse<HasRawResponse>
@@ -1276,7 +1258,7 @@ interface ActionsContract
      *
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
-     * @param StreamType1|value-of<StreamType1> $streamType Optionally specify a `stream_type`. This should match the `stream_type` that was used in `fork_start` command to properly stop the fork.
+     * @param Telnyx\Calls\Actions\ActionStopForkingParams\StreamType|value-of<Telnyx\Calls\Actions\ActionStopForkingParams\StreamType> $streamType Optionally specify a `stream_type`. This should match the `stream_type` that was used in `fork_start` command to properly stop the fork.
      *
      * @return ActionStopForkingResponse<HasRawResponse>
      *
@@ -1582,16 +1564,16 @@ interface ActionsContract
      * @param string $fromDisplayName The `from_display_name` string to be used as the caller id name (SIP From Display Name) presented to the destination (`to` number). The string should have a maximum of 128 characters, containing only letters, numbers, spaces, and -_~!.+ special characters. If ommited, the display name will be the same as the number in the `from` field.
      * @param MediaEncryption|value-of<MediaEncryption> $mediaEncryption defines whether media should be encrypted on the new call leg
      * @param string $mediaName The media_name of a file to be played back when the transfer destination answers before bridging the call. The media_name must point to a file previously uploaded to api.telnyx.com/v2/media by the same user/organization. The file must either be a WAV or MP3 file.
-     * @param MuteDtmf1|value-of<MuteDtmf1> $muteDtmf When enabled, DTMF tones are not passed to the call participant. The webhooks containing the DTMF information will be sent.
+     * @param Telnyx\Calls\Actions\ActionTransferParams\MuteDtmf|value-of<Telnyx\Calls\Actions\ActionTransferParams\MuteDtmf> $muteDtmf When enabled, DTMF tones are not passed to the call participant. The webhooks containing the DTMF information will be sent.
      * @param string $parkAfterUnbridge Specifies behavior after the bridge ends (i.e. the opposite leg either hangs up or is transferred). If supplied with the value `self`, the current leg will be parked after unbridge. If not set, the default behavior is to hang up the leg.
-     * @param Record2|value-of<Record2> $record Start recording automatically after an event. Disabled by default.
-     * @param RecordChannels2|value-of<RecordChannels2> $recordChannels defines which channel should be recorded ('single' or 'dual') when `record` is specified
+     * @param Telnyx\Calls\Actions\ActionTransferParams\Record|value-of<Telnyx\Calls\Actions\ActionTransferParams\Record> $record Start recording automatically after an event. Disabled by default.
+     * @param Telnyx\Calls\Actions\ActionTransferParams\RecordChannels|value-of<Telnyx\Calls\Actions\ActionTransferParams\RecordChannels> $recordChannels defines which channel should be recorded ('single' or 'dual') when `record` is specified
      * @param string $recordCustomFileName The custom recording file name to be used instead of the default `call_leg_id`. Telnyx will still add a Unix timestamp suffix.
-     * @param RecordFormat2|value-of<RecordFormat2> $recordFormat defines the format of the recording ('wav' or 'mp3') when `record` is specified
+     * @param Telnyx\Calls\Actions\ActionTransferParams\RecordFormat|value-of<Telnyx\Calls\Actions\ActionTransferParams\RecordFormat> $recordFormat defines the format of the recording ('wav' or 'mp3') when `record` is specified
      * @param int $recordMaxLength Defines the maximum length for the recording in seconds when `record` is specified. The minimum value is 0. The maximum value is 43200. The default value is 0 (infinite).
      * @param int $recordTimeoutSecs The number of seconds that Telnyx will wait for the recording to be stopped if silence is detected when `record` is specified. The timer only starts when the speech is detected. Please note that call transcription is used to detect silence and the related charge will be applied. The minimum value is 0. The default value is 0 (infinite).
-     * @param RecordTrack2|value-of<RecordTrack2> $recordTrack The audio track to be recorded. Can be either `both`, `inbound` or `outbound`. If only single track is specified (`inbound`, `outbound`), `channels` configuration is ignored and it will be recorded as mono (single channel).
-     * @param RecordTrim2|value-of<RecordTrim2> $recordTrim when set to `trim-silence`, silence will be removed from the beginning and end of the recording
+     * @param Telnyx\Calls\Actions\ActionTransferParams\RecordTrack|value-of<Telnyx\Calls\Actions\ActionTransferParams\RecordTrack> $recordTrack The audio track to be recorded. Can be either `both`, `inbound` or `outbound`. If only single track is specified (`inbound`, `outbound`), `channels` configuration is ignored and it will be recorded as mono (single channel).
+     * @param Telnyx\Calls\Actions\ActionTransferParams\RecordTrim|value-of<Telnyx\Calls\Actions\ActionTransferParams\RecordTrim> $recordTrim when set to `trim-silence`, silence will be removed from the beginning and end of the recording
      * @param string $sipAuthPassword SIP Authentication password used for SIP challenges
      * @param string $sipAuthUsername SIP Authentication username used for SIP challenges
      * @param list<SipHeader> $sipHeaders SIP headers to be added to the SIP INVITE. Currently only User-to-User header is supported.
@@ -1601,7 +1583,7 @@ interface ActionsContract
      * @param int $timeLimitSecs Sets the maximum duration of a Call Control Leg in seconds. If the time limit is reached, the call will hangup and a `call.hangup` webhook with a `hangup_cause` of `time_limit` will be sent. For example, by setting a time limit of 120 seconds, a Call Leg will be automatically terminated two minutes after being answered. The default time limit is 14400 seconds or 4 hours and this is also the maximum allowed call length.
      * @param int $timeoutSecs The number of seconds that Telnyx will wait for the call to be answered by the destination to which it is being transferred. If the timeout is reached before an answer is received, the call will hangup and a `call.hangup` webhook with a `hangup_cause` of `timeout` will be sent. Minimum value is 5 seconds. Maximum value is 600 seconds.
      * @param string $webhookURL use this field to override the URL for which Telnyx will send subsequent webhooks to for this call
-     * @param WebhookURLMethod1|value-of<WebhookURLMethod1> $webhookURLMethod HTTP request type used for `webhook_url`
+     * @param Telnyx\Calls\Actions\ActionTransferParams\WebhookURLMethod|value-of<Telnyx\Calls\Actions\ActionTransferParams\WebhookURLMethod> $webhookURLMethod HTTP request type used for `webhook_url`
      *
      * @return ActionTransferResponse<HasRawResponse>
      *

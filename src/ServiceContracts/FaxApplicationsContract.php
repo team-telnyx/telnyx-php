@@ -16,8 +16,6 @@ use Telnyx\FaxApplications\FaxApplicationListParams\Page;
 use Telnyx\FaxApplications\FaxApplicationListParams\Sort;
 use Telnyx\FaxApplications\FaxApplicationListResponse;
 use Telnyx\FaxApplications\FaxApplicationNewResponse;
-use Telnyx\FaxApplications\FaxApplicationUpdateParams\Inbound as Inbound1;
-use Telnyx\FaxApplications\FaxApplicationUpdateParams\Outbound as Outbound1;
 use Telnyx\FaxApplications\FaxApplicationUpdateResponse;
 use Telnyx\RequestOptions;
 
@@ -102,8 +100,8 @@ interface FaxApplicationsContract
      * @param bool $active specifies whether the connection can be used
      * @param AnchorsiteOverride|value-of<AnchorsiteOverride> $anchorsiteOverride `Latency` directs Telnyx to route media through the site with the lowest round-trip time to the user's connection. Telnyx calculates this time using ICMP ping messages. This can be disabled by specifying a site to handle all media.
      * @param string|null $faxEmailRecipient Specifies an email address where faxes sent to this application will be forwarded to (as pdf or tiff attachments)
-     * @param Inbound1 $inbound
-     * @param Outbound1 $outbound
+     * @param Telnyx\FaxApplications\FaxApplicationUpdateParams\Inbound $inbound
+     * @param Telnyx\FaxApplications\FaxApplicationUpdateParams\Outbound $outbound
      * @param list<string> $tags tags associated with the Fax Application
      * @param string|null $webhookEventFailoverURL The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
