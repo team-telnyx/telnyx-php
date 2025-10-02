@@ -7,9 +7,10 @@ namespace Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging\MessagingDeleteResponse\Data;
 
 /**
- * @phpstan-type messaging_delete_response = array{data?: MdrDetailReportResponse}
+ * @phpstan-type messaging_delete_response = array{data?: Data}
  * When used in a response, this type parameter can define a $rawResponse property.
  * @template TRawResponse of object = object{}
  *
@@ -21,7 +22,7 @@ final class MessagingDeleteResponse implements BaseModel
     use SdkModel;
 
     #[Api(optional: true)]
-    public ?MdrDetailReportResponse $data;
+    public ?Data $data;
 
     public function __construct()
     {
@@ -33,7 +34,7 @@ final class MessagingDeleteResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?MdrDetailReportResponse $data = null): self
+    public static function with(?Data $data = null): self
     {
         $obj = new self;
 
@@ -42,7 +43,7 @@ final class MessagingDeleteResponse implements BaseModel
         return $obj;
     }
 
-    public function withData(MdrDetailReportResponse $data): self
+    public function withData(Data $data): self
     {
         $obj = clone $this;
         $obj->data = $data;

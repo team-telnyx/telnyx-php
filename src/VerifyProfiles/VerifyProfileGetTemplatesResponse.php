@@ -7,13 +7,12 @@ namespace Telnyx\VerifyProfiles;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\VerifyProfiles\VerifyProfileGetTemplatesResponse\Data;
 
 /**
  * A list of Verify profile message templates.
  *
- * @phpstan-type verify_profile_get_templates_response = array{
- *   data: list<VerifyProfileMessageTemplateResponse>
- * }
+ * @phpstan-type verify_profile_get_templates_response = array{data: list<Data>}
  * When used in a response, this type parameter can define a $rawResponse property.
  * @template TRawResponse of object = object{}
  *
@@ -24,8 +23,8 @@ final class VerifyProfileGetTemplatesResponse implements BaseModel
     /** @use SdkModel<verify_profile_get_templates_response> */
     use SdkModel;
 
-    /** @var list<VerifyProfileMessageTemplateResponse> $data */
-    #[Api(list: VerifyProfileMessageTemplateResponse::class)]
+    /** @var list<Data> $data */
+    #[Api(list: Data::class)]
     public array $data;
 
     /**
@@ -52,7 +51,7 @@ final class VerifyProfileGetTemplatesResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<VerifyProfileMessageTemplateResponse> $data
+     * @param list<Data> $data
      */
     public static function with(array $data): self
     {
@@ -64,7 +63,7 @@ final class VerifyProfileGetTemplatesResponse implements BaseModel
     }
 
     /**
-     * @param list<VerifyProfileMessageTemplateResponse> $data
+     * @param list<Data> $data
      */
     public function withData(array $data): self
     {

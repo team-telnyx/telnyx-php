@@ -6,7 +6,7 @@ namespace Telnyx\ServiceContracts\Legacy\Reporting\BatchDetailRecords;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
-use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter;
+use Telnyx\Legacy\Reporting\BatchDetailRecords\Voice\VoiceCreateParams\Filter;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Voice\VoiceDeleteResponse;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Voice\VoiceGetFieldsResponse;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Voice\VoiceGetResponse;
