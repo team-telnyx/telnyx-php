@@ -7,9 +7,10 @@ namespace Telnyx\Legacy\Reporting\UsageReports\Voice;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Legacy\Reporting\UsageReports\Voice\VoiceGetResponse\Data;
 
 /**
- * @phpstan-type voice_get_response = array{data?: CdrUsageReportResponseLegacy}
+ * @phpstan-type voice_get_response = array{data?: Data}
  * When used in a response, this type parameter can define a $rawResponse property.
  * @template TRawResponse of object = object{}
  *
@@ -24,7 +25,7 @@ final class VoiceGetResponse implements BaseModel
      * Legacy V2 CDR usage report response.
      */
     #[Api(optional: true)]
-    public ?CdrUsageReportResponseLegacy $data;
+    public ?Data $data;
 
     public function __construct()
     {
@@ -36,7 +37,7 @@ final class VoiceGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?CdrUsageReportResponseLegacy $data = null): self
+    public static function with(?Data $data = null): self
     {
         $obj = new self;
 
@@ -48,7 +49,7 @@ final class VoiceGetResponse implements BaseModel
     /**
      * Legacy V2 CDR usage report response.
      */
-    public function withData(CdrUsageReportResponseLegacy $data): self
+    public function withData(Data $data): self
     {
         $obj = clone $this;
         $obj->data = $data;

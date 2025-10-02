@@ -7,12 +7,11 @@ namespace Telnyx\Legacy\Reporting\UsageReports\Messaging;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Legacy\Reporting\UsageReports\Messaging\MessagingListResponse\Data;
 use Telnyx\Legacy\Reporting\UsageReports\Messaging\MessagingListResponse\Meta;
 
 /**
- * @phpstan-type messaging_list_response = array{
- *   data?: list<MdrUsageReportResponseLegacy>, meta?: Meta
- * }
+ * @phpstan-type messaging_list_response = array{data?: list<Data>, meta?: Meta}
  * When used in a response, this type parameter can define a $rawResponse property.
  * @template TRawResponse of object = object{}
  *
@@ -23,8 +22,8 @@ final class MessagingListResponse implements BaseModel
     /** @use SdkModel<messaging_list_response> */
     use SdkModel;
 
-    /** @var list<MdrUsageReportResponseLegacy>|null $data */
-    #[Api(list: MdrUsageReportResponseLegacy::class, optional: true)]
+    /** @var list<Data>|null $data */
+    #[Api(list: Data::class, optional: true)]
     public ?array $data;
 
     #[Api(optional: true)]
@@ -40,7 +39,7 @@ final class MessagingListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<MdrUsageReportResponseLegacy> $data
+     * @param list<Data> $data
      */
     public static function with(?array $data = null, ?Meta $meta = null): self
     {
@@ -53,7 +52,7 @@ final class MessagingListResponse implements BaseModel
     }
 
     /**
-     * @param list<MdrUsageReportResponseLegacy> $data
+     * @param list<Data> $data
      */
     public function withData(array $data): self
     {

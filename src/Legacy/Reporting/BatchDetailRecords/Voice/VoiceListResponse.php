@@ -7,12 +7,11 @@ namespace Telnyx\Legacy\Reporting\BatchDetailRecords\Voice;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Legacy\Reporting\BatchDetailRecords\Voice\VoiceListResponse\Data;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Voice\VoiceListResponse\Meta;
 
 /**
- * @phpstan-type voice_list_response = array{
- *   data?: list<CdrDetailedReqResponse>, meta?: Meta
- * }
+ * @phpstan-type voice_list_response = array{data?: list<Data>, meta?: Meta}
  * When used in a response, this type parameter can define a $rawResponse property.
  * @template TRawResponse of object = object{}
  *
@@ -23,8 +22,8 @@ final class VoiceListResponse implements BaseModel
     /** @use SdkModel<voice_list_response> */
     use SdkModel;
 
-    /** @var list<CdrDetailedReqResponse>|null $data */
-    #[Api(list: CdrDetailedReqResponse::class, optional: true)]
+    /** @var list<Data>|null $data */
+    #[Api(list: Data::class, optional: true)]
     public ?array $data;
 
     #[Api(optional: true)]
@@ -40,7 +39,7 @@ final class VoiceListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<CdrDetailedReqResponse> $data
+     * @param list<Data> $data
      */
     public static function with(?array $data = null, ?Meta $meta = null): self
     {
@@ -53,7 +52,7 @@ final class VoiceListResponse implements BaseModel
     }
 
     /**
-     * @param list<CdrDetailedReqResponse> $data
+     * @param list<Data> $data
      */
     public function withData(array $data): self
     {

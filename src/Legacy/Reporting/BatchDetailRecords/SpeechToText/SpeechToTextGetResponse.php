@@ -7,11 +7,10 @@ namespace Telnyx\Legacy\Reporting\BatchDetailRecords\SpeechToText;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Legacy\Reporting\BatchDetailRecords\SpeechToText\SpeechToTextGetResponse\Data;
 
 /**
- * @phpstan-type speech_to_text_get_response = array{
- *   data?: SttDetailReportResponse
- * }
+ * @phpstan-type speech_to_text_get_response = array{data?: Data}
  * When used in a response, this type parameter can define a $rawResponse property.
  * @template TRawResponse of object = object{}
  *
@@ -23,7 +22,7 @@ final class SpeechToTextGetResponse implements BaseModel
     use SdkModel;
 
     #[Api(optional: true)]
-    public ?SttDetailReportResponse $data;
+    public ?Data $data;
 
     public function __construct()
     {
@@ -35,7 +34,7 @@ final class SpeechToTextGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?SttDetailReportResponse $data = null): self
+    public static function with(?Data $data = null): self
     {
         $obj = new self;
 
@@ -44,7 +43,7 @@ final class SpeechToTextGetResponse implements BaseModel
         return $obj;
     }
 
-    public function withData(SttDetailReportResponse $data): self
+    public function withData(Data $data): self
     {
         $obj = clone $this;
         $obj->data = $data;
