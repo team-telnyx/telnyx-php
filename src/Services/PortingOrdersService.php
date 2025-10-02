@@ -26,7 +26,6 @@ use Telnyx\PortingOrders\PortingOrderPhoneNumberConfiguration;
 use Telnyx\PortingOrders\PortingOrderRetrieveLoaTemplateParams;
 use Telnyx\PortingOrders\PortingOrderRetrieveParams;
 use Telnyx\PortingOrders\PortingOrderRetrieveRequirementsParams;
-use Telnyx\PortingOrders\PortingOrderRetrieveRequirementsParams\Page as Page1;
 use Telnyx\PortingOrders\PortingOrderUpdateParams;
 use Telnyx\PortingOrders\PortingOrderUpdateParams\ActivationSettings;
 use Telnyx\PortingOrders\PortingOrderUpdateParams\Messaging;
@@ -534,7 +533,7 @@ final class PortingOrdersService implements PortingOrdersContract
      *
      * Returns a list of all requirements based on country/number type for this porting order.
      *
-     * @param Page1 $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param Telnyx\PortingOrders\PortingOrderRetrieveRequirementsParams\Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @return PortingOrderGetRequirementsResponse<HasRawResponse>
      *

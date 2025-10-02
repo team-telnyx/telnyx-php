@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Connections\ConnectionGetResponse;
-use Telnyx\Connections\ConnectionListActiveCallsParams\Page as Page1;
 use Telnyx\Connections\ConnectionListActiveCallsResponse;
 use Telnyx\Connections\ConnectionListParams\Filter;
 use Telnyx\Connections\ConnectionListParams\Page;
@@ -90,7 +89,7 @@ interface ConnectionsContract
     /**
      * @api
      *
-     * @param Page1 $page Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number]
+     * @param Telnyx\Connections\ConnectionListActiveCallsParams\Page $page Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number]
      *
      * @return ConnectionListActiveCallsResponse<HasRawResponse>
      *

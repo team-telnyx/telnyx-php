@@ -12,7 +12,6 @@ use Telnyx\Portouts\PortoutListParams;
 use Telnyx\Portouts\PortoutListParams\Filter;
 use Telnyx\Portouts\PortoutListParams\Page;
 use Telnyx\Portouts\PortoutListRejectionCodesParams;
-use Telnyx\Portouts\PortoutListRejectionCodesParams\Filter as Filter1;
 use Telnyx\Portouts\PortoutListRejectionCodesResponse;
 use Telnyx\Portouts\PortoutListResponse;
 use Telnyx\Portouts\PortoutUpdateStatusParams;
@@ -154,7 +153,7 @@ final class PortoutsService implements PortoutsContract
      *
      * Given a port-out ID, list rejection codes that are eligible for that port-out
      *
-     * @param Filter1 $filter Consolidated filter parameter (deepObject style). Originally: filter[code], filter[code][in]
+     * @param Telnyx\Portouts\PortoutListRejectionCodesParams\Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[code], filter[code][in]
      *
      * @return PortoutListRejectionCodesResponse<HasRawResponse>
      *

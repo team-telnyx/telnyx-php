@@ -8,7 +8,6 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReportCreateParams\AggregationType;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReportDeleteResponse;
-use Telnyx\Reports\MdrUsageReports\MdrUsageReportFetchSyncParams\AggregationType as AggregationType1;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReportFetchSyncResponse;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReportGetResponse;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReportListParams\Page;
@@ -135,7 +134,7 @@ interface MdrUsageReportsContract
     /**
      * @api
      *
-     * @param AggregationType1|value-of<AggregationType1> $aggregationType
+     * @param Telnyx\Reports\MdrUsageReports\MdrUsageReportFetchSyncParams\AggregationType|value-of<Telnyx\Reports\MdrUsageReports\MdrUsageReportFetchSyncParams\AggregationType> $aggregationType
      * @param \DateTimeInterface $endDate
      * @param list<string> $profiles
      * @param \DateTimeInterface $startDate

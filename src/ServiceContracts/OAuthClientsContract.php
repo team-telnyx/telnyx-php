@@ -13,7 +13,6 @@ use Telnyx\OAuthClients\OAuthClientListParams\FilterAllowedGrantTypesContains;
 use Telnyx\OAuthClients\OAuthClientListParams\FilterClientType;
 use Telnyx\OAuthClients\OAuthClientListResponse;
 use Telnyx\OAuthClients\OAuthClientNewResponse;
-use Telnyx\OAuthClients\OAuthClientUpdateParams\AllowedGrantType as AllowedGrantType1;
 use Telnyx\OAuthClients\OAuthClientUpdateResponse;
 use Telnyx\RequestOptions;
 
@@ -93,7 +92,7 @@ interface OAuthClientsContract
     /**
      * @api
      *
-     * @param list<AllowedGrantType1|value-of<AllowedGrantType1>> $allowedGrantTypes List of allowed OAuth grant types
+     * @param list<Telnyx\OAuthClients\OAuthClientUpdateParams\AllowedGrantType|value-of<Telnyx\OAuthClients\OAuthClientUpdateParams\AllowedGrantType>> $allowedGrantTypes List of allowed OAuth grant types
      * @param list<string> $allowedScopes List of allowed OAuth scopes
      * @param string $logoUri URL of the client logo
      * @param string $name The name of the OAuth client

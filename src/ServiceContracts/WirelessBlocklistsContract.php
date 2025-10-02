@@ -12,7 +12,6 @@ use Telnyx\WirelessBlocklists\WirelessBlocklistDeleteResponse;
 use Telnyx\WirelessBlocklists\WirelessBlocklistGetResponse;
 use Telnyx\WirelessBlocklists\WirelessBlocklistListResponse;
 use Telnyx\WirelessBlocklists\WirelessBlocklistNewResponse;
-use Telnyx\WirelessBlocklists\WirelessBlocklistUpdateParams\Type as Type1;
 use Telnyx\WirelessBlocklists\WirelessBlocklistUpdateResponse;
 
 use const Telnyx\Core\OMIT as omit;
@@ -80,7 +79,7 @@ interface WirelessBlocklistsContract
      * @api
      *
      * @param string $name the name of the Wireless Blocklist
-     * @param Type1|value-of<Type1> $type the type of wireless blocklist
+     * @param Telnyx\WirelessBlocklists\WirelessBlocklistUpdateParams\Type|value-of<Telnyx\WirelessBlocklists\WirelessBlocklistUpdateParams\Type> $type the type of wireless blocklist
      * @param list<string> $values Values to block. The values here depend on the `type` of Wireless Blocklist.
      *
      * @return WirelessBlocklistUpdateResponse<HasRawResponse>

@@ -9,7 +9,6 @@ use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Portouts\PortoutGetResponse;
 use Telnyx\Portouts\PortoutListParams\Filter;
 use Telnyx\Portouts\PortoutListParams\Page;
-use Telnyx\Portouts\PortoutListRejectionCodesParams\Filter as Filter1;
 use Telnyx\Portouts\PortoutListRejectionCodesResponse;
 use Telnyx\Portouts\PortoutListResponse;
 use Telnyx\Portouts\PortoutUpdateStatusParams\Status;
@@ -78,7 +77,7 @@ interface PortoutsContract
     /**
      * @api
      *
-     * @param Filter1 $filter Consolidated filter parameter (deepObject style). Originally: filter[code], filter[code][in]
+     * @param Telnyx\Portouts\PortoutListRejectionCodesParams\Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[code], filter[code][in]
      *
      * @return PortoutListRejectionCodesResponse<HasRawResponse>
      *

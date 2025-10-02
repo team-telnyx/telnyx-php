@@ -13,7 +13,6 @@ use Telnyx\CustomStorageCredentials\CustomStorageCredentialCreateParams\Backend;
 use Telnyx\CustomStorageCredentials\CustomStorageCredentialGetResponse;
 use Telnyx\CustomStorageCredentials\CustomStorageCredentialNewResponse;
 use Telnyx\CustomStorageCredentials\CustomStorageCredentialUpdateParams;
-use Telnyx\CustomStorageCredentials\CustomStorageCredentialUpdateParams\Backend as Backend1;
 use Telnyx\CustomStorageCredentials\CustomStorageCredentialUpdateResponse;
 use Telnyx\CustomStorageCredentials\GcsConfigurationData;
 use Telnyx\CustomStorageCredentials\S3ConfigurationData;
@@ -123,7 +122,7 @@ final class CustomStorageCredentialsService implements CustomStorageCredentialsC
      *
      * Updates a stored custom credentials configuration.
      *
-     * @param Backend1|value-of<Backend1> $backend
+     * @param Telnyx\CustomStorageCredentials\CustomStorageCredentialUpdateParams\Backend|value-of<Telnyx\CustomStorageCredentials\CustomStorageCredentialUpdateParams\Backend> $backend
      * @param GcsConfigurationData|S3ConfigurationData|AzureConfigurationData $configuration
      *
      * @return CustomStorageCredentialUpdateResponse<HasRawResponse>

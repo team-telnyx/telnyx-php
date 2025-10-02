@@ -17,7 +17,6 @@ use Telnyx\Texml\Calls\CallInitiateParams\RecordingChannels;
 use Telnyx\Texml\Calls\CallInitiateParams\RecordingStatusCallbackMethod;
 use Telnyx\Texml\Calls\CallInitiateParams\RecordingTrack;
 use Telnyx\Texml\Calls\CallInitiateParams\StatusCallbackEvent;
-use Telnyx\Texml\Calls\CallInitiateParams\StatusCallbackMethod as StatusCallbackMethod1;
 use Telnyx\Texml\Calls\CallInitiateParams\Trim;
 use Telnyx\Texml\Calls\CallInitiateParams\URLMethod;
 use Telnyx\Texml\Calls\CallInitiateResponse;
@@ -141,7 +140,7 @@ final class CallsService implements CallsContract
      * @param string $sipAuthUsername the username to use for SIP authentication
      * @param string $statusCallback URL destination for Telnyx to send status callback events to for the call
      * @param StatusCallbackEvent|value-of<StatusCallbackEvent> $statusCallbackEvent The call events for which Telnyx should send a webhook. Multiple events can be defined when separated by a space.
-     * @param StatusCallbackMethod1|value-of<StatusCallbackMethod1> $statusCallbackMethod HTTP request type used for `StatusCallback`
+     * @param telnyx\Texml\Calls\CallInitiateParams\StatusCallbackMethod|value-of<Telnyx\Texml\Calls\CallInitiateParams\StatusCallbackMethod> $statusCallbackMethod HTTP request type used for `StatusCallback`
      * @param Trim|value-of<Trim> $trim Whether to trim any leading and trailing silence from the recording. Defaults to `trim-silence`.
      * @param string $url the URL from which Telnyx will retrieve the TeXML call instructions
      * @param URLMethod|value-of<URLMethod> $urlMethod HTTP request type used for `Url`. The default value is inherited from TeXML Application setting.

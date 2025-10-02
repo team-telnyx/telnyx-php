@@ -19,7 +19,6 @@ use Telnyx\SimCardGroups\SimCardGroupListResponse;
 use Telnyx\SimCardGroups\SimCardGroupNewResponse;
 use Telnyx\SimCardGroups\SimCardGroupRetrieveParams;
 use Telnyx\SimCardGroups\SimCardGroupUpdateParams;
-use Telnyx\SimCardGroups\SimCardGroupUpdateParams\DataLimit as DataLimit1;
 use Telnyx\SimCardGroups\SimCardGroupUpdateResponse;
 
 use const Telnyx\Core\OMIT as omit;
@@ -144,7 +143,7 @@ final class SimCardGroupsService implements SimCardGroupsContract
      *
      * Updates a SIM card group
      *
-     * @param DataLimit1 $dataLimit upper limit on the amount of data the SIM cards, within the group, can use
+     * @param Telnyx\SimCardGroups\SimCardGroupUpdateParams\DataLimit $dataLimit upper limit on the amount of data the SIM cards, within the group, can use
      * @param string $name a user friendly name for the SIM card group
      *
      * @return SimCardGroupUpdateResponse<HasRawResponse>

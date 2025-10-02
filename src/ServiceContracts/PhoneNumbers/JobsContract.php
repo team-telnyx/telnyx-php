@@ -12,7 +12,6 @@ use Telnyx\PhoneNumbers\Jobs\JobListParams\Filter;
 use Telnyx\PhoneNumbers\Jobs\JobListParams\Page;
 use Telnyx\PhoneNumbers\Jobs\JobListParams\Sort;
 use Telnyx\PhoneNumbers\Jobs\JobListResponse;
-use Telnyx\PhoneNumbers\Jobs\JobUpdateBatchParams\Filter as Filter1;
 use Telnyx\PhoneNumbers\Jobs\JobUpdateBatchResponse;
 use Telnyx\PhoneNumbers\Jobs\JobUpdateEmergencySettingsBatchResponse;
 use Telnyx\PhoneNumbers\Voice\UpdateVoiceSettings;
@@ -111,7 +110,7 @@ interface JobsContract
      * @api
      *
      * @param list<string> $phoneNumbers Array of phone number ids and/or phone numbers in E164 format to update. This parameter is required if no filter parameters are provided. If you want to update specific numbers rather than all numbers matching a filter, you must use this parameter. Each item must be either a valid phone number ID or a phone number in E164 format (e.g., '+13127367254').
-     * @param Filter1 $filter Consolidated filter parameter (deepObject style). Originally: filter[has_bundle], filter[tag], filter[connection_id], filter[phone_number], filter[status], filter[voice.connection_name], filter[voice.usage_payment_method], filter[billing_group_id], filter[emergency_address_id], filter[customer_reference]
+     * @param Telnyx\PhoneNumbers\Jobs\JobUpdateBatchParams\Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[has_bundle], filter[tag], filter[connection_id], filter[phone_number], filter[status], filter[voice.connection_name], filter[voice.usage_payment_method], filter[billing_group_id], filter[emergency_address_id], filter[customer_reference]
      * @param string $billingGroupID identifies the billing group associated with the phone number
      * @param string $connectionID identifies the connection associated with the phone number
      * @param string $customerReference a customer reference string for customer look ups

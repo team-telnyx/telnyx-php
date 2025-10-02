@@ -13,12 +13,6 @@ use Telnyx\Porting\LoaConfigurations\LoaConfigurationGetResponse;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationListParams\Page;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationListResponse;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationNewResponse;
-use Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Address as Address2;
-use Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Contact as Contact2;
-use Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Logo as Logo2;
-use Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Address as Address1;
-use Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Contact as Contact1;
-use Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Logo as Logo1;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateResponse;
 use Telnyx\RequestOptions;
 
@@ -90,10 +84,10 @@ interface LoaConfigurationsContract
     /**
      * @api
      *
-     * @param Address1 $address the address of the company
+     * @param Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Address $address the address of the company
      * @param string $companyName The name of the company
-     * @param Contact1 $contact the contact information of the company
-     * @param Logo1 $logo The logo of the LOA configuration
+     * @param Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Contact $contact the contact information of the company
+     * @param Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Logo $logo The logo of the LOA configuration
      * @param string $name The name of the LOA configuration
      *
      * @return LoaConfigurationUpdateResponse<HasRawResponse>
@@ -177,10 +171,10 @@ interface LoaConfigurationsContract
     /**
      * @api
      *
-     * @param Address2 $address the address of the company
+     * @param Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Address $address the address of the company
      * @param string $companyName The name of the company
-     * @param Contact2 $contact the contact information of the company
-     * @param Logo2 $logo The logo of the LOA configuration
+     * @param Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Contact $contact the contact information of the company
+     * @param Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Logo $logo The logo of the LOA configuration
      * @param string $name The name of the LOA configuration
      *
      * @throws APIException
