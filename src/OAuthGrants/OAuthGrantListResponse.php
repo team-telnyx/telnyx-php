@@ -7,11 +7,12 @@ namespace Telnyx\OAuthGrants;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\OAuthGrants\OAuthGrantListResponse\Data;
 use Telnyx\OAuthGrants\OAuthGrantListResponse\Meta;
 
 /**
- * @phpstan-type oauth_grant_list_response = array{data?: list<Data>, meta?: Meta}
+ * @phpstan-type oauth_grant_list_response = array{
+ *   data?: list<OAuthGrant>, meta?: Meta
+ * }
  * When used in a response, this type parameter can define a $rawResponse property.
  * @template TRawResponse of object = object{}
  *
@@ -22,8 +23,8 @@ final class OAuthGrantListResponse implements BaseModel
     /** @use SdkModel<oauth_grant_list_response> */
     use SdkModel;
 
-    /** @var list<Data>|null $data */
-    #[Api(list: Data::class, optional: true)]
+    /** @var list<OAuthGrant>|null $data */
+    #[Api(list: OAuthGrant::class, optional: true)]
     public ?array $data;
 
     #[Api(optional: true)]
@@ -39,7 +40,7 @@ final class OAuthGrantListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data> $data
+     * @param list<OAuthGrant> $data
      */
     public static function with(?array $data = null, ?Meta $meta = null): self
     {
@@ -52,7 +53,7 @@ final class OAuthGrantListResponse implements BaseModel
     }
 
     /**
-     * @param list<Data> $data
+     * @param list<OAuthGrant> $data
      */
     public function withData(array $data): self
     {
