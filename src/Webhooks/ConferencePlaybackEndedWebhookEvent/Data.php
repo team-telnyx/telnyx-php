@@ -71,9 +71,9 @@ final class Data implements BaseModel
         $obj = new self;
 
         null !== $id && $obj->id = $id;
-        null !== $eventType && $obj->eventType = $eventType instanceof EventType ? $eventType->value : $eventType;
+        null !== $eventType && $obj['eventType'] = $eventType;
         null !== $payload && $obj->payload = $payload;
-        null !== $recordType && $obj->recordType = $recordType instanceof RecordType ? $recordType->value : $recordType;
+        null !== $recordType && $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -97,7 +97,7 @@ final class Data implements BaseModel
     public function withEventType(EventType|string $eventType): self
     {
         $obj = clone $this;
-        $obj->eventType = $eventType instanceof EventType ? $eventType->value : $eventType;
+        $obj['eventType'] = $eventType;
 
         return $obj;
     }
@@ -118,7 +118,7 @@ final class Data implements BaseModel
     public function withRecordType(RecordType|string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType instanceof RecordType ? $recordType->value : $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }

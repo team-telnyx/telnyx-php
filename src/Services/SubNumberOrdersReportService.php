@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SubNumberOrdersReportContract;
 use Telnyx\SubNumberOrdersReport\SubNumberOrdersReportCreateParams;
@@ -34,8 +33,6 @@ final class SubNumberOrdersReportService implements SubNumberOrdersReportContrac
      * @param string $customerReference Filter by customer reference
      * @param string $orderRequestID Filter by specific order request ID
      * @param Status|value-of<Status> $status Filter by order status
-     *
-     * @return SubNumberOrdersReportNewResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -65,8 +62,6 @@ final class SubNumberOrdersReportService implements SubNumberOrdersReportContrac
      *
      * @param array<string, mixed> $params
      *
-     * @return SubNumberOrdersReportNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function createRaw(
@@ -93,29 +88,10 @@ final class SubNumberOrdersReportService implements SubNumberOrdersReportContrac
      *
      * Get the status and details of a sub number orders report.
      *
-     * @return SubNumberOrdersReportGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $reportID,
-        ?RequestOptions $requestOptions = null
-    ): SubNumberOrdersReportGetResponse {
-        $params = [];
-
-        return $this->retrieveRaw($reportID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return SubNumberOrdersReportGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $reportID,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): SubNumberOrdersReportGetResponse {
         // @phpstan-ignore-next-line;
@@ -136,21 +112,6 @@ final class SubNumberOrdersReportService implements SubNumberOrdersReportContrac
      */
     public function download(
         string $reportID,
-        ?RequestOptions $requestOptions = null
-    ): string {
-        $params = [];
-
-        return $this->downloadRaw($reportID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @throws APIException
-     */
-    public function downloadRaw(
-        string $reportID,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): string {
         // @phpstan-ignore-next-line;

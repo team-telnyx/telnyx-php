@@ -6,21 +6,21 @@ namespace Telnyx\Campaign;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type campaign_deactivate_response = array{
  *   time: float, message?: string, recordType?: string
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class CampaignDeactivateResponse implements BaseModel
+final class CampaignDeactivateResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<campaign_deactivate_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     #[Api]
     public float $time;

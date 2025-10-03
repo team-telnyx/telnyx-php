@@ -109,9 +109,9 @@ final class RequirementGroupCreateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->action = $action instanceof Action ? $action->value : $action;
+        $obj['action'] = $action;
         $obj->countryCode = $countryCode;
-        $obj->phoneNumberType = $phoneNumberType instanceof PhoneNumberType ? $phoneNumberType->value : $phoneNumberType;
+        $obj['phoneNumberType'] = $phoneNumberType;
 
         null !== $customerReference && $obj->customerReference = $customerReference;
         null !== $regulatoryRequirements && $obj->regulatoryRequirements = $regulatoryRequirements;
@@ -125,7 +125,7 @@ final class RequirementGroupCreateParams implements BaseModel
     public function withAction(Action|string $action): self
     {
         $obj = clone $this;
-        $obj->action = $action instanceof Action ? $action->value : $action;
+        $obj['action'] = $action;
 
         return $obj;
     }
@@ -148,7 +148,7 @@ final class RequirementGroupCreateParams implements BaseModel
         PhoneNumberType|string $phoneNumberType
     ): self {
         $obj = clone $this;
-        $obj->phoneNumberType = $phoneNumberType instanceof PhoneNumberType ? $phoneNumberType->value : $phoneNumberType;
+        $obj['phoneNumberType'] = $phoneNumberType;
 
         return $obj;
     }

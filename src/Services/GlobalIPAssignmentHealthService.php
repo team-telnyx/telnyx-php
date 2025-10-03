@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthGetResponse;
 use Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthRetrieveParams;
 use Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthRetrieveParams\Filter;
@@ -29,8 +28,6 @@ final class GlobalIPAssignmentHealthService implements GlobalIPAssignmentHealthC
      *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[global_ip_id][in], filter[global_ip_assignment_id][in]
      *
-     * @return GlobalIPAssignmentHealthGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
@@ -46,8 +43,6 @@ final class GlobalIPAssignmentHealthService implements GlobalIPAssignmentHealthC
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return GlobalIPAssignmentHealthGetResponse<HasRawResponse>
      *
      * @throws APIException
      */

@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PortingPhoneNumbers\PortingPhoneNumberListParams;
 use Telnyx\PortingPhoneNumbers\PortingPhoneNumberListParams\Filter;
 use Telnyx\PortingPhoneNumbers\PortingPhoneNumberListParams\Page;
@@ -31,8 +30,6 @@ final class PortingPhoneNumbersService implements PortingPhoneNumbersContract
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[porting_order_status]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
-     * @return PortingPhoneNumberListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -49,8 +46,6 @@ final class PortingPhoneNumbersService implements PortingPhoneNumbersContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return PortingPhoneNumberListResponse<HasRawResponse>
      *
      * @throws APIException
      */

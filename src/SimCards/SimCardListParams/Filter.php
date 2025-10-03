@@ -71,7 +71,7 @@ final class Filter implements BaseModel
         $obj = new self;
 
         null !== $iccid && $obj->iccid = $iccid;
-        null !== $status && $obj->status = array_map(fn ($v) => $v instanceof Status ? $v->value : $v, $status);
+        null !== $status && $obj['status'] = $status;
         null !== $tags && $obj->tags = $tags;
 
         return $obj;
@@ -96,7 +96,7 @@ final class Filter implements BaseModel
     public function withStatus(array $status): self
     {
         $obj = clone $this;
-        $obj->status = array_map(fn ($v) => $v instanceof Status ? $v->value : $v, $status);
+        $obj['status'] = $status;
 
         return $obj;
     }

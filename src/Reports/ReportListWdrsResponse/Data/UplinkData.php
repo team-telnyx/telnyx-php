@@ -50,7 +50,7 @@ final class UplinkData implements BaseModel
         $obj = new self;
 
         null !== $amount && $obj->amount = $amount;
-        null !== $unit && $obj->unit = $unit instanceof Unit ? $unit->value : $unit;
+        null !== $unit && $obj['unit'] = $unit;
 
         return $obj;
     }
@@ -74,7 +74,7 @@ final class UplinkData implements BaseModel
     public function withUnit(Unit|string $unit): self
     {
         $obj = clone $this;
-        $obj->unit = $unit instanceof Unit ? $unit->value : $unit;
+        $obj['unit'] = $unit;
 
         return $obj;
     }

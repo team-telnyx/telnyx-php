@@ -7,7 +7,9 @@ namespace Telnyx\AI\Assistants\Tests;
 use Telnyx\AI\Assistants\Tests\TestSuites\Runs\Meta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * Paginated list of assistant tests with metadata.
@@ -16,15 +18,13 @@ use Telnyx\Core\Contracts\BaseModel;
  * metadata for implementing pagination controls in the UI.
  *
  * @phpstan-type test_list_response = array{data: list<AssistantTest>, meta: Meta}
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class TestListResponse implements BaseModel
+final class TestListResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<test_list_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /**
      * Array of assistant test objects for the current page.

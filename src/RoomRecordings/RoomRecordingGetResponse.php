@@ -6,20 +6,20 @@ namespace Telnyx\RoomRecordings;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\RoomRecordings\RoomRecordingGetResponse\Data;
 
 /**
  * @phpstan-type room_recording_get_response = array{data?: Data}
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class RoomRecordingGetResponse implements BaseModel
+final class RoomRecordingGetResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<room_recording_get_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     #[Api(optional: true)]
     public ?Data $data;

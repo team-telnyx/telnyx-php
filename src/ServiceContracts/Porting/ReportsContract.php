@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\Porting;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Porting\Reports\ExportPortingOrdersCsvReport;
 use Telnyx\Porting\Reports\ReportCreateParams\ReportType;
 use Telnyx\Porting\Reports\ReportGetResponse;
@@ -25,8 +24,6 @@ interface ReportsContract
      * @param ExportPortingOrdersCsvReport $params the parameters for generating a porting orders CSV report
      * @param ReportType|value-of<ReportType> $reportType Identifies the type of report
      *
-     * @return ReportNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -40,8 +37,6 @@ interface ReportsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return ReportNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function createRaw(
@@ -51,8 +46,6 @@ interface ReportsContract
 
     /**
      * @api
-     *
-     * @return ReportGetResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -64,23 +57,8 @@ interface ReportsContract
     /**
      * @api
      *
-     * @return ReportGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
-        ?RequestOptions $requestOptions = null
-    ): ReportGetResponse;
-
-    /**
-     * @api
-     *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[report_type], filter[status]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
-     *
-     * @return ReportListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -94,8 +72,6 @@ interface ReportsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ReportListResponse<HasRawResponse>
      *
      * @throws APIException
      */

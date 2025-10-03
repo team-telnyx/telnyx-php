@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\CustomStorageCredentials\AzureConfigurationData;
 use Telnyx\CustomStorageCredentials\CustomStorageCredentialCreateParams\Backend;
 use Telnyx\CustomStorageCredentials\CustomStorageCredentialGetResponse;
@@ -23,8 +22,6 @@ interface CustomStorageCredentialsContract
      * @param Backend|value-of<Backend> $backend
      * @param GcsConfigurationData|S3ConfigurationData|AzureConfigurationData $configuration
      *
-     * @return CustomStorageCredentialNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -39,8 +36,6 @@ interface CustomStorageCredentialsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return CustomStorageCredentialNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function createRaw(
@@ -52,8 +47,6 @@ interface CustomStorageCredentialsContract
     /**
      * @api
      *
-     * @return CustomStorageCredentialGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
@@ -64,23 +57,8 @@ interface CustomStorageCredentialsContract
     /**
      * @api
      *
-     * @return CustomStorageCredentialGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $connectionID,
-        mixed $params,
-        ?RequestOptions $requestOptions = null,
-    ): CustomStorageCredentialGetResponse;
-
-    /**
-     * @api
-     *
      * @param Telnyx\CustomStorageCredentials\CustomStorageCredentialUpdateParams\Backend|value-of<Telnyx\CustomStorageCredentials\CustomStorageCredentialUpdateParams\Backend> $backend
      * @param GcsConfigurationData|S3ConfigurationData|AzureConfigurationData $configuration
-     *
-     * @return CustomStorageCredentialUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -95,8 +73,6 @@ interface CustomStorageCredentialsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return CustomStorageCredentialUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -114,16 +90,5 @@ interface CustomStorageCredentialsContract
     public function delete(
         string $connectionID,
         ?RequestOptions $requestOptions = null
-    ): mixed;
-
-    /**
-     * @api
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $connectionID,
-        mixed $params,
-        ?RequestOptions $requestOptions = null,
     ): mixed;
 }

@@ -6,19 +6,19 @@ namespace Telnyx\Verifications;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type verification_get_response = array{data: Verification}
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class VerificationGetResponse implements BaseModel
+final class VerificationGetResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<verification_get_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     #[Api]
     public Verification $data;

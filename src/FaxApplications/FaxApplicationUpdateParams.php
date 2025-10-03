@@ -152,7 +152,7 @@ final class FaxApplicationUpdateParams implements BaseModel
         $obj->webhookEventURL = $webhookEventURL;
 
         null !== $active && $obj->active = $active;
-        null !== $anchorsiteOverride && $obj->anchorsiteOverride = $anchorsiteOverride instanceof AnchorsiteOverride ? $anchorsiteOverride->value : $anchorsiteOverride;
+        null !== $anchorsiteOverride && $obj['anchorsiteOverride'] = $anchorsiteOverride;
         null !== $faxEmailRecipient && $obj->faxEmailRecipient = $faxEmailRecipient;
         null !== $inbound && $obj->inbound = $inbound;
         null !== $outbound && $obj->outbound = $outbound;
@@ -205,7 +205,7 @@ final class FaxApplicationUpdateParams implements BaseModel
         AnchorsiteOverride|string $anchorsiteOverride
     ): self {
         $obj = clone $this;
-        $obj->anchorsiteOverride = $anchorsiteOverride instanceof AnchorsiteOverride ? $anchorsiteOverride->value : $anchorsiteOverride;
+        $obj['anchorsiteOverride'] = $anchorsiteOverride;
 
         return $obj;
     }

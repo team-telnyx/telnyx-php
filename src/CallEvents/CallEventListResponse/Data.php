@@ -126,8 +126,8 @@ final class Data implements BaseModel
         $obj->eventTimestamp = $eventTimestamp;
         $obj->metadata = $metadata;
         $obj->name = $name;
-        $obj->recordType = $recordType instanceof RecordType ? $recordType->value : $recordType;
-        $obj->type = $type instanceof Type ? $type->value : $type;
+        $obj['recordType'] = $recordType;
+        $obj['type'] = $type;
 
         return $obj;
     }
@@ -193,7 +193,7 @@ final class Data implements BaseModel
     public function withRecordType(RecordType|string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType instanceof RecordType ? $recordType->value : $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -206,7 +206,7 @@ final class Data implements BaseModel
     public function withType(Type|string $type): self
     {
         $obj = clone $this;
-        $obj->type = $type instanceof Type ? $type->value : $type;
+        $obj['type'] = $type;
 
         return $obj;
     }

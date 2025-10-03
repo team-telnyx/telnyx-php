@@ -160,7 +160,7 @@ final class Participant implements BaseModel
         null !== $endConferenceOnExit && $obj->endConferenceOnExit = $endConferenceOnExit;
         null !== $hold && $obj->hold = $hold;
         null !== $muted && $obj->muted = $muted;
-        null !== $status && $obj->status = $status instanceof Status ? $status->value : $status;
+        null !== $status && $obj['status'] = $status;
         null !== $uri && $obj->uri = $uri;
 
         return $obj;
@@ -307,7 +307,7 @@ final class Participant implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

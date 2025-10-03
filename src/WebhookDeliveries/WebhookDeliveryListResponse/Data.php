@@ -112,7 +112,7 @@ final class Data implements BaseModel
         null !== $finishedAt && $obj->finishedAt = $finishedAt;
         null !== $recordType && $obj->recordType = $recordType;
         null !== $startedAt && $obj->startedAt = $startedAt;
-        null !== $status && $obj->status = $status instanceof Status ? $status->value : $status;
+        null !== $status && $obj['status'] = $status;
         null !== $userID && $obj->userID = $userID;
         null !== $webhook && $obj->webhook = $webhook;
 
@@ -184,7 +184,7 @@ final class Data implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

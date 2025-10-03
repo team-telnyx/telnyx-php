@@ -8,21 +8,21 @@ use Telnyx\AvailablePhoneNumbers\AvailablePhoneNumberListResponse\Data;
 use Telnyx\AvailablePhoneNumbers\AvailablePhoneNumberListResponse\Meta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type available_phone_number_list_response = array{
  *   data?: list<Data>, meta?: Meta
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class AvailablePhoneNumberListResponse implements BaseModel
+final class AvailablePhoneNumberListResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<available_phone_number_list_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /** @var list<Data>|null $data */
     #[Api(list: Data::class, optional: true)]

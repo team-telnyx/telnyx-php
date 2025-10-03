@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\VerificationsContract;
 use Telnyx\Services\Verifications\ActionsService;
@@ -45,30 +44,11 @@ final class VerificationsService implements VerificationsContract
      *
      * Retrieve verification
      *
-     * @return VerificationGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $verificationID,
         ?RequestOptions $requestOptions = null
-    ): VerificationGetResponse {
-        $params = [];
-
-        return $this->retrieveRaw($verificationID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return VerificationGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $verificationID,
-        mixed $params,
-        ?RequestOptions $requestOptions = null,
     ): VerificationGetResponse {
         // @phpstan-ignore-next-line;
         return $this->client->request(
@@ -89,8 +69,6 @@ final class VerificationsService implements VerificationsContract
      * @param string|null $customCode Send a self-generated numeric code to the end-user
      * @param string|null $extension Optional extension to dial after call is answered using DTMF digits. Valid digits are 0-9, A-D, *, and #. Pauses can be added using w (0.5s) and W (1s).
      * @param int $timeoutSecs the number of seconds the verification code is valid for
-     *
-     * @return CreateVerificationResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -117,8 +95,6 @@ final class VerificationsService implements VerificationsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return CreateVerificationResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -150,8 +126,6 @@ final class VerificationsService implements VerificationsContract
      * @param string $verifyProfileID the identifier of the associated Verify profile
      * @param int $timeoutSecs the number of seconds the verification code is valid for
      *
-     * @return CreateVerificationResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function triggerFlashcall(
@@ -173,8 +147,6 @@ final class VerificationsService implements VerificationsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return CreateVerificationResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -207,8 +179,6 @@ final class VerificationsService implements VerificationsContract
      * @param string|null $customCode Send a self-generated numeric code to the end-user
      * @param int $timeoutSecs the number of seconds the verification code is valid for
      *
-     * @return CreateVerificationResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function triggerSMS(
@@ -232,8 +202,6 @@ final class VerificationsService implements VerificationsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return CreateVerificationResponse<HasRawResponse>
      *
      * @throws APIException
      */

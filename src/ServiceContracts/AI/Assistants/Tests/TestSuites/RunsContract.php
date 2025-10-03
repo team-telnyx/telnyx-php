@@ -8,7 +8,6 @@ use Telnyx\AI\Assistants\Tests\Runs\TestRunResponse;
 use Telnyx\AI\Assistants\Tests\TestSuites\Runs\PaginatedTestRunList;
 use Telnyx\AI\Assistants\Tests\TestSuites\Runs\RunListParams\Page;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 
 use const Telnyx\Core\OMIT as omit;
@@ -21,8 +20,6 @@ interface RunsContract
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param string $status Filter runs by execution status (pending, running, completed, failed, timeout)
      * @param string $testSuiteRunID Filter runs by specific suite execution batch ID
-     *
-     * @return PaginatedTestRunList<HasRawResponse>
      *
      * @throws APIException
      */
@@ -38,8 +35,6 @@ interface RunsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return PaginatedTestRunList<HasRawResponse>
      *
      * @throws APIException
      */

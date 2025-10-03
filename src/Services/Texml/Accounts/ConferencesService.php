@@ -6,7 +6,6 @@ namespace Telnyx\Services\Texml\Accounts;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\Accounts\ConferencesContract;
 use Telnyx\Services\Texml\Accounts\Conferences\ParticipantsService;
@@ -47,8 +46,6 @@ final class ConferencesService implements ConferencesContract
      *
      * @param string $accountSid
      *
-     * @return ConferenceGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
@@ -65,8 +62,6 @@ final class ConferencesService implements ConferencesContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ConferenceGetResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -103,8 +98,6 @@ final class ConferencesService implements ConferencesContract
      * @param string $announceURL The URL we should call to announce something into the conference. The URL may return an MP3 file, a WAV file, or a TwiML document that contains `<Play>`, `<Say>`, `<Pause>`, or `<Redirect>` verbs.
      * @param string $status The new status of the resource. Specifying `completed` will end the conference and hang up all participants.
      *
-     * @return ConferenceUpdateResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function update(
@@ -130,8 +123,6 @@ final class ConferencesService implements ConferencesContract
      *
      * @param array<string, mixed> $params
      *
-     * @return ConferenceUpdateResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function updateRaw(
@@ -153,7 +144,7 @@ final class ConferencesService implements ConferencesContract
                 'texml/Accounts/%1$s/Conferences/%2$s', $accountSid, $conferenceSid,
             ],
             headers: ['Content-Type' => 'application/x-www-form-urlencoded'],
-            body: (object) array_diff_key($parsed, array_flip(['accountSid'])),
+            body: (object) array_diff_key($parsed, ['accountSid']),
             options: $options,
             convert: ConferenceUpdateResponse::class,
         );
@@ -171,8 +162,6 @@ final class ConferencesService implements ConferencesContract
      * @param int $pageSize The number of records to be displayed on a page
      * @param string $pageToken used to request the next page of results
      * @param Status|value-of<Status> $status filters conferences by status
-     *
-     * @return ConferenceGetConferencesResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -205,8 +194,6 @@ final class ConferencesService implements ConferencesContract
      *
      * @param array<string, mixed> $params
      *
-     * @return ConferenceGetConferencesResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieveConferencesRaw(
@@ -236,8 +223,6 @@ final class ConferencesService implements ConferencesContract
      *
      * @param string $accountSid
      *
-     * @return ConferenceGetRecordingsResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieveRecordings(
@@ -258,8 +243,6 @@ final class ConferencesService implements ConferencesContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ConferenceGetRecordingsResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -295,8 +278,6 @@ final class ConferencesService implements ConferencesContract
      *
      * @param string $accountSid
      *
-     * @return ConferenceGetRecordingsJsonResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieveRecordingsJson(
@@ -317,8 +298,6 @@ final class ConferencesService implements ConferencesContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ConferenceGetRecordingsJsonResponse<HasRawResponse>
      *
      * @throws APIException
      */

@@ -12,7 +12,6 @@ use Telnyx\AI\Assistants\Tests\Runs\TestRunResponse;
 use Telnyx\AI\Assistants\Tests\TestSuites\Runs\PaginatedTestRunList;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\Tests\RunsContract;
 
@@ -32,8 +31,6 @@ final class RunsService implements RunsContract
      *
      * @param string $testID
      *
-     * @return TestRunResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
@@ -50,8 +47,6 @@ final class RunsService implements RunsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return TestRunResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -84,8 +79,6 @@ final class RunsService implements RunsContract
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param string $status Filter runs by execution status (pending, running, completed, failed, timeout)
      *
-     * @return PaginatedTestRunList<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -103,8 +96,6 @@ final class RunsService implements RunsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return PaginatedTestRunList<HasRawResponse>
      *
      * @throws APIException
      */
@@ -132,8 +123,6 @@ final class RunsService implements RunsContract
      *
      * @param string $destinationVersionID Optional assistant version ID to use for this test run. If provided, the version must exist or a 400 error will be returned. If not provided, test will run on main version
      *
-     * @return TestRunResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function trigger(
@@ -150,8 +139,6 @@ final class RunsService implements RunsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return TestRunResponse<HasRawResponse>
      *
      * @throws APIException
      */

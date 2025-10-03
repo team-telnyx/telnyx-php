@@ -6,19 +6,19 @@ namespace Telnyx\OAuth;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type oauth_grants_response = array{redirectUri: string}
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class OAuthGrantsResponse implements BaseModel
+final class OAuthGrantsResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<oauth_grants_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /**
      * Redirect URI with authorization code or error.

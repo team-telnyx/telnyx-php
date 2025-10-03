@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\WellKnownContract;
 use Telnyx\WellKnown\WellKnownGetAuthorizationServerMetadataResponse;
@@ -24,30 +23,9 @@ final class WellKnownService implements WellKnownContract
      *
      * OAuth 2.0 Authorization Server Metadata (RFC 8414)
      *
-     * @return WellKnownGetAuthorizationServerMetadataResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieveAuthorizationServerMetadata(
-        ?RequestOptions $requestOptions = null
-    ): WellKnownGetAuthorizationServerMetadataResponse {
-        $params = [];
-
-        return $this->retrieveAuthorizationServerMetadataRaw(
-            $params,
-            $requestOptions
-        );
-    }
-
-    /**
-     * @api
-     *
-     * @return WellKnownGetAuthorizationServerMetadataResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveAuthorizationServerMetadataRaw(
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): WellKnownGetAuthorizationServerMetadataResponse {
         $path = $this
@@ -68,30 +46,9 @@ final class WellKnownService implements WellKnownContract
      *
      * OAuth 2.0 Protected Resource Metadata for resource discovery
      *
-     * @return WellKnownGetProtectedResourceMetadataResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieveProtectedResourceMetadata(
-        ?RequestOptions $requestOptions = null
-    ): WellKnownGetProtectedResourceMetadataResponse {
-        $params = [];
-
-        return $this->retrieveProtectedResourceMetadataRaw(
-            $params,
-            $requestOptions
-        );
-    }
-
-    /**
-     * @api
-     *
-     * @return WellKnownGetProtectedResourceMetadataResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveProtectedResourceMetadataRaw(
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): WellKnownGetProtectedResourceMetadataResponse {
         $path = $this

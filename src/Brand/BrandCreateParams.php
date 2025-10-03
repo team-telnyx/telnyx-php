@@ -273,8 +273,8 @@ final class BrandCreateParams implements BaseModel
         $obj->country = $country;
         $obj->displayName = $displayName;
         $obj->email = $email;
-        $obj->entityType = $entityType instanceof EntityType ? $entityType->value : $entityType;
-        $obj->vertical = $vertical instanceof Vertical ? $vertical->value : $vertical;
+        $obj['entityType'] = $entityType;
+        $obj['vertical'] = $vertical;
 
         null !== $businessContactEmail && $obj->businessContactEmail = $businessContactEmail;
         null !== $city && $obj->city = $city;
@@ -289,7 +289,7 @@ final class BrandCreateParams implements BaseModel
         null !== $phone && $obj->phone = $phone;
         null !== $postalCode && $obj->postalCode = $postalCode;
         null !== $state && $obj->state = $state;
-        null !== $stockExchange && $obj->stockExchange = $stockExchange instanceof StockExchange ? $stockExchange->value : $stockExchange;
+        null !== $stockExchange && $obj['stockExchange'] = $stockExchange;
         null !== $stockSymbol && $obj->stockSymbol = $stockSymbol;
         null !== $street && $obj->street = $street;
         null !== $webhookFailoverURL && $obj->webhookFailoverURL = $webhookFailoverURL;
@@ -340,7 +340,7 @@ final class BrandCreateParams implements BaseModel
     public function withEntityType(EntityType|string $entityType): self
     {
         $obj = clone $this;
-        $obj->entityType = $entityType instanceof EntityType ? $entityType->value : $entityType;
+        $obj['entityType'] = $entityType;
 
         return $obj;
     }
@@ -353,7 +353,7 @@ final class BrandCreateParams implements BaseModel
     public function withVertical(Vertical|string $vertical): self
     {
         $obj = clone $this;
-        $obj->vertical = $vertical instanceof Vertical ? $vertical->value : $vertical;
+        $obj['vertical'] = $vertical;
 
         return $obj;
     }
@@ -508,7 +508,7 @@ final class BrandCreateParams implements BaseModel
     public function withStockExchange(StockExchange|string $stockExchange): self
     {
         $obj = clone $this;
-        $obj->stockExchange = $stockExchange instanceof StockExchange ? $stockExchange->value : $stockExchange;
+        $obj['stockExchange'] = $stockExchange;
 
         return $obj;
     }

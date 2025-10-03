@@ -69,7 +69,7 @@ final class CommentCreateParams implements BaseModel
 
         null !== $body && $obj->body = $body;
         null !== $commentRecordID && $obj->commentRecordID = $commentRecordID;
-        null !== $commentRecordType && $obj->commentRecordType = $commentRecordType instanceof CommentRecordType ? $commentRecordType->value : $commentRecordType;
+        null !== $commentRecordType && $obj['commentRecordType'] = $commentRecordType;
 
         return $obj;
     }
@@ -97,7 +97,7 @@ final class CommentCreateParams implements BaseModel
         CommentRecordType|string $commentRecordType
     ): self {
         $obj = clone $this;
-        $obj->commentRecordType = $commentRecordType instanceof CommentRecordType ? $commentRecordType->value : $commentRecordType;
+        $obj['commentRecordType'] = $commentRecordType;
 
         return $obj;
     }

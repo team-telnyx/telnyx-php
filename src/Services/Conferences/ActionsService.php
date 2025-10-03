@@ -42,7 +42,6 @@ use Telnyx\Conferences\Actions\ActionUpdateParams;
 use Telnyx\Conferences\Actions\ActionUpdateParams\SupervisorRole;
 use Telnyx\Conferences\Actions\ActionUpdateResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Conferences\ActionsContract;
 
@@ -64,8 +63,6 @@ final class ActionsService implements ActionsContract
      * @param SupervisorRole|value-of<SupervisorRole> $supervisorRole Sets the participant as a supervisor for the conference. A conference can have multiple supervisors. "barge" means the supervisor enters the conference as a normal participant. This is the same as "none". "monitor" means the supervisor is muted but can hear all participants. "whisper" means that only the specified "whisper_call_control_ids" can hear the supervisor. Defaults to "none".
      * @param string $commandID Use this field to avoid execution of duplicate commands. Telnyx will ignore subsequent commands with the same `command_id` as one that has already been executed.
      * @param list<string> $whisperCallControlIDs Array of unique call_control_ids the supervisor can whisper to. If none provided, the supervisor will join the conference as a monitoring participant only.
-     *
-     * @return ActionUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -91,8 +88,6 @@ final class ActionsService implements ActionsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ActionUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -125,8 +120,6 @@ final class ActionsService implements ActionsContract
      * @param list<string> $callControlIDs List of unique identifiers and tokens for controlling the call. When empty all participants will be placed on hold.
      * @param string $mediaName The media_name of a file to be played to the participants when they are put on hold. The media_name must point to a file previously uploaded to api.telnyx.com/v2/media by the same user/organization. The file must either be a WAV or MP3 file.
      *
-     * @return ActionHoldResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function hold(
@@ -149,8 +142,6 @@ final class ActionsService implements ActionsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ActionHoldResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -198,8 +189,6 @@ final class ActionsService implements ActionsContract
      * @param Telnyx\Conferences\Actions\ActionJoinParams\SupervisorRole|value-of<Telnyx\Conferences\Actions\ActionJoinParams\SupervisorRole> $supervisorRole Sets the joining participant as a supervisor for the conference. A conference can have multiple supervisors. "barge" means the supervisor enters the conference as a normal participant. This is the same as "none". "monitor" means the supervisor is muted but can hear all participants. "whisper" means that only the specified "whisper_call_control_ids" can hear the supervisor. Defaults to "none".
      * @param list<string> $whisperCallControlIDs Array of unique call_control_ids the joining supervisor can whisper to. If none provided, the supervisor will join the conference as a monitoring participant only.
      *
-     * @return ActionJoinResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function join(
@@ -243,8 +232,6 @@ final class ActionsService implements ActionsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return ActionJoinResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function joinRaw(
@@ -280,8 +267,6 @@ final class ActionsService implements ActionsContract
      * @param Telnyx\Conferences\Actions\ActionLeaveParams\BeepEnabled|value-of<Telnyx\Conferences\Actions\ActionLeaveParams\BeepEnabled> $beepEnabled Whether a beep sound should be played when the participant leaves the conference. Can be used to override the conference-level setting.
      * @param string $commandID Use this field to avoid execution of duplicate commands. Telnyx will ignore subsequent commands with the same `command_id` as one that has already been executed.
      *
-     * @return ActionLeaveResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function leave(
@@ -304,8 +289,6 @@ final class ActionsService implements ActionsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ActionLeaveResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -336,8 +319,6 @@ final class ActionsService implements ActionsContract
      *
      * @param list<string> $callControlIDs Array of unique identifiers and tokens for controlling the call. When empty all participants will be muted.
      *
-     * @return ActionMuteResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function mute(
@@ -354,8 +335,6 @@ final class ActionsService implements ActionsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ActionMuteResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -389,8 +368,6 @@ final class ActionsService implements ActionsContract
      * @param string|int $loop The number of times the audio file should be played. If supplied, the value must be an integer between 1 and 100, or the special string `infinity` for an endless loop.
      * @param string $mediaName The media_name of a file to be played back in the conference. The media_name must point to a file previously uploaded to api.telnyx.com/v2/media by the same user/organization. The file must either be a WAV or MP3 file.
      *
-     * @return ActionPlayResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function play(
@@ -415,8 +392,6 @@ final class ActionsService implements ActionsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ActionPlayResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -448,8 +423,6 @@ final class ActionsService implements ActionsContract
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      * @param string $recordingID use this field to pause specific recording
      *
-     * @return ActionRecordPauseResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function recordPause(
@@ -467,8 +440,6 @@ final class ActionsService implements ActionsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ActionRecordPauseResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -500,8 +471,6 @@ final class ActionsService implements ActionsContract
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      * @param string $recordingID use this field to resume specific recording
      *
-     * @return ActionRecordResumeResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function recordResume(
@@ -519,8 +488,6 @@ final class ActionsService implements ActionsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ActionRecordResumeResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -559,8 +526,6 @@ final class ActionsService implements ActionsContract
      * @param bool $playBeep if enabled, a beep sound will be played at the start of a recording
      * @param Trim|value-of<Trim> $trim when set to `trim-silence`, silence will be removed from the beginning and end of the recording
      *
-     * @return ActionRecordStartResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function recordStart(
@@ -587,8 +552,6 @@ final class ActionsService implements ActionsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ActionRecordStartResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -625,8 +588,6 @@ final class ActionsService implements ActionsContract
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      * @param string $recordingID uniquely identifies the resource
      *
-     * @return ActionRecordStopResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function recordStop(
@@ -649,8 +610,6 @@ final class ActionsService implements ActionsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ActionRecordStopResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -697,8 +656,6 @@ final class ActionsService implements ActionsContract
      * @param PayloadType|value-of<PayloadType> $payloadType The type of the provided payload. The payload can either be plain text, or Speech Synthesis Markup Language (SSML).
      * @param mixed|ElevenLabsVoiceSettings|TelnyxVoiceSettings $voiceSettings The settings associated with the voice selected
      *
-     * @return ActionSpeakResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function speak(
@@ -730,8 +687,6 @@ final class ActionsService implements ActionsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return ActionSpeakResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function speakRaw(
@@ -761,8 +716,6 @@ final class ActionsService implements ActionsContract
      *
      * @param list<string> $callControlIDs List of call control ids identifying participants the audio file should stop be played to. If not given, the audio will be stoped to the entire conference.
      *
-     * @return ActionStopResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function stop(
@@ -779,8 +732,6 @@ final class ActionsService implements ActionsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ActionStopResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -811,8 +762,6 @@ final class ActionsService implements ActionsContract
      *
      * @param list<string> $callControlIDs List of unique identifiers and tokens for controlling the call. Enter each call control ID to be unheld.
      *
-     * @return ActionUnholdResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function unhold(
@@ -829,8 +778,6 @@ final class ActionsService implements ActionsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ActionUnholdResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -861,8 +808,6 @@ final class ActionsService implements ActionsContract
      *
      * @param list<string> $callControlIDs List of unique identifiers and tokens for controlling the call. Enter each call control ID to be unmuted. When empty all participants will be unmuted.
      *
-     * @return ActionUnmuteResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function unmute(
@@ -879,8 +824,6 @@ final class ActionsService implements ActionsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ActionUnmuteResponse<HasRawResponse>
      *
      * @throws APIException
      */

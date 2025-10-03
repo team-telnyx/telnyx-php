@@ -8,7 +8,9 @@ use Telnyx\AI\FineTuning\Jobs\FineTuningJob\Hyperparameters;
 use Telnyx\AI\FineTuning\Jobs\FineTuningJob\Status;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * The `fine_tuning.job` object represents a fine-tuning job that has been created through the API.
@@ -24,15 +26,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *   trainedTokens: int|null,
  *   trainingFile: string,
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class FineTuningJob implements BaseModel
+final class FineTuningJob implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<fine_tuning_job> */
     use SdkModel;
+
+    use SdkResponse;
 
     /**
      * The name of the fine-tuned model that is being created.
@@ -154,7 +154,7 @@ final class FineTuningJob implements BaseModel
         $obj->hyperparameters = $hyperparameters;
         $obj->model = $model;
         $obj->organizationID = $organizationID;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
         $obj->trainedTokens = $trainedTokens;
         $obj->trainingFile = $trainingFile;
 
@@ -235,7 +235,7 @@ final class FineTuningJob implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

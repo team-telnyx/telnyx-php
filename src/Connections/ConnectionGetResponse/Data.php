@@ -138,14 +138,14 @@ final class Data implements BaseModel
 
         null !== $id && $obj->id = $id;
         null !== $active && $obj->active = $active;
-        null !== $anchorsiteOverride && $obj->anchorsiteOverride = $anchorsiteOverride instanceof AnchorsiteOverride ? $anchorsiteOverride->value : $anchorsiteOverride;
+        null !== $anchorsiteOverride && $obj['anchorsiteOverride'] = $anchorsiteOverride;
         null !== $connectionName && $obj->connectionName = $connectionName;
         null !== $createdAt && $obj->createdAt = $createdAt;
         null !== $outboundVoiceProfileID && $obj->outboundVoiceProfileID = $outboundVoiceProfileID;
         null !== $recordType && $obj->recordType = $recordType;
         null !== $tags && $obj->tags = $tags;
         null !== $updatedAt && $obj->updatedAt = $updatedAt;
-        null !== $webhookAPIVersion && $obj->webhookAPIVersion = $webhookAPIVersion instanceof WebhookAPIVersion ? $webhookAPIVersion->value : $webhookAPIVersion;
+        null !== $webhookAPIVersion && $obj['webhookAPIVersion'] = $webhookAPIVersion;
         null !== $webhookEventFailoverURL && $obj->webhookEventFailoverURL = $webhookEventFailoverURL;
         null !== $webhookEventURL && $obj->webhookEventURL = $webhookEventURL;
 
@@ -183,7 +183,7 @@ final class Data implements BaseModel
         AnchorsiteOverride|string $anchorsiteOverride
     ): self {
         $obj = clone $this;
-        $obj->anchorsiteOverride = $anchorsiteOverride instanceof AnchorsiteOverride ? $anchorsiteOverride->value : $anchorsiteOverride;
+        $obj['anchorsiteOverride'] = $anchorsiteOverride;
 
         return $obj;
     }
@@ -263,7 +263,7 @@ final class Data implements BaseModel
         WebhookAPIVersion|string $webhookAPIVersion
     ): self {
         $obj = clone $this;
-        $obj->webhookAPIVersion = $webhookAPIVersion instanceof WebhookAPIVersion ? $webhookAPIVersion->value : $webhookAPIVersion;
+        $obj['webhookAPIVersion'] = $webhookAPIVersion;
 
         return $obj;
     }

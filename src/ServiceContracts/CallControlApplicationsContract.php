@@ -18,7 +18,6 @@ use Telnyx\CallControlApplications\CallControlApplicationNewResponse;
 use Telnyx\CallControlApplications\CallControlApplicationOutbound;
 use Telnyx\CallControlApplications\CallControlApplicationUpdateResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 
 use const Telnyx\Core\OMIT as omit;
@@ -41,8 +40,6 @@ interface CallControlApplicationsContract
      * @param WebhookAPIVersion|value-of<WebhookAPIVersion> $webhookAPIVersion determines which webhook format will be used, Telnyx API v1 or v2
      * @param string|null $webhookEventFailoverURL The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
-     *
-     * @return CallControlApplicationNewResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -68,8 +65,6 @@ interface CallControlApplicationsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return CallControlApplicationNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function createRaw(
@@ -80,25 +75,10 @@ interface CallControlApplicationsContract
     /**
      * @api
      *
-     * @return CallControlApplicationGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): CallControlApplicationGetResponse;
-
-    /**
-     * @api
-     *
-     * @return CallControlApplicationGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): CallControlApplicationGetResponse;
 
@@ -119,8 +99,6 @@ interface CallControlApplicationsContract
      * @param Telnyx\CallControlApplications\CallControlApplicationUpdateParams\WebhookAPIVersion|value-of<Telnyx\CallControlApplications\CallControlApplicationUpdateParams\WebhookAPIVersion> $webhookAPIVersion determines which webhook format will be used, Telnyx API v1 or v2
      * @param string|null $webhookEventFailoverURL The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
-     *
-     * @return CallControlApplicationUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -148,8 +126,6 @@ interface CallControlApplicationsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return CallControlApplicationUpdateResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function updateRaw(
@@ -176,8 +152,6 @@ interface CallControlApplicationsContract
      *   </li>
      * </ul> <br/> If not given, results are sorted by <code>created_at</code> in descending order.
      *
-     * @return CallControlApplicationListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -192,8 +166,6 @@ interface CallControlApplicationsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return CallControlApplicationListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function listRaw(
@@ -204,25 +176,10 @@ interface CallControlApplicationsContract
     /**
      * @api
      *
-     * @return CallControlApplicationDeleteResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): CallControlApplicationDeleteResponse;
-
-    /**
-     * @api
-     *
-     * @return CallControlApplicationDeleteResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): CallControlApplicationDeleteResponse;
 }

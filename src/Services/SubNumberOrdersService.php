@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\NumberOrderPhoneNumbers\UpdateRegulatoryRequirement;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SubNumberOrdersContract;
@@ -37,8 +36,6 @@ final class SubNumberOrdersService implements SubNumberOrdersContract
      *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[include_phone_numbers]
      *
-     * @return SubNumberOrderGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
@@ -55,8 +52,6 @@ final class SubNumberOrdersService implements SubNumberOrdersContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return SubNumberOrderGetResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -87,8 +82,6 @@ final class SubNumberOrdersService implements SubNumberOrdersContract
      *
      * @param list<UpdateRegulatoryRequirement> $regulatoryRequirements
      *
-     * @return SubNumberOrderUpdateResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function update(
@@ -105,8 +98,6 @@ final class SubNumberOrdersService implements SubNumberOrdersContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return SubNumberOrderUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -137,8 +128,6 @@ final class SubNumberOrdersService implements SubNumberOrdersContract
      *
      * @param Telnyx\SubNumberOrders\SubNumberOrderListParams\Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[status], filter[order_request_id], filter[country_code], filter[phone_number_type], filter[phone_numbers_count]
      *
-     * @return SubNumberOrderListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -154,8 +143,6 @@ final class SubNumberOrdersService implements SubNumberOrdersContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return SubNumberOrderListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -183,30 +170,11 @@ final class SubNumberOrdersService implements SubNumberOrdersContract
      *
      * Allows you to cancel a sub number order in 'pending' status.
      *
-     * @return SubNumberOrderCancelResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function cancel(
         string $subNumberOrderID,
         ?RequestOptions $requestOptions = null
-    ): SubNumberOrderCancelResponse {
-        $params = [];
-
-        return $this->cancelRaw($subNumberOrderID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return SubNumberOrderCancelResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function cancelRaw(
-        string $subNumberOrderID,
-        mixed $params,
-        ?RequestOptions $requestOptions = null,
     ): SubNumberOrderCancelResponse {
         // @phpstan-ignore-next-line;
         return $this->client->request(
@@ -224,8 +192,6 @@ final class SubNumberOrdersService implements SubNumberOrdersContract
      *
      * @param string $requirementGroupID The ID of the requirement group to associate
      *
-     * @return SubNumberOrderUpdateRequirementGroupResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function updateRequirementGroup(
@@ -242,8 +208,6 @@ final class SubNumberOrdersService implements SubNumberOrdersContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return SubNumberOrderUpdateRequirementGroupResponse<HasRawResponse>
      *
      * @throws APIException
      */

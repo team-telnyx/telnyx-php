@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\TextToSpeechContract;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams;
@@ -86,8 +85,6 @@ final class TextToSpeechService implements TextToSpeechContract
      * @param string $elevenlabsAPIKeyRef Reference to your ElevenLabs API key stored in the Telnyx Portal
      * @param Provider|value-of<Provider> $provider Filter voices by provider
      *
-     * @return TextToSpeechListVoicesResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function listVoices(
@@ -106,8 +103,6 @@ final class TextToSpeechService implements TextToSpeechContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return TextToSpeechListVoicesResponse<HasRawResponse>
      *
      * @throws APIException
      */

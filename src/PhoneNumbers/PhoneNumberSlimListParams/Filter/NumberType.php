@@ -43,7 +43,7 @@ final class NumberType implements BaseModel
     {
         $obj = new self;
 
-        null !== $eq && $obj->eq = $eq instanceof Eq ? $eq->value : $eq;
+        null !== $eq && $obj['eq'] = $eq;
 
         return $obj;
     }
@@ -56,7 +56,7 @@ final class NumberType implements BaseModel
     public function withEq(Eq|string $eq): self
     {
         $obj = clone $this;
-        $obj->eq = $eq instanceof Eq ? $eq->value : $eq;
+        $obj['eq'] = $eq;
 
         return $obj;
     }

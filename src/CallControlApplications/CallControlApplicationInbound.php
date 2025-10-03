@@ -75,7 +75,7 @@ final class CallControlApplicationInbound implements BaseModel
         null !== $channelLimit && $obj->channelLimit = $channelLimit;
         null !== $shakenStirEnabled && $obj->shakenStirEnabled = $shakenStirEnabled;
         null !== $sipSubdomain && $obj->sipSubdomain = $sipSubdomain;
-        null !== $sipSubdomainReceiveSettings && $obj->sipSubdomainReceiveSettings = $sipSubdomainReceiveSettings instanceof SipSubdomainReceiveSettings ? $sipSubdomainReceiveSettings->value : $sipSubdomainReceiveSettings;
+        null !== $sipSubdomainReceiveSettings && $obj['sipSubdomainReceiveSettings'] = $sipSubdomainReceiveSettings;
 
         return $obj;
     }
@@ -122,7 +122,7 @@ final class CallControlApplicationInbound implements BaseModel
         SipSubdomainReceiveSettings|string $sipSubdomainReceiveSettings
     ): self {
         $obj = clone $this;
-        $obj->sipSubdomainReceiveSettings = $sipSubdomainReceiveSettings instanceof SipSubdomainReceiveSettings ? $sipSubdomainReceiveSettings->value : $sipSubdomainReceiveSettings;
+        $obj['sipSubdomainReceiveSettings'] = $sipSubdomainReceiveSettings;
 
         return $obj;
     }

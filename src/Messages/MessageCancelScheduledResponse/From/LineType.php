@@ -19,5 +19,5 @@ enum LineType: string
 
     case PRE_PAID_WIRELESS = 'Pre-Paid Wireless';
 
-    case LINE_TYPE_ = '';
+    case EMPTY = '';
 }

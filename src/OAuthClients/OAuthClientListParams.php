@@ -121,9 +121,9 @@ final class OAuthClientListParams implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $filterAllowedGrantTypesContains && $obj->filterAllowedGrantTypesContains = $filterAllowedGrantTypesContains instanceof FilterAllowedGrantTypesContains ? $filterAllowedGrantTypesContains->value : $filterAllowedGrantTypesContains;
+        null !== $filterAllowedGrantTypesContains && $obj['filterAllowedGrantTypesContains'] = $filterAllowedGrantTypesContains;
         null !== $filterClientID && $obj->filterClientID = $filterClientID;
-        null !== $filterClientType && $obj->filterClientType = $filterClientType instanceof FilterClientType ? $filterClientType->value : $filterClientType;
+        null !== $filterClientType && $obj['filterClientType'] = $filterClientType;
         null !== $filterName && $obj->filterName = $filterName;
         null !== $filterNameContains && $obj->filterNameContains = $filterNameContains;
         null !== $filterVerified && $obj->filterVerified = $filterVerified;
@@ -142,7 +142,7 @@ final class OAuthClientListParams implements BaseModel
         FilterAllowedGrantTypesContains|string $filterAllowedGrantTypesContains
     ): self {
         $obj = clone $this;
-        $obj->filterAllowedGrantTypesContains = $filterAllowedGrantTypesContains instanceof FilterAllowedGrantTypesContains ? $filterAllowedGrantTypesContains->value : $filterAllowedGrantTypesContains;
+        $obj['filterAllowedGrantTypesContains'] = $filterAllowedGrantTypesContains;
 
         return $obj;
     }
@@ -167,7 +167,7 @@ final class OAuthClientListParams implements BaseModel
         FilterClientType|string $filterClientType
     ): self {
         $obj = clone $this;
-        $obj->filterClientType = $filterClientType instanceof FilterClientType ? $filterClientType->value : $filterClientType;
+        $obj['filterClientType'] = $filterClientType;
 
         return $obj;
     }

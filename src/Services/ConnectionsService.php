@@ -14,7 +14,6 @@ use Telnyx\Connections\ConnectionListParams\Page;
 use Telnyx\Connections\ConnectionListParams\Sort;
 use Telnyx\Connections\ConnectionListResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ConnectionsContract;
 
@@ -32,29 +31,10 @@ final class ConnectionsService implements ConnectionsContract
      *
      * Retrieves the high-level details of an existing connection. To retrieve specific authentication information, use the endpoint for the specific connection type.
      *
-     * @return ConnectionGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): ConnectionGetResponse {
-        $params = [];
-
-        return $this->retrieveRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return ConnectionGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): ConnectionGetResponse {
         // @phpstan-ignore-next-line;
@@ -86,8 +66,6 @@ final class ConnectionsService implements ConnectionsContract
      *   </li>
      * </ul> <br/> If not given, results are sorted by <code>created_at</code> in descending order.
      *
-     * @return ConnectionListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -105,8 +83,6 @@ final class ConnectionsService implements ConnectionsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ConnectionListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -136,8 +112,6 @@ final class ConnectionsService implements ConnectionsContract
      *
      * @param Telnyx\Connections\ConnectionListActiveCallsParams\Page $page Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number]
      *
-     * @return ConnectionListActiveCallsResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function listActiveCalls(
@@ -154,8 +128,6 @@ final class ConnectionsService implements ConnectionsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ConnectionListActiveCallsResponse<HasRawResponse>
      *
      * @throws APIException
      */

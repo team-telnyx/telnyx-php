@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Core\Contracts;
 
+use Psr\Http\Message\ResponseInterface;
 use Telnyx\Client;
 use Telnyx\Core\Conversion\Contracts\Converter;
 use Telnyx\Core\Conversion\Contracts\ConverterSource;
@@ -30,7 +31,7 @@ interface BasePage extends \IteratorAggregate
         Client $client,
         array $request,
         RequestOptions $options,
-        mixed $data,
+        ResponseInterface $response,
     );
 
     public function hasNextPage(): bool;

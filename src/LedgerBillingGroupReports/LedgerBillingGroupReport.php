@@ -99,9 +99,9 @@ final class LedgerBillingGroupReport implements BaseModel
         null !== $id && $obj->id = $id;
         null !== $createdAt && $obj->createdAt = $createdAt;
         null !== $organizationID && $obj->organizationID = $organizationID;
-        null !== $recordType && $obj->recordType = $recordType instanceof RecordType ? $recordType->value : $recordType;
+        null !== $recordType && $obj['recordType'] = $recordType;
         null !== $reportURL && $obj->reportURL = $reportURL;
-        null !== $status && $obj->status = $status instanceof Status ? $status->value : $status;
+        null !== $status && $obj['status'] = $status;
         null !== $updatedAt && $obj->updatedAt = $updatedAt;
 
         return $obj;
@@ -148,7 +148,7 @@ final class LedgerBillingGroupReport implements BaseModel
     public function withRecordType(RecordType|string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType instanceof RecordType ? $recordType->value : $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -172,7 +172,7 @@ final class LedgerBillingGroupReport implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

@@ -12,7 +12,6 @@ use Telnyx\AI\Conversations\Insights\InsightTemplateDetail;
 use Telnyx\AI\Conversations\Insights\InsightUpdateParams;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Conversations\InsightsContract;
 
@@ -34,8 +33,6 @@ final class InsightsService implements InsightsContract
      * @param string $name
      * @param mixed|string $jsonSchema if specified, the output will follow the JSON schema
      * @param string $webhook
-     *
-     * @return InsightTemplateDetail<HasRawResponse>
      *
      * @throws APIException
      */
@@ -60,8 +57,6 @@ final class InsightsService implements InsightsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return InsightTemplateDetail<HasRawResponse>
      *
      * @throws APIException
      */
@@ -89,29 +84,10 @@ final class InsightsService implements InsightsContract
      *
      * Get insight by ID
      *
-     * @return InsightTemplateDetail<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $insightID,
-        ?RequestOptions $requestOptions = null
-    ): InsightTemplateDetail {
-        $params = [];
-
-        return $this->retrieveRaw($insightID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return InsightTemplateDetail<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $insightID,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): InsightTemplateDetail {
         // @phpstan-ignore-next-line;
@@ -132,8 +108,6 @@ final class InsightsService implements InsightsContract
      * @param mixed|string $jsonSchema
      * @param string $name
      * @param string $webhook
-     *
-     * @return InsightTemplateDetail<HasRawResponse>
      *
      * @throws APIException
      */
@@ -159,8 +133,6 @@ final class InsightsService implements InsightsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return InsightTemplateDetail<HasRawResponse>
      *
      * @throws APIException
      */
@@ -191,8 +163,6 @@ final class InsightsService implements InsightsContract
      *
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
-     * @return InsightListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -208,8 +178,6 @@ final class InsightsService implements InsightsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return InsightListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -241,21 +209,6 @@ final class InsightsService implements InsightsContract
      */
     public function delete(
         string $insightID,
-        ?RequestOptions $requestOptions = null
-    ): mixed {
-        $params = [];
-
-        return $this->deleteRaw($insightID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $insightID,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): mixed {
         // @phpstan-ignore-next-line;

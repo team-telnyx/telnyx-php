@@ -18,15 +18,4 @@ interface OsrContract
         string $campaignID,
         ?RequestOptions $requestOptions = null
     ): mixed;
-
-    /**
-     * @api
-     *
-     * @throws APIException
-     */
-    public function getAttributesRaw(
-        string $campaignID,
-        mixed $params,
-        ?RequestOptions $requestOptions = null,
-    ): mixed;
 }

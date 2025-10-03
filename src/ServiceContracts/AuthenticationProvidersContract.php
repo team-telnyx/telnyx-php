@@ -13,7 +13,6 @@ use Telnyx\AuthenticationProviders\AuthenticationProviderNewResponse;
 use Telnyx\AuthenticationProviders\AuthenticationProviderUpdateResponse;
 use Telnyx\AuthenticationProviders\Settings;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 
 use const Telnyx\Core\OMIT as omit;
@@ -28,8 +27,6 @@ interface AuthenticationProvidersContract
      * @param string $shortName The short name associated with the authentication provider. This must be unique and URL-friendly, as it's going to be part of the login URL.
      * @param bool $active The active status of the authentication provider
      * @param string $settingsURL The URL for the identity provider metadata file to populate the settings automatically. If the settings attribute is provided, that will be used instead.
-     *
-     * @return AuthenticationProviderNewResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -47,8 +44,6 @@ interface AuthenticationProvidersContract
      *
      * @param array<string, mixed> $params
      *
-     * @return AuthenticationProviderNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function createRaw(
@@ -58,8 +53,6 @@ interface AuthenticationProvidersContract
 
     /**
      * @api
-     *
-     * @return AuthenticationProviderGetResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -71,26 +64,11 @@ interface AuthenticationProvidersContract
     /**
      * @api
      *
-     * @return AuthenticationProviderGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
-        ?RequestOptions $requestOptions = null
-    ): AuthenticationProviderGetResponse;
-
-    /**
-     * @api
-     *
      * @param bool $active The active status of the authentication provider
      * @param string $name the name associated with the authentication provider
      * @param Settings $settings the settings associated with the authentication provider
      * @param string $settingsURL The URL for the identity provider metadata file to populate the settings automatically. If the settings attribute is provided, that will be used instead.
      * @param string $shortName The short name associated with the authentication provider. This must be unique and URL-friendly, as it's going to be part of the login URL.
-     *
-     * @return AuthenticationProviderUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -108,8 +86,6 @@ interface AuthenticationProvidersContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return AuthenticationProviderUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -135,8 +111,6 @@ interface AuthenticationProvidersContract
      *   </li>
      * </ul><br/>If not given, results are sorted by <code>created_at</code> in descending order.
      *
-     * @return AuthenticationProviderListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -150,8 +124,6 @@ interface AuthenticationProvidersContract
      *
      * @param array<string, mixed> $params
      *
-     * @return AuthenticationProviderListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function listRaw(
@@ -162,25 +134,10 @@ interface AuthenticationProvidersContract
     /**
      * @api
      *
-     * @return AuthenticationProviderDeleteResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): AuthenticationProviderDeleteResponse;
-
-    /**
-     * @api
-     *
-     * @return AuthenticationProviderDeleteResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): AuthenticationProviderDeleteResponse;
 }

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\Texml\Accounts\Conferences;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantGetParticipantsResponse;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantGetResponse;
@@ -36,8 +35,6 @@ interface ParticipantsContract
      * @param string $accountSid
      * @param string $conferenceSid
      *
-     * @return ParticipantGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
@@ -51,8 +48,6 @@ interface ParticipantsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ParticipantGetResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -79,8 +74,6 @@ interface ParticipantsContract
      * @param bool $muted whether the participant should be muted
      * @param string $waitURL the URL to call for an audio file to play while the participant is waiting for the conference to start
      *
-     * @return ParticipantUpdateResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function update(
@@ -105,8 +98,6 @@ interface ParticipantsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ParticipantUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -194,8 +185,6 @@ interface ParticipantsContract
      * @param Trim|value-of<Trim> $trim Whether to trim any leading and trailing silence from the recording. Defaults to `trim-silence`.
      * @param string $waitURL the URL to call for an audio file to play while the participant is waiting for the conference to start
      *
-     * @return ParticipantParticipantsResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function participants(
@@ -254,8 +243,6 @@ interface ParticipantsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return ParticipantParticipantsResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function participantsRaw(
@@ -269,8 +256,6 @@ interface ParticipantsContract
      *
      * @param string $accountSid
      *
-     * @return ParticipantGetParticipantsResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieveParticipants(
@@ -283,8 +268,6 @@ interface ParticipantsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ParticipantGetParticipantsResponse<HasRawResponse>
      *
      * @throws APIException
      */

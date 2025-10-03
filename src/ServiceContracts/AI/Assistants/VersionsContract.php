@@ -23,7 +23,6 @@ use Telnyx\AI\Assistants\Versions\VersionUpdateResponse;
 use Telnyx\AI\Assistants\VoiceSettings;
 use Telnyx\AI\Assistants\WebhookTool;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 
 use const Telnyx\Core\OMIT as omit;
@@ -35,8 +34,6 @@ interface VersionsContract
      *
      * @param string $assistantID
      * @param bool $includeMcpServers
-     *
-     * @return VersionGetResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -51,8 +48,6 @@ interface VersionsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return VersionGetResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -84,8 +79,6 @@ interface VersionsContract
      * @param TranscriptionSettings $transcription
      * @param VoiceSettings $voiceSettings
      *
-     * @return VersionUpdateResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function update(
@@ -115,8 +108,6 @@ interface VersionsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return VersionUpdateResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function updateRaw(
@@ -128,26 +119,11 @@ interface VersionsContract
     /**
      * @api
      *
-     * @return AssistantsList<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
         string $assistantID,
         ?RequestOptions $requestOptions = null
-    ): AssistantsList;
-
-    /**
-     * @api
-     *
-     * @return AssistantsList<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        string $assistantID,
-        mixed $params,
-        ?RequestOptions $requestOptions = null,
     ): AssistantsList;
 
     /**
@@ -181,8 +157,6 @@ interface VersionsContract
      *
      * @param string $assistantID
      *
-     * @return VersionPromoteResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function promote(
@@ -195,8 +169,6 @@ interface VersionsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return VersionPromoteResponse<HasRawResponse>
      *
      * @throws APIException
      */

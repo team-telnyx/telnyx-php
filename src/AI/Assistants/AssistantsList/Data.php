@@ -200,7 +200,7 @@ final class Data implements BaseModel
         null !== $description && $obj->description = $description;
         null !== $dynamicVariables && $obj->dynamicVariables = $dynamicVariables;
         null !== $dynamicVariablesWebhookURL && $obj->dynamicVariablesWebhookURL = $dynamicVariablesWebhookURL;
-        null !== $enabledFeatures && $obj->enabledFeatures = array_map(fn ($v) => $v instanceof EnabledFeatures ? $v->value : $v, $enabledFeatures);
+        null !== $enabledFeatures && $obj['enabledFeatures'] = $enabledFeatures;
         null !== $greeting && $obj->greeting = $greeting;
         null !== $importMetadata && $obj->importMetadata = $importMetadata;
         null !== $insightSettings && $obj->insightSettings = $insightSettings;
@@ -300,7 +300,7 @@ final class Data implements BaseModel
     public function withEnabledFeatures(array $enabledFeatures): self
     {
         $obj = clone $this;
-        $obj->enabledFeatures = array_map(fn ($v) => $v instanceof EnabledFeatures ? $v->value : $v, $enabledFeatures);
+        $obj['enabledFeatures'] = $enabledFeatures;
 
         return $obj;
     }

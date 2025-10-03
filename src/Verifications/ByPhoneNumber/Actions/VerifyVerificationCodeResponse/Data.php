@@ -66,7 +66,7 @@ final class Data implements BaseModel
         $obj = new self;
 
         $obj->phoneNumber = $phoneNumber;
-        $obj->responseCode = $responseCode instanceof ResponseCode ? $responseCode->value : $responseCode;
+        $obj['responseCode'] = $responseCode;
 
         return $obj;
     }
@@ -90,7 +90,7 @@ final class Data implements BaseModel
     public function withResponseCode(ResponseCode|string $responseCode): self
     {
         $obj = clone $this;
-        $obj->responseCode = $responseCode instanceof ResponseCode ? $responseCode->value : $responseCode;
+        $obj['responseCode'] = $responseCode;
 
         return $obj;
     }

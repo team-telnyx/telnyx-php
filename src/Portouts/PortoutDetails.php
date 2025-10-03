@@ -276,7 +276,7 @@ final class PortoutDetails implements BaseModel
         null !== $serviceAddress && $obj->serviceAddress = $serviceAddress;
         null !== $spid && $obj->spid = $spid;
         null !== $state && $obj->state = $state;
-        null !== $status && $obj->status = $status instanceof Status ? $status->value : $status;
+        null !== $status && $obj['status'] = $status;
         null !== $supportKey && $obj->supportKey = $supportKey;
         null !== $updatedAt && $obj->updatedAt = $updatedAt;
         null !== $userID && $obj->userID = $userID;
@@ -526,7 +526,7 @@ final class PortoutDetails implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

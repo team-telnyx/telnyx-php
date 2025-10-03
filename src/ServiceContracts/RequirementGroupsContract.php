@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\RequirementGroups\RequirementGroup;
 use Telnyx\RequirementGroups\RequirementGroupCreateParams\Action;
@@ -26,8 +25,6 @@ interface RequirementGroupsContract
      * @param string $customerReference
      * @param list<RegulatoryRequirement> $regulatoryRequirements
      *
-     * @return RequirementGroup<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -44,8 +41,6 @@ interface RequirementGroupsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return RequirementGroup<HasRawResponse>
-     *
      * @throws APIException
      */
     public function createRaw(
@@ -55,8 +50,6 @@ interface RequirementGroupsContract
 
     /**
      * @api
-     *
-     * @return RequirementGroup<HasRawResponse>
      *
      * @throws APIException
      */
@@ -68,23 +61,8 @@ interface RequirementGroupsContract
     /**
      * @api
      *
-     * @return RequirementGroup<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
-        ?RequestOptions $requestOptions = null
-    ): RequirementGroup;
-
-    /**
-     * @api
-     *
      * @param string $customerReference Reference for the customer
      * @param list<Telnyx\RequirementGroups\RequirementGroupUpdateParams\RegulatoryRequirement> $regulatoryRequirements
-     *
-     * @return RequirementGroup<HasRawResponse>
      *
      * @throws APIException
      */
@@ -99,8 +77,6 @@ interface RequirementGroupsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return RequirementGroup<HasRawResponse>
      *
      * @throws APIException
      */
@@ -141,8 +117,6 @@ interface RequirementGroupsContract
     /**
      * @api
      *
-     * @return RequirementGroup<HasRawResponse>
-     *
      * @throws APIException
      */
     public function delete(
@@ -153,38 +127,10 @@ interface RequirementGroupsContract
     /**
      * @api
      *
-     * @return RequirementGroup<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $id,
-        mixed $params,
-        ?RequestOptions $requestOptions = null
-    ): RequirementGroup;
-
-    /**
-     * @api
-     *
-     * @return RequirementGroup<HasRawResponse>
-     *
      * @throws APIException
      */
     public function submitForApproval(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): RequirementGroup;
-
-    /**
-     * @api
-     *
-     * @return RequirementGroup<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function submitForApprovalRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): RequirementGroup;
 }

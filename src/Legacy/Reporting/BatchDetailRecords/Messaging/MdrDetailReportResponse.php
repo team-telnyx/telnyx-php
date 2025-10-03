@@ -128,16 +128,16 @@ final class MdrDetailReportResponse implements BaseModel
         null !== $id && $obj->id = $id;
         null !== $connections && $obj->connections = $connections;
         null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $directions && $obj->directions = array_map(fn ($v) => $v instanceof Direction ? $v->value : $v, $directions);
+        null !== $directions && $obj['directions'] = $directions;
         null !== $endDate && $obj->endDate = $endDate;
         null !== $filters && $obj->filters = $filters;
         null !== $profiles && $obj->profiles = $profiles;
         null !== $recordType && $obj->recordType = $recordType;
-        null !== $recordTypes && $obj->recordTypes = array_map(fn ($v) => $v instanceof RecordType ? $v->value : $v, $recordTypes);
+        null !== $recordTypes && $obj['recordTypes'] = $recordTypes;
         null !== $reportName && $obj->reportName = $reportName;
         null !== $reportURL && $obj->reportURL = $reportURL;
         null !== $startDate && $obj->startDate = $startDate;
-        null !== $status && $obj->status = $status instanceof Status ? $status->value : $status;
+        null !== $status && $obj['status'] = $status;
         null !== $updatedAt && $obj->updatedAt = $updatedAt;
 
         return $obj;
@@ -179,7 +179,7 @@ final class MdrDetailReportResponse implements BaseModel
     public function withDirections(array $directions): self
     {
         $obj = clone $this;
-        $obj->directions = array_map(fn ($v) => $v instanceof Direction ? $v->value : $v, $directions);
+        $obj['directions'] = $directions;
 
         return $obj;
     }
@@ -230,7 +230,7 @@ final class MdrDetailReportResponse implements BaseModel
     public function withRecordTypes(array $recordTypes): self
     {
         $obj = clone $this;
-        $obj->recordTypes = array_map(fn ($v) => $v instanceof RecordType ? $v->value : $v, $recordTypes);
+        $obj['recordTypes'] = $recordTypes;
 
         return $obj;
     }
@@ -265,7 +265,7 @@ final class MdrDetailReportResponse implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

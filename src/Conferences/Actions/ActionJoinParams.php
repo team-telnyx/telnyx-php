@@ -185,7 +185,7 @@ final class ActionJoinParams implements BaseModel
 
         $obj->callControlID = $callControlID;
 
-        null !== $beepEnabled && $obj->beepEnabled = $beepEnabled instanceof BeepEnabled ? $beepEnabled->value : $beepEnabled;
+        null !== $beepEnabled && $obj['beepEnabled'] = $beepEnabled;
         null !== $clientState && $obj->clientState = $clientState;
         null !== $commandID && $obj->commandID = $commandID;
         null !== $endConferenceOnExit && $obj->endConferenceOnExit = $endConferenceOnExit;
@@ -195,7 +195,7 @@ final class ActionJoinParams implements BaseModel
         null !== $mute && $obj->mute = $mute;
         null !== $softEndConferenceOnExit && $obj->softEndConferenceOnExit = $softEndConferenceOnExit;
         null !== $startConferenceOnEnter && $obj->startConferenceOnEnter = $startConferenceOnEnter;
-        null !== $supervisorRole && $obj->supervisorRole = $supervisorRole instanceof SupervisorRole ? $supervisorRole->value : $supervisorRole;
+        null !== $supervisorRole && $obj['supervisorRole'] = $supervisorRole;
         null !== $whisperCallControlIDs && $obj->whisperCallControlIDs = $whisperCallControlIDs;
 
         return $obj;
@@ -220,7 +220,7 @@ final class ActionJoinParams implements BaseModel
     public function withBeepEnabled(BeepEnabled|string $beepEnabled): self
     {
         $obj = clone $this;
-        $obj->beepEnabled = $beepEnabled instanceof BeepEnabled ? $beepEnabled->value : $beepEnabled;
+        $obj['beepEnabled'] = $beepEnabled;
 
         return $obj;
     }
@@ -335,7 +335,7 @@ final class ActionJoinParams implements BaseModel
         SupervisorRole|string $supervisorRole
     ): self {
         $obj = clone $this;
-        $obj->supervisorRole = $supervisorRole instanceof SupervisorRole ? $supervisorRole->value : $supervisorRole;
+        $obj['supervisorRole'] = $supervisorRole;
 
         return $obj;
     }

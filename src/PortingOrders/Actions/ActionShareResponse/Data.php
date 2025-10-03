@@ -105,7 +105,7 @@ final class Data implements BaseModel
         null !== $createdAt && $obj->createdAt = $createdAt;
         null !== $expiresAt && $obj->expiresAt = $expiresAt;
         null !== $expiresInSeconds && $obj->expiresInSeconds = $expiresInSeconds;
-        null !== $permissions && $obj->permissions = array_map(fn ($v) => $v instanceof Permission ? $v->value : $v, $permissions);
+        null !== $permissions && $obj['permissions'] = $permissions;
         null !== $portingOrderID && $obj->portingOrderID = $portingOrderID;
         null !== $recordType && $obj->recordType = $recordType;
 
@@ -175,7 +175,7 @@ final class Data implements BaseModel
     public function withPermissions(array $permissions): self
     {
         $obj = clone $this;
-        $obj->permissions = array_map(fn ($v) => $v instanceof Permission ? $v->value : $v, $permissions);
+        $obj['permissions'] = $permissions;
 
         return $obj;
     }

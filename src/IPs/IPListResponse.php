@@ -6,19 +6,19 @@ namespace Telnyx\IPs;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type ip_list_response = array{data?: list<IP>}
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class IPListResponse implements BaseModel
+final class IPListResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<ip_list_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /** @var list<IP>|null $data */
     #[Api(list: IP::class, optional: true)]

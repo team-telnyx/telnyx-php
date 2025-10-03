@@ -94,7 +94,7 @@ final class ChargesBreakdownRetrieveParams implements BaseModel
         $obj->startDate = $startDate;
 
         null !== $endDate && $obj->endDate = $endDate;
-        null !== $format && $obj->format = $format instanceof Format ? $format->value : $format;
+        null !== $format && $obj['format'] = $format;
 
         return $obj;
     }
@@ -129,7 +129,7 @@ final class ChargesBreakdownRetrieveParams implements BaseModel
     public function withFormat(Format|string $format): self
     {
         $obj = clone $this;
-        $obj->format = $format instanceof Format ? $format->value : $format;
+        $obj['format'] = $format;
 
         return $obj;
     }

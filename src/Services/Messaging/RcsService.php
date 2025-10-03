@@ -6,7 +6,6 @@ namespace Telnyx\Services\Messaging;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Messaging\Rcs\RcGetCapabilitiesResponse;
 use Telnyx\Messaging\Rcs\RcInviteTestNumberParams;
 use Telnyx\Messaging\Rcs\RcInviteTestNumberResponse;
@@ -39,8 +38,6 @@ final class RcsService implements RcsContract
      *
      * @param string $id
      *
-     * @return RcInviteTestNumberResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function inviteTestNumber(
@@ -57,8 +54,6 @@ final class RcsService implements RcsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return RcInviteTestNumberResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -91,8 +86,6 @@ final class RcsService implements RcsContract
      * @param string $agentID RCS Agent ID
      * @param list<string> $phoneNumbers List of phone numbers to check
      *
-     * @return RcListBulkCapabilitiesResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function listBulkCapabilities(
@@ -109,8 +102,6 @@ final class RcsService implements RcsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return RcListBulkCapabilitiesResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -140,8 +131,6 @@ final class RcsService implements RcsContract
      *
      * @param string $agentID
      *
-     * @return RcGetCapabilitiesResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieveCapabilities(
@@ -162,8 +151,6 @@ final class RcsService implements RcsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return RcGetCapabilitiesResponse<HasRawResponse>
      *
      * @throws APIException
      */

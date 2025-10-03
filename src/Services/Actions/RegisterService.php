@@ -9,7 +9,6 @@ use Telnyx\Actions\Register\RegisterCreateParams\Status;
 use Telnyx\Actions\Register\RegisterNewResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Actions\RegisterContract;
 
@@ -32,8 +31,6 @@ final class RegisterService implements RegisterContract
      * @param string $simCardGroupID The group SIMCardGroup identification. This attribute can be <code>null</code> when it's present in an associated resource.
      * @param Status|value-of<Status> $status status on which the SIM card will be set after being successful registered
      * @param list<string> $tags Searchable tags associated with the SIM card
-     *
-     * @return RegisterNewResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -58,8 +55,6 @@ final class RegisterService implements RegisterContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return RegisterNewResponse<HasRawResponse>
      *
      * @throws APIException
      */

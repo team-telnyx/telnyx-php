@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\MessagingProfiles;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigCreateParams\Op;
 use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigListParams\CreatedAt;
 use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigListParams\UpdatedAt;
@@ -25,8 +24,6 @@ interface AutorespConfigsContract
      * @param Op|value-of<Op> $op
      * @param string $respText
      *
-     * @return AutoRespConfigResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -43,8 +40,6 @@ interface AutorespConfigsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return AutoRespConfigResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function createRaw(
@@ -58,8 +53,6 @@ interface AutorespConfigsContract
      *
      * @param string $profileID
      *
-     * @return AutoRespConfigResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
@@ -72,8 +65,6 @@ interface AutorespConfigsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return AutoRespConfigResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -92,8 +83,6 @@ interface AutorespConfigsContract
      * @param Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigUpdateParams\Op|value-of<Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigUpdateParams\Op> $op
      * @param string $respText
      *
-     * @return AutoRespConfigResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function update(
@@ -111,8 +100,6 @@ interface AutorespConfigsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return AutoRespConfigResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function updateRaw(
@@ -128,8 +115,6 @@ interface AutorespConfigsContract
      * @param CreatedAt $createdAt Consolidated created_at parameter (deepObject style). Originally: created_at[gte], created_at[lte]
      * @param UpdatedAt $updatedAt Consolidated updated_at parameter (deepObject style). Originally: updated_at[gte], updated_at[lte]
      *
-     * @return AutorespConfigListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -144,8 +129,6 @@ interface AutorespConfigsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return AutorespConfigListResponse<HasRawResponse>
      *
      * @throws APIException
      */

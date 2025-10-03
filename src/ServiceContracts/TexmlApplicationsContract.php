@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\CredentialConnections\DtmfType;
 use Telnyx\RequestOptions;
@@ -44,8 +43,6 @@ interface TexmlApplicationsContract
      * @param string $voiceFallbackURL URL to which Telnyx will deliver your XML Translator webhooks if we get an error response from your voice_url
      * @param VoiceMethod|value-of<VoiceMethod> $voiceMethod HTTP request method Telnyx will use to interact with your XML Translator webhooks. Either 'get' or 'post'.
      *
-     * @return TexmlApplicationNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -71,8 +68,6 @@ interface TexmlApplicationsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return TexmlApplicationNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function createRaw(
@@ -83,25 +78,10 @@ interface TexmlApplicationsContract
     /**
      * @api
      *
-     * @return TexmlApplicationGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): TexmlApplicationGetResponse;
-
-    /**
-     * @api
-     *
-     * @return TexmlApplicationGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): TexmlApplicationGetResponse;
 
@@ -122,8 +102,6 @@ interface TexmlApplicationsContract
      * @param list<string> $tags tags associated with the Texml Application
      * @param string $voiceFallbackURL URL to which Telnyx will deliver your XML Translator webhooks if we get an error response from your voice_url
      * @param Telnyx\TexmlApplications\TexmlApplicationUpdateParams\VoiceMethod|value-of<Telnyx\TexmlApplications\TexmlApplicationUpdateParams\VoiceMethod> $voiceMethod HTTP request method Telnyx will use to interact with your XML Translator webhooks. Either 'get' or 'post'.
-     *
-     * @return TexmlApplicationUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -151,8 +129,6 @@ interface TexmlApplicationsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return TexmlApplicationUpdateResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function updateRaw(
@@ -179,8 +155,6 @@ interface TexmlApplicationsContract
      *   </li>
      * </ul> <br/> If not given, results are sorted by <code>created_at</code> in descending order.
      *
-     * @return TexmlApplicationListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -195,8 +169,6 @@ interface TexmlApplicationsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return TexmlApplicationListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function listRaw(
@@ -207,25 +179,10 @@ interface TexmlApplicationsContract
     /**
      * @api
      *
-     * @return TexmlApplicationDeleteResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): TexmlApplicationDeleteResponse;
-
-    /**
-     * @api
-     *
-     * @return TexmlApplicationDeleteResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): TexmlApplicationDeleteResponse;
 }

@@ -160,7 +160,7 @@ final class VerifyDetailRecord implements BaseModel
         null !== $updatedAt && $obj->updatedAt = $updatedAt;
         null !== $verificationStatus && $obj->verificationStatus = $verificationStatus;
         null !== $verifyChannelID && $obj->verifyChannelID = $verifyChannelID;
-        null !== $verifyChannelType && $obj->verifyChannelType = $verifyChannelType instanceof VerifyChannelType ? $verifyChannelType->value : $verifyChannelType;
+        null !== $verifyChannelType && $obj['verifyChannelType'] = $verifyChannelType;
         null !== $verifyProfileID && $obj->verifyProfileID = $verifyProfileID;
         null !== $verifyUsageFee && $obj->verifyUsageFee = $verifyUsageFee;
 
@@ -287,7 +287,7 @@ final class VerifyDetailRecord implements BaseModel
         VerifyChannelType|string $verifyChannelType
     ): self {
         $obj = clone $this;
-        $obj->verifyChannelType = $verifyChannelType instanceof VerifyChannelType ? $verifyChannelType->value : $verifyChannelType;
+        $obj['verifyChannelType'] = $verifyChannelType;
 
         return $obj;
     }

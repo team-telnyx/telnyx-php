@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Reports\ReportListMdrsParams\Direction;
 use Telnyx\Reports\ReportListMdrsParams\MessageType;
 use Telnyx\Reports\ReportListMdrsParams\Status;
@@ -31,8 +30,6 @@ interface ReportsContract
      * @param string $startDate Pagination start date
      * @param Status|value-of<Status> $status Message status
      *
-     * @return ReportListMdrsResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function listMdrs(
@@ -52,8 +49,6 @@ interface ReportsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ReportListMdrsResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -78,8 +73,6 @@ interface ReportsContract
      * @param list<string> $sort Field used to order the data. If no field is specified, default value is 'created_at'
      * @param string $startDate Start date
      *
-     * @return ReportListWdrsResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function listWdrs(
@@ -102,8 +95,6 @@ interface ReportsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ReportListWdrsResponse<HasRawResponse>
      *
      * @throws APIException
      */

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationCreateParams\Threshold;
 use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationDeleteResponse;
@@ -24,8 +23,6 @@ interface SimCardDataUsageNotificationsContract
      * @param string $simCardID the identification UUID of the related SIM card resource
      * @param Threshold $threshold data usage threshold that will trigger the notification
      *
-     * @return SimCardDataUsageNotificationNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -39,8 +36,6 @@ interface SimCardDataUsageNotificationsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return SimCardDataUsageNotificationNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function createRaw(
@@ -50,8 +45,6 @@ interface SimCardDataUsageNotificationsContract
 
     /**
      * @api
-     *
-     * @return SimCardDataUsageNotificationGetResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -63,23 +56,8 @@ interface SimCardDataUsageNotificationsContract
     /**
      * @api
      *
-     * @return SimCardDataUsageNotificationGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
-        ?RequestOptions $requestOptions = null
-    ): SimCardDataUsageNotificationGetResponse;
-
-    /**
-     * @api
-     *
      * @param string $simCardID the identification UUID of the related SIM card resource
      * @param Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationUpdateParams\Threshold $threshold data usage threshold that will trigger the notification
-     *
-     * @return SimCardDataUsageNotificationUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -94,8 +72,6 @@ interface SimCardDataUsageNotificationsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return SimCardDataUsageNotificationUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -112,8 +88,6 @@ interface SimCardDataUsageNotificationsContract
      * @param int $pageNumber the page number to load
      * @param int $pageSize the size of the page
      *
-     * @return SimCardDataUsageNotificationListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -128,8 +102,6 @@ interface SimCardDataUsageNotificationsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return SimCardDataUsageNotificationListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function listRaw(
@@ -140,25 +112,10 @@ interface SimCardDataUsageNotificationsContract
     /**
      * @api
      *
-     * @return SimCardDataUsageNotificationDeleteResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): SimCardDataUsageNotificationDeleteResponse;
-
-    /**
-     * @api
-     *
-     * @return SimCardDataUsageNotificationDeleteResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): SimCardDataUsageNotificationDeleteResponse;
 }

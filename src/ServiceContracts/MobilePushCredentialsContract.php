@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\MobilePushCredentials\MobilePushCredentialCreateParams\Type;
 use Telnyx\MobilePushCredentials\MobilePushCredentialListParams\Filter;
 use Telnyx\MobilePushCredentials\MobilePushCredentialListParams\Page;
@@ -27,8 +26,6 @@ interface MobilePushCredentialsContract
      * @param array<string,
      * mixed,> $projectAccountJsonFile Private key file in JSON format
      *
-     * @return PushCredentialResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -45,8 +42,6 @@ interface MobilePushCredentialsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return PushCredentialResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function createRaw(
@@ -56,8 +51,6 @@ interface MobilePushCredentialsContract
 
     /**
      * @api
-     *
-     * @return PushCredentialResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -69,23 +62,8 @@ interface MobilePushCredentialsContract
     /**
      * @api
      *
-     * @return PushCredentialResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $pushCredentialID,
-        mixed $params,
-        ?RequestOptions $requestOptions = null,
-    ): PushCredentialResponse;
-
-    /**
-     * @api
-     *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[type], filter[alias]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
-     *
-     * @return MobilePushCredentialListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -99,8 +77,6 @@ interface MobilePushCredentialsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return MobilePushCredentialListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -117,16 +93,5 @@ interface MobilePushCredentialsContract
     public function delete(
         string $pushCredentialID,
         ?RequestOptions $requestOptions = null
-    ): mixed;
-
-    /**
-     * @api
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $pushCredentialID,
-        mixed $params,
-        ?RequestOptions $requestOptions = null,
     ): mixed;
 }

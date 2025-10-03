@@ -135,7 +135,7 @@ final class DynamicEmergencyAddressCreateParams implements BaseModel
         $obj = new self;
 
         $obj->administrativeArea = $administrativeArea;
-        $obj->countryCode = $countryCode instanceof CountryCode ? $countryCode->value : $countryCode;
+        $obj['countryCode'] = $countryCode;
         $obj->houseNumber = $houseNumber;
         $obj->locality = $locality;
         $obj->postalCode = $postalCode;
@@ -164,7 +164,7 @@ final class DynamicEmergencyAddressCreateParams implements BaseModel
     public function withCountryCode(CountryCode|string $countryCode): self
     {
         $obj = clone $this;
-        $obj->countryCode = $countryCode instanceof CountryCode ? $countryCode->value : $countryCode;
+        $obj['countryCode'] = $countryCode;
 
         return $obj;
     }

@@ -74,10 +74,10 @@ final class Filter implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $actionType && $obj->actionType = $actionType instanceof ActionType ? $actionType->value : $actionType;
+        null !== $actionType && $obj['actionType'] = $actionType;
         null !== $bulkSimCardActionID && $obj->bulkSimCardActionID = $bulkSimCardActionID;
         null !== $simCardID && $obj->simCardID = $simCardID;
-        null !== $status && $obj->status = $status instanceof Status ? $status->value : $status;
+        null !== $status && $obj['status'] = $status;
 
         return $obj;
     }
@@ -90,7 +90,7 @@ final class Filter implements BaseModel
     public function withActionType(ActionType|string $actionType): self
     {
         $obj = clone $this;
-        $obj->actionType = $actionType instanceof ActionType ? $actionType->value : $actionType;
+        $obj['actionType'] = $actionType;
 
         return $obj;
     }
@@ -125,7 +125,7 @@ final class Filter implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

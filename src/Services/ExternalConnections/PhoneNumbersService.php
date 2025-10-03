@@ -6,7 +6,6 @@ namespace Telnyx\Services\ExternalConnections;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberGetResponse;
 use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberListParams;
 use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberListParams\Filter;
@@ -34,8 +33,6 @@ final class PhoneNumbersService implements PhoneNumbersContract
      *
      * @param string $id
      *
-     * @return PhoneNumberGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
@@ -52,8 +49,6 @@ final class PhoneNumbersService implements PhoneNumbersContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return PhoneNumberGetResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -88,8 +83,6 @@ final class PhoneNumbersService implements PhoneNumbersContract
      * @param string $id
      * @param string $locationID identifies the location to assign the phone number to
      *
-     * @return PhoneNumberUpdateResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function update(
@@ -107,8 +100,6 @@ final class PhoneNumbersService implements PhoneNumbersContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return PhoneNumberUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -130,7 +121,7 @@ final class PhoneNumbersService implements PhoneNumbersContract
             path: [
                 'external_connections/%1$s/phone_numbers/%2$s', $id, $phoneNumberID,
             ],
-            body: (object) array_diff_key($parsed, array_flip(['id'])),
+            body: (object) array_diff_key($parsed, ['id']),
             options: $options,
             convert: PhoneNumberUpdateResponse::class,
         );
@@ -143,8 +134,6 @@ final class PhoneNumbersService implements PhoneNumbersContract
      *
      * @param Filter $filter Filter parameter for phone numbers (deepObject style). Supports filtering by phone_number, civic_address_id, and location_id with eq/contains operations.
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
-     *
-     * @return PhoneNumberListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -163,8 +152,6 @@ final class PhoneNumbersService implements PhoneNumbersContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return PhoneNumberListResponse<HasRawResponse>
      *
      * @throws APIException
      */

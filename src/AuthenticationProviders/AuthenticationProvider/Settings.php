@@ -100,7 +100,7 @@ final class Settings implements BaseModel
 
         null !== $assertionConsumerServiceURL && $obj->assertionConsumerServiceURL = $assertionConsumerServiceURL;
         null !== $idpCertFingerprint && $obj->idpCertFingerprint = $idpCertFingerprint;
-        null !== $idpCertFingerprintAlgorithm && $obj->idpCertFingerprintAlgorithm = $idpCertFingerprintAlgorithm instanceof IdpCertFingerprintAlgorithm ? $idpCertFingerprintAlgorithm->value : $idpCertFingerprintAlgorithm;
+        null !== $idpCertFingerprintAlgorithm && $obj['idpCertFingerprintAlgorithm'] = $idpCertFingerprintAlgorithm;
         null !== $idpEntityID && $obj->idpEntityID = $idpEntityID;
         null !== $idpSSOTargetURL && $obj->idpSSOTargetURL = $idpSSOTargetURL;
         null !== $nameIdentifierFormat && $obj->nameIdentifierFormat = $nameIdentifierFormat;
@@ -141,7 +141,7 @@ final class Settings implements BaseModel
         IdpCertFingerprintAlgorithm|string $idpCertFingerprintAlgorithm
     ): self {
         $obj = clone $this;
-        $obj->idpCertFingerprintAlgorithm = $idpCertFingerprintAlgorithm instanceof IdpCertFingerprintAlgorithm ? $idpCertFingerprintAlgorithm->value : $idpCertFingerprintAlgorithm;
+        $obj['idpCertFingerprintAlgorithm'] = $idpCertFingerprintAlgorithm;
 
         return $obj;
     }

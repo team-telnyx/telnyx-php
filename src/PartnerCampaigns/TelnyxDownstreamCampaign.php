@@ -6,7 +6,9 @@ namespace Telnyx\PartnerCampaigns;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PartnerCampaigns\TelnyxDownstreamCampaign\CampaignStatus;
 
 /**
@@ -51,15 +53,13 @@ use Telnyx\PartnerCampaigns\TelnyxDownstreamCampaign\CampaignStatus;
  *   webhookFailoverURL?: string,
  *   webhookURL?: string,
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class TelnyxDownstreamCampaign implements BaseModel
+final class TelnyxDownstreamCampaign implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<telnyx_downstream_campaign> */
     use SdkModel;
+
+    use SdkResponse;
 
     /**
      * Unique identifier assigned to the brand by the registry.
@@ -361,7 +361,7 @@ final class TelnyxDownstreamCampaign implements BaseModel
         null !== $ageGated && $obj->ageGated = $ageGated;
         null !== $assignedPhoneNumbersCount && $obj->assignedPhoneNumbersCount = $assignedPhoneNumbersCount;
         null !== $brandDisplayName && $obj->brandDisplayName = $brandDisplayName;
-        null !== $campaignStatus && $obj->campaignStatus = $campaignStatus instanceof CampaignStatus ? $campaignStatus->value : $campaignStatus;
+        null !== $campaignStatus && $obj['campaignStatus'] = $campaignStatus;
         null !== $createdAt && $obj->createdAt = $createdAt;
         null !== $description && $obj->description = $description;
         null !== $directLending && $obj->directLending = $directLending;
@@ -462,7 +462,7 @@ final class TelnyxDownstreamCampaign implements BaseModel
         CampaignStatus|string $campaignStatus
     ): self {
         $obj = clone $this;
-        $obj->campaignStatus = $campaignStatus instanceof CampaignStatus ? $campaignStatus->value : $campaignStatus;
+        $obj['campaignStatus'] = $campaignStatus;
 
         return $obj;
     }

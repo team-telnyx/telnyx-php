@@ -110,7 +110,7 @@ final class PortingPhoneNumberBlock implements BaseModel
         null !== $countryCode && $obj->countryCode = $countryCode;
         null !== $createdAt && $obj->createdAt = $createdAt;
         null !== $phoneNumberRange && $obj->phoneNumberRange = $phoneNumberRange;
-        null !== $phoneNumberType && $obj->phoneNumberType = $phoneNumberType instanceof PhoneNumberType ? $phoneNumberType->value : $phoneNumberType;
+        null !== $phoneNumberType && $obj['phoneNumberType'] = $phoneNumberType;
         null !== $recordType && $obj->recordType = $recordType;
         null !== $updatedAt && $obj->updatedAt = $updatedAt;
 
@@ -184,7 +184,7 @@ final class PortingPhoneNumberBlock implements BaseModel
         PhoneNumberType|string $phoneNumberType
     ): self {
         $obj = clone $this;
-        $obj->phoneNumberType = $phoneNumberType instanceof PhoneNumberType ? $phoneNumberType->value : $phoneNumberType;
+        $obj['phoneNumberType'] = $phoneNumberType;
 
         return $obj;
     }

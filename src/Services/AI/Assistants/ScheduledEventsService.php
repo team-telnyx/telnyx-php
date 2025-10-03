@@ -16,7 +16,6 @@ use Telnyx\AI\Assistants\ScheduledEvents\ScheduledPhoneCallEventResponse;
 use Telnyx\AI\Assistants\ScheduledEvents\ScheduledSMSEventResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\ScheduledEventsContract;
 
@@ -152,8 +151,6 @@ final class ScheduledEventsService implements ScheduledEventsContract
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param \DateTimeInterface $toDate
      *
-     * @return ScheduledEventListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -178,8 +175,6 @@ final class ScheduledEventsService implements ScheduledEventsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ScheduledEventListResponse<HasRawResponse>
      *
      * @throws APIException
      */

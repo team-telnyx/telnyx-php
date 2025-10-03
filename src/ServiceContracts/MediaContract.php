@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Media\MediaGetResponse;
 use Telnyx\Media\MediaListParams\Filter;
 use Telnyx\Media\MediaListResponse;
@@ -20,8 +19,6 @@ interface MediaContract
     /**
      * @api
      *
-     * @return MediaGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
@@ -32,23 +29,8 @@ interface MediaContract
     /**
      * @api
      *
-     * @return MediaGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $mediaName,
-        mixed $params,
-        ?RequestOptions $requestOptions = null
-    ): MediaGetResponse;
-
-    /**
-     * @api
-     *
      * @param string $mediaURL The URL where the media to be stored in Telnyx network is currently hosted. The maximum allowed size is 20 MB.
      * @param int $ttlSecs The number of seconds after which the media resource will be deleted, defaults to 2 days. The maximum allowed vale is 630720000, which translates to 20 years.
-     *
-     * @return MediaUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -64,8 +46,6 @@ interface MediaContract
      *
      * @param array<string, mixed> $params
      *
-     * @return MediaUpdateResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function updateRaw(
@@ -79,8 +59,6 @@ interface MediaContract
      *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[content_type][]
      *
-     * @return MediaListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -92,8 +70,6 @@ interface MediaContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return MediaListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -117,30 +93,8 @@ interface MediaContract
      *
      * @throws APIException
      */
-    public function deleteRaw(
-        string $mediaName,
-        mixed $params,
-        ?RequestOptions $requestOptions = null
-    ): mixed;
-
-    /**
-     * @api
-     *
-     * @throws APIException
-     */
     public function download(
         string $mediaName,
-        ?RequestOptions $requestOptions = null
-    ): string;
-
-    /**
-     * @api
-     *
-     * @throws APIException
-     */
-    public function downloadRaw(
-        string $mediaName,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): string;
 
@@ -150,8 +104,6 @@ interface MediaContract
      * @param string $mediaURL The URL where the media to be stored in Telnyx network is currently hosted. The maximum allowed size is 20 MB.
      * @param string $mediaName the unique identifier of a file
      * @param int $ttlSecs The number of seconds after which the media resource will be deleted, defaults to 2 days. The maximum allowed vale is 630720000, which translates to 20 years.
-     *
-     * @return MediaUploadResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -166,8 +118,6 @@ interface MediaContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return MediaUploadResponse<HasRawResponse>
      *
      * @throws APIException
      */

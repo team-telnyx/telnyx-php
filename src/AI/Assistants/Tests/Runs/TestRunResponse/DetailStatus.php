@@ -65,7 +65,7 @@ final class DetailStatus implements BaseModel
         $obj = new self;
 
         $obj->name = $name;
-        $obj->status = $status instanceof TestStatus ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }
@@ -92,7 +92,7 @@ final class DetailStatus implements BaseModel
     public function withStatus(TestStatus|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof TestStatus ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

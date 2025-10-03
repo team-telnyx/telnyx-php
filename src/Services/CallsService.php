@@ -16,7 +16,6 @@ use Telnyx\Calls\CallDialParams\RecordFormat;
 use Telnyx\Calls\CallDialParams\RecordTrack;
 use Telnyx\Calls\CallDialParams\RecordTrim;
 use Telnyx\Calls\CallDialParams\SipTransportProtocol;
-use Telnyx\Calls\CallDialParams\StreamBidirectionalSamplingRate;
 use Telnyx\Calls\CallDialParams\StreamTrack;
 use Telnyx\Calls\CallDialParams\SupervisorRole;
 use Telnyx\Calls\CallDialParams\WebhookURLMethod;
@@ -32,7 +31,6 @@ use Telnyx\Calls\StreamBidirectionalTargetLegs;
 use Telnyx\Calls\StreamCodec;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\CallsContract;
 use Telnyx\Services\Calls\ActionsService;
@@ -108,7 +106,7 @@ final class CallsService implements CallsContract
      * @param SoundModifications $soundModifications use this field to modify sound effects, for example adjust the pitch
      * @param StreamBidirectionalCodec|value-of<StreamBidirectionalCodec> $streamBidirectionalCodec Indicates codec for bidirectional streaming RTP payloads. Used only with stream_bidirectional_mode=rtp. Case sensitive.
      * @param StreamBidirectionalMode|value-of<StreamBidirectionalMode> $streamBidirectionalMode configures method of bidirectional streaming (mp3, rtp)
-     * @param StreamBidirectionalSamplingRate|value-of<StreamBidirectionalSamplingRate> $streamBidirectionalSamplingRate audio sampling rate
+     * @param 8000|16000|22050|24000|48000 $streamBidirectionalSamplingRate audio sampling rate
      * @param StreamBidirectionalTargetLegs|value-of<StreamBidirectionalTargetLegs> $streamBidirectionalTargetLegs specifies which call legs should receive the bidirectional stream audio
      * @param StreamCodec|value-of<StreamCodec> $streamCodec Specifies the codec to be used for the streamed audio. When set to 'default' or when transcoding is not possible, the codec from the call will be used.
      * @param bool $streamEstablishBeforeCallOriginate Establish websocket connection before dialing the destination. This is useful for cases where the websocket connection takes a long time to establish.
@@ -122,8 +120,6 @@ final class CallsService implements CallsContract
      * @param TranscriptionStartRequest $transcriptionConfig
      * @param string $webhookURL use this field to override the URL for which Telnyx will send subsequent webhooks to for this call
      * @param WebhookURLMethod|value-of<WebhookURLMethod> $webhookURLMethod HTTP request type used for `webhook_url`
-     *
-     * @return CallDialResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -243,8 +239,6 @@ final class CallsService implements CallsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return CallDialResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function dialRaw(
@@ -271,29 +265,10 @@ final class CallsService implements CallsContract
      *
      * Returns the status of a call (data is available 10 minutes after call ended).
      *
-     * @return CallGetStatusResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieveStatus(
         string $callControlID,
-        ?RequestOptions $requestOptions = null
-    ): CallGetStatusResponse {
-        $params = [];
-
-        return $this->retrieveStatusRaw($callControlID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return CallGetStatusResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveStatusRaw(
-        string $callControlID,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): CallGetStatusResponse {
         // @phpstan-ignore-next-line;

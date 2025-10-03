@@ -59,7 +59,7 @@ final class PhoneNumber implements BaseModel
         $obj = new self;
 
         $obj->phoneNumber = $phoneNumber;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }
@@ -78,7 +78,7 @@ final class PhoneNumber implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

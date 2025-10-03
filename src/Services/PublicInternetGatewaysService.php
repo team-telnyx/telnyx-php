@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayCreateParams;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayDeleteResponse;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayGetResponse;
@@ -36,8 +35,6 @@ final class PublicInternetGatewaysService implements PublicInternetGatewaysContr
      * @param string $networkID the id of the network associated with the interface
      * @param string $regionCode the region the interface should be deployed to
      *
-     * @return PublicInternetGatewayNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -57,8 +54,6 @@ final class PublicInternetGatewaysService implements PublicInternetGatewaysContr
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return PublicInternetGatewayNewResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -86,29 +81,10 @@ final class PublicInternetGatewaysService implements PublicInternetGatewaysContr
      *
      * Retrieve a Public Internet Gateway.
      *
-     * @return PublicInternetGatewayGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): PublicInternetGatewayGetResponse {
-        $params = [];
-
-        return $this->retrieveRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return PublicInternetGatewayGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): PublicInternetGatewayGetResponse {
         // @phpstan-ignore-next-line;
@@ -128,8 +104,6 @@ final class PublicInternetGatewaysService implements PublicInternetGatewaysContr
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[network_id]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
-     * @return PublicInternetGatewayListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -146,8 +120,6 @@ final class PublicInternetGatewaysService implements PublicInternetGatewaysContr
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return PublicInternetGatewayListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -175,29 +147,10 @@ final class PublicInternetGatewaysService implements PublicInternetGatewaysContr
      *
      * Delete a Public Internet Gateway.
      *
-     * @return PublicInternetGatewayDeleteResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): PublicInternetGatewayDeleteResponse {
-        $params = [];
-
-        return $this->deleteRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return PublicInternetGatewayDeleteResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): PublicInternetGatewayDeleteResponse {
         // @phpstan-ignore-next-line;

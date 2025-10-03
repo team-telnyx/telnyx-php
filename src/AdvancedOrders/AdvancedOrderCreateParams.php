@@ -102,8 +102,8 @@ final class AdvancedOrderCreateParams implements BaseModel
         null !== $comments && $obj->comments = $comments;
         null !== $countryCode && $obj->countryCode = $countryCode;
         null !== $customerReference && $obj->customerReference = $customerReference;
-        null !== $features && $obj->features = array_map(fn ($v) => $v instanceof Feature ? $v->value : $v, $features);
-        null !== $phoneNumberType && $obj->phoneNumberType = $phoneNumberType instanceof PhoneNumberType ? $phoneNumberType->value : $phoneNumberType;
+        null !== $features && $obj['features'] = $features;
+        null !== $phoneNumberType && $obj['phoneNumberType'] = $phoneNumberType;
         null !== $quantity && $obj->quantity = $quantity;
         null !== $requirementGroupID && $obj->requirementGroupID = $requirementGroupID;
 
@@ -148,7 +148,7 @@ final class AdvancedOrderCreateParams implements BaseModel
     public function withFeatures(array $features): self
     {
         $obj = clone $this;
-        $obj->features = array_map(fn ($v) => $v instanceof Feature ? $v->value : $v, $features);
+        $obj['features'] = $features;
 
         return $obj;
     }
@@ -160,7 +160,7 @@ final class AdvancedOrderCreateParams implements BaseModel
         PhoneNumberType|string $phoneNumberType
     ): self {
         $obj = clone $this;
-        $obj->phoneNumberType = $phoneNumberType instanceof PhoneNumberType ? $phoneNumberType->value : $phoneNumberType;
+        $obj['phoneNumberType'] = $phoneNumberType;
 
         return $obj;
     }

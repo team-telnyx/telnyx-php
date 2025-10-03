@@ -6,20 +6,20 @@ namespace Telnyx\InboundChannels;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\InboundChannels\InboundChannelListResponse\Data;
 
 /**
  * @phpstan-type inbound_channel_list_response = array{data?: Data}
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class InboundChannelListResponse implements BaseModel
+final class InboundChannelListResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<inbound_channel_list_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     #[Api(optional: true)]
     public ?Data $data;

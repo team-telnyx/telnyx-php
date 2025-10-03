@@ -97,7 +97,7 @@ final class ActionLeaveParams implements BaseModel
 
         $obj->callControlID = $callControlID;
 
-        null !== $beepEnabled && $obj->beepEnabled = $beepEnabled instanceof BeepEnabled ? $beepEnabled->value : $beepEnabled;
+        null !== $beepEnabled && $obj['beepEnabled'] = $beepEnabled;
         null !== $commandID && $obj->commandID = $commandID;
 
         return $obj;
@@ -122,7 +122,7 @@ final class ActionLeaveParams implements BaseModel
     public function withBeepEnabled(BeepEnabled|string $beepEnabled): self
     {
         $obj = clone $this;
-        $obj->beepEnabled = $beepEnabled instanceof BeepEnabled ? $beepEnabled->value : $beepEnabled;
+        $obj['beepEnabled'] = $beepEnabled;
 
         return $obj;
     }

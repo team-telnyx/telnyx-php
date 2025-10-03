@@ -68,7 +68,7 @@ final class RequirementTypeListParams implements BaseModel
         $obj = new self;
 
         null !== $filter && $obj->filter = $filter;
-        null !== $sort && $obj->sort = array_map(fn ($v) => $v instanceof Sort ? $v->value : $v, $sort);
+        null !== $sort && $obj['sort'] = $sort;
 
         return $obj;
     }
@@ -92,7 +92,7 @@ final class RequirementTypeListParams implements BaseModel
     public function withSort(array $sort): self
     {
         $obj = clone $this;
-        $obj->sort = array_map(fn ($v) => $v instanceof Sort ? $v->value : $v, $sort);
+        $obj['sort'] = $sort;
 
         return $obj;
     }

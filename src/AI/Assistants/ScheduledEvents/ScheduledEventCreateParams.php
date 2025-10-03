@@ -129,7 +129,7 @@ final class ScheduledEventCreateParams implements BaseModel
 
         $obj->scheduledAtFixedDatetime = $scheduledAtFixedDatetime;
         $obj->telnyxAgentTarget = $telnyxAgentTarget;
-        $obj->telnyxConversationChannel = $telnyxConversationChannel instanceof ConversationChannelType ? $telnyxConversationChannel->value : $telnyxConversationChannel;
+        $obj['telnyxConversationChannel'] = $telnyxConversationChannel;
         $obj->telnyxEndUserTarget = $telnyxEndUserTarget;
 
         null !== $conversationMetadata && $obj->conversationMetadata = $conversationMetadata;
@@ -168,7 +168,7 @@ final class ScheduledEventCreateParams implements BaseModel
         ConversationChannelType|string $telnyxConversationChannel
     ): self {
         $obj = clone $this;
-        $obj->telnyxConversationChannel = $telnyxConversationChannel instanceof ConversationChannelType ? $telnyxConversationChannel->value : $telnyxConversationChannel;
+        $obj['telnyxConversationChannel'] = $telnyxConversationChannel;
 
         return $obj;
     }

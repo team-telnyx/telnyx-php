@@ -6,7 +6,9 @@ namespace Telnyx\CustomStorageCredentials;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\CustomStorageCredentials\CustomStorageCredentialGetResponse\RecordType;
 
 /**
@@ -15,15 +17,13 @@ use Telnyx\CustomStorageCredentials\CustomStorageCredentialGetResponse\RecordTyp
  *   data: CustomStorageConfiguration,
  *   recordType: value-of<RecordType>,
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class CustomStorageCredentialGetResponse implements BaseModel
+final class CustomStorageCredentialGetResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<custom_storage_credential_get_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /**
      * Uniquely identifies a Telnyx application (Call Control, TeXML) or Sip connection resource.
@@ -82,7 +82,7 @@ final class CustomStorageCredentialGetResponse implements BaseModel
 
         $obj->connectionID = $connectionID;
         $obj->data = $data;
-        $obj->recordType = $recordType instanceof RecordType ? $recordType->value : $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -114,7 +114,7 @@ final class CustomStorageCredentialGetResponse implements BaseModel
     public function withRecordType(RecordType|string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType instanceof RecordType ? $recordType->value : $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }

@@ -64,7 +64,7 @@ final class Emergency implements BaseModel
 
         null !== $emergencyAddressID && $obj->emergencyAddressID = $emergencyAddressID;
         null !== $emergencyEnabled && $obj->emergencyEnabled = $emergencyEnabled;
-        null !== $emergencyStatus && $obj->emergencyStatus = $emergencyStatus instanceof EmergencyStatus ? $emergencyStatus->value : $emergencyStatus;
+        null !== $emergencyStatus && $obj['emergencyStatus'] = $emergencyStatus;
 
         return $obj;
     }
@@ -100,7 +100,7 @@ final class Emergency implements BaseModel
         EmergencyStatus|string $emergencyStatus
     ): self {
         $obj = clone $this;
-        $obj->emergencyStatus = $emergencyStatus instanceof EmergencyStatus ? $emergencyStatus->value : $emergencyStatus;
+        $obj['emergencyStatus'] = $emergencyStatus;
 
         return $obj;
     }

@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Networks\NetworkCreateParams;
 use Telnyx\Networks\NetworkDeleteResponse;
 use Telnyx\Networks\NetworkGetResponse;
@@ -47,8 +46,6 @@ final class NetworksService implements NetworksContract
      *
      * @param string $name a user specified name for the network
      *
-     * @return NetworkNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -64,8 +61,6 @@ final class NetworksService implements NetworksContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return NetworkNewResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -93,29 +88,10 @@ final class NetworksService implements NetworksContract
      *
      * Retrieve a Network.
      *
-     * @return NetworkGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): NetworkGetResponse {
-        $params = [];
-
-        return $this->retrieveRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return NetworkGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): NetworkGetResponse {
         // @phpstan-ignore-next-line;
@@ -134,8 +110,6 @@ final class NetworksService implements NetworksContract
      *
      * @param string $name a user specified name for the network
      *
-     * @return NetworkUpdateResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function update(
@@ -152,8 +126,6 @@ final class NetworksService implements NetworksContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return NetworkUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -185,8 +157,6 @@ final class NetworksService implements NetworksContract
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[name]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
-     * @return NetworkListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -203,8 +173,6 @@ final class NetworksService implements NetworksContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return NetworkListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -232,29 +200,10 @@ final class NetworksService implements NetworksContract
      *
      * Delete a Network.
      *
-     * @return NetworkDeleteResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): NetworkDeleteResponse {
-        $params = [];
-
-        return $this->deleteRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return NetworkDeleteResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): NetworkDeleteResponse {
         // @phpstan-ignore-next-line;
@@ -274,8 +223,6 @@ final class NetworksService implements NetworksContract
      * @param Telnyx\Networks\NetworkListInterfacesParams\Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[name], filter[type], filter[status]
      * @param Telnyx\Networks\NetworkListInterfacesParams\Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
-     * @return NetworkListInterfacesResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function listInterfaces(
@@ -293,8 +240,6 @@ final class NetworksService implements NetworksContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return NetworkListInterfacesResponse<HasRawResponse>
      *
      * @throws APIException
      */

@@ -6,21 +6,21 @@ namespace Telnyx\VerifyProfiles;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type verify_profile_new_template_response = array{
  *   data?: VerifyProfileMessageTemplateResponse
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class VerifyProfileNewTemplateResponse implements BaseModel
+final class VerifyProfileNewTemplateResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<verify_profile_new_template_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     #[Api(optional: true)]
     public ?VerifyProfileMessageTemplateResponse $data;

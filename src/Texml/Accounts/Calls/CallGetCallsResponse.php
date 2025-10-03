@@ -6,7 +6,9 @@ namespace Telnyx\Texml\Accounts\Calls;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Texml\Accounts\Calls\CallGetCallsResponse\Call;
 
 /**
@@ -20,15 +22,13 @@ use Telnyx\Texml\Accounts\Calls\CallGetCallsResponse\Call;
  *   start?: int,
  *   uri?: string,
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class CallGetCallsResponse implements BaseModel
+final class CallGetCallsResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<call_get_calls_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /** @var list<Call>|null $calls */
     #[Api(list: Call::class, optional: true)]

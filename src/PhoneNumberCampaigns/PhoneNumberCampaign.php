@@ -6,7 +6,9 @@ namespace Telnyx\PhoneNumberCampaigns;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PhoneNumberCampaigns\PhoneNumberCampaign\AssignmentStatus;
 
 /**
@@ -22,15 +24,13 @@ use Telnyx\PhoneNumberCampaigns\PhoneNumberCampaign\AssignmentStatus;
  *   tcrCampaignID?: string,
  *   telnyxCampaignID?: string,
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class PhoneNumberCampaign implements BaseModel
+final class PhoneNumberCampaign implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<phone_number_campaign> */
     use SdkModel;
+
+    use SdkResponse;
 
     /**
      * For shared campaigns, this is the TCR campaign ID, otherwise it is the campaign ID.
@@ -136,7 +136,7 @@ final class PhoneNumberCampaign implements BaseModel
         $obj->phoneNumber = $phoneNumber;
         $obj->updatedAt = $updatedAt;
 
-        null !== $assignmentStatus && $obj->assignmentStatus = $assignmentStatus instanceof AssignmentStatus ? $assignmentStatus->value : $assignmentStatus;
+        null !== $assignmentStatus && $obj['assignmentStatus'] = $assignmentStatus;
         null !== $brandID && $obj->brandID = $brandID;
         null !== $failureReasons && $obj->failureReasons = $failureReasons;
         null !== $tcrBrandID && $obj->tcrBrandID = $tcrBrandID;
@@ -190,7 +190,7 @@ final class PhoneNumberCampaign implements BaseModel
         AssignmentStatus|string $assignmentStatus
     ): self {
         $obj = clone $this;
-        $obj->assignmentStatus = $assignmentStatus instanceof AssignmentStatus ? $assignmentStatus->value : $assignmentStatus;
+        $obj['assignmentStatus'] = $assignmentStatus;
 
         return $obj;
     }

@@ -6,19 +6,19 @@ namespace Telnyx\Legacy\Reporting\UsageReports;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type usage_report_get_speech_to_text_response = array{data?: mixed}
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class UsageReportGetSpeechToTextResponse implements BaseModel
+final class UsageReportGetSpeechToTextResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<usage_report_get_speech_to_text_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     #[Api(optional: true)]
     public mixed $data;

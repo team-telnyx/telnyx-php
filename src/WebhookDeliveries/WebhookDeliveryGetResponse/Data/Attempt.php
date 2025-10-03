@@ -82,7 +82,7 @@ final class Attempt implements BaseModel
         null !== $finishedAt && $obj->finishedAt = $finishedAt;
         null !== $http && $obj->http = $http;
         null !== $startedAt && $obj->startedAt = $startedAt;
-        null !== $status && $obj->status = $status instanceof Status ? $status->value : $status;
+        null !== $status && $obj['status'] = $status;
 
         return $obj;
     }
@@ -139,7 +139,7 @@ final class Attempt implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

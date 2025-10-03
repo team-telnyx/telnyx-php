@@ -6,22 +6,22 @@ namespace Telnyx\RecordingTranscriptions;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\RecordingTranscriptions\RecordingTranscriptionListResponse\Meta;
 
 /**
  * @phpstan-type recording_transcription_list_response = array{
  *   data?: list<RecordingTranscription>, meta?: Meta
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class RecordingTranscriptionListResponse implements BaseModel
+final class RecordingTranscriptionListResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<recording_transcription_list_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /** @var list<RecordingTranscription>|null $data */
     #[Api(list: RecordingTranscription::class, optional: true)]

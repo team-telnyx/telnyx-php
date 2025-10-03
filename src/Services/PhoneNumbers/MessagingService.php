@@ -6,7 +6,6 @@ namespace Telnyx\Services\PhoneNumbers;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PhoneNumbers\Messaging\MessagingGetResponse;
 use Telnyx\PhoneNumbers\Messaging\MessagingListParams;
 use Telnyx\PhoneNumbers\Messaging\MessagingListParams\Page;
@@ -30,29 +29,10 @@ final class MessagingService implements MessagingContract
      *
      * Retrieve a phone number with messaging settings
      *
-     * @return MessagingGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): MessagingGetResponse {
-        $params = [];
-
-        return $this->retrieveRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return MessagingGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): MessagingGetResponse {
         // @phpstan-ignore-next-line;
@@ -79,8 +59,6 @@ final class MessagingService implements MessagingContract
      * * Set this field to `""` to unassign the number from its messaging profile
      * * Set this field to a quoted UUID of a messaging profile to assign this number to that messaging profile
      *
-     * @return MessagingUpdateResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function update(
@@ -101,8 +79,6 @@ final class MessagingService implements MessagingContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return MessagingUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -133,8 +109,6 @@ final class MessagingService implements MessagingContract
      *
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
-     * @return MessagingListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -150,8 +124,6 @@ final class MessagingService implements MessagingContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return MessagingListResponse<HasRawResponse>
      *
      * @throws APIException
      */

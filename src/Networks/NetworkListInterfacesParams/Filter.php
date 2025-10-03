@@ -61,7 +61,7 @@ final class Filter implements BaseModel
         $obj = new self;
 
         null !== $name && $obj->name = $name;
-        null !== $status && $obj->status = $status instanceof InterfaceStatus ? $status->value : $status;
+        null !== $status && $obj['status'] = $status;
         null !== $type && $obj->type = $type;
 
         return $obj;
@@ -86,7 +86,7 @@ final class Filter implements BaseModel
     public function withStatus(InterfaceStatus|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof InterfaceStatus ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

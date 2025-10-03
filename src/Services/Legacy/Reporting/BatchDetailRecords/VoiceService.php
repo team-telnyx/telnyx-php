@@ -6,7 +6,6 @@ namespace Telnyx\Services\Legacy\Reporting\BatchDetailRecords;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Voice\VoiceCreateParams;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Voice\VoiceDeleteResponse;
@@ -44,8 +43,6 @@ final class VoiceService implements VoiceContract
      * @param bool $selectAllManagedAccounts Whether to select all managed accounts
      * @param string $source Source of the report. Valid values: calls (default), call-control, fax-api, webrtc
      * @param string $timezone Timezone for the report
-     *
-     * @return VoiceNewResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -89,8 +86,6 @@ final class VoiceService implements VoiceContract
      *
      * @param array<string, mixed> $params
      *
-     * @return VoiceNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function createRaw(
@@ -117,29 +112,10 @@ final class VoiceService implements VoiceContract
      *
      * Retrieves a specific CDR report request by ID
      *
-     * @return VoiceGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): VoiceGetResponse {
-        $params = [];
-
-        return $this->retrieveRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return VoiceGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): VoiceGetResponse {
         // @phpstan-ignore-next-line;
@@ -156,27 +132,9 @@ final class VoiceService implements VoiceContract
      *
      * Retrieves all CDR report requests for the authenticated user
      *
-     * @return VoiceListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
-        ?RequestOptions $requestOptions = null
-    ): VoiceListResponse {
-        $params = [];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return VoiceListResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): VoiceListResponse {
         // @phpstan-ignore-next-line;
@@ -193,29 +151,10 @@ final class VoiceService implements VoiceContract
      *
      * Deletes a specific CDR report request by ID
      *
-     * @return VoiceDeleteResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): VoiceDeleteResponse {
-        $params = [];
-
-        return $this->deleteRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return VoiceDeleteResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): VoiceDeleteResponse {
         // @phpstan-ignore-next-line;
@@ -232,27 +171,9 @@ final class VoiceService implements VoiceContract
      *
      * Retrieves all available fields that can be used in CDR reports
      *
-     * @return VoiceGetFieldsResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieveFields(
-        ?RequestOptions $requestOptions = null
-    ): VoiceGetFieldsResponse {
-        $params = [];
-
-        return $this->retrieveFieldsRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return VoiceGetFieldsResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveFieldsRaw(
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): VoiceGetFieldsResponse {
         // @phpstan-ignore-next-line;

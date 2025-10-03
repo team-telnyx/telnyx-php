@@ -83,7 +83,7 @@ final class Data implements BaseModel
         null !== $createdAt && $obj->createdAt = $createdAt;
         null !== $portingOrderID && $obj->portingOrderID = $portingOrderID;
         null !== $recordType && $obj->recordType = $recordType;
-        null !== $userType && $obj->userType = $userType instanceof UserType ? $userType->value : $userType;
+        null !== $userType && $obj['userType'] = $userType;
 
         return $obj;
     }
@@ -145,7 +145,7 @@ final class Data implements BaseModel
     public function withUserType(UserType|string $userType): self
     {
         $obj = clone $this;
-        $obj->userType = $userType instanceof UserType ? $userType->value : $userType;
+        $obj['userType'] = $userType;
 
         return $obj;
     }

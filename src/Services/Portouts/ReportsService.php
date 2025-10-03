@@ -6,7 +6,6 @@ namespace Telnyx\Services\Portouts;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Portouts\Reports\ExportPortoutsCsvReport;
 use Telnyx\Portouts\Reports\ReportCreateParams;
 use Telnyx\Portouts\Reports\ReportCreateParams\ReportType;
@@ -36,8 +35,6 @@ final class ReportsService implements ReportsContract
      * @param ExportPortoutsCsvReport $params the parameters for generating a port-outs CSV report
      * @param ReportType|value-of<ReportType> $reportType Identifies the type of report
      *
-     * @return ReportNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -54,8 +51,6 @@ final class ReportsService implements ReportsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ReportNewResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -83,29 +78,10 @@ final class ReportsService implements ReportsContract
      *
      * Retrieve a specific report generated.
      *
-     * @return ReportGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): ReportGetResponse {
-        $params = [];
-
-        return $this->retrieveRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return ReportGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): ReportGetResponse {
         // @phpstan-ignore-next-line;
@@ -125,8 +101,6 @@ final class ReportsService implements ReportsContract
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[report_type], filter[status]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
-     * @return ReportListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -143,8 +117,6 @@ final class ReportsService implements ReportsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ReportListResponse<HasRawResponse>
      *
      * @throws APIException
      */

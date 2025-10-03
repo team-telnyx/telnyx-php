@@ -103,9 +103,9 @@ final class RecordingTranscription implements BaseModel
         null !== $id && $obj->id = $id;
         null !== $createdAt && $obj->createdAt = $createdAt;
         null !== $durationMillis && $obj->durationMillis = $durationMillis;
-        null !== $recordType && $obj->recordType = $recordType instanceof RecordType ? $recordType->value : $recordType;
+        null !== $recordType && $obj['recordType'] = $recordType;
         null !== $recordingID && $obj->recordingID = $recordingID;
-        null !== $status && $obj->status = $status instanceof Status ? $status->value : $status;
+        null !== $status && $obj['status'] = $status;
         null !== $transcriptionText && $obj->transcriptionText = $transcriptionText;
         null !== $updatedAt && $obj->updatedAt = $updatedAt;
 
@@ -151,7 +151,7 @@ final class RecordingTranscription implements BaseModel
     public function withRecordType(RecordType|string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType instanceof RecordType ? $recordType->value : $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -175,7 +175,7 @@ final class RecordingTranscription implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

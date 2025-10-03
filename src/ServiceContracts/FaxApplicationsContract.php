@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\FaxApplications\FaxApplicationCreateParams\Inbound;
 use Telnyx\FaxApplications\FaxApplicationCreateParams\Outbound;
@@ -36,8 +35,6 @@ interface FaxApplicationsContract
      * @param string|null $webhookEventFailoverURL The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
      *
-     * @return FaxApplicationNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -58,8 +55,6 @@ interface FaxApplicationsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return FaxApplicationNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function createRaw(
@@ -70,25 +65,10 @@ interface FaxApplicationsContract
     /**
      * @api
      *
-     * @return FaxApplicationGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): FaxApplicationGetResponse;
-
-    /**
-     * @api
-     *
-     * @return FaxApplicationGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): FaxApplicationGetResponse;
 
@@ -105,8 +85,6 @@ interface FaxApplicationsContract
      * @param list<string> $tags tags associated with the Fax Application
      * @param string|null $webhookEventFailoverURL The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
-     *
-     * @return FaxApplicationUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -129,8 +107,6 @@ interface FaxApplicationsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return FaxApplicationUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -158,8 +134,6 @@ interface FaxApplicationsContract
      *   </li>
      * </ul> <br/> If not given, results are sorted by <code>created_at</code> in descending order.
      *
-     * @return FaxApplicationListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -174,8 +148,6 @@ interface FaxApplicationsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return FaxApplicationListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function listRaw(
@@ -186,25 +158,10 @@ interface FaxApplicationsContract
     /**
      * @api
      *
-     * @return FaxApplicationDeleteResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): FaxApplicationDeleteResponse;
-
-    /**
-     * @api
-     *
-     * @return FaxApplicationDeleteResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): FaxApplicationDeleteResponse;
 }

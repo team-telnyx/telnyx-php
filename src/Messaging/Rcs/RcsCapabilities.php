@@ -83,7 +83,7 @@ final class RcsCapabilities implements BaseModel
         null !== $agentName && $obj->agentName = $agentName;
         null !== $features && $obj->features = $features;
         null !== $phoneNumber && $obj->phoneNumber = $phoneNumber;
-        null !== $recordType && $obj->recordType = $recordType instanceof RecordType ? $recordType->value : $recordType;
+        null !== $recordType && $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -142,7 +142,7 @@ final class RcsCapabilities implements BaseModel
     public function withRecordType(RecordType|string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType instanceof RecordType ? $recordType->value : $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }

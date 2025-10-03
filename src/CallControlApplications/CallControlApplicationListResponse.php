@@ -7,21 +7,21 @@ namespace Telnyx\CallControlApplications;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type call_control_application_list_response = array{
  *   data?: list<CallControlApplication>, meta?: PaginationMeta
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class CallControlApplicationListResponse implements BaseModel
+final class CallControlApplicationListResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<call_control_application_list_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /** @var list<CallControlApplication>|null $data */
     #[Api(list: CallControlApplication::class, optional: true)]

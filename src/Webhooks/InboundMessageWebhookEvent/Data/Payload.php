@@ -255,7 +255,7 @@ final class Payload implements BaseModel
         null !== $completedAt && $obj->completedAt = $completedAt;
         null !== $cost && $obj->cost = $cost;
         null !== $costBreakdown && $obj->costBreakdown = $costBreakdown;
-        null !== $direction && $obj->direction = $direction instanceof Direction ? $direction->value : $direction;
+        null !== $direction && $obj['direction'] = $direction;
         null !== $encoding && $obj->encoding = $encoding;
         null !== $errors && $obj->errors = $errors;
         null !== $from && $obj->from = $from;
@@ -263,7 +263,7 @@ final class Payload implements BaseModel
         null !== $messagingProfileID && $obj->messagingProfileID = $messagingProfileID;
         null !== $parts && $obj->parts = $parts;
         null !== $receivedAt && $obj->receivedAt = $receivedAt;
-        null !== $recordType && $obj->recordType = $recordType instanceof RecordType ? $recordType->value : $recordType;
+        null !== $recordType && $obj['recordType'] = $recordType;
         null !== $sentAt && $obj->sentAt = $sentAt;
         null !== $tags && $obj->tags = $tags;
         null !== $tcrCampaignBillable && $obj->tcrCampaignBillable = $tcrCampaignBillable;
@@ -271,7 +271,7 @@ final class Payload implements BaseModel
         null !== $tcrCampaignRegistered && $obj->tcrCampaignRegistered = $tcrCampaignRegistered;
         null !== $text && $obj->text = $text;
         null !== $to && $obj->to = $to;
-        null !== $type && $obj->type = $type instanceof Type ? $type->value : $type;
+        null !== $type && $obj['type'] = $type;
         null !== $validUntil && $obj->validUntil = $validUntil;
         null !== $webhookFailoverURL && $obj->webhookFailoverURL = $webhookFailoverURL;
         null !== $webhookURL && $obj->webhookURL = $webhookURL;
@@ -339,7 +339,7 @@ final class Payload implements BaseModel
     public function withDirection(Direction|string $direction): self
     {
         $obj = clone $this;
-        $obj->direction = $direction instanceof Direction ? $direction->value : $direction;
+        $obj['direction'] = $direction;
 
         return $obj;
     }
@@ -428,7 +428,7 @@ final class Payload implements BaseModel
     public function withRecordType(RecordType|string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType instanceof RecordType ? $recordType->value : $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -523,7 +523,7 @@ final class Payload implements BaseModel
     public function withType(Type|string $type): self
     {
         $obj = clone $this;
-        $obj->type = $type instanceof Type ? $type->value : $type;
+        $obj['type'] = $type;
 
         return $obj;
     }

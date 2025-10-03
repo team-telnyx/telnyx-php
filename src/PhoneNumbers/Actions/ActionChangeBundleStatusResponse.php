@@ -6,21 +6,21 @@ namespace Telnyx\PhoneNumbers\Actions;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type action_change_bundle_status_response = array{
  *   data?: PhoneNumberWithVoiceSettings
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class ActionChangeBundleStatusResponse implements BaseModel
+final class ActionChangeBundleStatusResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<action_change_bundle_status_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     #[Api(optional: true)]
     public ?PhoneNumberWithVoiceSettings $data;

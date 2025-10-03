@@ -154,13 +154,13 @@ final class Conference implements BaseModel
         $obj->createdAt = $createdAt;
         $obj->expiresAt = $expiresAt;
         $obj->name = $name;
-        $obj->recordType = $recordType instanceof RecordType ? $recordType->value : $recordType;
+        $obj['recordType'] = $recordType;
 
         null !== $connectionID && $obj->connectionID = $connectionID;
-        null !== $endReason && $obj->endReason = $endReason instanceof EndReason ? $endReason->value : $endReason;
+        null !== $endReason && $obj['endReason'] = $endReason;
         null !== $endedBy && $obj->endedBy = $endedBy;
         null !== $region && $obj->region = $region;
-        null !== $status && $obj->status = $status instanceof Status ? $status->value : $status;
+        null !== $status && $obj['status'] = $status;
         null !== $updatedAt && $obj->updatedAt = $updatedAt;
 
         return $obj;
@@ -216,7 +216,7 @@ final class Conference implements BaseModel
     public function withRecordType(RecordType|string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType instanceof RecordType ? $recordType->value : $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -240,7 +240,7 @@ final class Conference implements BaseModel
     public function withEndReason(EndReason|string $endReason): self
     {
         $obj = clone $this;
-        $obj->endReason = $endReason instanceof EndReason ? $endReason->value : $endReason;
+        $obj['endReason'] = $endReason;
 
         return $obj;
     }
@@ -275,7 +275,7 @@ final class Conference implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

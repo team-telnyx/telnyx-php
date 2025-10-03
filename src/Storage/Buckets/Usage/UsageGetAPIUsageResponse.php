@@ -6,20 +6,20 @@ namespace Telnyx\Storage\Buckets\Usage;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Storage\Buckets\Usage\UsageGetAPIUsageResponse\Data;
 
 /**
  * @phpstan-type usage_get_api_usage_response = array{data?: list<Data>}
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class UsageGetAPIUsageResponse implements BaseModel
+final class UsageGetAPIUsageResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<usage_get_api_usage_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /** @var list<Data>|null $data */
     #[Api(list: Data::class, optional: true)]

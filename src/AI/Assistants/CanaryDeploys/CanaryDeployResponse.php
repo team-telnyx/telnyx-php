@@ -6,7 +6,9 @@ namespace Telnyx\AI\Assistants\CanaryDeploys;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * Response model for canary deploy operations.
@@ -17,15 +19,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *   updatedAt: \DateTimeInterface,
  *   versions: list<VersionConfig>,
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class CanaryDeployResponse implements BaseModel
+final class CanaryDeployResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<canary_deploy_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     #[Api('assistant_id')]
     public string $assistantID;

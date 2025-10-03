@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Faxes\FaxCreateParams\PreviewFormat;
 use Telnyx\Faxes\FaxCreateParams\Quality;
 use Telnyx\Faxes\FaxGetResponse;
@@ -37,8 +36,6 @@ interface FaxesContract
      * @param bool $t38Enabled The flag to disable the T.38 protocol.
      * @param string $webhookURL use this field to override the URL to which Telnyx will send subsequent webhooks for this fax
      *
-     * @return FaxNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -64,8 +61,6 @@ interface FaxesContract
      *
      * @param array<string, mixed> $params
      *
-     * @return FaxNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function createRaw(
@@ -75,8 +70,6 @@ interface FaxesContract
 
     /**
      * @api
-     *
-     * @return FaxGetResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -88,23 +81,8 @@ interface FaxesContract
     /**
      * @api
      *
-     * @return FaxGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
-        ?RequestOptions $requestOptions = null
-    ): FaxGetResponse;
-
-    /**
-     * @api
-     *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[created_at][gte], filter[created_at][gt], filter[created_at][lte], filter[created_at][lt], filter[direction][eq], filter[from][eq], filter[to][eq]
      * @param Page $page Consolidated pagination parameter (deepObject style). Originally: page[size], page[number]
-     *
-     * @return FaxListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -118,8 +96,6 @@ interface FaxesContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return FaxListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -135,17 +111,6 @@ interface FaxesContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): mixed;
-
-    /**
-     * @api
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): mixed;
 }

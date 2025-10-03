@@ -6,21 +6,21 @@ namespace Telnyx\NotificationSettings;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type notification_setting_delete_response = array{
  *   data?: NotificationSetting
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class NotificationSettingDeleteResponse implements BaseModel
+final class NotificationSettingDeleteResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<notification_setting_delete_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     #[Api(optional: true)]
     public ?NotificationSetting $data;

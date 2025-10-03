@@ -26,7 +26,6 @@ use Telnyx\AI\Assistants\TransferTool;
 use Telnyx\AI\Assistants\VoiceSettings;
 use Telnyx\AI\Assistants\WebhookTool;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 
 use const Telnyx\Core\OMIT as omit;
@@ -53,8 +52,6 @@ interface AssistantsContract
      * @param list<WebhookTool|RetrievalTool|HandoffTool|HangupTool|TransferTool|SipReferTool|DtmfTool> $tools The tools that the assistant can use. These may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables)
      * @param TranscriptionSettings $transcription
      * @param VoiceSettings $voiceSettings
-     *
-     * @return AssistantNewResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -83,8 +80,6 @@ interface AssistantsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return AssistantNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function createRaw(
@@ -99,8 +94,6 @@ interface AssistantsContract
      * @param bool $fetchDynamicVariablesFromWebhook
      * @param string $from
      * @param string $to
-     *
-     * @return AssistantGetResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -117,8 +110,6 @@ interface AssistantsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return AssistantGetResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -190,8 +181,6 @@ interface AssistantsContract
     /**
      * @api
      *
-     * @return AssistantsList<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -200,20 +189,6 @@ interface AssistantsContract
 
     /**
      * @api
-     *
-     * @return AssistantsList<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        mixed $params,
-        ?RequestOptions $requestOptions = null
-    ): AssistantsList;
-
-    /**
-     * @api
-     *
-     * @return AssistantDeleteResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -225,24 +200,9 @@ interface AssistantsContract
     /**
      * @api
      *
-     * @return AssistantDeleteResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $assistantID,
-        mixed $params,
-        ?RequestOptions $requestOptions = null,
-    ): AssistantDeleteResponse;
-
-    /**
-     * @api
-     *
      * @param string $content The message content sent by the client to the assistant
      * @param string $conversationID A unique identifier for the conversation thread, used to maintain context
      * @param string $name The optional display name of the user sending the message
-     *
-     * @return AssistantChatResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -259,8 +219,6 @@ interface AssistantsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return AssistantChatResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function chatRaw(
@@ -272,26 +230,11 @@ interface AssistantsContract
     /**
      * @api
      *
-     * @return AssistantCloneResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function clone(
         string $assistantID,
         ?RequestOptions $requestOptions = null
-    ): AssistantCloneResponse;
-
-    /**
-     * @api
-     *
-     * @return AssistantCloneResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function cloneRaw(
-        string $assistantID,
-        mixed $params,
-        ?RequestOptions $requestOptions = null,
     ): AssistantCloneResponse;
 
     /**
@@ -307,21 +250,8 @@ interface AssistantsContract
     /**
      * @api
      *
-     * @throws APIException
-     */
-    public function getTexmlRaw(
-        string $assistantID,
-        mixed $params,
-        ?RequestOptions $requestOptions = null,
-    ): string;
-
-    /**
-     * @api
-     *
      * @param string $apiKeyRef Integration secret pointer that refers to the API key for the external provider. This should be an identifier for an integration secret created via /v2/integration_secrets.
      * @param Provider|value-of<Provider> $provider the external provider to import assistants from
-     *
-     * @return AssistantsList<HasRawResponse>
      *
      * @throws APIException
      */
@@ -335,8 +265,6 @@ interface AssistantsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return AssistantsList<HasRawResponse>
      *
      * @throws APIException
      */

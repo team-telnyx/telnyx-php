@@ -6,7 +6,9 @@ namespace Telnyx\Texml\Accounts\Conferences;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Texml\Accounts\Conferences\ConferenceUpdateResponse\ReasonConferenceEnded;
 use Telnyx\Texml\Accounts\Conferences\ConferenceUpdateResponse\Status;
 
@@ -25,15 +27,13 @@ use Telnyx\Texml\Accounts\Conferences\ConferenceUpdateResponse\Status;
  *   subresourceUris?: array<string, mixed>,
  *   uri?: string,
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class ConferenceUpdateResponse implements BaseModel
+final class ConferenceUpdateResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<conference_update_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /**
      * The id of the account the resource belongs to.
@@ -153,10 +153,10 @@ final class ConferenceUpdateResponse implements BaseModel
         null !== $dateCreated && $obj->dateCreated = $dateCreated;
         null !== $dateUpdated && $obj->dateUpdated = $dateUpdated;
         null !== $friendlyName && $obj->friendlyName = $friendlyName;
-        null !== $reasonConferenceEnded && $obj->reasonConferenceEnded = $reasonConferenceEnded instanceof ReasonConferenceEnded ? $reasonConferenceEnded->value : $reasonConferenceEnded;
+        null !== $reasonConferenceEnded && $obj['reasonConferenceEnded'] = $reasonConferenceEnded;
         null !== $region && $obj->region = $region;
         null !== $sid && $obj->sid = $sid;
-        null !== $status && $obj->status = $status instanceof Status ? $status->value : $status;
+        null !== $status && $obj['status'] = $status;
         null !== $subresourceUris && $obj->subresourceUris = $subresourceUris;
         null !== $uri && $obj->uri = $uri;
 
@@ -239,7 +239,7 @@ final class ConferenceUpdateResponse implements BaseModel
         ReasonConferenceEnded|string $reasonConferenceEnded
     ): self {
         $obj = clone $this;
-        $obj->reasonConferenceEnded = $reasonConferenceEnded instanceof ReasonConferenceEnded ? $reasonConferenceEnded->value : $reasonConferenceEnded;
+        $obj['reasonConferenceEnded'] = $reasonConferenceEnded;
 
         return $obj;
     }
@@ -274,7 +274,7 @@ final class ConferenceUpdateResponse implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

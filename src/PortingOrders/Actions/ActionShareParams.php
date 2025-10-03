@@ -69,7 +69,7 @@ final class ActionShareParams implements BaseModel
         $obj = new self;
 
         null !== $expiresInSeconds && $obj->expiresInSeconds = $expiresInSeconds;
-        null !== $permissions && $obj->permissions = $permissions instanceof Permissions ? $permissions->value : $permissions;
+        null !== $permissions && $obj['permissions'] = $permissions;
 
         return $obj;
     }
@@ -93,7 +93,7 @@ final class ActionShareParams implements BaseModel
     public function withPermissions(Permissions|string $permissions): self
     {
         $obj = clone $this;
-        $obj->permissions = $permissions instanceof Permissions ? $permissions->value : $permissions;
+        $obj['permissions'] = $permissions;
 
         return $obj;
     }

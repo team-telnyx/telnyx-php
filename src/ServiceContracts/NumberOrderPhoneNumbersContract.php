@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberGetResponse;
 use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberListParams\Filter;
 use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberListResponse;
@@ -21,8 +20,6 @@ interface NumberOrderPhoneNumbersContract
     /**
      * @api
      *
-     * @return NumberOrderPhoneNumberGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
@@ -33,22 +30,7 @@ interface NumberOrderPhoneNumbersContract
     /**
      * @api
      *
-     * @return NumberOrderPhoneNumberGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $numberOrderPhoneNumberID,
-        mixed $params,
-        ?RequestOptions $requestOptions = null,
-    ): NumberOrderPhoneNumberGetResponse;
-
-    /**
-     * @api
-     *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[country_code]
-     *
-     * @return NumberOrderPhoneNumberListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -62,8 +44,6 @@ interface NumberOrderPhoneNumbersContract
      *
      * @param array<string, mixed> $params
      *
-     * @return NumberOrderPhoneNumberListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function listRaw(
@@ -75,8 +55,6 @@ interface NumberOrderPhoneNumbersContract
      * @api
      *
      * @param string $requirementGroupID The ID of the requirement group to associate
-     *
-     * @return NumberOrderPhoneNumberUpdateRequirementGroupResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -91,8 +69,6 @@ interface NumberOrderPhoneNumbersContract
      *
      * @param array<string, mixed> $params
      *
-     * @return NumberOrderPhoneNumberUpdateRequirementGroupResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function updateRequirementGroupRaw(
@@ -106,8 +82,6 @@ interface NumberOrderPhoneNumbersContract
      *
      * @param list<UpdateRegulatoryRequirement> $regulatoryRequirements
      *
-     * @return NumberOrderPhoneNumberUpdateRequirementsResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function updateRequirements(
@@ -120,8 +94,6 @@ interface NumberOrderPhoneNumbersContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return NumberOrderPhoneNumberUpdateRequirementsResponse<HasRawResponse>
      *
      * @throws APIException
      */

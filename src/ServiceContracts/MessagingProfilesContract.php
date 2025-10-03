@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\MessagingProfiles\MessagingProfileCreateParams\WebhookAPIVersion;
 use Telnyx\MessagingProfiles\MessagingProfileDeleteResponse;
 use Telnyx\MessagingProfiles\MessagingProfileGetResponse;
@@ -51,8 +50,6 @@ interface MessagingProfilesContract
      * @param string|null $webhookFailoverURL the failover URL where webhooks related to this messaging profile will be sent if sending to the primary URL fails
      * @param string|null $webhookURL the URL where webhooks related to this messaging profile will be sent
      *
-     * @return MessagingProfileNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -77,8 +74,6 @@ interface MessagingProfilesContract
      *
      * @param array<string, mixed> $params
      *
-     * @return MessagingProfileNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function createRaw(
@@ -89,25 +84,10 @@ interface MessagingProfilesContract
     /**
      * @api
      *
-     * @return MessagingProfileGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): MessagingProfileGetResponse;
-
-    /**
-     * @api
-     *
-     * @return MessagingProfileGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): MessagingProfileGetResponse;
 
@@ -141,8 +121,6 @@ interface MessagingProfilesContract
      *
      * This field is required if the messaging profile doesn't have it defined yet.
      *
-     * @return MessagingProfileUpdateResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function update(
@@ -169,8 +147,6 @@ interface MessagingProfilesContract
      *
      * @param array<string, mixed> $params
      *
-     * @return MessagingProfileUpdateResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function updateRaw(
@@ -185,8 +161,6 @@ interface MessagingProfilesContract
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[name]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
-     * @return MessagingProfileListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -200,8 +174,6 @@ interface MessagingProfilesContract
      *
      * @param array<string, mixed> $params
      *
-     * @return MessagingProfileListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function listRaw(
@@ -211,8 +183,6 @@ interface MessagingProfilesContract
 
     /**
      * @api
-     *
-     * @return MessagingProfileDeleteResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -224,22 +194,7 @@ interface MessagingProfilesContract
     /**
      * @api
      *
-     * @return MessagingProfileDeleteResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $id,
-        mixed $params,
-        ?RequestOptions $requestOptions = null
-    ): MessagingProfileDeleteResponse;
-
-    /**
-     * @api
-     *
      * @param Telnyx\MessagingProfiles\MessagingProfileListPhoneNumbersParams\Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
-     *
-     * @return MessagingProfileListPhoneNumbersResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -254,8 +209,6 @@ interface MessagingProfilesContract
      *
      * @param array<string, mixed> $params
      *
-     * @return MessagingProfileListPhoneNumbersResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function listPhoneNumbersRaw(
@@ -269,8 +222,6 @@ interface MessagingProfilesContract
      *
      * @param Telnyx\MessagingProfiles\MessagingProfileListShortCodesParams\Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
-     * @return MessagingProfileListShortCodesResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function listShortCodes(
@@ -283,8 +234,6 @@ interface MessagingProfilesContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return MessagingProfileListShortCodesResponse<HasRawResponse>
      *
      * @throws APIException
      */

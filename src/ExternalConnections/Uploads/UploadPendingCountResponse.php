@@ -6,20 +6,20 @@ namespace Telnyx\ExternalConnections\Uploads;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\ExternalConnections\Uploads\UploadPendingCountResponse\Data;
 
 /**
  * @phpstan-type upload_pending_count_response = array{data?: Data}
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class UploadPendingCountResponse implements BaseModel
+final class UploadPendingCountResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<upload_pending_count_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     #[Api(optional: true)]
     public ?Data $data;

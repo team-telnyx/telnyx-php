@@ -80,7 +80,7 @@ final class AuthenticationProviderListParams implements BaseModel
         $obj = new self;
 
         null !== $page && $obj->page = $page;
-        null !== $sort && $obj->sort = $sort instanceof Sort ? $sort->value : $sort;
+        null !== $sort && $obj['sort'] = $sort;
 
         return $obj;
     }
@@ -114,7 +114,7 @@ final class AuthenticationProviderListParams implements BaseModel
     public function withSort(Sort|string $sort): self
     {
         $obj = clone $this;
-        $obj->sort = $sort instanceof Sort ? $sort->value : $sort;
+        $obj['sort'] = $sort;
 
         return $obj;
     }

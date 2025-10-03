@@ -459,7 +459,7 @@ final class Record implements BaseModel
         null !== $brandDisplayName && $obj->brandDisplayName = $brandDisplayName;
         null !== $brandID && $obj->brandID = $brandID;
         null !== $campaignID && $obj->campaignID = $campaignID;
-        null !== $campaignStatus && $obj->campaignStatus = $campaignStatus instanceof CampaignStatus ? $campaignStatus->value : $campaignStatus;
+        null !== $campaignStatus && $obj['campaignStatus'] = $campaignStatus;
         null !== $createDate && $obj->createDate = $createDate;
         null !== $cspID && $obj->cspID = $cspID;
         null !== $description && $obj->description = $description;
@@ -490,7 +490,7 @@ final class Record implements BaseModel
         null !== $sample4 && $obj->sample4 = $sample4;
         null !== $sample5 && $obj->sample5 = $sample5;
         null !== $status && $obj->status = $status;
-        null !== $submissionStatus && $obj->submissionStatus = $submissionStatus instanceof SubmissionStatus ? $submissionStatus->value : $submissionStatus;
+        null !== $submissionStatus && $obj['submissionStatus'] = $submissionStatus;
         null !== $subscriberHelp && $obj->subscriberHelp = $subscriberHelp;
         null !== $subscriberOptin && $obj->subscriberOptin = $subscriberOptin;
         null !== $subscriberOptout && $obj->subscriberOptout = $subscriberOptout;
@@ -594,7 +594,7 @@ final class Record implements BaseModel
         CampaignStatus|string $campaignStatus
     ): self {
         $obj = clone $this;
-        $obj->campaignStatus = $campaignStatus instanceof CampaignStatus ? $campaignStatus->value : $campaignStatus;
+        $obj['campaignStatus'] = $campaignStatus;
 
         return $obj;
     }
@@ -937,7 +937,7 @@ final class Record implements BaseModel
         SubmissionStatus|string $submissionStatus
     ): self {
         $obj = clone $this;
-        $obj->submissionStatus = $submissionStatus instanceof SubmissionStatus ? $submissionStatus->value : $submissionStatus;
+        $obj['submissionStatus'] = $submissionStatus;
 
         return $obj;
     }

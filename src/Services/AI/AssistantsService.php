@@ -32,7 +32,6 @@ use Telnyx\AI\Assistants\VoiceSettings;
 use Telnyx\AI\Assistants\WebhookTool;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\AssistantsContract;
 use Telnyx\Services\AI\Assistants\CanaryDeploysService;
@@ -105,8 +104,6 @@ final class AssistantsService implements AssistantsContract
      * @param TranscriptionSettings $transcription
      * @param VoiceSettings $voiceSettings
      *
-     * @return AssistantNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -155,8 +152,6 @@ final class AssistantsService implements AssistantsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return AssistantNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function createRaw(
@@ -188,8 +183,6 @@ final class AssistantsService implements AssistantsContract
      * @param string $from
      * @param string $to
      *
-     * @return AssistantGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
@@ -214,8 +207,6 @@ final class AssistantsService implements AssistantsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return AssistantGetResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -341,28 +332,10 @@ final class AssistantsService implements AssistantsContract
      *
      * Retrieve a list of all AI Assistants configured by the user.
      *
-     * @return AssistantsList<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(?RequestOptions $requestOptions = null): AssistantsList
     {
-        $params = [];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return AssistantsList<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        mixed $params,
-        ?RequestOptions $requestOptions = null
-    ): AssistantsList {
         // @phpstan-ignore-next-line;
         return $this->client->request(
             method: 'get',
@@ -377,29 +350,10 @@ final class AssistantsService implements AssistantsContract
      *
      * Delete an AI Assistant by `assistant_id`.
      *
-     * @return AssistantDeleteResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function delete(
         string $assistantID,
-        ?RequestOptions $requestOptions = null
-    ): AssistantDeleteResponse {
-        $params = [];
-
-        return $this->deleteRaw($assistantID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return AssistantDeleteResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $assistantID,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): AssistantDeleteResponse {
         // @phpstan-ignore-next-line;
@@ -419,8 +373,6 @@ final class AssistantsService implements AssistantsContract
      * @param string $content The message content sent by the client to the assistant
      * @param string $conversationID A unique identifier for the conversation thread, used to maintain context
      * @param string $name The optional display name of the user sending the message
-     *
-     * @return AssistantChatResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -444,8 +396,6 @@ final class AssistantsService implements AssistantsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return AssistantChatResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -474,29 +424,10 @@ final class AssistantsService implements AssistantsContract
      *
      * Clone an existing assistant, excluding telephony and messaging settings.
      *
-     * @return AssistantCloneResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function clone(
         string $assistantID,
-        ?RequestOptions $requestOptions = null
-    ): AssistantCloneResponse {
-        $params = [];
-
-        return $this->cloneRaw($assistantID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return AssistantCloneResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function cloneRaw(
-        string $assistantID,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): AssistantCloneResponse {
         // @phpstan-ignore-next-line;
@@ -519,21 +450,6 @@ final class AssistantsService implements AssistantsContract
         string $assistantID,
         ?RequestOptions $requestOptions = null
     ): string {
-        $params = [];
-
-        return $this->getTexmlRaw($assistantID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @throws APIException
-     */
-    public function getTexmlRaw(
-        string $assistantID,
-        mixed $params,
-        ?RequestOptions $requestOptions = null
-    ): string {
         // @phpstan-ignore-next-line;
         return $this->client->request(
             method: 'get',
@@ -551,8 +467,6 @@ final class AssistantsService implements AssistantsContract
      * @param string $apiKeyRef Integration secret pointer that refers to the API key for the external provider. This should be an identifier for an integration secret created via /v2/integration_secrets.
      * @param Provider|value-of<Provider> $provider the external provider to import assistants from
      *
-     * @return AssistantsList<HasRawResponse>
-     *
      * @throws APIException
      */
     public function import(
@@ -569,8 +483,6 @@ final class AssistantsService implements AssistantsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return AssistantsList<HasRawResponse>
      *
      * @throws APIException
      */

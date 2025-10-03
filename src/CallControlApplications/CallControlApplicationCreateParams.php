@@ -181,14 +181,14 @@ final class CallControlApplicationCreateParams implements BaseModel
         $obj->webhookEventURL = $webhookEventURL;
 
         null !== $active && $obj->active = $active;
-        null !== $anchorsiteOverride && $obj->anchorsiteOverride = $anchorsiteOverride instanceof AnchorsiteOverride ? $anchorsiteOverride->value : $anchorsiteOverride;
-        null !== $dtmfType && $obj->dtmfType = $dtmfType instanceof DtmfType ? $dtmfType->value : $dtmfType;
+        null !== $anchorsiteOverride && $obj['anchorsiteOverride'] = $anchorsiteOverride;
+        null !== $dtmfType && $obj['dtmfType'] = $dtmfType;
         null !== $firstCommandTimeout && $obj->firstCommandTimeout = $firstCommandTimeout;
         null !== $firstCommandTimeoutSecs && $obj->firstCommandTimeoutSecs = $firstCommandTimeoutSecs;
         null !== $inbound && $obj->inbound = $inbound;
         null !== $outbound && $obj->outbound = $outbound;
         null !== $redactDtmfDebugLogging && $obj->redactDtmfDebugLogging = $redactDtmfDebugLogging;
-        null !== $webhookAPIVersion && $obj->webhookAPIVersion = $webhookAPIVersion instanceof WebhookAPIVersion ? $webhookAPIVersion->value : $webhookAPIVersion;
+        null !== $webhookAPIVersion && $obj['webhookAPIVersion'] = $webhookAPIVersion;
         null !== $webhookEventFailoverURL && $obj->webhookEventFailoverURL = $webhookEventFailoverURL;
         null !== $webhookTimeoutSecs && $obj->webhookTimeoutSecs = $webhookTimeoutSecs;
 
@@ -237,7 +237,7 @@ final class CallControlApplicationCreateParams implements BaseModel
         AnchorsiteOverride|string $anchorsiteOverride
     ): self {
         $obj = clone $this;
-        $obj->anchorsiteOverride = $anchorsiteOverride instanceof AnchorsiteOverride ? $anchorsiteOverride->value : $anchorsiteOverride;
+        $obj['anchorsiteOverride'] = $anchorsiteOverride;
 
         return $obj;
     }
@@ -250,7 +250,7 @@ final class CallControlApplicationCreateParams implements BaseModel
     public function withDtmfType(DtmfType|string $dtmfType): self
     {
         $obj = clone $this;
-        $obj->dtmfType = $dtmfType instanceof DtmfType ? $dtmfType->value : $dtmfType;
+        $obj['dtmfType'] = $dtmfType;
 
         return $obj;
     }
@@ -315,7 +315,7 @@ final class CallControlApplicationCreateParams implements BaseModel
         WebhookAPIVersion|string $webhookAPIVersion
     ): self {
         $obj = clone $this;
-        $obj->webhookAPIVersion = $webhookAPIVersion instanceof WebhookAPIVersion ? $webhookAPIVersion->value : $webhookAPIVersion;
+        $obj['webhookAPIVersion'] = $webhookAPIVersion;
 
         return $obj;
     }

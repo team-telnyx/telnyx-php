@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PhoneNumberCampaigns\PhoneNumberCampaign;
 use Telnyx\PhoneNumberCampaigns\PhoneNumberCampaignListParams\Filter;
 use Telnyx\PhoneNumberCampaigns\PhoneNumberCampaignListParams\Sort;
@@ -22,8 +21,6 @@ interface PhoneNumberCampaignsContract
      * @param string $campaignID the ID of the campaign you want to link to the specified phone number
      * @param string $phoneNumber the phone number you want to link to a specified campaign
      *
-     * @return PhoneNumberCampaign<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -37,8 +34,6 @@ interface PhoneNumberCampaignsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return PhoneNumberCampaign<HasRawResponse>
-     *
      * @throws APIException
      */
     public function createRaw(
@@ -48,8 +43,6 @@ interface PhoneNumberCampaignsContract
 
     /**
      * @api
-     *
-     * @return PhoneNumberCampaign<HasRawResponse>
      *
      * @throws APIException
      */
@@ -61,23 +54,8 @@ interface PhoneNumberCampaignsContract
     /**
      * @api
      *
-     * @return PhoneNumberCampaign<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $phoneNumber,
-        mixed $params,
-        ?RequestOptions $requestOptions = null,
-    ): PhoneNumberCampaign;
-
-    /**
-     * @api
-     *
      * @param string $campaignID the ID of the campaign you want to link to the specified phone number
      * @param string $phoneNumber1 the phone number you want to link to a specified campaign
-     *
-     * @return PhoneNumberCampaign<HasRawResponse>
      *
      * @throws APIException
      */
@@ -92,8 +70,6 @@ interface PhoneNumberCampaignsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return PhoneNumberCampaign<HasRawResponse>
      *
      * @throws APIException
      */
@@ -111,8 +87,6 @@ interface PhoneNumberCampaignsContract
      * @param int $recordsPerPage
      * @param Sort|value-of<Sort> $sort Specifies the sort order for results. If not given, results are sorted by createdAt in descending order.
      *
-     * @return PhoneNumberCampaignListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -128,8 +102,6 @@ interface PhoneNumberCampaignsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return PhoneNumberCampaignListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function listRaw(
@@ -140,25 +112,10 @@ interface PhoneNumberCampaignsContract
     /**
      * @api
      *
-     * @return PhoneNumberCampaign<HasRawResponse>
-     *
      * @throws APIException
      */
     public function delete(
         string $phoneNumber,
         ?RequestOptions $requestOptions = null
-    ): PhoneNumberCampaign;
-
-    /**
-     * @api
-     *
-     * @return PhoneNumberCampaign<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $phoneNumber,
-        mixed $params,
-        ?RequestOptions $requestOptions = null,
     ): PhoneNumberCampaign;
 }

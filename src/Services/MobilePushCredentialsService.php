@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\MobilePushCredentials\MobilePushCredentialCreateParams;
 use Telnyx\MobilePushCredentials\MobilePushCredentialCreateParams\Type;
 use Telnyx\MobilePushCredentials\MobilePushCredentialListParams;
@@ -38,8 +37,6 @@ final class MobilePushCredentialsService implements MobilePushCredentialsContrac
      * @param array<string,
      * mixed,> $projectAccountJsonFile Private key file in JSON format
      *
-     * @return PushCredentialResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -65,8 +62,6 @@ final class MobilePushCredentialsService implements MobilePushCredentialsContrac
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return PushCredentialResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -94,30 +89,11 @@ final class MobilePushCredentialsService implements MobilePushCredentialsContrac
      *
      * Retrieves mobile push credential based on the given `push_credential_id`
      *
-     * @return PushCredentialResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $pushCredentialID,
         ?RequestOptions $requestOptions = null
-    ): PushCredentialResponse {
-        $params = [];
-
-        return $this->retrieveRaw($pushCredentialID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return PushCredentialResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $pushCredentialID,
-        mixed $params,
-        ?RequestOptions $requestOptions = null,
     ): PushCredentialResponse {
         // @phpstan-ignore-next-line;
         return $this->client->request(
@@ -136,8 +112,6 @@ final class MobilePushCredentialsService implements MobilePushCredentialsContrac
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[type], filter[alias]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
-     * @return MobilePushCredentialListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -154,8 +128,6 @@ final class MobilePushCredentialsService implements MobilePushCredentialsContrac
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return MobilePushCredentialListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -188,21 +160,6 @@ final class MobilePushCredentialsService implements MobilePushCredentialsContrac
     public function delete(
         string $pushCredentialID,
         ?RequestOptions $requestOptions = null
-    ): mixed {
-        $params = [];
-
-        return $this->deleteRaw($pushCredentialID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $pushCredentialID,
-        mixed $params,
-        ?RequestOptions $requestOptions = null,
     ): mixed {
         // @phpstan-ignore-next-line;
         return $this->client->request(

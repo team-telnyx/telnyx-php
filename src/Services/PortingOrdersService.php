@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PortingOrders\PortingOrderCreateParams;
 use Telnyx\PortingOrders\PortingOrderDocuments;
 use Telnyx\PortingOrders\PortingOrderEndUser;
@@ -125,8 +124,6 @@ final class PortingOrdersService implements PortingOrdersContract
      * @param string $customerGroupReference A customer-specified group reference for customer bookkeeping purposes
      * @param string $customerReference A customer-specified reference number for customer bookkeeping purposes
      *
-     * @return PortingOrderNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -148,8 +145,6 @@ final class PortingOrdersService implements PortingOrdersContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return PortingOrderNewResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -179,8 +174,6 @@ final class PortingOrdersService implements PortingOrdersContract
      *
      * @param bool $includePhoneNumbers Include the first 50 phone number objects in the results
      *
-     * @return PortingOrderGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
@@ -197,8 +190,6 @@ final class PortingOrdersService implements PortingOrdersContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return PortingOrderGetResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -244,8 +235,6 @@ final class PortingOrdersService implements PortingOrdersContract
      * @param PortingOrderUserFeedback $userFeedback
      * @param string $webhookURL
      *
-     * @return PortingOrderUpdateResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function update(
@@ -287,8 +276,6 @@ final class PortingOrdersService implements PortingOrdersContract
      *
      * @param array<string, mixed> $params
      *
-     * @return PortingOrderUpdateResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function updateRaw(
@@ -321,8 +308,6 @@ final class PortingOrdersService implements PortingOrdersContract
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param Sort $sort Consolidated sort parameter (deepObject style). Originally: sort[value]
      *
-     * @return PortingOrderListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -346,8 +331,6 @@ final class PortingOrdersService implements PortingOrdersContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return PortingOrderListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -381,21 +364,6 @@ final class PortingOrdersService implements PortingOrdersContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        $params = [];
-
-        return $this->deleteRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $id,
-        mixed $params,
-        ?RequestOptions $requestOptions = null
-    ): mixed {
         // @phpstan-ignore-next-line;
         return $this->client->request(
             method: 'delete',
@@ -410,29 +378,10 @@ final class PortingOrdersService implements PortingOrdersContract
      *
      * Returns a list of allowed FOC dates for a porting order.
      *
-     * @return PortingOrderGetAllowedFocWindowsResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieveAllowedFocWindows(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): PortingOrderGetAllowedFocWindowsResponse {
-        $params = [];
-
-        return $this->retrieveAllowedFocWindowsRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return PortingOrderGetAllowedFocWindowsResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveAllowedFocWindowsRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): PortingOrderGetAllowedFocWindowsResponse {
         // @phpstan-ignore-next-line;
@@ -449,27 +398,9 @@ final class PortingOrdersService implements PortingOrdersContract
      *
      * Returns a list of all possible exception types for a porting order.
      *
-     * @return PortingOrderGetExceptionTypesResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieveExceptionTypes(
-        ?RequestOptions $requestOptions = null
-    ): PortingOrderGetExceptionTypesResponse {
-        $params = [];
-
-        return $this->retrieveExceptionTypesRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return PortingOrderGetExceptionTypesResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveExceptionTypesRaw(
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): PortingOrderGetExceptionTypesResponse {
         // @phpstan-ignore-next-line;
@@ -535,8 +466,6 @@ final class PortingOrdersService implements PortingOrdersContract
      *
      * @param Telnyx\PortingOrders\PortingOrderRetrieveRequirementsParams\Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
-     * @return PortingOrderGetRequirementsResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieveRequirements(
@@ -553,8 +482,6 @@ final class PortingOrdersService implements PortingOrdersContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return PortingOrderGetRequirementsResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -583,29 +510,10 @@ final class PortingOrdersService implements PortingOrdersContract
      *
      * Retrieve the associated V1 sub_request_id and port_request_id
      *
-     * @return PortingOrderGetSubRequestResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieveSubRequest(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): PortingOrderGetSubRequestResponse {
-        $params = [];
-
-        return $this->retrieveSubRequestRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return PortingOrderGetSubRequestResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveSubRequestRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): PortingOrderGetSubRequestResponse {
         // @phpstan-ignore-next-line;

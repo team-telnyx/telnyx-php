@@ -79,7 +79,7 @@ final class Webhook implements BaseModel
         null !== $eventType && $obj->eventType = $eventType;
         null !== $occurredAt && $obj->occurredAt = $occurredAt;
         null !== $payload && $obj->payload = $payload;
-        null !== $recordType && $obj->recordType = $recordType instanceof RecordType ? $recordType->value : $recordType;
+        null !== $recordType && $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -133,7 +133,7 @@ final class Webhook implements BaseModel
     public function withRecordType(RecordType|string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType instanceof RecordType ? $recordType->value : $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }

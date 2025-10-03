@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\NumberOrderPhoneNumbers\UpdateRegulatoryRequirement;
 use Telnyx\NumberOrders\NumberOrderCreateParams;
 use Telnyx\NumberOrders\NumberOrderCreateParams\PhoneNumber;
@@ -41,8 +40,6 @@ final class NumberOrdersService implements NumberOrdersContract
      * @param string $messagingProfileID identifies the messaging profile associated with the phone number
      * @param list<PhoneNumber> $phoneNumbers
      *
-     * @return NumberOrderNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -68,8 +65,6 @@ final class NumberOrdersService implements NumberOrdersContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return NumberOrderNewResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -97,29 +92,10 @@ final class NumberOrdersService implements NumberOrdersContract
      *
      * Get an existing phone number order.
      *
-     * @return NumberOrderGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $numberOrderID,
-        ?RequestOptions $requestOptions = null
-    ): NumberOrderGetResponse {
-        $params = [];
-
-        return $this->retrieveRaw($numberOrderID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return NumberOrderGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $numberOrderID,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): NumberOrderGetResponse {
         // @phpstan-ignore-next-line;
@@ -138,8 +114,6 @@ final class NumberOrdersService implements NumberOrdersContract
      *
      * @param string $customerReference a customer reference string for customer look ups
      * @param list<UpdateRegulatoryRequirement> $regulatoryRequirements
-     *
-     * @return NumberOrderUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -161,8 +135,6 @@ final class NumberOrdersService implements NumberOrdersContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return NumberOrderUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -194,8 +166,6 @@ final class NumberOrdersService implements NumberOrdersContract
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[status], filter[created_at], filter[phone_numbers_count], filter[customer_reference], filter[requirements_met]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
-     * @return NumberOrderListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -212,8 +182,6 @@ final class NumberOrdersService implements NumberOrdersContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return NumberOrderListResponse<HasRawResponse>
      *
      * @throws APIException
      */

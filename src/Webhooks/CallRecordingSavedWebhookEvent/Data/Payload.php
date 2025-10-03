@@ -112,7 +112,7 @@ final class Payload implements BaseModel
 
         null !== $callLegID && $obj->callLegID = $callLegID;
         null !== $callSessionID && $obj->callSessionID = $callSessionID;
-        null !== $channels && $obj->channels = $channels instanceof Channels ? $channels->value : $channels;
+        null !== $channels && $obj['channels'] = $channels;
         null !== $clientState && $obj->clientState = $clientState;
         null !== $connectionID && $obj->connectionID = $connectionID;
         null !== $publicRecordingURLs && $obj->publicRecordingURLs = $publicRecordingURLs;
@@ -153,7 +153,7 @@ final class Payload implements BaseModel
     public function withChannels(Channels|string $channels): self
     {
         $obj = clone $this;
-        $obj->channels = $channels instanceof Channels ? $channels->value : $channels;
+        $obj['channels'] = $channels;
 
         return $obj;
     }

@@ -72,7 +72,7 @@ final class CarouselCard implements BaseModel
         $obj = new self;
 
         $obj->cardContents = $cardContents;
-        $obj->cardWidth = $cardWidth instanceof CardWidth ? $cardWidth->value : $cardWidth;
+        $obj['cardWidth'] = $cardWidth;
 
         return $obj;
     }
@@ -98,7 +98,7 @@ final class CarouselCard implements BaseModel
     public function withCardWidth(CardWidth|string $cardWidth): self
     {
         $obj = clone $this;
-        $obj->cardWidth = $cardWidth instanceof CardWidth ? $cardWidth->value : $cardWidth;
+        $obj['cardWidth'] = $cardWidth;
 
         return $obj;
     }

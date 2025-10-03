@@ -6,19 +6,19 @@ namespace Telnyx\VerifiedNumbers;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type verified_number_data_wrapper = array{data?: VerifiedNumber}
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class VerifiedNumberDataWrapper implements BaseModel
+final class VerifiedNumberDataWrapper implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<verified_number_data_wrapper> */
     use SdkModel;
+
+    use SdkResponse;
 
     #[Api(optional: true)]
     public ?VerifiedNumber $data;

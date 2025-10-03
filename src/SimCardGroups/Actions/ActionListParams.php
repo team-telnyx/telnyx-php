@@ -98,8 +98,8 @@ final class ActionListParams implements BaseModel
         $obj = new self;
 
         null !== $filterSimCardGroupID && $obj->filterSimCardGroupID = $filterSimCardGroupID;
-        null !== $filterStatus && $obj->filterStatus = $filterStatus instanceof FilterStatus ? $filterStatus->value : $filterStatus;
-        null !== $filterType && $obj->filterType = $filterType instanceof FilterType ? $filterType->value : $filterType;
+        null !== $filterStatus && $obj['filterStatus'] = $filterStatus;
+        null !== $filterType && $obj['filterType'] = $filterType;
         null !== $pageNumber && $obj->pageNumber = $pageNumber;
         null !== $pageSize && $obj->pageSize = $pageSize;
 
@@ -125,7 +125,7 @@ final class ActionListParams implements BaseModel
     public function withFilterStatus(FilterStatus|string $filterStatus): self
     {
         $obj = clone $this;
-        $obj->filterStatus = $filterStatus instanceof FilterStatus ? $filterStatus->value : $filterStatus;
+        $obj['filterStatus'] = $filterStatus;
 
         return $obj;
     }
@@ -138,7 +138,7 @@ final class ActionListParams implements BaseModel
     public function withFilterType(FilterType|string $filterType): self
     {
         $obj = clone $this;
-        $obj->filterType = $filterType instanceof FilterType ? $filterType->value : $filterType;
+        $obj['filterType'] = $filterType;
 
         return $obj;
     }

@@ -150,7 +150,7 @@ final class Data implements BaseModel
         $obj->createdAt = $createdAt;
         $obj->email = $email;
         $obj->managerAccountID = $managerAccountID;
-        $obj->recordType = $recordType instanceof RecordType ? $recordType->value : $recordType;
+        $obj['recordType'] = $recordType;
         $obj->updatedAt = $updatedAt;
 
         null !== $managedAccountAllowCustomPricing && $obj->managedAccountAllowCustomPricing = $managedAccountAllowCustomPricing;
@@ -223,7 +223,7 @@ final class Data implements BaseModel
     public function withRecordType(RecordType|string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType instanceof RecordType ? $recordType->value : $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }

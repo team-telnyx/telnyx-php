@@ -161,7 +161,7 @@ final class MigrationParams implements BaseModel
         null !== $lastCopy && $obj->lastCopy = $lastCopy;
         null !== $refresh && $obj->refresh = $refresh;
         null !== $speed && $obj->speed = $speed;
-        null !== $status && $obj->status = $status instanceof Status ? $status->value : $status;
+        null !== $status && $obj['status'] = $status;
 
         return $obj;
     }
@@ -295,7 +295,7 @@ final class MigrationParams implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

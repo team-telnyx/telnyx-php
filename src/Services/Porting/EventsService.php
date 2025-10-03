@@ -6,7 +6,6 @@ namespace Telnyx\Services\Porting;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Porting\Events\EventGetResponse;
 use Telnyx\Porting\Events\EventListParams;
 use Telnyx\Porting\Events\EventListParams\Filter;
@@ -29,29 +28,10 @@ final class EventsService implements EventsContract
      *
      * Show a specific porting event.
      *
-     * @return EventGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): EventGetResponse {
-        $params = [];
-
-        return $this->retrieveRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return EventGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): EventGetResponse {
         // @phpstan-ignore-next-line;
@@ -71,8 +51,6 @@ final class EventsService implements EventsContract
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[type], filter[porting_order_id], filter[created_at][gte], filter[created_at][lte]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
-     * @return EventListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -89,8 +67,6 @@ final class EventsService implements EventsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return EventListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -122,21 +98,6 @@ final class EventsService implements EventsContract
      */
     public function republish(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): mixed {
-        $params = [];
-
-        return $this->republishRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @throws APIException
-     */
-    public function republishRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): mixed {
         // @phpstan-ignore-next-line;

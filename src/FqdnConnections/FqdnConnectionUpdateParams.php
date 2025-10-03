@@ -220,21 +220,21 @@ final class FqdnConnectionUpdateParams implements BaseModel
         $obj = new self;
 
         null !== $active && $obj->active = $active;
-        null !== $anchorsiteOverride && $obj->anchorsiteOverride = $anchorsiteOverride instanceof AnchorsiteOverride ? $anchorsiteOverride->value : $anchorsiteOverride;
+        null !== $anchorsiteOverride && $obj['anchorsiteOverride'] = $anchorsiteOverride;
         null !== $androidPushCredentialID && $obj->androidPushCredentialID = $androidPushCredentialID;
         null !== $connectionName && $obj->connectionName = $connectionName;
         null !== $defaultOnHoldComfortNoiseEnabled && $obj->defaultOnHoldComfortNoiseEnabled = $defaultOnHoldComfortNoiseEnabled;
-        null !== $dtmfType && $obj->dtmfType = $dtmfType instanceof DtmfType ? $dtmfType->value : $dtmfType;
+        null !== $dtmfType && $obj['dtmfType'] = $dtmfType;
         null !== $encodeContactHeaderEnabled && $obj->encodeContactHeaderEnabled = $encodeContactHeaderEnabled;
-        null !== $encryptedMedia && $obj->encryptedMedia = $encryptedMedia instanceof EncryptedMedia ? $encryptedMedia->value : $encryptedMedia;
+        null !== $encryptedMedia && $obj['encryptedMedia'] = $encryptedMedia;
         null !== $inbound && $obj->inbound = $inbound;
         null !== $iosPushCredentialID && $obj->iosPushCredentialID = $iosPushCredentialID;
         null !== $onnetT38PassthroughEnabled && $obj->onnetT38PassthroughEnabled = $onnetT38PassthroughEnabled;
         null !== $outbound && $obj->outbound = $outbound;
         null !== $rtcpSettings && $obj->rtcpSettings = $rtcpSettings;
         null !== $tags && $obj->tags = $tags;
-        null !== $transportProtocol && $obj->transportProtocol = $transportProtocol instanceof TransportProtocol ? $transportProtocol->value : $transportProtocol;
-        null !== $webhookAPIVersion && $obj->webhookAPIVersion = $webhookAPIVersion instanceof WebhookAPIVersion ? $webhookAPIVersion->value : $webhookAPIVersion;
+        null !== $transportProtocol && $obj['transportProtocol'] = $transportProtocol;
+        null !== $webhookAPIVersion && $obj['webhookAPIVersion'] = $webhookAPIVersion;
         null !== $webhookEventFailoverURL && $obj->webhookEventFailoverURL = $webhookEventFailoverURL;
         null !== $webhookEventURL && $obj->webhookEventURL = $webhookEventURL;
         null !== $webhookTimeoutSecs && $obj->webhookTimeoutSecs = $webhookTimeoutSecs;
@@ -262,7 +262,7 @@ final class FqdnConnectionUpdateParams implements BaseModel
         AnchorsiteOverride|string $anchorsiteOverride
     ): self {
         $obj = clone $this;
-        $obj->anchorsiteOverride = $anchorsiteOverride instanceof AnchorsiteOverride ? $anchorsiteOverride->value : $anchorsiteOverride;
+        $obj['anchorsiteOverride'] = $anchorsiteOverride;
 
         return $obj;
     }
@@ -310,7 +310,7 @@ final class FqdnConnectionUpdateParams implements BaseModel
     public function withDtmfType(DtmfType|string $dtmfType): self
     {
         $obj = clone $this;
-        $obj->dtmfType = $dtmfType instanceof DtmfType ? $dtmfType->value : $dtmfType;
+        $obj['dtmfType'] = $dtmfType;
 
         return $obj;
     }
@@ -336,7 +336,7 @@ final class FqdnConnectionUpdateParams implements BaseModel
         EncryptedMedia|string|null $encryptedMedia
     ): self {
         $obj = clone $this;
-        $obj->encryptedMedia = $encryptedMedia instanceof EncryptedMedia ? $encryptedMedia->value : $encryptedMedia;
+        $obj['encryptedMedia'] = $encryptedMedia;
 
         return $obj;
     }
@@ -410,7 +410,7 @@ final class FqdnConnectionUpdateParams implements BaseModel
         TransportProtocol|string $transportProtocol
     ): self {
         $obj = clone $this;
-        $obj->transportProtocol = $transportProtocol instanceof TransportProtocol ? $transportProtocol->value : $transportProtocol;
+        $obj['transportProtocol'] = $transportProtocol;
 
         return $obj;
     }
@@ -424,7 +424,7 @@ final class FqdnConnectionUpdateParams implements BaseModel
         WebhookAPIVersion|string $webhookAPIVersion
     ): self {
         $obj = clone $this;
-        $obj->webhookAPIVersion = $webhookAPIVersion instanceof WebhookAPIVersion ? $webhookAPIVersion->value : $webhookAPIVersion;
+        $obj['webhookAPIVersion'] = $webhookAPIVersion;
 
         return $obj;
     }

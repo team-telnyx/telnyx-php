@@ -6,7 +6,6 @@ namespace Telnyx\Services\MessagingProfiles;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigCreateParams;
 use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigCreateParams\Op;
 use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigDeleteParams;
@@ -39,8 +38,6 @@ final class AutorespConfigsService implements AutorespConfigsContract
      * @param Op|value-of<Op> $op
      * @param string $respText
      *
-     * @return AutoRespConfigResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -65,8 +62,6 @@ final class AutorespConfigsService implements AutorespConfigsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return AutoRespConfigResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -97,8 +92,6 @@ final class AutorespConfigsService implements AutorespConfigsContract
      *
      * @param string $profileID
      *
-     * @return AutoRespConfigResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
@@ -115,8 +108,6 @@ final class AutorespConfigsService implements AutorespConfigsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return AutoRespConfigResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -156,8 +147,6 @@ final class AutorespConfigsService implements AutorespConfigsContract
      * @param Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigUpdateParams\Op|value-of<Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigUpdateParams\Op> $op
      * @param string $respText
      *
-     * @return AutoRespConfigResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function update(
@@ -185,8 +174,6 @@ final class AutorespConfigsService implements AutorespConfigsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return AutoRespConfigResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function updateRaw(
@@ -209,7 +196,7 @@ final class AutorespConfigsService implements AutorespConfigsContract
                 $profileID,
                 $autorespCfgID,
             ],
-            body: (object) array_diff_key($parsed, array_flip(['profileID'])),
+            body: (object) array_diff_key($parsed, ['profileID']),
             options: $options,
             convert: AutoRespConfigResponse::class,
         );
@@ -223,8 +210,6 @@ final class AutorespConfigsService implements AutorespConfigsContract
      * @param string $countryCode
      * @param CreatedAt $createdAt Consolidated created_at parameter (deepObject style). Originally: created_at[gte], created_at[lte]
      * @param UpdatedAt $updatedAt Consolidated updated_at parameter (deepObject style). Originally: updated_at[gte], updated_at[lte]
-     *
-     * @return AutorespConfigListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -248,8 +233,6 @@ final class AutorespConfigsService implements AutorespConfigsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return AutorespConfigListResponse<HasRawResponse>
      *
      * @throws APIException
      */

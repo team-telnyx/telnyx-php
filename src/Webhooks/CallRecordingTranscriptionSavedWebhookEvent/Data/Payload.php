@@ -123,12 +123,12 @@ final class Payload implements BaseModel
         null !== $callControlID && $obj->callControlID = $callControlID;
         null !== $callLegID && $obj->callLegID = $callLegID;
         null !== $callSessionID && $obj->callSessionID = $callSessionID;
-        null !== $callingPartyType && $obj->callingPartyType = $callingPartyType instanceof CallingPartyType ? $callingPartyType->value : $callingPartyType;
+        null !== $callingPartyType && $obj['callingPartyType'] = $callingPartyType;
         null !== $clientState && $obj->clientState = $clientState;
         null !== $connectionID && $obj->connectionID = $connectionID;
         null !== $recordingID && $obj->recordingID = $recordingID;
         null !== $recordingTranscriptionID && $obj->recordingTranscriptionID = $recordingTranscriptionID;
-        null !== $status && $obj->status = $status instanceof Status ? $status->value : $status;
+        null !== $status && $obj['status'] = $status;
         null !== $transcriptionText && $obj->transcriptionText = $transcriptionText;
 
         return $obj;
@@ -176,7 +176,7 @@ final class Payload implements BaseModel
         CallingPartyType|string $callingPartyType
     ): self {
         $obj = clone $this;
-        $obj->callingPartyType = $callingPartyType instanceof CallingPartyType ? $callingPartyType->value : $callingPartyType;
+        $obj['callingPartyType'] = $callingPartyType;
 
         return $obj;
     }
@@ -234,7 +234,7 @@ final class Payload implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

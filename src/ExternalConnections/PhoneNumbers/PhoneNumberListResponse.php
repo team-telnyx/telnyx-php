@@ -6,7 +6,9 @@ namespace Telnyx\ExternalConnections\PhoneNumbers;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\ExternalConnections\ExternalVoiceIntegrationsPaginationMeta;
 
 /**
@@ -14,15 +16,13 @@ use Telnyx\ExternalConnections\ExternalVoiceIntegrationsPaginationMeta;
  *   data?: list<ExternalConnectionPhoneNumber>,
  *   meta?: ExternalVoiceIntegrationsPaginationMeta,
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class PhoneNumberListResponse implements BaseModel
+final class PhoneNumberListResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<phone_number_list_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /** @var list<ExternalConnectionPhoneNumber>|null $data */
     #[Api(list: ExternalConnectionPhoneNumber::class, optional: true)]

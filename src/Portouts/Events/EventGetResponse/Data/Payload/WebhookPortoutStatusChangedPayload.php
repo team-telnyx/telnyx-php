@@ -119,7 +119,7 @@ final class WebhookPortoutStatusChangedPayload implements BaseModel
         null !== $phoneNumbers && $obj->phoneNumbers = $phoneNumbers;
         null !== $rejectionReason && $obj->rejectionReason = $rejectionReason;
         null !== $spid && $obj->spid = $spid;
-        null !== $status && $obj->status = $status instanceof Status ? $status->value : $status;
+        null !== $status && $obj['status'] = $status;
         null !== $subscriberName && $obj->subscriberName = $subscriberName;
         null !== $userID && $obj->userID = $userID;
 
@@ -202,7 +202,7 @@ final class WebhookPortoutStatusChangedPayload implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

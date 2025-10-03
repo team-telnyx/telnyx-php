@@ -113,7 +113,7 @@ final class DialogflowConnectionCreateParams implements BaseModel
         $obj->serviceAccount = $serviceAccount;
 
         null !== $conversationProfileID && $obj->conversationProfileID = $conversationProfileID;
-        null !== $dialogflowAPI && $obj->dialogflowAPI = $dialogflowAPI instanceof DialogflowAPI ? $dialogflowAPI->value : $dialogflowAPI;
+        null !== $dialogflowAPI && $obj['dialogflowAPI'] = $dialogflowAPI;
         null !== $environment && $obj->environment = $environment;
         null !== $location && $obj->location = $location;
 
@@ -153,7 +153,7 @@ final class DialogflowConnectionCreateParams implements BaseModel
     public function withDialogflowAPI(DialogflowAPI|string $dialogflowAPI): self
     {
         $obj = clone $this;
-        $obj->dialogflowAPI = $dialogflowAPI instanceof DialogflowAPI ? $dialogflowAPI->value : $dialogflowAPI;
+        $obj['dialogflowAPI'] = $dialogflowAPI;
 
         return $obj;
     }

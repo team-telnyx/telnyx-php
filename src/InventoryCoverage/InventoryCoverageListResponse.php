@@ -6,7 +6,9 @@ namespace Telnyx\InventoryCoverage;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\InventoryCoverage\InventoryCoverageListResponse\Data;
 use Telnyx\InventoryCoverage\InventoryCoverageListResponse\Meta;
 
@@ -14,15 +16,13 @@ use Telnyx\InventoryCoverage\InventoryCoverageListResponse\Meta;
  * @phpstan-type inventory_coverage_list_response = array{
  *   data?: list<Data>, meta?: Meta
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class InventoryCoverageListResponse implements BaseModel
+final class InventoryCoverageListResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<inventory_coverage_list_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /** @var list<Data>|null $data */
     #[Api(list: Data::class, optional: true)]

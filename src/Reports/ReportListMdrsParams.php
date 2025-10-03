@@ -136,12 +136,12 @@ final class ReportListMdrsParams implements BaseModel
         null !== $id && $obj->id = $id;
         null !== $cld && $obj->cld = $cld;
         null !== $cli && $obj->cli = $cli;
-        null !== $direction && $obj->direction = $direction instanceof Direction ? $direction->value : $direction;
+        null !== $direction && $obj['direction'] = $direction;
         null !== $endDate && $obj->endDate = $endDate;
-        null !== $messageType && $obj->messageType = $messageType instanceof MessageType ? $messageType->value : $messageType;
+        null !== $messageType && $obj['messageType'] = $messageType;
         null !== $profile && $obj->profile = $profile;
         null !== $startDate && $obj->startDate = $startDate;
-        null !== $status && $obj->status = $status instanceof Status ? $status->value : $status;
+        null !== $status && $obj['status'] = $status;
 
         return $obj;
     }
@@ -187,7 +187,7 @@ final class ReportListMdrsParams implements BaseModel
     public function withDirection(Direction|string $direction): self
     {
         $obj = clone $this;
-        $obj->direction = $direction instanceof Direction ? $direction->value : $direction;
+        $obj['direction'] = $direction;
 
         return $obj;
     }
@@ -211,7 +211,7 @@ final class ReportListMdrsParams implements BaseModel
     public function withMessageType(MessageType|string $messageType): self
     {
         $obj = clone $this;
-        $obj->messageType = $messageType instanceof MessageType ? $messageType->value : $messageType;
+        $obj['messageType'] = $messageType;
 
         return $obj;
     }
@@ -246,7 +246,7 @@ final class ReportListMdrsParams implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

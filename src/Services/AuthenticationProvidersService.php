@@ -17,7 +17,6 @@ use Telnyx\AuthenticationProviders\AuthenticationProviderUpdateResponse;
 use Telnyx\AuthenticationProviders\Settings;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AuthenticationProvidersContract;
 
@@ -40,8 +39,6 @@ final class AuthenticationProvidersService implements AuthenticationProvidersCon
      * @param string $shortName The short name associated with the authentication provider. This must be unique and URL-friendly, as it's going to be part of the login URL.
      * @param bool $active The active status of the authentication provider
      * @param string $settingsURL The URL for the identity provider metadata file to populate the settings automatically. If the settings attribute is provided, that will be used instead.
-     *
-     * @return AuthenticationProviderNewResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -69,8 +66,6 @@ final class AuthenticationProvidersService implements AuthenticationProvidersCon
      *
      * @param array<string, mixed> $params
      *
-     * @return AuthenticationProviderNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function createRaw(
@@ -97,29 +92,10 @@ final class AuthenticationProvidersService implements AuthenticationProvidersCon
      *
      * Retrieves the details of an existing authentication provider.
      *
-     * @return AuthenticationProviderGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): AuthenticationProviderGetResponse {
-        $params = [];
-
-        return $this->retrieveRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return AuthenticationProviderGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): AuthenticationProviderGetResponse {
         // @phpstan-ignore-next-line;
@@ -141,8 +117,6 @@ final class AuthenticationProvidersService implements AuthenticationProvidersCon
      * @param Settings $settings the settings associated with the authentication provider
      * @param string $settingsURL The URL for the identity provider metadata file to populate the settings automatically. If the settings attribute is provided, that will be used instead.
      * @param string $shortName The short name associated with the authentication provider. This must be unique and URL-friendly, as it's going to be part of the login URL.
-     *
-     * @return AuthenticationProviderUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -170,8 +144,6 @@ final class AuthenticationProvidersService implements AuthenticationProvidersCon
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return AuthenticationProviderUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -213,8 +185,6 @@ final class AuthenticationProvidersService implements AuthenticationProvidersCon
      *   </li>
      * </ul><br/>If not given, results are sorted by <code>created_at</code> in descending order.
      *
-     * @return AuthenticationProviderListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -231,8 +201,6 @@ final class AuthenticationProvidersService implements AuthenticationProvidersCon
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return AuthenticationProviderListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -260,29 +228,10 @@ final class AuthenticationProvidersService implements AuthenticationProvidersCon
      *
      * Deletes an existing authentication provider.
      *
-     * @return AuthenticationProviderDeleteResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): AuthenticationProviderDeleteResponse {
-        $params = [];
-
-        return $this->deleteRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return AuthenticationProviderDeleteResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): AuthenticationProviderDeleteResponse {
         // @phpstan-ignore-next-line;

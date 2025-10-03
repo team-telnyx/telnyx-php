@@ -93,11 +93,11 @@ final class Upload implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $availableUsages && $obj->availableUsages = array_map(fn ($v) => $v instanceof AvailableUsage ? $v->value : $v, $availableUsages);
+        null !== $availableUsages && $obj['availableUsages'] = $availableUsages;
         null !== $errorCode && $obj->errorCode = $errorCode;
         null !== $errorMessage && $obj->errorMessage = $errorMessage;
         null !== $locationID && $obj->locationID = $locationID;
-        null !== $status && $obj->status = $status instanceof Status ? $status->value : $status;
+        null !== $status && $obj['status'] = $status;
         null !== $tenantID && $obj->tenantID = $tenantID;
         null !== $ticketID && $obj->ticketID = $ticketID;
         null !== $tnUploadEntries && $obj->tnUploadEntries = $tnUploadEntries;
@@ -111,7 +111,7 @@ final class Upload implements BaseModel
     public function withAvailableUsages(array $availableUsages): self
     {
         $obj = clone $this;
-        $obj->availableUsages = array_map(fn ($v) => $v instanceof AvailableUsage ? $v->value : $v, $availableUsages);
+        $obj['availableUsages'] = $availableUsages;
 
         return $obj;
     }
@@ -154,7 +154,7 @@ final class Upload implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

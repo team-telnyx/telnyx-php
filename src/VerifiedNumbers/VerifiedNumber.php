@@ -53,7 +53,7 @@ final class VerifiedNumber implements BaseModel
         $obj = new self;
 
         null !== $phoneNumber && $obj->phoneNumber = $phoneNumber;
-        null !== $recordType && $obj->recordType = $recordType instanceof RecordType ? $recordType->value : $recordType;
+        null !== $recordType && $obj['recordType'] = $recordType;
         null !== $verifiedAt && $obj->verifiedAt = $verifiedAt;
 
         return $obj;
@@ -75,7 +75,7 @@ final class VerifiedNumber implements BaseModel
     public function withRecordType(RecordType|string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType instanceof RecordType ? $recordType->value : $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }

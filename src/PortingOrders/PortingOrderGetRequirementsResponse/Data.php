@@ -77,7 +77,7 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $fieldType && $obj->fieldType = $fieldType instanceof FieldType ? $fieldType->value : $fieldType;
+        null !== $fieldType && $obj['fieldType'] = $fieldType;
         null !== $fieldValue && $obj->fieldValue = $fieldValue;
         null !== $recordType && $obj->recordType = $recordType;
         null !== $requirementStatus && $obj->requirementStatus = $requirementStatus;
@@ -94,7 +94,7 @@ final class Data implements BaseModel
     public function withFieldType(FieldType|string $fieldType): self
     {
         $obj = clone $this;
-        $obj->fieldType = $fieldType instanceof FieldType ? $fieldType->value : $fieldType;
+        $obj['fieldType'] = $fieldType;
 
         return $obj;
     }

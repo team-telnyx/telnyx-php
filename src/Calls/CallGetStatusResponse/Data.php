@@ -133,7 +133,7 @@ final class Data implements BaseModel
         $obj->callLegID = $callLegID;
         $obj->callSessionID = $callSessionID;
         $obj->isAlive = $isAlive;
-        $obj->recordType = $recordType instanceof RecordType ? $recordType->value : $recordType;
+        $obj['recordType'] = $recordType;
 
         null !== $callDuration && $obj->callDuration = $callDuration;
         null !== $clientState && $obj->clientState = $clientState;
@@ -193,7 +193,7 @@ final class Data implements BaseModel
     public function withRecordType(RecordType|string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType instanceof RecordType ? $recordType->value : $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }

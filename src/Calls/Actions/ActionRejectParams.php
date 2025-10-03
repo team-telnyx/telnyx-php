@@ -93,7 +93,7 @@ final class ActionRejectParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->cause = $cause instanceof Cause ? $cause->value : $cause;
+        $obj['cause'] = $cause;
 
         null !== $clientState && $obj->clientState = $clientState;
         null !== $commandID && $obj->commandID = $commandID;
@@ -109,7 +109,7 @@ final class ActionRejectParams implements BaseModel
     public function withCause(Cause|string $cause): self
     {
         $obj = clone $this;
-        $obj->cause = $cause instanceof Cause ? $cause->value : $cause;
+        $obj['cause'] = $cause;
 
         return $obj;
     }

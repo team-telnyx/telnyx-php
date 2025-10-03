@@ -7,22 +7,22 @@ namespace Telnyx\PortingOrders\ActivationJobs;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PortingOrders\PortingOrdersActivationJob;
 
 /**
  * @phpstan-type activation_job_list_response = array{
  *   data?: list<PortingOrdersActivationJob>, meta?: PaginationMeta
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class ActivationJobListResponse implements BaseModel
+final class ActivationJobListResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<activation_job_list_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /** @var list<PortingOrdersActivationJob>|null $data */
     #[Api(list: PortingOrdersActivationJob::class, optional: true)]

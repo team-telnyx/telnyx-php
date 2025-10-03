@@ -192,12 +192,12 @@ final class Payload implements BaseModel
         null !== $connectionID && $obj->connectionID = $connectionID;
         null !== $customHeaders && $obj->customHeaders = $customHeaders;
         null !== $from && $obj->from = $from;
-        null !== $hangupCause && $obj->hangupCause = $hangupCause instanceof HangupCause ? $hangupCause->value : $hangupCause;
-        null !== $hangupSource && $obj->hangupSource = $hangupSource instanceof HangupSource ? $hangupSource->value : $hangupSource;
+        null !== $hangupCause && $obj['hangupCause'] = $hangupCause;
+        null !== $hangupSource && $obj['hangupSource'] = $hangupSource;
         null !== $sipHangupCause && $obj->sipHangupCause = $sipHangupCause;
         null !== $sipHeaders && $obj->sipHeaders = $sipHeaders;
         null !== $startTime && $obj->startTime = $startTime;
-        null !== $state && $obj->state = $state instanceof State ? $state->value : $state;
+        null !== $state && $obj['state'] = $state;
         null !== $tags && $obj->tags = $tags;
         null !== $to && $obj->to = $to;
 
@@ -303,7 +303,7 @@ final class Payload implements BaseModel
     public function withHangupCause(HangupCause|string $hangupCause): self
     {
         $obj = clone $this;
-        $obj->hangupCause = $hangupCause instanceof HangupCause ? $hangupCause->value : $hangupCause;
+        $obj['hangupCause'] = $hangupCause;
 
         return $obj;
     }
@@ -316,7 +316,7 @@ final class Payload implements BaseModel
     public function withHangupSource(HangupSource|string $hangupSource): self
     {
         $obj = clone $this;
-        $obj->hangupSource = $hangupSource instanceof HangupSource ? $hangupSource->value : $hangupSource;
+        $obj['hangupSource'] = $hangupSource;
 
         return $obj;
     }
@@ -364,7 +364,7 @@ final class Payload implements BaseModel
     public function withState(State|string $state): self
     {
         $obj = clone $this;
-        $obj->state = $state instanceof State ? $state->value : $state;
+        $obj['state'] = $state;
 
         return $obj;
     }

@@ -91,7 +91,7 @@ final class MdrUsageReportCreateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->aggregationType = $aggregationType instanceof AggregationType ? $aggregationType->value : $aggregationType;
+        $obj['aggregationType'] = $aggregationType;
         $obj->endDate = $endDate;
         $obj->startDate = $startDate;
 
@@ -107,7 +107,7 @@ final class MdrUsageReportCreateParams implements BaseModel
         AggregationType|string $aggregationType
     ): self {
         $obj = clone $this;
-        $obj->aggregationType = $aggregationType instanceof AggregationType ? $aggregationType->value : $aggregationType;
+        $obj['aggregationType'] = $aggregationType;
 
         return $obj;
     }

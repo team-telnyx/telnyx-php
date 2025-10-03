@@ -71,7 +71,7 @@ final class Handoff implements BaseModel
 
         $obj->aiAssistants = $aiAssistants;
 
-        null !== $voiceMode && $obj->voiceMode = $voiceMode instanceof VoiceMode ? $voiceMode->value : $voiceMode;
+        null !== $voiceMode && $obj['voiceMode'] = $voiceMode;
 
         return $obj;
     }
@@ -97,7 +97,7 @@ final class Handoff implements BaseModel
     public function withVoiceMode(VoiceMode|string $voiceMode): self
     {
         $obj = clone $this;
-        $obj->voiceMode = $voiceMode instanceof VoiceMode ? $voiceMode->value : $voiceMode;
+        $obj['voiceMode'] = $voiceMode;
 
         return $obj;
     }

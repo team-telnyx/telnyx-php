@@ -6,7 +6,6 @@ namespace Telnyx\Services\Storage\Buckets;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Storage\Buckets\SslCertificateContract;
 use Telnyx\Storage\Buckets\SslCertificate\SslCertificateCreateParams;
@@ -31,8 +30,6 @@ final class SslCertificateService implements SslCertificateContract
      * @param string $certificate The SSL certificate file
      * @param string $privateKey The private key file
      *
-     * @return SslCertificateNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -50,8 +47,6 @@ final class SslCertificateService implements SslCertificateContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return SslCertificateNewResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -81,29 +76,10 @@ final class SslCertificateService implements SslCertificateContract
      *
      * Returns the stored certificate detail of a bucket, if applicable.
      *
-     * @return SslCertificateGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $bucketName,
-        ?RequestOptions $requestOptions = null
-    ): SslCertificateGetResponse {
-        $params = [];
-
-        return $this->retrieveRaw($bucketName, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return SslCertificateGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $bucketName,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): SslCertificateGetResponse {
         // @phpstan-ignore-next-line;
@@ -120,29 +96,10 @@ final class SslCertificateService implements SslCertificateContract
      *
      * Deletes an SSL certificate and its matching secret.
      *
-     * @return SslCertificateDeleteResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function delete(
         string $bucketName,
-        ?RequestOptions $requestOptions = null
-    ): SslCertificateDeleteResponse {
-        $params = [];
-
-        return $this->deleteRaw($bucketName, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return SslCertificateDeleteResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $bucketName,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): SslCertificateDeleteResponse {
         // @phpstan-ignore-next-line;

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\Texml\Accounts\Calls;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\Texml\Accounts\Calls\RecordingsJson\RecordingsJsonGetRecordingsJsonResponse;
 use Telnyx\Texml\Accounts\Calls\RecordingsJson\RecordingsJsonRecordingsJsonParams\RecordingChannels;
@@ -29,8 +28,6 @@ interface RecordingsJsonContract
      * @param RecordingTrack|value-of<RecordingTrack> $recordingTrack The audio track to record for the call. The default is `both`.
      * @param bool $sendRecordingURL whether to send RecordingUrl in webhooks
      *
-     * @return RecordingsJsonRecordingsJsonResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function recordingsJson(
@@ -51,8 +48,6 @@ interface RecordingsJsonContract
      *
      * @param array<string, mixed> $params
      *
-     * @return RecordingsJsonRecordingsJsonResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function recordingsJsonRaw(
@@ -66,8 +61,6 @@ interface RecordingsJsonContract
      *
      * @param string $accountSid
      *
-     * @return RecordingsJsonGetRecordingsJsonResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieveRecordingsJson(
@@ -80,8 +73,6 @@ interface RecordingsJsonContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return RecordingsJsonGetRecordingsJsonResponse<HasRawResponse>
      *
      * @throws APIException
      */

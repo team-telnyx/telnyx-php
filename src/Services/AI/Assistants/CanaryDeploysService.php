@@ -10,7 +10,6 @@ use Telnyx\AI\Assistants\CanaryDeploys\CanaryDeployUpdateParams;
 use Telnyx\AI\Assistants\CanaryDeploys\VersionConfig;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\CanaryDeploysContract;
 
@@ -31,8 +30,6 @@ final class CanaryDeploysService implements CanaryDeploysContract
      *
      * @param list<VersionConfig> $versions List of version configurations
      *
-     * @return CanaryDeployResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -49,8 +46,6 @@ final class CanaryDeploysService implements CanaryDeploysContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return CanaryDeployResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -82,29 +77,10 @@ final class CanaryDeploysService implements CanaryDeploysContract
      * Retrieves the current canary deploy configuration with all version IDs and their
      * traffic percentages for the specified assistant.
      *
-     * @return CanaryDeployResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $assistantID,
-        ?RequestOptions $requestOptions = null
-    ): CanaryDeployResponse {
-        $params = [];
-
-        return $this->retrieveRaw($assistantID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return CanaryDeployResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $assistantID,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): CanaryDeployResponse {
         // @phpstan-ignore-next-line;
@@ -126,8 +102,6 @@ final class CanaryDeploysService implements CanaryDeploysContract
      *
      * @param list<VersionConfig> $versions List of version configurations
      *
-     * @return CanaryDeployResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function update(
@@ -144,8 +118,6 @@ final class CanaryDeploysService implements CanaryDeploysContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return CanaryDeployResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -180,21 +152,6 @@ final class CanaryDeploysService implements CanaryDeploysContract
      */
     public function delete(
         string $assistantID,
-        ?RequestOptions $requestOptions = null
-    ): mixed {
-        $params = [];
-
-        return $this->deleteRaw($assistantID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $assistantID,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): mixed {
         // @phpstan-ignore-next-line;

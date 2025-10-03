@@ -141,11 +141,11 @@ final class VoiceUpdateParams implements BaseModel
         null !== $callRecording && $obj->callRecording = $callRecording;
         null !== $callerIDNameEnabled && $obj->callerIDNameEnabled = $callerIDNameEnabled;
         null !== $cnamListing && $obj->cnamListing = $cnamListing;
-        null !== $inboundCallScreening && $obj->inboundCallScreening = $inboundCallScreening instanceof InboundCallScreening ? $inboundCallScreening->value : $inboundCallScreening;
+        null !== $inboundCallScreening && $obj['inboundCallScreening'] = $inboundCallScreening;
         null !== $mediaFeatures && $obj->mediaFeatures = $mediaFeatures;
         null !== $techPrefixEnabled && $obj->techPrefixEnabled = $techPrefixEnabled;
         null !== $translatedNumber && $obj->translatedNumber = $translatedNumber;
-        null !== $usagePaymentMethod && $obj->usagePaymentMethod = $usagePaymentMethod instanceof UsagePaymentMethod ? $usagePaymentMethod->value : $usagePaymentMethod;
+        null !== $usagePaymentMethod && $obj['usagePaymentMethod'] = $usagePaymentMethod;
 
         return $obj;
     }
@@ -203,7 +203,7 @@ final class VoiceUpdateParams implements BaseModel
         InboundCallScreening|string $inboundCallScreening
     ): self {
         $obj = clone $this;
-        $obj->inboundCallScreening = $inboundCallScreening instanceof InboundCallScreening ? $inboundCallScreening->value : $inboundCallScreening;
+        $obj['inboundCallScreening'] = $inboundCallScreening;
 
         return $obj;
     }
@@ -250,7 +250,7 @@ final class VoiceUpdateParams implements BaseModel
         UsagePaymentMethod|string $usagePaymentMethod
     ): self {
         $obj = clone $this;
-        $obj->usagePaymentMethod = $usagePaymentMethod instanceof UsagePaymentMethod ? $usagePaymentMethod->value : $usagePaymentMethod;
+        $obj['usagePaymentMethod'] = $usagePaymentMethod;
 
         return $obj;
     }

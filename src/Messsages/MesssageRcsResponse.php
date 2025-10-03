@@ -6,20 +6,20 @@ namespace Telnyx\Messsages;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Messsages\MesssageRcsResponse\Data;
 
 /**
  * @phpstan-type messsage_rcs_response = array{data?: Data}
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class MesssageRcsResponse implements BaseModel
+final class MesssageRcsResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<messsage_rcs_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     #[Api(optional: true)]
     public ?Data $data;

@@ -52,7 +52,7 @@ final class AdditionalDocument implements BaseModel
         $obj = new self;
 
         null !== $documentID && $obj->documentID = $documentID;
-        null !== $documentType && $obj->documentType = $documentType instanceof DocumentType ? $documentType->value : $documentType;
+        null !== $documentType && $obj['documentType'] = $documentType;
 
         return $obj;
     }
@@ -76,7 +76,7 @@ final class AdditionalDocument implements BaseModel
     public function withDocumentType(DocumentType|string $documentType): self
     {
         $obj = clone $this;
-        $obj->documentType = $documentType instanceof DocumentType ? $documentType->value : $documentType;
+        $obj['documentType'] = $documentType;
 
         return $obj;
     }

@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\WirelessBlocklistsContract;
 use Telnyx\WirelessBlocklists\WirelessBlocklistCreateParams;
@@ -37,8 +36,6 @@ final class WirelessBlocklistsService implements WirelessBlocklistsContract
      * @param Type|value-of<Type> $type the type of wireless blocklist
      * @param list<string> $values Values to block. The values here depend on the `type` of Wireless Blocklist.
      *
-     * @return WirelessBlocklistNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -56,8 +53,6 @@ final class WirelessBlocklistsService implements WirelessBlocklistsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return WirelessBlocklistNewResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -85,29 +80,10 @@ final class WirelessBlocklistsService implements WirelessBlocklistsContract
      *
      * Retrieve information about a Wireless Blocklist.
      *
-     * @return WirelessBlocklistGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): WirelessBlocklistGetResponse {
-        $params = [];
-
-        return $this->retrieveRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return WirelessBlocklistGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): WirelessBlocklistGetResponse {
         // @phpstan-ignore-next-line;
@@ -128,8 +104,6 @@ final class WirelessBlocklistsService implements WirelessBlocklistsContract
      * @param Telnyx\WirelessBlocklists\WirelessBlocklistUpdateParams\Type|value-of<Telnyx\WirelessBlocklists\WirelessBlocklistUpdateParams\Type> $type the type of wireless blocklist
      * @param list<string> $values Values to block. The values here depend on the `type` of Wireless Blocklist.
      *
-     * @return WirelessBlocklistUpdateResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function update(
@@ -147,8 +121,6 @@ final class WirelessBlocklistsService implements WirelessBlocklistsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return WirelessBlocklistUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -182,8 +154,6 @@ final class WirelessBlocklistsService implements WirelessBlocklistsContract
      * @param int $pageNumber the page number to load
      * @param int $pageSize the size of the page
      *
-     * @return WirelessBlocklistListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -209,8 +179,6 @@ final class WirelessBlocklistsService implements WirelessBlocklistsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return WirelessBlocklistListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -238,29 +206,10 @@ final class WirelessBlocklistsService implements WirelessBlocklistsContract
      *
      * Deletes the Wireless Blocklist.
      *
-     * @return WirelessBlocklistDeleteResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): WirelessBlocklistDeleteResponse {
-        $params = [];
-
-        return $this->deleteRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return WirelessBlocklistDeleteResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): WirelessBlocklistDeleteResponse {
         // @phpstan-ignore-next-line;

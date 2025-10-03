@@ -288,12 +288,12 @@ final class SimCard implements BaseModel
         null !== $currentMnc && $obj->currentMnc = $currentMnc;
         null !== $dataLimit && $obj->dataLimit = $dataLimit;
         null !== $eid && $obj->eid = $eid;
-        null !== $esimInstallationStatus && $obj->esimInstallationStatus = $esimInstallationStatus instanceof EsimInstallationStatus ? $esimInstallationStatus->value : $esimInstallationStatus;
+        null !== $esimInstallationStatus && $obj['esimInstallationStatus'] = $esimInstallationStatus;
         null !== $iccid && $obj->iccid = $iccid;
         null !== $imsi && $obj->imsi = $imsi;
         null !== $ipv4 && $obj->ipv4 = $ipv4;
         null !== $ipv6 && $obj->ipv6 = $ipv6;
-        null !== $liveDataSession && $obj->liveDataSession = $liveDataSession instanceof LiveDataSession ? $liveDataSession->value : $liveDataSession;
+        null !== $liveDataSession && $obj['liveDataSession'] = $liveDataSession;
         null !== $msisdn && $obj->msisdn = $msisdn;
         null !== $pinPukCodes && $obj->pinPukCodes = $pinPukCodes;
         null !== $recordType && $obj->recordType = $recordType;
@@ -301,7 +301,7 @@ final class SimCard implements BaseModel
         null !== $simCardGroupID && $obj->simCardGroupID = $simCardGroupID;
         null !== $status && $obj->status = $status;
         null !== $tags && $obj->tags = $tags;
-        null !== $type && $obj->type = $type instanceof Type ? $type->value : $type;
+        null !== $type && $obj['type'] = $type;
         null !== $updatedAt && $obj->updatedAt = $updatedAt;
         null !== $version && $obj->version = $version;
 
@@ -444,7 +444,7 @@ final class SimCard implements BaseModel
         EsimInstallationStatus|string|null $esimInstallationStatus
     ): self {
         $obj = clone $this;
-        $obj->esimInstallationStatus = $esimInstallationStatus instanceof EsimInstallationStatus ? $esimInstallationStatus->value : $esimInstallationStatus;
+        $obj['esimInstallationStatus'] = $esimInstallationStatus;
 
         return $obj;
     }
@@ -503,7 +503,7 @@ final class SimCard implements BaseModel
         LiveDataSession|string $liveDataSession
     ): self {
         $obj = clone $this;
-        $obj->liveDataSession = $liveDataSession instanceof LiveDataSession ? $liveDataSession->value : $liveDataSession;
+        $obj['liveDataSession'] = $liveDataSession;
 
         return $obj;
     }
@@ -593,7 +593,7 @@ final class SimCard implements BaseModel
     public function withType(Type|string $type): self
     {
         $obj = clone $this;
-        $obj->type = $type instanceof Type ? $type->value : $type;
+        $obj['type'] = $type;
 
         return $obj;
     }

@@ -97,7 +97,7 @@ final class BillingGroup implements BaseModel
         null !== $deletedAt && $obj->deletedAt = $deletedAt;
         null !== $name && $obj->name = $name;
         null !== $organizationID && $obj->organizationID = $organizationID;
-        null !== $recordType && $obj->recordType = $recordType instanceof RecordType ? $recordType->value : $recordType;
+        null !== $recordType && $obj['recordType'] = $recordType;
         null !== $updatedAt && $obj->updatedAt = $updatedAt;
 
         return $obj;
@@ -166,7 +166,7 @@ final class BillingGroup implements BaseModel
     public function withRecordType(RecordType|string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType instanceof RecordType ? $recordType->value : $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }

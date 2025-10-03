@@ -6,21 +6,21 @@ namespace Telnyx\Campaign;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type campaign_get_sharing_status_response = array{
  *   sharedByMe?: CampaignSharingStatus, sharedWithMe?: CampaignSharingStatus
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class CampaignGetSharingStatusResponse implements BaseModel
+final class CampaignGetSharingStatusResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<campaign_get_sharing_status_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     #[Api(optional: true)]
     public ?CampaignSharingStatus $sharedByMe;

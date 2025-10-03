@@ -7,21 +7,21 @@ namespace Telnyx\Portouts\Reports;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type report_list_response = array{
  *   data?: list<PortoutReport>, meta?: PaginationMeta
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class ReportListResponse implements BaseModel
+final class ReportListResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<report_list_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /** @var list<PortoutReport>|null $data */
     #[Api(list: PortoutReport::class, optional: true)]

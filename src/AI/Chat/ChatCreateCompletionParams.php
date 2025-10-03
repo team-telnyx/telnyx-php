@@ -283,7 +283,7 @@ final class ChatCreateCompletionParams implements BaseModel
         null !== $responseFormat && $obj->responseFormat = $responseFormat;
         null !== $stream && $obj->stream = $stream;
         null !== $temperature && $obj->temperature = $temperature;
-        null !== $toolChoice && $obj->toolChoice = $toolChoice instanceof ToolChoice ? $toolChoice->value : $toolChoice;
+        null !== $toolChoice && $obj['toolChoice'] = $toolChoice;
         null !== $tools && $obj->tools = $tools;
         null !== $topLogprobs && $obj->topLogprobs = $topLogprobs;
         null !== $topP && $obj->topP = $topP;
@@ -502,7 +502,7 @@ final class ChatCreateCompletionParams implements BaseModel
     public function withToolChoice(ToolChoice|string $toolChoice): self
     {
         $obj = clone $this;
-        $obj->toolChoice = $toolChoice instanceof ToolChoice ? $toolChoice->value : $toolChoice;
+        $obj['toolChoice'] = $toolChoice;
 
         return $obj;
     }

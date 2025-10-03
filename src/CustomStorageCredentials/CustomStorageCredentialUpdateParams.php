@@ -78,7 +78,7 @@ final class CustomStorageCredentialUpdateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->backend = $backend instanceof Backend ? $backend->value : $backend;
+        $obj['backend'] = $backend;
         $obj->configuration = $configuration;
 
         return $obj;
@@ -90,7 +90,7 @@ final class CustomStorageCredentialUpdateParams implements BaseModel
     public function withBackend(Backend|string $backend): self
     {
         $obj = clone $this;
-        $obj->backend = $backend instanceof Backend ? $backend->value : $backend;
+        $obj['backend'] = $backend;
 
         return $obj;
     }

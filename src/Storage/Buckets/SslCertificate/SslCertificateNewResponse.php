@@ -6,19 +6,19 @@ namespace Telnyx\Storage\Buckets\SslCertificate;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type ssl_certificate_new_response = array{data?: SslCertificate}
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class SslCertificateNewResponse implements BaseModel
+final class SslCertificateNewResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<ssl_certificate_new_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     #[Api(optional: true)]
     public ?SslCertificate $data;

@@ -231,12 +231,12 @@ final class ActionGatherUsingSpeakParams implements BaseModel
         null !== $commandID && $obj->commandID = $commandID;
         null !== $interDigitTimeoutMillis && $obj->interDigitTimeoutMillis = $interDigitTimeoutMillis;
         null !== $invalidPayload && $obj->invalidPayload = $invalidPayload;
-        null !== $language && $obj->language = $language instanceof Language ? $language->value : $language;
+        null !== $language && $obj['language'] = $language;
         null !== $maximumDigits && $obj->maximumDigits = $maximumDigits;
         null !== $maximumTries && $obj->maximumTries = $maximumTries;
         null !== $minimumDigits && $obj->minimumDigits = $minimumDigits;
-        null !== $payloadType && $obj->payloadType = $payloadType instanceof PayloadType ? $payloadType->value : $payloadType;
-        null !== $serviceLevel && $obj->serviceLevel = $serviceLevel instanceof ServiceLevel ? $serviceLevel->value : $serviceLevel;
+        null !== $payloadType && $obj['payloadType'] = $payloadType;
+        null !== $serviceLevel && $obj['serviceLevel'] = $serviceLevel;
         null !== $terminatingDigit && $obj->terminatingDigit = $terminatingDigit;
         null !== $timeoutMillis && $obj->timeoutMillis = $timeoutMillis;
         null !== $validDigits && $obj->validDigits = $validDigits;
@@ -330,7 +330,7 @@ final class ActionGatherUsingSpeakParams implements BaseModel
     public function withLanguage(Language|string $language): self
     {
         $obj = clone $this;
-        $obj->language = $language instanceof Language ? $language->value : $language;
+        $obj['language'] = $language;
 
         return $obj;
     }
@@ -376,7 +376,7 @@ final class ActionGatherUsingSpeakParams implements BaseModel
     public function withPayloadType(PayloadType|string $payloadType): self
     {
         $obj = clone $this;
-        $obj->payloadType = $payloadType instanceof PayloadType ? $payloadType->value : $payloadType;
+        $obj['payloadType'] = $payloadType;
 
         return $obj;
     }
@@ -389,7 +389,7 @@ final class ActionGatherUsingSpeakParams implements BaseModel
     public function withServiceLevel(ServiceLevel|string $serviceLevel): self
     {
         $obj = clone $this;
-        $obj->serviceLevel = $serviceLevel instanceof ServiceLevel ? $serviceLevel->value : $serviceLevel;
+        $obj['serviceLevel'] = $serviceLevel;
 
         return $obj;
     }

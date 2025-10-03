@@ -6,7 +6,6 @@ namespace Telnyx\Services\Texml\Accounts\Transcriptions;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\Accounts\Transcriptions\JsonContract;
 use Telnyx\Texml\Accounts\Transcriptions\Json\JsonDeleteRecordingTranscriptionSidJsonParams;
@@ -84,8 +83,6 @@ final class JsonService implements JsonContract
      *
      * @param string $accountSid
      *
-     * @return JsonGetRecordingTranscriptionSidJsonResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieveRecordingTranscriptionSidJson(
@@ -106,8 +103,6 @@ final class JsonService implements JsonContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return JsonGetRecordingTranscriptionSidJsonResponse<HasRawResponse>
      *
      * @throws APIException
      */

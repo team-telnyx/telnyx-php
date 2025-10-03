@@ -82,7 +82,7 @@ final class AssociatedPhoneNumberCreateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->action = $action instanceof Action ? $action->value : $action;
+        $obj['action'] = $action;
         $obj->phoneNumberRange = $phoneNumberRange;
 
         return $obj;
@@ -96,7 +96,7 @@ final class AssociatedPhoneNumberCreateParams implements BaseModel
     public function withAction(Action|string $action): self
     {
         $obj = clone $this;
-        $obj->action = $action instanceof Action ? $action->value : $action;
+        $obj['action'] = $action;
 
         return $obj;
     }

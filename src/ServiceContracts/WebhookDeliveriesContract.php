@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\WebhookDeliveries\WebhookDeliveryGetResponse;
 use Telnyx\WebhookDeliveries\WebhookDeliveryListParams\Filter;
@@ -19,8 +18,6 @@ interface WebhookDeliveriesContract
     /**
      * @api
      *
-     * @return WebhookDeliveryGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
@@ -31,23 +28,8 @@ interface WebhookDeliveriesContract
     /**
      * @api
      *
-     * @return WebhookDeliveryGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
-        ?RequestOptions $requestOptions = null
-    ): WebhookDeliveryGetResponse;
-
-    /**
-     * @api
-     *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[status][eq], filter[event_type], filter[webhook][contains], filter[attempts][contains], filter[started_at][gte], filter[started_at][lte], filter[finished_at][gte], filter[finished_at][lte]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
-     *
-     * @return WebhookDeliveryListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -61,8 +43,6 @@ interface WebhookDeliveriesContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return WebhookDeliveryListResponse<HasRawResponse>
      *
      * @throws APIException
      */

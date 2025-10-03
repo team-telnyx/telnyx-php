@@ -233,14 +233,14 @@ final class Data implements BaseModel
         null !== $customerReference && $obj->customerReference = $customerReference;
         null !== $emergencyAddressID && $obj->emergencyAddressID = $emergencyAddressID;
         null !== $emergencyEnabled && $obj->emergencyEnabled = $emergencyEnabled;
-        null !== $emergencyStatus && $obj->emergencyStatus = $emergencyStatus instanceof EmergencyStatus ? $emergencyStatus->value : $emergencyStatus;
+        null !== $emergencyStatus && $obj['emergencyStatus'] = $emergencyStatus;
         null !== $externalPin && $obj->externalPin = $externalPin;
-        null !== $inboundCallScreening && $obj->inboundCallScreening = $inboundCallScreening instanceof InboundCallScreening ? $inboundCallScreening->value : $inboundCallScreening;
+        null !== $inboundCallScreening && $obj['inboundCallScreening'] = $inboundCallScreening;
         null !== $phoneNumber && $obj->phoneNumber = $phoneNumber;
-        null !== $phoneNumberType && $obj->phoneNumberType = $phoneNumberType instanceof PhoneNumberType ? $phoneNumberType->value : $phoneNumberType;
+        null !== $phoneNumberType && $obj['phoneNumberType'] = $phoneNumberType;
         null !== $purchasedAt && $obj->purchasedAt = $purchasedAt;
         null !== $recordType && $obj->recordType = $recordType;
-        null !== $status && $obj->status = $status instanceof Status ? $status->value : $status;
+        null !== $status && $obj['status'] = $status;
         null !== $t38FaxGatewayEnabled && $obj->t38FaxGatewayEnabled = $t38FaxGatewayEnabled;
 
         return $obj;
@@ -387,7 +387,7 @@ final class Data implements BaseModel
         EmergencyStatus|string $emergencyStatus
     ): self {
         $obj = clone $this;
-        $obj->emergencyStatus = $emergencyStatus instanceof EmergencyStatus ? $emergencyStatus->value : $emergencyStatus;
+        $obj['emergencyStatus'] = $emergencyStatus;
 
         return $obj;
     }
@@ -412,7 +412,7 @@ final class Data implements BaseModel
         InboundCallScreening|string $inboundCallScreening
     ): self {
         $obj = clone $this;
-        $obj->inboundCallScreening = $inboundCallScreening instanceof InboundCallScreening ? $inboundCallScreening->value : $inboundCallScreening;
+        $obj['inboundCallScreening'] = $inboundCallScreening;
 
         return $obj;
     }
@@ -438,7 +438,7 @@ final class Data implements BaseModel
         PhoneNumberType|string $phoneNumberType
     ): self {
         $obj = clone $this;
-        $obj->phoneNumberType = $phoneNumberType instanceof PhoneNumberType ? $phoneNumberType->value : $phoneNumberType;
+        $obj['phoneNumberType'] = $phoneNumberType;
 
         return $obj;
     }
@@ -473,7 +473,7 @@ final class Data implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

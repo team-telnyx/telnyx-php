@@ -60,7 +60,7 @@ final class Filter implements BaseModel
 
         null !== $dateCreatedAt && $obj->dateCreatedAt = $dateCreatedAt;
         null !== $sessionID && $obj->sessionID = $sessionID;
-        null !== $status && $obj->status = $status instanceof Status ? $status->value : $status;
+        null !== $status && $obj['status'] = $status;
 
         return $obj;
     }
@@ -92,7 +92,7 @@ final class Filter implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

@@ -6,19 +6,19 @@ namespace Telnyx\FaxApplications;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type fax_application_delete_response = array{data?: FaxApplication}
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class FaxApplicationDeleteResponse implements BaseModel
+final class FaxApplicationDeleteResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<fax_application_delete_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     #[Api(optional: true)]
     public ?FaxApplication $data;

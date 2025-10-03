@@ -105,7 +105,7 @@ final class Data implements BaseModel
         null !== $port && $obj->port = $port;
         null !== $recordType && $obj->recordType = $recordType;
         null !== $sipUsername && $obj->sipUsername = $sipUsername;
-        null !== $status && $obj->status = $status instanceof Status ? $status->value : $status;
+        null !== $status && $obj['status'] = $status;
         null !== $transport && $obj->transport = $transport;
         null !== $userAgent && $obj->userAgent = $userAgent;
 
@@ -175,7 +175,7 @@ final class Data implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

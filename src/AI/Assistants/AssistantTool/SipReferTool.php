@@ -56,7 +56,7 @@ final class SipReferTool implements BaseModel
         $obj = new self;
 
         $obj->refer = $refer;
-        $obj->type = $type instanceof Type ? $type->value : $type;
+        $obj['type'] = $type;
 
         return $obj;
     }
@@ -75,7 +75,7 @@ final class SipReferTool implements BaseModel
     public function withType(Type|string $type): self
     {
         $obj = clone $this;
-        $obj->type = $type instanceof Type ? $type->value : $type;
+        $obj['type'] = $type;
 
         return $obj;
     }

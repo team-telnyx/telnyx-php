@@ -83,7 +83,7 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->result = $result instanceof Result ? $result->value : $result;
+        $obj['result'] = $result;
         $obj->suggested = $suggested;
 
         null !== $errors && $obj->errors = $errors;
@@ -100,7 +100,7 @@ final class Data implements BaseModel
     public function withResult(Result|string $result): self
     {
         $obj = clone $this;
-        $obj->result = $result instanceof Result ? $result->value : $result;
+        $obj['result'] = $result;
 
         return $obj;
     }

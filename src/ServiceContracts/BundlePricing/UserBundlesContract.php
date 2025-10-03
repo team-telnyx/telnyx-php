@@ -14,7 +14,6 @@ use Telnyx\BundlePricing\UserBundles\UserBundleListResponse;
 use Telnyx\BundlePricing\UserBundles\UserBundleListUnusedResponse;
 use Telnyx\BundlePricing\UserBundles\UserBundleNewResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 
 use const Telnyx\Core\OMIT as omit;
@@ -27,8 +26,6 @@ interface UserBundlesContract
      * @param string $idempotencyKey Idempotency key for the request. Can be any UUID, but should always be unique for each request.
      * @param list<Item> $items
      * @param string $authorizationBearer Authenticates the request with your Telnyx API V2 KEY
-     *
-     * @return UserBundleNewResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -44,8 +41,6 @@ interface UserBundlesContract
      *
      * @param array<string, mixed> $params
      *
-     * @return UserBundleNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function createRaw(
@@ -57,8 +52,6 @@ interface UserBundlesContract
      * @api
      *
      * @param string $authorizationBearer Authenticates the request with your Telnyx API V2 KEY
-     *
-     * @return UserBundleGetResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -72,8 +65,6 @@ interface UserBundlesContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return UserBundleGetResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -90,8 +81,6 @@ interface UserBundlesContract
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param string $authorizationBearer Authenticates the request with your Telnyx API V2 KEY
      *
-     * @return UserBundleListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -106,8 +95,6 @@ interface UserBundlesContract
      *
      * @param array<string, mixed> $params
      *
-     * @return UserBundleListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function listRaw(
@@ -119,8 +106,6 @@ interface UserBundlesContract
      * @api
      *
      * @param string $authorizationBearer Authenticates the request with your Telnyx API V2 KEY
-     *
-     * @return UserBundleDeactivateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -135,8 +120,6 @@ interface UserBundlesContract
      *
      * @param array<string, mixed> $params
      *
-     * @return UserBundleDeactivateResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function deactivateRaw(
@@ -150,8 +133,6 @@ interface UserBundlesContract
      *
      * @param string $authorizationBearer Authenticates the request with your Telnyx API V2 KEY
      *
-     * @return UserBundleListResourcesResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function listResources(
@@ -164,8 +145,6 @@ interface UserBundlesContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return UserBundleListResourcesResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -181,8 +160,6 @@ interface UserBundlesContract
      * @param Telnyx\BundlePricing\UserBundles\UserBundleListUnusedParams\Filter $filter Consolidated filter parameter (deepObject style). Supports filtering by country_iso and resource. Examples: filter[country_iso]=US or filter[resource]=+15617819942
      * @param string $authorizationBearer Authenticates the request with your Telnyx API V2 KEY
      *
-     * @return UserBundleListUnusedResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function listUnused(
@@ -195,8 +172,6 @@ interface UserBundlesContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return UserBundleListUnusedResponse<HasRawResponse>
      *
      * @throws APIException
      */

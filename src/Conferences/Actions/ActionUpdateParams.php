@@ -103,7 +103,7 @@ final class ActionUpdateParams implements BaseModel
         $obj = new self;
 
         $obj->callControlID = $callControlID;
-        $obj->supervisorRole = $supervisorRole instanceof SupervisorRole ? $supervisorRole->value : $supervisorRole;
+        $obj['supervisorRole'] = $supervisorRole;
 
         null !== $commandID && $obj->commandID = $commandID;
         null !== $whisperCallControlIDs && $obj->whisperCallControlIDs = $whisperCallControlIDs;
@@ -131,7 +131,7 @@ final class ActionUpdateParams implements BaseModel
         SupervisorRole|string $supervisorRole
     ): self {
         $obj = clone $this;
-        $obj->supervisorRole = $supervisorRole instanceof SupervisorRole ? $supervisorRole->value : $supervisorRole;
+        $obj['supervisorRole'] = $supervisorRole;
 
         return $obj;
     }

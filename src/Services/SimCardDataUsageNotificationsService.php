@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SimCardDataUsageNotificationsContract;
 use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationCreateParams;
@@ -36,8 +35,6 @@ final class SimCardDataUsageNotificationsService implements SimCardDataUsageNoti
      * @param string $simCardID the identification UUID of the related SIM card resource
      * @param Threshold $threshold data usage threshold that will trigger the notification
      *
-     * @return SimCardDataUsageNotificationNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -54,8 +51,6 @@ final class SimCardDataUsageNotificationsService implements SimCardDataUsageNoti
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return SimCardDataUsageNotificationNewResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -85,29 +80,10 @@ final class SimCardDataUsageNotificationsService implements SimCardDataUsageNoti
      *
      * Get a single SIM Card Data Usage Notification.
      *
-     * @return SimCardDataUsageNotificationGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): SimCardDataUsageNotificationGetResponse {
-        $params = [];
-
-        return $this->retrieveRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return SimCardDataUsageNotificationGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): SimCardDataUsageNotificationGetResponse {
         // @phpstan-ignore-next-line;
@@ -127,8 +103,6 @@ final class SimCardDataUsageNotificationsService implements SimCardDataUsageNoti
      * @param string $simCardID the identification UUID of the related SIM card resource
      * @param Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationUpdateParams\Threshold $threshold data usage threshold that will trigger the notification
      *
-     * @return SimCardDataUsageNotificationUpdateResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function update(
@@ -146,8 +120,6 @@ final class SimCardDataUsageNotificationsService implements SimCardDataUsageNoti
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return SimCardDataUsageNotificationUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -182,8 +154,6 @@ final class SimCardDataUsageNotificationsService implements SimCardDataUsageNoti
      * @param int $pageNumber the page number to load
      * @param int $pageSize the size of the page
      *
-     * @return SimCardDataUsageNotificationListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -205,8 +175,6 @@ final class SimCardDataUsageNotificationsService implements SimCardDataUsageNoti
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return SimCardDataUsageNotificationListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -234,29 +202,10 @@ final class SimCardDataUsageNotificationsService implements SimCardDataUsageNoti
      *
      * Delete the SIM Card Data Usage Notification.
      *
-     * @return SimCardDataUsageNotificationDeleteResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): SimCardDataUsageNotificationDeleteResponse {
-        $params = [];
-
-        return $this->deleteRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return SimCardDataUsageNotificationDeleteResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): SimCardDataUsageNotificationDeleteResponse {
         // @phpstan-ignore-next-line;

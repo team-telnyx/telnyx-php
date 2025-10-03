@@ -107,7 +107,7 @@ final class SimCardAction implements BaseModel
         $obj = new self;
 
         null !== $id && $obj->id = $id;
-        null !== $actionType && $obj->actionType = $actionType instanceof ActionType ? $actionType->value : $actionType;
+        null !== $actionType && $obj['actionType'] = $actionType;
         null !== $createdAt && $obj->createdAt = $createdAt;
         null !== $recordType && $obj->recordType = $recordType;
         null !== $settings && $obj->settings = $settings;
@@ -143,7 +143,7 @@ final class SimCardAction implements BaseModel
     public function withActionType(ActionType|string $actionType): self
     {
         $obj = clone $this;
-        $obj->actionType = $actionType instanceof ActionType ? $actionType->value : $actionType;
+        $obj['actionType'] = $actionType;
 
         return $obj;
     }

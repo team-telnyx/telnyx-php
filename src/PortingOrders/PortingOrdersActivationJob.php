@@ -110,11 +110,11 @@ final class PortingOrdersActivationJob implements BaseModel
 
         null !== $id && $obj->id = $id;
         null !== $activateAt && $obj->activateAt = $activateAt;
-        null !== $activationType && $obj->activationType = $activationType instanceof ActivationType ? $activationType->value : $activationType;
+        null !== $activationType && $obj['activationType'] = $activationType;
         null !== $activationWindows && $obj->activationWindows = $activationWindows;
         null !== $createdAt && $obj->createdAt = $createdAt;
         null !== $recordType && $obj->recordType = $recordType;
-        null !== $status && $obj->status = $status instanceof Status ? $status->value : $status;
+        null !== $status && $obj['status'] = $status;
         null !== $updatedAt && $obj->updatedAt = $updatedAt;
 
         return $obj;
@@ -151,7 +151,7 @@ final class PortingOrdersActivationJob implements BaseModel
         ActivationType|string $activationType
     ): self {
         $obj = clone $this;
-        $obj->activationType = $activationType instanceof ActivationType ? $activationType->value : $activationType;
+        $obj['activationType'] = $activationType;
 
         return $obj;
     }
@@ -199,7 +199,7 @@ final class PortingOrdersActivationJob implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

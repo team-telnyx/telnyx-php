@@ -6,7 +6,6 @@ namespace Telnyx\Services\VerifiedNumbers;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\VerifiedNumbers\ActionsContract;
 use Telnyx\VerifiedNumbers\Actions\ActionSubmitVerificationCodeParams;
@@ -25,8 +24,6 @@ final class ActionsService implements ActionsContract
      * Submit verification code
      *
      * @param string $verificationCode
-     *
-     * @return VerifiedNumberDataWrapper<HasRawResponse>
      *
      * @throws APIException
      */
@@ -48,8 +45,6 @@ final class ActionsService implements ActionsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return VerifiedNumberDataWrapper<HasRawResponse>
      *
      * @throws APIException
      */

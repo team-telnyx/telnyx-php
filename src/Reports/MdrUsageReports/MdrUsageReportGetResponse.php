@@ -6,19 +6,19 @@ namespace Telnyx\Reports\MdrUsageReports;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type mdr_usage_report_get_response = array{data?: MdrUsageReport}
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class MdrUsageReportGetResponse implements BaseModel
+final class MdrUsageReportGetResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<mdr_usage_report_get_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     #[Api(optional: true)]
     public ?MdrUsageReport $data;

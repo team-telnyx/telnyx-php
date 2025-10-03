@@ -154,9 +154,9 @@ final class PhoneNumberWithMessagingSettings implements BaseModel
         null !== $messagingProduct && $obj->messagingProduct = $messagingProduct;
         null !== $messagingProfileID && $obj->messagingProfileID = $messagingProfileID;
         null !== $phoneNumber && $obj->phoneNumber = $phoneNumber;
-        null !== $recordType && $obj->recordType = $recordType instanceof RecordType ? $recordType->value : $recordType;
+        null !== $recordType && $obj['recordType'] = $recordType;
         null !== $trafficType && $obj->trafficType = $trafficType;
-        null !== $type && $obj->type = $type instanceof Type ? $type->value : $type;
+        null !== $type && $obj['type'] = $type;
         null !== $updatedAt && $obj->updatedAt = $updatedAt;
 
         return $obj;
@@ -269,7 +269,7 @@ final class PhoneNumberWithMessagingSettings implements BaseModel
     public function withRecordType(RecordType|string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType instanceof RecordType ? $recordType->value : $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -293,7 +293,7 @@ final class PhoneNumberWithMessagingSettings implements BaseModel
     public function withType(Type|string $type): self
     {
         $obj = clone $this;
-        $obj->type = $type instanceof Type ? $type->value : $type;
+        $obj['type'] = $type;
 
         return $obj;
     }

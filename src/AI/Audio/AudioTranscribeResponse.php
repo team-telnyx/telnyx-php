@@ -7,21 +7,21 @@ namespace Telnyx\AI\Audio;
 use Telnyx\AI\Audio\AudioTranscribeResponse\Segment;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type audio_transcribe_response = array{
  *   text: string, duration?: float, segments?: list<Segment>
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class AudioTranscribeResponse implements BaseModel
+final class AudioTranscribeResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<audio_transcribe_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /**
      * The transcribed text for the audio file.

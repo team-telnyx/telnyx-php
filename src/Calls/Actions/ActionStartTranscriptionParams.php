@@ -108,7 +108,7 @@ final class ActionStartTranscriptionParams implements BaseModel
 
         null !== $clientState && $obj->clientState = $clientState;
         null !== $commandID && $obj->commandID = $commandID;
-        null !== $transcriptionEngine && $obj->transcriptionEngine = $transcriptionEngine instanceof TranscriptionEngine ? $transcriptionEngine->value : $transcriptionEngine;
+        null !== $transcriptionEngine && $obj['transcriptionEngine'] = $transcriptionEngine;
         null !== $transcriptionEngineConfig && $obj->transcriptionEngineConfig = $transcriptionEngineConfig;
         null !== $transcriptionTracks && $obj->transcriptionTracks = $transcriptionTracks;
 
@@ -146,7 +146,7 @@ final class ActionStartTranscriptionParams implements BaseModel
         TranscriptionEngine|string $transcriptionEngine
     ): self {
         $obj = clone $this;
-        $obj->transcriptionEngine = $transcriptionEngine instanceof TranscriptionEngine ? $transcriptionEngine->value : $transcriptionEngine;
+        $obj['transcriptionEngine'] = $transcriptionEngine;
 
         return $obj;
     }

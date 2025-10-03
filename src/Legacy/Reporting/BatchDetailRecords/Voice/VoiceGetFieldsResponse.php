@@ -6,7 +6,9 @@ namespace Telnyx\Legacy\Reporting\BatchDetailRecords\Voice;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * Available CDR report fields grouped by category.
@@ -17,15 +19,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *   numberInformation?: list<string>,
  *   telephonyData?: list<string>,
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class VoiceGetFieldsResponse implements BaseModel
+final class VoiceGetFieldsResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<voice_get_fields_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /**
      * Cost and billing related information.

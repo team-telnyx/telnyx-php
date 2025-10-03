@@ -105,7 +105,7 @@ final class RegisterCreateParams implements BaseModel
         $obj->registrationCodes = $registrationCodes;
 
         null !== $simCardGroupID && $obj->simCardGroupID = $simCardGroupID;
-        null !== $status && $obj->status = $status instanceof Status ? $status->value : $status;
+        null !== $status && $obj['status'] = $status;
         null !== $tags && $obj->tags = $tags;
 
         return $obj;
@@ -141,7 +141,7 @@ final class RegisterCreateParams implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

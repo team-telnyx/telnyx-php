@@ -115,7 +115,7 @@ final class Payload implements BaseModel
         null !== $connectionID && $obj->connectionID = $connectionID;
         null !== $queue && $obj->queue = $queue;
         null !== $queuePosition && $obj->queuePosition = $queuePosition;
-        null !== $reason && $obj->reason = $reason instanceof Reason ? $reason->value : $reason;
+        null !== $reason && $obj['reason'] = $reason;
         null !== $waitTimeSecs && $obj->waitTimeSecs = $waitTimeSecs;
 
         return $obj;
@@ -206,7 +206,7 @@ final class Payload implements BaseModel
     public function withReason(Reason|string $reason): self
     {
         $obj = clone $this;
-        $obj->reason = $reason instanceof Reason ? $reason->value : $reason;
+        $obj['reason'] = $reason;
 
         return $obj;
     }

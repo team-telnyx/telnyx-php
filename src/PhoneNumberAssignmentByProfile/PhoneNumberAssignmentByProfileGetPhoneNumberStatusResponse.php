@@ -6,24 +6,24 @@ namespace Telnyx\PhoneNumberAssignmentByProfile;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileGetPhoneNumberStatusResponse\Record;
 
 /**
  * @phpstan-type phone_number_assignment_by_profile_get_phone_number_status_response = array{
  *   records: list<Record>
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class PhoneNumberAssignmentByProfileGetPhoneNumberStatusResponse implements BaseModel
+final class PhoneNumberAssignmentByProfileGetPhoneNumberStatusResponse implements BaseModel, ResponseConverter
 {
     /**
      * @use SdkModel<phone_number_assignment_by_profile_get_phone_number_status_response>
      */
     use SdkModel;
+
+    use SdkResponse;
 
     /** @var list<Record> $records */
     #[Api(list: Record::class)]

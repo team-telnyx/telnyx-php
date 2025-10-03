@@ -6,7 +6,6 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\ChargesSummary\ChargesSummaryGetResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 
 interface ChargesSummaryContract
@@ -16,8 +15,6 @@ interface ChargesSummaryContract
      *
      * @param \DateTimeInterface $endDate End date for the charges summary in ISO date format (YYYY-MM-DD). The date is exclusive, data for the end_date itself is not included in the report. The interval between start_date and end_date cannot exceed 31 days.
      * @param \DateTimeInterface $startDate Start date for the charges summary in ISO date format (YYYY-MM-DD)
-     *
-     * @return ChargesSummaryGetResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -31,8 +28,6 @@ interface ChargesSummaryContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ChargesSummaryGetResponse<HasRawResponse>
      *
      * @throws APIException
      */

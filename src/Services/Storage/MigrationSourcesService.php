@@ -6,7 +6,6 @@ namespace Telnyx\Services\Storage;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Storage\MigrationSourcesContract;
 use Telnyx\Storage\MigrationSources\MigrationSourceCreateParams;
@@ -36,8 +35,6 @@ final class MigrationSourcesService implements MigrationSourcesContract
      * @param ProviderAuth $providerAuth
      * @param string $sourceRegion for intra-Telnyx buckets migration, specify the source bucket region in this field
      *
-     * @return MigrationSourceNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -61,8 +58,6 @@ final class MigrationSourcesService implements MigrationSourcesContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return MigrationSourceNewResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -90,29 +85,10 @@ final class MigrationSourcesService implements MigrationSourcesContract
      *
      * Get a Migration Source
      *
-     * @return MigrationSourceGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): MigrationSourceGetResponse {
-        $params = [];
-
-        return $this->retrieveRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return MigrationSourceGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): MigrationSourceGetResponse {
         // @phpstan-ignore-next-line;
@@ -129,27 +105,9 @@ final class MigrationSourcesService implements MigrationSourcesContract
      *
      * List all Migration Sources
      *
-     * @return MigrationSourceListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
-        ?RequestOptions $requestOptions = null
-    ): MigrationSourceListResponse {
-        $params = [];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return MigrationSourceListResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): MigrationSourceListResponse {
         // @phpstan-ignore-next-line;
@@ -166,29 +124,10 @@ final class MigrationSourcesService implements MigrationSourcesContract
      *
      * Delete a Migration Source
      *
-     * @return MigrationSourceDeleteResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): MigrationSourceDeleteResponse {
-        $params = [];
-
-        return $this->deleteRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return MigrationSourceDeleteResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): MigrationSourceDeleteResponse {
         // @phpstan-ignore-next-line;

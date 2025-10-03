@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse;
 use Telnyx\GlobalIPLatency\GlobalIPLatencyRetrieveParams;
 use Telnyx\GlobalIPLatency\GlobalIPLatencyRetrieveParams\Filter;
@@ -29,8 +28,6 @@ final class GlobalIPLatencyService implements GlobalIPLatencyContract
      *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[global_ip_id][in]
      *
-     * @return GlobalIPLatencyGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
@@ -46,8 +43,6 @@ final class GlobalIPLatencyService implements GlobalIPLatencyContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return GlobalIPLatencyGetResponse<HasRawResponse>
      *
      * @throws APIException
      */

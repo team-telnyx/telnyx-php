@@ -67,7 +67,7 @@ final class CsvDownload implements BaseModel
 
         null !== $id && $obj->id = $id;
         null !== $recordType && $obj->recordType = $recordType;
-        null !== $status && $obj->status = $status instanceof Status ? $status->value : $status;
+        null !== $status && $obj['status'] = $status;
         null !== $url && $obj->url = $url;
 
         return $obj;
@@ -103,7 +103,7 @@ final class CsvDownload implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

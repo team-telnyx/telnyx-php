@@ -6,7 +6,6 @@ namespace Telnyx\Services\PortingOrders;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams\Filter;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams\Page;
@@ -38,8 +37,6 @@ final class VerificationCodesService implements VerificationCodesContract
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param Sort $sort Consolidated sort parameter (deepObject style). Originally: sort[value]
      *
-     * @return VerificationCodeListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -58,8 +55,6 @@ final class VerificationCodesService implements VerificationCodesContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return VerificationCodeListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -141,8 +136,6 @@ final class VerificationCodesService implements VerificationCodesContract
      *
      * @param list<VerificationCode> $verificationCodes
      *
-     * @return VerificationCodeVerifyResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function verify(
@@ -159,8 +152,6 @@ final class VerificationCodesService implements VerificationCodesContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return VerificationCodeVerifyResponse<HasRawResponse>
      *
      * @throws APIException
      */

@@ -97,8 +97,8 @@ final class ActionStartNoiseSuppressionParams implements BaseModel
 
         null !== $clientState && $obj->clientState = $clientState;
         null !== $commandID && $obj->commandID = $commandID;
-        null !== $direction && $obj->direction = $direction instanceof Direction ? $direction->value : $direction;
-        null !== $noiseSuppressionEngine && $obj->noiseSuppressionEngine = $noiseSuppressionEngine instanceof NoiseSuppressionEngine ? $noiseSuppressionEngine->value : $noiseSuppressionEngine;
+        null !== $direction && $obj['direction'] = $direction;
+        null !== $noiseSuppressionEngine && $obj['noiseSuppressionEngine'] = $noiseSuppressionEngine;
 
         return $obj;
     }
@@ -133,7 +133,7 @@ final class ActionStartNoiseSuppressionParams implements BaseModel
     public function withDirection(Direction|string $direction): self
     {
         $obj = clone $this;
-        $obj->direction = $direction instanceof Direction ? $direction->value : $direction;
+        $obj['direction'] = $direction;
 
         return $obj;
     }
@@ -149,7 +149,7 @@ final class ActionStartNoiseSuppressionParams implements BaseModel
         NoiseSuppressionEngine|string $noiseSuppressionEngine
     ): self {
         $obj = clone $this;
-        $obj->noiseSuppressionEngine = $noiseSuppressionEngine instanceof NoiseSuppressionEngine ? $noiseSuppressionEngine->value : $noiseSuppressionEngine;
+        $obj['noiseSuppressionEngine'] = $noiseSuppressionEngine;
 
         return $obj;
     }

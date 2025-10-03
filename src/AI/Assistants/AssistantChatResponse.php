@@ -6,19 +6,19 @@ namespace Telnyx\AI\Assistants;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type assistant_chat_response = array{content: string}
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class AssistantChatResponse implements BaseModel
+final class AssistantChatResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<assistant_chat_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /**
      * The assistant's generated response based on the input message and context.

@@ -11,7 +11,6 @@ use Telnyx\Comments\CommentListResponse;
 use Telnyx\Comments\CommentMarkAsReadResponse;
 use Telnyx\Comments\CommentNewResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 
 use const Telnyx\Core\OMIT as omit;
@@ -24,8 +23,6 @@ interface CommentsContract
      * @param string $body
      * @param string $commentRecordID
      * @param CommentRecordType|value-of<CommentRecordType> $commentRecordType
-     *
-     * @return CommentNewResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -41,8 +38,6 @@ interface CommentsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return CommentNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function createRaw(
@@ -52,8 +47,6 @@ interface CommentsContract
 
     /**
      * @api
-     *
-     * @return CommentGetResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -65,22 +58,7 @@ interface CommentsContract
     /**
      * @api
      *
-     * @return CommentGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
-        ?RequestOptions $requestOptions = null
-    ): CommentGetResponse;
-
-    /**
-     * @api
-     *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[comment_record_type], filter[comment_record_id]
-     *
-     * @return CommentListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -94,8 +72,6 @@ interface CommentsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return CommentListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function listRaw(
@@ -106,25 +82,10 @@ interface CommentsContract
     /**
      * @api
      *
-     * @return CommentMarkAsReadResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function markAsRead(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): CommentMarkAsReadResponse;
-
-    /**
-     * @api
-     *
-     * @return CommentMarkAsReadResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function markAsReadRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): CommentMarkAsReadResponse;
 }

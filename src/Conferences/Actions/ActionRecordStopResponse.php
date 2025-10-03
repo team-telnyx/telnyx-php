@@ -6,21 +6,21 @@ namespace Telnyx\Conferences\Actions;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type action_record_stop_response = array{
  *   data?: ConferenceCommandResult
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class ActionRecordStopResponse implements BaseModel
+final class ActionRecordStopResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<action_record_stop_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     #[Api(optional: true)]
     public ?ConferenceCommandResult $data;

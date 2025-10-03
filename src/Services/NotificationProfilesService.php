@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\NotificationProfiles\NotificationProfileCreateParams;
 use Telnyx\NotificationProfiles\NotificationProfileDeleteResponse;
 use Telnyx\NotificationProfiles\NotificationProfileGetResponse;
@@ -35,8 +34,6 @@ final class NotificationProfilesService implements NotificationProfilesContract
      *
      * @param string $name a human readable name
      *
-     * @return NotificationProfileNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -52,8 +49,6 @@ final class NotificationProfilesService implements NotificationProfilesContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return NotificationProfileNewResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -81,29 +76,10 @@ final class NotificationProfilesService implements NotificationProfilesContract
      *
      * Get a notification profile.
      *
-     * @return NotificationProfileGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): NotificationProfileGetResponse {
-        $params = [];
-
-        return $this->retrieveRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return NotificationProfileGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): NotificationProfileGetResponse {
         // @phpstan-ignore-next-line;
@@ -122,8 +98,6 @@ final class NotificationProfilesService implements NotificationProfilesContract
      *
      * @param string $name a human readable name
      *
-     * @return NotificationProfileUpdateResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function update(
@@ -140,8 +114,6 @@ final class NotificationProfilesService implements NotificationProfilesContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return NotificationProfileUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -172,8 +144,6 @@ final class NotificationProfilesService implements NotificationProfilesContract
      *
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
-     * @return NotificationProfileListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -189,8 +159,6 @@ final class NotificationProfilesService implements NotificationProfilesContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return NotificationProfileListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -218,29 +186,10 @@ final class NotificationProfilesService implements NotificationProfilesContract
      *
      * Delete a notification profile.
      *
-     * @return NotificationProfileDeleteResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): NotificationProfileDeleteResponse {
-        $params = [];
-
-        return $this->deleteRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return NotificationProfileDeleteResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): NotificationProfileDeleteResponse {
         // @phpstan-ignore-next-line;

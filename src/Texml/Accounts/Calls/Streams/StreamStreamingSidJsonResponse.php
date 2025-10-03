@@ -6,7 +6,9 @@ namespace Telnyx\Texml\Accounts\Calls\Streams;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Texml\Accounts\Calls\Streams\StreamStreamingSidJsonResponse\Status;
 
 /**
@@ -18,15 +20,13 @@ use Telnyx\Texml\Accounts\Calls\Streams\StreamStreamingSidJsonResponse\Status;
  *   status?: value-of<Status>,
  *   uri?: string,
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class StreamStreamingSidJsonResponse implements BaseModel
+final class StreamStreamingSidJsonResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<stream_streaming_sid_json_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     #[Api('account_sid', optional: true)]
     public ?string $accountSid;
@@ -83,7 +83,7 @@ final class StreamStreamingSidJsonResponse implements BaseModel
         null !== $callSid && $obj->callSid = $callSid;
         null !== $dateUpdated && $obj->dateUpdated = $dateUpdated;
         null !== $sid && $obj->sid = $sid;
-        null !== $status && $obj->status = $status instanceof Status ? $status->value : $status;
+        null !== $status && $obj['status'] = $status;
         null !== $uri && $obj->uri = $uri;
 
         return $obj;
@@ -132,7 +132,7 @@ final class StreamStreamingSidJsonResponse implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

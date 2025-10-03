@@ -98,8 +98,8 @@ final class CdrUsageReportFetchSyncParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->aggregationType = $aggregationType instanceof AggregationType ? $aggregationType->value : $aggregationType;
-        $obj->productBreakdown = $productBreakdown instanceof ProductBreakdown ? $productBreakdown->value : $productBreakdown;
+        $obj['aggregationType'] = $aggregationType;
+        $obj['productBreakdown'] = $productBreakdown;
 
         null !== $connections && $obj->connections = $connections;
         null !== $endDate && $obj->endDate = $endDate;
@@ -115,7 +115,7 @@ final class CdrUsageReportFetchSyncParams implements BaseModel
         AggregationType|string $aggregationType
     ): self {
         $obj = clone $this;
-        $obj->aggregationType = $aggregationType instanceof AggregationType ? $aggregationType->value : $aggregationType;
+        $obj['aggregationType'] = $aggregationType;
 
         return $obj;
     }
@@ -127,7 +127,7 @@ final class CdrUsageReportFetchSyncParams implements BaseModel
         ProductBreakdown|string $productBreakdown
     ): self {
         $obj = clone $this;
-        $obj->productBreakdown = $productBreakdown instanceof ProductBreakdown ? $productBreakdown->value : $productBreakdown;
+        $obj['productBreakdown'] = $productBreakdown;
 
         return $obj;
     }

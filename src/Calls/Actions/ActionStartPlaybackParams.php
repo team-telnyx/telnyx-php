@@ -152,7 +152,7 @@ final class ActionStartPlaybackParams implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $audioType && $obj->audioType = $audioType instanceof AudioType ? $audioType->value : $audioType;
+        null !== $audioType && $obj['audioType'] = $audioType;
         null !== $audioURL && $obj->audioURL = $audioURL;
         null !== $cacheAudio && $obj->cacheAudio = $cacheAudio;
         null !== $clientState && $obj->clientState = $clientState;
@@ -175,7 +175,7 @@ final class ActionStartPlaybackParams implements BaseModel
     public function withAudioType(AudioType|string $audioType): self
     {
         $obj = clone $this;
-        $obj->audioType = $audioType instanceof AudioType ? $audioType->value : $audioType;
+        $obj['audioType'] = $audioType;
 
         return $obj;
     }

@@ -134,10 +134,10 @@ final class Filter implements BaseModel
         null !== $emergencyAddressID && $obj->emergencyAddressID = $emergencyAddressID;
         null !== $hasBundle && $obj->hasBundle = $hasBundle;
         null !== $phoneNumber && $obj->phoneNumber = $phoneNumber;
-        null !== $status && $obj->status = $status instanceof Status ? $status->value : $status;
+        null !== $status && $obj['status'] = $status;
         null !== $tag && $obj->tag = $tag;
         null !== $voiceConnectionName && $obj->voiceConnectionName = $voiceConnectionName;
-        null !== $voiceUsagePaymentMethod && $obj->voiceUsagePaymentMethod = $voiceUsagePaymentMethod instanceof VoiceUsagePaymentMethod ? $voiceUsagePaymentMethod->value : $voiceUsagePaymentMethod;
+        null !== $voiceUsagePaymentMethod && $obj['voiceUsagePaymentMethod'] = $voiceUsagePaymentMethod;
 
         return $obj;
     }
@@ -217,7 +217,7 @@ final class Filter implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }
@@ -254,7 +254,7 @@ final class Filter implements BaseModel
         VoiceUsagePaymentMethod|string $voiceUsagePaymentMethod
     ): self {
         $obj = clone $this;
-        $obj->voiceUsagePaymentMethod = $voiceUsagePaymentMethod instanceof VoiceUsagePaymentMethod ? $voiceUsagePaymentMethod->value : $voiceUsagePaymentMethod;
+        $obj['voiceUsagePaymentMethod'] = $voiceUsagePaymentMethod;
 
         return $obj;
     }

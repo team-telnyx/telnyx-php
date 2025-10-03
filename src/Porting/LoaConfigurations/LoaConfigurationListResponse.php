@@ -7,21 +7,21 @@ namespace Telnyx\Porting\LoaConfigurations;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type loa_configuration_list_response = array{
  *   data?: list<PortingLoaConfiguration>, meta?: PaginationMeta
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class LoaConfigurationListResponse implements BaseModel
+final class LoaConfigurationListResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<loa_configuration_list_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /** @var list<PortingLoaConfiguration>|null $data */
     #[Api(list: PortingLoaConfiguration::class, optional: true)]

@@ -15,7 +15,6 @@ use Telnyx\Calls\CallDialParams\RecordFormat;
 use Telnyx\Calls\CallDialParams\RecordTrack;
 use Telnyx\Calls\CallDialParams\RecordTrim;
 use Telnyx\Calls\CallDialParams\SipTransportProtocol;
-use Telnyx\Calls\CallDialParams\StreamBidirectionalSamplingRate;
 use Telnyx\Calls\CallDialParams\StreamTrack;
 use Telnyx\Calls\CallDialParams\SupervisorRole;
 use Telnyx\Calls\CallDialParams\To;
@@ -91,7 +90,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   soundModifications?: SoundModifications,
  *   streamBidirectionalCodec?: StreamBidirectionalCodec|value-of<StreamBidirectionalCodec>,
  *   streamBidirectionalMode?: StreamBidirectionalMode|value-of<StreamBidirectionalMode>,
- *   streamBidirectionalSamplingRate?: StreamBidirectionalSamplingRate|value-of<StreamBidirectionalSamplingRate>,
+ *   streamBidirectionalSamplingRate?: 8000|16000|22050|24000|48000,
  *   streamBidirectionalTargetLegs?: StreamBidirectionalTargetLegs|value-of<StreamBidirectionalTargetLegs>,
  *   streamCodec?: StreamCodec|value-of<StreamCodec>,
  *   streamEstablishBeforeCallOriginate?: bool,
@@ -377,13 +376,9 @@ final class CallDialParams implements BaseModel
     /**
      * Audio sampling rate.
      *
-     * @var value-of<StreamBidirectionalSamplingRate>|null $streamBidirectionalSamplingRate
+     * @var 8000|16000|22050|24000|48000|null $streamBidirectionalSamplingRate
      */
-    #[Api(
-        'stream_bidirectional_sampling_rate',
-        enum: StreamBidirectionalSamplingRate::class,
-        optional: true,
-    )]
+    #[Api('stream_bidirectional_sampling_rate', optional: true)]
     public ?int $streamBidirectionalSamplingRate;
 
     /**
@@ -512,7 +507,7 @@ final class CallDialParams implements BaseModel
      * @param SipTransportProtocol|value-of<SipTransportProtocol> $sipTransportProtocol
      * @param StreamBidirectionalCodec|value-of<StreamBidirectionalCodec> $streamBidirectionalCodec
      * @param StreamBidirectionalMode|value-of<StreamBidirectionalMode> $streamBidirectionalMode
-     * @param StreamBidirectionalSamplingRate|value-of<StreamBidirectionalSamplingRate> $streamBidirectionalSamplingRate
+     * @param 8000|16000|22050|24000|48000 $streamBidirectionalSamplingRate
      * @param StreamBidirectionalTargetLegs|value-of<StreamBidirectionalTargetLegs> $streamBidirectionalTargetLegs
      * @param StreamCodec|value-of<StreamCodec> $streamCodec
      * @param StreamTrack|value-of<StreamTrack> $streamTrack
@@ -557,7 +552,7 @@ final class CallDialParams implements BaseModel
         ?SoundModifications $soundModifications = null,
         StreamBidirectionalCodec|string|null $streamBidirectionalCodec = null,
         StreamBidirectionalMode|string|null $streamBidirectionalMode = null,
-        StreamBidirectionalSamplingRate|int|null $streamBidirectionalSamplingRate = null,
+        ?int $streamBidirectionalSamplingRate = null,
         StreamBidirectionalTargetLegs|string|null $streamBidirectionalTargetLegs = null,
         StreamCodec|string|null $streamCodec = null,
         ?bool $streamEstablishBeforeCallOriginate = null,
@@ -578,7 +573,7 @@ final class CallDialParams implements BaseModel
         $obj->from = $from;
         $obj->to = $to;
 
-        null !== $answeringMachineDetection && $obj->answeringMachineDetection = $answeringMachineDetection instanceof AnsweringMachineDetection ? $answeringMachineDetection->value : $answeringMachineDetection;
+        null !== $answeringMachineDetection && $obj['answeringMachineDetection'] = $answeringMachineDetection;
         null !== $answeringMachineDetectionConfig && $obj->answeringMachineDetectionConfig = $answeringMachineDetectionConfig;
         null !== $audioURL && $obj->audioURL = $audioURL;
         null !== $billingGroupID && $obj->billingGroupID = $billingGroupID;
@@ -592,40 +587,40 @@ final class CallDialParams implements BaseModel
         null !== $enableDialogflow && $obj->enableDialogflow = $enableDialogflow;
         null !== $fromDisplayName && $obj->fromDisplayName = $fromDisplayName;
         null !== $linkTo && $obj->linkTo = $linkTo;
-        null !== $mediaEncryption && $obj->mediaEncryption = $mediaEncryption instanceof MediaEncryption ? $mediaEncryption->value : $mediaEncryption;
+        null !== $mediaEncryption && $obj['mediaEncryption'] = $mediaEncryption;
         null !== $mediaName && $obj->mediaName = $mediaName;
         null !== $parkAfterUnbridge && $obj->parkAfterUnbridge = $parkAfterUnbridge;
         null !== $preferredCodecs && $obj->preferredCodecs = $preferredCodecs;
-        null !== $record && $obj->record = $record instanceof Record ? $record->value : $record;
-        null !== $recordChannels && $obj->recordChannels = $recordChannels instanceof RecordChannels ? $recordChannels->value : $recordChannels;
+        null !== $record && $obj['record'] = $record;
+        null !== $recordChannels && $obj['recordChannels'] = $recordChannels;
         null !== $recordCustomFileName && $obj->recordCustomFileName = $recordCustomFileName;
-        null !== $recordFormat && $obj->recordFormat = $recordFormat instanceof RecordFormat ? $recordFormat->value : $recordFormat;
+        null !== $recordFormat && $obj['recordFormat'] = $recordFormat;
         null !== $recordMaxLength && $obj->recordMaxLength = $recordMaxLength;
         null !== $recordTimeoutSecs && $obj->recordTimeoutSecs = $recordTimeoutSecs;
-        null !== $recordTrack && $obj->recordTrack = $recordTrack instanceof RecordTrack ? $recordTrack->value : $recordTrack;
-        null !== $recordTrim && $obj->recordTrim = $recordTrim instanceof RecordTrim ? $recordTrim->value : $recordTrim;
+        null !== $recordTrack && $obj['recordTrack'] = $recordTrack;
+        null !== $recordTrim && $obj['recordTrim'] = $recordTrim;
         null !== $sendSilenceWhenIdle && $obj->sendSilenceWhenIdle = $sendSilenceWhenIdle;
         null !== $sipAuthPassword && $obj->sipAuthPassword = $sipAuthPassword;
         null !== $sipAuthUsername && $obj->sipAuthUsername = $sipAuthUsername;
         null !== $sipHeaders && $obj->sipHeaders = $sipHeaders;
-        null !== $sipTransportProtocol && $obj->sipTransportProtocol = $sipTransportProtocol instanceof SipTransportProtocol ? $sipTransportProtocol->value : $sipTransportProtocol;
+        null !== $sipTransportProtocol && $obj['sipTransportProtocol'] = $sipTransportProtocol;
         null !== $soundModifications && $obj->soundModifications = $soundModifications;
-        null !== $streamBidirectionalCodec && $obj->streamBidirectionalCodec = $streamBidirectionalCodec instanceof StreamBidirectionalCodec ? $streamBidirectionalCodec->value : $streamBidirectionalCodec;
-        null !== $streamBidirectionalMode && $obj->streamBidirectionalMode = $streamBidirectionalMode instanceof StreamBidirectionalMode ? $streamBidirectionalMode->value : $streamBidirectionalMode;
-        null !== $streamBidirectionalSamplingRate && $obj->streamBidirectionalSamplingRate = $streamBidirectionalSamplingRate instanceof StreamBidirectionalSamplingRate ? $streamBidirectionalSamplingRate->value : $streamBidirectionalSamplingRate;
-        null !== $streamBidirectionalTargetLegs && $obj->streamBidirectionalTargetLegs = $streamBidirectionalTargetLegs instanceof StreamBidirectionalTargetLegs ? $streamBidirectionalTargetLegs->value : $streamBidirectionalTargetLegs;
-        null !== $streamCodec && $obj->streamCodec = $streamCodec instanceof StreamCodec ? $streamCodec->value : $streamCodec;
+        null !== $streamBidirectionalCodec && $obj['streamBidirectionalCodec'] = $streamBidirectionalCodec;
+        null !== $streamBidirectionalMode && $obj['streamBidirectionalMode'] = $streamBidirectionalMode;
+        null !== $streamBidirectionalSamplingRate && $obj->streamBidirectionalSamplingRate = $streamBidirectionalSamplingRate;
+        null !== $streamBidirectionalTargetLegs && $obj['streamBidirectionalTargetLegs'] = $streamBidirectionalTargetLegs;
+        null !== $streamCodec && $obj['streamCodec'] = $streamCodec;
         null !== $streamEstablishBeforeCallOriginate && $obj->streamEstablishBeforeCallOriginate = $streamEstablishBeforeCallOriginate;
-        null !== $streamTrack && $obj->streamTrack = $streamTrack instanceof StreamTrack ? $streamTrack->value : $streamTrack;
+        null !== $streamTrack && $obj['streamTrack'] = $streamTrack;
         null !== $streamURL && $obj->streamURL = $streamURL;
         null !== $superviseCallControlID && $obj->superviseCallControlID = $superviseCallControlID;
-        null !== $supervisorRole && $obj->supervisorRole = $supervisorRole instanceof SupervisorRole ? $supervisorRole->value : $supervisorRole;
+        null !== $supervisorRole && $obj['supervisorRole'] = $supervisorRole;
         null !== $timeLimitSecs && $obj->timeLimitSecs = $timeLimitSecs;
         null !== $timeoutSecs && $obj->timeoutSecs = $timeoutSecs;
         null !== $transcription && $obj->transcription = $transcription;
         null !== $transcriptionConfig && $obj->transcriptionConfig = $transcriptionConfig;
         null !== $webhookURL && $obj->webhookURL = $webhookURL;
-        null !== $webhookURLMethod && $obj->webhookURLMethod = $webhookURLMethod instanceof WebhookURLMethod ? $webhookURLMethod->value : $webhookURLMethod;
+        null !== $webhookURLMethod && $obj['webhookURLMethod'] = $webhookURLMethod;
 
         return $obj;
     }
@@ -674,7 +669,7 @@ final class CallDialParams implements BaseModel
         AnsweringMachineDetection|string $answeringMachineDetection
     ): self {
         $obj = clone $this;
-        $obj->answeringMachineDetection = $answeringMachineDetection instanceof AnsweringMachineDetection ? $answeringMachineDetection->value : $answeringMachineDetection;
+        $obj['answeringMachineDetection'] = $answeringMachineDetection;
 
         return $obj;
     }
@@ -833,7 +828,7 @@ final class CallDialParams implements BaseModel
         MediaEncryption|string $mediaEncryption
     ): self {
         $obj = clone $this;
-        $obj->mediaEncryption = $mediaEncryption instanceof MediaEncryption ? $mediaEncryption->value : $mediaEncryption;
+        $obj['mediaEncryption'] = $mediaEncryption;
 
         return $obj;
     }
@@ -879,7 +874,7 @@ final class CallDialParams implements BaseModel
     public function withRecord(Record|string $record): self
     {
         $obj = clone $this;
-        $obj->record = $record instanceof Record ? $record->value : $record;
+        $obj['record'] = $record;
 
         return $obj;
     }
@@ -893,7 +888,7 @@ final class CallDialParams implements BaseModel
         RecordChannels|string $recordChannels
     ): self {
         $obj = clone $this;
-        $obj->recordChannels = $recordChannels instanceof RecordChannels ? $recordChannels->value : $recordChannels;
+        $obj['recordChannels'] = $recordChannels;
 
         return $obj;
     }
@@ -917,7 +912,7 @@ final class CallDialParams implements BaseModel
     public function withRecordFormat(RecordFormat|string $recordFormat): self
     {
         $obj = clone $this;
-        $obj->recordFormat = $recordFormat instanceof RecordFormat ? $recordFormat->value : $recordFormat;
+        $obj['recordFormat'] = $recordFormat;
 
         return $obj;
     }
@@ -952,7 +947,7 @@ final class CallDialParams implements BaseModel
     public function withRecordTrack(RecordTrack|string $recordTrack): self
     {
         $obj = clone $this;
-        $obj->recordTrack = $recordTrack instanceof RecordTrack ? $recordTrack->value : $recordTrack;
+        $obj['recordTrack'] = $recordTrack;
 
         return $obj;
     }
@@ -965,7 +960,7 @@ final class CallDialParams implements BaseModel
     public function withRecordTrim(RecordTrim|string $recordTrim): self
     {
         $obj = clone $this;
-        $obj->recordTrim = $recordTrim instanceof RecordTrim ? $recordTrim->value : $recordTrim;
+        $obj['recordTrim'] = $recordTrim;
 
         return $obj;
     }
@@ -1025,7 +1020,7 @@ final class CallDialParams implements BaseModel
         SipTransportProtocol|string $sipTransportProtocol
     ): self {
         $obj = clone $this;
-        $obj->sipTransportProtocol = $sipTransportProtocol instanceof SipTransportProtocol ? $sipTransportProtocol->value : $sipTransportProtocol;
+        $obj['sipTransportProtocol'] = $sipTransportProtocol;
 
         return $obj;
     }
@@ -1051,7 +1046,7 @@ final class CallDialParams implements BaseModel
         StreamBidirectionalCodec|string $streamBidirectionalCodec
     ): self {
         $obj = clone $this;
-        $obj->streamBidirectionalCodec = $streamBidirectionalCodec instanceof StreamBidirectionalCodec ? $streamBidirectionalCodec->value : $streamBidirectionalCodec;
+        $obj['streamBidirectionalCodec'] = $streamBidirectionalCodec;
 
         return $obj;
     }
@@ -1065,7 +1060,7 @@ final class CallDialParams implements BaseModel
         StreamBidirectionalMode|string $streamBidirectionalMode
     ): self {
         $obj = clone $this;
-        $obj->streamBidirectionalMode = $streamBidirectionalMode instanceof StreamBidirectionalMode ? $streamBidirectionalMode->value : $streamBidirectionalMode;
+        $obj['streamBidirectionalMode'] = $streamBidirectionalMode;
 
         return $obj;
     }
@@ -1073,13 +1068,13 @@ final class CallDialParams implements BaseModel
     /**
      * Audio sampling rate.
      *
-     * @param StreamBidirectionalSamplingRate|value-of<StreamBidirectionalSamplingRate> $streamBidirectionalSamplingRate
+     * @param 8000|16000|22050|24000|48000 $streamBidirectionalSamplingRate
      */
     public function withStreamBidirectionalSamplingRate(
-        StreamBidirectionalSamplingRate|int $streamBidirectionalSamplingRate
+        int $streamBidirectionalSamplingRate
     ): self {
         $obj = clone $this;
-        $obj->streamBidirectionalSamplingRate = $streamBidirectionalSamplingRate instanceof StreamBidirectionalSamplingRate ? $streamBidirectionalSamplingRate->value : $streamBidirectionalSamplingRate;
+        $obj->streamBidirectionalSamplingRate = $streamBidirectionalSamplingRate;
 
         return $obj;
     }
@@ -1093,7 +1088,7 @@ final class CallDialParams implements BaseModel
         StreamBidirectionalTargetLegs|string $streamBidirectionalTargetLegs
     ): self {
         $obj = clone $this;
-        $obj->streamBidirectionalTargetLegs = $streamBidirectionalTargetLegs instanceof StreamBidirectionalTargetLegs ? $streamBidirectionalTargetLegs->value : $streamBidirectionalTargetLegs;
+        $obj['streamBidirectionalTargetLegs'] = $streamBidirectionalTargetLegs;
 
         return $obj;
     }
@@ -1106,7 +1101,7 @@ final class CallDialParams implements BaseModel
     public function withStreamCodec(StreamCodec|string $streamCodec): self
     {
         $obj = clone $this;
-        $obj->streamCodec = $streamCodec instanceof StreamCodec ? $streamCodec->value : $streamCodec;
+        $obj['streamCodec'] = $streamCodec;
 
         return $obj;
     }
@@ -1131,7 +1126,7 @@ final class CallDialParams implements BaseModel
     public function withStreamTrack(StreamTrack|string $streamTrack): self
     {
         $obj = clone $this;
-        $obj->streamTrack = $streamTrack instanceof StreamTrack ? $streamTrack->value : $streamTrack;
+        $obj['streamTrack'] = $streamTrack;
 
         return $obj;
     }
@@ -1168,7 +1163,7 @@ final class CallDialParams implements BaseModel
         SupervisorRole|string $supervisorRole
     ): self {
         $obj = clone $this;
-        $obj->supervisorRole = $supervisorRole instanceof SupervisorRole ? $supervisorRole->value : $supervisorRole;
+        $obj['supervisorRole'] = $supervisorRole;
 
         return $obj;
     }
@@ -1235,7 +1230,7 @@ final class CallDialParams implements BaseModel
         WebhookURLMethod|string $webhookURLMethod
     ): self {
         $obj = clone $this;
-        $obj->webhookURLMethod = $webhookURLMethod instanceof WebhookURLMethod ? $webhookURLMethod->value : $webhookURLMethod;
+        $obj['webhookURLMethod'] = $webhookURLMethod;
 
         return $obj;
     }

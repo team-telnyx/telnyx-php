@@ -6,7 +6,6 @@ namespace Telnyx\ServiceContracts\CampaignBuilder;
 
 use Telnyx\CampaignBuilder\Brand\BrandQualifyByUsecaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 
 interface BrandContract
@@ -15,8 +14,6 @@ interface BrandContract
      * @api
      *
      * @param string $brandID
-     *
-     * @return BrandQualifyByUsecaseResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -30,8 +27,6 @@ interface BrandContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return BrandQualifyByUsecaseResponse<HasRawResponse>
      *
      * @throws APIException
      */

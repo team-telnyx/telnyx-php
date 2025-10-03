@@ -8,7 +8,6 @@ use Telnyx\AI\Conversations\Insights\InsightListParams\Page;
 use Telnyx\AI\Conversations\Insights\InsightListResponse;
 use Telnyx\AI\Conversations\Insights\InsightTemplateDetail;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 
 use const Telnyx\Core\OMIT as omit;
@@ -22,8 +21,6 @@ interface InsightsContract
      * @param string $name
      * @param mixed|string $jsonSchema if specified, the output will follow the JSON schema
      * @param string $webhook
-     *
-     * @return InsightTemplateDetail<HasRawResponse>
      *
      * @throws APIException
      */
@@ -40,8 +37,6 @@ interface InsightsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return InsightTemplateDetail<HasRawResponse>
-     *
      * @throws APIException
      */
     public function createRaw(
@@ -51,8 +46,6 @@ interface InsightsContract
 
     /**
      * @api
-     *
-     * @return InsightTemplateDetail<HasRawResponse>
      *
      * @throws APIException
      */
@@ -64,25 +57,10 @@ interface InsightsContract
     /**
      * @api
      *
-     * @return InsightTemplateDetail<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $insightID,
-        mixed $params,
-        ?RequestOptions $requestOptions = null
-    ): InsightTemplateDetail;
-
-    /**
-     * @api
-     *
      * @param string $instructions
      * @param mixed|string $jsonSchema
      * @param string $name
      * @param string $webhook
-     *
-     * @return InsightTemplateDetail<HasRawResponse>
      *
      * @throws APIException
      */
@@ -100,8 +78,6 @@ interface InsightsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return InsightTemplateDetail<HasRawResponse>
-     *
      * @throws APIException
      */
     public function updateRaw(
@@ -115,8 +91,6 @@ interface InsightsContract
      *
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
-     * @return InsightListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -128,8 +102,6 @@ interface InsightsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return InsightListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -145,17 +117,6 @@ interface InsightsContract
      */
     public function delete(
         string $insightID,
-        ?RequestOptions $requestOptions = null
-    ): mixed;
-
-    /**
-     * @api
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $insightID,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): mixed;
 }

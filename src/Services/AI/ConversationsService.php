@@ -15,7 +15,6 @@ use Telnyx\AI\Conversations\ConversationUpdateParams;
 use Telnyx\AI\Conversations\ConversationUpdateResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\ConversationsContract;
 use Telnyx\Services\AI\Conversations\InsightGroupsService;
@@ -60,8 +59,6 @@ final class ConversationsService implements ConversationsContract
      * string,> $metadata Metadata associated with the conversation
      * @param string $name
      *
-     * @return Conversation<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -78,8 +75,6 @@ final class ConversationsService implements ConversationsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return Conversation<HasRawResponse>
      *
      * @throws APIException
      */
@@ -107,30 +102,11 @@ final class ConversationsService implements ConversationsContract
      *
      * Retrieve a specific AI conversation by its ID.
      *
-     * @return ConversationGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $conversationID,
         ?RequestOptions $requestOptions = null
-    ): ConversationGetResponse {
-        $params = [];
-
-        return $this->retrieveRaw($conversationID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return ConversationGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $conversationID,
-        mixed $params,
-        ?RequestOptions $requestOptions = null,
     ): ConversationGetResponse {
         // @phpstan-ignore-next-line;
         return $this->client->request(
@@ -149,8 +125,6 @@ final class ConversationsService implements ConversationsContract
      * @param array<string,
      * string,> $metadata Metadata associated with the conversation
      *
-     * @return ConversationUpdateResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function update(
@@ -167,8 +141,6 @@ final class ConversationsService implements ConversationsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ConversationUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -210,8 +182,6 @@ final class ConversationsService implements ConversationsContract
      * @param string $or Apply OR conditions using PostgREST syntax (e.g., `or=(created_at.gte.2025-04-01,last_message_at.gte.2025-04-01)`)
      * @param string $order Order the results by specific fields (e.g., `order=created_at.desc` or `order=last_message_at.asc`)
      *
-     * @return ConversationListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -252,8 +222,6 @@ final class ConversationsService implements ConversationsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return ConversationListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function listRaw(
@@ -285,21 +253,6 @@ final class ConversationsService implements ConversationsContract
     public function delete(
         string $conversationID,
         ?RequestOptions $requestOptions = null
-    ): mixed {
-        $params = [];
-
-        return $this->deleteRaw($conversationID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $conversationID,
-        mixed $params,
-        ?RequestOptions $requestOptions = null,
     ): mixed {
         // @phpstan-ignore-next-line;
         return $this->client->request(
@@ -384,34 +337,11 @@ final class ConversationsService implements ConversationsContract
      *
      * Retrieve insights for a specific conversation
      *
-     * @return ConversationGetConversationsInsightsResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieveConversationsInsights(
         string $conversationID,
         ?RequestOptions $requestOptions = null
-    ): ConversationGetConversationsInsightsResponse {
-        $params = [];
-
-        return $this->retrieveConversationsInsightsRaw(
-            $conversationID,
-            $params,
-            $requestOptions
-        );
-    }
-
-    /**
-     * @api
-     *
-     * @return ConversationGetConversationsInsightsResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveConversationsInsightsRaw(
-        string $conversationID,
-        mixed $params,
-        ?RequestOptions $requestOptions = null,
     ): ConversationGetConversationsInsightsResponse {
         // @phpstan-ignore-next-line;
         return $this->client->request(

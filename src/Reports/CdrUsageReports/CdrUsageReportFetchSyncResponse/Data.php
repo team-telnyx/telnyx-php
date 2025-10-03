@@ -109,16 +109,16 @@ final class Data implements BaseModel
         $obj = new self;
 
         null !== $id && $obj->id = $id;
-        null !== $aggregationType && $obj->aggregationType = $aggregationType instanceof AggregationType ? $aggregationType->value : $aggregationType;
+        null !== $aggregationType && $obj['aggregationType'] = $aggregationType;
         null !== $connections && $obj->connections = $connections;
         null !== $createdAt && $obj->createdAt = $createdAt;
         null !== $endTime && $obj->endTime = $endTime;
-        null !== $productBreakdown && $obj->productBreakdown = $productBreakdown instanceof ProductBreakdown ? $productBreakdown->value : $productBreakdown;
+        null !== $productBreakdown && $obj['productBreakdown'] = $productBreakdown;
         null !== $recordType && $obj->recordType = $recordType;
         null !== $reportURL && $obj->reportURL = $reportURL;
         null !== $result && $obj->result = $result;
         null !== $startTime && $obj->startTime = $startTime;
-        null !== $status && $obj->status = $status instanceof Status ? $status->value : $status;
+        null !== $status && $obj['status'] = $status;
         null !== $updatedAt && $obj->updatedAt = $updatedAt;
 
         return $obj;
@@ -142,7 +142,7 @@ final class Data implements BaseModel
         AggregationType|string $aggregationType
     ): self {
         $obj = clone $this;
-        $obj->aggregationType = $aggregationType instanceof AggregationType ? $aggregationType->value : $aggregationType;
+        $obj['aggregationType'] = $aggregationType;
 
         return $obj;
     }
@@ -181,7 +181,7 @@ final class Data implements BaseModel
         ProductBreakdown|string $productBreakdown
     ): self {
         $obj = clone $this;
-        $obj->productBreakdown = $productBreakdown instanceof ProductBreakdown ? $productBreakdown->value : $productBreakdown;
+        $obj['productBreakdown'] = $productBreakdown;
 
         return $obj;
     }
@@ -227,7 +227,7 @@ final class Data implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

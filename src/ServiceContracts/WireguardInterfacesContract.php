@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\WireguardInterfaces\WireguardInterfaceDeleteResponse;
 use Telnyx\WireguardInterfaces\WireguardInterfaceGetResponse;
@@ -26,8 +25,6 @@ interface WireguardInterfacesContract
      * @param bool $enableSipTrunking enable SIP traffic forwarding over VPN interface
      * @param string $name a user specified name for the interface
      *
-     * @return WireguardInterfaceNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -43,8 +40,6 @@ interface WireguardInterfacesContract
      *
      * @param array<string, mixed> $params
      *
-     * @return WireguardInterfaceNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function createRaw(
@@ -54,8 +49,6 @@ interface WireguardInterfacesContract
 
     /**
      * @api
-     *
-     * @return WireguardInterfaceGetResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -67,23 +60,8 @@ interface WireguardInterfacesContract
     /**
      * @api
      *
-     * @return WireguardInterfaceGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
-        ?RequestOptions $requestOptions = null
-    ): WireguardInterfaceGetResponse;
-
-    /**
-     * @api
-     *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[network_id]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
-     *
-     * @return WireguardInterfaceListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -98,8 +76,6 @@ interface WireguardInterfacesContract
      *
      * @param array<string, mixed> $params
      *
-     * @return WireguardInterfaceListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function listRaw(
@@ -110,25 +86,10 @@ interface WireguardInterfacesContract
     /**
      * @api
      *
-     * @return WireguardInterfaceDeleteResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): WireguardInterfaceDeleteResponse;
-
-    /**
-     * @api
-     *
-     * @return WireguardInterfaceDeleteResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): WireguardInterfaceDeleteResponse;
 }

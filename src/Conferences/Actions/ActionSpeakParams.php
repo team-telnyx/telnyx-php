@@ -151,8 +151,8 @@ final class ActionSpeakParams implements BaseModel
 
         null !== $callControlIDs && $obj->callControlIDs = $callControlIDs;
         null !== $commandID && $obj->commandID = $commandID;
-        null !== $language && $obj->language = $language instanceof Language ? $language->value : $language;
-        null !== $payloadType && $obj->payloadType = $payloadType instanceof PayloadType ? $payloadType->value : $payloadType;
+        null !== $language && $obj['language'] = $language;
+        null !== $payloadType && $obj['payloadType'] = $payloadType;
         null !== $voiceSettings && $obj->voiceSettings = $voiceSettings;
 
         return $obj;
@@ -222,7 +222,7 @@ final class ActionSpeakParams implements BaseModel
     public function withLanguage(Language|string $language): self
     {
         $obj = clone $this;
-        $obj->language = $language instanceof Language ? $language->value : $language;
+        $obj['language'] = $language;
 
         return $obj;
     }
@@ -235,7 +235,7 @@ final class ActionSpeakParams implements BaseModel
     public function withPayloadType(PayloadType|string $payloadType): self
     {
         $obj = clone $this;
-        $obj->payloadType = $payloadType instanceof PayloadType ? $payloadType->value : $payloadType;
+        $obj['payloadType'] = $payloadType;
 
         return $obj;
     }

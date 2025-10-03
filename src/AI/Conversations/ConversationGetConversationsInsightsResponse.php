@@ -8,21 +8,21 @@ use Telnyx\AI\Assistants\Tests\TestSuites\Runs\Meta;
 use Telnyx\AI\Conversations\ConversationGetConversationsInsightsResponse\Data;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type conversation_get_conversations_insights_response = array{
  *   data: list<Data>, meta: Meta
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class ConversationGetConversationsInsightsResponse implements BaseModel
+final class ConversationGetConversationsInsightsResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<conversation_get_conversations_insights_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /** @var list<Data> $data */
     #[Api(list: Data::class)]

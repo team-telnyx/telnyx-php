@@ -6,21 +6,21 @@ namespace Telnyx\Legacy\Reporting\UsageReports\Messaging;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type messaging_get_response = array{
  *   data?: MdrUsageReportResponseLegacy
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class MessagingGetResponse implements BaseModel
+final class MessagingGetResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<messaging_get_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /**
      * Legacy V2 MDR usage report response.

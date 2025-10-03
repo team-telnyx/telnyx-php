@@ -16,7 +16,6 @@ use Telnyx\Conferences\ConferenceListParticipantsResponse;
 use Telnyx\Conferences\ConferenceListResponse;
 use Telnyx\Conferences\ConferenceNewResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ConferencesContract;
 use Telnyx\Services\Conferences\ActionsService;
@@ -64,8 +63,6 @@ final class ConferencesService implements ConferencesContract
      * @param int $maxParticipants The maximum number of active conference participants to allow. Must be between 2 and 800. Defaults to 250
      * @param bool $startConferenceOnCreate Whether the conference should be started on creation. If the conference isn't started all participants that join are automatically put on hold. Defaults to "true".
      *
-     * @return ConferenceNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -104,8 +101,6 @@ final class ConferencesService implements ConferencesContract
      *
      * @param array<string, mixed> $params
      *
-     * @return ConferenceNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function createRaw(
@@ -132,29 +127,10 @@ final class ConferencesService implements ConferencesContract
      *
      * Retrieve an existing conference
      *
-     * @return ConferenceGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): ConferenceGetResponse {
-        $params = [];
-
-        return $this->retrieveRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return ConferenceGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): ConferenceGetResponse {
         // @phpstan-ignore-next-line;
@@ -174,8 +150,6 @@ final class ConferencesService implements ConferencesContract
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[application_name][contains], filter[outbound.outbound_voice_profile_id], filter[leg_id], filter[application_session_id], filter[connection_id], filter[product], filter[failed], filter[from], filter[to], filter[name], filter[type], filter[occurred_at][eq/gt/gte/lt/lte], filter[status]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number]
      *
-     * @return ConferenceListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -192,8 +166,6 @@ final class ConferencesService implements ConferencesContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ConferenceListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -224,8 +196,6 @@ final class ConferencesService implements ConferencesContract
      * @param Telnyx\Conferences\ConferenceListParticipantsParams\Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[muted], filter[on_hold], filter[whispering]
      * @param Telnyx\Conferences\ConferenceListParticipantsParams\Page $page Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number]
      *
-     * @return ConferenceListParticipantsResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function listParticipants(
@@ -243,8 +213,6 @@ final class ConferencesService implements ConferencesContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ConferenceListParticipantsResponse<HasRawResponse>
      *
      * @throws APIException
      */

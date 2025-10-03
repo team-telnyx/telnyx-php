@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\OAuthClients\OAuthClientCreateParams;
 use Telnyx\OAuthClients\OAuthClientCreateParams\AllowedGrantType;
 use Telnyx\OAuthClients\OAuthClientCreateParams\ClientType;
@@ -45,8 +44,6 @@ final class OAuthClientsService implements OAuthClientsContract
      * @param bool $requirePkce Whether PKCE (Proof Key for Code Exchange) is required for this client
      * @param string $tosUri URL of the client's terms of service
      *
-     * @return OAuthClientNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -81,8 +78,6 @@ final class OAuthClientsService implements OAuthClientsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return OAuthClientNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function createRaw(
@@ -109,29 +104,10 @@ final class OAuthClientsService implements OAuthClientsContract
      *
      * Retrieve a single OAuth client by ID
      *
-     * @return OAuthClientGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): OAuthClientGetResponse {
-        $params = [];
-
-        return $this->retrieveRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return OAuthClientGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): OAuthClientGetResponse {
         // @phpstan-ignore-next-line;
@@ -156,8 +132,6 @@ final class OAuthClientsService implements OAuthClientsContract
      * @param list<string> $redirectUris List of redirect URIs
      * @param bool $requirePkce Whether PKCE (Proof Key for Code Exchange) is required for this client
      * @param string $tosUri URL of the client's terms of service
-     *
-     * @return OAuthClientUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -191,8 +165,6 @@ final class OAuthClientsService implements OAuthClientsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return OAuthClientUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -230,8 +202,6 @@ final class OAuthClientsService implements OAuthClientsContract
      * @param int $pageNumber Page number
      * @param int $pageSize Number of results per page
      *
-     * @return OAuthClientListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -264,8 +234,6 @@ final class OAuthClientsService implements OAuthClientsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return OAuthClientListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function listRaw(
@@ -296,21 +264,6 @@ final class OAuthClientsService implements OAuthClientsContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): mixed {
-        $params = [];
-
-        return $this->deleteRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): mixed {
         // @phpstan-ignore-next-line;

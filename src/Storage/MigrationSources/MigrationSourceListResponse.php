@@ -6,22 +6,22 @@ namespace Telnyx\Storage\MigrationSources;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Storage\Buckets\Usage\PaginationMetaSimple;
 
 /**
  * @phpstan-type migration_source_list_response = array{
  *   data?: list<MigrationSourceParams>, meta?: PaginationMetaSimple
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class MigrationSourceListResponse implements BaseModel
+final class MigrationSourceListResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<migration_source_list_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /** @var list<MigrationSourceParams>|null $data */
     #[Api(list: MigrationSourceParams::class, optional: true)]

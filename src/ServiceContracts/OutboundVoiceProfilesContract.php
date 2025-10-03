@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\OutboundVoiceProfiles\OutboundCallRecording;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileDeleteResponse;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileGetResponse;
@@ -41,8 +40,6 @@ interface OutboundVoiceProfilesContract
      * @param UsagePaymentMethod|value-of<UsagePaymentMethod> $usagePaymentMethod setting for how costs for outbound profile are calculated
      * @param list<string> $whitelistedDestinations the list of destinations you want to be able to call using this outbound voice profile formatted in alpha2
      *
-     * @return OutboundVoiceProfileNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -67,8 +64,6 @@ interface OutboundVoiceProfilesContract
      *
      * @param array<string, mixed> $params
      *
-     * @return OutboundVoiceProfileNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function createRaw(
@@ -79,25 +74,10 @@ interface OutboundVoiceProfilesContract
     /**
      * @api
      *
-     * @return OutboundVoiceProfileGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): OutboundVoiceProfileGetResponse;
-
-    /**
-     * @api
-     *
-     * @return OutboundVoiceProfileGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): OutboundVoiceProfileGetResponse;
 
@@ -117,8 +97,6 @@ interface OutboundVoiceProfilesContract
      * @param TrafficType|value-of<TrafficType> $trafficType specifies the type of traffic allowed in this profile
      * @param UsagePaymentMethod|value-of<UsagePaymentMethod> $usagePaymentMethod setting for how costs for outbound profile are calculated
      * @param list<string> $whitelistedDestinations the list of destinations you want to be able to call using this outbound voice profile formatted in alpha2
-     *
-     * @return OutboundVoiceProfileUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -144,8 +122,6 @@ interface OutboundVoiceProfilesContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return OutboundVoiceProfileUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -173,8 +149,6 @@ interface OutboundVoiceProfilesContract
      *   </li>
      * </ul> <br/>
      *
-     * @return OutboundVoiceProfileListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -189,8 +163,6 @@ interface OutboundVoiceProfilesContract
      *
      * @param array<string, mixed> $params
      *
-     * @return OutboundVoiceProfileListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function listRaw(
@@ -201,25 +173,10 @@ interface OutboundVoiceProfilesContract
     /**
      * @api
      *
-     * @return OutboundVoiceProfileDeleteResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): OutboundVoiceProfileDeleteResponse;
-
-    /**
-     * @api
-     *
-     * @return OutboundVoiceProfileDeleteResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): OutboundVoiceProfileDeleteResponse;
 }

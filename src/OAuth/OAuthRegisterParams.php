@@ -140,13 +140,13 @@ final class OAuthRegisterParams implements BaseModel
         $obj = new self;
 
         null !== $clientName && $obj->clientName = $clientName;
-        null !== $grantTypes && $obj->grantTypes = array_map(fn ($v) => $v instanceof GrantType ? $v->value : $v, $grantTypes);
+        null !== $grantTypes && $obj['grantTypes'] = $grantTypes;
         null !== $logoUri && $obj->logoUri = $logoUri;
         null !== $policyUri && $obj->policyUri = $policyUri;
         null !== $redirectUris && $obj->redirectUris = $redirectUris;
         null !== $responseTypes && $obj->responseTypes = $responseTypes;
         null !== $scope && $obj->scope = $scope;
-        null !== $tokenEndpointAuthMethod && $obj->tokenEndpointAuthMethod = $tokenEndpointAuthMethod instanceof TokenEndpointAuthMethod ? $tokenEndpointAuthMethod->value : $tokenEndpointAuthMethod;
+        null !== $tokenEndpointAuthMethod && $obj['tokenEndpointAuthMethod'] = $tokenEndpointAuthMethod;
         null !== $tosUri && $obj->tosUri = $tosUri;
 
         return $obj;
@@ -171,7 +171,7 @@ final class OAuthRegisterParams implements BaseModel
     public function withGrantTypes(array $grantTypes): self
     {
         $obj = clone $this;
-        $obj->grantTypes = array_map(fn ($v) => $v instanceof GrantType ? $v->value : $v, $grantTypes);
+        $obj['grantTypes'] = $grantTypes;
 
         return $obj;
     }
@@ -244,7 +244,7 @@ final class OAuthRegisterParams implements BaseModel
         TokenEndpointAuthMethod|string $tokenEndpointAuthMethod
     ): self {
         $obj = clone $this;
-        $obj->tokenEndpointAuthMethod = $tokenEndpointAuthMethod instanceof TokenEndpointAuthMethod ? $tokenEndpointAuthMethod->value : $tokenEndpointAuthMethod;
+        $obj['tokenEndpointAuthMethod'] = $tokenEndpointAuthMethod;
 
         return $obj;
     }

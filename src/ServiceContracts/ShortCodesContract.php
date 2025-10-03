@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ShortCodes\ShortCodeGetResponse;
 use Telnyx\ShortCodes\ShortCodeListParams\Filter;
@@ -20,8 +19,6 @@ interface ShortCodesContract
     /**
      * @api
      *
-     * @return ShortCodeGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
@@ -32,22 +29,7 @@ interface ShortCodesContract
     /**
      * @api
      *
-     * @return ShortCodeGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
-        ?RequestOptions $requestOptions = null
-    ): ShortCodeGetResponse;
-
-    /**
-     * @api
-     *
      * @param string $messagingProfileID unique identifier for a messaging profile
-     *
-     * @return ShortCodeUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -61,8 +43,6 @@ interface ShortCodesContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ShortCodeUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -78,8 +58,6 @@ interface ShortCodesContract
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[messaging_profile_id]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
-     * @return ShortCodeListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -92,8 +70,6 @@ interface ShortCodesContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ShortCodeListResponse<HasRawResponse>
      *
      * @throws APIException
      */

@@ -6,7 +6,6 @@ namespace Telnyx\Services\Texml\Accounts\Calls;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\Accounts\Calls\StreamsContract;
 use Telnyx\Texml\Accounts\Calls\Streams\StreamStreamingSidJsonParams;
@@ -31,8 +30,6 @@ final class StreamsService implements StreamsContract
      * @param string $callSid
      * @param Status|value-of<Status> $status the status of the Stream you wish to update
      *
-     * @return StreamStreamingSidJsonResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function streamingSidJson(
@@ -53,8 +50,6 @@ final class StreamsService implements StreamsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return StreamStreamingSidJsonResponse<HasRawResponse>
      *
      * @throws APIException
      */

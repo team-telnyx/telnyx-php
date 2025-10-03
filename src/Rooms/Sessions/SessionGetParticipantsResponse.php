@@ -7,22 +7,22 @@ namespace Telnyx\Rooms\Sessions;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\RoomParticipant;
 
 /**
  * @phpstan-type session_get_participants_response = array{
  *   data?: list<RoomParticipant>, meta?: PaginationMeta
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class SessionGetParticipantsResponse implements BaseModel
+final class SessionGetParticipantsResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<session_get_participants_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /** @var list<RoomParticipant>|null $data */
     #[Api(list: RoomParticipant::class, optional: true)]

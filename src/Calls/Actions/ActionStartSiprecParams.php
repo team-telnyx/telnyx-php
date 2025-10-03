@@ -124,8 +124,8 @@ final class ActionStartSiprecParams implements BaseModel
         null !== $includeMetadataCustomHeaders && $obj->includeMetadataCustomHeaders = $includeMetadataCustomHeaders;
         null !== $secure && $obj->secure = $secure;
         null !== $sessionTimeoutSecs && $obj->sessionTimeoutSecs = $sessionTimeoutSecs;
-        null !== $sipTransport && $obj->sipTransport = $sipTransport instanceof SipTransport ? $sipTransport->value : $sipTransport;
-        null !== $siprecTrack && $obj->siprecTrack = $siprecTrack instanceof SiprecTrack ? $siprecTrack->value : $siprecTrack;
+        null !== $sipTransport && $obj['sipTransport'] = $sipTransport;
+        null !== $siprecTrack && $obj['siprecTrack'] = $siprecTrack;
 
         return $obj;
     }
@@ -194,7 +194,7 @@ final class ActionStartSiprecParams implements BaseModel
     public function withSipTransport(SipTransport|string $sipTransport): self
     {
         $obj = clone $this;
-        $obj->sipTransport = $sipTransport instanceof SipTransport ? $sipTransport->value : $sipTransport;
+        $obj['sipTransport'] = $sipTransport;
 
         return $obj;
     }
@@ -207,7 +207,7 @@ final class ActionStartSiprecParams implements BaseModel
     public function withSiprecTrack(SiprecTrack|string $siprecTrack): self
     {
         $obj = clone $this;
-        $obj->siprecTrack = $siprecTrack instanceof SiprecTrack ? $siprecTrack->value : $siprecTrack;
+        $obj['siprecTrack'] = $siprecTrack;
 
         return $obj;
     }

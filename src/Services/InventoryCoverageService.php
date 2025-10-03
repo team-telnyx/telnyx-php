@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\InventoryCoverage\InventoryCoverageListParams;
 use Telnyx\InventoryCoverage\InventoryCoverageListParams\Filter;
 use Telnyx\InventoryCoverage\InventoryCoverageListResponse;
@@ -29,8 +28,6 @@ final class InventoryCoverageService implements InventoryCoverageContract
      *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[npa], filter[nxx], filter[administrative_area], filter[phone_number_type], filter[country_code], filter[count], filter[features], filter[groupBy]
      *
-     * @return InventoryCoverageListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -46,8 +43,6 @@ final class InventoryCoverageService implements InventoryCoverageContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return InventoryCoverageListResponse<HasRawResponse>
      *
      * @throws APIException
      */

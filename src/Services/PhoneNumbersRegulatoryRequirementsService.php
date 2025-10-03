@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PhoneNumbersRegulatoryRequirements\PhoneNumbersRegulatoryRequirementGetResponse;
 use Telnyx\PhoneNumbersRegulatoryRequirements\PhoneNumbersRegulatoryRequirementRetrieveParams;
 use Telnyx\PhoneNumbersRegulatoryRequirements\PhoneNumbersRegulatoryRequirementRetrieveParams\Filter;
@@ -29,8 +28,6 @@ final class PhoneNumbersRegulatoryRequirementsService implements PhoneNumbersReg
      *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[phone_number]
      *
-     * @return PhoneNumbersRegulatoryRequirementGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
@@ -46,8 +43,6 @@ final class PhoneNumbersRegulatoryRequirementsService implements PhoneNumbersReg
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return PhoneNumbersRegulatoryRequirementGetResponse<HasRawResponse>
      *
      * @throws APIException
      */

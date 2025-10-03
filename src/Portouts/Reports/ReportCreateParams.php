@@ -83,7 +83,7 @@ final class ReportCreateParams implements BaseModel
         $obj = new self;
 
         $obj->params = $params;
-        $obj->reportType = $reportType instanceof ReportType ? $reportType->value : $reportType;
+        $obj['reportType'] = $reportType;
 
         return $obj;
     }
@@ -107,7 +107,7 @@ final class ReportCreateParams implements BaseModel
     public function withReportType(ReportType|string $reportType): self
     {
         $obj = clone $this;
-        $obj->reportType = $reportType instanceof ReportType ? $reportType->value : $reportType;
+        $obj['reportType'] = $reportType;
 
         return $obj;
     }

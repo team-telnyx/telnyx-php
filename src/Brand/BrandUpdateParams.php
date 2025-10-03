@@ -287,24 +287,24 @@ final class BrandUpdateParams implements BaseModel
         $obj->country = $country;
         $obj->displayName = $displayName;
         $obj->email = $email;
-        $obj->entityType = $entityType instanceof EntityType ? $entityType->value : $entityType;
-        $obj->vertical = $vertical instanceof Vertical ? $vertical->value : $vertical;
+        $obj['entityType'] = $entityType;
+        $obj['vertical'] = $vertical;
 
         null !== $altBusinessID && $obj->altBusinessID = $altBusinessID;
-        null !== $altBusinessIDType && $obj->altBusinessIDType = $altBusinessIDType instanceof AltBusinessIDType ? $altBusinessIDType->value : $altBusinessIDType;
+        null !== $altBusinessIDType && $obj['altBusinessIDType'] = $altBusinessIDType;
         null !== $businessContactEmail && $obj->businessContactEmail = $businessContactEmail;
         null !== $city && $obj->city = $city;
         null !== $companyName && $obj->companyName = $companyName;
         null !== $ein && $obj->ein = $ein;
         null !== $firstName && $obj->firstName = $firstName;
-        null !== $identityStatus && $obj->identityStatus = $identityStatus instanceof BrandIdentityStatus ? $identityStatus->value : $identityStatus;
+        null !== $identityStatus && $obj['identityStatus'] = $identityStatus;
         null !== $ipAddress && $obj->ipAddress = $ipAddress;
         null !== $isReseller && $obj->isReseller = $isReseller;
         null !== $lastName && $obj->lastName = $lastName;
         null !== $phone && $obj->phone = $phone;
         null !== $postalCode && $obj->postalCode = $postalCode;
         null !== $state && $obj->state = $state;
-        null !== $stockExchange && $obj->stockExchange = $stockExchange instanceof StockExchange ? $stockExchange->value : $stockExchange;
+        null !== $stockExchange && $obj['stockExchange'] = $stockExchange;
         null !== $stockSymbol && $obj->stockSymbol = $stockSymbol;
         null !== $street && $obj->street = $street;
         null !== $webhookFailoverURL && $obj->webhookFailoverURL = $webhookFailoverURL;
@@ -355,7 +355,7 @@ final class BrandUpdateParams implements BaseModel
     public function withEntityType(EntityType|string $entityType): self
     {
         $obj = clone $this;
-        $obj->entityType = $entityType instanceof EntityType ? $entityType->value : $entityType;
+        $obj['entityType'] = $entityType;
 
         return $obj;
     }
@@ -368,7 +368,7 @@ final class BrandUpdateParams implements BaseModel
     public function withVertical(Vertical|string $vertical): self
     {
         $obj = clone $this;
-        $obj->vertical = $vertical instanceof Vertical ? $vertical->value : $vertical;
+        $obj['vertical'] = $vertical;
 
         return $obj;
     }
@@ -393,7 +393,7 @@ final class BrandUpdateParams implements BaseModel
         AltBusinessIDType|string $altBusinessIDType
     ): self {
         $obj = clone $this;
-        $obj->altBusinessIDType = $altBusinessIDType instanceof AltBusinessIDType ? $altBusinessIDType->value : $altBusinessIDType;
+        $obj['altBusinessIDType'] = $altBusinessIDType;
 
         return $obj;
     }
@@ -464,7 +464,7 @@ final class BrandUpdateParams implements BaseModel
         BrandIdentityStatus|string $identityStatus
     ): self {
         $obj = clone $this;
-        $obj->identityStatus = $identityStatus instanceof BrandIdentityStatus ? $identityStatus->value : $identityStatus;
+        $obj['identityStatus'] = $identityStatus;
 
         return $obj;
     }
@@ -540,7 +540,7 @@ final class BrandUpdateParams implements BaseModel
     public function withStockExchange(StockExchange|string $stockExchange): self
     {
         $obj = clone $this;
-        $obj->stockExchange = $stockExchange instanceof StockExchange ? $stockExchange->value : $stockExchange;
+        $obj['stockExchange'] = $stockExchange;
 
         return $obj;
     }

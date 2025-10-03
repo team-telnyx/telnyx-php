@@ -6,19 +6,19 @@ namespace Telnyx\ExternalConnections\LogMessages;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type log_message_dismiss_response = array{success?: bool}
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class LogMessageDismissResponse implements BaseModel
+final class LogMessageDismissResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<log_message_dismiss_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /**
      * Describes wether or not the operation was successful.

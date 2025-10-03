@@ -7,21 +7,21 @@ namespace Telnyx\BundlePricing\UserBundles;
 use Telnyx\BundlePricing\BillingBundles\PaginationResponse;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type user_bundle_list_response = array{
  *   data: list<UserBundle>, meta: PaginationResponse
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class UserBundleListResponse implements BaseModel
+final class UserBundleListResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<user_bundle_list_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /** @var list<UserBundle> $data */
     #[Api(list: UserBundle::class)]

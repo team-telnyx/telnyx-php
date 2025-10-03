@@ -130,7 +130,7 @@ final class TestUpdateParams implements BaseModel
         null !== $maxDurationSeconds && $obj->maxDurationSeconds = $maxDurationSeconds;
         null !== $name && $obj->name = $name;
         null !== $rubric && $obj->rubric = $rubric;
-        null !== $telnyxConversationChannel && $obj->telnyxConversationChannel = $telnyxConversationChannel instanceof TelnyxConversationChannel ? $telnyxConversationChannel->value : $telnyxConversationChannel;
+        null !== $telnyxConversationChannel && $obj['telnyxConversationChannel'] = $telnyxConversationChannel;
         null !== $testSuite && $obj->testSuite = $testSuite;
 
         return $obj;
@@ -213,7 +213,7 @@ final class TestUpdateParams implements BaseModel
         TelnyxConversationChannel|string $telnyxConversationChannel
     ): self {
         $obj = clone $this;
-        $obj->telnyxConversationChannel = $telnyxConversationChannel instanceof TelnyxConversationChannel ? $telnyxConversationChannel->value : $telnyxConversationChannel;
+        $obj['telnyxConversationChannel'] = $telnyxConversationChannel;
 
         return $obj;
     }

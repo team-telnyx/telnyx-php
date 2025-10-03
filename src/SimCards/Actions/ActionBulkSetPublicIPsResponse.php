@@ -6,20 +6,20 @@ namespace Telnyx\SimCards\Actions;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\SimCards\Actions\ActionBulkSetPublicIPsResponse\Data;
 
 /**
  * @phpstan-type action_bulk_set_public_ips_response = array{data?: Data}
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class ActionBulkSetPublicIPsResponse implements BaseModel
+final class ActionBulkSetPublicIPsResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<action_bulk_set_public_ips_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /**
      * This object represents a bulk SIM card action. It groups SIM card actions created through a bulk endpoint under a single resource for further lookup.

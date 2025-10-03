@@ -198,13 +198,13 @@ final class RoomComposition implements BaseModel
         null !== $downloadURL && $obj->downloadURL = $downloadURL;
         null !== $durationSecs && $obj->durationSecs = $durationSecs;
         null !== $endedAt && $obj->endedAt = $endedAt;
-        null !== $format && $obj->format = $format instanceof Format ? $format->value : $format;
+        null !== $format && $obj['format'] = $format;
         null !== $recordType && $obj->recordType = $recordType;
         null !== $roomID && $obj->roomID = $roomID;
         null !== $sessionID && $obj->sessionID = $sessionID;
         null !== $sizeMB && $obj->sizeMB = $sizeMB;
         null !== $startedAt && $obj->startedAt = $startedAt;
-        null !== $status && $obj->status = $status instanceof Status ? $status->value : $status;
+        null !== $status && $obj['status'] = $status;
         null !== $updatedAt && $obj->updatedAt = $updatedAt;
         null !== $userID && $obj->userID = $userID;
         null !== $videoLayout && $obj->videoLayout = $videoLayout;
@@ -289,7 +289,7 @@ final class RoomComposition implements BaseModel
     public function withFormat(Format|string $format): self
     {
         $obj = clone $this;
-        $obj->format = $format instanceof Format ? $format->value : $format;
+        $obj['format'] = $format;
 
         return $obj;
     }
@@ -354,7 +354,7 @@ final class RoomComposition implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

@@ -6,7 +6,6 @@ namespace Telnyx\Services\ManagedAccounts;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\ManagedAccounts\Actions\ActionDisableResponse;
 use Telnyx\ManagedAccounts\Actions\ActionEnableParams;
 use Telnyx\ManagedAccounts\Actions\ActionEnableResponse;
@@ -27,29 +26,10 @@ final class ActionsService implements ActionsContract
      *
      * Disables a managed account, forbidding it to use Telnyx services, including sending or receiving phone calls and SMS messages. Ongoing phone calls will not be affected. The managed account and its sub-users will no longer be able to log in via the mission control portal.
      *
-     * @return ActionDisableResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function disable(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): ActionDisableResponse {
-        $params = [];
-
-        return $this->disableRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return ActionDisableResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function disableRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): ActionDisableResponse {
         // @phpstan-ignore-next-line;
@@ -68,8 +48,6 @@ final class ActionsService implements ActionsContract
      *
      * @param bool $reenableAllConnections When true, all connections owned by this managed account will automatically be re-enabled. Note: Any connections that do not pass validations will not be re-enabled.
      *
-     * @return ActionEnableResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function enable(
@@ -86,8 +64,6 @@ final class ActionsService implements ActionsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ActionEnableResponse<HasRawResponse>
      *
      * @throws APIException
      */

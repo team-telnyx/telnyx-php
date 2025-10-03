@@ -74,9 +74,9 @@ final class CallRecording implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $inboundCallRecordingChannels && $obj->inboundCallRecordingChannels = $inboundCallRecordingChannels instanceof InboundCallRecordingChannels ? $inboundCallRecordingChannels->value : $inboundCallRecordingChannels;
+        null !== $inboundCallRecordingChannels && $obj['inboundCallRecordingChannels'] = $inboundCallRecordingChannels;
         null !== $inboundCallRecordingEnabled && $obj->inboundCallRecordingEnabled = $inboundCallRecordingEnabled;
-        null !== $inboundCallRecordingFormat && $obj->inboundCallRecordingFormat = $inboundCallRecordingFormat instanceof InboundCallRecordingFormat ? $inboundCallRecordingFormat->value : $inboundCallRecordingFormat;
+        null !== $inboundCallRecordingFormat && $obj['inboundCallRecordingFormat'] = $inboundCallRecordingFormat;
 
         return $obj;
     }
@@ -90,7 +90,7 @@ final class CallRecording implements BaseModel
         InboundCallRecordingChannels|string $inboundCallRecordingChannels
     ): self {
         $obj = clone $this;
-        $obj->inboundCallRecordingChannels = $inboundCallRecordingChannels instanceof InboundCallRecordingChannels ? $inboundCallRecordingChannels->value : $inboundCallRecordingChannels;
+        $obj['inboundCallRecordingChannels'] = $inboundCallRecordingChannels;
 
         return $obj;
     }
@@ -116,7 +116,7 @@ final class CallRecording implements BaseModel
         InboundCallRecordingFormat|string $inboundCallRecordingFormat
     ): self {
         $obj = clone $this;
-        $obj->inboundCallRecordingFormat = $inboundCallRecordingFormat instanceof InboundCallRecordingFormat ? $inboundCallRecordingFormat->value : $inboundCallRecordingFormat;
+        $obj['inboundCallRecordingFormat'] = $inboundCallRecordingFormat;
 
         return $obj;
     }

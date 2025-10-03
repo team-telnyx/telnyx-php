@@ -7,21 +7,21 @@ namespace Telnyx\Documents;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type document_list_response = array{
  *   data?: list<DocServiceDocument>, meta?: PaginationMeta
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class DocumentListResponse implements BaseModel
+final class DocumentListResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<document_list_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /** @var list<DocServiceDocument>|null $data */
     #[Api(list: DocServiceDocument::class, optional: true)]

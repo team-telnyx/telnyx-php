@@ -115,12 +115,12 @@ final class ActionRecordStartParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->format = $format instanceof Format ? $format->value : $format;
+        $obj['format'] = $format;
 
         null !== $commandID && $obj->commandID = $commandID;
         null !== $customFileName && $obj->customFileName = $customFileName;
         null !== $playBeep && $obj->playBeep = $playBeep;
-        null !== $trim && $obj->trim = $trim instanceof Trim ? $trim->value : $trim;
+        null !== $trim && $obj['trim'] = $trim;
 
         return $obj;
     }
@@ -133,7 +133,7 @@ final class ActionRecordStartParams implements BaseModel
     public function withFormat(Format|string $format): self
     {
         $obj = clone $this;
-        $obj->format = $format instanceof Format ? $format->value : $format;
+        $obj['format'] = $format;
 
         return $obj;
     }
@@ -179,7 +179,7 @@ final class ActionRecordStartParams implements BaseModel
     public function withTrim(Trim|string $trim): self
     {
         $obj = clone $this;
-        $obj->trim = $trim instanceof Trim ? $trim->value : $trim;
+        $obj['trim'] = $trim;
 
         return $obj;
     }

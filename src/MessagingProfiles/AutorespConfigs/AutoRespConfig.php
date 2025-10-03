@@ -103,7 +103,7 @@ final class AutoRespConfig implements BaseModel
         $obj->countryCode = $countryCode;
         $obj->createdAt = $createdAt;
         $obj->keywords = $keywords;
-        $obj->op = $op instanceof Op ? $op->value : $op;
+        $obj['op'] = $op;
         $obj->updatedAt = $updatedAt;
 
         null !== $respText && $obj->respText = $respText;
@@ -152,7 +152,7 @@ final class AutoRespConfig implements BaseModel
     public function withOp(Op|string $op): self
     {
         $obj = clone $this;
-        $obj->op = $op instanceof Op ? $op->value : $op;
+        $obj['op'] = $op;
 
         return $obj;
     }

@@ -22,7 +22,9 @@ use Telnyx\AI\Assistants\VoiceSettings;
 use Telnyx\AI\Assistants\WebhookTool;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type version_update_response = array{
@@ -46,15 +48,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *   transcription?: TranscriptionSettings,
  *   voiceSettings?: VoiceSettings,
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class VersionUpdateResponse implements BaseModel
+final class VersionUpdateResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<version_update_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     #[Api]
     public string $id;
@@ -206,7 +206,7 @@ final class VersionUpdateResponse implements BaseModel
         null !== $description && $obj->description = $description;
         null !== $dynamicVariables && $obj->dynamicVariables = $dynamicVariables;
         null !== $dynamicVariablesWebhookURL && $obj->dynamicVariablesWebhookURL = $dynamicVariablesWebhookURL;
-        null !== $enabledFeatures && $obj->enabledFeatures = array_map(fn ($v) => $v instanceof EnabledFeatures ? $v->value : $v, $enabledFeatures);
+        null !== $enabledFeatures && $obj['enabledFeatures'] = $enabledFeatures;
         null !== $greeting && $obj->greeting = $greeting;
         null !== $importMetadata && $obj->importMetadata = $importMetadata;
         null !== $insightSettings && $obj->insightSettings = $insightSettings;
@@ -306,7 +306,7 @@ final class VersionUpdateResponse implements BaseModel
     public function withEnabledFeatures(array $enabledFeatures): self
     {
         $obj = clone $this;
-        $obj->enabledFeatures = array_map(fn ($v) => $v instanceof EnabledFeatures ? $v->value : $v, $enabledFeatures);
+        $obj['enabledFeatures'] = $enabledFeatures;
 
         return $obj;
     }

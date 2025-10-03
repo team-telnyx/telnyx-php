@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\GlobalIPs\GlobalIPCreateParams;
 use Telnyx\GlobalIPs\GlobalIPDeleteResponse;
 use Telnyx\GlobalIPs\GlobalIPGetResponse;
@@ -35,8 +34,6 @@ final class GlobalIPsService implements GlobalIPsContract
      * @param string $name a user specified name for the address
      * @param array<string, mixed> $ports a Global IP ports grouped by protocol code
      *
-     * @return GlobalIPNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -56,8 +53,6 @@ final class GlobalIPsService implements GlobalIPsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return GlobalIPNewResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -85,29 +80,10 @@ final class GlobalIPsService implements GlobalIPsContract
      *
      * Retrieve a Global IP.
      *
-     * @return GlobalIPGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): GlobalIPGetResponse {
-        $params = [];
-
-        return $this->retrieveRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return GlobalIPGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): GlobalIPGetResponse {
         // @phpstan-ignore-next-line;
@@ -126,8 +102,6 @@ final class GlobalIPsService implements GlobalIPsContract
      *
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
-     * @return GlobalIPListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -143,8 +117,6 @@ final class GlobalIPsService implements GlobalIPsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return GlobalIPListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -172,29 +144,10 @@ final class GlobalIPsService implements GlobalIPsContract
      *
      * Delete a Global IP.
      *
-     * @return GlobalIPDeleteResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): GlobalIPDeleteResponse {
-        $params = [];
-
-        return $this->deleteRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return GlobalIPDeleteResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): GlobalIPDeleteResponse {
         // @phpstan-ignore-next-line;

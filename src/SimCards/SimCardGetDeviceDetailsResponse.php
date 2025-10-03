@@ -6,20 +6,20 @@ namespace Telnyx\SimCards;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\SimCards\SimCardGetDeviceDetailsResponse\Data;
 
 /**
  * @phpstan-type sim_card_get_device_details_response = array{data?: Data}
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class SimCardGetDeviceDetailsResponse implements BaseModel
+final class SimCardGetDeviceDetailsResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<sim_card_get_device_details_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     #[Api(optional: true)]
     public ?Data $data;

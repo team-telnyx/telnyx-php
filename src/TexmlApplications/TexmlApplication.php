@@ -197,9 +197,9 @@ final class TexmlApplication implements BaseModel
 
         null !== $id && $obj->id = $id;
         null !== $active && $obj->active = $active;
-        null !== $anchorsiteOverride && $obj->anchorsiteOverride = $anchorsiteOverride instanceof AnchorsiteOverride ? $anchorsiteOverride->value : $anchorsiteOverride;
+        null !== $anchorsiteOverride && $obj['anchorsiteOverride'] = $anchorsiteOverride;
         null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $dtmfType && $obj->dtmfType = $dtmfType instanceof DtmfType ? $dtmfType->value : $dtmfType;
+        null !== $dtmfType && $obj['dtmfType'] = $dtmfType;
         null !== $firstCommandTimeout && $obj->firstCommandTimeout = $firstCommandTimeout;
         null !== $firstCommandTimeoutSecs && $obj->firstCommandTimeoutSecs = $firstCommandTimeoutSecs;
         null !== $friendlyName && $obj->friendlyName = $friendlyName;
@@ -207,11 +207,11 @@ final class TexmlApplication implements BaseModel
         null !== $outbound && $obj->outbound = $outbound;
         null !== $recordType && $obj->recordType = $recordType;
         null !== $statusCallback && $obj->statusCallback = $statusCallback;
-        null !== $statusCallbackMethod && $obj->statusCallbackMethod = $statusCallbackMethod instanceof StatusCallbackMethod ? $statusCallbackMethod->value : $statusCallbackMethod;
+        null !== $statusCallbackMethod && $obj['statusCallbackMethod'] = $statusCallbackMethod;
         null !== $tags && $obj->tags = $tags;
         null !== $updatedAt && $obj->updatedAt = $updatedAt;
         null !== $voiceFallbackURL && $obj->voiceFallbackURL = $voiceFallbackURL;
-        null !== $voiceMethod && $obj->voiceMethod = $voiceMethod instanceof VoiceMethod ? $voiceMethod->value : $voiceMethod;
+        null !== $voiceMethod && $obj['voiceMethod'] = $voiceMethod;
         null !== $voiceURL && $obj->voiceURL = $voiceURL;
 
         return $obj;
@@ -248,7 +248,7 @@ final class TexmlApplication implements BaseModel
         AnchorsiteOverride|string $anchorsiteOverride
     ): self {
         $obj = clone $this;
-        $obj->anchorsiteOverride = $anchorsiteOverride instanceof AnchorsiteOverride ? $anchorsiteOverride->value : $anchorsiteOverride;
+        $obj['anchorsiteOverride'] = $anchorsiteOverride;
 
         return $obj;
     }
@@ -272,7 +272,7 @@ final class TexmlApplication implements BaseModel
     public function withDtmfType(DtmfType|string $dtmfType): self
     {
         $obj = clone $this;
-        $obj->dtmfType = $dtmfType instanceof DtmfType ? $dtmfType->value : $dtmfType;
+        $obj['dtmfType'] = $dtmfType;
 
         return $obj;
     }
@@ -358,7 +358,7 @@ final class TexmlApplication implements BaseModel
         StatusCallbackMethod|string $statusCallbackMethod
     ): self {
         $obj = clone $this;
-        $obj->statusCallbackMethod = $statusCallbackMethod instanceof StatusCallbackMethod ? $statusCallbackMethod->value : $statusCallbackMethod;
+        $obj['statusCallbackMethod'] = $statusCallbackMethod;
 
         return $obj;
     }
@@ -406,7 +406,7 @@ final class TexmlApplication implements BaseModel
     public function withVoiceMethod(VoiceMethod|string $voiceMethod): self
     {
         $obj = clone $this;
-        $obj->voiceMethod = $voiceMethod instanceof VoiceMethod ? $voiceMethod->value : $voiceMethod;
+        $obj['voiceMethod'] = $voiceMethod;
 
         return $obj;
     }

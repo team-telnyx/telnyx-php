@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\CustomStorageCredentials\AzureConfigurationData;
 use Telnyx\CustomStorageCredentials\CustomStorageCredentialCreateParams;
 use Telnyx\CustomStorageCredentials\CustomStorageCredentialCreateParams\Backend;
@@ -34,8 +33,6 @@ final class CustomStorageCredentialsService implements CustomStorageCredentialsC
      * @param Backend|value-of<Backend> $backend
      * @param GcsConfigurationData|S3ConfigurationData|AzureConfigurationData $configuration
      *
-     * @return CustomStorageCredentialNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -53,8 +50,6 @@ final class CustomStorageCredentialsService implements CustomStorageCredentialsC
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return CustomStorageCredentialNewResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -83,29 +78,10 @@ final class CustomStorageCredentialsService implements CustomStorageCredentialsC
      *
      * Returns the information about custom storage credentials.
      *
-     * @return CustomStorageCredentialGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $connectionID,
-        ?RequestOptions $requestOptions = null
-    ): CustomStorageCredentialGetResponse {
-        $params = [];
-
-        return $this->retrieveRaw($connectionID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return CustomStorageCredentialGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $connectionID,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): CustomStorageCredentialGetResponse {
         // @phpstan-ignore-next-line;
@@ -125,8 +101,6 @@ final class CustomStorageCredentialsService implements CustomStorageCredentialsC
      * @param Telnyx\CustomStorageCredentials\CustomStorageCredentialUpdateParams\Backend|value-of<Telnyx\CustomStorageCredentials\CustomStorageCredentialUpdateParams\Backend> $backend
      * @param GcsConfigurationData|S3ConfigurationData|AzureConfigurationData $configuration
      *
-     * @return CustomStorageCredentialUpdateResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function update(
@@ -144,8 +118,6 @@ final class CustomStorageCredentialsService implements CustomStorageCredentialsC
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return CustomStorageCredentialUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -178,21 +150,6 @@ final class CustomStorageCredentialsService implements CustomStorageCredentialsC
      */
     public function delete(
         string $connectionID,
-        ?RequestOptions $requestOptions = null
-    ): mixed {
-        $params = [];
-
-        return $this->deleteRaw($connectionID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $connectionID,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): mixed {
         // @phpstan-ignore-next-line;

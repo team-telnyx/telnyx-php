@@ -61,7 +61,7 @@ final class SipHeader implements BaseModel
     {
         $obj = new self;
 
-        $obj->name = $name instanceof Name ? $name->value : $name;
+        $obj['name'] = $name;
         $obj->value = $value;
 
         return $obj;
@@ -75,7 +75,7 @@ final class SipHeader implements BaseModel
     public function withName(Name|string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name instanceof Name ? $name->value : $name;
+        $obj['name'] = $name;
 
         return $obj;
     }

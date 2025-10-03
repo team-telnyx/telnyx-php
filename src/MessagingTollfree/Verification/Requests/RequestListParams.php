@@ -110,7 +110,7 @@ final class RequestListParams implements BaseModel
         null !== $dateEnd && $obj->dateEnd = $dateEnd;
         null !== $dateStart && $obj->dateStart = $dateStart;
         null !== $phoneNumber && $obj->phoneNumber = $phoneNumber;
-        null !== $status && $obj->status = $status instanceof TfVerificationStatus ? $status->value : $status;
+        null !== $status && $obj['status'] = $status;
 
         return $obj;
     }
@@ -168,7 +168,7 @@ final class RequestListParams implements BaseModel
     public function withStatus(TfVerificationStatus|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof TfVerificationStatus ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

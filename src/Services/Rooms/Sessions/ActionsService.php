@@ -6,7 +6,6 @@ namespace Telnyx\Services\Rooms\Sessions;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\Rooms\Sessions\Actions\ActionEndResponse;
 use Telnyx\Rooms\Sessions\Actions\ActionKickParams;
@@ -32,29 +31,10 @@ final class ActionsService implements ActionsContract
      *
      * Note: this will also kick all participants currently present in the room
      *
-     * @return ActionEndResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function end(
         string $roomSessionID,
-        ?RequestOptions $requestOptions = null
-    ): ActionEndResponse {
-        $params = [];
-
-        return $this->endRaw($roomSessionID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return ActionEndResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function endRaw(
-        string $roomSessionID,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): ActionEndResponse {
         // @phpstan-ignore-next-line;
@@ -74,8 +54,6 @@ final class ActionsService implements ActionsContract
      * @param list<string> $exclude list of participant id to exclude from the action
      * @param UnionMember0|list<string>|value-of<UnionMember0> $participants either a list of participant id to perform the action on, or the keyword "all" to perform the action on all participant
      *
-     * @return ActionKickResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function kick(
@@ -93,8 +71,6 @@ final class ActionsService implements ActionsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ActionKickResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -126,8 +102,6 @@ final class ActionsService implements ActionsContract
      * @param list<string> $exclude list of participant id to exclude from the action
      * @param Telnyx\Rooms\Sessions\Actions\ActionMuteParams\Participants\UnionMember0|list<string>|value-of<Telnyx\Rooms\Sessions\Actions\ActionMuteParams\Participants\UnionMember0> $participants either a list of participant id to perform the action on, or the keyword "all" to perform the action on all participant
      *
-     * @return ActionMuteResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function mute(
@@ -145,8 +119,6 @@ final class ActionsService implements ActionsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ActionMuteResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -178,8 +150,6 @@ final class ActionsService implements ActionsContract
      * @param list<string> $exclude list of participant id to exclude from the action
      * @param Telnyx\Rooms\Sessions\Actions\ActionUnmuteParams\Participants\UnionMember0|list<string>|value-of<Telnyx\Rooms\Sessions\Actions\ActionUnmuteParams\Participants\UnionMember0> $participants either a list of participant id to perform the action on, or the keyword "all" to perform the action on all participant
      *
-     * @return ActionUnmuteResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function unmute(
@@ -197,8 +167,6 @@ final class ActionsService implements ActionsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ActionUnmuteResponse<HasRawResponse>
      *
      * @throws APIException
      */

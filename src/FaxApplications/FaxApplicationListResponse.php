@@ -7,21 +7,21 @@ namespace Telnyx\FaxApplications;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type fax_application_list_response = array{
  *   data?: list<FaxApplication>, meta?: PaginationMeta
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class FaxApplicationListResponse implements BaseModel
+final class FaxApplicationListResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<fax_application_list_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /** @var list<FaxApplication>|null $data */
     #[Api(list: FaxApplication::class, optional: true)]

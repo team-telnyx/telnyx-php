@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\ManagedAccounts\ManagedAccountCreateParams;
 use Telnyx\ManagedAccounts\ManagedAccountGetAllocatableGlobalOutboundChannelsResponse;
 use Telnyx\ManagedAccounts\ManagedAccountGetResponse;
@@ -52,8 +51,6 @@ final class ManagedAccountsService implements ManagedAccountsContract
      * @param string $password Password for the managed account. If a password is not supplied, the account will not be able to be signed into directly. (A password reset may still be performed later to enable sign-in via password.)
      * @param bool $rollupBilling Boolean value that indicates if the billing information and charges to the managed account "roll up" to the manager account. If true, the managed account will not have its own balance and will use the shared balance with the manager account. This value cannot be changed after account creation without going through Telnyx support as changes require manual updates to the account ledger. Defaults to false.
      *
-     * @return ManagedAccountNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -79,8 +76,6 @@ final class ManagedAccountsService implements ManagedAccountsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ManagedAccountNewResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -108,29 +103,10 @@ final class ManagedAccountsService implements ManagedAccountsContract
      *
      * Retrieves the details of a single managed account.
      *
-     * @return ManagedAccountGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): ManagedAccountGetResponse {
-        $params = [];
-
-        return $this->retrieveRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return ManagedAccountGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): ManagedAccountGetResponse {
         // @phpstan-ignore-next-line;
@@ -148,8 +124,6 @@ final class ManagedAccountsService implements ManagedAccountsContract
      * Update a single managed account.
      *
      * @param bool $managedAccountAllowCustomPricing Boolean value that indicates if the managed account is able to have custom pricing set for it or not. If false, uses the pricing of the manager account. Defaults to false. This value may be changed, but there may be time lag between when the value is changed and pricing changes take effect.
-     *
-     * @return ManagedAccountUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -169,8 +143,6 @@ final class ManagedAccountsService implements ManagedAccountsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ManagedAccountUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -215,8 +187,6 @@ final class ManagedAccountsService implements ManagedAccountsContract
      *   </li>
      * </ul> <br/> If not given, results are sorted by <code>created_at</code> in descending order.
      *
-     * @return ManagedAccountListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -240,8 +210,6 @@ final class ManagedAccountsService implements ManagedAccountsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ManagedAccountListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -269,34 +237,9 @@ final class ManagedAccountsService implements ManagedAccountsContract
      *
      * Display information about allocatable global outbound channels for the current user. Only usable by account managers.
      *
-     * @return ManagedAccountGetAllocatableGlobalOutboundChannelsResponse<
-     *   HasRawResponse
-     * >
-     *
      * @throws APIException
      */
     public function getAllocatableGlobalOutboundChannels(
-        ?RequestOptions $requestOptions = null
-    ): ManagedAccountGetAllocatableGlobalOutboundChannelsResponse {
-        $params = [];
-
-        return $this->getAllocatableGlobalOutboundChannelsRaw(
-            $params,
-            $requestOptions
-        );
-    }
-
-    /**
-     * @api
-     *
-     * @return ManagedAccountGetAllocatableGlobalOutboundChannelsResponse<
-     *   HasRawResponse
-     * >
-     *
-     * @throws APIException
-     */
-    public function getAllocatableGlobalOutboundChannelsRaw(
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): ManagedAccountGetAllocatableGlobalOutboundChannelsResponse {
         // @phpstan-ignore-next-line;
@@ -315,8 +258,6 @@ final class ManagedAccountsService implements ManagedAccountsContract
      *
      * @param int $channelLimit Integer value that indicates the number of allocatable global outbound channels that should be allocated to the managed account. Must be 0 or more. If the value is 0 then the account will have no usable channels and will not be able to perform outbound calling.
      *
-     * @return ManagedAccountUpdateGlobalChannelLimitResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function updateGlobalChannelLimit(
@@ -333,8 +274,6 @@ final class ManagedAccountsService implements ManagedAccountsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ManagedAccountUpdateGlobalChannelLimitResponse<HasRawResponse>
      *
      * @throws APIException
      */

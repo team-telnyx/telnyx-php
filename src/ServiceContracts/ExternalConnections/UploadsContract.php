@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\ExternalConnections;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\ExternalConnections\Uploads\UploadCreateParams\AdditionalUsage;
 use Telnyx\ExternalConnections\Uploads\UploadCreateParams\Usage;
 use Telnyx\ExternalConnections\Uploads\UploadGetResponse;
@@ -31,8 +30,6 @@ interface UploadsContract
      * @param string $locationID identifies the location to assign all phone numbers to
      * @param Usage|value-of<Usage> $usage The use case of the upload request. NOTE: `calling_user_assignment` is not supported for toll free numbers.
      *
-     * @return UploadNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -50,8 +47,6 @@ interface UploadsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return UploadNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function createRaw(
@@ -65,8 +60,6 @@ interface UploadsContract
      *
      * @param string $id
      *
-     * @return UploadGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
@@ -79,8 +72,6 @@ interface UploadsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return UploadGetResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -96,8 +87,6 @@ interface UploadsContract
      * @param Filter $filter Filter parameter for uploads (deepObject style). Supports filtering by status, civic_address_id, location_id, and phone_number with eq/contains operations.
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
-     * @return UploadListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -112,8 +101,6 @@ interface UploadsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return UploadListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function listRaw(
@@ -125,8 +112,6 @@ interface UploadsContract
     /**
      * @api
      *
-     * @return UploadPendingCountResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function pendingCount(
@@ -136,21 +121,6 @@ interface UploadsContract
 
     /**
      * @api
-     *
-     * @return UploadPendingCountResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function pendingCountRaw(
-        string $id,
-        mixed $params,
-        ?RequestOptions $requestOptions = null
-    ): UploadPendingCountResponse;
-
-    /**
-     * @api
-     *
-     * @return UploadRefreshStatusResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -162,22 +132,7 @@ interface UploadsContract
     /**
      * @api
      *
-     * @return UploadRefreshStatusResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function refreshStatusRaw(
-        string $id,
-        mixed $params,
-        ?RequestOptions $requestOptions = null
-    ): UploadRefreshStatusResponse;
-
-    /**
-     * @api
-     *
      * @param string $id
-     *
-     * @return UploadRetryResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -191,8 +146,6 @@ interface UploadsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return UploadRetryResponse<HasRawResponse>
      *
      * @throws APIException
      */

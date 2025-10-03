@@ -10,7 +10,6 @@ use Telnyx\AI\Assistants\ScheduledEvents\ScheduledEventListResponse;
 use Telnyx\AI\Assistants\ScheduledEvents\ScheduledPhoneCallEventResponse;
 use Telnyx\AI\Assistants\ScheduledEvents\ScheduledSMSEventResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 
 use const Telnyx\Core\OMIT as omit;
@@ -88,8 +87,6 @@ interface ScheduledEventsContract
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param \DateTimeInterface $toDate
      *
-     * @return ScheduledEventListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -105,8 +102,6 @@ interface ScheduledEventsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ScheduledEventListResponse<HasRawResponse>
      *
      * @throws APIException
      */

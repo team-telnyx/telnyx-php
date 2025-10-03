@@ -6,7 +6,6 @@ namespace Telnyx\Services\PortingOrders;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateParams;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateParams\Params;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateResponse;
@@ -36,8 +35,6 @@ final class ActionRequirementsService implements ActionRequirementsContract
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param Sort $sort Consolidated sort parameter (deepObject style). Originally: sort[value]
      *
-     * @return ActionRequirementListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -56,8 +53,6 @@ final class ActionRequirementsService implements ActionRequirementsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ActionRequirementListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -89,8 +84,6 @@ final class ActionRequirementsService implements ActionRequirementsContract
      * @param string $portingOrderID
      * @param Params $params required information for initiating the action requirement for AU ID verification
      *
-     * @return ActionRequirementInitiateResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function initiate(
@@ -108,8 +101,6 @@ final class ActionRequirementsService implements ActionRequirementsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ActionRequirementInitiateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -133,7 +124,7 @@ final class ActionRequirementsService implements ActionRequirementsContract
                 $portingOrderID,
                 $id,
             ],
-            body: (object) array_diff_key($parsed, array_flip(['portingOrderID'])),
+            body: (object) array_diff_key($parsed, ['portingOrderID']),
             options: $options,
             convert: ActionRequirementInitiateResponse::class,
         );

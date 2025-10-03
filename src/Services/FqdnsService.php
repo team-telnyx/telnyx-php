@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Fqdns\FqdnCreateParams;
 use Telnyx\Fqdns\FqdnDeleteResponse;
 use Telnyx\Fqdns\FqdnGetResponse;
@@ -39,8 +38,6 @@ final class FqdnsService implements FqdnsContract
      * @param string $fqdn FQDN represented by this resource
      * @param int|null $port port to use when connecting to this FQDN
      *
-     * @return FqdnNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -64,8 +61,6 @@ final class FqdnsService implements FqdnsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return FqdnNewResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -93,29 +88,10 @@ final class FqdnsService implements FqdnsContract
      *
      * Return the details regarding a specific FQDN.
      *
-     * @return FqdnGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): FqdnGetResponse {
-        $params = [];
-
-        return $this->retrieveRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return FqdnGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): FqdnGetResponse {
         // @phpstan-ignore-next-line;
@@ -136,8 +112,6 @@ final class FqdnsService implements FqdnsContract
      * @param string $dnsRecordType The DNS record type for the FQDN. For cases where a port is not set, the DNS record type must be 'srv'. For cases where a port is set, the DNS record type must be 'a'. If the DNS record type is 'a' and a port is not specified, 5060 will be used.
      * @param string $fqdn FQDN represented by this resource
      * @param int|null $port port to use when connecting to this FQDN
-     *
-     * @return FqdnUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -163,8 +137,6 @@ final class FqdnsService implements FqdnsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return FqdnUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -196,8 +168,6 @@ final class FqdnsService implements FqdnsContract
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[connection_id], filter[fqdn], filter[port], filter[dns_record_type]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
-     * @return FqdnListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -214,8 +184,6 @@ final class FqdnsService implements FqdnsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return FqdnListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -243,29 +211,10 @@ final class FqdnsService implements FqdnsContract
      *
      * Delete an FQDN.
      *
-     * @return FqdnDeleteResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): FqdnDeleteResponse {
-        $params = [];
-
-        return $this->deleteRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return FqdnDeleteResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): FqdnDeleteResponse {
         // @phpstan-ignore-next-line;

@@ -6,21 +6,21 @@ namespace Telnyx\Reports;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Reports\ReportListWdrsResponse\Data;
 use Telnyx\Reports\ReportListWdrsResponse\Meta;
 
 /**
  * @phpstan-type report_list_wdrs_response = array{data?: list<Data>, meta?: Meta}
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class ReportListWdrsResponse implements BaseModel
+final class ReportListWdrsResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<report_list_wdrs_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /** @var list<Data>|null $data */
     #[Api(list: Data::class, optional: true)]

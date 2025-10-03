@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\CredentialConnections\ConnectionRtcpSettings;
 use Telnyx\CredentialConnections\DtmfType;
@@ -64,8 +63,6 @@ final class FqdnConnectionsService implements FqdnConnectionsContract
      * @param string $webhookEventURL The URL where webhooks related to this connection will be sent. Must include a scheme, such as 'https'.
      * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
      *
-     * @return FqdnConnectionNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -122,8 +119,6 @@ final class FqdnConnectionsService implements FqdnConnectionsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return FqdnConnectionNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function createRaw(
@@ -150,29 +145,10 @@ final class FqdnConnectionsService implements FqdnConnectionsContract
      *
      * Retrieves the details of an existing FQDN connection.
      *
-     * @return FqdnConnectionGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): FqdnConnectionGetResponse {
-        $params = [];
-
-        return $this->retrieveRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return FqdnConnectionGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): FqdnConnectionGetResponse {
         // @phpstan-ignore-next-line;
@@ -208,8 +184,6 @@ final class FqdnConnectionsService implements FqdnConnectionsContract
      * @param string|null $webhookEventFailoverURL The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      * @param string $webhookEventURL The URL where webhooks related to this connection will be sent. Must include a scheme, such as 'https'.
      * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
-     *
-     * @return FqdnConnectionUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -266,8 +240,6 @@ final class FqdnConnectionsService implements FqdnConnectionsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return FqdnConnectionUpdateResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function updateRaw(
@@ -310,8 +282,6 @@ final class FqdnConnectionsService implements FqdnConnectionsContract
      *   </li>
      * </ul> <br/> If not given, results are sorted by <code>created_at</code> in descending order.
      *
-     * @return FqdnConnectionListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -329,8 +299,6 @@ final class FqdnConnectionsService implements FqdnConnectionsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return FqdnConnectionListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -358,29 +326,10 @@ final class FqdnConnectionsService implements FqdnConnectionsContract
      *
      * Deletes an FQDN connection.
      *
-     * @return FqdnConnectionDeleteResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): FqdnConnectionDeleteResponse {
-        $params = [];
-
-        return $this->deleteRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return FqdnConnectionDeleteResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): FqdnConnectionDeleteResponse {
         // @phpstan-ignore-next-line;

@@ -6,22 +6,22 @@ namespace Telnyx\RequirementTypes;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\DocReqsRequirementType;
 
 /**
  * @phpstan-type requirement_type_get_response = array{
  *   data?: DocReqsRequirementType
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class RequirementTypeGetResponse implements BaseModel
+final class RequirementTypeGetResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<requirement_type_get_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     #[Api(optional: true)]
     public ?DocReqsRequirementType $data;

@@ -6,7 +6,6 @@ namespace Telnyx\Services\SimCards;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SimCards\ActionsContract;
 use Telnyx\SimCards\Actions\ActionBulkSetPublicIPsParams;
@@ -39,29 +38,10 @@ final class ActionsService implements ActionsContract
      *
      * This API fetches detailed information about a SIM card action to follow-up on an existing asynchronous operation.
      *
-     * @return ActionGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): ActionGetResponse {
-        $params = [];
-
-        return $this->retrieveRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return ActionGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): ActionGetResponse {
         // @phpstan-ignore-next-line;
@@ -81,8 +61,6 @@ final class ActionsService implements ActionsContract
      * @param Filter $filter Consolidated filter parameter for SIM card actions (deepObject style). Originally: filter[sim_card_id], filter[status], filter[bulk_sim_card_action_id], filter[action_type]
      * @param Page $page Consolidated pagination parameter (deepObject style). Originally: page[number], page[size]
      *
-     * @return ActionListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -99,8 +77,6 @@ final class ActionsService implements ActionsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ActionListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -131,8 +107,6 @@ final class ActionsService implements ActionsContract
      *
      * @param list<string> $simCardIDs
      *
-     * @return ActionBulkSetPublicIPsResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function bulkSetPublicIPs(
@@ -148,8 +122,6 @@ final class ActionsService implements ActionsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ActionBulkSetPublicIPsResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -178,29 +150,10 @@ final class ActionsService implements ActionsContract
      * This API disables a SIM card, disconnecting it from the network and making it impossible to consume data.<br/>
      * The API will trigger an asynchronous operation called a SIM Card Action. Transitioning to the disabled state may take a period of time. The status of the SIM Card Action can be followed through the [List SIM Card Action](https://developersdev.telnyx.com/docs/api/v2/wireless/SIM-Card-Actions#ListSIMCardActions) API.
      *
-     * @return ActionDisableResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function disable(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): ActionDisableResponse {
-        $params = [];
-
-        return $this->disableRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return ActionDisableResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function disableRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): ActionDisableResponse {
         // @phpstan-ignore-next-line;
@@ -219,29 +172,10 @@ final class ActionsService implements ActionsContract
      * To enable a SIM card, it must be associated with a SIM card group.<br/>
      * The API will trigger an asynchronous operation called a SIM Card Action. Transitioning to the enabled state may take a period of time. The status of the SIM Card Action can be followed through the [List SIM Card Action](https://developersdev.telnyx.com/docs/api/v2/wireless/SIM-Card-Actions#ListSIMCardActions) API.
      *
-     * @return ActionEnableResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function enable(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): ActionEnableResponse {
-        $params = [];
-
-        return $this->enableRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return ActionEnableResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function enableRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): ActionEnableResponse {
         // @phpstan-ignore-next-line;
@@ -259,29 +193,10 @@ final class ActionsService implements ActionsContract
      * This API removes an existing public IP from a SIM card. <br/><br/>
      *  The API will trigger an asynchronous operation called a SIM Card Action. The status of the SIM Card Action can be followed through the [List SIM Card Action](https://developersdev.telnyx.com/docs/api/v2/wireless/SIM-Card-Actions#ListSIMCardActions) API.
      *
-     * @return ActionRemovePublicIPResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function removePublicIP(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): ActionRemovePublicIPResponse {
-        $params = [];
-
-        return $this->removePublicIPRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return ActionRemovePublicIPResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function removePublicIPRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): ActionRemovePublicIPResponse {
         // @phpstan-ignore-next-line;
@@ -302,8 +217,6 @@ final class ActionsService implements ActionsContract
      *
      * @param string $regionCode The code of the region where the public IP should be assigned. A list of available regions can be found at the regions endpoint
      *
-     * @return ActionSetPublicIPResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function setPublicIP(
@@ -320,8 +233,6 @@ final class ActionsService implements ActionsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ActionSetPublicIPResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -352,29 +263,10 @@ final class ActionsService implements ActionsContract
      * To set a SIM card to standby, it must be associated with SIM card group.<br/>
      * The API will trigger an asynchronous operation called a SIM Card Action. Transitioning to the standby state may take a period of time. The status of the SIM Card Action can be followed through the [List SIM Card Action](https://developersdev.telnyx.com/docs/api/v2/wireless/SIM-Card-Actions#ListSIMCardActions) API.
      *
-     * @return ActionSetStandbyResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function setStandby(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): ActionSetStandbyResponse {
-        $params = [];
-
-        return $this->setStandbyRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return ActionSetStandbyResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function setStandbyRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): ActionSetStandbyResponse {
         // @phpstan-ignore-next-line;
@@ -393,8 +285,6 @@ final class ActionsService implements ActionsContract
      *
      * @param list<string> $registrationCodes
      *
-     * @return ActionValidateRegistrationCodesResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function validateRegistrationCodes(
@@ -410,8 +300,6 @@ final class ActionsService implements ActionsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ActionValidateRegistrationCodesResponse<HasRawResponse>
      *
      * @throws APIException
      */

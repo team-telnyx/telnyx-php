@@ -88,7 +88,7 @@ final class ReservedPhoneNumber implements BaseModel
         null !== $expiredAt && $obj->expiredAt = $expiredAt;
         null !== $phoneNumber && $obj->phoneNumber = $phoneNumber;
         null !== $recordType && $obj->recordType = $recordType;
-        null !== $status && $obj->status = $status instanceof Status ? $status->value : $status;
+        null !== $status && $obj['status'] = $status;
         null !== $updatedAt && $obj->updatedAt = $updatedAt;
 
         return $obj;
@@ -148,7 +148,7 @@ final class ReservedPhoneNumber implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

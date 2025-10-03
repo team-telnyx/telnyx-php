@@ -67,7 +67,7 @@ final class Data implements BaseModel
 
         $obj->bucket = $bucket;
         $obj->clusters = $clusters;
-        $obj->status = $status instanceof TaskStatus ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }
@@ -97,7 +97,7 @@ final class Data implements BaseModel
     public function withStatus(TaskStatus|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof TaskStatus ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }
