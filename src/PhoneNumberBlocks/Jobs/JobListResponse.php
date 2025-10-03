@@ -7,19 +7,19 @@ namespace Telnyx\PhoneNumberBlocks\Jobs;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type job_list_response = array{data?: list<Job>, meta?: PaginationMeta}
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class JobListResponse implements BaseModel
+final class JobListResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<job_list_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /** @var list<Job>|null $data */
     #[Api(list: Job::class, optional: true)]

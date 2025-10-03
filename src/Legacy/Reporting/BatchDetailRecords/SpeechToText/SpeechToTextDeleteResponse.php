@@ -6,21 +6,21 @@ namespace Telnyx\Legacy\Reporting\BatchDetailRecords\SpeechToText;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type speech_to_text_delete_response = array{
  *   data?: SttDetailReportResponse
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class SpeechToTextDeleteResponse implements BaseModel
+final class SpeechToTextDeleteResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<speech_to_text_delete_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     #[Api(optional: true)]
     public ?SttDetailReportResponse $data;

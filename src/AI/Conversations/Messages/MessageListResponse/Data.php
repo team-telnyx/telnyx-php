@@ -94,7 +94,7 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->role = $role instanceof Role ? $role->value : $role;
+        $obj['role'] = $role;
         $obj->text = $text;
 
         null !== $createdAt && $obj->createdAt = $createdAt;
@@ -112,7 +112,7 @@ final class Data implements BaseModel
     public function withRole(Role|string $role): self
     {
         $obj = clone $this;
-        $obj->role = $role instanceof Role ? $role->value : $role;
+        $obj['role'] = $role;
 
         return $obj;
     }

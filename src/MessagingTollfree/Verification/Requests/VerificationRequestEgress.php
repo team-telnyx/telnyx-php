@@ -6,7 +6,9 @@ namespace Telnyx\MessagingTollfree\Verification\Requests;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * A verification request as it comes out of the database.
@@ -37,15 +39,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *   verificationStatus?: value-of<TfVerificationStatus>,
  *   webhookURL?: string,
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class VerificationRequestEgress implements BaseModel
+final class VerificationRequestEgress implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<verification_request_egress> */
     use SdkModel;
+
+    use SdkResponse;
 
     #[Api]
     public string $id;
@@ -250,17 +250,17 @@ final class VerificationRequestEgress implements BaseModel
         $obj->businessZip = $businessZip;
         $obj->corporateWebsite = $corporateWebsite;
         $obj->isvReseller = $isvReseller;
-        $obj->messageVolume = $messageVolume instanceof Volume ? $messageVolume->value : $messageVolume;
+        $obj['messageVolume'] = $messageVolume;
         $obj->optInWorkflow = $optInWorkflow;
         $obj->optInWorkflowImageURLs = $optInWorkflowImageURLs;
         $obj->phoneNumbers = $phoneNumbers;
         $obj->productionMessageContent = $productionMessageContent;
-        $obj->useCase = $useCase instanceof UseCaseCategories ? $useCase->value : $useCase;
+        $obj['useCase'] = $useCase;
         $obj->useCaseSummary = $useCaseSummary;
         $obj->verificationRequestID = $verificationRequestID;
 
         null !== $businessAddr2 && $obj->businessAddr2 = $businessAddr2;
-        null !== $verificationStatus && $obj->verificationStatus = $verificationStatus instanceof TfVerificationStatus ? $verificationStatus->value : $verificationStatus;
+        null !== $verificationStatus && $obj['verificationStatus'] = $verificationStatus;
         null !== $webhookURL && $obj->webhookURL = $webhookURL;
 
         return $obj;
@@ -381,7 +381,7 @@ final class VerificationRequestEgress implements BaseModel
     public function withMessageVolume(Volume|string $messageVolume): self
     {
         $obj = clone $this;
-        $obj->messageVolume = $messageVolume instanceof Volume ? $messageVolume->value : $messageVolume;
+        $obj['messageVolume'] = $messageVolume;
 
         return $obj;
     }
@@ -434,7 +434,7 @@ final class VerificationRequestEgress implements BaseModel
     public function withUseCase(UseCaseCategories|string $useCase): self
     {
         $obj = clone $this;
-        $obj->useCase = $useCase instanceof UseCaseCategories ? $useCase->value : $useCase;
+        $obj['useCase'] = $useCase;
 
         return $obj;
     }
@@ -473,7 +473,7 @@ final class VerificationRequestEgress implements BaseModel
         TfVerificationStatus|string $verificationStatus
     ): self {
         $obj = clone $this;
-        $obj->verificationStatus = $verificationStatus instanceof TfVerificationStatus ? $verificationStatus->value : $verificationStatus;
+        $obj['verificationStatus'] = $verificationStatus;
 
         return $obj;
     }

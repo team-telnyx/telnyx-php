@@ -73,9 +73,9 @@ final class To implements BaseModel
         $obj = new self;
 
         null !== $carrier && $obj->carrier = $carrier;
-        null !== $lineType && $obj->lineType = $lineType instanceof LineType ? $lineType->value : $lineType;
+        null !== $lineType && $obj['lineType'] = $lineType;
         null !== $phoneNumber && $obj->phoneNumber = $phoneNumber;
-        null !== $status && $obj->status = $status instanceof Status ? $status->value : $status;
+        null !== $status && $obj['status'] = $status;
 
         return $obj;
     }
@@ -99,7 +99,7 @@ final class To implements BaseModel
     public function withLineType(LineType|string $lineType): self
     {
         $obj = clone $this;
-        $obj->lineType = $lineType instanceof LineType ? $lineType->value : $lineType;
+        $obj['lineType'] = $lineType;
 
         return $obj;
     }
@@ -123,7 +123,7 @@ final class To implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

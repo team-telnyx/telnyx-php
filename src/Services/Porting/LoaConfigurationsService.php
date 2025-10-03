@@ -6,7 +6,6 @@ namespace Telnyx\Services\Porting;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationCreateParams;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationCreateParams\Address;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationCreateParams\Contact;
@@ -42,8 +41,6 @@ final class LoaConfigurationsService implements LoaConfigurationsContract
      * @param Logo $logo The logo of the LOA configuration
      * @param string $name The name of the LOA configuration
      *
-     * @return LoaConfigurationNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -69,8 +66,6 @@ final class LoaConfigurationsService implements LoaConfigurationsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return LoaConfigurationNewResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -98,29 +93,10 @@ final class LoaConfigurationsService implements LoaConfigurationsContract
      *
      * Retrieve a specific LOA configuration.
      *
-     * @return LoaConfigurationGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): LoaConfigurationGetResponse {
-        $params = [];
-
-        return $this->retrieveRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return LoaConfigurationGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): LoaConfigurationGetResponse {
         // @phpstan-ignore-next-line;
@@ -142,8 +118,6 @@ final class LoaConfigurationsService implements LoaConfigurationsContract
      * @param Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Contact $contact the contact information of the company
      * @param Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Logo $logo The logo of the LOA configuration
      * @param string $name The name of the LOA configuration
-     *
-     * @return LoaConfigurationUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -171,8 +145,6 @@ final class LoaConfigurationsService implements LoaConfigurationsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return LoaConfigurationUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -203,8 +175,6 @@ final class LoaConfigurationsService implements LoaConfigurationsContract
      *
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
-     * @return LoaConfigurationListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -220,8 +190,6 @@ final class LoaConfigurationsService implements LoaConfigurationsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return LoaConfigurationListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -253,21 +221,6 @@ final class LoaConfigurationsService implements LoaConfigurationsContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): mixed {
-        $params = [];
-
-        return $this->deleteRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): mixed {
         // @phpstan-ignore-next-line;
@@ -347,21 +300,6 @@ final class LoaConfigurationsService implements LoaConfigurationsContract
      */
     public function preview1(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): string {
-        $params = [];
-
-        return $this->preview1Raw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @throws APIException
-     */
-    public function preview1Raw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): string {
         // @phpstan-ignore-next-line;

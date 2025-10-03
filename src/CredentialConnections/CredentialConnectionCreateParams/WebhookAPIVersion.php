@@ -9,9 +9,9 @@ namespace Telnyx\CredentialConnections\CredentialConnectionCreateParams;
  */
 enum WebhookAPIVersion: string
 {
-    case WEBHOOK_API_VERSION_1 = '1';
+    case _1 = '1';
 
-    case WEBHOOK_API_VERSION_2 = '2';
+    case _2 = '2';
 
     case TEXML = 'texml';
 }

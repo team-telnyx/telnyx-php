@@ -51,7 +51,7 @@ final class SubNumberOrderRegulatoryRequirement implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $fieldType && $obj->fieldType = $fieldType instanceof FieldType ? $fieldType->value : $fieldType;
+        null !== $fieldType && $obj['fieldType'] = $fieldType;
         null !== $recordType && $obj->recordType = $recordType;
         null !== $requirementID && $obj->requirementID = $requirementID;
 
@@ -64,7 +64,7 @@ final class SubNumberOrderRegulatoryRequirement implements BaseModel
     public function withFieldType(FieldType|string $fieldType): self
     {
         $obj = clone $this;
-        $obj->fieldType = $fieldType instanceof FieldType ? $fieldType->value : $fieldType;
+        $obj['fieldType'] = $fieldType;
 
         return $obj;
     }

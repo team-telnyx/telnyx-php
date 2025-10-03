@@ -173,9 +173,9 @@ final class Recording implements BaseModel
         null !== $errorCode && $obj->errorCode = $errorCode;
         null !== $mediaURL && $obj->mediaURL = $mediaURL;
         null !== $sid && $obj->sid = $sid;
-        null !== $source && $obj->source = $source instanceof Source ? $source->value : $source;
+        null !== $source && $obj['source'] = $source;
         null !== $startTime && $obj->startTime = $startTime;
-        null !== $status && $obj->status = $status instanceof Status ? $status->value : $status;
+        null !== $status && $obj['status'] = $status;
         null !== $subresourceUris && $obj->subresourceUris = $subresourceUris;
         null !== $uri && $obj->uri = $uri;
 
@@ -300,7 +300,7 @@ final class Recording implements BaseModel
     public function withSource(Source|string $source): self
     {
         $obj = clone $this;
-        $obj->source = $source instanceof Source ? $source->value : $source;
+        $obj['source'] = $source;
 
         return $obj;
     }
@@ -324,7 +324,7 @@ final class Recording implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

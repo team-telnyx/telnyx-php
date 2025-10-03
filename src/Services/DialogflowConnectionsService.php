@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\DialogflowConnections\DialogflowConnectionCreateParams;
 use Telnyx\DialogflowConnections\DialogflowConnectionCreateParams\DialogflowAPI;
 use Telnyx\DialogflowConnections\DialogflowConnectionGetResponse;
@@ -37,8 +36,6 @@ final class DialogflowConnectionsService implements DialogflowConnectionsContrac
      * @param string $environment which Dialogflow environment will be used
      * @param string $location The region of your agent is. (If you use Dialogflow CX, this param is required)
      *
-     * @return DialogflowConnectionNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -65,8 +62,6 @@ final class DialogflowConnectionsService implements DialogflowConnectionsContrac
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return DialogflowConnectionNewResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -95,29 +90,10 @@ final class DialogflowConnectionsService implements DialogflowConnectionsContrac
      *
      * Return details of the Dialogflow connection associated with the given CallControl connection.
      *
-     * @return DialogflowConnectionGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $connectionID,
-        ?RequestOptions $requestOptions = null
-    ): DialogflowConnectionGetResponse {
-        $params = [];
-
-        return $this->retrieveRaw($connectionID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return DialogflowConnectionGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $connectionID,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): DialogflowConnectionGetResponse {
         // @phpstan-ignore-next-line;
@@ -140,8 +116,6 @@ final class DialogflowConnectionsService implements DialogflowConnectionsContrac
      * @param Telnyx\DialogflowConnections\DialogflowConnectionUpdateParams\DialogflowAPI|value-of<Telnyx\DialogflowConnections\DialogflowConnectionUpdateParams\DialogflowAPI> $dialogflowAPI determine which Dialogflow will be used
      * @param string $environment which Dialogflow environment will be used
      * @param string $location The region of your agent is. (If you use Dialogflow CX, this param is required)
-     *
-     * @return DialogflowConnectionUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -169,8 +143,6 @@ final class DialogflowConnectionsService implements DialogflowConnectionsContrac
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return DialogflowConnectionUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -203,21 +175,6 @@ final class DialogflowConnectionsService implements DialogflowConnectionsContrac
      */
     public function delete(
         string $connectionID,
-        ?RequestOptions $requestOptions = null
-    ): mixed {
-        $params = [];
-
-        return $this->deleteRaw($connectionID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $connectionID,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): mixed {
         // @phpstan-ignore-next-line;

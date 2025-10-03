@@ -91,7 +91,7 @@ final class VerifiedNumberCreateParams implements BaseModel
         $obj = new self;
 
         $obj->phoneNumber = $phoneNumber;
-        $obj->verificationMethod = $verificationMethod instanceof VerificationMethod ? $verificationMethod->value : $verificationMethod;
+        $obj['verificationMethod'] = $verificationMethod;
 
         null !== $extension && $obj->extension = $extension;
 
@@ -115,7 +115,7 @@ final class VerifiedNumberCreateParams implements BaseModel
         VerificationMethod|string $verificationMethod
     ): self {
         $obj = clone $this;
-        $obj->verificationMethod = $verificationMethod instanceof VerificationMethod ? $verificationMethod->value : $verificationMethod;
+        $obj['verificationMethod'] = $verificationMethod;
 
         return $obj;
     }

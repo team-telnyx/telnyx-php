@@ -6,20 +6,20 @@ namespace Telnyx\Documents;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Documents\DocumentGenerateDownloadLinkResponse\Data;
 
 /**
  * @phpstan-type document_generate_download_link_response = array{data: Data}
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class DocumentGenerateDownloadLinkResponse implements BaseModel
+final class DocumentGenerateDownloadLinkResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<document_generate_download_link_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     #[Api]
     public Data $data;

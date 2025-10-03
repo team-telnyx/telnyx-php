@@ -6,7 +6,6 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Campaign\CampaignSharingStatus;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PartnerCampaigns\PartnerCampaignListParams\Sort;
 use Telnyx\PartnerCampaigns\PartnerCampaignListResponse;
 use Telnyx\PartnerCampaigns\PartnerCampaignListSharedByMeResponse;
@@ -20,8 +19,6 @@ interface PartnerCampaignsContract
     /**
      * @api
      *
-     * @return TelnyxDownstreamCampaign<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
@@ -32,23 +29,8 @@ interface PartnerCampaignsContract
     /**
      * @api
      *
-     * @return TelnyxDownstreamCampaign<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $campaignID,
-        mixed $params,
-        ?RequestOptions $requestOptions = null,
-    ): TelnyxDownstreamCampaign;
-
-    /**
-     * @api
-     *
      * @param string $webhookFailoverURL webhook failover to which campaign status updates are sent
      * @param string $webhookURL webhook to which campaign status updates are sent
-     *
-     * @return TelnyxDownstreamCampaign<HasRawResponse>
      *
      * @throws APIException
      */
@@ -63,8 +45,6 @@ interface PartnerCampaignsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return TelnyxDownstreamCampaign<HasRawResponse>
      *
      * @throws APIException
      */
@@ -81,8 +61,6 @@ interface PartnerCampaignsContract
      * @param int $recordsPerPage The amount of records per page, limited to between 1 and 500 inclusive. The default value is `10`.
      * @param Sort|value-of<Sort> $sort Specifies the sort order for results. If not given, results are sorted by createdAt in descending order.
      *
-     * @return PartnerCampaignListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -97,8 +75,6 @@ interface PartnerCampaignsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return PartnerCampaignListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function listRaw(
@@ -112,8 +88,6 @@ interface PartnerCampaignsContract
      * @param int $page The 1-indexed page number to get. The default value is `1`.
      * @param int $recordsPerPage The amount of records per page, limited to between 1 and 500 inclusive. The default value is `10`.
      *
-     * @return PartnerCampaignListSharedByMeResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function listSharedByMe(
@@ -126,8 +100,6 @@ interface PartnerCampaignsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return PartnerCampaignListSharedByMeResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -146,18 +118,5 @@ interface PartnerCampaignsContract
     public function retrieveSharingStatus(
         string $campaignID,
         ?RequestOptions $requestOptions = null
-    ): array;
-
-    /**
-     * @api
-     *
-     * @return array<string, CampaignSharingStatus>
-     *
-     * @throws APIException
-     */
-    public function retrieveSharingStatusRaw(
-        string $campaignID,
-        mixed $params,
-        ?RequestOptions $requestOptions = null,
     ): array;
 }

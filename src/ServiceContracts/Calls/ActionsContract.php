@@ -53,7 +53,6 @@ use Telnyx\Calls\Actions\ActionStartRecordingResponse;
 use Telnyx\Calls\Actions\ActionStartSiprecParams\SiprecTrack;
 use Telnyx\Calls\Actions\ActionStartSiprecParams\SipTransport;
 use Telnyx\Calls\Actions\ActionStartSiprecResponse;
-use Telnyx\Calls\Actions\ActionStartStreamingParams\StreamBidirectionalSamplingRate;
 use Telnyx\Calls\Actions\ActionStartStreamingResponse;
 use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngine;
 use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\Deepgram;
@@ -94,7 +93,6 @@ use Telnyx\Calls\StreamBidirectionalMode;
 use Telnyx\Calls\StreamBidirectionalTargetLegs;
 use Telnyx\Calls\StreamCodec;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 
 use const Telnyx\Core\OMIT as omit;
@@ -130,8 +128,6 @@ interface ActionsContract
      * @param TranscriptionStartRequest $transcriptionConfig
      * @param string $webhookURL use this field to override the URL for which Telnyx will send subsequent webhooks to for this call
      * @param WebhookURLMethod|value-of<WebhookURLMethod> $webhookURLMethod HTTP request type used for `webhook_url`
-     *
-     * @return ActionAnswerResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -171,8 +167,6 @@ interface ActionsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return ActionAnswerResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function answerRaw(
@@ -202,8 +196,6 @@ interface ActionsContract
      * @param Ringtone|value-of<Ringtone> $ringtone Specifies which country ringtone to play when `play_ringtone` is set to `true`. If not set, the US ringtone will be played.
      * @param string $videoRoomContext The additional parameter that will be passed to the video conference. It is a text field and the user can decide how to use it. For example, you can set the participant name or pass JSON text. It can be used only with video_room_id parameter.
      * @param string $videoRoomID the ID of the video room you want to bridge with, can't be used together with call_control_id parameter or queue parameter
-     *
-     * @return ActionBridgeResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -235,8 +227,6 @@ interface ActionsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return ActionBridgeResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function bridgeRaw(
@@ -254,8 +244,6 @@ interface ActionsContract
      * @param int $maxSize The maximum number of calls allowed in the queue at a given time. Can't be modified for an existing queue.
      * @param int $maxWaitTimeSecs the number of seconds after which the call will be removed from the queue
      *
-     * @return ActionEnqueueResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function enqueue(
@@ -272,8 +260,6 @@ interface ActionsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ActionEnqueueResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -297,8 +283,6 @@ interface ActionsContract
      * @param int $timeoutMillis the number of milliseconds to wait to complete the request
      * @param string $validDigits a list of all digits accepted as valid
      *
-     * @return ActionGatherResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function gather(
@@ -320,8 +304,6 @@ interface ActionsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ActionGatherResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -355,8 +337,6 @@ interface ActionsContract
      *  - **Telnyx:** Use `Telnyx.<model_id>.<voice_id>`
      * @param mixed|ElevenLabsVoiceSettings|TelnyxVoiceSettings $voiceSettings The settings associated with the voice selected
      *
-     * @return ActionGatherUsingAIResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function gatherUsingAI(
@@ -383,8 +363,6 @@ interface ActionsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return ActionGatherUsingAIResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function gatherUsingAIRaw(
@@ -410,8 +388,6 @@ interface ActionsContract
      * @param int $timeoutMillis the number of milliseconds to wait for a DTMF response after file playback ends before a replaying the sound file
      * @param string $validDigits a list of all digits accepted as valid
      *
-     * @return ActionGatherUsingAudioResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function gatherUsingAudio(
@@ -436,8 +412,6 @@ interface ActionsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ActionGatherUsingAudioResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -477,8 +451,6 @@ interface ActionsContract
      * @param string $validDigits a list of all digits accepted as valid
      * @param mixed|ElevenLabsVoiceSettings|TelnyxVoiceSettings $voiceSettings The settings associated with the voice selected
      *
-     * @return ActionGatherUsingSpeakResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function gatherUsingSpeak(
@@ -507,8 +479,6 @@ interface ActionsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return ActionGatherUsingSpeakResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function gatherUsingSpeakRaw(
@@ -522,8 +492,6 @@ interface ActionsContract
      *
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
-     *
-     * @return ActionHangupResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -539,8 +507,6 @@ interface ActionsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return ActionHangupResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function hangupRaw(
@@ -555,8 +521,6 @@ interface ActionsContract
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      *
-     * @return ActionLeaveQueueResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function leaveQueue(
@@ -570,8 +534,6 @@ interface ActionsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ActionLeaveQueueResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -588,8 +550,6 @@ interface ActionsContract
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      * @param string $recordingID uniquely identifies the resource
      *
-     * @return ActionPauseRecordingResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function pauseRecording(
@@ -604,8 +564,6 @@ interface ActionsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ActionPauseRecordingResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -626,8 +584,6 @@ interface ActionsContract
      * @param string $sipAuthUsername SIP Authentication username used for SIP challenges
      * @param list<SipHeader> $sipHeaders SIP headers to be added to the request. Currently only User-to-User header is supported.
      *
-     * @return ActionReferResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function refer(
@@ -647,8 +603,6 @@ interface ActionsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return ActionReferResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function referRaw(
@@ -663,8 +617,6 @@ interface ActionsContract
      * @param Cause|value-of<Cause> $cause cause for call rejection
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
-     *
-     * @return ActionRejectResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -681,8 +633,6 @@ interface ActionsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return ActionRejectResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function rejectRaw(
@@ -698,8 +648,6 @@ interface ActionsContract
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      * @param string $recordingID uniquely identifies the resource
      *
-     * @return ActionResumeRecordingResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function resumeRecording(
@@ -714,8 +662,6 @@ interface ActionsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ActionResumeRecordingResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -733,8 +679,6 @@ interface ActionsContract
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      * @param int $durationMillis Specifies for how many milliseconds each digit will be played in the audio stream. Ranges from 100 to 500ms
      *
-     * @return ActionSendDtmfResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function sendDtmf(
@@ -750,8 +694,6 @@ interface ActionsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ActionSendDtmfResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -769,8 +711,6 @@ interface ActionsContract
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      *
-     * @return ActionSendSipInfoResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function sendSipInfo(
@@ -786,8 +726,6 @@ interface ActionsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ActionSendSipInfoResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -820,8 +758,6 @@ interface ActionsContract
      * @param string $stop When specified, it stops the current audio being played. Specify `current` to stop the current audio being played, and to play the next file in the queue. Specify `all` to stop the current audio file being played and to also clear all audio files from the queue.
      * @param mixed|ElevenLabsVoiceSettings|TelnyxVoiceSettings $voiceSettings The settings associated with the voice selected
      *
-     * @return ActionSpeakResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function speak(
@@ -842,8 +778,6 @@ interface ActionsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ActionSpeakResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -871,8 +805,6 @@ interface ActionsContract
      *  - **Telnyx:** Use `Telnyx.<model_id>.<voice_id>`
      * @param mixed|ElevenLabsVoiceSettings|TelnyxVoiceSettings $voiceSettings The settings associated with the voice selected
      *
-     * @return ActionStartAIAssistantResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function startAIAssistant(
@@ -893,8 +825,6 @@ interface ActionsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return ActionStartAIAssistantResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function startAIAssistantRaw(
@@ -912,8 +842,6 @@ interface ActionsContract
      * @param StreamType|value-of<StreamType> $streamType Optionally specify a media type to stream. If `decrypted` selected, Telnyx will decrypt incoming SIP media before forking to the target. `rx` and `tx` are required fields if `decrypted` selected.
      * @param string $tx the network target, <udp:ip_address:port>, where the call's outgoing RTP media packets should be forwarded
      *
-     * @return ActionStartForkingResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function startForking(
@@ -930,8 +858,6 @@ interface ActionsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ActionStartForkingResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -951,8 +877,6 @@ interface ActionsContract
      * A - rnnoise engine
      * B - deepfilter engine.
      *
-     * @return ActionStartNoiseSuppressionResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function startNoiseSuppression(
@@ -968,8 +892,6 @@ interface ActionsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ActionStartNoiseSuppressionResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -994,8 +916,6 @@ interface ActionsContract
      * @param string $stop When specified, it stops the current audio being played. Specify `current` to stop the current audio being played, and to play the next file in the queue. Specify `all` to stop the current audio file being played and to also clear all audio files from the queue.
      * @param string $targetLegs Specifies the leg or legs on which audio will be played. If supplied, the value must be either `self`, `opposite` or `both`.
      *
-     * @return ActionStartPlaybackResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function startPlayback(
@@ -1018,8 +938,6 @@ interface ActionsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ActionStartPlaybackResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -1050,8 +968,6 @@ interface ActionsContract
      * @param bool $transcriptionSpeakerDiarization Enables speaker diarization. Applies to `google` engine only.
      * @param Trim|value-of<Trim> $trim when set to `trim-silence`, silence will be removed from the beginning and end of the recording
      *
-     * @return ActionStartRecordingResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function startRecording(
@@ -1081,8 +997,6 @@ interface ActionsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return ActionStartRecordingResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function startRecordingRaw(
@@ -1101,8 +1015,6 @@ interface ActionsContract
      * @param int $sessionTimeoutSecs Sets `Session-Expires` header to the INVITE. A reinvite is sent every half the value set. Usefull for session keep alive. Minimum value is 90, set to 0 to disable.
      * @param SipTransport|value-of<SipTransport> $sipTransport specifies SIP transport protocol
      * @param SiprecTrack|value-of<SiprecTrack> $siprecTrack specifies which track should be sent on siprec session
-     *
-     * @return ActionStartSiprecResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -1123,8 +1035,6 @@ interface ActionsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return ActionStartSiprecResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function startSiprecRaw(
@@ -1142,13 +1052,11 @@ interface ActionsContract
      * @param bool $enableDialogflow Enables Dialogflow for the current call. The default value is false.
      * @param StreamBidirectionalCodec|value-of<StreamBidirectionalCodec> $streamBidirectionalCodec Indicates codec for bidirectional streaming RTP payloads. Used only with stream_bidirectional_mode=rtp. Case sensitive.
      * @param StreamBidirectionalMode|value-of<StreamBidirectionalMode> $streamBidirectionalMode configures method of bidirectional streaming (mp3, rtp)
-     * @param StreamBidirectionalSamplingRate|value-of<StreamBidirectionalSamplingRate> $streamBidirectionalSamplingRate audio sampling rate
+     * @param 8000|16000|22050|24000|48000 $streamBidirectionalSamplingRate audio sampling rate
      * @param StreamBidirectionalTargetLegs|value-of<StreamBidirectionalTargetLegs> $streamBidirectionalTargetLegs specifies which call legs should receive the bidirectional stream audio
      * @param StreamCodec|value-of<StreamCodec> $streamCodec Specifies the codec to be used for the streamed audio. When set to 'default' or when transcoding is not possible, the codec from the call will be used.
      * @param Telnyx\Calls\Actions\ActionStartStreamingParams\StreamTrack|value-of<Telnyx\Calls\Actions\ActionStartStreamingParams\StreamTrack> $streamTrack specifies which track should be streamed
      * @param string $streamURL the destination WebSocket address where the stream is going to be delivered
-     *
-     * @return ActionStartStreamingResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -1173,8 +1081,6 @@ interface ActionsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return ActionStartStreamingResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function startStreamingRaw(
@@ -1191,8 +1097,6 @@ interface ActionsContract
      * @param TranscriptionEngine|value-of<TranscriptionEngine> $transcriptionEngine Engine to use for speech recognition. Legacy values `A` - `Google`, `B` - `Telnyx` are supported for backward compatibility.
      * @param Google|Telnyx|Deepgram|TranscriptionEngineAConfig|TranscriptionEngineBConfig $transcriptionEngineConfig
      * @param string $transcriptionTracks Indicates which leg of the call will be transcribed. Use `inbound` for the leg that requested the transcription, `outbound` for the other leg, and `both` for both legs of the call. Will default to `inbound`.
-     *
-     * @return ActionStartTranscriptionResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -1211,8 +1115,6 @@ interface ActionsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return ActionStartTranscriptionResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function startTranscriptionRaw(
@@ -1227,8 +1129,6 @@ interface ActionsContract
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      *
-     * @return ActionStopAIAssistantResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function stopAIAssistant(
@@ -1242,8 +1142,6 @@ interface ActionsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ActionStopAIAssistantResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -1260,8 +1158,6 @@ interface ActionsContract
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      * @param Telnyx\Calls\Actions\ActionStopForkingParams\StreamType|value-of<Telnyx\Calls\Actions\ActionStopForkingParams\StreamType> $streamType Optionally specify a `stream_type`. This should match the `stream_type` that was used in `fork_start` command to properly stop the fork.
      *
-     * @return ActionStopForkingResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function stopForking(
@@ -1277,8 +1173,6 @@ interface ActionsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return ActionStopForkingResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function stopForkingRaw(
@@ -1292,8 +1186,6 @@ interface ActionsContract
      *
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
-     *
-     * @return ActionStopGatherResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -1309,8 +1201,6 @@ interface ActionsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return ActionStopGatherResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function stopGatherRaw(
@@ -1325,8 +1215,6 @@ interface ActionsContract
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      *
-     * @return ActionStopNoiseSuppressionResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function stopNoiseSuppression(
@@ -1340,8 +1228,6 @@ interface ActionsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ActionStopNoiseSuppressionResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -1359,8 +1245,6 @@ interface ActionsContract
      * @param bool $overlay when enabled, it stops the audio being played in the overlay queue
      * @param string $stop Use `current` to stop the current audio being played. Use `all` to stop the current audio file being played and clear all audio files from the queue.
      *
-     * @return ActionStopPlaybackResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function stopPlayback(
@@ -1377,8 +1261,6 @@ interface ActionsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return ActionStopPlaybackResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function stopPlaybackRaw(
@@ -1393,8 +1275,6 @@ interface ActionsContract
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      * @param string $recordingID uniquely identifies the resource
-     *
-     * @return ActionStopRecordingResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -1411,8 +1291,6 @@ interface ActionsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return ActionStopRecordingResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function stopRecordingRaw(
@@ -1427,8 +1305,6 @@ interface ActionsContract
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      *
-     * @return ActionStopSiprecResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function stopSiprec(
@@ -1442,8 +1318,6 @@ interface ActionsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ActionStopSiprecResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -1460,8 +1334,6 @@ interface ActionsContract
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      * @param string $streamID Identifies the stream. If the `stream_id` is not provided the command stops all streams associated with a given `call_control_id`.
      *
-     * @return ActionStopStreamingResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function stopStreaming(
@@ -1477,8 +1349,6 @@ interface ActionsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return ActionStopStreamingResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function stopStreamingRaw(
@@ -1492,8 +1362,6 @@ interface ActionsContract
      *
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
-     *
-     * @return ActionStopTranscriptionResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -1509,8 +1377,6 @@ interface ActionsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return ActionStopTranscriptionResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function stopTranscriptionRaw(
@@ -1524,8 +1390,6 @@ interface ActionsContract
      *
      * @param Role|value-of<Role> $role The supervisor role to switch to. 'barge' allows speaking to both parties, 'whisper' allows speaking to caller only, 'monitor' allows listening only.
      *
-     * @return ActionSwitchSupervisorRoleResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function switchSupervisorRole(
@@ -1538,8 +1402,6 @@ interface ActionsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ActionSwitchSupervisorRoleResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -1585,8 +1447,6 @@ interface ActionsContract
      * @param string $webhookURL use this field to override the URL for which Telnyx will send subsequent webhooks to for this call
      * @param Telnyx\Calls\Actions\ActionTransferParams\WebhookURLMethod|value-of<Telnyx\Calls\Actions\ActionTransferParams\WebhookURLMethod> $webhookURLMethod HTTP request type used for `webhook_url`
      *
-     * @return ActionTransferResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function transfer(
@@ -1631,8 +1491,6 @@ interface ActionsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return ActionTransferResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function transferRaw(
@@ -1646,8 +1504,6 @@ interface ActionsContract
      *
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      *
-     * @return ActionUpdateClientStateResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function updateClientState(
@@ -1660,8 +1516,6 @@ interface ActionsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ActionUpdateClientStateResponse<HasRawResponse>
      *
      * @throws APIException
      */

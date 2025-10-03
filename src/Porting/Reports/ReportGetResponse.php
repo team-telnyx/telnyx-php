@@ -6,19 +6,19 @@ namespace Telnyx\Porting\Reports;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type report_get_response = array{data?: PortingReport}
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class ReportGetResponse implements BaseModel
+final class ReportGetResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<report_get_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     #[Api(optional: true)]
     public ?PortingReport $data;

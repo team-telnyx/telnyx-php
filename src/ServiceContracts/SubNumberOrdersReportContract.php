@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\SubNumberOrdersReport\SubNumberOrdersReportCreateParams\Status;
 use Telnyx\SubNumberOrdersReport\SubNumberOrdersReportGetResponse;
@@ -25,8 +24,6 @@ interface SubNumberOrdersReportContract
      * @param string $orderRequestID Filter by specific order request ID
      * @param Status|value-of<Status> $status Filter by order status
      *
-     * @return SubNumberOrdersReportNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -44,8 +41,6 @@ interface SubNumberOrdersReportContract
      *
      * @param array<string, mixed> $params
      *
-     * @return SubNumberOrdersReportNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function createRaw(
@@ -55,8 +50,6 @@ interface SubNumberOrdersReportContract
 
     /**
      * @api
-     *
-     * @return SubNumberOrdersReportGetResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -68,34 +61,10 @@ interface SubNumberOrdersReportContract
     /**
      * @api
      *
-     * @return SubNumberOrdersReportGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $reportID,
-        mixed $params,
-        ?RequestOptions $requestOptions = null
-    ): SubNumberOrdersReportGetResponse;
-
-    /**
-     * @api
-     *
      * @throws APIException
      */
     public function download(
         string $reportID,
-        ?RequestOptions $requestOptions = null
-    ): string;
-
-    /**
-     * @api
-     *
-     * @throws APIException
-     */
-    public function downloadRaw(
-        string $reportID,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): string;
 }

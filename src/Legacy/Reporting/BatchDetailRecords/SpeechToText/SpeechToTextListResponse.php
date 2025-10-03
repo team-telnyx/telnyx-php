@@ -6,21 +6,21 @@ namespace Telnyx\Legacy\Reporting\BatchDetailRecords\SpeechToText;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type speech_to_text_list_response = array{
  *   data?: list<SttDetailReportResponse>
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class SpeechToTextListResponse implements BaseModel
+final class SpeechToTextListResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<speech_to_text_list_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /** @var list<SttDetailReportResponse>|null $data */
     #[Api(list: SttDetailReportResponse::class, optional: true)]

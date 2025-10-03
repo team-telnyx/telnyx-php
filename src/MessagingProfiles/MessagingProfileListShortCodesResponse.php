@@ -7,22 +7,22 @@ namespace Telnyx\MessagingProfiles;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\ShortCode;
 
 /**
  * @phpstan-type messaging_profile_list_short_codes_response = array{
  *   data?: list<ShortCode>, meta?: PaginationMeta
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class MessagingProfileListShortCodesResponse implements BaseModel
+final class MessagingProfileListShortCodesResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<messaging_profile_list_short_codes_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /** @var list<ShortCode>|null $data */
     #[Api(list: ShortCode::class, optional: true)]

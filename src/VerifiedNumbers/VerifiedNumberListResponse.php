@@ -6,7 +6,9 @@ namespace Telnyx\VerifiedNumbers;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\VerifiedNumbers\VerifiedNumberListResponse\Meta;
 
 /**
@@ -15,15 +17,13 @@ use Telnyx\VerifiedNumbers\VerifiedNumberListResponse\Meta;
  * @phpstan-type verified_number_list_response = array{
  *   data: list<VerifiedNumber>, meta: Meta
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class VerifiedNumberListResponse implements BaseModel
+final class VerifiedNumberListResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<verified_number_list_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /** @var list<VerifiedNumber> $data */
     #[Api(list: VerifiedNumber::class)]

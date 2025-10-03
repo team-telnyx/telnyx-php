@@ -45,7 +45,7 @@ final class RegionInformation implements BaseModel
         $obj = new self;
 
         null !== $regionName && $obj->regionName = $regionName;
-        null !== $regionType && $obj->regionType = $regionType instanceof RegionType ? $regionType->value : $regionType;
+        null !== $regionType && $obj['regionType'] = $regionType;
 
         return $obj;
     }
@@ -64,7 +64,7 @@ final class RegionInformation implements BaseModel
     public function withRegionType(RegionType|string $regionType): self
     {
         $obj = clone $this;
-        $obj->regionType = $regionType instanceof RegionType ? $regionType->value : $regionType;
+        $obj['regionType'] = $regionType;
 
         return $obj;
     }

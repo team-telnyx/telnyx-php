@@ -6,19 +6,19 @@ namespace Telnyx\Legacy\Reporting\UsageReports\Voice;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type voice_get_response = array{data?: CdrUsageReportResponseLegacy}
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class VoiceGetResponse implements BaseModel
+final class VoiceGetResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<voice_get_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /**
      * Legacy V2 CDR usage report response.

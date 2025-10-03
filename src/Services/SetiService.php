@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SetiContract;
 use Telnyx\Seti\SetiGetBlackBoxTestResultsResponse;
@@ -29,8 +28,6 @@ final class SetiService implements SetiContract
      *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[product]
      *
-     * @return SetiGetBlackBoxTestResultsResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieveBlackBoxTestResults(
@@ -46,8 +43,6 @@ final class SetiService implements SetiContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return SetiGetBlackBoxTestResultsResponse<HasRawResponse>
      *
      * @throws APIException
      */

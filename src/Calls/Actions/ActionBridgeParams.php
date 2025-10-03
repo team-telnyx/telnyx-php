@@ -244,19 +244,19 @@ final class ActionBridgeParams implements BaseModel
 
         null !== $clientState && $obj->clientState = $clientState;
         null !== $commandID && $obj->commandID = $commandID;
-        null !== $muteDtmf && $obj->muteDtmf = $muteDtmf instanceof MuteDtmf ? $muteDtmf->value : $muteDtmf;
+        null !== $muteDtmf && $obj['muteDtmf'] = $muteDtmf;
         null !== $parkAfterUnbridge && $obj->parkAfterUnbridge = $parkAfterUnbridge;
         null !== $playRingtone && $obj->playRingtone = $playRingtone;
         null !== $queue && $obj->queue = $queue;
-        null !== $record && $obj->record = $record instanceof Record ? $record->value : $record;
-        null !== $recordChannels && $obj->recordChannels = $recordChannels instanceof RecordChannels ? $recordChannels->value : $recordChannels;
+        null !== $record && $obj['record'] = $record;
+        null !== $recordChannels && $obj['recordChannels'] = $recordChannels;
         null !== $recordCustomFileName && $obj->recordCustomFileName = $recordCustomFileName;
-        null !== $recordFormat && $obj->recordFormat = $recordFormat instanceof RecordFormat ? $recordFormat->value : $recordFormat;
+        null !== $recordFormat && $obj['recordFormat'] = $recordFormat;
         null !== $recordMaxLength && $obj->recordMaxLength = $recordMaxLength;
         null !== $recordTimeoutSecs && $obj->recordTimeoutSecs = $recordTimeoutSecs;
-        null !== $recordTrack && $obj->recordTrack = $recordTrack instanceof RecordTrack ? $recordTrack->value : $recordTrack;
-        null !== $recordTrim && $obj->recordTrim = $recordTrim instanceof RecordTrim ? $recordTrim->value : $recordTrim;
-        null !== $ringtone && $obj->ringtone = $ringtone instanceof Ringtone ? $ringtone->value : $ringtone;
+        null !== $recordTrack && $obj['recordTrack'] = $recordTrack;
+        null !== $recordTrim && $obj['recordTrim'] = $recordTrim;
+        null !== $ringtone && $obj['ringtone'] = $ringtone;
         null !== $videoRoomContext && $obj->videoRoomContext = $videoRoomContext;
         null !== $videoRoomID && $obj->videoRoomID = $videoRoomID;
 
@@ -304,7 +304,7 @@ final class ActionBridgeParams implements BaseModel
     public function withMuteDtmf(MuteDtmf|string $muteDtmf): self
     {
         $obj = clone $this;
-        $obj->muteDtmf = $muteDtmf instanceof MuteDtmf ? $muteDtmf->value : $muteDtmf;
+        $obj['muteDtmf'] = $muteDtmf;
 
         return $obj;
     }
@@ -350,7 +350,7 @@ final class ActionBridgeParams implements BaseModel
     public function withRecord(Record|string $record): self
     {
         $obj = clone $this;
-        $obj->record = $record instanceof Record ? $record->value : $record;
+        $obj['record'] = $record;
 
         return $obj;
     }
@@ -364,7 +364,7 @@ final class ActionBridgeParams implements BaseModel
         RecordChannels|string $recordChannels
     ): self {
         $obj = clone $this;
-        $obj->recordChannels = $recordChannels instanceof RecordChannels ? $recordChannels->value : $recordChannels;
+        $obj['recordChannels'] = $recordChannels;
 
         return $obj;
     }
@@ -388,7 +388,7 @@ final class ActionBridgeParams implements BaseModel
     public function withRecordFormat(RecordFormat|string $recordFormat): self
     {
         $obj = clone $this;
-        $obj->recordFormat = $recordFormat instanceof RecordFormat ? $recordFormat->value : $recordFormat;
+        $obj['recordFormat'] = $recordFormat;
 
         return $obj;
     }
@@ -423,7 +423,7 @@ final class ActionBridgeParams implements BaseModel
     public function withRecordTrack(RecordTrack|string $recordTrack): self
     {
         $obj = clone $this;
-        $obj->recordTrack = $recordTrack instanceof RecordTrack ? $recordTrack->value : $recordTrack;
+        $obj['recordTrack'] = $recordTrack;
 
         return $obj;
     }
@@ -436,7 +436,7 @@ final class ActionBridgeParams implements BaseModel
     public function withRecordTrim(RecordTrim|string $recordTrim): self
     {
         $obj = clone $this;
-        $obj->recordTrim = $recordTrim instanceof RecordTrim ? $recordTrim->value : $recordTrim;
+        $obj['recordTrim'] = $recordTrim;
 
         return $obj;
     }
@@ -449,7 +449,7 @@ final class ActionBridgeParams implements BaseModel
     public function withRingtone(Ringtone|string $ringtone): self
     {
         $obj = clone $this;
-        $obj->ringtone = $ringtone instanceof Ringtone ? $ringtone->value : $ringtone;
+        $obj['ringtone'] = $ringtone;
 
         return $obj;
     }

@@ -40,7 +40,7 @@ final class ScheduledEventsTest extends TestCase
                 '2025-04-15T13:07:28.764Z'
             ),
             telnyxAgentTarget: 'telnyx_agent_target',
-            telnyxConversationChannel: ConversationChannelType::$PHONE_CALL,
+            telnyxConversationChannel: ConversationChannelType::PHONE_CALL,
             telnyxEndUserTarget: 'telnyx_end_user_target',
         );
 
@@ -60,7 +60,7 @@ final class ScheduledEventsTest extends TestCase
                 '2025-04-15T13:07:28.764Z'
             ),
             telnyxAgentTarget: 'telnyx_agent_target',
-            telnyxConversationChannel: ConversationChannelType::$PHONE_CALL,
+            telnyxConversationChannel: ConversationChannelType::PHONE_CALL,
             telnyxEndUserTarget: 'telnyx_end_user_target',
         );
 

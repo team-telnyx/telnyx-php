@@ -122,7 +122,7 @@ final class Data implements BaseModel
 
         null !== $id && $obj->id = $id;
         null !== $alternateResourceID && $obj->alternateResourceID = $alternateResourceID;
-        null !== $changeMadeBy && $obj->changeMadeBy = $changeMadeBy instanceof ChangeMadeBy ? $changeMadeBy->value : $changeMadeBy;
+        null !== $changeMadeBy && $obj['changeMadeBy'] = $changeMadeBy;
         null !== $changeType && $obj->changeType = $changeType;
         null !== $changes && $obj->changes = $changes;
         null !== $createdAt && $obj->createdAt = $createdAt;
@@ -164,7 +164,7 @@ final class Data implements BaseModel
     public function withChangeMadeBy(ChangeMadeBy|string $changeMadeBy): self
     {
         $obj = clone $this;
-        $obj->changeMadeBy = $changeMadeBy instanceof ChangeMadeBy ? $changeMadeBy->value : $changeMadeBy;
+        $obj['changeMadeBy'] = $changeMadeBy;
 
         return $obj;
     }

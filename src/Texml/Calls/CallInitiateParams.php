@@ -372,33 +372,33 @@ final class CallInitiateParams implements BaseModel
 
         null !== $asyncAmd && $obj->asyncAmd = $asyncAmd;
         null !== $asyncAmdStatusCallback && $obj->asyncAmdStatusCallback = $asyncAmdStatusCallback;
-        null !== $asyncAmdStatusCallbackMethod && $obj->asyncAmdStatusCallbackMethod = $asyncAmdStatusCallbackMethod instanceof AsyncAmdStatusCallbackMethod ? $asyncAmdStatusCallbackMethod->value : $asyncAmdStatusCallbackMethod;
+        null !== $asyncAmdStatusCallbackMethod && $obj['asyncAmdStatusCallbackMethod'] = $asyncAmdStatusCallbackMethod;
         null !== $callerID && $obj->callerID = $callerID;
         null !== $cancelPlaybackOnDetectMessageEnd && $obj->cancelPlaybackOnDetectMessageEnd = $cancelPlaybackOnDetectMessageEnd;
         null !== $cancelPlaybackOnMachineDetection && $obj->cancelPlaybackOnMachineDetection = $cancelPlaybackOnMachineDetection;
-        null !== $detectionMode && $obj->detectionMode = $detectionMode instanceof DetectionMode ? $detectionMode->value : $detectionMode;
+        null !== $detectionMode && $obj['detectionMode'] = $detectionMode;
         null !== $fallbackURL && $obj->fallbackURL = $fallbackURL;
-        null !== $machineDetection && $obj->machineDetection = $machineDetection instanceof MachineDetection ? $machineDetection->value : $machineDetection;
+        null !== $machineDetection && $obj['machineDetection'] = $machineDetection;
         null !== $machineDetectionSilenceTimeout && $obj->machineDetectionSilenceTimeout = $machineDetectionSilenceTimeout;
         null !== $machineDetectionSpeechEndThreshold && $obj->machineDetectionSpeechEndThreshold = $machineDetectionSpeechEndThreshold;
         null !== $machineDetectionSpeechThreshold && $obj->machineDetectionSpeechThreshold = $machineDetectionSpeechThreshold;
         null !== $machineDetectionTimeout && $obj->machineDetectionTimeout = $machineDetectionTimeout;
         null !== $preferredCodecs && $obj->preferredCodecs = $preferredCodecs;
         null !== $record && $obj->record = $record;
-        null !== $recordingChannels && $obj->recordingChannels = $recordingChannels instanceof RecordingChannels ? $recordingChannels->value : $recordingChannels;
+        null !== $recordingChannels && $obj['recordingChannels'] = $recordingChannels;
         null !== $recordingStatusCallback && $obj->recordingStatusCallback = $recordingStatusCallback;
         null !== $recordingStatusCallbackEvent && $obj->recordingStatusCallbackEvent = $recordingStatusCallbackEvent;
-        null !== $recordingStatusCallbackMethod && $obj->recordingStatusCallbackMethod = $recordingStatusCallbackMethod instanceof RecordingStatusCallbackMethod ? $recordingStatusCallbackMethod->value : $recordingStatusCallbackMethod;
+        null !== $recordingStatusCallbackMethod && $obj['recordingStatusCallbackMethod'] = $recordingStatusCallbackMethod;
         null !== $recordingTimeout && $obj->recordingTimeout = $recordingTimeout;
-        null !== $recordingTrack && $obj->recordingTrack = $recordingTrack instanceof RecordingTrack ? $recordingTrack->value : $recordingTrack;
+        null !== $recordingTrack && $obj['recordingTrack'] = $recordingTrack;
         null !== $sipAuthPassword && $obj->sipAuthPassword = $sipAuthPassword;
         null !== $sipAuthUsername && $obj->sipAuthUsername = $sipAuthUsername;
         null !== $statusCallback && $obj->statusCallback = $statusCallback;
-        null !== $statusCallbackEvent && $obj->statusCallbackEvent = $statusCallbackEvent instanceof StatusCallbackEvent ? $statusCallbackEvent->value : $statusCallbackEvent;
-        null !== $statusCallbackMethod && $obj->statusCallbackMethod = $statusCallbackMethod instanceof StatusCallbackMethod ? $statusCallbackMethod->value : $statusCallbackMethod;
-        null !== $trim && $obj->trim = $trim instanceof Trim ? $trim->value : $trim;
+        null !== $statusCallbackEvent && $obj['statusCallbackEvent'] = $statusCallbackEvent;
+        null !== $statusCallbackMethod && $obj['statusCallbackMethod'] = $statusCallbackMethod;
+        null !== $trim && $obj['trim'] = $trim;
         null !== $url && $obj->url = $url;
-        null !== $urlMethod && $obj->urlMethod = $urlMethod instanceof URLMethod ? $urlMethod->value : $urlMethod;
+        null !== $urlMethod && $obj['urlMethod'] = $urlMethod;
 
         return $obj;
     }
@@ -457,7 +457,7 @@ final class CallInitiateParams implements BaseModel
         AsyncAmdStatusCallbackMethod|string $asyncAmdStatusCallbackMethod
     ): self {
         $obj = clone $this;
-        $obj->asyncAmdStatusCallbackMethod = $asyncAmdStatusCallbackMethod instanceof AsyncAmdStatusCallbackMethod ? $asyncAmdStatusCallbackMethod->value : $asyncAmdStatusCallbackMethod;
+        $obj['asyncAmdStatusCallbackMethod'] = $asyncAmdStatusCallbackMethod;
 
         return $obj;
     }
@@ -505,7 +505,7 @@ final class CallInitiateParams implements BaseModel
     public function withDetectionMode(DetectionMode|string $detectionMode): self
     {
         $obj = clone $this;
-        $obj->detectionMode = $detectionMode instanceof DetectionMode ? $detectionMode->value : $detectionMode;
+        $obj['detectionMode'] = $detectionMode;
 
         return $obj;
     }
@@ -530,7 +530,7 @@ final class CallInitiateParams implements BaseModel
         MachineDetection|string $machineDetection
     ): self {
         $obj = clone $this;
-        $obj->machineDetection = $machineDetection instanceof MachineDetection ? $machineDetection->value : $machineDetection;
+        $obj['machineDetection'] = $machineDetection;
 
         return $obj;
     }
@@ -614,7 +614,7 @@ final class CallInitiateParams implements BaseModel
         RecordingChannels|string $recordingChannels
     ): self {
         $obj = clone $this;
-        $obj->recordingChannels = $recordingChannels instanceof RecordingChannels ? $recordingChannels->value : $recordingChannels;
+        $obj['recordingChannels'] = $recordingChannels;
 
         return $obj;
     }
@@ -652,7 +652,7 @@ final class CallInitiateParams implements BaseModel
         RecordingStatusCallbackMethod|string $recordingStatusCallbackMethod
     ): self {
         $obj = clone $this;
-        $obj->recordingStatusCallbackMethod = $recordingStatusCallbackMethod instanceof RecordingStatusCallbackMethod ? $recordingStatusCallbackMethod->value : $recordingStatusCallbackMethod;
+        $obj['recordingStatusCallbackMethod'] = $recordingStatusCallbackMethod;
 
         return $obj;
     }
@@ -677,7 +677,7 @@ final class CallInitiateParams implements BaseModel
         RecordingTrack|string $recordingTrack
     ): self {
         $obj = clone $this;
-        $obj->recordingTrack = $recordingTrack instanceof RecordingTrack ? $recordingTrack->value : $recordingTrack;
+        $obj['recordingTrack'] = $recordingTrack;
 
         return $obj;
     }
@@ -724,7 +724,7 @@ final class CallInitiateParams implements BaseModel
         StatusCallbackEvent|string $statusCallbackEvent
     ): self {
         $obj = clone $this;
-        $obj->statusCallbackEvent = $statusCallbackEvent instanceof StatusCallbackEvent ? $statusCallbackEvent->value : $statusCallbackEvent;
+        $obj['statusCallbackEvent'] = $statusCallbackEvent;
 
         return $obj;
     }
@@ -738,7 +738,7 @@ final class CallInitiateParams implements BaseModel
         StatusCallbackMethod|string $statusCallbackMethod
     ): self {
         $obj = clone $this;
-        $obj->statusCallbackMethod = $statusCallbackMethod instanceof StatusCallbackMethod ? $statusCallbackMethod->value : $statusCallbackMethod;
+        $obj['statusCallbackMethod'] = $statusCallbackMethod;
 
         return $obj;
     }
@@ -751,7 +751,7 @@ final class CallInitiateParams implements BaseModel
     public function withTrim(Trim|string $trim): self
     {
         $obj = clone $this;
-        $obj->trim = $trim instanceof Trim ? $trim->value : $trim;
+        $obj['trim'] = $trim;
 
         return $obj;
     }
@@ -775,7 +775,7 @@ final class CallInitiateParams implements BaseModel
     public function withURLMethod(URLMethod|string $urlMethod): self
     {
         $obj = clone $this;
-        $obj->urlMethod = $urlMethod instanceof URLMethod ? $urlMethod->value : $urlMethod;
+        $obj['urlMethod'] = $urlMethod;
 
         return $obj;
     }

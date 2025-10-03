@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\NumberReservations\NumberReservationCreateParams;
 use Telnyx\NumberReservations\NumberReservationGetResponse;
 use Telnyx\NumberReservations\NumberReservationListParams;
@@ -44,8 +43,6 @@ final class NumberReservationsService implements NumberReservationsContract
      * @param string $customerReference a customer reference string for customer look ups
      * @param list<ReservedPhoneNumber> $phoneNumbers
      *
-     * @return NumberReservationNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -64,8 +61,6 @@ final class NumberReservationsService implements NumberReservationsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return NumberReservationNewResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -93,30 +88,11 @@ final class NumberReservationsService implements NumberReservationsContract
      *
      * Gets a single phone number reservation.
      *
-     * @return NumberReservationGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $numberReservationID,
         ?RequestOptions $requestOptions = null
-    ): NumberReservationGetResponse {
-        $params = [];
-
-        return $this->retrieveRaw($numberReservationID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return NumberReservationGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $numberReservationID,
-        mixed $params,
-        ?RequestOptions $requestOptions = null,
     ): NumberReservationGetResponse {
         // @phpstan-ignore-next-line;
         return $this->client->request(
@@ -135,8 +111,6 @@ final class NumberReservationsService implements NumberReservationsContract
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[status], filter[created_at], filter[phone_numbers.phone_number], filter[customer_reference]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
-     * @return NumberReservationListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -153,8 +127,6 @@ final class NumberReservationsService implements NumberReservationsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return NumberReservationListResponse<HasRawResponse>
      *
      * @throws APIException
      */

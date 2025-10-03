@@ -123,7 +123,7 @@ final class OAuthClientUpdateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $allowedGrantTypes && $obj->allowedGrantTypes = array_map(fn ($v) => $v instanceof AllowedGrantType ? $v->value : $v, $allowedGrantTypes);
+        null !== $allowedGrantTypes && $obj['allowedGrantTypes'] = $allowedGrantTypes;
         null !== $allowedScopes && $obj->allowedScopes = $allowedScopes;
         null !== $logoUri && $obj->logoUri = $logoUri;
         null !== $name && $obj->name = $name;
@@ -143,7 +143,7 @@ final class OAuthClientUpdateParams implements BaseModel
     public function withAllowedGrantTypes(array $allowedGrantTypes): self
     {
         $obj = clone $this;
-        $obj->allowedGrantTypes = array_map(fn ($v) => $v instanceof AllowedGrantType ? $v->value : $v, $allowedGrantTypes);
+        $obj['allowedGrantTypes'] = $allowedGrantTypes;
 
         return $obj;
     }

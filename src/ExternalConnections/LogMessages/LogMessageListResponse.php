@@ -6,7 +6,9 @@ namespace Telnyx\ExternalConnections\LogMessages;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\ExternalConnections\ExternalVoiceIntegrationsPaginationMeta;
 use Telnyx\ExternalConnections\LogMessages\LogMessageListResponse\LogMessage;
 
@@ -14,15 +16,13 @@ use Telnyx\ExternalConnections\LogMessages\LogMessageListResponse\LogMessage;
  * @phpstan-type log_message_list_response = array{
  *   logMessages?: list<LogMessage>, meta?: ExternalVoiceIntegrationsPaginationMeta
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class LogMessageListResponse implements BaseModel
+final class LogMessageListResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<log_message_list_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /** @var list<LogMessage>|null $logMessages */
     #[Api('log_messages', list: LogMessage::class, optional: true)]

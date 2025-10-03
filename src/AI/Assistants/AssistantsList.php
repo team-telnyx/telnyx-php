@@ -7,19 +7,19 @@ namespace Telnyx\AI\Assistants;
 use Telnyx\AI\Assistants\AssistantsList\Data;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type assistants_list = array{data: list<Data>}
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class AssistantsList implements BaseModel
+final class AssistantsList implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<assistants_list> */
     use SdkModel;
+
+    use SdkResponse;
 
     /** @var list<Data> $data */
     #[Api(list: Data::class)]

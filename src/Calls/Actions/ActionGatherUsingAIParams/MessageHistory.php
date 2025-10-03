@@ -50,7 +50,7 @@ final class MessageHistory implements BaseModel
         $obj = new self;
 
         null !== $content && $obj->content = $content;
-        null !== $role && $obj->role = $role instanceof Role ? $role->value : $role;
+        null !== $role && $obj['role'] = $role;
 
         return $obj;
     }
@@ -74,7 +74,7 @@ final class MessageHistory implements BaseModel
     public function withRole(Role|string $role): self
     {
         $obj = clone $this;
-        $obj->role = $role instanceof Role ? $role->value : $role;
+        $obj['role'] = $role;
 
         return $obj;
     }

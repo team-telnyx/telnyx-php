@@ -6,7 +6,9 @@ namespace Telnyx\WellKnown;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type well_known_get_authorization_server_metadata_response = array{
@@ -22,15 +24,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *   tokenEndpoint?: string,
  *   tokenEndpointAuthMethodsSupported?: list<string>,
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class WellKnownGetAuthorizationServerMetadataResponse implements BaseModel
+final class WellKnownGetAuthorizationServerMetadataResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<well_known_get_authorization_server_metadata_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /**
      * Authorization endpoint URL.

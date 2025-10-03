@@ -12,7 +12,6 @@ use Telnyx\Campaign\CampaignListResponse;
 use Telnyx\Campaign\CampaignSubmitAppealResponse;
 use Telnyx\Campaign\TelnyxCampaignCsp;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 
 use const Telnyx\Core\OMIT as omit;
@@ -22,26 +21,11 @@ interface CampaignContract
     /**
      * @api
      *
-     * @return TelnyxCampaignCsp<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $campaignID,
         ?RequestOptions $requestOptions = null
-    ): TelnyxCampaignCsp;
-
-    /**
-     * @api
-     *
-     * @return TelnyxCampaignCsp<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $campaignID,
-        mixed $params,
-        ?RequestOptions $requestOptions = null,
     ): TelnyxCampaignCsp;
 
     /**
@@ -58,8 +42,6 @@ interface CampaignContract
      * @param string $sample5 Message sample. Some campaign tiers require 5 or more message samples.
      * @param string $webhookFailoverURL webhook failover to which campaign status updates are sent
      * @param string $webhookURL webhook to which campaign status updates are sent
-     *
-     * @return TelnyxCampaignCsp<HasRawResponse>
      *
      * @throws APIException
      */
@@ -84,8 +66,6 @@ interface CampaignContract
      *
      * @param array<string, mixed> $params
      *
-     * @return TelnyxCampaignCsp<HasRawResponse>
-     *
      * @throws APIException
      */
     public function updateRaw(
@@ -102,8 +82,6 @@ interface CampaignContract
      * @param int $recordsPerPage The amount of records per page, limited to between 1 and 500 inclusive. The default value is `10`.
      * @param Sort|value-of<Sort> $sort Specifies the sort order for results. If not given, results are sorted by createdAt in descending order.
      *
-     * @return CampaignListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -118,8 +96,6 @@ interface CampaignContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return CampaignListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -143,19 +119,6 @@ interface CampaignContract
      *
      * @throws APIException
      */
-    public function acceptSharingRaw(
-        string $campaignID,
-        mixed $params,
-        ?RequestOptions $requestOptions = null,
-    ): mixed;
-
-    /**
-     * @api
-     *
-     * @return CampaignDeactivateResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
     public function deactivate(
         string $campaignID,
         ?RequestOptions $requestOptions = null
@@ -164,39 +127,11 @@ interface CampaignContract
     /**
      * @api
      *
-     * @return CampaignDeactivateResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function deactivateRaw(
-        string $campaignID,
-        mixed $params,
-        ?RequestOptions $requestOptions = null,
-    ): CampaignDeactivateResponse;
-
-    /**
-     * @api
-     *
-     * @return CampaignGetMnoMetadataResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function getMnoMetadata(
         string $campaignID,
         ?RequestOptions $requestOptions = null
-    ): CampaignGetMnoMetadataResponse;
-
-    /**
-     * @api
-     *
-     * @return CampaignGetMnoMetadataResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function getMnoMetadataRaw(
-        string $campaignID,
-        mixed $params,
-        ?RequestOptions $requestOptions = null,
     ): CampaignGetMnoMetadataResponse;
 
     /**
@@ -214,19 +149,6 @@ interface CampaignContract
      *
      * @throws APIException
      */
-    public function getOperationStatusRaw(
-        string $campaignID,
-        mixed $params,
-        ?RequestOptions $requestOptions = null,
-    ): mixed;
-
-    /**
-     * @api
-     *
-     * @return CampaignGetSharingStatusResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
     public function getSharingStatus(
         string $campaignID,
         ?RequestOptions $requestOptions = null
@@ -235,22 +157,7 @@ interface CampaignContract
     /**
      * @api
      *
-     * @return CampaignGetSharingStatusResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function getSharingStatusRaw(
-        string $campaignID,
-        mixed $params,
-        ?RequestOptions $requestOptions = null,
-    ): CampaignGetSharingStatusResponse;
-
-    /**
-     * @api
-     *
      * @param string $appealReason detailed explanation of why the campaign should be reconsidered and what changes have been made to address the rejection reason
-     *
-     * @return CampaignSubmitAppealResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -264,8 +171,6 @@ interface CampaignContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return CampaignSubmitAppealResponse<HasRawResponse>
      *
      * @throws APIException
      */

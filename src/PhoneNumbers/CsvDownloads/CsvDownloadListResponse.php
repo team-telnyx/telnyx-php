@@ -7,21 +7,21 @@ namespace Telnyx\PhoneNumbers\CsvDownloads;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type csv_download_list_response = array{
  *   data?: list<CsvDownload>, meta?: PaginationMeta
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class CsvDownloadListResponse implements BaseModel
+final class CsvDownloadListResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<csv_download_list_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /** @var list<CsvDownload>|null $data */
     #[Api(list: CsvDownload::class, optional: true)]

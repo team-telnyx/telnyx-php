@@ -6,22 +6,22 @@ namespace Telnyx\Portouts;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Metadata;
 
 /**
  * @phpstan-type portout_list_response = array{
  *   data?: list<PortoutDetails>, meta?: Metadata
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class PortoutListResponse implements BaseModel
+final class PortoutListResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<portout_list_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /** @var list<PortoutDetails>|null $data */
     #[Api(list: PortoutDetails::class, optional: true)]

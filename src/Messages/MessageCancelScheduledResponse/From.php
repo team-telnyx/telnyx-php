@@ -59,7 +59,7 @@ final class From implements BaseModel
         $obj = new self;
 
         null !== $carrier && $obj->carrier = $carrier;
-        null !== $lineType && $obj->lineType = $lineType instanceof LineType ? $lineType->value : $lineType;
+        null !== $lineType && $obj['lineType'] = $lineType;
         null !== $phoneNumber && $obj->phoneNumber = $phoneNumber;
 
         return $obj;
@@ -84,7 +84,7 @@ final class From implements BaseModel
     public function withLineType(LineType|string $lineType): self
     {
         $obj = clone $this;
-        $obj->lineType = $lineType instanceof LineType ? $lineType->value : $lineType;
+        $obj['lineType'] = $lineType;
 
         return $obj;
     }

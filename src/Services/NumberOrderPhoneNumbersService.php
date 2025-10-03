@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberGetResponse;
 use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberListParams;
 use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberListParams\Filter;
@@ -33,34 +32,11 @@ final class NumberOrderPhoneNumbersService implements NumberOrderPhoneNumbersCon
      *
      * Get an existing phone number in number order.
      *
-     * @return NumberOrderPhoneNumberGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $numberOrderPhoneNumberID,
         ?RequestOptions $requestOptions = null
-    ): NumberOrderPhoneNumberGetResponse {
-        $params = [];
-
-        return $this->retrieveRaw(
-            $numberOrderPhoneNumberID,
-            $params,
-            $requestOptions
-        );
-    }
-
-    /**
-     * @api
-     *
-     * @return NumberOrderPhoneNumberGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $numberOrderPhoneNumberID,
-        mixed $params,
-        ?RequestOptions $requestOptions = null,
     ): NumberOrderPhoneNumberGetResponse {
         // @phpstan-ignore-next-line;
         return $this->client->request(
@@ -78,8 +54,6 @@ final class NumberOrderPhoneNumbersService implements NumberOrderPhoneNumbersCon
      *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[country_code]
      *
-     * @return NumberOrderPhoneNumberListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -95,8 +69,6 @@ final class NumberOrderPhoneNumbersService implements NumberOrderPhoneNumbersCon
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return NumberOrderPhoneNumberListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -126,8 +98,6 @@ final class NumberOrderPhoneNumbersService implements NumberOrderPhoneNumbersCon
      *
      * @param string $requirementGroupID The ID of the requirement group to associate
      *
-     * @return NumberOrderPhoneNumberUpdateRequirementGroupResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function updateRequirementGroup(
@@ -144,8 +114,6 @@ final class NumberOrderPhoneNumbersService implements NumberOrderPhoneNumbersCon
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return NumberOrderPhoneNumberUpdateRequirementGroupResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -178,8 +146,6 @@ final class NumberOrderPhoneNumbersService implements NumberOrderPhoneNumbersCon
      *
      * @param list<UpdateRegulatoryRequirement> $regulatoryRequirements
      *
-     * @return NumberOrderPhoneNumberUpdateRequirementsResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function updateRequirements(
@@ -200,8 +166,6 @@ final class NumberOrderPhoneNumbersService implements NumberOrderPhoneNumbersCon
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return NumberOrderPhoneNumberUpdateRequirementsResponse<HasRawResponse>
      *
      * @throws APIException
      */

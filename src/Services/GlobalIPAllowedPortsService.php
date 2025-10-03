@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\GlobalIPAllowedPorts\GlobalIPAllowedPortListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\GlobalIPAllowedPortsContract;
@@ -23,27 +22,9 @@ final class GlobalIPAllowedPortsService implements GlobalIPAllowedPortsContract
      *
      * List all Global IP Allowed Ports
      *
-     * @return GlobalIPAllowedPortListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
-        ?RequestOptions $requestOptions = null
-    ): GlobalIPAllowedPortListResponse {
-        $params = [];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return GlobalIPAllowedPortListResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): GlobalIPAllowedPortListResponse {
         // @phpstan-ignore-next-line;

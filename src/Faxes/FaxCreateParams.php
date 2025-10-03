@@ -200,8 +200,8 @@ final class FaxCreateParams implements BaseModel
         null !== $mediaName && $obj->mediaName = $mediaName;
         null !== $mediaURL && $obj->mediaURL = $mediaURL;
         null !== $monochrome && $obj->monochrome = $monochrome;
-        null !== $previewFormat && $obj->previewFormat = $previewFormat instanceof PreviewFormat ? $previewFormat->value : $previewFormat;
-        null !== $quality && $obj->quality = $quality instanceof Quality ? $quality->value : $quality;
+        null !== $previewFormat && $obj['previewFormat'] = $previewFormat;
+        null !== $quality && $obj['quality'] = $quality;
         null !== $storeMedia && $obj->storeMedia = $storeMedia;
         null !== $storePreview && $obj->storePreview = $storePreview;
         null !== $t38Enabled && $obj->t38Enabled = $t38Enabled;
@@ -306,7 +306,7 @@ final class FaxCreateParams implements BaseModel
     public function withPreviewFormat(PreviewFormat|string $previewFormat): self
     {
         $obj = clone $this;
-        $obj->previewFormat = $previewFormat instanceof PreviewFormat ? $previewFormat->value : $previewFormat;
+        $obj['previewFormat'] = $previewFormat;
 
         return $obj;
     }
@@ -319,7 +319,7 @@ final class FaxCreateParams implements BaseModel
     public function withQuality(Quality|string $quality): self
     {
         $obj = clone $this;
-        $obj->quality = $quality instanceof Quality ? $quality->value : $quality;
+        $obj['quality'] = $quality;
 
         return $obj;
     }

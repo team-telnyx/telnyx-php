@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Faxes\FaxCreateParams;
 use Telnyx\Faxes\FaxCreateParams\PreviewFormat;
 use Telnyx\Faxes\FaxCreateParams\Quality;
@@ -65,8 +64,6 @@ final class FaxesService implements FaxesContract
      * @param bool $t38Enabled The flag to disable the T.38 protocol.
      * @param string $webhookURL use this field to override the URL to which Telnyx will send subsequent webhooks for this fax
      *
-     * @return FaxNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -111,8 +108,6 @@ final class FaxesService implements FaxesContract
      *
      * @param array<string, mixed> $params
      *
-     * @return FaxNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function createRaw(
@@ -139,29 +134,10 @@ final class FaxesService implements FaxesContract
      *
      * View a fax
      *
-     * @return FaxGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): FaxGetResponse {
-        $params = [];
-
-        return $this->retrieveRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return FaxGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): FaxGetResponse {
         // @phpstan-ignore-next-line;
@@ -181,8 +157,6 @@ final class FaxesService implements FaxesContract
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[created_at][gte], filter[created_at][gt], filter[created_at][lte], filter[created_at][lt], filter[direction][eq], filter[from][eq], filter[to][eq]
      * @param Page $page Consolidated pagination parameter (deepObject style). Originally: page[size], page[number]
      *
-     * @return FaxListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -199,8 +173,6 @@ final class FaxesService implements FaxesContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return FaxListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -229,21 +201,6 @@ final class FaxesService implements FaxesContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): mixed {
-        $params = [];
-
-        return $this->deleteRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): mixed {
         // @phpstan-ignore-next-line;

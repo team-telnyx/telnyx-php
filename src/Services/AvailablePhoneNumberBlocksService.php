@@ -9,7 +9,6 @@ use Telnyx\AvailablePhoneNumberBlocks\AvailablePhoneNumberBlockListParams\Filter
 use Telnyx\AvailablePhoneNumberBlocks\AvailablePhoneNumberBlockListResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AvailablePhoneNumberBlocksContract;
 
@@ -29,8 +28,6 @@ final class AvailablePhoneNumberBlocksService implements AvailablePhoneNumberBlo
      *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[locality], filter[country_code], filter[national_destination_code], filter[phone_number_type]
      *
-     * @return AvailablePhoneNumberBlockListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -46,8 +43,6 @@ final class AvailablePhoneNumberBlocksService implements AvailablePhoneNumberBlo
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return AvailablePhoneNumberBlockListResponse<HasRawResponse>
      *
      * @throws APIException
      */

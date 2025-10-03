@@ -7,22 +7,22 @@ namespace Telnyx\Actions\Purchase;
 use Telnyx\Actions\Purchase\PurchaseNewResponse\Error;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\SimpleSimCard;
 
 /**
  * @phpstan-type purchase_new_response = array{
  *   data?: list<SimpleSimCard>, errors?: list<Error>
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class PurchaseNewResponse implements BaseModel
+final class PurchaseNewResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<purchase_new_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /**
      * Successfully registered SIM cards.

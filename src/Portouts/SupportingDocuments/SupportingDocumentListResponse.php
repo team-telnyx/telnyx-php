@@ -6,20 +6,20 @@ namespace Telnyx\Portouts\SupportingDocuments;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Portouts\SupportingDocuments\SupportingDocumentListResponse\Data;
 
 /**
  * @phpstan-type supporting_document_list_response = array{data?: list<Data>}
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class SupportingDocumentListResponse implements BaseModel
+final class SupportingDocumentListResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<supporting_document_list_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /** @var list<Data>|null $data */
     #[Api(list: Data::class, optional: true)]

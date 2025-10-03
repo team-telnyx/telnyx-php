@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\OutboundVoiceProfiles\OutboundCallRecording;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileCreateParams;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileDeleteResponse;
@@ -53,8 +52,6 @@ final class OutboundVoiceProfilesService implements OutboundVoiceProfilesContrac
      * @param UsagePaymentMethod|value-of<UsagePaymentMethod> $usagePaymentMethod setting for how costs for outbound profile are calculated
      * @param list<string> $whitelistedDestinations the list of destinations you want to be able to call using this outbound voice profile formatted in alpha2
      *
-     * @return OutboundVoiceProfileNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -97,8 +94,6 @@ final class OutboundVoiceProfilesService implements OutboundVoiceProfilesContrac
      *
      * @param array<string, mixed> $params
      *
-     * @return OutboundVoiceProfileNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function createRaw(
@@ -125,29 +120,10 @@ final class OutboundVoiceProfilesService implements OutboundVoiceProfilesContrac
      *
      * Retrieves the details of an existing outbound voice profile.
      *
-     * @return OutboundVoiceProfileGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): OutboundVoiceProfileGetResponse {
-        $params = [];
-
-        return $this->retrieveRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return OutboundVoiceProfileGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): OutboundVoiceProfileGetResponse {
         // @phpstan-ignore-next-line;
@@ -177,8 +153,6 @@ final class OutboundVoiceProfilesService implements OutboundVoiceProfilesContrac
      * @param TrafficType|value-of<TrafficType> $trafficType specifies the type of traffic allowed in this profile
      * @param UsagePaymentMethod|value-of<UsagePaymentMethod> $usagePaymentMethod setting for how costs for outbound profile are calculated
      * @param list<string> $whitelistedDestinations the list of destinations you want to be able to call using this outbound voice profile formatted in alpha2
-     *
-     * @return OutboundVoiceProfileUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -223,8 +197,6 @@ final class OutboundVoiceProfilesService implements OutboundVoiceProfilesContrac
      *
      * @param array<string, mixed> $params
      *
-     * @return OutboundVoiceProfileUpdateResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function updateRaw(
@@ -267,8 +239,6 @@ final class OutboundVoiceProfilesService implements OutboundVoiceProfilesContrac
      *   </li>
      * </ul> <br/>
      *
-     * @return OutboundVoiceProfileListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -286,8 +256,6 @@ final class OutboundVoiceProfilesService implements OutboundVoiceProfilesContrac
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return OutboundVoiceProfileListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -315,29 +283,10 @@ final class OutboundVoiceProfilesService implements OutboundVoiceProfilesContrac
      *
      * Deletes an existing outbound voice profile.
      *
-     * @return OutboundVoiceProfileDeleteResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): OutboundVoiceProfileDeleteResponse {
-        $params = [];
-
-        return $this->deleteRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return OutboundVoiceProfileDeleteResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): OutboundVoiceProfileDeleteResponse {
         // @phpstan-ignore-next-line;

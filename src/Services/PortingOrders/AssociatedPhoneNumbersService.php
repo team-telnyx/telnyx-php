@@ -6,7 +6,6 @@ namespace Telnyx\Services\PortingOrders;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberCreateParams;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberCreateParams\Action;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberCreateParams\PhoneNumberRange;
@@ -38,8 +37,6 @@ final class AssociatedPhoneNumbersService implements AssociatedPhoneNumbersContr
      * @param Action|value-of<Action> $action specifies the action to take with this phone number during partial porting
      * @param PhoneNumberRange $phoneNumberRange
      *
-     * @return AssociatedPhoneNumberNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -57,8 +54,6 @@ final class AssociatedPhoneNumbersService implements AssociatedPhoneNumbersContr
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return AssociatedPhoneNumberNewResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -91,8 +86,6 @@ final class AssociatedPhoneNumbersService implements AssociatedPhoneNumbersContr
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param Sort $sort Consolidated sort parameter (deepObject style). Originally: sort[value]
      *
-     * @return AssociatedPhoneNumberListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -111,8 +104,6 @@ final class AssociatedPhoneNumbersService implements AssociatedPhoneNumbersContr
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return AssociatedPhoneNumberListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -143,8 +134,6 @@ final class AssociatedPhoneNumbersService implements AssociatedPhoneNumbersContr
      *
      * @param string $portingOrderID
      *
-     * @return AssociatedPhoneNumberDeleteResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function delete(
@@ -161,8 +150,6 @@ final class AssociatedPhoneNumbersService implements AssociatedPhoneNumbersContr
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return AssociatedPhoneNumberDeleteResponse<HasRawResponse>
      *
      * @throws APIException
      */

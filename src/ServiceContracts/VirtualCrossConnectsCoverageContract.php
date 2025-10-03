@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListParams\Filter;
 use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListParams\Filters;
@@ -23,8 +22,6 @@ interface VirtualCrossConnectsCoverageContract
      * @param Filters $filters Consolidated filters parameter (deepObject style). Originally: filters[available_bandwidth][contains]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
-     * @return VirtualCrossConnectsCoverageListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -38,8 +35,6 @@ interface VirtualCrossConnectsCoverageContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return VirtualCrossConnectsCoverageListResponse<HasRawResponse>
      *
      * @throws APIException
      */

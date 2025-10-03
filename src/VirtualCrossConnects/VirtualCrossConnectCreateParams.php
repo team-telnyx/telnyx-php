@@ -201,7 +201,7 @@ final class VirtualCrossConnectCreateParams implements BaseModel
         $obj = new self;
 
         $obj->bgpAsn = $bgpAsn;
-        $obj->cloudProvider = $cloudProvider instanceof CloudProvider ? $cloudProvider->value : $cloudProvider;
+        $obj['cloudProvider'] = $cloudProvider;
         $obj->cloudProviderRegion = $cloudProviderRegion;
         $obj->networkID = $networkID;
         $obj->primaryCloudAccountID = $primaryCloudAccountID;
@@ -239,7 +239,7 @@ final class VirtualCrossConnectCreateParams implements BaseModel
     public function withCloudProvider(CloudProvider|string $cloudProvider): self
     {
         $obj = clone $this;
-        $obj->cloudProvider = $cloudProvider instanceof CloudProvider ? $cloudProvider->value : $cloudProvider;
+        $obj['cloudProvider'] = $cloudProvider;
 
         return $obj;
     }

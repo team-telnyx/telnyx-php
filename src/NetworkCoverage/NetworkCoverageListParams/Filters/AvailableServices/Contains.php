@@ -43,7 +43,7 @@ final class Contains implements BaseModel
     {
         $obj = new self;
 
-        null !== $contains && $obj->contains = $contains instanceof AvailableService ? $contains->value : $contains;
+        null !== $contains && $obj['contains'] = $contains;
 
         return $obj;
     }
@@ -56,7 +56,7 @@ final class Contains implements BaseModel
     public function withContains(AvailableService|string $contains): self
     {
         $obj = clone $this;
-        $obj->contains = $contains instanceof AvailableService ? $contains->value : $contains;
+        $obj['contains'] = $contains;
 
         return $obj;
     }

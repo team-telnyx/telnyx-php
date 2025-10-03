@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordCreateParams;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordCreateParams\AdditionalData;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordGetResponse;
@@ -39,8 +38,6 @@ final class CustomerServiceRecordsService implements CustomerServiceRecordsContr
      * @param AdditionalData $additionalData
      * @param string $webhookURL callback URL to receive webhook notifications
      *
-     * @return CustomerServiceRecordNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -62,8 +59,6 @@ final class CustomerServiceRecordsService implements CustomerServiceRecordsContr
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return CustomerServiceRecordNewResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -91,34 +86,11 @@ final class CustomerServiceRecordsService implements CustomerServiceRecordsContr
      *
      * Get a specific customer service record.
      *
-     * @return CustomerServiceRecordGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $customerServiceRecordID,
         ?RequestOptions $requestOptions = null
-    ): CustomerServiceRecordGetResponse {
-        $params = [];
-
-        return $this->retrieveRaw(
-            $customerServiceRecordID,
-            $params,
-            $requestOptions
-        );
-    }
-
-    /**
-     * @api
-     *
-     * @return CustomerServiceRecordGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $customerServiceRecordID,
-        mixed $params,
-        ?RequestOptions $requestOptions = null,
     ): CustomerServiceRecordGetResponse {
         // @phpstan-ignore-next-line;
         return $this->client->request(
@@ -138,8 +110,6 @@ final class CustomerServiceRecordsService implements CustomerServiceRecordsContr
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param Sort $sort Consolidated sort parameter (deepObject style). Originally: sort[value]
      *
-     * @return CustomerServiceRecordListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -157,8 +127,6 @@ final class CustomerServiceRecordsService implements CustomerServiceRecordsContr
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return CustomerServiceRecordListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -188,8 +156,6 @@ final class CustomerServiceRecordsService implements CustomerServiceRecordsContr
      *
      * @param list<string> $phoneNumbers the phone numbers list to be verified
      *
-     * @return CustomerServiceRecordVerifyPhoneNumberCoverageResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function verifyPhoneNumberCoverage(
@@ -205,8 +171,6 @@ final class CustomerServiceRecordsService implements CustomerServiceRecordsContr
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return CustomerServiceRecordVerifyPhoneNumberCoverageResponse<HasRawResponse>
      *
      * @throws APIException
      */

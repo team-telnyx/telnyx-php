@@ -6,21 +6,21 @@ namespace Telnyx\CallControlApplications;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type call_control_application_get_response = array{
  *   data?: CallControlApplication
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class CallControlApplicationGetResponse implements BaseModel
+final class CallControlApplicationGetResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<call_control_application_get_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     #[Api(optional: true)]
     public ?CallControlApplication $data;

@@ -136,7 +136,7 @@ final class Data implements BaseModel
         null !== $updatedAt && $obj->updatedAt = $updatedAt;
         null !== $name && $obj->name = $name;
         null !== $networkID && $obj->networkID = $networkID;
-        null !== $status && $obj->status = $status instanceof InterfaceStatus ? $status->value : $status;
+        null !== $status && $obj['status'] = $status;
         null !== $enableSipTrunking && $obj->enableSipTrunking = $enableSipTrunking;
         null !== $endpoint && $obj->endpoint = $endpoint;
         null !== $publicKey && $obj->publicKey = $publicKey;
@@ -220,7 +220,7 @@ final class Data implements BaseModel
     public function withStatus(InterfaceStatus|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof InterfaceStatus ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

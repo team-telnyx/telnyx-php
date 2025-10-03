@@ -6,20 +6,20 @@ namespace Telnyx\Messages\Rcs;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Messages\Rcs\RcGenerateDeeplinkResponse\Data;
 
 /**
  * @phpstan-type rc_generate_deeplink_response = array{data: Data}
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class RcGenerateDeeplinkResponse implements BaseModel
+final class RcGenerateDeeplinkResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<rc_generate_deeplink_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     #[Api]
     public Data $data;

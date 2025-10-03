@@ -7,19 +7,19 @@ namespace Telnyx\Calls\Actions;
 use Telnyx\Calls\Actions\ActionAnswerResponse\Data;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type action_answer_response = array{data?: Data}
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class ActionAnswerResponse implements BaseModel
+final class ActionAnswerResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<action_answer_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     #[Api(optional: true)]
     public ?Data $data;

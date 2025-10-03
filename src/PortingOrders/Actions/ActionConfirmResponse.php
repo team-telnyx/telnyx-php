@@ -6,21 +6,21 @@ namespace Telnyx\PortingOrders\Actions;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PortingOrders\Actions\ActionConfirmResponse\Meta;
 use Telnyx\PortingOrders\PortingOrder;
 
 /**
  * @phpstan-type action_confirm_response = array{data?: PortingOrder, meta?: Meta}
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class ActionConfirmResponse implements BaseModel
+final class ActionConfirmResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<action_confirm_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     #[Api(optional: true)]
     public ?PortingOrder $data;

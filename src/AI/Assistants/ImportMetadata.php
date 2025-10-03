@@ -52,7 +52,7 @@ final class ImportMetadata implements BaseModel
         $obj = new self;
 
         null !== $importID && $obj->importID = $importID;
-        null !== $importProvider && $obj->importProvider = $importProvider instanceof ImportProvider ? $importProvider->value : $importProvider;
+        null !== $importProvider && $obj['importProvider'] = $importProvider;
 
         return $obj;
     }
@@ -77,7 +77,7 @@ final class ImportMetadata implements BaseModel
         ImportProvider|string $importProvider
     ): self {
         $obj = clone $this;
-        $obj->importProvider = $importProvider instanceof ImportProvider ? $importProvider->value : $importProvider;
+        $obj['importProvider'] = $importProvider;
 
         return $obj;
     }

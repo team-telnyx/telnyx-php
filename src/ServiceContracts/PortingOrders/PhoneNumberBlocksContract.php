@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\PortingOrders;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockCreateParams\ActivationRange;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockCreateParams\PhoneNumberRange;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockDeleteResponse;
@@ -26,8 +25,6 @@ interface PhoneNumberBlocksContract
      * @param list<ActivationRange> $activationRanges Specifies the activation ranges for this porting phone number block. The activation range must be within the block range and should not overlap with other activation ranges.
      * @param PhoneNumberRange $phoneNumberRange
      *
-     * @return PhoneNumberBlockNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -41,8 +38,6 @@ interface PhoneNumberBlocksContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return PhoneNumberBlockNewResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -59,8 +54,6 @@ interface PhoneNumberBlocksContract
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param Sort $sort Consolidated sort parameter (deepObject style). Originally: sort[value]
      *
-     * @return PhoneNumberBlockListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -76,8 +69,6 @@ interface PhoneNumberBlocksContract
      *
      * @param array<string, mixed> $params
      *
-     * @return PhoneNumberBlockListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function listRaw(
@@ -91,8 +82,6 @@ interface PhoneNumberBlocksContract
      *
      * @param string $portingOrderID
      *
-     * @return PhoneNumberBlockDeleteResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function delete(
@@ -105,8 +94,6 @@ interface PhoneNumberBlocksContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return PhoneNumberBlockDeleteResponse<HasRawResponse>
      *
      * @throws APIException
      */

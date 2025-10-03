@@ -6,7 +6,9 @@ namespace Telnyx\OAuth;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\OAuth\OAuthTokenResponse\TokenType;
 
 /**
@@ -17,15 +19,13 @@ use Telnyx\OAuth\OAuthTokenResponse\TokenType;
  *   refreshToken?: string,
  *   scope?: string,
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class OAuthTokenResponse implements BaseModel
+final class OAuthTokenResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<oauth_token_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /**
      * The access token.
@@ -99,7 +99,7 @@ final class OAuthTokenResponse implements BaseModel
 
         $obj->accessToken = $accessToken;
         $obj->expiresIn = $expiresIn;
-        $obj->tokenType = $tokenType instanceof TokenType ? $tokenType->value : $tokenType;
+        $obj['tokenType'] = $tokenType;
 
         null !== $refreshToken && $obj->refreshToken = $refreshToken;
         null !== $scope && $obj->scope = $scope;
@@ -137,7 +137,7 @@ final class OAuthTokenResponse implements BaseModel
     public function withTokenType(TokenType|string $tokenType): self
     {
         $obj = clone $this;
-        $obj->tokenType = $tokenType instanceof TokenType ? $tokenType->value : $tokenType;
+        $obj['tokenType'] = $tokenType;
 
         return $obj;
     }

@@ -128,14 +128,14 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $activationStatus && $obj->activationStatus = $activationStatus instanceof ActivationStatus ? $activationStatus->value : $activationStatus;
+        null !== $activationStatus && $obj['activationStatus'] = $activationStatus;
         null !== $phoneNumber && $obj->phoneNumber = $phoneNumber;
-        null !== $phoneNumberType && $obj->phoneNumberType = $phoneNumberType instanceof PhoneNumberType ? $phoneNumberType->value : $phoneNumberType;
-        null !== $portabilityStatus && $obj->portabilityStatus = $portabilityStatus instanceof PortabilityStatus ? $portabilityStatus->value : $portabilityStatus;
+        null !== $phoneNumberType && $obj['phoneNumberType'] = $phoneNumberType;
+        null !== $portabilityStatus && $obj['portabilityStatus'] = $portabilityStatus;
         null !== $portingOrderID && $obj->portingOrderID = $portingOrderID;
-        null !== $portingOrderStatus && $obj->portingOrderStatus = $portingOrderStatus instanceof PortingOrderStatus ? $portingOrderStatus->value : $portingOrderStatus;
+        null !== $portingOrderStatus && $obj['portingOrderStatus'] = $portingOrderStatus;
         null !== $recordType && $obj->recordType = $recordType;
-        null !== $requirementsStatus && $obj->requirementsStatus = $requirementsStatus instanceof RequirementsStatus ? $requirementsStatus->value : $requirementsStatus;
+        null !== $requirementsStatus && $obj['requirementsStatus'] = $requirementsStatus;
         null !== $supportKey && $obj->supportKey = $supportKey;
 
         return $obj;
@@ -150,7 +150,7 @@ final class Data implements BaseModel
         ActivationStatus|string $activationStatus
     ): self {
         $obj = clone $this;
-        $obj->activationStatus = $activationStatus instanceof ActivationStatus ? $activationStatus->value : $activationStatus;
+        $obj['activationStatus'] = $activationStatus;
 
         return $obj;
     }
@@ -175,7 +175,7 @@ final class Data implements BaseModel
         PhoneNumberType|string $phoneNumberType
     ): self {
         $obj = clone $this;
-        $obj->phoneNumberType = $phoneNumberType instanceof PhoneNumberType ? $phoneNumberType->value : $phoneNumberType;
+        $obj['phoneNumberType'] = $phoneNumberType;
 
         return $obj;
     }
@@ -189,7 +189,7 @@ final class Data implements BaseModel
         PortabilityStatus|string $portabilityStatus
     ): self {
         $obj = clone $this;
-        $obj->portabilityStatus = $portabilityStatus instanceof PortabilityStatus ? $portabilityStatus->value : $portabilityStatus;
+        $obj['portabilityStatus'] = $portabilityStatus;
 
         return $obj;
     }
@@ -214,7 +214,7 @@ final class Data implements BaseModel
         PortingOrderStatus|string $portingOrderStatus
     ): self {
         $obj = clone $this;
-        $obj->portingOrderStatus = $portingOrderStatus instanceof PortingOrderStatus ? $portingOrderStatus->value : $portingOrderStatus;
+        $obj['portingOrderStatus'] = $portingOrderStatus;
 
         return $obj;
     }
@@ -239,7 +239,7 @@ final class Data implements BaseModel
         RequirementsStatus|string $requirementsStatus
     ): self {
         $obj = clone $this;
-        $obj->requirementsStatus = $requirementsStatus instanceof RequirementsStatus ? $requirementsStatus->value : $requirementsStatus;
+        $obj['requirementsStatus'] = $requirementsStatus;
 
         return $obj;
     }

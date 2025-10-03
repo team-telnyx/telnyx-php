@@ -7,22 +7,22 @@ namespace Telnyx\SimCards;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\SimCards\SimCardListWirelessConnectivityLogsResponse\Data;
 
 /**
  * @phpstan-type sim_card_list_wireless_connectivity_logs_response = array{
  *   data?: list<Data>, meta?: PaginationMeta
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class SimCardListWirelessConnectivityLogsResponse implements BaseModel
+final class SimCardListWirelessConnectivityLogsResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<sim_card_list_wireless_connectivity_logs_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /** @var list<Data>|null $data */
     #[Api(list: Data::class, optional: true)]

@@ -7,21 +7,21 @@ namespace Telnyx\PortingOrders\PhoneNumberBlocks;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type phone_number_block_list_response = array{
  *   data?: list<PortingPhoneNumberBlock>, meta?: PaginationMeta
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class PhoneNumberBlockListResponse implements BaseModel
+final class PhoneNumberBlockListResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<phone_number_block_list_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /** @var list<PortingPhoneNumberBlock>|null $data */
     #[Api(list: PortingPhoneNumberBlock::class, optional: true)]

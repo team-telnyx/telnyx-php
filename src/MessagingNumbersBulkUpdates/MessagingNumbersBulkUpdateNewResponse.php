@@ -6,20 +6,20 @@ namespace Telnyx\MessagingNumbersBulkUpdates;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\MessagingNumbersBulkUpdates\MessagingNumbersBulkUpdateNewResponse\Data;
 
 /**
  * @phpstan-type messaging_numbers_bulk_update_new_response = array{data?: Data}
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class MessagingNumbersBulkUpdateNewResponse implements BaseModel
+final class MessagingNumbersBulkUpdateNewResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<messaging_numbers_bulk_update_new_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     #[Api(optional: true)]
     public ?Data $data;

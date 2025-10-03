@@ -7,19 +7,19 @@ namespace Telnyx\AI\Embeddings;
 use Telnyx\AI\Embeddings\EmbeddingGetResponse\Data;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type embedding_get_response = array{data: Data}
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class EmbeddingGetResponse implements BaseModel
+final class EmbeddingGetResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<embedding_get_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     #[Api]
     public Data $data;

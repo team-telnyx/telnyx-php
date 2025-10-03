@@ -77,7 +77,7 @@ final class BulkSimCardActionListParams implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $filterActionType && $obj->filterActionType = $filterActionType instanceof FilterActionType ? $filterActionType->value : $filterActionType;
+        null !== $filterActionType && $obj['filterActionType'] = $filterActionType;
         null !== $pageNumber && $obj->pageNumber = $pageNumber;
         null !== $pageSize && $obj->pageSize = $pageSize;
 
@@ -93,7 +93,7 @@ final class BulkSimCardActionListParams implements BaseModel
         FilterActionType|string $filterActionType
     ): self {
         $obj = clone $this;
-        $obj->filterActionType = $filterActionType instanceof FilterActionType ? $filterActionType->value : $filterActionType;
+        $obj['filterActionType'] = $filterActionType;
 
         return $obj;
     }

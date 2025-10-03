@@ -6,19 +6,19 @@ namespace Telnyx\Documents;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type document_upload_response = array{data?: DocServiceDocument}
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class DocumentUploadResponse implements BaseModel
+final class DocumentUploadResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<document_upload_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     #[Api(optional: true)]
     public ?DocServiceDocument $data;

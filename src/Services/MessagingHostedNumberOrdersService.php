@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderCheckEligibilityParams;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderCheckEligibilityResponse;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderCreateParams;
@@ -51,8 +50,6 @@ final class MessagingHostedNumberOrdersService implements MessagingHostedNumberO
      * @param string $messagingProfileID automatically associate the number with this messaging profile ID when the order is complete
      * @param list<string> $phoneNumbers phone numbers to be used for hosted messaging
      *
-     * @return MessagingHostedNumberOrderNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -72,8 +69,6 @@ final class MessagingHostedNumberOrdersService implements MessagingHostedNumberO
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return MessagingHostedNumberOrderNewResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -101,29 +96,10 @@ final class MessagingHostedNumberOrdersService implements MessagingHostedNumberO
      *
      * Retrieve a messaging hosted number order
      *
-     * @return MessagingHostedNumberOrderGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): MessagingHostedNumberOrderGetResponse {
-        $params = [];
-
-        return $this->retrieveRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return MessagingHostedNumberOrderGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): MessagingHostedNumberOrderGetResponse {
         // @phpstan-ignore-next-line;
@@ -142,8 +118,6 @@ final class MessagingHostedNumberOrdersService implements MessagingHostedNumberO
      *
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
-     * @return MessagingHostedNumberOrderListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -159,8 +133,6 @@ final class MessagingHostedNumberOrdersService implements MessagingHostedNumberO
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return MessagingHostedNumberOrderListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -188,29 +160,10 @@ final class MessagingHostedNumberOrdersService implements MessagingHostedNumberO
      *
      * Delete a messaging hosted number order and all associated phone numbers.
      *
-     * @return MessagingHostedNumberOrderDeleteResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): MessagingHostedNumberOrderDeleteResponse {
-        $params = [];
-
-        return $this->deleteRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return MessagingHostedNumberOrderDeleteResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): MessagingHostedNumberOrderDeleteResponse {
         // @phpstan-ignore-next-line;
@@ -229,8 +182,6 @@ final class MessagingHostedNumberOrdersService implements MessagingHostedNumberO
      *
      * @param list<string> $phoneNumbers List of phone numbers to check eligibility
      *
-     * @return MessagingHostedNumberOrderCheckEligibilityResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function checkEligibility(
@@ -246,8 +197,6 @@ final class MessagingHostedNumberOrdersService implements MessagingHostedNumberO
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return MessagingHostedNumberOrderCheckEligibilityResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -280,8 +229,6 @@ final class MessagingHostedNumberOrdersService implements MessagingHostedNumberO
      * @param list<string> $phoneNumbers
      * @param VerificationMethod|value-of<VerificationMethod> $verificationMethod
      *
-     * @return MessagingHostedNumberOrderNewVerificationCodesResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function createVerificationCodes(
@@ -302,8 +249,6 @@ final class MessagingHostedNumberOrdersService implements MessagingHostedNumberO
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return MessagingHostedNumberOrderNewVerificationCodesResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -336,8 +281,6 @@ final class MessagingHostedNumberOrdersService implements MessagingHostedNumberO
      *
      * @param list<VerificationCode> $verificationCodes
      *
-     * @return MessagingHostedNumberOrderValidateCodesResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function validateCodes(
@@ -354,8 +297,6 @@ final class MessagingHostedNumberOrdersService implements MessagingHostedNumberO
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return MessagingHostedNumberOrderValidateCodesResponse<HasRawResponse>
      *
      * @throws APIException
      */

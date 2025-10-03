@@ -6,19 +6,19 @@ namespace Telnyx\TexmlApplications;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type texml_application_update_response = array{data?: TexmlApplication}
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class TexmlApplicationUpdateResponse implements BaseModel
+final class TexmlApplicationUpdateResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<texml_application_update_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     #[Api(optional: true)]
     public ?TexmlApplication $data;

@@ -7,21 +7,21 @@ namespace Telnyx\UserAddresses;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type user_address_list_response = array{
  *   data?: list<UserAddress>, meta?: PaginationMeta
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class UserAddressListResponse implements BaseModel
+final class UserAddressListResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<user_address_list_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /** @var list<UserAddress>|null $data */
     #[Api(list: UserAddress::class, optional: true)]

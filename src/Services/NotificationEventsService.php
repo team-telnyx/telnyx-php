@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\NotificationEvents\NotificationEventListParams;
 use Telnyx\NotificationEvents\NotificationEventListParams\Page;
 use Telnyx\NotificationEvents\NotificationEventListResponse;
@@ -29,8 +28,6 @@ final class NotificationEventsService implements NotificationEventsContract
      *
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
-     * @return NotificationEventListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -46,8 +43,6 @@ final class NotificationEventsService implements NotificationEventsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return NotificationEventListResponse<HasRawResponse>
      *
      * @throws APIException
      */

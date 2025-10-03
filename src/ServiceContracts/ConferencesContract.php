@@ -12,7 +12,6 @@ use Telnyx\Conferences\ConferenceListParticipantsResponse;
 use Telnyx\Conferences\ConferenceListResponse;
 use Telnyx\Conferences\ConferenceNewResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 
 use const Telnyx\Core\OMIT as omit;
@@ -33,8 +32,6 @@ interface ConferencesContract
      * @param string $holdMediaName The media_name of a file to be played to participants joining the conference. The media_name must point to a file previously uploaded to api.telnyx.com/v2/media by the same user/organization. The file must either be a WAV or MP3 file. Takes effect only when "start_conference_on_create" is set to "false".
      * @param int $maxParticipants The maximum number of active conference participants to allow. Must be between 2 and 800. Defaults to 250
      * @param bool $startConferenceOnCreate Whether the conference should be started on creation. If the conference isn't started all participants that join are automatically put on hold. Defaults to "true".
-     *
-     * @return ConferenceNewResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -58,8 +55,6 @@ interface ConferencesContract
      *
      * @param array<string, mixed> $params
      *
-     * @return ConferenceNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function createRaw(
@@ -69,8 +64,6 @@ interface ConferencesContract
 
     /**
      * @api
-     *
-     * @return ConferenceGetResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -82,23 +75,8 @@ interface ConferencesContract
     /**
      * @api
      *
-     * @return ConferenceGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
-        ?RequestOptions $requestOptions = null
-    ): ConferenceGetResponse;
-
-    /**
-     * @api
-     *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[application_name][contains], filter[outbound.outbound_voice_profile_id], filter[leg_id], filter[application_session_id], filter[connection_id], filter[product], filter[failed], filter[from], filter[to], filter[name], filter[type], filter[occurred_at][eq/gt/gte/lt/lte], filter[status]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number]
-     *
-     * @return ConferenceListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -113,8 +91,6 @@ interface ConferencesContract
      *
      * @param array<string, mixed> $params
      *
-     * @return ConferenceListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function listRaw(
@@ -127,8 +103,6 @@ interface ConferencesContract
      *
      * @param Telnyx\Conferences\ConferenceListParticipantsParams\Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[muted], filter[on_hold], filter[whispering]
      * @param Telnyx\Conferences\ConferenceListParticipantsParams\Page $page Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number]
-     *
-     * @return ConferenceListParticipantsResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -143,8 +117,6 @@ interface ConferencesContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ConferenceListParticipantsResponse<HasRawResponse>
      *
      * @throws APIException
      */

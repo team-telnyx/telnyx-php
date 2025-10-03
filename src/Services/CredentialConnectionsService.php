@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\CredentialConnections\ConnectionRtcpSettings;
 use Telnyx\CredentialConnections\CredentialConnectionCreateParams;
@@ -74,8 +73,6 @@ final class CredentialConnectionsService implements CredentialConnectionsContrac
      * @param string $webhookEventURL The URL where webhooks related to this connection will be sent. Must include a scheme, such as 'https'.
      * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
      *
-     * @return CredentialConnectionNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -134,8 +131,6 @@ final class CredentialConnectionsService implements CredentialConnectionsContrac
      *
      * @param array<string, mixed> $params
      *
-     * @return CredentialConnectionNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function createRaw(
@@ -162,29 +157,10 @@ final class CredentialConnectionsService implements CredentialConnectionsContrac
      *
      * Retrieves the details of an existing credential connection.
      *
-     * @return CredentialConnectionGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): CredentialConnectionGetResponse {
-        $params = [];
-
-        return $this->retrieveRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return CredentialConnectionGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): CredentialConnectionGetResponse {
         // @phpstan-ignore-next-line;
@@ -222,8 +198,6 @@ final class CredentialConnectionsService implements CredentialConnectionsContrac
      * @param string|null $webhookEventFailoverURL The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      * @param string $webhookEventURL The URL where webhooks related to this connection will be sent. Must include a scheme, such as 'https'.
      * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
-     *
-     * @return CredentialConnectionUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -284,8 +258,6 @@ final class CredentialConnectionsService implements CredentialConnectionsContrac
      *
      * @param array<string, mixed> $params
      *
-     * @return CredentialConnectionUpdateResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function updateRaw(
@@ -328,8 +300,6 @@ final class CredentialConnectionsService implements CredentialConnectionsContrac
      *   </li>
      * </ul> <br/> If not given, results are sorted by <code>created_at</code> in descending order.
      *
-     * @return CredentialConnectionListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -347,8 +317,6 @@ final class CredentialConnectionsService implements CredentialConnectionsContrac
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return CredentialConnectionListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -376,29 +344,10 @@ final class CredentialConnectionsService implements CredentialConnectionsContrac
      *
      * Deletes an existing credential connection.
      *
-     * @return CredentialConnectionDeleteResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): CredentialConnectionDeleteResponse {
-        $params = [];
-
-        return $this->deleteRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return CredentialConnectionDeleteResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): CredentialConnectionDeleteResponse {
         // @phpstan-ignore-next-line;

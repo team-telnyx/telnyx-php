@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PortingOrders\PortingOrderDocuments;
 use Telnyx\PortingOrders\PortingOrderEndUser;
 use Telnyx\PortingOrders\PortingOrderGetAllowedFocWindowsResponse;
@@ -38,8 +37,6 @@ interface PortingOrdersContract
      * @param string $customerGroupReference A customer-specified group reference for customer bookkeeping purposes
      * @param string $customerReference A customer-specified reference number for customer bookkeeping purposes
      *
-     * @return PortingOrderNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -54,8 +51,6 @@ interface PortingOrdersContract
      *
      * @param array<string, mixed> $params
      *
-     * @return PortingOrderNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function createRaw(
@@ -67,8 +62,6 @@ interface PortingOrdersContract
      * @api
      *
      * @param bool $includePhoneNumbers Include the first 50 phone number objects in the results
-     *
-     * @return PortingOrderGetResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -82,8 +75,6 @@ interface PortingOrdersContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return PortingOrderGetResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -109,8 +100,6 @@ interface PortingOrdersContract
      * @param PortingOrderUserFeedback $userFeedback
      * @param string $webhookURL
      *
-     * @return PortingOrderUpdateResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function update(
@@ -135,8 +124,6 @@ interface PortingOrdersContract
      *
      * @param array<string, mixed> $params
      *
-     * @return PortingOrderUpdateResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function updateRaw(
@@ -153,8 +140,6 @@ interface PortingOrdersContract
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param Sort $sort Consolidated sort parameter (deepObject style). Originally: sort[value]
      *
-     * @return PortingOrderListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -169,8 +154,6 @@ interface PortingOrdersContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return PortingOrderListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -194,19 +177,6 @@ interface PortingOrdersContract
      *
      * @throws APIException
      */
-    public function deleteRaw(
-        string $id,
-        mixed $params,
-        ?RequestOptions $requestOptions = null
-    ): mixed;
-
-    /**
-     * @api
-     *
-     * @return PortingOrderGetAllowedFocWindowsResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
     public function retrieveAllowedFocWindows(
         string $id,
         ?RequestOptions $requestOptions = null
@@ -215,36 +185,9 @@ interface PortingOrdersContract
     /**
      * @api
      *
-     * @return PortingOrderGetAllowedFocWindowsResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveAllowedFocWindowsRaw(
-        string $id,
-        mixed $params,
-        ?RequestOptions $requestOptions = null
-    ): PortingOrderGetAllowedFocWindowsResponse;
-
-    /**
-     * @api
-     *
-     * @return PortingOrderGetExceptionTypesResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieveExceptionTypes(
-        ?RequestOptions $requestOptions = null
-    ): PortingOrderGetExceptionTypesResponse;
-
-    /**
-     * @api
-     *
-     * @return PortingOrderGetExceptionTypesResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveExceptionTypesRaw(
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): PortingOrderGetExceptionTypesResponse;
 
@@ -279,8 +222,6 @@ interface PortingOrdersContract
      *
      * @param Telnyx\PortingOrders\PortingOrderRetrieveRequirementsParams\Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
-     * @return PortingOrderGetRequirementsResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieveRequirements(
@@ -294,8 +235,6 @@ interface PortingOrdersContract
      *
      * @param array<string, mixed> $params
      *
-     * @return PortingOrderGetRequirementsResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieveRequirementsRaw(
@@ -307,25 +246,10 @@ interface PortingOrdersContract
     /**
      * @api
      *
-     * @return PortingOrderGetSubRequestResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieveSubRequest(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): PortingOrderGetSubRequestResponse;
-
-    /**
-     * @api
-     *
-     * @return PortingOrderGetSubRequestResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveSubRequestRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): PortingOrderGetSubRequestResponse;
 }

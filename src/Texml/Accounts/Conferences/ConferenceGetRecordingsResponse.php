@@ -6,7 +6,9 @@ namespace Telnyx\Texml\Accounts\Conferences;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Texml\Accounts\Conferences\ConferenceGetRecordingsResponse\Recording;
 
 /**
@@ -20,15 +22,13 @@ use Telnyx\Texml\Accounts\Conferences\ConferenceGetRecordingsResponse\Recording;
  *   start?: int,
  *   uri?: string,
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class ConferenceGetRecordingsResponse implements BaseModel
+final class ConferenceGetRecordingsResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<conference_get_recordings_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /**
      * The number of the last element on the page, zero-indexed.

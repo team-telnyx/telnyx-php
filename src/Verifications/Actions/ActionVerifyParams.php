@@ -69,7 +69,7 @@ final class ActionVerifyParams implements BaseModel
         $obj = new self;
 
         null !== $code && $obj->code = $code;
-        null !== $status && $obj->status = $status instanceof Status ? $status->value : $status;
+        null !== $status && $obj['status'] = $status;
 
         return $obj;
     }
@@ -93,7 +93,7 @@ final class ActionVerifyParams implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

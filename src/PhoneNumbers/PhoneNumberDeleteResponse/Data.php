@@ -252,10 +252,10 @@ final class Data implements BaseModel
         null !== $messagingProfileID && $obj->messagingProfileID = $messagingProfileID;
         null !== $messagingProfileName && $obj->messagingProfileName = $messagingProfileName;
         null !== $phoneNumber && $obj->phoneNumber = $phoneNumber;
-        null !== $phoneNumberType && $obj->phoneNumberType = $phoneNumberType instanceof PhoneNumberType ? $phoneNumberType->value : $phoneNumberType;
+        null !== $phoneNumberType && $obj['phoneNumberType'] = $phoneNumberType;
         null !== $purchasedAt && $obj->purchasedAt = $purchasedAt;
         null !== $recordType && $obj->recordType = $recordType;
-        null !== $status && $obj->status = $status instanceof Status ? $status->value : $status;
+        null !== $status && $obj['status'] = $status;
         null !== $t38FaxGatewayEnabled && $obj->t38FaxGatewayEnabled = $t38FaxGatewayEnabled;
         null !== $tags && $obj->tags = $tags;
         null !== $updatedAt && $obj->updatedAt = $updatedAt;
@@ -459,7 +459,7 @@ final class Data implements BaseModel
         PhoneNumberType|string $phoneNumberType
     ): self {
         $obj = clone $this;
-        $obj->phoneNumberType = $phoneNumberType instanceof PhoneNumberType ? $phoneNumberType->value : $phoneNumberType;
+        $obj['phoneNumberType'] = $phoneNumberType;
 
         return $obj;
     }
@@ -494,7 +494,7 @@ final class Data implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

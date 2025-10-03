@@ -51,7 +51,7 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $provider && $obj->provider = $provider instanceof Provider ? $provider->value : $provider;
+        null !== $provider && $obj['provider'] = $provider;
         null !== $sourceRegion && $obj->sourceRegion = $sourceRegion;
 
         return $obj;
@@ -65,7 +65,7 @@ final class Data implements BaseModel
     public function withProvider(Provider|string $provider): self
     {
         $obj = clone $this;
-        $obj->provider = $provider instanceof Provider ? $provider->value : $provider;
+        $obj['provider'] = $provider;
 
         return $obj;
     }

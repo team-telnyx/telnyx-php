@@ -58,7 +58,7 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $availableServices && $obj->availableServices = array_map(fn ($v) => $v instanceof AvailableService ? $v->value : $v, $availableServices);
+        null !== $availableServices && $obj['availableServices'] = $availableServices;
         null !== $location && $obj->location = $location;
         null !== $recordType && $obj->recordType = $recordType;
 
@@ -73,7 +73,7 @@ final class Data implements BaseModel
     public function withAvailableServices(array $availableServices): self
     {
         $obj = clone $this;
-        $obj->availableServices = array_map(fn ($v) => $v instanceof AvailableService ? $v->value : $v, $availableServices);
+        $obj['availableServices'] = $availableServices;
 
         return $obj;
     }

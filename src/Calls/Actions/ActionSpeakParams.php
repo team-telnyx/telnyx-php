@@ -171,9 +171,9 @@ final class ActionSpeakParams implements BaseModel
 
         null !== $clientState && $obj->clientState = $clientState;
         null !== $commandID && $obj->commandID = $commandID;
-        null !== $language && $obj->language = $language instanceof Language ? $language->value : $language;
-        null !== $payloadType && $obj->payloadType = $payloadType instanceof PayloadType ? $payloadType->value : $payloadType;
-        null !== $serviceLevel && $obj->serviceLevel = $serviceLevel instanceof ServiceLevel ? $serviceLevel->value : $serviceLevel;
+        null !== $language && $obj['language'] = $language;
+        null !== $payloadType && $obj['payloadType'] = $payloadType;
+        null !== $serviceLevel && $obj['serviceLevel'] = $serviceLevel;
         null !== $stop && $obj->stop = $stop;
         null !== $voiceSettings && $obj->voiceSettings = $voiceSettings;
 
@@ -242,7 +242,7 @@ final class ActionSpeakParams implements BaseModel
     public function withLanguage(Language|string $language): self
     {
         $obj = clone $this;
-        $obj->language = $language instanceof Language ? $language->value : $language;
+        $obj['language'] = $language;
 
         return $obj;
     }
@@ -255,7 +255,7 @@ final class ActionSpeakParams implements BaseModel
     public function withPayloadType(PayloadType|string $payloadType): self
     {
         $obj = clone $this;
-        $obj->payloadType = $payloadType instanceof PayloadType ? $payloadType->value : $payloadType;
+        $obj['payloadType'] = $payloadType;
 
         return $obj;
     }
@@ -268,7 +268,7 @@ final class ActionSpeakParams implements BaseModel
     public function withServiceLevel(ServiceLevel|string $serviceLevel): self
     {
         $obj = clone $this;
-        $obj->serviceLevel = $serviceLevel instanceof ServiceLevel ? $serviceLevel->value : $serviceLevel;
+        $obj['serviceLevel'] = $serviceLevel;
 
         return $obj;
     }

@@ -6,20 +6,20 @@ namespace Telnyx\ShortCodes;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\ShortCode;
 
 /**
  * @phpstan-type short_code_get_response = array{data?: ShortCode}
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class ShortCodeGetResponse implements BaseModel
+final class ShortCodeGetResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<short_code_get_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     #[Api(optional: true)]
     public ?ShortCode $data;

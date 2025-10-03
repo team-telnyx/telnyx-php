@@ -9,7 +9,6 @@ use Telnyx\BundlePricing\BillingBundles\BillingBundleListParams\Filter;
 use Telnyx\BundlePricing\BillingBundles\BillingBundleListParams\Page;
 use Telnyx\BundlePricing\BillingBundles\BillingBundleListResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 
 use const Telnyx\Core\OMIT as omit;
@@ -20,8 +19,6 @@ interface BillingBundlesContract
      * @api
      *
      * @param string $authorizationBearer Authenticates the request with your Telnyx API V2 KEY
-     *
-     * @return BillingBundleGetResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -35,8 +32,6 @@ interface BillingBundlesContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return BillingBundleGetResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -53,8 +48,6 @@ interface BillingBundlesContract
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param string $authorizationBearer Authenticates the request with your Telnyx API V2 KEY
      *
-     * @return BillingBundleListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -68,8 +61,6 @@ interface BillingBundlesContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return BillingBundleListResponse<HasRawResponse>
      *
      * @throws APIException
      */

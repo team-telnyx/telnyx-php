@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\Rooms\RoomGetResponse;
 use Telnyx\Rooms\RoomListParams\Filter;
@@ -28,8 +27,6 @@ interface RoomsContract
      * @param string $webhookEventURL The URL where webhooks related to this room will be sent. Must include a scheme, such as 'https'.
      * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
      *
-     * @return RoomNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -47,8 +44,6 @@ interface RoomsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return RoomNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function createRaw(
@@ -60,8 +55,6 @@ interface RoomsContract
      * @api
      *
      * @param bool $includeSessions to decide if room sessions should be included in the response
-     *
-     * @return RoomGetResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -75,8 +68,6 @@ interface RoomsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return RoomGetResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -96,8 +87,6 @@ interface RoomsContract
      * @param string $webhookEventURL The URL where webhooks related to this room will be sent. Must include a scheme, such as 'https'.
      * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
      *
-     * @return RoomUpdateResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function update(
@@ -116,8 +105,6 @@ interface RoomsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return RoomUpdateResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function updateRaw(
@@ -133,8 +120,6 @@ interface RoomsContract
      * @param bool $includeSessions to decide if room sessions should be included in the response
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
-     * @return RoomListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -148,8 +133,6 @@ interface RoomsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return RoomListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -165,17 +148,6 @@ interface RoomsContract
      */
     public function delete(
         string $roomID,
-        ?RequestOptions $requestOptions = null
-    ): mixed;
-
-    /**
-     * @api
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $roomID,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): mixed;
 }

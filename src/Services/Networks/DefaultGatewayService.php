@@ -6,7 +6,6 @@ namespace Telnyx\Services\Networks;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Networks\DefaultGateway\DefaultGatewayCreateParams;
 use Telnyx\Networks\DefaultGateway\DefaultGatewayDeleteResponse;
 use Telnyx\Networks\DefaultGateway\DefaultGatewayGetResponse;
@@ -30,8 +29,6 @@ final class DefaultGatewayService implements DefaultGatewayContract
      *
      * @param string $wireguardPeerID wireguard peer ID
      *
-     * @return DefaultGatewayNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -48,8 +45,6 @@ final class DefaultGatewayService implements DefaultGatewayContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return DefaultGatewayNewResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -78,29 +73,10 @@ final class DefaultGatewayService implements DefaultGatewayContract
      *
      * Get Default Gateway status.
      *
-     * @return DefaultGatewayGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): DefaultGatewayGetResponse {
-        $params = [];
-
-        return $this->retrieveRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return DefaultGatewayGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): DefaultGatewayGetResponse {
         // @phpstan-ignore-next-line;
@@ -117,29 +93,10 @@ final class DefaultGatewayService implements DefaultGatewayContract
      *
      * Delete Default Gateway.
      *
-     * @return DefaultGatewayDeleteResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): DefaultGatewayDeleteResponse {
-        $params = [];
-
-        return $this->deleteRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return DefaultGatewayDeleteResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): DefaultGatewayDeleteResponse {
         // @phpstan-ignore-next-line;

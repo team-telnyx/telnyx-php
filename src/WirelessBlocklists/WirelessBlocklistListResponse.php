@@ -7,21 +7,21 @@ namespace Telnyx\WirelessBlocklists;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type wireless_blocklist_list_response = array{
  *   data?: list<WirelessBlocklist>, meta?: PaginationMeta
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class WirelessBlocklistListResponse implements BaseModel
+final class WirelessBlocklistListResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<wireless_blocklist_list_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /** @var list<WirelessBlocklist>|null $data */
     #[Api(list: WirelessBlocklist::class, optional: true)]

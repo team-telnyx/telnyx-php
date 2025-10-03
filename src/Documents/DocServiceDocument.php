@@ -125,7 +125,7 @@ final class DocServiceDocument implements BaseModel
         null !== $recordType && $obj->recordType = $recordType;
         null !== $sha256 && $obj->sha256 = $sha256;
         null !== $size && $obj->size = $size;
-        null !== $status && $obj->status = $status instanceof Status ? $status->value : $status;
+        null !== $status && $obj['status'] = $status;
         null !== $updatedAt && $obj->updatedAt = $updatedAt;
 
         return $obj;
@@ -227,7 +227,7 @@ final class DocServiceDocument implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

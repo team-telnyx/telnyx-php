@@ -142,7 +142,7 @@ final class BundleLimit implements BaseModel
         null !== $country && $obj->country = $country;
         null !== $countryCode && $obj->countryCode = $countryCode;
         null !== $countryISO && $obj->countryISO = $countryISO;
-        null !== $direction && $obj->direction = $direction instanceof Direction ? $direction->value : $direction;
+        null !== $direction && $obj['direction'] = $direction;
         null !== $limit && $obj->limit = $limit;
         null !== $rate && $obj->rate = $rate;
         null !== $types && $obj->types = $types;
@@ -233,7 +233,7 @@ final class BundleLimit implements BaseModel
     public function withDirection(Direction|string $direction): self
     {
         $obj = clone $this;
-        $obj->direction = $direction instanceof Direction ? $direction->value : $direction;
+        $obj['direction'] = $direction;
 
         return $obj;
     }

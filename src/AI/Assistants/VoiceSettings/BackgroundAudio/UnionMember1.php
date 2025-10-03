@@ -61,7 +61,7 @@ final class UnionMember1 implements BaseModel
     {
         $obj = new self;
 
-        $obj->type = $type instanceof Type ? $type->value : $type;
+        $obj['type'] = $type;
         $obj->value = $value;
 
         return $obj;
@@ -75,7 +75,7 @@ final class UnionMember1 implements BaseModel
     public function withType(Type|string $type): self
     {
         $obj = clone $this;
-        $obj->type = $type instanceof Type ? $type->value : $type;
+        $obj['type'] = $type;
 
         return $obj;
     }

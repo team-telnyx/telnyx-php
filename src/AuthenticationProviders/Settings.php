@@ -95,7 +95,7 @@ final class Settings implements BaseModel
         $obj->idpEntityID = $idpEntityID;
         $obj->idpSSOTargetURL = $idpSSOTargetURL;
 
-        null !== $idpCertFingerprintAlgorithm && $obj->idpCertFingerprintAlgorithm = $idpCertFingerprintAlgorithm instanceof IdpCertFingerprintAlgorithm ? $idpCertFingerprintAlgorithm->value : $idpCertFingerprintAlgorithm;
+        null !== $idpCertFingerprintAlgorithm && $obj['idpCertFingerprintAlgorithm'] = $idpCertFingerprintAlgorithm;
 
         return $obj;
     }
@@ -142,7 +142,7 @@ final class Settings implements BaseModel
         IdpCertFingerprintAlgorithm|string $idpCertFingerprintAlgorithm
     ): self {
         $obj = clone $this;
-        $obj->idpCertFingerprintAlgorithm = $idpCertFingerprintAlgorithm instanceof IdpCertFingerprintAlgorithm ? $idpCertFingerprintAlgorithm->value : $idpCertFingerprintAlgorithm;
+        $obj['idpCertFingerprintAlgorithm'] = $idpCertFingerprintAlgorithm;
 
         return $obj;
     }

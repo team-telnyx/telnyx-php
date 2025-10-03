@@ -92,7 +92,7 @@ final class Data implements BaseModel
         null !== $id && $obj->id = $id;
         null !== $enabled && $obj->enabled = $enabled;
         null !== $invoiceEnabled && $obj->invoiceEnabled = $invoiceEnabled;
-        null !== $preference && $obj->preference = $preference instanceof Preference ? $preference->value : $preference;
+        null !== $preference && $obj['preference'] = $preference;
         null !== $rechargeAmount && $obj->rechargeAmount = $rechargeAmount;
         null !== $recordType && $obj->recordType = $recordType;
         null !== $thresholdAmount && $obj->thresholdAmount = $thresholdAmount;
@@ -138,7 +138,7 @@ final class Data implements BaseModel
     public function withPreference(Preference|string $preference): self
     {
         $obj = clone $this;
-        $obj->preference = $preference instanceof Preference ? $preference->value : $preference;
+        $obj['preference'] = $preference;
 
         return $obj;
     }

@@ -66,28 +66,7 @@ interface AdvancedOrdersContract
      *
      * @throws APIException
      */
-    public function retrieveRaw(
-        string $orderID,
-        mixed $params,
-        ?RequestOptions $requestOptions = null
-    ): mixed;
-
-    /**
-     * @api
-     *
-     * @throws APIException
-     */
     public function list(
-        ?RequestOptions $requestOptions = null
-    ): mixed;
-
-    /**
-     * @api
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): mixed;
 

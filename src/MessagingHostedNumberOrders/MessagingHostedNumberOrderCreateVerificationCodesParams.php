@@ -85,7 +85,7 @@ final class MessagingHostedNumberOrderCreateVerificationCodesParams implements B
         $obj = new self;
 
         $obj->phoneNumbers = $phoneNumbers;
-        $obj->verificationMethod = $verificationMethod instanceof VerificationMethod ? $verificationMethod->value : $verificationMethod;
+        $obj['verificationMethod'] = $verificationMethod;
 
         return $obj;
     }
@@ -108,7 +108,7 @@ final class MessagingHostedNumberOrderCreateVerificationCodesParams implements B
         VerificationMethod|string $verificationMethod
     ): self {
         $obj = clone $this;
-        $obj->verificationMethod = $verificationMethod instanceof VerificationMethod ? $verificationMethod->value : $verificationMethod;
+        $obj['verificationMethod'] = $verificationMethod;
 
         return $obj;
     }

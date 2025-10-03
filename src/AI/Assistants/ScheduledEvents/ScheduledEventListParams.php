@@ -75,7 +75,7 @@ final class ScheduledEventListParams implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $conversationChannel && $obj->conversationChannel = $conversationChannel instanceof ConversationChannelType ? $conversationChannel->value : $conversationChannel;
+        null !== $conversationChannel && $obj['conversationChannel'] = $conversationChannel;
         null !== $fromDate && $obj->fromDate = $fromDate;
         null !== $page && $obj->page = $page;
         null !== $toDate && $obj->toDate = $toDate;
@@ -90,7 +90,7 @@ final class ScheduledEventListParams implements BaseModel
         ConversationChannelType|string $conversationChannel
     ): self {
         $obj = clone $this;
-        $obj->conversationChannel = $conversationChannel instanceof ConversationChannelType ? $conversationChannel->value : $conversationChannel;
+        $obj['conversationChannel'] = $conversationChannel;
 
         return $obj;
     }

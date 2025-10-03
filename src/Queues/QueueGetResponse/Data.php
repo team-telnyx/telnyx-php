@@ -133,7 +133,7 @@ final class Data implements BaseModel
         $obj->currentSize = $currentSize;
         $obj->maxSize = $maxSize;
         $obj->name = $name;
-        $obj->recordType = $recordType instanceof RecordType ? $recordType->value : $recordType;
+        $obj['recordType'] = $recordType;
         $obj->updatedAt = $updatedAt;
 
         return $obj;
@@ -211,7 +211,7 @@ final class Data implements BaseModel
     public function withRecordType(RecordType|string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType instanceof RecordType ? $recordType->value : $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }

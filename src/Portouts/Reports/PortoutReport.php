@@ -109,8 +109,8 @@ final class PortoutReport implements BaseModel
         null !== $documentID && $obj->documentID = $documentID;
         null !== $params && $obj->params = $params;
         null !== $recordType && $obj->recordType = $recordType;
-        null !== $reportType && $obj->reportType = $reportType instanceof ReportType ? $reportType->value : $reportType;
-        null !== $status && $obj->status = $status instanceof Status ? $status->value : $status;
+        null !== $reportType && $obj['reportType'] = $reportType;
+        null !== $status && $obj['status'] = $status;
         null !== $updatedAt && $obj->updatedAt = $updatedAt;
 
         return $obj;
@@ -179,7 +179,7 @@ final class PortoutReport implements BaseModel
     public function withReportType(ReportType|string $reportType): self
     {
         $obj = clone $this;
-        $obj->reportType = $reportType instanceof ReportType ? $reportType->value : $reportType;
+        $obj['reportType'] = $reportType;
 
         return $obj;
     }
@@ -192,7 +192,7 @@ final class PortoutReport implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

@@ -123,7 +123,7 @@ final class Data implements BaseModel
         $obj->documentID = $documentID;
         $obj->portoutID = $portoutID;
         $obj->recordType = $recordType;
-        $obj->type = $type instanceof Type ? $type->value : $type;
+        $obj['type'] = $type;
         $obj->updatedAt = $updatedAt;
 
         return $obj;
@@ -189,7 +189,7 @@ final class Data implements BaseModel
     public function withType(Type|string $type): self
     {
         $obj = clone $this;
-        $obj->type = $type instanceof Type ? $type->value : $type;
+        $obj['type'] = $type;
 
         return $obj;
     }

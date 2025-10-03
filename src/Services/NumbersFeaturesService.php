@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\NumbersFeatures\NumbersFeatureCreateParams;
 use Telnyx\NumbersFeatures\NumbersFeatureNewResponse;
 use Telnyx\RequestOptions;
@@ -26,8 +25,6 @@ final class NumbersFeaturesService implements NumbersFeaturesContract
      *
      * @param list<string> $phoneNumbers
      *
-     * @return NumbersFeatureNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -43,8 +40,6 @@ final class NumbersFeaturesService implements NumbersFeaturesContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return NumbersFeatureNewResponse<HasRawResponse>
      *
      * @throws APIException
      */

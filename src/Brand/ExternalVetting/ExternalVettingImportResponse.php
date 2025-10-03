@@ -6,7 +6,9 @@ namespace Telnyx\Brand\ExternalVetting;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type external_vetting_import_response = array{
@@ -18,15 +20,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *   vettingScore?: int,
  *   vettingToken?: string,
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class ExternalVettingImportResponse implements BaseModel
+final class ExternalVettingImportResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<external_vetting_import_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /**
      * Vetting submission date. This is the date when the vetting request is generated in ISO 8601 format.

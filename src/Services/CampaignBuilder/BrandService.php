@@ -8,7 +8,6 @@ use Telnyx\CampaignBuilder\Brand\BrandQualifyByUsecaseParams;
 use Telnyx\CampaignBuilder\Brand\BrandQualifyByUsecaseResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\CampaignBuilder\BrandContract;
 
@@ -26,8 +25,6 @@ final class BrandService implements BrandContract
      *
      * @param string $brandID
      *
-     * @return BrandQualifyByUsecaseResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function qualifyByUsecase(
@@ -44,8 +41,6 @@ final class BrandService implements BrandContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return BrandQualifyByUsecaseResponse<HasRawResponse>
      *
      * @throws APIException
      */

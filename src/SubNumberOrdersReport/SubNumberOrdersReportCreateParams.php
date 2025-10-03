@@ -106,7 +106,7 @@ final class SubNumberOrdersReportCreateParams implements BaseModel
         null !== $createdAtLt && $obj->createdAtLt = $createdAtLt;
         null !== $customerReference && $obj->customerReference = $customerReference;
         null !== $orderRequestID && $obj->orderRequestID = $orderRequestID;
-        null !== $status && $obj->status = $status instanceof Status ? $status->value : $status;
+        null !== $status && $obj['status'] = $status;
 
         return $obj;
     }
@@ -174,7 +174,7 @@ final class SubNumberOrdersReportCreateParams implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

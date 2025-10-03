@@ -6,7 +6,6 @@ namespace Telnyx\Services\Texml;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\AccountsContract;
 use Telnyx\Services\Texml\Accounts\CallsService;
@@ -62,8 +61,6 @@ final class AccountsService implements AccountsContract
      * @param int $page the number of the page to be displayed, zero-indexed, should be used in conjuction with PageToken
      * @param int $pageSize The number of records to be displayed on a page
      *
-     * @return AccountGetRecordingsJsonResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieveRecordingsJson(
@@ -88,8 +85,6 @@ final class AccountsService implements AccountsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return AccountGetRecordingsJsonResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -121,8 +116,6 @@ final class AccountsService implements AccountsContract
      * @param int $pageSize The number of records to be displayed on a page
      * @param string $pageToken used to request the next page of results
      *
-     * @return AccountGetTranscriptionsJsonResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieveTranscriptionsJson(
@@ -144,8 +137,6 @@ final class AccountsService implements AccountsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return AccountGetTranscriptionsJsonResponse<HasRawResponse>
      *
      * @throws APIException
      */

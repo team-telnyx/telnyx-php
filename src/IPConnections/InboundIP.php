@@ -206,22 +206,22 @@ final class InboundIP implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $aniNumberFormat && $obj->aniNumberFormat = $aniNumberFormat instanceof AniNumberFormat ? $aniNumberFormat->value : $aniNumberFormat;
+        null !== $aniNumberFormat && $obj['aniNumberFormat'] = $aniNumberFormat;
         null !== $channelLimit && $obj->channelLimit = $channelLimit;
         null !== $codecs && $obj->codecs = $codecs;
         null !== $defaultPrimaryIPID && $obj->defaultPrimaryIPID = $defaultPrimaryIPID;
-        null !== $defaultRoutingMethod && $obj->defaultRoutingMethod = $defaultRoutingMethod instanceof DefaultRoutingMethod ? $defaultRoutingMethod->value : $defaultRoutingMethod;
+        null !== $defaultRoutingMethod && $obj['defaultRoutingMethod'] = $defaultRoutingMethod;
         null !== $defaultSecondaryIPID && $obj->defaultSecondaryIPID = $defaultSecondaryIPID;
         null !== $defaultTertiaryIPID && $obj->defaultTertiaryIPID = $defaultTertiaryIPID;
-        null !== $dnisNumberFormat && $obj->dnisNumberFormat = $dnisNumberFormat instanceof DnisNumberFormat ? $dnisNumberFormat->value : $dnisNumberFormat;
+        null !== $dnisNumberFormat && $obj['dnisNumberFormat'] = $dnisNumberFormat;
         null !== $generateRingbackTone && $obj->generateRingbackTone = $generateRingbackTone;
         null !== $isupHeadersEnabled && $obj->isupHeadersEnabled = $isupHeadersEnabled;
         null !== $prackEnabled && $obj->prackEnabled = $prackEnabled;
         null !== $shakenStirEnabled && $obj->shakenStirEnabled = $shakenStirEnabled;
         null !== $sipCompactHeadersEnabled && $obj->sipCompactHeadersEnabled = $sipCompactHeadersEnabled;
-        null !== $sipRegion && $obj->sipRegion = $sipRegion instanceof SipRegion ? $sipRegion->value : $sipRegion;
+        null !== $sipRegion && $obj['sipRegion'] = $sipRegion;
         null !== $sipSubdomain && $obj->sipSubdomain = $sipSubdomain;
-        null !== $sipSubdomainReceiveSettings && $obj->sipSubdomainReceiveSettings = $sipSubdomainReceiveSettings instanceof SipSubdomainReceiveSettings ? $sipSubdomainReceiveSettings->value : $sipSubdomainReceiveSettings;
+        null !== $sipSubdomainReceiveSettings && $obj['sipSubdomainReceiveSettings'] = $sipSubdomainReceiveSettings;
         null !== $timeout1xxSecs && $obj->timeout1xxSecs = $timeout1xxSecs;
         null !== $timeout2xxSecs && $obj->timeout2xxSecs = $timeout2xxSecs;
 
@@ -237,7 +237,7 @@ final class InboundIP implements BaseModel
         AniNumberFormat|string $aniNumberFormat
     ): self {
         $obj = clone $this;
-        $obj->aniNumberFormat = $aniNumberFormat instanceof AniNumberFormat ? $aniNumberFormat->value : $aniNumberFormat;
+        $obj['aniNumberFormat'] = $aniNumberFormat;
 
         return $obj;
     }
@@ -287,7 +287,7 @@ final class InboundIP implements BaseModel
         DefaultRoutingMethod|string $defaultRoutingMethod
     ): self {
         $obj = clone $this;
-        $obj->defaultRoutingMethod = $defaultRoutingMethod instanceof DefaultRoutingMethod ? $defaultRoutingMethod->value : $defaultRoutingMethod;
+        $obj['defaultRoutingMethod'] = $defaultRoutingMethod;
 
         return $obj;
     }
@@ -323,7 +323,7 @@ final class InboundIP implements BaseModel
         DnisNumberFormat|string $dnisNumberFormat
     ): self {
         $obj = clone $this;
-        $obj->dnisNumberFormat = $dnisNumberFormat instanceof DnisNumberFormat ? $dnisNumberFormat->value : $dnisNumberFormat;
+        $obj['dnisNumberFormat'] = $dnisNumberFormat;
 
         return $obj;
     }
@@ -392,7 +392,7 @@ final class InboundIP implements BaseModel
     public function withSipRegion(SipRegion|string $sipRegion): self
     {
         $obj = clone $this;
-        $obj->sipRegion = $sipRegion instanceof SipRegion ? $sipRegion->value : $sipRegion;
+        $obj['sipRegion'] = $sipRegion;
 
         return $obj;
     }
@@ -417,7 +417,7 @@ final class InboundIP implements BaseModel
         SipSubdomainReceiveSettings|string $sipSubdomainReceiveSettings
     ): self {
         $obj = clone $this;
-        $obj->sipSubdomainReceiveSettings = $sipSubdomainReceiveSettings instanceof SipSubdomainReceiveSettings ? $sipSubdomainReceiveSettings->value : $sipSubdomainReceiveSettings;
+        $obj['sipSubdomainReceiveSettings'] = $sipSubdomainReceiveSettings;
 
         return $obj;
     }

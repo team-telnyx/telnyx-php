@@ -159,13 +159,13 @@ final class ExternalConnection implements BaseModel
         null !== $active && $obj->active = $active;
         null !== $createdAt && $obj->createdAt = $createdAt;
         null !== $credentialActive && $obj->credentialActive = $credentialActive;
-        null !== $externalSipConnection && $obj->externalSipConnection = $externalSipConnection instanceof ExternalSipConnection ? $externalSipConnection->value : $externalSipConnection;
+        null !== $externalSipConnection && $obj['externalSipConnection'] = $externalSipConnection;
         null !== $inbound && $obj->inbound = $inbound;
         null !== $outbound && $obj->outbound = $outbound;
         null !== $recordType && $obj->recordType = $recordType;
         null !== $tags && $obj->tags = $tags;
         null !== $updatedAt && $obj->updatedAt = $updatedAt;
-        null !== $webhookAPIVersion && $obj->webhookAPIVersion = $webhookAPIVersion instanceof WebhookAPIVersion ? $webhookAPIVersion->value : $webhookAPIVersion;
+        null !== $webhookAPIVersion && $obj['webhookAPIVersion'] = $webhookAPIVersion;
         null !== $webhookEventFailoverURL && $obj->webhookEventFailoverURL = $webhookEventFailoverURL;
         null !== $webhookEventURL && $obj->webhookEventURL = $webhookEventURL;
         null !== $webhookTimeoutSecs && $obj->webhookTimeoutSecs = $webhookTimeoutSecs;
@@ -226,7 +226,7 @@ final class ExternalConnection implements BaseModel
         ExternalSipConnection|string $externalSipConnection
     ): self {
         $obj = clone $this;
-        $obj->externalSipConnection = $externalSipConnection instanceof ExternalSipConnection ? $externalSipConnection->value : $externalSipConnection;
+        $obj['externalSipConnection'] = $externalSipConnection;
 
         return $obj;
     }
@@ -291,7 +291,7 @@ final class ExternalConnection implements BaseModel
         WebhookAPIVersion|string $webhookAPIVersion
     ): self {
         $obj = clone $this;
-        $obj->webhookAPIVersion = $webhookAPIVersion instanceof WebhookAPIVersion ? $webhookAPIVersion->value : $webhookAPIVersion;
+        $obj['webhookAPIVersion'] = $webhookAPIVersion;
 
         return $obj;
     }

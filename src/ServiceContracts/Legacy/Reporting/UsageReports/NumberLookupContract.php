@@ -55,17 +55,6 @@ interface NumberLookupContract
     /**
      * @api
      *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
-        ?RequestOptions $requestOptions = null
-    ): mixed;
-
-    /**
-     * @api
-     *
      * @param int $page
      * @param int $perPage
      *
@@ -96,17 +85,6 @@ interface NumberLookupContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): mixed;
-
-    /**
-     * @api
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): mixed;
 }

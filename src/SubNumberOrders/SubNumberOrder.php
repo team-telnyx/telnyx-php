@@ -144,12 +144,12 @@ final class SubNumberOrder implements BaseModel
         null !== $customerReference && $obj->customerReference = $customerReference;
         null !== $isBlockSubNumberOrder && $obj->isBlockSubNumberOrder = $isBlockSubNumberOrder;
         null !== $orderRequestID && $obj->orderRequestID = $orderRequestID;
-        null !== $phoneNumberType && $obj->phoneNumberType = $phoneNumberType instanceof PhoneNumberType ? $phoneNumberType->value : $phoneNumberType;
+        null !== $phoneNumberType && $obj['phoneNumberType'] = $phoneNumberType;
         null !== $phoneNumbersCount && $obj->phoneNumbersCount = $phoneNumbersCount;
         null !== $recordType && $obj->recordType = $recordType;
         null !== $regulatoryRequirements && $obj->regulatoryRequirements = $regulatoryRequirements;
         null !== $requirementsMet && $obj->requirementsMet = $requirementsMet;
-        null !== $status && $obj->status = $status instanceof Status ? $status->value : $status;
+        null !== $status && $obj['status'] = $status;
         null !== $updatedAt && $obj->updatedAt = $updatedAt;
         null !== $userID && $obj->userID = $userID;
 
@@ -220,7 +220,7 @@ final class SubNumberOrder implements BaseModel
         PhoneNumberType|string $phoneNumberType
     ): self {
         $obj = clone $this;
-        $obj->phoneNumberType = $phoneNumberType instanceof PhoneNumberType ? $phoneNumberType->value : $phoneNumberType;
+        $obj['phoneNumberType'] = $phoneNumberType;
 
         return $obj;
     }
@@ -275,7 +275,7 @@ final class SubNumberOrder implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

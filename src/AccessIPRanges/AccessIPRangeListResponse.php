@@ -7,21 +7,21 @@ namespace Telnyx\AccessIPRanges;
 use Telnyx\AccessIPRanges\AccessIPRangeListResponse\Meta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type access_ip_range_list_response = array{
  *   data: list<AccessIPRange>, meta: Meta
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class AccessIPRangeListResponse implements BaseModel
+final class AccessIPRangeListResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<access_ip_range_list_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /** @var list<AccessIPRange> $data */
     #[Api(list: AccessIPRange::class)]

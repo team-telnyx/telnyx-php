@@ -7,21 +7,21 @@ namespace Telnyx\Rooms;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type room_list_response = array{
  *   data?: list<Room>, meta?: PaginationMeta
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class RoomListResponse implements BaseModel
+final class RoomListResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<room_list_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /** @var list<Room>|null $data */
     #[Api(list: Room::class, optional: true)]

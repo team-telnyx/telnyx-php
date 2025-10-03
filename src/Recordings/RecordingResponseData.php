@@ -169,16 +169,16 @@ final class RecordingResponseData implements BaseModel
         null !== $callControlID && $obj->callControlID = $callControlID;
         null !== $callLegID && $obj->callLegID = $callLegID;
         null !== $callSessionID && $obj->callSessionID = $callSessionID;
-        null !== $channels && $obj->channels = $channels instanceof Channels ? $channels->value : $channels;
+        null !== $channels && $obj['channels'] = $channels;
         null !== $conferenceID && $obj->conferenceID = $conferenceID;
         null !== $createdAt && $obj->createdAt = $createdAt;
         null !== $downloadURLs && $obj->downloadURLs = $downloadURLs;
         null !== $durationMillis && $obj->durationMillis = $durationMillis;
-        null !== $recordType && $obj->recordType = $recordType instanceof RecordType ? $recordType->value : $recordType;
+        null !== $recordType && $obj['recordType'] = $recordType;
         null !== $recordingEndedAt && $obj->recordingEndedAt = $recordingEndedAt;
         null !== $recordingStartedAt && $obj->recordingStartedAt = $recordingStartedAt;
-        null !== $source && $obj->source = $source instanceof Source ? $source->value : $source;
-        null !== $status && $obj->status = $status instanceof Status ? $status->value : $status;
+        null !== $source && $obj['source'] = $source;
+        null !== $status && $obj['status'] = $status;
         null !== $updatedAt && $obj->updatedAt = $updatedAt;
 
         return $obj;
@@ -236,7 +236,7 @@ final class RecordingResponseData implements BaseModel
     public function withChannels(Channels|string $channels): self
     {
         $obj = clone $this;
-        $obj->channels = $channels instanceof Channels ? $channels->value : $channels;
+        $obj['channels'] = $channels;
 
         return $obj;
     }
@@ -291,7 +291,7 @@ final class RecordingResponseData implements BaseModel
     public function withRecordType(RecordType|string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType instanceof RecordType ? $recordType->value : $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -326,7 +326,7 @@ final class RecordingResponseData implements BaseModel
     public function withSource(Source|string $source): self
     {
         $obj = clone $this;
-        $obj->source = $source instanceof Source ? $source->value : $source;
+        $obj['source'] = $source;
 
         return $obj;
     }
@@ -339,7 +339,7 @@ final class RecordingResponseData implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

@@ -28,7 +28,6 @@ use Telnyx\AI\Assistants\VoiceSettings;
 use Telnyx\AI\Assistants\WebhookTool;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\VersionsContract;
 
@@ -49,8 +48,6 @@ final class VersionsService implements VersionsContract
      * @param string $assistantID
      * @param bool $includeMcpServers
      *
-     * @return VersionGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
@@ -70,8 +67,6 @@ final class VersionsService implements VersionsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return VersionGetResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -120,8 +115,6 @@ final class VersionsService implements VersionsContract
      * @param list<WebhookTool|RetrievalTool|HandoffTool|HangupTool|TransferTool|SipReferTool|DtmfTool> $tools The tools that the assistant can use. These may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables)
      * @param TranscriptionSettings $transcription
      * @param VoiceSettings $voiceSettings
-     *
-     * @return VersionUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -174,8 +167,6 @@ final class VersionsService implements VersionsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return VersionUpdateResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function updateRaw(
@@ -194,7 +185,7 @@ final class VersionsService implements VersionsContract
         return $this->client->request(
             method: 'post',
             path: ['ai/assistants/%1$s/versions/%2$s', $assistantID, $versionID],
-            body: (object) array_diff_key($parsed, array_flip(['assistantID'])),
+            body: (object) array_diff_key($parsed, ['assistantID']),
             options: $options,
             convert: VersionUpdateResponse::class,
         );
@@ -205,29 +196,10 @@ final class VersionsService implements VersionsContract
      *
      * Retrieves all versions of a specific assistant with complete configuration and metadata
      *
-     * @return AssistantsList<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
         string $assistantID,
-        ?RequestOptions $requestOptions = null
-    ): AssistantsList {
-        $params = [];
-
-        return $this->listRaw($assistantID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return AssistantsList<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        string $assistantID,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): AssistantsList {
         // @phpstan-ignore-next-line;
@@ -293,8 +265,6 @@ final class VersionsService implements VersionsContract
      *
      * @param string $assistantID
      *
-     * @return VersionPromoteResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function promote(
@@ -311,8 +281,6 @@ final class VersionsService implements VersionsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return VersionPromoteResponse<HasRawResponse>
      *
      * @throws APIException
      */

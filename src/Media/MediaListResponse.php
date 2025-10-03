@@ -7,21 +7,21 @@ namespace Telnyx\Media;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type media_list_response = array{
  *   data?: list<MediaResource>, meta?: PaginationMeta
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class MediaListResponse implements BaseModel
+final class MediaListResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<media_list_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /** @var list<MediaResource>|null $data */
     #[Api(list: MediaResource::class, optional: true)]

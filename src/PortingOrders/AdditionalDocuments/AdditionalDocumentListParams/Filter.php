@@ -43,7 +43,7 @@ final class Filter implements BaseModel
     {
         $obj = new self;
 
-        null !== $documentType && $obj->documentType = array_map(fn ($v) => $v instanceof DocumentType ? $v->value : $v, $documentType);
+        null !== $documentType && $obj['documentType'] = $documentType;
 
         return $obj;
     }
@@ -56,7 +56,7 @@ final class Filter implements BaseModel
     public function withDocumentType(array $documentType): self
     {
         $obj = clone $this;
-        $obj->documentType = array_map(fn ($v) => $v instanceof DocumentType ? $v->value : $v, $documentType);
+        $obj['documentType'] = $documentType;
 
         return $obj;
     }

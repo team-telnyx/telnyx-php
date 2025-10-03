@@ -207,11 +207,11 @@ final class MessagingProfile implements BaseModel
         null !== $mmsTranscoding && $obj->mmsTranscoding = $mmsTranscoding;
         null !== $name && $obj->name = $name;
         null !== $numberPoolSettings && $obj->numberPoolSettings = $numberPoolSettings;
-        null !== $recordType && $obj->recordType = $recordType instanceof RecordType ? $recordType->value : $recordType;
+        null !== $recordType && $obj['recordType'] = $recordType;
         null !== $updatedAt && $obj->updatedAt = $updatedAt;
         null !== $urlShortenerSettings && $obj->urlShortenerSettings = $urlShortenerSettings;
         null !== $v1Secret && $obj->v1Secret = $v1Secret;
-        null !== $webhookAPIVersion && $obj->webhookAPIVersion = $webhookAPIVersion instanceof WebhookAPIVersion ? $webhookAPIVersion->value : $webhookAPIVersion;
+        null !== $webhookAPIVersion && $obj['webhookAPIVersion'] = $webhookAPIVersion;
         null !== $webhookFailoverURL && $obj->webhookFailoverURL = $webhookFailoverURL;
         null !== $webhookURL && $obj->webhookURL = $webhookURL;
         null !== $whitelistedDestinations && $obj->whitelistedDestinations = $whitelistedDestinations;
@@ -343,7 +343,7 @@ final class MessagingProfile implements BaseModel
     public function withRecordType(RecordType|string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType instanceof RecordType ? $recordType->value : $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -397,7 +397,7 @@ final class MessagingProfile implements BaseModel
         WebhookAPIVersion|string $webhookAPIVersion
     ): self {
         $obj = clone $this;
-        $obj->webhookAPIVersion = $webhookAPIVersion instanceof WebhookAPIVersion ? $webhookAPIVersion->value : $webhookAPIVersion;
+        $obj['webhookAPIVersion'] = $webhookAPIVersion;
 
         return $obj;
     }

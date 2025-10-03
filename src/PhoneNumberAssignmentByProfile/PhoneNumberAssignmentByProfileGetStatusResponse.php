@@ -6,7 +6,9 @@ namespace Telnyx\PhoneNumberAssignmentByProfile;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileGetStatusResponse\Status;
 
 /**
@@ -16,15 +18,13 @@ use Telnyx\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileGetStatu
  *   createdAt?: \DateTimeInterface,
  *   updatedAt?: \DateTimeInterface,
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class PhoneNumberAssignmentByProfileGetStatusResponse implements BaseModel
+final class PhoneNumberAssignmentByProfileGetStatusResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<phone_number_assignment_by_profile_get_status_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /**
      * An enumeration.
@@ -79,7 +79,7 @@ final class PhoneNumberAssignmentByProfileGetStatusResponse implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
         $obj->taskID = $taskID;
 
         null !== $createdAt && $obj->createdAt = $createdAt;
@@ -96,7 +96,7 @@ final class PhoneNumberAssignmentByProfileGetStatusResponse implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

@@ -6,19 +6,19 @@ namespace Telnyx\Fqdns;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type fqdn_get_response = array{data?: Fqdn}
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class FqdnGetResponse implements BaseModel
+final class FqdnGetResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<fqdn_get_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     #[Api(optional: true)]
     public ?Fqdn $data;

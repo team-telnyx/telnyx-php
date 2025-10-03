@@ -6,19 +6,19 @@ namespace Telnyx\PhoneNumbers\Jobs;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type job_get_response = array{data?: PhoneNumbersJob}
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class JobGetResponse implements BaseModel
+final class JobGetResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<job_get_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     #[Api(optional: true)]
     public ?PhoneNumbersJob $data;

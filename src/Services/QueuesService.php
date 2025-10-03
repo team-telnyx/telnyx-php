@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Queues\QueueGetResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\QueuesContract;
@@ -32,29 +31,10 @@ final class QueuesService implements QueuesContract
      *
      * Retrieve an existing call queue
      *
-     * @return QueueGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $queueName,
-        ?RequestOptions $requestOptions = null
-    ): QueueGetResponse {
-        $params = [];
-
-        return $this->retrieveRaw($queueName, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return QueueGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $queueName,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): QueueGetResponse {
         // @phpstan-ignore-next-line;

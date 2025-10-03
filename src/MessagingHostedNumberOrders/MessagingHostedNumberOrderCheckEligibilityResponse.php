@@ -6,22 +6,22 @@ namespace Telnyx\MessagingHostedNumberOrders;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderCheckEligibilityResponse\PhoneNumber;
 
 /**
  * @phpstan-type messaging_hosted_number_order_check_eligibility_response = array{
  *   phoneNumbers?: list<PhoneNumber>
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class MessagingHostedNumberOrderCheckEligibilityResponse implements BaseModel
+final class MessagingHostedNumberOrderCheckEligibilityResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<messaging_hosted_number_order_check_eligibility_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /**
      * List of phone numbers with their eligibility status.

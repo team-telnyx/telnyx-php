@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SimCardOrdersContract;
 use Telnyx\SimCardOrders\SimCardOrderCreateParams;
@@ -34,8 +33,6 @@ final class SimCardOrdersService implements SimCardOrdersContract
      * @param string $addressID uniquely identifies the address for the order
      * @param int $quantity the amount of SIM cards to order
      *
-     * @return SimCardOrderNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -52,8 +49,6 @@ final class SimCardOrdersService implements SimCardOrdersContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return SimCardOrderNewResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -81,29 +76,10 @@ final class SimCardOrdersService implements SimCardOrdersContract
      *
      * Get a single SIM card order by its ID.
      *
-     * @return SimCardOrderGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): SimCardOrderGetResponse {
-        $params = [];
-
-        return $this->retrieveRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return SimCardOrderGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): SimCardOrderGetResponse {
         // @phpstan-ignore-next-line;
@@ -123,8 +99,6 @@ final class SimCardOrdersService implements SimCardOrdersContract
      * @param Filter $filter Consolidated filter parameter for SIM card orders (deepObject style). Originally: filter[created_at], filter[updated_at], filter[quantity], filter[cost.amount], filter[cost.currency], filter[address.id], filter[address.street_address], filter[address.extended_address], filter[address.locality], filter[address.administrative_area], filter[address.country_code], filter[address.postal_code]
      * @param Page $page Consolidated pagination parameter (deepObject style). Originally: page[number], page[size]
      *
-     * @return SimCardOrderListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -141,8 +115,6 @@ final class SimCardOrdersService implements SimCardOrdersContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return SimCardOrderListResponse<HasRawResponse>
      *
      * @throws APIException
      */

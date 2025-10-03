@@ -6,20 +6,20 @@ namespace Telnyx\GlobalIPAllowedPorts;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\GlobalIPAllowedPorts\GlobalIPAllowedPortListResponse\Data;
 
 /**
  * @phpstan-type global_ip_allowed_port_list_response = array{data?: list<Data>}
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class GlobalIPAllowedPortListResponse implements BaseModel
+final class GlobalIPAllowedPortListResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<global_ip_allowed_port_list_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /** @var list<Data>|null $data */
     #[Api(list: Data::class, optional: true)]

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\OAuth\OAuthGetJwksResponse;
 use Telnyx\OAuth\OAuthGetResponse;
 use Telnyx\OAuth\OAuthGrantsResponse;
@@ -25,8 +24,6 @@ interface OAuthContract
     /**
      * @api
      *
-     * @return OAuthGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
@@ -37,23 +34,8 @@ interface OAuthContract
     /**
      * @api
      *
-     * @return OAuthGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $consentToken,
-        mixed $params,
-        ?RequestOptions $requestOptions = null,
-    ): OAuthGetResponse;
-
-    /**
-     * @api
-     *
      * @param bool $allowed Whether the grant is allowed
      * @param string $consentToken Consent token
-     *
-     * @return OAuthGrantsResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -68,8 +50,6 @@ interface OAuthContract
      *
      * @param array<string, mixed> $params
      *
-     * @return OAuthGrantsResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function grantsRaw(
@@ -82,8 +62,6 @@ interface OAuthContract
      *
      * @param string $token The token to introspect
      *
-     * @return OAuthIntrospectResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function introspect(
@@ -95,8 +73,6 @@ interface OAuthContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return OAuthIntrospectResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -118,8 +94,6 @@ interface OAuthContract
      * @param TokenEndpointAuthMethod|value-of<TokenEndpointAuthMethod> $tokenEndpointAuthMethod Authentication method for the token endpoint
      * @param string $tosUri URL of the client's terms of service
      *
-     * @return OAuthRegisterResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function register(
@@ -139,8 +113,6 @@ interface OAuthContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return OAuthRegisterResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -188,23 +160,9 @@ interface OAuthContract
     /**
      * @api
      *
-     * @return OAuthGetJwksResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieveJwks(
-        ?RequestOptions $requestOptions = null
-    ): OAuthGetJwksResponse;
-
-    /**
-     * @api
-     *
-     * @return OAuthGetJwksResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveJwksRaw(
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): OAuthGetJwksResponse;
 
@@ -219,8 +177,6 @@ interface OAuthContract
      * @param string $redirectUri Redirect URI (for authorization_code flow)
      * @param string $refreshToken Refresh token (for refresh_token flow)
      * @param string $scope Space-separated list of requested scopes (for client_credentials)
-     *
-     * @return OAuthTokenResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -240,8 +196,6 @@ interface OAuthContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return OAuthTokenResponse<HasRawResponse>
      *
      * @throws APIException
      */

@@ -6,7 +6,9 @@ namespace Telnyx\CampaignBuilder\Brand;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type brand_qualify_by_usecase_response = array{
@@ -18,15 +20,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *   quarterlyFee?: float,
  *   usecase?: string,
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class BrandQualifyByUsecaseResponse implements BaseModel
+final class BrandQualifyByUsecaseResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<brand_qualify_by_usecase_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /**
      * Campaign annual subscription fee.

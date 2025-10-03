@@ -6,21 +6,21 @@ namespace Telnyx\ExternalConnections\PhoneNumbers;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type phone_number_update_response = array{
  *   data?: ExternalConnectionPhoneNumber
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class PhoneNumberUpdateResponse implements BaseModel
+final class PhoneNumberUpdateResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<phone_number_update_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     #[Api(optional: true)]
     public ?ExternalConnectionPhoneNumber $data;

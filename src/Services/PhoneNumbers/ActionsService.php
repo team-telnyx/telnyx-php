@@ -6,7 +6,6 @@ namespace Telnyx\Services\PhoneNumbers;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PhoneNumbers\Actions\ActionChangeBundleStatusParams;
 use Telnyx\PhoneNumbers\Actions\ActionChangeBundleStatusResponse;
 use Telnyx\PhoneNumbers\Actions\ActionEnableEmergencyParams;
@@ -30,8 +29,6 @@ final class ActionsService implements ActionsContract
      *
      * @param string $bundleID The new bundle_id setting for the number. If you are assigning the number to a bundle, this is the unique ID of the bundle you wish to use. If you are removing the number from a bundle, this must be null. You cannot assign a number from one bundle to another directly. You must first remove it from a bundle, and then assign it to a new bundle.
      *
-     * @return ActionChangeBundleStatusResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function changeBundleStatus(
@@ -48,8 +45,6 @@ final class ActionsService implements ActionsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ActionChangeBundleStatusResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -81,8 +76,6 @@ final class ActionsService implements ActionsContract
      * @param string $emergencyAddressID identifies the address to be used with emergency services
      * @param bool $emergencyEnabled indicates whether to enable emergency services on this number
      *
-     * @return ActionEnableEmergencyResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function enableEmergency(
@@ -103,8 +96,6 @@ final class ActionsService implements ActionsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ActionEnableEmergencyResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -135,8 +126,6 @@ final class ActionsService implements ActionsContract
      *
      * @param list<string> $phoneNumbers Array of phone numbers to verify ownership for
      *
-     * @return ActionVerifyOwnershipResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function verifyOwnership(
@@ -152,8 +141,6 @@ final class ActionsService implements ActionsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ActionVerifyOwnershipResponse<HasRawResponse>
      *
      * @throws APIException
      */

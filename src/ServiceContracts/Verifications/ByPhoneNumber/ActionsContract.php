@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\Verifications\ByPhoneNumber;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\Verifications\ByPhoneNumber\Actions\VerifyVerificationCodeResponse;
 
@@ -16,8 +15,6 @@ interface ActionsContract
      *
      * @param string $code this is the code the user submits for verification
      * @param string $verifyProfileID the identifier of the associated Verify profile
-     *
-     * @return VerifyVerificationCodeResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -32,8 +29,6 @@ interface ActionsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return VerifyVerificationCodeResponse<HasRawResponse>
      *
      * @throws APIException
      */

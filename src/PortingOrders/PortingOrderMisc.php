@@ -68,8 +68,8 @@ final class PortingOrderMisc implements BaseModel
         $obj = new self;
 
         null !== $newBillingPhoneNumber && $obj->newBillingPhoneNumber = $newBillingPhoneNumber;
-        null !== $remainingNumbersAction && $obj->remainingNumbersAction = $remainingNumbersAction instanceof RemainingNumbersAction ? $remainingNumbersAction->value : $remainingNumbersAction;
-        null !== $type && $obj->type = $type instanceof PortingOrderType ? $type->value : $type;
+        null !== $remainingNumbersAction && $obj['remainingNumbersAction'] = $remainingNumbersAction;
+        null !== $type && $obj['type'] = $type;
 
         return $obj;
     }
@@ -95,7 +95,7 @@ final class PortingOrderMisc implements BaseModel
         RemainingNumbersAction|string $remainingNumbersAction
     ): self {
         $obj = clone $this;
-        $obj->remainingNumbersAction = $remainingNumbersAction instanceof RemainingNumbersAction ? $remainingNumbersAction->value : $remainingNumbersAction;
+        $obj['remainingNumbersAction'] = $remainingNumbersAction;
 
         return $obj;
     }
@@ -108,7 +108,7 @@ final class PortingOrderMisc implements BaseModel
     public function withType(PortingOrderType|string $type): self
     {
         $obj = clone $this;
-        $obj->type = $type instanceof PortingOrderType ? $type->value : $type;
+        $obj['type'] = $type;
 
         return $obj;
     }

@@ -190,7 +190,7 @@ final class MessagingProfileUpdateParams implements BaseModel
         null !== $numberPoolSettings && $obj->numberPoolSettings = $numberPoolSettings;
         null !== $urlShortenerSettings && $obj->urlShortenerSettings = $urlShortenerSettings;
         null !== $v1Secret && $obj->v1Secret = $v1Secret;
-        null !== $webhookAPIVersion && $obj->webhookAPIVersion = $webhookAPIVersion instanceof WebhookAPIVersion ? $webhookAPIVersion->value : $webhookAPIVersion;
+        null !== $webhookAPIVersion && $obj['webhookAPIVersion'] = $webhookAPIVersion;
         null !== $webhookFailoverURL && $obj->webhookFailoverURL = $webhookFailoverURL;
         null !== $webhookURL && $obj->webhookURL = $webhookURL;
         null !== $whitelistedDestinations && $obj->whitelistedDestinations = $whitelistedDestinations;
@@ -330,7 +330,7 @@ final class MessagingProfileUpdateParams implements BaseModel
         WebhookAPIVersion|string $webhookAPIVersion
     ): self {
         $obj = clone $this;
-        $obj->webhookAPIVersion = $webhookAPIVersion instanceof WebhookAPIVersion ? $webhookAPIVersion->value : $webhookAPIVersion;
+        $obj['webhookAPIVersion'] = $webhookAPIVersion;
 
         return $obj;
     }

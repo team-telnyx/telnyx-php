@@ -124,7 +124,7 @@ final class Body implements BaseModel
         null !== $isAnnounced && $obj->isAnnounced = $isAnnounced;
         null !== $isConnected && $obj->isConnected = $isConnected;
         null !== $isInMaintenance && $obj->isInMaintenance = $isInMaintenance;
-        null !== $status && $obj->status = $status instanceof InterfaceStatus ? $status->value : $status;
+        null !== $status && $obj['status'] = $status;
         null !== $wireguardPeerID && $obj->wireguardPeerID = $wireguardPeerID;
 
         return $obj;
@@ -226,7 +226,7 @@ final class Body implements BaseModel
     public function withStatus(InterfaceStatus|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof InterfaceStatus ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

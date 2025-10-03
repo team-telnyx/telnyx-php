@@ -94,7 +94,7 @@ final class Data implements BaseModel
         $obj = new self;
 
         $obj->createdAt = $createdAt;
-        $obj->status = $status instanceof BackgroundTaskStatus ? $status->value : $status;
+        $obj['status'] = $status;
         $obj->taskID = $taskID;
         $obj->taskName = $taskName;
         $obj->userID = $userID;
@@ -121,7 +121,7 @@ final class Data implements BaseModel
     public function withStatus(BackgroundTaskStatus|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof BackgroundTaskStatus ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

@@ -167,7 +167,7 @@ final class ConferenceCreateParams implements BaseModel
         $obj->callControlID = $callControlID;
         $obj->name = $name;
 
-        null !== $beepEnabled && $obj->beepEnabled = $beepEnabled instanceof BeepEnabled ? $beepEnabled->value : $beepEnabled;
+        null !== $beepEnabled && $obj['beepEnabled'] = $beepEnabled;
         null !== $clientState && $obj->clientState = $clientState;
         null !== $comfortNoise && $obj->comfortNoise = $comfortNoise;
         null !== $commandID && $obj->commandID = $commandID;
@@ -210,7 +210,7 @@ final class ConferenceCreateParams implements BaseModel
     public function withBeepEnabled(BeepEnabled|string $beepEnabled): self
     {
         $obj = clone $this;
-        $obj->beepEnabled = $beepEnabled instanceof BeepEnabled ? $beepEnabled->value : $beepEnabled;
+        $obj['beepEnabled'] = $beepEnabled;
 
         return $obj;
     }

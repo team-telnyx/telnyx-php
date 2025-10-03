@@ -41,7 +41,7 @@ final class Misc implements BaseModel
     {
         $obj = new self;
 
-        null !== $type && $obj->type = $type instanceof PortingOrderType ? $type->value : $type;
+        null !== $type && $obj['type'] = $type;
 
         return $obj;
     }
@@ -54,7 +54,7 @@ final class Misc implements BaseModel
     public function withType(PortingOrderType|string $type): self
     {
         $obj = clone $this;
-        $obj->type = $type instanceof PortingOrderType ? $type->value : $type;
+        $obj['type'] = $type;
 
         return $obj;
     }

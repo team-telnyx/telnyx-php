@@ -8,7 +8,6 @@ use Telnyx\AI\FineTuning\Jobs\FineTuningJob;
 use Telnyx\AI\FineTuning\Jobs\JobCreateParams\Hyperparameters;
 use Telnyx\AI\FineTuning\Jobs\JobListResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 
 use const Telnyx\Core\OMIT as omit;
@@ -22,8 +21,6 @@ interface JobsContract
      * @param string $trainingFile the storage bucket or object used for training
      * @param Hyperparameters $hyperparameters the hyperparameters used for the fine-tuning job
      * @param string $suffix optional suffix to append to the fine tuned model's name
-     *
-     * @return FineTuningJob<HasRawResponse>
      *
      * @throws APIException
      */
@@ -40,8 +37,6 @@ interface JobsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return FineTuningJob<HasRawResponse>
-     *
      * @throws APIException
      */
     public function createRaw(
@@ -51,8 +46,6 @@ interface JobsContract
 
     /**
      * @api
-     *
-     * @return FineTuningJob<HasRawResponse>
      *
      * @throws APIException
      */
@@ -64,21 +57,6 @@ interface JobsContract
     /**
      * @api
      *
-     * @return FineTuningJob<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $jobID,
-        mixed $params,
-        ?RequestOptions $requestOptions = null
-    ): FineTuningJob;
-
-    /**
-     * @api
-     *
-     * @return JobListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -88,37 +66,10 @@ interface JobsContract
     /**
      * @api
      *
-     * @return JobListResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        mixed $params,
-        ?RequestOptions $requestOptions = null
-    ): JobListResponse;
-
-    /**
-     * @api
-     *
-     * @return FineTuningJob<HasRawResponse>
-     *
      * @throws APIException
      */
     public function cancel(
         string $jobID,
-        ?RequestOptions $requestOptions = null
-    ): FineTuningJob;
-
-    /**
-     * @api
-     *
-     * @return FineTuningJob<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function cancelRaw(
-        string $jobID,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): FineTuningJob;
 }

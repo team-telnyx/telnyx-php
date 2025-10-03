@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\IntegrationSecrets\IntegrationSecretCreateParams\Type;
 use Telnyx\IntegrationSecrets\IntegrationSecretListParams\Filter;
 use Telnyx\IntegrationSecrets\IntegrationSecretListParams\Page;
@@ -26,8 +25,6 @@ interface IntegrationSecretsContract
      * @param string $password The password for the secret. Required for basic type secrets, ignored otherwise.
      * @param string $username The username for the secret. Required for basic type secrets, ignored otherwise.
      *
-     * @return IntegrationSecretNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -44,8 +41,6 @@ interface IntegrationSecretsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return IntegrationSecretNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function createRaw(
@@ -59,8 +54,6 @@ interface IntegrationSecretsContract
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[type]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
-     * @return IntegrationSecretListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -73,8 +66,6 @@ interface IntegrationSecretsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return IntegrationSecretListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -90,17 +81,6 @@ interface IntegrationSecretsContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): mixed;
-
-    /**
-     * @api
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): mixed;
 }

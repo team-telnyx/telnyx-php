@@ -6,21 +6,21 @@ namespace Telnyx\PhoneNumbers\Actions;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type action_enable_emergency_response = array{
  *   data?: PhoneNumberWithVoiceSettings
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class ActionEnableEmergencyResponse implements BaseModel
+final class ActionEnableEmergencyResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<action_enable_emergency_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     #[Api(optional: true)]
     public ?PhoneNumberWithVoiceSettings $data;

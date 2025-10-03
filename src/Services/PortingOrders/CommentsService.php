@@ -6,7 +6,6 @@ namespace Telnyx\Services\PortingOrders;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PortingOrders\Comments\CommentCreateParams;
 use Telnyx\PortingOrders\Comments\CommentListParams;
 use Telnyx\PortingOrders\Comments\CommentListParams\Page;
@@ -31,8 +30,6 @@ final class CommentsService implements CommentsContract
      *
      * @param string $body
      *
-     * @return CommentNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -49,8 +46,6 @@ final class CommentsService implements CommentsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return CommentNewResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -81,8 +76,6 @@ final class CommentsService implements CommentsContract
      *
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
-     * @return CommentListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -99,8 +92,6 @@ final class CommentsService implements CommentsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return CommentListResponse<HasRawResponse>
      *
      * @throws APIException
      */

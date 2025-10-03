@@ -6,20 +6,20 @@ namespace Telnyx\PortingOrders\ActionRequirements;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateResponse\Data;
 
 /**
  * @phpstan-type action_requirement_initiate_response = array{data?: Data}
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class ActionRequirementInitiateResponse implements BaseModel
+final class ActionRequirementInitiateResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<action_requirement_initiate_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     #[Api(optional: true)]
     public ?Data $data;

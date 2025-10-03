@@ -6,7 +6,6 @@ namespace Telnyx\Services\Texml\Accounts;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\Accounts\CallsContract;
 use Telnyx\Services\Texml\Accounts\Calls\RecordingsJsonService;
@@ -85,8 +84,6 @@ final class CallsService implements CallsContract
      *
      * @param string $accountSid
      *
-     * @return CallGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
@@ -103,8 +100,6 @@ final class CallsService implements CallsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return CallGetResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -144,8 +139,6 @@ final class CallsService implements CallsContract
      * @param string $texml teXML to replace the current one with
      * @param string $url the URL where TeXML will make a request to retrieve a new set of TeXML instructions to continue the call flow
      *
-     * @return CallUpdateResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function update(
@@ -181,8 +174,6 @@ final class CallsService implements CallsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return CallUpdateResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function updateRaw(
@@ -202,7 +193,7 @@ final class CallsService implements CallsContract
             method: 'post',
             path: ['texml/Accounts/%1$s/Calls/%2$s', $accountSid, $callSid],
             headers: ['Content-Type' => 'application/x-www-form-urlencoded'],
-            body: (object) array_diff_key($parsed, array_flip(['accountSid'])),
+            body: (object) array_diff_key($parsed, ['accountSid']),
             options: $options,
             convert: CallUpdateResponse::class,
         );
@@ -246,8 +237,6 @@ final class CallsService implements CallsContract
      * @param Trim|value-of<Trim> $trim Whether to trim any leading and trailing silence from the recording. Defaults to `trim-silence`.
      * @param string $url the URL from which Telnyx will retrieve the TeXML call instructions
      * @param URLMethod|value-of<URLMethod> $urlMethod HTTP request type used for `Url`. The default value is inherited from TeXML Application setting.
-     *
-     * @return CallCallsResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -332,8 +321,6 @@ final class CallsService implements CallsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return CallCallsResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function callsRaw(
@@ -373,8 +360,6 @@ final class CallsService implements CallsContract
      * @param string $startTimeLt Filters calls by their start date (before). Expected format is YYYY-MM-DD
      * @param Status|value-of<Status> $status filters calls by status
      * @param string $to filters calls by the to number
-     *
-     * @return CallGetCallsResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -417,8 +402,6 @@ final class CallsService implements CallsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return CallGetCallsResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieveCallsRaw(
@@ -457,8 +440,6 @@ final class CallsService implements CallsContract
      * @param telnyx\Texml\Accounts\Calls\CallSiprecJsonParams\StatusCallbackMethod|value-of<Telnyx\Texml\Accounts\Calls\CallSiprecJsonParams\StatusCallbackMethod> $statusCallbackMethod HTTP request type used for `StatusCallback`
      * @param Track|value-of<Track> $track The track to be used for siprec session. Can be `both_tracks`, `inbound_track` or `outbound_track`. Defaults to `both_tracks`.
      *
-     * @return CallSiprecJsonResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function siprecJson(
@@ -496,8 +477,6 @@ final class CallsService implements CallsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return CallSiprecJsonResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function siprecJsonRaw(
@@ -519,7 +498,7 @@ final class CallsService implements CallsContract
                 'texml/Accounts/%1$s/Calls/%2$s/Siprec.json', $accountSid, $callSid,
             ],
             headers: ['Content-Type' => 'application/x-www-form-urlencoded'],
-            body: (object) array_diff_key($parsed, array_flip(['accountSid'])),
+            body: (object) array_diff_key($parsed, ['accountSid']),
             options: $options,
             convert: CallSiprecJsonResponse::class,
         );
@@ -538,8 +517,6 @@ final class CallsService implements CallsContract
      * @param telnyx\Texml\Accounts\Calls\CallStreamsJsonParams\StatusCallbackMethod|value-of<Telnyx\Texml\Accounts\Calls\CallStreamsJsonParams\StatusCallbackMethod> $statusCallbackMethod HTTP method used to send status callbacks
      * @param Telnyx\Texml\Accounts\Calls\CallStreamsJsonParams\Track|value-of<Telnyx\Texml\Accounts\Calls\CallStreamsJsonParams\Track> $track Tracks to be included in the stream
      * @param string $url the destination WebSocket address where the stream is going to be delivered
-     *
-     * @return CallStreamsJsonResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -574,8 +551,6 @@ final class CallsService implements CallsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return CallStreamsJsonResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function streamsJsonRaw(
@@ -597,7 +572,7 @@ final class CallsService implements CallsContract
                 'texml/Accounts/%1$s/Calls/%2$s/Streams.json', $accountSid, $callSid,
             ],
             headers: ['Content-Type' => 'application/x-www-form-urlencoded'],
-            body: (object) array_diff_key($parsed, array_flip(['accountSid'])),
+            body: (object) array_diff_key($parsed, ['accountSid']),
             options: $options,
             convert: CallStreamsJsonResponse::class,
         );

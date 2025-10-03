@@ -160,11 +160,11 @@ final class Filter implements BaseModel
         null !== $emergencyAddressID && $obj->emergencyAddressID = $emergencyAddressID;
         null !== $numberType && $obj->numberType = $numberType;
         null !== $phoneNumber && $obj->phoneNumber = $phoneNumber;
-        null !== $source && $obj->source = $source instanceof Source ? $source->value : $source;
-        null !== $status && $obj->status = $status instanceof Status ? $status->value : $status;
+        null !== $source && $obj['source'] = $source;
+        null !== $status && $obj['status'] = $status;
         null !== $tag && $obj->tag = $tag;
         null !== $voiceConnectionName && $obj->voiceConnectionName = $voiceConnectionName;
-        null !== $voiceUsagePaymentMethod && $obj->voiceUsagePaymentMethod = $voiceUsagePaymentMethod instanceof VoiceUsagePaymentMethod ? $voiceUsagePaymentMethod->value : $voiceUsagePaymentMethod;
+        null !== $voiceUsagePaymentMethod && $obj['voiceUsagePaymentMethod'] = $voiceUsagePaymentMethod;
 
         return $obj;
     }
@@ -257,7 +257,7 @@ final class Filter implements BaseModel
     public function withSource(Source|string $source): self
     {
         $obj = clone $this;
-        $obj->source = $source instanceof Source ? $source->value : $source;
+        $obj['source'] = $source;
 
         return $obj;
     }
@@ -270,7 +270,7 @@ final class Filter implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }
@@ -307,7 +307,7 @@ final class Filter implements BaseModel
         VoiceUsagePaymentMethod|string $voiceUsagePaymentMethod
     ): self {
         $obj = clone $this;
-        $obj->voiceUsagePaymentMethod = $voiceUsagePaymentMethod instanceof VoiceUsagePaymentMethod ? $voiceUsagePaymentMethod->value : $voiceUsagePaymentMethod;
+        $obj['voiceUsagePaymentMethod'] = $voiceUsagePaymentMethod;
 
         return $obj;
     }

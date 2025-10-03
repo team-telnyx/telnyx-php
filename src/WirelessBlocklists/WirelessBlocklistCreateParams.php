@@ -96,7 +96,7 @@ final class WirelessBlocklistCreateParams implements BaseModel
         $obj = new self;
 
         $obj->name = $name;
-        $obj->type = $type instanceof Type ? $type->value : $type;
+        $obj['type'] = $type;
         $obj->values = $values;
 
         return $obj;
@@ -121,7 +121,7 @@ final class WirelessBlocklistCreateParams implements BaseModel
     public function withType(Type|string $type): self
     {
         $obj = clone $this;
-        $obj->type = $type instanceof Type ? $type->value : $type;
+        $obj['type'] = $type;
 
         return $obj;
     }

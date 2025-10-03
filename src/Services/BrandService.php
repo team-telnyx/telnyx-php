@@ -19,7 +19,6 @@ use Telnyx\Brand\TelnyxBrand;
 use Telnyx\Brand\Vertical;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\BrandContract;
 use Telnyx\Services\Brand\ExternalVettingService;
@@ -72,8 +71,6 @@ final class BrandService implements BrandContract
      * @param string $webhookFailoverURL webhook failover URL for brand status updates
      * @param string $webhookURL webhook URL for brand status updates
      * @param string $website brand website URL
-     *
-     * @return TelnyxBrand<HasRawResponse>
      *
      * @throws APIException
      */
@@ -139,8 +136,6 @@ final class BrandService implements BrandContract
      *
      * @param array<string, mixed> $params
      *
-     * @return TelnyxBrand<HasRawResponse>
-     *
      * @throws APIException
      */
     public function createRaw(
@@ -167,29 +162,10 @@ final class BrandService implements BrandContract
      *
      * Retrieve a brand by `brandId`.
      *
-     * @return BrandGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $brandID,
-        ?RequestOptions $requestOptions = null
-    ): BrandGetResponse {
-        $params = [];
-
-        return $this->retrieveRaw($brandID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return BrandGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $brandID,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): BrandGetResponse {
         // @phpstan-ignore-next-line;
@@ -233,8 +209,6 @@ final class BrandService implements BrandContract
      * @param string $webhookFailoverURL webhook failover URL for brand status updates
      * @param string $webhookURL webhook URL for brand status updates
      * @param string $website brand website URL
-     *
-     * @return TelnyxBrand<HasRawResponse>
      *
      * @throws APIException
      */
@@ -303,8 +277,6 @@ final class BrandService implements BrandContract
      *
      * @param array<string, mixed> $params
      *
-     * @return TelnyxBrand<HasRawResponse>
-     *
      * @throws APIException
      */
     public function updateRaw(
@@ -342,8 +314,6 @@ final class BrandService implements BrandContract
      * @param string $state
      * @param string $tcrBrandID Filter results by the TCR Brand id
      *
-     * @return BrandListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -378,8 +348,6 @@ final class BrandService implements BrandContract
      *
      * @param array<string, mixed> $params
      *
-     * @return BrandListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function listRaw(
@@ -412,21 +380,6 @@ final class BrandService implements BrandContract
         string $brandID,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        $params = [];
-
-        return $this->deleteRaw($brandID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $brandID,
-        mixed $params,
-        ?RequestOptions $requestOptions = null
-    ): mixed {
         // @phpstan-ignore-next-line;
         return $this->client->request(
             method: 'delete',
@@ -453,29 +406,10 @@ final class BrandService implements BrandContract
      *   found.
      * * `OTHERS` - Details of the data misrepresentation if any.
      *
-     * @return BrandGetFeedbackResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function getFeedback(
         string $brandID,
-        ?RequestOptions $requestOptions = null
-    ): BrandGetFeedbackResponse {
-        $params = [];
-
-        return $this->getFeedbackRaw($brandID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return BrandGetFeedbackResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function getFeedbackRaw(
-        string $brandID,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): BrandGetFeedbackResponse {
         // @phpstan-ignore-next-line;
@@ -498,21 +432,6 @@ final class BrandService implements BrandContract
         string $brandID,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        $params = [];
-
-        return $this->resend2faEmailRaw($brandID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @throws APIException
-     */
-    public function resend2faEmailRaw(
-        string $brandID,
-        mixed $params,
-        ?RequestOptions $requestOptions = null
-    ): mixed {
         // @phpstan-ignore-next-line;
         return $this->client->request(
             method: 'post',
@@ -531,21 +450,6 @@ final class BrandService implements BrandContract
      */
     public function revet(
         string $brandID,
-        ?RequestOptions $requestOptions = null
-    ): mixed {
-        $params = [];
-
-        return $this->revetRaw($brandID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @throws APIException
-     */
-    public function revetRaw(
-        string $brandID,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): mixed {
         // @phpstan-ignore-next-line;

@@ -50,7 +50,7 @@ final class Status implements BaseModel
         $obj = new self;
 
         null !== $reason && $obj->reason = $reason;
-        null !== $value && $obj->value = $value instanceof Value ? $value->value : $value;
+        null !== $value && $obj['value'] = $value;
 
         return $obj;
     }
@@ -74,7 +74,7 @@ final class Status implements BaseModel
     public function withValue(Value|string $value): self
     {
         $obj = clone $this;
-        $obj->value = $value instanceof Value ? $value->value : $value;
+        $obj['value'] = $value;
 
         return $obj;
     }

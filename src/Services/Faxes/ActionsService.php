@@ -6,7 +6,6 @@ namespace Telnyx\Services\Faxes;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Faxes\Actions\ActionCancelResponse;
 use Telnyx\Faxes\Actions\ActionRefreshResponse;
 use Telnyx\RequestOptions;
@@ -24,29 +23,10 @@ final class ActionsService implements ActionsContract
      *
      * Cancel the outbound fax that is in one of the following states: `queued`, `media.processed`, `originated` or `sending`
      *
-     * @return ActionCancelResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function cancel(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): ActionCancelResponse {
-        $params = [];
-
-        return $this->cancelRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return ActionCancelResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function cancelRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): ActionCancelResponse {
         // @phpstan-ignore-next-line;
@@ -63,29 +43,10 @@ final class ActionsService implements ActionsContract
      *
      * Refreshes the inbound fax's media_url when it has expired
      *
-     * @return ActionRefreshResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function refresh(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): ActionRefreshResponse {
-        $params = [];
-
-        return $this->refreshRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return ActionRefreshResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function refreshRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): ActionRefreshResponse {
         // @phpstan-ignore-next-line;

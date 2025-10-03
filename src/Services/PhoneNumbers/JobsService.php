@@ -6,7 +6,6 @@ namespace Telnyx\Services\PhoneNumbers;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PhoneNumbers\Jobs\JobDeleteBatchParams;
 use Telnyx\PhoneNumbers\Jobs\JobDeleteBatchResponse;
 use Telnyx\PhoneNumbers\Jobs\JobGetResponse;
@@ -37,29 +36,10 @@ final class JobsService implements JobsContract
      *
      * Retrieve a phone numbers job
      *
-     * @return JobGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): JobGetResponse {
-        $params = [];
-
-        return $this->retrieveRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return JobGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): JobGetResponse {
         // @phpstan-ignore-next-line;
@@ -80,8 +60,6 @@ final class JobsService implements JobsContract
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param Sort|value-of<Sort> $sort Specifies the sort order for results. If not given, results are sorted by created_at in descending order.
      *
-     * @return JobListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -99,8 +77,6 @@ final class JobsService implements JobsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return JobListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -127,8 +103,6 @@ final class JobsService implements JobsContract
      *
      * @param list<string> $phoneNumbers
      *
-     * @return JobDeleteBatchResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function deleteBatch(
@@ -144,8 +118,6 @@ final class JobsService implements JobsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return JobDeleteBatchResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -184,8 +156,6 @@ final class JobsService implements JobsContract
      * @param list<string> $tags a list of user-assigned tags to help organize phone numbers
      * @param UpdateVoiceSettings $voice
      *
-     * @return JobUpdateBatchResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function updateBatch(
@@ -222,8 +192,6 @@ final class JobsService implements JobsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return JobUpdateBatchResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function updateBatchRaw(
@@ -234,7 +202,7 @@ final class JobsService implements JobsContract
             $params,
             $requestOptions
         );
-        $query_params = array_flip(['filter']);
+        $query_params = ['filter'];
 
         // @phpstan-ignore-next-line;
         return $this->client->request(
@@ -255,8 +223,6 @@ final class JobsService implements JobsContract
      * @param bool $emergencyEnabled indicates whether to enable or disable emergency services on the numbers
      * @param list<string> $phoneNumbers
      * @param string|null $emergencyAddressID Identifies the address to be used with emergency services. Required if emergency_enabled is true, must be null or omitted if emergency_enabled is false.
-     *
-     * @return JobUpdateEmergencySettingsBatchResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -279,8 +245,6 @@ final class JobsService implements JobsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return JobUpdateEmergencySettingsBatchResponse<HasRawResponse>
      *
      * @throws APIException
      */

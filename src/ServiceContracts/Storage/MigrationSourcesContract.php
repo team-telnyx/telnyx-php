@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\Storage;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\Storage\MigrationSources\MigrationSourceCreateParams\Provider;
 use Telnyx\Storage\MigrationSources\MigrationSourceCreateParams\ProviderAuth;
@@ -26,8 +25,6 @@ interface MigrationSourcesContract
      * @param ProviderAuth $providerAuth
      * @param string $sourceRegion for intra-Telnyx buckets migration, specify the source bucket region in this field
      *
-     * @return MigrationSourceNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -43,8 +40,6 @@ interface MigrationSourcesContract
      *
      * @param array<string, mixed> $params
      *
-     * @return MigrationSourceNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function createRaw(
@@ -54,8 +49,6 @@ interface MigrationSourcesContract
 
     /**
      * @api
-     *
-     * @return MigrationSourceGetResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -67,21 +60,6 @@ interface MigrationSourcesContract
     /**
      * @api
      *
-     * @return MigrationSourceGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
-        ?RequestOptions $requestOptions = null
-    ): MigrationSourceGetResponse;
-
-    /**
-     * @api
-     *
-     * @return MigrationSourceListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -91,37 +69,10 @@ interface MigrationSourcesContract
     /**
      * @api
      *
-     * @return MigrationSourceListResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        mixed $params,
-        ?RequestOptions $requestOptions = null
-    ): MigrationSourceListResponse;
-
-    /**
-     * @api
-     *
-     * @return MigrationSourceDeleteResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): MigrationSourceDeleteResponse;
-
-    /**
-     * @api
-     *
-     * @return MigrationSourceDeleteResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): MigrationSourceDeleteResponse;
 }

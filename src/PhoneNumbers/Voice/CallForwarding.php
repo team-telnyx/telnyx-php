@@ -63,7 +63,7 @@ final class CallForwarding implements BaseModel
         $obj = new self;
 
         null !== $callForwardingEnabled && $obj->callForwardingEnabled = $callForwardingEnabled;
-        null !== $forwardingType && $obj->forwardingType = $forwardingType instanceof ForwardingType ? $forwardingType->value : $forwardingType;
+        null !== $forwardingType && $obj['forwardingType'] = $forwardingType;
         null !== $forwardsTo && $obj->forwardsTo = $forwardsTo;
 
         return $obj;
@@ -89,7 +89,7 @@ final class CallForwarding implements BaseModel
         ForwardingType|string $forwardingType
     ): self {
         $obj = clone $this;
-        $obj->forwardingType = $forwardingType instanceof ForwardingType ? $forwardingType->value : $forwardingType;
+        $obj['forwardingType'] = $forwardingType;
 
         return $obj;
     }

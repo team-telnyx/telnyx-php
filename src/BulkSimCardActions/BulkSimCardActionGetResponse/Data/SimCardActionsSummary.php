@@ -45,7 +45,7 @@ final class SimCardActionsSummary implements BaseModel
         $obj = new self;
 
         null !== $count && $obj->count = $count;
-        null !== $status && $obj->status = $status instanceof Status ? $status->value : $status;
+        null !== $status && $obj['status'] = $status;
 
         return $obj;
     }
@@ -64,7 +64,7 @@ final class SimCardActionsSummary implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

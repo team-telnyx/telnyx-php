@@ -7,7 +7,9 @@ namespace Telnyx\AI\Assistants\Tests\Runs;
 use Telnyx\AI\Assistants\Tests\Runs\TestRunResponse\DetailStatus;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * Response model containing test run execution details and results.
@@ -29,15 +31,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *   testSuiteRunID?: string,
  *   updatedAt?: \DateTimeInterface,
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class TestRunResponse implements BaseModel
+final class TestRunResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<test_run_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /**
      * Timestamp when the test run was created and queued.
@@ -173,7 +173,7 @@ final class TestRunResponse implements BaseModel
 
         $obj->createdAt = $createdAt;
         $obj->runID = $runID;
-        $obj->status = $status instanceof TestStatus ? $status->value : $status;
+        $obj['status'] = $status;
         $obj->testID = $testID;
         $obj->triggeredBy = $triggeredBy;
 
@@ -224,7 +224,7 @@ final class TestRunResponse implements BaseModel
     public function withStatus(TestStatus|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof TestStatus ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

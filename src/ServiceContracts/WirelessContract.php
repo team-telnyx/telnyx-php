@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\Wireless\WirelessGetRegionsResponse;
 
@@ -15,8 +14,6 @@ interface WirelessContract
      * @api
      *
      * @param string $product The product for which to list regions (e.g., 'public_ips', 'private_wireless_gateways').
-     *
-     * @return WirelessGetRegionsResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -29,8 +26,6 @@ interface WirelessContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return WirelessGetRegionsResponse<HasRawResponse>
      *
      * @throws APIException
      */

@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\NotificationEventConditions\NotificationEventConditionListParams;
 use Telnyx\NotificationEventConditions\NotificationEventConditionListParams\Filter;
 use Telnyx\NotificationEventConditions\NotificationEventConditionListParams\Page;
@@ -31,8 +30,6 @@ final class NotificationEventConditionsService implements NotificationEventCondi
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[associated_record_type][eq], filter[channel_type_id][eq], filter[notification_profile_id][eq], filter[notification_channel][eq], filter[notification_event_condition_id][eq], filter[status][eq]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
-     * @return NotificationEventConditionListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -49,8 +46,6 @@ final class NotificationEventConditionsService implements NotificationEventCondi
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return NotificationEventConditionListResponse<HasRawResponse>
      *
      * @throws APIException
      */

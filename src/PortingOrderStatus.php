@@ -57,7 +57,7 @@ final class PortingOrderStatus implements BaseModel
         $obj = new self;
 
         null !== $details && $obj->details = $details;
-        null !== $value && $obj->value = $value instanceof Value ? $value->value : $value;
+        null !== $value && $obj['value'] = $value;
 
         return $obj;
     }
@@ -83,7 +83,7 @@ final class PortingOrderStatus implements BaseModel
     public function withValue(Value|string $value): self
     {
         $obj = clone $this;
-        $obj->value = $value instanceof Value ? $value->value : $value;
+        $obj['value'] = $value;
 
         return $obj;
     }

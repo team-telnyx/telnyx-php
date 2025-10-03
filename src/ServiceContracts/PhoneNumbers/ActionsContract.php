@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\PhoneNumbers;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PhoneNumbers\Actions\ActionChangeBundleStatusResponse;
 use Telnyx\PhoneNumbers\Actions\ActionEnableEmergencyResponse;
 use Telnyx\PhoneNumbers\Actions\ActionVerifyOwnershipResponse;
@@ -17,8 +16,6 @@ interface ActionsContract
      * @api
      *
      * @param string $bundleID The new bundle_id setting for the number. If you are assigning the number to a bundle, this is the unique ID of the bundle you wish to use. If you are removing the number from a bundle, this must be null. You cannot assign a number from one bundle to another directly. You must first remove it from a bundle, and then assign it to a new bundle.
-     *
-     * @return ActionChangeBundleStatusResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -32,8 +29,6 @@ interface ActionsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ActionChangeBundleStatusResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -49,8 +44,6 @@ interface ActionsContract
      * @param string $emergencyAddressID identifies the address to be used with emergency services
      * @param bool $emergencyEnabled indicates whether to enable emergency services on this number
      *
-     * @return ActionEnableEmergencyResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function enableEmergency(
@@ -65,8 +58,6 @@ interface ActionsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return ActionEnableEmergencyResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function enableEmergencyRaw(
@@ -80,8 +71,6 @@ interface ActionsContract
      *
      * @param list<string> $phoneNumbers Array of phone numbers to verify ownership for
      *
-     * @return ActionVerifyOwnershipResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function verifyOwnership(
@@ -93,8 +82,6 @@ interface ActionsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ActionVerifyOwnershipResponse<HasRawResponse>
      *
      * @throws APIException
      */

@@ -6,20 +6,20 @@ namespace Telnyx\Networks;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Networks\NetworkUpdateResponse\Data;
 
 /**
- * @phpstan-type network_update_response = array{data?: data_alias}
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
+ * @phpstan-type network_update_response = array{data?: Data}
  */
-final class NetworkUpdateResponse implements BaseModel
+final class NetworkUpdateResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<network_update_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     #[Api(optional: true)]
     public ?Data $data;

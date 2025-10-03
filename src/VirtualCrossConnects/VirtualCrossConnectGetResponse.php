@@ -6,20 +6,20 @@ namespace Telnyx\VirtualCrossConnects;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectGetResponse\Data;
 
 /**
- * @phpstan-type virtual_cross_connect_get_response = array{data?: data_alias}
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
+ * @phpstan-type virtual_cross_connect_get_response = array{data?: Data}
  */
-final class VirtualCrossConnectGetResponse implements BaseModel
+final class VirtualCrossConnectGetResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<virtual_cross_connect_get_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     #[Api(optional: true)]
     public ?Data $data;

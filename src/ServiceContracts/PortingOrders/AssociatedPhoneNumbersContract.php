@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\PortingOrders;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberCreateParams\Action;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberCreateParams\PhoneNumberRange;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberDeleteResponse;
@@ -26,8 +25,6 @@ interface AssociatedPhoneNumbersContract
      * @param Action|value-of<Action> $action specifies the action to take with this phone number during partial porting
      * @param PhoneNumberRange $phoneNumberRange
      *
-     * @return AssociatedPhoneNumberNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -41,8 +38,6 @@ interface AssociatedPhoneNumbersContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return AssociatedPhoneNumberNewResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -59,8 +54,6 @@ interface AssociatedPhoneNumbersContract
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param Sort $sort Consolidated sort parameter (deepObject style). Originally: sort[value]
      *
-     * @return AssociatedPhoneNumberListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -76,8 +69,6 @@ interface AssociatedPhoneNumbersContract
      *
      * @param array<string, mixed> $params
      *
-     * @return AssociatedPhoneNumberListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function listRaw(
@@ -91,8 +82,6 @@ interface AssociatedPhoneNumbersContract
      *
      * @param string $portingOrderID
      *
-     * @return AssociatedPhoneNumberDeleteResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function delete(
@@ -105,8 +94,6 @@ interface AssociatedPhoneNumbersContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return AssociatedPhoneNumberDeleteResponse<HasRawResponse>
      *
      * @throws APIException
      */

@@ -6,7 +6,9 @@ namespace Telnyx\Texml\Accounts\Calls;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Texml\Accounts\Calls\CallSiprecJsonResponse\Status;
 use Telnyx\Texml\Accounts\Calls\CallSiprecJsonResponse\Track;
 
@@ -23,15 +25,13 @@ use Telnyx\Texml\Accounts\Calls\CallSiprecJsonResponse\Track;
  *   track?: value-of<Track>,
  *   uri?: string,
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class CallSiprecJsonResponse implements BaseModel
+final class CallSiprecJsonResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<call_siprec_json_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /**
      * The id of the account the resource belongs to.
@@ -131,8 +131,8 @@ final class CallSiprecJsonResponse implements BaseModel
         null !== $errorCode && $obj->errorCode = $errorCode;
         null !== $sid && $obj->sid = $sid;
         null !== $startTime && $obj->startTime = $startTime;
-        null !== $status && $obj->status = $status instanceof Status ? $status->value : $status;
-        null !== $track && $obj->track = $track instanceof Track ? $track->value : $track;
+        null !== $status && $obj['status'] = $status;
+        null !== $track && $obj['track'] = $track;
         null !== $uri && $obj->uri = $uri;
 
         return $obj;
@@ -223,7 +223,7 @@ final class CallSiprecJsonResponse implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }
@@ -236,7 +236,7 @@ final class CallSiprecJsonResponse implements BaseModel
     public function withTrack(Track|string $track): self
     {
         $obj = clone $this;
-        $obj->track = $track instanceof Track ? $track->value : $track;
+        $obj['track'] = $track;
 
         return $obj;
     }

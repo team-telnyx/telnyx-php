@@ -6,20 +6,20 @@ namespace Telnyx\SubNumberOrdersReport;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\SubNumberOrdersReport\SubNumberOrdersReportNewResponse\Data;
 
 /**
  * @phpstan-type sub_number_orders_report_new_response = array{data?: Data}
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class SubNumberOrdersReportNewResponse implements BaseModel
+final class SubNumberOrdersReportNewResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<sub_number_orders_report_new_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     #[Api(optional: true)]
     public ?Data $data;

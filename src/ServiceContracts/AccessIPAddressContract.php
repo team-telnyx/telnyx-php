@@ -9,7 +9,6 @@ use Telnyx\AccessIPAddress\AccessIPAddressListParams\Page;
 use Telnyx\AccessIPAddress\AccessIPAddressListResponse;
 use Telnyx\AccessIPAddress\AccessIPAddressResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 
 use const Telnyx\Core\OMIT as omit;
@@ -21,8 +20,6 @@ interface AccessIPAddressContract
      *
      * @param string $ipAddress
      * @param string $description
-     *
-     * @return AccessIPAddressResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -37,8 +34,6 @@ interface AccessIPAddressContract
      *
      * @param array<string, mixed> $params
      *
-     * @return AccessIPAddressResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function createRaw(
@@ -48,8 +43,6 @@ interface AccessIPAddressContract
 
     /**
      * @api
-     *
-     * @return AccessIPAddressResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -61,23 +54,8 @@ interface AccessIPAddressContract
     /**
      * @api
      *
-     * @return AccessIPAddressResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $accessIPAddressID,
-        mixed $params,
-        ?RequestOptions $requestOptions = null,
-    ): AccessIPAddressResponse;
-
-    /**
-     * @api
-     *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[ip_source], filter[ip_address], filter[created_at]. Supports complex bracket operations for dynamic filtering.
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
-     *
-     * @return AccessIPAddressListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -92,8 +70,6 @@ interface AccessIPAddressContract
      *
      * @param array<string, mixed> $params
      *
-     * @return AccessIPAddressListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function listRaw(
@@ -104,25 +80,10 @@ interface AccessIPAddressContract
     /**
      * @api
      *
-     * @return AccessIPAddressResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function delete(
         string $accessIPAddressID,
         ?RequestOptions $requestOptions = null
-    ): AccessIPAddressResponse;
-
-    /**
-     * @api
-     *
-     * @return AccessIPAddressResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $accessIPAddressID,
-        mixed $params,
-        ?RequestOptions $requestOptions = null,
     ): AccessIPAddressResponse;
 }

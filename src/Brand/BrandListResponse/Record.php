@@ -154,10 +154,10 @@ final class Record implements BaseModel
         null !== $createdAt && $obj->createdAt = $createdAt;
         null !== $displayName && $obj->displayName = $displayName;
         null !== $email && $obj->email = $email;
-        null !== $entityType && $obj->entityType = $entityType instanceof EntityType ? $entityType->value : $entityType;
+        null !== $entityType && $obj['entityType'] = $entityType;
         null !== $failureReasons && $obj->failureReasons = $failureReasons;
-        null !== $identityStatus && $obj->identityStatus = $identityStatus instanceof BrandIdentityStatus ? $identityStatus->value : $identityStatus;
-        null !== $status && $obj->status = $status instanceof Status ? $status->value : $status;
+        null !== $identityStatus && $obj['identityStatus'] = $identityStatus;
+        null !== $status && $obj['status'] = $status;
         null !== $tcrBrandID && $obj->tcrBrandID = $tcrBrandID;
         null !== $updatedAt && $obj->updatedAt = $updatedAt;
         null !== $website && $obj->website = $website;
@@ -240,7 +240,7 @@ final class Record implements BaseModel
     public function withEntityType(EntityType|string $entityType): self
     {
         $obj = clone $this;
-        $obj->entityType = $entityType instanceof EntityType ? $entityType->value : $entityType;
+        $obj['entityType'] = $entityType;
 
         return $obj;
     }
@@ -265,7 +265,7 @@ final class Record implements BaseModel
         BrandIdentityStatus|string $identityStatus
     ): self {
         $obj = clone $this;
-        $obj->identityStatus = $identityStatus instanceof BrandIdentityStatus ? $identityStatus->value : $identityStatus;
+        $obj['identityStatus'] = $identityStatus;
 
         return $obj;
     }
@@ -278,7 +278,7 @@ final class Record implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

@@ -131,7 +131,7 @@ final class OAuthTokenParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->grantType = $grantType instanceof GrantType ? $grantType->value : $grantType;
+        $obj['grantType'] = $grantType;
 
         null !== $clientID && $obj->clientID = $clientID;
         null !== $clientSecret && $obj->clientSecret = $clientSecret;
@@ -152,7 +152,7 @@ final class OAuthTokenParams implements BaseModel
     public function withGrantType(GrantType|string $grantType): self
     {
         $obj = clone $this;
-        $obj->grantType = $grantType instanceof GrantType ? $grantType->value : $grantType;
+        $obj['grantType'] = $grantType;
 
         return $obj;
     }

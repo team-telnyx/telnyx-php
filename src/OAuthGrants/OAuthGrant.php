@@ -111,7 +111,7 @@ final class OAuthGrant implements BaseModel
         $obj->id = $id;
         $obj->clientID = $clientID;
         $obj->createdAt = $createdAt;
-        $obj->recordType = $recordType instanceof RecordType ? $recordType->value : $recordType;
+        $obj['recordType'] = $recordType;
         $obj->scopes = $scopes;
 
         null !== $lastUsedAt && $obj->lastUsedAt = $lastUsedAt;
@@ -160,7 +160,7 @@ final class OAuthGrant implements BaseModel
     public function withRecordType(RecordType|string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType instanceof RecordType ? $recordType->value : $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }

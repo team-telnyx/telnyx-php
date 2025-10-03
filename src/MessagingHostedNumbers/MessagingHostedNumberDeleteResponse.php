@@ -6,22 +6,22 @@ namespace Telnyx\MessagingHostedNumbers;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\MessagingHostedNumberOrder;
 
 /**
  * @phpstan-type messaging_hosted_number_delete_response = array{
  *   data?: MessagingHostedNumberOrder
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class MessagingHostedNumberDeleteResponse implements BaseModel
+final class MessagingHostedNumberDeleteResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<messaging_hosted_number_delete_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     #[Api(optional: true)]
     public ?MessagingHostedNumberOrder $data;

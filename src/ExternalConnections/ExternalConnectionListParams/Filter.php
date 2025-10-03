@@ -84,7 +84,7 @@ final class Filter implements BaseModel
         null !== $id && $obj->id = $id;
         null !== $connectionName && $obj->connectionName = $connectionName;
         null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $externalSipConnection && $obj->externalSipConnection = $externalSipConnection instanceof ExternalSipConnection ? $externalSipConnection->value : $externalSipConnection;
+        null !== $externalSipConnection && $obj['externalSipConnection'] = $externalSipConnection;
         null !== $phoneNumber && $obj->phoneNumber = $phoneNumber;
 
         return $obj;
@@ -129,7 +129,7 @@ final class Filter implements BaseModel
         ExternalSipConnection|string $externalSipConnection
     ): self {
         $obj = clone $this;
-        $obj->externalSipConnection = $externalSipConnection instanceof ExternalSipConnection ? $externalSipConnection->value : $externalSipConnection;
+        $obj['externalSipConnection'] = $externalSipConnection;
 
         return $obj;
     }

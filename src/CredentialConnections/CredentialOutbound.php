@@ -113,14 +113,14 @@ final class CredentialOutbound implements BaseModel
         $obj = new self;
 
         null !== $aniOverride && $obj->aniOverride = $aniOverride;
-        null !== $aniOverrideType && $obj->aniOverrideType = $aniOverrideType instanceof AniOverrideType ? $aniOverrideType->value : $aniOverrideType;
+        null !== $aniOverrideType && $obj['aniOverrideType'] = $aniOverrideType;
         null !== $callParkingEnabled && $obj->callParkingEnabled = $callParkingEnabled;
         null !== $channelLimit && $obj->channelLimit = $channelLimit;
         null !== $generateRingbackTone && $obj->generateRingbackTone = $generateRingbackTone;
         null !== $instantRingbackEnabled && $obj->instantRingbackEnabled = $instantRingbackEnabled;
         null !== $localization && $obj->localization = $localization;
         null !== $outboundVoiceProfileID && $obj->outboundVoiceProfileID = $outboundVoiceProfileID;
-        null !== $t38ReinviteSource && $obj->t38ReinviteSource = $t38ReinviteSource instanceof T38ReinviteSource ? $t38ReinviteSource->value : $t38ReinviteSource;
+        null !== $t38ReinviteSource && $obj['t38ReinviteSource'] = $t38ReinviteSource;
 
         return $obj;
     }
@@ -145,7 +145,7 @@ final class CredentialOutbound implements BaseModel
         AniOverrideType|string $aniOverrideType
     ): self {
         $obj = clone $this;
-        $obj->aniOverrideType = $aniOverrideType instanceof AniOverrideType ? $aniOverrideType->value : $aniOverrideType;
+        $obj['aniOverrideType'] = $aniOverrideType;
 
         return $obj;
     }
@@ -227,7 +227,7 @@ final class CredentialOutbound implements BaseModel
         T38ReinviteSource|string $t38ReinviteSource
     ): self {
         $obj = clone $this;
-        $obj->t38ReinviteSource = $t38ReinviteSource instanceof T38ReinviteSource ? $t38ReinviteSource->value : $t38ReinviteSource;
+        $obj['t38ReinviteSource'] = $t38ReinviteSource;
 
         return $obj;
     }

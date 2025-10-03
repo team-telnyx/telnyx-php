@@ -189,11 +189,11 @@ final class Call implements BaseModel
         $obj = new self;
 
         null !== $accountSid && $obj->accountSid = $accountSid;
-        null !== $answeredBy && $obj->answeredBy = $answeredBy instanceof AnsweredBy ? $answeredBy->value : $answeredBy;
+        null !== $answeredBy && $obj['answeredBy'] = $answeredBy;
         null !== $callerName && $obj->callerName = $callerName;
         null !== $dateCreated && $obj->dateCreated = $dateCreated;
         null !== $dateUpdated && $obj->dateUpdated = $dateUpdated;
-        null !== $direction && $obj->direction = $direction instanceof Direction ? $direction->value : $direction;
+        null !== $direction && $obj['direction'] = $direction;
         null !== $duration && $obj->duration = $duration;
         null !== $endTime && $obj->endTime = $endTime;
         null !== $from && $obj->from = $from;
@@ -202,7 +202,7 @@ final class Call implements BaseModel
         null !== $priceUnit && $obj->priceUnit = $priceUnit;
         null !== $sid && $obj->sid = $sid;
         null !== $startTime && $obj->startTime = $startTime;
-        null !== $status && $obj->status = $status instanceof Status ? $status->value : $status;
+        null !== $status && $obj['status'] = $status;
         null !== $to && $obj->to = $to;
         null !== $toFormatted && $obj->toFormatted = $toFormatted;
         null !== $uri && $obj->uri = $uri;
@@ -229,7 +229,7 @@ final class Call implements BaseModel
     public function withAnsweredBy(AnsweredBy|string $answeredBy): self
     {
         $obj = clone $this;
-        $obj->answeredBy = $answeredBy instanceof AnsweredBy ? $answeredBy->value : $answeredBy;
+        $obj['answeredBy'] = $answeredBy;
 
         return $obj;
     }
@@ -275,7 +275,7 @@ final class Call implements BaseModel
     public function withDirection(Direction|string $direction): self
     {
         $obj = clone $this;
-        $obj->direction = $direction instanceof Direction ? $direction->value : $direction;
+        $obj['direction'] = $direction;
 
         return $obj;
     }
@@ -376,7 +376,7 @@ final class Call implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\PhoneNumberBlocks;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PhoneNumberBlocks\Jobs\JobDeletePhoneNumberBlockResponse;
 use Telnyx\PhoneNumberBlocks\Jobs\JobGetResponse;
 use Telnyx\PhoneNumberBlocks\Jobs\JobListParams\Filter;
@@ -21,8 +20,6 @@ interface JobsContract
     /**
      * @api
      *
-     * @return JobGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
@@ -33,24 +30,9 @@ interface JobsContract
     /**
      * @api
      *
-     * @return JobGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
-        ?RequestOptions $requestOptions = null
-    ): JobGetResponse;
-
-    /**
-     * @api
-     *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[type], filter[status]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param Sort|value-of<Sort> $sort Specifies the sort order for results. If not given, results are sorted by created_at in descending order.
-     *
-     * @return JobListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -66,8 +48,6 @@ interface JobsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return JobListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function listRaw(
@@ -80,8 +60,6 @@ interface JobsContract
      *
      * @param string $phoneNumberBlockID
      *
-     * @return JobDeletePhoneNumberBlockResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function deletePhoneNumberBlock(
@@ -93,8 +71,6 @@ interface JobsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return JobDeletePhoneNumberBlockResponse<HasRawResponse>
      *
      * @throws APIException
      */

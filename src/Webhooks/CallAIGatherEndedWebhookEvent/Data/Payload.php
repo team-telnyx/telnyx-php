@@ -128,7 +128,7 @@ final class Payload implements BaseModel
         null !== $from && $obj->from = $from;
         null !== $messageHistory && $obj->messageHistory = $messageHistory;
         null !== $result && $obj->result = $result;
-        null !== $status && $obj->status = $status instanceof Status ? $status->value : $status;
+        null !== $status && $obj['status'] = $status;
         null !== $to && $obj->to = $to;
 
         return $obj;
@@ -232,7 +232,7 @@ final class Payload implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

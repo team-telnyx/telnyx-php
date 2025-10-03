@@ -88,7 +88,7 @@ final class NumberLookupCreateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $aggregationType && $obj->aggregationType = $aggregationType instanceof AggregationType ? $aggregationType->value : $aggregationType;
+        null !== $aggregationType && $obj['aggregationType'] = $aggregationType;
         null !== $endDate && $obj->endDate = $endDate;
         null !== $managedAccounts && $obj->managedAccounts = $managedAccounts;
         null !== $startDate && $obj->startDate = $startDate;
@@ -105,7 +105,7 @@ final class NumberLookupCreateParams implements BaseModel
         AggregationType|string $aggregationType
     ): self {
         $obj = clone $this;
-        $obj->aggregationType = $aggregationType instanceof AggregationType ? $aggregationType->value : $aggregationType;
+        $obj['aggregationType'] = $aggregationType;
 
         return $obj;
     }

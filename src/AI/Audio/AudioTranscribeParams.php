@@ -119,12 +119,12 @@ final class AudioTranscribeParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->model = $model instanceof Model ? $model->value : $model;
+        $obj['model'] = $model;
 
         null !== $file && $obj->file = $file;
         null !== $fileURL && $obj->fileURL = $fileURL;
-        null !== $responseFormat && $obj->responseFormat = $responseFormat instanceof ResponseFormat ? $responseFormat->value : $responseFormat;
-        null !== $timestampGranularities && $obj->timestampGranularities = $timestampGranularities instanceof TimestampGranularities ? $timestampGranularities->value : $timestampGranularities;
+        null !== $responseFormat && $obj['responseFormat'] = $responseFormat;
+        null !== $timestampGranularities && $obj['timestampGranularities'] = $timestampGranularities;
 
         return $obj;
     }
@@ -137,7 +137,7 @@ final class AudioTranscribeParams implements BaseModel
     public function withModel(Model|string $model): self
     {
         $obj = clone $this;
-        $obj->model = $model instanceof Model ? $model->value : $model;
+        $obj['model'] = $model;
 
         return $obj;
     }
@@ -173,7 +173,7 @@ final class AudioTranscribeParams implements BaseModel
         ResponseFormat|string $responseFormat
     ): self {
         $obj = clone $this;
-        $obj->responseFormat = $responseFormat instanceof ResponseFormat ? $responseFormat->value : $responseFormat;
+        $obj['responseFormat'] = $responseFormat;
 
         return $obj;
     }
@@ -187,7 +187,7 @@ final class AudioTranscribeParams implements BaseModel
         TimestampGranularities|string $timestampGranularities
     ): self {
         $obj = clone $this;
-        $obj->timestampGranularities = $timestampGranularities instanceof TimestampGranularities ? $timestampGranularities->value : $timestampGranularities;
+        $obj['timestampGranularities'] = $timestampGranularities;
 
         return $obj;
     }

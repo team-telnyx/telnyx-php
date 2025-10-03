@@ -6,7 +6,6 @@ namespace Telnyx\Services\Texml\Accounts\Calls;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\Accounts\Calls\RecordingsJsonContract;
 use Telnyx\Texml\Accounts\Calls\RecordingsJson\RecordingsJsonGetRecordingsJsonResponse;
@@ -39,8 +38,6 @@ final class RecordingsJsonService implements RecordingsJsonContract
      * @param RecordingStatusCallbackMethod|value-of<RecordingStatusCallbackMethod> $recordingStatusCallbackMethod HTTP method used to send status callbacks
      * @param RecordingTrack|value-of<RecordingTrack> $recordingTrack The audio track to record for the call. The default is `both`.
      * @param bool $sendRecordingURL whether to send RecordingUrl in webhooks
-     *
-     * @return RecordingsJsonRecordingsJsonResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -75,8 +72,6 @@ final class RecordingsJsonService implements RecordingsJsonContract
      *
      * @param array<string, mixed> $params
      *
-     * @return RecordingsJsonRecordingsJsonResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function recordingsJsonRaw(
@@ -98,7 +93,7 @@ final class RecordingsJsonService implements RecordingsJsonContract
                 'texml/Accounts/%1$s/Calls/%2$s/Recordings.json', $accountSid, $callSid,
             ],
             headers: ['Content-Type' => 'application/x-www-form-urlencoded'],
-            body: (object) array_diff_key($parsed, array_flip(['accountSid'])),
+            body: (object) array_diff_key($parsed, ['accountSid']),
             options: $options,
             convert: RecordingsJsonRecordingsJsonResponse::class,
         );
@@ -110,8 +105,6 @@ final class RecordingsJsonService implements RecordingsJsonContract
      * Returns recordings for a call identified by call_sid.
      *
      * @param string $accountSid
-     *
-     * @return RecordingsJsonGetRecordingsJsonResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -129,8 +122,6 @@ final class RecordingsJsonService implements RecordingsJsonContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return RecordingsJsonGetRecordingsJsonResponse<HasRawResponse>
      *
      * @throws APIException
      */

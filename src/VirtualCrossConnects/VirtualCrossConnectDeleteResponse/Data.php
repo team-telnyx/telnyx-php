@@ -262,7 +262,7 @@ final class Data implements BaseModel
         $obj = new self;
 
         $obj->bgpAsn = $bgpAsn;
-        $obj->cloudProvider = $cloudProvider instanceof CloudProvider ? $cloudProvider->value : $cloudProvider;
+        $obj['cloudProvider'] = $cloudProvider;
         $obj->cloudProviderRegion = $cloudProviderRegion;
         $obj->primaryCloudAccountID = $primaryCloudAccountID;
 
@@ -272,7 +272,7 @@ final class Data implements BaseModel
         null !== $updatedAt && $obj->updatedAt = $updatedAt;
         null !== $name && $obj->name = $name;
         null !== $networkID && $obj->networkID = $networkID;
-        null !== $status && $obj->status = $status instanceof InterfaceStatus ? $status->value : $status;
+        null !== $status && $obj['status'] = $status;
         null !== $regionCode && $obj->regionCode = $regionCode;
         null !== $bandwidthMbps && $obj->bandwidthMbps = $bandwidthMbps;
         null !== $primaryBgpKey && $obj->primaryBgpKey = $primaryBgpKey;
@@ -365,7 +365,7 @@ final class Data implements BaseModel
     public function withStatus(InterfaceStatus|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof InterfaceStatus ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }
@@ -400,7 +400,7 @@ final class Data implements BaseModel
     public function withCloudProvider(CloudProvider|string $cloudProvider): self
     {
         $obj = clone $this;
-        $obj->cloudProvider = $cloudProvider instanceof CloudProvider ? $cloudProvider->value : $cloudProvider;
+        $obj['cloudProvider'] = $cloudProvider;
 
         return $obj;
     }

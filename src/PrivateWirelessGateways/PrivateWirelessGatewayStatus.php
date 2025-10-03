@@ -68,7 +68,7 @@ final class PrivateWirelessGatewayStatus implements BaseModel
 
         null !== $errorCode && $obj->errorCode = $errorCode;
         null !== $errorDescription && $obj->errorDescription = $errorDescription;
-        null !== $value && $obj->value = $value instanceof Value ? $value->value : $value;
+        null !== $value && $obj['value'] = $value;
 
         return $obj;
     }
@@ -109,7 +109,7 @@ final class PrivateWirelessGatewayStatus implements BaseModel
     public function withValue(Value|string $value): self
     {
         $obj = clone $this;
-        $obj->value = $value instanceof Value ? $value->value : $value;
+        $obj['value'] = $value;
 
         return $obj;
     }

@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\WireguardPeersContract;
 use Telnyx\WireguardPeers\WireguardPeerCreateParams;
@@ -37,8 +36,6 @@ final class WireguardPeersService implements WireguardPeersContract
      * @param string $wireguardInterfaceID the id of the wireguard interface associated with the peer
      * @param string $publicKey The WireGuard `PublicKey`.<br /><br />If you do not provide a Public Key, a new Public and Private key pair will be generated for you.
      *
-     * @return WireguardPeerNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -57,8 +54,6 @@ final class WireguardPeersService implements WireguardPeersContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return WireguardPeerNewResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -86,29 +81,10 @@ final class WireguardPeersService implements WireguardPeersContract
      *
      * Retrieve the WireGuard peer.
      *
-     * @return WireguardPeerGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): WireguardPeerGetResponse {
-        $params = [];
-
-        return $this->retrieveRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return WireguardPeerGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): WireguardPeerGetResponse {
         // @phpstan-ignore-next-line;
@@ -127,8 +103,6 @@ final class WireguardPeersService implements WireguardPeersContract
      *
      * @param string $publicKey The WireGuard `PublicKey`.<br /><br />If you do not provide a Public Key, a new Public and Private key pair will be generated for you.
      *
-     * @return WireguardPeerUpdateResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function update(
@@ -145,8 +119,6 @@ final class WireguardPeersService implements WireguardPeersContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return WireguardPeerUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -178,8 +150,6 @@ final class WireguardPeersService implements WireguardPeersContract
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[wireguard_interface_id]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
-     * @return WireguardPeerListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -196,8 +166,6 @@ final class WireguardPeersService implements WireguardPeersContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return WireguardPeerListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -225,29 +193,10 @@ final class WireguardPeersService implements WireguardPeersContract
      *
      * Delete the WireGuard peer.
      *
-     * @return WireguardPeerDeleteResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): WireguardPeerDeleteResponse {
-        $params = [];
-
-        return $this->deleteRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return WireguardPeerDeleteResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): WireguardPeerDeleteResponse {
         // @phpstan-ignore-next-line;
@@ -268,21 +217,6 @@ final class WireguardPeersService implements WireguardPeersContract
      */
     public function retrieveConfig(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): string {
-        $params = [];
-
-        return $this->retrieveConfigRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @throws APIException
-     */
-    public function retrieveConfigRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): string {
         // @phpstan-ignore-next-line;

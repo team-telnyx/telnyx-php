@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Fqdns\FqdnDeleteResponse;
 use Telnyx\Fqdns\FqdnGetResponse;
 use Telnyx\Fqdns\FqdnListParams\Filter;
@@ -27,8 +26,6 @@ interface FqdnsContract
      * @param string $fqdn FQDN represented by this resource
      * @param int|null $port port to use when connecting to this FQDN
      *
-     * @return FqdnNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -44,8 +41,6 @@ interface FqdnsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return FqdnNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function createRaw(
@@ -55,8 +50,6 @@ interface FqdnsContract
 
     /**
      * @api
-     *
-     * @return FqdnGetResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -68,25 +61,10 @@ interface FqdnsContract
     /**
      * @api
      *
-     * @return FqdnGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
-        ?RequestOptions $requestOptions = null
-    ): FqdnGetResponse;
-
-    /**
-     * @api
-     *
      * @param string $connectionID ID of the FQDN connection to which this IP should be attached
      * @param string $dnsRecordType The DNS record type for the FQDN. For cases where a port is not set, the DNS record type must be 'srv'. For cases where a port is set, the DNS record type must be 'a'. If the DNS record type is 'a' and a port is not specified, 5060 will be used.
      * @param string $fqdn FQDN represented by this resource
      * @param int|null $port port to use when connecting to this FQDN
-     *
-     * @return FqdnUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -104,8 +82,6 @@ interface FqdnsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return FqdnUpdateResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function updateRaw(
@@ -120,8 +96,6 @@ interface FqdnsContract
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[connection_id], filter[fqdn], filter[port], filter[dns_record_type]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
-     * @return FqdnListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -135,8 +109,6 @@ interface FqdnsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return FqdnListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function listRaw(
@@ -147,25 +119,10 @@ interface FqdnsContract
     /**
      * @api
      *
-     * @return FqdnDeleteResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): FqdnDeleteResponse;
-
-    /**
-     * @api
-     *
-     * @return FqdnDeleteResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): FqdnDeleteResponse;
 }

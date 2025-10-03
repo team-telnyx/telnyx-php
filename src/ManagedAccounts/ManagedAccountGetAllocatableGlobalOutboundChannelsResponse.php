@@ -6,24 +6,24 @@ namespace Telnyx\ManagedAccounts;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\ManagedAccounts\ManagedAccountGetAllocatableGlobalOutboundChannelsResponse\Data;
 
 /**
  * @phpstan-type managed_account_get_allocatable_global_outbound_channels_response = array{
  *   data?: Data
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class ManagedAccountGetAllocatableGlobalOutboundChannelsResponse implements BaseModel
+final class ManagedAccountGetAllocatableGlobalOutboundChannelsResponse implements BaseModel, ResponseConverter
 {
     /**
      * @use SdkModel<managed_account_get_allocatable_global_outbound_channels_response>
      */
     use SdkModel;
+
+    use SdkResponse;
 
     #[Api(optional: true)]
     public ?Data $data;

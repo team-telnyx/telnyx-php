@@ -123,7 +123,7 @@ final class DynamicEmergencyEndpoint implements BaseModel
         null !== $createdAt && $obj->createdAt = $createdAt;
         null !== $recordType && $obj->recordType = $recordType;
         null !== $sipFromID && $obj->sipFromID = $sipFromID;
-        null !== $status && $obj->status = $status instanceof Status ? $status->value : $status;
+        null !== $status && $obj['status'] = $status;
         null !== $updatedAt && $obj->updatedAt = $updatedAt;
 
         return $obj;
@@ -203,7 +203,7 @@ final class DynamicEmergencyEndpoint implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

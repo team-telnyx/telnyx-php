@@ -137,7 +137,7 @@ final class MesssageRcsParams implements BaseModel
 
         null !== $mmsFallback && $obj->mmsFallback = $mmsFallback;
         null !== $smsFallback && $obj->smsFallback = $smsFallback;
-        null !== $type && $obj->type = $type instanceof Type ? $type->value : $type;
+        null !== $type && $obj['type'] = $type;
         null !== $webhookURL && $obj->webhookURL = $webhookURL;
 
         return $obj;
@@ -208,7 +208,7 @@ final class MesssageRcsParams implements BaseModel
     public function withType(Type|string $type): self
     {
         $obj = clone $this;
-        $obj->type = $type instanceof Type ? $type->value : $type;
+        $obj['type'] = $type;
 
         return $obj;
     }

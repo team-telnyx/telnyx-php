@@ -212,16 +212,16 @@ final class OAuthClient implements BaseModel
         $obj = new self;
 
         $obj->clientID = $clientID;
-        $obj->clientType = $clientType instanceof ClientType ? $clientType->value : $clientType;
+        $obj['clientType'] = $clientType;
         $obj->createdAt = $createdAt;
         $obj->name = $name;
         $obj->orgID = $orgID;
-        $obj->recordType = $recordType instanceof RecordType ? $recordType->value : $recordType;
+        $obj['recordType'] = $recordType;
         $obj->requirePkce = $requirePkce;
         $obj->updatedAt = $updatedAt;
         $obj->userID = $userID;
 
-        null !== $allowedGrantTypes && $obj->allowedGrantTypes = array_map(fn ($v) => $v instanceof AllowedGrantType ? $v->value : $v, $allowedGrantTypes);
+        null !== $allowedGrantTypes && $obj['allowedGrantTypes'] = $allowedGrantTypes;
         null !== $allowedScopes && $obj->allowedScopes = $allowedScopes;
         null !== $clientSecret && $obj->clientSecret = $clientSecret;
         null !== $logoUri && $obj->logoUri = $logoUri;
@@ -251,7 +251,7 @@ final class OAuthClient implements BaseModel
     public function withClientType(ClientType|string $clientType): self
     {
         $obj = clone $this;
-        $obj->clientType = $clientType instanceof ClientType ? $clientType->value : $clientType;
+        $obj['clientType'] = $clientType;
 
         return $obj;
     }
@@ -297,7 +297,7 @@ final class OAuthClient implements BaseModel
     public function withRecordType(RecordType|string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType instanceof RecordType ? $recordType->value : $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -343,7 +343,7 @@ final class OAuthClient implements BaseModel
     public function withAllowedGrantTypes(array $allowedGrantTypes): self
     {
         $obj = clone $this;
-        $obj->allowedGrantTypes = array_map(fn ($v) => $v instanceof AllowedGrantType ? $v->value : $v, $allowedGrantTypes);
+        $obj['allowedGrantTypes'] = $allowedGrantTypes;
 
         return $obj;
     }

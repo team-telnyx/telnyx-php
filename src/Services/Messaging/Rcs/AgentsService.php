@@ -6,7 +6,6 @@ namespace Telnyx\Services\Messaging\Rcs;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Messaging\Rcs\Agents\AgentListParams;
 use Telnyx\Messaging\Rcs\Agents\AgentListParams\Page;
 use Telnyx\Messaging\Rcs\Agents\AgentListResponse;
@@ -33,21 +32,6 @@ final class AgentsService implements AgentsContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): RcsAgentResponse {
-        $params = [];
-
-        return $this->retrieveRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): RcsAgentResponse {
         // @phpstan-ignore-next-line;
@@ -120,8 +104,6 @@ final class AgentsService implements AgentsContract
      *
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
-     * @return AgentListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -137,8 +119,6 @@ final class AgentsService implements AgentsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return AgentListResponse<HasRawResponse>
      *
      * @throws APIException
      */

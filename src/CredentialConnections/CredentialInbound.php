@@ -127,10 +127,10 @@ final class CredentialInbound implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $aniNumberFormat && $obj->aniNumberFormat = $aniNumberFormat instanceof AniNumberFormat ? $aniNumberFormat->value : $aniNumberFormat;
+        null !== $aniNumberFormat && $obj['aniNumberFormat'] = $aniNumberFormat;
         null !== $channelLimit && $obj->channelLimit = $channelLimit;
         null !== $codecs && $obj->codecs = $codecs;
-        null !== $dnisNumberFormat && $obj->dnisNumberFormat = $dnisNumberFormat instanceof DnisNumberFormat ? $dnisNumberFormat->value : $dnisNumberFormat;
+        null !== $dnisNumberFormat && $obj['dnisNumberFormat'] = $dnisNumberFormat;
         null !== $generateRingbackTone && $obj->generateRingbackTone = $generateRingbackTone;
         null !== $isupHeadersEnabled && $obj->isupHeadersEnabled = $isupHeadersEnabled;
         null !== $prackEnabled && $obj->prackEnabled = $prackEnabled;
@@ -151,7 +151,7 @@ final class CredentialInbound implements BaseModel
         AniNumberFormat|string $aniNumberFormat
     ): self {
         $obj = clone $this;
-        $obj->aniNumberFormat = $aniNumberFormat instanceof AniNumberFormat ? $aniNumberFormat->value : $aniNumberFormat;
+        $obj['aniNumberFormat'] = $aniNumberFormat;
 
         return $obj;
     }
@@ -187,7 +187,7 @@ final class CredentialInbound implements BaseModel
         DnisNumberFormat|string $dnisNumberFormat
     ): self {
         $obj = clone $this;
-        $obj->dnisNumberFormat = $dnisNumberFormat instanceof DnisNumberFormat ? $dnisNumberFormat->value : $dnisNumberFormat;
+        $obj['dnisNumberFormat'] = $dnisNumberFormat;
 
         return $obj;
     }

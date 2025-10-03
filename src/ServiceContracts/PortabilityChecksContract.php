@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PortabilityChecks\PortabilityCheckRunResponse;
 use Telnyx\RequestOptions;
 
@@ -18,8 +17,6 @@ interface PortabilityChecksContract
      *
      * @param list<string> $phoneNumbers The list of +E.164 formatted phone numbers to check for portability
      *
-     * @return PortabilityCheckRunResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function run(
@@ -31,8 +28,6 @@ interface PortabilityChecksContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return PortabilityCheckRunResponse<HasRawResponse>
      *
      * @throws APIException
      */

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\DetailRecords\DetailRecordListParams\Filter;
 use Telnyx\DetailRecords\DetailRecordListParams\Page;
 use Telnyx\DetailRecords\DetailRecordListResponse;
@@ -22,8 +21,6 @@ interface DetailRecordsContract
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      * @param list<string> $sort Specifies the sort order for results. <br/>Example: sort=-created_at
      *
-     * @return DetailRecordListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -37,8 +34,6 @@ interface DetailRecordsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return DetailRecordListResponse<HasRawResponse>
      *
      * @throws APIException
      */

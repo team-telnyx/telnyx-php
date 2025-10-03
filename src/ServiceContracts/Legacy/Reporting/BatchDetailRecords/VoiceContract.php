@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\Legacy\Reporting\BatchDetailRecords;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Voice\VoiceDeleteResponse;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Voice\VoiceGetFieldsResponse;
@@ -35,8 +34,6 @@ interface VoiceContract
      * @param string $source Source of the report. Valid values: calls (default), call-control, fax-api, webrtc
      * @param string $timezone Timezone for the report
      *
-     * @return VoiceNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -61,8 +58,6 @@ interface VoiceContract
      *
      * @param array<string, mixed> $params
      *
-     * @return VoiceNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function createRaw(
@@ -72,8 +67,6 @@ interface VoiceContract
 
     /**
      * @api
-     *
-     * @return VoiceGetResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -85,21 +78,6 @@ interface VoiceContract
     /**
      * @api
      *
-     * @return VoiceGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
-        ?RequestOptions $requestOptions = null
-    ): VoiceGetResponse;
-
-    /**
-     * @api
-     *
-     * @return VoiceListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -108,20 +86,6 @@ interface VoiceContract
 
     /**
      * @api
-     *
-     * @return VoiceListResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        mixed $params,
-        ?RequestOptions $requestOptions = null
-    ): VoiceListResponse;
-
-    /**
-     * @api
-     *
-     * @return VoiceDeleteResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -133,36 +97,9 @@ interface VoiceContract
     /**
      * @api
      *
-     * @return VoiceDeleteResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $id,
-        mixed $params,
-        ?RequestOptions $requestOptions = null
-    ): VoiceDeleteResponse;
-
-    /**
-     * @api
-     *
-     * @return VoiceGetFieldsResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieveFields(
-        ?RequestOptions $requestOptions = null
-    ): VoiceGetFieldsResponse;
-
-    /**
-     * @api
-     *
-     * @return VoiceGetFieldsResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveFieldsRaw(
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): VoiceGetFieldsResponse;
 }

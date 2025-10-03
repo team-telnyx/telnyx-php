@@ -186,7 +186,7 @@ final class AmdDetailRecord implements BaseModel
         null !== $connectionName && $obj->connectionName = $connectionName;
         null !== $cost && $obj->cost = $cost;
         null !== $currency && $obj->currency = $currency;
-        null !== $feature && $obj->feature = $feature instanceof Feature ? $feature->value : $feature;
+        null !== $feature && $obj['feature'] = $feature;
         null !== $invokedAt && $obj->invokedAt = $invokedAt;
         null !== $isTelnyxBillable && $obj->isTelnyxBillable = $isTelnyxBillable;
         null !== $rate && $obj->rate = $rate;
@@ -311,7 +311,7 @@ final class AmdDetailRecord implements BaseModel
     public function withFeature(Feature|string $feature): self
     {
         $obj = clone $this;
-        $obj->feature = $feature instanceof Feature ? $feature->value : $feature;
+        $obj['feature'] = $feature;
 
         return $obj;
     }

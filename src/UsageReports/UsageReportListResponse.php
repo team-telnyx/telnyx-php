@@ -6,7 +6,9 @@ namespace Telnyx\UsageReports;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Core\Conversion\MapOf;
 use Telnyx\UsageReports\UsageReportListResponse\Meta;
 
@@ -14,15 +16,13 @@ use Telnyx\UsageReports\UsageReportListResponse\Meta;
  * @phpstan-type usage_report_list_response = array{
  *   data?: list<array<string, mixed>>, meta?: Meta
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class UsageReportListResponse implements BaseModel
+final class UsageReportListResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<usage_report_list_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /** @var list<array<string, mixed>>|null $data */
     #[Api(list: new MapOf('mixed'), optional: true)]

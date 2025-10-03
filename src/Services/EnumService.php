@@ -33,25 +33,6 @@ final class EnumService implements EnumContract
         Endpoint|string $endpoint,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        $params = [];
-
-        return $this->retrieveRaw($endpoint, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param Endpoint|value-of<Endpoint> $endpoint
-     *
-     * @return mixed|list<mixed|string>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        Endpoint|string $endpoint,
-        mixed $params,
-        ?RequestOptions $requestOptions = null,
-    ): mixed {
         // @phpstan-ignore-next-line;
         return $this->client->request(
             method: 'get',

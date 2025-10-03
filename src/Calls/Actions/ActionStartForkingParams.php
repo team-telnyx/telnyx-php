@@ -104,7 +104,7 @@ final class ActionStartForkingParams implements BaseModel
         null !== $clientState && $obj->clientState = $clientState;
         null !== $commandID && $obj->commandID = $commandID;
         null !== $rx && $obj->rx = $rx;
-        null !== $streamType && $obj->streamType = $streamType instanceof StreamType ? $streamType->value : $streamType;
+        null !== $streamType && $obj['streamType'] = $streamType;
         null !== $tx && $obj->tx = $tx;
 
         return $obj;
@@ -151,7 +151,7 @@ final class ActionStartForkingParams implements BaseModel
     public function withStreamType(StreamType|string $streamType): self
     {
         $obj = clone $this;
-        $obj->streamType = $streamType instanceof StreamType ? $streamType->value : $streamType;
+        $obj['streamType'] = $streamType;
 
         return $obj;
     }

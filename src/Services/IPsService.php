@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\IPs\IPCreateParams;
 use Telnyx\IPs\IPDeleteResponse;
 use Telnyx\IPs\IPGetResponse;
@@ -38,8 +37,6 @@ final class IPsService implements IPsContract
      * @param string $connectionID ID of the IP Connection to which this IP should be attached
      * @param int $port port to use when connecting to this IP
      *
-     * @return IPNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -61,8 +58,6 @@ final class IPsService implements IPsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return IPNewResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -90,29 +85,10 @@ final class IPsService implements IPsContract
      *
      * Return the details regarding a specific IP.
      *
-     * @return IPGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): IPGetResponse {
-        $params = [];
-
-        return $this->retrieveRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return IPGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): IPGetResponse {
         // @phpstan-ignore-next-line;
@@ -132,8 +108,6 @@ final class IPsService implements IPsContract
      * @param string $ipAddress IP adddress represented by this resource
      * @param string $connectionID ID of the IP Connection to which this IP should be attached
      * @param int $port port to use when connecting to this IP
-     *
-     * @return IPUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -157,8 +131,6 @@ final class IPsService implements IPsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return IPUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -190,8 +162,6 @@ final class IPsService implements IPsContract
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[connection_id], filter[ip_address], filter[port]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
-     * @return IPListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -208,8 +178,6 @@ final class IPsService implements IPsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return IPListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -234,29 +202,10 @@ final class IPsService implements IPsContract
      *
      * Delete an IP.
      *
-     * @return IPDeleteResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): IPDeleteResponse {
-        $params = [];
-
-        return $this->deleteRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return IPDeleteResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): IPDeleteResponse {
         // @phpstan-ignore-next-line;

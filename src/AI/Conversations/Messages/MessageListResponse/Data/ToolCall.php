@@ -72,7 +72,7 @@ final class ToolCall implements BaseModel
 
         $obj->id = $id;
         $obj->function1 = $function1;
-        $obj->type = $type instanceof Type ? $type->value : $type;
+        $obj['type'] = $type;
 
         return $obj;
     }
@@ -104,7 +104,7 @@ final class ToolCall implements BaseModel
     public function withType(Type|string $type): self
     {
         $obj = clone $this;
-        $obj->type = $type instanceof Type ? $type->value : $type;
+        $obj['type'] = $type;
 
         return $obj;
     }

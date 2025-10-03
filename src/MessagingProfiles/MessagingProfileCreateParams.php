@@ -197,7 +197,7 @@ final class MessagingProfileCreateParams implements BaseModel
         null !== $mmsTranscoding && $obj->mmsTranscoding = $mmsTranscoding;
         null !== $numberPoolSettings && $obj->numberPoolSettings = $numberPoolSettings;
         null !== $urlShortenerSettings && $obj->urlShortenerSettings = $urlShortenerSettings;
-        null !== $webhookAPIVersion && $obj->webhookAPIVersion = $webhookAPIVersion instanceof WebhookAPIVersion ? $webhookAPIVersion->value : $webhookAPIVersion;
+        null !== $webhookAPIVersion && $obj['webhookAPIVersion'] = $webhookAPIVersion;
         null !== $webhookFailoverURL && $obj->webhookFailoverURL = $webhookFailoverURL;
         null !== $webhookURL && $obj->webhookURL = $webhookURL;
 
@@ -339,7 +339,7 @@ final class MessagingProfileCreateParams implements BaseModel
         WebhookAPIVersion|string $webhookAPIVersion
     ): self {
         $obj = clone $this;
-        $obj->webhookAPIVersion = $webhookAPIVersion instanceof WebhookAPIVersion ? $webhookAPIVersion->value : $webhookAPIVersion;
+        $obj['webhookAPIVersion'] = $webhookAPIVersion;
 
         return $obj;
     }

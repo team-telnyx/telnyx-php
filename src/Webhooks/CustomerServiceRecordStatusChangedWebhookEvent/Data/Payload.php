@@ -70,7 +70,7 @@ final class Payload implements BaseModel
 
         null !== $id && $obj->id = $id;
         null !== $phoneNumber && $obj->phoneNumber = $phoneNumber;
-        null !== $status && $obj->status = $status instanceof Status ? $status->value : $status;
+        null !== $status && $obj['status'] = $status;
         null !== $updatedAt && $obj->updatedAt = $updatedAt;
 
         return $obj;
@@ -106,7 +106,7 @@ final class Payload implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

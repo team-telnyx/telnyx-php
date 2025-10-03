@@ -6,7 +6,6 @@ namespace Telnyx\ServiceContracts\Campaign;
 
 use Telnyx\Campaign\Usecase\UsecaseGetCostResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 
 interface UsecaseContract
@@ -15,8 +14,6 @@ interface UsecaseContract
      * @api
      *
      * @param string $usecase
-     *
-     * @return UsecaseGetCostResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -29,8 +26,6 @@ interface UsecaseContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return UsecaseGetCostResponse<HasRawResponse>
      *
      * @throws APIException
      */

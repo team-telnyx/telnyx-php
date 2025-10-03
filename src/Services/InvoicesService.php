@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Invoices\InvoiceGetResponse;
 use Telnyx\Invoices\InvoiceListParams;
 use Telnyx\Invoices\InvoiceListParams\Page;
@@ -33,8 +32,6 @@ final class InvoicesService implements InvoicesContract
      *
      * @param Action|value-of<Action> $action Invoice action
      *
-     * @return InvoiceGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
@@ -51,8 +48,6 @@ final class InvoicesService implements InvoicesContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return InvoiceGetResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -84,8 +79,6 @@ final class InvoicesService implements InvoicesContract
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      * @param Sort|value-of<Sort> $sort specifies the sort order for results
      *
-     * @return InvoiceListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -102,8 +95,6 @@ final class InvoicesService implements InvoicesContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return InvoiceListResponse<HasRawResponse>
      *
      * @throws APIException
      */

@@ -7,7 +7,9 @@ namespace Telnyx\AI\Assistants\Tests;
 use Telnyx\AI\Assistants\Tests\AssistantTest\Rubric;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * Response model containing complete assistant test information.
@@ -28,15 +30,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *   maxDurationSeconds?: int,
  *   testSuite?: string,
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class AssistantTest implements BaseModel
+final class AssistantTest implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<assistant_test> */
     use SdkModel;
+
+    use SdkResponse;
 
     /**
      * Timestamp when the test was created.
@@ -157,7 +157,7 @@ final class AssistantTest implements BaseModel
         $obj->createdAt = $createdAt;
         $obj->name = $name;
         $obj->rubric = $rubric;
-        $obj->telnyxConversationChannel = $telnyxConversationChannel instanceof TelnyxConversationChannel ? $telnyxConversationChannel->value : $telnyxConversationChannel;
+        $obj['telnyxConversationChannel'] = $telnyxConversationChannel;
         $obj->testID = $testID;
 
         null !== $description && $obj->description = $description;
@@ -213,7 +213,7 @@ final class AssistantTest implements BaseModel
         TelnyxConversationChannel|string $telnyxConversationChannel
     ): self {
         $obj = clone $this;
-        $obj->telnyxConversationChannel = $telnyxConversationChannel instanceof TelnyxConversationChannel ? $telnyxConversationChannel->value : $telnyxConversationChannel;
+        $obj['telnyxConversationChannel'] = $telnyxConversationChannel;
 
         return $obj;
     }

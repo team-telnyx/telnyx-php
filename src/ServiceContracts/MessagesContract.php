@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Messages\MessageCancelScheduledResponse;
 use Telnyx\Messages\MessageGetResponse;
 use Telnyx\Messages\MessageScheduleParams\Type;
@@ -24,8 +23,6 @@ interface MessagesContract
     /**
      * @api
      *
-     * @return MessageGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
@@ -36,38 +33,10 @@ interface MessagesContract
     /**
      * @api
      *
-     * @return MessageGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
-        ?RequestOptions $requestOptions = null
-    ): MessageGetResponse;
-
-    /**
-     * @api
-     *
-     * @return MessageCancelScheduledResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function cancelScheduled(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): MessageCancelScheduledResponse;
-
-    /**
-     * @api
-     *
-     * @return MessageCancelScheduledResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function cancelScheduledRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): MessageCancelScheduledResponse;
 
@@ -95,8 +64,6 @@ interface MessagesContract
      * @param string $webhookFailoverURL the failover URL where webhooks related to this message will be sent if sending to the primary URL fails
      * @param string $webhookURL the URL where webhooks related to this message will be sent
      *
-     * @return MessageScheduleResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function schedule(
@@ -119,8 +86,6 @@ interface MessagesContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return MessageScheduleResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -153,8 +118,6 @@ interface MessagesContract
      * @param string $webhookFailoverURL the failover URL where webhooks related to this message will be sent if sending to the primary URL fails
      * @param string $webhookURL the URL where webhooks related to this message will be sent
      *
-     * @return MessageSendResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function send(
@@ -178,8 +141,6 @@ interface MessagesContract
      *
      * @param array<string, mixed> $params
      *
-     * @return MessageSendResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function sendRaw(
@@ -199,8 +160,6 @@ interface MessagesContract
      * @param string $webhookFailoverURL the failover URL where webhooks related to this message will be sent if sending to the primary URL fails
      * @param string $webhookURL the URL where webhooks related to this message will be sent
      *
-     * @return MessageSendGroupMmsResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function sendGroupMms(
@@ -219,8 +178,6 @@ interface MessagesContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return MessageSendGroupMmsResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -247,8 +204,6 @@ interface MessagesContract
      * @param string $webhookFailoverURL the failover URL where webhooks related to this message will be sent if sending to the primary URL fails
      * @param string $webhookURL the URL where webhooks related to this message will be sent
      *
-     * @return MessageSendLongCodeResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function sendLongCode(
@@ -269,8 +224,6 @@ interface MessagesContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return MessageSendLongCodeResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -297,8 +250,6 @@ interface MessagesContract
      * @param string $webhookFailoverURL the failover URL where webhooks related to this message will be sent if sending to the primary URL fails
      * @param string $webhookURL the URL where webhooks related to this message will be sent
      *
-     * @return MessageSendNumberPoolResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function sendNumberPool(
@@ -319,8 +270,6 @@ interface MessagesContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return MessageSendNumberPoolResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -347,8 +296,6 @@ interface MessagesContract
      * @param string $webhookFailoverURL the failover URL where webhooks related to this message will be sent if sending to the primary URL fails
      * @param string $webhookURL the URL where webhooks related to this message will be sent
      *
-     * @return MessageSendShortCodeResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function sendShortCode(
@@ -369,8 +316,6 @@ interface MessagesContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return MessageSendShortCodeResponse<HasRawResponse>
      *
      * @throws APIException
      */

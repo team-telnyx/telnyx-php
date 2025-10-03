@@ -93,7 +93,7 @@ final class Data implements BaseModel
         $obj->id = $id;
         $obj->conversationInsights = $conversationInsights;
         $obj->createdAt = $createdAt;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }
@@ -141,7 +141,7 @@ final class Data implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

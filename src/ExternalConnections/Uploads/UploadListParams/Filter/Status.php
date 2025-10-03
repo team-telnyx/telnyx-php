@@ -41,7 +41,7 @@ final class Status implements BaseModel
     {
         $obj = new self;
 
-        null !== $eq && $obj->eq = array_map(fn ($v) => $v instanceof Eq ? $v->value : $v, $eq);
+        null !== $eq && $obj['eq'] = $eq;
 
         return $obj;
     }
@@ -54,7 +54,7 @@ final class Status implements BaseModel
     public function withEq(array $eq): self
     {
         $obj = clone $this;
-        $obj->eq = array_map(fn ($v) => $v instanceof Eq ? $v->value : $v, $eq);
+        $obj['eq'] = $eq;
 
         return $obj;
     }

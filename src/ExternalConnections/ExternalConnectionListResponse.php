@@ -6,22 +6,22 @@ namespace Telnyx\ExternalConnections;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type external_connection_list_response = array{
  *   data?: list<ExternalConnection>,
  *   meta?: ExternalVoiceIntegrationsPaginationMeta,
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class ExternalConnectionListResponse implements BaseModel
+final class ExternalConnectionListResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<external_connection_list_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /** @var list<ExternalConnection>|null $data */
     #[Api(list: ExternalConnection::class, optional: true)]

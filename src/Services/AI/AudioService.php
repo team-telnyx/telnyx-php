@@ -11,7 +11,6 @@ use Telnyx\AI\Audio\AudioTranscribeParams\TimestampGranularities;
 use Telnyx\AI\Audio\AudioTranscribeResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\AudioContract;
 
@@ -34,8 +33,6 @@ final class AudioService implements AudioContract
      * @param string $fileURL Link to audio file in one of these formats: flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm. Support for hosted files is limited to 100MB. Cannot be used together with `file`
      * @param ResponseFormat|value-of<ResponseFormat> $responseFormat The format of the transcript output. Use `verbose_json` to take advantage of timestamps.
      * @param TimestampGranularities|value-of<TimestampGranularities> $timestampGranularities The timestamp granularities to populate for this transcription. `response_format` must be set verbose_json to use timestamp granularities. Currently `segment` is supported.
-     *
-     * @return AudioTranscribeResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -62,8 +59,6 @@ final class AudioService implements AudioContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return AudioTranscribeResponse<HasRawResponse>
      *
      * @throws APIException
      */

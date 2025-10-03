@@ -8,7 +8,6 @@ use Telnyx\AI\Assistants\Tools\ToolTestParams;
 use Telnyx\AI\Assistants\Tools\ToolTestResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\ToolsContract;
 
@@ -31,8 +30,6 @@ final class ToolsService implements ToolsContract
      * mixed,> $arguments Key-value arguments to use for the webhook test
      * @param array<string,
      * mixed,> $dynamicVariables Key-value dynamic variables to use for the webhook test
-     *
-     * @return ToolTestResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -57,8 +54,6 @@ final class ToolsService implements ToolsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return ToolTestResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function testRaw(
@@ -77,7 +72,7 @@ final class ToolsService implements ToolsContract
         return $this->client->request(
             method: 'post',
             path: ['ai/assistants/%1$s/tools/%2$s/test', $assistantID, $toolID],
-            body: (object) array_diff_key($parsed, array_flip(['assistantID'])),
+            body: (object) array_diff_key($parsed, ['assistantID']),
             options: $options,
             convert: ToolTestResponse::class,
         );

@@ -78,7 +78,7 @@ final class NotificationChannelUpdateParams implements BaseModel
         $obj = new self;
 
         null !== $channelDestination && $obj->channelDestination = $channelDestination;
-        null !== $channelTypeID && $obj->channelTypeID = $channelTypeID instanceof ChannelTypeID ? $channelTypeID->value : $channelTypeID;
+        null !== $channelTypeID && $obj['channelTypeID'] = $channelTypeID;
         null !== $notificationProfileID && $obj->notificationProfileID = $notificationProfileID;
 
         return $obj;
@@ -103,7 +103,7 @@ final class NotificationChannelUpdateParams implements BaseModel
     public function withChannelTypeID(ChannelTypeID|string $channelTypeID): self
     {
         $obj = clone $this;
-        $obj->channelTypeID = $channelTypeID instanceof ChannelTypeID ? $channelTypeID->value : $channelTypeID;
+        $obj['channelTypeID'] = $channelTypeID;
 
         return $obj;
     }

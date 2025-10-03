@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\RequirementTypes\RequirementTypeGetResponse;
 use Telnyx\RequirementTypes\RequirementTypeListParams\Filter;
@@ -19,8 +18,6 @@ interface RequirementTypesContract
     /**
      * @api
      *
-     * @return RequirementTypeGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
@@ -31,23 +28,8 @@ interface RequirementTypesContract
     /**
      * @api
      *
-     * @return RequirementTypeGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
-        ?RequestOptions $requestOptions = null
-    ): RequirementTypeGetResponse;
-
-    /**
-     * @api
-     *
      * @param Filter $filter Consolidated filter parameter for requirement types (deepObject style). Originally: filter[name]
      * @param list<Sort|value-of<Sort>> $sort Consolidated sort parameter for requirement types (deepObject style). Originally: sort[]
-     *
-     * @return RequirementTypeListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -61,8 +43,6 @@ interface RequirementTypesContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return RequirementTypeListResponse<HasRawResponse>
      *
      * @throws APIException
      */

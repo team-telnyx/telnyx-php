@@ -89,7 +89,7 @@ final class Data implements BaseModel
         null !== $creditLimit && $obj->creditLimit = $creditLimit;
         null !== $currency && $obj->currency = $currency;
         null !== $pending && $obj->pending = $pending;
-        null !== $recordType && $obj->recordType = $recordType instanceof RecordType ? $recordType->value : $recordType;
+        null !== $recordType && $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -157,7 +157,7 @@ final class Data implements BaseModel
     public function withRecordType(RecordType|string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType instanceof RecordType ? $recordType->value : $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }

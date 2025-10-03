@@ -82,7 +82,7 @@ final class Comment implements BaseModel
         null !== $body && $obj->body = $body;
         null !== $insertedAt && $obj->insertedAt = $insertedAt;
         null !== $userID && $obj->userID = $userID;
-        null !== $userType && $obj->userType = $userType instanceof UserType ? $userType->value : $userType;
+        null !== $userType && $obj['userType'] = $userType;
 
         return $obj;
     }
@@ -139,7 +139,7 @@ final class Comment implements BaseModel
     public function withUserType(UserType|string $userType): self
     {
         $obj = clone $this;
-        $obj->userType = $userType instanceof UserType ? $userType->value : $userType;
+        $obj['userType'] = $userType;
 
         return $obj;
     }

@@ -6,19 +6,19 @@ namespace Telnyx\Wireless\DetailRecordsReports;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type detail_records_report_new_response = array{data?: WdrReport}
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class DetailRecordsReportNewResponse implements BaseModel
+final class DetailRecordsReportNewResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<detail_records_report_new_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     #[Api(optional: true)]
     public ?WdrReport $data;

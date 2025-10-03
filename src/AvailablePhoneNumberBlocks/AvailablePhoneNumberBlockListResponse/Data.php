@@ -75,7 +75,7 @@ final class Data implements BaseModel
         null !== $costInformation && $obj->costInformation = $costInformation;
         null !== $features && $obj->features = $features;
         null !== $range && $obj->range = $range;
-        null !== $recordType && $obj->recordType = $recordType instanceof RecordType ? $recordType->value : $recordType;
+        null !== $recordType && $obj['recordType'] = $recordType;
         null !== $regionInformation && $obj->regionInformation = $regionInformation;
         null !== $startingNumber && $obj->startingNumber = $startingNumber;
 
@@ -115,7 +115,7 @@ final class Data implements BaseModel
     public function withRecordType(RecordType|string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType instanceof RecordType ? $recordType->value : $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }

@@ -118,7 +118,7 @@ final class NotificationSetting implements BaseModel
         null !== $notificationEventConditionID && $obj->notificationEventConditionID = $notificationEventConditionID;
         null !== $notificationProfileID && $obj->notificationProfileID = $notificationProfileID;
         null !== $parameters && $obj->parameters = $parameters;
-        null !== $status && $obj->status = $status instanceof Status ? $status->value : $status;
+        null !== $status && $obj['status'] = $status;
         null !== $updatedAt && $obj->updatedAt = $updatedAt;
 
         return $obj;
@@ -218,7 +218,7 @@ final class NotificationSetting implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

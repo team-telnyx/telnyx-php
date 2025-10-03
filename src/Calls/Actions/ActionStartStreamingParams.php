@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Telnyx\Calls\Actions;
 
-use Telnyx\Calls\Actions\ActionStartStreamingParams\StreamBidirectionalSamplingRate;
 use Telnyx\Calls\Actions\ActionStartStreamingParams\StreamTrack;
 use Telnyx\Calls\DialogflowConfig;
 use Telnyx\Calls\StreamBidirectionalCodec;
@@ -41,7 +40,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   enableDialogflow?: bool,
  *   streamBidirectionalCodec?: StreamBidirectionalCodec|value-of<StreamBidirectionalCodec>,
  *   streamBidirectionalMode?: StreamBidirectionalMode|value-of<StreamBidirectionalMode>,
- *   streamBidirectionalSamplingRate?: StreamBidirectionalSamplingRate|value-of<StreamBidirectionalSamplingRate>,
+ *   streamBidirectionalSamplingRate?: 8000|16000|22050|24000|48000,
  *   streamBidirectionalTargetLegs?: StreamBidirectionalTargetLegs|value-of<StreamBidirectionalTargetLegs>,
  *   streamCodec?: StreamCodec|value-of<StreamCodec>,
  *   streamTrack?: StreamTrack|value-of<StreamTrack>,
@@ -102,13 +101,9 @@ final class ActionStartStreamingParams implements BaseModel
     /**
      * Audio sampling rate.
      *
-     * @var value-of<StreamBidirectionalSamplingRate>|null $streamBidirectionalSamplingRate
+     * @var 8000|16000|22050|24000|48000|null $streamBidirectionalSamplingRate
      */
-    #[Api(
-        'stream_bidirectional_sampling_rate',
-        enum: StreamBidirectionalSamplingRate::class,
-        optional: true,
-    )]
+    #[Api('stream_bidirectional_sampling_rate', optional: true)]
     public ?int $streamBidirectionalSamplingRate;
 
     /**
@@ -157,7 +152,7 @@ final class ActionStartStreamingParams implements BaseModel
      *
      * @param StreamBidirectionalCodec|value-of<StreamBidirectionalCodec> $streamBidirectionalCodec
      * @param StreamBidirectionalMode|value-of<StreamBidirectionalMode> $streamBidirectionalMode
-     * @param StreamBidirectionalSamplingRate|value-of<StreamBidirectionalSamplingRate> $streamBidirectionalSamplingRate
+     * @param 8000|16000|22050|24000|48000 $streamBidirectionalSamplingRate
      * @param StreamBidirectionalTargetLegs|value-of<StreamBidirectionalTargetLegs> $streamBidirectionalTargetLegs
      * @param StreamCodec|value-of<StreamCodec> $streamCodec
      * @param StreamTrack|value-of<StreamTrack> $streamTrack
@@ -169,7 +164,7 @@ final class ActionStartStreamingParams implements BaseModel
         ?bool $enableDialogflow = null,
         StreamBidirectionalCodec|string|null $streamBidirectionalCodec = null,
         StreamBidirectionalMode|string|null $streamBidirectionalMode = null,
-        StreamBidirectionalSamplingRate|int|null $streamBidirectionalSamplingRate = null,
+        ?int $streamBidirectionalSamplingRate = null,
         StreamBidirectionalTargetLegs|string|null $streamBidirectionalTargetLegs = null,
         StreamCodec|string|null $streamCodec = null,
         StreamTrack|string|null $streamTrack = null,
@@ -181,12 +176,12 @@ final class ActionStartStreamingParams implements BaseModel
         null !== $commandID && $obj->commandID = $commandID;
         null !== $dialogflowConfig && $obj->dialogflowConfig = $dialogflowConfig;
         null !== $enableDialogflow && $obj->enableDialogflow = $enableDialogflow;
-        null !== $streamBidirectionalCodec && $obj->streamBidirectionalCodec = $streamBidirectionalCodec instanceof StreamBidirectionalCodec ? $streamBidirectionalCodec->value : $streamBidirectionalCodec;
-        null !== $streamBidirectionalMode && $obj->streamBidirectionalMode = $streamBidirectionalMode instanceof StreamBidirectionalMode ? $streamBidirectionalMode->value : $streamBidirectionalMode;
-        null !== $streamBidirectionalSamplingRate && $obj->streamBidirectionalSamplingRate = $streamBidirectionalSamplingRate instanceof StreamBidirectionalSamplingRate ? $streamBidirectionalSamplingRate->value : $streamBidirectionalSamplingRate;
-        null !== $streamBidirectionalTargetLegs && $obj->streamBidirectionalTargetLegs = $streamBidirectionalTargetLegs instanceof StreamBidirectionalTargetLegs ? $streamBidirectionalTargetLegs->value : $streamBidirectionalTargetLegs;
-        null !== $streamCodec && $obj->streamCodec = $streamCodec instanceof StreamCodec ? $streamCodec->value : $streamCodec;
-        null !== $streamTrack && $obj->streamTrack = $streamTrack instanceof StreamTrack ? $streamTrack->value : $streamTrack;
+        null !== $streamBidirectionalCodec && $obj['streamBidirectionalCodec'] = $streamBidirectionalCodec;
+        null !== $streamBidirectionalMode && $obj['streamBidirectionalMode'] = $streamBidirectionalMode;
+        null !== $streamBidirectionalSamplingRate && $obj->streamBidirectionalSamplingRate = $streamBidirectionalSamplingRate;
+        null !== $streamBidirectionalTargetLegs && $obj['streamBidirectionalTargetLegs'] = $streamBidirectionalTargetLegs;
+        null !== $streamCodec && $obj['streamCodec'] = $streamCodec;
+        null !== $streamTrack && $obj['streamTrack'] = $streamTrack;
         null !== $streamURL && $obj->streamURL = $streamURL;
 
         return $obj;
@@ -243,7 +238,7 @@ final class ActionStartStreamingParams implements BaseModel
         StreamBidirectionalCodec|string $streamBidirectionalCodec
     ): self {
         $obj = clone $this;
-        $obj->streamBidirectionalCodec = $streamBidirectionalCodec instanceof StreamBidirectionalCodec ? $streamBidirectionalCodec->value : $streamBidirectionalCodec;
+        $obj['streamBidirectionalCodec'] = $streamBidirectionalCodec;
 
         return $obj;
     }
@@ -257,7 +252,7 @@ final class ActionStartStreamingParams implements BaseModel
         StreamBidirectionalMode|string $streamBidirectionalMode
     ): self {
         $obj = clone $this;
-        $obj->streamBidirectionalMode = $streamBidirectionalMode instanceof StreamBidirectionalMode ? $streamBidirectionalMode->value : $streamBidirectionalMode;
+        $obj['streamBidirectionalMode'] = $streamBidirectionalMode;
 
         return $obj;
     }
@@ -265,13 +260,13 @@ final class ActionStartStreamingParams implements BaseModel
     /**
      * Audio sampling rate.
      *
-     * @param StreamBidirectionalSamplingRate|value-of<StreamBidirectionalSamplingRate> $streamBidirectionalSamplingRate
+     * @param 8000|16000|22050|24000|48000 $streamBidirectionalSamplingRate
      */
     public function withStreamBidirectionalSamplingRate(
-        StreamBidirectionalSamplingRate|int $streamBidirectionalSamplingRate
+        int $streamBidirectionalSamplingRate
     ): self {
         $obj = clone $this;
-        $obj->streamBidirectionalSamplingRate = $streamBidirectionalSamplingRate instanceof StreamBidirectionalSamplingRate ? $streamBidirectionalSamplingRate->value : $streamBidirectionalSamplingRate;
+        $obj->streamBidirectionalSamplingRate = $streamBidirectionalSamplingRate;
 
         return $obj;
     }
@@ -285,7 +280,7 @@ final class ActionStartStreamingParams implements BaseModel
         StreamBidirectionalTargetLegs|string $streamBidirectionalTargetLegs
     ): self {
         $obj = clone $this;
-        $obj->streamBidirectionalTargetLegs = $streamBidirectionalTargetLegs instanceof StreamBidirectionalTargetLegs ? $streamBidirectionalTargetLegs->value : $streamBidirectionalTargetLegs;
+        $obj['streamBidirectionalTargetLegs'] = $streamBidirectionalTargetLegs;
 
         return $obj;
     }
@@ -298,7 +293,7 @@ final class ActionStartStreamingParams implements BaseModel
     public function withStreamCodec(StreamCodec|string $streamCodec): self
     {
         $obj = clone $this;
-        $obj->streamCodec = $streamCodec instanceof StreamCodec ? $streamCodec->value : $streamCodec;
+        $obj['streamCodec'] = $streamCodec;
 
         return $obj;
     }
@@ -311,7 +306,7 @@ final class ActionStartStreamingParams implements BaseModel
     public function withStreamTrack(StreamTrack|string $streamTrack): self
     {
         $obj = clone $this;
-        $obj->streamTrack = $streamTrack instanceof StreamTrack ? $streamTrack->value : $streamTrack;
+        $obj['streamTrack'] = $streamTrack;
 
         return $obj;
     }

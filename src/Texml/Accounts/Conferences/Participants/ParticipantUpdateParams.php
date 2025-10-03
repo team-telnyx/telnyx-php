@@ -172,14 +172,14 @@ final class ParticipantUpdateParams implements BaseModel
         $obj->accountSid = $accountSid;
         $obj->conferenceSid = $conferenceSid;
 
-        null !== $announceMethod && $obj->announceMethod = $announceMethod instanceof AnnounceMethod ? $announceMethod->value : $announceMethod;
+        null !== $announceMethod && $obj['announceMethod'] = $announceMethod;
         null !== $announceURL && $obj->announceURL = $announceURL;
         null !== $beepOnExit && $obj->beepOnExit = $beepOnExit;
         null !== $callSidToCoach && $obj->callSidToCoach = $callSidToCoach;
         null !== $coaching && $obj->coaching = $coaching;
         null !== $endConferenceOnExit && $obj->endConferenceOnExit = $endConferenceOnExit;
         null !== $hold && $obj->hold = $hold;
-        null !== $holdMethod && $obj->holdMethod = $holdMethod instanceof HoldMethod ? $holdMethod->value : $holdMethod;
+        null !== $holdMethod && $obj['holdMethod'] = $holdMethod;
         null !== $holdURL && $obj->holdURL = $holdURL;
         null !== $muted && $obj->muted = $muted;
         null !== $waitURL && $obj->waitURL = $waitURL;
@@ -212,7 +212,7 @@ final class ParticipantUpdateParams implements BaseModel
         AnnounceMethod|string $announceMethod
     ): self {
         $obj = clone $this;
-        $obj->announceMethod = $announceMethod instanceof AnnounceMethod ? $announceMethod->value : $announceMethod;
+        $obj['announceMethod'] = $announceMethod;
 
         return $obj;
     }
@@ -291,7 +291,7 @@ final class ParticipantUpdateParams implements BaseModel
     public function withHoldMethod(HoldMethod|string $holdMethod): self
     {
         $obj = clone $this;
-        $obj->holdMethod = $holdMethod instanceof HoldMethod ? $holdMethod->value : $holdMethod;
+        $obj['holdMethod'] = $holdMethod;
 
         return $obj;
     }

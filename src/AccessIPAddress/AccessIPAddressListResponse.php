@@ -7,21 +7,21 @@ namespace Telnyx\AccessIPAddress;
 use Telnyx\AccessIPAddress\AccessIPAddressListResponse\Meta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type access_ip_address_list_response = array{
  *   data: list<AccessIPAddressResponse>, meta: Meta
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class AccessIPAddressListResponse implements BaseModel
+final class AccessIPAddressListResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<access_ip_address_list_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /** @var list<AccessIPAddressResponse> $data */
     #[Api(list: AccessIPAddressResponse::class)]

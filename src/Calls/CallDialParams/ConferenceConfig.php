@@ -158,7 +158,7 @@ final class ConferenceConfig implements BaseModel
         $obj = new self;
 
         null !== $id && $obj->id = $id;
-        null !== $beepEnabled && $obj->beepEnabled = $beepEnabled instanceof BeepEnabled ? $beepEnabled->value : $beepEnabled;
+        null !== $beepEnabled && $obj['beepEnabled'] = $beepEnabled;
         null !== $conferenceName && $obj->conferenceName = $conferenceName;
         null !== $earlyMedia && $obj->earlyMedia = $earlyMedia;
         null !== $endConferenceOnExit && $obj->endConferenceOnExit = $endConferenceOnExit;
@@ -169,7 +169,7 @@ final class ConferenceConfig implements BaseModel
         null !== $softEndConferenceOnExit && $obj->softEndConferenceOnExit = $softEndConferenceOnExit;
         null !== $startConferenceOnCreate && $obj->startConferenceOnCreate = $startConferenceOnCreate;
         null !== $startConferenceOnEnter && $obj->startConferenceOnEnter = $startConferenceOnEnter;
-        null !== $supervisorRole && $obj->supervisorRole = $supervisorRole instanceof SupervisorRole ? $supervisorRole->value : $supervisorRole;
+        null !== $supervisorRole && $obj['supervisorRole'] = $supervisorRole;
         null !== $whisperCallControlIDs && $obj->whisperCallControlIDs = $whisperCallControlIDs;
 
         return $obj;
@@ -194,7 +194,7 @@ final class ConferenceConfig implements BaseModel
     public function withBeepEnabled(BeepEnabled|string $beepEnabled): self
     {
         $obj = clone $this;
-        $obj->beepEnabled = $beepEnabled instanceof BeepEnabled ? $beepEnabled->value : $beepEnabled;
+        $obj['beepEnabled'] = $beepEnabled;
 
         return $obj;
     }
@@ -321,7 +321,7 @@ final class ConferenceConfig implements BaseModel
         SupervisorRole|string $supervisorRole
     ): self {
         $obj = clone $this;
-        $obj->supervisorRole = $supervisorRole instanceof SupervisorRole ? $supervisorRole->value : $supervisorRole;
+        $obj['supervisorRole'] = $supervisorRole;
 
         return $obj;
     }

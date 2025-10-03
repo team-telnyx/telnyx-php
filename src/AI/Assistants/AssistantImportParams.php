@@ -83,7 +83,7 @@ final class AssistantImportParams implements BaseModel
         $obj = new self;
 
         $obj->apiKeyRef = $apiKeyRef;
-        $obj->provider = $provider instanceof Provider ? $provider->value : $provider;
+        $obj['provider'] = $provider;
 
         return $obj;
     }
@@ -107,7 +107,7 @@ final class AssistantImportParams implements BaseModel
     public function withProvider(Provider|string $provider): self
     {
         $obj = clone $this;
-        $obj->provider = $provider instanceof Provider ? $provider->value : $provider;
+        $obj['provider'] = $provider;
 
         return $obj;
     }

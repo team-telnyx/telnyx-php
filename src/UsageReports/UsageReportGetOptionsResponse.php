@@ -6,22 +6,22 @@ namespace Telnyx\UsageReports;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\UsageReports\UsageReportGetOptionsResponse\Data;
 
 /**
  * An object following one of the schemas published in https://developers.telnyx.com/docs/api/v2/detail-records.
  *
  * @phpstan-type usage_report_get_options_response = array{data?: list<Data>}
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class UsageReportGetOptionsResponse implements BaseModel
+final class UsageReportGetOptionsResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<usage_report_get_options_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /**
      * Collection of product description.

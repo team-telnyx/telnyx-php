@@ -43,7 +43,7 @@ final class Data implements BaseModel
         $obj = new self;
 
         null !== $name && $obj->name = $name;
-        null !== $value && $obj->value = $value instanceof Value ? $value->value : $value;
+        null !== $value && $obj['value'] = $value;
 
         return $obj;
     }
@@ -62,7 +62,7 @@ final class Data implements BaseModel
     public function withValue(Value|string $value): self
     {
         $obj = clone $this;
-        $obj->value = $value instanceof Value ? $value->value : $value;
+        $obj['value'] = $value;
 
         return $obj;
     }

@@ -83,7 +83,7 @@ final class Data implements BaseModel
 
         null !== $createdAt && $obj->createdAt = $createdAt;
         null !== $errorMessage && $obj->errorMessage = $errorMessage;
-        null !== $status && $obj->status = $status instanceof Status ? $status->value : $status;
+        null !== $status && $obj['status'] = $status;
         null !== $telephoneNumbers && $obj->telephoneNumbers = $telephoneNumbers;
         null !== $tenantID && $obj->tenantID = $tenantID;
         null !== $ticketID && $obj->ticketID = $ticketID;
@@ -121,7 +121,7 @@ final class Data implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

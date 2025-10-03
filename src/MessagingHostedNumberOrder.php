@@ -75,7 +75,7 @@ final class MessagingHostedNumberOrder implements BaseModel
         null !== $messagingProfileID && $obj->messagingProfileID = $messagingProfileID;
         null !== $phoneNumbers && $obj->phoneNumbers = $phoneNumbers;
         null !== $recordType && $obj->recordType = $recordType;
-        null !== $status && $obj->status = $status instanceof Status ? $status->value : $status;
+        null !== $status && $obj['status'] = $status;
 
         return $obj;
     }
@@ -130,7 +130,7 @@ final class MessagingHostedNumberOrder implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SiprecConnectorsContract;
 use Telnyx\SiprecConnectors\SiprecConnectorCreateParams;
@@ -34,8 +33,6 @@ final class SiprecConnectorsService implements SiprecConnectorsContract
      * @param int $port port for the SIPREC SRS
      * @param string $appSubdomain subdomain to route the call when using Telnyx SRS (optional for non-Telnyx SRS)
      *
-     * @return SiprecConnectorNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -59,8 +56,6 @@ final class SiprecConnectorsService implements SiprecConnectorsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return SiprecConnectorNewResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -88,29 +83,10 @@ final class SiprecConnectorsService implements SiprecConnectorsContract
      *
      * Returns details of a stored SIPREC connector.
      *
-     * @return SiprecConnectorGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $connectorName,
-        ?RequestOptions $requestOptions = null
-    ): SiprecConnectorGetResponse {
-        $params = [];
-
-        return $this->retrieveRaw($connectorName, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return SiprecConnectorGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $connectorName,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): SiprecConnectorGetResponse {
         // @phpstan-ignore-next-line;
@@ -131,8 +107,6 @@ final class SiprecConnectorsService implements SiprecConnectorsContract
      * @param string $name name for the SIPREC connector resource
      * @param int $port port for the SIPREC SRS
      * @param string $appSubdomain subdomain to route the call when using Telnyx SRS (optional for non-Telnyx SRS)
-     *
-     * @return SiprecConnectorUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -158,8 +132,6 @@ final class SiprecConnectorsService implements SiprecConnectorsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return SiprecConnectorUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -192,21 +164,6 @@ final class SiprecConnectorsService implements SiprecConnectorsContract
      */
     public function delete(
         string $connectorName,
-        ?RequestOptions $requestOptions = null
-    ): mixed {
-        $params = [];
-
-        return $this->deleteRaw($connectorName, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $connectorName,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): mixed {
         // @phpstan-ignore-next-line;

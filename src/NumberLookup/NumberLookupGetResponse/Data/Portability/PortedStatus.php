@@ -13,5 +13,5 @@ enum PortedStatus: string
 
     case N = 'N';
 
-    case PORTED_STATUS_ = '';
+    case EMPTY = '';
 }

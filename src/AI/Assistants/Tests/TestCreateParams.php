@@ -151,7 +151,7 @@ final class TestCreateParams implements BaseModel
 
         null !== $description && $obj->description = $description;
         null !== $maxDurationSeconds && $obj->maxDurationSeconds = $maxDurationSeconds;
-        null !== $telnyxConversationChannel && $obj->telnyxConversationChannel = $telnyxConversationChannel instanceof TelnyxConversationChannel ? $telnyxConversationChannel->value : $telnyxConversationChannel;
+        null !== $telnyxConversationChannel && $obj['telnyxConversationChannel'] = $telnyxConversationChannel;
         null !== $testSuite && $obj->testSuite = $testSuite;
 
         return $obj;
@@ -234,7 +234,7 @@ final class TestCreateParams implements BaseModel
         TelnyxConversationChannel|string $telnyxConversationChannel
     ): self {
         $obj = clone $this;
-        $obj->telnyxConversationChannel = $telnyxConversationChannel instanceof TelnyxConversationChannel ? $telnyxConversationChannel->value : $telnyxConversationChannel;
+        $obj['telnyxConversationChannel'] = $telnyxConversationChannel;
 
         return $obj;
     }

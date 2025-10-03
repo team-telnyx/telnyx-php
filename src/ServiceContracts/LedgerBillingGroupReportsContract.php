@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\LedgerBillingGroupReports\LedgerBillingGroupReportGetResponse;
 use Telnyx\LedgerBillingGroupReports\LedgerBillingGroupReportNewResponse;
 use Telnyx\RequestOptions;
@@ -20,8 +19,6 @@ interface LedgerBillingGroupReportsContract
      * @param int $month Month of the ledger billing group report
      * @param int $year Year of the ledger billing group report
      *
-     * @return LedgerBillingGroupReportNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -35,8 +32,6 @@ interface LedgerBillingGroupReportsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return LedgerBillingGroupReportNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function createRaw(
@@ -47,25 +42,10 @@ interface LedgerBillingGroupReportsContract
     /**
      * @api
      *
-     * @return LedgerBillingGroupReportGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): LedgerBillingGroupReportGetResponse;
-
-    /**
-     * @api
-     *
-     * @return LedgerBillingGroupReportGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): LedgerBillingGroupReportGetResponse;
 }

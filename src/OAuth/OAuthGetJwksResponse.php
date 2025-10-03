@@ -6,20 +6,20 @@ namespace Telnyx\OAuth;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\OAuth\OAuthGetJwksResponse\Key;
 
 /**
  * @phpstan-type oauth_get_jwks_response = array{keys?: list<Key>}
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class OAuthGetJwksResponse implements BaseModel
+final class OAuthGetJwksResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<oauth_get_jwks_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /** @var list<Key>|null $keys */
     #[Api(list: Key::class, optional: true)]

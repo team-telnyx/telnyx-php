@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\NumberLookup\NumberLookupGetResponse;
 use Telnyx\NumberLookup\NumberLookupRetrieveParams\Type;
 use Telnyx\RequestOptions;
@@ -19,8 +18,6 @@ interface NumberLookupContract
      *
      * @param Type|value-of<Type> $type Specifies the type of number lookup to be performed
      *
-     * @return NumberLookupGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
@@ -33,8 +30,6 @@ interface NumberLookupContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return NumberLookupGetResponse<HasRawResponse>
      *
      * @throws APIException
      */

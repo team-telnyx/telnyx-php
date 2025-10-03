@@ -209,7 +209,7 @@ final class ActionGatherUsingAIParams implements BaseModel
         null !== $commandID && $obj->commandID = $commandID;
         null !== $greeting && $obj->greeting = $greeting;
         null !== $interruptionSettings && $obj->interruptionSettings = $interruptionSettings;
-        null !== $language && $obj->language = $language instanceof GoogleTranscriptionLanguage ? $language->value : $language;
+        null !== $language && $obj['language'] = $language;
         null !== $messageHistory && $obj->messageHistory = $messageHistory;
         null !== $sendMessageHistoryUpdates && $obj->sendMessageHistoryUpdates = $sendMessageHistoryUpdates;
         null !== $sendPartialResults && $obj->sendPartialResults = $sendPartialResults;
@@ -297,7 +297,7 @@ final class ActionGatherUsingAIParams implements BaseModel
         GoogleTranscriptionLanguage|string $language
     ): self {
         $obj = clone $this;
-        $obj->language = $language instanceof GoogleTranscriptionLanguage ? $language->value : $language;
+        $obj['language'] = $language;
 
         return $obj;
     }

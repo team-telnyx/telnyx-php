@@ -69,7 +69,7 @@ final class CsvDownloadCreateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $csvFormat && $obj->csvFormat = $csvFormat instanceof CsvFormat ? $csvFormat->value : $csvFormat;
+        null !== $csvFormat && $obj['csvFormat'] = $csvFormat;
         null !== $filter && $obj->filter = $filter;
 
         return $obj;
@@ -83,7 +83,7 @@ final class CsvDownloadCreateParams implements BaseModel
     public function withCsvFormat(CsvFormat|string $csvFormat): self
     {
         $obj = clone $this;
-        $obj->csvFormat = $csvFormat instanceof CsvFormat ? $csvFormat->value : $csvFormat;
+        $obj['csvFormat'] = $csvFormat;
 
         return $obj;
     }

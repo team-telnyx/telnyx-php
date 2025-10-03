@@ -6,7 +6,6 @@ namespace Telnyx\Services\PortingOrders;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentCreateParams;
 use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentCreateParams\AdditionalDocument;
 use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentDeleteParams;
@@ -35,8 +34,6 @@ final class AdditionalDocumentsService implements AdditionalDocumentsContract
      *
      * @param list<AdditionalDocument> $additionalDocuments
      *
-     * @return AdditionalDocumentNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -53,8 +50,6 @@ final class AdditionalDocumentsService implements AdditionalDocumentsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return AdditionalDocumentNewResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -87,8 +82,6 @@ final class AdditionalDocumentsService implements AdditionalDocumentsContract
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param Sort $sort Consolidated sort parameter (deepObject style). Originally: sort[value]
      *
-     * @return AdditionalDocumentListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -107,8 +100,6 @@ final class AdditionalDocumentsService implements AdditionalDocumentsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return AdditionalDocumentListResponse<HasRawResponse>
      *
      * @throws APIException
      */

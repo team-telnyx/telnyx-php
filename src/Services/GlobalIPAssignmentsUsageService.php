@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\GlobalIPAssignmentsUsage\GlobalIPAssignmentsUsageGetResponse;
 use Telnyx\GlobalIPAssignmentsUsage\GlobalIPAssignmentsUsageRetrieveParams;
 use Telnyx\GlobalIPAssignmentsUsage\GlobalIPAssignmentsUsageRetrieveParams\Filter;
@@ -29,8 +28,6 @@ final class GlobalIPAssignmentsUsageService implements GlobalIPAssignmentsUsageC
      *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[global_ip_assignment_id][in], filter[global_ip_id][in]
      *
-     * @return GlobalIPAssignmentsUsageGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
@@ -46,8 +43,6 @@ final class GlobalIPAssignmentsUsageService implements GlobalIPAssignmentsUsageC
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return GlobalIPAssignmentsUsageGetResponse<HasRawResponse>
      *
      * @throws APIException
      */

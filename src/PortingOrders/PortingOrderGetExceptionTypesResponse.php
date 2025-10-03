@@ -6,22 +6,22 @@ namespace Telnyx\PortingOrders;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PortingOrdersExceptionType;
 
 /**
  * @phpstan-type porting_order_get_exception_types_response = array{
  *   data?: list<PortingOrdersExceptionType>
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class PortingOrderGetExceptionTypesResponse implements BaseModel
+final class PortingOrderGetExceptionTypesResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<porting_order_get_exception_types_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /** @var list<PortingOrdersExceptionType>|null $data */
     #[Api(list: PortingOrdersExceptionType::class, optional: true)]

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\NumberOrderPhoneNumbers\UpdateRegulatoryRequirement;
 use Telnyx\RequestOptions;
 use Telnyx\SubNumberOrders\SubNumberOrderCancelResponse;
@@ -24,8 +23,6 @@ interface SubNumberOrdersContract
      *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[include_phone_numbers]
      *
-     * @return SubNumberOrderGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
@@ -38,8 +35,6 @@ interface SubNumberOrdersContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return SubNumberOrderGetResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -54,8 +49,6 @@ interface SubNumberOrdersContract
      *
      * @param list<UpdateRegulatoryRequirement> $regulatoryRequirements
      *
-     * @return SubNumberOrderUpdateResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function update(
@@ -68,8 +61,6 @@ interface SubNumberOrdersContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return SubNumberOrderUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -84,8 +75,6 @@ interface SubNumberOrdersContract
      *
      * @param Telnyx\SubNumberOrders\SubNumberOrderListParams\Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[status], filter[order_request_id], filter[country_code], filter[phone_number_type], filter[phone_numbers_count]
      *
-     * @return SubNumberOrderListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -98,8 +87,6 @@ interface SubNumberOrdersContract
      *
      * @param array<string, mixed> $params
      *
-     * @return SubNumberOrderListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function listRaw(
@@ -109,8 +96,6 @@ interface SubNumberOrdersContract
 
     /**
      * @api
-     *
-     * @return SubNumberOrderCancelResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -122,22 +107,7 @@ interface SubNumberOrdersContract
     /**
      * @api
      *
-     * @return SubNumberOrderCancelResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function cancelRaw(
-        string $subNumberOrderID,
-        mixed $params,
-        ?RequestOptions $requestOptions = null,
-    ): SubNumberOrderCancelResponse;
-
-    /**
-     * @api
-     *
      * @param string $requirementGroupID The ID of the requirement group to associate
-     *
-     * @return SubNumberOrderUpdateRequirementGroupResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -151,8 +121,6 @@ interface SubNumberOrdersContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return SubNumberOrderUpdateRequirementGroupResponse<HasRawResponse>
      *
      * @throws APIException
      */

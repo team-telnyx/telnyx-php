@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\Legacy\Reporting;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Legacy\Reporting\UsageReports\UsageReportGetSpeechToTextResponse;
 use Telnyx\RequestOptions;
 
@@ -19,8 +18,6 @@ interface UsageReportsContract
      * @param \DateTimeInterface $endDate
      * @param \DateTimeInterface $startDate
      *
-     * @return UsageReportGetSpeechToTextResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieveSpeechToText(
@@ -33,8 +30,6 @@ interface UsageReportsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return UsageReportGetSpeechToTextResponse<HasRawResponse>
      *
      * @throws APIException
      */

@@ -6,21 +6,21 @@ namespace Telnyx\CustomerServiceRecords;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type customer_service_record_get_response = array{
  *   data?: CustomerServiceRecord
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class CustomerServiceRecordGetResponse implements BaseModel
+final class CustomerServiceRecordGetResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<customer_service_record_get_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     #[Api(optional: true)]
     public ?CustomerServiceRecord $data;

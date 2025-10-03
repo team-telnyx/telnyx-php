@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\Legacy\Reporting\UsageReports;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Legacy\Reporting\UsageReports\Voice\VoiceDeleteResponse;
 use Telnyx\Legacy\Reporting\UsageReports\Voice\VoiceGetResponse;
 use Telnyx\Legacy\Reporting\UsageReports\Voice\VoiceListResponse;
@@ -27,8 +26,6 @@ interface VoiceContract
      * @param int $productBreakdown Product breakdown type: No breakdown = 0, DID vs Toll-free = 1, Country = 2, DID vs Toll-free per Country = 3
      * @param bool $selectAllManagedAccounts Whether to select all managed accounts
      *
-     * @return VoiceNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -47,8 +44,6 @@ interface VoiceContract
      *
      * @param array<string, mixed> $params
      *
-     * @return VoiceNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function createRaw(
@@ -58,8 +53,6 @@ interface VoiceContract
 
     /**
      * @api
-     *
-     * @return VoiceGetResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -71,23 +64,8 @@ interface VoiceContract
     /**
      * @api
      *
-     * @return VoiceGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
-        ?RequestOptions $requestOptions = null
-    ): VoiceGetResponse;
-
-    /**
-     * @api
-     *
      * @param int $page Page number
      * @param int $perPage Size of the page
-     *
-     * @return VoiceListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -102,8 +80,6 @@ interface VoiceContract
      *
      * @param array<string, mixed> $params
      *
-     * @return VoiceListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function listRaw(
@@ -114,25 +90,10 @@ interface VoiceContract
     /**
      * @api
      *
-     * @return VoiceDeleteResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): VoiceDeleteResponse;
-
-    /**
-     * @api
-     *
-     * @return VoiceDeleteResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): VoiceDeleteResponse;
 }

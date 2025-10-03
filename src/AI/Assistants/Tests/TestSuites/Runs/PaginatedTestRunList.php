@@ -7,7 +7,9 @@ namespace Telnyx\AI\Assistants\Tests\TestSuites\Runs;
 use Telnyx\AI\Assistants\Tests\Runs\TestRunResponse;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * Paginated list of test runs with metadata.
@@ -18,15 +20,13 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type paginated_test_run_list = array{
  *   data: list<TestRunResponse>, meta: Meta
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class PaginatedTestRunList implements BaseModel
+final class PaginatedTestRunList implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<paginated_test_run_list> */
     use SdkModel;
+
+    use SdkResponse;
 
     /**
      * Array of test run objects for the current page.

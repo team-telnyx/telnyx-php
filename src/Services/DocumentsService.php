@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Documents\DocumentDeleteResponse;
 use Telnyx\Documents\DocumentGenerateDownloadLinkResponse;
 use Telnyx\Documents\DocumentGetResponse;
@@ -36,29 +35,10 @@ final class DocumentsService implements DocumentsContract
      *
      * Retrieve a document.
      *
-     * @return DocumentGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): DocumentGetResponse {
-        $params = [];
-
-        return $this->retrieveRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return DocumentGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): DocumentGetResponse {
         // @phpstan-ignore-next-line;
@@ -77,8 +57,6 @@ final class DocumentsService implements DocumentsContract
      *
      * @param string $customerReference optional reference string for customer tracking
      * @param string $filename the filename of the document
-     *
-     * @return DocumentUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -99,8 +77,6 @@ final class DocumentsService implements DocumentsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return DocumentUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -133,8 +109,6 @@ final class DocumentsService implements DocumentsContract
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param list<Sort|value-of<Sort>> $sort Consolidated sort parameter for documents (deepObject style). Originally: sort[]
      *
-     * @return DocumentListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -152,8 +126,6 @@ final class DocumentsService implements DocumentsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return DocumentListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -181,29 +153,10 @@ final class DocumentsService implements DocumentsContract
      *
      * Delete a document.<br /><br />A document can only be deleted if it's not linked to a service. If it is linked to a service, it must be unlinked prior to deleting.
      *
-     * @return DocumentDeleteResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): DocumentDeleteResponse {
-        $params = [];
-
-        return $this->deleteRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return DocumentDeleteResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): DocumentDeleteResponse {
         // @phpstan-ignore-next-line;
@@ -226,21 +179,6 @@ final class DocumentsService implements DocumentsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): string {
-        $params = [];
-
-        return $this->downloadRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @throws APIException
-     */
-    public function downloadRaw(
-        string $id,
-        mixed $params,
-        ?RequestOptions $requestOptions = null
-    ): string {
         // @phpstan-ignore-next-line;
         return $this->client->request(
             method: 'get',
@@ -256,29 +194,10 @@ final class DocumentsService implements DocumentsContract
      *
      * Generates a temporary pre-signed URL that can be used to download the document directly from the storage backend without authentication.
      *
-     * @return DocumentGenerateDownloadLinkResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function generateDownloadLink(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): DocumentGenerateDownloadLinkResponse {
-        $params = [];
-
-        return $this->generateDownloadLinkRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return DocumentGenerateDownloadLinkResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function generateDownloadLinkRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): DocumentGenerateDownloadLinkResponse {
         // @phpstan-ignore-next-line;
@@ -296,19 +215,17 @@ final class DocumentsService implements DocumentsContract
      * Upload a document.<br /><br />Uploaded files must be linked to a service within 30 minutes or they will be automatically deleted.
      *
      * @param string $url if the file is already hosted publicly, you can provide a URL and have the documents service fetch it for you
+     * @param string $file the Base64 encoded contents of the file you are uploading
      * @param string $customerReference a customer reference string for customer look ups
      * @param string $filename the filename of the document
-     * @param string $file the Base64 encoded contents of the file you are uploading
-     *
-     * @return DocumentUploadResponse<HasRawResponse>
      *
      * @throws APIException
      */
     public function upload(
         $url,
+        $file,
         $customerReference = omit,
         $filename = omit,
-        $file,
         ?RequestOptions $requestOptions = null,
     ): DocumentUploadResponse {
         $params = [
@@ -325,8 +242,6 @@ final class DocumentsService implements DocumentsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return DocumentUploadResponse<HasRawResponse>
      *
      * @throws APIException
      */

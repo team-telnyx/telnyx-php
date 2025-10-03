@@ -6,19 +6,19 @@ namespace Telnyx\PhoneNumbers\Voicemail;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type voicemail_get_response = array{data?: VoicemailPrefResponse}
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class VoicemailGetResponse implements BaseModel
+final class VoicemailGetResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<voicemail_get_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     #[Api(optional: true)]
     public ?VoicemailPrefResponse $data;

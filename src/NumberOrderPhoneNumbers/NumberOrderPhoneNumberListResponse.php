@@ -7,21 +7,21 @@ namespace Telnyx\NumberOrderPhoneNumbers;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type number_order_phone_number_list_response = array{
  *   data?: list<NumberOrderPhoneNumber>, meta?: PaginationMeta
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class NumberOrderPhoneNumberListResponse implements BaseModel
+final class NumberOrderPhoneNumberListResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<number_order_phone_number_list_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /** @var list<NumberOrderPhoneNumber>|null $data */
     #[Api(list: NumberOrderPhoneNumber::class, optional: true)]

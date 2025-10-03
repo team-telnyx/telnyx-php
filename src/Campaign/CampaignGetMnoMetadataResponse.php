@@ -7,19 +7,19 @@ namespace Telnyx\Campaign;
 use Telnyx\Campaign\CampaignGetMnoMetadataResponse\v10999;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type campaign_get_mno_metadata_response = array{_10999?: v10999}
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class CampaignGetMnoMetadataResponse implements BaseModel
+final class CampaignGetMnoMetadataResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<campaign_get_mno_metadata_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     #[Api('10999', optional: true)]
     public ?v10999 $_10999;

@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\UserTagsContract;
 use Telnyx\UserTags\UserTagListParams;
@@ -29,8 +28,6 @@ final class UserTagsService implements UserTagsContract
      *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[starts_with]
      *
-     * @return UserTagListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -46,8 +43,6 @@ final class UserTagsService implements UserTagsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return UserTagListResponse<HasRawResponse>
      *
      * @throws APIException
      */

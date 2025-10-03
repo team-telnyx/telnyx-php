@@ -6,20 +6,20 @@ namespace Telnyx\NumberLookup;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\NumberLookup\NumberLookupGetResponse\Data;
 
 /**
  * @phpstan-type number_lookup_get_response = array{data?: Data}
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class NumberLookupGetResponse implements BaseModel
+final class NumberLookupGetResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<number_lookup_get_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     #[Api(optional: true)]
     public ?Data $data;

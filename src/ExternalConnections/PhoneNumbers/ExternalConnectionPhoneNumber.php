@@ -92,7 +92,7 @@ final class ExternalConnectionPhoneNumber implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $acquiredCapabilities && $obj->acquiredCapabilities = array_map(fn ($v) => $v instanceof AcquiredCapability ? $v->value : $v, $acquiredCapabilities);
+        null !== $acquiredCapabilities && $obj['acquiredCapabilities'] = $acquiredCapabilities;
         null !== $civicAddressID && $obj->civicAddressID = $civicAddressID;
         null !== $displayedCountryCode && $obj->displayedCountryCode = $displayedCountryCode;
         null !== $locationID && $obj->locationID = $locationID;
@@ -109,7 +109,7 @@ final class ExternalConnectionPhoneNumber implements BaseModel
     public function withAcquiredCapabilities(array $acquiredCapabilities): self
     {
         $obj = clone $this;
-        $obj->acquiredCapabilities = array_map(fn ($v) => $v instanceof AcquiredCapability ? $v->value : $v, $acquiredCapabilities);
+        $obj['acquiredCapabilities'] = $acquiredCapabilities;
 
         return $obj;
     }

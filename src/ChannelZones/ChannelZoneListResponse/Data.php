@@ -105,7 +105,7 @@ final class Data implements BaseModel
         $obj->channels = $channels;
         $obj->countries = $countries;
         $obj->name = $name;
-        $obj->recordType = $recordType instanceof RecordType ? $recordType->value : $recordType;
+        $obj['recordType'] = $recordType;
 
         null !== $createdAt && $obj->createdAt = $createdAt;
         null !== $updatedAt && $obj->updatedAt = $updatedAt;
@@ -156,7 +156,7 @@ final class Data implements BaseModel
     public function withRecordType(RecordType|string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType instanceof RecordType ? $recordType->value : $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }

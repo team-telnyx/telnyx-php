@@ -125,7 +125,7 @@ final class Data implements BaseModel
 
         null !== $id && $obj->id = $id;
         null !== $allowMultipleChannels && $obj->allowMultipleChannels = $allowMultipleChannels;
-        null !== $associatedRecordType && $obj->associatedRecordType = $associatedRecordType instanceof AssociatedRecordType ? $associatedRecordType->value : $associatedRecordType;
+        null !== $associatedRecordType && $obj['associatedRecordType'] = $associatedRecordType;
         null !== $asynchronous && $obj->asynchronous = $asynchronous;
         null !== $createdAt && $obj->createdAt = $createdAt;
         null !== $description && $obj->description = $description;
@@ -168,7 +168,7 @@ final class Data implements BaseModel
         AssociatedRecordType|string $associatedRecordType
     ): self {
         $obj = clone $this;
-        $obj->associatedRecordType = $associatedRecordType instanceof AssociatedRecordType ? $associatedRecordType->value : $associatedRecordType;
+        $obj['associatedRecordType'] = $associatedRecordType;
 
         return $obj;
     }

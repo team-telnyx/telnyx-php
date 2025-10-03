@@ -9,7 +9,9 @@ use Telnyx\Brand\TelnyxBrand\OptionalAttributes;
 use Telnyx\Brand\TelnyxBrand\Status;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * Telnyx-specific extensions to The Campaign Registry's `Brand` type.
@@ -54,15 +56,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *   webhookURL?: string,
  *   website?: string,
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class TelnyxBrand implements BaseModel
+final class TelnyxBrand implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<telnyx_brand> */
     use SdkModel;
+
+    use SdkResponse;
 
     /**
      * Brand relationship to the CSP.
@@ -389,15 +389,15 @@ final class TelnyxBrand implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->brandRelationship = $brandRelationship instanceof BrandRelationship ? $brandRelationship->value : $brandRelationship;
+        $obj['brandRelationship'] = $brandRelationship;
         $obj->country = $country;
         $obj->displayName = $displayName;
         $obj->email = $email;
-        $obj->entityType = $entityType instanceof EntityType ? $entityType->value : $entityType;
+        $obj['entityType'] = $entityType;
         $obj->vertical = $vertical;
 
         null !== $altBusinessID && $obj->altBusinessID = $altBusinessID;
-        null !== $altBusinessIDType && $obj->altBusinessIDType = $altBusinessIDType instanceof AltBusinessIDType ? $altBusinessIDType->value : $altBusinessIDType;
+        null !== $altBusinessIDType && $obj['altBusinessIDType'] = $altBusinessIDType;
         null !== $brandID && $obj->brandID = $brandID;
         null !== $businessContactEmail && $obj->businessContactEmail = $businessContactEmail;
         null !== $city && $obj->city = $city;
@@ -407,7 +407,7 @@ final class TelnyxBrand implements BaseModel
         null !== $ein && $obj->ein = $ein;
         null !== $failureReasons && $obj->failureReasons = $failureReasons;
         null !== $firstName && $obj->firstName = $firstName;
-        null !== $identityStatus && $obj->identityStatus = $identityStatus instanceof BrandIdentityStatus ? $identityStatus->value : $identityStatus;
+        null !== $identityStatus && $obj['identityStatus'] = $identityStatus;
         null !== $ipAddress && $obj->ipAddress = $ipAddress;
         null !== $isReseller && $obj->isReseller = $isReseller;
         null !== $lastName && $obj->lastName = $lastName;
@@ -418,8 +418,8 @@ final class TelnyxBrand implements BaseModel
         null !== $postalCode && $obj->postalCode = $postalCode;
         null !== $referenceID && $obj->referenceID = $referenceID;
         null !== $state && $obj->state = $state;
-        null !== $status && $obj->status = $status instanceof Status ? $status->value : $status;
-        null !== $stockExchange && $obj->stockExchange = $stockExchange instanceof StockExchange ? $stockExchange->value : $stockExchange;
+        null !== $status && $obj['status'] = $status;
+        null !== $stockExchange && $obj['stockExchange'] = $stockExchange;
         null !== $stockSymbol && $obj->stockSymbol = $stockSymbol;
         null !== $street && $obj->street = $street;
         null !== $tcrBrandID && $obj->tcrBrandID = $tcrBrandID;
@@ -441,7 +441,7 @@ final class TelnyxBrand implements BaseModel
         BrandRelationship|string $brandRelationship
     ): self {
         $obj = clone $this;
-        $obj->brandRelationship = $brandRelationship instanceof BrandRelationship ? $brandRelationship->value : $brandRelationship;
+        $obj['brandRelationship'] = $brandRelationship;
 
         return $obj;
     }
@@ -487,7 +487,7 @@ final class TelnyxBrand implements BaseModel
     public function withEntityType(EntityType|string $entityType): self
     {
         $obj = clone $this;
-        $obj->entityType = $entityType instanceof EntityType ? $entityType->value : $entityType;
+        $obj['entityType'] = $entityType;
 
         return $obj;
     }
@@ -523,7 +523,7 @@ final class TelnyxBrand implements BaseModel
         AltBusinessIDType|string $altBusinessIDType
     ): self {
         $obj = clone $this;
-        $obj->altBusinessIDType = $altBusinessIDType instanceof AltBusinessIDType ? $altBusinessIDType->value : $altBusinessIDType;
+        $obj['altBusinessIDType'] = $altBusinessIDType;
 
         return $obj;
     }
@@ -638,7 +638,7 @@ final class TelnyxBrand implements BaseModel
         BrandIdentityStatus|string $identityStatus
     ): self {
         $obj = clone $this;
-        $obj->identityStatus = $identityStatus instanceof BrandIdentityStatus ? $identityStatus->value : $identityStatus;
+        $obj['identityStatus'] = $identityStatus;
 
         return $obj;
     }
@@ -759,7 +759,7 @@ final class TelnyxBrand implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }
@@ -772,7 +772,7 @@ final class TelnyxBrand implements BaseModel
     public function withStockExchange(StockExchange|string $stockExchange): self
     {
         $obj = clone $this;
-        $obj->stockExchange = $stockExchange instanceof StockExchange ? $stockExchange->value : $stockExchange;
+        $obj['stockExchange'] = $stockExchange;
 
         return $obj;
     }

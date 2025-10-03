@@ -183,7 +183,7 @@ final class UsageReportListParams implements BaseModel
         null !== $dateRange && $obj->dateRange = $dateRange;
         null !== $endDate && $obj->endDate = $endDate;
         null !== $filter && $obj->filter = $filter;
-        null !== $format && $obj->format = $format instanceof Format ? $format->value : $format;
+        null !== $format && $obj['format'] = $format;
         null !== $managedAccounts && $obj->managedAccounts = $managedAccounts;
         null !== $page && $obj->page = $page;
         null !== $sort && $obj->sort = $sort;
@@ -271,7 +271,7 @@ final class UsageReportListParams implements BaseModel
     public function withFormat(Format|string $format): self
     {
         $obj = clone $this;
-        $obj->format = $format instanceof Format ? $format->value : $format;
+        $obj['format'] = $format;
 
         return $obj;
     }

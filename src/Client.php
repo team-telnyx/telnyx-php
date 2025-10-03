@@ -938,9 +938,7 @@ class Client extends BaseClient
 
         $this->baseUrlOverridden = !is_null($baseUrl);
 
-        $base = $baseUrl ?? getenv(
-            'TELNYX_BASE_URL'
-        ) ?: 'https://api.telnyx.com/v2';
+        $baseUrl ??= getenv('TELNYX_BASE_URL') ?: 'https://api.telnyx.com/v2';
 
         $options = RequestOptions::with(
             uriFactory: Psr17FactoryDiscovery::findUriFactory(),
@@ -953,7 +951,7 @@ class Client extends BaseClient
             headers: [
                 'Content-Type' => 'application/json', 'Accept' => 'application/json',
             ],
-            baseUrl: $base,
+            baseUrl: $baseUrl,
             options: $options,
         );
 

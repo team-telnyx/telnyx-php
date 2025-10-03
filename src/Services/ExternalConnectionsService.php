@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\ExternalConnections\ExternalConnectionCreateParams;
 use Telnyx\ExternalConnections\ExternalConnectionCreateParams\ExternalSipConnection;
 use Telnyx\ExternalConnections\ExternalConnectionCreateParams\Inbound;
@@ -76,8 +75,8 @@ final class ExternalConnectionsService implements ExternalConnectionsContract
      *
      * Creates a new External Connection based on the parameters sent in the request. The external_sip_connection and outbound voice profile id are required. Once created, you can assign phone numbers to your application using the `/phone_numbers` endpoint.
      *
-     * @param ExternalSipConnection|value-of<ExternalSipConnection> $externalSipConnection the service that will be consuming this connection
      * @param Outbound $outbound
+     * @param ExternalSipConnection|value-of<ExternalSipConnection> $externalSipConnection the service that will be consuming this connection
      * @param bool $active specifies whether the connection can be used
      * @param Inbound $inbound
      * @param list<string> $tags tags associated with the connection
@@ -85,13 +84,11 @@ final class ExternalConnectionsService implements ExternalConnectionsContract
      * @param string $webhookEventURL The URL where webhooks related to this connection will be sent. Must include a scheme, such as 'https'.
      * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
      *
-     * @return ExternalConnectionNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
-        $externalSipConnection = 'zoom',
         $outbound,
+        $externalSipConnection = 'zoom',
         $active = omit,
         $inbound = omit,
         $tags = omit,
@@ -119,8 +116,6 @@ final class ExternalConnectionsService implements ExternalConnectionsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return ExternalConnectionNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function createRaw(
@@ -147,29 +142,10 @@ final class ExternalConnectionsService implements ExternalConnectionsContract
      *
      * Return the details of an existing External Connection inside the 'data' attribute of the response.
      *
-     * @return ExternalConnectionGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): ExternalConnectionGetResponse {
-        $params = [];
-
-        return $this->retrieveRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return ExternalConnectionGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): ExternalConnectionGetResponse {
         // @phpstan-ignore-next-line;
@@ -193,8 +169,6 @@ final class ExternalConnectionsService implements ExternalConnectionsContract
      * @param string|null $webhookEventFailoverURL The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      * @param string $webhookEventURL The URL where webhooks related to this connection will be sent. Must include a scheme, such as 'https'.
      * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
-     *
-     * @return ExternalConnectionUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -227,8 +201,6 @@ final class ExternalConnectionsService implements ExternalConnectionsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return ExternalConnectionUpdateResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function updateRaw(
@@ -259,8 +231,6 @@ final class ExternalConnectionsService implements ExternalConnectionsContract
      * @param Filter $filter Filter parameter for external connections (deepObject style). Supports filtering by connection_name, external_sip_connection, id, created_at, and phone_number.
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
-     * @return ExternalConnectionListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -277,8 +247,6 @@ final class ExternalConnectionsService implements ExternalConnectionsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ExternalConnectionListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -306,29 +274,10 @@ final class ExternalConnectionsService implements ExternalConnectionsContract
      *
      * Permanently deletes an External Connection. Deletion may be prevented if the application is in use by phone numbers, is active, or if it is an Operator Connect connection. To remove an Operator Connect integration please contact Telnyx support.
      *
-     * @return ExternalConnectionDeleteResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): ExternalConnectionDeleteResponse {
-        $params = [];
-
-        return $this->deleteRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return ExternalConnectionDeleteResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): ExternalConnectionDeleteResponse {
         // @phpstan-ignore-next-line;
@@ -347,8 +296,6 @@ final class ExternalConnectionsService implements ExternalConnectionsContract
      *
      * @param string $id
      * @param string $staticEmergencyAddressID A new static emergency address ID to update the location with
-     *
-     * @return ExternalConnectionUpdateLocationResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -370,8 +317,6 @@ final class ExternalConnectionsService implements ExternalConnectionsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return ExternalConnectionUpdateLocationResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function updateLocationRaw(
@@ -390,7 +335,7 @@ final class ExternalConnectionsService implements ExternalConnectionsContract
         return $this->client->request(
             method: 'patch',
             path: ['external_connections/%1$s/locations/%2$s', $id, $locationID],
-            body: (object) array_diff_key($parsed, array_flip(['id'])),
+            body: (object) array_diff_key($parsed, ['id']),
             options: $options,
             convert: ExternalConnectionUpdateLocationResponse::class,
         );

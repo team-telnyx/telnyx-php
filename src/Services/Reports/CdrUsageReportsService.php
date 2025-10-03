@@ -6,7 +6,6 @@ namespace Telnyx\Services\Reports;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Reports\CdrUsageReports\CdrUsageReportFetchSyncParams;
 use Telnyx\Reports\CdrUsageReports\CdrUsageReportFetchSyncParams\AggregationType;
 use Telnyx\Reports\CdrUsageReports\CdrUsageReportFetchSyncParams\ProductBreakdown;
@@ -34,8 +33,6 @@ final class CdrUsageReportsService implements CdrUsageReportsContract
      * @param \DateTimeInterface $endDate
      * @param \DateTimeInterface $startDate
      *
-     * @return CdrUsageReportFetchSyncResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function fetchSync(
@@ -61,8 +58,6 @@ final class CdrUsageReportsService implements CdrUsageReportsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return CdrUsageReportFetchSyncResponse<HasRawResponse>
      *
      * @throws APIException
      */

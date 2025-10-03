@@ -6,19 +6,19 @@ namespace Telnyx\Storage\Migrations;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type migration_get_response = array{data?: MigrationParams}
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class MigrationGetResponse implements BaseModel
+final class MigrationGetResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<migration_get_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     #[Api(optional: true)]
     public ?MigrationParams $data;

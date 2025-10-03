@@ -16,7 +16,6 @@ use Telnyx\AI\Embeddings\EmbeddingSimilaritySearchResponse;
 use Telnyx\AI\Embeddings\EmbeddingURLParams;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\EmbeddingsContract;
 use Telnyx\Services\AI\Embeddings\BucketsService;
@@ -68,8 +67,6 @@ final class EmbeddingsService implements EmbeddingsContract
      * @param EmbeddingModel|value-of<EmbeddingModel> $embeddingModel supported models to vectorize and embed documents
      * @param Loader|value-of<Loader> $loader supported types of custom document loaders for embeddings
      *
-     * @return EmbeddingResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -95,8 +92,6 @@ final class EmbeddingsService implements EmbeddingsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return EmbeddingResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -129,29 +124,10 @@ final class EmbeddingsService implements EmbeddingsContract
      * - `failure` - Task failed and no files were embedded successfully
      * - `partial_success` - Some files were embedded successfully, but at least one failed
      *
-     * @return EmbeddingGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $taskID,
-        ?RequestOptions $requestOptions = null
-    ): EmbeddingGetResponse {
-        $params = [];
-
-        return $this->retrieveRaw($taskID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return EmbeddingGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $taskID,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): EmbeddingGetResponse {
         // @phpstan-ignore-next-line;
@@ -170,8 +146,6 @@ final class EmbeddingsService implements EmbeddingsContract
      *
      * @param list<string> $status List of task statuses i.e. `status=queued&status=processing`
      *
-     * @return EmbeddingListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -187,8 +161,6 @@ final class EmbeddingsService implements EmbeddingsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return EmbeddingListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -228,8 +200,6 @@ final class EmbeddingsService implements EmbeddingsContract
      * @param string $query
      * @param int $numOfDocs
      *
-     * @return EmbeddingSimilaritySearchResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function similaritySearch(
@@ -249,8 +219,6 @@ final class EmbeddingsService implements EmbeddingsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return EmbeddingSimilaritySearchResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -281,8 +249,6 @@ final class EmbeddingsService implements EmbeddingsContract
      * @param string $bucketName Name of the bucket to store the embeddings. This bucket must already exist.
      * @param string $url The URL of the webpage to embed
      *
-     * @return EmbeddingResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function url(
@@ -299,8 +265,6 @@ final class EmbeddingsService implements EmbeddingsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return EmbeddingResponse<HasRawResponse>
      *
      * @throws APIException
      */

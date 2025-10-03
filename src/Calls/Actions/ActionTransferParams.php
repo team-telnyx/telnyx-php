@@ -389,7 +389,7 @@ final class ActionTransferParams implements BaseModel
 
         $obj->to = $to;
 
-        null !== $answeringMachineDetection && $obj->answeringMachineDetection = $answeringMachineDetection instanceof AnsweringMachineDetection ? $answeringMachineDetection->value : $answeringMachineDetection;
+        null !== $answeringMachineDetection && $obj['answeringMachineDetection'] = $answeringMachineDetection;
         null !== $answeringMachineDetectionConfig && $obj->answeringMachineDetectionConfig = $answeringMachineDetectionConfig;
         null !== $audioURL && $obj->audioURL = $audioURL;
         null !== $clientState && $obj->clientState = $clientState;
@@ -398,28 +398,28 @@ final class ActionTransferParams implements BaseModel
         null !== $earlyMedia && $obj->earlyMedia = $earlyMedia;
         null !== $from && $obj->from = $from;
         null !== $fromDisplayName && $obj->fromDisplayName = $fromDisplayName;
-        null !== $mediaEncryption && $obj->mediaEncryption = $mediaEncryption instanceof MediaEncryption ? $mediaEncryption->value : $mediaEncryption;
+        null !== $mediaEncryption && $obj['mediaEncryption'] = $mediaEncryption;
         null !== $mediaName && $obj->mediaName = $mediaName;
-        null !== $muteDtmf && $obj->muteDtmf = $muteDtmf instanceof MuteDtmf ? $muteDtmf->value : $muteDtmf;
+        null !== $muteDtmf && $obj['muteDtmf'] = $muteDtmf;
         null !== $parkAfterUnbridge && $obj->parkAfterUnbridge = $parkAfterUnbridge;
-        null !== $record && $obj->record = $record instanceof Record ? $record->value : $record;
-        null !== $recordChannels && $obj->recordChannels = $recordChannels instanceof RecordChannels ? $recordChannels->value : $recordChannels;
+        null !== $record && $obj['record'] = $record;
+        null !== $recordChannels && $obj['recordChannels'] = $recordChannels;
         null !== $recordCustomFileName && $obj->recordCustomFileName = $recordCustomFileName;
-        null !== $recordFormat && $obj->recordFormat = $recordFormat instanceof RecordFormat ? $recordFormat->value : $recordFormat;
+        null !== $recordFormat && $obj['recordFormat'] = $recordFormat;
         null !== $recordMaxLength && $obj->recordMaxLength = $recordMaxLength;
         null !== $recordTimeoutSecs && $obj->recordTimeoutSecs = $recordTimeoutSecs;
-        null !== $recordTrack && $obj->recordTrack = $recordTrack instanceof RecordTrack ? $recordTrack->value : $recordTrack;
-        null !== $recordTrim && $obj->recordTrim = $recordTrim instanceof RecordTrim ? $recordTrim->value : $recordTrim;
+        null !== $recordTrack && $obj['recordTrack'] = $recordTrack;
+        null !== $recordTrim && $obj['recordTrim'] = $recordTrim;
         null !== $sipAuthPassword && $obj->sipAuthPassword = $sipAuthPassword;
         null !== $sipAuthUsername && $obj->sipAuthUsername = $sipAuthUsername;
         null !== $sipHeaders && $obj->sipHeaders = $sipHeaders;
-        null !== $sipTransportProtocol && $obj->sipTransportProtocol = $sipTransportProtocol instanceof SipTransportProtocol ? $sipTransportProtocol->value : $sipTransportProtocol;
+        null !== $sipTransportProtocol && $obj['sipTransportProtocol'] = $sipTransportProtocol;
         null !== $soundModifications && $obj->soundModifications = $soundModifications;
         null !== $targetLegClientState && $obj->targetLegClientState = $targetLegClientState;
         null !== $timeLimitSecs && $obj->timeLimitSecs = $timeLimitSecs;
         null !== $timeoutSecs && $obj->timeoutSecs = $timeoutSecs;
         null !== $webhookURL && $obj->webhookURL = $webhookURL;
-        null !== $webhookURLMethod && $obj->webhookURLMethod = $webhookURLMethod instanceof WebhookURLMethod ? $webhookURLMethod->value : $webhookURLMethod;
+        null !== $webhookURLMethod && $obj['webhookURLMethod'] = $webhookURLMethod;
 
         return $obj;
     }
@@ -444,7 +444,7 @@ final class ActionTransferParams implements BaseModel
         AnsweringMachineDetection|string $answeringMachineDetection
     ): self {
         $obj = clone $this;
-        $obj->answeringMachineDetection = $answeringMachineDetection instanceof AnsweringMachineDetection ? $answeringMachineDetection->value : $answeringMachineDetection;
+        $obj['answeringMachineDetection'] = $answeringMachineDetection;
 
         return $obj;
     }
@@ -549,7 +549,7 @@ final class ActionTransferParams implements BaseModel
         MediaEncryption|string $mediaEncryption
     ): self {
         $obj = clone $this;
-        $obj->mediaEncryption = $mediaEncryption instanceof MediaEncryption ? $mediaEncryption->value : $mediaEncryption;
+        $obj['mediaEncryption'] = $mediaEncryption;
 
         return $obj;
     }
@@ -573,7 +573,7 @@ final class ActionTransferParams implements BaseModel
     public function withMuteDtmf(MuteDtmf|string $muteDtmf): self
     {
         $obj = clone $this;
-        $obj->muteDtmf = $muteDtmf instanceof MuteDtmf ? $muteDtmf->value : $muteDtmf;
+        $obj['muteDtmf'] = $muteDtmf;
 
         return $obj;
     }
@@ -597,7 +597,7 @@ final class ActionTransferParams implements BaseModel
     public function withRecord(Record|string $record): self
     {
         $obj = clone $this;
-        $obj->record = $record instanceof Record ? $record->value : $record;
+        $obj['record'] = $record;
 
         return $obj;
     }
@@ -611,7 +611,7 @@ final class ActionTransferParams implements BaseModel
         RecordChannels|string $recordChannels
     ): self {
         $obj = clone $this;
-        $obj->recordChannels = $recordChannels instanceof RecordChannels ? $recordChannels->value : $recordChannels;
+        $obj['recordChannels'] = $recordChannels;
 
         return $obj;
     }
@@ -635,7 +635,7 @@ final class ActionTransferParams implements BaseModel
     public function withRecordFormat(RecordFormat|string $recordFormat): self
     {
         $obj = clone $this;
-        $obj->recordFormat = $recordFormat instanceof RecordFormat ? $recordFormat->value : $recordFormat;
+        $obj['recordFormat'] = $recordFormat;
 
         return $obj;
     }
@@ -670,7 +670,7 @@ final class ActionTransferParams implements BaseModel
     public function withRecordTrack(RecordTrack|string $recordTrack): self
     {
         $obj = clone $this;
-        $obj->recordTrack = $recordTrack instanceof RecordTrack ? $recordTrack->value : $recordTrack;
+        $obj['recordTrack'] = $recordTrack;
 
         return $obj;
     }
@@ -683,7 +683,7 @@ final class ActionTransferParams implements BaseModel
     public function withRecordTrim(RecordTrim|string $recordTrim): self
     {
         $obj = clone $this;
-        $obj->recordTrim = $recordTrim instanceof RecordTrim ? $recordTrim->value : $recordTrim;
+        $obj['recordTrim'] = $recordTrim;
 
         return $obj;
     }
@@ -732,7 +732,7 @@ final class ActionTransferParams implements BaseModel
         SipTransportProtocol|string $sipTransportProtocol
     ): self {
         $obj = clone $this;
-        $obj->sipTransportProtocol = $sipTransportProtocol instanceof SipTransportProtocol ? $sipTransportProtocol->value : $sipTransportProtocol;
+        $obj['sipTransportProtocol'] = $sipTransportProtocol;
 
         return $obj;
     }
@@ -802,7 +802,7 @@ final class ActionTransferParams implements BaseModel
         WebhookURLMethod|string $webhookURLMethod
     ): self {
         $obj = clone $this;
-        $obj->webhookURLMethod = $webhookURLMethod instanceof WebhookURLMethod ? $webhookURLMethod->value : $webhookURLMethod;
+        $obj['webhookURLMethod'] = $webhookURLMethod;
 
         return $obj;
     }

@@ -84,8 +84,8 @@ final class StandaloneCard implements BaseModel
         $obj = new self;
 
         $obj->cardContent = $cardContent;
-        $obj->cardOrientation = $cardOrientation instanceof CardOrientation ? $cardOrientation->value : $cardOrientation;
-        $obj->thumbnailImageAlignment = $thumbnailImageAlignment instanceof ThumbnailImageAlignment ? $thumbnailImageAlignment->value : $thumbnailImageAlignment;
+        $obj['cardOrientation'] = $cardOrientation;
+        $obj['thumbnailImageAlignment'] = $thumbnailImageAlignment;
 
         return $obj;
     }
@@ -107,7 +107,7 @@ final class StandaloneCard implements BaseModel
         CardOrientation|string $cardOrientation
     ): self {
         $obj = clone $this;
-        $obj->cardOrientation = $cardOrientation instanceof CardOrientation ? $cardOrientation->value : $cardOrientation;
+        $obj['cardOrientation'] = $cardOrientation;
 
         return $obj;
     }
@@ -121,7 +121,7 @@ final class StandaloneCard implements BaseModel
         ThumbnailImageAlignment|string $thumbnailImageAlignment
     ): self {
         $obj = clone $this;
-        $obj->thumbnailImageAlignment = $thumbnailImageAlignment instanceof ThumbnailImageAlignment ? $thumbnailImageAlignment->value : $thumbnailImageAlignment;
+        $obj['thumbnailImageAlignment'] = $thumbnailImageAlignment;
 
         return $obj;
     }

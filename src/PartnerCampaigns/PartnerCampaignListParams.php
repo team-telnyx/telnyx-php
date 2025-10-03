@@ -79,7 +79,7 @@ final class PartnerCampaignListParams implements BaseModel
 
         null !== $page && $obj->page = $page;
         null !== $recordsPerPage && $obj->recordsPerPage = $recordsPerPage;
-        null !== $sort && $obj->sort = $sort instanceof Sort ? $sort->value : $sort;
+        null !== $sort && $obj['sort'] = $sort;
 
         return $obj;
     }
@@ -114,7 +114,7 @@ final class PartnerCampaignListParams implements BaseModel
     public function withSort(Sort|string $sort): self
     {
         $obj = clone $this;
-        $obj->sort = $sort instanceof Sort ? $sort->value : $sort;
+        $obj['sort'] = $sort;
 
         return $obj;
     }

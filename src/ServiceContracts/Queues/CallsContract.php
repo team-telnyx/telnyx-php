@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\Queues;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Queues\Calls\CallGetResponse;
 use Telnyx\Queues\Calls\CallListParams\Page;
 use Telnyx\Queues\Calls\CallListResponse;
@@ -20,8 +19,6 @@ interface CallsContract
      *
      * @param string $queueName
      *
-     * @return CallGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
@@ -34,8 +31,6 @@ interface CallsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return CallGetResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -50,8 +45,6 @@ interface CallsContract
      *
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number]
      *
-     * @return CallListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -64,8 +57,6 @@ interface CallsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return CallListResponse<HasRawResponse>
      *
      * @throws APIException
      */

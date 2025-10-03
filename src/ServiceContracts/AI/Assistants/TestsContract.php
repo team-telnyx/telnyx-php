@@ -10,7 +10,6 @@ use Telnyx\AI\Assistants\Tests\TestCreateParams\Rubric;
 use Telnyx\AI\Assistants\Tests\TestListParams\Page;
 use Telnyx\AI\Assistants\Tests\TestListResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 
 use const Telnyx\Core\OMIT as omit;
@@ -28,8 +27,6 @@ interface TestsContract
      * @param int $maxDurationSeconds Maximum duration in seconds that the test conversation should run before timing out. If not specified, uses system default timeout.
      * @param TelnyxConversationChannel|value-of<TelnyxConversationChannel> $telnyxConversationChannel The communication channel through which the test will be conducted. Determines how the assistant will receive and respond to test messages.
      * @param string $testSuite Optional test suite name to group related tests together. Useful for organizing tests by feature, team, or release cycle.
-     *
-     * @return AssistantTest<HasRawResponse>
      *
      * @throws APIException
      */
@@ -50,8 +47,6 @@ interface TestsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return AssistantTest<HasRawResponse>
-     *
      * @throws APIException
      */
     public function createRaw(
@@ -62,25 +57,10 @@ interface TestsContract
     /**
      * @api
      *
-     * @return AssistantTest<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $testID,
-        ?RequestOptions $requestOptions = null
-    ): AssistantTest;
-
-    /**
-     * @api
-     *
-     * @return AssistantTest<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $testID,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): AssistantTest;
 
@@ -95,8 +75,6 @@ interface TestsContract
      * @param list<Telnyx\AI\Assistants\Tests\TestUpdateParams\Rubric> $rubric updated evaluation criteria for assessing assistant performance
      * @param TelnyxConversationChannel|value-of<TelnyxConversationChannel> $telnyxConversationChannel updated communication channel for the test execution
      * @param string $testSuite updated test suite assignment for better organization
-     *
-     * @return AssistantTest<HasRawResponse>
      *
      * @throws APIException
      */
@@ -118,8 +96,6 @@ interface TestsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return AssistantTest<HasRawResponse>
-     *
      * @throws APIException
      */
     public function updateRaw(
@@ -136,8 +112,6 @@ interface TestsContract
      * @param string $telnyxConversationChannel Filter tests by communication channel (e.g., 'web_chat', 'sms')
      * @param string $testSuite Filter tests by test suite name
      *
-     * @return TestListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -153,8 +127,6 @@ interface TestsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return TestListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function listRaw(
@@ -169,17 +141,6 @@ interface TestsContract
      */
     public function delete(
         string $testID,
-        ?RequestOptions $requestOptions = null
-    ): mixed;
-
-    /**
-     * @api
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $testID,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): mixed;
 }

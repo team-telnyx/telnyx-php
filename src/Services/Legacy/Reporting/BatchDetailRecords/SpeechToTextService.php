@@ -6,7 +6,6 @@ namespace Telnyx\Services\Legacy\Reporting\BatchDetailRecords;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\SpeechToText\SpeechToTextCreateParams;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\SpeechToText\SpeechToTextDeleteResponse;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\SpeechToText\SpeechToTextGetResponse;
@@ -30,8 +29,6 @@ final class SpeechToTextService implements SpeechToTextContract
      * @param \DateTimeInterface $endDate End date in ISO format with timezone (date range must be up to one month)
      * @param \DateTimeInterface $startDate Start date in ISO format with timezone
      *
-     * @return SpeechToTextNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -48,8 +45,6 @@ final class SpeechToTextService implements SpeechToTextContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return SpeechToTextNewResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -77,29 +72,10 @@ final class SpeechToTextService implements SpeechToTextContract
      *
      * Retrieves a specific Speech to Text batch report request by ID
      *
-     * @return SpeechToTextGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): SpeechToTextGetResponse {
-        $params = [];
-
-        return $this->retrieveRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return SpeechToTextGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): SpeechToTextGetResponse {
         // @phpstan-ignore-next-line;
@@ -116,27 +92,9 @@ final class SpeechToTextService implements SpeechToTextContract
      *
      * Retrieves all Speech to Text batch report requests for the authenticated user
      *
-     * @return SpeechToTextListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
-        ?RequestOptions $requestOptions = null
-    ): SpeechToTextListResponse {
-        $params = [];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return SpeechToTextListResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): SpeechToTextListResponse {
         // @phpstan-ignore-next-line;
@@ -153,29 +111,10 @@ final class SpeechToTextService implements SpeechToTextContract
      *
      * Deletes a specific Speech to Text batch report request by ID
      *
-     * @return SpeechToTextDeleteResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): SpeechToTextDeleteResponse {
-        $params = [];
-
-        return $this->deleteRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return SpeechToTextDeleteResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): SpeechToTextDeleteResponse {
         // @phpstan-ignore-next-line;

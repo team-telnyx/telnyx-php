@@ -6,22 +6,22 @@ namespace Telnyx\IntegrationSecrets;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\IntegrationSecrets\IntegrationSecretListResponse\Meta;
 
 /**
  * @phpstan-type integration_secret_list_response = array{
  *   data: list<IntegrationSecret>, meta: Meta
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class IntegrationSecretListResponse implements BaseModel
+final class IntegrationSecretListResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<integration_secret_list_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /** @var list<IntegrationSecret> $data */
     #[Api(list: IntegrationSecret::class)]

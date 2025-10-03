@@ -9,7 +9,6 @@ use Telnyx\AuditEvents\AuditEventListParams\Page;
 use Telnyx\AuditEvents\AuditEventListParams\Sort;
 use Telnyx\AuditEvents\AuditEventListResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 
 use const Telnyx\Core\OMIT as omit;
@@ -22,8 +21,6 @@ interface AuditEventsContract
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[created_before], filter[created_after]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      * @param Sort|value-of<Sort> $sort set the order of the results by the creation date
-     *
-     * @return AuditEventListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -38,8 +35,6 @@ interface AuditEventsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return AuditEventListResponse<HasRawResponse>
      *
      * @throws APIException
      */

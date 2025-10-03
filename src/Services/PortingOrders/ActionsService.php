@@ -6,7 +6,6 @@ namespace Telnyx\Services\PortingOrders;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PortingOrders\Actions\ActionActivateResponse;
 use Telnyx\PortingOrders\Actions\ActionCancelResponse;
 use Telnyx\PortingOrders\Actions\ActionConfirmResponse;
@@ -30,29 +29,10 @@ final class ActionsService implements ActionsContract
      *
      * Activate each number in a porting order asynchronously. This operation is limited to US FastPort orders only.
      *
-     * @return ActionActivateResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function activate(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): ActionActivateResponse {
-        $params = [];
-
-        return $this->activateRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return ActionActivateResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function activateRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): ActionActivateResponse {
         // @phpstan-ignore-next-line;
@@ -69,29 +49,10 @@ final class ActionsService implements ActionsContract
      *
      * Cancel a porting order
      *
-     * @return ActionCancelResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function cancel(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): ActionCancelResponse {
-        $params = [];
-
-        return $this->cancelRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return ActionCancelResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function cancelRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): ActionCancelResponse {
         // @phpstan-ignore-next-line;
@@ -108,29 +69,10 @@ final class ActionsService implements ActionsContract
      *
      * Confirm and submit your porting order.
      *
-     * @return ActionConfirmResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function confirm(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): ActionConfirmResponse {
-        $params = [];
-
-        return $this->confirmRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return ActionConfirmResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function confirmRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): ActionConfirmResponse {
         // @phpstan-ignore-next-line;
@@ -149,8 +91,6 @@ final class ActionsService implements ActionsContract
      *
      * @param int $expiresInSeconds The number of seconds the token will be valid for
      * @param Permissions|value-of<Permissions> $permissions The permissions the token will have
-     *
-     * @return ActionShareResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -171,8 +111,6 @@ final class ActionsService implements ActionsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ActionShareResponse<HasRawResponse>
      *
      * @throws APIException
      */

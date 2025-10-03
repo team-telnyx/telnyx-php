@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\Texml\Accounts\Transcriptions;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\Texml\Accounts\Transcriptions\Json\JsonGetRecordingTranscriptionSidJsonResponse;
 
@@ -42,8 +41,6 @@ interface JsonContract
      *
      * @param string $accountSid
      *
-     * @return JsonGetRecordingTranscriptionSidJsonResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieveRecordingTranscriptionSidJson(
@@ -56,8 +53,6 @@ interface JsonContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return JsonGetRecordingTranscriptionSidJsonResponse<HasRawResponse>
      *
      * @throws APIException
      */

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\Portouts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Portouts\SupportingDocuments\SupportingDocumentCreateParams\Document;
 use Telnyx\Portouts\SupportingDocuments\SupportingDocumentListResponse;
 use Telnyx\Portouts\SupportingDocuments\SupportingDocumentNewResponse;
@@ -20,8 +19,6 @@ interface SupportingDocumentsContract
      *
      * @param list<Document> $documents List of supporting documents parameters
      *
-     * @return SupportingDocumentNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -35,8 +32,6 @@ interface SupportingDocumentsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return SupportingDocumentNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function createRaw(
@@ -48,25 +43,10 @@ interface SupportingDocumentsContract
     /**
      * @api
      *
-     * @return SupportingDocumentListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): SupportingDocumentListResponse;
-
-    /**
-     * @api
-     *
-     * @return SupportingDocumentListResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): SupportingDocumentListResponse;
 }

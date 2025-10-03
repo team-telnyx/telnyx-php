@@ -6,20 +6,20 @@ namespace Telnyx\PhoneNumbers\Voice;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PhoneNumbers\Actions\PhoneNumberWithVoiceSettings;
 
 /**
  * @phpstan-type voice_get_response = array{data?: PhoneNumberWithVoiceSettings}
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class VoiceGetResponse implements BaseModel
+final class VoiceGetResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<voice_get_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     #[Api(optional: true)]
     public ?PhoneNumberWithVoiceSettings $data;

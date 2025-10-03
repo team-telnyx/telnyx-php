@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\Texml\Accounts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\Texml\Accounts\Conferences\ConferenceGetConferencesResponse;
 use Telnyx\Texml\Accounts\Conferences\ConferenceGetRecordingsJsonResponse;
@@ -24,8 +23,6 @@ interface ConferencesContract
      *
      * @param string $accountSid
      *
-     * @return ConferenceGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
@@ -38,8 +35,6 @@ interface ConferencesContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ConferenceGetResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -57,8 +52,6 @@ interface ConferencesContract
      * @param string $announceURL The URL we should call to announce something into the conference. The URL may return an MP3 file, a WAV file, or a TwiML document that contains `<Play>`, `<Say>`, `<Pause>`, or `<Redirect>` verbs.
      * @param string $status The new status of the resource. Specifying `completed` will end the conference and hang up all participants.
      *
-     * @return ConferenceUpdateResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function update(
@@ -74,8 +67,6 @@ interface ConferencesContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ConferenceUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -96,8 +87,6 @@ interface ConferencesContract
      * @param string $pageToken used to request the next page of results
      * @param Status|value-of<Status> $status filters conferences by status
      *
-     * @return ConferenceGetConferencesResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieveConferences(
@@ -117,8 +106,6 @@ interface ConferencesContract
      *
      * @param array<string, mixed> $params
      *
-     * @return ConferenceGetConferencesResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieveConferencesRaw(
@@ -131,8 +118,6 @@ interface ConferencesContract
      * @api
      *
      * @param string $accountSid
-     *
-     * @return ConferenceGetRecordingsResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -147,8 +132,6 @@ interface ConferencesContract
      *
      * @param array<string, mixed> $params
      *
-     * @return ConferenceGetRecordingsResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieveRecordingsRaw(
@@ -162,8 +145,6 @@ interface ConferencesContract
      *
      * @param string $accountSid
      *
-     * @return ConferenceGetRecordingsJsonResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieveRecordingsJson(
@@ -176,8 +157,6 @@ interface ConferencesContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ConferenceGetRecordingsJsonResponse<HasRawResponse>
      *
      * @throws APIException
      */

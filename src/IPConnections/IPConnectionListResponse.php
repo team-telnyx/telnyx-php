@@ -7,21 +7,21 @@ namespace Telnyx\IPConnections;
 use Telnyx\ConnectionsPaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type ip_connection_list_response = array{
  *   data?: list<IPConnection>, meta?: ConnectionsPaginationMeta
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class IPConnectionListResponse implements BaseModel
+final class IPConnectionListResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<ip_connection_list_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /** @var list<IPConnection>|null $data */
     #[Api(list: IPConnection::class, optional: true)]

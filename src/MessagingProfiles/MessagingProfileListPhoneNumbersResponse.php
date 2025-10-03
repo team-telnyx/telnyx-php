@@ -7,22 +7,22 @@ namespace Telnyx\MessagingProfiles;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PhoneNumberWithMessagingSettings;
 
 /**
  * @phpstan-type messaging_profile_list_phone_numbers_response = array{
  *   data?: list<PhoneNumberWithMessagingSettings>, meta?: PaginationMeta
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class MessagingProfileListPhoneNumbersResponse implements BaseModel
+final class MessagingProfileListPhoneNumbersResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<messaging_profile_list_phone_numbers_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /** @var list<PhoneNumberWithMessagingSettings>|null $data */
     #[Api(list: PhoneNumberWithMessagingSettings::class, optional: true)]

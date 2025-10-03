@@ -6,7 +6,6 @@ namespace Telnyx\Services\ExternalConnections;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\ExternalConnections\Uploads\UploadCreateParams;
 use Telnyx\ExternalConnections\Uploads\UploadCreateParams\AdditionalUsage;
 use Telnyx\ExternalConnections\Uploads\UploadCreateParams\Usage;
@@ -44,8 +43,6 @@ final class UploadsService implements UploadsContract
      * @param string $locationID identifies the location to assign all phone numbers to
      * @param Usage|value-of<Usage> $usage The use case of the upload request. NOTE: `calling_user_assignment` is not supported for toll free numbers.
      *
-     * @return UploadNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -72,8 +69,6 @@ final class UploadsService implements UploadsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return UploadNewResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -104,8 +99,6 @@ final class UploadsService implements UploadsContract
      *
      * @param string $id
      *
-     * @return UploadGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
@@ -122,8 +115,6 @@ final class UploadsService implements UploadsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return UploadGetResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -156,8 +147,6 @@ final class UploadsService implements UploadsContract
      * @param Filter $filter Filter parameter for uploads (deepObject style). Supports filtering by status, civic_address_id, location_id, and phone_number with eq/contains operations.
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
-     * @return UploadListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -175,8 +164,6 @@ final class UploadsService implements UploadsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return UploadListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -205,29 +192,10 @@ final class UploadsService implements UploadsContract
      *
      * Returns the count of all pending upload requests for the given external connection.
      *
-     * @return UploadPendingCountResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function pendingCount(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): UploadPendingCountResponse {
-        $params = [];
-
-        return $this->pendingCountRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return UploadPendingCountResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function pendingCountRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): UploadPendingCountResponse {
         // @phpstan-ignore-next-line;
@@ -244,29 +212,10 @@ final class UploadsService implements UploadsContract
      *
      * Forces a recheck of the status of all pending Upload requests for the given external connection in the background.
      *
-     * @return UploadRefreshStatusResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function refreshStatus(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): UploadRefreshStatusResponse {
-        $params = [];
-
-        return $this->refreshStatusRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return UploadRefreshStatusResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function refreshStatusRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): UploadRefreshStatusResponse {
         // @phpstan-ignore-next-line;
@@ -285,8 +234,6 @@ final class UploadsService implements UploadsContract
      *
      * @param string $id
      *
-     * @return UploadRetryResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retry(
@@ -303,8 +250,6 @@ final class UploadsService implements UploadsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return UploadRetryResponse<HasRawResponse>
      *
      * @throws APIException
      */

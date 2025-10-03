@@ -76,7 +76,7 @@ final class Filters implements BaseModel
         null !== $createdAtGt && $obj->createdAtGt = $createdAtGt;
         null !== $createdAtLt && $obj->createdAtLt = $createdAtLt;
         null !== $customerReferenceIn && $obj->customerReferenceIn = $customerReferenceIn;
-        null !== $statusIn && $obj->statusIn = array_map(fn ($v) => $v instanceof StatusIn ? $v->value : $v, $statusIn);
+        null !== $statusIn && $obj['statusIn'] = $statusIn;
 
         return $obj;
     }
@@ -124,7 +124,7 @@ final class Filters implements BaseModel
     public function withStatusIn(array $statusIn): self
     {
         $obj = clone $this;
-        $obj->statusIn = array_map(fn ($v) => $v instanceof StatusIn ? $v->value : $v, $statusIn);
+        $obj['statusIn'] = $statusIn;
 
         return $obj;
     }

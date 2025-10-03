@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckCreateParams;
 use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckDeleteResponse;
 use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckGetResponse;
@@ -35,8 +34,6 @@ final class GlobalIPHealthChecksService implements GlobalIPHealthChecksContract
      * @param array<string, mixed> $healthCheckParams a Global IP health check params
      * @param string $healthCheckType the Global IP health check type
      *
-     * @return GlobalIPHealthCheckNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -58,8 +55,6 @@ final class GlobalIPHealthChecksService implements GlobalIPHealthChecksContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return GlobalIPHealthCheckNewResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -87,29 +82,10 @@ final class GlobalIPHealthChecksService implements GlobalIPHealthChecksContract
      *
      * Retrieve a Global IP health check.
      *
-     * @return GlobalIPHealthCheckGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): GlobalIPHealthCheckGetResponse {
-        $params = [];
-
-        return $this->retrieveRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return GlobalIPHealthCheckGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): GlobalIPHealthCheckGetResponse {
         // @phpstan-ignore-next-line;
@@ -128,8 +104,6 @@ final class GlobalIPHealthChecksService implements GlobalIPHealthChecksContract
      *
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
-     * @return GlobalIPHealthCheckListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -145,8 +119,6 @@ final class GlobalIPHealthChecksService implements GlobalIPHealthChecksContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return GlobalIPHealthCheckListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -174,29 +146,10 @@ final class GlobalIPHealthChecksService implements GlobalIPHealthChecksContract
      *
      * Delete a Global IP health check.
      *
-     * @return GlobalIPHealthCheckDeleteResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): GlobalIPHealthCheckDeleteResponse {
-        $params = [];
-
-        return $this->deleteRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return GlobalIPHealthCheckDeleteResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): GlobalIPHealthCheckDeleteResponse {
         // @phpstan-ignore-next-line;

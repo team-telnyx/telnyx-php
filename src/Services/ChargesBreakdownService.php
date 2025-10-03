@@ -9,7 +9,6 @@ use Telnyx\ChargesBreakdown\ChargesBreakdownRetrieveParams;
 use Telnyx\ChargesBreakdown\ChargesBreakdownRetrieveParams\Format;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ChargesBreakdownContract;
 
@@ -31,8 +30,6 @@ final class ChargesBreakdownService implements ChargesBreakdownContract
      * @param \DateTimeInterface $endDate End date for the charges breakdown in ISO date format (YYYY-MM-DD). If not provided, defaults to start_date + 1 month. The date is exclusive, data for the end_date itself is not included in the report. The interval between start_date and end_date cannot exceed 31 days.
      * @param Format|value-of<Format> $format Response format
      *
-     * @return ChargesBreakdownGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
@@ -52,8 +49,6 @@ final class ChargesBreakdownService implements ChargesBreakdownContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ChargesBreakdownGetResponse<HasRawResponse>
      *
      * @throws APIException
      */
