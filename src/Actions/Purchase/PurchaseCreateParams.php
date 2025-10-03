@@ -123,7 +123,7 @@ final class PurchaseCreateParams implements BaseModel
 
         null !== $product && $obj->product = $product;
         null !== $simCardGroupID && $obj->simCardGroupID = $simCardGroupID;
-        null !== $status && $obj->status = $status instanceof Status ? $status->value : $status;
+        null !== $status && $obj['status'] = $status;
         null !== $tags && $obj->tags = $tags;
         null !== $whitelabelName && $obj->whitelabelName = $whitelabelName;
 
@@ -171,7 +171,7 @@ final class PurchaseCreateParams implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

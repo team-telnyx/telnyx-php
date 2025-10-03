@@ -6,20 +6,20 @@ namespace Telnyx\GlobalIPs;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\GlobalIPs\GlobalIPGetResponse\Data;
 
 /**
- * @phpstan-type global_ip_get_response = array{data?: data_alias}
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
+ * @phpstan-type global_ip_get_response = array{data?: Data}
  */
-final class GlobalIPGetResponse implements BaseModel
+final class GlobalIPGetResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<global_ip_get_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     #[Api(optional: true)]
     public ?Data $data;

@@ -77,9 +77,9 @@ final class Deepgram implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->transcriptionModel = $transcriptionModel instanceof TranscriptionModel ? $transcriptionModel->value : $transcriptionModel;
+        $obj['transcriptionModel'] = $transcriptionModel;
 
-        null !== $language && $obj->language = $language instanceof Language ? $language->value : $language;
+        null !== $language && $obj['language'] = $language;
 
         return $obj;
     }
@@ -93,7 +93,7 @@ final class Deepgram implements BaseModel
         TranscriptionModel|string $transcriptionModel
     ): self {
         $obj = clone $this;
-        $obj->transcriptionModel = $transcriptionModel instanceof TranscriptionModel ? $transcriptionModel->value : $transcriptionModel;
+        $obj['transcriptionModel'] = $transcriptionModel;
 
         return $obj;
     }
@@ -106,7 +106,7 @@ final class Deepgram implements BaseModel
     public function withLanguage(Language|string $language): self
     {
         $obj = clone $this;
-        $obj->language = $language instanceof Language ? $language->value : $language;
+        $obj['language'] = $language;
 
         return $obj;
     }

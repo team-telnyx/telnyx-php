@@ -6,7 +6,9 @@ namespace Telnyx\Texml\Accounts;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Texml\Accounts\AccountGetTranscriptionsJsonResponse\Transcription;
 
 /**
@@ -21,15 +23,13 @@ use Telnyx\Texml\Accounts\AccountGetTranscriptionsJsonResponse\Transcription;
  *   transcriptions?: list<Transcription>,
  *   uri?: string,
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class AccountGetTranscriptionsJsonResponse implements BaseModel
+final class AccountGetTranscriptionsJsonResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<account_get_transcriptions_json_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /**
      * The number of the last element on the page, zero-indexed.

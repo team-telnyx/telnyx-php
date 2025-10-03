@@ -6,21 +6,21 @@ namespace Telnyx\BundlePricing\BillingBundles;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type billing_bundle_list_response = array{
  *   data: list<BillingBundleSummary>, meta: PaginationResponse
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class BillingBundleListResponse implements BaseModel
+final class BillingBundleListResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<billing_bundle_list_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /** @var list<BillingBundleSummary> $data */
     #[Api(list: BillingBundleSummary::class)]

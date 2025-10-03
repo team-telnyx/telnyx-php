@@ -43,7 +43,7 @@ final class Sort implements BaseModel
     {
         $obj = new self;
 
-        null !== $value && $obj->value = $value instanceof Value ? $value->value : $value;
+        null !== $value && $obj['value'] = $value;
 
         return $obj;
     }
@@ -56,7 +56,7 @@ final class Sort implements BaseModel
     public function withValue(Value|string $value): self
     {
         $obj = clone $this;
-        $obj->value = $value instanceof Value ? $value->value : $value;
+        $obj['value'] = $value;
 
         return $obj;
     }

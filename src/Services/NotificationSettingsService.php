@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\NotificationSettings\NotificationSettingCreateParams;
 use Telnyx\NotificationSettings\NotificationSettingCreateParams\Parameter;
 use Telnyx\NotificationSettings\NotificationSettingDeleteResponse;
@@ -38,8 +37,6 @@ final class NotificationSettingsService implements NotificationSettingsContract
      * @param string $notificationProfileID a UUID reference to the associated Notification Profile
      * @param list<Parameter> $parameters
      *
-     * @return NotificationSettingNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -63,8 +60,6 @@ final class NotificationSettingsService implements NotificationSettingsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return NotificationSettingNewResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -92,29 +87,10 @@ final class NotificationSettingsService implements NotificationSettingsContract
      *
      * Get a notification setting.
      *
-     * @return NotificationSettingGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): NotificationSettingGetResponse {
-        $params = [];
-
-        return $this->retrieveRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return NotificationSettingGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): NotificationSettingGetResponse {
         // @phpstan-ignore-next-line;
@@ -134,8 +110,6 @@ final class NotificationSettingsService implements NotificationSettingsContract
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[associated_record_type][eq], filter[channel_type_id][eq], filter[notification_profile_id][eq], filter[notification_channel][eq], filter[notification_event_condition_id][eq], filter[status][eq]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
-     * @return NotificationSettingListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -152,8 +126,6 @@ final class NotificationSettingsService implements NotificationSettingsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return NotificationSettingListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -181,29 +153,10 @@ final class NotificationSettingsService implements NotificationSettingsContract
      *
      * Delete a notification setting.
      *
-     * @return NotificationSettingDeleteResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): NotificationSettingDeleteResponse {
-        $params = [];
-
-        return $this->deleteRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return NotificationSettingDeleteResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): NotificationSettingDeleteResponse {
         // @phpstan-ignore-next-line;

@@ -15,7 +15,6 @@ use Telnyx\Calls\CallDialParams\RecordFormat;
 use Telnyx\Calls\CallDialParams\RecordTrack;
 use Telnyx\Calls\CallDialParams\RecordTrim;
 use Telnyx\Calls\CallDialParams\SipTransportProtocol;
-use Telnyx\Calls\CallDialParams\StreamBidirectionalSamplingRate;
 use Telnyx\Calls\CallDialParams\StreamTrack;
 use Telnyx\Calls\CallDialParams\SupervisorRole;
 use Telnyx\Calls\CallDialParams\WebhookURLMethod;
@@ -30,7 +29,6 @@ use Telnyx\Calls\StreamBidirectionalMode;
 use Telnyx\Calls\StreamBidirectionalTargetLegs;
 use Telnyx\Calls\StreamCodec;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 
 use const Telnyx\Core\OMIT as omit;
@@ -77,7 +75,7 @@ interface CallsContract
      * @param SoundModifications $soundModifications use this field to modify sound effects, for example adjust the pitch
      * @param StreamBidirectionalCodec|value-of<StreamBidirectionalCodec> $streamBidirectionalCodec Indicates codec for bidirectional streaming RTP payloads. Used only with stream_bidirectional_mode=rtp. Case sensitive.
      * @param StreamBidirectionalMode|value-of<StreamBidirectionalMode> $streamBidirectionalMode configures method of bidirectional streaming (mp3, rtp)
-     * @param StreamBidirectionalSamplingRate|value-of<StreamBidirectionalSamplingRate> $streamBidirectionalSamplingRate audio sampling rate
+     * @param 8000|16000|22050|24000|48000 $streamBidirectionalSamplingRate audio sampling rate
      * @param StreamBidirectionalTargetLegs|value-of<StreamBidirectionalTargetLegs> $streamBidirectionalTargetLegs specifies which call legs should receive the bidirectional stream audio
      * @param StreamCodec|value-of<StreamCodec> $streamCodec Specifies the codec to be used for the streamed audio. When set to 'default' or when transcoding is not possible, the codec from the call will be used.
      * @param bool $streamEstablishBeforeCallOriginate Establish websocket connection before dialing the destination. This is useful for cases where the websocket connection takes a long time to establish.
@@ -91,8 +89,6 @@ interface CallsContract
      * @param TranscriptionStartRequest $transcriptionConfig
      * @param string $webhookURL use this field to override the URL for which Telnyx will send subsequent webhooks to for this call
      * @param WebhookURLMethod|value-of<WebhookURLMethod> $webhookURLMethod HTTP request type used for `webhook_url`
-     *
-     * @return CallDialResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -156,8 +152,6 @@ interface CallsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return CallDialResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function dialRaw(
@@ -168,25 +162,10 @@ interface CallsContract
     /**
      * @api
      *
-     * @return CallGetStatusResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieveStatus(
         string $callControlID,
         ?RequestOptions $requestOptions = null
-    ): CallGetStatusResponse;
-
-    /**
-     * @api
-     *
-     * @return CallGetStatusResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveStatusRaw(
-        string $callControlID,
-        mixed $params,
-        ?RequestOptions $requestOptions = null,
     ): CallGetStatusResponse;
 }

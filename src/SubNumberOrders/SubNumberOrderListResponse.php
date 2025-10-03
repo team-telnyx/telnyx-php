@@ -7,21 +7,21 @@ namespace Telnyx\SubNumberOrders;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type sub_number_order_list_response = array{
  *   data?: list<SubNumberOrder>, meta?: PaginationMeta
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class SubNumberOrderListResponse implements BaseModel
+final class SubNumberOrderListResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<sub_number_order_list_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /** @var list<SubNumberOrder>|null $data */
     #[Api(list: SubNumberOrder::class, optional: true)]

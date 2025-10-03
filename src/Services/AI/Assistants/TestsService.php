@@ -14,7 +14,6 @@ use Telnyx\AI\Assistants\Tests\TestListResponse;
 use Telnyx\AI\Assistants\Tests\TestUpdateParams;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\TestsContract;
 use Telnyx\Services\AI\Assistants\Tests\RunsService;
@@ -57,8 +56,6 @@ final class TestsService implements TestsContract
      * @param TelnyxConversationChannel|value-of<TelnyxConversationChannel> $telnyxConversationChannel The communication channel through which the test will be conducted. Determines how the assistant will receive and respond to test messages.
      * @param string $testSuite Optional test suite name to group related tests together. Useful for organizing tests by feature, team, or release cycle.
      *
-     * @return AssistantTest<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -91,8 +88,6 @@ final class TestsService implements TestsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return AssistantTest<HasRawResponse>
-     *
      * @throws APIException
      */
     public function createRaw(
@@ -119,29 +114,10 @@ final class TestsService implements TestsContract
      *
      * Retrieves detailed information about a specific assistant test
      *
-     * @return AssistantTest<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $testID,
-        ?RequestOptions $requestOptions = null
-    ): AssistantTest {
-        $params = [];
-
-        return $this->retrieveRaw($testID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return AssistantTest<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $testID,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): AssistantTest {
         // @phpstan-ignore-next-line;
@@ -166,8 +142,6 @@ final class TestsService implements TestsContract
      * @param list<Telnyx\AI\Assistants\Tests\TestUpdateParams\Rubric> $rubric updated evaluation criteria for assessing assistant performance
      * @param TelnyxConversationChannel|value-of<TelnyxConversationChannel> $telnyxConversationChannel updated communication channel for the test execution
      * @param string $testSuite updated test suite assignment for better organization
-     *
-     * @return AssistantTest<HasRawResponse>
      *
      * @throws APIException
      */
@@ -202,8 +176,6 @@ final class TestsService implements TestsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return AssistantTest<HasRawResponse>
-     *
      * @throws APIException
      */
     public function updateRaw(
@@ -236,8 +208,6 @@ final class TestsService implements TestsContract
      * @param string $telnyxConversationChannel Filter tests by communication channel (e.g., 'web_chat', 'sms')
      * @param string $testSuite Filter tests by test suite name
      *
-     * @return TestListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -261,8 +231,6 @@ final class TestsService implements TestsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return TestListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -294,21 +262,6 @@ final class TestsService implements TestsContract
      */
     public function delete(
         string $testID,
-        ?RequestOptions $requestOptions = null
-    ): mixed {
-        $params = [];
-
-        return $this->deleteRaw($testID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $testID,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): mixed {
         // @phpstan-ignore-next-line;

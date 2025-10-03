@@ -6,7 +6,9 @@ namespace Telnyx\Messages;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Messages\MessageCancelScheduledResponse\Cost;
 use Telnyx\Messages\MessageCancelScheduledResponse\CostBreakdown;
 use Telnyx\Messages\MessageCancelScheduledResponse\Direction;
@@ -45,15 +47,13 @@ use Telnyx\Messages\MessageCancelScheduledResponse\Type;
  *   webhookFailoverURL?: string|null,
  *   webhookURL?: string|null,
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class MessageCancelScheduledResponse implements BaseModel
+final class MessageCancelScheduledResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<message_cancel_scheduled_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /**
      * Identifies the type of resource.
@@ -265,7 +265,7 @@ final class MessageCancelScheduledResponse implements BaseModel
         null !== $completedAt && $obj->completedAt = $completedAt;
         null !== $cost && $obj->cost = $cost;
         null !== $costBreakdown && $obj->costBreakdown = $costBreakdown;
-        null !== $direction && $obj->direction = $direction instanceof Direction ? $direction->value : $direction;
+        null !== $direction && $obj['direction'] = $direction;
         null !== $encoding && $obj->encoding = $encoding;
         null !== $errors && $obj->errors = $errors;
         null !== $from && $obj->from = $from;
@@ -274,7 +274,7 @@ final class MessageCancelScheduledResponse implements BaseModel
         null !== $organizationID && $obj->organizationID = $organizationID;
         null !== $parts && $obj->parts = $parts;
         null !== $receivedAt && $obj->receivedAt = $receivedAt;
-        null !== $recordType && $obj->recordType = $recordType instanceof RecordType ? $recordType->value : $recordType;
+        null !== $recordType && $obj['recordType'] = $recordType;
         null !== $sentAt && $obj->sentAt = $sentAt;
         null !== $subject && $obj->subject = $subject;
         null !== $tags && $obj->tags = $tags;
@@ -283,7 +283,7 @@ final class MessageCancelScheduledResponse implements BaseModel
         null !== $tcrCampaignRegistered && $obj->tcrCampaignRegistered = $tcrCampaignRegistered;
         null !== $text && $obj->text = $text;
         null !== $to && $obj->to = $to;
-        null !== $type && $obj->type = $type instanceof Type ? $type->value : $type;
+        null !== $type && $obj['type'] = $type;
         null !== $validUntil && $obj->validUntil = $validUntil;
         null !== $webhookFailoverURL && $obj->webhookFailoverURL = $webhookFailoverURL;
         null !== $webhookURL && $obj->webhookURL = $webhookURL;
@@ -340,7 +340,7 @@ final class MessageCancelScheduledResponse implements BaseModel
     public function withDirection(Direction|string $direction): self
     {
         $obj = clone $this;
-        $obj->direction = $direction instanceof Direction ? $direction->value : $direction;
+        $obj['direction'] = $direction;
 
         return $obj;
     }
@@ -440,7 +440,7 @@ final class MessageCancelScheduledResponse implements BaseModel
     public function withRecordType(RecordType|string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType instanceof RecordType ? $recordType->value : $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -546,7 +546,7 @@ final class MessageCancelScheduledResponse implements BaseModel
     public function withType(Type|string $type): self
     {
         $obj = clone $this;
-        $obj->type = $type instanceof Type ? $type->value : $type;
+        $obj['type'] = $type;
 
         return $obj;
     }

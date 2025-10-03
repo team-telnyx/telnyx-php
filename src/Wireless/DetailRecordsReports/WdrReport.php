@@ -103,7 +103,7 @@ final class WdrReport implements BaseModel
         null !== $recordType && $obj->recordType = $recordType;
         null !== $reportURL && $obj->reportURL = $reportURL;
         null !== $startTime && $obj->startTime = $startTime;
-        null !== $status && $obj->status = $status instanceof Status ? $status->value : $status;
+        null !== $status && $obj['status'] = $status;
         null !== $updatedAt && $obj->updatedAt = $updatedAt;
 
         return $obj;
@@ -180,7 +180,7 @@ final class WdrReport implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

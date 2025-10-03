@@ -95,7 +95,7 @@ final class InsightTemplate implements BaseModel
         $obj->createdAt = $createdAt;
         $obj->instructions = $instructions;
 
-        null !== $insightType && $obj->insightType = $insightType instanceof InsightType ? $insightType->value : $insightType;
+        null !== $insightType && $obj['insightType'] = $insightType;
         null !== $jsonSchema && $obj->jsonSchema = $jsonSchema;
         null !== $name && $obj->name = $name;
         null !== $webhook && $obj->webhook = $webhook;
@@ -133,7 +133,7 @@ final class InsightTemplate implements BaseModel
     public function withInsightType(InsightType|string $insightType): self
     {
         $obj = clone $this;
-        $obj->insightType = $insightType instanceof InsightType ? $insightType->value : $insightType;
+        $obj['insightType'] = $insightType;
 
         return $obj;
     }

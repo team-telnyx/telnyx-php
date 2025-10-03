@@ -7,22 +7,22 @@ namespace Telnyx\SimCardGroups;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\SimCardGroups\SimCardGroupListResponse\Data;
 
 /**
  * @phpstan-type sim_card_group_list_response = array{
  *   data?: list<Data>, meta?: PaginationMeta
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class SimCardGroupListResponse implements BaseModel
+final class SimCardGroupListResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<sim_card_group_list_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /** @var list<Data>|null $data */
     #[Api(list: Data::class, optional: true)]

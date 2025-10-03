@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentCreateParams;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentDeleteResponse;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentGetResponse;
@@ -38,8 +37,6 @@ final class GlobalIPAssignmentsService implements GlobalIPAssignmentsContract
      * @param bool $isInMaintenance enable/disable BGP announcement
      * @param string $wireguardPeerID wireguard peer ID
      *
-     * @return GlobalIPAssignmentNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -61,8 +58,6 @@ final class GlobalIPAssignmentsService implements GlobalIPAssignmentsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return GlobalIPAssignmentNewResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -90,29 +85,10 @@ final class GlobalIPAssignmentsService implements GlobalIPAssignmentsContract
      *
      * Retrieve a Global IP assignment.
      *
-     * @return GlobalIPAssignmentGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): GlobalIPAssignmentGetResponse {
-        $params = [];
-
-        return $this->retrieveRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return GlobalIPAssignmentGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): GlobalIPAssignmentGetResponse {
         // @phpstan-ignore-next-line;
@@ -131,8 +107,6 @@ final class GlobalIPAssignmentsService implements GlobalIPAssignmentsContract
      *
      * @param Body $body
      *
-     * @return GlobalIPAssignmentUpdateResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function update(
@@ -149,8 +123,6 @@ final class GlobalIPAssignmentsService implements GlobalIPAssignmentsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return GlobalIPAssignmentUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -181,8 +153,6 @@ final class GlobalIPAssignmentsService implements GlobalIPAssignmentsContract
      *
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
-     * @return GlobalIPAssignmentListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -198,8 +168,6 @@ final class GlobalIPAssignmentsService implements GlobalIPAssignmentsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return GlobalIPAssignmentListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -227,29 +195,10 @@ final class GlobalIPAssignmentsService implements GlobalIPAssignmentsContract
      *
      * Delete a Global IP assignment.
      *
-     * @return GlobalIPAssignmentDeleteResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): GlobalIPAssignmentDeleteResponse {
-        $params = [];
-
-        return $this->deleteRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return GlobalIPAssignmentDeleteResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): GlobalIPAssignmentDeleteResponse {
         // @phpstan-ignore-next-line;

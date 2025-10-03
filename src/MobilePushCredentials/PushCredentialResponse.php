@@ -6,21 +6,21 @@ namespace Telnyx\MobilePushCredentials;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * Success response with details about a push credential.
  *
  * @phpstan-type push_credential_response = array{data?: PushCredential}
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class PushCredentialResponse implements BaseModel
+final class PushCredentialResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<push_credential_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     #[Api(optional: true)]
     public ?PushCredential $data;

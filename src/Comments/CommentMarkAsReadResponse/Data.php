@@ -95,9 +95,9 @@ final class Data implements BaseModel
         null !== $id && $obj->id = $id;
         null !== $body && $obj->body = $body;
         null !== $commentRecordID && $obj->commentRecordID = $commentRecordID;
-        null !== $commentRecordType && $obj->commentRecordType = $commentRecordType instanceof CommentRecordType ? $commentRecordType->value : $commentRecordType;
+        null !== $commentRecordType && $obj['commentRecordType'] = $commentRecordType;
         null !== $commenter && $obj->commenter = $commenter;
-        null !== $commenterType && $obj->commenterType = $commenterType instanceof CommenterType ? $commenterType->value : $commenterType;
+        null !== $commenterType && $obj['commenterType'] = $commenterType;
         null !== $createdAt && $obj->createdAt = $createdAt;
         null !== $readAt && $obj->readAt = $readAt;
         null !== $updatedAt && $obj->updatedAt = $updatedAt;
@@ -136,7 +136,7 @@ final class Data implements BaseModel
         CommentRecordType|string $commentRecordType
     ): self {
         $obj = clone $this;
-        $obj->commentRecordType = $commentRecordType instanceof CommentRecordType ? $commentRecordType->value : $commentRecordType;
+        $obj['commentRecordType'] = $commentRecordType;
 
         return $obj;
     }
@@ -155,7 +155,7 @@ final class Data implements BaseModel
     public function withCommenterType(CommenterType|string $commenterType): self
     {
         $obj = clone $this;
-        $obj->commenterType = $commenterType instanceof CommenterType ? $commenterType->value : $commenterType;
+        $obj['commenterType'] = $commenterType;
 
         return $obj;
     }

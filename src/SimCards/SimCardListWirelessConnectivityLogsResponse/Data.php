@@ -191,7 +191,7 @@ final class Data implements BaseModel
         null !== $ipv4 && $obj->ipv4 = $ipv4;
         null !== $ipv6 && $obj->ipv6 = $ipv6;
         null !== $lastSeen && $obj->lastSeen = $lastSeen;
-        null !== $logType && $obj->logType = $logType instanceof LogType ? $logType->value : $logType;
+        null !== $logType && $obj['logType'] = $logType;
         null !== $mobileCountryCode && $obj->mobileCountryCode = $mobileCountryCode;
         null !== $mobileNetworkCode && $obj->mobileNetworkCode = $mobileNetworkCode;
         null !== $radioAccessTechnology && $obj->radioAccessTechnology = $radioAccessTechnology;
@@ -312,7 +312,7 @@ final class Data implements BaseModel
     public function withLogType(LogType|string $logType): self
     {
         $obj = clone $this;
-        $obj->logType = $logType instanceof LogType ? $logType->value : $logType;
+        $obj['logType'] = $logType;
 
         return $obj;
     }

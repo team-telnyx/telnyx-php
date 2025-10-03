@@ -117,7 +117,7 @@ final class Payload implements BaseModel
         null !== $failureReason && $obj->failureReason = $failureReason;
         null !== $streamID && $obj->streamID = $streamID;
         null !== $streamParams && $obj->streamParams = $streamParams;
-        null !== $streamType && $obj->streamType = $streamType instanceof StreamType ? $streamType->value : $streamType;
+        null !== $streamType && $obj['streamType'] = $streamType;
 
         return $obj;
     }
@@ -218,7 +218,7 @@ final class Payload implements BaseModel
     public function withStreamType(StreamType|string $streamType): self
     {
         $obj = clone $this;
-        $obj->streamType = $streamType instanceof StreamType ? $streamType->value : $streamType;
+        $obj['streamType'] = $streamType;
 
         return $obj;
     }

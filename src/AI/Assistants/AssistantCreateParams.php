@@ -185,7 +185,7 @@ final class AssistantCreateParams implements BaseModel
         null !== $description && $obj->description = $description;
         null !== $dynamicVariables && $obj->dynamicVariables = $dynamicVariables;
         null !== $dynamicVariablesWebhookURL && $obj->dynamicVariablesWebhookURL = $dynamicVariablesWebhookURL;
-        null !== $enabledFeatures && $obj->enabledFeatures = array_map(fn ($v) => $v instanceof EnabledFeatures ? $v->value : $v, $enabledFeatures);
+        null !== $enabledFeatures && $obj['enabledFeatures'] = $enabledFeatures;
         null !== $greeting && $obj->greeting = $greeting;
         null !== $insightSettings && $obj->insightSettings = $insightSettings;
         null !== $llmAPIKeyRef && $obj->llmAPIKeyRef = $llmAPIKeyRef;
@@ -268,7 +268,7 @@ final class AssistantCreateParams implements BaseModel
     public function withEnabledFeatures(array $enabledFeatures): self
     {
         $obj = clone $this;
-        $obj->enabledFeatures = array_map(fn ($v) => $v instanceof EnabledFeatures ? $v->value : $v, $enabledFeatures);
+        $obj['enabledFeatures'] = $enabledFeatures;
 
         return $obj;
     }

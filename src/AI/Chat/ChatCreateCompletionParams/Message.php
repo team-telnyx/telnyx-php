@@ -61,7 +61,7 @@ final class Message implements BaseModel
         $obj = new self;
 
         $obj->content = $content;
-        $obj->role = $role instanceof Role ? $role->value : $role;
+        $obj['role'] = $role;
 
         return $obj;
     }
@@ -83,7 +83,7 @@ final class Message implements BaseModel
     public function withRole(Role|string $role): self
     {
         $obj = clone $this;
-        $obj->role = $role instanceof Role ? $role->value : $role;
+        $obj['role'] = $role;
 
         return $obj;
     }

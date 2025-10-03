@@ -59,7 +59,7 @@ final class DtmfTool implements BaseModel
         $obj = new self;
 
         $obj->sendDtmf = $sendDtmf;
-        $obj->type = $type instanceof Type ? $type->value : $type;
+        $obj['type'] = $type;
 
         return $obj;
     }
@@ -81,7 +81,7 @@ final class DtmfTool implements BaseModel
     public function withType(Type|string $type): self
     {
         $obj = clone $this;
-        $obj->type = $type instanceof Type ? $type->value : $type;
+        $obj['type'] = $type;
 
         return $obj;
     }

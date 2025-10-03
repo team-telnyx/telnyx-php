@@ -56,7 +56,7 @@ final class ActionsParticipantsRequest implements BaseModel
         $obj = new self;
 
         null !== $exclude && $obj->exclude = $exclude;
-        null !== $participants && $obj->participants = $participants instanceof UnionMember0 ? $participants->value : $participants;
+        null !== $participants && $obj['participants'] = $participants;
 
         return $obj;
     }
@@ -83,7 +83,7 @@ final class ActionsParticipantsRequest implements BaseModel
         UnionMember0|array|string $participants
     ): self {
         $obj = clone $this;
-        $obj->participants = $participants instanceof UnionMember0 ? $participants->value : $participants;
+        $obj['participants'] = $participants;
 
         return $obj;
     }

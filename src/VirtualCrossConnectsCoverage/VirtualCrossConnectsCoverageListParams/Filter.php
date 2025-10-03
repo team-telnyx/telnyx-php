@@ -86,7 +86,7 @@ final class Filter implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $cloudProvider && $obj->cloudProvider = $cloudProvider instanceof CloudProvider ? $cloudProvider->value : $cloudProvider;
+        null !== $cloudProvider && $obj['cloudProvider'] = $cloudProvider;
         null !== $cloudProviderRegion && $obj->cloudProviderRegion = $cloudProviderRegion;
         null !== $locationCode && $obj->locationCode = $locationCode;
         null !== $locationPop && $obj->locationPop = $locationPop;
@@ -104,7 +104,7 @@ final class Filter implements BaseModel
     public function withCloudProvider(CloudProvider|string $cloudProvider): self
     {
         $obj = clone $this;
-        $obj->cloudProvider = $cloudProvider instanceof CloudProvider ? $cloudProvider->value : $cloudProvider;
+        $obj['cloudProvider'] = $cloudProvider;
 
         return $obj;
     }

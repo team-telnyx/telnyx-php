@@ -52,7 +52,7 @@ final class StreamParams implements BaseModel
         $obj = new self;
 
         null !== $streamURL && $obj->streamURL = $streamURL;
-        null !== $track && $obj->track = $track instanceof Track ? $track->value : $track;
+        null !== $track && $obj['track'] = $track;
 
         return $obj;
     }
@@ -76,7 +76,7 @@ final class StreamParams implements BaseModel
     public function withTrack(Track|string $track): self
     {
         $obj = clone $this;
-        $obj->track = $track instanceof Track ? $track->value : $track;
+        $obj['track'] = $track;
 
         return $obj;
     }

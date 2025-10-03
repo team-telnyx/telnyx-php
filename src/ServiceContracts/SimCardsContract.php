@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\SimCards\SimCardDeleteResponse;
 use Telnyx\SimCards\SimCardGetActivationCodeResponse;
@@ -31,8 +30,6 @@ interface SimCardsContract
      * @param bool $includePinPukCodes When set to true, includes the PIN and PUK codes in the response. These codes are used for SIM card security and unlocking purposes. Available for both physical SIM cards and eSIMs.
      * @param bool $includeSimCardGroup it includes the associated SIM card group object in the response when present
      *
-     * @return SimCardGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
@@ -46,8 +43,6 @@ interface SimCardsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return SimCardGetResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -66,8 +61,6 @@ interface SimCardsContract
      * @param SimCardStatus $status
      * @param list<string> $tags Searchable tags associated with the SIM card
      *
-     * @return SimCardUpdateResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function update(
@@ -84,8 +77,6 @@ interface SimCardsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return SimCardUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -104,8 +95,6 @@ interface SimCardsContract
      * @param Page $page Consolidated pagination parameter (deepObject style). Originally: page[number], page[size]
      * @param Sort|value-of<Sort> $sort Sorts SIM cards by the given field. Defaults to ascending order unless field is prefixed with a minus sign.
      *
-     * @return SimCardListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -122,8 +111,6 @@ interface SimCardsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return SimCardListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function listRaw(
@@ -135,8 +122,6 @@ interface SimCardsContract
      * @api
      *
      * @param bool $reportLost Enables deletion of disabled eSIMs that can't be uninstalled from a device. This is irreversible and the eSIM cannot be re-registered.
-     *
-     * @return SimCardDeleteResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -151,8 +136,6 @@ interface SimCardsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return SimCardDeleteResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function deleteRaw(
@@ -164,8 +147,6 @@ interface SimCardsContract
     /**
      * @api
      *
-     * @return SimCardGetActivationCodeResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function getActivationCode(
@@ -175,21 +156,6 @@ interface SimCardsContract
 
     /**
      * @api
-     *
-     * @return SimCardGetActivationCodeResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function getActivationCodeRaw(
-        string $id,
-        mixed $params,
-        ?RequestOptions $requestOptions = null
-    ): SimCardGetActivationCodeResponse;
-
-    /**
-     * @api
-     *
-     * @return SimCardGetDeviceDetailsResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -201,21 +167,6 @@ interface SimCardsContract
     /**
      * @api
      *
-     * @return SimCardGetDeviceDetailsResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function getDeviceDetailsRaw(
-        string $id,
-        mixed $params,
-        ?RequestOptions $requestOptions = null
-    ): SimCardGetDeviceDetailsResponse;
-
-    /**
-     * @api
-     *
-     * @return SimCardGetPublicIPResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function getPublicIP(
@@ -226,23 +177,8 @@ interface SimCardsContract
     /**
      * @api
      *
-     * @return SimCardGetPublicIPResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function getPublicIPRaw(
-        string $id,
-        mixed $params,
-        ?RequestOptions $requestOptions = null
-    ): SimCardGetPublicIPResponse;
-
-    /**
-     * @api
-     *
      * @param int $pageNumber the page number to load
      * @param int $pageSize the size of the page
-     *
-     * @return SimCardListWirelessConnectivityLogsResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -257,8 +193,6 @@ interface SimCardsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return SimCardListWirelessConnectivityLogsResponse<HasRawResponse>
      *
      * @throws APIException
      */

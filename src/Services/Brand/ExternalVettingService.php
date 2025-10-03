@@ -9,7 +9,6 @@ use Telnyx\Brand\ExternalVetting\ExternalVettingImportResponse;
 use Telnyx\Brand\ExternalVetting\ExternalVettingOrderParams;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Brand\ExternalVettingContract;
 
@@ -33,21 +32,6 @@ final class ExternalVettingService implements ExternalVettingContract
         string $brandID,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        $params = [];
-
-        return $this->listRaw($brandID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        string $brandID,
-        mixed $params,
-        ?RequestOptions $requestOptions = null
-    ): mixed {
         // @phpstan-ignore-next-line;
         return $this->client->request(
             method: 'get',
@@ -67,8 +51,6 @@ final class ExternalVettingService implements ExternalVettingContract
      * @param string $evpID external vetting provider ID for the brand
      * @param string $vettingID Unique ID that identifies a vetting transaction performed by a vetting provider. This ID is provided by the vetting provider at time of vetting.
      * @param string $vettingToken required by some providers for vetting record confirmation
-     *
-     * @return ExternalVettingImportResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -92,8 +74,6 @@ final class ExternalVettingService implements ExternalVettingContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ExternalVettingImportResponse<HasRawResponse>
      *
      * @throws APIException
      */

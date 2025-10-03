@@ -6,7 +6,9 @@ namespace Telnyx\Verifications\ByPhoneNumber;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Verifications\ByPhoneNumber\ByPhoneNumberListResponse\Meta;
 use Telnyx\Verifications\Verification;
 
@@ -14,15 +16,13 @@ use Telnyx\Verifications\Verification;
  * @phpstan-type by_phone_number_list_response = array{
  *   data: list<Verification>, meta: Meta
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class ByPhoneNumberListResponse implements BaseModel
+final class ByPhoneNumberListResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<by_phone_number_list_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /** @var list<Verification> $data */
     #[Api(list: Verification::class)]

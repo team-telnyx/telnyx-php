@@ -9,7 +9,6 @@ use Telnyx\AccessIPRanges\AccessIPRangeListParams\Filter;
 use Telnyx\AccessIPRanges\AccessIPRangeListParams\Page;
 use Telnyx\AccessIPRanges\AccessIPRangeListResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 
 use const Telnyx\Core\OMIT as omit;
@@ -21,8 +20,6 @@ interface AccessIPRangesContract
      *
      * @param string $cidrBlock
      * @param string $description
-     *
-     * @return AccessIPRange<HasRawResponse>
      *
      * @throws APIException
      */
@@ -37,8 +34,6 @@ interface AccessIPRangesContract
      *
      * @param array<string, mixed> $params
      *
-     * @return AccessIPRange<HasRawResponse>
-     *
      * @throws APIException
      */
     public function createRaw(
@@ -51,8 +46,6 @@ interface AccessIPRangesContract
      *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[cidr_block], filter[cidr_block][startswith], filter[cidr_block][endswith], filter[cidr_block][contains], filter[created_at]. Supports complex bracket operations for dynamic filtering.
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
-     *
-     * @return AccessIPRangeListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -67,8 +60,6 @@ interface AccessIPRangesContract
      *
      * @param array<string, mixed> $params
      *
-     * @return AccessIPRangeListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function listRaw(
@@ -79,25 +70,10 @@ interface AccessIPRangesContract
     /**
      * @api
      *
-     * @return AccessIPRange<HasRawResponse>
-     *
      * @throws APIException
      */
     public function delete(
         string $accessIPRangeID,
         ?RequestOptions $requestOptions = null
-    ): AccessIPRange;
-
-    /**
-     * @api
-     *
-     * @return AccessIPRange<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $accessIPRangeID,
-        mixed $params,
-        ?RequestOptions $requestOptions = null,
     ): AccessIPRange;
 }

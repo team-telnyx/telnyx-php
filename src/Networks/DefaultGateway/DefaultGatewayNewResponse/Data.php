@@ -97,7 +97,7 @@ final class Data implements BaseModel
         null !== $recordType && $obj->recordType = $recordType;
         null !== $updatedAt && $obj->updatedAt = $updatedAt;
         null !== $networkID && $obj->networkID = $networkID;
-        null !== $status && $obj->status = $status instanceof InterfaceStatus ? $status->value : $status;
+        null !== $status && $obj['status'] = $status;
         null !== $wireguardPeerID && $obj->wireguardPeerID = $wireguardPeerID;
 
         return $obj;
@@ -166,7 +166,7 @@ final class Data implements BaseModel
     public function withStatus(InterfaceStatus|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof InterfaceStatus ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

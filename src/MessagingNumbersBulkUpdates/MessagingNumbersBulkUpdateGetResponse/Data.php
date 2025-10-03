@@ -88,7 +88,7 @@ final class Data implements BaseModel
         null !== $failed && $obj->failed = $failed;
         null !== $orderID && $obj->orderID = $orderID;
         null !== $pending && $obj->pending = $pending;
-        null !== $recordType && $obj->recordType = $recordType instanceof RecordType ? $recordType->value : $recordType;
+        null !== $recordType && $obj['recordType'] = $recordType;
         null !== $success && $obj->success = $success;
 
         return $obj;
@@ -139,7 +139,7 @@ final class Data implements BaseModel
     public function withRecordType(RecordType|string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType instanceof RecordType ? $recordType->value : $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\NotificationProfiles\NotificationProfileDeleteResponse;
 use Telnyx\NotificationProfiles\NotificationProfileGetResponse;
 use Telnyx\NotificationProfiles\NotificationProfileListParams\Page;
@@ -23,8 +22,6 @@ interface NotificationProfilesContract
      *
      * @param string $name a human readable name
      *
-     * @return NotificationProfileNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -37,8 +34,6 @@ interface NotificationProfilesContract
      *
      * @param array<string, mixed> $params
      *
-     * @return NotificationProfileNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function createRaw(
@@ -48,8 +43,6 @@ interface NotificationProfilesContract
 
     /**
      * @api
-     *
-     * @return NotificationProfileGetResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -61,22 +54,7 @@ interface NotificationProfilesContract
     /**
      * @api
      *
-     * @return NotificationProfileGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
-        ?RequestOptions $requestOptions = null
-    ): NotificationProfileGetResponse;
-
-    /**
-     * @api
-     *
      * @param string $name a human readable name
-     *
-     * @return NotificationProfileUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -91,8 +69,6 @@ interface NotificationProfilesContract
      *
      * @param array<string, mixed> $params
      *
-     * @return NotificationProfileUpdateResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function updateRaw(
@@ -106,8 +82,6 @@ interface NotificationProfilesContract
      *
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
-     * @return NotificationProfileListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -120,8 +94,6 @@ interface NotificationProfilesContract
      *
      * @param array<string, mixed> $params
      *
-     * @return NotificationProfileListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function listRaw(
@@ -132,25 +104,10 @@ interface NotificationProfilesContract
     /**
      * @api
      *
-     * @return NotificationProfileDeleteResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): NotificationProfileDeleteResponse;
-
-    /**
-     * @api
-     *
-     * @return NotificationProfileDeleteResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): NotificationProfileDeleteResponse;
 }

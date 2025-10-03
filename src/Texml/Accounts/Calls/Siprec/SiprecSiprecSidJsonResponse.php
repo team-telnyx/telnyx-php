@@ -6,7 +6,9 @@ namespace Telnyx\Texml\Accounts\Calls\Siprec;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Texml\Accounts\Calls\Siprec\SiprecSiprecSidJsonResponse\Status;
 
 /**
@@ -19,15 +21,13 @@ use Telnyx\Texml\Accounts\Calls\Siprec\SiprecSiprecSidJsonResponse\Status;
  *   status?: value-of<Status>,
  *   uri?: string,
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class SiprecSiprecSidJsonResponse implements BaseModel
+final class SiprecSiprecSidJsonResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<siprec_siprec_sid_json_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /**
      * The id of the account the resource belongs to.
@@ -101,7 +101,7 @@ final class SiprecSiprecSidJsonResponse implements BaseModel
         null !== $dateUpdated && $obj->dateUpdated = $dateUpdated;
         null !== $errorCode && $obj->errorCode = $errorCode;
         null !== $sid && $obj->sid = $sid;
-        null !== $status && $obj->status = $status instanceof Status ? $status->value : $status;
+        null !== $status && $obj['status'] = $status;
         null !== $uri && $obj->uri = $uri;
 
         return $obj;
@@ -170,7 +170,7 @@ final class SiprecSiprecSidJsonResponse implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

@@ -6,7 +6,6 @@ namespace Telnyx\Services\Texml\Accounts\Conferences;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\Accounts\Conferences\ParticipantsContract;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantDeleteParams;
@@ -50,8 +49,6 @@ final class ParticipantsService implements ParticipantsContract
      * @param string $accountSid
      * @param string $conferenceSid
      *
-     * @return ParticipantGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
@@ -73,8 +70,6 @@ final class ParticipantsService implements ParticipantsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ParticipantGetResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -125,8 +120,6 @@ final class ParticipantsService implements ParticipantsContract
      * @param bool $muted whether the participant should be muted
      * @param string $waitURL the URL to call for an audio file to play while the participant is waiting for the conference to start
      *
-     * @return ParticipantUpdateResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function update(
@@ -173,8 +166,6 @@ final class ParticipantsService implements ParticipantsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ParticipantUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -323,8 +314,6 @@ final class ParticipantsService implements ParticipantsContract
      * @param Trim|value-of<Trim> $trim Whether to trim any leading and trailing silence from the recording. Defaults to `trim-silence`.
      * @param string $waitURL the URL to call for an audio file to play while the participant is waiting for the conference to start
      *
-     * @return ParticipantParticipantsResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function participants(
@@ -434,8 +423,6 @@ final class ParticipantsService implements ParticipantsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return ParticipantParticipantsResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function participantsRaw(
@@ -459,7 +446,7 @@ final class ParticipantsService implements ParticipantsContract
                 $conferenceSid,
             ],
             headers: ['Content-Type' => 'application/x-www-form-urlencoded'],
-            body: (object) array_diff_key($parsed, array_flip(['accountSid'])),
+            body: (object) array_diff_key($parsed, ['accountSid']),
             options: $options,
             convert: ParticipantParticipantsResponse::class,
         );
@@ -471,8 +458,6 @@ final class ParticipantsService implements ParticipantsContract
      * Lists conference participants
      *
      * @param string $accountSid
-     *
-     * @return ParticipantGetParticipantsResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -494,8 +479,6 @@ final class ParticipantsService implements ParticipantsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ParticipantGetParticipantsResponse<HasRawResponse>
      *
      * @throws APIException
      */

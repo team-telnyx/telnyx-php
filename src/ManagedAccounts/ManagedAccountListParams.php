@@ -101,7 +101,7 @@ final class ManagedAccountListParams implements BaseModel
         null !== $filter && $obj->filter = $filter;
         null !== $includeCancelledAccounts && $obj->includeCancelledAccounts = $includeCancelledAccounts;
         null !== $page && $obj->page = $page;
-        null !== $sort && $obj->sort = $sort instanceof Sort ? $sort->value : $sort;
+        null !== $sort && $obj['sort'] = $sort;
 
         return $obj;
     }
@@ -159,7 +159,7 @@ final class ManagedAccountListParams implements BaseModel
     public function withSort(Sort|string $sort): self
     {
         $obj = clone $this;
-        $obj->sort = $sort instanceof Sort ? $sort->value : $sort;
+        $obj['sort'] = $sort;
 
         return $obj;
     }

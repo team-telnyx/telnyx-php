@@ -229,24 +229,24 @@ final class ActionStartRecordingParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->channels = $channels instanceof Channels ? $channels->value : $channels;
-        $obj->format = $format instanceof Format ? $format->value : $format;
+        $obj['channels'] = $channels;
+        $obj['format'] = $format;
 
         null !== $clientState && $obj->clientState = $clientState;
         null !== $commandID && $obj->commandID = $commandID;
         null !== $customFileName && $obj->customFileName = $customFileName;
         null !== $maxLength && $obj->maxLength = $maxLength;
         null !== $playBeep && $obj->playBeep = $playBeep;
-        null !== $recordingTrack && $obj->recordingTrack = $recordingTrack instanceof RecordingTrack ? $recordingTrack->value : $recordingTrack;
+        null !== $recordingTrack && $obj['recordingTrack'] = $recordingTrack;
         null !== $timeoutSecs && $obj->timeoutSecs = $timeoutSecs;
         null !== $transcription && $obj->transcription = $transcription;
         null !== $transcriptionEngine && $obj->transcriptionEngine = $transcriptionEngine;
-        null !== $transcriptionLanguage && $obj->transcriptionLanguage = $transcriptionLanguage instanceof TranscriptionLanguage ? $transcriptionLanguage->value : $transcriptionLanguage;
+        null !== $transcriptionLanguage && $obj['transcriptionLanguage'] = $transcriptionLanguage;
         null !== $transcriptionMaxSpeakerCount && $obj->transcriptionMaxSpeakerCount = $transcriptionMaxSpeakerCount;
         null !== $transcriptionMinSpeakerCount && $obj->transcriptionMinSpeakerCount = $transcriptionMinSpeakerCount;
         null !== $transcriptionProfanityFilter && $obj->transcriptionProfanityFilter = $transcriptionProfanityFilter;
         null !== $transcriptionSpeakerDiarization && $obj->transcriptionSpeakerDiarization = $transcriptionSpeakerDiarization;
-        null !== $trim && $obj->trim = $trim instanceof Trim ? $trim->value : $trim;
+        null !== $trim && $obj['trim'] = $trim;
 
         return $obj;
     }
@@ -259,7 +259,7 @@ final class ActionStartRecordingParams implements BaseModel
     public function withChannels(Channels|string $channels): self
     {
         $obj = clone $this;
-        $obj->channels = $channels instanceof Channels ? $channels->value : $channels;
+        $obj['channels'] = $channels;
 
         return $obj;
     }
@@ -272,7 +272,7 @@ final class ActionStartRecordingParams implements BaseModel
     public function withFormat(Format|string $format): self
     {
         $obj = clone $this;
-        $obj->format = $format instanceof Format ? $format->value : $format;
+        $obj['format'] = $format;
 
         return $obj;
     }
@@ -341,7 +341,7 @@ final class ActionStartRecordingParams implements BaseModel
         RecordingTrack|string $recordingTrack
     ): self {
         $obj = clone $this;
-        $obj->recordingTrack = $recordingTrack instanceof RecordingTrack ? $recordingTrack->value : $recordingTrack;
+        $obj['recordingTrack'] = $recordingTrack;
 
         return $obj;
     }
@@ -388,7 +388,7 @@ final class ActionStartRecordingParams implements BaseModel
         TranscriptionLanguage|string $transcriptionLanguage
     ): self {
         $obj = clone $this;
-        $obj->transcriptionLanguage = $transcriptionLanguage instanceof TranscriptionLanguage ? $transcriptionLanguage->value : $transcriptionLanguage;
+        $obj['transcriptionLanguage'] = $transcriptionLanguage;
 
         return $obj;
     }
@@ -449,7 +449,7 @@ final class ActionStartRecordingParams implements BaseModel
     public function withTrim(Trim|string $trim): self
     {
         $obj = clone $this;
-        $obj->trim = $trim instanceof Trim ? $trim->value : $trim;
+        $obj['trim'] = $trim;
 
         return $obj;
     }

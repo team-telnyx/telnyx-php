@@ -6,22 +6,22 @@ namespace Telnyx\Messages;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Messages\MessageGetResponse\Data\InboundMessagePayload;
 
 /**
  * @phpstan-type message_get_response = array{
  *   data?: OutboundMessagePayload|InboundMessagePayload
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class MessageGetResponse implements BaseModel
+final class MessageGetResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<message_get_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     #[Api(optional: true)]
     public OutboundMessagePayload|InboundMessagePayload|null $data;

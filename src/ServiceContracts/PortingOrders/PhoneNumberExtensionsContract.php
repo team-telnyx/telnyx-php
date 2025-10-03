@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\PortingOrders;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionCreateParams\ActivationRange;
 use Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionCreateParams\ExtensionRange;
 use Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionDeleteResponse;
@@ -27,8 +26,6 @@ interface PhoneNumberExtensionsContract
      * @param ExtensionRange $extensionRange
      * @param string $portingPhoneNumberID identifies the porting phone number associated with this porting phone number extension
      *
-     * @return PhoneNumberExtensionNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -43,8 +40,6 @@ interface PhoneNumberExtensionsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return PhoneNumberExtensionNewResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -61,8 +56,6 @@ interface PhoneNumberExtensionsContract
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param Sort $sort Consolidated sort parameter (deepObject style). Originally: sort[value]
      *
-     * @return PhoneNumberExtensionListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -78,8 +71,6 @@ interface PhoneNumberExtensionsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return PhoneNumberExtensionListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function listRaw(
@@ -93,8 +84,6 @@ interface PhoneNumberExtensionsContract
      *
      * @param string $portingOrderID
      *
-     * @return PhoneNumberExtensionDeleteResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function delete(
@@ -107,8 +96,6 @@ interface PhoneNumberExtensionsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return PhoneNumberExtensionDeleteResponse<HasRawResponse>
      *
      * @throws APIException
      */

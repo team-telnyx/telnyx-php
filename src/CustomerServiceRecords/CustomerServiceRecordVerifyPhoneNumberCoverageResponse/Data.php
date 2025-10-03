@@ -80,7 +80,7 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $additionalDataRequired && $obj->additionalDataRequired = array_map(fn ($v) => $v instanceof AdditionalDataRequired ? $v->value : $v, $additionalDataRequired);
+        null !== $additionalDataRequired && $obj['additionalDataRequired'] = $additionalDataRequired;
         null !== $hasCsrCoverage && $obj->hasCsrCoverage = $hasCsrCoverage;
         null !== $phoneNumber && $obj->phoneNumber = $phoneNumber;
         null !== $reason && $obj->reason = $reason;
@@ -98,7 +98,7 @@ final class Data implements BaseModel
         array $additionalDataRequired
     ): self {
         $obj = clone $this;
-        $obj->additionalDataRequired = array_map(fn ($v) => $v instanceof AdditionalDataRequired ? $v->value : $v, $additionalDataRequired);
+        $obj['additionalDataRequired'] = $additionalDataRequired;
 
         return $obj;
     }

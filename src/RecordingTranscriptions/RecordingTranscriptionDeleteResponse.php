@@ -6,21 +6,21 @@ namespace Telnyx\RecordingTranscriptions;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type recording_transcription_delete_response = array{
  *   data?: RecordingTranscription
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class RecordingTranscriptionDeleteResponse implements BaseModel
+final class RecordingTranscriptionDeleteResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<recording_transcription_delete_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     #[Api(optional: true)]
     public ?RecordingTranscription $data;

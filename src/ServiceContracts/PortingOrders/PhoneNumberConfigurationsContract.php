@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\PortingOrders;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationCreateParams\PhoneNumberConfiguration;
 use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListParams\Filter;
 use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListParams\Page;
@@ -23,8 +22,6 @@ interface PhoneNumberConfigurationsContract
      *
      * @param list<PhoneNumberConfiguration> $phoneNumberConfigurations
      *
-     * @return PhoneNumberConfigurationNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -36,8 +33,6 @@ interface PhoneNumberConfigurationsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return PhoneNumberConfigurationNewResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -53,8 +48,6 @@ interface PhoneNumberConfigurationsContract
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param Sort $sort Consolidated sort parameter (deepObject style). Originally: sort[value]
      *
-     * @return PhoneNumberConfigurationListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -68,8 +61,6 @@ interface PhoneNumberConfigurationsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return PhoneNumberConfigurationListResponse<HasRawResponse>
      *
      * @throws APIException
      */

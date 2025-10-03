@@ -10,7 +10,6 @@ use Telnyx\Addresses\Actions\ActionValidateParams;
 use Telnyx\Addresses\Actions\ActionValidateResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Addresses\ActionsContract;
 
@@ -30,8 +29,6 @@ final class ActionsService implements ActionsContract
      *
      * @param string $id1 the ID of the address
      *
-     * @return ActionAcceptSuggestionsResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function acceptSuggestions(
@@ -48,8 +45,6 @@ final class ActionsService implements ActionsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ActionAcceptSuggestionsResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -85,8 +80,6 @@ final class ActionsService implements ActionsContract
      * @param string $extendedAddress additional street address information about the address such as, but not limited to, unit number or apartment number
      * @param string $locality The locality of the address. For US addresses, this corresponds to the city of the address.
      *
-     * @return ActionValidateResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function validate(
@@ -114,8 +107,6 @@ final class ActionsService implements ActionsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ActionValidateResponse<HasRawResponse>
      *
      * @throws APIException
      */

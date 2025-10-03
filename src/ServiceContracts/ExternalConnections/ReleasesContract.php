@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\ExternalConnections;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\ExternalConnections\Releases\ReleaseGetResponse;
 use Telnyx\ExternalConnections\Releases\ReleaseListParams\Filter;
 use Telnyx\ExternalConnections\Releases\ReleaseListParams\Page;
@@ -21,8 +20,6 @@ interface ReleasesContract
      *
      * @param string $id
      *
-     * @return ReleaseGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
@@ -35,8 +32,6 @@ interface ReleasesContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ReleaseGetResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -52,8 +47,6 @@ interface ReleasesContract
      * @param Filter $filter Filter parameter for releases (deepObject style). Supports filtering by status, civic_address_id, location_id, and phone_number with eq/contains operations.
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
-     * @return ReleaseListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -67,8 +60,6 @@ interface ReleasesContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ReleaseListResponse<HasRawResponse>
      *
      * @throws APIException
      */

@@ -125,8 +125,8 @@ final class EmbeddingCreateParams implements BaseModel
 
         null !== $documentChunkOverlapSize && $obj->documentChunkOverlapSize = $documentChunkOverlapSize;
         null !== $documentChunkSize && $obj->documentChunkSize = $documentChunkSize;
-        null !== $embeddingModel && $obj->embeddingModel = $embeddingModel instanceof EmbeddingModel ? $embeddingModel->value : $embeddingModel;
-        null !== $loader && $obj->loader = $loader instanceof Loader ? $loader->value : $loader;
+        null !== $embeddingModel && $obj['embeddingModel'] = $embeddingModel;
+        null !== $loader && $obj['loader'] = $loader;
 
         return $obj;
     }
@@ -165,7 +165,7 @@ final class EmbeddingCreateParams implements BaseModel
         EmbeddingModel|string $embeddingModel
     ): self {
         $obj = clone $this;
-        $obj->embeddingModel = $embeddingModel instanceof EmbeddingModel ? $embeddingModel->value : $embeddingModel;
+        $obj['embeddingModel'] = $embeddingModel;
 
         return $obj;
     }
@@ -178,7 +178,7 @@ final class EmbeddingCreateParams implements BaseModel
     public function withLoader(Loader|string $loader): self
     {
         $obj = clone $this;
-        $obj->loader = $loader instanceof Loader ? $loader->value : $loader;
+        $obj['loader'] = $loader;
 
         return $obj;
     }

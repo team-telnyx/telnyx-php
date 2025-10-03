@@ -152,8 +152,8 @@ final class Filter implements BaseModel
         null !== $pon && $obj->pon = $pon;
         null !== $portedOutAt && $obj->portedOutAt = $portedOutAt;
         null !== $spid && $obj->spid = $spid;
-        null !== $status && $obj->status = $status instanceof Status ? $status->value : $status;
-        null !== $statusIn && $obj->statusIn = array_map(fn ($v) => $v instanceof StatusIn ? $v->value : $v, $statusIn);
+        null !== $status && $obj['status'] = $status;
+        null !== $statusIn && $obj['statusIn'] = $statusIn;
         null !== $supportKey && $obj->supportKey = $supportKey;
 
         return $obj;
@@ -268,7 +268,7 @@ final class Filter implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }
@@ -281,7 +281,7 @@ final class Filter implements BaseModel
     public function withStatusIn(array $statusIn): self
     {
         $obj = clone $this;
-        $obj->statusIn = array_map(fn ($v) => $v instanceof StatusIn ? $v->value : $v, $statusIn);
+        $obj['statusIn'] = $statusIn;
 
         return $obj;
     }

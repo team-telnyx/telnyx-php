@@ -167,7 +167,7 @@ final class DynamicEmergencyAddress implements BaseModel
         $obj = new self;
 
         $obj->administrativeArea = $administrativeArea;
-        $obj->countryCode = $countryCode instanceof CountryCode ? $countryCode->value : $countryCode;
+        $obj['countryCode'] = $countryCode;
         $obj->houseNumber = $houseNumber;
         $obj->locality = $locality;
         $obj->postalCode = $postalCode;
@@ -179,7 +179,7 @@ final class DynamicEmergencyAddress implements BaseModel
         null !== $houseSuffix && $obj->houseSuffix = $houseSuffix;
         null !== $recordType && $obj->recordType = $recordType;
         null !== $sipGeolocationID && $obj->sipGeolocationID = $sipGeolocationID;
-        null !== $status && $obj->status = $status instanceof Status ? $status->value : $status;
+        null !== $status && $obj['status'] = $status;
         null !== $streetPostDirectional && $obj->streetPostDirectional = $streetPostDirectional;
         null !== $streetPreDirectional && $obj->streetPreDirectional = $streetPreDirectional;
         null !== $streetSuffix && $obj->streetSuffix = $streetSuffix;
@@ -202,7 +202,7 @@ final class DynamicEmergencyAddress implements BaseModel
     public function withCountryCode(CountryCode|string $countryCode): self
     {
         $obj = clone $this;
-        $obj->countryCode = $countryCode instanceof CountryCode ? $countryCode->value : $countryCode;
+        $obj['countryCode'] = $countryCode;
 
         return $obj;
     }
@@ -304,7 +304,7 @@ final class DynamicEmergencyAddress implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

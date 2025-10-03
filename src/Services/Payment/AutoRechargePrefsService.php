@@ -6,7 +6,6 @@ namespace Telnyx\Services\Payment;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Payment\AutoRechargePrefs\AutoRechargePrefListResponse;
 use Telnyx\Payment\AutoRechargePrefs\AutoRechargePrefUpdateParams;
 use Telnyx\Payment\AutoRechargePrefs\AutoRechargePrefUpdateParams\Preference;
@@ -34,8 +33,6 @@ final class AutoRechargePrefsService implements AutoRechargePrefsContract
      * @param string $rechargeAmount the amount to recharge the account, the actual recharge amount will be the amount necessary to reach the threshold amount plus the recharge amount
      * @param string $thresholdAmount the threshold amount at which the account will be recharged
      *
-     * @return AutoRechargePrefUpdateResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function update(
@@ -61,8 +58,6 @@ final class AutoRechargePrefsService implements AutoRechargePrefsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return AutoRechargePrefUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -90,27 +85,9 @@ final class AutoRechargePrefsService implements AutoRechargePrefsContract
      *
      * Returns the payment auto recharge preferences.
      *
-     * @return AutoRechargePrefListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
-        ?RequestOptions $requestOptions = null
-    ): AutoRechargePrefListResponse {
-        $params = [];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return AutoRechargePrefListResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): AutoRechargePrefListResponse {
         // @phpstan-ignore-next-line;

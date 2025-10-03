@@ -151,12 +151,12 @@ final class Filter implements BaseModel
         null !== $bestEffort && $obj->bestEffort = $bestEffort;
         null !== $countryCode && $obj->countryCode = $countryCode;
         null !== $excludeHeldNumbers && $obj->excludeHeldNumbers = $excludeHeldNumbers;
-        null !== $features && $obj->features = array_map(fn ($v) => $v instanceof Feature ? $v->value : $v, $features);
+        null !== $features && $obj['features'] = $features;
         null !== $limit && $obj->limit = $limit;
         null !== $locality && $obj->locality = $locality;
         null !== $nationalDestinationCode && $obj->nationalDestinationCode = $nationalDestinationCode;
         null !== $phoneNumber && $obj->phoneNumber = $phoneNumber;
-        null !== $phoneNumberType && $obj->phoneNumberType = $phoneNumberType instanceof PhoneNumberType ? $phoneNumberType->value : $phoneNumberType;
+        null !== $phoneNumberType && $obj['phoneNumberType'] = $phoneNumberType;
         null !== $quickship && $obj->quickship = $quickship;
         null !== $rateCenter && $obj->rateCenter = $rateCenter;
         null !== $reservable && $obj->reservable = $reservable;
@@ -216,7 +216,7 @@ final class Filter implements BaseModel
     public function withFeatures(array $features): self
     {
         $obj = clone $this;
-        $obj->features = array_map(fn ($v) => $v instanceof Feature ? $v->value : $v, $features);
+        $obj['features'] = $features;
 
         return $obj;
     }
@@ -275,7 +275,7 @@ final class Filter implements BaseModel
         PhoneNumberType|string $phoneNumberType
     ): self {
         $obj = clone $this;
-        $obj->phoneNumberType = $phoneNumberType instanceof PhoneNumberType ? $phoneNumberType->value : $phoneNumberType;
+        $obj['phoneNumberType'] = $phoneNumberType;
 
         return $obj;
     }

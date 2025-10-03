@@ -62,7 +62,7 @@ final class Filter implements BaseModel
         $obj = new self;
 
         null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $eventType && $obj->eventType = $eventType instanceof EventType ? $eventType->value : $eventType;
+        null !== $eventType && $obj['eventType'] = $eventType;
         null !== $portoutID && $obj->portoutID = $portoutID;
 
         return $obj;
@@ -87,7 +87,7 @@ final class Filter implements BaseModel
     public function withEventType(EventType|string $eventType): self
     {
         $obj = clone $this;
-        $obj->eventType = $eventType instanceof EventType ? $eventType->value : $eventType;
+        $obj['eventType'] = $eventType;
 
         return $obj;
     }

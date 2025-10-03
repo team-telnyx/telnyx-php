@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Regions\RegionListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\RegionsContract;
@@ -23,27 +22,9 @@ final class RegionsService implements RegionsContract
      *
      * List all regions and the interfaces that region supports
      *
-     * @return RegionListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
-        ?RequestOptions $requestOptions = null
-    ): RegionListResponse {
-        $params = [];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return RegionListResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): RegionListResponse {
         // @phpstan-ignore-next-line;

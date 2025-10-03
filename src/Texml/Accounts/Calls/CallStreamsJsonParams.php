@@ -146,12 +146,12 @@ final class CallStreamsJsonParams implements BaseModel
 
         $obj->accountSid = $accountSid;
 
-        null !== $bidirectionalCodec && $obj->bidirectionalCodec = $bidirectionalCodec instanceof BidirectionalCodec ? $bidirectionalCodec->value : $bidirectionalCodec;
-        null !== $bidirectionalMode && $obj->bidirectionalMode = $bidirectionalMode instanceof BidirectionalMode ? $bidirectionalMode->value : $bidirectionalMode;
+        null !== $bidirectionalCodec && $obj['bidirectionalCodec'] = $bidirectionalCodec;
+        null !== $bidirectionalMode && $obj['bidirectionalMode'] = $bidirectionalMode;
         null !== $name && $obj->name = $name;
         null !== $statusCallback && $obj->statusCallback = $statusCallback;
-        null !== $statusCallbackMethod && $obj->statusCallbackMethod = $statusCallbackMethod instanceof StatusCallbackMethod ? $statusCallbackMethod->value : $statusCallbackMethod;
-        null !== $track && $obj->track = $track instanceof Track ? $track->value : $track;
+        null !== $statusCallbackMethod && $obj['statusCallbackMethod'] = $statusCallbackMethod;
+        null !== $track && $obj['track'] = $track;
         null !== $url && $obj->url = $url;
 
         return $obj;
@@ -174,7 +174,7 @@ final class CallStreamsJsonParams implements BaseModel
         BidirectionalCodec|string $bidirectionalCodec
     ): self {
         $obj = clone $this;
-        $obj->bidirectionalCodec = $bidirectionalCodec instanceof BidirectionalCodec ? $bidirectionalCodec->value : $bidirectionalCodec;
+        $obj['bidirectionalCodec'] = $bidirectionalCodec;
 
         return $obj;
     }
@@ -188,7 +188,7 @@ final class CallStreamsJsonParams implements BaseModel
         BidirectionalMode|string $bidirectionalMode
     ): self {
         $obj = clone $this;
-        $obj->bidirectionalMode = $bidirectionalMode instanceof BidirectionalMode ? $bidirectionalMode->value : $bidirectionalMode;
+        $obj['bidirectionalMode'] = $bidirectionalMode;
 
         return $obj;
     }
@@ -224,7 +224,7 @@ final class CallStreamsJsonParams implements BaseModel
         StatusCallbackMethod|string $statusCallbackMethod
     ): self {
         $obj = clone $this;
-        $obj->statusCallbackMethod = $statusCallbackMethod instanceof StatusCallbackMethod ? $statusCallbackMethod->value : $statusCallbackMethod;
+        $obj['statusCallbackMethod'] = $statusCallbackMethod;
 
         return $obj;
     }
@@ -237,7 +237,7 @@ final class CallStreamsJsonParams implements BaseModel
     public function withTrack(Track|string $track): self
     {
         $obj = clone $this;
-        $obj->track = $track instanceof Track ? $track->value : $track;
+        $obj['track'] = $track;
 
         return $obj;
     }

@@ -9,7 +9,6 @@ use Telnyx\AI\AISummarizeParams;
 use Telnyx\AI\AISummarizeResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AIContract;
 use Telnyx\Services\AI\AssistantsService;
@@ -78,27 +77,9 @@ final class AIService implements AIContract
      *
      * This endpoint returns a list of Open Source and OpenAI models that are available for use. <br /><br /> **Note**: Model `id`'s will be in the form `{source}/{model_name}`. For example `openai/gpt-4` or `mistralai/Mistral-7B-Instruct-v0.1` consistent with HuggingFace naming conventions.
      *
-     * @return AIGetModelsResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieveModels(
-        ?RequestOptions $requestOptions = null
-    ): AIGetModelsResponse {
-        $params = [];
-
-        return $this->retrieveModelsRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return AIGetModelsResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveModelsRaw(
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): AIGetModelsResponse {
         // @phpstan-ignore-next-line;
@@ -126,8 +107,6 @@ final class AIService implements AIContract
      * @param string $filename the name of the file to be summarized
      * @param string $systemPrompt a system prompt to guide the summary generation
      *
-     * @return AISummarizeResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function summarize(
@@ -149,8 +128,6 @@ final class AIService implements AIContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return AISummarizeResponse<HasRawResponse>
      *
      * @throws APIException
      */

@@ -228,7 +228,7 @@ final class PortingOrder implements BaseModel
 
         null !== $id && $obj->id = $id;
         null !== $activationSettings && $obj->activationSettings = $activationSettings;
-        null !== $additionalSteps && $obj->additionalSteps = array_map(fn ($v) => $v instanceof AdditionalStep ? $v->value : $v, $additionalSteps);
+        null !== $additionalSteps && $obj['additionalSteps'] = $additionalSteps;
         null !== $createdAt && $obj->createdAt = $createdAt;
         null !== $customerGroupReference && $obj->customerGroupReference = $customerGroupReference;
         null !== $customerReference && $obj->customerReference = $customerReference;
@@ -240,7 +240,7 @@ final class PortingOrder implements BaseModel
         null !== $oldServiceProviderOcn && $obj->oldServiceProviderOcn = $oldServiceProviderOcn;
         null !== $parentSupportKey && $obj->parentSupportKey = $parentSupportKey;
         null !== $phoneNumberConfiguration && $obj->phoneNumberConfiguration = $phoneNumberConfiguration;
-        null !== $phoneNumberType && $obj->phoneNumberType = $phoneNumberType instanceof PhoneNumberType ? $phoneNumberType->value : $phoneNumberType;
+        null !== $phoneNumberType && $obj['phoneNumberType'] = $phoneNumberType;
         null !== $portingPhoneNumbersCount && $obj->portingPhoneNumbersCount = $portingPhoneNumbersCount;
         null !== $recordType && $obj->recordType = $recordType;
         null !== $requirements && $obj->requirements = $requirements;
@@ -283,7 +283,7 @@ final class PortingOrder implements BaseModel
     public function withAdditionalSteps(array $additionalSteps): self
     {
         $obj = clone $this;
-        $obj->additionalSteps = array_map(fn ($v) => $v instanceof AdditionalStep ? $v->value : $v, $additionalSteps);
+        $obj['additionalSteps'] = $additionalSteps;
 
         return $obj;
     }
@@ -412,7 +412,7 @@ final class PortingOrder implements BaseModel
         PhoneNumberType|string $phoneNumberType
     ): self {
         $obj = clone $this;
-        $obj->phoneNumberType = $phoneNumberType instanceof PhoneNumberType ? $phoneNumberType->value : $phoneNumberType;
+        $obj['phoneNumberType'] = $phoneNumberType;
 
         return $obj;
     }

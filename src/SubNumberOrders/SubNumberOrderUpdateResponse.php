@@ -6,19 +6,19 @@ namespace Telnyx\SubNumberOrders;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type sub_number_order_update_response = array{data?: SubNumberOrder}
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class SubNumberOrderUpdateResponse implements BaseModel
+final class SubNumberOrderUpdateResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<sub_number_order_update_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     #[Api(optional: true)]
     public ?SubNumberOrder $data;

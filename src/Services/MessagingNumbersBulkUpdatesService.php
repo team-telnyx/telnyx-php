@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\MessagingNumbersBulkUpdates\MessagingNumbersBulkUpdateCreateParams;
 use Telnyx\MessagingNumbersBulkUpdates\MessagingNumbersBulkUpdateGetResponse;
 use Telnyx\MessagingNumbersBulkUpdates\MessagingNumbersBulkUpdateNewResponse;
@@ -31,8 +30,6 @@ final class MessagingNumbersBulkUpdatesService implements MessagingNumbersBulkUp
      * * Set this field to a quoted UUID of a messaging profile to assign these numbers to that messaging profile
      * @param list<string> $numbers the list of phone numbers to update
      *
-     * @return MessagingNumbersBulkUpdateNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -51,8 +48,6 @@ final class MessagingNumbersBulkUpdatesService implements MessagingNumbersBulkUp
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return MessagingNumbersBulkUpdateNewResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -80,29 +75,10 @@ final class MessagingNumbersBulkUpdatesService implements MessagingNumbersBulkUp
      *
      * Retrieve bulk update status
      *
-     * @return MessagingNumbersBulkUpdateGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $orderID,
-        ?RequestOptions $requestOptions = null
-    ): MessagingNumbersBulkUpdateGetResponse {
-        $params = [];
-
-        return $this->retrieveRaw($orderID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return MessagingNumbersBulkUpdateGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $orderID,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): MessagingNumbersBulkUpdateGetResponse {
         // @phpstan-ignore-next-line;

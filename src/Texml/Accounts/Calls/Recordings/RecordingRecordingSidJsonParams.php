@@ -82,7 +82,7 @@ final class RecordingRecordingSidJsonParams implements BaseModel
         $obj->accountSid = $accountSid;
         $obj->callSid = $callSid;
 
-        null !== $status && $obj->status = $status instanceof Status ? $status->value : $status;
+        null !== $status && $obj['status'] = $status;
 
         return $obj;
     }
@@ -109,7 +109,7 @@ final class RecordingRecordingSidJsonParams implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

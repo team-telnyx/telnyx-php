@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Documents\DocumentDeleteResponse;
 use Telnyx\Documents\DocumentGenerateDownloadLinkResponse;
 use Telnyx\Documents\DocumentGetResponse;
@@ -24,8 +23,6 @@ interface DocumentsContract
     /**
      * @api
      *
-     * @return DocumentGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
@@ -36,23 +33,8 @@ interface DocumentsContract
     /**
      * @api
      *
-     * @return DocumentGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
-        ?RequestOptions $requestOptions = null
-    ): DocumentGetResponse;
-
-    /**
-     * @api
-     *
      * @param string $customerReference optional reference string for customer tracking
      * @param string $filename the filename of the document
-     *
-     * @return DocumentUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -67,8 +49,6 @@ interface DocumentsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return DocumentUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -85,8 +65,6 @@ interface DocumentsContract
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param list<Sort|value-of<Sort>> $sort Consolidated sort parameter for documents (deepObject style). Originally: sort[]
      *
-     * @return DocumentListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -101,8 +79,6 @@ interface DocumentsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return DocumentListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function listRaw(
@@ -113,25 +89,10 @@ interface DocumentsContract
     /**
      * @api
      *
-     * @return DocumentDeleteResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): DocumentDeleteResponse;
-
-    /**
-     * @api
-     *
-     * @return DocumentDeleteResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): DocumentDeleteResponse;
 
@@ -150,19 +111,6 @@ interface DocumentsContract
      *
      * @throws APIException
      */
-    public function downloadRaw(
-        string $id,
-        mixed $params,
-        ?RequestOptions $requestOptions = null
-    ): string;
-
-    /**
-     * @api
-     *
-     * @return DocumentGenerateDownloadLinkResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
     public function generateDownloadLink(
         string $id,
         ?RequestOptions $requestOptions = null
@@ -171,33 +119,18 @@ interface DocumentsContract
     /**
      * @api
      *
-     * @return DocumentGenerateDownloadLinkResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function generateDownloadLinkRaw(
-        string $id,
-        mixed $params,
-        ?RequestOptions $requestOptions = null
-    ): DocumentGenerateDownloadLinkResponse;
-
-    /**
-     * @api
-     *
      * @param string $url if the file is already hosted publicly, you can provide a URL and have the documents service fetch it for you
+     * @param string $file the Base64 encoded contents of the file you are uploading
      * @param string $customerReference a customer reference string for customer look ups
      * @param string $filename the filename of the document
-     * @param string $file the Base64 encoded contents of the file you are uploading
-     *
-     * @return DocumentUploadResponse<HasRawResponse>
      *
      * @throws APIException
      */
     public function upload(
         $url,
+        $file,
         $customerReference = omit,
         $filename = omit,
-        $file,
         ?RequestOptions $requestOptions = null,
     ): DocumentUploadResponse;
 
@@ -205,8 +138,6 @@ interface DocumentsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return DocumentUploadResponse<HasRawResponse>
      *
      * @throws APIException
      */

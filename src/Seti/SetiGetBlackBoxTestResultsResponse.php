@@ -6,22 +6,22 @@ namespace Telnyx\Seti;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Seti\SetiGetBlackBoxTestResultsResponse\Data;
 
 /**
  * @phpstan-type seti_get_black_box_test_results_response = array{
  *   data?: list<Data>
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class SetiGetBlackBoxTestResultsResponse implements BaseModel
+final class SetiGetBlackBoxTestResultsResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<seti_get_black_box_test_results_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /** @var list<Data>|null $data */
     #[Api(list: Data::class, optional: true)]

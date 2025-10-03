@@ -11,7 +11,6 @@ use Telnyx\BillingGroups\BillingGroupListResponse;
 use Telnyx\BillingGroups\BillingGroupNewResponse;
 use Telnyx\BillingGroups\BillingGroupUpdateResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 
 use const Telnyx\Core\OMIT as omit;
@@ -22,8 +21,6 @@ interface BillingGroupsContract
      * @api
      *
      * @param string $name A name for the billing group
-     *
-     * @return BillingGroupNewResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -37,8 +34,6 @@ interface BillingGroupsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return BillingGroupNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function createRaw(
@@ -48,8 +43,6 @@ interface BillingGroupsContract
 
     /**
      * @api
-     *
-     * @return BillingGroupGetResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -61,22 +54,7 @@ interface BillingGroupsContract
     /**
      * @api
      *
-     * @return BillingGroupGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
-        ?RequestOptions $requestOptions = null
-    ): BillingGroupGetResponse;
-
-    /**
-     * @api
-     *
      * @param string $name A name for the billing group
-     *
-     * @return BillingGroupUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -91,8 +69,6 @@ interface BillingGroupsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return BillingGroupUpdateResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function updateRaw(
@@ -106,8 +82,6 @@ interface BillingGroupsContract
      *
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
-     * @return BillingGroupListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -120,8 +94,6 @@ interface BillingGroupsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return BillingGroupListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function listRaw(
@@ -132,25 +104,10 @@ interface BillingGroupsContract
     /**
      * @api
      *
-     * @return BillingGroupDeleteResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): BillingGroupDeleteResponse;
-
-    /**
-     * @api
-     *
-     * @return BillingGroupDeleteResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): BillingGroupDeleteResponse;
 }

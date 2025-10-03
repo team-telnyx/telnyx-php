@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\PortingOrders;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PortingOrders\ActivationJobs\ActivationJobGetResponse;
 use Telnyx\PortingOrders\ActivationJobs\ActivationJobListParams\Page;
 use Telnyx\PortingOrders\ActivationJobs\ActivationJobListResponse;
@@ -21,8 +20,6 @@ interface ActivationJobsContract
      *
      * @param string $id
      *
-     * @return ActivationJobGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
@@ -35,8 +32,6 @@ interface ActivationJobsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ActivationJobGetResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -52,8 +47,6 @@ interface ActivationJobsContract
      * @param string $id
      * @param \DateTimeInterface $activateAt The desired activation time. The activation time should be between any of the activation windows.
      *
-     * @return ActivationJobUpdateResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function update(
@@ -68,8 +61,6 @@ interface ActivationJobsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return ActivationJobUpdateResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function updateRaw(
@@ -83,8 +74,6 @@ interface ActivationJobsContract
      *
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
-     * @return ActivationJobListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -97,8 +86,6 @@ interface ActivationJobsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ActivationJobListResponse<HasRawResponse>
      *
      * @throws APIException
      */

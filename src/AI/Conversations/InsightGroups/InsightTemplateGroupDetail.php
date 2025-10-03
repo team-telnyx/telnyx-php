@@ -6,19 +6,19 @@ namespace Telnyx\AI\Conversations\InsightGroups;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type insight_template_group_detail = array{data: InsightTemplateGroup}
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class InsightTemplateGroupDetail implements BaseModel
+final class InsightTemplateGroupDetail implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<insight_template_group_detail> */
     use SdkModel;
+
+    use SdkResponse;
 
     #[Api]
     public InsightTemplateGroup $data;

@@ -73,7 +73,7 @@ final class Filter implements BaseModel
         null !== $countryCode && $obj->countryCode = $countryCode;
         null !== $locality && $obj->locality = $locality;
         null !== $nationalDestinationCode && $obj->nationalDestinationCode = $nationalDestinationCode;
-        null !== $phoneNumberType && $obj->phoneNumberType = $phoneNumberType instanceof PhoneNumberType ? $phoneNumberType->value : $phoneNumberType;
+        null !== $phoneNumberType && $obj['phoneNumberType'] = $phoneNumberType;
 
         return $obj;
     }
@@ -121,7 +121,7 @@ final class Filter implements BaseModel
         PhoneNumberType|string $phoneNumberType
     ): self {
         $obj = clone $this;
-        $obj->phoneNumberType = $phoneNumberType instanceof PhoneNumberType ? $phoneNumberType->value : $phoneNumberType;
+        $obj['phoneNumberType'] = $phoneNumberType;
 
         return $obj;
     }

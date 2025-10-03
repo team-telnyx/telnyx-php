@@ -8,7 +8,6 @@ use Telnyx\Campaign\Usecase\UsecaseGetCostParams;
 use Telnyx\Campaign\Usecase\UsecaseGetCostResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Campaign\UsecaseContract;
 
@@ -26,8 +25,6 @@ final class UsecaseService implements UsecaseContract
      *
      * @param string $usecase
      *
-     * @return UsecaseGetCostResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function getCost(
@@ -43,8 +40,6 @@ final class UsecaseService implements UsecaseContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return UsecaseGetCostResponse<HasRawResponse>
      *
      * @throws APIException
      */

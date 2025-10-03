@@ -82,7 +82,7 @@ final class SttDetailReportResponse implements BaseModel
         null !== $endDate && $obj->endDate = $endDate;
         null !== $recordType && $obj->recordType = $recordType;
         null !== $startDate && $obj->startDate = $startDate;
-        null !== $status && $obj->status = $status instanceof Status ? $status->value : $status;
+        null !== $status && $obj['status'] = $status;
 
         return $obj;
     }
@@ -147,7 +147,7 @@ final class SttDetailReportResponse implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

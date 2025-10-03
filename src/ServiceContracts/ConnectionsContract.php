@@ -11,7 +11,6 @@ use Telnyx\Connections\ConnectionListParams\Page;
 use Telnyx\Connections\ConnectionListParams\Sort;
 use Telnyx\Connections\ConnectionListResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 
 use const Telnyx\Core\OMIT as omit;
@@ -21,25 +20,10 @@ interface ConnectionsContract
     /**
      * @api
      *
-     * @return ConnectionGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): ConnectionGetResponse;
-
-    /**
-     * @api
-     *
-     * @return ConnectionGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): ConnectionGetResponse;
 
@@ -61,8 +45,6 @@ interface ConnectionsContract
      *   </li>
      * </ul> <br/> If not given, results are sorted by <code>created_at</code> in descending order.
      *
-     * @return ConnectionListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -77,8 +59,6 @@ interface ConnectionsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return ConnectionListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function listRaw(
@@ -90,8 +70,6 @@ interface ConnectionsContract
      * @api
      *
      * @param Telnyx\Connections\ConnectionListActiveCallsParams\Page $page Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number]
-     *
-     * @return ConnectionListActiveCallsResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -105,8 +83,6 @@ interface ConnectionsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ConnectionListActiveCallsResponse<HasRawResponse>
      *
      * @throws APIException
      */

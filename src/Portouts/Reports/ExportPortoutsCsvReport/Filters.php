@@ -97,7 +97,7 @@ final class Filters implements BaseModel
         null !== $customerReferenceIn && $obj->customerReferenceIn = $customerReferenceIn;
         null !== $endUserName && $obj->endUserName = $endUserName;
         null !== $phoneNumbersOverlaps && $obj->phoneNumbersOverlaps = $phoneNumbersOverlaps;
-        null !== $statusIn && $obj->statusIn = array_map(fn ($v) => $v instanceof StatusIn ? $v->value : $v, $statusIn);
+        null !== $statusIn && $obj['statusIn'] = $statusIn;
 
         return $obj;
     }
@@ -169,7 +169,7 @@ final class Filters implements BaseModel
     public function withStatusIn(array $statusIn): self
     {
         $obj = clone $this;
-        $obj->statusIn = array_map(fn ($v) => $v instanceof StatusIn ? $v->value : $v, $statusIn);
+        $obj['statusIn'] = $statusIn;
 
         return $obj;
     }

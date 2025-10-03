@@ -163,10 +163,10 @@ final class CallSiprecJsonParams implements BaseModel
         null !== $name && $obj->name = $name;
         null !== $secure && $obj->secure = $secure;
         null !== $sessionTimeoutSecs && $obj->sessionTimeoutSecs = $sessionTimeoutSecs;
-        null !== $sipTransport && $obj->sipTransport = $sipTransport instanceof SipTransport ? $sipTransport->value : $sipTransport;
+        null !== $sipTransport && $obj['sipTransport'] = $sipTransport;
         null !== $statusCallback && $obj->statusCallback = $statusCallback;
-        null !== $statusCallbackMethod && $obj->statusCallbackMethod = $statusCallbackMethod instanceof StatusCallbackMethod ? $statusCallbackMethod->value : $statusCallbackMethod;
-        null !== $track && $obj->track = $track instanceof Track ? $track->value : $track;
+        null !== $statusCallbackMethod && $obj['statusCallbackMethod'] = $statusCallbackMethod;
+        null !== $track && $obj['track'] = $track;
 
         return $obj;
     }
@@ -243,7 +243,7 @@ final class CallSiprecJsonParams implements BaseModel
     public function withSipTransport(SipTransport|string $sipTransport): self
     {
         $obj = clone $this;
-        $obj->sipTransport = $sipTransport instanceof SipTransport ? $sipTransport->value : $sipTransport;
+        $obj['sipTransport'] = $sipTransport;
 
         return $obj;
     }
@@ -268,7 +268,7 @@ final class CallSiprecJsonParams implements BaseModel
         StatusCallbackMethod|string $statusCallbackMethod
     ): self {
         $obj = clone $this;
-        $obj->statusCallbackMethod = $statusCallbackMethod instanceof StatusCallbackMethod ? $statusCallbackMethod->value : $statusCallbackMethod;
+        $obj['statusCallbackMethod'] = $statusCallbackMethod;
 
         return $obj;
     }
@@ -281,7 +281,7 @@ final class CallSiprecJsonParams implements BaseModel
     public function withTrack(Track|string $track): self
     {
         $obj = clone $this;
-        $obj->track = $track instanceof Track ? $track->value : $track;
+        $obj['track'] = $track;
 
         return $obj;
     }

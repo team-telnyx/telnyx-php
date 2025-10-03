@@ -88,9 +88,9 @@ final class OutboundCallRecording implements BaseModel
         $obj = new self;
 
         null !== $callRecordingCallerPhoneNumbers && $obj->callRecordingCallerPhoneNumbers = $callRecordingCallerPhoneNumbers;
-        null !== $callRecordingChannels && $obj->callRecordingChannels = $callRecordingChannels instanceof CallRecordingChannels ? $callRecordingChannels->value : $callRecordingChannels;
-        null !== $callRecordingFormat && $obj->callRecordingFormat = $callRecordingFormat instanceof CallRecordingFormat ? $callRecordingFormat->value : $callRecordingFormat;
-        null !== $callRecordingType && $obj->callRecordingType = $callRecordingType instanceof CallRecordingType ? $callRecordingType->value : $callRecordingType;
+        null !== $callRecordingChannels && $obj['callRecordingChannels'] = $callRecordingChannels;
+        null !== $callRecordingFormat && $obj['callRecordingFormat'] = $callRecordingFormat;
+        null !== $callRecordingType && $obj['callRecordingType'] = $callRecordingType;
 
         return $obj;
     }
@@ -118,7 +118,7 @@ final class OutboundCallRecording implements BaseModel
         CallRecordingChannels|string $callRecordingChannels
     ): self {
         $obj = clone $this;
-        $obj->callRecordingChannels = $callRecordingChannels instanceof CallRecordingChannels ? $callRecordingChannels->value : $callRecordingChannels;
+        $obj['callRecordingChannels'] = $callRecordingChannels;
 
         return $obj;
     }
@@ -132,7 +132,7 @@ final class OutboundCallRecording implements BaseModel
         CallRecordingFormat|string $callRecordingFormat
     ): self {
         $obj = clone $this;
-        $obj->callRecordingFormat = $callRecordingFormat instanceof CallRecordingFormat ? $callRecordingFormat->value : $callRecordingFormat;
+        $obj['callRecordingFormat'] = $callRecordingFormat;
 
         return $obj;
     }
@@ -146,7 +146,7 @@ final class OutboundCallRecording implements BaseModel
         CallRecordingType|string $callRecordingType
     ): self {
         $obj = clone $this;
-        $obj->callRecordingType = $callRecordingType instanceof CallRecordingType ? $callRecordingType->value : $callRecordingType;
+        $obj['callRecordingType'] = $callRecordingType;
 
         return $obj;
     }

@@ -150,14 +150,14 @@ final class Data implements BaseModel
         null !== $cli && $obj->cli = $cli;
         null !== $cost && $obj->cost = $cost;
         null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $currency && $obj->currency = $currency instanceof Currency ? $currency->value : $currency;
+        null !== $currency && $obj['currency'] = $currency;
         null !== $direction && $obj->direction = $direction;
-        null !== $messageType && $obj->messageType = $messageType instanceof MessageType ? $messageType->value : $messageType;
+        null !== $messageType && $obj['messageType'] = $messageType;
         null !== $parts && $obj->parts = $parts;
         null !== $profileName && $obj->profileName = $profileName;
         null !== $rate && $obj->rate = $rate;
         null !== $recordType && $obj->recordType = $recordType;
-        null !== $status && $obj->status = $status instanceof Status ? $status->value : $status;
+        null !== $status && $obj['status'] = $status;
 
         return $obj;
     }
@@ -225,7 +225,7 @@ final class Data implements BaseModel
     public function withCurrency(Currency|string $currency): self
     {
         $obj = clone $this;
-        $obj->currency = $currency instanceof Currency ? $currency->value : $currency;
+        $obj['currency'] = $currency;
 
         return $obj;
     }
@@ -249,7 +249,7 @@ final class Data implements BaseModel
     public function withMessageType(MessageType|string $messageType): self
     {
         $obj = clone $this;
-        $obj->messageType = $messageType instanceof MessageType ? $messageType->value : $messageType;
+        $obj['messageType'] = $messageType;
 
         return $obj;
     }
@@ -303,7 +303,7 @@ final class Data implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

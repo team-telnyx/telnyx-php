@@ -6,7 +6,6 @@ namespace Telnyx\Services\Portouts;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Portouts\SupportingDocuments\SupportingDocumentCreateParams;
 use Telnyx\Portouts\SupportingDocuments\SupportingDocumentCreateParams\Document;
 use Telnyx\Portouts\SupportingDocuments\SupportingDocumentListResponse;
@@ -30,8 +29,6 @@ final class SupportingDocumentsService implements SupportingDocumentsContract
      *
      * @param list<Document> $documents List of supporting documents parameters
      *
-     * @return SupportingDocumentNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -48,8 +45,6 @@ final class SupportingDocumentsService implements SupportingDocumentsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return SupportingDocumentNewResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -78,29 +73,10 @@ final class SupportingDocumentsService implements SupportingDocumentsContract
      *
      * List every supporting documents for a portout request.
      *
-     * @return SupportingDocumentListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): SupportingDocumentListResponse {
-        $params = [];
-
-        return $this->listRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return SupportingDocumentListResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): SupportingDocumentListResponse {
         // @phpstan-ignore-next-line;

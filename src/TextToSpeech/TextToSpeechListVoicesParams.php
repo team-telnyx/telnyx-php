@@ -69,7 +69,7 @@ final class TextToSpeechListVoicesParams implements BaseModel
         $obj = new self;
 
         null !== $elevenlabsAPIKeyRef && $obj->elevenlabsAPIKeyRef = $elevenlabsAPIKeyRef;
-        null !== $provider && $obj->provider = $provider instanceof Provider ? $provider->value : $provider;
+        null !== $provider && $obj['provider'] = $provider;
 
         return $obj;
     }
@@ -93,7 +93,7 @@ final class TextToSpeechListVoicesParams implements BaseModel
     public function withProvider(Provider|string $provider): self
     {
         $obj = clone $this;
-        $obj->provider = $provider instanceof Provider ? $provider->value : $provider;
+        $obj['provider'] = $provider;
 
         return $obj;
     }

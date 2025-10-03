@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\FaxApplications\FaxApplicationCreateParams;
 use Telnyx\FaxApplications\FaxApplicationCreateParams\Inbound;
@@ -48,8 +47,6 @@ final class FaxApplicationsService implements FaxApplicationsContract
      * @param string|null $webhookEventFailoverURL The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
      *
-     * @return FaxApplicationNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -84,8 +81,6 @@ final class FaxApplicationsService implements FaxApplicationsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return FaxApplicationNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function createRaw(
@@ -112,29 +107,10 @@ final class FaxApplicationsService implements FaxApplicationsContract
      *
      * Return the details of an existing Fax Application inside the 'data' attribute of the response.
      *
-     * @return FaxApplicationGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): FaxApplicationGetResponse {
-        $params = [];
-
-        return $this->retrieveRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return FaxApplicationGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): FaxApplicationGetResponse {
         // @phpstan-ignore-next-line;
@@ -161,8 +137,6 @@ final class FaxApplicationsService implements FaxApplicationsContract
      * @param list<string> $tags tags associated with the Fax Application
      * @param string|null $webhookEventFailoverURL The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
-     *
-     * @return FaxApplicationUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -200,8 +174,6 @@ final class FaxApplicationsService implements FaxApplicationsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return FaxApplicationUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -245,8 +217,6 @@ final class FaxApplicationsService implements FaxApplicationsContract
      *   </li>
      * </ul> <br/> If not given, results are sorted by <code>created_at</code> in descending order.
      *
-     * @return FaxApplicationListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -264,8 +234,6 @@ final class FaxApplicationsService implements FaxApplicationsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return FaxApplicationListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -293,29 +261,10 @@ final class FaxApplicationsService implements FaxApplicationsContract
      *
      * Permanently deletes a Fax Application. Deletion may be prevented if the application is in use by phone numbers.
      *
-     * @return FaxApplicationDeleteResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): FaxApplicationDeleteResponse {
-        $params = [];
-
-        return $this->deleteRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return FaxApplicationDeleteResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): FaxApplicationDeleteResponse {
         // @phpstan-ignore-next-line;

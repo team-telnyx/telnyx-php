@@ -159,7 +159,7 @@ final class CallRetrieveCallsParams implements BaseModel
         null !== $startTime && $obj->startTime = $startTime;
         null !== $startTimeGt && $obj->startTimeGt = $startTimeGt;
         null !== $startTimeLt && $obj->startTimeLt = $startTimeLt;
-        null !== $status && $obj->status = $status instanceof Status ? $status->value : $status;
+        null !== $status && $obj['status'] = $status;
         null !== $to && $obj->to = $to;
 
         return $obj;
@@ -283,7 +283,7 @@ final class CallRetrieveCallsParams implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

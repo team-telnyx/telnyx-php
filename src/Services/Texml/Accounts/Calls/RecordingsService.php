@@ -6,7 +6,6 @@ namespace Telnyx\Services\Texml\Accounts\Calls;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\Accounts\Calls\RecordingsContract;
 use Telnyx\Texml\Accounts\Calls\Recordings\RecordingRecordingSidJsonParams;
@@ -31,8 +30,6 @@ final class RecordingsService implements RecordingsContract
      * @param string $callSid
      * @param Status|value-of<Status> $status
      *
-     * @return RecordingRecordingSidJsonResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function recordingSidJson(
@@ -53,8 +50,6 @@ final class RecordingsService implements RecordingsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return RecordingRecordingSidJsonResponse<HasRawResponse>
      *
      * @throws APIException
      */

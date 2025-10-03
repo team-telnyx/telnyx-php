@@ -21,7 +21,6 @@ use Telnyx\BundlePricing\UserBundles\UserBundleNewResponse;
 use Telnyx\BundlePricing\UserBundles\UserBundleRetrieveParams;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\BundlePricing\UserBundlesContract;
 
@@ -42,8 +41,6 @@ final class UserBundlesService implements UserBundlesContract
      * @param string $idempotencyKey Idempotency key for the request. Can be any UUID, but should always be unique for each request.
      * @param list<Item> $items
      * @param string $authorizationBearer Authenticates the request with your Telnyx API V2 KEY
-     *
-     * @return UserBundleNewResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -66,8 +63,6 @@ final class UserBundlesService implements UserBundlesContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return UserBundleNewResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -99,8 +94,6 @@ final class UserBundlesService implements UserBundlesContract
      *
      * @param string $authorizationBearer Authenticates the request with your Telnyx API V2 KEY
      *
-     * @return UserBundleGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
@@ -117,8 +110,6 @@ final class UserBundlesService implements UserBundlesContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return UserBundleGetResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -151,8 +142,6 @@ final class UserBundlesService implements UserBundlesContract
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param string $authorizationBearer Authenticates the request with your Telnyx API V2 KEY
      *
-     * @return UserBundleListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -174,8 +163,6 @@ final class UserBundlesService implements UserBundlesContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return UserBundleListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -210,8 +197,6 @@ final class UserBundlesService implements UserBundlesContract
      *
      * @param string $authorizationBearer Authenticates the request with your Telnyx API V2 KEY
      *
-     * @return UserBundleDeactivateResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function deactivate(
@@ -228,8 +213,6 @@ final class UserBundlesService implements UserBundlesContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return UserBundleDeactivateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -260,8 +243,6 @@ final class UserBundlesService implements UserBundlesContract
      *
      * @param string $authorizationBearer Authenticates the request with your Telnyx API V2 KEY
      *
-     * @return UserBundleListResourcesResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function listResources(
@@ -278,8 +259,6 @@ final class UserBundlesService implements UserBundlesContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return UserBundleListResourcesResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -311,8 +290,6 @@ final class UserBundlesService implements UserBundlesContract
      * @param Telnyx\BundlePricing\UserBundles\UserBundleListUnusedParams\Filter $filter Consolidated filter parameter (deepObject style). Supports filtering by country_iso and resource. Examples: filter[country_iso]=US or filter[resource]=+15617819942
      * @param string $authorizationBearer Authenticates the request with your Telnyx API V2 KEY
      *
-     * @return UserBundleListUnusedResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function listUnused(
@@ -332,8 +309,6 @@ final class UserBundlesService implements UserBundlesContract
      *
      * @param array<string, mixed> $params
      *
-     * @return UserBundleListUnusedResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function listUnusedRaw(
@@ -344,7 +319,7 @@ final class UserBundlesService implements UserBundlesContract
             $params,
             $requestOptions
         );
-        $query_params = array_flip(['filter']);
+        $query_params = ['filter'];
 
         /** @var array<string, string> */
         $header_params = array_diff_key($parsed, $query_params);

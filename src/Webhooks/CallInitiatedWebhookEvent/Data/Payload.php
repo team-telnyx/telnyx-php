@@ -212,14 +212,14 @@ final class Payload implements BaseModel
         null !== $connectionCodecs && $obj->connectionCodecs = $connectionCodecs;
         null !== $connectionID && $obj->connectionID = $connectionID;
         null !== $customHeaders && $obj->customHeaders = $customHeaders;
-        null !== $direction && $obj->direction = $direction instanceof Direction ? $direction->value : $direction;
+        null !== $direction && $obj['direction'] = $direction;
         null !== $from && $obj->from = $from;
         null !== $offeredCodecs && $obj->offeredCodecs = $offeredCodecs;
         null !== $shakenStirAttestation && $obj->shakenStirAttestation = $shakenStirAttestation;
         null !== $shakenStirValidated && $obj->shakenStirValidated = $shakenStirValidated;
         null !== $sipHeaders && $obj->sipHeaders = $sipHeaders;
         null !== $startTime && $obj->startTime = $startTime;
-        null !== $state && $obj->state = $state instanceof State ? $state->value : $state;
+        null !== $state && $obj['state'] = $state;
         null !== $tags && $obj->tags = $tags;
         null !== $to && $obj->to = $to;
 
@@ -335,7 +335,7 @@ final class Payload implements BaseModel
     public function withDirection(Direction|string $direction): self
     {
         $obj = clone $this;
-        $obj->direction = $direction instanceof Direction ? $direction->value : $direction;
+        $obj['direction'] = $direction;
 
         return $obj;
     }
@@ -417,7 +417,7 @@ final class Payload implements BaseModel
     public function withState(State|string $state): self
     {
         $obj = clone $this;
-        $obj->state = $state instanceof State ? $state->value : $state;
+        $obj['state'] = $state;
 
         return $obj;
     }

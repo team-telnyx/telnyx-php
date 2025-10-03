@@ -84,9 +84,9 @@ final class OpenURLAction implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->application = $application instanceof Application ? $application->value : $application;
+        $obj['application'] = $application;
         $obj->url = $url;
-        $obj->webviewViewMode = $webviewViewMode instanceof WebviewViewMode ? $webviewViewMode->value : $webviewViewMode;
+        $obj['webviewViewMode'] = $webviewViewMode;
 
         null !== $description && $obj->description = $description;
 
@@ -101,7 +101,7 @@ final class OpenURLAction implements BaseModel
     public function withApplication(Application|string $application): self
     {
         $obj = clone $this;
-        $obj->application = $application instanceof Application ? $application->value : $application;
+        $obj['application'] = $application;
 
         return $obj;
     }
@@ -121,7 +121,7 @@ final class OpenURLAction implements BaseModel
         WebviewViewMode|string $webviewViewMode
     ): self {
         $obj = clone $this;
-        $obj->webviewViewMode = $webviewViewMode instanceof WebviewViewMode ? $webviewViewMode->value : $webviewViewMode;
+        $obj['webviewViewMode'] = $webviewViewMode;
 
         return $obj;
     }

@@ -103,7 +103,7 @@ final class MigrationSourceCreateParams implements BaseModel
         $obj = new self;
 
         $obj->bucketName = $bucketName;
-        $obj->provider = $provider instanceof Provider ? $provider->value : $provider;
+        $obj['provider'] = $provider;
         $obj->providerAuth = $providerAuth;
 
         null !== $sourceRegion && $obj->sourceRegion = $sourceRegion;
@@ -130,7 +130,7 @@ final class MigrationSourceCreateParams implements BaseModel
     public function withProvider(Provider|string $provider): self
     {
         $obj = clone $this;
-        $obj->provider = $provider instanceof Provider ? $provider->value : $provider;
+        $obj['provider'] = $provider;
 
         return $obj;
     }

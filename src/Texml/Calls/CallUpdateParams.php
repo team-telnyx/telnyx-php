@@ -129,12 +129,12 @@ final class CallUpdateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $fallbackMethod && $obj->fallbackMethod = $fallbackMethod instanceof FallbackMethod ? $fallbackMethod->value : $fallbackMethod;
+        null !== $fallbackMethod && $obj['fallbackMethod'] = $fallbackMethod;
         null !== $fallbackURL && $obj->fallbackURL = $fallbackURL;
-        null !== $method && $obj->method = $method instanceof Method ? $method->value : $method;
+        null !== $method && $obj['method'] = $method;
         null !== $status && $obj->status = $status;
         null !== $statusCallback && $obj->statusCallback = $statusCallback;
-        null !== $statusCallbackMethod && $obj->statusCallbackMethod = $statusCallbackMethod instanceof StatusCallbackMethod ? $statusCallbackMethod->value : $statusCallbackMethod;
+        null !== $statusCallbackMethod && $obj['statusCallbackMethod'] = $statusCallbackMethod;
         null !== $texml && $obj->texml = $texml;
         null !== $url && $obj->url = $url;
 
@@ -150,7 +150,7 @@ final class CallUpdateParams implements BaseModel
         FallbackMethod|string $fallbackMethod
     ): self {
         $obj = clone $this;
-        $obj->fallbackMethod = $fallbackMethod instanceof FallbackMethod ? $fallbackMethod->value : $fallbackMethod;
+        $obj['fallbackMethod'] = $fallbackMethod;
 
         return $obj;
     }
@@ -174,7 +174,7 @@ final class CallUpdateParams implements BaseModel
     public function withMethod(Method|string $method): self
     {
         $obj = clone $this;
-        $obj->method = $method instanceof Method ? $method->value : $method;
+        $obj['method'] = $method;
 
         return $obj;
     }
@@ -210,7 +210,7 @@ final class CallUpdateParams implements BaseModel
         StatusCallbackMethod|string $statusCallbackMethod
     ): self {
         $obj = clone $this;
-        $obj->statusCallbackMethod = $statusCallbackMethod instanceof StatusCallbackMethod ? $statusCallbackMethod->value : $statusCallbackMethod;
+        $obj['statusCallbackMethod'] = $statusCallbackMethod;
 
         return $obj;
     }

@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\NetworkCoverage\NetworkCoverageListParams;
 use Telnyx\NetworkCoverage\NetworkCoverageListParams\Filter;
 use Telnyx\NetworkCoverage\NetworkCoverageListParams\Filters;
@@ -33,8 +32,6 @@ final class NetworkCoverageService implements NetworkCoverageContract
      * @param Filters $filters Consolidated filters parameter (deepObject style). Originally: filters[available_services][contains]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
-     * @return NetworkCoverageListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -52,8 +49,6 @@ final class NetworkCoverageService implements NetworkCoverageContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return NetworkCoverageListResponse<HasRawResponse>
      *
      * @throws APIException
      */

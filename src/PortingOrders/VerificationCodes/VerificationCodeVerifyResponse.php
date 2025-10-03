@@ -6,20 +6,20 @@ namespace Telnyx\PortingOrders\VerificationCodes;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeVerifyResponse\Data;
 
 /**
  * @phpstan-type verification_code_verify_response = array{data?: list<Data>}
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class VerificationCodeVerifyResponse implements BaseModel
+final class VerificationCodeVerifyResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<verification_code_verify_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /** @var list<Data>|null $data */
     #[Api(list: Data::class, optional: true)]

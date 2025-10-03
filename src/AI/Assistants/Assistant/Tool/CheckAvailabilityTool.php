@@ -60,7 +60,7 @@ final class CheckAvailabilityTool implements BaseModel
         $obj = new self;
 
         $obj->checkAvailability = $checkAvailability;
-        $obj->type = $type instanceof Type ? $type->value : $type;
+        $obj['type'] = $type;
 
         return $obj;
     }
@@ -80,7 +80,7 @@ final class CheckAvailabilityTool implements BaseModel
     public function withType(Type|string $type): self
     {
         $obj = clone $this;
-        $obj->type = $type instanceof Type ? $type->value : $type;
+        $obj['type'] = $type;
 
         return $obj;
     }

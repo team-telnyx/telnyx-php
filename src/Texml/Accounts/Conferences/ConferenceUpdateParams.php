@@ -98,7 +98,7 @@ final class ConferenceUpdateParams implements BaseModel
 
         $obj->accountSid = $accountSid;
 
-        null !== $announceMethod && $obj->announceMethod = $announceMethod instanceof AnnounceMethod ? $announceMethod->value : $announceMethod;
+        null !== $announceMethod && $obj['announceMethod'] = $announceMethod;
         null !== $announceURL && $obj->announceURL = $announceURL;
         null !== $status && $obj->status = $status;
 
@@ -122,7 +122,7 @@ final class ConferenceUpdateParams implements BaseModel
         AnnounceMethod|string $announceMethod
     ): self {
         $obj = clone $this;
-        $obj->announceMethod = $announceMethod instanceof AnnounceMethod ? $announceMethod->value : $announceMethod;
+        $obj['announceMethod'] = $announceMethod;
 
         return $obj;
     }

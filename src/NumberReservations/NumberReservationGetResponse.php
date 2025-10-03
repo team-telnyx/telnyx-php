@@ -6,19 +6,19 @@ namespace Telnyx\NumberReservations;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type number_reservation_get_response = array{data?: NumberReservation}
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class NumberReservationGetResponse implements BaseModel
+final class NumberReservationGetResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<number_reservation_get_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     #[Api(optional: true)]
     public ?NumberReservation $data;

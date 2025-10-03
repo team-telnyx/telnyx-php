@@ -72,9 +72,9 @@ final class TranscriptionEngineBConfig implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $language && $obj->language = $language instanceof Language ? $language->value : $language;
-        null !== $transcriptionEngine && $obj->transcriptionEngine = $transcriptionEngine instanceof TranscriptionEngine ? $transcriptionEngine->value : $transcriptionEngine;
-        null !== $transcriptionModel && $obj->transcriptionModel = $transcriptionModel instanceof TranscriptionModel ? $transcriptionModel->value : $transcriptionModel;
+        null !== $language && $obj['language'] = $language;
+        null !== $transcriptionEngine && $obj['transcriptionEngine'] = $transcriptionEngine;
+        null !== $transcriptionModel && $obj['transcriptionModel'] = $transcriptionModel;
 
         return $obj;
     }
@@ -87,7 +87,7 @@ final class TranscriptionEngineBConfig implements BaseModel
     public function withLanguage(Language|string $language): self
     {
         $obj = clone $this;
-        $obj->language = $language instanceof Language ? $language->value : $language;
+        $obj['language'] = $language;
 
         return $obj;
     }
@@ -101,7 +101,7 @@ final class TranscriptionEngineBConfig implements BaseModel
         TranscriptionEngine|string $transcriptionEngine
     ): self {
         $obj = clone $this;
-        $obj->transcriptionEngine = $transcriptionEngine instanceof TranscriptionEngine ? $transcriptionEngine->value : $transcriptionEngine;
+        $obj['transcriptionEngine'] = $transcriptionEngine;
 
         return $obj;
     }
@@ -115,7 +115,7 @@ final class TranscriptionEngineBConfig implements BaseModel
         TranscriptionModel|string $transcriptionModel
     ): self {
         $obj = clone $this;
-        $obj->transcriptionModel = $transcriptionModel instanceof TranscriptionModel ? $transcriptionModel->value : $transcriptionModel;
+        $obj['transcriptionModel'] = $transcriptionModel;
 
         return $obj;
     }

@@ -6,7 +6,6 @@ namespace Telnyx\Services\Legacy\Reporting\UsageReports;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Legacy\Reporting\UsageReports\Voice\VoiceCreateParams;
 use Telnyx\Legacy\Reporting\UsageReports\Voice\VoiceDeleteResponse;
 use Telnyx\Legacy\Reporting\UsageReports\Voice\VoiceGetResponse;
@@ -38,8 +37,6 @@ final class VoiceService implements VoiceContract
      * @param int $productBreakdown Product breakdown type: No breakdown = 0, DID vs Toll-free = 1, Country = 2, DID vs Toll-free per Country = 3
      * @param bool $selectAllManagedAccounts Whether to select all managed accounts
      *
-     * @return VoiceNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -70,8 +67,6 @@ final class VoiceService implements VoiceContract
      *
      * @param array<string, mixed> $params
      *
-     * @return VoiceNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function createRaw(
@@ -99,29 +94,10 @@ final class VoiceService implements VoiceContract
      *
      * Fetch single cdr usage report by id.
      *
-     * @return VoiceGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): VoiceGetResponse {
-        $params = [];
-
-        return $this->retrieveRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return VoiceGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): VoiceGetResponse {
         // @phpstan-ignore-next-line;
@@ -141,8 +117,6 @@ final class VoiceService implements VoiceContract
      * @param int $page Page number
      * @param int $perPage Size of the page
      *
-     * @return VoiceListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -159,8 +133,6 @@ final class VoiceService implements VoiceContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return VoiceListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -188,29 +160,10 @@ final class VoiceService implements VoiceContract
      *
      * Deletes a specific V2 legacy usage CDR report request by ID
      *
-     * @return VoiceDeleteResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): VoiceDeleteResponse {
-        $params = [];
-
-        return $this->deleteRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return VoiceDeleteResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): VoiceDeleteResponse {
         // @phpstan-ignore-next-line;

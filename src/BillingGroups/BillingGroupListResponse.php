@@ -7,21 +7,21 @@ namespace Telnyx\BillingGroups;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type billing_group_list_response = array{
  *   data?: list<BillingGroup>, meta?: PaginationMeta
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class BillingGroupListResponse implements BaseModel
+final class BillingGroupListResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<billing_group_list_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /** @var list<BillingGroup>|null $data */
     #[Api(list: BillingGroup::class, optional: true)]

@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\WirelessBlocklistValuesContract;
 use Telnyx\WirelessBlocklistValues\WirelessBlocklistValueListParams;
@@ -27,8 +26,6 @@ final class WirelessBlocklistValuesService implements WirelessBlocklistValuesCon
      *
      * @param Type|value-of<Type> $type The Wireless Blocklist type for which to list possible values (e.g., `country`, `mcc`, `plmn`).
      *
-     * @return WirelessBlocklistValueListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -44,8 +41,6 @@ final class WirelessBlocklistValuesService implements WirelessBlocklistValuesCon
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return WirelessBlocklistValueListResponse<HasRawResponse>
      *
      * @throws APIException
      */

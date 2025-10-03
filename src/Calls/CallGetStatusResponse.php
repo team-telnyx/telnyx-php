@@ -7,19 +7,19 @@ namespace Telnyx\Calls;
 use Telnyx\Calls\CallGetStatusResponse\Data;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type call_get_status_response = array{data?: Data}
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class CallGetStatusResponse implements BaseModel
+final class CallGetStatusResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<call_get_status_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     #[Api(optional: true)]
     public ?Data $data;

@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileAssignParams;
 use Telnyx\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileAssignResponse;
 use Telnyx\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileAssignResponse\AssignProfileToCampaignResponse;
@@ -88,10 +87,6 @@ final class PhoneNumberAssignmentByProfileService implements PhoneNumberAssignme
      * @param int $page
      * @param int $recordsPerPage
      *
-     * @return PhoneNumberAssignmentByProfileGetPhoneNumberStatusResponse<
-     *   HasRawResponse
-     * >
-     *
      * @throws APIException
      */
     public function retrievePhoneNumberStatus(
@@ -113,10 +108,6 @@ final class PhoneNumberAssignmentByProfileService implements PhoneNumberAssignme
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return PhoneNumberAssignmentByProfileGetPhoneNumberStatusResponse<
-     *   HasRawResponse
-     * >
      *
      * @throws APIException
      */
@@ -147,29 +138,10 @@ final class PhoneNumberAssignmentByProfileService implements PhoneNumberAssignme
      *
      * Check the status of the task associated with assigning all phone numbers on a messaging profile to a campaign by `taskId`.
      *
-     * @return PhoneNumberAssignmentByProfileGetStatusResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieveStatus(
         string $taskID,
-        ?RequestOptions $requestOptions = null
-    ): PhoneNumberAssignmentByProfileGetStatusResponse {
-        $params = [];
-
-        return $this->retrieveStatusRaw($taskID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return PhoneNumberAssignmentByProfileGetStatusResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveStatusRaw(
-        string $taskID,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): PhoneNumberAssignmentByProfileGetStatusResponse {
         // @phpstan-ignore-next-line;

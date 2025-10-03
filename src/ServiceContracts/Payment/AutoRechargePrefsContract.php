@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\Payment;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Payment\AutoRechargePrefs\AutoRechargePrefListResponse;
 use Telnyx\Payment\AutoRechargePrefs\AutoRechargePrefUpdateParams\Preference;
 use Telnyx\Payment\AutoRechargePrefs\AutoRechargePrefUpdateResponse;
@@ -24,8 +23,6 @@ interface AutoRechargePrefsContract
      * @param string $rechargeAmount the amount to recharge the account, the actual recharge amount will be the amount necessary to reach the threshold amount plus the recharge amount
      * @param string $thresholdAmount the threshold amount at which the account will be recharged
      *
-     * @return AutoRechargePrefUpdateResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function update(
@@ -42,8 +39,6 @@ interface AutoRechargePrefsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return AutoRechargePrefUpdateResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function updateRaw(
@@ -54,23 +49,9 @@ interface AutoRechargePrefsContract
     /**
      * @api
      *
-     * @return AutoRechargePrefListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
-        ?RequestOptions $requestOptions = null
-    ): AutoRechargePrefListResponse;
-
-    /**
-     * @api
-     *
-     * @return AutoRechargePrefListResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): AutoRechargePrefListResponse;
 }

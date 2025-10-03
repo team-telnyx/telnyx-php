@@ -204,15 +204,15 @@ final class Fax implements BaseModel
         null !== $clientState && $obj->clientState = $clientState;
         null !== $connectionID && $obj->connectionID = $connectionID;
         null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $direction && $obj->direction = $direction instanceof Direction ? $direction->value : $direction;
+        null !== $direction && $obj['direction'] = $direction;
         null !== $from && $obj->from = $from;
         null !== $fromDisplayName && $obj->fromDisplayName = $fromDisplayName;
         null !== $mediaName && $obj->mediaName = $mediaName;
         null !== $mediaURL && $obj->mediaURL = $mediaURL;
         null !== $previewURL && $obj->previewURL = $previewURL;
-        null !== $quality && $obj->quality = $quality instanceof Quality ? $quality->value : $quality;
-        null !== $recordType && $obj->recordType = $recordType instanceof RecordType ? $recordType->value : $recordType;
-        null !== $status && $obj->status = $status instanceof Status ? $status->value : $status;
+        null !== $quality && $obj['quality'] = $quality;
+        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $status && $obj['status'] = $status;
         null !== $storeMedia && $obj->storeMedia = $storeMedia;
         null !== $storedMediaURL && $obj->storedMediaURL = $storedMediaURL;
         null !== $to && $obj->to = $to;
@@ -275,7 +275,7 @@ final class Fax implements BaseModel
     public function withDirection(Direction|string $direction): self
     {
         $obj = clone $this;
-        $obj->direction = $direction instanceof Direction ? $direction->value : $direction;
+        $obj['direction'] = $direction;
 
         return $obj;
     }
@@ -343,7 +343,7 @@ final class Fax implements BaseModel
     public function withQuality(Quality|string $quality): self
     {
         $obj = clone $this;
-        $obj->quality = $quality instanceof Quality ? $quality->value : $quality;
+        $obj['quality'] = $quality;
 
         return $obj;
     }
@@ -356,7 +356,7 @@ final class Fax implements BaseModel
     public function withRecordType(RecordType|string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType instanceof RecordType ? $recordType->value : $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -369,7 +369,7 @@ final class Fax implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

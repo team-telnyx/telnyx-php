@@ -48,7 +48,7 @@ final class Filters implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $availableServices && $obj->availableServices = $availableServices instanceof AvailableService ? $availableServices->value : $availableServices;
+        null !== $availableServices && $obj['availableServices'] = $availableServices;
 
         return $obj;
     }
@@ -62,7 +62,7 @@ final class Filters implements BaseModel
         AvailableService|Contains|string $availableServices
     ): self {
         $obj = clone $this;
-        $obj->availableServices = $availableServices instanceof AvailableService ? $availableServices->value : $availableServices;
+        $obj['availableServices'] = $availableServices;
 
         return $obj;
     }

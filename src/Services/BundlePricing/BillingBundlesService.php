@@ -12,7 +12,6 @@ use Telnyx\BundlePricing\BillingBundles\BillingBundleListResponse;
 use Telnyx\BundlePricing\BillingBundles\BillingBundleRetrieveParams;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\BundlePricing\BillingBundlesContract;
 
@@ -32,8 +31,6 @@ final class BillingBundlesService implements BillingBundlesContract
      *
      * @param string $authorizationBearer Authenticates the request with your Telnyx API V2 KEY
      *
-     * @return BillingBundleGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
@@ -50,8 +47,6 @@ final class BillingBundlesService implements BillingBundlesContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return BillingBundleGetResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -84,8 +79,6 @@ final class BillingBundlesService implements BillingBundlesContract
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param string $authorizationBearer Authenticates the request with your Telnyx API V2 KEY
      *
-     * @return BillingBundleListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -107,8 +100,6 @@ final class BillingBundlesService implements BillingBundlesContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return BillingBundleListResponse<HasRawResponse>
      *
      * @throws APIException
      */

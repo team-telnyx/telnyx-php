@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Messsages\MesssageRcsParams;
 use Telnyx\Messsages\MesssageRcsParams\MmsFallback;
 use Telnyx\Messsages\MesssageRcsParams\SMSFallback;
@@ -39,8 +38,6 @@ final class MesssagesService implements MesssagesContract
      * @param Type|value-of<Type> $type Message type - must be set to "RCS"
      * @param string $webhookURL the URL where webhooks related to this message will be sent
      *
-     * @return MesssageRcsResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function rcs(
@@ -72,8 +69,6 @@ final class MesssagesService implements MesssagesContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return MesssageRcsResponse<HasRawResponse>
      *
      * @throws APIException
      */

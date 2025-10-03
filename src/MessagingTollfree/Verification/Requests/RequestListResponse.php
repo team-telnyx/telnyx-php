@@ -6,7 +6,9 @@ namespace Telnyx\MessagingTollfree\Verification\Requests;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * A paginated response.
@@ -14,15 +16,13 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type request_list_response = array{
  *   records?: list<VerificationRequestStatus>, totalRecords?: int
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class RequestListResponse implements BaseModel
+final class RequestListResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<request_list_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /**
      * The records yielded by this request.

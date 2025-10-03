@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\VerifyProfilesContract;
 use Telnyx\VerifyProfiles\VerifyProfileCreateParams;
@@ -47,8 +46,6 @@ final class VerifyProfilesService implements VerifyProfilesContract
      * @param string $webhookFailoverURL
      * @param string $webhookURL
      *
-     * @return VerifyProfileData<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -79,8 +76,6 @@ final class VerifyProfilesService implements VerifyProfilesContract
      *
      * @param array<string, mixed> $params
      *
-     * @return VerifyProfileData<HasRawResponse>
-     *
      * @throws APIException
      */
     public function createRaw(
@@ -107,30 +102,11 @@ final class VerifyProfilesService implements VerifyProfilesContract
      *
      * Gets a single Verify profile.
      *
-     * @return VerifyProfileData<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $verifyProfileID,
         ?RequestOptions $requestOptions = null
-    ): VerifyProfileData {
-        $params = [];
-
-        return $this->retrieveRaw($verifyProfileID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return VerifyProfileData<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $verifyProfileID,
-        mixed $params,
-        ?RequestOptions $requestOptions = null,
     ): VerifyProfileData {
         // @phpstan-ignore-next-line;
         return $this->client->request(
@@ -153,8 +129,6 @@ final class VerifyProfilesService implements VerifyProfilesContract
      * @param Telnyx\VerifyProfiles\VerifyProfileUpdateParams\SMS $sms
      * @param string $webhookFailoverURL
      * @param string $webhookURL
-     *
-     * @return VerifyProfileData<HasRawResponse>
      *
      * @throws APIException
      */
@@ -187,8 +161,6 @@ final class VerifyProfilesService implements VerifyProfilesContract
      *
      * @param array<string, mixed> $params
      *
-     * @return VerifyProfileData<HasRawResponse>
-     *
      * @throws APIException
      */
     public function updateRaw(
@@ -219,8 +191,6 @@ final class VerifyProfilesService implements VerifyProfilesContract
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[name]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
-     * @return VerifyProfileListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -237,8 +207,6 @@ final class VerifyProfilesService implements VerifyProfilesContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return VerifyProfileListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -266,30 +234,11 @@ final class VerifyProfilesService implements VerifyProfilesContract
      *
      * Delete Verify profile
      *
-     * @return VerifyProfileData<HasRawResponse>
-     *
      * @throws APIException
      */
     public function delete(
         string $verifyProfileID,
         ?RequestOptions $requestOptions = null
-    ): VerifyProfileData {
-        $params = [];
-
-        return $this->deleteRaw($verifyProfileID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return VerifyProfileData<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $verifyProfileID,
-        mixed $params,
-        ?RequestOptions $requestOptions = null,
     ): VerifyProfileData {
         // @phpstan-ignore-next-line;
         return $this->client->request(
@@ -307,8 +256,6 @@ final class VerifyProfilesService implements VerifyProfilesContract
      *
      * @param string $text the text content of the message template
      *
-     * @return VerifyProfileNewTemplateResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function createTemplate(
@@ -324,8 +271,6 @@ final class VerifyProfilesService implements VerifyProfilesContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return VerifyProfileNewTemplateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -353,27 +298,9 @@ final class VerifyProfilesService implements VerifyProfilesContract
      *
      * List all Verify profile message templates.
      *
-     * @return VerifyProfileGetTemplatesResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieveTemplates(
-        ?RequestOptions $requestOptions = null
-    ): VerifyProfileGetTemplatesResponse {
-        $params = [];
-
-        return $this->retrieveTemplatesRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return VerifyProfileGetTemplatesResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveTemplatesRaw(
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): VerifyProfileGetTemplatesResponse {
         // @phpstan-ignore-next-line;
@@ -392,8 +319,6 @@ final class VerifyProfilesService implements VerifyProfilesContract
      *
      * @param string $text the text content of the message template
      *
-     * @return VerifyProfileUpdateTemplateResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function updateTemplate(
@@ -410,8 +335,6 @@ final class VerifyProfilesService implements VerifyProfilesContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return VerifyProfileUpdateTemplateResponse<HasRawResponse>
      *
      * @throws APIException
      */

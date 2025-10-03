@@ -78,7 +78,7 @@ final class Category1 implements BaseModel
 
         null !== $bytesReceived && $obj->bytesReceived = $bytesReceived;
         null !== $bytesSent && $obj->bytesSent = $bytesSent;
-        null !== $category && $obj->category = $category instanceof Category ? $category->value : $category;
+        null !== $category && $obj['category'] = $category;
         null !== $ops && $obj->ops = $ops;
         null !== $successfulOps && $obj->successfulOps = $successfulOps;
 
@@ -115,7 +115,7 @@ final class Category1 implements BaseModel
     public function withCategory(Category|string $category): self
     {
         $obj = clone $this;
-        $obj->category = $category instanceof Category ? $category->value : $category;
+        $obj['category'] = $category;
 
         return $obj;
     }

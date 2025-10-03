@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\NumberBlockOrders\NumberBlockOrderGetResponse;
 use Telnyx\NumberBlockOrders\NumberBlockOrderListParams\Filter;
 use Telnyx\NumberBlockOrders\NumberBlockOrderListParams\Page;
@@ -26,8 +25,6 @@ interface NumberBlockOrdersContract
      * @param string $customerReference a customer reference string for customer look ups
      * @param string $messagingProfileID identifies the messaging profile associated with the phone number
      *
-     * @return NumberBlockOrderNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -44,8 +41,6 @@ interface NumberBlockOrdersContract
      *
      * @param array<string, mixed> $params
      *
-     * @return NumberBlockOrderNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function createRaw(
@@ -55,8 +50,6 @@ interface NumberBlockOrdersContract
 
     /**
      * @api
-     *
-     * @return NumberBlockOrderGetResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -68,23 +61,8 @@ interface NumberBlockOrdersContract
     /**
      * @api
      *
-     * @return NumberBlockOrderGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $numberBlockOrderID,
-        mixed $params,
-        ?RequestOptions $requestOptions = null,
-    ): NumberBlockOrderGetResponse;
-
-    /**
-     * @api
-     *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[status], filter[created_at], filter[phone_numbers.starting_number]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
-     *
-     * @return NumberBlockOrderListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -98,8 +76,6 @@ interface NumberBlockOrdersContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return NumberBlockOrderListResponse<HasRawResponse>
      *
      * @throws APIException
      */

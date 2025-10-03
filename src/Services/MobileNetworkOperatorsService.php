@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\MobileNetworkOperators\MobileNetworkOperatorListParams;
 use Telnyx\MobileNetworkOperators\MobileNetworkOperatorListParams\Filter;
 use Telnyx\MobileNetworkOperators\MobileNetworkOperatorListParams\Page;
@@ -31,8 +30,6 @@ final class MobileNetworkOperatorsService implements MobileNetworkOperatorsContr
      * @param Filter $filter Consolidated filter parameter for mobile network operators (deepObject style). Originally: filter[name][starts_with], filter[name][contains], filter[name][ends_with], filter[country_code], filter[mcc], filter[mnc], filter[tadig], filter[network_preferences_enabled]
      * @param Page $page Consolidated pagination parameter (deepObject style). Originally: page[number], page[size]
      *
-     * @return MobileNetworkOperatorListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -49,8 +46,6 @@ final class MobileNetworkOperatorsService implements MobileNetworkOperatorsContr
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return MobileNetworkOperatorListResponse<HasRawResponse>
      *
      * @throws APIException
      */

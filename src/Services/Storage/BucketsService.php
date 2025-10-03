@@ -6,7 +6,6 @@ namespace Telnyx\Services\Storage;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Storage\BucketsContract;
 use Telnyx\Services\Storage\Buckets\SslCertificateService;
@@ -47,8 +46,6 @@ final class BucketsService implements BucketsContract
      * @param string $bucketName
      * @param int $ttl The time to live of the token in seconds
      *
-     * @return BucketNewPresignedURLResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function createPresignedURL(
@@ -66,8 +63,6 @@ final class BucketsService implements BucketsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return BucketNewPresignedURLResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -89,7 +84,7 @@ final class BucketsService implements BucketsContract
             path: [
                 'storage/buckets/%1$s/%2$s/presigned_url', $bucketName, $objectName,
             ],
-            body: (object) array_diff_key($parsed, array_flip(['bucketName'])),
+            body: (object) array_diff_key($parsed, ['bucketName']),
             options: $options,
             convert: BucketNewPresignedURLResponse::class,
         );

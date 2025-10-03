@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\UsageReportsContract;
 use Telnyx\UsageReports\UsageReportGetOptionsParams;
@@ -42,8 +41,6 @@ final class UsageReportsService implements UsageReportsContract
      * @param list<string> $sort Specifies the sort order for results
      * @param string $startDate The start date for the time range you are interested in. The maximum time range is 31 days. Format: YYYY-MM-DDTHH:mm:ssZ
      * @param string $authorizationBearer Authenticates the request with your Telnyx API V2 KEY
-     *
-     * @return UsageReportListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -84,8 +81,6 @@ final class UsageReportsService implements UsageReportsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return UsageReportListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -135,8 +130,6 @@ final class UsageReportsService implements UsageReportsContract
      * @param string $product Options (dimensions and metrics) for a given product. If none specified, all products will be returned.
      * @param string $authorizationBearer Authenticates the request with your Telnyx API V2 KEY
      *
-     * @return UsageReportGetOptionsResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function getOptions(
@@ -156,8 +149,6 @@ final class UsageReportsService implements UsageReportsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return UsageReportGetOptionsResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function getOptionsRaw(
@@ -168,7 +159,7 @@ final class UsageReportsService implements UsageReportsContract
             $params,
             $requestOptions
         );
-        $query_params = array_flip(['product']);
+        $query_params = ['product'];
 
         /** @var array<string, string> */
         $header_params = array_diff_key($parsed, $query_params);

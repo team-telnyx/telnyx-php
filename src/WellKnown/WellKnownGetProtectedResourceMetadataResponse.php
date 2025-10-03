@@ -6,21 +6,21 @@ namespace Telnyx\WellKnown;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type well_known_get_protected_resource_metadata_response = array{
  *   authorizationServers?: list<string>, resource?: string
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class WellKnownGetProtectedResourceMetadataResponse implements BaseModel
+final class WellKnownGetProtectedResourceMetadataResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<well_known_get_protected_resource_metadata_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /**
      * List of authorization server URLs.

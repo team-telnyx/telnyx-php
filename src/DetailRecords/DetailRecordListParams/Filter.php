@@ -71,9 +71,9 @@ final class Filter implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->recordType = $recordType instanceof RecordType ? $recordType->value : $recordType;
+        $obj['recordType'] = $recordType;
 
-        null !== $dateRange && $obj->dateRange = $dateRange instanceof DateRange ? $dateRange->value : $dateRange;
+        null !== $dateRange && $obj['dateRange'] = $dateRange;
 
         return $obj;
     }
@@ -86,7 +86,7 @@ final class Filter implements BaseModel
     public function withRecordType(RecordType|string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType instanceof RecordType ? $recordType->value : $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -99,7 +99,7 @@ final class Filter implements BaseModel
     public function withDateRange(DateRange|string $dateRange): self
     {
         $obj = clone $this;
-        $obj->dateRange = $dateRange instanceof DateRange ? $dateRange->value : $dateRange;
+        $obj['dateRange'] = $dateRange;
 
         return $obj;
     }

@@ -6,7 +6,6 @@ namespace Telnyx\Services\PhoneNumbers;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PhoneNumbers\Voice\CallForwarding;
 use Telnyx\PhoneNumbers\Voice\CallRecording;
 use Telnyx\PhoneNumbers\Voice\CnamListing;
@@ -38,29 +37,10 @@ final class VoiceService implements VoiceContract
      *
      * Retrieve a phone number with voice settings
      *
-     * @return VoiceGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): VoiceGetResponse {
-        $params = [];
-
-        return $this->retrieveRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return VoiceGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): VoiceGetResponse {
         // @phpstan-ignore-next-line;
@@ -86,8 +66,6 @@ final class VoiceService implements VoiceContract
      * @param bool $techPrefixEnabled controls whether a tech prefix is enabled for this phone number
      * @param string $translatedNumber This field allows you to rewrite the destination number of an inbound call before the call is routed to you. The value of this field may be any alphanumeric value, and the value will replace the number originally dialed.
      * @param UsagePaymentMethod|value-of<UsagePaymentMethod> $usagePaymentMethod controls whether a number is billed per minute or uses your concurrent channels
-     *
-     * @return VoiceUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -124,8 +102,6 @@ final class VoiceService implements VoiceContract
      *
      * @param array<string, mixed> $params
      *
-     * @return VoiceUpdateResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function updateRaw(
@@ -157,8 +133,6 @@ final class VoiceService implements VoiceContract
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param Sort|value-of<Sort> $sort Specifies the sort order for results. If not given, results are sorted by created_at in descending order.
      *
-     * @return VoiceListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -176,8 +150,6 @@ final class VoiceService implements VoiceContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return VoiceListResponse<HasRawResponse>
      *
      * @throws APIException
      */

@@ -11,7 +11,6 @@ use Telnyx\ChannelZones\ChannelZoneUpdateParams;
 use Telnyx\ChannelZones\ChannelZoneUpdateResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ChannelZonesContract;
 
@@ -31,8 +30,6 @@ final class ChannelZonesService implements ChannelZonesContract
      *
      * @param int $channels The number of reserved channels
      *
-     * @return ChannelZoneUpdateResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function update(
@@ -49,8 +46,6 @@ final class ChannelZonesService implements ChannelZonesContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ChannelZoneUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -81,8 +76,6 @@ final class ChannelZonesService implements ChannelZonesContract
      *
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
-     * @return ChannelZoneListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -98,8 +91,6 @@ final class ChannelZonesService implements ChannelZonesContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ChannelZoneListResponse<HasRawResponse>
      *
      * @throws APIException
      */

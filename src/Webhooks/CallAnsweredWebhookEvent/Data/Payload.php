@@ -152,7 +152,7 @@ final class Payload implements BaseModel
         null !== $from && $obj->from = $from;
         null !== $sipHeaders && $obj->sipHeaders = $sipHeaders;
         null !== $startTime && $obj->startTime = $startTime;
-        null !== $state && $obj->state = $state instanceof State ? $state->value : $state;
+        null !== $state && $obj['state'] = $state;
         null !== $tags && $obj->tags = $tags;
         null !== $to && $obj->to = $to;
 
@@ -270,7 +270,7 @@ final class Payload implements BaseModel
     public function withState(State|string $state): self
     {
         $obj = clone $this;
-        $obj->state = $state instanceof State ? $state->value : $state;
+        $obj['state'] = $state;
 
         return $obj;
     }

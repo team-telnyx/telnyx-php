@@ -188,10 +188,10 @@ final class OutboundVoiceProfileCreateParams implements BaseModel
         null !== $dailySpendLimitEnabled && $obj->dailySpendLimitEnabled = $dailySpendLimitEnabled;
         null !== $enabled && $obj->enabled = $enabled;
         null !== $maxDestinationRate && $obj->maxDestinationRate = $maxDestinationRate;
-        null !== $servicePlan && $obj->servicePlan = $servicePlan instanceof ServicePlan ? $servicePlan->value : $servicePlan;
+        null !== $servicePlan && $obj['servicePlan'] = $servicePlan;
         null !== $tags && $obj->tags = $tags;
-        null !== $trafficType && $obj->trafficType = $trafficType instanceof TrafficType ? $trafficType->value : $trafficType;
-        null !== $usagePaymentMethod && $obj->usagePaymentMethod = $usagePaymentMethod instanceof UsagePaymentMethod ? $usagePaymentMethod->value : $usagePaymentMethod;
+        null !== $trafficType && $obj['trafficType'] = $trafficType;
+        null !== $usagePaymentMethod && $obj['usagePaymentMethod'] = $usagePaymentMethod;
         null !== $whitelistedDestinations && $obj->whitelistedDestinations = $whitelistedDestinations;
 
         return $obj;
@@ -292,7 +292,7 @@ final class OutboundVoiceProfileCreateParams implements BaseModel
     public function withServicePlan(ServicePlan|string $servicePlan): self
     {
         $obj = clone $this;
-        $obj->servicePlan = $servicePlan instanceof ServicePlan ? $servicePlan->value : $servicePlan;
+        $obj['servicePlan'] = $servicePlan;
 
         return $obj;
     }
@@ -316,7 +316,7 @@ final class OutboundVoiceProfileCreateParams implements BaseModel
     public function withTrafficType(TrafficType|string $trafficType): self
     {
         $obj = clone $this;
-        $obj->trafficType = $trafficType instanceof TrafficType ? $trafficType->value : $trafficType;
+        $obj['trafficType'] = $trafficType;
 
         return $obj;
     }
@@ -330,7 +330,7 @@ final class OutboundVoiceProfileCreateParams implements BaseModel
         UsagePaymentMethod|string $usagePaymentMethod
     ): self {
         $obj = clone $this;
-        $obj->usagePaymentMethod = $usagePaymentMethod instanceof UsagePaymentMethod ? $usagePaymentMethod->value : $usagePaymentMethod;
+        $obj['usagePaymentMethod'] = $usagePaymentMethod;
 
         return $obj;
     }

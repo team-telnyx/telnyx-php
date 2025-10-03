@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\Rooms\RoomCreateParams;
 use Telnyx\Rooms\RoomGetResponse;
@@ -57,8 +56,6 @@ final class RoomsService implements RoomsContract
      * @param string $webhookEventURL The URL where webhooks related to this room will be sent. Must include a scheme, such as 'https'.
      * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
      *
-     * @return RoomNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -86,8 +83,6 @@ final class RoomsService implements RoomsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return RoomNewResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -117,8 +112,6 @@ final class RoomsService implements RoomsContract
      *
      * @param bool $includeSessions to decide if room sessions should be included in the response
      *
-     * @return RoomGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
@@ -135,8 +128,6 @@ final class RoomsService implements RoomsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return RoomGetResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -172,8 +163,6 @@ final class RoomsService implements RoomsContract
      * @param string $webhookEventURL The URL where webhooks related to this room will be sent. Must include a scheme, such as 'https'.
      * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
      *
-     * @return RoomUpdateResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function update(
@@ -202,8 +191,6 @@ final class RoomsService implements RoomsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return RoomUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -236,8 +223,6 @@ final class RoomsService implements RoomsContract
      * @param bool $includeSessions to decide if room sessions should be included in the response
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
-     * @return RoomListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -259,8 +244,6 @@ final class RoomsService implements RoomsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return RoomListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -292,21 +275,6 @@ final class RoomsService implements RoomsContract
      */
     public function delete(
         string $roomID,
-        ?RequestOptions $requestOptions = null
-    ): mixed {
-        $params = [];
-
-        return $this->deleteRaw($roomID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $roomID,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): mixed {
         // @phpstan-ignore-next-line;

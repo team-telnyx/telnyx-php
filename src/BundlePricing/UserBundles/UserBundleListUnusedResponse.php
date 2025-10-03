@@ -7,19 +7,19 @@ namespace Telnyx\BundlePricing\UserBundles;
 use Telnyx\BundlePricing\UserBundles\UserBundleListUnusedResponse\Data;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type user_bundle_list_unused_response = array{data: list<Data>}
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class UserBundleListUnusedResponse implements BaseModel
+final class UserBundleListUnusedResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<user_bundle_list_unused_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /** @var list<Data> $data */
     #[Api(list: Data::class)]

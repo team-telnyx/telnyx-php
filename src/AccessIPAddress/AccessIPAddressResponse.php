@@ -6,7 +6,9 @@ namespace Telnyx\AccessIPAddress;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type access_ip_address_response = array{
@@ -19,15 +21,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *   description?: string,
  *   updatedAt?: \DateTimeInterface,
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class AccessIPAddressResponse implements BaseModel
+final class AccessIPAddressResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<access_ip_address_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     #[Api]
     public string $id;
@@ -106,7 +106,7 @@ final class AccessIPAddressResponse implements BaseModel
         $obj->id = $id;
         $obj->ipAddress = $ipAddress;
         $obj->source = $source;
-        $obj->status = $status instanceof CloudflareSyncStatus ? $status->value : $status;
+        $obj['status'] = $status;
         $obj->userID = $userID;
 
         null !== $createdAt && $obj->createdAt = $createdAt;
@@ -148,7 +148,7 @@ final class AccessIPAddressResponse implements BaseModel
     public function withStatus(CloudflareSyncStatus|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof CloudflareSyncStatus ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

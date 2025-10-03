@@ -6,21 +6,21 @@ namespace Telnyx\AuthenticationProviders;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type authentication_provider_update_response = array{
  *   data?: AuthenticationProvider
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class AuthenticationProviderUpdateResponse implements BaseModel
+final class AuthenticationProviderUpdateResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<authentication_provider_update_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     #[Api(optional: true)]
     public ?AuthenticationProvider $data;

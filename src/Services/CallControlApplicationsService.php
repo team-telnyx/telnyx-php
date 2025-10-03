@@ -22,7 +22,6 @@ use Telnyx\CallControlApplications\CallControlApplicationUpdateParams;
 use Telnyx\CallControlApplications\CallControlApplicationUpdateResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\CallControlApplicationsContract;
 
@@ -53,8 +52,6 @@ final class CallControlApplicationsService implements CallControlApplicationsCon
      * @param WebhookAPIVersion|value-of<WebhookAPIVersion> $webhookAPIVersion determines which webhook format will be used, Telnyx API v1 or v2
      * @param string|null $webhookEventFailoverURL The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
-     *
-     * @return CallControlApplicationNewResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -98,8 +95,6 @@ final class CallControlApplicationsService implements CallControlApplicationsCon
      *
      * @param array<string, mixed> $params
      *
-     * @return CallControlApplicationNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function createRaw(
@@ -126,29 +121,10 @@ final class CallControlApplicationsService implements CallControlApplicationsCon
      *
      * Retrieves the details of an existing call control application.
      *
-     * @return CallControlApplicationGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): CallControlApplicationGetResponse {
-        $params = [];
-
-        return $this->retrieveRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return CallControlApplicationGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): CallControlApplicationGetResponse {
         // @phpstan-ignore-next-line;
@@ -179,8 +155,6 @@ final class CallControlApplicationsService implements CallControlApplicationsCon
      * @param Telnyx\CallControlApplications\CallControlApplicationUpdateParams\WebhookAPIVersion|value-of<Telnyx\CallControlApplications\CallControlApplicationUpdateParams\WebhookAPIVersion> $webhookAPIVersion determines which webhook format will be used, Telnyx API v1 or v2
      * @param string|null $webhookEventFailoverURL The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
-     *
-     * @return CallControlApplicationUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -227,8 +201,6 @@ final class CallControlApplicationsService implements CallControlApplicationsCon
      *
      * @param array<string, mixed> $params
      *
-     * @return CallControlApplicationUpdateResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function updateRaw(
@@ -271,8 +243,6 @@ final class CallControlApplicationsService implements CallControlApplicationsCon
      *   </li>
      * </ul> <br/> If not given, results are sorted by <code>created_at</code> in descending order.
      *
-     * @return CallControlApplicationListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -290,8 +260,6 @@ final class CallControlApplicationsService implements CallControlApplicationsCon
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return CallControlApplicationListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -319,29 +287,10 @@ final class CallControlApplicationsService implements CallControlApplicationsCon
      *
      * Deletes a call control application.
      *
-     * @return CallControlApplicationDeleteResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): CallControlApplicationDeleteResponse {
-        $params = [];
-
-        return $this->deleteRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return CallControlApplicationDeleteResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): CallControlApplicationDeleteResponse {
         // @phpstan-ignore-next-line;

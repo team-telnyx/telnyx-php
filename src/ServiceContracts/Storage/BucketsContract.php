@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\Storage;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\Storage\Buckets\BucketNewPresignedURLResponse;
 
@@ -18,8 +17,6 @@ interface BucketsContract
      *
      * @param string $bucketName
      * @param int $ttl The time to live of the token in seconds
-     *
-     * @return BucketNewPresignedURLResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -34,8 +31,6 @@ interface BucketsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return BucketNewPresignedURLResponse<HasRawResponse>
      *
      * @throws APIException
      */

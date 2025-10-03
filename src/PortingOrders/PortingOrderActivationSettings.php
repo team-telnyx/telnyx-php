@@ -68,7 +68,7 @@ final class PortingOrderActivationSettings implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $activationStatus && $obj->activationStatus = $activationStatus instanceof ActivationStatus ? $activationStatus->value : $activationStatus;
+        null !== $activationStatus && $obj['activationStatus'] = $activationStatus;
         null !== $fastPortEligible && $obj->fastPortEligible = $fastPortEligible;
         null !== $focDatetimeActual && $obj->focDatetimeActual = $focDatetimeActual;
         null !== $focDatetimeRequested && $obj->focDatetimeRequested = $focDatetimeRequested;
@@ -85,7 +85,7 @@ final class PortingOrderActivationSettings implements BaseModel
         ActivationStatus|string $activationStatus
     ): self {
         $obj = clone $this;
-        $obj->activationStatus = $activationStatus instanceof ActivationStatus ? $activationStatus->value : $activationStatus;
+        $obj['activationStatus'] = $activationStatus;
 
         return $obj;
     }

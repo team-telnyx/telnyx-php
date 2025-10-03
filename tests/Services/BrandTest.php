@@ -39,8 +39,8 @@ final class BrandTest extends TestCase
             country: 'US',
             displayName: 'ABC Mobile',
             email: 'email',
-            entityType: EntityType::$PRIVATE_PROFIT,
-            vertical: Vertical::$TECHNOLOGY,
+            entityType: EntityType::PRIVATE_PROFIT,
+            vertical: Vertical::TECHNOLOGY,
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -57,8 +57,8 @@ final class BrandTest extends TestCase
             country: 'US',
             displayName: 'ABC Mobile',
             email: 'email',
-            entityType: EntityType::$PRIVATE_PROFIT,
-            vertical: Vertical::$TECHNOLOGY,
+            entityType: EntityType::PRIVATE_PROFIT,
+            vertical: Vertical::TECHNOLOGY,
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -88,8 +88,8 @@ final class BrandTest extends TestCase
             country: 'US',
             displayName: 'ABC Mobile',
             email: 'email',
-            entityType: EntityType::$PRIVATE_PROFIT,
-            vertical: Vertical::$TECHNOLOGY,
+            entityType: EntityType::PRIVATE_PROFIT,
+            vertical: Vertical::TECHNOLOGY,
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -107,8 +107,8 @@ final class BrandTest extends TestCase
             country: 'US',
             displayName: 'ABC Mobile',
             email: 'email',
-            entityType: EntityType::$PRIVATE_PROFIT,
-            vertical: Vertical::$TECHNOLOGY,
+            entityType: EntityType::PRIVATE_PROFIT,
+            vertical: Vertical::TECHNOLOGY,
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType

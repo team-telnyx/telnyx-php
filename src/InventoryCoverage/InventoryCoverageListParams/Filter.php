@@ -116,12 +116,12 @@ final class Filter implements BaseModel
 
         null !== $administrativeArea && $obj->administrativeArea = $administrativeArea;
         null !== $count && $obj->count = $count;
-        null !== $countryCode && $obj->countryCode = $countryCode instanceof CountryCode ? $countryCode->value : $countryCode;
-        null !== $features && $obj->features = array_map(fn ($v) => $v instanceof Feature ? $v->value : $v, $features);
-        null !== $groupBy && $obj->groupBy = $groupBy instanceof GroupBy ? $groupBy->value : $groupBy;
+        null !== $countryCode && $obj['countryCode'] = $countryCode;
+        null !== $features && $obj['features'] = $features;
+        null !== $groupBy && $obj['groupBy'] = $groupBy;
         null !== $npa && $obj->npa = $npa;
         null !== $nxx && $obj->nxx = $nxx;
-        null !== $phoneNumberType && $obj->phoneNumberType = $phoneNumberType instanceof PhoneNumberType ? $phoneNumberType->value : $phoneNumberType;
+        null !== $phoneNumberType && $obj['phoneNumberType'] = $phoneNumberType;
 
         return $obj;
     }
@@ -156,7 +156,7 @@ final class Filter implements BaseModel
     public function withCountryCode(CountryCode|string $countryCode): self
     {
         $obj = clone $this;
-        $obj->countryCode = $countryCode instanceof CountryCode ? $countryCode->value : $countryCode;
+        $obj['countryCode'] = $countryCode;
 
         return $obj;
     }
@@ -169,7 +169,7 @@ final class Filter implements BaseModel
     public function withFeatures(array $features): self
     {
         $obj = clone $this;
-        $obj->features = array_map(fn ($v) => $v instanceof Feature ? $v->value : $v, $features);
+        $obj['features'] = $features;
 
         return $obj;
     }
@@ -182,7 +182,7 @@ final class Filter implements BaseModel
     public function withGroupBy(GroupBy|string $groupBy): self
     {
         $obj = clone $this;
-        $obj->groupBy = $groupBy instanceof GroupBy ? $groupBy->value : $groupBy;
+        $obj['groupBy'] = $groupBy;
 
         return $obj;
     }
@@ -218,7 +218,7 @@ final class Filter implements BaseModel
         PhoneNumberType|string $phoneNumberType
     ): self {
         $obj = clone $this;
-        $obj->phoneNumberType = $phoneNumberType instanceof PhoneNumberType ? $phoneNumberType->value : $phoneNumberType;
+        $obj['phoneNumberType'] = $phoneNumberType;
 
         return $obj;
     }

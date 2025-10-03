@@ -106,11 +106,11 @@ final class Filter implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $activationStatus && $obj->activationStatus = $activationStatus instanceof ActivationStatus ? $activationStatus->value : $activationStatus;
+        null !== $activationStatus && $obj['activationStatus'] = $activationStatus;
         null !== $phoneNumber && $obj->phoneNumber = $phoneNumber;
-        null !== $portabilityStatus && $obj->portabilityStatus = $portabilityStatus instanceof PortabilityStatus ? $portabilityStatus->value : $portabilityStatus;
+        null !== $portabilityStatus && $obj['portabilityStatus'] = $portabilityStatus;
         null !== $portingOrderID && $obj->portingOrderID = $portingOrderID;
-        null !== $status && $obj->status = $status instanceof UnionMember0 ? $status->value : $status;
+        null !== $status && $obj['status'] = $status;
         null !== $supportKey && $obj->supportKey = $supportKey;
 
         return $obj;
@@ -125,7 +125,7 @@ final class Filter implements BaseModel
         ActivationStatus|string $activationStatus
     ): self {
         $obj = clone $this;
-        $obj->activationStatus = $activationStatus instanceof ActivationStatus ? $activationStatus->value : $activationStatus;
+        $obj['activationStatus'] = $activationStatus;
 
         return $obj;
     }
@@ -152,7 +152,7 @@ final class Filter implements BaseModel
         PortabilityStatus|string $portabilityStatus
     ): self {
         $obj = clone $this;
-        $obj->portabilityStatus = $portabilityStatus instanceof PortabilityStatus ? $portabilityStatus->value : $portabilityStatus;
+        $obj['portabilityStatus'] = $portabilityStatus;
 
         return $obj;
     }
@@ -178,7 +178,7 @@ final class Filter implements BaseModel
     public function withStatus(UnionMember0|array|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof UnionMember0 ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

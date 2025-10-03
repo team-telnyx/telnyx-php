@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\Porting;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationCreateParams\Address;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationCreateParams\Contact;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationCreateParams\Logo;
@@ -29,8 +28,6 @@ interface LoaConfigurationsContract
      * @param Logo $logo The logo of the LOA configuration
      * @param string $name The name of the LOA configuration
      *
-     * @return LoaConfigurationNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -47,8 +44,6 @@ interface LoaConfigurationsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return LoaConfigurationNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function createRaw(
@@ -58,8 +53,6 @@ interface LoaConfigurationsContract
 
     /**
      * @api
-     *
-     * @return LoaConfigurationGetResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -71,26 +64,11 @@ interface LoaConfigurationsContract
     /**
      * @api
      *
-     * @return LoaConfigurationGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
-        ?RequestOptions $requestOptions = null
-    ): LoaConfigurationGetResponse;
-
-    /**
-     * @api
-     *
      * @param Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Address $address the address of the company
      * @param string $companyName The name of the company
      * @param Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Contact $contact the contact information of the company
      * @param Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Logo $logo The logo of the LOA configuration
      * @param string $name The name of the LOA configuration
-     *
-     * @return LoaConfigurationUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -109,8 +87,6 @@ interface LoaConfigurationsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return LoaConfigurationUpdateResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function updateRaw(
@@ -124,8 +100,6 @@ interface LoaConfigurationsContract
      *
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
-     * @return LoaConfigurationListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -137,8 +111,6 @@ interface LoaConfigurationsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return LoaConfigurationListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -154,17 +126,6 @@ interface LoaConfigurationsContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): mixed;
-
-    /**
-     * @api
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): mixed;
 
@@ -207,17 +168,6 @@ interface LoaConfigurationsContract
      */
     public function preview1(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): string;
-
-    /**
-     * @api
-     *
-     * @throws APIException
-     */
-    public function preview1Raw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): string;
 }

@@ -177,7 +177,7 @@ final class ManagedAccount implements BaseModel
         $obj->createdAt = $createdAt;
         $obj->email = $email;
         $obj->managerAccountID = $managerAccountID;
-        $obj->recordType = $recordType instanceof RecordType ? $recordType->value : $recordType;
+        $obj['recordType'] = $recordType;
         $obj->updatedAt = $updatedAt;
 
         null !== $balance && $obj->balance = $balance;
@@ -273,7 +273,7 @@ final class ManagedAccount implements BaseModel
     public function withRecordType(RecordType|string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType instanceof RecordType ? $recordType->value : $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }

@@ -75,7 +75,7 @@ final class RegulatoryRequirement implements BaseModel
         null !== $fieldType && $obj->fieldType = $fieldType;
         null !== $fieldValue && $obj->fieldValue = $fieldValue;
         null !== $requirementID && $obj->requirementID = $requirementID;
-        null !== $status && $obj->status = $status instanceof Status ? $status->value : $status;
+        null !== $status && $obj['status'] = $status;
         null !== $updatedAt && $obj->updatedAt = $updatedAt;
 
         return $obj;
@@ -127,7 +127,7 @@ final class RegulatoryRequirement implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

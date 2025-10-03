@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\IntegrationSecrets\IntegrationSecretCreateParams;
 use Telnyx\IntegrationSecrets\IntegrationSecretCreateParams\Type;
 use Telnyx\IntegrationSecrets\IntegrationSecretListParams;
@@ -37,8 +36,6 @@ final class IntegrationSecretsService implements IntegrationSecretsContract
      * @param string $password The password for the secret. Required for basic type secrets, ignored otherwise.
      * @param string $username The username for the secret. Required for basic type secrets, ignored otherwise.
      *
-     * @return IntegrationSecretNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -64,8 +61,6 @@ final class IntegrationSecretsService implements IntegrationSecretsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return IntegrationSecretNewResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -96,8 +91,6 @@ final class IntegrationSecretsService implements IntegrationSecretsContract
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[type]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
-     * @return IntegrationSecretListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -114,8 +107,6 @@ final class IntegrationSecretsService implements IntegrationSecretsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return IntegrationSecretListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -147,21 +138,6 @@ final class IntegrationSecretsService implements IntegrationSecretsContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): mixed {
-        $params = [];
-
-        return $this->deleteRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): mixed {
         // @phpstan-ignore-next-line;

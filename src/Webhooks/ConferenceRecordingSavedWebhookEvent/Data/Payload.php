@@ -140,11 +140,11 @@ final class Payload implements BaseModel
 
         null !== $callControlID && $obj->callControlID = $callControlID;
         null !== $callSessionID && $obj->callSessionID = $callSessionID;
-        null !== $channels && $obj->channels = $channels instanceof Channels ? $channels->value : $channels;
+        null !== $channels && $obj['channels'] = $channels;
         null !== $clientState && $obj->clientState = $clientState;
         null !== $conferenceID && $obj->conferenceID = $conferenceID;
         null !== $connectionID && $obj->connectionID = $connectionID;
-        null !== $format && $obj->format = $format instanceof Format ? $format->value : $format;
+        null !== $format && $obj['format'] = $format;
         null !== $publicRecordingURLs && $obj->publicRecordingURLs = $publicRecordingURLs;
         null !== $recordingEndedAt && $obj->recordingEndedAt = $recordingEndedAt;
         null !== $recordingID && $obj->recordingID = $recordingID;
@@ -184,7 +184,7 @@ final class Payload implements BaseModel
     public function withChannels(Channels|string $channels): self
     {
         $obj = clone $this;
-        $obj->channels = $channels instanceof Channels ? $channels->value : $channels;
+        $obj['channels'] = $channels;
 
         return $obj;
     }
@@ -230,7 +230,7 @@ final class Payload implements BaseModel
     public function withFormat(Format|string $format): self
     {
         $obj = clone $this;
-        $obj->format = $format instanceof Format ? $format->value : $format;
+        $obj['format'] = $format;
 
         return $obj;
     }

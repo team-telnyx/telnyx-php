@@ -93,7 +93,7 @@ final class AutorespConfigCreateParams implements BaseModel
 
         $obj->countryCode = $countryCode;
         $obj->keywords = $keywords;
-        $obj->op = $op instanceof Op ? $op->value : $op;
+        $obj['op'] = $op;
 
         null !== $respText && $obj->respText = $respText;
 
@@ -125,7 +125,7 @@ final class AutorespConfigCreateParams implements BaseModel
     public function withOp(Op|string $op): self
     {
         $obj = clone $this;
-        $obj->op = $op instanceof Op ? $op->value : $op;
+        $obj['op'] = $op;
 
         return $obj;
     }

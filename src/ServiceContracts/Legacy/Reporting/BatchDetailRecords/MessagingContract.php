@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\Legacy\Reporting\BatchDetailRecords;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging\MessagingDeleteResponse;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging\MessagingGetResponse;
@@ -33,8 +32,6 @@ interface MessagingContract
      * @param bool $selectAllManagedAccounts Whether to select all managed accounts
      * @param string $timezone Timezone for the report
      *
-     * @return MessagingNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -58,8 +55,6 @@ interface MessagingContract
      *
      * @param array<string, mixed> $params
      *
-     * @return MessagingNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function createRaw(
@@ -69,8 +64,6 @@ interface MessagingContract
 
     /**
      * @api
-     *
-     * @return MessagingGetResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -82,21 +75,6 @@ interface MessagingContract
     /**
      * @api
      *
-     * @return MessagingGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
-        ?RequestOptions $requestOptions = null
-    ): MessagingGetResponse;
-
-    /**
-     * @api
-     *
-     * @return MessagingListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -106,37 +84,10 @@ interface MessagingContract
     /**
      * @api
      *
-     * @return MessagingListResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        mixed $params,
-        ?RequestOptions $requestOptions = null
-    ): MessagingListResponse;
-
-    /**
-     * @api
-     *
-     * @return MessagingDeleteResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): MessagingDeleteResponse;
-
-    /**
-     * @api
-     *
-     * @return MessagingDeleteResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): MessagingDeleteResponse;
 }

@@ -58,7 +58,7 @@ final class ChatCompletionToolParam implements BaseModel
         $obj = new self;
 
         $obj->function1 = $function1;
-        $obj->type = $type instanceof Type ? $type->value : $type;
+        $obj['type'] = $type;
 
         return $obj;
     }
@@ -77,7 +77,7 @@ final class ChatCompletionToolParam implements BaseModel
     public function withType(Type|string $type): self
     {
         $obj = clone $this;
-        $obj->type = $type instanceof Type ? $type->value : $type;
+        $obj['type'] = $type;
 
         return $obj;
     }

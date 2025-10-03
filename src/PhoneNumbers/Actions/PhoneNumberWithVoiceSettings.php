@@ -172,13 +172,13 @@ final class PhoneNumberWithVoiceSettings implements BaseModel
         null !== $connectionID && $obj->connectionID = $connectionID;
         null !== $customerReference && $obj->customerReference = $customerReference;
         null !== $emergency && $obj->emergency = $emergency;
-        null !== $inboundCallScreening && $obj->inboundCallScreening = $inboundCallScreening instanceof InboundCallScreening ? $inboundCallScreening->value : $inboundCallScreening;
+        null !== $inboundCallScreening && $obj['inboundCallScreening'] = $inboundCallScreening;
         null !== $mediaFeatures && $obj->mediaFeatures = $mediaFeatures;
         null !== $phoneNumber && $obj->phoneNumber = $phoneNumber;
         null !== $recordType && $obj->recordType = $recordType;
         null !== $techPrefixEnabled && $obj->techPrefixEnabled = $techPrefixEnabled;
         null !== $translatedNumber && $obj->translatedNumber = $translatedNumber;
-        null !== $usagePaymentMethod && $obj->usagePaymentMethod = $usagePaymentMethod instanceof UsagePaymentMethod ? $usagePaymentMethod->value : $usagePaymentMethod;
+        null !== $usagePaymentMethod && $obj['usagePaymentMethod'] = $usagePaymentMethod;
 
         return $obj;
     }
@@ -269,7 +269,7 @@ final class PhoneNumberWithVoiceSettings implements BaseModel
         InboundCallScreening|string $inboundCallScreening
     ): self {
         $obj = clone $this;
-        $obj->inboundCallScreening = $inboundCallScreening instanceof InboundCallScreening ? $inboundCallScreening->value : $inboundCallScreening;
+        $obj['inboundCallScreening'] = $inboundCallScreening;
 
         return $obj;
     }
@@ -338,7 +338,7 @@ final class PhoneNumberWithVoiceSettings implements BaseModel
         UsagePaymentMethod|string $usagePaymentMethod
     ): self {
         $obj = clone $this;
-        $obj->usagePaymentMethod = $usagePaymentMethod instanceof UsagePaymentMethod ? $usagePaymentMethod->value : $usagePaymentMethod;
+        $obj['usagePaymentMethod'] = $usagePaymentMethod;
 
         return $obj;
     }

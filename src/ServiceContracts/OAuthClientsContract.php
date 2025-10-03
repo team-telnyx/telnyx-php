@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\OAuthClients\OAuthClientCreateParams\AllowedGrantType;
 use Telnyx\OAuthClients\OAuthClientCreateParams\ClientType;
 use Telnyx\OAuthClients\OAuthClientGetResponse;
@@ -33,8 +32,6 @@ interface OAuthClientsContract
      * @param bool $requirePkce Whether PKCE (Proof Key for Code Exchange) is required for this client
      * @param string $tosUri URL of the client's terms of service
      *
-     * @return OAuthClientNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -55,8 +52,6 @@ interface OAuthClientsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return OAuthClientNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function createRaw(
@@ -67,25 +62,10 @@ interface OAuthClientsContract
     /**
      * @api
      *
-     * @return OAuthClientGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): OAuthClientGetResponse;
-
-    /**
-     * @api
-     *
-     * @return OAuthClientGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): OAuthClientGetResponse;
 
@@ -100,8 +80,6 @@ interface OAuthClientsContract
      * @param list<string> $redirectUris List of redirect URIs
      * @param bool $requirePkce Whether PKCE (Proof Key for Code Exchange) is required for this client
      * @param string $tosUri URL of the client's terms of service
-     *
-     * @return OAuthClientUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -123,8 +101,6 @@ interface OAuthClientsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return OAuthClientUpdateResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function updateRaw(
@@ -145,8 +121,6 @@ interface OAuthClientsContract
      * @param int $pageNumber Page number
      * @param int $pageSize Number of results per page
      *
-     * @return OAuthClientListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -166,8 +140,6 @@ interface OAuthClientsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return OAuthClientListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function listRaw(
@@ -182,17 +154,6 @@ interface OAuthClientsContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): mixed;
-
-    /**
-     * @api
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): mixed;
 }

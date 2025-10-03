@@ -6,7 +6,6 @@ namespace Telnyx\Services\CredentialConnections;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\CredentialConnections\Actions\ActionCheckRegistrationStatusResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\CredentialConnections\ActionsContract;
@@ -23,29 +22,10 @@ final class ActionsService implements ActionsContract
      *
      * Checks the registration_status for a credential connection, (`registration_status`) as well as the timestamp for the last SIP registration event (`registration_status_updated_at`)
      *
-     * @return ActionCheckRegistrationStatusResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function checkRegistrationStatus(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): ActionCheckRegistrationStatusResponse {
-        $params = [];
-
-        return $this->checkRegistrationStatusRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return ActionCheckRegistrationStatusResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function checkRegistrationStatusRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): ActionCheckRegistrationStatusResponse {
         // @phpstan-ignore-next-line;

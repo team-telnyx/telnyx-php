@@ -7,22 +7,22 @@ namespace Telnyx\Networks;
 use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Networks\NetworkListInterfacesResponse\Data;
 
 /**
  * @phpstan-type network_list_interfaces_response = array{
- *   data?: list<data_alias>, meta?: PaginationMeta
+ *   data?: list<Data>, meta?: PaginationMeta
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class NetworkListInterfacesResponse implements BaseModel
+final class NetworkListInterfacesResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<network_list_interfaces_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /** @var list<Data>|null $data */
     #[Api(list: Data::class, optional: true)]

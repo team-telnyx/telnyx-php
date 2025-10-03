@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\UserAddresses\UserAddressGetResponse;
 use Telnyx\UserAddresses\UserAddressListParams\Filter;
@@ -36,8 +35,6 @@ interface UserAddressesContract
      * @param string $postalCode the postal code of the user address
      * @param string $skipAddressVerification An optional boolean value specifying if verification of the address should be skipped or not. UserAddresses are generally used for shipping addresses, and failure to validate your shipping address will likely result in a failure to deliver SIM cards or other items ordered from Telnyx. Do not use this parameter unless you are sure that the address is correct even though it cannot be validated. If this is set to any value other than true, verification of the address will be attempted, and the user address will not be allowed if verification fails. If verification fails but suggested values are available that might make the address correct, they will be present in the response as well. If this value is set to true, then the verification will not be attempted. Defaults to false (verification will be performed).
      *
-     * @return UserAddressNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -63,8 +60,6 @@ interface UserAddressesContract
      *
      * @param array<string, mixed> $params
      *
-     * @return UserAddressNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function createRaw(
@@ -75,25 +70,10 @@ interface UserAddressesContract
     /**
      * @api
      *
-     * @return UserAddressGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): UserAddressGetResponse;
-
-    /**
-     * @api
-     *
-     * @return UserAddressGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): UserAddressGetResponse;
 
@@ -115,8 +95,6 @@ interface UserAddressesContract
      *   </li>
      * </ul> <br/> If not given, results are sorted by <code>created_at</code> in descending order.
      *
-     * @return UserAddressListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -130,8 +108,6 @@ interface UserAddressesContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return UserAddressListResponse<HasRawResponse>
      *
      * @throws APIException
      */

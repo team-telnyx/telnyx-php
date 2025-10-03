@@ -6,21 +6,21 @@ namespace Telnyx\NotificationProfiles;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type notification_profile_get_response = array{
  *   data?: NotificationProfile
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class NotificationProfileGetResponse implements BaseModel
+final class NotificationProfileGetResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<notification_profile_get_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /**
      * A Collection of Notification Channels.

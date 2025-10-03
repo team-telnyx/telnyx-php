@@ -193,9 +193,9 @@ final class Data implements BaseModel
         $obj->endConferenceOnExit = $endConferenceOnExit;
         $obj->muted = $muted;
         $obj->onHold = $onHold;
-        $obj->recordType = $recordType instanceof RecordType ? $recordType->value : $recordType;
+        $obj['recordType'] = $recordType;
         $obj->softEndConferenceOnExit = $softEndConferenceOnExit;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
         $obj->updatedAt = $updatedAt;
         $obj->whisperCallControlIDs = $whisperCallControlIDs;
 
@@ -296,7 +296,7 @@ final class Data implements BaseModel
     public function withRecordType(RecordType|string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType instanceof RecordType ? $recordType->value : $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -321,7 +321,7 @@ final class Data implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

@@ -6,7 +6,6 @@ namespace Telnyx\Services\Legacy\Reporting\BatchDetailRecords;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging\MessagingCreateParams;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging\MessagingDeleteResponse;
@@ -42,8 +41,6 @@ final class MessagingService implements MessagingContract
      * @param string $reportName Name of the report
      * @param bool $selectAllManagedAccounts Whether to select all managed accounts
      * @param string $timezone Timezone for the report
-     *
-     * @return MessagingNewResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -85,8 +82,6 @@ final class MessagingService implements MessagingContract
      *
      * @param array<string, mixed> $params
      *
-     * @return MessagingNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function createRaw(
@@ -113,29 +108,10 @@ final class MessagingService implements MessagingContract
      *
      * Retrieves a specific MDR detailed report request by ID
      *
-     * @return MessagingGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): MessagingGetResponse {
-        $params = [];
-
-        return $this->retrieveRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return MessagingGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): MessagingGetResponse {
         // @phpstan-ignore-next-line;
@@ -152,27 +128,9 @@ final class MessagingService implements MessagingContract
      *
      * Retrieves all MDR detailed report requests for the authenticated user
      *
-     * @return MessagingListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
-        ?RequestOptions $requestOptions = null
-    ): MessagingListResponse {
-        $params = [];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return MessagingListResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): MessagingListResponse {
         // @phpstan-ignore-next-line;
@@ -189,29 +147,10 @@ final class MessagingService implements MessagingContract
      *
      * Deletes a specific MDR detailed report request by ID
      *
-     * @return MessagingDeleteResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): MessagingDeleteResponse {
-        $params = [];
-
-        return $this->deleteRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return MessagingDeleteResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): MessagingDeleteResponse {
         // @phpstan-ignore-next-line;

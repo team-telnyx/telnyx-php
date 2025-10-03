@@ -134,10 +134,10 @@ final class OAuthRetrieveAuthorizeParams implements BaseModel
 
         $obj->clientID = $clientID;
         $obj->redirectUri = $redirectUri;
-        $obj->responseType = $responseType instanceof ResponseType ? $responseType->value : $responseType;
+        $obj['responseType'] = $responseType;
 
         null !== $codeChallenge && $obj->codeChallenge = $codeChallenge;
-        null !== $codeChallengeMethod && $obj->codeChallengeMethod = $codeChallengeMethod instanceof CodeChallengeMethod ? $codeChallengeMethod->value : $codeChallengeMethod;
+        null !== $codeChallengeMethod && $obj['codeChallengeMethod'] = $codeChallengeMethod;
         null !== $scope && $obj->scope = $scope;
         null !== $state && $obj->state = $state;
 
@@ -174,7 +174,7 @@ final class OAuthRetrieveAuthorizeParams implements BaseModel
     public function withResponseType(ResponseType|string $responseType): self
     {
         $obj = clone $this;
-        $obj->responseType = $responseType instanceof ResponseType ? $responseType->value : $responseType;
+        $obj['responseType'] = $responseType;
 
         return $obj;
     }
@@ -199,7 +199,7 @@ final class OAuthRetrieveAuthorizeParams implements BaseModel
         CodeChallengeMethod|string $codeChallengeMethod
     ): self {
         $obj = clone $this;
-        $obj->codeChallengeMethod = $codeChallengeMethod instanceof CodeChallengeMethod ? $codeChallengeMethod->value : $codeChallengeMethod;
+        $obj['codeChallengeMethod'] = $codeChallengeMethod;
 
         return $obj;
     }

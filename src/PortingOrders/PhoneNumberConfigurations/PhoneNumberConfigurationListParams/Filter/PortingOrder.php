@@ -41,7 +41,7 @@ final class PortingOrder implements BaseModel
     {
         $obj = new self;
 
-        null !== $status && $obj->status = array_map(fn ($v) => $v instanceof Status ? $v->value : $v, $status);
+        null !== $status && $obj['status'] = $status;
 
         return $obj;
     }
@@ -54,7 +54,7 @@ final class PortingOrder implements BaseModel
     public function withStatus(array $status): self
     {
         $obj = clone $this;
-        $obj->status = array_map(fn ($v) => $v instanceof Status ? $v->value : $v, $status);
+        $obj['status'] = $status;
 
         return $obj;
     }

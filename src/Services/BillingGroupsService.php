@@ -15,7 +15,6 @@ use Telnyx\BillingGroups\BillingGroupUpdateParams;
 use Telnyx\BillingGroups\BillingGroupUpdateResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\BillingGroupsContract;
 
@@ -35,8 +34,6 @@ final class BillingGroupsService implements BillingGroupsContract
      *
      * @param string $name A name for the billing group
      *
-     * @return BillingGroupNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -52,8 +49,6 @@ final class BillingGroupsService implements BillingGroupsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return BillingGroupNewResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -81,29 +76,10 @@ final class BillingGroupsService implements BillingGroupsContract
      *
      * Get a billing group
      *
-     * @return BillingGroupGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): BillingGroupGetResponse {
-        $params = [];
-
-        return $this->retrieveRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return BillingGroupGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): BillingGroupGetResponse {
         // @phpstan-ignore-next-line;
@@ -122,8 +98,6 @@ final class BillingGroupsService implements BillingGroupsContract
      *
      * @param string $name A name for the billing group
      *
-     * @return BillingGroupUpdateResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function update(
@@ -140,8 +114,6 @@ final class BillingGroupsService implements BillingGroupsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return BillingGroupUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -172,8 +144,6 @@ final class BillingGroupsService implements BillingGroupsContract
      *
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
-     * @return BillingGroupListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -189,8 +159,6 @@ final class BillingGroupsService implements BillingGroupsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return BillingGroupListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -218,29 +186,10 @@ final class BillingGroupsService implements BillingGroupsContract
      *
      * Delete a billing group
      *
-     * @return BillingGroupDeleteResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): BillingGroupDeleteResponse {
-        $params = [];
-
-        return $this->deleteRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return BillingGroupDeleteResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): BillingGroupDeleteResponse {
         // @phpstan-ignore-next-line;

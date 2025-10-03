@@ -7,7 +7,9 @@ namespace Telnyx\ChannelZones;
 use Telnyx\ChannelZones\ChannelZoneUpdateResponse\RecordType;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type channel_zone_update_response = array{
@@ -19,15 +21,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *   createdAt?: string,
  *   updatedAt?: string,
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class ChannelZoneUpdateResponse implements BaseModel
+final class ChannelZoneUpdateResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<channel_zone_update_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     #[Api]
     public string $id;
@@ -111,7 +111,7 @@ final class ChannelZoneUpdateResponse implements BaseModel
         $obj->channels = $channels;
         $obj->countries = $countries;
         $obj->name = $name;
-        $obj->recordType = $recordType instanceof RecordType ? $recordType->value : $recordType;
+        $obj['recordType'] = $recordType;
 
         null !== $createdAt && $obj->createdAt = $createdAt;
         null !== $updatedAt && $obj->updatedAt = $updatedAt;
@@ -162,7 +162,7 @@ final class ChannelZoneUpdateResponse implements BaseModel
     public function withRecordType(RecordType|string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType instanceof RecordType ? $recordType->value : $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }

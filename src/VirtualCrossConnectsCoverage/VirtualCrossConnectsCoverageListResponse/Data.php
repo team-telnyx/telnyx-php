@@ -78,7 +78,7 @@ final class Data implements BaseModel
         $obj = new self;
 
         null !== $availableBandwidth && $obj->availableBandwidth = $availableBandwidth;
-        null !== $cloudProvider && $obj->cloudProvider = $cloudProvider instanceof CloudProvider ? $cloudProvider->value : $cloudProvider;
+        null !== $cloudProvider && $obj['cloudProvider'] = $cloudProvider;
         null !== $cloudProviderRegion && $obj->cloudProviderRegion = $cloudProviderRegion;
         null !== $location && $obj->location = $location;
         null !== $recordType && $obj->recordType = $recordType;
@@ -107,7 +107,7 @@ final class Data implements BaseModel
     public function withCloudProvider(CloudProvider|string $cloudProvider): self
     {
         $obj = clone $this;
-        $obj->cloudProvider = $cloudProvider instanceof CloudProvider ? $cloudProvider->value : $cloudProvider;
+        $obj['cloudProvider'] = $cloudProvider;
 
         return $obj;
     }

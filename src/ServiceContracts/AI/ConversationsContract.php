@@ -10,7 +10,6 @@ use Telnyx\AI\Conversations\ConversationGetResponse;
 use Telnyx\AI\Conversations\ConversationListResponse;
 use Telnyx\AI\Conversations\ConversationUpdateResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 
 use const Telnyx\Core\OMIT as omit;
@@ -23,8 +22,6 @@ interface ConversationsContract
      * @param array<string,
      * string,> $metadata Metadata associated with the conversation
      * @param string $name
-     *
-     * @return Conversation<HasRawResponse>
      *
      * @throws APIException
      */
@@ -39,8 +36,6 @@ interface ConversationsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return Conversation<HasRawResponse>
-     *
      * @throws APIException
      */
     public function createRaw(
@@ -50,8 +45,6 @@ interface ConversationsContract
 
     /**
      * @api
-     *
-     * @return ConversationGetResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -63,23 +56,8 @@ interface ConversationsContract
     /**
      * @api
      *
-     * @return ConversationGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $conversationID,
-        mixed $params,
-        ?RequestOptions $requestOptions = null,
-    ): ConversationGetResponse;
-
-    /**
-     * @api
-     *
      * @param array<string,
      * string,> $metadata Metadata associated with the conversation
-     *
-     * @return ConversationUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -93,8 +71,6 @@ interface ConversationsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ConversationUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -120,8 +96,6 @@ interface ConversationsContract
      * @param string $or Apply OR conditions using PostgREST syntax (e.g., `or=(created_at.gte.2025-04-01,last_message_at.gte.2025-04-01)`)
      * @param string $order Order the results by specific fields (e.g., `order=created_at.desc` or `order=last_message_at.asc`)
      *
-     * @return ConversationListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -145,8 +119,6 @@ interface ConversationsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return ConversationListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function listRaw(
@@ -162,17 +134,6 @@ interface ConversationsContract
     public function delete(
         string $conversationID,
         ?RequestOptions $requestOptions = null
-    ): mixed;
-
-    /**
-     * @api
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $conversationID,
-        mixed $params,
-        ?RequestOptions $requestOptions = null,
     ): mixed;
 
     /**
@@ -218,25 +179,10 @@ interface ConversationsContract
     /**
      * @api
      *
-     * @return ConversationGetConversationsInsightsResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieveConversationsInsights(
         string $conversationID,
         ?RequestOptions $requestOptions = null
-    ): ConversationGetConversationsInsightsResponse;
-
-    /**
-     * @api
-     *
-     * @return ConversationGetConversationsInsightsResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveConversationsInsightsRaw(
-        string $conversationID,
-        mixed $params,
-        ?RequestOptions $requestOptions = null,
     ): ConversationGetConversationsInsightsResponse;
 }

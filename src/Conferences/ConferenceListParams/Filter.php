@@ -161,10 +161,10 @@ final class Filter implements BaseModel
         null !== $name && $obj->name = $name;
         null !== $occurredAt && $obj->occurredAt = $occurredAt;
         null !== $outboundOutboundVoiceProfileID && $obj->outboundOutboundVoiceProfileID = $outboundOutboundVoiceProfileID;
-        null !== $product && $obj->product = $product instanceof Product ? $product->value : $product;
-        null !== $status && $obj->status = $status instanceof Status ? $status->value : $status;
+        null !== $product && $obj['product'] = $product;
+        null !== $status && $obj['status'] = $status;
         null !== $to && $obj->to = $to;
-        null !== $type && $obj->type = $type instanceof Type ? $type->value : $type;
+        null !== $type && $obj['type'] = $type;
 
         return $obj;
     }
@@ -277,7 +277,7 @@ final class Filter implements BaseModel
     public function withProduct(Product|string $product): self
     {
         $obj = clone $this;
-        $obj->product = $product instanceof Product ? $product->value : $product;
+        $obj['product'] = $product;
 
         return $obj;
     }
@@ -290,7 +290,7 @@ final class Filter implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }
@@ -314,7 +314,7 @@ final class Filter implements BaseModel
     public function withType(Type|string $type): self
     {
         $obj = clone $this;
-        $obj->type = $type instanceof Type ? $type->value : $type;
+        $obj['type'] = $type;
 
         return $obj;
     }

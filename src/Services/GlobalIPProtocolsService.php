@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\GlobalIPProtocols\GlobalIPProtocolListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\GlobalIPProtocolsContract;
@@ -23,27 +22,9 @@ final class GlobalIPProtocolsService implements GlobalIPProtocolsContract
      *
      * List all Global IP Protocols
      *
-     * @return GlobalIPProtocolListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
-        ?RequestOptions $requestOptions = null
-    ): GlobalIPProtocolListResponse {
-        $params = [];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return GlobalIPProtocolListResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): GlobalIPProtocolListResponse {
         // @phpstan-ignore-next-line;

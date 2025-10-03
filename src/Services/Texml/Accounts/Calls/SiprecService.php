@@ -6,7 +6,6 @@ namespace Telnyx\Services\Texml\Accounts\Calls;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\Accounts\Calls\SiprecContract;
 use Telnyx\Texml\Accounts\Calls\Siprec\SiprecSiprecSidJsonParams;
@@ -31,8 +30,6 @@ final class SiprecService implements SiprecContract
      * @param string $callSid
      * @param Status|value-of<Status> $status The new status of the resource. Specifying `stopped` will end the siprec session.
      *
-     * @return SiprecSiprecSidJsonResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function siprecSidJson(
@@ -53,8 +50,6 @@ final class SiprecService implements SiprecContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return SiprecSiprecSidJsonResponse<HasRawResponse>
      *
      * @throws APIException
      */

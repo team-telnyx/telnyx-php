@@ -104,10 +104,10 @@ final class Filter implements BaseModel
 
         null !== $billingGroup && $obj->billingGroup = $billingGroup;
         null !== $cld && $obj->cld = $cld;
-        null !== $cldFilter && $obj->cldFilter = $cldFilter instanceof CldFilter ? $cldFilter->value : $cldFilter;
+        null !== $cldFilter && $obj['cldFilter'] = $cldFilter;
         null !== $cli && $obj->cli = $cli;
-        null !== $cliFilter && $obj->cliFilter = $cliFilter instanceof CliFilter ? $cliFilter->value : $cliFilter;
-        null !== $filterType && $obj->filterType = $filterType instanceof FilterType ? $filterType->value : $filterType;
+        null !== $cliFilter && $obj['cliFilter'] = $cliFilter;
+        null !== $filterType && $obj['filterType'] = $filterType;
         null !== $tagsList && $obj->tagsList = $tagsList;
 
         return $obj;
@@ -143,7 +143,7 @@ final class Filter implements BaseModel
     public function withCldFilter(CldFilter|string $cldFilter): self
     {
         $obj = clone $this;
-        $obj->cldFilter = $cldFilter instanceof CldFilter ? $cldFilter->value : $cldFilter;
+        $obj['cldFilter'] = $cldFilter;
 
         return $obj;
     }
@@ -167,7 +167,7 @@ final class Filter implements BaseModel
     public function withCliFilter(CliFilter|string $cliFilter): self
     {
         $obj = clone $this;
-        $obj->cliFilter = $cliFilter instanceof CliFilter ? $cliFilter->value : $cliFilter;
+        $obj['cliFilter'] = $cliFilter;
 
         return $obj;
     }
@@ -180,7 +180,7 @@ final class Filter implements BaseModel
     public function withFilterType(FilterType|string $filterType): self
     {
         $obj = clone $this;
-        $obj->filterType = $filterType instanceof FilterType ? $filterType->value : $filterType;
+        $obj['filterType'] = $filterType;
 
         return $obj;
     }

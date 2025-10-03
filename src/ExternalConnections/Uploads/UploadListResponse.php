@@ -6,22 +6,22 @@ namespace Telnyx\ExternalConnections\Uploads;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\ExternalConnections\ExternalVoiceIntegrationsPaginationMeta;
 
 /**
  * @phpstan-type upload_list_response = array{
  *   data?: list<Upload>, meta?: ExternalVoiceIntegrationsPaginationMeta
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class UploadListResponse implements BaseModel
+final class UploadListResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<upload_list_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /** @var list<Upload>|null $data */
     #[Api(list: Upload::class, optional: true)]

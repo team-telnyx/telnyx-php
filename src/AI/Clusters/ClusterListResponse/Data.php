@@ -104,7 +104,7 @@ final class Data implements BaseModel
         $obj->finishedAt = $finishedAt;
         $obj->minClusterSize = $minClusterSize;
         $obj->minSubclusterSize = $minSubclusterSize;
-        $obj->status = $status instanceof TaskStatus ? $status->value : $status;
+        $obj['status'] = $status;
         $obj->taskID = $taskID;
 
         return $obj;
@@ -156,7 +156,7 @@ final class Data implements BaseModel
     public function withStatus(TaskStatus|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof TaskStatus ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

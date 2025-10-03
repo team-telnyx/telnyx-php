@@ -7,19 +7,19 @@ namespace Telnyx\ChargesSummary;
 use Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type charges_summary_get_response = array{data: Data}
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class ChargesSummaryGetResponse implements BaseModel
+final class ChargesSummaryGetResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<charges_summary_get_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     #[Api]
     public Data $data;

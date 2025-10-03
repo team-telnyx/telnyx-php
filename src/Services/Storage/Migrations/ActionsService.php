@@ -6,7 +6,6 @@ namespace Telnyx\Services\Storage\Migrations;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Storage\Migrations\ActionsContract;
 use Telnyx\Storage\Migrations\Actions\ActionStopResponse;
@@ -23,29 +22,10 @@ final class ActionsService implements ActionsContract
      *
      * Stop a Migration
      *
-     * @return ActionStopResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function stop(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): ActionStopResponse {
-        $params = [];
-
-        return $this->stopRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return ActionStopResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function stopRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): ActionStopResponse {
         // @phpstan-ignore-next-line;

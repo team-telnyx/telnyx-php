@@ -51,8 +51,8 @@ final class Status implements BaseModel
     {
         $obj = new self;
 
-        null !== $eq && $obj->eq = $eq instanceof Eq ? $eq->value : $eq;
-        null !== $in && $obj->in = array_map(fn ($v) => $v instanceof In ? $v->value : $v, $in);
+        null !== $eq && $obj['eq'] = $eq;
+        null !== $in && $obj['in'] = $in;
 
         return $obj;
     }
@@ -65,7 +65,7 @@ final class Status implements BaseModel
     public function withEq(Eq|string $eq): self
     {
         $obj = clone $this;
-        $obj->eq = $eq instanceof Eq ? $eq->value : $eq;
+        $obj['eq'] = $eq;
 
         return $obj;
     }
@@ -78,7 +78,7 @@ final class Status implements BaseModel
     public function withIn(array $in): self
     {
         $obj = clone $this;
-        $obj->in = array_map(fn ($v) => $v instanceof In ? $v->value : $v, $in);
+        $obj['in'] = $in;
 
         return $obj;
     }

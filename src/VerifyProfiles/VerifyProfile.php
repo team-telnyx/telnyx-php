@@ -103,7 +103,7 @@ final class VerifyProfile implements BaseModel
         null !== $flashcall && $obj->flashcall = $flashcall;
         null !== $language && $obj->language = $language;
         null !== $name && $obj->name = $name;
-        null !== $recordType && $obj->recordType = $recordType instanceof RecordType ? $recordType->value : $recordType;
+        null !== $recordType && $obj['recordType'] = $recordType;
         null !== $sms && $obj->sms = $sms;
         null !== $updatedAt && $obj->updatedAt = $updatedAt;
         null !== $webhookFailoverURL && $obj->webhookFailoverURL = $webhookFailoverURL;
@@ -168,7 +168,7 @@ final class VerifyProfile implements BaseModel
     public function withRecordType(RecordType|string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType instanceof RecordType ? $recordType->value : $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }

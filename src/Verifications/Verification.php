@@ -119,10 +119,10 @@ final class Verification implements BaseModel
         null !== $createdAt && $obj->createdAt = $createdAt;
         null !== $customCode && $obj->customCode = $customCode;
         null !== $phoneNumber && $obj->phoneNumber = $phoneNumber;
-        null !== $recordType && $obj->recordType = $recordType instanceof RecordType ? $recordType->value : $recordType;
-        null !== $status && $obj->status = $status instanceof Status ? $status->value : $status;
+        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $status && $obj['status'] = $status;
         null !== $timeoutSecs && $obj->timeoutSecs = $timeoutSecs;
-        null !== $type && $obj->type = $type instanceof Type ? $type->value : $type;
+        null !== $type && $obj['type'] = $type;
         null !== $updatedAt && $obj->updatedAt = $updatedAt;
         null !== $verifyProfileID && $obj->verifyProfileID = $verifyProfileID;
 
@@ -175,7 +175,7 @@ final class Verification implements BaseModel
     public function withRecordType(RecordType|string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType instanceof RecordType ? $recordType->value : $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }
@@ -188,7 +188,7 @@ final class Verification implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }
@@ -212,7 +212,7 @@ final class Verification implements BaseModel
     public function withType(Type|string $type): self
     {
         $obj = clone $this;
-        $obj->type = $type instanceof Type ? $type->value : $type;
+        $obj['type'] = $type;
 
         return $obj;
     }

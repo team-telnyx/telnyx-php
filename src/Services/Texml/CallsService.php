@@ -6,7 +6,6 @@ namespace Telnyx\Services\Texml;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\CallsContract;
 use Telnyx\Texml\Calls\CallInitiateParams;
@@ -49,8 +48,6 @@ final class CallsService implements CallsContract
      * @param string $texml teXML to replace the current one with
      * @param string $url the URL where TeXML will make a request to retrieve a new set of TeXML instructions to continue the call flow
      *
-     * @return CallUpdateResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function update(
@@ -83,8 +80,6 @@ final class CallsService implements CallsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return CallUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -144,8 +139,6 @@ final class CallsService implements CallsContract
      * @param Trim|value-of<Trim> $trim Whether to trim any leading and trailing silence from the recording. Defaults to `trim-silence`.
      * @param string $url the URL from which Telnyx will retrieve the TeXML call instructions
      * @param URLMethod|value-of<URLMethod> $urlMethod HTTP request type used for `Url`. The default value is inherited from TeXML Application setting.
-     *
-     * @return CallInitiateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -225,8 +218,6 @@ final class CallsService implements CallsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return CallInitiateResponse<HasRawResponse>
      *
      * @throws APIException
      */

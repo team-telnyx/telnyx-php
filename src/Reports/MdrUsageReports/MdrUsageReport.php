@@ -107,7 +107,7 @@ final class MdrUsageReport implements BaseModel
         $obj = new self;
 
         null !== $id && $obj->id = $id;
-        null !== $aggregationType && $obj->aggregationType = $aggregationType instanceof AggregationType ? $aggregationType->value : $aggregationType;
+        null !== $aggregationType && $obj['aggregationType'] = $aggregationType;
         null !== $connections && $obj->connections = $connections;
         null !== $createdAt && $obj->createdAt = $createdAt;
         null !== $endDate && $obj->endDate = $endDate;
@@ -116,7 +116,7 @@ final class MdrUsageReport implements BaseModel
         null !== $reportURL && $obj->reportURL = $reportURL;
         null !== $result && $obj->result = $result;
         null !== $startDate && $obj->startDate = $startDate;
-        null !== $status && $obj->status = $status instanceof Status ? $status->value : $status;
+        null !== $status && $obj['status'] = $status;
         null !== $updatedAt && $obj->updatedAt = $updatedAt;
 
         return $obj;
@@ -140,7 +140,7 @@ final class MdrUsageReport implements BaseModel
         AggregationType|string $aggregationType
     ): self {
         $obj = clone $this;
-        $obj->aggregationType = $aggregationType instanceof AggregationType ? $aggregationType->value : $aggregationType;
+        $obj['aggregationType'] = $aggregationType;
 
         return $obj;
     }
@@ -221,7 +221,7 @@ final class MdrUsageReport implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

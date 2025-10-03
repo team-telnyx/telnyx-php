@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayDeleteResponse;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayGetResponse;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayListParams\Filter;
@@ -25,8 +24,6 @@ interface PublicInternetGatewaysContract
      * @param string $networkID the id of the network associated with the interface
      * @param string $regionCode the region the interface should be deployed to
      *
-     * @return PublicInternetGatewayNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -41,8 +38,6 @@ interface PublicInternetGatewaysContract
      *
      * @param array<string, mixed> $params
      *
-     * @return PublicInternetGatewayNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function createRaw(
@@ -52,8 +47,6 @@ interface PublicInternetGatewaysContract
 
     /**
      * @api
-     *
-     * @return PublicInternetGatewayGetResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -65,23 +58,8 @@ interface PublicInternetGatewaysContract
     /**
      * @api
      *
-     * @return PublicInternetGatewayGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
-        ?RequestOptions $requestOptions = null
-    ): PublicInternetGatewayGetResponse;
-
-    /**
-     * @api
-     *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[network_id]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
-     *
-     * @return PublicInternetGatewayListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -96,8 +74,6 @@ interface PublicInternetGatewaysContract
      *
      * @param array<string, mixed> $params
      *
-     * @return PublicInternetGatewayListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function listRaw(
@@ -108,25 +84,10 @@ interface PublicInternetGatewaysContract
     /**
      * @api
      *
-     * @return PublicInternetGatewayDeleteResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): PublicInternetGatewayDeleteResponse;
-
-    /**
-     * @api
-     *
-     * @return PublicInternetGatewayDeleteResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): PublicInternetGatewayDeleteResponse;
 }

@@ -334,28 +334,28 @@ final class ActionAnswerParams implements BaseModel
         null !== $clientState && $obj->clientState = $clientState;
         null !== $commandID && $obj->commandID = $commandID;
         null !== $customHeaders && $obj->customHeaders = $customHeaders;
-        null !== $preferredCodecs && $obj->preferredCodecs = $preferredCodecs instanceof PreferredCodecs ? $preferredCodecs->value : $preferredCodecs;
-        null !== $record && $obj->record = $record instanceof Record ? $record->value : $record;
-        null !== $recordChannels && $obj->recordChannels = $recordChannels instanceof RecordChannels ? $recordChannels->value : $recordChannels;
+        null !== $preferredCodecs && $obj['preferredCodecs'] = $preferredCodecs;
+        null !== $record && $obj['record'] = $record;
+        null !== $recordChannels && $obj['recordChannels'] = $recordChannels;
         null !== $recordCustomFileName && $obj->recordCustomFileName = $recordCustomFileName;
-        null !== $recordFormat && $obj->recordFormat = $recordFormat instanceof RecordFormat ? $recordFormat->value : $recordFormat;
+        null !== $recordFormat && $obj['recordFormat'] = $recordFormat;
         null !== $recordMaxLength && $obj->recordMaxLength = $recordMaxLength;
         null !== $recordTimeoutSecs && $obj->recordTimeoutSecs = $recordTimeoutSecs;
-        null !== $recordTrack && $obj->recordTrack = $recordTrack instanceof RecordTrack ? $recordTrack->value : $recordTrack;
-        null !== $recordTrim && $obj->recordTrim = $recordTrim instanceof RecordTrim ? $recordTrim->value : $recordTrim;
+        null !== $recordTrack && $obj['recordTrack'] = $recordTrack;
+        null !== $recordTrim && $obj['recordTrim'] = $recordTrim;
         null !== $sendSilenceWhenIdle && $obj->sendSilenceWhenIdle = $sendSilenceWhenIdle;
         null !== $sipHeaders && $obj->sipHeaders = $sipHeaders;
         null !== $soundModifications && $obj->soundModifications = $soundModifications;
-        null !== $streamBidirectionalCodec && $obj->streamBidirectionalCodec = $streamBidirectionalCodec instanceof StreamBidirectionalCodec ? $streamBidirectionalCodec->value : $streamBidirectionalCodec;
-        null !== $streamBidirectionalMode && $obj->streamBidirectionalMode = $streamBidirectionalMode instanceof StreamBidirectionalMode ? $streamBidirectionalMode->value : $streamBidirectionalMode;
-        null !== $streamBidirectionalTargetLegs && $obj->streamBidirectionalTargetLegs = $streamBidirectionalTargetLegs instanceof StreamBidirectionalTargetLegs ? $streamBidirectionalTargetLegs->value : $streamBidirectionalTargetLegs;
-        null !== $streamCodec && $obj->streamCodec = $streamCodec instanceof StreamCodec ? $streamCodec->value : $streamCodec;
-        null !== $streamTrack && $obj->streamTrack = $streamTrack instanceof StreamTrack ? $streamTrack->value : $streamTrack;
+        null !== $streamBidirectionalCodec && $obj['streamBidirectionalCodec'] = $streamBidirectionalCodec;
+        null !== $streamBidirectionalMode && $obj['streamBidirectionalMode'] = $streamBidirectionalMode;
+        null !== $streamBidirectionalTargetLegs && $obj['streamBidirectionalTargetLegs'] = $streamBidirectionalTargetLegs;
+        null !== $streamCodec && $obj['streamCodec'] = $streamCodec;
+        null !== $streamTrack && $obj['streamTrack'] = $streamTrack;
         null !== $streamURL && $obj->streamURL = $streamURL;
         null !== $transcription && $obj->transcription = $transcription;
         null !== $transcriptionConfig && $obj->transcriptionConfig = $transcriptionConfig;
         null !== $webhookURL && $obj->webhookURL = $webhookURL;
-        null !== $webhookURLMethod && $obj->webhookURLMethod = $webhookURLMethod instanceof WebhookURLMethod ? $webhookURLMethod->value : $webhookURLMethod;
+        null !== $webhookURLMethod && $obj['webhookURLMethod'] = $webhookURLMethod;
 
         return $obj;
     }
@@ -415,7 +415,7 @@ final class ActionAnswerParams implements BaseModel
         PreferredCodecs|string $preferredCodecs
     ): self {
         $obj = clone $this;
-        $obj->preferredCodecs = $preferredCodecs instanceof PreferredCodecs ? $preferredCodecs->value : $preferredCodecs;
+        $obj['preferredCodecs'] = $preferredCodecs;
 
         return $obj;
     }
@@ -428,7 +428,7 @@ final class ActionAnswerParams implements BaseModel
     public function withRecord(Record|string $record): self
     {
         $obj = clone $this;
-        $obj->record = $record instanceof Record ? $record->value : $record;
+        $obj['record'] = $record;
 
         return $obj;
     }
@@ -442,7 +442,7 @@ final class ActionAnswerParams implements BaseModel
         RecordChannels|string $recordChannels
     ): self {
         $obj = clone $this;
-        $obj->recordChannels = $recordChannels instanceof RecordChannels ? $recordChannels->value : $recordChannels;
+        $obj['recordChannels'] = $recordChannels;
 
         return $obj;
     }
@@ -466,7 +466,7 @@ final class ActionAnswerParams implements BaseModel
     public function withRecordFormat(RecordFormat|string $recordFormat): self
     {
         $obj = clone $this;
-        $obj->recordFormat = $recordFormat instanceof RecordFormat ? $recordFormat->value : $recordFormat;
+        $obj['recordFormat'] = $recordFormat;
 
         return $obj;
     }
@@ -501,7 +501,7 @@ final class ActionAnswerParams implements BaseModel
     public function withRecordTrack(RecordTrack|string $recordTrack): self
     {
         $obj = clone $this;
-        $obj->recordTrack = $recordTrack instanceof RecordTrack ? $recordTrack->value : $recordTrack;
+        $obj['recordTrack'] = $recordTrack;
 
         return $obj;
     }
@@ -514,7 +514,7 @@ final class ActionAnswerParams implements BaseModel
     public function withRecordTrim(RecordTrim|string $recordTrim): self
     {
         $obj = clone $this;
-        $obj->recordTrim = $recordTrim instanceof RecordTrim ? $recordTrim->value : $recordTrim;
+        $obj['recordTrim'] = $recordTrim;
 
         return $obj;
     }
@@ -564,7 +564,7 @@ final class ActionAnswerParams implements BaseModel
         StreamBidirectionalCodec|string $streamBidirectionalCodec
     ): self {
         $obj = clone $this;
-        $obj->streamBidirectionalCodec = $streamBidirectionalCodec instanceof StreamBidirectionalCodec ? $streamBidirectionalCodec->value : $streamBidirectionalCodec;
+        $obj['streamBidirectionalCodec'] = $streamBidirectionalCodec;
 
         return $obj;
     }
@@ -578,7 +578,7 @@ final class ActionAnswerParams implements BaseModel
         StreamBidirectionalMode|string $streamBidirectionalMode
     ): self {
         $obj = clone $this;
-        $obj->streamBidirectionalMode = $streamBidirectionalMode instanceof StreamBidirectionalMode ? $streamBidirectionalMode->value : $streamBidirectionalMode;
+        $obj['streamBidirectionalMode'] = $streamBidirectionalMode;
 
         return $obj;
     }
@@ -592,7 +592,7 @@ final class ActionAnswerParams implements BaseModel
         StreamBidirectionalTargetLegs|string $streamBidirectionalTargetLegs
     ): self {
         $obj = clone $this;
-        $obj->streamBidirectionalTargetLegs = $streamBidirectionalTargetLegs instanceof StreamBidirectionalTargetLegs ? $streamBidirectionalTargetLegs->value : $streamBidirectionalTargetLegs;
+        $obj['streamBidirectionalTargetLegs'] = $streamBidirectionalTargetLegs;
 
         return $obj;
     }
@@ -605,7 +605,7 @@ final class ActionAnswerParams implements BaseModel
     public function withStreamCodec(StreamCodec|string $streamCodec): self
     {
         $obj = clone $this;
-        $obj->streamCodec = $streamCodec instanceof StreamCodec ? $streamCodec->value : $streamCodec;
+        $obj['streamCodec'] = $streamCodec;
 
         return $obj;
     }
@@ -618,7 +618,7 @@ final class ActionAnswerParams implements BaseModel
     public function withStreamTrack(StreamTrack|string $streamTrack): self
     {
         $obj = clone $this;
-        $obj->streamTrack = $streamTrack instanceof StreamTrack ? $streamTrack->value : $streamTrack;
+        $obj['streamTrack'] = $streamTrack;
 
         return $obj;
     }
@@ -674,7 +674,7 @@ final class ActionAnswerParams implements BaseModel
         WebhookURLMethod|string $webhookURLMethod
     ): self {
         $obj = clone $this;
-        $obj->webhookURLMethod = $webhookURLMethod instanceof WebhookURLMethod ? $webhookURLMethod->value : $webhookURLMethod;
+        $obj['webhookURLMethod'] = $webhookURLMethod;
 
         return $obj;
     }

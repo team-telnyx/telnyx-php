@@ -126,11 +126,11 @@ final class Data implements BaseModel
         $obj = new self;
 
         null !== $id && $obj->id = $id;
-        null !== $availableNotificationMethods && $obj->availableNotificationMethods = array_map(fn ($v) => $v instanceof AvailableNotificationMethod ? $v->value : $v, $availableNotificationMethods);
+        null !== $availableNotificationMethods && $obj['availableNotificationMethods'] = $availableNotificationMethods;
         null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $eventType && $obj->eventType = $eventType instanceof EventType ? $eventType->value : $eventType;
+        null !== $eventType && $obj['eventType'] = $eventType;
         null !== $payload && $obj->payload = $payload;
-        null !== $payloadStatus && $obj->payloadStatus = $payloadStatus instanceof PayloadStatus ? $payloadStatus->value : $payloadStatus;
+        null !== $payloadStatus && $obj['payloadStatus'] = $payloadStatus;
         null !== $portingOrderID && $obj->portingOrderID = $portingOrderID;
         null !== $recordType && $obj->recordType = $recordType;
         null !== $updatedAt && $obj->updatedAt = $updatedAt;
@@ -158,7 +158,7 @@ final class Data implements BaseModel
         array $availableNotificationMethods
     ): self {
         $obj = clone $this;
-        $obj->availableNotificationMethods = array_map(fn ($v) => $v instanceof AvailableNotificationMethod ? $v->value : $v, $availableNotificationMethods);
+        $obj['availableNotificationMethods'] = $availableNotificationMethods;
 
         return $obj;
     }
@@ -182,7 +182,7 @@ final class Data implements BaseModel
     public function withEventType(EventType|string $eventType): self
     {
         $obj = clone $this;
-        $obj->eventType = $eventType instanceof EventType ? $eventType->value : $eventType;
+        $obj['eventType'] = $eventType;
 
         return $obj;
     }
@@ -207,7 +207,7 @@ final class Data implements BaseModel
     public function withPayloadStatus(PayloadStatus|string $payloadStatus): self
     {
         $obj = clone $this;
-        $obj->payloadStatus = $payloadStatus instanceof PayloadStatus ? $payloadStatus->value : $payloadStatus;
+        $obj['payloadStatus'] = $payloadStatus;
 
         return $obj;
     }

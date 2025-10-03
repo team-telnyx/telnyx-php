@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\TelephonyCredentials\TelephonyCredentialDeleteResponse;
 use Telnyx\TelephonyCredentials\TelephonyCredentialGetResponse;
@@ -27,8 +26,6 @@ interface TelephonyCredentialsContract
      * @param string $name
      * @param string $tag Tags a credential. A single tag can hold at maximum 1000 credentials.
      *
-     * @return TelephonyCredentialNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -44,8 +41,6 @@ interface TelephonyCredentialsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return TelephonyCredentialNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function createRaw(
@@ -55,8 +50,6 @@ interface TelephonyCredentialsContract
 
     /**
      * @api
-     *
-     * @return TelephonyCredentialGetResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -68,25 +61,10 @@ interface TelephonyCredentialsContract
     /**
      * @api
      *
-     * @return TelephonyCredentialGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
-        ?RequestOptions $requestOptions = null
-    ): TelephonyCredentialGetResponse;
-
-    /**
-     * @api
-     *
      * @param string $connectionID identifies the Credential Connection this credential is associated with
      * @param string $expiresAt ISO-8601 formatted date indicating when the credential will expire
      * @param string $name
      * @param string $tag Tags a credential. A single tag can hold at maximum 1000 credentials.
-     *
-     * @return TelephonyCredentialUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -104,8 +82,6 @@ interface TelephonyCredentialsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return TelephonyCredentialUpdateResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function updateRaw(
@@ -120,8 +96,6 @@ interface TelephonyCredentialsContract
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[tag], filter[name], filter[status], filter[resource_id], filter[sip_username]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
-     * @return TelephonyCredentialListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -135,8 +109,6 @@ interface TelephonyCredentialsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return TelephonyCredentialListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function listRaw(
@@ -146,8 +118,6 @@ interface TelephonyCredentialsContract
 
     /**
      * @api
-     *
-     * @return TelephonyCredentialDeleteResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -159,34 +129,10 @@ interface TelephonyCredentialsContract
     /**
      * @api
      *
-     * @return TelephonyCredentialDeleteResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $id,
-        mixed $params,
-        ?RequestOptions $requestOptions = null
-    ): TelephonyCredentialDeleteResponse;
-
-    /**
-     * @api
-     *
      * @throws APIException
      */
     public function createToken(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): string;
-
-    /**
-     * @api
-     *
-     * @throws APIException
-     */
-    public function createTokenRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): string;
 }

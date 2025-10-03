@@ -165,7 +165,7 @@ final class Data implements BaseModel
         $obj->from = $from;
         $obj->queueID = $queueID;
         $obj->queuePosition = $queuePosition;
-        $obj->recordType = $recordType instanceof RecordType ? $recordType->value : $recordType;
+        $obj['recordType'] = $recordType;
         $obj->to = $to;
         $obj->waitTimeSecs = $waitTimeSecs;
 
@@ -266,7 +266,7 @@ final class Data implements BaseModel
     public function withRecordType(RecordType|string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType instanceof RecordType ? $recordType->value : $recordType;
+        $obj['recordType'] = $recordType;
 
         return $obj;
     }

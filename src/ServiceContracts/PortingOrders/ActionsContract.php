@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\PortingOrders;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PortingOrders\Actions\ActionActivateResponse;
 use Telnyx\PortingOrders\Actions\ActionCancelResponse;
 use Telnyx\PortingOrders\Actions\ActionConfirmResponse;
@@ -20,8 +19,6 @@ interface ActionsContract
     /**
      * @api
      *
-     * @return ActionActivateResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function activate(
@@ -31,21 +28,6 @@ interface ActionsContract
 
     /**
      * @api
-     *
-     * @return ActionActivateResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function activateRaw(
-        string $id,
-        mixed $params,
-        ?RequestOptions $requestOptions = null
-    ): ActionActivateResponse;
-
-    /**
-     * @api
-     *
-     * @return ActionCancelResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -57,21 +39,6 @@ interface ActionsContract
     /**
      * @api
      *
-     * @return ActionCancelResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function cancelRaw(
-        string $id,
-        mixed $params,
-        ?RequestOptions $requestOptions = null
-    ): ActionCancelResponse;
-
-    /**
-     * @api
-     *
-     * @return ActionConfirmResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function confirm(
@@ -82,23 +49,8 @@ interface ActionsContract
     /**
      * @api
      *
-     * @return ActionConfirmResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function confirmRaw(
-        string $id,
-        mixed $params,
-        ?RequestOptions $requestOptions = null
-    ): ActionConfirmResponse;
-
-    /**
-     * @api
-     *
      * @param int $expiresInSeconds The number of seconds the token will be valid for
      * @param Permissions|value-of<Permissions> $permissions The permissions the token will have
-     *
-     * @return ActionShareResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -113,8 +65,6 @@ interface ActionsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ActionShareResponse<HasRawResponse>
      *
      * @throws APIException
      */

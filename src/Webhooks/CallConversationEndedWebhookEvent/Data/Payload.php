@@ -168,7 +168,7 @@ final class Payload implements BaseModel
         null !== $callControlID && $obj->callControlID = $callControlID;
         null !== $callLegID && $obj->callLegID = $callLegID;
         null !== $callSessionID && $obj->callSessionID = $callSessionID;
-        null !== $callingPartyType && $obj->callingPartyType = $callingPartyType instanceof CallingPartyType ? $callingPartyType->value : $callingPartyType;
+        null !== $callingPartyType && $obj['callingPartyType'] = $callingPartyType;
         null !== $clientState && $obj->clientState = $clientState;
         null !== $connectionID && $obj->connectionID = $connectionID;
         null !== $conversationID && $obj->conversationID = $conversationID;
@@ -237,7 +237,7 @@ final class Payload implements BaseModel
         CallingPartyType|string $callingPartyType
     ): self {
         $obj = clone $this;
-        $obj->callingPartyType = $callingPartyType instanceof CallingPartyType ? $callingPartyType->value : $callingPartyType;
+        $obj['callingPartyType'] = $callingPartyType;
 
         return $obj;
     }

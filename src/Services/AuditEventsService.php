@@ -11,7 +11,6 @@ use Telnyx\AuditEvents\AuditEventListParams\Sort;
 use Telnyx\AuditEvents\AuditEventListResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AuditEventsContract;
 
@@ -33,8 +32,6 @@ final class AuditEventsService implements AuditEventsContract
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      * @param Sort|value-of<Sort> $sort set the order of the results by the creation date
      *
-     * @return AuditEventListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -52,8 +49,6 @@ final class AuditEventsService implements AuditEventsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return AuditEventListResponse<HasRawResponse>
      *
      * @throws APIException
      */

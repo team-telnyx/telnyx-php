@@ -140,7 +140,7 @@ final class ScheduledSMSEventResponse implements BaseModel
         $obj->assistantID = $assistantID;
         $obj->scheduledAtFixedDatetime = $scheduledAtFixedDatetime;
         $obj->telnyxAgentTarget = $telnyxAgentTarget;
-        $obj->telnyxConversationChannel = $telnyxConversationChannel instanceof ConversationChannelType ? $telnyxConversationChannel->value : $telnyxConversationChannel;
+        $obj['telnyxConversationChannel'] = $telnyxConversationChannel;
         $obj->telnyxEndUserTarget = $telnyxEndUserTarget;
         $obj->text = $text;
 
@@ -150,7 +150,7 @@ final class ScheduledSMSEventResponse implements BaseModel
         null !== $errors && $obj->errors = $errors;
         null !== $retryCount && $obj->retryCount = $retryCount;
         null !== $scheduledEventID && $obj->scheduledEventID = $scheduledEventID;
-        null !== $status && $obj->status = $status instanceof EventStatus ? $status->value : $status;
+        null !== $status && $obj['status'] = $status;
 
         return $obj;
     }
@@ -187,7 +187,7 @@ final class ScheduledSMSEventResponse implements BaseModel
         ConversationChannelType|string $telnyxConversationChannel
     ): self {
         $obj = clone $this;
-        $obj->telnyxConversationChannel = $telnyxConversationChannel instanceof ConversationChannelType ? $telnyxConversationChannel->value : $telnyxConversationChannel;
+        $obj['telnyxConversationChannel'] = $telnyxConversationChannel;
 
         return $obj;
     }
@@ -268,7 +268,7 @@ final class ScheduledSMSEventResponse implements BaseModel
     public function withStatus(EventStatus|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof EventStatus ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

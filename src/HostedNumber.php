@@ -64,7 +64,7 @@ final class HostedNumber implements BaseModel
         null !== $id && $obj->id = $id;
         null !== $phoneNumber && $obj->phoneNumber = $phoneNumber;
         null !== $recordType && $obj->recordType = $recordType;
-        null !== $status && $obj->status = $status instanceof Status ? $status->value : $status;
+        null !== $status && $obj['status'] = $status;
 
         return $obj;
     }
@@ -105,7 +105,7 @@ final class HostedNumber implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

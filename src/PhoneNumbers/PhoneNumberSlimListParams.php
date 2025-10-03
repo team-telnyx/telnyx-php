@@ -99,7 +99,7 @@ final class PhoneNumberSlimListParams implements BaseModel
         null !== $includeConnection && $obj->includeConnection = $includeConnection;
         null !== $includeTags && $obj->includeTags = $includeTags;
         null !== $page && $obj->page = $page;
-        null !== $sort && $obj->sort = $sort instanceof Sort ? $sort->value : $sort;
+        null !== $sort && $obj['sort'] = $sort;
 
         return $obj;
     }
@@ -156,7 +156,7 @@ final class PhoneNumberSlimListParams implements BaseModel
     public function withSort(Sort|string $sort): self
     {
         $obj = clone $this;
-        $obj->sort = $sort instanceof Sort ? $sort->value : $sort;
+        $obj['sort'] = $sort;
 
         return $obj;
     }

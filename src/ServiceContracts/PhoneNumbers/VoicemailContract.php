@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\PhoneNumbers;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PhoneNumbers\Voicemail\VoicemailGetResponse;
 use Telnyx\PhoneNumbers\Voicemail\VoicemailNewResponse;
 use Telnyx\PhoneNumbers\Voicemail\VoicemailUpdateResponse;
@@ -21,8 +20,6 @@ interface VoicemailContract
      * @param bool $enabled whether voicemail is enabled
      * @param string $pin The pin used for voicemail
      *
-     * @return VoicemailNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -37,8 +34,6 @@ interface VoicemailContract
      *
      * @param array<string, mixed> $params
      *
-     * @return VoicemailNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function createRaw(
@@ -50,8 +45,6 @@ interface VoicemailContract
     /**
      * @api
      *
-     * @return VoicemailGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
@@ -62,23 +55,8 @@ interface VoicemailContract
     /**
      * @api
      *
-     * @return VoicemailGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $phoneNumberID,
-        mixed $params,
-        ?RequestOptions $requestOptions = null,
-    ): VoicemailGetResponse;
-
-    /**
-     * @api
-     *
      * @param bool $enabled whether voicemail is enabled
      * @param string $pin The pin used for voicemail
-     *
-     * @return VoicemailUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -93,8 +71,6 @@ interface VoicemailContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return VoicemailUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */

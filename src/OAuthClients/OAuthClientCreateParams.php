@@ -155,9 +155,9 @@ final class OAuthClientCreateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->allowedGrantTypes = array_map(fn ($v) => $v instanceof AllowedGrantType ? $v->value : $v, $allowedGrantTypes);
+        $obj['allowedGrantTypes'] = $allowedGrantTypes;
         $obj->allowedScopes = $allowedScopes;
-        $obj->clientType = $clientType instanceof ClientType ? $clientType->value : $clientType;
+        $obj['clientType'] = $clientType;
         $obj->name = $name;
 
         null !== $logoUri && $obj->logoUri = $logoUri;
@@ -177,7 +177,7 @@ final class OAuthClientCreateParams implements BaseModel
     public function withAllowedGrantTypes(array $allowedGrantTypes): self
     {
         $obj = clone $this;
-        $obj->allowedGrantTypes = array_map(fn ($v) => $v instanceof AllowedGrantType ? $v->value : $v, $allowedGrantTypes);
+        $obj['allowedGrantTypes'] = $allowedGrantTypes;
 
         return $obj;
     }
@@ -203,7 +203,7 @@ final class OAuthClientCreateParams implements BaseModel
     public function withClientType(ClientType|string $clientType): self
     {
         $obj = clone $this;
-        $obj->clientType = $clientType instanceof ClientType ? $clientType->value : $clientType;
+        $obj['clientType'] = $clientType;
 
         return $obj;
     }

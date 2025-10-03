@@ -77,7 +77,7 @@ final class Messaging implements BaseModel
         null !== $enableMessaging && $obj->enableMessaging = $enableMessaging;
         null !== $messagingCapable && $obj->messagingCapable = $messagingCapable;
         null !== $messagingPortCompleted && $obj->messagingPortCompleted = $messagingPortCompleted;
-        null !== $messagingPortStatus && $obj->messagingPortStatus = $messagingPortStatus instanceof MessagingPortStatus ? $messagingPortStatus->value : $messagingPortStatus;
+        null !== $messagingPortStatus && $obj['messagingPortStatus'] = $messagingPortStatus;
 
         return $obj;
     }
@@ -125,7 +125,7 @@ final class Messaging implements BaseModel
         MessagingPortStatus|string $messagingPortStatus
     ): self {
         $obj = clone $this;
-        $obj->messagingPortStatus = $messagingPortStatus instanceof MessagingPortStatus ? $messagingPortStatus->value : $messagingPortStatus;
+        $obj['messagingPortStatus'] = $messagingPortStatus;
 
         return $obj;
     }

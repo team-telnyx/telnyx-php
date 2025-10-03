@@ -106,7 +106,7 @@ final class Payload implements BaseModel
         null !== $clientState && $obj->clientState = $clientState;
         null !== $connectionID && $obj->connectionID = $connectionID;
         null !== $from && $obj->from = $from;
-        null !== $result && $obj->result = $result instanceof Result ? $result->value : $result;
+        null !== $result && $obj['result'] = $result;
         null !== $to && $obj->to = $to;
 
         return $obj;
@@ -186,7 +186,7 @@ final class Payload implements BaseModel
     public function withResult(Result|string $result): self
     {
         $obj = clone $this;
-        $obj->result = $result instanceof Result ? $result->value : $result;
+        $obj['result'] = $result;
 
         return $obj;
     }

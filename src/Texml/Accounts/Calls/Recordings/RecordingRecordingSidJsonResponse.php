@@ -6,8 +6,9 @@ namespace Telnyx\Texml\Accounts\Calls\Recordings;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Texml\Accounts\Calls\Recordings\RecordingRecordingSidJsonResponse\Channels;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Texml\Accounts\Calls\Recordings\RecordingRecordingSidJsonResponse\Source;
 use Telnyx\Texml\Accounts\Calls\Recordings\RecordingRecordingSidJsonResponse\Track;
 
@@ -15,7 +16,7 @@ use Telnyx\Texml\Accounts\Calls\Recordings\RecordingRecordingSidJsonResponse\Tra
  * @phpstan-type recording_recording_sid_json_response = array{
  *   accountSid?: string,
  *   callSid?: string,
- *   channels?: value-of<Channels>,
+ *   channels?: 1|2,
  *   conferenceSid?: string|null,
  *   dateCreated?: \DateTimeInterface,
  *   dateUpdated?: \DateTimeInterface,
@@ -29,15 +30,13 @@ use Telnyx\Texml\Accounts\Calls\Recordings\RecordingRecordingSidJsonResponse\Tra
  *   track?: value-of<Track>,
  *   uri?: string,
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class RecordingRecordingSidJsonResponse implements BaseModel
+final class RecordingRecordingSidJsonResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<recording_recording_sid_json_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     #[Api('account_sid', optional: true)]
     public ?string $accountSid;
@@ -45,8 +44,8 @@ final class RecordingRecordingSidJsonResponse implements BaseModel
     #[Api('call_sid', optional: true)]
     public ?string $callSid;
 
-    /** @var value-of<Channels>|null $channels */
-    #[Api(enum: Channels::class, optional: true)]
+    /** @var 1|2|null $channels */
+    #[Api(optional: true)]
     public ?int $channels;
 
     #[Api('conference_sid', nullable: true, optional: true)]
@@ -120,14 +119,14 @@ final class RecordingRecordingSidJsonResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Channels|value-of<Channels> $channels
+     * @param 1|2 $channels
      * @param Source|value-of<Source> $source
      * @param Track|value-of<Track> $track
      */
     public static function with(
         ?string $accountSid = null,
         ?string $callSid = null,
-        Channels|int|null $channels = null,
+        ?int $channels = null,
         ?string $conferenceSid = null,
         ?\DateTimeInterface $dateCreated = null,
         ?\DateTimeInterface $dateUpdated = null,
@@ -145,7 +144,7 @@ final class RecordingRecordingSidJsonResponse implements BaseModel
 
         null !== $accountSid && $obj->accountSid = $accountSid;
         null !== $callSid && $obj->callSid = $callSid;
-        null !== $channels && $obj->channels = $channels instanceof Channels ? $channels->value : $channels;
+        null !== $channels && $obj->channels = $channels;
         null !== $conferenceSid && $obj->conferenceSid = $conferenceSid;
         null !== $dateCreated && $obj->dateCreated = $dateCreated;
         null !== $dateUpdated && $obj->dateUpdated = $dateUpdated;
@@ -154,9 +153,9 @@ final class RecordingRecordingSidJsonResponse implements BaseModel
         null !== $price && $obj->price = $price;
         null !== $priceUnit && $obj->priceUnit = $priceUnit;
         null !== $sid && $obj->sid = $sid;
-        null !== $source && $obj->source = $source instanceof Source ? $source->value : $source;
+        null !== $source && $obj['source'] = $source;
         null !== $startTime && $obj->startTime = $startTime;
-        null !== $track && $obj->track = $track instanceof Track ? $track->value : $track;
+        null !== $track && $obj['track'] = $track;
         null !== $uri && $obj->uri = $uri;
 
         return $obj;
@@ -179,12 +178,12 @@ final class RecordingRecordingSidJsonResponse implements BaseModel
     }
 
     /**
-     * @param Channels|value-of<Channels> $channels
+     * @param 1|2 $channels
      */
-    public function withChannels(Channels|int $channels): self
+    public function withChannels(int $channels): self
     {
         $obj = clone $this;
-        $obj->channels = $channels instanceof Channels ? $channels->value : $channels;
+        $obj->channels = $channels;
 
         return $obj;
     }
@@ -273,7 +272,7 @@ final class RecordingRecordingSidJsonResponse implements BaseModel
     public function withSource(Source|string $source): self
     {
         $obj = clone $this;
-        $obj->source = $source instanceof Source ? $source->value : $source;
+        $obj['source'] = $source;
 
         return $obj;
     }
@@ -294,7 +293,7 @@ final class RecordingRecordingSidJsonResponse implements BaseModel
     public function withTrack(Track|string $track): self
     {
         $obj = clone $this;
-        $obj->track = $track instanceof Track ? $track->value : $track;
+        $obj['track'] = $track;
 
         return $obj;
     }

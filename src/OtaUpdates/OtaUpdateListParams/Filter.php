@@ -65,8 +65,8 @@ final class Filter implements BaseModel
         $obj = new self;
 
         null !== $simCardID && $obj->simCardID = $simCardID;
-        null !== $status && $obj->status = $status instanceof Status ? $status->value : $status;
-        null !== $type && $obj->type = $type instanceof Type ? $type->value : $type;
+        null !== $status && $obj['status'] = $status;
+        null !== $type && $obj['type'] = $type;
 
         return $obj;
     }
@@ -90,7 +90,7 @@ final class Filter implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }
@@ -103,7 +103,7 @@ final class Filter implements BaseModel
     public function withType(Type|string $type): self
     {
         $obj = clone $this;
-        $obj->type = $type instanceof Type ? $type->value : $type;
+        $obj['type'] = $type;
 
         return $obj;
     }

@@ -109,13 +109,13 @@ final class TnUploadEntry implements BaseModel
         $obj = new self;
 
         null !== $civicAddressID && $obj->civicAddressID = $civicAddressID;
-        null !== $errorCode && $obj->errorCode = $errorCode instanceof ErrorCode ? $errorCode->value : $errorCode;
+        null !== $errorCode && $obj['errorCode'] = $errorCode;
         null !== $errorMessage && $obj->errorMessage = $errorMessage;
-        null !== $internalStatus && $obj->internalStatus = $internalStatus instanceof InternalStatus ? $internalStatus->value : $internalStatus;
+        null !== $internalStatus && $obj['internalStatus'] = $internalStatus;
         null !== $locationID && $obj->locationID = $locationID;
         null !== $numberID && $obj->numberID = $numberID;
         null !== $phoneNumber && $obj->phoneNumber = $phoneNumber;
-        null !== $status && $obj->status = $status instanceof Status ? $status->value : $status;
+        null !== $status && $obj['status'] = $status;
 
         return $obj;
     }
@@ -139,7 +139,7 @@ final class TnUploadEntry implements BaseModel
     public function withErrorCode(ErrorCode|string $errorCode): self
     {
         $obj = clone $this;
-        $obj->errorCode = $errorCode instanceof ErrorCode ? $errorCode->value : $errorCode;
+        $obj['errorCode'] = $errorCode;
 
         return $obj;
     }
@@ -164,7 +164,7 @@ final class TnUploadEntry implements BaseModel
         InternalStatus|string $internalStatus
     ): self {
         $obj = clone $this;
-        $obj->internalStatus = $internalStatus instanceof InternalStatus ? $internalStatus->value : $internalStatus;
+        $obj['internalStatus'] = $internalStatus;
 
         return $obj;
     }
@@ -210,7 +210,7 @@ final class TnUploadEntry implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

@@ -50,7 +50,7 @@ final class Filter implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $portingOrderStatus && $obj->portingOrderStatus = $portingOrderStatus instanceof PortingOrderStatus ? $portingOrderStatus->value : $portingOrderStatus;
+        null !== $portingOrderStatus && $obj['portingOrderStatus'] = $portingOrderStatus;
 
         return $obj;
     }
@@ -64,7 +64,7 @@ final class Filter implements BaseModel
         PortingOrderStatus|string $portingOrderStatus
     ): self {
         $obj = clone $this;
-        $obj->portingOrderStatus = $portingOrderStatus instanceof PortingOrderStatus ? $portingOrderStatus->value : $portingOrderStatus;
+        $obj['portingOrderStatus'] = $portingOrderStatus;
 
         return $obj;
     }

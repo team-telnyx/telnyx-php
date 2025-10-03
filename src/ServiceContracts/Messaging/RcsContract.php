@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\Messaging;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Messaging\Rcs\RcGetCapabilitiesResponse;
 use Telnyx\Messaging\Rcs\RcInviteTestNumberResponse;
 use Telnyx\Messaging\Rcs\RcListBulkCapabilitiesResponse;
@@ -17,8 +16,6 @@ interface RcsContract
      * @api
      *
      * @param string $id
-     *
-     * @return RcInviteTestNumberResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -32,8 +29,6 @@ interface RcsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return RcInviteTestNumberResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -49,8 +44,6 @@ interface RcsContract
      * @param string $agentID RCS Agent ID
      * @param list<string> $phoneNumbers List of phone numbers to check
      *
-     * @return RcListBulkCapabilitiesResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function listBulkCapabilities(
@@ -64,8 +57,6 @@ interface RcsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return RcListBulkCapabilitiesResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function listBulkCapabilitiesRaw(
@@ -77,8 +68,6 @@ interface RcsContract
      * @api
      *
      * @param string $agentID
-     *
-     * @return RcGetCapabilitiesResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -92,8 +81,6 @@ interface RcsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return RcGetCapabilitiesResponse<HasRawResponse>
      *
      * @throws APIException
      */

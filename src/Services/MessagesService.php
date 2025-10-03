@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Messages\MessageCancelScheduledResponse;
 use Telnyx\Messages\MessageGetResponse;
 use Telnyx\Messages\MessageScheduleParams;
@@ -48,29 +47,10 @@ final class MessagesService implements MessagesContract
      *
      * Note: This API endpoint can only retrieve messages that are no older than 10 days since their creation. If you require messages older than this, please generate an [MDR report.](https://developers.telnyx.com/api/v1/mission-control/add-mdr-request)
      *
-     * @return MessageGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): MessageGetResponse {
-        $params = [];
-
-        return $this->retrieveRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return MessageGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): MessageGetResponse {
         // @phpstan-ignore-next-line;
@@ -87,29 +67,10 @@ final class MessagesService implements MessagesContract
      *
      * Cancel a scheduled message that has not yet been sent. Only messages with `status=scheduled` and `send_at` more than a minute from now can be cancelled.
      *
-     * @return MessageCancelScheduledResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function cancelScheduled(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): MessageCancelScheduledResponse {
-        $params = [];
-
-        return $this->cancelScheduledRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return MessageCancelScheduledResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function cancelScheduledRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): MessageCancelScheduledResponse {
         // @phpstan-ignore-next-line;
@@ -151,8 +112,6 @@ final class MessagesService implements MessagesContract
      * @param string $webhookFailoverURL the failover URL where webhooks related to this message will be sent if sending to the primary URL fails
      * @param string $webhookURL the URL where webhooks related to this message will be sent
      *
-     * @return MessageScheduleResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function schedule(
@@ -192,8 +151,6 @@ final class MessagesService implements MessagesContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return MessageScheduleResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -246,8 +203,6 @@ final class MessagesService implements MessagesContract
      * @param string $webhookFailoverURL the failover URL where webhooks related to this message will be sent if sending to the primary URL fails
      * @param string $webhookURL the URL where webhooks related to this message will be sent
      *
-     * @return MessageSendResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function send(
@@ -288,8 +243,6 @@ final class MessagesService implements MessagesContract
      *
      * @param array<string, mixed> $params
      *
-     * @return MessageSendResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function sendRaw(
@@ -325,8 +278,6 @@ final class MessagesService implements MessagesContract
      * @param string $webhookFailoverURL the failover URL where webhooks related to this message will be sent if sending to the primary URL fails
      * @param string $webhookURL the URL where webhooks related to this message will be sent
      *
-     * @return MessageSendGroupMmsResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function sendGroupMms(
@@ -358,8 +309,6 @@ final class MessagesService implements MessagesContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return MessageSendGroupMmsResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -402,8 +351,6 @@ final class MessagesService implements MessagesContract
      * @param string $webhookFailoverURL the failover URL where webhooks related to this message will be sent if sending to the primary URL fails
      * @param string $webhookURL the URL where webhooks related to this message will be sent
      *
-     * @return MessageSendLongCodeResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function sendLongCode(
@@ -439,8 +386,6 @@ final class MessagesService implements MessagesContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return MessageSendLongCodeResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -483,8 +428,6 @@ final class MessagesService implements MessagesContract
      * @param string $webhookFailoverURL the failover URL where webhooks related to this message will be sent if sending to the primary URL fails
      * @param string $webhookURL the URL where webhooks related to this message will be sent
      *
-     * @return MessageSendNumberPoolResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function sendNumberPool(
@@ -520,8 +463,6 @@ final class MessagesService implements MessagesContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return MessageSendNumberPoolResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -564,8 +505,6 @@ final class MessagesService implements MessagesContract
      * @param string $webhookFailoverURL the failover URL where webhooks related to this message will be sent if sending to the primary URL fails
      * @param string $webhookURL the URL where webhooks related to this message will be sent
      *
-     * @return MessageSendShortCodeResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function sendShortCode(
@@ -601,8 +540,6 @@ final class MessagesService implements MessagesContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return MessageSendShortCodeResponse<HasRawResponse>
      *
      * @throws APIException
      */

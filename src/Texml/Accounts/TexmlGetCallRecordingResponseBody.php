@@ -7,7 +7,6 @@ namespace Telnyx\Texml\Accounts;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Texml\Accounts\TexmlGetCallRecordingResponseBody\Channels;
 use Telnyx\Texml\Accounts\TexmlGetCallRecordingResponseBody\Source;
 use Telnyx\Texml\Accounts\TexmlGetCallRecordingResponseBody\Status;
 
@@ -15,7 +14,7 @@ use Telnyx\Texml\Accounts\TexmlGetCallRecordingResponseBody\Status;
  * @phpstan-type texml_get_call_recording_response_body = array{
  *   accountSid?: string,
  *   callSid?: string,
- *   channels?: value-of<Channels>,
+ *   channels?: 1|2,
  *   conferenceSid?: string|null,
  *   dateCreated?: \DateTimeInterface,
  *   dateUpdated?: \DateTimeInterface,
@@ -41,8 +40,8 @@ final class TexmlGetCallRecordingResponseBody implements BaseModel
     #[Api('call_sid', optional: true)]
     public ?string $callSid;
 
-    /** @var value-of<Channels>|null $channels */
-    #[Api(enum: Channels::class, optional: true)]
+    /** @var 1|2|null $channels */
+    #[Api(optional: true)]
     public ?int $channels;
 
     #[Api('conference_sid', nullable: true, optional: true)]
@@ -109,14 +108,14 @@ final class TexmlGetCallRecordingResponseBody implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Channels|value-of<Channels> $channels
+     * @param 1|2 $channels
      * @param Source|value-of<Source> $source
      * @param Status|value-of<Status> $status
      */
     public static function with(
         ?string $accountSid = null,
         ?string $callSid = null,
-        Channels|int|null $channels = null,
+        ?int $channels = null,
         ?string $conferenceSid = null,
         ?\DateTimeInterface $dateCreated = null,
         ?\DateTimeInterface $dateUpdated = null,
@@ -134,7 +133,7 @@ final class TexmlGetCallRecordingResponseBody implements BaseModel
 
         null !== $accountSid && $obj->accountSid = $accountSid;
         null !== $callSid && $obj->callSid = $callSid;
-        null !== $channels && $obj->channels = $channels instanceof Channels ? $channels->value : $channels;
+        null !== $channels && $obj->channels = $channels;
         null !== $conferenceSid && $obj->conferenceSid = $conferenceSid;
         null !== $dateCreated && $obj->dateCreated = $dateCreated;
         null !== $dateUpdated && $obj->dateUpdated = $dateUpdated;
@@ -142,9 +141,9 @@ final class TexmlGetCallRecordingResponseBody implements BaseModel
         null !== $errorCode && $obj->errorCode = $errorCode;
         null !== $mediaURL && $obj->mediaURL = $mediaURL;
         null !== $sid && $obj->sid = $sid;
-        null !== $source && $obj->source = $source instanceof Source ? $source->value : $source;
+        null !== $source && $obj['source'] = $source;
         null !== $startTime && $obj->startTime = $startTime;
-        null !== $status && $obj->status = $status instanceof Status ? $status->value : $status;
+        null !== $status && $obj['status'] = $status;
         null !== $subresourcesUris && $obj->subresourcesUris = $subresourcesUris;
         null !== $uri && $obj->uri = $uri;
 
@@ -168,12 +167,12 @@ final class TexmlGetCallRecordingResponseBody implements BaseModel
     }
 
     /**
-     * @param Channels|value-of<Channels> $channels
+     * @param 1|2 $channels
      */
-    public function withChannels(Channels|int $channels): self
+    public function withChannels(int $channels): self
     {
         $obj = clone $this;
-        $obj->channels = $channels instanceof Channels ? $channels->value : $channels;
+        $obj->channels = $channels;
 
         return $obj;
     }
@@ -248,7 +247,7 @@ final class TexmlGetCallRecordingResponseBody implements BaseModel
     public function withSource(Source|string $source): self
     {
         $obj = clone $this;
-        $obj->source = $source instanceof Source ? $source->value : $source;
+        $obj['source'] = $source;
 
         return $obj;
     }
@@ -267,7 +266,7 @@ final class TexmlGetCallRecordingResponseBody implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

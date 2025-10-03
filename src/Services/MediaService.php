@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Media\MediaGetResponse;
 use Telnyx\Media\MediaListParams;
 use Telnyx\Media\MediaListParams\Filter;
@@ -32,29 +31,10 @@ final class MediaService implements MediaContract
      *
      * Returns the information about a stored media file.
      *
-     * @return MediaGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $mediaName,
-        ?RequestOptions $requestOptions = null
-    ): MediaGetResponse {
-        $params = [];
-
-        return $this->retrieveRaw($mediaName, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return MediaGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $mediaName,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): MediaGetResponse {
         // @phpstan-ignore-next-line;
@@ -74,8 +54,6 @@ final class MediaService implements MediaContract
      * @param string $mediaURL The URL where the media to be stored in Telnyx network is currently hosted. The maximum allowed size is 20 MB.
      * @param int $ttlSecs The number of seconds after which the media resource will be deleted, defaults to 2 days. The maximum allowed vale is 630720000, which translates to 20 years.
      *
-     * @return MediaUpdateResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function update(
@@ -93,8 +71,6 @@ final class MediaService implements MediaContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return MediaUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -125,8 +101,6 @@ final class MediaService implements MediaContract
      *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[content_type][]
      *
-     * @return MediaListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -142,8 +116,6 @@ final class MediaService implements MediaContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return MediaListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -177,21 +149,6 @@ final class MediaService implements MediaContract
         string $mediaName,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        $params = [];
-
-        return $this->deleteRaw($mediaName, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $mediaName,
-        mixed $params,
-        ?RequestOptions $requestOptions = null
-    ): mixed {
         // @phpstan-ignore-next-line;
         return $this->client->request(
             method: 'delete',
@@ -210,21 +167,6 @@ final class MediaService implements MediaContract
      */
     public function download(
         string $mediaName,
-        ?RequestOptions $requestOptions = null
-    ): string {
-        $params = [];
-
-        return $this->downloadRaw($mediaName, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @throws APIException
-     */
-    public function downloadRaw(
-        string $mediaName,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): string {
         // @phpstan-ignore-next-line;
@@ -246,8 +188,6 @@ final class MediaService implements MediaContract
      * @param string $mediaName the unique identifier of a file
      * @param int $ttlSecs The number of seconds after which the media resource will be deleted, defaults to 2 days. The maximum allowed vale is 630720000, which translates to 20 years.
      *
-     * @return MediaUploadResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function upload(
@@ -267,8 +207,6 @@ final class MediaService implements MediaContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return MediaUploadResponse<HasRawResponse>
      *
      * @throws APIException
      */

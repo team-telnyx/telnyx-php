@@ -6,21 +6,21 @@ namespace Telnyx\CredentialConnections;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type credential_connection_new_response = array{
  *   data?: CredentialConnection
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class CredentialConnectionNewResponse implements BaseModel
+final class CredentialConnectionNewResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<credential_connection_new_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     #[Api(optional: true)]
     public ?CredentialConnection $data;

@@ -23,19 +23,4 @@ interface EnumContract
         Endpoint|string $endpoint,
         ?RequestOptions $requestOptions = null
     ): mixed;
-
-    /**
-     * @api
-     *
-     * @param Endpoint|value-of<Endpoint> $endpoint
-     *
-     * @return mixed|list<mixed|string>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        Endpoint|string $endpoint,
-        mixed $params,
-        ?RequestOptions $requestOptions = null,
-    ): mixed;
 }

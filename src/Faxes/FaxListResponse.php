@@ -6,19 +6,19 @@ namespace Telnyx\Faxes;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type fax_list_response = array{data?: list<Fax>, meta?: mixed}
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class FaxListResponse implements BaseModel
+final class FaxListResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<fax_list_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /** @var list<Fax>|null $data */
     #[Api(list: Fax::class, optional: true)]

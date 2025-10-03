@@ -65,7 +65,7 @@ final class VerificationCodeSendParams implements BaseModel
         $obj = new self;
 
         null !== $phoneNumbers && $obj->phoneNumbers = $phoneNumbers;
-        null !== $verificationMethod && $obj->verificationMethod = $verificationMethod instanceof VerificationMethod ? $verificationMethod->value : $verificationMethod;
+        null !== $verificationMethod && $obj['verificationMethod'] = $verificationMethod;
 
         return $obj;
     }
@@ -88,7 +88,7 @@ final class VerificationCodeSendParams implements BaseModel
         VerificationMethod|string $verificationMethod
     ): self {
         $obj = clone $this;
-        $obj->verificationMethod = $verificationMethod instanceof VerificationMethod ? $verificationMethod->value : $verificationMethod;
+        $obj['verificationMethod'] = $verificationMethod;
 
         return $obj;
     }

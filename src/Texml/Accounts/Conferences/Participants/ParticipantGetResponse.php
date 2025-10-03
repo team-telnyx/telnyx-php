@@ -6,7 +6,9 @@ namespace Telnyx\Texml\Accounts\Conferences\Participants;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantGetResponse\Status;
 
 /**
@@ -26,15 +28,13 @@ use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantGetResponse\Status
  *   status?: value-of<Status>,
  *   uri?: string,
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class ParticipantGetResponse implements BaseModel
+final class ParticipantGetResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<participant_get_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /**
      * The id of the account the resource belongs to.
@@ -164,7 +164,7 @@ final class ParticipantGetResponse implements BaseModel
         null !== $endConferenceOnExit && $obj->endConferenceOnExit = $endConferenceOnExit;
         null !== $hold && $obj->hold = $hold;
         null !== $muted && $obj->muted = $muted;
-        null !== $status && $obj->status = $status instanceof Status ? $status->value : $status;
+        null !== $status && $obj['status'] = $status;
         null !== $uri && $obj->uri = $uri;
 
         return $obj;
@@ -311,7 +311,7 @@ final class ParticipantGetResponse implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

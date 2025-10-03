@@ -12,7 +12,6 @@ use Telnyx\AI\Conversations\InsightGroups\InsightGroupUpdateParams;
 use Telnyx\AI\Conversations\InsightGroups\InsightTemplateGroupDetail;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Conversations\InsightGroupsContract;
 use Telnyx\Services\AI\Conversations\InsightGroups\InsightsService;
@@ -39,29 +38,10 @@ final class InsightGroupsService implements InsightGroupsContract
      *
      * Get insight group by ID
      *
-     * @return InsightTemplateGroupDetail<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $groupID,
-        ?RequestOptions $requestOptions = null
-    ): InsightTemplateGroupDetail {
-        $params = [];
-
-        return $this->retrieveRaw($groupID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return InsightTemplateGroupDetail<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $groupID,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): InsightTemplateGroupDetail {
         // @phpstan-ignore-next-line;
@@ -81,8 +61,6 @@ final class InsightGroupsService implements InsightGroupsContract
      * @param string $description
      * @param string $name
      * @param string $webhook
-     *
-     * @return InsightTemplateGroupDetail<HasRawResponse>
      *
      * @throws APIException
      */
@@ -104,8 +82,6 @@ final class InsightGroupsService implements InsightGroupsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return InsightTemplateGroupDetail<HasRawResponse>
      *
      * @throws APIException
      */
@@ -140,21 +116,6 @@ final class InsightGroupsService implements InsightGroupsContract
         string $groupID,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        $params = [];
-
-        return $this->deleteRaw($groupID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $groupID,
-        mixed $params,
-        ?RequestOptions $requestOptions = null
-    ): mixed {
         // @phpstan-ignore-next-line;
         return $this->client->request(
             method: 'delete',
@@ -172,8 +133,6 @@ final class InsightGroupsService implements InsightGroupsContract
      * @param string $name
      * @param string $description
      * @param string $webhook
-     *
-     * @return InsightTemplateGroupDetail<HasRawResponse>
      *
      * @throws APIException
      */
@@ -194,8 +153,6 @@ final class InsightGroupsService implements InsightGroupsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return InsightTemplateGroupDetail<HasRawResponse>
      *
      * @throws APIException
      */
@@ -225,8 +182,6 @@ final class InsightGroupsService implements InsightGroupsContract
      *
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
-     * @return InsightGroupGetInsightGroupsResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieveInsightGroups(
@@ -242,8 +197,6 @@ final class InsightGroupsService implements InsightGroupsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return InsightGroupGetInsightGroupsResponse<HasRawResponse>
      *
      * @throws APIException
      */

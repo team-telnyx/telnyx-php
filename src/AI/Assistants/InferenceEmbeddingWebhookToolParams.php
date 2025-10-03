@@ -130,7 +130,7 @@ final class InferenceEmbeddingWebhookToolParams implements BaseModel
 
         null !== $bodyParameters && $obj->bodyParameters = $bodyParameters;
         null !== $headers && $obj->headers = $headers;
-        null !== $method && $obj->method = $method instanceof Method ? $method->value : $method;
+        null !== $method && $obj['method'] = $method;
         null !== $pathParameters && $obj->pathParameters = $pathParameters;
         null !== $queryParameters && $obj->queryParameters = $queryParameters;
 
@@ -202,7 +202,7 @@ final class InferenceEmbeddingWebhookToolParams implements BaseModel
     public function withMethod(Method|string $method): self
     {
         $obj = clone $this;
-        $obj->method = $method instanceof Method ? $method->value : $method;
+        $obj['method'] = $method;
 
         return $obj;
     }

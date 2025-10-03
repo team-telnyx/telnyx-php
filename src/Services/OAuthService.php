@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\OAuth\OAuthGetJwksResponse;
 use Telnyx\OAuth\OAuthGetResponse;
 use Telnyx\OAuth\OAuthGrantsParams;
@@ -39,29 +38,10 @@ final class OAuthService implements OAuthContract
      *
      * Retrieve details about an OAuth consent token
      *
-     * @return OAuthGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $consentToken,
-        ?RequestOptions $requestOptions = null
-    ): OAuthGetResponse {
-        $params = [];
-
-        return $this->retrieveRaw($consentToken, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return OAuthGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $consentToken,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): OAuthGetResponse {
         // @phpstan-ignore-next-line;
@@ -81,8 +61,6 @@ final class OAuthService implements OAuthContract
      * @param bool $allowed Whether the grant is allowed
      * @param string $consentToken Consent token
      *
-     * @return OAuthGrantsResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function grants(
@@ -99,8 +77,6 @@ final class OAuthService implements OAuthContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return OAuthGrantsResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -130,8 +106,6 @@ final class OAuthService implements OAuthContract
      *
      * @param string $token The token to introspect
      *
-     * @return OAuthIntrospectResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function introspect(
@@ -147,8 +121,6 @@ final class OAuthService implements OAuthContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return OAuthIntrospectResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -187,8 +159,6 @@ final class OAuthService implements OAuthContract
      * @param TokenEndpointAuthMethod|value-of<TokenEndpointAuthMethod> $tokenEndpointAuthMethod Authentication method for the token endpoint
      * @param string $tosUri URL of the client's terms of service
      *
-     * @return OAuthRegisterResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function register(
@@ -222,8 +192,6 @@ final class OAuthService implements OAuthContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return OAuthRegisterResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -315,27 +283,9 @@ final class OAuthService implements OAuthContract
      *
      * Retrieve the JSON Web Key Set for token verification
      *
-     * @return OAuthGetJwksResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieveJwks(
-        ?RequestOptions $requestOptions = null
-    ): OAuthGetJwksResponse {
-        $params = [];
-
-        return $this->retrieveJwksRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return OAuthGetJwksResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveJwksRaw(
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): OAuthGetJwksResponse {
         // @phpstan-ignore-next-line;
@@ -360,8 +310,6 @@ final class OAuthService implements OAuthContract
      * @param string $redirectUri Redirect URI (for authorization_code flow)
      * @param string $refreshToken Refresh token (for refresh_token flow)
      * @param string $scope Space-separated list of requested scopes (for client_credentials)
-     *
-     * @return OAuthTokenResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -394,8 +342,6 @@ final class OAuthService implements OAuthContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return OAuthTokenResponse<HasRawResponse>
      *
      * @throws APIException
      */

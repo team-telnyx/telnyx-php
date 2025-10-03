@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileAssignResponse\AssignProfileToCampaignResponse;
 use Telnyx\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileAssignResponse\SettingsDataErrorMessage;
 use Telnyx\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileGetPhoneNumberStatusResponse;
@@ -50,10 +49,6 @@ interface PhoneNumberAssignmentByProfileContract
      * @param int $page
      * @param int $recordsPerPage
      *
-     * @return PhoneNumberAssignmentByProfileGetPhoneNumberStatusResponse<
-     *   HasRawResponse
-     * >
-     *
      * @throws APIException
      */
     public function retrievePhoneNumberStatus(
@@ -68,10 +63,6 @@ interface PhoneNumberAssignmentByProfileContract
      *
      * @param array<string, mixed> $params
      *
-     * @return PhoneNumberAssignmentByProfileGetPhoneNumberStatusResponse<
-     *   HasRawResponse
-     * >
-     *
      * @throws APIException
      */
     public function retrievePhoneNumberStatusRaw(
@@ -83,25 +74,10 @@ interface PhoneNumberAssignmentByProfileContract
     /**
      * @api
      *
-     * @return PhoneNumberAssignmentByProfileGetStatusResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieveStatus(
         string $taskID,
-        ?RequestOptions $requestOptions = null
-    ): PhoneNumberAssignmentByProfileGetStatusResponse;
-
-    /**
-     * @api
-     *
-     * @return PhoneNumberAssignmentByProfileGetStatusResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveStatusRaw(
-        string $taskID,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): PhoneNumberAssignmentByProfileGetStatusResponse;
 }

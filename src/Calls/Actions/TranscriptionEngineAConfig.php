@@ -145,13 +145,13 @@ final class TranscriptionEngineAConfig implements BaseModel
         null !== $enableSpeakerDiarization && $obj->enableSpeakerDiarization = $enableSpeakerDiarization;
         null !== $hints && $obj->hints = $hints;
         null !== $interimResults && $obj->interimResults = $interimResults;
-        null !== $language && $obj->language = $language instanceof GoogleTranscriptionLanguage ? $language->value : $language;
+        null !== $language && $obj['language'] = $language;
         null !== $maxSpeakerCount && $obj->maxSpeakerCount = $maxSpeakerCount;
         null !== $minSpeakerCount && $obj->minSpeakerCount = $minSpeakerCount;
-        null !== $model && $obj->model = $model instanceof Model ? $model->value : $model;
+        null !== $model && $obj['model'] = $model;
         null !== $profanityFilter && $obj->profanityFilter = $profanityFilter;
         null !== $speechContext && $obj->speechContext = $speechContext;
-        null !== $transcriptionEngine && $obj->transcriptionEngine = $transcriptionEngine instanceof TranscriptionEngine ? $transcriptionEngine->value : $transcriptionEngine;
+        null !== $transcriptionEngine && $obj['transcriptionEngine'] = $transcriptionEngine;
         null !== $useEnhanced && $obj->useEnhanced = $useEnhanced;
 
         return $obj;
@@ -202,7 +202,7 @@ final class TranscriptionEngineAConfig implements BaseModel
         GoogleTranscriptionLanguage|string $language
     ): self {
         $obj = clone $this;
-        $obj->language = $language instanceof GoogleTranscriptionLanguage ? $language->value : $language;
+        $obj['language'] = $language;
 
         return $obj;
     }
@@ -237,7 +237,7 @@ final class TranscriptionEngineAConfig implements BaseModel
     public function withModel(Model|string $model): self
     {
         $obj = clone $this;
-        $obj->model = $model instanceof Model ? $model->value : $model;
+        $obj['model'] = $model;
 
         return $obj;
     }
@@ -275,7 +275,7 @@ final class TranscriptionEngineAConfig implements BaseModel
         TranscriptionEngine|string $transcriptionEngine
     ): self {
         $obj = clone $this;
-        $obj->transcriptionEngine = $transcriptionEngine instanceof TranscriptionEngine ? $transcriptionEngine->value : $transcriptionEngine;
+        $obj['transcriptionEngine'] = $transcriptionEngine;
 
         return $obj;
     }

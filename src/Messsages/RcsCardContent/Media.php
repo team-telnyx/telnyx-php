@@ -52,7 +52,7 @@ final class Media implements BaseModel
         $obj = new self;
 
         null !== $contentInfo && $obj->contentInfo = $contentInfo;
-        null !== $height && $obj->height = $height instanceof Height ? $height->value : $height;
+        null !== $height && $obj['height'] = $height;
 
         return $obj;
     }
@@ -73,7 +73,7 @@ final class Media implements BaseModel
     public function withHeight(Height|string $height): self
     {
         $obj = clone $this;
-        $obj->height = $height instanceof Height ? $height->value : $height;
+        $obj['height'] = $height;
 
         return $obj;
     }

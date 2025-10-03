@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\RoomRecordings\RoomRecordingDeleteBulkParams;
 use Telnyx\RoomRecordings\RoomRecordingDeleteBulkResponse;
@@ -31,30 +30,11 @@ final class RoomRecordingsService implements RoomRecordingsContract
      *
      * View a room recording.
      *
-     * @return RoomRecordingGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $roomRecordingID,
         ?RequestOptions $requestOptions = null
-    ): RoomRecordingGetResponse {
-        $params = [];
-
-        return $this->retrieveRaw($roomRecordingID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return RoomRecordingGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $roomRecordingID,
-        mixed $params,
-        ?RequestOptions $requestOptions = null,
     ): RoomRecordingGetResponse {
         // @phpstan-ignore-next-line;
         return $this->client->request(
@@ -73,8 +53,6 @@ final class RoomRecordingsService implements RoomRecordingsContract
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[date_ended_at][eq], filter[date_ended_at][gte], filter[date_ended_at][lte], filter[date_started_at][eq], filter[date_started_at][gte], filter[date_started_at][lte], filter[room_id], filter[participant_id], filter[session_id], filter[status], filter[type], filter[duration_secs]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
-     * @return RoomRecordingListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -91,8 +69,6 @@ final class RoomRecordingsService implements RoomRecordingsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return RoomRecordingListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -126,21 +102,6 @@ final class RoomRecordingsService implements RoomRecordingsContract
         string $roomRecordingID,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        $params = [];
-
-        return $this->deleteRaw($roomRecordingID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $roomRecordingID,
-        mixed $params,
-        ?RequestOptions $requestOptions = null,
-    ): mixed {
         // @phpstan-ignore-next-line;
         return $this->client->request(
             method: 'delete',
@@ -158,8 +119,6 @@ final class RoomRecordingsService implements RoomRecordingsContract
      * @param Telnyx\RoomRecordings\RoomRecordingDeleteBulkParams\Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[date_ended_at][eq], filter[date_ended_at][gte], filter[date_ended_at][lte], filter[date_started_at][eq], filter[date_started_at][gte], filter[date_started_at][lte], filter[room_id], filter[participant_id], filter[session_id], filter[status], filter[type], filter[duration_secs]
      * @param Telnyx\RoomRecordings\RoomRecordingDeleteBulkParams\Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
-     * @return RoomRecordingDeleteBulkResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function deleteBulk(
@@ -176,8 +135,6 @@ final class RoomRecordingsService implements RoomRecordingsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return RoomRecordingDeleteBulkResponse<HasRawResponse>
      *
      * @throws APIException
      */

@@ -58,7 +58,7 @@ final class InvoiceRetrieveParams implements BaseModel
     {
         $obj = new self;
 
-        null !== $action && $obj->action = $action instanceof Action ? $action->value : $action;
+        null !== $action && $obj['action'] = $action;
 
         return $obj;
     }
@@ -71,7 +71,7 @@ final class InvoiceRetrieveParams implements BaseModel
     public function withAction(Action|string $action): self
     {
         $obj = clone $this;
-        $obj->action = $action instanceof Action ? $action->value : $action;
+        $obj['action'] = $action;
 
         return $obj;
     }

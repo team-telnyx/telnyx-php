@@ -6,20 +6,20 @@ namespace Telnyx\SiprecConnectors;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\SiprecConnectors\SiprecConnectorNewResponse\Data;
 
 /**
  * @phpstan-type siprec_connector_new_response = array{data: Data}
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class SiprecConnectorNewResponse implements BaseModel
+final class SiprecConnectorNewResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<siprec_connector_new_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     #[Api]
     public Data $data;

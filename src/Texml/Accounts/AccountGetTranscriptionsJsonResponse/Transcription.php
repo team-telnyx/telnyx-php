@@ -120,7 +120,7 @@ final class Transcription implements BaseModel
         null !== $duration && $obj->duration = $duration;
         null !== $recordingSid && $obj->recordingSid = $recordingSid;
         null !== $sid && $obj->sid = $sid;
-        null !== $status && $obj->status = $status instanceof Status ? $status->value : $status;
+        null !== $status && $obj['status'] = $status;
         null !== $transcriptionText && $obj->transcriptionText = $transcriptionText;
         null !== $uri && $obj->uri = $uri;
 
@@ -211,7 +211,7 @@ final class Transcription implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

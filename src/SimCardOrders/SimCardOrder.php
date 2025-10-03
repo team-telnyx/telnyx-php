@@ -116,7 +116,7 @@ final class SimCardOrder implements BaseModel
         null !== $orderAddress && $obj->orderAddress = $orderAddress;
         null !== $quantity && $obj->quantity = $quantity;
         null !== $recordType && $obj->recordType = $recordType;
-        null !== $status && $obj->status = $status instanceof Status ? $status->value : $status;
+        null !== $status && $obj['status'] = $status;
         null !== $trackingURL && $obj->trackingURL = $trackingURL;
         null !== $updatedAt && $obj->updatedAt = $updatedAt;
 
@@ -197,7 +197,7 @@ final class SimCardOrder implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

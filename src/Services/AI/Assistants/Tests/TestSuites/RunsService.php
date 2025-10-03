@@ -12,7 +12,6 @@ use Telnyx\AI\Assistants\Tests\TestSuites\Runs\RunTriggerParams;
 use Telnyx\Client;
 use Telnyx\Core\Conversion\ListOf;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\Tests\TestSuites\RunsContract;
 
@@ -34,8 +33,6 @@ final class RunsService implements RunsContract
      * @param string $status Filter runs by execution status (pending, running, completed, failed, timeout)
      * @param string $testSuiteRunID Filter runs by specific suite execution batch ID
      *
-     * @return PaginatedTestRunList<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -56,8 +53,6 @@ final class RunsService implements RunsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return PaginatedTestRunList<HasRawResponse>
      *
      * @throws APIException
      */

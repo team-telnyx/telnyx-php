@@ -6,21 +6,21 @@ namespace Telnyx\DynamicEmergencyEndpoints;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type dynamic_emergency_endpoint_new_response = array{
  *   data?: DynamicEmergencyEndpoint
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class DynamicEmergencyEndpointNewResponse implements BaseModel
+final class DynamicEmergencyEndpointNewResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<dynamic_emergency_endpoint_new_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     #[Api(optional: true)]
     public ?DynamicEmergencyEndpoint $data;

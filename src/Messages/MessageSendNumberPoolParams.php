@@ -161,7 +161,7 @@ final class MessageSendNumberPoolParams implements BaseModel
         null !== $mediaURLs && $obj->mediaURLs = $mediaURLs;
         null !== $subject && $obj->subject = $subject;
         null !== $text && $obj->text = $text;
-        null !== $type && $obj->type = $type instanceof Type ? $type->value : $type;
+        null !== $type && $obj['type'] = $type;
         null !== $useProfileWebhooks && $obj->useProfileWebhooks = $useProfileWebhooks;
         null !== $webhookFailoverURL && $obj->webhookFailoverURL = $webhookFailoverURL;
         null !== $webhookURL && $obj->webhookURL = $webhookURL;
@@ -249,7 +249,7 @@ final class MessageSendNumberPoolParams implements BaseModel
     public function withType(Type|string $type): self
     {
         $obj = clone $this;
-        $obj->type = $type instanceof Type ? $type->value : $type;
+        $obj['type'] = $type;
 
         return $obj;
     }

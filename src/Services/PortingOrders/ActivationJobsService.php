@@ -6,7 +6,6 @@ namespace Telnyx\Services\PortingOrders;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PortingOrders\ActivationJobs\ActivationJobGetResponse;
 use Telnyx\PortingOrders\ActivationJobs\ActivationJobListParams;
 use Telnyx\PortingOrders\ActivationJobs\ActivationJobListParams\Page;
@@ -33,8 +32,6 @@ final class ActivationJobsService implements ActivationJobsContract
      *
      * @param string $id
      *
-     * @return ActivationJobGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
@@ -51,8 +48,6 @@ final class ActivationJobsService implements ActivationJobsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ActivationJobGetResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -85,8 +80,6 @@ final class ActivationJobsService implements ActivationJobsContract
      * @param string $id
      * @param \DateTimeInterface $activateAt The desired activation time. The activation time should be between any of the activation windows.
      *
-     * @return ActivationJobUpdateResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function update(
@@ -104,8 +97,6 @@ final class ActivationJobsService implements ActivationJobsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ActivationJobUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -125,7 +116,7 @@ final class ActivationJobsService implements ActivationJobsContract
         return $this->client->request(
             method: 'patch',
             path: ['porting_orders/%1$s/activation_jobs/%2$s', $id, $activationJobID],
-            body: (object) array_diff_key($parsed, array_flip(['id'])),
+            body: (object) array_diff_key($parsed, ['id']),
             options: $options,
             convert: ActivationJobUpdateResponse::class,
         );
@@ -137,8 +128,6 @@ final class ActivationJobsService implements ActivationJobsContract
      * Returns a list of your porting activation jobs.
      *
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
-     *
-     * @return ActivationJobListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -156,8 +145,6 @@ final class ActivationJobsService implements ActivationJobsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ActivationJobListResponse<HasRawResponse>
      *
      * @throws APIException
      */

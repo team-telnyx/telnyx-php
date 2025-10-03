@@ -132,7 +132,7 @@ final class ExternalConnectionCreateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->externalSipConnection = $externalSipConnection instanceof ExternalSipConnection ? $externalSipConnection->value : $externalSipConnection;
+        $obj['externalSipConnection'] = $externalSipConnection;
         $obj->outbound = $outbound;
 
         null !== $active && $obj->active = $active;
@@ -154,7 +154,7 @@ final class ExternalConnectionCreateParams implements BaseModel
         ExternalSipConnection|string $externalSipConnection
     ): self {
         $obj = clone $this;
-        $obj->externalSipConnection = $externalSipConnection instanceof ExternalSipConnection ? $externalSipConnection->value : $externalSipConnection;
+        $obj['externalSipConnection'] = $externalSipConnection;
 
         return $obj;
     }

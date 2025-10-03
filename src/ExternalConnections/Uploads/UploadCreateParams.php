@@ -108,10 +108,10 @@ final class UploadCreateParams implements BaseModel
 
         $obj->numberIDs = $numberIDs;
 
-        null !== $additionalUsages && $obj->additionalUsages = array_map(fn ($v) => $v instanceof AdditionalUsage ? $v->value : $v, $additionalUsages);
+        null !== $additionalUsages && $obj['additionalUsages'] = $additionalUsages;
         null !== $civicAddressID && $obj->civicAddressID = $civicAddressID;
         null !== $locationID && $obj->locationID = $locationID;
-        null !== $usage && $obj->usage = $usage instanceof Usage ? $usage->value : $usage;
+        null !== $usage && $obj['usage'] = $usage;
 
         return $obj;
     }
@@ -133,7 +133,7 @@ final class UploadCreateParams implements BaseModel
     public function withAdditionalUsages(array $additionalUsages): self
     {
         $obj = clone $this;
-        $obj->additionalUsages = array_map(fn ($v) => $v instanceof AdditionalUsage ? $v->value : $v, $additionalUsages);
+        $obj['additionalUsages'] = $additionalUsages;
 
         return $obj;
     }
@@ -168,7 +168,7 @@ final class UploadCreateParams implements BaseModel
     public function withUsage(Usage|string $usage): self
     {
         $obj = clone $this;
-        $obj->usage = $usage instanceof Usage ? $usage->value : $usage;
+        $obj['usage'] = $usage;
 
         return $obj;
     }

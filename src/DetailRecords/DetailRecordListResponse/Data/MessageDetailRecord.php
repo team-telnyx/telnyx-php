@@ -323,11 +323,11 @@ final class MessageDetailRecord implements BaseModel
         null !== $deliveryStatus && $obj->deliveryStatus = $deliveryStatus;
         null !== $deliveryStatusFailoverURL && $obj->deliveryStatusFailoverURL = $deliveryStatusFailoverURL;
         null !== $deliveryStatusWebhookURL && $obj->deliveryStatusWebhookURL = $deliveryStatusWebhookURL;
-        null !== $direction && $obj->direction = $direction instanceof Direction ? $direction->value : $direction;
+        null !== $direction && $obj['direction'] = $direction;
         null !== $errors && $obj->errors = $errors;
         null !== $fteu && $obj->fteu = $fteu;
         null !== $mcc && $obj->mcc = $mcc;
-        null !== $messageType && $obj->messageType = $messageType instanceof MessageType ? $messageType->value : $messageType;
+        null !== $messageType && $obj['messageType'] = $messageType;
         null !== $mnc && $obj->mnc = $mnc;
         null !== $onNet && $obj->onNet = $onNet;
         null !== $parts && $obj->parts = $parts;
@@ -336,7 +336,7 @@ final class MessageDetailRecord implements BaseModel
         null !== $rate && $obj->rate = $rate;
         null !== $sentAt && $obj->sentAt = $sentAt;
         null !== $sourceCountryCode && $obj->sourceCountryCode = $sourceCountryCode;
-        null !== $status && $obj->status = $status instanceof Status ? $status->value : $status;
+        null !== $status && $obj['status'] = $status;
         null !== $tags && $obj->tags = $tags;
         null !== $updatedAt && $obj->updatedAt = $updatedAt;
         null !== $userID && $obj->userID = $userID;
@@ -498,7 +498,7 @@ final class MessageDetailRecord implements BaseModel
     public function withDirection(Direction|string $direction): self
     {
         $obj = clone $this;
-        $obj->direction = $direction instanceof Direction ? $direction->value : $direction;
+        $obj['direction'] = $direction;
 
         return $obj;
     }
@@ -546,7 +546,7 @@ final class MessageDetailRecord implements BaseModel
     public function withMessageType(MessageType|string $messageType): self
     {
         $obj = clone $this;
-        $obj->messageType = $messageType instanceof MessageType ? $messageType->value : $messageType;
+        $obj['messageType'] = $messageType;
 
         return $obj;
     }
@@ -647,7 +647,7 @@ final class MessageDetailRecord implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

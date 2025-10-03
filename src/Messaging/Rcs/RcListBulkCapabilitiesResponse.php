@@ -6,21 +6,21 @@ namespace Telnyx\Messaging\Rcs;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type rc_list_bulk_capabilities_response = array{
  *   data?: list<RcsCapabilities>
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class RcListBulkCapabilitiesResponse implements BaseModel
+final class RcListBulkCapabilitiesResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<rc_list_bulk_capabilities_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /** @var list<RcsCapabilities>|null $data */
     #[Api(list: RcsCapabilities::class, optional: true)]

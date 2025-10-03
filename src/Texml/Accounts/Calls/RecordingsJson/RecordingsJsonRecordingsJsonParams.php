@@ -143,11 +143,11 @@ final class RecordingsJsonRecordingsJsonParams implements BaseModel
         $obj->accountSid = $accountSid;
 
         null !== $playBeep && $obj->playBeep = $playBeep;
-        null !== $recordingChannels && $obj->recordingChannels = $recordingChannels instanceof RecordingChannels ? $recordingChannels->value : $recordingChannels;
+        null !== $recordingChannels && $obj['recordingChannels'] = $recordingChannels;
         null !== $recordingStatusCallback && $obj->recordingStatusCallback = $recordingStatusCallback;
         null !== $recordingStatusCallbackEvent && $obj->recordingStatusCallbackEvent = $recordingStatusCallbackEvent;
-        null !== $recordingStatusCallbackMethod && $obj->recordingStatusCallbackMethod = $recordingStatusCallbackMethod instanceof RecordingStatusCallbackMethod ? $recordingStatusCallbackMethod->value : $recordingStatusCallbackMethod;
-        null !== $recordingTrack && $obj->recordingTrack = $recordingTrack instanceof RecordingTrack ? $recordingTrack->value : $recordingTrack;
+        null !== $recordingStatusCallbackMethod && $obj['recordingStatusCallbackMethod'] = $recordingStatusCallbackMethod;
+        null !== $recordingTrack && $obj['recordingTrack'] = $recordingTrack;
         null !== $sendRecordingURL && $obj->sendRecordingURL = $sendRecordingURL;
 
         return $obj;
@@ -181,7 +181,7 @@ final class RecordingsJsonRecordingsJsonParams implements BaseModel
         RecordingChannels|string $recordingChannels
     ): self {
         $obj = clone $this;
-        $obj->recordingChannels = $recordingChannels instanceof RecordingChannels ? $recordingChannels->value : $recordingChannels;
+        $obj['recordingChannels'] = $recordingChannels;
 
         return $obj;
     }
@@ -219,7 +219,7 @@ final class RecordingsJsonRecordingsJsonParams implements BaseModel
         RecordingStatusCallbackMethod|string $recordingStatusCallbackMethod
     ): self {
         $obj = clone $this;
-        $obj->recordingStatusCallbackMethod = $recordingStatusCallbackMethod instanceof RecordingStatusCallbackMethod ? $recordingStatusCallbackMethod->value : $recordingStatusCallbackMethod;
+        $obj['recordingStatusCallbackMethod'] = $recordingStatusCallbackMethod;
 
         return $obj;
     }
@@ -233,7 +233,7 @@ final class RecordingsJsonRecordingsJsonParams implements BaseModel
         RecordingTrack|string $recordingTrack
     ): self {
         $obj = clone $this;
-        $obj->recordingTrack = $recordingTrack instanceof RecordingTrack ? $recordingTrack->value : $recordingTrack;
+        $obj['recordingTrack'] = $recordingTrack;
 
         return $obj;
     }

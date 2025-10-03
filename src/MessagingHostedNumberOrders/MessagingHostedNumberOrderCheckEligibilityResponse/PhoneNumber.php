@@ -70,7 +70,7 @@ final class PhoneNumber implements BaseModel
 
         null !== $detail && $obj->detail = $detail;
         null !== $eligible && $obj->eligible = $eligible;
-        null !== $eligibleStatus && $obj->eligibleStatus = $eligibleStatus instanceof EligibleStatus ? $eligibleStatus->value : $eligibleStatus;
+        null !== $eligibleStatus && $obj['eligibleStatus'] = $eligibleStatus;
         null !== $phoneNumber && $obj->phoneNumber = $phoneNumber;
 
         return $obj;
@@ -107,7 +107,7 @@ final class PhoneNumber implements BaseModel
         EligibleStatus|string $eligibleStatus
     ): self {
         $obj = clone $this;
-        $obj->eligibleStatus = $eligibleStatus instanceof EligibleStatus ? $eligibleStatus->value : $eligibleStatus;
+        $obj['eligibleStatus'] = $eligibleStatus;
 
         return $obj;
     }

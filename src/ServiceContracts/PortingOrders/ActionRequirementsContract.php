@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\PortingOrders;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateParams\Params;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateResponse;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementListParams\Filter;
@@ -25,8 +24,6 @@ interface ActionRequirementsContract
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param Sort $sort Consolidated sort parameter (deepObject style). Originally: sort[value]
      *
-     * @return ActionRequirementListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -42,8 +39,6 @@ interface ActionRequirementsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return ActionRequirementListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function listRaw(
@@ -58,8 +53,6 @@ interface ActionRequirementsContract
      * @param string $portingOrderID
      * @param Params $params required information for initiating the action requirement for AU ID verification
      *
-     * @return ActionRequirementInitiateResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function initiate(
@@ -73,8 +66,6 @@ interface ActionRequirementsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ActionRequirementInitiateResponse<HasRawResponse>
      *
      * @throws APIException
      */

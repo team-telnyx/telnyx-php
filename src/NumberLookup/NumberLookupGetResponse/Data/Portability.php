@@ -145,7 +145,7 @@ final class Portability implements BaseModel
         null !== $lrn && $obj->lrn = $lrn;
         null !== $ocn && $obj->ocn = $ocn;
         null !== $portedDate && $obj->portedDate = $portedDate;
-        null !== $portedStatus && $obj->portedStatus = $portedStatus instanceof PortedStatus ? $portedStatus->value : $portedStatus;
+        null !== $portedStatus && $obj['portedStatus'] = $portedStatus;
         null !== $spid && $obj->spid = $spid;
         null !== $spidCarrierName && $obj->spidCarrierName = $spidCarrierName;
         null !== $spidCarrierType && $obj->spidCarrierType = $spidCarrierType;
@@ -250,7 +250,7 @@ final class Portability implements BaseModel
     public function withPortedStatus(PortedStatus|string $portedStatus): self
     {
         $obj = clone $this;
-        $obj->portedStatus = $portedStatus instanceof PortedStatus ? $portedStatus->value : $portedStatus;
+        $obj['portedStatus'] = $portedStatus;
 
         return $obj;
     }

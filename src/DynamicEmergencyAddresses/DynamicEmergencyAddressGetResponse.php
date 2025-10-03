@@ -6,21 +6,21 @@ namespace Telnyx\DynamicEmergencyAddresses;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type dynamic_emergency_address_get_response = array{
  *   data?: DynamicEmergencyAddress
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class DynamicEmergencyAddressGetResponse implements BaseModel
+final class DynamicEmergencyAddressGetResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<dynamic_emergency_address_get_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     #[Api(optional: true)]
     public ?DynamicEmergencyAddress $data;

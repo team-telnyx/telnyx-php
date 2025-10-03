@@ -122,12 +122,12 @@ final class Payload implements BaseModel
 
         null !== $clientState && $obj->clientState = $clientState;
         null !== $connectionID && $obj->connectionID = $connectionID;
-        null !== $direction && $obj->direction = $direction instanceof Direction ? $direction->value : $direction;
+        null !== $direction && $obj['direction'] = $direction;
         null !== $faxID && $obj->faxID = $faxID;
         null !== $from && $obj->from = $from;
         null !== $mediaName && $obj->mediaName = $mediaName;
         null !== $originalMediaURL && $obj->originalMediaURL = $originalMediaURL;
-        null !== $status && $obj->status = $status instanceof Status ? $status->value : $status;
+        null !== $status && $obj['status'] = $status;
         null !== $to && $obj->to = $to;
         null !== $userID && $obj->userID = $userID;
 
@@ -164,7 +164,7 @@ final class Payload implements BaseModel
     public function withDirection(Direction|string $direction): self
     {
         $obj = clone $this;
-        $obj->direction = $direction instanceof Direction ? $direction->value : $direction;
+        $obj['direction'] = $direction;
 
         return $obj;
     }
@@ -221,7 +221,7 @@ final class Payload implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

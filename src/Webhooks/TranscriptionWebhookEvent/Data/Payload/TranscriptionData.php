@@ -71,7 +71,7 @@ final class TranscriptionData implements BaseModel
         null !== $confidence && $obj->confidence = $confidence;
         null !== $isFinal && $obj->isFinal = $isFinal;
         null !== $transcript && $obj->transcript = $transcript;
-        null !== $transcriptionTrack && $obj->transcriptionTrack = $transcriptionTrack instanceof TranscriptionTrack ? $transcriptionTrack->value : $transcriptionTrack;
+        null !== $transcriptionTrack && $obj['transcriptionTrack'] = $transcriptionTrack;
 
         return $obj;
     }
@@ -118,7 +118,7 @@ final class TranscriptionData implements BaseModel
         TranscriptionTrack|string $transcriptionTrack
     ): self {
         $obj = clone $this;
-        $obj->transcriptionTrack = $transcriptionTrack instanceof TranscriptionTrack ? $transcriptionTrack->value : $transcriptionTrack;
+        $obj['transcriptionTrack'] = $transcriptionTrack;
 
         return $obj;
     }

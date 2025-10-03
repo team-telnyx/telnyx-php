@@ -11,7 +11,6 @@ use Telnyx\AI\Embeddings\EmbeddingListResponse;
 use Telnyx\AI\Embeddings\EmbeddingResponse;
 use Telnyx\AI\Embeddings\EmbeddingSimilaritySearchResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 
 use const Telnyx\Core\OMIT as omit;
@@ -26,8 +25,6 @@ interface EmbeddingsContract
      * @param int $documentChunkSize
      * @param EmbeddingModel|value-of<EmbeddingModel> $embeddingModel supported models to vectorize and embed documents
      * @param Loader|value-of<Loader> $loader supported types of custom document loaders for embeddings
-     *
-     * @return EmbeddingResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -45,8 +42,6 @@ interface EmbeddingsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return EmbeddingResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function createRaw(
@@ -56,8 +51,6 @@ interface EmbeddingsContract
 
     /**
      * @api
-     *
-     * @return EmbeddingGetResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -69,22 +62,7 @@ interface EmbeddingsContract
     /**
      * @api
      *
-     * @return EmbeddingGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $taskID,
-        mixed $params,
-        ?RequestOptions $requestOptions = null
-    ): EmbeddingGetResponse;
-
-    /**
-     * @api
-     *
      * @param list<string> $status List of task statuses i.e. `status=queued&status=processing`
-     *
-     * @return EmbeddingListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -97,8 +75,6 @@ interface EmbeddingsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return EmbeddingListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -114,8 +90,6 @@ interface EmbeddingsContract
      * @param string $query
      * @param int $numOfDocs
      *
-     * @return EmbeddingSimilaritySearchResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function similaritySearch(
@@ -130,8 +104,6 @@ interface EmbeddingsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return EmbeddingSimilaritySearchResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function similaritySearchRaw(
@@ -145,8 +117,6 @@ interface EmbeddingsContract
      * @param string $bucketName Name of the bucket to store the embeddings. This bucket must already exist.
      * @param string $url The URL of the webpage to embed
      *
-     * @return EmbeddingResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function url(
@@ -159,8 +129,6 @@ interface EmbeddingsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return EmbeddingResponse<HasRawResponse>
      *
      * @throws APIException
      */

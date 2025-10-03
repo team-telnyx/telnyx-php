@@ -7,21 +7,21 @@ namespace Telnyx\AI\Conversations\InsightGroups;
 use Telnyx\AI\Assistants\Tests\TestSuites\Runs\Meta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type insight_group_get_insight_groups_response = array{
  *   data: list<InsightTemplateGroup>, meta: Meta
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class InsightGroupGetInsightGroupsResponse implements BaseModel
+final class InsightGroupGetInsightGroupsResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<insight_group_get_insight_groups_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /** @var list<InsightTemplateGroup> $data */
     #[Api(list: InsightTemplateGroup::class)]

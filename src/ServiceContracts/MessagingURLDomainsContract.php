@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\MessagingURLDomains\MessagingURLDomainListParams\Page;
 use Telnyx\MessagingURLDomains\MessagingURLDomainListResponse;
 use Telnyx\RequestOptions;
@@ -19,8 +18,6 @@ interface MessagingURLDomainsContract
      *
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
-     * @return MessagingURLDomainListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -32,8 +29,6 @@ interface MessagingURLDomainsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return MessagingURLDomainListResponse<HasRawResponse>
      *
      * @throws APIException
      */

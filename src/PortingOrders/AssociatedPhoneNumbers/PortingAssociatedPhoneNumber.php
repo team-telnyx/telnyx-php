@@ -114,11 +114,11 @@ final class PortingAssociatedPhoneNumber implements BaseModel
         $obj = new self;
 
         null !== $id && $obj->id = $id;
-        null !== $action && $obj->action = $action instanceof Action ? $action->value : $action;
+        null !== $action && $obj['action'] = $action;
         null !== $countryCode && $obj->countryCode = $countryCode;
         null !== $createdAt && $obj->createdAt = $createdAt;
         null !== $phoneNumberRange && $obj->phoneNumberRange = $phoneNumberRange;
-        null !== $phoneNumberType && $obj->phoneNumberType = $phoneNumberType instanceof PhoneNumberType ? $phoneNumberType->value : $phoneNumberType;
+        null !== $phoneNumberType && $obj['phoneNumberType'] = $phoneNumberType;
         null !== $portingOrderID && $obj->portingOrderID = $portingOrderID;
         null !== $recordType && $obj->recordType = $recordType;
         null !== $updatedAt && $obj->updatedAt = $updatedAt;
@@ -145,7 +145,7 @@ final class PortingAssociatedPhoneNumber implements BaseModel
     public function withAction(Action|string $action): self
     {
         $obj = clone $this;
-        $obj->action = $action instanceof Action ? $action->value : $action;
+        $obj['action'] = $action;
 
         return $obj;
     }
@@ -193,7 +193,7 @@ final class PortingAssociatedPhoneNumber implements BaseModel
         PhoneNumberType|string $phoneNumberType
     ): self {
         $obj = clone $this;
-        $obj->phoneNumberType = $phoneNumberType instanceof PhoneNumberType ? $phoneNumberType->value : $phoneNumberType;
+        $obj['phoneNumberType'] = $phoneNumberType;
 
         return $obj;
     }

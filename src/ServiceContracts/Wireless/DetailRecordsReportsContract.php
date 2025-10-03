@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\Wireless;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\Wireless\DetailRecordsReports\DetailRecordsReportDeleteResponse;
 use Telnyx\Wireless\DetailRecordsReports\DetailRecordsReportGetResponse;
@@ -22,8 +21,6 @@ interface DetailRecordsReportsContract
      * @param string $endTime ISO 8601 formatted date-time indicating the end time
      * @param string $startTime ISO 8601 formatted date-time indicating the start time
      *
-     * @return DetailRecordsReportNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -37,8 +34,6 @@ interface DetailRecordsReportsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return DetailRecordsReportNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function createRaw(
@@ -48,8 +43,6 @@ interface DetailRecordsReportsContract
 
     /**
      * @api
-     *
-     * @return DetailRecordsReportGetResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -61,23 +54,8 @@ interface DetailRecordsReportsContract
     /**
      * @api
      *
-     * @return DetailRecordsReportGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
-        ?RequestOptions $requestOptions = null
-    ): DetailRecordsReportGetResponse;
-
-    /**
-     * @api
-     *
      * @param int $pageNumber the page number to load
      * @param int $pageSize the size of the page
-     *
-     * @return DetailRecordsReportListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -92,8 +70,6 @@ interface DetailRecordsReportsContract
      *
      * @param array<string, mixed> $params
      *
-     * @return DetailRecordsReportListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function listRaw(
@@ -104,25 +80,10 @@ interface DetailRecordsReportsContract
     /**
      * @api
      *
-     * @return DetailRecordsReportDeleteResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): DetailRecordsReportDeleteResponse;
-
-    /**
-     * @api
-     *
-     * @return DetailRecordsReportDeleteResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): DetailRecordsReportDeleteResponse;
 }

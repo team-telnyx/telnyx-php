@@ -97,12 +97,12 @@ final class Data implements BaseModel
         null !== $administrativeArea && $obj->administrativeArea = $administrativeArea;
         null !== $advanceRequirements && $obj->advanceRequirements = $advanceRequirements;
         null !== $count && $obj->count = $count;
-        null !== $coverageType && $obj->coverageType = $coverageType instanceof CoverageType ? $coverageType->value : $coverageType;
+        null !== $coverageType && $obj['coverageType'] = $coverageType;
         null !== $group && $obj->group = $group;
         null !== $groupType && $obj->groupType = $groupType;
         null !== $numberRange && $obj->numberRange = $numberRange;
-        null !== $numberType && $obj->numberType = $numberType instanceof NumberType ? $numberType->value : $numberType;
-        null !== $phoneNumberType && $obj->phoneNumberType = $phoneNumberType instanceof PhoneNumberType ? $phoneNumberType->value : $phoneNumberType;
+        null !== $numberType && $obj['numberType'] = $numberType;
+        null !== $phoneNumberType && $obj['phoneNumberType'] = $phoneNumberType;
         null !== $recordType && $obj->recordType = $recordType;
 
         return $obj;
@@ -141,7 +141,7 @@ final class Data implements BaseModel
     public function withCoverageType(CoverageType|string $coverageType): self
     {
         $obj = clone $this;
-        $obj->coverageType = $coverageType instanceof CoverageType ? $coverageType->value : $coverageType;
+        $obj['coverageType'] = $coverageType;
 
         return $obj;
     }
@@ -176,7 +176,7 @@ final class Data implements BaseModel
     public function withNumberType(NumberType|string $numberType): self
     {
         $obj = clone $this;
-        $obj->numberType = $numberType instanceof NumberType ? $numberType->value : $numberType;
+        $obj['numberType'] = $numberType;
 
         return $obj;
     }
@@ -188,7 +188,7 @@ final class Data implements BaseModel
         PhoneNumberType|string $phoneNumberType
     ): self {
         $obj = clone $this;
-        $obj->phoneNumberType = $phoneNumberType instanceof PhoneNumberType ? $phoneNumberType->value : $phoneNumberType;
+        $obj['phoneNumberType'] = $phoneNumberType;
 
         return $obj;
     }

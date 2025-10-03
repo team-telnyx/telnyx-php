@@ -53,7 +53,7 @@ final class Logo implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $contentType && $obj->contentType = $contentType instanceof ContentType ? $contentType->value : $contentType;
+        null !== $contentType && $obj['contentType'] = $contentType;
         null !== $documentID && $obj->documentID = $documentID;
 
         return $obj;
@@ -67,7 +67,7 @@ final class Logo implements BaseModel
     public function withContentType(ContentType|string $contentType): self
     {
         $obj = clone $this;
-        $obj->contentType = $contentType instanceof ContentType ? $contentType->value : $contentType;
+        $obj['contentType'] = $contentType;
 
         return $obj;
     }

@@ -53,7 +53,7 @@ final class Filter implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $action && $obj->action = $action instanceof Action ? $action->value : $action;
+        null !== $action && $obj['action'] = $action;
         null !== $phoneNumber && $obj->phoneNumber = $phoneNumber;
 
         return $obj;
@@ -67,7 +67,7 @@ final class Filter implements BaseModel
     public function withAction(Action|string $action): self
     {
         $obj = clone $this;
-        $obj->action = $action instanceof Action ? $action->value : $action;
+        $obj['action'] = $action;
 
         return $obj;
     }

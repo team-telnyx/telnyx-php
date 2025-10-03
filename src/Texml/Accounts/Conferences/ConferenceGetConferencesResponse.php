@@ -6,7 +6,9 @@ namespace Telnyx\Texml\Accounts\Conferences;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Texml\Accounts\Conferences\ConferenceGetConferencesResponse\Conference;
 
 /**
@@ -20,15 +22,13 @@ use Telnyx\Texml\Accounts\Conferences\ConferenceGetConferencesResponse\Conferenc
  *   start?: int,
  *   uri?: string,
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class ConferenceGetConferencesResponse implements BaseModel
+final class ConferenceGetConferencesResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<conference_get_conferences_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /** @var list<Conference>|null $conferences */
     #[Api(list: Conference::class, optional: true)]

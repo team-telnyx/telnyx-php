@@ -112,7 +112,7 @@ final class Data implements BaseModel
         null !== $contentType && $obj->contentType = $contentType;
         null !== $createdAt && $obj->createdAt = $createdAt;
         null !== $documentID && $obj->documentID = $documentID;
-        null !== $documentType && $obj->documentType = $documentType instanceof DocumentType ? $documentType->value : $documentType;
+        null !== $documentType && $obj['documentType'] = $documentType;
         null !== $filename && $obj->filename = $filename;
         null !== $portingOrderID && $obj->portingOrderID = $portingOrderID;
         null !== $recordType && $obj->recordType = $recordType;
@@ -173,7 +173,7 @@ final class Data implements BaseModel
     public function withDocumentType(DocumentType|string $documentType): self
     {
         $obj = clone $this;
-        $obj->documentType = $documentType instanceof DocumentType ? $documentType->value : $documentType;
+        $obj['documentType'] = $documentType;
 
         return $obj;
     }

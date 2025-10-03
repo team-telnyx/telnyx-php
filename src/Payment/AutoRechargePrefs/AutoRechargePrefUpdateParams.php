@@ -92,7 +92,7 @@ final class AutoRechargePrefUpdateParams implements BaseModel
 
         null !== $enabled && $obj->enabled = $enabled;
         null !== $invoiceEnabled && $obj->invoiceEnabled = $invoiceEnabled;
-        null !== $preference && $obj->preference = $preference instanceof Preference ? $preference->value : $preference;
+        null !== $preference && $obj['preference'] = $preference;
         null !== $rechargeAmount && $obj->rechargeAmount = $rechargeAmount;
         null !== $thresholdAmount && $obj->thresholdAmount = $thresholdAmount;
 
@@ -126,7 +126,7 @@ final class AutoRechargePrefUpdateParams implements BaseModel
     public function withPreference(Preference|string $preference): self
     {
         $obj = clone $this;
-        $obj->preference = $preference instanceof Preference ? $preference->value : $preference;
+        $obj['preference'] = $preference;
 
         return $obj;
     }

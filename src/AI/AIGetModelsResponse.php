@@ -7,19 +7,19 @@ namespace Telnyx\AI;
 use Telnyx\AI\AIGetModelsResponse\Data;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type ai_get_models_response = array{data: list<Data>, object1?: string}
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class AIGetModelsResponse implements BaseModel
+final class AIGetModelsResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<ai_get_models_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /** @var list<Data> $data */
     #[Api(list: Data::class)]

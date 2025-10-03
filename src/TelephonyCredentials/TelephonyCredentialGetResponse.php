@@ -6,21 +6,21 @@ namespace Telnyx\TelephonyCredentials;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type telephony_credential_get_response = array{
  *   data?: TelephonyCredential
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class TelephonyCredentialGetResponse implements BaseModel
+final class TelephonyCredentialGetResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<telephony_credential_get_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     #[Api(optional: true)]
     public ?TelephonyCredential $data;

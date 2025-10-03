@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\Networks\NetworkDeleteResponse;
 use Telnyx\Networks\NetworkGetResponse;
 use Telnyx\Networks\NetworkListInterfacesResponse;
@@ -25,8 +24,6 @@ interface NetworksContract
      *
      * @param string $name a user specified name for the network
      *
-     * @return NetworkNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -39,8 +36,6 @@ interface NetworksContract
      *
      * @param array<string, mixed> $params
      *
-     * @return NetworkNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function createRaw(
@@ -50,8 +45,6 @@ interface NetworksContract
 
     /**
      * @api
-     *
-     * @return NetworkGetResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -63,22 +56,7 @@ interface NetworksContract
     /**
      * @api
      *
-     * @return NetworkGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
-        ?RequestOptions $requestOptions = null
-    ): NetworkGetResponse;
-
-    /**
-     * @api
-     *
      * @param string $name a user specified name for the network
-     *
-     * @return NetworkUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -92,8 +70,6 @@ interface NetworksContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return NetworkUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -109,8 +85,6 @@ interface NetworksContract
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[name]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
-     * @return NetworkListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -124,8 +98,6 @@ interface NetworksContract
      *
      * @param array<string, mixed> $params
      *
-     * @return NetworkListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function listRaw(
@@ -135,8 +107,6 @@ interface NetworksContract
 
     /**
      * @api
-     *
-     * @return NetworkDeleteResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -148,23 +118,8 @@ interface NetworksContract
     /**
      * @api
      *
-     * @return NetworkDeleteResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $id,
-        mixed $params,
-        ?RequestOptions $requestOptions = null
-    ): NetworkDeleteResponse;
-
-    /**
-     * @api
-     *
      * @param Telnyx\Networks\NetworkListInterfacesParams\Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[name], filter[type], filter[status]
      * @param Telnyx\Networks\NetworkListInterfacesParams\Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
-     *
-     * @return NetworkListInterfacesResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -179,8 +134,6 @@ interface NetworksContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return NetworkListInterfacesResponse<HasRawResponse>
      *
      * @throws APIException
      */

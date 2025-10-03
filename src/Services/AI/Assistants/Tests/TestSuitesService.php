@@ -7,7 +7,6 @@ namespace Telnyx\Services\AI\Assistants\Tests;
 use Telnyx\AI\Assistants\Tests\TestSuites\TestSuiteListResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\Tests\TestSuitesContract;
 use Telnyx\Services\AI\Assistants\Tests\TestSuites\RunsService;
@@ -32,27 +31,9 @@ final class TestSuitesService implements TestSuitesContract
      *
      * Retrieves a list of all distinct test suite names available to the current user
      *
-     * @return TestSuiteListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
-        ?RequestOptions $requestOptions = null
-    ): TestSuiteListResponse {
-        $params = [];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return TestSuiteListResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): TestSuiteListResponse {
         // @phpstan-ignore-next-line;

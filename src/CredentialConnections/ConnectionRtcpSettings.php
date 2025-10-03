@@ -59,7 +59,7 @@ final class ConnectionRtcpSettings implements BaseModel
         $obj = new self;
 
         null !== $captureEnabled && $obj->captureEnabled = $captureEnabled;
-        null !== $port && $obj->port = $port instanceof Port ? $port->value : $port;
+        null !== $port && $obj['port'] = $port;
         null !== $reportFrequencySecs && $obj->reportFrequencySecs = $reportFrequencySecs;
 
         return $obj;
@@ -84,7 +84,7 @@ final class ConnectionRtcpSettings implements BaseModel
     public function withPort(Port|string $port): self
     {
         $obj = clone $this;
-        $obj->port = $port instanceof Port ? $port->value : $port;
+        $obj['port'] = $port;
 
         return $obj;
     }

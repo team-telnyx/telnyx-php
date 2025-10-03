@@ -108,7 +108,7 @@ final class IntegrationSecretCreateParams implements BaseModel
         $obj = new self;
 
         $obj->identifier = $identifier;
-        $obj->type = $type instanceof Type ? $type->value : $type;
+        $obj['type'] = $type;
 
         null !== $token && $obj->token = $token;
         null !== $password && $obj->password = $password;
@@ -136,7 +136,7 @@ final class IntegrationSecretCreateParams implements BaseModel
     public function withType(Type|string $type): self
     {
         $obj = clone $this;
-        $obj->type = $type instanceof Type ? $type->value : $type;
+        $obj['type'] = $type;
 
         return $obj;
     }

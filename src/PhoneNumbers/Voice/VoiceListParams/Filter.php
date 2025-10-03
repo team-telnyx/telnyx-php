@@ -79,7 +79,7 @@ final class Filter implements BaseModel
         null !== $connectionName && $obj->connectionName = $connectionName;
         null !== $customerReference && $obj->customerReference = $customerReference;
         null !== $phoneNumber && $obj->phoneNumber = $phoneNumber;
-        null !== $voiceUsagePaymentMethod && $obj->voiceUsagePaymentMethod = $voiceUsagePaymentMethod instanceof VoiceUsagePaymentMethod ? $voiceUsagePaymentMethod->value : $voiceUsagePaymentMethod;
+        null !== $voiceUsagePaymentMethod && $obj['voiceUsagePaymentMethod'] = $voiceUsagePaymentMethod;
 
         return $obj;
     }
@@ -127,7 +127,7 @@ final class Filter implements BaseModel
         VoiceUsagePaymentMethod|string $voiceUsagePaymentMethod
     ): self {
         $obj = clone $this;
-        $obj->voiceUsagePaymentMethod = $voiceUsagePaymentMethod instanceof VoiceUsagePaymentMethod ? $voiceUsagePaymentMethod->value : $voiceUsagePaymentMethod;
+        $obj['voiceUsagePaymentMethod'] = $voiceUsagePaymentMethod;
 
         return $obj;
     }

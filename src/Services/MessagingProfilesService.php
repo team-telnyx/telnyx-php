@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\MessagingProfiles\MessagingProfileCreateParams;
 use Telnyx\MessagingProfiles\MessagingProfileCreateParams\WebhookAPIVersion;
 use Telnyx\MessagingProfiles\MessagingProfileDeleteResponse;
@@ -74,8 +73,6 @@ final class MessagingProfilesService implements MessagingProfilesContract
      * @param string|null $webhookFailoverURL the failover URL where webhooks related to this messaging profile will be sent if sending to the primary URL fails
      * @param string|null $webhookURL the URL where webhooks related to this messaging profile will be sent
      *
-     * @return MessagingProfileNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -118,8 +115,6 @@ final class MessagingProfilesService implements MessagingProfilesContract
      *
      * @param array<string, mixed> $params
      *
-     * @return MessagingProfileNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function createRaw(
@@ -146,29 +141,10 @@ final class MessagingProfilesService implements MessagingProfilesContract
      *
      * Retrieve a messaging profile
      *
-     * @return MessagingProfileGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): MessagingProfileGetResponse {
-        $params = [];
-
-        return $this->retrieveRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return MessagingProfileGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): MessagingProfileGetResponse {
         // @phpstan-ignore-next-line;
@@ -211,8 +187,6 @@ final class MessagingProfilesService implements MessagingProfilesContract
      * @param list<string> $whitelistedDestinations Destinations to which the messaging profile is allowed to send. The elements in the list must be valid ISO 3166-1 alpha-2 country codes. If set to `["*"]`, all destinations will be allowed.
      *
      * This field is required if the messaging profile doesn't have it defined yet.
-     *
-     * @return MessagingProfileUpdateResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -259,8 +233,6 @@ final class MessagingProfilesService implements MessagingProfilesContract
      *
      * @param array<string, mixed> $params
      *
-     * @return MessagingProfileUpdateResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function updateRaw(
@@ -291,8 +263,6 @@ final class MessagingProfilesService implements MessagingProfilesContract
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[name]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
-     * @return MessagingProfileListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -309,8 +279,6 @@ final class MessagingProfilesService implements MessagingProfilesContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return MessagingProfileListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -338,29 +306,10 @@ final class MessagingProfilesService implements MessagingProfilesContract
      *
      * Delete a messaging profile
      *
-     * @return MessagingProfileDeleteResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): MessagingProfileDeleteResponse {
-        $params = [];
-
-        return $this->deleteRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return MessagingProfileDeleteResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): MessagingProfileDeleteResponse {
         // @phpstan-ignore-next-line;
@@ -379,8 +328,6 @@ final class MessagingProfilesService implements MessagingProfilesContract
      *
      * @param Telnyx\MessagingProfiles\MessagingProfileListPhoneNumbersParams\Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
-     * @return MessagingProfileListPhoneNumbersResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function listPhoneNumbers(
@@ -397,8 +344,6 @@ final class MessagingProfilesService implements MessagingProfilesContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return MessagingProfileListPhoneNumbersResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -429,8 +374,6 @@ final class MessagingProfilesService implements MessagingProfilesContract
      *
      * @param Telnyx\MessagingProfiles\MessagingProfileListShortCodesParams\Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
-     * @return MessagingProfileListShortCodesResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function listShortCodes(
@@ -447,8 +390,6 @@ final class MessagingProfilesService implements MessagingProfilesContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return MessagingProfileListShortCodesResponse<HasRawResponse>
      *
      * @throws APIException
      */

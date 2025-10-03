@@ -6,7 +6,6 @@ namespace Telnyx\Services\Wireless;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Wireless\DetailRecordsReportsContract;
 use Telnyx\Wireless\DetailRecordsReports\DetailRecordsReportCreateParams;
@@ -33,8 +32,6 @@ final class DetailRecordsReportsService implements DetailRecordsReportsContract
      * @param string $endTime ISO 8601 formatted date-time indicating the end time
      * @param string $startTime ISO 8601 formatted date-time indicating the start time
      *
-     * @return DetailRecordsReportNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -51,8 +48,6 @@ final class DetailRecordsReportsService implements DetailRecordsReportsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return DetailRecordsReportNewResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -80,29 +75,10 @@ final class DetailRecordsReportsService implements DetailRecordsReportsContract
      *
      * Returns one specific WDR report
      *
-     * @return DetailRecordsReportGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): DetailRecordsReportGetResponse {
-        $params = [];
-
-        return $this->retrieveRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return DetailRecordsReportGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): DetailRecordsReportGetResponse {
         // @phpstan-ignore-next-line;
@@ -122,8 +98,6 @@ final class DetailRecordsReportsService implements DetailRecordsReportsContract
      * @param int $pageNumber the page number to load
      * @param int $pageSize the size of the page
      *
-     * @return DetailRecordsReportListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -140,8 +114,6 @@ final class DetailRecordsReportsService implements DetailRecordsReportsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return DetailRecordsReportListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -169,29 +141,10 @@ final class DetailRecordsReportsService implements DetailRecordsReportsContract
      *
      * Deletes one specific WDR report.
      *
-     * @return DetailRecordsReportDeleteResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): DetailRecordsReportDeleteResponse {
-        $params = [];
-
-        return $this->deleteRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return DetailRecordsReportDeleteResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): DetailRecordsReportDeleteResponse {
         // @phpstan-ignore-next-line;

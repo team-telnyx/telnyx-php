@@ -6,7 +6,9 @@ namespace Telnyx\RequirementGroups;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\RequirementGroups\RequirementGroup\RegulatoryRequirement;
 use Telnyx\RequirementGroups\RequirementGroup\Status;
 
@@ -23,15 +25,13 @@ use Telnyx\RequirementGroups\RequirementGroup\Status;
  *   status?: value-of<Status>,
  *   updatedAt?: \DateTimeInterface,
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class RequirementGroup implements BaseModel
+final class RequirementGroup implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<requirement_group> */
     use SdkModel;
+
+    use SdkResponse;
 
     #[Api(optional: true)]
     public ?string $id;
@@ -104,7 +104,7 @@ final class RequirementGroup implements BaseModel
         null !== $phoneNumberType && $obj->phoneNumberType = $phoneNumberType;
         null !== $recordType && $obj->recordType = $recordType;
         null !== $regulatoryRequirements && $obj->regulatoryRequirements = $regulatoryRequirements;
-        null !== $status && $obj->status = $status instanceof Status ? $status->value : $status;
+        null !== $status && $obj['status'] = $status;
         null !== $updatedAt && $obj->updatedAt = $updatedAt;
 
         return $obj;
@@ -184,7 +184,7 @@ final class RequirementGroup implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

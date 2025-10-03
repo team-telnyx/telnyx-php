@@ -149,10 +149,10 @@ final class Conference implements BaseModel
         null !== $dateCreated && $obj->dateCreated = $dateCreated;
         null !== $dateUpdated && $obj->dateUpdated = $dateUpdated;
         null !== $friendlyName && $obj->friendlyName = $friendlyName;
-        null !== $reasonConferenceEnded && $obj->reasonConferenceEnded = $reasonConferenceEnded instanceof ReasonConferenceEnded ? $reasonConferenceEnded->value : $reasonConferenceEnded;
+        null !== $reasonConferenceEnded && $obj['reasonConferenceEnded'] = $reasonConferenceEnded;
         null !== $region && $obj->region = $region;
         null !== $sid && $obj->sid = $sid;
-        null !== $status && $obj->status = $status instanceof Status ? $status->value : $status;
+        null !== $status && $obj['status'] = $status;
         null !== $subresourceUris && $obj->subresourceUris = $subresourceUris;
         null !== $uri && $obj->uri = $uri;
 
@@ -235,7 +235,7 @@ final class Conference implements BaseModel
         ReasonConferenceEnded|string $reasonConferenceEnded
     ): self {
         $obj = clone $this;
-        $obj->reasonConferenceEnded = $reasonConferenceEnded instanceof ReasonConferenceEnded ? $reasonConferenceEnded->value : $reasonConferenceEnded;
+        $obj['reasonConferenceEnded'] = $reasonConferenceEnded;
 
         return $obj;
     }
@@ -270,7 +270,7 @@ final class Conference implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }

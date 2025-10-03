@@ -116,7 +116,7 @@ final class BrandListParams implements BaseModel
         null !== $entityType && $obj->entityType = $entityType;
         null !== $page && $obj->page = $page;
         null !== $recordsPerPage && $obj->recordsPerPage = $recordsPerPage;
-        null !== $sort && $obj->sort = $sort instanceof Sort ? $sort->value : $sort;
+        null !== $sort && $obj['sort'] = $sort;
         null !== $state && $obj->state = $state;
         null !== $tcrBrandID && $obj->tcrBrandID = $tcrBrandID;
 
@@ -185,7 +185,7 @@ final class BrandListParams implements BaseModel
     public function withSort(Sort|string $sort): self
     {
         $obj = clone $this;
-        $obj->sort = $sort instanceof Sort ? $sort->value : $sort;
+        $obj['sort'] = $sort;
 
         return $obj;
     }

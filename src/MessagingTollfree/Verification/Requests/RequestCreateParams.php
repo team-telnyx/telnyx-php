@@ -294,12 +294,12 @@ final class RequestCreateParams implements BaseModel
         $obj->businessZip = $businessZip;
         $obj->corporateWebsite = $corporateWebsite;
         $obj->isvReseller = $isvReseller;
-        $obj->messageVolume = $messageVolume instanceof Volume ? $messageVolume->value : $messageVolume;
+        $obj['messageVolume'] = $messageVolume;
         $obj->optInWorkflow = $optInWorkflow;
         $obj->optInWorkflowImageURLs = $optInWorkflowImageURLs;
         $obj->phoneNumbers = $phoneNumbers;
         $obj->productionMessageContent = $productionMessageContent;
-        $obj->useCase = $useCase instanceof UseCaseCategories ? $useCase->value : $useCase;
+        $obj['useCase'] = $useCase;
         $obj->useCaseSummary = $useCaseSummary;
 
         null !== $businessAddr2 && $obj->businessAddr2 = $businessAddr2;
@@ -451,7 +451,7 @@ final class RequestCreateParams implements BaseModel
     public function withMessageVolume(Volume|string $messageVolume): self
     {
         $obj = clone $this;
-        $obj->messageVolume = $messageVolume instanceof Volume ? $messageVolume->value : $messageVolume;
+        $obj['messageVolume'] = $messageVolume;
 
         return $obj;
     }
@@ -514,7 +514,7 @@ final class RequestCreateParams implements BaseModel
     public function withUseCase(UseCaseCategories|string $useCase): self
     {
         $obj = clone $this;
-        $obj->useCase = $useCase instanceof UseCaseCategories ? $useCase->value : $useCase;
+        $obj['useCase'] = $useCase;
 
         return $obj;
     }

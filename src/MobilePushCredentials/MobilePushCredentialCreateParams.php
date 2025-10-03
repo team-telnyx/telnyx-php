@@ -124,7 +124,7 @@ final class MobilePushCredentialCreateParams implements BaseModel
         $obj->alias = $alias;
         $obj->certificate = $certificate;
         $obj->privateKey = $privateKey;
-        $obj->type = $type instanceof Type ? $type->value : $type;
+        $obj['type'] = $type;
         $obj->projectAccountJsonFile = $projectAccountJsonFile;
 
         return $obj;
@@ -171,7 +171,7 @@ final class MobilePushCredentialCreateParams implements BaseModel
     public function withType(Type|string $type): self
     {
         $obj = clone $this;
-        $obj->type = $type instanceof Type ? $type->value : $type;
+        $obj['type'] = $type;
 
         return $obj;
     }

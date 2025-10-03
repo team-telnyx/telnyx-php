@@ -7,21 +7,21 @@ namespace Telnyx\CredentialConnections;
 use Telnyx\ConnectionsPaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type credential_connection_list_response = array{
  *   data?: list<CredentialConnection>, meta?: ConnectionsPaginationMeta
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class CredentialConnectionListResponse implements BaseModel
+final class CredentialConnectionListResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<credential_connection_list_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /** @var list<CredentialConnection>|null $data */
     #[Api(list: CredentialConnection::class, optional: true)]

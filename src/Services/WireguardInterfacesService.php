@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\WireguardInterfacesContract;
 use Telnyx\WireguardInterfaces\WireguardInterfaceCreateParams;
@@ -37,8 +36,6 @@ final class WireguardInterfacesService implements WireguardInterfacesContract
      * @param bool $enableSipTrunking enable SIP traffic forwarding over VPN interface
      * @param string $name a user specified name for the interface
      *
-     * @return WireguardInterfaceNewResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function create(
@@ -62,8 +59,6 @@ final class WireguardInterfacesService implements WireguardInterfacesContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return WireguardInterfaceNewResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -91,29 +86,10 @@ final class WireguardInterfacesService implements WireguardInterfacesContract
      *
      * Retrieve a WireGuard Interfaces.
      *
-     * @return WireguardInterfaceGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): WireguardInterfaceGetResponse {
-        $params = [];
-
-        return $this->retrieveRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return WireguardInterfaceGetResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): WireguardInterfaceGetResponse {
         // @phpstan-ignore-next-line;
@@ -133,8 +109,6 @@ final class WireguardInterfacesService implements WireguardInterfacesContract
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[network_id]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
-     * @return WireguardInterfaceListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -151,8 +125,6 @@ final class WireguardInterfacesService implements WireguardInterfacesContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return WireguardInterfaceListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -180,29 +152,10 @@ final class WireguardInterfacesService implements WireguardInterfacesContract
      *
      * Delete a WireGuard Interface.
      *
-     * @return WireguardInterfaceDeleteResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): WireguardInterfaceDeleteResponse {
-        $params = [];
-
-        return $this->deleteRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return WireguardInterfaceDeleteResponse<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $id,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): WireguardInterfaceDeleteResponse {
         // @phpstan-ignore-next-line;

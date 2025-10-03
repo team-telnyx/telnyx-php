@@ -14,7 +14,6 @@ use Telnyx\AI\Clusters\ClusterListResponse;
 use Telnyx\AI\Clusters\ClusterRetrieveParams;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\ClustersContract;
 
@@ -35,8 +34,6 @@ final class ClustersService implements ClustersContract
      * @param bool $showSubclusters whether or not to include subclusters and their nodes in the response
      * @param int $topNNodes The number of nodes in the cluster to return in the response. Nodes will be sorted by their centrality within the cluster.
      *
-     * @return ClusterGetResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
@@ -56,8 +53,6 @@ final class ClustersService implements ClustersContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ClusterGetResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -88,8 +83,6 @@ final class ClustersService implements ClustersContract
      *
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
-     * @return ClusterListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -105,8 +98,6 @@ final class ClustersService implements ClustersContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ClusterListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -140,21 +131,6 @@ final class ClustersService implements ClustersContract
         string $taskID,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        $params = [];
-
-        return $this->deleteRaw($taskID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $taskID,
-        mixed $params,
-        ?RequestOptions $requestOptions = null
-    ): mixed {
         // @phpstan-ignore-next-line;
         return $this->client->request(
             method: 'delete',
@@ -174,8 +150,6 @@ final class ClustersService implements ClustersContract
      * @param int $minClusterSize Smallest number of related text chunks to qualify as a cluster. Top-level clusters should be thought of as identifying broad themes in your data.
      * @param int $minSubclusterSize Smallest number of related text chunks to qualify as a sub-cluster. Sub-clusters should be thought of as identifying more specific topics within a broader theme.
      * @param string $prefix prefix to filter whcih files in the buckets are included
-     *
-     * @return ClusterComputeResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -202,8 +176,6 @@ final class ClustersService implements ClustersContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return ClusterComputeResponse<HasRawResponse>
      *
      * @throws APIException
      */

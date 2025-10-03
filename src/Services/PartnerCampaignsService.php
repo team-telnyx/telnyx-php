@@ -8,7 +8,6 @@ use Telnyx\Campaign\CampaignSharingStatus;
 use Telnyx\Client;
 use Telnyx\Core\Conversion\MapOf;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Implementation\HasRawResponse;
 use Telnyx\PartnerCampaigns\PartnerCampaignListParams;
 use Telnyx\PartnerCampaigns\PartnerCampaignListParams\Sort;
 use Telnyx\PartnerCampaigns\PartnerCampaignListResponse;
@@ -33,29 +32,10 @@ final class PartnerCampaignsService implements PartnerCampaignsContract
      *
      * Retrieve campaign details by `campaignId`.
      *
-     * @return TelnyxDownstreamCampaign<HasRawResponse>
-     *
      * @throws APIException
      */
     public function retrieve(
         string $campaignID,
-        ?RequestOptions $requestOptions = null
-    ): TelnyxDownstreamCampaign {
-        $params = [];
-
-        return $this->retrieveRaw($campaignID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @return TelnyxDownstreamCampaign<HasRawResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $campaignID,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): TelnyxDownstreamCampaign {
         // @phpstan-ignore-next-line;
@@ -74,8 +54,6 @@ final class PartnerCampaignsService implements PartnerCampaignsContract
      *
      * @param string $webhookFailoverURL webhook failover to which campaign status updates are sent
      * @param string $webhookURL webhook to which campaign status updates are sent
-     *
-     * @return TelnyxDownstreamCampaign<HasRawResponse>
      *
      * @throws APIException
      */
@@ -96,8 +74,6 @@ final class PartnerCampaignsService implements PartnerCampaignsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return TelnyxDownstreamCampaign<HasRawResponse>
      *
      * @throws APIException
      */
@@ -132,8 +108,6 @@ final class PartnerCampaignsService implements PartnerCampaignsContract
      * @param int $recordsPerPage The amount of records per page, limited to between 1 and 500 inclusive. The default value is `10`.
      * @param Sort|value-of<Sort> $sort Specifies the sort order for results. If not given, results are sorted by createdAt in descending order.
      *
-     * @return PartnerCampaignListResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -153,8 +127,6 @@ final class PartnerCampaignsService implements PartnerCampaignsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return PartnerCampaignListResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -189,8 +161,6 @@ final class PartnerCampaignsService implements PartnerCampaignsContract
      * @param int $page The 1-indexed page number to get. The default value is `1`.
      * @param int $recordsPerPage The amount of records per page, limited to between 1 and 500 inclusive. The default value is `10`.
      *
-     * @return PartnerCampaignListSharedByMeResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function listSharedByMe(
@@ -207,8 +177,6 @@ final class PartnerCampaignsService implements PartnerCampaignsContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return PartnerCampaignListSharedByMeResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -242,27 +210,6 @@ final class PartnerCampaignsService implements PartnerCampaignsContract
      */
     public function retrieveSharingStatus(
         string $campaignID,
-        ?RequestOptions $requestOptions = null
-    ): array {
-        $params = [];
-
-        return $this->retrieveSharingStatusRaw(
-            $campaignID,
-            $params,
-            $requestOptions
-        );
-    }
-
-    /**
-     * @api
-     *
-     * @return array<string, CampaignSharingStatus>
-     *
-     * @throws APIException
-     */
-    public function retrieveSharingStatusRaw(
-        string $campaignID,
-        mixed $params,
         ?RequestOptions $requestOptions = null
     ): array {
         // @phpstan-ignore-next-line;

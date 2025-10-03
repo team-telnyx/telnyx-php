@@ -58,7 +58,7 @@ final class WebhookTool implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->type = $type instanceof Type ? $type->value : $type;
+        $obj['type'] = $type;
         $obj->webhook = $webhook;
 
         return $obj;
@@ -70,7 +70,7 @@ final class WebhookTool implements BaseModel
     public function withType(Type|string $type): self
     {
         $obj = clone $this;
-        $obj->type = $type instanceof Type ? $type->value : $type;
+        $obj['type'] = $type;
 
         return $obj;
     }

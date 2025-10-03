@@ -144,12 +144,12 @@ final class NumberOrderPhoneNumber implements BaseModel
         null !== $locality && $obj->locality = $locality;
         null !== $orderRequestID && $obj->orderRequestID = $orderRequestID;
         null !== $phoneNumber && $obj->phoneNumber = $phoneNumber;
-        null !== $phoneNumberType && $obj->phoneNumberType = $phoneNumberType instanceof PhoneNumberType ? $phoneNumberType->value : $phoneNumberType;
+        null !== $phoneNumberType && $obj['phoneNumberType'] = $phoneNumberType;
         null !== $recordType && $obj->recordType = $recordType;
         null !== $regulatoryRequirements && $obj->regulatoryRequirements = $regulatoryRequirements;
         null !== $requirementsMet && $obj->requirementsMet = $requirementsMet;
-        null !== $requirementsStatus && $obj->requirementsStatus = $requirementsStatus instanceof RequirementsStatus ? $requirementsStatus->value : $requirementsStatus;
-        null !== $status && $obj->status = $status instanceof Status ? $status->value : $status;
+        null !== $requirementsStatus && $obj['requirementsStatus'] = $requirementsStatus;
+        null !== $status && $obj['status'] = $status;
         null !== $subNumberOrderID && $obj->subNumberOrderID = $subNumberOrderID;
 
         return $obj;
@@ -226,7 +226,7 @@ final class NumberOrderPhoneNumber implements BaseModel
         PhoneNumberType|string $phoneNumberType
     ): self {
         $obj = clone $this;
-        $obj->phoneNumberType = $phoneNumberType instanceof PhoneNumberType ? $phoneNumberType->value : $phoneNumberType;
+        $obj['phoneNumberType'] = $phoneNumberType;
 
         return $obj;
     }
@@ -271,7 +271,7 @@ final class NumberOrderPhoneNumber implements BaseModel
         RequirementsStatus|string $requirementsStatus
     ): self {
         $obj = clone $this;
-        $obj->requirementsStatus = $requirementsStatus instanceof RequirementsStatus ? $requirementsStatus->value : $requirementsStatus;
+        $obj['requirementsStatus'] = $requirementsStatus;
 
         return $obj;
     }
@@ -284,7 +284,7 @@ final class NumberOrderPhoneNumber implements BaseModel
     public function withStatus(Status|string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status instanceof Status ? $status->value : $status;
+        $obj['status'] = $status;
 
         return $obj;
     }
