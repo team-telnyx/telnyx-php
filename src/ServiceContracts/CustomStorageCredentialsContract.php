@@ -57,7 +57,7 @@ interface CustomStorageCredentialsContract
     /**
      * @api
      *
-     * @param Telnyx\CustomStorageCredentials\CustomStorageCredentialUpdateParams\Backend|value-of<Telnyx\CustomStorageCredentials\CustomStorageCredentialUpdateParams\Backend> $backend
+     * @param \Telnyx\CustomStorageCredentials\CustomStorageCredentialUpdateParams\Backend|value-of<\Telnyx\CustomStorageCredentials\CustomStorageCredentialUpdateParams\Backend> $backend
      * @param GcsConfigurationData|S3ConfigurationData|AzureConfigurationData $configuration
      *
      * @throws APIException

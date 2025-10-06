@@ -66,7 +66,7 @@ interface DialogflowConnectionsContract
      * @param array<string,
      * mixed,> $serviceAccount The JSON map to connect your Dialoglow account
      * @param string $conversationProfileID The id of a configured conversation profile on your Dialogflow account. (If you use Dialogflow CX, this param is required)
-     * @param Telnyx\DialogflowConnections\DialogflowConnectionUpdateParams\DialogflowAPI|value-of<Telnyx\DialogflowConnections\DialogflowConnectionUpdateParams\DialogflowAPI> $dialogflowAPI determine which Dialogflow will be used
+     * @param \Telnyx\DialogflowConnections\DialogflowConnectionUpdateParams\DialogflowAPI|value-of<\Telnyx\DialogflowConnections\DialogflowConnectionUpdateParams\DialogflowAPI> $dialogflowAPI determine which Dialogflow will be used
      * @param string $environment which Dialogflow environment will be used
      * @param string $location The region of your agent is. (If you use Dialogflow CX, this param is required)
      *

@@ -464,7 +464,7 @@ final class PortingOrdersService implements PortingOrdersContract
      *
      * Returns a list of all requirements based on country/number type for this porting order.
      *
-     * @param Telnyx\PortingOrders\PortingOrderRetrieveRequirementsParams\Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param PortingOrderRetrieveRequirementsParams\Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @throws APIException
      */

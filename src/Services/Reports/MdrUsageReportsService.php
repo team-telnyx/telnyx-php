@@ -173,7 +173,7 @@ final class MdrUsageReportsService implements MdrUsageReportsContract
      *
      * Generate and fetch messaging usage report synchronously. This endpoint will both generate and fetch the messaging report over a specified time period. No polling is necessary but the response may take up to a couple of minutes.
      *
-     * @param Telnyx\Reports\MdrUsageReports\MdrUsageReportFetchSyncParams\AggregationType|value-of<Telnyx\Reports\MdrUsageReports\MdrUsageReportFetchSyncParams\AggregationType> $aggregationType
+     * @param MdrUsageReportFetchSyncParams\AggregationType|value-of<MdrUsageReportFetchSyncParams\AggregationType> $aggregationType
      * @param \DateTimeInterface $endDate
      * @param list<string> $profiles
      * @param \DateTimeInterface $startDate

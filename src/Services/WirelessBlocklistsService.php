@@ -101,7 +101,7 @@ final class WirelessBlocklistsService implements WirelessBlocklistsContract
      * Update a Wireless Blocklist.
      *
      * @param string $name the name of the Wireless Blocklist
-     * @param Telnyx\WirelessBlocklists\WirelessBlocklistUpdateParams\Type|value-of<Telnyx\WirelessBlocklists\WirelessBlocklistUpdateParams\Type> $type the type of wireless blocklist
+     * @param WirelessBlocklistUpdateParams\Type|value-of<WirelessBlocklistUpdateParams\Type> $type the type of wireless blocklist
      * @param list<string> $values Values to block. The values here depend on the `type` of Wireless Blocklist.
      *
      * @throws APIException

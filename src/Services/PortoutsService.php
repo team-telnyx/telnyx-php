@@ -129,7 +129,7 @@ final class PortoutsService implements PortoutsContract
      *
      * Given a port-out ID, list rejection codes that are eligible for that port-out
      *
-     * @param Telnyx\Portouts\PortoutListRejectionCodesParams\Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[code], filter[code][in]
+     * @param PortoutListRejectionCodesParams\Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[code], filter[code][in]
      *
      * @throws APIException
      */

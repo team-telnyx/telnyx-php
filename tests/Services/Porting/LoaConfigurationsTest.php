@@ -107,7 +107,7 @@ final class LoaConfigurationsTest extends TestCase
 
         $result = $this->client->porting->loaConfigurations->update(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            address: Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Address::with(
+            address: \Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Address::with(
                 city: 'Austin',
                 countryCode: 'US',
                 state: 'TX',
@@ -115,11 +115,11 @@ final class LoaConfigurationsTest extends TestCase
                 zipCode: '78701',
             ),
             companyName: 'Telnyx',
-            contact: Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Contact::with(
+            contact: \Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Contact::with(
                 email: 'testing@telnyx.com',
                 phoneNumber: '+12003270001'
             ),
-            logo: Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Logo::with(
+            logo: \Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Logo::with(
                 documentID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
             ),
             name: 'My LOA Configuration',
@@ -137,7 +137,7 @@ final class LoaConfigurationsTest extends TestCase
 
         $result = $this->client->porting->loaConfigurations->update(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            address: Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Address::with(
+            address: \Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Address::with(
                 city: 'Austin',
                 countryCode: 'US',
                 state: 'TX',
@@ -146,11 +146,11 @@ final class LoaConfigurationsTest extends TestCase
             )
                 ->withExtendedAddress('14th Floor'),
             companyName: 'Telnyx',
-            contact: Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Contact::with(
+            contact: \Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Contact::with(
                 email: 'testing@telnyx.com',
                 phoneNumber: '+12003270001'
             ),
-            logo: Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Logo::with(
+            logo: \Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Logo::with(
                 documentID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
             ),
             name: 'My LOA Configuration',
@@ -193,7 +193,7 @@ final class LoaConfigurationsTest extends TestCase
         }
 
         $result = $this->client->porting->loaConfigurations->preview0(
-            address: Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Address::with(
+            address: \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Address::with(
                 city: 'Austin',
                 countryCode: 'US',
                 state: 'TX',
@@ -201,11 +201,11 @@ final class LoaConfigurationsTest extends TestCase
                 zipCode: '78701',
             ),
             companyName: 'Telnyx',
-            contact: Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Contact::with(
+            contact: \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Contact::with(
                 email: 'testing@telnyx.com',
                 phoneNumber: '+12003270001'
             ),
-            logo: Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Logo::with(
+            logo: \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Logo::with(
                 documentID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
             ),
             name: 'My LOA Configuration',
@@ -222,7 +222,7 @@ final class LoaConfigurationsTest extends TestCase
         }
 
         $result = $this->client->porting->loaConfigurations->preview0(
-            address: Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Address::with(
+            address: \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Address::with(
                 city: 'Austin',
                 countryCode: 'US',
                 state: 'TX',
@@ -231,11 +231,11 @@ final class LoaConfigurationsTest extends TestCase
             )
                 ->withExtendedAddress('14th Floor'),
             companyName: 'Telnyx',
-            contact: Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Contact::with(
+            contact: \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Contact::with(
                 email: 'testing@telnyx.com',
                 phoneNumber: '+12003270001'
             ),
-            logo: Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Logo::with(
+            logo: \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Logo::with(
                 documentID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
             ),
             name: 'My LOA Configuration',

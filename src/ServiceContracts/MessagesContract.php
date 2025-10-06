@@ -113,7 +113,7 @@ interface MessagesContract
      * @param string $text Message body (i.e., content) as a non-empty string.
      *
      * **Required for SMS**
-     * @param Telnyx\Messages\MessageSendParams\Type|value-of<Telnyx\Messages\MessageSendParams\Type> $type the protocol for sending the message, either SMS or MMS
+     * @param \Telnyx\Messages\MessageSendParams\Type|value-of<\Telnyx\Messages\MessageSendParams\Type> $type the protocol for sending the message, either SMS or MMS
      * @param bool $useProfileWebhooks If the profile this number is associated with has webhooks, use them for delivery notifications. If webhooks are also specified on the message itself, they will be attempted first, then those on the profile.
      * @param string $webhookFailoverURL the failover URL where webhooks related to this message will be sent if sending to the primary URL fails
      * @param string $webhookURL the URL where webhooks related to this message will be sent
@@ -199,7 +199,7 @@ interface MessagesContract
      * @param string $text Message body (i.e., content) as a non-empty string.
      *
      * **Required for SMS**
-     * @param Telnyx\Messages\MessageSendLongCodeParams\Type|value-of<Telnyx\Messages\MessageSendLongCodeParams\Type> $type the protocol for sending the message, either SMS or MMS
+     * @param \Telnyx\Messages\MessageSendLongCodeParams\Type|value-of<\Telnyx\Messages\MessageSendLongCodeParams\Type> $type the protocol for sending the message, either SMS or MMS
      * @param bool $useProfileWebhooks If the profile this number is associated with has webhooks, use them for delivery notifications. If webhooks are also specified on the message itself, they will be attempted first, then those on the profile.
      * @param string $webhookFailoverURL the failover URL where webhooks related to this message will be sent if sending to the primary URL fails
      * @param string $webhookURL the URL where webhooks related to this message will be sent
@@ -245,7 +245,7 @@ interface MessagesContract
      * @param string $text Message body (i.e., content) as a non-empty string.
      *
      * **Required for SMS**
-     * @param Telnyx\Messages\MessageSendNumberPoolParams\Type|value-of<Telnyx\Messages\MessageSendNumberPoolParams\Type> $type the protocol for sending the message, either SMS or MMS
+     * @param \Telnyx\Messages\MessageSendNumberPoolParams\Type|value-of<\Telnyx\Messages\MessageSendNumberPoolParams\Type> $type the protocol for sending the message, either SMS or MMS
      * @param bool $useProfileWebhooks If the profile this number is associated with has webhooks, use them for delivery notifications. If webhooks are also specified on the message itself, they will be attempted first, then those on the profile.
      * @param string $webhookFailoverURL the failover URL where webhooks related to this message will be sent if sending to the primary URL fails
      * @param string $webhookURL the URL where webhooks related to this message will be sent
@@ -291,7 +291,7 @@ interface MessagesContract
      * @param string $text Message body (i.e., content) as a non-empty string.
      *
      * **Required for SMS**
-     * @param Telnyx\Messages\MessageSendShortCodeParams\Type|value-of<Telnyx\Messages\MessageSendShortCodeParams\Type> $type the protocol for sending the message, either SMS or MMS
+     * @param \Telnyx\Messages\MessageSendShortCodeParams\Type|value-of<\Telnyx\Messages\MessageSendShortCodeParams\Type> $type the protocol for sending the message, either SMS or MMS
      * @param bool $useProfileWebhooks If the profile this number is associated with has webhooks, use them for delivery notifications. If webhooks are also specified on the message itself, they will be attempted first, then those on the profile.
      * @param string $webhookFailoverURL the failover URL where webhooks related to this message will be sent if sending to the primary URL fails
      * @param string $webhookURL the URL where webhooks related to this message will be sent

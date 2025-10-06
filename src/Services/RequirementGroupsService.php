@@ -111,7 +111,7 @@ final class RequirementGroupsService implements RequirementGroupsContract
      * Update requirement values in requirement group
      *
      * @param string $customerReference Reference for the customer
-     * @param list<Telnyx\RequirementGroups\RequirementGroupUpdateParams\RegulatoryRequirement> $regulatoryRequirements
+     * @param list<RequirementGroupUpdateParams\RegulatoryRequirement> $regulatoryRequirements
      *
      * @throws APIException
      */

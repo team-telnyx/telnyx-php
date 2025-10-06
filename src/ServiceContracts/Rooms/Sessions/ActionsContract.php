@@ -58,7 +58,7 @@ interface ActionsContract
      * @api
      *
      * @param list<string> $exclude list of participant id to exclude from the action
-     * @param Telnyx\Rooms\Sessions\Actions\ActionMuteParams\Participants\UnionMember0|list<string>|value-of<Telnyx\Rooms\Sessions\Actions\ActionMuteParams\Participants\UnionMember0> $participants either a list of participant id to perform the action on, or the keyword "all" to perform the action on all participant
+     * @param \Telnyx\Rooms\Sessions\Actions\ActionMuteParams\Participants\UnionMember0|list<string>|value-of<\Telnyx\Rooms\Sessions\Actions\ActionMuteParams\Participants\UnionMember0> $participants either a list of participant id to perform the action on, or the keyword "all" to perform the action on all participant
      *
      * @throws APIException
      */
@@ -86,7 +86,7 @@ interface ActionsContract
      * @api
      *
      * @param list<string> $exclude list of participant id to exclude from the action
-     * @param Telnyx\Rooms\Sessions\Actions\ActionUnmuteParams\Participants\UnionMember0|list<string>|value-of<Telnyx\Rooms\Sessions\Actions\ActionUnmuteParams\Participants\UnionMember0> $participants either a list of participant id to perform the action on, or the keyword "all" to perform the action on all participant
+     * @param \Telnyx\Rooms\Sessions\Actions\ActionUnmuteParams\Participants\UnionMember0|list<string>|value-of<\Telnyx\Rooms\Sessions\Actions\ActionUnmuteParams\Participants\UnionMember0> $participants either a list of participant id to perform the action on, or the keyword "all" to perform the action on all participant
      *
      * @throws APIException
      */

@@ -72,7 +72,7 @@ interface OAuthClientsContract
     /**
      * @api
      *
-     * @param list<Telnyx\OAuthClients\OAuthClientUpdateParams\AllowedGrantType|value-of<Telnyx\OAuthClients\OAuthClientUpdateParams\AllowedGrantType>> $allowedGrantTypes List of allowed OAuth grant types
+     * @param list<\Telnyx\OAuthClients\OAuthClientUpdateParams\AllowedGrantType|value-of<\Telnyx\OAuthClients\OAuthClientUpdateParams\AllowedGrantType>> $allowedGrantTypes List of allowed OAuth grant types
      * @param list<string> $allowedScopes List of allowed OAuth scopes
      * @param string $logoUri URL of the client logo
      * @param string $name The name of the OAuth client

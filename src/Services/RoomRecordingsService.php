@@ -116,8 +116,8 @@ final class RoomRecordingsService implements RoomRecordingsContract
      *
      * Delete several room recordings in a bulk.
      *
-     * @param Telnyx\RoomRecordings\RoomRecordingDeleteBulkParams\Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[date_ended_at][eq], filter[date_ended_at][gte], filter[date_ended_at][lte], filter[date_started_at][eq], filter[date_started_at][gte], filter[date_started_at][lte], filter[room_id], filter[participant_id], filter[session_id], filter[status], filter[type], filter[duration_secs]
-     * @param Telnyx\RoomRecordings\RoomRecordingDeleteBulkParams\Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param RoomRecordingDeleteBulkParams\Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[date_ended_at][eq], filter[date_ended_at][gte], filter[date_ended_at][lte], filter[date_started_at][eq], filter[date_started_at][gte], filter[date_started_at][lte], filter[room_id], filter[participant_id], filter[session_id], filter[status], filter[type], filter[duration_secs]
+     * @param RoomRecordingDeleteBulkParams\Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @throws APIException
      */

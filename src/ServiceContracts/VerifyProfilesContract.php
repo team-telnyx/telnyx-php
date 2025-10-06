@@ -70,11 +70,11 @@ interface VerifyProfilesContract
     /**
      * @api
      *
-     * @param Telnyx\VerifyProfiles\VerifyProfileUpdateParams\Call $call
-     * @param Telnyx\VerifyProfiles\VerifyProfileUpdateParams\Flashcall $flashcall
+     * @param \Telnyx\VerifyProfiles\VerifyProfileUpdateParams\Call $call
+     * @param \Telnyx\VerifyProfiles\VerifyProfileUpdateParams\Flashcall $flashcall
      * @param string $language
      * @param string $name
-     * @param Telnyx\VerifyProfiles\VerifyProfileUpdateParams\SMS $sms
+     * @param \Telnyx\VerifyProfiles\VerifyProfileUpdateParams\SMS $sms
      * @param string $webhookFailoverURL
      * @param string $webhookURL
      *

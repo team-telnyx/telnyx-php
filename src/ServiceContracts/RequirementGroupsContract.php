@@ -62,7 +62,7 @@ interface RequirementGroupsContract
      * @api
      *
      * @param string $customerReference Reference for the customer
-     * @param list<Telnyx\RequirementGroups\RequirementGroupUpdateParams\RegulatoryRequirement> $regulatoryRequirements
+     * @param list<\Telnyx\RequirementGroups\RequirementGroupUpdateParams\RegulatoryRequirement> $regulatoryRequirements
      *
      * @throws APIException
      */

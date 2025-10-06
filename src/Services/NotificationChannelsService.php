@@ -107,7 +107,7 @@ final class NotificationChannelsService implements NotificationChannelsContract
      * Update a notification channel.
      *
      * @param string $channelDestination the destination associated with the channel type
-     * @param Telnyx\NotificationChannels\NotificationChannelUpdateParams\ChannelTypeID|value-of<Telnyx\NotificationChannels\NotificationChannelUpdateParams\ChannelTypeID> $channelTypeID A Channel Type ID
+     * @param NotificationChannelUpdateParams\ChannelTypeID|value-of<NotificationChannelUpdateParams\ChannelTypeID> $channelTypeID A Channel Type ID
      * @param string $notificationProfileID a UUID reference to the associated Notification Profile
      *
      * @throws APIException
