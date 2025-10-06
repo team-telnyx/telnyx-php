@@ -33,6 +33,7 @@ use Telnyx\MessagingProfiles\MessagingProfileUpdateParams\WebhookAPIVersion;
  *   enabled?: bool,
  *   mmsFallBackToSMS?: bool,
  *   mmsTranscoding?: bool,
+ *   mobileOnly?: bool,
  *   name?: string,
  *   numberPoolSettings?: NumberPoolSettings|null,
  *   urlShortenerSettings?: URLShortenerSettings|null,
@@ -84,6 +85,12 @@ final class MessagingProfileUpdateParams implements BaseModel
      */
     #[Api('mms_transcoding', optional: true)]
     public ?bool $mmsTranscoding;
+
+    /**
+     * Send messages only to mobile phone numbers.
+     */
+    #[Api('mobile_only', optional: true)]
+    public ?bool $mobileOnly;
 
     /**
      * A user friendly name for the messaging profile.
@@ -169,6 +176,7 @@ final class MessagingProfileUpdateParams implements BaseModel
         ?bool $enabled = null,
         ?bool $mmsFallBackToSMS = null,
         ?bool $mmsTranscoding = null,
+        ?bool $mobileOnly = null,
         ?string $name = null,
         ?NumberPoolSettings $numberPoolSettings = null,
         ?URLShortenerSettings $urlShortenerSettings = null,
@@ -186,6 +194,7 @@ final class MessagingProfileUpdateParams implements BaseModel
         null !== $enabled && $obj->enabled = $enabled;
         null !== $mmsFallBackToSMS && $obj->mmsFallBackToSMS = $mmsFallBackToSMS;
         null !== $mmsTranscoding && $obj->mmsTranscoding = $mmsTranscoding;
+        null !== $mobileOnly && $obj->mobileOnly = $mobileOnly;
         null !== $name && $obj->name = $name;
         null !== $numberPoolSettings && $obj->numberPoolSettings = $numberPoolSettings;
         null !== $urlShortenerSettings && $obj->urlShortenerSettings = $urlShortenerSettings;
@@ -261,6 +270,17 @@ final class MessagingProfileUpdateParams implements BaseModel
     {
         $obj = clone $this;
         $obj->mmsTranscoding = $mmsTranscoding;
+
+        return $obj;
+    }
+
+    /**
+     * Send messages only to mobile phone numbers.
+     */
+    public function withMobileOnly(bool $mobileOnly): self
+    {
+        $obj = clone $this;
+        $obj->mobileOnly = $mobileOnly;
 
         return $obj;
     }
