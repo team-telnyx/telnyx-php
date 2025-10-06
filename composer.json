@@ -24,7 +24,7 @@
     "sort-packages": true
   },
   "description": "Telnyx PHP SDK",
-  "name": "org-placeholder/telnyx",
+  "name": "telnyx/telnyx-php",
   "require": {
     "php": "^8.1",
     "php-http/discovery": "^1",
