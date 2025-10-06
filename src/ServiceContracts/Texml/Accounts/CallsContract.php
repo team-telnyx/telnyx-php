@@ -7,6 +7,7 @@ namespace Telnyx\ServiceContracts\Texml\Accounts;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\AsyncAmdStatusCallbackMethod;
+use Telnyx\Texml\Accounts\Calls\CallCallsParams\CustomHeader;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\DetectionMode;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\MachineDetection;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\RecordingChannels;
@@ -114,6 +115,7 @@ interface CallsContract
      * @param string $callerID To be used as the caller id name (SIP From Display Name) presented to the destination (`To` number). The string should have a maximum of 128 characters, containing only letters, numbers, spaces, and `-_~!.+` special characters. If ommited, the display name will be the same as the number in the `From` field.
      * @param bool $cancelPlaybackOnDetectMessageEnd Whether to cancel ongoing playback on `greeting ended` detection. Defaults to `true`.
      * @param bool $cancelPlaybackOnMachineDetection Whether to cancel ongoing playback on `machine` detection. Defaults to `true`.
+     * @param list<CustomHeader> $customHeaders Custom HTTP headers to be sent with the call. Each header should be an object with 'name' and 'value' properties.
      * @param DetectionMode|value-of<DetectionMode> $detectionMode allows you to chose between Premium and Standard detections
      * @param string $fallbackURL a failover URL for which Telnyx will retrieve the TeXML call instructions if the `Url` is not responding
      * @param MachineDetection|value-of<MachineDetection> $machineDetection enables Answering Machine Detection
@@ -152,6 +154,7 @@ interface CallsContract
         $callerID = omit,
         $cancelPlaybackOnDetectMessageEnd = omit,
         $cancelPlaybackOnMachineDetection = omit,
+        $customHeaders = omit,
         $detectionMode = omit,
         $fallbackURL = omit,
         $machineDetection = omit,

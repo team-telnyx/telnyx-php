@@ -18,6 +18,7 @@ use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\ConferenceRecordingStatusCallbackMethod;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\ConferenceStatusCallbackMethod;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\ConferenceTrim;
+use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\CustomHeader;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\MachineDetection;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\RecordingChannels;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\RecordingStatusCallbackMethod;
@@ -285,6 +286,7 @@ final class ParticipantsService implements ParticipantsContract
      * @param string $conferenceStatusCallbackEvent The changes to the conference's state that should generate a call to `ConferenceStatusCallback`. Can be: `start`, `end`, `join` and `leave`. Separate multiple values with a space. By default no callbacks are sent.
      * @param ConferenceStatusCallbackMethod|value-of<ConferenceStatusCallbackMethod> $conferenceStatusCallbackMethod HTTP request type used for `ConferenceStatusCallback`. Defaults to `POST`.
      * @param ConferenceTrim|value-of<ConferenceTrim> $conferenceTrim Whether to trim any leading and trailing silence from the conference recording. Defaults to `trim-silence`.
+     * @param list<CustomHeader> $customHeaders Custom HTTP headers to be sent with the call. Each header should be an object with 'name' and 'value' properties.
      * @param bool $earlyMedia Whether participant shall be bridged to conference before the participant answers (from early media if available). Defaults to `false`.
      * @param bool $endConferenceOnExit Whether to end the conference when the participant leaves. Defaults to `false`.
      * @param string $from The phone number of the party that initiated the call. Phone numbers are formatted with a `+` and country code.
@@ -336,6 +338,7 @@ final class ParticipantsService implements ParticipantsContract
         $conferenceStatusCallbackEvent = omit,
         $conferenceStatusCallbackMethod = omit,
         $conferenceTrim = omit,
+        $customHeaders = omit,
         $earlyMedia = omit,
         $endConferenceOnExit = omit,
         $from = omit,
@@ -385,6 +388,7 @@ final class ParticipantsService implements ParticipantsContract
             'conferenceStatusCallbackEvent' => $conferenceStatusCallbackEvent,
             'conferenceStatusCallbackMethod' => $conferenceStatusCallbackMethod,
             'conferenceTrim' => $conferenceTrim,
+            'customHeaders' => $customHeaders,
             'earlyMedia' => $earlyMedia,
             'endConferenceOnExit' => $endConferenceOnExit,
             'from' => $from,
