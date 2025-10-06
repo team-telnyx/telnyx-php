@@ -9,6 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\AsyncAmdStatusCallbackMethod;
+use Telnyx\Texml\Accounts\Calls\CallCallsParams\CustomHeader;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\DetectionMode;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\MachineDetection;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\RecordingChannels;
@@ -45,6 +46,7 @@ use Telnyx\Texml\Accounts\Calls\CallCallsParams\URLMethod;
  *   callerID?: string,
  *   cancelPlaybackOnDetectMessageEnd?: bool,
  *   cancelPlaybackOnMachineDetection?: bool,
+ *   customHeaders?: list<CustomHeader>,
  *   detectionMode?: DetectionMode|value-of<DetectionMode>,
  *   fallbackURL?: string,
  *   machineDetection?: MachineDetection|value-of<MachineDetection>,
@@ -136,6 +138,14 @@ final class CallCallsParams implements BaseModel
      */
     #[Api('CancelPlaybackOnMachineDetection', optional: true)]
     public ?bool $cancelPlaybackOnMachineDetection;
+
+    /**
+     * Custom HTTP headers to be sent with the call. Each header should be an object with 'name' and 'value' properties.
+     *
+     * @var list<CustomHeader>|null $customHeaders
+     */
+    #[Api('CustomHeaders', list: CustomHeader::class, optional: true)]
+    public ?array $customHeaders;
 
     /**
      * Allows you to chose between Premium and Standard detections.
@@ -336,6 +346,7 @@ final class CallCallsParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param AsyncAmdStatusCallbackMethod|value-of<AsyncAmdStatusCallbackMethod> $asyncAmdStatusCallbackMethod
+     * @param list<CustomHeader> $customHeaders
      * @param DetectionMode|value-of<DetectionMode> $detectionMode
      * @param MachineDetection|value-of<MachineDetection> $machineDetection
      * @param RecordingChannels|value-of<RecordingChannels> $recordingChannels
@@ -356,6 +367,7 @@ final class CallCallsParams implements BaseModel
         ?string $callerID = null,
         ?bool $cancelPlaybackOnDetectMessageEnd = null,
         ?bool $cancelPlaybackOnMachineDetection = null,
+        ?array $customHeaders = null,
         DetectionMode|string|null $detectionMode = null,
         ?string $fallbackURL = null,
         MachineDetection|string|null $machineDetection = null,
@@ -393,6 +405,7 @@ final class CallCallsParams implements BaseModel
         null !== $callerID && $obj->callerID = $callerID;
         null !== $cancelPlaybackOnDetectMessageEnd && $obj->cancelPlaybackOnDetectMessageEnd = $cancelPlaybackOnDetectMessageEnd;
         null !== $cancelPlaybackOnMachineDetection && $obj->cancelPlaybackOnMachineDetection = $cancelPlaybackOnMachineDetection;
+        null !== $customHeaders && $obj->customHeaders = $customHeaders;
         null !== $detectionMode && $obj['detectionMode'] = $detectionMode;
         null !== $fallbackURL && $obj->fallbackURL = $fallbackURL;
         null !== $machineDetection && $obj['machineDetection'] = $machineDetection;
@@ -522,6 +535,19 @@ final class CallCallsParams implements BaseModel
     ): self {
         $obj = clone $this;
         $obj->cancelPlaybackOnMachineDetection = $cancelPlaybackOnMachineDetection;
+
+        return $obj;
+    }
+
+    /**
+     * Custom HTTP headers to be sent with the call. Each header should be an object with 'name' and 'value' properties.
+     *
+     * @param list<CustomHeader> $customHeaders
+     */
+    public function withCustomHeaders(array $customHeaders): self
+    {
+        $obj = clone $this;
+        $obj->customHeaders = $customHeaders;
 
         return $obj;
     }
