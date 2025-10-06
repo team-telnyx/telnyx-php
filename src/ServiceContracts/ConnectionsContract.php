@@ -69,7 +69,7 @@ interface ConnectionsContract
     /**
      * @api
      *
-     * @param Telnyx\Connections\ConnectionListActiveCallsParams\Page $page Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number]
+     * @param \Telnyx\Connections\ConnectionListActiveCallsParams\Page $page Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number]
      *
      * @throws APIException
      */

@@ -64,10 +64,10 @@ interface LoaConfigurationsContract
     /**
      * @api
      *
-     * @param Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Address $address the address of the company
+     * @param \Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Address $address the address of the company
      * @param string $companyName The name of the company
-     * @param Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Contact $contact the contact information of the company
-     * @param Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Logo $logo The logo of the LOA configuration
+     * @param \Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Contact $contact the contact information of the company
+     * @param \Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Logo $logo The logo of the LOA configuration
      * @param string $name The name of the LOA configuration
      *
      * @throws APIException
@@ -132,10 +132,10 @@ interface LoaConfigurationsContract
     /**
      * @api
      *
-     * @param Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Address $address the address of the company
+     * @param \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Address $address the address of the company
      * @param string $companyName The name of the company
-     * @param Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Contact $contact the contact information of the company
-     * @param Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Logo $logo The logo of the LOA configuration
+     * @param \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Contact $contact the contact information of the company
+     * @param \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Logo $logo The logo of the LOA configuration
      * @param string $name The name of the LOA configuration
      *
      * @throws APIException

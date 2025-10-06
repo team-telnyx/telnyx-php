@@ -61,7 +61,7 @@ interface NotificationChannelsContract
      * @api
      *
      * @param string $channelDestination the destination associated with the channel type
-     * @param Telnyx\NotificationChannels\NotificationChannelUpdateParams\ChannelTypeID|value-of<Telnyx\NotificationChannels\NotificationChannelUpdateParams\ChannelTypeID> $channelTypeID A Channel Type ID
+     * @param \Telnyx\NotificationChannels\NotificationChannelUpdateParams\ChannelTypeID|value-of<\Telnyx\NotificationChannels\NotificationChannelUpdateParams\ChannelTypeID> $channelTypeID A Channel Type ID
      * @param string $notificationProfileID a UUID reference to the associated Notification Profile
      *
      * @throws APIException

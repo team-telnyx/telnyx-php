@@ -144,7 +144,7 @@ final class AutorespConfigsService implements AutorespConfigsContract
      * @param string $profileID
      * @param string $countryCode
      * @param list<string> $keywords
-     * @param Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigUpdateParams\Op|value-of<Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigUpdateParams\Op> $op
+     * @param AutorespConfigUpdateParams\Op|value-of<AutorespConfigUpdateParams\Op> $op
      * @param string $respText
      *
      * @throws APIException

@@ -14,7 +14,7 @@ use Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthRetrieveParams\Filte
  *
  * @phpstan-type filter_alias = array{
  *   globalIPAssignmentID?: string|In,
- *   globalIPID?: string|Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthRetrieveParams\Filter\GlobalIPID\In,
+ *   globalIPID?: string|\Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthRetrieveParams\Filter\GlobalIPID\In,
  * }
  */
 final class Filter implements BaseModel
@@ -32,7 +32,7 @@ final class Filter implements BaseModel
      * Filter by exact Global IP ID.
      */
     #[Api('global_ip_id', optional: true)]
-    public string|Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthRetrieveParams\Filter\GlobalIPID\In|null $globalIPID;
+    public string|Filter\GlobalIPID\In|null $globalIPID;
 
     public function __construct()
     {
@@ -46,7 +46,7 @@ final class Filter implements BaseModel
      */
     public static function with(
         string|In|null $globalIPAssignmentID = null,
-        string|Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthRetrieveParams\Filter\GlobalIPID\In|null $globalIPID = null,
+        string|Filter\GlobalIPID\In|null $globalIPID = null,
     ): self {
         $obj = new self;
 
@@ -72,7 +72,7 @@ final class Filter implements BaseModel
      * Filter by exact Global IP ID.
      */
     public function withGlobalIPID(
-        string|Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthRetrieveParams\Filter\GlobalIPID\In $globalIPID,
+        string|Filter\GlobalIPID\In $globalIPID,
     ): self {
         $obj = clone $this;
         $obj->globalIPID = $globalIPID;

@@ -101,8 +101,8 @@ interface ConferencesContract
     /**
      * @api
      *
-     * @param Telnyx\Conferences\ConferenceListParticipantsParams\Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[muted], filter[on_hold], filter[whispering]
-     * @param Telnyx\Conferences\ConferenceListParticipantsParams\Page $page Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number]
+     * @param \Telnyx\Conferences\ConferenceListParticipantsParams\Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[muted], filter[on_hold], filter[whispering]
+     * @param \Telnyx\Conferences\ConferenceListParticipantsParams\Page $page Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number]
      *
      * @throws APIException
      */

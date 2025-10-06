@@ -139,7 +139,7 @@ final class TestsService implements TestsContract
      * @param string $instructions updated test scenario instructions and objectives
      * @param int $maxDurationSeconds updated maximum test duration in seconds
      * @param string $name Updated name for the assistant test. Must be unique and descriptive.
-     * @param list<Telnyx\AI\Assistants\Tests\TestUpdateParams\Rubric> $rubric updated evaluation criteria for assessing assistant performance
+     * @param list<TestUpdateParams\Rubric> $rubric updated evaluation criteria for assessing assistant performance
      * @param TelnyxConversationChannel|value-of<TelnyxConversationChannel> $telnyxConversationChannel updated communication channel for the test execution
      * @param string $testSuite updated test suite assignment for better organization
      *

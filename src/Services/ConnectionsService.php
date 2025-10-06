@@ -110,7 +110,7 @@ final class ConnectionsService implements ConnectionsContract
      *
      * Lists all active calls for given connection. Acceptable connections are either SIP connections with webhook_url or xml_request_url, call control or texml. Returned results are cursor paginated.
      *
-     * @param Telnyx\Connections\ConnectionListActiveCallsParams\Page $page Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number]
+     * @param ConnectionListActiveCallsParams\Page $page Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number]
      *
      * @throws APIException
      */

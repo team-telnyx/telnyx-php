@@ -57,7 +57,7 @@ interface PortoutsContract
     /**
      * @api
      *
-     * @param Telnyx\Portouts\PortoutListRejectionCodesParams\Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[code], filter[code][in]
+     * @param \Telnyx\Portouts\PortoutListRejectionCodesParams\Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[code], filter[code][in]
      *
      * @throws APIException
      */

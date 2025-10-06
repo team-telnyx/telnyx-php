@@ -144,15 +144,15 @@ final class CallControlApplicationsService implements CallControlApplicationsCon
      * @param string $applicationName a user-assigned name to help manage the application
      * @param string $webhookEventURL The URL where webhooks related to this connection will be sent. Must include a scheme, such as 'https'.
      * @param bool $active specifies whether the connection can be used
-     * @param Telnyx\CallControlApplications\CallControlApplicationUpdateParams\AnchorsiteOverride|value-of<Telnyx\CallControlApplications\CallControlApplicationUpdateParams\AnchorsiteOverride> $anchorsiteOverride <code>Latency</code> directs Telnyx to route media through the site with the lowest round-trip time to the user's connection. Telnyx calculates this time using ICMP ping messages. This can be disabled by specifying a site to handle all media.
-     * @param Telnyx\CallControlApplications\CallControlApplicationUpdateParams\DtmfType|value-of<Telnyx\CallControlApplications\CallControlApplicationUpdateParams\DtmfType> $dtmfType Sets the type of DTMF digits sent from Telnyx to this Connection. Note that DTMF digits sent to Telnyx will be accepted in all formats.
+     * @param CallControlApplicationUpdateParams\AnchorsiteOverride|value-of<CallControlApplicationUpdateParams\AnchorsiteOverride> $anchorsiteOverride <code>Latency</code> directs Telnyx to route media through the site with the lowest round-trip time to the user's connection. Telnyx calculates this time using ICMP ping messages. This can be disabled by specifying a site to handle all media.
+     * @param CallControlApplicationUpdateParams\DtmfType|value-of<CallControlApplicationUpdateParams\DtmfType> $dtmfType Sets the type of DTMF digits sent from Telnyx to this Connection. Note that DTMF digits sent to Telnyx will be accepted in all formats.
      * @param bool $firstCommandTimeout specifies whether calls to phone numbers associated with this connection should hangup after timing out
      * @param int $firstCommandTimeoutSecs specifies how many seconds to wait before timing out a dial command
      * @param CallControlApplicationInbound $inbound
      * @param CallControlApplicationOutbound $outbound
      * @param bool $redactDtmfDebugLogging when enabled, DTMF digits entered by users will be redacted in debug logs to protect PII data entered through IVR interactions
      * @param list<string> $tags tags assigned to the Call Control Application
-     * @param Telnyx\CallControlApplications\CallControlApplicationUpdateParams\WebhookAPIVersion|value-of<Telnyx\CallControlApplications\CallControlApplicationUpdateParams\WebhookAPIVersion> $webhookAPIVersion determines which webhook format will be used, Telnyx API v1 or v2
+     * @param CallControlApplicationUpdateParams\WebhookAPIVersion|value-of<CallControlApplicationUpdateParams\WebhookAPIVersion> $webhookAPIVersion determines which webhook format will be used, Telnyx API v1 or v2
      * @param string|null $webhookEventFailoverURL The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
      *

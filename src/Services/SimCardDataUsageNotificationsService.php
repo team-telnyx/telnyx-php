@@ -101,7 +101,7 @@ final class SimCardDataUsageNotificationsService implements SimCardDataUsageNoti
      * Updates information for a SIM Card Data Usage Notification.
      *
      * @param string $simCardID the identification UUID of the related SIM card resource
-     * @param Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationUpdateParams\Threshold $threshold data usage threshold that will trigger the notification
+     * @param SimCardDataUsageNotificationUpdateParams\Threshold $threshold data usage threshold that will trigger the notification
      *
      * @throws APIException
      */
