@@ -14,6 +14,7 @@ use Telnyx\Services\Texml\Accounts\Calls\SiprecService;
 use Telnyx\Services\Texml\Accounts\Calls\StreamsService;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\AsyncAmdStatusCallbackMethod;
+use Telnyx\Texml\Accounts\Calls\CallCallsParams\CustomHeader;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\DetectionMode;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\MachineDetection;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\RecordingChannels;
@@ -213,6 +214,7 @@ final class CallsService implements CallsContract
      * @param string $callerID To be used as the caller id name (SIP From Display Name) presented to the destination (`To` number). The string should have a maximum of 128 characters, containing only letters, numbers, spaces, and `-_~!.+` special characters. If ommited, the display name will be the same as the number in the `From` field.
      * @param bool $cancelPlaybackOnDetectMessageEnd Whether to cancel ongoing playback on `greeting ended` detection. Defaults to `true`.
      * @param bool $cancelPlaybackOnMachineDetection Whether to cancel ongoing playback on `machine` detection. Defaults to `true`.
+     * @param list<CustomHeader> $customHeaders Custom HTTP headers to be sent with the call. Each header should be an object with 'name' and 'value' properties.
      * @param DetectionMode|value-of<DetectionMode> $detectionMode allows you to chose between Premium and Standard detections
      * @param string $fallbackURL a failover URL for which Telnyx will retrieve the TeXML call instructions if the `Url` is not responding
      * @param MachineDetection|value-of<MachineDetection> $machineDetection enables Answering Machine Detection
@@ -251,6 +253,7 @@ final class CallsService implements CallsContract
         $callerID = omit,
         $cancelPlaybackOnDetectMessageEnd = omit,
         $cancelPlaybackOnMachineDetection = omit,
+        $customHeaders = omit,
         $detectionMode = omit,
         $fallbackURL = omit,
         $machineDetection = omit,
@@ -287,6 +290,7 @@ final class CallsService implements CallsContract
             'callerID' => $callerID,
             'cancelPlaybackOnDetectMessageEnd' => $cancelPlaybackOnDetectMessageEnd,
             'cancelPlaybackOnMachineDetection' => $cancelPlaybackOnMachineDetection,
+            'customHeaders' => $customHeaders,
             'detectionMode' => $detectionMode,
             'fallbackURL' => $fallbackURL,
             'machineDetection' => $machineDetection,

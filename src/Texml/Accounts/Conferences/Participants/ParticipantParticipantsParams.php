@@ -14,6 +14,7 @@ use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\ConferenceRecordingStatusCallbackMethod;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\ConferenceStatusCallbackMethod;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\ConferenceTrim;
+use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\CustomHeader;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\MachineDetection;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\RecordingChannels;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\RecordingStatusCallbackMethod;
@@ -56,6 +57,7 @@ use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams
  *   conferenceStatusCallbackEvent?: string,
  *   conferenceStatusCallbackMethod?: ConferenceStatusCallbackMethod|value-of<ConferenceStatusCallbackMethod>,
  *   conferenceTrim?: ConferenceTrim|value-of<ConferenceTrim>,
+ *   customHeaders?: list<CustomHeader>,
  *   earlyMedia?: bool,
  *   endConferenceOnExit?: bool,
  *   from?: string,
@@ -220,6 +222,14 @@ final class ParticipantParticipantsParams implements BaseModel
      */
     #[Api('ConferenceTrim', enum: ConferenceTrim::class, optional: true)]
     public ?string $conferenceTrim;
+
+    /**
+     * Custom HTTP headers to be sent with the call. Each header should be an object with 'name' and 'value' properties.
+     *
+     * @var list<CustomHeader>|null $customHeaders
+     */
+    #[Api('CustomHeaders', list: CustomHeader::class, optional: true)]
+    public ?array $customHeaders;
 
     /**
      * Whether participant shall be bridged to conference before the participant answers (from early media if available). Defaults to `false`.
@@ -439,6 +449,7 @@ final class ParticipantParticipantsParams implements BaseModel
      * @param ConferenceRecordingStatusCallbackMethod|value-of<ConferenceRecordingStatusCallbackMethod> $conferenceRecordingStatusCallbackMethod
      * @param ConferenceStatusCallbackMethod|value-of<ConferenceStatusCallbackMethod> $conferenceStatusCallbackMethod
      * @param ConferenceTrim|value-of<ConferenceTrim> $conferenceTrim
+     * @param list<CustomHeader> $customHeaders
      * @param MachineDetection|value-of<MachineDetection> $machineDetection
      * @param RecordingChannels|value-of<RecordingChannels> $recordingChannels
      * @param RecordingStatusCallbackMethod|value-of<RecordingStatusCallbackMethod> $recordingStatusCallbackMethod
@@ -465,6 +476,7 @@ final class ParticipantParticipantsParams implements BaseModel
         ?string $conferenceStatusCallbackEvent = null,
         ConferenceStatusCallbackMethod|string|null $conferenceStatusCallbackMethod = null,
         ConferenceTrim|string|null $conferenceTrim = null,
+        ?array $customHeaders = null,
         ?bool $earlyMedia = null,
         ?bool $endConferenceOnExit = null,
         ?string $from = null,
@@ -515,6 +527,7 @@ final class ParticipantParticipantsParams implements BaseModel
         null !== $conferenceStatusCallbackEvent && $obj->conferenceStatusCallbackEvent = $conferenceStatusCallbackEvent;
         null !== $conferenceStatusCallbackMethod && $obj['conferenceStatusCallbackMethod'] = $conferenceStatusCallbackMethod;
         null !== $conferenceTrim && $obj['conferenceTrim'] = $conferenceTrim;
+        null !== $customHeaders && $obj->customHeaders = $customHeaders;
         null !== $earlyMedia && $obj->earlyMedia = $earlyMedia;
         null !== $endConferenceOnExit && $obj->endConferenceOnExit = $endConferenceOnExit;
         null !== $from && $obj->from = $from;
@@ -762,6 +775,19 @@ final class ParticipantParticipantsParams implements BaseModel
     ): self {
         $obj = clone $this;
         $obj['conferenceTrim'] = $conferenceTrim;
+
+        return $obj;
+    }
+
+    /**
+     * Custom HTTP headers to be sent with the call. Each header should be an object with 'name' and 'value' properties.
+     *
+     * @param list<CustomHeader> $customHeaders
+     */
+    public function withCustomHeaders(array $customHeaders): self
+    {
+        $obj = clone $this;
+        $obj->customHeaders = $customHeaders;
 
         return $obj;
     }
