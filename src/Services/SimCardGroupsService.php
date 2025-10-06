@@ -134,7 +134,7 @@ final class SimCardGroupsService implements SimCardGroupsContract
      *
      * Updates a SIM card group
      *
-     * @param Telnyx\SimCardGroups\SimCardGroupUpdateParams\DataLimit $dataLimit upper limit on the amount of data the SIM cards, within the group, can use
+     * @param SimCardGroupUpdateParams\DataLimit $dataLimit upper limit on the amount of data the SIM cards, within the group, can use
      * @param string $name a user friendly name for the SIM card group
      *
      * @throws APIException

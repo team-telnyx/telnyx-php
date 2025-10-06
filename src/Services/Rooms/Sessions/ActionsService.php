@@ -100,7 +100,7 @@ final class ActionsService implements ActionsContract
      * Mute participants in room session.
      *
      * @param list<string> $exclude list of participant id to exclude from the action
-     * @param Telnyx\Rooms\Sessions\Actions\ActionMuteParams\Participants\UnionMember0|list<string>|value-of<Telnyx\Rooms\Sessions\Actions\ActionMuteParams\Participants\UnionMember0> $participants either a list of participant id to perform the action on, or the keyword "all" to perform the action on all participant
+     * @param ActionMuteParams\Participants\UnionMember0|list<string>|value-of<ActionMuteParams\Participants\UnionMember0> $participants either a list of participant id to perform the action on, or the keyword "all" to perform the action on all participant
      *
      * @throws APIException
      */
@@ -148,7 +148,7 @@ final class ActionsService implements ActionsContract
      * Unmute participants in room session.
      *
      * @param list<string> $exclude list of participant id to exclude from the action
-     * @param Telnyx\Rooms\Sessions\Actions\ActionUnmuteParams\Participants\UnionMember0|list<string>|value-of<Telnyx\Rooms\Sessions\Actions\ActionUnmuteParams\Participants\UnionMember0> $participants either a list of participant id to perform the action on, or the keyword "all" to perform the action on all participant
+     * @param ActionUnmuteParams\Participants\UnionMember0|list<string>|value-of<ActionUnmuteParams\Participants\UnionMember0> $participants either a list of participant id to perform the action on, or the keyword "all" to perform the action on all participant
      *
      * @throws APIException
      */

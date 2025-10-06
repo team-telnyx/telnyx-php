@@ -57,7 +57,7 @@ interface SimCardDataUsageNotificationsContract
      * @api
      *
      * @param string $simCardID the identification UUID of the related SIM card resource
-     * @param Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationUpdateParams\Threshold $threshold data usage threshold that will trigger the notification
+     * @param \Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationUpdateParams\Threshold $threshold data usage threshold that will trigger the notification
      *
      * @throws APIException
      */

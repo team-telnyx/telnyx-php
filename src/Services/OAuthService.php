@@ -150,7 +150,7 @@ final class OAuthService implements OAuthContract
      * Register a new OAuth client dynamically (RFC 7591)
      *
      * @param string $clientName Human-readable string name of the client to be presented to the end-user
-     * @param list<Telnyx\OAuth\OAuthRegisterParams\GrantType|value-of<Telnyx\OAuth\OAuthRegisterParams\GrantType>> $grantTypes Array of OAuth 2.0 grant type strings that the client may use
+     * @param list<OAuthRegisterParams\GrantType|value-of<OAuthRegisterParams\GrantType>> $grantTypes Array of OAuth 2.0 grant type strings that the client may use
      * @param string $logoUri URL of the client logo
      * @param string $policyUri URL of the client's privacy policy
      * @param list<string> $redirectUris Array of redirection URI strings for use in redirect-based flows

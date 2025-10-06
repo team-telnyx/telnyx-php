@@ -80,7 +80,7 @@ final class ExternalConnectionsTest extends TestCase
 
         $result = $this->client->externalConnections->update(
             'id',
-            outbound: Telnyx\ExternalConnections\ExternalConnectionUpdateParams\Outbound::with(
+            outbound: \Telnyx\ExternalConnections\ExternalConnectionUpdateParams\Outbound::with(
                 outboundVoiceProfileID: 'outbound_voice_profile_id'
             ),
         );
@@ -97,7 +97,7 @@ final class ExternalConnectionsTest extends TestCase
 
         $result = $this->client->externalConnections->update(
             'id',
-            outbound: Telnyx\ExternalConnections\ExternalConnectionUpdateParams\Outbound::with(
+            outbound: \Telnyx\ExternalConnections\ExternalConnectionUpdateParams\Outbound::with(
                 outboundVoiceProfileID: 'outbound_voice_profile_id'
             )
                 ->withChannelLimit(10),

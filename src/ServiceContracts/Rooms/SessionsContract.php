@@ -74,9 +74,9 @@ interface SessionsContract
     /**
      * @api
      *
-     * @param Telnyx\Rooms\Sessions\SessionList1Params\Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[date_created_at][eq], filter[date_created_at][gte], filter[date_created_at][lte], filter[date_updated_at][eq], filter[date_updated_at][gte], filter[date_updated_at][lte], filter[date_ended_at][eq], filter[date_ended_at][gte], filter[date_ended_at][lte], filter[active]
+     * @param \Telnyx\Rooms\Sessions\SessionList1Params\Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[date_created_at][eq], filter[date_created_at][gte], filter[date_created_at][lte], filter[date_updated_at][eq], filter[date_updated_at][gte], filter[date_updated_at][lte], filter[date_ended_at][eq], filter[date_ended_at][gte], filter[date_ended_at][lte], filter[active]
      * @param bool $includeParticipants to decide if room participants should be included in the response
-     * @param Telnyx\Rooms\Sessions\SessionList1Params\Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param \Telnyx\Rooms\Sessions\SessionList1Params\Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @throws APIException
      */
@@ -104,8 +104,8 @@ interface SessionsContract
     /**
      * @api
      *
-     * @param Telnyx\Rooms\Sessions\SessionRetrieveParticipantsParams\Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[date_joined_at][eq], filter[date_joined_at][gte], filter[date_joined_at][lte], filter[date_updated_at][eq], filter[date_updated_at][gte], filter[date_updated_at][lte], filter[date_left_at][eq], filter[date_left_at][gte], filter[date_left_at][lte], filter[context]
-     * @param Telnyx\Rooms\Sessions\SessionRetrieveParticipantsParams\Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param \Telnyx\Rooms\Sessions\SessionRetrieveParticipantsParams\Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[date_joined_at][eq], filter[date_joined_at][gte], filter[date_joined_at][lte], filter[date_updated_at][eq], filter[date_updated_at][gte], filter[date_updated_at][lte], filter[date_left_at][eq], filter[date_left_at][gte], filter[date_left_at][lte], filter[context]
+     * @param \Telnyx\Rooms\Sessions\SessionRetrieveParticipantsParams\Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      *
      * @throws APIException
      */

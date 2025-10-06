@@ -191,10 +191,10 @@ final class CredentialConnectionsService implements CredentialConnectionsContrac
      * @param CredentialOutbound $outbound
      * @param string $password The password to be used as part of the credentials. Must be 8 to 128 characters long.
      * @param ConnectionRtcpSettings $rtcpSettings
-     * @param Telnyx\CredentialConnections\CredentialConnectionUpdateParams\SipUriCallingPreference|value-of<Telnyx\CredentialConnections\CredentialConnectionUpdateParams\SipUriCallingPreference> $sipUriCallingPreference This feature enables inbound SIP URI calls to your Credential Auth Connection. If enabled for all (unrestricted) then anyone who calls the SIP URI <your-username>@telnyx.com will be connected to your Connection. You can also choose to allow only calls that are originated on any Connections under your account (internal).
+     * @param CredentialConnectionUpdateParams\SipUriCallingPreference|value-of<CredentialConnectionUpdateParams\SipUriCallingPreference> $sipUriCallingPreference This feature enables inbound SIP URI calls to your Credential Auth Connection. If enabled for all (unrestricted) then anyone who calls the SIP URI <your-username>@telnyx.com will be connected to your Connection. You can also choose to allow only calls that are originated on any Connections under your account (internal).
      * @param list<string> $tags tags associated with the connection
      * @param string $userName The user name to be used as part of the credentials. Must be 4-32 characters long and alphanumeric values only (no spaces or special characters).
-     * @param Telnyx\CredentialConnections\CredentialConnectionUpdateParams\WebhookAPIVersion|value-of<Telnyx\CredentialConnections\CredentialConnectionUpdateParams\WebhookAPIVersion> $webhookAPIVersion determines which webhook format will be used, Telnyx API v1 or v2
+     * @param CredentialConnectionUpdateParams\WebhookAPIVersion|value-of<CredentialConnectionUpdateParams\WebhookAPIVersion> $webhookAPIVersion determines which webhook format will be used, Telnyx API v1 or v2
      * @param string|null $webhookEventFailoverURL The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      * @param string $webhookEventURL The URL where webhooks related to this connection will be sent. Must include a scheme, such as 'https'.
      * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook

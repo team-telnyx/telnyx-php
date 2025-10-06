@@ -95,7 +95,7 @@ interface MdrUsageReportsContract
     /**
      * @api
      *
-     * @param Telnyx\Reports\MdrUsageReports\MdrUsageReportFetchSyncParams\AggregationType|value-of<Telnyx\Reports\MdrUsageReports\MdrUsageReportFetchSyncParams\AggregationType> $aggregationType
+     * @param \Telnyx\Reports\MdrUsageReports\MdrUsageReportFetchSyncParams\AggregationType|value-of<\Telnyx\Reports\MdrUsageReports\MdrUsageReportFetchSyncParams\AggregationType> $aggregationType
      * @param \DateTimeInterface $endDate
      * @param list<string> $profiles
      * @param \DateTimeInterface $startDate

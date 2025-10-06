@@ -126,7 +126,7 @@ final class SubNumberOrdersService implements SubNumberOrdersContract
      *
      * Get a paginated list of sub number orders.
      *
-     * @param Telnyx\SubNumberOrders\SubNumberOrderListParams\Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[status], filter[order_request_id], filter[country_code], filter[phone_number_type], filter[phone_numbers_count]
+     * @param SubNumberOrderListParams\Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[status], filter[order_request_id], filter[country_code], filter[phone_number_type], filter[phone_numbers_count]
      *
      * @throws APIException
      */

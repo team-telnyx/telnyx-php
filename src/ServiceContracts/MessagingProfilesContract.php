@@ -117,7 +117,7 @@ interface MessagingProfilesContract
      *
      * To disable this feature, set the object field to `null`.
      * @param string $v1Secret secret used to authenticate with v1 endpoints
-     * @param Telnyx\MessagingProfiles\MessagingProfileUpdateParams\WebhookAPIVersion|value-of<Telnyx\MessagingProfiles\MessagingProfileUpdateParams\WebhookAPIVersion> $webhookAPIVersion determines which webhook format will be used, Telnyx API v1, v2, or a legacy 2010-04-01 format
+     * @param \Telnyx\MessagingProfiles\MessagingProfileUpdateParams\WebhookAPIVersion|value-of<\Telnyx\MessagingProfiles\MessagingProfileUpdateParams\WebhookAPIVersion> $webhookAPIVersion determines which webhook format will be used, Telnyx API v1, v2, or a legacy 2010-04-01 format
      * @param string|null $webhookFailoverURL the failover URL where webhooks related to this messaging profile will be sent if sending to the primary URL fails
      * @param string|null $webhookURL the URL where webhooks related to this messaging profile will be sent
      * @param list<string> $whitelistedDestinations Destinations to which the messaging profile is allowed to send. The elements in the list must be valid ISO 3166-1 alpha-2 country codes. If set to `["*"]`, all destinations will be allowed.
@@ -198,7 +198,7 @@ interface MessagingProfilesContract
     /**
      * @api
      *
-     * @param Telnyx\MessagingProfiles\MessagingProfileListPhoneNumbersParams\Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param \Telnyx\MessagingProfiles\MessagingProfileListPhoneNumbersParams\Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
      * @throws APIException
      */
@@ -224,7 +224,7 @@ interface MessagingProfilesContract
     /**
      * @api
      *
-     * @param Telnyx\MessagingProfiles\MessagingProfileListShortCodesParams\Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param \Telnyx\MessagingProfiles\MessagingProfileListShortCodesParams\Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      *
      * @throws APIException
      */

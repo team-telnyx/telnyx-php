@@ -157,7 +157,7 @@ interface UserBundlesContract
     /**
      * @api
      *
-     * @param Telnyx\BundlePricing\UserBundles\UserBundleListUnusedParams\Filter $filter Consolidated filter parameter (deepObject style). Supports filtering by country_iso and resource. Examples: filter[country_iso]=US or filter[resource]=+15617819942
+     * @param \Telnyx\BundlePricing\UserBundles\UserBundleListUnusedParams\Filter $filter Consolidated filter parameter (deepObject style). Supports filtering by country_iso and resource. Examples: filter[country_iso]=US or filter[resource]=+15617819942
      * @param string $authorizationBearer Authenticates the request with your Telnyx API V2 KEY
      *
      * @throws APIException

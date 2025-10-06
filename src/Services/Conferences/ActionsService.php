@@ -186,7 +186,7 @@ final class ActionsService implements ActionsContract
      * @param bool $mute Whether the participant should be muted immediately after joining the conference. Defaults to "false".
      * @param bool $softEndConferenceOnExit Whether the conference should end after the participant leaves the conference. NOTE this doesn't hang up the other participants. Defaults to "false".
      * @param bool $startConferenceOnEnter Whether the conference should be started after the participant joins the conference. Defaults to "false".
-     * @param Telnyx\Conferences\Actions\ActionJoinParams\SupervisorRole|value-of<Telnyx\Conferences\Actions\ActionJoinParams\SupervisorRole> $supervisorRole Sets the joining participant as a supervisor for the conference. A conference can have multiple supervisors. "barge" means the supervisor enters the conference as a normal participant. This is the same as "none". "monitor" means the supervisor is muted but can hear all participants. "whisper" means that only the specified "whisper_call_control_ids" can hear the supervisor. Defaults to "none".
+     * @param ActionJoinParams\SupervisorRole|value-of<ActionJoinParams\SupervisorRole> $supervisorRole Sets the joining participant as a supervisor for the conference. A conference can have multiple supervisors. "barge" means the supervisor enters the conference as a normal participant. This is the same as "none". "monitor" means the supervisor is muted but can hear all participants. "whisper" means that only the specified "whisper_call_control_ids" can hear the supervisor. Defaults to "none".
      * @param list<string> $whisperCallControlIDs Array of unique call_control_ids the joining supervisor can whisper to. If none provided, the supervisor will join the conference as a monitoring participant only.
      *
      * @throws APIException
@@ -264,7 +264,7 @@ final class ActionsService implements ActionsContract
      * - `conference.participant.left`
      *
      * @param string $callControlID Unique identifier and token for controlling the call
-     * @param Telnyx\Conferences\Actions\ActionLeaveParams\BeepEnabled|value-of<Telnyx\Conferences\Actions\ActionLeaveParams\BeepEnabled> $beepEnabled Whether a beep sound should be played when the participant leaves the conference. Can be used to override the conference-level setting.
+     * @param ActionLeaveParams\BeepEnabled|value-of<ActionLeaveParams\BeepEnabled> $beepEnabled Whether a beep sound should be played when the participant leaves the conference. Can be used to override the conference-level setting.
      * @param string $commandID Use this field to avoid execution of duplicate commands. Telnyx will ignore subsequent commands with the same `command_id` as one that has already been executed.
      *
      * @throws APIException

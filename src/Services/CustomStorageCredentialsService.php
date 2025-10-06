@@ -98,7 +98,7 @@ final class CustomStorageCredentialsService implements CustomStorageCredentialsC
      *
      * Updates a stored custom credentials configuration.
      *
-     * @param Telnyx\CustomStorageCredentials\CustomStorageCredentialUpdateParams\Backend|value-of<Telnyx\CustomStorageCredentials\CustomStorageCredentialUpdateParams\Backend> $backend
+     * @param CustomStorageCredentialUpdateParams\Backend|value-of<CustomStorageCredentialUpdateParams\Backend> $backend
      * @param GcsConfigurationData|S3ConfigurationData|AzureConfigurationData $configuration
      *
      * @throws APIException
