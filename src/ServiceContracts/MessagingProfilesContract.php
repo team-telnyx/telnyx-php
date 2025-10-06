@@ -34,6 +34,7 @@ interface MessagingProfilesContract
      * @param bool $enabled specifies whether the messaging profile is enabled or not
      * @param bool $mmsFallBackToSMS enables SMS fallback for MMS messages
      * @param bool $mmsTranscoding enables automated resizing of MMS media
+     * @param bool $mobileOnly send messages only to mobile phone numbers
      * @param NumberPoolSettings|null $numberPoolSettings Number Pool allows you to send messages from a pool of numbers of different types, assigning
      * weights to each type. The pool consists of all the long code and toll free numbers
      * assigned to the messaging profile.
@@ -61,6 +62,7 @@ interface MessagingProfilesContract
         $enabled = omit,
         $mmsFallBackToSMS = omit,
         $mmsTranscoding = omit,
+        $mobileOnly = omit,
         $numberPoolSettings = omit,
         $urlShortenerSettings = omit,
         $webhookAPIVersion = omit,
@@ -100,6 +102,7 @@ interface MessagingProfilesContract
      * @param bool $enabled specifies whether the messaging profile is enabled or not
      * @param bool $mmsFallBackToSMS enables SMS fallback for MMS messages
      * @param bool $mmsTranscoding enables automated resizing of MMS media
+     * @param bool $mobileOnly send messages only to mobile phone numbers
      * @param string $name a user friendly name for the messaging profile
      * @param NumberPoolSettings|null $numberPoolSettings Number Pool allows you to send messages from a pool of numbers of different types, assigning
      * weights to each type. The pool consists of all the long code and toll free numbers
@@ -131,6 +134,7 @@ interface MessagingProfilesContract
         $enabled = omit,
         $mmsFallBackToSMS = omit,
         $mmsTranscoding = omit,
+        $mobileOnly = omit,
         $name = omit,
         $numberPoolSettings = omit,
         $urlShortenerSettings = omit,

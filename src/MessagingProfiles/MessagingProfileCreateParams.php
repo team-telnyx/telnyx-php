@@ -35,6 +35,7 @@ use Telnyx\MessagingProfiles\MessagingProfileCreateParams\WebhookAPIVersion;
  *   enabled?: bool,
  *   mmsFallBackToSMS?: bool,
  *   mmsTranscoding?: bool,
+ *   mobileOnly?: bool,
  *   numberPoolSettings?: NumberPoolSettings|null,
  *   urlShortenerSettings?: URLShortenerSettings|null,
  *   webhookAPIVersion?: WebhookAPIVersion|value-of<WebhookAPIVersion>,
@@ -97,6 +98,12 @@ final class MessagingProfileCreateParams implements BaseModel
      */
     #[Api('mms_transcoding', optional: true)]
     public ?bool $mmsTranscoding;
+
+    /**
+     * Send messages only to mobile phone numbers.
+     */
+    #[Api('mobile_only', optional: true)]
+    public ?bool $mobileOnly;
 
     /**
      * Number Pool allows you to send messages from a pool of numbers of different types, assigning
@@ -178,6 +185,7 @@ final class MessagingProfileCreateParams implements BaseModel
         ?bool $enabled = null,
         ?bool $mmsFallBackToSMS = null,
         ?bool $mmsTranscoding = null,
+        ?bool $mobileOnly = null,
         ?NumberPoolSettings $numberPoolSettings = null,
         ?URLShortenerSettings $urlShortenerSettings = null,
         WebhookAPIVersion|string|null $webhookAPIVersion = null,
@@ -195,6 +203,7 @@ final class MessagingProfileCreateParams implements BaseModel
         null !== $enabled && $obj->enabled = $enabled;
         null !== $mmsFallBackToSMS && $obj->mmsFallBackToSMS = $mmsFallBackToSMS;
         null !== $mmsTranscoding && $obj->mmsTranscoding = $mmsTranscoding;
+        null !== $mobileOnly && $obj->mobileOnly = $mobileOnly;
         null !== $numberPoolSettings && $obj->numberPoolSettings = $numberPoolSettings;
         null !== $urlShortenerSettings && $obj->urlShortenerSettings = $urlShortenerSettings;
         null !== $webhookAPIVersion && $obj['webhookAPIVersion'] = $webhookAPIVersion;
@@ -292,6 +301,17 @@ final class MessagingProfileCreateParams implements BaseModel
     {
         $obj = clone $this;
         $obj->mmsTranscoding = $mmsTranscoding;
+
+        return $obj;
+    }
+
+    /**
+     * Send messages only to mobile phone numbers.
+     */
+    public function withMobileOnly(bool $mobileOnly): self
+    {
+        $obj = clone $this;
+        $obj->mobileOnly = $mobileOnly;
 
         return $obj;
     }
