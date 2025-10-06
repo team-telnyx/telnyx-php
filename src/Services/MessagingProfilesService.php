@@ -57,6 +57,7 @@ final class MessagingProfilesService implements MessagingProfilesContract
      * @param bool $enabled specifies whether the messaging profile is enabled or not
      * @param bool $mmsFallBackToSMS enables SMS fallback for MMS messages
      * @param bool $mmsTranscoding enables automated resizing of MMS media
+     * @param bool $mobileOnly send messages only to mobile phone numbers
      * @param NumberPoolSettings|null $numberPoolSettings Number Pool allows you to send messages from a pool of numbers of different types, assigning
      * weights to each type. The pool consists of all the long code and toll free numbers
      * assigned to the messaging profile.
@@ -84,6 +85,7 @@ final class MessagingProfilesService implements MessagingProfilesContract
         $enabled = omit,
         $mmsFallBackToSMS = omit,
         $mmsTranscoding = omit,
+        $mobileOnly = omit,
         $numberPoolSettings = omit,
         $urlShortenerSettings = omit,
         $webhookAPIVersion = omit,
@@ -100,6 +102,7 @@ final class MessagingProfilesService implements MessagingProfilesContract
             'enabled' => $enabled,
             'mmsFallBackToSMS' => $mmsFallBackToSMS,
             'mmsTranscoding' => $mmsTranscoding,
+            'mobileOnly' => $mobileOnly,
             'numberPoolSettings' => $numberPoolSettings,
             'urlShortenerSettings' => $urlShortenerSettings,
             'webhookAPIVersion' => $webhookAPIVersion,
@@ -167,6 +170,7 @@ final class MessagingProfilesService implements MessagingProfilesContract
      * @param bool $enabled specifies whether the messaging profile is enabled or not
      * @param bool $mmsFallBackToSMS enables SMS fallback for MMS messages
      * @param bool $mmsTranscoding enables automated resizing of MMS media
+     * @param bool $mobileOnly send messages only to mobile phone numbers
      * @param string $name a user friendly name for the messaging profile
      * @param NumberPoolSettings|null $numberPoolSettings Number Pool allows you to send messages from a pool of numbers of different types, assigning
      * weights to each type. The pool consists of all the long code and toll free numbers
@@ -198,6 +202,7 @@ final class MessagingProfilesService implements MessagingProfilesContract
         $enabled = omit,
         $mmsFallBackToSMS = omit,
         $mmsTranscoding = omit,
+        $mobileOnly = omit,
         $name = omit,
         $numberPoolSettings = omit,
         $urlShortenerSettings = omit,
@@ -215,6 +220,7 @@ final class MessagingProfilesService implements MessagingProfilesContract
             'enabled' => $enabled,
             'mmsFallBackToSMS' => $mmsFallBackToSMS,
             'mmsTranscoding' => $mmsTranscoding,
+            'mobileOnly' => $mobileOnly,
             'name' => $name,
             'numberPoolSettings' => $numberPoolSettings,
             'urlShortenerSettings' => $urlShortenerSettings,
