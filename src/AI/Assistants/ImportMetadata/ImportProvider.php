@@ -12,4 +12,6 @@ enum ImportProvider: string
     case ELEVENLABS = 'elevenlabs';
 
     case VAPI = 'vapi';
+
+    case RETELL = 'retell';
 }
