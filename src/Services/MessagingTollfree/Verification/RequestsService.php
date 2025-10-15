@@ -7,6 +7,7 @@ namespace Telnyx\Services\MessagingTollfree\Verification;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\MessagingTollfree\Verification\Requests\RequestCreateParams;
+use Telnyx\MessagingTollfree\Verification\Requests\RequestCreateParams\EntityType;
 use Telnyx\MessagingTollfree\Verification\Requests\RequestListParams;
 use Telnyx\MessagingTollfree\Verification\Requests\RequestListResponse;
 use Telnyx\MessagingTollfree\Verification\Requests\RequestUpdateParams;
@@ -53,7 +54,18 @@ final class RequestsService implements RequestsContract
      * @param string $productionMessageContent An example of a message that will be sent from the given phone numbers
      * @param UseCaseCategories|value-of<UseCaseCategories> $useCase Tollfree usecase categories
      * @param string $useCaseSummary Human-readable summary of the desired use-case
+     * @param bool $ageGatedContent Indicates if messaging content requires age gating (e.g., 18+). Defaults to false if not provided.
      * @param string $businessAddr2 Line 2 of the business address
+     * @param string|null $businessRegistrationCountry ISO 3166-1 alpha-2 country code of the issuing business authority. Must be exactly 2 letters. Automatically converted to uppercase. Required from January 2026.
+     * @param string|null $businessRegistrationNumber Official business registration number (e.g., Employer Identification Number (EIN) in the U.S.). Required from January 2026.
+     * @param string|null $businessRegistrationType Type of business registration being provided. Required from January 2026.
+     * @param string|null $doingBusinessAs Doing Business As (DBA) name if different from legal name
+     * @param EntityType|value-of<EntityType>|null $entityType Business entity classification
+     * @param string|null $helpMessageResponse The message returned when users text 'HELP'
+     * @param string|null $optInConfirmationResponse Message sent to users confirming their opt-in to receive messages
+     * @param string|null $optInKeywords Keywords used to collect and process consumer opt-ins
+     * @param string|null $privacyPolicyURL URL pointing to the business's privacy policy. Plain string, no URL format validation.
+     * @param string|null $termsAndConditionURL URL pointing to the business's terms and conditions. Plain string, no URL format validation.
      * @param string $webhookURL URL that should receive webhooks relating to this verification request
      *
      * @throws APIException
@@ -78,7 +90,18 @@ final class RequestsService implements RequestsContract
         $productionMessageContent,
         $useCase,
         $useCaseSummary,
+        $ageGatedContent = omit,
         $businessAddr2 = omit,
+        $businessRegistrationCountry = omit,
+        $businessRegistrationNumber = omit,
+        $businessRegistrationType = omit,
+        $doingBusinessAs = omit,
+        $entityType = omit,
+        $helpMessageResponse = omit,
+        $optInConfirmationResponse = omit,
+        $optInKeywords = omit,
+        $privacyPolicyURL = omit,
+        $termsAndConditionURL = omit,
         $webhookURL = omit,
         ?RequestOptions $requestOptions = null,
     ): VerificationRequestEgress {
@@ -102,7 +125,18 @@ final class RequestsService implements RequestsContract
             'productionMessageContent' => $productionMessageContent,
             'useCase' => $useCase,
             'useCaseSummary' => $useCaseSummary,
+            'ageGatedContent' => $ageGatedContent,
             'businessAddr2' => $businessAddr2,
+            'businessRegistrationCountry' => $businessRegistrationCountry,
+            'businessRegistrationNumber' => $businessRegistrationNumber,
+            'businessRegistrationType' => $businessRegistrationType,
+            'doingBusinessAs' => $doingBusinessAs,
+            'entityType' => $entityType,
+            'helpMessageResponse' => $helpMessageResponse,
+            'optInConfirmationResponse' => $optInConfirmationResponse,
+            'optInKeywords' => $optInKeywords,
+            'privacyPolicyURL' => $privacyPolicyURL,
+            'termsAndConditionURL' => $termsAndConditionURL,
             'webhookURL' => $webhookURL,
         ];
 
@@ -179,7 +213,18 @@ final class RequestsService implements RequestsContract
      * @param string $productionMessageContent An example of a message that will be sent from the given phone numbers
      * @param UseCaseCategories|value-of<UseCaseCategories> $useCase Tollfree usecase categories
      * @param string $useCaseSummary Human-readable summary of the desired use-case
+     * @param bool $ageGatedContent Indicates if messaging content requires age gating (e.g., 18+). Defaults to false if not provided.
      * @param string $businessAddr2 Line 2 of the business address
+     * @param string|null $businessRegistrationCountry ISO 3166-1 alpha-2 country code of the issuing business authority. Must be exactly 2 letters. Automatically converted to uppercase. Required from January 2026.
+     * @param string|null $businessRegistrationNumber Official business registration number (e.g., Employer Identification Number (EIN) in the U.S.). Required from January 2026.
+     * @param string|null $businessRegistrationType Type of business registration being provided. Required from January 2026.
+     * @param string|null $doingBusinessAs Doing Business As (DBA) name if different from legal name
+     * @param RequestUpdateParams\EntityType|value-of<RequestUpdateParams\EntityType>|null $entityType Business entity classification
+     * @param string|null $helpMessageResponse The message returned when users text 'HELP'
+     * @param string|null $optInConfirmationResponse Message sent to users confirming their opt-in to receive messages
+     * @param string|null $optInKeywords Keywords used to collect and process consumer opt-ins
+     * @param string|null $privacyPolicyURL URL pointing to the business's privacy policy. Plain string, no URL format validation.
+     * @param string|null $termsAndConditionURL URL pointing to the business's terms and conditions. Plain string, no URL format validation.
      * @param string $webhookURL URL that should receive webhooks relating to this verification request
      *
      * @throws APIException
@@ -205,7 +250,18 @@ final class RequestsService implements RequestsContract
         $productionMessageContent,
         $useCase,
         $useCaseSummary,
+        $ageGatedContent = omit,
         $businessAddr2 = omit,
+        $businessRegistrationCountry = omit,
+        $businessRegistrationNumber = omit,
+        $businessRegistrationType = omit,
+        $doingBusinessAs = omit,
+        $entityType = omit,
+        $helpMessageResponse = omit,
+        $optInConfirmationResponse = omit,
+        $optInKeywords = omit,
+        $privacyPolicyURL = omit,
+        $termsAndConditionURL = omit,
         $webhookURL = omit,
         ?RequestOptions $requestOptions = null,
     ): VerificationRequestEgress {
@@ -229,7 +285,18 @@ final class RequestsService implements RequestsContract
             'productionMessageContent' => $productionMessageContent,
             'useCase' => $useCase,
             'useCaseSummary' => $useCaseSummary,
+            'ageGatedContent' => $ageGatedContent,
             'businessAddr2' => $businessAddr2,
+            'businessRegistrationCountry' => $businessRegistrationCountry,
+            'businessRegistrationNumber' => $businessRegistrationNumber,
+            'businessRegistrationType' => $businessRegistrationType,
+            'doingBusinessAs' => $doingBusinessAs,
+            'entityType' => $entityType,
+            'helpMessageResponse' => $helpMessageResponse,
+            'optInConfirmationResponse' => $optInConfirmationResponse,
+            'optInKeywords' => $optInKeywords,
+            'privacyPolicyURL' => $privacyPolicyURL,
+            'termsAndConditionURL' => $termsAndConditionURL,
             'webhookURL' => $webhookURL,
         ];
 

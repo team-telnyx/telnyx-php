@@ -13,4 +13,6 @@ enum Status: string
     case PENDING_APPROVAL = 'pending-approval';
 
     case DECLINED = 'declined';
+
+    case EXPIRED = 'expired';
 }

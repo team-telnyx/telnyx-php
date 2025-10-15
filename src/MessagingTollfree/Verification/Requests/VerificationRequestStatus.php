@@ -9,6 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
+use Telnyx\MessagingTollfree\Verification\Requests\VerificationRequestStatus\EntityType;
 
 /**
  * A verification request and its status, suitable for returning to users.
@@ -35,9 +36,20 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  *   useCase: value-of<UseCaseCategories>,
  *   useCaseSummary: string,
  *   verificationStatus: value-of<TfVerificationStatus>,
+ *   ageGatedContent?: bool,
  *   businessAddr2?: string,
+ *   businessRegistrationCountry?: string,
+ *   businessRegistrationNumber?: string,
+ *   businessRegistrationType?: string,
  *   createdAt?: \DateTimeInterface,
+ *   doingBusinessAs?: string,
+ *   entityType?: value-of<EntityType>,
+ *   helpMessageResponse?: string,
+ *   optInConfirmationResponse?: string,
+ *   optInKeywords?: string,
+ *   privacyPolicyURL?: string,
  *   reason?: string,
+ *   termsAndConditionURL?: string,
  *   updatedAt?: \DateTimeInterface,
  *   webhookURL?: string,
  * }
@@ -130,13 +142,51 @@ final class VerificationRequestStatus implements BaseModel, ResponseConverter
     public string $verificationStatus;
 
     #[Api(optional: true)]
+    public ?bool $ageGatedContent;
+
+    #[Api(optional: true)]
     public ?string $businessAddr2;
+
+    #[Api(optional: true)]
+    public ?string $businessRegistrationCountry;
+
+    #[Api(optional: true)]
+    public ?string $businessRegistrationNumber;
+
+    #[Api(optional: true)]
+    public ?string $businessRegistrationType;
 
     #[Api(optional: true)]
     public ?\DateTimeInterface $createdAt;
 
     #[Api(optional: true)]
+    public ?string $doingBusinessAs;
+
+    /**
+     * Business entity classification.
+     *
+     * @var value-of<EntityType>|null $entityType
+     */
+    #[Api(enum: EntityType::class, optional: true)]
+    public ?string $entityType;
+
+    #[Api(optional: true)]
+    public ?string $helpMessageResponse;
+
+    #[Api(optional: true)]
+    public ?string $optInConfirmationResponse;
+
+    #[Api(optional: true)]
+    public ?string $optInKeywords;
+
+    #[Api(optional: true)]
+    public ?string $privacyPolicyURL;
+
+    #[Api(optional: true)]
     public ?string $reason;
+
+    #[Api(optional: true)]
+    public ?string $termsAndConditionURL;
 
     #[Api(optional: true)]
     public ?\DateTimeInterface $updatedAt;
@@ -216,6 +266,7 @@ final class VerificationRequestStatus implements BaseModel, ResponseConverter
      * @param list<TfPhoneNumber> $phoneNumbers
      * @param UseCaseCategories|value-of<UseCaseCategories> $useCase
      * @param TfVerificationStatus|value-of<TfVerificationStatus> $verificationStatus
+     * @param EntityType|value-of<EntityType> $entityType
      */
     public static function with(
         string $id,
@@ -239,9 +290,20 @@ final class VerificationRequestStatus implements BaseModel, ResponseConverter
         UseCaseCategories|string $useCase,
         string $useCaseSummary,
         TfVerificationStatus|string $verificationStatus,
+        ?bool $ageGatedContent = null,
         ?string $businessAddr2 = null,
+        ?string $businessRegistrationCountry = null,
+        ?string $businessRegistrationNumber = null,
+        ?string $businessRegistrationType = null,
         ?\DateTimeInterface $createdAt = null,
+        ?string $doingBusinessAs = null,
+        EntityType|string|null $entityType = null,
+        ?string $helpMessageResponse = null,
+        ?string $optInConfirmationResponse = null,
+        ?string $optInKeywords = null,
+        ?string $privacyPolicyURL = null,
         ?string $reason = null,
+        ?string $termsAndConditionURL = null,
         ?\DateTimeInterface $updatedAt = null,
         ?string $webhookURL = null,
     ): self {
@@ -269,9 +331,20 @@ final class VerificationRequestStatus implements BaseModel, ResponseConverter
         $obj->useCaseSummary = $useCaseSummary;
         $obj['verificationStatus'] = $verificationStatus;
 
+        null !== $ageGatedContent && $obj->ageGatedContent = $ageGatedContent;
         null !== $businessAddr2 && $obj->businessAddr2 = $businessAddr2;
+        null !== $businessRegistrationCountry && $obj->businessRegistrationCountry = $businessRegistrationCountry;
+        null !== $businessRegistrationNumber && $obj->businessRegistrationNumber = $businessRegistrationNumber;
+        null !== $businessRegistrationType && $obj->businessRegistrationType = $businessRegistrationType;
         null !== $createdAt && $obj->createdAt = $createdAt;
+        null !== $doingBusinessAs && $obj->doingBusinessAs = $doingBusinessAs;
+        null !== $entityType && $obj['entityType'] = $entityType;
+        null !== $helpMessageResponse && $obj->helpMessageResponse = $helpMessageResponse;
+        null !== $optInConfirmationResponse && $obj->optInConfirmationResponse = $optInConfirmationResponse;
+        null !== $optInKeywords && $obj->optInKeywords = $optInKeywords;
+        null !== $privacyPolicyURL && $obj->privacyPolicyURL = $privacyPolicyURL;
         null !== $reason && $obj->reason = $reason;
+        null !== $termsAndConditionURL && $obj->termsAndConditionURL = $termsAndConditionURL;
         null !== $updatedAt && $obj->updatedAt = $updatedAt;
         null !== $webhookURL && $obj->webhookURL = $webhookURL;
 
@@ -473,10 +546,45 @@ final class VerificationRequestStatus implements BaseModel, ResponseConverter
         return $obj;
     }
 
+    public function withAgeGatedContent(bool $ageGatedContent): self
+    {
+        $obj = clone $this;
+        $obj->ageGatedContent = $ageGatedContent;
+
+        return $obj;
+    }
+
     public function withBusinessAddr2(string $businessAddr2): self
     {
         $obj = clone $this;
         $obj->businessAddr2 = $businessAddr2;
+
+        return $obj;
+    }
+
+    public function withBusinessRegistrationCountry(
+        string $businessRegistrationCountry
+    ): self {
+        $obj = clone $this;
+        $obj->businessRegistrationCountry = $businessRegistrationCountry;
+
+        return $obj;
+    }
+
+    public function withBusinessRegistrationNumber(
+        string $businessRegistrationNumber
+    ): self {
+        $obj = clone $this;
+        $obj->businessRegistrationNumber = $businessRegistrationNumber;
+
+        return $obj;
+    }
+
+    public function withBusinessRegistrationType(
+        string $businessRegistrationType
+    ): self {
+        $obj = clone $this;
+        $obj->businessRegistrationType = $businessRegistrationType;
 
         return $obj;
     }
@@ -489,10 +597,72 @@ final class VerificationRequestStatus implements BaseModel, ResponseConverter
         return $obj;
     }
 
+    public function withDoingBusinessAs(string $doingBusinessAs): self
+    {
+        $obj = clone $this;
+        $obj->doingBusinessAs = $doingBusinessAs;
+
+        return $obj;
+    }
+
+    /**
+     * Business entity classification.
+     *
+     * @param EntityType|value-of<EntityType> $entityType
+     */
+    public function withEntityType(EntityType|string $entityType): self
+    {
+        $obj = clone $this;
+        $obj['entityType'] = $entityType;
+
+        return $obj;
+    }
+
+    public function withHelpMessageResponse(string $helpMessageResponse): self
+    {
+        $obj = clone $this;
+        $obj->helpMessageResponse = $helpMessageResponse;
+
+        return $obj;
+    }
+
+    public function withOptInConfirmationResponse(
+        string $optInConfirmationResponse
+    ): self {
+        $obj = clone $this;
+        $obj->optInConfirmationResponse = $optInConfirmationResponse;
+
+        return $obj;
+    }
+
+    public function withOptInKeywords(string $optInKeywords): self
+    {
+        $obj = clone $this;
+        $obj->optInKeywords = $optInKeywords;
+
+        return $obj;
+    }
+
+    public function withPrivacyPolicyURL(string $privacyPolicyURL): self
+    {
+        $obj = clone $this;
+        $obj->privacyPolicyURL = $privacyPolicyURL;
+
+        return $obj;
+    }
+
     public function withReason(string $reason): self
     {
         $obj = clone $this;
         $obj->reason = $reason;
+
+        return $obj;
+    }
+
+    public function withTermsAndConditionURL(string $termsAndConditionURL): self
+    {
+        $obj = clone $this;
+        $obj->termsAndConditionURL = $termsAndConditionURL;
 
         return $obj;
     }

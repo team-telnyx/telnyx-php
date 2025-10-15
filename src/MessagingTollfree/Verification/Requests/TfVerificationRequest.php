@@ -7,6 +7,7 @@ namespace Telnyx\MessagingTollfree\Verification\Requests;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\MessagingTollfree\Verification\Requests\TfVerificationRequest\EntityType;
 
 /**
  * The body of a tollfree verification request.
@@ -31,7 +32,18 @@ use Telnyx\Core\Contracts\BaseModel;
  *   productionMessageContent: string,
  *   useCase: value-of<UseCaseCategories>,
  *   useCaseSummary: string,
+ *   ageGatedContent?: bool,
  *   businessAddr2?: string,
+ *   businessRegistrationCountry?: string|null,
+ *   businessRegistrationNumber?: string|null,
+ *   businessRegistrationType?: string|null,
+ *   doingBusinessAs?: string|null,
+ *   entityType?: value-of<EntityType>|null,
+ *   helpMessageResponse?: string|null,
+ *   optInConfirmationResponse?: string|null,
+ *   optInKeywords?: string|null,
+ *   privacyPolicyURL?: string|null,
+ *   termsAndConditionURL?: string|null,
  *   webhookURL?: string,
  * }
  */
@@ -163,10 +175,78 @@ final class TfVerificationRequest implements BaseModel
     public string $useCaseSummary;
 
     /**
+     * Indicates if messaging content requires age gating (e.g., 18+). Defaults to false if not provided.
+     */
+    #[Api(optional: true)]
+    public ?bool $ageGatedContent;
+
+    /**
      * Line 2 of the business address.
      */
     #[Api(optional: true)]
     public ?string $businessAddr2;
+
+    /**
+     * ISO 3166-1 alpha-2 country code of the issuing business authority. Must be exactly 2 letters. Automatically converted to uppercase. Required from January 2026.
+     */
+    #[Api(nullable: true, optional: true)]
+    public ?string $businessRegistrationCountry;
+
+    /**
+     * Official business registration number (e.g., Employer Identification Number (EIN) in the U.S.). Required from January 2026.
+     */
+    #[Api(nullable: true, optional: true)]
+    public ?string $businessRegistrationNumber;
+
+    /**
+     * Type of business registration being provided. Required from January 2026.
+     */
+    #[Api(nullable: true, optional: true)]
+    public ?string $businessRegistrationType;
+
+    /**
+     * Doing Business As (DBA) name if different from legal name.
+     */
+    #[Api(nullable: true, optional: true)]
+    public ?string $doingBusinessAs;
+
+    /**
+     * Business entity classification.
+     *
+     * @var value-of<EntityType>|null $entityType
+     */
+    #[Api(enum: EntityType::class, nullable: true, optional: true)]
+    public ?string $entityType;
+
+    /**
+     * The message returned when users text 'HELP'.
+     */
+    #[Api(nullable: true, optional: true)]
+    public ?string $helpMessageResponse;
+
+    /**
+     * Message sent to users confirming their opt-in to receive messages.
+     */
+    #[Api(nullable: true, optional: true)]
+    public ?string $optInConfirmationResponse;
+
+    /**
+     * Keywords used to collect and process consumer opt-ins.
+     */
+    #[Api(nullable: true, optional: true)]
+    public ?string $optInKeywords;
+
+    /**
+     * URL pointing to the business's privacy policy. Plain string, no URL format validation.
+     */
+    #[Api(nullable: true, optional: true)]
+    public ?string $privacyPolicyURL;
+
+    /**
+     * URL pointing to the business's terms and conditions. Plain string, no URL format validation.
+     */
+    #[Api(nullable: true, optional: true)]
+    public ?string $termsAndConditionURL;
 
     /**
      * URL that should receive webhooks relating to this verification request.
@@ -241,6 +321,7 @@ final class TfVerificationRequest implements BaseModel
      * @param list<URL> $optInWorkflowImageURLs
      * @param list<TfPhoneNumber> $phoneNumbers
      * @param UseCaseCategories|value-of<UseCaseCategories> $useCase
+     * @param EntityType|value-of<EntityType>|null $entityType
      */
     public static function with(
         string $additionalInformation,
@@ -262,7 +343,18 @@ final class TfVerificationRequest implements BaseModel
         string $productionMessageContent,
         UseCaseCategories|string $useCase,
         string $useCaseSummary,
+        ?bool $ageGatedContent = null,
         ?string $businessAddr2 = null,
+        ?string $businessRegistrationCountry = null,
+        ?string $businessRegistrationNumber = null,
+        ?string $businessRegistrationType = null,
+        ?string $doingBusinessAs = null,
+        EntityType|string|null $entityType = null,
+        ?string $helpMessageResponse = null,
+        ?string $optInConfirmationResponse = null,
+        ?string $optInKeywords = null,
+        ?string $privacyPolicyURL = null,
+        ?string $termsAndConditionURL = null,
         ?string $webhookURL = null,
     ): self {
         $obj = new self;
@@ -287,7 +379,18 @@ final class TfVerificationRequest implements BaseModel
         $obj['useCase'] = $useCase;
         $obj->useCaseSummary = $useCaseSummary;
 
+        null !== $ageGatedContent && $obj->ageGatedContent = $ageGatedContent;
         null !== $businessAddr2 && $obj->businessAddr2 = $businessAddr2;
+        null !== $businessRegistrationCountry && $obj->businessRegistrationCountry = $businessRegistrationCountry;
+        null !== $businessRegistrationNumber && $obj->businessRegistrationNumber = $businessRegistrationNumber;
+        null !== $businessRegistrationType && $obj->businessRegistrationType = $businessRegistrationType;
+        null !== $doingBusinessAs && $obj->doingBusinessAs = $doingBusinessAs;
+        null !== $entityType && $obj['entityType'] = $entityType;
+        null !== $helpMessageResponse && $obj->helpMessageResponse = $helpMessageResponse;
+        null !== $optInConfirmationResponse && $obj->optInConfirmationResponse = $optInConfirmationResponse;
+        null !== $optInKeywords && $obj->optInKeywords = $optInKeywords;
+        null !== $privacyPolicyURL && $obj->privacyPolicyURL = $privacyPolicyURL;
+        null !== $termsAndConditionURL && $obj->termsAndConditionURL = $termsAndConditionURL;
         null !== $webhookURL && $obj->webhookURL = $webhookURL;
 
         return $obj;
@@ -516,12 +619,140 @@ final class TfVerificationRequest implements BaseModel
     }
 
     /**
+     * Indicates if messaging content requires age gating (e.g., 18+). Defaults to false if not provided.
+     */
+    public function withAgeGatedContent(bool $ageGatedContent): self
+    {
+        $obj = clone $this;
+        $obj->ageGatedContent = $ageGatedContent;
+
+        return $obj;
+    }
+
+    /**
      * Line 2 of the business address.
      */
     public function withBusinessAddr2(string $businessAddr2): self
     {
         $obj = clone $this;
         $obj->businessAddr2 = $businessAddr2;
+
+        return $obj;
+    }
+
+    /**
+     * ISO 3166-1 alpha-2 country code of the issuing business authority. Must be exactly 2 letters. Automatically converted to uppercase. Required from January 2026.
+     */
+    public function withBusinessRegistrationCountry(
+        ?string $businessRegistrationCountry
+    ): self {
+        $obj = clone $this;
+        $obj->businessRegistrationCountry = $businessRegistrationCountry;
+
+        return $obj;
+    }
+
+    /**
+     * Official business registration number (e.g., Employer Identification Number (EIN) in the U.S.). Required from January 2026.
+     */
+    public function withBusinessRegistrationNumber(
+        ?string $businessRegistrationNumber
+    ): self {
+        $obj = clone $this;
+        $obj->businessRegistrationNumber = $businessRegistrationNumber;
+
+        return $obj;
+    }
+
+    /**
+     * Type of business registration being provided. Required from January 2026.
+     */
+    public function withBusinessRegistrationType(
+        ?string $businessRegistrationType
+    ): self {
+        $obj = clone $this;
+        $obj->businessRegistrationType = $businessRegistrationType;
+
+        return $obj;
+    }
+
+    /**
+     * Doing Business As (DBA) name if different from legal name.
+     */
+    public function withDoingBusinessAs(?string $doingBusinessAs): self
+    {
+        $obj = clone $this;
+        $obj->doingBusinessAs = $doingBusinessAs;
+
+        return $obj;
+    }
+
+    /**
+     * Business entity classification.
+     *
+     * @param EntityType|value-of<EntityType>|null $entityType
+     */
+    public function withEntityType(EntityType|string|null $entityType): self
+    {
+        $obj = clone $this;
+        $obj['entityType'] = $entityType;
+
+        return $obj;
+    }
+
+    /**
+     * The message returned when users text 'HELP'.
+     */
+    public function withHelpMessageResponse(?string $helpMessageResponse): self
+    {
+        $obj = clone $this;
+        $obj->helpMessageResponse = $helpMessageResponse;
+
+        return $obj;
+    }
+
+    /**
+     * Message sent to users confirming their opt-in to receive messages.
+     */
+    public function withOptInConfirmationResponse(
+        ?string $optInConfirmationResponse
+    ): self {
+        $obj = clone $this;
+        $obj->optInConfirmationResponse = $optInConfirmationResponse;
+
+        return $obj;
+    }
+
+    /**
+     * Keywords used to collect and process consumer opt-ins.
+     */
+    public function withOptInKeywords(?string $optInKeywords): self
+    {
+        $obj = clone $this;
+        $obj->optInKeywords = $optInKeywords;
+
+        return $obj;
+    }
+
+    /**
+     * URL pointing to the business's privacy policy. Plain string, no URL format validation.
+     */
+    public function withPrivacyPolicyURL(?string $privacyPolicyURL): self
+    {
+        $obj = clone $this;
+        $obj->privacyPolicyURL = $privacyPolicyURL;
+
+        return $obj;
+    }
+
+    /**
+     * URL pointing to the business's terms and conditions. Plain string, no URL format validation.
+     */
+    public function withTermsAndConditionURL(
+        ?string $termsAndConditionURL
+    ): self {
+        $obj = clone $this;
+        $obj->termsAndConditionURL = $termsAndConditionURL;
 
         return $obj;
     }
