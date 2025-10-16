@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileUpdateParams\CallingWindow;
 
 /**
  * An object containing the method's parameters.
@@ -29,6 +30,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   name: string,
  *   billingGroupID?: string|null,
  *   callRecording?: OutboundCallRecording,
+ *   callingWindow?: CallingWindow,
  *   concurrentCallLimit?: int|null,
  *   dailySpendLimit?: string,
  *   dailySpendLimitEnabled?: bool,
@@ -61,6 +63,12 @@ final class OutboundVoiceProfileUpdateParams implements BaseModel
 
     #[Api('call_recording', optional: true)]
     public ?OutboundCallRecording $callRecording;
+
+    /**
+     * (BETA) Specifies the time window and call limits for calls made using this outbound voice profile.
+     */
+    #[Api('calling_window', optional: true)]
+    public ?CallingWindow $callingWindow;
 
     /**
      * Must be no more than your global concurrent call limit. Null means no limit.
@@ -166,6 +174,7 @@ final class OutboundVoiceProfileUpdateParams implements BaseModel
         string $name,
         ?string $billingGroupID = null,
         ?OutboundCallRecording $callRecording = null,
+        ?CallingWindow $callingWindow = null,
         ?int $concurrentCallLimit = null,
         ?string $dailySpendLimit = null,
         ?bool $dailySpendLimitEnabled = null,
@@ -183,6 +192,7 @@ final class OutboundVoiceProfileUpdateParams implements BaseModel
 
         null !== $billingGroupID && $obj->billingGroupID = $billingGroupID;
         null !== $callRecording && $obj->callRecording = $callRecording;
+        null !== $callingWindow && $obj->callingWindow = $callingWindow;
         null !== $concurrentCallLimit && $obj->concurrentCallLimit = $concurrentCallLimit;
         null !== $dailySpendLimit && $obj->dailySpendLimit = $dailySpendLimit;
         null !== $dailySpendLimitEnabled && $obj->dailySpendLimitEnabled = $dailySpendLimitEnabled;
@@ -224,6 +234,17 @@ final class OutboundVoiceProfileUpdateParams implements BaseModel
     ): self {
         $obj = clone $this;
         $obj->callRecording = $callRecording;
+
+        return $obj;
+    }
+
+    /**
+     * (BETA) Specifies the time window and call limits for calls made using this outbound voice profile.
+     */
+    public function withCallingWindow(CallingWindow $callingWindow): self
+    {
+        $obj = clone $this;
+        $obj->callingWindow = $callingWindow;
 
         return $obj;
     }
