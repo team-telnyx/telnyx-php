@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
+ * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
  *
  * @phpstan-type page_alias = array{number?: int, size?: int}
  */

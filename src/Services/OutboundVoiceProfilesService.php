@@ -8,6 +8,7 @@ use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\OutboundVoiceProfiles\OutboundCallRecording;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileCreateParams;
+use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileCreateParams\CallingWindow;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileDeleteResponse;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileGetResponse;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileListParams;
@@ -41,6 +42,7 @@ final class OutboundVoiceProfilesService implements OutboundVoiceProfilesContrac
      * @param string $name a user-supplied name to help with organization
      * @param string|null $billingGroupID The ID of the billing group associated with the outbound proflile. Defaults to null (for no group assigned).
      * @param OutboundCallRecording $callRecording
+     * @param CallingWindow $callingWindow (BETA) Specifies the time window and call limits for calls made using this outbound voice profile. Note that all times are UTC in 24-hour clock time.
      * @param int|null $concurrentCallLimit Must be no more than your global concurrent call limit. Null means no limit.
      * @param string $dailySpendLimit the maximum amount of usage charges, in USD, you want Telnyx to allow on this outbound voice profile in a day before disallowing new calls
      * @param bool $dailySpendLimitEnabled specifies whether to enforce the daily_spend_limit on this outbound voice profile
@@ -58,6 +60,7 @@ final class OutboundVoiceProfilesService implements OutboundVoiceProfilesContrac
         $name,
         $billingGroupID = omit,
         $callRecording = omit,
+        $callingWindow = omit,
         $concurrentCallLimit = omit,
         $dailySpendLimit = omit,
         $dailySpendLimitEnabled = omit,
@@ -74,6 +77,7 @@ final class OutboundVoiceProfilesService implements OutboundVoiceProfilesContrac
             'name' => $name,
             'billingGroupID' => $billingGroupID,
             'callRecording' => $callRecording,
+            'callingWindow' => $callingWindow,
             'concurrentCallLimit' => $concurrentCallLimit,
             'dailySpendLimit' => $dailySpendLimit,
             'dailySpendLimitEnabled' => $dailySpendLimitEnabled,
@@ -143,6 +147,7 @@ final class OutboundVoiceProfilesService implements OutboundVoiceProfilesContrac
      * @param string $name a user-supplied name to help with organization
      * @param string|null $billingGroupID The ID of the billing group associated with the outbound proflile. Defaults to null (for no group assigned).
      * @param OutboundCallRecording $callRecording
+     * @param OutboundVoiceProfileUpdateParams\CallingWindow $callingWindow (BETA) Specifies the time window and call limits for calls made using this outbound voice profile
      * @param int|null $concurrentCallLimit Must be no more than your global concurrent call limit. Null means no limit.
      * @param string $dailySpendLimit the maximum amount of usage charges, in USD, you want Telnyx to allow on this outbound voice profile in a day before disallowing new calls
      * @param bool $dailySpendLimitEnabled specifies whether to enforce the daily_spend_limit on this outbound voice profile
@@ -161,6 +166,7 @@ final class OutboundVoiceProfilesService implements OutboundVoiceProfilesContrac
         $name,
         $billingGroupID = omit,
         $callRecording = omit,
+        $callingWindow = omit,
         $concurrentCallLimit = omit,
         $dailySpendLimit = omit,
         $dailySpendLimitEnabled = omit,
@@ -177,6 +183,7 @@ final class OutboundVoiceProfilesService implements OutboundVoiceProfilesContrac
             'name' => $name,
             'billingGroupID' => $billingGroupID,
             'callRecording' => $callRecording,
+            'callingWindow' => $callingWindow,
             'concurrentCallLimit' => $concurrentCallLimit,
             'dailySpendLimit' => $dailySpendLimit,
             'dailySpendLimitEnabled' => $dailySpendLimitEnabled,
@@ -225,7 +232,7 @@ final class OutboundVoiceProfilesService implements OutboundVoiceProfilesContrac
      * Get all outbound voice profiles belonging to the user that match the given filters.
      *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[name][contains]
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param Sort|value-of<Sort> $sort Specifies the sort order for results. By default sorting direction is ascending. To have the results sorted in descending order add the <code>-</code> prefix.<br/><br/>
      * That is: <ul>
      *   <li>
