@@ -1,5 +1,26 @@
 # Changelog
 
+## 4.1.0 (2025-10-16)
+
+Full Changelog: [v4.0.0...v4.1.0](https://github.com/team-telnyx/telnyx-php/compare/v4.0.0...v4.1.0)
+
+### Features
+
+* ENGDESK-45836: Document private endpoint for republishing account events ([8b49daa](https://github.com/team-telnyx/telnyx-php/commit/8b49daa1ce8a804dba672157cccd81370c3c900d))
+* Fix broken link to List SIM card action ([56cfe76](https://github.com/team-telnyx/telnyx-php/commit/56cfe761b96c276697144312cd6ffe01beaca687))
+* MSG-5978: Add BRN fields to toll-free verification OpenAPI specs ([c83ab33](https://github.com/team-telnyx/telnyx-php/commit/c83ab335232dd26962ec306c46dc2c8fa7b6d6c6))
+* Retell assistants import ([3089d71](https://github.com/team-telnyx/telnyx-php/commit/3089d7140ad1abc2b11ee3b9b970a28f8e39bceb))
+
+
+### Bug Fixes
+
+* inverted retry condition ([4213773](https://github.com/team-telnyx/telnyx-php/commit/4213773cd9d821b2531a9b7d4ed69b598aaa7e38))
+
+
+### Chores
+
+* add license ([8b06ca9](https://github.com/team-telnyx/telnyx-php/commit/8b06ca916d7973c60ad549fb077bb8c7915193f4))
+
 ## 4.0.0 (2025-10-08)
 
 Full Changelog: [v0.0.1...v4.0.0](https://github.com/team-telnyx/telnyx-php/compare/v0.0.1...v4.0.0)
