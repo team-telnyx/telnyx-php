@@ -45,7 +45,7 @@ final class OutboundVoiceProfileListParams implements BaseModel
     public ?Filter $filter;
 
     /**
-     * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
+     * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
      */
     #[Api(optional: true)]
     public ?Page $page;
@@ -107,7 +107,7 @@ final class OutboundVoiceProfileListParams implements BaseModel
     }
 
     /**
-     * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
+     * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
      */
     public function withPage(Page $page): self
     {

@@ -7,6 +7,7 @@ namespace Telnyx\OutboundVoiceProfiles;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfile\CallingWindow;
 
 /**
  * @phpstan-type outbound_voice_profile = array{
@@ -14,6 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   id?: string,
  *   billingGroupID?: string|null,
  *   callRecording?: OutboundCallRecording,
+ *   callingWindow?: CallingWindow,
  *   concurrentCallLimit?: int|null,
  *   connectionsCount?: int,
  *   createdAt?: string,
@@ -55,6 +57,12 @@ final class OutboundVoiceProfile implements BaseModel
 
     #[Api('call_recording', optional: true)]
     public ?OutboundCallRecording $callRecording;
+
+    /**
+     * (BETA) Specifies the time window and call limits for calls made using this outbound voice profile. Note that all times are UTC in 24-hour clock time.
+     */
+    #[Api('calling_window', optional: true)]
+    public ?CallingWindow $callingWindow;
 
     /**
      * Must be no more than your global concurrent call limit. Null means no limit.
@@ -185,6 +193,7 @@ final class OutboundVoiceProfile implements BaseModel
         ?string $id = null,
         ?string $billingGroupID = null,
         ?OutboundCallRecording $callRecording = null,
+        ?CallingWindow $callingWindow = null,
         ?int $concurrentCallLimit = null,
         ?int $connectionsCount = null,
         ?string $createdAt = null,
@@ -207,6 +216,7 @@ final class OutboundVoiceProfile implements BaseModel
         null !== $id && $obj->id = $id;
         null !== $billingGroupID && $obj->billingGroupID = $billingGroupID;
         null !== $callRecording && $obj->callRecording = $callRecording;
+        null !== $callingWindow && $obj->callingWindow = $callingWindow;
         null !== $concurrentCallLimit && $obj->concurrentCallLimit = $concurrentCallLimit;
         null !== $connectionsCount && $obj->connectionsCount = $connectionsCount;
         null !== $createdAt && $obj->createdAt = $createdAt;
@@ -263,6 +273,17 @@ final class OutboundVoiceProfile implements BaseModel
     ): self {
         $obj = clone $this;
         $obj->callRecording = $callRecording;
+
+        return $obj;
+    }
+
+    /**
+     * (BETA) Specifies the time window and call limits for calls made using this outbound voice profile. Note that all times are UTC in 24-hour clock time.
+     */
+    public function withCallingWindow(CallingWindow $callingWindow): self
+    {
+        $obj = clone $this;
+        $obj->callingWindow = $callingWindow;
 
         return $obj;
     }
