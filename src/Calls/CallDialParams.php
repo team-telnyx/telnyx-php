@@ -378,7 +378,11 @@ final class CallDialParams implements BaseModel
      *
      * @var 8000|16000|22050|24000|48000|null $streamBidirectionalSamplingRate
      */
-    #[Api('stream_bidirectional_sampling_rate', optional: true)]
+    #[Api(
+        'stream_bidirectional_sampling_rate',
+        enum: StreamBidirectionalSamplingRate::class,
+        optional: true,
+    )]
     public ?int $streamBidirectionalSamplingRate;
 
     /**

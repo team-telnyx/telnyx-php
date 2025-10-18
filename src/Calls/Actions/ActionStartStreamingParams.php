@@ -8,6 +8,7 @@ use Telnyx\Calls\Actions\ActionStartStreamingParams\StreamTrack;
 use Telnyx\Calls\DialogflowConfig;
 use Telnyx\Calls\StreamBidirectionalCodec;
 use Telnyx\Calls\StreamBidirectionalMode;
+use Telnyx\Calls\StreamBidirectionalSamplingRate;
 use Telnyx\Calls\StreamBidirectionalTargetLegs;
 use Telnyx\Calls\StreamCodec;
 use Telnyx\Core\Attributes\Api;
@@ -103,7 +104,11 @@ final class ActionStartStreamingParams implements BaseModel
      *
      * @var 8000|16000|22050|24000|48000|null $streamBidirectionalSamplingRate
      */
-    #[Api('stream_bidirectional_sampling_rate', optional: true)]
+    #[Api(
+        'stream_bidirectional_sampling_rate',
+        enum: StreamBidirectionalSamplingRate::class,
+        optional: true,
+    )]
     public ?int $streamBidirectionalSamplingRate;
 
     /**

@@ -9,12 +9,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
-use Telnyx\Verifications\ByPhoneNumber\ByPhoneNumberListResponse\Meta;
 use Telnyx\Verifications\Verification;
 
 /**
  * @phpstan-type by_phone_number_list_response = array{
- *   data: list<Verification>, meta: Meta
+ *   data: list<Verification>, meta: VerifyMeta
  * }
  */
 final class ByPhoneNumberListResponse implements BaseModel, ResponseConverter
@@ -29,7 +28,7 @@ final class ByPhoneNumberListResponse implements BaseModel, ResponseConverter
     public array $data;
 
     #[Api]
-    public Meta $meta;
+    public VerifyMeta $meta;
 
     /**
      * `new ByPhoneNumberListResponse()` is missing required properties by the API.
@@ -57,7 +56,7 @@ final class ByPhoneNumberListResponse implements BaseModel, ResponseConverter
      *
      * @param list<Verification> $data
      */
-    public static function with(array $data, Meta $meta): self
+    public static function with(array $data, VerifyMeta $meta): self
     {
         $obj = new self;
 
@@ -78,7 +77,7 @@ final class ByPhoneNumberListResponse implements BaseModel, ResponseConverter
         return $obj;
     }
 
-    public function withMeta(Meta $meta): self
+    public function withMeta(VerifyMeta $meta): self
     {
         $obj = clone $this;
         $obj->meta = $meta;

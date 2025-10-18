@@ -6,13 +6,10 @@ namespace Telnyx\Services\AI;
 
 use Telnyx\AI\Assistants\AssistantChatParams;
 use Telnyx\AI\Assistants\AssistantChatResponse;
-use Telnyx\AI\Assistants\AssistantCloneResponse;
 use Telnyx\AI\Assistants\AssistantCreateParams;
 use Telnyx\AI\Assistants\AssistantDeleteResponse;
-use Telnyx\AI\Assistants\AssistantGetResponse;
 use Telnyx\AI\Assistants\AssistantImportParams;
 use Telnyx\AI\Assistants\AssistantImportParams\Provider;
-use Telnyx\AI\Assistants\AssistantNewResponse;
 use Telnyx\AI\Assistants\AssistantRetrieveParams;
 use Telnyx\AI\Assistants\AssistantsList;
 use Telnyx\AI\Assistants\AssistantTool\DtmfTool;
@@ -21,6 +18,7 @@ use Telnyx\AI\Assistants\AssistantTool\SipReferTool;
 use Telnyx\AI\Assistants\AssistantUpdateParams;
 use Telnyx\AI\Assistants\EnabledFeatures;
 use Telnyx\AI\Assistants\HangupTool;
+use Telnyx\AI\Assistants\InferenceEmbedding;
 use Telnyx\AI\Assistants\InsightSettings;
 use Telnyx\AI\Assistants\MessagingSettings;
 use Telnyx\AI\Assistants\PrivacySettings;
@@ -124,7 +122,7 @@ final class AssistantsService implements AssistantsContract
         $transcription = omit,
         $voiceSettings = omit,
         ?RequestOptions $requestOptions = null,
-    ): AssistantNewResponse {
+    ): InferenceEmbedding {
         $params = [
             'instructions' => $instructions,
             'model' => $model,
@@ -157,7 +155,7 @@ final class AssistantsService implements AssistantsContract
     public function createRaw(
         array $params,
         ?RequestOptions $requestOptions = null
-    ): AssistantNewResponse {
+    ): InferenceEmbedding {
         [$parsed, $options] = AssistantCreateParams::parseRequest(
             $params,
             $requestOptions
@@ -169,7 +167,7 @@ final class AssistantsService implements AssistantsContract
             path: 'ai/assistants',
             body: (object) $parsed,
             options: $options,
-            convert: AssistantNewResponse::class,
+            convert: InferenceEmbedding::class,
         );
     }
 
@@ -192,7 +190,7 @@ final class AssistantsService implements AssistantsContract
         $from = omit,
         $to = omit,
         ?RequestOptions $requestOptions = null,
-    ): AssistantGetResponse {
+    ): InferenceEmbedding {
         $params = [
             'callControlID' => $callControlID,
             'fetchDynamicVariablesFromWebhook' => $fetchDynamicVariablesFromWebhook,
@@ -214,7 +212,7 @@ final class AssistantsService implements AssistantsContract
         string $assistantID,
         array $params,
         ?RequestOptions $requestOptions = null
-    ): AssistantGetResponse {
+    ): InferenceEmbedding {
         [$parsed, $options] = AssistantRetrieveParams::parseRequest(
             $params,
             $requestOptions
@@ -226,7 +224,7 @@ final class AssistantsService implements AssistantsContract
             path: ['ai/assistants/%1$s', $assistantID],
             query: $parsed,
             options: $options,
-            convert: AssistantGetResponse::class,
+            convert: InferenceEmbedding::class,
         );
     }
 
@@ -429,13 +427,13 @@ final class AssistantsService implements AssistantsContract
     public function clone(
         string $assistantID,
         ?RequestOptions $requestOptions = null
-    ): AssistantCloneResponse {
+    ): InferenceEmbedding {
         // @phpstan-ignore-next-line;
         return $this->client->request(
             method: 'post',
             path: ['ai/assistants/%1$s/clone', $assistantID],
             options: $requestOptions,
-            convert: AssistantCloneResponse::class,
+            convert: InferenceEmbedding::class,
         );
     }
 
