@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\MessagingTollfree\Verification;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\MessagingTollfree\Verification\Requests\RequestCreateParams\EntityType;
 use Telnyx\MessagingTollfree\Verification\Requests\RequestListResponse;
 use Telnyx\MessagingTollfree\Verification\Requests\TfPhoneNumber;
 use Telnyx\MessagingTollfree\Verification\Requests\TfVerificationStatus;
+use Telnyx\MessagingTollfree\Verification\Requests\TollFreeVerificationEntityType;
 use Telnyx\MessagingTollfree\Verification\Requests\URL;
 use Telnyx\MessagingTollfree\Verification\Requests\UseCaseCategories;
 use Telnyx\MessagingTollfree\Verification\Requests\VerificationRequestEgress;
@@ -48,7 +48,7 @@ interface RequestsContract
      * @param string|null $businessRegistrationNumber Official business registration number (e.g., Employer Identification Number (EIN) in the U.S.). Required from January 2026.
      * @param string|null $businessRegistrationType Type of business registration being provided. Required from January 2026.
      * @param string|null $doingBusinessAs Doing Business As (DBA) name if different from legal name
-     * @param EntityType|value-of<EntityType>|null $entityType Business entity classification
+     * @param TollFreeVerificationEntityType|value-of<TollFreeVerificationEntityType>|null $entityType Business entity classification
      * @param string|null $helpMessageResponse The message returned when users text 'HELP'
      * @param string|null $optInConfirmationResponse Message sent to users confirming their opt-in to receive messages
      * @param string|null $optInKeywords Keywords used to collect and process consumer opt-ins
@@ -144,7 +144,7 @@ interface RequestsContract
      * @param string|null $businessRegistrationNumber Official business registration number (e.g., Employer Identification Number (EIN) in the U.S.). Required from January 2026.
      * @param string|null $businessRegistrationType Type of business registration being provided. Required from January 2026.
      * @param string|null $doingBusinessAs Doing Business As (DBA) name if different from legal name
-     * @param \Telnyx\MessagingTollfree\Verification\Requests\RequestUpdateParams\EntityType|value-of<\Telnyx\MessagingTollfree\Verification\Requests\RequestUpdateParams\EntityType>|null $entityType Business entity classification
+     * @param TollFreeVerificationEntityType|value-of<TollFreeVerificationEntityType>|null $entityType Business entity classification
      * @param string|null $helpMessageResponse The message returned when users text 'HELP'
      * @param string|null $optInConfirmationResponse Message sent to users confirming their opt-in to receive messages
      * @param string|null $optInKeywords Keywords used to collect and process consumer opt-ins

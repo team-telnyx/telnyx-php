@@ -9,11 +9,10 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
-use Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging\MessagingListResponse\Meta;
 
 /**
  * @phpstan-type messaging_list_response = array{
- *   data?: list<MdrDetailReportResponse>, meta?: Meta
+ *   data?: list<MdrDetailReportResponse>, meta?: BatchCsvPaginationMeta
  * }
  */
 final class MessagingListResponse implements BaseModel, ResponseConverter
@@ -28,7 +27,7 @@ final class MessagingListResponse implements BaseModel, ResponseConverter
     public ?array $data;
 
     #[Api(optional: true)]
-    public ?Meta $meta;
+    public ?BatchCsvPaginationMeta $meta;
 
     public function __construct()
     {
@@ -42,8 +41,10 @@ final class MessagingListResponse implements BaseModel, ResponseConverter
      *
      * @param list<MdrDetailReportResponse> $data
      */
-    public static function with(?array $data = null, ?Meta $meta = null): self
-    {
+    public static function with(
+        ?array $data = null,
+        ?BatchCsvPaginationMeta $meta = null
+    ): self {
         $obj = new self;
 
         null !== $data && $obj->data = $data;
@@ -63,7 +64,7 @@ final class MessagingListResponse implements BaseModel, ResponseConverter
         return $obj;
     }
 
-    public function withMeta(Meta $meta): self
+    public function withMeta(BatchCsvPaginationMeta $meta): self
     {
         $obj = clone $this;
         $obj->meta = $meta;

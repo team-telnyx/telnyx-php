@@ -8,6 +8,7 @@ use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\VerifyProfilesContract;
+use Telnyx\VerifyProfiles\MessageTemplate;
 use Telnyx\VerifyProfiles\VerifyProfileCreateParams;
 use Telnyx\VerifyProfiles\VerifyProfileCreateParams\Call;
 use Telnyx\VerifyProfiles\VerifyProfileCreateParams\Flashcall;
@@ -19,10 +20,8 @@ use Telnyx\VerifyProfiles\VerifyProfileListParams;
 use Telnyx\VerifyProfiles\VerifyProfileListParams\Filter;
 use Telnyx\VerifyProfiles\VerifyProfileListParams\Page;
 use Telnyx\VerifyProfiles\VerifyProfileListResponse;
-use Telnyx\VerifyProfiles\VerifyProfileNewTemplateResponse;
 use Telnyx\VerifyProfiles\VerifyProfileUpdateParams;
 use Telnyx\VerifyProfiles\VerifyProfileUpdateTemplateParams;
-use Telnyx\VerifyProfiles\VerifyProfileUpdateTemplateResponse;
 
 use const Telnyx\Core\OMIT as omit;
 
@@ -261,7 +260,7 @@ final class VerifyProfilesService implements VerifyProfilesContract
     public function createTemplate(
         $text,
         ?RequestOptions $requestOptions = null
-    ): VerifyProfileNewTemplateResponse {
+    ): MessageTemplate {
         $params = ['text' => $text];
 
         return $this->createTemplateRaw($params, $requestOptions);
@@ -277,7 +276,7 @@ final class VerifyProfilesService implements VerifyProfilesContract
     public function createTemplateRaw(
         array $params,
         ?RequestOptions $requestOptions = null
-    ): VerifyProfileNewTemplateResponse {
+    ): MessageTemplate {
         [$parsed, $options] = VerifyProfileCreateTemplateParams::parseRequest(
             $params,
             $requestOptions
@@ -289,7 +288,7 @@ final class VerifyProfilesService implements VerifyProfilesContract
             path: 'verify_profiles/templates',
             body: (object) $parsed,
             options: $options,
-            convert: VerifyProfileNewTemplateResponse::class,
+            convert: MessageTemplate::class,
         );
     }
 
@@ -325,7 +324,7 @@ final class VerifyProfilesService implements VerifyProfilesContract
         string $templateID,
         $text,
         ?RequestOptions $requestOptions = null
-    ): VerifyProfileUpdateTemplateResponse {
+    ): MessageTemplate {
         $params = ['text' => $text];
 
         return $this->updateTemplateRaw($templateID, $params, $requestOptions);
@@ -342,7 +341,7 @@ final class VerifyProfilesService implements VerifyProfilesContract
         string $templateID,
         array $params,
         ?RequestOptions $requestOptions = null
-    ): VerifyProfileUpdateTemplateResponse {
+    ): MessageTemplate {
         [$parsed, $options] = VerifyProfileUpdateTemplateParams::parseRequest(
             $params,
             $requestOptions
@@ -354,7 +353,7 @@ final class VerifyProfilesService implements VerifyProfilesContract
             path: ['verify_profiles/templates/%1$s', $templateID],
             body: (object) $parsed,
             options: $options,
-            convert: VerifyProfileUpdateTemplateResponse::class,
+            convert: MessageTemplate::class,
         );
     }
 }

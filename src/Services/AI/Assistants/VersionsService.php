@@ -10,6 +10,7 @@ use Telnyx\AI\Assistants\AssistantTool\HandoffTool;
 use Telnyx\AI\Assistants\AssistantTool\SipReferTool;
 use Telnyx\AI\Assistants\EnabledFeatures;
 use Telnyx\AI\Assistants\HangupTool;
+use Telnyx\AI\Assistants\InferenceEmbedding;
 use Telnyx\AI\Assistants\InsightSettings;
 use Telnyx\AI\Assistants\MessagingSettings;
 use Telnyx\AI\Assistants\PrivacySettings;
@@ -18,12 +19,9 @@ use Telnyx\AI\Assistants\TelephonySettings;
 use Telnyx\AI\Assistants\TranscriptionSettings;
 use Telnyx\AI\Assistants\TransferTool;
 use Telnyx\AI\Assistants\Versions\VersionDeleteParams;
-use Telnyx\AI\Assistants\Versions\VersionGetResponse;
 use Telnyx\AI\Assistants\Versions\VersionPromoteParams;
-use Telnyx\AI\Assistants\Versions\VersionPromoteResponse;
 use Telnyx\AI\Assistants\Versions\VersionRetrieveParams;
 use Telnyx\AI\Assistants\Versions\VersionUpdateParams;
-use Telnyx\AI\Assistants\Versions\VersionUpdateResponse;
 use Telnyx\AI\Assistants\VoiceSettings;
 use Telnyx\AI\Assistants\WebhookTool;
 use Telnyx\Client;
@@ -55,7 +53,7 @@ final class VersionsService implements VersionsContract
         $assistantID,
         $includeMcpServers = omit,
         ?RequestOptions $requestOptions = null,
-    ): VersionGetResponse {
+    ): InferenceEmbedding {
         $params = [
             'assistantID' => $assistantID, 'includeMcpServers' => $includeMcpServers,
         ];
@@ -74,7 +72,7 @@ final class VersionsService implements VersionsContract
         string $versionID,
         array $params,
         ?RequestOptions $requestOptions = null
-    ): VersionGetResponse {
+    ): InferenceEmbedding {
         [$parsed, $options] = VersionRetrieveParams::parseRequest(
             $params,
             $requestOptions
@@ -88,7 +86,7 @@ final class VersionsService implements VersionsContract
             path: ['ai/assistants/%1$s/versions/%2$s', $assistantID, $versionID],
             query: $parsed,
             options: $options,
-            convert: VersionGetResponse::class,
+            convert: InferenceEmbedding::class,
         );
     }
 
@@ -138,7 +136,7 @@ final class VersionsService implements VersionsContract
         $transcription = omit,
         $voiceSettings = omit,
         ?RequestOptions $requestOptions = null,
-    ): VersionUpdateResponse {
+    ): InferenceEmbedding {
         $params = [
             'assistantID' => $assistantID,
             'description' => $description,
@@ -173,7 +171,7 @@ final class VersionsService implements VersionsContract
         string $versionID,
         array $params,
         ?RequestOptions $requestOptions = null
-    ): VersionUpdateResponse {
+    ): InferenceEmbedding {
         [$parsed, $options] = VersionUpdateParams::parseRequest(
             $params,
             $requestOptions
@@ -187,7 +185,7 @@ final class VersionsService implements VersionsContract
             path: ['ai/assistants/%1$s/versions/%2$s', $assistantID, $versionID],
             body: (object) array_diff_key($parsed, ['assistantID']),
             options: $options,
-            convert: VersionUpdateResponse::class,
+            convert: InferenceEmbedding::class,
         );
     }
 
@@ -271,7 +269,7 @@ final class VersionsService implements VersionsContract
         string $versionID,
         $assistantID,
         ?RequestOptions $requestOptions = null
-    ): VersionPromoteResponse {
+    ): InferenceEmbedding {
         $params = ['assistantID' => $assistantID];
 
         return $this->promoteRaw($versionID, $params, $requestOptions);
@@ -288,7 +286,7 @@ final class VersionsService implements VersionsContract
         string $versionID,
         array $params,
         ?RequestOptions $requestOptions = null
-    ): VersionPromoteResponse {
+    ): InferenceEmbedding {
         [$parsed, $options] = VersionPromoteParams::parseRequest(
             $params,
             $requestOptions
@@ -303,7 +301,7 @@ final class VersionsService implements VersionsContract
                 'ai/assistants/%1$s/versions/%2$s/promote', $assistantID, $versionID,
             ],
             options: $options,
-            convert: VersionPromoteResponse::class,
+            convert: InferenceEmbedding::class,
         );
     }
 }
