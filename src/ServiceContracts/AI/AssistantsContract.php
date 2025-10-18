@@ -5,17 +5,15 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\AI;
 
 use Telnyx\AI\Assistants\AssistantChatResponse;
-use Telnyx\AI\Assistants\AssistantCloneResponse;
 use Telnyx\AI\Assistants\AssistantDeleteResponse;
-use Telnyx\AI\Assistants\AssistantGetResponse;
 use Telnyx\AI\Assistants\AssistantImportParams\Provider;
-use Telnyx\AI\Assistants\AssistantNewResponse;
 use Telnyx\AI\Assistants\AssistantsList;
 use Telnyx\AI\Assistants\AssistantTool\DtmfTool;
 use Telnyx\AI\Assistants\AssistantTool\HandoffTool;
 use Telnyx\AI\Assistants\AssistantTool\SipReferTool;
 use Telnyx\AI\Assistants\EnabledFeatures;
 use Telnyx\AI\Assistants\HangupTool;
+use Telnyx\AI\Assistants\InferenceEmbedding;
 use Telnyx\AI\Assistants\InsightSettings;
 use Telnyx\AI\Assistants\MessagingSettings;
 use Telnyx\AI\Assistants\PrivacySettings;
@@ -73,7 +71,7 @@ interface AssistantsContract
         $transcription = omit,
         $voiceSettings = omit,
         ?RequestOptions $requestOptions = null,
-    ): AssistantNewResponse;
+    ): InferenceEmbedding;
 
     /**
      * @api
@@ -85,7 +83,7 @@ interface AssistantsContract
     public function createRaw(
         array $params,
         ?RequestOptions $requestOptions = null
-    ): AssistantNewResponse;
+    ): InferenceEmbedding;
 
     /**
      * @api
@@ -104,7 +102,7 @@ interface AssistantsContract
         $from = omit,
         $to = omit,
         ?RequestOptions $requestOptions = null,
-    ): AssistantGetResponse;
+    ): InferenceEmbedding;
 
     /**
      * @api
@@ -117,7 +115,7 @@ interface AssistantsContract
         string $assistantID,
         array $params,
         ?RequestOptions $requestOptions = null,
-    ): AssistantGetResponse;
+    ): InferenceEmbedding;
 
     /**
      * @api
@@ -235,7 +233,7 @@ interface AssistantsContract
     public function clone(
         string $assistantID,
         ?RequestOptions $requestOptions = null
-    ): AssistantCloneResponse;
+    ): InferenceEmbedding;
 
     /**
      * @api

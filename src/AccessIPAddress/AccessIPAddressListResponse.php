@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Telnyx\AccessIPAddress;
 
-use Telnyx\AccessIPAddress\AccessIPAddressListResponse\Meta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkResponse;
@@ -13,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type access_ip_address_list_response = array{
- *   data: list<AccessIPAddressResponse>, meta: Meta
+ *   data: list<AccessIPAddressResponse>, meta: PaginationMetaCloudflareIPListSync
  * }
  */
 final class AccessIPAddressListResponse implements BaseModel, ResponseConverter
@@ -28,7 +27,7 @@ final class AccessIPAddressListResponse implements BaseModel, ResponseConverter
     public array $data;
 
     #[Api]
-    public Meta $meta;
+    public PaginationMetaCloudflareIPListSync $meta;
 
     /**
      * `new AccessIPAddressListResponse()` is missing required properties by the API.
@@ -56,8 +55,10 @@ final class AccessIPAddressListResponse implements BaseModel, ResponseConverter
      *
      * @param list<AccessIPAddressResponse> $data
      */
-    public static function with(array $data, Meta $meta): self
-    {
+    public static function with(
+        array $data,
+        PaginationMetaCloudflareIPListSync $meta
+    ): self {
         $obj = new self;
 
         $obj->data = $data;
@@ -77,7 +78,7 @@ final class AccessIPAddressListResponse implements BaseModel, ResponseConverter
         return $obj;
     }
 
-    public function withMeta(Meta $meta): self
+    public function withMeta(PaginationMetaCloudflareIPListSync $meta): self
     {
         $obj = clone $this;
         $obj->meta = $meta;

@@ -7,11 +7,11 @@ namespace Telnyx\PhoneNumberBlocks\Jobs\Job;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\PhoneNumberBlocks\Jobs\Job\FailedOperation\Error;
+use Telnyx\PhoneNumberBlocks\Jobs\JobError;
 
 /**
  * @phpstan-type failed_operation = array{
- *   id?: string, errors?: list<Error>, phoneNumber?: string
+ *   id?: string, errors?: list<JobError>, phoneNumber?: string
  * }
  */
 final class FailedOperation implements BaseModel
@@ -25,8 +25,8 @@ final class FailedOperation implements BaseModel
     #[Api(optional: true)]
     public ?string $id;
 
-    /** @var list<Error>|null $errors */
-    #[Api(list: Error::class, optional: true)]
+    /** @var list<JobError>|null $errors */
+    #[Api(list: JobError::class, optional: true)]
     public ?array $errors;
 
     /**
@@ -45,7 +45,7 @@ final class FailedOperation implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Error> $errors
+     * @param list<JobError> $errors
      */
     public static function with(
         ?string $id = null,
@@ -73,7 +73,7 @@ final class FailedOperation implements BaseModel
     }
 
     /**
-     * @param list<Error> $errors
+     * @param list<JobError> $errors
      */
     public function withErrors(array $errors): self
     {

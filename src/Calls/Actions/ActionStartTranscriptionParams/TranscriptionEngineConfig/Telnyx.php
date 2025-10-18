@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig;
 
-use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\Telnyx\Language;
 use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\Telnyx\TranscriptionEngine;
 use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\Telnyx\TranscriptionModel;
+use Telnyx\Calls\Actions\TelnyxTranscriptionLanguage;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type telnyx_alias = array{
- *   language?: value-of<Language>,
+ *   language?: value-of<TelnyxTranscriptionLanguage>,
  *   transcriptionEngine?: value-of<TranscriptionEngine>,
  *   transcriptionModel?: value-of<TranscriptionModel>,
  * }
@@ -26,9 +26,9 @@ final class Telnyx implements BaseModel
     /**
      * Language to use for speech recognition.
      *
-     * @var value-of<Language>|null $language
+     * @var value-of<TelnyxTranscriptionLanguage>|null $language
      */
-    #[Api(enum: Language::class, optional: true)]
+    #[Api(enum: TelnyxTranscriptionLanguage::class, optional: true)]
     public ?string $language;
 
     /**
@@ -61,12 +61,12 @@ final class Telnyx implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Language|value-of<Language> $language
+     * @param TelnyxTranscriptionLanguage|value-of<TelnyxTranscriptionLanguage> $language
      * @param TranscriptionEngine|value-of<TranscriptionEngine> $transcriptionEngine
      * @param TranscriptionModel|value-of<TranscriptionModel> $transcriptionModel
      */
     public static function with(
-        Language|string|null $language = null,
+        TelnyxTranscriptionLanguage|string|null $language = null,
         TranscriptionEngine|string|null $transcriptionEngine = null,
         TranscriptionModel|string|null $transcriptionModel = null,
     ): self {
@@ -82,10 +82,11 @@ final class Telnyx implements BaseModel
     /**
      * Language to use for speech recognition.
      *
-     * @param Language|value-of<Language> $language
+     * @param TelnyxTranscriptionLanguage|value-of<TelnyxTranscriptionLanguage> $language
      */
-    public function withLanguage(Language|string $language): self
-    {
+    public function withLanguage(
+        TelnyxTranscriptionLanguage|string $language
+    ): self {
         $obj = clone $this;
         $obj['language'] = $language;
 

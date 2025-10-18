@@ -10,6 +10,7 @@ use Telnyx\AI\Assistants\AssistantTool\HandoffTool;
 use Telnyx\AI\Assistants\AssistantTool\SipReferTool;
 use Telnyx\AI\Assistants\EnabledFeatures;
 use Telnyx\AI\Assistants\HangupTool;
+use Telnyx\AI\Assistants\InferenceEmbedding;
 use Telnyx\AI\Assistants\InsightSettings;
 use Telnyx\AI\Assistants\MessagingSettings;
 use Telnyx\AI\Assistants\PrivacySettings;
@@ -17,9 +18,6 @@ use Telnyx\AI\Assistants\RetrievalTool;
 use Telnyx\AI\Assistants\TelephonySettings;
 use Telnyx\AI\Assistants\TranscriptionSettings;
 use Telnyx\AI\Assistants\TransferTool;
-use Telnyx\AI\Assistants\Versions\VersionGetResponse;
-use Telnyx\AI\Assistants\Versions\VersionPromoteResponse;
-use Telnyx\AI\Assistants\Versions\VersionUpdateResponse;
 use Telnyx\AI\Assistants\VoiceSettings;
 use Telnyx\AI\Assistants\WebhookTool;
 use Telnyx\Core\Exceptions\APIException;
@@ -42,7 +40,7 @@ interface VersionsContract
         $assistantID,
         $includeMcpServers = omit,
         ?RequestOptions $requestOptions = null,
-    ): VersionGetResponse;
+    ): InferenceEmbedding;
 
     /**
      * @api
@@ -55,7 +53,7 @@ interface VersionsContract
         string $versionID,
         array $params,
         ?RequestOptions $requestOptions = null
-    ): VersionGetResponse;
+    ): InferenceEmbedding;
 
     /**
      * @api
@@ -101,7 +99,7 @@ interface VersionsContract
         $transcription = omit,
         $voiceSettings = omit,
         ?RequestOptions $requestOptions = null,
-    ): VersionUpdateResponse;
+    ): InferenceEmbedding;
 
     /**
      * @api
@@ -114,7 +112,7 @@ interface VersionsContract
         string $versionID,
         array $params,
         ?RequestOptions $requestOptions = null
-    ): VersionUpdateResponse;
+    ): InferenceEmbedding;
 
     /**
      * @api
@@ -163,7 +161,7 @@ interface VersionsContract
         string $versionID,
         $assistantID,
         ?RequestOptions $requestOptions = null
-    ): VersionPromoteResponse;
+    ): InferenceEmbedding;
 
     /**
      * @api
@@ -176,5 +174,5 @@ interface VersionsContract
         string $versionID,
         array $params,
         ?RequestOptions $requestOptions = null
-    ): VersionPromoteResponse;
+    ): InferenceEmbedding;
 }

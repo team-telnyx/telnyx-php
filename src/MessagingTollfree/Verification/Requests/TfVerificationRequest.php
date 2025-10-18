@@ -7,7 +7,6 @@ namespace Telnyx\MessagingTollfree\Verification\Requests;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\MessagingTollfree\Verification\Requests\TfVerificationRequest\EntityType;
 
 /**
  * The body of a tollfree verification request.
@@ -38,7 +37,7 @@ use Telnyx\MessagingTollfree\Verification\Requests\TfVerificationRequest\EntityT
  *   businessRegistrationNumber?: string|null,
  *   businessRegistrationType?: string|null,
  *   doingBusinessAs?: string|null,
- *   entityType?: value-of<EntityType>|null,
+ *   entityType?: value-of<TollFreeVerificationEntityType>|null,
  *   helpMessageResponse?: string|null,
  *   optInConfirmationResponse?: string|null,
  *   optInKeywords?: string|null,
@@ -213,9 +212,13 @@ final class TfVerificationRequest implements BaseModel
     /**
      * Business entity classification.
      *
-     * @var value-of<EntityType>|null $entityType
+     * @var value-of<TollFreeVerificationEntityType>|null $entityType
      */
-    #[Api(enum: EntityType::class, nullable: true, optional: true)]
+    #[Api(
+        enum: TollFreeVerificationEntityType::class,
+        nullable: true,
+        optional: true
+    )]
     public ?string $entityType;
 
     /**
@@ -321,7 +324,7 @@ final class TfVerificationRequest implements BaseModel
      * @param list<URL> $optInWorkflowImageURLs
      * @param list<TfPhoneNumber> $phoneNumbers
      * @param UseCaseCategories|value-of<UseCaseCategories> $useCase
-     * @param EntityType|value-of<EntityType>|null $entityType
+     * @param TollFreeVerificationEntityType|value-of<TollFreeVerificationEntityType>|null $entityType
      */
     public static function with(
         string $additionalInformation,
@@ -349,7 +352,7 @@ final class TfVerificationRequest implements BaseModel
         ?string $businessRegistrationNumber = null,
         ?string $businessRegistrationType = null,
         ?string $doingBusinessAs = null,
-        EntityType|string|null $entityType = null,
+        TollFreeVerificationEntityType|string|null $entityType = null,
         ?string $helpMessageResponse = null,
         ?string $optInConfirmationResponse = null,
         ?string $optInKeywords = null,
@@ -690,10 +693,11 @@ final class TfVerificationRequest implements BaseModel
     /**
      * Business entity classification.
      *
-     * @param EntityType|value-of<EntityType>|null $entityType
+     * @param TollFreeVerificationEntityType|value-of<TollFreeVerificationEntityType>|null $entityType
      */
-    public function withEntityType(EntityType|string|null $entityType): self
-    {
+    public function withEntityType(
+        TollFreeVerificationEntityType|string|null $entityType
+    ): self {
         $obj = clone $this;
         $obj['entityType'] = $entityType;
 

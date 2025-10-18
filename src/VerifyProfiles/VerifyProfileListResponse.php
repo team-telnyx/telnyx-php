@@ -9,13 +9,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
-use Telnyx\VerifyProfiles\VerifyProfileListResponse\Meta;
+use Telnyx\Verifications\ByPhoneNumber\VerifyMeta;
 
 /**
  * A paginated list of Verify profiles.
  *
  * @phpstan-type verify_profile_list_response = array{
- *   data: list<VerifyProfile>, meta: Meta
+ *   data: list<VerifyProfile>, meta: VerifyMeta
  * }
  */
 final class VerifyProfileListResponse implements BaseModel, ResponseConverter
@@ -30,7 +30,7 @@ final class VerifyProfileListResponse implements BaseModel, ResponseConverter
     public array $data;
 
     #[Api]
-    public Meta $meta;
+    public VerifyMeta $meta;
 
     /**
      * `new VerifyProfileListResponse()` is missing required properties by the API.
@@ -58,7 +58,7 @@ final class VerifyProfileListResponse implements BaseModel, ResponseConverter
      *
      * @param list<VerifyProfile> $data
      */
-    public static function with(array $data, Meta $meta): self
+    public static function with(array $data, VerifyMeta $meta): self
     {
         $obj = new self;
 
@@ -79,7 +79,7 @@ final class VerifyProfileListResponse implements BaseModel, ResponseConverter
         return $obj;
     }
 
-    public function withMeta(Meta $meta): self
+    public function withMeta(VerifyMeta $meta): self
     {
         $obj = clone $this;
         $obj->meta = $meta;

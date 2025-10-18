@@ -9,11 +9,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
-use Telnyx\OAuthGrants\OAuthGrantListResponse\Meta;
+use Telnyx\OAuthClients\PaginationMetaOAuth;
 
 /**
  * @phpstan-type oauth_grant_list_response = array{
- *   data?: list<OAuthGrant>, meta?: Meta
+ *   data?: list<OAuthGrant>, meta?: PaginationMetaOAuth
  * }
  */
 final class OAuthGrantListResponse implements BaseModel, ResponseConverter
@@ -28,7 +28,7 @@ final class OAuthGrantListResponse implements BaseModel, ResponseConverter
     public ?array $data;
 
     #[Api(optional: true)]
-    public ?Meta $meta;
+    public ?PaginationMetaOAuth $meta;
 
     public function __construct()
     {
@@ -42,8 +42,10 @@ final class OAuthGrantListResponse implements BaseModel, ResponseConverter
      *
      * @param list<OAuthGrant> $data
      */
-    public static function with(?array $data = null, ?Meta $meta = null): self
-    {
+    public static function with(
+        ?array $data = null,
+        ?PaginationMetaOAuth $meta = null
+    ): self {
         $obj = new self;
 
         null !== $data && $obj->data = $data;
@@ -63,7 +65,7 @@ final class OAuthGrantListResponse implements BaseModel, ResponseConverter
         return $obj;
     }
 
-    public function withMeta(Meta $meta): self
+    public function withMeta(PaginationMetaOAuth $meta): self
     {
         $obj = clone $this;
         $obj->meta = $meta;

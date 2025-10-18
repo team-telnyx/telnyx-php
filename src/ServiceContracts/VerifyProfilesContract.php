@@ -6,6 +6,7 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
+use Telnyx\VerifyProfiles\MessageTemplate;
 use Telnyx\VerifyProfiles\VerifyProfileCreateParams\Call;
 use Telnyx\VerifyProfiles\VerifyProfileCreateParams\Flashcall;
 use Telnyx\VerifyProfiles\VerifyProfileCreateParams\SMS;
@@ -14,8 +15,6 @@ use Telnyx\VerifyProfiles\VerifyProfileGetTemplatesResponse;
 use Telnyx\VerifyProfiles\VerifyProfileListParams\Filter;
 use Telnyx\VerifyProfiles\VerifyProfileListParams\Page;
 use Telnyx\VerifyProfiles\VerifyProfileListResponse;
-use Telnyx\VerifyProfiles\VerifyProfileNewTemplateResponse;
-use Telnyx\VerifyProfiles\VerifyProfileUpdateTemplateResponse;
 
 use const Telnyx\Core\OMIT as omit;
 
@@ -151,7 +150,7 @@ interface VerifyProfilesContract
     public function createTemplate(
         $text,
         ?RequestOptions $requestOptions = null
-    ): VerifyProfileNewTemplateResponse;
+    ): MessageTemplate;
 
     /**
      * @api
@@ -163,7 +162,7 @@ interface VerifyProfilesContract
     public function createTemplateRaw(
         array $params,
         ?RequestOptions $requestOptions = null
-    ): VerifyProfileNewTemplateResponse;
+    ): MessageTemplate;
 
     /**
      * @api
@@ -185,7 +184,7 @@ interface VerifyProfilesContract
         string $templateID,
         $text,
         ?RequestOptions $requestOptions = null
-    ): VerifyProfileUpdateTemplateResponse;
+    ): MessageTemplate;
 
     /**
      * @api
@@ -198,5 +197,5 @@ interface VerifyProfilesContract
         string $templateID,
         array $params,
         ?RequestOptions $requestOptions = null,
-    ): VerifyProfileUpdateTemplateResponse;
+    ): MessageTemplate;
 }

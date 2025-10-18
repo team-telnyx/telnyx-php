@@ -9,11 +9,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
-use Telnyx\Legacy\Reporting\UsageReports\Voice\VoiceListResponse\Meta;
+use Telnyx\Legacy\Reporting\UsageReports\Messaging\StandardPaginationMeta;
 
 /**
  * @phpstan-type voice_list_response = array{
- *   data?: list<CdrUsageReportResponseLegacy>, meta?: Meta
+ *   data?: list<CdrUsageReportResponseLegacy>, meta?: StandardPaginationMeta
  * }
  */
 final class VoiceListResponse implements BaseModel, ResponseConverter
@@ -28,7 +28,7 @@ final class VoiceListResponse implements BaseModel, ResponseConverter
     public ?array $data;
 
     #[Api(optional: true)]
-    public ?Meta $meta;
+    public ?StandardPaginationMeta $meta;
 
     public function __construct()
     {
@@ -42,8 +42,10 @@ final class VoiceListResponse implements BaseModel, ResponseConverter
      *
      * @param list<CdrUsageReportResponseLegacy> $data
      */
-    public static function with(?array $data = null, ?Meta $meta = null): self
-    {
+    public static function with(
+        ?array $data = null,
+        ?StandardPaginationMeta $meta = null
+    ): self {
         $obj = new self;
 
         null !== $data && $obj->data = $data;
@@ -63,7 +65,7 @@ final class VoiceListResponse implements BaseModel, ResponseConverter
         return $obj;
     }
 
-    public function withMeta(Meta $meta): self
+    public function withMeta(StandardPaginationMeta $meta): self
     {
         $obj = clone $this;
         $obj->meta = $meta;

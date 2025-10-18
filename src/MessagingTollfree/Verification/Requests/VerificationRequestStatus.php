@@ -9,7 +9,6 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
-use Telnyx\MessagingTollfree\Verification\Requests\VerificationRequestStatus\EntityType;
 
 /**
  * A verification request and its status, suitable for returning to users.
@@ -43,7 +42,7 @@ use Telnyx\MessagingTollfree\Verification\Requests\VerificationRequestStatus\Ent
  *   businessRegistrationType?: string,
  *   createdAt?: \DateTimeInterface,
  *   doingBusinessAs?: string,
- *   entityType?: value-of<EntityType>,
+ *   entityType?: value-of<TollFreeVerificationEntityType>,
  *   helpMessageResponse?: string,
  *   optInConfirmationResponse?: string,
  *   optInKeywords?: string,
@@ -165,9 +164,9 @@ final class VerificationRequestStatus implements BaseModel, ResponseConverter
     /**
      * Business entity classification.
      *
-     * @var value-of<EntityType>|null $entityType
+     * @var value-of<TollFreeVerificationEntityType>|null $entityType
      */
-    #[Api(enum: EntityType::class, optional: true)]
+    #[Api(enum: TollFreeVerificationEntityType::class, optional: true)]
     public ?string $entityType;
 
     #[Api(optional: true)]
@@ -266,7 +265,7 @@ final class VerificationRequestStatus implements BaseModel, ResponseConverter
      * @param list<TfPhoneNumber> $phoneNumbers
      * @param UseCaseCategories|value-of<UseCaseCategories> $useCase
      * @param TfVerificationStatus|value-of<TfVerificationStatus> $verificationStatus
-     * @param EntityType|value-of<EntityType> $entityType
+     * @param TollFreeVerificationEntityType|value-of<TollFreeVerificationEntityType> $entityType
      */
     public static function with(
         string $id,
@@ -297,7 +296,7 @@ final class VerificationRequestStatus implements BaseModel, ResponseConverter
         ?string $businessRegistrationType = null,
         ?\DateTimeInterface $createdAt = null,
         ?string $doingBusinessAs = null,
-        EntityType|string|null $entityType = null,
+        TollFreeVerificationEntityType|string|null $entityType = null,
         ?string $helpMessageResponse = null,
         ?string $optInConfirmationResponse = null,
         ?string $optInKeywords = null,
@@ -608,10 +607,11 @@ final class VerificationRequestStatus implements BaseModel, ResponseConverter
     /**
      * Business entity classification.
      *
-     * @param EntityType|value-of<EntityType> $entityType
+     * @param TollFreeVerificationEntityType|value-of<TollFreeVerificationEntityType> $entityType
      */
-    public function withEntityType(EntityType|string $entityType): self
-    {
+    public function withEntityType(
+        TollFreeVerificationEntityType|string $entityType
+    ): self {
         $obj = clone $this;
         $obj['entityType'] = $entityType;
 
