@@ -1,5 +1,13 @@
 # Changelog
 
+## 4.2.0 (2025-10-18)
+
+Full Changelog: [v4.1.0...v4.2.0](https://github.com/team-telnyx/telnyx-php/compare/v4.1.0...v4.2.0)
+
+### Features
+
+* define more models ([e2a13b6](https://github.com/team-telnyx/telnyx-php/commit/e2a13b63a9e2a623ebb8414cd5e9907aaca2e1b3))
+
 ## 4.1.0 (2025-10-16)
 
 Full Changelog: [v4.0.0...v4.1.0](https://github.com/team-telnyx/telnyx-php/compare/v4.0.0...v4.1.0)
