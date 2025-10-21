@@ -165,6 +165,8 @@ class Client extends BaseClient
 {
     public string $apiKey;
 
+    public string $publicKey;
+
     public bool $baseUrlOverridden;
 
     /**
@@ -932,9 +934,13 @@ class Client extends BaseClient
      */
     public WellKnownService $wellKnown;
 
-    public function __construct(?string $apiKey = null, ?string $baseUrl = null)
-    {
+    public function __construct(
+        ?string $apiKey = null,
+        ?string $publicKey = null,
+        ?string $baseUrl = null
+    ) {
         $this->apiKey = (string) ($apiKey ?? getenv('TELNYX_API_KEY'));
+        $this->publicKey = (string) ($publicKey ?? getenv('TELNYX_PUBLIC_KEY'));
 
         $this->baseUrlOverridden = !is_null($baseUrl);
 
