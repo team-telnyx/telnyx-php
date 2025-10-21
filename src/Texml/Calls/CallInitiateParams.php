@@ -20,18 +20,7 @@ use Telnyx\Texml\Calls\CallInitiateParams\Trim;
 use Telnyx\Texml\Calls\CallInitiateParams\URLMethod;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new CallInitiateParams); // set properties as needed
- * $client->texml.calls->initiate(...$params->toArray());
- * ```
  * Initiate an outbound TeXML call. Telnyx will request TeXML from the XML Request URL configured for the connection in the Mission Control Portal.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->texml.calls->initiate(...$params->toArray());`
  *
  * @see Telnyx\Texml\Calls->initiate
  *

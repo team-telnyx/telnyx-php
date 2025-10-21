@@ -12,18 +12,7 @@ use Telnyx\TelephonyCredentials\TelephonyCredentialListParams\Filter;
 use Telnyx\TelephonyCredentials\TelephonyCredentialListParams\Page;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new TelephonyCredentialListParams); // set properties as needed
- * $client->telephonyCredentials->list(...$params->toArray());
- * ```
  * List all On-demand Credentials.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->telephonyCredentials->list(...$params->toArray());`
  *
  * @see Telnyx\TelephonyCredentials->list
  *

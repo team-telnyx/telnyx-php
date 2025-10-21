@@ -12,18 +12,7 @@ use Telnyx\Portouts\Reports\ReportListParams\Filter;
 use Telnyx\Portouts\Reports\ReportListParams\Page;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ReportListParams); // set properties as needed
- * $client->portouts.reports->list(...$params->toArray());
- * ```
  * List the reports generated about port-out operations.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->portouts.reports->list(...$params->toArray());`
  *
  * @see Telnyx\Portouts\Reports->list
  *

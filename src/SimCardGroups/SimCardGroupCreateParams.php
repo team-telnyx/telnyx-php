@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SimCardGroups\SimCardGroupCreateParams\DataLimit;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new SimCardGroupCreateParams); // set properties as needed
- * $client->simCardGroups->create(...$params->toArray());
- * ```
  * Creates a new SIM card group object.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->simCardGroups->create(...$params->toArray());`
  *
  * @see Telnyx\SimCardGroups->create
  *

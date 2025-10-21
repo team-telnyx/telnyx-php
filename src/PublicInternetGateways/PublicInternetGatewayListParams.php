@@ -12,18 +12,7 @@ use Telnyx\PublicInternetGateways\PublicInternetGatewayListParams\Filter;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayListParams\Page;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new PublicInternetGatewayListParams); // set properties as needed
- * $client->publicInternetGateways->list(...$params->toArray());
- * ```
  * List all Public Internet Gateways.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->publicInternetGateways->list(...$params->toArray());`
  *
  * @see Telnyx\PublicInternetGateways->list
  *

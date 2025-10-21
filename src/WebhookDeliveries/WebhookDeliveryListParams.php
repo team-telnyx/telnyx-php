@@ -12,18 +12,7 @@ use Telnyx\WebhookDeliveries\WebhookDeliveryListParams\Filter;
 use Telnyx\WebhookDeliveries\WebhookDeliveryListParams\Page;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new WebhookDeliveryListParams); // set properties as needed
- * $client->webhookDeliveries->list(...$params->toArray());
- * ```
  * Lists webhook_deliveries for the authenticated user.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->webhookDeliveries->list(...$params->toArray());`
  *
  * @see Telnyx\WebhookDeliveries->list
  *

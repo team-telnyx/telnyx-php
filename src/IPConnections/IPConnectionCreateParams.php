@@ -17,18 +17,7 @@ use Telnyx\IPConnections\IPConnectionCreateParams\TransportProtocol;
 use Telnyx\IPConnections\IPConnectionCreateParams\WebhookAPIVersion;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new IPConnectionCreateParams); // set properties as needed
- * $client->ipConnections->create(...$params->toArray());
- * ```
  * Creates an IP connection.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->ipConnections->create(...$params->toArray());`
  *
  * @see Telnyx\IPConnections->create
  *

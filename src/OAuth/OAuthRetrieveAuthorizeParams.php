@@ -12,18 +12,7 @@ use Telnyx\OAuth\OAuthRetrieveAuthorizeParams\CodeChallengeMethod;
 use Telnyx\OAuth\OAuthRetrieveAuthorizeParams\ResponseType;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new OAuthRetrieveAuthorizeParams); // set properties as needed
- * $client->oauth->retrieveAuthorize(...$params->toArray());
- * ```
  * OAuth 2.0 authorization endpoint for the authorization code flow.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->oauth->retrieveAuthorize(...$params->toArray());`
  *
  * @see Telnyx\OAuth->retrieveAuthorize
  *

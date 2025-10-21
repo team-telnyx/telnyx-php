@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Messages\MessageSendLongCodeParams\Type;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new MessageSendLongCodeParams); // set properties as needed
- * $client->messages->sendLongCode(...$params->toArray());
- * ```
  * Send a long code message.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->messages->sendLongCode(...$params->toArray());`
  *
  * @see Telnyx\Messages->sendLongCode
  *

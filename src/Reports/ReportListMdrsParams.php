@@ -13,18 +13,7 @@ use Telnyx\Reports\ReportListMdrsParams\MessageType;
 use Telnyx\Reports\ReportListMdrsParams\Status;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ReportListMdrsParams); // set properties as needed
- * $client->reports->listMdrs(...$params->toArray());
- * ```
  * Fetch all Mdr records.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->reports->listMdrs(...$params->toArray());`
  *
  * @see Telnyx\Reports->listMdrs
  *

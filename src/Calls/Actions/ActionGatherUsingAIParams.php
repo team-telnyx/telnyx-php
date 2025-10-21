@@ -13,12 +13,6 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ActionGatherUsingAIParams); // set properties as needed
- * $client->calls.actions->gatherUsingAI(...$params->toArray());
- * ```
  * Gather parameters defined in the request payload using a voice assistant.
  *
  *  You can pass parameters described as a JSON Schema object and the voice assistant will attempt to gather these informations.
@@ -29,11 +23,6 @@ use Telnyx\Core\Contracts\BaseModel;
  * - `call.conversation.ended`
  * - `call.ai_gather.partial_results` (if `send_partial_results` is set to `true`)
  * - `call.ai_gather.message_history_updated` (if `send_message_history_updates` is set to `true`)
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->calls.actions->gatherUsingAI(...$params->toArray());`
  *
  * @see Telnyx\Calls\Actions->gatherUsingAI
  *

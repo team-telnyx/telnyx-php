@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ParticipantRetrieveParams); // set properties as needed
- * $client->texml.accounts.conferences.participants->retrieve(...$params->toArray());
- * ```
  * Gets conference participant resource.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->texml.accounts.conferences.participants->retrieve(...$params->toArray());`
  *
  * @see Telnyx\Texml\Accounts\Conferences\Participants->retrieve
  *

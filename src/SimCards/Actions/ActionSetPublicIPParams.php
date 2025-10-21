@@ -10,20 +10,9 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ActionSetPublicIPParams); // set properties as needed
- * $client->simCards.actions->setPublicIP(...$params->toArray());
- * ```
  * This API makes a SIM card reachable on the public internet by mapping a random public IP to the SIM card. <br/><br/>
  *  The API will trigger an asynchronous operation called a SIM Card Action. The status of the SIM Card Action can be followed through the [List SIM Card Action](https://developers.telnyx.com/api/wireless/list-sim-card-actions) API. <br/><br/>
  *  Setting a Public IP to a SIM Card incurs a charge and will only succeed if the account has sufficient funds.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->simCards.actions->setPublicIP(...$params->toArray());`
  *
  * @see Telnyx\SimCards\Actions->setPublicIP
  *

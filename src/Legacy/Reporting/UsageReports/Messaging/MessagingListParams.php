@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new MessagingListParams); // set properties as needed
- * $client->legacy.reporting.usageReports.messaging->list(...$params->toArray());
- * ```
  * Fetch all previous requests for MDR usage reports.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->legacy.reporting.usageReports.messaging->list(...$params->toArray());`
  *
  * @see Telnyx\Legacy\Reporting\UsageReports\Messaging->list
  *

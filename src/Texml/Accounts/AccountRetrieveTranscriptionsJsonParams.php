@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new AccountRetrieveTranscriptionsJsonParams); // set properties as needed
- * $client->texml.accounts->retrieveTranscriptionsJson(...$params->toArray());
- * ```
  * Returns multiple recording transcription resources for an account.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->texml.accounts->retrieveTranscriptionsJson(...$params->toArray());`
  *
  * @see Telnyx\Texml\Accounts->retrieveTranscriptionsJson
  *

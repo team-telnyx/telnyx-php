@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new BillingBundleRetrieveParams); // set properties as needed
- * $client->bundlePricing.billingBundles->retrieve(...$params->toArray());
- * ```
  * Get a single bundle by ID.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->bundlePricing.billingBundles->retrieve(...$params->toArray());`
  *
  * @see Telnyx\BundlePricing\BillingBundles->retrieve
  *

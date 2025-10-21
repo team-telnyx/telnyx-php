@@ -12,18 +12,7 @@ use Telnyx\Faxes\FaxListParams\Filter;
 use Telnyx\Faxes\FaxListParams\Page;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new FaxListParams); // set properties as needed
- * $client->faxes->list(...$params->toArray());
- * ```
  * View a list of faxes.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->faxes->list(...$params->toArray());`
  *
  * @see Telnyx\Faxes->list
  *

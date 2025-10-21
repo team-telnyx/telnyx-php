@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberListParams\Filter;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new NumberOrderPhoneNumberListParams); // set properties as needed
- * $client->numberOrderPhoneNumbers->list(...$params->toArray());
- * ```
  * Get a list of phone numbers associated to orders.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->numberOrderPhoneNumbers->list(...$params->toArray());`
  *
  * @see Telnyx\NumberOrderPhoneNumbers->list
  *

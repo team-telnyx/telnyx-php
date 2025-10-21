@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new CommentCreateParams); // set properties as needed
- * $client->portouts.comments->create(...$params->toArray());
- * ```
  * Creates a comment on a portout request.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->portouts.comments->create(...$params->toArray());`
  *
  * @see Telnyx\Portouts\Comments->create
  *

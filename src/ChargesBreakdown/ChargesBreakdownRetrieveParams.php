@@ -11,18 +11,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ChargesBreakdownRetrieveParams); // set properties as needed
- * $client->chargesBreakdown->retrieve(...$params->toArray());
- * ```
  * Retrieve a detailed breakdown of monthly charges for phone numbers in a specified date range. The date range cannot exceed 31 days.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->chargesBreakdown->retrieve(...$params->toArray());`
  *
  * @see Telnyx\ChargesBreakdown->retrieve
  *

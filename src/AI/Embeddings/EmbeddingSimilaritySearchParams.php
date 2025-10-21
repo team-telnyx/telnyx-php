@@ -10,12 +10,6 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new EmbeddingSimilaritySearchParams); // set properties as needed
- * $client->ai.embeddings->similaritySearch(...$params->toArray());
- * ```
  * Perform a similarity search on a Telnyx Storage Bucket, returning the most similar `num_docs` document chunks to the query.
  *
  * Currently the only available distance metric is cosine similarity which will return a `distance` between 0 and 1.
@@ -25,11 +19,6 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * If a bucket was embedded using a custom loader, such as `intercom`, the additional metadata will be returned in the
  * `loader_metadata` field.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->ai.embeddings->similaritySearch(...$params->toArray());`
  *
  * @see Telnyx\AI\Embeddings->similaritySearch
  *

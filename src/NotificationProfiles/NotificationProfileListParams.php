@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NotificationProfiles\NotificationProfileListParams\Page;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new NotificationProfileListParams); // set properties as needed
- * $client->notificationProfiles->list(...$params->toArray());
- * ```
  * Returns a list of your notifications profiles.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->notificationProfiles->list(...$params->toArray());`
  *
  * @see Telnyx\NotificationProfiles->list
  *

@@ -13,18 +13,7 @@ use Telnyx\TexmlApplications\TexmlApplicationListParams\Page;
 use Telnyx\TexmlApplications\TexmlApplicationListParams\Sort;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new TexmlApplicationListParams); // set properties as needed
- * $client->texmlApplications->list(...$params->toArray());
- * ```
  * Returns a list of your TeXML Applications.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->texmlApplications->list(...$params->toArray());`
  *
  * @see Telnyx\TexmlApplications->list
  *

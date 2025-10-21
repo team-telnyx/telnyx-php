@@ -12,18 +12,7 @@ use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigListParams\CreatedAt;
 use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigListParams\UpdatedAt;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new AutorespConfigListParams); // set properties as needed
- * $client->messagingProfiles.autorespConfigs->list(...$params->toArray());
- * ```
  * List Auto-Response Settings.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->messagingProfiles.autorespConfigs->list(...$params->toArray());`
  *
  * @see Telnyx\MessagingProfiles\AutorespConfigs->list
  *

@@ -11,12 +11,6 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ConferenceCreateParams); // set properties as needed
- * $client->conferences->create(...$params->toArray());
- * ```
  * Create a conference from an existing call leg using a `call_control_id` and a conference name. Upon creating the conference, the call will be automatically bridged to the conference. Conferences will expire after all participants have left the conference or after 4 hours regardless of the number of active participants.
  *
  * **Expected Webhooks:**
@@ -27,11 +21,6 @@ use Telnyx\Core\Contracts\BaseModel;
  * - `conference.ended`
  * - `conference.recording.saved`
  * - `conference.floor.changed`
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->conferences->create(...$params->toArray());`
  *
  * @see Telnyx\Conferences->create
  *

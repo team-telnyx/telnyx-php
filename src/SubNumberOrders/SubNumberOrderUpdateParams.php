@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NumberOrderPhoneNumbers\UpdateRegulatoryRequirement;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new SubNumberOrderUpdateParams); // set properties as needed
- * $client->subNumberOrders->update(...$params->toArray());
- * ```
  * Updates a sub number order.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->subNumberOrders->update(...$params->toArray());`
  *
  * @see Telnyx\SubNumberOrders->update
  *

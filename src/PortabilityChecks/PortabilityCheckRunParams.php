@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new PortabilityCheckRunParams); // set properties as needed
- * $client->portabilityChecks->run(...$params->toArray());
- * ```
  * Runs a portability check, returning the results immediately.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->portabilityChecks->run(...$params->toArray());`
  *
  * @see Telnyx\PortabilityChecks->run
  *

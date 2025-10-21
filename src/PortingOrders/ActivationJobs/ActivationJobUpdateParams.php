@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ActivationJobUpdateParams); // set properties as needed
- * $client->portingOrders.activationJobs->update(...$params->toArray());
- * ```
  * Updates the activation time of a porting activation job.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->portingOrders.activationJobs->update(...$params->toArray());`
  *
  * @see Telnyx\PortingOrders\ActivationJobs->update
  *

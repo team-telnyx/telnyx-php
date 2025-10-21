@@ -13,18 +13,7 @@ use Telnyx\VerifyProfiles\VerifyProfileCreateParams\Flashcall;
 use Telnyx\VerifyProfiles\VerifyProfileCreateParams\SMS;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new VerifyProfileCreateParams); // set properties as needed
- * $client->verifyProfiles->create(...$params->toArray());
- * ```
  * Creates a new Verify profile to associate verifications with.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->verifyProfiles->create(...$params->toArray());`
  *
  * @see Telnyx\VerifyProfiles->create
  *

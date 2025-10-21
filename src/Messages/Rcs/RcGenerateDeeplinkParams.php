@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new RcGenerateDeeplinkParams); // set properties as needed
- * $client->messages.rcs->generateDeeplink(...$params->toArray());
- * ```
  * Generate a deeplink URL that can be used to start an RCS conversation with a specific agent.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->messages.rcs->generateDeeplink(...$params->toArray());`
  *
  * @see Telnyx\Messages\Rcs->generateDeeplink
  *

@@ -12,18 +12,7 @@ use Telnyx\IPs\IPListParams\Filter;
 use Telnyx\IPs\IPListParams\Page;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new IPListParams); // set properties as needed
- * $client->ips->list(...$params->toArray());
- * ```
  * Get all IPs belonging to the user that match the given filters.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->ips->list(...$params->toArray());`
  *
  * @see Telnyx\IPs->list
  *

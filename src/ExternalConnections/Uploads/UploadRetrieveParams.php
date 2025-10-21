@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new UploadRetrieveParams); // set properties as needed
- * $client->externalConnections.uploads->retrieve(...$params->toArray());
- * ```
  * Return the details of an Upload request and its phone numbers.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->externalConnections.uploads->retrieve(...$params->toArray());`
  *
  * @see Telnyx\ExternalConnections\Uploads->retrieve
  *

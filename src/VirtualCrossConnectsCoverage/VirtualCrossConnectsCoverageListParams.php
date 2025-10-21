@@ -13,18 +13,7 @@ use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListParams\F
 use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListParams\Page;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new VirtualCrossConnectsCoverageListParams); // set properties as needed
- * $client->virtualCrossConnectsCoverage->list(...$params->toArray());
- * ```
  * List Virtual Cross Connects Cloud Coverage.<br /><br />This endpoint shows which cloud regions are available for the `location_code` your Virtual Cross Connect will be provisioned in.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->virtualCrossConnectsCoverage->list(...$params->toArray());`
  *
  * @see Telnyx\VirtualCrossConnectsCoverage->list
  *

@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Invoices\InvoiceRetrieveParams\Action;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new InvoiceRetrieveParams); // set properties as needed
- * $client->invoices->retrieve(...$params->toArray());
- * ```
  * Retrieve a single invoice by its unique identifier.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->invoices->retrieve(...$params->toArray());`
  *
  * @see Telnyx\Invoices->retrieve
  *

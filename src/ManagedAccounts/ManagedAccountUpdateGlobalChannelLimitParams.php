@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ManagedAccountUpdateGlobalChannelLimitParams); // set properties as needed
- * $client->managedAccounts->updateGlobalChannelLimit(...$params->toArray());
- * ```
  * Update the amount of allocatable global outbound channels allocated to a specific managed account.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->managedAccounts->updateGlobalChannelLimit(...$params->toArray());`
  *
  * @see Telnyx\ManagedAccounts->updateGlobalChannelLimit
  *

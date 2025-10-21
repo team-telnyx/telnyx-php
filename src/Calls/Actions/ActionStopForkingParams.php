@@ -11,22 +11,11 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ActionStopForkingParams); // set properties as needed
- * $client->calls.actions->stopForking(...$params->toArray());
- * ```
  * Stop forking a call.
  *
  * **Expected Webhooks:**
  *
  * - `call.fork.stopped`
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->calls.actions->stopForking(...$params->toArray());`
  *
  * @see Telnyx\Calls\Actions->stopForking
  *

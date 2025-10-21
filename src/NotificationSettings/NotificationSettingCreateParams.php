@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NotificationSettings\NotificationSettingCreateParams\Parameter;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new NotificationSettingCreateParams); // set properties as needed
- * $client->notificationSettings->create(...$params->toArray());
- * ```
  * Add a notification setting.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->notificationSettings->create(...$params->toArray());`
  *
  * @see Telnyx\NotificationSettings->create
  *

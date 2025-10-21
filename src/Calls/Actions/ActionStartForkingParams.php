@@ -11,12 +11,6 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ActionStartForkingParams); // set properties as needed
- * $client->calls.actions->startForking(...$params->toArray());
- * ```
  * Call forking allows you to stream the media from a call to a specific target in realtime.
  * This stream can be used to enable realtime audio analysis to support a
  * variety of use cases, including fraud detection, or the creation of AI-generated audio responses.
@@ -26,11 +20,6 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * - `call.fork.started`
  * - `call.fork.stopped`
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->calls.actions->startForking(...$params->toArray());`
  *
  * @see Telnyx\Calls\Actions->startForking
  *

@@ -12,18 +12,7 @@ use Telnyx\RequirementTypes\RequirementTypeListParams\Filter;
 use Telnyx\RequirementTypes\RequirementTypeListParams\Sort;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new RequirementTypeListParams); // set properties as needed
- * $client->requirementTypes->list(...$params->toArray());
- * ```
  * List all requirement types ordered by created_at descending.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->requirementTypes->list(...$params->toArray());`
  *
  * @see Telnyx\RequirementTypes->list
  *

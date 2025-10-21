@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ActionSubmitVerificationCodeParams); // set properties as needed
- * $client->verifiedNumbers.actions->submitVerificationCode(...$params->toArray());
- * ```
  * Submit verification code.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->verifiedNumbers.actions->submitVerificationCode(...$params->toArray());`
  *
  * @see Telnyx\VerifiedNumbers\Actions->submitVerificationCode
  *

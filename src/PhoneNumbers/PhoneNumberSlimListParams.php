@@ -13,18 +13,7 @@ use Telnyx\PhoneNumbers\PhoneNumberSlimListParams\Page;
 use Telnyx\PhoneNumbers\PhoneNumberSlimListParams\Sort;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new PhoneNumberSlimListParams); // set properties as needed
- * $client->phoneNumbers->slimList(...$params->toArray());
- * ```
  * List phone numbers, This endpoint is a lighter version of the /phone_numbers endpoint having higher performance and rate limit.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->phoneNumbers->slimList(...$params->toArray());`
  *
  * @see Telnyx\PhoneNumbers->slimList
  *

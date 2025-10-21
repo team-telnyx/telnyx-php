@@ -11,12 +11,6 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ActionStartPlaybackParams); // set properties as needed
- * $client->calls.actions->startPlayback(...$params->toArray());
- * ```
  * Play an audio file on the call. If multiple play audio commands are issued consecutively,
  * the audio files will be placed in a queue awaiting playback.
  *
@@ -29,11 +23,6 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * - `call.playback.started`
  * - `call.playback.ended`
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->calls.actions->startPlayback(...$params->toArray());`
  *
  * @see Telnyx\Calls\Actions->startPlayback
  *

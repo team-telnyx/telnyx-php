@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\ExternalConnections\CivicAddresses\CivicAddressListParams\Filter;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new CivicAddressListParams); // set properties as needed
- * $client->externalConnections.civicAddresses->list(...$params->toArray());
- * ```
  * Returns the civic addresses and locations from Microsoft Teams.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->externalConnections.civicAddresses->list(...$params->toArray());`
  *
  * @see Telnyx\ExternalConnections\CivicAddresses->list
  *

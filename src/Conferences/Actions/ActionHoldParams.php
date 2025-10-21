@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ActionHoldParams); // set properties as needed
- * $client->conferences.actions->hold(...$params->toArray());
- * ```
  * Hold a list of participants in a conference call.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->conferences.actions->hold(...$params->toArray());`
  *
  * @see Telnyx\Conferences\Actions->hold
  *

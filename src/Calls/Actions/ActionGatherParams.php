@@ -10,12 +10,6 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ActionGatherParams); // set properties as needed
- * $client->calls.actions->gather(...$params->toArray());
- * ```
  * Gather DTMF signals to build interactive menus.
  *
  * You can pass a list of valid digits. The `Answer` command must be issued before the `gather` command.
@@ -24,11 +18,6 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * - `call.dtmf.received` (you may receive many of these webhooks)
  * - `call.gather.ended`
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->calls.actions->gather(...$params->toArray());`
  *
  * @see Telnyx\Calls\Actions->gather
  *

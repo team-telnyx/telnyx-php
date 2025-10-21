@@ -23,18 +23,7 @@ use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\Trim;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ParticipantParticipantsParams); // set properties as needed
- * $client->texml.accounts.conferences.participants->participants(...$params->toArray());
- * ```
  * Dials a new conference participant.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->texml.accounts.conferences.participants->participants(...$params->toArray());`
  *
  * @see Telnyx\Texml\Accounts\Conferences\Participants->participants
  *

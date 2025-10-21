@@ -12,18 +12,7 @@ use Telnyx\NotificationEventConditions\NotificationEventConditionListParams\Filt
 use Telnyx\NotificationEventConditions\NotificationEventConditionListParams\Page;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new NotificationEventConditionListParams); // set properties as needed
- * $client->notificationEventConditions->list(...$params->toArray());
- * ```
  * Returns a list of your notifications events conditions.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->notificationEventConditions->list(...$params->toArray());`
  *
  * @see Telnyx\NotificationEventConditions->list
  *

@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Storage\Buckets\Usage\UsageGetAPIUsageParams\Filter;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new UsageGetAPIUsageParams); // set properties as needed
- * $client->storage.buckets.usage->getAPIUsage(...$params->toArray());
- * ```
  * Returns the detail on API usage on a bucket of a particular time period, group by method category.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->storage.buckets.usage->getAPIUsage(...$params->toArray());`
  *
  * @see Telnyx\Storage\Buckets\Usage->getAPIUsage
  *

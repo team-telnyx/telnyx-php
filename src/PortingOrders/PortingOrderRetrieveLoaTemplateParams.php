@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new PortingOrderRetrieveLoaTemplateParams); // set properties as needed
- * $client->portingOrders->retrieveLoaTemplate(...$params->toArray());
- * ```
  * Download a porting order loa template.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->portingOrders->retrieveLoaTemplate(...$params->toArray());`
  *
  * @see Telnyx\PortingOrders->retrieveLoaTemplate
  *

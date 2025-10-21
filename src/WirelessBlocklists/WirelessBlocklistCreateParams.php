@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\WirelessBlocklists\WirelessBlocklistCreateParams\Type;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new WirelessBlocklistCreateParams); // set properties as needed
- * $client->wirelessBlocklists->create(...$params->toArray());
- * ```
  * Create a Wireless Blocklist to prevent SIMs from connecting to certain networks.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->wirelessBlocklists->create(...$params->toArray());`
  *
  * @see Telnyx\WirelessBlocklists->create
  *

@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Payment\AutoRechargePrefs\AutoRechargePrefUpdateParams\Preference;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new AutoRechargePrefUpdateParams); // set properties as needed
- * $client->payment.autoRechargePrefs->update(...$params->toArray());
- * ```
  * Update payment auto recharge preferences.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->payment.autoRechargePrefs->update(...$params->toArray());`
  *
  * @see Telnyx\Payment\AutoRechargePrefs->update
  *

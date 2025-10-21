@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Messages\MessageSendNumberPoolParams\Type;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new MessageSendNumberPoolParams); // set properties as needed
- * $client->messages->sendNumberPool(...$params->toArray());
- * ```
  * Send a message using number pool.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->messages->sendNumberPool(...$params->toArray());`
  *
  * @see Telnyx\Messages->sendNumberPool
  *

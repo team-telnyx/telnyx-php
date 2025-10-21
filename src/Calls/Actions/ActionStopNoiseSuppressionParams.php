@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ActionStopNoiseSuppressionParams); // set properties as needed
- * $client->calls.actions->stopNoiseSuppression(...$params->toArray());
- * ```
  * Noise Suppression Stop (BETA).
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->calls.actions->stopNoiseSuppression(...$params->toArray());`
  *
  * @see Telnyx\Calls\Actions->stopNoiseSuppression
  *

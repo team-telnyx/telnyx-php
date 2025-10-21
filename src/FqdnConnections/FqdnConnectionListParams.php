@@ -13,18 +13,7 @@ use Telnyx\FqdnConnections\FqdnConnectionListParams\Page;
 use Telnyx\FqdnConnections\FqdnConnectionListParams\Sort;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new FqdnConnectionListParams); // set properties as needed
- * $client->fqdnConnections->list(...$params->toArray());
- * ```
  * Returns a list of your FQDN connections.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->fqdnConnections->list(...$params->toArray());`
  *
  * @see Telnyx\FqdnConnections->list
  *

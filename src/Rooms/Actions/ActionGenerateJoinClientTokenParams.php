@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ActionGenerateJoinClientTokenParams); // set properties as needed
- * $client->rooms.actions->generateJoinClientToken(...$params->toArray());
- * ```
  * Synchronously create an Client Token to join a Room. Client Token is necessary to join a Telnyx Room. Client Token will expire after `token_ttl_secs`, a Refresh Token is also provided to refresh a Client Token, the Refresh Token expires after `refresh_token_ttl_secs`.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->rooms.actions->generateJoinClientToken(...$params->toArray());`
  *
  * @see Telnyx\Rooms\Actions->generateJoinClientToken
  *

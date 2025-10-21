@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentCreateParams\AdditionalDocument;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new AdditionalDocumentCreateParams); // set properties as needed
- * $client->portingOrders.additionalDocuments->create(...$params->toArray());
- * ```
  * Creates a list of additional documents for a porting order.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->portingOrders.additionalDocuments->create(...$params->toArray());`
  *
  * @see Telnyx\PortingOrders\AdditionalDocuments->create
  *

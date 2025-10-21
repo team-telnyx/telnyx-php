@@ -12,18 +12,7 @@ use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressListParams\Filter;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressListParams\Page;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new DynamicEmergencyAddressListParams); // set properties as needed
- * $client->dynamicEmergencyAddresses->list(...$params->toArray());
- * ```
  * Returns the dynamic emergency addresses according to filters.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->dynamicEmergencyAddresses->list(...$params->toArray());`
  *
  * @see Telnyx\DynamicEmergencyAddresses->list
  *

@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ManagedAccountCreateParams); // set properties as needed
- * $client->managedAccounts->create(...$params->toArray());
- * ```
  * Create a new managed account owned by the authenticated user. You need to be explictly approved by Telnyx in order to become a manager account.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->managedAccounts->create(...$params->toArray());`
  *
  * @see Telnyx\ManagedAccounts->create
  *

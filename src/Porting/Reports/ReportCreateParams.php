@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Porting\Reports\ReportCreateParams\ReportType;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ReportCreateParams); // set properties as needed
- * $client->porting.reports->create(...$params->toArray());
- * ```
  * Generate reports about porting operations.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->porting.reports->create(...$params->toArray());`
  *
  * @see Telnyx\Porting\Reports->create
  *

@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressCreateParams\CountryCode;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new DynamicEmergencyAddressCreateParams); // set properties as needed
- * $client->dynamicEmergencyAddresses->create(...$params->toArray());
- * ```
  * Creates a dynamic emergency address.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->dynamicEmergencyAddresses->create(...$params->toArray());`
  *
  * @see Telnyx\DynamicEmergencyAddresses->create
  *

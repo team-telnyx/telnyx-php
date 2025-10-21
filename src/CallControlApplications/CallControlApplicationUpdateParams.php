@@ -13,18 +13,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new CallControlApplicationUpdateParams); // set properties as needed
- * $client->callControlApplications->update(...$params->toArray());
- * ```
  * Updates settings of an existing call control application.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->callControlApplications->update(...$params->toArray());`
  *
  * @see Telnyx\CallControlApplications->update
  *

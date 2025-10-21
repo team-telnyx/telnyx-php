@@ -10,22 +10,11 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ActionStopPlaybackParams); // set properties as needed
- * $client->calls.actions->stopPlayback(...$params->toArray());
- * ```
  * Stop audio being played on the call.
  *
  * **Expected Webhooks:**
  *
  * - `call.playback.ended` or `call.speak.ended`
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->calls.actions->stopPlayback(...$params->toArray());`
  *
  * @see Telnyx\Calls\Actions->stopPlayback
  *

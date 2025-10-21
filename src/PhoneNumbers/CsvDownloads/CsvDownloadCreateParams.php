@@ -12,18 +12,7 @@ use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadCreateParams\CsvFormat;
 use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadCreateParams\Filter;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new CsvDownloadCreateParams); // set properties as needed
- * $client->phoneNumbers.csvDownloads->create(...$params->toArray());
- * ```
  * Create a CSV download.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->phoneNumbers.csvDownloads->create(...$params->toArray());`
  *
  * @see Telnyx\PhoneNumbers\CsvDownloads->create
  *

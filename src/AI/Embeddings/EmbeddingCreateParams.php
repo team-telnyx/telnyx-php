@@ -12,12 +12,6 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new EmbeddingCreateParams); // set properties as needed
- * $client->ai.embeddings->create(...$params->toArray());
- * ```
  * Perform embedding on a Telnyx Storage Bucket using the a embedding model.
  * The current supported file types are:
  * - PDF
@@ -38,11 +32,6 @@ use Telnyx\Core\Contracts\BaseModel;
  * `intercom` which loads Intercom article jsons as specified by [the Intercom article API](https://developers.intercom.com/docs/references/rest-api/api.intercom.io/Articles/article/)
  * This loader will split each article into paragraphs and save additional parameters relevant to Intercom docs, such as
  * `article_url` and `heading`. These values will be returned by the `/v2/ai/embeddings/similarity-search` endpoint in the `loader_metadata` field.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->ai.embeddings->create(...$params->toArray());`
  *
  * @see Telnyx\AI\Embeddings->create
  *

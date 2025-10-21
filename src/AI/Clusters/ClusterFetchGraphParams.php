@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ClusterFetchGraphParams); // set properties as needed
- * $client->ai.clusters->fetchGraph(...$params->toArray());
- * ```
  * Fetch a cluster visualization.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->ai.clusters->fetchGraph(...$params->toArray());`
  *
  * @see Telnyx\AI\Clusters->fetchGraph
  *

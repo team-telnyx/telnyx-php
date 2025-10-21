@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\Actions\ActionShareParams\Permissions;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ActionShareParams); // set properties as needed
- * $client->portingOrders.actions->share(...$params->toArray());
- * ```
  * Creates a sharing token for a porting order. The token can be used to share the porting order with non-Telnyx users.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->portingOrders.actions->share(...$params->toArray());`
  *
  * @see Telnyx\PortingOrders\Actions->share
  *

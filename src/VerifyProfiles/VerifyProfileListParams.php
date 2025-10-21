@@ -12,18 +12,7 @@ use Telnyx\VerifyProfiles\VerifyProfileListParams\Filter;
 use Telnyx\VerifyProfiles\VerifyProfileListParams\Page;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new VerifyProfileListParams); // set properties as needed
- * $client->verifyProfiles->list(...$params->toArray());
- * ```
  * Gets a paginated list of Verify profiles.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->verifyProfiles->list(...$params->toArray());`
  *
  * @see Telnyx\VerifyProfiles->list
  *

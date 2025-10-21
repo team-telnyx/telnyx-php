@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new SiprecConnectorUpdateParams); // set properties as needed
- * $client->siprecConnectors->update(...$params->toArray());
- * ```
  * Updates a stored SIPREC connector configuration.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->siprecConnectors->update(...$params->toArray());`
  *
  * @see Telnyx\SiprecConnectors->update
  *

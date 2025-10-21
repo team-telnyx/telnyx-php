@@ -16,18 +16,7 @@ use Telnyx\IPConnections\IPConnectionUpdateParams\TransportProtocol;
 use Telnyx\IPConnections\IPConnectionUpdateParams\WebhookAPIVersion;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new IPConnectionUpdateParams); // set properties as needed
- * $client->ipConnections->update(...$params->toArray());
- * ```
  * Updates settings of an existing IP connection.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->ipConnections->update(...$params->toArray());`
  *
  * @see Telnyx\IPConnections->update
  *

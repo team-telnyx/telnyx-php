@@ -17,23 +17,12 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ActionBridgeParams); // set properties as needed
- * $client->calls.actions->bridge(...$params->toArray());
- * ```
  * Bridge two call control calls.
  *
  * **Expected Webhooks:**
  *
  * - `call.bridged` for Leg A
  * - `call.bridged` for Leg B
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->calls.actions->bridge(...$params->toArray());`
  *
  * @see Telnyx\Calls\Actions->bridge
  *

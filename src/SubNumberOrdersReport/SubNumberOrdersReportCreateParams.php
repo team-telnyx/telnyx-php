@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SubNumberOrdersReport\SubNumberOrdersReportCreateParams\Status;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new SubNumberOrdersReportCreateParams); // set properties as needed
- * $client->subNumberOrdersReport->create(...$params->toArray());
- * ```
  * Create a CSV report for sub number orders. The report will be generated asynchronously and can be downloaded once complete.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->subNumberOrdersReport->create(...$params->toArray());`
  *
  * @see Telnyx\SubNumberOrdersReport->create
  *

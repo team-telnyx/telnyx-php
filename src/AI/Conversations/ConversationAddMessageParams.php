@@ -13,18 +13,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\MapOf;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ConversationAddMessageParams); // set properties as needed
- * $client->ai.conversations->addMessage(...$params->toArray());
- * ```
  * Add a new message to the conversation. Used to insert a new messages to a conversation manually ( without using chat endpoint ).
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->ai.conversations->addMessage(...$params->toArray());`
  *
  * @see Telnyx\AI\Conversations->addMessage
  *

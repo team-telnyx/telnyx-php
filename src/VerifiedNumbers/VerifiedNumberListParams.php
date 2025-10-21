@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\VerifiedNumbers\VerifiedNumberListParams\Page;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new VerifiedNumberListParams); // set properties as needed
- * $client->verifiedNumbers->list(...$params->toArray());
- * ```
  * Gets a paginated list of Verified Numbers.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->verifiedNumbers->list(...$params->toArray());`
  *
  * @see Telnyx\VerifiedNumbers->list
  *

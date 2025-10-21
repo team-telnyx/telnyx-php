@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new MediaUpdateParams); // set properties as needed
- * $client->media->update(...$params->toArray());
- * ```
  * Updates a stored media file.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->media->update(...$params->toArray());`
  *
  * @see Telnyx\Media->update
  *

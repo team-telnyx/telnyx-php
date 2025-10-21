@@ -10,21 +10,10 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new CanaryDeployUpdateParams); // set properties as needed
- * $client->ai.assistants.canaryDeploys->update(...$params->toArray());
- * ```
  * Endpoint to update a canary deploy configuration for an assistant.
  *
  * Updates the existing canary deploy configuration with new version IDs and percentages.
  *   All old versions and percentages are replaces by new ones from this request.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->ai.assistants.canaryDeploys->update(...$params->toArray());`
  *
  * @see Telnyx\AI\Assistants\CanaryDeploys->update
  *

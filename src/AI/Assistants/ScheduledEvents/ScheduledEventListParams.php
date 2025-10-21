@@ -11,18 +11,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ScheduledEventListParams); // set properties as needed
- * $client->ai.assistants.scheduledEvents->list(...$params->toArray());
- * ```
  * Get scheduled events for an assistant with pagination and filtering.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->ai.assistants.scheduledEvents->list(...$params->toArray());`
  *
  * @see Telnyx\AI\Assistants\ScheduledEvents->list
  *

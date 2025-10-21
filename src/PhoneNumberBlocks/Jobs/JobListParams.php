@@ -13,18 +13,7 @@ use Telnyx\PhoneNumberBlocks\Jobs\JobListParams\Page;
 use Telnyx\PhoneNumberBlocks\Jobs\JobListParams\Sort;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new JobListParams); // set properties as needed
- * $client->phoneNumberBlocks.jobs->list(...$params->toArray());
- * ```
  * Lists the phone number blocks jobs.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->phoneNumberBlocks.jobs->list(...$params->toArray());`
  *
  * @see Telnyx\PhoneNumberBlocks\Jobs->list
  *

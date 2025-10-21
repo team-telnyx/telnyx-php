@@ -12,18 +12,7 @@ use Telnyx\MobilePushCredentials\MobilePushCredentialListParams\Filter;
 use Telnyx\MobilePushCredentials\MobilePushCredentialListParams\Page;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new MobilePushCredentialListParams); // set properties as needed
- * $client->mobilePushCredentials->list(...$params->toArray());
- * ```
  * List mobile push credentials.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->mobilePushCredentials->list(...$params->toArray());`
  *
  * @see Telnyx\MobilePushCredentials->list
  *

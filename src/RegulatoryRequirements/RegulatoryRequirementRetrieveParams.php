@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\RegulatoryRequirements\RegulatoryRequirementRetrieveParams\Filter;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new RegulatoryRequirementRetrieveParams); // set properties as needed
- * $client->regulatoryRequirements->retrieve(...$params->toArray());
- * ```
  * Retrieve regulatory requirements.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->regulatoryRequirements->retrieve(...$params->toArray());`
  *
  * @see Telnyx\RegulatoryRequirements->retrieve
  *

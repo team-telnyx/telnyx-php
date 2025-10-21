@@ -12,18 +12,7 @@ use Telnyx\Fqdns\FqdnListParams\Filter;
 use Telnyx\Fqdns\FqdnListParams\Page;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new FqdnListParams); // set properties as needed
- * $client->fqdns->list(...$params->toArray());
- * ```
  * Get all FQDNs belonging to the user that match the given filters.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->fqdns->list(...$params->toArray());`
  *
  * @see Telnyx\Fqdns->list
  *

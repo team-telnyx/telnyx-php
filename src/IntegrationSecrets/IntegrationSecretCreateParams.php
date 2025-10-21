@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\IntegrationSecrets\IntegrationSecretCreateParams\Type;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new IntegrationSecretCreateParams); // set properties as needed
- * $client->integrationSecrets->create(...$params->toArray());
- * ```
  * Create a new secret with an associated identifier that can be used to securely integrate with other services.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->integrationSecrets->create(...$params->toArray());`
  *
  * @see Telnyx\IntegrationSecrets->create
  *

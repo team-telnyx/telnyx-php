@@ -10,22 +10,11 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ActionSendDtmfParams); // set properties as needed
- * $client->calls.actions->sendDtmf(...$params->toArray());
- * ```
  * Sends DTMF tones from this leg. DTMF tones will be heard by the other end of the call.
  *
  * **Expected Webhooks:**
  *
  * There are no webhooks associated with this command.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->calls.actions->sendDtmf(...$params->toArray());`
  *
  * @see Telnyx\Calls\Actions->sendDtmf
  *

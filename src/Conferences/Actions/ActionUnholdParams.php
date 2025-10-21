@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ActionUnholdParams); // set properties as needed
- * $client->conferences.actions->unhold(...$params->toArray());
- * ```
  * Unhold a list of participants in a conference call.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->conferences.actions->unhold(...$params->toArray());`
  *
  * @see Telnyx\Conferences\Actions->unhold
  *

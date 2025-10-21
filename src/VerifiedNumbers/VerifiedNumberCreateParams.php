@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\VerifiedNumbers\VerifiedNumberCreateParams\VerificationMethod;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new VerifiedNumberCreateParams); // set properties as needed
- * $client->verifiedNumbers->create(...$params->toArray());
- * ```
  * Initiates phone number verification procedure. Supports DTMF extension dialing for voice calls to numbers behind IVR systems.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->verifiedNumbers->create(...$params->toArray());`
  *
  * @see Telnyx\VerifiedNumbers->create
  *

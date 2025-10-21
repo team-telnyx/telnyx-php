@@ -12,18 +12,7 @@ use Telnyx\Invoices\InvoiceListParams\Page;
 use Telnyx\Invoices\InvoiceListParams\Sort;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new InvoiceListParams); // set properties as needed
- * $client->invoices->list(...$params->toArray());
- * ```
  * Retrieve a paginated list of invoices.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->invoices->list(...$params->toArray());`
  *
  * @see Telnyx\Invoices->list
  *

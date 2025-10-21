@@ -13,18 +13,7 @@ use Telnyx\Messsages\MesssageRcsParams\SMSFallback;
 use Telnyx\Messsages\MesssageRcsParams\Type;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new MesssageRcsParams); // set properties as needed
- * $client->messsages->rcs(...$params->toArray());
- * ```
  * Send an RCS message.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->messsages->rcs(...$params->toArray());`
  *
  * @see Telnyx\Messsages->rcs
  *

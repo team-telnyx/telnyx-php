@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ManagedAccountUpdateParams); // set properties as needed
- * $client->managedAccounts->update(...$params->toArray());
- * ```
  * Update a single managed account.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->managedAccounts->update(...$params->toArray());`
  *
  * @see Telnyx\ManagedAccounts->update
  *

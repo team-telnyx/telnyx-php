@@ -13,18 +13,7 @@ use Telnyx\MessagingOptouts\MessagingOptoutListParams\Filter;
 use Telnyx\MessagingOptouts\MessagingOptoutListParams\Page;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new MessagingOptoutListParams); // set properties as needed
- * $client->messagingOptouts->list(...$params->toArray());
- * ```
  * Retrieve a list of opt-out blocks.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->messagingOptouts->list(...$params->toArray());`
  *
  * @see Telnyx\MessagingOptouts->list
  *

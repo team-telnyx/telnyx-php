@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckListParams\Page;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new GlobalIPHealthCheckListParams); // set properties as needed
- * $client->globalIPHealthChecks->list(...$params->toArray());
- * ```
  * List all Global IP health checks.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->globalIPHealthChecks->list(...$params->toArray());`
  *
  * @see Telnyx\GlobalIPHealthChecks->list
  *

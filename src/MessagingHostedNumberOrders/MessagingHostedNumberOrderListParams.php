@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderListParams\Page;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new MessagingHostedNumberOrderListParams); // set properties as needed
- * $client->messagingHostedNumberOrders->list(...$params->toArray());
- * ```
  * List messaging hosted number orders.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->messagingHostedNumberOrders->list(...$params->toArray());`
  *
  * @see Telnyx\MessagingHostedNumberOrders->list
  *

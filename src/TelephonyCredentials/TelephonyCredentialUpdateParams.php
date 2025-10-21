@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new TelephonyCredentialUpdateParams); // set properties as needed
- * $client->telephonyCredentials->update(...$params->toArray());
- * ```
  * Update an existing credential.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->telephonyCredentials->update(...$params->toArray());`
  *
  * @see Telnyx\TelephonyCredentials->update
  *

@@ -13,18 +13,7 @@ use Telnyx\IPConnections\IPConnectionListParams\Page;
 use Telnyx\IPConnections\IPConnectionListParams\Sort;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new IPConnectionListParams); // set properties as needed
- * $client->ipConnections->list(...$params->toArray());
- * ```
  * Returns a list of your IP connections.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->ipConnections->list(...$params->toArray());`
  *
  * @see Telnyx\IPConnections->list
  *

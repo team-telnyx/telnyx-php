@@ -13,18 +13,7 @@ use Telnyx\UserAddresses\UserAddressListParams\Page;
 use Telnyx\UserAddresses\UserAddressListParams\Sort;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new UserAddressListParams); // set properties as needed
- * $client->userAddresses->list(...$params->toArray());
- * ```
  * Returns a list of your user addresses.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->userAddresses->list(...$params->toArray());`
  *
  * @see Telnyx\UserAddresses->list
  *

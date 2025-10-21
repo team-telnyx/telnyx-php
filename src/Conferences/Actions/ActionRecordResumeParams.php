@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ActionRecordResumeParams); // set properties as needed
- * $client->conferences.actions->recordResume(...$params->toArray());
- * ```
  * Resume conference recording.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->conferences.actions->recordResume(...$params->toArray());`
  *
  * @see Telnyx\Conferences\Actions->recordResume
  *

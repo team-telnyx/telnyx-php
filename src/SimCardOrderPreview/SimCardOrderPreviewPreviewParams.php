@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new SimCardOrderPreviewPreviewParams); // set properties as needed
- * $client->simCardOrderPreview->preview(...$params->toArray());
- * ```
  * Preview SIM card order purchases.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->simCardOrderPreview->preview(...$params->toArray());`
  *
  * @see Telnyx\SimCardOrderPreview->preview
  *

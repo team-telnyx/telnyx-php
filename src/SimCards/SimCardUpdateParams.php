@@ -12,18 +12,7 @@ use Telnyx\SimCards\SimCardUpdateParams\DataLimit;
 use Telnyx\SimCardStatus;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new SimCardUpdateParams); // set properties as needed
- * $client->simCards->update(...$params->toArray());
- * ```
  * Updates SIM card data.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->simCards->update(...$params->toArray());`
  *
  * @see Telnyx\SimCards->update
  *

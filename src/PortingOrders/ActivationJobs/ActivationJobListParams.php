@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\ActivationJobs\ActivationJobListParams\Page;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ActivationJobListParams); // set properties as needed
- * $client->portingOrders.activationJobs->list(...$params->toArray());
- * ```
  * Returns a list of your porting activation jobs.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->portingOrders.activationJobs->list(...$params->toArray());`
  *
  * @see Telnyx\PortingOrders\ActivationJobs->list
  *

@@ -12,12 +12,6 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ActionStartSiprecParams); // set properties as needed
- * $client->calls.actions->startSiprec(...$params->toArray());
- * ```
  * Start siprec session to configured in SIPREC connector SRS.
  *
  * **Expected Webhooks:**
@@ -25,11 +19,6 @@ use Telnyx\Core\Contracts\BaseModel;
  * - `siprec.started`
  * - `siprec.stopped`
  * - `siprec.failed`
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->calls.actions->startSiprec(...$params->toArray());`
  *
  * @see Telnyx\Calls\Actions->startSiprec
  *

@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ExternalVettingOrderParams); // set properties as needed
- * $client->brand.externalVetting->order(...$params->toArray());
- * ```
  * Order new external vetting for a brand.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->brand.externalVetting->order(...$params->toArray());`
  *
  * @see Telnyx\Brand\ExternalVetting->order
  *

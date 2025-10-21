@@ -12,18 +12,7 @@ use Telnyx\ExternalConnections\Uploads\UploadCreateParams\AdditionalUsage;
 use Telnyx\ExternalConnections\Uploads\UploadCreateParams\Usage;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new UploadCreateParams); // set properties as needed
- * $client->externalConnections.uploads->create(...$params->toArray());
- * ```
  * Creates a new Upload request to Microsoft teams with the included phone numbers. Only one of civic_address_id or location_id must be provided, not both. The maximum allowed phone numbers for the numbers_ids array is 1000.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->externalConnections.uploads->create(...$params->toArray());`
  *
  * @see Telnyx\ExternalConnections\Uploads->create
  *

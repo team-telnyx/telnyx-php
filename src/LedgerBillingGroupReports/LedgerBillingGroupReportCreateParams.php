@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new LedgerBillingGroupReportCreateParams); // set properties as needed
- * $client->ledgerBillingGroupReports->create(...$params->toArray());
- * ```
  * Create a ledger billing group report.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->ledgerBillingGroupReports->create(...$params->toArray());`
  *
  * @see Telnyx\LedgerBillingGroupReports->create
  *

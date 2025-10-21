@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new VerificationTriggerCallParams); // set properties as needed
- * $client->verifications->triggerCall(...$params->toArray());
- * ```
  * Trigger Call verification.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->verifications->triggerCall(...$params->toArray());`
  *
  * @see Telnyx\Verifications->triggerCall
  *

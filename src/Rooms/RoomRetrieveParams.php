@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new RoomRetrieveParams); // set properties as needed
- * $client->rooms->retrieve(...$params->toArray());
- * ```
  * View a room.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->rooms->retrieve(...$params->toArray());`
  *
  * @see Telnyx\Rooms->retrieve
  *

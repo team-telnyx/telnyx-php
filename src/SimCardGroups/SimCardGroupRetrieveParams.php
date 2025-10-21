@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new SimCardGroupRetrieveParams); // set properties as needed
- * $client->simCardGroups->retrieve(...$params->toArray());
- * ```
  * Returns the details regarding a specific SIM card group.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->simCardGroups->retrieve(...$params->toArray());`
  *
  * @see Telnyx\SimCardGroups->retrieve
  *

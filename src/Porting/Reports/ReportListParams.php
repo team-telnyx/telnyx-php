@@ -12,18 +12,7 @@ use Telnyx\Porting\Reports\ReportListParams\Filter;
 use Telnyx\Porting\Reports\ReportListParams\Page;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ReportListParams); // set properties as needed
- * $client->porting.reports->list(...$params->toArray());
- * ```
  * List the reports generated about porting operations.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->porting.reports->list(...$params->toArray());`
  *
  * @see Telnyx\Porting\Reports->list
  *

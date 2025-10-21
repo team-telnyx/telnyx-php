@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Portouts\PortoutListRejectionCodesParams\Filter;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new PortoutListRejectionCodesParams); // set properties as needed
- * $client->portouts->listRejectionCodes(...$params->toArray());
- * ```
  * Given a port-out ID, list rejection codes that are eligible for that port-out.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->portouts->listRejectionCodes(...$params->toArray());`
  *
  * @see Telnyx\Portouts->listRejectionCodes
  *

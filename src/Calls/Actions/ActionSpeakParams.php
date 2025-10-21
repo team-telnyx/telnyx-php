@@ -14,23 +14,12 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ActionSpeakParams); // set properties as needed
- * $client->calls.actions->speak(...$params->toArray());
- * ```
  * Convert text to speech and play it back on the call. If multiple speak text commands are issued consecutively, the audio files will be placed in a queue awaiting playback.
  *
  * **Expected Webhooks:**
  *
  * - `call.speak.started`
  * - `call.speak.ended`
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->calls.actions->speak(...$params->toArray());`
  *
  * @see Telnyx\Calls\Actions->speak
  *

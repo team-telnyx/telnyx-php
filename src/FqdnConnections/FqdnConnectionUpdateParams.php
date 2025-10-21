@@ -14,18 +14,7 @@ use Telnyx\CredentialConnections\DtmfType;
 use Telnyx\CredentialConnections\EncryptedMedia;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new FqdnConnectionUpdateParams); // set properties as needed
- * $client->fqdnConnections->update(...$params->toArray());
- * ```
  * Updates settings of an existing FQDN connection.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->fqdnConnections->update(...$params->toArray());`
  *
  * @see Telnyx\FqdnConnections->update
  *

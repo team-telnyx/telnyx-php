@@ -12,18 +12,7 @@ use Telnyx\PhoneNumbers\Jobs\JobUpdateBatchParams\Filter;
 use Telnyx\PhoneNumbers\Voice\UpdateVoiceSettings;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new JobUpdateBatchParams); // set properties as needed
- * $client->phoneNumbers.jobs->updateBatch(...$params->toArray());
- * ```
  * Creates a new background job to update a batch of numbers. At most one thousand numbers can be updated per API call. At least one of the updateable fields must be submitted. IMPORTANT: You must either specify filters (using the filter parameters) or specific phone numbers (using the phone_numbers parameter in the request body). If you specify filters, ALL phone numbers that match the given filters (up to 1000 at a time) will be updated. If you want to update only specific numbers, you must use the phone_numbers parameter in the request body. When using the phone_numbers parameter, ensure you follow the correct format as shown in the example (either phone number IDs or phone numbers in E164 format).
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->phoneNumbers.jobs->updateBatch(...$params->toArray());`
  *
  * @see Telnyx\PhoneNumbers\Jobs->updateBatch
  *

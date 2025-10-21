@@ -13,18 +13,7 @@ use Telnyx\Texml\Accounts\Calls\CallSiprecJsonParams\StatusCallbackMethod;
 use Telnyx\Texml\Accounts\Calls\CallSiprecJsonParams\Track;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new CallSiprecJsonParams); // set properties as needed
- * $client->texml.accounts.calls->siprecJson(...$params->toArray());
- * ```
  * Starts siprec session with specified parameters for call idientified by call_sid.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->texml.accounts.calls->siprecJson(...$params->toArray());`
  *
  * @see Telnyx\Texml\Accounts\Calls->siprecJson
  *

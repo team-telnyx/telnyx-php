@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new SslCertificateCreateParams); // set properties as needed
- * $client->storage.buckets.sslCertificate->create(...$params->toArray());
- * ```
  * Uploads an SSL certificate and its matching secret so that you can use Telnyx’s storage as your CDN.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->storage.buckets.sslCertificate->create(...$params->toArray());`
  *
  * @see Telnyx\Storage\Buckets\SslCertificate->create
  *

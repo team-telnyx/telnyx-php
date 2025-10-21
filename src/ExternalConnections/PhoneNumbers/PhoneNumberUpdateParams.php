@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new PhoneNumberUpdateParams); // set properties as needed
- * $client->externalConnections.phoneNumbers->update(...$params->toArray());
- * ```
  * Asynchronously update settings of the phone number associated with the given external connection.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->externalConnections.phoneNumbers->update(...$params->toArray());`
  *
  * @see Telnyx\ExternalConnections\PhoneNumbers->update
  *

@@ -12,18 +12,7 @@ use Telnyx\IntegrationSecrets\IntegrationSecretListParams\Filter;
 use Telnyx\IntegrationSecrets\IntegrationSecretListParams\Page;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new IntegrationSecretListParams); // set properties as needed
- * $client->integrationSecrets->list(...$params->toArray());
- * ```
  * Retrieve a list of all integration secrets configured by the user.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->integrationSecrets->list(...$params->toArray());`
  *
  * @see Telnyx\IntegrationSecrets->list
  *

@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new NumberLookupListParams); // set properties as needed
- * $client->legacy.reporting.usageReports.numberLookup->list(...$params->toArray());
- * ```
  * Retrieve a paginated list of telco data usage reports.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->legacy.reporting.usageReports.numberLookup->list(...$params->toArray());`
  *
  * @see Telnyx\Legacy\Reporting\UsageReports\NumberLookup->list
  *

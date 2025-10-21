@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Messaging\Rcs\Agents\AgentListParams\Page;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new AgentListParams); // set properties as needed
- * $client->messaging.rcs.agents->list(...$params->toArray());
- * ```
  * List all RCS agents.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->messaging.rcs.agents->list(...$params->toArray());`
  *
  * @see Telnyx\Messaging\Rcs\Agents->list
  *

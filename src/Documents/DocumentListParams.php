@@ -13,18 +13,7 @@ use Telnyx\Documents\DocumentListParams\Page;
 use Telnyx\Documents\DocumentListParams\Sort;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new DocumentListParams); // set properties as needed
- * $client->documents->list(...$params->toArray());
- * ```
  * List all documents ordered by created_at descending.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->documents->list(...$params->toArray());`
  *
  * @see Telnyx\Documents->list
  *

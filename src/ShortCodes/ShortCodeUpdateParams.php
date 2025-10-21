@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ShortCodeUpdateParams); // set properties as needed
- * $client->shortCodes->update(...$params->toArray());
- * ```
  * Update the settings for a specific short code. To unbind a short code from a profile, set the `messaging_profile_id` to `null` or an empty string.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->shortCodes->update(...$params->toArray());`
  *
  * @see Telnyx\ShortCodes->update
  *

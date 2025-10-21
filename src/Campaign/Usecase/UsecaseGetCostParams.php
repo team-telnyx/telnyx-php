@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new UsecaseGetCostParams); // set properties as needed
- * $client->campaign.usecase->getCost(...$params->toArray());
- * ```
  * Get Campaign Cost.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->campaign.usecase->getCost(...$params->toArray());`
  *
  * @see Telnyx\Campaign\Usecase->getCost
  *

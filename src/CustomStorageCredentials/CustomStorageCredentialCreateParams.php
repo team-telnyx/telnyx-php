@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\CustomStorageCredentials\CustomStorageCredentialCreateParams\Backend;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new CustomStorageCredentialCreateParams); // set properties as needed
- * $client->customStorageCredentials->create(...$params->toArray());
- * ```
  * Creates a custom storage credentials configuration.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->customStorageCredentials->create(...$params->toArray());`
  *
  * @see Telnyx\CustomStorageCredentials->create
  *

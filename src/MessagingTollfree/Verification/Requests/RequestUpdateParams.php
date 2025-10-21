@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new RequestUpdateParams); // set properties as needed
- * $client->messagingTollfree.verification.requests->update(...$params->toArray());
- * ```
  * Update an existing tollfree verification request. This is particularly useful when there are pending customer actions to be taken.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->messagingTollfree.verification.requests->update(...$params->toArray());`
  *
  * @see Telnyx\MessagingTollfree\Verification\Requests->update
  *

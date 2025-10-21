@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new BrandUpdateParams); // set properties as needed
- * $client->brand->update(...$params->toArray());
- * ```
  * Update a brand's attributes by `brandId`.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->brand->update(...$params->toArray());`
  *
  * @see Telnyx\Brand->update
  *

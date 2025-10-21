@@ -25,18 +25,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new VersionUpdateParams); // set properties as needed
- * $client->ai.assistants.versions->update(...$params->toArray());
- * ```
  * Updates the configuration of a specific assistant version. Can not update main version.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->ai.assistants.versions->update(...$params->toArray());`
  *
  * @see Telnyx\AI\Assistants\Versions->update
  *

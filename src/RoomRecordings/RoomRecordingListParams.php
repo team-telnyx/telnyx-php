@@ -12,18 +12,7 @@ use Telnyx\RoomRecordings\RoomRecordingListParams\Filter;
 use Telnyx\RoomRecordings\RoomRecordingListParams\Page;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new RoomRecordingListParams); // set properties as needed
- * $client->roomRecordings->list(...$params->toArray());
- * ```
  * View a list of room recordings.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->roomRecordings->list(...$params->toArray());`
  *
  * @see Telnyx\RoomRecordings->list
  *

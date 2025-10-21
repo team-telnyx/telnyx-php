@@ -12,18 +12,7 @@ use Telnyx\Rooms\Sessions\SessionRetrieveParticipantsParams\Filter;
 use Telnyx\Rooms\Sessions\SessionRetrieveParticipantsParams\Page;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new SessionRetrieveParticipantsParams); // set properties as needed
- * $client->rooms.sessions->retrieveParticipants(...$params->toArray());
- * ```
  * View a list of room participants.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->rooms.sessions->retrieveParticipants(...$params->toArray());`
  *
  * @see Telnyx\Rooms\Sessions->retrieveParticipants
  *

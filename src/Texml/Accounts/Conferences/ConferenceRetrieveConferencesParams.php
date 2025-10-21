@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Texml\Accounts\Conferences\ConferenceRetrieveConferencesParams\Status;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ConferenceRetrieveConferencesParams); // set properties as needed
- * $client->texml.accounts.conferences->retrieveConferences(...$params->toArray());
- * ```
  * Lists conference resources.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->texml.accounts.conferences->retrieveConferences(...$params->toArray());`
  *
  * @see Telnyx\Texml\Accounts\Conferences->retrieveConferences
  *

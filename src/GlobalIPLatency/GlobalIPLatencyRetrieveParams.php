@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\GlobalIPLatency\GlobalIPLatencyRetrieveParams\Filter;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new GlobalIPLatencyRetrieveParams); // set properties as needed
- * $client->globalIPLatency->retrieve(...$params->toArray());
- * ```
  * Global IP Latency Metrics.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->globalIPLatency->retrieve(...$params->toArray());`
  *
  * @see Telnyx\GlobalIPLatency->retrieve
  *
