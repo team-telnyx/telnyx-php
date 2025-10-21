@@ -14,18 +14,7 @@ use Telnyx\Texml\Accounts\Calls\CallStreamsJsonParams\StatusCallbackMethod;
 use Telnyx\Texml\Accounts\Calls\CallStreamsJsonParams\Track;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new CallStreamsJsonParams); // set properties as needed
- * $client->texml.accounts.calls->streamsJson(...$params->toArray());
- * ```
  * Starts streaming media from a call to a specific WebSocket address.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->texml.accounts.calls->streamsJson(...$params->toArray());`
  *
  * @see Telnyx\Texml\Accounts\Calls->streamsJson
  *

@@ -12,18 +12,7 @@ use Telnyx\ExternalConnections\ExternalConnectionListParams\Filter;
 use Telnyx\ExternalConnections\ExternalConnectionListParams\Page;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ExternalConnectionListParams); // set properties as needed
- * $client->externalConnections->list(...$params->toArray());
- * ```
  * This endpoint returns a list of your External Connections inside the 'data' attribute of the response. External Connections are used by Telnyx customers to seamless configure SIP trunking integrations with Telnyx Partners, through External Voice Integrations in Mission Control Portal.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->externalConnections->list(...$params->toArray());`
  *
  * @see Telnyx\ExternalConnections->list
  *

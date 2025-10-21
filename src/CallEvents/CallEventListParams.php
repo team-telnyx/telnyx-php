@@ -12,20 +12,9 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new CallEventListParams); // set properties as needed
- * $client->callEvents->list(...$params->toArray());
- * ```
  * Filters call events by given filter parameters. Events are ordered by `occurred_at`. If filter for `leg_id` or `application_session_id` is not present, it only filters events from the last 24 hours.
  *
  * **Note**: Only one `filter[occurred_at]` can be passed.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->callEvents->list(...$params->toArray());`
  *
  * @see Telnyx\CallEvents->list
  *

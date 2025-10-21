@@ -12,18 +12,7 @@ use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantUpdateParams\Annou
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantUpdateParams\HoldMethod;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ParticipantUpdateParams); // set properties as needed
- * $client->texml.accounts.conferences.participants->update(...$params->toArray());
- * ```
  * Updates a conference participant.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->texml.accounts.conferences.participants->update(...$params->toArray());`
  *
  * @see Telnyx\Texml\Accounts\Conferences\Participants->update
  *

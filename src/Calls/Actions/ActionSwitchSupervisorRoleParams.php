@@ -11,18 +11,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ActionSwitchSupervisorRoleParams); // set properties as needed
- * $client->calls.actions->switchSupervisorRole(...$params->toArray());
- * ```
  * Switch the supervisor role for a bridged call. This allows switching between different supervisor modes during an active call.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->calls.actions->switchSupervisorRole(...$params->toArray());`
  *
  * @see Telnyx\Calls\Actions->switchSupervisorRole
  *

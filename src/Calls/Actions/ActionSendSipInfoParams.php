@@ -10,22 +10,11 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ActionSendSipInfoParams); // set properties as needed
- * $client->calls.actions->sendSipInfo(...$params->toArray());
- * ```
  * Sends SIP info from this leg.
  *
  * **Expected Webhooks:**
  *
  * - `call.sip_info.received` (to be received on the target call leg)
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->calls.actions->sendSipInfo(...$params->toArray());`
  *
  * @see Telnyx\Calls\Actions->sendSipInfo
  *

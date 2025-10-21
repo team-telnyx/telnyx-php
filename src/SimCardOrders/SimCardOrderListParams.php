@@ -12,18 +12,7 @@ use Telnyx\SimCardOrders\SimCardOrderListParams\Filter;
 use Telnyx\SimCardOrders\SimCardOrderListParams\Page;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new SimCardOrderListParams); // set properties as needed
- * $client->simCardOrders->list(...$params->toArray());
- * ```
  * Get all SIM card orders according to filters.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->simCardOrders->list(...$params->toArray());`
  *
  * @see Telnyx\SimCardOrders->list
  *

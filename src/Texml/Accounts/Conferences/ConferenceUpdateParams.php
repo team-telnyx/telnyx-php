@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Texml\Accounts\Conferences\ConferenceUpdateParams\AnnounceMethod;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ConferenceUpdateParams); // set properties as needed
- * $client->texml.accounts.conferences->update(...$params->toArray());
- * ```
  * Updates a conference resource.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->texml.accounts.conferences->update(...$params->toArray());`
  *
  * @see Telnyx\Texml\Accounts\Conferences->update
  *

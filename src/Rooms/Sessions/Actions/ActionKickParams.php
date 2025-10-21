@@ -12,18 +12,7 @@ use Telnyx\Rooms\Sessions\Actions\ActionKickParams\Participants;
 use Telnyx\Rooms\Sessions\Actions\ActionKickParams\Participants\UnionMember0;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ActionKickParams); // set properties as needed
- * $client->rooms.sessions.actions->kick(...$params->toArray());
- * ```
  * Kick participants from a room session.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->rooms.sessions.actions->kick(...$params->toArray());`
  *
  * @see Telnyx\Rooms\Sessions\Actions->kick
  *

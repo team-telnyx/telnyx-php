@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new NumberReservationCreateParams); // set properties as needed
- * $client->numberReservations->create(...$params->toArray());
- * ```
  * Creates a Phone Number Reservation for multiple numbers.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->numberReservations->create(...$params->toArray());`
  *
  * @see Telnyx\NumberReservations->create
  *

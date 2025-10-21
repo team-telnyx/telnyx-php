@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigUpdateParams\Op;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new AutorespConfigUpdateParams); // set properties as needed
- * $client->messagingProfiles.autorespConfigs->update(...$params->toArray());
- * ```
  * Update Auto-Response Setting.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->messagingProfiles.autorespConfigs->update(...$params->toArray());`
  *
  * @see Telnyx\MessagingProfiles\AutorespConfigs->update
  *

@@ -13,18 +13,7 @@ use Telnyx\RequirementGroups\RequirementGroupCreateParams\PhoneNumberType;
 use Telnyx\RequirementGroups\RequirementGroupCreateParams\RegulatoryRequirement;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new RequirementGroupCreateParams); // set properties as needed
- * $client->requirementGroups->create(...$params->toArray());
- * ```
  * Create a new requirement group.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->requirementGroups->create(...$params->toArray());`
  *
  * @see Telnyx\RequirementGroups->create
  *

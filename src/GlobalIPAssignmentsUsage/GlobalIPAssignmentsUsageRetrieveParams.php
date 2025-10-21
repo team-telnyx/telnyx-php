@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\GlobalIPAssignmentsUsage\GlobalIPAssignmentsUsageRetrieveParams\Filter;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new GlobalIPAssignmentsUsageRetrieveParams); // set properties as needed
- * $client->globalIPAssignmentsUsage->retrieve(...$params->toArray());
- * ```
  * Global IP Assignment Usage Metrics.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->globalIPAssignmentsUsage->retrieve(...$params->toArray());`
  *
  * @see Telnyx\GlobalIPAssignmentsUsage->retrieve
  *

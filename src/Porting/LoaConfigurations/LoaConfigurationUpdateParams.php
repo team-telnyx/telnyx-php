@@ -13,18 +13,7 @@ use Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Contact;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Logo;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new LoaConfigurationUpdateParams); // set properties as needed
- * $client->porting.loaConfigurations->update(...$params->toArray());
- * ```
  * Update a specific LOA configuration.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->porting.loaConfigurations->update(...$params->toArray());`
  *
  * @see Telnyx\Porting\LoaConfigurations->update
  *

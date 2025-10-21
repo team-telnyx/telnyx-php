@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReportListParams\Page;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new MdrUsageReportListParams); // set properties as needed
- * $client->reports.mdrUsageReports->list(...$params->toArray());
- * ```
  * Fetch all messaging usage reports. Usage reports are aggregated messaging data for specified time period and breakdown.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->reports.mdrUsageReports->list(...$params->toArray());`
  *
  * @see Telnyx\Reports\MdrUsageReports->list
  *

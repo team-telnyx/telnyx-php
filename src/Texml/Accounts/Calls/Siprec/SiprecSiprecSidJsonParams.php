@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Texml\Accounts\Calls\Siprec\SiprecSiprecSidJsonParams\Status;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new SiprecSiprecSidJsonParams); // set properties as needed
- * $client->texml.accounts.calls.siprec->siprecSidJson(...$params->toArray());
- * ```
  * Updates siprec session identified by siprec_sid.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->texml.accounts.calls.siprec->siprecSidJson(...$params->toArray());`
  *
  * @see Telnyx\Texml\Accounts\Calls\Siprec->siprecSidJson
  *

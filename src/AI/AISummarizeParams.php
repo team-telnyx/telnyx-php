@@ -10,12 +10,6 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new AISummarizeParams); // set properties as needed
- * $client->ai->summarize(...$params->toArray());
- * ```
  * Generate a summary of a file's contents.
  *
  *  Supports the following text formats:
@@ -24,11 +18,6 @@ use Telnyx\Core\Contracts\BaseModel;
  *  Supports the following media formats (billed for both the transcription and summary):
  * - flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm
  * - Up to 100 MB
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->ai->summarize(...$params->toArray());`
  *
  * @see Telnyx\AI->summarize
  *

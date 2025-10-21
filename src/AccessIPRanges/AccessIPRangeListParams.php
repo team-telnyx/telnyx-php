@@ -12,18 +12,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new AccessIPRangeListParams); // set properties as needed
- * $client->accessIPRanges->list(...$params->toArray());
- * ```
  * List all Access IP Ranges.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->accessIPRanges->list(...$params->toArray());`
  *
  * @see Telnyx\AccessIPRanges->list
  *

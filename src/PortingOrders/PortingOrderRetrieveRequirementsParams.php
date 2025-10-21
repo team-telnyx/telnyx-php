@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\PortingOrderRetrieveRequirementsParams\Page;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new PortingOrderRetrieveRequirementsParams); // set properties as needed
- * $client->portingOrders->retrieveRequirements(...$params->toArray());
- * ```
  * Returns a list of all requirements based on country/number type for this porting order.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->portingOrders->retrieveRequirements(...$params->toArray());`
  *
  * @see Telnyx\PortingOrders->retrieveRequirements
  *

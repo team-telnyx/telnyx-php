@@ -13,18 +13,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new AudioTranscribeParams); // set properties as needed
- * $client->ai.audio->transcribe(...$params->toArray());
- * ```
  * Transcribe speech to text. This endpoint is consistent with the [OpenAI Transcription API](https://platform.openai.com/docs/api-reference/audio/createTranscription) and may be used with the OpenAI JS or Python SDK.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->ai.audio->transcribe(...$params->toArray());`
  *
  * @see Telnyx\AI\Audio->transcribe
  *

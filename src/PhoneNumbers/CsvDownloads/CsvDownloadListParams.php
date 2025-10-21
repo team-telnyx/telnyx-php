@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadListParams\Page;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new CsvDownloadListParams); // set properties as needed
- * $client->phoneNumbers.csvDownloads->list(...$params->toArray());
- * ```
  * List CSV downloads.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->phoneNumbers.csvDownloads->list(...$params->toArray());`
  *
  * @see Telnyx\PhoneNumbers\CsvDownloads->list
  *

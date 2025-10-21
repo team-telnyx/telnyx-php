@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ActionSetWirelessBlocklistParams); // set properties as needed
- * $client->simCardGroups.actions->setWirelessBlocklist(...$params->toArray());
- * ```
  * This action will asynchronously assign a Wireless Blocklist to all the SIMs in the SIM card group.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->simCardGroups.actions->setWirelessBlocklist(...$params->toArray());`
  *
  * @see Telnyx\SimCardGroups\Actions->setWirelessBlocklist
  *

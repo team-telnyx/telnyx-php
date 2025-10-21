@@ -11,18 +11,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new BulkSimCardActionListParams); // set properties as needed
- * $client->bulkSimCardActions->list(...$params->toArray());
- * ```
  * This API lists a paginated collection of bulk SIM card actions. A bulk SIM card action contains details about a collection of individual SIM card actions.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->bulkSimCardActions->list(...$params->toArray());`
  *
  * @see Telnyx\BulkSimCardActions->list
  *

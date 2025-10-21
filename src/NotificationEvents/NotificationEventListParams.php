@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NotificationEvents\NotificationEventListParams\Page;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new NotificationEventListParams); // set properties as needed
- * $client->notificationEvents->list(...$params->toArray());
- * ```
  * Returns a list of your notifications events.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->notificationEvents->list(...$params->toArray());`
  *
  * @see Telnyx\NotificationEvents->list
  *

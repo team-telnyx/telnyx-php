@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new AuthenticationProviderUpdateParams); // set properties as needed
- * $client->authenticationProviders->update(...$params->toArray());
- * ```
  * Updates settings of an existing authentication provider.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->authenticationProviders->update(...$params->toArray());`
  *
  * @see Telnyx\AuthenticationProviders->update
  *

@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\TextToSpeech\TextToSpeechListVoicesParams\Provider;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new TextToSpeechListVoicesParams); // set properties as needed
- * $client->textToSpeech->listVoices(...$params->toArray());
- * ```
  * Returns a list of voices that can be used with the text to speech commands.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->textToSpeech->listVoices(...$params->toArray());`
  *
  * @see Telnyx\TextToSpeech->listVoices
  *

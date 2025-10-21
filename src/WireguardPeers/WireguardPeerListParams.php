@@ -12,18 +12,7 @@ use Telnyx\WireguardPeers\WireguardPeerListParams\Filter;
 use Telnyx\WireguardPeers\WireguardPeerListParams\Page;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new WireguardPeerListParams); // set properties as needed
- * $client->wireguardPeers->list(...$params->toArray());
- * ```
  * List all WireGuard peers.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->wireguardPeers->list(...$params->toArray());`
  *
  * @see Telnyx\WireguardPeers->list
  *

@@ -24,12 +24,6 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ActionTransferParams); // set properties as needed
- * $client->calls.actions->transfer(...$params->toArray());
- * ```
  * Transfer a call to a new destination. If the transfer is unsuccessful, a `call.hangup` webhook for the other call (Leg B) will be sent indicating that the transfer could not be completed. The original call will remain active and may be issued additional commands, potentially transfering the call to an alternate destination.
  *
  * **Expected Webhooks:**
@@ -41,11 +35,6 @@ use Telnyx\Core\Contracts\BaseModel;
  * - `call.machine.greeting.ended` if `answering_machine_detection` was requested to detect the end of machine greeting
  * - `call.machine.premium.detection.ended` if `answering_machine_detection=premium` was requested
  * - `call.machine.premium.greeting.ended` if `answering_machine_detection=premium` was requested and a beep was detected
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->calls.actions->transfer(...$params->toArray());`
  *
  * @see Telnyx\Calls\Actions->transfer
  *

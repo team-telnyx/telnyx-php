@@ -12,18 +12,7 @@ use Telnyx\Rooms\Sessions\Actions\ActionMuteParams\Participants;
 use Telnyx\Rooms\Sessions\Actions\ActionMuteParams\Participants\UnionMember0;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ActionMuteParams); // set properties as needed
- * $client->rooms.sessions.actions->mute(...$params->toArray());
- * ```
  * Mute participants in room session.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->rooms.sessions.actions->mute(...$params->toArray());`
  *
  * @see Telnyx\Rooms\Sessions\Actions->mute
  *

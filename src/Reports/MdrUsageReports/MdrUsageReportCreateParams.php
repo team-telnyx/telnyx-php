@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReportCreateParams\AggregationType;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new MdrUsageReportCreateParams); // set properties as needed
- * $client->reports.mdrUsageReports->create(...$params->toArray());
- * ```
  * Submit request for new new messaging usage report. This endpoint will pull and aggregate messaging data in specified time period.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->reports.mdrUsageReports->create(...$params->toArray());`
  *
  * @see Telnyx\Reports\MdrUsageReports->create
  *

@@ -14,12 +14,6 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ActionGatherUsingSpeakParams); // set properties as needed
- * $client->calls.actions->gatherUsingSpeak(...$params->toArray());
- * ```
  * Convert text to speech and play it on the call until the required DTMF signals are gathered to build interactive menus.
  *
  * You can pass a list of valid digits along with an 'invalid_payload', which will be played back at the beginning of each prompt. Speech will be interrupted when a DTMF signal is received. The `Answer` command must be issued before the `gather_using_speak` command.
@@ -28,11 +22,6 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * - `call.dtmf.received` (you may receive many of these webhooks)
  * - `call.gather.ended`
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->calls.actions->gatherUsingSpeak(...$params->toArray());`
  *
  * @see Telnyx\Calls\Actions->gatherUsingSpeak
  *

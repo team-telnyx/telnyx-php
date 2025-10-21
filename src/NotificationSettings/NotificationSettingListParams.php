@@ -12,18 +12,7 @@ use Telnyx\NotificationSettings\NotificationSettingListParams\Filter;
 use Telnyx\NotificationSettings\NotificationSettingListParams\Page;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new NotificationSettingListParams); // set properties as needed
- * $client->notificationSettings->list(...$params->toArray());
- * ```
  * List notification settings.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->notificationSettings->list(...$params->toArray());`
  *
  * @see Telnyx\NotificationSettings->list
  *

@@ -10,21 +10,10 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new CanaryDeployCreateParams); // set properties as needed
- * $client->ai.assistants.canaryDeploys->create(...$params->toArray());
- * ```
  * Endpoint to create a canary deploy configuration for an assistant.
  *
  * Creates a new canary deploy configuration with multiple version IDs and their traffic
  * percentages for A/B testing or gradual rollouts of assistant versions.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->ai.assistants.canaryDeploys->create(...$params->toArray());`
  *
  * @see Telnyx\AI\Assistants\CanaryDeploys->create
  *

@@ -12,22 +12,11 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ActionRecordStartParams); // set properties as needed
- * $client->conferences.actions->recordStart(...$params->toArray());
- * ```
  * Start recording the conference. Recording will stop on conference end, or via the Stop Recording command.
  *
  * **Expected Webhooks:**
  *
  * - `conference.recording.saved`
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->conferences.actions->recordStart(...$params->toArray());`
  *
  * @see Telnyx\Conferences\Actions->recordStart
  *

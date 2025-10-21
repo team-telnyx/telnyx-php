@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Verifications\Actions\ActionVerifyParams\Status;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ActionVerifyParams); // set properties as needed
- * $client->verifications.actions->verify(...$params->toArray());
- * ```
  * Verify verification code by ID.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->verifications.actions->verify(...$params->toArray());`
  *
  * @see Telnyx\Verifications\Actions->verify
  *

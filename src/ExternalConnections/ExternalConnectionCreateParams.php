@@ -13,18 +13,7 @@ use Telnyx\ExternalConnections\ExternalConnectionCreateParams\Inbound;
 use Telnyx\ExternalConnections\ExternalConnectionCreateParams\Outbound;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ExternalConnectionCreateParams); // set properties as needed
- * $client->externalConnections->create(...$params->toArray());
- * ```
  * Creates a new External Connection based on the parameters sent in the request. The external_sip_connection and outbound voice profile id are required. Once created, you can assign phone numbers to your application using the `/phone_numbers` endpoint.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->externalConnections->create(...$params->toArray());`
  *
  * @see Telnyx\ExternalConnections->create
  *

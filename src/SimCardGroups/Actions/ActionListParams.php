@@ -12,18 +12,7 @@ use Telnyx\SimCardGroups\Actions\ActionListParams\FilterStatus;
 use Telnyx\SimCardGroups\Actions\ActionListParams\FilterType;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ActionListParams); // set properties as needed
- * $client->simCardGroups.actions->list(...$params->toArray());
- * ```
  * This API allows listing a paginated collection a SIM card group actions. It allows to explore a collection of existing asynchronous operation using specific filters.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->simCardGroups.actions->list(...$params->toArray());`
  *
  * @see Telnyx\SimCardGroups\Actions->list
  *

@@ -13,18 +13,7 @@ use Telnyx\PortingOrders\ActionRequirements\ActionRequirementListParams\Page;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementListParams\Sort;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ActionRequirementListParams); // set properties as needed
- * $client->portingOrders.actionRequirements->list(...$params->toArray());
- * ```
  * Returns a list of action requirements for a specific porting order.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->portingOrders.actionRequirements->list(...$params->toArray());`
  *
  * @see Telnyx\PortingOrders\ActionRequirements->list
  *

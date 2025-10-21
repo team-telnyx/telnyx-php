@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ActionStopAIAssistantParams); // set properties as needed
- * $client->calls.actions->stopAIAssistant(...$params->toArray());
- * ```
  * Stop an AI assistant on the call.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->calls.actions->stopAIAssistant(...$params->toArray());`
  *
  * @see Telnyx\Calls\Actions->stopAIAssistant
  *

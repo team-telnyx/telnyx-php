@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ActionUploadFileParams); // set properties as needed
- * $client->messagingHostedNumberOrders.actions->uploadFile(...$params->toArray());
- * ```
  * Upload file required for a messaging hosted number order.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->messagingHostedNumberOrders.actions->uploadFile(...$params->toArray());`
  *
  * @see Telnyx\MessagingHostedNumberOrders\Actions->uploadFile
  *

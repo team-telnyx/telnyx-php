@@ -25,12 +25,6 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ActionAnswerParams); // set properties as needed
- * $client->calls.actions->answer(...$params->toArray());
- * ```
  * Answer an incoming call. You must issue this command before executing subsequent commands on an incoming call.
  *
  * **Expected Webhooks:**
@@ -39,11 +33,6 @@ use Telnyx\Core\Contracts\BaseModel;
  * - `streaming.started`, `streaming.stopped` or `streaming.failed` if `stream_url` was set
  *
  * When the `record` parameter is set to `record-from-answer`, the response will include a `recording_id` field.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->calls.actions->answer(...$params->toArray());`
  *
  * @see Telnyx\Calls\Actions->answer
  *

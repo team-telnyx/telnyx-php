@@ -12,18 +12,7 @@ use Telnyx\ExternalConnections\Releases\ReleaseListParams\Filter;
 use Telnyx\ExternalConnections\Releases\ReleaseListParams\Page;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ReleaseListParams); // set properties as needed
- * $client->externalConnections.releases->list(...$params->toArray());
- * ```
  * Returns a list of your Releases for the given external connection. These are automatically created when you change the `connection_id` of a phone number that is currently on Microsoft Teams.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->externalConnections.releases->list(...$params->toArray());`
  *
  * @see Telnyx\ExternalConnections\Releases->list
  *

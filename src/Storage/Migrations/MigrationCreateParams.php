@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new MigrationCreateParams); // set properties as needed
- * $client->storage.migrations->create(...$params->toArray());
- * ```
  * Initiate a migration of data from an external provider into Telnyx Cloud Storage. Currently, only S3 is supported.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->storage.migrations->create(...$params->toArray());`
  *
  * @see Telnyx\Storage\Migrations->create
  *

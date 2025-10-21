@@ -12,18 +12,7 @@ use Telnyx\Portouts\PortoutListParams\Filter;
 use Telnyx\Portouts\PortoutListParams\Page;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new PortoutListParams); // set properties as needed
- * $client->portouts->list(...$params->toArray());
- * ```
  * Returns the portout requests according to filters.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->portouts->list(...$params->toArray());`
  *
  * @see Telnyx\Portouts->list
  *

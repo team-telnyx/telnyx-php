@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\InventoryCoverage\InventoryCoverageListParams\Filter;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new InventoryCoverageListParams); // set properties as needed
- * $client->inventoryCoverage->list(...$params->toArray());
- * ```
  * Creates an inventory coverage request. If locality, npa or national_destination_code is used in groupBy, and no region or locality filters are used, the whole paginated set is returned.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->inventoryCoverage->list(...$params->toArray());`
  *
  * @see Telnyx\InventoryCoverage->list
  *

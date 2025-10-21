@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\OAuth\OAuthTokenParams\GrantType;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new OAuthTokenParams); // set properties as needed
- * $client->oauth->token(...$params->toArray());
- * ```
  * Exchange authorization code, client credentials, or refresh token for access token.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->oauth->token(...$params->toArray());`
  *
  * @see Telnyx\OAuth->token
  *

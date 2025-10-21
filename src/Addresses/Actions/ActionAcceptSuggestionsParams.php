@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ActionAcceptSuggestionsParams); // set properties as needed
- * $client->addresses.actions->acceptSuggestions(...$params->toArray());
- * ```
  * Accepts this address suggestion as a new emergency address for Operator Connect and finishes the uploads of the numbers associated with it to Microsoft.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->addresses.actions->acceptSuggestions(...$params->toArray());`
  *
  * @see Telnyx\Addresses\Actions->acceptSuggestions
  *

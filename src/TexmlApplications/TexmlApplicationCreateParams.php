@@ -16,18 +16,7 @@ use Telnyx\TexmlApplications\TexmlApplicationCreateParams\StatusCallbackMethod;
 use Telnyx\TexmlApplications\TexmlApplicationCreateParams\VoiceMethod;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new TexmlApplicationCreateParams); // set properties as needed
- * $client->texmlApplications->create(...$params->toArray());
- * ```
  * Creates a TeXML Application.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->texmlApplications->create(...$params->toArray());`
  *
  * @see Telnyx\TexmlApplications->create
  *

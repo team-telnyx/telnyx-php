@@ -12,18 +12,7 @@ use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberListParams\Filter;
 use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberListParams\Page;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new PhoneNumberListParams); // set properties as needed
- * $client->externalConnections.phoneNumbers->list(...$params->toArray());
- * ```
  * Returns a list of all active phone numbers associated with the given external connection.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->externalConnections.phoneNumbers->list(...$params->toArray());`
  *
  * @see Telnyx\ExternalConnections\PhoneNumbers->list
  *

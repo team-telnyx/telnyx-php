@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new DetailRecordsReportCreateParams); // set properties as needed
- * $client->wireless.detailRecordsReports->create(...$params->toArray());
- * ```
  * Asynchronously create a report containing Wireless Detail Records (WDRs) for the SIM cards that consumed wireless data in the given time period.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->wireless.detailRecordsReports->create(...$params->toArray());`
  *
  * @see Telnyx\Wireless\DetailRecordsReports->create
  *

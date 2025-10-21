@@ -12,12 +12,6 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ActionReferParams); // set properties as needed
- * $client->calls.actions->refer(...$params->toArray());
- * ```
  * Initiate a SIP Refer on a Call Control call. You can initiate a SIP Refer at any point in the duration of a call.
  *
  * **Expected Webhooks:**
@@ -25,11 +19,6 @@ use Telnyx\Core\Contracts\BaseModel;
  * - `call.refer.started`
  * - `call.refer.completed`
  * - `call.refer.failed`
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->calls.actions->refer(...$params->toArray());`
  *
  * @see Telnyx\Calls\Actions->refer
  *

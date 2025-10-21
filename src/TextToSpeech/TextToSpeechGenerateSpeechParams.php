@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new TextToSpeechGenerateSpeechParams); // set properties as needed
- * $client->textToSpeech->generateSpeech(...$params->toArray());
- * ```
  * Converts the provided text to speech using the specified voice and returns audio data.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->textToSpeech->generateSpeech(...$params->toArray());`
  *
  * @see Telnyx\TextToSpeech->generateSpeech
  *

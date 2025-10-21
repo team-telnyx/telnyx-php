@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileUpdateParams\CallingWindow;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new OutboundVoiceProfileUpdateParams); // set properties as needed
- * $client->outboundVoiceProfiles->update(...$params->toArray());
- * ```
  * Updates an existing outbound voice profile.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->outboundVoiceProfiles->update(...$params->toArray());`
  *
  * @see Telnyx\OutboundVoiceProfiles->update
  *

@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentListParams\Page;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new GlobalIPAssignmentListParams); // set properties as needed
- * $client->globalIPAssignments->list(...$params->toArray());
- * ```
  * List all Global IP assignments.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->globalIPAssignments->list(...$params->toArray());`
  *
  * @see Telnyx\GlobalIPAssignments->list
  *

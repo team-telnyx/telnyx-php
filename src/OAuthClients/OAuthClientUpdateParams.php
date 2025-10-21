@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\OAuthClients\OAuthClientUpdateParams\AllowedGrantType;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new OAuthClientUpdateParams); // set properties as needed
- * $client->oauthClients->update(...$params->toArray());
- * ```
  * Update an existing OAuth client.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->oauthClients->update(...$params->toArray());`
  *
  * @see Telnyx\OAuthClients->update
  *

@@ -13,18 +13,7 @@ use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberListParams\
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberListParams\Sort;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new AssociatedPhoneNumberListParams); // set properties as needed
- * $client->portingOrders.associatedPhoneNumbers->list(...$params->toArray());
- * ```
  * Returns a list of all associated phone numbers for a porting order. Associated phone numbers are used for partial porting in GB to specify which phone numbers should be kept or disconnected.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->portingOrders.associatedPhoneNumbers->list(...$params->toArray());`
  *
  * @see Telnyx\PortingOrders\AssociatedPhoneNumbers->list
  *

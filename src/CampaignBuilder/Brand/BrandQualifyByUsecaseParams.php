@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new BrandQualifyByUsecaseParams); // set properties as needed
- * $client->campaignBuilder.brand->qualifyByUsecase(...$params->toArray());
- * ```
  * This endpoint allows you to see whether or not the supplied brand is suitable for your desired campaign use case.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->campaignBuilder.brand->qualifyByUsecase(...$params->toArray());`
  *
  * @see Telnyx\CampaignBuilder\Brand->qualifyByUsecase
  *

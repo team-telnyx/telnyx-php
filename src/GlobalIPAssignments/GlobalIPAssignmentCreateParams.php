@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new GlobalIPAssignmentCreateParams); // set properties as needed
- * $client->globalIPAssignments->create(...$params->toArray());
- * ```
  * Create a Global IP assignment.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->globalIPAssignments->create(...$params->toArray());`
  *
  * @see Telnyx\GlobalIPAssignments->create
  *

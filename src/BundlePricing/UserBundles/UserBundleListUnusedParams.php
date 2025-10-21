@@ -11,18 +11,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new UserBundleListUnusedParams); // set properties as needed
- * $client->bundlePricing.userBundles->listUnused(...$params->toArray());
- * ```
  * Returns all user bundles that aren't in use.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->bundlePricing.userBundles->listUnused(...$params->toArray());`
  *
  * @see Telnyx\BundlePricing\UserBundles->listUnused
  *

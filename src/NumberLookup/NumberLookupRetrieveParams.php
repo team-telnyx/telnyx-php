@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NumberLookup\NumberLookupRetrieveParams\Type;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new NumberLookupRetrieveParams); // set properties as needed
- * $client->numberLookup->retrieve(...$params->toArray());
- * ```
  * Returns information about the provided phone number.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->numberLookup->retrieve(...$params->toArray());`
  *
  * @see Telnyx\NumberLookup->retrieve
  *

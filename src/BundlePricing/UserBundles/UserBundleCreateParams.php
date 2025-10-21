@@ -11,18 +11,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new UserBundleCreateParams); // set properties as needed
- * $client->bundlePricing.userBundles->create(...$params->toArray());
- * ```
  * Creates multiple user bundles for the user.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->bundlePricing.userBundles->create(...$params->toArray());`
  *
  * @see Telnyx\BundlePricing\UserBundles->create
  *

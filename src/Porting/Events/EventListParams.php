@@ -12,18 +12,7 @@ use Telnyx\Porting\Events\EventListParams\Filter;
 use Telnyx\Porting\Events\EventListParams\Page;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new EventListParams); // set properties as needed
- * $client->porting.events->list(...$params->toArray());
- * ```
  * Returns a list of all porting events.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->porting.events->list(...$params->toArray());`
  *
  * @see Telnyx\Porting\Events->list
  *

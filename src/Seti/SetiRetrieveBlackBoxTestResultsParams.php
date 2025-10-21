@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Seti\SetiRetrieveBlackBoxTestResultsParams\Filter;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new SetiRetrieveBlackBoxTestResultsParams); // set properties as needed
- * $client->seti->retrieveBlackBoxTestResults(...$params->toArray());
- * ```
  * Returns the results of the various black box tests.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->seti->retrieveBlackBoxTestResults(...$params->toArray());`
  *
  * @see Telnyx\Seti->retrieveBlackBoxTestResults
  *

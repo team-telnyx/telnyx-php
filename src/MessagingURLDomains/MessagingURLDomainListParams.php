@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\MessagingURLDomains\MessagingURLDomainListParams\Page;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new MessagingURLDomainListParams); // set properties as needed
- * $client->messagingURLDomains->list(...$params->toArray());
- * ```
  * List messaging URL domains.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->messagingURLDomains->list(...$params->toArray());`
  *
  * @see Telnyx\MessagingURLDomains->list
  *

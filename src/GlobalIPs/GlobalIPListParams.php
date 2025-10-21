@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\GlobalIPs\GlobalIPListParams\Page;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new GlobalIPListParams); // set properties as needed
- * $client->globalIPs->list(...$params->toArray());
- * ```
  * List all Global IPs.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->globalIPs->list(...$params->toArray());`
  *
  * @see Telnyx\GlobalIPs->list
  *

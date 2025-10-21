@@ -12,18 +12,7 @@ use Telnyx\MessagingProfiles\MessagingProfileListParams\Filter;
 use Telnyx\MessagingProfiles\MessagingProfileListParams\Page;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new MessagingProfileListParams); // set properties as needed
- * $client->messagingProfiles->list(...$params->toArray());
- * ```
  * List messaging profiles.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->messagingProfiles->list(...$params->toArray());`
  *
  * @see Telnyx\MessagingProfiles->list
  *

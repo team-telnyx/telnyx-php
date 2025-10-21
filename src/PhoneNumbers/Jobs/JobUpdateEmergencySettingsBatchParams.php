@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new JobUpdateEmergencySettingsBatchParams); // set properties as needed
- * $client->phoneNumbers.jobs->updateEmergencySettingsBatch(...$params->toArray());
- * ```
  * Creates a background job to update the emergency settings of a collection of phone numbers. At most one thousand numbers can be updated per API call.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->phoneNumbers.jobs->updateEmergencySettingsBatch(...$params->toArray());`
  *
  * @see Telnyx\PhoneNumbers\Jobs->updateEmergencySettingsBatch
  *

@@ -12,18 +12,7 @@ use Telnyx\ExternalConnections\LogMessages\LogMessageListParams\Filter;
 use Telnyx\ExternalConnections\LogMessages\LogMessageListParams\Page;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new LogMessageListParams); // set properties as needed
- * $client->externalConnections.logMessages->list(...$params->toArray());
- * ```
  * Retrieve a list of log messages for all external connections associated with your account.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->externalConnections.logMessages->list(...$params->toArray());`
  *
  * @see Telnyx\ExternalConnections\LogMessages->list
  *

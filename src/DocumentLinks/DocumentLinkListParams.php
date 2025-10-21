@@ -12,18 +12,7 @@ use Telnyx\DocumentLinks\DocumentLinkListParams\Filter;
 use Telnyx\DocumentLinks\DocumentLinkListParams\Page;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new DocumentLinkListParams); // set properties as needed
- * $client->documentLinks->list(...$params->toArray());
- * ```
  * List all documents links ordered by created_at descending.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->documentLinks->list(...$params->toArray());`
  *
  * @see Telnyx\DocumentLinks->list
  *

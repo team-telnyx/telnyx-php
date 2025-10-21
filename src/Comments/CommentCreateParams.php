@@ -11,18 +11,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new CommentCreateParams); // set properties as needed
- * $client->comments->create(...$params->toArray());
- * ```
  * Create a comment.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->comments->create(...$params->toArray());`
  *
  * @see Telnyx\Comments->create
  *

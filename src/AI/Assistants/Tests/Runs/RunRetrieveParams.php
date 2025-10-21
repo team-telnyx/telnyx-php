@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new RunRetrieveParams); // set properties as needed
- * $client->ai.assistants.tests.runs->retrieve(...$params->toArray());
- * ```
  * Retrieves detailed information about a specific test run execution.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->ai.assistants.tests.runs->retrieve(...$params->toArray());`
  *
  * @see Telnyx\AI\Assistants\Tests\Runs->retrieve
  *

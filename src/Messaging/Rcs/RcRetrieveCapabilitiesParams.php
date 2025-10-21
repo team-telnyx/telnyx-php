@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new RcRetrieveCapabilitiesParams); // set properties as needed
- * $client->messaging.rcs->retrieveCapabilities(...$params->toArray());
- * ```
  * List RCS capabilities of a phone number.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->messaging.rcs->retrieveCapabilities(...$params->toArray());`
  *
  * @see Telnyx\Messaging\Rcs->retrieveCapabilities
  *

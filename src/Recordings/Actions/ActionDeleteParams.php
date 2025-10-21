@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ActionDeleteParams); // set properties as needed
- * $client->recordings.actions->delete(...$params->toArray());
- * ```
  * Permanently deletes a list of call recordings.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->recordings.actions->delete(...$params->toArray());`
  *
  * @see Telnyx\Recordings\Actions->delete
  *

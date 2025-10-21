@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ActionStopTranscriptionParams); // set properties as needed
- * $client->calls.actions->stopTranscription(...$params->toArray());
- * ```
  * Stop real-time transcription.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->calls.actions->stopTranscription(...$params->toArray());`
  *
  * @see Telnyx\Calls\Actions->stopTranscription
  *

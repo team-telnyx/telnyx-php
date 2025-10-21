@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NotificationChannels\NotificationChannelCreateParams\ChannelTypeID;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new NotificationChannelCreateParams); // set properties as needed
- * $client->notificationChannels->create(...$params->toArray());
- * ```
  * Create a notification channel.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->notificationChannels->create(...$params->toArray());`
  *
  * @see Telnyx\NotificationChannels->create
  *

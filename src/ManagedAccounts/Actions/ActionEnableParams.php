@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ActionEnableParams); // set properties as needed
- * $client->managedAccounts.actions->enable(...$params->toArray());
- * ```
  * Enables a managed account and its sub-users to use Telnyx services.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->managedAccounts.actions->enable(...$params->toArray());`
  *
  * @see Telnyx\ManagedAccounts\Actions->enable
  *

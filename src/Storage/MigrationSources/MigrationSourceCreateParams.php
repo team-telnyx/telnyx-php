@@ -12,18 +12,7 @@ use Telnyx\Storage\MigrationSources\MigrationSourceCreateParams\Provider;
 use Telnyx\Storage\MigrationSources\MigrationSourceCreateParams\ProviderAuth;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new MigrationSourceCreateParams); // set properties as needed
- * $client->storage.migrationSources->create(...$params->toArray());
- * ```
  * Create a source from which data can be migrated from.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->storage.migrationSources->create(...$params->toArray());`
  *
  * @see Telnyx\Storage\MigrationSources->create
  *

@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new SpeechToTextCreateParams); // set properties as needed
- * $client->legacy.reporting.batchDetailRecords.speechToText->create(...$params->toArray());
- * ```
  * Creates a new Speech to Text batch report request with the specified filters.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->legacy.reporting.batchDetailRecords.speechToText->create(...$params->toArray());`
  *
  * @see Telnyx\Legacy\Reporting\BatchDetailRecords\SpeechToText->create
  *

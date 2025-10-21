@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new JobDeletePhoneNumberBlockParams); // set properties as needed
- * $client->phoneNumberBlocks.jobs->deletePhoneNumberBlock(...$params->toArray());
- * ```
  * Creates a new background job to delete all the phone numbers associated with the given block. We will only consider the phone number block as deleted after all phone numbers associated with it are removed, so multiple executions of this job may be necessary in case some of the phone numbers present errors during the deletion process.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->phoneNumberBlocks.jobs->deletePhoneNumberBlock(...$params->toArray());`
  *
  * @see Telnyx\PhoneNumberBlocks\Jobs->deletePhoneNumberBlock
  *

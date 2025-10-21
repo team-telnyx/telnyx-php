@@ -13,18 +13,7 @@ use Telnyx\FaxApplications\FaxApplicationUpdateParams\Inbound;
 use Telnyx\FaxApplications\FaxApplicationUpdateParams\Outbound;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new FaxApplicationUpdateParams); // set properties as needed
- * $client->faxApplications->update(...$params->toArray());
- * ```
  * Updates settings of an existing Fax Application based on the parameters of the request.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->faxApplications->update(...$params->toArray());`
  *
  * @see Telnyx\FaxApplications->update
  *

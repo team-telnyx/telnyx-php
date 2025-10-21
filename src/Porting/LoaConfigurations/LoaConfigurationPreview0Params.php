@@ -13,18 +13,7 @@ use Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Contact;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Logo;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new LoaConfigurationPreview0Params); // set properties as needed
- * $client->porting.loaConfigurations->preview0(...$params->toArray());
- * ```
  * Preview the LOA template that would be generated without need to create LOA configuration.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->porting.loaConfigurations->preview0(...$params->toArray());`
  *
  * @see Telnyx\Porting\LoaConfigurations->preview0
  *

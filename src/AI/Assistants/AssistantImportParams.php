@@ -11,18 +11,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new AssistantImportParams); // set properties as needed
- * $client->ai.assistants->import(...$params->toArray());
- * ```
  * Import assistants from external providers. Any assistant that has already been imported will be overwritten with its latest version from the importing provider.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->ai.assistants->import(...$params->toArray());`
  *
  * @see Telnyx\AI\Assistants->import
  *

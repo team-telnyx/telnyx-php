@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ScheduledEventDeleteParams); // set properties as needed
- * $client->ai.assistants.scheduledEvents->delete(...$params->toArray());
- * ```
  * If the event is pending, this will cancel the event. Otherwise, this will simply remove the record of the event.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->ai.assistants.scheduledEvents->delete(...$params->toArray());`
  *
  * @see Telnyx\AI\Assistants\ScheduledEvents->delete
  *

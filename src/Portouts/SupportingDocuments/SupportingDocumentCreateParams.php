@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Portouts\SupportingDocuments\SupportingDocumentCreateParams\Document;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new SupportingDocumentCreateParams); // set properties as needed
- * $client->portouts.supportingDocuments->create(...$params->toArray());
- * ```
  * Creates a list of supporting documents on a portout request.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->portouts.supportingDocuments->create(...$params->toArray());`
  *
  * @see Telnyx\Portouts\SupportingDocuments->create
  *

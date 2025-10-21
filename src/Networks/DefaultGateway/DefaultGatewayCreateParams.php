@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new DefaultGatewayCreateParams); // set properties as needed
- * $client->networks.defaultGateway->create(...$params->toArray());
- * ```
  * Create Default Gateway.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->networks.defaultGateway->create(...$params->toArray());`
  *
  * @see Telnyx\Networks\DefaultGateway->create
  *

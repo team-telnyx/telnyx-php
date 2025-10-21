@@ -13,18 +13,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new AddressListParams); // set properties as needed
- * $client->addresses->list(...$params->toArray());
- * ```
  * Returns a list of your addresses.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->addresses->list(...$params->toArray());`
  *
  * @see Telnyx\Addresses->list
  *

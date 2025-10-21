@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PhoneNumbersRegulatoryRequirements\PhoneNumbersRegulatoryRequirementRetrieveParams\Filter;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new PhoneNumbersRegulatoryRequirementRetrieveParams); // set properties as needed
- * $client->phoneNumbersRegulatoryRequirements->retrieve(...$params->toArray());
- * ```
  * Retrieve regulatory requirements for a list of phone numbers.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->phoneNumbersRegulatoryRequirements->retrieve(...$params->toArray());`
  *
  * @see Telnyx\PhoneNumbersRegulatoryRequirements->retrieve
  *

@@ -13,18 +13,7 @@ use Telnyx\PhoneNumbers\PhoneNumberListParams\Page;
 use Telnyx\PhoneNumbers\PhoneNumberListParams\Sort;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new PhoneNumberListParams); // set properties as needed
- * $client->phoneNumbers->list(...$params->toArray());
- * ```
  * List phone numbers.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->phoneNumbers->list(...$params->toArray());`
  *
  * @see Telnyx\PhoneNumbers->list
  *

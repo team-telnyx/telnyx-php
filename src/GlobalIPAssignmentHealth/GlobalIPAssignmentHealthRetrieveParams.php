@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthRetrieveParams\Filter;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new GlobalIPAssignmentHealthRetrieveParams); // set properties as needed
- * $client->globalIPAssignmentHealth->retrieve(...$params->toArray());
- * ```
  * Global IP Assignment Health Check Metrics.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->globalIPAssignmentHealth->retrieve(...$params->toArray());`
  *
  * @see Telnyx\GlobalIPAssignmentHealth->retrieve
  *

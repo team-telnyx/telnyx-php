@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\Comments\CommentListParams\Page;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new CommentListParams); // set properties as needed
- * $client->portingOrders.comments->list(...$params->toArray());
- * ```
  * Returns a list of all comments of a porting order.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->portingOrders.comments->list(...$params->toArray());`
  *
  * @see Telnyx\PortingOrders\Comments->list
  *

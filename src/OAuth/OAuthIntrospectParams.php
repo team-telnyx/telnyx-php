@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new OAuthIntrospectParams); // set properties as needed
- * $client->oauth->introspect(...$params->toArray());
- * ```
  * Introspect an OAuth access token to check its validity and metadata.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->oauth->introspect(...$params->toArray());`
  *
  * @see Telnyx\OAuth->introspect
  *

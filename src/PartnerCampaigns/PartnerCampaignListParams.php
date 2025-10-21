@@ -11,20 +11,9 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PartnerCampaigns\PartnerCampaignListParams\Sort;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new PartnerCampaignListParams); // set properties as needed
- * $client->partnerCampaigns->list(...$params->toArray());
- * ```
  * Retrieve all partner campaigns you have shared to Telnyx in a paginated fashion.
  *
  * This endpoint is currently limited to only returning shared campaigns that Telnyx has accepted. In other words, shared but pending campaigns are currently omitted from the response from this endpoint.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->partnerCampaigns->list(...$params->toArray());`
  *
  * @see Telnyx\PartnerCampaigns->list
  *

@@ -11,18 +11,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ClusterListParams); // set properties as needed
- * $client->ai.clusters->list(...$params->toArray());
- * ```
  * List all clusters.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->ai.clusters->list(...$params->toArray());`
  *
  * @see Telnyx\AI\Clusters->list
  *

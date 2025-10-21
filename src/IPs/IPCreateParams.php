@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new IPCreateParams); // set properties as needed
- * $client->ips->create(...$params->toArray());
- * ```
  * Create a new IP object.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->ips->create(...$params->toArray());`
  *
  * @see Telnyx\IPs->create
  *

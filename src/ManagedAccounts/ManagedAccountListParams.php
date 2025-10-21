@@ -13,18 +13,7 @@ use Telnyx\ManagedAccounts\ManagedAccountListParams\Page;
 use Telnyx\ManagedAccounts\ManagedAccountListParams\Sort;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ManagedAccountListParams); // set properties as needed
- * $client->managedAccounts->list(...$params->toArray());
- * ```
  * Lists the accounts managed by the current user. Users need to be explictly approved by Telnyx in order to become manager accounts.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->managedAccounts->list(...$params->toArray());`
  *
  * @see Telnyx\ManagedAccounts->list
  *

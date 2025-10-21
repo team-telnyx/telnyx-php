@@ -15,22 +15,11 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ActionStartTranscriptionParams); // set properties as needed
- * $client->calls.actions->startTranscription(...$params->toArray());
- * ```
  * Start real-time transcription. Transcription will stop on call hang-up, or can be initiated via the Transcription stop command.
  *
  * **Expected Webhooks:**
  *
  * - `call.transcription`
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->calls.actions->startTranscription(...$params->toArray());`
  *
  * @see Telnyx\Calls\Actions->startTranscription
  *

@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectCreateParams\CloudProvider;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new VirtualCrossConnectCreateParams); // set properties as needed
- * $client->virtualCrossConnects->create(...$params->toArray());
- * ```
  * Create a new Virtual Cross Connect.<br /><br />For AWS and GCE, you have the option of creating the primary connection first and the secondary connection later. You also have the option of disabling the primary and/or secondary connections at any time and later re-enabling them. With Azure, you do not have this option. Azure requires both the primary and secondary connections to be created at the same time and they can not be independantly disabled.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->virtualCrossConnects->create(...$params->toArray());`
  *
  * @see Telnyx\VirtualCrossConnects->create
  *

@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new PrivateWirelessGatewayCreateParams); // set properties as needed
- * $client->privateWirelessGateways->create(...$params->toArray());
- * ```
  * Asynchronously create a Private Wireless Gateway for SIM cards for a previously created network. This operation may take several minutes so you can check the Private Wireless Gateway status at the section Get a Private Wireless Gateway.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->privateWirelessGateways->create(...$params->toArray());`
  *
  * @see Telnyx\PrivateWirelessGateways->create
  *

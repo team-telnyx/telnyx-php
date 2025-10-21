@@ -13,18 +13,7 @@ use Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionListParams\Pa
 use Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionListParams\Sort;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new PhoneNumberExtensionListParams); // set properties as needed
- * $client->portingOrders.phoneNumberExtensions->list(...$params->toArray());
- * ```
  * Returns a list of all phone number extensions of a porting order.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->portingOrders.phoneNumberExtensions->list(...$params->toArray());`
  *
  * @see Telnyx\PortingOrders\PhoneNumberExtensions->list
  *
