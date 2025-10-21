@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type v10999_alias = array{
+ * @phpstan-type mno_10999_alias = array{
  *   minMsgSamples: int,
  *   mno: string,
  *   mnoReview: bool,
@@ -22,9 +22,9 @@ use Telnyx\Core\Contracts\BaseModel;
  *   reqSubscriberOptout: bool,
  * }
  */
-final class v10999 implements BaseModel
+final class mno_10999 implements BaseModel
 {
-    /** @use SdkModel<v10999_alias> */
+    /** @use SdkModel<mno_10999_alias> */
     use SdkModel;
 
     #[Api]
@@ -58,11 +58,11 @@ final class v10999 implements BaseModel
     public bool $reqSubscriberOptout;
 
     /**
-     * `new v10999()` is missing required properties by the API.
+     * `new mno_10999()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * v10999::with(
+     * mno_10999::with(
      *   minMsgSamples: ...,
      *   mno: ...,
      *   mnoReview: ...,
@@ -79,7 +79,7 @@ final class v10999 implements BaseModel
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new v10999)
+     * (new mno_10999)
      *   ->withMinMsgSamples(...)
      *   ->withMno(...)
      *   ->withMnoReview(...)
