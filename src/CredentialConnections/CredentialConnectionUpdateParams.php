@@ -12,18 +12,7 @@ use Telnyx\CredentialConnections\CredentialConnectionUpdateParams\SipUriCallingP
 use Telnyx\CredentialConnections\CredentialConnectionUpdateParams\WebhookAPIVersion;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new CredentialConnectionUpdateParams); // set properties as needed
- * $client->credentialConnections->update(...$params->toArray());
- * ```
  * Updates settings of an existing credential connection.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->credentialConnections->update(...$params->toArray());`
  *
  * @see Telnyx\CredentialConnections->update
  *

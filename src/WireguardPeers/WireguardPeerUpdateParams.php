@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new WireguardPeerUpdateParams); // set properties as needed
- * $client->wireguardPeers->update(...$params->toArray());
- * ```
  * Update the WireGuard peer.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->wireguardPeers->update(...$params->toArray());`
  *
  * @see Telnyx\WireguardPeers->update
  *

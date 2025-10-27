@@ -11,19 +11,8 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new PurchaseCreateParams); // set properties as needed
- * $client->actions.purchase->create(...$params->toArray());
- * ```
  * Purchases and registers the specified amount of eSIMs to the current user's account.<br/><br/>
  * If <code>sim_card_group_id</code> is provided, the eSIMs will be associated with that group. Otherwise, the default group for the current user will be used.<br/><br/>.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->actions.purchase->create(...$params->toArray());`
  *
  * @see Telnyx\Actions\Purchase->create
  *

@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new PhoneNumberExtensionDeleteParams); // set properties as needed
- * $client->portingOrders.phoneNumberExtensions->delete(...$params->toArray());
- * ```
  * Deletes a phone number extension.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->portingOrders.phoneNumberExtensions->delete(...$params->toArray());`
  *
  * @see Telnyx\PortingOrders\PhoneNumberExtensions->delete
  *

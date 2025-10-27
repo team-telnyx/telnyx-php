@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new UserBundleDeactivateParams); // set properties as needed
- * $client->bundlePricing.userBundles->deactivate(...$params->toArray());
- * ```
  * Deactivates a user bundle by its ID.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->bundlePricing.userBundles->deactivate(...$params->toArray());`
  *
  * @see Telnyx\BundlePricing\UserBundles->deactivate
  *

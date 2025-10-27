@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationListParams\Page;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new LoaConfigurationListParams); // set properties as needed
- * $client->porting.loaConfigurations->list(...$params->toArray());
- * ```
  * List the LOA configurations.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->porting.loaConfigurations->list(...$params->toArray());`
  *
  * @see Telnyx\Porting\LoaConfigurations->list
  *

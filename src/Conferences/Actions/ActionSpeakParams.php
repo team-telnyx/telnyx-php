@@ -15,18 +15,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ActionSpeakParams); // set properties as needed
- * $client->conferences.actions->speak(...$params->toArray());
- * ```
  * Convert text to speech and play it to all or some participants.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->conferences.actions->speak(...$params->toArray());`
  *
  * @see Telnyx\Conferences\Actions->speak
  *

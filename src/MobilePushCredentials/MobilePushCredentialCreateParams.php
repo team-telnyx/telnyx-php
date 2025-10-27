@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\MobilePushCredentials\MobilePushCredentialCreateParams\Type;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new MobilePushCredentialCreateParams); // set properties as needed
- * $client->mobilePushCredentials->create(...$params->toArray());
- * ```
  * Creates a new mobile push credential.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->mobilePushCredentials->create(...$params->toArray());`
  *
  * @see Telnyx\MobilePushCredentials->create
  *

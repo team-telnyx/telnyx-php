@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new PartnerCampaignUpdateParams); // set properties as needed
- * $client->partnerCampaigns->update(...$params->toArray());
- * ```
  * Update campaign details by `campaignId`. **Please note:** Only webhook urls are editable.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->partnerCampaigns->update(...$params->toArray());`
  *
  * @see Telnyx\PartnerCampaigns->update
  *

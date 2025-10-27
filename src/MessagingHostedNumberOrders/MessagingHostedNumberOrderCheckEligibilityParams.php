@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new MessagingHostedNumberOrderCheckEligibilityParams); // set properties as needed
- * $client->messagingHostedNumberOrders->checkEligibility(...$params->toArray());
- * ```
  * Check eligibility of phone numbers for hosted messaging.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->messagingHostedNumberOrders->checkEligibility(...$params->toArray());`
  *
  * @see Telnyx\MessagingHostedNumberOrders->checkEligibility
  *

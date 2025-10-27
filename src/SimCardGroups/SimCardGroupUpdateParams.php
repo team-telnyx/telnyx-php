@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SimCardGroups\SimCardGroupUpdateParams\DataLimit;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new SimCardGroupUpdateParams); // set properties as needed
- * $client->simCardGroups->update(...$params->toArray());
- * ```
  * Updates a SIM card group.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->simCardGroups->update(...$params->toArray());`
  *
  * @see Telnyx\SimCardGroups->update
  *

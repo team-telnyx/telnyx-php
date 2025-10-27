@@ -137,4 +137,34 @@ final class DocumentsTest extends TestCase
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
+
+    #[Test]
+    public function testUploadJson(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
+        $result = $this->client->documents->uploadJson(
+            url: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
+            file: 'U3RhaW5sZXNzIHJvY2tz',
+        );
+
+        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+    }
+
+    #[Test]
+    public function testUploadJsonWithOptionalParams(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
+        $result = $this->client->documents->uploadJson(
+            url: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
+            file: 'U3RhaW5sZXNzIHJvY2tz',
+        );
+
+        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+    }
 }

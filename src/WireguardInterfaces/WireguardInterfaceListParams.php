@@ -12,18 +12,7 @@ use Telnyx\WireguardInterfaces\WireguardInterfaceListParams\Filter;
 use Telnyx\WireguardInterfaces\WireguardInterfaceListParams\Page;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new WireguardInterfaceListParams); // set properties as needed
- * $client->wireguardInterfaces->list(...$params->toArray());
- * ```
  * List all WireGuard Interfaces.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->wireguardInterfaces->list(...$params->toArray());`
  *
  * @see Telnyx\WireguardInterfaces->list
  *

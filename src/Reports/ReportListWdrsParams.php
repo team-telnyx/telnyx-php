@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Reports\ReportListWdrsParams\Page;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ReportListWdrsParams); // set properties as needed
- * $client->reports->listWdrs(...$params->toArray());
- * ```
  * Fetch all Wdr records.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->reports->listWdrs(...$params->toArray());`
  *
  * @see Telnyx\Reports->listWdrs
  *

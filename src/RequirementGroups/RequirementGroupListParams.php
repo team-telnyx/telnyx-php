@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\RequirementGroups\RequirementGroupListParams\Filter;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new RequirementGroupListParams); // set properties as needed
- * $client->requirementGroups->list(...$params->toArray());
- * ```
  * List requirement groups.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->requirementGroups->list(...$params->toArray());`
  *
  * @see Telnyx\RequirementGroups->list
  *

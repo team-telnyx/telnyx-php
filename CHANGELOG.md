@@ -1,5 +1,27 @@
 # Changelog
 
+## 5.0.0 (2025-10-27)
+
+Full Changelog: [v4.1.0...v5.0.0](https://github.com/team-telnyx/telnyx-php/compare/v4.1.0...v5.0.0)
+
+### ⚠ BREAKING CHANGES
+
+* remove confusing `toArray()` alias to `__serialize()` in favour of `toProperties()`
+
+### Features
+
+* **api:** add method to upload JSON documents ([643be7f](https://github.com/team-telnyx/telnyx-php/commit/643be7fba6041edfa30c95895aa9cfa6d37f33fd))
+* **api:** added webhook public key ([4fef9c8](https://github.com/team-telnyx/telnyx-php/commit/4fef9c874acbf025f289cc1e5b66b5315e49ddf3))
+* **api:** manual updates ([8de74fe](https://github.com/team-telnyx/telnyx-php/commit/8de74feba69963556872d94afd656eeb569ff422))
+* **api:** manual updates ([571b16c](https://github.com/team-telnyx/telnyx-php/commit/571b16caccf584163c92c069efece6db1022eda4))
+* define more models ([e2a13b6](https://github.com/team-telnyx/telnyx-php/commit/e2a13b63a9e2a623ebb8414cd5e9907aaca2e1b3))
+* remove confusing `toArray()` alias to `__serialize()` in favour of `toProperties()` ([1b36bb9](https://github.com/team-telnyx/telnyx-php/commit/1b36bb9f0c3ee20b15fe2fdc9244b8b28ddf3ed6))
+
+
+### Documentation
+
+* update package description and add keywords ([#6](https://github.com/team-telnyx/telnyx-php/issues/6)) ([715c69e](https://github.com/team-telnyx/telnyx-php/commit/715c69e2e516e995279264ca7e06ba5692a644e5))
+
 ## 4.1.0 (2025-10-16)
 
 Full Changelog: [v4.0.0...v4.1.0](https://github.com/team-telnyx/telnyx-php/compare/v4.0.0...v4.1.0)

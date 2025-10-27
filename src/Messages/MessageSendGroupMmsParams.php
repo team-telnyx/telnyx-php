@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new MessageSendGroupMmsParams); // set properties as needed
- * $client->messages->sendGroupMms(...$params->toArray());
- * ```
  * Send a group MMS message.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->messages->sendGroupMms(...$params->toArray());`
  *
  * @see Telnyx\Messages->sendGroupMms
  *

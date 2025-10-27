@@ -10,20 +10,9 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ExternalVettingImportParams); // set properties as needed
- * $client->brand.externalVetting->import(...$params->toArray());
- * ```
  * This operation can be used to import an external vetting record from a TCR-approved
  * vetting provider. If the vetting provider confirms validity of the record, it will be
  * saved with the brand and will be considered for future campaign qualification.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->brand.externalVetting->import(...$params->toArray());`
  *
  * @see Telnyx\Brand\ExternalVetting->import
  *

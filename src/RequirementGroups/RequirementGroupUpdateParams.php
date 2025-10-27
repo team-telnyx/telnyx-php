@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\RequirementGroups\RequirementGroupUpdateParams\RegulatoryRequirement;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new RequirementGroupUpdateParams); // set properties as needed
- * $client->requirementGroups->update(...$params->toArray());
- * ```
  * Update requirement values in requirement group.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->requirementGroups->update(...$params->toArray());`
  *
  * @see Telnyx\RequirementGroups->update
  *

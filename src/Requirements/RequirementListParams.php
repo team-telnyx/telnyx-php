@@ -13,18 +13,7 @@ use Telnyx\Requirements\RequirementListParams\Page;
 use Telnyx\Requirements\RequirementListParams\Sort;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new RequirementListParams); // set properties as needed
- * $client->requirements->list(...$params->toArray());
- * ```
  * List all requirements with filtering, sorting, and pagination.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->requirements->list(...$params->toArray());`
  *
  * @see Telnyx\Requirements->list
  *

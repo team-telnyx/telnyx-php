@@ -12,18 +12,7 @@ use Telnyx\PhoneNumberCampaigns\PhoneNumberCampaignListParams\Filter;
 use Telnyx\PhoneNumberCampaigns\PhoneNumberCampaignListParams\Sort;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new PhoneNumberCampaignListParams); // set properties as needed
- * $client->phoneNumberCampaigns->list(...$params->toArray());
- * ```
  * Retrieve All Phone Number Campaigns.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->phoneNumberCampaigns->list(...$params->toArray());`
  *
  * @see Telnyx\PhoneNumberCampaigns->list
  *

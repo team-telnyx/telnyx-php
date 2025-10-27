@@ -13,18 +13,7 @@ use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListP
 use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListParams\Sort;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new PhoneNumberConfigurationListParams); // set properties as needed
- * $client->portingOrders.phoneNumberConfigurations->list(...$params->toArray());
- * ```
  * Returns a list of phone number configurations paginated.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->portingOrders.phoneNumberConfigurations->list(...$params->toArray());`
  *
  * @see Telnyx\PortingOrders\PhoneNumberConfigurations->list
  *

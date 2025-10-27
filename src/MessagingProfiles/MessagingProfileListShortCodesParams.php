@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\MessagingProfiles\MessagingProfileListShortCodesParams\Page;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new MessagingProfileListShortCodesParams); // set properties as needed
- * $client->messagingProfiles->listShortCodes(...$params->toArray());
- * ```
  * List short codes associated with a messaging profile.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->messagingProfiles->listShortCodes(...$params->toArray());`
  *
  * @see Telnyx\MessagingProfiles->listShortCodes
  *

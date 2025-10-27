@@ -16,18 +16,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ChatCreateCompletionParams); // set properties as needed
- * $client->ai.chat->createCompletion(...$params->toArray());
- * ```
  * Chat with a language model. This endpoint is consistent with the [OpenAI Chat Completions API](https://platform.openai.com/docs/api-reference/chat) and may be used with the OpenAI JS or Python SDK.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->ai.chat->createCompletion(...$params->toArray());`
  *
  * @see Telnyx\AI\Chat->createCompletion
  *

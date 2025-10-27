@@ -11,18 +11,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new TestListParams); // set properties as needed
- * $client->ai.assistants.tests->list(...$params->toArray());
- * ```
  * Retrieves a paginated list of assistant tests with optional filtering capabilities.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->ai.assistants.tests->list(...$params->toArray());`
  *
  * @see Telnyx\AI\Assistants\Tests->list
  *

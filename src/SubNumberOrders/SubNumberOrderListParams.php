@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SubNumberOrders\SubNumberOrderListParams\Filter;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new SubNumberOrderListParams); // set properties as needed
- * $client->subNumberOrders->list(...$params->toArray());
- * ```
  * Get a paginated list of sub number orders.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->subNumberOrders->list(...$params->toArray());`
  *
  * @see Telnyx\SubNumberOrders->list
  *

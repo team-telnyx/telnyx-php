@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\WirelessBlocklistValues\WirelessBlocklistValueListParams\Type;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new WirelessBlocklistValueListParams); // set properties as needed
- * $client->wirelessBlocklistValues->list(...$params->toArray());
- * ```
  * Retrieve all wireless blocklist values for a given blocklist type.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->wirelessBlocklistValues->list(...$params->toArray());`
  *
  * @see Telnyx\WirelessBlocklistValues->list
  *

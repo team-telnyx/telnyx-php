@@ -10,23 +10,12 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ActionHangupParams); // set properties as needed
- * $client->calls.actions->hangup(...$params->toArray());
- * ```
  * Hang up the call.
  *
  * **Expected Webhooks:**
  *
  * - `call.hangup`
  * - `call.recording.saved`
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->calls.actions->hangup(...$params->toArray());`
  *
  * @see Telnyx\Calls\Actions->hangup
  *

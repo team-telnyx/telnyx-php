@@ -12,18 +12,7 @@ use Telnyx\Rooms\Sessions\SessionList0Params\Filter;
 use Telnyx\Rooms\Sessions\SessionList0Params\Page;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new SessionList0Params); // set properties as needed
- * $client->rooms.sessions->list0(...$params->toArray());
- * ```
  * View a list of room sessions.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->rooms.sessions->list0(...$params->toArray());`
  *
  * @see Telnyx\Rooms\Sessions->list0
  *

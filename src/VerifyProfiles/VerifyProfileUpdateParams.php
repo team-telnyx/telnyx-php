@@ -13,18 +13,7 @@ use Telnyx\VerifyProfiles\VerifyProfileUpdateParams\Flashcall;
 use Telnyx\VerifyProfiles\VerifyProfileUpdateParams\SMS;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new VerifyProfileUpdateParams); // set properties as needed
- * $client->verifyProfiles->update(...$params->toArray());
- * ```
  * Update Verify profile.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->verifyProfiles->update(...$params->toArray());`
  *
  * @see Telnyx\VerifyProfiles->update
  *

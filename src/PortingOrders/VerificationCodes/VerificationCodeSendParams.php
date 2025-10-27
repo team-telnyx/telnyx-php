@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeSendParams\VerificationMethod;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new VerificationCodeSendParams); // set properties as needed
- * $client->portingOrders.verificationCodes->send(...$params->toArray());
- * ```
  * Send the verification code for all porting phone numbers.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->portingOrders.verificationCodes->send(...$params->toArray());`
  *
  * @see Telnyx\PortingOrders\VerificationCodes->send
  *

@@ -12,18 +12,7 @@ use Telnyx\OAuth\OAuthRegisterParams\GrantType;
 use Telnyx\OAuth\OAuthRegisterParams\TokenEndpointAuthMethod;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new OAuthRegisterParams); // set properties as needed
- * $client->oauth->register(...$params->toArray());
- * ```
  * Register a new OAuth client dynamically (RFC 7591).
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->oauth->register(...$params->toArray());`
  *
  * @see Telnyx\OAuth->register
  *

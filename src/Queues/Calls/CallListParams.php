@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Queues\Calls\CallListParams\Page;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new CallListParams); // set properties as needed
- * $client->queues.calls->list(...$params->toArray());
- * ```
  * Retrieve the list of calls in an existing queue.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->queues.calls->list(...$params->toArray());`
  *
  * @see Telnyx\Queues\Calls->list
  *

@@ -12,18 +12,7 @@ use Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionCreateParams\
 use Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionCreateParams\ExtensionRange;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new PhoneNumberExtensionCreateParams); // set properties as needed
- * $client->portingOrders.phoneNumberExtensions->create(...$params->toArray());
- * ```
  * Creates a new phone number extension.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->portingOrders.phoneNumberExtensions->create(...$params->toArray());`
  *
  * @see Telnyx\PortingOrders\PhoneNumberExtensions->create
  *

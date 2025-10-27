@@ -25,12 +25,6 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new CallDialParams); // set properties as needed
- * $client->calls->dial(...$params->toArray());
- * ```
  * Dial a number or SIP URI from a given connection. A successful response will include a `call_leg_id` which can be used to correlate the command with subsequent webhooks.
  *
  * **Expected Webhooks:**
@@ -44,11 +38,6 @@ use Telnyx\Core\Contracts\BaseModel;
  * - `streaming.started`, `streaming.stopped` or `streaming.failed` if `stream_url` was set
  *
  * When the `record` parameter is set to `record-from-answer`, the response will include a `recording_id` field.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->calls->dial(...$params->toArray());`
  *
  * @see Telnyx\Calls->dial
  *
@@ -378,7 +367,11 @@ final class CallDialParams implements BaseModel
      *
      * @var 8000|16000|22050|24000|48000|null $streamBidirectionalSamplingRate
      */
-    #[Api('stream_bidirectional_sampling_rate', optional: true)]
+    #[Api(
+        'stream_bidirectional_sampling_rate',
+        enum: StreamBidirectionalSamplingRate::class,
+        optional: true,
+    )]
     public ?int $streamBidirectionalSamplingRate;
 
     /**

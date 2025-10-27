@@ -11,18 +11,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ConnectionListActiveCallsParams); // set properties as needed
- * $client->connections->listActiveCalls(...$params->toArray());
- * ```
  * Lists all active calls for given connection. Acceptable connections are either SIP connections with webhook_url or xml_request_url, call control or texml. Returned results are cursor paginated.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->connections->listActiveCalls(...$params->toArray());`
  *
  * @see Telnyx\Connections->listActiveCalls
  *

@@ -12,18 +12,7 @@ use Telnyx\UsageReports\UsageReportListParams\Format;
 use Telnyx\UsageReports\UsageReportListParams\Page;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new UsageReportListParams); // set properties as needed
- * $client->usageReports->list(...$params->toArray());
- * ```
  * Get Telnyx usage data by product, broken out by the specified dimensions.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->usageReports->list(...$params->toArray());`
  *
  * @see Telnyx\UsageReports->list
  *

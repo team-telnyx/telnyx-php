@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationCreateParams\PhoneNumberConfiguration;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new PhoneNumberConfigurationCreateParams); // set properties as needed
- * $client->portingOrders.phoneNumberConfigurations->create(...$params->toArray());
- * ```
  * Creates a list of phone number configurations.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->portingOrders.phoneNumberConfigurations->create(...$params->toArray());`
  *
  * @see Telnyx\PortingOrders\PhoneNumberConfigurations->create
  *

@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new WireguardInterfaceCreateParams); // set properties as needed
- * $client->wireguardInterfaces->create(...$params->toArray());
- * ```
  * Create a new WireGuard Interface. Current limitation of 10 interfaces per user can be created.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->wireguardInterfaces->create(...$params->toArray());`
  *
  * @see Telnyx\WireguardInterfaces->create
  *

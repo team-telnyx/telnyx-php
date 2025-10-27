@@ -12,18 +12,7 @@ use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockCreateParams\Activati
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockCreateParams\PhoneNumberRange;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new PhoneNumberBlockCreateParams); // set properties as needed
- * $client->portingOrders.phoneNumberBlocks->create(...$params->toArray());
- * ```
  * Creates a new phone number block.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->portingOrders.phoneNumberBlocks->create(...$params->toArray());`
  *
  * @see Telnyx\PortingOrders\PhoneNumberBlocks->create
  *

@@ -12,18 +12,7 @@ use Telnyx\NotificationChannels\NotificationChannelListParams\Filter;
 use Telnyx\NotificationChannels\NotificationChannelListParams\Page;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new NotificationChannelListParams); // set properties as needed
- * $client->notificationChannels->list(...$params->toArray());
- * ```
  * List notification channels.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->notificationChannels->list(...$params->toArray());`
  *
  * @see Telnyx\NotificationChannels->list
  *

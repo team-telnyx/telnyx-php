@@ -12,18 +12,7 @@ use Telnyx\NumberBlockOrders\NumberBlockOrderListParams\Filter;
 use Telnyx\NumberBlockOrders\NumberBlockOrderListParams\Page;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new NumberBlockOrderListParams); // set properties as needed
- * $client->numberBlockOrders->list(...$params->toArray());
- * ```
  * Get a paginated list of number block orders.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->numberBlockOrders->list(...$params->toArray());`
  *
  * @see Telnyx\NumberBlockOrders->list
  *

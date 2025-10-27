@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\DialogflowConnections\DialogflowConnectionUpdateParams\DialogflowAPI;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new DialogflowConnectionUpdateParams); // set properties as needed
- * $client->dialogflowConnections->update(...$params->toArray());
- * ```
  * Updates a stored Dialogflow Connection.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->dialogflowConnections->update(...$params->toArray());`
  *
  * @see Telnyx\DialogflowConnections->update
  *

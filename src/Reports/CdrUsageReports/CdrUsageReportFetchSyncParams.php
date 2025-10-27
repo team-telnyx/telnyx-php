@@ -12,18 +12,7 @@ use Telnyx\Reports\CdrUsageReports\CdrUsageReportFetchSyncParams\AggregationType
 use Telnyx\Reports\CdrUsageReports\CdrUsageReportFetchSyncParams\ProductBreakdown;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new CdrUsageReportFetchSyncParams); // set properties as needed
- * $client->reports.cdrUsageReports->fetchSync(...$params->toArray());
- * ```
  * Generate and fetch voice usage report synchronously. This endpoint will both generate and fetch the voice report over a specified time period. No polling is necessary but the response may take up to a couple of minutes.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->reports.cdrUsageReports->fetchSync(...$params->toArray());`
  *
  * @see Telnyx\Reports\CdrUsageReports->fetchSync
  *

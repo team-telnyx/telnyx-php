@@ -12,18 +12,7 @@ use Telnyx\NumberReservations\NumberReservationListParams\Filter;
 use Telnyx\NumberReservations\NumberReservationListParams\Page;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new NumberReservationListParams); // set properties as needed
- * $client->numberReservations->list(...$params->toArray());
- * ```
  * Gets a paginated list of phone number reservations.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->numberReservations->list(...$params->toArray());`
  *
  * @see Telnyx\NumberReservations->list
  *

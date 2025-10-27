@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\CustomStorageCredentials\CustomStorageCredentialUpdateParams\Backend;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new CustomStorageCredentialUpdateParams); // set properties as needed
- * $client->customStorageCredentials->update(...$params->toArray());
- * ```
  * Updates a stored custom credentials configuration.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->customStorageCredentials->update(...$params->toArray());`
  *
  * @see Telnyx\CustomStorageCredentials->update
  *

@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateParams\Params;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ActionRequirementInitiateParams); // set properties as needed
- * $client->portingOrders.actionRequirements->initiate(...$params->toArray());
- * ```
  * Initiates a specific action requirement for a porting order.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->portingOrders.actionRequirements->initiate(...$params->toArray());`
  *
  * @see Telnyx\PortingOrders\ActionRequirements->initiate
  *

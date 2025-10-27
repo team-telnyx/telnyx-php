@@ -9,11 +9,10 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
-use Telnyx\Reports\MdrUsageReports\MdrUsageReportListResponse\Meta;
 
 /**
  * @phpstan-type mdr_usage_report_list_response = array{
- *   data?: list<MdrUsageReport>, meta?: Meta
+ *   data?: list<MdrUsageReport>, meta?: PaginationMetaReporting
  * }
  */
 final class MdrUsageReportListResponse implements BaseModel, ResponseConverter
@@ -28,7 +27,7 @@ final class MdrUsageReportListResponse implements BaseModel, ResponseConverter
     public ?array $data;
 
     #[Api(optional: true)]
-    public ?Meta $meta;
+    public ?PaginationMetaReporting $meta;
 
     public function __construct()
     {
@@ -42,8 +41,10 @@ final class MdrUsageReportListResponse implements BaseModel, ResponseConverter
      *
      * @param list<MdrUsageReport> $data
      */
-    public static function with(?array $data = null, ?Meta $meta = null): self
-    {
+    public static function with(
+        ?array $data = null,
+        ?PaginationMetaReporting $meta = null
+    ): self {
         $obj = new self;
 
         null !== $data && $obj->data = $data;
@@ -63,7 +64,7 @@ final class MdrUsageReportListResponse implements BaseModel, ResponseConverter
         return $obj;
     }
 
-    public function withMeta(Meta $meta): self
+    public function withMeta(PaginationMetaReporting $meta): self
     {
         $obj = clone $this;
         $obj->meta = $meta;

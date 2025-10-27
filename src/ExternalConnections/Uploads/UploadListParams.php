@@ -12,18 +12,7 @@ use Telnyx\ExternalConnections\Uploads\UploadListParams\Filter;
 use Telnyx\ExternalConnections\Uploads\UploadListParams\Page;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new UploadListParams); // set properties as needed
- * $client->externalConnections.uploads->list(...$params->toArray());
- * ```
  * Returns a list of your Upload requests for the given external connection.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->externalConnections.uploads->list(...$params->toArray());`
  *
  * @see Telnyx\ExternalConnections\Uploads->list
  *

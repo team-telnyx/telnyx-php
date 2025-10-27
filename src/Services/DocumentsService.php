@@ -16,6 +16,8 @@ use Telnyx\Documents\DocumentListParams\Sort;
 use Telnyx\Documents\DocumentListResponse;
 use Telnyx\Documents\DocumentUpdateParams;
 use Telnyx\Documents\DocumentUpdateResponse;
+use Telnyx\Documents\DocumentUploadJsonParams;
+use Telnyx\Documents\DocumentUploadJsonResponse;
 use Telnyx\Documents\DocumentUploadParams;
 use Telnyx\Documents\DocumentUploadResponse;
 use Telnyx\RequestOptions;
@@ -257,10 +259,65 @@ final class DocumentsService implements DocumentsContract
         // @phpstan-ignore-next-line;
         return $this->client->request(
             method: 'post',
-            path: 'documents',
+            path: 'documents?content-type=multipart',
             body: (object) $parsed,
             options: $options,
             convert: DocumentUploadResponse::class,
+        );
+    }
+
+    /**
+     * @api
+     *
+     * Upload a document.<br /><br />Uploaded files must be linked to a service within 30 minutes or they will be automatically deleted.
+     *
+     * @param string $url if the file is already hosted publicly, you can provide a URL and have the documents service fetch it for you
+     * @param string $file the Base64 encoded contents of the file you are uploading
+     * @param string $customerReference a customer reference string for customer look ups
+     * @param string $filename the filename of the document
+     *
+     * @throws APIException
+     */
+    public function uploadJson(
+        $url,
+        $file,
+        $customerReference = omit,
+        $filename = omit,
+        ?RequestOptions $requestOptions = null,
+    ): DocumentUploadJsonResponse {
+        $params = [
+            'url' => $url,
+            'customerReference' => $customerReference,
+            'filename' => $filename,
+            'file' => $file,
+        ];
+
+        return $this->uploadJsonRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @throws APIException
+     */
+    public function uploadJsonRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): DocumentUploadJsonResponse {
+        [$parsed, $options] = DocumentUploadJsonParams::parseRequest(
+            $params,
+            $requestOptions
+        );
+
+        // @phpstan-ignore-next-line;
+        return $this->client->request(
+            method: 'post',
+            path: 'documents',
+            body: (object) $parsed,
+            options: $options,
+            convert: DocumentUploadJsonResponse::class,
         );
     }
 }

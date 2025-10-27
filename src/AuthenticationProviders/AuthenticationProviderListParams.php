@@ -12,18 +12,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new AuthenticationProviderListParams); // set properties as needed
- * $client->authenticationProviders->list(...$params->toArray());
- * ```
  * Returns a list of your SSO authentication providers.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->authenticationProviders->list(...$params->toArray());`
  *
  * @see Telnyx\AuthenticationProviders->list
  *

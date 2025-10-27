@@ -13,22 +13,11 @@ use Telnyx\PortingOrders\PortingOrderUpdateParams\Messaging;
 use Telnyx\PortingOrders\PortingOrderUpdateParams\Requirement;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new PortingOrderUpdateParams); // set properties as needed
- * $client->portingOrders->update(...$params->toArray());
- * ```
  * Edits the details of an existing porting order.
  *
  * Any or all of a porting orders attributes may be included in the resource object included in a PATCH request.
  *
  * If a request does not include all of the attributes for a resource, the system will interpret the missing attributes as if they were included with their current values. To explicitly set something to null, it must be included in the request with a null value.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->portingOrders->update(...$params->toArray());`
  *
  * @see Telnyx\PortingOrders->update
  *

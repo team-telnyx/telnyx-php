@@ -13,18 +13,7 @@ use Telnyx\FaxApplications\FaxApplicationCreateParams\Inbound;
 use Telnyx\FaxApplications\FaxApplicationCreateParams\Outbound;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new FaxApplicationCreateParams); // set properties as needed
- * $client->faxApplications->create(...$params->toArray());
- * ```
  * Creates a new Fax Application based on the parameters sent in the request. The application name and webhook URL are required. Once created, you can assign phone numbers to your application using the `/phone_numbers` endpoint.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->faxApplications->create(...$params->toArray());`
  *
  * @see Telnyx\FaxApplications->create
  *

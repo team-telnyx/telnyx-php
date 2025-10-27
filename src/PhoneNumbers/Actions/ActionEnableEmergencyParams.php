@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ActionEnableEmergencyParams); // set properties as needed
- * $client->phoneNumbers.actions->enableEmergency(...$params->toArray());
- * ```
  * Enable emergency for a phone number.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->phoneNumbers.actions->enableEmergency(...$params->toArray());`
  *
  * @see Telnyx\PhoneNumbers\Actions->enableEmergency
  *

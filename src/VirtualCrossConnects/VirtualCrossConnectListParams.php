@@ -12,18 +12,7 @@ use Telnyx\VirtualCrossConnects\VirtualCrossConnectListParams\Filter;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectListParams\Page;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new VirtualCrossConnectListParams); // set properties as needed
- * $client->virtualCrossConnects->list(...$params->toArray());
- * ```
  * List all Virtual Cross Connects.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->virtualCrossConnects->list(...$params->toArray());`
  *
  * @see Telnyx\VirtualCrossConnects->list
  *

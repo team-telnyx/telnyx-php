@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Texml\Accounts\Calls\Recordings\RecordingRecordingSidJsonParams\Status;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new RecordingRecordingSidJsonParams); // set properties as needed
- * $client->texml.accounts.calls.recordings->recordingSidJson(...$params->toArray());
- * ```
  * Updates recording resource for particular call.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->texml.accounts.calls.recordings->recordingSidJson(...$params->toArray());`
  *
  * @see Telnyx\Texml\Accounts\Calls\Recordings->recordingSidJson
  *

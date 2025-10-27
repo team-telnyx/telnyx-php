@@ -13,18 +13,7 @@ use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams\Page;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams\Sort;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new VerificationCodeListParams); // set properties as needed
- * $client->portingOrders.verificationCodes->list(...$params->toArray());
- * ```
  * Returns a list of verification codes for a porting order.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->portingOrders.verificationCodes->list(...$params->toArray());`
  *
  * @see Telnyx\PortingOrders\VerificationCodes->list
  *

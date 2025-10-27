@@ -13,18 +13,7 @@ use Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams\Page;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams\Sort;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new CustomerServiceRecordListParams); // set properties as needed
- * $client->customerServiceRecords->list(...$params->toArray());
- * ```
  * List customer service records.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->customerServiceRecords->list(...$params->toArray());`
  *
  * @see Telnyx\CustomerServiceRecords->list
  *

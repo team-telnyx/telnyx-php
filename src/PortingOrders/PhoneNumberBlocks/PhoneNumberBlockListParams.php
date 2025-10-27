@@ -13,18 +13,7 @@ use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Page;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Sort;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new PhoneNumberBlockListParams); // set properties as needed
- * $client->portingOrders.phoneNumberBlocks->list(...$params->toArray());
- * ```
  * Returns a list of all phone number blocks of a porting order.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->portingOrders.phoneNumberBlocks->list(...$params->toArray());`
  *
  * @see Telnyx\PortingOrders\PhoneNumberBlocks->list
  *

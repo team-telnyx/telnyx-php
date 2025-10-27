@@ -11,18 +11,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new InsightGroupRetrieveInsightGroupsParams); // set properties as needed
- * $client->ai.conversations.insightGroups->retrieveInsightGroups(...$params->toArray());
- * ```
  * Get all insight groups.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->ai.conversations.insightGroups->retrieveInsightGroups(...$params->toArray());`
  *
  * @see Telnyx\AI\Conversations\InsightGroups->retrieveInsightGroups
  *

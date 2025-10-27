@@ -12,18 +12,7 @@ use Telnyx\MobileNetworkOperators\MobileNetworkOperatorListParams\Filter;
 use Telnyx\MobileNetworkOperators\MobileNetworkOperatorListParams\Page;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new MobileNetworkOperatorListParams); // set properties as needed
- * $client->mobileNetworkOperators->list(...$params->toArray());
- * ```
  * Telnyx has a set of GSM mobile operators partners that are available through our mobile network roaming. This resource is entirely managed by Telnyx and may change over time. That means that this resource won't allow any write operations for it. Still, it's available so it can be used as a support resource that can be related to other resources or become a configuration option.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->mobileNetworkOperators->list(...$params->toArray());`
  *
  * @see Telnyx\MobileNetworkOperators->list
  *

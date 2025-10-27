@@ -12,18 +12,7 @@ use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberCreateParam
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberCreateParams\PhoneNumberRange;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new AssociatedPhoneNumberCreateParams); // set properties as needed
- * $client->portingOrders.associatedPhoneNumbers->create(...$params->toArray());
- * ```
  * Creates a new associated phone number for a porting order. This is used for partial porting in GB to specify which phone numbers should be kept or disconnected.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->portingOrders.associatedPhoneNumbers->create(...$params->toArray());`
  *
  * @see Telnyx\PortingOrders\AssociatedPhoneNumbers->create
  *

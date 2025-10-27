@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new VersionRetrieveParams); // set properties as needed
- * $client->ai.assistants.versions->retrieve(...$params->toArray());
- * ```
  * Retrieves a specific version of an assistant by assistant_id and version_id.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->ai.assistants.versions->retrieve(...$params->toArray());`
  *
  * @see Telnyx\AI\Assistants\Versions->retrieve
  *

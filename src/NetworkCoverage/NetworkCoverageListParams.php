@@ -13,18 +13,7 @@ use Telnyx\NetworkCoverage\NetworkCoverageListParams\Filters;
 use Telnyx\NetworkCoverage\NetworkCoverageListParams\Page;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new NetworkCoverageListParams); // set properties as needed
- * $client->networkCoverage->list(...$params->toArray());
- * ```
  * List all locations and the interfaces that region supports.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->networkCoverage->list(...$params->toArray());`
  *
  * @see Telnyx\NetworkCoverage->list
  *

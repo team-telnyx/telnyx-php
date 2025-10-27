@@ -12,18 +12,7 @@ use Telnyx\RoomCompositions\RoomCompositionListParams\Filter;
 use Telnyx\RoomCompositions\RoomCompositionListParams\Page;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new RoomCompositionListParams); // set properties as needed
- * $client->roomCompositions->list(...$params->toArray());
- * ```
  * View a list of room compositions.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->roomCompositions->list(...$params->toArray());`
  *
  * @see Telnyx\RoomCompositions->list
  *

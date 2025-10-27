@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants;
 
-use Telnyx\AI\Assistants\AssistantsList\Data;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkResponse;
@@ -12,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type assistants_list = array{data: list<Data>}
+ * @phpstan-type assistants_list = array{data: list<InferenceEmbedding>}
  */
 final class AssistantsList implements BaseModel, ResponseConverter
 {
@@ -21,8 +20,8 @@ final class AssistantsList implements BaseModel, ResponseConverter
 
     use SdkResponse;
 
-    /** @var list<Data> $data */
-    #[Api(list: Data::class)]
+    /** @var list<InferenceEmbedding> $data */
+    #[Api(list: InferenceEmbedding::class)]
     public array $data;
 
     /**
@@ -49,7 +48,7 @@ final class AssistantsList implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data> $data
+     * @param list<InferenceEmbedding> $data
      */
     public static function with(array $data): self
     {
@@ -61,7 +60,7 @@ final class AssistantsList implements BaseModel, ResponseConverter
     }
 
     /**
-     * @param list<Data> $data
+     * @param list<InferenceEmbedding> $data
      */
     public function withData(array $data): self
     {

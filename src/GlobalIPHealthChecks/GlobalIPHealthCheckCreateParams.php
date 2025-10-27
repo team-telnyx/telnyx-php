@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new GlobalIPHealthCheckCreateParams); // set properties as needed
- * $client->globalIPHealthChecks->create(...$params->toArray());
- * ```
  * Create a Global IP health check.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->globalIPHealthChecks->create(...$params->toArray());`
  *
  * @see Telnyx\GlobalIPHealthChecks->create
  *

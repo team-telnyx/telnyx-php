@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new CustomerServiceRecordVerifyPhoneNumberCoverageParams); // set properties as needed
- * $client->customerServiceRecords->verifyPhoneNumberCoverage(...$params->toArray());
- * ```
  * Verify the coverage for a list of phone numbers.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->customerServiceRecords->verifyPhoneNumberCoverage(...$params->toArray());`
  *
  * @see Telnyx\CustomerServiceRecords->verifyPhoneNumberCoverage
  *

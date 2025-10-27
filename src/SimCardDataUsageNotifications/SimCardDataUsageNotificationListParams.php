@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new SimCardDataUsageNotificationListParams); // set properties as needed
- * $client->simCardDataUsageNotifications->list(...$params->toArray());
- * ```
  * Lists a paginated collection of SIM card data usage notifications. It enables exploring the collection using specific filters.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->simCardDataUsageNotifications->list(...$params->toArray());`
  *
  * @see Telnyx\SimCardDataUsageNotifications->list
  *

@@ -13,18 +13,7 @@ use Telnyx\FaxApplications\FaxApplicationListParams\Page;
 use Telnyx\FaxApplications\FaxApplicationListParams\Sort;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new FaxApplicationListParams); // set properties as needed
- * $client->faxApplications->list(...$params->toArray());
- * ```
  * This endpoint returns a list of your Fax Applications inside the 'data' attribute of the response. You can adjust which applications are listed by using filters. Fax Applications are used to configure how you send and receive faxes using the Programmable Fax API with Telnyx.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->faxApplications->list(...$params->toArray());`
  *
  * @see Telnyx\FaxApplications->list
  *

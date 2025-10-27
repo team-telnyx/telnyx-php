@@ -12,18 +12,7 @@ use Telnyx\Recordings\RecordingListParams\Filter;
 use Telnyx\Recordings\RecordingListParams\Page;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new RecordingListParams); // set properties as needed
- * $client->recordings->list(...$params->toArray());
- * ```
  * Returns a list of your call recordings.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->recordings->list(...$params->toArray());`
  *
  * @see Telnyx\Recordings->list
  *

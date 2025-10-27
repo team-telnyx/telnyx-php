@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new RcInviteTestNumberParams); // set properties as needed
- * $client->messaging.rcs->inviteTestNumber(...$params->toArray());
- * ```
  * Adds a test phone number to an RCS agent for testing purposes.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->messaging.rcs->inviteTestNumber(...$params->toArray());`
  *
  * @see Telnyx\Messaging\Rcs->inviteTestNumber
  *

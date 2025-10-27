@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new CivicAddressRetrieveParams); // set properties as needed
- * $client->externalConnections.civicAddresses->retrieve(...$params->toArray());
- * ```
  * Return the details of an existing Civic Address with its Locations inside the 'data' attribute of the response.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->externalConnections.civicAddresses->retrieve(...$params->toArray());`
  *
  * @see Telnyx\ExternalConnections\CivicAddresses->retrieve
  *

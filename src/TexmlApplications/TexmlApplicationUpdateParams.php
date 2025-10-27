@@ -16,18 +16,7 @@ use Telnyx\TexmlApplications\TexmlApplicationUpdateParams\StatusCallbackMethod;
 use Telnyx\TexmlApplications\TexmlApplicationUpdateParams\VoiceMethod;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new TexmlApplicationUpdateParams); // set properties as needed
- * $client->texmlApplications->update(...$params->toArray());
- * ```
  * Updates settings of an existing TeXML Application.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->texmlApplications->update(...$params->toArray());`
  *
  * @see Telnyx\TexmlApplications->update
  *

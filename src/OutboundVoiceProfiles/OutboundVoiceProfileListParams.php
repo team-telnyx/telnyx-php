@@ -13,18 +13,7 @@ use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileListParams\Page;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileListParams\Sort;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new OutboundVoiceProfileListParams); // set properties as needed
- * $client->outboundVoiceProfiles->list(...$params->toArray());
- * ```
  * Get all outbound voice profiles belonging to the user that match the given filters.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->outboundVoiceProfiles->list(...$params->toArray());`
  *
  * @see Telnyx\OutboundVoiceProfiles->list
  *

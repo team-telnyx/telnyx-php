@@ -11,18 +11,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new RunListParams); // set properties as needed
- * $client->ai.assistants.tests.testSuites.runs->list(...$params->toArray());
- * ```
  * Retrieves paginated history of test runs for a specific test suite with filtering options.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->ai.assistants.tests.testSuites.runs->list(...$params->toArray());`
  *
  * @see Telnyx\AI\Assistants\Tests\TestSuites\Runs->list
  *

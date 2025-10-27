@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new OAuthGrantListParams); // set properties as needed
- * $client->oauthGrants->list(...$params->toArray());
- * ```
  * Retrieve a paginated list of OAuth grants for the authenticated user.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->oauthGrants->list(...$params->toArray());`
  *
  * @see Telnyx\OAuthGrants->list
  *

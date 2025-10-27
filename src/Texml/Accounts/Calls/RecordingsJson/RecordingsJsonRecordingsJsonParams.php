@@ -13,18 +13,7 @@ use Telnyx\Texml\Accounts\Calls\RecordingsJson\RecordingsJsonRecordingsJsonParam
 use Telnyx\Texml\Accounts\Calls\RecordingsJson\RecordingsJsonRecordingsJsonParams\RecordingTrack;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new RecordingsJsonRecordingsJsonParams); // set properties as needed
- * $client->texml.accounts.calls.recordingsJson->recordingsJson(...$params->toArray());
- * ```
  * Starts recording with specified parameters for call idientified by call_sid.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->texml.accounts.calls.recordingsJson->recordingsJson(...$params->toArray());`
  *
  * @see Telnyx\Texml\Accounts\Calls\RecordingsJson->recordingsJson
  *

@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new DocumentUpdateParams); // set properties as needed
- * $client->documents->update(...$params->toArray());
- * ```
  * Update a document.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->documents->update(...$params->toArray());`
  *
  * @see Telnyx\Documents->update
  *

@@ -10,20 +10,9 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new BucketCreatePresignedURLParams); // set properties as needed
- * $client->storage.buckets->createPresignedURL(...$params->toArray());
- * ```
  * Returns a timed and authenticated URL to get an object. This is the equivalent to AWS S3’s “presigned” URL. Please note that Telnyx performs authentication differently from AWS S3 and you MUST NOT use the presign method of AWS s3api CLI or sdk to generate the presigned URL.
  *
  * Refer to: https://developers.telnyx.com/docs/cloud-storage/presigned-urls
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->storage.buckets->createPresignedURL(...$params->toArray());`
  *
  * @see Telnyx\Storage\Buckets->createPresignedURL
  *

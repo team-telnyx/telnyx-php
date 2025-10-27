@@ -11,18 +11,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new BrandListParams); // set properties as needed
- * $client->brand->list(...$params->toArray());
- * ```
  * This endpoint is used to list all brands associated with your organization.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->brand->list(...$params->toArray());`
  *
  * @see Telnyx\Brand->list
  *

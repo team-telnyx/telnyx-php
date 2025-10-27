@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\DialogflowConnections\DialogflowConnectionCreateParams\DialogflowAPI;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new DialogflowConnectionCreateParams); // set properties as needed
- * $client->dialogflowConnections->create(...$params->toArray());
- * ```
  * Save Dialogflow Credentiails to Telnyx, so it can be used with other Telnyx services.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->dialogflowConnections->create(...$params->toArray());`
  *
  * @see Telnyx\DialogflowConnections->create
  *

@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ActionVerifyOwnershipParams); // set properties as needed
- * $client->phoneNumbers.actions->verifyOwnership(...$params->toArray());
- * ```
  * Verifies ownership of the provided phone numbers and returns a mapping of numbers to their IDs, plus a list of numbers not found in the account.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->phoneNumbers.actions->verifyOwnership(...$params->toArray());`
  *
  * @see Telnyx\PhoneNumbers\Actions->verifyOwnership
  *

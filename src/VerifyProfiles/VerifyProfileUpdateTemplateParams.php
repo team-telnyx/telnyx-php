@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new VerifyProfileUpdateTemplateParams); // set properties as needed
- * $client->verifyProfiles->updateTemplate(...$params->toArray());
- * ```
  * Update an existing Verify profile message template.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->verifyProfiles->updateTemplate(...$params->toArray());`
  *
  * @see Telnyx\VerifyProfiles->updateTemplate
  *

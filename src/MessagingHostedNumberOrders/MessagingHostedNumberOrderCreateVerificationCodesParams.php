@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderCreateVerificationCodesParams\VerificationMethod;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new MessagingHostedNumberOrderCreateVerificationCodesParams); // set properties as needed
- * $client->messagingHostedNumberOrders->createVerificationCodes(...$params->toArray());
- * ```
  * Create verification codes to validate numbers of the hosted order. The verification codes will be sent to the numbers of the hosted order.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->messagingHostedNumberOrders->createVerificationCodes(...$params->toArray());`
  *
  * @see Telnyx\MessagingHostedNumberOrders->createVerificationCodes
  *

@@ -11,18 +11,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new InsightListParams); // set properties as needed
- * $client->ai.conversations.insights->list(...$params->toArray());
- * ```
  * Get all insights.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->ai.conversations.insights->list(...$params->toArray());`
  *
  * @see Telnyx\AI\Conversations\Insights->list
  *

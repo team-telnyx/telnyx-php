@@ -12,18 +12,7 @@ use Telnyx\DetailRecords\DetailRecordListParams\Filter;
 use Telnyx\DetailRecords\DetailRecordListParams\Page;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new DetailRecordListParams); // set properties as needed
- * $client->detailRecords->list(...$params->toArray());
- * ```
  * Search for any detail record across the Telnyx Platform.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->detailRecords->list(...$params->toArray());`
  *
  * @see Telnyx\DetailRecords->list
  *

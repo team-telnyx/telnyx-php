@@ -12,18 +12,7 @@ use Telnyx\OtaUpdates\OtaUpdateListParams\Filter;
 use Telnyx\OtaUpdates\OtaUpdateListParams\Page;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new OtaUpdateListParams); // set properties as needed
- * $client->otaUpdates->list(...$params->toArray());
- * ```
  * List OTA updates.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->otaUpdates->list(...$params->toArray());`
  *
  * @see Telnyx\OtaUpdates->list
  *

@@ -13,18 +13,7 @@ use Telnyx\PortingOrders\PortingOrderListParams\Page;
 use Telnyx\PortingOrders\PortingOrderListParams\Sort;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new PortingOrderListParams); // set properties as needed
- * $client->portingOrders->list(...$params->toArray());
- * ```
  * Returns a list of your porting order.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->portingOrders->list(...$params->toArray());`
  *
  * @see Telnyx\PortingOrders->list
  *

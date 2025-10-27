@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupCreateParams\AggregationType;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new NumberLookupCreateParams); // set properties as needed
- * $client->legacy.reporting.usageReports.numberLookup->create(...$params->toArray());
- * ```
  * Submit a new telco data usage report.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->legacy.reporting.usageReports.numberLookup->create(...$params->toArray());`
  *
  * @see Telnyx\Legacy\Reporting\UsageReports\NumberLookup->create
  *

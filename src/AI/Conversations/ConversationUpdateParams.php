@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ConversationUpdateParams); // set properties as needed
- * $client->ai.conversations->update(...$params->toArray());
- * ```
  * Update metadata for a specific conversation.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->ai.conversations->update(...$params->toArray());`
  *
  * @see Telnyx\AI\Conversations->update
  *

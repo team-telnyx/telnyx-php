@@ -10,12 +10,6 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ActionGatherUsingAudioParams); // set properties as needed
- * $client->calls.actions->gatherUsingAudio(...$params->toArray());
- * ```
  * Play an audio file on the call until the required DTMF signals are gathered to build interactive menus.
  *
  * You can pass a list of valid digits along with an 'invalid_audio_url', which will be played back at the beginning of each prompt. Playback will be interrupted when a DTMF signal is received. The `Answer command must be issued before the `gather_using_audio` command.
@@ -26,11 +20,6 @@ use Telnyx\Core\Contracts\BaseModel;
  * - `call.playback.ended`
  * - `call.dtmf.received` (you may receive many of these webhooks)
  * - `call.gather.ended`
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->calls.actions->gatherUsingAudio(...$params->toArray());`
  *
  * @see Telnyx\Calls\Actions->gatherUsingAudio
  *

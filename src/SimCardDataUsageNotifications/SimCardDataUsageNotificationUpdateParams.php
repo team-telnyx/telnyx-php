@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationUpdateParams\Threshold;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new SimCardDataUsageNotificationUpdateParams); // set properties as needed
- * $client->simCardDataUsageNotifications->update(...$params->toArray());
- * ```
  * Updates information for a SIM Card Data Usage Notification.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->simCardDataUsageNotifications->update(...$params->toArray());`
  *
  * @see Telnyx\SimCardDataUsageNotifications->update
  *

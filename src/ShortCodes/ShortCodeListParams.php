@@ -12,18 +12,7 @@ use Telnyx\ShortCodes\ShortCodeListParams\Filter;
 use Telnyx\ShortCodes\ShortCodeListParams\Page;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ShortCodeListParams); // set properties as needed
- * $client->shortCodes->list(...$params->toArray());
- * ```
  * List short codes.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->shortCodes->list(...$params->toArray());`
  *
  * @see Telnyx\ShortCodes->list
  *

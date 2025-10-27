@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new WirelessBlocklistListParams); // set properties as needed
- * $client->wirelessBlocklists->list(...$params->toArray());
- * ```
  * Get all Wireless Blocklists belonging to the user.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->wirelessBlocklists->list(...$params->toArray());`
  *
  * @see Telnyx\WirelessBlocklists->list
  *

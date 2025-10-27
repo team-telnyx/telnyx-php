@@ -12,18 +12,7 @@ use Telnyx\PortingPhoneNumbers\PortingPhoneNumberListParams\Filter;
 use Telnyx\PortingPhoneNumbers\PortingPhoneNumberListParams\Page;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new PortingPhoneNumberListParams); // set properties as needed
- * $client->portingPhoneNumbers->list(...$params->toArray());
- * ```
  * Returns a list of your porting phone numbers.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->portingPhoneNumbers->list(...$params->toArray());`
  *
  * @see Telnyx\PortingPhoneNumbers->list
  *

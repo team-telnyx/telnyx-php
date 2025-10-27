@@ -12,12 +12,6 @@ use Telnyx\Faxes\FaxCreateParams\PreviewFormat;
 use Telnyx\Faxes\FaxCreateParams\Quality;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new FaxCreateParams); // set properties as needed
- * $client->faxes->create(...$params->toArray());
- * ```
  * Send a fax. Files have size limits and page count limit validations. If a file is bigger than 50MB or has more than 350 pages it will fail with `file_size_limit_exceeded` and `page_count_limit_exceeded` respectively.
  *
  * **Expected Webhooks:**
@@ -27,11 +21,6 @@ use Telnyx\Faxes\FaxCreateParams\Quality;
  * - `fax.sending.started`
  * - `fax.delivered`
  * - `fax.failed`
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->faxes->create(...$params->toArray());`
  *
  * @see Telnyx\Faxes->create
  *

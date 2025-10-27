@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new AutorespConfigRetrieveParams); // set properties as needed
- * $client->messagingProfiles.autorespConfigs->retrieve(...$params->toArray());
- * ```
  * Get Auto-Response Setting.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->messagingProfiles.autorespConfigs->retrieve(...$params->toArray());`
  *
  * @see Telnyx\MessagingProfiles\AutorespConfigs->retrieve
  *

@@ -11,22 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Messages\MessageSendParams\Type;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new MessageSendParams); // set properties as needed
- * $client->messages->send(...$params->toArray());
- * ```
  * Send a message with a Phone Number, Alphanumeric Sender ID, Short Code or Number Pool.
  *
  * This endpoint allows you to send a message with any messaging resource.
  * Current messaging resources include: long-code, short-code, number-pool, and
  * alphanumeric-sender-id.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->messages->send(...$params->toArray());`
  *
  * @see Telnyx\Messages->send
  *

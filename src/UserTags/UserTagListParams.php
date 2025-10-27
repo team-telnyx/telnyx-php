@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\UserTags\UserTagListParams\Filter;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new UserTagListParams); // set properties as needed
- * $client->userTags->list(...$params->toArray());
- * ```
  * List all user tags.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->userTags->list(...$params->toArray());`
  *
  * @see Telnyx\UserTags->list
  *

@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PhoneNumbers\Messaging\MessagingListParams\Page;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new MessagingListParams); // set properties as needed
- * $client->phoneNumbers.messaging->list(...$params->toArray());
- * ```
  * List phone numbers with messaging settings.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->phoneNumbers.messaging->list(...$params->toArray());`
  *
  * @see Telnyx\PhoneNumbers\Messaging->list
  *

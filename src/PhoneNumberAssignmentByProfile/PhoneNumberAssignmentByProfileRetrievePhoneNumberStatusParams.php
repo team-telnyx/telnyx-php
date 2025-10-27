@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new PhoneNumberAssignmentByProfileRetrievePhoneNumberStatusParams); // set properties as needed
- * $client->phoneNumberAssignmentByProfile->retrievePhoneNumberStatus(...$params->toArray());
- * ```
  * Check the status of the individual phone number/campaign assignments associated with the supplied `taskId`.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->phoneNumberAssignmentByProfile->retrievePhoneNumberStatus(...$params->toArray());`
  *
  * @see Telnyx\PhoneNumberAssignmentByProfile->retrievePhoneNumberStatus
  *

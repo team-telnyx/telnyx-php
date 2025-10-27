@@ -12,18 +12,7 @@ use Telnyx\OAuthClients\OAuthClientListParams\FilterAllowedGrantTypesContains;
 use Telnyx\OAuthClients\OAuthClientListParams\FilterClientType;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new OAuthClientListParams); // set properties as needed
- * $client->oauthClients->list(...$params->toArray());
- * ```
  * Retrieve a paginated list of OAuth clients for the authenticated user.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->oauthClients->list(...$params->toArray());`
  *
  * @see Telnyx\OAuthClients->list
  *

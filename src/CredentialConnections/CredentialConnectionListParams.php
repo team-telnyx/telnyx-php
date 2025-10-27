@@ -13,18 +13,7 @@ use Telnyx\CredentialConnections\CredentialConnectionListParams\Page;
 use Telnyx\CredentialConnections\CredentialConnectionListParams\Sort;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new CredentialConnectionListParams); // set properties as needed
- * $client->credentialConnections->list(...$params->toArray());
- * ```
  * Returns a list of your credential connections.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->credentialConnections->list(...$params->toArray());`
  *
  * @see Telnyx\CredentialConnections->list
  *

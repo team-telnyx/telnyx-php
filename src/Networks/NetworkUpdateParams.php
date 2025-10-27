@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new NetworkUpdateParams); // set properties as needed
- * $client->networks->update(...$params->toArray());
- * ```
  * Update a Network.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->networks->update(...$params->toArray());`
  *
  * @see Telnyx\Networks->update
  *

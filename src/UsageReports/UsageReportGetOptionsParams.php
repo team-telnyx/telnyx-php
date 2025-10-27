@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new UsageReportGetOptionsParams); // set properties as needed
- * $client->usageReports->getOptions(...$params->toArray());
- * ```
  * Get the Usage Reports options for querying usage, including the products available and their respective metrics and dimensions.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->usageReports->getOptions(...$params->toArray());`
  *
  * @see Telnyx\UsageReports->getOptions
  *

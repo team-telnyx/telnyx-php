@@ -10,22 +10,11 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ActionPauseRecordingParams); // set properties as needed
- * $client->calls.actions->pauseRecording(...$params->toArray());
- * ```
  * Pause recording the call. Recording can be resumed via Resume recording command.
  *
  * **Expected Webhooks:**
  *
  * There are no webhooks associated with this command.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->calls.actions->pauseRecording(...$params->toArray());`
  *
  * @see Telnyx\Calls\Actions->pauseRecording
  *

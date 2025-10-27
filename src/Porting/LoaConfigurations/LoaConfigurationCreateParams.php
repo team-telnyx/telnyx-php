@@ -13,18 +13,7 @@ use Telnyx\Porting\LoaConfigurations\LoaConfigurationCreateParams\Contact;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationCreateParams\Logo;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new LoaConfigurationCreateParams); // set properties as needed
- * $client->porting.loaConfigurations->create(...$params->toArray());
- * ```
  * Create a LOA configuration.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->porting.loaConfigurations->create(...$params->toArray());`
  *
  * @see Telnyx\Porting\LoaConfigurations->create
  *

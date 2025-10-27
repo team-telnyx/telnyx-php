@@ -12,18 +12,7 @@ use Telnyx\PhoneNumbers\Voice\VoiceUpdateParams\InboundCallScreening;
 use Telnyx\PhoneNumbers\Voice\VoiceUpdateParams\UsagePaymentMethod;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new VoiceUpdateParams); // set properties as needed
- * $client->phoneNumbers.voice->update(...$params->toArray());
- * ```
  * Update a phone number with voice settings.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->phoneNumbers.voice->update(...$params->toArray());`
  *
  * @see Telnyx\PhoneNumbers\Voice->update
  *

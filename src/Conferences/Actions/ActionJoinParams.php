@@ -12,23 +12,12 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ActionJoinParams); // set properties as needed
- * $client->conferences.actions->join(...$params->toArray());
- * ```
  * Join an existing call leg to a conference. Issue the Join Conference command with the conference ID in the path and the `call_control_id` of the leg you wish to join to the conference as an attribute. The conference can have up to a certain amount of active participants, as set by the `max_participants` parameter in conference creation request.
  *
  * **Expected Webhooks:**
  *
  * - `conference.participant.joined`
  * - `conference.participant.left`
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->conferences.actions->join(...$params->toArray());`
  *
  * @see Telnyx\Conferences\Actions->join
  *

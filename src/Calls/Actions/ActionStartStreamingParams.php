@@ -8,6 +8,7 @@ use Telnyx\Calls\Actions\ActionStartStreamingParams\StreamTrack;
 use Telnyx\Calls\DialogflowConfig;
 use Telnyx\Calls\StreamBidirectionalCodec;
 use Telnyx\Calls\StreamBidirectionalMode;
+use Telnyx\Calls\StreamBidirectionalSamplingRate;
 use Telnyx\Calls\StreamBidirectionalTargetLegs;
 use Telnyx\Calls\StreamCodec;
 use Telnyx\Core\Attributes\Api;
@@ -16,20 +17,9 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ActionStartStreamingParams); // set properties as needed
- * $client->calls.actions->startStreaming(...$params->toArray());
- * ```
  * Start streaming the media from a call to a specific WebSocket address or Dialogflow connection in near-realtime. Audio will be delivered as base64-encoded RTP payload (raw audio), wrapped in JSON payloads.
  *
  * Please find more details about media streaming messages specification under the [link](https://developers.telnyx.com/docs/voice/programmable-voice/media-streaming).
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->calls.actions->startStreaming(...$params->toArray());`
  *
  * @see Telnyx\Calls\Actions->startStreaming
  *
@@ -103,7 +93,11 @@ final class ActionStartStreamingParams implements BaseModel
      *
      * @var 8000|16000|22050|24000|48000|null $streamBidirectionalSamplingRate
      */
-    #[Api('stream_bidirectional_sampling_rate', optional: true)]
+    #[Api(
+        'stream_bidirectional_sampling_rate',
+        enum: StreamBidirectionalSamplingRate::class,
+        optional: true,
+    )]
     public ?int $streamBidirectionalSamplingRate;
 
     /**

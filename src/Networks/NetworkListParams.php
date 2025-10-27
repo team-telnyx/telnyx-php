@@ -12,18 +12,7 @@ use Telnyx\Networks\NetworkListParams\Filter;
 use Telnyx\Networks\NetworkListParams\Page;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new NetworkListParams); // set properties as needed
- * $client->networks->list(...$params->toArray());
- * ```
  * List all Networks.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->networks->list(...$params->toArray());`
  *
  * @see Telnyx\Networks->list
  *

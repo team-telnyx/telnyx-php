@@ -11,22 +11,11 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new ActionLeaveParams); // set properties as needed
- * $client->conferences.actions->leave(...$params->toArray());
- * ```
  * Removes a call leg from a conference and moves it back to parked state.
  *
  * **Expected Webhooks:**
  *
  * - `conference.participant.left`
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->conferences.actions->leave(...$params->toArray());`
  *
  * @see Telnyx\Conferences\Actions->leave
  *

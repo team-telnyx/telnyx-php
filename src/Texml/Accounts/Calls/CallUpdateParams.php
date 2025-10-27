@@ -13,18 +13,7 @@ use Telnyx\Texml\Accounts\Calls\CallUpdateParams\Method;
 use Telnyx\Texml\Accounts\Calls\CallUpdateParams\StatusCallbackMethod;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new CallUpdateParams); // set properties as needed
- * $client->texml.accounts.calls->update(...$params->toArray());
- * ```
  * Update TeXML call. Please note that the keys present in the payload MUST BE formatted in CamelCase as specified in the example.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->texml.accounts.calls->update(...$params->toArray());`
  *
  * @see Telnyx\Texml\Accounts\Calls->update
  *

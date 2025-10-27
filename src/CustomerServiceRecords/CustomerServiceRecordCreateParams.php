@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordCreateParams\AdditionalData;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new CustomerServiceRecordCreateParams); // set properties as needed
- * $client->customerServiceRecords->create(...$params->toArray());
- * ```
  * Create a new customer service record for the provided phone number.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->customerServiceRecords->create(...$params->toArray());`
  *
  * @see Telnyx\CustomerServiceRecords->create
  *

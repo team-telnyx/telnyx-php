@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\MessagingProfiles\MessagingProfileCreateParams\WebhookAPIVersion;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new MessagingProfileCreateParams); // set properties as needed
- * $client->messagingProfiles->create(...$params->toArray());
- * ```
  * Create a messaging profile.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->messagingProfiles->create(...$params->toArray());`
  *
  * @see Telnyx\MessagingProfiles->create
  *

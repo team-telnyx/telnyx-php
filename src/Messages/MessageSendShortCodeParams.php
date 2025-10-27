@@ -11,18 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Messages\MessageSendShortCodeParams\Type;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new MessageSendShortCodeParams); // set properties as needed
- * $client->messages->sendShortCode(...$params->toArray());
- * ```
  * Send a short code message.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->messages->sendShortCode(...$params->toArray());`
  *
  * @see Telnyx\Messages->sendShortCode
  *

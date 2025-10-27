@@ -12,18 +12,7 @@ use Telnyx\RoomRecordings\RoomRecordingDeleteBulkParams\Filter;
 use Telnyx\RoomRecordings\RoomRecordingDeleteBulkParams\Page;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new RoomRecordingDeleteBulkParams); // set properties as needed
- * $client->roomRecordings->deleteBulk(...$params->toArray());
- * ```
  * Delete several room recordings in a bulk.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->roomRecordings->deleteBulk(...$params->toArray());`
  *
  * @see Telnyx\RoomRecordings->deleteBulk
  *

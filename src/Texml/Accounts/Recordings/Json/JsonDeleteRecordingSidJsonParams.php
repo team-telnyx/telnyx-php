@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new JsonDeleteRecordingSidJsonParams); // set properties as needed
- * $client->texml.accounts.recordings.json->deleteRecordingSidJson(...$params->toArray());
- * ```
  * Deletes recording resource identified by recording id.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->texml.accounts.recordings.json->deleteRecordingSidJson(...$params->toArray());`
  *
  * @see Telnyx\Texml\Accounts\Recordings\Json->deleteRecordingSidJson
  *

@@ -13,6 +13,7 @@ use Telnyx\Documents\DocumentListParams\Page;
 use Telnyx\Documents\DocumentListParams\Sort;
 use Telnyx\Documents\DocumentListResponse;
 use Telnyx\Documents\DocumentUpdateResponse;
+use Telnyx\Documents\DocumentUploadJsonResponse;
 use Telnyx\Documents\DocumentUploadResponse;
 use Telnyx\RequestOptions;
 
@@ -145,4 +146,34 @@ interface DocumentsContract
         array $params,
         ?RequestOptions $requestOptions = null
     ): DocumentUploadResponse;
+
+    /**
+     * @api
+     *
+     * @param string $url if the file is already hosted publicly, you can provide a URL and have the documents service fetch it for you
+     * @param string $file the Base64 encoded contents of the file you are uploading
+     * @param string $customerReference a customer reference string for customer look ups
+     * @param string $filename the filename of the document
+     *
+     * @throws APIException
+     */
+    public function uploadJson(
+        $url,
+        $file,
+        $customerReference = omit,
+        $filename = omit,
+        ?RequestOptions $requestOptions = null,
+    ): DocumentUploadJsonResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @throws APIException
+     */
+    public function uploadJsonRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): DocumentUploadJsonResponse;
 }

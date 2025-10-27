@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new VersionPromoteParams); // set properties as needed
- * $client->ai.assistants.versions->promote(...$params->toArray());
- * ```
  * Promotes a specific version to be the main/current version of the assistant. This will delete any existing canary deploy configuration and send all live production traffic to this version.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->ai.assistants.versions->promote(...$params->toArray());`
  *
  * @see Telnyx\AI\Assistants\Versions->promote
  *

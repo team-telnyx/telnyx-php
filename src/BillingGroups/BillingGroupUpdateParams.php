@@ -10,18 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new BillingGroupUpdateParams); // set properties as needed
- * $client->billingGroups->update(...$params->toArray());
- * ```
  * Update a billing group.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->billingGroups->update(...$params->toArray());`
  *
  * @see Telnyx\BillingGroups->update
  *
