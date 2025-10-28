@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Recordings\RecordingListParams\Filter\CreatedAt;
 
 /**
- * Consolidated filter parameter (deepObject style). Originally: filter[conference_id], filter[created_at][gte], filter[created_at][lte], filter[call_leg_id], filter[call_session_id], filter[from], filter[to], filter[connection_id].
+ * Consolidated filter parameter (deepObject style). Originally: filter[conference_id], filter[created_at][gte], filter[created_at][lte], filter[call_leg_id], filter[call_session_id], filter[from], filter[to], filter[connection_id], filter[sip_call_id].
  *
  * @phpstan-type filter_alias = array{
  *   callLegID?: string,
@@ -19,6 +19,7 @@ use Telnyx\Recordings\RecordingListParams\Filter\CreatedAt;
  *   connectionID?: string,
  *   createdAt?: CreatedAt,
  *   from?: string,
+ *   sipCallID?: string,
  *   to?: string,
  * }
  */
@@ -61,6 +62,12 @@ final class Filter implements BaseModel
     public ?string $from;
 
     /**
+     * If present, recordings will be filtered to those with a matching `sip_call_id` attribute. Matching is case-sensitive.
+     */
+    #[Api('sip_call_id', optional: true)]
+    public ?string $sipCallID;
+
+    /**
      * If present, recordings will be filtered to those with a matching `to` attribute (case-sensitive).
      */
     #[Api(optional: true)]
@@ -83,6 +90,7 @@ final class Filter implements BaseModel
         ?string $connectionID = null,
         ?CreatedAt $createdAt = null,
         ?string $from = null,
+        ?string $sipCallID = null,
         ?string $to = null,
     ): self {
         $obj = new self;
@@ -93,6 +101,7 @@ final class Filter implements BaseModel
         null !== $connectionID && $obj->connectionID = $connectionID;
         null !== $createdAt && $obj->createdAt = $createdAt;
         null !== $from && $obj->from = $from;
+        null !== $sipCallID && $obj->sipCallID = $sipCallID;
         null !== $to && $obj->to = $to;
 
         return $obj;
@@ -157,6 +166,17 @@ final class Filter implements BaseModel
     {
         $obj = clone $this;
         $obj->from = $from;
+
+        return $obj;
+    }
+
+    /**
+     * If present, recordings will be filtered to those with a matching `sip_call_id` attribute. Matching is case-sensitive.
+     */
+    public function withSipCallID(string $sipCallID): self
+    {
+        $obj = clone $this;
+        $obj->sipCallID = $sipCallID;
 
         return $obj;
     }
