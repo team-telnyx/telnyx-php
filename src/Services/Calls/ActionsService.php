@@ -108,6 +108,7 @@ use Telnyx\Calls\Actions\ActionTransferParams;
 use Telnyx\Calls\Actions\ActionTransferParams\AnsweringMachineDetection;
 use Telnyx\Calls\Actions\ActionTransferParams\AnsweringMachineDetectionConfig;
 use Telnyx\Calls\Actions\ActionTransferParams\MediaEncryption;
+use Telnyx\Calls\Actions\ActionTransferParams\SipRegion;
 use Telnyx\Calls\Actions\ActionTransferParams\SipTransportProtocol;
 use Telnyx\Calls\Actions\ActionTransferResponse;
 use Telnyx\Calls\Actions\ActionUpdateClientStateParams;
@@ -2582,6 +2583,7 @@ final class ActionsService implements ActionsContract
      * @param string $sipAuthPassword SIP Authentication password used for SIP challenges
      * @param string $sipAuthUsername SIP Authentication username used for SIP challenges
      * @param list<SipHeader> $sipHeaders SIP headers to be added to the SIP INVITE. Currently only User-to-User header is supported.
+     * @param SipRegion|value-of<SipRegion> $sipRegion defines the SIP region to be used for the call
      * @param SipTransportProtocol|value-of<SipTransportProtocol> $sipTransportProtocol defines SIP transport protocol to be used on the call
      * @param SoundModifications $soundModifications use this field to modify sound effects, for example adjust the pitch
      * @param string $targetLegClientState Use this field to add state to every subsequent webhook for the new leg. It must be a valid Base-64 encoded string.
@@ -2619,6 +2621,7 @@ final class ActionsService implements ActionsContract
         $sipAuthPassword = omit,
         $sipAuthUsername = omit,
         $sipHeaders = omit,
+        $sipRegion = omit,
         $sipTransportProtocol = omit,
         $soundModifications = omit,
         $targetLegClientState = omit,
@@ -2654,6 +2657,7 @@ final class ActionsService implements ActionsContract
             'sipAuthPassword' => $sipAuthPassword,
             'sipAuthUsername' => $sipAuthUsername,
             'sipHeaders' => $sipHeaders,
+            'sipRegion' => $sipRegion,
             'sipTransportProtocol' => $sipTransportProtocol,
             'soundModifications' => $soundModifications,
             'targetLegClientState' => $targetLegClientState,

@@ -14,6 +14,7 @@ use Telnyx\Calls\CallDialParams\RecordChannels;
 use Telnyx\Calls\CallDialParams\RecordFormat;
 use Telnyx\Calls\CallDialParams\RecordTrack;
 use Telnyx\Calls\CallDialParams\RecordTrim;
+use Telnyx\Calls\CallDialParams\SipRegion;
 use Telnyx\Calls\CallDialParams\SipTransportProtocol;
 use Telnyx\Calls\CallDialParams\StreamTrack;
 use Telnyx\Calls\CallDialParams\SupervisorRole;
@@ -71,6 +72,7 @@ interface CallsContract
      * @param string $sipAuthPassword SIP Authentication password used for SIP challenges
      * @param string $sipAuthUsername SIP Authentication username used for SIP challenges
      * @param list<SipHeader> $sipHeaders SIP headers to be added to the SIP INVITE request. Currently only User-to-User header is supported.
+     * @param SipRegion|value-of<SipRegion> $sipRegion defines the SIP region to be used for the call
      * @param SipTransportProtocol|value-of<SipTransportProtocol> $sipTransportProtocol defines SIP transport protocol to be used on the call
      * @param SoundModifications $soundModifications use this field to modify sound effects, for example adjust the pitch
      * @param StreamBidirectionalCodec|value-of<StreamBidirectionalCodec> $streamBidirectionalCodec Indicates codec for bidirectional streaming RTP payloads. Used only with stream_bidirectional_mode=rtp. Case sensitive.
@@ -126,6 +128,7 @@ interface CallsContract
         $sipAuthPassword = omit,
         $sipAuthUsername = omit,
         $sipHeaders = omit,
+        $sipRegion = omit,
         $sipTransportProtocol = omit,
         $soundModifications = omit,
         $streamBidirectionalCodec = omit,
