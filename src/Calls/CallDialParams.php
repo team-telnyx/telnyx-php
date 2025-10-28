@@ -14,6 +14,7 @@ use Telnyx\Calls\CallDialParams\RecordChannels;
 use Telnyx\Calls\CallDialParams\RecordFormat;
 use Telnyx\Calls\CallDialParams\RecordTrack;
 use Telnyx\Calls\CallDialParams\RecordTrim;
+use Telnyx\Calls\CallDialParams\SipRegion;
 use Telnyx\Calls\CallDialParams\SipTransportProtocol;
 use Telnyx\Calls\CallDialParams\StreamTrack;
 use Telnyx\Calls\CallDialParams\SupervisorRole;
@@ -75,6 +76,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   sipAuthPassword?: string,
  *   sipAuthUsername?: string,
  *   sipHeaders?: list<SipHeader>,
+ *   sipRegion?: SipRegion|value-of<SipRegion>,
  *   sipTransportProtocol?: SipTransportProtocol|value-of<SipTransportProtocol>,
  *   soundModifications?: SoundModifications,
  *   streamBidirectionalCodec?: StreamBidirectionalCodec|value-of<StreamBidirectionalCodec>,
@@ -321,6 +323,14 @@ final class CallDialParams implements BaseModel
     public ?array $sipHeaders;
 
     /**
+     * Defines the SIP region to be used for the call.
+     *
+     * @var value-of<SipRegion>|null $sipRegion
+     */
+    #[Api('sip_region', enum: SipRegion::class, optional: true)]
+    public ?string $sipRegion;
+
+    /**
      * Defines SIP transport protocol to be used on the call.
      *
      * @var value-of<SipTransportProtocol>|null $sipTransportProtocol
@@ -497,6 +507,7 @@ final class CallDialParams implements BaseModel
      * @param RecordTrack|value-of<RecordTrack> $recordTrack
      * @param RecordTrim|value-of<RecordTrim> $recordTrim
      * @param list<SipHeader> $sipHeaders
+     * @param SipRegion|value-of<SipRegion> $sipRegion
      * @param SipTransportProtocol|value-of<SipTransportProtocol> $sipTransportProtocol
      * @param StreamBidirectionalCodec|value-of<StreamBidirectionalCodec> $streamBidirectionalCodec
      * @param StreamBidirectionalMode|value-of<StreamBidirectionalMode> $streamBidirectionalMode
@@ -541,6 +552,7 @@ final class CallDialParams implements BaseModel
         ?string $sipAuthPassword = null,
         ?string $sipAuthUsername = null,
         ?array $sipHeaders = null,
+        SipRegion|string|null $sipRegion = null,
         SipTransportProtocol|string|null $sipTransportProtocol = null,
         ?SoundModifications $soundModifications = null,
         StreamBidirectionalCodec|string|null $streamBidirectionalCodec = null,
@@ -596,6 +608,7 @@ final class CallDialParams implements BaseModel
         null !== $sipAuthPassword && $obj->sipAuthPassword = $sipAuthPassword;
         null !== $sipAuthUsername && $obj->sipAuthUsername = $sipAuthUsername;
         null !== $sipHeaders && $obj->sipHeaders = $sipHeaders;
+        null !== $sipRegion && $obj['sipRegion'] = $sipRegion;
         null !== $sipTransportProtocol && $obj['sipTransportProtocol'] = $sipTransportProtocol;
         null !== $soundModifications && $obj->soundModifications = $soundModifications;
         null !== $streamBidirectionalCodec && $obj['streamBidirectionalCodec'] = $streamBidirectionalCodec;
@@ -1000,6 +1013,19 @@ final class CallDialParams implements BaseModel
     {
         $obj = clone $this;
         $obj->sipHeaders = $sipHeaders;
+
+        return $obj;
+    }
+
+    /**
+     * Defines the SIP region to be used for the call.
+     *
+     * @param SipRegion|value-of<SipRegion> $sipRegion
+     */
+    public function withSipRegion(SipRegion|string $sipRegion): self
+    {
+        $obj = clone $this;
+        $obj['sipRegion'] = $sipRegion;
 
         return $obj;
     }

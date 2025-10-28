@@ -13,6 +13,7 @@ use Telnyx\Calls\Actions\ActionTransferParams\RecordChannels;
 use Telnyx\Calls\Actions\ActionTransferParams\RecordFormat;
 use Telnyx\Calls\Actions\ActionTransferParams\RecordTrack;
 use Telnyx\Calls\Actions\ActionTransferParams\RecordTrim;
+use Telnyx\Calls\Actions\ActionTransferParams\SipRegion;
 use Telnyx\Calls\Actions\ActionTransferParams\SipTransportProtocol;
 use Telnyx\Calls\Actions\ActionTransferParams\WebhookURLMethod;
 use Telnyx\Calls\CustomSipHeader;
@@ -64,6 +65,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   sipAuthPassword?: string,
  *   sipAuthUsername?: string,
  *   sipHeaders?: list<SipHeader>,
+ *   sipRegion?: SipRegion|value-of<SipRegion>,
  *   sipTransportProtocol?: SipTransportProtocol|value-of<SipTransportProtocol>,
  *   soundModifications?: SoundModifications,
  *   targetLegClientState?: string,
@@ -254,6 +256,14 @@ final class ActionTransferParams implements BaseModel
     public ?array $sipHeaders;
 
     /**
+     * Defines the SIP region to be used for the call.
+     *
+     * @var value-of<SipRegion>|null $sipRegion
+     */
+    #[Api('sip_region', enum: SipRegion::class, optional: true)]
+    public ?string $sipRegion;
+
+    /**
      * Defines SIP transport protocol to be used on the call.
      *
      * @var value-of<SipTransportProtocol>|null $sipTransportProtocol
@@ -337,6 +347,7 @@ final class ActionTransferParams implements BaseModel
      * @param RecordTrack|value-of<RecordTrack> $recordTrack
      * @param RecordTrim|value-of<RecordTrim> $recordTrim
      * @param list<SipHeader> $sipHeaders
+     * @param SipRegion|value-of<SipRegion> $sipRegion
      * @param SipTransportProtocol|value-of<SipTransportProtocol> $sipTransportProtocol
      * @param WebhookURLMethod|value-of<WebhookURLMethod> $webhookURLMethod
      */
@@ -366,6 +377,7 @@ final class ActionTransferParams implements BaseModel
         ?string $sipAuthPassword = null,
         ?string $sipAuthUsername = null,
         ?array $sipHeaders = null,
+        SipRegion|string|null $sipRegion = null,
         SipTransportProtocol|string|null $sipTransportProtocol = null,
         ?SoundModifications $soundModifications = null,
         ?string $targetLegClientState = null,
@@ -402,6 +414,7 @@ final class ActionTransferParams implements BaseModel
         null !== $sipAuthPassword && $obj->sipAuthPassword = $sipAuthPassword;
         null !== $sipAuthUsername && $obj->sipAuthUsername = $sipAuthUsername;
         null !== $sipHeaders && $obj->sipHeaders = $sipHeaders;
+        null !== $sipRegion && $obj['sipRegion'] = $sipRegion;
         null !== $sipTransportProtocol && $obj['sipTransportProtocol'] = $sipTransportProtocol;
         null !== $soundModifications && $obj->soundModifications = $soundModifications;
         null !== $targetLegClientState && $obj->targetLegClientState = $targetLegClientState;
@@ -708,6 +721,19 @@ final class ActionTransferParams implements BaseModel
     {
         $obj = clone $this;
         $obj->sipHeaders = $sipHeaders;
+
+        return $obj;
+    }
+
+    /**
+     * Defines the SIP region to be used for the call.
+     *
+     * @param SipRegion|value-of<SipRegion> $sipRegion
+     */
+    public function withSipRegion(SipRegion|string $sipRegion): self
+    {
+        $obj = clone $this;
+        $obj['sipRegion'] = $sipRegion;
 
         return $obj;
     }
