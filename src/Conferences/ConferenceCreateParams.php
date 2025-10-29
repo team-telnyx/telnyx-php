@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Conferences;
 
 use Telnyx\Conferences\ConferenceCreateParams\BeepEnabled;
+use Telnyx\Conferences\ConferenceCreateParams\Region;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
@@ -35,6 +36,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   holdAudioURL?: string,
  *   holdMediaName?: string,
  *   maxParticipants?: int,
+ *   region?: Region|value-of<Region>,
  *   startConferenceOnCreate?: bool,
  * }
  */
@@ -107,6 +109,14 @@ final class ConferenceCreateParams implements BaseModel
     public ?int $maxParticipants;
 
     /**
+     * Sets the region where the conference data will be hosted. Defaults to the region defined in user's data locality settings (Europe or US).
+     *
+     * @var value-of<Region>|null $region
+     */
+    #[Api(enum: Region::class, optional: true)]
+    public ?string $region;
+
+    /**
      * Whether the conference should be started on creation. If the conference isn't started all participants that join are automatically put on hold. Defaults to "true".
      */
     #[Api('start_conference_on_create', optional: true)]
@@ -137,6 +147,7 @@ final class ConferenceCreateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param BeepEnabled|value-of<BeepEnabled> $beepEnabled
+     * @param Region|value-of<Region> $region
      */
     public static function with(
         string $callControlID,
@@ -149,6 +160,7 @@ final class ConferenceCreateParams implements BaseModel
         ?string $holdAudioURL = null,
         ?string $holdMediaName = null,
         ?int $maxParticipants = null,
+        Region|string|null $region = null,
         ?bool $startConferenceOnCreate = null,
     ): self {
         $obj = new self;
@@ -164,6 +176,7 @@ final class ConferenceCreateParams implements BaseModel
         null !== $holdAudioURL && $obj->holdAudioURL = $holdAudioURL;
         null !== $holdMediaName && $obj->holdMediaName = $holdMediaName;
         null !== $maxParticipants && $obj->maxParticipants = $maxParticipants;
+        null !== $region && $obj['region'] = $region;
         null !== $startConferenceOnCreate && $obj->startConferenceOnCreate = $startConferenceOnCreate;
 
         return $obj;
@@ -277,6 +290,19 @@ final class ConferenceCreateParams implements BaseModel
     {
         $obj = clone $this;
         $obj->maxParticipants = $maxParticipants;
+
+        return $obj;
+    }
+
+    /**
+     * Sets the region where the conference data will be hosted. Defaults to the region defined in user's data locality settings (Europe or US).
+     *
+     * @param Region|value-of<Region> $region
+     */
+    public function withRegion(Region|string $region): self
+    {
+        $obj = clone $this;
+        $obj['region'] = $region;
 
         return $obj;
     }

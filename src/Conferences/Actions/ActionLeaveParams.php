@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Conferences\Actions;
 
 use Telnyx\Conferences\Actions\ActionLeaveParams\BeepEnabled;
+use Telnyx\Conferences\Actions\ActionLeaveParams\Region;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
@@ -23,6 +24,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   callControlID: string,
  *   beepEnabled?: BeepEnabled|value-of<BeepEnabled>,
  *   commandID?: string,
+ *   region?: Region|value-of<Region>,
  * }
  */
 final class ActionLeaveParams implements BaseModel
@@ -52,6 +54,14 @@ final class ActionLeaveParams implements BaseModel
     public ?string $commandID;
 
     /**
+     * Region where the conference data is located. Defaults to the region defined in user's data locality settings (Europe or US).
+     *
+     * @var value-of<Region>|null $region
+     */
+    #[Api(enum: Region::class, optional: true)]
+    public ?string $region;
+
+    /**
      * `new ActionLeaveParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
@@ -76,11 +86,13 @@ final class ActionLeaveParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param BeepEnabled|value-of<BeepEnabled> $beepEnabled
+     * @param Region|value-of<Region> $region
      */
     public static function with(
         string $callControlID,
         BeepEnabled|string|null $beepEnabled = null,
         ?string $commandID = null,
+        Region|string|null $region = null,
     ): self {
         $obj = new self;
 
@@ -88,6 +100,7 @@ final class ActionLeaveParams implements BaseModel
 
         null !== $beepEnabled && $obj['beepEnabled'] = $beepEnabled;
         null !== $commandID && $obj->commandID = $commandID;
+        null !== $region && $obj['region'] = $region;
 
         return $obj;
     }
@@ -123,6 +136,19 @@ final class ActionLeaveParams implements BaseModel
     {
         $obj = clone $this;
         $obj->commandID = $commandID;
+
+        return $obj;
+    }
+
+    /**
+     * Region where the conference data is located. Defaults to the region defined in user's data locality settings (Europe or US).
+     *
+     * @param Region|value-of<Region> $region
+     */
+    public function withRegion(Region|string $region): self
+    {
+        $obj = clone $this;
+        $obj['region'] = $region;
 
         return $obj;
     }

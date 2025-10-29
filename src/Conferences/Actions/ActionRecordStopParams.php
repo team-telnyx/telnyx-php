@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Conferences\Actions;
 
+use Telnyx\Conferences\Actions\ActionRecordStopParams\Region;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
@@ -19,7 +20,10 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Conferences\Actions->recordStop
  *
  * @phpstan-type action_record_stop_params = array{
- *   clientState?: string, commandID?: string, recordingID?: string
+ *   clientState?: string,
+ *   commandID?: string,
+ *   recordingID?: string,
+ *   region?: Region|value-of<Region>,
  * }
  */
 final class ActionRecordStopParams implements BaseModel
@@ -46,6 +50,14 @@ final class ActionRecordStopParams implements BaseModel
     #[Api('recording_id', optional: true)]
     public ?string $recordingID;
 
+    /**
+     * Region where the conference data is located. Defaults to the region defined in user's data locality settings (Europe or US).
+     *
+     * @var value-of<Region>|null $region
+     */
+    #[Api(enum: Region::class, optional: true)]
+    public ?string $region;
+
     public function __construct()
     {
         $this->initialize();
@@ -55,17 +67,21 @@ final class ActionRecordStopParams implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Region|value-of<Region> $region
      */
     public static function with(
         ?string $clientState = null,
         ?string $commandID = null,
         ?string $recordingID = null,
+        Region|string|null $region = null,
     ): self {
         $obj = new self;
 
         null !== $clientState && $obj->clientState = $clientState;
         null !== $commandID && $obj->commandID = $commandID;
         null !== $recordingID && $obj->recordingID = $recordingID;
+        null !== $region && $obj['region'] = $region;
 
         return $obj;
     }
@@ -99,6 +115,19 @@ final class ActionRecordStopParams implements BaseModel
     {
         $obj = clone $this;
         $obj->recordingID = $recordingID;
+
+        return $obj;
+    }
+
+    /**
+     * Region where the conference data is located. Defaults to the region defined in user's data locality settings (Europe or US).
+     *
+     * @param Region|value-of<Region> $region
+     */
+    public function withRegion(Region|string $region): self
+    {
+        $obj = clone $this;
+        $obj['region'] = $region;
 
         return $obj;
     }

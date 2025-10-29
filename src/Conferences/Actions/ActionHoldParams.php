@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Conferences\Actions;
 
+use Telnyx\Conferences\Actions\ActionHoldParams\Region;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
@@ -15,7 +16,10 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Conferences\Actions->hold
  *
  * @phpstan-type action_hold_params = array{
- *   audioURL?: string, callControlIDs?: list<string>, mediaName?: string
+ *   audioURL?: string,
+ *   callControlIDs?: list<string>,
+ *   mediaName?: string,
+ *   region?: Region|value-of<Region>,
  * }
  */
 final class ActionHoldParams implements BaseModel
@@ -44,6 +48,14 @@ final class ActionHoldParams implements BaseModel
     #[Api('media_name', optional: true)]
     public ?string $mediaName;
 
+    /**
+     * Region where the conference data is located. Defaults to the region defined in user's data locality settings (Europe or US).
+     *
+     * @var value-of<Region>|null $region
+     */
+    #[Api(enum: Region::class, optional: true)]
+    public ?string $region;
+
     public function __construct()
     {
         $this->initialize();
@@ -55,17 +67,20 @@ final class ActionHoldParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<string> $callControlIDs
+     * @param Region|value-of<Region> $region
      */
     public static function with(
         ?string $audioURL = null,
         ?array $callControlIDs = null,
         ?string $mediaName = null,
+        Region|string|null $region = null,
     ): self {
         $obj = new self;
 
         null !== $audioURL && $obj->audioURL = $audioURL;
         null !== $callControlIDs && $obj->callControlIDs = $callControlIDs;
         null !== $mediaName && $obj->mediaName = $mediaName;
+        null !== $region && $obj['region'] = $region;
 
         return $obj;
     }
@@ -101,6 +116,19 @@ final class ActionHoldParams implements BaseModel
     {
         $obj = clone $this;
         $obj->mediaName = $mediaName;
+
+        return $obj;
+    }
+
+    /**
+     * Region where the conference data is located. Defaults to the region defined in user's data locality settings (Europe or US).
+     *
+     * @param Region|value-of<Region> $region
+     */
+    public function withRegion(Region|string $region): self
+    {
+        $obj = clone $this;
+        $obj['region'] = $region;
 
         return $obj;
     }

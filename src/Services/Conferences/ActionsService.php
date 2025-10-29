@@ -39,6 +39,7 @@ use Telnyx\Conferences\Actions\ActionUnholdResponse;
 use Telnyx\Conferences\Actions\ActionUnmuteParams;
 use Telnyx\Conferences\Actions\ActionUnmuteResponse;
 use Telnyx\Conferences\Actions\ActionUpdateParams;
+use Telnyx\Conferences\Actions\ActionUpdateParams\Region;
 use Telnyx\Conferences\Actions\ActionUpdateParams\SupervisorRole;
 use Telnyx\Conferences\Actions\ActionUpdateResponse;
 use Telnyx\Core\Exceptions\APIException;
@@ -62,6 +63,7 @@ final class ActionsService implements ActionsContract
      * @param string $callControlID Unique identifier and token for controlling the call
      * @param SupervisorRole|value-of<SupervisorRole> $supervisorRole Sets the participant as a supervisor for the conference. A conference can have multiple supervisors. "barge" means the supervisor enters the conference as a normal participant. This is the same as "none". "monitor" means the supervisor is muted but can hear all participants. "whisper" means that only the specified "whisper_call_control_ids" can hear the supervisor. Defaults to "none".
      * @param string $commandID Use this field to avoid execution of duplicate commands. Telnyx will ignore subsequent commands with the same `command_id` as one that has already been executed.
+     * @param Region|value-of<Region> $region Region where the conference data is located. Defaults to the region defined in user's data locality settings (Europe or US).
      * @param list<string> $whisperCallControlIDs Array of unique call_control_ids the supervisor can whisper to. If none provided, the supervisor will join the conference as a monitoring participant only.
      *
      * @throws APIException
@@ -71,6 +73,7 @@ final class ActionsService implements ActionsContract
         $callControlID,
         $supervisorRole,
         $commandID = omit,
+        $region = omit,
         $whisperCallControlIDs = omit,
         ?RequestOptions $requestOptions = null,
     ): ActionUpdateResponse {
@@ -78,6 +81,7 @@ final class ActionsService implements ActionsContract
             'callControlID' => $callControlID,
             'supervisorRole' => $supervisorRole,
             'commandID' => $commandID,
+            'region' => $region,
             'whisperCallControlIDs' => $whisperCallControlIDs,
         ];
 
@@ -119,6 +123,7 @@ final class ActionsService implements ActionsContract
      * @param string $audioURL The URL of a file to be played to the participants when they are put on hold. media_name and audio_url cannot be used together in one request.
      * @param list<string> $callControlIDs List of unique identifiers and tokens for controlling the call. When empty all participants will be placed on hold.
      * @param string $mediaName The media_name of a file to be played to the participants when they are put on hold. The media_name must point to a file previously uploaded to api.telnyx.com/v2/media by the same user/organization. The file must either be a WAV or MP3 file.
+     * @param ActionHoldParams\Region|value-of<ActionHoldParams\Region> $region Region where the conference data is located. Defaults to the region defined in user's data locality settings (Europe or US).
      *
      * @throws APIException
      */
@@ -127,12 +132,14 @@ final class ActionsService implements ActionsContract
         $audioURL = omit,
         $callControlIDs = omit,
         $mediaName = omit,
+        $region = omit,
         ?RequestOptions $requestOptions = null,
     ): ActionHoldResponse {
         $params = [
             'audioURL' => $audioURL,
             'callControlIDs' => $callControlIDs,
             'mediaName' => $mediaName,
+            'region' => $region,
         ];
 
         return $this->holdRaw($id, $params, $requestOptions);
@@ -184,6 +191,7 @@ final class ActionsService implements ActionsContract
      * @param string $holdAudioURL The URL of a file to be played to the participant when they are put on hold after joining the conference. hold_media_name and hold_audio_url cannot be used together in one request. Takes effect only when "start_conference_on_create" is set to "false". This property takes effect only if "hold" is set to "true".
      * @param string $holdMediaName The media_name of a file to be played to the participant when they are put on hold after joining the conference. The media_name must point to a file previously uploaded to api.telnyx.com/v2/media by the same user/organization. The file must either be a WAV or MP3 file. Takes effect only when "start_conference_on_create" is set to "false". This property takes effect only if "hold" is set to "true".
      * @param bool $mute Whether the participant should be muted immediately after joining the conference. Defaults to "false".
+     * @param ActionJoinParams\Region|value-of<ActionJoinParams\Region> $region Region where the conference data is located. Defaults to the region defined in user's data locality settings (Europe or US).
      * @param bool $softEndConferenceOnExit Whether the conference should end after the participant leaves the conference. NOTE this doesn't hang up the other participants. Defaults to "false".
      * @param bool $startConferenceOnEnter Whether the conference should be started after the participant joins the conference. Defaults to "false".
      * @param ActionJoinParams\SupervisorRole|value-of<ActionJoinParams\SupervisorRole> $supervisorRole Sets the joining participant as a supervisor for the conference. A conference can have multiple supervisors. "barge" means the supervisor enters the conference as a normal participant. This is the same as "none". "monitor" means the supervisor is muted but can hear all participants. "whisper" means that only the specified "whisper_call_control_ids" can hear the supervisor. Defaults to "none".
@@ -202,6 +210,7 @@ final class ActionsService implements ActionsContract
         $holdAudioURL = omit,
         $holdMediaName = omit,
         $mute = omit,
+        $region = omit,
         $softEndConferenceOnExit = omit,
         $startConferenceOnEnter = omit,
         $supervisorRole = omit,
@@ -218,6 +227,7 @@ final class ActionsService implements ActionsContract
             'holdAudioURL' => $holdAudioURL,
             'holdMediaName' => $holdMediaName,
             'mute' => $mute,
+            'region' => $region,
             'softEndConferenceOnExit' => $softEndConferenceOnExit,
             'startConferenceOnEnter' => $startConferenceOnEnter,
             'supervisorRole' => $supervisorRole,
@@ -266,6 +276,7 @@ final class ActionsService implements ActionsContract
      * @param string $callControlID Unique identifier and token for controlling the call
      * @param ActionLeaveParams\BeepEnabled|value-of<ActionLeaveParams\BeepEnabled> $beepEnabled Whether a beep sound should be played when the participant leaves the conference. Can be used to override the conference-level setting.
      * @param string $commandID Use this field to avoid execution of duplicate commands. Telnyx will ignore subsequent commands with the same `command_id` as one that has already been executed.
+     * @param ActionLeaveParams\Region|value-of<ActionLeaveParams\Region> $region Region where the conference data is located. Defaults to the region defined in user's data locality settings (Europe or US).
      *
      * @throws APIException
      */
@@ -274,12 +285,14 @@ final class ActionsService implements ActionsContract
         $callControlID,
         $beepEnabled = omit,
         $commandID = omit,
+        $region = omit,
         ?RequestOptions $requestOptions = null,
     ): ActionLeaveResponse {
         $params = [
             'callControlID' => $callControlID,
             'beepEnabled' => $beepEnabled,
             'commandID' => $commandID,
+            'region' => $region,
         ];
 
         return $this->leaveRaw($id, $params, $requestOptions);
@@ -318,15 +331,17 @@ final class ActionsService implements ActionsContract
      * Mute a list of participants in a conference call
      *
      * @param list<string> $callControlIDs Array of unique identifiers and tokens for controlling the call. When empty all participants will be muted.
+     * @param ActionMuteParams\Region|value-of<ActionMuteParams\Region> $region Region where the conference data is located. Defaults to the region defined in user's data locality settings (Europe or US).
      *
      * @throws APIException
      */
     public function mute(
         string $id,
         $callControlIDs = omit,
-        ?RequestOptions $requestOptions = null
+        $region = omit,
+        ?RequestOptions $requestOptions = null,
     ): ActionMuteResponse {
-        $params = ['callControlIDs' => $callControlIDs];
+        $params = ['callControlIDs' => $callControlIDs, 'region' => $region];
 
         return $this->muteRaw($id, $params, $requestOptions);
     }
@@ -367,6 +382,7 @@ final class ActionsService implements ActionsContract
      * @param list<string> $callControlIDs List of call control ids identifying participants the audio file should be played to. If not given, the audio file will be played to the entire conference.
      * @param string|int $loop The number of times the audio file should be played. If supplied, the value must be an integer between 1 and 100, or the special string `infinity` for an endless loop.
      * @param string $mediaName The media_name of a file to be played back in the conference. The media_name must point to a file previously uploaded to api.telnyx.com/v2/media by the same user/organization. The file must either be a WAV or MP3 file.
+     * @param ActionPlayParams\Region|value-of<ActionPlayParams\Region> $region Region where the conference data is located. Defaults to the region defined in user's data locality settings (Europe or US).
      *
      * @throws APIException
      */
@@ -376,6 +392,7 @@ final class ActionsService implements ActionsContract
         $callControlIDs = omit,
         $loop = omit,
         $mediaName = omit,
+        $region = omit,
         ?RequestOptions $requestOptions = null,
     ): ActionPlayResponse {
         $params = [
@@ -383,6 +400,7 @@ final class ActionsService implements ActionsContract
             'callControlIDs' => $callControlIDs,
             'loop' => $loop,
             'mediaName' => $mediaName,
+            'region' => $region,
         ];
 
         return $this->playRaw($id, $params, $requestOptions);
@@ -422,6 +440,7 @@ final class ActionsService implements ActionsContract
      *
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      * @param string $recordingID use this field to pause specific recording
+     * @param ActionRecordPauseParams\Region|value-of<ActionRecordPauseParams\Region> $region Region where the conference data is located. Defaults to the region defined in user's data locality settings (Europe or US).
      *
      * @throws APIException
      */
@@ -429,9 +448,14 @@ final class ActionsService implements ActionsContract
         string $id,
         $commandID = omit,
         $recordingID = omit,
+        $region = omit,
         ?RequestOptions $requestOptions = null,
     ): ActionRecordPauseResponse {
-        $params = ['commandID' => $commandID, 'recordingID' => $recordingID];
+        $params = [
+            'commandID' => $commandID,
+            'recordingID' => $recordingID,
+            'region' => $region,
+        ];
 
         return $this->recordPauseRaw($id, $params, $requestOptions);
     }
@@ -470,6 +494,7 @@ final class ActionsService implements ActionsContract
      *
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      * @param string $recordingID use this field to resume specific recording
+     * @param ActionRecordResumeParams\Region|value-of<ActionRecordResumeParams\Region> $region Region where the conference data is located. Defaults to the region defined in user's data locality settings (Europe or US).
      *
      * @throws APIException
      */
@@ -477,9 +502,14 @@ final class ActionsService implements ActionsContract
         string $id,
         $commandID = omit,
         $recordingID = omit,
+        $region = omit,
         ?RequestOptions $requestOptions = null,
     ): ActionRecordResumeResponse {
-        $params = ['commandID' => $commandID, 'recordingID' => $recordingID];
+        $params = [
+            'commandID' => $commandID,
+            'recordingID' => $recordingID,
+            'region' => $region,
+        ];
 
         return $this->recordResumeRaw($id, $params, $requestOptions);
     }
@@ -524,6 +554,7 @@ final class ActionsService implements ActionsContract
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `conference_id`.
      * @param string $customFileName The custom recording file name to be used instead of the default `call_leg_id`. Telnyx will still add a Unix timestamp suffix.
      * @param bool $playBeep if enabled, a beep sound will be played at the start of a recording
+     * @param ActionRecordStartParams\Region|value-of<ActionRecordStartParams\Region> $region Region where the conference data is located. Defaults to the region defined in user's data locality settings (Europe or US).
      * @param Trim|value-of<Trim> $trim when set to `trim-silence`, silence will be removed from the beginning and end of the recording
      *
      * @throws APIException
@@ -534,6 +565,7 @@ final class ActionsService implements ActionsContract
         $commandID = omit,
         $customFileName = omit,
         $playBeep = omit,
+        $region = omit,
         $trim = omit,
         ?RequestOptions $requestOptions = null,
     ): ActionRecordStartResponse {
@@ -542,6 +574,7 @@ final class ActionsService implements ActionsContract
             'commandID' => $commandID,
             'customFileName' => $customFileName,
             'playBeep' => $playBeep,
+            'region' => $region,
             'trim' => $trim,
         ];
 
@@ -587,6 +620,7 @@ final class ActionsService implements ActionsContract
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      * @param string $recordingID uniquely identifies the resource
+     * @param ActionRecordStopParams\Region|value-of<ActionRecordStopParams\Region> $region Region where the conference data is located. Defaults to the region defined in user's data locality settings (Europe or US).
      *
      * @throws APIException
      */
@@ -595,12 +629,14 @@ final class ActionsService implements ActionsContract
         $clientState = omit,
         $commandID = omit,
         $recordingID = omit,
+        $region = omit,
         ?RequestOptions $requestOptions = null,
     ): ActionRecordStopResponse {
         $params = [
             'clientState' => $clientState,
             'commandID' => $commandID,
             'recordingID' => $recordingID,
+            'region' => $region,
         ];
 
         return $this->recordStopRaw($id, $params, $requestOptions);
@@ -654,6 +690,7 @@ final class ActionsService implements ActionsContract
      * @param string $commandID Use this field to avoid execution of duplicate commands. Telnyx will ignore subsequent commands with the same `command_id` as one that has already been executed.
      * @param Language|value-of<Language> $language The language you want spoken. This parameter is ignored when a `Polly.*` voice is specified.
      * @param PayloadType|value-of<PayloadType> $payloadType The type of the provided payload. The payload can either be plain text, or Speech Synthesis Markup Language (SSML).
+     * @param ActionSpeakParams\Region|value-of<ActionSpeakParams\Region> $region Region where the conference data is located. Defaults to the region defined in user's data locality settings (Europe or US).
      * @param mixed|ElevenLabsVoiceSettings|TelnyxVoiceSettings $voiceSettings The settings associated with the voice selected
      *
      * @throws APIException
@@ -666,6 +703,7 @@ final class ActionsService implements ActionsContract
         $commandID = omit,
         $language = omit,
         $payloadType = omit,
+        $region = omit,
         $voiceSettings = omit,
         ?RequestOptions $requestOptions = null,
     ): ActionSpeakResponse {
@@ -676,6 +714,7 @@ final class ActionsService implements ActionsContract
             'commandID' => $commandID,
             'language' => $language,
             'payloadType' => $payloadType,
+            'region' => $region,
             'voiceSettings' => $voiceSettings,
         ];
 
@@ -715,15 +754,17 @@ final class ActionsService implements ActionsContract
      * Stop audio being played to all or some participants on a conference call.
      *
      * @param list<string> $callControlIDs List of call control ids identifying participants the audio file should stop be played to. If not given, the audio will be stoped to the entire conference.
+     * @param ActionStopParams\Region|value-of<ActionStopParams\Region> $region Region where the conference data is located. Defaults to the region defined in user's data locality settings (Europe or US).
      *
      * @throws APIException
      */
     public function stop(
         string $id,
         $callControlIDs = omit,
-        ?RequestOptions $requestOptions = null
+        $region = omit,
+        ?RequestOptions $requestOptions = null,
     ): ActionStopResponse {
-        $params = ['callControlIDs' => $callControlIDs];
+        $params = ['callControlIDs' => $callControlIDs, 'region' => $region];
 
         return $this->stopRaw($id, $params, $requestOptions);
     }
@@ -761,15 +802,17 @@ final class ActionsService implements ActionsContract
      * Unhold a list of participants in a conference call
      *
      * @param list<string> $callControlIDs List of unique identifiers and tokens for controlling the call. Enter each call control ID to be unheld.
+     * @param ActionUnholdParams\Region|value-of<ActionUnholdParams\Region> $region Region where the conference data is located. Defaults to the region defined in user's data locality settings (Europe or US).
      *
      * @throws APIException
      */
     public function unhold(
         string $id,
         $callControlIDs,
-        ?RequestOptions $requestOptions = null
+        $region = omit,
+        ?RequestOptions $requestOptions = null,
     ): ActionUnholdResponse {
-        $params = ['callControlIDs' => $callControlIDs];
+        $params = ['callControlIDs' => $callControlIDs, 'region' => $region];
 
         return $this->unholdRaw($id, $params, $requestOptions);
     }
@@ -807,15 +850,17 @@ final class ActionsService implements ActionsContract
      * Unmute a list of participants in a conference call
      *
      * @param list<string> $callControlIDs List of unique identifiers and tokens for controlling the call. Enter each call control ID to be unmuted. When empty all participants will be unmuted.
+     * @param ActionUnmuteParams\Region|value-of<ActionUnmuteParams\Region> $region Region where the conference data is located. Defaults to the region defined in user's data locality settings (Europe or US).
      *
      * @throws APIException
      */
     public function unmute(
         string $id,
         $callControlIDs = omit,
-        ?RequestOptions $requestOptions = null
+        $region = omit,
+        ?RequestOptions $requestOptions = null,
     ): ActionUnmuteResponse {
-        $params = ['callControlIDs' => $callControlIDs];
+        $params = ['callControlIDs' => $callControlIDs, 'region' => $region];
 
         return $this->unmuteRaw($id, $params, $requestOptions);
     }

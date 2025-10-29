@@ -8,6 +8,7 @@ use Telnyx\Calls\Actions\ElevenLabsVoiceSettings;
 use Telnyx\Calls\Actions\TelnyxVoiceSettings;
 use Telnyx\Conferences\Actions\ActionSpeakParams\Language;
 use Telnyx\Conferences\Actions\ActionSpeakParams\PayloadType;
+use Telnyx\Conferences\Actions\ActionSpeakParams\Region;
 use Telnyx\Conferences\Actions\ActionSpeakParams\VoiceSettings;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
@@ -26,6 +27,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   commandID?: string,
  *   language?: Language|value-of<Language>,
  *   payloadType?: PayloadType|value-of<PayloadType>,
+ *   region?: Region|value-of<Region>,
  *   voiceSettings?: mixed|ElevenLabsVoiceSettings|TelnyxVoiceSettings,
  * }
  */
@@ -88,6 +90,14 @@ final class ActionSpeakParams implements BaseModel
     public ?string $payloadType;
 
     /**
+     * Region where the conference data is located. Defaults to the region defined in user's data locality settings (Europe or US).
+     *
+     * @var value-of<Region>|null $region
+     */
+    #[Api(enum: Region::class, optional: true)]
+    public ?string $region;
+
+    /**
      * The settings associated with the voice selected.
      *
      * @var mixed|ElevenLabsVoiceSettings|TelnyxVoiceSettings|null $voiceSettings
@@ -122,6 +132,7 @@ final class ActionSpeakParams implements BaseModel
      * @param list<string> $callControlIDs
      * @param Language|value-of<Language> $language
      * @param PayloadType|value-of<PayloadType> $payloadType
+     * @param Region|value-of<Region> $region
      * @param mixed|ElevenLabsVoiceSettings|TelnyxVoiceSettings $voiceSettings
      */
     public static function with(
@@ -131,6 +142,7 @@ final class ActionSpeakParams implements BaseModel
         ?string $commandID = null,
         Language|string|null $language = null,
         PayloadType|string|null $payloadType = null,
+        Region|string|null $region = null,
         mixed $voiceSettings = null,
     ): self {
         $obj = new self;
@@ -142,6 +154,7 @@ final class ActionSpeakParams implements BaseModel
         null !== $commandID && $obj->commandID = $commandID;
         null !== $language && $obj['language'] = $language;
         null !== $payloadType && $obj['payloadType'] = $payloadType;
+        null !== $region && $obj['region'] = $region;
         null !== $voiceSettings && $obj->voiceSettings = $voiceSettings;
 
         return $obj;
@@ -225,6 +238,19 @@ final class ActionSpeakParams implements BaseModel
     {
         $obj = clone $this;
         $obj['payloadType'] = $payloadType;
+
+        return $obj;
+    }
+
+    /**
+     * Region where the conference data is located. Defaults to the region defined in user's data locality settings (Europe or US).
+     *
+     * @param Region|value-of<Region> $region
+     */
+    public function withRegion(Region|string $region): self
+    {
+        $obj = clone $this;
+        $obj['region'] = $region;
 
         return $obj;
     }
