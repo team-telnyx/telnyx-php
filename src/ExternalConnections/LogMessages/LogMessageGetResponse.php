@@ -12,11 +12,11 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\ExternalConnections\LogMessages\LogMessageGetResponse\LogMessage;
 
 /**
- * @phpstan-type log_message_get_response = array{logMessages?: list<LogMessage>}
+ * @phpstan-type LogMessageGetResponseShape = array{logMessages?: list<LogMessage>}
  */
 final class LogMessageGetResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<log_message_get_response> */
+    /** @use SdkModel<LogMessageGetResponseShape> */
     use SdkModel;
 
     use SdkResponse;

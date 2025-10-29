@@ -11,7 +11,7 @@ use Telnyx\SubNumberOrdersReport\SubNumberOrdersReportNewResponse\Data\Filters;
 use Telnyx\SubNumberOrdersReport\SubNumberOrdersReportNewResponse\Data\Status;
 
 /**
- * @phpstan-type data_alias = array{
+ * @phpstan-type DataShape = array{
  *   id?: string,
  *   createdAt?: \DateTimeInterface,
  *   filters?: Filters,
@@ -23,7 +23,7 @@ use Telnyx\SubNumberOrdersReport\SubNumberOrdersReportNewResponse\Data\Status;
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**

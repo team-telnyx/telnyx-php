@@ -12,11 +12,11 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\GlobalIPs\GlobalIPNewResponse\Data;
 
 /**
- * @phpstan-type global_ip_new_response = array{data?: Data}
+ * @phpstan-type GlobalIPNewResponseShape = array{data?: Data}
  */
 final class GlobalIPNewResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<global_ip_new_response> */
+    /** @use SdkModel<GlobalIPNewResponseShape> */
     use SdkModel;
 
     use SdkResponse;

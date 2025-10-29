@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type detail_records_report_new_response = array{data?: WdrReport}
+ * @phpstan-type DetailRecordsReportNewResponseShape = array{data?: WdrReport}
  */
 final class DetailRecordsReportNewResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<detail_records_report_new_response> */
+    /** @use SdkModel<DetailRecordsReportNewResponseShape> */
     use SdkModel;
 
     use SdkResponse;

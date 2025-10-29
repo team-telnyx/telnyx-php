@@ -9,13 +9,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type date_joined_at = array{
+ * @phpstan-type DateJoinedAtShape = array{
  *   eq?: \DateTimeInterface, gte?: \DateTimeInterface, lte?: \DateTimeInterface
  * }
  */
 final class DateJoinedAt implements BaseModel
 {
-    /** @use SdkModel<date_joined_at> */
+    /** @use SdkModel<DateJoinedAtShape> */
     use SdkModel;
 
     /**

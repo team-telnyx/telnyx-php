@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type external_connection_delete_response = array{
+ * @phpstan-type ExternalConnectionDeleteResponseShape = array{
  *   data?: ExternalConnection
  * }
  */
 final class ExternalConnectionDeleteResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<external_connection_delete_response> */
+    /** @use SdkModel<ExternalConnectionDeleteResponseShape> */
     use SdkModel;
 
     use SdkResponse;

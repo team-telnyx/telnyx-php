@@ -10,13 +10,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\VerifiedNumbers\VerifiedNumber\RecordType;
 
 /**
- * @phpstan-type verified_number = array{
+ * @phpstan-type VerifiedNumberShape = array{
  *   phoneNumber?: string, recordType?: value-of<RecordType>, verifiedAt?: string
  * }
  */
 final class VerifiedNumber implements BaseModel
 {
-    /** @use SdkModel<verified_number> */
+    /** @use SdkModel<VerifiedNumberShape> */
     use SdkModel;
 
     #[Api('phone_number', optional: true)]

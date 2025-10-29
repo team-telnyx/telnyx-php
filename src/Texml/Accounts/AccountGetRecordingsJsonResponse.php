@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type account_get_recordings_json_response = array{
+ * @phpstan-type AccountGetRecordingsJsonResponseShape = array{
  *   end?: int,
  *   firstPageUri?: string,
  *   nextPageUri?: string,
@@ -25,7 +25,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  */
 final class AccountGetRecordingsJsonResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<account_get_recordings_json_response> */
+    /** @use SdkModel<AccountGetRecordingsJsonResponseShape> */
     use SdkModel;
 
     use SdkResponse;

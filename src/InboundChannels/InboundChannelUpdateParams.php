@@ -14,11 +14,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\InboundChannels->update
  *
- * @phpstan-type inbound_channel_update_params = array{channels: int}
+ * @phpstan-type InboundChannelUpdateParamsShape = array{channels: int}
  */
 final class InboundChannelUpdateParams implements BaseModel
 {
-    /** @use SdkModel<inbound_channel_update_params> */
+    /** @use SdkModel<InboundChannelUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 

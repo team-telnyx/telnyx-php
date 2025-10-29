@@ -15,7 +15,7 @@ use Telnyx\Messsages\RcsSuggestion\Action\ViewLocationAction;
 /**
  * When tapped, initiates the corresponding native action on the device.
  *
- * @phpstan-type action_alias = array{
+ * @phpstan-type ActionShape = array{
  *   createCalendarEventAction?: CreateCalendarEventAction,
  *   dialAction?: DialAction,
  *   fallbackURL?: string,
@@ -28,7 +28,7 @@ use Telnyx\Messsages\RcsSuggestion\Action\ViewLocationAction;
  */
 final class Action implements BaseModel
 {
-    /** @use SdkModel<action_alias> */
+    /** @use SdkModel<ActionShape> */
     use SdkModel;
 
     /**

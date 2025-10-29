@@ -12,7 +12,7 @@ use Telnyx\PhoneNumbers\Voice\CallForwarding\ForwardingType;
 /**
  * The call forwarding settings for a phone number.
  *
- * @phpstan-type call_forwarding = array{
+ * @phpstan-type CallForwardingShape = array{
  *   callForwardingEnabled?: bool,
  *   forwardingType?: value-of<ForwardingType>,
  *   forwardsTo?: string,
@@ -20,7 +20,7 @@ use Telnyx\PhoneNumbers\Voice\CallForwarding\ForwardingType;
  */
 final class CallForwarding implements BaseModel
 {
-    /** @use SdkModel<call_forwarding> */
+    /** @use SdkModel<CallForwardingShape> */
     use SdkModel;
 
     /**

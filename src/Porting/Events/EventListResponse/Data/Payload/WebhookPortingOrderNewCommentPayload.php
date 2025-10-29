@@ -12,13 +12,13 @@ use Telnyx\Porting\Events\EventListResponse\Data\Payload\WebhookPortingOrderNewC
 /**
  * The webhook payload for the porting_order.new_comment event.
  *
- * @phpstan-type webhook_porting_order_new_comment_payload = array{
+ * @phpstan-type WebhookPortingOrderNewCommentPayloadShape = array{
  *   comment?: Comment, portingOrderID?: string, supportKey?: string
  * }
  */
 final class WebhookPortingOrderNewCommentPayload implements BaseModel
 {
-    /** @use SdkModel<webhook_porting_order_new_comment_payload> */
+    /** @use SdkModel<WebhookPortingOrderNewCommentPayloadShape> */
     use SdkModel;
 
     /**

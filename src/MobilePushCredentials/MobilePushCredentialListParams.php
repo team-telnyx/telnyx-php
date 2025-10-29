@@ -16,13 +16,13 @@ use Telnyx\MobilePushCredentials\MobilePushCredentialListParams\Page;
  *
  * @see Telnyx\MobilePushCredentials->list
  *
- * @phpstan-type mobile_push_credential_list_params = array{
+ * @phpstan-type MobilePushCredentialListParamsShape = array{
  *   filter?: Filter, page?: Page
  * }
  */
 final class MobilePushCredentialListParams implements BaseModel
 {
-    /** @use SdkModel<mobile_push_credential_list_params> */
+    /** @use SdkModel<MobilePushCredentialListParamsShape> */
     use SdkModel;
     use SdkParams;
 

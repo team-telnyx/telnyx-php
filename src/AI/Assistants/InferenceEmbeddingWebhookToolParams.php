@@ -14,7 +14,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type inference_embedding_webhook_tool_params = array{
+ * @phpstan-type InferenceEmbeddingWebhookToolParamsShape = array{
  *   description: string,
  *   name: string,
  *   url: string,
@@ -27,7 +27,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class InferenceEmbeddingWebhookToolParams implements BaseModel
 {
-    /** @use SdkModel<inference_embedding_webhook_tool_params> */
+    /** @use SdkModel<InferenceEmbeddingWebhookToolParamsShape> */
     use SdkModel;
 
     /**

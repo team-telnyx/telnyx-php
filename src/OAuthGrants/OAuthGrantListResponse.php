@@ -12,13 +12,13 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\OAuthClients\PaginationMetaOAuth;
 
 /**
- * @phpstan-type oauth_grant_list_response = array{
+ * @phpstan-type OAuthGrantListResponseShape = array{
  *   data?: list<OAuthGrant>, meta?: PaginationMetaOAuth
  * }
  */
 final class OAuthGrantListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<oauth_grant_list_response> */
+    /** @use SdkModel<OAuthGrantListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

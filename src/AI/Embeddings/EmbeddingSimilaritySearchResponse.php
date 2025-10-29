@@ -12,11 +12,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type embedding_similarity_search_response = array{data: list<Data>}
+ * @phpstan-type EmbeddingSimilaritySearchResponseShape = array{data: list<Data>}
  */
 final class EmbeddingSimilaritySearchResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<embedding_similarity_search_response> */
+    /** @use SdkModel<EmbeddingSimilaritySearchResponseShape> */
     use SdkModel;
 
     use SdkResponse;

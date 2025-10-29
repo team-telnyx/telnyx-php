@@ -10,13 +10,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\ConferenceParticipantPlaybackEndedWebhookEvent\Data;
 
 /**
- * @phpstan-type conference_participant_playback_ended_webhook_event = array{
+ * @phpstan-type ConferenceParticipantPlaybackEndedWebhookEventShape = array{
  *   data?: Data
  * }
  */
 final class ConferenceParticipantPlaybackEndedWebhookEvent implements BaseModel
 {
-    /** @use SdkModel<conference_participant_playback_ended_webhook_event> */
+    /** @use SdkModel<ConferenceParticipantPlaybackEndedWebhookEventShape> */
     use SdkModel;
 
     #[Api(optional: true)]

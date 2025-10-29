@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Opens the user's default calendar app and starts the new calendar event flow with the agent-specified event data pre-filled.
  *
- * @phpstan-type create_calendar_event_action = array{
+ * @phpstan-type CreateCalendarEventActionShape = array{
  *   description?: string,
  *   endTime?: \DateTimeInterface,
  *   startTime?: \DateTimeInterface,
@@ -20,7 +20,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class CreateCalendarEventAction implements BaseModel
 {
-    /** @use SdkModel<create_calendar_event_action> */
+    /** @use SdkModel<CreateCalendarEventActionShape> */
     use SdkModel;
 
     /**

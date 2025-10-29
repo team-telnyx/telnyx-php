@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\DynamicEmergencyEndpoints->create
  *
- * @phpstan-type dynamic_emergency_endpoint_create_params = array{
+ * @phpstan-type DynamicEmergencyEndpointCreateParamsShape = array{
  *   callbackNumber: string, callerName: string, dynamicEmergencyAddressID: string
  * }
  */
 final class DynamicEmergencyEndpointCreateParams implements BaseModel
 {
-    /** @use SdkModel<dynamic_emergency_endpoint_create_params> */
+    /** @use SdkModel<DynamicEmergencyEndpointCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

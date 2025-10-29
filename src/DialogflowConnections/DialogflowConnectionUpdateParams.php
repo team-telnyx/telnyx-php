@@ -15,7 +15,7 @@ use Telnyx\DialogflowConnections\DialogflowConnectionUpdateParams\DialogflowAPI;
  *
  * @see Telnyx\DialogflowConnections->update
  *
- * @phpstan-type dialogflow_connection_update_params = array{
+ * @phpstan-type DialogflowConnectionUpdateParamsShape = array{
  *   serviceAccount: array<string, mixed>,
  *   conversationProfileID?: string,
  *   dialogflowAPI?: DialogflowAPI|value-of<DialogflowAPI>,
@@ -25,7 +25,7 @@ use Telnyx\DialogflowConnections\DialogflowConnectionUpdateParams\DialogflowAPI;
  */
 final class DialogflowConnectionUpdateParams implements BaseModel
 {
-    /** @use SdkModel<dialogflow_connection_update_params> */
+    /** @use SdkModel<DialogflowConnectionUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -16,11 +16,11 @@ use Telnyx\ShortCodes\ShortCodeListParams\Page;
  *
  * @see Telnyx\ShortCodes->list
  *
- * @phpstan-type short_code_list_params = array{filter?: Filter, page?: Page}
+ * @phpstan-type ShortCodeListParamsShape = array{filter?: Filter, page?: Page}
  */
 final class ShortCodeListParams implements BaseModel
 {
-    /** @use SdkModel<short_code_list_params> */
+    /** @use SdkModel<ShortCodeListParamsShape> */
     use SdkModel;
     use SdkParams;
 

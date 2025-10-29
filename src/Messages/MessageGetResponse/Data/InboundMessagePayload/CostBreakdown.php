@@ -13,11 +13,11 @@ use Telnyx\Messages\MessageGetResponse\Data\InboundMessagePayload\CostBreakdown\
 /**
  * Detailed breakdown of the message cost components.
  *
- * @phpstan-type cost_breakdown = array{carrierFee?: CarrierFee, rate?: Rate}
+ * @phpstan-type CostBreakdownShape = array{carrierFee?: CarrierFee, rate?: Rate}
  */
 final class CostBreakdown implements BaseModel
 {
-    /** @use SdkModel<cost_breakdown> */
+    /** @use SdkModel<CostBreakdownShape> */
     use SdkModel;
 
     #[Api('carrier_fee', optional: true)]

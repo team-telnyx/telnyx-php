@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Outbound call quality statistics.
  *
- * @phpstan-type outbound_alias = array{
+ * @phpstan-type OutboundShape = array{
  *   packetCount?: string, skipPacketCount?: string
  * }
  */
 final class Outbound implements BaseModel
 {
-    /** @use SdkModel<outbound_alias> */
+    /** @use SdkModel<OutboundShape> */
     use SdkModel;
 
     /**

@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type call_alias = array{
+ * @phpstan-type CallShape = array{
  *   appName?: string,
  *   codeLength?: int,
  *   defaultVerificationTimeoutSecs?: int,
@@ -19,7 +19,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class Call implements BaseModel
 {
-    /** @use SdkModel<call_alias> */
+    /** @use SdkModel<CallShape> */
     use SdkModel;
 
     /**

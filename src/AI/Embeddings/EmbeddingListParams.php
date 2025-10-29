@@ -14,11 +14,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\AI\Embeddings->list
  *
- * @phpstan-type embedding_list_params = array{status?: list<string>}
+ * @phpstan-type EmbeddingListParamsShape = array{status?: list<string>}
  */
 final class EmbeddingListParams implements BaseModel
 {
-    /** @use SdkModel<embedding_list_params> */
+    /** @use SdkModel<EmbeddingListParamsShape> */
     use SdkModel;
     use SdkParams;
 

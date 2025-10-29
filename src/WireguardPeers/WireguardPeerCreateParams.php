@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\WireguardPeers->create
  *
- * @phpstan-type wireguard_peer_create_params = array{
+ * @phpstan-type WireguardPeerCreateParamsShape = array{
  *   wireguardInterfaceID: string, publicKey?: string
  * }
  */
 final class WireguardPeerCreateParams implements BaseModel
 {
-    /** @use SdkModel<wireguard_peer_create_params> */
+    /** @use SdkModel<WireguardPeerCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

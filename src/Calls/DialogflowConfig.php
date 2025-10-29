@@ -9,13 +9,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type dialogflow_config = array{
+ * @phpstan-type DialogflowConfigShape = array{
  *   analyzeSentiment?: bool, partialAutomatedAgentReply?: bool
  * }
  */
 final class DialogflowConfig implements BaseModel
 {
-    /** @use SdkModel<dialogflow_config> */
+    /** @use SdkModel<DialogflowConfigShape> */
     use SdkModel;
 
     /**

@@ -13,7 +13,7 @@ use Telnyx\Reports\ReportListWdrsResponse\Data\Rate;
 use Telnyx\Reports\ReportListWdrsResponse\Data\UplinkData;
 
 /**
- * @phpstan-type data_alias = array{
+ * @phpstan-type DataShape = array{
  *   id?: string,
  *   cost?: Cost,
  *   createdAt?: \DateTimeInterface,
@@ -33,7 +33,7 @@ use Telnyx\Reports\ReportListWdrsResponse\Data\UplinkData;
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**

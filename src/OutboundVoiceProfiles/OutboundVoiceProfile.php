@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfile\CallingWindow;
 
 /**
- * @phpstan-type outbound_voice_profile = array{
+ * @phpstan-type OutboundVoiceProfileShape = array{
  *   name: string,
  *   id?: string,
  *   billingGroupID?: string|null,
@@ -34,7 +34,7 @@ use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfile\CallingWindow;
  */
 final class OutboundVoiceProfile implements BaseModel
 {
-    /** @use SdkModel<outbound_voice_profile> */
+    /** @use SdkModel<OutboundVoiceProfileShape> */
     use SdkModel;
 
     /**

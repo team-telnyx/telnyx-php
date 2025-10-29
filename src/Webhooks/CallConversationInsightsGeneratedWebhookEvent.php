@@ -10,13 +10,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\CallConversationInsightsGeneratedWebhookEvent\Data;
 
 /**
- * @phpstan-type call_conversation_insights_generated_webhook_event = array{
+ * @phpstan-type CallConversationInsightsGeneratedWebhookEventShape = array{
  *   data?: Data
  * }
  */
 final class CallConversationInsightsGeneratedWebhookEvent implements BaseModel
 {
-    /** @use SdkModel<call_conversation_insights_generated_webhook_event> */
+    /** @use SdkModel<CallConversationInsightsGeneratedWebhookEventShape> */
     use SdkModel;
 
     #[Api(optional: true)]

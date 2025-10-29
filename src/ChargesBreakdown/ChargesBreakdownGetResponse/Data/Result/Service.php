@@ -9,13 +9,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type service_alias = array{
- *   cost: string, costType: string, name: string
- * }
+ * @phpstan-type ServiceShape = array{cost: string, costType: string, name: string}
  */
 final class Service implements BaseModel
 {
-    /** @use SdkModel<service_alias> */
+    /** @use SdkModel<ServiceShape> */
     use SdkModel;
 
     /**

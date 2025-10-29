@@ -14,11 +14,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\AI\Conversations\InsightGroups\Insights->deleteUnassign
  *
- * @phpstan-type insight_delete_unassign_params = array{groupID: string}
+ * @phpstan-type InsightDeleteUnassignParamsShape = array{groupID: string}
  */
 final class InsightDeleteUnassignParams implements BaseModel
 {
-    /** @use SdkModel<insight_delete_unassign_params> */
+    /** @use SdkModel<InsightDeleteUnassignParamsShape> */
     use SdkModel;
     use SdkParams;
 

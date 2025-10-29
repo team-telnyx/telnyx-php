@@ -9,13 +9,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type stop_recording_request = array{
+ * @phpstan-type StopRecordingRequestShape = array{
  *   clientState?: string, commandID?: string, recordingID?: string
  * }
  */
 final class StopRecordingRequest implements BaseModel
 {
-    /** @use SdkModel<stop_recording_request> */
+    /** @use SdkModel<StopRecordingRequestShape> */
     use SdkModel;
 
     /**

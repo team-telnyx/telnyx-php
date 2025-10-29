@@ -13,13 +13,13 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PortingOrders\PortingOrderGetAllowedFocWindowsResponse\Data;
 
 /**
- * @phpstan-type porting_order_get_allowed_foc_windows_response = array{
+ * @phpstan-type PortingOrderGetAllowedFocWindowsResponseShape = array{
  *   data?: list<Data>, meta?: PaginationMeta
  * }
  */
 final class PortingOrderGetAllowedFocWindowsResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<porting_order_get_allowed_foc_windows_response> */
+    /** @use SdkModel<PortingOrderGetAllowedFocWindowsResponseShape> */
     use SdkModel;
 
     use SdkResponse;

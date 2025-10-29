@@ -16,13 +16,13 @@ use Telnyx\NumberBlockOrders\NumberBlockOrderListParams\Page;
  *
  * @see Telnyx\NumberBlockOrders->list
  *
- * @phpstan-type number_block_order_list_params = array{
+ * @phpstan-type NumberBlockOrderListParamsShape = array{
  *   filter?: Filter, page?: Page
  * }
  */
 final class NumberBlockOrderListParams implements BaseModel
 {
-    /** @use SdkModel<number_block_order_list_params> */
+    /** @use SdkModel<NumberBlockOrderListParamsShape> */
     use SdkModel;
     use SdkParams;
 

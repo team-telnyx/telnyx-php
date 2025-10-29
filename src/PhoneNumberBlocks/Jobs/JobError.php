@@ -11,13 +11,13 @@ use Telnyx\PhoneNumberBlocks\Jobs\JobError\Meta;
 use Telnyx\PhoneNumberBlocks\Jobs\JobError\Source;
 
 /**
- * @phpstan-type job_error = array{
+ * @phpstan-type JobErrorShape = array{
  *   code: string, title: string, detail?: string, meta?: Meta, source?: Source
  * }
  */
 final class JobError implements BaseModel
 {
-    /** @use SdkModel<job_error> */
+    /** @use SdkModel<JobErrorShape> */
     use SdkModel;
 
     #[Api]

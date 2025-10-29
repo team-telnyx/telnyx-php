@@ -17,7 +17,7 @@ use Telnyx\Reports\ReportListMdrsParams\Status;
  *
  * @see Telnyx\Reports->listMdrs
  *
- * @phpstan-type report_list_mdrs_params = array{
+ * @phpstan-type ReportListMdrsParamsShape = array{
  *   id?: string,
  *   cld?: string,
  *   cli?: string,
@@ -31,7 +31,7 @@ use Telnyx\Reports\ReportListMdrsParams\Status;
  */
 final class ReportListMdrsParams implements BaseModel
 {
-    /** @use SdkModel<report_list_mdrs_params> */
+    /** @use SdkModel<ReportListMdrsParamsShape> */
     use SdkModel;
     use SdkParams;
 

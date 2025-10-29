@@ -12,7 +12,7 @@ use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter;
 /**
  * Response object for CDR detailed report.
  *
- * @phpstan-type cdr_detailed_req_response = array{
+ * @phpstan-type CdrDetailedReqResponseShape = array{
  *   id?: string,
  *   callTypes?: list<int>,
  *   connections?: list<int>,
@@ -34,7 +34,7 @@ use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter;
  */
 final class CdrDetailedReqResponse implements BaseModel
 {
-    /** @use SdkModel<cdr_detailed_req_response> */
+    /** @use SdkModel<CdrDetailedReqResponseShape> */
     use SdkModel;
 
     /**

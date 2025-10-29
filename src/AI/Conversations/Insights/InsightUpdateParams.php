@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\AI\Conversations\Insights->update
  *
- * @phpstan-type insight_update_params = array{
+ * @phpstan-type InsightUpdateParamsShape = array{
  *   instructions?: string,
  *   jsonSchema?: mixed|string,
  *   name?: string,
@@ -24,7 +24,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class InsightUpdateParams implements BaseModel
 {
-    /** @use SdkModel<insight_update_params> */
+    /** @use SdkModel<InsightUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 

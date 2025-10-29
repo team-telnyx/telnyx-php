@@ -16,7 +16,7 @@ use Telnyx\OAuth\OAuthRegisterParams\TokenEndpointAuthMethod;
  *
  * @see Telnyx\OAuth->register
  *
- * @phpstan-type oauth_register_params = array{
+ * @phpstan-type OAuthRegisterParamsShape = array{
  *   clientName?: string,
  *   grantTypes?: list<GrantType|value-of<GrantType>>,
  *   logoUri?: string,
@@ -30,7 +30,7 @@ use Telnyx\OAuth\OAuthRegisterParams\TokenEndpointAuthMethod;
  */
 final class OAuthRegisterParams implements BaseModel
 {
-    /** @use SdkModel<oauth_register_params> */
+    /** @use SdkModel<OAuthRegisterParamsShape> */
     use SdkModel;
     use SdkParams;
 

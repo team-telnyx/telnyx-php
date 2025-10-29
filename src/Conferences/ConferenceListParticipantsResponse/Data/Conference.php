@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Info about the conference that the participant is in.
  *
- * @phpstan-type conference_alias = array{id?: string, name?: string}
+ * @phpstan-type ConferenceShape = array{id?: string, name?: string}
  */
 final class Conference implements BaseModel
 {
-    /** @use SdkModel<conference_alias> */
+    /** @use SdkModel<ConferenceShape> */
     use SdkModel;
 
     /**

@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Optional configuration parameters to modify 'answering_machine_detection' performance.
  *
- * @phpstan-type answering_machine_detection_config = array{
+ * @phpstan-type AnsweringMachineDetectionConfigShape = array{
  *   afterGreetingSilenceMillis?: int,
  *   betweenWordsSilenceMillis?: int,
  *   greetingDurationMillis?: int,
@@ -26,7 +26,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class AnsweringMachineDetectionConfig implements BaseModel
 {
-    /** @use SdkModel<answering_machine_detection_config> */
+    /** @use SdkModel<AnsweringMachineDetectionConfigShape> */
     use SdkModel;
 
     /**

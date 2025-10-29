@@ -12,13 +12,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type user_address_list_response = array{
+ * @phpstan-type UserAddressListResponseShape = array{
  *   data?: list<UserAddress>, meta?: PaginationMeta
  * }
  */
 final class UserAddressListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<user_address_list_response> */
+    /** @use SdkModel<UserAddressListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

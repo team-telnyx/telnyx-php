@@ -16,14 +16,14 @@ use Telnyx\Rooms\Sessions\Actions\ActionKickParams\Participants\UnionMember0;
  *
  * @see Telnyx\Rooms\Sessions\Actions->kick
  *
- * @phpstan-type action_kick_params = array{
+ * @phpstan-type ActionKickParamsShape = array{
  *   exclude?: list<string>,
  *   participants?: UnionMember0|list<string>|value-of<UnionMember0>,
  * }
  */
 final class ActionKickParams implements BaseModel
 {
-    /** @use SdkModel<action_kick_params> */
+    /** @use SdkModel<ActionKickParamsShape> */
     use SdkModel;
     use SdkParams;
 

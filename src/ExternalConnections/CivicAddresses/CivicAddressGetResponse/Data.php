@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\ExternalConnections\CivicAddresses\CivicAddressGetResponse\Data\Location;
 
 /**
- * @phpstan-type data_alias = array{
+ * @phpstan-type DataShape = array{
  *   id?: string,
  *   cityOrTown?: string,
  *   cityOrTownAlias?: string,
@@ -31,7 +31,7 @@ use Telnyx\ExternalConnections\CivicAddresses\CivicAddressGetResponse\Data\Locat
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**

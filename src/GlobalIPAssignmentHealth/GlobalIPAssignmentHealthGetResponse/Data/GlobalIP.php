@@ -9,11 +9,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type global_ip = array{id?: string, ipAddress?: string}
+ * @phpstan-type GlobalIPShape = array{id?: string, ipAddress?: string}
  */
 final class GlobalIP implements BaseModel
 {
-    /** @use SdkModel<global_ip> */
+    /** @use SdkModel<GlobalIPShape> */
     use SdkModel;
 
     /**

@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\SimCardGroups\Actions->setPrivateWirelessGateway
  *
- * @phpstan-type action_set_private_wireless_gateway_params = array{
+ * @phpstan-type ActionSetPrivateWirelessGatewayParamsShape = array{
  *   privateWirelessGatewayID: string
  * }
  */
 final class ActionSetPrivateWirelessGatewayParams implements BaseModel
 {
-    /** @use SdkModel<action_set_private_wireless_gateway_params> */
+    /** @use SdkModel<ActionSetPrivateWirelessGatewayParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Brand->update
  *
- * @phpstan-type brand_update_params = array{
+ * @phpstan-type BrandUpdateParamsShape = array{
  *   country: string,
  *   displayName: string,
  *   email: string,
@@ -44,7 +44,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class BrandUpdateParams implements BaseModel
 {
-    /** @use SdkModel<brand_update_params> */
+    /** @use SdkModel<BrandUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 

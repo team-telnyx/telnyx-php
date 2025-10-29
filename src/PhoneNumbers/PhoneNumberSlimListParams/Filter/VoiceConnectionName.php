@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Filter by voice connection name pattern matching (requires include_connection param).
  *
- * @phpstan-type voice_connection_name = array{
+ * @phpstan-type VoiceConnectionNameShape = array{
  *   contains?: string, endsWith?: string, eq?: string, startsWith?: string
  * }
  */
 final class VoiceConnectionName implements BaseModel
 {
-    /** @use SdkModel<voice_connection_name> */
+    /** @use SdkModel<VoiceConnectionNameShape> */
     use SdkModel;
 
     /**

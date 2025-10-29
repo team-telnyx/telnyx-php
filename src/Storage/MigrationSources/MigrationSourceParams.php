@@ -11,7 +11,7 @@ use Telnyx\Storage\MigrationSources\MigrationSourceParams\Provider;
 use Telnyx\Storage\MigrationSources\MigrationSourceParams\ProviderAuth;
 
 /**
- * @phpstan-type migration_source_params = array{
+ * @phpstan-type MigrationSourceParamsShape = array{
  *   bucketName: string,
  *   provider: value-of<Provider>,
  *   providerAuth: ProviderAuth,
@@ -21,7 +21,7 @@ use Telnyx\Storage\MigrationSources\MigrationSourceParams\ProviderAuth;
  */
 final class MigrationSourceParams implements BaseModel
 {
-    /** @use SdkModel<migration_source_params> */
+    /** @use SdkModel<MigrationSourceParamsShape> */
     use SdkModel;
 
     /**

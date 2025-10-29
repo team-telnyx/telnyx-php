@@ -14,11 +14,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\ExternalConnections\Uploads->retrieve
  *
- * @phpstan-type upload_retrieve_params = array{id: string}
+ * @phpstan-type UploadRetrieveParamsShape = array{id: string}
  */
 final class UploadRetrieveParams implements BaseModel
 {
-    /** @use SdkModel<upload_retrieve_params> */
+    /** @use SdkModel<UploadRetrieveParamsShape> */
     use SdkModel;
     use SdkParams;
 

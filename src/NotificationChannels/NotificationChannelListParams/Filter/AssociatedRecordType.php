@@ -10,11 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NotificationChannels\NotificationChannelListParams\Filter\AssociatedRecordType\Eq;
 
 /**
- * @phpstan-type associated_record_type = array{eq?: value-of<Eq>}
+ * @phpstan-type AssociatedRecordTypeShape = array{eq?: value-of<Eq>}
  */
 final class AssociatedRecordType implements BaseModel
 {
-    /** @use SdkModel<associated_record_type> */
+    /** @use SdkModel<AssociatedRecordTypeShape> */
     use SdkModel;
 
     /**

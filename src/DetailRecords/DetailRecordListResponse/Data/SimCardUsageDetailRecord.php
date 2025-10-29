@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type sim_card_usage_detail_record = array{
+ * @phpstan-type SimCardUsageDetailRecordShape = array{
  *   recordType: string,
  *   id?: string,
  *   closedAt?: \DateTimeInterface,
@@ -33,7 +33,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class SimCardUsageDetailRecord implements BaseModel
 {
-    /** @use SdkModel<sim_card_usage_detail_record> */
+    /** @use SdkModel<SimCardUsageDetailRecordShape> */
     use SdkModel;
 
     #[Api('record_type')]

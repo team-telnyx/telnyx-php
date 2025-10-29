@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type credential_connection_delete_response = array{
+ * @phpstan-type CredentialConnectionDeleteResponseShape = array{
  *   data?: CredentialConnection
  * }
  */
 final class CredentialConnectionDeleteResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<credential_connection_delete_response> */
+    /** @use SdkModel<CredentialConnectionDeleteResponseShape> */
     use SdkModel;
 
     use SdkResponse;

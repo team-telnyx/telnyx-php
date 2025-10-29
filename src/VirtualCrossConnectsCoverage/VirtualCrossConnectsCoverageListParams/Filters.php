@@ -12,11 +12,11 @@ use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListParams\F
 /**
  * Consolidated filters parameter (deepObject style). Originally: filters[available_bandwidth][contains].
  *
- * @phpstan-type filters_alias = array{availableBandwidth?: int|Contains}
+ * @phpstan-type FiltersShape = array{availableBandwidth?: int|Contains}
  */
 final class Filters implements BaseModel
 {
-    /** @use SdkModel<filters_alias> */
+    /** @use SdkModel<FiltersShape> */
     use SdkModel;
 
     /**

@@ -12,7 +12,7 @@ use Telnyx\SimCards\Actions\ActionBulkSetPublicIPsResponse\Data\ActionType;
 /**
  * This object represents a bulk SIM card action. It groups SIM card actions created through a bulk endpoint under a single resource for further lookup.
  *
- * @phpstan-type data_alias = array{
+ * @phpstan-type DataShape = array{
  *   id?: string,
  *   actionType?: value-of<ActionType>,
  *   createdAt?: string,
@@ -23,7 +23,7 @@ use Telnyx\SimCards\Actions\ActionBulkSetPublicIPsResponse\Data\ActionType;
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**

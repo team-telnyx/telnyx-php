@@ -11,11 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * IDs related to who ended the conference. It is expected for them to all be there or all be null.
  *
- * @phpstan-type ended_by = array{callControlID?: string, callSessionID?: string}
+ * @phpstan-type EndedByShape = array{
+ *   callControlID?: string, callSessionID?: string
+ * }
  */
 final class EndedBy implements BaseModel
 {
-    /** @use SdkModel<ended_by> */
+    /** @use SdkModel<EndedByShape> */
     use SdkModel;
 
     /**

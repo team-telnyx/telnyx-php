@@ -13,7 +13,7 @@ use Telnyx\RegulatoryRequirements\RegulatoryRequirementRetrieveParams\Filter\Pho
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[phone_number], filter[requirement_group_id], filter[country_code], filter[phone_number_type], filter[action].
  *
- * @phpstan-type filter_alias = array{
+ * @phpstan-type FilterShape = array{
  *   action?: value-of<Action>,
  *   countryCode?: string,
  *   phoneNumber?: string,
@@ -23,7 +23,7 @@ use Telnyx\RegulatoryRequirements\RegulatoryRequirementRetrieveParams\Filter\Pho
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**

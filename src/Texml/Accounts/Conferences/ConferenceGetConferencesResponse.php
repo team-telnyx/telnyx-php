@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Texml\Accounts\Conferences\ConferenceGetConferencesResponse\Conference;
 
 /**
- * @phpstan-type conference_get_conferences_response = array{
+ * @phpstan-type ConferenceGetConferencesResponseShape = array{
  *   conferences?: list<Conference>,
  *   end?: int,
  *   firstPageUri?: string,
@@ -25,7 +25,7 @@ use Telnyx\Texml\Accounts\Conferences\ConferenceGetConferencesResponse\Conferenc
  */
 final class ConferenceGetConferencesResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<conference_get_conferences_response> */
+    /** @use SdkModel<ConferenceGetConferencesResponseShape> */
     use SdkModel;
 
     use SdkResponse;

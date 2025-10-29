@@ -14,7 +14,7 @@ use Telnyx\PhoneNumbers\PhoneNumberDetailed\SourceType;
 use Telnyx\PhoneNumbers\PhoneNumberDetailed\Status;
 
 /**
- * @phpstan-type phone_number_detailed = array{
+ * @phpstan-type PhoneNumberDetailedShape = array{
  *   id?: string,
  *   billingGroupID?: string,
  *   callForwardingEnabled?: bool,
@@ -46,7 +46,7 @@ use Telnyx\PhoneNumbers\PhoneNumberDetailed\Status;
  */
 final class PhoneNumberDetailed implements BaseModel
 {
-    /** @use SdkModel<phone_number_detailed> */
+    /** @use SdkModel<PhoneNumberDetailedShape> */
     use SdkModel;
 
     /**

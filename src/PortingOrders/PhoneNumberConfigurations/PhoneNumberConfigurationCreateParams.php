@@ -15,13 +15,13 @@ use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationCreat
  *
  * @see Telnyx\PortingOrders\PhoneNumberConfigurations->create
  *
- * @phpstan-type phone_number_configuration_create_params = array{
+ * @phpstan-type PhoneNumberConfigurationCreateParamsShape = array{
  *   phoneNumberConfigurations?: list<PhoneNumberConfiguration>
  * }
  */
 final class PhoneNumberConfigurationCreateParams implements BaseModel
 {
-    /** @use SdkModel<phone_number_configuration_create_params> */
+    /** @use SdkModel<PhoneNumberConfigurationCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

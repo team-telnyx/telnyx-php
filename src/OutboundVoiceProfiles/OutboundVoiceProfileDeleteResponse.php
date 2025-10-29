@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type outbound_voice_profile_delete_response = array{
+ * @phpstan-type OutboundVoiceProfileDeleteResponseShape = array{
  *   data?: OutboundVoiceProfile
  * }
  */
 final class OutboundVoiceProfileDeleteResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<outbound_voice_profile_delete_response> */
+    /** @use SdkModel<OutboundVoiceProfileDeleteResponseShape> */
     use SdkModel;
 
     use SdkResponse;

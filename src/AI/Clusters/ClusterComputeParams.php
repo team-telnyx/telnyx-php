@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\AI\Clusters->compute
  *
- * @phpstan-type cluster_compute_params = array{
+ * @phpstan-type ClusterComputeParamsShape = array{
  *   bucket: string,
  *   files?: list<string>,
  *   minClusterSize?: int,
@@ -24,7 +24,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class ClusterComputeParams implements BaseModel
 {
-    /** @use SdkModel<cluster_compute_params> */
+    /** @use SdkModel<ClusterComputeParamsShape> */
     use SdkModel;
     use SdkParams;
 

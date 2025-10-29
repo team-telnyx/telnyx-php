@@ -13,13 +13,13 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\List\ListGetAllResponse\Data;
 
 /**
- * @phpstan-type list_get_all_response = array{
+ * @phpstan-type ListGetAllResponseShape = array{
  *   data?: list<Data>, meta?: PaginationMeta
  * }
  */
 final class ListGetAllResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<list_get_all_response> */
+    /** @use SdkModel<ListGetAllResponseShape> */
     use SdkModel;
 
     use SdkResponse;

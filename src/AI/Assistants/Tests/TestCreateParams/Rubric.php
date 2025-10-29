@@ -9,11 +9,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type rubric_alias = array{criteria: string, name: string}
+ * @phpstan-type RubricShape = array{criteria: string, name: string}
  */
 final class Rubric implements BaseModel
 {
-    /** @use SdkModel<rubric_alias> */
+    /** @use SdkModel<RubricShape> */
     use SdkModel;
 
     /**

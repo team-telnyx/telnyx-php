@@ -14,11 +14,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Legacy\Reporting\UsageReports\Messaging->list
  *
- * @phpstan-type messaging_list_params = array{page?: int, perPage?: int}
+ * @phpstan-type MessagingListParamsShape = array{page?: int, perPage?: int}
  */
 final class MessagingListParams implements BaseModel
 {
-    /** @use SdkModel<messaging_list_params> */
+    /** @use SdkModel<MessagingListParamsShape> */
     use SdkModel;
     use SdkParams;
 

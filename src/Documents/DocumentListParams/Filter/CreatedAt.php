@@ -9,13 +9,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type created_at = array{
+ * @phpstan-type CreatedAtShape = array{
  *   gt?: \DateTimeInterface, lt?: \DateTimeInterface
  * }
  */
 final class CreatedAt implements BaseModel
 {
-    /** @use SdkModel<created_at> */
+    /** @use SdkModel<CreatedAtShape> */
     use SdkModel;
 
     /**

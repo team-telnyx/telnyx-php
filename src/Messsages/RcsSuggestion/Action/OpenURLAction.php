@@ -13,7 +13,7 @@ use Telnyx\Messsages\RcsSuggestion\Action\OpenURLAction\WebviewViewMode;
 /**
  * Opens the user's default web browser app to the specified URL.
  *
- * @phpstan-type open_url_action = array{
+ * @phpstan-type OpenURLActionShape = array{
  *   application: value-of<Application>,
  *   url: string,
  *   webviewViewMode: value-of<WebviewViewMode>,
@@ -22,7 +22,7 @@ use Telnyx\Messsages\RcsSuggestion\Action\OpenURLAction\WebviewViewMode;
  */
 final class OpenURLAction implements BaseModel
 {
-    /** @use SdkModel<open_url_action> */
+    /** @use SdkModel<OpenURLActionShape> */
     use SdkModel;
 
     /**

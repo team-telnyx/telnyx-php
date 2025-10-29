@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * The filters that were applied to generate this report.
  *
- * @phpstan-type filters_alias = array{
+ * @phpstan-type FiltersShape = array{
  *   countryCode?: string,
  *   createdAtGt?: \DateTimeInterface,
  *   createdAtLt?: \DateTimeInterface,
@@ -22,7 +22,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class Filters implements BaseModel
 {
-    /** @use SdkModel<filters_alias> */
+    /** @use SdkModel<FiltersShape> */
     use SdkModel;
 
     #[Api('country_code', optional: true)]

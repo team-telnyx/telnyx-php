@@ -9,11 +9,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type check_availability = array{apiKeyRef: string, eventTypeID: int}
+ * @phpstan-type CheckAvailabilityShape = array{
+ *   apiKeyRef: string, eventTypeID: int
+ * }
  */
 final class CheckAvailability implements BaseModel
 {
-    /** @use SdkModel<check_availability> */
+    /** @use SdkModel<CheckAvailabilityShape> */
     use SdkModel;
 
     /**

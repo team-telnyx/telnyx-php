@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\CallAnsweredWebhookEvent\Data\Payload\State;
 
 /**
- * @phpstan-type payload_alias = array{
+ * @phpstan-type PayloadShape = array{
  *   callControlID?: string,
  *   callLegID?: string,
  *   callSessionID?: string,
@@ -29,7 +29,7 @@ use Telnyx\Webhooks\CallAnsweredWebhookEvent\Data\Payload\State;
  */
 final class Payload implements BaseModel
 {
-    /** @use SdkModel<payload_alias> */
+    /** @use SdkModel<PayloadShape> */
     use SdkModel;
 
     /**

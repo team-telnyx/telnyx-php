@@ -20,7 +20,7 @@ use Telnyx\TexmlApplications\TexmlApplicationUpdateParams\VoiceMethod;
  *
  * @see Telnyx\TexmlApplications->update
  *
- * @phpstan-type texml_application_update_params = array{
+ * @phpstan-type TexmlApplicationUpdateParamsShape = array{
  *   friendlyName: string,
  *   voiceURL: string,
  *   active?: bool,
@@ -39,7 +39,7 @@ use Telnyx\TexmlApplications\TexmlApplicationUpdateParams\VoiceMethod;
  */
 final class TexmlApplicationUpdateParams implements BaseModel
 {
-    /** @use SdkModel<texml_application_update_params> */
+    /** @use SdkModel<TexmlApplicationUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 

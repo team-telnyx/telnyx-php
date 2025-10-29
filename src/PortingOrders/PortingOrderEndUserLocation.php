@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type porting_order_end_user_location = array{
+ * @phpstan-type PortingOrderEndUserLocationShape = array{
  *   administrativeArea?: string,
  *   countryCode?: string,
  *   extendedAddress?: string,
@@ -20,7 +20,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class PortingOrderEndUserLocation implements BaseModel
 {
-    /** @use SdkModel<porting_order_end_user_location> */
+    /** @use SdkModel<PortingOrderEndUserLocationShape> */
     use SdkModel;
 
     /**

@@ -13,11 +13,11 @@ use Telnyx\WebhookDeliveries\WebhookDeliveryGetResponse\Data\Attempt\HTTP\Respon
 /**
  * HTTP request and response information.
  *
- * @phpstan-type http_alias = array{request?: Request, response?: Response|null}
+ * @phpstan-type HTTPShape = array{request?: Request, response?: Response|null}
  */
 final class HTTP implements BaseModel
 {
-    /** @use SdkModel<http_alias> */
+    /** @use SdkModel<HTTPShape> */
     use SdkModel;
 
     /**

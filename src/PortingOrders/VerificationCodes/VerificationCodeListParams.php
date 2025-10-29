@@ -17,13 +17,13 @@ use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams\Sort;
  *
  * @see Telnyx\PortingOrders\VerificationCodes->list
  *
- * @phpstan-type verification_code_list_params = array{
+ * @phpstan-type VerificationCodeListParamsShape = array{
  *   filter?: Filter, page?: Page, sort?: Sort
  * }
  */
 final class VerificationCodeListParams implements BaseModel
 {
-    /** @use SdkModel<verification_code_list_params> */
+    /** @use SdkModel<VerificationCodeListParamsShape> */
     use SdkModel;
     use SdkParams;
 

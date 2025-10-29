@@ -12,11 +12,11 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\GlobalIPs\GlobalIPDeleteResponse\Data;
 
 /**
- * @phpstan-type global_ip_delete_response = array{data?: Data}
+ * @phpstan-type GlobalIPDeleteResponseShape = array{data?: Data}
  */
 final class GlobalIPDeleteResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<global_ip_delete_response> */
+    /** @use SdkModel<GlobalIPDeleteResponseShape> */
     use SdkModel;
 
     use SdkResponse;

@@ -10,14 +10,14 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\CustomStorageCredentials\CustomStorageConfiguration\Backend;
 
 /**
- * @phpstan-type custom_storage_configuration = array{
+ * @phpstan-type CustomStorageConfigurationShape = array{
  *   backend: value-of<Backend>,
  *   configuration: GcsConfigurationData|S3ConfigurationData|AzureConfigurationData,
  * }
  */
 final class CustomStorageConfiguration implements BaseModel
 {
-    /** @use SdkModel<custom_storage_configuration> */
+    /** @use SdkModel<CustomStorageConfigurationShape> */
     use SdkModel;
 
     /** @var value-of<Backend> $backend */

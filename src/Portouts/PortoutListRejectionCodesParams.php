@@ -15,11 +15,11 @@ use Telnyx\Portouts\PortoutListRejectionCodesParams\Filter;
  *
  * @see Telnyx\Portouts->listRejectionCodes
  *
- * @phpstan-type portout_list_rejection_codes_params = array{filter?: Filter}
+ * @phpstan-type PortoutListRejectionCodesParamsShape = array{filter?: Filter}
  */
 final class PortoutListRejectionCodesParams implements BaseModel
 {
-    /** @use SdkModel<portout_list_rejection_codes_params> */
+    /** @use SdkModel<PortoutListRejectionCodesParamsShape> */
     use SdkModel;
     use SdkParams;
 

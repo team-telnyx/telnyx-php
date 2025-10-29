@@ -9,13 +9,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type pagination_response = array{
+ * @phpstan-type PaginationResponseShape = array{
  *   pageNumber: int, pageSize: int, totalPages: int, totalResults: int
  * }
  */
 final class PaginationResponse implements BaseModel
 {
-    /** @use SdkModel<pagination_response> */
+    /** @use SdkModel<PaginationResponseShape> */
     use SdkModel;
 
     /**

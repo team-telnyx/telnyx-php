@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * (BETA) Specifies the time window and call limits for calls made using this outbound voice profile.
  *
- * @phpstan-type calling_window = array{
+ * @phpstan-type CallingWindowShape = array{
  *   callsPerCld?: int, endTime?: string, startTime?: string
  * }
  */
 final class CallingWindow implements BaseModel
 {
-    /** @use SdkModel<calling_window> */
+    /** @use SdkModel<CallingWindowShape> */
     use SdkModel;
 
     /**

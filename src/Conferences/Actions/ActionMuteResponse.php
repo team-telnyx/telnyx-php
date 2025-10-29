@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type action_mute_response = array{data?: ConferenceCommandResult}
+ * @phpstan-type ActionMuteResponseShape = array{data?: ConferenceCommandResult}
  */
 final class ActionMuteResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<action_mute_response> */
+    /** @use SdkModel<ActionMuteResponseShape> */
     use SdkModel;
 
     use SdkResponse;

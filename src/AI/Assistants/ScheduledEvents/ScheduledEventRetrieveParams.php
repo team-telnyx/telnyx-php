@@ -14,11 +14,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\AI\Assistants\ScheduledEvents->retrieve
  *
- * @phpstan-type scheduled_event_retrieve_params = array{assistantID: string}
+ * @phpstan-type ScheduledEventRetrieveParamsShape = array{assistantID: string}
  */
 final class ScheduledEventRetrieveParams implements BaseModel
 {
-    /** @use SdkModel<scheduled_event_retrieve_params> */
+    /** @use SdkModel<ScheduledEventRetrieveParamsShape> */
     use SdkModel;
     use SdkParams;
 

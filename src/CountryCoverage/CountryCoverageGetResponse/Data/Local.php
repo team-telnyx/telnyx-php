@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type local_alias = array{
+ * @phpstan-type LocalShape = array{
  *   features?: list<string>,
  *   fullPstnReplacement?: bool,
  *   internationalSMS?: bool,
@@ -20,7 +20,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class Local implements BaseModel
 {
-    /** @use SdkModel<local_alias> */
+    /** @use SdkModel<LocalShape> */
     use SdkModel;
 
     /** @var list<string>|null $features */

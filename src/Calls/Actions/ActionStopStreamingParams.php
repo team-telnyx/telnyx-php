@@ -18,13 +18,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Calls\Actions->stopStreaming
  *
- * @phpstan-type action_stop_streaming_params = array{
+ * @phpstan-type ActionStopStreamingParamsShape = array{
  *   clientState?: string, commandID?: string, streamID?: string
  * }
  */
 final class ActionStopStreamingParams implements BaseModel
 {
-    /** @use SdkModel<action_stop_streaming_params> */
+    /** @use SdkModel<ActionStopStreamingParamsShape> */
     use SdkModel;
     use SdkParams;
 

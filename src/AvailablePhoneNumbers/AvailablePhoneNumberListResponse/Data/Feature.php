@@ -9,11 +9,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type feature_alias = array{name?: string}
+ * @phpstan-type FeatureShape = array{name?: string}
  */
 final class Feature implements BaseModel
 {
-    /** @use SdkModel<feature_alias> */
+    /** @use SdkModel<FeatureShape> */
     use SdkModel;
 
     #[Api(optional: true)]

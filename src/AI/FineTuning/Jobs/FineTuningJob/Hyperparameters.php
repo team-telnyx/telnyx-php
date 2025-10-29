@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * The hyperparameters used for the fine-tuning job.
  *
- * @phpstan-type hyperparameters_alias = array{nEpochs: int}
+ * @phpstan-type HyperparametersShape = array{nEpochs: int}
  */
 final class Hyperparameters implements BaseModel
 {
-    /** @use SdkModel<hyperparameters_alias> */
+    /** @use SdkModel<HyperparametersShape> */
     use SdkModel;
 
     /**

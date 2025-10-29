@@ -16,11 +16,13 @@ use Telnyx\WebhookDeliveries\WebhookDeliveryListParams\Page;
  *
  * @see Telnyx\WebhookDeliveries->list
  *
- * @phpstan-type webhook_delivery_list_params = array{filter?: Filter, page?: Page}
+ * @phpstan-type WebhookDeliveryListParamsShape = array{
+ *   filter?: Filter, page?: Page
+ * }
  */
 final class WebhookDeliveryListParams implements BaseModel
 {
-    /** @use SdkModel<webhook_delivery_list_params> */
+    /** @use SdkModel<WebhookDeliveryListParamsShape> */
     use SdkModel;
     use SdkParams;
 

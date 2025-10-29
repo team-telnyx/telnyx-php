@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\BundlePricing\UserBundles->listResources
  *
- * @phpstan-type user_bundle_list_resources_params = array{
+ * @phpstan-type UserBundleListResourcesParamsShape = array{
  *   authorizationBearer?: string
  * }
  */
 final class UserBundleListResourcesParams implements BaseModel
 {
-    /** @use SdkModel<user_bundle_list_resources_params> */
+    /** @use SdkModel<UserBundleListResourcesParamsShape> */
     use SdkModel;
     use SdkParams;
 

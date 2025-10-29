@@ -12,11 +12,11 @@ use Telnyx\IntegrationSecrets\IntegrationSecretListParams\Filter\Type;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[type].
  *
- * @phpstan-type filter_alias = array{type?: value-of<Type>}
+ * @phpstan-type FilterShape = array{type?: value-of<Type>}
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /** @var value-of<Type>|null $type */

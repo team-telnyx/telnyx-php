@@ -15,7 +15,7 @@ use Telnyx\Portouts\PortoutListParams\Filter\StatusIn;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[carrier_name], filter[country_code], filter[country_code_in], filter[foc_date], filter[inserted_at], filter[phone_number], filter[pon], filter[ported_out_at], filter[spid], filter[status], filter[status_in], filter[support_key].
  *
- * @phpstan-type filter_alias = array{
+ * @phpstan-type FilterShape = array{
  *   carrierName?: string,
  *   countryCode?: string,
  *   countryCodeIn?: list<string>,
@@ -32,7 +32,7 @@ use Telnyx\Portouts\PortoutListParams\Filter\StatusIn;
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**

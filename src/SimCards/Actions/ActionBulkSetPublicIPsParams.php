@@ -15,13 +15,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\SimCards\Actions->bulkSetPublicIPs
  *
- * @phpstan-type action_bulk_set_public_ips_params = array{
+ * @phpstan-type ActionBulkSetPublicIPsParamsShape = array{
  *   simCardIDs: list<string>
  * }
  */
 final class ActionBulkSetPublicIPsParams implements BaseModel
 {
-    /** @use SdkModel<action_bulk_set_public_ips_params> */
+    /** @use SdkModel<ActionBulkSetPublicIPsParamsShape> */
     use SdkModel;
     use SdkParams;
 

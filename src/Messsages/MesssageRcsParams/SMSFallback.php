@@ -9,11 +9,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type sms_fallback = array{from?: string, text?: string}
+ * @phpstan-type SMSFallbackShape = array{from?: string, text?: string}
  */
 final class SMSFallback implements BaseModel
 {
-    /** @use SdkModel<sms_fallback> */
+    /** @use SdkModel<SMSFallbackShape> */
     use SdkModel;
 
     /**

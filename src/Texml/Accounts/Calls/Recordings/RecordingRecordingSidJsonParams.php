@@ -15,13 +15,13 @@ use Telnyx\Texml\Accounts\Calls\Recordings\RecordingRecordingSidJsonParams\Statu
  *
  * @see Telnyx\Texml\Accounts\Calls\Recordings->recordingSidJson
  *
- * @phpstan-type recording_recording_sid_json_params = array{
+ * @phpstan-type RecordingRecordingSidJsonParamsShape = array{
  *   accountSid: string, callSid: string, status?: Status|value-of<Status>
  * }
  */
 final class RecordingRecordingSidJsonParams implements BaseModel
 {
-    /** @use SdkModel<recording_recording_sid_json_params> */
+    /** @use SdkModel<RecordingRecordingSidJsonParamsShape> */
     use SdkModel;
     use SdkParams;
 

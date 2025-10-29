@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Media->upload
  *
- * @phpstan-type media_upload_params = array{
+ * @phpstan-type MediaUploadParamsShape = array{
  *   mediaURL: string, mediaName?: string, ttlSecs?: int
  * }
  */
 final class MediaUploadParams implements BaseModel
 {
-    /** @use SdkModel<media_upload_params> */
+    /** @use SdkModel<MediaUploadParamsShape> */
     use SdkModel;
     use SdkParams;
 

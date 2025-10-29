@@ -12,11 +12,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type ai_summarize_response = array{data: Data}
+ * @phpstan-type AISummarizeResponseShape = array{data: Data}
  */
 final class AISummarizeResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<ai_summarize_response> */
+    /** @use SdkModel<AISummarizeResponseShape> */
     use SdkModel;
 
     use SdkResponse;

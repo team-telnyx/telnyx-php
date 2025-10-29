@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\MessagingTollfree\Verification\Requests->list
  *
- * @phpstan-type request_list_params = array{
+ * @phpstan-type RequestListParamsShape = array{
  *   page: int,
  *   pageSize: int,
  *   dateEnd?: \DateTimeInterface,
@@ -25,7 +25,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class RequestListParams implements BaseModel
 {
-    /** @use SdkModel<request_list_params> */
+    /** @use SdkModel<RequestListParamsShape> */
     use SdkModel;
     use SdkParams;
 

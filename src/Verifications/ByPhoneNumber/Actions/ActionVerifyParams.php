@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Verifications\ByPhoneNumber\Actions->verify
  *
- * @phpstan-type action_verify_params = array{
+ * @phpstan-type ActionVerifyParamsShape = array{
  *   code: string, verifyProfileID: string
  * }
  */
 final class ActionVerifyParams implements BaseModel
 {
-    /** @use SdkModel<action_verify_params> */
+    /** @use SdkModel<ActionVerifyParamsShape> */
     use SdkModel;
     use SdkParams;
 

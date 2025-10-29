@@ -9,13 +9,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type porting_order_user_feedback = array{
+ * @phpstan-type PortingOrderUserFeedbackShape = array{
  *   userComment?: string, userRating?: int
  * }
  */
 final class PortingOrderUserFeedback implements BaseModel
 {
-    /** @use SdkModel<porting_order_user_feedback> */
+    /** @use SdkModel<PortingOrderUserFeedbackShape> */
     use SdkModel;
 
     /**

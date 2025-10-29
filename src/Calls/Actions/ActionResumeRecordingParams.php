@@ -18,13 +18,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Calls\Actions->resumeRecording
  *
- * @phpstan-type action_resume_recording_params = array{
+ * @phpstan-type ActionResumeRecordingParamsShape = array{
  *   clientState?: string, commandID?: string, recordingID?: string
  * }
  */
 final class ActionResumeRecordingParams implements BaseModel
 {
-    /** @use SdkModel<action_resume_recording_params> */
+    /** @use SdkModel<ActionResumeRecordingParamsShape> */
     use SdkModel;
     use SdkParams;
 

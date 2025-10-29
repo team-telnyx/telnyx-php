@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type action_stop_ai_assistant_response = array{
+ * @phpstan-type ActionStopAIAssistantResponseShape = array{
  *   data?: CallControlCommandResult
  * }
  */
 final class ActionStopAIAssistantResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<action_stop_ai_assistant_response> */
+    /** @use SdkModel<ActionStopAIAssistantResponseShape> */
     use SdkModel;
 
     use SdkResponse;

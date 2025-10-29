@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Texml\Accounts\TexmlGetCallRecordingResponseBody;
 
 /**
- * @phpstan-type recordings_json_get_recordings_json_response = array{
+ * @phpstan-type RecordingsJsonGetRecordingsJsonResponseShape = array{
  *   end?: int,
  *   firstPageUri?: string,
  *   nextPageUri?: string,
@@ -26,7 +26,7 @@ use Telnyx\Texml\Accounts\TexmlGetCallRecordingResponseBody;
  */
 final class RecordingsJsonGetRecordingsJsonResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<recordings_json_get_recordings_json_response> */
+    /** @use SdkModel<RecordingsJsonGetRecordingsJsonResponseShape> */
     use SdkModel;
 
     use SdkResponse;

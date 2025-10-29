@@ -9,13 +9,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type verify_meta = array{
+ * @phpstan-type VerifyMetaShape = array{
  *   pageNumber?: int, pageSize?: int, totalPages?: int, totalResults?: int
  * }
  */
 final class VerifyMeta implements BaseModel
 {
-    /** @use SdkModel<verify_meta> */
+    /** @use SdkModel<VerifyMetaShape> */
     use SdkModel;
 
     #[Api('page_number', optional: true)]

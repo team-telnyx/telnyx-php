@@ -11,7 +11,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type record_alias = array{
+ * @phpstan-type RecordShape = array{
  *   ageGated?: bool,
  *   assignedPhoneNumbersCount?: float,
  *   autoRenewal?: bool,
@@ -67,7 +67,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class Record implements BaseModel
 {
-    /** @use SdkModel<record_alias> */
+    /** @use SdkModel<RecordShape> */
     use SdkModel;
 
     /**

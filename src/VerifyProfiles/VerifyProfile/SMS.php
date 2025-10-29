@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type sms_alias = array{
+ * @phpstan-type SMSShape = array{
  *   alphaSender?: string|null,
  *   appName?: string,
  *   codeLength?: int,
@@ -20,7 +20,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class SMS implements BaseModel
 {
-    /** @use SdkModel<sms_alias> */
+    /** @use SdkModel<SMSShape> */
     use SdkModel;
 
     /**

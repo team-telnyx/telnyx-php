@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Documents->uploadJson
  *
- * @phpstan-type document_upload_json_params = array{
+ * @phpstan-type DocumentUploadJsonParamsShape = array{
  *   url: string, customerReference?: string, filename?: string, file: string
  * }
  */
 final class DocumentUploadJsonParams implements BaseModel
 {
-    /** @use SdkModel<document_upload_json_params> */
+    /** @use SdkModel<DocumentUploadJsonParamsShape> */
     use SdkModel;
     use SdkParams;
 

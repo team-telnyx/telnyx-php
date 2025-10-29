@@ -15,7 +15,7 @@ use Telnyx\TexmlApplications\TexmlApplication\StatusCallbackMethod;
 use Telnyx\TexmlApplications\TexmlApplication\VoiceMethod;
 
 /**
- * @phpstan-type texml_application = array{
+ * @phpstan-type TexmlApplicationShape = array{
  *   id?: string,
  *   active?: bool,
  *   anchorsiteOverride?: value-of<AnchorsiteOverride>,
@@ -38,7 +38,7 @@ use Telnyx\TexmlApplications\TexmlApplication\VoiceMethod;
  */
 final class TexmlApplication implements BaseModel
 {
-    /** @use SdkModel<texml_application> */
+    /** @use SdkModel<TexmlApplicationShape> */
     use SdkModel;
 
     /**

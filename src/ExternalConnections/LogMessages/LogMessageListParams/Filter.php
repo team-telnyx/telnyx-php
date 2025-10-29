@@ -12,13 +12,13 @@ use Telnyx\ExternalConnections\LogMessages\LogMessageListParams\Filter\Telephone
 /**
  * Filter parameter for log messages (deepObject style). Supports filtering by external_connection_id and telephone_number with eq/contains operations.
  *
- * @phpstan-type filter_alias = array{
+ * @phpstan-type FilterShape = array{
  *   externalConnectionID?: string, telephoneNumber?: TelephoneNumber
  * }
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**

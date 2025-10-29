@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type ssl_certificate_get_response = array{data?: SslCertificate}
+ * @phpstan-type SslCertificateGetResponseShape = array{data?: SslCertificate}
  */
 final class SslCertificateGetResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<ssl_certificate_get_response> */
+    /** @use SdkModel<SslCertificateGetResponseShape> */
     use SdkModel;
 
     use SdkResponse;

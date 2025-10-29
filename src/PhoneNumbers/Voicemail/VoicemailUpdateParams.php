@@ -14,11 +14,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\PhoneNumbers\Voicemail->update
  *
- * @phpstan-type voicemail_update_params = array{enabled?: bool, pin?: string}
+ * @phpstan-type VoicemailUpdateParamsShape = array{enabled?: bool, pin?: string}
  */
 final class VoicemailUpdateParams implements BaseModel
 {
-    /** @use SdkModel<voicemail_update_params> */
+    /** @use SdkModel<VoicemailUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 

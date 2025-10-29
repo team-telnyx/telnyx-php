@@ -13,13 +13,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type connection_list_active_calls_response = array{
+ * @phpstan-type ConnectionListActiveCallsResponseShape = array{
  *   data?: list<Data>, meta?: Meta
  * }
  */
 final class ConnectionListActiveCallsResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<connection_list_active_calls_response> */
+    /** @use SdkModel<ConnectionListActiveCallsResponseShape> */
     use SdkModel;
 
     use SdkResponse;

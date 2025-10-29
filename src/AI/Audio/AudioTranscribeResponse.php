@@ -12,13 +12,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type audio_transcribe_response = array{
+ * @phpstan-type AudioTranscribeResponseShape = array{
  *   text: string, duration?: float, segments?: list<Segment>
  * }
  */
 final class AudioTranscribeResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<audio_transcribe_response> */
+    /** @use SdkModel<AudioTranscribeResponseShape> */
     use SdkModel;
 
     use SdkResponse;

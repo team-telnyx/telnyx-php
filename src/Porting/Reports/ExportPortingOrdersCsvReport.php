@@ -12,11 +12,11 @@ use Telnyx\Porting\Reports\ExportPortingOrdersCsvReport\Filters;
 /**
  * The parameters for generating a porting orders CSV report.
  *
- * @phpstan-type export_porting_orders_csv_report = array{filters: Filters}
+ * @phpstan-type ExportPortingOrdersCsvReportShape = array{filters: Filters}
  */
 final class ExportPortingOrdersCsvReport implements BaseModel
 {
-    /** @use SdkModel<export_porting_orders_csv_report> */
+    /** @use SdkModel<ExportPortingOrdersCsvReportShape> */
     use SdkModel;
 
     /**

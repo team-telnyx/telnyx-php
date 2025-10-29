@@ -13,13 +13,13 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\WireguardInterfaces\WireguardInterfaceListResponse\Data;
 
 /**
- * @phpstan-type wireguard_interface_list_response = array{
+ * @phpstan-type WireguardInterfaceListResponseShape = array{
  *   data?: list<Data>, meta?: PaginationMeta
  * }
  */
 final class WireguardInterfaceListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<wireguard_interface_list_response> */
+    /** @use SdkModel<WireguardInterfaceListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

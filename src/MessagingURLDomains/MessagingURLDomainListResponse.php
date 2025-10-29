@@ -13,13 +13,13 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\MessagingURLDomains\MessagingURLDomainListResponse\Data;
 
 /**
- * @phpstan-type messaging_url_domain_list_response = array{
+ * @phpstan-type MessagingURLDomainListResponseShape = array{
  *   data?: list<Data>, meta?: PaginationMeta
  * }
  */
 final class MessagingURLDomainListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<messaging_url_domain_list_response> */
+    /** @use SdkModel<MessagingURLDomainListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

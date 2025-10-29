@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\PhoneNumberBlocks\Jobs->deletePhoneNumberBlock
  *
- * @phpstan-type job_delete_phone_number_block_params = array{
+ * @phpstan-type JobDeletePhoneNumberBlockParamsShape = array{
  *   phoneNumberBlockID: string
  * }
  */
 final class JobDeletePhoneNumberBlockParams implements BaseModel
 {
-    /** @use SdkModel<job_delete_phone_number_block_params> */
+    /** @use SdkModel<JobDeletePhoneNumberBlockParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -14,13 +14,13 @@ use Telnyx\Verifications\ByPhoneNumber\VerifyMeta;
 /**
  * A paginated list of Verify profiles.
  *
- * @phpstan-type verify_profile_list_response = array{
+ * @phpstan-type VerifyProfileListResponseShape = array{
  *   data: list<VerifyProfile>, meta: VerifyMeta
  * }
  */
 final class VerifyProfileListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<verify_profile_list_response> */
+    /** @use SdkModel<VerifyProfileListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

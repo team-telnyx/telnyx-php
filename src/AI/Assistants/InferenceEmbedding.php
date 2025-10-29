@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type inference_embedding = array{
+ * @phpstan-type InferenceEmbeddingShape = array{
  *   id: string,
  *   createdAt: \DateTimeInterface,
  *   instructions: string,
@@ -38,7 +38,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  */
 final class InferenceEmbedding implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<inference_embedding> */
+    /** @use SdkModel<InferenceEmbeddingShape> */
     use SdkModel;
 
     use SdkResponse;

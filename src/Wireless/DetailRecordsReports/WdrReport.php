@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Wireless\DetailRecordsReports\WdrReport\Status;
 
 /**
- * @phpstan-type wdr_report = array{
+ * @phpstan-type WdrReportShape = array{
  *   id?: string,
  *   createdAt?: string,
  *   endTime?: string,
@@ -23,7 +23,7 @@ use Telnyx\Wireless\DetailRecordsReports\WdrReport\Status;
  */
 final class WdrReport implements BaseModel
 {
-    /** @use SdkModel<wdr_report> */
+    /** @use SdkModel<WdrReportShape> */
     use SdkModel;
 
     /**

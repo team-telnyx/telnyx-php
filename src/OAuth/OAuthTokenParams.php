@@ -15,7 +15,7 @@ use Telnyx\OAuth\OAuthTokenParams\GrantType;
  *
  * @see Telnyx\OAuth->token
  *
- * @phpstan-type oauth_token_params = array{
+ * @phpstan-type OAuthTokenParamsShape = array{
  *   grantType: GrantType|value-of<GrantType>,
  *   clientID?: string,
  *   clientSecret?: string,
@@ -28,7 +28,7 @@ use Telnyx\OAuth\OAuthTokenParams\GrantType;
  */
 final class OAuthTokenParams implements BaseModel
 {
-    /** @use SdkModel<oauth_token_params> */
+    /** @use SdkModel<OAuthTokenParamsShape> */
     use SdkModel;
     use SdkParams;
 

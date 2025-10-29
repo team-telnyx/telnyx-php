@@ -13,13 +13,13 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PhoneNumberWithMessagingSettings;
 
 /**
- * @phpstan-type messaging_profile_list_phone_numbers_response = array{
+ * @phpstan-type MessagingProfileListPhoneNumbersResponseShape = array{
  *   data?: list<PhoneNumberWithMessagingSettings>, meta?: PaginationMeta
  * }
  */
 final class MessagingProfileListPhoneNumbersResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<messaging_profile_list_phone_numbers_response> */
+    /** @use SdkModel<MessagingProfileListPhoneNumbersResponseShape> */
     use SdkModel;
 
     use SdkResponse;

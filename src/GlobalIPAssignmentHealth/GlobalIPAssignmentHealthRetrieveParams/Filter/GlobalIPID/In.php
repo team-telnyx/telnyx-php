@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Filtering operations.
  *
- * @phpstan-type in_alias = array{in?: string}
+ * @phpstan-type InShape = array{in?: string}
  */
 final class In implements BaseModel
 {
-    /** @use SdkModel<in_alias> */
+    /** @use SdkModel<InShape> */
     use SdkModel;
 
     /**

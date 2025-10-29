@@ -17,13 +17,13 @@ use Telnyx\Requirements\RequirementListParams\Sort;
  *
  * @see Telnyx\Requirements->list
  *
- * @phpstan-type requirement_list_params = array{
+ * @phpstan-type RequirementListParamsShape = array{
  *   filter?: Filter, page?: Page, sort?: list<Sort|value-of<Sort>>
  * }
  */
 final class RequirementListParams implements BaseModel
 {
-    /** @use SdkModel<requirement_list_params> */
+    /** @use SdkModel<RequirementListParamsShape> */
     use SdkModel;
     use SdkParams;
 

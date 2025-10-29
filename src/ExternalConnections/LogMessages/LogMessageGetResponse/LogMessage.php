@@ -11,13 +11,13 @@ use Telnyx\ExternalConnections\LogMessages\LogMessageGetResponse\LogMessage\Meta
 use Telnyx\ExternalConnections\LogMessages\LogMessageGetResponse\LogMessage\Source;
 
 /**
- * @phpstan-type log_message = array{
+ * @phpstan-type LogMessageShape = array{
  *   code: string, title: string, detail?: string, meta?: Meta, source?: Source
  * }
  */
 final class LogMessage implements BaseModel
 {
-    /** @use SdkModel<log_message> */
+    /** @use SdkModel<LogMessageShape> */
     use SdkModel;
 
     #[Api]

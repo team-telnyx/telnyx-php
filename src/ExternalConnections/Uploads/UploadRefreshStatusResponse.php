@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type upload_refresh_status_response = array{success?: bool}
+ * @phpstan-type UploadRefreshStatusResponseShape = array{success?: bool}
  */
 final class UploadRefreshStatusResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<upload_refresh_status_response> */
+    /** @use SdkModel<UploadRefreshStatusResponseShape> */
     use SdkModel;
 
     use SdkResponse;

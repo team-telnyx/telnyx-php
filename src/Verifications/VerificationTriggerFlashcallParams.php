@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Verifications->triggerFlashcall
  *
- * @phpstan-type verification_trigger_flashcall_params = array{
+ * @phpstan-type VerificationTriggerFlashcallParamsShape = array{
  *   phoneNumber: string, verifyProfileID: string, timeoutSecs?: int
  * }
  */
 final class VerificationTriggerFlashcallParams implements BaseModel
 {
-    /** @use SdkModel<verification_trigger_flashcall_params> */
+    /** @use SdkModel<VerificationTriggerFlashcallParamsShape> */
     use SdkModel;
     use SdkParams;
 

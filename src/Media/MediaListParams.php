@@ -15,11 +15,11 @@ use Telnyx\Media\MediaListParams\Filter;
  *
  * @see Telnyx\Media->list
  *
- * @phpstan-type media_list_params = array{filter?: Filter}
+ * @phpstan-type MediaListParamsShape = array{filter?: Filter}
  */
 final class MediaListParams implements BaseModel
 {
-    /** @use SdkModel<media_list_params> */
+    /** @use SdkModel<MediaListParamsShape> */
     use SdkModel;
     use SdkParams;
 

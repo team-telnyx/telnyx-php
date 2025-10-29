@@ -11,13 +11,13 @@ use Telnyx\Messsages\RcsAgentMessage\ContentMessage\RichCard\CarouselCard;
 use Telnyx\Messsages\RcsAgentMessage\ContentMessage\RichCard\StandaloneCard;
 
 /**
- * @phpstan-type rich_card = array{
+ * @phpstan-type RichCardShape = array{
  *   carouselCard?: CarouselCard, standaloneCard?: StandaloneCard
  * }
  */
 final class RichCard implements BaseModel
 {
-    /** @use SdkModel<rich_card> */
+    /** @use SdkModel<RichCardShape> */
     use SdkModel;
 
     /**

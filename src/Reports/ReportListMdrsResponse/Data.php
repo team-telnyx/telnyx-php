@@ -12,7 +12,7 @@ use Telnyx\Reports\ReportListMdrsResponse\Data\MessageType;
 use Telnyx\Reports\ReportListMdrsResponse\Data\Status;
 
 /**
- * @phpstan-type data_alias = array{
+ * @phpstan-type DataShape = array{
  *   id?: string,
  *   cld?: string,
  *   cli?: string,
@@ -30,7 +30,7 @@ use Telnyx\Reports\ReportListMdrsResponse\Data\Status;
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**

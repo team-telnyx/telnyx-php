@@ -14,13 +14,13 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 /**
  * List of Auto-Response Settings.
  *
- * @phpstan-type autoresp_config_list_response = array{
+ * @phpstan-type AutorespConfigListResponseShape = array{
  *   data: list<AutoRespConfig>, meta: PaginationMeta
  * }
  */
 final class AutorespConfigListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<autoresp_config_list_response> */
+    /** @use SdkModel<AutorespConfigListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

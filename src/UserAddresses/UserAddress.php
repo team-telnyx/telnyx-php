@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type user_address = array{
+ * @phpstan-type UserAddressShape = array{
  *   id?: string,
  *   administrativeArea?: string,
  *   borough?: string,
@@ -31,7 +31,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class UserAddress implements BaseModel
 {
-    /** @use SdkModel<user_address> */
+    /** @use SdkModel<UserAddressShape> */
     use SdkModel;
 
     /**

@@ -13,13 +13,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type channel_zone_list_response = array{
+ * @phpstan-type ChannelZoneListResponseShape = array{
  *   data?: list<Data>, meta?: PaginationMeta
  * }
  */
 final class ChannelZoneListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<channel_zone_list_response> */
+    /** @use SdkModel<ChannelZoneListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

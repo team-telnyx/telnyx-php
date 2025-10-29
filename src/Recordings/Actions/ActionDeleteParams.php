@@ -14,11 +14,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Recordings\Actions->delete
  *
- * @phpstan-type action_delete_params = array{ids: list<string>}
+ * @phpstan-type ActionDeleteParamsShape = array{ids: list<string>}
  */
 final class ActionDeleteParams implements BaseModel
 {
-    /** @use SdkModel<action_delete_params> */
+    /** @use SdkModel<ActionDeleteParamsShape> */
     use SdkModel;
     use SdkParams;
 

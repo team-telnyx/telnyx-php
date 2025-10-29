@@ -13,7 +13,7 @@ use Telnyx\FqdnConnections\OutboundFqdn\IPAuthenticationMethod;
 use Telnyx\FqdnConnections\OutboundFqdn\T38ReinviteSource;
 
 /**
- * @phpstan-type outbound_fqdn = array{
+ * @phpstan-type OutboundFqdnShape = array{
  *   aniOverride?: string,
  *   aniOverrideType?: value-of<AniOverrideType>,
  *   callParkingEnabled?: bool|null,
@@ -33,7 +33,7 @@ use Telnyx\FqdnConnections\OutboundFqdn\T38ReinviteSource;
  */
 final class OutboundFqdn implements BaseModel
 {
-    /** @use SdkModel<outbound_fqdn> */
+    /** @use SdkModel<OutboundFqdnShape> */
     use SdkModel;
 
     /**

@@ -12,13 +12,13 @@ use Telnyx\Porting\LoaConfigurations\PortingLoaConfiguration\Logo\ContentType;
 /**
  * The logo to be used in the LOA.
  *
- * @phpstan-type logo_alias = array{
+ * @phpstan-type LogoShape = array{
  *   contentType?: value-of<ContentType>, documentID?: string
  * }
  */
 final class Logo implements BaseModel
 {
-    /** @use SdkModel<logo_alias> */
+    /** @use SdkModel<LogoShape> */
     use SdkModel;
 
     /**

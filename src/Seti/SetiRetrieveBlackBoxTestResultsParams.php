@@ -15,13 +15,13 @@ use Telnyx\Seti\SetiRetrieveBlackBoxTestResultsParams\Filter;
  *
  * @see Telnyx\Seti->retrieveBlackBoxTestResults
  *
- * @phpstan-type seti_retrieve_black_box_test_results_params = array{
+ * @phpstan-type SetiRetrieveBlackBoxTestResultsParamsShape = array{
  *   filter?: Filter
  * }
  */
 final class SetiRetrieveBlackBoxTestResultsParams implements BaseModel
 {
-    /** @use SdkModel<seti_retrieve_black_box_test_results_params> */
+    /** @use SdkModel<SetiRetrieveBlackBoxTestResultsParamsShape> */
     use SdkModel;
     use SdkParams;
 

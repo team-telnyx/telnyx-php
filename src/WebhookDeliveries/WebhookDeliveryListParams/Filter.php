@@ -16,7 +16,7 @@ use Telnyx\WebhookDeliveries\WebhookDeliveryListParams\Filter\Webhook;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[status][eq], filter[event_type], filter[webhook][contains], filter[attempts][contains], filter[started_at][gte], filter[started_at][lte], filter[finished_at][gte], filter[finished_at][lte].
  *
- * @phpstan-type filter_alias = array{
+ * @phpstan-type FilterShape = array{
  *   attempts?: Attempts,
  *   eventType?: string,
  *   finishedAt?: FinishedAt,
@@ -27,7 +27,7 @@ use Telnyx\WebhookDeliveries\WebhookDeliveryListParams\Filter\Webhook;
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     #[Api(optional: true)]

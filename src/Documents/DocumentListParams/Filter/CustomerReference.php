@@ -9,11 +9,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type customer_reference = array{eq?: string, in?: list<string>}
+ * @phpstan-type CustomerReferenceShape = array{eq?: string, in?: list<string>}
  */
 final class CustomerReference implements BaseModel
 {
-    /** @use SdkModel<customer_reference> */
+    /** @use SdkModel<CustomerReferenceShape> */
     use SdkModel;
 
     /**

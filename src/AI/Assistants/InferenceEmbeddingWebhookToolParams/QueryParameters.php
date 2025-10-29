@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * The query parameters the webhook tool accepts, described as a JSON Schema object. These parameters will be passed to the webhook as the query of the request. See the [JSON Schema reference](https://json-schema.org/understanding-json-schema) for documentation about the format.
  *
- * @phpstan-type query_parameters = array{
+ * @phpstan-type QueryParametersShape = array{
  *   properties?: array<string, mixed>,
  *   required?: list<string>,
  *   type?: value-of<Type>,
@@ -20,7 +20,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class QueryParameters implements BaseModel
 {
-    /** @use SdkModel<query_parameters> */
+    /** @use SdkModel<QueryParametersShape> */
     use SdkModel;
 
     /**

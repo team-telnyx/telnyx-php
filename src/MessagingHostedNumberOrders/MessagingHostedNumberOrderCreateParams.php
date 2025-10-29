@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\MessagingHostedNumberOrders->create
  *
- * @phpstan-type messaging_hosted_number_order_create_params = array{
+ * @phpstan-type MessagingHostedNumberOrderCreateParamsShape = array{
  *   messagingProfileID?: string, phoneNumbers?: list<string>
  * }
  */
 final class MessagingHostedNumberOrderCreateParams implements BaseModel
 {
-    /** @use SdkModel<messaging_hosted_number_order_create_params> */
+    /** @use SdkModel<MessagingHostedNumberOrderCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

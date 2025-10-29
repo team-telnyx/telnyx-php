@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type mobile_network_operators_preference = array{
+ * @phpstan-type MobileNetworkOperatorsPreferenceShape = array{
  *   mobileNetworkOperatorID?: string,
  *   mobileNetworkOperatorName?: string,
  *   priority?: int,
@@ -17,7 +17,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class MobileNetworkOperatorsPreference implements BaseModel
 {
-    /** @use SdkModel<mobile_network_operators_preference> */
+    /** @use SdkModel<MobileNetworkOperatorsPreferenceShape> */
     use SdkModel;
 
     /**

@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type number_order_update_response = array{
+ * @phpstan-type NumberOrderUpdateResponseShape = array{
  *   data?: NumberOrderWithPhoneNumbers
  * }
  */
 final class NumberOrderUpdateResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<number_order_update_response> */
+    /** @use SdkModel<NumberOrderUpdateResponseShape> */
     use SdkModel;
 
     use SdkResponse;

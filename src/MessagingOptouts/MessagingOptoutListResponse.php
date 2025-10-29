@@ -13,13 +13,13 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\MessagingOptouts\MessagingOptoutListResponse\Data;
 
 /**
- * @phpstan-type messaging_optout_list_response = array{
+ * @phpstan-type MessagingOptoutListResponseShape = array{
  *   data?: list<Data>, meta?: PaginationMeta
  * }
  */
 final class MessagingOptoutListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<messaging_optout_list_response> */
+    /** @use SdkModel<MessagingOptoutListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

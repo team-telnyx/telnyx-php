@@ -13,13 +13,13 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\ManagedAccounts\ManagedAccountListResponse\Data;
 
 /**
- * @phpstan-type managed_account_list_response = array{
+ * @phpstan-type ManagedAccountListResponseShape = array{
  *   data?: list<Data>, meta?: PaginationMeta
  * }
  */
 final class ManagedAccountListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<managed_account_list_response> */
+    /** @use SdkModel<ManagedAccountListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

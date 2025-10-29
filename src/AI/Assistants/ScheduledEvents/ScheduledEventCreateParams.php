@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\AI\Assistants\ScheduledEvents->create
  *
- * @phpstan-type scheduled_event_create_params = array{
+ * @phpstan-type ScheduledEventCreateParamsShape = array{
  *   scheduledAtFixedDatetime: \DateTimeInterface,
  *   telnyxAgentTarget: string,
  *   telnyxConversationChannel: ConversationChannelType|value-of<ConversationChannelType>,
@@ -26,7 +26,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class ScheduledEventCreateParams implements BaseModel
 {
-    /** @use SdkModel<scheduled_event_create_params> */
+    /** @use SdkModel<ScheduledEventCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

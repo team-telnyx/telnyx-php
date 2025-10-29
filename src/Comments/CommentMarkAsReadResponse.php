@@ -12,11 +12,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type comment_mark_as_read_response = array{data?: Data}
+ * @phpstan-type CommentMarkAsReadResponseShape = array{data?: Data}
  */
 final class CommentMarkAsReadResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<comment_mark_as_read_response> */
+    /** @use SdkModel<CommentMarkAsReadResponseShape> */
     use SdkModel;
 
     use SdkResponse;

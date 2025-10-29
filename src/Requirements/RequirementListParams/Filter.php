@@ -13,7 +13,7 @@ use Telnyx\Requirements\RequirementListParams\Filter\PhoneNumberType;
 /**
  * Consolidated filter parameter for requirements (deepObject style). Originally: filter[country_code], filter[phone_number_type], filter[action].
  *
- * @phpstan-type filter_alias = array{
+ * @phpstan-type FilterShape = array{
  *   action?: value-of<Action>,
  *   countryCode?: string,
  *   phoneNumberType?: value-of<PhoneNumberType>,
@@ -21,7 +21,7 @@ use Telnyx\Requirements\RequirementListParams\Filter\PhoneNumberType;
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**

@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * A phone number.
  *
- * @phpstan-type tf_phone_number = array{phoneNumber: string}
+ * @phpstan-type TfPhoneNumberShape = array{phoneNumber: string}
  */
 final class TfPhoneNumber implements BaseModel
 {
-    /** @use SdkModel<tf_phone_number> */
+    /** @use SdkModel<TfPhoneNumberShape> */
     use SdkModel;
 
     #[Api]

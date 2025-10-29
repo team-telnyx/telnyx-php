@@ -9,11 +9,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type v50_alias = array{amount?: float, unit?: string}
+ * @phpstan-type V50Shape = array{amount?: float, unit?: string}
  */
 final class v50 implements BaseModel
 {
-    /** @use SdkModel<v50_alias> */
+    /** @use SdkModel<V50Shape> */
     use SdkModel;
 
     /**

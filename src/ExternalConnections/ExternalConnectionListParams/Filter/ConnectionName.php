@@ -9,11 +9,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type connection_name = array{contains?: string}
+ * @phpstan-type ConnectionNameShape = array{contains?: string}
  */
 final class ConnectionName implements BaseModel
 {
-    /** @use SdkModel<connection_name> */
+    /** @use SdkModel<ConnectionNameShape> */
     use SdkModel;
 
     /**

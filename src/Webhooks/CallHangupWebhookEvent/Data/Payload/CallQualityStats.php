@@ -13,11 +13,13 @@ use Telnyx\Webhooks\CallHangupWebhookEvent\Data\Payload\CallQualityStats\Outboun
 /**
  * Call quality statistics aggregated from the CHANNEL_HANGUP_COMPLETE event. Only includes metrics that are available (filters out nil values). Returns nil if no metrics are available.
  *
- * @phpstan-type call_quality_stats = array{inbound?: Inbound, outbound?: Outbound}
+ * @phpstan-type CallQualityStatsShape = array{
+ *   inbound?: Inbound, outbound?: Outbound
+ * }
  */
 final class CallQualityStats implements BaseModel
 {
-    /** @use SdkModel<call_quality_stats> */
+    /** @use SdkModel<CallQualityStatsShape> */
     use SdkModel;
 
     /**

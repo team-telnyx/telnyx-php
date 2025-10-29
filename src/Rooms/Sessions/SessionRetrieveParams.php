@@ -14,11 +14,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Rooms\Sessions->retrieve
  *
- * @phpstan-type session_retrieve_params = array{includeParticipants?: bool}
+ * @phpstan-type SessionRetrieveParamsShape = array{includeParticipants?: bool}
  */
 final class SessionRetrieveParams implements BaseModel
 {
-    /** @use SdkModel<session_retrieve_params> */
+    /** @use SdkModel<SessionRetrieveParamsShape> */
     use SdkModel;
     use SdkParams;
 

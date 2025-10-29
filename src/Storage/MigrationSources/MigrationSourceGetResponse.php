@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type migration_source_get_response = array{
+ * @phpstan-type MigrationSourceGetResponseShape = array{
  *   data?: MigrationSourceParams
  * }
  */
 final class MigrationSourceGetResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<migration_source_get_response> */
+    /** @use SdkModel<MigrationSourceGetResponseShape> */
     use SdkModel;
 
     use SdkResponse;

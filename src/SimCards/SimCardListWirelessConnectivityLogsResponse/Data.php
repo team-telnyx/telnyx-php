@@ -12,7 +12,7 @@ use Telnyx\SimCards\SimCardListWirelessConnectivityLogsResponse\Data\LogType;
 /**
  * This object represents a wireless connectivity session log that happened through a SIM card. It aids in finding out potential problems when the SIM is not able to attach properly.
  *
- * @phpstan-type data_alias = array{
+ * @phpstan-type DataShape = array{
  *   id?: int,
  *   apn?: string,
  *   cellID?: string,
@@ -35,7 +35,7 @@ use Telnyx\SimCards\SimCardListWirelessConnectivityLogsResponse\Data\LogType;
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**

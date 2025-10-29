@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\ManagedAccounts\ManagedAccountListResponse\Data\RecordType;
 
 /**
- * @phpstan-type data_alias = array{
+ * @phpstan-type DataShape = array{
  *   id: string,
  *   apiUser: string,
  *   createdAt: string,
@@ -25,7 +25,7 @@ use Telnyx\ManagedAccounts\ManagedAccountListResponse\Data\RecordType;
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**

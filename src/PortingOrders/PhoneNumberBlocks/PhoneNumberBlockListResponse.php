@@ -12,13 +12,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type phone_number_block_list_response = array{
+ * @phpstan-type PhoneNumberBlockListResponseShape = array{
  *   data?: list<PortingPhoneNumberBlock>, meta?: PaginationMeta
  * }
  */
 final class PhoneNumberBlockListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<phone_number_block_list_response> */
+    /** @use SdkModel<PhoneNumberBlockListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

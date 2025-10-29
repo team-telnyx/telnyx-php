@@ -9,11 +9,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type country_alias = array{code: string, name: string}
+ * @phpstan-type CountryShape = array{code: string, name: string}
  */
 final class Country implements BaseModel
 {
-    /** @use SdkModel<country_alias> */
+    /** @use SdkModel<CountryShape> */
     use SdkModel;
 
     /**

@@ -12,7 +12,7 @@ use Telnyx\Messsages\RcsContentInfo;
 use Telnyx\Messsages\RcsSuggestion;
 
 /**
- * @phpstan-type content_message = array{
+ * @phpstan-type ContentMessageShape = array{
  *   contentInfo?: RcsContentInfo,
  *   richCard?: RichCard,
  *   suggestions?: list<RcsSuggestion>,
@@ -21,7 +21,7 @@ use Telnyx\Messsages\RcsSuggestion;
  */
 final class ContentMessage implements BaseModel
 {
-    /** @use SdkModel<content_message> */
+    /** @use SdkModel<ContentMessageShape> */
     use SdkModel;
 
     #[Api('content_info', optional: true)]

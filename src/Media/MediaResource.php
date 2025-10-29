@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type media_resource = array{
+ * @phpstan-type MediaResourceShape = array{
  *   contentType?: string,
  *   createdAt?: string,
  *   expiresAt?: string,
@@ -19,7 +19,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class MediaResource implements BaseModel
 {
-    /** @use SdkModel<media_resource> */
+    /** @use SdkModel<MediaResourceShape> */
     use SdkModel;
 
     /**

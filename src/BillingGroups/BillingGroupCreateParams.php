@@ -14,11 +14,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\BillingGroups->create
  *
- * @phpstan-type billing_group_create_params = array{name?: string}
+ * @phpstan-type BillingGroupCreateParamsShape = array{name?: string}
  */
 final class BillingGroupCreateParams implements BaseModel
 {
-    /** @use SdkModel<billing_group_create_params> */
+    /** @use SdkModel<BillingGroupCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

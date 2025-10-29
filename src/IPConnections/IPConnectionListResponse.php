@@ -12,13 +12,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type ip_connection_list_response = array{
+ * @phpstan-type IPConnectionListResponseShape = array{
  *   data?: list<IPConnection>, meta?: ConnectionsPaginationMeta
  * }
  */
 final class IPConnectionListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<ip_connection_list_response> */
+    /** @use SdkModel<IPConnectionListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

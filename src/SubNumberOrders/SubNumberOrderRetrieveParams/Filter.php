@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[include_phone_numbers].
  *
- * @phpstan-type filter_alias = array{includePhoneNumbers?: bool}
+ * @phpstan-type FilterShape = array{includePhoneNumbers?: bool}
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**

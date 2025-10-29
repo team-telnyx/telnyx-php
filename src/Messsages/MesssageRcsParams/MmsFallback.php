@@ -9,13 +9,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type mms_fallback = array{
+ * @phpstan-type MmsFallbackShape = array{
  *   from?: string, mediaURLs?: list<string>, subject?: string, text?: string
  * }
  */
 final class MmsFallback implements BaseModel
 {
-    /** @use SdkModel<mms_fallback> */
+    /** @use SdkModel<MmsFallbackShape> */
     use SdkModel;
 
     /**

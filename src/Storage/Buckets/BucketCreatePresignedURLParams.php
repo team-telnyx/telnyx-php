@@ -16,13 +16,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Storage\Buckets->createPresignedURL
  *
- * @phpstan-type bucket_create_presigned_url_params = array{
+ * @phpstan-type BucketCreatePresignedURLParamsShape = array{
  *   bucketName: string, ttl?: int
  * }
  */
 final class BucketCreatePresignedURLParams implements BaseModel
 {
-    /** @use SdkModel<bucket_create_presigned_url_params> */
+    /** @use SdkModel<BucketCreatePresignedURLParamsShape> */
     use SdkModel;
     use SdkParams;
 

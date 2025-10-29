@@ -14,11 +14,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Addresses\Actions->acceptSuggestions
  *
- * @phpstan-type action_accept_suggestions_params = array{id?: string}
+ * @phpstan-type ActionAcceptSuggestionsParamsShape = array{id?: string}
  */
 final class ActionAcceptSuggestionsParams implements BaseModel
 {
-    /** @use SdkModel<action_accept_suggestions_params> */
+    /** @use SdkModel<ActionAcceptSuggestionsParamsShape> */
     use SdkModel;
     use SdkParams;
 

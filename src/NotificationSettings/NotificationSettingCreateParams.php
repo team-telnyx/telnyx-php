@@ -15,7 +15,7 @@ use Telnyx\NotificationSettings\NotificationSettingCreateParams\Parameter;
  *
  * @see Telnyx\NotificationSettings->create
  *
- * @phpstan-type notification_setting_create_params = array{
+ * @phpstan-type NotificationSettingCreateParamsShape = array{
  *   notificationChannelID?: string,
  *   notificationEventConditionID?: string,
  *   notificationProfileID?: string,
@@ -24,7 +24,7 @@ use Telnyx\NotificationSettings\NotificationSettingCreateParams\Parameter;
  */
 final class NotificationSettingCreateParams implements BaseModel
 {
-    /** @use SdkModel<notification_setting_create_params> */
+    /** @use SdkModel<NotificationSettingCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

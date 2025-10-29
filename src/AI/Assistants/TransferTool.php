@@ -10,13 +10,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type transfer_tool = array{
+ * @phpstan-type TransferToolShape = array{
  *   transfer: InferenceEmbeddingTransferToolParams, type: value-of<Type>
  * }
  */
 final class TransferTool implements BaseModel
 {
-    /** @use SdkModel<transfer_tool> */
+    /** @use SdkModel<TransferToolShape> */
     use SdkModel;
 
     #[Api]

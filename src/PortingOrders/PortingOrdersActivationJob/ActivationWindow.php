@@ -9,13 +9,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type activation_window = array{
+ * @phpstan-type ActivationWindowShape = array{
  *   endAt?: \DateTimeInterface, startAt?: \DateTimeInterface
  * }
  */
 final class ActivationWindow implements BaseModel
 {
-    /** @use SdkModel<activation_window> */
+    /** @use SdkModel<ActivationWindowShape> */
     use SdkModel;
 
     /**

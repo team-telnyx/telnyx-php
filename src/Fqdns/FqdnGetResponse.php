@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type fqdn_get_response = array{data?: Fqdn}
+ * @phpstan-type FqdnGetResponseShape = array{data?: Fqdn}
  */
 final class FqdnGetResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<fqdn_get_response> */
+    /** @use SdkModel<FqdnGetResponseShape> */
     use SdkModel;
 
     use SdkResponse;

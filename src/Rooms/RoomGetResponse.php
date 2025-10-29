@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type room_get_response = array{data?: Room}
+ * @phpstan-type RoomGetResponseShape = array{data?: Room}
  */
 final class RoomGetResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<room_get_response> */
+    /** @use SdkModel<RoomGetResponseShape> */
     use SdkModel;
 
     use SdkResponse;

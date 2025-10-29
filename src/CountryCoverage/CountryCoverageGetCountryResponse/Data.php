@@ -11,7 +11,7 @@ use Telnyx\CountryCoverage\CountryCoverageGetCountryResponse\Data\Local;
 use Telnyx\CountryCoverage\CountryCoverageGetCountryResponse\Data\TollFree;
 
 /**
- * @phpstan-type data_alias = array{
+ * @phpstan-type DataShape = array{
  *   code?: string,
  *   features?: list<string>,
  *   internationalSMS?: bool,
@@ -31,7 +31,7 @@ use Telnyx\CountryCoverage\CountryCoverageGetCountryResponse\Data\TollFree;
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**

@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type user_bundle_get_response = array{data: UserBundle}
+ * @phpstan-type UserBundleGetResponseShape = array{data: UserBundle}
  */
 final class UserBundleGetResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<user_bundle_get_response> */
+    /** @use SdkModel<UserBundleGetResponseShape> */
     use SdkModel;
 
     use SdkResponse;

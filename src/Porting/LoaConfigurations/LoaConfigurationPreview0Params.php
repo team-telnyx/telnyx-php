@@ -17,7 +17,7 @@ use Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Logo;
  *
  * @see Telnyx\Porting\LoaConfigurations->preview0
  *
- * @phpstan-type loa_configuration_preview_0_params = array{
+ * @phpstan-type LoaConfigurationPreview0ParamsShape = array{
  *   address: Address,
  *   companyName: string,
  *   contact: Contact,
@@ -27,7 +27,7 @@ use Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Logo;
  */
 final class LoaConfigurationPreview0Params implements BaseModel
 {
-    /** @use SdkModel<loa_configuration_preview_0_params> */
+    /** @use SdkModel<LoaConfigurationPreview0ParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -12,11 +12,11 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\WireguardPeers\WireguardPeerNewResponse\Data;
 
 /**
- * @phpstan-type wireguard_peer_new_response = array{data?: Data}
+ * @phpstan-type WireguardPeerNewResponseShape = array{data?: Data}
  */
 final class WireguardPeerNewResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<wireguard_peer_new_response> */
+    /** @use SdkModel<WireguardPeerNewResponseShape> */
     use SdkModel;
 
     use SdkResponse;

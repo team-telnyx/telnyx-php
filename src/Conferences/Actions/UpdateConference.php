@@ -11,7 +11,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type update_conference = array{
+ * @phpstan-type UpdateConferenceShape = array{
  *   callControlID: string,
  *   supervisorRole: value-of<SupervisorRole>,
  *   commandID?: string,
@@ -21,7 +21,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class UpdateConference implements BaseModel
 {
-    /** @use SdkModel<update_conference> */
+    /** @use SdkModel<UpdateConferenceShape> */
     use SdkModel;
 
     /**

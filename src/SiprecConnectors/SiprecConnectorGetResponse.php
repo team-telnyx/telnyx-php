@@ -12,11 +12,11 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\SiprecConnectors\SiprecConnectorGetResponse\Data;
 
 /**
- * @phpstan-type siprec_connector_get_response = array{data: Data}
+ * @phpstan-type SiprecConnectorGetResponseShape = array{data: Data}
  */
 final class SiprecConnectorGetResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<siprec_connector_get_response> */
+    /** @use SdkModel<SiprecConnectorGetResponseShape> */
     use SdkModel;
 
     use SdkResponse;

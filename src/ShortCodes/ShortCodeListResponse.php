@@ -13,13 +13,13 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\ShortCode;
 
 /**
- * @phpstan-type short_code_list_response = array{
+ * @phpstan-type ShortCodeListResponseShape = array{
  *   data?: list<ShortCode>, meta?: PaginationMeta
  * }
  */
 final class ShortCodeListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<short_code_list_response> */
+    /** @use SdkModel<ShortCodeListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

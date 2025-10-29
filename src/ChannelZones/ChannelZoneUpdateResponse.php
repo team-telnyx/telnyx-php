@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type channel_zone_update_response = array{
+ * @phpstan-type ChannelZoneUpdateResponseShape = array{
  *   id: string,
  *   channels: int,
  *   countries: list<string>,
@@ -24,7 +24,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  */
 final class ChannelZoneUpdateResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<channel_zone_update_response> */
+    /** @use SdkModel<ChannelZoneUpdateResponseShape> */
     use SdkModel;
 
     use SdkResponse;

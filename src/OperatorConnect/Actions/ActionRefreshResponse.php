@@ -11,11 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type action_refresh_response = array{message?: string, success?: bool}
+ * @phpstan-type ActionRefreshResponseShape = array{
+ *   message?: string, success?: bool
+ * }
  */
 final class ActionRefreshResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<action_refresh_response> */
+    /** @use SdkModel<ActionRefreshResponseShape> */
     use SdkModel;
 
     use SdkResponse;

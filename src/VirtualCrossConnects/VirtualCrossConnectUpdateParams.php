@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\VirtualCrossConnects->update
  *
- * @phpstan-type virtual_cross_connect_update_params = array{
+ * @phpstan-type VirtualCrossConnectUpdateParamsShape = array{
  *   primaryCloudIP?: string,
  *   primaryEnabled?: bool,
  *   primaryRoutingAnnouncement?: bool,
@@ -25,7 +25,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class VirtualCrossConnectUpdateParams implements BaseModel
 {
-    /** @use SdkModel<virtual_cross_connect_update_params> */
+    /** @use SdkModel<VirtualCrossConnectUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 

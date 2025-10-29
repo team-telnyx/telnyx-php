@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Event occurred_at filters.
  *
- * @phpstan-type occurred_at = array{
+ * @phpstan-type OccurredAtShape = array{
  *   eq?: string, gt?: string, gte?: string, lt?: string, lte?: string
  * }
  */
 final class OccurredAt implements BaseModel
 {
-    /** @use SdkModel<occurred_at> */
+    /** @use SdkModel<OccurredAtShape> */
     use SdkModel;
 
     /**

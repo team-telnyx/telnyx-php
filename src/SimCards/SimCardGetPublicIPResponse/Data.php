@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SimCards\SimCardGetPublicIPResponse\Data\Type;
 
 /**
- * @phpstan-type data_alias = array{
+ * @phpstan-type DataShape = array{
  *   createdAt?: string,
  *   ip?: string,
  *   recordType?: string,
@@ -22,7 +22,7 @@ use Telnyx\SimCards\SimCardGetPublicIPResponse\Data\Type;
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**

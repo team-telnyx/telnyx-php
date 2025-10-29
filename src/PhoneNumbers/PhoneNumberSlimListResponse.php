@@ -13,13 +13,13 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PhoneNumbers\PhoneNumberSlimListResponse\Data;
 
 /**
- * @phpstan-type phone_number_slim_list_response = array{
+ * @phpstan-type PhoneNumberSlimListResponseShape = array{
  *   data?: list<Data>, meta?: PaginationMeta
  * }
  */
 final class PhoneNumberSlimListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<phone_number_slim_list_response> */
+    /** @use SdkModel<PhoneNumberSlimListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

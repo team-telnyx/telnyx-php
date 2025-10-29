@@ -12,11 +12,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type embedding_get_response = array{data: Data}
+ * @phpstan-type EmbeddingGetResponseShape = array{data: Data}
  */
 final class EmbeddingGetResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<embedding_get_response> */
+    /** @use SdkModel<EmbeddingGetResponseShape> */
     use SdkModel;
 
     use SdkResponse;

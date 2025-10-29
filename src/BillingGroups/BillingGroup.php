@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type billing_group = array{
+ * @phpstan-type BillingGroupShape = array{
  *   id?: string,
  *   createdAt?: \DateTimeInterface,
  *   deletedAt?: \DateTimeInterface|null,
@@ -22,7 +22,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class BillingGroup implements BaseModel
 {
-    /** @use SdkModel<billing_group> */
+    /** @use SdkModel<BillingGroupShape> */
     use SdkModel;
 
     /**

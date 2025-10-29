@@ -10,13 +10,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type import_metadata = array{
+ * @phpstan-type ImportMetadataShape = array{
  *   importID?: string, importProvider?: value-of<ImportProvider>
  * }
  */
 final class ImportMetadata implements BaseModel
 {
-    /** @use SdkModel<import_metadata> */
+    /** @use SdkModel<ImportMetadataShape> */
     use SdkModel;
 
     /**

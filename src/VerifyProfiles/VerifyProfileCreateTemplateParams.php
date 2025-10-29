@@ -14,11 +14,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\VerifyProfiles->createTemplate
  *
- * @phpstan-type verify_profile_create_template_params = array{text: string}
+ * @phpstan-type VerifyProfileCreateTemplateParamsShape = array{text: string}
  */
 final class VerifyProfileCreateTemplateParams implements BaseModel
 {
-    /** @use SdkModel<verify_profile_create_template_params> */
+    /** @use SdkModel<VerifyProfileCreateTemplateParamsShape> */
     use SdkModel;
     use SdkParams;
 

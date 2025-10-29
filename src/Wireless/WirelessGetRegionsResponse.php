@@ -12,11 +12,11 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Wireless\WirelessGetRegionsResponse\Data;
 
 /**
- * @phpstan-type wireless_get_regions_response = array{data?: list<Data>}
+ * @phpstan-type WirelessGetRegionsResponseShape = array{data?: list<Data>}
  */
 final class WirelessGetRegionsResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<wireless_get_regions_response> */
+    /** @use SdkModel<WirelessGetRegionsResponseShape> */
     use SdkModel;
 
     use SdkResponse;

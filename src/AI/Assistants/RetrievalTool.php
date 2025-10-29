@@ -10,13 +10,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type retrieval_tool = array{
+ * @phpstan-type RetrievalToolShape = array{
  *   retrieval: InferenceEmbeddingBucketIDs, type: value-of<Type>
  * }
  */
 final class RetrievalTool implements BaseModel
 {
-    /** @use SdkModel<retrieval_tool> */
+    /** @use SdkModel<RetrievalToolShape> */
     use SdkModel;
 
     #[Api]

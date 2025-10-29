@@ -9,13 +9,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type pagination_meta_cloudflare_ip_list_sync = array{
+ * @phpstan-type PaginationMetaCloudflareIPListSyncShape = array{
  *   pageNumber: int, pageSize: int, totalPages: int, totalResults: int
  * }
  */
 final class PaginationMetaCloudflareIPListSync implements BaseModel
 {
-    /** @use SdkModel<pagination_meta_cloudflare_ip_list_sync> */
+    /** @use SdkModel<PaginationMetaCloudflareIPListSyncShape> */
     use SdkModel;
 
     #[Api('page_number')]

@@ -9,13 +9,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type segment_alias = array{
+ * @phpstan-type SegmentShape = array{
  *   id: float, end: float, start: float, text: string
  * }
  */
 final class Segment implements BaseModel
 {
-    /** @use SdkModel<segment_alias> */
+    /** @use SdkModel<SegmentShape> */
     use SdkModel;
 
     /**

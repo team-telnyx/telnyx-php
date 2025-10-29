@@ -14,11 +14,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\PortingOrders\AdditionalDocuments->delete
  *
- * @phpstan-type additional_document_delete_params = array{id: string}
+ * @phpstan-type AdditionalDocumentDeleteParamsShape = array{id: string}
  */
 final class AdditionalDocumentDeleteParams implements BaseModel
 {
-    /** @use SdkModel<additional_document_delete_params> */
+    /** @use SdkModel<AdditionalDocumentDeleteParamsShape> */
     use SdkModel;
     use SdkParams;
 

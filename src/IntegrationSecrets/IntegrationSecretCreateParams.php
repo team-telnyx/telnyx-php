@@ -15,7 +15,7 @@ use Telnyx\IntegrationSecrets\IntegrationSecretCreateParams\Type;
  *
  * @see Telnyx\IntegrationSecrets->create
  *
- * @phpstan-type integration_secret_create_params = array{
+ * @phpstan-type IntegrationSecretCreateParamsShape = array{
  *   identifier: string,
  *   type: Type|value-of<Type>,
  *   token?: string,
@@ -25,7 +25,7 @@ use Telnyx\IntegrationSecrets\IntegrationSecretCreateParams\Type;
  */
 final class IntegrationSecretCreateParams implements BaseModel
 {
-    /** @use SdkModel<integration_secret_create_params> */
+    /** @use SdkModel<IntegrationSecretCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

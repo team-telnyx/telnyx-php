@@ -16,13 +16,13 @@ use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadCreateParams\Filter;
  *
  * @see Telnyx\PhoneNumbers\CsvDownloads->create
  *
- * @phpstan-type csv_download_create_params = array{
+ * @phpstan-type CsvDownloadCreateParamsShape = array{
  *   csvFormat?: CsvFormat|value-of<CsvFormat>, filter?: Filter
  * }
  */
 final class CsvDownloadCreateParams implements BaseModel
 {
-    /** @use SdkModel<csv_download_create_params> */
+    /** @use SdkModel<CsvDownloadCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\SimCardOrders->create
  *
- * @phpstan-type sim_card_order_create_params = array{
+ * @phpstan-type SimCardOrderCreateParamsShape = array{
  *   addressID: string, quantity: int
  * }
  */
 final class SimCardOrderCreateParams implements BaseModel
 {
-    /** @use SdkModel<sim_card_order_create_params> */
+    /** @use SdkModel<SimCardOrderCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

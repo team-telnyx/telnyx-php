@@ -14,11 +14,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\AI\Assistants\Tests\TestSuites\Runs->trigger
  *
- * @phpstan-type run_trigger_params = array{destinationVersionID?: string}
+ * @phpstan-type RunTriggerParamsShape = array{destinationVersionID?: string}
  */
 final class RunTriggerParams implements BaseModel
 {
-    /** @use SdkModel<run_trigger_params> */
+    /** @use SdkModel<RunTriggerParamsShape> */
     use SdkModel;
     use SdkParams;
 

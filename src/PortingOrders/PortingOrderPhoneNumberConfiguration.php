@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type porting_order_phone_number_configuration = array{
+ * @phpstan-type PortingOrderPhoneNumberConfigurationShape = array{
  *   billingGroupID?: string,
  *   connectionID?: string,
  *   emergencyAddressID?: string,
@@ -19,7 +19,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class PortingOrderPhoneNumberConfiguration implements BaseModel
 {
-    /** @use SdkModel<porting_order_phone_number_configuration> */
+    /** @use SdkModel<PortingOrderPhoneNumberConfigurationShape> */
     use SdkModel;
 
     /**

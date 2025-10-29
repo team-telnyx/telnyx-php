@@ -17,13 +17,13 @@ use Telnyx\PhoneNumberBlocks\Jobs\JobListParams\Sort;
  *
  * @see Telnyx\PhoneNumberBlocks\Jobs->list
  *
- * @phpstan-type job_list_params = array{
+ * @phpstan-type JobListParamsShape = array{
  *   filter?: Filter, page?: Page, sort?: Sort|value-of<Sort>
  * }
  */
 final class JobListParams implements BaseModel
 {
-    /** @use SdkModel<job_list_params> */
+    /** @use SdkModel<JobListParamsShape> */
     use SdkModel;
     use SdkParams;
 

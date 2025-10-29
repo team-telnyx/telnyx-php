@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type call_control_application_delete_response = array{
+ * @phpstan-type CallControlApplicationDeleteResponseShape = array{
  *   data?: CallControlApplication
  * }
  */
 final class CallControlApplicationDeleteResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<call_control_application_delete_response> */
+    /** @use SdkModel<CallControlApplicationDeleteResponseShape> */
     use SdkModel;
 
     use SdkResponse;

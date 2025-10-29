@@ -12,11 +12,11 @@ use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentListParams\Filter
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[document_type].
  *
- * @phpstan-type filter_alias = array{documentType?: list<value-of<DocumentType>>}
+ * @phpstan-type FilterShape = array{documentType?: list<value-of<DocumentType>>}
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**

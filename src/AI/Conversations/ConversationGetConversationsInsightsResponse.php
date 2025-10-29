@@ -13,13 +13,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type conversation_get_conversations_insights_response = array{
+ * @phpstan-type ConversationGetConversationsInsightsResponseShape = array{
  *   data: list<Data>, meta: Meta
  * }
  */
 final class ConversationGetConversationsInsightsResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<conversation_get_conversations_insights_response> */
+    /** @use SdkModel<ConversationGetConversationsInsightsResponseShape> */
     use SdkModel;
 
     use SdkResponse;

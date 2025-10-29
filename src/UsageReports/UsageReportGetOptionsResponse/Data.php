@@ -12,7 +12,7 @@ use Telnyx\UsageReports\UsageReportGetOptionsResponse\Data\RecordType;
 /**
  * An object following one of the schemas published in https://developers.telnyx.com/docs/api/v2/detail-records.
  *
- * @phpstan-type data_alias = array{
+ * @phpstan-type DataShape = array{
  *   product?: string,
  *   productDimensions?: list<string>,
  *   productMetrics?: list<string>,
@@ -21,7 +21,7 @@ use Telnyx\UsageReports\UsageReportGetOptionsResponse\Data\RecordType;
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**

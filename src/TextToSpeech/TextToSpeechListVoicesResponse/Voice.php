@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type voice_alias = array{
+ * @phpstan-type VoiceShape = array{
  *   id?: string,
  *   accent?: string,
  *   age?: string,
@@ -22,7 +22,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class Voice implements BaseModel
 {
-    /** @use SdkModel<voice_alias> */
+    /** @use SdkModel<VoiceShape> */
     use SdkModel;
 
     #[Api(optional: true)]

@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * The porting order that was split.
  *
- * @phpstan-type from_alias = array{id?: string}
+ * @phpstan-type FromShape = array{id?: string}
  */
 final class From implements BaseModel
 {
-    /** @use SdkModel<from_alias> */
+    /** @use SdkModel<FromShape> */
     use SdkModel;
 
     /**

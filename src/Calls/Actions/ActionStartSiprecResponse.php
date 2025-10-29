@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type action_start_siprec_response = array{
+ * @phpstan-type ActionStartSiprecResponseShape = array{
  *   data?: CallControlCommandResult
  * }
  */
 final class ActionStartSiprecResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<action_start_siprec_response> */
+    /** @use SdkModel<ActionStartSiprecResponseShape> */
     use SdkModel;
 
     use SdkResponse;

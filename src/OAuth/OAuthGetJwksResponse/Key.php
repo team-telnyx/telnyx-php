@@ -9,13 +9,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type key_alias = array{
+ * @phpstan-type KeyShape = array{
  *   alg?: string, kid?: string, kty?: string, use?: string
  * }
  */
 final class Key implements BaseModel
 {
-    /** @use SdkModel<key_alias> */
+    /** @use SdkModel<KeyShape> */
     use SdkModel;
 
     /**

@@ -18,7 +18,7 @@ use Telnyx\CredentialConnections\EncryptedMedia;
  *
  * @see Telnyx\FqdnConnections->create
  *
- * @phpstan-type fqdn_connection_create_params = array{
+ * @phpstan-type FqdnConnectionCreateParamsShape = array{
  *   connectionName: string,
  *   active?: bool,
  *   anchorsiteOverride?: AnchorsiteOverride|value-of<AnchorsiteOverride>,
@@ -43,7 +43,7 @@ use Telnyx\CredentialConnections\EncryptedMedia;
  */
 final class FqdnConnectionCreateParams implements BaseModel
 {
-    /** @use SdkModel<fqdn_connection_create_params> */
+    /** @use SdkModel<FqdnConnectionCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

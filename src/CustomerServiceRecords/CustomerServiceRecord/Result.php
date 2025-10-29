@@ -13,7 +13,7 @@ use Telnyx\CustomerServiceRecords\CustomerServiceRecord\Result\Admin;
 /**
  * The result of the CSR request. This field would be null in case of `pending` or `failed` status.
  *
- * @phpstan-type result_alias = array{
+ * @phpstan-type ResultShape = array{
  *   address?: Address,
  *   admin?: Admin,
  *   associatedPhoneNumbers?: list<string>,
@@ -22,7 +22,7 @@ use Telnyx\CustomerServiceRecords\CustomerServiceRecord\Result\Admin;
  */
 final class Result implements BaseModel
 {
-    /** @use SdkModel<result_alias> */
+    /** @use SdkModel<ResultShape> */
     use SdkModel;
 
     /**

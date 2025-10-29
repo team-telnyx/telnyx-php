@@ -17,7 +17,7 @@ use Telnyx\VerifyProfiles\VerifyProfileCreateParams\SMS;
  *
  * @see Telnyx\VerifyProfiles->create
  *
- * @phpstan-type verify_profile_create_params = array{
+ * @phpstan-type VerifyProfileCreateParamsShape = array{
  *   name: string,
  *   call?: Call,
  *   flashcall?: Flashcall,
@@ -29,7 +29,7 @@ use Telnyx\VerifyProfiles\VerifyProfileCreateParams\SMS;
  */
 final class VerifyProfileCreateParams implements BaseModel
 {
-    /** @use SdkModel<verify_profile_create_params> */
+    /** @use SdkModel<VerifyProfileCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

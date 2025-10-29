@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\ManagedAccounts->updateGlobalChannelLimit
  *
- * @phpstan-type managed_account_update_global_channel_limit_params = array{
+ * @phpstan-type ManagedAccountUpdateGlobalChannelLimitParamsShape = array{
  *   channelLimit?: int
  * }
  */
 final class ManagedAccountUpdateGlobalChannelLimitParams implements BaseModel
 {
-    /** @use SdkModel<managed_account_update_global_channel_limit_params> */
+    /** @use SdkModel<ManagedAccountUpdateGlobalChannelLimitParamsShape> */
     use SdkModel;
     use SdkParams;
 

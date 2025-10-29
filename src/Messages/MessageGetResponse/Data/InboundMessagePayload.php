@@ -19,7 +19,7 @@ use Telnyx\Messages\MessageGetResponse\Data\InboundMessagePayload\Type;
 use Telnyx\Messages\MessagingError;
 
 /**
- * @phpstan-type inbound_message_payload = array{
+ * @phpstan-type InboundMessagePayloadShape = array{
  *   id?: string,
  *   cc?: list<Cc>,
  *   completedAt?: \DateTimeInterface|null,
@@ -49,7 +49,7 @@ use Telnyx\Messages\MessagingError;
  */
 final class InboundMessagePayload implements BaseModel
 {
-    /** @use SdkModel<inbound_message_payload> */
+    /** @use SdkModel<InboundMessagePayloadShape> */
     use SdkModel;
 
     /**

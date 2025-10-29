@@ -15,13 +15,13 @@ use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentCreateParams\Addi
  *
  * @see Telnyx\PortingOrders\AdditionalDocuments->create
  *
- * @phpstan-type additional_document_create_params = array{
+ * @phpstan-type AdditionalDocumentCreateParamsShape = array{
  *   additionalDocuments?: list<AdditionalDocument>
  * }
  */
 final class AdditionalDocumentCreateParams implements BaseModel
 {
-    /** @use SdkModel<additional_document_create_params> */
+    /** @use SdkModel<AdditionalDocumentCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

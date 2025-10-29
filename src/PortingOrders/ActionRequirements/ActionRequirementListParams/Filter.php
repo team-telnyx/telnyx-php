@@ -13,7 +13,7 @@ use Telnyx\PortingOrders\ActionRequirements\ActionRequirementListParams\Filter\S
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[id][in][], filter[requirement_type_id], filter[action_type], filter[status].
  *
- * @phpstan-type filter_alias = array{
+ * @phpstan-type FilterShape = array{
  *   id?: list<string>,
  *   actionType?: value-of<ActionType>,
  *   requirementTypeID?: string,
@@ -22,7 +22,7 @@ use Telnyx\PortingOrders\ActionRequirements\ActionRequirementListParams\Filter\S
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**

@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Available bandwidth filtering operations.
  *
- * @phpstan-type contains_alias = array{contains?: int}
+ * @phpstan-type ContainsShape = array{contains?: int}
  */
 final class Contains implements BaseModel
 {
-    /** @use SdkModel<contains_alias> */
+    /** @use SdkModel<ContainsShape> */
     use SdkModel;
 
     /**

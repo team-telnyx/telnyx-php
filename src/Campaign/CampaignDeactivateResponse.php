@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type campaign_deactivate_response = array{
+ * @phpstan-type CampaignDeactivateResponseShape = array{
  *   time: float, message?: string, recordType?: string
  * }
  */
 final class CampaignDeactivateResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<campaign_deactivate_response> */
+    /** @use SdkModel<CampaignDeactivateResponseShape> */
     use SdkModel;
 
     use SdkResponse;

@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\Comments\CommentNewResponse\Data\UserType;
 
 /**
- * @phpstan-type data_alias = array{
+ * @phpstan-type DataShape = array{
  *   id?: string,
  *   body?: string,
  *   createdAt?: \DateTimeInterface,
@@ -21,7 +21,7 @@ use Telnyx\PortingOrders\Comments\CommentNewResponse\Data\UserType;
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     #[Api(optional: true)]

@@ -16,7 +16,7 @@ use Telnyx\SimCardGroups\Actions\ActionListParams\FilterType;
  *
  * @see Telnyx\SimCardGroups\Actions->list
  *
- * @phpstan-type action_list_params = array{
+ * @phpstan-type ActionListParamsShape = array{
  *   filterSimCardGroupID?: string,
  *   filterStatus?: FilterStatus|value-of<FilterStatus>,
  *   filterType?: FilterType|value-of<FilterType>,
@@ -26,7 +26,7 @@ use Telnyx\SimCardGroups\Actions\ActionListParams\FilterType;
  */
 final class ActionListParams implements BaseModel
 {
-    /** @use SdkModel<action_list_params> */
+    /** @use SdkModel<ActionListParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\SimCards->retrieve
  *
- * @phpstan-type sim_card_retrieve_params = array{
+ * @phpstan-type SimCardRetrieveParamsShape = array{
  *   includePinPukCodes?: bool, includeSimCardGroup?: bool
  * }
  */
 final class SimCardRetrieveParams implements BaseModel
 {
-    /** @use SdkModel<sim_card_retrieve_params> */
+    /** @use SdkModel<SimCardRetrieveParamsShape> */
     use SdkModel;
     use SdkParams;
 

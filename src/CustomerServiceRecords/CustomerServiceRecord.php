@@ -11,7 +11,7 @@ use Telnyx\CustomerServiceRecords\CustomerServiceRecord\Result;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecord\Status;
 
 /**
- * @phpstan-type customer_service_record = array{
+ * @phpstan-type CustomerServiceRecordShape = array{
  *   id?: string,
  *   createdAt?: \DateTimeInterface,
  *   errorMessage?: string,
@@ -24,7 +24,7 @@ use Telnyx\CustomerServiceRecords\CustomerServiceRecord\Status;
  */
 final class CustomerServiceRecord implements BaseModel
 {
-    /** @use SdkModel<customer_service_record> */
+    /** @use SdkModel<CustomerServiceRecordShape> */
     use SdkModel;
 
     /**

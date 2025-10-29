@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type oauth_grants_response = array{redirectUri: string}
+ * @phpstan-type OAuthGrantsResponseShape = array{redirectUri: string}
  */
 final class OAuthGrantsResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<oauth_grants_response> */
+    /** @use SdkModel<OAuthGrantsResponseShape> */
     use SdkModel;
 
     use SdkResponse;

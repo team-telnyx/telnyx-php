@@ -13,11 +13,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type audit_event_list_response = array{data?: list<Data>, meta?: Meta}
+ * @phpstan-type AuditEventListResponseShape = array{
+ *   data?: list<Data>, meta?: Meta
+ * }
  */
 final class AuditEventListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<audit_event_list_response> */
+    /** @use SdkModel<AuditEventListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

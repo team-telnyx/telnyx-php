@@ -13,7 +13,7 @@ use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency;
 use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\ProberLocation;
 
 /**
- * @phpstan-type data_alias = array{
+ * @phpstan-type DataShape = array{
  *   globalIP?: GlobalIP,
  *   meanLatency?: MeanLatency,
  *   percentileLatency?: PercentileLatency,
@@ -23,7 +23,7 @@ use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\ProberLocation;
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     #[Api('global_ip', optional: true)]

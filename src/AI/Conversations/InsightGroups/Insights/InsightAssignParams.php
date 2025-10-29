@@ -14,11 +14,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\AI\Conversations\InsightGroups\Insights->assign
  *
- * @phpstan-type insight_assign_params = array{groupID: string}
+ * @phpstan-type InsightAssignParamsShape = array{groupID: string}
  */
 final class InsightAssignParams implements BaseModel
 {
-    /** @use SdkModel<insight_assign_params> */
+    /** @use SdkModel<InsightAssignParamsShape> */
     use SdkModel;
     use SdkParams;
 

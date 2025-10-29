@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type ssl_certificate_delete_response = array{data?: SslCertificate}
+ * @phpstan-type SslCertificateDeleteResponseShape = array{data?: SslCertificate}
  */
 final class SslCertificateDeleteResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<ssl_certificate_delete_response> */
+    /** @use SdkModel<SslCertificateDeleteResponseShape> */
     use SdkModel;
 
     use SdkResponse;

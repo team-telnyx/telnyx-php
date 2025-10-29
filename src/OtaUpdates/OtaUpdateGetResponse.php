@@ -12,11 +12,11 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\OtaUpdates\OtaUpdateGetResponse\Data;
 
 /**
- * @phpstan-type ota_update_get_response = array{data?: Data}
+ * @phpstan-type OtaUpdateGetResponseShape = array{data?: Data}
  */
 final class OtaUpdateGetResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<ota_update_get_response> */
+    /** @use SdkModel<OtaUpdateGetResponseShape> */
     use SdkModel;
 
     use SdkResponse;

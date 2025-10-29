@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type oauth_grant_delete_response = array{data?: OAuthGrant}
+ * @phpstan-type OAuthGrantDeleteResponseShape = array{data?: OAuthGrant}
  */
 final class OAuthGrantDeleteResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<oauth_grant_delete_response> */
+    /** @use SdkModel<OAuthGrantDeleteResponseShape> */
     use SdkModel;
 
     use SdkResponse;

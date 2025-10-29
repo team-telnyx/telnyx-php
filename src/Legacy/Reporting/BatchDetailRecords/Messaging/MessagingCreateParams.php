@@ -15,7 +15,7 @@ use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter;
  *
  * @see Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging->create
  *
- * @phpstan-type messaging_create_params = array{
+ * @phpstan-type MessagingCreateParamsShape = array{
  *   endTime: \DateTimeInterface,
  *   startTime: \DateTimeInterface,
  *   connections?: list<int>,
@@ -32,7 +32,7 @@ use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter;
  */
 final class MessagingCreateParams implements BaseModel
 {
-    /** @use SdkModel<messaging_create_params> */
+    /** @use SdkModel<MessagingCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -16,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Calls\Actions->startNoiseSuppression
  *
- * @phpstan-type action_start_noise_suppression_params = array{
+ * @phpstan-type ActionStartNoiseSuppressionParamsShape = array{
  *   clientState?: string,
  *   commandID?: string,
  *   direction?: Direction|value-of<Direction>,
@@ -25,7 +25,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class ActionStartNoiseSuppressionParams implements BaseModel
 {
-    /** @use SdkModel<action_start_noise_suppression_params> */
+    /** @use SdkModel<ActionStartNoiseSuppressionParamsShape> */
     use SdkModel;
     use SdkParams;
 

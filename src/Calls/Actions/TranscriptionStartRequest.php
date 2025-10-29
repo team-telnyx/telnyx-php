@@ -14,7 +14,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type transcription_start_request = array{
+ * @phpstan-type TranscriptionStartRequestShape = array{
  *   clientState?: string,
  *   commandID?: string,
  *   transcriptionEngine?: value-of<TranscriptionEngine>,
@@ -24,7 +24,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class TranscriptionStartRequest implements BaseModel
 {
-    /** @use SdkModel<transcription_start_request> */
+    /** @use SdkModel<TranscriptionStartRequestShape> */
     use SdkModel;
 
     /**

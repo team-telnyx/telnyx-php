@@ -17,13 +17,13 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  * Returns test run execution results with pagination support for
  * handling large numbers of test executions.
  *
- * @phpstan-type paginated_test_run_list = array{
+ * @phpstan-type PaginatedTestRunListShape = array{
  *   data: list<TestRunResponse>, meta: Meta
  * }
  */
 final class PaginatedTestRunList implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<paginated_test_run_list> */
+    /** @use SdkModel<PaginatedTestRunListShape> */
     use SdkModel;
 
     use SdkResponse;

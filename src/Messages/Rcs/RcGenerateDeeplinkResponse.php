@@ -12,11 +12,11 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Messages\Rcs\RcGenerateDeeplinkResponse\Data;
 
 /**
- * @phpstan-type rc_generate_deeplink_response = array{data: Data}
+ * @phpstan-type RcGenerateDeeplinkResponseShape = array{data: Data}
  */
 final class RcGenerateDeeplinkResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<rc_generate_deeplink_response> */
+    /** @use SdkModel<RcGenerateDeeplinkResponseShape> */
     use SdkModel;
 
     use SdkResponse;

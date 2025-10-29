@@ -15,11 +15,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Comments->list
  *
- * @phpstan-type comment_list_params = array{filter?: Filter}
+ * @phpstan-type CommentListParamsShape = array{filter?: Filter}
  */
 final class CommentListParams implements BaseModel
 {
-    /** @use SdkModel<comment_list_params> */
+    /** @use SdkModel<CommentListParamsShape> */
     use SdkModel;
     use SdkParams;
 

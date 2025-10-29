@@ -15,7 +15,7 @@ use Telnyx\Messages\MessageSendShortCodeParams\Type;
  *
  * @see Telnyx\Messages->sendShortCode
  *
- * @phpstan-type message_send_short_code_params = array{
+ * @phpstan-type MessageSendShortCodeParamsShape = array{
  *   from: string,
  *   to: string,
  *   autoDetect?: bool,
@@ -30,7 +30,7 @@ use Telnyx\Messages\MessageSendShortCodeParams\Type;
  */
 final class MessageSendShortCodeParams implements BaseModel
 {
-    /** @use SdkModel<message_send_short_code_params> */
+    /** @use SdkModel<MessageSendShortCodeParamsShape> */
     use SdkModel;
     use SdkParams;
 

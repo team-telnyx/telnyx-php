@@ -12,7 +12,7 @@ use Telnyx\Portouts\Events\EventListResponse\Data\Payload\WebhookPortoutStatusCh
 /**
  * The webhook payload for the portout.status_changed event.
  *
- * @phpstan-type webhook_portout_status_changed_payload = array{
+ * @phpstan-type WebhookPortoutStatusChangedPayloadShape = array{
  *   id?: string,
  *   attemptedPin?: string,
  *   carrierName?: string,
@@ -26,7 +26,7 @@ use Telnyx\Portouts\Events\EventListResponse\Data\Payload\WebhookPortoutStatusCh
  */
 final class WebhookPortoutStatusChangedPayload implements BaseModel
 {
-    /** @use SdkModel<webhook_portout_status_changed_payload> */
+    /** @use SdkModel<WebhookPortoutStatusChangedPayloadShape> */
     use SdkModel;
 
     /**

@@ -9,13 +9,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type phone_number_campaign_create = array{
+ * @phpstan-type PhoneNumberCampaignCreateShape = array{
  *   campaignID: string, phoneNumber: string
  * }
  */
 final class PhoneNumberCampaignCreate implements BaseModel
 {
-    /** @use SdkModel<phone_number_campaign_create> */
+    /** @use SdkModel<PhoneNumberCampaignCreateShape> */
     use SdkModel;
 
     /**

@@ -12,11 +12,11 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Texml\TexmlSecretsResponse\Data;
 
 /**
- * @phpstan-type texml_secrets_response = array{data?: Data}
+ * @phpstan-type TexmlSecretsResponseShape = array{data?: Data}
  */
 final class TexmlSecretsResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<texml_secrets_response> */
+    /** @use SdkModel<TexmlSecretsResponseShape> */
     use SdkModel;
 
     use SdkResponse;

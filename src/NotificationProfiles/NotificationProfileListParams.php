@@ -15,11 +15,11 @@ use Telnyx\NotificationProfiles\NotificationProfileListParams\Page;
  *
  * @see Telnyx\NotificationProfiles->list
  *
- * @phpstan-type notification_profile_list_params = array{page?: Page}
+ * @phpstan-type NotificationProfileListParamsShape = array{page?: Page}
  */
 final class NotificationProfileListParams implements BaseModel
 {
-    /** @use SdkModel<notification_profile_list_params> */
+    /** @use SdkModel<NotificationProfileListParamsShape> */
     use SdkModel;
     use SdkParams;
 

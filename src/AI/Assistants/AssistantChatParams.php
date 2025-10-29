@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\AI\Assistants->chat
  *
- * @phpstan-type assistant_chat_params = array{
+ * @phpstan-type AssistantChatParamsShape = array{
  *   content: string, conversationID: string, name?: string
  * }
  */
 final class AssistantChatParams implements BaseModel
 {
-    /** @use SdkModel<assistant_chat_params> */
+    /** @use SdkModel<AssistantChatParamsShape> */
     use SdkModel;
     use SdkParams;
 

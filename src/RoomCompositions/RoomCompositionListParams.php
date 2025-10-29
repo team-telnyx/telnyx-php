@@ -16,11 +16,13 @@ use Telnyx\RoomCompositions\RoomCompositionListParams\Page;
  *
  * @see Telnyx\RoomCompositions->list
  *
- * @phpstan-type room_composition_list_params = array{filter?: Filter, page?: Page}
+ * @phpstan-type RoomCompositionListParamsShape = array{
+ *   filter?: Filter, page?: Page
+ * }
  */
 final class RoomCompositionListParams implements BaseModel
 {
-    /** @use SdkModel<room_composition_list_params> */
+    /** @use SdkModel<RoomCompositionListParamsShape> */
     use SdkModel;
     use SdkParams;
 

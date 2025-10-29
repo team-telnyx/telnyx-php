@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type usecase_get_cost_response = array{
+ * @phpstan-type UsecaseGetCostResponseShape = array{
  *   campaignUsecase: string,
  *   description: string,
  *   monthlyCost: string,
@@ -20,7 +20,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  */
 final class UsecaseGetCostResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<usecase_get_cost_response> */
+    /** @use SdkModel<UsecaseGetCostResponseShape> */
     use SdkModel;
 
     use SdkResponse;

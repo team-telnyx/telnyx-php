@@ -16,7 +16,7 @@ use Telnyx\Reports\CdrUsageReports\CdrUsageReportFetchSyncParams\ProductBreakdow
  *
  * @see Telnyx\Reports\CdrUsageReports->fetchSync
  *
- * @phpstan-type cdr_usage_report_fetch_sync_params = array{
+ * @phpstan-type CdrUsageReportFetchSyncParamsShape = array{
  *   aggregationType: AggregationType|value-of<AggregationType>,
  *   productBreakdown: ProductBreakdown|value-of<ProductBreakdown>,
  *   connections?: list<float>,
@@ -26,7 +26,7 @@ use Telnyx\Reports\CdrUsageReports\CdrUsageReportFetchSyncParams\ProductBreakdow
  */
 final class CdrUsageReportFetchSyncParams implements BaseModel
 {
-    /** @use SdkModel<cdr_usage_report_fetch_sync_params> */
+    /** @use SdkModel<CdrUsageReportFetchSyncParamsShape> */
     use SdkModel;
     use SdkParams;
 

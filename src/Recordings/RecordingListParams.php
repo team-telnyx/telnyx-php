@@ -16,11 +16,11 @@ use Telnyx\Recordings\RecordingListParams\Page;
  *
  * @see Telnyx\Recordings->list
  *
- * @phpstan-type recording_list_params = array{filter?: Filter, page?: Page}
+ * @phpstan-type RecordingListParamsShape = array{filter?: Filter, page?: Page}
  */
 final class RecordingListParams implements BaseModel
 {
-    /** @use SdkModel<recording_list_params> */
+    /** @use SdkModel<RecordingListParamsShape> */
     use SdkModel;
     use SdkParams;
 

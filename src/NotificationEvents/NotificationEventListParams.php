@@ -15,11 +15,11 @@ use Telnyx\NotificationEvents\NotificationEventListParams\Page;
  *
  * @see Telnyx\NotificationEvents->list
  *
- * @phpstan-type notification_event_list_params = array{page?: Page}
+ * @phpstan-type NotificationEventListParamsShape = array{page?: Page}
  */
 final class NotificationEventListParams implements BaseModel
 {
-    /** @use SdkModel<notification_event_list_params> */
+    /** @use SdkModel<NotificationEventListParamsShape> */
     use SdkModel;
     use SdkParams;
 

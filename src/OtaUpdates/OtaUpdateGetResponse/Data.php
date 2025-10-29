@@ -14,7 +14,7 @@ use Telnyx\OtaUpdates\OtaUpdateGetResponse\Data\Type;
 /**
  * This object represents an Over the Air (OTA) update request. It allows tracking the current status of a operation that apply settings in a particular SIM card. <br/><br/>.
  *
- * @phpstan-type data_alias = array{
+ * @phpstan-type DataShape = array{
  *   id?: string,
  *   createdAt?: string,
  *   recordType?: string,
@@ -27,7 +27,7 @@ use Telnyx\OtaUpdates\OtaUpdateGetResponse\Data\Type;
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**

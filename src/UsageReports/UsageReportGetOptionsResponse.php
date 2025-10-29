@@ -14,11 +14,11 @@ use Telnyx\UsageReports\UsageReportGetOptionsResponse\Data;
 /**
  * An object following one of the schemas published in https://developers.telnyx.com/docs/api/v2/detail-records.
  *
- * @phpstan-type usage_report_get_options_response = array{data?: list<Data>}
+ * @phpstan-type UsageReportGetOptionsResponseShape = array{data?: list<Data>}
  */
 final class UsageReportGetOptionsResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<usage_report_get_options_response> */
+    /** @use SdkModel<UsageReportGetOptionsResponseShape> */
     use SdkModel;
 
     use SdkResponse;

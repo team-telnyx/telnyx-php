@@ -17,7 +17,7 @@ use Telnyx\FaxApplications\FaxApplicationUpdateParams\Outbound;
  *
  * @see Telnyx\FaxApplications->update
  *
- * @phpstan-type fax_application_update_params = array{
+ * @phpstan-type FaxApplicationUpdateParamsShape = array{
  *   applicationName: string,
  *   webhookEventURL: string,
  *   active?: bool,
@@ -32,7 +32,7 @@ use Telnyx\FaxApplications\FaxApplicationUpdateParams\Outbound;
  */
 final class FaxApplicationUpdateParams implements BaseModel
 {
-    /** @use SdkModel<fax_application_update_params> */
+    /** @use SdkModel<FaxApplicationUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 

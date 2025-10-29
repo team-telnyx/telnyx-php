@@ -17,7 +17,7 @@ use Telnyx\Porting\Events\EventListResponse\Data\Payload\WebhookPortingOrderStat
 use Telnyx\Porting\Events\EventListResponse\Data\PayloadStatus;
 
 /**
- * @phpstan-type data_alias = array{
+ * @phpstan-type DataShape = array{
  *   id?: string,
  *   availableNotificationMethods?: list<value-of<AvailableNotificationMethod>>,
  *   createdAt?: \DateTimeInterface,
@@ -31,7 +31,7 @@ use Telnyx\Porting\Events\EventListResponse\Data\PayloadStatus;
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**

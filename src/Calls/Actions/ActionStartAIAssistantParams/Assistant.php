@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * AI Assistant configuration.
  *
- * @phpstan-type assistant_alias = array{
+ * @phpstan-type AssistantShape = array{
  *   id?: string, instructions?: string, openaiAPIKeyRef?: string
  * }
  */
 final class Assistant implements BaseModel
 {
-    /** @use SdkModel<assistant_alias> */
+    /** @use SdkModel<AssistantShape> */
     use SdkModel;
 
     /**

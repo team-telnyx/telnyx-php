@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type upload_new_response = array{success?: bool, ticketID?: string}
+ * @phpstan-type UploadNewResponseShape = array{success?: bool, ticketID?: string}
  */
 final class UploadNewResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<upload_new_response> */
+    /** @use SdkModel<UploadNewResponseShape> */
     use SdkModel;
 
     use SdkResponse;

@@ -15,13 +15,13 @@ use Telnyx\CustomerServiceRecords\CustomerServiceRecordCreateParams\AdditionalDa
  *
  * @see Telnyx\CustomerServiceRecords->create
  *
- * @phpstan-type customer_service_record_create_params = array{
+ * @phpstan-type CustomerServiceRecordCreateParamsShape = array{
  *   phoneNumber: string, additionalData?: AdditionalData, webhookURL?: string
  * }
  */
 final class CustomerServiceRecordCreateParams implements BaseModel
 {
-    /** @use SdkModel<customer_service_record_create_params> */
+    /** @use SdkModel<CustomerServiceRecordCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

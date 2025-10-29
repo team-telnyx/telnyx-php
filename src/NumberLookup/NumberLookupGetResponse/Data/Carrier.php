@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NumberLookup\NumberLookupGetResponse\Data\Carrier\Type;
 
 /**
- * @phpstan-type carrier_alias = array{
+ * @phpstan-type CarrierShape = array{
  *   errorCode?: string,
  *   mobileCountryCode?: string,
  *   mobileNetworkCode?: string,
@@ -21,7 +21,7 @@ use Telnyx\NumberLookup\NumberLookupGetResponse\Data\Carrier\Type;
  */
 final class Carrier implements BaseModel
 {
-    /** @use SdkModel<carrier_alias> */
+    /** @use SdkModel<CarrierShape> */
     use SdkModel;
 
     /**

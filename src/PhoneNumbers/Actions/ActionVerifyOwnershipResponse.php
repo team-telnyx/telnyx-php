@@ -12,11 +12,11 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PhoneNumbers\Actions\ActionVerifyOwnershipResponse\Data;
 
 /**
- * @phpstan-type action_verify_ownership_response = array{data?: Data}
+ * @phpstan-type ActionVerifyOwnershipResponseShape = array{data?: Data}
  */
 final class ActionVerifyOwnershipResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<action_verify_ownership_response> */
+    /** @use SdkModel<ActionVerifyOwnershipResponseShape> */
     use SdkModel;
 
     use SdkResponse;

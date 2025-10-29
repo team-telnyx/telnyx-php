@@ -14,11 +14,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\MessagingProfiles\AutorespConfigs->delete
  *
- * @phpstan-type autoresp_config_delete_params = array{profileID: string}
+ * @phpstan-type AutorespConfigDeleteParamsShape = array{profileID: string}
  */
 final class AutorespConfigDeleteParams implements BaseModel
 {
-    /** @use SdkModel<autoresp_config_delete_params> */
+    /** @use SdkModel<AutorespConfigDeleteParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type telephony_credential_get_response = array{
+ * @phpstan-type TelephonyCredentialGetResponseShape = array{
  *   data?: TelephonyCredential
  * }
  */
 final class TelephonyCredentialGetResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<telephony_credential_get_response> */
+    /** @use SdkModel<TelephonyCredentialGetResponseShape> */
     use SdkModel;
 
     use SdkResponse;

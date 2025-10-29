@@ -10,11 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\StreamingFailedWebhookEvent\Data;
 
 /**
- * @phpstan-type streaming_failed_webhook_event = array{data?: Data}
+ * @phpstan-type StreamingFailedWebhookEventShape = array{data?: Data}
  */
 final class StreamingFailedWebhookEvent implements BaseModel
 {
-    /** @use SdkModel<streaming_failed_webhook_event> */
+    /** @use SdkModel<StreamingFailedWebhookEventShape> */
     use SdkModel;
 
     #[Api(optional: true)]

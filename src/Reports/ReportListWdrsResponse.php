@@ -13,11 +13,13 @@ use Telnyx\Reports\ReportListWdrsResponse\Data;
 use Telnyx\Reports\ReportListWdrsResponse\Meta;
 
 /**
- * @phpstan-type report_list_wdrs_response = array{data?: list<Data>, meta?: Meta}
+ * @phpstan-type ReportListWdrsResponseShape = array{
+ *   data?: list<Data>, meta?: Meta
+ * }
  */
 final class ReportListWdrsResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<report_list_wdrs_response> */
+    /** @use SdkModel<ReportListWdrsResponseShape> */
     use SdkModel;
 
     use SdkResponse;

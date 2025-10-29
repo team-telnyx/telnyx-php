@@ -15,7 +15,7 @@ use Telnyx\ExternalConnections\Releases\ReleaseListParams\Filter\Status;
 /**
  * Filter parameter for releases (deepObject style). Supports filtering by status, civic_address_id, location_id, and phone_number with eq/contains operations.
  *
- * @phpstan-type filter_alias = array{
+ * @phpstan-type FilterShape = array{
  *   civicAddressID?: CivicAddressID,
  *   locationID?: LocationID,
  *   phoneNumber?: PhoneNumber,
@@ -24,7 +24,7 @@ use Telnyx\ExternalConnections\Releases\ReleaseListParams\Filter\Status;
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     #[Api('civic_address_id', optional: true)]

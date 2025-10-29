@@ -9,13 +9,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type total_alias = array{
+ * @phpstan-type TotalShape = array{
  *   bytesReceived?: int, bytesSent?: int, ops?: int, successfulOps?: int
  * }
  */
 final class Total implements BaseModel
 {
-    /** @use SdkModel<total_alias> */
+    /** @use SdkModel<TotalShape> */
     use SdkModel;
 
     /**

@@ -17,7 +17,7 @@ use Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Logo;
  *
  * @see Telnyx\Porting\LoaConfigurations->update
  *
- * @phpstan-type loa_configuration_update_params = array{
+ * @phpstan-type LoaConfigurationUpdateParamsShape = array{
  *   address: Address,
  *   companyName: string,
  *   contact: Contact,
@@ -27,7 +27,7 @@ use Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Logo;
  */
 final class LoaConfigurationUpdateParams implements BaseModel
 {
-    /** @use SdkModel<loa_configuration_update_params> */
+    /** @use SdkModel<LoaConfigurationUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 

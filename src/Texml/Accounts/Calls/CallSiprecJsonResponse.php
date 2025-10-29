@@ -13,7 +13,7 @@ use Telnyx\Texml\Accounts\Calls\CallSiprecJsonResponse\Status;
 use Telnyx\Texml\Accounts\Calls\CallSiprecJsonResponse\Track;
 
 /**
- * @phpstan-type call_siprec_json_response = array{
+ * @phpstan-type CallSiprecJsonResponseShape = array{
  *   accountSid?: string,
  *   callSid?: string,
  *   dateCreated?: string,
@@ -28,7 +28,7 @@ use Telnyx\Texml\Accounts\Calls\CallSiprecJsonResponse\Track;
  */
 final class CallSiprecJsonResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<call_siprec_json_response> */
+    /** @use SdkModel<CallSiprecJsonResponseShape> */
     use SdkModel;
 
     use SdkResponse;

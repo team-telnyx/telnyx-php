@@ -12,13 +12,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type notification_setting_list_response = array{
+ * @phpstan-type NotificationSettingListResponseShape = array{
  *   data?: list<NotificationSetting>, meta?: PaginationMeta
  * }
  */
 final class NotificationSettingListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<notification_setting_list_response> */
+    /** @use SdkModel<NotificationSettingListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

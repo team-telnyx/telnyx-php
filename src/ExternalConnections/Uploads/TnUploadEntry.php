@@ -12,7 +12,7 @@ use Telnyx\ExternalConnections\Uploads\TnUploadEntry\InternalStatus;
 use Telnyx\ExternalConnections\Uploads\TnUploadEntry\Status;
 
 /**
- * @phpstan-type tn_upload_entry = array{
+ * @phpstan-type TnUploadEntryShape = array{
  *   civicAddressID?: string,
  *   errorCode?: value-of<ErrorCode>,
  *   errorMessage?: string,
@@ -25,7 +25,7 @@ use Telnyx\ExternalConnections\Uploads\TnUploadEntry\Status;
  */
 final class TnUploadEntry implements BaseModel
 {
-    /** @use SdkModel<tn_upload_entry> */
+    /** @use SdkModel<TnUploadEntryShape> */
     use SdkModel;
 
     /**

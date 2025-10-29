@@ -16,13 +16,13 @@ use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\v90
 use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\v99;
 
 /**
- * @phpstan-type percentile_latency = array{
+ * @phpstan-type PercentileLatencyShape = array{
  *   p0?: v0, p100?: v100, p25?: v25, p50?: v50, p75?: v75, p90?: v90, p99?: v99
  * }
  */
 final class PercentileLatency implements BaseModel
 {
-    /** @use SdkModel<percentile_latency> */
+    /** @use SdkModel<PercentileLatencyShape> */
     use SdkModel;
 
     #[Api('0', optional: true)]

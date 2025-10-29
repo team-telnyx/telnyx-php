@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\MessagingHostedNumberOrders->checkEligibility
  *
- * @phpstan-type messaging_hosted_number_order_check_eligibility_params = array{
+ * @phpstan-type MessagingHostedNumberOrderCheckEligibilityParamsShape = array{
  *   phoneNumbers: list<string>
  * }
  */
 final class MessagingHostedNumberOrderCheckEligibilityParams implements BaseModel
 {
-    /** @use SdkModel<messaging_hosted_number_order_check_eligibility_params> */
+    /** @use SdkModel<MessagingHostedNumberOrderCheckEligibilityParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type voicemail_new_response = array{data?: VoicemailPrefResponse}
+ * @phpstan-type VoicemailNewResponseShape = array{data?: VoicemailPrefResponse}
  */
 final class VoicemailNewResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<voicemail_new_response> */
+    /** @use SdkModel<VoicemailNewResponseShape> */
     use SdkModel;
 
     use SdkResponse;

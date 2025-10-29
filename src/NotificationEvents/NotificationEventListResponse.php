@@ -13,13 +13,13 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\NotificationEvents\NotificationEventListResponse\Data;
 
 /**
- * @phpstan-type notification_event_list_response = array{
+ * @phpstan-type NotificationEventListResponseShape = array{
  *   data?: list<Data>, meta?: PaginationMeta
  * }
  */
 final class NotificationEventListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<notification_event_list_response> */
+    /** @use SdkModel<NotificationEventListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

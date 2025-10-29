@@ -16,13 +16,13 @@ use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointListParams\Page;
  *
  * @see Telnyx\DynamicEmergencyEndpoints->list
  *
- * @phpstan-type dynamic_emergency_endpoint_list_params = array{
+ * @phpstan-type DynamicEmergencyEndpointListParamsShape = array{
  *   filter?: Filter, page?: Page
  * }
  */
 final class DynamicEmergencyEndpointListParams implements BaseModel
 {
-    /** @use SdkModel<dynamic_emergency_endpoint_list_params> */
+    /** @use SdkModel<DynamicEmergencyEndpointListParamsShape> */
     use SdkModel;
     use SdkParams;
 

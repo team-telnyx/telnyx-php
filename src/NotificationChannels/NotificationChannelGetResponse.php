@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type notification_channel_get_response = array{
+ * @phpstan-type NotificationChannelGetResponseShape = array{
  *   data?: NotificationChannel
  * }
  */
 final class NotificationChannelGetResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<notification_channel_get_response> */
+    /** @use SdkModel<NotificationChannelGetResponseShape> */
     use SdkModel;
 
     use SdkResponse;

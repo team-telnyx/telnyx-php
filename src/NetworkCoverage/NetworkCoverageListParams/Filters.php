@@ -14,13 +14,13 @@ use Telnyx\NetworkCoverage\NetworkCoverageListParams\Filters\AvailableServices\C
 /**
  * Consolidated filters parameter (deepObject style). Originally: filters[available_services][contains].
  *
- * @phpstan-type filters_alias = array{
+ * @phpstan-type FiltersShape = array{
  *   availableServices?: Contains|value-of<AvailableService>
  * }
  */
 final class Filters implements BaseModel
 {
-    /** @use SdkModel<filters_alias> */
+    /** @use SdkModel<FiltersShape> */
     use SdkModel;
 
     /**

@@ -14,11 +14,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\PortingOrders\ActivationJobs->retrieve
  *
- * @phpstan-type activation_job_retrieve_params = array{id: string}
+ * @phpstan-type ActivationJobRetrieveParamsShape = array{id: string}
  */
 final class ActivationJobRetrieveParams implements BaseModel
 {
-    /** @use SdkModel<activation_job_retrieve_params> */
+    /** @use SdkModel<ActivationJobRetrieveParamsShape> */
     use SdkModel;
     use SdkParams;
 

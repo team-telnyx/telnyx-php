@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type action_change_bundle_status_response = array{
+ * @phpstan-type ActionChangeBundleStatusResponseShape = array{
  *   data?: PhoneNumberWithVoiceSettings
  * }
  */
 final class ActionChangeBundleStatusResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<action_change_bundle_status_response> */
+    /** @use SdkModel<ActionChangeBundleStatusResponseShape> */
     use SdkModel;
 
     use SdkResponse;

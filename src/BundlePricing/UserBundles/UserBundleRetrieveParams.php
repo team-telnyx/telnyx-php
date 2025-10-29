@@ -14,11 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\BundlePricing\UserBundles->retrieve
  *
- * @phpstan-type user_bundle_retrieve_params = array{authorizationBearer?: string}
+ * @phpstan-type UserBundleRetrieveParamsShape = array{
+ *   authorizationBearer?: string
+ * }
  */
 final class UserBundleRetrieveParams implements BaseModel
 {
-    /** @use SdkModel<user_bundle_retrieve_params> */
+    /** @use SdkModel<UserBundleRetrieveParamsShape> */
     use SdkModel;
     use SdkParams;
 

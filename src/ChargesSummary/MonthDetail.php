@@ -9,13 +9,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type month_detail = array{
+ * @phpstan-type MonthDetailShape = array{
  *   mrc: string, quantity: int, otc?: string|null
  * }
  */
 final class MonthDetail implements BaseModel
 {
-    /** @use SdkModel<month_detail> */
+    /** @use SdkModel<MonthDetailShape> */
     use SdkModel;
 
     /**

@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\ManagedAccounts\ManagedAccountBalance\RecordType;
 
 /**
- * @phpstan-type managed_account_balance = array{
+ * @phpstan-type ManagedAccountBalanceShape = array{
  *   availableCredit?: string,
  *   balance?: string,
  *   creditLimit?: string,
@@ -20,7 +20,7 @@ use Telnyx\ManagedAccounts\ManagedAccountBalance\RecordType;
  */
 final class ManagedAccountBalance implements BaseModel
 {
-    /** @use SdkModel<managed_account_balance> */
+    /** @use SdkModel<ManagedAccountBalanceShape> */
     use SdkModel;
 
     /**

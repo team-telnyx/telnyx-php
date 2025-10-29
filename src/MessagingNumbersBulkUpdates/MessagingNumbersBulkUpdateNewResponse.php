@@ -12,11 +12,11 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\MessagingNumbersBulkUpdates\MessagingNumbersBulkUpdateNewResponse\Data;
 
 /**
- * @phpstan-type messaging_numbers_bulk_update_new_response = array{data?: Data}
+ * @phpstan-type MessagingNumbersBulkUpdateNewResponseShape = array{data?: Data}
  */
 final class MessagingNumbersBulkUpdateNewResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<messaging_numbers_bulk_update_new_response> */
+    /** @use SdkModel<MessagingNumbersBulkUpdateNewResponseShape> */
     use SdkModel;
 
     use SdkResponse;

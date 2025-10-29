@@ -16,7 +16,7 @@ use Telnyx\PhoneNumbers\Voice\VoiceUpdateParams\UsagePaymentMethod;
  *
  * @see Telnyx\PhoneNumbers\Voice->update
  *
- * @phpstan-type voice_update_params = array{
+ * @phpstan-type VoiceUpdateParamsShape = array{
  *   callForwarding?: CallForwarding,
  *   callRecording?: CallRecording,
  *   callerIDNameEnabled?: bool,
@@ -30,7 +30,7 @@ use Telnyx\PhoneNumbers\Voice\VoiceUpdateParams\UsagePaymentMethod;
  */
 final class VoiceUpdateParams implements BaseModel
 {
-    /** @use SdkModel<voice_update_params> */
+    /** @use SdkModel<VoiceUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 

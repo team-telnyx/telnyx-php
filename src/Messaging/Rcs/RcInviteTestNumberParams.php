@@ -14,11 +14,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Messaging\Rcs->inviteTestNumber
  *
- * @phpstan-type rc_invite_test_number_params = array{id: string}
+ * @phpstan-type RcInviteTestNumberParamsShape = array{id: string}
  */
 final class RcInviteTestNumberParams implements BaseModel
 {
-    /** @use SdkModel<rc_invite_test_number_params> */
+    /** @use SdkModel<RcInviteTestNumberParamsShape> */
     use SdkModel;
     use SdkParams;
 

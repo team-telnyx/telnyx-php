@@ -13,13 +13,13 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 /**
  * A paginated response.
  *
- * @phpstan-type request_list_response = array{
+ * @phpstan-type RequestListResponseShape = array{
  *   records?: list<VerificationRequestStatus>, totalRecords?: int
  * }
  */
 final class RequestListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<request_list_response> */
+    /** @use SdkModel<RequestListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

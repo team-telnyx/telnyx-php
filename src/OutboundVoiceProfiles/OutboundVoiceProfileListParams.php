@@ -17,13 +17,13 @@ use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileListParams\Sort;
  *
  * @see Telnyx\OutboundVoiceProfiles->list
  *
- * @phpstan-type outbound_voice_profile_list_params = array{
+ * @phpstan-type OutboundVoiceProfileListParamsShape = array{
  *   filter?: Filter, page?: Page, sort?: Sort|value-of<Sort>
  * }
  */
 final class OutboundVoiceProfileListParams implements BaseModel
 {
-    /** @use SdkModel<outbound_voice_profile_list_params> */
+    /** @use SdkModel<OutboundVoiceProfileListParamsShape> */
     use SdkModel;
     use SdkParams;
 

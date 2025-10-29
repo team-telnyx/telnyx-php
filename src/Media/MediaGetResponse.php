@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type media_get_response = array{data?: MediaResource}
+ * @phpstan-type MediaGetResponseShape = array{data?: MediaResource}
  */
 final class MediaGetResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<media_get_response> */
+    /** @use SdkModel<MediaGetResponseShape> */
     use SdkModel;
 
     use SdkResponse;

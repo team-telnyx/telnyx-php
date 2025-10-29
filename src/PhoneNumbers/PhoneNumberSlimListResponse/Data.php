@@ -13,7 +13,7 @@ use Telnyx\PhoneNumbers\PhoneNumberSlimListResponse\Data\PhoneNumberType;
 use Telnyx\PhoneNumbers\PhoneNumberSlimListResponse\Data\Status;
 
 /**
- * @phpstan-type data_alias = array{
+ * @phpstan-type DataShape = array{
  *   id?: string,
  *   billingGroupID?: string,
  *   callForwardingEnabled?: bool,
@@ -39,7 +39,7 @@ use Telnyx\PhoneNumbers\PhoneNumberSlimListResponse\Data\Status;
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**

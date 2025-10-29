@@ -10,11 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\CallSiprecStartedWebhookEvent\Data;
 
 /**
- * @phpstan-type call_siprec_started_webhook_event = array{data?: Data}
+ * @phpstan-type CallSiprecStartedWebhookEventShape = array{data?: Data}
  */
 final class CallSiprecStartedWebhookEvent implements BaseModel
 {
-    /** @use SdkModel<call_siprec_started_webhook_event> */
+    /** @use SdkModel<CallSiprecStartedWebhookEventShape> */
     use SdkModel;
 
     #[Api(optional: true)]

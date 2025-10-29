@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type authentication_provider_get_response = array{
+ * @phpstan-type AuthenticationProviderGetResponseShape = array{
  *   data?: AuthenticationProvider
  * }
  */
 final class AuthenticationProviderGetResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<authentication_provider_get_response> */
+    /** @use SdkModel<AuthenticationProviderGetResponseShape> */
     use SdkModel;
 
     use SdkResponse;

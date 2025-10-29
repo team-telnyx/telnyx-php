@@ -9,11 +9,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type header_alias = array{name?: string, value?: string}
+ * @phpstan-type HeaderShape = array{name?: string, value?: string}
  */
 final class Header implements BaseModel
 {
-    /** @use SdkModel<header_alias> */
+    /** @use SdkModel<HeaderShape> */
     use SdkModel;
 
     #[Api(optional: true)]

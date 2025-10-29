@@ -12,11 +12,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type campaign_get_mno_metadata_response = array{_10999?: mno_10999}
+ * @phpstan-type CampaignGetMnoMetadataResponseShape = array{_10999?: mno_10999}
  */
 final class CampaignGetMnoMetadataResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<campaign_get_mno_metadata_response> */
+    /** @use SdkModel<CampaignGetMnoMetadataResponseShape> */
     use SdkModel;
 
     use SdkResponse;

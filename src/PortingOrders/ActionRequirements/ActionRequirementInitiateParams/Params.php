@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Required information for initiating the action requirement for AU ID verification.
  *
- * @phpstan-type params_alias = array{firstName: string, lastName: string}
+ * @phpstan-type ParamsShape = array{firstName: string, lastName: string}
  */
 final class Params implements BaseModel
 {
-    /** @use SdkModel<params_alias> */
+    /** @use SdkModel<ParamsShape> */
     use SdkModel;
 
     /**

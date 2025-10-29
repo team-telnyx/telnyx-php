@@ -12,11 +12,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type cluster_get_response = array{data: Data}
+ * @phpstan-type ClusterGetResponseShape = array{data: Data}
  */
 final class ClusterGetResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<cluster_get_response> */
+    /** @use SdkModel<ClusterGetResponseShape> */
     use SdkModel;
 
     use SdkResponse;

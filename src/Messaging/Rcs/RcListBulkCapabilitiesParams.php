@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Messaging\Rcs->listBulkCapabilities
  *
- * @phpstan-type rc_list_bulk_capabilities_params = array{
+ * @phpstan-type RcListBulkCapabilitiesParamsShape = array{
  *   agentID: string, phoneNumbers: list<string>
  * }
  */
 final class RcListBulkCapabilitiesParams implements BaseModel
 {
-    /** @use SdkModel<rc_list_bulk_capabilities_params> */
+    /** @use SdkModel<RcListBulkCapabilitiesParamsShape> */
     use SdkModel;
     use SdkParams;
 

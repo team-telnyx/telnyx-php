@@ -12,11 +12,11 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeVerifyResponse\Data;
 
 /**
- * @phpstan-type verification_code_verify_response = array{data?: list<Data>}
+ * @phpstan-type VerificationCodeVerifyResponseShape = array{data?: list<Data>}
  */
 final class VerificationCodeVerifyResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<verification_code_verify_response> */
+    /** @use SdkModel<VerificationCodeVerifyResponseShape> */
     use SdkModel;
 
     use SdkResponse;

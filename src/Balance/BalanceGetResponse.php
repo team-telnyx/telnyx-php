@@ -12,11 +12,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type balance_get_response = array{data?: Data}
+ * @phpstan-type BalanceGetResponseShape = array{data?: Data}
  */
 final class BalanceGetResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<balance_get_response> */
+    /** @use SdkModel<BalanceGetResponseShape> */
     use SdkModel;
 
     use SdkResponse;

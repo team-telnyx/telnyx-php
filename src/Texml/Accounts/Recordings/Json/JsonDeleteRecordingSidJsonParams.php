@@ -14,11 +14,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Texml\Accounts\Recordings\Json->deleteRecordingSidJson
  *
- * @phpstan-type json_delete_recording_sid_json_params = array{accountSid: string}
+ * @phpstan-type JsonDeleteRecordingSidJsonParamsShape = array{accountSid: string}
  */
 final class JsonDeleteRecordingSidJsonParams implements BaseModel
 {
-    /** @use SdkModel<json_delete_recording_sid_json_params> */
+    /** @use SdkModel<JsonDeleteRecordingSidJsonParamsShape> */
     use SdkModel;
     use SdkParams;
 

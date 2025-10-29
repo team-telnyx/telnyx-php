@@ -17,13 +17,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\CallControlApplications->list
  *
- * @phpstan-type call_control_application_list_params = array{
+ * @phpstan-type CallControlApplicationListParamsShape = array{
  *   filter?: Filter, page?: Page, sort?: Sort|value-of<Sort>
  * }
  */
 final class CallControlApplicationListParams implements BaseModel
 {
-    /** @use SdkModel<call_control_application_list_params> */
+    /** @use SdkModel<CallControlApplicationListParamsShape> */
     use SdkModel;
     use SdkParams;
 

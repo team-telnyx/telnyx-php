@@ -12,11 +12,11 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PortingOrders\Actions\ActionShareResponse\Data;
 
 /**
- * @phpstan-type action_share_response = array{data?: Data}
+ * @phpstan-type ActionShareResponseShape = array{data?: Data}
  */
 final class ActionShareResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<action_share_response> */
+    /** @use SdkModel<ActionShareResponseShape> */
     use SdkModel;
 
     use SdkResponse;

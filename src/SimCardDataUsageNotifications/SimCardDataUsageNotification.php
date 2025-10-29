@@ -12,7 +12,7 @@ use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotification\Threshold;
 /**
  * The SIM card individual data usage notification information.
  *
- * @phpstan-type sim_card_data_usage_notification = array{
+ * @phpstan-type SimCardDataUsageNotificationShape = array{
  *   id?: string,
  *   createdAt?: string,
  *   recordType?: string,
@@ -23,7 +23,7 @@ use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotification\Threshold;
  */
 final class SimCardDataUsageNotification implements BaseModel
 {
-    /** @use SdkModel<sim_card_data_usage_notification> */
+    /** @use SdkModel<SimCardDataUsageNotificationShape> */
     use SdkModel;
 
     /**

@@ -11,11 +11,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type sip_refer_tool = array{refer: Refer, type: value-of<Type>}
+ * @phpstan-type SipReferToolShape = array{refer: Refer, type: value-of<Type>}
  */
 final class SipReferTool implements BaseModel
 {
-    /** @use SdkModel<sip_refer_tool> */
+    /** @use SdkModel<SipReferToolShape> */
     use SdkModel;
 
     #[Api]

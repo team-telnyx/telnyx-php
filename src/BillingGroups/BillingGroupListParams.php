@@ -15,11 +15,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\BillingGroups->list
  *
- * @phpstan-type billing_group_list_params = array{page?: Page}
+ * @phpstan-type BillingGroupListParamsShape = array{page?: Page}
  */
 final class BillingGroupListParams implements BaseModel
 {
-    /** @use SdkModel<billing_group_list_params> */
+    /** @use SdkModel<BillingGroupListParamsShape> */
     use SdkModel;
     use SdkParams;
 

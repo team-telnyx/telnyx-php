@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\SimCardGroups\Actions->setWirelessBlocklist
  *
- * @phpstan-type action_set_wireless_blocklist_params = array{
+ * @phpstan-type ActionSetWirelessBlocklistParamsShape = array{
  *   wirelessBlocklistID: string
  * }
  */
 final class ActionSetWirelessBlocklistParams implements BaseModel
 {
-    /** @use SdkModel<action_set_wireless_blocklist_params> */
+    /** @use SdkModel<ActionSetWirelessBlocklistParamsShape> */
     use SdkModel;
     use SdkParams;
 

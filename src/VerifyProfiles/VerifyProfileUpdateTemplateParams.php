@@ -14,11 +14,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\VerifyProfiles->updateTemplate
  *
- * @phpstan-type verify_profile_update_template_params = array{text: string}
+ * @phpstan-type VerifyProfileUpdateTemplateParamsShape = array{text: string}
  */
 final class VerifyProfileUpdateTemplateParams implements BaseModel
 {
-    /** @use SdkModel<verify_profile_update_template_params> */
+    /** @use SdkModel<VerifyProfileUpdateTemplateParamsShape> */
     use SdkModel;
     use SdkParams;
 

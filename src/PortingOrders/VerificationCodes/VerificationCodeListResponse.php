@@ -13,13 +13,13 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListResponse\Data;
 
 /**
- * @phpstan-type verification_code_list_response = array{
+ * @phpstan-type VerificationCodeListResponseShape = array{
  *   data?: list<Data>, meta?: PaginationMeta
  * }
  */
 final class VerificationCodeListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<verification_code_list_response> */
+    /** @use SdkModel<VerificationCodeListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

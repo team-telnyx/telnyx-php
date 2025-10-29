@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Consolidated created_at parameter (deepObject style). Originally: created_at[gte], created_at[lte].
  *
- * @phpstan-type created_at = array{gte?: string, lte?: string}
+ * @phpstan-type CreatedAtShape = array{gte?: string, lte?: string}
  */
 final class CreatedAt implements BaseModel
 {
-    /** @use SdkModel<created_at> */
+    /** @use SdkModel<CreatedAtShape> */
     use SdkModel;
 
     #[Api(optional: true)]

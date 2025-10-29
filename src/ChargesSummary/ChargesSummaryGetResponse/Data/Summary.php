@@ -13,13 +13,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type summary_alias = array{
+ * @phpstan-type SummaryShape = array{
  *   adjustments: list<Adjustment>, lines: list<Comparative|Simple>
  * }
  */
 final class Summary implements BaseModel
 {
-    /** @use SdkModel<summary_alias> */
+    /** @use SdkModel<SummaryShape> */
     use SdkModel;
 
     /**

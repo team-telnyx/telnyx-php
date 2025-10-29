@@ -13,13 +13,13 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Networks\DefaultGateway\DefaultGatewayDeleteResponse\Data;
 
 /**
- * @phpstan-type default_gateway_delete_response = array{
+ * @phpstan-type DefaultGatewayDeleteResponseShape = array{
  *   data?: list<Data>, meta?: PaginationMeta
  * }
  */
 final class DefaultGatewayDeleteResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<default_gateway_delete_response> */
+    /** @use SdkModel<DefaultGatewayDeleteResponseShape> */
     use SdkModel;
 
     use SdkResponse;

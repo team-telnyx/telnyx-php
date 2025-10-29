@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type global_ip_assignment_get_response = array{
+ * @phpstan-type GlobalIPAssignmentGetResponseShape = array{
  *   data?: GlobalIPAssignment
  * }
  */
 final class GlobalIPAssignmentGetResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<global_ip_assignment_get_response> */
+    /** @use SdkModel<GlobalIPAssignmentGetResponseShape> */
     use SdkModel;
 
     use SdkResponse;

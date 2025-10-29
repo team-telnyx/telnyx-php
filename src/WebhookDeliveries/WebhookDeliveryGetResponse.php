@@ -12,11 +12,11 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\WebhookDeliveries\WebhookDeliveryGetResponse\Data;
 
 /**
- * @phpstan-type webhook_delivery_get_response = array{data?: Data}
+ * @phpstan-type WebhookDeliveryGetResponseShape = array{data?: Data}
  */
 final class WebhookDeliveryGetResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<webhook_delivery_get_response> */
+    /** @use SdkModel<WebhookDeliveryGetResponseShape> */
     use SdkModel;
 
     use SdkResponse;

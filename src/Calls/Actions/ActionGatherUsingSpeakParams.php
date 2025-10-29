@@ -25,7 +25,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Calls\Actions->gatherUsingSpeak
  *
- * @phpstan-type action_gather_using_speak_params = array{
+ * @phpstan-type ActionGatherUsingSpeakParamsShape = array{
  *   payload: string,
  *   voice: string,
  *   clientState?: string,
@@ -46,7 +46,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class ActionGatherUsingSpeakParams implements BaseModel
 {
-    /** @use SdkModel<action_gather_using_speak_params> */
+    /** @use SdkModel<ActionGatherUsingSpeakParamsShape> */
     use SdkModel;
     use SdkParams;
 

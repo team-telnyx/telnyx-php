@@ -16,13 +16,13 @@ use Telnyx\PortingPhoneNumbers\PortingPhoneNumberListParams\Page;
  *
  * @see Telnyx\PortingPhoneNumbers->list
  *
- * @phpstan-type porting_phone_number_list_params = array{
+ * @phpstan-type PortingPhoneNumberListParamsShape = array{
  *   filter?: Filter, page?: Page
  * }
  */
 final class PortingPhoneNumberListParams implements BaseModel
 {
-    /** @use SdkModel<porting_phone_number_list_params> */
+    /** @use SdkModel<PortingPhoneNumberListParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\AI\Conversations->list
  *
- * @phpstan-type conversation_list_params = array{
+ * @phpstan-type ConversationListParamsShape = array{
  *   id?: string,
  *   createdAt?: string,
  *   lastMessageAt?: string,
@@ -31,7 +31,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class ConversationListParams implements BaseModel
 {
-    /** @use SdkModel<conversation_list_params> */
+    /** @use SdkModel<ConversationListParamsShape> */
     use SdkModel;
     use SdkParams;
 

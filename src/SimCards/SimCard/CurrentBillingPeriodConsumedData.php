@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * The SIM card consumption so far in the current billing cycle.
  *
- * @phpstan-type current_billing_period_consumed_data = array{
+ * @phpstan-type CurrentBillingPeriodConsumedDataShape = array{
  *   amount?: string, unit?: string
  * }
  */
 final class CurrentBillingPeriodConsumedData implements BaseModel
 {
-    /** @use SdkModel<current_billing_period_consumed_data> */
+    /** @use SdkModel<CurrentBillingPeriodConsumedDataShape> */
     use SdkModel;
 
     #[Api(optional: true)]

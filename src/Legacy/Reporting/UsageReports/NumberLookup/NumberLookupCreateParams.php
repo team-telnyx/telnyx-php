@@ -15,7 +15,7 @@ use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupCreateParams\A
  *
  * @see Telnyx\Legacy\Reporting\UsageReports\NumberLookup->create
  *
- * @phpstan-type number_lookup_create_params = array{
+ * @phpstan-type NumberLookupCreateParamsShape = array{
  *   aggregationType?: AggregationType|value-of<AggregationType>,
  *   endDate?: \DateTimeInterface,
  *   managedAccounts?: list<string>,
@@ -24,7 +24,7 @@ use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupCreateParams\A
  */
 final class NumberLookupCreateParams implements BaseModel
 {
-    /** @use SdkModel<number_lookup_create_params> */
+    /** @use SdkModel<NumberLookupCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

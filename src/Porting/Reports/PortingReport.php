@@ -11,7 +11,7 @@ use Telnyx\Porting\Reports\PortingReport\ReportType;
 use Telnyx\Porting\Reports\PortingReport\Status;
 
 /**
- * @phpstan-type porting_report = array{
+ * @phpstan-type PortingReportShape = array{
  *   id?: string,
  *   createdAt?: \DateTimeInterface,
  *   documentID?: string,
@@ -24,7 +24,7 @@ use Telnyx\Porting\Reports\PortingReport\Status;
  */
 final class PortingReport implements BaseModel
 {
-    /** @use SdkModel<porting_report> */
+    /** @use SdkModel<PortingReportShape> */
     use SdkModel;
 
     /**

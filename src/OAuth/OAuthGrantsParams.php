@@ -14,11 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\OAuth->grants
  *
- * @phpstan-type oauth_grants_params = array{allowed: bool, consentToken: string}
+ * @phpstan-type OAuthGrantsParamsShape = array{
+ *   allowed: bool, consentToken: string
+ * }
  */
 final class OAuthGrantsParams implements BaseModel
 {
-    /** @use SdkModel<oauth_grants_params> */
+    /** @use SdkModel<OAuthGrantsParamsShape> */
     use SdkModel;
     use SdkParams;
 

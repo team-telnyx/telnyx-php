@@ -15,13 +15,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\BundlePricing\UserBundles->create
  *
- * @phpstan-type user_bundle_create_params = array{
+ * @phpstan-type UserBundleCreateParamsShape = array{
  *   idempotencyKey?: string, items?: list<Item>, authorizationBearer?: string
  * }
  */
 final class UserBundleCreateParams implements BaseModel
 {
-    /** @use SdkModel<user_bundle_create_params> */
+    /** @use SdkModel<UserBundleCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

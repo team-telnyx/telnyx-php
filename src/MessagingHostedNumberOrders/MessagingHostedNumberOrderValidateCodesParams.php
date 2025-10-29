@@ -15,13 +15,13 @@ use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderValidateCodesPa
  *
  * @see Telnyx\MessagingHostedNumberOrders->validateCodes
  *
- * @phpstan-type messaging_hosted_number_order_validate_codes_params = array{
+ * @phpstan-type MessagingHostedNumberOrderValidateCodesParamsShape = array{
  *   verificationCodes: list<VerificationCode>
  * }
  */
 final class MessagingHostedNumberOrderValidateCodesParams implements BaseModel
 {
-    /** @use SdkModel<messaging_hosted_number_order_validate_codes_params> */
+    /** @use SdkModel<MessagingHostedNumberOrderValidateCodesParamsShape> */
     use SdkModel;
     use SdkParams;
 

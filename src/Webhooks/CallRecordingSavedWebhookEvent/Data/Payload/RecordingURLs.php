@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Recording URLs in requested format. These URLs are valid for 10 minutes. After 10 minutes, you may retrieve recordings via API using Reports -> Call Recordings documentation, or via Mission Control under Reporting -> Recordings.
  *
- * @phpstan-type recording_urls = array{mp3?: string|null, wav?: string|null}
+ * @phpstan-type RecordingURLsShape = array{mp3?: string|null, wav?: string|null}
  */
 final class RecordingURLs implements BaseModel
 {
-    /** @use SdkModel<recording_urls> */
+    /** @use SdkModel<RecordingURLsShape> */
     use SdkModel;
 
     /**

@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Fqdns->update
  *
- * @phpstan-type fqdn_update_params = array{
+ * @phpstan-type FqdnUpdateParamsShape = array{
  *   connectionID?: string, dnsRecordType?: string, fqdn?: string, port?: int|null
  * }
  */
 final class FqdnUpdateParams implements BaseModel
 {
-    /** @use SdkModel<fqdn_update_params> */
+    /** @use SdkModel<FqdnUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 

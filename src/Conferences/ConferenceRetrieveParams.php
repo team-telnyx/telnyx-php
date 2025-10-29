@@ -15,13 +15,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Conferences->retrieve
  *
- * @phpstan-type conference_retrieve_params = array{
+ * @phpstan-type ConferenceRetrieveParamsShape = array{
  *   region?: Region|value-of<Region>
  * }
  */
 final class ConferenceRetrieveParams implements BaseModel
 {
-    /** @use SdkModel<conference_retrieve_params> */
+    /** @use SdkModel<ConferenceRetrieveParamsShape> */
     use SdkModel;
     use SdkParams;
 

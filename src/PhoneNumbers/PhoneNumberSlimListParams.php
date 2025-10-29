@@ -17,7 +17,7 @@ use Telnyx\PhoneNumbers\PhoneNumberSlimListParams\Sort;
  *
  * @see Telnyx\PhoneNumbers->slimList
  *
- * @phpstan-type phone_number_slim_list_params = array{
+ * @phpstan-type PhoneNumberSlimListParamsShape = array{
  *   filter?: Filter,
  *   includeConnection?: bool,
  *   includeTags?: bool,
@@ -27,7 +27,7 @@ use Telnyx\PhoneNumbers\PhoneNumberSlimListParams\Sort;
  */
 final class PhoneNumberSlimListParams implements BaseModel
 {
-    /** @use SdkModel<phone_number_slim_list_params> */
+    /** @use SdkModel<PhoneNumberSlimListParamsShape> */
     use SdkModel;
     use SdkParams;
 

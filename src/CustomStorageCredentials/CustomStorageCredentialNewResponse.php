@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\CustomStorageCredentials\CustomStorageCredentialNewResponse\RecordType;
 
 /**
- * @phpstan-type custom_storage_credential_new_response = array{
+ * @phpstan-type CustomStorageCredentialNewResponseShape = array{
  *   connectionID: string,
  *   data: CustomStorageConfiguration,
  *   recordType: value-of<RecordType>,
@@ -20,7 +20,7 @@ use Telnyx\CustomStorageCredentials\CustomStorageCredentialNewResponse\RecordTyp
  */
 final class CustomStorageCredentialNewResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<custom_storage_credential_new_response> */
+    /** @use SdkModel<CustomStorageCredentialNewResponseShape> */
     use SdkModel;
 
     use SdkResponse;

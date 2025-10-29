@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\MessagingTollfree\Verification\Requests->update
  *
- * @phpstan-type request_update_params = array{
+ * @phpstan-type RequestUpdateParamsShape = array{
  *   additionalInformation: string,
  *   businessAddr1: string,
  *   businessCity: string,
@@ -51,7 +51,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class RequestUpdateParams implements BaseModel
 {
-    /** @use SdkModel<request_update_params> */
+    /** @use SdkModel<RequestUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 

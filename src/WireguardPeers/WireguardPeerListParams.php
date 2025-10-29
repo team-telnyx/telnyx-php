@@ -16,11 +16,11 @@ use Telnyx\WireguardPeers\WireguardPeerListParams\Page;
  *
  * @see Telnyx\WireguardPeers->list
  *
- * @phpstan-type wireguard_peer_list_params = array{filter?: Filter, page?: Page}
+ * @phpstan-type WireguardPeerListParamsShape = array{filter?: Filter, page?: Page}
  */
 final class WireguardPeerListParams implements BaseModel
 {
-    /** @use SdkModel<wireguard_peer_list_params> */
+    /** @use SdkModel<WireguardPeerListParamsShape> */
     use SdkModel;
     use SdkParams;
 

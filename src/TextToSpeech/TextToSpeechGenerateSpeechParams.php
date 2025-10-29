@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\TextToSpeech->generateSpeech
  *
- * @phpstan-type text_to_speech_generate_speech_params = array{
+ * @phpstan-type TextToSpeechGenerateSpeechParamsShape = array{
  *   text: string, voice: string
  * }
  */
 final class TextToSpeechGenerateSpeechParams implements BaseModel
 {
-    /** @use SdkModel<text_to_speech_generate_speech_params> */
+    /** @use SdkModel<TextToSpeechGenerateSpeechParamsShape> */
     use SdkModel;
     use SdkParams;
 

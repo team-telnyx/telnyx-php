@@ -14,11 +14,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\CampaignBuilder\Brand->qualifyByUsecase
  *
- * @phpstan-type brand_qualify_by_usecase_params = array{brandID: string}
+ * @phpstan-type BrandQualifyByUsecaseParamsShape = array{brandID: string}
  */
 final class BrandQualifyByUsecaseParams implements BaseModel
 {
-    /** @use SdkModel<brand_qualify_by_usecase_params> */
+    /** @use SdkModel<BrandQualifyByUsecaseParamsShape> */
     use SdkModel;
     use SdkParams;
 

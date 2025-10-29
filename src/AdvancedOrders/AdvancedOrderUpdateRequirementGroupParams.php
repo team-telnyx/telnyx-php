@@ -16,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\AdvancedOrders->updateRequirementGroup
  *
- * @phpstan-type advanced_order_update_requirement_group_params = array{
+ * @phpstan-type AdvancedOrderUpdateRequirementGroupParamsShape = array{
  *   areaCode?: string,
  *   comments?: string,
  *   countryCode?: string,
@@ -29,7 +29,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class AdvancedOrderUpdateRequirementGroupParams implements BaseModel
 {
-    /** @use SdkModel<advanced_order_update_requirement_group_params> */
+    /** @use SdkModel<AdvancedOrderUpdateRequirementGroupParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -12,13 +12,13 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderCheckEligibilityResponse\PhoneNumber;
 
 /**
- * @phpstan-type messaging_hosted_number_order_check_eligibility_response = array{
+ * @phpstan-type MessagingHostedNumberOrderCheckEligibilityResponseShape = array{
  *   phoneNumbers?: list<PhoneNumber>
  * }
  */
 final class MessagingHostedNumberOrderCheckEligibilityResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<messaging_hosted_number_order_check_eligibility_response> */
+    /** @use SdkModel<MessagingHostedNumberOrderCheckEligibilityResponseShape> */
     use SdkModel;
 
     use SdkResponse;

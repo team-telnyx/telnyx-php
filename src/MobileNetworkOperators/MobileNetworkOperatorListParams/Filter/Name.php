@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Advanced name filtering operations.
  *
- * @phpstan-type name_alias = array{
+ * @phpstan-type NameShape = array{
  *   contains?: string, endsWith?: string, startsWith?: string
  * }
  */
 final class Name implements BaseModel
 {
-    /** @use SdkModel<name_alias> */
+    /** @use SdkModel<NameShape> */
     use SdkModel;
 
     /**

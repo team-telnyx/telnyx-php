@@ -17,7 +17,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\AI\Assistants->create
  *
- * @phpstan-type assistant_create_params = array{
+ * @phpstan-type AssistantCreateParamsShape = array{
  *   instructions: string,
  *   model: string,
  *   name: string,
@@ -38,7 +38,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class AssistantCreateParams implements BaseModel
 {
-    /** @use SdkModel<assistant_create_params> */
+    /** @use SdkModel<AssistantCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

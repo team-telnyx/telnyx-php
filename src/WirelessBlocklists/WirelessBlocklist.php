@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\WirelessBlocklists\WirelessBlocklist\Type;
 
 /**
- * @phpstan-type wireless_blocklist = array{
+ * @phpstan-type WirelessBlocklistShape = array{
  *   id?: string,
  *   createdAt?: string,
  *   name?: string,
@@ -22,7 +22,7 @@ use Telnyx\WirelessBlocklists\WirelessBlocklist\Type;
  */
 final class WirelessBlocklist implements BaseModel
 {
-    /** @use SdkModel<wireless_blocklist> */
+    /** @use SdkModel<WirelessBlocklistShape> */
     use SdkModel;
 
     /**

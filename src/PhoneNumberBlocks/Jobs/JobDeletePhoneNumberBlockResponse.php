@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type job_delete_phone_number_block_response = array{data?: Job}
+ * @phpstan-type JobDeletePhoneNumberBlockResponseShape = array{data?: Job}
  */
 final class JobDeletePhoneNumberBlockResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<job_delete_phone_number_block_response> */
+    /** @use SdkModel<JobDeletePhoneNumberBlockResponseShape> */
     use SdkModel;
 
     use SdkResponse;

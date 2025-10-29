@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * The CNAM listing settings for a phone number.
  *
- * @phpstan-type cnam_listing = array{
+ * @phpstan-type CnamListingShape = array{
  *   cnamListingDetails?: string, cnamListingEnabled?: bool
  * }
  */
 final class CnamListing implements BaseModel
 {
-    /** @use SdkModel<cnam_listing> */
+    /** @use SdkModel<CnamListingShape> */
     use SdkModel;
 
     /**

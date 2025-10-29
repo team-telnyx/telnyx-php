@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type action_switch_supervisor_role_response = array{
+ * @phpstan-type ActionSwitchSupervisorRoleResponseShape = array{
  *   data?: CallControlCommandResult
  * }
  */
 final class ActionSwitchSupervisorRoleResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<action_switch_supervisor_role_response> */
+    /** @use SdkModel<ActionSwitchSupervisorRoleResponseShape> */
     use SdkModel;
 
     use SdkResponse;

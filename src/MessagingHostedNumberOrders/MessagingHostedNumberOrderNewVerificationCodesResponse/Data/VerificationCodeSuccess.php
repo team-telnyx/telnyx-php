@@ -12,13 +12,13 @@ use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderNewVerification
 /**
  * Successful verification code creation response.
  *
- * @phpstan-type verification_code_success = array{
+ * @phpstan-type VerificationCodeSuccessShape = array{
  *   phoneNumber: string, type: value-of<Type>, verificationCodeID: string
  * }
  */
 final class VerificationCodeSuccess implements BaseModel
 {
-    /** @use SdkModel<verification_code_success> */
+    /** @use SdkModel<VerificationCodeSuccessShape> */
     use SdkModel;
 
     /**

@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Subresources details for a recording if available.
  *
- * @phpstan-type texml_recording_subresources_uris = array{
+ * @phpstan-type TexmlRecordingSubresourcesUrisShape = array{
  *   transcriptions?: string|null
  * }
  */
 final class TexmlRecordingSubresourcesUris implements BaseModel
 {
-    /** @use SdkModel<texml_recording_subresources_uris> */
+    /** @use SdkModel<TexmlRecordingSubresourcesUrisShape> */
     use SdkModel;
 
     #[Api(nullable: true, optional: true)]

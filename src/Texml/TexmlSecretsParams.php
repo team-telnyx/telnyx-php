@@ -14,11 +14,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Texml->secrets
  *
- * @phpstan-type texml_secrets_params = array{name: string, value: string}
+ * @phpstan-type TexmlSecretsParamsShape = array{name: string, value: string}
  */
 final class TexmlSecretsParams implements BaseModel
 {
-    /** @use SdkModel<texml_secrets_params> */
+    /** @use SdkModel<TexmlSecretsParamsShape> */
     use SdkModel;
     use SdkParams;
 

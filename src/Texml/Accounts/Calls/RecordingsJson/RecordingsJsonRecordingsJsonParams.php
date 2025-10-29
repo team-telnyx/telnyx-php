@@ -17,7 +17,7 @@ use Telnyx\Texml\Accounts\Calls\RecordingsJson\RecordingsJsonRecordingsJsonParam
  *
  * @see Telnyx\Texml\Accounts\Calls\RecordingsJson->recordingsJson
  *
- * @phpstan-type recordings_json_recordings_json_params = array{
+ * @phpstan-type RecordingsJsonRecordingsJsonParamsShape = array{
  *   accountSid: string,
  *   playBeep?: bool,
  *   recordingChannels?: RecordingChannels|value-of<RecordingChannels>,
@@ -30,7 +30,7 @@ use Telnyx\Texml\Accounts\Calls\RecordingsJson\RecordingsJsonRecordingsJsonParam
  */
 final class RecordingsJsonRecordingsJsonParams implements BaseModel
 {
-    /** @use SdkModel<recordings_json_recordings_json_params> */
+    /** @use SdkModel<RecordingsJsonRecordingsJsonParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -13,7 +13,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 /**
  * A verification request as it comes out of the database.
  *
- * @phpstan-type verification_request_egress = array{
+ * @phpstan-type VerificationRequestEgressShape = array{
  *   id: string,
  *   additionalInformation: string,
  *   businessAddr1: string,
@@ -53,7 +53,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  */
 final class VerificationRequestEgress implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<verification_request_egress> */
+    /** @use SdkModel<VerificationRequestEgressShape> */
     use SdkModel;
 
     use SdkResponse;

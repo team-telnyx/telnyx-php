@@ -12,13 +12,13 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\GlobalIPHealthCheckTypes\GlobalIPHealthCheckTypeListResponse\Data;
 
 /**
- * @phpstan-type global_ip_health_check_type_list_response = array{
+ * @phpstan-type GlobalIPHealthCheckTypeListResponseShape = array{
  *   data?: list<Data>
  * }
  */
 final class GlobalIPHealthCheckTypeListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<global_ip_health_check_type_list_response> */
+    /** @use SdkModel<GlobalIPHealthCheckTypeListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

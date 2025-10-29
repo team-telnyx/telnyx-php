@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type billing_group_delete_response = array{data?: BillingGroup}
+ * @phpstan-type BillingGroupDeleteResponseShape = array{data?: BillingGroup}
  */
 final class BillingGroupDeleteResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<billing_group_delete_response> */
+    /** @use SdkModel<BillingGroupDeleteResponseShape> */
     use SdkModel;
 
     use SdkResponse;

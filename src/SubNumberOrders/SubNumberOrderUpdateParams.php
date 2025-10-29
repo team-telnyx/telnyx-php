@@ -15,13 +15,13 @@ use Telnyx\NumberOrderPhoneNumbers\UpdateRegulatoryRequirement;
  *
  * @see Telnyx\SubNumberOrders->update
  *
- * @phpstan-type sub_number_order_update_params = array{
+ * @phpstan-type SubNumberOrderUpdateParamsShape = array{
  *   regulatoryRequirements?: list<UpdateRegulatoryRequirement>
  * }
  */
 final class SubNumberOrderUpdateParams implements BaseModel
 {
-    /** @use SdkModel<sub_number_order_update_params> */
+    /** @use SdkModel<SubNumberOrderUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 

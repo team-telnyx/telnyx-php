@@ -23,7 +23,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Calls\Actions->startForking
  *
- * @phpstan-type action_start_forking_params = array{
+ * @phpstan-type ActionStartForkingParamsShape = array{
  *   clientState?: string,
  *   commandID?: string,
  *   rx?: string,
@@ -33,7 +33,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class ActionStartForkingParams implements BaseModel
 {
-    /** @use SdkModel<action_start_forking_params> */
+    /** @use SdkModel<ActionStartForkingParamsShape> */
     use SdkModel;
     use SdkParams;
 

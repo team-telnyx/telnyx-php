@@ -14,11 +14,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Media->update
  *
- * @phpstan-type media_update_params = array{mediaURL?: string, ttlSecs?: int}
+ * @phpstan-type MediaUpdateParamsShape = array{mediaURL?: string, ttlSecs?: int}
  */
 final class MediaUpdateParams implements BaseModel
 {
-    /** @use SdkModel<media_update_params> */
+    /** @use SdkModel<MediaUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 

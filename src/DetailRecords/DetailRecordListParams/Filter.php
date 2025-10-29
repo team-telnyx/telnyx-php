@@ -13,13 +13,13 @@ use Telnyx\DetailRecords\DetailRecordListParams\Filter\RecordType;
 /**
  * Filter records on a given record attribute and value. <br/>Example: filter[status]=delivered. <br/>Required: filter[record_type] must be specified.
  *
- * @phpstan-type filter_alias = array{
+ * @phpstan-type FilterShape = array{
  *   recordType: value-of<RecordType>, dateRange?: value-of<DateRange>
  * }
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**

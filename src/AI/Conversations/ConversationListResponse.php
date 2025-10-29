@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type conversation_list_response = array{data: list<Conversation>}
+ * @phpstan-type ConversationListResponseShape = array{data: list<Conversation>}
  */
 final class ConversationListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<conversation_list_response> */
+    /** @use SdkModel<ConversationListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

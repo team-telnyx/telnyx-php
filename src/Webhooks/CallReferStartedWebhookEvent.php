@@ -10,11 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\CallReferStartedWebhookEvent\Data;
 
 /**
- * @phpstan-type call_refer_started_webhook_event = array{data?: Data}
+ * @phpstan-type CallReferStartedWebhookEventShape = array{data?: Data}
  */
 final class CallReferStartedWebhookEvent implements BaseModel
 {
-    /** @use SdkModel<call_refer_started_webhook_event> */
+    /** @use SdkModel<CallReferStartedWebhookEventShape> */
     use SdkModel;
 
     #[Api(optional: true)]

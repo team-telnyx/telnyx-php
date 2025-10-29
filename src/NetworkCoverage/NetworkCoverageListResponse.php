@@ -13,13 +13,13 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\NetworkCoverage\NetworkCoverageListResponse\Data;
 
 /**
- * @phpstan-type network_coverage_list_response = array{
+ * @phpstan-type NetworkCoverageListResponseShape = array{
  *   data?: list<Data>, meta?: PaginationMeta
  * }
  */
 final class NetworkCoverageListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<network_coverage_list_response> */
+    /** @use SdkModel<NetworkCoverageListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

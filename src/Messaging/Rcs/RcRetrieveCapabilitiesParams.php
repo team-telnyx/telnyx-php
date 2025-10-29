@@ -14,11 +14,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Messaging\Rcs->retrieveCapabilities
  *
- * @phpstan-type rc_retrieve_capabilities_params = array{agentID: string}
+ * @phpstan-type RcRetrieveCapabilitiesParamsShape = array{agentID: string}
  */
 final class RcRetrieveCapabilitiesParams implements BaseModel
 {
-    /** @use SdkModel<rc_retrieve_capabilities_params> */
+    /** @use SdkModel<RcRetrieveCapabilitiesParamsShape> */
     use SdkModel;
     use SdkParams;
 

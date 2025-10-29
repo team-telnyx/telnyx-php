@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\VerifiedNumbers\Actions->submitVerificationCode
  *
- * @phpstan-type action_submit_verification_code_params = array{
+ * @phpstan-type ActionSubmitVerificationCodeParamsShape = array{
  *   verificationCode: string
  * }
  */
 final class ActionSubmitVerificationCodeParams implements BaseModel
 {
-    /** @use SdkModel<action_submit_verification_code_params> */
+    /** @use SdkModel<ActionSubmitVerificationCodeParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -12,13 +12,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type action_list_response = array{
+ * @phpstan-type ActionListResponseShape = array{
  *   data?: list<SimCardAction>, meta?: PaginationMeta
  * }
  */
 final class ActionListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<action_list_response> */
+    /** @use SdkModel<ActionListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

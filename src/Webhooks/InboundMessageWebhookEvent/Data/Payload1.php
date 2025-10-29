@@ -19,7 +19,7 @@ use Telnyx\Webhooks\InboundMessageWebhookEvent\Data\Payload\To;
 use Telnyx\Webhooks\InboundMessageWebhookEvent\Data\Payload\Type;
 
 /**
- * @phpstan-type payload_alias = array{
+ * @phpstan-type PayloadShape = array{
  *   id?: string,
  *   cc?: list<Cc>,
  *   completedAt?: \DateTimeInterface|null,
@@ -49,7 +49,7 @@ use Telnyx\Webhooks\InboundMessageWebhookEvent\Data\Payload\Type;
  */
 final class Payload implements BaseModel
 {
-    /** @use SdkModel<payload_alias> */
+    /** @use SdkModel<PayloadShape> */
     use SdkModel;
 
     /**

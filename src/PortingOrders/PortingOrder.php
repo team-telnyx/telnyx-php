@@ -12,7 +12,7 @@ use Telnyx\PortingOrders\PortingOrder\PhoneNumberType;
 use Telnyx\PortingOrderStatus;
 
 /**
- * @phpstan-type porting_order = array{
+ * @phpstan-type PortingOrderShape = array{
  *   id?: string,
  *   activationSettings?: PortingOrderActivationSettings,
  *   additionalSteps?: list<value-of<AdditionalStep>>,
@@ -42,7 +42,7 @@ use Telnyx\PortingOrderStatus;
  */
 final class PortingOrder implements BaseModel
 {
-    /** @use SdkModel<porting_order> */
+    /** @use SdkModel<PortingOrderShape> */
     use SdkModel;
 
     /**

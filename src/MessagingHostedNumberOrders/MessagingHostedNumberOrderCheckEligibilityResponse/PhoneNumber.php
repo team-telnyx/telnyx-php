@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderCheckEligibilityResponse\PhoneNumber\EligibleStatus;
 
 /**
- * @phpstan-type phone_number = array{
+ * @phpstan-type PhoneNumberShape = array{
  *   detail?: string,
  *   eligible?: bool,
  *   eligibleStatus?: value-of<EligibleStatus>,
@@ -19,7 +19,7 @@ use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderCheckEligibilit
  */
 final class PhoneNumber implements BaseModel
 {
-    /** @use SdkModel<phone_number> */
+    /** @use SdkModel<PhoneNumberShape> */
     use SdkModel;
 
     /**

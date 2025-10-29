@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * An object representing the address information from when the order was submitted.
  *
- * @phpstan-type order_address = array{
+ * @phpstan-type OrderAddressShape = array{
  *   id?: string,
  *   administrativeArea?: string,
  *   businessName?: string,
@@ -26,7 +26,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class OrderAddress implements BaseModel
 {
-    /** @use SdkModel<order_address> */
+    /** @use SdkModel<OrderAddressShape> */
     use SdkModel;
 
     /**

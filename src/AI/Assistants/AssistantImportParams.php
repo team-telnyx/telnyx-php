@@ -15,13 +15,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\AI\Assistants->import
  *
- * @phpstan-type assistant_import_params = array{
+ * @phpstan-type AssistantImportParamsShape = array{
  *   apiKeyRef: string, provider: Provider|value-of<Provider>
  * }
  */
 final class AssistantImportParams implements BaseModel
 {
-    /** @use SdkModel<assistant_import_params> */
+    /** @use SdkModel<AssistantImportParamsShape> */
     use SdkModel;
     use SdkParams;
 

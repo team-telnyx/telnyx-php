@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * The webhook payload for the portout.new_comment event.
  *
- * @phpstan-type webhook_portout_new_comment_payload = array{
+ * @phpstan-type WebhookPortoutNewCommentPayloadShape = array{
  *   id?: string, comment?: string, portoutID?: string, userID?: string
  * }
  */
 final class WebhookPortoutNewCommentPayload implements BaseModel
 {
-    /** @use SdkModel<webhook_portout_new_comment_payload> */
+    /** @use SdkModel<WebhookPortoutNewCommentPayloadShape> */
     use SdkModel;
 
     /**

@@ -12,13 +12,13 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PhoneNumberWithMessagingSettings;
 
 /**
- * @phpstan-type messaging_update_response = array{
+ * @phpstan-type MessagingUpdateResponseShape = array{
  *   data?: PhoneNumberWithMessagingSettings
  * }
  */
 final class MessagingUpdateResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<messaging_update_response> */
+    /** @use SdkModel<MessagingUpdateResponseShape> */
     use SdkModel;
 
     use SdkResponse;

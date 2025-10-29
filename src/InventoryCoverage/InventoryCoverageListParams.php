@@ -15,11 +15,11 @@ use Telnyx\InventoryCoverage\InventoryCoverageListParams\Filter;
  *
  * @see Telnyx\InventoryCoverage->list
  *
- * @phpstan-type inventory_coverage_list_params = array{filter?: Filter}
+ * @phpstan-type InventoryCoverageListParamsShape = array{filter?: Filter}
  */
 final class InventoryCoverageListParams implements BaseModel
 {
-    /** @use SdkModel<inventory_coverage_list_params> */
+    /** @use SdkModel<InventoryCoverageListParamsShape> */
     use SdkModel;
     use SdkParams;
 

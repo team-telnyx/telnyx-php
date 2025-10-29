@@ -20,7 +20,7 @@ use Telnyx\TexmlApplications\TexmlApplicationCreateParams\VoiceMethod;
  *
  * @see Telnyx\TexmlApplications->create
  *
- * @phpstan-type texml_application_create_params = array{
+ * @phpstan-type TexmlApplicationCreateParamsShape = array{
  *   friendlyName: string,
  *   voiceURL: string,
  *   active?: bool,
@@ -39,7 +39,7 @@ use Telnyx\TexmlApplications\TexmlApplicationCreateParams\VoiceMethod;
  */
 final class TexmlApplicationCreateParams implements BaseModel
 {
-    /** @use SdkModel<texml_application_create_params> */
+    /** @use SdkModel<TexmlApplicationCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

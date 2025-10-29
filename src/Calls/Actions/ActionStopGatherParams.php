@@ -18,13 +18,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Calls\Actions->stopGather
  *
- * @phpstan-type action_stop_gather_params = array{
+ * @phpstan-type ActionStopGatherParamsShape = array{
  *   clientState?: string, commandID?: string
  * }
  */
 final class ActionStopGatherParams implements BaseModel
 {
-    /** @use SdkModel<action_stop_gather_params> */
+    /** @use SdkModel<ActionStopGatherParamsShape> */
     use SdkModel;
     use SdkParams;
 

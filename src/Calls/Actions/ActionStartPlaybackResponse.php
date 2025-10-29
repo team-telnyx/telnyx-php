@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type action_start_playback_response = array{
+ * @phpstan-type ActionStartPlaybackResponseShape = array{
  *   data?: CallControlCommandResult
  * }
  */
 final class ActionStartPlaybackResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<action_start_playback_response> */
+    /** @use SdkModel<ActionStartPlaybackResponseShape> */
     use SdkModel;
 
     use SdkResponse;

@@ -14,11 +14,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Wireless->retrieveRegions
  *
- * @phpstan-type wireless_retrieve_regions_params = array{product: string}
+ * @phpstan-type WirelessRetrieveRegionsParamsShape = array{product: string}
  */
 final class WirelessRetrieveRegionsParams implements BaseModel
 {
-    /** @use SdkModel<wireless_retrieve_regions_params> */
+    /** @use SdkModel<WirelessRetrieveRegionsParamsShape> */
     use SdkModel;
     use SdkParams;
 

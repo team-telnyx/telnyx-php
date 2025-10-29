@@ -17,13 +17,13 @@ use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentListParams\Sort;
  *
  * @see Telnyx\PortingOrders\AdditionalDocuments->list
  *
- * @phpstan-type additional_document_list_params = array{
+ * @phpstan-type AdditionalDocumentListParamsShape = array{
  *   filter?: Filter, page?: Page, sort?: Sort
  * }
  */
 final class AdditionalDocumentListParams implements BaseModel
 {
-    /** @use SdkModel<additional_document_list_params> */
+    /** @use SdkModel<AdditionalDocumentListParamsShape> */
     use SdkModel;
     use SdkParams;
 

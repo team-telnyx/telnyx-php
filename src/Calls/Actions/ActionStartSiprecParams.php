@@ -22,7 +22,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Calls\Actions->startSiprec
  *
- * @phpstan-type action_start_siprec_params = array{
+ * @phpstan-type ActionStartSiprecParamsShape = array{
  *   clientState?: string,
  *   connectorName?: string,
  *   includeMetadataCustomHeaders?: bool,
@@ -34,7 +34,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class ActionStartSiprecParams implements BaseModel
 {
-    /** @use SdkModel<action_start_siprec_params> */
+    /** @use SdkModel<ActionStartSiprecParamsShape> */
     use SdkModel;
     use SdkParams;
 

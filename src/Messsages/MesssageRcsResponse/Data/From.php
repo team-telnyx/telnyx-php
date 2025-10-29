@@ -9,13 +9,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type from_alias = array{
+ * @phpstan-type FromShape = array{
  *   agentID?: string, agentName?: string, carrier?: string
  * }
  */
 final class From implements BaseModel
 {
-    /** @use SdkModel<from_alias> */
+    /** @use SdkModel<FromShape> */
     use SdkModel;
 
     /**

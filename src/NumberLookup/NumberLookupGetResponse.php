@@ -12,11 +12,11 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\NumberLookup\NumberLookupGetResponse\Data;
 
 /**
- * @phpstan-type number_lookup_get_response = array{data?: Data}
+ * @phpstan-type NumberLookupGetResponseShape = array{data?: Data}
  */
 final class NumberLookupGetResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<number_lookup_get_response> */
+    /** @use SdkModel<NumberLookupGetResponseShape> */
     use SdkModel;
 
     use SdkResponse;

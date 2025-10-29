@@ -11,13 +11,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type chat_completion_tool_param = array{
+ * @phpstan-type ChatCompletionToolParamShape = array{
  *   function1: Function1, type: value-of<Type>
  * }
  */
 final class ChatCompletionToolParam implements BaseModel
 {
-    /** @use SdkModel<chat_completion_tool_param> */
+    /** @use SdkModel<ChatCompletionToolParamShape> */
     use SdkModel;
 
     #[Api]

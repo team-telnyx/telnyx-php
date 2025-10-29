@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type address_delete_response = array{data?: Address}
+ * @phpstan-type AddressDeleteResponseShape = array{data?: Address}
  */
 final class AddressDeleteResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<address_delete_response> */
+    /** @use SdkModel<AddressDeleteResponseShape> */
     use SdkModel;
 
     use SdkResponse;

@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Texml\Accounts->retrieveTranscriptionsJson
  *
- * @phpstan-type account_retrieve_transcriptions_json_params = array{
+ * @phpstan-type AccountRetrieveTranscriptionsJsonParamsShape = array{
  *   pageSize?: int, pageToken?: string
  * }
  */
 final class AccountRetrieveTranscriptionsJsonParams implements BaseModel
 {
-    /** @use SdkModel<account_retrieve_transcriptions_json_params> */
+    /** @use SdkModel<AccountRetrieveTranscriptionsJsonParamsShape> */
     use SdkModel;
     use SdkParams;
 

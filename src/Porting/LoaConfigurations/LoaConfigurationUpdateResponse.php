@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type loa_configuration_update_response = array{
+ * @phpstan-type LoaConfigurationUpdateResponseShape = array{
  *   data?: PortingLoaConfiguration
  * }
  */
 final class LoaConfigurationUpdateResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<loa_configuration_update_response> */
+    /** @use SdkModel<LoaConfigurationUpdateResponseShape> */
     use SdkModel;
 
     use SdkResponse;

@@ -9,11 +9,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type lat_long = array{latitude: float, longitude: float}
+ * @phpstan-type LatLongShape = array{latitude: float, longitude: float}
  */
 final class LatLong implements BaseModel
 {
-    /** @use SdkModel<lat_long> */
+    /** @use SdkModel<LatLongShape> */
     use SdkModel;
 
     /**

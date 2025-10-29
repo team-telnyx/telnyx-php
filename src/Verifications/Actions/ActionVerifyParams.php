@@ -15,13 +15,13 @@ use Telnyx\Verifications\Actions\ActionVerifyParams\Status;
  *
  * @see Telnyx\Verifications\Actions->verify
  *
- * @phpstan-type action_verify_params = array{
+ * @phpstan-type ActionVerifyParamsShape = array{
  *   code?: string, status?: Status|value-of<Status>
  * }
  */
 final class ActionVerifyParams implements BaseModel
 {
-    /** @use SdkModel<action_verify_params> */
+    /** @use SdkModel<ActionVerifyParamsShape> */
     use SdkModel;
     use SdkParams;
 

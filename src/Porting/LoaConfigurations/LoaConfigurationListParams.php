@@ -15,11 +15,11 @@ use Telnyx\Porting\LoaConfigurations\LoaConfigurationListParams\Page;
  *
  * @see Telnyx\Porting\LoaConfigurations->list
  *
- * @phpstan-type loa_configuration_list_params = array{page?: Page}
+ * @phpstan-type LoaConfigurationListParamsShape = array{page?: Page}
  */
 final class LoaConfigurationListParams implements BaseModel
 {
-    /** @use SdkModel<loa_configuration_list_params> */
+    /** @use SdkModel<LoaConfigurationListParamsShape> */
     use SdkModel;
     use SdkParams;
 

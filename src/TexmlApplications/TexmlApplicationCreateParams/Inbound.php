@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\TexmlApplications\TexmlApplicationCreateParams\Inbound\SipSubdomainReceiveSettings;
 
 /**
- * @phpstan-type inbound_alias = array{
+ * @phpstan-type InboundShape = array{
  *   channelLimit?: int,
  *   shakenStirEnabled?: bool,
  *   sipSubdomain?: string,
@@ -19,7 +19,7 @@ use Telnyx\TexmlApplications\TexmlApplicationCreateParams\Inbound\SipSubdomainRe
  */
 final class Inbound implements BaseModel
 {
-    /** @use SdkModel<inbound_alias> */
+    /** @use SdkModel<InboundShape> */
     use SdkModel;
 
     /**

@@ -12,13 +12,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type insight_list_response = array{
+ * @phpstan-type InsightListResponseShape = array{
  *   data: list<InsightTemplate>, meta: Meta
  * }
  */
 final class InsightListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<insight_list_response> */
+    /** @use SdkModel<InsightListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

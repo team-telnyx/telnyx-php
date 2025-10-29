@@ -12,7 +12,7 @@ use Telnyx\DetailRecords\DetailRecordListResponse\Data\MessageDetailRecord\Messa
 use Telnyx\DetailRecords\DetailRecordListResponse\Data\MessageDetailRecord\Status;
 
 /**
- * @phpstan-type message_detail_record = array{
+ * @phpstan-type MessageDetailRecordShape = array{
  *   recordType: string,
  *   carrier?: string,
  *   carrierFee?: string,
@@ -48,7 +48,7 @@ use Telnyx\DetailRecords\DetailRecordListResponse\Data\MessageDetailRecord\Statu
  */
 final class MessageDetailRecord implements BaseModel
 {
-    /** @use SdkModel<message_detail_record> */
+    /** @use SdkModel<MessageDetailRecordShape> */
     use SdkModel;
 
     /**

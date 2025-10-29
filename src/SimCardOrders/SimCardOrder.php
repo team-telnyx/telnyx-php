@@ -12,7 +12,7 @@ use Telnyx\SimCardOrders\SimCardOrder\OrderAddress;
 use Telnyx\SimCardOrders\SimCardOrder\Status;
 
 /**
- * @phpstan-type sim_card_order = array{
+ * @phpstan-type SimCardOrderShape = array{
  *   id?: string,
  *   cost?: Cost,
  *   createdAt?: string,
@@ -26,7 +26,7 @@ use Telnyx\SimCardOrders\SimCardOrder\Status;
  */
 final class SimCardOrder implements BaseModel
 {
-    /** @use SdkModel<sim_card_order> */
+    /** @use SdkModel<SimCardOrderShape> */
     use SdkModel;
 
     /**

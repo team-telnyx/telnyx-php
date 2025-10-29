@@ -11,7 +11,7 @@ use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddress\CountryCode;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddress\Status;
 
 /**
- * @phpstan-type dynamic_emergency_address = array{
+ * @phpstan-type DynamicEmergencyAddressShape = array{
  *   administrativeArea: string,
  *   countryCode: value-of<CountryCode>,
  *   houseNumber: string,
@@ -33,7 +33,7 @@ use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddress\Status;
  */
 final class DynamicEmergencyAddress implements BaseModel
 {
-    /** @use SdkModel<dynamic_emergency_address> */
+    /** @use SdkModel<DynamicEmergencyAddressShape> */
     use SdkModel;
 
     #[Api('administrative_area')]

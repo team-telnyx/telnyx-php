@@ -12,7 +12,7 @@ use Telnyx\Recordings\RecordingListParams\Filter\CreatedAt;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[conference_id], filter[created_at][gte], filter[created_at][lte], filter[call_leg_id], filter[call_session_id], filter[from], filter[to], filter[connection_id], filter[sip_call_id].
  *
- * @phpstan-type filter_alias = array{
+ * @phpstan-type FilterShape = array{
  *   callLegID?: string,
  *   callSessionID?: string,
  *   conferenceID?: string,
@@ -25,7 +25,7 @@ use Telnyx\Recordings\RecordingListParams\Filter\CreatedAt;
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**

@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type texml_application_get_response = array{data?: TexmlApplication}
+ * @phpstan-type TexmlApplicationGetResponseShape = array{data?: TexmlApplication}
  */
 final class TexmlApplicationGetResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<texml_application_get_response> */
+    /** @use SdkModel<TexmlApplicationGetResponseShape> */
     use SdkModel;
 
     use SdkResponse;

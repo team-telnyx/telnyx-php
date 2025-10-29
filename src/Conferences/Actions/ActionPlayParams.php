@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Conferences\Actions->play
  *
- * @phpstan-type action_play_params = array{
+ * @phpstan-type ActionPlayParamsShape = array{
  *   audioURL?: string,
  *   callControlIDs?: list<string>,
  *   loop?: string|int,
@@ -25,7 +25,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class ActionPlayParams implements BaseModel
 {
-    /** @use SdkModel<action_play_params> */
+    /** @use SdkModel<ActionPlayParamsShape> */
     use SdkModel;
     use SdkParams;
 

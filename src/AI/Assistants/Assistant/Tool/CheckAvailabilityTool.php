@@ -11,13 +11,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type check_availability_tool = array{
+ * @phpstan-type CheckAvailabilityToolShape = array{
  *   checkAvailability: CheckAvailability, type: value-of<Type>
  * }
  */
 final class CheckAvailabilityTool implements BaseModel
 {
-    /** @use SdkModel<check_availability_tool> */
+    /** @use SdkModel<CheckAvailabilityToolShape> */
     use SdkModel;
 
     #[Api('check_availability')]

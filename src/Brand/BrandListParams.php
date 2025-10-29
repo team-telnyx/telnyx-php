@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Brand->list
  *
- * @phpstan-type brand_list_params = array{
+ * @phpstan-type BrandListParamsShape = array{
  *   brandID?: string,
  *   country?: string,
  *   displayName?: string,
@@ -29,7 +29,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class BrandListParams implements BaseModel
 {
-    /** @use SdkModel<brand_list_params> */
+    /** @use SdkModel<BrandListParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type document_upload_json_response = array{data?: DocServiceDocument}
+ * @phpstan-type DocumentUploadJsonResponseShape = array{data?: DocServiceDocument}
  */
 final class DocumentUploadJsonResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<document_upload_json_response> */
+    /** @use SdkModel<DocumentUploadJsonResponseShape> */
     use SdkModel;
 
     use SdkResponse;

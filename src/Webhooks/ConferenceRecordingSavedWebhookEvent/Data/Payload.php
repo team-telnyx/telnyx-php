@@ -13,7 +13,7 @@ use Telnyx\Webhooks\ConferenceRecordingSavedWebhookEvent\Data\Payload\PublicReco
 use Telnyx\Webhooks\ConferenceRecordingSavedWebhookEvent\Data\Payload\RecordingURLs;
 
 /**
- * @phpstan-type payload_alias = array{
+ * @phpstan-type PayloadShape = array{
  *   callControlID?: string,
  *   callSessionID?: string,
  *   channels?: value-of<Channels>,
@@ -30,7 +30,7 @@ use Telnyx\Webhooks\ConferenceRecordingSavedWebhookEvent\Data\Payload\RecordingU
  */
 final class Payload implements BaseModel
 {
-    /** @use SdkModel<payload_alias> */
+    /** @use SdkModel<PayloadShape> */
     use SdkModel;
 
     /**

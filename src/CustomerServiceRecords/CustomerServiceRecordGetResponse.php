@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type customer_service_record_get_response = array{
+ * @phpstan-type CustomerServiceRecordGetResponseShape = array{
  *   data?: CustomerServiceRecord
  * }
  */
 final class CustomerServiceRecordGetResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<customer_service_record_get_response> */
+    /** @use SdkModel<CustomerServiceRecordGetResponseShape> */
     use SdkModel;
 
     use SdkResponse;

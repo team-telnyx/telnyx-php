@@ -11,7 +11,7 @@ use Telnyx\Storage\Buckets\SslCertificate\SslCertificate\IssuedBy;
 use Telnyx\Storage\Buckets\SslCertificate\SslCertificate\IssuedTo;
 
 /**
- * @phpstan-type ssl_certificate = array{
+ * @phpstan-type SslCertificateShape = array{
  *   id?: string,
  *   createdAt?: \DateTimeInterface,
  *   issuedBy?: IssuedBy,
@@ -22,7 +22,7 @@ use Telnyx\Storage\Buckets\SslCertificate\SslCertificate\IssuedTo;
  */
 final class SslCertificate implements BaseModel
 {
-    /** @use SdkModel<ssl_certificate> */
+    /** @use SdkModel<SslCertificateShape> */
     use SdkModel;
 
     /**

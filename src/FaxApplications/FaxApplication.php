@@ -12,7 +12,7 @@ use Telnyx\FaxApplications\FaxApplication\Inbound;
 use Telnyx\FaxApplications\FaxApplication\Outbound;
 
 /**
- * @phpstan-type fax_application = array{
+ * @phpstan-type FaxApplicationShape = array{
  *   id?: string,
  *   active?: bool,
  *   anchorsiteOverride?: value-of<AnchorsiteOverride>,
@@ -30,7 +30,7 @@ use Telnyx\FaxApplications\FaxApplication\Outbound;
  */
 final class FaxApplication implements BaseModel
 {
-    /** @use SdkModel<fax_application> */
+    /** @use SdkModel<FaxApplicationShape> */
     use SdkModel;
 
     /**

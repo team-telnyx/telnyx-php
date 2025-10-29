@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Texml\Accounts\Calls\RecordingsJson->retrieveRecordingsJson
  *
- * @phpstan-type recordings_json_retrieve_recordings_json_params = array{
+ * @phpstan-type RecordingsJsonRetrieveRecordingsJsonParamsShape = array{
  *   accountSid: string
  * }
  */
 final class RecordingsJsonRetrieveRecordingsJsonParams implements BaseModel
 {
-    /** @use SdkModel<recordings_json_retrieve_recordings_json_params> */
+    /** @use SdkModel<RecordingsJsonRetrieveRecordingsJsonParamsShape> */
     use SdkModel;
     use SdkParams;
 

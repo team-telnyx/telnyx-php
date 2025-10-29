@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type conversation_alias = array{
+ * @phpstan-type ConversationShape = array{
  *   id: string,
  *   createdAt: \DateTimeInterface,
  *   lastMessageAt: \DateTimeInterface,
@@ -21,7 +21,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  */
 final class Conversation implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<conversation_alias> */
+    /** @use SdkModel<ConversationShape> */
     use SdkModel;
 
     use SdkResponse;

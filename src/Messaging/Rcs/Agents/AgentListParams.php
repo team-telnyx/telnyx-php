@@ -15,11 +15,11 @@ use Telnyx\Messaging\Rcs\Agents\AgentListParams\Page;
  *
  * @see Telnyx\Messaging\Rcs\Agents->list
  *
- * @phpstan-type agent_list_params = array{page?: Page}
+ * @phpstan-type AgentListParamsShape = array{page?: Page}
  */
 final class AgentListParams implements BaseModel
 {
-    /** @use SdkModel<agent_list_params> */
+    /** @use SdkModel<AgentListParamsShape> */
     use SdkModel;
     use SdkParams;
 

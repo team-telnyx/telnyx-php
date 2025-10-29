@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Networks\InterfaceStatus;
 
 /**
- * @phpstan-type global_ip_assignment = array{
+ * @phpstan-type GlobalIPAssignmentShape = array{
  *   id?: string,
  *   createdAt?: string,
  *   recordType?: string,
@@ -25,7 +25,7 @@ use Telnyx\Networks\InterfaceStatus;
  */
 final class GlobalIPAssignment implements BaseModel
 {
-    /** @use SdkModel<global_ip_assignment> */
+    /** @use SdkModel<GlobalIPAssignmentShape> */
     use SdkModel;
 
     /**

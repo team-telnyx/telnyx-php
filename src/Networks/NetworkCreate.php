@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type network_create = array{
+ * @phpstan-type NetworkCreateShape = array{
  *   id?: string,
  *   createdAt?: string,
  *   recordType?: string,
@@ -19,7 +19,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class NetworkCreate implements BaseModel
 {
-    /** @use SdkModel<network_create> */
+    /** @use SdkModel<NetworkCreateShape> */
     use SdkModel;
 
     /**

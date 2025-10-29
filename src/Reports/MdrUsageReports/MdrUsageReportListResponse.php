@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type mdr_usage_report_list_response = array{
+ * @phpstan-type MdrUsageReportListResponseShape = array{
  *   data?: list<MdrUsageReport>, meta?: PaginationMetaReporting
  * }
  */
 final class MdrUsageReportListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<mdr_usage_report_list_response> */
+    /** @use SdkModel<MdrUsageReportListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

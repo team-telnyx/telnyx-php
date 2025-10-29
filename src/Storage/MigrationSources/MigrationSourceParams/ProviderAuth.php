@@ -9,13 +9,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type provider_auth = array{
+ * @phpstan-type ProviderAuthShape = array{
  *   accessKey?: string, secretAccessKey?: string
  * }
  */
 final class ProviderAuth implements BaseModel
 {
-    /** @use SdkModel<provider_auth> */
+    /** @use SdkModel<ProviderAuthShape> */
     use SdkModel;
 
     /**

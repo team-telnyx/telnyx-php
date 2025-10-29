@@ -15,7 +15,7 @@ use Telnyx\PortingOrders\PortingOrderListParams\Filter\PhoneNumbers;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[customer_reference], filter[customer_group_reference], filter[parent_support_key], filter[phone_numbers.country_code], filter[phone_numbers.carrier_name], filter[misc.type], filter[end_user.admin.entity_name], filter[end_user.admin.auth_person_name], filter[activation_settings.fast_port_eligible], filter[activation_settings.foc_datetime_requested][gt], filter[activation_settings.foc_datetime_requested][lt], filter[phone_numbers.phone_number][contains].
  *
- * @phpstan-type filter_alias = array{
+ * @phpstan-type FilterShape = array{
  *   activationSettings?: ActivationSettings,
  *   customerGroupReference?: string,
  *   customerReference?: string,
@@ -27,7 +27,7 @@ use Telnyx\PortingOrders\PortingOrderListParams\Filter\PhoneNumbers;
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     #[Api('activation_settings', optional: true)]

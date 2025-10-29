@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\RoomCompositions->create
  *
- * @phpstan-type room_composition_create_params = array{
+ * @phpstan-type RoomCompositionCreateParamsShape = array{
  *   format?: string|null,
  *   resolution?: string|null,
  *   sessionID?: string|null,
@@ -26,7 +26,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class RoomCompositionCreateParams implements BaseModel
 {
-    /** @use SdkModel<room_composition_create_params> */
+    /** @use SdkModel<RoomCompositionCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

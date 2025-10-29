@@ -12,11 +12,11 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectUpdateResponse\Data;
 
 /**
- * @phpstan-type virtual_cross_connect_update_response = array{data?: Data}
+ * @phpstan-type VirtualCrossConnectUpdateResponseShape = array{data?: Data}
  */
 final class VirtualCrossConnectUpdateResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<virtual_cross_connect_update_response> */
+    /** @use SdkModel<VirtualCrossConnectUpdateResponseShape> */
     use SdkModel;
 
     use SdkResponse;

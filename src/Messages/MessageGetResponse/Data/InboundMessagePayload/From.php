@@ -11,7 +11,7 @@ use Telnyx\Messages\MessageGetResponse\Data\InboundMessagePayload\From\LineType;
 use Telnyx\Messages\MessageGetResponse\Data\InboundMessagePayload\From\Status;
 
 /**
- * @phpstan-type from_alias = array{
+ * @phpstan-type FromShape = array{
  *   carrier?: string,
  *   lineType?: value-of<LineType>,
  *   phoneNumber?: string,
@@ -20,7 +20,7 @@ use Telnyx\Messages\MessageGetResponse\Data\InboundMessagePayload\From\Status;
  */
 final class From implements BaseModel
 {
-    /** @use SdkModel<from_alias> */
+    /** @use SdkModel<FromShape> */
     use SdkModel;
 
     /**

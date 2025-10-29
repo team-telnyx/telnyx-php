@@ -10,11 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\PortingOrderType;
 
 /**
- * @phpstan-type misc_alias = array{type?: value-of<PortingOrderType>}
+ * @phpstan-type MiscShape = array{type?: value-of<PortingOrderType>}
  */
 final class Misc implements BaseModel
 {
-    /** @use SdkModel<misc_alias> */
+    /** @use SdkModel<MiscShape> */
     use SdkModel;
 
     /**

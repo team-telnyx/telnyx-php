@@ -17,13 +17,13 @@ use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Sort;
  *
  * @see Telnyx\PortingOrders\PhoneNumberBlocks->list
  *
- * @phpstan-type phone_number_block_list_params = array{
+ * @phpstan-type PhoneNumberBlockListParamsShape = array{
  *   filter?: Filter, page?: Page, sort?: Sort
  * }
  */
 final class PhoneNumberBlockListParams implements BaseModel
 {
-    /** @use SdkModel<phone_number_block_list_params> */
+    /** @use SdkModel<PhoneNumberBlockListParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -15,11 +15,11 @@ use Telnyx\RegulatoryRequirements\RegulatoryRequirementRetrieveParams\Filter;
  *
  * @see Telnyx\RegulatoryRequirements->retrieve
  *
- * @phpstan-type regulatory_requirement_retrieve_params = array{filter?: Filter}
+ * @phpstan-type RegulatoryRequirementRetrieveParamsShape = array{filter?: Filter}
  */
 final class RegulatoryRequirementRetrieveParams implements BaseModel
 {
-    /** @use SdkModel<regulatory_requirement_retrieve_params> */
+    /** @use SdkModel<RegulatoryRequirementRetrieveParamsShape> */
     use SdkModel;
     use SdkParams;
 

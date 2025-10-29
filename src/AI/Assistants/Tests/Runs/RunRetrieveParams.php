@@ -14,11 +14,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\AI\Assistants\Tests\Runs->retrieve
  *
- * @phpstan-type run_retrieve_params = array{testID: string}
+ * @phpstan-type RunRetrieveParamsShape = array{testID: string}
  */
 final class RunRetrieveParams implements BaseModel
 {
-    /** @use SdkModel<run_retrieve_params> */
+    /** @use SdkModel<RunRetrieveParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type address_alias = array{
+ * @phpstan-type AddressShape = array{
  *   id?: string,
  *   addressBook?: bool,
  *   administrativeArea?: string,
@@ -33,7 +33,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class Address implements BaseModel
 {
-    /** @use SdkModel<address_alias> */
+    /** @use SdkModel<AddressShape> */
     use SdkModel;
 
     /**

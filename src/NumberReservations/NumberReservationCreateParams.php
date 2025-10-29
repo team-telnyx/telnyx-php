@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\NumberReservations->create
  *
- * @phpstan-type number_reservation_create_params = array{
+ * @phpstan-type NumberReservationCreateParamsShape = array{
  *   customerReference?: string, phoneNumbers?: list<ReservedPhoneNumber>
  * }
  */
 final class NumberReservationCreateParams implements BaseModel
 {
-    /** @use SdkModel<number_reservation_create_params> */
+    /** @use SdkModel<NumberReservationCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

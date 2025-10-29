@@ -12,7 +12,7 @@ use Telnyx\PortingOrders\PortingOrderMessaging\MessagingPortStatus;
 /**
  * Information about messaging porting process.
  *
- * @phpstan-type porting_order_messaging = array{
+ * @phpstan-type PortingOrderMessagingShape = array{
  *   enableMessaging?: bool,
  *   messagingCapable?: bool,
  *   messagingPortCompleted?: bool,
@@ -21,7 +21,7 @@ use Telnyx\PortingOrders\PortingOrderMessaging\MessagingPortStatus;
  */
 final class PortingOrderMessaging implements BaseModel
 {
-    /** @use SdkModel<porting_order_messaging> */
+    /** @use SdkModel<PortingOrderMessagingShape> */
     use SdkModel;
 
     /**

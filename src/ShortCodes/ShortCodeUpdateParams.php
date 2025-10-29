@@ -14,11 +14,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\ShortCodes->update
  *
- * @phpstan-type short_code_update_params = array{messagingProfileID: string}
+ * @phpstan-type ShortCodeUpdateParamsShape = array{messagingProfileID: string}
  */
 final class ShortCodeUpdateParams implements BaseModel
 {
-    /** @use SdkModel<short_code_update_params> */
+    /** @use SdkModel<ShortCodeUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 

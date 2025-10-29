@@ -12,11 +12,11 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\CountryCoverage\CountryCoverageGetResponse\Data;
 
 /**
- * @phpstan-type country_coverage_get_response = array{data?: list<Data>}
+ * @phpstan-type CountryCoverageGetResponseShape = array{data?: list<Data>}
  */
 final class CountryCoverageGetResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<country_coverage_get_response> */
+    /** @use SdkModel<CountryCoverageGetResponseShape> */
     use SdkModel;
 
     use SdkResponse;

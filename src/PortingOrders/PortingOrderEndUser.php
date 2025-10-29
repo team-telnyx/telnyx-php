@@ -9,13 +9,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type porting_order_end_user = array{
+ * @phpstan-type PortingOrderEndUserShape = array{
  *   admin?: PortingOrderEndUserAdmin, location?: PortingOrderEndUserLocation
  * }
  */
 final class PortingOrderEndUser implements BaseModel
 {
-    /** @use SdkModel<porting_order_end_user> */
+    /** @use SdkModel<PortingOrderEndUserShape> */
     use SdkModel;
 
     #[Api(optional: true)]

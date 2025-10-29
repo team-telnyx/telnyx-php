@@ -10,11 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\CallHangupWebhookEvent\Data;
 
 /**
- * @phpstan-type call_hangup_webhook_event = array{data?: Data}
+ * @phpstan-type CallHangupWebhookEventShape = array{data?: Data}
  */
 final class CallHangupWebhookEvent implements BaseModel
 {
-    /** @use SdkModel<call_hangup_webhook_event> */
+    /** @use SdkModel<CallHangupWebhookEventShape> */
     use SdkModel;
 
     #[Api(optional: true)]

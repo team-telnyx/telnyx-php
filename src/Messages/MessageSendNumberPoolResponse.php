@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type message_send_number_pool_response = array{
+ * @phpstan-type MessageSendNumberPoolResponseShape = array{
  *   data?: OutboundMessagePayload
  * }
  */
 final class MessageSendNumberPoolResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<message_send_number_pool_response> */
+    /** @use SdkModel<MessageSendNumberPoolResponseShape> */
     use SdkModel;
 
     use SdkResponse;

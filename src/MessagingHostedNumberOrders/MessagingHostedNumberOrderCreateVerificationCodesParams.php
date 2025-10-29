@@ -15,7 +15,7 @@ use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderCreateVerificat
  *
  * @see Telnyx\MessagingHostedNumberOrders->createVerificationCodes
  *
- * @phpstan-type messaging_hosted_number_order_create_verification_codes_params = array{
+ * @phpstan-type MessagingHostedNumberOrderCreateVerificationCodesParamsShape = array{
  *   phoneNumbers: list<string>,
  *   verificationMethod: VerificationMethod|value-of<VerificationMethod>,
  * }
@@ -23,7 +23,7 @@ use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderCreateVerificat
 final class MessagingHostedNumberOrderCreateVerificationCodesParams implements BaseModel
 {
     /**
-     * @use SdkModel<messaging_hosted_number_order_create_verification_codes_params>
+     * @use SdkModel<MessagingHostedNumberOrderCreateVerificationCodesParamsShape>
      */
     use SdkModel;
     use SdkParams;

@@ -12,7 +12,7 @@ use Telnyx\OutboundVoiceProfiles\OutboundCallRecording\CallRecordingFormat;
 use Telnyx\OutboundVoiceProfiles\OutboundCallRecording\CallRecordingType;
 
 /**
- * @phpstan-type outbound_call_recording = array{
+ * @phpstan-type OutboundCallRecordingShape = array{
  *   callRecordingCallerPhoneNumbers?: list<string>,
  *   callRecordingChannels?: value-of<CallRecordingChannels>,
  *   callRecordingFormat?: value-of<CallRecordingFormat>,
@@ -21,7 +21,7 @@ use Telnyx\OutboundVoiceProfiles\OutboundCallRecording\CallRecordingType;
  */
 final class OutboundCallRecording implements BaseModel
 {
-    /** @use SdkModel<outbound_call_recording> */
+    /** @use SdkModel<OutboundCallRecordingShape> */
     use SdkModel;
 
     /**

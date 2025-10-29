@@ -12,7 +12,7 @@ use Telnyx\NotificationChannels\NotificationChannel\ChannelTypeID;
 /**
  * A Notification Channel.
  *
- * @phpstan-type notification_channel = array{
+ * @phpstan-type NotificationChannelShape = array{
  *   id?: string,
  *   channelDestination?: string,
  *   channelTypeID?: value-of<ChannelTypeID>,
@@ -23,7 +23,7 @@ use Telnyx\NotificationChannels\NotificationChannel\ChannelTypeID;
  */
 final class NotificationChannel implements BaseModel
 {
-    /** @use SdkModel<notification_channel> */
+    /** @use SdkModel<NotificationChannelShape> */
     use SdkModel;
 
     /**

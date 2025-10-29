@@ -14,13 +14,13 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  * Aligns with the OpenAI API:
  * https://platform.openai.com/docs/api-reference/assistants/deleteAssistant
  *
- * @phpstan-type assistant_delete_response = array{
+ * @phpstan-type AssistantDeleteResponseShape = array{
  *   id: string, deleted: bool, object1: string
  * }
  */
 final class AssistantDeleteResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<assistant_delete_response> */
+    /** @use SdkModel<AssistantDeleteResponseShape> */
     use SdkModel;
 
     use SdkResponse;

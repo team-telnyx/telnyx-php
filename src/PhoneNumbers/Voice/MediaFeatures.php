@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * The media features settings for a phone number.
  *
- * @phpstan-type media_features = array{
+ * @phpstan-type MediaFeaturesShape = array{
  *   acceptAnyRtpPacketsEnabled?: bool,
  *   rtpAutoAdjustEnabled?: bool,
  *   t38FaxGatewayEnabled?: bool,
@@ -19,7 +19,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class MediaFeatures implements BaseModel
 {
-    /** @use SdkModel<media_features> */
+    /** @use SdkModel<MediaFeaturesShape> */
     use SdkModel;
 
     /**

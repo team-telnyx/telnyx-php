@@ -10,13 +10,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Networks\InterfaceStatus;
 
 /**
- * @phpstan-type interface1_alias = array{
+ * @phpstan-type Interface1Shape = array{
  *   name?: string, networkID?: string, status?: value-of<InterfaceStatus>
  * }
  */
 final class Interface1 implements BaseModel
 {
-    /** @use SdkModel<interface1_alias> */
+    /** @use SdkModel<Interface1Shape> */
     use SdkModel;
 
     /**

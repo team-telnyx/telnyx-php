@@ -9,13 +9,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type metadata_alias = array{
+ * @phpstan-type MetadataShape = array{
  *   pageNumber?: float, pageSize?: float, totalPages?: float, totalResults?: float
  * }
  */
 final class Metadata implements BaseModel
 {
-    /** @use SdkModel<metadata_alias> */
+    /** @use SdkModel<MetadataShape> */
     use SdkModel;
 
     /**

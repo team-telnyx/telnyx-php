@@ -14,11 +14,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\MessagingHostedNumberOrders\Actions->uploadFile
  *
- * @phpstan-type action_upload_file_params = array{bill?: string, loa?: string}
+ * @phpstan-type ActionUploadFileParamsShape = array{bill?: string, loa?: string}
  */
 final class ActionUploadFileParams implements BaseModel
 {
-    /** @use SdkModel<action_upload_file_params> */
+    /** @use SdkModel<ActionUploadFileParamsShape> */
     use SdkModel;
     use SdkParams;
 

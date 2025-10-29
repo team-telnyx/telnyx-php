@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Messsages\RcsCardContent\Media;
 
 /**
- * @phpstan-type rcs_card_content = array{
+ * @phpstan-type RcsCardContentShape = array{
  *   description?: string,
  *   media?: Media,
  *   suggestions?: list<RcsSuggestion>,
@@ -19,7 +19,7 @@ use Telnyx\Messsages\RcsCardContent\Media;
  */
 final class RcsCardContent implements BaseModel
 {
-    /** @use SdkModel<rcs_card_content> */
+    /** @use SdkModel<RcsCardContentShape> */
     use SdkModel;
 
     /**

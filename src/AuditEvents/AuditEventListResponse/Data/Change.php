@@ -13,7 +13,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Details of the changes made to a resource.
  *
- * @phpstan-type change_alias = array{
+ * @phpstan-type ChangeShape = array{
  *   field?: string,
  *   from?: string|float|bool|null|list<mixed>|array<string, mixed>,
  *   to?: string|float|bool|null|list<mixed>|array<string, mixed>,
@@ -21,7 +21,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class Change implements BaseModel
 {
-    /** @use SdkModel<change_alias> */
+    /** @use SdkModel<ChangeShape> */
     use SdkModel;
 
     /**

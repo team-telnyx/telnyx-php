@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Opens the user's default dialer app with the agent-specified phone number filled in.
  *
- * @phpstan-type dial_action = array{phoneNumber: string}
+ * @phpstan-type DialActionShape = array{phoneNumber: string}
  */
 final class DialAction implements BaseModel
 {
-    /** @use SdkModel<dial_action> */
+    /** @use SdkModel<DialActionShape> */
     use SdkModel;
 
     /**

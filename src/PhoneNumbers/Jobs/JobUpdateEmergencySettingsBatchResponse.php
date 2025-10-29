@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type job_update_emergency_settings_batch_response = array{
+ * @phpstan-type JobUpdateEmergencySettingsBatchResponseShape = array{
  *   data?: PhoneNumbersJob
  * }
  */
 final class JobUpdateEmergencySettingsBatchResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<job_update_emergency_settings_batch_response> */
+    /** @use SdkModel<JobUpdateEmergencySettingsBatchResponseShape> */
     use SdkModel;
 
     use SdkResponse;

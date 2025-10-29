@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Brand->create
  *
- * @phpstan-type brand_create_params = array{
+ * @phpstan-type BrandCreateParamsShape = array{
  *   country: string,
  *   displayName: string,
  *   email: string,
@@ -43,7 +43,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class BrandCreateParams implements BaseModel
 {
-    /** @use SdkModel<brand_create_params> */
+    /** @use SdkModel<BrandCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

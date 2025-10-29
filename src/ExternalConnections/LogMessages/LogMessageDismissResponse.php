@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type log_message_dismiss_response = array{success?: bool}
+ * @phpstan-type LogMessageDismissResponseShape = array{success?: bool}
  */
 final class LogMessageDismissResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<log_message_dismiss_response> */
+    /** @use SdkModel<LogMessageDismissResponseShape> */
     use SdkModel;
 
     use SdkResponse;

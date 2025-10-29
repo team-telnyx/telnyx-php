@@ -12,11 +12,11 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\ManagedAccounts\ManagedAccount;
 
 /**
- * @phpstan-type action_disable_response = array{data?: ManagedAccount}
+ * @phpstan-type ActionDisableResponseShape = array{data?: ManagedAccount}
  */
 final class ActionDisableResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<action_disable_response> */
+    /** @use SdkModel<ActionDisableResponseShape> */
     use SdkModel;
 
     use SdkResponse;

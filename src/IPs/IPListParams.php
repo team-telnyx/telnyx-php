@@ -16,11 +16,11 @@ use Telnyx\IPs\IPListParams\Page;
  *
  * @see Telnyx\IPs->list
  *
- * @phpstan-type ip_list_params = array{filter?: Filter, page?: Page}
+ * @phpstan-type IPListParamsShape = array{filter?: Filter, page?: Page}
  */
 final class IPListParams implements BaseModel
 {
-    /** @use SdkModel<ip_list_params> */
+    /** @use SdkModel<IPListParamsShape> */
     use SdkModel;
     use SdkParams;
 

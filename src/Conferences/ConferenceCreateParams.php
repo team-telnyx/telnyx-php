@@ -25,7 +25,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Conferences->create
  *
- * @phpstan-type conference_create_params = array{
+ * @phpstan-type ConferenceCreateParamsShape = array{
  *   callControlID: string,
  *   name: string,
  *   beepEnabled?: BeepEnabled|value-of<BeepEnabled>,
@@ -42,7 +42,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class ConferenceCreateParams implements BaseModel
 {
-    /** @use SdkModel<conference_create_params> */
+    /** @use SdkModel<ConferenceCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\TelephonyCredentials->update
  *
- * @phpstan-type telephony_credential_update_params = array{
+ * @phpstan-type TelephonyCredentialUpdateParamsShape = array{
  *   connectionID?: string, expiresAt?: string, name?: string, tag?: string
  * }
  */
 final class TelephonyCredentialUpdateParams implements BaseModel
 {
-    /** @use SdkModel<telephony_credential_update_params> */
+    /** @use SdkModel<TelephonyCredentialUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 

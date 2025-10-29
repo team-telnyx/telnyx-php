@@ -16,13 +16,13 @@ use Telnyx\PublicInternetGateways\PublicInternetGatewayListParams\Page;
  *
  * @see Telnyx\PublicInternetGateways->list
  *
- * @phpstan-type public_internet_gateway_list_params = array{
+ * @phpstan-type PublicInternetGatewayListParamsShape = array{
  *   filter?: Filter, page?: Page
  * }
  */
 final class PublicInternetGatewayListParams implements BaseModel
 {
-    /** @use SdkModel<public_internet_gateway_list_params> */
+    /** @use SdkModel<PublicInternetGatewayListParamsShape> */
     use SdkModel;
     use SdkParams;
 

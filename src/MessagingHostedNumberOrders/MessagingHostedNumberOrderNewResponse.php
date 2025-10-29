@@ -12,13 +12,13 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\MessagingHostedNumberOrder;
 
 /**
- * @phpstan-type messaging_hosted_number_order_new_response = array{
+ * @phpstan-type MessagingHostedNumberOrderNewResponseShape = array{
  *   data?: MessagingHostedNumberOrder
  * }
  */
 final class MessagingHostedNumberOrderNewResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<messaging_hosted_number_order_new_response> */
+    /** @use SdkModel<MessagingHostedNumberOrderNewResponseShape> */
     use SdkModel;
 
     use SdkResponse;

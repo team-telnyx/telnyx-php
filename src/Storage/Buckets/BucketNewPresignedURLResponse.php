@@ -12,11 +12,11 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Storage\Buckets\BucketNewPresignedURLResponse\Content;
 
 /**
- * @phpstan-type bucket_new_presigned_url_response = array{content?: Content}
+ * @phpstan-type BucketNewPresignedURLResponseShape = array{content?: Content}
  */
 final class BucketNewPresignedURLResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<bucket_new_presigned_url_response> */
+    /** @use SdkModel<BucketNewPresignedURLResponseShape> */
     use SdkModel;
 
     use SdkResponse;

@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type action_enable_emergency_response = array{
+ * @phpstan-type ActionEnableEmergencyResponseShape = array{
  *   data?: PhoneNumberWithVoiceSettings
  * }
  */
 final class ActionEnableEmergencyResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<action_enable_emergency_response> */
+    /** @use SdkModel<ActionEnableEmergencyResponseShape> */
     use SdkModel;
 
     use SdkResponse;

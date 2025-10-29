@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\SimCardGroups->list
  *
- * @phpstan-type sim_card_group_list_params = array{
+ * @phpstan-type SimCardGroupListParamsShape = array{
  *   filterName?: string,
  *   filterPrivateWirelessGatewayID?: string,
  *   filterWirelessBlocklistID?: string,
@@ -24,7 +24,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class SimCardGroupListParams implements BaseModel
 {
-    /** @use SdkModel<sim_card_group_list_params> */
+    /** @use SdkModel<SimCardGroupListParamsShape> */
     use SdkModel;
     use SdkParams;
 

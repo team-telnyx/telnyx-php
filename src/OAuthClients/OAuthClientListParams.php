@@ -16,7 +16,7 @@ use Telnyx\OAuthClients\OAuthClientListParams\FilterClientType;
  *
  * @see Telnyx\OAuthClients->list
  *
- * @phpstan-type oauth_client_list_params = array{
+ * @phpstan-type OAuthClientListParamsShape = array{
  *   filterAllowedGrantTypesContains?: FilterAllowedGrantTypesContains|value-of<FilterAllowedGrantTypesContains>,
  *   filterClientID?: string,
  *   filterClientType?: FilterClientType|value-of<FilterClientType>,
@@ -29,7 +29,7 @@ use Telnyx\OAuthClients\OAuthClientListParams\FilterClientType;
  */
 final class OAuthClientListParams implements BaseModel
 {
-    /** @use SdkModel<oauth_client_list_params> */
+    /** @use SdkModel<OAuthClientListParamsShape> */
     use SdkModel;
     use SdkParams;
 

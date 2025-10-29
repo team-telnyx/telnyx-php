@@ -12,7 +12,7 @@ use Telnyx\Texml\Accounts\Calls\CallGetCallsResponse\Call\Direction;
 use Telnyx\Texml\Accounts\Calls\CallGetCallsResponse\Call\Status;
 
 /**
- * @phpstan-type call_alias = array{
+ * @phpstan-type CallShape = array{
  *   accountSid?: string,
  *   answeredBy?: value-of<AnsweredBy>,
  *   callerName?: string,
@@ -35,7 +35,7 @@ use Telnyx\Texml\Accounts\Calls\CallGetCallsResponse\Call\Status;
  */
 final class Call implements BaseModel
 {
-    /** @use SdkModel<call_alias> */
+    /** @use SdkModel<CallShape> */
     use SdkModel;
 
     /**

@@ -11,11 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type messaging_profile_delete_response = array{data?: MessagingProfile}
+ * @phpstan-type MessagingProfileDeleteResponseShape = array{
+ *   data?: MessagingProfile
+ * }
  */
 final class MessagingProfileDeleteResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<messaging_profile_delete_response> */
+    /** @use SdkModel<MessagingProfileDeleteResponseShape> */
     use SdkModel;
 
     use SdkResponse;

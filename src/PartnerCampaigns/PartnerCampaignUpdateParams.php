@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\PartnerCampaigns->update
  *
- * @phpstan-type partner_campaign_update_params = array{
+ * @phpstan-type PartnerCampaignUpdateParamsShape = array{
  *   webhookFailoverURL?: string, webhookURL?: string
  * }
  */
 final class PartnerCampaignUpdateParams implements BaseModel
 {
-    /** @use SdkModel<partner_campaign_update_params> */
+    /** @use SdkModel<PartnerCampaignUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 

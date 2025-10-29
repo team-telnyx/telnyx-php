@@ -12,13 +12,13 @@ use Telnyx\PrivateWirelessGateways\PrivateWirelessGatewayStatus\Value;
 /**
  * The current status or failure details of the Private Wireless Gateway.
  *
- * @phpstan-type private_wireless_gateway_status = array{
+ * @phpstan-type PrivateWirelessGatewayStatusShape = array{
  *   errorCode?: string, errorDescription?: string, value?: value-of<Value>
  * }
  */
 final class PrivateWirelessGatewayStatus implements BaseModel
 {
-    /** @use SdkModel<private_wireless_gateway_status> */
+    /** @use SdkModel<PrivateWirelessGatewayStatusShape> */
     use SdkModel;
 
     /**

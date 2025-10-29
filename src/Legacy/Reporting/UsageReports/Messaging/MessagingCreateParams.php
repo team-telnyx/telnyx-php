@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Legacy\Reporting\UsageReports\Messaging->create
  *
- * @phpstan-type messaging_create_params = array{
+ * @phpstan-type MessagingCreateParamsShape = array{
  *   aggregationType: int,
  *   endTime?: \DateTimeInterface,
  *   managedAccounts?: list<string>,
@@ -25,7 +25,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class MessagingCreateParams implements BaseModel
 {
-    /** @use SdkModel<messaging_create_params> */
+    /** @use SdkModel<MessagingCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

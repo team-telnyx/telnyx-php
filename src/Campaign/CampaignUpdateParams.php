@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Campaign->update
  *
- * @phpstan-type campaign_update_params = array{
+ * @phpstan-type CampaignUpdateParamsShape = array{
  *   autoRenewal?: bool,
  *   helpMessage?: string,
  *   messageFlow?: string,
@@ -30,7 +30,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class CampaignUpdateParams implements BaseModel
 {
-    /** @use SdkModel<campaign_update_params> */
+    /** @use SdkModel<CampaignUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\GlobalIPs->create
  *
- * @phpstan-type global_ip_create_params = array{
+ * @phpstan-type GlobalIPCreateParamsShape = array{
  *   description?: string, name?: string, ports?: array<string, mixed>
  * }
  */
 final class GlobalIPCreateParams implements BaseModel
 {
-    /** @use SdkModel<global_ip_create_params> */
+    /** @use SdkModel<GlobalIPCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

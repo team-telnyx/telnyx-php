@@ -14,11 +14,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\SimCardGroups->retrieve
  *
- * @phpstan-type sim_card_group_retrieve_params = array{includeIccids?: bool}
+ * @phpstan-type SimCardGroupRetrieveParamsShape = array{includeIccids?: bool}
  */
 final class SimCardGroupRetrieveParams implements BaseModel
 {
-    /** @use SdkModel<sim_card_group_retrieve_params> */
+    /** @use SdkModel<SimCardGroupRetrieveParamsShape> */
     use SdkModel;
     use SdkParams;
 

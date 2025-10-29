@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Wireless\DetailRecordsReports->list
  *
- * @phpstan-type detail_records_report_list_params = array{
+ * @phpstan-type DetailRecordsReportListParamsShape = array{
  *   pageNumber?: int, pageSize?: int
  * }
  */
 final class DetailRecordsReportListParams implements BaseModel
 {
-    /** @use SdkModel<detail_records_report_list_params> */
+    /** @use SdkModel<DetailRecordsReportListParamsShape> */
     use SdkModel;
     use SdkParams;
 

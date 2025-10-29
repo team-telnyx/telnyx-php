@@ -11,7 +11,7 @@ use Telnyx\DocReqsRequirementType\AcceptanceCriteria;
 use Telnyx\DocReqsRequirementType\Type;
 
 /**
- * @phpstan-type doc_reqs_requirement_type = array{
+ * @phpstan-type DocReqsRequirementTypeShape = array{
  *   id?: string,
  *   acceptanceCriteria?: AcceptanceCriteria,
  *   createdAt?: string,
@@ -25,7 +25,7 @@ use Telnyx\DocReqsRequirementType\Type;
  */
 final class DocReqsRequirementType implements BaseModel
 {
-    /** @use SdkModel<doc_reqs_requirement_type> */
+    /** @use SdkModel<DocReqsRequirementTypeShape> */
     use SdkModel;
 
     /**

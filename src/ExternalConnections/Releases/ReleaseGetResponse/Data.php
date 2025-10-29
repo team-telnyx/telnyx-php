@@ -11,7 +11,7 @@ use Telnyx\ExternalConnections\Releases\ReleaseGetResponse\Data\Status;
 use Telnyx\ExternalConnections\Releases\ReleaseGetResponse\Data\TelephoneNumber;
 
 /**
- * @phpstan-type data_alias = array{
+ * @phpstan-type DataShape = array{
  *   createdAt?: string,
  *   errorMessage?: string,
  *   status?: value-of<Status>,
@@ -22,7 +22,7 @@ use Telnyx\ExternalConnections\Releases\ReleaseGetResponse\Data\TelephoneNumber;
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**

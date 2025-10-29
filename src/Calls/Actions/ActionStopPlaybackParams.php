@@ -18,13 +18,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Calls\Actions->stopPlayback
  *
- * @phpstan-type action_stop_playback_params = array{
+ * @phpstan-type ActionStopPlaybackParamsShape = array{
  *   clientState?: string, commandID?: string, overlay?: bool, stop?: string
  * }
  */
 final class ActionStopPlaybackParams implements BaseModel
 {
-    /** @use SdkModel<action_stop_playback_params> */
+    /** @use SdkModel<ActionStopPlaybackParamsShape> */
     use SdkModel;
     use SdkParams;
 

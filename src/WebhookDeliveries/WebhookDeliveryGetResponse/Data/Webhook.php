@@ -12,7 +12,7 @@ use Telnyx\WebhookDeliveries\WebhookDeliveryGetResponse\Data\Webhook\RecordType;
 /**
  * Original webhook JSON data. Payload fields vary according to event type.
  *
- * @phpstan-type webhook_alias = array{
+ * @phpstan-type WebhookShape = array{
  *   id?: string,
  *   eventType?: string,
  *   occurredAt?: \DateTimeInterface,
@@ -22,7 +22,7 @@ use Telnyx\WebhookDeliveries\WebhookDeliveryGetResponse\Data\Webhook\RecordType;
  */
 final class Webhook implements BaseModel
 {
-    /** @use SdkModel<webhook_alias> */
+    /** @use SdkModel<WebhookShape> */
     use SdkModel;
 
     /**

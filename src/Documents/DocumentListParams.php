@@ -17,13 +17,13 @@ use Telnyx\Documents\DocumentListParams\Sort;
  *
  * @see Telnyx\Documents->list
  *
- * @phpstan-type document_list_params = array{
+ * @phpstan-type DocumentListParamsShape = array{
  *   filter?: Filter, page?: Page, sort?: list<Sort|value-of<Sort>>
  * }
  */
 final class DocumentListParams implements BaseModel
 {
-    /** @use SdkModel<document_list_params> */
+    /** @use SdkModel<DocumentListParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -10,13 +10,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\PortingOrderListParams\Filter\PhoneNumbers\PhoneNumber;
 
 /**
- * @phpstan-type phone_numbers = array{
+ * @phpstan-type PhoneNumbersShape = array{
  *   carrierName?: string, countryCode?: string, phoneNumber?: PhoneNumber
  * }
  */
 final class PhoneNumbers implements BaseModel
 {
-    /** @use SdkModel<phone_numbers> */
+    /** @use SdkModel<PhoneNumbersShape> */
     use SdkModel;
 
     /**

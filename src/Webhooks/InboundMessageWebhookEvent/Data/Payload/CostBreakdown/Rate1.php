@@ -9,11 +9,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type rate_alias = array{amount?: string, currency?: string}
+ * @phpstan-type RateShape = array{amount?: string, currency?: string}
  */
 final class Rate implements BaseModel
 {
-    /** @use SdkModel<rate_alias> */
+    /** @use SdkModel<RateShape> */
     use SdkModel;
 
     /**

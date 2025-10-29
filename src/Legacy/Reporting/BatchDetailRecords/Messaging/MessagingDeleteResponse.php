@@ -11,11 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type messaging_delete_response = array{data?: MdrDetailReportResponse}
+ * @phpstan-type MessagingDeleteResponseShape = array{
+ *   data?: MdrDetailReportResponse
+ * }
  */
 final class MessagingDeleteResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<messaging_delete_response> */
+    /** @use SdkModel<MessagingDeleteResponseShape> */
     use SdkModel;
 
     use SdkResponse;

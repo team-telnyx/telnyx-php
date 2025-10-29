@@ -12,13 +12,13 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\MessagingHostedNumberOrder;
 
 /**
- * @phpstan-type action_upload_file_response = array{
+ * @phpstan-type ActionUploadFileResponseShape = array{
  *   data?: MessagingHostedNumberOrder
  * }
  */
 final class ActionUploadFileResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<action_upload_file_response> */
+    /** @use SdkModel<ActionUploadFileResponseShape> */
     use SdkModel;
 
     use SdkResponse;

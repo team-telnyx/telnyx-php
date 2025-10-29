@@ -14,11 +14,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\ExternalConnections\PhoneNumbers->retrieve
  *
- * @phpstan-type phone_number_retrieve_params = array{id: string}
+ * @phpstan-type PhoneNumberRetrieveParamsShape = array{id: string}
  */
 final class PhoneNumberRetrieveParams implements BaseModel
 {
-    /** @use SdkModel<phone_number_retrieve_params> */
+    /** @use SdkModel<PhoneNumberRetrieveParamsShape> */
     use SdkModel;
     use SdkParams;
 

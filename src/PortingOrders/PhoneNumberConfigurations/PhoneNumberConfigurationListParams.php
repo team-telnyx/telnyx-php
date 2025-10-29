@@ -17,13 +17,13 @@ use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListP
  *
  * @see Telnyx\PortingOrders\PhoneNumberConfigurations->list
  *
- * @phpstan-type phone_number_configuration_list_params = array{
+ * @phpstan-type PhoneNumberConfigurationListParamsShape = array{
  *   filter?: Filter, page?: Page, sort?: Sort
  * }
  */
 final class PhoneNumberConfigurationListParams implements BaseModel
 {
-    /** @use SdkModel<phone_number_configuration_list_params> */
+    /** @use SdkModel<PhoneNumberConfigurationListParamsShape> */
     use SdkModel;
     use SdkParams;
 

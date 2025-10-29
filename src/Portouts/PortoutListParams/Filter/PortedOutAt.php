@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Filter by ported_out_at date range using nested operations.
  *
- * @phpstan-type ported_out_at = array{
+ * @phpstan-type PortedOutAtShape = array{
  *   gte?: \DateTimeInterface, lte?: \DateTimeInterface
  * }
  */
 final class PortedOutAt implements BaseModel
 {
-    /** @use SdkModel<ported_out_at> */
+    /** @use SdkModel<PortedOutAtShape> */
     use SdkModel;
 
     /**

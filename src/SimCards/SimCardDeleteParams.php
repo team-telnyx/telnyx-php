@@ -16,11 +16,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\SimCards->delete
  *
- * @phpstan-type sim_card_delete_params = array{reportLost?: bool}
+ * @phpstan-type SimCardDeleteParamsShape = array{reportLost?: bool}
  */
 final class SimCardDeleteParams implements BaseModel
 {
-    /** @use SdkModel<sim_card_delete_params> */
+    /** @use SdkModel<SimCardDeleteParamsShape> */
     use SdkModel;
     use SdkParams;
 

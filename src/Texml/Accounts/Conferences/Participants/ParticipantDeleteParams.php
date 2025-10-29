@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Texml\Accounts\Conferences\Participants->delete
  *
- * @phpstan-type participant_delete_params = array{
+ * @phpstan-type ParticipantDeleteParamsShape = array{
  *   accountSid: string, conferenceSid: string
  * }
  */
 final class ParticipantDeleteParams implements BaseModel
 {
-    /** @use SdkModel<participant_delete_params> */
+    /** @use SdkModel<ParticipantDeleteParamsShape> */
     use SdkModel;
     use SdkParams;
 

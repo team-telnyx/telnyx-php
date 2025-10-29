@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\SiprecConnectors->update
  *
- * @phpstan-type siprec_connector_update_params = array{
+ * @phpstan-type SiprecConnectorUpdateParamsShape = array{
  *   host: string, name: string, port: int, appSubdomain?: string
  * }
  */
 final class SiprecConnectorUpdateParams implements BaseModel
 {
-    /** @use SdkModel<siprec_connector_update_params> */
+    /** @use SdkModel<SiprecConnectorUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 

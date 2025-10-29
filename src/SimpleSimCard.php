@@ -13,7 +13,7 @@ use Telnyx\SimpleSimCard\EsimInstallationStatus;
 use Telnyx\SimpleSimCard\Type;
 
 /**
- * @phpstan-type simple_sim_card = array{
+ * @phpstan-type SimpleSimCardShape = array{
  *   id?: string,
  *   actionsInProgress?: bool,
  *   authorizedImeis?: list<string>|null,
@@ -37,7 +37,7 @@ use Telnyx\SimpleSimCard\Type;
  */
 final class SimpleSimCard implements BaseModel
 {
-    /** @use SdkModel<simple_sim_card> */
+    /** @use SdkModel<SimpleSimCardShape> */
     use SdkModel;
 
     /**

@@ -12,7 +12,7 @@ use Telnyx\Webhooks\CallEnqueuedWebhookEvent\Data\Payload;
 use Telnyx\Webhooks\CallEnqueuedWebhookEvent\Data\RecordType;
 
 /**
- * @phpstan-type data_alias = array{
+ * @phpstan-type DataShape = array{
  *   id?: string,
  *   eventType?: value-of<EventType>,
  *   occurredAt?: \DateTimeInterface,
@@ -22,7 +22,7 @@ use Telnyx\Webhooks\CallEnqueuedWebhookEvent\Data\RecordType;
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**

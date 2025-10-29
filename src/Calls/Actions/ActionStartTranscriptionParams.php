@@ -23,7 +23,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Calls\Actions->startTranscription
  *
- * @phpstan-type action_start_transcription_params = array{
+ * @phpstan-type ActionStartTranscriptionParamsShape = array{
  *   clientState?: string,
  *   commandID?: string,
  *   transcriptionEngine?: TranscriptionEngine|value-of<TranscriptionEngine>,
@@ -33,7 +33,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class ActionStartTranscriptionParams implements BaseModel
 {
-    /** @use SdkModel<action_start_transcription_params> */
+    /** @use SdkModel<ActionStartTranscriptionParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -12,11 +12,11 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Rooms\Actions\ActionRefreshClientTokenResponse\Data;
 
 /**
- * @phpstan-type action_refresh_client_token_response = array{data?: Data}
+ * @phpstan-type ActionRefreshClientTokenResponseShape = array{data?: Data}
  */
 final class ActionRefreshClientTokenResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<action_refresh_client_token_response> */
+    /** @use SdkModel<ActionRefreshClientTokenResponseShape> */
     use SdkModel;
 
     use SdkResponse;

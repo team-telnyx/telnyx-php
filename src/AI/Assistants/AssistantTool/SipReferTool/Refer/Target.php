@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type target_alias = array{
+ * @phpstan-type TargetShape = array{
  *   name: string,
  *   sipAddress: string,
  *   sipAuthPassword?: string,
@@ -18,7 +18,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class Target implements BaseModel
 {
-    /** @use SdkModel<target_alias> */
+    /** @use SdkModel<TargetShape> */
     use SdkModel;
 
     /**

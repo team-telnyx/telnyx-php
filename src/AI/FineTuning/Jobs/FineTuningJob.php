@@ -15,7 +15,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 /**
  * The `fine_tuning.job` object represents a fine-tuning job that has been created through the API.
  *
- * @phpstan-type fine_tuning_job = array{
+ * @phpstan-type FineTuningJobShape = array{
  *   id: string,
  *   createdAt: int,
  *   finishedAt: int|null,
@@ -29,7 +29,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  */
 final class FineTuningJob implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<fine_tuning_job> */
+    /** @use SdkModel<FineTuningJobShape> */
     use SdkModel;
 
     use SdkResponse;

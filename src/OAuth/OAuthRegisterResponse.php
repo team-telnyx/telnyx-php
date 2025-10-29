@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type oauth_register_response = array{
+ * @phpstan-type OAuthRegisterResponseShape = array{
  *   clientID: string,
  *   clientIDIssuedAt: int,
  *   clientName?: string,
@@ -28,7 +28,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  */
 final class OAuthRegisterResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<oauth_register_response> */
+    /** @use SdkModel<OAuthRegisterResponseShape> */
     use SdkModel;
 
     use SdkResponse;

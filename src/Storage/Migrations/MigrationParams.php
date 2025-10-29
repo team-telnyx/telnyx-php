@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Storage\Migrations\MigrationParams\Status;
 
 /**
- * @phpstan-type migration_params = array{
+ * @phpstan-type MigrationParamsShape = array{
  *   sourceID: string,
  *   targetBucketName: string,
  *   targetRegion: string,
@@ -27,7 +27,7 @@ use Telnyx\Storage\Migrations\MigrationParams\Status;
  */
 final class MigrationParams implements BaseModel
 {
-    /** @use SdkModel<migration_params> */
+    /** @use SdkModel<MigrationParamsShape> */
     use SdkModel;
 
     /**

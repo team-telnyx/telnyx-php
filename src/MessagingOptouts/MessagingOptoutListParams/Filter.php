@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[messaging_profile_id], filter[from].
  *
- * @phpstan-type filter_alias = array{from?: string, messagingProfileID?: string}
+ * @phpstan-type FilterShape = array{from?: string, messagingProfileID?: string}
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**

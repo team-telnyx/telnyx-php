@@ -12,7 +12,7 @@ use Telnyx\Porting\LoaConfigurations\PortingLoaConfiguration\Contact;
 use Telnyx\Porting\LoaConfigurations\PortingLoaConfiguration\Logo;
 
 /**
- * @phpstan-type porting_loa_configuration = array{
+ * @phpstan-type PortingLoaConfigurationShape = array{
  *   id?: string,
  *   address?: Address,
  *   companyName?: string,
@@ -27,7 +27,7 @@ use Telnyx\Porting\LoaConfigurations\PortingLoaConfiguration\Logo;
  */
 final class PortingLoaConfiguration implements BaseModel
 {
-    /** @use SdkModel<porting_loa_configuration> */
+    /** @use SdkModel<PortingLoaConfigurationShape> */
     use SdkModel;
 
     /**

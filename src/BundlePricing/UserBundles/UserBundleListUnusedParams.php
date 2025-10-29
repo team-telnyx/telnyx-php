@@ -15,13 +15,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\BundlePricing\UserBundles->listUnused
  *
- * @phpstan-type user_bundle_list_unused_params = array{
+ * @phpstan-type UserBundleListUnusedParamsShape = array{
  *   filter?: Filter, authorizationBearer?: string
  * }
  */
 final class UserBundleListUnusedParams implements BaseModel
 {
-    /** @use SdkModel<user_bundle_list_unused_params> */
+    /** @use SdkModel<UserBundleListUnusedParamsShape> */
     use SdkModel;
     use SdkParams;
 

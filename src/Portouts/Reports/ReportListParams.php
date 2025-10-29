@@ -16,11 +16,11 @@ use Telnyx\Portouts\Reports\ReportListParams\Page;
  *
  * @see Telnyx\Portouts\Reports->list
  *
- * @phpstan-type report_list_params = array{filter?: Filter, page?: Page}
+ * @phpstan-type ReportListParamsShape = array{filter?: Filter, page?: Page}
  */
 final class ReportListParams implements BaseModel
 {
-    /** @use SdkModel<report_list_params> */
+    /** @use SdkModel<ReportListParamsShape> */
     use SdkModel;
     use SdkParams;
 

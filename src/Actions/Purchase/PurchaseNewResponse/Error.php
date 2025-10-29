@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type error_alias = array{
+ * @phpstan-type ErrorShape = array{
  *   code: string,
  *   title: string,
  *   detail?: string,
@@ -20,7 +20,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class Error implements BaseModel
 {
-    /** @use SdkModel<error_alias> */
+    /** @use SdkModel<ErrorShape> */
     use SdkModel;
 
     #[Api]

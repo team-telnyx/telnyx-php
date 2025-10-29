@@ -17,7 +17,7 @@ use Telnyx\ManagedAccounts\ManagedAccountListParams\Sort;
  *
  * @see Telnyx\ManagedAccounts->list
  *
- * @phpstan-type managed_account_list_params = array{
+ * @phpstan-type ManagedAccountListParamsShape = array{
  *   filter?: Filter,
  *   includeCancelledAccounts?: bool,
  *   page?: Page,
@@ -26,7 +26,7 @@ use Telnyx\ManagedAccounts\ManagedAccountListParams\Sort;
  */
 final class ManagedAccountListParams implements BaseModel
 {
-    /** @use SdkModel<managed_account_list_params> */
+    /** @use SdkModel<ManagedAccountListParamsShape> */
     use SdkModel;
     use SdkParams;
 

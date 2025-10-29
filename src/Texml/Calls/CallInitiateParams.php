@@ -24,7 +24,7 @@ use Telnyx\Texml\Calls\CallInitiateParams\URLMethod;
  *
  * @see Telnyx\Texml\Calls->initiate
  *
- * @phpstan-type call_initiate_params = array{
+ * @phpstan-type CallInitiateParamsShape = array{
  *   from: string,
  *   to: string,
  *   asyncAmd?: bool,
@@ -60,7 +60,7 @@ use Telnyx\Texml\Calls\CallInitiateParams\URLMethod;
  */
 final class CallInitiateParams implements BaseModel
 {
-    /** @use SdkModel<call_initiate_params> */
+    /** @use SdkModel<CallInitiateParamsShape> */
     use SdkModel;
     use SdkParams;
 

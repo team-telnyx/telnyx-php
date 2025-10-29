@@ -11,7 +11,7 @@ use Telnyx\RoomCompositions\RoomComposition\Format;
 use Telnyx\RoomCompositions\RoomComposition\Status;
 
 /**
- * @phpstan-type room_composition = array{
+ * @phpstan-type RoomCompositionShape = array{
  *   id?: string,
  *   completedAt?: \DateTimeInterface,
  *   createdAt?: \DateTimeInterface,
@@ -35,7 +35,7 @@ use Telnyx\RoomCompositions\RoomComposition\Status;
  */
 final class RoomComposition implements BaseModel
 {
-    /** @use SdkModel<room_composition> */
+    /** @use SdkModel<RoomCompositionShape> */
     use SdkModel;
 
     /**

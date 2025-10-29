@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * An object representing the total cost of the order.
  *
- * @phpstan-type cost_alias = array{amount?: string, currency?: string}
+ * @phpstan-type CostShape = array{amount?: string, currency?: string}
  */
 final class Cost implements BaseModel
 {
-    /** @use SdkModel<cost_alias> */
+    /** @use SdkModel<CostShape> */
     use SdkModel;
 
     /**

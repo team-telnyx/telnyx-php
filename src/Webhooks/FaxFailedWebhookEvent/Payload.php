@@ -12,7 +12,7 @@ use Telnyx\Webhooks\FaxFailedWebhookEvent\Payload\FailureReason;
 use Telnyx\Webhooks\FaxFailedWebhookEvent\Payload\Status;
 
 /**
- * @phpstan-type payload_alias = array{
+ * @phpstan-type PayloadShape = array{
  *   clientState?: string,
  *   connectionID?: string,
  *   direction?: value-of<Direction>,
@@ -28,7 +28,7 @@ use Telnyx\Webhooks\FaxFailedWebhookEvent\Payload\Status;
  */
 final class Payload implements BaseModel
 {
-    /** @use SdkModel<payload_alias> */
+    /** @use SdkModel<PayloadShape> */
     use SdkModel;
 
     /**

@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type authentication_provider_delete_response = array{
+ * @phpstan-type AuthenticationProviderDeleteResponseShape = array{
  *   data?: AuthenticationProvider
  * }
  */
 final class AuthenticationProviderDeleteResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<authentication_provider_delete_response> */
+    /** @use SdkModel<AuthenticationProviderDeleteResponseShape> */
     use SdkModel;
 
     use SdkResponse;

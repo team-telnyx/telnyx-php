@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\CallMachineDetectionEndedWebhookEvent\Data\Payload\Result;
 
 /**
- * @phpstan-type payload_alias = array{
+ * @phpstan-type PayloadShape = array{
  *   callControlID?: string,
  *   callLegID?: string,
  *   callSessionID?: string,
@@ -23,7 +23,7 @@ use Telnyx\Webhooks\CallMachineDetectionEndedWebhookEvent\Data\Payload\Result;
  */
 final class Payload implements BaseModel
 {
-    /** @use SdkModel<payload_alias> */
+    /** @use SdkModel<PayloadShape> */
     use SdkModel;
 
     /**

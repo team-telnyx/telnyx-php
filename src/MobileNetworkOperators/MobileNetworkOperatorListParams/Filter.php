@@ -12,7 +12,7 @@ use Telnyx\MobileNetworkOperators\MobileNetworkOperatorListParams\Filter\Name;
 /**
  * Consolidated filter parameter for mobile network operators (deepObject style). Originally: filter[name][starts_with], filter[name][contains], filter[name][ends_with], filter[country_code], filter[mcc], filter[mnc], filter[tadig], filter[network_preferences_enabled].
  *
- * @phpstan-type filter_alias = array{
+ * @phpstan-type FilterShape = array{
  *   countryCode?: string,
  *   mcc?: string,
  *   mnc?: string,
@@ -23,7 +23,7 @@ use Telnyx\MobileNetworkOperators\MobileNetworkOperatorListParams\Filter\Name;
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**

@@ -11,7 +11,7 @@ use Telnyx\NotificationEventConditions\NotificationEventConditionListResponse\Da
 use Telnyx\NotificationEventConditions\NotificationEventConditionListResponse\Data\Parameter;
 
 /**
- * @phpstan-type data_alias = array{
+ * @phpstan-type DataShape = array{
  *   id?: string,
  *   allowMultipleChannels?: bool,
  *   associatedRecordType?: value-of<AssociatedRecordType>,
@@ -28,7 +28,7 @@ use Telnyx\NotificationEventConditions\NotificationEventConditionListResponse\Da
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**

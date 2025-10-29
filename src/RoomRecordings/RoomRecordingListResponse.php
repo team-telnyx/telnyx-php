@@ -13,13 +13,13 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\RoomRecordings\RoomRecordingListResponse\Data;
 
 /**
- * @phpstan-type room_recording_list_response = array{
+ * @phpstan-type RoomRecordingListResponseShape = array{
  *   data?: list<Data>, meta?: PaginationMeta
  * }
  */
 final class RoomRecordingListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<room_recording_list_response> */
+    /** @use SdkModel<RoomRecordingListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

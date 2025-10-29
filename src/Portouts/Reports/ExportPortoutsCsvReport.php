@@ -12,11 +12,11 @@ use Telnyx\Portouts\Reports\ExportPortoutsCsvReport\Filters;
 /**
  * The parameters for generating a port-outs CSV report.
  *
- * @phpstan-type export_portouts_csv_report = array{filters: Filters}
+ * @phpstan-type ExportPortoutsCsvReportShape = array{filters: Filters}
  */
 final class ExportPortoutsCsvReport implements BaseModel
 {
-    /** @use SdkModel<export_portouts_csv_report> */
+    /** @use SdkModel<ExportPortoutsCsvReportShape> */
     use SdkModel;
 
     /**

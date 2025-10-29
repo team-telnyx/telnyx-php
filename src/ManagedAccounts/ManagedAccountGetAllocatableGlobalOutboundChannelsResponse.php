@@ -12,14 +12,14 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\ManagedAccounts\ManagedAccountGetAllocatableGlobalOutboundChannelsResponse\Data;
 
 /**
- * @phpstan-type managed_account_get_allocatable_global_outbound_channels_response = array{
+ * @phpstan-type ManagedAccountGetAllocatableGlobalOutboundChannelsResponseShape = array{
  *   data?: Data
  * }
  */
 final class ManagedAccountGetAllocatableGlobalOutboundChannelsResponse implements BaseModel, ResponseConverter
 {
     /**
-     * @use SdkModel<managed_account_get_allocatable_global_outbound_channels_response>
+     * @use SdkModel<ManagedAccountGetAllocatableGlobalOutboundChannelsResponseShape>
      */
     use SdkModel;
 

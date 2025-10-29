@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type user_address_get_response = array{data?: UserAddress}
+ * @phpstan-type UserAddressGetResponseShape = array{data?: UserAddress}
  */
 final class UserAddressGetResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<user_address_get_response> */
+    /** @use SdkModel<UserAddressGetResponseShape> */
     use SdkModel;
 
     use SdkResponse;

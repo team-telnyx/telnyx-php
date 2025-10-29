@@ -15,11 +15,11 @@ use Telnyx\Queues\Calls\CallListParams\Page;
  *
  * @see Telnyx\Queues\Calls->list
  *
- * @phpstan-type call_list_params = array{page?: Page}
+ * @phpstan-type CallListParamsShape = array{page?: Page}
  */
 final class CallListParams implements BaseModel
 {
-    /** @use SdkModel<call_list_params> */
+    /** @use SdkModel<CallListParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -12,7 +12,7 @@ use Telnyx\GlobalIPUsage\GlobalIPUsageGetResponse\Data\Received;
 use Telnyx\GlobalIPUsage\GlobalIPUsageGetResponse\Data\Transmitted;
 
 /**
- * @phpstan-type data_alias = array{
+ * @phpstan-type DataShape = array{
  *   globalIP?: GlobalIP,
  *   received?: Received,
  *   timestamp?: \DateTimeInterface,
@@ -21,7 +21,7 @@ use Telnyx\GlobalIPUsage\GlobalIPUsageGetResponse\Data\Transmitted;
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     #[Api('global_ip', optional: true)]

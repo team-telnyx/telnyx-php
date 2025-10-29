@@ -12,11 +12,11 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Messaging\Rcs\RcInviteTestNumberResponse\Data;
 
 /**
- * @phpstan-type rc_invite_test_number_response = array{data: Data}
+ * @phpstan-type RcInviteTestNumberResponseShape = array{data: Data}
  */
 final class RcInviteTestNumberResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<rc_invite_test_number_response> */
+    /** @use SdkModel<RcInviteTestNumberResponseShape> */
     use SdkModel;
 
     use SdkResponse;

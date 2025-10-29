@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Consolidated updated_at parameter (deepObject style). Originally: updated_at[gte], updated_at[lte].
  *
- * @phpstan-type updated_at = array{gte?: string, lte?: string}
+ * @phpstan-type UpdatedAtShape = array{gte?: string, lte?: string}
  */
 final class UpdatedAt implements BaseModel
 {
-    /** @use SdkModel<updated_at> */
+    /** @use SdkModel<UpdatedAtShape> */
     use SdkModel;
 
     #[Api(optional: true)]

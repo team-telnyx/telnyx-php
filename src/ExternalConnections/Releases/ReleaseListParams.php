@@ -16,11 +16,11 @@ use Telnyx\ExternalConnections\Releases\ReleaseListParams\Page;
  *
  * @see Telnyx\ExternalConnections\Releases->list
  *
- * @phpstan-type release_list_params = array{filter?: Filter, page?: Page}
+ * @phpstan-type ReleaseListParamsShape = array{filter?: Filter, page?: Page}
  */
 final class ReleaseListParams implements BaseModel
 {
-    /** @use SdkModel<release_list_params> */
+    /** @use SdkModel<ReleaseListParamsShape> */
     use SdkModel;
     use SdkParams;
 

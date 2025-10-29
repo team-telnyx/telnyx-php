@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\PhoneNumberCampaigns->create
  *
- * @phpstan-type phone_number_campaign_create_params = array{
+ * @phpstan-type PhoneNumberCampaignCreateParamsShape = array{
  *   campaignID: string, phoneNumber: string
  * }
  */
 final class PhoneNumberCampaignCreateParams implements BaseModel
 {
-    /** @use SdkModel<phone_number_campaign_create_params> */
+    /** @use SdkModel<PhoneNumberCampaignCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

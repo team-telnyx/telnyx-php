@@ -17,13 +17,13 @@ use Telnyx\FaxApplications\FaxApplicationListParams\Sort;
  *
  * @see Telnyx\FaxApplications->list
  *
- * @phpstan-type fax_application_list_params = array{
+ * @phpstan-type FaxApplicationListParamsShape = array{
  *   filter?: Filter, page?: Page, sort?: Sort|value-of<Sort>
  * }
  */
 final class FaxApplicationListParams implements BaseModel
 {
-    /** @use SdkModel<fax_application_list_params> */
+    /** @use SdkModel<FaxApplicationListParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\PortingOrders\ActivationJobs->update
  *
- * @phpstan-type activation_job_update_params = array{
+ * @phpstan-type ActivationJobUpdateParamsShape = array{
  *   id: string, activateAt?: \DateTimeInterface
  * }
  */
 final class ActivationJobUpdateParams implements BaseModel
 {
-    /** @use SdkModel<activation_job_update_params> */
+    /** @use SdkModel<ActivationJobUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -17,7 +17,7 @@ use Telnyx\Porting\LoaConfigurations\LoaConfigurationCreateParams\Logo;
  *
  * @see Telnyx\Porting\LoaConfigurations->create
  *
- * @phpstan-type loa_configuration_create_params = array{
+ * @phpstan-type LoaConfigurationCreateParamsShape = array{
  *   address: Address,
  *   companyName: string,
  *   contact: Contact,
@@ -27,7 +27,7 @@ use Telnyx\Porting\LoaConfigurations\LoaConfigurationCreateParams\Logo;
  */
 final class LoaConfigurationCreateParams implements BaseModel
 {
-    /** @use SdkModel<loa_configuration_create_params> */
+    /** @use SdkModel<LoaConfigurationCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

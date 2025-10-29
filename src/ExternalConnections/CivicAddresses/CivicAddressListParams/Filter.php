@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Filter parameter for civic addresses (deepObject style). Supports filtering by country.
  *
- * @phpstan-type filter_alias = array{country?: list<string>}
+ * @phpstan-type FilterShape = array{country?: list<string>}
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**

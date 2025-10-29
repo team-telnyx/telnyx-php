@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type speech_to_text_delete_response = array{
+ * @phpstan-type SpeechToTextDeleteResponseShape = array{
  *   data?: SttDetailReportResponse
  * }
  */
 final class SpeechToTextDeleteResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<speech_to_text_delete_response> */
+    /** @use SdkModel<SpeechToTextDeleteResponseShape> */
     use SdkModel;
 
     use SdkResponse;

@@ -9,11 +9,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type source_alias = array{pointer?: string}
+ * @phpstan-type SourceShape = array{pointer?: string}
  */
 final class Source implements BaseModel
 {
-    /** @use SdkModel<source_alias> */
+    /** @use SdkModel<SourceShape> */
     use SdkModel;
 
     /**

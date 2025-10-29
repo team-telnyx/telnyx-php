@@ -17,13 +17,13 @@ use Telnyx\PortingOrders\PortingOrderListParams\Sort;
  *
  * @see Telnyx\PortingOrders->list
  *
- * @phpstan-type porting_order_list_params = array{
+ * @phpstan-type PortingOrderListParamsShape = array{
  *   filter?: Filter, includePhoneNumbers?: bool, page?: Page, sort?: Sort
  * }
  */
 final class PortingOrderListParams implements BaseModel
 {
-    /** @use SdkModel<porting_order_list_params> */
+    /** @use SdkModel<PortingOrderListParamsShape> */
     use SdkModel;
     use SdkParams;
 

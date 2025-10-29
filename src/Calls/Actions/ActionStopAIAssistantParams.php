@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Calls\Actions->stopAIAssistant
  *
- * @phpstan-type action_stop_ai_assistant_params = array{
+ * @phpstan-type ActionStopAIAssistantParamsShape = array{
  *   clientState?: string, commandID?: string
  * }
  */
 final class ActionStopAIAssistantParams implements BaseModel
 {
-    /** @use SdkModel<action_stop_ai_assistant_params> */
+    /** @use SdkModel<ActionStopAIAssistantParamsShape> */
     use SdkModel;
     use SdkParams;
 

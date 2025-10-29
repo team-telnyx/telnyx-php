@@ -13,13 +13,13 @@ use Telnyx\Messsages\RcsContentInfo;
 /**
  * A media file within a rich card.
  *
- * @phpstan-type media_alias = array{
+ * @phpstan-type MediaShape = array{
  *   contentInfo?: RcsContentInfo, height?: value-of<Height>
  * }
  */
 final class Media implements BaseModel
 {
-    /** @use SdkModel<media_alias> */
+    /** @use SdkModel<MediaShape> */
     use SdkModel;
 
     #[Api('content_info', optional: true)]

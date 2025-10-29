@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Documents->update
  *
- * @phpstan-type document_update_params = array{
+ * @phpstan-type DocumentUpdateParamsShape = array{
  *   customerReference?: string, filename?: string
  * }
  */
 final class DocumentUpdateParams implements BaseModel
 {
-    /** @use SdkModel<document_update_params> */
+    /** @use SdkModel<DocumentUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 

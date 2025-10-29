@@ -12,13 +12,13 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Messages\MessageGetResponse\Data\InboundMessagePayload;
 
 /**
- * @phpstan-type message_get_response = array{
+ * @phpstan-type MessageGetResponseShape = array{
  *   data?: OutboundMessagePayload|InboundMessagePayload
  * }
  */
 final class MessageGetResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<message_get_response> */
+    /** @use SdkModel<MessageGetResponseShape> */
     use SdkModel;
 
     use SdkResponse;

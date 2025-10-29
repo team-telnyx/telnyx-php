@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Specifies the phone number range for this associated phone number.
  *
- * @phpstan-type phone_number_range = array{endAt?: string, startAt?: string}
+ * @phpstan-type PhoneNumberRangeShape = array{endAt?: string, startAt?: string}
  */
 final class PhoneNumberRange implements BaseModel
 {
-    /** @use SdkModel<phone_number_range> */
+    /** @use SdkModel<PhoneNumberRangeShape> */
     use SdkModel;
 
     /**

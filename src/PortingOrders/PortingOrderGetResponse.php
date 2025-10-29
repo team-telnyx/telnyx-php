@@ -12,13 +12,13 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PortingOrders\PortingOrderGetResponse\Meta;
 
 /**
- * @phpstan-type porting_order_get_response = array{
+ * @phpstan-type PortingOrderGetResponseShape = array{
  *   data?: PortingOrder, meta?: Meta
  * }
  */
 final class PortingOrderGetResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<porting_order_get_response> */
+    /** @use SdkModel<PortingOrderGetResponseShape> */
     use SdkModel;
 
     use SdkResponse;

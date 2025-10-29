@@ -13,13 +13,13 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\SimCardGroups\SimCardGroupListResponse\Data;
 
 /**
- * @phpstan-type sim_card_group_list_response = array{
+ * @phpstan-type SimCardGroupListResponseShape = array{
  *   data?: list<Data>, meta?: PaginationMeta
  * }
  */
 final class SimCardGroupListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<sim_card_group_list_response> */
+    /** @use SdkModel<SimCardGroupListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

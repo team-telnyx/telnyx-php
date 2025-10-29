@@ -36,7 +36,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Calls\Actions->answer
  *
- * @phpstan-type action_answer_params = array{
+ * @phpstan-type ActionAnswerParamsShape = array{
  *   billingGroupID?: string,
  *   clientState?: string,
  *   commandID?: string,
@@ -67,7 +67,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class ActionAnswerParams implements BaseModel
 {
-    /** @use SdkModel<action_answer_params> */
+    /** @use SdkModel<ActionAnswerParamsShape> */
     use SdkModel;
     use SdkParams;
 

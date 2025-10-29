@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * The summary of the resource that have been assigned to the Private Wireless Gateway.
  *
- * @phpstan-type pwg_assigned_resources_summary = array{
+ * @phpstan-type PwgAssignedResourcesSummaryShape = array{
  *   count?: int, recordType?: string
  * }
  */
 final class PwgAssignedResourcesSummary implements BaseModel
 {
-    /** @use SdkModel<pwg_assigned_resources_summary> */
+    /** @use SdkModel<PwgAssignedResourcesSummaryShape> */
     use SdkModel;
 
     /**

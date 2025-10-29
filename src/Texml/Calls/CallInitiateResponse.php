@@ -12,11 +12,11 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Texml\Calls\CallInitiateResponse\Data;
 
 /**
- * @phpstan-type call_initiate_response = array{data?: Data}
+ * @phpstan-type CallInitiateResponseShape = array{data?: Data}
  */
 final class CallInitiateResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<call_initiate_response> */
+    /** @use SdkModel<CallInitiateResponseShape> */
     use SdkModel;
 
     use SdkResponse;

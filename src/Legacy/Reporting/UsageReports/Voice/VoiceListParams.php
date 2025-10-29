@@ -14,11 +14,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Legacy\Reporting\UsageReports\Voice->list
  *
- * @phpstan-type voice_list_params = array{page?: int, perPage?: int}
+ * @phpstan-type VoiceListParamsShape = array{page?: int, perPage?: int}
  */
 final class VoiceListParams implements BaseModel
 {
-    /** @use SdkModel<voice_list_params> */
+    /** @use SdkModel<VoiceListParamsShape> */
     use SdkModel;
     use SdkParams;
 

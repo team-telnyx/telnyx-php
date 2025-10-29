@@ -15,11 +15,11 @@ use Telnyx\PortingOrders\ActivationJobs\ActivationJobListParams\Page;
  *
  * @see Telnyx\PortingOrders\ActivationJobs->list
  *
- * @phpstan-type activation_job_list_params = array{page?: Page}
+ * @phpstan-type ActivationJobListParamsShape = array{page?: Page}
  */
 final class ActivationJobListParams implements BaseModel
 {
-    /** @use SdkModel<activation_job_list_params> */
+    /** @use SdkModel<ActivationJobListParamsShape> */
     use SdkModel;
     use SdkParams;
 

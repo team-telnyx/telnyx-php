@@ -29,7 +29,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\AI\Assistants\Versions->update
  *
- * @phpstan-type version_update_params = array{
+ * @phpstan-type VersionUpdateParamsShape = array{
  *   assistantID: string,
  *   description?: string,
  *   dynamicVariables?: array<string, mixed>,
@@ -51,7 +51,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class VersionUpdateParams implements BaseModel
 {
-    /** @use SdkModel<version_update_params> */
+    /** @use SdkModel<VersionUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 

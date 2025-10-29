@@ -10,11 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Reports\ReportListWdrsResponse\Data\Rate\Currency;
 
 /**
- * @phpstan-type rate_alias = array{amount?: string, currency?: value-of<Currency>}
+ * @phpstan-type RateShape = array{amount?: string, currency?: value-of<Currency>}
  */
 final class Rate implements BaseModel
 {
-    /** @use SdkModel<rate_alias> */
+    /** @use SdkModel<RateShape> */
     use SdkModel;
 
     /**

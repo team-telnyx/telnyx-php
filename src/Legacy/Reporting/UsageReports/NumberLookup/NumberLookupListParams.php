@@ -14,11 +14,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Legacy\Reporting\UsageReports\NumberLookup->list
  *
- * @phpstan-type number_lookup_list_params = array{page?: int, perPage?: int}
+ * @phpstan-type NumberLookupListParamsShape = array{page?: int, perPage?: int}
  */
 final class NumberLookupListParams implements BaseModel
 {
-    /** @use SdkModel<number_lookup_list_params> */
+    /** @use SdkModel<NumberLookupListParamsShape> */
     use SdkModel;
     use SdkParams;
 

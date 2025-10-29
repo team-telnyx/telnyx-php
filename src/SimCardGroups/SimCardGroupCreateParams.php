@@ -15,13 +15,13 @@ use Telnyx\SimCardGroups\SimCardGroupCreateParams\DataLimit;
  *
  * @see Telnyx\SimCardGroups->create
  *
- * @phpstan-type sim_card_group_create_params = array{
+ * @phpstan-type SimCardGroupCreateParamsShape = array{
  *   name: string, dataLimit?: DataLimit
  * }
  */
 final class SimCardGroupCreateParams implements BaseModel
 {
-    /** @use SdkModel<sim_card_group_create_params> */
+    /** @use SdkModel<SimCardGroupCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

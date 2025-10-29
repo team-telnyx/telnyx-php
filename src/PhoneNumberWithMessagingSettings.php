@@ -12,7 +12,7 @@ use Telnyx\PhoneNumberWithMessagingSettings\RecordType;
 use Telnyx\PhoneNumberWithMessagingSettings\Type;
 
 /**
- * @phpstan-type phone_number_with_messaging_settings = array{
+ * @phpstan-type PhoneNumberWithMessagingSettingsShape = array{
  *   id?: string,
  *   countryCode?: string,
  *   createdAt?: \DateTimeInterface,
@@ -30,7 +30,7 @@ use Telnyx\PhoneNumberWithMessagingSettings\Type;
  */
 final class PhoneNumberWithMessagingSettings implements BaseModel
 {
-    /** @use SdkModel<phone_number_with_messaging_settings> */
+    /** @use SdkModel<PhoneNumberWithMessagingSettingsShape> */
     use SdkModel;
 
     /**

@@ -14,7 +14,7 @@ use Telnyx\SimCardGroups\Actions\SimCardGroupAction\Type;
 /**
  * This object represents a SIM card group action request. It allows tracking the current status of an operation that impacts the SIM card group and SIM card in it.
  *
- * @phpstan-type sim_card_group_action = array{
+ * @phpstan-type SimCardGroupActionShape = array{
  *   id?: string,
  *   createdAt?: string,
  *   recordType?: string,
@@ -27,7 +27,7 @@ use Telnyx\SimCardGroups\Actions\SimCardGroupAction\Type;
  */
 final class SimCardGroupAction implements BaseModel
 {
-    /** @use SdkModel<sim_card_group_action> */
+    /** @use SdkModel<SimCardGroupActionShape> */
     use SdkModel;
 
     /**

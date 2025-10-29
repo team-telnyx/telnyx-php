@@ -12,11 +12,11 @@ use Telnyx\GlobalIPLatency\GlobalIPLatencyRetrieveParams\Filter\GlobalIPID\In;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[global_ip_id][in].
  *
- * @phpstan-type filter_alias = array{globalIPID?: string|In}
+ * @phpstan-type FilterShape = array{globalIPID?: string|In}
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**

@@ -15,13 +15,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Conferences\Actions->recordResume
  *
- * @phpstan-type action_record_resume_params = array{
+ * @phpstan-type ActionRecordResumeParamsShape = array{
  *   commandID?: string, recordingID?: string, region?: Region|value-of<Region>
  * }
  */
 final class ActionRecordResumeParams implements BaseModel
 {
-    /** @use SdkModel<action_record_resume_params> */
+    /** @use SdkModel<ActionRecordResumeParamsShape> */
     use SdkModel;
     use SdkParams;
 

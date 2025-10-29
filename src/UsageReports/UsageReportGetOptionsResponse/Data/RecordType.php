@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * An object following one of the schemas published in https://developers.telnyx.com/docs/api/v2/detail-records.
  *
- * @phpstan-type record_type = array{
+ * @phpstan-type RecordTypeShape = array{
  *   productDimensions?: list<string>,
  *   productMetrics?: list<string>,
  *   recordType?: string,
@@ -19,7 +19,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class RecordType implements BaseModel
 {
-    /** @use SdkModel<record_type> */
+    /** @use SdkModel<RecordTypeShape> */
     use SdkModel;
 
     /**

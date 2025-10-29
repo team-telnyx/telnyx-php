@@ -13,7 +13,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 /**
  * Response model for canary deploy operations.
  *
- * @phpstan-type canary_deploy_response = array{
+ * @phpstan-type CanaryDeployResponseShape = array{
  *   assistantID: string,
  *   createdAt: \DateTimeInterface,
  *   updatedAt: \DateTimeInterface,
@@ -22,7 +22,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  */
 final class CanaryDeployResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<canary_deploy_response> */
+    /** @use SdkModel<CanaryDeployResponseShape> */
     use SdkModel;
 
     use SdkResponse;

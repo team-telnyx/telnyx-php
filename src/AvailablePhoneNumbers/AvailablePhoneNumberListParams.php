@@ -15,11 +15,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\AvailablePhoneNumbers->list
  *
- * @phpstan-type available_phone_number_list_params = array{filter?: Filter}
+ * @phpstan-type AvailablePhoneNumberListParamsShape = array{filter?: Filter}
  */
 final class AvailablePhoneNumberListParams implements BaseModel
 {
-    /** @use SdkModel<available_phone_number_list_params> */
+    /** @use SdkModel<AvailablePhoneNumberListParamsShape> */
     use SdkModel;
     use SdkParams;
 

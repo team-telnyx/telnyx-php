@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Calls\Actions->enqueue
  *
- * @phpstan-type action_enqueue_params = array{
+ * @phpstan-type ActionEnqueueParamsShape = array{
  *   queueName: string,
  *   clientState?: string,
  *   commandID?: string,
@@ -24,7 +24,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class ActionEnqueueParams implements BaseModel
 {
-    /** @use SdkModel<action_enqueue_params> */
+    /** @use SdkModel<ActionEnqueueParamsShape> */
     use SdkModel;
     use SdkParams;
 

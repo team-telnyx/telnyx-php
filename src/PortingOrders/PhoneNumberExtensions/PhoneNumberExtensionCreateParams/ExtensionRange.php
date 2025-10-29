@@ -9,11 +9,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type extension_range = array{endAt: int, startAt: int}
+ * @phpstan-type ExtensionRangeShape = array{endAt: int, startAt: int}
  */
 final class ExtensionRange implements BaseModel
 {
-    /** @use SdkModel<extension_range> */
+    /** @use SdkModel<ExtensionRangeShape> */
     use SdkModel;
 
     /**

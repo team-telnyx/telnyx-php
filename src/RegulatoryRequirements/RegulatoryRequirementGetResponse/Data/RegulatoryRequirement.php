@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\RegulatoryRequirements\RegulatoryRequirementGetResponse\Data\RegulatoryRequirement\AcceptanceCriteria;
 
 /**
- * @phpstan-type regulatory_requirement = array{
+ * @phpstan-type RegulatoryRequirementShape = array{
  *   id?: string,
  *   acceptanceCriteria?: AcceptanceCriteria,
  *   description?: string,
@@ -21,7 +21,7 @@ use Telnyx\RegulatoryRequirements\RegulatoryRequirementGetResponse\Data\Regulato
  */
 final class RegulatoryRequirement implements BaseModel
 {
-    /** @use SdkModel<regulatory_requirement> */
+    /** @use SdkModel<RegulatoryRequirementShape> */
     use SdkModel;
 
     #[Api(optional: true)]

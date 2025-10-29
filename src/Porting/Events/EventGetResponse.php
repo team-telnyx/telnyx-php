@@ -12,11 +12,11 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Porting\Events\EventGetResponse\Data;
 
 /**
- * @phpstan-type event_get_response = array{data?: Data}
+ * @phpstan-type EventGetResponseShape = array{data?: Data}
  */
 final class EventGetResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<event_get_response> */
+    /** @use SdkModel<EventGetResponseShape> */
     use SdkModel;
 
     use SdkResponse;

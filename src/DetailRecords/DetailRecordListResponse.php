@@ -20,14 +20,14 @@ use Telnyx\DetailRecords\DetailRecordListResponse\Data\VerifyDetailRecord;
 use Telnyx\DetailRecords\DetailRecordListResponse\Meta;
 
 /**
- * @phpstan-type detail_record_list_response = array{
+ * @phpstan-type DetailRecordListResponseShape = array{
  *   data?: list<MessageDetailRecord|ConferenceDetailRecord|ConferenceParticipantDetailRecord|AmdDetailRecord|VerifyDetailRecord|SimCardUsageDetailRecord|MediaStorageDetailRecord>,
  *   meta?: Meta,
  * }
  */
 final class DetailRecordListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<detail_record_list_response> */
+    /** @use SdkModel<DetailRecordListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

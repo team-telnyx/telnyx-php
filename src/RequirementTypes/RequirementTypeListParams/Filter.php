@@ -12,11 +12,11 @@ use Telnyx\RequirementTypes\RequirementTypeListParams\Filter\Name;
 /**
  * Consolidated filter parameter for requirement types (deepObject style). Originally: filter[name].
  *
- * @phpstan-type filter_alias = array{name?: Name}
+ * @phpstan-type FilterShape = array{name?: Name}
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     #[Api(optional: true)]

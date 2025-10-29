@@ -14,7 +14,7 @@ use Telnyx\ExternalConnections\ExternalConnectionListParams\Filter\PhoneNumber;
 /**
  * Filter parameter for external connections (deepObject style). Supports filtering by connection_name, external_sip_connection, id, created_at, and phone_number.
  *
- * @phpstan-type filter_alias = array{
+ * @phpstan-type FilterShape = array{
  *   id?: string,
  *   connectionName?: ConnectionName,
  *   createdAt?: string,
@@ -24,7 +24,7 @@ use Telnyx\ExternalConnections\ExternalConnectionListParams\Filter\PhoneNumber;
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**

@@ -15,11 +15,11 @@ use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadListParams\Page;
  *
  * @see Telnyx\PhoneNumbers\CsvDownloads->list
  *
- * @phpstan-type csv_download_list_params = array{page?: Page}
+ * @phpstan-type CsvDownloadListParamsShape = array{page?: Page}
  */
 final class CsvDownloadListParams implements BaseModel
 {
-    /** @use SdkModel<csv_download_list_params> */
+    /** @use SdkModel<CsvDownloadListParamsShape> */
     use SdkModel;
     use SdkParams;
 

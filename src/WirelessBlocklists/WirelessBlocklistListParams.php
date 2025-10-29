@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\WirelessBlocklists->list
  *
- * @phpstan-type wireless_blocklist_list_params = array{
+ * @phpstan-type WirelessBlocklistListParamsShape = array{
  *   filterName?: string,
  *   filterType?: string,
  *   filterValues?: string,
@@ -24,7 +24,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class WirelessBlocklistListParams implements BaseModel
 {
-    /** @use SdkModel<wireless_blocklist_list_params> */
+    /** @use SdkModel<WirelessBlocklistListParamsShape> */
     use SdkModel;
     use SdkParams;
 

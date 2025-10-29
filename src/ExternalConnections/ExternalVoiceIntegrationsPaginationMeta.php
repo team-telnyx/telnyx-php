@@ -9,13 +9,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type external_voice_integrations_pagination_meta = array{
+ * @phpstan-type ExternalVoiceIntegrationsPaginationMetaShape = array{
  *   pageNumber?: int, pageSize?: int, totalPages?: int, totalResults?: int
  * }
  */
 final class ExternalVoiceIntegrationsPaginationMeta implements BaseModel
 {
-    /** @use SdkModel<external_voice_integrations_pagination_meta> */
+    /** @use SdkModel<ExternalVoiceIntegrationsPaginationMetaShape> */
     use SdkModel;
 
     #[Api('page_number', optional: true)]

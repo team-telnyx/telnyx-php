@@ -17,13 +17,13 @@ use Telnyx\UserAddresses\UserAddressListParams\Sort;
  *
  * @see Telnyx\UserAddresses->list
  *
- * @phpstan-type user_address_list_params = array{
+ * @phpstan-type UserAddressListParamsShape = array{
  *   filter?: Filter, page?: Page, sort?: Sort|value-of<Sort>
  * }
  */
 final class UserAddressListParams implements BaseModel
 {
-    /** @use SdkModel<user_address_list_params> */
+    /** @use SdkModel<UserAddressListParamsShape> */
     use SdkModel;
     use SdkParams;
 

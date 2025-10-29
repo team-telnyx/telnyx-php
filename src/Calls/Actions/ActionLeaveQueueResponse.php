@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type action_leave_queue_response = array{
+ * @phpstan-type ActionLeaveQueueResponseShape = array{
  *   data?: CallControlCommandResult
  * }
  */
 final class ActionLeaveQueueResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<action_leave_queue_response> */
+    /** @use SdkModel<ActionLeaveQueueResponseShape> */
     use SdkModel;
 
     use SdkResponse;

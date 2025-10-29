@@ -17,7 +17,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\CallControlApplications->update
  *
- * @phpstan-type call_control_application_update_params = array{
+ * @phpstan-type CallControlApplicationUpdateParamsShape = array{
  *   applicationName: string,
  *   webhookEventURL: string,
  *   active?: bool,
@@ -36,7 +36,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class CallControlApplicationUpdateParams implements BaseModel
 {
-    /** @use SdkModel<call_control_application_update_params> */
+    /** @use SdkModel<CallControlApplicationUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 

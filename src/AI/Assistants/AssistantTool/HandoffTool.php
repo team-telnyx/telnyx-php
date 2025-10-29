@@ -13,11 +13,11 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * The handoff tool allows the assistant to hand off control of the conversation to another AI assistant. By default, this will happen transparently to the end user.
  *
- * @phpstan-type handoff_tool = array{handoff: Handoff, type: value-of<Type>}
+ * @phpstan-type HandoffToolShape = array{handoff: Handoff, type: value-of<Type>}
  */
 final class HandoffTool implements BaseModel
 {
-    /** @use SdkModel<handoff_tool> */
+    /** @use SdkModel<HandoffToolShape> */
     use SdkModel;
 
     #[Api]

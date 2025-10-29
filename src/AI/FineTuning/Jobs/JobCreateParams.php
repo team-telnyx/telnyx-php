@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\AI\FineTuning\Jobs->create
  *
- * @phpstan-type job_create_params = array{
+ * @phpstan-type JobCreateParamsShape = array{
  *   model: string,
  *   trainingFile: string,
  *   hyperparameters?: Hyperparameters,
@@ -24,7 +24,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class JobCreateParams implements BaseModel
 {
-    /** @use SdkModel<job_create_params> */
+    /** @use SdkModel<JobCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

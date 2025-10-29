@@ -14,11 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\PortingOrders->retrieve
  *
- * @phpstan-type porting_order_retrieve_params = array{includePhoneNumbers?: bool}
+ * @phpstan-type PortingOrderRetrieveParamsShape = array{
+ *   includePhoneNumbers?: bool
+ * }
  */
 final class PortingOrderRetrieveParams implements BaseModel
 {
-    /** @use SdkModel<porting_order_retrieve_params> */
+    /** @use SdkModel<PortingOrderRetrieveParamsShape> */
     use SdkModel;
     use SdkParams;
 

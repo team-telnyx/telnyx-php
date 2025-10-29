@@ -18,13 +18,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\PartnerCampaigns->listSharedByMe
  *
- * @phpstan-type partner_campaign_list_shared_by_me_params = array{
+ * @phpstan-type PartnerCampaignListSharedByMeParamsShape = array{
  *   page?: int, recordsPerPage?: int
  * }
  */
 final class PartnerCampaignListSharedByMeParams implements BaseModel
 {
-    /** @use SdkModel<partner_campaign_list_shared_by_me_params> */
+    /** @use SdkModel<PartnerCampaignListSharedByMeParamsShape> */
     use SdkModel;
     use SdkParams;
 

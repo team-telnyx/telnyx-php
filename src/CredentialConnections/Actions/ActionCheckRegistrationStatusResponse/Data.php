@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\CredentialConnections\Actions\ActionCheckRegistrationStatusResponse\Data\Status;
 
 /**
- * @phpstan-type data_alias = array{
+ * @phpstan-type DataShape = array{
  *   ipAddress?: string,
  *   lastRegistration?: string,
  *   port?: int,
@@ -23,7 +23,7 @@ use Telnyx\CredentialConnections\Actions\ActionCheckRegistrationStatusResponse\D
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**

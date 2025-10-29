@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * The body parameters the webhook tool accepts, described as a JSON Schema object. These parameters will be passed to the webhook as the body of the request. See the [JSON Schema reference](https://json-schema.org/understanding-json-schema) for documentation about the format.
  *
- * @phpstan-type body_parameters = array{
+ * @phpstan-type BodyParametersShape = array{
  *   properties?: array<string, mixed>,
  *   required?: list<string>,
  *   type?: value-of<Type>,
@@ -20,7 +20,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class BodyParameters implements BaseModel
 {
-    /** @use SdkModel<body_parameters> */
+    /** @use SdkModel<BodyParametersShape> */
     use SdkModel;
 
     /**

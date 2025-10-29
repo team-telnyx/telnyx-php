@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\PortingOrders\AssociatedPhoneNumbers->delete
  *
- * @phpstan-type associated_phone_number_delete_params = array{
+ * @phpstan-type AssociatedPhoneNumberDeleteParamsShape = array{
  *   portingOrderID: string
  * }
  */
 final class AssociatedPhoneNumberDeleteParams implements BaseModel
 {
-    /** @use SdkModel<associated_phone_number_delete_params> */
+    /** @use SdkModel<AssociatedPhoneNumberDeleteParamsShape> */
     use SdkModel;
     use SdkParams;
 

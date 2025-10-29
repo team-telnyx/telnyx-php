@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type book_appointment = array{
+ * @phpstan-type BookAppointmentShape = array{
  *   apiKeyRef: string,
  *   eventTypeID: int,
  *   attendeeName?: string,
@@ -18,7 +18,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class BookAppointment implements BaseModel
 {
-    /** @use SdkModel<book_appointment> */
+    /** @use SdkModel<BookAppointmentShape> */
     use SdkModel;
 
     /**

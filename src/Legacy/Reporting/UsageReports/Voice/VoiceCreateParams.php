@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Legacy\Reporting\UsageReports\Voice->create
  *
- * @phpstan-type voice_create_params = array{
+ * @phpstan-type VoiceCreateParamsShape = array{
  *   endTime: \DateTimeInterface,
  *   startTime: \DateTimeInterface,
  *   aggregationType?: int,
@@ -26,7 +26,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class VoiceCreateParams implements BaseModel
 {
-    /** @use SdkModel<voice_create_params> */
+    /** @use SdkModel<VoiceCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

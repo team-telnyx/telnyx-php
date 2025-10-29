@@ -11,7 +11,7 @@ use Telnyx\Messages\MessageGetResponse\Data\InboundMessagePayload\To\LineType;
 use Telnyx\Messages\MessageGetResponse\Data\InboundMessagePayload\To\Status;
 
 /**
- * @phpstan-type to_alias = array{
+ * @phpstan-type ToShape = array{
  *   carrier?: string,
  *   lineType?: value-of<LineType>,
  *   phoneNumber?: string,
@@ -20,7 +20,7 @@ use Telnyx\Messages\MessageGetResponse\Data\InboundMessagePayload\To\Status;
  */
 final class To implements BaseModel
 {
-    /** @use SdkModel<to_alias> */
+    /** @use SdkModel<ToShape> */
     use SdkModel;
 
     /**

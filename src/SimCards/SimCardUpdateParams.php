@@ -16,7 +16,7 @@ use Telnyx\SimCardStatus;
  *
  * @see Telnyx\SimCards->update
  *
- * @phpstan-type sim_card_update_params = array{
+ * @phpstan-type SimCardUpdateParamsShape = array{
  *   authorizedImeis?: list<string>|null,
  *   dataLimit?: DataLimit,
  *   simCardGroupID?: string,
@@ -26,7 +26,7 @@ use Telnyx\SimCardStatus;
  */
 final class SimCardUpdateParams implements BaseModel
 {
-    /** @use SdkModel<sim_card_update_params> */
+    /** @use SdkModel<SimCardUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 

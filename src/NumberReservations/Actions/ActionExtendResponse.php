@@ -12,11 +12,11 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\NumberReservations\NumberReservation;
 
 /**
- * @phpstan-type action_extend_response = array{data?: NumberReservation}
+ * @phpstan-type ActionExtendResponseShape = array{data?: NumberReservation}
  */
 final class ActionExtendResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<action_extend_response> */
+    /** @use SdkModel<ActionExtendResponseShape> */
     use SdkModel;
 
     use SdkResponse;

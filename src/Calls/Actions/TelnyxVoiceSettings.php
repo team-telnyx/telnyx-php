@@ -9,11 +9,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type telnyx_voice_settings = array{voiceSpeed?: float}
+ * @phpstan-type TelnyxVoiceSettingsShape = array{voiceSpeed?: float}
  */
 final class TelnyxVoiceSettings implements BaseModel
 {
-    /** @use SdkModel<telnyx_voice_settings> */
+    /** @use SdkModel<TelnyxVoiceSettingsShape> */
     use SdkModel;
 
     /**

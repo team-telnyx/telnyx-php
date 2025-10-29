@@ -17,7 +17,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\CallControlApplications->create
  *
- * @phpstan-type call_control_application_create_params = array{
+ * @phpstan-type CallControlApplicationCreateParamsShape = array{
  *   applicationName: string,
  *   webhookEventURL: string,
  *   active?: bool,
@@ -35,7 +35,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class CallControlApplicationCreateParams implements BaseModel
 {
-    /** @use SdkModel<call_control_application_create_params> */
+    /** @use SdkModel<CallControlApplicationCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

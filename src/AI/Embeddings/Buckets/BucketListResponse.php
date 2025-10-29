@@ -12,11 +12,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type bucket_list_response = array{data: Data}
+ * @phpstan-type BucketListResponseShape = array{data: Data}
  */
 final class BucketListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<bucket_list_response> */
+    /** @use SdkModel<BucketListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

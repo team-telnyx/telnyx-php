@@ -11,7 +11,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type advanced_order = array{
+ * @phpstan-type AdvancedOrderShape = array{
  *   areaCode?: string,
  *   comments?: string,
  *   countryCode?: string,
@@ -24,7 +24,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class AdvancedOrder implements BaseModel
 {
-    /** @use SdkModel<advanced_order> */
+    /** @use SdkModel<AdvancedOrderShape> */
     use SdkModel;
 
     #[Api('area_code', optional: true)]

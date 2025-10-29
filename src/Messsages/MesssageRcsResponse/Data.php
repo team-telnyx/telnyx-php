@@ -12,7 +12,7 @@ use Telnyx\Messsages\MesssageRcsResponse\Data\To;
 use Telnyx\Messsages\RcsAgentMessage;
 
 /**
- * @phpstan-type data_alias = array{
+ * @phpstan-type DataShape = array{
  *   id?: string,
  *   body?: RcsAgentMessage,
  *   direction?: string,
@@ -28,7 +28,7 @@ use Telnyx\Messsages\RcsAgentMessage;
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**

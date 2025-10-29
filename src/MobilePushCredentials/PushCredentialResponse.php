@@ -13,11 +13,11 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 /**
  * Success response with details about a push credential.
  *
- * @phpstan-type push_credential_response = array{data?: PushCredential}
+ * @phpstan-type PushCredentialResponseShape = array{data?: PushCredential}
  */
 final class PushCredentialResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<push_credential_response> */
+    /** @use SdkModel<PushCredentialResponseShape> */
     use SdkModel;
 
     use SdkResponse;

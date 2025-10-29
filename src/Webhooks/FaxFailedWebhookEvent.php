@@ -12,7 +12,7 @@ use Telnyx\Webhooks\FaxFailedWebhookEvent\Payload;
 use Telnyx\Webhooks\FaxFailedWebhookEvent\RecordType;
 
 /**
- * @phpstan-type fax_failed_webhook_event = array{
+ * @phpstan-type FaxFailedWebhookEventShape = array{
  *   id?: string,
  *   eventType?: value-of<EventType>,
  *   payload?: Payload,
@@ -21,7 +21,7 @@ use Telnyx\Webhooks\FaxFailedWebhookEvent\RecordType;
  */
 final class FaxFailedWebhookEvent implements BaseModel
 {
-    /** @use SdkModel<fax_failed_webhook_event> */
+    /** @use SdkModel<FaxFailedWebhookEventShape> */
     use SdkModel;
 
     /**

@@ -16,11 +16,11 @@ use Telnyx\Fqdns\FqdnListParams\Page;
  *
  * @see Telnyx\Fqdns->list
  *
- * @phpstan-type fqdn_list_params = array{filter?: Filter, page?: Page}
+ * @phpstan-type FqdnListParamsShape = array{filter?: Filter, page?: Page}
  */
 final class FqdnListParams implements BaseModel
 {
-    /** @use SdkModel<fqdn_list_params> */
+    /** @use SdkModel<FqdnListParamsShape> */
     use SdkModel;
     use SdkParams;
 

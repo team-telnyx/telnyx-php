@@ -12,13 +12,13 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\MessagingHostedNumberOrder;
 
 /**
- * @phpstan-type messaging_hosted_number_order_delete_response = array{
+ * @phpstan-type MessagingHostedNumberOrderDeleteResponseShape = array{
  *   data?: MessagingHostedNumberOrder
  * }
  */
 final class MessagingHostedNumberOrderDeleteResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<messaging_hosted_number_order_delete_response> */
+    /** @use SdkModel<MessagingHostedNumberOrderDeleteResponseShape> */
     use SdkModel;
 
     use SdkResponse;

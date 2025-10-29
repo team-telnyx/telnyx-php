@@ -12,13 +12,13 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Metadata;
 
 /**
- * @phpstan-type portout_list_response = array{
+ * @phpstan-type PortoutListResponseShape = array{
  *   data?: list<PortoutDetails>, meta?: Metadata
  * }
  */
 final class PortoutListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<portout_list_response> */
+    /** @use SdkModel<PortoutListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

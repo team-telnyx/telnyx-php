@@ -15,11 +15,11 @@ use Telnyx\MessagingProfiles\MessagingProfileListPhoneNumbersParams\Page;
  *
  * @see Telnyx\MessagingProfiles->listPhoneNumbers
  *
- * @phpstan-type messaging_profile_list_phone_numbers_params = array{page?: Page}
+ * @phpstan-type MessagingProfileListPhoneNumbersParamsShape = array{page?: Page}
  */
 final class MessagingProfileListPhoneNumbersParams implements BaseModel
 {
-    /** @use SdkModel<messaging_profile_list_phone_numbers_params> */
+    /** @use SdkModel<MessagingProfileListPhoneNumbersParamsShape> */
     use SdkModel;
     use SdkParams;
 

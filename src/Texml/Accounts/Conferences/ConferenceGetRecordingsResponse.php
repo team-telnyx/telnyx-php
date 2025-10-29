@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Texml\Accounts\Conferences\ConferenceGetRecordingsResponse\Recording;
 
 /**
- * @phpstan-type conference_get_recordings_response = array{
+ * @phpstan-type ConferenceGetRecordingsResponseShape = array{
  *   end?: int,
  *   firstPageUri?: string,
  *   nextPageUri?: string,
@@ -25,7 +25,7 @@ use Telnyx\Texml\Accounts\Conferences\ConferenceGetRecordingsResponse\Recording;
  */
 final class ConferenceGetRecordingsResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<conference_get_recordings_response> */
+    /** @use SdkModel<ConferenceGetRecordingsResponseShape> */
     use SdkModel;
 
     use SdkResponse;

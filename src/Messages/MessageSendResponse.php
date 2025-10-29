@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type message_send_response = array{data?: OutboundMessagePayload}
+ * @phpstan-type MessageSendResponseShape = array{data?: OutboundMessagePayload}
  */
 final class MessageSendResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<message_send_response> */
+    /** @use SdkModel<MessageSendResponseShape> */
     use SdkModel;
 
     use SdkResponse;

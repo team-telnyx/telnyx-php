@@ -16,7 +16,7 @@ use Telnyx\UsageReports\UsageReportListParams\Page;
  *
  * @see Telnyx\UsageReports->list
  *
- * @phpstan-type usage_report_list_params = array{
+ * @phpstan-type UsageReportListParamsShape = array{
  *   dimensions: list<string>,
  *   metrics: list<string>,
  *   product: string,
@@ -33,7 +33,7 @@ use Telnyx\UsageReports\UsageReportListParams\Page;
  */
 final class UsageReportListParams implements BaseModel
 {
-    /** @use SdkModel<usage_report_list_params> */
+    /** @use SdkModel<UsageReportListParamsShape> */
     use SdkModel;
     use SdkParams;
 

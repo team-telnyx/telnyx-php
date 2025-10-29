@@ -11,11 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type texml_application_delete_response = array{data?: TexmlApplication}
+ * @phpstan-type TexmlApplicationDeleteResponseShape = array{
+ *   data?: TexmlApplication
+ * }
  */
 final class TexmlApplicationDeleteResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<texml_application_delete_response> */
+    /** @use SdkModel<TexmlApplicationDeleteResponseShape> */
     use SdkModel;
 
     use SdkResponse;

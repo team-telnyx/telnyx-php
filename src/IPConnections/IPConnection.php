@@ -15,7 +15,7 @@ use Telnyx\IPConnections\IPConnection\TransportProtocol;
 use Telnyx\IPConnections\IPConnection\WebhookAPIVersion;
 
 /**
- * @phpstan-type ip_connection = array{
+ * @phpstan-type IPConnectionShape = array{
  *   id?: string,
  *   active?: bool,
  *   anchorsiteOverride?: value-of<AnchorsiteOverride>,
@@ -41,7 +41,7 @@ use Telnyx\IPConnections\IPConnection\WebhookAPIVersion;
  */
 final class IPConnection implements BaseModel
 {
-    /** @use SdkModel<ip_connection> */
+    /** @use SdkModel<IPConnectionShape> */
     use SdkModel;
 
     /**

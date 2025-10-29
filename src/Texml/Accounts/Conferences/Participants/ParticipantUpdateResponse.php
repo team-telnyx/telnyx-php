@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantUpdateResponse\Status;
 
 /**
- * @phpstan-type participant_update_response = array{
+ * @phpstan-type ParticipantUpdateResponseShape = array{
  *   accountSid?: string,
  *   apiVersion?: string,
  *   callSid?: string,
@@ -31,7 +31,7 @@ use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantUpdateResponse\Sta
  */
 final class ParticipantUpdateResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<participant_update_response> */
+    /** @use SdkModel<ParticipantUpdateResponseShape> */
     use SdkModel;
 
     use SdkResponse;

@@ -9,13 +9,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type parameter_alias = array{
+ * @phpstan-type ParameterShape = array{
  *   dataType?: string, name?: string, optional?: bool
  * }
  */
 final class Parameter implements BaseModel
 {
-    /** @use SdkModel<parameter_alias> */
+    /** @use SdkModel<ParameterShape> */
     use SdkModel;
 
     #[Api('data_type', optional: true)]

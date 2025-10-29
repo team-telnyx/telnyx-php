@@ -12,13 +12,13 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\SimCards\Actions\ActionValidateRegistrationCodesResponse\Data;
 
 /**
- * @phpstan-type action_validate_registration_codes_response = array{
+ * @phpstan-type ActionValidateRegistrationCodesResponseShape = array{
  *   data?: list<Data>
  * }
  */
 final class ActionValidateRegistrationCodesResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<action_validate_registration_codes_response> */
+    /** @use SdkModel<ActionValidateRegistrationCodesResponseShape> */
     use SdkModel;
 
     use SdkResponse;

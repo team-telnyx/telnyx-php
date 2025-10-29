@@ -9,13 +9,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type batch_csv_pagination_meta = array{
+ * @phpstan-type BatchCsvPaginationMetaShape = array{
  *   pageNumber?: int, pageSize?: int, totalPages?: int, totalResults?: int
  * }
  */
 final class BatchCsvPaginationMeta implements BaseModel
 {
-    /** @use SdkModel<batch_csv_pagination_meta> */
+    /** @use SdkModel<BatchCsvPaginationMetaShape> */
     use SdkModel;
 
     #[Api('page_number', optional: true)]

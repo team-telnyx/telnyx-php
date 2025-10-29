@@ -17,13 +17,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Addresses->list
  *
- * @phpstan-type address_list_params = array{
+ * @phpstan-type AddressListParamsShape = array{
  *   filter?: Filter, page?: Page, sort?: Sort|value-of<Sort>
  * }
  */
 final class AddressListParams implements BaseModel
 {
-    /** @use SdkModel<address_list_params> */
+    /** @use SdkModel<AddressListParamsShape> */
     use SdkModel;
     use SdkParams;
 

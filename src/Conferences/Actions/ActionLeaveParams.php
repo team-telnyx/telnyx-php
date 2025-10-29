@@ -20,7 +20,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Conferences\Actions->leave
  *
- * @phpstan-type action_leave_params = array{
+ * @phpstan-type ActionLeaveParamsShape = array{
  *   callControlID: string,
  *   beepEnabled?: BeepEnabled|value-of<BeepEnabled>,
  *   commandID?: string,
@@ -29,7 +29,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class ActionLeaveParams implements BaseModel
 {
-    /** @use SdkModel<action_leave_params> */
+    /** @use SdkModel<ActionLeaveParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -10,11 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\CallForkStoppedWebhookEvent\Data;
 
 /**
- * @phpstan-type call_fork_stopped_webhook_event = array{data?: Data}
+ * @phpstan-type CallForkStoppedWebhookEventShape = array{data?: Data}
  */
 final class CallForkStoppedWebhookEvent implements BaseModel
 {
-    /** @use SdkModel<call_fork_stopped_webhook_event> */
+    /** @use SdkModel<CallForkStoppedWebhookEventShape> */
     use SdkModel;
 
     #[Api(optional: true)]

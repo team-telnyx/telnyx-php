@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type call_calls_response = array{
+ * @phpstan-type CallCallsResponseShape = array{
  *   from?: string, status?: string, to?: string
  * }
  */
 final class CallCallsResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<call_calls_response> */
+    /** @use SdkModel<CallCallsResponseShape> */
     use SdkModel;
 
     use SdkResponse;

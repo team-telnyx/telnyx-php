@@ -16,11 +16,11 @@ use Telnyx\Faxes\FaxListParams\Page;
  *
  * @see Telnyx\Faxes->list
  *
- * @phpstan-type fax_list_params = array{filter?: Filter, page?: Page}
+ * @phpstan-type FaxListParamsShape = array{filter?: Filter, page?: Page}
  */
 final class FaxListParams implements BaseModel
 {
-    /** @use SdkModel<fax_list_params> */
+    /** @use SdkModel<FaxListParamsShape> */
     use SdkModel;
     use SdkParams;
 

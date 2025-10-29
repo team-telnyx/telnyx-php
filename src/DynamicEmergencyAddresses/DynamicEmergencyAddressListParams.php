@@ -16,13 +16,13 @@ use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressListParams\Page;
  *
  * @see Telnyx\DynamicEmergencyAddresses->list
  *
- * @phpstan-type dynamic_emergency_address_list_params = array{
+ * @phpstan-type DynamicEmergencyAddressListParamsShape = array{
  *   filter?: Filter, page?: Page
  * }
  */
 final class DynamicEmergencyAddressListParams implements BaseModel
 {
-    /** @use SdkModel<dynamic_emergency_address_list_params> */
+    /** @use SdkModel<DynamicEmergencyAddressListParamsShape> */
     use SdkModel;
     use SdkParams;
 

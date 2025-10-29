@@ -9,13 +9,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type inference_embedding_bucket_ids = array{
+ * @phpstan-type InferenceEmbeddingBucketIDsShape = array{
  *   bucketIDs: list<string>, maxNumResults?: int
  * }
  */
 final class InferenceEmbeddingBucketIDs implements BaseModel
 {
-    /** @use SdkModel<inference_embedding_bucket_ids> */
+    /** @use SdkModel<InferenceEmbeddingBucketIDsShape> */
     use SdkModel;
 
     /**

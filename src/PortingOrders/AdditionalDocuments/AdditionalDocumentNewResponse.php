@@ -12,11 +12,11 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentNewResponse\Data;
 
 /**
- * @phpstan-type additional_document_new_response = array{data?: list<Data>}
+ * @phpstan-type AdditionalDocumentNewResponseShape = array{data?: list<Data>}
  */
 final class AdditionalDocumentNewResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<additional_document_new_response> */
+    /** @use SdkModel<AdditionalDocumentNewResponseShape> */
     use SdkModel;
 
     use SdkResponse;

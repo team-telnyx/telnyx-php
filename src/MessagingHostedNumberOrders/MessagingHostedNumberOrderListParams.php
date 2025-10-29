@@ -15,11 +15,11 @@ use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderListParams\Page
  *
  * @see Telnyx\MessagingHostedNumberOrders->list
  *
- * @phpstan-type messaging_hosted_number_order_list_params = array{page?: Page}
+ * @phpstan-type MessagingHostedNumberOrderListParamsShape = array{page?: Page}
  */
 final class MessagingHostedNumberOrderListParams implements BaseModel
 {
-    /** @use SdkModel<messaging_hosted_number_order_list_params> */
+    /** @use SdkModel<MessagingHostedNumberOrderListParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -15,11 +15,13 @@ use Telnyx\NumberLookup\NumberLookupRetrieveParams\Type;
  *
  * @see Telnyx\NumberLookup->retrieve
  *
- * @phpstan-type number_lookup_retrieve_params = array{type?: Type|value-of<Type>}
+ * @phpstan-type NumberLookupRetrieveParamsShape = array{
+ *   type?: Type|value-of<Type>
+ * }
  */
 final class NumberLookupRetrieveParams implements BaseModel
 {
-    /** @use SdkModel<number_lookup_retrieve_params> */
+    /** @use SdkModel<NumberLookupRetrieveParamsShape> */
     use SdkModel;
     use SdkParams;
 

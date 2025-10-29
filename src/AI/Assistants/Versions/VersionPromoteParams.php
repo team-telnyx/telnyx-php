@@ -14,11 +14,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\AI\Assistants\Versions->promote
  *
- * @phpstan-type version_promote_params = array{assistantID: string}
+ * @phpstan-type VersionPromoteParamsShape = array{assistantID: string}
  */
 final class VersionPromoteParams implements BaseModel
 {
-    /** @use SdkModel<version_promote_params> */
+    /** @use SdkModel<VersionPromoteParamsShape> */
     use SdkModel;
     use SdkParams;
 

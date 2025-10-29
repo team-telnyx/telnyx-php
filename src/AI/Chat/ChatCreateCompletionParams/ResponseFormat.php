@@ -12,11 +12,11 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Use this is you want to guarantee a JSON output without defining a schema. For control over the schema, use `guided_json`.
  *
- * @phpstan-type response_format = array{type: value-of<Type>}
+ * @phpstan-type ResponseFormatShape = array{type: value-of<Type>}
  */
 final class ResponseFormat implements BaseModel
 {
-    /** @use SdkModel<response_format> */
+    /** @use SdkModel<ResponseFormatShape> */
     use SdkModel;
 
     /** @var value-of<Type> $type */

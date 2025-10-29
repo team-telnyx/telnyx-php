@@ -16,13 +16,13 @@ use Telnyx\DetailRecords\DetailRecordListParams\Page;
  *
  * @see Telnyx\DetailRecords->list
  *
- * @phpstan-type detail_record_list_params = array{
+ * @phpstan-type DetailRecordListParamsShape = array{
  *   filter?: Filter, page?: Page, sort?: list<string>
  * }
  */
 final class DetailRecordListParams implements BaseModel
 {
-    /** @use SdkModel<detail_record_list_params> */
+    /** @use SdkModel<DetailRecordListParamsShape> */
     use SdkModel;
     use SdkParams;
 

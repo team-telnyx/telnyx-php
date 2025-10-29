@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Texml\Accounts\Transcriptions\Json\JsonGetRecordingTranscriptionSidJsonResponse\Status;
 
 /**
- * @phpstan-type json_get_recording_transcription_sid_json_response = array{
+ * @phpstan-type JsonGetRecordingTranscriptionSidJsonResponseShape = array{
  *   accountSid?: string,
  *   apiVersion?: string,
  *   callSid?: string,
@@ -28,7 +28,7 @@ use Telnyx\Texml\Accounts\Transcriptions\Json\JsonGetRecordingTranscriptionSidJs
  */
 final class JsonGetRecordingTranscriptionSidJsonResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<json_get_recording_transcription_sid_json_response> */
+    /** @use SdkModel<JsonGetRecordingTranscriptionSidJsonResponseShape> */
     use SdkModel;
 
     use SdkResponse;

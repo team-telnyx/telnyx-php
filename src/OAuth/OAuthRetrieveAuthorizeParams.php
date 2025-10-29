@@ -16,7 +16,7 @@ use Telnyx\OAuth\OAuthRetrieveAuthorizeParams\ResponseType;
  *
  * @see Telnyx\OAuth->retrieveAuthorize
  *
- * @phpstan-type oauth_retrieve_authorize_params = array{
+ * @phpstan-type OAuthRetrieveAuthorizeParamsShape = array{
  *   clientID: string,
  *   redirectUri: string,
  *   responseType: ResponseType|value-of<ResponseType>,
@@ -28,7 +28,7 @@ use Telnyx\OAuth\OAuthRetrieveAuthorizeParams\ResponseType;
  */
 final class OAuthRetrieveAuthorizeParams implements BaseModel
 {
-    /** @use SdkModel<oauth_retrieve_authorize_params> */
+    /** @use SdkModel<OAuthRetrieveAuthorizeParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\CallConversationEndedWebhookEvent\Data\Payload\CallingPartyType;
 
 /**
- * @phpstan-type payload_alias = array{
+ * @phpstan-type PayloadShape = array{
  *   assistantID?: string,
  *   callControlID?: string,
  *   callLegID?: string,
@@ -31,7 +31,7 @@ use Telnyx\Webhooks\CallConversationEndedWebhookEvent\Data\Payload\CallingPartyT
  */
 final class Payload implements BaseModel
 {
-    /** @use SdkModel<payload_alias> */
+    /** @use SdkModel<PayloadShape> */
     use SdkModel;
 
     /**

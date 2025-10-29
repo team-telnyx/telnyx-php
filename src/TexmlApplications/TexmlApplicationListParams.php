@@ -17,13 +17,13 @@ use Telnyx\TexmlApplications\TexmlApplicationListParams\Sort;
  *
  * @see Telnyx\TexmlApplications->list
  *
- * @phpstan-type texml_application_list_params = array{
+ * @phpstan-type TexmlApplicationListParamsShape = array{
  *   filter?: Filter, page?: Page, sort?: Sort|value-of<Sort>
  * }
  */
 final class TexmlApplicationListParams implements BaseModel
 {
-    /** @use SdkModel<texml_application_list_params> */
+    /** @use SdkModel<TexmlApplicationListParamsShape> */
     use SdkModel;
     use SdkParams;
 

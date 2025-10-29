@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Wireless\DetailRecordsReports->create
  *
- * @phpstan-type detail_records_report_create_params = array{
+ * @phpstan-type DetailRecordsReportCreateParamsShape = array{
  *   endTime?: string, startTime?: string
  * }
  */
 final class DetailRecordsReportCreateParams implements BaseModel
 {
-    /** @use SdkModel<detail_records_report_create_params> */
+    /** @use SdkModel<DetailRecordsReportCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

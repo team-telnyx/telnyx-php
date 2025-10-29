@@ -11,7 +11,7 @@ use Telnyx\NetworkCoverage\AvailableService;
 use Telnyx\NetworkCoverage\NetworkCoverageListResponse\Data\Location;
 
 /**
- * @phpstan-type data_alias = array{
+ * @phpstan-type DataShape = array{
  *   availableServices?: list<value-of<AvailableService>>,
  *   location?: Location,
  *   recordType?: string,
@@ -19,7 +19,7 @@ use Telnyx\NetworkCoverage\NetworkCoverageListResponse\Data\Location;
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**

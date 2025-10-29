@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * The new porting order that the phone numbers was moved to.
  *
- * @phpstan-type to_alias = array{id?: string}
+ * @phpstan-type ToShape = array{id?: string}
  */
 final class To implements BaseModel
 {
-    /** @use SdkModel<to_alias> */
+    /** @use SdkModel<ToShape> */
     use SdkModel;
 
     /**

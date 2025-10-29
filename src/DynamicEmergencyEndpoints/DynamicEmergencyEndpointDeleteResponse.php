@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type dynamic_emergency_endpoint_delete_response = array{
+ * @phpstan-type DynamicEmergencyEndpointDeleteResponseShape = array{
  *   data?: DynamicEmergencyEndpoint
  * }
  */
 final class DynamicEmergencyEndpointDeleteResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<dynamic_emergency_endpoint_delete_response> */
+    /** @use SdkModel<DynamicEmergencyEndpointDeleteResponseShape> */
     use SdkModel;
 
     use SdkResponse;

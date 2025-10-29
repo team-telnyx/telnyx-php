@@ -14,11 +14,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\ExternalConnections\Releases->retrieve
  *
- * @phpstan-type release_retrieve_params = array{id: string}
+ * @phpstan-type ReleaseRetrieveParamsShape = array{id: string}
  */
 final class ReleaseRetrieveParams implements BaseModel
 {
-    /** @use SdkModel<release_retrieve_params> */
+    /** @use SdkModel<ReleaseRetrieveParamsShape> */
     use SdkModel;
     use SdkParams;
 

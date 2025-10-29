@@ -13,7 +13,7 @@ use Telnyx\Faxes\Fax\RecordType;
 use Telnyx\Faxes\Fax\Status;
 
 /**
- * @phpstan-type fax_alias = array{
+ * @phpstan-type FaxShape = array{
  *   id?: string,
  *   clientState?: string,
  *   connectionID?: string,
@@ -37,7 +37,7 @@ use Telnyx\Faxes\Fax\Status;
  */
 final class Fax implements BaseModel
 {
-    /** @use SdkModel<fax_alias> */
+    /** @use SdkModel<FaxShape> */
     use SdkModel;
 
     /**

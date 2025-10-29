@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\IPs->update
  *
- * @phpstan-type ip_update_params = array{
+ * @phpstan-type IPUpdateParamsShape = array{
  *   ipAddress: string, connectionID?: string, port?: int
  * }
  */
 final class IPUpdateParams implements BaseModel
 {
-    /** @use SdkModel<ip_update_params> */
+    /** @use SdkModel<IPUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 

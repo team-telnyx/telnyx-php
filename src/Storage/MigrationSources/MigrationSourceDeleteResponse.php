@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type migration_source_delete_response = array{
+ * @phpstan-type MigrationSourceDeleteResponseShape = array{
  *   data?: MigrationSourceParams
  * }
  */
 final class MigrationSourceDeleteResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<migration_source_delete_response> */
+    /** @use SdkModel<MigrationSourceDeleteResponseShape> */
     use SdkModel;
 
     use SdkResponse;

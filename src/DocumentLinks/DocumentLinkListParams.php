@@ -16,11 +16,11 @@ use Telnyx\DocumentLinks\DocumentLinkListParams\Page;
  *
  * @see Telnyx\DocumentLinks->list
  *
- * @phpstan-type document_link_list_params = array{filter?: Filter, page?: Page}
+ * @phpstan-type DocumentLinkListParamsShape = array{filter?: Filter, page?: Page}
  */
 final class DocumentLinkListParams implements BaseModel
 {
-    /** @use SdkModel<document_link_list_params> */
+    /** @use SdkModel<DocumentLinkListParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -14,11 +14,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\ChannelZones->update
  *
- * @phpstan-type channel_zone_update_params = array{channels: int}
+ * @phpstan-type ChannelZoneUpdateParamsShape = array{channels: int}
  */
 final class ChannelZoneUpdateParams implements BaseModel
 {
-    /** @use SdkModel<channel_zone_update_params> */
+    /** @use SdkModel<ChannelZoneUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 

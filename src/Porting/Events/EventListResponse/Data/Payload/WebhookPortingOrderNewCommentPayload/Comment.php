@@ -12,7 +12,7 @@ use Telnyx\Porting\Events\EventListResponse\Data\Payload\WebhookPortingOrderNewC
 /**
  * The comment that was added to the porting order.
  *
- * @phpstan-type comment_alias = array{
+ * @phpstan-type CommentShape = array{
  *   id?: string,
  *   body?: string,
  *   insertedAt?: \DateTimeInterface,
@@ -22,7 +22,7 @@ use Telnyx\Porting\Events\EventListResponse\Data\Payload\WebhookPortingOrderNewC
  */
 final class Comment implements BaseModel
 {
-    /** @use SdkModel<comment_alias> */
+    /** @use SdkModel<CommentShape> */
     use SdkModel;
 
     /**

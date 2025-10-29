@@ -15,13 +15,13 @@ use Telnyx\Portouts\SupportingDocuments\SupportingDocumentCreateParams\Document;
  *
  * @see Telnyx\Portouts\SupportingDocuments->create
  *
- * @phpstan-type supporting_document_create_params = array{
+ * @phpstan-type SupportingDocumentCreateParamsShape = array{
  *   documents?: list<Document>
  * }
  */
 final class SupportingDocumentCreateParams implements BaseModel
 {
-    /** @use SdkModel<supporting_document_create_params> */
+    /** @use SdkModel<SupportingDocumentCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\AI\Assistants->retrieve
  *
- * @phpstan-type assistant_retrieve_params = array{
+ * @phpstan-type AssistantRetrieveParamsShape = array{
  *   callControlID?: string,
  *   fetchDynamicVariablesFromWebhook?: bool,
  *   from?: string,
@@ -23,7 +23,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class AssistantRetrieveParams implements BaseModel
 {
-    /** @use SdkModel<assistant_retrieve_params> */
+    /** @use SdkModel<AssistantRetrieveParamsShape> */
     use SdkModel;
     use SdkParams;
 

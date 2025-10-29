@@ -12,11 +12,11 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Documents\DocumentGenerateDownloadLinkResponse\Data;
 
 /**
- * @phpstan-type document_generate_download_link_response = array{data: Data}
+ * @phpstan-type DocumentGenerateDownloadLinkResponseShape = array{data: Data}
  */
 final class DocumentGenerateDownloadLinkResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<document_generate_download_link_response> */
+    /** @use SdkModel<DocumentGenerateDownloadLinkResponseShape> */
     use SdkModel;
 
     use SdkResponse;

@@ -11,7 +11,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type transcription_engine_b_config = array{
+ * @phpstan-type TranscriptionEngineBConfigShape = array{
  *   language?: value-of<TelnyxTranscriptionLanguage>,
  *   transcriptionEngine?: value-of<TranscriptionEngine>,
  *   transcriptionModel?: value-of<TranscriptionModel>,
@@ -19,7 +19,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class TranscriptionEngineBConfig implements BaseModel
 {
-    /** @use SdkModel<transcription_engine_b_config> */
+    /** @use SdkModel<TranscriptionEngineBConfigShape> */
     use SdkModel;
 
     /**

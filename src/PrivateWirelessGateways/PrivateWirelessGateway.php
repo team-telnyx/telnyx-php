@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type private_wireless_gateway = array{
+ * @phpstan-type PrivateWirelessGatewayShape = array{
  *   id?: string,
  *   assignedResources?: list<PwgAssignedResourcesSummary>,
  *   createdAt?: string,
@@ -24,7 +24,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class PrivateWirelessGateway implements BaseModel
 {
-    /** @use SdkModel<private_wireless_gateway> */
+    /** @use SdkModel<PrivateWirelessGatewayShape> */
     use SdkModel;
 
     /**

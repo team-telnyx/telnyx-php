@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\ManagedAccounts->create
  *
- * @phpstan-type managed_account_create_params = array{
+ * @phpstan-type ManagedAccountCreateParamsShape = array{
  *   businessName: string,
  *   email?: string,
  *   managedAccountAllowCustomPricing?: bool,
@@ -24,7 +24,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class ManagedAccountCreateParams implements BaseModel
 {
-    /** @use SdkModel<managed_account_create_params> */
+    /** @use SdkModel<ManagedAccountCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

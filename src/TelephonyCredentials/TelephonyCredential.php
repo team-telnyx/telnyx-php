@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type telephony_credential = array{
+ * @phpstan-type TelephonyCredentialShape = array{
  *   id?: string,
  *   createdAt?: string,
  *   expired?: bool,
@@ -24,7 +24,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class TelephonyCredential implements BaseModel
 {
-    /** @use SdkModel<telephony_credential> */
+    /** @use SdkModel<TelephonyCredentialShape> */
     use SdkModel;
 
     /**

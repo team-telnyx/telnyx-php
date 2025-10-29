@@ -13,7 +13,7 @@ use Telnyx\CredentialConnections\DtmfType;
 use Telnyx\CredentialConnections\EncryptedMedia;
 
 /**
- * @phpstan-type fqdn_connection = array{
+ * @phpstan-type FqdnConnectionShape = array{
  *   connectionName: string,
  *   id?: string,
  *   active?: bool,
@@ -53,7 +53,7 @@ use Telnyx\CredentialConnections\EncryptedMedia;
  */
 final class FqdnConnection implements BaseModel
 {
-    /** @use SdkModel<fqdn_connection> */
+    /** @use SdkModel<FqdnConnectionShape> */
     use SdkModel;
 
     /**

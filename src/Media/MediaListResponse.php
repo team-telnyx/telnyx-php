@@ -12,13 +12,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type media_list_response = array{
+ * @phpstan-type MediaListResponseShape = array{
  *   data?: list<MediaResource>, meta?: PaginationMeta
  * }
  */
 final class MediaListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<media_list_response> */
+    /** @use SdkModel<MediaListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

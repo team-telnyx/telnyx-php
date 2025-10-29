@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type oauth_client_list_response = array{
+ * @phpstan-type OAuthClientListResponseShape = array{
  *   data?: list<OAuthClient>, meta?: PaginationMetaOAuth
  * }
  */
 final class OAuthClientListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<oauth_client_list_response> */
+    /** @use SdkModel<OAuthClientListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

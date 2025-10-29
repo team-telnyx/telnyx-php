@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type billing_bundle_summary = array{
+ * @phpstan-type BillingBundleSummaryShape = array{
  *   id: string,
  *   costCode: string,
  *   createdAt: \DateTimeInterface,
@@ -23,7 +23,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class BillingBundleSummary implements BaseModel
 {
-    /** @use SdkModel<billing_bundle_summary> */
+    /** @use SdkModel<BillingBundleSummaryShape> */
     use SdkModel;
 
     /**

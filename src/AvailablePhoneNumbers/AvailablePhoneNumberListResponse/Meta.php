@@ -9,11 +9,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type meta_alias = array{bestEffortResults?: int, totalResults?: int}
+ * @phpstan-type MetaShape = array{bestEffortResults?: int, totalResults?: int}
  */
 final class Meta implements BaseModel
 {
-    /** @use SdkModel<meta_alias> */
+    /** @use SdkModel<MetaShape> */
     use SdkModel;
 
     #[Api('best_effort_results', optional: true)]

@@ -15,7 +15,7 @@ use Telnyx\Reports\MdrUsageReports\MdrUsageReportFetchSyncParams\AggregationType
  *
  * @see Telnyx\Reports\MdrUsageReports->fetchSync
  *
- * @phpstan-type mdr_usage_report_fetch_sync_params = array{
+ * @phpstan-type MdrUsageReportFetchSyncParamsShape = array{
  *   aggregationType: AggregationType|value-of<AggregationType>,
  *   endDate?: \DateTimeInterface,
  *   profiles?: list<string>,
@@ -24,7 +24,7 @@ use Telnyx\Reports\MdrUsageReports\MdrUsageReportFetchSyncParams\AggregationType
  */
 final class MdrUsageReportFetchSyncParams implements BaseModel
 {
-    /** @use SdkModel<mdr_usage_report_fetch_sync_params> */
+    /** @use SdkModel<MdrUsageReportFetchSyncParamsShape> */
     use SdkModel;
     use SdkParams;
 

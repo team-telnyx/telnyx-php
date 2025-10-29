@@ -22,13 +22,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\AI\Embeddings->similaritySearch
  *
- * @phpstan-type embedding_similarity_search_params = array{
+ * @phpstan-type EmbeddingSimilaritySearchParamsShape = array{
  *   bucketName: string, query: string, numOfDocs?: int
  * }
  */
 final class EmbeddingSimilaritySearchParams implements BaseModel
 {
-    /** @use SdkModel<embedding_similarity_search_params> */
+    /** @use SdkModel<EmbeddingSimilaritySearchParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\PortingOrderActivationSettings\ActivationStatus;
 
 /**
- * @phpstan-type porting_order_activation_settings = array{
+ * @phpstan-type PortingOrderActivationSettingsShape = array{
  *   activationStatus?: value-of<ActivationStatus>,
  *   fastPortEligible?: bool,
  *   focDatetimeActual?: \DateTimeInterface,
@@ -19,7 +19,7 @@ use Telnyx\PortingOrders\PortingOrderActivationSettings\ActivationStatus;
  */
 final class PortingOrderActivationSettings implements BaseModel
 {
-    /** @use SdkModel<porting_order_activation_settings> */
+    /** @use SdkModel<PortingOrderActivationSettingsShape> */
     use SdkModel;
 
     /**

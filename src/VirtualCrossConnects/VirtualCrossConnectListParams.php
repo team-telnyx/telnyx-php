@@ -16,13 +16,13 @@ use Telnyx\VirtualCrossConnects\VirtualCrossConnectListParams\Page;
  *
  * @see Telnyx\VirtualCrossConnects->list
  *
- * @phpstan-type virtual_cross_connect_list_params = array{
+ * @phpstan-type VirtualCrossConnectListParamsShape = array{
  *   filter?: Filter, page?: Page
  * }
  */
 final class VirtualCrossConnectListParams implements BaseModel
 {
-    /** @use SdkModel<virtual_cross_connect_list_params> */
+    /** @use SdkModel<VirtualCrossConnectListParamsShape> */
     use SdkModel;
     use SdkParams;
 

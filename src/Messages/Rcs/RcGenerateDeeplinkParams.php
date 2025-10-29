@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Messages\Rcs->generateDeeplink
  *
- * @phpstan-type rc_generate_deeplink_params = array{
+ * @phpstan-type RcGenerateDeeplinkParamsShape = array{
  *   body?: string, phoneNumber?: string
  * }
  */
 final class RcGenerateDeeplinkParams implements BaseModel
 {
-    /** @use SdkModel<rc_generate_deeplink_params> */
+    /** @use SdkModel<RcGenerateDeeplinkParamsShape> */
     use SdkModel;
     use SdkParams;
 

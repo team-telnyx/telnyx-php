@@ -10,13 +10,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type dtmf_tool = array{
+ * @phpstan-type DtmfToolShape = array{
  *   sendDtmf: array<string, mixed>, type: value-of<Type>
  * }
  */
 final class DtmfTool implements BaseModel
 {
-    /** @use SdkModel<dtmf_tool> */
+    /** @use SdkModel<DtmfToolShape> */
     use SdkModel;
 
     /** @var array<string, mixed> $sendDtmf */

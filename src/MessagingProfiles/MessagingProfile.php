@@ -11,7 +11,7 @@ use Telnyx\MessagingProfiles\MessagingProfile\RecordType;
 use Telnyx\MessagingProfiles\MessagingProfile\WebhookAPIVersion;
 
 /**
- * @phpstan-type messaging_profile = array{
+ * @phpstan-type MessagingProfileShape = array{
  *   id?: string,
  *   alphaSender?: string|null,
  *   createdAt?: \DateTimeInterface,
@@ -35,7 +35,7 @@ use Telnyx\MessagingProfiles\MessagingProfile\WebhookAPIVersion;
  */
 final class MessagingProfile implements BaseModel
 {
-    /** @use SdkModel<messaging_profile> */
+    /** @use SdkModel<MessagingProfileShape> */
     use SdkModel;
 
     /**

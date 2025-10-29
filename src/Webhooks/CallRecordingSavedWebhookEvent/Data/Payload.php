@@ -12,7 +12,7 @@ use Telnyx\Webhooks\CallRecordingSavedWebhookEvent\Data\Payload\PublicRecordingU
 use Telnyx\Webhooks\CallRecordingSavedWebhookEvent\Data\Payload\RecordingURLs;
 
 /**
- * @phpstan-type payload_alias = array{
+ * @phpstan-type PayloadShape = array{
  *   callLegID?: string,
  *   callSessionID?: string,
  *   channels?: value-of<Channels>,
@@ -26,7 +26,7 @@ use Telnyx\Webhooks\CallRecordingSavedWebhookEvent\Data\Payload\RecordingURLs;
  */
 final class Payload implements BaseModel
 {
-    /** @use SdkModel<payload_alias> */
+    /** @use SdkModel<PayloadShape> */
     use SdkModel;
 
     /**

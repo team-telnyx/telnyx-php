@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type action_hangup_response = array{data?: CallControlCommandResult}
+ * @phpstan-type ActionHangupResponseShape = array{data?: CallControlCommandResult}
  */
 final class ActionHangupResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<action_hangup_response> */
+    /** @use SdkModel<ActionHangupResponseShape> */
     use SdkModel;
 
     use SdkResponse;

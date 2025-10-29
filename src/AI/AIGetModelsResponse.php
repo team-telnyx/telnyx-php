@@ -12,11 +12,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type ai_get_models_response = array{data: list<Data>, object1?: string}
+ * @phpstan-type AIGetModelsResponseShape = array{
+ *   data: list<Data>, object1?: string
+ * }
  */
 final class AIGetModelsResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<ai_get_models_response> */
+    /** @use SdkModel<AIGetModelsResponseShape> */
     use SdkModel;
 
     use SdkResponse;

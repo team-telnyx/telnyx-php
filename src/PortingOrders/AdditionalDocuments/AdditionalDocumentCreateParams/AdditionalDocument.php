@@ -10,13 +10,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentCreateParams\AdditionalDocument\DocumentType;
 
 /**
- * @phpstan-type additional_document = array{
+ * @phpstan-type AdditionalDocumentShape = array{
  *   documentID?: string, documentType?: value-of<DocumentType>
  * }
  */
 final class AdditionalDocument implements BaseModel
 {
-    /** @use SdkModel<additional_document> */
+    /** @use SdkModel<AdditionalDocumentShape> */
     use SdkModel;
 
     /**

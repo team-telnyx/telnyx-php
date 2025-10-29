@@ -15,11 +15,11 @@ use Telnyx\MessagingProfiles\MessagingProfileListShortCodesParams\Page;
  *
  * @see Telnyx\MessagingProfiles->listShortCodes
  *
- * @phpstan-type messaging_profile_list_short_codes_params = array{page?: Page}
+ * @phpstan-type MessagingProfileListShortCodesParamsShape = array{page?: Page}
  */
 final class MessagingProfileListShortCodesParams implements BaseModel
 {
-    /** @use SdkModel<messaging_profile_list_short_codes_params> */
+    /** @use SdkModel<MessagingProfileListShortCodesParamsShape> */
     use SdkModel;
     use SdkParams;
 

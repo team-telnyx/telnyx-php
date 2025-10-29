@@ -13,13 +13,13 @@ use Telnyx\PhoneNumberBlocks\Jobs\JobListParams\Filter\Type;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[type], filter[status].
  *
- * @phpstan-type filter_alias = array{
+ * @phpstan-type FilterShape = array{
  *   status?: value-of<Status>, type?: value-of<Type>
  * }
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**

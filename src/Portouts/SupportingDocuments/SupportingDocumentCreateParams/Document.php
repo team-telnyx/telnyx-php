@@ -10,11 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Portouts\SupportingDocuments\SupportingDocumentCreateParams\Document\Type;
 
 /**
- * @phpstan-type document_alias = array{documentID: string, type: value-of<Type>}
+ * @phpstan-type DocumentShape = array{documentID: string, type: value-of<Type>}
  */
 final class Document implements BaseModel
 {
-    /** @use SdkModel<document_alias> */
+    /** @use SdkModel<DocumentShape> */
     use SdkModel;
 
     /**

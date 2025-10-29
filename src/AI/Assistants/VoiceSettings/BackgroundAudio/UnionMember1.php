@@ -10,11 +10,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type union_member1 = array{type: value-of<Type>, value: string}
+ * @phpstan-type UnionMember1Shape = array{type: value-of<Type>, value: string}
  */
 final class UnionMember1 implements BaseModel
 {
-    /** @use SdkModel<union_member1> */
+    /** @use SdkModel<UnionMember1Shape> */
     use SdkModel;
 
     /**

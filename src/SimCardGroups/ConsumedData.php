@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Represents the amount of data consumed.
  *
- * @phpstan-type consumed_data = array{amount?: string, unit?: string}
+ * @phpstan-type ConsumedDataShape = array{amount?: string, unit?: string}
  */
 final class ConsumedData implements BaseModel
 {
-    /** @use SdkModel<consumed_data> */
+    /** @use SdkModel<ConsumedDataShape> */
     use SdkModel;
 
     #[Api(optional: true)]

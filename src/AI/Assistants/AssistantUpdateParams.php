@@ -17,7 +17,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\AI\Assistants->update
  *
- * @phpstan-type assistant_update_params = array{
+ * @phpstan-type AssistantUpdateParamsShape = array{
  *   description?: string,
  *   dynamicVariables?: array<string, mixed>,
  *   dynamicVariablesWebhookURL?: string,
@@ -39,7 +39,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class AssistantUpdateParams implements BaseModel
 {
-    /** @use SdkModel<assistant_update_params> */
+    /** @use SdkModel<AssistantUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 

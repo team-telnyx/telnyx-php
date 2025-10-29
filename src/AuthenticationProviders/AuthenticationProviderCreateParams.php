@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\AuthenticationProviders->create
  *
- * @phpstan-type authentication_provider_create_params = array{
+ * @phpstan-type AuthenticationProviderCreateParamsShape = array{
  *   name: string,
  *   settings: Settings,
  *   shortName: string,
@@ -24,7 +24,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class AuthenticationProviderCreateParams implements BaseModel
 {
-    /** @use SdkModel<authentication_provider_create_params> */
+    /** @use SdkModel<AuthenticationProviderCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

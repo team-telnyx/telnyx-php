@@ -16,11 +16,11 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  * Returns a list of distinct test suite names that can be used for
  * filtering and organizing tests.
  *
- * @phpstan-type test_suite_list_response = array{data: list<string>}
+ * @phpstan-type TestSuiteListResponseShape = array{data: list<string>}
  */
 final class TestSuiteListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<test_suite_list_response> */
+    /** @use SdkModel<TestSuiteListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

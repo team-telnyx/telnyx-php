@@ -15,7 +15,7 @@ use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileUpdateParams\CallingWindow;
  *
  * @see Telnyx\OutboundVoiceProfiles->update
  *
- * @phpstan-type outbound_voice_profile_update_params = array{
+ * @phpstan-type OutboundVoiceProfileUpdateParamsShape = array{
  *   name: string,
  *   billingGroupID?: string|null,
  *   callRecording?: OutboundCallRecording,
@@ -34,7 +34,7 @@ use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileUpdateParams\CallingWindow;
  */
 final class OutboundVoiceProfileUpdateParams implements BaseModel
 {
-    /** @use SdkModel<outbound_voice_profile_update_params> */
+    /** @use SdkModel<OutboundVoiceProfileUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 

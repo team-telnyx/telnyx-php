@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\PhoneNumbers\Messaging->update
  *
- * @phpstan-type messaging_update_params = array{
+ * @phpstan-type MessagingUpdateParamsShape = array{
  *   messagingProduct?: string, messagingProfileID?: string
  * }
  */
 final class MessagingUpdateParams implements BaseModel
 {
-    /** @use SdkModel<messaging_update_params> */
+    /** @use SdkModel<MessagingUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 

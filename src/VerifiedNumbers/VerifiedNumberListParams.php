@@ -15,11 +15,11 @@ use Telnyx\VerifiedNumbers\VerifiedNumberListParams\Page;
  *
  * @see Telnyx\VerifiedNumbers->list
  *
- * @phpstan-type verified_number_list_params = array{page?: Page}
+ * @phpstan-type VerifiedNumberListParamsShape = array{page?: Page}
  */
 final class VerifiedNumberListParams implements BaseModel
 {
-    /** @use SdkModel<verified_number_list_params> */
+    /** @use SdkModel<VerifiedNumberListParamsShape> */
     use SdkModel;
     use SdkParams;
 

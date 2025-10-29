@@ -12,7 +12,7 @@ use Telnyx\Verifications\Verification\Status;
 use Telnyx\Verifications\Verification\Type;
 
 /**
- * @phpstan-type verification_alias = array{
+ * @phpstan-type VerificationShape = array{
  *   id?: string,
  *   createdAt?: string,
  *   customCode?: string|null,
@@ -27,7 +27,7 @@ use Telnyx\Verifications\Verification\Type;
  */
 final class Verification implements BaseModel
 {
-    /** @use SdkModel<verification_alias> */
+    /** @use SdkModel<VerificationShape> */
     use SdkModel;
 
     #[Api(optional: true)]

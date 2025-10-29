@@ -10,13 +10,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type webhook_tool = array{
+ * @phpstan-type WebhookToolShape = array{
  *   type: value-of<Type>, webhook: InferenceEmbeddingWebhookToolParams
  * }
  */
 final class WebhookTool implements BaseModel
 {
-    /** @use SdkModel<webhook_tool> */
+    /** @use SdkModel<WebhookToolShape> */
     use SdkModel;
 
     /** @var value-of<Type> $type */

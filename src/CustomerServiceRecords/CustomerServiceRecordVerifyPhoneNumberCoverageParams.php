@@ -14,15 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\CustomerServiceRecords->verifyPhoneNumberCoverage
  *
- * @phpstan-type customer_service_record_verify_phone_number_coverage_params = array{
+ * @phpstan-type CustomerServiceRecordVerifyPhoneNumberCoverageParamsShape = array{
  *   phoneNumbers: list<string>
  * }
  */
 final class CustomerServiceRecordVerifyPhoneNumberCoverageParams implements BaseModel
 {
-    /**
-     * @use SdkModel<customer_service_record_verify_phone_number_coverage_params>
-     */
+    /** @use SdkModel<CustomerServiceRecordVerifyPhoneNumberCoverageParamsShape> */
     use SdkModel;
     use SdkParams;
 

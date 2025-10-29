@@ -17,11 +17,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\AI\Assistants\CanaryDeploys->create
  *
- * @phpstan-type canary_deploy_create_params = array{versions: list<VersionConfig>}
+ * @phpstan-type CanaryDeployCreateParamsShape = array{
+ *   versions: list<VersionConfig>
+ * }
  */
 final class CanaryDeployCreateParams implements BaseModel
 {
-    /** @use SdkModel<canary_deploy_create_params> */
+    /** @use SdkModel<CanaryDeployCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

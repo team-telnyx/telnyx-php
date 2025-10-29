@@ -42,7 +42,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Calls->dial
  *
- * @phpstan-type call_dial_params = array{
+ * @phpstan-type CallDialParamsShape = array{
  *   connectionID: string,
  *   from: string,
  *   to: string|list<string>,
@@ -99,7 +99,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class CallDialParams implements BaseModel
 {
-    /** @use SdkModel<call_dial_params> */
+    /** @use SdkModel<CallDialParamsShape> */
     use SdkModel;
     use SdkParams;
 

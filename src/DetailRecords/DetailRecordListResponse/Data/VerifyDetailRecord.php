@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\DetailRecords\DetailRecordListResponse\Data\VerifyDetailRecord\VerifyChannelType;
 
 /**
- * @phpstan-type verify_detail_record = array{
+ * @phpstan-type VerifyDetailRecordShape = array{
  *   recordType: string,
  *   id?: string,
  *   createdAt?: \DateTimeInterface,
@@ -29,7 +29,7 @@ use Telnyx\DetailRecords\DetailRecordListResponse\Data\VerifyDetailRecord\Verify
  */
 final class VerifyDetailRecord implements BaseModel
 {
-    /** @use SdkModel<verify_detail_record> */
+    /** @use SdkModel<VerifyDetailRecordShape> */
     use SdkModel;
 
     #[Api('record_type')]

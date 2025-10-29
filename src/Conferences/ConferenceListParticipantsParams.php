@@ -17,13 +17,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Conferences->listParticipants
  *
- * @phpstan-type conference_list_participants_params = array{
+ * @phpstan-type ConferenceListParticipantsParamsShape = array{
  *   filter?: Filter, page?: Page, region?: Region|value-of<Region>
  * }
  */
 final class ConferenceListParticipantsParams implements BaseModel
 {
-    /** @use SdkModel<conference_list_participants_params> */
+    /** @use SdkModel<ConferenceListParticipantsParamsShape> */
     use SdkModel;
     use SdkParams;
 

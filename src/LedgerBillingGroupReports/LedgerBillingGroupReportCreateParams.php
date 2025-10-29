@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\LedgerBillingGroupReports->create
  *
- * @phpstan-type ledger_billing_group_report_create_params = array{
+ * @phpstan-type LedgerBillingGroupReportCreateParamsShape = array{
  *   month?: int, year?: int
  * }
  */
 final class LedgerBillingGroupReportCreateParams implements BaseModel
 {
-    /** @use SdkModel<ledger_billing_group_report_create_params> */
+    /** @use SdkModel<LedgerBillingGroupReportCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

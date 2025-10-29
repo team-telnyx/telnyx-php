@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\PortingOrderRequirement\FieldType;
 
 /**
- * @phpstan-type porting_order_requirement = array{
+ * @phpstan-type PortingOrderRequirementShape = array{
  *   fieldType?: value-of<FieldType>,
  *   fieldValue?: string,
  *   recordType?: string,
@@ -19,7 +19,7 @@ use Telnyx\PortingOrders\PortingOrderRequirement\FieldType;
  */
 final class PortingOrderRequirement implements BaseModel
 {
-    /** @use SdkModel<porting_order_requirement> */
+    /** @use SdkModel<PortingOrderRequirementShape> */
     use SdkModel;
 
     /**

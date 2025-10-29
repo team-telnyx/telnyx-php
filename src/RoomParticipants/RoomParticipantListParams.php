@@ -16,11 +16,13 @@ use Telnyx\RoomParticipants\RoomParticipantListParams\Page;
  *
  * @see Telnyx\RoomParticipants->list
  *
- * @phpstan-type room_participant_list_params = array{filter?: Filter, page?: Page}
+ * @phpstan-type RoomParticipantListParamsShape = array{
+ *   filter?: Filter, page?: Page
+ * }
  */
 final class RoomParticipantListParams implements BaseModel
 {
-    /** @use SdkModel<room_participant_list_params> */
+    /** @use SdkModel<RoomParticipantListParamsShape> */
     use SdkModel;
     use SdkParams;
 

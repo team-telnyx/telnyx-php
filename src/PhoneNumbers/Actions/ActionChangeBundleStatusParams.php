@@ -14,11 +14,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\PhoneNumbers\Actions->changeBundleStatus
  *
- * @phpstan-type action_change_bundle_status_params = array{bundleID: string}
+ * @phpstan-type ActionChangeBundleStatusParamsShape = array{bundleID: string}
  */
 final class ActionChangeBundleStatusParams implements BaseModel
 {
-    /** @use SdkModel<action_change_bundle_status_params> */
+    /** @use SdkModel<ActionChangeBundleStatusParamsShape> */
     use SdkModel;
     use SdkParams;
 

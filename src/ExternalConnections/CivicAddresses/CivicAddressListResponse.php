@@ -12,11 +12,11 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\ExternalConnections\CivicAddresses\CivicAddressListResponse\Data;
 
 /**
- * @phpstan-type civic_address_list_response = array{data?: list<Data>}
+ * @phpstan-type CivicAddressListResponseShape = array{data?: list<Data>}
  */
 final class CivicAddressListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<civic_address_list_response> */
+    /** @use SdkModel<CivicAddressListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\RequirementGroups\RequirementGroup\RegulatoryRequirement\Status;
 
 /**
- * @phpstan-type regulatory_requirement = array{
+ * @phpstan-type RegulatoryRequirementShape = array{
  *   createdAt?: \DateTimeInterface,
  *   expiresAt?: \DateTimeInterface,
  *   fieldType?: string,
@@ -22,7 +22,7 @@ use Telnyx\RequirementGroups\RequirementGroup\RegulatoryRequirement\Status;
  */
 final class RegulatoryRequirement implements BaseModel
 {
-    /** @use SdkModel<regulatory_requirement> */
+    /** @use SdkModel<RegulatoryRequirementShape> */
     use SdkModel;
 
     #[Api('created_at', optional: true)]

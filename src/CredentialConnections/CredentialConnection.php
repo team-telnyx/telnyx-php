@@ -11,7 +11,7 @@ use Telnyx\CredentialConnections\CredentialConnection\SipUriCallingPreference;
 use Telnyx\CredentialConnections\CredentialConnection\WebhookAPIVersion;
 
 /**
- * @phpstan-type credential_connection = array{
+ * @phpstan-type CredentialConnectionShape = array{
  *   id?: string,
  *   active?: bool,
  *   anchorsiteOverride?: value-of<AnchorsiteOverride>,
@@ -39,7 +39,7 @@ use Telnyx\CredentialConnections\CredentialConnection\WebhookAPIVersion;
  */
 final class CredentialConnection implements BaseModel
 {
-    /** @use SdkModel<credential_connection> */
+    /** @use SdkModel<CredentialConnectionShape> */
     use SdkModel;
 
     /**

@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Legacy\Reporting\BatchDetailRecords\SpeechToText->create
  *
- * @phpstan-type speech_to_text_create_params = array{
+ * @phpstan-type SpeechToTextCreateParamsShape = array{
  *   endDate: \DateTimeInterface, startDate: \DateTimeInterface
  * }
  */
 final class SpeechToTextCreateParams implements BaseModel
 {
-    /** @use SdkModel<speech_to_text_create_params> */
+    /** @use SdkModel<SpeechToTextCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

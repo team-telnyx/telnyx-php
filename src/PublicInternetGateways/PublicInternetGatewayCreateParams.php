@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\PublicInternetGateways->create
  *
- * @phpstan-type public_internet_gateway_create_params = array{
+ * @phpstan-type PublicInternetGatewayCreateParamsShape = array{
  *   name?: string, networkID?: string, regionCode?: string
  * }
  */
 final class PublicInternetGatewayCreateParams implements BaseModel
 {
-    /** @use SdkModel<public_internet_gateway_create_params> */
+    /** @use SdkModel<PublicInternetGatewayCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

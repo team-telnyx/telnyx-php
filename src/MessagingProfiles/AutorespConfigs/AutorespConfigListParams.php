@@ -16,13 +16,13 @@ use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigListParams\UpdatedAt;
  *
  * @see Telnyx\MessagingProfiles\AutorespConfigs->list
  *
- * @phpstan-type autoresp_config_list_params = array{
+ * @phpstan-type AutorespConfigListParamsShape = array{
  *   countryCode?: string, createdAt?: CreatedAt, updatedAt?: UpdatedAt
  * }
  */
 final class AutorespConfigListParams implements BaseModel
 {
-    /** @use SdkModel<autoresp_config_list_params> */
+    /** @use SdkModel<AutorespConfigListParamsShape> */
     use SdkModel;
     use SdkParams;
 

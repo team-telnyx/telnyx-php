@@ -13,13 +13,13 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PhoneNumbers\Actions\PhoneNumberWithVoiceSettings;
 
 /**
- * @phpstan-type voice_list_response = array{
+ * @phpstan-type VoiceListResponseShape = array{
  *   data?: list<PhoneNumberWithVoiceSettings>, meta?: PaginationMeta
  * }
  */
 final class VoiceListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<voice_list_response> */
+    /** @use SdkModel<VoiceListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

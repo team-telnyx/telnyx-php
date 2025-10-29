@@ -13,7 +13,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type conference_alias = array{
+ * @phpstan-type ConferenceShape = array{
  *   id: string,
  *   createdAt: string,
  *   expiresAt: string,
@@ -29,7 +29,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class Conference implements BaseModel
 {
-    /** @use SdkModel<conference_alias> */
+    /** @use SdkModel<ConferenceShape> */
     use SdkModel;
 
     /**

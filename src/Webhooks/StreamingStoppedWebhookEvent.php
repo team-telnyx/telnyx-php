@@ -10,11 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\StreamingStoppedWebhookEvent\Data;
 
 /**
- * @phpstan-type streaming_stopped_webhook_event = array{data?: Data}
+ * @phpstan-type StreamingStoppedWebhookEventShape = array{data?: Data}
  */
 final class StreamingStoppedWebhookEvent implements BaseModel
 {
-    /** @use SdkModel<streaming_stopped_webhook_event> */
+    /** @use SdkModel<StreamingStoppedWebhookEventShape> */
     use SdkModel;
 
     #[Api(optional: true)]

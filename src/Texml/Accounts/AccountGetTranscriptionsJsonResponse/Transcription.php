@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Texml\Accounts\AccountGetTranscriptionsJsonResponse\Transcription\Status;
 
 /**
- * @phpstan-type transcription_alias = array{
+ * @phpstan-type TranscriptionShape = array{
  *   accountSid?: string,
  *   apiVersion?: string,
  *   callSid?: string,
@@ -26,7 +26,7 @@ use Telnyx\Texml\Accounts\AccountGetTranscriptionsJsonResponse\Transcription\Sta
  */
 final class Transcription implements BaseModel
 {
-    /** @use SdkModel<transcription_alias> */
+    /** @use SdkModel<TranscriptionShape> */
     use SdkModel;
 
     #[Api('account_sid', optional: true)]

@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type action_set_public_ip_response = array{data?: SimCardAction}
+ * @phpstan-type ActionSetPublicIPResponseShape = array{data?: SimCardAction}
  */
 final class ActionSetPublicIPResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<action_set_public_ip_response> */
+    /** @use SdkModel<ActionSetPublicIPResponseShape> */
     use SdkModel;
 
     use SdkResponse;

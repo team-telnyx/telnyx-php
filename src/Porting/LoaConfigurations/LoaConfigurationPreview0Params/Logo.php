@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * The logo of the LOA configuration.
  *
- * @phpstan-type logo_alias = array{documentID: string}
+ * @phpstan-type LogoShape = array{documentID: string}
  */
 final class Logo implements BaseModel
 {
-    /** @use SdkModel<logo_alias> */
+    /** @use SdkModel<LogoShape> */
     use SdkModel;
 
     /**

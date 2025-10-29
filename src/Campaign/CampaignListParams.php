@@ -15,13 +15,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Campaign->list
  *
- * @phpstan-type campaign_list_params = array{
+ * @phpstan-type CampaignListParamsShape = array{
  *   brandID: string, page?: int, recordsPerPage?: int, sort?: Sort|value-of<Sort>
  * }
  */
 final class CampaignListParams implements BaseModel
 {
-    /** @use SdkModel<campaign_list_params> */
+    /** @use SdkModel<CampaignListParamsShape> */
     use SdkModel;
     use SdkParams;
 

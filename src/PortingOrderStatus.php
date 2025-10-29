@@ -12,13 +12,13 @@ use Telnyx\PortingOrderStatus\Value;
 /**
  * Porting order status.
  *
- * @phpstan-type porting_order_status = array{
+ * @phpstan-type PortingOrderStatusShape = array{
  *   details?: list<PortingOrdersExceptionType>, value?: value-of<Value>
  * }
  */
 final class PortingOrderStatus implements BaseModel
 {
-    /** @use SdkModel<porting_order_status> */
+    /** @use SdkModel<PortingOrderStatusShape> */
     use SdkModel;
 
     /**

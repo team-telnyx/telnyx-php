@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type ip_alias = array{
+ * @phpstan-type IPShape = array{
  *   id?: string,
  *   connectionID?: string,
  *   createdAt?: string,
@@ -21,7 +21,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class IP implements BaseModel
 {
-    /** @use SdkModel<ip_alias> */
+    /** @use SdkModel<IPShape> */
     use SdkModel;
 
     /**

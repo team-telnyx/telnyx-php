@@ -12,7 +12,7 @@ use Telnyx\NumberLookup\NumberLookupGetResponse\Data\Carrier;
 use Telnyx\NumberLookup\NumberLookupGetResponse\Data\Portability;
 
 /**
- * @phpstan-type data_alias = array{
+ * @phpstan-type DataShape = array{
  *   callerName?: CallerName,
  *   carrier?: Carrier,
  *   countryCode?: string,
@@ -25,7 +25,7 @@ use Telnyx\NumberLookup\NumberLookupGetResponse\Data\Portability;
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     #[Api('caller_name', optional: true)]

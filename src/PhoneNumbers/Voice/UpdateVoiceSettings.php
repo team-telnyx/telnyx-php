@@ -11,7 +11,7 @@ use Telnyx\PhoneNumbers\Voice\UpdateVoiceSettings\InboundCallScreening;
 use Telnyx\PhoneNumbers\Voice\UpdateVoiceSettings\UsagePaymentMethod;
 
 /**
- * @phpstan-type update_voice_settings = array{
+ * @phpstan-type UpdateVoiceSettingsShape = array{
  *   callForwarding?: CallForwarding,
  *   callRecording?: CallRecording,
  *   callerIDNameEnabled?: bool,
@@ -25,7 +25,7 @@ use Telnyx\PhoneNumbers\Voice\UpdateVoiceSettings\UsagePaymentMethod;
  */
 final class UpdateVoiceSettings implements BaseModel
 {
-    /** @use SdkModel<update_voice_settings> */
+    /** @use SdkModel<UpdateVoiceSettingsShape> */
     use SdkModel;
 
     /**

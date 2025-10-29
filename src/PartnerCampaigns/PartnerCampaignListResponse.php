@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type partner_campaign_list_response = array{
+ * @phpstan-type PartnerCampaignListResponseShape = array{
  *   page?: int, records?: list<TelnyxDownstreamCampaign>, totalRecords?: int
  * }
  */
 final class PartnerCampaignListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<partner_campaign_list_response> */
+    /** @use SdkModel<PartnerCampaignListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

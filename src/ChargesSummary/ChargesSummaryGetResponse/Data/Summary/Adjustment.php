@@ -9,13 +9,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type adjustment_alias = array{
+ * @phpstan-type AdjustmentShape = array{
  *   amount: string, description: string, eventDate: \DateTimeInterface
  * }
  */
 final class Adjustment implements BaseModel
 {
-    /** @use SdkModel<adjustment_alias> */
+    /** @use SdkModel<AdjustmentShape> */
     use SdkModel;
 
     /**

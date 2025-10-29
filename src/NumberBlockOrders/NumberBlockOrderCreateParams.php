@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\NumberBlockOrders->create
  *
- * @phpstan-type number_block_order_create_params = array{
+ * @phpstan-type NumberBlockOrderCreateParamsShape = array{
  *   range: int,
  *   startingNumber: string,
  *   connectionID?: string,
@@ -24,7 +24,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class NumberBlockOrderCreateParams implements BaseModel
 {
-    /** @use SdkModel<number_block_order_create_params> */
+    /** @use SdkModel<NumberBlockOrderCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -16,13 +16,13 @@ use Telnyx\TelephonyCredentials\TelephonyCredentialListParams\Page;
  *
  * @see Telnyx\TelephonyCredentials->list
  *
- * @phpstan-type telephony_credential_list_params = array{
+ * @phpstan-type TelephonyCredentialListParamsShape = array{
  *   filter?: Filter, page?: Page
  * }
  */
 final class TelephonyCredentialListParams implements BaseModel
 {
-    /** @use SdkModel<telephony_credential_list_params> */
+    /** @use SdkModel<TelephonyCredentialListParamsShape> */
     use SdkModel;
     use SdkParams;
 

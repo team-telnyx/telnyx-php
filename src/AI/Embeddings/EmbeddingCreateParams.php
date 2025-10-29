@@ -35,7 +35,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\AI\Embeddings->create
  *
- * @phpstan-type embedding_create_params = array{
+ * @phpstan-type EmbeddingCreateParamsShape = array{
  *   bucketName: string,
  *   documentChunkOverlapSize?: int,
  *   documentChunkSize?: int,
@@ -45,7 +45,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class EmbeddingCreateParams implements BaseModel
 {
-    /** @use SdkModel<embedding_create_params> */
+    /** @use SdkModel<EmbeddingCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

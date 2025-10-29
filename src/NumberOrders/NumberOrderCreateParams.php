@@ -15,7 +15,7 @@ use Telnyx\NumberOrders\NumberOrderCreateParams\PhoneNumber;
  *
  * @see Telnyx\NumberOrders->create
  *
- * @phpstan-type number_order_create_params = array{
+ * @phpstan-type NumberOrderCreateParamsShape = array{
  *   billingGroupID?: string,
  *   connectionID?: string,
  *   customerReference?: string,
@@ -25,7 +25,7 @@ use Telnyx\NumberOrders\NumberOrderCreateParams\PhoneNumber;
  */
 final class NumberOrderCreateParams implements BaseModel
 {
-    /** @use SdkModel<number_order_create_params> */
+    /** @use SdkModel<NumberOrderCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

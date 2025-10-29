@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\AI\Conversations\Insights->create
  *
- * @phpstan-type insight_create_params = array{
+ * @phpstan-type InsightCreateParamsShape = array{
  *   instructions: string,
  *   name: string,
  *   jsonSchema?: mixed|string,
@@ -24,7 +24,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class InsightCreateParams implements BaseModel
 {
-    /** @use SdkModel<insight_create_params> */
+    /** @use SdkModel<InsightCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

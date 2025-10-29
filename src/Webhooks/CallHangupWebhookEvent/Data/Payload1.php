@@ -15,7 +15,7 @@ use Telnyx\Webhooks\CallHangupWebhookEvent\Data\Payload\HangupSource;
 use Telnyx\Webhooks\CallHangupWebhookEvent\Data\Payload\State;
 
 /**
- * @phpstan-type payload_alias = array{
+ * @phpstan-type PayloadShape = array{
  *   callControlID?: string,
  *   callLegID?: string,
  *   callQualityStats?: CallQualityStats|null,
@@ -36,7 +36,7 @@ use Telnyx\Webhooks\CallHangupWebhookEvent\Data\Payload\State;
  */
 final class Payload implements BaseModel
 {
-    /** @use SdkModel<payload_alias> */
+    /** @use SdkModel<PayloadShape> */
     use SdkModel;
 
     /**

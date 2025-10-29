@@ -14,7 +14,7 @@ use Telnyx\Rooms\Sessions\SessionList1Params\Filter\DateUpdatedAt;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[date_created_at][eq], filter[date_created_at][gte], filter[date_created_at][lte], filter[date_updated_at][eq], filter[date_updated_at][gte], filter[date_updated_at][lte], filter[date_ended_at][eq], filter[date_ended_at][gte], filter[date_ended_at][lte], filter[active].
  *
- * @phpstan-type filter_alias = array{
+ * @phpstan-type FilterShape = array{
  *   active?: bool,
  *   dateCreatedAt?: DateCreatedAt,
  *   dateEndedAt?: DateEndedAt,
@@ -23,7 +23,7 @@ use Telnyx\Rooms\Sessions\SessionList1Params\Filter\DateUpdatedAt;
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**

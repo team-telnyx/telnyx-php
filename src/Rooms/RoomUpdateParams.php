@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Rooms->update
  *
- * @phpstan-type room_update_params = array{
+ * @phpstan-type RoomUpdateParamsShape = array{
  *   enableRecording?: bool,
  *   maxParticipants?: int,
  *   uniqueName?: string,
@@ -25,7 +25,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class RoomUpdateParams implements BaseModel
 {
-    /** @use SdkModel<room_update_params> */
+    /** @use SdkModel<RoomUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 

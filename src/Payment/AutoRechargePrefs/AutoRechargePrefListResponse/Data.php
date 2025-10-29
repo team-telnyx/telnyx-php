@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Payment\AutoRechargePrefs\AutoRechargePrefListResponse\Data\Preference;
 
 /**
- * @phpstan-type data_alias = array{
+ * @phpstan-type DataShape = array{
  *   id?: string,
  *   enabled?: bool,
  *   invoiceEnabled?: bool,
@@ -22,7 +22,7 @@ use Telnyx\Payment\AutoRechargePrefs\AutoRechargePrefListResponse\Data\Preferenc
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**

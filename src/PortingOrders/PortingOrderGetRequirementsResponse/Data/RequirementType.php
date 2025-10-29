@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Identifies the requirement type that meets this requirement.
  *
- * @phpstan-type requirement_type = array{
+ * @phpstan-type RequirementTypeShape = array{
  *   id?: string,
  *   acceptanceCriteria?: array<string, mixed>,
  *   description?: string,
@@ -22,7 +22,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class RequirementType implements BaseModel
 {
-    /** @use SdkModel<requirement_type> */
+    /** @use SdkModel<RequirementTypeShape> */
     use SdkModel;
 
     /**

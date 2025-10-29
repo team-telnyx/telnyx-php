@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\PhoneNumbers\Jobs->updateEmergencySettingsBatch
  *
- * @phpstan-type job_update_emergency_settings_batch_params = array{
+ * @phpstan-type JobUpdateEmergencySettingsBatchParamsShape = array{
  *   emergencyEnabled: bool,
  *   phoneNumbers: list<string>,
  *   emergencyAddressID?: string|null,
@@ -22,7 +22,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class JobUpdateEmergencySettingsBatchParams implements BaseModel
 {
-    /** @use SdkModel<job_update_emergency_settings_batch_params> */
+    /** @use SdkModel<JobUpdateEmergencySettingsBatchParamsShape> */
     use SdkModel;
     use SdkParams;
 

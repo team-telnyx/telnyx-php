@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\WireguardInterfaces->create
  *
- * @phpstan-type wireguard_interface_create_params = array{
+ * @phpstan-type WireguardInterfaceCreateParamsShape = array{
  *   networkID: string, regionCode: string, enableSipTrunking?: bool, name?: string
  * }
  */
 final class WireguardInterfaceCreateParams implements BaseModel
 {
-    /** @use SdkModel<wireguard_interface_create_params> */
+    /** @use SdkModel<WireguardInterfaceCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

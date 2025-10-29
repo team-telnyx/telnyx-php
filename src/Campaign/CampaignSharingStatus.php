@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type campaign_sharing_status = array{
+ * @phpstan-type CampaignSharingStatusShape = array{
  *   downstreamCnpID?: string,
  *   sharedDate?: string,
  *   sharingStatus?: string,
@@ -19,7 +19,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class CampaignSharingStatus implements BaseModel
 {
-    /** @use SdkModel<campaign_sharing_status> */
+    /** @use SdkModel<CampaignSharingStatusShape> */
     use SdkModel;
 
     #[Api('downstreamCnpId', optional: true)]

@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileGetStatusResponse\Status;
 
 /**
- * @phpstan-type phone_number_assignment_by_profile_get_status_response = array{
+ * @phpstan-type PhoneNumberAssignmentByProfileGetStatusResponseShape = array{
  *   status: value-of<Status>,
  *   taskID: string,
  *   createdAt?: \DateTimeInterface,
@@ -21,7 +21,7 @@ use Telnyx\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileGetStatu
  */
 final class PhoneNumberAssignmentByProfileGetStatusResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<phone_number_assignment_by_profile_get_status_response> */
+    /** @use SdkModel<PhoneNumberAssignmentByProfileGetStatusResponseShape> */
     use SdkModel;
 
     use SdkResponse;

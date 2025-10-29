@@ -16,7 +16,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 /**
  * Telnyx-specific extensions to The Campaign Registry's `Brand` type.
  *
- * @phpstan-type brand_get_response = array{
+ * @phpstan-type BrandGetResponseShape = array{
  *   brandRelationship: value-of<BrandRelationship>,
  *   country: string,
  *   displayName: string,
@@ -60,7 +60,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  */
 final class BrandGetResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<brand_get_response> */
+    /** @use SdkModel<BrandGetResponseShape> */
     use SdkModel;
 
     use SdkResponse;

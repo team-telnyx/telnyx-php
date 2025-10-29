@@ -16,7 +16,7 @@ use Telnyx\PhoneNumbers\Voice\UpdateVoiceSettings;
  *
  * @see Telnyx\PhoneNumbers\Jobs->updateBatch
  *
- * @phpstan-type job_update_batch_params = array{
+ * @phpstan-type JobUpdateBatchParamsShape = array{
  *   phoneNumbers: list<string>,
  *   filter?: Filter,
  *   billingGroupID?: string,
@@ -31,7 +31,7 @@ use Telnyx\PhoneNumbers\Voice\UpdateVoiceSettings;
  */
 final class JobUpdateBatchParams implements BaseModel
 {
-    /** @use SdkModel<job_update_batch_params> */
+    /** @use SdkModel<JobUpdateBatchParamsShape> */
     use SdkModel;
     use SdkParams;
 

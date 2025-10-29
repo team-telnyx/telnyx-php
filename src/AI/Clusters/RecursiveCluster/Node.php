@@ -9,11 +9,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type node_alias = array{filename: string, text: string}
+ * @phpstan-type NodeShape = array{filename: string, text: string}
  */
 final class Node implements BaseModel
 {
-    /** @use SdkModel<node_alias> */
+    /** @use SdkModel<NodeShape> */
     use SdkModel;
 
     /**

@@ -11,7 +11,7 @@ use Telnyx\NotificationSettings\NotificationSetting\Parameter;
 use Telnyx\NotificationSettings\NotificationSetting\Status;
 
 /**
- * @phpstan-type notification_setting = array{
+ * @phpstan-type NotificationSettingShape = array{
  *   id?: string,
  *   associatedRecordType?: string,
  *   associatedRecordTypeValue?: string,
@@ -26,7 +26,7 @@ use Telnyx\NotificationSettings\NotificationSetting\Status;
  */
 final class NotificationSetting implements BaseModel
 {
-    /** @use SdkModel<notification_setting> */
+    /** @use SdkModel<NotificationSettingShape> */
     use SdkModel;
 
     /**

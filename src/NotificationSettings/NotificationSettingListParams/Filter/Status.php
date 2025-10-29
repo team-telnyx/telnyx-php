@@ -10,11 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NotificationSettings\NotificationSettingListParams\Filter\Status\Eq;
 
 /**
- * @phpstan-type status_alias = array{eq?: value-of<Eq>}
+ * @phpstan-type StatusShape = array{eq?: value-of<Eq>}
  */
 final class Status implements BaseModel
 {
-    /** @use SdkModel<status_alias> */
+    /** @use SdkModel<StatusShape> */
     use SdkModel;
 
     /**

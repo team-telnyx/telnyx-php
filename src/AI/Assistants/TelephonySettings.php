@@ -9,13 +9,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type telephony_settings = array{
+ * @phpstan-type TelephonySettingsShape = array{
  *   defaultTexmlAppID?: string, supportsUnauthenticatedWebCalls?: bool
  * }
  */
 final class TelephonySettings implements BaseModel
 {
-    /** @use SdkModel<telephony_settings> */
+    /** @use SdkModel<TelephonySettingsShape> */
     use SdkModel;
 
     /**

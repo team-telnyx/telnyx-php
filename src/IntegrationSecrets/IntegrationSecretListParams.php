@@ -16,13 +16,13 @@ use Telnyx\IntegrationSecrets\IntegrationSecretListParams\Page;
  *
  * @see Telnyx\IntegrationSecrets->list
  *
- * @phpstan-type integration_secret_list_params = array{
+ * @phpstan-type IntegrationSecretListParamsShape = array{
  *   filter?: Filter, page?: Page
  * }
  */
 final class IntegrationSecretListParams implements BaseModel
 {
-    /** @use SdkModel<integration_secret_list_params> */
+    /** @use SdkModel<IntegrationSecretListParamsShape> */
     use SdkModel;
     use SdkParams;
 

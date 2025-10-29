@@ -10,13 +10,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PhoneNumberBlocks\Jobs\JobError;
 
 /**
- * @phpstan-type failed_operation = array{
+ * @phpstan-type FailedOperationShape = array{
  *   id?: string, errors?: list<JobError>, phoneNumber?: string
  * }
  */
 final class FailedOperation implements BaseModel
 {
-    /** @use SdkModel<failed_operation> */
+    /** @use SdkModel<FailedOperationShape> */
     use SdkModel;
 
     /**

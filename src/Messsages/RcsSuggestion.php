@@ -11,11 +11,11 @@ use Telnyx\Messsages\RcsSuggestion\Action;
 use Telnyx\Messsages\RcsSuggestion\Reply;
 
 /**
- * @phpstan-type rcs_suggestion = array{action?: Action, reply?: Reply}
+ * @phpstan-type RcsSuggestionShape = array{action?: Action, reply?: Reply}
  */
 final class RcsSuggestion implements BaseModel
 {
-    /** @use SdkModel<rcs_suggestion> */
+    /** @use SdkModel<RcsSuggestionShape> */
     use SdkModel;
 
     /**

@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type action_stop_response = array{data?: ConferenceCommandResult}
+ * @phpstan-type ActionStopResponseShape = array{data?: ConferenceCommandResult}
  */
 final class ActionStopResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<action_stop_response> */
+    /** @use SdkModel<ActionStopResponseShape> */
     use SdkModel;
 
     use SdkResponse;

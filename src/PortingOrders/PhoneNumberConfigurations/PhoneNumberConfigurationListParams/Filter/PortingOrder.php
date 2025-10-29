@@ -10,11 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListParams\Filter\PortingOrder\Status;
 
 /**
- * @phpstan-type porting_order = array{status?: list<value-of<Status>>}
+ * @phpstan-type PortingOrderShape = array{status?: list<value-of<Status>>}
  */
 final class PortingOrder implements BaseModel
 {
-    /** @use SdkModel<porting_order> */
+    /** @use SdkModel<PortingOrderShape> */
     use SdkModel;
 
     /**

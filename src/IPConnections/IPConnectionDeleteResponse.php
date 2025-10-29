@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type ip_connection_delete_response = array{data?: IPConnection}
+ * @phpstan-type IPConnectionDeleteResponseShape = array{data?: IPConnection}
  */
 final class IPConnectionDeleteResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<ip_connection_delete_response> */
+    /** @use SdkModel<IPConnectionDeleteResponseShape> */
     use SdkModel;
 
     use SdkResponse;

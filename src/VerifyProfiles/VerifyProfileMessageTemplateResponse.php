@@ -9,13 +9,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type verify_profile_message_template_response = array{
+ * @phpstan-type VerifyProfileMessageTemplateResponseShape = array{
  *   id?: string, text?: string
  * }
  */
 final class VerifyProfileMessageTemplateResponse implements BaseModel
 {
-    /** @use SdkModel<verify_profile_message_template_response> */
+    /** @use SdkModel<VerifyProfileMessageTemplateResponseShape> */
     use SdkModel;
 
     #[Api(optional: true)]

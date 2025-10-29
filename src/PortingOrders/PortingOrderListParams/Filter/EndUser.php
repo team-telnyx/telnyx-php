@@ -10,11 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\PortingOrderListParams\Filter\EndUser\Admin;
 
 /**
- * @phpstan-type end_user = array{admin?: Admin}
+ * @phpstan-type EndUserShape = array{admin?: Admin}
  */
 final class EndUser implements BaseModel
 {
-    /** @use SdkModel<end_user> */
+    /** @use SdkModel<EndUserShape> */
     use SdkModel;
 
     #[Api(optional: true)]

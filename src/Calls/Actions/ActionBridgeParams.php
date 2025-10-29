@@ -26,7 +26,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Calls\Actions->bridge
  *
- * @phpstan-type action_bridge_params = array{
+ * @phpstan-type ActionBridgeParamsShape = array{
  *   callControlID: string,
  *   clientState?: string,
  *   commandID?: string,
@@ -49,7 +49,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class ActionBridgeParams implements BaseModel
 {
-    /** @use SdkModel<action_bridge_params> */
+    /** @use SdkModel<ActionBridgeParamsShape> */
     use SdkModel;
     use SdkParams;
 

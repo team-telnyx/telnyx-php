@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Texml\Accounts\Conferences->retrieveRecordingsJson
  *
- * @phpstan-type conference_retrieve_recordings_json_params = array{
+ * @phpstan-type ConferenceRetrieveRecordingsJsonParamsShape = array{
  *   accountSid: string
  * }
  */
 final class ConferenceRetrieveRecordingsJsonParams implements BaseModel
 {
-    /** @use SdkModel<conference_retrieve_recordings_json_params> */
+    /** @use SdkModel<ConferenceRetrieveRecordingsJsonParamsShape> */
     use SdkModel;
     use SdkParams;
 

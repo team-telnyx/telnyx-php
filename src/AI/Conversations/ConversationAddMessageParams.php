@@ -17,7 +17,7 @@ use Telnyx\Core\Conversion\MapOf;
  *
  * @see Telnyx\AI\Conversations->addMessage
  *
- * @phpstan-type conversation_add_message_params = array{
+ * @phpstan-type ConversationAddMessageParamsShape = array{
  *   role: string,
  *   content?: string,
  *   metadata?: array<string, string|int|bool|list<string|int|bool>>,
@@ -30,7 +30,7 @@ use Telnyx\Core\Conversion\MapOf;
  */
 final class ConversationAddMessageParams implements BaseModel
 {
-    /** @use SdkModel<conversation_add_message_params> */
+    /** @use SdkModel<ConversationAddMessageParamsShape> */
     use SdkModel;
     use SdkParams;
 

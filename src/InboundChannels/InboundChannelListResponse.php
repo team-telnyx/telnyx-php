@@ -12,11 +12,11 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\InboundChannels\InboundChannelListResponse\Data;
 
 /**
- * @phpstan-type inbound_channel_list_response = array{data?: Data}
+ * @phpstan-type InboundChannelListResponseShape = array{data?: Data}
  */
 final class InboundChannelListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<inbound_channel_list_response> */
+    /** @use SdkModel<InboundChannelListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

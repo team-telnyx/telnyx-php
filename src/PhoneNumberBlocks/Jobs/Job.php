@@ -13,7 +13,7 @@ use Telnyx\PhoneNumberBlocks\Jobs\Job\SuccessfulOperation;
 use Telnyx\PhoneNumberBlocks\Jobs\Job\Type;
 
 /**
- * @phpstan-type job_alias = array{
+ * @phpstan-type JobShape = array{
  *   id?: string,
  *   createdAt?: string,
  *   etc?: \DateTimeInterface,
@@ -27,7 +27,7 @@ use Telnyx\PhoneNumberBlocks\Jobs\Job\Type;
  */
 final class Job implements BaseModel
 {
-    /** @use SdkModel<job_alias> */
+    /** @use SdkModel<JobShape> */
     use SdkModel;
 
     /**

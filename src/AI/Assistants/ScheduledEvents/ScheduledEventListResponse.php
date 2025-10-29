@@ -13,14 +13,14 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type scheduled_event_list_response = array{
+ * @phpstan-type ScheduledEventListResponseShape = array{
  *   data: list<ScheduledPhoneCallEventResponse|ScheduledSMSEventResponse>,
  *   meta: Meta,
  * }
  */
 final class ScheduledEventListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<scheduled_event_list_response> */
+    /** @use SdkModel<ScheduledEventListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

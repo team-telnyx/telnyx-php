@@ -16,11 +16,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\SimCards\Actions->setPublicIP
  *
- * @phpstan-type action_set_public_ip_params = array{regionCode?: string}
+ * @phpstan-type ActionSetPublicIPParamsShape = array{regionCode?: string}
  */
 final class ActionSetPublicIPParams implements BaseModel
 {
-    /** @use SdkModel<action_set_public_ip_params> */
+    /** @use SdkModel<ActionSetPublicIPParamsShape> */
     use SdkModel;
     use SdkParams;
 

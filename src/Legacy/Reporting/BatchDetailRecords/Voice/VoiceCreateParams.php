@@ -15,7 +15,7 @@ use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter;
  *
  * @see Telnyx\Legacy\Reporting\BatchDetailRecords\Voice->create
  *
- * @phpstan-type voice_create_params = array{
+ * @phpstan-type VoiceCreateParamsShape = array{
  *   endTime: \DateTimeInterface,
  *   startTime: \DateTimeInterface,
  *   callTypes?: list<int>,
@@ -33,7 +33,7 @@ use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter;
  */
 final class VoiceCreateParams implements BaseModel
 {
-    /** @use SdkModel<voice_create_params> */
+    /** @use SdkModel<VoiceCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

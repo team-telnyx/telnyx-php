@@ -9,11 +9,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type filename_alias = array{contains?: string}
+ * @phpstan-type FilenameShape = array{contains?: string}
  */
 final class Filename implements BaseModel
 {
-    /** @use SdkModel<filename_alias> */
+    /** @use SdkModel<FilenameShape> */
     use SdkModel;
 
     /**

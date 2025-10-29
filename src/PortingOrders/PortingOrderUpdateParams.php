@@ -21,7 +21,7 @@ use Telnyx\PortingOrders\PortingOrderUpdateParams\Requirement;
  *
  * @see Telnyx\PortingOrders->update
  *
- * @phpstan-type porting_order_update_params = array{
+ * @phpstan-type PortingOrderUpdateParamsShape = array{
  *   activationSettings?: ActivationSettings,
  *   customerGroupReference?: string,
  *   customerReference?: string,
@@ -38,7 +38,7 @@ use Telnyx\PortingOrders\PortingOrderUpdateParams\Requirement;
  */
 final class PortingOrderUpdateParams implements BaseModel
 {
-    /** @use SdkModel<porting_order_update_params> */
+    /** @use SdkModel<PortingOrderUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 

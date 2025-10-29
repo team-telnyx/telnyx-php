@@ -17,13 +17,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\AuditEvents->list
  *
- * @phpstan-type audit_event_list_params = array{
+ * @phpstan-type AuditEventListParamsShape = array{
  *   filter?: Filter, page?: Page, sort?: Sort|value-of<Sort>
  * }
  */
 final class AuditEventListParams implements BaseModel
 {
-    /** @use SdkModel<audit_event_list_params> */
+    /** @use SdkModel<AuditEventListParamsShape> */
     use SdkModel;
     use SdkParams;
 

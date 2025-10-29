@@ -23,7 +23,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Calls\Actions->gatherUsingAudio
  *
- * @phpstan-type action_gather_using_audio_params = array{
+ * @phpstan-type ActionGatherUsingAudioParamsShape = array{
  *   audioURL?: string,
  *   clientState?: string,
  *   commandID?: string,
@@ -41,7 +41,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class ActionGatherUsingAudioParams implements BaseModel
 {
-    /** @use SdkModel<action_gather_using_audio_params> */
+    /** @use SdkModel<ActionGatherUsingAudioParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Specifies objective criteria for acceptance.
  *
- * @phpstan-type acceptance_criteria = array{
+ * @phpstan-type AcceptanceCriteriaShape = array{
  *   acceptableCharacters?: string,
  *   acceptableValues?: list<string>,
  *   localityLimit?: string,
@@ -22,7 +22,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class AcceptanceCriteria implements BaseModel
 {
-    /** @use SdkModel<acceptance_criteria> */
+    /** @use SdkModel<AcceptanceCriteriaShape> */
     use SdkModel;
 
     /**

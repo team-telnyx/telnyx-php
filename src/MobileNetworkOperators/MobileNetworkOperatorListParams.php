@@ -16,13 +16,13 @@ use Telnyx\MobileNetworkOperators\MobileNetworkOperatorListParams\Page;
  *
  * @see Telnyx\MobileNetworkOperators->list
  *
- * @phpstan-type mobile_network_operator_list_params = array{
+ * @phpstan-type MobileNetworkOperatorListParamsShape = array{
  *   filter?: Filter, page?: Page
  * }
  */
 final class MobileNetworkOperatorListParams implements BaseModel
 {
-    /** @use SdkModel<mobile_network_operator_list_params> */
+    /** @use SdkModel<MobileNetworkOperatorListParamsShape> */
     use SdkModel;
     use SdkParams;
 

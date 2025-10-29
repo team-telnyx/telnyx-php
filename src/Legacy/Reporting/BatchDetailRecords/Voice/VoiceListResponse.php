@@ -12,13 +12,13 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging\BatchCsvPaginationMeta;
 
 /**
- * @phpstan-type voice_list_response = array{
+ * @phpstan-type VoiceListResponseShape = array{
  *   data?: list<CdrDetailedReqResponse>, meta?: BatchCsvPaginationMeta
  * }
  */
 final class VoiceListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<voice_list_response> */
+    /** @use SdkModel<VoiceListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

@@ -13,13 +13,13 @@ use Telnyx\UserAddresses\UserAddressListParams\Filter\StreetAddress;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[customer_reference][eq], filter[customer_reference][contains], filter[street_address][contains].
  *
- * @phpstan-type filter_alias = array{
+ * @phpstan-type FilterShape = array{
  *   customerReference?: CustomerReference, streetAddress?: StreetAddress
  * }
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**

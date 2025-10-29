@@ -10,13 +10,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\PortingOrderListParams\Filter\ActivationSettings\FocDatetimeRequested;
 
 /**
- * @phpstan-type activation_settings = array{
+ * @phpstan-type ActivationSettingsShape = array{
  *   fastPortEligible?: bool, focDatetimeRequested?: FocDatetimeRequested
  * }
  */
 final class ActivationSettings implements BaseModel
 {
-    /** @use SdkModel<activation_settings> */
+    /** @use SdkModel<ActivationSettingsShape> */
     use SdkModel;
 
     /**

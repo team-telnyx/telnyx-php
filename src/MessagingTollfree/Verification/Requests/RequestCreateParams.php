@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\MessagingTollfree\Verification\Requests->create
  *
- * @phpstan-type request_create_params = array{
+ * @phpstan-type RequestCreateParamsShape = array{
  *   additionalInformation: string,
  *   businessAddr1: string,
  *   businessCity: string,
@@ -51,7 +51,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class RequestCreateParams implements BaseModel
 {
-    /** @use SdkModel<request_create_params> */
+    /** @use SdkModel<RequestCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

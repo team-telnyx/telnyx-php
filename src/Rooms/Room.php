@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type room_alias = array{
+ * @phpstan-type RoomShape = array{
  *   id?: string,
  *   activeSessionID?: string,
  *   createdAt?: \DateTimeInterface,
@@ -26,7 +26,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class Room implements BaseModel
 {
-    /** @use SdkModel<room_alias> */
+    /** @use SdkModel<RoomShape> */
     use SdkModel;
 
     /**

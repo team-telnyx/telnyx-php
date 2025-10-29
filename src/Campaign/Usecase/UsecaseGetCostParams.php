@@ -14,11 +14,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Campaign\Usecase->getCost
  *
- * @phpstan-type usecase_get_cost_params = array{usecase: string}
+ * @phpstan-type UsecaseGetCostParamsShape = array{usecase: string}
  */
 final class UsecaseGetCostParams implements BaseModel
 {
-    /** @use SdkModel<usecase_get_cost_params> */
+    /** @use SdkModel<UsecaseGetCostParamsShape> */
     use SdkModel;
     use SdkParams;
 

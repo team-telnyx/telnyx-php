@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type video_region = array{
+ * @phpstan-type VideoRegionShape = array{
  *   height?: int|null,
  *   maxColumns?: int|null,
  *   maxRows?: int|null,
@@ -22,7 +22,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class VideoRegion implements BaseModel
 {
-    /** @use SdkModel<video_region> */
+    /** @use SdkModel<VideoRegionShape> */
     use SdkModel;
 
     /**

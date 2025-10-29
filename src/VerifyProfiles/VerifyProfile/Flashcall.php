@@ -9,11 +9,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type flashcall_alias = array{defaultVerificationTimeoutSecs?: int}
+ * @phpstan-type FlashcallShape = array{defaultVerificationTimeoutSecs?: int}
  */
 final class Flashcall implements BaseModel
 {
-    /** @use SdkModel<flashcall_alias> */
+    /** @use SdkModel<FlashcallShape> */
     use SdkModel;
 
     /**

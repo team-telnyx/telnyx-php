@@ -15,13 +15,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Conferences\Actions->recordPause
  *
- * @phpstan-type action_record_pause_params = array{
+ * @phpstan-type ActionRecordPauseParamsShape = array{
  *   commandID?: string, recordingID?: string, region?: Region|value-of<Region>
  * }
  */
 final class ActionRecordPauseParams implements BaseModel
 {
-    /** @use SdkModel<action_record_pause_params> */
+    /** @use SdkModel<ActionRecordPauseParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -15,7 +15,7 @@ use Telnyx\Messages\MessageSendLongCodeParams\Type;
  *
  * @see Telnyx\Messages->sendLongCode
  *
- * @phpstan-type message_send_long_code_params = array{
+ * @phpstan-type MessageSendLongCodeParamsShape = array{
  *   from: string,
  *   to: string,
  *   autoDetect?: bool,
@@ -30,7 +30,7 @@ use Telnyx\Messages\MessageSendLongCodeParams\Type;
  */
 final class MessageSendLongCodeParams implements BaseModel
 {
-    /** @use SdkModel<message_send_long_code_params> */
+    /** @use SdkModel<MessageSendLongCodeParamsShape> */
     use SdkModel;
     use SdkParams;
 

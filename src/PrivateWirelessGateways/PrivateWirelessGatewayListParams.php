@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\PrivateWirelessGateways->list
  *
- * @phpstan-type private_wireless_gateway_list_params = array{
+ * @phpstan-type PrivateWirelessGatewayListParamsShape = array{
  *   filterCreatedAt?: string,
  *   filterIPRange?: string,
  *   filterName?: string,
@@ -26,7 +26,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class PrivateWirelessGatewayListParams implements BaseModel
 {
-    /** @use SdkModel<private_wireless_gateway_list_params> */
+    /** @use SdkModel<PrivateWirelessGatewayListParamsShape> */
     use SdkModel;
     use SdkParams;
 

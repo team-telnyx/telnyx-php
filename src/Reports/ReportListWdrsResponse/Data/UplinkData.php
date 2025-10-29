@@ -10,11 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Reports\ReportListWdrsResponse\Data\UplinkData\Unit;
 
 /**
- * @phpstan-type uplink_data = array{amount?: float, unit?: value-of<Unit>}
+ * @phpstan-type UplinkDataShape = array{amount?: float, unit?: value-of<Unit>}
  */
 final class UplinkData implements BaseModel
 {
-    /** @use SdkModel<uplink_data> */
+    /** @use SdkModel<UplinkDataShape> */
     use SdkModel;
 
     /**

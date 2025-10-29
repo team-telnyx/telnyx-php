@@ -21,7 +21,7 @@ use Telnyx\IPConnections\IPConnectionCreateParams\WebhookAPIVersion;
  *
  * @see Telnyx\IPConnections->create
  *
- * @phpstan-type ip_connection_create_params = array{
+ * @phpstan-type IPConnectionCreateParamsShape = array{
  *   active?: bool,
  *   anchorsiteOverride?: AnchorsiteOverride|value-of<AnchorsiteOverride>,
  *   androidPushCredentialID?: string|null,
@@ -45,7 +45,7 @@ use Telnyx\IPConnections\IPConnectionCreateParams\WebhookAPIVersion;
  */
 final class IPConnectionCreateParams implements BaseModel
 {
-    /** @use SdkModel<ip_connection_create_params> */
+    /** @use SdkModel<IPConnectionCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

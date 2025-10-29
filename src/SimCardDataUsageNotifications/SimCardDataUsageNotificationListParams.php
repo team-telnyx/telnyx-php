@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\SimCardDataUsageNotifications->list
  *
- * @phpstan-type sim_card_data_usage_notification_list_params = array{
+ * @phpstan-type SimCardDataUsageNotificationListParamsShape = array{
  *   filterSimCardID?: string, pageNumber?: int, pageSize?: int
  * }
  */
 final class SimCardDataUsageNotificationListParams implements BaseModel
 {
-    /** @use SdkModel<sim_card_data_usage_notification_list_params> */
+    /** @use SdkModel<SimCardDataUsageNotificationListParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Use this field to modify sound effects, for example adjust the pitch.
  *
- * @phpstan-type sound_modifications = array{
+ * @phpstan-type SoundModificationsShape = array{
  *   octaves?: float, pitch?: float, semitone?: float, track?: string
  * }
  */
 final class SoundModifications implements BaseModel
 {
-    /** @use SdkModel<sound_modifications> */
+    /** @use SdkModel<SoundModificationsShape> */
     use SdkModel;
 
     /**

@@ -16,13 +16,13 @@ use Telnyx\NumberReservations\NumberReservationListParams\Page;
  *
  * @see Telnyx\NumberReservations->list
  *
- * @phpstan-type number_reservation_list_params = array{
+ * @phpstan-type NumberReservationListParamsShape = array{
  *   filter?: Filter, page?: Page
  * }
  */
 final class NumberReservationListParams implements BaseModel
 {
-    /** @use SdkModel<number_reservation_list_params> */
+    /** @use SdkModel<NumberReservationListParamsShape> */
     use SdkModel;
     use SdkParams;
 

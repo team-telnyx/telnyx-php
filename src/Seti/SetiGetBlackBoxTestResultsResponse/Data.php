@@ -10,13 +10,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Seti\SetiGetBlackBoxTestResultsResponse\Data\BlackBoxTest;
 
 /**
- * @phpstan-type data_alias = array{
+ * @phpstan-type DataShape = array{
  *   blackBoxTests?: list<BlackBoxTest>, product?: string, recordType?: string
  * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /** @var list<BlackBoxTest>|null $blackBoxTests */

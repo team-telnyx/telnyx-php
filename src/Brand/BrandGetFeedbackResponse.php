@@ -12,13 +12,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type brand_get_feedback_response = array{
+ * @phpstan-type BrandGetFeedbackResponseShape = array{
  *   brandID: string, category: list<Category>
  * }
  */
 final class BrandGetFeedbackResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<brand_get_feedback_response> */
+    /** @use SdkModel<BrandGetFeedbackResponseShape> */
     use SdkModel;
 
     use SdkResponse;

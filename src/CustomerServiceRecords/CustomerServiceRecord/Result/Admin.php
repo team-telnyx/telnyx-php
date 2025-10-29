@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * The admin of the customer service record.
  *
- * @phpstan-type admin_alias = array{
+ * @phpstan-type AdminShape = array{
  *   accountNumber?: string,
  *   authorizedPersonName?: string,
  *   billingPhoneNumber?: string,
@@ -20,7 +20,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class Admin implements BaseModel
 {
-    /** @use SdkModel<admin_alias> */
+    /** @use SdkModel<AdminShape> */
     use SdkModel;
 
     /**
