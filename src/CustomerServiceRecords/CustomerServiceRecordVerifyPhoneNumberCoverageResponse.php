@@ -12,14 +12,14 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordVerifyPhoneNumberCoverageResponse\Data;
 
 /**
- * @phpstan-type customer_service_record_verify_phone_number_coverage_response = array{
+ * @phpstan-type CustomerServiceRecordVerifyPhoneNumberCoverageResponseShape = array{
  *   data?: list<Data>
  * }
  */
 final class CustomerServiceRecordVerifyPhoneNumberCoverageResponse implements BaseModel, ResponseConverter
 {
     /**
-     * @use SdkModel<customer_service_record_verify_phone_number_coverage_response>
+     * @use SdkModel<CustomerServiceRecordVerifyPhoneNumberCoverageResponseShape>
      */
     use SdkModel;
 

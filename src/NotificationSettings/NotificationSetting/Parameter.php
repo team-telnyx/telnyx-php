@@ -9,11 +9,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type parameter_alias = array{name?: string, value?: string}
+ * @phpstan-type ParameterShape = array{name?: string, value?: string}
  */
 final class Parameter implements BaseModel
 {
-    /** @use SdkModel<parameter_alias> */
+    /** @use SdkModel<ParameterShape> */
     use SdkModel;
 
     #[Api(optional: true)]

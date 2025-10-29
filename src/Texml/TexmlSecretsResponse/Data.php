@@ -10,11 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Texml\TexmlSecretsResponse\Data\Value;
 
 /**
- * @phpstan-type data_alias = array{name?: string, value?: value-of<Value>}
+ * @phpstan-type DataShape = array{name?: string, value?: value-of<Value>}
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     #[Api(optional: true)]

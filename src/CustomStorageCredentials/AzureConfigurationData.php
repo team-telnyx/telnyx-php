@@ -9,13 +9,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type azure_configuration_data = array{
+ * @phpstan-type AzureConfigurationDataShape = array{
  *   accountKey?: string, accountName?: string, bucket?: string
  * }
  */
 final class AzureConfigurationData implements BaseModel
 {
-    /** @use SdkModel<azure_configuration_data> */
+    /** @use SdkModel<AzureConfigurationDataShape> */
     use SdkModel;
 
     /**

@@ -12,11 +12,11 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PhoneNumbers\PhoneNumberDeleteResponse\Data;
 
 /**
- * @phpstan-type phone_number_delete_response = array{data?: Data}
+ * @phpstan-type PhoneNumberDeleteResponseShape = array{data?: Data}
  */
 final class PhoneNumberDeleteResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<phone_number_delete_response> */
+    /** @use SdkModel<PhoneNumberDeleteResponseShape> */
     use SdkModel;
 
     use SdkResponse;

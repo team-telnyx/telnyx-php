@@ -17,13 +17,13 @@ use Telnyx\PortingOrders\ActionRequirements\ActionRequirementListParams\Sort;
  *
  * @see Telnyx\PortingOrders\ActionRequirements->list
  *
- * @phpstan-type action_requirement_list_params = array{
+ * @phpstan-type ActionRequirementListParamsShape = array{
  *   filter?: Filter, page?: Page, sort?: Sort
  * }
  */
 final class ActionRequirementListParams implements BaseModel
 {
-    /** @use SdkModel<action_requirement_list_params> */
+    /** @use SdkModel<ActionRequirementListParamsShape> */
     use SdkModel;
     use SdkParams;
 

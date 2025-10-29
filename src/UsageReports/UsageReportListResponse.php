@@ -13,13 +13,13 @@ use Telnyx\Core\Conversion\MapOf;
 use Telnyx\UsageReports\UsageReportListResponse\Meta;
 
 /**
- * @phpstan-type usage_report_list_response = array{
+ * @phpstan-type UsageReportListResponseShape = array{
  *   data?: list<array<string, mixed>>, meta?: Meta
  * }
  */
 final class UsageReportListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<usage_report_list_response> */
+    /** @use SdkModel<UsageReportListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

@@ -9,13 +9,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type simple_alias = array{
+ * @phpstan-type SimpleShape = array{
  *   alias: string, amount: string, name: string, quantity: int, type: string
  * }
  */
 final class Simple implements BaseModel
 {
-    /** @use SdkModel<simple_alias> */
+    /** @use SdkModel<SimpleShape> */
     use SdkModel;
 
     #[Api]

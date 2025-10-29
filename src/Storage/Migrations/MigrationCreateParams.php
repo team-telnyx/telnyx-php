@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Storage\Migrations->create
  *
- * @phpstan-type migration_create_params = array{
+ * @phpstan-type MigrationCreateParamsShape = array{
  *   sourceID: string,
  *   targetBucketName: string,
  *   targetRegion: string,
@@ -23,7 +23,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class MigrationCreateParams implements BaseModel
 {
-    /** @use SdkModel<migration_create_params> */
+    /** @use SdkModel<MigrationCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

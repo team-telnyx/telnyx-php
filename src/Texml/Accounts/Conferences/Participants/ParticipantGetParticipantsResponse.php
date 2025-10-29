@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantGetParticipantsResponse\Participant;
 
 /**
- * @phpstan-type participant_get_participants_response = array{
+ * @phpstan-type ParticipantGetParticipantsResponseShape = array{
  *   end?: int,
  *   firstPageUri?: string,
  *   nextPageUri?: string,
@@ -25,7 +25,7 @@ use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantGetParticipantsRes
  */
 final class ParticipantGetParticipantsResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<participant_get_participants_response> */
+    /** @use SdkModel<ParticipantGetParticipantsResponseShape> */
     use SdkModel;
 
     use SdkResponse;

@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpoint\Status;
 
 /**
- * @phpstan-type dynamic_emergency_endpoint = array{
+ * @phpstan-type DynamicEmergencyEndpointShape = array{
  *   callbackNumber: string,
  *   callerName: string,
  *   dynamicEmergencyAddressID: string,
@@ -24,7 +24,7 @@ use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpoint\Status;
  */
 final class DynamicEmergencyEndpoint implements BaseModel
 {
-    /** @use SdkModel<dynamic_emergency_endpoint> */
+    /** @use SdkModel<DynamicEmergencyEndpointShape> */
     use SdkModel;
 
     #[Api('callback_number')]

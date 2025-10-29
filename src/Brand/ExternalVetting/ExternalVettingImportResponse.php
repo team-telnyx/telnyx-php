@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type external_vetting_import_response = array{
+ * @phpstan-type ExternalVettingImportResponseShape = array{
  *   createDate?: string,
  *   evpID?: string,
  *   vettedDate?: string,
@@ -23,7 +23,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  */
 final class ExternalVettingImportResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<external_vetting_import_response> */
+    /** @use SdkModel<ExternalVettingImportResponseShape> */
     use SdkModel;
 
     use SdkResponse;

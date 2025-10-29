@@ -13,13 +13,13 @@ use Telnyx\ManagedAccounts\ManagedAccountListParams\Filter\OrganizationName;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[email][contains], filter[email][eq], filter[organization_name][contains], filter[organization_name][eq].
  *
- * @phpstan-type filter_alias = array{
+ * @phpstan-type FilterShape = array{
  *   email?: Email, organizationName?: OrganizationName
  * }
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     #[Api(optional: true)]

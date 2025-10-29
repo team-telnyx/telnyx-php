@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type comparative_alias = array{
+ * @phpstan-type ComparativeShape = array{
  *   alias: string,
  *   existingThisMonth: MonthDetail,
  *   name: string,
@@ -20,7 +20,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class Comparative implements BaseModel
 {
-    /** @use SdkModel<comparative_alias> */
+    /** @use SdkModel<ComparativeShape> */
     use SdkModel;
 
     #[Api]

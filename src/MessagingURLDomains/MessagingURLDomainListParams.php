@@ -15,11 +15,11 @@ use Telnyx\MessagingURLDomains\MessagingURLDomainListParams\Page;
  *
  * @see Telnyx\MessagingURLDomains->list
  *
- * @phpstan-type messaging_url_domain_list_params = array{page?: Page}
+ * @phpstan-type MessagingURLDomainListParamsShape = array{page?: Page}
  */
 final class MessagingURLDomainListParams implements BaseModel
 {
-    /** @use SdkModel<messaging_url_domain_list_params> */
+    /** @use SdkModel<MessagingURLDomainListParamsShape> */
     use SdkModel;
     use SdkParams;
 

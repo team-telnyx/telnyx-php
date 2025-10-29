@@ -11,11 +11,11 @@ use Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams\Filter\Status\
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams\Filter\Status\In;
 
 /**
- * @phpstan-type status_alias = array{eq?: value-of<Eq>, in?: list<value-of<In>>}
+ * @phpstan-type StatusShape = array{eq?: value-of<Eq>, in?: list<value-of<In>>}
  */
 final class Status implements BaseModel
 {
-    /** @use SdkModel<status_alias> */
+    /** @use SdkModel<StatusShape> */
     use SdkModel;
 
     /**

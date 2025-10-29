@@ -19,13 +19,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Calls\Actions->hangup
  *
- * @phpstan-type action_hangup_params = array{
+ * @phpstan-type ActionHangupParamsShape = array{
  *   clientState?: string, commandID?: string
  * }
  */
 final class ActionHangupParams implements BaseModel
 {
-    /** @use SdkModel<action_hangup_params> */
+    /** @use SdkModel<ActionHangupParamsShape> */
     use SdkModel;
     use SdkParams;
 

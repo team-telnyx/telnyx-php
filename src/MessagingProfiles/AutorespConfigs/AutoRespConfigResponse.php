@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type auto_resp_config_response = array{data: AutoRespConfig}
+ * @phpstan-type AutoRespConfigResponseShape = array{data: AutoRespConfig}
  */
 final class AutoRespConfigResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<auto_resp_config_response> */
+    /** @use SdkModel<AutoRespConfigResponseShape> */
     use SdkModel;
 
     use SdkResponse;

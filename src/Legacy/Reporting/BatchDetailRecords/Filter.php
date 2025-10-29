@@ -14,7 +14,7 @@ use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter\FilterType;
 /**
  * Query filter criteria. Note: The first filter object must specify filter_type as 'and'. You cannot follow an 'or' with another 'and'.
  *
- * @phpstan-type filter_alias = array{
+ * @phpstan-type FilterShape = array{
  *   billingGroup?: string,
  *   cld?: string,
  *   cldFilter?: value-of<CldFilter>,
@@ -26,7 +26,7 @@ use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter\FilterType;
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**

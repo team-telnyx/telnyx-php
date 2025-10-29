@@ -14,11 +14,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\NotificationProfiles->create
  *
- * @phpstan-type notification_profile_create_params = array{name?: string}
+ * @phpstan-type NotificationProfileCreateParamsShape = array{name?: string}
  */
 final class NotificationProfileCreateParams implements BaseModel
 {
-    /** @use SdkModel<notification_profile_create_params> */
+    /** @use SdkModel<NotificationProfileCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -9,11 +9,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type data_alias = array{from?: string, status?: string, to?: string}
+ * @phpstan-type DataShape = array{from?: string, status?: string, to?: string}
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     #[Api(optional: true)]

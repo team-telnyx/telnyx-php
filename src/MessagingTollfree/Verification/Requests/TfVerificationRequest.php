@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * The body of a tollfree verification request.
  *
- * @phpstan-type tf_verification_request = array{
+ * @phpstan-type TfVerificationRequestShape = array{
  *   additionalInformation: string,
  *   businessAddr1: string,
  *   businessCity: string,
@@ -48,7 +48,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class TfVerificationRequest implements BaseModel
 {
-    /** @use SdkModel<tf_verification_request> */
+    /** @use SdkModel<TfVerificationRequestShape> */
     use SdkModel;
 
     /**

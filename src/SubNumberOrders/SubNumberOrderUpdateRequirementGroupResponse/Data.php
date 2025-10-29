@@ -11,7 +11,7 @@ use Telnyx\SubNumberOrders\SubNumberOrderUpdateRequirementGroupResponse\Data\Pho
 use Telnyx\SubNumberOrders\SubNumberOrderUpdateRequirementGroupResponse\Data\RegulatoryRequirement;
 
 /**
- * @phpstan-type data_alias = array{
+ * @phpstan-type DataShape = array{
  *   id?: string,
  *   countryCode?: string,
  *   createdAt?: \DateTimeInterface,
@@ -30,7 +30,7 @@ use Telnyx\SubNumberOrders\SubNumberOrderUpdateRequirementGroupResponse\Data\Reg
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     #[Api(optional: true)]

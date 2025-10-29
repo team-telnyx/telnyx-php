@@ -13,13 +13,13 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\SimpleSimCard;
 
 /**
- * @phpstan-type purchase_new_response = array{
+ * @phpstan-type PurchaseNewResponseShape = array{
  *   data?: list<SimpleSimCard>, errors?: list<Error>
  * }
  */
 final class PurchaseNewResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<purchase_new_response> */
+    /** @use SdkModel<PurchaseNewResponseShape> */
     use SdkModel;
 
     use SdkResponse;

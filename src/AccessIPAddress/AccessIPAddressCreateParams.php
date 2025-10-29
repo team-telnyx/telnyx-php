@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\AccessIPAddress->create
  *
- * @phpstan-type access_ip_address_create_params = array{
+ * @phpstan-type AccessIPAddressCreateParamsShape = array{
  *   ipAddress: string, description?: string
  * }
  */
 final class AccessIPAddressCreateParams implements BaseModel
 {
-    /** @use SdkModel<access_ip_address_create_params> */
+    /** @use SdkModel<AccessIPAddressCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\AccessIPRanges->create
  *
- * @phpstan-type access_ip_range_create_params = array{
+ * @phpstan-type AccessIPRangeCreateParamsShape = array{
  *   cidrBlock: string, description?: string
  * }
  */
 final class AccessIPRangeCreateParams implements BaseModel
 {
-    /** @use SdkModel<access_ip_range_create_params> */
+    /** @use SdkModel<AccessIPRangeCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

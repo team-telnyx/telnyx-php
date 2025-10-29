@@ -15,11 +15,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\AI\Conversations\InsightGroups->retrieveInsightGroups
  *
- * @phpstan-type insight_group_retrieve_insight_groups_params = array{page?: Page}
+ * @phpstan-type InsightGroupRetrieveInsightGroupsParamsShape = array{page?: Page}
  */
 final class InsightGroupRetrieveInsightGroupsParams implements BaseModel
 {
-    /** @use SdkModel<insight_group_retrieve_insight_groups_params> */
+    /** @use SdkModel<InsightGroupRetrieveInsightGroupsParamsShape> */
     use SdkModel;
     use SdkParams;
 

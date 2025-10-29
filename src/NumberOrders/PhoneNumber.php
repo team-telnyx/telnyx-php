@@ -13,7 +13,7 @@ use Telnyx\NumberOrders\PhoneNumber\Status;
 use Telnyx\SubNumberOrderRegulatoryRequirementWithValue;
 
 /**
- * @phpstan-type phone_number = array{
+ * @phpstan-type PhoneNumberShape = array{
  *   id?: string,
  *   bundleID?: string,
  *   countryCode?: string,
@@ -29,7 +29,7 @@ use Telnyx\SubNumberOrderRegulatoryRequirementWithValue;
  */
 final class PhoneNumber implements BaseModel
 {
-    /** @use SdkModel<phone_number> */
+    /** @use SdkModel<PhoneNumberShape> */
     use SdkModel;
 
     #[Api(optional: true)]

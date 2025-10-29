@@ -12,13 +12,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type customer_service_record_list_response = array{
+ * @phpstan-type CustomerServiceRecordListResponseShape = array{
  *   data?: list<CustomerServiceRecord>, meta?: PaginationMeta
  * }
  */
 final class CustomerServiceRecordListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<customer_service_record_list_response> */
+    /** @use SdkModel<CustomerServiceRecordListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

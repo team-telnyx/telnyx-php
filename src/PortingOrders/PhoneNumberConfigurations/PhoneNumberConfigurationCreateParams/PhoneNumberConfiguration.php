@@ -9,13 +9,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type phone_number_configuration = array{
+ * @phpstan-type PhoneNumberConfigurationShape = array{
  *   portingPhoneNumberID: string, userBundleID: string
  * }
  */
 final class PhoneNumberConfiguration implements BaseModel
 {
-    /** @use SdkModel<phone_number_configuration> */
+    /** @use SdkModel<PhoneNumberConfigurationShape> */
     use SdkModel;
 
     /**

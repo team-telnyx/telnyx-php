@@ -14,13 +14,13 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 /**
  * Mobile mobile push credentials.
  *
- * @phpstan-type mobile_push_credential_list_response = array{
+ * @phpstan-type MobilePushCredentialListResponseShape = array{
  *   data?: list<PushCredential>, meta?: PaginationMeta
  * }
  */
 final class MobilePushCredentialListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<mobile_push_credential_list_response> */
+    /** @use SdkModel<MobilePushCredentialListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

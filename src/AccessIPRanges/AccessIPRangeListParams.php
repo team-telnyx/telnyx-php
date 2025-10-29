@@ -16,11 +16,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\AccessIPRanges->list
  *
- * @phpstan-type access_ip_range_list_params = array{filter?: Filter, page?: Page}
+ * @phpstan-type AccessIPRangeListParamsShape = array{filter?: Filter, page?: Page}
  */
 final class AccessIPRangeListParams implements BaseModel
 {
-    /** @use SdkModel<access_ip_range_list_params> */
+    /** @use SdkModel<AccessIPRangeListParamsShape> */
     use SdkModel;
     use SdkParams;
 

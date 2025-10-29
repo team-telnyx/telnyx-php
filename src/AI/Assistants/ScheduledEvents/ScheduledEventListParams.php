@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\AI\Assistants\ScheduledEvents->list
  *
- * @phpstan-type scheduled_event_list_params = array{
+ * @phpstan-type ScheduledEventListParamsShape = array{
  *   conversationChannel?: ConversationChannelType|value-of<ConversationChannelType>,
  *   fromDate?: \DateTimeInterface,
  *   page?: Page,
@@ -24,7 +24,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class ScheduledEventListParams implements BaseModel
 {
-    /** @use SdkModel<scheduled_event_list_params> */
+    /** @use SdkModel<ScheduledEventListParamsShape> */
     use SdkModel;
     use SdkParams;
 

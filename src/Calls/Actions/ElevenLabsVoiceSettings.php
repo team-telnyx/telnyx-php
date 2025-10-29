@@ -9,11 +9,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type eleven_labs_voice_settings = array{apiKeyRef?: string}
+ * @phpstan-type ElevenLabsVoiceSettingsShape = array{apiKeyRef?: string}
  */
 final class ElevenLabsVoiceSettings implements BaseModel
 {
-    /** @use SdkModel<eleven_labs_voice_settings> */
+    /** @use SdkModel<ElevenLabsVoiceSettingsShape> */
     use SdkModel;
 
     /**

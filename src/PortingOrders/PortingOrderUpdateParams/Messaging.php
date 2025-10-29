@@ -9,11 +9,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type messaging_alias = array{enableMessaging?: bool}
+ * @phpstan-type MessagingShape = array{enableMessaging?: bool}
  */
 final class Messaging implements BaseModel
 {
-    /** @use SdkModel<messaging_alias> */
+    /** @use SdkModel<MessagingShape> */
     use SdkModel;
 
     /**

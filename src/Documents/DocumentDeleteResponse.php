@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type document_delete_response = array{data?: DocServiceDocument}
+ * @phpstan-type DocumentDeleteResponseShape = array{data?: DocServiceDocument}
  */
 final class DocumentDeleteResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<document_delete_response> */
+    /** @use SdkModel<DocumentDeleteResponseShape> */
     use SdkModel;
 
     use SdkResponse;

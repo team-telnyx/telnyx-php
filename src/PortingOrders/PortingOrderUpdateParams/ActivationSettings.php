@@ -9,13 +9,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type activation_settings = array{
+ * @phpstan-type ActivationSettingsShape = array{
  *   focDatetimeRequested?: \DateTimeInterface
  * }
  */
 final class ActivationSettings implements BaseModel
 {
-    /** @use SdkModel<activation_settings> */
+    /** @use SdkModel<ActivationSettingsShape> */
     use SdkModel;
 
     /**

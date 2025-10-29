@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SubNumberOrderRegulatoryRequirementWithValue\FieldType;
 
 /**
- * @phpstan-type sub_number_order_regulatory_requirement_with_value = array{
+ * @phpstan-type SubNumberOrderRegulatoryRequirementWithValueShape = array{
  *   fieldType?: value-of<FieldType>,
  *   fieldValue?: string,
  *   recordType?: string,
@@ -19,7 +19,7 @@ use Telnyx\SubNumberOrderRegulatoryRequirementWithValue\FieldType;
  */
 final class SubNumberOrderRegulatoryRequirementWithValue implements BaseModel
 {
-    /** @use SdkModel<sub_number_order_regulatory_requirement_with_value> */
+    /** @use SdkModel<SubNumberOrderRegulatoryRequirementWithValueShape> */
     use SdkModel;
 
     /** @var value-of<FieldType>|null $fieldType */

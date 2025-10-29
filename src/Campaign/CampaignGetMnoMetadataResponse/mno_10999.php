@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type mno_10999_alias = array{
+ * @phpstan-type Mno10999Shape = array{
  *   minMsgSamples: int,
  *   mno: string,
  *   mnoReview: bool,
@@ -24,7 +24,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class mno_10999 implements BaseModel
 {
-    /** @use SdkModel<mno_10999_alias> */
+    /** @use SdkModel<Mno10999Shape> */
     use SdkModel;
 
     #[Api]

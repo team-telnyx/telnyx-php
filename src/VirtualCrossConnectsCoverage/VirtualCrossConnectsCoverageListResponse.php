@@ -13,13 +13,13 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListResponse\Data;
 
 /**
- * @phpstan-type virtual_cross_connects_coverage_list_response = array{
+ * @phpstan-type VirtualCrossConnectsCoverageListResponseShape = array{
  *   data?: list<Data>, meta?: PaginationMeta
  * }
  */
 final class VirtualCrossConnectsCoverageListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<virtual_cross_connects_coverage_list_response> */
+    /** @use SdkModel<VirtualCrossConnectsCoverageListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

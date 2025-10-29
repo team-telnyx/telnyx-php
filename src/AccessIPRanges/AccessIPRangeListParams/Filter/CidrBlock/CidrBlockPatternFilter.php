@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * CIDR block pattern matching operations.
  *
- * @phpstan-type cidr_block_pattern_filter = array{
+ * @phpstan-type CidrBlockPatternFilterShape = array{
  *   contains?: string, endswith?: string, startswith?: string
  * }
  */
 final class CidrBlockPatternFilter implements BaseModel
 {
-    /** @use SdkModel<cidr_block_pattern_filter> */
+    /** @use SdkModel<CidrBlockPatternFilterShape> */
     use SdkModel;
 
     /**

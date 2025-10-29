@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\PhoneNumbers\Actions->enableEmergency
  *
- * @phpstan-type action_enable_emergency_params = array{
+ * @phpstan-type ActionEnableEmergencyParamsShape = array{
  *   emergencyAddressID: string, emergencyEnabled: bool
  * }
  */
 final class ActionEnableEmergencyParams implements BaseModel
 {
-    /** @use SdkModel<action_enable_emergency_params> */
+    /** @use SdkModel<ActionEnableEmergencyParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -15,7 +15,7 @@ use Telnyx\Reports\ReportListWdrsParams\Page;
  *
  * @see Telnyx\Reports->listWdrs
  *
- * @phpstan-type report_list_wdrs_params = array{
+ * @phpstan-type ReportListWdrsParamsShape = array{
  *   id?: string,
  *   endDate?: string,
  *   imsi?: string,
@@ -32,7 +32,7 @@ use Telnyx\Reports\ReportListWdrsParams\Page;
  */
 final class ReportListWdrsParams implements BaseModel
 {
-    /** @use SdkModel<report_list_wdrs_params> */
+    /** @use SdkModel<ReportListWdrsParamsShape> */
     use SdkModel;
     use SdkParams;
 

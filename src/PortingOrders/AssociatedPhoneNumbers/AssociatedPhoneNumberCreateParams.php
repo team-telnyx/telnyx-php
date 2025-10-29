@@ -16,13 +16,13 @@ use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberCreateParam
  *
  * @see Telnyx\PortingOrders\AssociatedPhoneNumbers->create
  *
- * @phpstan-type associated_phone_number_create_params = array{
+ * @phpstan-type AssociatedPhoneNumberCreateParamsShape = array{
  *   action: Action|value-of<Action>, phoneNumberRange: PhoneNumberRange
  * }
  */
 final class AssociatedPhoneNumberCreateParams implements BaseModel
 {
-    /** @use SdkModel<associated_phone_number_create_params> */
+    /** @use SdkModel<AssociatedPhoneNumberCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

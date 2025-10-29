@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type job_list_response = array{data: list<FineTuningJob>}
+ * @phpstan-type JobListResponseShape = array{data: list<FineTuningJob>}
  */
 final class JobListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<job_list_response> */
+    /** @use SdkModel<JobListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

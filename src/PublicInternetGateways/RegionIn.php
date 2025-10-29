@@ -9,11 +9,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type region_in = array{regionCode?: string}
+ * @phpstan-type RegionInShape = array{regionCode?: string}
  */
 final class RegionIn implements BaseModel
 {
-    /** @use SdkModel<region_in> */
+    /** @use SdkModel<RegionInShape> */
     use SdkModel;
 
     /**

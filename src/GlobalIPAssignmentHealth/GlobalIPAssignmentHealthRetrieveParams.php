@@ -15,13 +15,13 @@ use Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthRetrieveParams\Filte
  *
  * @see Telnyx\GlobalIPAssignmentHealth->retrieve
  *
- * @phpstan-type global_ip_assignment_health_retrieve_params = array{
+ * @phpstan-type GlobalIPAssignmentHealthRetrieveParamsShape = array{
  *   filter?: Filter
  * }
  */
 final class GlobalIPAssignmentHealthRetrieveParams implements BaseModel
 {
-    /** @use SdkModel<global_ip_assignment_health_retrieve_params> */
+    /** @use SdkModel<GlobalIPAssignmentHealthRetrieveParamsShape> */
     use SdkModel;
     use SdkParams;
 

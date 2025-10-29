@@ -13,7 +13,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 /**
  * Available CDR report fields grouped by category.
  *
- * @phpstan-type voice_get_fields_response = array{
+ * @phpstan-type VoiceGetFieldsResponseShape = array{
  *   billing?: list<string>,
  *   interactionData?: list<string>,
  *   numberInformation?: list<string>,
@@ -22,7 +22,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  */
 final class VoiceGetFieldsResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<voice_get_fields_response> */
+    /** @use SdkModel<VoiceGetFieldsResponseShape> */
     use SdkModel;
 
     use SdkResponse;

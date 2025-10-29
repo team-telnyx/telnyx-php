@@ -13,13 +13,13 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentListResponse\Data;
 
 /**
- * @phpstan-type additional_document_list_response = array{
+ * @phpstan-type AdditionalDocumentListResponseShape = array{
  *   data?: list<Data>, meta?: PaginationMeta
  * }
  */
 final class AdditionalDocumentListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<additional_document_list_response> */
+    /** @use SdkModel<AdditionalDocumentListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

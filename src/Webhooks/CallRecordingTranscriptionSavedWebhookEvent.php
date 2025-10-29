@@ -10,13 +10,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\CallRecordingTranscriptionSavedWebhookEvent\Data;
 
 /**
- * @phpstan-type call_recording_transcription_saved_webhook_event = array{
+ * @phpstan-type CallRecordingTranscriptionSavedWebhookEventShape = array{
  *   data?: Data
  * }
  */
 final class CallRecordingTranscriptionSavedWebhookEvent implements BaseModel
 {
-    /** @use SdkModel<call_recording_transcription_saved_webhook_event> */
+    /** @use SdkModel<CallRecordingTranscriptionSavedWebhookEventShape> */
     use SdkModel;
 
     #[Api(optional: true)]

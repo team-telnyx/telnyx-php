@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\UsageReports->getOptions
  *
- * @phpstan-type usage_report_get_options_params = array{
+ * @phpstan-type UsageReportGetOptionsParamsShape = array{
  *   product?: string, authorizationBearer?: string
  * }
  */
 final class UsageReportGetOptionsParams implements BaseModel
 {
-    /** @use SdkModel<usage_report_get_options_params> */
+    /** @use SdkModel<UsageReportGetOptionsParamsShape> */
     use SdkModel;
     use SdkParams;
 

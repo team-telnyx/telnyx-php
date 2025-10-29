@@ -17,13 +17,13 @@ use Telnyx\MessagingOptouts\MessagingOptoutListParams\Page;
  *
  * @see Telnyx\MessagingOptouts->list
  *
- * @phpstan-type messaging_optout_list_params = array{
+ * @phpstan-type MessagingOptoutListParamsShape = array{
  *   createdAt?: CreatedAt, filter?: Filter, page?: Page, redactionEnabled?: string
  * }
  */
 final class MessagingOptoutListParams implements BaseModel
 {
-    /** @use SdkModel<messaging_optout_list_params> */
+    /** @use SdkModel<MessagingOptoutListParamsShape> */
     use SdkModel;
     use SdkParams;
 

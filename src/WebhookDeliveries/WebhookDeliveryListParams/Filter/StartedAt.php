@@ -9,11 +9,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type started_at = array{gte?: string, lte?: string}
+ * @phpstan-type StartedAtShape = array{gte?: string, lte?: string}
  */
 final class StartedAt implements BaseModel
 {
-    /** @use SdkModel<started_at> */
+    /** @use SdkModel<StartedAtShape> */
     use SdkModel;
 
     /**

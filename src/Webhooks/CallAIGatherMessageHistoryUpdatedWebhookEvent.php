@@ -10,13 +10,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\CallAIGatherMessageHistoryUpdatedWebhookEvent\Data;
 
 /**
- * @phpstan-type call_ai_gather_message_history_updated_webhook_event = array{
+ * @phpstan-type CallAIGatherMessageHistoryUpdatedWebhookEventShape = array{
  *   data?: Data
  * }
  */
 final class CallAIGatherMessageHistoryUpdatedWebhookEvent implements BaseModel
 {
-    /** @use SdkModel<call_ai_gather_message_history_updated_webhook_event> */
+    /** @use SdkModel<CallAIGatherMessageHistoryUpdatedWebhookEventShape> */
     use SdkModel;
 
     #[Api(optional: true)]

@@ -10,11 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\InboundMessageWebhookEvent\Data;
 
 /**
- * @phpstan-type inbound_message_webhook_event = array{data?: Data}
+ * @phpstan-type InboundMessageWebhookEventShape = array{data?: Data}
  */
 final class InboundMessageWebhookEvent implements BaseModel
 {
-    /** @use SdkModel<inbound_message_webhook_event> */
+    /** @use SdkModel<InboundMessageWebhookEventShape> */
     use SdkModel;
 
     #[Api(optional: true)]

@@ -15,7 +15,7 @@ use Telnyx\Messages\MessageSendNumberPoolParams\Type;
  *
  * @see Telnyx\Messages->sendNumberPool
  *
- * @phpstan-type message_send_number_pool_params = array{
+ * @phpstan-type MessageSendNumberPoolParamsShape = array{
  *   messagingProfileID: string,
  *   to: string,
  *   autoDetect?: bool,
@@ -30,7 +30,7 @@ use Telnyx\Messages\MessageSendNumberPoolParams\Type;
  */
 final class MessageSendNumberPoolParams implements BaseModel
 {
-    /** @use SdkModel<message_send_number_pool_params> */
+    /** @use SdkModel<MessageSendNumberPoolParamsShape> */
     use SdkModel;
     use SdkParams;
 

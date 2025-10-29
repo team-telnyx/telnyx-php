@@ -14,7 +14,7 @@ use Telnyx\PortingPhoneNumbers\PortingPhoneNumberListResponse\Data\PortingOrderS
 use Telnyx\PortingPhoneNumbers\PortingPhoneNumberListResponse\Data\RequirementsStatus;
 
 /**
- * @phpstan-type data_alias = array{
+ * @phpstan-type DataShape = array{
  *   activationStatus?: value-of<ActivationStatus>,
  *   phoneNumber?: string,
  *   phoneNumberType?: value-of<PhoneNumberType>,
@@ -28,7 +28,7 @@ use Telnyx\PortingPhoneNumbers\PortingPhoneNumberListResponse\Data\RequirementsS
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**

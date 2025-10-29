@@ -13,7 +13,7 @@ use Telnyx\RequirementGroups\RequirementGroup\RegulatoryRequirement;
 use Telnyx\RequirementGroups\RequirementGroup\Status;
 
 /**
- * @phpstan-type requirement_group = array{
+ * @phpstan-type RequirementGroupShape = array{
  *   id?: string,
  *   action?: string,
  *   countryCode?: string,
@@ -28,7 +28,7 @@ use Telnyx\RequirementGroups\RequirementGroup\Status;
  */
 final class RequirementGroup implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<requirement_group> */
+    /** @use SdkModel<RequirementGroupShape> */
     use SdkModel;
 
     use SdkResponse;

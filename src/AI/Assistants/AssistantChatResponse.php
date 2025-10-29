@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type assistant_chat_response = array{content: string}
+ * @phpstan-type AssistantChatResponseShape = array{content: string}
  */
 final class AssistantChatResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<assistant_chat_response> */
+    /** @use SdkModel<AssistantChatResponseShape> */
     use SdkModel;
 
     use SdkResponse;

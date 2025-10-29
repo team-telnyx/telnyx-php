@@ -11,7 +11,7 @@ use Telnyx\Webhooks\InboundMessageWebhookEvent\Data\Payload\Cc\LineType;
 use Telnyx\Webhooks\InboundMessageWebhookEvent\Data\Payload\Cc\Status;
 
 /**
- * @phpstan-type cc_alias = array{
+ * @phpstan-type CcShape = array{
  *   carrier?: string,
  *   lineType?: value-of<LineType>,
  *   phoneNumber?: string,
@@ -20,7 +20,7 @@ use Telnyx\Webhooks\InboundMessageWebhookEvent\Data\Payload\Cc\Status;
  */
 final class Cc implements BaseModel
 {
-    /** @use SdkModel<cc_alias> */
+    /** @use SdkModel<CcShape> */
     use SdkModel;
 
     /**

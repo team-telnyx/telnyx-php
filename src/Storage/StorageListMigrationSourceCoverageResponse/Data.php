@@ -10,13 +10,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Storage\StorageListMigrationSourceCoverageResponse\Data\Provider;
 
 /**
- * @phpstan-type data_alias = array{
+ * @phpstan-type DataShape = array{
  *   provider?: value-of<Provider>, sourceRegion?: string
  * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**

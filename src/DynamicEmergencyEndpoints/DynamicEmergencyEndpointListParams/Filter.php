@@ -12,13 +12,13 @@ use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointListParams\Filter\S
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[status], filter[country_code].
  *
- * @phpstan-type filter_alias = array{
+ * @phpstan-type FilterShape = array{
  *   countryCode?: string, status?: value-of<Status>
  * }
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**

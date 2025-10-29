@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Portouts\PortoutDetails\Status;
 
 /**
- * @phpstan-type portout_details = array{
+ * @phpstan-type PortoutDetailsShape = array{
  *   id?: string,
  *   alreadyPorted?: bool,
  *   authorizedName?: string,
@@ -42,7 +42,7 @@ use Telnyx\Portouts\PortoutDetails\Status;
  */
 final class PortoutDetails implements BaseModel
 {
-    /** @use SdkModel<portout_details> */
+    /** @use SdkModel<PortoutDetailsShape> */
     use SdkModel;
 
     #[Api(optional: true)]

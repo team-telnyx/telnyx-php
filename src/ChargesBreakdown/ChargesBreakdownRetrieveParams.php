@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\ChargesBreakdown->retrieve
  *
- * @phpstan-type charges_breakdown_retrieve_params = array{
+ * @phpstan-type ChargesBreakdownRetrieveParamsShape = array{
  *   startDate: \DateTimeInterface,
  *   endDate?: \DateTimeInterface,
  *   format?: Format|value-of<Format>,
@@ -23,7 +23,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class ChargesBreakdownRetrieveParams implements BaseModel
 {
-    /** @use SdkModel<charges_breakdown_retrieve_params> */
+    /** @use SdkModel<ChargesBreakdownRetrieveParamsShape> */
     use SdkModel;
     use SdkParams;
 

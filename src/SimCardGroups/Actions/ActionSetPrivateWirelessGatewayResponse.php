@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type action_set_private_wireless_gateway_response = array{
+ * @phpstan-type ActionSetPrivateWirelessGatewayResponseShape = array{
  *   data?: SimCardGroupAction
  * }
  */
 final class ActionSetPrivateWirelessGatewayResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<action_set_private_wireless_gateway_response> */
+    /** @use SdkModel<ActionSetPrivateWirelessGatewayResponseShape> */
     use SdkModel;
 
     use SdkResponse;

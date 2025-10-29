@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Rooms\Actions->refreshClientToken
  *
- * @phpstan-type action_refresh_client_token_params = array{
+ * @phpstan-type ActionRefreshClientTokenParamsShape = array{
  *   refreshToken: string, tokenTtlSecs?: int
  * }
  */
 final class ActionRefreshClientTokenParams implements BaseModel
 {
-    /** @use SdkModel<action_refresh_client_token_params> */
+    /** @use SdkModel<ActionRefreshClientTokenParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\PhoneNumbers->update
  *
- * @phpstan-type phone_number_update_params = array{
+ * @phpstan-type PhoneNumberUpdateParamsShape = array{
  *   billingGroupID?: string,
  *   connectionID?: string,
  *   customerReference?: string,
@@ -25,7 +25,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class PhoneNumberUpdateParams implements BaseModel
 {
-    /** @use SdkModel<phone_number_update_params> */
+    /** @use SdkModel<PhoneNumberUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 

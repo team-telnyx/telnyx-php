@@ -9,13 +9,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type to_alias = array{
+ * @phpstan-type ToShape = array{
  *   carrier?: string, lineType?: string, phoneNumber?: string, status?: string
  * }
  */
 final class To implements BaseModel
 {
-    /** @use SdkModel<to_alias> */
+    /** @use SdkModel<ToShape> */
     use SdkModel;
 
     #[Api(optional: true)]

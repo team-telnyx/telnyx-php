@@ -10,11 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\CallLeftQueueWebhookEvent\Data;
 
 /**
- * @phpstan-type call_left_queue_webhook_event = array{data?: Data}
+ * @phpstan-type CallLeftQueueWebhookEventShape = array{data?: Data}
  */
 final class CallLeftQueueWebhookEvent implements BaseModel
 {
-    /** @use SdkModel<call_left_queue_webhook_event> */
+    /** @use SdkModel<CallLeftQueueWebhookEventShape> */
     use SdkModel;
 
     #[Api(optional: true)]

@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\MessagingNumbersBulkUpdates\MessagingNumbersBulkUpdateNewResponse\Data\RecordType;
 
 /**
- * @phpstan-type data_alias = array{
+ * @phpstan-type DataShape = array{
  *   failed?: list<string>,
  *   orderID?: string,
  *   pending?: list<string>,
@@ -20,7 +20,7 @@ use Telnyx\MessagingNumbersBulkUpdates\MessagingNumbersBulkUpdateNewResponse\Dat
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**

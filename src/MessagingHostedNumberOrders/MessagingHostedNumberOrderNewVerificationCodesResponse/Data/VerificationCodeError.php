@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Failed verification code creation response.
  *
- * @phpstan-type verification_code_error = array{
+ * @phpstan-type VerificationCodeErrorShape = array{
  *   error: string, phoneNumber: string
  * }
  */
 final class VerificationCodeError implements BaseModel
 {
-    /** @use SdkModel<verification_code_error> */
+    /** @use SdkModel<VerificationCodeErrorShape> */
     use SdkModel;
 
     /**

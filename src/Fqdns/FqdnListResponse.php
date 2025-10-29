@@ -12,13 +12,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type fqdn_list_response = array{
+ * @phpstan-type FqdnListResponseShape = array{
  *   data?: list<Fqdn>, meta?: ConnectionsPaginationMeta
  * }
  */
 final class FqdnListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<fqdn_list_response> */
+    /** @use SdkModel<FqdnListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

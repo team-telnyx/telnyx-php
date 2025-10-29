@@ -13,13 +13,13 @@ use Telnyx\WebhookDeliveries\WebhookDeliveryListResponse\Data;
 use Telnyx\WebhookDeliveries\WebhookDeliveryListResponse\Meta;
 
 /**
- * @phpstan-type webhook_delivery_list_response = array{
+ * @phpstan-type WebhookDeliveryListResponseShape = array{
  *   data?: list<Data>, meta?: Meta
  * }
  */
 final class WebhookDeliveryListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<webhook_delivery_list_response> */
+    /** @use SdkModel<WebhookDeliveryListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

@@ -21,7 +21,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Conferences\Actions->recordStart
  *
- * @phpstan-type action_record_start_params = array{
+ * @phpstan-type ActionRecordStartParamsShape = array{
  *   format: Format|value-of<Format>,
  *   commandID?: string,
  *   customFileName?: string,
@@ -32,7 +32,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class ActionRecordStartParams implements BaseModel
 {
-    /** @use SdkModel<action_record_start_params> */
+    /** @use SdkModel<ActionRecordStartParamsShape> */
     use SdkModel;
     use SdkParams;
 

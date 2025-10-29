@@ -9,13 +9,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type function1_alias = array{
+ * @phpstan-type Function1Shape = array{
  *   name: string, description?: string, parameters?: array<string, mixed>
  * }
  */
 final class Function1 implements BaseModel
 {
-    /** @use SdkModel<function1_alias> */
+    /** @use SdkModel<Function1Shape> */
     use SdkModel;
 
     #[Api]

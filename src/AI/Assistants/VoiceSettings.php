@@ -12,7 +12,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type voice_settings = array{
+ * @phpstan-type VoiceSettingsShape = array{
  *   voice: string,
  *   apiKeyRef?: string,
  *   backgroundAudio?: UnionMember0|UnionMember1|UnionMember2,
@@ -21,7 +21,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class VoiceSettings implements BaseModel
 {
-    /** @use SdkModel<voice_settings> */
+    /** @use SdkModel<VoiceSettingsShape> */
     use SdkModel;
 
     /**

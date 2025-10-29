@@ -11,7 +11,7 @@ use Telnyx\Texml\Accounts\Conferences\ConferenceGetRecordingsResponse\Recording\
 use Telnyx\Texml\Accounts\Conferences\ConferenceGetRecordingsResponse\Recording\Status;
 
 /**
- * @phpstan-type recording_alias = array{
+ * @phpstan-type RecordingShape = array{
  *   accountSid?: string,
  *   callSid?: string,
  *   channels?: int,
@@ -31,7 +31,7 @@ use Telnyx\Texml\Accounts\Conferences\ConferenceGetRecordingsResponse\Recording\
  */
 final class Recording implements BaseModel
 {
-    /** @use SdkModel<recording_alias> */
+    /** @use SdkModel<RecordingShape> */
     use SdkModel;
 
     /**

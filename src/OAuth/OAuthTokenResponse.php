@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\OAuth\OAuthTokenResponse\TokenType;
 
 /**
- * @phpstan-type oauth_token_response = array{
+ * @phpstan-type OAuthTokenResponseShape = array{
  *   accessToken: string,
  *   expiresIn: int,
  *   tokenType: value-of<TokenType>,
@@ -22,7 +22,7 @@ use Telnyx\OAuth\OAuthTokenResponse\TokenType;
  */
 final class OAuthTokenResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<oauth_token_response> */
+    /** @use SdkModel<OAuthTokenResponseShape> */
     use SdkModel;
 
     use SdkResponse;

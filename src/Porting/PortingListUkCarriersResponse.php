@@ -12,11 +12,11 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Porting\PortingListUkCarriersResponse\Data;
 
 /**
- * @phpstan-type porting_list_uk_carriers_response = array{data?: list<Data>}
+ * @phpstan-type PortingListUkCarriersResponseShape = array{data?: list<Data>}
  */
 final class PortingListUkCarriersResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<porting_list_uk_carriers_response> */
+    /** @use SdkModel<PortingListUkCarriersResponseShape> */
     use SdkModel;
 
     use SdkResponse;

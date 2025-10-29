@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Configuration for a single version in canary deploy.
  *
- * @phpstan-type version_config = array{percentage: float, versionID: string}
+ * @phpstan-type VersionConfigShape = array{percentage: float, versionID: string}
  */
 final class VersionConfig implements BaseModel
 {
-    /** @use SdkModel<version_config> */
+    /** @use SdkModel<VersionConfigShape> */
     use SdkModel;
 
     /**

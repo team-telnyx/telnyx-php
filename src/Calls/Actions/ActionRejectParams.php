@@ -19,13 +19,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Calls\Actions->reject
  *
- * @phpstan-type action_reject_params = array{
+ * @phpstan-type ActionRejectParamsShape = array{
  *   cause: Cause|value-of<Cause>, clientState?: string, commandID?: string
  * }
  */
 final class ActionRejectParams implements BaseModel
 {
-    /** @use SdkModel<action_reject_params> */
+    /** @use SdkModel<ActionRejectParamsShape> */
     use SdkModel;
     use SdkParams;
 

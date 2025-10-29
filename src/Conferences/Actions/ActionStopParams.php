@@ -15,13 +15,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Conferences\Actions->stop
  *
- * @phpstan-type action_stop_params = array{
+ * @phpstan-type ActionStopParamsShape = array{
  *   callControlIDs?: list<string>, region?: Region|value-of<Region>
  * }
  */
 final class ActionStopParams implements BaseModel
 {
-    /** @use SdkModel<action_stop_params> */
+    /** @use SdkModel<ActionStopParamsShape> */
     use SdkModel;
     use SdkParams;
 

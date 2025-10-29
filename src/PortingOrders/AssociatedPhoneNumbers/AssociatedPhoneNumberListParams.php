@@ -17,13 +17,13 @@ use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberListParams\
  *
  * @see Telnyx\PortingOrders\AssociatedPhoneNumbers->list
  *
- * @phpstan-type associated_phone_number_list_params = array{
+ * @phpstan-type AssociatedPhoneNumberListParamsShape = array{
  *   filter?: Filter, page?: Page, sort?: Sort
  * }
  */
 final class AssociatedPhoneNumberListParams implements BaseModel
 {
-    /** @use SdkModel<associated_phone_number_list_params> */
+    /** @use SdkModel<AssociatedPhoneNumberListParamsShape> */
     use SdkModel;
     use SdkParams;
 

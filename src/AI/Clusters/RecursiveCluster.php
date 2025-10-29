@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type recursive_cluster = array{
+ * @phpstan-type RecursiveClusterShape = array{
  *   clusterID: string,
  *   clusterSummary: string,
  *   totalNumberOfNodes: int,
@@ -21,7 +21,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class RecursiveCluster implements BaseModel
 {
-    /** @use SdkModel<recursive_cluster> */
+    /** @use SdkModel<RecursiveClusterShape> */
     use SdkModel;
 
     #[Api('cluster_id')]

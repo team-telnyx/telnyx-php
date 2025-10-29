@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * To disable this feature, set the object field to `null`.
  *
- * @phpstan-type number_pool_settings = array{
+ * @phpstan-type NumberPoolSettingsShape = array{
  *   longCodeWeight: float,
  *   skipUnhealthy: bool,
  *   tollFreeWeight: float,
@@ -25,7 +25,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class NumberPoolSettings implements BaseModel
 {
-    /** @use SdkModel<number_pool_settings> */
+    /** @use SdkModel<NumberPoolSettingsShape> */
     use SdkModel;
 
     /**

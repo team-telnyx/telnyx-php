@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type external_connection_get_response = array{
+ * @phpstan-type ExternalConnectionGetResponseShape = array{
  *   data?: ExternalConnection
  * }
  */
 final class ExternalConnectionGetResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<external_connection_get_response> */
+    /** @use SdkModel<ExternalConnectionGetResponseShape> */
     use SdkModel;
 
     use SdkResponse;

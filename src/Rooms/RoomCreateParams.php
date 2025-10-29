@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Rooms->create
  *
- * @phpstan-type room_create_params = array{
+ * @phpstan-type RoomCreateParamsShape = array{
  *   enableRecording?: bool,
  *   maxParticipants?: int,
  *   uniqueName?: string,
@@ -25,7 +25,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class RoomCreateParams implements BaseModel
 {
-    /** @use SdkModel<room_create_params> */
+    /** @use SdkModel<RoomCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

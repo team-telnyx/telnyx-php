@@ -12,13 +12,13 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PortingOrders\PortingOrdersActivationJob;
 
 /**
- * @phpstan-type activation_job_update_response = array{
+ * @phpstan-type ActivationJobUpdateResponseShape = array{
  *   data?: PortingOrdersActivationJob
  * }
  */
 final class ActivationJobUpdateResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<activation_job_update_response> */
+    /** @use SdkModel<ActivationJobUpdateResponseShape> */
     use SdkModel;
 
     use SdkResponse;

@@ -22,7 +22,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Calls\Actions->refer
  *
- * @phpstan-type action_refer_params = array{
+ * @phpstan-type ActionReferParamsShape = array{
  *   sipAddress: string,
  *   clientState?: string,
  *   commandID?: string,
@@ -34,7 +34,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class ActionReferParams implements BaseModel
 {
-    /** @use SdkModel<action_refer_params> */
+    /** @use SdkModel<ActionReferParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -13,13 +13,13 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 /**
  * A list of Verify profile message templates.
  *
- * @phpstan-type verify_profile_get_templates_response = array{
+ * @phpstan-type VerifyProfileGetTemplatesResponseShape = array{
  *   data: list<VerifyProfileMessageTemplateResponse>
  * }
  */
 final class VerifyProfileGetTemplatesResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<verify_profile_get_templates_response> */
+    /** @use SdkModel<VerifyProfileGetTemplatesResponseShape> */
     use SdkModel;
 
     use SdkResponse;

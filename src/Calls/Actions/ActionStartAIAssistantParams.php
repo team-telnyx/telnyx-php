@@ -21,7 +21,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Calls\Actions->startAIAssistant
  *
- * @phpstan-type action_start_ai_assistant_params = array{
+ * @phpstan-type ActionStartAIAssistantParamsShape = array{
  *   assistant?: Assistant,
  *   clientState?: string,
  *   commandID?: string,
@@ -34,7 +34,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class ActionStartAIAssistantParams implements BaseModel
 {
-    /** @use SdkModel<action_start_ai_assistant_params> */
+    /** @use SdkModel<ActionStartAIAssistantParamsShape> */
     use SdkModel;
     use SdkParams;
 

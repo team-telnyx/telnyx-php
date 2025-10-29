@@ -15,11 +15,11 @@ use Telnyx\PortingOrders\Comments\CommentListParams\Page;
  *
  * @see Telnyx\PortingOrders\Comments->list
  *
- * @phpstan-type comment_list_params = array{page?: Page}
+ * @phpstan-type CommentListParamsShape = array{page?: Page}
  */
 final class CommentListParams implements BaseModel
 {
-    /** @use SdkModel<comment_list_params> */
+    /** @use SdkModel<CommentListParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[verified].
  *
- * @phpstan-type filter_alias = array{verified?: bool}
+ * @phpstan-type FilterShape = array{verified?: bool}
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**

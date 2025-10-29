@@ -13,13 +13,13 @@ use Telnyx\Portouts\Events\EventListParams\Filter\EventType;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[event_type], filter[portout_id], filter[created_at].
  *
- * @phpstan-type filter_alias = array{
+ * @phpstan-type FilterShape = array{
  *   createdAt?: CreatedAt, eventType?: value-of<EventType>, portoutID?: string
  * }
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**

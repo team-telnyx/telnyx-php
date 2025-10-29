@@ -12,13 +12,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type message_alias = array{
+ * @phpstan-type MessageShape = array{
  *   content: string|list<TextAndImageArray>, role: value-of<Role>
  * }
  */
 final class Message implements BaseModel
 {
-    /** @use SdkModel<message_alias> */
+    /** @use SdkModel<MessageShape> */
     use SdkModel;
 
     /** @var string|list<TextAndImageArray> $content */

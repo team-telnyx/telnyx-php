@@ -11,7 +11,7 @@ use Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateResponse\Da
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateResponse\Data\Status;
 
 /**
- * @phpstan-type data_alias = array{
+ * @phpstan-type DataShape = array{
  *   id?: string,
  *   actionType?: string,
  *   actionURL?: string|null,
@@ -26,7 +26,7 @@ use Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateResponse\Da
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**

@@ -27,7 +27,7 @@ use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams
  *
  * @see Telnyx\Texml\Accounts\Conferences\Participants->participants
  *
- * @phpstan-type participant_participants_params = array{
+ * @phpstan-type ParticipantParticipantsParamsShape = array{
  *   accountSid: string,
  *   amdStatusCallback?: string,
  *   amdStatusCallbackMethod?: AmdStatusCallbackMethod|value-of<AmdStatusCallbackMethod>,
@@ -79,7 +79,7 @@ use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams
  */
 final class ParticipantParticipantsParams implements BaseModel
 {
-    /** @use SdkModel<participant_participants_params> */
+    /** @use SdkModel<ParticipantParticipantsParamsShape> */
     use SdkModel;
     use SdkParams;
 

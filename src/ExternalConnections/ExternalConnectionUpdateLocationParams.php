@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\ExternalConnections->updateLocation
  *
- * @phpstan-type external_connection_update_location_params = array{
+ * @phpstan-type ExternalConnectionUpdateLocationParamsShape = array{
  *   id: string, staticEmergencyAddressID: string
  * }
  */
 final class ExternalConnectionUpdateLocationParams implements BaseModel
 {
-    /** @use SdkModel<external_connection_update_location_params> */
+    /** @use SdkModel<ExternalConnectionUpdateLocationParamsShape> */
     use SdkModel;
     use SdkParams;
 

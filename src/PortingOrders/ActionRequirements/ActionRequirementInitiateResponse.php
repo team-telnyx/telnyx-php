@@ -12,11 +12,11 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateResponse\Data;
 
 /**
- * @phpstan-type action_requirement_initiate_response = array{data?: Data}
+ * @phpstan-type ActionRequirementInitiateResponseShape = array{data?: Data}
  */
 final class ActionRequirementInitiateResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<action_requirement_initiate_response> */
+    /** @use SdkModel<ActionRequirementInitiateResponseShape> */
     use SdkModel;
 
     use SdkResponse;

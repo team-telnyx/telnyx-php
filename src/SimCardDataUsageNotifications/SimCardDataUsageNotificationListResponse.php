@@ -12,13 +12,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type sim_card_data_usage_notification_list_response = array{
+ * @phpstan-type SimCardDataUsageNotificationListResponseShape = array{
  *   data?: list<SimCardDataUsageNotification>, meta?: PaginationMeta
  * }
  */
 final class SimCardDataUsageNotificationListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<sim_card_data_usage_notification_list_response> */
+    /** @use SdkModel<SimCardDataUsageNotificationListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

@@ -10,13 +10,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrdersExceptionType\Code;
 
 /**
- * @phpstan-type porting_orders_exception_type = array{
+ * @phpstan-type PortingOrdersExceptionTypeShape = array{
  *   code?: value-of<Code>, description?: string
  * }
  */
 final class PortingOrdersExceptionType implements BaseModel
 {
-    /** @use SdkModel<porting_orders_exception_type> */
+    /** @use SdkModel<PortingOrdersExceptionTypeShape> */
     use SdkModel;
 
     /**

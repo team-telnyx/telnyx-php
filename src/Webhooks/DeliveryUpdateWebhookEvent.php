@@ -11,11 +11,11 @@ use Telnyx\Webhooks\DeliveryUpdateWebhookEvent\Data;
 use Telnyx\Webhooks\DeliveryUpdateWebhookEvent\Meta;
 
 /**
- * @phpstan-type delivery_update_webhook_event = array{data?: Data, meta?: Meta}
+ * @phpstan-type DeliveryUpdateWebhookEventShape = array{data?: Data, meta?: Meta}
  */
 final class DeliveryUpdateWebhookEvent implements BaseModel
 {
-    /** @use SdkModel<delivery_update_webhook_event> */
+    /** @use SdkModel<DeliveryUpdateWebhookEventShape> */
     use SdkModel;
 
     #[Api(optional: true)]

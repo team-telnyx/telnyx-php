@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type csv_download_new_response = array{data?: list<CsvDownload>}
+ * @phpstan-type CsvDownloadNewResponseShape = array{data?: list<CsvDownload>}
  */
 final class CsvDownloadNewResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<csv_download_new_response> */
+    /** @use SdkModel<CsvDownloadNewResponseShape> */
     use SdkModel;
 
     use SdkResponse;

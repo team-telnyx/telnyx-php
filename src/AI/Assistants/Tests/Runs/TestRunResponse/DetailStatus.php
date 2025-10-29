@@ -10,11 +10,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type detail_status = array{name: string, status: value-of<TestStatus>}
+ * @phpstan-type DetailStatusShape = array{
+ *   name: string, status: value-of<TestStatus>
+ * }
  */
 final class DetailStatus implements BaseModel
 {
-    /** @use SdkModel<detail_status> */
+    /** @use SdkModel<DetailStatusShape> */
     use SdkModel;
 
     #[Api]

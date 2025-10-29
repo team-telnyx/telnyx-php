@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\MessagingProfiles\AutorespConfigs\AutoRespConfig\Op;
 
 /**
- * @phpstan-type auto_resp_config = array{
+ * @phpstan-type AutoRespConfigShape = array{
  *   id: string,
  *   countryCode: string,
  *   createdAt: \DateTimeInterface,
@@ -22,7 +22,7 @@ use Telnyx\MessagingProfiles\AutorespConfigs\AutoRespConfig\Op;
  */
 final class AutoRespConfig implements BaseModel
 {
-    /** @use SdkModel<auto_resp_config> */
+    /** @use SdkModel<AutoRespConfigShape> */
     use SdkModel;
 
     #[Api]

@@ -17,13 +17,13 @@ use Telnyx\PartnerCampaigns\PartnerCampaignListParams\Sort;
  *
  * @see Telnyx\PartnerCampaigns->list
  *
- * @phpstan-type partner_campaign_list_params = array{
+ * @phpstan-type PartnerCampaignListParamsShape = array{
  *   page?: int, recordsPerPage?: int, sort?: Sort|value-of<Sort>
  * }
  */
 final class PartnerCampaignListParams implements BaseModel
 {
-    /** @use SdkModel<partner_campaign_list_params> */
+    /** @use SdkModel<PartnerCampaignListParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type messaging_new_response = array{
+ * @phpstan-type MessagingNewResponseShape = array{
  *   data?: MdrUsageReportResponseLegacy
  * }
  */
 final class MessagingNewResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<messaging_new_response> */
+    /** @use SdkModel<MessagingNewResponseShape> */
     use SdkModel;
 
     use SdkResponse;

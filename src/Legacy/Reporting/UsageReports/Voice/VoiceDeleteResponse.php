@@ -11,11 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type voice_delete_response = array{data?: CdrUsageReportResponseLegacy}
+ * @phpstan-type VoiceDeleteResponseShape = array{
+ *   data?: CdrUsageReportResponseLegacy
+ * }
  */
 final class VoiceDeleteResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<voice_delete_response> */
+    /** @use SdkModel<VoiceDeleteResponseShape> */
     use SdkModel;
 
     use SdkResponse;

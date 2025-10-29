@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type result_alias = array{
+ * @phpstan-type ResultShape = array{
  *   chargeType: string,
  *   serviceOwnerEmail: string,
  *   serviceOwnerUserID: string,
@@ -20,7 +20,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class Result implements BaseModel
 {
-    /** @use SdkModel<result_alias> */
+    /** @use SdkModel<ResultShape> */
     use SdkModel;
 
     /**

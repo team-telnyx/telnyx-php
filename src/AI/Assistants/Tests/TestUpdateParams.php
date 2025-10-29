@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\AI\Assistants\Tests->update
  *
- * @phpstan-type test_update_params = array{
+ * @phpstan-type TestUpdateParamsShape = array{
  *   description?: string,
  *   destination?: string,
  *   instructions?: string,
@@ -28,7 +28,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class TestUpdateParams implements BaseModel
 {
-    /** @use SdkModel<test_update_params> */
+    /** @use SdkModel<TestUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 

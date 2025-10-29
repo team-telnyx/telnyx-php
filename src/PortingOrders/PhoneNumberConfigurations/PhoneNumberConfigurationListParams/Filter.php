@@ -12,7 +12,7 @@ use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListP
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[porting_order.status][in][], filter[porting_phone_number][in][], filter[user_bundle_id][in][].
  *
- * @phpstan-type filter_alias = array{
+ * @phpstan-type FilterShape = array{
  *   portingOrder?: PortingOrder,
  *   portingPhoneNumber?: list<string>,
  *   userBundleID?: list<string>,
@@ -20,7 +20,7 @@ use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListP
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     #[Api('porting_order', optional: true)]

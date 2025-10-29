@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\CampaignBuilder->create
  *
- * @phpstan-type campaign_builder_create_params = array{
+ * @phpstan-type CampaignBuilderCreateParamsShape = array{
  *   brandID: string,
  *   description: string,
  *   usecase: string,
@@ -54,7 +54,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class CampaignBuilderCreateParams implements BaseModel
 {
-    /** @use SdkModel<campaign_builder_create_params> */
+    /** @use SdkModel<CampaignBuilderCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\AI\Assistants\Versions->retrieve
  *
- * @phpstan-type version_retrieve_params = array{
+ * @phpstan-type VersionRetrieveParamsShape = array{
  *   assistantID: string, includeMcpServers?: bool
  * }
  */
 final class VersionRetrieveParams implements BaseModel
 {
-    /** @use SdkModel<version_retrieve_params> */
+    /** @use SdkModel<VersionRetrieveParamsShape> */
     use SdkModel;
     use SdkParams;
 

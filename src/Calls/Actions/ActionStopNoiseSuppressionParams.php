@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Calls\Actions->stopNoiseSuppression
  *
- * @phpstan-type action_stop_noise_suppression_params = array{
+ * @phpstan-type ActionStopNoiseSuppressionParamsShape = array{
  *   clientState?: string, commandID?: string
  * }
  */
 final class ActionStopNoiseSuppressionParams implements BaseModel
 {
-    /** @use SdkModel<action_stop_noise_suppression_params> */
+    /** @use SdkModel<ActionStopNoiseSuppressionParamsShape> */
     use SdkModel;
     use SdkParams;
 

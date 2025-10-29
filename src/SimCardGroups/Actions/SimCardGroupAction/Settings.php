@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * A JSON object representation of the action params.
  *
- * @phpstan-type settings_alias = array{privateWirelessGatewayID?: string}
+ * @phpstan-type SettingsShape = array{privateWirelessGatewayID?: string}
  */
 final class Settings implements BaseModel
 {
-    /** @use SdkModel<settings_alias> */
+    /** @use SdkModel<SettingsShape> */
     use SdkModel;
 
     /**

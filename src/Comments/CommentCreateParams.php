@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Comments->create
  *
- * @phpstan-type comment_create_params = array{
+ * @phpstan-type CommentCreateParamsShape = array{
  *   body?: string,
  *   commentRecordID?: string,
  *   commentRecordType?: CommentRecordType|value-of<CommentRecordType>,
@@ -23,7 +23,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class CommentCreateParams implements BaseModel
 {
-    /** @use SdkModel<comment_create_params> */
+    /** @use SdkModel<CommentCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

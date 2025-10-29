@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type user_bundle = array{
+ * @phpstan-type UserBundleShape = array{
  *   id: string,
  *   active: bool,
  *   billingBundle: BillingBundleSummary,
@@ -22,7 +22,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class UserBundle implements BaseModel
 {
-    /** @use SdkModel<user_bundle> */
+    /** @use SdkModel<UserBundleShape> */
     use SdkModel;
 
     /**

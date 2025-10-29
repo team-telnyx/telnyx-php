@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\RegulatoryRequirements\RegulatoryRequirementGetResponse\Data\RegulatoryRequirement;
 
 /**
- * @phpstan-type data_alias = array{
+ * @phpstan-type DataShape = array{
  *   action?: string,
  *   countryCode?: string,
  *   phoneNumberType?: string,
@@ -19,7 +19,7 @@ use Telnyx\RegulatoryRequirements\RegulatoryRequirementGetResponse\Data\Regulato
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     #[Api(optional: true)]

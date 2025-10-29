@@ -9,13 +9,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type messaging_settings = array{
+ * @phpstan-type MessagingSettingsShape = array{
  *   defaultMessagingProfileID?: string, deliveryStatusWebhookURL?: string
  * }
  */
 final class MessagingSettings implements BaseModel
 {
-    /** @use SdkModel<messaging_settings> */
+    /** @use SdkModel<MessagingSettingsShape> */
     use SdkModel;
 
     /**

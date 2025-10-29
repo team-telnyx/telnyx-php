@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type push_credential = array{
+ * @phpstan-type PushCredentialShape = array{
  *   id: string,
  *   alias: string,
  *   certificate: string,
@@ -23,7 +23,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class PushCredential implements BaseModel
 {
-    /** @use SdkModel<push_credential> */
+    /** @use SdkModel<PushCredentialShape> */
     use SdkModel;
 
     /**

@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * The webhook payload for the portout.foc_date_changed event.
  *
- * @phpstan-type webhook_portout_foc_date_changed_payload = array{
+ * @phpstan-type WebhookPortoutFocDateChangedPayloadShape = array{
  *   id?: string, focDate?: \DateTimeInterface, userID?: string
  * }
  */
 final class WebhookPortoutFocDateChangedPayload implements BaseModel
 {
-    /** @use SdkModel<webhook_portout_foc_date_changed_payload> */
+    /** @use SdkModel<WebhookPortoutFocDateChangedPayloadShape> */
     use SdkModel;
 
     /**

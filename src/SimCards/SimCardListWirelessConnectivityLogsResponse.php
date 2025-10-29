@@ -13,13 +13,13 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\SimCards\SimCardListWirelessConnectivityLogsResponse\Data;
 
 /**
- * @phpstan-type sim_card_list_wireless_connectivity_logs_response = array{
+ * @phpstan-type SimCardListWirelessConnectivityLogsResponseShape = array{
  *   data?: list<Data>, meta?: PaginationMeta
  * }
  */
 final class SimCardListWirelessConnectivityLogsResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<sim_card_list_wireless_connectivity_logs_response> */
+    /** @use SdkModel<SimCardListWirelessConnectivityLogsResponseShape> */
     use SdkModel;
 
     use SdkResponse;

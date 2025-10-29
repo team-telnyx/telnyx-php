@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\MessagingProfiles\AutorespConfigs\AutoRespConfigCreate\Op;
 
 /**
- * @phpstan-type auto_resp_config_create = array{
+ * @phpstan-type AutoRespConfigCreateShape = array{
  *   countryCode: string,
  *   keywords: list<string>,
  *   op: value-of<Op>,
@@ -19,7 +19,7 @@ use Telnyx\MessagingProfiles\AutorespConfigs\AutoRespConfigCreate\Op;
  */
 final class AutoRespConfigCreate implements BaseModel
 {
-    /** @use SdkModel<auto_resp_config_create> */
+    /** @use SdkModel<AutoRespConfigCreateShape> */
     use SdkModel;
 
     #[Api('country_code')]

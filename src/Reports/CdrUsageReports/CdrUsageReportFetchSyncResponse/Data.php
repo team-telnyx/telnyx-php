@@ -12,7 +12,7 @@ use Telnyx\Reports\CdrUsageReports\CdrUsageReportFetchSyncResponse\Data\ProductB
 use Telnyx\Reports\CdrUsageReports\CdrUsageReportFetchSyncResponse\Data\Status;
 
 /**
- * @phpstan-type data_alias = array{
+ * @phpstan-type DataShape = array{
  *   id?: string,
  *   aggregationType?: value-of<AggregationType>,
  *   connections?: list<int>,
@@ -29,7 +29,7 @@ use Telnyx\Reports\CdrUsageReports\CdrUsageReportFetchSyncResponse\Data\Status;
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**

@@ -18,7 +18,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  * scheduling, and metadata. Used when retrieving individual tests or
  * after creating/updating tests.
  *
- * @phpstan-type assistant_test = array{
+ * @phpstan-type AssistantTestShape = array{
  *   createdAt: \DateTimeInterface,
  *   name: string,
  *   rubric: list<Rubric>,
@@ -33,7 +33,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  */
 final class AssistantTest implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<assistant_test> */
+    /** @use SdkModel<AssistantTestShape> */
     use SdkModel;
 
     use SdkResponse;

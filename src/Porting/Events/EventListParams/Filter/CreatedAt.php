@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Created at date range filtering operations.
  *
- * @phpstan-type created_at = array{
+ * @phpstan-type CreatedAtShape = array{
  *   gte?: \DateTimeInterface, lte?: \DateTimeInterface
  * }
  */
 final class CreatedAt implements BaseModel
 {
-    /** @use SdkModel<created_at> */
+    /** @use SdkModel<CreatedAtShape> */
     use SdkModel;
 
     /**

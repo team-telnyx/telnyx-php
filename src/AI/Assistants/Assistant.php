@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Assistant configuration including choice of LLM, custom instructions, and tools.
  *
- * @phpstan-type assistant_alias = array{
+ * @phpstan-type AssistantShape = array{
  *   instructions?: string,
  *   model?: string,
  *   openaiAPIKeyRef?: string,
@@ -23,7 +23,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class Assistant implements BaseModel
 {
-    /** @use SdkModel<assistant_alias> */
+    /** @use SdkModel<AssistantShape> */
     use SdkModel;
 
     /**

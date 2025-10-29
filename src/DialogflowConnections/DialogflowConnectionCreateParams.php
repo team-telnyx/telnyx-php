@@ -15,7 +15,7 @@ use Telnyx\DialogflowConnections\DialogflowConnectionCreateParams\DialogflowAPI;
  *
  * @see Telnyx\DialogflowConnections->create
  *
- * @phpstan-type dialogflow_connection_create_params = array{
+ * @phpstan-type DialogflowConnectionCreateParamsShape = array{
  *   serviceAccount: array<string, mixed>,
  *   conversationProfileID?: string,
  *   dialogflowAPI?: DialogflowAPI|value-of<DialogflowAPI>,
@@ -25,7 +25,7 @@ use Telnyx\DialogflowConnections\DialogflowConnectionCreateParams\DialogflowAPI;
  */
 final class DialogflowConnectionCreateParams implements BaseModel
 {
-    /** @use SdkModel<dialogflow_connection_create_params> */
+    /** @use SdkModel<DialogflowConnectionCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

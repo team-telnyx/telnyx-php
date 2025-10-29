@@ -9,11 +9,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type found_alias = array{id?: string, numberValE164?: string}
+ * @phpstan-type FoundShape = array{id?: string, numberValE164?: string}
  */
 final class Found implements BaseModel
 {
-    /** @use SdkModel<found_alias> */
+    /** @use SdkModel<FoundShape> */
     use SdkModel;
 
     /**

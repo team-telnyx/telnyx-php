@@ -13,13 +13,13 @@ use Telnyx\ExternalConnections\ExternalVoiceIntegrationsPaginationMeta;
 use Telnyx\ExternalConnections\Releases\ReleaseListResponse\Data;
 
 /**
- * @phpstan-type release_list_response = array{
+ * @phpstan-type ReleaseListResponseShape = array{
  *   data?: list<Data>, meta?: ExternalVoiceIntegrationsPaginationMeta
  * }
  */
 final class ReleaseListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<release_list_response> */
+    /** @use SdkModel<ReleaseListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

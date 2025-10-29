@@ -14,11 +14,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\BillingGroups->update
  *
- * @phpstan-type billing_group_update_params = array{name?: string}
+ * @phpstan-type BillingGroupUpdateParamsShape = array{name?: string}
  */
 final class BillingGroupUpdateParams implements BaseModel
 {
-    /** @use SdkModel<billing_group_update_params> */
+    /** @use SdkModel<BillingGroupUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 

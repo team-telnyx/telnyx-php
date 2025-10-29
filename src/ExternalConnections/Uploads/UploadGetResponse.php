@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type upload_get_response = array{data?: Upload}
+ * @phpstan-type UploadGetResponseShape = array{data?: Upload}
  */
 final class UploadGetResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<upload_get_response> */
+    /** @use SdkModel<UploadGetResponseShape> */
     use SdkModel;
 
     use SdkResponse;

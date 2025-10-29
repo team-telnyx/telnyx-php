@@ -9,13 +9,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type update_regulatory_requirement = array{
+ * @phpstan-type UpdateRegulatoryRequirementShape = array{
  *   fieldValue?: string, requirementID?: string
  * }
  */
 final class UpdateRegulatoryRequirement implements BaseModel
 {
-    /** @use SdkModel<update_regulatory_requirement> */
+    /** @use SdkModel<UpdateRegulatoryRequirementShape> */
     use SdkModel;
 
     /**

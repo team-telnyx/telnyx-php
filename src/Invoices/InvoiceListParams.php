@@ -16,13 +16,13 @@ use Telnyx\Invoices\InvoiceListParams\Sort;
  *
  * @see Telnyx\Invoices->list
  *
- * @phpstan-type invoice_list_params = array{
+ * @phpstan-type InvoiceListParamsShape = array{
  *   page?: Page, sort?: Sort|value-of<Sort>
  * }
  */
 final class InvoiceListParams implements BaseModel
 {
-    /** @use SdkModel<invoice_list_params> */
+    /** @use SdkModel<InvoiceListParamsShape> */
     use SdkModel;
     use SdkParams;
 

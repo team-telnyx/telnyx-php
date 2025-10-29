@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * FOC datetime range filtering operations.
  *
- * @phpstan-type foc_datetime_requested = array{gt?: string, lt?: string}
+ * @phpstan-type FocDatetimeRequestedShape = array{gt?: string, lt?: string}
  */
 final class FocDatetimeRequested implements BaseModel
 {
-    /** @use SdkModel<foc_datetime_requested> */
+    /** @use SdkModel<FocDatetimeRequestedShape> */
     use SdkModel;
 
     /**

@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[muted], filter[on_hold], filter[whispering].
  *
- * @phpstan-type filter_alias = array{
+ * @phpstan-type FilterShape = array{
  *   muted?: bool, onHold?: bool, whispering?: bool
  * }
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**

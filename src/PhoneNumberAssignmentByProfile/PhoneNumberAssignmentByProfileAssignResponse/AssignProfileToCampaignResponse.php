@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type assign_profile_to_campaign_response = array{
+ * @phpstan-type AssignProfileToCampaignResponseShape = array{
  *   messagingProfileID: string,
  *   taskID: string,
  *   campaignID?: string,
@@ -18,7 +18,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class AssignProfileToCampaignResponse implements BaseModel
 {
-    /** @use SdkModel<assign_profile_to_campaign_response> */
+    /** @use SdkModel<AssignProfileToCampaignResponseShape> */
     use SdkModel;
 
     /**

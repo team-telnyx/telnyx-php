@@ -11,7 +11,7 @@ use Telnyx\PhoneNumbers\PhoneNumberDeleteResponse\Data\PhoneNumberType;
 use Telnyx\PhoneNumbers\PhoneNumberDeleteResponse\Data\Status;
 
 /**
- * @phpstan-type data_alias = array{
+ * @phpstan-type DataShape = array{
  *   id?: string,
  *   billingGroupID?: string,
  *   callForwardingEnabled?: bool,
@@ -40,7 +40,7 @@ use Telnyx\PhoneNumbers\PhoneNumberDeleteResponse\Data\Status;
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**

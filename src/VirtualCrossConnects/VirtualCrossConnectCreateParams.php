@@ -15,7 +15,7 @@ use Telnyx\VirtualCrossConnects\VirtualCrossConnectCreateParams\CloudProvider;
  *
  * @see Telnyx\VirtualCrossConnects->create
  *
- * @phpstan-type virtual_cross_connect_create_params = array{
+ * @phpstan-type VirtualCrossConnectCreateParamsShape = array{
  *   bgpAsn: float,
  *   cloudProvider: CloudProvider|value-of<CloudProvider>,
  *   cloudProviderRegion: string,
@@ -35,7 +35,7 @@ use Telnyx\VirtualCrossConnects\VirtualCrossConnectCreateParams\CloudProvider;
  */
 final class VirtualCrossConnectCreateParams implements BaseModel
 {
-    /** @use SdkModel<virtual_cross_connect_create_params> */
+    /** @use SdkModel<VirtualCrossConnectCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

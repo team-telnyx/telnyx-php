@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Texml\Accounts->retrieveRecordingsJson
  *
- * @phpstan-type account_retrieve_recordings_json_params = array{
+ * @phpstan-type AccountRetrieveRecordingsJsonParamsShape = array{
  *   dateCreated?: \DateTimeInterface, page?: int, pageSize?: int
  * }
  */
 final class AccountRetrieveRecordingsJsonParams implements BaseModel
 {
-    /** @use SdkModel<account_retrieve_recordings_json_params> */
+    /** @use SdkModel<AccountRetrieveRecordingsJsonParamsShape> */
     use SdkModel;
     use SdkParams;
 

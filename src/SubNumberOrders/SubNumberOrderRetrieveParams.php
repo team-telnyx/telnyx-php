@@ -15,11 +15,11 @@ use Telnyx\SubNumberOrders\SubNumberOrderRetrieveParams\Filter;
  *
  * @see Telnyx\SubNumberOrders->retrieve
  *
- * @phpstan-type sub_number_order_retrieve_params = array{filter?: Filter}
+ * @phpstan-type SubNumberOrderRetrieveParamsShape = array{filter?: Filter}
  */
 final class SubNumberOrderRetrieveParams implements BaseModel
 {
-    /** @use SdkModel<sub_number_order_retrieve_params> */
+    /** @use SdkModel<SubNumberOrderRetrieveParamsShape> */
     use SdkModel;
     use SdkParams;
 

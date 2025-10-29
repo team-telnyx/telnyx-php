@@ -12,11 +12,11 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data;
 
 /**
- * @phpstan-type global_ip_latency_get_response = array{data?: list<Data>}
+ * @phpstan-type GlobalIPLatencyGetResponseShape = array{data?: list<Data>}
  */
 final class GlobalIPLatencyGetResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<global_ip_latency_get_response> */
+    /** @use SdkModel<GlobalIPLatencyGetResponseShape> */
     use SdkModel;
 
     use SdkResponse;

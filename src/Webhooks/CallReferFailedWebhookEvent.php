@@ -10,11 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\CallReferFailedWebhookEvent\Data;
 
 /**
- * @phpstan-type call_refer_failed_webhook_event = array{data?: Data}
+ * @phpstan-type CallReferFailedWebhookEventShape = array{data?: Data}
  */
 final class CallReferFailedWebhookEvent implements BaseModel
 {
-    /** @use SdkModel<call_refer_failed_webhook_event> */
+    /** @use SdkModel<CallReferFailedWebhookEventShape> */
     use SdkModel;
 
     #[Api(optional: true)]

@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\ExternalConnections\PhoneNumbers->update
  *
- * @phpstan-type phone_number_update_params = array{
+ * @phpstan-type PhoneNumberUpdateParamsShape = array{
  *   id: string, locationID?: string
  * }
  */
 final class PhoneNumberUpdateParams implements BaseModel
 {
-    /** @use SdkModel<phone_number_update_params> */
+    /** @use SdkModel<PhoneNumberUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 

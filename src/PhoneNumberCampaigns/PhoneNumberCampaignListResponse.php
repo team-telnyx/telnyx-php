@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type phone_number_campaign_list_response = array{
+ * @phpstan-type PhoneNumberCampaignListResponseShape = array{
  *   page: int, records: list<PhoneNumberCampaign>, totalRecords: int
  * }
  */
 final class PhoneNumberCampaignListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<phone_number_campaign_list_response> */
+    /** @use SdkModel<PhoneNumberCampaignListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

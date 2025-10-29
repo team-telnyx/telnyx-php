@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type scheduled_sms_event_response = array{
+ * @phpstan-type ScheduledSMSEventResponseShape = array{
  *   assistantID: string,
  *   scheduledAtFixedDatetime: \DateTimeInterface,
  *   telnyxAgentTarget: string,
@@ -28,7 +28,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class ScheduledSMSEventResponse implements BaseModel
 {
-    /** @use SdkModel<scheduled_sms_event_response> */
+    /** @use SdkModel<ScheduledSMSEventResponseShape> */
     use SdkModel;
 
     #[Api('assistant_id')]

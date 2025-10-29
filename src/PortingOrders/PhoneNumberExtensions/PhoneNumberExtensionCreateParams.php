@@ -16,7 +16,7 @@ use Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionCreateParams\
  *
  * @see Telnyx\PortingOrders\PhoneNumberExtensions->create
  *
- * @phpstan-type phone_number_extension_create_params = array{
+ * @phpstan-type PhoneNumberExtensionCreateParamsShape = array{
  *   activationRanges: list<ActivationRange>,
  *   extensionRange: ExtensionRange,
  *   portingPhoneNumberID: string,
@@ -24,7 +24,7 @@ use Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionCreateParams\
  */
 final class PhoneNumberExtensionCreateParams implements BaseModel
 {
-    /** @use SdkModel<phone_number_extension_create_params> */
+    /** @use SdkModel<PhoneNumberExtensionCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

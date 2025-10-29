@@ -15,11 +15,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\ChannelZones->list
  *
- * @phpstan-type channel_zone_list_params = array{page?: Page}
+ * @phpstan-type ChannelZoneListParamsShape = array{page?: Page}
  */
 final class ChannelZoneListParams implements BaseModel
 {
-    /** @use SdkModel<channel_zone_list_params> */
+    /** @use SdkModel<ChannelZoneListParamsShape> */
     use SdkModel;
     use SdkParams;
 

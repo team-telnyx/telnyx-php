@@ -20,7 +20,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\AI\Chat->createCompletion
  *
- * @phpstan-type chat_create_completion_params = array{
+ * @phpstan-type ChatCreateCompletionParamsShape = array{
  *   messages: list<Message>,
  *   apiKeyRef?: string,
  *   bestOf?: int,
@@ -48,7 +48,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class ChatCreateCompletionParams implements BaseModel
 {
-    /** @use SdkModel<chat_create_completion_params> */
+    /** @use SdkModel<ChatCreateCompletionParamsShape> */
     use SdkModel;
     use SdkParams;
 

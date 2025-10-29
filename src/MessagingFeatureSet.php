@@ -13,13 +13,13 @@ use Telnyx\Core\Contracts\BaseModel;
  * can vary depending on the characteristics the phone number, as well as its current
  * product configuration.
  *
- * @phpstan-type messaging_feature_set = array{
+ * @phpstan-type MessagingFeatureSetShape = array{
  *   domesticTwoWay: bool, internationalInbound: bool, internationalOutbound: bool
  * }
  */
 final class MessagingFeatureSet implements BaseModel
 {
-    /** @use SdkModel<messaging_feature_set> */
+    /** @use SdkModel<MessagingFeatureSetShape> */
     use SdkModel;
 
     /**

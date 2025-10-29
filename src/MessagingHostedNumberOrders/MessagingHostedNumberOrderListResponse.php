@@ -13,13 +13,13 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\MessagingHostedNumberOrder;
 
 /**
- * @phpstan-type messaging_hosted_number_order_list_response = array{
+ * @phpstan-type MessagingHostedNumberOrderListResponseShape = array{
  *   data?: list<MessagingHostedNumberOrder>, meta?: PaginationMeta
  * }
  */
 final class MessagingHostedNumberOrderListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<messaging_hosted_number_order_list_response> */
+    /** @use SdkModel<MessagingHostedNumberOrderListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

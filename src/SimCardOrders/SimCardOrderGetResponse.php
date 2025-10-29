@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type sim_card_order_get_response = array{data?: SimCardOrder}
+ * @phpstan-type SimCardOrderGetResponseShape = array{data?: SimCardOrder}
  */
 final class SimCardOrderGetResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<sim_card_order_get_response> */
+    /** @use SdkModel<SimCardOrderGetResponseShape> */
     use SdkModel;
 
     use SdkResponse;

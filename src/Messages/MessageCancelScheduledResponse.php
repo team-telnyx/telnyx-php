@@ -19,7 +19,7 @@ use Telnyx\Messages\MessageCancelScheduledResponse\To;
 use Telnyx\Messages\MessageCancelScheduledResponse\Type;
 
 /**
- * @phpstan-type message_cancel_scheduled_response = array{
+ * @phpstan-type MessageCancelScheduledResponseShape = array{
  *   id?: string,
  *   completedAt?: \DateTimeInterface,
  *   cost?: Cost|null,
@@ -50,7 +50,7 @@ use Telnyx\Messages\MessageCancelScheduledResponse\Type;
  */
 final class MessageCancelScheduledResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<message_cancel_scheduled_response> */
+    /** @use SdkModel<MessageCancelScheduledResponseShape> */
     use SdkModel;
 
     use SdkResponse;

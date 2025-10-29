@@ -11,7 +11,7 @@ use Telnyx\CredentialConnections\CredentialInbound\AniNumberFormat;
 use Telnyx\CredentialConnections\CredentialInbound\DnisNumberFormat;
 
 /**
- * @phpstan-type credential_inbound = array{
+ * @phpstan-type CredentialInboundShape = array{
  *   aniNumberFormat?: value-of<AniNumberFormat>,
  *   channelLimit?: int,
  *   codecs?: list<string>,
@@ -27,7 +27,7 @@ use Telnyx\CredentialConnections\CredentialInbound\DnisNumberFormat;
  */
 final class CredentialInbound implements BaseModel
 {
-    /** @use SdkModel<credential_inbound> */
+    /** @use SdkModel<CredentialInboundShape> */
     use SdkModel;
 
     /**

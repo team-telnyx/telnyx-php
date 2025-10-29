@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type authentication_provider = array{
+ * @phpstan-type AuthenticationProviderShape = array{
  *   id?: string,
  *   active?: bool,
  *   createdAt?: \DateTimeInterface,
@@ -24,7 +24,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class AuthenticationProvider implements BaseModel
 {
-    /** @use SdkModel<authentication_provider> */
+    /** @use SdkModel<AuthenticationProviderShape> */
     use SdkModel;
 
     /**

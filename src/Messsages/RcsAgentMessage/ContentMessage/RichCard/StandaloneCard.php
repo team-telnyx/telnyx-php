@@ -14,7 +14,7 @@ use Telnyx\Messsages\RcsCardContent;
 /**
  * Standalone card.
  *
- * @phpstan-type standalone_card = array{
+ * @phpstan-type StandaloneCardShape = array{
  *   cardContent: RcsCardContent,
  *   cardOrientation: value-of<CardOrientation>,
  *   thumbnailImageAlignment: value-of<ThumbnailImageAlignment>,
@@ -22,7 +22,7 @@ use Telnyx\Messsages\RcsCardContent;
  */
 final class StandaloneCard implements BaseModel
 {
-    /** @use SdkModel<standalone_card> */
+    /** @use SdkModel<StandaloneCardShape> */
     use SdkModel;
 
     #[Api('card_content')]

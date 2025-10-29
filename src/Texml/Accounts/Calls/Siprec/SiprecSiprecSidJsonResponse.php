@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Texml\Accounts\Calls\Siprec\SiprecSiprecSidJsonResponse\Status;
 
 /**
- * @phpstan-type siprec_siprec_sid_json_response = array{
+ * @phpstan-type SiprecSiprecSidJsonResponseShape = array{
  *   accountSid?: string,
  *   callSid?: string,
  *   dateUpdated?: string,
@@ -24,7 +24,7 @@ use Telnyx\Texml\Accounts\Calls\Siprec\SiprecSiprecSidJsonResponse\Status;
  */
 final class SiprecSiprecSidJsonResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<siprec_siprec_sid_json_response> */
+    /** @use SdkModel<SiprecSiprecSidJsonResponseShape> */
     use SdkModel;
 
     use SdkResponse;

@@ -12,11 +12,11 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Reports\CdrUsageReports\CdrUsageReportFetchSyncResponse\Data;
 
 /**
- * @phpstan-type cdr_usage_report_fetch_sync_response = array{data?: Data}
+ * @phpstan-type CdrUsageReportFetchSyncResponseShape = array{data?: Data}
  */
 final class CdrUsageReportFetchSyncResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<cdr_usage_report_fetch_sync_response> */
+    /** @use SdkModel<CdrUsageReportFetchSyncResponseShape> */
     use SdkModel;
 
     use SdkResponse;

@@ -16,11 +16,11 @@ use Telnyx\Networks\NetworkListParams\Page;
  *
  * @see Telnyx\Networks->list
  *
- * @phpstan-type network_list_params = array{filter?: Filter, page?: Page}
+ * @phpstan-type NetworkListParamsShape = array{filter?: Filter, page?: Page}
  */
 final class NetworkListParams implements BaseModel
 {
-    /** @use SdkModel<network_list_params> */
+    /** @use SdkModel<NetworkListParamsShape> */
     use SdkModel;
     use SdkParams;
 

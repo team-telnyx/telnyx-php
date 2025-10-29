@@ -15,13 +15,13 @@ use Telnyx\Texml\Accounts\Calls\Siprec\SiprecSiprecSidJsonParams\Status;
  *
  * @see Telnyx\Texml\Accounts\Calls\Siprec->siprecSidJson
  *
- * @phpstan-type siprec_siprec_sid_json_params = array{
+ * @phpstan-type SiprecSiprecSidJsonParamsShape = array{
  *   accountSid: string, callSid: string, status?: Status|value-of<Status>
  * }
  */
 final class SiprecSiprecSidJsonParams implements BaseModel
 {
-    /** @use SdkModel<siprec_siprec_sid_json_params> */
+    /** @use SdkModel<SiprecSiprecSidJsonParamsShape> */
     use SdkModel;
     use SdkParams;
 

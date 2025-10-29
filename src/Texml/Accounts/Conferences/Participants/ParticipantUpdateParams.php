@@ -16,7 +16,7 @@ use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantUpdateParams\HoldM
  *
  * @see Telnyx\Texml\Accounts\Conferences\Participants->update
  *
- * @phpstan-type participant_update_params = array{
+ * @phpstan-type ParticipantUpdateParamsShape = array{
  *   accountSid: string,
  *   conferenceSid: string,
  *   announceMethod?: AnnounceMethod|value-of<AnnounceMethod>,
@@ -34,7 +34,7 @@ use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantUpdateParams\HoldM
  */
 final class ParticipantUpdateParams implements BaseModel
 {
-    /** @use SdkModel<participant_update_params> */
+    /** @use SdkModel<ParticipantUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 

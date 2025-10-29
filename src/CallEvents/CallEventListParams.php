@@ -18,11 +18,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\CallEvents->list
  *
- * @phpstan-type call_event_list_params = array{filter?: Filter, page?: Page}
+ * @phpstan-type CallEventListParamsShape = array{filter?: Filter, page?: Page}
  */
 final class CallEventListParams implements BaseModel
 {
-    /** @use SdkModel<call_event_list_params> */
+    /** @use SdkModel<CallEventListParamsShape> */
     use SdkModel;
     use SdkParams;
 

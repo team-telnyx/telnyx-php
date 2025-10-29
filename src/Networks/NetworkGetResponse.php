@@ -12,11 +12,11 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Networks\NetworkGetResponse\Data;
 
 /**
- * @phpstan-type network_get_response = array{data?: Data}
+ * @phpstan-type NetworkGetResponseShape = array{data?: Data}
  */
 final class NetworkGetResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<network_get_response> */
+    /** @use SdkModel<NetworkGetResponseShape> */
     use SdkModel;
 
     use SdkResponse;

@@ -13,13 +13,13 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\MobileNetworkOperators\MobileNetworkOperatorListResponse\Data;
 
 /**
- * @phpstan-type mobile_network_operator_list_response = array{
+ * @phpstan-type MobileNetworkOperatorListResponseShape = array{
  *   data?: list<Data>, meta?: PaginationMeta
  * }
  */
 final class MobileNetworkOperatorListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<mobile_network_operator_list_response> */
+    /** @use SdkModel<MobileNetworkOperatorListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

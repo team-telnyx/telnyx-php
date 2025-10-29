@@ -9,11 +9,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type number_alias = array{country?: string, number?: string}
+ * @phpstan-type NumberShape = array{country?: string, number?: string}
  */
 final class Number implements BaseModel
 {
-    /** @use SdkModel<number_alias> */
+    /** @use SdkModel<NumberShape> */
     use SdkModel;
 
     #[Api(optional: true)]

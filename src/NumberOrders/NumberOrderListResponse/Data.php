@@ -11,7 +11,7 @@ use Telnyx\NumberOrders\NumberOrderListResponse\Data\PhoneNumber;
 use Telnyx\NumberOrders\NumberOrderListResponse\Data\Status;
 
 /**
- * @phpstan-type data_alias = array{
+ * @phpstan-type DataShape = array{
  *   id?: string,
  *   billingGroupID?: string,
  *   connectionID?: string,
@@ -29,7 +29,7 @@ use Telnyx\NumberOrders\NumberOrderListResponse\Data\Status;
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     #[Api(optional: true)]

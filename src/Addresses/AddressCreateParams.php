@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Addresses->create
  *
- * @phpstan-type address_create_params = array{
+ * @phpstan-type AddressCreateParamsShape = array{
  *   businessName: string,
  *   countryCode: string,
  *   firstName: string,
@@ -34,7 +34,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class AddressCreateParams implements BaseModel
 {
-    /** @use SdkModel<address_create_params> */
+    /** @use SdkModel<AddressCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

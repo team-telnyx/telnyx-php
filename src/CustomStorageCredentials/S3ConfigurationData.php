@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type s3_configuration_data = array{
+ * @phpstan-type S3ConfigurationDataShape = array{
  *   awsAccessKeyID?: string,
  *   awsSecretAccessKey?: string,
  *   bucket?: string,
@@ -18,7 +18,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class S3ConfigurationData implements BaseModel
 {
-    /** @use SdkModel<s3_configuration_data> */
+    /** @use SdkModel<S3ConfigurationDataShape> */
     use SdkModel;
 
     /**

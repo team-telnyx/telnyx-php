@@ -14,11 +14,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\AI\Assistants\ScheduledEvents->delete
  *
- * @phpstan-type scheduled_event_delete_params = array{assistantID: string}
+ * @phpstan-type ScheduledEventDeleteParamsShape = array{assistantID: string}
  */
 final class ScheduledEventDeleteParams implements BaseModel
 {
-    /** @use SdkModel<scheduled_event_delete_params> */
+    /** @use SdkModel<ScheduledEventDeleteParamsShape> */
     use SdkModel;
     use SdkParams;
 

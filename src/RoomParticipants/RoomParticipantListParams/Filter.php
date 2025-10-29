@@ -14,7 +14,7 @@ use Telnyx\RoomParticipants\RoomParticipantListParams\Filter\DateUpdatedAt;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[date_joined_at][eq], filter[date_joined_at][gte], filter[date_joined_at][lte], filter[date_updated_at][eq], filter[date_updated_at][gte], filter[date_updated_at][lte], filter[date_left_at][eq], filter[date_left_at][gte], filter[date_left_at][lte], filter[context], filter[session_id].
  *
- * @phpstan-type filter_alias = array{
+ * @phpstan-type FilterShape = array{
  *   context?: string,
  *   dateJoinedAt?: DateJoinedAt,
  *   dateLeftAt?: DateLeftAt,
@@ -24,7 +24,7 @@ use Telnyx\RoomParticipants\RoomParticipantListParams\Filter\DateUpdatedAt;
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**

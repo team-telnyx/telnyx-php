@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type bundle_limit = array{
+ * @phpstan-type BundleLimitShape = array{
  *   id: string,
  *   createdAt: \DateTimeInterface,
  *   metric: string,
@@ -28,7 +28,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class BundleLimit implements BaseModel
 {
-    /** @use SdkModel<bundle_limit> */
+    /** @use SdkModel<BundleLimitShape> */
     use SdkModel;
 
     #[Api]

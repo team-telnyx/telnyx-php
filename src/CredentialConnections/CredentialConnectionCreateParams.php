@@ -16,7 +16,7 @@ use Telnyx\CredentialConnections\CredentialConnectionCreateParams\WebhookAPIVers
  *
  * @see Telnyx\CredentialConnections->create
  *
- * @phpstan-type credential_connection_create_params = array{
+ * @phpstan-type CredentialConnectionCreateParamsShape = array{
  *   connectionName: string,
  *   password: string,
  *   userName: string,
@@ -42,7 +42,7 @@ use Telnyx\CredentialConnections\CredentialConnectionCreateParams\WebhookAPIVers
  */
 final class CredentialConnectionCreateParams implements BaseModel
 {
-    /** @use SdkModel<credential_connection_create_params> */
+    /** @use SdkModel<CredentialConnectionCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -13,11 +13,13 @@ use Telnyx\Metadata;
 use Telnyx\Portouts\Comments\CommentListResponse\Data;
 
 /**
- * @phpstan-type comment_list_response = array{data?: list<Data>, meta?: Metadata}
+ * @phpstan-type CommentListResponseShape = array{
+ *   data?: list<Data>, meta?: Metadata
+ * }
  */
 final class CommentListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<comment_list_response> */
+    /** @use SdkModel<CommentListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

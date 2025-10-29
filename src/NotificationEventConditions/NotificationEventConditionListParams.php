@@ -16,13 +16,13 @@ use Telnyx\NotificationEventConditions\NotificationEventConditionListParams\Page
  *
  * @see Telnyx\NotificationEventConditions->list
  *
- * @phpstan-type notification_event_condition_list_params = array{
+ * @phpstan-type NotificationEventConditionListParamsShape = array{
  *   filter?: Filter, page?: Page
  * }
  */
 final class NotificationEventConditionListParams implements BaseModel
 {
-    /** @use SdkModel<notification_event_condition_list_params> */
+    /** @use SdkModel<NotificationEventConditionListParamsShape> */
     use SdkModel;
     use SdkParams;
 

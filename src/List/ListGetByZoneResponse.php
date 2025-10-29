@@ -13,13 +13,13 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\List\ListGetByZoneResponse\Data;
 
 /**
- * @phpstan-type list_get_by_zone_response = array{
+ * @phpstan-type ListGetByZoneResponseShape = array{
  *   data?: list<Data>, meta?: PaginationMeta
  * }
  */
 final class ListGetByZoneResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<list_get_by_zone_response> */
+    /** @use SdkModel<ListGetByZoneResponseShape> */
     use SdkModel;
 
     use SdkResponse;

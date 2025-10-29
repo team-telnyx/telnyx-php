@@ -11,7 +11,7 @@ use Telnyx\CredentialConnections\CredentialOutbound\AniOverrideType;
 use Telnyx\CredentialConnections\CredentialOutbound\T38ReinviteSource;
 
 /**
- * @phpstan-type credential_outbound = array{
+ * @phpstan-type CredentialOutboundShape = array{
  *   aniOverride?: string,
  *   aniOverrideType?: value-of<AniOverrideType>,
  *   callParkingEnabled?: bool|null,
@@ -25,7 +25,7 @@ use Telnyx\CredentialConnections\CredentialOutbound\T38ReinviteSource;
  */
 final class CredentialOutbound implements BaseModel
 {
-    /** @use SdkModel<credential_outbound> */
+    /** @use SdkModel<CredentialOutboundShape> */
     use SdkModel;
 
     /**

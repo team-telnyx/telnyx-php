@@ -15,13 +15,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Conferences\Actions->unhold
  *
- * @phpstan-type action_unhold_params = array{
+ * @phpstan-type ActionUnholdParamsShape = array{
  *   callControlIDs: list<string>, region?: Region|value-of<Region>
  * }
  */
 final class ActionUnholdParams implements BaseModel
 {
-    /** @use SdkModel<action_unhold_params> */
+    /** @use SdkModel<ActionUnholdParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -15,14 +15,14 @@ use Telnyx\PortingOrders\VerificationCodes\VerificationCodeSendParams\Verificati
  *
  * @see Telnyx\PortingOrders\VerificationCodes->send
  *
- * @phpstan-type verification_code_send_params = array{
+ * @phpstan-type VerificationCodeSendParamsShape = array{
  *   phoneNumbers?: list<string>,
  *   verificationMethod?: VerificationMethod|value-of<VerificationMethod>,
  * }
  */
 final class VerificationCodeSendParams implements BaseModel
 {
-    /** @use SdkModel<verification_code_send_params> */
+    /** @use SdkModel<VerificationCodeSendParamsShape> */
     use SdkModel;
     use SdkParams;
 

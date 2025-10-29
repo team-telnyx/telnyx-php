@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type sub_number_order_cancel_response = array{data?: SubNumberOrder}
+ * @phpstan-type SubNumberOrderCancelResponseShape = array{data?: SubNumberOrder}
  */
 final class SubNumberOrderCancelResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<sub_number_order_cancel_response> */
+    /** @use SdkModel<SubNumberOrderCancelResponseShape> */
     use SdkModel;
 
     use SdkResponse;

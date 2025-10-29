@@ -16,13 +16,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\BundlePricing\BillingBundles->list
  *
- * @phpstan-type billing_bundle_list_params = array{
+ * @phpstan-type BillingBundleListParamsShape = array{
  *   filter?: Filter, page?: Page, authorizationBearer?: string
  * }
  */
 final class BillingBundleListParams implements BaseModel
 {
-    /** @use SdkModel<billing_bundle_list_params> */
+    /** @use SdkModel<BillingBundleListParamsShape> */
     use SdkModel;
     use SdkParams;
 

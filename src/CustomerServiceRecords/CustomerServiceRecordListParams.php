@@ -17,13 +17,13 @@ use Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams\Sort;
  *
  * @see Telnyx\CustomerServiceRecords->list
  *
- * @phpstan-type customer_service_record_list_params = array{
+ * @phpstan-type CustomerServiceRecordListParamsShape = array{
  *   filter?: Filter, page?: Page, sort?: Sort
  * }
  */
 final class CustomerServiceRecordListParams implements BaseModel
 {
-    /** @use SdkModel<customer_service_record_list_params> */
+    /** @use SdkModel<CustomerServiceRecordListParamsShape> */
     use SdkModel;
     use SdkParams;
 

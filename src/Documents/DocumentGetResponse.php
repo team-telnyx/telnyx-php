@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type document_get_response = array{data?: DocServiceDocument}
+ * @phpstan-type DocumentGetResponseShape = array{data?: DocServiceDocument}
  */
 final class DocumentGetResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<document_get_response> */
+    /** @use SdkModel<DocumentGetResponseShape> */
     use SdkModel;
 
     use SdkResponse;

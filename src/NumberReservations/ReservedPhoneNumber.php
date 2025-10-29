@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NumberReservations\ReservedPhoneNumber\Status;
 
 /**
- * @phpstan-type reserved_phone_number = array{
+ * @phpstan-type ReservedPhoneNumberShape = array{
  *   id?: string,
  *   createdAt?: \DateTimeInterface,
  *   expiredAt?: \DateTimeInterface,
@@ -22,7 +22,7 @@ use Telnyx\NumberReservations\ReservedPhoneNumber\Status;
  */
 final class ReservedPhoneNumber implements BaseModel
 {
-    /** @use SdkModel<reserved_phone_number> */
+    /** @use SdkModel<ReservedPhoneNumberShape> */
     use SdkModel;
 
     #[Api(optional: true)]

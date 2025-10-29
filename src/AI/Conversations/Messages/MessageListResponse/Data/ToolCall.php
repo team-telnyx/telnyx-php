@@ -11,13 +11,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type tool_call = array{
+ * @phpstan-type ToolCallShape = array{
  *   id: string, function1: Function1, type: value-of<Type>
  * }
  */
 final class ToolCall implements BaseModel
 {
-    /** @use SdkModel<tool_call> */
+    /** @use SdkModel<ToolCallShape> */
     use SdkModel;
 
     /**

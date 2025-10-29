@@ -15,13 +15,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Conferences\Actions->mute
  *
- * @phpstan-type action_mute_params = array{
+ * @phpstan-type ActionMuteParamsShape = array{
  *   callControlIDs?: list<string>, region?: Region|value-of<Region>
  * }
  */
 final class ActionMuteParams implements BaseModel
 {
-    /** @use SdkModel<action_mute_params> */
+    /** @use SdkModel<ActionMuteParamsShape> */
     use SdkModel;
     use SdkParams;
 

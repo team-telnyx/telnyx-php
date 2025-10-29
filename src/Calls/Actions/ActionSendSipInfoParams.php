@@ -18,13 +18,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Calls\Actions->sendSipInfo
  *
- * @phpstan-type action_send_sip_info_params = array{
+ * @phpstan-type ActionSendSipInfoParamsShape = array{
  *   body: string, contentType: string, clientState?: string, commandID?: string
  * }
  */
 final class ActionSendSipInfoParams implements BaseModel
 {
-    /** @use SdkModel<action_send_sip_info_params> */
+    /** @use SdkModel<ActionSendSipInfoParamsShape> */
     use SdkModel;
     use SdkParams;
 

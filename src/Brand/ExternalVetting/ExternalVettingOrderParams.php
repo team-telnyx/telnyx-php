@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Brand\ExternalVetting->order
  *
- * @phpstan-type external_vetting_order_params = array{
+ * @phpstan-type ExternalVettingOrderParamsShape = array{
  *   evpID: string, vettingClass: string
  * }
  */
 final class ExternalVettingOrderParams implements BaseModel
 {
-    /** @use SdkModel<external_vetting_order_params> */
+    /** @use SdkModel<ExternalVettingOrderParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\SimCards->listWirelessConnectivityLogs
  *
- * @phpstan-type sim_card_list_wireless_connectivity_logs_params = array{
+ * @phpstan-type SimCardListWirelessConnectivityLogsParamsShape = array{
  *   pageNumber?: int, pageSize?: int
  * }
  */
 final class SimCardListWirelessConnectivityLogsParams implements BaseModel
 {
-    /** @use SdkModel<sim_card_list_wireless_connectivity_logs_params> */
+    /** @use SdkModel<SimCardListWirelessConnectivityLogsParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -13,13 +13,13 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Networks\NetworkListResponse\Data;
 
 /**
- * @phpstan-type network_list_response = array{
+ * @phpstan-type NetworkListResponseShape = array{
  *   data?: list<Data>, meta?: PaginationMeta
  * }
  */
 final class NetworkListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<network_list_response> */
+    /** @use SdkModel<NetworkListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

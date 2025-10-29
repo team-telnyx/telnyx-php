@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type access_ip_range = array{
+ * @phpstan-type AccessIPRangeShape = array{
  *   id: string,
  *   cidrBlock: string,
  *   status: value-of<CloudflareSyncStatus>,
@@ -24,7 +24,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  */
 final class AccessIPRange implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<access_ip_range> */
+    /** @use SdkModel<AccessIPRangeShape> */
     use SdkModel;
 
     use SdkResponse;

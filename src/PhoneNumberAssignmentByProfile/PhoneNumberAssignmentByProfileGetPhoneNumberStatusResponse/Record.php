@@ -9,13 +9,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type record_alias = array{
+ * @phpstan-type RecordShape = array{
  *   phoneNumber: string, status: string, taskID: string
  * }
  */
 final class Record implements BaseModel
 {
-    /** @use SdkModel<record_alias> */
+    /** @use SdkModel<RecordShape> */
     use SdkModel;
 
     /**

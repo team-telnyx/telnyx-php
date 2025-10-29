@@ -10,13 +10,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderValidateCodesResponse\Data\PhoneNumber\Status;
 
 /**
- * @phpstan-type phone_number = array{
+ * @phpstan-type PhoneNumberShape = array{
  *   phoneNumber: string, status: value-of<Status>
  * }
  */
 final class PhoneNumber implements BaseModel
 {
-    /** @use SdkModel<phone_number> */
+    /** @use SdkModel<PhoneNumberShape> */
     use SdkModel;
 
     #[Api('phone_number')]

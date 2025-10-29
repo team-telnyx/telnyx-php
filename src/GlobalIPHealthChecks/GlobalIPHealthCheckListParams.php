@@ -15,11 +15,11 @@ use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckListParams\Page;
  *
  * @see Telnyx\GlobalIPHealthChecks->list
  *
- * @phpstan-type global_ip_health_check_list_params = array{page?: Page}
+ * @phpstan-type GlobalIPHealthCheckListParamsShape = array{page?: Page}
  */
 final class GlobalIPHealthCheckListParams implements BaseModel
 {
-    /** @use SdkModel<global_ip_health_check_list_params> */
+    /** @use SdkModel<GlobalIPHealthCheckListParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type fax_list_response = array{data?: list<Fax>, meta?: mixed}
+ * @phpstan-type FaxListResponseShape = array{data?: list<Fax>, meta?: mixed}
  */
 final class FaxListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<fax_list_response> */
+    /** @use SdkModel<FaxListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

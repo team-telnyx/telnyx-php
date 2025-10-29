@@ -13,7 +13,7 @@ use Telnyx\VerifyProfiles\VerifyProfile\RecordType;
 use Telnyx\VerifyProfiles\VerifyProfile\SMS;
 
 /**
- * @phpstan-type verify_profile = array{
+ * @phpstan-type VerifyProfileShape = array{
  *   id?: string,
  *   call?: Call,
  *   createdAt?: string,
@@ -29,7 +29,7 @@ use Telnyx\VerifyProfiles\VerifyProfile\SMS;
  */
 final class VerifyProfile implements BaseModel
 {
-    /** @use SdkModel<verify_profile> */
+    /** @use SdkModel<VerifyProfileShape> */
     use SdkModel;
 
     #[Api(optional: true)]

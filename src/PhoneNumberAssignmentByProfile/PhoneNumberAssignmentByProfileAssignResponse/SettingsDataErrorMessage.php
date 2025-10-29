@@ -9,11 +9,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type settings_data_error_message = array{message: string}
+ * @phpstan-type SettingsDataErrorMessageShape = array{message: string}
  */
 final class SettingsDataErrorMessage implements BaseModel
 {
-    /** @use SdkModel<settings_data_error_message> */
+    /** @use SdkModel<SettingsDataErrorMessageShape> */
     use SdkModel;
 
     #[Api]

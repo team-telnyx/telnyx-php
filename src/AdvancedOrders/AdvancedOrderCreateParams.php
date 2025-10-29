@@ -16,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\AdvancedOrders->create
  *
- * @phpstan-type advanced_order_create_params = array{
+ * @phpstan-type AdvancedOrderCreateParamsShape = array{
  *   areaCode?: string,
  *   comments?: string,
  *   countryCode?: string,
@@ -29,7 +29,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class AdvancedOrderCreateParams implements BaseModel
 {
-    /** @use SdkModel<advanced_order_create_params> */
+    /** @use SdkModel<AdvancedOrderCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

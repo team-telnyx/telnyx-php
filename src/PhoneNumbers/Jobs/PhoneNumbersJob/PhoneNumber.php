@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * The unique phone numbers given as arguments in the job creation.
  *
- * @phpstan-type phone_number = array{id?: string, phoneNumber?: string}
+ * @phpstan-type PhoneNumberShape = array{id?: string, phoneNumber?: string}
  */
 final class PhoneNumber implements BaseModel
 {
-    /** @use SdkModel<phone_number> */
+    /** @use SdkModel<PhoneNumberShape> */
     use SdkModel;
 
     /**

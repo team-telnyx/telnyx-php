@@ -15,13 +15,13 @@ use Telnyx\PortingOrders\Actions\ActionShareParams\Permissions;
  *
  * @see Telnyx\PortingOrders\Actions->share
  *
- * @phpstan-type action_share_params = array{
+ * @phpstan-type ActionShareParamsShape = array{
  *   expiresInSeconds?: int, permissions?: Permissions|value-of<Permissions>
  * }
  */
 final class ActionShareParams implements BaseModel
 {
-    /** @use SdkModel<action_share_params> */
+    /** @use SdkModel<ActionShareParamsShape> */
     use SdkModel;
     use SdkParams;
 

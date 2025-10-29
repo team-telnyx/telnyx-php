@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\OAuthGrants\OAuthGrant\RecordType;
 
 /**
- * @phpstan-type oauth_grant = array{
+ * @phpstan-type OAuthGrantShape = array{
  *   id: string,
  *   clientID: string,
  *   createdAt: \DateTimeInterface,
@@ -21,7 +21,7 @@ use Telnyx\OAuthGrants\OAuthGrant\RecordType;
  */
 final class OAuthGrant implements BaseModel
 {
-    /** @use SdkModel<oauth_grant> */
+    /** @use SdkModel<OAuthGrantShape> */
     use SdkModel;
 
     /**

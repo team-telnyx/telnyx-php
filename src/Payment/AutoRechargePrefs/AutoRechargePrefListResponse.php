@@ -12,11 +12,11 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Payment\AutoRechargePrefs\AutoRechargePrefListResponse\Data;
 
 /**
- * @phpstan-type auto_recharge_pref_list_response = array{data?: Data}
+ * @phpstan-type AutoRechargePrefListResponseShape = array{data?: Data}
  */
 final class AutoRechargePrefListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<auto_recharge_pref_list_response> */
+    /** @use SdkModel<AutoRechargePrefListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

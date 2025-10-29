@@ -14,7 +14,7 @@ use Telnyx\RequirementGroups\RequirementGroupListParams\Filter\Status;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[country_code], filter[phone_number_type], filter[action], filter[status], filter[customer_reference].
  *
- * @phpstan-type filter_alias = array{
+ * @phpstan-type FilterShape = array{
  *   action?: value-of<Action>,
  *   countryCode?: string,
  *   customerReference?: string,
@@ -24,7 +24,7 @@ use Telnyx\RequirementGroups\RequirementGroupListParams\Filter\Status;
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**

@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type billing_group_get_response = array{data?: BillingGroup}
+ * @phpstan-type BillingGroupGetResponseShape = array{data?: BillingGroup}
  */
 final class BillingGroupGetResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<billing_group_get_response> */
+    /** @use SdkModel<BillingGroupGetResponseShape> */
     use SdkModel;
 
     use SdkResponse;

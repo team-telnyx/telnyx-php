@@ -25,7 +25,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Calls\Actions->startRecording
  *
- * @phpstan-type action_start_recording_params = array{
+ * @phpstan-type ActionStartRecordingParamsShape = array{
  *   channels: Channels|value-of<Channels>,
  *   format: Format|value-of<Format>,
  *   clientState?: string,
@@ -47,7 +47,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class ActionStartRecordingParams implements BaseModel
 {
-    /** @use SdkModel<action_start_recording_params> */
+    /** @use SdkModel<ActionStartRecordingParamsShape> */
     use SdkModel;
     use SdkParams;
 

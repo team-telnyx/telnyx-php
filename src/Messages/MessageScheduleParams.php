@@ -19,7 +19,7 @@ use Telnyx\Messages\MessageScheduleParams\Type;
  *
  * @see Telnyx\Messages->schedule
  *
- * @phpstan-type message_schedule_params = array{
+ * @phpstan-type MessageScheduleParamsShape = array{
  *   to: string,
  *   autoDetect?: bool,
  *   from?: string,
@@ -36,7 +36,7 @@ use Telnyx\Messages\MessageScheduleParams\Type;
  */
 final class MessageScheduleParams implements BaseModel
 {
-    /** @use SdkModel<message_schedule_params> */
+    /** @use SdkModel<MessageScheduleParamsShape> */
     use SdkModel;
     use SdkParams;
 

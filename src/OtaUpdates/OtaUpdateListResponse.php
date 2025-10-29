@@ -13,13 +13,13 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\OtaUpdates\OtaUpdateListResponse\Data;
 
 /**
- * @phpstan-type ota_update_list_response = array{
+ * @phpstan-type OtaUpdateListResponseShape = array{
  *   data?: list<Data>, meta?: PaginationMeta
  * }
  */
 final class OtaUpdateListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<ota_update_list_response> */
+    /** @use SdkModel<OtaUpdateListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

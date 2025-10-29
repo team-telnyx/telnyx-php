@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\AI\Conversations->create
  *
- * @phpstan-type conversation_create_params = array{
+ * @phpstan-type ConversationCreateParamsShape = array{
  *   metadata?: array<string, string>, name?: string
  * }
  */
 final class ConversationCreateParams implements BaseModel
 {
-    /** @use SdkModel<conversation_create_params> */
+    /** @use SdkModel<ConversationCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

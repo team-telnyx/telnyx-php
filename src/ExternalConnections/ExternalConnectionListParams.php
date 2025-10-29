@@ -16,13 +16,13 @@ use Telnyx\ExternalConnections\ExternalConnectionListParams\Page;
  *
  * @see Telnyx\ExternalConnections->list
  *
- * @phpstan-type external_connection_list_params = array{
+ * @phpstan-type ExternalConnectionListParamsShape = array{
  *   filter?: Filter, page?: Page
  * }
  */
 final class ExternalConnectionListParams implements BaseModel
 {
-    /** @use SdkModel<external_connection_list_params> */
+    /** @use SdkModel<ExternalConnectionListParamsShape> */
     use SdkModel;
     use SdkParams;
 

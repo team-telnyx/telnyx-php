@@ -16,11 +16,11 @@ use Telnyx\Portouts\Events\EventListParams\Page;
  *
  * @see Telnyx\Portouts\Events->list
  *
- * @phpstan-type event_list_params = array{filter?: Filter, page?: Page}
+ * @phpstan-type EventListParamsShape = array{filter?: Filter, page?: Page}
  */
 final class EventListParams implements BaseModel
 {
-    /** @use SdkModel<event_list_params> */
+    /** @use SdkModel<EventListParamsShape> */
     use SdkModel;
     use SdkParams;
 

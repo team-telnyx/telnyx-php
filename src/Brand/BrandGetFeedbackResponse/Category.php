@@ -9,13 +9,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type category_alias = array{
+ * @phpstan-type CategoryShape = array{
  *   id: string, description: string, displayName: string, fields: list<string>
  * }
  */
 final class Category implements BaseModel
 {
-    /** @use SdkModel<category_alias> */
+    /** @use SdkModel<CategoryShape> */
     use SdkModel;
 
     /**

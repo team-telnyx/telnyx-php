@@ -17,13 +17,13 @@ use Telnyx\PhoneNumbers\PhoneNumberListParams\Sort;
  *
  * @see Telnyx\PhoneNumbers->list
  *
- * @phpstan-type phone_number_list_params = array{
+ * @phpstan-type PhoneNumberListParamsShape = array{
  *   filter?: Filter, page?: Page, sort?: Sort|value-of<Sort>
  * }
  */
 final class PhoneNumberListParams implements BaseModel
 {
-    /** @use SdkModel<phone_number_list_params> */
+    /** @use SdkModel<PhoneNumberListParamsShape> */
     use SdkModel;
     use SdkParams;
 

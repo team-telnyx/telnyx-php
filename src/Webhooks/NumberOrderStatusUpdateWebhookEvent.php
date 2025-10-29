@@ -11,13 +11,13 @@ use Telnyx\Webhooks\NumberOrderStatusUpdateWebhookEvent\Data;
 use Telnyx\Webhooks\NumberOrderStatusUpdateWebhookEvent\Meta;
 
 /**
- * @phpstan-type number_order_status_update_webhook_event = array{
+ * @phpstan-type NumberOrderStatusUpdateWebhookEventShape = array{
  *   data: Data, meta: Meta
  * }
  */
 final class NumberOrderStatusUpdateWebhookEvent implements BaseModel
 {
-    /** @use SdkModel<number_order_status_update_webhook_event> */
+    /** @use SdkModel<NumberOrderStatusUpdateWebhookEventShape> */
     use SdkModel;
 
     #[Api]

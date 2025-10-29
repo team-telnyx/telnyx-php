@@ -26,7 +26,7 @@ use Telnyx\Texml\Accounts\Calls\CallCallsParams\URLMethod;
  *
  * @see Telnyx\Texml\Accounts\Calls->calls
  *
- * @phpstan-type call_calls_params = array{
+ * @phpstan-type CallCallsParamsShape = array{
  *   applicationSid: string,
  *   from: string,
  *   to: string,
@@ -66,7 +66,7 @@ use Telnyx\Texml\Accounts\Calls\CallCallsParams\URLMethod;
  */
 final class CallCallsParams implements BaseModel
 {
-    /** @use SdkModel<call_calls_params> */
+    /** @use SdkModel<CallCallsParamsShape> */
     use SdkModel;
     use SdkParams;
 

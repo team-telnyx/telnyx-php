@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\ShortCode\RecordType;
 
 /**
- * @phpstan-type short_code = array{
+ * @phpstan-type ShortCodeShape = array{
  *   messagingProfileID: string|null,
  *   id?: string,
  *   countryCode?: string,
@@ -22,7 +22,7 @@ use Telnyx\ShortCode\RecordType;
  */
 final class ShortCode implements BaseModel
 {
-    /** @use SdkModel<short_code> */
+    /** @use SdkModel<ShortCodeShape> */
     use SdkModel;
 
     /**

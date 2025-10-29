@@ -17,7 +17,7 @@ use Telnyx\Messages\OutboundMessagePayload\To;
 use Telnyx\Messages\OutboundMessagePayload\Type;
 
 /**
- * @phpstan-type outbound_message_payload = array{
+ * @phpstan-type OutboundMessagePayloadShape = array{
  *   id?: string,
  *   completedAt?: \DateTimeInterface,
  *   cost?: Cost|null,
@@ -48,7 +48,7 @@ use Telnyx\Messages\OutboundMessagePayload\Type;
  */
 final class OutboundMessagePayload implements BaseModel
 {
-    /** @use SdkModel<outbound_message_payload> */
+    /** @use SdkModel<OutboundMessagePayloadShape> */
     use SdkModel;
 
     /**

@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\DetailRecords\DetailRecordListResponse\Data\AmdDetailRecord\Feature;
 
 /**
- * @phpstan-type amd_detail_record = array{
+ * @phpstan-type AmdDetailRecordShape = array{
  *   recordType: string,
  *   id?: string,
  *   billingGroupID?: string,
@@ -31,7 +31,7 @@ use Telnyx\DetailRecords\DetailRecordListResponse\Data\AmdDetailRecord\Feature;
  */
 final class AmdDetailRecord implements BaseModel
 {
-    /** @use SdkModel<amd_detail_record> */
+    /** @use SdkModel<AmdDetailRecordShape> */
     use SdkModel;
 
     #[Api('record_type')]

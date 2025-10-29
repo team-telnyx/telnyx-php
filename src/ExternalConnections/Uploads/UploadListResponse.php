@@ -12,13 +12,13 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\ExternalConnections\ExternalVoiceIntegrationsPaginationMeta;
 
 /**
- * @phpstan-type upload_list_response = array{
+ * @phpstan-type UploadListResponseShape = array{
  *   data?: list<Upload>, meta?: ExternalVoiceIntegrationsPaginationMeta
  * }
  */
 final class UploadListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<upload_list_response> */
+    /** @use SdkModel<UploadListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

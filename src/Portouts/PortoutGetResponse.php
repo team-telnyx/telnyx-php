@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type portout_get_response = array{data?: PortoutDetails}
+ * @phpstan-type PortoutGetResponseShape = array{data?: PortoutDetails}
  */
 final class PortoutGetResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<portout_get_response> */
+    /** @use SdkModel<PortoutGetResponseShape> */
     use SdkModel;
 
     use SdkResponse;

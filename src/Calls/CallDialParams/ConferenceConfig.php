@@ -13,7 +13,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Optional configuration parameters to dial new participant into a conference.
  *
- * @phpstan-type conference_config = array{
+ * @phpstan-type ConferenceConfigShape = array{
  *   id?: string,
  *   beepEnabled?: value-of<BeepEnabled>,
  *   conferenceName?: string,
@@ -32,7 +32,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class ConferenceConfig implements BaseModel
 {
-    /** @use SdkModel<conference_config> */
+    /** @use SdkModel<ConferenceConfigShape> */
     use SdkModel;
 
     /**

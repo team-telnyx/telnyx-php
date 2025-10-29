@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type campaign_status_update_webhook_event = array{
+ * @phpstan-type CampaignStatusUpdateWebhookEventShape = array{
  *   brandID?: string,
  *   campaignID?: string,
  *   createDate?: string,
@@ -19,7 +19,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class CampaignStatusUpdateWebhookEvent implements BaseModel
 {
-    /** @use SdkModel<campaign_status_update_webhook_event> */
+    /** @use SdkModel<CampaignStatusUpdateWebhookEventShape> */
     use SdkModel;
 
     /**

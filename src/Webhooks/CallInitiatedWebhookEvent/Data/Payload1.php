@@ -13,7 +13,7 @@ use Telnyx\Webhooks\CallInitiatedWebhookEvent\Data\Payload\Direction;
 use Telnyx\Webhooks\CallInitiatedWebhookEvent\Data\Payload\State;
 
 /**
- * @phpstan-type payload_alias = array{
+ * @phpstan-type PayloadShape = array{
  *   callControlID?: string,
  *   callLegID?: string,
  *   callScreeningResult?: string,
@@ -37,7 +37,7 @@ use Telnyx\Webhooks\CallInitiatedWebhookEvent\Data\Payload\State;
  */
 final class Payload implements BaseModel
 {
-    /** @use SdkModel<payload_alias> */
+    /** @use SdkModel<PayloadShape> */
     use SdkModel;
 
     /**

@@ -17,13 +17,13 @@ use Telnyx\NetworkCoverage\NetworkCoverageListParams\Page;
  *
  * @see Telnyx\NetworkCoverage->list
  *
- * @phpstan-type network_coverage_list_params = array{
+ * @phpstan-type NetworkCoverageListParamsShape = array{
  *   filter?: Filter, filters?: Filters, page?: Page
  * }
  */
 final class NetworkCoverageListParams implements BaseModel
 {
-    /** @use SdkModel<network_coverage_list_params> */
+    /** @use SdkModel<NetworkCoverageListParamsShape> */
     use SdkModel;
     use SdkParams;
 

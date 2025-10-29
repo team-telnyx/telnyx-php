@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\BundlePricing\UserBundles->deactivate
  *
- * @phpstan-type user_bundle_deactivate_params = array{
+ * @phpstan-type UserBundleDeactivateParamsShape = array{
  *   authorizationBearer?: string
  * }
  */
 final class UserBundleDeactivateParams implements BaseModel
 {
-    /** @use SdkModel<user_bundle_deactivate_params> */
+    /** @use SdkModel<UserBundleDeactivateParamsShape> */
     use SdkModel;
     use SdkParams;
 

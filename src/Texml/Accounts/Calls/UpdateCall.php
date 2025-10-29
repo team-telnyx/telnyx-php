@@ -12,7 +12,7 @@ use Telnyx\Texml\Accounts\Calls\UpdateCall\Method;
 use Telnyx\Texml\Accounts\Calls\UpdateCall\StatusCallbackMethod;
 
 /**
- * @phpstan-type update_call = array{
+ * @phpstan-type UpdateCallShape = array{
  *   fallbackMethod?: value-of<FallbackMethod>,
  *   fallbackURL?: string,
  *   method?: value-of<Method>,
@@ -25,7 +25,7 @@ use Telnyx\Texml\Accounts\Calls\UpdateCall\StatusCallbackMethod;
  */
 final class UpdateCall implements BaseModel
 {
-    /** @use SdkModel<update_call> */
+    /** @use SdkModel<UpdateCallShape> */
     use SdkModel;
 
     /**

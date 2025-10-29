@@ -16,11 +16,11 @@ use Telnyx\Portouts\PortoutListParams\Page;
  *
  * @see Telnyx\Portouts->list
  *
- * @phpstan-type portout_list_params = array{filter?: Filter, page?: Page}
+ * @phpstan-type PortoutListParamsShape = array{filter?: Filter, page?: Page}
  */
 final class PortoutListParams implements BaseModel
 {
-    /** @use SdkModel<portout_list_params> */
+    /** @use SdkModel<PortoutListParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -12,7 +12,7 @@ use Telnyx\Reports\MdrUsageReports\MdrUsageReport\Result;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReport\Status;
 
 /**
- * @phpstan-type mdr_usage_report = array{
+ * @phpstan-type MdrUsageReportShape = array{
  *   id?: string,
  *   aggregationType?: value-of<AggregationType>,
  *   connections?: list<int>,
@@ -29,7 +29,7 @@ use Telnyx\Reports\MdrUsageReports\MdrUsageReport\Status;
  */
 final class MdrUsageReport implements BaseModel
 {
-    /** @use SdkModel<mdr_usage_report> */
+    /** @use SdkModel<MdrUsageReportShape> */
     use SdkModel;
 
     /**

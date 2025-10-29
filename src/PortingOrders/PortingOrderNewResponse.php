@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type porting_order_new_response = array{data?: list<PortingOrder>}
+ * @phpstan-type PortingOrderNewResponseShape = array{data?: list<PortingOrder>}
  */
 final class PortingOrderNewResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<porting_order_new_response> */
+    /** @use SdkModel<PortingOrderNewResponseShape> */
     use SdkModel;
 
     use SdkResponse;

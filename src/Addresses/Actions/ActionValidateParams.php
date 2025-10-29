@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Addresses\Actions->validate
  *
- * @phpstan-type action_validate_params = array{
+ * @phpstan-type ActionValidateParamsShape = array{
  *   countryCode: string,
  *   postalCode: string,
  *   streetAddress: string,
@@ -25,7 +25,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class ActionValidateParams implements BaseModel
 {
-    /** @use SdkModel<action_validate_params> */
+    /** @use SdkModel<ActionValidateParamsShape> */
     use SdkModel;
     use SdkParams;
 

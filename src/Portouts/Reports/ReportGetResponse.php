@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type report_get_response = array{data?: PortoutReport}
+ * @phpstan-type ReportGetResponseShape = array{data?: PortoutReport}
  */
 final class ReportGetResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<report_get_response> */
+    /** @use SdkModel<ReportGetResponseShape> */
     use SdkModel;
 
     use SdkResponse;

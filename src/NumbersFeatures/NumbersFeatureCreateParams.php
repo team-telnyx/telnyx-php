@@ -14,11 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\NumbersFeatures->create
  *
- * @phpstan-type numbers_feature_create_params = array{phoneNumbers: list<string>}
+ * @phpstan-type NumbersFeatureCreateParamsShape = array{
+ *   phoneNumbers: list<string>
+ * }
  */
 final class NumbersFeatureCreateParams implements BaseModel
 {
-    /** @use SdkModel<numbers_feature_create_params> */
+    /** @use SdkModel<NumbersFeatureCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

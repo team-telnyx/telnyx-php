@@ -15,11 +15,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\AI\Clusters->list
  *
- * @phpstan-type cluster_list_params = array{page?: Page}
+ * @phpstan-type ClusterListParamsShape = array{page?: Page}
  */
 final class ClusterListParams implements BaseModel
 {
-    /** @use SdkModel<cluster_list_params> */
+    /** @use SdkModel<ClusterListParamsShape> */
     use SdkModel;
     use SdkParams;
 

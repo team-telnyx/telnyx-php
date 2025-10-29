@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\AI\Assistants\Tests->create
  *
- * @phpstan-type test_create_params = array{
+ * @phpstan-type TestCreateParamsShape = array{
  *   destination: string,
  *   instructions: string,
  *   name: string,
@@ -28,7 +28,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class TestCreateParams implements BaseModel
 {
-    /** @use SdkModel<test_create_params> */
+    /** @use SdkModel<TestCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

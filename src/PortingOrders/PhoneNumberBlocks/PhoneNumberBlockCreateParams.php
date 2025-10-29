@@ -16,13 +16,13 @@ use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockCreateParams\PhoneNum
  *
  * @see Telnyx\PortingOrders\PhoneNumberBlocks->create
  *
- * @phpstan-type phone_number_block_create_params = array{
+ * @phpstan-type PhoneNumberBlockCreateParamsShape = array{
  *   activationRanges: list<ActivationRange>, phoneNumberRange: PhoneNumberRange
  * }
  */
 final class PhoneNumberBlockCreateParams implements BaseModel
 {
-    /** @use SdkModel<phone_number_block_create_params> */
+    /** @use SdkModel<PhoneNumberBlockCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

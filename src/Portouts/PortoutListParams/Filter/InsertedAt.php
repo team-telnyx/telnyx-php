@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Filter by inserted_at date range using nested operations.
  *
- * @phpstan-type inserted_at = array{
+ * @phpstan-type InsertedAtShape = array{
  *   gte?: \DateTimeInterface, lte?: \DateTimeInterface
  * }
  */
 final class InsertedAt implements BaseModel
 {
-    /** @use SdkModel<inserted_at> */
+    /** @use SdkModel<InsertedAtShape> */
     use SdkModel;
 
     /**

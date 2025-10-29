@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\PhoneNumberAssignmentByProfile->assign
  *
- * @phpstan-type phone_number_assignment_by_profile_assign_params = array{
+ * @phpstan-type PhoneNumberAssignmentByProfileAssignParamsShape = array{
  *   messagingProfileID: string, campaignID?: string, tcrCampaignID?: string
  * }
  */
 final class PhoneNumberAssignmentByProfileAssignParams implements BaseModel
 {
-    /** @use SdkModel<phone_number_assignment_by_profile_assign_params> */
+    /** @use SdkModel<PhoneNumberAssignmentByProfileAssignParamsShape> */
     use SdkModel;
     use SdkParams;
 

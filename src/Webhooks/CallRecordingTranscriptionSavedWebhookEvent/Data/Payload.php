@@ -11,7 +11,7 @@ use Telnyx\Webhooks\CallRecordingTranscriptionSavedWebhookEvent\Data\Payload\Cal
 use Telnyx\Webhooks\CallRecordingTranscriptionSavedWebhookEvent\Data\Payload\Status;
 
 /**
- * @phpstan-type payload_alias = array{
+ * @phpstan-type PayloadShape = array{
  *   callControlID?: string,
  *   callLegID?: string,
  *   callSessionID?: string,
@@ -26,7 +26,7 @@ use Telnyx\Webhooks\CallRecordingTranscriptionSavedWebhookEvent\Data\Payload\Sta
  */
 final class Payload implements BaseModel
 {
-    /** @use SdkModel<payload_alias> */
+    /** @use SdkModel<PayloadShape> */
     use SdkModel;
 
     /**

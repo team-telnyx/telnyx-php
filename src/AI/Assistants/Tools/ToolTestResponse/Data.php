@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Response model for webhook tool test results.
  *
- * @phpstan-type data_alias = array{
+ * @phpstan-type DataShape = array{
  *   contentType: string,
  *   request: array<string, mixed>,
  *   response: string,
@@ -21,7 +21,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     #[Api('content_type')]

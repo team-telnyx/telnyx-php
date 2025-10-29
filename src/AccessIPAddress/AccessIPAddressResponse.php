@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type access_ip_address_response = array{
+ * @phpstan-type AccessIPAddressResponseShape = array{
  *   id: string,
  *   ipAddress: string,
  *   source: string,
@@ -24,7 +24,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  */
 final class AccessIPAddressResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<access_ip_address_response> */
+    /** @use SdkModel<AccessIPAddressResponseShape> */
     use SdkModel;
 
     use SdkResponse;

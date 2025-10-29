@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\ChargesSummary->retrieve
  *
- * @phpstan-type charges_summary_retrieve_params = array{
+ * @phpstan-type ChargesSummaryRetrieveParamsShape = array{
  *   endDate: \DateTimeInterface, startDate: \DateTimeInterface
  * }
  */
 final class ChargesSummaryRetrieveParams implements BaseModel
 {
-    /** @use SdkModel<charges_summary_retrieve_params> */
+    /** @use SdkModel<ChargesSummaryRetrieveParamsShape> */
     use SdkModel;
     use SdkParams;
 

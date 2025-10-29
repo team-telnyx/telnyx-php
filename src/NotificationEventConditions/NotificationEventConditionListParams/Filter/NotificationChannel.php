@@ -9,11 +9,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type notification_channel = array{eq?: string}
+ * @phpstan-type NotificationChannelShape = array{eq?: string}
  */
 final class NotificationChannel implements BaseModel
 {
-    /** @use SdkModel<notification_channel> */
+    /** @use SdkModel<NotificationChannelShape> */
     use SdkModel;
 
     /**

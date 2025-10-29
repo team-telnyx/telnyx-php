@@ -15,7 +15,7 @@ use Telnyx\NotificationChannels\NotificationChannelUpdateParams\ChannelTypeID;
  *
  * @see Telnyx\NotificationChannels->update
  *
- * @phpstan-type notification_channel_update_params = array{
+ * @phpstan-type NotificationChannelUpdateParamsShape = array{
  *   channelDestination?: string,
  *   channelTypeID?: ChannelTypeID|value-of<ChannelTypeID>,
  *   notificationProfileID?: string,
@@ -23,7 +23,7 @@ use Telnyx\NotificationChannels\NotificationChannelUpdateParams\ChannelTypeID;
  */
 final class NotificationChannelUpdateParams implements BaseModel
 {
-    /** @use SdkModel<notification_channel_update_params> */
+    /** @use SdkModel<NotificationChannelUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 

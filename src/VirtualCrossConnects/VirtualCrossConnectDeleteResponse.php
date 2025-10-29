@@ -12,11 +12,11 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectDeleteResponse\Data;
 
 /**
- * @phpstan-type virtual_cross_connect_delete_response = array{data?: Data}
+ * @phpstan-type VirtualCrossConnectDeleteResponseShape = array{data?: Data}
  */
 final class VirtualCrossConnectDeleteResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<virtual_cross_connect_delete_response> */
+    /** @use SdkModel<VirtualCrossConnectDeleteResponseShape> */
     use SdkModel;
 
     use SdkResponse;

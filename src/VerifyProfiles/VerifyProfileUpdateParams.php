@@ -17,7 +17,7 @@ use Telnyx\VerifyProfiles\VerifyProfileUpdateParams\SMS;
  *
  * @see Telnyx\VerifyProfiles->update
  *
- * @phpstan-type verify_profile_update_params = array{
+ * @phpstan-type VerifyProfileUpdateParamsShape = array{
  *   call?: Call,
  *   flashcall?: Flashcall,
  *   language?: string,
@@ -29,7 +29,7 @@ use Telnyx\VerifyProfiles\VerifyProfileUpdateParams\SMS;
  */
 final class VerifyProfileUpdateParams implements BaseModel
 {
-    /** @use SdkModel<verify_profile_update_params> */
+    /** @use SdkModel<VerifyProfileUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 

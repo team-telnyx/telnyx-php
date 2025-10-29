@@ -12,7 +12,7 @@ use Telnyx\Porting\Events\EventGetResponse\Data\Payload\WebhookPortingOrderMessa
 /**
  * The webhook payload for the porting_order.messaging_changed event.
  *
- * @phpstan-type webhook_porting_order_messaging_changed_payload = array{
+ * @phpstan-type WebhookPortingOrderMessagingChangedPayloadShape = array{
  *   id?: string,
  *   customerReference?: string,
  *   messaging?: Messaging,
@@ -21,7 +21,7 @@ use Telnyx\Porting\Events\EventGetResponse\Data\Payload\WebhookPortingOrderMessa
  */
 final class WebhookPortingOrderMessagingChangedPayload implements BaseModel
 {
-    /** @use SdkModel<webhook_porting_order_messaging_changed_payload> */
+    /** @use SdkModel<WebhookPortingOrderMessagingChangedPayloadShape> */
     use SdkModel;
 
     /**

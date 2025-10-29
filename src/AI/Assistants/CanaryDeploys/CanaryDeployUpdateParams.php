@@ -17,11 +17,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\AI\Assistants\CanaryDeploys->update
  *
- * @phpstan-type canary_deploy_update_params = array{versions: list<VersionConfig>}
+ * @phpstan-type CanaryDeployUpdateParamsShape = array{
+ *   versions: list<VersionConfig>
+ * }
  */
 final class CanaryDeployUpdateParams implements BaseModel
 {
-    /** @use SdkModel<canary_deploy_update_params> */
+    /** @use SdkModel<CanaryDeployUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 

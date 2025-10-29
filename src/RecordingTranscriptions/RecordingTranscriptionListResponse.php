@@ -12,13 +12,13 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\RecordingTranscriptions\RecordingTranscriptionListResponse\Meta;
 
 /**
- * @phpstan-type recording_transcription_list_response = array{
+ * @phpstan-type RecordingTranscriptionListResponseShape = array{
  *   data?: list<RecordingTranscription>, meta?: Meta
  * }
  */
 final class RecordingTranscriptionListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<recording_transcription_list_response> */
+    /** @use SdkModel<RecordingTranscriptionListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

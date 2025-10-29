@@ -18,7 +18,7 @@ use Telnyx\PhoneNumbers\PhoneNumberListParams\Filter\WithoutTags;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[tag], filter[phone_number], filter[status], filter[country_iso_alpha2], filter[connection_id], filter[voice.connection_name], filter[voice.usage_payment_method], filter[billing_group_id], filter[emergency_address_id], filter[customer_reference], filter[number_type], filter[source].
  *
- * @phpstan-type filter_alias = array{
+ * @phpstan-type FilterShape = array{
  *   billingGroupID?: string,
  *   connectionID?: string,
  *   countryISOAlpha2?: string|list<string>,
@@ -36,7 +36,7 @@ use Telnyx\PhoneNumbers\PhoneNumberListParams\Filter\WithoutTags;
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**

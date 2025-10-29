@@ -12,11 +12,11 @@ use Telnyx\NetworkCoverage\AvailableService;
 /**
  * Available service filtering operations.
  *
- * @phpstan-type contains_alias = array{contains?: value-of<AvailableService>}
+ * @phpstan-type ContainsShape = array{contains?: value-of<AvailableService>}
  */
 final class Contains implements BaseModel
 {
-    /** @use SdkModel<contains_alias> */
+    /** @use SdkModel<ContainsShape> */
     use SdkModel;
 
     /**

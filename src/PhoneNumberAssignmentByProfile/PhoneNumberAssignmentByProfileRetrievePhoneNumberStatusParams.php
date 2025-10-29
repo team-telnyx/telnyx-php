@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\PhoneNumberAssignmentByProfile->retrievePhoneNumberStatus
  *
- * @phpstan-type phone_number_assignment_by_profile_retrieve_phone_number_status_params = array{
+ * @phpstan-type PhoneNumberAssignmentByProfileRetrievePhoneNumberStatusParamsShape = array{
  *   page?: int, recordsPerPage?: int
  * }
  */
@@ -22,7 +22,7 @@ final class PhoneNumberAssignmentByProfileRetrievePhoneNumberStatusParams implem
 {
     /**
      * @use SdkModel<
-     *   phone_number_assignment_by_profile_retrieve_phone_number_status_params
+     *   PhoneNumberAssignmentByProfileRetrievePhoneNumberStatusParamsShape
      * >
      */
     use SdkModel;

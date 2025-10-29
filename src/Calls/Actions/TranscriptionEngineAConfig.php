@@ -12,7 +12,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type transcription_engine_a_config = array{
+ * @phpstan-type TranscriptionEngineAConfigShape = array{
  *   enableSpeakerDiarization?: bool,
  *   hints?: list<string>,
  *   interimResults?: bool,
@@ -28,7 +28,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class TranscriptionEngineAConfig implements BaseModel
 {
-    /** @use SdkModel<transcription_engine_a_config> */
+    /** @use SdkModel<TranscriptionEngineAConfigShape> */
     use SdkModel;
 
     /**

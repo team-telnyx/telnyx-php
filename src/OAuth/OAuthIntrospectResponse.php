@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type oauth_introspect_response = array{
+ * @phpstan-type OAuthIntrospectResponseShape = array{
  *   active: bool,
  *   aud?: string,
  *   clientID?: string,
@@ -23,7 +23,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  */
 final class OAuthIntrospectResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<oauth_introspect_response> */
+    /** @use SdkModel<OAuthIntrospectResponseShape> */
     use SdkModel;
 
     use SdkResponse;

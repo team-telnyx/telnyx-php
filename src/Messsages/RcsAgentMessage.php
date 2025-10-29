@@ -11,7 +11,7 @@ use Telnyx\Messsages\RcsAgentMessage\ContentMessage;
 use Telnyx\Messsages\RcsAgentMessage\Event;
 
 /**
- * @phpstan-type rcs_agent_message = array{
+ * @phpstan-type RcsAgentMessageShape = array{
  *   contentMessage?: ContentMessage,
  *   event?: Event,
  *   expireTime?: \DateTimeInterface,
@@ -20,7 +20,7 @@ use Telnyx\Messsages\RcsAgentMessage\Event;
  */
 final class RcsAgentMessage implements BaseModel
 {
-    /** @use SdkModel<rcs_agent_message> */
+    /** @use SdkModel<RcsAgentMessageShape> */
     use SdkModel;
 
     #[Api('content_message', optional: true)]

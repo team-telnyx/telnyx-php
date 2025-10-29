@@ -9,11 +9,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type insight_settings = array{insightGroupID?: string}
+ * @phpstan-type InsightSettingsShape = array{insightGroupID?: string}
  */
 final class InsightSettings implements BaseModel
 {
-    /** @use SdkModel<insight_settings> */
+    /** @use SdkModel<InsightSettingsShape> */
     use SdkModel;
 
     /**

@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Messaging\Rcs\Agents->update
  *
- * @phpstan-type agent_update_params = array{
+ * @phpstan-type AgentUpdateParamsShape = array{
  *   profileID?: string|null,
  *   webhookFailoverURL?: string|null,
  *   webhookURL?: string|null,
@@ -22,7 +22,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class AgentUpdateParams implements BaseModel
 {
-    /** @use SdkModel<agent_update_params> */
+    /** @use SdkModel<AgentUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 

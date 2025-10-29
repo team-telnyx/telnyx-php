@@ -10,13 +10,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\CallMachinePremiumDetectionEndedWebhookEvent\Data;
 
 /**
- * @phpstan-type call_machine_premium_detection_ended_webhook_event = array{
+ * @phpstan-type CallMachinePremiumDetectionEndedWebhookEventShape = array{
  *   data?: Data
  * }
  */
 final class CallMachinePremiumDetectionEndedWebhookEvent implements BaseModel
 {
-    /** @use SdkModel<call_machine_premium_detection_ended_webhook_event> */
+    /** @use SdkModel<CallMachinePremiumDetectionEndedWebhookEventShape> */
     use SdkModel;
 
     #[Api(optional: true)]

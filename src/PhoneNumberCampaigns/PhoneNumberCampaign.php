@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PhoneNumberCampaigns\PhoneNumberCampaign\AssignmentStatus;
 
 /**
- * @phpstan-type phone_number_campaign = array{
+ * @phpstan-type PhoneNumberCampaignShape = array{
  *   campaignID: string,
  *   createdAt: string,
  *   phoneNumber: string,
@@ -27,7 +27,7 @@ use Telnyx\PhoneNumberCampaigns\PhoneNumberCampaign\AssignmentStatus;
  */
 final class PhoneNumberCampaign implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<phone_number_campaign> */
+    /** @use SdkModel<PhoneNumberCampaignShape> */
     use SdkModel;
 
     use SdkResponse;

@@ -12,7 +12,7 @@ use Telnyx\Porting\Events\EventListResponse\Data\Payload\WebhookPortingOrderMess
 /**
  * The messaging portability status of the porting order.
  *
- * @phpstan-type messaging_alias = array{
+ * @phpstan-type MessagingShape = array{
  *   enableMessaging?: bool,
  *   messagingCapable?: bool,
  *   messagingPortCompleted?: bool,
@@ -21,7 +21,7 @@ use Telnyx\Porting\Events\EventListResponse\Data\Payload\WebhookPortingOrderMess
  */
 final class Messaging implements BaseModel
 {
-    /** @use SdkModel<messaging_alias> */
+    /** @use SdkModel<MessagingShape> */
     use SdkModel;
 
     /**

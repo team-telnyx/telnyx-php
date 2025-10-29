@@ -15,11 +15,13 @@ use Telnyx\Invoices\InvoiceRetrieveParams\Action;
  *
  * @see Telnyx\Invoices->retrieve
  *
- * @phpstan-type invoice_retrieve_params = array{action?: Action|value-of<Action>}
+ * @phpstan-type InvoiceRetrieveParamsShape = array{
+ *   action?: Action|value-of<Action>
+ * }
  */
 final class InvoiceRetrieveParams implements BaseModel
 {
-    /** @use SdkModel<invoice_retrieve_params> */
+    /** @use SdkModel<InvoiceRetrieveParamsShape> */
     use SdkModel;
     use SdkParams;
 

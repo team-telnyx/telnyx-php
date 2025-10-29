@@ -12,7 +12,7 @@ use Telnyx\OAuthClients\OAuthClient\ClientType;
 use Telnyx\OAuthClients\OAuthClient\RecordType;
 
 /**
- * @phpstan-type oauth_client = array{
+ * @phpstan-type OAuthClientShape = array{
  *   clientID: string,
  *   clientType: value-of<ClientType>,
  *   createdAt: \DateTimeInterface,
@@ -33,7 +33,7 @@ use Telnyx\OAuthClients\OAuthClient\RecordType;
  */
 final class OAuthClient implements BaseModel
 {
-    /** @use SdkModel<oauth_client> */
+    /** @use SdkModel<OAuthClientShape> */
     use SdkModel;
 
     /**

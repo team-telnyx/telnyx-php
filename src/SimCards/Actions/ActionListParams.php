@@ -16,11 +16,11 @@ use Telnyx\SimCards\Actions\ActionListParams\Page;
  *
  * @see Telnyx\SimCards\Actions->list
  *
- * @phpstan-type action_list_params = array{filter?: Filter, page?: Page}
+ * @phpstan-type ActionListParamsShape = array{filter?: Filter, page?: Page}
  */
 final class ActionListParams implements BaseModel
 {
-    /** @use SdkModel<action_list_params> */
+    /** @use SdkModel<ActionListParamsShape> */
     use SdkModel;
     use SdkParams;
 

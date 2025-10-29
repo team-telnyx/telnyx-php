@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type message_send_group_mms_response = array{
+ * @phpstan-type MessageSendGroupMmsResponseShape = array{
  *   data?: OutboundMessagePayload
  * }
  */
 final class MessageSendGroupMmsResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<message_send_group_mms_response> */
+    /** @use SdkModel<MessageSendGroupMmsResponseShape> */
     use SdkModel;
 
     use SdkResponse;

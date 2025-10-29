@@ -15,11 +15,11 @@ use Telnyx\ExternalConnections\CivicAddresses\CivicAddressListParams\Filter;
  *
  * @see Telnyx\ExternalConnections\CivicAddresses->list
  *
- * @phpstan-type civic_address_list_params = array{filter?: Filter}
+ * @phpstan-type CivicAddressListParamsShape = array{filter?: Filter}
  */
 final class CivicAddressListParams implements BaseModel
 {
-    /** @use SdkModel<civic_address_list_params> */
+    /** @use SdkModel<CivicAddressListParamsShape> */
     use SdkModel;
     use SdkParams;
 

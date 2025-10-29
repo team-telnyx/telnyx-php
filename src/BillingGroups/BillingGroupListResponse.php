@@ -12,13 +12,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type billing_group_list_response = array{
+ * @phpstan-type BillingGroupListResponseShape = array{
  *   data?: list<BillingGroup>, meta?: PaginationMeta
  * }
  */
 final class BillingGroupListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<billing_group_list_response> */
+    /** @use SdkModel<BillingGroupListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

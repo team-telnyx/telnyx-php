@@ -14,11 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\OAuthGrants->list
  *
- * @phpstan-type oauth_grant_list_params = array{pageNumber?: int, pageSize?: int}
+ * @phpstan-type OAuthGrantListParamsShape = array{
+ *   pageNumber?: int, pageSize?: int
+ * }
  */
 final class OAuthGrantListParams implements BaseModel
 {
-    /** @use SdkModel<oauth_grant_list_params> */
+    /** @use SdkModel<OAuthGrantListParamsShape> */
     use SdkModel;
     use SdkParams;
 

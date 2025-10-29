@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\TranscriptionWebhookEvent\Data\Payload\TranscriptionData\TranscriptionTrack;
 
 /**
- * @phpstan-type transcription_data = array{
+ * @phpstan-type TranscriptionDataShape = array{
  *   confidence?: float,
  *   isFinal?: bool,
  *   transcript?: string,
@@ -19,7 +19,7 @@ use Telnyx\Webhooks\TranscriptionWebhookEvent\Data\Payload\TranscriptionData\Tra
  */
 final class TranscriptionData implements BaseModel
 {
-    /** @use SdkModel<transcription_data> */
+    /** @use SdkModel<TranscriptionDataShape> */
     use SdkModel;
 
     /**

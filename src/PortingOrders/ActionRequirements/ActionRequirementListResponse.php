@@ -13,13 +13,13 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementListResponse\Data;
 
 /**
- * @phpstan-type action_requirement_list_response = array{
+ * @phpstan-type ActionRequirementListResponseShape = array{
  *   data?: list<Data>, meta?: PaginationMeta
  * }
  */
 final class ActionRequirementListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<action_requirement_list_response> */
+    /** @use SdkModel<ActionRequirementListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type acceptance_criteria = array{
+ * @phpstan-type AcceptanceCriteriaShape = array{
  *   acceptableCharacters?: string,
  *   acceptableValues?: list<string>,
  *   caseSensitive?: string,
@@ -22,7 +22,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class AcceptanceCriteria implements BaseModel
 {
-    /** @use SdkModel<acceptance_criteria> */
+    /** @use SdkModel<AcceptanceCriteriaShape> */
     use SdkModel;
 
     #[Api('acceptable_characters', optional: true)]

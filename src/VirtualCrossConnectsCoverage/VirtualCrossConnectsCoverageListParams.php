@@ -17,13 +17,13 @@ use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListParams\P
  *
  * @see Telnyx\VirtualCrossConnectsCoverage->list
  *
- * @phpstan-type virtual_cross_connects_coverage_list_params = array{
+ * @phpstan-type VirtualCrossConnectsCoverageListParamsShape = array{
  *   filter?: Filter, filters?: Filters, page?: Page
  * }
  */
 final class VirtualCrossConnectsCoverageListParams implements BaseModel
 {
-    /** @use SdkModel<virtual_cross_connects_coverage_list_params> */
+    /** @use SdkModel<VirtualCrossConnectsCoverageListParamsShape> */
     use SdkModel;
     use SdkParams;
 

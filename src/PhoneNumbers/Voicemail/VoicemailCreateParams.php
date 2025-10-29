@@ -14,11 +14,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\PhoneNumbers\Voicemail->create
  *
- * @phpstan-type voicemail_create_params = array{enabled?: bool, pin?: string}
+ * @phpstan-type VoicemailCreateParamsShape = array{enabled?: bool, pin?: string}
  */
 final class VoicemailCreateParams implements BaseModel
 {
-    /** @use SdkModel<voicemail_create_params> */
+    /** @use SdkModel<VoicemailCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

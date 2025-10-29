@@ -11,7 +11,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type inference_embedding_transfer_tool_params = array{
+ * @phpstan-type InferenceEmbeddingTransferToolParamsShape = array{
  *   from: string,
  *   targets: list<Target>,
  *   customHeaders?: list<CustomHeader>,
@@ -20,7 +20,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class InferenceEmbeddingTransferToolParams implements BaseModel
 {
-    /** @use SdkModel<inference_embedding_transfer_tool_params> */
+    /** @use SdkModel<InferenceEmbeddingTransferToolParamsShape> */
     use SdkModel;
 
     /**

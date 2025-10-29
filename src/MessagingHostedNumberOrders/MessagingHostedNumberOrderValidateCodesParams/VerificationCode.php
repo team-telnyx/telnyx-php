@@ -9,11 +9,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type verification_code = array{code: string, phoneNumber: string}
+ * @phpstan-type VerificationCodeShape = array{code: string, phoneNumber: string}
  */
 final class VerificationCode implements BaseModel
 {
-    /** @use SdkModel<verification_code> */
+    /** @use SdkModel<VerificationCodeShape> */
     use SdkModel;
 
     #[Api]

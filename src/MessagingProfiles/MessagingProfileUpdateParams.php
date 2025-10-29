@@ -15,7 +15,7 @@ use Telnyx\MessagingProfiles\MessagingProfileUpdateParams\WebhookAPIVersion;
  *
  * @see Telnyx\MessagingProfiles->update
  *
- * @phpstan-type messaging_profile_update_params = array{
+ * @phpstan-type MessagingProfileUpdateParamsShape = array{
  *   alphaSender?: string|null,
  *   dailySpendLimit?: string,
  *   dailySpendLimitEnabled?: bool,
@@ -35,7 +35,7 @@ use Telnyx\MessagingProfiles\MessagingProfileUpdateParams\WebhookAPIVersion;
  */
 final class MessagingProfileUpdateParams implements BaseModel
 {
-    /** @use SdkModel<messaging_profile_update_params> */
+    /** @use SdkModel<MessagingProfileUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 

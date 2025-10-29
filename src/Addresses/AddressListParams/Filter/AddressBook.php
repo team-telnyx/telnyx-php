@@ -9,11 +9,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type address_book = array{eq?: string}
+ * @phpstan-type AddressBookShape = array{eq?: string}
  */
 final class AddressBook implements BaseModel
 {
-    /** @use SdkModel<address_book> */
+    /** @use SdkModel<AddressBookShape> */
     use SdkModel;
 
     /**

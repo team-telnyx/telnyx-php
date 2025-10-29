@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Calls\Actions->leaveQueue
  *
- * @phpstan-type action_leave_queue_params = array{
+ * @phpstan-type ActionLeaveQueueParamsShape = array{
  *   clientState?: string, commandID?: string
  * }
  */
 final class ActionLeaveQueueParams implements BaseModel
 {
-    /** @use SdkModel<action_leave_queue_params> */
+    /** @use SdkModel<ActionLeaveQueueParamsShape> */
     use SdkModel;
     use SdkParams;
 

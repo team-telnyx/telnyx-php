@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type fqdn_alias = array{
+ * @phpstan-type FqdnShape = array{
  *   id?: string,
  *   connectionID?: string,
  *   createdAt?: string,
@@ -22,7 +22,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class Fqdn implements BaseModel
 {
-    /** @use SdkModel<fqdn_alias> */
+    /** @use SdkModel<FqdnShape> */
     use SdkModel;
 
     /**

@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type rc_list_bulk_capabilities_response = array{
+ * @phpstan-type RcListBulkCapabilitiesResponseShape = array{
  *   data?: list<RcsCapabilities>
  * }
  */
 final class RcListBulkCapabilitiesResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<rc_list_bulk_capabilities_response> */
+    /** @use SdkModel<RcListBulkCapabilitiesResponseShape> */
     use SdkModel;
 
     use SdkResponse;

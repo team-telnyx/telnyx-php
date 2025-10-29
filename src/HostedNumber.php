@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\HostedNumber\Status;
 
 /**
- * @phpstan-type hosted_number = array{
+ * @phpstan-type HostedNumberShape = array{
  *   id?: string,
  *   phoneNumber?: string,
  *   recordType?: string,
@@ -19,7 +19,7 @@ use Telnyx\HostedNumber\Status;
  */
 final class HostedNumber implements BaseModel
 {
-    /** @use SdkModel<hosted_number> */
+    /** @use SdkModel<HostedNumberShape> */
     use SdkModel;
 
     /**

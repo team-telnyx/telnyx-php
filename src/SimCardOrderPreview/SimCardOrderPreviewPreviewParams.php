@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\SimCardOrderPreview->preview
  *
- * @phpstan-type sim_card_order_preview_preview_params = array{
+ * @phpstan-type SimCardOrderPreviewPreviewParamsShape = array{
  *   addressID: string, quantity: int
  * }
  */
 final class SimCardOrderPreviewPreviewParams implements BaseModel
 {
-    /** @use SdkModel<sim_card_order_preview_preview_params> */
+    /** @use SdkModel<SimCardOrderPreviewPreviewParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\AuthenticationProviders->update
  *
- * @phpstan-type authentication_provider_update_params = array{
+ * @phpstan-type AuthenticationProviderUpdateParamsShape = array{
  *   active?: bool,
  *   name?: string,
  *   settings?: Settings,
@@ -24,7 +24,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class AuthenticationProviderUpdateParams implements BaseModel
 {
-    /** @use SdkModel<authentication_provider_update_params> */
+    /** @use SdkModel<AuthenticationProviderUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -11,7 +11,7 @@ use Telnyx\RecordingTranscriptions\RecordingTranscription\RecordType;
 use Telnyx\RecordingTranscriptions\RecordingTranscription\Status;
 
 /**
- * @phpstan-type recording_transcription = array{
+ * @phpstan-type RecordingTranscriptionShape = array{
  *   id?: string,
  *   createdAt?: string,
  *   durationMillis?: int,
@@ -24,7 +24,7 @@ use Telnyx\RecordingTranscriptions\RecordingTranscription\Status;
  */
 final class RecordingTranscription implements BaseModel
 {
-    /** @use SdkModel<recording_transcription> */
+    /** @use SdkModel<RecordingTranscriptionShape> */
     use SdkModel;
 
     /**

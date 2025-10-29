@@ -12,7 +12,7 @@ use Telnyx\PhoneNumbers\Actions\PhoneNumberWithVoiceSettings\Emergency\Emergency
 /**
  * The emergency services settings for a phone number.
  *
- * @phpstan-type emergency_alias = array{
+ * @phpstan-type EmergencyShape = array{
  *   emergencyAddressID?: string,
  *   emergencyEnabled?: bool,
  *   emergencyStatus?: value-of<EmergencyStatus>,
@@ -20,7 +20,7 @@ use Telnyx\PhoneNumbers\Actions\PhoneNumberWithVoiceSettings\Emergency\Emergency
  */
 final class Emergency implements BaseModel
 {
-    /** @use SdkModel<emergency_alias> */
+    /** @use SdkModel<EmergencyShape> */
     use SdkModel;
 
     /**

@@ -16,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Actions\Purchase->create
  *
- * @phpstan-type purchase_create_params = array{
+ * @phpstan-type PurchaseCreateParamsShape = array{
  *   amount: int,
  *   product?: string,
  *   simCardGroupID?: string,
@@ -27,7 +27,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class PurchaseCreateParams implements BaseModel
 {
-    /** @use SdkModel<purchase_create_params> */
+    /** @use SdkModel<PurchaseCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

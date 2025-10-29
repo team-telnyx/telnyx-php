@@ -14,11 +14,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\MessagingProfiles\AutorespConfigs->retrieve
  *
- * @phpstan-type autoresp_config_retrieve_params = array{profileID: string}
+ * @phpstan-type AutorespConfigRetrieveParamsShape = array{profileID: string}
  */
 final class AutorespConfigRetrieveParams implements BaseModel
 {
-    /** @use SdkModel<autoresp_config_retrieve_params> */
+    /** @use SdkModel<AutorespConfigRetrieveParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type dynamic_emergency_endpoint_new_response = array{
+ * @phpstan-type DynamicEmergencyEndpointNewResponseShape = array{
  *   data?: DynamicEmergencyEndpoint
  * }
  */
 final class DynamicEmergencyEndpointNewResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<dynamic_emergency_endpoint_new_response> */
+    /** @use SdkModel<DynamicEmergencyEndpointNewResponseShape> */
     use SdkModel;
 
     use SdkResponse;

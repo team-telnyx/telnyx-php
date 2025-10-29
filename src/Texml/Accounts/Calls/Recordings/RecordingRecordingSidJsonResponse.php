@@ -13,7 +13,7 @@ use Telnyx\Texml\Accounts\Calls\Recordings\RecordingRecordingSidJsonResponse\Sou
 use Telnyx\Texml\Accounts\Calls\Recordings\RecordingRecordingSidJsonResponse\Track;
 
 /**
- * @phpstan-type recording_recording_sid_json_response = array{
+ * @phpstan-type RecordingRecordingSidJsonResponseShape = array{
  *   accountSid?: string,
  *   callSid?: string,
  *   channels?: 1|2,
@@ -33,7 +33,7 @@ use Telnyx\Texml\Accounts\Calls\Recordings\RecordingRecordingSidJsonResponse\Tra
  */
 final class RecordingRecordingSidJsonResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<recording_recording_sid_json_response> */
+    /** @use SdkModel<RecordingRecordingSidJsonResponseShape> */
     use SdkModel;
 
     use SdkResponse;

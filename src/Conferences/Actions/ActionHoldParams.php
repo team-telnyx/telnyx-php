@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Conferences\Actions->hold
  *
- * @phpstan-type action_hold_params = array{
+ * @phpstan-type ActionHoldParamsShape = array{
  *   audioURL?: string,
  *   callControlIDs?: list<string>,
  *   mediaName?: string,
@@ -24,7 +24,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class ActionHoldParams implements BaseModel
 {
-    /** @use SdkModel<action_hold_params> */
+    /** @use SdkModel<ActionHoldParamsShape> */
     use SdkModel;
     use SdkParams;
 

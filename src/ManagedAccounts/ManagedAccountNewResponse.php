@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type managed_account_new_response = array{data?: ManagedAccount}
+ * @phpstan-type ManagedAccountNewResponseShape = array{data?: ManagedAccount}
  */
 final class ManagedAccountNewResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<managed_account_new_response> */
+    /** @use SdkModel<ManagedAccountNewResponseShape> */
     use SdkModel;
 
     use SdkResponse;

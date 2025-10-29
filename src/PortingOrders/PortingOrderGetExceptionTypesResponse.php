@@ -12,13 +12,13 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PortingOrdersExceptionType;
 
 /**
- * @phpstan-type porting_order_get_exception_types_response = array{
+ * @phpstan-type PortingOrderGetExceptionTypesResponseShape = array{
  *   data?: list<PortingOrdersExceptionType>
  * }
  */
 final class PortingOrderGetExceptionTypesResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<porting_order_get_exception_types_response> */
+    /** @use SdkModel<PortingOrderGetExceptionTypesResponseShape> */
     use SdkModel;
 
     use SdkResponse;

@@ -18,13 +18,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Calls\Actions->sendDtmf
  *
- * @phpstan-type action_send_dtmf_params = array{
+ * @phpstan-type ActionSendDtmfParamsShape = array{
  *   digits: string, clientState?: string, commandID?: string, durationMillis?: int
  * }
  */
 final class ActionSendDtmfParams implements BaseModel
 {
-    /** @use SdkModel<action_send_dtmf_params> */
+    /** @use SdkModel<ActionSendDtmfParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -12,13 +12,13 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Metadata;
 
 /**
- * @phpstan-type dynamic_emergency_address_list_response = array{
+ * @phpstan-type DynamicEmergencyAddressListResponseShape = array{
  *   data?: list<DynamicEmergencyAddress>, meta?: Metadata
  * }
  */
 final class DynamicEmergencyAddressListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<dynamic_emergency_address_list_response> */
+    /** @use SdkModel<DynamicEmergencyAddressListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

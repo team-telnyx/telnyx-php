@@ -16,7 +16,7 @@ use Telnyx\OAuthClients\OAuthClientCreateParams\ClientType;
  *
  * @see Telnyx\OAuthClients->create
  *
- * @phpstan-type oauth_client_create_params = array{
+ * @phpstan-type OAuthClientCreateParamsShape = array{
  *   allowedGrantTypes: list<AllowedGrantType|value-of<AllowedGrantType>>,
  *   allowedScopes: list<string>,
  *   clientType: ClientType|value-of<ClientType>,
@@ -30,7 +30,7 @@ use Telnyx\OAuthClients\OAuthClientCreateParams\ClientType;
  */
 final class OAuthClientCreateParams implements BaseModel
 {
-    /** @use SdkModel<oauth_client_create_params> */
+    /** @use SdkModel<OAuthClientCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

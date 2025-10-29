@@ -11,7 +11,7 @@ use Telnyx\Texml\Accounts\Conferences\ConferenceGetConferencesResponse\Conferenc
 use Telnyx\Texml\Accounts\Conferences\ConferenceGetConferencesResponse\Conference\Status;
 
 /**
- * @phpstan-type conference_alias = array{
+ * @phpstan-type ConferenceShape = array{
  *   accountSid?: string,
  *   apiVersion?: string,
  *   callSidEndingConference?: string,
@@ -28,7 +28,7 @@ use Telnyx\Texml\Accounts\Conferences\ConferenceGetConferencesResponse\Conferenc
  */
 final class Conference implements BaseModel
 {
-    /** @use SdkModel<conference_alias> */
+    /** @use SdkModel<ConferenceShape> */
     use SdkModel;
 
     /**

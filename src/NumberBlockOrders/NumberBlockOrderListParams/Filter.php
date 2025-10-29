@@ -12,13 +12,13 @@ use Telnyx\NumberBlockOrders\NumberBlockOrderListParams\Filter\CreatedAt;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[status], filter[created_at], filter[phone_numbers.starting_number].
  *
- * @phpstan-type filter_alias = array{
+ * @phpstan-type FilterShape = array{
  *   createdAt?: CreatedAt, phoneNumbersStartingNumber?: string, status?: string
  * }
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**

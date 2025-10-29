@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NumberBlockOrders\NumberBlockOrder\Status;
 
 /**
- * @phpstan-type number_block_order = array{
+ * @phpstan-type NumberBlockOrderShape = array{
  *   id?: string,
  *   connectionID?: string,
  *   createdAt?: \DateTimeInterface,
@@ -27,7 +27,7 @@ use Telnyx\NumberBlockOrders\NumberBlockOrder\Status;
  */
 final class NumberBlockOrder implements BaseModel
 {
-    /** @use SdkModel<number_block_order> */
+    /** @use SdkModel<NumberBlockOrderShape> */
     use SdkModel;
 
     #[Api(optional: true)]

@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type usage_report_get_speech_to_text_response = array{data?: mixed}
+ * @phpstan-type UsageReportGetSpeechToTextResponseShape = array{data?: mixed}
  */
 final class UsageReportGetSpeechToTextResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<usage_report_get_speech_to_text_response> */
+    /** @use SdkModel<UsageReportGetSpeechToTextResponseShape> */
     use SdkModel;
 
     use SdkResponse;

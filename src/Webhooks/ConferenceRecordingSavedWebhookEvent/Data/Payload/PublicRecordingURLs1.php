@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Recording URLs in requested format. The URL is valid for as long as the file exists. For security purposes, this feature is activated on a per request basis.  Please contact customer support with your Account ID to request activation.
  *
- * @phpstan-type public_recording_urls = array{
+ * @phpstan-type PublicRecordingURLsShape = array{
  *   mp3?: string|null, wav?: string|null
  * }
  */
 final class PublicRecordingURLs implements BaseModel
 {
-    /** @use SdkModel<public_recording_urls> */
+    /** @use SdkModel<PublicRecordingURLsShape> */
     use SdkModel;
 
     /**

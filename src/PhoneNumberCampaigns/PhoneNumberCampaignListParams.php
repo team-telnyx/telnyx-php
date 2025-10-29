@@ -16,13 +16,13 @@ use Telnyx\PhoneNumberCampaigns\PhoneNumberCampaignListParams\Sort;
  *
  * @see Telnyx\PhoneNumberCampaigns->list
  *
- * @phpstan-type phone_number_campaign_list_params = array{
+ * @phpstan-type PhoneNumberCampaignListParamsShape = array{
  *   filter?: Filter, page?: int, recordsPerPage?: int, sort?: Sort|value-of<Sort>
  * }
  */
 final class PhoneNumberCampaignListParams implements BaseModel
 {
-    /** @use SdkModel<phone_number_campaign_list_params> */
+    /** @use SdkModel<PhoneNumberCampaignListParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -9,13 +9,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type black_box_test = array{
+ * @phpstan-type BlackBoxTestShape = array{
  *   id?: string, recordType?: string, result?: float
  * }
  */
 final class BlackBoxTest implements BaseModel
 {
-    /** @use SdkModel<black_box_test> */
+    /** @use SdkModel<BlackBoxTestShape> */
     use SdkModel;
 
     /**

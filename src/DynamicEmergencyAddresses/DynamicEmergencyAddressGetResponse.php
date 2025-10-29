@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type dynamic_emergency_address_get_response = array{
+ * @phpstan-type DynamicEmergencyAddressGetResponseShape = array{
  *   data?: DynamicEmergencyAddress
  * }
  */
 final class DynamicEmergencyAddressGetResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<dynamic_emergency_address_get_response> */
+    /** @use SdkModel<DynamicEmergencyAddressGetResponseShape> */
     use SdkModel;
 
     use SdkResponse;

@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type associated_phone_number_new_response = array{
+ * @phpstan-type AssociatedPhoneNumberNewResponseShape = array{
  *   data?: PortingAssociatedPhoneNumber
  * }
  */
 final class AssociatedPhoneNumberNewResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<associated_phone_number_new_response> */
+    /** @use SdkModel<AssociatedPhoneNumberNewResponseShape> */
     use SdkModel;
 
     use SdkResponse;

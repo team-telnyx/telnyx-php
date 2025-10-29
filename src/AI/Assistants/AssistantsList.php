@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type assistants_list = array{data: list<InferenceEmbedding>}
+ * @phpstan-type AssistantsListShape = array{data: list<InferenceEmbedding>}
  */
 final class AssistantsList implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<assistants_list> */
+    /** @use SdkModel<AssistantsListShape> */
     use SdkModel;
 
     use SdkResponse;

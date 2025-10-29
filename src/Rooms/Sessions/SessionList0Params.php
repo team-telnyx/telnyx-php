@@ -16,13 +16,13 @@ use Telnyx\Rooms\Sessions\SessionList0Params\Page;
  *
  * @see Telnyx\Rooms\Sessions->list0
  *
- * @phpstan-type session_list_0_params = array{
+ * @phpstan-type SessionList0ParamsShape = array{
  *   filter?: Filter, includeParticipants?: bool, page?: Page
  * }
  */
 final class SessionList0Params implements BaseModel
 {
-    /** @use SdkModel<session_list_0_params> */
+    /** @use SdkModel<SessionList0ParamsShape> */
     use SdkModel;
     use SdkParams;
 

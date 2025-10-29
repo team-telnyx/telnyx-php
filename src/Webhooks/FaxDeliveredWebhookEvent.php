@@ -12,7 +12,7 @@ use Telnyx\Webhooks\FaxDeliveredWebhookEvent\Payload;
 use Telnyx\Webhooks\FaxDeliveredWebhookEvent\RecordType;
 
 /**
- * @phpstan-type fax_delivered_webhook_event = array{
+ * @phpstan-type FaxDeliveredWebhookEventShape = array{
  *   id?: string,
  *   eventType?: value-of<EventType>,
  *   payload?: Payload,
@@ -21,7 +21,7 @@ use Telnyx\Webhooks\FaxDeliveredWebhookEvent\RecordType;
  */
 final class FaxDeliveredWebhookEvent implements BaseModel
 {
-    /** @use SdkModel<fax_delivered_webhook_event> */
+    /** @use SdkModel<FaxDeliveredWebhookEventShape> */
     use SdkModel;
 
     /**

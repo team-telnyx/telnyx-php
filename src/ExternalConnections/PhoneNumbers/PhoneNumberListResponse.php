@@ -12,14 +12,14 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\ExternalConnections\ExternalVoiceIntegrationsPaginationMeta;
 
 /**
- * @phpstan-type phone_number_list_response = array{
+ * @phpstan-type PhoneNumberListResponseShape = array{
  *   data?: list<ExternalConnectionPhoneNumber>,
  *   meta?: ExternalVoiceIntegrationsPaginationMeta,
  * }
  */
 final class PhoneNumberListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<phone_number_list_response> */
+    /** @use SdkModel<PhoneNumberListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

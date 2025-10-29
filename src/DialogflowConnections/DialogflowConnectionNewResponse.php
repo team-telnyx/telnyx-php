@@ -12,11 +12,11 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\DialogflowConnections\DialogflowConnectionNewResponse\Data;
 
 /**
- * @phpstan-type dialogflow_connection_new_response = array{data: Data}
+ * @phpstan-type DialogflowConnectionNewResponseShape = array{data: Data}
  */
 final class DialogflowConnectionNewResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<dialogflow_connection_new_response> */
+    /** @use SdkModel<DialogflowConnectionNewResponseShape> */
     use SdkModel;
 
     use SdkResponse;

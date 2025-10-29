@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Storage\Buckets\SslCertificate->create
  *
- * @phpstan-type ssl_certificate_create_params = array{
+ * @phpstan-type SslCertificateCreateParamsShape = array{
  *   certificate?: string, privateKey?: string
  * }
  */
 final class SslCertificateCreateParams implements BaseModel
 {
-    /** @use SdkModel<ssl_certificate_create_params> */
+    /** @use SdkModel<SslCertificateCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

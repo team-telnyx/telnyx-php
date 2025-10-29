@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\ManagedAccounts\ManagedAccount\RecordType;
 
 /**
- * @phpstan-type managed_account = array{
+ * @phpstan-type ManagedAccountShape = array{
  *   id: string,
  *   apiKey: string,
  *   apiToken: string,
@@ -28,7 +28,7 @@ use Telnyx\ManagedAccounts\ManagedAccount\RecordType;
  */
 final class ManagedAccount implements BaseModel
 {
-    /** @use SdkModel<managed_account> */
+    /** @use SdkModel<ManagedAccountShape> */
     use SdkModel;
 
     /**

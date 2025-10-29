@@ -15,13 +15,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Conferences\Actions->unmute
  *
- * @phpstan-type action_unmute_params = array{
+ * @phpstan-type ActionUnmuteParamsShape = array{
  *   callControlIDs?: list<string>, region?: Region|value-of<Region>
  * }
  */
 final class ActionUnmuteParams implements BaseModel
 {
-    /** @use SdkModel<action_unmute_params> */
+    /** @use SdkModel<ActionUnmuteParamsShape> */
     use SdkModel;
     use SdkParams;
 

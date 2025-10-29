@@ -16,7 +16,7 @@ use Telnyx\ExternalConnections\ExternalConnectionUpdateParams\Outbound;
  *
  * @see Telnyx\ExternalConnections->update
  *
- * @phpstan-type external_connection_update_params = array{
+ * @phpstan-type ExternalConnectionUpdateParamsShape = array{
  *   outbound: Outbound,
  *   active?: bool,
  *   inbound?: Inbound,
@@ -28,7 +28,7 @@ use Telnyx\ExternalConnections\ExternalConnectionUpdateParams\Outbound;
  */
 final class ExternalConnectionUpdateParams implements BaseModel
 {
-    /** @use SdkModel<external_connection_update_params> */
+    /** @use SdkModel<ExternalConnectionUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 

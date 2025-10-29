@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type number_block_order_get_response = array{data?: NumberBlockOrder}
+ * @phpstan-type NumberBlockOrderGetResponseShape = array{data?: NumberBlockOrder}
  */
 final class NumberBlockOrderGetResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<number_block_order_get_response> */
+    /** @use SdkModel<NumberBlockOrderGetResponseShape> */
     use SdkModel;
 
     use SdkResponse;

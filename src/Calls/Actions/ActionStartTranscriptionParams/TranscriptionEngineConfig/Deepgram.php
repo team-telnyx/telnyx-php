@@ -11,7 +11,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type deepgram_alias = array{
+ * @phpstan-type DeepgramShape = array{
  *   transcriptionEngine: string,
  *   transcriptionModel: value-of<TranscriptionModel>,
  *   language?: value-of<Language>,
@@ -19,7 +19,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class Deepgram implements BaseModel
 {
-    /** @use SdkModel<deepgram_alias> */
+    /** @use SdkModel<DeepgramShape> */
     use SdkModel;
 
     /**

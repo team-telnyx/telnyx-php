@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\MessagingHostedNumberOrder\Status;
 
 /**
- * @phpstan-type messaging_hosted_number_order = array{
+ * @phpstan-type MessagingHostedNumberOrderShape = array{
  *   id?: string,
  *   messagingProfileID?: string|null,
  *   phoneNumbers?: list<HostedNumber>,
@@ -20,7 +20,7 @@ use Telnyx\MessagingHostedNumberOrder\Status;
  */
 final class MessagingHostedNumberOrder implements BaseModel
 {
-    /** @use SdkModel<messaging_hosted_number_order> */
+    /** @use SdkModel<MessagingHostedNumberOrderShape> */
     use SdkModel;
 
     /**

@@ -12,11 +12,11 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\RoomRecordings\RoomRecordingDeleteBulkResponse\Data;
 
 /**
- * @phpstan-type room_recording_delete_bulk_response = array{data?: Data}
+ * @phpstan-type RoomRecordingDeleteBulkResponseShape = array{data?: Data}
  */
 final class RoomRecordingDeleteBulkResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<room_recording_delete_bulk_response> */
+    /** @use SdkModel<RoomRecordingDeleteBulkResponseShape> */
     use SdkModel;
 
     use SdkResponse;

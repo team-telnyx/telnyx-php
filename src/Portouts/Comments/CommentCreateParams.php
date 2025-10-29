@@ -14,11 +14,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Portouts\Comments->create
  *
- * @phpstan-type comment_create_params = array{body?: string}
+ * @phpstan-type CommentCreateParamsShape = array{body?: string}
  */
 final class CommentCreateParams implements BaseModel
 {
-    /** @use SdkModel<comment_create_params> */
+    /** @use SdkModel<CommentCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

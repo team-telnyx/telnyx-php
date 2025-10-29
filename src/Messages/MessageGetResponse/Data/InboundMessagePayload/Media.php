@@ -9,13 +9,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type media_alias = array{
+ * @phpstan-type MediaShape = array{
  *   contentType?: string, hashSha256?: string, size?: int, url?: string
  * }
  */
 final class Media implements BaseModel
 {
-    /** @use SdkModel<media_alias> */
+    /** @use SdkModel<MediaShape> */
     use SdkModel;
 
     /**

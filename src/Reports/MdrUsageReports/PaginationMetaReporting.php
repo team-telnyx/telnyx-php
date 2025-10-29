@@ -9,13 +9,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type pagination_meta_reporting = array{
+ * @phpstan-type PaginationMetaReportingShape = array{
  *   pageNumber?: int, pageSize?: int, totalPages?: int, totalResults?: int
  * }
  */
 final class PaginationMetaReporting implements BaseModel
 {
-    /** @use SdkModel<pagination_meta_reporting> */
+    /** @use SdkModel<PaginationMetaReportingShape> */
     use SdkModel;
 
     #[Api('page_number', optional: true)]

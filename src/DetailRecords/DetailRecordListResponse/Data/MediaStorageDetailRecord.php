@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type media_storage_detail_record = array{
+ * @phpstan-type MediaStorageDetailRecordShape = array{
  *   recordType: string,
  *   id?: string,
  *   actionType?: string,
@@ -29,7 +29,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class MediaStorageDetailRecord implements BaseModel
 {
-    /** @use SdkModel<media_storage_detail_record> */
+    /** @use SdkModel<MediaStorageDetailRecordShape> */
     use SdkModel;
 
     #[Api('record_type')]

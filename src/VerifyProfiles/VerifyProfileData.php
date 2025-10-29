@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type verify_profile_data = array{data?: VerifyProfile}
+ * @phpstan-type VerifyProfileDataShape = array{data?: VerifyProfile}
  */
 final class VerifyProfileData implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<verify_profile_data> */
+    /** @use SdkModel<VerifyProfileDataShape> */
     use SdkModel;
 
     use SdkResponse;

@@ -12,11 +12,11 @@ use Telnyx\Core\Conversion\ListOf;
 /**
  * Request details.
  *
- * @phpstan-type request_alias = array{headers?: list<list<string>>, url?: string}
+ * @phpstan-type RequestShape = array{headers?: list<list<string>>, url?: string}
  */
 final class Request implements BaseModel
 {
-    /** @use SdkModel<request_alias> */
+    /** @use SdkModel<RequestShape> */
     use SdkModel;
 
     /**

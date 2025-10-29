@@ -12,11 +12,11 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\SimCardOrderPreview\SimCardOrderPreviewPreviewResponse\Data;
 
 /**
- * @phpstan-type sim_card_order_preview_preview_response = array{data?: Data}
+ * @phpstan-type SimCardOrderPreviewPreviewResponseShape = array{data?: Data}
  */
 final class SimCardOrderPreviewPreviewResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<sim_card_order_preview_preview_response> */
+    /** @use SdkModel<SimCardOrderPreviewPreviewResponseShape> */
     use SdkModel;
 
     use SdkResponse;

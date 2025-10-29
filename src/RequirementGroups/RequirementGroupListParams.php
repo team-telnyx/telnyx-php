@@ -15,11 +15,11 @@ use Telnyx\RequirementGroups\RequirementGroupListParams\Filter;
  *
  * @see Telnyx\RequirementGroups->list
  *
- * @phpstan-type requirement_group_list_params = array{filter?: Filter}
+ * @phpstan-type RequirementGroupListParamsShape = array{filter?: Filter}
  */
 final class RequirementGroupListParams implements BaseModel
 {
-    /** @use SdkModel<requirement_group_list_params> */
+    /** @use SdkModel<RequirementGroupListParamsShape> */
     use SdkModel;
     use SdkParams;
 

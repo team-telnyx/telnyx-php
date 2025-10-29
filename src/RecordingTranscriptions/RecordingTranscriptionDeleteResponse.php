@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type recording_transcription_delete_response = array{
+ * @phpstan-type RecordingTranscriptionDeleteResponseShape = array{
  *   data?: RecordingTranscription
  * }
  */
 final class RecordingTranscriptionDeleteResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<recording_transcription_delete_response> */
+    /** @use SdkModel<RecordingTranscriptionDeleteResponseShape> */
     use SdkModel;
 
     use SdkResponse;

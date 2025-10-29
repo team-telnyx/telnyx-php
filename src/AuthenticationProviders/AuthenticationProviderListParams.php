@@ -16,13 +16,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\AuthenticationProviders->list
  *
- * @phpstan-type authentication_provider_list_params = array{
+ * @phpstan-type AuthenticationProviderListParamsShape = array{
  *   page?: Page, sort?: Sort|value-of<Sort>
  * }
  */
 final class AuthenticationProviderListParams implements BaseModel
 {
-    /** @use SdkModel<authentication_provider_list_params> */
+    /** @use SdkModel<AuthenticationProviderListParamsShape> */
     use SdkModel;
     use SdkParams;
 

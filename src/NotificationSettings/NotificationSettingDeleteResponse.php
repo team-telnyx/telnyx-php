@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type notification_setting_delete_response = array{
+ * @phpstan-type NotificationSettingDeleteResponseShape = array{
  *   data?: NotificationSetting
  * }
  */
 final class NotificationSettingDeleteResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<notification_setting_delete_response> */
+    /** @use SdkModel<NotificationSettingDeleteResponseShape> */
     use SdkModel;
 
     use SdkResponse;

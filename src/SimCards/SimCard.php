@@ -17,7 +17,7 @@ use Telnyx\SimCards\SimCard\Type;
 use Telnyx\SimCardStatus;
 
 /**
- * @phpstan-type sim_card = array{
+ * @phpstan-type SimCardShape = array{
  *   id?: string,
  *   actionsInProgress?: bool,
  *   authorizedImeis?: list<string>|null,
@@ -49,7 +49,7 @@ use Telnyx\SimCardStatus;
  */
 final class SimCard implements BaseModel
 {
-    /** @use SdkModel<sim_card> */
+    /** @use SdkModel<SimCardShape> */
     use SdkModel;
 
     /**

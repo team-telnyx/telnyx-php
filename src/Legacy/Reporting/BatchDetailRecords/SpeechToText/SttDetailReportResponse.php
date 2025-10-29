@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\SpeechToText\SttDetailReportResponse\Status;
 
 /**
- * @phpstan-type stt_detail_report_response = array{
+ * @phpstan-type SttDetailReportResponseShape = array{
  *   id?: string,
  *   createdAt?: \DateTimeInterface,
  *   downloadLink?: string,
@@ -22,7 +22,7 @@ use Telnyx\Legacy\Reporting\BatchDetailRecords\SpeechToText\SttDetailReportRespo
  */
 final class SttDetailReportResponse implements BaseModel
 {
-    /** @use SdkModel<stt_detail_report_response> */
+    /** @use SdkModel<SttDetailReportResponseShape> */
     use SdkModel;
 
     /**

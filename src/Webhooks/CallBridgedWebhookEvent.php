@@ -10,11 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\CallBridgedWebhookEvent\Data;
 
 /**
- * @phpstan-type call_bridged_webhook_event = array{data?: Data}
+ * @phpstan-type CallBridgedWebhookEventShape = array{data?: Data}
  */
 final class CallBridgedWebhookEvent implements BaseModel
 {
-    /** @use SdkModel<call_bridged_webhook_event> */
+    /** @use SdkModel<CallBridgedWebhookEventShape> */
     use SdkModel;
 
     #[Api(optional: true)]

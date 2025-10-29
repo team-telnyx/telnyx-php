@@ -17,7 +17,7 @@ use Telnyx\RequirementGroups\RequirementGroupCreateParams\RegulatoryRequirement;
  *
  * @see Telnyx\RequirementGroups->create
  *
- * @phpstan-type requirement_group_create_params = array{
+ * @phpstan-type RequirementGroupCreateParamsShape = array{
  *   action: Action|value-of<Action>,
  *   countryCode: string,
  *   phoneNumberType: PhoneNumberType|value-of<PhoneNumberType>,
@@ -27,7 +27,7 @@ use Telnyx\RequirementGroups\RequirementGroupCreateParams\RegulatoryRequirement;
  */
 final class RequirementGroupCreateParams implements BaseModel
 {
-    /** @use SdkModel<requirement_group_create_params> */
+    /** @use SdkModel<RequirementGroupCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

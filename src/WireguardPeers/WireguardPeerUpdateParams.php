@@ -14,11 +14,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\WireguardPeers->update
  *
- * @phpstan-type wireguard_peer_update_params = array{publicKey?: string}
+ * @phpstan-type WireguardPeerUpdateParamsShape = array{publicKey?: string}
  */
 final class WireguardPeerUpdateParams implements BaseModel
 {
-    /** @use SdkModel<wireguard_peer_update_params> */
+    /** @use SdkModel<WireguardPeerUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 

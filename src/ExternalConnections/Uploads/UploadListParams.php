@@ -16,11 +16,11 @@ use Telnyx\ExternalConnections\Uploads\UploadListParams\Page;
  *
  * @see Telnyx\ExternalConnections\Uploads->list
  *
- * @phpstan-type upload_list_params = array{filter?: Filter, page?: Page}
+ * @phpstan-type UploadListParamsShape = array{filter?: Filter, page?: Page}
  */
 final class UploadListParams implements BaseModel
 {
-    /** @use SdkModel<upload_list_params> */
+    /** @use SdkModel<UploadListParamsShape> */
     use SdkModel;
     use SdkParams;
 

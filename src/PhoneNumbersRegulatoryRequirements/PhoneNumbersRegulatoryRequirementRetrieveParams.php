@@ -15,13 +15,13 @@ use Telnyx\PhoneNumbersRegulatoryRequirements\PhoneNumbersRegulatoryRequirementR
  *
  * @see Telnyx\PhoneNumbersRegulatoryRequirements->retrieve
  *
- * @phpstan-type phone_numbers_regulatory_requirement_retrieve_params = array{
+ * @phpstan-type PhoneNumbersRegulatoryRequirementRetrieveParamsShape = array{
  *   filter?: Filter
  * }
  */
 final class PhoneNumbersRegulatoryRequirementRetrieveParams implements BaseModel
 {
-    /** @use SdkModel<phone_numbers_regulatory_requirement_retrieve_params> */
+    /** @use SdkModel<PhoneNumbersRegulatoryRequirementRetrieveParamsShape> */
     use SdkModel;
     use SdkParams;
 

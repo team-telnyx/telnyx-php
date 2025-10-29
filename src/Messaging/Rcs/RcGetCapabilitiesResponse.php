@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type rc_get_capabilities_response = array{data?: RcsCapabilities}
+ * @phpstan-type RcGetCapabilitiesResponseShape = array{data?: RcsCapabilities}
  */
 final class RcGetCapabilitiesResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<rc_get_capabilities_response> */
+    /** @use SdkModel<RcGetCapabilitiesResponseShape> */
     use SdkModel;
 
     use SdkResponse;

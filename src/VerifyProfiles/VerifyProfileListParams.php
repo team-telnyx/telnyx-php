@@ -16,11 +16,11 @@ use Telnyx\VerifyProfiles\VerifyProfileListParams\Page;
  *
  * @see Telnyx\VerifyProfiles->list
  *
- * @phpstan-type verify_profile_list_params = array{filter?: Filter, page?: Page}
+ * @phpstan-type VerifyProfileListParamsShape = array{filter?: Filter, page?: Page}
  */
 final class VerifyProfileListParams implements BaseModel
 {
-    /** @use SdkModel<verify_profile_list_params> */
+    /** @use SdkModel<VerifyProfileListParamsShape> */
     use SdkModel;
     use SdkParams;
 

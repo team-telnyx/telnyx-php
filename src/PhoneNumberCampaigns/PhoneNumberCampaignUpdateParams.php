@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\PhoneNumberCampaigns->update
  *
- * @phpstan-type phone_number_campaign_update_params = array{
+ * @phpstan-type PhoneNumberCampaignUpdateParamsShape = array{
  *   campaignID: string, phoneNumber: string
  * }
  */
 final class PhoneNumberCampaignUpdateParams implements BaseModel
 {
-    /** @use SdkModel<phone_number_campaign_update_params> */
+    /** @use SdkModel<PhoneNumberCampaignUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 

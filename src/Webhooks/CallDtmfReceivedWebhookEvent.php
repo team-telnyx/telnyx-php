@@ -10,11 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\CallDtmfReceivedWebhookEvent\Data;
 
 /**
- * @phpstan-type call_dtmf_received_webhook_event = array{data?: Data}
+ * @phpstan-type CallDtmfReceivedWebhookEventShape = array{data?: Data}
  */
 final class CallDtmfReceivedWebhookEvent implements BaseModel
 {
-    /** @use SdkModel<call_dtmf_received_webhook_event> */
+    /** @use SdkModel<CallDtmfReceivedWebhookEventShape> */
     use SdkModel;
 
     #[Api(optional: true)]

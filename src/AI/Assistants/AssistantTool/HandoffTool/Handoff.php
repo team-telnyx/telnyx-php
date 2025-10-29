@@ -11,13 +11,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type handoff_alias = array{
+ * @phpstan-type HandoffShape = array{
  *   aiAssistants: list<AIAssistant>, voiceMode?: value-of<VoiceMode>
  * }
  */
 final class Handoff implements BaseModel
 {
-    /** @use SdkModel<handoff_alias> */
+    /** @use SdkModel<HandoffShape> */
     use SdkModel;
 
     /**

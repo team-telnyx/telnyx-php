@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\AI\Assistants\Tools->test
  *
- * @phpstan-type tool_test_params = array{
+ * @phpstan-type ToolTestParamsShape = array{
  *   assistantID: string,
  *   arguments?: array<string, mixed>,
  *   dynamicVariables?: array<string, mixed>,
@@ -22,7 +22,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class ToolTestParams implements BaseModel
 {
-    /** @use SdkModel<tool_test_params> */
+    /** @use SdkModel<ToolTestParamsShape> */
     use SdkModel;
     use SdkParams;
 

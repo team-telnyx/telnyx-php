@@ -12,11 +12,11 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\ShortCode;
 
 /**
- * @phpstan-type short_code_get_response = array{data?: ShortCode}
+ * @phpstan-type ShortCodeGetResponseShape = array{data?: ShortCode}
  */
 final class ShortCodeGetResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<short_code_get_response> */
+    /** @use SdkModel<ShortCodeGetResponseShape> */
     use SdkModel;
 
     use SdkResponse;

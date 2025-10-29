@@ -17,11 +17,13 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  * Returns a subset of tests based on pagination parameters along with
  * metadata for implementing pagination controls in the UI.
  *
- * @phpstan-type test_list_response = array{data: list<AssistantTest>, meta: Meta}
+ * @phpstan-type TestListResponseShape = array{
+ *   data: list<AssistantTest>, meta: Meta
+ * }
  */
 final class TestListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<test_list_response> */
+    /** @use SdkModel<TestListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

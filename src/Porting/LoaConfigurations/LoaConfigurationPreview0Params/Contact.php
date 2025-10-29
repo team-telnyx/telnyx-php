@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * The contact information of the company.
  *
- * @phpstan-type contact_alias = array{email: string, phoneNumber: string}
+ * @phpstan-type ContactShape = array{email: string, phoneNumber: string}
  */
 final class Contact implements BaseModel
 {
-    /** @use SdkModel<contact_alias> */
+    /** @use SdkModel<ContactShape> */
     use SdkModel;
 
     /**

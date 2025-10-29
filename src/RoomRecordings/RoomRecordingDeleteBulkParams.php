@@ -16,13 +16,13 @@ use Telnyx\RoomRecordings\RoomRecordingDeleteBulkParams\Page;
  *
  * @see Telnyx\RoomRecordings->deleteBulk
  *
- * @phpstan-type room_recording_delete_bulk_params = array{
+ * @phpstan-type RoomRecordingDeleteBulkParamsShape = array{
  *   filter?: Filter, page?: Page
  * }
  */
 final class RoomRecordingDeleteBulkParams implements BaseModel
 {
-    /** @use SdkModel<room_recording_delete_bulk_params> */
+    /** @use SdkModel<RoomRecordingDeleteBulkParamsShape> */
     use SdkModel;
     use SdkParams;
 

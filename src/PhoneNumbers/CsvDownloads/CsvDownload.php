@@ -10,13 +10,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PhoneNumbers\CsvDownloads\CsvDownload\Status;
 
 /**
- * @phpstan-type csv_download = array{
+ * @phpstan-type CsvDownloadShape = array{
  *   id?: string, recordType?: string, status?: value-of<Status>, url?: string
  * }
  */
 final class CsvDownload implements BaseModel
 {
-    /** @use SdkModel<csv_download> */
+    /** @use SdkModel<CsvDownloadShape> */
     use SdkModel;
 
     /**

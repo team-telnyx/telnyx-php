@@ -12,11 +12,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type action_gather_using_ai_response = array{data?: Data}
+ * @phpstan-type ActionGatherUsingAIResponseShape = array{data?: Data}
  */
 final class ActionGatherUsingAIResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<action_gather_using_ai_response> */
+    /** @use SdkModel<ActionGatherUsingAIResponseShape> */
     use SdkModel;
 
     use SdkResponse;

@@ -13,13 +13,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type bulk_sim_card_action_list_response = array{
+ * @phpstan-type BulkSimCardActionListResponseShape = array{
  *   data?: list<Data>, meta?: PaginationMeta
  * }
  */
 final class BulkSimCardActionListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<bulk_sim_card_action_list_response> */
+    /** @use SdkModel<BulkSimCardActionListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

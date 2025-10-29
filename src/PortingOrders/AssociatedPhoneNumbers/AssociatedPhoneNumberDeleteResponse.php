@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type associated_phone_number_delete_response = array{
+ * @phpstan-type AssociatedPhoneNumberDeleteResponseShape = array{
  *   data?: PortingAssociatedPhoneNumber
  * }
  */
 final class AssociatedPhoneNumberDeleteResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<associated_phone_number_delete_response> */
+    /** @use SdkModel<AssociatedPhoneNumberDeleteResponseShape> */
     use SdkModel;
 
     use SdkResponse;

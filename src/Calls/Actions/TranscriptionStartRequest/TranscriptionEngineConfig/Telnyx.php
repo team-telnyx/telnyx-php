@@ -12,7 +12,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type telnyx_alias = array{
+ * @phpstan-type TelnyxShape = array{
  *   language?: value-of<TelnyxTranscriptionLanguage>,
  *   transcriptionEngine?: value-of<TranscriptionEngine>,
  *   transcriptionModel?: value-of<TranscriptionModel>,
@@ -20,7 +20,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class Telnyx implements BaseModel
 {
-    /** @use SdkModel<telnyx_alias> */
+    /** @use SdkModel<TelnyxShape> */
     use SdkModel;
 
     /**

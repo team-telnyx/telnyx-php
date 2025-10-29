@@ -15,7 +15,7 @@ use Telnyx\Payment\AutoRechargePrefs\AutoRechargePrefUpdateParams\Preference;
  *
  * @see Telnyx\Payment\AutoRechargePrefs->update
  *
- * @phpstan-type auto_recharge_pref_update_params = array{
+ * @phpstan-type AutoRechargePrefUpdateParamsShape = array{
  *   enabled?: bool,
  *   invoiceEnabled?: bool,
  *   preference?: Preference|value-of<Preference>,
@@ -25,7 +25,7 @@ use Telnyx\Payment\AutoRechargePrefs\AutoRechargePrefUpdateParams\Preference;
  */
 final class AutoRechargePrefUpdateParams implements BaseModel
 {
-    /** @use SdkModel<auto_recharge_pref_update_params> */
+    /** @use SdkModel<AutoRechargePrefUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 

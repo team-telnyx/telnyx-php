@@ -13,13 +13,13 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\GlobalIPs\GlobalIPListResponse\Data;
 
 /**
- * @phpstan-type global_ip_list_response = array{
+ * @phpstan-type GlobalIPListResponseShape = array{
  *   data?: list<Data>, meta?: PaginationMeta
  * }
  */
 final class GlobalIPListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<global_ip_list_response> */
+    /** @use SdkModel<GlobalIPListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

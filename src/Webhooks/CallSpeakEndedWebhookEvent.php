@@ -10,11 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\CallSpeakEndedWebhookEvent\Data;
 
 /**
- * @phpstan-type call_speak_ended_webhook_event = array{data?: Data}
+ * @phpstan-type CallSpeakEndedWebhookEventShape = array{data?: Data}
  */
 final class CallSpeakEndedWebhookEvent implements BaseModel
 {
-    /** @use SdkModel<call_speak_ended_webhook_event> */
+    /** @use SdkModel<CallSpeakEndedWebhookEventShape> */
     use SdkModel;
 
     #[Api(optional: true)]

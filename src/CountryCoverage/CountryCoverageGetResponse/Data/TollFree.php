@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type toll_free = array{
+ * @phpstan-type TollFreeShape = array{
  *   features?: list<string>,
  *   fullPstnReplacement?: bool,
  *   internationalSMS?: bool,
@@ -20,7 +20,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class TollFree implements BaseModel
 {
-    /** @use SdkModel<toll_free> */
+    /** @use SdkModel<TollFreeShape> */
     use SdkModel;
 
     /** @var list<string>|null $features */

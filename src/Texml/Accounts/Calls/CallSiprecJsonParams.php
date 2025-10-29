@@ -17,7 +17,7 @@ use Telnyx\Texml\Accounts\Calls\CallSiprecJsonParams\Track;
  *
  * @see Telnyx\Texml\Accounts\Calls->siprecJson
  *
- * @phpstan-type call_siprec_json_params = array{
+ * @phpstan-type CallSiprecJsonParamsShape = array{
  *   accountSid: string,
  *   connectorName?: string,
  *   includeMetadataCustomHeaders?: bool,
@@ -32,7 +32,7 @@ use Telnyx\Texml\Accounts\Calls\CallSiprecJsonParams\Track;
  */
 final class CallSiprecJsonParams implements BaseModel
 {
-    /** @use SdkModel<call_siprec_json_params> */
+    /** @use SdkModel<CallSiprecJsonParamsShape> */
     use SdkModel;
     use SdkParams;
 

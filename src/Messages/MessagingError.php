@@ -10,13 +10,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Messages\MessagingError\Source;
 
 /**
- * @phpstan-type messaging_error = array{
+ * @phpstan-type MessagingErrorShape = array{
  *   code: string, title: string, detail?: string, meta?: mixed, source?: Source
  * }
  */
 final class MessagingError implements BaseModel
 {
-    /** @use SdkModel<messaging_error> */
+    /** @use SdkModel<MessagingErrorShape> */
     use SdkModel;
 
     #[Api]

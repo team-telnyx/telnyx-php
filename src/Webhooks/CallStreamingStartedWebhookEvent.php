@@ -10,11 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\CallStreamingStartedWebhookEvent\Data;
 
 /**
- * @phpstan-type call_streaming_started_webhook_event = array{data?: Data}
+ * @phpstan-type CallStreamingStartedWebhookEventShape = array{data?: Data}
  */
 final class CallStreamingStartedWebhookEvent implements BaseModel
 {
-    /** @use SdkModel<call_streaming_started_webhook_event> */
+    /** @use SdkModel<CallStreamingStartedWebhookEventShape> */
     use SdkModel;
 
     #[Api(optional: true)]

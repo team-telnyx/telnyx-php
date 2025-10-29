@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\List\ListGetAllResponse\Data\Number;
 
 /**
- * @phpstan-type data_alias = array{
+ * @phpstan-type DataShape = array{
  *   numberOfChannels?: int,
  *   numbers?: list<Number>,
  *   zoneID?: string,
@@ -19,7 +19,7 @@ use Telnyx\List\ListGetAllResponse\Data\Number;
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     #[Api('number_of_channels', optional: true)]

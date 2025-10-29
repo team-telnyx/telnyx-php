@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\CallAIGatherPartialResultsWebhookEvent\Data\Payload\MessageHistory;
 
 /**
- * @phpstan-type payload_alias = array{
+ * @phpstan-type PayloadShape = array{
  *   callControlID?: string,
  *   callLegID?: string,
  *   callSessionID?: string,
@@ -24,7 +24,7 @@ use Telnyx\Webhooks\CallAIGatherPartialResultsWebhookEvent\Data\Payload\MessageH
  */
 final class Payload implements BaseModel
 {
-    /** @use SdkModel<payload_alias> */
+    /** @use SdkModel<PayloadShape> */
     use SdkModel;
 
     /**

@@ -18,7 +18,7 @@ use Telnyx\CredentialConnections\EncryptedMedia;
  *
  * @see Telnyx\FqdnConnections->update
  *
- * @phpstan-type fqdn_connection_update_params = array{
+ * @phpstan-type FqdnConnectionUpdateParamsShape = array{
  *   active?: bool,
  *   anchorsiteOverride?: AnchorsiteOverride|value-of<AnchorsiteOverride>,
  *   androidPushCredentialID?: string|null,
@@ -42,7 +42,7 @@ use Telnyx\CredentialConnections\EncryptedMedia;
  */
 final class FqdnConnectionUpdateParams implements BaseModel
 {
-    /** @use SdkModel<fqdn_connection_update_params> */
+    /** @use SdkModel<FqdnConnectionUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 

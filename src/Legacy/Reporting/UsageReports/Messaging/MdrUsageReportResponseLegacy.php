@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Legacy V2 MDR usage report response.
  *
- * @phpstan-type mdr_usage_report_response_legacy = array{
+ * @phpstan-type MdrUsageReportResponseLegacyShape = array{
  *   id?: string,
  *   aggregationType?: int,
  *   connections?: list<int>,
@@ -28,7 +28,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class MdrUsageReportResponseLegacy implements BaseModel
 {
-    /** @use SdkModel<mdr_usage_report_response_legacy> */
+    /** @use SdkModel<MdrUsageReportResponseLegacyShape> */
     use SdkModel;
 
     /**

@@ -15,7 +15,7 @@ use Telnyx\PhoneNumbers\Jobs\PhoneNumbersJob\SuccessfulOperation;
 use Telnyx\PhoneNumbers\Jobs\PhoneNumbersJob\Type;
 
 /**
- * @phpstan-type phone_numbers_job = array{
+ * @phpstan-type PhoneNumbersJobShape = array{
  *   id?: string,
  *   createdAt?: string,
  *   etc?: \DateTimeInterface,
@@ -31,7 +31,7 @@ use Telnyx\PhoneNumbers\Jobs\PhoneNumbersJob\Type;
  */
 final class PhoneNumbersJob implements BaseModel
 {
-    /** @use SdkModel<phone_numbers_job> */
+    /** @use SdkModel<PhoneNumbersJobShape> */
     use SdkModel;
 
     /**

@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type voice_get_response = array{data?: CdrDetailedReqResponse}
+ * @phpstan-type VoiceGetResponseShape = array{data?: CdrDetailedReqResponse}
  */
 final class VoiceGetResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<voice_get_response> */
+    /** @use SdkModel<VoiceGetResponseShape> */
     use SdkModel;
 
     use SdkResponse;

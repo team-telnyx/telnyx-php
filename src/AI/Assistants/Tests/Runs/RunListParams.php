@@ -15,11 +15,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\AI\Assistants\Tests\Runs->list
  *
- * @phpstan-type run_list_params = array{page?: Page, status?: string}
+ * @phpstan-type RunListParamsShape = array{page?: Page, status?: string}
  */
 final class RunListParams implements BaseModel
 {
-    /** @use SdkModel<run_list_params> */
+    /** @use SdkModel<RunListParamsShape> */
     use SdkModel;
     use SdkParams;
 

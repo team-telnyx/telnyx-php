@@ -17,7 +17,7 @@ use Telnyx\FaxApplications\FaxApplicationCreateParams\Outbound;
  *
  * @see Telnyx\FaxApplications->create
  *
- * @phpstan-type fax_application_create_params = array{
+ * @phpstan-type FaxApplicationCreateParamsShape = array{
  *   applicationName: string,
  *   webhookEventURL: string,
  *   active?: bool,
@@ -31,7 +31,7 @@ use Telnyx\FaxApplications\FaxApplicationCreateParams\Outbound;
  */
 final class FaxApplicationCreateParams implements BaseModel
 {
-    /** @use SdkModel<fax_application_create_params> */
+    /** @use SdkModel<FaxApplicationCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

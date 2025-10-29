@@ -19,7 +19,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Calls\Actions->stopForking
  *
- * @phpstan-type action_stop_forking_params = array{
+ * @phpstan-type ActionStopForkingParamsShape = array{
  *   clientState?: string,
  *   commandID?: string,
  *   streamType?: StreamType|value-of<StreamType>,
@@ -27,7 +27,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class ActionStopForkingParams implements BaseModel
 {
-    /** @use SdkModel<action_stop_forking_params> */
+    /** @use SdkModel<ActionStopForkingParamsShape> */
     use SdkModel;
     use SdkParams;
 

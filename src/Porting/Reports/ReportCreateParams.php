@@ -15,14 +15,14 @@ use Telnyx\Porting\Reports\ReportCreateParams\ReportType;
  *
  * @see Telnyx\Porting\Reports->create
  *
- * @phpstan-type report_create_params = array{
+ * @phpstan-type ReportCreateParamsShape = array{
  *   params: ExportPortingOrdersCsvReport,
  *   reportType: ReportType|value-of<ReportType>,
  * }
  */
 final class ReportCreateParams implements BaseModel
 {
-    /** @use SdkModel<report_create_params> */
+    /** @use SdkModel<ReportCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

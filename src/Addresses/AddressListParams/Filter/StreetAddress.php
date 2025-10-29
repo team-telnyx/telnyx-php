@@ -9,11 +9,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type street_address = array{contains?: string}
+ * @phpstan-type StreetAddressShape = array{contains?: string}
  */
 final class StreetAddress implements BaseModel
 {
-    /** @use SdkModel<street_address> */
+    /** @use SdkModel<StreetAddressShape> */
     use SdkModel;
 
     /**

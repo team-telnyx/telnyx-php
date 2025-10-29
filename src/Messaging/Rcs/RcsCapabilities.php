@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Messaging\Rcs\RcsCapabilities\RecordType;
 
 /**
- * @phpstan-type rcs_capabilities = array{
+ * @phpstan-type RcsCapabilitiesShape = array{
  *   agentID?: string,
  *   agentName?: string,
  *   features?: list<string>,
@@ -20,7 +20,7 @@ use Telnyx\Messaging\Rcs\RcsCapabilities\RecordType;
  */
 final class RcsCapabilities implements BaseModel
 {
-    /** @use SdkModel<rcs_capabilities> */
+    /** @use SdkModel<RcsCapabilitiesShape> */
     use SdkModel;
 
     /**

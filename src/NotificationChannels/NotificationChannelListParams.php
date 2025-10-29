@@ -16,13 +16,13 @@ use Telnyx\NotificationChannels\NotificationChannelListParams\Page;
  *
  * @see Telnyx\NotificationChannels->list
  *
- * @phpstan-type notification_channel_list_params = array{
+ * @phpstan-type NotificationChannelListParamsShape = array{
  *   filter?: Filter, page?: Page
  * }
  */
 final class NotificationChannelListParams implements BaseModel
 {
-    /** @use SdkModel<notification_channel_list_params> */
+    /** @use SdkModel<NotificationChannelListParamsShape> */
     use SdkModel;
     use SdkParams;
 

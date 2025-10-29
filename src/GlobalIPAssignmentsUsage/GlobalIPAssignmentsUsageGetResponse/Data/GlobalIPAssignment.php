@@ -10,13 +10,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\GlobalIPAssignmentsUsage\GlobalIPAssignmentsUsageGetResponse\Data\GlobalIPAssignment\WireguardPeer;
 
 /**
- * @phpstan-type global_ip_assignment = array{
+ * @phpstan-type GlobalIPAssignmentShape = array{
  *   id?: string, wireguardPeer?: WireguardPeer, wireguardPeerID?: string
  * }
  */
 final class GlobalIPAssignment implements BaseModel
 {
-    /** @use SdkModel<global_ip_assignment> */
+    /** @use SdkModel<GlobalIPAssignmentShape> */
     use SdkModel;
 
     /**

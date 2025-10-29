@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type user_bundle_deactivate_response = array{data: UserBundle}
+ * @phpstan-type UserBundleDeactivateResponseShape = array{data: UserBundle}
  */
 final class UserBundleDeactivateResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<user_bundle_deactivate_response> */
+    /** @use SdkModel<UserBundleDeactivateResponseShape> */
     use SdkModel;
 
     use SdkResponse;

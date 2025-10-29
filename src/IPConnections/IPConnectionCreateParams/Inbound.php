@@ -14,7 +14,7 @@ use Telnyx\IPConnections\IPConnectionCreateParams\Inbound\SipRegion;
 use Telnyx\IPConnections\IPConnectionCreateParams\Inbound\SipSubdomainReceiveSettings;
 
 /**
- * @phpstan-type inbound_alias = array{
+ * @phpstan-type InboundShape = array{
  *   aniNumberFormat?: value-of<AniNumberFormat>,
  *   channelLimit?: int,
  *   codecs?: list<string>,
@@ -34,7 +34,7 @@ use Telnyx\IPConnections\IPConnectionCreateParams\Inbound\SipSubdomainReceiveSet
  */
 final class Inbound implements BaseModel
 {
-    /** @use SdkModel<inbound_alias> */
+    /** @use SdkModel<InboundShape> */
     use SdkModel;
 
     /**

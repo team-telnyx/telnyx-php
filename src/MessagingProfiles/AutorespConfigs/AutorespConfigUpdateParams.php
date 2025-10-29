@@ -15,7 +15,7 @@ use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigUpdateParams\Op;
  *
  * @see Telnyx\MessagingProfiles\AutorespConfigs->update
  *
- * @phpstan-type autoresp_config_update_params = array{
+ * @phpstan-type AutorespConfigUpdateParamsShape = array{
  *   profileID: string,
  *   countryCode: string,
  *   keywords: list<string>,
@@ -25,7 +25,7 @@ use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigUpdateParams\Op;
  */
 final class AutorespConfigUpdateParams implements BaseModel
 {
-    /** @use SdkModel<autoresp_config_update_params> */
+    /** @use SdkModel<AutorespConfigUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 

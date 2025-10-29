@@ -9,11 +9,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type mean_latency = array{amount?: float, unit?: string}
+ * @phpstan-type MeanLatencyShape = array{amount?: float, unit?: string}
  */
 final class MeanLatency implements BaseModel
 {
-    /** @use SdkModel<mean_latency> */
+    /** @use SdkModel<MeanLatencyShape> */
     use SdkModel;
 
     /**

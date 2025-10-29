@@ -13,7 +13,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type google_alias = array{
+ * @phpstan-type GoogleShape = array{
  *   enableSpeakerDiarization?: bool,
  *   hints?: list<string>,
  *   interimResults?: bool,
@@ -29,7 +29,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class Google implements BaseModel
 {
-    /** @use SdkModel<google_alias> */
+    /** @use SdkModel<GoogleShape> */
     use SdkModel;
 
     /**

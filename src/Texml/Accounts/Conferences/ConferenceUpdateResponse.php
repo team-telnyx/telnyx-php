@@ -13,7 +13,7 @@ use Telnyx\Texml\Accounts\Conferences\ConferenceUpdateResponse\ReasonConferenceE
 use Telnyx\Texml\Accounts\Conferences\ConferenceUpdateResponse\Status;
 
 /**
- * @phpstan-type conference_update_response = array{
+ * @phpstan-type ConferenceUpdateResponseShape = array{
  *   accountSid?: string,
  *   apiVersion?: string,
  *   callSidEndingConference?: string,
@@ -30,7 +30,7 @@ use Telnyx\Texml\Accounts\Conferences\ConferenceUpdateResponse\Status;
  */
 final class ConferenceUpdateResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<conference_update_response> */
+    /** @use SdkModel<ConferenceUpdateResponseShape> */
     use SdkModel;
 
     use SdkResponse;

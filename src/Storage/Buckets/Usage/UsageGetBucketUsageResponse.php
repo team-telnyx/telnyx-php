@@ -12,13 +12,13 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Storage\Buckets\Usage\UsageGetBucketUsageResponse\Data;
 
 /**
- * @phpstan-type usage_get_bucket_usage_response = array{
+ * @phpstan-type UsageGetBucketUsageResponseShape = array{
  *   data?: list<Data>, meta?: PaginationMetaSimple
  * }
  */
 final class UsageGetBucketUsageResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<usage_get_bucket_usage_response> */
+    /** @use SdkModel<UsageGetBucketUsageResponseShape> */
     use SdkModel;
 
     use SdkResponse;

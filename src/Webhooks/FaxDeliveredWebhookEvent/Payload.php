@@ -11,7 +11,7 @@ use Telnyx\Webhooks\FaxDeliveredWebhookEvent\Payload\Direction;
 use Telnyx\Webhooks\FaxDeliveredWebhookEvent\Payload\Status;
 
 /**
- * @phpstan-type payload_alias = array{
+ * @phpstan-type PayloadShape = array{
  *   callDurationSecs?: int,
  *   clientState?: string,
  *   connectionID?: string,
@@ -28,7 +28,7 @@ use Telnyx\Webhooks\FaxDeliveredWebhookEvent\Payload\Status;
  */
 final class Payload implements BaseModel
 {
-    /** @use SdkModel<payload_alias> */
+    /** @use SdkModel<PayloadShape> */
     use SdkModel;
 
     /**

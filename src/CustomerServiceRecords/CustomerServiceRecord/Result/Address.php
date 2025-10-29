@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * The address of the customer service record.
  *
- * @phpstan-type address_alias = array{
+ * @phpstan-type AddressShape = array{
  *   administrativeArea?: string,
  *   fullAddress?: string,
  *   locality?: string,
@@ -21,7 +21,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class Address implements BaseModel
 {
-    /** @use SdkModel<address_alias> */
+    /** @use SdkModel<AddressShape> */
     use SdkModel;
 
     /**

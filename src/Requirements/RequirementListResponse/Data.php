@@ -12,7 +12,7 @@ use Telnyx\Requirements\RequirementListResponse\Data\Action;
 use Telnyx\Requirements\RequirementListResponse\Data\PhoneNumberType;
 
 /**
- * @phpstan-type data_alias = array{
+ * @phpstan-type DataShape = array{
  *   id?: string,
  *   action?: value-of<Action>,
  *   countryCode?: string,
@@ -26,7 +26,7 @@ use Telnyx\Requirements\RequirementListResponse\Data\PhoneNumberType;
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**

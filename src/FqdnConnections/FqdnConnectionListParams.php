@@ -17,13 +17,13 @@ use Telnyx\FqdnConnections\FqdnConnectionListParams\Sort;
  *
  * @see Telnyx\FqdnConnections->list
  *
- * @phpstan-type fqdn_connection_list_params = array{
+ * @phpstan-type FqdnConnectionListParamsShape = array{
  *   filter?: Filter, page?: Page, sort?: Sort|value-of<Sort>
  * }
  */
 final class FqdnConnectionListParams implements BaseModel
 {
-    /** @use SdkModel<fqdn_connection_list_params> */
+    /** @use SdkModel<FqdnConnectionListParamsShape> */
     use SdkModel;
     use SdkParams;
 

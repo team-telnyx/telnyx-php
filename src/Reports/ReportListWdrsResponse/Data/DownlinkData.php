@@ -10,11 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Reports\ReportListWdrsResponse\Data\DownlinkData\Unit;
 
 /**
- * @phpstan-type downlink_data = array{amount?: float, unit?: value-of<Unit>}
+ * @phpstan-type DownlinkDataShape = array{amount?: float, unit?: value-of<Unit>}
  */
 final class DownlinkData implements BaseModel
 {
-    /** @use SdkModel<downlink_data> */
+    /** @use SdkModel<DownlinkDataShape> */
     use SdkModel;
 
     /**

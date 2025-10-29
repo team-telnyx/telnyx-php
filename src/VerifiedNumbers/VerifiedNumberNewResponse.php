@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type verified_number_new_response = array{
+ * @phpstan-type VerifiedNumberNewResponseShape = array{
  *   phoneNumber?: string, verificationMethod?: string
  * }
  */
 final class VerifiedNumberNewResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<verified_number_new_response> */
+    /** @use SdkModel<VerifiedNumberNewResponseShape> */
     use SdkModel;
 
     use SdkResponse;

@@ -13,13 +13,13 @@ use Telnyx\Storage\Buckets\Usage\PaginationMetaSimple;
 use Telnyx\Storage\StorageListMigrationSourceCoverageResponse\Data;
 
 /**
- * @phpstan-type storage_list_migration_source_coverage_response = array{
+ * @phpstan-type StorageListMigrationSourceCoverageResponseShape = array{
  *   data?: list<Data>, meta?: PaginationMetaSimple
  * }
  */
 final class StorageListMigrationSourceCoverageResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<storage_list_migration_source_coverage_response> */
+    /** @use SdkModel<StorageListMigrationSourceCoverageResponseShape> */
     use SdkModel;
 
     use SdkResponse;

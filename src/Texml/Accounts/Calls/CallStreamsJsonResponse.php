@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Texml\Accounts\Calls\CallStreamsJsonResponse\Status;
 
 /**
- * @phpstan-type call_streams_json_response = array{
+ * @phpstan-type CallStreamsJsonResponseShape = array{
  *   accountSid?: string,
  *   callSid?: string,
  *   dateUpdated?: \DateTimeInterface,
@@ -24,7 +24,7 @@ use Telnyx\Texml\Accounts\Calls\CallStreamsJsonResponse\Status;
  */
 final class CallStreamsJsonResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<call_streams_json_response> */
+    /** @use SdkModel<CallStreamsJsonResponseShape> */
     use SdkModel;
 
     use SdkResponse;

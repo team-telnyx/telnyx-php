@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Legacy V2 CDR usage report response.
  *
- * @phpstan-type cdr_usage_report_response_legacy = array{
+ * @phpstan-type CdrUsageReportResponseLegacyShape = array{
  *   id?: string,
  *   aggregationType?: int,
  *   connections?: list<int>,
@@ -28,7 +28,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class CdrUsageReportResponseLegacy implements BaseModel
 {
-    /** @use SdkModel<cdr_usage_report_response_legacy> */
+    /** @use SdkModel<CdrUsageReportResponseLegacyShape> */
     use SdkModel;
 
     /**

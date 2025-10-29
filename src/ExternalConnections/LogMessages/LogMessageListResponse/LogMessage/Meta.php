@@ -9,13 +9,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type meta_alias = array{
+ * @phpstan-type MetaShape = array{
  *   externalConnectionID?: string, telephoneNumber?: string, ticketID?: string
  * }
  */
 final class Meta implements BaseModel
 {
-    /** @use SdkModel<meta_alias> */
+    /** @use SdkModel<MetaShape> */
     use SdkModel;
 
     /**

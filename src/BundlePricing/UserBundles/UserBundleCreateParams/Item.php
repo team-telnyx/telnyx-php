@@ -9,11 +9,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type item_alias = array{billingBundleID: string, quantity: int}
+ * @phpstan-type ItemShape = array{billingBundleID: string, quantity: int}
  */
 final class Item implements BaseModel
 {
-    /** @use SdkModel<item_alias> */
+    /** @use SdkModel<ItemShape> */
     use SdkModel;
 
     /**

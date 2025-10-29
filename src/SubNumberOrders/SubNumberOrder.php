@@ -11,7 +11,7 @@ use Telnyx\SubNumberOrders\SubNumberOrder\PhoneNumberType;
 use Telnyx\SubNumberOrders\SubNumberOrder\Status;
 
 /**
- * @phpstan-type sub_number_order = array{
+ * @phpstan-type SubNumberOrderShape = array{
  *   id?: string,
  *   countryCode?: string,
  *   createdAt?: \DateTimeInterface,
@@ -30,7 +30,7 @@ use Telnyx\SubNumberOrders\SubNumberOrder\Status;
  */
 final class SubNumberOrder implements BaseModel
 {
-    /** @use SdkModel<sub_number_order> */
+    /** @use SdkModel<SubNumberOrderShape> */
     use SdkModel;
 
     #[Api(optional: true)]

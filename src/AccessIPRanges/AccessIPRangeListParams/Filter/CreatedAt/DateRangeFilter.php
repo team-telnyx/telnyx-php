@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Date range filtering operations.
  *
- * @phpstan-type date_range_filter = array{
+ * @phpstan-type DateRangeFilterShape = array{
  *   gt?: \DateTimeInterface,
  *   gte?: \DateTimeInterface,
  *   lt?: \DateTimeInterface,
@@ -20,7 +20,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class DateRangeFilter implements BaseModel
 {
-    /** @use SdkModel<date_range_filter> */
+    /** @use SdkModel<DateRangeFilterShape> */
     use SdkModel;
 
     /**

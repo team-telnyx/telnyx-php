@@ -11,13 +11,13 @@ use Telnyx\Rooms\Sessions\Actions\ActionsParticipantsRequest\Participants;
 use Telnyx\Rooms\Sessions\Actions\ActionsParticipantsRequest\Participants\UnionMember0;
 
 /**
- * @phpstan-type actions_participants_request = array{
+ * @phpstan-type ActionsParticipantsRequestShape = array{
  *   exclude?: list<string>, participants?: list<string>|value-of<UnionMember0>
  * }
  */
 final class ActionsParticipantsRequest implements BaseModel
 {
-    /** @use SdkModel<actions_participants_request> */
+    /** @use SdkModel<ActionsParticipantsRequestShape> */
     use SdkModel;
 
     /**

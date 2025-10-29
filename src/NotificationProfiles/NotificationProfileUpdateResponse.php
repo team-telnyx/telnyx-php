@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type notification_profile_update_response = array{
+ * @phpstan-type NotificationProfileUpdateResponseShape = array{
  *   data?: NotificationProfile
  * }
  */
 final class NotificationProfileUpdateResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<notification_profile_update_response> */
+    /** @use SdkModel<NotificationProfileUpdateResponseShape> */
     use SdkModel;
 
     use SdkResponse;

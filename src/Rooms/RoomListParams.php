@@ -16,13 +16,13 @@ use Telnyx\Rooms\RoomListParams\Page;
  *
  * @see Telnyx\Rooms->list
  *
- * @phpstan-type room_list_params = array{
+ * @phpstan-type RoomListParamsShape = array{
  *   filter?: Filter, includeSessions?: bool, page?: Page
  * }
  */
 final class RoomListParams implements BaseModel
 {
-    /** @use SdkModel<room_list_params> */
+    /** @use SdkModel<RoomListParamsShape> */
     use SdkModel;
     use SdkParams;
 

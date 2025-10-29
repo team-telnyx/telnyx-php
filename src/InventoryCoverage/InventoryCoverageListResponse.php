@@ -13,13 +13,13 @@ use Telnyx\InventoryCoverage\InventoryCoverageListResponse\Data;
 use Telnyx\InventoryCoverage\InventoryCoverageListResponse\Meta;
 
 /**
- * @phpstan-type inventory_coverage_list_response = array{
+ * @phpstan-type InventoryCoverageListResponseShape = array{
  *   data?: list<Data>, meta?: Meta
  * }
  */
 final class InventoryCoverageListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<inventory_coverage_list_response> */
+    /** @use SdkModel<InventoryCoverageListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

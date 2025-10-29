@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Messages->sendGroupMms
  *
- * @phpstan-type message_send_group_mms_params = array{
+ * @phpstan-type MessageSendGroupMmsParamsShape = array{
  *   from: string,
  *   to: list<string>,
  *   mediaURLs?: list<string>,
@@ -27,7 +27,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class MessageSendGroupMmsParams implements BaseModel
 {
-    /** @use SdkModel<message_send_group_mms_params> */
+    /** @use SdkModel<MessageSendGroupMmsParamsShape> */
     use SdkModel;
     use SdkParams;
 

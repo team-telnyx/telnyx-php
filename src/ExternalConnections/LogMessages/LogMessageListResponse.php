@@ -13,13 +13,13 @@ use Telnyx\ExternalConnections\ExternalVoiceIntegrationsPaginationMeta;
 use Telnyx\ExternalConnections\LogMessages\LogMessageListResponse\LogMessage;
 
 /**
- * @phpstan-type log_message_list_response = array{
+ * @phpstan-type LogMessageListResponseShape = array{
  *   logMessages?: list<LogMessage>, meta?: ExternalVoiceIntegrationsPaginationMeta
  * }
  */
 final class LogMessageListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<log_message_list_response> */
+    /** @use SdkModel<LogMessageListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

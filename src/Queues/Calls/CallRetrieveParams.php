@@ -14,11 +14,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Queues\Calls->retrieve
  *
- * @phpstan-type call_retrieve_params = array{queueName: string}
+ * @phpstan-type CallRetrieveParamsShape = array{queueName: string}
  */
 final class CallRetrieveParams implements BaseModel
 {
-    /** @use SdkModel<call_retrieve_params> */
+    /** @use SdkModel<CallRetrieveParamsShape> */
     use SdkModel;
     use SdkParams;
 

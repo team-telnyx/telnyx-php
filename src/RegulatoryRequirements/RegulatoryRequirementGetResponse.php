@@ -12,11 +12,11 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\RegulatoryRequirements\RegulatoryRequirementGetResponse\Data;
 
 /**
- * @phpstan-type regulatory_requirement_get_response = array{data?: list<Data>}
+ * @phpstan-type RegulatoryRequirementGetResponseShape = array{data?: list<Data>}
  */
 final class RegulatoryRequirementGetResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<regulatory_requirement_get_response> */
+    /** @use SdkModel<RegulatoryRequirementGetResponseShape> */
     use SdkModel;
 
     use SdkResponse;

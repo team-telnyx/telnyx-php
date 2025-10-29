@@ -15,13 +15,13 @@ use Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateParams\Para
  *
  * @see Telnyx\PortingOrders\ActionRequirements->initiate
  *
- * @phpstan-type action_requirement_initiate_params = array{
+ * @phpstan-type ActionRequirementInitiateParamsShape = array{
  *   portingOrderID: string, params: Params
  * }
  */
 final class ActionRequirementInitiateParams implements BaseModel
 {
-    /** @use SdkModel<action_requirement_initiate_params> */
+    /** @use SdkModel<ActionRequirementInitiateParamsShape> */
     use SdkModel;
     use SdkParams;
 

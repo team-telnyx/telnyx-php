@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type campaign_submit_appeal_response = array{
+ * @phpstan-type CampaignSubmitAppealResponseShape = array{
  *   appealedAt?: \DateTimeInterface
  * }
  */
 final class CampaignSubmitAppealResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<campaign_submit_appeal_response> */
+    /** @use SdkModel<CampaignSubmitAppealResponseShape> */
     use SdkModel;
 
     use SdkResponse;

@@ -14,7 +14,7 @@ use Telnyx\Documents\DocumentListParams\Filter\Filename;
 /**
  * Consolidated filter parameter for documents (deepObject style). Originally: filter[filename][contains], filter[customer_reference][eq], filter[customer_reference][in][], filter[created_at][gt], filter[created_at][lt].
  *
- * @phpstan-type filter_alias = array{
+ * @phpstan-type FilterShape = array{
  *   createdAt?: CreatedAt,
  *   customerReference?: CustomerReference,
  *   filename?: Filename,
@@ -22,7 +22,7 @@ use Telnyx\Documents\DocumentListParams\Filter\Filename;
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     #[Api('created_at', optional: true)]

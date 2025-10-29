@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * A Collection of Notification Channels.
  *
- * @phpstan-type notification_profile = array{
+ * @phpstan-type NotificationProfileShape = array{
  *   id?: string,
  *   createdAt?: \DateTimeInterface,
  *   name?: string,
@@ -20,7 +20,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class NotificationProfile implements BaseModel
 {
-    /** @use SdkModel<notification_profile> */
+    /** @use SdkModel<NotificationProfileShape> */
     use SdkModel;
 
     /**

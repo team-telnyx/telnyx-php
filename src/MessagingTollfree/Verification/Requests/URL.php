@@ -9,11 +9,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type url_alias = array{url: string}
+ * @phpstan-type URLShape = array{url: string}
  */
 final class URL implements BaseModel
 {
-    /** @use SdkModel<url_alias> */
+    /** @use SdkModel<URLShape> */
     use SdkModel;
 
     #[Api]

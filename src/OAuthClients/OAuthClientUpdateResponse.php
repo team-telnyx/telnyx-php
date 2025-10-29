@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type oauth_client_update_response = array{data?: OAuthClient}
+ * @phpstan-type OAuthClientUpdateResponseShape = array{data?: OAuthClient}
  */
 final class OAuthClientUpdateResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<oauth_client_update_response> */
+    /** @use SdkModel<OAuthClientUpdateResponseShape> */
     use SdkModel;
 
     use SdkResponse;

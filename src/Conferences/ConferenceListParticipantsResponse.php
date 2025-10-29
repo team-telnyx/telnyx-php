@@ -13,13 +13,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type conference_list_participants_response = array{
+ * @phpstan-type ConferenceListParticipantsResponseShape = array{
  *   data?: list<Data>, meta?: PaginationMeta
  * }
  */
 final class ConferenceListParticipantsResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<conference_list_participants_response> */
+    /** @use SdkModel<ConferenceListParticipantsResponseShape> */
     use SdkModel;
 
     use SdkResponse;

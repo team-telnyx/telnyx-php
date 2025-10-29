@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SimCardGroups\SimCardGroup\DataLimit;
 
 /**
- * @phpstan-type sim_card_group = array{
+ * @phpstan-type SimCardGroupShape = array{
  *   id?: string,
  *   consumedData?: ConsumedData,
  *   createdAt?: string,
@@ -25,7 +25,7 @@ use Telnyx\SimCardGroups\SimCardGroup\DataLimit;
  */
 final class SimCardGroup implements BaseModel
 {
-    /** @use SdkModel<sim_card_group> */
+    /** @use SdkModel<SimCardGroupShape> */
     use SdkModel;
 
     /**

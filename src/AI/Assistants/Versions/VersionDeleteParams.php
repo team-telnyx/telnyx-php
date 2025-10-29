@@ -14,11 +14,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\AI\Assistants\Versions->delete
  *
- * @phpstan-type version_delete_params = array{assistantID: string}
+ * @phpstan-type VersionDeleteParamsShape = array{assistantID: string}
  */
 final class VersionDeleteParams implements BaseModel
 {
-    /** @use SdkModel<version_delete_params> */
+    /** @use SdkModel<VersionDeleteParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -9,13 +9,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type issued_to = array{
+ * @phpstan-type IssuedToShape = array{
  *   commonName?: string, organization?: string, organizationUnit?: string
  * }
  */
 final class IssuedTo implements BaseModel
 {
-    /** @use SdkModel<issued_to> */
+    /** @use SdkModel<IssuedToShape> */
     use SdkModel;
 
     /**

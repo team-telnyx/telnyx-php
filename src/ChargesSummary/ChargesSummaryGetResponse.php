@@ -12,11 +12,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type charges_summary_get_response = array{data: Data}
+ * @phpstan-type ChargesSummaryGetResponseShape = array{data: Data}
  */
 final class ChargesSummaryGetResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<charges_summary_get_response> */
+    /** @use SdkModel<ChargesSummaryGetResponseShape> */
     use SdkModel;
 
     use SdkResponse;

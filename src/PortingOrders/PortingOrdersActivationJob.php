@@ -12,7 +12,7 @@ use Telnyx\PortingOrders\PortingOrdersActivationJob\ActivationWindow;
 use Telnyx\PortingOrders\PortingOrdersActivationJob\Status;
 
 /**
- * @phpstan-type porting_orders_activation_job = array{
+ * @phpstan-type PortingOrdersActivationJobShape = array{
  *   id?: string,
  *   activateAt?: \DateTimeInterface,
  *   activationType?: value-of<ActivationType>,
@@ -25,7 +25,7 @@ use Telnyx\PortingOrders\PortingOrdersActivationJob\Status;
  */
 final class PortingOrdersActivationJob implements BaseModel
 {
-    /** @use SdkModel<porting_orders_activation_job> */
+    /** @use SdkModel<PortingOrdersActivationJobShape> */
     use SdkModel;
 
     /**

@@ -15,13 +15,13 @@ use Telnyx\GlobalIPAssignmentsUsage\GlobalIPAssignmentsUsageRetrieveParams\Filte
  *
  * @see Telnyx\GlobalIPAssignmentsUsage->retrieve
  *
- * @phpstan-type global_ip_assignments_usage_retrieve_params = array{
+ * @phpstan-type GlobalIPAssignmentsUsageRetrieveParamsShape = array{
  *   filter?: Filter
  * }
  */
 final class GlobalIPAssignmentsUsageRetrieveParams implements BaseModel
 {
-    /** @use SdkModel<global_ip_assignments_usage_retrieve_params> */
+    /** @use SdkModel<GlobalIPAssignmentsUsageRetrieveParamsShape> */
     use SdkModel;
     use SdkParams;
 

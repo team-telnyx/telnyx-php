@@ -26,7 +26,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Calls\Actions->startPlayback
  *
- * @phpstan-type action_start_playback_params = array{
+ * @phpstan-type ActionStartPlaybackParamsShape = array{
  *   audioType?: AudioType|value-of<AudioType>,
  *   audioURL?: string,
  *   cacheAudio?: bool,
@@ -42,7 +42,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class ActionStartPlaybackParams implements BaseModel
 {
-    /** @use SdkModel<action_start_playback_params> */
+    /** @use SdkModel<ActionStartPlaybackParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -13,13 +13,13 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Networks\DefaultGateway\DefaultGatewayNewResponse\Data;
 
 /**
- * @phpstan-type default_gateway_new_response = array{
+ * @phpstan-type DefaultGatewayNewResponseShape = array{
  *   data?: list<Data>, meta?: PaginationMeta
  * }
  */
 final class DefaultGatewayNewResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<default_gateway_new_response> */
+    /** @use SdkModel<DefaultGatewayNewResponseShape> */
     use SdkModel;
 
     use SdkResponse;

@@ -12,11 +12,11 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Rooms\Actions\ActionGenerateJoinClientTokenResponse\Data;
 
 /**
- * @phpstan-type action_generate_join_client_token_response = array{data?: Data}
+ * @phpstan-type ActionGenerateJoinClientTokenResponseShape = array{data?: Data}
  */
 final class ActionGenerateJoinClientTokenResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<action_generate_join_client_token_response> */
+    /** @use SdkModel<ActionGenerateJoinClientTokenResponseShape> */
     use SdkModel;
 
     use SdkResponse;

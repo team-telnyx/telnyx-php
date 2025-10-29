@@ -16,11 +16,11 @@ use Telnyx\OtaUpdates\OtaUpdateListParams\Page;
  *
  * @see Telnyx\OtaUpdates->list
  *
- * @phpstan-type ota_update_list_params = array{filter?: Filter, page?: Page}
+ * @phpstan-type OtaUpdateListParamsShape = array{filter?: Filter, page?: Page}
  */
 final class OtaUpdateListParams implements BaseModel
 {
-    /** @use SdkModel<ota_update_list_params> */
+    /** @use SdkModel<OtaUpdateListParamsShape> */
     use SdkModel;
     use SdkParams;
 

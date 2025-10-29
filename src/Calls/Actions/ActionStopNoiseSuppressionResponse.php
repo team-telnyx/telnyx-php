@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type action_stop_noise_suppression_response = array{
+ * @phpstan-type ActionStopNoiseSuppressionResponseShape = array{
  *   data?: CallControlCommandResult
  * }
  */
 final class ActionStopNoiseSuppressionResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<action_stop_noise_suppression_response> */
+    /** @use SdkModel<ActionStopNoiseSuppressionResponseShape> */
     use SdkModel;
 
     use SdkResponse;

@@ -12,13 +12,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type room_composition_list_response = array{
+ * @phpstan-type RoomCompositionListResponseShape = array{
  *   data?: list<RoomComposition>, meta?: PaginationMeta
  * }
  */
 final class RoomCompositionListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<room_composition_list_response> */
+    /** @use SdkModel<RoomCompositionListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

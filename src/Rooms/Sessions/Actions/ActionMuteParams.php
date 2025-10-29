@@ -16,14 +16,14 @@ use Telnyx\Rooms\Sessions\Actions\ActionMuteParams\Participants\UnionMember0;
  *
  * @see Telnyx\Rooms\Sessions\Actions->mute
  *
- * @phpstan-type action_mute_params = array{
+ * @phpstan-type ActionMuteParamsShape = array{
  *   exclude?: list<string>,
  *   participants?: UnionMember0|list<string>|value-of<UnionMember0>,
  * }
  */
 final class ActionMuteParams implements BaseModel
 {
-    /** @use SdkModel<action_mute_params> */
+    /** @use SdkModel<ActionMuteParamsShape> */
     use SdkModel;
     use SdkParams;
 

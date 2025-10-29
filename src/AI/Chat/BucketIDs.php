@@ -9,11 +9,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type bucket_ids = array{bucketIDs: list<string>, maxNumResults?: int}
+ * @phpstan-type BucketIDsShape = array{
+ *   bucketIDs: list<string>, maxNumResults?: int
+ * }
  */
 final class BucketIDs implements BaseModel
 {
-    /** @use SdkModel<bucket_ids> */
+    /** @use SdkModel<BucketIDsShape> */
     use SdkModel;
 
     /** @var list<string> $bucketIDs */

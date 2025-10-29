@@ -16,13 +16,13 @@ use Telnyx\NotificationSettings\NotificationSettingListParams\Page;
  *
  * @see Telnyx\NotificationSettings->list
  *
- * @phpstan-type notification_setting_list_params = array{
+ * @phpstan-type NotificationSettingListParamsShape = array{
  *   filter?: Filter, page?: Page
  * }
  */
 final class NotificationSettingListParams implements BaseModel
 {
-    /** @use SdkModel<notification_setting_list_params> */
+    /** @use SdkModel<NotificationSettingListParamsShape> */
     use SdkModel;
     use SdkParams;
 

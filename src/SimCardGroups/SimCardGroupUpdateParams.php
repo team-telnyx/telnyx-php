@@ -15,13 +15,13 @@ use Telnyx\SimCardGroups\SimCardGroupUpdateParams\DataLimit;
  *
  * @see Telnyx\SimCardGroups->update
  *
- * @phpstan-type sim_card_group_update_params = array{
+ * @phpstan-type SimCardGroupUpdateParamsShape = array{
  *   dataLimit?: DataLimit, name?: string
  * }
  */
 final class SimCardGroupUpdateParams implements BaseModel
 {
-    /** @use SdkModel<sim_card_group_update_params> */
+    /** @use SdkModel<SimCardGroupUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 

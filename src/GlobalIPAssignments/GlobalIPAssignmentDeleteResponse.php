@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type global_ip_assignment_delete_response = array{
+ * @phpstan-type GlobalIPAssignmentDeleteResponseShape = array{
  *   data?: GlobalIPAssignment
  * }
  */
 final class GlobalIPAssignmentDeleteResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<global_ip_assignment_delete_response> */
+    /** @use SdkModel<GlobalIPAssignmentDeleteResponseShape> */
     use SdkModel;
 
     use SdkResponse;

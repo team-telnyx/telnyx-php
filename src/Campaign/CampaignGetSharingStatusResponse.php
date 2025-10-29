@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type campaign_get_sharing_status_response = array{
+ * @phpstan-type CampaignGetSharingStatusResponseShape = array{
  *   sharedByMe?: CampaignSharingStatus, sharedWithMe?: CampaignSharingStatus
  * }
  */
 final class CampaignGetSharingStatusResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<campaign_get_sharing_status_response> */
+    /** @use SdkModel<CampaignGetSharingStatusResponseShape> */
     use SdkModel;
 
     use SdkResponse;

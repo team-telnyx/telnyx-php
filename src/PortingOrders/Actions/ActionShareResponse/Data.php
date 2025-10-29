@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\Actions\ActionShareResponse\Data\Permission;
 
 /**
- * @phpstan-type data_alias = array{
+ * @phpstan-type DataShape = array{
  *   id?: string,
  *   token?: string,
  *   createdAt?: \DateTimeInterface,
@@ -23,7 +23,7 @@ use Telnyx\PortingOrders\Actions\ActionShareResponse\Data\Permission;
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**

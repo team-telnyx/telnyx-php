@@ -12,13 +12,13 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Verifications\Verification;
 
 /**
- * @phpstan-type by_phone_number_list_response = array{
+ * @phpstan-type ByPhoneNumberListResponseShape = array{
  *   data: list<Verification>, meta: VerifyMeta
  * }
  */
 final class ByPhoneNumberListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<by_phone_number_list_response> */
+    /** @use SdkModel<ByPhoneNumberListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

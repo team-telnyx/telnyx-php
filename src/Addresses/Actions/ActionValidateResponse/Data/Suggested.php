@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Provides normalized address when available.
  *
- * @phpstan-type suggested_alias = array{
+ * @phpstan-type SuggestedShape = array{
  *   administrativeArea?: string,
  *   countryCode?: string,
  *   extendedAddress?: string,
@@ -22,7 +22,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class Suggested implements BaseModel
 {
-    /** @use SdkModel<suggested_alias> */
+    /** @use SdkModel<SuggestedShape> */
     use SdkModel;
 
     /**

@@ -13,7 +13,7 @@ use Telnyx\RoomRecordings\RoomRecordingDeleteBulkParams\Filter\DateStartedAt;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[date_ended_at][eq], filter[date_ended_at][gte], filter[date_ended_at][lte], filter[date_started_at][eq], filter[date_started_at][gte], filter[date_started_at][lte], filter[room_id], filter[participant_id], filter[session_id], filter[status], filter[type], filter[duration_secs].
  *
- * @phpstan-type filter_alias = array{
+ * @phpstan-type FilterShape = array{
  *   dateEndedAt?: DateEndedAt,
  *   dateStartedAt?: DateStartedAt,
  *   durationSecs?: int,
@@ -26,7 +26,7 @@ use Telnyx\RoomRecordings\RoomRecordingDeleteBulkParams\Filter\DateStartedAt;
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     #[Api('date_ended_at', optional: true)]

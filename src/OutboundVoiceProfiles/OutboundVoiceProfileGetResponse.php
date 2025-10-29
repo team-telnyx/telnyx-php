@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type outbound_voice_profile_get_response = array{
+ * @phpstan-type OutboundVoiceProfileGetResponseShape = array{
  *   data?: OutboundVoiceProfile
  * }
  */
 final class OutboundVoiceProfileGetResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<outbound_voice_profile_get_response> */
+    /** @use SdkModel<OutboundVoiceProfileGetResponseShape> */
     use SdkModel;
 
     use SdkResponse;

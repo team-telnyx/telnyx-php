@@ -12,7 +12,7 @@ use Telnyx\IPConnections\IPConnectionListParams\Filter\ConnectionName;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[connection_name], filter[fqdn], filter[outbound_voice_profile_id], filter[outbound.outbound_voice_profile_id].
  *
- * @phpstan-type filter_alias = array{
+ * @phpstan-type FilterShape = array{
  *   connectionName?: ConnectionName,
  *   fqdn?: string,
  *   outboundVoiceProfileID?: string,
@@ -20,7 +20,7 @@ use Telnyx\IPConnections\IPConnectionListParams\Filter\ConnectionName;
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**

@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\TelephonyCredentials->create
  *
- * @phpstan-type telephony_credential_create_params = array{
+ * @phpstan-type TelephonyCredentialCreateParamsShape = array{
  *   connectionID: string, expiresAt?: string, name?: string, tag?: string
  * }
  */
 final class TelephonyCredentialCreateParams implements BaseModel
 {
-    /** @use SdkModel<telephony_credential_create_params> */
+    /** @use SdkModel<TelephonyCredentialCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

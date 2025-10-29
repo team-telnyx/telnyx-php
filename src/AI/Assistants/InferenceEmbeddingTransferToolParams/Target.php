@@ -9,11 +9,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type target_alias = array{name?: string, to?: string}
+ * @phpstan-type TargetShape = array{name?: string, to?: string}
  */
 final class Target implements BaseModel
 {
-    /** @use SdkModel<target_alias> */
+    /** @use SdkModel<TargetShape> */
     use SdkModel;
 
     /**

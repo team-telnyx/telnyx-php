@@ -14,11 +14,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\AI\Embeddings->url
  *
- * @phpstan-type embedding_url_params = array{bucketName: string, url: string}
+ * @phpstan-type EmbeddingURLParamsShape = array{bucketName: string, url: string}
  */
 final class EmbeddingURLParams implements BaseModel
 {
-    /** @use SdkModel<embedding_url_params> */
+    /** @use SdkModel<EmbeddingURLParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -14,7 +14,7 @@ use Telnyx\FqdnConnections\InboundFqdn\SipRegion;
 use Telnyx\FqdnConnections\InboundFqdn\SipSubdomainReceiveSettings;
 
 /**
- * @phpstan-type inbound_fqdn = array{
+ * @phpstan-type InboundFqdnShape = array{
  *   aniNumberFormat?: value-of<AniNumberFormat>,
  *   channelLimit?: int|null,
  *   codecs?: list<string>,
@@ -37,7 +37,7 @@ use Telnyx\FqdnConnections\InboundFqdn\SipSubdomainReceiveSettings;
  */
 final class InboundFqdn implements BaseModel
 {
-    /** @use SdkModel<inbound_fqdn> */
+    /** @use SdkModel<InboundFqdnShape> */
     use SdkModel;
 
     /**

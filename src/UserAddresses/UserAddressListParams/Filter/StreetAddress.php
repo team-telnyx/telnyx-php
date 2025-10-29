@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Filter user addresses via street address. Supports partial matching (contains). Matching is not case-sensitive.
  *
- * @phpstan-type street_address = array{contains?: string}
+ * @phpstan-type StreetAddressShape = array{contains?: string}
  */
 final class StreetAddress implements BaseModel
 {
-    /** @use SdkModel<street_address> */
+    /** @use SdkModel<StreetAddressShape> */
     use SdkModel;
 
     /**

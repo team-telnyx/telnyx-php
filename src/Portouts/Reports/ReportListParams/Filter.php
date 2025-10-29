@@ -13,13 +13,13 @@ use Telnyx\Portouts\Reports\ReportListParams\Filter\Status;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[report_type], filter[status].
  *
- * @phpstan-type filter_alias = array{
+ * @phpstan-type FilterShape = array{
  *   reportType?: value-of<ReportType>, status?: value-of<Status>
  * }
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**

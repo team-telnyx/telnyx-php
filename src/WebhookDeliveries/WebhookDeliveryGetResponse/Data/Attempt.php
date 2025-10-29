@@ -13,7 +13,7 @@ use Telnyx\WebhookDeliveries\WebhookDeliveryGetResponse\Data\Attempt\Status;
 /**
  * Webhook delivery attempt details.
  *
- * @phpstan-type attempt_alias = array{
+ * @phpstan-type AttemptShape = array{
  *   errors?: list<int>,
  *   finishedAt?: \DateTimeInterface,
  *   http?: HTTP,
@@ -23,7 +23,7 @@ use Telnyx\WebhookDeliveries\WebhookDeliveryGetResponse\Data\Attempt\Status;
  */
 final class Attempt implements BaseModel
 {
-    /** @use SdkModel<attempt_alias> */
+    /** @use SdkModel<AttemptShape> */
     use SdkModel;
 
     /**

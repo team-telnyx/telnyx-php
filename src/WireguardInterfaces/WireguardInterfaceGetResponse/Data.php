@@ -11,7 +11,7 @@ use Telnyx\Networks\InterfaceStatus;
 use Telnyx\WireguardInterfaces\WireguardInterfaceGetResponse\Data\Region;
 
 /**
- * @phpstan-type data_alias = array{
+ * @phpstan-type DataShape = array{
  *   id?: string,
  *   createdAt?: string,
  *   recordType?: string,
@@ -28,7 +28,7 @@ use Telnyx\WireguardInterfaces\WireguardInterfaceGetResponse\Data\Region;
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**

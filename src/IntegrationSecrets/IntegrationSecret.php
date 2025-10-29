@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type integration_secret = array{
+ * @phpstan-type IntegrationSecretShape = array{
  *   id: string,
  *   createdAt: \DateTimeInterface,
  *   identifier: string,
@@ -19,7 +19,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class IntegrationSecret implements BaseModel
 {
-    /** @use SdkModel<integration_secret> */
+    /** @use SdkModel<IntegrationSecretShape> */
     use SdkModel;
 
     #[Api]

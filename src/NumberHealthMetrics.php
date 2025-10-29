@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * High level health metrics about the number and it's messaging sending patterns.
  *
- * @phpstan-type number_health_metrics = array{
+ * @phpstan-type NumberHealthMetricsShape = array{
  *   inboundOutboundRatio: float,
  *   messageCount: int,
  *   spamRatio: float,
@@ -20,7 +20,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class NumberHealthMetrics implements BaseModel
 {
-    /** @use SdkModel<number_health_metrics> */
+    /** @use SdkModel<NumberHealthMetricsShape> */
     use SdkModel;
 
     /**

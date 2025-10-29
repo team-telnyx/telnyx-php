@@ -24,7 +24,7 @@ use Telnyx\Faxes\FaxCreateParams\Quality;
  *
  * @see Telnyx\Faxes->create
  *
- * @phpstan-type fax_create_params = array{
+ * @phpstan-type FaxCreateParamsShape = array{
  *   connectionID: string,
  *   from: string,
  *   to: string,
@@ -43,7 +43,7 @@ use Telnyx\Faxes\FaxCreateParams\Quality;
  */
 final class FaxCreateParams implements BaseModel
 {
-    /** @use SdkModel<fax_create_params> */
+    /** @use SdkModel<FaxCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type api_error = array{
+ * @phpstan-type APIErrorShape = array{
  *   code: string,
  *   title: string,
  *   detail?: string,
@@ -20,7 +20,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class APIError implements BaseModel
 {
-    /** @use SdkModel<api_error> */
+    /** @use SdkModel<APIErrorShape> */
     use SdkModel;
 
     #[Api]

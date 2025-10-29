@@ -39,7 +39,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Calls\Actions->transfer
  *
- * @phpstan-type action_transfer_params = array{
+ * @phpstan-type ActionTransferParamsShape = array{
  *   to: string,
  *   answeringMachineDetection?: AnsweringMachineDetection|value-of<AnsweringMachineDetection>,
  *   answeringMachineDetectionConfig?: AnsweringMachineDetectionConfig,
@@ -77,7 +77,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class ActionTransferParams implements BaseModel
 {
-    /** @use SdkModel<action_transfer_params> */
+    /** @use SdkModel<ActionTransferParamsShape> */
     use SdkModel;
     use SdkParams;
 

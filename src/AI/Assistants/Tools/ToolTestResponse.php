@@ -14,11 +14,11 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 /**
  * Response model for webhook tool test results.
  *
- * @phpstan-type tool_test_response = array{data: Data}
+ * @phpstan-type ToolTestResponseShape = array{data: Data}
  */
 final class ToolTestResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<tool_test_response> */
+    /** @use SdkModel<ToolTestResponseShape> */
     use SdkModel;
 
     use SdkResponse;

@@ -9,13 +9,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type location_alias = array{
+ * @phpstan-type LocationShape = array{
  *   id?: string, additionalInfo?: string, description?: string, isDefault?: bool
  * }
  */
 final class Location implements BaseModel
 {
-    /** @use SdkModel<location_alias> */
+    /** @use SdkModel<LocationShape> */
     use SdkModel;
 
     /**

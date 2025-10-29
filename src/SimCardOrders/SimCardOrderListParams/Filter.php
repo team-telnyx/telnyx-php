@@ -13,7 +13,7 @@ use Telnyx\SimCardOrders\SimCardOrderListParams\Filter\Cost;
 /**
  * Consolidated filter parameter for SIM card orders (deepObject style). Originally: filter[created_at], filter[updated_at], filter[quantity], filter[cost.amount], filter[cost.currency], filter[address.id], filter[address.street_address], filter[address.extended_address], filter[address.locality], filter[address.administrative_area], filter[address.country_code], filter[address.postal_code].
  *
- * @phpstan-type filter_alias = array{
+ * @phpstan-type FilterShape = array{
  *   address?: Address,
  *   cost?: Cost,
  *   createdAt?: \DateTimeInterface,
@@ -23,7 +23,7 @@ use Telnyx\SimCardOrders\SimCardOrderListParams\Filter\Cost;
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     #[Api(optional: true)]

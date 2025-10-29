@@ -12,13 +12,13 @@ use Telnyx\FaxApplications\FaxApplicationListParams\Filter\ApplicationName;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[application_name][contains], filter[outbound_voice_profile_id].
  *
- * @phpstan-type filter_alias = array{
+ * @phpstan-type FilterShape = array{
  *   applicationName?: ApplicationName, outboundVoiceProfileID?: string
  * }
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**

@@ -15,11 +15,11 @@ use Telnyx\GlobalIPUsage\GlobalIPUsageRetrieveParams\Filter;
  *
  * @see Telnyx\GlobalIPUsage->retrieve
  *
- * @phpstan-type global_ip_usage_retrieve_params = array{filter?: Filter}
+ * @phpstan-type GlobalIPUsageRetrieveParamsShape = array{filter?: Filter}
  */
 final class GlobalIPUsageRetrieveParams implements BaseModel
 {
-    /** @use SdkModel<global_ip_usage_retrieve_params> */
+    /** @use SdkModel<GlobalIPUsageRetrieveParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\PrivateWirelessGateways->create
  *
- * @phpstan-type private_wireless_gateway_create_params = array{
+ * @phpstan-type PrivateWirelessGatewayCreateParamsShape = array{
  *   name: string, networkID: string, regionCode?: string
  * }
  */
 final class PrivateWirelessGatewayCreateParams implements BaseModel
 {
-    /** @use SdkModel<private_wireless_gateway_create_params> */
+    /** @use SdkModel<PrivateWirelessGatewayCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

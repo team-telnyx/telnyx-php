@@ -12,11 +12,11 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Storage\Buckets\Usage\UsageGetAPIUsageResponse\Data;
 
 /**
- * @phpstan-type usage_get_api_usage_response = array{data?: list<Data>}
+ * @phpstan-type UsageGetAPIUsageResponseShape = array{data?: list<Data>}
  */
 final class UsageGetAPIUsageResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<usage_get_api_usage_response> */
+    /** @use SdkModel<UsageGetAPIUsageResponseShape> */
     use SdkModel;
 
     use SdkResponse;

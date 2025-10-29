@@ -12,11 +12,11 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\OAuth\OAuthGetJwksResponse\Key;
 
 /**
- * @phpstan-type oauth_get_jwks_response = array{keys?: list<Key>}
+ * @phpstan-type OAuthGetJwksResponseShape = array{keys?: list<Key>}
  */
 final class OAuthGetJwksResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<oauth_get_jwks_response> */
+    /** @use SdkModel<OAuthGetJwksResponseShape> */
     use SdkModel;
 
     use SdkResponse;

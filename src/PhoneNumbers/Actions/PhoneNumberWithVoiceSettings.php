@@ -16,7 +16,7 @@ use Telnyx\PhoneNumbers\Voice\CnamListing;
 use Telnyx\PhoneNumbers\Voice\MediaFeatures;
 
 /**
- * @phpstan-type phone_number_with_voice_settings = array{
+ * @phpstan-type PhoneNumberWithVoiceSettingsShape = array{
  *   id?: string,
  *   callForwarding?: CallForwarding,
  *   callRecording?: CallRecording,
@@ -35,7 +35,7 @@ use Telnyx\PhoneNumbers\Voice\MediaFeatures;
  */
 final class PhoneNumberWithVoiceSettings implements BaseModel
 {
-    /** @use SdkModel<phone_number_with_voice_settings> */
+    /** @use SdkModel<PhoneNumberWithVoiceSettingsShape> */
     use SdkModel;
 
     /**

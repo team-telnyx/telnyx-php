@@ -14,13 +14,13 @@ use Telnyx\Porting\Events\EventGetResponse\Data\Payload\WebhookPortingOrderSplit
 /**
  * The webhook payload for the porting_order.split event.
  *
- * @phpstan-type webhook_porting_order_split_payload = array{
+ * @phpstan-type WebhookPortingOrderSplitPayloadShape = array{
  *   from?: From, portingPhoneNumbers?: list<PortingPhoneNumber>, to?: To
  * }
  */
 final class WebhookPortingOrderSplitPayload implements BaseModel
 {
-    /** @use SdkModel<webhook_porting_order_split_payload> */
+    /** @use SdkModel<WebhookPortingOrderSplitPayloadShape> */
     use SdkModel;
 
     /**

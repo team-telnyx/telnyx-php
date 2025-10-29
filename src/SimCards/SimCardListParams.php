@@ -17,7 +17,7 @@ use Telnyx\SimCards\SimCardListParams\Sort;
  *
  * @see Telnyx\SimCards->list
  *
- * @phpstan-type sim_card_list_params = array{
+ * @phpstan-type SimCardListParamsShape = array{
  *   filter?: Filter,
  *   filterSimCardGroupID?: string,
  *   includeSimCardGroup?: bool,
@@ -27,7 +27,7 @@ use Telnyx\SimCards\SimCardListParams\Sort;
  */
 final class SimCardListParams implements BaseModel
 {
-    /** @use SdkModel<sim_card_list_params> */
+    /** @use SdkModel<SimCardListParamsShape> */
     use SdkModel;
     use SdkParams;
 

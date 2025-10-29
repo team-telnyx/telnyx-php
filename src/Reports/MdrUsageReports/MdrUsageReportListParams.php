@@ -15,11 +15,11 @@ use Telnyx\Reports\MdrUsageReports\MdrUsageReportListParams\Page;
  *
  * @see Telnyx\Reports\MdrUsageReports->list
  *
- * @phpstan-type mdr_usage_report_list_params = array{page?: Page}
+ * @phpstan-type MdrUsageReportListParamsShape = array{page?: Page}
  */
 final class MdrUsageReportListParams implements BaseModel
 {
-    /** @use SdkModel<mdr_usage_report_list_params> */
+    /** @use SdkModel<MdrUsageReportListParamsShape> */
     use SdkModel;
     use SdkParams;
 

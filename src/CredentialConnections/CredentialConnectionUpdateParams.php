@@ -16,7 +16,7 @@ use Telnyx\CredentialConnections\CredentialConnectionUpdateParams\WebhookAPIVers
  *
  * @see Telnyx\CredentialConnections->update
  *
- * @phpstan-type credential_connection_update_params = array{
+ * @phpstan-type CredentialConnectionUpdateParamsShape = array{
  *   active?: bool,
  *   anchorsiteOverride?: AnchorsiteOverride|value-of<AnchorsiteOverride>,
  *   androidPushCredentialID?: string|null,
@@ -42,7 +42,7 @@ use Telnyx\CredentialConnections\CredentialConnectionUpdateParams\WebhookAPIVers
  */
 final class CredentialConnectionUpdateParams implements BaseModel
 {
-    /** @use SdkModel<credential_connection_update_params> */
+    /** @use SdkModel<CredentialConnectionUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 

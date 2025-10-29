@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * From number filtering operations.
  *
- * @phpstan-type from_alias = array{eq?: string}
+ * @phpstan-type FromShape = array{eq?: string}
  */
 final class From implements BaseModel
 {
-    /** @use SdkModel<from_alias> */
+    /** @use SdkModel<FromShape> */
     use SdkModel;
 
     /**

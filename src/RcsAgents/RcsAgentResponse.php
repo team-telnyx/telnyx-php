@@ -9,11 +9,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type rcs_agent_response = array{data?: RcsAgent}
+ * @phpstan-type RcsAgentResponseShape = array{data?: RcsAgent}
  */
 final class RcsAgentResponse implements BaseModel
 {
-    /** @use SdkModel<rcs_agent_response> */
+    /** @use SdkModel<RcsAgentResponseShape> */
     use SdkModel;
 
     #[Api(optional: true)]

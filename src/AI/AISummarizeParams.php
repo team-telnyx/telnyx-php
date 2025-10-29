@@ -21,13 +21,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\AI->summarize
  *
- * @phpstan-type ai_summarize_params = array{
+ * @phpstan-type AISummarizeParamsShape = array{
  *   bucket: string, filename: string, systemPrompt?: string
  * }
  */
 final class AISummarizeParams implements BaseModel
 {
-    /** @use SdkModel<ai_summarize_params> */
+    /** @use SdkModel<AISummarizeParamsShape> */
     use SdkModel;
     use SdkParams;
 

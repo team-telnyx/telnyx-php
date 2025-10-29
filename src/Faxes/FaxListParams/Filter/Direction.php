@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Direction filtering operations.
  *
- * @phpstan-type direction_alias = array{eq?: string}
+ * @phpstan-type DirectionShape = array{eq?: string}
  */
 final class Direction implements BaseModel
 {
-    /** @use SdkModel<direction_alias> */
+    /** @use SdkModel<DirectionShape> */
     use SdkModel;
 
     /**

@@ -10,13 +10,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\CredentialConnections\ConnectionRtcpSettings\Port;
 
 /**
- * @phpstan-type connection_rtcp_settings = array{
+ * @phpstan-type ConnectionRtcpSettingsShape = array{
  *   captureEnabled?: bool, port?: value-of<Port>, reportFrequencySecs?: int
  * }
  */
 final class ConnectionRtcpSettings implements BaseModel
 {
-    /** @use SdkModel<connection_rtcp_settings> */
+    /** @use SdkModel<ConnectionRtcpSettingsShape> */
     use SdkModel;
 
     /**

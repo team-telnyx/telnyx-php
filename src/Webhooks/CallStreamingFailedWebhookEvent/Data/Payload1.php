@@ -11,7 +11,7 @@ use Telnyx\Webhooks\CallStreamingFailedWebhookEvent\Data\Payload\StreamParams;
 use Telnyx\Webhooks\CallStreamingFailedWebhookEvent\Data\Payload\StreamType;
 
 /**
- * @phpstan-type payload_alias = array{
+ * @phpstan-type PayloadShape = array{
  *   callControlID?: string,
  *   callLegID?: string,
  *   callSessionID?: string,
@@ -25,7 +25,7 @@ use Telnyx\Webhooks\CallStreamingFailedWebhookEvent\Data\Payload\StreamType;
  */
 final class Payload implements BaseModel
 {
-    /** @use SdkModel<payload_alias> */
+    /** @use SdkModel<PayloadShape> */
     use SdkModel;
 
     /**

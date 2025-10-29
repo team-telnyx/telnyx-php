@@ -12,11 +12,11 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\GlobalIPAllowedPorts\GlobalIPAllowedPortListResponse\Data;
 
 /**
- * @phpstan-type global_ip_allowed_port_list_response = array{data?: list<Data>}
+ * @phpstan-type GlobalIPAllowedPortListResponseShape = array{data?: list<Data>}
  */
 final class GlobalIPAllowedPortListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<global_ip_allowed_port_list_response> */
+    /** @use SdkModel<GlobalIPAllowedPortListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

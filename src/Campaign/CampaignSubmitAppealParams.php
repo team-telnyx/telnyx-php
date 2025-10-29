@@ -14,11 +14,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Campaign->submitAppeal
  *
- * @phpstan-type campaign_submit_appeal_params = array{appealReason: string}
+ * @phpstan-type CampaignSubmitAppealParamsShape = array{appealReason: string}
  */
 final class CampaignSubmitAppealParams implements BaseModel
 {
-    /** @use SdkModel<campaign_submit_appeal_params> */
+    /** @use SdkModel<CampaignSubmitAppealParamsShape> */
     use SdkModel;
     use SdkParams;
 

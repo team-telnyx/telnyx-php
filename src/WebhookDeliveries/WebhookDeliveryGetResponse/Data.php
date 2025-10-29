@@ -14,7 +14,7 @@ use Telnyx\WebhookDeliveries\WebhookDeliveryGetResponse\Data\Webhook;
 /**
  * Record of all attempts to deliver a webhook.
  *
- * @phpstan-type data_alias = array{
+ * @phpstan-type DataShape = array{
  *   id?: string,
  *   attempts?: list<Attempt>,
  *   finishedAt?: \DateTimeInterface,
@@ -27,7 +27,7 @@ use Telnyx\WebhookDeliveries\WebhookDeliveryGetResponse\Data\Webhook;
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**

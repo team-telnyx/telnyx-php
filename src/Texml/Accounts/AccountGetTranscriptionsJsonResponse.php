@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Texml\Accounts\AccountGetTranscriptionsJsonResponse\Transcription;
 
 /**
- * @phpstan-type account_get_transcriptions_json_response = array{
+ * @phpstan-type AccountGetTranscriptionsJsonResponseShape = array{
  *   end?: int,
  *   firstPageUri?: string,
  *   nextPageUri?: string,
@@ -26,7 +26,7 @@ use Telnyx\Texml\Accounts\AccountGetTranscriptionsJsonResponse\Transcription;
  */
 final class AccountGetTranscriptionsJsonResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<account_get_transcriptions_json_response> */
+    /** @use SdkModel<AccountGetTranscriptionsJsonResponseShape> */
     use SdkModel;
 
     use SdkResponse;

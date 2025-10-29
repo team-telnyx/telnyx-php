@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type address_new_response = array{data?: Address}
+ * @phpstan-type AddressNewResponseShape = array{data?: Address}
  */
 final class AddressNewResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<address_new_response> */
+    /** @use SdkModel<AddressNewResponseShape> */
     use SdkModel;
 
     use SdkResponse;

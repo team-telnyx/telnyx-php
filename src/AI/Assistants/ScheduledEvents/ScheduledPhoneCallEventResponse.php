@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type scheduled_phone_call_event_response = array{
+ * @phpstan-type ScheduledPhoneCallEventResponseShape = array{
  *   assistantID: string,
  *   scheduledAtFixedDatetime: \DateTimeInterface,
  *   telnyxAgentTarget: string,
@@ -28,7 +28,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class ScheduledPhoneCallEventResponse implements BaseModel
 {
-    /** @use SdkModel<scheduled_phone_call_event_response> */
+    /** @use SdkModel<ScheduledPhoneCallEventResponseShape> */
     use SdkModel;
 
     #[Api('assistant_id')]

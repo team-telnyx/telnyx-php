@@ -23,7 +23,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Calls\Actions->startStreaming
  *
- * @phpstan-type action_start_streaming_params = array{
+ * @phpstan-type ActionStartStreamingParamsShape = array{
  *   clientState?: string,
  *   commandID?: string,
  *   dialogflowConfig?: DialogflowConfig,
@@ -39,7 +39,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class ActionStartStreamingParams implements BaseModel
 {
-    /** @use SdkModel<action_start_streaming_params> */
+    /** @use SdkModel<ActionStartStreamingParamsShape> */
     use SdkModel;
     use SdkParams;
 

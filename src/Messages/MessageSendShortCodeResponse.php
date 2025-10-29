@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type message_send_short_code_response = array{
+ * @phpstan-type MessageSendShortCodeResponseShape = array{
  *   data?: OutboundMessagePayload
  * }
  */
 final class MessageSendShortCodeResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<message_send_short_code_response> */
+    /** @use SdkModel<MessageSendShortCodeResponseShape> */
     use SdkModel;
 
     use SdkResponse;

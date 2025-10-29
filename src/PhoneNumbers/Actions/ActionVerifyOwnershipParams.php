@@ -14,11 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\PhoneNumbers\Actions->verifyOwnership
  *
- * @phpstan-type action_verify_ownership_params = array{phoneNumbers: list<string>}
+ * @phpstan-type ActionVerifyOwnershipParamsShape = array{
+ *   phoneNumbers: list<string>
+ * }
  */
 final class ActionVerifyOwnershipParams implements BaseModel
 {
-    /** @use SdkModel<action_verify_ownership_params> */
+    /** @use SdkModel<ActionVerifyOwnershipParamsShape> */
     use SdkModel;
     use SdkParams;
 

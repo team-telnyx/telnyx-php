@@ -13,13 +13,13 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\DocumentLinks\DocumentLinkListResponse\Data;
 
 /**
- * @phpstan-type document_link_list_response = array{
+ * @phpstan-type DocumentLinkListResponseShape = array{
  *   data?: list<Data>, meta?: PaginationMeta
  * }
  */
 final class DocumentLinkListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<document_link_list_response> */
+    /** @use SdkModel<DocumentLinkListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

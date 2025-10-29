@@ -17,7 +17,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * To disable this feature, set the object field to `null`.
  *
- * @phpstan-type url_shortener_settings = array{
+ * @phpstan-type URLShortenerSettingsShape = array{
  *   domain: string,
  *   prefix?: string,
  *   replaceBlacklistOnly?: bool,
@@ -26,7 +26,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class URLShortenerSettings implements BaseModel
 {
-    /** @use SdkModel<url_shortener_settings> */
+    /** @use SdkModel<URLShortenerSettingsShape> */
     use SdkModel;
 
     /**

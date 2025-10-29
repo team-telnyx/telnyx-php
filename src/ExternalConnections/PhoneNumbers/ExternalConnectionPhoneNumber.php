@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\ExternalConnections\PhoneNumbers\ExternalConnectionPhoneNumber\AcquiredCapability;
 
 /**
- * @phpstan-type external_connection_phone_number = array{
+ * @phpstan-type ExternalConnectionPhoneNumberShape = array{
  *   acquiredCapabilities?: list<value-of<AcquiredCapability>>,
  *   civicAddressID?: string,
  *   displayedCountryCode?: string,
@@ -22,7 +22,7 @@ use Telnyx\ExternalConnections\PhoneNumbers\ExternalConnectionPhoneNumber\Acquir
  */
 final class ExternalConnectionPhoneNumber implements BaseModel
 {
-    /** @use SdkModel<external_connection_phone_number> */
+    /** @use SdkModel<ExternalConnectionPhoneNumberShape> */
     use SdkModel;
 
     /** @var list<value-of<AcquiredCapability>>|null $acquiredCapabilities */

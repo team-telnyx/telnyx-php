@@ -18,7 +18,7 @@ use Telnyx\Texml\Accounts\Calls\CallStreamsJsonParams\Track;
  *
  * @see Telnyx\Texml\Accounts\Calls->streamsJson
  *
- * @phpstan-type call_streams_json_params = array{
+ * @phpstan-type CallStreamsJsonParamsShape = array{
  *   accountSid: string,
  *   bidirectionalCodec?: BidirectionalCodec|value-of<BidirectionalCodec>,
  *   bidirectionalMode?: BidirectionalMode|value-of<BidirectionalMode>,
@@ -31,7 +31,7 @@ use Telnyx\Texml\Accounts\Calls\CallStreamsJsonParams\Track;
  */
 final class CallStreamsJsonParams implements BaseModel
 {
-    /** @use SdkModel<call_streams_json_params> */
+    /** @use SdkModel<CallStreamsJsonParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -15,13 +15,13 @@ use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationUpdateParam
  *
  * @see Telnyx\SimCardDataUsageNotifications->update
  *
- * @phpstan-type sim_card_data_usage_notification_update_params = array{
+ * @phpstan-type SimCardDataUsageNotificationUpdateParamsShape = array{
  *   simCardID?: string, threshold?: Threshold
  * }
  */
 final class SimCardDataUsageNotificationUpdateParams implements BaseModel
 {
-    /** @use SdkModel<sim_card_data_usage_notification_update_params> */
+    /** @use SdkModel<SimCardDataUsageNotificationUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 

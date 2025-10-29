@@ -10,13 +10,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\RecordingTranscriptions\RecordingTranscriptionListResponse\Meta\Cursors;
 
 /**
- * @phpstan-type meta_alias = array{
+ * @phpstan-type MetaShape = array{
  *   cursors?: Cursors, next?: string, previous?: string
  * }
  */
 final class Meta implements BaseModel
 {
-    /** @use SdkModel<meta_alias> */
+    /** @use SdkModel<MetaShape> */
     use SdkModel;
 
     #[Api(optional: true)]

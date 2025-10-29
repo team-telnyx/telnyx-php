@@ -9,13 +9,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type gcs_configuration_data = array{
+ * @phpstan-type GcsConfigurationDataShape = array{
  *   bucket?: string, credentials?: string
  * }
  */
 final class GcsConfigurationData implements BaseModel
 {
-    /** @use SdkModel<gcs_configuration_data> */
+    /** @use SdkModel<GcsConfigurationDataShape> */
     use SdkModel;
 
     /**

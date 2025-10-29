@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type credential_connection_update_response = array{
+ * @phpstan-type CredentialConnectionUpdateResponseShape = array{
  *   data?: CredentialConnection
  * }
  */
 final class CredentialConnectionUpdateResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<credential_connection_update_response> */
+    /** @use SdkModel<CredentialConnectionUpdateResponseShape> */
     use SdkModel;
 
     use SdkResponse;

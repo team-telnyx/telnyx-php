@@ -16,13 +16,13 @@ use Telnyx\Networks\NetworkListInterfacesParams\Page;
  *
  * @see Telnyx\Networks->listInterfaces
  *
- * @phpstan-type network_list_interfaces_params = array{
+ * @phpstan-type NetworkListInterfacesParamsShape = array{
  *   filter?: Filter, page?: Page
  * }
  */
 final class NetworkListInterfacesParams implements BaseModel
 {
-    /** @use SdkModel<network_list_interfaces_params> */
+    /** @use SdkModel<NetworkListInterfacesParamsShape> */
     use SdkModel;
     use SdkParams;
 

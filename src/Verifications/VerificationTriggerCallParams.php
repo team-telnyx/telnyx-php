@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Verifications->triggerCall
  *
- * @phpstan-type verification_trigger_call_params = array{
+ * @phpstan-type VerificationTriggerCallParamsShape = array{
  *   phoneNumber: string,
  *   verifyProfileID: string,
  *   customCode?: string|null,
@@ -24,7 +24,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class VerificationTriggerCallParams implements BaseModel
 {
-    /** @use SdkModel<verification_trigger_call_params> */
+    /** @use SdkModel<VerificationTriggerCallParamsShape> */
     use SdkModel;
     use SdkParams;
 

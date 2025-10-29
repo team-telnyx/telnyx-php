@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[content_type][].
  *
- * @phpstan-type filter_alias = array{contentType?: list<string>}
+ * @phpstan-type FilterShape = array{contentType?: list<string>}
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**

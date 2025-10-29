@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\AI\Clusters->retrieve
  *
- * @phpstan-type cluster_retrieve_params = array{
+ * @phpstan-type ClusterRetrieveParamsShape = array{
  *   showSubclusters?: bool, topNNodes?: int
  * }
  */
 final class ClusterRetrieveParams implements BaseModel
 {
-    /** @use SdkModel<cluster_retrieve_params> */
+    /** @use SdkModel<ClusterRetrieveParamsShape> */
     use SdkModel;
     use SdkParams;
 

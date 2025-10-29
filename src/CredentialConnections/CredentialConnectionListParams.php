@@ -17,13 +17,13 @@ use Telnyx\CredentialConnections\CredentialConnectionListParams\Sort;
  *
  * @see Telnyx\CredentialConnections->list
  *
- * @phpstan-type credential_connection_list_params = array{
+ * @phpstan-type CredentialConnectionListParamsShape = array{
  *   filter?: Filter, page?: Page, sort?: Sort|value-of<Sort>
  * }
  */
 final class CredentialConnectionListParams implements BaseModel
 {
-    /** @use SdkModel<credential_connection_list_params> */
+    /** @use SdkModel<CredentialConnectionListParamsShape> */
     use SdkModel;
     use SdkParams;
 

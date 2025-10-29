@@ -12,7 +12,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type refer_alias = array{
+ * @phpstan-type ReferShape = array{
  *   targets: list<Target>,
  *   customHeaders?: list<CustomHeader>,
  *   sipHeaders?: list<SipHeader>,
@@ -20,7 +20,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class Refer implements BaseModel
 {
-    /** @use SdkModel<refer_alias> */
+    /** @use SdkModel<ReferShape> */
     use SdkModel;
 
     /**

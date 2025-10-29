@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type additional_data = array{
+ * @phpstan-type AdditionalDataShape = array{
  *   accountNumber?: string,
  *   addressLine1?: string,
  *   authorizedPersonName?: string,
@@ -24,7 +24,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class AdditionalData implements BaseModel
 {
-    /** @use SdkModel<additional_data> */
+    /** @use SdkModel<AdditionalDataShape> */
     use SdkModel;
 
     /**

@@ -18,13 +18,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Calls\Actions->stopSiprec
  *
- * @phpstan-type action_stop_siprec_params = array{
+ * @phpstan-type ActionStopSiprecParamsShape = array{
  *   clientState?: string, commandID?: string
  * }
  */
 final class ActionStopSiprecParams implements BaseModel
 {
-    /** @use SdkModel<action_stop_siprec_params> */
+    /** @use SdkModel<ActionStopSiprecParamsShape> */
     use SdkModel;
     use SdkParams;
 

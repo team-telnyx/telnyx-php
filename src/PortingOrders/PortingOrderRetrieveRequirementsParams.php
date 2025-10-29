@@ -15,11 +15,11 @@ use Telnyx\PortingOrders\PortingOrderRetrieveRequirementsParams\Page;
  *
  * @see Telnyx\PortingOrders->retrieveRequirements
  *
- * @phpstan-type porting_order_retrieve_requirements_params = array{page?: Page}
+ * @phpstan-type PortingOrderRetrieveRequirementsParamsShape = array{page?: Page}
  */
 final class PortingOrderRetrieveRequirementsParams implements BaseModel
 {
-    /** @use SdkModel<porting_order_retrieve_requirements_params> */
+    /** @use SdkModel<PortingOrderRetrieveRequirementsParamsShape> */
     use SdkModel;
     use SdkParams;
 

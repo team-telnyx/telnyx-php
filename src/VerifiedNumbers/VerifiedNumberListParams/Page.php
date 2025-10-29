@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Consolidated page parameter (deepObject style). Use page[size] and page[number] in the query string. Originally: page[size], page[number].
  *
- * @phpstan-type page_alias = array{number?: int, size?: int}
+ * @phpstan-type PageShape = array{number?: int, size?: int}
  */
 final class Page implements BaseModel
 {
-    /** @use SdkModel<page_alias> */
+    /** @use SdkModel<PageShape> */
     use SdkModel;
 
     #[Api(optional: true)]

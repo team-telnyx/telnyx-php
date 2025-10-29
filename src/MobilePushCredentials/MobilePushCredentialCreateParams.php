@@ -15,7 +15,7 @@ use Telnyx\MobilePushCredentials\MobilePushCredentialCreateParams\Type;
  *
  * @see Telnyx\MobilePushCredentials->create
  *
- * @phpstan-type mobile_push_credential_create_params = array{
+ * @phpstan-type MobilePushCredentialCreateParamsShape = array{
  *   alias: string,
  *   certificate: string,
  *   privateKey: string,
@@ -25,7 +25,7 @@ use Telnyx\MobilePushCredentials\MobilePushCredentialCreateParams\Type;
  */
 final class MobilePushCredentialCreateParams implements BaseModel
 {
-    /** @use SdkModel<mobile_push_credential_create_params> */
+    /** @use SdkModel<MobilePushCredentialCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

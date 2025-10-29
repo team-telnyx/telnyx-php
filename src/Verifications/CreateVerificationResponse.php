@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type create_verification_response = array{data: Verification}
+ * @phpstan-type CreateVerificationResponseShape = array{data: Verification}
  */
 final class CreateVerificationResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<create_verification_response> */
+    /** @use SdkModel<CreateVerificationResponseShape> */
     use SdkModel;
 
     use SdkResponse;

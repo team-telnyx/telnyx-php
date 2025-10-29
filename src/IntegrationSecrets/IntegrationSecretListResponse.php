@@ -12,13 +12,13 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\IntegrationSecrets\IntegrationSecretListResponse\Meta;
 
 /**
- * @phpstan-type integration_secret_list_response = array{
+ * @phpstan-type IntegrationSecretListResponseShape = array{
  *   data: list<IntegrationSecret>, meta: Meta
  * }
  */
 final class IntegrationSecretListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<integration_secret_list_response> */
+    /** @use SdkModel<IntegrationSecretListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

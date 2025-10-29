@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type well_known_get_protected_resource_metadata_response = array{
+ * @phpstan-type WellKnownGetProtectedResourceMetadataResponseShape = array{
  *   authorizationServers?: list<string>, resource?: string
  * }
  */
 final class WellKnownGetProtectedResourceMetadataResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<well_known_get_protected_resource_metadata_response> */
+    /** @use SdkModel<WellKnownGetProtectedResourceMetadataResponseShape> */
     use SdkModel;
 
     use SdkResponse;

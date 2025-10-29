@@ -15,11 +15,11 @@ use Telnyx\Storage\Buckets\Usage\UsageGetAPIUsageParams\Filter;
  *
  * @see Telnyx\Storage\Buckets\Usage->getAPIUsage
  *
- * @phpstan-type usage_get_api_usage_params = array{filter: Filter}
+ * @phpstan-type UsageGetAPIUsageParamsShape = array{filter: Filter}
  */
 final class UsageGetAPIUsageParams implements BaseModel
 {
-    /** @use SdkModel<usage_get_api_usage_params> */
+    /** @use SdkModel<UsageGetAPIUsageParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -13,13 +13,13 @@ use Telnyx\Porting\Events\EventListParams\Filter\Type;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[type], filter[porting_order_id], filter[created_at][gte], filter[created_at][lte].
  *
- * @phpstan-type filter_alias = array{
+ * @phpstan-type FilterShape = array{
  *   createdAt?: CreatedAt, portingOrderID?: string, type?: value-of<Type>
  * }
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**

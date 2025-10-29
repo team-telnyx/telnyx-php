@@ -12,7 +12,7 @@ use Telnyx\Webhooks\ConferenceFloorChangedWebhookEvent\Payload;
 use Telnyx\Webhooks\ConferenceFloorChangedWebhookEvent\RecordType;
 
 /**
- * @phpstan-type conference_floor_changed_webhook_event = array{
+ * @phpstan-type ConferenceFloorChangedWebhookEventShape = array{
  *   id?: string,
  *   eventType?: value-of<EventType>,
  *   payload?: Payload,
@@ -21,7 +21,7 @@ use Telnyx\Webhooks\ConferenceFloorChangedWebhookEvent\RecordType;
  */
 final class ConferenceFloorChangedWebhookEvent implements BaseModel
 {
-    /** @use SdkModel<conference_floor_changed_webhook_event> */
+    /** @use SdkModel<ConferenceFloorChangedWebhookEventShape> */
     use SdkModel;
 
     /**

@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Indicates the document's filesize.
  *
- * @phpstan-type size_alias = array{amount?: int, unit?: string}
+ * @phpstan-type SizeShape = array{amount?: int, unit?: string}
  */
 final class Size implements BaseModel
 {
-    /** @use SdkModel<size_alias> */
+    /** @use SdkModel<SizeShape> */
     use SdkModel;
 
     /**

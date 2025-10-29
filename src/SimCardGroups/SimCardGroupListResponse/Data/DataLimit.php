@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Upper limit on the amount of data the SIM cards, within the group, can use.
  *
- * @phpstan-type data_limit = array{amount?: string, unit?: string}
+ * @phpstan-type DataLimitShape = array{amount?: string, unit?: string}
  */
 final class DataLimit implements BaseModel
 {
-    /** @use SdkModel<data_limit> */
+    /** @use SdkModel<DataLimitShape> */
     use SdkModel;
 
     #[Api(optional: true)]

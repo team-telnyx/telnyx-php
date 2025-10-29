@@ -12,14 +12,14 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileGetPhoneNumberStatusResponse\Record;
 
 /**
- * @phpstan-type phone_number_assignment_by_profile_get_phone_number_status_response = array{
+ * @phpstan-type PhoneNumberAssignmentByProfileGetPhoneNumberStatusResponseShape = array{
  *   records: list<Record>
  * }
  */
 final class PhoneNumberAssignmentByProfileGetPhoneNumberStatusResponse implements BaseModel, ResponseConverter
 {
     /**
-     * @use SdkModel<phone_number_assignment_by_profile_get_phone_number_status_response>
+     * @use SdkModel<PhoneNumberAssignmentByProfileGetPhoneNumberStatusResponseShape>
      */
     use SdkModel;
 

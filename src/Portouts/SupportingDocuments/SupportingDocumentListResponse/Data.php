@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Portouts\SupportingDocuments\SupportingDocumentListResponse\Data\Type;
 
 /**
- * @phpstan-type data_alias = array{
+ * @phpstan-type DataShape = array{
  *   id: string,
  *   createdAt: string,
  *   documentID: string,
@@ -22,7 +22,7 @@ use Telnyx\Portouts\SupportingDocuments\SupportingDocumentListResponse\Data\Type
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     #[Api]

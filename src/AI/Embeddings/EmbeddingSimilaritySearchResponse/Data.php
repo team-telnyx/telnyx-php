@@ -24,13 +24,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *   }
  * }.
  *
- * @phpstan-type data_alias = array{
+ * @phpstan-type DataShape = array{
  *   distance: float, documentChunk: string, metadata: Metadata
  * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     #[Api]

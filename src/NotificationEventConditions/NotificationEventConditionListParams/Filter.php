@@ -17,7 +17,7 @@ use Telnyx\NotificationEventConditions\NotificationEventConditionListParams\Filt
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[associated_record_type][eq], filter[channel_type_id][eq], filter[notification_profile_id][eq], filter[notification_channel][eq], filter[notification_event_condition_id][eq], filter[status][eq].
  *
- * @phpstan-type filter_alias = array{
+ * @phpstan-type FilterShape = array{
  *   associatedRecordType?: AssociatedRecordType,
  *   channelTypeID?: ChannelTypeID,
  *   notificationChannel?: NotificationChannel,
@@ -28,7 +28,7 @@ use Telnyx\NotificationEventConditions\NotificationEventConditionListParams\Filt
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     #[Api('associated_record_type', optional: true)]

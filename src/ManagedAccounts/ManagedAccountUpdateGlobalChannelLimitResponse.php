@@ -12,13 +12,13 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\ManagedAccounts\ManagedAccountUpdateGlobalChannelLimitResponse\Data;
 
 /**
- * @phpstan-type managed_account_update_global_channel_limit_response = array{
+ * @phpstan-type ManagedAccountUpdateGlobalChannelLimitResponseShape = array{
  *   data?: Data
  * }
  */
 final class ManagedAccountUpdateGlobalChannelLimitResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<managed_account_update_global_channel_limit_response> */
+    /** @use SdkModel<ManagedAccountUpdateGlobalChannelLimitResponseShape> */
     use SdkModel;
 
     use SdkResponse;

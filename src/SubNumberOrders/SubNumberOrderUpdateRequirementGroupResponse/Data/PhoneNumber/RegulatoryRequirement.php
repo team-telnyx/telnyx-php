@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type regulatory_requirement = array{
+ * @phpstan-type RegulatoryRequirementShape = array{
  *   fieldType?: string,
  *   fieldValue?: string,
  *   requirementID?: string,
@@ -18,7 +18,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class RegulatoryRequirement implements BaseModel
 {
-    /** @use SdkModel<regulatory_requirement> */
+    /** @use SdkModel<RegulatoryRequirementShape> */
     use SdkModel;
 
     #[Api('field_type', optional: true)]

@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Rooms\Actions->generateJoinClientToken
  *
- * @phpstan-type action_generate_join_client_token_params = array{
+ * @phpstan-type ActionGenerateJoinClientTokenParamsShape = array{
  *   refreshTokenTtlSecs?: int, tokenTtlSecs?: int
  * }
  */
 final class ActionGenerateJoinClientTokenParams implements BaseModel
 {
-    /** @use SdkModel<action_generate_join_client_token_params> */
+    /** @use SdkModel<ActionGenerateJoinClientTokenParamsShape> */
     use SdkModel;
     use SdkParams;
 

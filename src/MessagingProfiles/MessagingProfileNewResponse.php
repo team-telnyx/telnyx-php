@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type messaging_profile_new_response = array{data?: MessagingProfile}
+ * @phpstan-type MessagingProfileNewResponseShape = array{data?: MessagingProfile}
  */
 final class MessagingProfileNewResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<messaging_profile_new_response> */
+    /** @use SdkModel<MessagingProfileNewResponseShape> */
     use SdkModel;
 
     use SdkResponse;

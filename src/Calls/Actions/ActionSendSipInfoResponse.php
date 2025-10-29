@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type action_send_sip_info_response = array{
+ * @phpstan-type ActionSendSipInfoResponseShape = array{
  *   data?: CallControlCommandResult
  * }
  */
 final class ActionSendSipInfoResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<action_send_sip_info_response> */
+    /** @use SdkModel<ActionSendSipInfoResponseShape> */
     use SdkModel;
 
     use SdkResponse;

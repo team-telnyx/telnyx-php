@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type message_template = array{
+ * @phpstan-type MessageTemplateShape = array{
  *   data?: VerifyProfileMessageTemplateResponse
  * }
  */
 final class MessageTemplate implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<message_template> */
+    /** @use SdkModel<MessageTemplateShape> */
     use SdkModel;
 
     use SdkResponse;

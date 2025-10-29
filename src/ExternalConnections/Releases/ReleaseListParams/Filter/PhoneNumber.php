@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Phone number filter operations. Use 'eq' for exact matches or 'contains' for partial matches.
  *
- * @phpstan-type phone_number = array{contains?: string, eq?: string}
+ * @phpstan-type PhoneNumberShape = array{contains?: string, eq?: string}
  */
 final class PhoneNumber implements BaseModel
 {
-    /** @use SdkModel<phone_number> */
+    /** @use SdkModel<PhoneNumberShape> */
     use SdkModel;
 
     /**

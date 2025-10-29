@@ -9,11 +9,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type plmn_alias = array{code: string, name: string}
+ * @phpstan-type PlmnShape = array{code: string, name: string}
  */
 final class Plmn implements BaseModel
 {
-    /** @use SdkModel<plmn_alias> */
+    /** @use SdkModel<PlmnShape> */
     use SdkModel;
 
     /**

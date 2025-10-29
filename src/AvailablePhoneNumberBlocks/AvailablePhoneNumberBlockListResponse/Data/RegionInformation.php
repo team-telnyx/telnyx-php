@@ -10,13 +10,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type region_information = array{
+ * @phpstan-type RegionInformationShape = array{
  *   regionName?: string, regionType?: value-of<RegionType>
  * }
  */
 final class RegionInformation implements BaseModel
 {
-    /** @use SdkModel<region_information> */
+    /** @use SdkModel<RegionInformationShape> */
     use SdkModel;
 
     #[Api('region_name', optional: true)]

@@ -12,13 +12,13 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderValidateCodesResponse\Data;
 
 /**
- * @phpstan-type messaging_hosted_number_order_validate_codes_response = array{
+ * @phpstan-type MessagingHostedNumberOrderValidateCodesResponseShape = array{
  *   data?: Data
  * }
  */
 final class MessagingHostedNumberOrderValidateCodesResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<messaging_hosted_number_order_validate_codes_response> */
+    /** @use SdkModel<MessagingHostedNumberOrderValidateCodesResponseShape> */
     use SdkModel;
 
     use SdkResponse;

@@ -13,13 +13,13 @@ use Telnyx\Reports\MdrUsageReports\PaginationMetaReporting;
 use Telnyx\Reports\ReportListMdrsResponse\Data;
 
 /**
- * @phpstan-type report_list_mdrs_response = array{
+ * @phpstan-type ReportListMdrsResponseShape = array{
  *   data?: list<Data>, meta?: PaginationMetaReporting
  * }
  */
 final class ReportListMdrsResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<report_list_mdrs_response> */
+    /** @use SdkModel<ReportListMdrsResponseShape> */
     use SdkModel;
 
     use SdkResponse;

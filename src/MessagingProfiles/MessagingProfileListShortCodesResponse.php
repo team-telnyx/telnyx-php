@@ -13,13 +13,13 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\ShortCode;
 
 /**
- * @phpstan-type messaging_profile_list_short_codes_response = array{
+ * @phpstan-type MessagingProfileListShortCodesResponseShape = array{
  *   data?: list<ShortCode>, meta?: PaginationMeta
  * }
  */
 final class MessagingProfileListShortCodesResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<messaging_profile_list_short_codes_response> */
+    /** @use SdkModel<MessagingProfileListShortCodesResponseShape> */
     use SdkModel;
 
     use SdkResponse;

@@ -15,11 +15,11 @@ use Telnyx\UserTags\UserTagListParams\Filter;
  *
  * @see Telnyx\UserTags->list
  *
- * @phpstan-type user_tag_list_params = array{filter?: Filter}
+ * @phpstan-type UserTagListParamsShape = array{filter?: Filter}
  */
 final class UserTagListParams implements BaseModel
 {
-    /** @use SdkModel<user_tag_list_params> */
+    /** @use SdkModel<UserTagListParamsShape> */
     use SdkModel;
     use SdkParams;
 

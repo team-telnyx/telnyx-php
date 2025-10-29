@@ -23,7 +23,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Calls\Actions->speak
  *
- * @phpstan-type action_speak_params = array{
+ * @phpstan-type ActionSpeakParamsShape = array{
  *   payload: string,
  *   voice: string,
  *   clientState?: string,
@@ -37,7 +37,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class ActionSpeakParams implements BaseModel
 {
-    /** @use SdkModel<action_speak_params> */
+    /** @use SdkModel<ActionSpeakParamsShape> */
     use SdkModel;
     use SdkParams;
 

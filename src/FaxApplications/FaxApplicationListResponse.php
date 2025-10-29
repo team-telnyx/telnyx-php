@@ -12,13 +12,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type fax_application_list_response = array{
+ * @phpstan-type FaxApplicationListResponseShape = array{
  *   data?: list<FaxApplication>, meta?: PaginationMeta
  * }
  */
 final class FaxApplicationListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<fax_application_list_response> */
+    /** @use SdkModel<FaxApplicationListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

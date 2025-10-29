@@ -13,13 +13,13 @@ use Telnyx\RoomCompositions\RoomCompositionListParams\Filter\Status;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[date_created_at][eq], filter[date_created_at][gte], filter[date_created_at][lte], filter[session_id], filter[status].
  *
- * @phpstan-type filter_alias = array{
+ * @phpstan-type FilterShape = array{
  *   dateCreatedAt?: DateCreatedAt, sessionID?: string, status?: value-of<Status>
  * }
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     #[Api('date_created_at', optional: true)]

@@ -10,13 +10,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type text_and_image_array = array{
+ * @phpstan-type TextAndImageArrayShape = array{
  *   type: value-of<Type>, imageURL?: string, text?: string
  * }
  */
 final class TextAndImageArray implements BaseModel
 {
-    /** @use SdkModel<text_and_image_array> */
+    /** @use SdkModel<TextAndImageArrayShape> */
     use SdkModel;
 
     /** @var value-of<Type> $type */

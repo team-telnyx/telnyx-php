@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\SimCards\Actions->validateRegistrationCodes
  *
- * @phpstan-type action_validate_registration_codes_params = array{
+ * @phpstan-type ActionValidateRegistrationCodesParamsShape = array{
  *   registrationCodes?: list<string>
  * }
  */
 final class ActionValidateRegistrationCodesParams implements BaseModel
 {
-    /** @use SdkModel<action_validate_registration_codes_params> */
+    /** @use SdkModel<ActionValidateRegistrationCodesParamsShape> */
     use SdkModel;
     use SdkParams;
 

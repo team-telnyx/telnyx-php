@@ -15,7 +15,7 @@ use Telnyx\MessagingProfiles\MessagingProfileCreateParams\WebhookAPIVersion;
  *
  * @see Telnyx\MessagingProfiles->create
  *
- * @phpstan-type messaging_profile_create_params = array{
+ * @phpstan-type MessagingProfileCreateParamsShape = array{
  *   name: string,
  *   whitelistedDestinations: list<string>,
  *   alphaSender?: string|null,
@@ -34,7 +34,7 @@ use Telnyx\MessagingProfiles\MessagingProfileCreateParams\WebhookAPIVersion;
  */
 final class MessagingProfileCreateParams implements BaseModel
 {
-    /** @use SdkModel<messaging_profile_create_params> */
+    /** @use SdkModel<MessagingProfileCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

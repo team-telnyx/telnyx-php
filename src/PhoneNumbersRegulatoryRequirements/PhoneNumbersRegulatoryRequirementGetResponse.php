@@ -13,13 +13,13 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PhoneNumbersRegulatoryRequirements\PhoneNumbersRegulatoryRequirementGetResponse\Data;
 
 /**
- * @phpstan-type phone_numbers_regulatory_requirement_get_response = array{
+ * @phpstan-type PhoneNumbersRegulatoryRequirementGetResponseShape = array{
  *   data?: list<Data>, meta?: PaginationMeta
  * }
  */
 final class PhoneNumbersRegulatoryRequirementGetResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<phone_numbers_regulatory_requirement_get_response> */
+    /** @use SdkModel<PhoneNumbersRegulatoryRequirementGetResponseShape> */
     use SdkModel;
 
     use SdkResponse;

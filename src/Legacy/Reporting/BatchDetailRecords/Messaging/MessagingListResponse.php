@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type messaging_list_response = array{
+ * @phpstan-type MessagingListResponseShape = array{
  *   data?: list<MdrDetailReportResponse>, meta?: BatchCsvPaginationMeta
  * }
  */
 final class MessagingListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<messaging_list_response> */
+    /** @use SdkModel<MessagingListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

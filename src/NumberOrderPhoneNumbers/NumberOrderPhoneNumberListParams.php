@@ -15,11 +15,11 @@ use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberListParams\Filter;
  *
  * @see Telnyx\NumberOrderPhoneNumbers->list
  *
- * @phpstan-type number_order_phone_number_list_params = array{filter?: Filter}
+ * @phpstan-type NumberOrderPhoneNumberListParamsShape = array{filter?: Filter}
  */
 final class NumberOrderPhoneNumberListParams implements BaseModel
 {
-    /** @use SdkModel<number_order_phone_number_list_params> */
+    /** @use SdkModel<NumberOrderPhoneNumberListParamsShape> */
     use SdkModel;
     use SdkParams;
 

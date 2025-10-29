@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\FaxApplications\FaxApplicationCreateParams\Inbound\SipSubdomainReceiveSettings;
 
 /**
- * @phpstan-type inbound_alias = array{
+ * @phpstan-type InboundShape = array{
  *   channelLimit?: int,
  *   sipSubdomain?: string,
  *   sipSubdomainReceiveSettings?: value-of<SipSubdomainReceiveSettings>,
@@ -18,7 +18,7 @@ use Telnyx\FaxApplications\FaxApplicationCreateParams\Inbound\SipSubdomainReceiv
  */
 final class Inbound implements BaseModel
 {
-    /** @use SdkModel<inbound_alias> */
+    /** @use SdkModel<InboundShape> */
     use SdkModel;
 
     /**

@@ -15,13 +15,13 @@ use Telnyx\TextToSpeech\TextToSpeechListVoicesParams\Provider;
  *
  * @see Telnyx\TextToSpeech->listVoices
  *
- * @phpstan-type text_to_speech_list_voices_params = array{
+ * @phpstan-type TextToSpeechListVoicesParamsShape = array{
  *   elevenlabsAPIKeyRef?: string, provider?: Provider|value-of<Provider>
  * }
  */
 final class TextToSpeechListVoicesParams implements BaseModel
 {
-    /** @use SdkModel<text_to_speech_list_voices_params> */
+    /** @use SdkModel<TextToSpeechListVoicesParamsShape> */
     use SdkModel;
     use SdkParams;
 

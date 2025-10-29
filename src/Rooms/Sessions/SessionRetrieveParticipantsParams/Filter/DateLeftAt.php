@@ -9,13 +9,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type date_left_at = array{
+ * @phpstan-type DateLeftAtShape = array{
  *   eq?: \DateTimeInterface, gte?: \DateTimeInterface, lte?: \DateTimeInterface
  * }
  */
 final class DateLeftAt implements BaseModel
 {
-    /** @use SdkModel<date_left_at> */
+    /** @use SdkModel<DateLeftAtShape> */
     use SdkModel;
 
     /**

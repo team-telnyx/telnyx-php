@@ -9,11 +9,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type optional_attributes = array{taxExemptStatus?: string}
+ * @phpstan-type OptionalAttributesShape = array{taxExemptStatus?: string}
  */
 final class OptionalAttributes implements BaseModel
 {
-    /** @use SdkModel<optional_attributes> */
+    /** @use SdkModel<OptionalAttributesShape> */
     use SdkModel;
 
     /**

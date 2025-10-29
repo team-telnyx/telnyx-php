@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\PortingOrderMisc\RemainingNumbersAction;
 
 /**
- * @phpstan-type porting_order_misc = array{
+ * @phpstan-type PortingOrderMiscShape = array{
  *   newBillingPhoneNumber?: string,
  *   remainingNumbersAction?: value-of<RemainingNumbersAction>,
  *   type?: value-of<PortingOrderType>,
@@ -18,7 +18,7 @@ use Telnyx\PortingOrders\PortingOrderMisc\RemainingNumbersAction;
  */
 final class PortingOrderMisc implements BaseModel
 {
-    /** @use SdkModel<porting_order_misc> */
+    /** @use SdkModel<PortingOrderMiscShape> */
     use SdkModel;
 
     /**

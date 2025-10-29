@@ -9,13 +9,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type requested_scope = array{
+ * @phpstan-type RequestedScopeShape = array{
  *   id?: string, description?: string, name?: string
  * }
  */
 final class RequestedScope implements BaseModel
 {
-    /** @use SdkModel<requested_scope> */
+    /** @use SdkModel<RequestedScopeShape> */
     use SdkModel;
 
     /**

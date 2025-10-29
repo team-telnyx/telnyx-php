@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\GlobalIPHealthChecks->create
  *
- * @phpstan-type global_ip_health_check_create_params = array{
+ * @phpstan-type GlobalIPHealthCheckCreateParamsShape = array{
  *   globalIPID?: string,
  *   healthCheckParams?: array<string, mixed>,
  *   healthCheckType?: string,
@@ -22,7 +22,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class GlobalIPHealthCheckCreateParams implements BaseModel
 {
-    /** @use SdkModel<global_ip_health_check_create_params> */
+    /** @use SdkModel<GlobalIPHealthCheckCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

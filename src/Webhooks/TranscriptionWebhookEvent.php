@@ -10,11 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\TranscriptionWebhookEvent\Data;
 
 /**
- * @phpstan-type transcription_webhook_event = array{data?: Data}
+ * @phpstan-type TranscriptionWebhookEventShape = array{data?: Data}
  */
 final class TranscriptionWebhookEvent implements BaseModel
 {
-    /** @use SdkModel<transcription_webhook_event> */
+    /** @use SdkModel<TranscriptionWebhookEventShape> */
     use SdkModel;
 
     #[Api(optional: true)]

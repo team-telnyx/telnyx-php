@@ -14,11 +14,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\PhoneNumbers\Jobs->deleteBatch
  *
- * @phpstan-type job_delete_batch_params = array{phoneNumbers: list<string>}
+ * @phpstan-type JobDeleteBatchParamsShape = array{phoneNumbers: list<string>}
  */
 final class JobDeleteBatchParams implements BaseModel
 {
-    /** @use SdkModel<job_delete_batch_params> */
+    /** @use SdkModel<JobDeleteBatchParamsShape> */
     use SdkModel;
     use SdkParams;
 

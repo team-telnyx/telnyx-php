@@ -12,13 +12,13 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Storage\Buckets\Usage\PaginationMetaSimple;
 
 /**
- * @phpstan-type migration_list_response = array{
+ * @phpstan-type MigrationListResponseShape = array{
  *   data?: list<MigrationParams>, meta?: PaginationMetaSimple
  * }
  */
 final class MigrationListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<migration_list_response> */
+    /** @use SdkModel<MigrationListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NumberOrders\NumberOrderWithPhoneNumbers\Status;
 
 /**
- * @phpstan-type number_order_with_phone_numbers = array{
+ * @phpstan-type NumberOrderWithPhoneNumbersShape = array{
  *   id?: string,
  *   billingGroupID?: string,
  *   connectionID?: string,
@@ -28,7 +28,7 @@ use Telnyx\NumberOrders\NumberOrderWithPhoneNumbers\Status;
  */
 final class NumberOrderWithPhoneNumbers implements BaseModel
 {
-    /** @use SdkModel<number_order_with_phone_numbers> */
+    /** @use SdkModel<NumberOrderWithPhoneNumbersShape> */
     use SdkModel;
 
     #[Api(optional: true)]

@@ -12,7 +12,7 @@ use Telnyx\IPConnections\OutboundIP\IPAuthenticationMethod;
 use Telnyx\IPConnections\OutboundIP\T38ReinviteSource;
 
 /**
- * @phpstan-type outbound_ip = array{
+ * @phpstan-type OutboundIPShape = array{
  *   aniOverride?: string,
  *   aniOverrideType?: value-of<AniOverrideType>,
  *   callParkingEnabled?: bool|null,
@@ -29,7 +29,7 @@ use Telnyx\IPConnections\OutboundIP\T38ReinviteSource;
  */
 final class OutboundIP implements BaseModel
 {
-    /** @use SdkModel<outbound_ip> */
+    /** @use SdkModel<OutboundIPShape> */
     use SdkModel;
 
     /**

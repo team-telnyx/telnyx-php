@@ -12,7 +12,7 @@ use Telnyx\Porting\Reports\ExportPortingOrdersCsvReport\Filters\StatusIn;
 /**
  * The filters to apply to the export porting order CSV report.
  *
- * @phpstan-type filters_alias = array{
+ * @phpstan-type FiltersShape = array{
  *   createdAtGt?: \DateTimeInterface,
  *   createdAtLt?: \DateTimeInterface,
  *   customerReferenceIn?: list<string>,
@@ -21,7 +21,7 @@ use Telnyx\Porting\Reports\ExportPortingOrdersCsvReport\Filters\StatusIn;
  */
 final class Filters implements BaseModel
 {
-    /** @use SdkModel<filters_alias> */
+    /** @use SdkModel<FiltersShape> */
     use SdkModel;
 
     /**

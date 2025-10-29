@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Application name filters.
  *
- * @phpstan-type application_name = array{contains?: string}
+ * @phpstan-type ApplicationNameShape = array{contains?: string}
  */
 final class ApplicationName implements BaseModel
 {
-    /** @use SdkModel<application_name> */
+    /** @use SdkModel<ApplicationNameShape> */
     use SdkModel;
 
     /**

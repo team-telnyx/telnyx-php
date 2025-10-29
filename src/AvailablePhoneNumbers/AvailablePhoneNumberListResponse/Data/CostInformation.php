@@ -9,13 +9,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type cost_information = array{
+ * @phpstan-type CostInformationShape = array{
  *   currency?: string, monthlyCost?: string, upfrontCost?: string
  * }
  */
 final class CostInformation implements BaseModel
 {
-    /** @use SdkModel<cost_information> */
+    /** @use SdkModel<CostInformationShape> */
     use SdkModel;
 
     /**

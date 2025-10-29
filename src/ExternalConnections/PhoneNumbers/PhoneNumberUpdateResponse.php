@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type phone_number_update_response = array{
+ * @phpstan-type PhoneNumberUpdateResponseShape = array{
  *   data?: ExternalConnectionPhoneNumber
  * }
  */
 final class PhoneNumberUpdateResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<phone_number_update_response> */
+    /** @use SdkModel<PhoneNumberUpdateResponseShape> */
     use SdkModel;
 
     use SdkResponse;

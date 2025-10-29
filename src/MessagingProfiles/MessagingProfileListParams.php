@@ -16,13 +16,13 @@ use Telnyx\MessagingProfiles\MessagingProfileListParams\Page;
  *
  * @see Telnyx\MessagingProfiles->list
  *
- * @phpstan-type messaging_profile_list_params = array{
+ * @phpstan-type MessagingProfileListParamsShape = array{
  *   filter?: Filter, page?: Page
  * }
  */
 final class MessagingProfileListParams implements BaseModel
 {
-    /** @use SdkModel<messaging_profile_list_params> */
+    /** @use SdkModel<MessagingProfileListParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -19,7 +19,7 @@ use Telnyx\Messages\MessageSendParams\Type;
  *
  * @see Telnyx\Messages->send
  *
- * @phpstan-type message_send_params = array{
+ * @phpstan-type MessageSendParamsShape = array{
  *   to: string,
  *   autoDetect?: bool,
  *   from?: string,
@@ -36,7 +36,7 @@ use Telnyx\Messages\MessageSendParams\Type;
  */
 final class MessageSendParams implements BaseModel
 {
-    /** @use SdkModel<message_send_params> */
+    /** @use SdkModel<MessageSendParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Texml\Accounts\Calls\CallGetCallsResponse\Call;
 
 /**
- * @phpstan-type call_get_calls_response = array{
+ * @phpstan-type CallGetCallsResponseShape = array{
  *   calls?: list<Call>,
  *   end?: int,
  *   firstPageUri?: string,
@@ -25,7 +25,7 @@ use Telnyx\Texml\Accounts\Calls\CallGetCallsResponse\Call;
  */
 final class CallGetCallsResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<call_get_calls_response> */
+    /** @use SdkModel<CallGetCallsResponseShape> */
     use SdkModel;
 
     use SdkResponse;

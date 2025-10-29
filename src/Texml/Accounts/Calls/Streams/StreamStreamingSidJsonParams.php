@@ -15,13 +15,13 @@ use Telnyx\Texml\Accounts\Calls\Streams\StreamStreamingSidJsonParams\Status;
  *
  * @see Telnyx\Texml\Accounts\Calls\Streams->streamingSidJson
  *
- * @phpstan-type stream_streaming_sid_json_params = array{
+ * @phpstan-type StreamStreamingSidJsonParamsShape = array{
  *   accountSid: string, callSid: string, status?: Status|value-of<Status>
  * }
  */
 final class StreamStreamingSidJsonParams implements BaseModel
 {
-    /** @use SdkModel<stream_streaming_sid_json_params> */
+    /** @use SdkModel<StreamStreamingSidJsonParamsShape> */
     use SdkModel;
     use SdkParams;
 

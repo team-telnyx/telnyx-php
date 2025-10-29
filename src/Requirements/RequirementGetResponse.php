@@ -12,11 +12,11 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Requirements\RequirementGetResponse\Data;
 
 /**
- * @phpstan-type requirement_get_response = array{data?: Data}
+ * @phpstan-type RequirementGetResponseShape = array{data?: Data}
  */
 final class RequirementGetResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<requirement_get_response> */
+    /** @use SdkModel<RequirementGetResponseShape> */
     use SdkModel;
 
     use SdkResponse;

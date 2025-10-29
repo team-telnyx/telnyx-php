@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type verified_number_data_wrapper = array{data?: VerifiedNumber}
+ * @phpstan-type VerifiedNumberDataWrapperShape = array{data?: VerifiedNumber}
  */
 final class VerifiedNumberDataWrapper implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<verified_number_data_wrapper> */
+    /** @use SdkModel<VerifiedNumberDataWrapperShape> */
     use SdkModel;
 
     use SdkResponse;

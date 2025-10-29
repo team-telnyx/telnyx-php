@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type call_control_application_inbound = array{
+ * @phpstan-type CallControlApplicationInboundShape = array{
  *   channelLimit?: int,
  *   shakenStirEnabled?: bool,
  *   sipSubdomain?: string,
@@ -19,7 +19,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class CallControlApplicationInbound implements BaseModel
 {
-    /** @use SdkModel<call_control_application_inbound> */
+    /** @use SdkModel<CallControlApplicationInboundShape> */
     use SdkModel;
 
     /**

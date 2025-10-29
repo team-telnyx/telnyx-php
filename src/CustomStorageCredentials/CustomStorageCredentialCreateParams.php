@@ -15,14 +15,14 @@ use Telnyx\CustomStorageCredentials\CustomStorageCredentialCreateParams\Backend;
  *
  * @see Telnyx\CustomStorageCredentials->create
  *
- * @phpstan-type custom_storage_credential_create_params = array{
+ * @phpstan-type CustomStorageCredentialCreateParamsShape = array{
  *   backend: Backend|value-of<Backend>,
  *   configuration: GcsConfigurationData|S3ConfigurationData|AzureConfigurationData,
  * }
  */
 final class CustomStorageCredentialCreateParams implements BaseModel
 {
-    /** @use SdkModel<custom_storage_credential_create_params> */
+    /** @use SdkModel<CustomStorageCredentialCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

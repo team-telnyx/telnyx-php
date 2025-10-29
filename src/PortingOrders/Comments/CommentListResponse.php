@@ -13,13 +13,13 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PortingOrders\Comments\CommentListResponse\Data;
 
 /**
- * @phpstan-type comment_list_response = array{
+ * @phpstan-type CommentListResponseShape = array{
  *   data?: list<Data>, meta?: PaginationMeta
  * }
  */
 final class CommentListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<comment_list_response> */
+    /** @use SdkModel<CommentListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

@@ -9,11 +9,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type conference_command_result = array{result: string}
+ * @phpstan-type ConferenceCommandResultShape = array{result: string}
  */
 final class ConferenceCommandResult implements BaseModel
 {
-    /** @use SdkModel<conference_command_result> */
+    /** @use SdkModel<ConferenceCommandResultShape> */
     use SdkModel;
 
     #[Api]

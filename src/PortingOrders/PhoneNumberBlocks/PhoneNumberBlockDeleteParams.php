@@ -14,11 +14,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\PortingOrders\PhoneNumberBlocks->delete
  *
- * @phpstan-type phone_number_block_delete_params = array{portingOrderID: string}
+ * @phpstan-type PhoneNumberBlockDeleteParamsShape = array{portingOrderID: string}
  */
 final class PhoneNumberBlockDeleteParams implements BaseModel
 {
-    /** @use SdkModel<phone_number_block_delete_params> */
+    /** @use SdkModel<PhoneNumberBlockDeleteParamsShape> */
     use SdkModel;
     use SdkParams;
 

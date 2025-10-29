@@ -14,11 +14,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\AI\Clusters->fetchGraph
  *
- * @phpstan-type cluster_fetch_graph_params = array{clusterID?: int}
+ * @phpstan-type ClusterFetchGraphParamsShape = array{clusterID?: int}
  */
 final class ClusterFetchGraphParams implements BaseModel
 {
-    /** @use SdkModel<cluster_fetch_graph_params> */
+    /** @use SdkModel<ClusterFetchGraphParamsShape> */
     use SdkModel;
     use SdkParams;
 

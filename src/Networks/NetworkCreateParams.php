@@ -14,11 +14,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Networks->create
  *
- * @phpstan-type network_create_params = array{name: string}
+ * @phpstan-type NetworkCreateParamsShape = array{name: string}
  */
 final class NetworkCreateParams implements BaseModel
 {
-    /** @use SdkModel<network_create_params> */
+    /** @use SdkModel<NetworkCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

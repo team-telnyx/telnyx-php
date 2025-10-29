@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\GlobalIPAssignments->create
  *
- * @phpstan-type global_ip_assignment_create_params = array{
+ * @phpstan-type GlobalIPAssignmentCreateParamsShape = array{
  *   globalIPID?: string, isInMaintenance?: bool, wireguardPeerID?: string
  * }
  */
 final class GlobalIPAssignmentCreateParams implements BaseModel
 {
-    /** @use SdkModel<global_ip_assignment_create_params> */
+    /** @use SdkModel<GlobalIPAssignmentCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

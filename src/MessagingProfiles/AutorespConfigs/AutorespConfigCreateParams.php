@@ -15,7 +15,7 @@ use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigCreateParams\Op;
  *
  * @see Telnyx\MessagingProfiles\AutorespConfigs->create
  *
- * @phpstan-type autoresp_config_create_params = array{
+ * @phpstan-type AutorespConfigCreateParamsShape = array{
  *   countryCode: string,
  *   keywords: list<string>,
  *   op: Op|value-of<Op>,
@@ -24,7 +24,7 @@ use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigCreateParams\Op;
  */
 final class AutorespConfigCreateParams implements BaseModel
 {
-    /** @use SdkModel<autoresp_config_create_params> */
+    /** @use SdkModel<AutorespConfigCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

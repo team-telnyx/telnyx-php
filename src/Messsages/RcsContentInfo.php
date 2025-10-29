@@ -9,13 +9,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type rcs_content_info = array{
+ * @phpstan-type RcsContentInfoShape = array{
  *   fileURL: string, forceRefresh?: bool, thumbnailURL?: string
  * }
  */
 final class RcsContentInfo implements BaseModel
 {
-    /** @use SdkModel<rcs_content_info> */
+    /** @use SdkModel<RcsContentInfoShape> */
     use SdkModel;
 
     /**

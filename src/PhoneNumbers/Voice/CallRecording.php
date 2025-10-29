@@ -13,7 +13,7 @@ use Telnyx\PhoneNumbers\Voice\CallRecording\InboundCallRecordingFormat;
 /**
  * The call recording settings for a phone number.
  *
- * @phpstan-type call_recording = array{
+ * @phpstan-type CallRecordingShape = array{
  *   inboundCallRecordingChannels?: value-of<InboundCallRecordingChannels>,
  *   inboundCallRecordingEnabled?: bool,
  *   inboundCallRecordingFormat?: value-of<InboundCallRecordingFormat>,
@@ -21,7 +21,7 @@ use Telnyx\PhoneNumbers\Voice\CallRecording\InboundCallRecordingFormat;
  */
 final class CallRecording implements BaseModel
 {
-    /** @use SdkModel<call_recording> */
+    /** @use SdkModel<CallRecordingShape> */
     use SdkModel;
 
     /**

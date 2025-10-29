@@ -15,7 +15,7 @@ use Telnyx\SubNumberOrdersReport\SubNumberOrdersReportCreateParams\Status;
  *
  * @see Telnyx\SubNumberOrdersReport->create
  *
- * @phpstan-type sub_number_orders_report_create_params = array{
+ * @phpstan-type SubNumberOrdersReportCreateParamsShape = array{
  *   countryCode?: string,
  *   createdAtGt?: \DateTimeInterface,
  *   createdAtLt?: \DateTimeInterface,
@@ -26,7 +26,7 @@ use Telnyx\SubNumberOrdersReport\SubNumberOrdersReportCreateParams\Status;
  */
 final class SubNumberOrdersReportCreateParams implements BaseModel
 {
-    /** @use SdkModel<sub_number_orders_report_create_params> */
+    /** @use SdkModel<SubNumberOrdersReportCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

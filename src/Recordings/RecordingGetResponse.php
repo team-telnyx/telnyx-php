@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type recording_get_response = array{data?: RecordingResponseData}
+ * @phpstan-type RecordingGetResponseShape = array{data?: RecordingResponseData}
  */
 final class RecordingGetResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<recording_get_response> */
+    /** @use SdkModel<RecordingGetResponseShape> */
     use SdkModel;
 
     use SdkResponse;

@@ -16,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Conferences\Actions->update
  *
- * @phpstan-type action_update_params = array{
+ * @phpstan-type ActionUpdateParamsShape = array{
  *   callControlID: string,
  *   supervisorRole: SupervisorRole|value-of<SupervisorRole>,
  *   commandID?: string,
@@ -26,7 +26,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class ActionUpdateParams implements BaseModel
 {
-    /** @use SdkModel<action_update_params> */
+    /** @use SdkModel<ActionUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 

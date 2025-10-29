@@ -13,7 +13,7 @@ use Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging\MdrDetailReportResponse
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging\MdrDetailReportResponse\Status;
 
 /**
- * @phpstan-type mdr_detail_report_response = array{
+ * @phpstan-type MdrDetailReportResponseShape = array{
  *   id?: string,
  *   connections?: list<int>,
  *   createdAt?: \DateTimeInterface,
@@ -32,7 +32,7 @@ use Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging\MdrDetailReportResponse
  */
 final class MdrDetailReportResponse implements BaseModel
 {
-    /** @use SdkModel<mdr_detail_report_response> */
+    /** @use SdkModel<MdrDetailReportResponseShape> */
     use SdkModel;
 
     /**

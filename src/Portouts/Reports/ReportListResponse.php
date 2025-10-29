@@ -12,13 +12,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type report_list_response = array{
+ * @phpstan-type ReportListResponseShape = array{
  *   data?: list<PortoutReport>, meta?: PaginationMeta
  * }
  */
 final class ReportListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<report_list_response> */
+    /** @use SdkModel<ReportListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

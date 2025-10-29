@@ -9,11 +9,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type ai_assistant = array{id: string, name: string}
+ * @phpstan-type AIAssistantShape = array{id: string, name: string}
  */
 final class AIAssistant implements BaseModel
 {
-    /** @use SdkModel<ai_assistant> */
+    /** @use SdkModel<AIAssistantShape> */
     use SdkModel;
 
     /**

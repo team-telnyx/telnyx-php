@@ -13,7 +13,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type call_control_application = array{
+ * @phpstan-type CallControlApplicationShape = array{
  *   id?: string,
  *   active?: bool,
  *   anchorsiteOverride?: value-of<AnchorsiteOverride>,
@@ -36,7 +36,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class CallControlApplication implements BaseModel
 {
-    /** @use SdkModel<call_control_application> */
+    /** @use SdkModel<CallControlApplicationShape> */
     use SdkModel;
 
     #[Api(optional: true)]

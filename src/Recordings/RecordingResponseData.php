@@ -14,7 +14,7 @@ use Telnyx\Recordings\RecordingResponseData\Source;
 use Telnyx\Recordings\RecordingResponseData\Status;
 
 /**
- * @phpstan-type recording_response_data = array{
+ * @phpstan-type RecordingResponseDataShape = array{
  *   id?: string,
  *   callControlID?: string,
  *   callLegID?: string,
@@ -34,7 +34,7 @@ use Telnyx\Recordings\RecordingResponseData\Status;
  */
 final class RecordingResponseData implements BaseModel
 {
-    /** @use SdkModel<recording_response_data> */
+    /** @use SdkModel<RecordingResponseDataShape> */
     use SdkModel;
 
     /**

@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type action_reject_response = array{data?: CallControlCommandResult}
+ * @phpstan-type ActionRejectResponseShape = array{data?: CallControlCommandResult}
  */
 final class ActionRejectResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<action_reject_response> */
+    /** @use SdkModel<ActionRejectResponseShape> */
     use SdkModel;
 
     use SdkResponse;

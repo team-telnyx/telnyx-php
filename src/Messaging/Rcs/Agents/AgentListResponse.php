@@ -13,13 +13,13 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\RcsAgents\RcsAgent;
 
 /**
- * @phpstan-type agent_list_response = array{
+ * @phpstan-type AgentListResponseShape = array{
  *   data?: list<RcsAgent>, meta?: PaginationMeta
  * }
  */
 final class AgentListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<agent_list_response> */
+    /** @use SdkModel<AgentListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

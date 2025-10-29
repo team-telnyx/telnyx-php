@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Fqdns->create
  *
- * @phpstan-type fqdn_create_params = array{
+ * @phpstan-type FqdnCreateParamsShape = array{
  *   connectionID: string, dnsRecordType: string, fqdn: string, port?: int|null
  * }
  */
 final class FqdnCreateParams implements BaseModel
 {
-    /** @use SdkModel<fqdn_create_params> */
+    /** @use SdkModel<FqdnCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

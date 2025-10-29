@@ -16,13 +16,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Brand\ExternalVetting->import
  *
- * @phpstan-type external_vetting_import_params = array{
+ * @phpstan-type ExternalVettingImportParamsShape = array{
  *   evpID: string, vettingID: string, vettingToken?: string
  * }
  */
 final class ExternalVettingImportParams implements BaseModel
 {
-    /** @use SdkModel<external_vetting_import_params> */
+    /** @use SdkModel<ExternalVettingImportParamsShape> */
     use SdkModel;
     use SdkParams;
 

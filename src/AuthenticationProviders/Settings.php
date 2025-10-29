@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * The settings associated with the authentication provider.
  *
- * @phpstan-type settings_alias = array{
+ * @phpstan-type SettingsShape = array{
  *   idpCertFingerprint: string,
  *   idpEntityID: string,
  *   idpSSOTargetURL: string,
@@ -21,7 +21,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class Settings implements BaseModel
 {
-    /** @use SdkModel<settings_alias> */
+    /** @use SdkModel<SettingsShape> */
     use SdkModel;
 
     /**

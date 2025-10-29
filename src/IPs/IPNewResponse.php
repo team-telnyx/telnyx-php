@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type ip_new_response = array{data?: IP}
+ * @phpstan-type IPNewResponseShape = array{data?: IP}
  */
 final class IPNewResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<ip_new_response> */
+    /** @use SdkModel<IPNewResponseShape> */
     use SdkModel;
 
     use SdkResponse;

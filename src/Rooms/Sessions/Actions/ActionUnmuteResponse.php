@@ -12,11 +12,11 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Rooms\Sessions\Actions\ActionUnmuteResponse\Data;
 
 /**
- * @phpstan-type action_unmute_response = array{data?: Data}
+ * @phpstan-type ActionUnmuteResponseShape = array{data?: Data}
  */
 final class ActionUnmuteResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<action_unmute_response> */
+    /** @use SdkModel<ActionUnmuteResponseShape> */
     use SdkModel;
 
     use SdkResponse;

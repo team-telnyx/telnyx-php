@@ -9,13 +9,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type pagination_meta_oauth = array{
+ * @phpstan-type PaginationMetaOAuthShape = array{
  *   pageNumber?: int, pageSize?: int, totalPages?: int, totalResults?: int
  * }
  */
 final class PaginationMetaOAuth implements BaseModel
 {
-    /** @use SdkModel<pagination_meta_oauth> */
+    /** @use SdkModel<PaginationMetaOAuthShape> */
     use SdkModel;
 
     /**

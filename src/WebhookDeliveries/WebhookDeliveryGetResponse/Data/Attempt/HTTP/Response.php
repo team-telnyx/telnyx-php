@@ -12,13 +12,13 @@ use Telnyx\Core\Conversion\ListOf;
 /**
  * Response details, optional.
  *
- * @phpstan-type response_alias = array{
+ * @phpstan-type ResponseShape = array{
  *   body?: string, headers?: list<list<string>>, status?: int
  * }
  */
 final class Response implements BaseModel
 {
-    /** @use SdkModel<response_alias> */
+    /** @use SdkModel<ResponseShape> */
     use SdkModel;
 
     /**

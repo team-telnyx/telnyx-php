@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Specifies a value for a requirement on the Porting Order.
  *
- * @phpstan-type requirement_alias = array{
+ * @phpstan-type RequirementShape = array{
  *   fieldValue: string, requirementTypeID: string
  * }
  */
 final class Requirement implements BaseModel
 {
-    /** @use SdkModel<requirement_alias> */
+    /** @use SdkModel<RequirementShape> */
     use SdkModel;
 
     /**

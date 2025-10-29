@@ -12,13 +12,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type private_wireless_gateway_list_response = array{
+ * @phpstan-type PrivateWirelessGatewayListResponseShape = array{
  *   data?: list<PrivateWirelessGateway>, meta?: PaginationMeta
  * }
  */
 final class PrivateWirelessGatewayListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<private_wireless_gateway_list_response> */
+    /** @use SdkModel<PrivateWirelessGatewayListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

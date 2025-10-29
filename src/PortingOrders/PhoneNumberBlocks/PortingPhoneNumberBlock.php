@@ -12,7 +12,7 @@ use Telnyx\PortingOrders\PhoneNumberBlocks\PortingPhoneNumberBlock\PhoneNumberRa
 use Telnyx\PortingOrders\PhoneNumberBlocks\PortingPhoneNumberBlock\PhoneNumberType;
 
 /**
- * @phpstan-type porting_phone_number_block = array{
+ * @phpstan-type PortingPhoneNumberBlockShape = array{
  *   id?: string,
  *   activationRanges?: list<ActivationRange>,
  *   countryCode?: string,
@@ -25,7 +25,7 @@ use Telnyx\PortingOrders\PhoneNumberBlocks\PortingPhoneNumberBlock\PhoneNumberTy
  */
 final class PortingPhoneNumberBlock implements BaseModel
 {
-    /** @use SdkModel<porting_phone_number_block> */
+    /** @use SdkModel<PortingPhoneNumberBlockShape> */
     use SdkModel;
 
     /**

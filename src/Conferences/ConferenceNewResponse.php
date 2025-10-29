@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type conference_new_response = array{data?: Conference}
+ * @phpstan-type ConferenceNewResponseShape = array{data?: Conference}
  */
 final class ConferenceNewResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<conference_new_response> */
+    /** @use SdkModel<ConferenceNewResponseShape> */
     use SdkModel;
 
     use SdkResponse;

@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * The address of the company.
  *
- * @phpstan-type address_alias = array{
+ * @phpstan-type AddressShape = array{
  *   city?: string,
  *   countryCode?: string,
  *   extendedAddress?: string,
@@ -22,7 +22,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class Address implements BaseModel
 {
-    /** @use SdkModel<address_alias> */
+    /** @use SdkModel<AddressShape> */
     use SdkModel;
 
     /**

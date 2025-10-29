@@ -26,7 +26,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Calls\Actions->gatherUsingAI
  *
- * @phpstan-type action_gather_using_ai_params = array{
+ * @phpstan-type ActionGatherUsingAIParamsShape = array{
  *   parameters: mixed,
  *   assistant?: Assistant,
  *   clientState?: string,
@@ -45,7 +45,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class ActionGatherUsingAIParams implements BaseModel
 {
-    /** @use SdkModel<action_gather_using_ai_params> */
+    /** @use SdkModel<ActionGatherUsingAIParamsShape> */
     use SdkModel;
     use SdkParams;
 

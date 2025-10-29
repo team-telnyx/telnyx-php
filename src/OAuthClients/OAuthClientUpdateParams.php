@@ -15,7 +15,7 @@ use Telnyx\OAuthClients\OAuthClientUpdateParams\AllowedGrantType;
  *
  * @see Telnyx\OAuthClients->update
  *
- * @phpstan-type oauth_client_update_params = array{
+ * @phpstan-type OAuthClientUpdateParamsShape = array{
  *   allowedGrantTypes?: list<AllowedGrantType|value-of<AllowedGrantType>>,
  *   allowedScopes?: list<string>,
  *   logoUri?: string,
@@ -28,7 +28,7 @@ use Telnyx\OAuthClients\OAuthClientUpdateParams\AllowedGrantType;
  */
 final class OAuthClientUpdateParams implements BaseModel
 {
-    /** @use SdkModel<oauth_client_update_params> */
+    /** @use SdkModel<OAuthClientUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 

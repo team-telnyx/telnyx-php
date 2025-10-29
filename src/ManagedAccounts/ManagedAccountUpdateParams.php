@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\ManagedAccounts->update
  *
- * @phpstan-type managed_account_update_params = array{
+ * @phpstan-type ManagedAccountUpdateParamsShape = array{
  *   managedAccountAllowCustomPricing?: bool
  * }
  */
 final class ManagedAccountUpdateParams implements BaseModel
 {
-    /** @use SdkModel<managed_account_update_params> */
+    /** @use SdkModel<ManagedAccountUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 

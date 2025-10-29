@@ -10,13 +10,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\MessagingFeatureSet;
 
 /**
- * @phpstan-type features_alias = array{
+ * @phpstan-type FeaturesShape = array{
  *   mms?: MessagingFeatureSet|null, sms?: MessagingFeatureSet|null
  * }
  */
 final class Features implements BaseModel
 {
-    /** @use SdkModel<features_alias> */
+    /** @use SdkModel<FeaturesShape> */
     use SdkModel;
 
     /**

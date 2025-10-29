@@ -14,11 +14,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Networks->update
  *
- * @phpstan-type network_update_params = array{name: string}
+ * @phpstan-type NetworkUpdateParamsShape = array{name: string}
  */
 final class NetworkUpdateParams implements BaseModel
 {
-    /** @use SdkModel<network_update_params> */
+    /** @use SdkModel<NetworkUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 

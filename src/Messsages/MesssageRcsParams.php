@@ -17,7 +17,7 @@ use Telnyx\Messsages\MesssageRcsParams\Type;
  *
  * @see Telnyx\Messsages->rcs
  *
- * @phpstan-type messsage_rcs_params = array{
+ * @phpstan-type MesssageRcsParamsShape = array{
  *   agentID: string,
  *   agentMessage: RcsAgentMessage,
  *   messagingProfileID: string,
@@ -30,7 +30,7 @@ use Telnyx\Messsages\MesssageRcsParams\Type;
  */
 final class MesssageRcsParams implements BaseModel
 {
-    /** @use SdkModel<messsage_rcs_params> */
+    /** @use SdkModel<MesssageRcsParamsShape> */
     use SdkModel;
     use SdkParams;
 

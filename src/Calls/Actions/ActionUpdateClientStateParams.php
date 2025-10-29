@@ -14,11 +14,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Calls\Actions->updateClientState
  *
- * @phpstan-type action_update_client_state_params = array{clientState: string}
+ * @phpstan-type ActionUpdateClientStateParamsShape = array{clientState: string}
  */
 final class ActionUpdateClientStateParams implements BaseModel
 {
-    /** @use SdkModel<action_update_client_state_params> */
+    /** @use SdkModel<ActionUpdateClientStateParamsShape> */
     use SdkModel;
     use SdkParams;
 

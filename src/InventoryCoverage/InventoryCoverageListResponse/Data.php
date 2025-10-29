@@ -12,7 +12,7 @@ use Telnyx\InventoryCoverage\InventoryCoverageListResponse\Data\NumberType;
 use Telnyx\InventoryCoverage\InventoryCoverageListResponse\Data\PhoneNumberType;
 
 /**
- * @phpstan-type data_alias = array{
+ * @phpstan-type DataShape = array{
  *   administrativeArea?: string,
  *   advanceRequirements?: bool,
  *   count?: int,
@@ -27,7 +27,7 @@ use Telnyx\InventoryCoverage\InventoryCoverageListResponse\Data\PhoneNumberType;
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     #[Api('administrative_area', optional: true)]

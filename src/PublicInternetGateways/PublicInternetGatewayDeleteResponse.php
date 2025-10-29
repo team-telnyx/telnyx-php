@@ -12,11 +12,11 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayDeleteResponse\Data;
 
 /**
- * @phpstan-type public_internet_gateway_delete_response = array{data?: Data}
+ * @phpstan-type PublicInternetGatewayDeleteResponseShape = array{data?: Data}
  */
 final class PublicInternetGatewayDeleteResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<public_internet_gateway_delete_response> */
+    /** @use SdkModel<PublicInternetGatewayDeleteResponseShape> */
     use SdkModel;
 
     use SdkResponse;

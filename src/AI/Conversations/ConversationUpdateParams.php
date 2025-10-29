@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\AI\Conversations->update
  *
- * @phpstan-type conversation_update_params = array{
+ * @phpstan-type ConversationUpdateParamsShape = array{
  *   metadata?: array<string, string>
  * }
  */
 final class ConversationUpdateParams implements BaseModel
 {
-    /** @use SdkModel<conversation_update_params> */
+    /** @use SdkModel<ConversationUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -13,13 +13,13 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Rooms\RoomSession;
 
 /**
- * @phpstan-type session_list1_response = array{
+ * @phpstan-type SessionList1ResponseShape = array{
  *   data?: list<RoomSession>, meta?: PaginationMeta
  * }
  */
 final class SessionList1Response implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<session_list1_response> */
+    /** @use SdkModel<SessionList1ResponseShape> */
     use SdkModel;
 
     use SdkResponse;

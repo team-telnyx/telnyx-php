@@ -12,15 +12,13 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberUpdateRequirementGroupResponse\Data;
 
 /**
- * @phpstan-type number_order_phone_number_update_requirement_group_response = array{
+ * @phpstan-type NumberOrderPhoneNumberUpdateRequirementGroupResponseShape = array{
  *   data?: Data
  * }
  */
 final class NumberOrderPhoneNumberUpdateRequirementGroupResponse implements BaseModel, ResponseConverter
 {
-    /**
-     * @use SdkModel<number_order_phone_number_update_requirement_group_response>
-     */
+    /** @use SdkModel<NumberOrderPhoneNumberUpdateRequirementGroupResponseShape> */
     use SdkModel;
 
     use SdkResponse;

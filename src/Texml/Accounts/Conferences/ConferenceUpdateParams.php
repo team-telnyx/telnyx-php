@@ -15,7 +15,7 @@ use Telnyx\Texml\Accounts\Conferences\ConferenceUpdateParams\AnnounceMethod;
  *
  * @see Telnyx\Texml\Accounts\Conferences->update
  *
- * @phpstan-type conference_update_params = array{
+ * @phpstan-type ConferenceUpdateParamsShape = array{
  *   accountSid: string,
  *   announceMethod?: AnnounceMethod|value-of<AnnounceMethod>,
  *   announceURL?: string,
@@ -24,7 +24,7 @@ use Telnyx\Texml\Accounts\Conferences\ConferenceUpdateParams\AnnounceMethod;
  */
 final class ConferenceUpdateParams implements BaseModel
 {
-    /** @use SdkModel<conference_update_params> */
+    /** @use SdkModel<ConferenceUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 

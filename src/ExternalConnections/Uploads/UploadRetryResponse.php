@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type upload_retry_response = array{data?: Upload}
+ * @phpstan-type UploadRetryResponseShape = array{data?: Upload}
  */
 final class UploadRetryResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<upload_retry_response> */
+    /** @use SdkModel<UploadRetryResponseShape> */
     use SdkModel;
 
     use SdkResponse;

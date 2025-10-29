@@ -16,13 +16,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\AccessIPAddress->list
  *
- * @phpstan-type access_ip_address_list_params = array{
+ * @phpstan-type AccessIPAddressListParamsShape = array{
  *   filter?: Filter, page?: Page
  * }
  */
 final class AccessIPAddressListParams implements BaseModel
 {
-    /** @use SdkModel<access_ip_address_list_params> */
+    /** @use SdkModel<AccessIPAddressListParamsShape> */
     use SdkModel;
     use SdkParams;
 

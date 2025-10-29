@@ -16,13 +16,13 @@ use Telnyx\WirelessBlocklistValues\WirelessBlocklistValueListResponse\Data\Mcc;
 use Telnyx\WirelessBlocklistValues\WirelessBlocklistValueListResponse\Data\Plmn;
 
 /**
- * @phpstan-type wireless_blocklist_value_list_response = array{
+ * @phpstan-type WirelessBlocklistValueListResponseShape = array{
  *   data?: list<Country>|list<Mcc>|list<Plmn>, meta?: PaginationMeta
  * }
  */
 final class WirelessBlocklistValueListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<wireless_blocklist_value_list_response> */
+    /** @use SdkModel<WirelessBlocklistValueListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

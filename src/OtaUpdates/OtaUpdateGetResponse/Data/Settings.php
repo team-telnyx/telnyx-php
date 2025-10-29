@@ -12,13 +12,13 @@ use Telnyx\OtaUpdates\OtaUpdateGetResponse\Data\Settings\MobileNetworkOperatorsP
 /**
  * A JSON object representation of the operation. The information present here will relate directly to the source of the OTA request.
  *
- * @phpstan-type settings_alias = array{
+ * @phpstan-type SettingsShape = array{
  *   mobileNetworkOperatorsPreferences?: list<MobileNetworkOperatorsPreference>
  * }
  */
 final class Settings implements BaseModel
 {
-    /** @use SdkModel<settings_alias> */
+    /** @use SdkModel<SettingsShape> */
     use SdkModel;
 
     /**

@@ -15,13 +15,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Calls\Actions->switchSupervisorRole
  *
- * @phpstan-type action_switch_supervisor_role_params = array{
+ * @phpstan-type ActionSwitchSupervisorRoleParamsShape = array{
  *   role: Role|value-of<Role>
  * }
  */
 final class ActionSwitchSupervisorRoleParams implements BaseModel
 {
-    /** @use SdkModel<action_switch_supervisor_role_params> */
+    /** @use SdkModel<ActionSwitchSupervisorRoleParamsShape> */
     use SdkModel;
     use SdkParams;
 

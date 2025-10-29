@@ -17,7 +17,7 @@ use Telnyx\ExternalConnections\ExternalConnectionCreateParams\Outbound;
  *
  * @see Telnyx\ExternalConnections->create
  *
- * @phpstan-type external_connection_create_params = array{
+ * @phpstan-type ExternalConnectionCreateParamsShape = array{
  *   externalSipConnection: ExternalSipConnection|value-of<ExternalSipConnection>,
  *   outbound: Outbound,
  *   active?: bool,
@@ -30,7 +30,7 @@ use Telnyx\ExternalConnections\ExternalConnectionCreateParams\Outbound;
  */
 final class ExternalConnectionCreateParams implements BaseModel
 {
-    /** @use SdkModel<external_connection_create_params> */
+    /** @use SdkModel<ExternalConnectionCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

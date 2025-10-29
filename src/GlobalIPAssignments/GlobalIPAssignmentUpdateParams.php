@@ -15,11 +15,11 @@ use Telnyx\GlobalIPAssignments\GlobalIPAssignmentUpdateParams\Body;
  *
  * @see Telnyx\GlobalIPAssignments->update
  *
- * @phpstan-type global_ip_assignment_update_params = array{body: Body}
+ * @phpstan-type GlobalIPAssignmentUpdateParamsShape = array{body: Body}
  */
 final class GlobalIPAssignmentUpdateParams implements BaseModel
 {
-    /** @use SdkModel<global_ip_assignment_update_params> */
+    /** @use SdkModel<GlobalIPAssignmentUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 

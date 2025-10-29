@@ -13,7 +13,7 @@ use Telnyx\ExternalConnections\ExternalConnection\Outbound;
 use Telnyx\ExternalConnections\ExternalConnection\WebhookAPIVersion;
 
 /**
- * @phpstan-type external_connection = array{
+ * @phpstan-type ExternalConnectionShape = array{
  *   id?: string,
  *   active?: bool,
  *   createdAt?: string,
@@ -32,7 +32,7 @@ use Telnyx\ExternalConnections\ExternalConnection\WebhookAPIVersion;
  */
 final class ExternalConnection implements BaseModel
 {
-    /** @use SdkModel<external_connection> */
+    /** @use SdkModel<ExternalConnectionShape> */
     use SdkModel;
 
     /**

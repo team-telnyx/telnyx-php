@@ -14,11 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\PortabilityChecks->run
  *
- * @phpstan-type portability_check_run_params = array{phoneNumbers?: list<string>}
+ * @phpstan-type PortabilityCheckRunParamsShape = array{
+ *   phoneNumbers?: list<string>
+ * }
  */
 final class PortabilityCheckRunParams implements BaseModel
 {
-    /** @use SdkModel<portability_check_run_params> */
+    /** @use SdkModel<PortabilityCheckRunParamsShape> */
     use SdkModel;
     use SdkParams;
 

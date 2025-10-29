@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\BundlePricing\BillingBundles->retrieve
  *
- * @phpstan-type billing_bundle_retrieve_params = array{
+ * @phpstan-type BillingBundleRetrieveParamsShape = array{
  *   authorizationBearer?: string
  * }
  */
 final class BillingBundleRetrieveParams implements BaseModel
 {
-    /** @use SdkModel<billing_bundle_retrieve_params> */
+    /** @use SdkModel<BillingBundleRetrieveParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\AI\Conversations\InsightGroups->insightGroups
  *
- * @phpstan-type insight_group_insight_groups_params = array{
+ * @phpstan-type InsightGroupInsightGroupsParamsShape = array{
  *   name: string, description?: string, webhook?: string
  * }
  */
 final class InsightGroupInsightGroupsParams implements BaseModel
 {
-    /** @use SdkModel<insight_group_insight_groups_params> */
+    /** @use SdkModel<InsightGroupInsightGroupsParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -12,11 +12,11 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\ExternalConnections\Releases\ReleaseGetResponse\Data;
 
 /**
- * @phpstan-type release_get_response = array{data?: Data}
+ * @phpstan-type ReleaseGetResponseShape = array{data?: Data}
  */
 final class ReleaseGetResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<release_get_response> */
+    /** @use SdkModel<ReleaseGetResponseShape> */
     use SdkModel;
 
     use SdkResponse;

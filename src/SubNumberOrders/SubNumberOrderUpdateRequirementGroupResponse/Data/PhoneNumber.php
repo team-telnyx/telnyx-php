@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SubNumberOrders\SubNumberOrderUpdateRequirementGroupResponse\Data\PhoneNumber\RegulatoryRequirement;
 
 /**
- * @phpstan-type phone_number = array{
+ * @phpstan-type PhoneNumberShape = array{
  *   id?: string,
  *   bundleID?: string,
  *   countryCode?: string,
@@ -25,7 +25,7 @@ use Telnyx\SubNumberOrders\SubNumberOrderUpdateRequirementGroupResponse\Data\Pho
  */
 final class PhoneNumber implements BaseModel
 {
-    /** @use SdkModel<phone_number> */
+    /** @use SdkModel<PhoneNumberShape> */
     use SdkModel;
 
     #[Api(optional: true)]

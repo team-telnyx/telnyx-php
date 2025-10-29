@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Portouts->updateStatus
  *
- * @phpstan-type portout_update_status_params = array{
+ * @phpstan-type PortoutUpdateStatusParamsShape = array{
  *   id: string, reason: string, hostMessaging?: bool
  * }
  */
 final class PortoutUpdateStatusParams implements BaseModel
 {
-    /** @use SdkModel<portout_update_status_params> */
+    /** @use SdkModel<PortoutUpdateStatusParamsShape> */
     use SdkModel;
     use SdkParams;
 

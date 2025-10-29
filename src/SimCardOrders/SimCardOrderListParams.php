@@ -16,11 +16,11 @@ use Telnyx\SimCardOrders\SimCardOrderListParams\Page;
  *
  * @see Telnyx\SimCardOrders->list
  *
- * @phpstan-type sim_card_order_list_params = array{filter?: Filter, page?: Page}
+ * @phpstan-type SimCardOrderListParamsShape = array{filter?: Filter, page?: Page}
  */
 final class SimCardOrderListParams implements BaseModel
 {
-    /** @use SdkModel<sim_card_order_list_params> */
+    /** @use SdkModel<SimCardOrderListParamsShape> */
     use SdkModel;
     use SdkParams;
 

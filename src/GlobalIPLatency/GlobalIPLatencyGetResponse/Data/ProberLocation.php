@@ -9,13 +9,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type prober_location = array{
+ * @phpstan-type ProberLocationShape = array{
  *   id?: string, lat?: float, lon?: float, name?: string
  * }
  */
 final class ProberLocation implements BaseModel
 {
-    /** @use SdkModel<prober_location> */
+    /** @use SdkModel<ProberLocationShape> */
     use SdkModel;
 
     /**

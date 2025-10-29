@@ -13,13 +13,13 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayListResponse\Data;
 
 /**
- * @phpstan-type public_internet_gateway_list_response = array{
+ * @phpstan-type PublicInternetGatewayListResponseShape = array{
  *   data?: list<Data>, meta?: PaginationMeta
  * }
  */
 final class PublicInternetGatewayListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<public_internet_gateway_list_response> */
+    /** @use SdkModel<PublicInternetGatewayListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

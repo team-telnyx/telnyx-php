@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type document_update_response = array{data?: DocServiceDocument}
+ * @phpstan-type DocumentUpdateResponseShape = array{data?: DocServiceDocument}
  */
 final class DocumentUpdateResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<document_update_response> */
+    /** @use SdkModel<DocumentUpdateResponseShape> */
     use SdkModel;
 
     use SdkResponse;

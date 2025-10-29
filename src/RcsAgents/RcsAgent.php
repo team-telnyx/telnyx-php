@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type rcs_agent = array{
+ * @phpstan-type RcsAgentShape = array{
  *   agentID?: string,
  *   agentName?: string,
  *   createdAt?: \DateTimeInterface,
@@ -23,7 +23,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class RcsAgent implements BaseModel
 {
-    /** @use SdkModel<rcs_agent> */
+    /** @use SdkModel<RcsAgentShape> */
     use SdkModel;
 
     /**

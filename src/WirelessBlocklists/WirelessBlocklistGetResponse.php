@@ -11,11 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type wireless_blocklist_get_response = array{data?: WirelessBlocklist}
+ * @phpstan-type WirelessBlocklistGetResponseShape = array{
+ *   data?: WirelessBlocklist
+ * }
  */
 final class WirelessBlocklistGetResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<wireless_blocklist_get_response> */
+    /** @use SdkModel<WirelessBlocklistGetResponseShape> */
     use SdkModel;
 
     use SdkResponse;

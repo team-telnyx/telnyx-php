@@ -16,13 +16,13 @@ use Telnyx\Rooms\Sessions\SessionRetrieveParticipantsParams\Page;
  *
  * @see Telnyx\Rooms\Sessions->retrieveParticipants
  *
- * @phpstan-type session_retrieve_participants_params = array{
+ * @phpstan-type SessionRetrieveParticipantsParamsShape = array{
  *   filter?: Filter, page?: Page
  * }
  */
 final class SessionRetrieveParticipantsParams implements BaseModel
 {
-    /** @use SdkModel<session_retrieve_participants_params> */
+    /** @use SdkModel<SessionRetrieveParticipantsParamsShape> */
     use SdkModel;
     use SdkParams;
 

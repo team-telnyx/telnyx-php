@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NumberReservations\NumberReservation\Status;
 
 /**
- * @phpstan-type number_reservation = array{
+ * @phpstan-type NumberReservationShape = array{
  *   id?: string,
  *   createdAt?: \DateTimeInterface,
  *   customerReference?: string,
@@ -22,7 +22,7 @@ use Telnyx\NumberReservations\NumberReservation\Status;
  */
 final class NumberReservation implements BaseModel
 {
-    /** @use SdkModel<number_reservation> */
+    /** @use SdkModel<NumberReservationShape> */
     use SdkModel;
 
     #[Api(optional: true)]

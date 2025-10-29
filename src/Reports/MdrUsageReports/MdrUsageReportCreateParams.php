@@ -15,7 +15,7 @@ use Telnyx\Reports\MdrUsageReports\MdrUsageReportCreateParams\AggregationType;
  *
  * @see Telnyx\Reports\MdrUsageReports->create
  *
- * @phpstan-type mdr_usage_report_create_params = array{
+ * @phpstan-type MdrUsageReportCreateParamsShape = array{
  *   aggregationType: AggregationType|value-of<AggregationType>,
  *   endDate: \DateTimeInterface,
  *   startDate: \DateTimeInterface,
@@ -24,7 +24,7 @@ use Telnyx\Reports\MdrUsageReports\MdrUsageReportCreateParams\AggregationType;
  */
 final class MdrUsageReportCreateParams implements BaseModel
 {
-    /** @use SdkModel<mdr_usage_report_create_params> */
+    /** @use SdkModel<MdrUsageReportCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

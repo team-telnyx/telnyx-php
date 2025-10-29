@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantGetParticipantsResponse\Participant\Status;
 
 /**
- * @phpstan-type participant_alias = array{
+ * @phpstan-type ParticipantShape = array{
  *   accountSid?: string,
  *   apiVersion?: string,
  *   callSid?: string,
@@ -29,7 +29,7 @@ use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantGetParticipantsRes
  */
 final class Participant implements BaseModel
 {
-    /** @use SdkModel<participant_alias> */
+    /** @use SdkModel<ParticipantShape> */
     use SdkModel;
 
     /**

@@ -14,11 +14,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\ManagedAccounts\Actions->enable
  *
- * @phpstan-type action_enable_params = array{reenableAllConnections?: bool}
+ * @phpstan-type ActionEnableParamsShape = array{reenableAllConnections?: bool}
  */
 final class ActionEnableParams implements BaseModel
 {
-    /** @use SdkModel<action_enable_params> */
+    /** @use SdkModel<ActionEnableParamsShape> */
     use SdkModel;
     use SdkParams;
 

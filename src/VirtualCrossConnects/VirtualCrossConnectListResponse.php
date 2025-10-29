@@ -13,13 +13,13 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectListResponse\Data;
 
 /**
- * @phpstan-type virtual_cross_connect_list_response = array{
+ * @phpstan-type VirtualCrossConnectListResponseShape = array{
  *   data?: list<Data>, meta?: PaginationMeta
  * }
  */
 final class VirtualCrossConnectListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<virtual_cross_connect_list_response> */
+    /** @use SdkModel<VirtualCrossConnectListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

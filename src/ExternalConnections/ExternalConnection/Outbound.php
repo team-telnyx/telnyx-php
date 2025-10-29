@@ -9,13 +9,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type outbound_alias = array{
+ * @phpstan-type OutboundShape = array{
  *   channelLimit?: int, outboundVoiceProfileID?: string
  * }
  */
 final class Outbound implements BaseModel
 {
-    /** @use SdkModel<outbound_alias> */
+    /** @use SdkModel<OutboundShape> */
     use SdkModel;
 
     /**

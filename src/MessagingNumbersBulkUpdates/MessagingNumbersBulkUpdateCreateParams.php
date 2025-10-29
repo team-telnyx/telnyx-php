@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\MessagingNumbersBulkUpdates->create
  *
- * @phpstan-type messaging_numbers_bulk_update_create_params = array{
+ * @phpstan-type MessagingNumbersBulkUpdateCreateParamsShape = array{
  *   messagingProfileID: string, numbers: list<string>
  * }
  */
 final class MessagingNumbersBulkUpdateCreateParams implements BaseModel
 {
-    /** @use SdkModel<messaging_numbers_bulk_update_create_params> */
+    /** @use SdkModel<MessagingNumbersBulkUpdateCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

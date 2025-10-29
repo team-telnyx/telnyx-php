@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\AI\Assistants\Tests->list
  *
- * @phpstan-type test_list_params = array{
+ * @phpstan-type TestListParamsShape = array{
  *   destination?: string,
  *   page?: Page,
  *   telnyxConversationChannel?: string,
@@ -24,7 +24,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class TestListParams implements BaseModel
 {
-    /** @use SdkModel<test_list_params> */
+    /** @use SdkModel<TestListParamsShape> */
     use SdkModel;
     use SdkParams;
 

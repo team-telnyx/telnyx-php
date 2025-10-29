@@ -15,14 +15,14 @@ use Telnyx\NumberOrderPhoneNumbers\UpdateRegulatoryRequirement;
  *
  * @see Telnyx\NumberOrders->update
  *
- * @phpstan-type number_order_update_params = array{
+ * @phpstan-type NumberOrderUpdateParamsShape = array{
  *   customerReference?: string,
  *   regulatoryRequirements?: list<UpdateRegulatoryRequirement>,
  * }
  */
 final class NumberOrderUpdateParams implements BaseModel
 {
-    /** @use SdkModel<number_order_update_params> */
+    /** @use SdkModel<NumberOrderUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 

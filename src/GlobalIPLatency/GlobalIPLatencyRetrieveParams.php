@@ -15,11 +15,11 @@ use Telnyx\GlobalIPLatency\GlobalIPLatencyRetrieveParams\Filter;
  *
  * @see Telnyx\GlobalIPLatency->retrieve
  *
- * @phpstan-type global_ip_latency_retrieve_params = array{filter?: Filter}
+ * @phpstan-type GlobalIPLatencyRetrieveParamsShape = array{filter?: Filter}
  */
 final class GlobalIPLatencyRetrieveParams implements BaseModel
 {
-    /** @use SdkModel<global_ip_latency_retrieve_params> */
+    /** @use SdkModel<GlobalIPLatencyRetrieveParamsShape> */
     use SdkModel;
     use SdkParams;
 

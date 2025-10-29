@@ -16,7 +16,7 @@ use Telnyx\ExternalConnections\Uploads\UploadCreateParams\Usage;
  *
  * @see Telnyx\ExternalConnections\Uploads->create
  *
- * @phpstan-type upload_create_params = array{
+ * @phpstan-type UploadCreateParamsShape = array{
  *   numberIDs: list<string>,
  *   additionalUsages?: list<AdditionalUsage|value-of<AdditionalUsage>>,
  *   civicAddressID?: string,
@@ -26,7 +26,7 @@ use Telnyx\ExternalConnections\Uploads\UploadCreateParams\Usage;
  */
 final class UploadCreateParams implements BaseModel
 {
-    /** @use SdkModel<upload_create_params> */
+    /** @use SdkModel<UploadCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

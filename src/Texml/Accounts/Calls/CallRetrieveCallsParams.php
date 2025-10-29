@@ -15,7 +15,7 @@ use Telnyx\Texml\Accounts\Calls\CallRetrieveCallsParams\Status;
  *
  * @see Telnyx\Texml\Accounts\Calls->retrieveCalls
  *
- * @phpstan-type call_retrieve_calls_params = array{
+ * @phpstan-type CallRetrieveCallsParamsShape = array{
  *   endTime?: string,
  *   endTimeGt?: string,
  *   endTimeLt?: string,
@@ -32,7 +32,7 @@ use Telnyx\Texml\Accounts\Calls\CallRetrieveCallsParams\Status;
  */
 final class CallRetrieveCallsParams implements BaseModel
 {
-    /** @use SdkModel<call_retrieve_calls_params> */
+    /** @use SdkModel<CallRetrieveCallsParamsShape> */
     use SdkModel;
     use SdkParams;
 

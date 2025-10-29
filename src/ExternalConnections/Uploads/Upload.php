@@ -11,7 +11,7 @@ use Telnyx\ExternalConnections\Uploads\Upload\AvailableUsage;
 use Telnyx\ExternalConnections\Uploads\Upload\Status;
 
 /**
- * @phpstan-type upload_alias = array{
+ * @phpstan-type UploadShape = array{
  *   availableUsages?: list<value-of<AvailableUsage>>,
  *   errorCode?: string,
  *   errorMessage?: string,
@@ -24,7 +24,7 @@ use Telnyx\ExternalConnections\Uploads\Upload\Status;
  */
 final class Upload implements BaseModel
 {
-    /** @use SdkModel<upload_alias> */
+    /** @use SdkModel<UploadShape> */
     use SdkModel;
 
     /** @var list<value-of<AvailableUsage>>|null $availableUsages */

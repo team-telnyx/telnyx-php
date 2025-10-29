@@ -15,11 +15,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\AI\Conversations\Insights->list
  *
- * @phpstan-type insight_list_params = array{page?: Page}
+ * @phpstan-type InsightListParamsShape = array{page?: Page}
  */
 final class InsightListParams implements BaseModel
 {
-    /** @use SdkModel<insight_list_params> */
+    /** @use SdkModel<InsightListParamsShape> */
     use SdkModel;
     use SdkParams;
 

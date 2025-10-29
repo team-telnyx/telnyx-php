@@ -15,11 +15,11 @@ use Telnyx\GlobalIPs\GlobalIPListParams\Page;
  *
  * @see Telnyx\GlobalIPs->list
  *
- * @phpstan-type global_ip_list_params = array{page?: Page}
+ * @phpstan-type GlobalIPListParamsShape = array{page?: Page}
  */
 final class GlobalIPListParams implements BaseModel
 {
-    /** @use SdkModel<global_ip_list_params> */
+    /** @use SdkModel<GlobalIPListParamsShape> */
     use SdkModel;
     use SdkParams;
 

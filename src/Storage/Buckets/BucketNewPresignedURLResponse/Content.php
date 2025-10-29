@@ -9,13 +9,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type content_alias = array{
+ * @phpstan-type ContentShape = array{
  *   token?: string, expiresAt?: \DateTimeInterface, presignedURL?: string
  * }
  */
 final class Content implements BaseModel
 {
-    /** @use SdkModel<content_alias> */
+    /** @use SdkModel<ContentShape> */
     use SdkModel;
 
     /**

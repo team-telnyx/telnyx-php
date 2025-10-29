@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Request model for creating or updating canary deploys.
  *
- * @phpstan-type canary_deploy = array{versions: list<VersionConfig>}
+ * @phpstan-type CanaryDeployShape = array{versions: list<VersionConfig>}
  */
 final class CanaryDeploy implements BaseModel
 {
-    /** @use SdkModel<canary_deploy> */
+    /** @use SdkModel<CanaryDeployShape> */
     use SdkModel;
 
     /**

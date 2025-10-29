@@ -12,13 +12,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type messaging_profile_list_response = array{
+ * @phpstan-type MessagingProfileListResponseShape = array{
  *   data?: list<MessagingProfile>, meta?: PaginationMeta
  * }
  */
 final class MessagingProfileListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<messaging_profile_list_response> */
+    /** @use SdkModel<MessagingProfileListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

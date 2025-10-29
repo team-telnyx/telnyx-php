@@ -15,7 +15,7 @@ use Telnyx\Texml\Accounts\Conferences\ConferenceRetrieveConferencesParams\Status
  *
  * @see Telnyx\Texml\Accounts\Conferences->retrieveConferences
  *
- * @phpstan-type conference_retrieve_conferences_params = array{
+ * @phpstan-type ConferenceRetrieveConferencesParamsShape = array{
  *   dateCreated?: string,
  *   dateUpdated?: string,
  *   friendlyName?: string,
@@ -27,7 +27,7 @@ use Telnyx\Texml\Accounts\Conferences\ConferenceRetrieveConferencesParams\Status
  */
 final class ConferenceRetrieveConferencesParams implements BaseModel
 {
-    /** @use SdkModel<conference_retrieve_conferences_params> */
+    /** @use SdkModel<ConferenceRetrieveConferencesParamsShape> */
     use SdkModel;
     use SdkParams;
 

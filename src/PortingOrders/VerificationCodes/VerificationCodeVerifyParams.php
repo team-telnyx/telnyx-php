@@ -15,13 +15,13 @@ use Telnyx\PortingOrders\VerificationCodes\VerificationCodeVerifyParams\Verifica
  *
  * @see Telnyx\PortingOrders\VerificationCodes->verify
  *
- * @phpstan-type verification_code_verify_params = array{
+ * @phpstan-type VerificationCodeVerifyParamsShape = array{
  *   verificationCodes?: list<VerificationCode>
  * }
  */
 final class VerificationCodeVerifyParams implements BaseModel
 {
-    /** @use SdkModel<verification_code_verify_params> */
+    /** @use SdkModel<VerificationCodeVerifyParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -13,11 +13,13 @@ use Telnyx\PortingOrders\Actions\ActionCancelResponse\Meta;
 use Telnyx\PortingOrders\PortingOrder;
 
 /**
- * @phpstan-type action_cancel_response = array{data?: PortingOrder, meta?: Meta}
+ * @phpstan-type ActionCancelResponseShape = array{
+ *   data?: PortingOrder, meta?: Meta
+ * }
  */
 final class ActionCancelResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<action_cancel_response> */
+    /** @use SdkModel<ActionCancelResponseShape> */
     use SdkModel;
 
     use SdkResponse;

@@ -14,11 +14,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Networks\DefaultGateway->create
  *
- * @phpstan-type default_gateway_create_params = array{wireguardPeerID?: string}
+ * @phpstan-type DefaultGatewayCreateParamsShape = array{wireguardPeerID?: string}
  */
 final class DefaultGatewayCreateParams implements BaseModel
 {
-    /** @use SdkModel<default_gateway_create_params> */
+    /** @use SdkModel<DefaultGatewayCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\OAuth\OAuthGetResponse\Data\RequestedScope;
 
 /**
- * @phpstan-type data_alias = array{
+ * @phpstan-type DataShape = array{
  *   clientID?: string,
  *   logoUri?: string|null,
  *   name?: string,
@@ -23,7 +23,7 @@ use Telnyx\OAuth\OAuthGetResponse\Data\RequestedScope;
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**

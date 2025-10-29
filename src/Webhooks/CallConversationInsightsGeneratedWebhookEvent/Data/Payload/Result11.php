@@ -10,11 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\CallConversationInsightsGeneratedWebhookEvent\Data\Payload\Result1\Result;
 
 /**
- * @phpstan-type result1_alias = array{insightID?: string, result?: mixed|string}
+ * @phpstan-type Result1Shape = array{insightID?: string, result?: mixed|string}
  */
 final class Result1 implements BaseModel
 {
-    /** @use SdkModel<result1_alias> */
+    /** @use SdkModel<Result1Shape> */
     use SdkModel;
 
     /**

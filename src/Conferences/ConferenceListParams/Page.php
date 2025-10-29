@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number].
  *
- * @phpstan-type page_alias = array{
+ * @phpstan-type PageShape = array{
  *   after?: string, before?: string, limit?: int, number?: int, size?: int
  * }
  */
 final class Page implements BaseModel
 {
-    /** @use SdkModel<page_alias> */
+    /** @use SdkModel<PageShape> */
     use SdkModel;
 
     /**

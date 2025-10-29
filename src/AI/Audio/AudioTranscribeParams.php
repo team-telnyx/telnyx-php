@@ -17,7 +17,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\AI\Audio->transcribe
  *
- * @phpstan-type audio_transcribe_params = array{
+ * @phpstan-type AudioTranscribeParamsShape = array{
  *   model: Model|value-of<Model>,
  *   file?: string,
  *   fileURL?: string,
@@ -27,7 +27,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class AudioTranscribeParams implements BaseModel
 {
-    /** @use SdkModel<audio_transcribe_params> */
+    /** @use SdkModel<AudioTranscribeParamsShape> */
     use SdkModel;
     use SdkParams;
 

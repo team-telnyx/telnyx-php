@@ -11,7 +11,7 @@ use Telnyx\Documents\DocServiceDocument\Size;
 use Telnyx\Documents\DocServiceDocument\Status;
 
 /**
- * @phpstan-type doc_service_document = array{
+ * @phpstan-type DocServiceDocumentShape = array{
  *   id?: string,
  *   contentType?: string,
  *   createdAt?: string,
@@ -26,7 +26,7 @@ use Telnyx\Documents\DocServiceDocument\Status;
  */
 final class DocServiceDocument implements BaseModel
 {
-    /** @use SdkModel<doc_service_document> */
+    /** @use SdkModel<DocServiceDocumentShape> */
     use SdkModel;
 
     /**

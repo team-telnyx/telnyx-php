@@ -11,7 +11,7 @@ use Telnyx\LedgerBillingGroupReports\LedgerBillingGroupReport\RecordType;
 use Telnyx\LedgerBillingGroupReports\LedgerBillingGroupReport\Status;
 
 /**
- * @phpstan-type ledger_billing_group_report = array{
+ * @phpstan-type LedgerBillingGroupReportShape = array{
  *   id?: string,
  *   createdAt?: \DateTimeInterface,
  *   organizationID?: string,
@@ -23,7 +23,7 @@ use Telnyx\LedgerBillingGroupReports\LedgerBillingGroupReport\Status;
  */
 final class LedgerBillingGroupReport implements BaseModel
 {
-    /** @use SdkModel<ledger_billing_group_report> */
+    /** @use SdkModel<LedgerBillingGroupReportShape> */
     use SdkModel;
 
     /**

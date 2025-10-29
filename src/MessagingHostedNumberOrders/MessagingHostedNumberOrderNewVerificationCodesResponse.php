@@ -14,14 +14,14 @@ use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderNewVerification
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderNewVerificationCodesResponse\Data\VerificationCodeSuccess;
 
 /**
- * @phpstan-type messaging_hosted_number_order_new_verification_codes_response = array{
+ * @phpstan-type MessagingHostedNumberOrderNewVerificationCodesResponseShape = array{
  *   data: list<VerificationCodeSuccess|VerificationCodeError>
  * }
  */
 final class MessagingHostedNumberOrderNewVerificationCodesResponse implements BaseModel, ResponseConverter
 {
     /**
-     * @use SdkModel<messaging_hosted_number_order_new_verification_codes_response>
+     * @use SdkModel<MessagingHostedNumberOrderNewVerificationCodesResponseShape>
      */
     use SdkModel;
 

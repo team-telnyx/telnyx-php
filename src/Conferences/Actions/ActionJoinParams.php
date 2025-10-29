@@ -22,7 +22,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Conferences\Actions->join
  *
- * @phpstan-type action_join_params = array{
+ * @phpstan-type ActionJoinParamsShape = array{
  *   callControlID: string,
  *   beepEnabled?: BeepEnabled|value-of<BeepEnabled>,
  *   clientState?: string,
@@ -41,7 +41,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class ActionJoinParams implements BaseModel
 {
-    /** @use SdkModel<action_join_params> */
+    /** @use SdkModel<ActionJoinParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type user_bundle_resource = array{
+ * @phpstan-type UserBundleResourceShape = array{
  *   id: string,
  *   createdAt: \DateTimeInterface,
  *   resource: string,
@@ -19,7 +19,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class UserBundleResource implements BaseModel
 {
-    /** @use SdkModel<user_bundle_resource> */
+    /** @use SdkModel<UserBundleResourceShape> */
     use SdkModel;
 
     /**

@@ -15,11 +15,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Connections->listActiveCalls
  *
- * @phpstan-type connection_list_active_calls_params = array{page?: Page}
+ * @phpstan-type ConnectionListActiveCallsParamsShape = array{page?: Page}
  */
 final class ConnectionListActiveCallsParams implements BaseModel
 {
-    /** @use SdkModel<connection_list_active_calls_params> */
+    /** @use SdkModel<ConnectionListActiveCallsParamsShape> */
     use SdkModel;
     use SdkParams;
 

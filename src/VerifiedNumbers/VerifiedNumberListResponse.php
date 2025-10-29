@@ -14,13 +14,13 @@ use Telnyx\VerifiedNumbers\VerifiedNumberListResponse\Meta;
 /**
  * A paginated list of Verified Numbers.
  *
- * @phpstan-type verified_number_list_response = array{
+ * @phpstan-type VerifiedNumberListResponseShape = array{
  *   data: list<VerifiedNumber>, meta: Meta
  * }
  */
 final class VerifiedNumberListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<verified_number_list_response> */
+    /** @use SdkModel<VerifiedNumberListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

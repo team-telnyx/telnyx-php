@@ -10,11 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\CallAIGatherEndedWebhookEvent\Data;
 
 /**
- * @phpstan-type call_ai_gather_ended_webhook_event = array{data?: Data}
+ * @phpstan-type CallAIGatherEndedWebhookEventShape = array{data?: Data}
  */
 final class CallAIGatherEndedWebhookEvent implements BaseModel
 {
-    /** @use SdkModel<call_ai_gather_ended_webhook_event> */
+    /** @use SdkModel<CallAIGatherEndedWebhookEventShape> */
     use SdkModel;
 
     #[Api(optional: true)]

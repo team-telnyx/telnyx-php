@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Calls\Actions->stopTranscription
  *
- * @phpstan-type action_stop_transcription_params = array{
+ * @phpstan-type ActionStopTranscriptionParamsShape = array{
  *   clientState?: string, commandID?: string
  * }
  */
 final class ActionStopTranscriptionParams implements BaseModel
 {
-    /** @use SdkModel<action_stop_transcription_params> */
+    /** @use SdkModel<ActionStopTranscriptionParamsShape> */
     use SdkModel;
     use SdkParams;
 

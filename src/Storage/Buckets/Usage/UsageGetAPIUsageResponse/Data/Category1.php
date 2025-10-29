@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Storage\Buckets\Usage\UsageGetAPIUsageResponse\Data\Category1\Category;
 
 /**
- * @phpstan-type category1_alias = array{
+ * @phpstan-type Category1Shape = array{
  *   bytesReceived?: int,
  *   bytesSent?: int,
  *   category?: value-of<Category>,
@@ -20,7 +20,7 @@ use Telnyx\Storage\Buckets\Usage\UsageGetAPIUsageResponse\Data\Category1\Categor
  */
 final class Category1 implements BaseModel
 {
-    /** @use SdkModel<category1_alias> */
+    /** @use SdkModel<Category1Shape> */
     use SdkModel;
 
     /**

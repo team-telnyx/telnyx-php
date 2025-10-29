@@ -11,7 +11,7 @@ use Telnyx\PortingOrders\PhoneNumberExtensions\PortingPhoneNumberExtension\Activ
 use Telnyx\PortingOrders\PhoneNumberExtensions\PortingPhoneNumberExtension\ExtensionRange;
 
 /**
- * @phpstan-type porting_phone_number_extension = array{
+ * @phpstan-type PortingPhoneNumberExtensionShape = array{
  *   id?: string,
  *   activationRanges?: list<ActivationRange>,
  *   createdAt?: \DateTimeInterface,
@@ -23,7 +23,7 @@ use Telnyx\PortingOrders\PhoneNumberExtensions\PortingPhoneNumberExtension\Exten
  */
 final class PortingPhoneNumberExtension implements BaseModel
 {
-    /** @use SdkModel<porting_phone_number_extension> */
+    /** @use SdkModel<PortingPhoneNumberExtensionShape> */
     use SdkModel;
 
     /**

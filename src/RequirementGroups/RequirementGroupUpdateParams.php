@@ -15,14 +15,14 @@ use Telnyx\RequirementGroups\RequirementGroupUpdateParams\RegulatoryRequirement;
  *
  * @see Telnyx\RequirementGroups->update
  *
- * @phpstan-type requirement_group_update_params = array{
+ * @phpstan-type RequirementGroupUpdateParamsShape = array{
  *   customerReference?: string,
  *   regulatoryRequirements?: list<RegulatoryRequirement>,
  * }
  */
 final class RequirementGroupUpdateParams implements BaseModel
 {
-    /** @use SdkModel<requirement_group_update_params> */
+    /** @use SdkModel<RequirementGroupUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 

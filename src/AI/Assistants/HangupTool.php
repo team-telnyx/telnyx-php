@@ -10,13 +10,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type hangup_tool = array{
+ * @phpstan-type HangupToolShape = array{
  *   hangup: HangupToolParams, type: value-of<Type>
  * }
  */
 final class HangupTool implements BaseModel
 {
-    /** @use SdkModel<hangup_tool> */
+    /** @use SdkModel<HangupToolShape> */
     use SdkModel;
 
     #[Api]

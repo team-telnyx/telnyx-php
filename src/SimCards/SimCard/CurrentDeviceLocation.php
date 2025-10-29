@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Current physical location data of a given SIM card. Accuracy is given in meters.
  *
- * @phpstan-type current_device_location = array{
+ * @phpstan-type CurrentDeviceLocationShape = array{
  *   accuracy?: int, accuracyUnit?: string, latitude?: string, longitude?: string
  * }
  */
 final class CurrentDeviceLocation implements BaseModel
 {
-    /** @use SdkModel<current_device_location> */
+    /** @use SdkModel<CurrentDeviceLocationShape> */
     use SdkModel;
 
     #[Api(optional: true)]

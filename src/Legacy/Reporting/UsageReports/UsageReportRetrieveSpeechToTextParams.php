@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Legacy\Reporting\UsageReports->retrieveSpeechToText
  *
- * @phpstan-type usage_report_retrieve_speech_to_text_params = array{
+ * @phpstan-type UsageReportRetrieveSpeechToTextParamsShape = array{
  *   endDate?: \DateTimeInterface, startDate?: \DateTimeInterface
  * }
  */
 final class UsageReportRetrieveSpeechToTextParams implements BaseModel
 {
-    /** @use SdkModel<usage_report_retrieve_speech_to_text_params> */
+    /** @use SdkModel<UsageReportRetrieveSpeechToTextParamsShape> */
     use SdkModel;
     use SdkParams;
 

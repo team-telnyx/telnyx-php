@@ -9,13 +9,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type call_control_application_outbound = array{
+ * @phpstan-type CallControlApplicationOutboundShape = array{
  *   channelLimit?: int, outboundVoiceProfileID?: string
  * }
  */
 final class CallControlApplicationOutbound implements BaseModel
 {
-    /** @use SdkModel<call_control_application_outbound> */
+    /** @use SdkModel<CallControlApplicationOutboundShape> */
     use SdkModel;
 
     /**

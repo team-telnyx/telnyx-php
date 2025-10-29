@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\PortingOrders\PhoneNumberExtensions->delete
  *
- * @phpstan-type phone_number_extension_delete_params = array{
+ * @phpstan-type PhoneNumberExtensionDeleteParamsShape = array{
  *   portingOrderID: string
  * }
  */
 final class PhoneNumberExtensionDeleteParams implements BaseModel
 {
-    /** @use SdkModel<phone_number_extension_delete_params> */
+    /** @use SdkModel<PhoneNumberExtensionDeleteParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -13,7 +13,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 /**
  * A verification request and its status, suitable for returning to users.
  *
- * @phpstan-type verification_request_status = array{
+ * @phpstan-type VerificationRequestStatusShape = array{
  *   id: string,
  *   additionalInformation: string,
  *   businessAddr1: string,
@@ -55,7 +55,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  */
 final class VerificationRequestStatus implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<verification_request_status> */
+    /** @use SdkModel<VerificationRequestStatusShape> */
     use SdkModel;
 
     use SdkResponse;

@@ -18,13 +18,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Calls\Actions->pauseRecording
  *
- * @phpstan-type action_pause_recording_params = array{
+ * @phpstan-type ActionPauseRecordingParamsShape = array{
  *   clientState?: string, commandID?: string, recordingID?: string
  * }
  */
 final class ActionPauseRecordingParams implements BaseModel
 {
-    /** @use SdkModel<action_pause_recording_params> */
+    /** @use SdkModel<ActionPauseRecordingParamsShape> */
     use SdkModel;
     use SdkParams;
 

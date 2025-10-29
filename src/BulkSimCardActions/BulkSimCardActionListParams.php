@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\BulkSimCardActions->list
  *
- * @phpstan-type bulk_sim_card_action_list_params = array{
+ * @phpstan-type BulkSimCardActionListParamsShape = array{
  *   filterActionType?: FilterActionType|value-of<FilterActionType>,
  *   pageNumber?: int,
  *   pageSize?: int,
@@ -23,7 +23,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class BulkSimCardActionListParams implements BaseModel
 {
-    /** @use SdkModel<bulk_sim_card_action_list_params> */
+    /** @use SdkModel<BulkSimCardActionListParamsShape> */
     use SdkModel;
     use SdkParams;
 

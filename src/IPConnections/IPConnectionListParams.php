@@ -17,13 +17,13 @@ use Telnyx\IPConnections\IPConnectionListParams\Sort;
  *
  * @see Telnyx\IPConnections->list
  *
- * @phpstan-type ip_connection_list_params = array{
+ * @phpstan-type IPConnectionListParamsShape = array{
  *   filter?: Filter, page?: Page, sort?: Sort|value-of<Sort>
  * }
  */
 final class IPConnectionListParams implements BaseModel
 {
-    /** @use SdkModel<ip_connection_list_params> */
+    /** @use SdkModel<IPConnectionListParamsShape> */
     use SdkModel;
     use SdkParams;
 

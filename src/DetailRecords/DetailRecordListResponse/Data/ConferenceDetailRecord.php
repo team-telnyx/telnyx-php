@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type conference_detail_record = array{
+ * @phpstan-type ConferenceDetailRecordShape = array{
  *   recordType: string,
  *   id?: string,
  *   callLegID?: string,
@@ -29,7 +29,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class ConferenceDetailRecord implements BaseModel
 {
-    /** @use SdkModel<conference_detail_record> */
+    /** @use SdkModel<ConferenceDetailRecordShape> */
     use SdkModel;
 
     #[Api('record_type')]

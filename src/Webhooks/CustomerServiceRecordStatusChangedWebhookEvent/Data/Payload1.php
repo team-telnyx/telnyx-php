@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\CustomerServiceRecordStatusChangedWebhookEvent\Data\Payload\Status;
 
 /**
- * @phpstan-type payload_alias = array{
+ * @phpstan-type PayloadShape = array{
  *   id?: string,
  *   phoneNumber?: string,
  *   status?: value-of<Status>,
@@ -19,7 +19,7 @@ use Telnyx\Webhooks\CustomerServiceRecordStatusChangedWebhookEvent\Data\Payload\
  */
 final class Payload implements BaseModel
 {
-    /** @use SdkModel<payload_alias> */
+    /** @use SdkModel<PayloadShape> */
     use SdkModel;
 
     /**

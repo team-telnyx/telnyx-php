@@ -12,13 +12,13 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\TexmlApplications\TexmlApplicationListResponse\Meta;
 
 /**
- * @phpstan-type texml_application_list_response = array{
+ * @phpstan-type TexmlApplicationListResponseShape = array{
  *   data?: list<TexmlApplication>, meta?: Meta
  * }
  */
 final class TexmlApplicationListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<texml_application_list_response> */
+    /** @use SdkModel<TexmlApplicationListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

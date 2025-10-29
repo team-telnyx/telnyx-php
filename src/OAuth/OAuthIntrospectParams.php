@@ -14,11 +14,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\OAuth->introspect
  *
- * @phpstan-type oauth_introspect_params = array{token: string}
+ * @phpstan-type OAuthIntrospectParamsShape = array{token: string}
  */
 final class OAuthIntrospectParams implements BaseModel
 {
-    /** @use SdkModel<oauth_introspect_params> */
+    /** @use SdkModel<OAuthIntrospectParamsShape> */
     use SdkModel;
     use SdkParams;
 

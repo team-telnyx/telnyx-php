@@ -17,13 +17,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Connections->list
  *
- * @phpstan-type connection_list_params = array{
+ * @phpstan-type ConnectionListParamsShape = array{
  *   filter?: Filter, page?: Page, sort?: Sort|value-of<Sort>
  * }
  */
 final class ConnectionListParams implements BaseModel
 {
-    /** @use SdkModel<connection_list_params> */
+    /** @use SdkModel<ConnectionListParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\PortingOrders->create
  *
- * @phpstan-type porting_order_create_params = array{
+ * @phpstan-type PortingOrderCreateParamsShape = array{
  *   phoneNumbers: list<string>,
  *   customerGroupReference?: string,
  *   customerReference?: string,
@@ -22,7 +22,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class PortingOrderCreateParams implements BaseModel
 {
-    /** @use SdkModel<porting_order_create_params> */
+    /** @use SdkModel<PortingOrderCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

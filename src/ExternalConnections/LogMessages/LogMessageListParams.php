@@ -16,11 +16,11 @@ use Telnyx\ExternalConnections\LogMessages\LogMessageListParams\Page;
  *
  * @see Telnyx\ExternalConnections\LogMessages->list
  *
- * @phpstan-type log_message_list_params = array{filter?: Filter, page?: Page}
+ * @phpstan-type LogMessageListParamsShape = array{filter?: Filter, page?: Page}
  */
 final class LogMessageListParams implements BaseModel
 {
-    /** @use SdkModel<log_message_list_params> */
+    /** @use SdkModel<LogMessageListParamsShape> */
     use SdkModel;
     use SdkParams;
 

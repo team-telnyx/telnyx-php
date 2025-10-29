@@ -17,7 +17,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  * Provides comprehensive information about a test execution including
  * status, timing, logs, and detailed evaluation results.
  *
- * @phpstan-type test_run_response = array{
+ * @phpstan-type TestRunResponseShape = array{
  *   createdAt: \DateTimeInterface,
  *   runID: string,
  *   status: value-of<TestStatus>,
@@ -34,7 +34,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  */
 final class TestRunResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<test_run_response> */
+    /** @use SdkModel<TestRunResponseShape> */
     use SdkModel;
 
     use SdkResponse;

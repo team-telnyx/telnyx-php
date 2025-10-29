@@ -11,13 +11,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type book_appointment_tool = array{
+ * @phpstan-type BookAppointmentToolShape = array{
  *   bookAppointment: BookAppointment, type: value-of<Type>
  * }
  */
 final class BookAppointmentTool implements BaseModel
 {
-    /** @use SdkModel<book_appointment_tool> */
+    /** @use SdkModel<BookAppointmentToolShape> */
     use SdkModel;
 
     #[Api('book_appointment')]

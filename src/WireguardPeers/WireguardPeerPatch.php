@@ -9,11 +9,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type wireguard_peer_patch = array{publicKey?: string}
+ * @phpstan-type WireguardPeerPatchShape = array{publicKey?: string}
  */
 final class WireguardPeerPatch implements BaseModel
 {
-    /** @use SdkModel<wireguard_peer_patch> */
+    /** @use SdkModel<WireguardPeerPatchShape> */
     use SdkModel;
 
     /**

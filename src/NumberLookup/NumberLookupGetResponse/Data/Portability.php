@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NumberLookup\NumberLookupGetResponse\Data\Portability\PortedStatus;
 
 /**
- * @phpstan-type portability_alias = array{
+ * @phpstan-type PortabilityShape = array{
  *   altspid?: string,
  *   altspidCarrierName?: string,
  *   altspidCarrierType?: string,
@@ -28,7 +28,7 @@ use Telnyx\NumberLookup\NumberLookupGetResponse\Data\Portability\PortedStatus;
  */
 final class Portability implements BaseModel
 {
-    /** @use SdkModel<portability_alias> */
+    /** @use SdkModel<PortabilityShape> */
     use SdkModel;
 
     /**

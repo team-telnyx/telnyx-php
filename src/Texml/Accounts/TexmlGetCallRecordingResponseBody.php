@@ -11,7 +11,7 @@ use Telnyx\Texml\Accounts\TexmlGetCallRecordingResponseBody\Source;
 use Telnyx\Texml\Accounts\TexmlGetCallRecordingResponseBody\Status;
 
 /**
- * @phpstan-type texml_get_call_recording_response_body = array{
+ * @phpstan-type TexmlGetCallRecordingResponseBodyShape = array{
  *   accountSid?: string,
  *   callSid?: string,
  *   channels?: 1|2,
@@ -31,7 +31,7 @@ use Telnyx\Texml\Accounts\TexmlGetCallRecordingResponseBody\Status;
  */
 final class TexmlGetCallRecordingResponseBody implements BaseModel
 {
-    /** @use SdkModel<texml_get_call_recording_response_body> */
+    /** @use SdkModel<TexmlGetCallRecordingResponseBodyShape> */
     use SdkModel;
 
     #[Api('account_sid', optional: true)]

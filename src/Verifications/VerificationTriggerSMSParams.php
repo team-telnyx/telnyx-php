@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Verifications->triggerSMS
  *
- * @phpstan-type verification_trigger_sms_params = array{
+ * @phpstan-type VerificationTriggerSMSParamsShape = array{
  *   phoneNumber: string,
  *   verifyProfileID: string,
  *   customCode?: string|null,
@@ -23,7 +23,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class VerificationTriggerSMSParams implements BaseModel
 {
-    /** @use SdkModel<verification_trigger_sms_params> */
+    /** @use SdkModel<VerificationTriggerSMSParamsShape> */
     use SdkModel;
     use SdkParams;
 

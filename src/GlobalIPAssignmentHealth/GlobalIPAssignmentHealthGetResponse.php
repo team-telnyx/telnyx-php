@@ -12,13 +12,13 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthGetResponse\Data;
 
 /**
- * @phpstan-type global_ip_assignment_health_get_response = array{
+ * @phpstan-type GlobalIPAssignmentHealthGetResponseShape = array{
  *   data?: list<Data>
  * }
  */
 final class GlobalIPAssignmentHealthGetResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<global_ip_assignment_health_get_response> */
+    /** @use SdkModel<GlobalIPAssignmentHealthGetResponseShape> */
     use SdkModel;
 
     use SdkResponse;

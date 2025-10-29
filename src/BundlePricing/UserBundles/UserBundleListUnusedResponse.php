@@ -12,11 +12,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type user_bundle_list_unused_response = array{data: list<Data>}
+ * @phpstan-type UserBundleListUnusedResponseShape = array{data: list<Data>}
  */
 final class UserBundleListUnusedResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<user_bundle_list_unused_response> */
+    /** @use SdkModel<UserBundleListUnusedResponseShape> */
     use SdkModel;
 
     use SdkResponse;

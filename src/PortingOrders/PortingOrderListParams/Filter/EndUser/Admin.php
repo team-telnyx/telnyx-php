@@ -9,11 +9,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type admin_alias = array{authPersonName?: string, entityName?: string}
+ * @phpstan-type AdminShape = array{authPersonName?: string, entityName?: string}
  */
 final class Admin implements BaseModel
 {
-    /** @use SdkModel<admin_alias> */
+    /** @use SdkModel<AdminShape> */
     use SdkModel;
 
     /**

@@ -12,13 +12,11 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Seti\SetiGetBlackBoxTestResultsResponse\Data;
 
 /**
- * @phpstan-type seti_get_black_box_test_results_response = array{
- *   data?: list<Data>
- * }
+ * @phpstan-type SetiGetBlackBoxTestResultsResponseShape = array{data?: list<Data>}
  */
 final class SetiGetBlackBoxTestResultsResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<seti_get_black_box_test_results_response> */
+    /** @use SdkModel<SetiGetBlackBoxTestResultsResponseShape> */
     use SdkModel;
 
     use SdkResponse;

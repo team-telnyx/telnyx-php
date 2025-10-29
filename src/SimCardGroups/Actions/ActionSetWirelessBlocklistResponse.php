@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type action_set_wireless_blocklist_response = array{
+ * @phpstan-type ActionSetWirelessBlocklistResponseShape = array{
  *   data?: SimCardGroupAction
  * }
  */
 final class ActionSetWirelessBlocklistResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<action_set_wireless_blocklist_response> */
+    /** @use SdkModel<ActionSetWirelessBlocklistResponseShape> */
     use SdkModel;
 
     use SdkResponse;

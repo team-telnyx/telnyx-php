@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type brand_qualify_by_usecase_response = array{
+ * @phpstan-type BrandQualifyByUsecaseResponseShape = array{
  *   annualFee?: float,
  *   maxSubUsecases?: int,
  *   minSubUsecases?: int,
@@ -23,7 +23,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  */
 final class BrandQualifyByUsecaseResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<brand_qualify_by_usecase_response> */
+    /** @use SdkModel<BrandQualifyByUsecaseResponseShape> */
     use SdkModel;
 
     use SdkResponse;

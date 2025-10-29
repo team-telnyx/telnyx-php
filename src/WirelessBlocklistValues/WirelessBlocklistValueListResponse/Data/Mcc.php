@@ -9,11 +9,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type mcc_alias = array{code: string, name: string}
+ * @phpstan-type MccShape = array{code: string, name: string}
  */
 final class Mcc implements BaseModel
 {
-    /** @use SdkModel<mcc_alias> */
+    /** @use SdkModel<MccShape> */
     use SdkModel;
 
     /**

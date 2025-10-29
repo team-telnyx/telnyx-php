@@ -9,11 +9,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type caller_name = array{callerName?: string, errorCode?: string}
+ * @phpstan-type CallerNameShape = array{callerName?: string, errorCode?: string}
  */
 final class CallerName implements BaseModel
 {
-    /** @use SdkModel<caller_name> */
+    /** @use SdkModel<CallerNameShape> */
     use SdkModel;
 
     /**

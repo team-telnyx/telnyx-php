@@ -16,13 +16,13 @@ use Telnyx\WireguardInterfaces\WireguardInterfaceListParams\Page;
  *
  * @see Telnyx\WireguardInterfaces->list
  *
- * @phpstan-type wireguard_interface_list_params = array{
+ * @phpstan-type WireguardInterfaceListParamsShape = array{
  *   filter?: Filter, page?: Page
  * }
  */
 final class WireguardInterfaceListParams implements BaseModel
 {
-    /** @use SdkModel<wireguard_interface_list_params> */
+    /** @use SdkModel<WireguardInterfaceListParamsShape> */
     use SdkModel;
     use SdkParams;
 

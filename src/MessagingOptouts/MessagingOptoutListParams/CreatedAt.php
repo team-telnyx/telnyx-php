@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Consolidated created_at parameter (deepObject style). Originally: created_at[gte], created_at[lte].
  *
- * @phpstan-type created_at = array{
+ * @phpstan-type CreatedAtShape = array{
  *   gte?: \DateTimeInterface, lte?: \DateTimeInterface
  * }
  */
 final class CreatedAt implements BaseModel
 {
-    /** @use SdkModel<created_at> */
+    /** @use SdkModel<CreatedAtShape> */
     use SdkModel;
 
     /**

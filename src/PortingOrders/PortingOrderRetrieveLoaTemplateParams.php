@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\PortingOrders->retrieveLoaTemplate
  *
- * @phpstan-type porting_order_retrieve_loa_template_params = array{
+ * @phpstan-type PortingOrderRetrieveLoaTemplateParamsShape = array{
  *   loaConfigurationID?: string
  * }
  */
 final class PortingOrderRetrieveLoaTemplateParams implements BaseModel
 {
-    /** @use SdkModel<porting_order_retrieve_loa_template_params> */
+    /** @use SdkModel<PortingOrderRetrieveLoaTemplateParamsShape> */
     use SdkModel;
     use SdkParams;
 

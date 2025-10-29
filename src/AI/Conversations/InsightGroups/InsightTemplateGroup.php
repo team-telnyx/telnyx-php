@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type insight_template_group = array{
+ * @phpstan-type InsightTemplateGroupShape = array{
  *   id: string,
  *   createdAt: \DateTimeInterface,
  *   name: string,
@@ -21,7 +21,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class InsightTemplateGroup implements BaseModel
 {
-    /** @use SdkModel<insight_template_group> */
+    /** @use SdkModel<InsightTemplateGroupShape> */
     use SdkModel;
 
     #[Api]

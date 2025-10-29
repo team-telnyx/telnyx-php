@@ -14,11 +14,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\ExternalConnections\Uploads->retry
  *
- * @phpstan-type upload_retry_params = array{id: string}
+ * @phpstan-type UploadRetryParamsShape = array{id: string}
  */
 final class UploadRetryParams implements BaseModel
 {
-    /** @use SdkModel<upload_retry_params> */
+    /** @use SdkModel<UploadRetryParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -9,13 +9,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type acceptance_criteria = array{
+ * @phpstan-type AcceptanceCriteriaShape = array{
  *   fieldType?: string, fieldValue?: string, localityLimit?: string
  * }
  */
 final class AcceptanceCriteria implements BaseModel
 {
-    /** @use SdkModel<acceptance_criteria> */
+    /** @use SdkModel<AcceptanceCriteriaShape> */
     use SdkModel;
 
     #[Api('field_type', optional: true)]

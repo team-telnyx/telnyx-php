@@ -13,11 +13,13 @@ use Telnyx\PortingOrders\Actions\ActionConfirmResponse\Meta;
 use Telnyx\PortingOrders\PortingOrder;
 
 /**
- * @phpstan-type action_confirm_response = array{data?: PortingOrder, meta?: Meta}
+ * @phpstan-type ActionConfirmResponseShape = array{
+ *   data?: PortingOrder, meta?: Meta
+ * }
  */
 final class ActionConfirmResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<action_confirm_response> */
+    /** @use SdkModel<ActionConfirmResponseShape> */
     use SdkModel;
 
     use SdkResponse;

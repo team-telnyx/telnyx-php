@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type ledger_billing_group_report_new_response = array{
+ * @phpstan-type LedgerBillingGroupReportNewResponseShape = array{
  *   data?: LedgerBillingGroupReport
  * }
  */
 final class LedgerBillingGroupReportNewResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<ledger_billing_group_report_new_response> */
+    /** @use SdkModel<LedgerBillingGroupReportNewResponseShape> */
     use SdkModel;
 
     use SdkResponse;

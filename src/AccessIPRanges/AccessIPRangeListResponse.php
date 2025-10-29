@@ -12,13 +12,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type access_ip_range_list_response = array{
+ * @phpstan-type AccessIPRangeListResponseShape = array{
  *   data: list<AccessIPRange>, meta: PaginationMetaCloudflareIPListSync
  * }
  */
 final class AccessIPRangeListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<access_ip_range_list_response> */
+    /** @use SdkModel<AccessIPRangeListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

@@ -14,11 +14,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\ExternalConnections\CivicAddresses->retrieve
  *
- * @phpstan-type civic_address_retrieve_params = array{id: string}
+ * @phpstan-type CivicAddressRetrieveParamsShape = array{id: string}
  */
 final class CivicAddressRetrieveParams implements BaseModel
 {
-    /** @use SdkModel<civic_address_retrieve_params> */
+    /** @use SdkModel<CivicAddressRetrieveParamsShape> */
     use SdkModel;
     use SdkParams;
 

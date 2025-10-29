@@ -9,11 +9,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type reply_alias = array{postbackData?: string, text?: string}
+ * @phpstan-type ReplyShape = array{postbackData?: string, text?: string}
  */
 final class Reply implements BaseModel
 {
-    /** @use SdkModel<reply_alias> */
+    /** @use SdkModel<ReplyShape> */
     use SdkModel;
 
     /**

@@ -16,11 +16,11 @@ use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberListParams\Page;
  *
  * @see Telnyx\ExternalConnections\PhoneNumbers->list
  *
- * @phpstan-type phone_number_list_params = array{filter?: Filter, page?: Page}
+ * @phpstan-type PhoneNumberListParamsShape = array{filter?: Filter, page?: Page}
  */
 final class PhoneNumberListParams implements BaseModel
 {
-    /** @use SdkModel<phone_number_list_params> */
+    /** @use SdkModel<PhoneNumberListParamsShape> */
     use SdkModel;
     use SdkParams;
 

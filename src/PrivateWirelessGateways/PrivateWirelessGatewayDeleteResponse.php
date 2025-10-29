@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type private_wireless_gateway_delete_response = array{
+ * @phpstan-type PrivateWirelessGatewayDeleteResponseShape = array{
  *   data?: PrivateWirelessGateway
  * }
  */
 final class PrivateWirelessGatewayDeleteResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<private_wireless_gateway_delete_response> */
+    /** @use SdkModel<PrivateWirelessGatewayDeleteResponseShape> */
     use SdkModel;
 
     use SdkResponse;

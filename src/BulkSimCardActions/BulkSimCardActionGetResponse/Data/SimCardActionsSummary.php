@@ -10,13 +10,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type sim_card_actions_summary = array{
+ * @phpstan-type SimCardActionsSummaryShape = array{
  *   count?: int, status?: value-of<Status>
  * }
  */
 final class SimCardActionsSummary implements BaseModel
 {
-    /** @use SdkModel<sim_card_actions_summary> */
+    /** @use SdkModel<SimCardActionsSummaryShape> */
     use SdkModel;
 
     #[Api(optional: true)]

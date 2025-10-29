@@ -12,11 +12,11 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayNewResponse\Data;
 
 /**
- * @phpstan-type public_internet_gateway_new_response = array{data?: Data}
+ * @phpstan-type PublicInternetGatewayNewResponseShape = array{data?: Data}
  */
 final class PublicInternetGatewayNewResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<public_internet_gateway_new_response> */
+    /** @use SdkModel<PublicInternetGatewayNewResponseShape> */
     use SdkModel;
 
     use SdkResponse;

@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Networks\InterfaceStatus;
 
 /**
- * @phpstan-type body_alias = array{
+ * @phpstan-type BodyShape = array{
  *   id?: string,
  *   createdAt?: string,
  *   recordType?: string,
@@ -25,7 +25,7 @@ use Telnyx\Networks\InterfaceStatus;
  */
 final class Body implements BaseModel
 {
-    /** @use SdkModel<body_alias> */
+    /** @use SdkModel<BodyShape> */
     use SdkModel;
 
     /**

@@ -15,13 +15,13 @@ use Telnyx\WirelessBlocklists\WirelessBlocklistUpdateParams\Type;
  *
  * @see Telnyx\WirelessBlocklists->update
  *
- * @phpstan-type wireless_blocklist_update_params = array{
+ * @phpstan-type WirelessBlocklistUpdateParamsShape = array{
  *   name?: string, type?: Type|value-of<Type>, values?: list<string>
  * }
  */
 final class WirelessBlocklistUpdateParams implements BaseModel
 {
-    /** @use SdkModel<wireless_blocklist_update_params> */
+    /** @use SdkModel<WirelessBlocklistUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 

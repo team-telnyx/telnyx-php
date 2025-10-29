@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type well_known_get_authorization_server_metadata_response = array{
+ * @phpstan-type WellKnownGetAuthorizationServerMetadataResponseShape = array{
  *   authorizationEndpoint?: string,
  *   codeChallengeMethodsSupported?: list<string>,
  *   grantTypesSupported?: list<string>,
@@ -27,7 +27,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  */
 final class WellKnownGetAuthorizationServerMetadataResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<well_known_get_authorization_server_metadata_response> */
+    /** @use SdkModel<WellKnownGetAuthorizationServerMetadataResponseShape> */
     use SdkModel;
 
     use SdkResponse;

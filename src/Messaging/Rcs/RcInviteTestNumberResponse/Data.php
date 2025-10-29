@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Messaging\Rcs\RcInviteTestNumberResponse\Data\RecordType;
 
 /**
- * @phpstan-type data_alias = array{
+ * @phpstan-type DataShape = array{
  *   agentID?: string,
  *   phoneNumber?: string,
  *   recordType?: value-of<RecordType>,
@@ -19,7 +19,7 @@ use Telnyx\Messaging\Rcs\RcInviteTestNumberResponse\Data\RecordType;
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**

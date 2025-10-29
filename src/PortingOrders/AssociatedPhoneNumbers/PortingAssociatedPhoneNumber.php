@@ -12,7 +12,7 @@ use Telnyx\PortingOrders\AssociatedPhoneNumbers\PortingAssociatedPhoneNumber\Pho
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\PortingAssociatedPhoneNumber\PhoneNumberType;
 
 /**
- * @phpstan-type porting_associated_phone_number = array{
+ * @phpstan-type PortingAssociatedPhoneNumberShape = array{
  *   id?: string,
  *   action?: value-of<Action>,
  *   countryCode?: string,
@@ -26,7 +26,7 @@ use Telnyx\PortingOrders\AssociatedPhoneNumbers\PortingAssociatedPhoneNumber\Pho
  */
 final class PortingAssociatedPhoneNumber implements BaseModel
 {
-    /** @use SdkModel<porting_associated_phone_number> */
+    /** @use SdkModel<PortingAssociatedPhoneNumberShape> */
     use SdkModel;
 
     /**

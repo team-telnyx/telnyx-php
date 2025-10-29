@@ -12,11 +12,11 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PortabilityChecks\PortabilityCheckRunResponse\Data;
 
 /**
- * @phpstan-type portability_check_run_response = array{data?: list<Data>}
+ * @phpstan-type PortabilityCheckRunResponseShape = array{data?: list<Data>}
  */
 final class PortabilityCheckRunResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<portability_check_run_response> */
+    /** @use SdkModel<PortabilityCheckRunResponseShape> */
     use SdkModel;
 
     use SdkResponse;

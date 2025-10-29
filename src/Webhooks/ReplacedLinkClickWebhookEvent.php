@@ -10,11 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\ReplacedLinkClickWebhookEvent\Data;
 
 /**
- * @phpstan-type replaced_link_click_webhook_event = array{data?: Data}
+ * @phpstan-type ReplacedLinkClickWebhookEventShape = array{data?: Data}
  */
 final class ReplacedLinkClickWebhookEvent implements BaseModel
 {
-    /** @use SdkModel<replaced_link_click_webhook_event> */
+    /** @use SdkModel<ReplacedLinkClickWebhookEventShape> */
     use SdkModel;
 
     #[Api(optional: true)]

@@ -12,11 +12,11 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Networks\NetworkUpdateResponse\Data;
 
 /**
- * @phpstan-type network_update_response = array{data?: Data}
+ * @phpstan-type NetworkUpdateResponseShape = array{data?: Data}
  */
 final class NetworkUpdateResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<network_update_response> */
+    /** @use SdkModel<NetworkUpdateResponseShape> */
     use SdkModel;
 
     use SdkResponse;

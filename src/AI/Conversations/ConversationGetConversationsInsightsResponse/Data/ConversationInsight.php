@@ -9,11 +9,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type conversation_insight = array{insightID: string, result: string}
+ * @phpstan-type ConversationInsightShape = array{
+ *   insightID: string, result: string
+ * }
  */
 final class ConversationInsight implements BaseModel
 {
-    /** @use SdkModel<conversation_insight> */
+    /** @use SdkModel<ConversationInsightShape> */
     use SdkModel;
 
     /**

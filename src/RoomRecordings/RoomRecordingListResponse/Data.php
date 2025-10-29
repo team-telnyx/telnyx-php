@@ -11,7 +11,7 @@ use Telnyx\RoomRecordings\RoomRecordingListResponse\Data\Status;
 use Telnyx\RoomRecordings\RoomRecordingListResponse\Data\Type;
 
 /**
- * @phpstan-type data_alias = array{
+ * @phpstan-type DataShape = array{
  *   id?: string,
  *   codec?: string,
  *   completedAt?: \DateTimeInterface,
@@ -32,7 +32,7 @@ use Telnyx\RoomRecordings\RoomRecordingListResponse\Data\Type;
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**

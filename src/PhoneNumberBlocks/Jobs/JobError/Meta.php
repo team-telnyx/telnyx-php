@@ -9,11 +9,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type meta_alias = array{url?: string}
+ * @phpstan-type MetaShape = array{url?: string}
  */
 final class Meta implements BaseModel
 {
-    /** @use SdkModel<meta_alias> */
+    /** @use SdkModel<MetaShape> */
     use SdkModel;
 
     /**

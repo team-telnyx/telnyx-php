@@ -21,7 +21,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Calls\Actions->gather
  *
- * @phpstan-type action_gather_params = array{
+ * @phpstan-type ActionGatherParamsShape = array{
  *   clientState?: string,
  *   commandID?: string,
  *   gatherID?: string,
@@ -36,7 +36,7 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class ActionGatherParams implements BaseModel
 {
-    /** @use SdkModel<action_gather_params> */
+    /** @use SdkModel<ActionGatherParamsShape> */
     use SdkModel;
     use SdkParams;
 

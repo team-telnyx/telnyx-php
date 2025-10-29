@@ -13,13 +13,13 @@ use Telnyx\Messsages\RcsCardContent;
 /**
  * Carousel of cards.
  *
- * @phpstan-type carousel_card = array{
+ * @phpstan-type CarouselCardShape = array{
  *   cardContents: list<RcsCardContent>, cardWidth: value-of<CardWidth>
  * }
  */
 final class CarouselCard implements BaseModel
 {
-    /** @use SdkModel<carousel_card> */
+    /** @use SdkModel<CarouselCardShape> */
     use SdkModel;
 
     /**

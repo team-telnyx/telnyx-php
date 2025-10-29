@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type integration_secret_new_response = array{data: IntegrationSecret}
+ * @phpstan-type IntegrationSecretNewResponseShape = array{data: IntegrationSecret}
  */
 final class IntegrationSecretNewResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<integration_secret_new_response> */
+    /** @use SdkModel<IntegrationSecretNewResponseShape> */
     use SdkModel;
 
     use SdkResponse;

@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * The webhook payload for the porting_order.deleted event.
  *
- * @phpstan-type webhook_porting_order_deleted_payload = array{
+ * @phpstan-type WebhookPortingOrderDeletedPayloadShape = array{
  *   id?: string, customerReference?: string, deletedAt?: \DateTimeInterface
  * }
  */
 final class WebhookPortingOrderDeletedPayload implements BaseModel
 {
-    /** @use SdkModel<webhook_porting_order_deleted_payload> */
+    /** @use SdkModel<WebhookPortingOrderDeletedPayloadShape> */
     use SdkModel;
 
     /**
