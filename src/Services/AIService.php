@@ -18,6 +18,8 @@ use Telnyx\Services\AI\ClustersService;
 use Telnyx\Services\AI\ConversationsService;
 use Telnyx\Services\AI\EmbeddingsService;
 use Telnyx\Services\AI\FineTuningService;
+use Telnyx\Services\AI\IntegrationsService;
+use Telnyx\Services\AI\McpServersService;
 
 use const Telnyx\Core\OMIT as omit;
 
@@ -59,6 +61,16 @@ final class AIService implements AIContract
     public FineTuningService $fineTuning;
 
     /**
+     * @@api
+     */
+    public IntegrationsService $integrations;
+
+    /**
+     * @@api
+     */
+    public McpServersService $mcpServers;
+
+    /**
      * @internal
      */
     public function __construct(private Client $client)
@@ -70,6 +82,8 @@ final class AIService implements AIContract
         $this->conversations = new ConversationsService($client);
         $this->embeddings = new EmbeddingsService($client);
         $this->fineTuning = new FineTuningService($client);
+        $this->integrations = new IntegrationsService($client);
+        $this->mcpServers = new McpServersService($client);
     }
 
     /**
