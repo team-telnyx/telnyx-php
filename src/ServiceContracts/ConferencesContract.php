@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Conferences\ConferenceCreateParams\BeepEnabled;
+use Telnyx\Conferences\ConferenceCreateParams\Region;
 use Telnyx\Conferences\ConferenceGetResponse;
 use Telnyx\Conferences\ConferenceListParams\Filter;
 use Telnyx\Conferences\ConferenceListParams\Page;
@@ -31,6 +32,7 @@ interface ConferencesContract
      * @param string $holdAudioURL The URL of a file to be played to participants joining the conference. The URL can point to either a WAV or MP3 file. hold_media_name and hold_audio_url cannot be used together in one request. Takes effect only when "start_conference_on_create" is set to "false".
      * @param string $holdMediaName The media_name of a file to be played to participants joining the conference. The media_name must point to a file previously uploaded to api.telnyx.com/v2/media by the same user/organization. The file must either be a WAV or MP3 file. Takes effect only when "start_conference_on_create" is set to "false".
      * @param int $maxParticipants The maximum number of active conference participants to allow. Must be between 2 and 800. Defaults to 250
+     * @param Region|value-of<Region> $region Sets the region where the conference data will be hosted. Defaults to the region defined in user's data locality settings (Europe or US).
      * @param bool $startConferenceOnCreate Whether the conference should be started on creation. If the conference isn't started all participants that join are automatically put on hold. Defaults to "true".
      *
      * @throws APIException
@@ -46,6 +48,7 @@ interface ConferencesContract
         $holdAudioURL = omit,
         $holdMediaName = omit,
         $maxParticipants = omit,
+        $region = omit,
         $startConferenceOnCreate = omit,
         ?RequestOptions $requestOptions = null,
     ): ConferenceNewResponse;
@@ -65,10 +68,26 @@ interface ConferencesContract
     /**
      * @api
      *
+     * @param \Telnyx\Conferences\ConferenceRetrieveParams\Region|value-of<\Telnyx\Conferences\ConferenceRetrieveParams\Region> $region Region where the conference data is located
+     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
+        $region = omit,
+        ?RequestOptions $requestOptions = null
+    ): ConferenceGetResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @throws APIException
+     */
+    public function retrieveRaw(
+        string $id,
+        array $params,
         ?RequestOptions $requestOptions = null
     ): ConferenceGetResponse;
 
@@ -77,13 +96,15 @@ interface ConferencesContract
      *
      * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[application_name][contains], filter[outbound.outbound_voice_profile_id], filter[leg_id], filter[application_session_id], filter[connection_id], filter[product], filter[failed], filter[from], filter[to], filter[name], filter[type], filter[occurred_at][eq/gt/gte/lt/lte], filter[status]
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number]
+     * @param \Telnyx\Conferences\ConferenceListParams\Region|value-of<\Telnyx\Conferences\ConferenceListParams\Region> $region Region where the conference data is located
      *
      * @throws APIException
      */
     public function list(
         $filter = omit,
         $page = omit,
-        ?RequestOptions $requestOptions = null
+        $region = omit,
+        ?RequestOptions $requestOptions = null,
     ): ConferenceListResponse;
 
     /**
@@ -103,6 +124,7 @@ interface ConferencesContract
      *
      * @param \Telnyx\Conferences\ConferenceListParticipantsParams\Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[muted], filter[on_hold], filter[whispering]
      * @param \Telnyx\Conferences\ConferenceListParticipantsParams\Page $page Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number]
+     * @param \Telnyx\Conferences\ConferenceListParticipantsParams\Region|value-of<\Telnyx\Conferences\ConferenceListParticipantsParams\Region> $region Region where the conference data is located
      *
      * @throws APIException
      */
@@ -110,6 +132,7 @@ interface ConferencesContract
         string $conferenceID,
         $filter = omit,
         $page = omit,
+        $region = omit,
         ?RequestOptions $requestOptions = null,
     ): ConferenceListParticipantsResponse;
 

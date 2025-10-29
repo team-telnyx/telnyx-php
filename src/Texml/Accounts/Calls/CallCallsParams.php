@@ -15,6 +15,7 @@ use Telnyx\Texml\Accounts\Calls\CallCallsParams\MachineDetection;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\RecordingChannels;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\RecordingStatusCallbackMethod;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\RecordingTrack;
+use Telnyx\Texml\Accounts\Calls\CallCallsParams\SipRegion;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\StatusCallbackEvent;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\StatusCallbackMethod;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\Trim;
@@ -54,6 +55,7 @@ use Telnyx\Texml\Accounts\Calls\CallCallsParams\URLMethod;
  *   sendRecordingURL?: bool,
  *   sipAuthPassword?: string,
  *   sipAuthUsername?: string,
+ *   sipRegion?: SipRegion|value-of<SipRegion>,
  *   statusCallback?: string,
  *   statusCallbackEvent?: StatusCallbackEvent|value-of<StatusCallbackEvent>,
  *   statusCallbackMethod?: StatusCallbackMethod|value-of<StatusCallbackMethod>,
@@ -259,6 +261,14 @@ final class CallCallsParams implements BaseModel
     public ?string $sipAuthUsername;
 
     /**
+     * Defines the SIP region to be used for the call.
+     *
+     * @var value-of<SipRegion>|null $sipRegion
+     */
+    #[Api('SipRegion', enum: SipRegion::class, optional: true)]
+    public ?string $sipRegion;
+
+    /**
      * URL destination for Telnyx to send status callback events to for the call.
      */
     #[Api('StatusCallback', optional: true)]
@@ -341,6 +351,7 @@ final class CallCallsParams implements BaseModel
      * @param RecordingChannels|value-of<RecordingChannels> $recordingChannels
      * @param RecordingStatusCallbackMethod|value-of<RecordingStatusCallbackMethod> $recordingStatusCallbackMethod
      * @param RecordingTrack|value-of<RecordingTrack> $recordingTrack
+     * @param SipRegion|value-of<SipRegion> $sipRegion
      * @param StatusCallbackEvent|value-of<StatusCallbackEvent> $statusCallbackEvent
      * @param StatusCallbackMethod|value-of<StatusCallbackMethod> $statusCallbackMethod
      * @param Trim|value-of<Trim> $trim
@@ -375,6 +386,7 @@ final class CallCallsParams implements BaseModel
         ?bool $sendRecordingURL = null,
         ?string $sipAuthPassword = null,
         ?string $sipAuthUsername = null,
+        SipRegion|string|null $sipRegion = null,
         ?string $statusCallback = null,
         StatusCallbackEvent|string|null $statusCallbackEvent = null,
         StatusCallbackMethod|string|null $statusCallbackMethod = null,
@@ -413,6 +425,7 @@ final class CallCallsParams implements BaseModel
         null !== $sendRecordingURL && $obj->sendRecordingURL = $sendRecordingURL;
         null !== $sipAuthPassword && $obj->sipAuthPassword = $sipAuthPassword;
         null !== $sipAuthUsername && $obj->sipAuthUsername = $sipAuthUsername;
+        null !== $sipRegion && $obj['sipRegion'] = $sipRegion;
         null !== $statusCallback && $obj->statusCallback = $statusCallback;
         null !== $statusCallbackEvent && $obj['statusCallbackEvent'] = $statusCallbackEvent;
         null !== $statusCallbackMethod && $obj['statusCallbackMethod'] = $statusCallbackMethod;
@@ -755,6 +768,19 @@ final class CallCallsParams implements BaseModel
     {
         $obj = clone $this;
         $obj->sipAuthUsername = $sipAuthUsername;
+
+        return $obj;
+    }
+
+    /**
+     * Defines the SIP region to be used for the call.
+     *
+     * @param SipRegion|value-of<SipRegion> $sipRegion
+     */
+    public function withSipRegion(SipRegion|string $sipRegion): self
+    {
+        $obj = clone $this;
+        $obj['sipRegion'] = $sipRegion;
 
         return $obj;
     }

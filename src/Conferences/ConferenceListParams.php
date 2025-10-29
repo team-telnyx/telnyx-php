@@ -6,6 +6,7 @@ namespace Telnyx\Conferences;
 
 use Telnyx\Conferences\ConferenceListParams\Filter;
 use Telnyx\Conferences\ConferenceListParams\Page;
+use Telnyx\Conferences\ConferenceListParams\Region;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
@@ -16,7 +17,9 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Conferences->list
  *
- * @phpstan-type conference_list_params = array{filter?: Filter, page?: Page}
+ * @phpstan-type conference_list_params = array{
+ *   filter?: Filter, page?: Page, region?: Region|value-of<Region>
+ * }
  */
 final class ConferenceListParams implements BaseModel
 {
@@ -36,6 +39,14 @@ final class ConferenceListParams implements BaseModel
     #[Api(optional: true)]
     public ?Page $page;
 
+    /**
+     * Region where the conference data is located.
+     *
+     * @var value-of<Region>|null $region
+     */
+    #[Api(enum: Region::class, optional: true)]
+    public ?string $region;
+
     public function __construct()
     {
         $this->initialize();
@@ -45,13 +56,19 @@ final class ConferenceListParams implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Region|value-of<Region> $region
      */
-    public static function with(?Filter $filter = null, ?Page $page = null): self
-    {
+    public static function with(
+        ?Filter $filter = null,
+        ?Page $page = null,
+        Region|string|null $region = null
+    ): self {
         $obj = new self;
 
         null !== $filter && $obj->filter = $filter;
         null !== $page && $obj->page = $page;
+        null !== $region && $obj['region'] = $region;
 
         return $obj;
     }
@@ -74,6 +91,19 @@ final class ConferenceListParams implements BaseModel
     {
         $obj = clone $this;
         $obj->page = $page;
+
+        return $obj;
+    }
+
+    /**
+     * Region where the conference data is located.
+     *
+     * @param Region|value-of<Region> $region
+     */
+    public function withRegion(Region|string $region): self
+    {
+        $obj = clone $this;
+        $obj['region'] = $region;
 
         return $obj;
     }

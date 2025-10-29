@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Conferences\Actions;
 
+use Telnyx\Conferences\Actions\UpdateConference\Region;
 use Telnyx\Conferences\Actions\UpdateConference\SupervisorRole;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
@@ -14,6 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   callControlID: string,
  *   supervisorRole: value-of<SupervisorRole>,
  *   commandID?: string,
+ *   region?: value-of<Region>,
  *   whisperCallControlIDs?: list<string>,
  * }
  */
@@ -41,6 +43,14 @@ final class UpdateConference implements BaseModel
      */
     #[Api('command_id', optional: true)]
     public ?string $commandID;
+
+    /**
+     * Region where the conference data is located. Defaults to the region defined in user's data locality settings (Europe or US).
+     *
+     * @var value-of<Region>|null $region
+     */
+    #[Api(enum: Region::class, optional: true)]
+    public ?string $region;
 
     /**
      * Array of unique call_control_ids the supervisor can whisper to. If none provided, the supervisor will join the conference as a monitoring participant only.
@@ -75,12 +85,14 @@ final class UpdateConference implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param SupervisorRole|value-of<SupervisorRole> $supervisorRole
+     * @param Region|value-of<Region> $region
      * @param list<string> $whisperCallControlIDs
      */
     public static function with(
         string $callControlID,
         SupervisorRole|string $supervisorRole,
         ?string $commandID = null,
+        Region|string|null $region = null,
         ?array $whisperCallControlIDs = null,
     ): self {
         $obj = new self;
@@ -89,6 +101,7 @@ final class UpdateConference implements BaseModel
         $obj['supervisorRole'] = $supervisorRole;
 
         null !== $commandID && $obj->commandID = $commandID;
+        null !== $region && $obj['region'] = $region;
         null !== $whisperCallControlIDs && $obj->whisperCallControlIDs = $whisperCallControlIDs;
 
         return $obj;
@@ -126,6 +139,19 @@ final class UpdateConference implements BaseModel
     {
         $obj = clone $this;
         $obj->commandID = $commandID;
+
+        return $obj;
+    }
+
+    /**
+     * Region where the conference data is located. Defaults to the region defined in user's data locality settings (Europe or US).
+     *
+     * @param Region|value-of<Region> $region
+     */
+    public function withRegion(Region|string $region): self
+    {
+        $obj = clone $this;
+        $obj['region'] = $region;
 
         return $obj;
     }

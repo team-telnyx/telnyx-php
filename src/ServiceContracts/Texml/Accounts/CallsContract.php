@@ -13,6 +13,7 @@ use Telnyx\Texml\Accounts\Calls\CallCallsParams\MachineDetection;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\RecordingChannels;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\RecordingStatusCallbackMethod;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\RecordingTrack;
+use Telnyx\Texml\Accounts\Calls\CallCallsParams\SipRegion;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\StatusCallbackEvent;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\Trim;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\URLMethod;
@@ -134,6 +135,7 @@ interface CallsContract
      * @param bool $sendRecordingURL whether to send RecordingUrl in webhooks
      * @param string $sipAuthPassword the password to use for SIP authentication
      * @param string $sipAuthUsername the username to use for SIP authentication
+     * @param SipRegion|value-of<SipRegion> $sipRegion defines the SIP region to be used for the call
      * @param string $statusCallback URL destination for Telnyx to send status callback events to for the call
      * @param StatusCallbackEvent|value-of<StatusCallbackEvent> $statusCallbackEvent The call events for which Telnyx should send a webhook. Multiple events can be defined when separated by a space.
      * @param \Telnyx\Texml\Accounts\Calls\CallCallsParams\StatusCallbackMethod|value-of<\Telnyx\Texml\Accounts\Calls\CallCallsParams\StatusCallbackMethod> $statusCallbackMethod HTTP request type used for `StatusCallback`
@@ -173,6 +175,7 @@ interface CallsContract
         $sendRecordingURL = omit,
         $sipAuthPassword = omit,
         $sipAuthUsername = omit,
+        $sipRegion = omit,
         $statusCallback = omit,
         $statusCallbackEvent = omit,
         $statusCallbackMethod = omit,

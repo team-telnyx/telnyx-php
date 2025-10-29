@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Conferences\Actions;
 
 use Telnyx\Conferences\Actions\ActionRecordStartParams\Format;
+use Telnyx\Conferences\Actions\ActionRecordStartParams\Region;
 use Telnyx\Conferences\Actions\ActionRecordStartParams\Trim;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
@@ -25,6 +26,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   commandID?: string,
  *   customFileName?: string,
  *   playBeep?: bool,
+ *   region?: Region|value-of<Region>,
  *   trim?: Trim|value-of<Trim>,
  * }
  */
@@ -61,6 +63,14 @@ final class ActionRecordStartParams implements BaseModel
     public ?bool $playBeep;
 
     /**
+     * Region where the conference data is located. Defaults to the region defined in user's data locality settings (Europe or US).
+     *
+     * @var value-of<Region>|null $region
+     */
+    #[Api(enum: Region::class, optional: true)]
+    public ?string $region;
+
+    /**
      * When set to `trim-silence`, silence will be removed from the beginning and end of the recording.
      *
      * @var value-of<Trim>|null $trim
@@ -93,6 +103,7 @@ final class ActionRecordStartParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Format|value-of<Format> $format
+     * @param Region|value-of<Region> $region
      * @param Trim|value-of<Trim> $trim
      */
     public static function with(
@@ -100,6 +111,7 @@ final class ActionRecordStartParams implements BaseModel
         ?string $commandID = null,
         ?string $customFileName = null,
         ?bool $playBeep = null,
+        Region|string|null $region = null,
         Trim|string|null $trim = null,
     ): self {
         $obj = new self;
@@ -109,6 +121,7 @@ final class ActionRecordStartParams implements BaseModel
         null !== $commandID && $obj->commandID = $commandID;
         null !== $customFileName && $obj->customFileName = $customFileName;
         null !== $playBeep && $obj->playBeep = $playBeep;
+        null !== $region && $obj['region'] = $region;
         null !== $trim && $obj['trim'] = $trim;
 
         return $obj;
@@ -156,6 +169,19 @@ final class ActionRecordStartParams implements BaseModel
     {
         $obj = clone $this;
         $obj->playBeep = $playBeep;
+
+        return $obj;
+    }
+
+    /**
+     * Region where the conference data is located. Defaults to the region defined in user's data locality settings (Europe or US).
+     *
+     * @param Region|value-of<Region> $region
+     */
+    public function withRegion(Region|string $region): self
+    {
+        $obj = clone $this;
+        $obj['region'] = $region;
 
         return $obj;
     }

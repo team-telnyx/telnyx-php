@@ -273,7 +273,9 @@ final class ActionsTest extends TestCase
 
         $result = $this->client->conferences->actions->unhold(
             'id',
-            ['v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg']
+            callControlIDs: [
+                'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
+            ],
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -288,7 +290,9 @@ final class ActionsTest extends TestCase
 
         $result = $this->client->conferences->actions->unhold(
             'id',
-            ['v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg']
+            callControlIDs: [
+                'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
+            ],
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Conferences\Actions;
 
 use Telnyx\Conferences\Actions\ActionJoinParams\BeepEnabled;
+use Telnyx\Conferences\Actions\ActionJoinParams\Region;
 use Telnyx\Conferences\Actions\ActionJoinParams\SupervisorRole;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
@@ -31,6 +32,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   holdAudioURL?: string,
  *   holdMediaName?: string,
  *   mute?: bool,
+ *   region?: Region|value-of<Region>,
  *   softEndConferenceOnExit?: bool,
  *   startConferenceOnEnter?: bool,
  *   supervisorRole?: SupervisorRole|value-of<SupervisorRole>,
@@ -100,6 +102,14 @@ final class ActionJoinParams implements BaseModel
     public ?bool $mute;
 
     /**
+     * Region where the conference data is located. Defaults to the region defined in user's data locality settings (Europe or US).
+     *
+     * @var value-of<Region>|null $region
+     */
+    #[Api(enum: Region::class, optional: true)]
+    public ?string $region;
+
+    /**
      * Whether the conference should end after the participant leaves the conference. NOTE this doesn't hang up the other participants. Defaults to "false".
      */
     #[Api('soft_end_conference_on_exit', optional: true)]
@@ -152,6 +162,7 @@ final class ActionJoinParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param BeepEnabled|value-of<BeepEnabled> $beepEnabled
+     * @param Region|value-of<Region> $region
      * @param SupervisorRole|value-of<SupervisorRole> $supervisorRole
      * @param list<string> $whisperCallControlIDs
      */
@@ -165,6 +176,7 @@ final class ActionJoinParams implements BaseModel
         ?string $holdAudioURL = null,
         ?string $holdMediaName = null,
         ?bool $mute = null,
+        Region|string|null $region = null,
         ?bool $softEndConferenceOnExit = null,
         ?bool $startConferenceOnEnter = null,
         SupervisorRole|string|null $supervisorRole = null,
@@ -182,6 +194,7 @@ final class ActionJoinParams implements BaseModel
         null !== $holdAudioURL && $obj->holdAudioURL = $holdAudioURL;
         null !== $holdMediaName && $obj->holdMediaName = $holdMediaName;
         null !== $mute && $obj->mute = $mute;
+        null !== $region && $obj['region'] = $region;
         null !== $softEndConferenceOnExit && $obj->softEndConferenceOnExit = $softEndConferenceOnExit;
         null !== $startConferenceOnEnter && $obj->startConferenceOnEnter = $startConferenceOnEnter;
         null !== $supervisorRole && $obj['supervisorRole'] = $supervisorRole;
@@ -287,6 +300,19 @@ final class ActionJoinParams implements BaseModel
     {
         $obj = clone $this;
         $obj->mute = $mute;
+
+        return $obj;
+    }
+
+    /**
+     * Region where the conference data is located. Defaults to the region defined in user's data locality settings (Europe or US).
+     *
+     * @param Region|value-of<Region> $region
+     */
+    public function withRegion(Region|string $region): self
+    {
+        $obj = clone $this;
+        $obj['region'] = $region;
 
         return $obj;
     }

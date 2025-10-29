@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Conferences\Actions;
 
+use Telnyx\Conferences\Actions\ActionUnholdParams\Region;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
@@ -14,7 +15,9 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Conferences\Actions->unhold
  *
- * @phpstan-type action_unhold_params = array{callControlIDs: list<string>}
+ * @phpstan-type action_unhold_params = array{
+ *   callControlIDs: list<string>, region?: Region|value-of<Region>
+ * }
  */
 final class ActionUnholdParams implements BaseModel
 {
@@ -29,6 +32,14 @@ final class ActionUnholdParams implements BaseModel
      */
     #[Api('call_control_ids', list: 'string')]
     public array $callControlIDs;
+
+    /**
+     * Region where the conference data is located. Defaults to the region defined in user's data locality settings (Europe or US).
+     *
+     * @var value-of<Region>|null $region
+     */
+    #[Api(enum: Region::class, optional: true)]
+    public ?string $region;
 
     /**
      * `new ActionUnholdParams()` is missing required properties by the API.
@@ -55,12 +66,17 @@ final class ActionUnholdParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<string> $callControlIDs
+     * @param Region|value-of<Region> $region
      */
-    public static function with(array $callControlIDs): self
-    {
+    public static function with(
+        array $callControlIDs,
+        Region|string|null $region = null
+    ): self {
         $obj = new self;
 
         $obj->callControlIDs = $callControlIDs;
+
+        null !== $region && $obj['region'] = $region;
 
         return $obj;
     }
@@ -74,6 +90,19 @@ final class ActionUnholdParams implements BaseModel
     {
         $obj = clone $this;
         $obj->callControlIDs = $callControlIDs;
+
+        return $obj;
+    }
+
+    /**
+     * Region where the conference data is located. Defaults to the region defined in user's data locality settings (Europe or US).
+     *
+     * @param Region|value-of<Region> $region
+     */
+    public function withRegion(Region|string $region): self
+    {
+        $obj = clone $this;
+        $obj['region'] = $region;
 
         return $obj;
     }
