@@ -385,6 +385,7 @@ final class ActionsService implements ActionsContract
      * @param string $queueName The name of the queue the call should be put in. If a queue with a given name doesn't exist yet it will be created.
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
+     * @param bool $keepAfterHangup If set to true, the call will remain in the queue after hangup. In this case bridging to such call will fail with necessary information needed to re-establish the call.
      * @param int $maxSize The maximum number of calls allowed in the queue at a given time. Can't be modified for an existing queue.
      * @param int $maxWaitTimeSecs the number of seconds after which the call will be removed from the queue
      *
@@ -395,6 +396,7 @@ final class ActionsService implements ActionsContract
         $queueName,
         $clientState = omit,
         $commandID = omit,
+        $keepAfterHangup = omit,
         $maxSize = omit,
         $maxWaitTimeSecs = omit,
         ?RequestOptions $requestOptions = null,
@@ -403,6 +405,7 @@ final class ActionsService implements ActionsContract
             'queueName' => $queueName,
             'clientState' => $clientState,
             'commandID' => $commandID,
+            'keepAfterHangup' => $keepAfterHangup,
             'maxSize' => $maxSize,
             'maxWaitTimeSecs' => $maxWaitTimeSecs,
         ];
