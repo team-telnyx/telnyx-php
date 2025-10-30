@@ -43,6 +43,34 @@ interface CallsContract
     /**
      * @api
      *
+     * @param string $queueName
+     * @param bool $keepAfterHangup whether the call should remain in queue after hangup
+     *
+     * @throws APIException
+     */
+    public function update(
+        string $callControlID,
+        $queueName,
+        $keepAfterHangup = omit,
+        ?RequestOptions $requestOptions = null,
+    ): mixed;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $callControlID,
+        array $params,
+        ?RequestOptions $requestOptions = null,
+    ): mixed;
+
+    /**
+     * @api
+     *
      * @param Page $page Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number]
      *
      * @throws APIException

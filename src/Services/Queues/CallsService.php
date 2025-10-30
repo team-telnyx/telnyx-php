@@ -11,6 +11,7 @@ use Telnyx\Queues\Calls\CallListParams;
 use Telnyx\Queues\Calls\CallListParams\Page;
 use Telnyx\Queues\Calls\CallListResponse;
 use Telnyx\Queues\Calls\CallRetrieveParams;
+use Telnyx\Queues\Calls\CallUpdateParams;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Queues\CallsContract;
 
@@ -67,6 +68,58 @@ final class CallsService implements CallsContract
             path: ['queues/%1$s/calls/%2$s', $queueName, $callControlID],
             options: $options,
             convert: CallGetResponse::class,
+        );
+    }
+
+    /**
+     * @api
+     *
+     * Update queued call's keep_after_hangup flag
+     *
+     * @param string $queueName
+     * @param bool $keepAfterHangup whether the call should remain in queue after hangup
+     *
+     * @throws APIException
+     */
+    public function update(
+        string $callControlID,
+        $queueName,
+        $keepAfterHangup = omit,
+        ?RequestOptions $requestOptions = null,
+    ): mixed {
+        $params = [
+            'queueName' => $queueName, 'keepAfterHangup' => $keepAfterHangup,
+        ];
+
+        return $this->updateRaw($callControlID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @throws APIException
+     */
+    public function updateRaw(
+        string $callControlID,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): mixed {
+        [$parsed, $options] = CallUpdateParams::parseRequest(
+            $params,
+            $requestOptions
+        );
+        $queueName = $parsed['queueName'];
+        unset($parsed['queueName']);
+
+        // @phpstan-ignore-next-line;
+        return $this->client->request(
+            method: 'patch',
+            path: ['queues/%1$s/calls/%2$s', $queueName, $callControlID],
+            body: (object) array_diff_key($parsed, ['queueName']),
+            options: $options,
+            convert: null,
         );
     }
 
