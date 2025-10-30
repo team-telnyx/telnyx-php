@@ -10,6 +10,7 @@ use Telnyx\Queues\Calls\CallGetResponse;
 use Telnyx\Queues\Calls\CallListParams;
 use Telnyx\Queues\Calls\CallListParams\Page;
 use Telnyx\Queues\Calls\CallListResponse;
+use Telnyx\Queues\Calls\CallRemoveParams;
 use Telnyx\Queues\Calls\CallRetrieveParams;
 use Telnyx\Queues\Calls\CallUpdateParams;
 use Telnyx\RequestOptions;
@@ -166,6 +167,53 @@ final class CallsService implements CallsContract
             query: $parsed,
             options: $options,
             convert: CallListResponse::class,
+        );
+    }
+
+    /**
+     * @api
+     *
+     * Removes an inactive call from a queue. If the call is no longer active, use this command to remove it from the queue.
+     *
+     * @param string $queueName
+     *
+     * @throws APIException
+     */
+    public function remove(
+        string $callControlID,
+        $queueName,
+        ?RequestOptions $requestOptions = null
+    ): mixed {
+        $params = ['queueName' => $queueName];
+
+        return $this->removeRaw($callControlID, $params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @throws APIException
+     */
+    public function removeRaw(
+        string $callControlID,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): mixed {
+        [$parsed, $options] = CallRemoveParams::parseRequest(
+            $params,
+            $requestOptions
+        );
+        $queueName = $parsed['queueName'];
+        unset($parsed['queueName']);
+
+        // @phpstan-ignore-next-line;
+        return $this->client->request(
+            method: 'delete',
+            path: ['queues/%1$s/calls/%2$s', $queueName, $callControlID],
+            options: $options,
+            convert: null,
         );
     }
 }

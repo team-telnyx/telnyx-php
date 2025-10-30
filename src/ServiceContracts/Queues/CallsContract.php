@@ -93,4 +93,30 @@ interface CallsContract
         array $params,
         ?RequestOptions $requestOptions = null
     ): CallListResponse;
+
+    /**
+     * @api
+     *
+     * @param string $queueName
+     *
+     * @throws APIException
+     */
+    public function remove(
+        string $callControlID,
+        $queueName,
+        ?RequestOptions $requestOptions = null,
+    ): mixed;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @throws APIException
+     */
+    public function removeRaw(
+        string $callControlID,
+        array $params,
+        ?RequestOptions $requestOptions = null,
+    ): mixed;
 }
