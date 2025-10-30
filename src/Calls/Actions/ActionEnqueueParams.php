@@ -18,6 +18,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   queueName: string,
  *   clientState?: string,
  *   commandID?: string,
+ *   keepAfterHangup?: bool,
  *   maxSize?: int,
  *   maxWaitTimeSecs?: int,
  * }
@@ -45,6 +46,12 @@ final class ActionEnqueueParams implements BaseModel
      */
     #[Api('command_id', optional: true)]
     public ?string $commandID;
+
+    /**
+     * If set to true, the call will remain in the queue after hangup. In this case bridging to such call will fail with necessary information needed to re-establish the call.
+     */
+    #[Api('keep_after_hangup', optional: true)]
+    public ?bool $keepAfterHangup;
 
     /**
      * The maximum number of calls allowed in the queue at a given time. Can't be modified for an existing queue.
@@ -86,6 +93,7 @@ final class ActionEnqueueParams implements BaseModel
         string $queueName,
         ?string $clientState = null,
         ?string $commandID = null,
+        ?bool $keepAfterHangup = null,
         ?int $maxSize = null,
         ?int $maxWaitTimeSecs = null,
     ): self {
@@ -95,6 +103,7 @@ final class ActionEnqueueParams implements BaseModel
 
         null !== $clientState && $obj->clientState = $clientState;
         null !== $commandID && $obj->commandID = $commandID;
+        null !== $keepAfterHangup && $obj->keepAfterHangup = $keepAfterHangup;
         null !== $maxSize && $obj->maxSize = $maxSize;
         null !== $maxWaitTimeSecs && $obj->maxWaitTimeSecs = $maxWaitTimeSecs;
 
@@ -130,6 +139,17 @@ final class ActionEnqueueParams implements BaseModel
     {
         $obj = clone $this;
         $obj->commandID = $commandID;
+
+        return $obj;
+    }
+
+    /**
+     * If set to true, the call will remain in the queue after hangup. In this case bridging to such call will fail with necessary information needed to re-establish the call.
+     */
+    public function withKeepAfterHangup(bool $keepAfterHangup): self
+    {
+        $obj = clone $this;
+        $obj->keepAfterHangup = $keepAfterHangup;
 
         return $obj;
     }
