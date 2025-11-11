@@ -12,15 +12,9 @@ use Telnyx\CredentialConnections\DtmfType;
 use Telnyx\CredentialConnections\EncryptedMedia;
 use Telnyx\IPConnections\InboundIP;
 use Telnyx\IPConnections\IPConnectionCreateParams;
-use Telnyx\IPConnections\IPConnectionCreateParams\Inbound;
-use Telnyx\IPConnections\IPConnectionCreateParams\TransportProtocol;
-use Telnyx\IPConnections\IPConnectionCreateParams\WebhookAPIVersion;
 use Telnyx\IPConnections\IPConnectionDeleteResponse;
 use Telnyx\IPConnections\IPConnectionGetResponse;
 use Telnyx\IPConnections\IPConnectionListParams;
-use Telnyx\IPConnections\IPConnectionListParams\Filter;
-use Telnyx\IPConnections\IPConnectionListParams\Page;
-use Telnyx\IPConnections\IPConnectionListParams\Sort;
 use Telnyx\IPConnections\IPConnectionListResponse;
 use Telnyx\IPConnections\IPConnectionNewResponse;
 use Telnyx\IPConnections\IPConnectionUpdateParams;
@@ -28,8 +22,6 @@ use Telnyx\IPConnections\IPConnectionUpdateResponse;
 use Telnyx\IPConnections\OutboundIP;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\IPConnectionsContract;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class IPConnectionsService implements IPConnectionsContract
 {
@@ -43,89 +35,70 @@ final class IPConnectionsService implements IPConnectionsContract
      *
      * Creates an IP connection.
      *
-     * @param bool $active Defaults to true
-     * @param AnchorsiteOverride|value-of<AnchorsiteOverride> $anchorsiteOverride `Latency` directs Telnyx to route media through the site with the lowest round-trip time to the user's connection. Telnyx calculates this time using ICMP ping messages. This can be disabled by specifying a site to handle all media.
-     * @param string|null $androidPushCredentialID The uuid of the push credential for Android
-     * @param string $connectionName
-     * @param bool $defaultOnHoldComfortNoiseEnabled When enabled, Telnyx will generate comfort noise when you place the call on hold. If disabled, you will need to generate comfort noise or on hold music to avoid RTP timeout.
-     * @param DtmfType|value-of<DtmfType> $dtmfType Sets the type of DTMF digits sent from Telnyx to this Connection. Note that DTMF digits sent to Telnyx will be accepted in all formats.
-     * @param bool $encodeContactHeaderEnabled encode the SIP contact header sent by Telnyx to avoid issues for NAT or ALG scenarios
-     * @param EncryptedMedia|value-of<EncryptedMedia>|null $encryptedMedia Enable use of SRTP for encryption. Cannot be set if the transport_portocol is TLS.
-     * @param Inbound $inbound
-     * @param string|null $iosPushCredentialID The uuid of the push credential for Ios
-     * @param bool $onnetT38PassthroughEnabled Enable on-net T38 if you prefer the sender and receiver negotiating T38 directly if both are on the Telnyx network. If this is disabled, Telnyx will be able to use T38 on just one leg of the call depending on each leg's settings.
-     * @param OutboundIP $outbound
-     * @param ConnectionRtcpSettings $rtcpSettings
-     * @param list<string> $tags tags associated with the connection
-     * @param TransportProtocol|value-of<TransportProtocol> $transportProtocol One of UDP, TLS, or TCP. Applies only to connections with IP authentication or FQDN authentication.
-     * @param WebhookAPIVersion|value-of<WebhookAPIVersion> $webhookAPIVersion determines which webhook format will be used, Telnyx API v1 or v2
-     * @param string|null $webhookEventFailoverURL The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
-     * @param string $webhookEventURL The URL where webhooks related to this connection will be sent. Must include a scheme, such as 'https'.
-     * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
+     * @param array{
+     *   active?: bool,
+     *   anchorsite_override?: value-of<AnchorsiteOverride>,
+     *   android_push_credential_id?: string|null,
+     *   connection_name?: string,
+     *   default_on_hold_comfort_noise_enabled?: bool,
+     *   dtmf_type?: "RFC 2833"|"Inband"|"SIP INFO"|DtmfType,
+     *   encode_contact_header_enabled?: bool,
+     *   encrypted_media?: "SRTP"|EncryptedMedia|null,
+     *   inbound?: array{
+     *     ani_number_format?: "+E.164"|"E.164"|"+E.164-national"|"E.164-national",
+     *     channel_limit?: int,
+     *     codecs?: list<string>,
+     *     default_routing_method?: "sequential"|"round-robin",
+     *     dnis_number_format?: "+e164"|"e164"|"national"|"sip_username",
+     *     generate_ringback_tone?: bool,
+     *     isup_headers_enabled?: bool,
+     *     prack_enabled?: bool,
+     *     shaken_stir_enabled?: bool,
+     *     sip_compact_headers_enabled?: bool,
+     *     sip_region?: "US"|"Europe"|"Australia",
+     *     sip_subdomain?: string,
+     *     sip_subdomain_receive_settings?: "only_my_connections"|"from_anyone",
+     *     timeout_1xx_secs?: int,
+     *     timeout_2xx_secs?: int,
+     *   },
+     *   ios_push_credential_id?: string|null,
+     *   onnet_t38_passthrough_enabled?: bool,
+     *   outbound?: array{
+     *     ani_override?: string,
+     *     ani_override_type?: "always"|"normal"|"emergency",
+     *     call_parking_enabled?: bool|null,
+     *     channel_limit?: int,
+     *     generate_ringback_tone?: bool,
+     *     instant_ringback_enabled?: bool,
+     *     ip_authentication_method?: "tech-prefixp-charge-info"|"token",
+     *     ip_authentication_token?: string,
+     *     localization?: string,
+     *     outbound_voice_profile_id?: string,
+     *     t38_reinvite_source?: "telnyx"|"customer"|"disabled"|"passthru"|"caller-passthru"|"callee-passthru",
+     *     tech_prefix?: string,
+     *   }|OutboundIP,
+     *   rtcp_settings?: array{
+     *     capture_enabled?: bool,
+     *     port?: "rtcp-mux"|"rtp+1",
+     *     report_frequency_secs?: int,
+     *   }|ConnectionRtcpSettings,
+     *   tags?: list<string>,
+     *   transport_protocol?: "UDP"|"TCP"|"TLS",
+     *   webhook_api_version?: "1"|"2",
+     *   webhook_event_failover_url?: string|null,
+     *   webhook_event_url?: string,
+     *   webhook_timeout_secs?: int|null,
+     * }|IPConnectionCreateParams $params
      *
      * @throws APIException
      */
     public function create(
-        $active = omit,
-        $anchorsiteOverride = omit,
-        $androidPushCredentialID = omit,
-        $connectionName = omit,
-        $defaultOnHoldComfortNoiseEnabled = omit,
-        $dtmfType = omit,
-        $encodeContactHeaderEnabled = omit,
-        $encryptedMedia = omit,
-        $inbound = omit,
-        $iosPushCredentialID = omit,
-        $onnetT38PassthroughEnabled = omit,
-        $outbound = omit,
-        $rtcpSettings = omit,
-        $tags = omit,
-        $transportProtocol = omit,
-        $webhookAPIVersion = omit,
-        $webhookEventFailoverURL = omit,
-        $webhookEventURL = omit,
-        $webhookTimeoutSecs = omit,
+        array|IPConnectionCreateParams $params,
         ?RequestOptions $requestOptions = null,
-    ): IPConnectionNewResponse {
-        $params = [
-            'active' => $active,
-            'anchorsiteOverride' => $anchorsiteOverride,
-            'androidPushCredentialID' => $androidPushCredentialID,
-            'connectionName' => $connectionName,
-            'defaultOnHoldComfortNoiseEnabled' => $defaultOnHoldComfortNoiseEnabled,
-            'dtmfType' => $dtmfType,
-            'encodeContactHeaderEnabled' => $encodeContactHeaderEnabled,
-            'encryptedMedia' => $encryptedMedia,
-            'inbound' => $inbound,
-            'iosPushCredentialID' => $iosPushCredentialID,
-            'onnetT38PassthroughEnabled' => $onnetT38PassthroughEnabled,
-            'outbound' => $outbound,
-            'rtcpSettings' => $rtcpSettings,
-            'tags' => $tags,
-            'transportProtocol' => $transportProtocol,
-            'webhookAPIVersion' => $webhookAPIVersion,
-            'webhookEventFailoverURL' => $webhookEventFailoverURL,
-            'webhookEventURL' => $webhookEventURL,
-            'webhookTimeoutSecs' => $webhookTimeoutSecs,
-        ];
-
-        return $this->createRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): IPConnectionNewResponse {
         [$parsed, $options] = IPConnectionCreateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -163,91 +136,74 @@ final class IPConnectionsService implements IPConnectionsContract
      *
      * Updates settings of an existing IP connection.
      *
-     * @param bool $active Defaults to true
-     * @param AnchorsiteOverride|value-of<AnchorsiteOverride> $anchorsiteOverride `Latency` directs Telnyx to route media through the site with the lowest round-trip time to the user's connection. Telnyx calculates this time using ICMP ping messages. This can be disabled by specifying a site to handle all media.
-     * @param string|null $androidPushCredentialID The uuid of the push credential for Android
-     * @param string $connectionName
-     * @param bool $defaultOnHoldComfortNoiseEnabled When enabled, Telnyx will generate comfort noise when you place the call on hold. If disabled, you will need to generate comfort noise or on hold music to avoid RTP timeout.
-     * @param DtmfType|value-of<DtmfType> $dtmfType Sets the type of DTMF digits sent from Telnyx to this Connection. Note that DTMF digits sent to Telnyx will be accepted in all formats.
-     * @param bool $encodeContactHeaderEnabled encode the SIP contact header sent by Telnyx to avoid issues for NAT or ALG scenarios
-     * @param EncryptedMedia|value-of<EncryptedMedia>|null $encryptedMedia Enable use of SRTP for encryption. Cannot be set if the transport_portocol is TLS.
-     * @param InboundIP $inbound
-     * @param string|null $iosPushCredentialID The uuid of the push credential for Ios
-     * @param bool $onnetT38PassthroughEnabled Enable on-net T38 if you prefer the sender and receiver negotiating T38 directly if both are on the Telnyx network. If this is disabled, Telnyx will be able to use T38 on just one leg of the call depending on each leg's settings.
-     * @param OutboundIP $outbound
-     * @param ConnectionRtcpSettings $rtcpSettings
-     * @param list<string> $tags tags associated with the connection
-     * @param IPConnectionUpdateParams\TransportProtocol|value-of<IPConnectionUpdateParams\TransportProtocol> $transportProtocol One of UDP, TLS, or TCP. Applies only to connections with IP authentication or FQDN authentication.
-     * @param IPConnectionUpdateParams\WebhookAPIVersion|value-of<IPConnectionUpdateParams\WebhookAPIVersion> $webhookAPIVersion determines which webhook format will be used, Telnyx API v1 or v2
-     * @param string|null $webhookEventFailoverURL The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
-     * @param string $webhookEventURL The URL where webhooks related to this connection will be sent. Must include a scheme, such as 'https'.
-     * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
+     * @param array{
+     *   active?: bool,
+     *   anchorsite_override?: value-of<AnchorsiteOverride>,
+     *   android_push_credential_id?: string|null,
+     *   connection_name?: string,
+     *   default_on_hold_comfort_noise_enabled?: bool,
+     *   dtmf_type?: "RFC 2833"|"Inband"|"SIP INFO"|DtmfType,
+     *   encode_contact_header_enabled?: bool,
+     *   encrypted_media?: "SRTP"|EncryptedMedia|null,
+     *   inbound?: array{
+     *     ani_number_format?: "+E.164"|"E.164"|"+E.164-national"|"E.164-national",
+     *     channel_limit?: int,
+     *     codecs?: list<string>,
+     *     default_primary_ip_id?: string,
+     *     default_routing_method?: "sequential"|"round-robin",
+     *     default_secondary_ip_id?: string,
+     *     default_tertiary_ip_id?: string,
+     *     dnis_number_format?: "+e164"|"e164"|"national"|"sip_username",
+     *     generate_ringback_tone?: bool,
+     *     isup_headers_enabled?: bool,
+     *     prack_enabled?: bool,
+     *     shaken_stir_enabled?: bool,
+     *     sip_compact_headers_enabled?: bool,
+     *     sip_region?: "US"|"Europe"|"Australia",
+     *     sip_subdomain?: string,
+     *     sip_subdomain_receive_settings?: "only_my_connections"|"from_anyone",
+     *     timeout_1xx_secs?: int,
+     *     timeout_2xx_secs?: int,
+     *   }|InboundIP,
+     *   ios_push_credential_id?: string|null,
+     *   onnet_t38_passthrough_enabled?: bool,
+     *   outbound?: array{
+     *     ani_override?: string,
+     *     ani_override_type?: "always"|"normal"|"emergency",
+     *     call_parking_enabled?: bool|null,
+     *     channel_limit?: int,
+     *     generate_ringback_tone?: bool,
+     *     instant_ringback_enabled?: bool,
+     *     ip_authentication_method?: "tech-prefixp-charge-info"|"token",
+     *     ip_authentication_token?: string,
+     *     localization?: string,
+     *     outbound_voice_profile_id?: string,
+     *     t38_reinvite_source?: "telnyx"|"customer"|"disabled"|"passthru"|"caller-passthru"|"callee-passthru",
+     *     tech_prefix?: string,
+     *   }|OutboundIP,
+     *   rtcp_settings?: array{
+     *     capture_enabled?: bool,
+     *     port?: "rtcp-mux"|"rtp+1",
+     *     report_frequency_secs?: int,
+     *   }|ConnectionRtcpSettings,
+     *   tags?: list<string>,
+     *   transport_protocol?: "UDP"|"TCP"|"TLS",
+     *   webhook_api_version?: "1"|"2",
+     *   webhook_event_failover_url?: string|null,
+     *   webhook_event_url?: string,
+     *   webhook_timeout_secs?: int|null,
+     * }|IPConnectionUpdateParams $params
      *
      * @throws APIException
      */
     public function update(
         string $id,
-        $active = omit,
-        $anchorsiteOverride = omit,
-        $androidPushCredentialID = omit,
-        $connectionName = omit,
-        $defaultOnHoldComfortNoiseEnabled = omit,
-        $dtmfType = omit,
-        $encodeContactHeaderEnabled = omit,
-        $encryptedMedia = omit,
-        $inbound = omit,
-        $iosPushCredentialID = omit,
-        $onnetT38PassthroughEnabled = omit,
-        $outbound = omit,
-        $rtcpSettings = omit,
-        $tags = omit,
-        $transportProtocol = omit,
-        $webhookAPIVersion = omit,
-        $webhookEventFailoverURL = omit,
-        $webhookEventURL = omit,
-        $webhookTimeoutSecs = omit,
+        array|IPConnectionUpdateParams $params,
         ?RequestOptions $requestOptions = null,
-    ): IPConnectionUpdateResponse {
-        $params = [
-            'active' => $active,
-            'anchorsiteOverride' => $anchorsiteOverride,
-            'androidPushCredentialID' => $androidPushCredentialID,
-            'connectionName' => $connectionName,
-            'defaultOnHoldComfortNoiseEnabled' => $defaultOnHoldComfortNoiseEnabled,
-            'dtmfType' => $dtmfType,
-            'encodeContactHeaderEnabled' => $encodeContactHeaderEnabled,
-            'encryptedMedia' => $encryptedMedia,
-            'inbound' => $inbound,
-            'iosPushCredentialID' => $iosPushCredentialID,
-            'onnetT38PassthroughEnabled' => $onnetT38PassthroughEnabled,
-            'outbound' => $outbound,
-            'rtcpSettings' => $rtcpSettings,
-            'tags' => $tags,
-            'transportProtocol' => $transportProtocol,
-            'webhookAPIVersion' => $webhookAPIVersion,
-            'webhookEventFailoverURL' => $webhookEventFailoverURL,
-            'webhookEventURL' => $webhookEventURL,
-            'webhookTimeoutSecs' => $webhookTimeoutSecs,
-        ];
-
-        return $this->updateRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): IPConnectionUpdateResponse {
         [$parsed, $options] = IPConnectionUpdateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -265,48 +221,25 @@ final class IPConnectionsService implements IPConnectionsContract
      *
      * Returns a list of your IP connections.
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[connection_name], filter[fqdn], filter[outbound_voice_profile_id], filter[outbound.outbound_voice_profile_id]
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
-     * @param Sort|value-of<Sort> $sort Specifies the sort order for results. By default sorting direction is ascending. To have the results sorted in descending order add the <code> -</code> prefix.<br/><br/>
-     * That is: <ul>
-     *   <li>
-     *     <code>connection_name</code>: sorts the result by the
-     *     <code>connection_name</code> field in ascending order.
-     *   </li>
-     *
-     *   <li>
-     *     <code>-connection_name</code>: sorts the result by the
-     *     <code>connection_name</code> field in descending order.
-     *   </li>
-     * </ul> <br/> If not given, results are sorted by <code>created_at</code> in descending order.
+     * @param array{
+     *   filter?: array{
+     *     connection_name?: array{contains?: string},
+     *     fqdn?: string,
+     *     outbound_voice_profile_id?: string,
+     *   },
+     *   page?: array{number?: int, size?: int},
+     *   sort?: "created_at"|"connection_name"|"active",
+     * }|IPConnectionListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
-        $sort = omit,
-        ?RequestOptions $requestOptions = null,
-    ): IPConnectionListResponse {
-        $params = ['filter' => $filter, 'page' => $page, 'sort' => $sort];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
+        array|IPConnectionListParams $params,
         ?RequestOptions $requestOptions = null
     ): IPConnectionListResponse {
         [$parsed, $options] = IPConnectionListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

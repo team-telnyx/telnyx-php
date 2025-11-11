@@ -13,12 +13,12 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 /**
  * @phpstan-type McpServerNewResponseShape = array{
  *   id: string,
- *   createdAt: \DateTimeInterface,
+ *   created_at: \DateTimeInterface,
  *   name: string,
  *   type: string,
  *   url: string,
- *   allowedTools?: list<string>|null,
- *   apiKeyRef?: string|null,
+ *   allowed_tools?: list<string>|null,
+ *   api_key_ref?: string|null,
  * }
  */
 final class McpServerNewResponse implements BaseModel, ResponseConverter
@@ -31,8 +31,8 @@ final class McpServerNewResponse implements BaseModel, ResponseConverter
     #[Api]
     public string $id;
 
-    #[Api('created_at')]
-    public \DateTimeInterface $createdAt;
+    #[Api]
+    public \DateTimeInterface $created_at;
 
     #[Api]
     public string $name;
@@ -43,12 +43,12 @@ final class McpServerNewResponse implements BaseModel, ResponseConverter
     #[Api]
     public string $url;
 
-    /** @var list<string>|null $allowedTools */
-    #[Api('allowed_tools', list: 'string', nullable: true, optional: true)]
-    public ?array $allowedTools;
+    /** @var list<string>|null $allowed_tools */
+    #[Api(list: 'string', nullable: true, optional: true)]
+    public ?array $allowed_tools;
 
-    #[Api('api_key_ref', nullable: true, optional: true)]
-    public ?string $apiKeyRef;
+    #[Api(nullable: true, optional: true)]
+    public ?string $api_key_ref;
 
     /**
      * `new McpServerNewResponse()` is missing required properties by the API.
@@ -56,7 +56,7 @@ final class McpServerNewResponse implements BaseModel, ResponseConverter
      * To enforce required parameters use
      * ```
      * McpServerNewResponse::with(
-     *   id: ..., createdAt: ..., name: ..., type: ..., url: ...
+     *   id: ..., created_at: ..., name: ..., type: ..., url: ...
      * )
      * ```
      *
@@ -81,27 +81,27 @@ final class McpServerNewResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string>|null $allowedTools
+     * @param list<string>|null $allowed_tools
      */
     public static function with(
         string $id,
-        \DateTimeInterface $createdAt,
+        \DateTimeInterface $created_at,
         string $name,
         string $type,
         string $url,
-        ?array $allowedTools = null,
-        ?string $apiKeyRef = null,
+        ?array $allowed_tools = null,
+        ?string $api_key_ref = null,
     ): self {
         $obj = new self;
 
         $obj->id = $id;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $created_at;
         $obj->name = $name;
         $obj->type = $type;
         $obj->url = $url;
 
-        null !== $allowedTools && $obj->allowedTools = $allowedTools;
-        null !== $apiKeyRef && $obj->apiKeyRef = $apiKeyRef;
+        null !== $allowed_tools && $obj->allowed_tools = $allowed_tools;
+        null !== $api_key_ref && $obj->api_key_ref = $api_key_ref;
 
         return $obj;
     }
@@ -117,7 +117,7 @@ final class McpServerNewResponse implements BaseModel, ResponseConverter
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }
@@ -152,7 +152,7 @@ final class McpServerNewResponse implements BaseModel, ResponseConverter
     public function withAllowedTools(?array $allowedTools): self
     {
         $obj = clone $this;
-        $obj->allowedTools = $allowedTools;
+        $obj->allowed_tools = $allowedTools;
 
         return $obj;
     }
@@ -160,7 +160,7 @@ final class McpServerNewResponse implements BaseModel, ResponseConverter
     public function withAPIKeyRef(?string $apiKeyRef): self
     {
         $obj = clone $this;
-        $obj->apiKeyRef = $apiKeyRef;
+        $obj->api_key_ref = $apiKeyRef;
 
         return $obj;
     }

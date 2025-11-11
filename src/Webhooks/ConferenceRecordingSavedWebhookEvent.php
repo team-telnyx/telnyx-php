@@ -10,7 +10,9 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\ConferenceRecordingSavedWebhookEvent\Data;
 
 /**
- * @phpstan-type ConferenceRecordingSavedWebhookEventShape = array{data?: Data}
+ * @phpstan-type ConferenceRecordingSavedWebhookEventShape = array{
+ *   data?: Data|null
+ * }
  */
 final class ConferenceRecordingSavedWebhookEvent implements BaseModel
 {

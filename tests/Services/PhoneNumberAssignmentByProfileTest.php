@@ -33,9 +33,9 @@ final class PhoneNumberAssignmentByProfileTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->phoneNumberAssignmentByProfile->assign(
-            messagingProfileID: '4001767e-ce0f-4cae-9d5f-0d5e636e7809'
-        );
+        $result = $this->client->phoneNumberAssignmentByProfile->assign([
+            'messagingProfileId' => '4001767e-ce0f-4cae-9d5f-0d5e636e7809',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -47,9 +47,9 @@ final class PhoneNumberAssignmentByProfileTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->phoneNumberAssignmentByProfile->assign(
-            messagingProfileID: '4001767e-ce0f-4cae-9d5f-0d5e636e7809'
-        );
+        $result = $this->client->phoneNumberAssignmentByProfile->assign([
+            'messagingProfileId' => '4001767e-ce0f-4cae-9d5f-0d5e636e7809',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -64,7 +64,7 @@ final class PhoneNumberAssignmentByProfileTest extends TestCase
         $result = $this
             ->client
             ->phoneNumberAssignmentByProfile
-            ->retrievePhoneNumberStatus('taskId')
+            ->retrievePhoneNumberStatus('taskId', [])
         ;
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType

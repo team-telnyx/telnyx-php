@@ -48,7 +48,8 @@ final class InsightGroupsTest extends TestCase
         }
 
         $result = $this->client->ai->conversations->insightGroups->update(
-            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
+            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+            []
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -75,9 +76,9 @@ final class InsightGroupsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ai->conversations->insightGroups->insightGroups(
-            name: 'name'
-        );
+        $result = $this->client->ai->conversations->insightGroups->insightGroups([
+            'name' => 'name',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -89,9 +90,9 @@ final class InsightGroupsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ai->conversations->insightGroups->insightGroups(
-            name: 'name'
-        );
+        $result = $this->client->ai->conversations->insightGroups->insightGroups([
+            'name' => 'name',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -108,7 +109,7 @@ final class InsightGroupsTest extends TestCase
             ->ai
             ->conversations
             ->insightGroups
-            ->retrieveInsightGroups()
+            ->retrieveInsightGroups([])
         ;
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType

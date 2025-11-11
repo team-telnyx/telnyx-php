@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\CallSpeakStartedWebhookEvent\Data;
 
 /**
- * @phpstan-type CallSpeakStartedWebhookEventShape = array{data?: Data}
+ * @phpstan-type CallSpeakStartedWebhookEventShape = array{data?: Data|null}
  */
 final class CallSpeakStartedWebhookEvent implements BaseModel
 {

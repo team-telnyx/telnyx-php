@@ -18,8 +18,6 @@ use Telnyx\PartnerCampaigns\TelnyxDownstreamCampaign;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PartnerCampaignsContract;
 
-use const Telnyx\Core\OMIT as omit;
-
 final class PartnerCampaignsService implements PartnerCampaignsContract
 {
     /**
@@ -52,39 +50,20 @@ final class PartnerCampaignsService implements PartnerCampaignsContract
      *
      * Update campaign details by `campaignId`. **Please note:** Only webhook urls are editable.
      *
-     * @param string $webhookFailoverURL webhook failover to which campaign status updates are sent
-     * @param string $webhookURL webhook to which campaign status updates are sent
+     * @param array{
+     *   webhookFailoverURL?: string, webhookURL?: string
+     * }|PartnerCampaignUpdateParams $params
      *
      * @throws APIException
      */
     public function update(
         string $campaignID,
-        $webhookFailoverURL = omit,
-        $webhookURL = omit,
+        array|PartnerCampaignUpdateParams $params,
         ?RequestOptions $requestOptions = null,
-    ): TelnyxDownstreamCampaign {
-        $params = [
-            'webhookFailoverURL' => $webhookFailoverURL, 'webhookURL' => $webhookURL,
-        ];
-
-        return $this->updateRaw($campaignID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $campaignID,
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): TelnyxDownstreamCampaign {
         [$parsed, $options] = PartnerCampaignUpdateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -104,39 +83,19 @@ final class PartnerCampaignsService implements PartnerCampaignsContract
      *
      * This endpoint is currently limited to only returning shared campaigns that Telnyx has accepted. In other words, shared but pending campaigns are currently omitted from the response from this endpoint.
      *
-     * @param int $page The 1-indexed page number to get. The default value is `1`.
-     * @param int $recordsPerPage The amount of records per page, limited to between 1 and 500 inclusive. The default value is `10`.
-     * @param Sort|value-of<Sort> $sort Specifies the sort order for results. If not given, results are sorted by createdAt in descending order.
+     * @param array{
+     *   page?: int, recordsPerPage?: int, sort?: value-of<Sort>
+     * }|PartnerCampaignListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $page = omit,
-        $recordsPerPage = omit,
-        $sort = omit,
+        array|PartnerCampaignListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): PartnerCampaignListResponse {
-        $params = [
-            'page' => $page, 'recordsPerPage' => $recordsPerPage, 'sort' => $sort,
-        ];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): PartnerCampaignListResponse {
         [$parsed, $options] = PartnerCampaignListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -158,35 +117,19 @@ final class PartnerCampaignsService implements PartnerCampaignsContract
      * has accepted. In other words, shared but pending campaigns are currently omitted
      * from the response from this endpoint.
      *
-     * @param int $page The 1-indexed page number to get. The default value is `1`.
-     * @param int $recordsPerPage The amount of records per page, limited to between 1 and 500 inclusive. The default value is `10`.
+     * @param array{
+     *   page?: int, recordsPerPage?: int
+     * }|PartnerCampaignListSharedByMeParams $params
      *
      * @throws APIException
      */
     public function listSharedByMe(
-        $page = omit,
-        $recordsPerPage = omit,
-        ?RequestOptions $requestOptions = null
-    ): PartnerCampaignListSharedByMeResponse {
-        $params = ['page' => $page, 'recordsPerPage' => $recordsPerPage];
-
-        return $this->listSharedByMeRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listSharedByMeRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|PartnerCampaignListSharedByMeParams $params,
+        ?RequestOptions $requestOptions = null,
     ): PartnerCampaignListSharedByMeResponse {
         [$parsed, $options] = PartnerCampaignListSharedByMeParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -204,7 +147,7 @@ final class PartnerCampaignsService implements PartnerCampaignsContract
      *
      * Get Sharing Status
      *
-     * @return array<string, CampaignSharingStatus>
+     * @return array<string,CampaignSharingStatus>
      *
      * @throws APIException
      */

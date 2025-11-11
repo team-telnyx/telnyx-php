@@ -14,9 +14,9 @@ use Telnyx\Rooms\RoomListParams\Filter\DateUpdatedAt;
  * Consolidated filter parameter (deepObject style). Originally: filter[date_created_at][eq], filter[date_created_at][gte], filter[date_created_at][lte], filter[date_updated_at][eq], filter[date_updated_at][gte], filter[date_updated_at][lte], filter[unique_name].
  *
  * @phpstan-type FilterShape = array{
- *   dateCreatedAt?: DateCreatedAt,
- *   dateUpdatedAt?: DateUpdatedAt,
- *   uniqueName?: string,
+ *   date_created_at?: DateCreatedAt|null,
+ *   date_updated_at?: DateUpdatedAt|null,
+ *   unique_name?: string|null,
  * }
  */
 final class Filter implements BaseModel
@@ -24,17 +24,17 @@ final class Filter implements BaseModel
     /** @use SdkModel<FilterShape> */
     use SdkModel;
 
-    #[Api('date_created_at', optional: true)]
-    public ?DateCreatedAt $dateCreatedAt;
+    #[Api(optional: true)]
+    public ?DateCreatedAt $date_created_at;
 
-    #[Api('date_updated_at', optional: true)]
-    public ?DateUpdatedAt $dateUpdatedAt;
+    #[Api(optional: true)]
+    public ?DateUpdatedAt $date_updated_at;
 
     /**
      * Unique_name for filtering rooms.
      */
-    #[Api('unique_name', optional: true)]
-    public ?string $uniqueName;
+    #[Api(optional: true)]
+    public ?string $unique_name;
 
     public function __construct()
     {
@@ -47,15 +47,15 @@ final class Filter implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?DateCreatedAt $dateCreatedAt = null,
-        ?DateUpdatedAt $dateUpdatedAt = null,
-        ?string $uniqueName = null,
+        ?DateCreatedAt $date_created_at = null,
+        ?DateUpdatedAt $date_updated_at = null,
+        ?string $unique_name = null,
     ): self {
         $obj = new self;
 
-        null !== $dateCreatedAt && $obj->dateCreatedAt = $dateCreatedAt;
-        null !== $dateUpdatedAt && $obj->dateUpdatedAt = $dateUpdatedAt;
-        null !== $uniqueName && $obj->uniqueName = $uniqueName;
+        null !== $date_created_at && $obj->date_created_at = $date_created_at;
+        null !== $date_updated_at && $obj->date_updated_at = $date_updated_at;
+        null !== $unique_name && $obj->unique_name = $unique_name;
 
         return $obj;
     }
@@ -63,7 +63,7 @@ final class Filter implements BaseModel
     public function withDateCreatedAt(DateCreatedAt $dateCreatedAt): self
     {
         $obj = clone $this;
-        $obj->dateCreatedAt = $dateCreatedAt;
+        $obj->date_created_at = $dateCreatedAt;
 
         return $obj;
     }
@@ -71,7 +71,7 @@ final class Filter implements BaseModel
     public function withDateUpdatedAt(DateUpdatedAt $dateUpdatedAt): self
     {
         $obj = clone $this;
-        $obj->dateUpdatedAt = $dateUpdatedAt;
+        $obj->date_updated_at = $dateUpdatedAt;
 
         return $obj;
     }
@@ -82,7 +82,7 @@ final class Filter implements BaseModel
     public function withUniqueName(string $uniqueName): self
     {
         $obj = clone $this;
-        $obj->uniqueName = $uniqueName;
+        $obj->unique_name = $uniqueName;
 
         return $obj;
     }

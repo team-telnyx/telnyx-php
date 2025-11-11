@@ -23,38 +23,21 @@ final class BrandService implements BrandContract
      *
      * This endpoint allows you to see whether or not the supplied brand is suitable for your desired campaign use case.
      *
-     * @param string $brandID
+     * @param array{brandId: string}|BrandQualifyByUsecaseParams $params
      *
      * @throws APIException
      */
     public function qualifyByUsecase(
         string $usecase,
-        $brandID,
-        ?RequestOptions $requestOptions = null
-    ): BrandQualifyByUsecaseResponse {
-        $params = ['brandID' => $brandID];
-
-        return $this->qualifyByUsecaseRaw($usecase, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function qualifyByUsecaseRaw(
-        string $usecase,
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|BrandQualifyByUsecaseParams $params,
+        ?RequestOptions $requestOptions = null,
     ): BrandQualifyByUsecaseResponse {
         [$parsed, $options] = BrandQualifyByUsecaseParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
-        $brandID = $parsed['brandID'];
-        unset($parsed['brandID']);
+        $brandID = $parsed['brandId'];
+        unset($parsed['brandId']);
 
         // @phpstan-ignore-next-line;
         return $this->client->request(

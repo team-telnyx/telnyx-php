@@ -13,7 +13,7 @@ use Telnyx\MessagingHostedNumberOrder;
 
 /**
  * @phpstan-type ActionUploadFileResponseShape = array{
- *   data?: MessagingHostedNumberOrder
+ *   data?: MessagingHostedNumberOrder|null
  * }
  */
 final class ActionUploadFileResponse implements BaseModel, ResponseConverter

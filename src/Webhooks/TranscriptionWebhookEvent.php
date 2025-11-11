@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\TranscriptionWebhookEvent\Data;
 
 /**
- * @phpstan-type TranscriptionWebhookEventShape = array{data?: Data}
+ * @phpstan-type TranscriptionWebhookEventShape = array{data?: Data|null}
  */
 final class TranscriptionWebhookEvent implements BaseModel
 {

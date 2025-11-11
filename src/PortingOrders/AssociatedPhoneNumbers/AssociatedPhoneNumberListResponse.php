@@ -13,7 +13,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type AssociatedPhoneNumberListResponseShape = array{
- *   data?: list<PortingAssociatedPhoneNumber>, meta?: PaginationMeta
+ *   data?: list<PortingAssociatedPhoneNumber>|null, meta?: PaginationMeta|null
  * }
  */
 final class AssociatedPhoneNumberListResponse implements BaseModel, ResponseConverter

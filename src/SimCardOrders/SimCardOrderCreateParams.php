@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\SimCardOrders->create
  *
  * @phpstan-type SimCardOrderCreateParamsShape = array{
- *   addressID: string, quantity: int
+ *   address_id: string, quantity: int
  * }
  */
 final class SimCardOrderCreateParams implements BaseModel
@@ -27,8 +27,8 @@ final class SimCardOrderCreateParams implements BaseModel
     /**
      * Uniquely identifies the address for the order.
      */
-    #[Api('address_id')]
-    public string $addressID;
+    #[Api]
+    public string $address_id;
 
     /**
      * The amount of SIM cards to order.
@@ -41,7 +41,7 @@ final class SimCardOrderCreateParams implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * SimCardOrderCreateParams::with(addressID: ..., quantity: ...)
+     * SimCardOrderCreateParams::with(address_id: ..., quantity: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -60,11 +60,11 @@ final class SimCardOrderCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(string $addressID, int $quantity): self
+    public static function with(string $address_id, int $quantity): self
     {
         $obj = new self;
 
-        $obj->addressID = $addressID;
+        $obj->address_id = $address_id;
         $obj->quantity = $quantity;
 
         return $obj;
@@ -76,7 +76,7 @@ final class SimCardOrderCreateParams implements BaseModel
     public function withAddressID(string $addressID): self
     {
         $obj = clone $this;
-        $obj->addressID = $addressID;
+        $obj->address_id = $addressID;
 
         return $obj;
     }

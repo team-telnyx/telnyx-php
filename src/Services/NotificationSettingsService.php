@@ -7,18 +7,13 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\NotificationSettings\NotificationSettingCreateParams;
-use Telnyx\NotificationSettings\NotificationSettingCreateParams\Parameter;
 use Telnyx\NotificationSettings\NotificationSettingDeleteResponse;
 use Telnyx\NotificationSettings\NotificationSettingGetResponse;
 use Telnyx\NotificationSettings\NotificationSettingListParams;
-use Telnyx\NotificationSettings\NotificationSettingListParams\Filter;
-use Telnyx\NotificationSettings\NotificationSettingListParams\Page;
 use Telnyx\NotificationSettings\NotificationSettingListResponse;
 use Telnyx\NotificationSettings\NotificationSettingNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\NotificationSettingsContract;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class NotificationSettingsService implements NotificationSettingsContract
 {
@@ -32,44 +27,22 @@ final class NotificationSettingsService implements NotificationSettingsContract
      *
      * Add a notification setting.
      *
-     * @param string $notificationChannelID a UUID reference to the associated Notification Channel
-     * @param string $notificationEventConditionID a UUID reference to the associated Notification Event Condition
-     * @param string $notificationProfileID a UUID reference to the associated Notification Profile
-     * @param list<Parameter> $parameters
+     * @param array{
+     *   notification_channel_id?: string,
+     *   notification_event_condition_id?: string,
+     *   notification_profile_id?: string,
+     *   parameters?: list<array{name?: string, value?: string}>,
+     * }|NotificationSettingCreateParams $params
      *
      * @throws APIException
      */
     public function create(
-        $notificationChannelID = omit,
-        $notificationEventConditionID = omit,
-        $notificationProfileID = omit,
-        $parameters = omit,
+        array|NotificationSettingCreateParams $params,
         ?RequestOptions $requestOptions = null,
-    ): NotificationSettingNewResponse {
-        $params = [
-            'notificationChannelID' => $notificationChannelID,
-            'notificationEventConditionID' => $notificationEventConditionID,
-            'notificationProfileID' => $notificationProfileID,
-            'parameters' => $parameters,
-        ];
-
-        return $this->createRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): NotificationSettingNewResponse {
         [$parsed, $options] = NotificationSettingCreateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -107,35 +80,29 @@ final class NotificationSettingsService implements NotificationSettingsContract
      *
      * List notification settings.
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[associated_record_type][eq], filter[channel_type_id][eq], filter[notification_profile_id][eq], filter[notification_channel][eq], filter[notification_event_condition_id][eq], filter[status][eq]
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param array{
+     *   filter?: array{
+     *     associated_record_type?: array{eq?: "account"|"phone_number"},
+     *     channel_type_id?: array{eq?: "webhook"|"sms"|"email"|"voice"},
+     *     notification_channel?: array{eq?: string},
+     *     notification_event_condition_id?: array{eq?: string},
+     *     notification_profile_id?: array{eq?: string},
+     *     status?: array{
+     *       eq?: "enabled"|"enable-received"|"enable-pending"|"enable-submtited"|"delete-received"|"delete-pending"|"delete-submitted"|"deleted",
+     *     },
+     *   },
+     *   page?: array{number?: int, size?: int},
+     * }|NotificationSettingListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): NotificationSettingListResponse {
-        $params = ['filter' => $filter, 'page' => $page];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|NotificationSettingListParams $params,
+        ?RequestOptions $requestOptions = null,
     ): NotificationSettingListResponse {
         [$parsed, $options] = NotificationSettingListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

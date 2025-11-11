@@ -16,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\SimCards\Actions->setPublicIP
  *
- * @phpstan-type ActionSetPublicIPParamsShape = array{regionCode?: string}
+ * @phpstan-type ActionSetPublicIPParamsShape = array{region_code?: string}
  */
 final class ActionSetPublicIPParams implements BaseModel
 {
@@ -28,7 +28,7 @@ final class ActionSetPublicIPParams implements BaseModel
      * The code of the region where the public IP should be assigned. A list of available regions can be found at the regions endpoint.
      */
     #[Api(optional: true)]
-    public ?string $regionCode;
+    public ?string $region_code;
 
     public function __construct()
     {
@@ -40,11 +40,11 @@ final class ActionSetPublicIPParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?string $regionCode = null): self
+    public static function with(?string $region_code = null): self
     {
         $obj = new self;
 
-        null !== $regionCode && $obj->regionCode = $regionCode;
+        null !== $region_code && $obj->region_code = $region_code;
 
         return $obj;
     }
@@ -55,7 +55,7 @@ final class ActionSetPublicIPParams implements BaseModel
     public function withRegionCode(string $regionCode): self
     {
         $obj = clone $this;
-        $obj->regionCode = $regionCode;
+        $obj->region_code = $regionCode;
 
         return $obj;
     }

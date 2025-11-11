@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Invoices\InvoiceGetResponse\Data;
 
 /**
- * @phpstan-type InvoiceGetResponseShape = array{data?: Data}
+ * @phpstan-type InvoiceGetResponseShape = array{data?: Data|null}
  */
 final class InvoiceGetResponse implements BaseModel, ResponseConverter
 {

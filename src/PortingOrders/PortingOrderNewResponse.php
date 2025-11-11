@@ -11,7 +11,9 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type PortingOrderNewResponseShape = array{data?: list<PortingOrder>}
+ * @phpstan-type PortingOrderNewResponseShape = array{
+ *   data?: list<PortingOrder>|null
+ * }
  */
 final class PortingOrderNewResponse implements BaseModel, ResponseConverter
 {

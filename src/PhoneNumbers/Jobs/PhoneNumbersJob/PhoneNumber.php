@@ -11,7 +11,9 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * The unique phone numbers given as arguments in the job creation.
  *
- * @phpstan-type PhoneNumberShape = array{id?: string, phoneNumber?: string}
+ * @phpstan-type PhoneNumberShape = array{
+ *   id?: string|null, phone_number?: string|null
+ * }
  */
 final class PhoneNumber implements BaseModel
 {
@@ -27,8 +29,8 @@ final class PhoneNumber implements BaseModel
     /**
      * The phone number in e164 format.
      */
-    #[Api('phone_number', optional: true)]
-    public ?string $phoneNumber;
+    #[Api(optional: true)]
+    public ?string $phone_number;
 
     public function __construct()
     {
@@ -42,12 +44,12 @@ final class PhoneNumber implements BaseModel
      */
     public static function with(
         ?string $id = null,
-        ?string $phoneNumber = null
+        ?string $phone_number = null
     ): self {
         $obj = new self;
 
         null !== $id && $obj->id = $id;
-        null !== $phoneNumber && $obj->phoneNumber = $phoneNumber;
+        null !== $phone_number && $obj->phone_number = $phone_number;
 
         return $obj;
     }
@@ -69,7 +71,7 @@ final class PhoneNumber implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj->phoneNumber = $phoneNumber;
+        $obj->phone_number = $phoneNumber;
 
         return $obj;
     }

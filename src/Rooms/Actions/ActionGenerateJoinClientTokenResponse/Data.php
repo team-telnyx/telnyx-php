@@ -10,10 +10,10 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type DataShape = array{
- *   token?: string,
- *   refreshToken?: string,
- *   refreshTokenExpiresAt?: \DateTimeInterface,
- *   tokenExpiresAt?: \DateTimeInterface,
+ *   token?: string|null,
+ *   refresh_token?: string|null,
+ *   refresh_token_expires_at?: \DateTimeInterface|null,
+ *   token_expires_at?: \DateTimeInterface|null,
  * }
  */
 final class Data implements BaseModel
@@ -24,20 +24,20 @@ final class Data implements BaseModel
     #[Api(optional: true)]
     public ?string $token;
 
-    #[Api('refresh_token', optional: true)]
-    public ?string $refreshToken;
+    #[Api(optional: true)]
+    public ?string $refresh_token;
 
     /**
      * ISO 8601 timestamp when the refresh token expires.
      */
-    #[Api('refresh_token_expires_at', optional: true)]
-    public ?\DateTimeInterface $refreshTokenExpiresAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $refresh_token_expires_at;
 
     /**
      * ISO 8601 timestamp when the token expires.
      */
-    #[Api('token_expires_at', optional: true)]
-    public ?\DateTimeInterface $tokenExpiresAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $token_expires_at;
 
     public function __construct()
     {
@@ -51,16 +51,16 @@ final class Data implements BaseModel
      */
     public static function with(
         ?string $token = null,
-        ?string $refreshToken = null,
-        ?\DateTimeInterface $refreshTokenExpiresAt = null,
-        ?\DateTimeInterface $tokenExpiresAt = null,
+        ?string $refresh_token = null,
+        ?\DateTimeInterface $refresh_token_expires_at = null,
+        ?\DateTimeInterface $token_expires_at = null,
     ): self {
         $obj = new self;
 
         null !== $token && $obj->token = $token;
-        null !== $refreshToken && $obj->refreshToken = $refreshToken;
-        null !== $refreshTokenExpiresAt && $obj->refreshTokenExpiresAt = $refreshTokenExpiresAt;
-        null !== $tokenExpiresAt && $obj->tokenExpiresAt = $tokenExpiresAt;
+        null !== $refresh_token && $obj->refresh_token = $refresh_token;
+        null !== $refresh_token_expires_at && $obj->refresh_token_expires_at = $refresh_token_expires_at;
+        null !== $token_expires_at && $obj->token_expires_at = $token_expires_at;
 
         return $obj;
     }
@@ -76,7 +76,7 @@ final class Data implements BaseModel
     public function withRefreshToken(string $refreshToken): self
     {
         $obj = clone $this;
-        $obj->refreshToken = $refreshToken;
+        $obj->refresh_token = $refreshToken;
 
         return $obj;
     }
@@ -88,7 +88,7 @@ final class Data implements BaseModel
         \DateTimeInterface $refreshTokenExpiresAt
     ): self {
         $obj = clone $this;
-        $obj->refreshTokenExpiresAt = $refreshTokenExpiresAt;
+        $obj->refresh_token_expires_at = $refreshTokenExpiresAt;
 
         return $obj;
     }
@@ -99,7 +99,7 @@ final class Data implements BaseModel
     public function withTokenExpiresAt(\DateTimeInterface $tokenExpiresAt): self
     {
         $obj = clone $this;
-        $obj->tokenExpiresAt = $tokenExpiresAt;
+        $obj->token_expires_at = $tokenExpiresAt;
 
         return $obj;
     }

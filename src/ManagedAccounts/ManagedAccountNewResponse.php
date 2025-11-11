@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type ManagedAccountNewResponseShape = array{data?: ManagedAccount}
+ * @phpstan-type ManagedAccountNewResponseShape = array{data?: ManagedAccount|null}
  */
 final class ManagedAccountNewResponse implements BaseModel, ResponseConverter
 {

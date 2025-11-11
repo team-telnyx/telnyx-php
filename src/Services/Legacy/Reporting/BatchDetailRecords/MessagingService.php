@@ -15,8 +15,6 @@ use Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging\MessagingNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Legacy\Reporting\BatchDetailRecords\MessagingContract;
 
-use const Telnyx\Core\OMIT as omit;
-
 final class MessagingService implements MessagingContract
 {
     /**
@@ -29,68 +27,38 @@ final class MessagingService implements MessagingContract
      *
      * Creates a new MDR detailed report request with the specified filters
      *
-     * @param \DateTimeInterface $endTime End time in ISO format. Note: If end time includes the last 4 hours, some MDRs might not appear in this report, due to wait time for downstream message delivery confirmation
-     * @param \DateTimeInterface $startTime Start time in ISO format
-     * @param list<int> $connections List of connections to filter by
-     * @param list<int> $directions List of directions to filter by (Inbound = 1, Outbound = 2)
-     * @param list<Filter> $filters List of filters to apply
-     * @param bool $includeMessageBody Whether to include message body in the report
-     * @param list<string> $managedAccounts List of managed accounts to include
-     * @param list<string> $profiles List of messaging profile IDs to filter by
-     * @param list<int> $recordTypes List of record types to filter by (Complete = 1, Incomplete = 2, Errors = 3)
-     * @param string $reportName Name of the report
-     * @param bool $selectAllManagedAccounts Whether to select all managed accounts
-     * @param string $timezone Timezone for the report
+     * @param array{
+     *   end_time: string|\DateTimeInterface,
+     *   start_time: string|\DateTimeInterface,
+     *   connections?: list<int>,
+     *   directions?: list<int>,
+     *   filters?: list<array{
+     *     billing_group?: string,
+     *     cld?: string,
+     *     cld_filter?: "contains"|"starts_with"|"ends_with",
+     *     cli?: string,
+     *     cli_filter?: "contains"|"starts_with"|"ends_with",
+     *     filter_type?: "and"|"or",
+     *     tags_list?: string,
+     *   }|Filter>,
+     *   include_message_body?: bool,
+     *   managed_accounts?: list<string>,
+     *   profiles?: list<string>,
+     *   record_types?: list<int>,
+     *   report_name?: string,
+     *   select_all_managed_accounts?: bool,
+     *   timezone?: string,
+     * }|MessagingCreateParams $params
      *
      * @throws APIException
      */
     public function create(
-        $endTime,
-        $startTime,
-        $connections = omit,
-        $directions = omit,
-        $filters = omit,
-        $includeMessageBody = omit,
-        $managedAccounts = omit,
-        $profiles = omit,
-        $recordTypes = omit,
-        $reportName = omit,
-        $selectAllManagedAccounts = omit,
-        $timezone = omit,
-        ?RequestOptions $requestOptions = null,
-    ): MessagingNewResponse {
-        $params = [
-            'endTime' => $endTime,
-            'startTime' => $startTime,
-            'connections' => $connections,
-            'directions' => $directions,
-            'filters' => $filters,
-            'includeMessageBody' => $includeMessageBody,
-            'managedAccounts' => $managedAccounts,
-            'profiles' => $profiles,
-            'recordTypes' => $recordTypes,
-            'reportName' => $reportName,
-            'selectAllManagedAccounts' => $selectAllManagedAccounts,
-            'timezone' => $timezone,
-        ];
-
-        return $this->createRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
+        array|MessagingCreateParams $params,
         ?RequestOptions $requestOptions = null
     ): MessagingNewResponse {
         [$parsed, $options] = MessagingCreateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

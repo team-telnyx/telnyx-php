@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Messaging\Rcs->listBulkCapabilities
  *
  * @phpstan-type RcListBulkCapabilitiesParamsShape = array{
- *   agentID: string, phoneNumbers: list<string>
+ *   agent_id: string, phone_numbers: list<string>
  * }
  */
 final class RcListBulkCapabilitiesParams implements BaseModel
@@ -27,23 +27,23 @@ final class RcListBulkCapabilitiesParams implements BaseModel
     /**
      * RCS Agent ID.
      */
-    #[Api('agent_id')]
-    public string $agentID;
+    #[Api]
+    public string $agent_id;
 
     /**
      * List of phone numbers to check.
      *
-     * @var list<string> $phoneNumbers
+     * @var list<string> $phone_numbers
      */
-    #[Api('phone_numbers', list: 'string')]
-    public array $phoneNumbers;
+    #[Api(list: 'string')]
+    public array $phone_numbers;
 
     /**
      * `new RcListBulkCapabilitiesParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * RcListBulkCapabilitiesParams::with(agentID: ..., phoneNumbers: ...)
+     * RcListBulkCapabilitiesParams::with(agent_id: ..., phone_numbers: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -62,14 +62,14 @@ final class RcListBulkCapabilitiesParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $phoneNumbers
+     * @param list<string> $phone_numbers
      */
-    public static function with(string $agentID, array $phoneNumbers): self
+    public static function with(string $agent_id, array $phone_numbers): self
     {
         $obj = new self;
 
-        $obj->agentID = $agentID;
-        $obj->phoneNumbers = $phoneNumbers;
+        $obj->agent_id = $agent_id;
+        $obj->phone_numbers = $phone_numbers;
 
         return $obj;
     }
@@ -80,7 +80,7 @@ final class RcListBulkCapabilitiesParams implements BaseModel
     public function withAgentID(string $agentID): self
     {
         $obj = clone $this;
-        $obj->agentID = $agentID;
+        $obj->agent_id = $agentID;
 
         return $obj;
     }
@@ -93,7 +93,7 @@ final class RcListBulkCapabilitiesParams implements BaseModel
     public function withPhoneNumbers(array $phoneNumbers): self
     {
         $obj = clone $this;
-        $obj->phoneNumbers = $phoneNumbers;
+        $obj->phone_numbers = $phoneNumbers;
 
         return $obj;
     }

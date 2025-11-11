@@ -18,15 +18,15 @@ use Telnyx\FaxApplications\FaxApplicationCreateParams\Outbound;
  * @see Telnyx\FaxApplications->create
  *
  * @phpstan-type FaxApplicationCreateParamsShape = array{
- *   applicationName: string,
- *   webhookEventURL: string,
+ *   application_name: string,
+ *   webhook_event_url: string,
  *   active?: bool,
- *   anchorsiteOverride?: AnchorsiteOverride|value-of<AnchorsiteOverride>,
+ *   anchorsite_override?: AnchorsiteOverride|value-of<AnchorsiteOverride>,
  *   inbound?: Inbound,
  *   outbound?: Outbound,
  *   tags?: list<string>,
- *   webhookEventFailoverURL?: string|null,
- *   webhookTimeoutSecs?: int|null,
+ *   webhook_event_failover_url?: string|null,
+ *   webhook_timeout_secs?: int|null,
  * }
  */
 final class FaxApplicationCreateParams implements BaseModel
@@ -38,14 +38,14 @@ final class FaxApplicationCreateParams implements BaseModel
     /**
      * A user-assigned name to help manage the application.
      */
-    #[Api('application_name')]
-    public string $applicationName;
+    #[Api]
+    public string $application_name;
 
     /**
      * The URL where webhooks related to this connection will be sent. Must include a scheme, such as 'https'.
      */
-    #[Api('webhook_event_url')]
-    public string $webhookEventURL;
+    #[Api]
+    public string $webhook_event_url;
 
     /**
      * Specifies whether the connection can be used.
@@ -56,10 +56,10 @@ final class FaxApplicationCreateParams implements BaseModel
     /**
      * `Latency` directs Telnyx to route media through the site with the lowest round-trip time to the user's connection. Telnyx calculates this time using ICMP ping messages. This can be disabled by specifying a site to handle all media.
      *
-     * @var value-of<AnchorsiteOverride>|null $anchorsiteOverride
+     * @var value-of<AnchorsiteOverride>|null $anchorsite_override
      */
-    #[Api('anchorsite_override', enum: AnchorsiteOverride::class, optional: true)]
-    public ?string $anchorsiteOverride;
+    #[Api(enum: AnchorsiteOverride::class, optional: true)]
+    public ?string $anchorsite_override;
 
     #[Api(optional: true)]
     public ?Inbound $inbound;
@@ -78,21 +78,21 @@ final class FaxApplicationCreateParams implements BaseModel
     /**
      * The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      */
-    #[Api('webhook_event_failover_url', nullable: true, optional: true)]
-    public ?string $webhookEventFailoverURL;
+    #[Api(nullable: true, optional: true)]
+    public ?string $webhook_event_failover_url;
 
     /**
      * Specifies how many seconds to wait before timing out a webhook.
      */
-    #[Api('webhook_timeout_secs', nullable: true, optional: true)]
-    public ?int $webhookTimeoutSecs;
+    #[Api(nullable: true, optional: true)]
+    public ?int $webhook_timeout_secs;
 
     /**
      * `new FaxApplicationCreateParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * FaxApplicationCreateParams::with(applicationName: ..., webhookEventURL: ...)
+     * FaxApplicationCreateParams::with(application_name: ..., webhook_event_url: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -113,32 +113,32 @@ final class FaxApplicationCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AnchorsiteOverride|value-of<AnchorsiteOverride> $anchorsiteOverride
+     * @param AnchorsiteOverride|value-of<AnchorsiteOverride> $anchorsite_override
      * @param list<string> $tags
      */
     public static function with(
-        string $applicationName,
-        string $webhookEventURL,
+        string $application_name,
+        string $webhook_event_url,
         ?bool $active = null,
-        AnchorsiteOverride|string|null $anchorsiteOverride = null,
+        AnchorsiteOverride|string|null $anchorsite_override = null,
         ?Inbound $inbound = null,
         ?Outbound $outbound = null,
         ?array $tags = null,
-        ?string $webhookEventFailoverURL = null,
-        ?int $webhookTimeoutSecs = null,
+        ?string $webhook_event_failover_url = null,
+        ?int $webhook_timeout_secs = null,
     ): self {
         $obj = new self;
 
-        $obj->applicationName = $applicationName;
-        $obj->webhookEventURL = $webhookEventURL;
+        $obj->application_name = $application_name;
+        $obj->webhook_event_url = $webhook_event_url;
 
         null !== $active && $obj->active = $active;
-        null !== $anchorsiteOverride && $obj['anchorsiteOverride'] = $anchorsiteOverride;
+        null !== $anchorsite_override && $obj['anchorsite_override'] = $anchorsite_override;
         null !== $inbound && $obj->inbound = $inbound;
         null !== $outbound && $obj->outbound = $outbound;
         null !== $tags && $obj->tags = $tags;
-        null !== $webhookEventFailoverURL && $obj->webhookEventFailoverURL = $webhookEventFailoverURL;
-        null !== $webhookTimeoutSecs && $obj->webhookTimeoutSecs = $webhookTimeoutSecs;
+        null !== $webhook_event_failover_url && $obj->webhook_event_failover_url = $webhook_event_failover_url;
+        null !== $webhook_timeout_secs && $obj->webhook_timeout_secs = $webhook_timeout_secs;
 
         return $obj;
     }
@@ -149,7 +149,7 @@ final class FaxApplicationCreateParams implements BaseModel
     public function withApplicationName(string $applicationName): self
     {
         $obj = clone $this;
-        $obj->applicationName = $applicationName;
+        $obj->application_name = $applicationName;
 
         return $obj;
     }
@@ -160,7 +160,7 @@ final class FaxApplicationCreateParams implements BaseModel
     public function withWebhookEventURL(string $webhookEventURL): self
     {
         $obj = clone $this;
-        $obj->webhookEventURL = $webhookEventURL;
+        $obj->webhook_event_url = $webhookEventURL;
 
         return $obj;
     }
@@ -185,7 +185,7 @@ final class FaxApplicationCreateParams implements BaseModel
         AnchorsiteOverride|string $anchorsiteOverride
     ): self {
         $obj = clone $this;
-        $obj['anchorsiteOverride'] = $anchorsiteOverride;
+        $obj['anchorsite_override'] = $anchorsiteOverride;
 
         return $obj;
     }
@@ -226,7 +226,7 @@ final class FaxApplicationCreateParams implements BaseModel
         ?string $webhookEventFailoverURL
     ): self {
         $obj = clone $this;
-        $obj->webhookEventFailoverURL = $webhookEventFailoverURL;
+        $obj->webhook_event_failover_url = $webhookEventFailoverURL;
 
         return $obj;
     }
@@ -237,7 +237,7 @@ final class FaxApplicationCreateParams implements BaseModel
     public function withWebhookTimeoutSecs(?int $webhookTimeoutSecs): self
     {
         $obj = clone $this;
-        $obj->webhookTimeoutSecs = $webhookTimeoutSecs;
+        $obj->webhook_timeout_secs = $webhookTimeoutSecs;
 
         return $obj;
     }

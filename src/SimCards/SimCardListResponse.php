@@ -14,7 +14,7 @@ use Telnyx\SimpleSimCard;
 
 /**
  * @phpstan-type SimCardListResponseShape = array{
- *   data?: list<SimpleSimCard>, meta?: PaginationMeta
+ *   data?: list<SimpleSimCard>|null, meta?: PaginationMeta|null
  * }
  */
 final class SimCardListResponse implements BaseModel, ResponseConverter

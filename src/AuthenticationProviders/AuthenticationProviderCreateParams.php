@@ -17,9 +17,9 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type AuthenticationProviderCreateParamsShape = array{
  *   name: string,
  *   settings: Settings,
- *   shortName: string,
+ *   short_name: string,
  *   active?: bool,
- *   settingsURL?: string,
+ *   settings_url?: string,
  * }
  */
 final class AuthenticationProviderCreateParams implements BaseModel
@@ -43,8 +43,8 @@ final class AuthenticationProviderCreateParams implements BaseModel
     /**
      * The short name associated with the authentication provider. This must be unique and URL-friendly, as it's going to be part of the login URL.
      */
-    #[Api('short_name')]
-    public string $shortName;
+    #[Api]
+    public string $short_name;
 
     /**
      * The active status of the authentication provider.
@@ -55,8 +55,8 @@ final class AuthenticationProviderCreateParams implements BaseModel
     /**
      * The URL for the identity provider metadata file to populate the settings automatically. If the settings attribute is provided, that will be used instead.
      */
-    #[Api('settings_url', optional: true)]
-    public ?string $settingsURL;
+    #[Api(optional: true)]
+    public ?string $settings_url;
 
     /**
      * `new AuthenticationProviderCreateParams()` is missing required properties by the API.
@@ -64,7 +64,7 @@ final class AuthenticationProviderCreateParams implements BaseModel
      * To enforce required parameters use
      * ```
      * AuthenticationProviderCreateParams::with(
-     *   name: ..., settings: ..., shortName: ...
+     *   name: ..., settings: ..., short_name: ...
      * )
      * ```
      *
@@ -90,18 +90,18 @@ final class AuthenticationProviderCreateParams implements BaseModel
     public static function with(
         string $name,
         Settings $settings,
-        string $shortName,
+        string $short_name,
         ?bool $active = null,
-        ?string $settingsURL = null,
+        ?string $settings_url = null,
     ): self {
         $obj = new self;
 
         $obj->name = $name;
         $obj->settings = $settings;
-        $obj->shortName = $shortName;
+        $obj->short_name = $short_name;
 
         null !== $active && $obj->active = $active;
-        null !== $settingsURL && $obj->settingsURL = $settingsURL;
+        null !== $settings_url && $obj->settings_url = $settings_url;
 
         return $obj;
     }
@@ -134,7 +134,7 @@ final class AuthenticationProviderCreateParams implements BaseModel
     public function withShortName(string $shortName): self
     {
         $obj = clone $this;
-        $obj->shortName = $shortName;
+        $obj->short_name = $shortName;
 
         return $obj;
     }
@@ -156,7 +156,7 @@ final class AuthenticationProviderCreateParams implements BaseModel
     public function withSettingsURL(string $settingsURL): self
     {
         $obj = clone $this;
-        $obj->settingsURL = $settingsURL;
+        $obj->settings_url = $settingsURL;
 
         return $obj;
     }

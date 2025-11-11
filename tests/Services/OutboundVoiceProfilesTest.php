@@ -33,7 +33,9 @@ final class OutboundVoiceProfilesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->outboundVoiceProfiles->create(name: 'office');
+        $result = $this->client->outboundVoiceProfiles->create([
+            'name' => 'office',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -45,7 +47,9 @@ final class OutboundVoiceProfilesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->outboundVoiceProfiles->create(name: 'office');
+        $result = $this->client->outboundVoiceProfiles->create([
+            'name' => 'office',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -73,7 +77,7 @@ final class OutboundVoiceProfilesTest extends TestCase
 
         $result = $this->client->outboundVoiceProfiles->update(
             '1293384261075731499',
-            name: 'office'
+            ['name' => 'office']
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -88,7 +92,7 @@ final class OutboundVoiceProfilesTest extends TestCase
 
         $result = $this->client->outboundVoiceProfiles->update(
             '1293384261075731499',
-            name: 'office'
+            ['name' => 'office']
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -101,7 +105,7 @@ final class OutboundVoiceProfilesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->outboundVoiceProfiles->list();
+        $result = $this->client->outboundVoiceProfiles->list([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

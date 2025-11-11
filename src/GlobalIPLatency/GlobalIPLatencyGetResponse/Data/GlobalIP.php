@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type GlobalIPShape = array{id?: string, ipAddress?: string}
+ * @phpstan-type GlobalIPShape = array{id?: string|null, ip_address?: string|null}
  */
 final class GlobalIP implements BaseModel
 {
@@ -25,8 +25,8 @@ final class GlobalIP implements BaseModel
     /**
      * The Global IP address.
      */
-    #[Api('ip_address', optional: true)]
-    public ?string $ipAddress;
+    #[Api(optional: true)]
+    public ?string $ip_address;
 
     public function __construct()
     {
@@ -40,12 +40,12 @@ final class GlobalIP implements BaseModel
      */
     public static function with(
         ?string $id = null,
-        ?string $ipAddress = null
+        ?string $ip_address = null
     ): self {
         $obj = new self;
 
         null !== $id && $obj->id = $id;
-        null !== $ipAddress && $obj->ipAddress = $ipAddress;
+        null !== $ip_address && $obj->ip_address = $ip_address;
 
         return $obj;
     }
@@ -67,7 +67,7 @@ final class GlobalIP implements BaseModel
     public function withIPAddress(string $ipAddress): self
     {
         $obj = clone $this;
-        $obj->ipAddress = $ipAddress;
+        $obj->ip_address = $ipAddress;
 
         return $obj;
     }

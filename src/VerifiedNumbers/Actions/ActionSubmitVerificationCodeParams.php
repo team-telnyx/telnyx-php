@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\VerifiedNumbers\Actions->submitVerificationCode
  *
  * @phpstan-type ActionSubmitVerificationCodeParamsShape = array{
- *   verificationCode: string
+ *   verification_code: string
  * }
  */
 final class ActionSubmitVerificationCodeParams implements BaseModel
@@ -24,15 +24,15 @@ final class ActionSubmitVerificationCodeParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    #[Api('verification_code')]
-    public string $verificationCode;
+    #[Api]
+    public string $verification_code;
 
     /**
      * `new ActionSubmitVerificationCodeParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * ActionSubmitVerificationCodeParams::with(verificationCode: ...)
+     * ActionSubmitVerificationCodeParams::with(verification_code: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -51,11 +51,11 @@ final class ActionSubmitVerificationCodeParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(string $verificationCode): self
+    public static function with(string $verification_code): self
     {
         $obj = new self;
 
-        $obj->verificationCode = $verificationCode;
+        $obj->verification_code = $verification_code;
 
         return $obj;
     }
@@ -63,7 +63,7 @@ final class ActionSubmitVerificationCodeParams implements BaseModel
     public function withVerificationCode(string $verificationCode): self
     {
         $obj = clone $this;
-        $obj->verificationCode = $verificationCode;
+        $obj->verification_code = $verificationCode;
 
         return $obj;
     }

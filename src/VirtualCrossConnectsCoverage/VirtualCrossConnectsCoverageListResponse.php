@@ -14,7 +14,7 @@ use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListResponse
 
 /**
  * @phpstan-type VirtualCrossConnectsCoverageListResponseShape = array{
- *   data?: list<Data>, meta?: PaginationMeta
+ *   data?: list<Data>|null, meta?: PaginationMeta|null
  * }
  */
 final class VirtualCrossConnectsCoverageListResponse implements BaseModel, ResponseConverter

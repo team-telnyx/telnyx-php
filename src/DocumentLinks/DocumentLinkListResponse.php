@@ -14,7 +14,7 @@ use Telnyx\DocumentLinks\DocumentLinkListResponse\Data;
 
 /**
  * @phpstan-type DocumentLinkListResponseShape = array{
- *   data?: list<Data>, meta?: PaginationMeta
+ *   data?: list<Data>|null, meta?: PaginationMeta|null
  * }
  */
 final class DocumentLinkListResponse implements BaseModel, ResponseConverter

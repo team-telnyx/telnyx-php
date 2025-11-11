@@ -16,8 +16,8 @@ use Telnyx\NumberOrderPhoneNumbers\UpdateRegulatoryRequirement;
  * @see Telnyx\NumberOrders->update
  *
  * @phpstan-type NumberOrderUpdateParamsShape = array{
- *   customerReference?: string,
- *   regulatoryRequirements?: list<UpdateRegulatoryRequirement>,
+ *   customer_reference?: string,
+ *   regulatory_requirements?: list<UpdateRegulatoryRequirement>,
  * }
  */
 final class NumberOrderUpdateParams implements BaseModel
@@ -29,16 +29,12 @@ final class NumberOrderUpdateParams implements BaseModel
     /**
      * A customer reference string for customer look ups.
      */
-    #[Api('customer_reference', optional: true)]
-    public ?string $customerReference;
+    #[Api(optional: true)]
+    public ?string $customer_reference;
 
-    /** @var list<UpdateRegulatoryRequirement>|null $regulatoryRequirements */
-    #[Api(
-        'regulatory_requirements',
-        list: UpdateRegulatoryRequirement::class,
-        optional: true,
-    )]
-    public ?array $regulatoryRequirements;
+    /** @var list<UpdateRegulatoryRequirement>|null $regulatory_requirements */
+    #[Api(list: UpdateRegulatoryRequirement::class, optional: true)]
+    public ?array $regulatory_requirements;
 
     public function __construct()
     {
@@ -50,16 +46,16 @@ final class NumberOrderUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<UpdateRegulatoryRequirement> $regulatoryRequirements
+     * @param list<UpdateRegulatoryRequirement> $regulatory_requirements
      */
     public static function with(
-        ?string $customerReference = null,
-        ?array $regulatoryRequirements = null
+        ?string $customer_reference = null,
+        ?array $regulatory_requirements = null
     ): self {
         $obj = new self;
 
-        null !== $customerReference && $obj->customerReference = $customerReference;
-        null !== $regulatoryRequirements && $obj->regulatoryRequirements = $regulatoryRequirements;
+        null !== $customer_reference && $obj->customer_reference = $customer_reference;
+        null !== $regulatory_requirements && $obj->regulatory_requirements = $regulatory_requirements;
 
         return $obj;
     }
@@ -70,7 +66,7 @@ final class NumberOrderUpdateParams implements BaseModel
     public function withCustomerReference(string $customerReference): self
     {
         $obj = clone $this;
-        $obj->customerReference = $customerReference;
+        $obj->customer_reference = $customerReference;
 
         return $obj;
     }
@@ -82,7 +78,7 @@ final class NumberOrderUpdateParams implements BaseModel
         array $regulatoryRequirements
     ): self {
         $obj = clone $this;
-        $obj->regulatoryRequirements = $regulatoryRequirements;
+        $obj->regulatory_requirements = $regulatoryRequirements;
 
         return $obj;
     }

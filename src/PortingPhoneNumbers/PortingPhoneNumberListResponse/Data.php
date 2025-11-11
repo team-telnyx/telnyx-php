@@ -15,15 +15,15 @@ use Telnyx\PortingPhoneNumbers\PortingPhoneNumberListResponse\Data\RequirementsS
 
 /**
  * @phpstan-type DataShape = array{
- *   activationStatus?: value-of<ActivationStatus>,
- *   phoneNumber?: string,
- *   phoneNumberType?: value-of<PhoneNumberType>,
- *   portabilityStatus?: value-of<PortabilityStatus>,
- *   portingOrderID?: string,
- *   portingOrderStatus?: value-of<PortingOrderStatus>,
- *   recordType?: string,
- *   requirementsStatus?: value-of<RequirementsStatus>,
- *   supportKey?: string,
+ *   activation_status?: value-of<ActivationStatus>|null,
+ *   phone_number?: string|null,
+ *   phone_number_type?: value-of<PhoneNumberType>|null,
+ *   portability_status?: value-of<PortabilityStatus>|null,
+ *   porting_order_id?: string|null,
+ *   porting_order_status?: value-of<PortingOrderStatus>|null,
+ *   record_type?: string|null,
+ *   requirements_status?: value-of<RequirementsStatus>|null,
+ *   support_key?: string|null,
  * }
  */
 final class Data implements BaseModel
@@ -34,70 +34,66 @@ final class Data implements BaseModel
     /**
      * Activation status.
      *
-     * @var value-of<ActivationStatus>|null $activationStatus
+     * @var value-of<ActivationStatus>|null $activation_status
      */
-    #[Api('activation_status', enum: ActivationStatus::class, optional: true)]
-    public ?string $activationStatus;
+    #[Api(enum: ActivationStatus::class, optional: true)]
+    public ?string $activation_status;
 
     /**
      * E164 formatted phone number.
      */
-    #[Api('phone_number', optional: true)]
-    public ?string $phoneNumber;
+    #[Api(optional: true)]
+    public ?string $phone_number;
 
     /**
      * The type of the phone number.
      *
-     * @var value-of<PhoneNumberType>|null $phoneNumberType
+     * @var value-of<PhoneNumberType>|null $phone_number_type
      */
-    #[Api('phone_number_type', enum: PhoneNumberType::class, optional: true)]
-    public ?string $phoneNumberType;
+    #[Api(enum: PhoneNumberType::class, optional: true)]
+    public ?string $phone_number_type;
 
     /**
      * Specifies whether Telnyx is able to confirm portability this number in the United States & Canada. International phone numbers are provisional by default.
      *
-     * @var value-of<PortabilityStatus>|null $portabilityStatus
+     * @var value-of<PortabilityStatus>|null $portability_status
      */
-    #[Api('portability_status', enum: PortabilityStatus::class, optional: true)]
-    public ?string $portabilityStatus;
+    #[Api(enum: PortabilityStatus::class, optional: true)]
+    public ?string $portability_status;
 
     /**
      * Identifies the associated port request.
      */
-    #[Api('porting_order_id', optional: true)]
-    public ?string $portingOrderID;
+    #[Api(optional: true)]
+    public ?string $porting_order_id;
 
     /**
      * The current status of the porting order.
      *
-     * @var value-of<PortingOrderStatus>|null $portingOrderStatus
+     * @var value-of<PortingOrderStatus>|null $porting_order_status
      */
-    #[Api(
-        'porting_order_status',
-        enum: PortingOrderStatus::class,
-        optional: true
-    )]
-    public ?string $portingOrderStatus;
+    #[Api(enum: PortingOrderStatus::class, optional: true)]
+    public ?string $porting_order_status;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api('record_type', optional: true)]
-    public ?string $recordType;
+    #[Api(optional: true)]
+    public ?string $record_type;
 
     /**
      * The current status of the requirements in a INTL porting order.
      *
-     * @var value-of<RequirementsStatus>|null $requirementsStatus
+     * @var value-of<RequirementsStatus>|null $requirements_status
      */
-    #[Api('requirements_status', enum: RequirementsStatus::class, optional: true)]
-    public ?string $requirementsStatus;
+    #[Api(enum: RequirementsStatus::class, optional: true)]
+    public ?string $requirements_status;
 
     /**
      * A key to reference this porting order when contacting Telnyx customer support.
      */
-    #[Api('support_key', optional: true)]
-    public ?string $supportKey;
+    #[Api(optional: true)]
+    public ?string $support_key;
 
     public function __construct()
     {
@@ -109,34 +105,34 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ActivationStatus|value-of<ActivationStatus> $activationStatus
-     * @param PhoneNumberType|value-of<PhoneNumberType> $phoneNumberType
-     * @param PortabilityStatus|value-of<PortabilityStatus> $portabilityStatus
-     * @param PortingOrderStatus|value-of<PortingOrderStatus> $portingOrderStatus
-     * @param RequirementsStatus|value-of<RequirementsStatus> $requirementsStatus
+     * @param ActivationStatus|value-of<ActivationStatus> $activation_status
+     * @param PhoneNumberType|value-of<PhoneNumberType> $phone_number_type
+     * @param PortabilityStatus|value-of<PortabilityStatus> $portability_status
+     * @param PortingOrderStatus|value-of<PortingOrderStatus> $porting_order_status
+     * @param RequirementsStatus|value-of<RequirementsStatus> $requirements_status
      */
     public static function with(
-        ActivationStatus|string|null $activationStatus = null,
-        ?string $phoneNumber = null,
-        PhoneNumberType|string|null $phoneNumberType = null,
-        PortabilityStatus|string|null $portabilityStatus = null,
-        ?string $portingOrderID = null,
-        PortingOrderStatus|string|null $portingOrderStatus = null,
-        ?string $recordType = null,
-        RequirementsStatus|string|null $requirementsStatus = null,
-        ?string $supportKey = null,
+        ActivationStatus|string|null $activation_status = null,
+        ?string $phone_number = null,
+        PhoneNumberType|string|null $phone_number_type = null,
+        PortabilityStatus|string|null $portability_status = null,
+        ?string $porting_order_id = null,
+        PortingOrderStatus|string|null $porting_order_status = null,
+        ?string $record_type = null,
+        RequirementsStatus|string|null $requirements_status = null,
+        ?string $support_key = null,
     ): self {
         $obj = new self;
 
-        null !== $activationStatus && $obj['activationStatus'] = $activationStatus;
-        null !== $phoneNumber && $obj->phoneNumber = $phoneNumber;
-        null !== $phoneNumberType && $obj['phoneNumberType'] = $phoneNumberType;
-        null !== $portabilityStatus && $obj['portabilityStatus'] = $portabilityStatus;
-        null !== $portingOrderID && $obj->portingOrderID = $portingOrderID;
-        null !== $portingOrderStatus && $obj['portingOrderStatus'] = $portingOrderStatus;
-        null !== $recordType && $obj->recordType = $recordType;
-        null !== $requirementsStatus && $obj['requirementsStatus'] = $requirementsStatus;
-        null !== $supportKey && $obj->supportKey = $supportKey;
+        null !== $activation_status && $obj['activation_status'] = $activation_status;
+        null !== $phone_number && $obj->phone_number = $phone_number;
+        null !== $phone_number_type && $obj['phone_number_type'] = $phone_number_type;
+        null !== $portability_status && $obj['portability_status'] = $portability_status;
+        null !== $porting_order_id && $obj->porting_order_id = $porting_order_id;
+        null !== $porting_order_status && $obj['porting_order_status'] = $porting_order_status;
+        null !== $record_type && $obj->record_type = $record_type;
+        null !== $requirements_status && $obj['requirements_status'] = $requirements_status;
+        null !== $support_key && $obj->support_key = $support_key;
 
         return $obj;
     }
@@ -150,7 +146,7 @@ final class Data implements BaseModel
         ActivationStatus|string $activationStatus
     ): self {
         $obj = clone $this;
-        $obj['activationStatus'] = $activationStatus;
+        $obj['activation_status'] = $activationStatus;
 
         return $obj;
     }
@@ -161,7 +157,7 @@ final class Data implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj->phoneNumber = $phoneNumber;
+        $obj->phone_number = $phoneNumber;
 
         return $obj;
     }
@@ -175,7 +171,7 @@ final class Data implements BaseModel
         PhoneNumberType|string $phoneNumberType
     ): self {
         $obj = clone $this;
-        $obj['phoneNumberType'] = $phoneNumberType;
+        $obj['phone_number_type'] = $phoneNumberType;
 
         return $obj;
     }
@@ -189,7 +185,7 @@ final class Data implements BaseModel
         PortabilityStatus|string $portabilityStatus
     ): self {
         $obj = clone $this;
-        $obj['portabilityStatus'] = $portabilityStatus;
+        $obj['portability_status'] = $portabilityStatus;
 
         return $obj;
     }
@@ -200,7 +196,7 @@ final class Data implements BaseModel
     public function withPortingOrderID(string $portingOrderID): self
     {
         $obj = clone $this;
-        $obj->portingOrderID = $portingOrderID;
+        $obj->porting_order_id = $portingOrderID;
 
         return $obj;
     }
@@ -214,7 +210,7 @@ final class Data implements BaseModel
         PortingOrderStatus|string $portingOrderStatus
     ): self {
         $obj = clone $this;
-        $obj['portingOrderStatus'] = $portingOrderStatus;
+        $obj['porting_order_status'] = $portingOrderStatus;
 
         return $obj;
     }
@@ -225,7 +221,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType;
+        $obj->record_type = $recordType;
 
         return $obj;
     }
@@ -239,7 +235,7 @@ final class Data implements BaseModel
         RequirementsStatus|string $requirementsStatus
     ): self {
         $obj = clone $this;
-        $obj['requirementsStatus'] = $requirementsStatus;
+        $obj['requirements_status'] = $requirementsStatus;
 
         return $obj;
     }
@@ -250,7 +246,7 @@ final class Data implements BaseModel
     public function withSupportKey(string $supportKey): self
     {
         $obj = clone $this;
-        $obj->supportKey = $supportKey;
+        $obj->support_key = $supportKey;
 
         return $obj;
     }

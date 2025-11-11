@@ -12,7 +12,9 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\GlobalIPAllowedPorts\GlobalIPAllowedPortListResponse\Data;
 
 /**
- * @phpstan-type GlobalIPAllowedPortListResponseShape = array{data?: list<Data>}
+ * @phpstan-type GlobalIPAllowedPortListResponseShape = array{
+ *   data?: list<Data>|null
+ * }
  */
 final class GlobalIPAllowedPortListResponse implements BaseModel, ResponseConverter
 {

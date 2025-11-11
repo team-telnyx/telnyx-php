@@ -12,8 +12,6 @@ use Telnyx\Portouts\Comments\CommentNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Portouts\CommentsContract;
 
-use const Telnyx\Core\OMIT as omit;
-
 final class CommentsService implements CommentsContract
 {
     /**
@@ -26,35 +24,18 @@ final class CommentsService implements CommentsContract
      *
      * Creates a comment on a portout request.
      *
-     * @param string $body Comment to post on this portout request
+     * @param array{body?: string}|CommentCreateParams $params
      *
      * @throws APIException
      */
     public function create(
         string $id,
-        $body = omit,
-        ?RequestOptions $requestOptions = null
-    ): CommentNewResponse {
-        $params = ['body' => $body];
-
-        return $this->createRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|CommentCreateParams $params,
+        ?RequestOptions $requestOptions = null,
     ): CommentNewResponse {
         [$parsed, $options] = CommentCreateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

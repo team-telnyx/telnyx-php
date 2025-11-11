@@ -6,9 +6,6 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\Porting\LoaConfigurations\LoaConfigurationCreateParams\Address;
-use Telnyx\Porting\LoaConfigurations\LoaConfigurationCreateParams\Contact;
-use Telnyx\Porting\LoaConfigurations\LoaConfigurationCreateParams\Logo;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -36,22 +33,21 @@ final class LoaConfigurationsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->porting->loaConfigurations->create(
-            address: Address::with(
-                city: 'Austin',
-                countryCode: 'US',
-                state: 'TX',
-                streetAddress: '600 Congress Avenue',
-                zipCode: '78701',
-            ),
-            companyName: 'Telnyx',
-            contact: Contact::with(
-                email: 'testing@telnyx.com',
-                phoneNumber: '+12003270001'
-            ),
-            logo: Logo::with(documentID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'),
-            name: 'My LOA Configuration',
-        );
+        $result = $this->client->porting->loaConfigurations->create([
+            'address' => [
+                'city' => 'Austin',
+                'country_code' => 'US',
+                'state' => 'TX',
+                'street_address' => '600 Congress Avenue',
+                'zip_code' => '78701',
+            ],
+            'company_name' => 'Telnyx',
+            'contact' => [
+                'email' => 'testing@telnyx.com', 'phone_number' => '+12003270001',
+            ],
+            'logo' => ['document_id' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
+            'name' => 'My LOA Configuration',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -63,23 +59,22 @@ final class LoaConfigurationsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->porting->loaConfigurations->create(
-            address: Address::with(
-                city: 'Austin',
-                countryCode: 'US',
-                state: 'TX',
-                streetAddress: '600 Congress Avenue',
-                zipCode: '78701',
-            )
-                ->withExtendedAddress('14th Floor'),
-            companyName: 'Telnyx',
-            contact: Contact::with(
-                email: 'testing@telnyx.com',
-                phoneNumber: '+12003270001'
-            ),
-            logo: Logo::with(documentID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'),
-            name: 'My LOA Configuration',
-        );
+        $result = $this->client->porting->loaConfigurations->create([
+            'address' => [
+                'city' => 'Austin',
+                'country_code' => 'US',
+                'state' => 'TX',
+                'street_address' => '600 Congress Avenue',
+                'zip_code' => '78701',
+                'extended_address' => '14th Floor',
+            ],
+            'company_name' => 'Telnyx',
+            'contact' => [
+                'email' => 'testing@telnyx.com', 'phone_number' => '+12003270001',
+            ],
+            'logo' => ['document_id' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
+            'name' => 'My LOA Configuration',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -107,22 +102,21 @@ final class LoaConfigurationsTest extends TestCase
 
         $result = $this->client->porting->loaConfigurations->update(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            address: \Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Address::with(
-                city: 'Austin',
-                countryCode: 'US',
-                state: 'TX',
-                streetAddress: '600 Congress Avenue',
-                zipCode: '78701',
-            ),
-            companyName: 'Telnyx',
-            contact: \Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Contact::with(
-                email: 'testing@telnyx.com',
-                phoneNumber: '+12003270001'
-            ),
-            logo: \Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Logo::with(
-                documentID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
-            ),
-            name: 'My LOA Configuration',
+            [
+                'address' => [
+                    'city' => 'Austin',
+                    'country_code' => 'US',
+                    'state' => 'TX',
+                    'street_address' => '600 Congress Avenue',
+                    'zip_code' => '78701',
+                ],
+                'company_name' => 'Telnyx',
+                'contact' => [
+                    'email' => 'testing@telnyx.com', 'phone_number' => '+12003270001',
+                ],
+                'logo' => ['document_id' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
+                'name' => 'My LOA Configuration',
+            ],
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -137,23 +131,22 @@ final class LoaConfigurationsTest extends TestCase
 
         $result = $this->client->porting->loaConfigurations->update(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            address: \Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Address::with(
-                city: 'Austin',
-                countryCode: 'US',
-                state: 'TX',
-                streetAddress: '600 Congress Avenue',
-                zipCode: '78701',
-            )
-                ->withExtendedAddress('14th Floor'),
-            companyName: 'Telnyx',
-            contact: \Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Contact::with(
-                email: 'testing@telnyx.com',
-                phoneNumber: '+12003270001'
-            ),
-            logo: \Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Logo::with(
-                documentID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
-            ),
-            name: 'My LOA Configuration',
+            [
+                'address' => [
+                    'city' => 'Austin',
+                    'country_code' => 'US',
+                    'state' => 'TX',
+                    'street_address' => '600 Congress Avenue',
+                    'zip_code' => '78701',
+                    'extended_address' => '14th Floor',
+                ],
+                'company_name' => 'Telnyx',
+                'contact' => [
+                    'email' => 'testing@telnyx.com', 'phone_number' => '+12003270001',
+                ],
+                'logo' => ['document_id' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
+                'name' => 'My LOA Configuration',
+            ],
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -166,7 +159,7 @@ final class LoaConfigurationsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->porting->loaConfigurations->list();
+        $result = $this->client->porting->loaConfigurations->list([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -192,24 +185,21 @@ final class LoaConfigurationsTest extends TestCase
             $this->markTestSkipped("Prism doesn't support application/pdf responses");
         }
 
-        $result = $this->client->porting->loaConfigurations->preview0(
-            address: \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Address::with(
-                city: 'Austin',
-                countryCode: 'US',
-                state: 'TX',
-                streetAddress: '600 Congress Avenue',
-                zipCode: '78701',
-            ),
-            companyName: 'Telnyx',
-            contact: \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Contact::with(
-                email: 'testing@telnyx.com',
-                phoneNumber: '+12003270001'
-            ),
-            logo: \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Logo::with(
-                documentID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
-            ),
-            name: 'My LOA Configuration',
-        );
+        $result = $this->client->porting->loaConfigurations->preview0([
+            'address' => [
+                'city' => 'Austin',
+                'country_code' => 'US',
+                'state' => 'TX',
+                'street_address' => '600 Congress Avenue',
+                'zip_code' => '78701',
+            ],
+            'company_name' => 'Telnyx',
+            'contact' => [
+                'email' => 'testing@telnyx.com', 'phone_number' => '+12003270001',
+            ],
+            'logo' => ['document_id' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
+            'name' => 'My LOA Configuration',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -221,25 +211,22 @@ final class LoaConfigurationsTest extends TestCase
             $this->markTestSkipped("Prism doesn't support application/pdf responses");
         }
 
-        $result = $this->client->porting->loaConfigurations->preview0(
-            address: \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Address::with(
-                city: 'Austin',
-                countryCode: 'US',
-                state: 'TX',
-                streetAddress: '600 Congress Avenue',
-                zipCode: '78701',
-            )
-                ->withExtendedAddress('14th Floor'),
-            companyName: 'Telnyx',
-            contact: \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Contact::with(
-                email: 'testing@telnyx.com',
-                phoneNumber: '+12003270001'
-            ),
-            logo: \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Logo::with(
-                documentID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
-            ),
-            name: 'My LOA Configuration',
-        );
+        $result = $this->client->porting->loaConfigurations->preview0([
+            'address' => [
+                'city' => 'Austin',
+                'country_code' => 'US',
+                'state' => 'TX',
+                'street_address' => '600 Congress Avenue',
+                'zip_code' => '78701',
+                'extended_address' => '14th Floor',
+            ],
+            'company_name' => 'Telnyx',
+            'contact' => [
+                'email' => 'testing@telnyx.com', 'phone_number' => '+12003270001',
+            ],
+            'logo' => ['document_id' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
+            'name' => 'My LOA Configuration',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

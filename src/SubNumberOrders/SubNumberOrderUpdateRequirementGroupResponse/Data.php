@@ -12,20 +12,20 @@ use Telnyx\SubNumberOrders\SubNumberOrderUpdateRequirementGroupResponse\Data\Reg
 
 /**
  * @phpstan-type DataShape = array{
- *   id?: string,
- *   countryCode?: string,
- *   createdAt?: \DateTimeInterface,
- *   customerReference?: string,
- *   isBlockSubNumberOrder?: bool,
- *   orderRequestID?: string,
- *   phoneNumberType?: string,
- *   phoneNumbers?: list<PhoneNumber>,
- *   phoneNumbersCount?: int,
- *   recordType?: string,
- *   regulatoryRequirements?: list<RegulatoryRequirement>,
- *   requirementsMet?: bool,
- *   status?: string,
- *   updatedAt?: \DateTimeInterface,
+ *   id?: string|null,
+ *   country_code?: string|null,
+ *   created_at?: \DateTimeInterface|null,
+ *   customer_reference?: string|null,
+ *   is_block_sub_number_order?: bool|null,
+ *   order_request_id?: string|null,
+ *   phone_number_type?: string|null,
+ *   phone_numbers?: list<PhoneNumber>|null,
+ *   phone_numbers_count?: int|null,
+ *   record_type?: string|null,
+ *   regulatory_requirements?: list<RegulatoryRequirement>|null,
+ *   requirements_met?: bool|null,
+ *   status?: string|null,
+ *   updated_at?: \DateTimeInterface|null,
  * }
  */
 final class Data implements BaseModel
@@ -36,50 +36,46 @@ final class Data implements BaseModel
     #[Api(optional: true)]
     public ?string $id;
 
-    #[Api('country_code', optional: true)]
-    public ?string $countryCode;
+    #[Api(optional: true)]
+    public ?string $country_code;
 
-    #[Api('created_at', optional: true)]
-    public ?\DateTimeInterface $createdAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $created_at;
 
-    #[Api('customer_reference', optional: true)]
-    public ?string $customerReference;
+    #[Api(optional: true)]
+    public ?string $customer_reference;
 
-    #[Api('is_block_sub_number_order', optional: true)]
-    public ?bool $isBlockSubNumberOrder;
+    #[Api(optional: true)]
+    public ?bool $is_block_sub_number_order;
 
-    #[Api('order_request_id', optional: true)]
-    public ?string $orderRequestID;
+    #[Api(optional: true)]
+    public ?string $order_request_id;
 
-    #[Api('phone_number_type', optional: true)]
-    public ?string $phoneNumberType;
+    #[Api(optional: true)]
+    public ?string $phone_number_type;
 
-    /** @var list<PhoneNumber>|null $phoneNumbers */
-    #[Api('phone_numbers', list: PhoneNumber::class, optional: true)]
-    public ?array $phoneNumbers;
+    /** @var list<PhoneNumber>|null $phone_numbers */
+    #[Api(list: PhoneNumber::class, optional: true)]
+    public ?array $phone_numbers;
 
-    #[Api('phone_numbers_count', optional: true)]
-    public ?int $phoneNumbersCount;
+    #[Api(optional: true)]
+    public ?int $phone_numbers_count;
 
-    #[Api('record_type', optional: true)]
-    public ?string $recordType;
+    #[Api(optional: true)]
+    public ?string $record_type;
 
-    /** @var list<RegulatoryRequirement>|null $regulatoryRequirements */
-    #[Api(
-        'regulatory_requirements',
-        list: RegulatoryRequirement::class,
-        optional: true,
-    )]
-    public ?array $regulatoryRequirements;
+    /** @var list<RegulatoryRequirement>|null $regulatory_requirements */
+    #[Api(list: RegulatoryRequirement::class, optional: true)]
+    public ?array $regulatory_requirements;
 
-    #[Api('requirements_met', optional: true)]
-    public ?bool $requirementsMet;
+    #[Api(optional: true)]
+    public ?bool $requirements_met;
 
     #[Api(optional: true)]
     public ?string $status;
 
-    #[Api('updated_at', optional: true)]
-    public ?\DateTimeInterface $updatedAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $updated_at;
 
     public function __construct()
     {
@@ -91,41 +87,41 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<PhoneNumber> $phoneNumbers
-     * @param list<RegulatoryRequirement> $regulatoryRequirements
+     * @param list<PhoneNumber> $phone_numbers
+     * @param list<RegulatoryRequirement> $regulatory_requirements
      */
     public static function with(
         ?string $id = null,
-        ?string $countryCode = null,
-        ?\DateTimeInterface $createdAt = null,
-        ?string $customerReference = null,
-        ?bool $isBlockSubNumberOrder = null,
-        ?string $orderRequestID = null,
-        ?string $phoneNumberType = null,
-        ?array $phoneNumbers = null,
-        ?int $phoneNumbersCount = null,
-        ?string $recordType = null,
-        ?array $regulatoryRequirements = null,
-        ?bool $requirementsMet = null,
+        ?string $country_code = null,
+        ?\DateTimeInterface $created_at = null,
+        ?string $customer_reference = null,
+        ?bool $is_block_sub_number_order = null,
+        ?string $order_request_id = null,
+        ?string $phone_number_type = null,
+        ?array $phone_numbers = null,
+        ?int $phone_numbers_count = null,
+        ?string $record_type = null,
+        ?array $regulatory_requirements = null,
+        ?bool $requirements_met = null,
         ?string $status = null,
-        ?\DateTimeInterface $updatedAt = null,
+        ?\DateTimeInterface $updated_at = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj->id = $id;
-        null !== $countryCode && $obj->countryCode = $countryCode;
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $customerReference && $obj->customerReference = $customerReference;
-        null !== $isBlockSubNumberOrder && $obj->isBlockSubNumberOrder = $isBlockSubNumberOrder;
-        null !== $orderRequestID && $obj->orderRequestID = $orderRequestID;
-        null !== $phoneNumberType && $obj->phoneNumberType = $phoneNumberType;
-        null !== $phoneNumbers && $obj->phoneNumbers = $phoneNumbers;
-        null !== $phoneNumbersCount && $obj->phoneNumbersCount = $phoneNumbersCount;
-        null !== $recordType && $obj->recordType = $recordType;
-        null !== $regulatoryRequirements && $obj->regulatoryRequirements = $regulatoryRequirements;
-        null !== $requirementsMet && $obj->requirementsMet = $requirementsMet;
+        null !== $country_code && $obj->country_code = $country_code;
+        null !== $created_at && $obj->created_at = $created_at;
+        null !== $customer_reference && $obj->customer_reference = $customer_reference;
+        null !== $is_block_sub_number_order && $obj->is_block_sub_number_order = $is_block_sub_number_order;
+        null !== $order_request_id && $obj->order_request_id = $order_request_id;
+        null !== $phone_number_type && $obj->phone_number_type = $phone_number_type;
+        null !== $phone_numbers && $obj->phone_numbers = $phone_numbers;
+        null !== $phone_numbers_count && $obj->phone_numbers_count = $phone_numbers_count;
+        null !== $record_type && $obj->record_type = $record_type;
+        null !== $regulatory_requirements && $obj->regulatory_requirements = $regulatory_requirements;
+        null !== $requirements_met && $obj->requirements_met = $requirements_met;
         null !== $status && $obj->status = $status;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
+        null !== $updated_at && $obj->updated_at = $updated_at;
 
         return $obj;
     }
@@ -141,7 +137,7 @@ final class Data implements BaseModel
     public function withCountryCode(string $countryCode): self
     {
         $obj = clone $this;
-        $obj->countryCode = $countryCode;
+        $obj->country_code = $countryCode;
 
         return $obj;
     }
@@ -149,7 +145,7 @@ final class Data implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }
@@ -157,7 +153,7 @@ final class Data implements BaseModel
     public function withCustomerReference(string $customerReference): self
     {
         $obj = clone $this;
-        $obj->customerReference = $customerReference;
+        $obj->customer_reference = $customerReference;
 
         return $obj;
     }
@@ -165,7 +161,7 @@ final class Data implements BaseModel
     public function withIsBlockSubNumberOrder(bool $isBlockSubNumberOrder): self
     {
         $obj = clone $this;
-        $obj->isBlockSubNumberOrder = $isBlockSubNumberOrder;
+        $obj->is_block_sub_number_order = $isBlockSubNumberOrder;
 
         return $obj;
     }
@@ -173,7 +169,7 @@ final class Data implements BaseModel
     public function withOrderRequestID(string $orderRequestID): self
     {
         $obj = clone $this;
-        $obj->orderRequestID = $orderRequestID;
+        $obj->order_request_id = $orderRequestID;
 
         return $obj;
     }
@@ -181,7 +177,7 @@ final class Data implements BaseModel
     public function withPhoneNumberType(string $phoneNumberType): self
     {
         $obj = clone $this;
-        $obj->phoneNumberType = $phoneNumberType;
+        $obj->phone_number_type = $phoneNumberType;
 
         return $obj;
     }
@@ -192,7 +188,7 @@ final class Data implements BaseModel
     public function withPhoneNumbers(array $phoneNumbers): self
     {
         $obj = clone $this;
-        $obj->phoneNumbers = $phoneNumbers;
+        $obj->phone_numbers = $phoneNumbers;
 
         return $obj;
     }
@@ -200,7 +196,7 @@ final class Data implements BaseModel
     public function withPhoneNumbersCount(int $phoneNumbersCount): self
     {
         $obj = clone $this;
-        $obj->phoneNumbersCount = $phoneNumbersCount;
+        $obj->phone_numbers_count = $phoneNumbersCount;
 
         return $obj;
     }
@@ -208,7 +204,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType;
+        $obj->record_type = $recordType;
 
         return $obj;
     }
@@ -220,7 +216,7 @@ final class Data implements BaseModel
         array $regulatoryRequirements
     ): self {
         $obj = clone $this;
-        $obj->regulatoryRequirements = $regulatoryRequirements;
+        $obj->regulatory_requirements = $regulatoryRequirements;
 
         return $obj;
     }
@@ -228,7 +224,7 @@ final class Data implements BaseModel
     public function withRequirementsMet(bool $requirementsMet): self
     {
         $obj = clone $this;
-        $obj->requirementsMet = $requirementsMet;
+        $obj->requirements_met = $requirementsMet;
 
         return $obj;
     }
@@ -244,7 +240,7 @@ final class Data implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $obj->updated_at = $updatedAt;
 
         return $obj;
     }

@@ -12,18 +12,11 @@ use Telnyx\PhoneNumbers\Voice\CnamListing;
 use Telnyx\PhoneNumbers\Voice\MediaFeatures;
 use Telnyx\PhoneNumbers\Voice\VoiceGetResponse;
 use Telnyx\PhoneNumbers\Voice\VoiceListParams;
-use Telnyx\PhoneNumbers\Voice\VoiceListParams\Filter;
-use Telnyx\PhoneNumbers\Voice\VoiceListParams\Page;
-use Telnyx\PhoneNumbers\Voice\VoiceListParams\Sort;
 use Telnyx\PhoneNumbers\Voice\VoiceListResponse;
 use Telnyx\PhoneNumbers\Voice\VoiceUpdateParams;
-use Telnyx\PhoneNumbers\Voice\VoiceUpdateParams\InboundCallScreening;
-use Telnyx\PhoneNumbers\Voice\VoiceUpdateParams\UsagePaymentMethod;
 use Telnyx\PhoneNumbers\Voice\VoiceUpdateResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PhoneNumbers\VoiceContract;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class VoiceService implements VoiceContract
 {
@@ -57,61 +50,42 @@ final class VoiceService implements VoiceContract
      *
      * Update a phone number with voice settings
      *
-     * @param CallForwarding $callForwarding the call forwarding settings for a phone number
-     * @param CallRecording $callRecording the call recording settings for a phone number
-     * @param bool $callerIDNameEnabled controls whether the caller ID name is enabled for this phone number
-     * @param CnamListing $cnamListing the CNAM listing settings for a phone number
-     * @param InboundCallScreening|value-of<InboundCallScreening> $inboundCallScreening The inbound_call_screening setting is a phone number configuration option variable that allows users to configure their settings to block or flag fraudulent calls. It can be set to disabled, reject_calls, or flag_calls. This feature has an additional per-number monthly cost associated with it.
-     * @param MediaFeatures $mediaFeatures the media features settings for a phone number
-     * @param bool $techPrefixEnabled controls whether a tech prefix is enabled for this phone number
-     * @param string $translatedNumber This field allows you to rewrite the destination number of an inbound call before the call is routed to you. The value of this field may be any alphanumeric value, and the value will replace the number originally dialed.
-     * @param UsagePaymentMethod|value-of<UsagePaymentMethod> $usagePaymentMethod controls whether a number is billed per minute or uses your concurrent channels
+     * @param array{
+     *   call_forwarding?: array{
+     *     call_forwarding_enabled?: bool,
+     *     forwarding_type?: "always"|"on-failure",
+     *     forwards_to?: string,
+     *   }|CallForwarding,
+     *   call_recording?: array{
+     *     inbound_call_recording_channels?: "single"|"dual",
+     *     inbound_call_recording_enabled?: bool,
+     *     inbound_call_recording_format?: "wav"|"mp3",
+     *   }|CallRecording,
+     *   caller_id_name_enabled?: bool,
+     *   cnam_listing?: array{
+     *     cnam_listing_details?: string, cnam_listing_enabled?: bool
+     *   }|CnamListing,
+     *   inbound_call_screening?: "disabled"|"reject_calls"|"flag_calls",
+     *   media_features?: array{
+     *     accept_any_rtp_packets_enabled?: bool,
+     *     rtp_auto_adjust_enabled?: bool,
+     *     t38_fax_gateway_enabled?: bool,
+     *   }|MediaFeatures,
+     *   tech_prefix_enabled?: bool,
+     *   translated_number?: string,
+     *   usage_payment_method?: "pay-per-minute"|"channel",
+     * }|VoiceUpdateParams $params
      *
      * @throws APIException
      */
     public function update(
         string $id,
-        $callForwarding = omit,
-        $callRecording = omit,
-        $callerIDNameEnabled = omit,
-        $cnamListing = omit,
-        $inboundCallScreening = omit,
-        $mediaFeatures = omit,
-        $techPrefixEnabled = omit,
-        $translatedNumber = omit,
-        $usagePaymentMethod = omit,
+        array|VoiceUpdateParams $params,
         ?RequestOptions $requestOptions = null,
-    ): VoiceUpdateResponse {
-        $params = [
-            'callForwarding' => $callForwarding,
-            'callRecording' => $callRecording,
-            'callerIDNameEnabled' => $callerIDNameEnabled,
-            'cnamListing' => $cnamListing,
-            'inboundCallScreening' => $inboundCallScreening,
-            'mediaFeatures' => $mediaFeatures,
-            'techPrefixEnabled' => $techPrefixEnabled,
-            'translatedNumber' => $translatedNumber,
-            'usagePaymentMethod' => $usagePaymentMethod,
-        ];
-
-        return $this->updateRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): VoiceUpdateResponse {
         [$parsed, $options] = VoiceUpdateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -129,37 +103,26 @@ final class VoiceService implements VoiceContract
      *
      * List phone numbers with voice settings
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[phone_number], filter[connection_name], filter[customer_reference], filter[voice.usage_payment_method]
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
-     * @param Sort|value-of<Sort> $sort Specifies the sort order for results. If not given, results are sorted by created_at in descending order.
+     * @param array{
+     *   filter?: array{
+     *     connection_name?: array{contains?: string},
+     *     customer_reference?: string,
+     *     phone_number?: string,
+     *     'voice.usage_payment_method'?: "pay-per-minute"|"channel",
+     *   },
+     *   page?: array{number?: int, size?: int},
+     *   sort?: "purchased_at"|"phone_number"|"connection_name"|"usage_payment_method",
+     * }|VoiceListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
-        $sort = omit,
-        ?RequestOptions $requestOptions = null,
-    ): VoiceListResponse {
-        $params = ['filter' => $filter, 'page' => $page, 'sort' => $sort];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
+        array|VoiceListParams $params,
         ?RequestOptions $requestOptions = null
     ): VoiceListResponse {
         [$parsed, $options] = VoiceListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

@@ -35,7 +35,7 @@ final class ActionsTest extends TestCase
 
         $result = $this->client->phoneNumbers->actions->changeBundleStatus(
             '1293384261075731499',
-            '5194d8fc-87e6-4188-baa9-1c434bbe861b'
+            ['bundle_id' => '5194d8fc-87e6-4188-baa9-1c434bbe861b'],
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -50,7 +50,7 @@ final class ActionsTest extends TestCase
 
         $result = $this->client->phoneNumbers->actions->changeBundleStatus(
             '1293384261075731499',
-            '5194d8fc-87e6-4188-baa9-1c434bbe861b'
+            ['bundle_id' => '5194d8fc-87e6-4188-baa9-1c434bbe861b'],
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -65,8 +65,7 @@ final class ActionsTest extends TestCase
 
         $result = $this->client->phoneNumbers->actions->enableEmergency(
             '1293384261075731499',
-            emergencyAddressID: '53829456729313',
-            emergencyEnabled: true,
+            ['emergency_address_id' => '53829456729313', 'emergency_enabled' => true],
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -81,8 +80,7 @@ final class ActionsTest extends TestCase
 
         $result = $this->client->phoneNumbers->actions->enableEmergency(
             '1293384261075731499',
-            emergencyAddressID: '53829456729313',
-            emergencyEnabled: true,
+            ['emergency_address_id' => '53829456729313', 'emergency_enabled' => true],
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -95,9 +93,9 @@ final class ActionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->phoneNumbers->actions->verifyOwnership(
-            ['+15551234567']
-        );
+        $result = $this->client->phoneNumbers->actions->verifyOwnership([
+            'phone_numbers' => ['+15551234567'],
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -109,9 +107,9 @@ final class ActionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->phoneNumbers->actions->verifyOwnership(
-            ['+15551234567']
-        );
+        $result = $this->client->phoneNumbers->actions->verifyOwnership([
+            'phone_numbers' => ['+15551234567'],
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

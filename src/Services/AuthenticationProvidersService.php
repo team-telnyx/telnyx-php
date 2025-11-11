@@ -8,19 +8,14 @@ use Telnyx\AuthenticationProviders\AuthenticationProviderCreateParams;
 use Telnyx\AuthenticationProviders\AuthenticationProviderDeleteResponse;
 use Telnyx\AuthenticationProviders\AuthenticationProviderGetResponse;
 use Telnyx\AuthenticationProviders\AuthenticationProviderListParams;
-use Telnyx\AuthenticationProviders\AuthenticationProviderListParams\Page;
-use Telnyx\AuthenticationProviders\AuthenticationProviderListParams\Sort;
 use Telnyx\AuthenticationProviders\AuthenticationProviderListResponse;
 use Telnyx\AuthenticationProviders\AuthenticationProviderNewResponse;
 use Telnyx\AuthenticationProviders\AuthenticationProviderUpdateParams;
 use Telnyx\AuthenticationProviders\AuthenticationProviderUpdateResponse;
-use Telnyx\AuthenticationProviders\Settings;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AuthenticationProvidersContract;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class AuthenticationProvidersService implements AuthenticationProvidersContract
 {
@@ -34,47 +29,28 @@ final class AuthenticationProvidersService implements AuthenticationProvidersCon
      *
      * Creates an authentication provider.
      *
-     * @param string $name the name associated with the authentication provider
-     * @param Settings $settings the settings associated with the authentication provider
-     * @param string $shortName The short name associated with the authentication provider. This must be unique and URL-friendly, as it's going to be part of the login URL.
-     * @param bool $active The active status of the authentication provider
-     * @param string $settingsURL The URL for the identity provider metadata file to populate the settings automatically. If the settings attribute is provided, that will be used instead.
+     * @param array{
+     *   name: string,
+     *   settings: array{
+     *     idp_cert_fingerprint: string,
+     *     idp_entity_id: string,
+     *     idp_sso_target_url: string,
+     *     idp_cert_fingerprint_algorithm?: "sha1"|"sha256"|"sha384"|"sha512",
+     *   },
+     *   short_name: string,
+     *   active?: bool,
+     *   settings_url?: string,
+     * }|AuthenticationProviderCreateParams $params
      *
      * @throws APIException
      */
     public function create(
-        $name,
-        $settings,
-        $shortName,
-        $active = omit,
-        $settingsURL = omit,
+        array|AuthenticationProviderCreateParams $params,
         ?RequestOptions $requestOptions = null,
-    ): AuthenticationProviderNewResponse {
-        $params = [
-            'name' => $name,
-            'settings' => $settings,
-            'shortName' => $shortName,
-            'active' => $active,
-            'settingsURL' => $settingsURL,
-        ];
-
-        return $this->createRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): AuthenticationProviderNewResponse {
         [$parsed, $options] = AuthenticationProviderCreateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -112,49 +88,29 @@ final class AuthenticationProvidersService implements AuthenticationProvidersCon
      *
      * Updates settings of an existing authentication provider.
      *
-     * @param bool $active The active status of the authentication provider
-     * @param string $name the name associated with the authentication provider
-     * @param Settings $settings the settings associated with the authentication provider
-     * @param string $settingsURL The URL for the identity provider metadata file to populate the settings automatically. If the settings attribute is provided, that will be used instead.
-     * @param string $shortName The short name associated with the authentication provider. This must be unique and URL-friendly, as it's going to be part of the login URL.
+     * @param array{
+     *   active?: bool,
+     *   name?: string,
+     *   settings?: array{
+     *     idp_cert_fingerprint: string,
+     *     idp_entity_id: string,
+     *     idp_sso_target_url: string,
+     *     idp_cert_fingerprint_algorithm?: "sha1"|"sha256"|"sha384"|"sha512",
+     *   },
+     *   settings_url?: string,
+     *   short_name?: string,
+     * }|AuthenticationProviderUpdateParams $params
      *
      * @throws APIException
      */
     public function update(
         string $id,
-        $active = omit,
-        $name = omit,
-        $settings = omit,
-        $settingsURL = omit,
-        $shortName = omit,
+        array|AuthenticationProviderUpdateParams $params,
         ?RequestOptions $requestOptions = null,
-    ): AuthenticationProviderUpdateResponse {
-        $params = [
-            'active' => $active,
-            'name' => $name,
-            'settings' => $settings,
-            'settingsURL' => $settingsURL,
-            'shortName' => $shortName,
-        ];
-
-        return $this->updateRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): AuthenticationProviderUpdateResponse {
         [$parsed, $options] = AuthenticationProviderUpdateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -170,47 +126,23 @@ final class AuthenticationProvidersService implements AuthenticationProvidersCon
     /**
      * @api
      *
+     * @phpstan-type Sort = "name"|"-name"|"short_name"|"-short_name"|"active"|"-active"|"created_at"|"-created_at"|"updated_at"|"-updated_at"
+     *
      * Returns a list of your SSO authentication providers.
      *
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
-     * @param Sort|value-of<Sort> $sort Specifies the sort order for results. By default sorting direction is ascending. To have the results sorted in descending order add the <code>-</code> prefix.<br/><br/>
-     * That is: <ul>
-     *   <li>
-     *     <code>name</code>: sorts the result by the
-     *     <code>name</code> field in ascending order.
-     *   </li>
-     *   <li>
-     *     <code>-name</code>: sorts the result by the
-     *     <code>name</code> field in descending order.
-     *   </li>
-     * </ul><br/>If not given, results are sorted by <code>created_at</code> in descending order.
+     * @param array{
+     *   page?: array{number?: int, size?: int}, sort?: Sort
+     * }|AuthenticationProviderListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $page = omit,
-        $sort = omit,
-        ?RequestOptions $requestOptions = null
-    ): AuthenticationProviderListResponse {
-        $params = ['page' => $page, 'sort' => $sort];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|AuthenticationProviderListParams $params,
+        ?RequestOptions $requestOptions = null,
     ): AuthenticationProviderListResponse {
         [$parsed, $options] = AuthenticationProviderListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

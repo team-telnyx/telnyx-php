@@ -13,7 +13,7 @@ use Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthGetResponse\Data;
 
 /**
  * @phpstan-type GlobalIPAssignmentHealthGetResponseShape = array{
- *   data?: list<Data>
+ *   data?: list<Data>|null
  * }
  */
 final class GlobalIPAssignmentHealthGetResponse implements BaseModel, ResponseConverter

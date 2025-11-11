@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type MetaShape = array{attempt: int, deliveredTo: string}
+ * @phpstan-type MetaShape = array{attempt: int, delivered_to: string}
  */
 final class Meta implements BaseModel
 {
@@ -25,15 +25,15 @@ final class Meta implements BaseModel
     /**
      * URL where the webhook was delivered.
      */
-    #[Api('delivered_to')]
-    public string $deliveredTo;
+    #[Api]
+    public string $delivered_to;
 
     /**
      * `new Meta()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Meta::with(attempt: ..., deliveredTo: ...)
+     * Meta::with(attempt: ..., delivered_to: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -52,12 +52,12 @@ final class Meta implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(int $attempt, string $deliveredTo): self
+    public static function with(int $attempt, string $delivered_to): self
     {
         $obj = new self;
 
         $obj->attempt = $attempt;
-        $obj->deliveredTo = $deliveredTo;
+        $obj->delivered_to = $delivered_to;
 
         return $obj;
     }
@@ -79,7 +79,7 @@ final class Meta implements BaseModel
     public function withDeliveredTo(string $deliveredTo): self
     {
         $obj = clone $this;
-        $obj->deliveredTo = $deliveredTo;
+        $obj->delivered_to = $deliveredTo;
 
         return $obj;
     }

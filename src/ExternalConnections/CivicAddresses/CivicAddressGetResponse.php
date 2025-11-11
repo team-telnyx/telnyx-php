@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\ExternalConnections\CivicAddresses\CivicAddressGetResponse\Data;
 
 /**
- * @phpstan-type CivicAddressGetResponseShape = array{data?: Data}
+ * @phpstan-type CivicAddressGetResponseShape = array{data?: Data|null}
  */
 final class CivicAddressGetResponse implements BaseModel, ResponseConverter
 {

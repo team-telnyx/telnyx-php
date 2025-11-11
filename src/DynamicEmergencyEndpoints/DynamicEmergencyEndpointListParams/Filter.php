@@ -13,7 +13,7 @@ use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointListParams\Filter\S
  * Consolidated filter parameter (deepObject style). Originally: filter[status], filter[country_code].
  *
  * @phpstan-type FilterShape = array{
- *   countryCode?: string, status?: value-of<Status>
+ *   country_code?: string|null, status?: value-of<Status>|null
  * }
  */
 final class Filter implements BaseModel
@@ -24,8 +24,8 @@ final class Filter implements BaseModel
     /**
      * Filter by country code.
      */
-    #[Api('country_code', optional: true)]
-    public ?string $countryCode;
+    #[Api(optional: true)]
+    public ?string $country_code;
 
     /**
      * Filter by status.
@@ -48,12 +48,12 @@ final class Filter implements BaseModel
      * @param Status|value-of<Status> $status
      */
     public static function with(
-        ?string $countryCode = null,
+        ?string $country_code = null,
         Status|string|null $status = null
     ): self {
         $obj = new self;
 
-        null !== $countryCode && $obj->countryCode = $countryCode;
+        null !== $country_code && $obj->country_code = $country_code;
         null !== $status && $obj['status'] = $status;
 
         return $obj;
@@ -65,7 +65,7 @@ final class Filter implements BaseModel
     public function withCountryCode(string $countryCode): self
     {
         $obj = clone $this;
-        $obj->countryCode = $countryCode;
+        $obj->country_code = $countryCode;
 
         return $obj;
     }

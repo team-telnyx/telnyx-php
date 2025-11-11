@@ -33,7 +33,7 @@ final class PurchaseTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->actions->purchase->create(amount: 10);
+        $result = $this->client->actions->purchase->create(['amount' => 10]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -45,7 +45,7 @@ final class PurchaseTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->actions->purchase->create(amount: 10);
+        $result = $this->client->actions->purchase->create(['amount' => 10]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

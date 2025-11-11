@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type TextAndImageArrayShape = array{
- *   type: value-of<Type>, imageURL?: string, text?: string
+ *   type: value-of<Type>, image_url?: string|null, text?: string|null
  * }
  */
 final class TextAndImageArray implements BaseModel
@@ -23,8 +23,8 @@ final class TextAndImageArray implements BaseModel
     #[Api(enum: Type::class)]
     public string $type;
 
-    #[Api('image_url', optional: true)]
-    public ?string $imageURL;
+    #[Api(optional: true)]
+    public ?string $image_url;
 
     #[Api(optional: true)]
     public ?string $text;
@@ -57,14 +57,14 @@ final class TextAndImageArray implements BaseModel
      */
     public static function with(
         Type|string $type,
-        ?string $imageURL = null,
+        ?string $image_url = null,
         ?string $text = null
     ): self {
         $obj = new self;
 
         $obj['type'] = $type;
 
-        null !== $imageURL && $obj->imageURL = $imageURL;
+        null !== $image_url && $obj->image_url = $image_url;
         null !== $text && $obj->text = $text;
 
         return $obj;
@@ -84,7 +84,7 @@ final class TextAndImageArray implements BaseModel
     public function withImageURL(string $imageURL): self
     {
         $obj = clone $this;
-        $obj->imageURL = $imageURL;
+        $obj->image_url = $imageURL;
 
         return $obj;
     }

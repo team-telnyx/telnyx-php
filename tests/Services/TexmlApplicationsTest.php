@@ -33,10 +33,9 @@ final class TexmlApplicationsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->texmlApplications->create(
-            friendlyName: 'call-router',
-            voiceURL: 'https://example.com'
-        );
+        $result = $this->client->texmlApplications->create([
+            'friendly_name' => 'call-router', 'voice_url' => 'https://example.com',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -48,10 +47,9 @@ final class TexmlApplicationsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->texmlApplications->create(
-            friendlyName: 'call-router',
-            voiceURL: 'https://example.com'
-        );
+        $result = $this->client->texmlApplications->create([
+            'friendly_name' => 'call-router', 'voice_url' => 'https://example.com',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -77,8 +75,7 @@ final class TexmlApplicationsTest extends TestCase
 
         $result = $this->client->texmlApplications->update(
             '1293384261075731499',
-            friendlyName: 'call-router',
-            voiceURL: 'https://example.com',
+            ['friendly_name' => 'call-router', 'voice_url' => 'https://example.com'],
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -93,8 +90,7 @@ final class TexmlApplicationsTest extends TestCase
 
         $result = $this->client->texmlApplications->update(
             '1293384261075731499',
-            friendlyName: 'call-router',
-            voiceURL: 'https://example.com',
+            ['friendly_name' => 'call-router', 'voice_url' => 'https://example.com'],
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -107,7 +103,7 @@ final class TexmlApplicationsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->texmlApplications->list();
+        $result = $this->client->texmlApplications->list([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

@@ -6,45 +6,25 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
+use Telnyx\WireguardInterfaces\WireguardInterfaceCreateParams;
 use Telnyx\WireguardInterfaces\WireguardInterfaceDeleteResponse;
 use Telnyx\WireguardInterfaces\WireguardInterfaceGetResponse;
-use Telnyx\WireguardInterfaces\WireguardInterfaceListParams\Filter;
-use Telnyx\WireguardInterfaces\WireguardInterfaceListParams\Page;
+use Telnyx\WireguardInterfaces\WireguardInterfaceListParams;
 use Telnyx\WireguardInterfaces\WireguardInterfaceListResponse;
 use Telnyx\WireguardInterfaces\WireguardInterfaceNewResponse;
-
-use const Telnyx\Core\OMIT as omit;
 
 interface WireguardInterfacesContract
 {
     /**
      * @api
      *
-     * @param string $networkID the id of the network associated with the interface
-     * @param string $regionCode the region the interface should be deployed to
-     * @param bool $enableSipTrunking enable SIP traffic forwarding over VPN interface
-     * @param string $name a user specified name for the interface
+     * @param array<mixed>|WireguardInterfaceCreateParams $params
      *
      * @throws APIException
      */
     public function create(
-        $networkID,
-        $regionCode,
-        $enableSipTrunking = omit,
-        $name = omit,
+        array|WireguardInterfaceCreateParams $params,
         ?RequestOptions $requestOptions = null,
-    ): WireguardInterfaceNewResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): WireguardInterfaceNewResponse;
 
     /**
@@ -60,27 +40,13 @@ interface WireguardInterfacesContract
     /**
      * @api
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[network_id]
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param array<mixed>|WireguardInterfaceListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): WireguardInterfaceListResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|WireguardInterfaceListParams $params,
+        ?RequestOptions $requestOptions = null,
     ): WireguardInterfaceListResponse;
 
     /**

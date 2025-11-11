@@ -13,7 +13,7 @@ use Telnyx\MessagingHostedNumberOrder;
 
 /**
  * @phpstan-type MessagingHostedNumberOrderGetResponseShape = array{
- *   data?: MessagingHostedNumberOrder
+ *   data?: MessagingHostedNumberOrder|null
  * }
  */
 final class MessagingHostedNumberOrderGetResponse implements BaseModel, ResponseConverter

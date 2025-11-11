@@ -6,117 +6,64 @@ namespace Telnyx\ServiceContracts\Queues;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Queues\Calls\CallGetResponse;
-use Telnyx\Queues\Calls\CallListParams\Page;
+use Telnyx\Queues\Calls\CallListParams;
 use Telnyx\Queues\Calls\CallListResponse;
+use Telnyx\Queues\Calls\CallRemoveParams;
+use Telnyx\Queues\Calls\CallRetrieveParams;
+use Telnyx\Queues\Calls\CallUpdateParams;
 use Telnyx\RequestOptions;
-
-use const Telnyx\Core\OMIT as omit;
 
 interface CallsContract
 {
     /**
      * @api
      *
-     * @param string $queueName
+     * @param array<mixed>|CallRetrieveParams $params
      *
      * @throws APIException
      */
     public function retrieve(
         string $callControlID,
-        $queueName,
+        array|CallRetrieveParams $params,
         ?RequestOptions $requestOptions = null,
     ): CallGetResponse;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $callControlID,
-        array $params,
-        ?RequestOptions $requestOptions = null,
-    ): CallGetResponse;
-
-    /**
-     * @api
-     *
-     * @param string $queueName
-     * @param bool $keepAfterHangup whether the call should remain in queue after hangup
+     * @param array<mixed>|CallUpdateParams $params
      *
      * @throws APIException
      */
     public function update(
         string $callControlID,
-        $queueName,
-        $keepAfterHangup = omit,
+        array|CallUpdateParams $params,
         ?RequestOptions $requestOptions = null,
     ): mixed;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $callControlID,
-        array $params,
-        ?RequestOptions $requestOptions = null,
-    ): mixed;
-
-    /**
-     * @api
-     *
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number]
+     * @param array<mixed>|CallListParams $params
      *
      * @throws APIException
      */
     public function list(
         string $queueName,
-        $page = omit,
-        ?RequestOptions $requestOptions = null
+        array|CallListParams $params,
+        ?RequestOptions $requestOptions = null,
     ): CallListResponse;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        string $queueName,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): CallListResponse;
-
-    /**
-     * @api
-     *
-     * @param string $queueName
+     * @param array<mixed>|CallRemoveParams $params
      *
      * @throws APIException
      */
     public function remove(
         string $callControlID,
-        $queueName,
-        ?RequestOptions $requestOptions = null,
-    ): mixed;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function removeRaw(
-        string $callControlID,
-        array $params,
+        array|CallRemoveParams $params,
         ?RequestOptions $requestOptions = null,
     ): mixed;
 }

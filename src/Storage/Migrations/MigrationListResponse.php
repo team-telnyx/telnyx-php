@@ -13,7 +13,7 @@ use Telnyx\Storage\Buckets\Usage\PaginationMetaSimple;
 
 /**
  * @phpstan-type MigrationListResponseShape = array{
- *   data?: list<MigrationParams>, meta?: PaginationMetaSimple
+ *   data?: list<MigrationParams>|null, meta?: PaginationMetaSimple|null
  * }
  */
 final class MigrationListResponse implements BaseModel, ResponseConverter

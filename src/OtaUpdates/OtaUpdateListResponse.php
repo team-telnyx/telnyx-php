@@ -14,7 +14,7 @@ use Telnyx\OtaUpdates\OtaUpdateListResponse\Data;
 
 /**
  * @phpstan-type OtaUpdateListResponseShape = array{
- *   data?: list<Data>, meta?: PaginationMeta
+ *   data?: list<Data>|null, meta?: PaginationMeta|null
  * }
  */
 final class OtaUpdateListResponse implements BaseModel, ResponseConverter

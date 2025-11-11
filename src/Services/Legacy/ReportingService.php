@@ -12,12 +12,12 @@ use Telnyx\Services\Legacy\Reporting\UsageReportsService;
 final class ReportingService implements ReportingContract
 {
     /**
-     * @@api
+     * @api
      */
     public BatchDetailRecordsService $batchDetailRecords;
 
     /**
-     * @@api
+     * @api
      */
     public UsageReportsService $usageReports;
 

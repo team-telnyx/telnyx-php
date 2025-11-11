@@ -47,7 +47,7 @@ final class BulkSimCardActionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->bulkSimCardActions->list();
+        $result = $this->client->bulkSimCardActions->list([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

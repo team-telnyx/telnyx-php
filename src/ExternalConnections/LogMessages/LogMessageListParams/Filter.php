@@ -13,7 +13,7 @@ use Telnyx\ExternalConnections\LogMessages\LogMessageListParams\Filter\Telephone
  * Filter parameter for log messages (deepObject style). Supports filtering by external_connection_id and telephone_number with eq/contains operations.
  *
  * @phpstan-type FilterShape = array{
- *   externalConnectionID?: string, telephoneNumber?: TelephoneNumber
+ *   external_connection_id?: string|null, telephone_number?: TelephoneNumber|null
  * }
  */
 final class Filter implements BaseModel
@@ -24,14 +24,14 @@ final class Filter implements BaseModel
     /**
      * The external connection ID to filter by or "null" to filter for logs without an external connection ID.
      */
-    #[Api('external_connection_id', optional: true)]
-    public ?string $externalConnectionID;
+    #[Api(optional: true)]
+    public ?string $external_connection_id;
 
     /**
      * Telephone number filter operations for log messages. Use 'eq' for exact matches or 'contains' for partial matches.
      */
-    #[Api('telephone_number', optional: true)]
-    public ?TelephoneNumber $telephoneNumber;
+    #[Api(optional: true)]
+    public ?TelephoneNumber $telephone_number;
 
     public function __construct()
     {
@@ -44,13 +44,13 @@ final class Filter implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $externalConnectionID = null,
-        ?TelephoneNumber $telephoneNumber = null
+        ?string $external_connection_id = null,
+        ?TelephoneNumber $telephone_number = null,
     ): self {
         $obj = new self;
 
-        null !== $externalConnectionID && $obj->externalConnectionID = $externalConnectionID;
-        null !== $telephoneNumber && $obj->telephoneNumber = $telephoneNumber;
+        null !== $external_connection_id && $obj->external_connection_id = $external_connection_id;
+        null !== $telephone_number && $obj->telephone_number = $telephone_number;
 
         return $obj;
     }
@@ -61,7 +61,7 @@ final class Filter implements BaseModel
     public function withExternalConnectionID(string $externalConnectionID): self
     {
         $obj = clone $this;
-        $obj->externalConnectionID = $externalConnectionID;
+        $obj->external_connection_id = $externalConnectionID;
 
         return $obj;
     }
@@ -72,7 +72,7 @@ final class Filter implements BaseModel
     public function withTelephoneNumber(TelephoneNumber $telephoneNumber): self
     {
         $obj = clone $this;
-        $obj->telephoneNumber = $telephoneNumber;
+        $obj->telephone_number = $telephoneNumber;
 
         return $obj;
     }

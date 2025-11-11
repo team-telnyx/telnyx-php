@@ -19,7 +19,7 @@ use Telnyx\Services\Messaging\Rcs\AgentsService;
 final class RcsService implements RcsContract
 {
     /**
-     * @@api
+     * @api
      */
     public AgentsService $agents;
 
@@ -36,35 +36,18 @@ final class RcsService implements RcsContract
      *
      * Adds a test phone number to an RCS agent for testing purposes.
      *
-     * @param string $id
+     * @param array{id: string}|RcInviteTestNumberParams $params
      *
      * @throws APIException
      */
     public function inviteTestNumber(
         string $phoneNumber,
-        $id,
-        ?RequestOptions $requestOptions = null
-    ): RcInviteTestNumberResponse {
-        $params = ['id' => $id];
-
-        return $this->inviteTestNumberRaw($phoneNumber, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function inviteTestNumberRaw(
-        string $phoneNumber,
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|RcInviteTestNumberParams $params,
+        ?RequestOptions $requestOptions = null,
     ): RcInviteTestNumberResponse {
         [$parsed, $options] = RcInviteTestNumberParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
         $id = $parsed['id'];
         unset($parsed['id']);
@@ -83,35 +66,19 @@ final class RcsService implements RcsContract
      *
      * List RCS capabilities of a given batch of phone numbers
      *
-     * @param string $agentID RCS Agent ID
-     * @param list<string> $phoneNumbers List of phone numbers to check
+     * @param array{
+     *   agent_id: string, phone_numbers: list<string>
+     * }|RcListBulkCapabilitiesParams $params
      *
      * @throws APIException
      */
     public function listBulkCapabilities(
-        $agentID,
-        $phoneNumbers,
-        ?RequestOptions $requestOptions = null
-    ): RcListBulkCapabilitiesResponse {
-        $params = ['agentID' => $agentID, 'phoneNumbers' => $phoneNumbers];
-
-        return $this->listBulkCapabilitiesRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listBulkCapabilitiesRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|RcListBulkCapabilitiesParams $params,
+        ?RequestOptions $requestOptions = null,
     ): RcListBulkCapabilitiesResponse {
         [$parsed, $options] = RcListBulkCapabilitiesParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -129,42 +96,21 @@ final class RcsService implements RcsContract
      *
      * List RCS capabilities of a phone number
      *
-     * @param string $agentID
+     * @param array{agent_id: string}|RcRetrieveCapabilitiesParams $params
      *
      * @throws APIException
      */
     public function retrieveCapabilities(
         string $phoneNumber,
-        $agentID,
-        ?RequestOptions $requestOptions = null
-    ): RcGetCapabilitiesResponse {
-        $params = ['agentID' => $agentID];
-
-        return $this->retrieveCapabilitiesRaw(
-            $phoneNumber,
-            $params,
-            $requestOptions
-        );
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function retrieveCapabilitiesRaw(
-        string $phoneNumber,
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|RcRetrieveCapabilitiesParams $params,
+        ?RequestOptions $requestOptions = null,
     ): RcGetCapabilitiesResponse {
         [$parsed, $options] = RcRetrieveCapabilitiesParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
-        $agentID = $parsed['agentID'];
-        unset($parsed['agentID']);
+        $agentID = $parsed['agent_id'];
+        unset($parsed['agent_id']);
 
         // @phpstan-ignore-next-line;
         return $this->client->request(

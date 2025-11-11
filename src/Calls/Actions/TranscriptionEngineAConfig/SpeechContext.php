@@ -9,7 +9,9 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type SpeechContextShape = array{boost?: float, phrases?: list<string>}
+ * @phpstan-type SpeechContextShape = array{
+ *   boost?: float|null, phrases?: list<string>|null
+ * }
  */
 final class SpeechContext implements BaseModel
 {

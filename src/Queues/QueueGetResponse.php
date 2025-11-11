@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Queues\QueueGetResponse\Data;
 
 /**
- * @phpstan-type QueueGetResponseShape = array{data?: Data}
+ * @phpstan-type QueueGetResponseShape = array{data?: Data|null}
  */
 final class QueueGetResponse implements BaseModel, ResponseConverter
 {

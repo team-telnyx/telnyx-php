@@ -12,7 +12,11 @@ use Telnyx\Core\Contracts\BaseModel;
  * Event occurred_at filters.
  *
  * @phpstan-type OccurredAtShape = array{
- *   eq?: string, gt?: string, gte?: string, lt?: string, lte?: string
+ *   eq?: string|null,
+ *   gt?: string|null,
+ *   gte?: string|null,
+ *   lt?: string|null,
+ *   lte?: string|null,
  * }
  */
 final class OccurredAt implements BaseModel

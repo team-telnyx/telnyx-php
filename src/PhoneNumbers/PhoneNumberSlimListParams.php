@@ -19,8 +19,8 @@ use Telnyx\PhoneNumbers\PhoneNumberSlimListParams\Sort;
  *
  * @phpstan-type PhoneNumberSlimListParamsShape = array{
  *   filter?: Filter,
- *   includeConnection?: bool,
- *   includeTags?: bool,
+ *   include_connection?: bool,
+ *   include_tags?: bool,
  *   page?: Page,
  *   sort?: Sort|value-of<Sort>,
  * }
@@ -41,13 +41,13 @@ final class PhoneNumberSlimListParams implements BaseModel
      * Include the connection associated with the phone number.
      */
     #[Api(optional: true)]
-    public ?bool $includeConnection;
+    public ?bool $include_connection;
 
     /**
      * Include the tags associated with the phone number.
      */
     #[Api(optional: true)]
-    public ?bool $includeTags;
+    public ?bool $include_tags;
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
@@ -77,16 +77,16 @@ final class PhoneNumberSlimListParams implements BaseModel
      */
     public static function with(
         ?Filter $filter = null,
-        ?bool $includeConnection = null,
-        ?bool $includeTags = null,
+        ?bool $include_connection = null,
+        ?bool $include_tags = null,
         ?Page $page = null,
         Sort|string|null $sort = null,
     ): self {
         $obj = new self;
 
         null !== $filter && $obj->filter = $filter;
-        null !== $includeConnection && $obj->includeConnection = $includeConnection;
-        null !== $includeTags && $obj->includeTags = $includeTags;
+        null !== $include_connection && $obj->include_connection = $include_connection;
+        null !== $include_tags && $obj->include_tags = $include_tags;
         null !== $page && $obj->page = $page;
         null !== $sort && $obj['sort'] = $sort;
 
@@ -110,7 +110,7 @@ final class PhoneNumberSlimListParams implements BaseModel
     public function withIncludeConnection(bool $includeConnection): self
     {
         $obj = clone $this;
-        $obj->includeConnection = $includeConnection;
+        $obj->include_connection = $includeConnection;
 
         return $obj;
     }
@@ -121,7 +121,7 @@ final class PhoneNumberSlimListParams implements BaseModel
     public function withIncludeTags(bool $includeTags): self
     {
         $obj = clone $this;
-        $obj->includeTags = $includeTags;
+        $obj->include_tags = $includeTags;
 
         return $obj;
     }

@@ -8,15 +8,10 @@ use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Invoices\InvoiceGetResponse;
 use Telnyx\Invoices\InvoiceListParams;
-use Telnyx\Invoices\InvoiceListParams\Page;
-use Telnyx\Invoices\InvoiceListParams\Sort;
 use Telnyx\Invoices\InvoiceListResponse;
 use Telnyx\Invoices\InvoiceRetrieveParams;
-use Telnyx\Invoices\InvoiceRetrieveParams\Action;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\InvoicesContract;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class InvoicesService implements InvoicesContract
 {
@@ -30,35 +25,18 @@ final class InvoicesService implements InvoicesContract
      *
      * Retrieve a single invoice by its unique identifier.
      *
-     * @param Action|value-of<Action> $action Invoice action
+     * @param array{action?: "json"|"link"}|InvoiceRetrieveParams $params
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        $action = omit,
-        ?RequestOptions $requestOptions = null
-    ): InvoiceGetResponse {
-        $params = ['action' => $action];
-
-        return $this->retrieveRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|InvoiceRetrieveParams $params,
+        ?RequestOptions $requestOptions = null,
     ): InvoiceGetResponse {
         [$parsed, $options] = InvoiceRetrieveParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -76,35 +54,19 @@ final class InvoicesService implements InvoicesContract
      *
      * Retrieve a paginated list of invoices.
      *
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
-     * @param Sort|value-of<Sort> $sort specifies the sort order for results
+     * @param array{
+     *   page?: array{number?: int, size?: int}, sort?: "period_start"|"-period_start"
+     * }|InvoiceListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $page = omit,
-        $sort = omit,
-        ?RequestOptions $requestOptions = null
-    ): InvoiceListResponse {
-        $params = ['page' => $page, 'sort' => $sort];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
+        array|InvoiceListParams $params,
         ?RequestOptions $requestOptions = null
     ): InvoiceListResponse {
         [$parsed, $options] = InvoiceListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

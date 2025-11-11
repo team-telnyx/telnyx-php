@@ -14,7 +14,7 @@ use Telnyx\ExternalConnections\Releases\ReleaseListResponse\Data;
 
 /**
  * @phpstan-type ReleaseListResponseShape = array{
- *   data?: list<Data>, meta?: ExternalVoiceIntegrationsPaginationMeta
+ *   data?: list<Data>|null, meta?: ExternalVoiceIntegrationsPaginationMeta|null
  * }
  */
 final class ReleaseListResponse implements BaseModel, ResponseConverter

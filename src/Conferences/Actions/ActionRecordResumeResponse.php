@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type ActionRecordResumeResponseShape = array{
- *   data?: ConferenceCommandResult
+ *   data?: ConferenceCommandResult|null
  * }
  */
 final class ActionRecordResumeResponse implements BaseModel, ResponseConverter

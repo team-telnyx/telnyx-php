@@ -33,9 +33,9 @@ final class ChargesBreakdownTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->chargesBreakdown->retrieve(
-            startDate: new \DateTimeImmutable('2025-05-01')
-        );
+        $result = $this->client->chargesBreakdown->retrieve([
+            'start_date' => '2025-05-01',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -47,9 +47,9 @@ final class ChargesBreakdownTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->chargesBreakdown->retrieve(
-            startDate: new \DateTimeImmutable('2025-05-01')
-        );
+        $result = $this->client->chargesBreakdown->retrieve([
+            'start_date' => '2025-05-01',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

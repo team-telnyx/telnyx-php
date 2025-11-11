@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * Failed verification code creation response.
  *
  * @phpstan-type VerificationCodeErrorShape = array{
- *   error: string, phoneNumber: string
+ *   error: string, phone_number: string
  * }
  */
 final class VerificationCodeError implements BaseModel
@@ -29,15 +29,15 @@ final class VerificationCodeError implements BaseModel
     /**
      * Phone number for which the verification code creation failed.
      */
-    #[Api('phone_number')]
-    public string $phoneNumber;
+    #[Api]
+    public string $phone_number;
 
     /**
      * `new VerificationCodeError()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * VerificationCodeError::with(error: ..., phoneNumber: ...)
+     * VerificationCodeError::with(error: ..., phone_number: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -56,12 +56,12 @@ final class VerificationCodeError implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(string $error, string $phoneNumber): self
+    public static function with(string $error, string $phone_number): self
     {
         $obj = new self;
 
         $obj->error = $error;
-        $obj->phoneNumber = $phoneNumber;
+        $obj->phone_number = $phone_number;
 
         return $obj;
     }
@@ -83,7 +83,7 @@ final class VerificationCodeError implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj->phoneNumber = $phoneNumber;
+        $obj->phone_number = $phoneNumber;
 
         return $obj;
     }

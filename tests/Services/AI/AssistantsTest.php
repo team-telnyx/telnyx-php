@@ -33,11 +33,9 @@ final class AssistantsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ai->assistants->create(
-            instructions: 'instructions',
-            model: 'model',
-            name: 'name'
-        );
+        $result = $this->client->ai->assistants->create([
+            'instructions' => 'instructions', 'model' => 'model', 'name' => 'name',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -49,11 +47,9 @@ final class AssistantsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ai->assistants->create(
-            instructions: 'instructions',
-            model: 'model',
-            name: 'name'
-        );
+        $result = $this->client->ai->assistants->create([
+            'instructions' => 'instructions', 'model' => 'model', 'name' => 'name',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -65,7 +61,7 @@ final class AssistantsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ai->assistants->retrieve('assistant_id');
+        $result = $this->client->ai->assistants->retrieve('assistant_id', []);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -77,7 +73,7 @@ final class AssistantsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ai->assistants->update('assistant_id');
+        $result = $this->client->ai->assistants->update('assistant_id', []);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -115,8 +111,10 @@ final class AssistantsTest extends TestCase
 
         $result = $this->client->ai->assistants->chat(
             'assistant_id',
-            content: 'Tell me a joke about cats',
-            conversationID: '42b20469-1215-4a9a-8964-c36f66b406f4',
+            [
+                'content' => 'Tell me a joke about cats',
+                'conversation_id' => '42b20469-1215-4a9a-8964-c36f66b406f4',
+            ],
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -131,8 +129,10 @@ final class AssistantsTest extends TestCase
 
         $result = $this->client->ai->assistants->chat(
             'assistant_id',
-            content: 'Tell me a joke about cats',
-            conversationID: '42b20469-1215-4a9a-8964-c36f66b406f4',
+            [
+                'content' => 'Tell me a joke about cats',
+                'conversation_id' => '42b20469-1215-4a9a-8964-c36f66b406f4',
+            ],
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -169,10 +169,9 @@ final class AssistantsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ai->assistants->import(
-            apiKeyRef: 'api_key_ref',
-            provider: 'elevenlabs'
-        );
+        $result = $this->client->ai->assistants->import([
+            'api_key_ref' => 'api_key_ref', 'provider' => 'elevenlabs',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -184,10 +183,9 @@ final class AssistantsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ai->assistants->import(
-            apiKeyRef: 'api_key_ref',
-            provider: 'elevenlabs'
-        );
+        $result = $this->client->ai->assistants->import([
+            'api_key_ref' => 'api_key_ref', 'provider' => 'elevenlabs',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

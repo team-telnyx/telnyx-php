@@ -6,7 +6,6 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateParams\Params;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -35,7 +34,8 @@ final class ActionRequirementsTest extends TestCase
         }
 
         $result = $this->client->portingOrders->actionRequirements->list(
-            'porting_order_id'
+            'porting_order_id',
+            []
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -50,8 +50,10 @@ final class ActionRequirementsTest extends TestCase
 
         $result = $this->client->portingOrders->actionRequirements->initiate(
             'id',
-            portingOrderID: 'porting_order_id',
-            params: Params::with(firstName: 'John', lastName: 'Doe'),
+            [
+                'porting_order_id' => 'porting_order_id',
+                'params' => ['first_name' => 'John', 'last_name' => 'Doe'],
+            ],
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -66,8 +68,10 @@ final class ActionRequirementsTest extends TestCase
 
         $result = $this->client->portingOrders->actionRequirements->initiate(
             'id',
-            portingOrderID: 'porting_order_id',
-            params: Params::with(firstName: 'John', lastName: 'Doe'),
+            [
+                'porting_order_id' => 'porting_order_id',
+                'params' => ['first_name' => 'John', 'last_name' => 'Doe'],
+            ],
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType

@@ -47,8 +47,7 @@ final class ExternalVettingTest extends TestCase
 
         $result = $this->client->brand->externalVetting->import(
             'brandId',
-            evpID: 'evpId',
-            vettingID: 'vettingId'
+            ['evpId' => 'evpId', 'vettingId' => 'vettingId']
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -63,8 +62,7 @@ final class ExternalVettingTest extends TestCase
 
         $result = $this->client->brand->externalVetting->import(
             'brandId',
-            evpID: 'evpId',
-            vettingID: 'vettingId'
+            ['evpId' => 'evpId', 'vettingId' => 'vettingId']
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -79,8 +77,7 @@ final class ExternalVettingTest extends TestCase
 
         $result = $this->client->brand->externalVetting->order(
             'brandId',
-            evpID: 'evpId',
-            vettingClass: 'vettingClass'
+            ['evpId' => 'evpId', 'vettingClass' => 'vettingClass']
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -95,8 +92,7 @@ final class ExternalVettingTest extends TestCase
 
         $result = $this->client->brand->externalVetting->order(
             'brandId',
-            evpID: 'evpId',
-            vettingClass: 'vettingClass'
+            ['evpId' => 'evpId', 'vettingClass' => 'vettingClass']
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType

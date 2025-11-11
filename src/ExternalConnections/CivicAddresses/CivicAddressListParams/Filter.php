@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Filter parameter for civic addresses (deepObject style). Supports filtering by country.
  *
- * @phpstan-type FilterShape = array{country?: list<string>}
+ * @phpstan-type FilterShape = array{country?: list<string>|null}
  */
 final class Filter implements BaseModel
 {

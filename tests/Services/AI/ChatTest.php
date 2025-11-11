@@ -5,7 +5,6 @@ namespace Tests\Services\AI;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Telnyx\AI\Chat\ChatCreateCompletionParams\Message;
 use Telnyx\Client;
 use Tests\UnsupportedMockTests;
 
@@ -34,12 +33,12 @@ final class ChatTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ai->chat->createCompletion(
-            messages: [
-                Message::with(content: 'You are a friendly chatbot.', role: 'system'),
-                Message::with(content: 'Hello, world!', role: 'user'),
+        $result = $this->client->ai->chat->createCompletion([
+            'messages' => [
+                ['content' => 'You are a friendly chatbot.', 'role' => 'system'],
+                ['content' => 'Hello, world!', 'role' => 'user'],
             ],
-        );
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -51,12 +50,12 @@ final class ChatTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ai->chat->createCompletion(
-            messages: [
-                Message::with(content: 'You are a friendly chatbot.', role: 'system'),
-                Message::with(content: 'Hello, world!', role: 'user'),
+        $result = $this->client->ai->chat->createCompletion([
+            'messages' => [
+                ['content' => 'You are a friendly chatbot.', 'role' => 'system'],
+                ['content' => 'Hello, world!', 'role' => 'user'],
             ],
-        );
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

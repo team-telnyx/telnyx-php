@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Storage\Buckets\SslCertificate->create
  *
  * @phpstan-type SslCertificateCreateParamsShape = array{
- *   certificate?: string, privateKey?: string
+ *   certificate?: string, private_key?: string
  * }
  */
 final class SslCertificateCreateParams implements BaseModel
@@ -33,8 +33,8 @@ final class SslCertificateCreateParams implements BaseModel
     /**
      * The private key file.
      */
-    #[Api('private_key', optional: true)]
-    public ?string $privateKey;
+    #[Api(optional: true)]
+    public ?string $private_key;
 
     public function __construct()
     {
@@ -48,12 +48,12 @@ final class SslCertificateCreateParams implements BaseModel
      */
     public static function with(
         ?string $certificate = null,
-        ?string $privateKey = null
+        ?string $private_key = null
     ): self {
         $obj = new self;
 
         null !== $certificate && $obj->certificate = $certificate;
-        null !== $privateKey && $obj->privateKey = $privateKey;
+        null !== $private_key && $obj->private_key = $private_key;
 
         return $obj;
     }
@@ -75,7 +75,7 @@ final class SslCertificateCreateParams implements BaseModel
     public function withPrivateKey(string $privateKey): self
     {
         $obj = clone $this;
-        $obj->privateKey = $privateKey;
+        $obj->private_key = $privateKey;
 
         return $obj;
     }

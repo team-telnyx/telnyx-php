@@ -5,14 +5,11 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\AvailablePhoneNumbers\AvailablePhoneNumberListParams;
-use Telnyx\AvailablePhoneNumbers\AvailablePhoneNumberListParams\Filter;
 use Telnyx\AvailablePhoneNumbers\AvailablePhoneNumberListResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AvailablePhoneNumbersContract;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class AvailablePhoneNumbersService implements AvailablePhoneNumbersContract
 {
@@ -26,33 +23,35 @@ final class AvailablePhoneNumbersService implements AvailablePhoneNumbersContrac
      *
      * List available phone numbers
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[phone_number], filter[locality], filter[administrative_area], filter[country_code], filter[national_destination_code], filter[rate_center], filter[phone_number_type], filter[features], filter[limit], filter[best_effort], filter[quickship], filter[reservable], filter[exclude_held_numbers]
+     * @param array{
+     *   filter?: array{
+     *     administrative_area?: string,
+     *     best_effort?: bool,
+     *     country_code?: string,
+     *     exclude_held_numbers?: bool,
+     *     features?: list<"sms"|"mms"|"voice"|"fax"|"emergency"|"hd_voice"|"international_sms"|"local_calling">,
+     *     limit?: int,
+     *     locality?: string,
+     *     national_destination_code?: string,
+     *     phone_number?: array{
+     *       contains?: string, ends_with?: string, starts_with?: string
+     *     },
+     *     phone_number_type?: "local"|"toll_free"|"mobile"|"national"|"shared_cost",
+     *     quickship?: bool,
+     *     rate_center?: string,
+     *     reservable?: bool,
+     *   },
+     * }|AvailablePhoneNumberListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        ?RequestOptions $requestOptions = null
-    ): AvailablePhoneNumberListResponse {
-        $params = ['filter' => $filter];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|AvailablePhoneNumberListParams $params,
+        ?RequestOptions $requestOptions = null,
     ): AvailablePhoneNumberListResponse {
         [$parsed, $options] = AvailablePhoneNumberListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

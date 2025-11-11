@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Texml\Accounts->retrieveTranscriptionsJson
  *
  * @phpstan-type AccountRetrieveTranscriptionsJsonParamsShape = array{
- *   pageSize?: int, pageToken?: string
+ *   PageSize?: int, PageToken?: string
  * }
  */
 final class AccountRetrieveTranscriptionsJsonParams implements BaseModel
@@ -28,13 +28,13 @@ final class AccountRetrieveTranscriptionsJsonParams implements BaseModel
      * The number of records to be displayed on a page.
      */
     #[Api(optional: true)]
-    public ?int $pageSize;
+    public ?int $PageSize;
 
     /**
      * Used to request the next page of results.
      */
     #[Api(optional: true)]
-    public ?string $pageToken;
+    public ?string $PageToken;
 
     public function __construct()
     {
@@ -47,13 +47,13 @@ final class AccountRetrieveTranscriptionsJsonParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?int $pageSize = null,
-        ?string $pageToken = null
+        ?int $PageSize = null,
+        ?string $PageToken = null
     ): self {
         $obj = new self;
 
-        null !== $pageSize && $obj->pageSize = $pageSize;
-        null !== $pageToken && $obj->pageToken = $pageToken;
+        null !== $PageSize && $obj->PageSize = $PageSize;
+        null !== $PageToken && $obj->PageToken = $PageToken;
 
         return $obj;
     }
@@ -64,7 +64,7 @@ final class AccountRetrieveTranscriptionsJsonParams implements BaseModel
     public function withPageSize(int $pageSize): self
     {
         $obj = clone $this;
-        $obj->pageSize = $pageSize;
+        $obj->PageSize = $pageSize;
 
         return $obj;
     }
@@ -75,7 +75,7 @@ final class AccountRetrieveTranscriptionsJsonParams implements BaseModel
     public function withPageToken(string $pageToken): self
     {
         $obj = clone $this;
-        $obj->pageToken = $pageToken;
+        $obj->PageToken = $pageToken;
 
         return $obj;
     }

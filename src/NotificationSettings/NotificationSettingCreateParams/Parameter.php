@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type ParameterShape = array{name?: string, value?: string}
+ * @phpstan-type ParameterShape = array{name?: string|null, value?: string|null}
  */
 final class Parameter implements BaseModel
 {

@@ -13,14 +13,14 @@ use Telnyx\Texml\Accounts\Conferences\ConferenceGetRecordingsResponse\Recording;
 
 /**
  * @phpstan-type ConferenceGetRecordingsResponseShape = array{
- *   end?: int,
- *   firstPageUri?: string,
- *   nextPageUri?: string,
- *   page?: int,
- *   pageSize?: int,
- *   recordings?: list<Recording>,
- *   start?: int,
- *   uri?: string,
+ *   end?: int|null,
+ *   first_page_uri?: string|null,
+ *   next_page_uri?: string|null,
+ *   page?: int|null,
+ *   page_size?: int|null,
+ *   recordings?: list<Recording>|null,
+ *   start?: int|null,
+ *   uri?: string|null,
  * }
  */
 final class ConferenceGetRecordingsResponse implements BaseModel, ResponseConverter
@@ -39,14 +39,14 @@ final class ConferenceGetRecordingsResponse implements BaseModel, ResponseConver
     /**
      * /v2/texml/Accounts/61bf923e-5e4d-4595-a110-56190ea18a1b/Conferences/6dc6cc1a-1ba1-4351-86b8-4c22c95cd98f/Recordings.json?page=0&pagesize=20.
      */
-    #[Api('first_page_uri', optional: true)]
-    public ?string $firstPageUri;
+    #[Api(optional: true)]
+    public ?string $first_page_uri;
 
     /**
      * /v2/texml/Accounts/61bf923e-5e4d-4595-a110-56190ea18a1b/Conferences/6dc6cc1a-1ba1-4351-86b8-4c22c95cd98f/Recordings.json?Page=1&PageSize=1&PageToken=MTY4AjgyNDkwNzIxMQ.
      */
-    #[Api('next_page_uri', optional: true)]
-    public ?string $nextPageUri;
+    #[Api(optional: true)]
+    public ?string $next_page_uri;
 
     /**
      * Current page number, zero-indexed.
@@ -57,8 +57,8 @@ final class ConferenceGetRecordingsResponse implements BaseModel, ResponseConver
     /**
      * The number of items on the page.
      */
-    #[Api('page_size', optional: true)]
-    public ?int $pageSize;
+    #[Api(optional: true)]
+    public ?int $page_size;
 
     /** @var list<Recording>|null $recordings */
     #[Api(list: Recording::class, optional: true)]
@@ -90,10 +90,10 @@ final class ConferenceGetRecordingsResponse implements BaseModel, ResponseConver
      */
     public static function with(
         ?int $end = null,
-        ?string $firstPageUri = null,
-        ?string $nextPageUri = null,
+        ?string $first_page_uri = null,
+        ?string $next_page_uri = null,
         ?int $page = null,
-        ?int $pageSize = null,
+        ?int $page_size = null,
         ?array $recordings = null,
         ?int $start = null,
         ?string $uri = null,
@@ -101,10 +101,10 @@ final class ConferenceGetRecordingsResponse implements BaseModel, ResponseConver
         $obj = new self;
 
         null !== $end && $obj->end = $end;
-        null !== $firstPageUri && $obj->firstPageUri = $firstPageUri;
-        null !== $nextPageUri && $obj->nextPageUri = $nextPageUri;
+        null !== $first_page_uri && $obj->first_page_uri = $first_page_uri;
+        null !== $next_page_uri && $obj->next_page_uri = $next_page_uri;
         null !== $page && $obj->page = $page;
-        null !== $pageSize && $obj->pageSize = $pageSize;
+        null !== $page_size && $obj->page_size = $page_size;
         null !== $recordings && $obj->recordings = $recordings;
         null !== $start && $obj->start = $start;
         null !== $uri && $obj->uri = $uri;
@@ -129,7 +129,7 @@ final class ConferenceGetRecordingsResponse implements BaseModel, ResponseConver
     public function withFirstPageUri(string $firstPageUri): self
     {
         $obj = clone $this;
-        $obj->firstPageUri = $firstPageUri;
+        $obj->first_page_uri = $firstPageUri;
 
         return $obj;
     }
@@ -140,7 +140,7 @@ final class ConferenceGetRecordingsResponse implements BaseModel, ResponseConver
     public function withNextPageUri(string $nextPageUri): self
     {
         $obj = clone $this;
-        $obj->nextPageUri = $nextPageUri;
+        $obj->next_page_uri = $nextPageUri;
 
         return $obj;
     }
@@ -162,7 +162,7 @@ final class ConferenceGetRecordingsResponse implements BaseModel, ResponseConver
     public function withPageSize(int $pageSize): self
     {
         $obj = clone $this;
-        $obj->pageSize = $pageSize;
+        $obj->page_size = $pageSize;
 
         return $obj;
     }

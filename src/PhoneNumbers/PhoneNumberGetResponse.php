@@ -11,7 +11,9 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type PhoneNumberGetResponseShape = array{data?: PhoneNumberDetailed}
+ * @phpstan-type PhoneNumberGetResponseShape = array{
+ *   data?: PhoneNumberDetailed|null
+ * }
  */
 final class PhoneNumberGetResponse implements BaseModel, ResponseConverter
 {

@@ -11,7 +11,9 @@ use Telnyx\PortingOrders\PortingOrderListParams\Filter\PhoneNumbers\PhoneNumber;
 
 /**
  * @phpstan-type PhoneNumbersShape = array{
- *   carrierName?: string, countryCode?: string, phoneNumber?: PhoneNumber
+ *   carrier_name?: string|null,
+ *   country_code?: string|null,
+ *   phone_number?: PhoneNumber|null,
  * }
  */
 final class PhoneNumbers implements BaseModel
@@ -22,20 +24,20 @@ final class PhoneNumbers implements BaseModel
     /**
      * Filter results by old service provider.
      */
-    #[Api('carrier_name', optional: true)]
-    public ?string $carrierName;
+    #[Api(optional: true)]
+    public ?string $carrier_name;
 
     /**
      * Filter results by country ISO 3166-1 alpha-2 code.
      */
-    #[Api('country_code', optional: true)]
-    public ?string $countryCode;
+    #[Api(optional: true)]
+    public ?string $country_code;
 
     /**
      * Phone number pattern filtering operations.
      */
-    #[Api('phone_number', optional: true)]
-    public ?PhoneNumber $phoneNumber;
+    #[Api(optional: true)]
+    public ?PhoneNumber $phone_number;
 
     public function __construct()
     {
@@ -48,15 +50,15 @@ final class PhoneNumbers implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $carrierName = null,
-        ?string $countryCode = null,
-        ?PhoneNumber $phoneNumber = null,
+        ?string $carrier_name = null,
+        ?string $country_code = null,
+        ?PhoneNumber $phone_number = null,
     ): self {
         $obj = new self;
 
-        null !== $carrierName && $obj->carrierName = $carrierName;
-        null !== $countryCode && $obj->countryCode = $countryCode;
-        null !== $phoneNumber && $obj->phoneNumber = $phoneNumber;
+        null !== $carrier_name && $obj->carrier_name = $carrier_name;
+        null !== $country_code && $obj->country_code = $country_code;
+        null !== $phone_number && $obj->phone_number = $phone_number;
 
         return $obj;
     }
@@ -67,7 +69,7 @@ final class PhoneNumbers implements BaseModel
     public function withCarrierName(string $carrierName): self
     {
         $obj = clone $this;
-        $obj->carrierName = $carrierName;
+        $obj->carrier_name = $carrierName;
 
         return $obj;
     }
@@ -78,7 +80,7 @@ final class PhoneNumbers implements BaseModel
     public function withCountryCode(string $countryCode): self
     {
         $obj = clone $this;
-        $obj->countryCode = $countryCode;
+        $obj->country_code = $countryCode;
 
         return $obj;
     }
@@ -89,7 +91,7 @@ final class PhoneNumbers implements BaseModel
     public function withPhoneNumber(PhoneNumber $phoneNumber): self
     {
         $obj = clone $this;
-        $obj->phoneNumber = $phoneNumber;
+        $obj->phone_number = $phoneNumber;
 
         return $obj;
     }

@@ -5,7 +5,6 @@ namespace Tests\Services;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Telnyx\AuthenticationProviders\Settings;
 use Telnyx\Client;
 use Tests\UnsupportedMockTests;
 
@@ -34,15 +33,15 @@ final class AuthenticationProvidersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->authenticationProviders->create(
-            name: 'Okta',
-            settings: Settings::with(
-                idpCertFingerprint: '13:38:C7:BB:C9:FF:4A:70:38:3A:E3:D9:5C:CD:DB:2E:50:1E:80:A7',
-                idpEntityID: 'https://myorg.myidp.com/saml/metadata',
-                idpSSOTargetURL: 'https://myorg.myidp.com/trust/saml2/http-post/sso',
-            ),
-            shortName: 'myorg',
-        );
+        $result = $this->client->authenticationProviders->create([
+            'name' => 'Okta',
+            'settings' => [
+                'idp_cert_fingerprint' => '13:38:C7:BB:C9:FF:4A:70:38:3A:E3:D9:5C:CD:DB:2E:50:1E:80:A7',
+                'idp_entity_id' => 'https://myorg.myidp.com/saml/metadata',
+                'idp_sso_target_url' => 'https://myorg.myidp.com/trust/saml2/http-post/sso',
+            ],
+            'short_name' => 'myorg',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -54,16 +53,16 @@ final class AuthenticationProvidersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->authenticationProviders->create(
-            name: 'Okta',
-            settings: Settings::with(
-                idpCertFingerprint: '13:38:C7:BB:C9:FF:4A:70:38:3A:E3:D9:5C:CD:DB:2E:50:1E:80:A7',
-                idpEntityID: 'https://myorg.myidp.com/saml/metadata',
-                idpSSOTargetURL: 'https://myorg.myidp.com/trust/saml2/http-post/sso',
-            )
-                ->withIdpCertFingerprintAlgorithm('sha256'),
-            shortName: 'myorg',
-        );
+        $result = $this->client->authenticationProviders->create([
+            'name' => 'Okta',
+            'settings' => [
+                'idp_cert_fingerprint' => '13:38:C7:BB:C9:FF:4A:70:38:3A:E3:D9:5C:CD:DB:2E:50:1E:80:A7',
+                'idp_entity_id' => 'https://myorg.myidp.com/saml/metadata',
+                'idp_sso_target_url' => 'https://myorg.myidp.com/trust/saml2/http-post/sso',
+                'idp_cert_fingerprint_algorithm' => 'sha256',
+            ],
+            'short_name' => 'myorg',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -87,7 +86,7 @@ final class AuthenticationProvidersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->authenticationProviders->update('id');
+        $result = $this->client->authenticationProviders->update('id', []);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -99,7 +98,7 @@ final class AuthenticationProvidersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->authenticationProviders->list();
+        $result = $this->client->authenticationProviders->list([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

@@ -14,7 +14,7 @@ use Telnyx\DocReqsRequirementType;
 
 /**
  * @phpstan-type RequirementTypeListResponseShape = array{
- *   data?: list<DocReqsRequirementType>, meta?: PaginationMeta
+ *   data?: list<DocReqsRequirementType>|null, meta?: PaginationMeta|null
  * }
  */
 final class RequirementTypeListResponse implements BaseModel, ResponseConverter

@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type CreatedAtShape = array{
- *   gt?: \DateTimeInterface, lt?: \DateTimeInterface
+ *   gt?: \DateTimeInterface|null, lt?: \DateTimeInterface|null
  * }
  */
 final class CreatedAt implements BaseModel

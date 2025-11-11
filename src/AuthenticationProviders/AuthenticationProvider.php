@@ -11,15 +11,15 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type AuthenticationProviderShape = array{
- *   id?: string,
- *   active?: bool,
- *   createdAt?: \DateTimeInterface,
- *   name?: string,
- *   organizationID?: string,
- *   recordType?: string,
- *   settings?: Settings,
- *   shortName?: string,
- *   updatedAt?: \DateTimeInterface,
+ *   id?: string|null,
+ *   active?: bool|null,
+ *   created_at?: \DateTimeInterface|null,
+ *   name?: string|null,
+ *   organization_id?: string|null,
+ *   record_type?: string|null,
+ *   settings?: Settings|null,
+ *   short_name?: string|null,
+ *   updated_at?: \DateTimeInterface|null,
  * }
  */
 final class AuthenticationProvider implements BaseModel
@@ -42,8 +42,8 @@ final class AuthenticationProvider implements BaseModel
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Api('created_at', optional: true)]
-    public ?\DateTimeInterface $createdAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $created_at;
 
     /**
      * The name associated with the authentication provider.
@@ -54,14 +54,14 @@ final class AuthenticationProvider implements BaseModel
     /**
      * The id from the Organization the authentication provider belongs to.
      */
-    #[Api('organization_id', optional: true)]
-    public ?string $organizationID;
+    #[Api(optional: true)]
+    public ?string $organization_id;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api('record_type', optional: true)]
-    public ?string $recordType;
+    #[Api(optional: true)]
+    public ?string $record_type;
 
     /**
      * The settings associated with the authentication provider.
@@ -72,14 +72,14 @@ final class AuthenticationProvider implements BaseModel
     /**
      * The short name associated with the authentication provider. This must be unique and URL-friendly, as it's going to be part of the login URL.
      */
-    #[Api('short_name', optional: true)]
-    public ?string $shortName;
+    #[Api(optional: true)]
+    public ?string $short_name;
 
     /**
      * ISO 8601 formatted date indicating when the resource was updated.
      */
-    #[Api('updated_at', optional: true)]
-    public ?\DateTimeInterface $updatedAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $updated_at;
 
     public function __construct()
     {
@@ -94,25 +94,25 @@ final class AuthenticationProvider implements BaseModel
     public static function with(
         ?string $id = null,
         ?bool $active = null,
-        ?\DateTimeInterface $createdAt = null,
+        ?\DateTimeInterface $created_at = null,
         ?string $name = null,
-        ?string $organizationID = null,
-        ?string $recordType = null,
+        ?string $organization_id = null,
+        ?string $record_type = null,
         ?Settings $settings = null,
-        ?string $shortName = null,
-        ?\DateTimeInterface $updatedAt = null,
+        ?string $short_name = null,
+        ?\DateTimeInterface $updated_at = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj->id = $id;
         null !== $active && $obj->active = $active;
-        null !== $createdAt && $obj->createdAt = $createdAt;
+        null !== $created_at && $obj->created_at = $created_at;
         null !== $name && $obj->name = $name;
-        null !== $organizationID && $obj->organizationID = $organizationID;
-        null !== $recordType && $obj->recordType = $recordType;
+        null !== $organization_id && $obj->organization_id = $organization_id;
+        null !== $record_type && $obj->record_type = $record_type;
         null !== $settings && $obj->settings = $settings;
-        null !== $shortName && $obj->shortName = $shortName;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
+        null !== $short_name && $obj->short_name = $short_name;
+        null !== $updated_at && $obj->updated_at = $updated_at;
 
         return $obj;
     }
@@ -145,7 +145,7 @@ final class AuthenticationProvider implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }
@@ -167,7 +167,7 @@ final class AuthenticationProvider implements BaseModel
     public function withOrganizationID(string $organizationID): self
     {
         $obj = clone $this;
-        $obj->organizationID = $organizationID;
+        $obj->organization_id = $organizationID;
 
         return $obj;
     }
@@ -178,7 +178,7 @@ final class AuthenticationProvider implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType;
+        $obj->record_type = $recordType;
 
         return $obj;
     }
@@ -200,7 +200,7 @@ final class AuthenticationProvider implements BaseModel
     public function withShortName(string $shortName): self
     {
         $obj = clone $this;
-        $obj->shortName = $shortName;
+        $obj->short_name = $shortName;
 
         return $obj;
     }
@@ -211,7 +211,7 @@ final class AuthenticationProvider implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $obj->updated_at = $updatedAt;
 
         return $obj;
     }

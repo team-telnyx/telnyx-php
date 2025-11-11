@@ -11,14 +11,14 @@ use Telnyx\PortingOrders\Actions\ActionShareResponse\Data\Permission;
 
 /**
  * @phpstan-type DataShape = array{
- *   id?: string,
- *   token?: string,
- *   createdAt?: \DateTimeInterface,
- *   expiresAt?: \DateTimeInterface,
- *   expiresInSeconds?: int,
- *   permissions?: list<value-of<Permission>>,
- *   portingOrderID?: string,
- *   recordType?: string,
+ *   id?: string|null,
+ *   token?: string|null,
+ *   created_at?: \DateTimeInterface|null,
+ *   expires_at?: \DateTimeInterface|null,
+ *   expires_in_seconds?: int|null,
+ *   permissions?: list<value-of<Permission>>|null,
+ *   porting_order_id?: string|null,
+ *   record_type?: string|null,
  * }
  */
 final class Data implements BaseModel
@@ -41,20 +41,20 @@ final class Data implements BaseModel
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Api('created_at', optional: true)]
-    public ?\DateTimeInterface $createdAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $created_at;
 
     /**
      * ISO 8601 formatted date indicating when the sharing token expires.
      */
-    #[Api('expires_at', optional: true)]
-    public ?\DateTimeInterface $expiresAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $expires_at;
 
     /**
      * The number of seconds until the sharing token expires.
      */
-    #[Api('expires_in_seconds', optional: true)]
-    public ?int $expiresInSeconds;
+    #[Api(optional: true)]
+    public ?int $expires_in_seconds;
 
     /**
      * The permissions granted to the sharing token.
@@ -67,14 +67,14 @@ final class Data implements BaseModel
     /**
      * Identifies the porting order resource being shared.
      */
-    #[Api('porting_order_id', optional: true)]
-    public ?string $portingOrderID;
+    #[Api(optional: true)]
+    public ?string $porting_order_id;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api('record_type', optional: true)]
-    public ?string $recordType;
+    #[Api(optional: true)]
+    public ?string $record_type;
 
     public function __construct()
     {
@@ -91,23 +91,23 @@ final class Data implements BaseModel
     public static function with(
         ?string $id = null,
         ?string $token = null,
-        ?\DateTimeInterface $createdAt = null,
-        ?\DateTimeInterface $expiresAt = null,
-        ?int $expiresInSeconds = null,
+        ?\DateTimeInterface $created_at = null,
+        ?\DateTimeInterface $expires_at = null,
+        ?int $expires_in_seconds = null,
         ?array $permissions = null,
-        ?string $portingOrderID = null,
-        ?string $recordType = null,
+        ?string $porting_order_id = null,
+        ?string $record_type = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj->id = $id;
         null !== $token && $obj->token = $token;
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $expiresAt && $obj->expiresAt = $expiresAt;
-        null !== $expiresInSeconds && $obj->expiresInSeconds = $expiresInSeconds;
+        null !== $created_at && $obj->created_at = $created_at;
+        null !== $expires_at && $obj->expires_at = $expires_at;
+        null !== $expires_in_seconds && $obj->expires_in_seconds = $expires_in_seconds;
         null !== $permissions && $obj['permissions'] = $permissions;
-        null !== $portingOrderID && $obj->portingOrderID = $portingOrderID;
-        null !== $recordType && $obj->recordType = $recordType;
+        null !== $porting_order_id && $obj->porting_order_id = $porting_order_id;
+        null !== $record_type && $obj->record_type = $record_type;
 
         return $obj;
     }
@@ -140,7 +140,7 @@ final class Data implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }
@@ -151,7 +151,7 @@ final class Data implements BaseModel
     public function withExpiresAt(\DateTimeInterface $expiresAt): self
     {
         $obj = clone $this;
-        $obj->expiresAt = $expiresAt;
+        $obj->expires_at = $expiresAt;
 
         return $obj;
     }
@@ -162,7 +162,7 @@ final class Data implements BaseModel
     public function withExpiresInSeconds(int $expiresInSeconds): self
     {
         $obj = clone $this;
-        $obj->expiresInSeconds = $expiresInSeconds;
+        $obj->expires_in_seconds = $expiresInSeconds;
 
         return $obj;
     }
@@ -186,7 +186,7 @@ final class Data implements BaseModel
     public function withPortingOrderID(string $portingOrderID): self
     {
         $obj = clone $this;
-        $obj->portingOrderID = $portingOrderID;
+        $obj->porting_order_id = $portingOrderID;
 
         return $obj;
     }
@@ -197,7 +197,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType;
+        $obj->record_type = $recordType;
 
         return $obj;
     }

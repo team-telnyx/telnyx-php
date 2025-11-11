@@ -5,42 +5,30 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Networks\NetworkCreateParams;
 use Telnyx\Networks\NetworkDeleteResponse;
 use Telnyx\Networks\NetworkGetResponse;
+use Telnyx\Networks\NetworkListInterfacesParams;
 use Telnyx\Networks\NetworkListInterfacesResponse;
-use Telnyx\Networks\NetworkListParams\Filter;
-use Telnyx\Networks\NetworkListParams\Page;
+use Telnyx\Networks\NetworkListParams;
 use Telnyx\Networks\NetworkListResponse;
 use Telnyx\Networks\NetworkNewResponse;
+use Telnyx\Networks\NetworkUpdateParams;
 use Telnyx\Networks\NetworkUpdateResponse;
 use Telnyx\RequestOptions;
-
-use const Telnyx\Core\OMIT as omit;
 
 interface NetworksContract
 {
     /**
      * @api
      *
-     * @param string $name a user specified name for the network
+     * @param array<mixed>|NetworkCreateParams $params
      *
      * @throws APIException
      */
     public function create(
-        $name,
-        ?RequestOptions $requestOptions = null
-    ): NetworkNewResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|NetworkCreateParams $params,
+        ?RequestOptions $requestOptions = null,
     ): NetworkNewResponse;
 
     /**
@@ -56,52 +44,25 @@ interface NetworksContract
     /**
      * @api
      *
-     * @param string $name a user specified name for the network
+     * @param array<mixed>|NetworkUpdateParams $params
      *
      * @throws APIException
      */
     public function update(
         string $id,
-        $name,
-        ?RequestOptions $requestOptions = null
+        array|NetworkUpdateParams $params,
+        ?RequestOptions $requestOptions = null,
     ): NetworkUpdateResponse;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): NetworkUpdateResponse;
-
-    /**
-     * @api
-     *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[name]
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param array<mixed>|NetworkListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): NetworkListResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
+        array|NetworkListParams $params,
         ?RequestOptions $requestOptions = null
     ): NetworkListResponse;
 
@@ -118,28 +79,13 @@ interface NetworksContract
     /**
      * @api
      *
-     * @param \Telnyx\Networks\NetworkListInterfacesParams\Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[name], filter[type], filter[status]
-     * @param \Telnyx\Networks\NetworkListInterfacesParams\Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param array<mixed>|NetworkListInterfacesParams $params
      *
      * @throws APIException
      */
     public function listInterfaces(
         string $id,
-        $filter = omit,
-        $page = omit,
+        array|NetworkListInterfacesParams $params,
         ?RequestOptions $requestOptions = null,
-    ): NetworkListInterfacesResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listInterfacesRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): NetworkListInterfacesResponse;
 }

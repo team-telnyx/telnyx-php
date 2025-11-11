@@ -11,7 +11,9 @@ use Telnyx\Webhooks\DeliveryUpdateWebhookEvent\Data;
 use Telnyx\Webhooks\DeliveryUpdateWebhookEvent\Meta;
 
 /**
- * @phpstan-type DeliveryUpdateWebhookEventShape = array{data?: Data, meta?: Meta}
+ * @phpstan-type DeliveryUpdateWebhookEventShape = array{
+ *   data?: Data|null, meta?: Meta|null
+ * }
  */
 final class DeliveryUpdateWebhookEvent implements BaseModel
 {

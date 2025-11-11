@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * The settings associated with speech to text for the voice assistant. This is only relevant if the assistant uses a text-to-text language model. Any assistant using a model with native audio support (e.g. `fixie-ai/ultravox-v0_4`) will ignore this field.
  *
- * @phpstan-type TranscriptionConfigShape = array{model?: string}
+ * @phpstan-type TranscriptionConfigShape = array{model?: string|null}
  */
 final class TranscriptionConfig implements BaseModel
 {

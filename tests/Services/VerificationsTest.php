@@ -47,10 +47,10 @@ final class VerificationsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->verifications->triggerCall(
-            phoneNumber: '+13035551234',
-            verifyProfileID: '12ade33a-21c0-473b-b055-b3c836e1c292',
-        );
+        $result = $this->client->verifications->triggerCall([
+            'phone_number' => '+13035551234',
+            'verify_profile_id' => '12ade33a-21c0-473b-b055-b3c836e1c292',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -62,10 +62,10 @@ final class VerificationsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->verifications->triggerCall(
-            phoneNumber: '+13035551234',
-            verifyProfileID: '12ade33a-21c0-473b-b055-b3c836e1c292',
-        );
+        $result = $this->client->verifications->triggerCall([
+            'phone_number' => '+13035551234',
+            'verify_profile_id' => '12ade33a-21c0-473b-b055-b3c836e1c292',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -77,10 +77,10 @@ final class VerificationsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->verifications->triggerFlashcall(
-            phoneNumber: '+13035551234',
-            verifyProfileID: '12ade33a-21c0-473b-b055-b3c836e1c292',
-        );
+        $result = $this->client->verifications->triggerFlashcall([
+            'phone_number' => '+13035551234',
+            'verify_profile_id' => '12ade33a-21c0-473b-b055-b3c836e1c292',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -92,10 +92,10 @@ final class VerificationsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->verifications->triggerFlashcall(
-            phoneNumber: '+13035551234',
-            verifyProfileID: '12ade33a-21c0-473b-b055-b3c836e1c292',
-        );
+        $result = $this->client->verifications->triggerFlashcall([
+            'phone_number' => '+13035551234',
+            'verify_profile_id' => '12ade33a-21c0-473b-b055-b3c836e1c292',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -107,10 +107,10 @@ final class VerificationsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->verifications->triggerSMS(
-            phoneNumber: '+13035551234',
-            verifyProfileID: '12ade33a-21c0-473b-b055-b3c836e1c292',
-        );
+        $result = $this->client->verifications->triggerSMS([
+            'phone_number' => '+13035551234',
+            'verify_profile_id' => '12ade33a-21c0-473b-b055-b3c836e1c292',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -122,10 +122,10 @@ final class VerificationsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->verifications->triggerSMS(
-            phoneNumber: '+13035551234',
-            verifyProfileID: '12ade33a-21c0-473b-b055-b3c836e1c292',
-        );
+        $result = $this->client->verifications->triggerSMS([
+            'phone_number' => '+13035551234',
+            'verify_profile_id' => '12ade33a-21c0-473b-b055-b3c836e1c292',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * Created at date range filtering operations.
  *
  * @phpstan-type CreatedAtShape = array{
- *   gte?: \DateTimeInterface, lte?: \DateTimeInterface
+ *   gte?: \DateTimeInterface|null, lte?: \DateTimeInterface|null
  * }
  */
 final class CreatedAt implements BaseModel

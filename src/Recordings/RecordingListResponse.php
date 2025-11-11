@@ -13,7 +13,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type RecordingListResponseShape = array{
- *   data?: list<RecordingResponseData>, meta?: PaginationMeta
+ *   data?: list<RecordingResponseData>|null, meta?: PaginationMeta|null
  * }
  */
 final class RecordingListResponse implements BaseModel, ResponseConverter

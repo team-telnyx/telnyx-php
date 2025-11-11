@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type ConferenceGetResponseShape = array{data?: Conference}
+ * @phpstan-type ConferenceGetResponseShape = array{data?: Conference|null}
  */
 final class ConferenceGetResponse implements BaseModel, ResponseConverter
 {

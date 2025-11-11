@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type OutboundVoiceProfileDeleteResponseShape = array{
- *   data?: OutboundVoiceProfile
+ *   data?: OutboundVoiceProfile|null
  * }
  */
 final class OutboundVoiceProfileDeleteResponse implements BaseModel, ResponseConverter

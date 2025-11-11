@@ -33,7 +33,9 @@ final class EmbeddingsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ai->embeddings->create(bucketName: 'bucket_name');
+        $result = $this->client->ai->embeddings->create([
+            'bucket_name' => 'bucket_name',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -45,7 +47,9 @@ final class EmbeddingsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ai->embeddings->create(bucketName: 'bucket_name');
+        $result = $this->client->ai->embeddings->create([
+            'bucket_name' => 'bucket_name',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -69,7 +73,7 @@ final class EmbeddingsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ai->embeddings->list();
+        $result = $this->client->ai->embeddings->list([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -81,10 +85,9 @@ final class EmbeddingsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ai->embeddings->similaritySearch(
-            bucketName: 'bucket_name',
-            query: 'query'
-        );
+        $result = $this->client->ai->embeddings->similaritySearch([
+            'bucket_name' => 'bucket_name', 'query' => 'query',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -96,10 +99,9 @@ final class EmbeddingsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ai->embeddings->similaritySearch(
-            bucketName: 'bucket_name',
-            query: 'query'
-        );
+        $result = $this->client->ai->embeddings->similaritySearch([
+            'bucket_name' => 'bucket_name', 'query' => 'query',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -111,10 +113,9 @@ final class EmbeddingsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ai->embeddings->url(
-            bucketName: 'bucket_name',
-            url: 'url'
-        );
+        $result = $this->client->ai->embeddings->url([
+            'bucket_name' => 'bucket_name', 'url' => 'url',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -126,10 +127,9 @@ final class EmbeddingsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ai->embeddings->url(
-            bucketName: 'bucket_name',
-            url: 'url'
-        );
+        $result = $this->client->ai->embeddings->url([
+            'bucket_name' => 'bucket_name', 'url' => 'url',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

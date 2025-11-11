@@ -11,7 +11,7 @@ use Telnyx\Services\MessagingTollfree\VerificationService;
 final class MessagingTollfreeService implements MessagingTollfreeContract
 {
     /**
-     * @@api
+     * @api
      */
     public VerificationService $verification;
 

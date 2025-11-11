@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * To number filtering operations.
  *
- * @phpstan-type ToShape = array{eq?: string}
+ * @phpstan-type ToShape = array{eq?: string|null}
  */
 final class To implements BaseModel
 {

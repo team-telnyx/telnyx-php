@@ -12,7 +12,10 @@ use Telnyx\Core\Contracts\BaseModel;
  * Current physical location data of a given SIM card. Accuracy is given in meters.
  *
  * @phpstan-type CurrentDeviceLocationShape = array{
- *   accuracy?: int, accuracyUnit?: string, latitude?: string, longitude?: string
+ *   accuracy?: int|null,
+ *   accuracy_unit?: string|null,
+ *   latitude?: string|null,
+ *   longitude?: string|null,
  * }
  */
 final class CurrentDeviceLocation implements BaseModel
@@ -23,8 +26,8 @@ final class CurrentDeviceLocation implements BaseModel
     #[Api(optional: true)]
     public ?int $accuracy;
 
-    #[Api('accuracy_unit', optional: true)]
-    public ?string $accuracyUnit;
+    #[Api(optional: true)]
+    public ?string $accuracy_unit;
 
     #[Api(optional: true)]
     public ?string $latitude;
@@ -44,14 +47,14 @@ final class CurrentDeviceLocation implements BaseModel
      */
     public static function with(
         ?int $accuracy = null,
-        ?string $accuracyUnit = null,
+        ?string $accuracy_unit = null,
         ?string $latitude = null,
         ?string $longitude = null,
     ): self {
         $obj = new self;
 
         null !== $accuracy && $obj->accuracy = $accuracy;
-        null !== $accuracyUnit && $obj->accuracyUnit = $accuracyUnit;
+        null !== $accuracy_unit && $obj->accuracy_unit = $accuracy_unit;
         null !== $latitude && $obj->latitude = $latitude;
         null !== $longitude && $obj->longitude = $longitude;
 
@@ -69,7 +72,7 @@ final class CurrentDeviceLocation implements BaseModel
     public function withAccuracyUnit(string $accuracyUnit): self
     {
         $obj = clone $this;
-        $obj->accuracyUnit = $accuracyUnit;
+        $obj->accuracy_unit = $accuracyUnit;
 
         return $obj;
     }

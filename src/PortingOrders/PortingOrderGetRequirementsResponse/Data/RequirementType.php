@@ -12,12 +12,12 @@ use Telnyx\Core\Contracts\BaseModel;
  * Identifies the requirement type that meets this requirement.
  *
  * @phpstan-type RequirementTypeShape = array{
- *   id?: string,
- *   acceptanceCriteria?: array<string, mixed>,
- *   description?: string,
- *   example?: string,
- *   name?: string,
- *   type?: string,
+ *   id?: string|null,
+ *   acceptance_criteria?: array<string,mixed>|null,
+ *   description?: string|null,
+ *   example?: string|null,
+ *   name?: string|null,
+ *   type?: string|null,
  * }
  */
 final class RequirementType implements BaseModel
@@ -34,10 +34,10 @@ final class RequirementType implements BaseModel
     /**
      * The acceptance criteria for the requirement type.
      *
-     * @var array<string, mixed>|null $acceptanceCriteria
+     * @var array<string,mixed>|null $acceptance_criteria
      */
-    #[Api('acceptance_criteria', map: 'mixed', optional: true)]
-    public ?array $acceptanceCriteria;
+    #[Api(map: 'mixed', optional: true)]
+    public ?array $acceptance_criteria;
 
     /**
      * A description of the requirement type.
@@ -73,11 +73,11 @@ final class RequirementType implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param array<string, mixed> $acceptanceCriteria
+     * @param array<string,mixed> $acceptance_criteria
      */
     public static function with(
         ?string $id = null,
-        ?array $acceptanceCriteria = null,
+        ?array $acceptance_criteria = null,
         ?string $description = null,
         ?string $example = null,
         ?string $name = null,
@@ -86,7 +86,7 @@ final class RequirementType implements BaseModel
         $obj = new self;
 
         null !== $id && $obj->id = $id;
-        null !== $acceptanceCriteria && $obj->acceptanceCriteria = $acceptanceCriteria;
+        null !== $acceptance_criteria && $obj->acceptance_criteria = $acceptance_criteria;
         null !== $description && $obj->description = $description;
         null !== $example && $obj->example = $example;
         null !== $name && $obj->name = $name;
@@ -109,12 +109,12 @@ final class RequirementType implements BaseModel
     /**
      * The acceptance criteria for the requirement type.
      *
-     * @param array<string, mixed> $acceptanceCriteria
+     * @param array<string,mixed> $acceptanceCriteria
      */
     public function withAcceptanceCriteria(array $acceptanceCriteria): self
     {
         $obj = clone $this;
-        $obj->acceptanceCriteria = $acceptanceCriteria;
+        $obj->acceptance_criteria = $acceptanceCriteria;
 
         return $obj;
     }

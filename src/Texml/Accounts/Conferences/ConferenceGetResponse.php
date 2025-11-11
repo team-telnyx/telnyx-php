@@ -14,18 +14,18 @@ use Telnyx\Texml\Accounts\Conferences\ConferenceGetResponse\Status;
 
 /**
  * @phpstan-type ConferenceGetResponseShape = array{
- *   accountSid?: string,
- *   apiVersion?: string,
- *   callSidEndingConference?: string,
- *   dateCreated?: string,
- *   dateUpdated?: string,
- *   friendlyName?: string,
- *   reasonConferenceEnded?: value-of<ReasonConferenceEnded>,
- *   region?: string,
- *   sid?: string,
- *   status?: value-of<Status>,
- *   subresourceUris?: array<string, mixed>,
- *   uri?: string,
+ *   account_sid?: string|null,
+ *   api_version?: string|null,
+ *   call_sid_ending_conference?: string|null,
+ *   date_created?: string|null,
+ *   date_updated?: string|null,
+ *   friendly_name?: string|null,
+ *   reason_conference_ended?: value-of<ReasonConferenceEnded>|null,
+ *   region?: string|null,
+ *   sid?: string|null,
+ *   status?: value-of<Status>|null,
+ *   subresource_uris?: array<string,mixed>|null,
+ *   uri?: string|null,
  * }
  */
 final class ConferenceGetResponse implements BaseModel, ResponseConverter
@@ -38,50 +38,46 @@ final class ConferenceGetResponse implements BaseModel, ResponseConverter
     /**
      * The id of the account the resource belongs to.
      */
-    #[Api('account_sid', optional: true)]
-    public ?string $accountSid;
+    #[Api(optional: true)]
+    public ?string $account_sid;
 
     /**
      * The version of the API that was used to make the request.
      */
-    #[Api('api_version', optional: true)]
-    public ?string $apiVersion;
+    #[Api(optional: true)]
+    public ?string $api_version;
 
     /**
      * Caller ID, if present.
      */
-    #[Api('call_sid_ending_conference', optional: true)]
-    public ?string $callSidEndingConference;
+    #[Api(optional: true)]
+    public ?string $call_sid_ending_conference;
 
     /**
      * The timestamp of when the resource was created.
      */
-    #[Api('date_created', optional: true)]
-    public ?string $dateCreated;
+    #[Api(optional: true)]
+    public ?string $date_created;
 
     /**
      * The timestamp of when the resource was last updated.
      */
-    #[Api('date_updated', optional: true)]
-    public ?string $dateUpdated;
+    #[Api(optional: true)]
+    public ?string $date_updated;
 
     /**
      * A string that you assigned to describe this conference room.
      */
-    #[Api('friendly_name', optional: true)]
-    public ?string $friendlyName;
+    #[Api(optional: true)]
+    public ?string $friendly_name;
 
     /**
      * The reason why a conference ended. When a conference is in progress, will be null.
      *
-     * @var value-of<ReasonConferenceEnded>|null $reasonConferenceEnded
+     * @var value-of<ReasonConferenceEnded>|null $reason_conference_ended
      */
-    #[Api(
-        'reason_conference_ended',
-        enum: ReasonConferenceEnded::class,
-        optional: true,
-    )]
-    public ?string $reasonConferenceEnded;
+    #[Api(enum: ReasonConferenceEnded::class, optional: true)]
+    public ?string $reason_conference_ended;
 
     /**
      * A string representing the region where the conference is hosted.
@@ -106,10 +102,10 @@ final class ConferenceGetResponse implements BaseModel, ResponseConverter
     /**
      * A list of related resources identified by their relative URIs.
      *
-     * @var array<string, mixed>|null $subresourceUris
+     * @var array<string,mixed>|null $subresource_uris
      */
-    #[Api('subresource_uris', map: 'mixed', optional: true)]
-    public ?array $subresourceUris;
+    #[Api(map: 'mixed', optional: true)]
+    public ?array $subresource_uris;
 
     /**
      * The relative URI for this conference.
@@ -127,37 +123,37 @@ final class ConferenceGetResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ReasonConferenceEnded|value-of<ReasonConferenceEnded> $reasonConferenceEnded
+     * @param ReasonConferenceEnded|value-of<ReasonConferenceEnded> $reason_conference_ended
      * @param Status|value-of<Status> $status
-     * @param array<string, mixed> $subresourceUris
+     * @param array<string,mixed> $subresource_uris
      */
     public static function with(
-        ?string $accountSid = null,
-        ?string $apiVersion = null,
-        ?string $callSidEndingConference = null,
-        ?string $dateCreated = null,
-        ?string $dateUpdated = null,
-        ?string $friendlyName = null,
-        ReasonConferenceEnded|string|null $reasonConferenceEnded = null,
+        ?string $account_sid = null,
+        ?string $api_version = null,
+        ?string $call_sid_ending_conference = null,
+        ?string $date_created = null,
+        ?string $date_updated = null,
+        ?string $friendly_name = null,
+        ReasonConferenceEnded|string|null $reason_conference_ended = null,
         ?string $region = null,
         ?string $sid = null,
         Status|string|null $status = null,
-        ?array $subresourceUris = null,
+        ?array $subresource_uris = null,
         ?string $uri = null,
     ): self {
         $obj = new self;
 
-        null !== $accountSid && $obj->accountSid = $accountSid;
-        null !== $apiVersion && $obj->apiVersion = $apiVersion;
-        null !== $callSidEndingConference && $obj->callSidEndingConference = $callSidEndingConference;
-        null !== $dateCreated && $obj->dateCreated = $dateCreated;
-        null !== $dateUpdated && $obj->dateUpdated = $dateUpdated;
-        null !== $friendlyName && $obj->friendlyName = $friendlyName;
-        null !== $reasonConferenceEnded && $obj['reasonConferenceEnded'] = $reasonConferenceEnded;
+        null !== $account_sid && $obj->account_sid = $account_sid;
+        null !== $api_version && $obj->api_version = $api_version;
+        null !== $call_sid_ending_conference && $obj->call_sid_ending_conference = $call_sid_ending_conference;
+        null !== $date_created && $obj->date_created = $date_created;
+        null !== $date_updated && $obj->date_updated = $date_updated;
+        null !== $friendly_name && $obj->friendly_name = $friendly_name;
+        null !== $reason_conference_ended && $obj['reason_conference_ended'] = $reason_conference_ended;
         null !== $region && $obj->region = $region;
         null !== $sid && $obj->sid = $sid;
         null !== $status && $obj['status'] = $status;
-        null !== $subresourceUris && $obj->subresourceUris = $subresourceUris;
+        null !== $subresource_uris && $obj->subresource_uris = $subresource_uris;
         null !== $uri && $obj->uri = $uri;
 
         return $obj;
@@ -169,7 +165,7 @@ final class ConferenceGetResponse implements BaseModel, ResponseConverter
     public function withAccountSid(string $accountSid): self
     {
         $obj = clone $this;
-        $obj->accountSid = $accountSid;
+        $obj->account_sid = $accountSid;
 
         return $obj;
     }
@@ -180,7 +176,7 @@ final class ConferenceGetResponse implements BaseModel, ResponseConverter
     public function withAPIVersion(string $apiVersion): self
     {
         $obj = clone $this;
-        $obj->apiVersion = $apiVersion;
+        $obj->api_version = $apiVersion;
 
         return $obj;
     }
@@ -192,7 +188,7 @@ final class ConferenceGetResponse implements BaseModel, ResponseConverter
         string $callSidEndingConference
     ): self {
         $obj = clone $this;
-        $obj->callSidEndingConference = $callSidEndingConference;
+        $obj->call_sid_ending_conference = $callSidEndingConference;
 
         return $obj;
     }
@@ -203,7 +199,7 @@ final class ConferenceGetResponse implements BaseModel, ResponseConverter
     public function withDateCreated(string $dateCreated): self
     {
         $obj = clone $this;
-        $obj->dateCreated = $dateCreated;
+        $obj->date_created = $dateCreated;
 
         return $obj;
     }
@@ -214,7 +210,7 @@ final class ConferenceGetResponse implements BaseModel, ResponseConverter
     public function withDateUpdated(string $dateUpdated): self
     {
         $obj = clone $this;
-        $obj->dateUpdated = $dateUpdated;
+        $obj->date_updated = $dateUpdated;
 
         return $obj;
     }
@@ -225,7 +221,7 @@ final class ConferenceGetResponse implements BaseModel, ResponseConverter
     public function withFriendlyName(string $friendlyName): self
     {
         $obj = clone $this;
-        $obj->friendlyName = $friendlyName;
+        $obj->friendly_name = $friendlyName;
 
         return $obj;
     }
@@ -239,7 +235,7 @@ final class ConferenceGetResponse implements BaseModel, ResponseConverter
         ReasonConferenceEnded|string $reasonConferenceEnded
     ): self {
         $obj = clone $this;
-        $obj['reasonConferenceEnded'] = $reasonConferenceEnded;
+        $obj['reason_conference_ended'] = $reasonConferenceEnded;
 
         return $obj;
     }
@@ -282,12 +278,12 @@ final class ConferenceGetResponse implements BaseModel, ResponseConverter
     /**
      * A list of related resources identified by their relative URIs.
      *
-     * @param array<string, mixed> $subresourceUris
+     * @param array<string,mixed> $subresourceUris
      */
     public function withSubresourceUris(array $subresourceUris): self
     {
         $obj = clone $this;
-        $obj->subresourceUris = $subresourceUris;
+        $obj->subresource_uris = $subresourceUris;
 
         return $obj;
     }

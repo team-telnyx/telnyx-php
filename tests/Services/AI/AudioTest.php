@@ -33,9 +33,9 @@ final class AudioTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ai->audio->transcribe(
-            model: 'distil-whisper/distil-large-v2'
-        );
+        $result = $this->client->ai->audio->transcribe([
+            'model' => 'distil-whisper/distil-large-v2',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -47,9 +47,9 @@ final class AudioTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ai->audio->transcribe(
-            model: 'distil-whisper/distil-large-v2'
-        );
+        $result = $this->client->ai->audio->transcribe([
+            'model' => 'distil-whisper/distil-large-v2',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

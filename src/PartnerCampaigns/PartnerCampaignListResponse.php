@@ -12,7 +12,9 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type PartnerCampaignListResponseShape = array{
- *   page?: int, records?: list<TelnyxDownstreamCampaign>, totalRecords?: int
+ *   page?: int|null,
+ *   records?: list<TelnyxDownstreamCampaign>|null,
+ *   totalRecords?: int|null,
  * }
  */
 final class PartnerCampaignListResponse implements BaseModel, ResponseConverter

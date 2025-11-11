@@ -6,40 +6,21 @@ namespace Telnyx\ServiceContracts\Texml\Accounts\Calls;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
-use Telnyx\Texml\Accounts\Calls\Recordings\RecordingRecordingSidJsonParams\Status;
+use Telnyx\Texml\Accounts\Calls\Recordings\RecordingRecordingSidJsonParams;
 use Telnyx\Texml\Accounts\Calls\Recordings\RecordingRecordingSidJsonResponse;
-
-use const Telnyx\Core\OMIT as omit;
 
 interface RecordingsContract
 {
     /**
      * @api
      *
-     * @param string $accountSid
-     * @param string $callSid
-     * @param Status|value-of<Status> $status
+     * @param array<mixed>|RecordingRecordingSidJsonParams $params
      *
      * @throws APIException
      */
     public function recordingSidJson(
         string $recordingSid,
-        $accountSid,
-        $callSid,
-        $status = omit,
-        ?RequestOptions $requestOptions = null,
-    ): RecordingRecordingSidJsonResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function recordingSidJsonRaw(
-        string $recordingSid,
-        array $params,
+        array|RecordingRecordingSidJsonParams $params,
         ?RequestOptions $requestOptions = null,
     ): RecordingRecordingSidJsonResponse;
 }

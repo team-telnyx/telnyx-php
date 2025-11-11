@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\GlobalIPUsage\GlobalIPUsageGetResponse\Data;
 
 /**
- * @phpstan-type GlobalIPUsageGetResponseShape = array{data?: list<Data>}
+ * @phpstan-type GlobalIPUsageGetResponseShape = array{data?: list<Data>|null}
  */
 final class GlobalIPUsageGetResponse implements BaseModel, ResponseConverter
 {

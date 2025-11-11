@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type TelephonyCredentialUpdateResponseShape = array{
- *   data?: TelephonyCredential
+ *   data?: TelephonyCredential|null
  * }
  */
 final class TelephonyCredentialUpdateResponse implements BaseModel, ResponseConverter

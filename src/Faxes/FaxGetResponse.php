@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type FaxGetResponseShape = array{data?: Fax}
+ * @phpstan-type FaxGetResponseShape = array{data?: Fax|null}
  */
 final class FaxGetResponse implements BaseModel, ResponseConverter
 {

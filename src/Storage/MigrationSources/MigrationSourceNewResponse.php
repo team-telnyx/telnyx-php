@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type MigrationSourceNewResponseShape = array{
- *   data?: MigrationSourceParams
+ *   data?: MigrationSourceParams|null
  * }
  */
 final class MigrationSourceNewResponse implements BaseModel, ResponseConverter

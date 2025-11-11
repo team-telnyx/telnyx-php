@@ -11,10 +11,10 @@ use Telnyx\List\ListGetAllResponse\Data\Number;
 
 /**
  * @phpstan-type DataShape = array{
- *   numberOfChannels?: int,
- *   numbers?: list<Number>,
- *   zoneID?: string,
- *   zoneName?: string,
+ *   number_of_channels?: int|null,
+ *   numbers?: list<Number>|null,
+ *   zone_id?: string|null,
+ *   zone_name?: string|null,
  * }
  */
 final class Data implements BaseModel
@@ -22,18 +22,18 @@ final class Data implements BaseModel
     /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Api('number_of_channels', optional: true)]
-    public ?int $numberOfChannels;
+    #[Api(optional: true)]
+    public ?int $number_of_channels;
 
     /** @var list<Number>|null $numbers */
     #[Api(list: Number::class, optional: true)]
     public ?array $numbers;
 
-    #[Api('zone_id', optional: true)]
-    public ?string $zoneID;
+    #[Api(optional: true)]
+    public ?string $zone_id;
 
-    #[Api('zone_name', optional: true)]
-    public ?string $zoneName;
+    #[Api(optional: true)]
+    public ?string $zone_name;
 
     public function __construct()
     {
@@ -48,17 +48,17 @@ final class Data implements BaseModel
      * @param list<Number> $numbers
      */
     public static function with(
-        ?int $numberOfChannels = null,
+        ?int $number_of_channels = null,
         ?array $numbers = null,
-        ?string $zoneID = null,
-        ?string $zoneName = null,
+        ?string $zone_id = null,
+        ?string $zone_name = null,
     ): self {
         $obj = new self;
 
-        null !== $numberOfChannels && $obj->numberOfChannels = $numberOfChannels;
+        null !== $number_of_channels && $obj->number_of_channels = $number_of_channels;
         null !== $numbers && $obj->numbers = $numbers;
-        null !== $zoneID && $obj->zoneID = $zoneID;
-        null !== $zoneName && $obj->zoneName = $zoneName;
+        null !== $zone_id && $obj->zone_id = $zone_id;
+        null !== $zone_name && $obj->zone_name = $zone_name;
 
         return $obj;
     }
@@ -66,7 +66,7 @@ final class Data implements BaseModel
     public function withNumberOfChannels(int $numberOfChannels): self
     {
         $obj = clone $this;
-        $obj->numberOfChannels = $numberOfChannels;
+        $obj->number_of_channels = $numberOfChannels;
 
         return $obj;
     }
@@ -85,7 +85,7 @@ final class Data implements BaseModel
     public function withZoneID(string $zoneID): self
     {
         $obj = clone $this;
-        $obj->zoneID = $zoneID;
+        $obj->zone_id = $zoneID;
 
         return $obj;
     }
@@ -93,7 +93,7 @@ final class Data implements BaseModel
     public function withZoneName(string $zoneName): self
     {
         $obj = clone $this;
-        $obj->zoneName = $zoneName;
+        $obj->zone_name = $zoneName;
 
         return $obj;
     }

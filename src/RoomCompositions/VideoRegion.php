@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * @phpstan-type VideoRegionShape = array{
  *   height?: int|null,
- *   maxColumns?: int|null,
- *   maxRows?: int|null,
- *   videoSources?: list<string>,
+ *   max_columns?: int|null,
+ *   max_rows?: int|null,
+ *   video_sources?: list<string>|null,
  *   width?: int|null,
- *   xPos?: int|null,
- *   yPos?: int|null,
- *   zPos?: int|null,
+ *   x_pos?: int|null,
+ *   y_pos?: int|null,
+ *   z_pos?: int|null,
  * }
  */
 final class VideoRegion implements BaseModel
@@ -34,22 +34,22 @@ final class VideoRegion implements BaseModel
     /**
      * Maximum number of columns of the region's placement grid. By default, the region has as many columns as needed to layout all the specified video sources.
      */
-    #[Api('max_columns', nullable: true, optional: true)]
-    public ?int $maxColumns;
+    #[Api(nullable: true, optional: true)]
+    public ?int $max_columns;
 
     /**
      * Maximum number of rows of the region's placement grid. By default, the region has as many rows as needed to layout all the specified video sources.
      */
-    #[Api('max_rows', nullable: true, optional: true)]
-    public ?int $maxRows;
+    #[Api(nullable: true, optional: true)]
+    public ?int $max_rows;
 
     /**
      * Array of video recording ids to be composed in the region. Can be "*" to specify all video recordings in the session.
      *
-     * @var list<string>|null $videoSources
+     * @var list<string>|null $video_sources
      */
-    #[Api('video_sources', list: 'string', optional: true)]
-    public ?array $videoSources;
+    #[Api(list: 'string', optional: true)]
+    public ?array $video_sources;
 
     /**
      * Width of the video region.
@@ -60,20 +60,20 @@ final class VideoRegion implements BaseModel
     /**
      * X axis value (in pixels) of the region's upper left corner relative to the upper left corner of the whole room composition viewport.
      */
-    #[Api('x_pos', nullable: true, optional: true)]
-    public ?int $xPos;
+    #[Api(nullable: true, optional: true)]
+    public ?int $x_pos;
 
     /**
      * Y axis value (in pixels) of the region's upper left corner relative to the upper left corner of the whole room composition viewport.
      */
-    #[Api('y_pos', nullable: true, optional: true)]
-    public ?int $yPos;
+    #[Api(nullable: true, optional: true)]
+    public ?int $y_pos;
 
     /**
      * Regions with higher z_pos values are stacked on top of regions with lower z_pos values.
      */
-    #[Api('z_pos', nullable: true, optional: true)]
-    public ?int $zPos;
+    #[Api(nullable: true, optional: true)]
+    public ?int $z_pos;
 
     public function __construct()
     {
@@ -85,28 +85,28 @@ final class VideoRegion implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $videoSources
+     * @param list<string> $video_sources
      */
     public static function with(
         ?int $height = null,
-        ?int $maxColumns = null,
-        ?int $maxRows = null,
-        ?array $videoSources = null,
+        ?int $max_columns = null,
+        ?int $max_rows = null,
+        ?array $video_sources = null,
         ?int $width = null,
-        ?int $xPos = null,
-        ?int $yPos = null,
-        ?int $zPos = null,
+        ?int $x_pos = null,
+        ?int $y_pos = null,
+        ?int $z_pos = null,
     ): self {
         $obj = new self;
 
         null !== $height && $obj->height = $height;
-        null !== $maxColumns && $obj->maxColumns = $maxColumns;
-        null !== $maxRows && $obj->maxRows = $maxRows;
-        null !== $videoSources && $obj->videoSources = $videoSources;
+        null !== $max_columns && $obj->max_columns = $max_columns;
+        null !== $max_rows && $obj->max_rows = $max_rows;
+        null !== $video_sources && $obj->video_sources = $video_sources;
         null !== $width && $obj->width = $width;
-        null !== $xPos && $obj->xPos = $xPos;
-        null !== $yPos && $obj->yPos = $yPos;
-        null !== $zPos && $obj->zPos = $zPos;
+        null !== $x_pos && $obj->x_pos = $x_pos;
+        null !== $y_pos && $obj->y_pos = $y_pos;
+        null !== $z_pos && $obj->z_pos = $z_pos;
 
         return $obj;
     }
@@ -128,7 +128,7 @@ final class VideoRegion implements BaseModel
     public function withMaxColumns(?int $maxColumns): self
     {
         $obj = clone $this;
-        $obj->maxColumns = $maxColumns;
+        $obj->max_columns = $maxColumns;
 
         return $obj;
     }
@@ -139,7 +139,7 @@ final class VideoRegion implements BaseModel
     public function withMaxRows(?int $maxRows): self
     {
         $obj = clone $this;
-        $obj->maxRows = $maxRows;
+        $obj->max_rows = $maxRows;
 
         return $obj;
     }
@@ -152,7 +152,7 @@ final class VideoRegion implements BaseModel
     public function withVideoSources(array $videoSources): self
     {
         $obj = clone $this;
-        $obj->videoSources = $videoSources;
+        $obj->video_sources = $videoSources;
 
         return $obj;
     }
@@ -174,7 +174,7 @@ final class VideoRegion implements BaseModel
     public function withXPos(?int $xPos): self
     {
         $obj = clone $this;
-        $obj->xPos = $xPos;
+        $obj->x_pos = $xPos;
 
         return $obj;
     }
@@ -185,7 +185,7 @@ final class VideoRegion implements BaseModel
     public function withYPos(?int $yPos): self
     {
         $obj = clone $this;
-        $obj->yPos = $yPos;
+        $obj->y_pos = $yPos;
 
         return $obj;
     }
@@ -196,7 +196,7 @@ final class VideoRegion implements BaseModel
     public function withZPos(?int $zPos): self
     {
         $obj = clone $this;
-        $obj->zPos = $zPos;
+        $obj->z_pos = $zPos;
 
         return $obj;
     }

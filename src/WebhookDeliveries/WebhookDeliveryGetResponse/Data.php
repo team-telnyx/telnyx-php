@@ -15,14 +15,14 @@ use Telnyx\WebhookDeliveries\WebhookDeliveryGetResponse\Data\Webhook;
  * Record of all attempts to deliver a webhook.
  *
  * @phpstan-type DataShape = array{
- *   id?: string,
- *   attempts?: list<Attempt>,
- *   finishedAt?: \DateTimeInterface,
- *   recordType?: string,
- *   startedAt?: \DateTimeInterface,
- *   status?: value-of<Status>,
- *   userID?: string,
- *   webhook?: Webhook,
+ *   id?: string|null,
+ *   attempts?: list<Attempt>|null,
+ *   finished_at?: \DateTimeInterface|null,
+ *   record_type?: string|null,
+ *   started_at?: \DateTimeInterface|null,
+ *   status?: value-of<Status>|null,
+ *   user_id?: string|null,
+ *   webhook?: Webhook|null,
  * }
  */
 final class Data implements BaseModel
@@ -47,20 +47,20 @@ final class Data implements BaseModel
     /**
      * ISO 8601 timestamp indicating when the last webhook response has been received.
      */
-    #[Api('finished_at', optional: true)]
-    public ?\DateTimeInterface $finishedAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $finished_at;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api('record_type', optional: true)]
-    public ?string $recordType;
+    #[Api(optional: true)]
+    public ?string $record_type;
 
     /**
      * ISO 8601 timestamp indicating when the first request attempt was initiated.
      */
-    #[Api('started_at', optional: true)]
-    public ?\DateTimeInterface $startedAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $started_at;
 
     /**
      * Delivery status: 'delivered' when successfuly delivered or 'failed' if all attempts have failed.
@@ -73,8 +73,8 @@ final class Data implements BaseModel
     /**
      * Uniquely identifies the user that owns the webhook_delivery record.
      */
-    #[Api('user_id', optional: true)]
-    public ?string $userID;
+    #[Api(optional: true)]
+    public ?string $user_id;
 
     /**
      * Original webhook JSON data. Payload fields vary according to event type.
@@ -98,22 +98,22 @@ final class Data implements BaseModel
     public static function with(
         ?string $id = null,
         ?array $attempts = null,
-        ?\DateTimeInterface $finishedAt = null,
-        ?string $recordType = null,
-        ?\DateTimeInterface $startedAt = null,
+        ?\DateTimeInterface $finished_at = null,
+        ?string $record_type = null,
+        ?\DateTimeInterface $started_at = null,
         Status|string|null $status = null,
-        ?string $userID = null,
+        ?string $user_id = null,
         ?Webhook $webhook = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj->id = $id;
         null !== $attempts && $obj->attempts = $attempts;
-        null !== $finishedAt && $obj->finishedAt = $finishedAt;
-        null !== $recordType && $obj->recordType = $recordType;
-        null !== $startedAt && $obj->startedAt = $startedAt;
+        null !== $finished_at && $obj->finished_at = $finished_at;
+        null !== $record_type && $obj->record_type = $record_type;
+        null !== $started_at && $obj->started_at = $started_at;
         null !== $status && $obj['status'] = $status;
-        null !== $userID && $obj->userID = $userID;
+        null !== $user_id && $obj->user_id = $user_id;
         null !== $webhook && $obj->webhook = $webhook;
 
         return $obj;
@@ -149,7 +149,7 @@ final class Data implements BaseModel
     public function withFinishedAt(\DateTimeInterface $finishedAt): self
     {
         $obj = clone $this;
-        $obj->finishedAt = $finishedAt;
+        $obj->finished_at = $finishedAt;
 
         return $obj;
     }
@@ -160,7 +160,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType;
+        $obj->record_type = $recordType;
 
         return $obj;
     }
@@ -171,7 +171,7 @@ final class Data implements BaseModel
     public function withStartedAt(\DateTimeInterface $startedAt): self
     {
         $obj = clone $this;
-        $obj->startedAt = $startedAt;
+        $obj->started_at = $startedAt;
 
         return $obj;
     }
@@ -195,7 +195,7 @@ final class Data implements BaseModel
     public function withUserID(string $userID): self
     {
         $obj = clone $this;
-        $obj->userID = $userID;
+        $obj->user_id = $userID;
 
         return $obj;
     }

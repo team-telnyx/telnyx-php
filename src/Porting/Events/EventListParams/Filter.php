@@ -14,7 +14,9 @@ use Telnyx\Porting\Events\EventListParams\Filter\Type;
  * Consolidated filter parameter (deepObject style). Originally: filter[type], filter[porting_order_id], filter[created_at][gte], filter[created_at][lte].
  *
  * @phpstan-type FilterShape = array{
- *   createdAt?: CreatedAt, portingOrderID?: string, type?: value-of<Type>
+ *   created_at?: CreatedAt|null,
+ *   porting_order_id?: string|null,
+ *   type?: value-of<Type>|null,
  * }
  */
 final class Filter implements BaseModel
@@ -25,14 +27,14 @@ final class Filter implements BaseModel
     /**
      * Created at date range filtering operations.
      */
-    #[Api('created_at', optional: true)]
-    public ?CreatedAt $createdAt;
+    #[Api(optional: true)]
+    public ?CreatedAt $created_at;
 
     /**
      * Filter by porting order ID.
      */
-    #[Api('porting_order_id', optional: true)]
-    public ?string $portingOrderID;
+    #[Api(optional: true)]
+    public ?string $porting_order_id;
 
     /**
      * Filter by event type.
@@ -55,14 +57,14 @@ final class Filter implements BaseModel
      * @param Type|value-of<Type> $type
      */
     public static function with(
-        ?CreatedAt $createdAt = null,
-        ?string $portingOrderID = null,
+        ?CreatedAt $created_at = null,
+        ?string $porting_order_id = null,
         Type|string|null $type = null,
     ): self {
         $obj = new self;
 
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $portingOrderID && $obj->portingOrderID = $portingOrderID;
+        null !== $created_at && $obj->created_at = $created_at;
+        null !== $porting_order_id && $obj->porting_order_id = $porting_order_id;
         null !== $type && $obj['type'] = $type;
 
         return $obj;
@@ -74,7 +76,7 @@ final class Filter implements BaseModel
     public function withCreatedAt(CreatedAt $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }
@@ -85,7 +87,7 @@ final class Filter implements BaseModel
     public function withPortingOrderID(string $portingOrderID): self
     {
         $obj = clone $this;
-        $obj->portingOrderID = $portingOrderID;
+        $obj->porting_order_id = $portingOrderID;
 
         return $obj;
     }

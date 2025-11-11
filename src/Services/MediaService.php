@@ -8,7 +8,6 @@ use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Media\MediaGetResponse;
 use Telnyx\Media\MediaListParams;
-use Telnyx\Media\MediaListParams\Filter;
 use Telnyx\Media\MediaListResponse;
 use Telnyx\Media\MediaUpdateParams;
 use Telnyx\Media\MediaUpdateResponse;
@@ -16,8 +15,6 @@ use Telnyx\Media\MediaUploadParams;
 use Telnyx\Media\MediaUploadResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MediaContract;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class MediaService implements MediaContract
 {
@@ -51,37 +48,18 @@ final class MediaService implements MediaContract
      *
      * Updates a stored media file.
      *
-     * @param string $mediaURL The URL where the media to be stored in Telnyx network is currently hosted. The maximum allowed size is 20 MB.
-     * @param int $ttlSecs The number of seconds after which the media resource will be deleted, defaults to 2 days. The maximum allowed vale is 630720000, which translates to 20 years.
+     * @param array{media_url?: string, ttl_secs?: int}|MediaUpdateParams $params
      *
      * @throws APIException
      */
     public function update(
         string $mediaName,
-        $mediaURL = omit,
-        $ttlSecs = omit,
+        array|MediaUpdateParams $params,
         ?RequestOptions $requestOptions = null,
-    ): MediaUpdateResponse {
-        $params = ['mediaURL' => $mediaURL, 'ttlSecs' => $ttlSecs];
-
-        return $this->updateRaw($mediaName, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $mediaName,
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): MediaUpdateResponse {
         [$parsed, $options] = MediaUpdateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -99,33 +77,19 @@ final class MediaService implements MediaContract
      *
      * Returns a list of stored media files.
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[content_type][]
+     * @param array{
+     *   filter?: array{content_type?: list<string>}
+     * }|MediaListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        ?RequestOptions $requestOptions = null
-    ): MediaListResponse {
-        $params = ['filter' => $filter];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
+        array|MediaListParams $params,
         ?RequestOptions $requestOptions = null
     ): MediaListResponse {
         [$parsed, $options] = MediaListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -184,39 +148,19 @@ final class MediaService implements MediaContract
      *
      * Upload media file to Telnyx so it can be used with other Telnyx services
      *
-     * @param string $mediaURL The URL where the media to be stored in Telnyx network is currently hosted. The maximum allowed size is 20 MB.
-     * @param string $mediaName the unique identifier of a file
-     * @param int $ttlSecs The number of seconds after which the media resource will be deleted, defaults to 2 days. The maximum allowed vale is 630720000, which translates to 20 years.
+     * @param array{
+     *   media_url: string, media_name?: string, ttl_secs?: int
+     * }|MediaUploadParams $params
      *
      * @throws APIException
      */
     public function upload(
-        $mediaURL,
-        $mediaName = omit,
-        $ttlSecs = omit,
-        ?RequestOptions $requestOptions = null,
-    ): MediaUploadResponse {
-        $params = [
-            'mediaURL' => $mediaURL, 'mediaName' => $mediaName, 'ttlSecs' => $ttlSecs,
-        ];
-
-        return $this->uploadRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function uploadRaw(
-        array $params,
+        array|MediaUploadParams $params,
         ?RequestOptions $requestOptions = null
     ): MediaUploadResponse {
         [$parsed, $options] = MediaUploadParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

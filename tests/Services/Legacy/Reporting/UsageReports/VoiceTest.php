@@ -33,10 +33,10 @@ final class VoiceTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->legacy->reporting->usageReports->voice->create(
-            endTime: new \DateTimeImmutable('2024-02-01T00:00:00Z'),
-            startTime: new \DateTimeImmutable('2024-02-01T00:00:00Z'),
-        );
+        $result = $this->client->legacy->reporting->usageReports->voice->create([
+            'end_time' => '2024-02-01T00:00:00Z',
+            'start_time' => '2024-02-01T00:00:00Z',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -48,10 +48,10 @@ final class VoiceTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->legacy->reporting->usageReports->voice->create(
-            endTime: new \DateTimeImmutable('2024-02-01T00:00:00Z'),
-            startTime: new \DateTimeImmutable('2024-02-01T00:00:00Z'),
-        );
+        $result = $this->client->legacy->reporting->usageReports->voice->create([
+            'end_time' => '2024-02-01T00:00:00Z',
+            'start_time' => '2024-02-01T00:00:00Z',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -77,7 +77,7 @@ final class VoiceTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->legacy->reporting->usageReports->voice->list();
+        $result = $this->client->legacy->reporting->usageReports->voice->list([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

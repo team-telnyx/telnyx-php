@@ -7,12 +7,9 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\InventoryCoverage\InventoryCoverageListParams;
-use Telnyx\InventoryCoverage\InventoryCoverageListParams\Filter;
 use Telnyx\InventoryCoverage\InventoryCoverageListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\InventoryCoverageContract;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class InventoryCoverageService implements InventoryCoverageContract
 {
@@ -26,33 +23,28 @@ final class InventoryCoverageService implements InventoryCoverageContract
      *
      * Creates an inventory coverage request. If locality, npa or national_destination_code is used in groupBy, and no region or locality filters are used, the whole paginated set is returned.
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[npa], filter[nxx], filter[administrative_area], filter[phone_number_type], filter[country_code], filter[count], filter[features], filter[groupBy]
+     * @param array{
+     *   filter?: array{
+     *     administrative_area?: string,
+     *     count?: bool,
+     *     country_code?: "AT"|"AU"|"BE"|"BG"|"CA"|"CH"|"CN"|"CY"|"CZ"|"DE"|"DK"|"EE"|"ES"|"FI"|"FR"|"GB"|"GR"|"HU"|"HR"|"IE"|"IT"|"LT"|"LU"|"LV"|"NL"|"NZ"|"MX"|"NO"|"PL"|"PT"|"RO"|"SE"|"SG"|"SI"|"SK"|"US",
+     *     features?: list<"sms"|"mms"|"voice"|"fax"|"emergency">,
+     *     groupBy?: "locality"|"npa"|"national_destination_code",
+     *     npa?: int,
+     *     nxx?: int,
+     *     phone_number_type?: "local"|"toll_free"|"national"|"mobile"|"landline"|"shared_cost",
+     *   },
+     * }|InventoryCoverageListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        ?RequestOptions $requestOptions = null
-    ): InventoryCoverageListResponse {
-        $params = ['filter' => $filter];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|InventoryCoverageListParams $params,
+        ?RequestOptions $requestOptions = null,
     ): InventoryCoverageListResponse {
         [$parsed, $options] = InventoryCoverageListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

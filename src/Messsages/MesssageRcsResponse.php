@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Messsages\MesssageRcsResponse\Data;
 
 /**
- * @phpstan-type MesssageRcsResponseShape = array{data?: Data}
+ * @phpstan-type MesssageRcsResponseShape = array{data?: Data|null}
  */
 final class MesssageRcsResponse implements BaseModel, ResponseConverter
 {

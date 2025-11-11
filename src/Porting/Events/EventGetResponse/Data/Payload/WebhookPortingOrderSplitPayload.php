@@ -15,7 +15,9 @@ use Telnyx\Porting\Events\EventGetResponse\Data\Payload\WebhookPortingOrderSplit
  * The webhook payload for the porting_order.split event.
  *
  * @phpstan-type WebhookPortingOrderSplitPayloadShape = array{
- *   from?: From, portingPhoneNumbers?: list<PortingPhoneNumber>, to?: To
+ *   from?: From|null,
+ *   porting_phone_numbers?: list<PortingPhoneNumber>|null,
+ *   to?: To|null,
  * }
  */
 final class WebhookPortingOrderSplitPayload implements BaseModel
@@ -32,14 +34,10 @@ final class WebhookPortingOrderSplitPayload implements BaseModel
     /**
      * The list of porting phone numbers that were moved to the new porting order.
      *
-     * @var list<PortingPhoneNumber>|null $portingPhoneNumbers
+     * @var list<PortingPhoneNumber>|null $porting_phone_numbers
      */
-    #[Api(
-        'porting_phone_numbers',
-        list: PortingPhoneNumber::class,
-        optional: true
-    )]
-    public ?array $portingPhoneNumbers;
+    #[Api(list: PortingPhoneNumber::class, optional: true)]
+    public ?array $porting_phone_numbers;
 
     /**
      * The new porting order that the phone numbers was moved to.
@@ -57,17 +55,17 @@ final class WebhookPortingOrderSplitPayload implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<PortingPhoneNumber> $portingPhoneNumbers
+     * @param list<PortingPhoneNumber> $porting_phone_numbers
      */
     public static function with(
         ?From $from = null,
-        ?array $portingPhoneNumbers = null,
+        ?array $porting_phone_numbers = null,
         ?To $to = null
     ): self {
         $obj = new self;
 
         null !== $from && $obj->from = $from;
-        null !== $portingPhoneNumbers && $obj->portingPhoneNumbers = $portingPhoneNumbers;
+        null !== $porting_phone_numbers && $obj->porting_phone_numbers = $porting_phone_numbers;
         null !== $to && $obj->to = $to;
 
         return $obj;
@@ -92,7 +90,7 @@ final class WebhookPortingOrderSplitPayload implements BaseModel
     public function withPortingPhoneNumbers(array $portingPhoneNumbers): self
     {
         $obj = clone $this;
-        $obj->portingPhoneNumbers = $portingPhoneNumbers;
+        $obj->porting_phone_numbers = $portingPhoneNumbers;
 
         return $obj;
     }

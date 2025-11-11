@@ -17,7 +17,7 @@ use Telnyx\WirelessBlocklistValues\WirelessBlocklistValueListResponse\Data\Plmn;
 
 /**
  * @phpstan-type WirelessBlocklistValueListResponseShape = array{
- *   data?: list<Country>|list<Mcc>|list<Plmn>, meta?: PaginationMeta
+ *   data?: null|list<Country>|list<Mcc>|list<Plmn>, meta?: PaginationMeta|null
  * }
  */
 final class WirelessBlocklistValueListResponse implements BaseModel, ResponseConverter

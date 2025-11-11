@@ -12,7 +12,7 @@ use Telnyx\NetworkCoverage\AvailableService;
 /**
  * Available service filtering operations.
  *
- * @phpstan-type ContainsShape = array{contains?: value-of<AvailableService>}
+ * @phpstan-type ContainsShape = array{contains?: value-of<AvailableService>|null}
  */
 final class Contains implements BaseModel
 {

@@ -19,8 +19,8 @@ use Telnyx\SimCards\SimCardListParams\Sort;
  *
  * @phpstan-type SimCardListParamsShape = array{
  *   filter?: Filter,
- *   filterSimCardGroupID?: string,
- *   includeSimCardGroup?: bool,
+ *   filter_sim_card_group_id_?: string,
+ *   include_sim_card_group?: bool,
  *   page?: Page,
  *   sort?: Sort|value-of<Sort>,
  * }
@@ -41,13 +41,13 @@ final class SimCardListParams implements BaseModel
      * A valid SIM card group ID.
      */
     #[Api(optional: true)]
-    public ?string $filterSimCardGroupID;
+    public ?string $filter_sim_card_group_id_;
 
     /**
      * It includes the associated SIM card group object in the response when present.
      */
     #[Api(optional: true)]
-    public ?bool $includeSimCardGroup;
+    public ?bool $include_sim_card_group;
 
     /**
      * Consolidated pagination parameter (deepObject style). Originally: page[number], page[size].
@@ -77,16 +77,16 @@ final class SimCardListParams implements BaseModel
      */
     public static function with(
         ?Filter $filter = null,
-        ?string $filterSimCardGroupID = null,
-        ?bool $includeSimCardGroup = null,
+        ?string $filter_sim_card_group_id_ = null,
+        ?bool $include_sim_card_group = null,
         ?Page $page = null,
         Sort|string|null $sort = null,
     ): self {
         $obj = new self;
 
         null !== $filter && $obj->filter = $filter;
-        null !== $filterSimCardGroupID && $obj->filterSimCardGroupID = $filterSimCardGroupID;
-        null !== $includeSimCardGroup && $obj->includeSimCardGroup = $includeSimCardGroup;
+        null !== $filter_sim_card_group_id_ && $obj->filter_sim_card_group_id_ = $filter_sim_card_group_id_;
+        null !== $include_sim_card_group && $obj->include_sim_card_group = $include_sim_card_group;
         null !== $page && $obj->page = $page;
         null !== $sort && $obj['sort'] = $sort;
 
@@ -110,7 +110,7 @@ final class SimCardListParams implements BaseModel
     public function withFilterSimCardGroupID(string $filterSimCardGroupID): self
     {
         $obj = clone $this;
-        $obj->filterSimCardGroupID = $filterSimCardGroupID;
+        $obj->filter_sim_card_group_id_ = $filterSimCardGroupID;
 
         return $obj;
     }
@@ -121,7 +121,7 @@ final class SimCardListParams implements BaseModel
     public function withIncludeSimCardGroup(bool $includeSimCardGroup): self
     {
         $obj = clone $this;
-        $obj->includeSimCardGroup = $includeSimCardGroup;
+        $obj->include_sim_card_group = $includeSimCardGroup;
 
         return $obj;
     }

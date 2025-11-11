@@ -17,9 +17,9 @@ use Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionCreateParams\
  * @see Telnyx\PortingOrders\PhoneNumberExtensions->create
  *
  * @phpstan-type PhoneNumberExtensionCreateParamsShape = array{
- *   activationRanges: list<ActivationRange>,
- *   extensionRange: ExtensionRange,
- *   portingPhoneNumberID: string,
+ *   activation_ranges: list<ActivationRange>,
+ *   extension_range: ExtensionRange,
+ *   porting_phone_number_id: string,
  * }
  */
 final class PhoneNumberExtensionCreateParams implements BaseModel
@@ -31,19 +31,19 @@ final class PhoneNumberExtensionCreateParams implements BaseModel
     /**
      * Specifies the activation ranges for this porting phone number extension. The activation range must be within the extension range and should not overlap with other activation ranges.
      *
-     * @var list<ActivationRange> $activationRanges
+     * @var list<ActivationRange> $activation_ranges
      */
-    #[Api('activation_ranges', list: ActivationRange::class)]
-    public array $activationRanges;
+    #[Api(list: ActivationRange::class)]
+    public array $activation_ranges;
 
-    #[Api('extension_range')]
-    public ExtensionRange $extensionRange;
+    #[Api]
+    public ExtensionRange $extension_range;
 
     /**
      * Identifies the porting phone number associated with this porting phone number extension.
      */
-    #[Api('porting_phone_number_id')]
-    public string $portingPhoneNumberID;
+    #[Api]
+    public string $porting_phone_number_id;
 
     /**
      * `new PhoneNumberExtensionCreateParams()` is missing required properties by the API.
@@ -51,7 +51,7 @@ final class PhoneNumberExtensionCreateParams implements BaseModel
      * To enforce required parameters use
      * ```
      * PhoneNumberExtensionCreateParams::with(
-     *   activationRanges: ..., extensionRange: ..., portingPhoneNumberID: ...
+     *   activation_ranges: ..., extension_range: ..., porting_phone_number_id: ...
      * )
      * ```
      *
@@ -74,18 +74,18 @@ final class PhoneNumberExtensionCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ActivationRange> $activationRanges
+     * @param list<ActivationRange> $activation_ranges
      */
     public static function with(
-        array $activationRanges,
-        ExtensionRange $extensionRange,
-        string $portingPhoneNumberID,
+        array $activation_ranges,
+        ExtensionRange $extension_range,
+        string $porting_phone_number_id,
     ): self {
         $obj = new self;
 
-        $obj->activationRanges = $activationRanges;
-        $obj->extensionRange = $extensionRange;
-        $obj->portingPhoneNumberID = $portingPhoneNumberID;
+        $obj->activation_ranges = $activation_ranges;
+        $obj->extension_range = $extension_range;
+        $obj->porting_phone_number_id = $porting_phone_number_id;
 
         return $obj;
     }
@@ -98,7 +98,7 @@ final class PhoneNumberExtensionCreateParams implements BaseModel
     public function withActivationRanges(array $activationRanges): self
     {
         $obj = clone $this;
-        $obj->activationRanges = $activationRanges;
+        $obj->activation_ranges = $activationRanges;
 
         return $obj;
     }
@@ -106,7 +106,7 @@ final class PhoneNumberExtensionCreateParams implements BaseModel
     public function withExtensionRange(ExtensionRange $extensionRange): self
     {
         $obj = clone $this;
-        $obj->extensionRange = $extensionRange;
+        $obj->extension_range = $extensionRange;
 
         return $obj;
     }
@@ -117,7 +117,7 @@ final class PhoneNumberExtensionCreateParams implements BaseModel
     public function withPortingPhoneNumberID(string $portingPhoneNumberID): self
     {
         $obj = clone $this;
-        $obj->portingPhoneNumberID = $portingPhoneNumberID;
+        $obj->porting_phone_number_id = $portingPhoneNumberID;
 
         return $obj;
     }

@@ -12,9 +12,9 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type DeepgramShape = array{
- *   transcriptionEngine: string,
- *   transcriptionModel: value-of<TranscriptionModel>,
- *   language?: value-of<Language>,
+ *   transcription_engine: "Deepgram",
+ *   transcription_model: value-of<TranscriptionModel>,
+ *   language?: value-of<Language>|null,
  * }
  */
 final class Deepgram implements BaseModel
@@ -24,17 +24,19 @@ final class Deepgram implements BaseModel
 
     /**
      * Engine identifier for Deepgram transcription service.
+     *
+     * @var "Deepgram" $transcription_engine
      */
-    #[Api('transcription_engine')]
-    public string $transcriptionEngine = 'Deepgram';
+    #[Api]
+    public string $transcription_engine = 'Deepgram';
 
     /**
      * The model to use for transcription.
      *
-     * @var value-of<TranscriptionModel> $transcriptionModel
+     * @var value-of<TranscriptionModel> $transcription_model
      */
-    #[Api('transcription_model', enum: TranscriptionModel::class)]
-    public string $transcriptionModel;
+    #[Api(enum: TranscriptionModel::class)]
+    public string $transcription_model;
 
     /**
      * Language to use for speech recognition. Available languages depend on the selected model.
@@ -49,7 +51,7 @@ final class Deepgram implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * Deepgram::with(transcriptionModel: ...)
+     * Deepgram::with(transcription_model: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -68,16 +70,16 @@ final class Deepgram implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param TranscriptionModel|value-of<TranscriptionModel> $transcriptionModel
+     * @param TranscriptionModel|value-of<TranscriptionModel> $transcription_model
      * @param Language|value-of<Language> $language
      */
     public static function with(
-        TranscriptionModel|string $transcriptionModel = 'deepgram/nova-2',
+        TranscriptionModel|string $transcription_model = 'deepgram/nova-2',
         Language|string|null $language = null,
     ): self {
         $obj = new self;
 
-        $obj['transcriptionModel'] = $transcriptionModel;
+        $obj['transcription_model'] = $transcription_model;
 
         null !== $language && $obj['language'] = $language;
 
@@ -93,7 +95,7 @@ final class Deepgram implements BaseModel
         TranscriptionModel|string $transcriptionModel
     ): self {
         $obj = clone $this;
-        $obj['transcriptionModel'] = $transcriptionModel;
+        $obj['transcription_model'] = $transcriptionModel;
 
         return $obj;
     }

@@ -33,9 +33,14 @@ final class MessagingTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->legacy->reporting->usageReports->messaging->create(
-            aggregationType: 0
-        );
+        $result = $this
+            ->client
+            ->legacy
+            ->reporting
+            ->usageReports
+            ->messaging
+            ->create(['aggregation_type' => 0])
+        ;
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -47,9 +52,14 @@ final class MessagingTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->legacy->reporting->usageReports->messaging->create(
-            aggregationType: 0
-        );
+        $result = $this
+            ->client
+            ->legacy
+            ->reporting
+            ->usageReports
+            ->messaging
+            ->create(['aggregation_type' => 0])
+        ;
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -80,7 +90,14 @@ final class MessagingTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->legacy->reporting->usageReports->messaging->list();
+        $result = $this
+            ->client
+            ->legacy
+            ->reporting
+            ->usageReports
+            ->messaging
+            ->list([])
+        ;
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\CallReferStartedWebhookEvent\Data;
 
 /**
- * @phpstan-type CallReferStartedWebhookEventShape = array{data?: Data}
+ * @phpstan-type CallReferStartedWebhookEventShape = array{data?: Data|null}
  */
 final class CallReferStartedWebhookEvent implements BaseModel
 {

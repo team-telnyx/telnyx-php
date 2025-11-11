@@ -33,9 +33,9 @@ final class ManagedAccountsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->managedAccounts->create(
-            businessName: "Larry's Cat Food Inc"
-        );
+        $result = $this->client->managedAccounts->create([
+            'business_name' => "Larry's Cat Food Inc",
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -47,9 +47,9 @@ final class ManagedAccountsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->managedAccounts->create(
-            businessName: "Larry's Cat Food Inc"
-        );
+        $result = $this->client->managedAccounts->create([
+            'business_name' => "Larry's Cat Food Inc",
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -73,7 +73,7 @@ final class ManagedAccountsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->managedAccounts->update('id');
+        $result = $this->client->managedAccounts->update('id', []);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -85,7 +85,7 @@ final class ManagedAccountsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->managedAccounts->list();
+        $result = $this->client->managedAccounts->list([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -113,7 +113,10 @@ final class ManagedAccountsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->managedAccounts->updateGlobalChannelLimit('id');
+        $result = $this->client->managedAccounts->updateGlobalChannelLimit(
+            'id',
+            []
+        );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

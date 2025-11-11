@@ -5,16 +5,11 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\AuditEvents\AuditEventListParams;
-use Telnyx\AuditEvents\AuditEventListParams\Filter;
-use Telnyx\AuditEvents\AuditEventListParams\Page;
-use Telnyx\AuditEvents\AuditEventListParams\Sort;
 use Telnyx\AuditEvents\AuditEventListResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AuditEventsContract;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class AuditEventsService implements AuditEventsContract
 {
@@ -28,37 +23,24 @@ final class AuditEventsService implements AuditEventsContract
      *
      * Retrieve a list of audit log entries. Audit logs are a best-effort, eventually consistent record of significant account-related changes.
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[created_before], filter[created_after]
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
-     * @param Sort|value-of<Sort> $sort set the order of the results by the creation date
+     * @param array{
+     *   filter?: array{
+     *     created_after?: string|\DateTimeInterface,
+     *     created_before?: string|\DateTimeInterface,
+     *   },
+     *   page?: array{number?: int, size?: int},
+     *   sort?: "asc"|"desc",
+     * }|AuditEventListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
-        $sort = omit,
-        ?RequestOptions $requestOptions = null,
-    ): AuditEventListResponse {
-        $params = ['filter' => $filter, 'page' => $page, 'sort' => $sort];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
+        array|AuditEventListParams $params,
         ?RequestOptions $requestOptions = null
     ): AuditEventListResponse {
         [$parsed, $options] = AuditEventListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

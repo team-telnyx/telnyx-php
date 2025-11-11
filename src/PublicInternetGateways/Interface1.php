@@ -11,7 +11,9 @@ use Telnyx\Networks\InterfaceStatus;
 
 /**
  * @phpstan-type Interface1Shape = array{
- *   name?: string, networkID?: string, status?: value-of<InterfaceStatus>
+ *   name?: string|null,
+ *   network_id?: string|null,
+ *   status?: value-of<InterfaceStatus>|null,
  * }
  */
 final class Interface1 implements BaseModel
@@ -28,8 +30,8 @@ final class Interface1 implements BaseModel
     /**
      * The id of the network associated with the interface.
      */
-    #[Api('network_id', optional: true)]
-    public ?string $networkID;
+    #[Api(optional: true)]
+    public ?string $network_id;
 
     /**
      * The current status of the interface deployment.
@@ -53,13 +55,13 @@ final class Interface1 implements BaseModel
      */
     public static function with(
         ?string $name = null,
-        ?string $networkID = null,
+        ?string $network_id = null,
         InterfaceStatus|string|null $status = null,
     ): self {
         $obj = new self;
 
         null !== $name && $obj->name = $name;
-        null !== $networkID && $obj->networkID = $networkID;
+        null !== $network_id && $obj->network_id = $network_id;
         null !== $status && $obj['status'] = $status;
 
         return $obj;
@@ -82,7 +84,7 @@ final class Interface1 implements BaseModel
     public function withNetworkID(string $networkID): self
     {
         $obj = clone $this;
-        $obj->networkID = $networkID;
+        $obj->network_id = $networkID;
 
         return $obj;
     }

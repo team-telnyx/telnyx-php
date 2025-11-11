@@ -33,9 +33,9 @@ final class CustomerServiceRecordsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->customerServiceRecords->create(
-            phoneNumber: '+1234567890'
-        );
+        $result = $this->client->customerServiceRecords->create([
+            'phone_number' => '+1234567890',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -47,9 +47,9 @@ final class CustomerServiceRecordsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->customerServiceRecords->create(
-            phoneNumber: '+1234567890'
-        );
+        $result = $this->client->customerServiceRecords->create([
+            'phone_number' => '+1234567890',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -75,7 +75,7 @@ final class CustomerServiceRecordsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->customerServiceRecords->list();
+        $result = $this->client->customerServiceRecords->list([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -87,9 +87,9 @@ final class CustomerServiceRecordsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->customerServiceRecords->verifyPhoneNumberCoverage(
-            ['+1234567890']
-        );
+        $result = $this->client->customerServiceRecords->verifyPhoneNumberCoverage([
+            'phone_numbers' => ['+1234567890'],
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -101,9 +101,9 @@ final class CustomerServiceRecordsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->customerServiceRecords->verifyPhoneNumberCoverage(
-            ['+1234567890']
-        );
+        $result = $this->client->customerServiceRecords->verifyPhoneNumberCoverage([
+            'phone_numbers' => ['+1234567890'],
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

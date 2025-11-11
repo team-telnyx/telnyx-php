@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * PIN and PUK codes for the SIM card. Only available when include_pin_puk_codes=true is set in the request.
  *
  * @phpstan-type PinPukCodesShape = array{
- *   pin1?: string, pin2?: string, puk1?: string, puk2?: string
+ *   pin1?: string|null, pin2?: string|null, puk1?: string|null, puk2?: string|null
  * }
  */
 final class PinPukCodes implements BaseModel

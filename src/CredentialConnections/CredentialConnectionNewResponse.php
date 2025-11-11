@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type CredentialConnectionNewResponseShape = array{
- *   data?: CredentialConnection
+ *   data?: CredentialConnection|null
  * }
  */
 final class CredentialConnectionNewResponse implements BaseModel, ResponseConverter

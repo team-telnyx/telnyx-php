@@ -16,7 +16,7 @@ use Telnyx\SimCardGroups\SimCardGroupUpdateParams\DataLimit;
  * @see Telnyx\SimCardGroups->update
  *
  * @phpstan-type SimCardGroupUpdateParamsShape = array{
- *   dataLimit?: DataLimit, name?: string
+ *   data_limit?: DataLimit, name?: string
  * }
  */
 final class SimCardGroupUpdateParams implements BaseModel
@@ -28,8 +28,8 @@ final class SimCardGroupUpdateParams implements BaseModel
     /**
      * Upper limit on the amount of data the SIM cards, within the group, can use.
      */
-    #[Api('data_limit', optional: true)]
-    public ?DataLimit $dataLimit;
+    #[Api(optional: true)]
+    public ?DataLimit $data_limit;
 
     /**
      * A user friendly name for the SIM card group.
@@ -48,12 +48,12 @@ final class SimCardGroupUpdateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?DataLimit $dataLimit = null,
+        ?DataLimit $data_limit = null,
         ?string $name = null
     ): self {
         $obj = new self;
 
-        null !== $dataLimit && $obj->dataLimit = $dataLimit;
+        null !== $data_limit && $obj->data_limit = $data_limit;
         null !== $name && $obj->name = $name;
 
         return $obj;
@@ -65,7 +65,7 @@ final class SimCardGroupUpdateParams implements BaseModel
     public function withDataLimit(DataLimit $dataLimit): self
     {
         $obj = clone $this;
-        $obj->dataLimit = $dataLimit;
+        $obj->data_limit = $dataLimit;
 
         return $obj;
     }

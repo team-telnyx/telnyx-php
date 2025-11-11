@@ -14,7 +14,7 @@ use Telnyx\PortingOrders\PortingOrder;
 
 /**
  * @phpstan-type ActionConfirmResponseShape = array{
- *   data?: PortingOrder, meta?: Meta
+ *   data?: PortingOrder|null, meta?: Meta|null
  * }
  */
 final class ActionConfirmResponse implements BaseModel, ResponseConverter

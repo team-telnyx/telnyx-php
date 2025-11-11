@@ -20,12 +20,12 @@ use Telnyx\Core\Conversion\MapOf;
  * @phpstan-type ConversationAddMessageParamsShape = array{
  *   role: string,
  *   content?: string,
- *   metadata?: array<string, string|int|bool|list<string|int|bool>>,
+ *   metadata?: array<string,string|int|bool|list<string|int|bool>>,
  *   name?: string,
- *   sentAt?: \DateTimeInterface,
- *   toolCallID?: string,
- *   toolCalls?: list<array<string, mixed>>,
- *   toolChoice?: mixed|string,
+ *   sent_at?: \DateTimeInterface,
+ *   tool_call_id?: string,
+ *   tool_calls?: list<array<string,mixed>>,
+ *   tool_choice?: mixed|string,
  * }
  */
 final class ConversationAddMessageParams implements BaseModel
@@ -40,26 +40,26 @@ final class ConversationAddMessageParams implements BaseModel
     #[Api(optional: true)]
     public ?string $content;
 
-    /** @var array<string, string|int|bool|list<string|int|bool>>|null $metadata */
+    /** @var array<string,string|int|bool|list<string|int|bool>>|null $metadata */
     #[Api(map: Metadata::class, optional: true)]
     public ?array $metadata;
 
     #[Api(optional: true)]
     public ?string $name;
 
-    #[Api('sent_at', optional: true)]
-    public ?\DateTimeInterface $sentAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $sent_at;
 
-    #[Api('tool_call_id', optional: true)]
-    public ?string $toolCallID;
+    #[Api(optional: true)]
+    public ?string $tool_call_id;
 
-    /** @var list<array<string, mixed>>|null $toolCalls */
-    #[Api('tool_calls', list: new MapOf('mixed'), optional: true)]
-    public ?array $toolCalls;
+    /** @var list<array<string,mixed>>|null $tool_calls */
+    #[Api(list: new MapOf('mixed'), optional: true)]
+    public ?array $tool_calls;
 
-    /** @var mixed|string|null $toolChoice */
-    #[Api('tool_choice', union: ToolChoice::class, optional: true)]
-    public mixed $toolChoice;
+    /** @var mixed|string|null $tool_choice */
+    #[Api(union: ToolChoice::class, optional: true)]
+    public mixed $tool_choice;
 
     /**
      * `new ConversationAddMessageParams()` is missing required properties by the API.
@@ -85,19 +85,19 @@ final class ConversationAddMessageParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param array<string, string|int|bool|list<string|int|bool>> $metadata
-     * @param list<array<string, mixed>> $toolCalls
-     * @param mixed|string $toolChoice
+     * @param array<string,string|int|bool|list<string|int|bool>> $metadata
+     * @param list<array<string,mixed>> $tool_calls
+     * @param mixed|string $tool_choice
      */
     public static function with(
         string $role,
         ?string $content = null,
         ?array $metadata = null,
         ?string $name = null,
-        ?\DateTimeInterface $sentAt = null,
-        ?string $toolCallID = null,
-        ?array $toolCalls = null,
-        mixed $toolChoice = null,
+        ?\DateTimeInterface $sent_at = null,
+        ?string $tool_call_id = null,
+        ?array $tool_calls = null,
+        mixed $tool_choice = null,
     ): self {
         $obj = new self;
 
@@ -106,10 +106,10 @@ final class ConversationAddMessageParams implements BaseModel
         null !== $content && $obj->content = $content;
         null !== $metadata && $obj->metadata = $metadata;
         null !== $name && $obj->name = $name;
-        null !== $sentAt && $obj->sentAt = $sentAt;
-        null !== $toolCallID && $obj->toolCallID = $toolCallID;
-        null !== $toolCalls && $obj->toolCalls = $toolCalls;
-        null !== $toolChoice && $obj->toolChoice = $toolChoice;
+        null !== $sent_at && $obj->sent_at = $sent_at;
+        null !== $tool_call_id && $obj->tool_call_id = $tool_call_id;
+        null !== $tool_calls && $obj->tool_calls = $tool_calls;
+        null !== $tool_choice && $obj->tool_choice = $tool_choice;
 
         return $obj;
     }
@@ -131,7 +131,7 @@ final class ConversationAddMessageParams implements BaseModel
     }
 
     /**
-     * @param array<string, string|int|bool|list<string|int|bool>> $metadata
+     * @param array<string,string|int|bool|list<string|int|bool>> $metadata
      */
     public function withMetadata(array $metadata): self
     {
@@ -152,7 +152,7 @@ final class ConversationAddMessageParams implements BaseModel
     public function withSentAt(\DateTimeInterface $sentAt): self
     {
         $obj = clone $this;
-        $obj->sentAt = $sentAt;
+        $obj->sent_at = $sentAt;
 
         return $obj;
     }
@@ -160,18 +160,18 @@ final class ConversationAddMessageParams implements BaseModel
     public function withToolCallID(string $toolCallID): self
     {
         $obj = clone $this;
-        $obj->toolCallID = $toolCallID;
+        $obj->tool_call_id = $toolCallID;
 
         return $obj;
     }
 
     /**
-     * @param list<array<string, mixed>> $toolCalls
+     * @param list<array<string,mixed>> $toolCalls
      */
     public function withToolCalls(array $toolCalls): self
     {
         $obj = clone $this;
-        $obj->toolCalls = $toolCalls;
+        $obj->tool_calls = $toolCalls;
 
         return $obj;
     }
@@ -182,7 +182,7 @@ final class ConversationAddMessageParams implements BaseModel
     public function withToolChoice(mixed $toolChoice): self
     {
         $obj = clone $this;
-        $obj->toolChoice = $toolChoice;
+        $obj->tool_choice = $toolChoice;
 
         return $obj;
     }

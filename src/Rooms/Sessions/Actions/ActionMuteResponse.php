@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Rooms\Sessions\Actions\ActionMuteResponse\Data;
 
 /**
- * @phpstan-type ActionMuteResponseShape = array{data?: Data}
+ * @phpstan-type ActionMuteResponseShape = array{data?: Data|null}
  */
 final class ActionMuteResponse implements BaseModel, ResponseConverter
 {

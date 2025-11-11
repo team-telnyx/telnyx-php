@@ -12,16 +12,16 @@ use Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateResponse\Da
 
 /**
  * @phpstan-type DataShape = array{
- *   id?: string,
- *   actionType?: string,
- *   actionURL?: string|null,
- *   cancelReason?: string|null,
- *   createdAt?: \DateTimeInterface,
- *   portingOrderID?: string,
- *   recordType?: value-of<RecordType>,
- *   requirementTypeID?: string,
- *   status?: value-of<Status>,
- *   updatedAt?: \DateTimeInterface,
+ *   id?: string|null,
+ *   action_type?: string|null,
+ *   action_url?: string|null,
+ *   cancel_reason?: string|null,
+ *   created_at?: \DateTimeInterface|null,
+ *   porting_order_id?: string|null,
+ *   record_type?: value-of<RecordType>|null,
+ *   requirement_type_id?: string|null,
+ *   status?: value-of<Status>|null,
+ *   updated_at?: \DateTimeInterface|null,
  * }
  */
 final class Data implements BaseModel
@@ -38,46 +38,46 @@ final class Data implements BaseModel
     /**
      * The type of action required.
      */
-    #[Api('action_type', optional: true)]
-    public ?string $actionType;
+    #[Api(optional: true)]
+    public ?string $action_type;
 
     /**
      * Optional URL for the action.
      */
-    #[Api('action_url', nullable: true, optional: true)]
-    public ?string $actionURL;
+    #[Api(nullable: true, optional: true)]
+    public ?string $action_url;
 
     /**
      * Reason for cancellation if status is 'cancelled'.
      */
-    #[Api('cancel_reason', nullable: true, optional: true)]
-    public ?string $cancelReason;
+    #[Api(nullable: true, optional: true)]
+    public ?string $cancel_reason;
 
     /**
      * ISO 8601 formatted date-time indicating when the resource was created.
      */
-    #[Api('created_at', optional: true)]
-    public ?\DateTimeInterface $createdAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $created_at;
 
     /**
      * The ID of the porting order this action requirement belongs to.
      */
-    #[Api('porting_order_id', optional: true)]
-    public ?string $portingOrderID;
+    #[Api(optional: true)]
+    public ?string $porting_order_id;
 
     /**
      * Identifies the type of the resource.
      *
-     * @var value-of<RecordType>|null $recordType
+     * @var value-of<RecordType>|null $record_type
      */
-    #[Api('record_type', enum: RecordType::class, optional: true)]
-    public ?string $recordType;
+    #[Api(enum: RecordType::class, optional: true)]
+    public ?string $record_type;
 
     /**
      * The ID of the requirement type.
      */
-    #[Api('requirement_type_id', optional: true)]
-    public ?string $requirementTypeID;
+    #[Api(optional: true)]
+    public ?string $requirement_type_id;
 
     /**
      * Current status of the action requirement.
@@ -90,8 +90,8 @@ final class Data implements BaseModel
     /**
      * ISO 8601 formatted date-time indicating when the resource was updated.
      */
-    #[Api('updated_at', optional: true)]
-    public ?\DateTimeInterface $updatedAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $updated_at;
 
     public function __construct()
     {
@@ -103,33 +103,33 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param RecordType|value-of<RecordType> $recordType
+     * @param RecordType|value-of<RecordType> $record_type
      * @param Status|value-of<Status> $status
      */
     public static function with(
         ?string $id = null,
-        ?string $actionType = null,
-        ?string $actionURL = null,
-        ?string $cancelReason = null,
-        ?\DateTimeInterface $createdAt = null,
-        ?string $portingOrderID = null,
-        RecordType|string|null $recordType = null,
-        ?string $requirementTypeID = null,
+        ?string $action_type = null,
+        ?string $action_url = null,
+        ?string $cancel_reason = null,
+        ?\DateTimeInterface $created_at = null,
+        ?string $porting_order_id = null,
+        RecordType|string|null $record_type = null,
+        ?string $requirement_type_id = null,
         Status|string|null $status = null,
-        ?\DateTimeInterface $updatedAt = null,
+        ?\DateTimeInterface $updated_at = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj->id = $id;
-        null !== $actionType && $obj->actionType = $actionType;
-        null !== $actionURL && $obj->actionURL = $actionURL;
-        null !== $cancelReason && $obj->cancelReason = $cancelReason;
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $portingOrderID && $obj->portingOrderID = $portingOrderID;
-        null !== $recordType && $obj['recordType'] = $recordType;
-        null !== $requirementTypeID && $obj->requirementTypeID = $requirementTypeID;
+        null !== $action_type && $obj->action_type = $action_type;
+        null !== $action_url && $obj->action_url = $action_url;
+        null !== $cancel_reason && $obj->cancel_reason = $cancel_reason;
+        null !== $created_at && $obj->created_at = $created_at;
+        null !== $porting_order_id && $obj->porting_order_id = $porting_order_id;
+        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $requirement_type_id && $obj->requirement_type_id = $requirement_type_id;
         null !== $status && $obj['status'] = $status;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
+        null !== $updated_at && $obj->updated_at = $updated_at;
 
         return $obj;
     }
@@ -151,7 +151,7 @@ final class Data implements BaseModel
     public function withActionType(string $actionType): self
     {
         $obj = clone $this;
-        $obj->actionType = $actionType;
+        $obj->action_type = $actionType;
 
         return $obj;
     }
@@ -162,7 +162,7 @@ final class Data implements BaseModel
     public function withActionURL(?string $actionURL): self
     {
         $obj = clone $this;
-        $obj->actionURL = $actionURL;
+        $obj->action_url = $actionURL;
 
         return $obj;
     }
@@ -173,7 +173,7 @@ final class Data implements BaseModel
     public function withCancelReason(?string $cancelReason): self
     {
         $obj = clone $this;
-        $obj->cancelReason = $cancelReason;
+        $obj->cancel_reason = $cancelReason;
 
         return $obj;
     }
@@ -184,7 +184,7 @@ final class Data implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }
@@ -195,7 +195,7 @@ final class Data implements BaseModel
     public function withPortingOrderID(string $portingOrderID): self
     {
         $obj = clone $this;
-        $obj->portingOrderID = $portingOrderID;
+        $obj->porting_order_id = $portingOrderID;
 
         return $obj;
     }
@@ -208,7 +208,7 @@ final class Data implements BaseModel
     public function withRecordType(RecordType|string $recordType): self
     {
         $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
@@ -219,7 +219,7 @@ final class Data implements BaseModel
     public function withRequirementTypeID(string $requirementTypeID): self
     {
         $obj = clone $this;
-        $obj->requirementTypeID = $requirementTypeID;
+        $obj->requirement_type_id = $requirementTypeID;
 
         return $obj;
     }
@@ -243,7 +243,7 @@ final class Data implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $obj->updated_at = $updatedAt;
 
         return $obj;
     }

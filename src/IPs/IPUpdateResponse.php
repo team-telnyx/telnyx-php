@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type IPUpdateResponseShape = array{data?: IP}
+ * @phpstan-type IPUpdateResponseShape = array{data?: IP|null}
  */
 final class IPUpdateResponse implements BaseModel, ResponseConverter
 {

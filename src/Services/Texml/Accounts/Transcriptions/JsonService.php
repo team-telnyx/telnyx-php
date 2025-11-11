@@ -24,44 +24,23 @@ final class JsonService implements JsonContract
      *
      * Permanently deletes a recording transcription.
      *
-     * @param string $accountSid
+     * @param array{
+     *   account_sid: string
+     * }|JsonDeleteRecordingTranscriptionSidJsonParams $params
      *
      * @throws APIException
      */
     public function deleteRecordingTranscriptionSidJson(
         string $recordingTranscriptionSid,
-        $accountSid,
+        array|JsonDeleteRecordingTranscriptionSidJsonParams $params,
         ?RequestOptions $requestOptions = null,
     ): mixed {
-        $params = ['accountSid' => $accountSid];
-
-        return $this->deleteRecordingTranscriptionSidJsonRaw(
-            $recordingTranscriptionSid,
+        [$parsed, $options] = JsonDeleteRecordingTranscriptionSidJsonParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function deleteRecordingTranscriptionSidJsonRaw(
-        string $recordingTranscriptionSid,
-        array $params,
-        ?RequestOptions $requestOptions = null,
-    ): mixed {
-        [
-            $parsed, $options,
-        ] = JsonDeleteRecordingTranscriptionSidJsonParams::parseRequest(
-            $params,
-            $requestOptions
-        );
-        $accountSid = $parsed['accountSid'];
-        unset($parsed['accountSid']);
+        $accountSid = $parsed['account_sid'];
+        unset($parsed['account_sid']);
 
         // @phpstan-ignore-next-line;
         return $this->client->request(
@@ -81,44 +60,23 @@ final class JsonService implements JsonContract
      *
      * Returns the recording transcription resource identified by its ID.
      *
-     * @param string $accountSid
+     * @param array{
+     *   account_sid: string
+     * }|JsonRetrieveRecordingTranscriptionSidJsonParams $params
      *
      * @throws APIException
      */
     public function retrieveRecordingTranscriptionSidJson(
         string $recordingTranscriptionSid,
-        $accountSid,
+        array|JsonRetrieveRecordingTranscriptionSidJsonParams $params,
         ?RequestOptions $requestOptions = null,
     ): JsonGetRecordingTranscriptionSidJsonResponse {
-        $params = ['accountSid' => $accountSid];
-
-        return $this->retrieveRecordingTranscriptionSidJsonRaw(
-            $recordingTranscriptionSid,
+        [$parsed, $options] = JsonRetrieveRecordingTranscriptionSidJsonParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function retrieveRecordingTranscriptionSidJsonRaw(
-        string $recordingTranscriptionSid,
-        array $params,
-        ?RequestOptions $requestOptions = null,
-    ): JsonGetRecordingTranscriptionSidJsonResponse {
-        [
-            $parsed, $options,
-        ] = JsonRetrieveRecordingTranscriptionSidJsonParams::parseRequest(
-            $params,
-            $requestOptions
-        );
-        $accountSid = $parsed['accountSid'];
-        unset($parsed['accountSid']);
+        $accountSid = $parsed['account_sid'];
+        unset($parsed['account_sid']);
 
         // @phpstan-ignore-next-line;
         return $this->client->request(

@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type RegionShape = array{
- *   code?: string, name?: string, recordType?: string
+ *   code?: string|null, name?: string|null, record_type?: string|null
  * }
  */
 final class Region implements BaseModel
@@ -33,8 +33,8 @@ final class Region implements BaseModel
     /**
      * Identifies the type of the resource.
      */
-    #[Api('record_type', optional: true)]
-    public ?string $recordType;
+    #[Api(optional: true)]
+    public ?string $record_type;
 
     public function __construct()
     {
@@ -49,13 +49,13 @@ final class Region implements BaseModel
     public static function with(
         ?string $code = null,
         ?string $name = null,
-        ?string $recordType = null
+        ?string $record_type = null
     ): self {
         $obj = new self;
 
         null !== $code && $obj->code = $code;
         null !== $name && $obj->name = $name;
-        null !== $recordType && $obj->recordType = $recordType;
+        null !== $record_type && $obj->record_type = $record_type;
 
         return $obj;
     }
@@ -88,7 +88,7 @@ final class Region implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType;
+        $obj->record_type = $recordType;
 
         return $obj;
     }

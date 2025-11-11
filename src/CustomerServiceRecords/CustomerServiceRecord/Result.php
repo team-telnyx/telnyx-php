@@ -14,10 +14,10 @@ use Telnyx\CustomerServiceRecords\CustomerServiceRecord\Result\Admin;
  * The result of the CSR request. This field would be null in case of `pending` or `failed` status.
  *
  * @phpstan-type ResultShape = array{
- *   address?: Address,
- *   admin?: Admin,
- *   associatedPhoneNumbers?: list<string>,
- *   carrierName?: string,
+ *   address?: Address|null,
+ *   admin?: Admin|null,
+ *   associated_phone_numbers?: list<string>|null,
+ *   carrier_name?: string|null,
  * }
  */
 final class Result implements BaseModel
@@ -40,16 +40,16 @@ final class Result implements BaseModel
     /**
      * The associated phone numbers of the customer service record.
      *
-     * @var list<string>|null $associatedPhoneNumbers
+     * @var list<string>|null $associated_phone_numbers
      */
-    #[Api('associated_phone_numbers', list: 'string', optional: true)]
-    public ?array $associatedPhoneNumbers;
+    #[Api(list: 'string', optional: true)]
+    public ?array $associated_phone_numbers;
 
     /**
      * The name of the carrier that the customer service record is for.
      */
-    #[Api('carrier_name', optional: true)]
-    public ?string $carrierName;
+    #[Api(optional: true)]
+    public ?string $carrier_name;
 
     public function __construct()
     {
@@ -61,20 +61,20 @@ final class Result implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $associatedPhoneNumbers
+     * @param list<string> $associated_phone_numbers
      */
     public static function with(
         ?Address $address = null,
         ?Admin $admin = null,
-        ?array $associatedPhoneNumbers = null,
-        ?string $carrierName = null,
+        ?array $associated_phone_numbers = null,
+        ?string $carrier_name = null,
     ): self {
         $obj = new self;
 
         null !== $address && $obj->address = $address;
         null !== $admin && $obj->admin = $admin;
-        null !== $associatedPhoneNumbers && $obj->associatedPhoneNumbers = $associatedPhoneNumbers;
-        null !== $carrierName && $obj->carrierName = $carrierName;
+        null !== $associated_phone_numbers && $obj->associated_phone_numbers = $associated_phone_numbers;
+        null !== $carrier_name && $obj->carrier_name = $carrier_name;
 
         return $obj;
     }
@@ -110,7 +110,7 @@ final class Result implements BaseModel
         array $associatedPhoneNumbers
     ): self {
         $obj = clone $this;
-        $obj->associatedPhoneNumbers = $associatedPhoneNumbers;
+        $obj->associated_phone_numbers = $associatedPhoneNumbers;
 
         return $obj;
     }
@@ -121,7 +121,7 @@ final class Result implements BaseModel
     public function withCarrierName(string $carrierName): self
     {
         $obj = clone $this;
-        $obj->carrierName = $carrierName;
+        $obj->carrier_name = $carrierName;
 
         return $obj;
     }

@@ -35,7 +35,7 @@ final class RcsTest extends TestCase
 
         $result = $this->client->messaging->rcs->inviteTestNumber(
             'phone_number',
-            'id'
+            ['id' => 'id']
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -50,7 +50,7 @@ final class RcsTest extends TestCase
 
         $result = $this->client->messaging->rcs->inviteTestNumber(
             'phone_number',
-            'id'
+            ['id' => 'id']
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -63,10 +63,9 @@ final class RcsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->messaging->rcs->listBulkCapabilities(
-            agentID: 'TestAgent',
-            phoneNumbers: ['+13125551234']
-        );
+        $result = $this->client->messaging->rcs->listBulkCapabilities([
+            'agent_id' => 'TestAgent', 'phone_numbers' => ['+13125551234'],
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -78,10 +77,9 @@ final class RcsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->messaging->rcs->listBulkCapabilities(
-            agentID: 'TestAgent',
-            phoneNumbers: ['+13125551234']
-        );
+        $result = $this->client->messaging->rcs->listBulkCapabilities([
+            'agent_id' => 'TestAgent', 'phone_numbers' => ['+13125551234'],
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -95,7 +93,7 @@ final class RcsTest extends TestCase
 
         $result = $this->client->messaging->rcs->retrieveCapabilities(
             'phone_number',
-            'agent_id'
+            ['agent_id' => 'agent_id']
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -110,7 +108,7 @@ final class RcsTest extends TestCase
 
         $result = $this->client->messaging->rcs->retrieveCapabilities(
             'phone_number',
-            'agent_id'
+            ['agent_id' => 'agent_id']
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType

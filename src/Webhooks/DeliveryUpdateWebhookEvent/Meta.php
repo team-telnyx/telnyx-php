@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type MetaShape = array{attempt?: int, deliveredTo?: string}
+ * @phpstan-type MetaShape = array{attempt?: int|null, delivered_to?: string|null}
  */
 final class Meta implements BaseModel
 {
@@ -25,8 +25,8 @@ final class Meta implements BaseModel
     /**
      * The webhook URL the event was delivered to.
      */
-    #[Api('delivered_to', optional: true)]
-    public ?string $deliveredTo;
+    #[Api(optional: true)]
+    public ?string $delivered_to;
 
     public function __construct()
     {
@@ -40,12 +40,12 @@ final class Meta implements BaseModel
      */
     public static function with(
         ?int $attempt = null,
-        ?string $deliveredTo = null
+        ?string $delivered_to = null
     ): self {
         $obj = new self;
 
         null !== $attempt && $obj->attempt = $attempt;
-        null !== $deliveredTo && $obj->deliveredTo = $deliveredTo;
+        null !== $delivered_to && $obj->delivered_to = $delivered_to;
 
         return $obj;
     }
@@ -67,7 +67,7 @@ final class Meta implements BaseModel
     public function withDeliveredTo(string $deliveredTo): self
     {
         $obj = clone $this;
-        $obj->deliveredTo = $deliveredTo;
+        $obj->delivered_to = $deliveredTo;
 
         return $obj;
     }

@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * An object representing the total cost of the order.
  *
- * @phpstan-type CostShape = array{amount?: string, currency?: string}
+ * @phpstan-type CostShape = array{amount?: string|null, currency?: string|null}
  */
 final class Cost implements BaseModel
 {

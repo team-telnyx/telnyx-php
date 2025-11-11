@@ -14,7 +14,7 @@ use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentListResponse\Data
 
 /**
  * @phpstan-type AdditionalDocumentListResponseShape = array{
- *   data?: list<Data>, meta?: PaginationMeta
+ *   data?: list<Data>|null, meta?: PaginationMeta|null
  * }
  */
 final class AdditionalDocumentListResponse implements BaseModel, ResponseConverter

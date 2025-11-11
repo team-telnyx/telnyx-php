@@ -13,7 +13,7 @@ use Telnyx\ExternalConnections\ExternalVoiceIntegrationsPaginationMeta;
 
 /**
  * @phpstan-type UploadListResponseShape = array{
- *   data?: list<Upload>, meta?: ExternalVoiceIntegrationsPaginationMeta
+ *   data?: list<Upload>|null, meta?: ExternalVoiceIntegrationsPaginationMeta|null
  * }
  */
 final class UploadListResponse implements BaseModel, ResponseConverter

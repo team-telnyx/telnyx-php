@@ -13,11 +13,11 @@ use Telnyx\Webhooks\CallRecordingTranscriptionSavedWebhookEvent\Data\RecordType;
 
 /**
  * @phpstan-type DataShape = array{
- *   id?: string,
- *   eventType?: value-of<EventType>,
- *   occurredAt?: \DateTimeInterface,
- *   payload?: Payload,
- *   recordType?: value-of<RecordType>,
+ *   id?: string|null,
+ *   event_type?: value-of<EventType>|null,
+ *   occurred_at?: \DateTimeInterface|null,
+ *   payload?: Payload|null,
+ *   record_type?: value-of<RecordType>|null,
  * }
  */
 final class Data implements BaseModel
@@ -34,16 +34,16 @@ final class Data implements BaseModel
     /**
      * The type of event being delivered.
      *
-     * @var value-of<EventType>|null $eventType
+     * @var value-of<EventType>|null $event_type
      */
-    #[Api('event_type', enum: EventType::class, optional: true)]
-    public ?string $eventType;
+    #[Api(enum: EventType::class, optional: true)]
+    public ?string $event_type;
 
     /**
      * ISO 8601 datetime of when the event occurred.
      */
-    #[Api('occurred_at', optional: true)]
-    public ?\DateTimeInterface $occurredAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $occurred_at;
 
     #[Api(optional: true)]
     public ?Payload $payload;
@@ -51,10 +51,10 @@ final class Data implements BaseModel
     /**
      * Identifies the type of the resource.
      *
-     * @var value-of<RecordType>|null $recordType
+     * @var value-of<RecordType>|null $record_type
      */
-    #[Api('record_type', enum: RecordType::class, optional: true)]
-    public ?string $recordType;
+    #[Api(enum: RecordType::class, optional: true)]
+    public ?string $record_type;
 
     public function __construct()
     {
@@ -66,23 +66,23 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param EventType|value-of<EventType> $eventType
-     * @param RecordType|value-of<RecordType> $recordType
+     * @param EventType|value-of<EventType> $event_type
+     * @param RecordType|value-of<RecordType> $record_type
      */
     public static function with(
         ?string $id = null,
-        EventType|string|null $eventType = null,
-        ?\DateTimeInterface $occurredAt = null,
+        EventType|string|null $event_type = null,
+        ?\DateTimeInterface $occurred_at = null,
         ?Payload $payload = null,
-        RecordType|string|null $recordType = null,
+        RecordType|string|null $record_type = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj->id = $id;
-        null !== $eventType && $obj['eventType'] = $eventType;
-        null !== $occurredAt && $obj->occurredAt = $occurredAt;
+        null !== $event_type && $obj['event_type'] = $event_type;
+        null !== $occurred_at && $obj->occurred_at = $occurred_at;
         null !== $payload && $obj->payload = $payload;
-        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $record_type && $obj['record_type'] = $record_type;
 
         return $obj;
     }
@@ -106,7 +106,7 @@ final class Data implements BaseModel
     public function withEventType(EventType|string $eventType): self
     {
         $obj = clone $this;
-        $obj['eventType'] = $eventType;
+        $obj['event_type'] = $eventType;
 
         return $obj;
     }
@@ -117,7 +117,7 @@ final class Data implements BaseModel
     public function withOccurredAt(\DateTimeInterface $occurredAt): self
     {
         $obj = clone $this;
-        $obj->occurredAt = $occurredAt;
+        $obj->occurred_at = $occurredAt;
 
         return $obj;
     }
@@ -138,7 +138,7 @@ final class Data implements BaseModel
     public function withRecordType(RecordType|string $recordType): self
     {
         $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }

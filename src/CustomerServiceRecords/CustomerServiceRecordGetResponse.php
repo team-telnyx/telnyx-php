@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type CustomerServiceRecordGetResponseShape = array{
- *   data?: CustomerServiceRecord
+ *   data?: CustomerServiceRecord|null
  * }
  */
 final class CustomerServiceRecordGetResponse implements BaseModel, ResponseConverter

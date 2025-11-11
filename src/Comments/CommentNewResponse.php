@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type CommentNewResponseShape = array{data?: Data}
+ * @phpstan-type CommentNewResponseShape = array{data?: Data|null}
  */
 final class CommentNewResponse implements BaseModel, ResponseConverter
 {

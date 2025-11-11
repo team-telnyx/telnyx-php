@@ -14,7 +14,7 @@ use Telnyx\NumberOrders\NumberOrderListResponse\Data;
 
 /**
  * @phpstan-type NumberOrderListResponseShape = array{
- *   data?: list<Data>, meta?: PaginationMeta
+ *   data?: list<Data>|null, meta?: PaginationMeta|null
  * }
  */
 final class NumberOrderListResponse implements BaseModel, ResponseConverter

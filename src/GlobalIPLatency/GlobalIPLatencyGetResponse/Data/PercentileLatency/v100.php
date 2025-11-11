@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type V100Shape = array{amount?: float, unit?: string}
+ * @phpstan-type V100Shape = array{amount?: float|null, unit?: string|null}
  */
 final class v100 implements BaseModel
 {

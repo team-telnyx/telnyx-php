@@ -12,8 +12,6 @@ use Telnyx\LedgerBillingGroupReports\LedgerBillingGroupReportNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\LedgerBillingGroupReportsContract;
 
-use const Telnyx\Core\OMIT as omit;
-
 final class LedgerBillingGroupReportsService implements LedgerBillingGroupReportsContract
 {
     /**
@@ -26,35 +24,19 @@ final class LedgerBillingGroupReportsService implements LedgerBillingGroupReport
      *
      * Create a ledger billing group report
      *
-     * @param int $month Month of the ledger billing group report
-     * @param int $year Year of the ledger billing group report
+     * @param array{
+     *   month?: int, year?: int
+     * }|LedgerBillingGroupReportCreateParams $params
      *
      * @throws APIException
      */
     public function create(
-        $month = omit,
-        $year = omit,
-        ?RequestOptions $requestOptions = null
-    ): LedgerBillingGroupReportNewResponse {
-        $params = ['month' => $month, 'year' => $year];
-
-        return $this->createRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|LedgerBillingGroupReportCreateParams $params,
+        ?RequestOptions $requestOptions = null,
     ): LedgerBillingGroupReportNewResponse {
         [$parsed, $options] = LedgerBillingGroupReportCreateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

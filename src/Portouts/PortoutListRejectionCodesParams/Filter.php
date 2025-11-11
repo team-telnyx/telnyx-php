@@ -12,7 +12,7 @@ use Telnyx\Portouts\PortoutListRejectionCodesParams\Filter\Code;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[code], filter[code][in].
  *
- * @phpstan-type FilterShape = array{code?: int|list<int>}
+ * @phpstan-type FilterShape = array{code?: int|null|list<int>}
  */
 final class Filter implements BaseModel
 {

@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Wireless\WirelessGetRegionsResponse\Data;
 
 /**
- * @phpstan-type WirelessGetRegionsResponseShape = array{data?: list<Data>}
+ * @phpstan-type WirelessGetRegionsResponseShape = array{data?: list<Data>|null}
  */
 final class WirelessGetRegionsResponse implements BaseModel, ResponseConverter
 {

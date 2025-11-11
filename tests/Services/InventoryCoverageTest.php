@@ -33,7 +33,7 @@ final class InventoryCoverageTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->inventoryCoverage->list();
+        $result = $this->client->inventoryCoverage->list([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

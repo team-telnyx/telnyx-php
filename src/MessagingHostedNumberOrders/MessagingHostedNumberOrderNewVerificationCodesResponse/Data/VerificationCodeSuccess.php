@@ -13,7 +13,7 @@ use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderNewVerification
  * Successful verification code creation response.
  *
  * @phpstan-type VerificationCodeSuccessShape = array{
- *   phoneNumber: string, type: value-of<Type>, verificationCodeID: string
+ *   phone_number: string, type: value-of<Type>, verification_code_id: string
  * }
  */
 final class VerificationCodeSuccess implements BaseModel
@@ -24,8 +24,8 @@ final class VerificationCodeSuccess implements BaseModel
     /**
      * Phone number for which the verification code was created.
      */
-    #[Api('phone_number')]
-    public string $phoneNumber;
+    #[Api]
+    public string $phone_number;
 
     /**
      * Type of verification method used.
@@ -38,8 +38,8 @@ final class VerificationCodeSuccess implements BaseModel
     /**
      * Unique identifier for the verification code.
      */
-    #[Api('verification_code_id')]
-    public string $verificationCodeID;
+    #[Api]
+    public string $verification_code_id;
 
     /**
      * `new VerificationCodeSuccess()` is missing required properties by the API.
@@ -47,7 +47,7 @@ final class VerificationCodeSuccess implements BaseModel
      * To enforce required parameters use
      * ```
      * VerificationCodeSuccess::with(
-     *   phoneNumber: ..., type: ..., verificationCodeID: ...
+     *   phone_number: ..., type: ..., verification_code_id: ...
      * )
      * ```
      *
@@ -73,15 +73,15 @@ final class VerificationCodeSuccess implements BaseModel
      * @param Type|value-of<Type> $type
      */
     public static function with(
-        string $phoneNumber,
+        string $phone_number,
         Type|string $type,
-        string $verificationCodeID
+        string $verification_code_id
     ): self {
         $obj = new self;
 
-        $obj->phoneNumber = $phoneNumber;
+        $obj->phone_number = $phone_number;
         $obj['type'] = $type;
-        $obj->verificationCodeID = $verificationCodeID;
+        $obj->verification_code_id = $verification_code_id;
 
         return $obj;
     }
@@ -92,7 +92,7 @@ final class VerificationCodeSuccess implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj->phoneNumber = $phoneNumber;
+        $obj->phone_number = $phoneNumber;
 
         return $obj;
     }
@@ -116,7 +116,7 @@ final class VerificationCodeSuccess implements BaseModel
     public function withVerificationCodeID(string $verificationCodeID): self
     {
         $obj = clone $this;
-        $obj->verificationCodeID = $verificationCodeID;
+        $obj->verification_code_id = $verificationCodeID;
 
         return $obj;
     }

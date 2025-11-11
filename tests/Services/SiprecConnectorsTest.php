@@ -33,11 +33,11 @@ final class SiprecConnectorsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->siprecConnectors->create(
-            host: 'siprec.telnyx.com',
-            name: 'my-siprec-connector',
-            port: 5060
-        );
+        $result = $this->client->siprecConnectors->create([
+            'host' => 'siprec.telnyx.com',
+            'name' => 'my-siprec-connector',
+            'port' => 5060,
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -49,11 +49,11 @@ final class SiprecConnectorsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->siprecConnectors->create(
-            host: 'siprec.telnyx.com',
-            name: 'my-siprec-connector',
-            port: 5060
-        );
+        $result = $this->client->siprecConnectors->create([
+            'host' => 'siprec.telnyx.com',
+            'name' => 'my-siprec-connector',
+            'port' => 5060,
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -79,9 +79,11 @@ final class SiprecConnectorsTest extends TestCase
 
         $result = $this->client->siprecConnectors->update(
             'connector_name',
-            host: 'siprec.telnyx.com',
-            name: 'my-siprec-connector',
-            port: 5060,
+            [
+                'host' => 'siprec.telnyx.com',
+                'name' => 'my-siprec-connector',
+                'port' => 5060,
+            ],
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -96,9 +98,11 @@ final class SiprecConnectorsTest extends TestCase
 
         $result = $this->client->siprecConnectors->update(
             'connector_name',
-            host: 'siprec.telnyx.com',
-            name: 'my-siprec-connector',
-            port: 5060,
+            [
+                'host' => 'siprec.telnyx.com',
+                'name' => 'my-siprec-connector',
+                'port' => 5060,
+            ],
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType

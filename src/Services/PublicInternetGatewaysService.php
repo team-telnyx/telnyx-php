@@ -10,14 +10,10 @@ use Telnyx\PublicInternetGateways\PublicInternetGatewayCreateParams;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayDeleteResponse;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayGetResponse;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayListParams;
-use Telnyx\PublicInternetGateways\PublicInternetGatewayListParams\Filter;
-use Telnyx\PublicInternetGateways\PublicInternetGatewayListParams\Page;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayListResponse;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PublicInternetGatewaysContract;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class PublicInternetGatewaysService implements PublicInternetGatewaysContract
 {
@@ -31,39 +27,19 @@ final class PublicInternetGatewaysService implements PublicInternetGatewaysContr
      *
      * Create a new Public Internet Gateway.
      *
-     * @param string $name a user specified name for the interface
-     * @param string $networkID the id of the network associated with the interface
-     * @param string $regionCode the region the interface should be deployed to
+     * @param array{
+     *   name?: string, network_id?: string, region_code?: string
+     * }|PublicInternetGatewayCreateParams $params
      *
      * @throws APIException
      */
     public function create(
-        $name = omit,
-        $networkID = omit,
-        $regionCode = omit,
+        array|PublicInternetGatewayCreateParams $params,
         ?RequestOptions $requestOptions = null,
-    ): PublicInternetGatewayNewResponse {
-        $params = [
-            'name' => $name, 'networkID' => $networkID, 'regionCode' => $regionCode,
-        ];
-
-        return $this->createRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): PublicInternetGatewayNewResponse {
         [$parsed, $options] = PublicInternetGatewayCreateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -101,35 +77,19 @@ final class PublicInternetGatewaysService implements PublicInternetGatewaysContr
      *
      * List all Public Internet Gateways.
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[network_id]
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param array{
+     *   filter?: array{network_id?: string}, page?: array{number?: int, size?: int}
+     * }|PublicInternetGatewayListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): PublicInternetGatewayListResponse {
-        $params = ['filter' => $filter, 'page' => $page];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|PublicInternetGatewayListParams $params,
+        ?RequestOptions $requestOptions = null,
     ): PublicInternetGatewayListResponse {
         [$parsed, $options] = PublicInternetGatewayListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

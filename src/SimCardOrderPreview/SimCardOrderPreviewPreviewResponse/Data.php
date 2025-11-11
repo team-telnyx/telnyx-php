@@ -13,11 +13,11 @@ use Telnyx\SimCardOrderPreview\SimCardOrderPreviewPreviewResponse\Data\TotalCost
 
 /**
  * @phpstan-type DataShape = array{
- *   quantity?: int,
- *   recordType?: string,
- *   shippingCost?: ShippingCost,
- *   simCardsCost?: SimCardsCost,
- *   totalCost?: TotalCost,
+ *   quantity?: int|null,
+ *   record_type?: string|null,
+ *   shipping_cost?: ShippingCost|null,
+ *   sim_cards_cost?: SimCardsCost|null,
+ *   total_cost?: TotalCost|null,
  * }
  */
 final class Data implements BaseModel
@@ -34,17 +34,17 @@ final class Data implements BaseModel
     /**
      * Identifies the type of the resource.
      */
-    #[Api('record_type', optional: true)]
-    public ?string $recordType;
+    #[Api(optional: true)]
+    public ?string $record_type;
 
-    #[Api('shipping_cost', optional: true)]
-    public ?ShippingCost $shippingCost;
+    #[Api(optional: true)]
+    public ?ShippingCost $shipping_cost;
 
-    #[Api('sim_cards_cost', optional: true)]
-    public ?SimCardsCost $simCardsCost;
+    #[Api(optional: true)]
+    public ?SimCardsCost $sim_cards_cost;
 
-    #[Api('total_cost', optional: true)]
-    public ?TotalCost $totalCost;
+    #[Api(optional: true)]
+    public ?TotalCost $total_cost;
 
     public function __construct()
     {
@@ -58,18 +58,18 @@ final class Data implements BaseModel
      */
     public static function with(
         ?int $quantity = null,
-        ?string $recordType = null,
-        ?ShippingCost $shippingCost = null,
-        ?SimCardsCost $simCardsCost = null,
-        ?TotalCost $totalCost = null,
+        ?string $record_type = null,
+        ?ShippingCost $shipping_cost = null,
+        ?SimCardsCost $sim_cards_cost = null,
+        ?TotalCost $total_cost = null,
     ): self {
         $obj = new self;
 
         null !== $quantity && $obj->quantity = $quantity;
-        null !== $recordType && $obj->recordType = $recordType;
-        null !== $shippingCost && $obj->shippingCost = $shippingCost;
-        null !== $simCardsCost && $obj->simCardsCost = $simCardsCost;
-        null !== $totalCost && $obj->totalCost = $totalCost;
+        null !== $record_type && $obj->record_type = $record_type;
+        null !== $shipping_cost && $obj->shipping_cost = $shipping_cost;
+        null !== $sim_cards_cost && $obj->sim_cards_cost = $sim_cards_cost;
+        null !== $total_cost && $obj->total_cost = $total_cost;
 
         return $obj;
     }
@@ -91,7 +91,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType;
+        $obj->record_type = $recordType;
 
         return $obj;
     }
@@ -99,7 +99,7 @@ final class Data implements BaseModel
     public function withShippingCost(ShippingCost $shippingCost): self
     {
         $obj = clone $this;
-        $obj->shippingCost = $shippingCost;
+        $obj->shipping_cost = $shippingCost;
 
         return $obj;
     }
@@ -107,7 +107,7 @@ final class Data implements BaseModel
     public function withSimCardsCost(SimCardsCost $simCardsCost): self
     {
         $obj = clone $this;
-        $obj->simCardsCost = $simCardsCost;
+        $obj->sim_cards_cost = $simCardsCost;
 
         return $obj;
     }
@@ -115,7 +115,7 @@ final class Data implements BaseModel
     public function withTotalCost(TotalCost $totalCost): self
     {
         $obj = clone $this;
-        $obj->totalCost = $totalCost;
+        $obj->total_cost = $totalCost;
 
         return $obj;
     }

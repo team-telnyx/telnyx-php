@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type MetaShape = array{url?: string}
+ * @phpstan-type MetaShape = array{url?: string|null}
  */
 final class Meta implements BaseModel
 {

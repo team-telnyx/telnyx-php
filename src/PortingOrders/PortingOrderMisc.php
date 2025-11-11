@@ -11,9 +11,9 @@ use Telnyx\PortingOrders\PortingOrderMisc\RemainingNumbersAction;
 
 /**
  * @phpstan-type PortingOrderMiscShape = array{
- *   newBillingPhoneNumber?: string,
- *   remainingNumbersAction?: value-of<RemainingNumbersAction>,
- *   type?: value-of<PortingOrderType>,
+ *   new_billing_phone_number?: string|null,
+ *   remaining_numbers_action?: value-of<RemainingNumbersAction>|null,
+ *   type?: value-of<PortingOrderType>|null,
  * }
  */
 final class PortingOrderMisc implements BaseModel
@@ -24,20 +24,16 @@ final class PortingOrderMisc implements BaseModel
     /**
      * New billing phone number for the remaining numbers. Used in case the current billing phone number is being ported to Telnyx. This will be set on your account with your current service provider and should be one of the numbers remaining on that account.
      */
-    #[Api('new_billing_phone_number', optional: true)]
-    public ?string $newBillingPhoneNumber;
+    #[Api(optional: true)]
+    public ?string $new_billing_phone_number;
 
     /**
      * Remaining numbers can be either kept with their current service provider or disconnected. 'new_billing_telephone_number' is required when 'remaining_numbers_action' is 'keep'.
      *
-     * @var value-of<RemainingNumbersAction>|null $remainingNumbersAction
+     * @var value-of<RemainingNumbersAction>|null $remaining_numbers_action
      */
-    #[Api(
-        'remaining_numbers_action',
-        enum: RemainingNumbersAction::class,
-        optional: true,
-    )]
-    public ?string $remainingNumbersAction;
+    #[Api(enum: RemainingNumbersAction::class, optional: true)]
+    public ?string $remaining_numbers_action;
 
     /**
      * A port can be either 'full' or 'partial'. When type is 'full' the other attributes should be omitted.
@@ -57,18 +53,18 @@ final class PortingOrderMisc implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param RemainingNumbersAction|value-of<RemainingNumbersAction> $remainingNumbersAction
+     * @param RemainingNumbersAction|value-of<RemainingNumbersAction> $remaining_numbers_action
      * @param PortingOrderType|value-of<PortingOrderType> $type
      */
     public static function with(
-        ?string $newBillingPhoneNumber = null,
-        RemainingNumbersAction|string|null $remainingNumbersAction = null,
+        ?string $new_billing_phone_number = null,
+        RemainingNumbersAction|string|null $remaining_numbers_action = null,
         PortingOrderType|string|null $type = null,
     ): self {
         $obj = new self;
 
-        null !== $newBillingPhoneNumber && $obj->newBillingPhoneNumber = $newBillingPhoneNumber;
-        null !== $remainingNumbersAction && $obj['remainingNumbersAction'] = $remainingNumbersAction;
+        null !== $new_billing_phone_number && $obj->new_billing_phone_number = $new_billing_phone_number;
+        null !== $remaining_numbers_action && $obj['remaining_numbers_action'] = $remaining_numbers_action;
         null !== $type && $obj['type'] = $type;
 
         return $obj;
@@ -81,7 +77,7 @@ final class PortingOrderMisc implements BaseModel
         string $newBillingPhoneNumber
     ): self {
         $obj = clone $this;
-        $obj->newBillingPhoneNumber = $newBillingPhoneNumber;
+        $obj->new_billing_phone_number = $newBillingPhoneNumber;
 
         return $obj;
     }
@@ -95,7 +91,7 @@ final class PortingOrderMisc implements BaseModel
         RemainingNumbersAction|string $remainingNumbersAction
     ): self {
         $obj = clone $this;
-        $obj['remainingNumbersAction'] = $remainingNumbersAction;
+        $obj['remaining_numbers_action'] = $remainingNumbersAction;
 
         return $obj;
     }

@@ -13,7 +13,7 @@ use Telnyx\PortingOrdersExceptionType;
 
 /**
  * @phpstan-type PortingOrderGetExceptionTypesResponseShape = array{
- *   data?: list<PortingOrdersExceptionType>
+ *   data?: list<PortingOrdersExceptionType>|null
  * }
  */
 final class PortingOrderGetExceptionTypesResponse implements BaseModel, ResponseConverter

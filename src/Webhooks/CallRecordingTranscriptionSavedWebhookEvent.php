@@ -11,7 +11,7 @@ use Telnyx\Webhooks\CallRecordingTranscriptionSavedWebhookEvent\Data;
 
 /**
  * @phpstan-type CallRecordingTranscriptionSavedWebhookEventShape = array{
- *   data?: Data
+ *   data?: Data|null
  * }
  */
 final class CallRecordingTranscriptionSavedWebhookEvent implements BaseModel

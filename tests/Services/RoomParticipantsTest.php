@@ -47,7 +47,7 @@ final class RoomParticipantsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->roomParticipants->list();
+        $result = $this->client->roomParticipants->list([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

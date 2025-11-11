@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * Filter phone numbers by pattern matching.
  *
  * @phpstan-type PhoneNumberShape = array{
- *   contains?: string, endsWith?: string, startsWith?: string
+ *   contains?: string|null, ends_with?: string|null, starts_with?: string|null
  * }
  */
 final class PhoneNumber implements BaseModel
@@ -29,14 +29,14 @@ final class PhoneNumber implements BaseModel
     /**
      * Filter numbers ending with a pattern (excludes NDC if used with `national_destination_code` filter).
      */
-    #[Api('ends_with', optional: true)]
-    public ?string $endsWith;
+    #[Api(optional: true)]
+    public ?string $ends_with;
 
     /**
      * Filter numbers starting with a pattern (excludes NDC if used with `national_destination_code` filter).
      */
-    #[Api('starts_with', optional: true)]
-    public ?string $startsWith;
+    #[Api(optional: true)]
+    public ?string $starts_with;
 
     public function __construct()
     {
@@ -50,14 +50,14 @@ final class PhoneNumber implements BaseModel
      */
     public static function with(
         ?string $contains = null,
-        ?string $endsWith = null,
-        ?string $startsWith = null
+        ?string $ends_with = null,
+        ?string $starts_with = null,
     ): self {
         $obj = new self;
 
         null !== $contains && $obj->contains = $contains;
-        null !== $endsWith && $obj->endsWith = $endsWith;
-        null !== $startsWith && $obj->startsWith = $startsWith;
+        null !== $ends_with && $obj->ends_with = $ends_with;
+        null !== $starts_with && $obj->starts_with = $starts_with;
 
         return $obj;
     }
@@ -79,7 +79,7 @@ final class PhoneNumber implements BaseModel
     public function withEndsWith(string $endsWith): self
     {
         $obj = clone $this;
-        $obj->endsWith = $endsWith;
+        $obj->ends_with = $endsWith;
 
         return $obj;
     }
@@ -90,7 +90,7 @@ final class PhoneNumber implements BaseModel
     public function withStartsWith(string $startsWith): self
     {
         $obj = clone $this;
-        $obj->startsWith = $startsWith;
+        $obj->starts_with = $startsWith;
 
         return $obj;
     }

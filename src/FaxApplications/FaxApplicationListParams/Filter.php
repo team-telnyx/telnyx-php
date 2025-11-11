@@ -13,7 +13,8 @@ use Telnyx\FaxApplications\FaxApplicationListParams\Filter\ApplicationName;
  * Consolidated filter parameter (deepObject style). Originally: filter[application_name][contains], filter[outbound_voice_profile_id].
  *
  * @phpstan-type FilterShape = array{
- *   applicationName?: ApplicationName, outboundVoiceProfileID?: string
+ *   application_name?: ApplicationName|null,
+ *   outbound_voice_profile_id?: string|null,
  * }
  */
 final class Filter implements BaseModel
@@ -24,14 +25,14 @@ final class Filter implements BaseModel
     /**
      * Application name filtering operations.
      */
-    #[Api('application_name', optional: true)]
-    public ?ApplicationName $applicationName;
+    #[Api(optional: true)]
+    public ?ApplicationName $application_name;
 
     /**
      * Identifies the associated outbound voice profile.
      */
-    #[Api('outbound_voice_profile_id', optional: true)]
-    public ?string $outboundVoiceProfileID;
+    #[Api(optional: true)]
+    public ?string $outbound_voice_profile_id;
 
     public function __construct()
     {
@@ -44,13 +45,13 @@ final class Filter implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?ApplicationName $applicationName = null,
-        ?string $outboundVoiceProfileID = null,
+        ?ApplicationName $application_name = null,
+        ?string $outbound_voice_profile_id = null,
     ): self {
         $obj = new self;
 
-        null !== $applicationName && $obj->applicationName = $applicationName;
-        null !== $outboundVoiceProfileID && $obj->outboundVoiceProfileID = $outboundVoiceProfileID;
+        null !== $application_name && $obj->application_name = $application_name;
+        null !== $outbound_voice_profile_id && $obj->outbound_voice_profile_id = $outbound_voice_profile_id;
 
         return $obj;
     }
@@ -61,7 +62,7 @@ final class Filter implements BaseModel
     public function withApplicationName(ApplicationName $applicationName): self
     {
         $obj = clone $this;
-        $obj->applicationName = $applicationName;
+        $obj->application_name = $applicationName;
 
         return $obj;
     }
@@ -73,7 +74,7 @@ final class Filter implements BaseModel
         string $outboundVoiceProfileID
     ): self {
         $obj = clone $this;
-        $obj->outboundVoiceProfileID = $outboundVoiceProfileID;
+        $obj->outbound_voice_profile_id = $outboundVoiceProfileID;
 
         return $obj;
     }

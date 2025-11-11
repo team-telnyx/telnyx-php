@@ -13,7 +13,7 @@ use Telnyx\Storage\Buckets\Usage\UsageGetBucketUsageResponse\Data;
 
 /**
  * @phpstan-type UsageGetBucketUsageResponseShape = array{
- *   data?: list<Data>, meta?: PaginationMetaSimple
+ *   data?: list<Data>|null, meta?: PaginationMetaSimple|null
  * }
  */
 final class UsageGetBucketUsageResponse implements BaseModel, ResponseConverter

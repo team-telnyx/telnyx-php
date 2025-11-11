@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type ExternalConnectionUpdateResponseShape = array{
- *   data?: ExternalConnection
+ *   data?: ExternalConnection|null
  * }
  */
 final class ExternalConnectionUpdateResponse implements BaseModel, ResponseConverter

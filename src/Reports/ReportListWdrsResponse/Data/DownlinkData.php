@@ -10,7 +10,9 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Reports\ReportListWdrsResponse\Data\DownlinkData\Unit;
 
 /**
- * @phpstan-type DownlinkDataShape = array{amount?: float, unit?: value-of<Unit>}
+ * @phpstan-type DownlinkDataShape = array{
+ *   amount?: float|null, unit?: value-of<Unit>|null
+ * }
  */
 final class DownlinkData implements BaseModel
 {

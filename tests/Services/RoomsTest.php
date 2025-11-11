@@ -33,7 +33,7 @@ final class RoomsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->rooms->create();
+        $result = $this->client->rooms->create([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -46,7 +46,8 @@ final class RoomsTest extends TestCase
         }
 
         $result = $this->client->rooms->retrieve(
-            '0ccc7b54-4df3-4bca-a65a-3da1ecc777f0'
+            '0ccc7b54-4df3-4bca-a65a-3da1ecc777f0',
+            []
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -60,7 +61,8 @@ final class RoomsTest extends TestCase
         }
 
         $result = $this->client->rooms->update(
-            '0ccc7b54-4df3-4bca-a65a-3da1ecc777f0'
+            '0ccc7b54-4df3-4bca-a65a-3da1ecc777f0',
+            []
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -73,7 +75,7 @@ final class RoomsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->rooms->list();
+        $result = $this->client->rooms->list([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

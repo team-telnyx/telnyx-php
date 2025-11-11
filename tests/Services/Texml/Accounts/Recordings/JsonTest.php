@@ -41,7 +41,7 @@ final class JsonTest extends TestCase
             ->json
             ->deleteRecordingSidJson(
                 '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
-                'account_sid'
+                ['account_sid' => 'account_sid']
             )
         ;
 
@@ -63,7 +63,7 @@ final class JsonTest extends TestCase
             ->json
             ->deleteRecordingSidJson(
                 '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
-                'account_sid'
+                ['account_sid' => 'account_sid']
             )
         ;
 
@@ -85,7 +85,7 @@ final class JsonTest extends TestCase
             ->json
             ->retrieveRecordingSidJson(
                 '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
-                'account_sid'
+                ['account_sid' => 'account_sid']
             )
         ;
 
@@ -107,7 +107,7 @@ final class JsonTest extends TestCase
             ->json
             ->retrieveRecordingSidJson(
                 '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
-                'account_sid'
+                ['account_sid' => 'account_sid']
             )
         ;
 

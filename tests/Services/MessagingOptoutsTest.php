@@ -33,7 +33,7 @@ final class MessagingOptoutsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->messagingOptouts->list();
+        $result = $this->client->messagingOptouts->list([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

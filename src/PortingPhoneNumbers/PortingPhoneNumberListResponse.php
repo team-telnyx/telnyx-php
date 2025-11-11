@@ -14,7 +14,7 @@ use Telnyx\PortingPhoneNumbers\PortingPhoneNumberListResponse\Data;
 
 /**
  * @phpstan-type PortingPhoneNumberListResponseShape = array{
- *   data?: list<Data>, meta?: PaginationMeta
+ *   data?: list<Data>|null, meta?: PaginationMeta|null
  * }
  */
 final class PortingPhoneNumberListResponse implements BaseModel, ResponseConverter

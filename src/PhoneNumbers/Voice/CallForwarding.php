@@ -13,9 +13,9 @@ use Telnyx\PhoneNumbers\Voice\CallForwarding\ForwardingType;
  * The call forwarding settings for a phone number.
  *
  * @phpstan-type CallForwardingShape = array{
- *   callForwardingEnabled?: bool,
- *   forwardingType?: value-of<ForwardingType>,
- *   forwardsTo?: string,
+ *   call_forwarding_enabled?: bool|null,
+ *   forwarding_type?: value-of<ForwardingType>|null,
+ *   forwards_to?: string|null,
  * }
  */
 final class CallForwarding implements BaseModel
@@ -26,22 +26,22 @@ final class CallForwarding implements BaseModel
     /**
      * Indicates if call forwarding will be enabled for this number if forwards_to and forwarding_type are filled in. Defaults to true for backwards compatibility with APIV1 use of numbers endpoints.
      */
-    #[Api('call_forwarding_enabled', optional: true)]
-    public ?bool $callForwardingEnabled;
+    #[Api(optional: true)]
+    public ?bool $call_forwarding_enabled;
 
     /**
      * Call forwarding type. 'forwards_to' must be set for this to have an effect.
      *
-     * @var value-of<ForwardingType>|null $forwardingType
+     * @var value-of<ForwardingType>|null $forwarding_type
      */
-    #[Api('forwarding_type', enum: ForwardingType::class, optional: true)]
-    public ?string $forwardingType;
+    #[Api(enum: ForwardingType::class, optional: true)]
+    public ?string $forwarding_type;
 
     /**
      * The phone number to which inbound calls to this number are forwarded. Inbound calls will not be forwarded if this field is left blank. If set, must be a +E.164-formatted phone number.
      */
-    #[Api('forwards_to', optional: true)]
-    public ?string $forwardsTo;
+    #[Api(optional: true)]
+    public ?string $forwards_to;
 
     public function __construct()
     {
@@ -53,18 +53,18 @@ final class CallForwarding implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ForwardingType|value-of<ForwardingType> $forwardingType
+     * @param ForwardingType|value-of<ForwardingType> $forwarding_type
      */
     public static function with(
-        ?bool $callForwardingEnabled = null,
-        ForwardingType|string|null $forwardingType = null,
-        ?string $forwardsTo = null,
+        ?bool $call_forwarding_enabled = null,
+        ForwardingType|string|null $forwarding_type = null,
+        ?string $forwards_to = null,
     ): self {
         $obj = new self;
 
-        null !== $callForwardingEnabled && $obj->callForwardingEnabled = $callForwardingEnabled;
-        null !== $forwardingType && $obj['forwardingType'] = $forwardingType;
-        null !== $forwardsTo && $obj->forwardsTo = $forwardsTo;
+        null !== $call_forwarding_enabled && $obj->call_forwarding_enabled = $call_forwarding_enabled;
+        null !== $forwarding_type && $obj['forwarding_type'] = $forwarding_type;
+        null !== $forwards_to && $obj->forwards_to = $forwards_to;
 
         return $obj;
     }
@@ -75,7 +75,7 @@ final class CallForwarding implements BaseModel
     public function withCallForwardingEnabled(bool $callForwardingEnabled): self
     {
         $obj = clone $this;
-        $obj->callForwardingEnabled = $callForwardingEnabled;
+        $obj->call_forwarding_enabled = $callForwardingEnabled;
 
         return $obj;
     }
@@ -89,7 +89,7 @@ final class CallForwarding implements BaseModel
         ForwardingType|string $forwardingType
     ): self {
         $obj = clone $this;
-        $obj['forwardingType'] = $forwardingType;
+        $obj['forwarding_type'] = $forwardingType;
 
         return $obj;
     }
@@ -100,7 +100,7 @@ final class CallForwarding implements BaseModel
     public function withForwardsTo(string $forwardsTo): self
     {
         $obj = clone $this;
-        $obj->forwardsTo = $forwardsTo;
+        $obj->forwards_to = $forwardsTo;
 
         return $obj;
     }

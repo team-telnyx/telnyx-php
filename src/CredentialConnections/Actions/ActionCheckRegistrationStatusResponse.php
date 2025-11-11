@@ -12,7 +12,9 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\CredentialConnections\Actions\ActionCheckRegistrationStatusResponse\Data;
 
 /**
- * @phpstan-type ActionCheckRegistrationStatusResponseShape = array{data?: Data}
+ * @phpstan-type ActionCheckRegistrationStatusResponseShape = array{
+ *   data?: Data|null
+ * }
  */
 final class ActionCheckRegistrationStatusResponse implements BaseModel, ResponseConverter
 {

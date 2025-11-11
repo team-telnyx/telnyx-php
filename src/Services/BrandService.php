@@ -23,12 +23,10 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\BrandContract;
 use Telnyx\Services\Brand\ExternalVettingService;
 
-use const Telnyx\Core\OMIT as omit;
-
 final class BrandService implements BrandContract
 {
     /**
-     * @@api
+     * @api
      */
     public ExternalVettingService $externalVetting;
 
@@ -45,106 +43,42 @@ final class BrandService implements BrandContract
      *
      * This endpoint is used to create a new brand. A brand is an entity created by The Campaign Registry (TCR) that represents an organization or a company. It is this entity that TCR created campaigns will be associated with. Each brand creation will entail an upfront, non-refundable $4 expense.
      *
-     * @param string $country ISO2 2 characters country code. Example: US - United States
-     * @param string $displayName display name, marketing name, or DBA name of the brand
-     * @param string $email valid email address of brand support contact
-     * @param EntityType|value-of<EntityType> $entityType Entity type behind the brand. This is the form of business establishment.
-     * @param Vertical|value-of<Vertical> $vertical vertical or industry segment of the brand or campaign
-     * @param string $businessContactEmail Business contact email.
-     *
-     * Required if `entityType` is `PUBLIC_PROFIT`. Otherwise, it is recommended to either omit this field or set it to `null`.
-     * @param string $city City name
-     * @param string $companyName (Required for Non-profit/private/public) Legal company name
-     * @param string $ein (Required for Non-profit) Government assigned corporate tax ID. EIN is 9-digits in U.S.
-     * @param string $firstName first name of business contact
-     * @param string $ipAddress IP address of the browser requesting to create brand identity
-     * @param bool $isReseller
-     * @param string $lastName last name of business contact
-     * @param string $mobilePhone Valid mobile phone number in e.164 international format.
-     * @param bool $mock Mock brand for testing purposes. Defaults to false.
-     * @param string $phone Valid phone number in e.164 international format.
-     * @param string $postalCode Postal codes. Use 5 digit zipcode for United States
-     * @param string $state State. Must be 2 letters code for United States.
-     * @param StockExchange|value-of<StockExchange> $stockExchange (Required for public company) stock exchange
-     * @param string $stockSymbol (Required for public company) stock symbol
-     * @param string $street street number and name
-     * @param string $webhookFailoverURL webhook failover URL for brand status updates
-     * @param string $webhookURL webhook URL for brand status updates
-     * @param string $website brand website URL
+     * @param array{
+     *   country: string,
+     *   displayName: string,
+     *   email: string,
+     *   entityType: "PRIVATE_PROFIT"|"PUBLIC_PROFIT"|"NON_PROFIT"|"GOVERNMENT"|EntityType,
+     *   vertical: value-of<Vertical>,
+     *   businessContactEmail?: string,
+     *   city?: string,
+     *   companyName?: string,
+     *   ein?: string,
+     *   firstName?: string,
+     *   ipAddress?: string,
+     *   isReseller?: bool,
+     *   lastName?: string,
+     *   mobilePhone?: string,
+     *   mock?: bool,
+     *   phone?: string,
+     *   postalCode?: string,
+     *   state?: string,
+     *   stockExchange?: value-of<StockExchange>,
+     *   stockSymbol?: string,
+     *   street?: string,
+     *   webhookFailoverURL?: string,
+     *   webhookURL?: string,
+     *   website?: string,
+     * }|BrandCreateParams $params
      *
      * @throws APIException
      */
     public function create(
-        $country,
-        $displayName,
-        $email,
-        $entityType,
-        $vertical,
-        $businessContactEmail = omit,
-        $city = omit,
-        $companyName = omit,
-        $ein = omit,
-        $firstName = omit,
-        $ipAddress = omit,
-        $isReseller = omit,
-        $lastName = omit,
-        $mobilePhone = omit,
-        $mock = omit,
-        $phone = omit,
-        $postalCode = omit,
-        $state = omit,
-        $stockExchange = omit,
-        $stockSymbol = omit,
-        $street = omit,
-        $webhookFailoverURL = omit,
-        $webhookURL = omit,
-        $website = omit,
-        ?RequestOptions $requestOptions = null,
-    ): TelnyxBrand {
-        $params = [
-            'country' => $country,
-            'displayName' => $displayName,
-            'email' => $email,
-            'entityType' => $entityType,
-            'vertical' => $vertical,
-            'businessContactEmail' => $businessContactEmail,
-            'city' => $city,
-            'companyName' => $companyName,
-            'ein' => $ein,
-            'firstName' => $firstName,
-            'ipAddress' => $ipAddress,
-            'isReseller' => $isReseller,
-            'lastName' => $lastName,
-            'mobilePhone' => $mobilePhone,
-            'mock' => $mock,
-            'phone' => $phone,
-            'postalCode' => $postalCode,
-            'state' => $state,
-            'stockExchange' => $stockExchange,
-            'stockSymbol' => $stockSymbol,
-            'street' => $street,
-            'webhookFailoverURL' => $webhookFailoverURL,
-            'webhookURL' => $webhookURL,
-            'website' => $website,
-        ];
-
-        return $this->createRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
+        array|BrandCreateParams $params,
         ?RequestOptions $requestOptions = null
     ): TelnyxBrand {
         [$parsed, $options] = BrandCreateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -182,111 +116,44 @@ final class BrandService implements BrandContract
      *
      * Update a brand's attributes by `brandId`.
      *
-     * @param string $country ISO2 2 characters country code. Example: US - United States
-     * @param string $displayName display or marketing name of the brand
-     * @param string $email valid email address of brand support contact
-     * @param EntityType|value-of<EntityType> $entityType Entity type behind the brand. This is the form of business establishment.
-     * @param Vertical|value-of<Vertical> $vertical vertical or industry segment of the brand or campaign
-     * @param string $altBusinessID Alternate business identifier such as DUNS, LEI, or GIIN
-     * @param AltBusinessIDType|value-of<AltBusinessIDType> $altBusinessIDType an enumeration
-     * @param string $businessContactEmail Business contact email.
-     *
-     * Required if `entityType` will be changed to `PUBLIC_PROFIT`. Otherwise, it is recommended to either omit this field or set it to `null`.
-     * @param string $city City name
-     * @param string $companyName (Required for Non-profit/private/public) Legal company name
-     * @param string $ein (Required for Non-profit) Government assigned corporate tax ID. EIN is 9-digits in U.S.
-     * @param string $firstName first name of business contact
-     * @param BrandIdentityStatus|value-of<BrandIdentityStatus> $identityStatus The verification status of an active brand
-     * @param string $ipAddress IP address of the browser requesting to create brand identity
-     * @param bool $isReseller
-     * @param string $lastName last name of business contact
-     * @param string $phone Valid phone number in e.164 international format.
-     * @param string $postalCode Postal codes. Use 5 digit zipcode for United States
-     * @param string $state State. Must be 2 letters code for United States.
-     * @param StockExchange|value-of<StockExchange> $stockExchange (Required for public company) stock exchange
-     * @param string $stockSymbol (Required for public company) stock symbol
-     * @param string $street street number and name
-     * @param string $webhookFailoverURL webhook failover URL for brand status updates
-     * @param string $webhookURL webhook URL for brand status updates
-     * @param string $website brand website URL
+     * @param array{
+     *   country: string,
+     *   displayName: string,
+     *   email: string,
+     *   entityType: "PRIVATE_PROFIT"|"PUBLIC_PROFIT"|"NON_PROFIT"|"GOVERNMENT"|EntityType,
+     *   vertical: value-of<Vertical>,
+     *   altBusiness_id?: string,
+     *   altBusinessIdType?: "NONE"|"DUNS"|"GIIN"|"LEI"|AltBusinessIDType,
+     *   businessContactEmail?: string,
+     *   city?: string,
+     *   companyName?: string,
+     *   ein?: string,
+     *   firstName?: string,
+     *   identityStatus?: "VERIFIED"|"UNVERIFIED"|"SELF_DECLARED"|"VETTED_VERIFIED"|BrandIdentityStatus,
+     *   ipAddress?: string,
+     *   isReseller?: bool,
+     *   lastName?: string,
+     *   phone?: string,
+     *   postalCode?: string,
+     *   state?: string,
+     *   stockExchange?: value-of<StockExchange>,
+     *   stockSymbol?: string,
+     *   street?: string,
+     *   webhookFailoverURL?: string,
+     *   webhookURL?: string,
+     *   website?: string,
+     * }|BrandUpdateParams $params
      *
      * @throws APIException
      */
     public function update(
         string $brandID,
-        $country,
-        $displayName,
-        $email,
-        $entityType,
-        $vertical,
-        $altBusinessID = omit,
-        $altBusinessIDType = omit,
-        $businessContactEmail = omit,
-        $city = omit,
-        $companyName = omit,
-        $ein = omit,
-        $firstName = omit,
-        $identityStatus = omit,
-        $ipAddress = omit,
-        $isReseller = omit,
-        $lastName = omit,
-        $phone = omit,
-        $postalCode = omit,
-        $state = omit,
-        $stockExchange = omit,
-        $stockSymbol = omit,
-        $street = omit,
-        $webhookFailoverURL = omit,
-        $webhookURL = omit,
-        $website = omit,
+        array|BrandUpdateParams $params,
         ?RequestOptions $requestOptions = null,
-    ): TelnyxBrand {
-        $params = [
-            'country' => $country,
-            'displayName' => $displayName,
-            'email' => $email,
-            'entityType' => $entityType,
-            'vertical' => $vertical,
-            'altBusinessID' => $altBusinessID,
-            'altBusinessIDType' => $altBusinessIDType,
-            'businessContactEmail' => $businessContactEmail,
-            'city' => $city,
-            'companyName' => $companyName,
-            'ein' => $ein,
-            'firstName' => $firstName,
-            'identityStatus' => $identityStatus,
-            'ipAddress' => $ipAddress,
-            'isReseller' => $isReseller,
-            'lastName' => $lastName,
-            'phone' => $phone,
-            'postalCode' => $postalCode,
-            'state' => $state,
-            'stockExchange' => $stockExchange,
-            'stockSymbol' => $stockSymbol,
-            'street' => $street,
-            'webhookFailoverURL' => $webhookFailoverURL,
-            'webhookURL' => $webhookURL,
-            'website' => $website,
-        ];
-
-        return $this->updateRaw($brandID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $brandID,
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): TelnyxBrand {
         [$parsed, $options] = BrandUpdateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -304,59 +171,27 @@ final class BrandService implements BrandContract
      *
      * This endpoint is used to list all brands associated with your organization.
      *
-     * @param string $brandID Filter results by the Telnyx Brand id
-     * @param string $country
-     * @param string $displayName
-     * @param string $entityType
-     * @param int $page
-     * @param int $recordsPerPage number of records per page. maximum of 500
-     * @param Sort|value-of<Sort> $sort Specifies the sort order for results. If not given, results are sorted by createdAt in descending order.
-     * @param string $state
-     * @param string $tcrBrandID Filter results by the TCR Brand id
+     * @param array{
+     *   brandId?: string,
+     *   country?: string,
+     *   displayName?: string,
+     *   entityType?: string,
+     *   page?: int,
+     *   recordsPerPage?: int,
+     *   sort?: value-of<Sort>,
+     *   state?: string,
+     *   tcrBrandId?: string,
+     * }|BrandListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $brandID = omit,
-        $country = omit,
-        $displayName = omit,
-        $entityType = omit,
-        $page = omit,
-        $recordsPerPage = omit,
-        $sort = omit,
-        $state = omit,
-        $tcrBrandID = omit,
-        ?RequestOptions $requestOptions = null,
-    ): BrandListResponse {
-        $params = [
-            'brandID' => $brandID,
-            'country' => $country,
-            'displayName' => $displayName,
-            'entityType' => $entityType,
-            'page' => $page,
-            'recordsPerPage' => $recordsPerPage,
-            'sort' => $sort,
-            'state' => $state,
-            'tcrBrandID' => $tcrBrandID,
-        ];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
+        array|BrandListParams $params,
         ?RequestOptions $requestOptions = null
     ): BrandListResponse {
         [$parsed, $options] = BrandListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

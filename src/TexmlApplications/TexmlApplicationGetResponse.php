@@ -11,7 +11,9 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type TexmlApplicationGetResponseShape = array{data?: TexmlApplication}
+ * @phpstan-type TexmlApplicationGetResponseShape = array{
+ *   data?: TexmlApplication|null
+ * }
  */
 final class TexmlApplicationGetResponse implements BaseModel, ResponseConverter
 {

@@ -10,9 +10,9 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type DataShape = array{
- *   acceptedAddressSuggestions?: bool,
- *   locationID?: string,
- *   staticEmergencyAddressID?: string,
+ *   accepted_address_suggestions?: bool|null,
+ *   location_id?: string|null,
+ *   static_emergency_address_id?: string|null,
  * }
  */
 final class Data implements BaseModel
@@ -20,14 +20,14 @@ final class Data implements BaseModel
     /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Api('accepted_address_suggestions', optional: true)]
-    public ?bool $acceptedAddressSuggestions;
+    #[Api(optional: true)]
+    public ?bool $accepted_address_suggestions;
 
-    #[Api('location_id', optional: true)]
-    public ?string $locationID;
+    #[Api(optional: true)]
+    public ?string $location_id;
 
-    #[Api('static_emergency_address_id', optional: true)]
-    public ?string $staticEmergencyAddressID;
+    #[Api(optional: true)]
+    public ?string $static_emergency_address_id;
 
     public function __construct()
     {
@@ -40,15 +40,15 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?bool $acceptedAddressSuggestions = null,
-        ?string $locationID = null,
-        ?string $staticEmergencyAddressID = null,
+        ?bool $accepted_address_suggestions = null,
+        ?string $location_id = null,
+        ?string $static_emergency_address_id = null,
     ): self {
         $obj = new self;
 
-        null !== $acceptedAddressSuggestions && $obj->acceptedAddressSuggestions = $acceptedAddressSuggestions;
-        null !== $locationID && $obj->locationID = $locationID;
-        null !== $staticEmergencyAddressID && $obj->staticEmergencyAddressID = $staticEmergencyAddressID;
+        null !== $accepted_address_suggestions && $obj->accepted_address_suggestions = $accepted_address_suggestions;
+        null !== $location_id && $obj->location_id = $location_id;
+        null !== $static_emergency_address_id && $obj->static_emergency_address_id = $static_emergency_address_id;
 
         return $obj;
     }
@@ -57,7 +57,7 @@ final class Data implements BaseModel
         bool $acceptedAddressSuggestions
     ): self {
         $obj = clone $this;
-        $obj->acceptedAddressSuggestions = $acceptedAddressSuggestions;
+        $obj->accepted_address_suggestions = $acceptedAddressSuggestions;
 
         return $obj;
     }
@@ -65,7 +65,7 @@ final class Data implements BaseModel
     public function withLocationID(string $locationID): self
     {
         $obj = clone $this;
-        $obj->locationID = $locationID;
+        $obj->location_id = $locationID;
 
         return $obj;
     }
@@ -74,7 +74,7 @@ final class Data implements BaseModel
         string $staticEmergencyAddressID
     ): self {
         $obj = clone $this;
-        $obj->staticEmergencyAddressID = $staticEmergencyAddressID;
+        $obj->static_emergency_address_id = $staticEmergencyAddressID;
 
         return $obj;
     }

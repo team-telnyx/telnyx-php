@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\AI\Conversations->update
  *
  * @phpstan-type ConversationUpdateParamsShape = array{
- *   metadata?: array<string, string>
+ *   metadata?: array<string,string>
  * }
  */
 final class ConversationUpdateParams implements BaseModel
@@ -27,7 +27,7 @@ final class ConversationUpdateParams implements BaseModel
     /**
      * Metadata associated with the conversation.
      *
-     * @var array<string, string>|null $metadata
+     * @var array<string,string>|null $metadata
      */
     #[Api(map: 'string', optional: true)]
     public ?array $metadata;
@@ -42,7 +42,7 @@ final class ConversationUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param array<string, string> $metadata
+     * @param array<string,string> $metadata
      */
     public static function with(?array $metadata = null): self
     {
@@ -56,7 +56,7 @@ final class ConversationUpdateParams implements BaseModel
     /**
      * Metadata associated with the conversation.
      *
-     * @param array<string, string> $metadata
+     * @param array<string,string> $metadata
      */
     public function withMetadata(array $metadata): self
     {

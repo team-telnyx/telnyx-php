@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\SimCardGroups->retrieve
  *
- * @phpstan-type SimCardGroupRetrieveParamsShape = array{includeIccids?: bool}
+ * @phpstan-type SimCardGroupRetrieveParamsShape = array{include_iccids?: bool}
  */
 final class SimCardGroupRetrieveParams implements BaseModel
 {
@@ -26,7 +26,7 @@ final class SimCardGroupRetrieveParams implements BaseModel
      * It includes a list of associated ICCIDs.
      */
     #[Api(optional: true)]
-    public ?bool $includeIccids;
+    public ?bool $include_iccids;
 
     public function __construct()
     {
@@ -38,11 +38,11 @@ final class SimCardGroupRetrieveParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?bool $includeIccids = null): self
+    public static function with(?bool $include_iccids = null): self
     {
         $obj = new self;
 
-        null !== $includeIccids && $obj->includeIccids = $includeIccids;
+        null !== $include_iccids && $obj->include_iccids = $include_iccids;
 
         return $obj;
     }
@@ -53,7 +53,7 @@ final class SimCardGroupRetrieveParams implements BaseModel
     public function withIncludeIccids(bool $includeIccids): self
     {
         $obj = clone $this;
-        $obj->includeIccids = $includeIccids;
+        $obj->include_iccids = $includeIccids;
 
         return $obj;
     }

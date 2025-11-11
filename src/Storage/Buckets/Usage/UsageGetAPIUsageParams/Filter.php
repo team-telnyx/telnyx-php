@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * Consolidated filter parameter (deepObject style). Originally: filter[start_time], filter[end_time].
  *
  * @phpstan-type FilterShape = array{
- *   endTime: \DateTimeInterface, startTime: \DateTimeInterface
+ *   end_time: \DateTimeInterface, start_time: \DateTimeInterface
  * }
  */
 final class Filter implements BaseModel
@@ -23,21 +23,21 @@ final class Filter implements BaseModel
     /**
      * The end time of the period to filter the usage (ISO microsecond format).
      */
-    #[Api('end_time')]
-    public \DateTimeInterface $endTime;
+    #[Api]
+    public \DateTimeInterface $end_time;
 
     /**
      * The start time of the period to filter the usage (ISO microsecond format).
      */
-    #[Api('start_time')]
-    public \DateTimeInterface $startTime;
+    #[Api]
+    public \DateTimeInterface $start_time;
 
     /**
      * `new Filter()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Filter::with(endTime: ..., startTime: ...)
+     * Filter::with(end_time: ..., start_time: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -57,13 +57,13 @@ final class Filter implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        \DateTimeInterface $endTime,
-        \DateTimeInterface $startTime
+        \DateTimeInterface $end_time,
+        \DateTimeInterface $start_time
     ): self {
         $obj = new self;
 
-        $obj->endTime = $endTime;
-        $obj->startTime = $startTime;
+        $obj->end_time = $end_time;
+        $obj->start_time = $start_time;
 
         return $obj;
     }
@@ -74,7 +74,7 @@ final class Filter implements BaseModel
     public function withEndTime(\DateTimeInterface $endTime): self
     {
         $obj = clone $this;
-        $obj->endTime = $endTime;
+        $obj->end_time = $endTime;
 
         return $obj;
     }
@@ -85,7 +85,7 @@ final class Filter implements BaseModel
     public function withStartTime(\DateTimeInterface $startTime): self
     {
         $obj = clone $this;
-        $obj->startTime = $startTime;
+        $obj->start_time = $startTime;
 
         return $obj;
     }

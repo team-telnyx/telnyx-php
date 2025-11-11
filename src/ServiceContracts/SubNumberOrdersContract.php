@@ -5,93 +5,55 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\NumberOrderPhoneNumbers\UpdateRegulatoryRequirement;
 use Telnyx\RequestOptions;
 use Telnyx\SubNumberOrders\SubNumberOrderCancelResponse;
 use Telnyx\SubNumberOrders\SubNumberOrderGetResponse;
+use Telnyx\SubNumberOrders\SubNumberOrderListParams;
 use Telnyx\SubNumberOrders\SubNumberOrderListResponse;
-use Telnyx\SubNumberOrders\SubNumberOrderRetrieveParams\Filter;
+use Telnyx\SubNumberOrders\SubNumberOrderRetrieveParams;
+use Telnyx\SubNumberOrders\SubNumberOrderUpdateParams;
+use Telnyx\SubNumberOrders\SubNumberOrderUpdateRequirementGroupParams;
 use Telnyx\SubNumberOrders\SubNumberOrderUpdateRequirementGroupResponse;
 use Telnyx\SubNumberOrders\SubNumberOrderUpdateResponse;
-
-use const Telnyx\Core\OMIT as omit;
 
 interface SubNumberOrdersContract
 {
     /**
      * @api
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[include_phone_numbers]
+     * @param array<mixed>|SubNumberOrderRetrieveParams $params
      *
      * @throws APIException
      */
     public function retrieve(
         string $subNumberOrderID,
-        $filter = omit,
+        array|SubNumberOrderRetrieveParams $params,
         ?RequestOptions $requestOptions = null,
     ): SubNumberOrderGetResponse;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $subNumberOrderID,
-        array $params,
-        ?RequestOptions $requestOptions = null,
-    ): SubNumberOrderGetResponse;
-
-    /**
-     * @api
-     *
-     * @param list<UpdateRegulatoryRequirement> $regulatoryRequirements
+     * @param array<mixed>|SubNumberOrderUpdateParams $params
      *
      * @throws APIException
      */
     public function update(
         string $subNumberOrderID,
-        $regulatoryRequirements = omit,
+        array|SubNumberOrderUpdateParams $params,
         ?RequestOptions $requestOptions = null,
     ): SubNumberOrderUpdateResponse;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $subNumberOrderID,
-        array $params,
-        ?RequestOptions $requestOptions = null,
-    ): SubNumberOrderUpdateResponse;
-
-    /**
-     * @api
-     *
-     * @param \Telnyx\SubNumberOrders\SubNumberOrderListParams\Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[status], filter[order_request_id], filter[country_code], filter[phone_number_type], filter[phone_numbers_count]
+     * @param array<mixed>|SubNumberOrderListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        ?RequestOptions $requestOptions = null
-    ): SubNumberOrderListResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|SubNumberOrderListParams $params,
+        ?RequestOptions $requestOptions = null,
     ): SubNumberOrderListResponse;
 
     /**
@@ -107,26 +69,13 @@ interface SubNumberOrdersContract
     /**
      * @api
      *
-     * @param string $requirementGroupID The ID of the requirement group to associate
+     * @param array<mixed>|SubNumberOrderUpdateRequirementGroupParams $params
      *
      * @throws APIException
      */
     public function updateRequirementGroup(
         string $id,
-        $requirementGroupID,
-        ?RequestOptions $requestOptions = null
-    ): SubNumberOrderUpdateRequirementGroupResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRequirementGroupRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|SubNumberOrderUpdateRequirementGroupParams $params,
+        ?RequestOptions $requestOptions = null,
     ): SubNumberOrderUpdateRequirementGroupResponse;
 }

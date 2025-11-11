@@ -10,15 +10,15 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type RcsAgentShape = array{
- *   agentID?: string,
- *   agentName?: string,
- *   createdAt?: \DateTimeInterface,
- *   enabled?: bool,
- *   profileID?: string|null,
- *   updatedAt?: \DateTimeInterface,
- *   userID?: string,
- *   webhookFailoverURL?: string|null,
- *   webhookURL?: string|null,
+ *   agent_id?: string|null,
+ *   agent_name?: string|null,
+ *   created_at?: \DateTimeInterface|null,
+ *   enabled?: bool|null,
+ *   profile_id?: string|null,
+ *   updated_at?: \DateTimeInterface|null,
+ *   user_id?: string|null,
+ *   webhook_failover_url?: string|null,
+ *   webhook_url?: string|null,
  * }
  */
 final class RcsAgent implements BaseModel
@@ -29,20 +29,20 @@ final class RcsAgent implements BaseModel
     /**
      * RCS Agent ID.
      */
-    #[Api('agent_id', optional: true)]
-    public ?string $agentID;
+    #[Api(optional: true)]
+    public ?string $agent_id;
 
     /**
      * Human readable agent name.
      */
-    #[Api('agent_name', optional: true)]
-    public ?string $agentName;
+    #[Api(optional: true)]
+    public ?string $agent_name;
 
     /**
      * Date and time when the resource was created.
      */
-    #[Api('created_at', optional: true)]
-    public ?\DateTimeInterface $createdAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $created_at;
 
     /**
      * Specifies whether the agent is enabled.
@@ -53,32 +53,32 @@ final class RcsAgent implements BaseModel
     /**
      * Messaging profile ID associated with the RCS Agent.
      */
-    #[Api('profile_id', nullable: true, optional: true)]
-    public ?string $profileID;
+    #[Api(nullable: true, optional: true)]
+    public ?string $profile_id;
 
     /**
      * Date and time when the resource was updated.
      */
-    #[Api('updated_at', optional: true)]
-    public ?\DateTimeInterface $updatedAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $updated_at;
 
     /**
      * User ID associated with the RCS Agent.
      */
-    #[Api('user_id', optional: true)]
-    public ?string $userID;
+    #[Api(optional: true)]
+    public ?string $user_id;
 
     /**
      * Failover URL to receive RCS events.
      */
-    #[Api('webhook_failover_url', nullable: true, optional: true)]
-    public ?string $webhookFailoverURL;
+    #[Api(nullable: true, optional: true)]
+    public ?string $webhook_failover_url;
 
     /**
      * URL to receive RCS events.
      */
-    #[Api('webhook_url', nullable: true, optional: true)]
-    public ?string $webhookURL;
+    #[Api(nullable: true, optional: true)]
+    public ?string $webhook_url;
 
     public function __construct()
     {
@@ -91,27 +91,27 @@ final class RcsAgent implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $agentID = null,
-        ?string $agentName = null,
-        ?\DateTimeInterface $createdAt = null,
+        ?string $agent_id = null,
+        ?string $agent_name = null,
+        ?\DateTimeInterface $created_at = null,
         ?bool $enabled = null,
-        ?string $profileID = null,
-        ?\DateTimeInterface $updatedAt = null,
-        ?string $userID = null,
-        ?string $webhookFailoverURL = null,
-        ?string $webhookURL = null,
+        ?string $profile_id = null,
+        ?\DateTimeInterface $updated_at = null,
+        ?string $user_id = null,
+        ?string $webhook_failover_url = null,
+        ?string $webhook_url = null,
     ): self {
         $obj = new self;
 
-        null !== $agentID && $obj->agentID = $agentID;
-        null !== $agentName && $obj->agentName = $agentName;
-        null !== $createdAt && $obj->createdAt = $createdAt;
+        null !== $agent_id && $obj->agent_id = $agent_id;
+        null !== $agent_name && $obj->agent_name = $agent_name;
+        null !== $created_at && $obj->created_at = $created_at;
         null !== $enabled && $obj->enabled = $enabled;
-        null !== $profileID && $obj->profileID = $profileID;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
-        null !== $userID && $obj->userID = $userID;
-        null !== $webhookFailoverURL && $obj->webhookFailoverURL = $webhookFailoverURL;
-        null !== $webhookURL && $obj->webhookURL = $webhookURL;
+        null !== $profile_id && $obj->profile_id = $profile_id;
+        null !== $updated_at && $obj->updated_at = $updated_at;
+        null !== $user_id && $obj->user_id = $user_id;
+        null !== $webhook_failover_url && $obj->webhook_failover_url = $webhook_failover_url;
+        null !== $webhook_url && $obj->webhook_url = $webhook_url;
 
         return $obj;
     }
@@ -122,7 +122,7 @@ final class RcsAgent implements BaseModel
     public function withAgentID(string $agentID): self
     {
         $obj = clone $this;
-        $obj->agentID = $agentID;
+        $obj->agent_id = $agentID;
 
         return $obj;
     }
@@ -133,7 +133,7 @@ final class RcsAgent implements BaseModel
     public function withAgentName(string $agentName): self
     {
         $obj = clone $this;
-        $obj->agentName = $agentName;
+        $obj->agent_name = $agentName;
 
         return $obj;
     }
@@ -144,7 +144,7 @@ final class RcsAgent implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }
@@ -166,7 +166,7 @@ final class RcsAgent implements BaseModel
     public function withProfileID(?string $profileID): self
     {
         $obj = clone $this;
-        $obj->profileID = $profileID;
+        $obj->profile_id = $profileID;
 
         return $obj;
     }
@@ -177,7 +177,7 @@ final class RcsAgent implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $obj->updated_at = $updatedAt;
 
         return $obj;
     }
@@ -188,7 +188,7 @@ final class RcsAgent implements BaseModel
     public function withUserID(string $userID): self
     {
         $obj = clone $this;
-        $obj->userID = $userID;
+        $obj->user_id = $userID;
 
         return $obj;
     }
@@ -199,7 +199,7 @@ final class RcsAgent implements BaseModel
     public function withWebhookFailoverURL(?string $webhookFailoverURL): self
     {
         $obj = clone $this;
-        $obj->webhookFailoverURL = $webhookFailoverURL;
+        $obj->webhook_failover_url = $webhookFailoverURL;
 
         return $obj;
     }
@@ -210,7 +210,7 @@ final class RcsAgent implements BaseModel
     public function withWebhookURL(?string $webhookURL): self
     {
         $obj = clone $this;
-        $obj->webhookURL = $webhookURL;
+        $obj->webhook_url = $webhookURL;
 
         return $obj;
     }

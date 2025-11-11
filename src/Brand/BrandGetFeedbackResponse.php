@@ -13,7 +13,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type BrandGetFeedbackResponseShape = array{
- *   brandID: string, category: list<Category>
+ *   brandId: string, category: list<Category>
  * }
  */
 final class BrandGetFeedbackResponse implements BaseModel, ResponseConverter
@@ -26,8 +26,8 @@ final class BrandGetFeedbackResponse implements BaseModel, ResponseConverter
     /**
      * ID of the brand being queried about.
      */
-    #[Api('brandId')]
-    public string $brandID;
+    #[Api]
+    public string $brandId;
 
     /**
      * A list of reasons why brand creation/revetting didn't go as planned.
@@ -42,7 +42,7 @@ final class BrandGetFeedbackResponse implements BaseModel, ResponseConverter
      *
      * To enforce required parameters use
      * ```
-     * BrandGetFeedbackResponse::with(brandID: ..., category: ...)
+     * BrandGetFeedbackResponse::with(brandId: ..., category: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -63,11 +63,11 @@ final class BrandGetFeedbackResponse implements BaseModel, ResponseConverter
      *
      * @param list<Category> $category
      */
-    public static function with(string $brandID, array $category): self
+    public static function with(string $brandId, array $category): self
     {
         $obj = new self;
 
-        $obj->brandID = $brandID;
+        $obj->brandId = $brandId;
         $obj->category = $category;
 
         return $obj;
@@ -79,7 +79,7 @@ final class BrandGetFeedbackResponse implements BaseModel, ResponseConverter
     public function withBrandID(string $brandID): self
     {
         $obj = clone $this;
-        $obj->brandID = $brandID;
+        $obj->brandId = $brandID;
 
         return $obj;
     }

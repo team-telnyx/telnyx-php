@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type ExtensionRangeShape = array{endAt: int, startAt: int}
+ * @phpstan-type ExtensionRangeShape = array{end_at: int, start_at: int}
  */
 final class ExtensionRange implements BaseModel
 {
@@ -19,21 +19,21 @@ final class ExtensionRange implements BaseModel
     /**
      * Specifies the end of the extension range for this porting phone number extension.
      */
-    #[Api('end_at')]
-    public int $endAt;
+    #[Api]
+    public int $end_at;
 
     /**
      * Specifies the start of the extension range for this porting phone number extension.
      */
-    #[Api('start_at')]
-    public int $startAt;
+    #[Api]
+    public int $start_at;
 
     /**
      * `new ExtensionRange()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * ExtensionRange::with(endAt: ..., startAt: ...)
+     * ExtensionRange::with(end_at: ..., start_at: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -52,12 +52,12 @@ final class ExtensionRange implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(int $endAt, int $startAt): self
+    public static function with(int $end_at, int $start_at): self
     {
         $obj = new self;
 
-        $obj->endAt = $endAt;
-        $obj->startAt = $startAt;
+        $obj->end_at = $end_at;
+        $obj->start_at = $start_at;
 
         return $obj;
     }
@@ -68,7 +68,7 @@ final class ExtensionRange implements BaseModel
     public function withEndAt(int $endAt): self
     {
         $obj = clone $this;
-        $obj->endAt = $endAt;
+        $obj->end_at = $endAt;
 
         return $obj;
     }
@@ -79,7 +79,7 @@ final class ExtensionRange implements BaseModel
     public function withStartAt(int $startAt): self
     {
         $obj = clone $this;
-        $obj->startAt = $startAt;
+        $obj->start_at = $startAt;
 
         return $obj;
     }

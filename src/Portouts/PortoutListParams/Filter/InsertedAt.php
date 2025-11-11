@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * Filter by inserted_at date range using nested operations.
  *
  * @phpstan-type InsertedAtShape = array{
- *   gte?: \DateTimeInterface, lte?: \DateTimeInterface
+ *   gte?: \DateTimeInterface|null, lte?: \DateTimeInterface|null
  * }
  */
 final class InsertedAt implements BaseModel

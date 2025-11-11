@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type PhoneNumberGetResponseShape = array{
- *   data?: ExternalConnectionPhoneNumber
+ *   data?: ExternalConnectionPhoneNumber|null
  * }
  */
 final class PhoneNumberGetResponse implements BaseModel, ResponseConverter

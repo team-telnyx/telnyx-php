@@ -39,10 +39,10 @@ final class MessagingTest extends TestCase
             ->reporting
             ->batchDetailRecords
             ->messaging
-            ->create(
-                endTime: new \DateTimeImmutable('2024-02-12T23:59:59Z'),
-                startTime: new \DateTimeImmutable('2024-02-01T00:00:00Z'),
-            )
+            ->create([
+                'end_time' => '2024-02-12T23:59:59Z',
+                'start_time' => '2024-02-01T00:00:00Z',
+            ])
         ;
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -61,10 +61,10 @@ final class MessagingTest extends TestCase
             ->reporting
             ->batchDetailRecords
             ->messaging
-            ->create(
-                endTime: new \DateTimeImmutable('2024-02-12T23:59:59Z'),
-                startTime: new \DateTimeImmutable('2024-02-01T00:00:00Z'),
-            )
+            ->create([
+                'end_time' => '2024-02-12T23:59:59Z',
+                'start_time' => '2024-02-01T00:00:00Z',
+            ])
         ;
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType

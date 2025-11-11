@@ -47,7 +47,7 @@ final class PortoutsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->portouts->list();
+        $result = $this->client->portouts->list([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -60,7 +60,8 @@ final class PortoutsTest extends TestCase
         }
 
         $result = $this->client->portouts->listRejectionCodes(
-            '329d6658-8f93-405d-862f-648776e8afd7'
+            '329d6658-8f93-405d-862f-648776e8afd7',
+            []
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -75,8 +76,10 @@ final class PortoutsTest extends TestCase
 
         $result = $this->client->portouts->updateStatus(
             'authorized',
-            id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            reason: 'I do not recognize this transaction',
+            [
+                'id' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+                'reason' => 'I do not recognize this transaction',
+            ],
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -91,8 +94,10 @@ final class PortoutsTest extends TestCase
 
         $result = $this->client->portouts->updateStatus(
             'authorized',
-            id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            reason: 'I do not recognize this transaction',
+            [
+                'id' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+                'reason' => 'I do not recognize this transaction',
+            ],
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType

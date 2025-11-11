@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type OutboundShape = array{
- *   channelLimit?: int, outboundVoiceProfileID?: string
+ *   channel_limit?: int|null, outbound_voice_profile_id?: string|null
  * }
  */
 final class Outbound implements BaseModel
@@ -21,14 +21,14 @@ final class Outbound implements BaseModel
     /**
      * When set, this will limit the total number of outbound calls to phone numbers associated with this connection.
      */
-    #[Api('channel_limit', optional: true)]
-    public ?int $channelLimit;
+    #[Api(optional: true)]
+    public ?int $channel_limit;
 
     /**
      * Identifies the associated outbound voice profile.
      */
-    #[Api('outbound_voice_profile_id', optional: true)]
-    public ?string $outboundVoiceProfileID;
+    #[Api(optional: true)]
+    public ?string $outbound_voice_profile_id;
 
     public function __construct()
     {
@@ -41,13 +41,13 @@ final class Outbound implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?int $channelLimit = null,
-        ?string $outboundVoiceProfileID = null
+        ?int $channel_limit = null,
+        ?string $outbound_voice_profile_id = null
     ): self {
         $obj = new self;
 
-        null !== $channelLimit && $obj->channelLimit = $channelLimit;
-        null !== $outboundVoiceProfileID && $obj->outboundVoiceProfileID = $outboundVoiceProfileID;
+        null !== $channel_limit && $obj->channel_limit = $channel_limit;
+        null !== $outbound_voice_profile_id && $obj->outbound_voice_profile_id = $outbound_voice_profile_id;
 
         return $obj;
     }
@@ -58,7 +58,7 @@ final class Outbound implements BaseModel
     public function withChannelLimit(int $channelLimit): self
     {
         $obj = clone $this;
-        $obj->channelLimit = $channelLimit;
+        $obj->channel_limit = $channelLimit;
 
         return $obj;
     }
@@ -70,7 +70,7 @@ final class Outbound implements BaseModel
         string $outboundVoiceProfileID
     ): self {
         $obj = clone $this;
-        $obj->outboundVoiceProfileID = $outboundVoiceProfileID;
+        $obj->outbound_voice_profile_id = $outboundVoiceProfileID;
 
         return $obj;
     }

@@ -12,7 +12,11 @@ use Telnyx\PhoneNumberBlocks\Jobs\JobError\Source;
 
 /**
  * @phpstan-type JobErrorShape = array{
- *   code: string, title: string, detail?: string, meta?: Meta, source?: Source
+ *   code: string,
+ *   title: string,
+ *   detail?: string|null,
+ *   meta?: Meta|null,
+ *   source?: Source|null,
  * }
  */
 final class JobError implements BaseModel

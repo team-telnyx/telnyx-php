@@ -6,7 +6,6 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\ExternalConnections\ExternalConnectionCreateParams\Outbound;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -34,10 +33,9 @@ final class ExternalConnectionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->externalConnections->create(
-            externalSipConnection: 'zoom',
-            outbound: (new Outbound)
-        );
+        $result = $this->client->externalConnections->create([
+            'external_sip_connection' => 'zoom', 'outbound' => [],
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -49,12 +47,13 @@ final class ExternalConnectionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->externalConnections->create(
-            externalSipConnection: 'zoom',
-            outbound: (new Outbound)
-                ->withChannelLimit(10)
-                ->withOutboundVoiceProfileID('outbound_voice_profile_id'),
-        );
+        $result = $this->client->externalConnections->create([
+            'external_sip_connection' => 'zoom',
+            'outbound' => [
+                'channel_limit' => 10,
+                'outbound_voice_profile_id' => 'outbound_voice_profile_id',
+            ],
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -80,9 +79,11 @@ final class ExternalConnectionsTest extends TestCase
 
         $result = $this->client->externalConnections->update(
             'id',
-            outbound: \Telnyx\ExternalConnections\ExternalConnectionUpdateParams\Outbound::with(
-                outboundVoiceProfileID: 'outbound_voice_profile_id'
-            ),
+            [
+                'outbound' => [
+                    'outbound_voice_profile_id' => 'outbound_voice_profile_id',
+                ],
+            ],
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -97,10 +98,12 @@ final class ExternalConnectionsTest extends TestCase
 
         $result = $this->client->externalConnections->update(
             'id',
-            outbound: \Telnyx\ExternalConnections\ExternalConnectionUpdateParams\Outbound::with(
-                outboundVoiceProfileID: 'outbound_voice_profile_id'
-            )
-                ->withChannelLimit(10),
+            [
+                'outbound' => [
+                    'outbound_voice_profile_id' => 'outbound_voice_profile_id',
+                    'channel_limit' => 10,
+                ],
+            ],
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -113,7 +116,7 @@ final class ExternalConnectionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->externalConnections->list();
+        $result = $this->client->externalConnections->list([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -139,8 +142,10 @@ final class ExternalConnectionsTest extends TestCase
 
         $result = $this->client->externalConnections->updateLocation(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            staticEmergencyAddressID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+            [
+                'id' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+                'static_emergency_address_id' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+            ],
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -155,8 +160,10 @@ final class ExternalConnectionsTest extends TestCase
 
         $result = $this->client->externalConnections->updateLocation(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            staticEmergencyAddressID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+            [
+                'id' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+                'static_emergency_address_id' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+            ],
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType

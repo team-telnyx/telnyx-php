@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type SpeechToTextGetResponseShape = array{
- *   data?: SttDetailReportResponse
+ *   data?: SttDetailReportResponse|null
  * }
  */
 final class SpeechToTextGetResponse implements BaseModel, ResponseConverter

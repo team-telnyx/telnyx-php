@@ -10,11 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type CampaignStatusUpdateWebhookEventShape = array{
- *   brandID?: string,
- *   campaignID?: string,
- *   createDate?: string,
- *   cspID?: string,
- *   isTMobileRegistered?: bool,
+ *   brandId?: string|null,
+ *   campaignId?: string|null,
+ *   createDate?: string|null,
+ *   cspId?: string|null,
+ *   isTMobileRegistered?: bool|null,
  * }
  */
 final class CampaignStatusUpdateWebhookEvent implements BaseModel
@@ -25,14 +25,14 @@ final class CampaignStatusUpdateWebhookEvent implements BaseModel
     /**
      * Brand ID associated with the campaign.
      */
-    #[Api('brandId', optional: true)]
-    public ?string $brandID;
+    #[Api(optional: true)]
+    public ?string $brandId;
 
     /**
      * The ID of the campaign.
      */
-    #[Api('campaignId', optional: true)]
-    public ?string $campaignID;
+    #[Api(optional: true)]
+    public ?string $campaignId;
 
     /**
      * Unix timestamp when campaign was created.
@@ -43,8 +43,8 @@ final class CampaignStatusUpdateWebhookEvent implements BaseModel
     /**
      * Alphanumeric identifier of the CSP associated with this campaign.
      */
-    #[Api('cspId', optional: true)]
-    public ?string $cspID;
+    #[Api(optional: true)]
+    public ?string $cspId;
 
     /**
      * Indicates whether the campaign is registered with T-Mobile.
@@ -63,18 +63,18 @@ final class CampaignStatusUpdateWebhookEvent implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $brandID = null,
-        ?string $campaignID = null,
+        ?string $brandId = null,
+        ?string $campaignId = null,
         ?string $createDate = null,
-        ?string $cspID = null,
+        ?string $cspId = null,
         ?bool $isTMobileRegistered = null,
     ): self {
         $obj = new self;
 
-        null !== $brandID && $obj->brandID = $brandID;
-        null !== $campaignID && $obj->campaignID = $campaignID;
+        null !== $brandId && $obj->brandId = $brandId;
+        null !== $campaignId && $obj->campaignId = $campaignId;
         null !== $createDate && $obj->createDate = $createDate;
-        null !== $cspID && $obj->cspID = $cspID;
+        null !== $cspId && $obj->cspId = $cspId;
         null !== $isTMobileRegistered && $obj->isTMobileRegistered = $isTMobileRegistered;
 
         return $obj;
@@ -86,7 +86,7 @@ final class CampaignStatusUpdateWebhookEvent implements BaseModel
     public function withBrandID(string $brandID): self
     {
         $obj = clone $this;
-        $obj->brandID = $brandID;
+        $obj->brandId = $brandID;
 
         return $obj;
     }
@@ -97,7 +97,7 @@ final class CampaignStatusUpdateWebhookEvent implements BaseModel
     public function withCampaignID(string $campaignID): self
     {
         $obj = clone $this;
-        $obj->campaignID = $campaignID;
+        $obj->campaignId = $campaignID;
 
         return $obj;
     }
@@ -119,7 +119,7 @@ final class CampaignStatusUpdateWebhookEvent implements BaseModel
     public function withCspID(string $cspID): self
     {
         $obj = clone $this;
-        $obj->cspID = $cspID;
+        $obj->cspId = $cspID;
 
         return $obj;
     }

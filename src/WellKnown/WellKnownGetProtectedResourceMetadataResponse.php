@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type WellKnownGetProtectedResourceMetadataResponseShape = array{
- *   authorizationServers?: list<string>, resource?: string
+ *   authorization_servers?: list<string>|null, resource?: string|null
  * }
  */
 final class WellKnownGetProtectedResourceMetadataResponse implements BaseModel, ResponseConverter
@@ -25,10 +25,10 @@ final class WellKnownGetProtectedResourceMetadataResponse implements BaseModel, 
     /**
      * List of authorization server URLs.
      *
-     * @var list<string>|null $authorizationServers
+     * @var list<string>|null $authorization_servers
      */
-    #[Api('authorization_servers', list: 'string', optional: true)]
-    public ?array $authorizationServers;
+    #[Api(list: 'string', optional: true)]
+    public ?array $authorization_servers;
 
     /**
      * Protected resource URL.
@@ -46,15 +46,15 @@ final class WellKnownGetProtectedResourceMetadataResponse implements BaseModel, 
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $authorizationServers
+     * @param list<string> $authorization_servers
      */
     public static function with(
-        ?array $authorizationServers = null,
+        ?array $authorization_servers = null,
         ?string $resource = null
     ): self {
         $obj = new self;
 
-        null !== $authorizationServers && $obj->authorizationServers = $authorizationServers;
+        null !== $authorization_servers && $obj->authorization_servers = $authorization_servers;
         null !== $resource && $obj->resource = $resource;
 
         return $obj;
@@ -68,7 +68,7 @@ final class WellKnownGetProtectedResourceMetadataResponse implements BaseModel, 
     public function withAuthorizationServers(array $authorizationServers): self
     {
         $obj = clone $this;
-        $obj->authorizationServers = $authorizationServers;
+        $obj->authorization_servers = $authorizationServers;
 
         return $obj;
     }

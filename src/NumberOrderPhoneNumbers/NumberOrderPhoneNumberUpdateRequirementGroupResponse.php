@@ -13,7 +13,7 @@ use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberUpdateRequirementGroupR
 
 /**
  * @phpstan-type NumberOrderPhoneNumberUpdateRequirementGroupResponseShape = array{
- *   data?: Data
+ *   data?: Data|null
  * }
  */
 final class NumberOrderPhoneNumberUpdateRequirementGroupResponse implements BaseModel, ResponseConverter

@@ -7,13 +7,9 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DetailRecords\DetailRecordListParams;
-use Telnyx\DetailRecords\DetailRecordListParams\Filter;
-use Telnyx\DetailRecords\DetailRecordListParams\Page;
 use Telnyx\DetailRecords\DetailRecordListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\DetailRecordsContract;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class DetailRecordsService implements DetailRecordsContract
 {
@@ -27,37 +23,24 @@ final class DetailRecordsService implements DetailRecordsContract
      *
      * Search for any detail record across the Telnyx Platform
      *
-     * @param Filter $filter Filter records on a given record attribute and value. <br/>Example: filter[status]=delivered. <br/>Required: filter[record_type] must be specified.
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
-     * @param list<string> $sort Specifies the sort order for results. <br/>Example: sort=-created_at
+     * @param array{
+     *   filter?: array{
+     *     record_type: "ai-voice-assistant"|"amd"|"call-control"|"conference"|"conference-participant"|"embedding"|"fax"|"inference"|"inference-speech-to-text"|"media_storage"|"media-streaming"|"messaging"|"noise-suppression"|"recording"|"sip-trunking"|"siprec-client"|"stt"|"tts"|"verify"|"webrtc"|"wireless",
+     *     date_range?: "yesterday"|"today"|"tomorrow"|"last_week"|"this_week"|"next_week"|"last_month"|"this_month"|"next_month",
+     *   },
+     *   page?: array{number?: int, size?: int},
+     *   sort?: list<string>,
+     * }|DetailRecordListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
-        $sort = omit,
-        ?RequestOptions $requestOptions = null,
-    ): DetailRecordListResponse {
-        $params = ['filter' => $filter, 'page' => $page, 'sort' => $sort];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
+        array|DetailRecordListParams $params,
         ?RequestOptions $requestOptions = null
     ): DetailRecordListResponse {
         [$parsed, $options] = DetailRecordListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

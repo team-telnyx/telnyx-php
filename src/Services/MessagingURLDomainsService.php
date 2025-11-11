@@ -7,12 +7,9 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\MessagingURLDomains\MessagingURLDomainListParams;
-use Telnyx\MessagingURLDomains\MessagingURLDomainListParams\Page;
 use Telnyx\MessagingURLDomains\MessagingURLDomainListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MessagingURLDomainsContract;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class MessagingURLDomainsService implements MessagingURLDomainsContract
 {
@@ -26,33 +23,19 @@ final class MessagingURLDomainsService implements MessagingURLDomainsContract
      *
      * List messaging URL domains
      *
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param array{
+     *   page?: array{number?: int, size?: int}
+     * }|MessagingURLDomainListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): MessagingURLDomainListResponse {
-        $params = ['page' => $page];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|MessagingURLDomainListParams $params,
+        ?RequestOptions $requestOptions = null,
     ): MessagingURLDomainListResponse {
         [$parsed, $options] = MessagingURLDomainListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

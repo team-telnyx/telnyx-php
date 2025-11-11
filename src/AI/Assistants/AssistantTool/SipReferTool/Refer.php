@@ -14,8 +14,8 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * @phpstan-type ReferShape = array{
  *   targets: list<Target>,
- *   customHeaders?: list<CustomHeader>,
- *   sipHeaders?: list<SipHeader>,
+ *   custom_headers?: list<CustomHeader>|null,
+ *   sip_headers?: list<SipHeader>|null,
  * }
  */
 final class Refer implements BaseModel
@@ -34,18 +34,18 @@ final class Refer implements BaseModel
     /**
      * Custom headers to be added to the SIP REFER.
      *
-     * @var list<CustomHeader>|null $customHeaders
+     * @var list<CustomHeader>|null $custom_headers
      */
-    #[Api('custom_headers', list: CustomHeader::class, optional: true)]
-    public ?array $customHeaders;
+    #[Api(list: CustomHeader::class, optional: true)]
+    public ?array $custom_headers;
 
     /**
      * SIP headers to be added to the SIP REFER. Currently only User-to-User and Diversion headers are supported.
      *
-     * @var list<SipHeader>|null $sipHeaders
+     * @var list<SipHeader>|null $sip_headers
      */
-    #[Api('sip_headers', list: SipHeader::class, optional: true)]
-    public ?array $sipHeaders;
+    #[Api(list: SipHeader::class, optional: true)]
+    public ?array $sip_headers;
 
     /**
      * `new Refer()` is missing required properties by the API.
@@ -72,20 +72,20 @@ final class Refer implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<Target> $targets
-     * @param list<CustomHeader> $customHeaders
-     * @param list<SipHeader> $sipHeaders
+     * @param list<CustomHeader> $custom_headers
+     * @param list<SipHeader> $sip_headers
      */
     public static function with(
         array $targets,
-        ?array $customHeaders = null,
-        ?array $sipHeaders = null
+        ?array $custom_headers = null,
+        ?array $sip_headers = null
     ): self {
         $obj = new self;
 
         $obj->targets = $targets;
 
-        null !== $customHeaders && $obj->customHeaders = $customHeaders;
-        null !== $sipHeaders && $obj->sipHeaders = $sipHeaders;
+        null !== $custom_headers && $obj->custom_headers = $custom_headers;
+        null !== $sip_headers && $obj->sip_headers = $sip_headers;
 
         return $obj;
     }
@@ -111,7 +111,7 @@ final class Refer implements BaseModel
     public function withCustomHeaders(array $customHeaders): self
     {
         $obj = clone $this;
-        $obj->customHeaders = $customHeaders;
+        $obj->custom_headers = $customHeaders;
 
         return $obj;
     }
@@ -124,7 +124,7 @@ final class Refer implements BaseModel
     public function withSipHeaders(array $sipHeaders): self
     {
         $obj = clone $this;
-        $obj->sipHeaders = $sipHeaders;
+        $obj->sip_headers = $sipHeaders;
 
         return $obj;
     }

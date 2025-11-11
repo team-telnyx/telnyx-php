@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * IDs related to who ended the conference. It is expected for them to all be there or all be null.
  *
  * @phpstan-type EndedByShape = array{
- *   callControlID?: string, callSessionID?: string
+ *   call_control_id?: string|null, call_session_id?: string|null
  * }
  */
 final class EndedBy implements BaseModel
@@ -23,14 +23,14 @@ final class EndedBy implements BaseModel
     /**
      * Call Control ID which ended the conference.
      */
-    #[Api('call_control_id', optional: true)]
-    public ?string $callControlID;
+    #[Api(optional: true)]
+    public ?string $call_control_id;
 
     /**
      * Call Session ID which ended the conference.
      */
-    #[Api('call_session_id', optional: true)]
-    public ?string $callSessionID;
+    #[Api(optional: true)]
+    public ?string $call_session_id;
 
     public function __construct()
     {
@@ -43,13 +43,13 @@ final class EndedBy implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $callControlID = null,
-        ?string $callSessionID = null
+        ?string $call_control_id = null,
+        ?string $call_session_id = null
     ): self {
         $obj = new self;
 
-        null !== $callControlID && $obj->callControlID = $callControlID;
-        null !== $callSessionID && $obj->callSessionID = $callSessionID;
+        null !== $call_control_id && $obj->call_control_id = $call_control_id;
+        null !== $call_session_id && $obj->call_session_id = $call_session_id;
 
         return $obj;
     }
@@ -60,7 +60,7 @@ final class EndedBy implements BaseModel
     public function withCallControlID(string $callControlID): self
     {
         $obj = clone $this;
-        $obj->callControlID = $callControlID;
+        $obj->call_control_id = $callControlID;
 
         return $obj;
     }
@@ -71,7 +71,7 @@ final class EndedBy implements BaseModel
     public function withCallSessionID(string $callSessionID): self
     {
         $obj = clone $this;
-        $obj->callSessionID = $callSessionID;
+        $obj->call_session_id = $callSessionID;
 
         return $obj;
     }

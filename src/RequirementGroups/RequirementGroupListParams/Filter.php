@@ -15,11 +15,11 @@ use Telnyx\RequirementGroups\RequirementGroupListParams\Filter\Status;
  * Consolidated filter parameter (deepObject style). Originally: filter[country_code], filter[phone_number_type], filter[action], filter[status], filter[customer_reference].
  *
  * @phpstan-type FilterShape = array{
- *   action?: value-of<Action>,
- *   countryCode?: string,
- *   customerReference?: string,
- *   phoneNumberType?: value-of<PhoneNumberType>,
- *   status?: value-of<Status>,
+ *   action?: value-of<Action>|null,
+ *   country_code?: string|null,
+ *   customer_reference?: string|null,
+ *   phone_number_type?: value-of<PhoneNumberType>|null,
+ *   status?: value-of<Status>|null,
  * }
  */
 final class Filter implements BaseModel
@@ -38,22 +38,22 @@ final class Filter implements BaseModel
     /**
      * Filter requirement groups by country code (iso alpha 2).
      */
-    #[Api('country_code', optional: true)]
-    public ?string $countryCode;
+    #[Api(optional: true)]
+    public ?string $country_code;
 
     /**
      * Filter requirement groups by customer reference.
      */
-    #[Api('customer_reference', optional: true)]
-    public ?string $customerReference;
+    #[Api(optional: true)]
+    public ?string $customer_reference;
 
     /**
      * Filter requirement groups by phone number type.
      *
-     * @var value-of<PhoneNumberType>|null $phoneNumberType
+     * @var value-of<PhoneNumberType>|null $phone_number_type
      */
-    #[Api('phone_number_type', enum: PhoneNumberType::class, optional: true)]
-    public ?string $phoneNumberType;
+    #[Api(enum: PhoneNumberType::class, optional: true)]
+    public ?string $phone_number_type;
 
     /**
      * Filter requirement groups by status.
@@ -74,22 +74,22 @@ final class Filter implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Action|value-of<Action> $action
-     * @param PhoneNumberType|value-of<PhoneNumberType> $phoneNumberType
+     * @param PhoneNumberType|value-of<PhoneNumberType> $phone_number_type
      * @param Status|value-of<Status> $status
      */
     public static function with(
         Action|string|null $action = null,
-        ?string $countryCode = null,
-        ?string $customerReference = null,
-        PhoneNumberType|string|null $phoneNumberType = null,
+        ?string $country_code = null,
+        ?string $customer_reference = null,
+        PhoneNumberType|string|null $phone_number_type = null,
         Status|string|null $status = null,
     ): self {
         $obj = new self;
 
         null !== $action && $obj['action'] = $action;
-        null !== $countryCode && $obj->countryCode = $countryCode;
-        null !== $customerReference && $obj->customerReference = $customerReference;
-        null !== $phoneNumberType && $obj['phoneNumberType'] = $phoneNumberType;
+        null !== $country_code && $obj->country_code = $country_code;
+        null !== $customer_reference && $obj->customer_reference = $customer_reference;
+        null !== $phone_number_type && $obj['phone_number_type'] = $phone_number_type;
         null !== $status && $obj['status'] = $status;
 
         return $obj;
@@ -114,7 +114,7 @@ final class Filter implements BaseModel
     public function withCountryCode(string $countryCode): self
     {
         $obj = clone $this;
-        $obj->countryCode = $countryCode;
+        $obj->country_code = $countryCode;
 
         return $obj;
     }
@@ -125,7 +125,7 @@ final class Filter implements BaseModel
     public function withCustomerReference(string $customerReference): self
     {
         $obj = clone $this;
-        $obj->customerReference = $customerReference;
+        $obj->customer_reference = $customerReference;
 
         return $obj;
     }
@@ -139,7 +139,7 @@ final class Filter implements BaseModel
         PhoneNumberType|string $phoneNumberType
     ): self {
         $obj = clone $this;
-        $obj['phoneNumberType'] = $phoneNumberType;
+        $obj['phone_number_type'] = $phoneNumberType;
 
         return $obj;
     }

@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type CallControlApplicationDeleteResponseShape = array{
- *   data?: CallControlApplication
+ *   data?: CallControlApplication|null
  * }
  */
 final class CallControlApplicationDeleteResponse implements BaseModel, ResponseConverter

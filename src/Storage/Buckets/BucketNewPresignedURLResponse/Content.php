@@ -10,7 +10,9 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type ContentShape = array{
- *   token?: string, expiresAt?: \DateTimeInterface, presignedURL?: string
+ *   token?: string|null,
+ *   expires_at?: \DateTimeInterface|null,
+ *   presigned_url?: string|null,
  * }
  */
 final class Content implements BaseModel
@@ -27,14 +29,14 @@ final class Content implements BaseModel
     /**
      * The expiration time of the token.
      */
-    #[Api('expires_at', optional: true)]
-    public ?\DateTimeInterface $expiresAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $expires_at;
 
     /**
      * The presigned URL for the object.
      */
-    #[Api('presigned_url', optional: true)]
-    public ?string $presignedURL;
+    #[Api(optional: true)]
+    public ?string $presigned_url;
 
     public function __construct()
     {
@@ -48,14 +50,14 @@ final class Content implements BaseModel
      */
     public static function with(
         ?string $token = null,
-        ?\DateTimeInterface $expiresAt = null,
-        ?string $presignedURL = null,
+        ?\DateTimeInterface $expires_at = null,
+        ?string $presigned_url = null,
     ): self {
         $obj = new self;
 
         null !== $token && $obj->token = $token;
-        null !== $expiresAt && $obj->expiresAt = $expiresAt;
-        null !== $presignedURL && $obj->presignedURL = $presignedURL;
+        null !== $expires_at && $obj->expires_at = $expires_at;
+        null !== $presigned_url && $obj->presigned_url = $presigned_url;
 
         return $obj;
     }
@@ -77,7 +79,7 @@ final class Content implements BaseModel
     public function withExpiresAt(\DateTimeInterface $expiresAt): self
     {
         $obj = clone $this;
-        $obj->expiresAt = $expiresAt;
+        $obj->expires_at = $expiresAt;
 
         return $obj;
     }
@@ -88,7 +90,7 @@ final class Content implements BaseModel
     public function withPresignedURL(string $presignedURL): self
     {
         $obj = clone $this;
-        $obj->presignedURL = $presignedURL;
+        $obj->presigned_url = $presignedURL;
 
         return $obj;
     }

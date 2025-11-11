@@ -12,7 +12,9 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\RegulatoryRequirements\RegulatoryRequirementGetResponse\Data;
 
 /**
- * @phpstan-type RegulatoryRequirementGetResponseShape = array{data?: list<Data>}
+ * @phpstan-type RegulatoryRequirementGetResponseShape = array{
+ *   data?: list<Data>|null
+ * }
  */
 final class RegulatoryRequirementGetResponse implements BaseModel, ResponseConverter
 {

@@ -14,7 +14,7 @@ use Telnyx\ManagedAccounts\ManagedAccountListParams\Filter\OrganizationName;
  * Consolidated filter parameter (deepObject style). Originally: filter[email][contains], filter[email][eq], filter[organization_name][contains], filter[organization_name][eq].
  *
  * @phpstan-type FilterShape = array{
- *   email?: Email, organizationName?: OrganizationName
+ *   email?: Email|null, organization_name?: OrganizationName|null
  * }
  */
 final class Filter implements BaseModel
@@ -25,8 +25,8 @@ final class Filter implements BaseModel
     #[Api(optional: true)]
     public ?Email $email;
 
-    #[Api('organization_name', optional: true)]
-    public ?OrganizationName $organizationName;
+    #[Api(optional: true)]
+    public ?OrganizationName $organization_name;
 
     public function __construct()
     {
@@ -40,12 +40,12 @@ final class Filter implements BaseModel
      */
     public static function with(
         ?Email $email = null,
-        ?OrganizationName $organizationName = null
+        ?OrganizationName $organization_name = null
     ): self {
         $obj = new self;
 
         null !== $email && $obj->email = $email;
-        null !== $organizationName && $obj->organizationName = $organizationName;
+        null !== $organization_name && $obj->organization_name = $organization_name;
 
         return $obj;
     }
@@ -62,7 +62,7 @@ final class Filter implements BaseModel
         OrganizationName $organizationName
     ): self {
         $obj = clone $this;
-        $obj->organizationName = $organizationName;
+        $obj->organization_name = $organizationName;
 
         return $obj;
     }

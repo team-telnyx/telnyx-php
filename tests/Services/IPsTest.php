@@ -33,7 +33,7 @@ final class IPsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ips->create(ipAddress: '192.168.0.0');
+        $result = $this->client->ips->create(['ip_address' => '192.168.0.0']);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -45,7 +45,7 @@ final class IPsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ips->create(ipAddress: '192.168.0.0');
+        $result = $this->client->ips->create(['ip_address' => '192.168.0.0']);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -73,7 +73,7 @@ final class IPsTest extends TestCase
 
         $result = $this->client->ips->update(
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
-            ipAddress: '192.168.0.0'
+            ['ip_address' => '192.168.0.0']
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -88,7 +88,7 @@ final class IPsTest extends TestCase
 
         $result = $this->client->ips->update(
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
-            ipAddress: '192.168.0.0'
+            ['ip_address' => '192.168.0.0']
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -101,7 +101,7 @@ final class IPsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ips->list();
+        $result = $this->client->ips->list([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

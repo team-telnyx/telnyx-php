@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type IPListResponseShape = array{data?: list<IP>}
+ * @phpstan-type IPListResponseShape = array{data?: list<IP>|null}
  */
 final class IPListResponse implements BaseModel, ResponseConverter
 {

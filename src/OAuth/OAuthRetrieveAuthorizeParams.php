@@ -17,11 +17,11 @@ use Telnyx\OAuth\OAuthRetrieveAuthorizeParams\ResponseType;
  * @see Telnyx\OAuth->retrieveAuthorize
  *
  * @phpstan-type OAuthRetrieveAuthorizeParamsShape = array{
- *   clientID: string,
- *   redirectUri: string,
- *   responseType: ResponseType|value-of<ResponseType>,
- *   codeChallenge?: string,
- *   codeChallengeMethod?: CodeChallengeMethod|value-of<CodeChallengeMethod>,
+ *   client_id: string,
+ *   redirect_uri: string,
+ *   response_type: ResponseType|value-of<ResponseType>,
+ *   code_challenge?: string,
+ *   code_challenge_method?: CodeChallengeMethod|value-of<CodeChallengeMethod>,
  *   scope?: string,
  *   state?: string,
  * }
@@ -36,35 +36,35 @@ final class OAuthRetrieveAuthorizeParams implements BaseModel
      * OAuth client identifier.
      */
     #[Api]
-    public string $clientID;
+    public string $client_id;
 
     /**
      * Redirect URI.
      */
     #[Api]
-    public string $redirectUri;
+    public string $redirect_uri;
 
     /**
      * OAuth response type.
      *
-     * @var value-of<ResponseType> $responseType
+     * @var value-of<ResponseType> $response_type
      */
     #[Api(enum: ResponseType::class)]
-    public string $responseType;
+    public string $response_type;
 
     /**
      * PKCE code challenge.
      */
     #[Api(optional: true)]
-    public ?string $codeChallenge;
+    public ?string $code_challenge;
 
     /**
      * PKCE code challenge method.
      *
-     * @var value-of<CodeChallengeMethod>|null $codeChallengeMethod
+     * @var value-of<CodeChallengeMethod>|null $code_challenge_method
      */
     #[Api(enum: CodeChallengeMethod::class, optional: true)]
-    public ?string $codeChallengeMethod;
+    public ?string $code_challenge_method;
 
     /**
      * Space-separated list of requested scopes.
@@ -84,7 +84,7 @@ final class OAuthRetrieveAuthorizeParams implements BaseModel
      * To enforce required parameters use
      * ```
      * OAuthRetrieveAuthorizeParams::with(
-     *   clientID: ..., redirectUri: ..., responseType: ...
+     *   client_id: ..., redirect_uri: ..., response_type: ...
      * )
      * ```
      *
@@ -107,26 +107,26 @@ final class OAuthRetrieveAuthorizeParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ResponseType|value-of<ResponseType> $responseType
-     * @param CodeChallengeMethod|value-of<CodeChallengeMethod> $codeChallengeMethod
+     * @param ResponseType|value-of<ResponseType> $response_type
+     * @param CodeChallengeMethod|value-of<CodeChallengeMethod> $code_challenge_method
      */
     public static function with(
-        string $clientID,
-        string $redirectUri,
-        ResponseType|string $responseType,
-        ?string $codeChallenge = null,
-        CodeChallengeMethod|string|null $codeChallengeMethod = null,
+        string $client_id,
+        string $redirect_uri,
+        ResponseType|string $response_type,
+        ?string $code_challenge = null,
+        CodeChallengeMethod|string|null $code_challenge_method = null,
         ?string $scope = null,
         ?string $state = null,
     ): self {
         $obj = new self;
 
-        $obj->clientID = $clientID;
-        $obj->redirectUri = $redirectUri;
-        $obj['responseType'] = $responseType;
+        $obj->client_id = $client_id;
+        $obj->redirect_uri = $redirect_uri;
+        $obj['response_type'] = $response_type;
 
-        null !== $codeChallenge && $obj->codeChallenge = $codeChallenge;
-        null !== $codeChallengeMethod && $obj['codeChallengeMethod'] = $codeChallengeMethod;
+        null !== $code_challenge && $obj->code_challenge = $code_challenge;
+        null !== $code_challenge_method && $obj['code_challenge_method'] = $code_challenge_method;
         null !== $scope && $obj->scope = $scope;
         null !== $state && $obj->state = $state;
 
@@ -139,7 +139,7 @@ final class OAuthRetrieveAuthorizeParams implements BaseModel
     public function withClientID(string $clientID): self
     {
         $obj = clone $this;
-        $obj->clientID = $clientID;
+        $obj->client_id = $clientID;
 
         return $obj;
     }
@@ -150,7 +150,7 @@ final class OAuthRetrieveAuthorizeParams implements BaseModel
     public function withRedirectUri(string $redirectUri): self
     {
         $obj = clone $this;
-        $obj->redirectUri = $redirectUri;
+        $obj->redirect_uri = $redirectUri;
 
         return $obj;
     }
@@ -163,7 +163,7 @@ final class OAuthRetrieveAuthorizeParams implements BaseModel
     public function withResponseType(ResponseType|string $responseType): self
     {
         $obj = clone $this;
-        $obj['responseType'] = $responseType;
+        $obj['response_type'] = $responseType;
 
         return $obj;
     }
@@ -174,7 +174,7 @@ final class OAuthRetrieveAuthorizeParams implements BaseModel
     public function withCodeChallenge(string $codeChallenge): self
     {
         $obj = clone $this;
-        $obj->codeChallenge = $codeChallenge;
+        $obj->code_challenge = $codeChallenge;
 
         return $obj;
     }
@@ -188,7 +188,7 @@ final class OAuthRetrieveAuthorizeParams implements BaseModel
         CodeChallengeMethod|string $codeChallengeMethod
     ): self {
         $obj = clone $this;
-        $obj['codeChallengeMethod'] = $codeChallengeMethod;
+        $obj['code_challenge_method'] = $codeChallengeMethod;
 
         return $obj;
     }

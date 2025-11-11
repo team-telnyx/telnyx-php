@@ -33,9 +33,9 @@ final class RegisterTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->actions->register->create(
-            registrationCodes: ['0000000001', '0000000002', '0000000003']
-        );
+        $result = $this->client->actions->register->create([
+            'registration_codes' => ['0000000001', '0000000002', '0000000003'],
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -47,9 +47,9 @@ final class RegisterTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->actions->register->create(
-            registrationCodes: ['0000000001', '0000000002', '0000000003']
-        );
+        $result = $this->client->actions->register->create([
+            'registration_codes' => ['0000000001', '0000000002', '0000000003'],
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

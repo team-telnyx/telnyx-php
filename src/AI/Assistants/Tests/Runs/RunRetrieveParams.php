@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\AI\Assistants\Tests\Runs->retrieve
  *
- * @phpstan-type RunRetrieveParamsShape = array{testID: string}
+ * @phpstan-type RunRetrieveParamsShape = array{test_id: string}
  */
 final class RunRetrieveParams implements BaseModel
 {
@@ -23,14 +23,14 @@ final class RunRetrieveParams implements BaseModel
     use SdkParams;
 
     #[Api]
-    public string $testID;
+    public string $test_id;
 
     /**
      * `new RunRetrieveParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * RunRetrieveParams::with(testID: ...)
+     * RunRetrieveParams::with(test_id: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -49,11 +49,11 @@ final class RunRetrieveParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(string $testID): self
+    public static function with(string $test_id): self
     {
         $obj = new self;
 
-        $obj->testID = $testID;
+        $obj->test_id = $test_id;
 
         return $obj;
     }
@@ -61,7 +61,7 @@ final class RunRetrieveParams implements BaseModel
     public function withTestID(string $testID): self
     {
         $obj = clone $this;
-        $obj->testID = $testID;
+        $obj->test_id = $testID;
 
         return $obj;
     }

@@ -13,15 +13,15 @@ use Telnyx\Texml\Accounts\TexmlGetCallRecordingResponseBody;
 
 /**
  * @phpstan-type ConferenceGetRecordingsJsonResponseShape = array{
- *   end?: int,
- *   firstPageUri?: string,
- *   nextPageUri?: string,
- *   page?: int,
- *   pageSize?: int,
- *   previousPageUri?: string,
- *   recordings?: list<TexmlGetCallRecordingResponseBody>,
- *   start?: int,
- *   uri?: string,
+ *   end?: int|null,
+ *   first_page_uri?: string|null,
+ *   next_page_uri?: string|null,
+ *   page?: int|null,
+ *   page_size?: int|null,
+ *   previous_page_uri?: string|null,
+ *   recordings?: list<TexmlGetCallRecordingResponseBody>|null,
+ *   start?: int|null,
+ *   uri?: string|null,
  * }
  */
 final class ConferenceGetRecordingsJsonResponse implements BaseModel, ResponseConverter
@@ -40,14 +40,14 @@ final class ConferenceGetRecordingsJsonResponse implements BaseModel, ResponseCo
     /**
      * Relative uri to the first page of the query results.
      */
-    #[Api('first_page_uri', optional: true)]
-    public ?string $firstPageUri;
+    #[Api(optional: true)]
+    public ?string $first_page_uri;
 
     /**
      * Relative uri to the next page of the query results.
      */
-    #[Api('next_page_uri', optional: true)]
-    public ?string $nextPageUri;
+    #[Api(optional: true)]
+    public ?string $next_page_uri;
 
     /**
      * Current page number, zero-indexed.
@@ -58,14 +58,14 @@ final class ConferenceGetRecordingsJsonResponse implements BaseModel, ResponseCo
     /**
      * The number of items on the page.
      */
-    #[Api('page_size', optional: true)]
-    public ?int $pageSize;
+    #[Api(optional: true)]
+    public ?int $page_size;
 
     /**
      * Relative uri to the previous page of the query results.
      */
-    #[Api('previous_page_uri', optional: true)]
-    public ?string $previousPageUri;
+    #[Api(optional: true)]
+    public ?string $previous_page_uri;
 
     /** @var list<TexmlGetCallRecordingResponseBody>|null $recordings */
     #[Api(list: TexmlGetCallRecordingResponseBody::class, optional: true)]
@@ -97,11 +97,11 @@ final class ConferenceGetRecordingsJsonResponse implements BaseModel, ResponseCo
      */
     public static function with(
         ?int $end = null,
-        ?string $firstPageUri = null,
-        ?string $nextPageUri = null,
+        ?string $first_page_uri = null,
+        ?string $next_page_uri = null,
         ?int $page = null,
-        ?int $pageSize = null,
-        ?string $previousPageUri = null,
+        ?int $page_size = null,
+        ?string $previous_page_uri = null,
         ?array $recordings = null,
         ?int $start = null,
         ?string $uri = null,
@@ -109,11 +109,11 @@ final class ConferenceGetRecordingsJsonResponse implements BaseModel, ResponseCo
         $obj = new self;
 
         null !== $end && $obj->end = $end;
-        null !== $firstPageUri && $obj->firstPageUri = $firstPageUri;
-        null !== $nextPageUri && $obj->nextPageUri = $nextPageUri;
+        null !== $first_page_uri && $obj->first_page_uri = $first_page_uri;
+        null !== $next_page_uri && $obj->next_page_uri = $next_page_uri;
         null !== $page && $obj->page = $page;
-        null !== $pageSize && $obj->pageSize = $pageSize;
-        null !== $previousPageUri && $obj->previousPageUri = $previousPageUri;
+        null !== $page_size && $obj->page_size = $page_size;
+        null !== $previous_page_uri && $obj->previous_page_uri = $previous_page_uri;
         null !== $recordings && $obj->recordings = $recordings;
         null !== $start && $obj->start = $start;
         null !== $uri && $obj->uri = $uri;
@@ -138,7 +138,7 @@ final class ConferenceGetRecordingsJsonResponse implements BaseModel, ResponseCo
     public function withFirstPageUri(string $firstPageUri): self
     {
         $obj = clone $this;
-        $obj->firstPageUri = $firstPageUri;
+        $obj->first_page_uri = $firstPageUri;
 
         return $obj;
     }
@@ -149,7 +149,7 @@ final class ConferenceGetRecordingsJsonResponse implements BaseModel, ResponseCo
     public function withNextPageUri(string $nextPageUri): self
     {
         $obj = clone $this;
-        $obj->nextPageUri = $nextPageUri;
+        $obj->next_page_uri = $nextPageUri;
 
         return $obj;
     }
@@ -171,7 +171,7 @@ final class ConferenceGetRecordingsJsonResponse implements BaseModel, ResponseCo
     public function withPageSize(int $pageSize): self
     {
         $obj = clone $this;
-        $obj->pageSize = $pageSize;
+        $obj->page_size = $pageSize;
 
         return $obj;
     }
@@ -182,7 +182,7 @@ final class ConferenceGetRecordingsJsonResponse implements BaseModel, ResponseCo
     public function withPreviousPageUri(string $previousPageUri): self
     {
         $obj = clone $this;
-        $obj->previousPageUri = $previousPageUri;
+        $obj->previous_page_uri = $previousPageUri;
 
         return $obj;
     }

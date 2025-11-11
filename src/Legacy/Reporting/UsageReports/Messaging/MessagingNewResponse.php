@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type MessagingNewResponseShape = array{
- *   data?: MdrUsageReportResponseLegacy
+ *   data?: MdrUsageReportResponseLegacy|null
  * }
  */
 final class MessagingNewResponse implements BaseModel, ResponseConverter

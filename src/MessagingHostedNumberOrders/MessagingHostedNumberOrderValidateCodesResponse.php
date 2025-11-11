@@ -13,7 +13,7 @@ use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderValidateCodesRe
 
 /**
  * @phpstan-type MessagingHostedNumberOrderValidateCodesResponseShape = array{
- *   data?: Data
+ *   data?: Data|null
  * }
  */
 final class MessagingHostedNumberOrderValidateCodesResponse implements BaseModel, ResponseConverter

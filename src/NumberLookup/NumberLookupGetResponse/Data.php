@@ -13,14 +13,14 @@ use Telnyx\NumberLookup\NumberLookupGetResponse\Data\Portability;
 
 /**
  * @phpstan-type DataShape = array{
- *   callerName?: CallerName,
- *   carrier?: Carrier,
- *   countryCode?: string,
- *   fraud?: string,
- *   nationalFormat?: string,
- *   phoneNumber?: string,
- *   portability?: Portability,
- *   recordType?: string,
+ *   caller_name?: CallerName|null,
+ *   carrier?: Carrier|null,
+ *   country_code?: string|null,
+ *   fraud?: string|null,
+ *   national_format?: string|null,
+ *   phone_number?: string|null,
+ *   portability?: Portability|null,
+ *   record_type?: string|null,
  * }
  */
 final class Data implements BaseModel
@@ -28,8 +28,8 @@ final class Data implements BaseModel
     /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Api('caller_name', optional: true)]
-    public ?CallerName $callerName;
+    #[Api(optional: true)]
+    public ?CallerName $caller_name;
 
     #[Api(optional: true)]
     public ?Carrier $carrier;
@@ -37,8 +37,8 @@ final class Data implements BaseModel
     /**
      * Region code that matches the specific country calling code.
      */
-    #[Api('country_code', optional: true)]
-    public ?string $countryCode;
+    #[Api(optional: true)]
+    public ?string $country_code;
 
     /**
      * Unused.
@@ -49,14 +49,14 @@ final class Data implements BaseModel
     /**
      * Hyphen-separated national number, preceded by the national destination code (NDC), with a 0 prefix, if an NDC is found.
      */
-    #[Api('national_format', optional: true)]
-    public ?string $nationalFormat;
+    #[Api(optional: true)]
+    public ?string $national_format;
 
     /**
      * E164-formatted phone number.
      */
-    #[Api('phone_number', optional: true)]
-    public ?string $phoneNumber;
+    #[Api(optional: true)]
+    public ?string $phone_number;
 
     #[Api(optional: true)]
     public ?Portability $portability;
@@ -64,8 +64,8 @@ final class Data implements BaseModel
     /**
      * Identifies the type of record.
      */
-    #[Api('record_type', optional: true)]
-    public ?string $recordType;
+    #[Api(optional: true)]
+    public ?string $record_type;
 
     public function __construct()
     {
@@ -78,25 +78,25 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?CallerName $callerName = null,
+        ?CallerName $caller_name = null,
         ?Carrier $carrier = null,
-        ?string $countryCode = null,
+        ?string $country_code = null,
         ?string $fraud = null,
-        ?string $nationalFormat = null,
-        ?string $phoneNumber = null,
+        ?string $national_format = null,
+        ?string $phone_number = null,
         ?Portability $portability = null,
-        ?string $recordType = null,
+        ?string $record_type = null,
     ): self {
         $obj = new self;
 
-        null !== $callerName && $obj->callerName = $callerName;
+        null !== $caller_name && $obj->caller_name = $caller_name;
         null !== $carrier && $obj->carrier = $carrier;
-        null !== $countryCode && $obj->countryCode = $countryCode;
+        null !== $country_code && $obj->country_code = $country_code;
         null !== $fraud && $obj->fraud = $fraud;
-        null !== $nationalFormat && $obj->nationalFormat = $nationalFormat;
-        null !== $phoneNumber && $obj->phoneNumber = $phoneNumber;
+        null !== $national_format && $obj->national_format = $national_format;
+        null !== $phone_number && $obj->phone_number = $phone_number;
         null !== $portability && $obj->portability = $portability;
-        null !== $recordType && $obj->recordType = $recordType;
+        null !== $record_type && $obj->record_type = $record_type;
 
         return $obj;
     }
@@ -104,7 +104,7 @@ final class Data implements BaseModel
     public function withCallerName(CallerName $callerName): self
     {
         $obj = clone $this;
-        $obj->callerName = $callerName;
+        $obj->caller_name = $callerName;
 
         return $obj;
     }
@@ -123,7 +123,7 @@ final class Data implements BaseModel
     public function withCountryCode(string $countryCode): self
     {
         $obj = clone $this;
-        $obj->countryCode = $countryCode;
+        $obj->country_code = $countryCode;
 
         return $obj;
     }
@@ -145,7 +145,7 @@ final class Data implements BaseModel
     public function withNationalFormat(string $nationalFormat): self
     {
         $obj = clone $this;
-        $obj->nationalFormat = $nationalFormat;
+        $obj->national_format = $nationalFormat;
 
         return $obj;
     }
@@ -156,7 +156,7 @@ final class Data implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj->phoneNumber = $phoneNumber;
+        $obj->phone_number = $phoneNumber;
 
         return $obj;
     }
@@ -175,7 +175,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType;
+        $obj->record_type = $recordType;
 
         return $obj;
     }

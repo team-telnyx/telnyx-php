@@ -33,7 +33,7 @@ final class UserBundlesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->bundlePricing->userBundles->create();
+        $result = $this->client->bundlePricing->userBundles->create([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -46,7 +46,8 @@ final class UserBundlesTest extends TestCase
         }
 
         $result = $this->client->bundlePricing->userBundles->retrieve(
-            'ca1d2263-d1f1-43ac-ba53-248e7a4bb26a'
+            'ca1d2263-d1f1-43ac-ba53-248e7a4bb26a',
+            []
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -59,7 +60,7 @@ final class UserBundlesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->bundlePricing->userBundles->list();
+        $result = $this->client->bundlePricing->userBundles->list([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -72,7 +73,8 @@ final class UserBundlesTest extends TestCase
         }
 
         $result = $this->client->bundlePricing->userBundles->deactivate(
-            'ca1d2263-d1f1-43ac-ba53-248e7a4bb26a'
+            'ca1d2263-d1f1-43ac-ba53-248e7a4bb26a',
+            []
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -86,7 +88,8 @@ final class UserBundlesTest extends TestCase
         }
 
         $result = $this->client->bundlePricing->userBundles->listResources(
-            'ca1d2263-d1f1-43ac-ba53-248e7a4bb26a'
+            'ca1d2263-d1f1-43ac-ba53-248e7a4bb26a',
+            []
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -99,7 +102,7 @@ final class UserBundlesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->bundlePricing->userBundles->listUnused();
+        $result = $this->client->bundlePricing->userBundles->listUnused([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

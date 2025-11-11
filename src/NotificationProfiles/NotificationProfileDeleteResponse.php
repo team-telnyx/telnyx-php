@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type NotificationProfileDeleteResponseShape = array{
- *   data?: NotificationProfile
+ *   data?: NotificationProfile|null
  * }
  */
 final class NotificationProfileDeleteResponse implements BaseModel, ResponseConverter

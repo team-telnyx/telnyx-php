@@ -14,7 +14,7 @@ use Telnyx\WireguardPeers\WireguardPeerListResponse\Data;
 
 /**
  * @phpstan-type WireguardPeerListResponseShape = array{
- *   data?: list<Data>, meta?: PaginationMeta
+ *   data?: list<Data>|null, meta?: PaginationMeta|null
  * }
  */
 final class WireguardPeerListResponse implements BaseModel, ResponseConverter

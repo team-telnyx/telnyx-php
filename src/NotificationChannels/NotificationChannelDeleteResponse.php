@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type NotificationChannelDeleteResponseShape = array{
- *   data?: NotificationChannel
+ *   data?: NotificationChannel|null
  * }
  */
 final class NotificationChannelDeleteResponse implements BaseModel, ResponseConverter

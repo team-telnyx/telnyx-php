@@ -19,7 +19,7 @@ use Telnyx\ManagedAccounts\ManagedAccountListParams\Sort;
  *
  * @phpstan-type ManagedAccountListParamsShape = array{
  *   filter?: Filter,
- *   includeCancelledAccounts?: bool,
+ *   include_cancelled_accounts?: bool,
  *   page?: Page,
  *   sort?: Sort|value-of<Sort>,
  * }
@@ -40,7 +40,7 @@ final class ManagedAccountListParams implements BaseModel
      * Specifies if cancelled accounts should be included in the results.
      */
     #[Api(optional: true)]
-    public ?bool $includeCancelledAccounts;
+    public ?bool $include_cancelled_accounts;
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
@@ -81,14 +81,14 @@ final class ManagedAccountListParams implements BaseModel
      */
     public static function with(
         ?Filter $filter = null,
-        ?bool $includeCancelledAccounts = null,
+        ?bool $include_cancelled_accounts = null,
         ?Page $page = null,
         Sort|string|null $sort = null,
     ): self {
         $obj = new self;
 
         null !== $filter && $obj->filter = $filter;
-        null !== $includeCancelledAccounts && $obj->includeCancelledAccounts = $includeCancelledAccounts;
+        null !== $include_cancelled_accounts && $obj->include_cancelled_accounts = $include_cancelled_accounts;
         null !== $page && $obj->page = $page;
         null !== $sort && $obj['sort'] = $sort;
 
@@ -113,7 +113,7 @@ final class ManagedAccountListParams implements BaseModel
         bool $includeCancelledAccounts
     ): self {
         $obj = clone $this;
-        $obj->includeCancelledAccounts = $includeCancelledAccounts;
+        $obj->include_cancelled_accounts = $includeCancelledAccounts;
 
         return $obj;
     }

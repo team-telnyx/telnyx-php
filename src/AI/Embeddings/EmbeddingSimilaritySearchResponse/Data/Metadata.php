@@ -14,8 +14,8 @@ use Telnyx\Core\Contracts\BaseModel;
  *   embedding: string,
  *   filename: string,
  *   source: string,
- *   certainty?: float,
- *   loaderMetadata?: array<string, mixed>,
+ *   certainty?: float|null,
+ *   loader_metadata?: array<string,mixed>|null,
  * }
  */
 final class Metadata implements BaseModel
@@ -38,9 +38,9 @@ final class Metadata implements BaseModel
     #[Api(optional: true)]
     public ?float $certainty;
 
-    /** @var array<string, mixed>|null $loaderMetadata */
-    #[Api('loader_metadata', map: 'mixed', optional: true)]
-    public ?array $loaderMetadata;
+    /** @var array<string,mixed>|null $loader_metadata */
+    #[Api(map: 'mixed', optional: true)]
+    public ?array $loader_metadata;
 
     /**
      * `new Metadata()` is missing required properties by the API.
@@ -70,7 +70,7 @@ final class Metadata implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param array<string, mixed> $loaderMetadata
+     * @param array<string,mixed> $loader_metadata
      */
     public static function with(
         string $checksum,
@@ -78,7 +78,7 @@ final class Metadata implements BaseModel
         string $filename,
         string $source,
         ?float $certainty = null,
-        ?array $loaderMetadata = null,
+        ?array $loader_metadata = null,
     ): self {
         $obj = new self;
 
@@ -88,7 +88,7 @@ final class Metadata implements BaseModel
         $obj->source = $source;
 
         null !== $certainty && $obj->certainty = $certainty;
-        null !== $loaderMetadata && $obj->loaderMetadata = $loaderMetadata;
+        null !== $loader_metadata && $obj->loader_metadata = $loader_metadata;
 
         return $obj;
     }
@@ -134,12 +134,12 @@ final class Metadata implements BaseModel
     }
 
     /**
-     * @param array<string, mixed> $loaderMetadata
+     * @param array<string,mixed> $loaderMetadata
      */
     public function withLoaderMetadata(array $loaderMetadata): self
     {
         $obj = clone $this;
-        $obj->loaderMetadata = $loaderMetadata;
+        $obj->loader_metadata = $loaderMetadata;
 
         return $obj;
     }

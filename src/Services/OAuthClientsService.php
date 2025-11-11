@@ -7,20 +7,14 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\OAuthClients\OAuthClientCreateParams;
-use Telnyx\OAuthClients\OAuthClientCreateParams\AllowedGrantType;
-use Telnyx\OAuthClients\OAuthClientCreateParams\ClientType;
 use Telnyx\OAuthClients\OAuthClientGetResponse;
 use Telnyx\OAuthClients\OAuthClientListParams;
-use Telnyx\OAuthClients\OAuthClientListParams\FilterAllowedGrantTypesContains;
-use Telnyx\OAuthClients\OAuthClientListParams\FilterClientType;
 use Telnyx\OAuthClients\OAuthClientListResponse;
 use Telnyx\OAuthClients\OAuthClientNewResponse;
 use Telnyx\OAuthClients\OAuthClientUpdateParams;
 use Telnyx\OAuthClients\OAuthClientUpdateResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\OAuthClientsContract;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class OAuthClientsService implements OAuthClientsContract
 {
@@ -34,59 +28,27 @@ final class OAuthClientsService implements OAuthClientsContract
      *
      * Create a new OAuth client
      *
-     * @param list<AllowedGrantType|value-of<AllowedGrantType>> $allowedGrantTypes List of allowed OAuth grant types
-     * @param list<string> $allowedScopes List of allowed OAuth scopes
-     * @param ClientType|value-of<ClientType> $clientType OAuth client type
-     * @param string $name The name of the OAuth client
-     * @param string $logoUri URL of the client logo
-     * @param string $policyUri URL of the client's privacy policy
-     * @param list<string> $redirectUris List of redirect URIs (required for authorization_code flow)
-     * @param bool $requirePkce Whether PKCE (Proof Key for Code Exchange) is required for this client
-     * @param string $tosUri URL of the client's terms of service
+     * @param array{
+     *   allowed_grant_types: list<"client_credentials"|"authorization_code"|"refresh_token">,
+     *   allowed_scopes: list<string>,
+     *   client_type: "public"|"confidential",
+     *   name: string,
+     *   logo_uri?: string,
+     *   policy_uri?: string,
+     *   redirect_uris?: list<string>,
+     *   require_pkce?: bool,
+     *   tos_uri?: string,
+     * }|OAuthClientCreateParams $params
      *
      * @throws APIException
      */
     public function create(
-        $allowedGrantTypes,
-        $allowedScopes,
-        $clientType,
-        $name,
-        $logoUri = omit,
-        $policyUri = omit,
-        $redirectUris = omit,
-        $requirePkce = omit,
-        $tosUri = omit,
+        array|OAuthClientCreateParams $params,
         ?RequestOptions $requestOptions = null,
-    ): OAuthClientNewResponse {
-        $params = [
-            'allowedGrantTypes' => $allowedGrantTypes,
-            'allowedScopes' => $allowedScopes,
-            'clientType' => $clientType,
-            'name' => $name,
-            'logoUri' => $logoUri,
-            'policyUri' => $policyUri,
-            'redirectUris' => $redirectUris,
-            'requirePkce' => $requirePkce,
-            'tosUri' => $tosUri,
-        ];
-
-        return $this->createRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): OAuthClientNewResponse {
         [$parsed, $options] = OAuthClientCreateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -124,58 +86,27 @@ final class OAuthClientsService implements OAuthClientsContract
      *
      * Update an existing OAuth client
      *
-     * @param list<OAuthClientUpdateParams\AllowedGrantType|value-of<OAuthClientUpdateParams\AllowedGrantType>> $allowedGrantTypes List of allowed OAuth grant types
-     * @param list<string> $allowedScopes List of allowed OAuth scopes
-     * @param string $logoUri URL of the client logo
-     * @param string $name The name of the OAuth client
-     * @param string $policyUri URL of the client's privacy policy
-     * @param list<string> $redirectUris List of redirect URIs
-     * @param bool $requirePkce Whether PKCE (Proof Key for Code Exchange) is required for this client
-     * @param string $tosUri URL of the client's terms of service
+     * @param array{
+     *   allowed_grant_types?: list<"client_credentials"|"authorization_code"|"refresh_token">,
+     *   allowed_scopes?: list<string>,
+     *   logo_uri?: string,
+     *   name?: string,
+     *   policy_uri?: string,
+     *   redirect_uris?: list<string>,
+     *   require_pkce?: bool,
+     *   tos_uri?: string,
+     * }|OAuthClientUpdateParams $params
      *
      * @throws APIException
      */
     public function update(
         string $id,
-        $allowedGrantTypes = omit,
-        $allowedScopes = omit,
-        $logoUri = omit,
-        $name = omit,
-        $policyUri = omit,
-        $redirectUris = omit,
-        $requirePkce = omit,
-        $tosUri = omit,
+        array|OAuthClientUpdateParams $params,
         ?RequestOptions $requestOptions = null,
-    ): OAuthClientUpdateResponse {
-        $params = [
-            'allowedGrantTypes' => $allowedGrantTypes,
-            'allowedScopes' => $allowedScopes,
-            'logoUri' => $logoUri,
-            'name' => $name,
-            'policyUri' => $policyUri,
-            'redirectUris' => $redirectUris,
-            'requirePkce' => $requirePkce,
-            'tosUri' => $tosUri,
-        ];
-
-        return $this->updateRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): OAuthClientUpdateResponse {
         [$parsed, $options] = OAuthClientUpdateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -193,56 +124,26 @@ final class OAuthClientsService implements OAuthClientsContract
      *
      * Retrieve a paginated list of OAuth clients for the authenticated user
      *
-     * @param FilterAllowedGrantTypesContains|value-of<FilterAllowedGrantTypesContains> $filterAllowedGrantTypesContains Filter by allowed grant type
-     * @param string $filterClientID Filter by client ID
-     * @param FilterClientType|value-of<FilterClientType> $filterClientType Filter by client type
-     * @param string $filterName Filter by exact client name
-     * @param string $filterNameContains Filter by client name containing text
-     * @param bool $filterVerified Filter by verification status
-     * @param int $pageNumber Page number
-     * @param int $pageSize Number of results per page
+     * @param array{
+     *   filter_allowed_grant_types__contains_?: "client_credentials"|"authorization_code"|"refresh_token",
+     *   filter_client_id_?: string,
+     *   filter_client_type_?: "confidential"|"public",
+     *   filter_name_?: string,
+     *   filter_name__contains_?: string,
+     *   filter_verified_?: bool,
+     *   page_number_?: int,
+     *   page_size_?: int,
+     * }|OAuthClientListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $filterAllowedGrantTypesContains = omit,
-        $filterClientID = omit,
-        $filterClientType = omit,
-        $filterName = omit,
-        $filterNameContains = omit,
-        $filterVerified = omit,
-        $pageNumber = omit,
-        $pageSize = omit,
-        ?RequestOptions $requestOptions = null,
-    ): OAuthClientListResponse {
-        $params = [
-            'filterAllowedGrantTypesContains' => $filterAllowedGrantTypesContains,
-            'filterClientID' => $filterClientID,
-            'filterClientType' => $filterClientType,
-            'filterName' => $filterName,
-            'filterNameContains' => $filterNameContains,
-            'filterVerified' => $filterVerified,
-            'pageNumber' => $pageNumber,
-            'pageSize' => $pageSize,
-        ];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
+        array|OAuthClientListParams $params,
         ?RequestOptions $requestOptions = null
     ): OAuthClientListResponse {
         [$parsed, $options] = OAuthClientListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

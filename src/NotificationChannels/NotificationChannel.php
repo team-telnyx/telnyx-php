@@ -13,12 +13,12 @@ use Telnyx\NotificationChannels\NotificationChannel\ChannelTypeID;
  * A Notification Channel.
  *
  * @phpstan-type NotificationChannelShape = array{
- *   id?: string,
- *   channelDestination?: string,
- *   channelTypeID?: value-of<ChannelTypeID>,
- *   createdAt?: \DateTimeInterface,
- *   notificationProfileID?: string,
- *   updatedAt?: \DateTimeInterface,
+ *   id?: string|null,
+ *   channel_destination?: string|null,
+ *   channel_type_id?: value-of<ChannelTypeID>|null,
+ *   created_at?: \DateTimeInterface|null,
+ *   notification_profile_id?: string|null,
+ *   updated_at?: \DateTimeInterface|null,
  * }
  */
 final class NotificationChannel implements BaseModel
@@ -35,34 +35,34 @@ final class NotificationChannel implements BaseModel
     /**
      * The destination associated with the channel type.
      */
-    #[Api('channel_destination', optional: true)]
-    public ?string $channelDestination;
+    #[Api(optional: true)]
+    public ?string $channel_destination;
 
     /**
      * A Channel Type ID.
      *
-     * @var value-of<ChannelTypeID>|null $channelTypeID
+     * @var value-of<ChannelTypeID>|null $channel_type_id
      */
-    #[Api('channel_type_id', enum: ChannelTypeID::class, optional: true)]
-    public ?string $channelTypeID;
+    #[Api(enum: ChannelTypeID::class, optional: true)]
+    public ?string $channel_type_id;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Api('created_at', optional: true)]
-    public ?\DateTimeInterface $createdAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $created_at;
 
     /**
      * A UUID reference to the associated Notification Profile.
      */
-    #[Api('notification_profile_id', optional: true)]
-    public ?string $notificationProfileID;
+    #[Api(optional: true)]
+    public ?string $notification_profile_id;
 
     /**
      * ISO 8601 formatted date indicating when the resource was updated.
      */
-    #[Api('updated_at', optional: true)]
-    public ?\DateTimeInterface $updatedAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $updated_at;
 
     public function __construct()
     {
@@ -74,24 +74,24 @@ final class NotificationChannel implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ChannelTypeID|value-of<ChannelTypeID> $channelTypeID
+     * @param ChannelTypeID|value-of<ChannelTypeID> $channel_type_id
      */
     public static function with(
         ?string $id = null,
-        ?string $channelDestination = null,
-        ChannelTypeID|string|null $channelTypeID = null,
-        ?\DateTimeInterface $createdAt = null,
-        ?string $notificationProfileID = null,
-        ?\DateTimeInterface $updatedAt = null,
+        ?string $channel_destination = null,
+        ChannelTypeID|string|null $channel_type_id = null,
+        ?\DateTimeInterface $created_at = null,
+        ?string $notification_profile_id = null,
+        ?\DateTimeInterface $updated_at = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj->id = $id;
-        null !== $channelDestination && $obj->channelDestination = $channelDestination;
-        null !== $channelTypeID && $obj['channelTypeID'] = $channelTypeID;
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $notificationProfileID && $obj->notificationProfileID = $notificationProfileID;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
+        null !== $channel_destination && $obj->channel_destination = $channel_destination;
+        null !== $channel_type_id && $obj['channel_type_id'] = $channel_type_id;
+        null !== $created_at && $obj->created_at = $created_at;
+        null !== $notification_profile_id && $obj->notification_profile_id = $notification_profile_id;
+        null !== $updated_at && $obj->updated_at = $updated_at;
 
         return $obj;
     }
@@ -113,7 +113,7 @@ final class NotificationChannel implements BaseModel
     public function withChannelDestination(string $channelDestination): self
     {
         $obj = clone $this;
-        $obj->channelDestination = $channelDestination;
+        $obj->channel_destination = $channelDestination;
 
         return $obj;
     }
@@ -126,7 +126,7 @@ final class NotificationChannel implements BaseModel
     public function withChannelTypeID(ChannelTypeID|string $channelTypeID): self
     {
         $obj = clone $this;
-        $obj['channelTypeID'] = $channelTypeID;
+        $obj['channel_type_id'] = $channelTypeID;
 
         return $obj;
     }
@@ -137,7 +137,7 @@ final class NotificationChannel implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }
@@ -149,7 +149,7 @@ final class NotificationChannel implements BaseModel
         string $notificationProfileID
     ): self {
         $obj = clone $this;
-        $obj->notificationProfileID = $notificationProfileID;
+        $obj->notification_profile_id = $notificationProfileID;
 
         return $obj;
     }
@@ -160,7 +160,7 @@ final class NotificationChannel implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $obj->updated_at = $updatedAt;
 
         return $obj;
     }

@@ -7,15 +7,12 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DialogflowConnections\DialogflowConnectionCreateParams;
-use Telnyx\DialogflowConnections\DialogflowConnectionCreateParams\DialogflowAPI;
 use Telnyx\DialogflowConnections\DialogflowConnectionGetResponse;
 use Telnyx\DialogflowConnections\DialogflowConnectionNewResponse;
 use Telnyx\DialogflowConnections\DialogflowConnectionUpdateParams;
 use Telnyx\DialogflowConnections\DialogflowConnectionUpdateResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\DialogflowConnectionsContract;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class DialogflowConnectionsService implements DialogflowConnectionsContract
 {
@@ -29,50 +26,24 @@ final class DialogflowConnectionsService implements DialogflowConnectionsContrac
      *
      * Save Dialogflow Credentiails to Telnyx, so it can be used with other Telnyx services.
      *
-     * @param array<string,
-     * mixed,> $serviceAccount The JSON map to connect your Dialoglow account
-     * @param string $conversationProfileID The id of a configured conversation profile on your Dialogflow account. (If you use Dialogflow CX, this param is required)
-     * @param DialogflowAPI|value-of<DialogflowAPI> $dialogflowAPI determine which Dialogflow will be used
-     * @param string $environment which Dialogflow environment will be used
-     * @param string $location The region of your agent is. (If you use Dialogflow CX, this param is required)
+     * @param array{
+     *   service_account: array<string,mixed>,
+     *   conversation_profile_id?: string,
+     *   dialogflow_api?: "cx"|"es",
+     *   environment?: string,
+     *   location?: string,
+     * }|DialogflowConnectionCreateParams $params
      *
      * @throws APIException
      */
     public function create(
         string $connectionID,
-        $serviceAccount,
-        $conversationProfileID = omit,
-        $dialogflowAPI = omit,
-        $environment = omit,
-        $location = omit,
+        array|DialogflowConnectionCreateParams $params,
         ?RequestOptions $requestOptions = null,
-    ): DialogflowConnectionNewResponse {
-        $params = [
-            'serviceAccount' => $serviceAccount,
-            'conversationProfileID' => $conversationProfileID,
-            'dialogflowAPI' => $dialogflowAPI,
-            'environment' => $environment,
-            'location' => $location,
-        ];
-
-        return $this->createRaw($connectionID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        string $connectionID,
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): DialogflowConnectionNewResponse {
         [$parsed, $options] = DialogflowConnectionCreateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -110,50 +81,24 @@ final class DialogflowConnectionsService implements DialogflowConnectionsContrac
      *
      * Updates a stored Dialogflow Connection.
      *
-     * @param array<string,
-     * mixed,> $serviceAccount The JSON map to connect your Dialoglow account
-     * @param string $conversationProfileID The id of a configured conversation profile on your Dialogflow account. (If you use Dialogflow CX, this param is required)
-     * @param DialogflowConnectionUpdateParams\DialogflowAPI|value-of<DialogflowConnectionUpdateParams\DialogflowAPI> $dialogflowAPI determine which Dialogflow will be used
-     * @param string $environment which Dialogflow environment will be used
-     * @param string $location The region of your agent is. (If you use Dialogflow CX, this param is required)
+     * @param array{
+     *   service_account: array<string,mixed>,
+     *   conversation_profile_id?: string,
+     *   dialogflow_api?: "cx"|"es",
+     *   environment?: string,
+     *   location?: string,
+     * }|DialogflowConnectionUpdateParams $params
      *
      * @throws APIException
      */
     public function update(
         string $connectionID,
-        $serviceAccount,
-        $conversationProfileID = omit,
-        $dialogflowAPI = omit,
-        $environment = omit,
-        $location = omit,
+        array|DialogflowConnectionUpdateParams $params,
         ?RequestOptions $requestOptions = null,
-    ): DialogflowConnectionUpdateResponse {
-        $params = [
-            'serviceAccount' => $serviceAccount,
-            'conversationProfileID' => $conversationProfileID,
-            'dialogflowAPI' => $dialogflowAPI,
-            'environment' => $environment,
-            'location' => $location,
-        ];
-
-        return $this->updateRaw($connectionID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $connectionID,
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): DialogflowConnectionUpdateResponse {
         [$parsed, $options] = DialogflowConnectionUpdateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

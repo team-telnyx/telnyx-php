@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type OAuthGrantDeleteResponseShape = array{data?: OAuthGrant}
+ * @phpstan-type OAuthGrantDeleteResponseShape = array{data?: OAuthGrant|null}
  */
 final class OAuthGrantDeleteResponse implements BaseModel, ResponseConverter
 {

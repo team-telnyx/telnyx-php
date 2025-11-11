@@ -13,7 +13,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type RoomListResponseShape = array{
- *   data?: list<Room>, meta?: PaginationMeta
+ *   data?: list<Room>|null, meta?: PaginationMeta|null
  * }
  */
 final class RoomListResponse implements BaseModel, ResponseConverter

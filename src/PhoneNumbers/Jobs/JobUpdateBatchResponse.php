@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type JobUpdateBatchResponseShape = array{data?: PhoneNumbersJob}
+ * @phpstan-type JobUpdateBatchResponseShape = array{data?: PhoneNumbersJob|null}
  */
 final class JobUpdateBatchResponse implements BaseModel, ResponseConverter
 {

@@ -24,17 +24,17 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Calls\Actions->startStreaming
  *
  * @phpstan-type ActionStartStreamingParamsShape = array{
- *   clientState?: string,
- *   commandID?: string,
- *   dialogflowConfig?: DialogflowConfig,
- *   enableDialogflow?: bool,
- *   streamBidirectionalCodec?: StreamBidirectionalCodec|value-of<StreamBidirectionalCodec>,
- *   streamBidirectionalMode?: StreamBidirectionalMode|value-of<StreamBidirectionalMode>,
- *   streamBidirectionalSamplingRate?: 8000|16000|22050|24000|48000,
- *   streamBidirectionalTargetLegs?: StreamBidirectionalTargetLegs|value-of<StreamBidirectionalTargetLegs>,
- *   streamCodec?: StreamCodec|value-of<StreamCodec>,
- *   streamTrack?: StreamTrack|value-of<StreamTrack>,
- *   streamURL?: string,
+ *   client_state?: string,
+ *   command_id?: string,
+ *   dialogflow_config?: DialogflowConfig,
+ *   enable_dialogflow?: bool,
+ *   stream_bidirectional_codec?: StreamBidirectionalCodec|value-of<StreamBidirectionalCodec>,
+ *   stream_bidirectional_mode?: StreamBidirectionalMode|value-of<StreamBidirectionalMode>,
+ *   stream_bidirectional_sampling_rate?: 8000|16000|22050|24000|48000,
+ *   stream_bidirectional_target_legs?: StreamBidirectionalTargetLegs|value-of<StreamBidirectionalTargetLegs>,
+ *   stream_codec?: StreamCodec|value-of<StreamCodec>,
+ *   stream_track?: StreamTrack|value-of<StreamTrack>,
+ *   stream_url?: string,
  * }
  */
 final class ActionStartStreamingParams implements BaseModel
@@ -46,93 +46,77 @@ final class ActionStartStreamingParams implements BaseModel
     /**
      * Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      */
-    #[Api('client_state', optional: true)]
-    public ?string $clientState;
+    #[Api(optional: true)]
+    public ?string $client_state;
 
     /**
      * Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      */
-    #[Api('command_id', optional: true)]
-    public ?string $commandID;
+    #[Api(optional: true)]
+    public ?string $command_id;
 
-    #[Api('dialogflow_config', optional: true)]
-    public ?DialogflowConfig $dialogflowConfig;
+    #[Api(optional: true)]
+    public ?DialogflowConfig $dialogflow_config;
 
     /**
      * Enables Dialogflow for the current call. The default value is false.
      */
-    #[Api('enable_dialogflow', optional: true)]
-    public ?bool $enableDialogflow;
+    #[Api(optional: true)]
+    public ?bool $enable_dialogflow;
 
     /**
      * Indicates codec for bidirectional streaming RTP payloads. Used only with stream_bidirectional_mode=rtp. Case sensitive.
      *
-     * @var value-of<StreamBidirectionalCodec>|null $streamBidirectionalCodec
+     * @var value-of<StreamBidirectionalCodec>|null $stream_bidirectional_codec
      */
-    #[Api(
-        'stream_bidirectional_codec',
-        enum: StreamBidirectionalCodec::class,
-        optional: true,
-    )]
-    public ?string $streamBidirectionalCodec;
+    #[Api(enum: StreamBidirectionalCodec::class, optional: true)]
+    public ?string $stream_bidirectional_codec;
 
     /**
      * Configures method of bidirectional streaming (mp3, rtp).
      *
-     * @var value-of<StreamBidirectionalMode>|null $streamBidirectionalMode
+     * @var value-of<StreamBidirectionalMode>|null $stream_bidirectional_mode
      */
-    #[Api(
-        'stream_bidirectional_mode',
-        enum: StreamBidirectionalMode::class,
-        optional: true,
-    )]
-    public ?string $streamBidirectionalMode;
+    #[Api(enum: StreamBidirectionalMode::class, optional: true)]
+    public ?string $stream_bidirectional_mode;
 
     /**
      * Audio sampling rate.
      *
-     * @var 8000|16000|22050|24000|48000|null $streamBidirectionalSamplingRate
+     * @var 8000|16000|22050|24000|48000|null $stream_bidirectional_sampling_rate
      */
-    #[Api(
-        'stream_bidirectional_sampling_rate',
-        enum: StreamBidirectionalSamplingRate::class,
-        optional: true,
-    )]
-    public ?int $streamBidirectionalSamplingRate;
+    #[Api(enum: StreamBidirectionalSamplingRate::class, optional: true)]
+    public ?int $stream_bidirectional_sampling_rate;
 
     /**
      * Specifies which call legs should receive the bidirectional stream audio.
      *
-     * @var value-of<StreamBidirectionalTargetLegs>|null $streamBidirectionalTargetLegs
+     * @var value-of<StreamBidirectionalTargetLegs>|null $stream_bidirectional_target_legs
      */
-    #[Api(
-        'stream_bidirectional_target_legs',
-        enum: StreamBidirectionalTargetLegs::class,
-        optional: true,
-    )]
-    public ?string $streamBidirectionalTargetLegs;
+    #[Api(enum: StreamBidirectionalTargetLegs::class, optional: true)]
+    public ?string $stream_bidirectional_target_legs;
 
     /**
      * Specifies the codec to be used for the streamed audio. When set to 'default' or when transcoding is not possible, the codec from the call will be used.
      *
-     * @var value-of<StreamCodec>|null $streamCodec
+     * @var value-of<StreamCodec>|null $stream_codec
      */
-    #[Api('stream_codec', enum: StreamCodec::class, optional: true)]
-    public ?string $streamCodec;
+    #[Api(enum: StreamCodec::class, optional: true)]
+    public ?string $stream_codec;
 
     /**
      * Specifies which track should be streamed.
      *
-     * @var value-of<StreamTrack>|null $streamTrack
+     * @var value-of<StreamTrack>|null $stream_track
      */
-    #[Api('stream_track', enum: StreamTrack::class, optional: true)]
-    public ?string $streamTrack;
+    #[Api(enum: StreamTrack::class, optional: true)]
+    public ?string $stream_track;
 
     /**
      * The destination WebSocket address where the stream is going to be delivered.
      */
-    #[Api('stream_url', optional: true)]
-    public ?string $streamURL;
+    #[Api(optional: true)]
+    public ?string $stream_url;
 
     public function __construct()
     {
@@ -144,39 +128,39 @@ final class ActionStartStreamingParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param StreamBidirectionalCodec|value-of<StreamBidirectionalCodec> $streamBidirectionalCodec
-     * @param StreamBidirectionalMode|value-of<StreamBidirectionalMode> $streamBidirectionalMode
-     * @param 8000|16000|22050|24000|48000 $streamBidirectionalSamplingRate
-     * @param StreamBidirectionalTargetLegs|value-of<StreamBidirectionalTargetLegs> $streamBidirectionalTargetLegs
-     * @param StreamCodec|value-of<StreamCodec> $streamCodec
-     * @param StreamTrack|value-of<StreamTrack> $streamTrack
+     * @param StreamBidirectionalCodec|value-of<StreamBidirectionalCodec> $stream_bidirectional_codec
+     * @param StreamBidirectionalMode|value-of<StreamBidirectionalMode> $stream_bidirectional_mode
+     * @param 8000|16000|22050|24000|48000 $stream_bidirectional_sampling_rate
+     * @param StreamBidirectionalTargetLegs|value-of<StreamBidirectionalTargetLegs> $stream_bidirectional_target_legs
+     * @param StreamCodec|value-of<StreamCodec> $stream_codec
+     * @param StreamTrack|value-of<StreamTrack> $stream_track
      */
     public static function with(
-        ?string $clientState = null,
-        ?string $commandID = null,
-        ?DialogflowConfig $dialogflowConfig = null,
-        ?bool $enableDialogflow = null,
-        StreamBidirectionalCodec|string|null $streamBidirectionalCodec = null,
-        StreamBidirectionalMode|string|null $streamBidirectionalMode = null,
-        ?int $streamBidirectionalSamplingRate = null,
-        StreamBidirectionalTargetLegs|string|null $streamBidirectionalTargetLegs = null,
-        StreamCodec|string|null $streamCodec = null,
-        StreamTrack|string|null $streamTrack = null,
-        ?string $streamURL = null,
+        ?string $client_state = null,
+        ?string $command_id = null,
+        ?DialogflowConfig $dialogflow_config = null,
+        ?bool $enable_dialogflow = null,
+        StreamBidirectionalCodec|string|null $stream_bidirectional_codec = null,
+        StreamBidirectionalMode|string|null $stream_bidirectional_mode = null,
+        ?int $stream_bidirectional_sampling_rate = null,
+        StreamBidirectionalTargetLegs|string|null $stream_bidirectional_target_legs = null,
+        StreamCodec|string|null $stream_codec = null,
+        StreamTrack|string|null $stream_track = null,
+        ?string $stream_url = null,
     ): self {
         $obj = new self;
 
-        null !== $clientState && $obj->clientState = $clientState;
-        null !== $commandID && $obj->commandID = $commandID;
-        null !== $dialogflowConfig && $obj->dialogflowConfig = $dialogflowConfig;
-        null !== $enableDialogflow && $obj->enableDialogflow = $enableDialogflow;
-        null !== $streamBidirectionalCodec && $obj['streamBidirectionalCodec'] = $streamBidirectionalCodec;
-        null !== $streamBidirectionalMode && $obj['streamBidirectionalMode'] = $streamBidirectionalMode;
-        null !== $streamBidirectionalSamplingRate && $obj->streamBidirectionalSamplingRate = $streamBidirectionalSamplingRate;
-        null !== $streamBidirectionalTargetLegs && $obj['streamBidirectionalTargetLegs'] = $streamBidirectionalTargetLegs;
-        null !== $streamCodec && $obj['streamCodec'] = $streamCodec;
-        null !== $streamTrack && $obj['streamTrack'] = $streamTrack;
-        null !== $streamURL && $obj->streamURL = $streamURL;
+        null !== $client_state && $obj->client_state = $client_state;
+        null !== $command_id && $obj->command_id = $command_id;
+        null !== $dialogflow_config && $obj->dialogflow_config = $dialogflow_config;
+        null !== $enable_dialogflow && $obj->enable_dialogflow = $enable_dialogflow;
+        null !== $stream_bidirectional_codec && $obj['stream_bidirectional_codec'] = $stream_bidirectional_codec;
+        null !== $stream_bidirectional_mode && $obj['stream_bidirectional_mode'] = $stream_bidirectional_mode;
+        null !== $stream_bidirectional_sampling_rate && $obj->stream_bidirectional_sampling_rate = $stream_bidirectional_sampling_rate;
+        null !== $stream_bidirectional_target_legs && $obj['stream_bidirectional_target_legs'] = $stream_bidirectional_target_legs;
+        null !== $stream_codec && $obj['stream_codec'] = $stream_codec;
+        null !== $stream_track && $obj['stream_track'] = $stream_track;
+        null !== $stream_url && $obj->stream_url = $stream_url;
 
         return $obj;
     }
@@ -187,7 +171,7 @@ final class ActionStartStreamingParams implements BaseModel
     public function withClientState(string $clientState): self
     {
         $obj = clone $this;
-        $obj->clientState = $clientState;
+        $obj->client_state = $clientState;
 
         return $obj;
     }
@@ -198,7 +182,7 @@ final class ActionStartStreamingParams implements BaseModel
     public function withCommandID(string $commandID): self
     {
         $obj = clone $this;
-        $obj->commandID = $commandID;
+        $obj->command_id = $commandID;
 
         return $obj;
     }
@@ -207,7 +191,7 @@ final class ActionStartStreamingParams implements BaseModel
         DialogflowConfig $dialogflowConfig
     ): self {
         $obj = clone $this;
-        $obj->dialogflowConfig = $dialogflowConfig;
+        $obj->dialogflow_config = $dialogflowConfig;
 
         return $obj;
     }
@@ -218,7 +202,7 @@ final class ActionStartStreamingParams implements BaseModel
     public function withEnableDialogflow(bool $enableDialogflow): self
     {
         $obj = clone $this;
-        $obj->enableDialogflow = $enableDialogflow;
+        $obj->enable_dialogflow = $enableDialogflow;
 
         return $obj;
     }
@@ -232,7 +216,7 @@ final class ActionStartStreamingParams implements BaseModel
         StreamBidirectionalCodec|string $streamBidirectionalCodec
     ): self {
         $obj = clone $this;
-        $obj['streamBidirectionalCodec'] = $streamBidirectionalCodec;
+        $obj['stream_bidirectional_codec'] = $streamBidirectionalCodec;
 
         return $obj;
     }
@@ -246,7 +230,7 @@ final class ActionStartStreamingParams implements BaseModel
         StreamBidirectionalMode|string $streamBidirectionalMode
     ): self {
         $obj = clone $this;
-        $obj['streamBidirectionalMode'] = $streamBidirectionalMode;
+        $obj['stream_bidirectional_mode'] = $streamBidirectionalMode;
 
         return $obj;
     }
@@ -260,7 +244,7 @@ final class ActionStartStreamingParams implements BaseModel
         int $streamBidirectionalSamplingRate
     ): self {
         $obj = clone $this;
-        $obj->streamBidirectionalSamplingRate = $streamBidirectionalSamplingRate;
+        $obj->stream_bidirectional_sampling_rate = $streamBidirectionalSamplingRate;
 
         return $obj;
     }
@@ -274,7 +258,7 @@ final class ActionStartStreamingParams implements BaseModel
         StreamBidirectionalTargetLegs|string $streamBidirectionalTargetLegs
     ): self {
         $obj = clone $this;
-        $obj['streamBidirectionalTargetLegs'] = $streamBidirectionalTargetLegs;
+        $obj['stream_bidirectional_target_legs'] = $streamBidirectionalTargetLegs;
 
         return $obj;
     }
@@ -287,7 +271,7 @@ final class ActionStartStreamingParams implements BaseModel
     public function withStreamCodec(StreamCodec|string $streamCodec): self
     {
         $obj = clone $this;
-        $obj['streamCodec'] = $streamCodec;
+        $obj['stream_codec'] = $streamCodec;
 
         return $obj;
     }
@@ -300,7 +284,7 @@ final class ActionStartStreamingParams implements BaseModel
     public function withStreamTrack(StreamTrack|string $streamTrack): self
     {
         $obj = clone $this;
-        $obj['streamTrack'] = $streamTrack;
+        $obj['stream_track'] = $streamTrack;
 
         return $obj;
     }
@@ -311,7 +295,7 @@ final class ActionStartStreamingParams implements BaseModel
     public function withStreamURL(string $streamURL): self
     {
         $obj = clone $this;
-        $obj->streamURL = $streamURL;
+        $obj->stream_url = $streamURL;
 
         return $obj;
     }

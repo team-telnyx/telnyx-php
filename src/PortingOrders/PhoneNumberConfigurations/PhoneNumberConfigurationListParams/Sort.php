@@ -12,7 +12,7 @@ use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListP
 /**
  * Consolidated sort parameter (deepObject style). Originally: sort[value].
  *
- * @phpstan-type SortShape = array{value?: value-of<Value>}
+ * @phpstan-type SortShape = array{value?: value-of<Value>|null}
  */
 final class Sort implements BaseModel
 {

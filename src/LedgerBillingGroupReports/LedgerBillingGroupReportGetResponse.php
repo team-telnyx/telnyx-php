@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type LedgerBillingGroupReportGetResponseShape = array{
- *   data?: LedgerBillingGroupReport
+ *   data?: LedgerBillingGroupReport|null
  * }
  */
 final class LedgerBillingGroupReportGetResponse implements BaseModel, ResponseConverter

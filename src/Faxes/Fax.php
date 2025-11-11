@@ -14,25 +14,25 @@ use Telnyx\Faxes\Fax\Status;
 
 /**
  * @phpstan-type FaxShape = array{
- *   id?: string,
- *   clientState?: string,
- *   connectionID?: string,
- *   createdAt?: \DateTimeInterface,
- *   direction?: value-of<Direction>,
- *   from?: string,
- *   fromDisplayName?: string,
- *   mediaName?: string,
- *   mediaURL?: string,
- *   previewURL?: string,
- *   quality?: value-of<Quality>,
- *   recordType?: value-of<RecordType>,
- *   status?: value-of<Status>,
- *   storeMedia?: bool,
- *   storedMediaURL?: string,
- *   to?: string,
- *   updatedAt?: \DateTimeInterface,
- *   webhookFailoverURL?: string,
- *   webhookURL?: string,
+ *   id?: string|null,
+ *   client_state?: string|null,
+ *   connection_id?: string|null,
+ *   created_at?: \DateTimeInterface|null,
+ *   direction?: value-of<Direction>|null,
+ *   from?: string|null,
+ *   from_display_name?: string|null,
+ *   media_name?: string|null,
+ *   media_url?: string|null,
+ *   preview_url?: string|null,
+ *   quality?: value-of<Quality>|null,
+ *   record_type?: value-of<RecordType>|null,
+ *   status?: value-of<Status>|null,
+ *   store_media?: bool|null,
+ *   stored_media_url?: string|null,
+ *   to?: string|null,
+ *   updated_at?: \DateTimeInterface|null,
+ *   webhook_failover_url?: string|null,
+ *   webhook_url?: string|null,
  * }
  */
 final class Fax implements BaseModel
@@ -49,20 +49,20 @@ final class Fax implements BaseModel
     /**
      * State received from a command.
      */
-    #[Api('client_state', optional: true)]
-    public ?string $clientState;
+    #[Api(optional: true)]
+    public ?string $client_state;
 
     /**
      * The ID of the connection used to send the fax.
      */
-    #[Api('connection_id', optional: true)]
-    public ?string $connectionID;
+    #[Api(optional: true)]
+    public ?string $connection_id;
 
     /**
      * ISO 8601 timestamp when resource was created.
      */
-    #[Api('created_at', optional: true)]
-    public ?\DateTimeInterface $createdAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $created_at;
 
     /**
      * The direction of the fax.
@@ -81,26 +81,26 @@ final class Fax implements BaseModel
     /**
      * The string used as the caller id name (SIP From Display Name) presented to the destination (`to` number).
      */
-    #[Api('from_display_name', optional: true)]
-    public ?string $fromDisplayName;
+    #[Api(optional: true)]
+    public ?string $from_display_name;
 
     /**
      * The media_name used for the fax's media. Must point to a file previously uploaded to api.telnyx.com/v2/media by the same user/organization. media_name and media_url/contents can't be submitted together.
      */
-    #[Api('media_name', optional: true)]
-    public ?string $mediaName;
+    #[Api(optional: true)]
+    public ?string $media_name;
 
     /**
      * The URL (or list of URLs) to the PDF used for the fax's media. media_url and media_name/contents can't be submitted together.
      */
-    #[Api('media_url', optional: true)]
-    public ?string $mediaURL;
+    #[Api(optional: true)]
+    public ?string $media_url;
 
     /**
      * If `store_preview` was set to `true`, this is a link to temporary location. Link expires after 10 minutes.
      */
-    #[Api('preview_url', optional: true)]
-    public ?string $previewURL;
+    #[Api(optional: true)]
+    public ?string $preview_url;
 
     /**
      * The quality of the fax. The `ultra` settings provides the highest quality available, but also present longer fax processing times. `ultra_light` is best suited for images, wihle `ultra_dark` is best suited for text.
@@ -113,10 +113,10 @@ final class Fax implements BaseModel
     /**
      * Identifies the type of the resource.
      *
-     * @var value-of<RecordType>|null $recordType
+     * @var value-of<RecordType>|null $record_type
      */
-    #[Api('record_type', enum: RecordType::class, optional: true)]
-    public ?string $recordType;
+    #[Api(enum: RecordType::class, optional: true)]
+    public ?string $record_type;
 
     /**
      * Status of the fax.
@@ -129,14 +129,14 @@ final class Fax implements BaseModel
     /**
      * Should fax media be stored on temporary URL. It does not support media_name.
      */
-    #[Api('store_media', optional: true)]
-    public ?bool $storeMedia;
+    #[Api(optional: true)]
+    public ?bool $store_media;
 
     /**
      * If store_media was set to true, this is a link to temporary location. Link expires after 10 minutes.
      */
-    #[Api('stored_media_url', optional: true)]
-    public ?string $storedMediaURL;
+    #[Api(optional: true)]
+    public ?string $stored_media_url;
 
     /**
      * The phone number, in E.164 format, the fax will be sent to or SIP URI.
@@ -147,20 +147,20 @@ final class Fax implements BaseModel
     /**
      * ISO 8601 timestamp when resource was updated.
      */
-    #[Api('updated_at', optional: true)]
-    public ?\DateTimeInterface $updatedAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $updated_at;
 
     /**
      * Optional failover URL that will receive fax webhooks if webhook_url doesn't return a 2XX response.
      */
-    #[Api('webhook_failover_url', optional: true)]
-    public ?string $webhookFailoverURL;
+    #[Api(optional: true)]
+    public ?string $webhook_failover_url;
 
     /**
      * URL that will receive fax webhooks.
      */
-    #[Api('webhook_url', optional: true)]
-    public ?string $webhookURL;
+    #[Api(optional: true)]
+    public ?string $webhook_url;
 
     public function __construct()
     {
@@ -174,51 +174,51 @@ final class Fax implements BaseModel
      *
      * @param Direction|value-of<Direction> $direction
      * @param Quality|value-of<Quality> $quality
-     * @param RecordType|value-of<RecordType> $recordType
+     * @param RecordType|value-of<RecordType> $record_type
      * @param Status|value-of<Status> $status
      */
     public static function with(
         ?string $id = null,
-        ?string $clientState = null,
-        ?string $connectionID = null,
-        ?\DateTimeInterface $createdAt = null,
+        ?string $client_state = null,
+        ?string $connection_id = null,
+        ?\DateTimeInterface $created_at = null,
         Direction|string|null $direction = null,
         ?string $from = null,
-        ?string $fromDisplayName = null,
-        ?string $mediaName = null,
-        ?string $mediaURL = null,
-        ?string $previewURL = null,
+        ?string $from_display_name = null,
+        ?string $media_name = null,
+        ?string $media_url = null,
+        ?string $preview_url = null,
         Quality|string|null $quality = null,
-        RecordType|string|null $recordType = null,
+        RecordType|string|null $record_type = null,
         Status|string|null $status = null,
-        ?bool $storeMedia = null,
-        ?string $storedMediaURL = null,
+        ?bool $store_media = null,
+        ?string $stored_media_url = null,
         ?string $to = null,
-        ?\DateTimeInterface $updatedAt = null,
-        ?string $webhookFailoverURL = null,
-        ?string $webhookURL = null,
+        ?\DateTimeInterface $updated_at = null,
+        ?string $webhook_failover_url = null,
+        ?string $webhook_url = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj->id = $id;
-        null !== $clientState && $obj->clientState = $clientState;
-        null !== $connectionID && $obj->connectionID = $connectionID;
-        null !== $createdAt && $obj->createdAt = $createdAt;
+        null !== $client_state && $obj->client_state = $client_state;
+        null !== $connection_id && $obj->connection_id = $connection_id;
+        null !== $created_at && $obj->created_at = $created_at;
         null !== $direction && $obj['direction'] = $direction;
         null !== $from && $obj->from = $from;
-        null !== $fromDisplayName && $obj->fromDisplayName = $fromDisplayName;
-        null !== $mediaName && $obj->mediaName = $mediaName;
-        null !== $mediaURL && $obj->mediaURL = $mediaURL;
-        null !== $previewURL && $obj->previewURL = $previewURL;
+        null !== $from_display_name && $obj->from_display_name = $from_display_name;
+        null !== $media_name && $obj->media_name = $media_name;
+        null !== $media_url && $obj->media_url = $media_url;
+        null !== $preview_url && $obj->preview_url = $preview_url;
         null !== $quality && $obj['quality'] = $quality;
-        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $record_type && $obj['record_type'] = $record_type;
         null !== $status && $obj['status'] = $status;
-        null !== $storeMedia && $obj->storeMedia = $storeMedia;
-        null !== $storedMediaURL && $obj->storedMediaURL = $storedMediaURL;
+        null !== $store_media && $obj->store_media = $store_media;
+        null !== $stored_media_url && $obj->stored_media_url = $stored_media_url;
         null !== $to && $obj->to = $to;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
-        null !== $webhookFailoverURL && $obj->webhookFailoverURL = $webhookFailoverURL;
-        null !== $webhookURL && $obj->webhookURL = $webhookURL;
+        null !== $updated_at && $obj->updated_at = $updated_at;
+        null !== $webhook_failover_url && $obj->webhook_failover_url = $webhook_failover_url;
+        null !== $webhook_url && $obj->webhook_url = $webhook_url;
 
         return $obj;
     }
@@ -240,7 +240,7 @@ final class Fax implements BaseModel
     public function withClientState(string $clientState): self
     {
         $obj = clone $this;
-        $obj->clientState = $clientState;
+        $obj->client_state = $clientState;
 
         return $obj;
     }
@@ -251,7 +251,7 @@ final class Fax implements BaseModel
     public function withConnectionID(string $connectionID): self
     {
         $obj = clone $this;
-        $obj->connectionID = $connectionID;
+        $obj->connection_id = $connectionID;
 
         return $obj;
     }
@@ -262,7 +262,7 @@ final class Fax implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }
@@ -297,7 +297,7 @@ final class Fax implements BaseModel
     public function withFromDisplayName(string $fromDisplayName): self
     {
         $obj = clone $this;
-        $obj->fromDisplayName = $fromDisplayName;
+        $obj->from_display_name = $fromDisplayName;
 
         return $obj;
     }
@@ -308,7 +308,7 @@ final class Fax implements BaseModel
     public function withMediaName(string $mediaName): self
     {
         $obj = clone $this;
-        $obj->mediaName = $mediaName;
+        $obj->media_name = $mediaName;
 
         return $obj;
     }
@@ -319,7 +319,7 @@ final class Fax implements BaseModel
     public function withMediaURL(string $mediaURL): self
     {
         $obj = clone $this;
-        $obj->mediaURL = $mediaURL;
+        $obj->media_url = $mediaURL;
 
         return $obj;
     }
@@ -330,7 +330,7 @@ final class Fax implements BaseModel
     public function withPreviewURL(string $previewURL): self
     {
         $obj = clone $this;
-        $obj->previewURL = $previewURL;
+        $obj->preview_url = $previewURL;
 
         return $obj;
     }
@@ -356,7 +356,7 @@ final class Fax implements BaseModel
     public function withRecordType(RecordType|string $recordType): self
     {
         $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
@@ -380,7 +380,7 @@ final class Fax implements BaseModel
     public function withStoreMedia(bool $storeMedia): self
     {
         $obj = clone $this;
-        $obj->storeMedia = $storeMedia;
+        $obj->store_media = $storeMedia;
 
         return $obj;
     }
@@ -391,7 +391,7 @@ final class Fax implements BaseModel
     public function withStoredMediaURL(string $storedMediaURL): self
     {
         $obj = clone $this;
-        $obj->storedMediaURL = $storedMediaURL;
+        $obj->stored_media_url = $storedMediaURL;
 
         return $obj;
     }
@@ -413,7 +413,7 @@ final class Fax implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $obj->updated_at = $updatedAt;
 
         return $obj;
     }
@@ -424,7 +424,7 @@ final class Fax implements BaseModel
     public function withWebhookFailoverURL(string $webhookFailoverURL): self
     {
         $obj = clone $this;
-        $obj->webhookFailoverURL = $webhookFailoverURL;
+        $obj->webhook_failover_url = $webhookFailoverURL;
 
         return $obj;
     }
@@ -435,7 +435,7 @@ final class Fax implements BaseModel
     public function withWebhookURL(string $webhookURL): self
     {
         $obj = clone $this;
-        $obj->webhookURL = $webhookURL;
+        $obj->webhook_url = $webhookURL;
 
         return $obj;
     }

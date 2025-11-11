@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type DataShape = array{
- *   id: string, created: int, ownedBy: string, object1?: string
+ *   id: string, created: int, owned_by: string, object1?: string|null
  * }
  */
 final class Data implements BaseModel
@@ -24,8 +24,8 @@ final class Data implements BaseModel
     #[Api]
     public int $created;
 
-    #[Api('owned_by')]
-    public string $ownedBy;
+    #[Api]
+    public string $owned_by;
 
     #[Api(optional: true)]
     public ?string $object1;
@@ -35,7 +35,7 @@ final class Data implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * Data::with(id: ..., created: ..., ownedBy: ...)
+     * Data::with(id: ..., created: ..., owned_by: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -57,14 +57,14 @@ final class Data implements BaseModel
     public static function with(
         string $id,
         int $created,
-        string $ownedBy,
+        string $owned_by,
         ?string $object1 = null
     ): self {
         $obj = new self;
 
         $obj->id = $id;
         $obj->created = $created;
-        $obj->ownedBy = $ownedBy;
+        $obj->owned_by = $owned_by;
 
         null !== $object1 && $obj->object1 = $object1;
 
@@ -90,7 +90,7 @@ final class Data implements BaseModel
     public function withOwnedBy(string $ownedBy): self
     {
         $obj = clone $this;
-        $obj->ownedBy = $ownedBy;
+        $obj->owned_by = $ownedBy;
 
         return $obj;
     }

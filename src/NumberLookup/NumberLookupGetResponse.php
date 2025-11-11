@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\NumberLookup\NumberLookupGetResponse\Data;
 
 /**
- * @phpstan-type NumberLookupGetResponseShape = array{data?: Data}
+ * @phpstan-type NumberLookupGetResponseShape = array{data?: Data|null}
  */
 final class NumberLookupGetResponse implements BaseModel, ResponseConverter
 {

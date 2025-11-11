@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type BookAppointmentToolShape = array{
- *   bookAppointment: BookAppointment, type: value-of<Type>
+ *   book_appointment: BookAppointment, type: value-of<Type>
  * }
  */
 final class BookAppointmentTool implements BaseModel
@@ -20,8 +20,8 @@ final class BookAppointmentTool implements BaseModel
     /** @use SdkModel<BookAppointmentToolShape> */
     use SdkModel;
 
-    #[Api('book_appointment')]
-    public BookAppointment $bookAppointment;
+    #[Api]
+    public BookAppointment $book_appointment;
 
     /** @var value-of<Type> $type */
     #[Api(enum: Type::class)]
@@ -32,7 +32,7 @@ final class BookAppointmentTool implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * BookAppointmentTool::with(bookAppointment: ..., type: ...)
+     * BookAppointmentTool::with(book_appointment: ..., type: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -54,12 +54,12 @@ final class BookAppointmentTool implements BaseModel
      * @param Type|value-of<Type> $type
      */
     public static function with(
-        BookAppointment $bookAppointment,
+        BookAppointment $book_appointment,
         Type|string $type
     ): self {
         $obj = new self;
 
-        $obj->bookAppointment = $bookAppointment;
+        $obj->book_appointment = $book_appointment;
         $obj['type'] = $type;
 
         return $obj;
@@ -68,7 +68,7 @@ final class BookAppointmentTool implements BaseModel
     public function withBookAppointment(BookAppointment $bookAppointment): self
     {
         $obj = clone $this;
-        $obj->bookAppointment = $bookAppointment;
+        $obj->book_appointment = $bookAppointment;
 
         return $obj;
     }

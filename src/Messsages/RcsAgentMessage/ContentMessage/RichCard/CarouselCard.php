@@ -14,7 +14,7 @@ use Telnyx\Messsages\RcsCardContent;
  * Carousel of cards.
  *
  * @phpstan-type CarouselCardShape = array{
- *   cardContents: list<RcsCardContent>, cardWidth: value-of<CardWidth>
+ *   card_contents: list<RcsCardContent>, card_width: value-of<CardWidth>
  * }
  */
 final class CarouselCard implements BaseModel
@@ -25,25 +25,25 @@ final class CarouselCard implements BaseModel
     /**
      * The list of contents for each card in the carousel. A carousel can have a minimum of 2 cards and a maximum 10 cards.
      *
-     * @var list<RcsCardContent> $cardContents
+     * @var list<RcsCardContent> $card_contents
      */
-    #[Api('card_contents', list: RcsCardContent::class)]
-    public array $cardContents;
+    #[Api(list: RcsCardContent::class)]
+    public array $card_contents;
 
     /**
      * The width of the cards in the carousel.
      *
-     * @var value-of<CardWidth> $cardWidth
+     * @var value-of<CardWidth> $card_width
      */
-    #[Api('card_width', enum: CardWidth::class)]
-    public string $cardWidth;
+    #[Api(enum: CardWidth::class)]
+    public string $card_width;
 
     /**
      * `new CarouselCard()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * CarouselCard::with(cardContents: ..., cardWidth: ...)
+     * CarouselCard::with(card_contents: ..., card_width: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -62,17 +62,17 @@ final class CarouselCard implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<RcsCardContent> $cardContents
-     * @param CardWidth|value-of<CardWidth> $cardWidth
+     * @param list<RcsCardContent> $card_contents
+     * @param CardWidth|value-of<CardWidth> $card_width
      */
     public static function with(
-        array $cardContents,
-        CardWidth|string $cardWidth
+        array $card_contents,
+        CardWidth|string $card_width
     ): self {
         $obj = new self;
 
-        $obj->cardContents = $cardContents;
-        $obj['cardWidth'] = $cardWidth;
+        $obj->card_contents = $card_contents;
+        $obj['card_width'] = $card_width;
 
         return $obj;
     }
@@ -85,7 +85,7 @@ final class CarouselCard implements BaseModel
     public function withCardContents(array $cardContents): self
     {
         $obj = clone $this;
-        $obj->cardContents = $cardContents;
+        $obj->card_contents = $cardContents;
 
         return $obj;
     }
@@ -98,7 +98,7 @@ final class CarouselCard implements BaseModel
     public function withCardWidth(CardWidth|string $cardWidth): self
     {
         $obj = clone $this;
-        $obj['cardWidth'] = $cardWidth;
+        $obj['card_width'] = $cardWidth;
 
         return $obj;
     }

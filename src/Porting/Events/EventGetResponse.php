@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Porting\Events\EventGetResponse\Data;
 
 /**
- * @phpstan-type EventGetResponseShape = array{data?: Data}
+ * @phpstan-type EventGetResponseShape = array{data?: Data|null}
  */
 final class EventGetResponse implements BaseModel, ResponseConverter
 {

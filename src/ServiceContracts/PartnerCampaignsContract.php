@@ -6,13 +6,13 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Campaign\CampaignSharingStatus;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\PartnerCampaigns\PartnerCampaignListParams\Sort;
+use Telnyx\PartnerCampaigns\PartnerCampaignListParams;
 use Telnyx\PartnerCampaigns\PartnerCampaignListResponse;
+use Telnyx\PartnerCampaigns\PartnerCampaignListSharedByMeParams;
 use Telnyx\PartnerCampaigns\PartnerCampaignListSharedByMeResponse;
+use Telnyx\PartnerCampaigns\PartnerCampaignUpdateParams;
 use Telnyx\PartnerCampaigns\TelnyxDownstreamCampaign;
 use Telnyx\RequestOptions;
-
-use const Telnyx\Core\OMIT as omit;
 
 interface PartnerCampaignsContract
 {
@@ -29,89 +29,44 @@ interface PartnerCampaignsContract
     /**
      * @api
      *
-     * @param string $webhookFailoverURL webhook failover to which campaign status updates are sent
-     * @param string $webhookURL webhook to which campaign status updates are sent
+     * @param array<mixed>|PartnerCampaignUpdateParams $params
      *
      * @throws APIException
      */
     public function update(
         string $campaignID,
-        $webhookFailoverURL = omit,
-        $webhookURL = omit,
+        array|PartnerCampaignUpdateParams $params,
         ?RequestOptions $requestOptions = null,
     ): TelnyxDownstreamCampaign;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $campaignID,
-        array $params,
-        ?RequestOptions $requestOptions = null,
-    ): TelnyxDownstreamCampaign;
-
-    /**
-     * @api
-     *
-     * @param int $page The 1-indexed page number to get. The default value is `1`.
-     * @param int $recordsPerPage The amount of records per page, limited to between 1 and 500 inclusive. The default value is `10`.
-     * @param Sort|value-of<Sort> $sort Specifies the sort order for results. If not given, results are sorted by createdAt in descending order.
+     * @param array<mixed>|PartnerCampaignListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $page = omit,
-        $recordsPerPage = omit,
-        $sort = omit,
+        array|PartnerCampaignListParams $params,
         ?RequestOptions $requestOptions = null,
     ): PartnerCampaignListResponse;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): PartnerCampaignListResponse;
-
-    /**
-     * @api
-     *
-     * @param int $page The 1-indexed page number to get. The default value is `1`.
-     * @param int $recordsPerPage The amount of records per page, limited to between 1 and 500 inclusive. The default value is `10`.
+     * @param array<mixed>|PartnerCampaignListSharedByMeParams $params
      *
      * @throws APIException
      */
     public function listSharedByMe(
-        $page = omit,
-        $recordsPerPage = omit,
+        array|PartnerCampaignListSharedByMeParams $params,
         ?RequestOptions $requestOptions = null,
     ): PartnerCampaignListSharedByMeResponse;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listSharedByMeRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): PartnerCampaignListSharedByMeResponse;
-
-    /**
-     * @api
-     *
-     * @return array<string, CampaignSharingStatus>
+     * @return array<string,CampaignSharingStatus>
      *
      * @throws APIException
      */

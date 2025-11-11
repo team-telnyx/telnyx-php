@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\ConferencePlaybackEndedWebhookEvent\Data;
 
 /**
- * @phpstan-type ConferencePlaybackEndedWebhookEventShape = array{data?: Data}
+ * @phpstan-type ConferencePlaybackEndedWebhookEventShape = array{data?: Data|null}
  */
 final class ConferencePlaybackEndedWebhookEvent implements BaseModel
 {

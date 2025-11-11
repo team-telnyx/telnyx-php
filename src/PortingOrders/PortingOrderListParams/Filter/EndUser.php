@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\PortingOrderListParams\Filter\EndUser\Admin;
 
 /**
- * @phpstan-type EndUserShape = array{admin?: Admin}
+ * @phpstan-type EndUserShape = array{admin?: Admin|null}
  */
 final class EndUser implements BaseModel
 {

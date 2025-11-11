@@ -12,7 +12,9 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\ExternalConnections\LogMessages\LogMessageGetResponse\LogMessage;
 
 /**
- * @phpstan-type LogMessageGetResponseShape = array{logMessages?: list<LogMessage>}
+ * @phpstan-type LogMessageGetResponseShape = array{
+ *   log_messages?: list<LogMessage>|null
+ * }
  */
 final class LogMessageGetResponse implements BaseModel, ResponseConverter
 {
@@ -21,9 +23,9 @@ final class LogMessageGetResponse implements BaseModel, ResponseConverter
 
     use SdkResponse;
 
-    /** @var list<LogMessage>|null $logMessages */
-    #[Api('log_messages', list: LogMessage::class, optional: true)]
-    public ?array $logMessages;
+    /** @var list<LogMessage>|null $log_messages */
+    #[Api(list: LogMessage::class, optional: true)]
+    public ?array $log_messages;
 
     public function __construct()
     {
@@ -35,13 +37,13 @@ final class LogMessageGetResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<LogMessage> $logMessages
+     * @param list<LogMessage> $log_messages
      */
-    public static function with(?array $logMessages = null): self
+    public static function with(?array $log_messages = null): self
     {
         $obj = new self;
 
-        null !== $logMessages && $obj->logMessages = $logMessages;
+        null !== $log_messages && $obj->log_messages = $log_messages;
 
         return $obj;
     }
@@ -52,7 +54,7 @@ final class LogMessageGetResponse implements BaseModel, ResponseConverter
     public function withLogMessages(array $logMessages): self
     {
         $obj = clone $this;
-        $obj->logMessages = $logMessages;
+        $obj->log_messages = $logMessages;
 
         return $obj;
     }

@@ -14,11 +14,11 @@ use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\ProberLocation;
 
 /**
  * @phpstan-type DataShape = array{
- *   globalIP?: GlobalIP,
- *   meanLatency?: MeanLatency,
- *   percentileLatency?: PercentileLatency,
- *   proberLocation?: ProberLocation,
- *   timestamp?: \DateTimeInterface,
+ *   global_ip?: GlobalIP|null,
+ *   mean_latency?: MeanLatency|null,
+ *   percentile_latency?: PercentileLatency|null,
+ *   prober_location?: ProberLocation|null,
+ *   timestamp?: \DateTimeInterface|null,
  * }
  */
 final class Data implements BaseModel
@@ -26,17 +26,17 @@ final class Data implements BaseModel
     /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Api('global_ip', optional: true)]
-    public ?GlobalIP $globalIP;
+    #[Api(optional: true)]
+    public ?GlobalIP $global_ip;
 
-    #[Api('mean_latency', optional: true)]
-    public ?MeanLatency $meanLatency;
+    #[Api(optional: true)]
+    public ?MeanLatency $mean_latency;
 
-    #[Api('percentile_latency', optional: true)]
-    public ?PercentileLatency $percentileLatency;
+    #[Api(optional: true)]
+    public ?PercentileLatency $percentile_latency;
 
-    #[Api('prober_location', optional: true)]
-    public ?ProberLocation $proberLocation;
+    #[Api(optional: true)]
+    public ?ProberLocation $prober_location;
 
     /**
      * The timestamp of the metric.
@@ -55,18 +55,18 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?GlobalIP $globalIP = null,
-        ?MeanLatency $meanLatency = null,
-        ?PercentileLatency $percentileLatency = null,
-        ?ProberLocation $proberLocation = null,
+        ?GlobalIP $global_ip = null,
+        ?MeanLatency $mean_latency = null,
+        ?PercentileLatency $percentile_latency = null,
+        ?ProberLocation $prober_location = null,
         ?\DateTimeInterface $timestamp = null,
     ): self {
         $obj = new self;
 
-        null !== $globalIP && $obj->globalIP = $globalIP;
-        null !== $meanLatency && $obj->meanLatency = $meanLatency;
-        null !== $percentileLatency && $obj->percentileLatency = $percentileLatency;
-        null !== $proberLocation && $obj->proberLocation = $proberLocation;
+        null !== $global_ip && $obj->global_ip = $global_ip;
+        null !== $mean_latency && $obj->mean_latency = $mean_latency;
+        null !== $percentile_latency && $obj->percentile_latency = $percentile_latency;
+        null !== $prober_location && $obj->prober_location = $prober_location;
         null !== $timestamp && $obj->timestamp = $timestamp;
 
         return $obj;
@@ -75,7 +75,7 @@ final class Data implements BaseModel
     public function withGlobalIP(GlobalIP $globalIP): self
     {
         $obj = clone $this;
-        $obj->globalIP = $globalIP;
+        $obj->global_ip = $globalIP;
 
         return $obj;
     }
@@ -83,7 +83,7 @@ final class Data implements BaseModel
     public function withMeanLatency(MeanLatency $meanLatency): self
     {
         $obj = clone $this;
-        $obj->meanLatency = $meanLatency;
+        $obj->mean_latency = $meanLatency;
 
         return $obj;
     }
@@ -92,7 +92,7 @@ final class Data implements BaseModel
         PercentileLatency $percentileLatency
     ): self {
         $obj = clone $this;
-        $obj->percentileLatency = $percentileLatency;
+        $obj->percentile_latency = $percentileLatency;
 
         return $obj;
     }
@@ -100,7 +100,7 @@ final class Data implements BaseModel
     public function withProberLocation(ProberLocation $proberLocation): self
     {
         $obj = clone $this;
-        $obj->proberLocation = $proberLocation;
+        $obj->prober_location = $proberLocation;
 
         return $obj;
     }

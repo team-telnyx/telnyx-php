@@ -11,10 +11,10 @@ use Telnyx\HostedNumber\Status;
 
 /**
  * @phpstan-type HostedNumberShape = array{
- *   id?: string,
- *   phoneNumber?: string,
- *   recordType?: string,
- *   status?: value-of<Status>,
+ *   id?: string|null,
+ *   phone_number?: string|null,
+ *   record_type?: string|null,
+ *   status?: value-of<Status>|null,
  * }
  */
 final class HostedNumber implements BaseModel
@@ -31,11 +31,11 @@ final class HostedNumber implements BaseModel
     /**
      * The messaging hosted phone number (+E.164 format).
      */
-    #[Api('phone_number', optional: true)]
-    public ?string $phoneNumber;
+    #[Api(optional: true)]
+    public ?string $phone_number;
 
-    #[Api('record_type', optional: true)]
-    public ?string $recordType;
+    #[Api(optional: true)]
+    public ?string $record_type;
 
     /** @var value-of<Status>|null $status */
     #[Api(enum: Status::class, optional: true)]
@@ -55,15 +55,15 @@ final class HostedNumber implements BaseModel
      */
     public static function with(
         ?string $id = null,
-        ?string $phoneNumber = null,
-        ?string $recordType = null,
+        ?string $phone_number = null,
+        ?string $record_type = null,
         Status|string|null $status = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj->id = $id;
-        null !== $phoneNumber && $obj->phoneNumber = $phoneNumber;
-        null !== $recordType && $obj->recordType = $recordType;
+        null !== $phone_number && $obj->phone_number = $phone_number;
+        null !== $record_type && $obj->record_type = $record_type;
         null !== $status && $obj['status'] = $status;
 
         return $obj;
@@ -86,7 +86,7 @@ final class HostedNumber implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj->phoneNumber = $phoneNumber;
+        $obj->phone_number = $phoneNumber;
 
         return $obj;
     }
@@ -94,7 +94,7 @@ final class HostedNumber implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType;
+        $obj->record_type = $recordType;
 
         return $obj;
     }

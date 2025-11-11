@@ -6,7 +6,6 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\Storage\MigrationSources\MigrationSourceCreateParams\ProviderAuth;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -34,11 +33,9 @@ final class MigrationSourcesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->storage->migrationSources->create(
-            bucketName: 'bucket_name',
-            provider: 'aws',
-            providerAuth: (new ProviderAuth),
-        );
+        $result = $this->client->storage->migrationSources->create([
+            'bucket_name' => 'bucket_name', 'provider' => 'aws', 'provider_auth' => [],
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -50,13 +47,13 @@ final class MigrationSourcesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->storage->migrationSources->create(
-            bucketName: 'bucket_name',
-            provider: 'aws',
-            providerAuth: (new ProviderAuth)
-                ->withAccessKey('access_key')
-                ->withSecretAccessKey('secret_access_key'),
-        );
+        $result = $this->client->storage->migrationSources->create([
+            'bucket_name' => 'bucket_name',
+            'provider' => 'aws',
+            'provider_auth' => [
+                'access_key' => 'access_key', 'secret_access_key' => 'secret_access_key',
+            ],
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

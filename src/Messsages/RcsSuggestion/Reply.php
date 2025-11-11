@@ -9,7 +9,9 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type ReplyShape = array{postbackData?: string, text?: string}
+ * @phpstan-type ReplyShape = array{
+ *   postback_data?: string|null, text?: string|null
+ * }
  */
 final class Reply implements BaseModel
 {
@@ -19,8 +21,8 @@ final class Reply implements BaseModel
     /**
      * Payload (base64 encoded) that will be sent to the agent in the user event that results when the user taps the suggested action. Maximum 2048 characters.
      */
-    #[Api('postback_data', optional: true)]
-    public ?string $postbackData;
+    #[Api(optional: true)]
+    public ?string $postback_data;
 
     /**
      * Text that is shown in the suggested reply (maximum 25 characters).
@@ -39,12 +41,12 @@ final class Reply implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $postbackData = null,
+        ?string $postback_data = null,
         ?string $text = null
     ): self {
         $obj = new self;
 
-        null !== $postbackData && $obj->postbackData = $postbackData;
+        null !== $postback_data && $obj->postback_data = $postback_data;
         null !== $text && $obj->text = $text;
 
         return $obj;
@@ -56,7 +58,7 @@ final class Reply implements BaseModel
     public function withPostbackData(string $postbackData): self
     {
         $obj = clone $this;
-        $obj->postbackData = $postbackData;
+        $obj->postback_data = $postbackData;
 
         return $obj;
     }

@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\AI\Assistants\Versions->retrieve
  *
  * @phpstan-type VersionRetrieveParamsShape = array{
- *   assistantID: string, includeMcpServers?: bool
+ *   assistant_id: string, include_mcp_servers?: bool
  * }
  */
 final class VersionRetrieveParams implements BaseModel
@@ -25,17 +25,17 @@ final class VersionRetrieveParams implements BaseModel
     use SdkParams;
 
     #[Api]
-    public string $assistantID;
+    public string $assistant_id;
 
     #[Api(optional: true)]
-    public ?bool $includeMcpServers;
+    public ?bool $include_mcp_servers;
 
     /**
      * `new VersionRetrieveParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * VersionRetrieveParams::with(assistantID: ...)
+     * VersionRetrieveParams::with(assistant_id: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -55,14 +55,14 @@ final class VersionRetrieveParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        string $assistantID,
-        ?bool $includeMcpServers = null
+        string $assistant_id,
+        ?bool $include_mcp_servers = null
     ): self {
         $obj = new self;
 
-        $obj->assistantID = $assistantID;
+        $obj->assistant_id = $assistant_id;
 
-        null !== $includeMcpServers && $obj->includeMcpServers = $includeMcpServers;
+        null !== $include_mcp_servers && $obj->include_mcp_servers = $include_mcp_servers;
 
         return $obj;
     }
@@ -70,7 +70,7 @@ final class VersionRetrieveParams implements BaseModel
     public function withAssistantID(string $assistantID): self
     {
         $obj = clone $this;
-        $obj->assistantID = $assistantID;
+        $obj->assistant_id = $assistantID;
 
         return $obj;
     }
@@ -78,7 +78,7 @@ final class VersionRetrieveParams implements BaseModel
     public function withIncludeMcpServers(bool $includeMcpServers): self
     {
         $obj = clone $this;
-        $obj->includeMcpServers = $includeMcpServers;
+        $obj->include_mcp_servers = $includeMcpServers;
 
         return $obj;
     }

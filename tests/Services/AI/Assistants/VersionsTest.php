@@ -35,7 +35,7 @@ final class VersionsTest extends TestCase
 
         $result = $this->client->ai->assistants->versions->retrieve(
             'version_id',
-            assistantID: 'assistant_id'
+            ['assistant_id' => 'assistant_id']
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -50,7 +50,7 @@ final class VersionsTest extends TestCase
 
         $result = $this->client->ai->assistants->versions->retrieve(
             'version_id',
-            assistantID: 'assistant_id'
+            ['assistant_id' => 'assistant_id']
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -65,7 +65,7 @@ final class VersionsTest extends TestCase
 
         $result = $this->client->ai->assistants->versions->update(
             'version_id',
-            assistantID: 'assistant_id'
+            ['assistant_id' => 'assistant_id']
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -80,7 +80,7 @@ final class VersionsTest extends TestCase
 
         $result = $this->client->ai->assistants->versions->update(
             'version_id',
-            assistantID: 'assistant_id'
+            ['assistant_id' => 'assistant_id']
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -107,7 +107,7 @@ final class VersionsTest extends TestCase
 
         $result = $this->client->ai->assistants->versions->delete(
             'version_id',
-            'assistant_id'
+            ['assistant_id' => 'assistant_id']
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -122,7 +122,7 @@ final class VersionsTest extends TestCase
 
         $result = $this->client->ai->assistants->versions->delete(
             'version_id',
-            'assistant_id'
+            ['assistant_id' => 'assistant_id']
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -137,7 +137,7 @@ final class VersionsTest extends TestCase
 
         $result = $this->client->ai->assistants->versions->promote(
             'version_id',
-            'assistant_id'
+            ['assistant_id' => 'assistant_id']
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -152,7 +152,7 @@ final class VersionsTest extends TestCase
 
         $result = $this->client->ai->assistants->versions->promote(
             'version_id',
-            'assistant_id'
+            ['assistant_id' => 'assistant_id']
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType

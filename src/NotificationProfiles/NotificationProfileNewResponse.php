@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type NotificationProfileNewResponseShape = array{
- *   data?: NotificationProfile
+ *   data?: NotificationProfile|null
  * }
  */
 final class NotificationProfileNewResponse implements BaseModel, ResponseConverter

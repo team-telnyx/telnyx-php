@@ -14,7 +14,7 @@ use Telnyx\Porting\Events\EventListResponse\Data;
 
 /**
  * @phpstan-type EventListResponseShape = array{
- *   data?: list<Data>, meta?: PaginationMeta
+ *   data?: list<Data>|null, meta?: PaginationMeta|null
  * }
  */
 final class EventListResponse implements BaseModel, ResponseConverter

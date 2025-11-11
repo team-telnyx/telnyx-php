@@ -16,9 +16,9 @@ use Telnyx\NotificationSettings\NotificationSettingCreateParams\Parameter;
  * @see Telnyx\NotificationSettings->create
  *
  * @phpstan-type NotificationSettingCreateParamsShape = array{
- *   notificationChannelID?: string,
- *   notificationEventConditionID?: string,
- *   notificationProfileID?: string,
+ *   notification_channel_id?: string,
+ *   notification_event_condition_id?: string,
+ *   notification_profile_id?: string,
  *   parameters?: list<Parameter>,
  * }
  */
@@ -31,20 +31,20 @@ final class NotificationSettingCreateParams implements BaseModel
     /**
      * A UUID reference to the associated Notification Channel.
      */
-    #[Api('notification_channel_id', optional: true)]
-    public ?string $notificationChannelID;
+    #[Api(optional: true)]
+    public ?string $notification_channel_id;
 
     /**
      * A UUID reference to the associated Notification Event Condition.
      */
-    #[Api('notification_event_condition_id', optional: true)]
-    public ?string $notificationEventConditionID;
+    #[Api(optional: true)]
+    public ?string $notification_event_condition_id;
 
     /**
      * A UUID reference to the associated Notification Profile.
      */
-    #[Api('notification_profile_id', optional: true)]
-    public ?string $notificationProfileID;
+    #[Api(optional: true)]
+    public ?string $notification_profile_id;
 
     /** @var list<Parameter>|null $parameters */
     #[Api(list: Parameter::class, optional: true)]
@@ -63,16 +63,16 @@ final class NotificationSettingCreateParams implements BaseModel
      * @param list<Parameter> $parameters
      */
     public static function with(
-        ?string $notificationChannelID = null,
-        ?string $notificationEventConditionID = null,
-        ?string $notificationProfileID = null,
+        ?string $notification_channel_id = null,
+        ?string $notification_event_condition_id = null,
+        ?string $notification_profile_id = null,
         ?array $parameters = null,
     ): self {
         $obj = new self;
 
-        null !== $notificationChannelID && $obj->notificationChannelID = $notificationChannelID;
-        null !== $notificationEventConditionID && $obj->notificationEventConditionID = $notificationEventConditionID;
-        null !== $notificationProfileID && $obj->notificationProfileID = $notificationProfileID;
+        null !== $notification_channel_id && $obj->notification_channel_id = $notification_channel_id;
+        null !== $notification_event_condition_id && $obj->notification_event_condition_id = $notification_event_condition_id;
+        null !== $notification_profile_id && $obj->notification_profile_id = $notification_profile_id;
         null !== $parameters && $obj->parameters = $parameters;
 
         return $obj;
@@ -85,7 +85,7 @@ final class NotificationSettingCreateParams implements BaseModel
         string $notificationChannelID
     ): self {
         $obj = clone $this;
-        $obj->notificationChannelID = $notificationChannelID;
+        $obj->notification_channel_id = $notificationChannelID;
 
         return $obj;
     }
@@ -97,7 +97,7 @@ final class NotificationSettingCreateParams implements BaseModel
         string $notificationEventConditionID
     ): self {
         $obj = clone $this;
-        $obj->notificationEventConditionID = $notificationEventConditionID;
+        $obj->notification_event_condition_id = $notificationEventConditionID;
 
         return $obj;
     }
@@ -109,7 +109,7 @@ final class NotificationSettingCreateParams implements BaseModel
         string $notificationProfileID
     ): self {
         $obj = clone $this;
-        $obj->notificationProfileID = $notificationProfileID;
+        $obj->notification_profile_id = $notificationProfileID;
 
         return $obj;
     }

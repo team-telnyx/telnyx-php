@@ -11,14 +11,14 @@ use Telnyx\RoomParticipant;
 
 /**
  * @phpstan-type RoomSessionShape = array{
- *   id?: string,
- *   active?: bool,
- *   createdAt?: \DateTimeInterface,
- *   endedAt?: \DateTimeInterface,
- *   participants?: list<RoomParticipant>,
- *   recordType?: string,
- *   roomID?: string,
- *   updatedAt?: \DateTimeInterface,
+ *   id?: string|null,
+ *   active?: bool|null,
+ *   created_at?: \DateTimeInterface|null,
+ *   ended_at?: \DateTimeInterface|null,
+ *   participants?: list<RoomParticipant>|null,
+ *   record_type?: string|null,
+ *   room_id?: string|null,
+ *   updated_at?: \DateTimeInterface|null,
  * }
  */
 final class RoomSession implements BaseModel
@@ -41,33 +41,33 @@ final class RoomSession implements BaseModel
     /**
      * ISO 8601 timestamp when the room session was created.
      */
-    #[Api('created_at', optional: true)]
-    public ?\DateTimeInterface $createdAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $created_at;
 
     /**
      * ISO 8601 timestamp when the room session has ended.
      */
-    #[Api('ended_at', optional: true)]
-    public ?\DateTimeInterface $endedAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $ended_at;
 
     /** @var list<RoomParticipant>|null $participants */
     #[Api(list: RoomParticipant::class, optional: true)]
     public ?array $participants;
 
-    #[Api('record_type', optional: true)]
-    public ?string $recordType;
+    #[Api(optional: true)]
+    public ?string $record_type;
 
     /**
      * Identify the room hosting that room session.
      */
-    #[Api('room_id', optional: true)]
-    public ?string $roomID;
+    #[Api(optional: true)]
+    public ?string $room_id;
 
     /**
      * ISO 8601 timestamp when the room session was updated.
      */
-    #[Api('updated_at', optional: true)]
-    public ?\DateTimeInterface $updatedAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $updated_at;
 
     public function __construct()
     {
@@ -84,23 +84,23 @@ final class RoomSession implements BaseModel
     public static function with(
         ?string $id = null,
         ?bool $active = null,
-        ?\DateTimeInterface $createdAt = null,
-        ?\DateTimeInterface $endedAt = null,
+        ?\DateTimeInterface $created_at = null,
+        ?\DateTimeInterface $ended_at = null,
         ?array $participants = null,
-        ?string $recordType = null,
-        ?string $roomID = null,
-        ?\DateTimeInterface $updatedAt = null,
+        ?string $record_type = null,
+        ?string $room_id = null,
+        ?\DateTimeInterface $updated_at = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj->id = $id;
         null !== $active && $obj->active = $active;
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $endedAt && $obj->endedAt = $endedAt;
+        null !== $created_at && $obj->created_at = $created_at;
+        null !== $ended_at && $obj->ended_at = $ended_at;
         null !== $participants && $obj->participants = $participants;
-        null !== $recordType && $obj->recordType = $recordType;
-        null !== $roomID && $obj->roomID = $roomID;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
+        null !== $record_type && $obj->record_type = $record_type;
+        null !== $room_id && $obj->room_id = $room_id;
+        null !== $updated_at && $obj->updated_at = $updated_at;
 
         return $obj;
     }
@@ -133,7 +133,7 @@ final class RoomSession implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }
@@ -144,7 +144,7 @@ final class RoomSession implements BaseModel
     public function withEndedAt(\DateTimeInterface $endedAt): self
     {
         $obj = clone $this;
-        $obj->endedAt = $endedAt;
+        $obj->ended_at = $endedAt;
 
         return $obj;
     }
@@ -163,7 +163,7 @@ final class RoomSession implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType;
+        $obj->record_type = $recordType;
 
         return $obj;
     }
@@ -174,7 +174,7 @@ final class RoomSession implements BaseModel
     public function withRoomID(string $roomID): self
     {
         $obj = clone $this;
-        $obj->roomID = $roomID;
+        $obj->room_id = $roomID;
 
         return $obj;
     }
@@ -185,7 +185,7 @@ final class RoomSession implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $obj->updated_at = $updatedAt;
 
         return $obj;
     }

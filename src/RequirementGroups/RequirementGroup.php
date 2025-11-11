@@ -14,16 +14,16 @@ use Telnyx\RequirementGroups\RequirementGroup\Status;
 
 /**
  * @phpstan-type RequirementGroupShape = array{
- *   id?: string,
- *   action?: string,
- *   countryCode?: string,
- *   createdAt?: \DateTimeInterface,
- *   customerReference?: string,
- *   phoneNumberType?: string,
- *   recordType?: string,
- *   regulatoryRequirements?: list<RegulatoryRequirement>,
- *   status?: value-of<Status>,
- *   updatedAt?: \DateTimeInterface,
+ *   id?: string|null,
+ *   action?: string|null,
+ *   country_code?: string|null,
+ *   created_at?: \DateTimeInterface|null,
+ *   customer_reference?: string|null,
+ *   phone_number_type?: string|null,
+ *   record_type?: string|null,
+ *   regulatory_requirements?: list<RegulatoryRequirement>|null,
+ *   status?: value-of<Status>|null,
+ *   updated_at?: \DateTimeInterface|null,
  * }
  */
 final class RequirementGroup implements BaseModel, ResponseConverter
@@ -39,35 +39,31 @@ final class RequirementGroup implements BaseModel, ResponseConverter
     #[Api(optional: true)]
     public ?string $action;
 
-    #[Api('country_code', optional: true)]
-    public ?string $countryCode;
+    #[Api(optional: true)]
+    public ?string $country_code;
 
-    #[Api('created_at', optional: true)]
-    public ?\DateTimeInterface $createdAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $created_at;
 
-    #[Api('customer_reference', optional: true)]
-    public ?string $customerReference;
+    #[Api(optional: true)]
+    public ?string $customer_reference;
 
-    #[Api('phone_number_type', optional: true)]
-    public ?string $phoneNumberType;
+    #[Api(optional: true)]
+    public ?string $phone_number_type;
 
-    #[Api('record_type', optional: true)]
-    public ?string $recordType;
+    #[Api(optional: true)]
+    public ?string $record_type;
 
-    /** @var list<RegulatoryRequirement>|null $regulatoryRequirements */
-    #[Api(
-        'regulatory_requirements',
-        list: RegulatoryRequirement::class,
-        optional: true,
-    )]
-    public ?array $regulatoryRequirements;
+    /** @var list<RegulatoryRequirement>|null $regulatory_requirements */
+    #[Api(list: RegulatoryRequirement::class, optional: true)]
+    public ?array $regulatory_requirements;
 
     /** @var value-of<Status>|null $status */
     #[Api(enum: Status::class, optional: true)]
     public ?string $status;
 
-    #[Api('updated_at', optional: true)]
-    public ?\DateTimeInterface $updatedAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $updated_at;
 
     public function __construct()
     {
@@ -79,33 +75,33 @@ final class RequirementGroup implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<RegulatoryRequirement> $regulatoryRequirements
+     * @param list<RegulatoryRequirement> $regulatory_requirements
      * @param Status|value-of<Status> $status
      */
     public static function with(
         ?string $id = null,
         ?string $action = null,
-        ?string $countryCode = null,
-        ?\DateTimeInterface $createdAt = null,
-        ?string $customerReference = null,
-        ?string $phoneNumberType = null,
-        ?string $recordType = null,
-        ?array $regulatoryRequirements = null,
+        ?string $country_code = null,
+        ?\DateTimeInterface $created_at = null,
+        ?string $customer_reference = null,
+        ?string $phone_number_type = null,
+        ?string $record_type = null,
+        ?array $regulatory_requirements = null,
         Status|string|null $status = null,
-        ?\DateTimeInterface $updatedAt = null,
+        ?\DateTimeInterface $updated_at = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj->id = $id;
         null !== $action && $obj->action = $action;
-        null !== $countryCode && $obj->countryCode = $countryCode;
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $customerReference && $obj->customerReference = $customerReference;
-        null !== $phoneNumberType && $obj->phoneNumberType = $phoneNumberType;
-        null !== $recordType && $obj->recordType = $recordType;
-        null !== $regulatoryRequirements && $obj->regulatoryRequirements = $regulatoryRequirements;
+        null !== $country_code && $obj->country_code = $country_code;
+        null !== $created_at && $obj->created_at = $created_at;
+        null !== $customer_reference && $obj->customer_reference = $customer_reference;
+        null !== $phone_number_type && $obj->phone_number_type = $phone_number_type;
+        null !== $record_type && $obj->record_type = $record_type;
+        null !== $regulatory_requirements && $obj->regulatory_requirements = $regulatory_requirements;
         null !== $status && $obj['status'] = $status;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
+        null !== $updated_at && $obj->updated_at = $updated_at;
 
         return $obj;
     }
@@ -129,7 +125,7 @@ final class RequirementGroup implements BaseModel, ResponseConverter
     public function withCountryCode(string $countryCode): self
     {
         $obj = clone $this;
-        $obj->countryCode = $countryCode;
+        $obj->country_code = $countryCode;
 
         return $obj;
     }
@@ -137,7 +133,7 @@ final class RequirementGroup implements BaseModel, ResponseConverter
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }
@@ -145,7 +141,7 @@ final class RequirementGroup implements BaseModel, ResponseConverter
     public function withCustomerReference(string $customerReference): self
     {
         $obj = clone $this;
-        $obj->customerReference = $customerReference;
+        $obj->customer_reference = $customerReference;
 
         return $obj;
     }
@@ -153,7 +149,7 @@ final class RequirementGroup implements BaseModel, ResponseConverter
     public function withPhoneNumberType(string $phoneNumberType): self
     {
         $obj = clone $this;
-        $obj->phoneNumberType = $phoneNumberType;
+        $obj->phone_number_type = $phoneNumberType;
 
         return $obj;
     }
@@ -161,7 +157,7 @@ final class RequirementGroup implements BaseModel, ResponseConverter
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType;
+        $obj->record_type = $recordType;
 
         return $obj;
     }
@@ -173,7 +169,7 @@ final class RequirementGroup implements BaseModel, ResponseConverter
         array $regulatoryRequirements
     ): self {
         $obj = clone $this;
-        $obj->regulatoryRequirements = $regulatoryRequirements;
+        $obj->regulatory_requirements = $regulatoryRequirements;
 
         return $obj;
     }
@@ -192,7 +188,7 @@ final class RequirementGroup implements BaseModel, ResponseConverter
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $obj->updated_at = $updatedAt;
 
         return $obj;
     }

@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type IPDeleteResponseShape = array{data?: IP}
+ * @phpstan-type IPDeleteResponseShape = array{data?: IP|null}
  */
 final class IPDeleteResponse implements BaseModel, ResponseConverter
 {

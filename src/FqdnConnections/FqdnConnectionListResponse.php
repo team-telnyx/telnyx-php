@@ -13,7 +13,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type FqdnConnectionListResponseShape = array{
- *   data?: list<FqdnConnection>, meta?: ConnectionsPaginationMeta
+ *   data?: list<FqdnConnection>|null, meta?: ConnectionsPaginationMeta|null
  * }
  */
 final class FqdnConnectionListResponse implements BaseModel, ResponseConverter

@@ -9,15 +9,12 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\Rooms\Sessions\Actions\ActionEndResponse;
 use Telnyx\Rooms\Sessions\Actions\ActionKickParams;
-use Telnyx\Rooms\Sessions\Actions\ActionKickParams\Participants\UnionMember0;
 use Telnyx\Rooms\Sessions\Actions\ActionKickResponse;
 use Telnyx\Rooms\Sessions\Actions\ActionMuteParams;
 use Telnyx\Rooms\Sessions\Actions\ActionMuteResponse;
 use Telnyx\Rooms\Sessions\Actions\ActionUnmuteParams;
 use Telnyx\Rooms\Sessions\Actions\ActionUnmuteResponse;
 use Telnyx\ServiceContracts\Rooms\Sessions\ActionsContract;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class ActionsService implements ActionsContract
 {
@@ -51,37 +48,20 @@ final class ActionsService implements ActionsContract
      *
      * Kick participants from a room session.
      *
-     * @param list<string> $exclude list of participant id to exclude from the action
-     * @param UnionMember0|list<string>|value-of<UnionMember0> $participants either a list of participant id to perform the action on, or the keyword "all" to perform the action on all participant
+     * @param array{
+     *   exclude?: list<string>, participants?: "all"|list<string>
+     * }|ActionKickParams $params
      *
      * @throws APIException
      */
     public function kick(
         string $roomSessionID,
-        $exclude = omit,
-        $participants = omit,
+        array|ActionKickParams $params,
         ?RequestOptions $requestOptions = null,
-    ): ActionKickResponse {
-        $params = ['exclude' => $exclude, 'participants' => $participants];
-
-        return $this->kickRaw($roomSessionID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function kickRaw(
-        string $roomSessionID,
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): ActionKickResponse {
         [$parsed, $options] = ActionKickParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -99,37 +79,20 @@ final class ActionsService implements ActionsContract
      *
      * Mute participants in room session.
      *
-     * @param list<string> $exclude list of participant id to exclude from the action
-     * @param ActionMuteParams\Participants\UnionMember0|list<string>|value-of<ActionMuteParams\Participants\UnionMember0> $participants either a list of participant id to perform the action on, or the keyword "all" to perform the action on all participant
+     * @param array{
+     *   exclude?: list<string>, participants?: "all"|list<string>
+     * }|ActionMuteParams $params
      *
      * @throws APIException
      */
     public function mute(
         string $roomSessionID,
-        $exclude = omit,
-        $participants = omit,
+        array|ActionMuteParams $params,
         ?RequestOptions $requestOptions = null,
-    ): ActionMuteResponse {
-        $params = ['exclude' => $exclude, 'participants' => $participants];
-
-        return $this->muteRaw($roomSessionID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function muteRaw(
-        string $roomSessionID,
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): ActionMuteResponse {
         [$parsed, $options] = ActionMuteParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -147,37 +110,20 @@ final class ActionsService implements ActionsContract
      *
      * Unmute participants in room session.
      *
-     * @param list<string> $exclude list of participant id to exclude from the action
-     * @param ActionUnmuteParams\Participants\UnionMember0|list<string>|value-of<ActionUnmuteParams\Participants\UnionMember0> $participants either a list of participant id to perform the action on, or the keyword "all" to perform the action on all participant
+     * @param array{
+     *   exclude?: list<string>, participants?: "all"|list<string>
+     * }|ActionUnmuteParams $params
      *
      * @throws APIException
      */
     public function unmute(
         string $roomSessionID,
-        $exclude = omit,
-        $participants = omit,
+        array|ActionUnmuteParams $params,
         ?RequestOptions $requestOptions = null,
-    ): ActionUnmuteResponse {
-        $params = ['exclude' => $exclude, 'participants' => $participants];
-
-        return $this->unmuteRaw($roomSessionID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function unmuteRaw(
-        string $roomSessionID,
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): ActionUnmuteResponse {
         [$parsed, $options] = ActionUnmuteParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

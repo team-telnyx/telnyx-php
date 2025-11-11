@@ -9,15 +9,14 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\PortingOrders\PortingOrderCreateParams;
 use Telnyx\PortingOrders\PortingOrderDocuments;
 use Telnyx\PortingOrders\PortingOrderEndUser;
+use Telnyx\PortingOrders\PortingOrderEndUserAdmin;
+use Telnyx\PortingOrders\PortingOrderEndUserLocation;
 use Telnyx\PortingOrders\PortingOrderGetAllowedFocWindowsResponse;
 use Telnyx\PortingOrders\PortingOrderGetExceptionTypesResponse;
 use Telnyx\PortingOrders\PortingOrderGetRequirementsResponse;
 use Telnyx\PortingOrders\PortingOrderGetResponse;
 use Telnyx\PortingOrders\PortingOrderGetSubRequestResponse;
 use Telnyx\PortingOrders\PortingOrderListParams;
-use Telnyx\PortingOrders\PortingOrderListParams\Filter;
-use Telnyx\PortingOrders\PortingOrderListParams\Page;
-use Telnyx\PortingOrders\PortingOrderListParams\Sort;
 use Telnyx\PortingOrders\PortingOrderListResponse;
 use Telnyx\PortingOrders\PortingOrderMisc;
 use Telnyx\PortingOrders\PortingOrderNewResponse;
@@ -25,10 +24,8 @@ use Telnyx\PortingOrders\PortingOrderPhoneNumberConfiguration;
 use Telnyx\PortingOrders\PortingOrderRetrieveLoaTemplateParams;
 use Telnyx\PortingOrders\PortingOrderRetrieveParams;
 use Telnyx\PortingOrders\PortingOrderRetrieveRequirementsParams;
+use Telnyx\PortingOrders\PortingOrderType;
 use Telnyx\PortingOrders\PortingOrderUpdateParams;
-use Telnyx\PortingOrders\PortingOrderUpdateParams\ActivationSettings;
-use Telnyx\PortingOrders\PortingOrderUpdateParams\Messaging;
-use Telnyx\PortingOrders\PortingOrderUpdateParams\Requirement;
 use Telnyx\PortingOrders\PortingOrderUpdateResponse;
 use Telnyx\PortingOrders\PortingOrderUserFeedback;
 use Telnyx\RequestOptions;
@@ -44,57 +41,55 @@ use Telnyx\Services\PortingOrders\PhoneNumberConfigurationsService;
 use Telnyx\Services\PortingOrders\PhoneNumberExtensionsService;
 use Telnyx\Services\PortingOrders\VerificationCodesService;
 
-use const Telnyx\Core\OMIT as omit;
-
 final class PortingOrdersService implements PortingOrdersContract
 {
     /**
-     * @@api
+     * @api
      */
     public PhoneNumberConfigurationsService $phoneNumberConfigurations;
 
     /**
-     * @@api
+     * @api
      */
     public ActionsService $actions;
 
     /**
-     * @@api
+     * @api
      */
     public ActivationJobsService $activationJobs;
 
     /**
-     * @@api
+     * @api
      */
     public AdditionalDocumentsService $additionalDocuments;
 
     /**
-     * @@api
+     * @api
      */
     public CommentsService $comments;
 
     /**
-     * @@api
+     * @api
      */
     public VerificationCodesService $verificationCodes;
 
     /**
-     * @@api
+     * @api
      */
     public ActionRequirementsService $actionRequirements;
 
     /**
-     * @@api
+     * @api
      */
     public AssociatedPhoneNumbersService $associatedPhoneNumbers;
 
     /**
-     * @@api
+     * @api
      */
     public PhoneNumberBlocksService $phoneNumberBlocks;
 
     /**
-     * @@api
+     * @api
      */
     public PhoneNumberExtensionsService $phoneNumberExtensions;
 
@@ -120,41 +115,21 @@ final class PortingOrdersService implements PortingOrdersContract
      *
      * Creates a new porting order object.
      *
-     * @param list<string> $phoneNumbers The list of +E.164 formatted phone numbers
-     * @param string $customerGroupReference A customer-specified group reference for customer bookkeeping purposes
-     * @param string $customerReference A customer-specified reference number for customer bookkeeping purposes
+     * @param array{
+     *   phone_numbers: list<string>,
+     *   customer_group_reference?: string,
+     *   customer_reference?: string,
+     * }|PortingOrderCreateParams $params
      *
      * @throws APIException
      */
     public function create(
-        $phoneNumbers,
-        $customerGroupReference = omit,
-        $customerReference = omit,
+        array|PortingOrderCreateParams $params,
         ?RequestOptions $requestOptions = null,
-    ): PortingOrderNewResponse {
-        $params = [
-            'phoneNumbers' => $phoneNumbers,
-            'customerGroupReference' => $customerGroupReference,
-            'customerReference' => $customerReference,
-        ];
-
-        return $this->createRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): PortingOrderNewResponse {
         [$parsed, $options] = PortingOrderCreateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -172,35 +147,18 @@ final class PortingOrdersService implements PortingOrdersContract
      *
      * Retrieves the details of an existing porting order.
      *
-     * @param bool $includePhoneNumbers Include the first 50 phone number objects in the results
+     * @param array{include_phone_numbers?: bool}|PortingOrderRetrieveParams $params
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        $includePhoneNumbers = omit,
+        array|PortingOrderRetrieveParams $params,
         ?RequestOptions $requestOptions = null,
-    ): PortingOrderGetResponse {
-        $params = ['includePhoneNumbers' => $includePhoneNumbers];
-
-        return $this->retrieveRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): PortingOrderGetResponse {
         [$parsed, $options] = PortingOrderRetrieveParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -222,70 +180,48 @@ final class PortingOrdersService implements PortingOrdersContract
      *
      * If a request does not include all of the attributes for a resource, the system will interpret the missing attributes as if they were included with their current values. To explicitly set something to null, it must be included in the request with a null value.
      *
-     * @param ActivationSettings $activationSettings
-     * @param string $customerGroupReference
-     * @param string $customerReference
-     * @param PortingOrderDocuments $documents can be specified directly or via the `requirement_group_id` parameter
-     * @param PortingOrderEndUser $endUser
-     * @param Messaging $messaging
-     * @param PortingOrderMisc $misc
-     * @param PortingOrderPhoneNumberConfiguration $phoneNumberConfiguration
-     * @param string $requirementGroupID If present, we will read the current values from the specified Requirement Group into the Documents and Requirements for this Porting Order. Note that any future changes in the Requirement Group would have no impact on this Porting Order. We will return an error if a specified Requirement Group conflicts with documents or requirements in the same request.
-     * @param list<Requirement> $requirements list of requirements for porting numbers
-     * @param PortingOrderUserFeedback $userFeedback
-     * @param string $webhookURL
+     * @param array{
+     *   activation_settings?: array{
+     *     foc_datetime_requested?: string|\DateTimeInterface
+     *   },
+     *   customer_group_reference?: string,
+     *   customer_reference?: string,
+     *   documents?: array{invoice?: string, loa?: string}|PortingOrderDocuments,
+     *   end_user?: array{
+     *     admin?: array<mixed>|PortingOrderEndUserAdmin,
+     *     location?: array<mixed>|PortingOrderEndUserLocation,
+     *   }|PortingOrderEndUser,
+     *   messaging?: array{enable_messaging?: bool},
+     *   misc?: array{
+     *     new_billing_phone_number?: string,
+     *     remaining_numbers_action?: "keep"|"disconnect",
+     *     type?: "full"|"partial"|PortingOrderType,
+     *   }|PortingOrderMisc,
+     *   phone_number_configuration?: array{
+     *     billing_group_id?: string,
+     *     connection_id?: string,
+     *     emergency_address_id?: string,
+     *     messaging_profile_id?: string,
+     *     tags?: list<string>,
+     *   }|PortingOrderPhoneNumberConfiguration,
+     *   requirement_group_id?: string,
+     *   requirements?: list<array{field_value: string, requirement_type_id: string}>,
+     *   user_feedback?: array{
+     *     user_comment?: string, user_rating?: int
+     *   }|PortingOrderUserFeedback,
+     *   webhook_url?: string,
+     * }|PortingOrderUpdateParams $params
      *
      * @throws APIException
      */
     public function update(
         string $id,
-        $activationSettings = omit,
-        $customerGroupReference = omit,
-        $customerReference = omit,
-        $documents = omit,
-        $endUser = omit,
-        $messaging = omit,
-        $misc = omit,
-        $phoneNumberConfiguration = omit,
-        $requirementGroupID = omit,
-        $requirements = omit,
-        $userFeedback = omit,
-        $webhookURL = omit,
+        array|PortingOrderUpdateParams $params,
         ?RequestOptions $requestOptions = null,
-    ): PortingOrderUpdateResponse {
-        $params = [
-            'activationSettings' => $activationSettings,
-            'customerGroupReference' => $customerGroupReference,
-            'customerReference' => $customerReference,
-            'documents' => $documents,
-            'endUser' => $endUser,
-            'messaging' => $messaging,
-            'misc' => $misc,
-            'phoneNumberConfiguration' => $phoneNumberConfiguration,
-            'requirementGroupID' => $requirementGroupID,
-            'requirements' => $requirements,
-            'userFeedback' => $userFeedback,
-            'webhookURL' => $webhookURL,
-        ];
-
-        return $this->updateRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): PortingOrderUpdateResponse {
         [$parsed, $options] = PortingOrderUpdateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -303,44 +239,41 @@ final class PortingOrdersService implements PortingOrdersContract
      *
      * Returns a list of your porting order.
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[customer_reference], filter[customer_group_reference], filter[parent_support_key], filter[phone_numbers.country_code], filter[phone_numbers.carrier_name], filter[misc.type], filter[end_user.admin.entity_name], filter[end_user.admin.auth_person_name], filter[activation_settings.fast_port_eligible], filter[activation_settings.foc_datetime_requested][gt], filter[activation_settings.foc_datetime_requested][lt], filter[phone_numbers.phone_number][contains]
-     * @param bool $includePhoneNumbers Include the first 50 phone number objects in the results
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
-     * @param Sort $sort Consolidated sort parameter (deepObject style). Originally: sort[value]
+     * @param array{
+     *   filter?: array{
+     *     activation_settings?: array{
+     *       fast_port_eligible?: bool,
+     *       foc_datetime_requested?: array{gt?: string, lt?: string},
+     *     },
+     *     customer_group_reference?: string,
+     *     customer_reference?: string,
+     *     end_user?: array{
+     *       admin?: array{auth_person_name?: string, entity_name?: string}
+     *     },
+     *     misc?: array{type?: "full"|"partial"|PortingOrderType},
+     *     parent_support_key?: string,
+     *     phone_numbers?: array{
+     *       carrier_name?: string,
+     *       country_code?: string,
+     *       phone_number?: array{contains?: string},
+     *     },
+     *   },
+     *   include_phone_numbers?: bool,
+     *   page?: array{number?: int, size?: int},
+     *   sort?: array{
+     *     value?: "created_at"|"-created_at"|"activation_settings.foc_datetime_requested"|"-activation_settings.foc_datetime_requested",
+     *   },
+     * }|PortingOrderListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $includePhoneNumbers = omit,
-        $page = omit,
-        $sort = omit,
-        ?RequestOptions $requestOptions = null,
-    ): PortingOrderListResponse {
-        $params = [
-            'filter' => $filter,
-            'includePhoneNumbers' => $includePhoneNumbers,
-            'page' => $page,
-            'sort' => $sort,
-        ];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
+        array|PortingOrderListParams $params,
         ?RequestOptions $requestOptions = null
     ): PortingOrderListResponse {
         [$parsed, $options] = PortingOrderListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -417,35 +350,20 @@ final class PortingOrdersService implements PortingOrdersContract
      *
      * Download a porting order loa template
      *
-     * @param string $loaConfigurationID The identifier of the LOA configuration to use for the template. If not provided, the default LOA configuration will be used.
+     * @param array{
+     *   loa_configuration_id?: string
+     * }|PortingOrderRetrieveLoaTemplateParams $params
      *
      * @throws APIException
      */
     public function retrieveLoaTemplate(
         string $id,
-        $loaConfigurationID = omit,
+        array|PortingOrderRetrieveLoaTemplateParams $params,
         ?RequestOptions $requestOptions = null,
-    ): string {
-        $params = ['loaConfigurationID' => $loaConfigurationID];
-
-        return $this->retrieveLoaTemplateRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function retrieveLoaTemplateRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): string {
         [$parsed, $options] = PortingOrderRetrieveLoaTemplateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -464,35 +382,20 @@ final class PortingOrdersService implements PortingOrdersContract
      *
      * Returns a list of all requirements based on country/number type for this porting order.
      *
-     * @param PortingOrderRetrieveRequirementsParams\Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param array{
+     *   page?: array{number?: int, size?: int}
+     * }|PortingOrderRetrieveRequirementsParams $params
      *
      * @throws APIException
      */
     public function retrieveRequirements(
         string $id,
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): PortingOrderGetRequirementsResponse {
-        $params = ['page' => $page];
-
-        return $this->retrieveRequirementsRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function retrieveRequirementsRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|PortingOrderRetrieveRequirementsParams $params,
+        ?RequestOptions $requestOptions = null,
     ): PortingOrderGetRequirementsResponse {
         [$parsed, $options] = PortingOrderRetrieveRequirementsParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

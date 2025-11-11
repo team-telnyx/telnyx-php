@@ -12,7 +12,9 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\ExternalConnections\ExternalConnectionUpdateLocationResponse\Data;
 
 /**
- * @phpstan-type ExternalConnectionUpdateLocationResponseShape = array{data?: Data}
+ * @phpstan-type ExternalConnectionUpdateLocationResponseShape = array{
+ *   data?: Data|null
+ * }
  */
 final class ExternalConnectionUpdateLocationResponse implements BaseModel, ResponseConverter
 {

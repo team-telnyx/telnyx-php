@@ -14,7 +14,7 @@ use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListR
 
 /**
  * @phpstan-type PhoneNumberConfigurationListResponseShape = array{
- *   data?: list<Data>, meta?: PaginationMeta
+ *   data?: list<Data>|null, meta?: PaginationMeta|null
  * }
  */
 final class PhoneNumberConfigurationListResponse implements BaseModel, ResponseConverter

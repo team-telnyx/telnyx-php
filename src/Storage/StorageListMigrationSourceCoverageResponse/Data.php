@@ -11,7 +11,7 @@ use Telnyx\Storage\StorageListMigrationSourceCoverageResponse\Data\Provider;
 
 /**
  * @phpstan-type DataShape = array{
- *   provider?: value-of<Provider>, sourceRegion?: string
+ *   provider?: value-of<Provider>|null, source_region?: string|null
  * }
  */
 final class Data implements BaseModel
@@ -30,8 +30,8 @@ final class Data implements BaseModel
     /**
      * Provider region from which to migrate data.
      */
-    #[Api('source_region', optional: true)]
-    public ?string $sourceRegion;
+    #[Api(optional: true)]
+    public ?string $source_region;
 
     public function __construct()
     {
@@ -47,12 +47,12 @@ final class Data implements BaseModel
      */
     public static function with(
         Provider|string|null $provider = null,
-        ?string $sourceRegion = null
+        ?string $source_region = null
     ): self {
         $obj = new self;
 
         null !== $provider && $obj['provider'] = $provider;
-        null !== $sourceRegion && $obj->sourceRegion = $sourceRegion;
+        null !== $source_region && $obj->source_region = $source_region;
 
         return $obj;
     }
@@ -76,7 +76,7 @@ final class Data implements BaseModel
     public function withSourceRegion(string $sourceRegion): self
     {
         $obj = clone $this;
-        $obj->sourceRegion = $sourceRegion;
+        $obj->source_region = $sourceRegion;
 
         return $obj;
     }

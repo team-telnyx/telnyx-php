@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\MessagingProfiles\AutorespConfigs->retrieve
  *
- * @phpstan-type AutorespConfigRetrieveParamsShape = array{profileID: string}
+ * @phpstan-type AutorespConfigRetrieveParamsShape = array{profile_id: string}
  */
 final class AutorespConfigRetrieveParams implements BaseModel
 {
@@ -23,14 +23,14 @@ final class AutorespConfigRetrieveParams implements BaseModel
     use SdkParams;
 
     #[Api]
-    public string $profileID;
+    public string $profile_id;
 
     /**
      * `new AutorespConfigRetrieveParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * AutorespConfigRetrieveParams::with(profileID: ...)
+     * AutorespConfigRetrieveParams::with(profile_id: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -49,11 +49,11 @@ final class AutorespConfigRetrieveParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(string $profileID): self
+    public static function with(string $profile_id): self
     {
         $obj = new self;
 
-        $obj->profileID = $profileID;
+        $obj->profile_id = $profile_id;
 
         return $obj;
     }
@@ -61,7 +61,7 @@ final class AutorespConfigRetrieveParams implements BaseModel
     public function withProfileID(string $profileID): self
     {
         $obj = clone $this;
-        $obj->profileID = $profileID;
+        $obj->profile_id = $profileID;
 
         return $obj;
     }

@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[porting_phone_number_id].
  *
- * @phpstan-type FilterShape = array{portingPhoneNumberID?: string}
+ * @phpstan-type FilterShape = array{porting_phone_number_id?: string|null}
  */
 final class Filter implements BaseModel
 {
@@ -21,8 +21,8 @@ final class Filter implements BaseModel
     /**
      * Filter results by porting phone number id.
      */
-    #[Api('porting_phone_number_id', optional: true)]
-    public ?string $portingPhoneNumberID;
+    #[Api(optional: true)]
+    public ?string $porting_phone_number_id;
 
     public function __construct()
     {
@@ -34,11 +34,11 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?string $portingPhoneNumberID = null): self
+    public static function with(?string $porting_phone_number_id = null): self
     {
         $obj = new self;
 
-        null !== $portingPhoneNumberID && $obj->portingPhoneNumberID = $portingPhoneNumberID;
+        null !== $porting_phone_number_id && $obj->porting_phone_number_id = $porting_phone_number_id;
 
         return $obj;
     }
@@ -49,7 +49,7 @@ final class Filter implements BaseModel
     public function withPortingPhoneNumberID(string $portingPhoneNumberID): self
     {
         $obj = clone $this;
-        $obj->portingPhoneNumberID = $portingPhoneNumberID;
+        $obj->porting_phone_number_id = $portingPhoneNumberID;
 
         return $obj;
     }

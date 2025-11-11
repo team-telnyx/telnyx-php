@@ -10,9 +10,9 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type DataShape = array{
- *   healthCheckParams?: array<string, mixed>,
- *   healthCheckType?: string,
- *   recordType?: string,
+ *   health_check_params?: array<string,mixed>|null,
+ *   health_check_type?: string|null,
+ *   record_type?: string|null,
  * }
  */
 final class Data implements BaseModel
@@ -23,22 +23,22 @@ final class Data implements BaseModel
     /**
      * Global IP Health check params.
      *
-     * @var array<string, mixed>|null $healthCheckParams
+     * @var array<string,mixed>|null $health_check_params
      */
-    #[Api('health_check_params', map: 'mixed', optional: true)]
-    public ?array $healthCheckParams;
+    #[Api(map: 'mixed', optional: true)]
+    public ?array $health_check_params;
 
     /**
      * Global IP Health check type.
      */
-    #[Api('health_check_type', optional: true)]
-    public ?string $healthCheckType;
+    #[Api(optional: true)]
+    public ?string $health_check_type;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api('record_type', optional: true)]
-    public ?string $recordType;
+    #[Api(optional: true)]
+    public ?string $record_type;
 
     public function __construct()
     {
@@ -50,18 +50,18 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param array<string, mixed> $healthCheckParams
+     * @param array<string,mixed> $health_check_params
      */
     public static function with(
-        ?array $healthCheckParams = null,
-        ?string $healthCheckType = null,
-        ?string $recordType = null,
+        ?array $health_check_params = null,
+        ?string $health_check_type = null,
+        ?string $record_type = null,
     ): self {
         $obj = new self;
 
-        null !== $healthCheckParams && $obj->healthCheckParams = $healthCheckParams;
-        null !== $healthCheckType && $obj->healthCheckType = $healthCheckType;
-        null !== $recordType && $obj->recordType = $recordType;
+        null !== $health_check_params && $obj->health_check_params = $health_check_params;
+        null !== $health_check_type && $obj->health_check_type = $health_check_type;
+        null !== $record_type && $obj->record_type = $record_type;
 
         return $obj;
     }
@@ -69,12 +69,12 @@ final class Data implements BaseModel
     /**
      * Global IP Health check params.
      *
-     * @param array<string, mixed> $healthCheckParams
+     * @param array<string,mixed> $healthCheckParams
      */
     public function withHealthCheckParams(array $healthCheckParams): self
     {
         $obj = clone $this;
-        $obj->healthCheckParams = $healthCheckParams;
+        $obj->health_check_params = $healthCheckParams;
 
         return $obj;
     }
@@ -85,7 +85,7 @@ final class Data implements BaseModel
     public function withHealthCheckType(string $healthCheckType): self
     {
         $obj = clone $this;
-        $obj->healthCheckType = $healthCheckType;
+        $obj->health_check_type = $healthCheckType;
 
         return $obj;
     }
@@ -96,7 +96,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType;
+        $obj->record_type = $recordType;
 
         return $obj;
     }

@@ -7,16 +7,11 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\MobilePushCredentials\MobilePushCredentialCreateParams;
-use Telnyx\MobilePushCredentials\MobilePushCredentialCreateParams\Type;
 use Telnyx\MobilePushCredentials\MobilePushCredentialListParams;
-use Telnyx\MobilePushCredentials\MobilePushCredentialListParams\Filter;
-use Telnyx\MobilePushCredentials\MobilePushCredentialListParams\Page;
 use Telnyx\MobilePushCredentials\MobilePushCredentialListResponse;
 use Telnyx\MobilePushCredentials\PushCredentialResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MobilePushCredentialsContract;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class MobilePushCredentialsService implements MobilePushCredentialsContract
 {
@@ -30,48 +25,15 @@ final class MobilePushCredentialsService implements MobilePushCredentialsContrac
      *
      * Creates a new mobile push credential
      *
-     * @param string $alias Alias to uniquely identify the credential
-     * @param string $certificate Certificate as received from APNs
-     * @param string $privateKey Corresponding private key to the certificate as received from APNs
-     * @param Type|value-of<Type> $type Type of mobile push credential. Should be <code>android</code> here
-     * @param array<string,
-     * mixed,> $projectAccountJsonFile Private key file in JSON format
-     *
      * @throws APIException
      */
     public function create(
-        $alias,
-        $certificate,
-        $privateKey,
-        $type,
-        $projectAccountJsonFile,
-        ?RequestOptions $requestOptions = null,
-    ): PushCredentialResponse {
-        $params = [
-            'alias' => $alias,
-            'certificate' => $certificate,
-            'privateKey' => $privateKey,
-            'type' => $type,
-            'projectAccountJsonFile' => $projectAccountJsonFile,
-        ];
-
-        return $this->createRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): PushCredentialResponse {
         [$parsed, $options] = MobilePushCredentialCreateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -109,35 +71,20 @@ final class MobilePushCredentialsService implements MobilePushCredentialsContrac
      *
      * List mobile push credentials
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[type], filter[alias]
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param array{
+     *   filter?: array{alias?: string, type?: "ios"|"android"},
+     *   page?: array{number?: int, size?: int},
+     * }|MobilePushCredentialListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): MobilePushCredentialListResponse {
-        $params = ['filter' => $filter, 'page' => $page];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|MobilePushCredentialListParams $params,
+        ?RequestOptions $requestOptions = null,
     ): MobilePushCredentialListResponse {
         [$parsed, $options] = MobilePushCredentialListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

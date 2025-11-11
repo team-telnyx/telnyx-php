@@ -10,15 +10,12 @@ use Telnyx\NotificationProfiles\NotificationProfileCreateParams;
 use Telnyx\NotificationProfiles\NotificationProfileDeleteResponse;
 use Telnyx\NotificationProfiles\NotificationProfileGetResponse;
 use Telnyx\NotificationProfiles\NotificationProfileListParams;
-use Telnyx\NotificationProfiles\NotificationProfileListParams\Page;
 use Telnyx\NotificationProfiles\NotificationProfileListResponse;
 use Telnyx\NotificationProfiles\NotificationProfileNewResponse;
 use Telnyx\NotificationProfiles\NotificationProfileUpdateParams;
 use Telnyx\NotificationProfiles\NotificationProfileUpdateResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\NotificationProfilesContract;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class NotificationProfilesService implements NotificationProfilesContract
 {
@@ -32,33 +29,17 @@ final class NotificationProfilesService implements NotificationProfilesContract
      *
      * Create a notification profile.
      *
-     * @param string $name a human readable name
+     * @param array{name?: string}|NotificationProfileCreateParams $params
      *
      * @throws APIException
      */
     public function create(
-        $name = omit,
-        ?RequestOptions $requestOptions = null
-    ): NotificationProfileNewResponse {
-        $params = ['name' => $name];
-
-        return $this->createRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|NotificationProfileCreateParams $params,
+        ?RequestOptions $requestOptions = null,
     ): NotificationProfileNewResponse {
         [$parsed, $options] = NotificationProfileCreateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -96,35 +77,18 @@ final class NotificationProfilesService implements NotificationProfilesContract
      *
      * Update a notification profile.
      *
-     * @param string $name a human readable name
+     * @param array{name?: string}|NotificationProfileUpdateParams $params
      *
      * @throws APIException
      */
     public function update(
         string $id,
-        $name = omit,
-        ?RequestOptions $requestOptions = null
-    ): NotificationProfileUpdateResponse {
-        $params = ['name' => $name];
-
-        return $this->updateRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|NotificationProfileUpdateParams $params,
+        ?RequestOptions $requestOptions = null,
     ): NotificationProfileUpdateResponse {
         [$parsed, $options] = NotificationProfileUpdateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -142,33 +106,19 @@ final class NotificationProfilesService implements NotificationProfilesContract
      *
      * Returns a list of your notifications profiles.
      *
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param array{
+     *   page?: array{number?: int, size?: int}
+     * }|NotificationProfileListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): NotificationProfileListResponse {
-        $params = ['page' => $page];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|NotificationProfileListParams $params,
+        ?RequestOptions $requestOptions = null,
     ): NotificationProfileListResponse {
         [$parsed, $options] = NotificationProfileListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

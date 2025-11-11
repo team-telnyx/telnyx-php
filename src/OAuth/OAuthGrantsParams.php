@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\OAuth->grants
  *
  * @phpstan-type OAuthGrantsParamsShape = array{
- *   allowed: bool, consentToken: string
+ *   allowed: bool, consent_token: string
  * }
  */
 final class OAuthGrantsParams implements BaseModel
@@ -33,15 +33,15 @@ final class OAuthGrantsParams implements BaseModel
     /**
      * Consent token.
      */
-    #[Api('consent_token')]
-    public string $consentToken;
+    #[Api]
+    public string $consent_token;
 
     /**
      * `new OAuthGrantsParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * OAuthGrantsParams::with(allowed: ..., consentToken: ...)
+     * OAuthGrantsParams::with(allowed: ..., consent_token: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -60,12 +60,12 @@ final class OAuthGrantsParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(bool $allowed, string $consentToken): self
+    public static function with(bool $allowed, string $consent_token): self
     {
         $obj = new self;
 
         $obj->allowed = $allowed;
-        $obj->consentToken = $consentToken;
+        $obj->consent_token = $consent_token;
 
         return $obj;
     }
@@ -87,7 +87,7 @@ final class OAuthGrantsParams implements BaseModel
     public function withConsentToken(string $consentToken): self
     {
         $obj = clone $this;
-        $obj->consentToken = $consentToken;
+        $obj->consent_token = $consentToken;
 
         return $obj;
     }

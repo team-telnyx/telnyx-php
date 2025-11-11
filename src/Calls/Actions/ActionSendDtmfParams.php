@@ -19,7 +19,10 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Calls\Actions->sendDtmf
  *
  * @phpstan-type ActionSendDtmfParamsShape = array{
- *   digits: string, clientState?: string, commandID?: string, durationMillis?: int
+ *   digits: string,
+ *   client_state?: string,
+ *   command_id?: string,
+ *   duration_millis?: int,
  * }
  */
 final class ActionSendDtmfParams implements BaseModel
@@ -37,20 +40,20 @@ final class ActionSendDtmfParams implements BaseModel
     /**
      * Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      */
-    #[Api('client_state', optional: true)]
-    public ?string $clientState;
+    #[Api(optional: true)]
+    public ?string $client_state;
 
     /**
      * Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      */
-    #[Api('command_id', optional: true)]
-    public ?string $commandID;
+    #[Api(optional: true)]
+    public ?string $command_id;
 
     /**
      * Specifies for how many milliseconds each digit will be played in the audio stream. Ranges from 100 to 500ms.
      */
-    #[Api('duration_millis', optional: true)]
-    public ?int $durationMillis;
+    #[Api(optional: true)]
+    public ?int $duration_millis;
 
     /**
      * `new ActionSendDtmfParams()` is missing required properties by the API.
@@ -78,17 +81,17 @@ final class ActionSendDtmfParams implements BaseModel
      */
     public static function with(
         string $digits,
-        ?string $clientState = null,
-        ?string $commandID = null,
-        ?int $durationMillis = null,
+        ?string $client_state = null,
+        ?string $command_id = null,
+        ?int $duration_millis = null,
     ): self {
         $obj = new self;
 
         $obj->digits = $digits;
 
-        null !== $clientState && $obj->clientState = $clientState;
-        null !== $commandID && $obj->commandID = $commandID;
-        null !== $durationMillis && $obj->durationMillis = $durationMillis;
+        null !== $client_state && $obj->client_state = $client_state;
+        null !== $command_id && $obj->command_id = $command_id;
+        null !== $duration_millis && $obj->duration_millis = $duration_millis;
 
         return $obj;
     }
@@ -110,7 +113,7 @@ final class ActionSendDtmfParams implements BaseModel
     public function withClientState(string $clientState): self
     {
         $obj = clone $this;
-        $obj->clientState = $clientState;
+        $obj->client_state = $clientState;
 
         return $obj;
     }
@@ -121,7 +124,7 @@ final class ActionSendDtmfParams implements BaseModel
     public function withCommandID(string $commandID): self
     {
         $obj = clone $this;
-        $obj->commandID = $commandID;
+        $obj->command_id = $commandID;
 
         return $obj;
     }
@@ -132,7 +135,7 @@ final class ActionSendDtmfParams implements BaseModel
     public function withDurationMillis(int $durationMillis): self
     {
         $obj = clone $this;
-        $obj->durationMillis = $durationMillis;
+        $obj->duration_millis = $durationMillis;
 
         return $obj;
     }

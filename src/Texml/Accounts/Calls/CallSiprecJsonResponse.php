@@ -14,16 +14,16 @@ use Telnyx\Texml\Accounts\Calls\CallSiprecJsonResponse\Track;
 
 /**
  * @phpstan-type CallSiprecJsonResponseShape = array{
- *   accountSid?: string,
- *   callSid?: string,
- *   dateCreated?: string,
- *   dateUpdated?: string,
- *   errorCode?: string,
- *   sid?: string,
- *   startTime?: string,
- *   status?: value-of<Status>,
- *   track?: value-of<Track>,
- *   uri?: string,
+ *   account_sid?: string|null,
+ *   call_sid?: string|null,
+ *   date_created?: string|null,
+ *   date_updated?: string|null,
+ *   error_code?: string|null,
+ *   sid?: string|null,
+ *   start_time?: string|null,
+ *   status?: value-of<Status>|null,
+ *   track?: value-of<Track>|null,
+ *   uri?: string|null,
  * }
  */
 final class CallSiprecJsonResponse implements BaseModel, ResponseConverter
@@ -36,32 +36,32 @@ final class CallSiprecJsonResponse implements BaseModel, ResponseConverter
     /**
      * The id of the account the resource belongs to.
      */
-    #[Api('account_sid', optional: true)]
-    public ?string $accountSid;
+    #[Api(optional: true)]
+    public ?string $account_sid;
 
     /**
      * The id of the call the resource belongs to.
      */
-    #[Api('call_sid', optional: true)]
-    public ?string $callSid;
+    #[Api(optional: true)]
+    public ?string $call_sid;
 
     /**
      * The date and time the siprec session was created.
      */
-    #[Api('date_created', optional: true)]
-    public ?string $dateCreated;
+    #[Api(optional: true)]
+    public ?string $date_created;
 
     /**
      * The date and time the siprec session was last updated.
      */
-    #[Api('date_updated', optional: true)]
-    public ?string $dateUpdated;
+    #[Api(optional: true)]
+    public ?string $date_updated;
 
     /**
      * The error code of the siprec session.
      */
-    #[Api('error_code', optional: true)]
-    public ?string $errorCode;
+    #[Api(optional: true)]
+    public ?string $error_code;
 
     /**
      * The SID of the siprec session.
@@ -72,8 +72,8 @@ final class CallSiprecJsonResponse implements BaseModel, ResponseConverter
     /**
      * The date and time the siprec session was started.
      */
-    #[Api('start_time', optional: true)]
-    public ?string $startTime;
+    #[Api(optional: true)]
+    public ?string $start_time;
 
     /**
      * The status of the siprec session.
@@ -111,26 +111,26 @@ final class CallSiprecJsonResponse implements BaseModel, ResponseConverter
      * @param Track|value-of<Track> $track
      */
     public static function with(
-        ?string $accountSid = null,
-        ?string $callSid = null,
-        ?string $dateCreated = null,
-        ?string $dateUpdated = null,
-        ?string $errorCode = null,
+        ?string $account_sid = null,
+        ?string $call_sid = null,
+        ?string $date_created = null,
+        ?string $date_updated = null,
+        ?string $error_code = null,
         ?string $sid = null,
-        ?string $startTime = null,
+        ?string $start_time = null,
         Status|string|null $status = null,
         Track|string|null $track = null,
         ?string $uri = null,
     ): self {
         $obj = new self;
 
-        null !== $accountSid && $obj->accountSid = $accountSid;
-        null !== $callSid && $obj->callSid = $callSid;
-        null !== $dateCreated && $obj->dateCreated = $dateCreated;
-        null !== $dateUpdated && $obj->dateUpdated = $dateUpdated;
-        null !== $errorCode && $obj->errorCode = $errorCode;
+        null !== $account_sid && $obj->account_sid = $account_sid;
+        null !== $call_sid && $obj->call_sid = $call_sid;
+        null !== $date_created && $obj->date_created = $date_created;
+        null !== $date_updated && $obj->date_updated = $date_updated;
+        null !== $error_code && $obj->error_code = $error_code;
         null !== $sid && $obj->sid = $sid;
-        null !== $startTime && $obj->startTime = $startTime;
+        null !== $start_time && $obj->start_time = $start_time;
         null !== $status && $obj['status'] = $status;
         null !== $track && $obj['track'] = $track;
         null !== $uri && $obj->uri = $uri;
@@ -144,7 +144,7 @@ final class CallSiprecJsonResponse implements BaseModel, ResponseConverter
     public function withAccountSid(string $accountSid): self
     {
         $obj = clone $this;
-        $obj->accountSid = $accountSid;
+        $obj->account_sid = $accountSid;
 
         return $obj;
     }
@@ -155,7 +155,7 @@ final class CallSiprecJsonResponse implements BaseModel, ResponseConverter
     public function withCallSid(string $callSid): self
     {
         $obj = clone $this;
-        $obj->callSid = $callSid;
+        $obj->call_sid = $callSid;
 
         return $obj;
     }
@@ -166,7 +166,7 @@ final class CallSiprecJsonResponse implements BaseModel, ResponseConverter
     public function withDateCreated(string $dateCreated): self
     {
         $obj = clone $this;
-        $obj->dateCreated = $dateCreated;
+        $obj->date_created = $dateCreated;
 
         return $obj;
     }
@@ -177,7 +177,7 @@ final class CallSiprecJsonResponse implements BaseModel, ResponseConverter
     public function withDateUpdated(string $dateUpdated): self
     {
         $obj = clone $this;
-        $obj->dateUpdated = $dateUpdated;
+        $obj->date_updated = $dateUpdated;
 
         return $obj;
     }
@@ -188,7 +188,7 @@ final class CallSiprecJsonResponse implements BaseModel, ResponseConverter
     public function withErrorCode(string $errorCode): self
     {
         $obj = clone $this;
-        $obj->errorCode = $errorCode;
+        $obj->error_code = $errorCode;
 
         return $obj;
     }
@@ -210,7 +210,7 @@ final class CallSiprecJsonResponse implements BaseModel, ResponseConverter
     public function withStartTime(string $startTime): self
     {
         $obj = clone $this;
-        $obj->startTime = $startTime;
+        $obj->start_time = $startTime;
 
         return $obj;
     }

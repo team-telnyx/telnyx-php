@@ -4,42 +4,22 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
-use Telnyx\AuditEvents\AuditEventListParams\Filter;
-use Telnyx\AuditEvents\AuditEventListParams\Page;
-use Telnyx\AuditEvents\AuditEventListParams\Sort;
+use Telnyx\AuditEvents\AuditEventListParams;
 use Telnyx\AuditEvents\AuditEventListResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
-
-use const Telnyx\Core\OMIT as omit;
 
 interface AuditEventsContract
 {
     /**
      * @api
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[created_before], filter[created_after]
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
-     * @param Sort|value-of<Sort> $sort set the order of the results by the creation date
+     * @param array<mixed>|AuditEventListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
-        $sort = omit,
+        array|AuditEventListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): AuditEventListResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): AuditEventListResponse;
 }

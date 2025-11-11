@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PortabilityChecks\PortabilityCheckRunResponse\Data;
 
 /**
- * @phpstan-type PortabilityCheckRunResponseShape = array{data?: list<Data>}
+ * @phpstan-type PortabilityCheckRunResponseShape = array{data?: list<Data>|null}
  */
 final class PortabilityCheckRunResponse implements BaseModel, ResponseConverter
 {

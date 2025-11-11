@@ -10,20 +10,20 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type ResultShape = array{
- *   carrierPassthroughFee?: string,
- *   connection?: string,
- *   cost?: string,
- *   currency?: string,
- *   delivered?: string,
- *   direction?: string,
- *   messageType?: string,
- *   parts?: string,
- *   product?: string,
- *   profileID?: string,
- *   received?: string,
- *   sent?: string,
- *   tags?: string,
- *   tnType?: string,
+ *   carrier_passthrough_fee?: string|null,
+ *   connection?: string|null,
+ *   cost?: string|null,
+ *   currency?: string|null,
+ *   delivered?: string|null,
+ *   direction?: string|null,
+ *   message_type?: string|null,
+ *   parts?: string|null,
+ *   product?: string|null,
+ *   profile_id?: string|null,
+ *   received?: string|null,
+ *   sent?: string|null,
+ *   tags?: string|null,
+ *   tn_type?: string|null,
  * }
  */
 final class Result implements BaseModel
@@ -31,8 +31,8 @@ final class Result implements BaseModel
     /** @use SdkModel<ResultShape> */
     use SdkModel;
 
-    #[Api('carrier_passthrough_fee', optional: true)]
-    public ?string $carrierPassthroughFee;
+    #[Api(optional: true)]
+    public ?string $carrier_passthrough_fee;
 
     #[Api(optional: true)]
     public ?string $connection;
@@ -49,8 +49,8 @@ final class Result implements BaseModel
     #[Api(optional: true)]
     public ?string $direction;
 
-    #[Api('message_type', optional: true)]
-    public ?string $messageType;
+    #[Api(optional: true)]
+    public ?string $message_type;
 
     #[Api(optional: true)]
     public ?string $parts;
@@ -58,8 +58,8 @@ final class Result implements BaseModel
     #[Api(optional: true)]
     public ?string $product;
 
-    #[Api('profile_id', optional: true)]
-    public ?string $profileID;
+    #[Api(optional: true)]
+    public ?string $profile_id;
 
     #[Api(optional: true)]
     public ?string $received;
@@ -70,8 +70,8 @@ final class Result implements BaseModel
     #[Api(optional: true)]
     public ?string $tags;
 
-    #[Api('tn_type', optional: true)]
-    public ?string $tnType;
+    #[Api(optional: true)]
+    public ?string $tn_type;
 
     public function __construct()
     {
@@ -84,37 +84,37 @@ final class Result implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $carrierPassthroughFee = null,
+        ?string $carrier_passthrough_fee = null,
         ?string $connection = null,
         ?string $cost = null,
         ?string $currency = null,
         ?string $delivered = null,
         ?string $direction = null,
-        ?string $messageType = null,
+        ?string $message_type = null,
         ?string $parts = null,
         ?string $product = null,
-        ?string $profileID = null,
+        ?string $profile_id = null,
         ?string $received = null,
         ?string $sent = null,
         ?string $tags = null,
-        ?string $tnType = null,
+        ?string $tn_type = null,
     ): self {
         $obj = new self;
 
-        null !== $carrierPassthroughFee && $obj->carrierPassthroughFee = $carrierPassthroughFee;
+        null !== $carrier_passthrough_fee && $obj->carrier_passthrough_fee = $carrier_passthrough_fee;
         null !== $connection && $obj->connection = $connection;
         null !== $cost && $obj->cost = $cost;
         null !== $currency && $obj->currency = $currency;
         null !== $delivered && $obj->delivered = $delivered;
         null !== $direction && $obj->direction = $direction;
-        null !== $messageType && $obj->messageType = $messageType;
+        null !== $message_type && $obj->message_type = $message_type;
         null !== $parts && $obj->parts = $parts;
         null !== $product && $obj->product = $product;
-        null !== $profileID && $obj->profileID = $profileID;
+        null !== $profile_id && $obj->profile_id = $profile_id;
         null !== $received && $obj->received = $received;
         null !== $sent && $obj->sent = $sent;
         null !== $tags && $obj->tags = $tags;
-        null !== $tnType && $obj->tnType = $tnType;
+        null !== $tn_type && $obj->tn_type = $tn_type;
 
         return $obj;
     }
@@ -123,7 +123,7 @@ final class Result implements BaseModel
         string $carrierPassthroughFee
     ): self {
         $obj = clone $this;
-        $obj->carrierPassthroughFee = $carrierPassthroughFee;
+        $obj->carrier_passthrough_fee = $carrierPassthroughFee;
 
         return $obj;
     }
@@ -171,7 +171,7 @@ final class Result implements BaseModel
     public function withMessageType(string $messageType): self
     {
         $obj = clone $this;
-        $obj->messageType = $messageType;
+        $obj->message_type = $messageType;
 
         return $obj;
     }
@@ -195,7 +195,7 @@ final class Result implements BaseModel
     public function withProfileID(string $profileID): self
     {
         $obj = clone $this;
-        $obj->profileID = $profileID;
+        $obj->profile_id = $profileID;
 
         return $obj;
     }
@@ -227,7 +227,7 @@ final class Result implements BaseModel
     public function withTnType(string $tnType): self
     {
         $obj = clone $this;
-        $obj->tnType = $tnType;
+        $obj->tn_type = $tnType;
 
         return $obj;
     }

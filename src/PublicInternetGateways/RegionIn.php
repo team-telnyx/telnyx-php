@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type RegionInShape = array{regionCode?: string}
+ * @phpstan-type RegionInShape = array{region_code?: string|null}
  */
 final class RegionIn implements BaseModel
 {
@@ -19,8 +19,8 @@ final class RegionIn implements BaseModel
     /**
      * The region the interface should be deployed to.
      */
-    #[Api('region_code', optional: true)]
-    public ?string $regionCode;
+    #[Api(optional: true)]
+    public ?string $region_code;
 
     public function __construct()
     {
@@ -32,11 +32,11 @@ final class RegionIn implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?string $regionCode = null): self
+    public static function with(?string $region_code = null): self
     {
         $obj = new self;
 
-        null !== $regionCode && $obj->regionCode = $regionCode;
+        null !== $region_code && $obj->region_code = $region_code;
 
         return $obj;
     }
@@ -47,7 +47,7 @@ final class RegionIn implements BaseModel
     public function withRegionCode(string $regionCode): self
     {
         $obj = clone $this;
-        $obj->regionCode = $regionCode;
+        $obj->region_code = $regionCode;
 
         return $obj;
     }

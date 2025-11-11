@@ -12,7 +12,8 @@ use Telnyx\Rooms\Sessions\Actions\ActionsParticipantsRequest\Participants\UnionM
 
 /**
  * @phpstan-type ActionsParticipantsRequestShape = array{
- *   exclude?: list<string>, participants?: list<string>|value-of<UnionMember0>
+ *   exclude?: list<string>|null,
+ *   participants?: null|list<string>|value-of<UnionMember0>,
  * }
  */
 final class ActionsParticipantsRequest implements BaseModel

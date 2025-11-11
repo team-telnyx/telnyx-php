@@ -23,20 +23,20 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Conferences\Actions->join
  *
  * @phpstan-type ActionJoinParamsShape = array{
- *   callControlID: string,
- *   beepEnabled?: BeepEnabled|value-of<BeepEnabled>,
- *   clientState?: string,
- *   commandID?: string,
- *   endConferenceOnExit?: bool,
+ *   call_control_id: string,
+ *   beep_enabled?: BeepEnabled|value-of<BeepEnabled>,
+ *   client_state?: string,
+ *   command_id?: string,
+ *   end_conference_on_exit?: bool,
  *   hold?: bool,
- *   holdAudioURL?: string,
- *   holdMediaName?: string,
+ *   hold_audio_url?: string,
+ *   hold_media_name?: string,
  *   mute?: bool,
  *   region?: Region|value-of<Region>,
- *   softEndConferenceOnExit?: bool,
- *   startConferenceOnEnter?: bool,
- *   supervisorRole?: SupervisorRole|value-of<SupervisorRole>,
- *   whisperCallControlIDs?: list<string>,
+ *   soft_end_conference_on_exit?: bool,
+ *   start_conference_on_enter?: bool,
+ *   supervisor_role?: SupervisorRole|value-of<SupervisorRole>,
+ *   whisper_call_control_ids?: list<string>,
  * }
  */
 final class ActionJoinParams implements BaseModel
@@ -48,34 +48,34 @@ final class ActionJoinParams implements BaseModel
     /**
      * Unique identifier and token for controlling the call.
      */
-    #[Api('call_control_id')]
-    public string $callControlID;
+    #[Api]
+    public string $call_control_id;
 
     /**
      * Whether a beep sound should be played when the participant joins and/or leaves the conference. Can be used to override the conference-level setting.
      *
-     * @var value-of<BeepEnabled>|null $beepEnabled
+     * @var value-of<BeepEnabled>|null $beep_enabled
      */
-    #[Api('beep_enabled', enum: BeepEnabled::class, optional: true)]
-    public ?string $beepEnabled;
+    #[Api(enum: BeepEnabled::class, optional: true)]
+    public ?string $beep_enabled;
 
     /**
      * Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string. Please note that the client_state will be updated for the participient call leg and the change will not affect conferencing webhooks unless the participient is the owner of the conference.
      */
-    #[Api('client_state', optional: true)]
-    public ?string $clientState;
+    #[Api(optional: true)]
+    public ?string $client_state;
 
     /**
      * Use this field to avoid execution of duplicate commands. Telnyx will ignore subsequent commands with the same `command_id` as one that has already been executed.
      */
-    #[Api('command_id', optional: true)]
-    public ?string $commandID;
+    #[Api(optional: true)]
+    public ?string $command_id;
 
     /**
      * Whether the conference should end and all remaining participants be hung up after the participant leaves the conference. Defaults to "false".
      */
-    #[Api('end_conference_on_exit', optional: true)]
-    public ?bool $endConferenceOnExit;
+    #[Api(optional: true)]
+    public ?bool $end_conference_on_exit;
 
     /**
      * Whether the participant should be put on hold immediately after joining the conference. Defaults to "false".
@@ -86,14 +86,14 @@ final class ActionJoinParams implements BaseModel
     /**
      * The URL of a file to be played to the participant when they are put on hold after joining the conference. hold_media_name and hold_audio_url cannot be used together in one request. Takes effect only when "start_conference_on_create" is set to "false". This property takes effect only if "hold" is set to "true".
      */
-    #[Api('hold_audio_url', optional: true)]
-    public ?string $holdAudioURL;
+    #[Api(optional: true)]
+    public ?string $hold_audio_url;
 
     /**
      * The media_name of a file to be played to the participant when they are put on hold after joining the conference. The media_name must point to a file previously uploaded to api.telnyx.com/v2/media by the same user/organization. The file must either be a WAV or MP3 file. Takes effect only when "start_conference_on_create" is set to "false". This property takes effect only if "hold" is set to "true".
      */
-    #[Api('hold_media_name', optional: true)]
-    public ?string $holdMediaName;
+    #[Api(optional: true)]
+    public ?string $hold_media_name;
 
     /**
      * Whether the participant should be muted immediately after joining the conference. Defaults to "false".
@@ -112,37 +112,37 @@ final class ActionJoinParams implements BaseModel
     /**
      * Whether the conference should end after the participant leaves the conference. NOTE this doesn't hang up the other participants. Defaults to "false".
      */
-    #[Api('soft_end_conference_on_exit', optional: true)]
-    public ?bool $softEndConferenceOnExit;
+    #[Api(optional: true)]
+    public ?bool $soft_end_conference_on_exit;
 
     /**
      * Whether the conference should be started after the participant joins the conference. Defaults to "false".
      */
-    #[Api('start_conference_on_enter', optional: true)]
-    public ?bool $startConferenceOnEnter;
+    #[Api(optional: true)]
+    public ?bool $start_conference_on_enter;
 
     /**
      * Sets the joining participant as a supervisor for the conference. A conference can have multiple supervisors. "barge" means the supervisor enters the conference as a normal participant. This is the same as "none". "monitor" means the supervisor is muted but can hear all participants. "whisper" means that only the specified "whisper_call_control_ids" can hear the supervisor. Defaults to "none".
      *
-     * @var value-of<SupervisorRole>|null $supervisorRole
+     * @var value-of<SupervisorRole>|null $supervisor_role
      */
-    #[Api('supervisor_role', enum: SupervisorRole::class, optional: true)]
-    public ?string $supervisorRole;
+    #[Api(enum: SupervisorRole::class, optional: true)]
+    public ?string $supervisor_role;
 
     /**
      * Array of unique call_control_ids the joining supervisor can whisper to. If none provided, the supervisor will join the conference as a monitoring participant only.
      *
-     * @var list<string>|null $whisperCallControlIDs
+     * @var list<string>|null $whisper_call_control_ids
      */
-    #[Api('whisper_call_control_ids', list: 'string', optional: true)]
-    public ?array $whisperCallControlIDs;
+    #[Api(list: 'string', optional: true)]
+    public ?array $whisper_call_control_ids;
 
     /**
      * `new ActionJoinParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * ActionJoinParams::with(callControlID: ...)
+     * ActionJoinParams::with(call_control_id: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -161,44 +161,44 @@ final class ActionJoinParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param BeepEnabled|value-of<BeepEnabled> $beepEnabled
+     * @param BeepEnabled|value-of<BeepEnabled> $beep_enabled
      * @param Region|value-of<Region> $region
-     * @param SupervisorRole|value-of<SupervisorRole> $supervisorRole
-     * @param list<string> $whisperCallControlIDs
+     * @param SupervisorRole|value-of<SupervisorRole> $supervisor_role
+     * @param list<string> $whisper_call_control_ids
      */
     public static function with(
-        string $callControlID,
-        BeepEnabled|string|null $beepEnabled = null,
-        ?string $clientState = null,
-        ?string $commandID = null,
-        ?bool $endConferenceOnExit = null,
+        string $call_control_id,
+        BeepEnabled|string|null $beep_enabled = null,
+        ?string $client_state = null,
+        ?string $command_id = null,
+        ?bool $end_conference_on_exit = null,
         ?bool $hold = null,
-        ?string $holdAudioURL = null,
-        ?string $holdMediaName = null,
+        ?string $hold_audio_url = null,
+        ?string $hold_media_name = null,
         ?bool $mute = null,
         Region|string|null $region = null,
-        ?bool $softEndConferenceOnExit = null,
-        ?bool $startConferenceOnEnter = null,
-        SupervisorRole|string|null $supervisorRole = null,
-        ?array $whisperCallControlIDs = null,
+        ?bool $soft_end_conference_on_exit = null,
+        ?bool $start_conference_on_enter = null,
+        SupervisorRole|string|null $supervisor_role = null,
+        ?array $whisper_call_control_ids = null,
     ): self {
         $obj = new self;
 
-        $obj->callControlID = $callControlID;
+        $obj->call_control_id = $call_control_id;
 
-        null !== $beepEnabled && $obj['beepEnabled'] = $beepEnabled;
-        null !== $clientState && $obj->clientState = $clientState;
-        null !== $commandID && $obj->commandID = $commandID;
-        null !== $endConferenceOnExit && $obj->endConferenceOnExit = $endConferenceOnExit;
+        null !== $beep_enabled && $obj['beep_enabled'] = $beep_enabled;
+        null !== $client_state && $obj->client_state = $client_state;
+        null !== $command_id && $obj->command_id = $command_id;
+        null !== $end_conference_on_exit && $obj->end_conference_on_exit = $end_conference_on_exit;
         null !== $hold && $obj->hold = $hold;
-        null !== $holdAudioURL && $obj->holdAudioURL = $holdAudioURL;
-        null !== $holdMediaName && $obj->holdMediaName = $holdMediaName;
+        null !== $hold_audio_url && $obj->hold_audio_url = $hold_audio_url;
+        null !== $hold_media_name && $obj->hold_media_name = $hold_media_name;
         null !== $mute && $obj->mute = $mute;
         null !== $region && $obj['region'] = $region;
-        null !== $softEndConferenceOnExit && $obj->softEndConferenceOnExit = $softEndConferenceOnExit;
-        null !== $startConferenceOnEnter && $obj->startConferenceOnEnter = $startConferenceOnEnter;
-        null !== $supervisorRole && $obj['supervisorRole'] = $supervisorRole;
-        null !== $whisperCallControlIDs && $obj->whisperCallControlIDs = $whisperCallControlIDs;
+        null !== $soft_end_conference_on_exit && $obj->soft_end_conference_on_exit = $soft_end_conference_on_exit;
+        null !== $start_conference_on_enter && $obj->start_conference_on_enter = $start_conference_on_enter;
+        null !== $supervisor_role && $obj['supervisor_role'] = $supervisor_role;
+        null !== $whisper_call_control_ids && $obj->whisper_call_control_ids = $whisper_call_control_ids;
 
         return $obj;
     }
@@ -209,7 +209,7 @@ final class ActionJoinParams implements BaseModel
     public function withCallControlID(string $callControlID): self
     {
         $obj = clone $this;
-        $obj->callControlID = $callControlID;
+        $obj->call_control_id = $callControlID;
 
         return $obj;
     }
@@ -222,7 +222,7 @@ final class ActionJoinParams implements BaseModel
     public function withBeepEnabled(BeepEnabled|string $beepEnabled): self
     {
         $obj = clone $this;
-        $obj['beepEnabled'] = $beepEnabled;
+        $obj['beep_enabled'] = $beepEnabled;
 
         return $obj;
     }
@@ -233,7 +233,7 @@ final class ActionJoinParams implements BaseModel
     public function withClientState(string $clientState): self
     {
         $obj = clone $this;
-        $obj->clientState = $clientState;
+        $obj->client_state = $clientState;
 
         return $obj;
     }
@@ -244,7 +244,7 @@ final class ActionJoinParams implements BaseModel
     public function withCommandID(string $commandID): self
     {
         $obj = clone $this;
-        $obj->commandID = $commandID;
+        $obj->command_id = $commandID;
 
         return $obj;
     }
@@ -255,7 +255,7 @@ final class ActionJoinParams implements BaseModel
     public function withEndConferenceOnExit(bool $endConferenceOnExit): self
     {
         $obj = clone $this;
-        $obj->endConferenceOnExit = $endConferenceOnExit;
+        $obj->end_conference_on_exit = $endConferenceOnExit;
 
         return $obj;
     }
@@ -277,7 +277,7 @@ final class ActionJoinParams implements BaseModel
     public function withHoldAudioURL(string $holdAudioURL): self
     {
         $obj = clone $this;
-        $obj->holdAudioURL = $holdAudioURL;
+        $obj->hold_audio_url = $holdAudioURL;
 
         return $obj;
     }
@@ -288,7 +288,7 @@ final class ActionJoinParams implements BaseModel
     public function withHoldMediaName(string $holdMediaName): self
     {
         $obj = clone $this;
-        $obj->holdMediaName = $holdMediaName;
+        $obj->hold_media_name = $holdMediaName;
 
         return $obj;
     }
@@ -324,7 +324,7 @@ final class ActionJoinParams implements BaseModel
         bool $softEndConferenceOnExit
     ): self {
         $obj = clone $this;
-        $obj->softEndConferenceOnExit = $softEndConferenceOnExit;
+        $obj->soft_end_conference_on_exit = $softEndConferenceOnExit;
 
         return $obj;
     }
@@ -336,7 +336,7 @@ final class ActionJoinParams implements BaseModel
         bool $startConferenceOnEnter
     ): self {
         $obj = clone $this;
-        $obj->startConferenceOnEnter = $startConferenceOnEnter;
+        $obj->start_conference_on_enter = $startConferenceOnEnter;
 
         return $obj;
     }
@@ -350,7 +350,7 @@ final class ActionJoinParams implements BaseModel
         SupervisorRole|string $supervisorRole
     ): self {
         $obj = clone $this;
-        $obj['supervisorRole'] = $supervisorRole;
+        $obj['supervisor_role'] = $supervisorRole;
 
         return $obj;
     }
@@ -364,7 +364,7 @@ final class ActionJoinParams implements BaseModel
         array $whisperCallControlIDs
     ): self {
         $obj = clone $this;
-        $obj->whisperCallControlIDs = $whisperCallControlIDs;
+        $obj->whisper_call_control_ids = $whisperCallControlIDs;
 
         return $obj;
     }

@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type DataShape = array{result?: string}
+ * @phpstan-type DataShape = array{result?: string|null}
  */
 final class Data implements BaseModel
 {

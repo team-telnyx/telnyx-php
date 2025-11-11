@@ -33,7 +33,7 @@ final class ReportsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->reports->listMdrs();
+        $result = $this->client->reports->listMdrs([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -45,7 +45,7 @@ final class ReportsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->reports->listWdrs();
+        $result = $this->client->reports->listWdrs([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

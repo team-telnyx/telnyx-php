@@ -23,12 +23,12 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type ActionSpeakParamsShape = array{
  *   payload: string,
  *   voice: string,
- *   callControlIDs?: list<string>,
- *   commandID?: string,
+ *   call_control_ids?: list<string>,
+ *   command_id?: string,
  *   language?: Language|value-of<Language>,
- *   payloadType?: PayloadType|value-of<PayloadType>,
+ *   payload_type?: PayloadType|value-of<PayloadType>,
  *   region?: Region|value-of<Region>,
- *   voiceSettings?: mixed|ElevenLabsVoiceSettings|TelnyxVoiceSettings,
+ *   voice_settings?: mixed|ElevenLabsVoiceSettings|TelnyxVoiceSettings,
  * }
  */
 final class ActionSpeakParams implements BaseModel
@@ -62,16 +62,16 @@ final class ActionSpeakParams implements BaseModel
     /**
      * Call Control IDs of participants who will hear the spoken text. When empty all participants will hear the spoken text.
      *
-     * @var list<string>|null $callControlIDs
+     * @var list<string>|null $call_control_ids
      */
-    #[Api('call_control_ids', list: 'string', optional: true)]
-    public ?array $callControlIDs;
+    #[Api(list: 'string', optional: true)]
+    public ?array $call_control_ids;
 
     /**
      * Use this field to avoid execution of duplicate commands. Telnyx will ignore subsequent commands with the same `command_id` as one that has already been executed.
      */
-    #[Api('command_id', optional: true)]
-    public ?string $commandID;
+    #[Api(optional: true)]
+    public ?string $command_id;
 
     /**
      * The language you want spoken. This parameter is ignored when a `Polly.*` voice is specified.
@@ -84,10 +84,10 @@ final class ActionSpeakParams implements BaseModel
     /**
      * The type of the provided payload. The payload can either be plain text, or Speech Synthesis Markup Language (SSML).
      *
-     * @var value-of<PayloadType>|null $payloadType
+     * @var value-of<PayloadType>|null $payload_type
      */
-    #[Api('payload_type', enum: PayloadType::class, optional: true)]
-    public ?string $payloadType;
+    #[Api(enum: PayloadType::class, optional: true)]
+    public ?string $payload_type;
 
     /**
      * Region where the conference data is located. Defaults to the region defined in user's data locality settings (Europe or US).
@@ -100,10 +100,10 @@ final class ActionSpeakParams implements BaseModel
     /**
      * The settings associated with the voice selected.
      *
-     * @var mixed|ElevenLabsVoiceSettings|TelnyxVoiceSettings|null $voiceSettings
+     * @var mixed|ElevenLabsVoiceSettings|TelnyxVoiceSettings|null $voice_settings
      */
-    #[Api('voice_settings', union: VoiceSettings::class, optional: true)]
-    public mixed $voiceSettings;
+    #[Api(union: VoiceSettings::class, optional: true)]
+    public mixed $voice_settings;
 
     /**
      * `new ActionSpeakParams()` is missing required properties by the API.
@@ -129,33 +129,33 @@ final class ActionSpeakParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $callControlIDs
+     * @param list<string> $call_control_ids
      * @param Language|value-of<Language> $language
-     * @param PayloadType|value-of<PayloadType> $payloadType
+     * @param PayloadType|value-of<PayloadType> $payload_type
      * @param Region|value-of<Region> $region
-     * @param mixed|ElevenLabsVoiceSettings|TelnyxVoiceSettings $voiceSettings
+     * @param mixed|ElevenLabsVoiceSettings|TelnyxVoiceSettings $voice_settings
      */
     public static function with(
         string $payload,
         string $voice,
-        ?array $callControlIDs = null,
-        ?string $commandID = null,
+        ?array $call_control_ids = null,
+        ?string $command_id = null,
         Language|string|null $language = null,
-        PayloadType|string|null $payloadType = null,
+        PayloadType|string|null $payload_type = null,
         Region|string|null $region = null,
-        mixed $voiceSettings = null,
+        mixed $voice_settings = null,
     ): self {
         $obj = new self;
 
         $obj->payload = $payload;
         $obj->voice = $voice;
 
-        null !== $callControlIDs && $obj->callControlIDs = $callControlIDs;
-        null !== $commandID && $obj->commandID = $commandID;
+        null !== $call_control_ids && $obj->call_control_ids = $call_control_ids;
+        null !== $command_id && $obj->command_id = $command_id;
         null !== $language && $obj['language'] = $language;
-        null !== $payloadType && $obj['payloadType'] = $payloadType;
+        null !== $payload_type && $obj['payload_type'] = $payload_type;
         null !== $region && $obj['region'] = $region;
-        null !== $voiceSettings && $obj->voiceSettings = $voiceSettings;
+        null !== $voice_settings && $obj->voice_settings = $voice_settings;
 
         return $obj;
     }
@@ -200,7 +200,7 @@ final class ActionSpeakParams implements BaseModel
     public function withCallControlIDs(array $callControlIDs): self
     {
         $obj = clone $this;
-        $obj->callControlIDs = $callControlIDs;
+        $obj->call_control_ids = $callControlIDs;
 
         return $obj;
     }
@@ -211,7 +211,7 @@ final class ActionSpeakParams implements BaseModel
     public function withCommandID(string $commandID): self
     {
         $obj = clone $this;
-        $obj->commandID = $commandID;
+        $obj->command_id = $commandID;
 
         return $obj;
     }
@@ -237,7 +237,7 @@ final class ActionSpeakParams implements BaseModel
     public function withPayloadType(PayloadType|string $payloadType): self
     {
         $obj = clone $this;
-        $obj['payloadType'] = $payloadType;
+        $obj['payload_type'] = $payloadType;
 
         return $obj;
     }
@@ -263,7 +263,7 @@ final class ActionSpeakParams implements BaseModel
     public function withVoiceSettings(mixed $voiceSettings): self
     {
         $obj = clone $this;
-        $obj->voiceSettings = $voiceSettings;
+        $obj->voice_settings = $voiceSettings;
 
         return $obj;
     }

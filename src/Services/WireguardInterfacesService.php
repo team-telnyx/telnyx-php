@@ -12,12 +12,8 @@ use Telnyx\WireguardInterfaces\WireguardInterfaceCreateParams;
 use Telnyx\WireguardInterfaces\WireguardInterfaceDeleteResponse;
 use Telnyx\WireguardInterfaces\WireguardInterfaceGetResponse;
 use Telnyx\WireguardInterfaces\WireguardInterfaceListParams;
-use Telnyx\WireguardInterfaces\WireguardInterfaceListParams\Filter;
-use Telnyx\WireguardInterfaces\WireguardInterfaceListParams\Page;
 use Telnyx\WireguardInterfaces\WireguardInterfaceListResponse;
 use Telnyx\WireguardInterfaces\WireguardInterfaceNewResponse;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class WireguardInterfacesService implements WireguardInterfacesContract
 {
@@ -31,44 +27,22 @@ final class WireguardInterfacesService implements WireguardInterfacesContract
      *
      * Create a new WireGuard Interface. Current limitation of 10 interfaces per user can be created.
      *
-     * @param string $networkID the id of the network associated with the interface
-     * @param string $regionCode the region the interface should be deployed to
-     * @param bool $enableSipTrunking enable SIP traffic forwarding over VPN interface
-     * @param string $name a user specified name for the interface
+     * @param array{
+     *   network_id: string,
+     *   region_code: string,
+     *   enable_sip_trunking?: bool,
+     *   name?: string,
+     * }|WireguardInterfaceCreateParams $params
      *
      * @throws APIException
      */
     public function create(
-        $networkID,
-        $regionCode,
-        $enableSipTrunking = omit,
-        $name = omit,
+        array|WireguardInterfaceCreateParams $params,
         ?RequestOptions $requestOptions = null,
-    ): WireguardInterfaceNewResponse {
-        $params = [
-            'networkID' => $networkID,
-            'regionCode' => $regionCode,
-            'enableSipTrunking' => $enableSipTrunking,
-            'name' => $name,
-        ];
-
-        return $this->createRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): WireguardInterfaceNewResponse {
         [$parsed, $options] = WireguardInterfaceCreateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -106,35 +80,19 @@ final class WireguardInterfacesService implements WireguardInterfacesContract
      *
      * List all WireGuard Interfaces.
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[network_id]
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param array{
+     *   filter?: array{network_id?: string}, page?: array{number?: int, size?: int}
+     * }|WireguardInterfaceListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): WireguardInterfaceListResponse {
-        $params = ['filter' => $filter, 'page' => $page];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|WireguardInterfaceListParams $params,
+        ?RequestOptions $requestOptions = null,
     ): WireguardInterfaceListResponse {
         [$parsed, $options] = WireguardInterfaceListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

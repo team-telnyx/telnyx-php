@@ -13,8 +13,6 @@ use Telnyx\Rooms\Actions\ActionRefreshClientTokenParams;
 use Telnyx\Rooms\Actions\ActionRefreshClientTokenResponse;
 use Telnyx\ServiceContracts\Rooms\ActionsContract;
 
-use const Telnyx\Core\OMIT as omit;
-
 final class ActionsService implements ActionsContract
 {
     /**
@@ -27,40 +25,20 @@ final class ActionsService implements ActionsContract
      *
      * Synchronously create an Client Token to join a Room. Client Token is necessary to join a Telnyx Room. Client Token will expire after `token_ttl_secs`, a Refresh Token is also provided to refresh a Client Token, the Refresh Token expires after `refresh_token_ttl_secs`.
      *
-     * @param int $refreshTokenTtlSecs the time to live in seconds of the Refresh Token, after that time the Refresh Token is invalid and can't be used to refresh Client Token
-     * @param int $tokenTtlSecs the time to live in seconds of the Client Token, after that time the Client Token is invalid and can't be used to join a Room
+     * @param array{
+     *   refresh_token_ttl_secs?: int, token_ttl_secs?: int
+     * }|ActionGenerateJoinClientTokenParams $params
      *
      * @throws APIException
      */
     public function generateJoinClientToken(
         string $roomID,
-        $refreshTokenTtlSecs = omit,
-        $tokenTtlSecs = omit,
+        array|ActionGenerateJoinClientTokenParams $params,
         ?RequestOptions $requestOptions = null,
-    ): ActionGenerateJoinClientTokenResponse {
-        $params = [
-            'refreshTokenTtlSecs' => $refreshTokenTtlSecs,
-            'tokenTtlSecs' => $tokenTtlSecs,
-        ];
-
-        return $this->generateJoinClientTokenRaw($roomID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function generateJoinClientTokenRaw(
-        string $roomID,
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): ActionGenerateJoinClientTokenResponse {
         [$parsed, $options] = ActionGenerateJoinClientTokenParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -78,39 +56,20 @@ final class ActionsService implements ActionsContract
      *
      * Synchronously refresh an Client Token to join a Room. Client Token is necessary to join a Telnyx Room. Client Token will expire after `token_ttl_secs`.
      *
-     * @param string $refreshToken
-     * @param int $tokenTtlSecs the time to live in seconds of the Client Token, after that time the Client Token is invalid and can't be used to join a Room
+     * @param array{
+     *   refresh_token: string, token_ttl_secs?: int
+     * }|ActionRefreshClientTokenParams $params
      *
      * @throws APIException
      */
     public function refreshClientToken(
         string $roomID,
-        $refreshToken,
-        $tokenTtlSecs = omit,
+        array|ActionRefreshClientTokenParams $params,
         ?RequestOptions $requestOptions = null,
-    ): ActionRefreshClientTokenResponse {
-        $params = [
-            'refreshToken' => $refreshToken, 'tokenTtlSecs' => $tokenTtlSecs,
-        ];
-
-        return $this->refreshClientTokenRaw($roomID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function refreshClientTokenRaw(
-        string $roomID,
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): ActionRefreshClientTokenResponse {
         [$parsed, $options] = ActionRefreshClientTokenParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

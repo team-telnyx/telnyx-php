@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\MessagingNumbersBulkUpdates->create
  *
  * @phpstan-type MessagingNumbersBulkUpdateCreateParamsShape = array{
- *   messagingProfileID: string, numbers: list<string>
+ *   messaging_profile_id: string, numbers: list<string>
  * }
  */
 final class MessagingNumbersBulkUpdateCreateParams implements BaseModel
@@ -30,8 +30,8 @@ final class MessagingNumbersBulkUpdateCreateParams implements BaseModel
      * * Set this field to `""` to unassign each number from their respective messaging profile
      * * Set this field to a quoted UUID of a messaging profile to assign these numbers to that messaging profile
      */
-    #[Api('messaging_profile_id')]
-    public string $messagingProfileID;
+    #[Api]
+    public string $messaging_profile_id;
 
     /**
      * The list of phone numbers to update.
@@ -47,7 +47,7 @@ final class MessagingNumbersBulkUpdateCreateParams implements BaseModel
      * To enforce required parameters use
      * ```
      * MessagingNumbersBulkUpdateCreateParams::with(
-     *   messagingProfileID: ..., numbers: ...
+     *   messaging_profile_id: ..., numbers: ...
      * )
      * ```
      *
@@ -72,12 +72,12 @@ final class MessagingNumbersBulkUpdateCreateParams implements BaseModel
      * @param list<string> $numbers
      */
     public static function with(
-        string $messagingProfileID,
+        string $messaging_profile_id,
         array $numbers
     ): self {
         $obj = new self;
 
-        $obj->messagingProfileID = $messagingProfileID;
+        $obj->messaging_profile_id = $messaging_profile_id;
         $obj->numbers = $numbers;
 
         return $obj;
@@ -92,7 +92,7 @@ final class MessagingNumbersBulkUpdateCreateParams implements BaseModel
     public function withMessagingProfileID(string $messagingProfileID): self
     {
         $obj = clone $this;
-        $obj->messagingProfileID = $messagingProfileID;
+        $obj->messaging_profile_id = $messagingProfileID;
 
         return $obj;
     }

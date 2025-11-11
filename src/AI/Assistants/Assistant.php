@@ -15,10 +15,10 @@ use Telnyx\Core\Contracts\BaseModel;
  * Assistant configuration including choice of LLM, custom instructions, and tools.
  *
  * @phpstan-type AssistantShape = array{
- *   instructions?: string,
- *   model?: string,
- *   openaiAPIKeyRef?: string,
- *   tools?: list<BookAppointmentTool|CheckAvailabilityTool|WebhookTool|HangupTool|TransferTool|RetrievalTool>,
+ *   instructions?: string|null,
+ *   model?: string|null,
+ *   openai_api_key_ref?: string|null,
+ *   tools?: list<BookAppointmentTool|CheckAvailabilityTool|WebhookTool|HangupTool|TransferTool|RetrievalTool>|null,
  * }
  */
 final class Assistant implements BaseModel
@@ -41,8 +41,8 @@ final class Assistant implements BaseModel
     /**
      * This is necessary only if the model selected is from OpenAI. You would pass the `identifier` for an integration secret [/v2/integration_secrets](https://developers.telnyx.com/api/secrets-manager/integration-secrets/create-integration-secret) that refers to your OpenAI API Key. Warning: Free plans are unlikely to work with this integration.
      */
-    #[Api('openai_api_key_ref', optional: true)]
-    public ?string $openaiAPIKeyRef;
+    #[Api(optional: true)]
+    public ?string $openai_api_key_ref;
 
     /**
      * The tools that the voice assistant can use.
@@ -67,14 +67,14 @@ final class Assistant implements BaseModel
     public static function with(
         ?string $instructions = null,
         ?string $model = null,
-        ?string $openaiAPIKeyRef = null,
+        ?string $openai_api_key_ref = null,
         ?array $tools = null,
     ): self {
         $obj = new self;
 
         null !== $instructions && $obj->instructions = $instructions;
         null !== $model && $obj->model = $model;
-        null !== $openaiAPIKeyRef && $obj->openaiAPIKeyRef = $openaiAPIKeyRef;
+        null !== $openai_api_key_ref && $obj->openai_api_key_ref = $openai_api_key_ref;
         null !== $tools && $obj->tools = $tools;
 
         return $obj;
@@ -108,7 +108,7 @@ final class Assistant implements BaseModel
     public function withOpenAIAPIKeyRef(string $openaiAPIKeyRef): self
     {
         $obj = clone $this;
-        $obj->openaiAPIKeyRef = $openaiAPIKeyRef;
+        $obj->openai_api_key_ref = $openaiAPIKeyRef;
 
         return $obj;
     }

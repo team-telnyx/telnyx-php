@@ -13,7 +13,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type CallControlApplicationListResponseShape = array{
- *   data?: list<CallControlApplication>, meta?: PaginationMeta
+ *   data?: list<CallControlApplication>|null, meta?: PaginationMeta|null
  * }
  */
 final class CallControlApplicationListResponse implements BaseModel, ResponseConverter

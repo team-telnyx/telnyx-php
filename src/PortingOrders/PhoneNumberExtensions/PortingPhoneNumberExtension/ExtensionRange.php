@@ -11,7 +11,9 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Specifies the extension range for this porting phone number extension.
  *
- * @phpstan-type ExtensionRangeShape = array{endAt?: int, startAt?: int}
+ * @phpstan-type ExtensionRangeShape = array{
+ *   end_at?: int|null, start_at?: int|null
+ * }
  */
 final class ExtensionRange implements BaseModel
 {
@@ -21,14 +23,14 @@ final class ExtensionRange implements BaseModel
     /**
      * Specifies the end of the extension range for this porting phone number extension.
      */
-    #[Api('end_at', optional: true)]
-    public ?int $endAt;
+    #[Api(optional: true)]
+    public ?int $end_at;
 
     /**
      * Specifies the start of the extension range for this porting phone number extension.
      */
-    #[Api('start_at', optional: true)]
-    public ?int $startAt;
+    #[Api(optional: true)]
+    public ?int $start_at;
 
     public function __construct()
     {
@@ -40,12 +42,12 @@ final class ExtensionRange implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?int $endAt = null, ?int $startAt = null): self
+    public static function with(?int $end_at = null, ?int $start_at = null): self
     {
         $obj = new self;
 
-        null !== $endAt && $obj->endAt = $endAt;
-        null !== $startAt && $obj->startAt = $startAt;
+        null !== $end_at && $obj->end_at = $end_at;
+        null !== $start_at && $obj->start_at = $start_at;
 
         return $obj;
     }
@@ -56,7 +58,7 @@ final class ExtensionRange implements BaseModel
     public function withEndAt(int $endAt): self
     {
         $obj = clone $this;
-        $obj->endAt = $endAt;
+        $obj->end_at = $endAt;
 
         return $obj;
     }
@@ -67,7 +69,7 @@ final class ExtensionRange implements BaseModel
     public function withStartAt(int $startAt): self
     {
         $obj = clone $this;
-        $obj->startAt = $startAt;
+        $obj->start_at = $startAt;
 
         return $obj;
     }

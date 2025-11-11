@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type NotificationEventConditionIDShape = array{eq?: string}
+ * @phpstan-type NotificationEventConditionIDShape = array{eq?: string|null}
  */
 final class NotificationEventConditionID implements BaseModel
 {

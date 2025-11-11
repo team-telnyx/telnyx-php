@@ -16,8 +16,8 @@ use Telnyx\PortingOrders\VerificationCodes\VerificationCodeSendParams\Verificati
  * @see Telnyx\PortingOrders\VerificationCodes->send
  *
  * @phpstan-type VerificationCodeSendParamsShape = array{
- *   phoneNumbers?: list<string>,
- *   verificationMethod?: VerificationMethod|value-of<VerificationMethod>,
+ *   phone_numbers?: list<string>,
+ *   verification_method?: VerificationMethod|value-of<VerificationMethod>,
  * }
  */
 final class VerificationCodeSendParams implements BaseModel
@@ -26,13 +26,13 @@ final class VerificationCodeSendParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    /** @var list<string>|null $phoneNumbers */
-    #[Api('phone_numbers', list: 'string', optional: true)]
-    public ?array $phoneNumbers;
+    /** @var list<string>|null $phone_numbers */
+    #[Api(list: 'string', optional: true)]
+    public ?array $phone_numbers;
 
-    /** @var value-of<VerificationMethod>|null $verificationMethod */
-    #[Api('verification_method', enum: VerificationMethod::class, optional: true)]
-    public ?string $verificationMethod;
+    /** @var value-of<VerificationMethod>|null $verification_method */
+    #[Api(enum: VerificationMethod::class, optional: true)]
+    public ?string $verification_method;
 
     public function __construct()
     {
@@ -44,17 +44,17 @@ final class VerificationCodeSendParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $phoneNumbers
-     * @param VerificationMethod|value-of<VerificationMethod> $verificationMethod
+     * @param list<string> $phone_numbers
+     * @param VerificationMethod|value-of<VerificationMethod> $verification_method
      */
     public static function with(
-        ?array $phoneNumbers = null,
-        VerificationMethod|string|null $verificationMethod = null,
+        ?array $phone_numbers = null,
+        VerificationMethod|string|null $verification_method = null,
     ): self {
         $obj = new self;
 
-        null !== $phoneNumbers && $obj->phoneNumbers = $phoneNumbers;
-        null !== $verificationMethod && $obj['verificationMethod'] = $verificationMethod;
+        null !== $phone_numbers && $obj->phone_numbers = $phone_numbers;
+        null !== $verification_method && $obj['verification_method'] = $verification_method;
 
         return $obj;
     }
@@ -65,7 +65,7 @@ final class VerificationCodeSendParams implements BaseModel
     public function withPhoneNumbers(array $phoneNumbers): self
     {
         $obj = clone $this;
-        $obj->phoneNumbers = $phoneNumbers;
+        $obj->phone_numbers = $phoneNumbers;
 
         return $obj;
     }
@@ -77,7 +77,7 @@ final class VerificationCodeSendParams implements BaseModel
         VerificationMethod|string $verificationMethod
     ): self {
         $obj = clone $this;
-        $obj['verificationMethod'] = $verificationMethod;
+        $obj['verification_method'] = $verificationMethod;
 
         return $obj;
     }

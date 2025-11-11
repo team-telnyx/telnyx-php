@@ -33,7 +33,7 @@ final class SimCardGroupsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->simCardGroups->create(name: 'My Test Group');
+        $result = $this->client->simCardGroups->create(['name' => 'My Test Group']);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -45,7 +45,7 @@ final class SimCardGroupsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->simCardGroups->create(name: 'My Test Group');
+        $result = $this->client->simCardGroups->create(['name' => 'My Test Group']);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -58,7 +58,8 @@ final class SimCardGroupsTest extends TestCase
         }
 
         $result = $this->client->simCardGroups->retrieve(
-            '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
+            '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
+            []
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -72,7 +73,8 @@ final class SimCardGroupsTest extends TestCase
         }
 
         $result = $this->client->simCardGroups->update(
-            '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
+            '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
+            []
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -85,7 +87,7 @@ final class SimCardGroupsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->simCardGroups->list();
+        $result = $this->client->simCardGroups->list([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

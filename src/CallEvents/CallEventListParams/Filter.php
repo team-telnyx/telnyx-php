@@ -17,19 +17,19 @@ use Telnyx\Core\Contracts\BaseModel;
  * Consolidated filter parameter (deepObject style). Originally: filter[application_name][contains], filter[outbound.outbound_voice_profile_id], filter[leg_id], filter[application_session_id], filter[connection_id], filter[product], filter[failed], filter[from], filter[to], filter[name], filter[type], filter[occurred_at][eq/gt/gte/lt/lte], filter[status].
  *
  * @phpstan-type FilterShape = array{
- *   applicationName?: ApplicationName,
- *   applicationSessionID?: string,
- *   connectionID?: string,
- *   failed?: bool,
- *   from?: string,
- *   legID?: string,
- *   name?: string,
- *   occurredAt?: OccurredAt,
- *   outboundOutboundVoiceProfileID?: string,
- *   product?: value-of<Product>,
- *   status?: value-of<Status>,
- *   to?: string,
- *   type?: value-of<Type>,
+ *   application_name?: ApplicationName|null,
+ *   application_session_id?: string|null,
+ *   connection_id?: string|null,
+ *   failed?: bool|null,
+ *   from?: string|null,
+ *   leg_id?: string|null,
+ *   name?: string|null,
+ *   occurred_at?: OccurredAt|null,
+ *   outbound_outbound_voice_profile_id?: string|null,
+ *   product?: value-of<Product>|null,
+ *   status?: value-of<Status>|null,
+ *   to?: string|null,
+ *   type?: value-of<Type>|null,
  * }
  */
 final class Filter implements BaseModel
@@ -40,20 +40,20 @@ final class Filter implements BaseModel
     /**
      * Application name filters.
      */
-    #[Api('application_name', optional: true)]
-    public ?ApplicationName $applicationName;
+    #[Api(optional: true)]
+    public ?ApplicationName $application_name;
 
     /**
      * The unique identifier of the call session. A session may include multiple call leg events.
      */
-    #[Api('application_session_id', optional: true)]
-    public ?string $applicationSessionID;
+    #[Api(optional: true)]
+    public ?string $application_session_id;
 
     /**
      * The unique identifier of the conection.
      */
-    #[Api('connection_id', optional: true)]
-    public ?string $connectionID;
+    #[Api(optional: true)]
+    public ?string $connection_id;
 
     /**
      * Delivery failed or not.
@@ -70,8 +70,8 @@ final class Filter implements BaseModel
     /**
      * The unique identifier of an individual call leg.
      */
-    #[Api('leg_id', optional: true)]
-    public ?string $legID;
+    #[Api(optional: true)]
+    public ?string $leg_id;
 
     /**
      * If present, conferences will be filtered to those with a matching `name` attribute. Matching is case-sensitive.
@@ -82,14 +82,14 @@ final class Filter implements BaseModel
     /**
      * Event occurred_at filters.
      */
-    #[Api('occurred_at', optional: true)]
-    public ?OccurredAt $occurredAt;
+    #[Api(optional: true)]
+    public ?OccurredAt $occurred_at;
 
     /**
      * Identifies the associated outbound voice profile.
      */
     #[Api('outbound.outbound_voice_profile_id', optional: true)]
-    public ?string $outboundOutboundVoiceProfileID;
+    public ?string $outbound_outbound_voice_profile_id;
 
     /**
      * Filter by product.
@@ -136,15 +136,15 @@ final class Filter implements BaseModel
      * @param Type|value-of<Type> $type
      */
     public static function with(
-        ?ApplicationName $applicationName = null,
-        ?string $applicationSessionID = null,
-        ?string $connectionID = null,
+        ?ApplicationName $application_name = null,
+        ?string $application_session_id = null,
+        ?string $connection_id = null,
         ?bool $failed = null,
         ?string $from = null,
-        ?string $legID = null,
+        ?string $leg_id = null,
         ?string $name = null,
-        ?OccurredAt $occurredAt = null,
-        ?string $outboundOutboundVoiceProfileID = null,
+        ?OccurredAt $occurred_at = null,
+        ?string $outbound_outbound_voice_profile_id = null,
         Product|string|null $product = null,
         Status|string|null $status = null,
         ?string $to = null,
@@ -152,15 +152,15 @@ final class Filter implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $applicationName && $obj->applicationName = $applicationName;
-        null !== $applicationSessionID && $obj->applicationSessionID = $applicationSessionID;
-        null !== $connectionID && $obj->connectionID = $connectionID;
+        null !== $application_name && $obj->application_name = $application_name;
+        null !== $application_session_id && $obj->application_session_id = $application_session_id;
+        null !== $connection_id && $obj->connection_id = $connection_id;
         null !== $failed && $obj->failed = $failed;
         null !== $from && $obj->from = $from;
-        null !== $legID && $obj->legID = $legID;
+        null !== $leg_id && $obj->leg_id = $leg_id;
         null !== $name && $obj->name = $name;
-        null !== $occurredAt && $obj->occurredAt = $occurredAt;
-        null !== $outboundOutboundVoiceProfileID && $obj->outboundOutboundVoiceProfileID = $outboundOutboundVoiceProfileID;
+        null !== $occurred_at && $obj->occurred_at = $occurred_at;
+        null !== $outbound_outbound_voice_profile_id && $obj->outbound_outbound_voice_profile_id = $outbound_outbound_voice_profile_id;
         null !== $product && $obj['product'] = $product;
         null !== $status && $obj['status'] = $status;
         null !== $to && $obj->to = $to;
@@ -175,7 +175,7 @@ final class Filter implements BaseModel
     public function withApplicationName(ApplicationName $applicationName): self
     {
         $obj = clone $this;
-        $obj->applicationName = $applicationName;
+        $obj->application_name = $applicationName;
 
         return $obj;
     }
@@ -186,7 +186,7 @@ final class Filter implements BaseModel
     public function withApplicationSessionID(string $applicationSessionID): self
     {
         $obj = clone $this;
-        $obj->applicationSessionID = $applicationSessionID;
+        $obj->application_session_id = $applicationSessionID;
 
         return $obj;
     }
@@ -197,7 +197,7 @@ final class Filter implements BaseModel
     public function withConnectionID(string $connectionID): self
     {
         $obj = clone $this;
-        $obj->connectionID = $connectionID;
+        $obj->connection_id = $connectionID;
 
         return $obj;
     }
@@ -230,7 +230,7 @@ final class Filter implements BaseModel
     public function withLegID(string $legID): self
     {
         $obj = clone $this;
-        $obj->legID = $legID;
+        $obj->leg_id = $legID;
 
         return $obj;
     }
@@ -252,7 +252,7 @@ final class Filter implements BaseModel
     public function withOccurredAt(OccurredAt $occurredAt): self
     {
         $obj = clone $this;
-        $obj->occurredAt = $occurredAt;
+        $obj->occurred_at = $occurredAt;
 
         return $obj;
     }
@@ -264,7 +264,7 @@ final class Filter implements BaseModel
         string $outboundOutboundVoiceProfileID
     ): self {
         $obj = clone $this;
-        $obj->outboundOutboundVoiceProfileID = $outboundOutboundVoiceProfileID;
+        $obj->outbound_outbound_voice_profile_id = $outboundOutboundVoiceProfileID;
 
         return $obj;
     }

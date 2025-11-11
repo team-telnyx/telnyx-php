@@ -13,15 +13,15 @@ use Telnyx\Webhooks\CallRecordingSavedWebhookEvent\Data\Payload\RecordingURLs;
 
 /**
  * @phpstan-type PayloadShape = array{
- *   callLegID?: string,
- *   callSessionID?: string,
- *   channels?: value-of<Channels>,
- *   clientState?: string,
- *   connectionID?: string,
- *   publicRecordingURLs?: PublicRecordingURLs,
- *   recordingEndedAt?: \DateTimeInterface,
- *   recordingStartedAt?: \DateTimeInterface,
- *   recordingURLs?: RecordingURLs,
+ *   call_leg_id?: string|null,
+ *   call_session_id?: string|null,
+ *   channels?: value-of<Channels>|null,
+ *   client_state?: string|null,
+ *   connection_id?: string|null,
+ *   public_recording_urls?: PublicRecordingURLs|null,
+ *   recording_ended_at?: \DateTimeInterface|null,
+ *   recording_started_at?: \DateTimeInterface|null,
+ *   recording_urls?: RecordingURLs|null,
  * }
  */
 final class Payload implements BaseModel
@@ -32,14 +32,14 @@ final class Payload implements BaseModel
     /**
      * ID that is unique to the call and can be used to correlate webhook events.
      */
-    #[Api('call_leg_id', optional: true)]
-    public ?string $callLegID;
+    #[Api(optional: true)]
+    public ?string $call_leg_id;
 
     /**
      * ID that is unique to the call session and can be used to correlate webhook events. Call session is a group of related call legs that logically belong to the same phone call, e.g. an inbound and outbound leg of a transferred call.
      */
-    #[Api('call_session_id', optional: true)]
-    public ?string $callSessionID;
+    #[Api(optional: true)]
+    public ?string $call_session_id;
 
     /**
      * Whether recording was recorded in `single` or `dual` channel.
@@ -52,38 +52,38 @@ final class Payload implements BaseModel
     /**
      * State received from a command.
      */
-    #[Api('client_state', optional: true)]
-    public ?string $clientState;
+    #[Api(optional: true)]
+    public ?string $client_state;
 
     /**
      * Call Control App ID (formerly Telnyx connection ID) used in the call.
      */
-    #[Api('connection_id', optional: true)]
-    public ?string $connectionID;
+    #[Api(optional: true)]
+    public ?string $connection_id;
 
     /**
      * Recording URLs in requested format. The URL is valid for as long as the file exists. For security purposes, this feature is activated on a per request basis.  Please contact customer support with your Account ID to request activation.
      */
-    #[Api('public_recording_urls', optional: true)]
-    public ?PublicRecordingURLs $publicRecordingURLs;
+    #[Api(optional: true)]
+    public ?PublicRecordingURLs $public_recording_urls;
 
     /**
      * ISO 8601 datetime of when recording ended.
      */
-    #[Api('recording_ended_at', optional: true)]
-    public ?\DateTimeInterface $recordingEndedAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $recording_ended_at;
 
     /**
      * ISO 8601 datetime of when recording started.
      */
-    #[Api('recording_started_at', optional: true)]
-    public ?\DateTimeInterface $recordingStartedAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $recording_started_at;
 
     /**
      * Recording URLs in requested format. These URLs are valid for 10 minutes. After 10 minutes, you may retrieve recordings via API using Reports -> Call Recordings documentation, or via Mission Control under Reporting -> Recordings.
      */
-    #[Api('recording_urls', optional: true)]
-    public ?RecordingURLs $recordingURLs;
+    #[Api(optional: true)]
+    public ?RecordingURLs $recording_urls;
 
     public function __construct()
     {
@@ -98,27 +98,27 @@ final class Payload implements BaseModel
      * @param Channels|value-of<Channels> $channels
      */
     public static function with(
-        ?string $callLegID = null,
-        ?string $callSessionID = null,
+        ?string $call_leg_id = null,
+        ?string $call_session_id = null,
         Channels|string|null $channels = null,
-        ?string $clientState = null,
-        ?string $connectionID = null,
-        ?PublicRecordingURLs $publicRecordingURLs = null,
-        ?\DateTimeInterface $recordingEndedAt = null,
-        ?\DateTimeInterface $recordingStartedAt = null,
-        ?RecordingURLs $recordingURLs = null,
+        ?string $client_state = null,
+        ?string $connection_id = null,
+        ?PublicRecordingURLs $public_recording_urls = null,
+        ?\DateTimeInterface $recording_ended_at = null,
+        ?\DateTimeInterface $recording_started_at = null,
+        ?RecordingURLs $recording_urls = null,
     ): self {
         $obj = new self;
 
-        null !== $callLegID && $obj->callLegID = $callLegID;
-        null !== $callSessionID && $obj->callSessionID = $callSessionID;
+        null !== $call_leg_id && $obj->call_leg_id = $call_leg_id;
+        null !== $call_session_id && $obj->call_session_id = $call_session_id;
         null !== $channels && $obj['channels'] = $channels;
-        null !== $clientState && $obj->clientState = $clientState;
-        null !== $connectionID && $obj->connectionID = $connectionID;
-        null !== $publicRecordingURLs && $obj->publicRecordingURLs = $publicRecordingURLs;
-        null !== $recordingEndedAt && $obj->recordingEndedAt = $recordingEndedAt;
-        null !== $recordingStartedAt && $obj->recordingStartedAt = $recordingStartedAt;
-        null !== $recordingURLs && $obj->recordingURLs = $recordingURLs;
+        null !== $client_state && $obj->client_state = $client_state;
+        null !== $connection_id && $obj->connection_id = $connection_id;
+        null !== $public_recording_urls && $obj->public_recording_urls = $public_recording_urls;
+        null !== $recording_ended_at && $obj->recording_ended_at = $recording_ended_at;
+        null !== $recording_started_at && $obj->recording_started_at = $recording_started_at;
+        null !== $recording_urls && $obj->recording_urls = $recording_urls;
 
         return $obj;
     }
@@ -129,7 +129,7 @@ final class Payload implements BaseModel
     public function withCallLegID(string $callLegID): self
     {
         $obj = clone $this;
-        $obj->callLegID = $callLegID;
+        $obj->call_leg_id = $callLegID;
 
         return $obj;
     }
@@ -140,7 +140,7 @@ final class Payload implements BaseModel
     public function withCallSessionID(string $callSessionID): self
     {
         $obj = clone $this;
-        $obj->callSessionID = $callSessionID;
+        $obj->call_session_id = $callSessionID;
 
         return $obj;
     }
@@ -164,7 +164,7 @@ final class Payload implements BaseModel
     public function withClientState(string $clientState): self
     {
         $obj = clone $this;
-        $obj->clientState = $clientState;
+        $obj->client_state = $clientState;
 
         return $obj;
     }
@@ -175,7 +175,7 @@ final class Payload implements BaseModel
     public function withConnectionID(string $connectionID): self
     {
         $obj = clone $this;
-        $obj->connectionID = $connectionID;
+        $obj->connection_id = $connectionID;
 
         return $obj;
     }
@@ -187,7 +187,7 @@ final class Payload implements BaseModel
         PublicRecordingURLs $publicRecordingURLs
     ): self {
         $obj = clone $this;
-        $obj->publicRecordingURLs = $publicRecordingURLs;
+        $obj->public_recording_urls = $publicRecordingURLs;
 
         return $obj;
     }
@@ -199,7 +199,7 @@ final class Payload implements BaseModel
         \DateTimeInterface $recordingEndedAt
     ): self {
         $obj = clone $this;
-        $obj->recordingEndedAt = $recordingEndedAt;
+        $obj->recording_ended_at = $recordingEndedAt;
 
         return $obj;
     }
@@ -211,7 +211,7 @@ final class Payload implements BaseModel
         \DateTimeInterface $recordingStartedAt
     ): self {
         $obj = clone $this;
-        $obj->recordingStartedAt = $recordingStartedAt;
+        $obj->recording_started_at = $recordingStartedAt;
 
         return $obj;
     }
@@ -222,7 +222,7 @@ final class Payload implements BaseModel
     public function withRecordingURLs(RecordingURLs $recordingURLs): self
     {
         $obj = clone $this;
-        $obj->recordingURLs = $recordingURLs;
+        $obj->recording_urls = $recordingURLs;
 
         return $obj;
     }

@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\WireguardPeers\WireguardPeerNewResponse\Data;
 
 /**
- * @phpstan-type WireguardPeerNewResponseShape = array{data?: Data}
+ * @phpstan-type WireguardPeerNewResponseShape = array{data?: Data|null}
  */
 final class WireguardPeerNewResponse implements BaseModel, ResponseConverter
 {

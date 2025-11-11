@@ -13,9 +13,9 @@ use Telnyx\CustomStorageCredentials\CustomStorageCredentialGetResponse\RecordTyp
 
 /**
  * @phpstan-type CustomStorageCredentialGetResponseShape = array{
- *   connectionID: string,
+ *   connection_id: string,
  *   data: CustomStorageConfiguration,
- *   recordType: value-of<RecordType>,
+ *   record_type: value-of<RecordType>,
  * }
  */
 final class CustomStorageCredentialGetResponse implements BaseModel, ResponseConverter
@@ -28,8 +28,8 @@ final class CustomStorageCredentialGetResponse implements BaseModel, ResponseCon
     /**
      * Uniquely identifies a Telnyx application (Call Control, TeXML) or Sip connection resource.
      */
-    #[Api('connection_id')]
-    public string $connectionID;
+    #[Api]
+    public string $connection_id;
 
     #[Api]
     public CustomStorageConfiguration $data;
@@ -37,10 +37,10 @@ final class CustomStorageCredentialGetResponse implements BaseModel, ResponseCon
     /**
      * Identifies record type.
      *
-     * @var value-of<RecordType> $recordType
+     * @var value-of<RecordType> $record_type
      */
-    #[Api('record_type', enum: RecordType::class)]
-    public string $recordType;
+    #[Api(enum: RecordType::class)]
+    public string $record_type;
 
     /**
      * `new CustomStorageCredentialGetResponse()` is missing required properties by the API.
@@ -48,7 +48,7 @@ final class CustomStorageCredentialGetResponse implements BaseModel, ResponseCon
      * To enforce required parameters use
      * ```
      * CustomStorageCredentialGetResponse::with(
-     *   connectionID: ..., data: ..., recordType: ...
+     *   connection_id: ..., data: ..., record_type: ...
      * )
      * ```
      *
@@ -71,18 +71,18 @@ final class CustomStorageCredentialGetResponse implements BaseModel, ResponseCon
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param RecordType|value-of<RecordType> $recordType
+     * @param RecordType|value-of<RecordType> $record_type
      */
     public static function with(
-        string $connectionID,
+        string $connection_id,
         CustomStorageConfiguration $data,
-        RecordType|string $recordType,
+        RecordType|string $record_type,
     ): self {
         $obj = new self;
 
-        $obj->connectionID = $connectionID;
+        $obj->connection_id = $connection_id;
         $obj->data = $data;
-        $obj['recordType'] = $recordType;
+        $obj['record_type'] = $record_type;
 
         return $obj;
     }
@@ -93,7 +93,7 @@ final class CustomStorageCredentialGetResponse implements BaseModel, ResponseCon
     public function withConnectionID(string $connectionID): self
     {
         $obj = clone $this;
-        $obj->connectionID = $connectionID;
+        $obj->connection_id = $connectionID;
 
         return $obj;
     }
@@ -114,7 +114,7 @@ final class CustomStorageCredentialGetResponse implements BaseModel, ResponseCon
     public function withRecordType(RecordType|string $recordType): self
     {
         $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }

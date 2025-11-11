@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type ActionRefreshResponseShape = array{result?: string}
+ * @phpstan-type ActionRefreshResponseShape = array{result?: string|null}
  */
 final class ActionRefreshResponse implements BaseModel, ResponseConverter
 {

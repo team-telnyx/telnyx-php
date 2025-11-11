@@ -24,42 +24,21 @@ final class JsonService implements JsonContract
      *
      * Deletes recording resource identified by recording id.
      *
-     * @param string $accountSid
+     * @param array{account_sid: string}|JsonDeleteRecordingSidJsonParams $params
      *
      * @throws APIException
      */
     public function deleteRecordingSidJson(
         string $recordingSid,
-        $accountSid,
-        ?RequestOptions $requestOptions = null
-    ): mixed {
-        $params = ['accountSid' => $accountSid];
-
-        return $this->deleteRecordingSidJsonRaw(
-            $recordingSid,
-            $params,
-            $requestOptions
-        );
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function deleteRecordingSidJsonRaw(
-        string $recordingSid,
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|JsonDeleteRecordingSidJsonParams $params,
+        ?RequestOptions $requestOptions = null,
     ): mixed {
         [$parsed, $options] = JsonDeleteRecordingSidJsonParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
-        $accountSid = $parsed['accountSid'];
-        unset($parsed['accountSid']);
+        $accountSid = $parsed['account_sid'];
+        unset($parsed['account_sid']);
 
         // @phpstan-ignore-next-line;
         return $this->client->request(
@@ -77,42 +56,21 @@ final class JsonService implements JsonContract
      *
      * Returns recording resource identified by recording id.
      *
-     * @param string $accountSid
+     * @param array{account_sid: string}|JsonRetrieveRecordingSidJsonParams $params
      *
      * @throws APIException
      */
     public function retrieveRecordingSidJson(
         string $recordingSid,
-        $accountSid,
-        ?RequestOptions $requestOptions = null
-    ): TexmlGetCallRecordingResponseBody {
-        $params = ['accountSid' => $accountSid];
-
-        return $this->retrieveRecordingSidJsonRaw(
-            $recordingSid,
-            $params,
-            $requestOptions
-        );
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function retrieveRecordingSidJsonRaw(
-        string $recordingSid,
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|JsonRetrieveRecordingSidJsonParams $params,
+        ?RequestOptions $requestOptions = null,
     ): TexmlGetCallRecordingResponseBody {
         [$parsed, $options] = JsonRetrieveRecordingSidJsonParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
-        $accountSid = $parsed['accountSid'];
-        unset($parsed['accountSid']);
+        $accountSid = $parsed['account_sid'];
+        unset($parsed['account_sid']);
 
         // @phpstan-ignore-next-line;
         return $this->client->request(

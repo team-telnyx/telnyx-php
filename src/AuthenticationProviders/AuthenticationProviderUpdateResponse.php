@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type AuthenticationProviderUpdateResponseShape = array{
- *   data?: AuthenticationProvider
+ *   data?: AuthenticationProvider|null
  * }
  */
 final class AuthenticationProviderUpdateResponse implements BaseModel, ResponseConverter

@@ -35,7 +35,7 @@ final class CivicAddressesTest extends TestCase
 
         $result = $this->client->externalConnections->civicAddresses->retrieve(
             '318fb664-d341-44d2-8405-e6bfb9ced6d9',
-            'id'
+            ['id' => 'id']
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -50,7 +50,7 @@ final class CivicAddressesTest extends TestCase
 
         $result = $this->client->externalConnections->civicAddresses->retrieve(
             '318fb664-d341-44d2-8405-e6bfb9ced6d9',
-            'id'
+            ['id' => 'id']
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -63,7 +63,10 @@ final class CivicAddressesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->externalConnections->civicAddresses->list('id');
+        $result = $this->client->externalConnections->civicAddresses->list(
+            'id',
+            []
+        );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

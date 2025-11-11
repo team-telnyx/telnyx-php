@@ -33,11 +33,11 @@ final class MigrationsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->storage->migrations->create(
-            sourceID: 'source_id',
-            targetBucketName: 'target_bucket_name',
-            targetRegion: 'target_region',
-        );
+        $result = $this->client->storage->migrations->create([
+            'source_id' => 'source_id',
+            'target_bucket_name' => 'target_bucket_name',
+            'target_region' => 'target_region',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -49,11 +49,11 @@ final class MigrationsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->storage->migrations->create(
-            sourceID: 'source_id',
-            targetBucketName: 'target_bucket_name',
-            targetRegion: 'target_region',
-        );
+        $result = $this->client->storage->migrations->create([
+            'source_id' => 'source_id',
+            'target_bucket_name' => 'target_bucket_name',
+            'target_region' => 'target_region',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

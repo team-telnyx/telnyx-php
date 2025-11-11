@@ -10,11 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type CampaignSharingStatusShape = array{
- *   downstreamCnpID?: string,
- *   sharedDate?: string,
- *   sharingStatus?: string,
- *   statusDate?: string,
- *   upstreamCnpID?: string,
+ *   downstreamCnpId?: string|null,
+ *   sharedDate?: string|null,
+ *   sharingStatus?: string|null,
+ *   statusDate?: string|null,
+ *   upstreamCnpId?: string|null,
  * }
  */
 final class CampaignSharingStatus implements BaseModel
@@ -22,8 +22,8 @@ final class CampaignSharingStatus implements BaseModel
     /** @use SdkModel<CampaignSharingStatusShape> */
     use SdkModel;
 
-    #[Api('downstreamCnpId', optional: true)]
-    public ?string $downstreamCnpID;
+    #[Api(optional: true)]
+    public ?string $downstreamCnpId;
 
     #[Api(optional: true)]
     public ?string $sharedDate;
@@ -34,8 +34,8 @@ final class CampaignSharingStatus implements BaseModel
     #[Api(optional: true)]
     public ?string $statusDate;
 
-    #[Api('upstreamCnpId', optional: true)]
-    public ?string $upstreamCnpID;
+    #[Api(optional: true)]
+    public ?string $upstreamCnpId;
 
     public function __construct()
     {
@@ -48,19 +48,19 @@ final class CampaignSharingStatus implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $downstreamCnpID = null,
+        ?string $downstreamCnpId = null,
         ?string $sharedDate = null,
         ?string $sharingStatus = null,
         ?string $statusDate = null,
-        ?string $upstreamCnpID = null,
+        ?string $upstreamCnpId = null,
     ): self {
         $obj = new self;
 
-        null !== $downstreamCnpID && $obj->downstreamCnpID = $downstreamCnpID;
+        null !== $downstreamCnpId && $obj->downstreamCnpId = $downstreamCnpId;
         null !== $sharedDate && $obj->sharedDate = $sharedDate;
         null !== $sharingStatus && $obj->sharingStatus = $sharingStatus;
         null !== $statusDate && $obj->statusDate = $statusDate;
-        null !== $upstreamCnpID && $obj->upstreamCnpID = $upstreamCnpID;
+        null !== $upstreamCnpId && $obj->upstreamCnpId = $upstreamCnpId;
 
         return $obj;
     }
@@ -68,7 +68,7 @@ final class CampaignSharingStatus implements BaseModel
     public function withDownstreamCnpID(string $downstreamCnpID): self
     {
         $obj = clone $this;
-        $obj->downstreamCnpID = $downstreamCnpID;
+        $obj->downstreamCnpId = $downstreamCnpID;
 
         return $obj;
     }
@@ -100,7 +100,7 @@ final class CampaignSharingStatus implements BaseModel
     public function withUpstreamCnpID(string $upstreamCnpID): self
     {
         $obj = clone $this;
-        $obj->upstreamCnpID = $upstreamCnpID;
+        $obj->upstreamCnpId = $upstreamCnpID;
 
         return $obj;
     }

@@ -17,7 +17,7 @@ use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigListParams\UpdatedAt;
  * @see Telnyx\MessagingProfiles\AutorespConfigs->list
  *
  * @phpstan-type AutorespConfigListParamsShape = array{
- *   countryCode?: string, createdAt?: CreatedAt, updatedAt?: UpdatedAt
+ *   country_code?: string, created_at?: CreatedAt, updated_at?: UpdatedAt
  * }
  */
 final class AutorespConfigListParams implements BaseModel
@@ -27,19 +27,19 @@ final class AutorespConfigListParams implements BaseModel
     use SdkParams;
 
     #[Api(optional: true)]
-    public ?string $countryCode;
+    public ?string $country_code;
 
     /**
      * Consolidated created_at parameter (deepObject style). Originally: created_at[gte], created_at[lte].
      */
     #[Api(optional: true)]
-    public ?CreatedAt $createdAt;
+    public ?CreatedAt $created_at;
 
     /**
      * Consolidated updated_at parameter (deepObject style). Originally: updated_at[gte], updated_at[lte].
      */
     #[Api(optional: true)]
-    public ?UpdatedAt $updatedAt;
+    public ?UpdatedAt $updated_at;
 
     public function __construct()
     {
@@ -52,15 +52,15 @@ final class AutorespConfigListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $countryCode = null,
-        ?CreatedAt $createdAt = null,
-        ?UpdatedAt $updatedAt = null,
+        ?string $country_code = null,
+        ?CreatedAt $created_at = null,
+        ?UpdatedAt $updated_at = null,
     ): self {
         $obj = new self;
 
-        null !== $countryCode && $obj->countryCode = $countryCode;
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
+        null !== $country_code && $obj->country_code = $country_code;
+        null !== $created_at && $obj->created_at = $created_at;
+        null !== $updated_at && $obj->updated_at = $updated_at;
 
         return $obj;
     }
@@ -68,7 +68,7 @@ final class AutorespConfigListParams implements BaseModel
     public function withCountryCode(string $countryCode): self
     {
         $obj = clone $this;
-        $obj->countryCode = $countryCode;
+        $obj->country_code = $countryCode;
 
         return $obj;
     }
@@ -79,7 +79,7 @@ final class AutorespConfigListParams implements BaseModel
     public function withCreatedAt(CreatedAt $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }
@@ -90,7 +90,7 @@ final class AutorespConfigListParams implements BaseModel
     public function withUpdatedAt(UpdatedAt $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $obj->updated_at = $updatedAt;
 
         return $obj;
     }

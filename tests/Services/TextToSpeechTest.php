@@ -33,10 +33,9 @@ final class TextToSpeechTest extends TestCase
             $this->markTestSkipped("Prism doesn't support audio/mpeg responses");
         }
 
-        $result = $this->client->textToSpeech->generateSpeech(
-            text: 'text',
-            voice: 'voice'
-        );
+        $result = $this->client->textToSpeech->generateSpeech([
+            'text' => 'text', 'voice' => 'voice',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -48,10 +47,9 @@ final class TextToSpeechTest extends TestCase
             $this->markTestSkipped("Prism doesn't support audio/mpeg responses");
         }
 
-        $result = $this->client->textToSpeech->generateSpeech(
-            text: 'text',
-            voice: 'voice'
-        );
+        $result = $this->client->textToSpeech->generateSpeech([
+            'text' => 'text', 'voice' => 'voice',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -63,7 +61,7 @@ final class TextToSpeechTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->textToSpeech->listVoices();
+        $result = $this->client->textToSpeech->listVoices([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

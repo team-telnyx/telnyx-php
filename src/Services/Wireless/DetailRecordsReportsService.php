@@ -15,8 +15,6 @@ use Telnyx\Wireless\DetailRecordsReports\DetailRecordsReportListParams;
 use Telnyx\Wireless\DetailRecordsReports\DetailRecordsReportListResponse;
 use Telnyx\Wireless\DetailRecordsReports\DetailRecordsReportNewResponse;
 
-use const Telnyx\Core\OMIT as omit;
-
 final class DetailRecordsReportsService implements DetailRecordsReportsContract
 {
     /**
@@ -29,35 +27,19 @@ final class DetailRecordsReportsService implements DetailRecordsReportsContract
      *
      * Asynchronously create a report containing Wireless Detail Records (WDRs) for the SIM cards that consumed wireless data in the given time period.
      *
-     * @param string $endTime ISO 8601 formatted date-time indicating the end time
-     * @param string $startTime ISO 8601 formatted date-time indicating the start time
+     * @param array{
+     *   end_time?: string, start_time?: string
+     * }|DetailRecordsReportCreateParams $params
      *
      * @throws APIException
      */
     public function create(
-        $endTime = omit,
-        $startTime = omit,
-        ?RequestOptions $requestOptions = null
-    ): DetailRecordsReportNewResponse {
-        $params = ['endTime' => $endTime, 'startTime' => $startTime];
-
-        return $this->createRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|DetailRecordsReportCreateParams $params,
+        ?RequestOptions $requestOptions = null,
     ): DetailRecordsReportNewResponse {
         [$parsed, $options] = DetailRecordsReportCreateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -95,35 +77,19 @@ final class DetailRecordsReportsService implements DetailRecordsReportsContract
      *
      * Returns the WDR Reports that match the given parameters.
      *
-     * @param int $pageNumber the page number to load
-     * @param int $pageSize the size of the page
+     * @param array{
+     *   page_number_?: int, page_size_?: int
+     * }|DetailRecordsReportListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $pageNumber = omit,
-        $pageSize = omit,
-        ?RequestOptions $requestOptions = null
-    ): DetailRecordsReportListResponse {
-        $params = ['pageNumber' => $pageNumber, 'pageSize' => $pageSize];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|DetailRecordsReportListParams $params,
+        ?RequestOptions $requestOptions = null,
     ): DetailRecordsReportListResponse {
         [$parsed, $options] = DetailRecordsReportListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

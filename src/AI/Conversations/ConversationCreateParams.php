@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\AI\Conversations->create
  *
  * @phpstan-type ConversationCreateParamsShape = array{
- *   metadata?: array<string, string>, name?: string
+ *   metadata?: array<string,string>, name?: string
  * }
  */
 final class ConversationCreateParams implements BaseModel
@@ -27,7 +27,7 @@ final class ConversationCreateParams implements BaseModel
     /**
      * Metadata associated with the conversation.
      *
-     * @var array<string, string>|null $metadata
+     * @var array<string,string>|null $metadata
      */
     #[Api(map: 'string', optional: true)]
     public ?array $metadata;
@@ -45,7 +45,7 @@ final class ConversationCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param array<string, string> $metadata
+     * @param array<string,string> $metadata
      */
     public static function with(
         ?array $metadata = null,
@@ -62,7 +62,7 @@ final class ConversationCreateParams implements BaseModel
     /**
      * Metadata associated with the conversation.
      *
-     * @param array<string, string> $metadata
+     * @param array<string,string> $metadata
      */
     public function withMetadata(array $metadata): self
     {

@@ -33,7 +33,7 @@ final class ClustersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ai->clusters->retrieve('task_id');
+        $result = $this->client->ai->clusters->retrieve('task_id', []);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -45,7 +45,7 @@ final class ClustersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ai->clusters->list();
+        $result = $this->client->ai->clusters->list([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -69,7 +69,7 @@ final class ClustersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ai->clusters->compute(bucket: 'bucket');
+        $result = $this->client->ai->clusters->compute(['bucket' => 'bucket']);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -81,7 +81,7 @@ final class ClustersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ai->clusters->compute(bucket: 'bucket');
+        $result = $this->client->ai->clusters->compute(['bucket' => 'bucket']);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -93,7 +93,7 @@ final class ClustersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ai->clusters->fetchGraph('task_id');
+        $result = $this->client->ai->clusters->fetchGraph('task_id', []);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

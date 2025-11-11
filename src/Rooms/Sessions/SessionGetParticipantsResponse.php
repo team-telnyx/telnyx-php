@@ -14,7 +14,7 @@ use Telnyx\RoomParticipant;
 
 /**
  * @phpstan-type SessionGetParticipantsResponseShape = array{
- *   data?: list<RoomParticipant>, meta?: PaginationMeta
+ *   data?: list<RoomParticipant>|null, meta?: PaginationMeta|null
  * }
  */
 final class SessionGetParticipantsResponse implements BaseModel, ResponseConverter

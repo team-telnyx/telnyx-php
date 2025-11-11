@@ -13,12 +13,12 @@ use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListParams\F
  * Consolidated filter parameter (deepObject style). Originally: filter[cloud_provider], filter[cloud_provider_region], filter[location.region], filter[location.site], filter[location.pop], filter[location.code].
  *
  * @phpstan-type FilterShape = array{
- *   cloudProvider?: value-of<CloudProvider>,
- *   cloudProviderRegion?: string,
- *   locationCode?: string,
- *   locationPop?: string,
- *   locationRegion?: string,
- *   locationSite?: string,
+ *   cloud_provider?: value-of<CloudProvider>|null,
+ *   cloud_provider_region?: string|null,
+ *   location_code?: string|null,
+ *   location_pop?: string|null,
+ *   location_region?: string|null,
+ *   location_site?: string|null,
  * }
  */
 final class Filter implements BaseModel
@@ -29,40 +29,40 @@ final class Filter implements BaseModel
     /**
      * The Virtual Private Cloud provider.
      *
-     * @var value-of<CloudProvider>|null $cloudProvider
+     * @var value-of<CloudProvider>|null $cloud_provider
      */
-    #[Api('cloud_provider', enum: CloudProvider::class, optional: true)]
-    public ?string $cloudProvider;
+    #[Api(enum: CloudProvider::class, optional: true)]
+    public ?string $cloud_provider;
 
     /**
      * The region of specific cloud provider.
      */
-    #[Api('cloud_provider_region', optional: true)]
-    public ?string $cloudProviderRegion;
+    #[Api(optional: true)]
+    public ?string $cloud_provider_region;
 
     /**
      * The code of associated location to filter on.
      */
     #[Api('location.code', optional: true)]
-    public ?string $locationCode;
+    public ?string $location_code;
 
     /**
      * The POP of associated location to filter on.
      */
     #[Api('location.pop', optional: true)]
-    public ?string $locationPop;
+    public ?string $location_pop;
 
     /**
      * The region of associated location to filter on.
      */
     #[Api('location.region', optional: true)]
-    public ?string $locationRegion;
+    public ?string $location_region;
 
     /**
      * The site of associated location to filter on.
      */
     #[Api('location.site', optional: true)]
-    public ?string $locationSite;
+    public ?string $location_site;
 
     public function __construct()
     {
@@ -74,24 +74,24 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CloudProvider|value-of<CloudProvider> $cloudProvider
+     * @param CloudProvider|value-of<CloudProvider> $cloud_provider
      */
     public static function with(
-        CloudProvider|string|null $cloudProvider = null,
-        ?string $cloudProviderRegion = null,
-        ?string $locationCode = null,
-        ?string $locationPop = null,
-        ?string $locationRegion = null,
-        ?string $locationSite = null,
+        CloudProvider|string|null $cloud_provider = null,
+        ?string $cloud_provider_region = null,
+        ?string $location_code = null,
+        ?string $location_pop = null,
+        ?string $location_region = null,
+        ?string $location_site = null,
     ): self {
         $obj = new self;
 
-        null !== $cloudProvider && $obj['cloudProvider'] = $cloudProvider;
-        null !== $cloudProviderRegion && $obj->cloudProviderRegion = $cloudProviderRegion;
-        null !== $locationCode && $obj->locationCode = $locationCode;
-        null !== $locationPop && $obj->locationPop = $locationPop;
-        null !== $locationRegion && $obj->locationRegion = $locationRegion;
-        null !== $locationSite && $obj->locationSite = $locationSite;
+        null !== $cloud_provider && $obj['cloud_provider'] = $cloud_provider;
+        null !== $cloud_provider_region && $obj->cloud_provider_region = $cloud_provider_region;
+        null !== $location_code && $obj->location_code = $location_code;
+        null !== $location_pop && $obj->location_pop = $location_pop;
+        null !== $location_region && $obj->location_region = $location_region;
+        null !== $location_site && $obj->location_site = $location_site;
 
         return $obj;
     }
@@ -104,7 +104,7 @@ final class Filter implements BaseModel
     public function withCloudProvider(CloudProvider|string $cloudProvider): self
     {
         $obj = clone $this;
-        $obj['cloudProvider'] = $cloudProvider;
+        $obj['cloud_provider'] = $cloudProvider;
 
         return $obj;
     }
@@ -115,7 +115,7 @@ final class Filter implements BaseModel
     public function withCloudProviderRegion(string $cloudProviderRegion): self
     {
         $obj = clone $this;
-        $obj->cloudProviderRegion = $cloudProviderRegion;
+        $obj->cloud_provider_region = $cloudProviderRegion;
 
         return $obj;
     }
@@ -126,7 +126,7 @@ final class Filter implements BaseModel
     public function withLocationCode(string $locationCode): self
     {
         $obj = clone $this;
-        $obj->locationCode = $locationCode;
+        $obj->location_code = $locationCode;
 
         return $obj;
     }
@@ -137,7 +137,7 @@ final class Filter implements BaseModel
     public function withLocationPop(string $locationPop): self
     {
         $obj = clone $this;
-        $obj->locationPop = $locationPop;
+        $obj->location_pop = $locationPop;
 
         return $obj;
     }
@@ -148,7 +148,7 @@ final class Filter implements BaseModel
     public function withLocationRegion(string $locationRegion): self
     {
         $obj = clone $this;
-        $obj->locationRegion = $locationRegion;
+        $obj->location_region = $locationRegion;
 
         return $obj;
     }
@@ -159,7 +159,7 @@ final class Filter implements BaseModel
     public function withLocationSite(string $locationSite): self
     {
         $obj = clone $this;
-        $obj->locationSite = $locationSite;
+        $obj->location_site = $locationSite;
 
         return $obj;
     }

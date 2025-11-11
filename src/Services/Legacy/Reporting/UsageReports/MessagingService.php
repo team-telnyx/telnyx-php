@@ -15,8 +15,6 @@ use Telnyx\Legacy\Reporting\UsageReports\Messaging\MessagingNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Legacy\Reporting\UsageReports\MessagingContract;
 
-use const Telnyx\Core\OMIT as omit;
-
 final class MessagingService implements MessagingContract
 {
     /**
@@ -29,50 +27,24 @@ final class MessagingService implements MessagingContract
      *
      * Creates a new legacy usage V2 MDR report request with the specified filters
      *
-     * @param int $aggregationType Aggregation type: No aggregation = 0, By Messaging Profile = 1, By Tags = 2
-     * @param \DateTimeInterface $endTime
-     * @param list<string> $managedAccounts List of managed accounts to include
-     * @param list<string> $profiles List of messaging profile IDs to filter by
-     * @param bool $selectAllManagedAccounts
-     * @param \DateTimeInterface $startTime
+     * @param array{
+     *   aggregation_type: int,
+     *   end_time?: string|\DateTimeInterface,
+     *   managed_accounts?: list<string>,
+     *   profiles?: list<string>,
+     *   select_all_managed_accounts?: bool,
+     *   start_time?: string|\DateTimeInterface,
+     * }|MessagingCreateParams $params
      *
      * @throws APIException
      */
     public function create(
-        $aggregationType,
-        $endTime = omit,
-        $managedAccounts = omit,
-        $profiles = omit,
-        $selectAllManagedAccounts = omit,
-        $startTime = omit,
-        ?RequestOptions $requestOptions = null,
-    ): MessagingNewResponse {
-        $params = [
-            'aggregationType' => $aggregationType,
-            'endTime' => $endTime,
-            'managedAccounts' => $managedAccounts,
-            'profiles' => $profiles,
-            'selectAllManagedAccounts' => $selectAllManagedAccounts,
-            'startTime' => $startTime,
-        ];
-
-        return $this->createRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
+        array|MessagingCreateParams $params,
         ?RequestOptions $requestOptions = null
     ): MessagingNewResponse {
         [$parsed, $options] = MessagingCreateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -111,35 +83,17 @@ final class MessagingService implements MessagingContract
      *
      * Fetch all previous requests for MDR usage reports.
      *
-     * @param int $page Page number
-     * @param int $perPage Size of the page
+     * @param array{page?: int, per_page?: int}|MessagingListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $page = omit,
-        $perPage = omit,
-        ?RequestOptions $requestOptions = null
-    ): MessagingListResponse {
-        $params = ['page' => $page, 'perPage' => $perPage];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
+        array|MessagingListParams $params,
         ?RequestOptions $requestOptions = null
     ): MessagingListResponse {
         [$parsed, $options] = MessagingListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

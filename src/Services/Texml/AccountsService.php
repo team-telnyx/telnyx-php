@@ -17,27 +17,25 @@ use Telnyx\Texml\Accounts\AccountGetTranscriptionsJsonResponse;
 use Telnyx\Texml\Accounts\AccountRetrieveRecordingsJsonParams;
 use Telnyx\Texml\Accounts\AccountRetrieveTranscriptionsJsonParams;
 
-use const Telnyx\Core\OMIT as omit;
-
 final class AccountsService implements AccountsContract
 {
     /**
-     * @@api
+     * @api
      */
     public CallsService $calls;
 
     /**
-     * @@api
+     * @api
      */
     public ConferencesService $conferences;
 
     /**
-     * @@api
+     * @api
      */
     public RecordingsService $recordings;
 
     /**
-     * @@api
+     * @api
      */
     public TranscriptionsService $transcriptions;
 
@@ -57,45 +55,20 @@ final class AccountsService implements AccountsContract
      *
      * Returns multiple recording resources for an account.
      *
-     * @param \DateTimeInterface $dateCreated Filters recording by the creation date. Expected format is ISO8601 date or date-time, ie. {YYYY}-{MM}-{DD} or {YYYY}-{MM}-{DD}T{hh}:{mm}:{ss}Z. Also accepts inequality operators, e.g. DateCreated>=2023-05-22.
-     * @param int $page the number of the page to be displayed, zero-indexed, should be used in conjuction with PageToken
-     * @param int $pageSize The number of records to be displayed on a page
+     * @param array{
+     *   DateCreated?: string|\DateTimeInterface, Page?: int, PageSize?: int
+     * }|AccountRetrieveRecordingsJsonParams $params
      *
      * @throws APIException
      */
     public function retrieveRecordingsJson(
         string $accountSid,
-        $dateCreated = omit,
-        $page = omit,
-        $pageSize = omit,
+        array|AccountRetrieveRecordingsJsonParams $params,
         ?RequestOptions $requestOptions = null,
-    ): AccountGetRecordingsJsonResponse {
-        $params = [
-            'dateCreated' => $dateCreated, 'page' => $page, 'pageSize' => $pageSize,
-        ];
-
-        return $this->retrieveRecordingsJsonRaw(
-            $accountSid,
-            $params,
-            $requestOptions
-        );
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function retrieveRecordingsJsonRaw(
-        string $accountSid,
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): AccountGetRecordingsJsonResponse {
         [$parsed, $options] = AccountRetrieveRecordingsJsonParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -113,41 +86,20 @@ final class AccountsService implements AccountsContract
      *
      * Returns multiple recording transcription resources for an account.
      *
-     * @param int $pageSize The number of records to be displayed on a page
-     * @param string $pageToken used to request the next page of results
+     * @param array{
+     *   PageSize?: int, PageToken?: string
+     * }|AccountRetrieveTranscriptionsJsonParams $params
      *
      * @throws APIException
      */
     public function retrieveTranscriptionsJson(
         string $accountSid,
-        $pageSize = omit,
-        $pageToken = omit,
+        array|AccountRetrieveTranscriptionsJsonParams $params,
         ?RequestOptions $requestOptions = null,
-    ): AccountGetTranscriptionsJsonResponse {
-        $params = ['pageSize' => $pageSize, 'pageToken' => $pageToken];
-
-        return $this->retrieveTranscriptionsJsonRaw(
-            $accountSid,
-            $params,
-            $requestOptions
-        );
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function retrieveTranscriptionsJsonRaw(
-        string $accountSid,
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): AccountGetTranscriptionsJsonResponse {
         [$parsed, $options] = AccountRetrieveTranscriptionsJsonParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

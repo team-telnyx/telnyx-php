@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type TexmlApplicationUpdateResponseShape = array{
- *   data?: TexmlApplication
+ *   data?: TexmlApplication|null
  * }
  */
 final class TexmlApplicationUpdateResponse implements BaseModel, ResponseConverter

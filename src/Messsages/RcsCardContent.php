@@ -11,10 +11,10 @@ use Telnyx\Messsages\RcsCardContent\Media;
 
 /**
  * @phpstan-type RcsCardContentShape = array{
- *   description?: string,
- *   media?: Media,
- *   suggestions?: list<RcsSuggestion>,
- *   title?: string,
+ *   description?: string|null,
+ *   media?: Media|null,
+ *   suggestions?: list<RcsSuggestion>|null,
+ *   title?: string|null,
  * }
  */
 final class RcsCardContent implements BaseModel

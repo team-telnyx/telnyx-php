@@ -33,14 +33,14 @@ final class UserAddressesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->userAddresses->create(
-            businessName: "Toy-O'Kon",
-            countryCode: 'US',
-            firstName: 'Alfred',
-            lastName: 'Foster',
-            locality: 'Austin',
-            streetAddress: '600 Congress Avenue',
-        );
+        $result = $this->client->userAddresses->create([
+            'business_name' => "Toy-O'Kon",
+            'country_code' => 'US',
+            'first_name' => 'Alfred',
+            'last_name' => 'Foster',
+            'locality' => 'Austin',
+            'street_address' => '600 Congress Avenue',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -52,14 +52,14 @@ final class UserAddressesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->userAddresses->create(
-            businessName: "Toy-O'Kon",
-            countryCode: 'US',
-            firstName: 'Alfred',
-            lastName: 'Foster',
-            locality: 'Austin',
-            streetAddress: '600 Congress Avenue',
-        );
+        $result = $this->client->userAddresses->create([
+            'business_name' => "Toy-O'Kon",
+            'country_code' => 'US',
+            'first_name' => 'Alfred',
+            'last_name' => 'Foster',
+            'locality' => 'Austin',
+            'street_address' => '600 Congress Avenue',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -83,7 +83,7 @@ final class UserAddressesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->userAddresses->list();
+        $result = $this->client->userAddresses->list([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

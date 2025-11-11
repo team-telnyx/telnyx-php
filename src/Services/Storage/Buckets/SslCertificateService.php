@@ -13,8 +13,6 @@ use Telnyx\Storage\Buckets\SslCertificate\SslCertificateDeleteResponse;
 use Telnyx\Storage\Buckets\SslCertificate\SslCertificateGetResponse;
 use Telnyx\Storage\Buckets\SslCertificate\SslCertificateNewResponse;
 
-use const Telnyx\Core\OMIT as omit;
-
 final class SslCertificateService implements SslCertificateContract
 {
     /**
@@ -27,37 +25,20 @@ final class SslCertificateService implements SslCertificateContract
      *
      * Uploads an SSL certificate and its matching secret so that you can use Telnyx’s storage as your CDN.
      *
-     * @param string $certificate The SSL certificate file
-     * @param string $privateKey The private key file
+     * @param array{
+     *   certificate?: string, private_key?: string
+     * }|SslCertificateCreateParams $params
      *
      * @throws APIException
      */
     public function create(
         string $bucketName,
-        $certificate = omit,
-        $privateKey = omit,
+        array|SslCertificateCreateParams $params,
         ?RequestOptions $requestOptions = null,
-    ): SslCertificateNewResponse {
-        $params = ['certificate' => $certificate, 'privateKey' => $privateKey];
-
-        return $this->createRaw($bucketName, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        string $bucketName,
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): SslCertificateNewResponse {
         [$parsed, $options] = SslCertificateCreateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

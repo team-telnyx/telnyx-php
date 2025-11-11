@@ -35,7 +35,7 @@ final class CallsTest extends TestCase
 
         $result = $this->client->queues->calls->retrieve(
             'call_control_id',
-            'queue_name'
+            ['queue_name' => 'queue_name']
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -50,7 +50,7 @@ final class CallsTest extends TestCase
 
         $result = $this->client->queues->calls->retrieve(
             'call_control_id',
-            'queue_name'
+            ['queue_name' => 'queue_name']
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -65,7 +65,7 @@ final class CallsTest extends TestCase
 
         $result = $this->client->queues->calls->update(
             'call_control_id',
-            queueName: 'queue_name'
+            ['queue_name' => 'queue_name']
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -80,7 +80,7 @@ final class CallsTest extends TestCase
 
         $result = $this->client->queues->calls->update(
             'call_control_id',
-            queueName: 'queue_name'
+            ['queue_name' => 'queue_name']
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -93,7 +93,7 @@ final class CallsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->queues->calls->list('queue_name');
+        $result = $this->client->queues->calls->list('queue_name', []);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -107,7 +107,7 @@ final class CallsTest extends TestCase
 
         $result = $this->client->queues->calls->remove(
             'call_control_id',
-            'queue_name'
+            ['queue_name' => 'queue_name']
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -122,7 +122,7 @@ final class CallsTest extends TestCase
 
         $result = $this->client->queues->calls->remove(
             'call_control_id',
-            'queue_name'
+            ['queue_name' => 'queue_name']
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType

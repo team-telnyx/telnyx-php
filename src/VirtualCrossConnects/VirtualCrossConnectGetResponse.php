@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectGetResponse\Data;
 
 /**
- * @phpstan-type VirtualCrossConnectGetResponseShape = array{data?: Data}
+ * @phpstan-type VirtualCrossConnectGetResponseShape = array{data?: Data|null}
  */
 final class VirtualCrossConnectGetResponse implements BaseModel, ResponseConverter
 {

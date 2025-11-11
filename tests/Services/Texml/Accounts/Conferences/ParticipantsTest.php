@@ -41,8 +41,7 @@ final class ParticipantsTest extends TestCase
             ->participants
             ->retrieve(
                 'call_sid_or_participant_label',
-                accountSid: 'account_sid',
-                conferenceSid: 'conference_sid',
+                ['account_sid' => 'account_sid', 'conference_sid' => 'conference_sid'],
             )
         ;
 
@@ -64,8 +63,7 @@ final class ParticipantsTest extends TestCase
             ->participants
             ->retrieve(
                 'call_sid_or_participant_label',
-                accountSid: 'account_sid',
-                conferenceSid: 'conference_sid',
+                ['account_sid' => 'account_sid', 'conference_sid' => 'conference_sid'],
             )
         ;
 
@@ -81,8 +79,7 @@ final class ParticipantsTest extends TestCase
 
         $result = $this->client->texml->accounts->conferences->participants->update(
             'call_sid_or_participant_label',
-            accountSid: 'account_sid',
-            conferenceSid: 'conference_sid',
+            ['account_sid' => 'account_sid', 'conference_sid' => 'conference_sid'],
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -97,8 +94,7 @@ final class ParticipantsTest extends TestCase
 
         $result = $this->client->texml->accounts->conferences->participants->update(
             'call_sid_or_participant_label',
-            accountSid: 'account_sid',
-            conferenceSid: 'conference_sid',
+            ['account_sid' => 'account_sid', 'conference_sid' => 'conference_sid'],
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -113,8 +109,7 @@ final class ParticipantsTest extends TestCase
 
         $result = $this->client->texml->accounts->conferences->participants->delete(
             'call_sid_or_participant_label',
-            accountSid: 'account_sid',
-            conferenceSid: 'conference_sid',
+            ['account_sid' => 'account_sid', 'conference_sid' => 'conference_sid'],
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -129,8 +124,7 @@ final class ParticipantsTest extends TestCase
 
         $result = $this->client->texml->accounts->conferences->participants->delete(
             'call_sid_or_participant_label',
-            accountSid: 'account_sid',
-            conferenceSid: 'conference_sid',
+            ['account_sid' => 'account_sid', 'conference_sid' => 'conference_sid'],
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -149,7 +143,7 @@ final class ParticipantsTest extends TestCase
             ->accounts
             ->conferences
             ->participants
-            ->participants('conference_sid', accountSid: 'account_sid')
+            ->participants('conference_sid', ['account_sid' => 'account_sid'])
         ;
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -168,7 +162,7 @@ final class ParticipantsTest extends TestCase
             ->accounts
             ->conferences
             ->participants
-            ->participants('conference_sid', accountSid: 'account_sid')
+            ->participants('conference_sid', ['account_sid' => 'account_sid'])
         ;
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -187,7 +181,10 @@ final class ParticipantsTest extends TestCase
             ->accounts
             ->conferences
             ->participants
-            ->retrieveParticipants('conference_sid', 'account_sid')
+            ->retrieveParticipants(
+                'conference_sid',
+                ['account_sid' => 'account_sid']
+            )
         ;
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -206,7 +203,10 @@ final class ParticipantsTest extends TestCase
             ->accounts
             ->conferences
             ->participants
-            ->retrieveParticipants('conference_sid', 'account_sid')
+            ->retrieveParticipants(
+                'conference_sid',
+                ['account_sid' => 'account_sid']
+            )
         ;
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType

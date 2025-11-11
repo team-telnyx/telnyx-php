@@ -6,21 +6,15 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\NumberOrderPhoneNumbers\UpdateRegulatoryRequirement;
 use Telnyx\NumberOrders\NumberOrderCreateParams;
-use Telnyx\NumberOrders\NumberOrderCreateParams\PhoneNumber;
 use Telnyx\NumberOrders\NumberOrderGetResponse;
 use Telnyx\NumberOrders\NumberOrderListParams;
-use Telnyx\NumberOrders\NumberOrderListParams\Filter;
-use Telnyx\NumberOrders\NumberOrderListParams\Page;
 use Telnyx\NumberOrders\NumberOrderListResponse;
 use Telnyx\NumberOrders\NumberOrderNewResponse;
 use Telnyx\NumberOrders\NumberOrderUpdateParams;
 use Telnyx\NumberOrders\NumberOrderUpdateResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\NumberOrdersContract;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class NumberOrdersService implements NumberOrdersContract
 {
@@ -34,47 +28,25 @@ final class NumberOrdersService implements NumberOrdersContract
      *
      * Creates a phone number order.
      *
-     * @param string $billingGroupID identifies the billing group associated with the phone number
-     * @param string $connectionID identifies the connection associated with this phone number
-     * @param string $customerReference a customer reference string for customer look ups
-     * @param string $messagingProfileID identifies the messaging profile associated with the phone number
-     * @param list<PhoneNumber> $phoneNumbers
+     * @param array{
+     *   billing_group_id?: string,
+     *   connection_id?: string,
+     *   customer_reference?: string,
+     *   messaging_profile_id?: string,
+     *   phone_numbers?: list<array{
+     *     phone_number: string, bundle_id?: string, requirement_group_id?: string
+     *   }>,
+     * }|NumberOrderCreateParams $params
      *
      * @throws APIException
      */
     public function create(
-        $billingGroupID = omit,
-        $connectionID = omit,
-        $customerReference = omit,
-        $messagingProfileID = omit,
-        $phoneNumbers = omit,
+        array|NumberOrderCreateParams $params,
         ?RequestOptions $requestOptions = null,
-    ): NumberOrderNewResponse {
-        $params = [
-            'billingGroupID' => $billingGroupID,
-            'connectionID' => $connectionID,
-            'customerReference' => $customerReference,
-            'messagingProfileID' => $messagingProfileID,
-            'phoneNumbers' => $phoneNumbers,
-        ];
-
-        return $this->createRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): NumberOrderNewResponse {
         [$parsed, $options] = NumberOrderCreateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -112,40 +84,23 @@ final class NumberOrdersService implements NumberOrdersContract
      *
      * Updates a phone number order.
      *
-     * @param string $customerReference a customer reference string for customer look ups
-     * @param list<UpdateRegulatoryRequirement> $regulatoryRequirements
+     * @param array{
+     *   customer_reference?: string,
+     *   regulatory_requirements?: list<array{
+     *     field_value?: string, requirement_id?: string
+     *   }>,
+     * }|NumberOrderUpdateParams $params
      *
      * @throws APIException
      */
     public function update(
         string $numberOrderID,
-        $customerReference = omit,
-        $regulatoryRequirements = omit,
+        array|NumberOrderUpdateParams $params,
         ?RequestOptions $requestOptions = null,
-    ): NumberOrderUpdateResponse {
-        $params = [
-            'customerReference' => $customerReference,
-            'regulatoryRequirements' => $regulatoryRequirements,
-        ];
-
-        return $this->updateRaw($numberOrderID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $numberOrderID,
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): NumberOrderUpdateResponse {
         [$parsed, $options] = NumberOrderUpdateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -163,35 +118,26 @@ final class NumberOrdersService implements NumberOrdersContract
      *
      * Get a paginated list of number orders.
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[status], filter[created_at], filter[phone_numbers_count], filter[customer_reference], filter[requirements_met]
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param array{
+     *   filter?: array{
+     *     created_at?: array{gt?: string, lt?: string},
+     *     customer_reference?: string,
+     *     phone_numbers_count?: string,
+     *     requirements_met?: bool,
+     *     status?: string,
+     *   },
+     *   page?: array{number?: int, size?: int},
+     * }|NumberOrderListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): NumberOrderListResponse {
-        $params = ['filter' => $filter, 'page' => $page];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
+        array|NumberOrderListParams $params,
         ?RequestOptions $requestOptions = null
     ): NumberOrderListResponse {
         [$parsed, $options] = NumberOrderListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

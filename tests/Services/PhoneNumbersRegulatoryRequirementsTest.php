@@ -33,7 +33,7 @@ final class PhoneNumbersRegulatoryRequirementsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->phoneNumbersRegulatoryRequirements->retrieve();
+        $result = $this->client->phoneNumbersRegulatoryRequirements->retrieve([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

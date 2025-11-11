@@ -5,8 +5,6 @@ namespace Tests\Services;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Telnyx\Brand\EntityType;
-use Telnyx\Brand\Vertical;
 use Telnyx\Client;
 use Tests\UnsupportedMockTests;
 
@@ -35,13 +33,13 @@ final class BrandTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->brand->create(
-            country: 'US',
-            displayName: 'ABC Mobile',
-            email: 'email',
-            entityType: EntityType::PRIVATE_PROFIT,
-            vertical: Vertical::TECHNOLOGY,
-        );
+        $result = $this->client->brand->create([
+            'country' => 'US',
+            'displayName' => 'ABC Mobile',
+            'email' => 'email',
+            'entityType' => 'PRIVATE_PROFIT',
+            'vertical' => 'TECHNOLOGY',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -53,13 +51,13 @@ final class BrandTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->brand->create(
-            country: 'US',
-            displayName: 'ABC Mobile',
-            email: 'email',
-            entityType: EntityType::PRIVATE_PROFIT,
-            vertical: Vertical::TECHNOLOGY,
-        );
+        $result = $this->client->brand->create([
+            'country' => 'US',
+            'displayName' => 'ABC Mobile',
+            'email' => 'email',
+            'entityType' => 'PRIVATE_PROFIT',
+            'vertical' => 'TECHNOLOGY',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -85,11 +83,13 @@ final class BrandTest extends TestCase
 
         $result = $this->client->brand->update(
             'brandId',
-            country: 'US',
-            displayName: 'ABC Mobile',
-            email: 'email',
-            entityType: EntityType::PRIVATE_PROFIT,
-            vertical: Vertical::TECHNOLOGY,
+            [
+                'country' => 'US',
+                'displayName' => 'ABC Mobile',
+                'email' => 'email',
+                'entityType' => 'PRIVATE_PROFIT',
+                'vertical' => 'TECHNOLOGY',
+            ],
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -104,11 +104,13 @@ final class BrandTest extends TestCase
 
         $result = $this->client->brand->update(
             'brandId',
-            country: 'US',
-            displayName: 'ABC Mobile',
-            email: 'email',
-            entityType: EntityType::PRIVATE_PROFIT,
-            vertical: Vertical::TECHNOLOGY,
+            [
+                'country' => 'US',
+                'displayName' => 'ABC Mobile',
+                'email' => 'email',
+                'entityType' => 'PRIVATE_PROFIT',
+                'vertical' => 'TECHNOLOGY',
+            ],
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -121,7 +123,7 @@ final class BrandTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->brand->list();
+        $result = $this->client->brand->list([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

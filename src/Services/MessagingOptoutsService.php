@@ -7,14 +7,9 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\MessagingOptouts\MessagingOptoutListParams;
-use Telnyx\MessagingOptouts\MessagingOptoutListParams\CreatedAt;
-use Telnyx\MessagingOptouts\MessagingOptoutListParams\Filter;
-use Telnyx\MessagingOptouts\MessagingOptoutListParams\Page;
 use Telnyx\MessagingOptouts\MessagingOptoutListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MessagingOptoutsContract;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class MessagingOptoutsService implements MessagingOptoutsContract
 {
@@ -28,44 +23,24 @@ final class MessagingOptoutsService implements MessagingOptoutsContract
      *
      * Retrieve a list of opt-out blocks.
      *
-     * @param CreatedAt $createdAt Consolidated created_at parameter (deepObject style). Originally: created_at[gte], created_at[lte]
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[messaging_profile_id], filter[from]
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
-     * @param string $redactionEnabled If receiving address (+E.164 formatted phone number) should be redacted
+     * @param array{
+     *   created_at?: array{
+     *     gte?: string|\DateTimeInterface, lte?: string|\DateTimeInterface
+     *   },
+     *   filter?: array{from?: string, messaging_profile_id?: string},
+     *   page?: array{number?: int, size?: int},
+     *   redaction_enabled?: string,
+     * }|MessagingOptoutListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $createdAt = omit,
-        $filter = omit,
-        $page = omit,
-        $redactionEnabled = omit,
+        array|MessagingOptoutListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): MessagingOptoutListResponse {
-        $params = [
-            'createdAt' => $createdAt,
-            'filter' => $filter,
-            'page' => $page,
-            'redactionEnabled' => $redactionEnabled,
-        ];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): MessagingOptoutListResponse {
         [$parsed, $options] = MessagingOptoutListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

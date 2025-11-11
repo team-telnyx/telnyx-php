@@ -9,10 +9,7 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Verifications\ActionsContract;
 use Telnyx\Verifications\Actions\ActionVerifyParams;
-use Telnyx\Verifications\Actions\ActionVerifyParams\Status;
 use Telnyx\Verifications\ByPhoneNumber\Actions\VerifyVerificationCodeResponse;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class ActionsService implements ActionsContract
 {
@@ -26,37 +23,20 @@ final class ActionsService implements ActionsContract
      *
      * Verify verification code by ID
      *
-     * @param string $code this is the code the user submits for verification
-     * @param Status|value-of<Status> $status Identifies if the verification code has been accepted or rejected. Only permitted if custom_code was used for the verification.
+     * @param array{
+     *   code?: string, status?: "accepted"|"rejected"
+     * }|ActionVerifyParams $params
      *
      * @throws APIException
      */
     public function verify(
         string $verificationID,
-        $code = omit,
-        $status = omit,
-        ?RequestOptions $requestOptions = null,
-    ): VerifyVerificationCodeResponse {
-        $params = ['code' => $code, 'status' => $status];
-
-        return $this->verifyRaw($verificationID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function verifyRaw(
-        string $verificationID,
-        array $params,
+        array|ActionVerifyParams $params,
         ?RequestOptions $requestOptions = null,
     ): VerifyVerificationCodeResponse {
         [$parsed, $options] = ActionVerifyParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

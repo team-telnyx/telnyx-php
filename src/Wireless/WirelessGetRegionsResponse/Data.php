@@ -12,8 +12,8 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type DataShape = array{
  *   code: string,
  *   name: string,
- *   insertedAt?: \DateTimeInterface,
- *   updatedAt?: \DateTimeInterface,
+ *   inserted_at?: \DateTimeInterface|null,
+ *   updated_at?: \DateTimeInterface|null,
  * }
  */
 final class Data implements BaseModel
@@ -36,14 +36,14 @@ final class Data implements BaseModel
     /**
      * Timestamp when the region was inserted.
      */
-    #[Api('inserted_at', optional: true)]
-    public ?\DateTimeInterface $insertedAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $inserted_at;
 
     /**
      * Timestamp when the region was last updated.
      */
-    #[Api('updated_at', optional: true)]
-    public ?\DateTimeInterface $updatedAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $updated_at;
 
     /**
      * `new Data()` is missing required properties by the API.
@@ -72,16 +72,16 @@ final class Data implements BaseModel
     public static function with(
         string $code,
         string $name,
-        ?\DateTimeInterface $insertedAt = null,
-        ?\DateTimeInterface $updatedAt = null,
+        ?\DateTimeInterface $inserted_at = null,
+        ?\DateTimeInterface $updated_at = null,
     ): self {
         $obj = new self;
 
         $obj->code = $code;
         $obj->name = $name;
 
-        null !== $insertedAt && $obj->insertedAt = $insertedAt;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
+        null !== $inserted_at && $obj->inserted_at = $inserted_at;
+        null !== $updated_at && $obj->updated_at = $updated_at;
 
         return $obj;
     }
@@ -114,7 +114,7 @@ final class Data implements BaseModel
     public function withInsertedAt(\DateTimeInterface $insertedAt): self
     {
         $obj = clone $this;
-        $obj->insertedAt = $insertedAt;
+        $obj->inserted_at = $insertedAt;
 
         return $obj;
     }
@@ -125,7 +125,7 @@ final class Data implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $obj->updated_at = $updatedAt;
 
         return $obj;
     }

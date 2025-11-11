@@ -12,11 +12,11 @@ use Telnyx\OAuthGrants\OAuthGrant\RecordType;
 /**
  * @phpstan-type OAuthGrantShape = array{
  *   id: string,
- *   clientID: string,
- *   createdAt: \DateTimeInterface,
- *   recordType: value-of<RecordType>,
+ *   client_id: string,
+ *   created_at: \DateTimeInterface,
+ *   record_type: value-of<RecordType>,
  *   scopes: list<string>,
- *   lastUsedAt?: \DateTimeInterface|null,
+ *   last_used_at?: \DateTimeInterface|null,
  * }
  */
 final class OAuthGrant implements BaseModel
@@ -33,22 +33,22 @@ final class OAuthGrant implements BaseModel
     /**
      * OAuth client identifier.
      */
-    #[Api('client_id')]
-    public string $clientID;
+    #[Api]
+    public string $client_id;
 
     /**
      * Timestamp when the grant was created.
      */
-    #[Api('created_at')]
-    public \DateTimeInterface $createdAt;
+    #[Api]
+    public \DateTimeInterface $created_at;
 
     /**
      * Record type identifier.
      *
-     * @var value-of<RecordType> $recordType
+     * @var value-of<RecordType> $record_type
      */
-    #[Api('record_type', enum: RecordType::class)]
-    public string $recordType;
+    #[Api(enum: RecordType::class)]
+    public string $record_type;
 
     /**
      * List of granted OAuth scopes.
@@ -61,8 +61,8 @@ final class OAuthGrant implements BaseModel
     /**
      * Timestamp when the grant was last used.
      */
-    #[Api('last_used_at', nullable: true, optional: true)]
-    public ?\DateTimeInterface $lastUsedAt;
+    #[Api(nullable: true, optional: true)]
+    public ?\DateTimeInterface $last_used_at;
 
     /**
      * `new OAuthGrant()` is missing required properties by the API.
@@ -70,7 +70,7 @@ final class OAuthGrant implements BaseModel
      * To enforce required parameters use
      * ```
      * OAuthGrant::with(
-     *   id: ..., clientID: ..., createdAt: ..., recordType: ..., scopes: ...
+     *   id: ..., client_id: ..., created_at: ..., record_type: ..., scopes: ...
      * )
      * ```
      *
@@ -95,26 +95,26 @@ final class OAuthGrant implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param RecordType|value-of<RecordType> $recordType
+     * @param RecordType|value-of<RecordType> $record_type
      * @param list<string> $scopes
      */
     public static function with(
         string $id,
-        string $clientID,
-        \DateTimeInterface $createdAt,
-        RecordType|string $recordType,
+        string $client_id,
+        \DateTimeInterface $created_at,
+        RecordType|string $record_type,
         array $scopes,
-        ?\DateTimeInterface $lastUsedAt = null,
+        ?\DateTimeInterface $last_used_at = null,
     ): self {
         $obj = new self;
 
         $obj->id = $id;
-        $obj->clientID = $clientID;
-        $obj->createdAt = $createdAt;
-        $obj['recordType'] = $recordType;
+        $obj->client_id = $client_id;
+        $obj->created_at = $created_at;
+        $obj['record_type'] = $record_type;
         $obj->scopes = $scopes;
 
-        null !== $lastUsedAt && $obj->lastUsedAt = $lastUsedAt;
+        null !== $last_used_at && $obj->last_used_at = $last_used_at;
 
         return $obj;
     }
@@ -136,7 +136,7 @@ final class OAuthGrant implements BaseModel
     public function withClientID(string $clientID): self
     {
         $obj = clone $this;
-        $obj->clientID = $clientID;
+        $obj->client_id = $clientID;
 
         return $obj;
     }
@@ -147,7 +147,7 @@ final class OAuthGrant implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }
@@ -160,7 +160,7 @@ final class OAuthGrant implements BaseModel
     public function withRecordType(RecordType|string $recordType): self
     {
         $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
@@ -184,7 +184,7 @@ final class OAuthGrant implements BaseModel
     public function withLastUsedAt(?\DateTimeInterface $lastUsedAt): self
     {
         $obj = clone $this;
-        $obj->lastUsedAt = $lastUsedAt;
+        $obj->last_used_at = $lastUsedAt;
 
         return $obj;
     }

@@ -16,17 +16,17 @@ use Telnyx\Services\Porting\ReportsService;
 final class PortingService implements PortingContract
 {
     /**
-     * @@api
+     * @api
      */
     public EventsService $events;
 
     /**
-     * @@api
+     * @api
      */
     public ReportsService $reports;
 
     /**
-     * @@api
+     * @api
      */
     public LoaConfigurationsService $loaConfigurations;
 

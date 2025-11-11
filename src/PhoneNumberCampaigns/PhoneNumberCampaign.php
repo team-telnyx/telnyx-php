@@ -13,16 +13,16 @@ use Telnyx\PhoneNumberCampaigns\PhoneNumberCampaign\AssignmentStatus;
 
 /**
  * @phpstan-type PhoneNumberCampaignShape = array{
- *   campaignID: string,
+ *   campaignId: string,
  *   createdAt: string,
  *   phoneNumber: string,
  *   updatedAt: string,
- *   assignmentStatus?: value-of<AssignmentStatus>,
- *   brandID?: string,
- *   failureReasons?: string,
- *   tcrBrandID?: string,
- *   tcrCampaignID?: string,
- *   telnyxCampaignID?: string,
+ *   assignmentStatus?: value-of<AssignmentStatus>|null,
+ *   brandId?: string|null,
+ *   failureReasons?: string|null,
+ *   tcrBrandId?: string|null,
+ *   tcrCampaignId?: string|null,
+ *   telnyxCampaignId?: string|null,
  * }
  */
 final class PhoneNumberCampaign implements BaseModel, ResponseConverter
@@ -35,8 +35,8 @@ final class PhoneNumberCampaign implements BaseModel, ResponseConverter
     /**
      * For shared campaigns, this is the TCR campaign ID, otherwise it is the campaign ID.
      */
-    #[Api('campaignId')]
-    public string $campaignID;
+    #[Api]
+    public string $campaignId;
 
     #[Api]
     public string $createdAt;
@@ -58,8 +58,8 @@ final class PhoneNumberCampaign implements BaseModel, ResponseConverter
     /**
      * Brand ID. Empty if the number is associated to a shared campaign.
      */
-    #[Api('brandId', optional: true)]
-    public ?string $brandID;
+    #[Api(optional: true)]
+    public ?string $brandId;
 
     /**
      * Extra info about a failure to assign/unassign a number. Relevant only if the assignmentStatus is either FAILED_ASSIGNMENT or FAILED_UNASSIGNMENT.
@@ -70,20 +70,20 @@ final class PhoneNumberCampaign implements BaseModel, ResponseConverter
     /**
      * TCR's alphanumeric ID for the brand.
      */
-    #[Api('tcrBrandId', optional: true)]
-    public ?string $tcrBrandID;
+    #[Api(optional: true)]
+    public ?string $tcrBrandId;
 
     /**
      * TCR's alphanumeric ID for the campaign.
      */
-    #[Api('tcrCampaignId', optional: true)]
-    public ?string $tcrCampaignID;
+    #[Api(optional: true)]
+    public ?string $tcrCampaignId;
 
     /**
      * Campaign ID. Empty if the number is associated to a shared campaign.
      */
-    #[Api('telnyxCampaignId', optional: true)]
-    public ?string $telnyxCampaignID;
+    #[Api(optional: true)]
+    public ?string $telnyxCampaignId;
 
     /**
      * `new PhoneNumberCampaign()` is missing required properties by the API.
@@ -91,7 +91,7 @@ final class PhoneNumberCampaign implements BaseModel, ResponseConverter
      * To enforce required parameters use
      * ```
      * PhoneNumberCampaign::with(
-     *   campaignID: ..., createdAt: ..., phoneNumber: ..., updatedAt: ...
+     *   campaignId: ..., createdAt: ..., phoneNumber: ..., updatedAt: ...
      * )
      * ```
      *
@@ -118,30 +118,30 @@ final class PhoneNumberCampaign implements BaseModel, ResponseConverter
      * @param AssignmentStatus|value-of<AssignmentStatus> $assignmentStatus
      */
     public static function with(
-        string $campaignID,
+        string $campaignId,
         string $createdAt,
         string $phoneNumber,
         string $updatedAt,
         AssignmentStatus|string|null $assignmentStatus = null,
-        ?string $brandID = null,
+        ?string $brandId = null,
         ?string $failureReasons = null,
-        ?string $tcrBrandID = null,
-        ?string $tcrCampaignID = null,
-        ?string $telnyxCampaignID = null,
+        ?string $tcrBrandId = null,
+        ?string $tcrCampaignId = null,
+        ?string $telnyxCampaignId = null,
     ): self {
         $obj = new self;
 
-        $obj->campaignID = $campaignID;
+        $obj->campaignId = $campaignId;
         $obj->createdAt = $createdAt;
         $obj->phoneNumber = $phoneNumber;
         $obj->updatedAt = $updatedAt;
 
         null !== $assignmentStatus && $obj['assignmentStatus'] = $assignmentStatus;
-        null !== $brandID && $obj->brandID = $brandID;
+        null !== $brandId && $obj->brandId = $brandId;
         null !== $failureReasons && $obj->failureReasons = $failureReasons;
-        null !== $tcrBrandID && $obj->tcrBrandID = $tcrBrandID;
-        null !== $tcrCampaignID && $obj->tcrCampaignID = $tcrCampaignID;
-        null !== $telnyxCampaignID && $obj->telnyxCampaignID = $telnyxCampaignID;
+        null !== $tcrBrandId && $obj->tcrBrandId = $tcrBrandId;
+        null !== $tcrCampaignId && $obj->tcrCampaignId = $tcrCampaignId;
+        null !== $telnyxCampaignId && $obj->telnyxCampaignId = $telnyxCampaignId;
 
         return $obj;
     }
@@ -152,7 +152,7 @@ final class PhoneNumberCampaign implements BaseModel, ResponseConverter
     public function withCampaignID(string $campaignID): self
     {
         $obj = clone $this;
-        $obj->campaignID = $campaignID;
+        $obj->campaignId = $campaignID;
 
         return $obj;
     }
@@ -201,7 +201,7 @@ final class PhoneNumberCampaign implements BaseModel, ResponseConverter
     public function withBrandID(string $brandID): self
     {
         $obj = clone $this;
-        $obj->brandID = $brandID;
+        $obj->brandId = $brandID;
 
         return $obj;
     }
@@ -223,7 +223,7 @@ final class PhoneNumberCampaign implements BaseModel, ResponseConverter
     public function withTcrBrandID(string $tcrBrandID): self
     {
         $obj = clone $this;
-        $obj->tcrBrandID = $tcrBrandID;
+        $obj->tcrBrandId = $tcrBrandID;
 
         return $obj;
     }
@@ -234,7 +234,7 @@ final class PhoneNumberCampaign implements BaseModel, ResponseConverter
     public function withTcrCampaignID(string $tcrCampaignID): self
     {
         $obj = clone $this;
-        $obj->tcrCampaignID = $tcrCampaignID;
+        $obj->tcrCampaignId = $tcrCampaignID;
 
         return $obj;
     }
@@ -245,7 +245,7 @@ final class PhoneNumberCampaign implements BaseModel, ResponseConverter
     public function withTelnyxCampaignID(string $telnyxCampaignID): self
     {
         $obj = clone $this;
-        $obj->telnyxCampaignID = $telnyxCampaignID;
+        $obj->telnyxCampaignId = $telnyxCampaignID;
 
         return $obj;
     }

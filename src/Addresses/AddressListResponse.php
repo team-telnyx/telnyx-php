@@ -13,7 +13,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type AddressListResponseShape = array{
- *   data?: list<Address>, meta?: PaginationMeta
+ *   data?: list<Address>|null, meta?: PaginationMeta|null
  * }
  */
 final class AddressListResponse implements BaseModel, ResponseConverter

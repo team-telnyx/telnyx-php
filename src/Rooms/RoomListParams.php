@@ -17,7 +17,7 @@ use Telnyx\Rooms\RoomListParams\Page;
  * @see Telnyx\Rooms->list
  *
  * @phpstan-type RoomListParamsShape = array{
- *   filter?: Filter, includeSessions?: bool, page?: Page
+ *   filter?: Filter, include_sessions?: bool, page?: Page
  * }
  */
 final class RoomListParams implements BaseModel
@@ -36,7 +36,7 @@ final class RoomListParams implements BaseModel
      * To decide if room sessions should be included in the response.
      */
     #[Api(optional: true)]
-    public ?bool $includeSessions;
+    public ?bool $include_sessions;
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
@@ -56,13 +56,13 @@ final class RoomListParams implements BaseModel
      */
     public static function with(
         ?Filter $filter = null,
-        ?bool $includeSessions = null,
+        ?bool $include_sessions = null,
         ?Page $page = null
     ): self {
         $obj = new self;
 
         null !== $filter && $obj->filter = $filter;
-        null !== $includeSessions && $obj->includeSessions = $includeSessions;
+        null !== $include_sessions && $obj->include_sessions = $include_sessions;
         null !== $page && $obj->page = $page;
 
         return $obj;
@@ -85,7 +85,7 @@ final class RoomListParams implements BaseModel
     public function withIncludeSessions(bool $includeSessions): self
     {
         $obj = clone $this;
-        $obj->includeSessions = $includeSessions;
+        $obj->include_sessions = $includeSessions;
 
         return $obj;
     }

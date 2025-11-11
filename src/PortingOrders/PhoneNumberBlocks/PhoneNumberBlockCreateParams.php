@@ -17,7 +17,7 @@ use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockCreateParams\PhoneNum
  * @see Telnyx\PortingOrders\PhoneNumberBlocks->create
  *
  * @phpstan-type PhoneNumberBlockCreateParamsShape = array{
- *   activationRanges: list<ActivationRange>, phoneNumberRange: PhoneNumberRange
+ *   activation_ranges: list<ActivationRange>, phone_number_range: PhoneNumberRange
  * }
  */
 final class PhoneNumberBlockCreateParams implements BaseModel
@@ -29,20 +29,22 @@ final class PhoneNumberBlockCreateParams implements BaseModel
     /**
      * Specifies the activation ranges for this porting phone number block. The activation range must be within the block range and should not overlap with other activation ranges.
      *
-     * @var list<ActivationRange> $activationRanges
+     * @var list<ActivationRange> $activation_ranges
      */
-    #[Api('activation_ranges', list: ActivationRange::class)]
-    public array $activationRanges;
+    #[Api(list: ActivationRange::class)]
+    public array $activation_ranges;
 
-    #[Api('phone_number_range')]
-    public PhoneNumberRange $phoneNumberRange;
+    #[Api]
+    public PhoneNumberRange $phone_number_range;
 
     /**
      * `new PhoneNumberBlockCreateParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * PhoneNumberBlockCreateParams::with(activationRanges: ..., phoneNumberRange: ...)
+     * PhoneNumberBlockCreateParams::with(
+     *   activation_ranges: ..., phone_number_range: ...
+     * )
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -63,16 +65,16 @@ final class PhoneNumberBlockCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ActivationRange> $activationRanges
+     * @param list<ActivationRange> $activation_ranges
      */
     public static function with(
-        array $activationRanges,
-        PhoneNumberRange $phoneNumberRange
+        array $activation_ranges,
+        PhoneNumberRange $phone_number_range
     ): self {
         $obj = new self;
 
-        $obj->activationRanges = $activationRanges;
-        $obj->phoneNumberRange = $phoneNumberRange;
+        $obj->activation_ranges = $activation_ranges;
+        $obj->phone_number_range = $phone_number_range;
 
         return $obj;
     }
@@ -85,7 +87,7 @@ final class PhoneNumberBlockCreateParams implements BaseModel
     public function withActivationRanges(array $activationRanges): self
     {
         $obj = clone $this;
-        $obj->activationRanges = $activationRanges;
+        $obj->activation_ranges = $activationRanges;
 
         return $obj;
     }
@@ -94,7 +96,7 @@ final class PhoneNumberBlockCreateParams implements BaseModel
         PhoneNumberRange $phoneNumberRange
     ): self {
         $obj = clone $this;
-        $obj->phoneNumberRange = $phoneNumberRange;
+        $obj->phone_number_range = $phoneNumberRange;
 
         return $obj;
     }

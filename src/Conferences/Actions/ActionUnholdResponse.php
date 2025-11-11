@@ -11,7 +11,9 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type ActionUnholdResponseShape = array{data?: ConferenceCommandResult}
+ * @phpstan-type ActionUnholdResponseShape = array{
+ *   data?: ConferenceCommandResult|null
+ * }
  */
 final class ActionUnholdResponse implements BaseModel, ResponseConverter
 {

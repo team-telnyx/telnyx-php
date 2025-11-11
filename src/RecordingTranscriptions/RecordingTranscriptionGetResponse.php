@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type RecordingTranscriptionGetResponseShape = array{
- *   data?: RecordingTranscription
+ *   data?: RecordingTranscription|null
  * }
  */
 final class RecordingTranscriptionGetResponse implements BaseModel, ResponseConverter

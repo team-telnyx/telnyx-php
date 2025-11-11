@@ -13,15 +13,17 @@ use Telnyx\Messages\OutboundMessagePayload\CostBreakdown\Rate;
 /**
  * Detailed breakdown of the message cost components.
  *
- * @phpstan-type CostBreakdownShape = array{carrierFee?: CarrierFee, rate?: Rate}
+ * @phpstan-type CostBreakdownShape = array{
+ *   carrier_fee?: CarrierFee|null, rate?: Rate|null
+ * }
  */
 final class CostBreakdown implements BaseModel
 {
     /** @use SdkModel<CostBreakdownShape> */
     use SdkModel;
 
-    #[Api('carrier_fee', optional: true)]
-    public ?CarrierFee $carrierFee;
+    #[Api(optional: true)]
+    public ?CarrierFee $carrier_fee;
 
     #[Api(optional: true)]
     public ?Rate $rate;
@@ -37,12 +39,12 @@ final class CostBreakdown implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?CarrierFee $carrierFee = null,
+        ?CarrierFee $carrier_fee = null,
         ?Rate $rate = null
     ): self {
         $obj = new self;
 
-        null !== $carrierFee && $obj->carrierFee = $carrierFee;
+        null !== $carrier_fee && $obj->carrier_fee = $carrier_fee;
         null !== $rate && $obj->rate = $rate;
 
         return $obj;
@@ -51,7 +53,7 @@ final class CostBreakdown implements BaseModel
     public function withCarrierFee(CarrierFee $carrierFee): self
     {
         $obj = clone $this;
-        $obj->carrierFee = $carrierFee;
+        $obj->carrier_fee = $carrierFee;
 
         return $obj;
     }

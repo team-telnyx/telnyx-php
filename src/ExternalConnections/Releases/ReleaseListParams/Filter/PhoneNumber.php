@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Phone number filter operations. Use 'eq' for exact matches or 'contains' for partial matches.
  *
- * @phpstan-type PhoneNumberShape = array{contains?: string, eq?: string}
+ * @phpstan-type PhoneNumberShape = array{contains?: string|null, eq?: string|null}
  */
 final class PhoneNumber implements BaseModel
 {

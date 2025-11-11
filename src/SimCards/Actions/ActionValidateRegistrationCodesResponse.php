@@ -13,7 +13,7 @@ use Telnyx\SimCards\Actions\ActionValidateRegistrationCodesResponse\Data;
 
 /**
  * @phpstan-type ActionValidateRegistrationCodesResponseShape = array{
- *   data?: list<Data>
+ *   data?: list<Data>|null
  * }
  */
 final class ActionValidateRegistrationCodesResponse implements BaseModel, ResponseConverter

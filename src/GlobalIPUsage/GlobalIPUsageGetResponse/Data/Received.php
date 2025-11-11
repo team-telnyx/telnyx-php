@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type ReceivedShape = array{amount?: float, unit?: string}
+ * @phpstan-type ReceivedShape = array{amount?: float|null, unit?: string|null}
  */
 final class Received implements BaseModel
 {

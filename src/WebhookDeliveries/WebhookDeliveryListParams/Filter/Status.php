@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\WebhookDeliveries\WebhookDeliveryListParams\Filter\Status\Eq;
 
 /**
- * @phpstan-type StatusShape = array{eq?: value-of<Eq>}
+ * @phpstan-type StatusShape = array{eq?: value-of<Eq>|null}
  */
 final class Status implements BaseModel
 {

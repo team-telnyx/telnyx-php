@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type TexmlApplicationDeleteResponseShape = array{
- *   data?: TexmlApplication
+ *   data?: TexmlApplication|null
  * }
  */
 final class TexmlApplicationDeleteResponse implements BaseModel, ResponseConverter

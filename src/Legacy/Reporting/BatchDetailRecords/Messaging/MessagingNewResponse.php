@@ -11,7 +11,9 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type MessagingNewResponseShape = array{data?: MdrDetailReportResponse}
+ * @phpstan-type MessagingNewResponseShape = array{
+ *   data?: MdrDetailReportResponse|null
+ * }
  */
 final class MessagingNewResponse implements BaseModel, ResponseConverter
 {

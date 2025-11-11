@@ -17,8 +17,8 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Actions\Register->create
  *
  * @phpstan-type RegisterCreateParamsShape = array{
- *   registrationCodes: list<string>,
- *   simCardGroupID?: string,
+ *   registration_codes: list<string>,
+ *   sim_card_group_id?: string,
  *   status?: Status|value-of<Status>,
  *   tags?: list<string>,
  * }
@@ -29,15 +29,15 @@ final class RegisterCreateParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    /** @var list<string> $registrationCodes */
-    #[Api('registration_codes', list: 'string')]
-    public array $registrationCodes;
+    /** @var list<string> $registration_codes */
+    #[Api(list: 'string')]
+    public array $registration_codes;
 
     /**
      * The group SIMCardGroup identification. This attribute can be <code>null</code> when it's present in an associated resource.
      */
-    #[Api('sim_card_group_id', optional: true)]
-    public ?string $simCardGroupID;
+    #[Api(optional: true)]
+    public ?string $sim_card_group_id;
 
     /**
      * Status on which the SIM card will be set after being successful registered.
@@ -60,7 +60,7 @@ final class RegisterCreateParams implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * RegisterCreateParams::with(registrationCodes: ...)
+     * RegisterCreateParams::with(registration_codes: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -79,21 +79,21 @@ final class RegisterCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $registrationCodes
+     * @param list<string> $registration_codes
      * @param Status|value-of<Status> $status
      * @param list<string> $tags
      */
     public static function with(
-        array $registrationCodes,
-        ?string $simCardGroupID = null,
+        array $registration_codes,
+        ?string $sim_card_group_id = null,
         Status|string|null $status = null,
         ?array $tags = null,
     ): self {
         $obj = new self;
 
-        $obj->registrationCodes = $registrationCodes;
+        $obj->registration_codes = $registration_codes;
 
-        null !== $simCardGroupID && $obj->simCardGroupID = $simCardGroupID;
+        null !== $sim_card_group_id && $obj->sim_card_group_id = $sim_card_group_id;
         null !== $status && $obj['status'] = $status;
         null !== $tags && $obj->tags = $tags;
 
@@ -106,7 +106,7 @@ final class RegisterCreateParams implements BaseModel
     public function withRegistrationCodes(array $registrationCodes): self
     {
         $obj = clone $this;
-        $obj->registrationCodes = $registrationCodes;
+        $obj->registration_codes = $registrationCodes;
 
         return $obj;
     }
@@ -117,7 +117,7 @@ final class RegisterCreateParams implements BaseModel
     public function withSimCardGroupID(string $simCardGroupID): self
     {
         $obj = clone $this;
-        $obj->simCardGroupID = $simCardGroupID;
+        $obj->sim_card_group_id = $simCardGroupID;
 
         return $obj;
     }

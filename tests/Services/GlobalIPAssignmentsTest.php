@@ -6,7 +6,6 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\GlobalIPAssignments\GlobalIPAssignmentUpdateParams\Body;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -34,7 +33,7 @@ final class GlobalIPAssignmentsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->globalIPAssignments->create();
+        $result = $this->client->globalIPAssignments->create([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -62,7 +61,7 @@ final class GlobalIPAssignmentsTest extends TestCase
 
         $result = $this->client->globalIPAssignments->update(
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
-            new Body
+            ['body' => []]
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -77,9 +76,13 @@ final class GlobalIPAssignmentsTest extends TestCase
 
         $result = $this->client->globalIPAssignments->update(
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
-            (new Body)
-                ->withGlobalIPID('a836125b-20b6-452e-9c03-2653f09c7ed7')
-                ->withWireguardPeerID('e66c496d-4a85-423b-8b2a-8e63fac20320'),
+            [
+                'body' => [
+                    'global_ip_id' => 'a836125b-20b6-452e-9c03-2653f09c7ed7',
+                    'is_in_maintenance' => true,
+                    'wireguard_peer_id' => 'e66c496d-4a85-423b-8b2a-8e63fac20320',
+                ],
+            ],
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -92,7 +95,7 @@ final class GlobalIPAssignmentsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->globalIPAssignments->list();
+        $result = $this->client->globalIPAssignments->list([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

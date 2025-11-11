@@ -11,9 +11,9 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type ResultShape = array{
- *   chargeType: string,
- *   serviceOwnerEmail: string,
- *   serviceOwnerUserID: string,
+ *   charge_type: string,
+ *   service_owner_email: string,
+ *   service_owner_user_id: string,
  *   services: list<Service>,
  *   tn: string,
  * }
@@ -26,20 +26,20 @@ final class Result implements BaseModel
     /**
      * Type of charge for the number.
      */
-    #[Api('charge_type')]
-    public string $chargeType;
+    #[Api]
+    public string $charge_type;
 
     /**
      * Email address of the service owner.
      */
-    #[Api('service_owner_email')]
-    public string $serviceOwnerEmail;
+    #[Api]
+    public string $service_owner_email;
 
     /**
      * User ID of the service owner.
      */
-    #[Api('service_owner_user_id')]
-    public string $serviceOwnerUserID;
+    #[Api]
+    public string $service_owner_user_id;
 
     /**
      * List of services associated with this number.
@@ -61,9 +61,9 @@ final class Result implements BaseModel
      * To enforce required parameters use
      * ```
      * Result::with(
-     *   chargeType: ...,
-     *   serviceOwnerEmail: ...,
-     *   serviceOwnerUserID: ...,
+     *   charge_type: ...,
+     *   service_owner_email: ...,
+     *   service_owner_user_id: ...,
      *   services: ...,
      *   tn: ...,
      * )
@@ -93,17 +93,17 @@ final class Result implements BaseModel
      * @param list<Service> $services
      */
     public static function with(
-        string $chargeType,
-        string $serviceOwnerEmail,
-        string $serviceOwnerUserID,
+        string $charge_type,
+        string $service_owner_email,
+        string $service_owner_user_id,
         array $services,
         string $tn,
     ): self {
         $obj = new self;
 
-        $obj->chargeType = $chargeType;
-        $obj->serviceOwnerEmail = $serviceOwnerEmail;
-        $obj->serviceOwnerUserID = $serviceOwnerUserID;
+        $obj->charge_type = $charge_type;
+        $obj->service_owner_email = $service_owner_email;
+        $obj->service_owner_user_id = $service_owner_user_id;
         $obj->services = $services;
         $obj->tn = $tn;
 
@@ -116,7 +116,7 @@ final class Result implements BaseModel
     public function withChargeType(string $chargeType): self
     {
         $obj = clone $this;
-        $obj->chargeType = $chargeType;
+        $obj->charge_type = $chargeType;
 
         return $obj;
     }
@@ -127,7 +127,7 @@ final class Result implements BaseModel
     public function withServiceOwnerEmail(string $serviceOwnerEmail): self
     {
         $obj = clone $this;
-        $obj->serviceOwnerEmail = $serviceOwnerEmail;
+        $obj->service_owner_email = $serviceOwnerEmail;
 
         return $obj;
     }
@@ -138,7 +138,7 @@ final class Result implements BaseModel
     public function withServiceOwnerUserID(string $serviceOwnerUserID): self
     {
         $obj = clone $this;
-        $obj->serviceOwnerUserID = $serviceOwnerUserID;
+        $obj->service_owner_user_id = $serviceOwnerUserID;
 
         return $obj;
     }

@@ -10,13 +10,9 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ShortCodesContract;
 use Telnyx\ShortCodes\ShortCodeGetResponse;
 use Telnyx\ShortCodes\ShortCodeListParams;
-use Telnyx\ShortCodes\ShortCodeListParams\Filter;
-use Telnyx\ShortCodes\ShortCodeListParams\Page;
 use Telnyx\ShortCodes\ShortCodeListResponse;
 use Telnyx\ShortCodes\ShortCodeUpdateParams;
 use Telnyx\ShortCodes\ShortCodeUpdateResponse;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class ShortCodesService implements ShortCodesContract
 {
@@ -50,35 +46,18 @@ final class ShortCodesService implements ShortCodesContract
      *
      * Update the settings for a specific short code. To unbind a short code from a profile, set the `messaging_profile_id` to `null` or an empty string.
      *
-     * @param string $messagingProfileID unique identifier for a messaging profile
+     * @param array{messaging_profile_id: string}|ShortCodeUpdateParams $params
      *
      * @throws APIException
      */
     public function update(
         string $id,
-        $messagingProfileID,
-        ?RequestOptions $requestOptions = null
-    ): ShortCodeUpdateResponse {
-        $params = ['messagingProfileID' => $messagingProfileID];
-
-        return $this->updateRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|ShortCodeUpdateParams $params,
+        ?RequestOptions $requestOptions = null,
     ): ShortCodeUpdateResponse {
         [$parsed, $options] = ShortCodeUpdateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -96,35 +75,20 @@ final class ShortCodesService implements ShortCodesContract
      *
      * List short codes
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[messaging_profile_id]
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param array{
+     *   filter?: array{messaging_profile_id?: string},
+     *   page?: array{number?: int, size?: int},
+     * }|ShortCodeListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): ShortCodeListResponse {
-        $params = ['filter' => $filter, 'page' => $page];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
+        array|ShortCodeListParams $params,
         ?RequestOptions $requestOptions = null
     ): ShortCodeListResponse {
         [$parsed, $options] = ShortCodeListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

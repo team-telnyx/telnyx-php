@@ -22,18 +22,18 @@ use Telnyx\PortingOrders\PortingOrderUpdateParams\Requirement;
  * @see Telnyx\PortingOrders->update
  *
  * @phpstan-type PortingOrderUpdateParamsShape = array{
- *   activationSettings?: ActivationSettings,
- *   customerGroupReference?: string,
- *   customerReference?: string,
+ *   activation_settings?: ActivationSettings,
+ *   customer_group_reference?: string,
+ *   customer_reference?: string,
  *   documents?: PortingOrderDocuments,
- *   endUser?: PortingOrderEndUser,
+ *   end_user?: PortingOrderEndUser,
  *   messaging?: Messaging,
  *   misc?: PortingOrderMisc,
- *   phoneNumberConfiguration?: PortingOrderPhoneNumberConfiguration,
- *   requirementGroupID?: string,
+ *   phone_number_configuration?: PortingOrderPhoneNumberConfiguration,
+ *   requirement_group_id?: string,
  *   requirements?: list<Requirement>,
- *   userFeedback?: PortingOrderUserFeedback,
- *   webhookURL?: string,
+ *   user_feedback?: PortingOrderUserFeedback,
+ *   webhook_url?: string,
  * }
  */
 final class PortingOrderUpdateParams implements BaseModel
@@ -42,14 +42,14 @@ final class PortingOrderUpdateParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    #[Api('activation_settings', optional: true)]
-    public ?ActivationSettings $activationSettings;
+    #[Api(optional: true)]
+    public ?ActivationSettings $activation_settings;
 
-    #[Api('customer_group_reference', optional: true)]
-    public ?string $customerGroupReference;
+    #[Api(optional: true)]
+    public ?string $customer_group_reference;
 
-    #[Api('customer_reference', optional: true)]
-    public ?string $customerReference;
+    #[Api(optional: true)]
+    public ?string $customer_reference;
 
     /**
      * Can be specified directly or via the `requirement_group_id` parameter.
@@ -57,8 +57,8 @@ final class PortingOrderUpdateParams implements BaseModel
     #[Api(optional: true)]
     public ?PortingOrderDocuments $documents;
 
-    #[Api('end_user', optional: true)]
-    public ?PortingOrderEndUser $endUser;
+    #[Api(optional: true)]
+    public ?PortingOrderEndUser $end_user;
 
     #[Api(optional: true)]
     public ?Messaging $messaging;
@@ -66,14 +66,14 @@ final class PortingOrderUpdateParams implements BaseModel
     #[Api(optional: true)]
     public ?PortingOrderMisc $misc;
 
-    #[Api('phone_number_configuration', optional: true)]
-    public ?PortingOrderPhoneNumberConfiguration $phoneNumberConfiguration;
+    #[Api(optional: true)]
+    public ?PortingOrderPhoneNumberConfiguration $phone_number_configuration;
 
     /**
      * If present, we will read the current values from the specified Requirement Group into the Documents and Requirements for this Porting Order. Note that any future changes in the Requirement Group would have no impact on this Porting Order. We will return an error if a specified Requirement Group conflicts with documents or requirements in the same request.
      */
-    #[Api('requirement_group_id', optional: true)]
-    public ?string $requirementGroupID;
+    #[Api(optional: true)]
+    public ?string $requirement_group_id;
 
     /**
      * List of requirements for porting numbers.
@@ -83,11 +83,11 @@ final class PortingOrderUpdateParams implements BaseModel
     #[Api(list: Requirement::class, optional: true)]
     public ?array $requirements;
 
-    #[Api('user_feedback', optional: true)]
-    public ?PortingOrderUserFeedback $userFeedback;
+    #[Api(optional: true)]
+    public ?PortingOrderUserFeedback $user_feedback;
 
-    #[Api('webhook_url', optional: true)]
-    public ?string $webhookURL;
+    #[Api(optional: true)]
+    public ?string $webhook_url;
 
     public function __construct()
     {
@@ -102,33 +102,33 @@ final class PortingOrderUpdateParams implements BaseModel
      * @param list<Requirement> $requirements
      */
     public static function with(
-        ?ActivationSettings $activationSettings = null,
-        ?string $customerGroupReference = null,
-        ?string $customerReference = null,
+        ?ActivationSettings $activation_settings = null,
+        ?string $customer_group_reference = null,
+        ?string $customer_reference = null,
         ?PortingOrderDocuments $documents = null,
-        ?PortingOrderEndUser $endUser = null,
+        ?PortingOrderEndUser $end_user = null,
         ?Messaging $messaging = null,
         ?PortingOrderMisc $misc = null,
-        ?PortingOrderPhoneNumberConfiguration $phoneNumberConfiguration = null,
-        ?string $requirementGroupID = null,
+        ?PortingOrderPhoneNumberConfiguration $phone_number_configuration = null,
+        ?string $requirement_group_id = null,
         ?array $requirements = null,
-        ?PortingOrderUserFeedback $userFeedback = null,
-        ?string $webhookURL = null,
+        ?PortingOrderUserFeedback $user_feedback = null,
+        ?string $webhook_url = null,
     ): self {
         $obj = new self;
 
-        null !== $activationSettings && $obj->activationSettings = $activationSettings;
-        null !== $customerGroupReference && $obj->customerGroupReference = $customerGroupReference;
-        null !== $customerReference && $obj->customerReference = $customerReference;
+        null !== $activation_settings && $obj->activation_settings = $activation_settings;
+        null !== $customer_group_reference && $obj->customer_group_reference = $customer_group_reference;
+        null !== $customer_reference && $obj->customer_reference = $customer_reference;
         null !== $documents && $obj->documents = $documents;
-        null !== $endUser && $obj->endUser = $endUser;
+        null !== $end_user && $obj->end_user = $end_user;
         null !== $messaging && $obj->messaging = $messaging;
         null !== $misc && $obj->misc = $misc;
-        null !== $phoneNumberConfiguration && $obj->phoneNumberConfiguration = $phoneNumberConfiguration;
-        null !== $requirementGroupID && $obj->requirementGroupID = $requirementGroupID;
+        null !== $phone_number_configuration && $obj->phone_number_configuration = $phone_number_configuration;
+        null !== $requirement_group_id && $obj->requirement_group_id = $requirement_group_id;
         null !== $requirements && $obj->requirements = $requirements;
-        null !== $userFeedback && $obj->userFeedback = $userFeedback;
-        null !== $webhookURL && $obj->webhookURL = $webhookURL;
+        null !== $user_feedback && $obj->user_feedback = $user_feedback;
+        null !== $webhook_url && $obj->webhook_url = $webhook_url;
 
         return $obj;
     }
@@ -137,7 +137,7 @@ final class PortingOrderUpdateParams implements BaseModel
         ActivationSettings $activationSettings
     ): self {
         $obj = clone $this;
-        $obj->activationSettings = $activationSettings;
+        $obj->activation_settings = $activationSettings;
 
         return $obj;
     }
@@ -146,7 +146,7 @@ final class PortingOrderUpdateParams implements BaseModel
         string $customerGroupReference
     ): self {
         $obj = clone $this;
-        $obj->customerGroupReference = $customerGroupReference;
+        $obj->customer_group_reference = $customerGroupReference;
 
         return $obj;
     }
@@ -154,7 +154,7 @@ final class PortingOrderUpdateParams implements BaseModel
     public function withCustomerReference(string $customerReference): self
     {
         $obj = clone $this;
-        $obj->customerReference = $customerReference;
+        $obj->customer_reference = $customerReference;
 
         return $obj;
     }
@@ -173,7 +173,7 @@ final class PortingOrderUpdateParams implements BaseModel
     public function withEndUser(PortingOrderEndUser $endUser): self
     {
         $obj = clone $this;
-        $obj->endUser = $endUser;
+        $obj->end_user = $endUser;
 
         return $obj;
     }
@@ -198,7 +198,7 @@ final class PortingOrderUpdateParams implements BaseModel
         PortingOrderPhoneNumberConfiguration $phoneNumberConfiguration
     ): self {
         $obj = clone $this;
-        $obj->phoneNumberConfiguration = $phoneNumberConfiguration;
+        $obj->phone_number_configuration = $phoneNumberConfiguration;
 
         return $obj;
     }
@@ -209,7 +209,7 @@ final class PortingOrderUpdateParams implements BaseModel
     public function withRequirementGroupID(string $requirementGroupID): self
     {
         $obj = clone $this;
-        $obj->requirementGroupID = $requirementGroupID;
+        $obj->requirement_group_id = $requirementGroupID;
 
         return $obj;
     }
@@ -231,7 +231,7 @@ final class PortingOrderUpdateParams implements BaseModel
         PortingOrderUserFeedback $userFeedback
     ): self {
         $obj = clone $this;
-        $obj->userFeedback = $userFeedback;
+        $obj->user_feedback = $userFeedback;
 
         return $obj;
     }
@@ -239,7 +239,7 @@ final class PortingOrderUpdateParams implements BaseModel
     public function withWebhookURL(string $webhookURL): self
     {
         $obj = clone $this;
-        $obj->webhookURL = $webhookURL;
+        $obj->webhook_url = $webhookURL;
 
         return $obj;
     }

@@ -16,8 +16,6 @@ use Telnyx\Legacy\Reporting\BatchDetailRecords\Voice\VoiceNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Legacy\Reporting\BatchDetailRecords\VoiceContract;
 
-use const Telnyx\Core\OMIT as omit;
-
 final class VoiceService implements VoiceContract
 {
     /**
@@ -30,71 +28,39 @@ final class VoiceService implements VoiceContract
      *
      * Creates a new CDR report request with the specified filters
      *
-     * @param \DateTimeInterface $endTime End time in ISO format
-     * @param \DateTimeInterface $startTime Start time in ISO format
-     * @param list<int> $callTypes List of call types to filter by (Inbound = 1, Outbound = 2)
-     * @param list<int> $connections List of connections to filter by
-     * @param list<string> $fields Set of fields to include in the report
-     * @param list<Filter> $filters List of filters to apply
-     * @param bool $includeAllMetadata Whether to include all metadata
-     * @param list<string> $managedAccounts List of managed accounts to include
-     * @param list<int> $recordTypes List of record types to filter by (Complete = 1, Incomplete = 2, Errors = 3)
-     * @param string $reportName Name of the report
-     * @param bool $selectAllManagedAccounts Whether to select all managed accounts
-     * @param string $source Source of the report. Valid values: calls (default), call-control, fax-api, webrtc
-     * @param string $timezone Timezone for the report
+     * @param array{
+     *   end_time: string|\DateTimeInterface,
+     *   start_time: string|\DateTimeInterface,
+     *   call_types?: list<int>,
+     *   connections?: list<int>,
+     *   fields?: list<string>,
+     *   filters?: list<array{
+     *     billing_group?: string,
+     *     cld?: string,
+     *     cld_filter?: "contains"|"starts_with"|"ends_with",
+     *     cli?: string,
+     *     cli_filter?: "contains"|"starts_with"|"ends_with",
+     *     filter_type?: "and"|"or",
+     *     tags_list?: string,
+     *   }|Filter>,
+     *   include_all_metadata?: bool,
+     *   managed_accounts?: list<string>,
+     *   record_types?: list<int>,
+     *   report_name?: string,
+     *   select_all_managed_accounts?: bool,
+     *   source?: string,
+     *   timezone?: string,
+     * }|VoiceCreateParams $params
      *
      * @throws APIException
      */
     public function create(
-        $endTime,
-        $startTime,
-        $callTypes = omit,
-        $connections = omit,
-        $fields = omit,
-        $filters = omit,
-        $includeAllMetadata = omit,
-        $managedAccounts = omit,
-        $recordTypes = omit,
-        $reportName = omit,
-        $selectAllManagedAccounts = omit,
-        $source = omit,
-        $timezone = omit,
-        ?RequestOptions $requestOptions = null,
-    ): VoiceNewResponse {
-        $params = [
-            'endTime' => $endTime,
-            'startTime' => $startTime,
-            'callTypes' => $callTypes,
-            'connections' => $connections,
-            'fields' => $fields,
-            'filters' => $filters,
-            'includeAllMetadata' => $includeAllMetadata,
-            'managedAccounts' => $managedAccounts,
-            'recordTypes' => $recordTypes,
-            'reportName' => $reportName,
-            'selectAllManagedAccounts' => $selectAllManagedAccounts,
-            'source' => $source,
-            'timezone' => $timezone,
-        ];
-
-        return $this->createRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
+        array|VoiceCreateParams $params,
         ?RequestOptions $requestOptions = null
     ): VoiceNewResponse {
         [$parsed, $options] = VoiceCreateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

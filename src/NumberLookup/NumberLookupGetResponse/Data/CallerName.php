@@ -9,7 +9,9 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type CallerNameShape = array{callerName?: string, errorCode?: string}
+ * @phpstan-type CallerNameShape = array{
+ *   caller_name?: string|null, error_code?: string|null
+ * }
  */
 final class CallerName implements BaseModel
 {
@@ -19,14 +21,14 @@ final class CallerName implements BaseModel
     /**
      * The name of the requested phone number's owner as per the CNAM database.
      */
-    #[Api('caller_name', optional: true)]
-    public ?string $callerName;
+    #[Api(optional: true)]
+    public ?string $caller_name;
 
     /**
      * A caller-name lookup specific error code, expressed as a stringified 5-digit integer.
      */
-    #[Api('error_code', optional: true)]
-    public ?string $errorCode;
+    #[Api(optional: true)]
+    public ?string $error_code;
 
     public function __construct()
     {
@@ -39,13 +41,13 @@ final class CallerName implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $callerName = null,
-        ?string $errorCode = null
+        ?string $caller_name = null,
+        ?string $error_code = null
     ): self {
         $obj = new self;
 
-        null !== $callerName && $obj->callerName = $callerName;
-        null !== $errorCode && $obj->errorCode = $errorCode;
+        null !== $caller_name && $obj->caller_name = $caller_name;
+        null !== $error_code && $obj->error_code = $error_code;
 
         return $obj;
     }
@@ -56,7 +58,7 @@ final class CallerName implements BaseModel
     public function withCallerName(string $callerName): self
     {
         $obj = clone $this;
-        $obj->callerName = $callerName;
+        $obj->caller_name = $callerName;
 
         return $obj;
     }
@@ -67,7 +69,7 @@ final class CallerName implements BaseModel
     public function withErrorCode(string $errorCode): self
     {
         $obj = clone $this;
-        $obj->errorCode = $errorCode;
+        $obj->error_code = $errorCode;
 
         return $obj;
     }

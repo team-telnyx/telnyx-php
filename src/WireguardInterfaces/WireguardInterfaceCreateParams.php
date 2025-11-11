@@ -15,7 +15,10 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\WireguardInterfaces->create
  *
  * @phpstan-type WireguardInterfaceCreateParamsShape = array{
- *   networkID: string, regionCode: string, enableSipTrunking?: bool, name?: string
+ *   network_id: string,
+ *   region_code: string,
+ *   enable_sip_trunking?: bool,
+ *   name?: string,
  * }
  */
 final class WireguardInterfaceCreateParams implements BaseModel
@@ -27,20 +30,20 @@ final class WireguardInterfaceCreateParams implements BaseModel
     /**
      * The id of the network associated with the interface.
      */
-    #[Api('network_id')]
-    public string $networkID;
+    #[Api]
+    public string $network_id;
 
     /**
      * The region the interface should be deployed to.
      */
-    #[Api('region_code')]
-    public string $regionCode;
+    #[Api]
+    public string $region_code;
 
     /**
      * Enable SIP traffic forwarding over VPN interface.
      */
-    #[Api('enable_sip_trunking', optional: true)]
-    public ?bool $enableSipTrunking;
+    #[Api(optional: true)]
+    public ?bool $enable_sip_trunking;
 
     /**
      * A user specified name for the interface.
@@ -53,7 +56,7 @@ final class WireguardInterfaceCreateParams implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * WireguardInterfaceCreateParams::with(networkID: ..., regionCode: ...)
+     * WireguardInterfaceCreateParams::with(network_id: ..., region_code: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -73,17 +76,17 @@ final class WireguardInterfaceCreateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        string $networkID,
-        string $regionCode,
-        ?bool $enableSipTrunking = null,
+        string $network_id,
+        string $region_code,
+        ?bool $enable_sip_trunking = null,
         ?string $name = null,
     ): self {
         $obj = new self;
 
-        $obj->networkID = $networkID;
-        $obj->regionCode = $regionCode;
+        $obj->network_id = $network_id;
+        $obj->region_code = $region_code;
 
-        null !== $enableSipTrunking && $obj->enableSipTrunking = $enableSipTrunking;
+        null !== $enable_sip_trunking && $obj->enable_sip_trunking = $enable_sip_trunking;
         null !== $name && $obj->name = $name;
 
         return $obj;
@@ -95,7 +98,7 @@ final class WireguardInterfaceCreateParams implements BaseModel
     public function withNetworkID(string $networkID): self
     {
         $obj = clone $this;
-        $obj->networkID = $networkID;
+        $obj->network_id = $networkID;
 
         return $obj;
     }
@@ -106,7 +109,7 @@ final class WireguardInterfaceCreateParams implements BaseModel
     public function withRegionCode(string $regionCode): self
     {
         $obj = clone $this;
-        $obj->regionCode = $regionCode;
+        $obj->region_code = $regionCode;
 
         return $obj;
     }
@@ -117,7 +120,7 @@ final class WireguardInterfaceCreateParams implements BaseModel
     public function withEnableSipTrunking(bool $enableSipTrunking): self
     {
         $obj = clone $this;
-        $obj->enableSipTrunking = $enableSipTrunking;
+        $obj->enable_sip_trunking = $enableSipTrunking;
 
         return $obj;
     }

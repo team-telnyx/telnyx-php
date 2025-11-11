@@ -13,17 +13,17 @@ use Telnyx\Texml\Accounts\Transcriptions\Json\JsonGetRecordingTranscriptionSidJs
 
 /**
  * @phpstan-type JsonGetRecordingTranscriptionSidJsonResponseShape = array{
- *   accountSid?: string,
- *   apiVersion?: string,
- *   callSid?: string,
- *   dateCreated?: \DateTimeInterface,
- *   dateUpdated?: \DateTimeInterface,
+ *   account_sid?: string|null,
+ *   api_version?: string|null,
+ *   call_sid?: string|null,
+ *   date_created?: \DateTimeInterface|null,
+ *   date_updated?: \DateTimeInterface|null,
  *   duration?: string|null,
- *   recordingSid?: string,
- *   sid?: string,
- *   status?: value-of<Status>,
- *   transcriptionText?: string,
- *   uri?: string,
+ *   recording_sid?: string|null,
+ *   sid?: string|null,
+ *   status?: value-of<Status>|null,
+ *   transcription_text?: string|null,
+ *   uri?: string|null,
  * }
  */
 final class JsonGetRecordingTranscriptionSidJsonResponse implements BaseModel, ResponseConverter
@@ -33,23 +33,23 @@ final class JsonGetRecordingTranscriptionSidJsonResponse implements BaseModel, R
 
     use SdkResponse;
 
-    #[Api('account_sid', optional: true)]
-    public ?string $accountSid;
+    #[Api(optional: true)]
+    public ?string $account_sid;
 
     /**
      * The version of the API that was used to make the request.
      */
-    #[Api('api_version', optional: true)]
-    public ?string $apiVersion;
+    #[Api(optional: true)]
+    public ?string $api_version;
 
-    #[Api('call_sid', optional: true)]
-    public ?string $callSid;
+    #[Api(optional: true)]
+    public ?string $call_sid;
 
-    #[Api('date_created', optional: true)]
-    public ?\DateTimeInterface $dateCreated;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $date_created;
 
-    #[Api('date_updated', optional: true)]
-    public ?\DateTimeInterface $dateUpdated;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $date_updated;
 
     /**
      * The duration of this recording, given in seconds.
@@ -60,8 +60,8 @@ final class JsonGetRecordingTranscriptionSidJsonResponse implements BaseModel, R
     /**
      * Identifier of a resource.
      */
-    #[Api('recording_sid', optional: true)]
-    public ?string $recordingSid;
+    #[Api(optional: true)]
+    public ?string $recording_sid;
 
     /**
      * Identifier of a resource.
@@ -80,8 +80,8 @@ final class JsonGetRecordingTranscriptionSidJsonResponse implements BaseModel, R
     /**
      * The recording's transcribed text.
      */
-    #[Api('transcription_text', optional: true)]
-    public ?string $transcriptionText;
+    #[Api(optional: true)]
+    public ?string $transcription_text;
 
     /**
      * The relative URI for the recording transcription resource.
@@ -102,30 +102,30 @@ final class JsonGetRecordingTranscriptionSidJsonResponse implements BaseModel, R
      * @param Status|value-of<Status> $status
      */
     public static function with(
-        ?string $accountSid = null,
-        ?string $apiVersion = null,
-        ?string $callSid = null,
-        ?\DateTimeInterface $dateCreated = null,
-        ?\DateTimeInterface $dateUpdated = null,
+        ?string $account_sid = null,
+        ?string $api_version = null,
+        ?string $call_sid = null,
+        ?\DateTimeInterface $date_created = null,
+        ?\DateTimeInterface $date_updated = null,
         ?string $duration = null,
-        ?string $recordingSid = null,
+        ?string $recording_sid = null,
         ?string $sid = null,
         Status|string|null $status = null,
-        ?string $transcriptionText = null,
+        ?string $transcription_text = null,
         ?string $uri = null,
     ): self {
         $obj = new self;
 
-        null !== $accountSid && $obj->accountSid = $accountSid;
-        null !== $apiVersion && $obj->apiVersion = $apiVersion;
-        null !== $callSid && $obj->callSid = $callSid;
-        null !== $dateCreated && $obj->dateCreated = $dateCreated;
-        null !== $dateUpdated && $obj->dateUpdated = $dateUpdated;
+        null !== $account_sid && $obj->account_sid = $account_sid;
+        null !== $api_version && $obj->api_version = $api_version;
+        null !== $call_sid && $obj->call_sid = $call_sid;
+        null !== $date_created && $obj->date_created = $date_created;
+        null !== $date_updated && $obj->date_updated = $date_updated;
         null !== $duration && $obj->duration = $duration;
-        null !== $recordingSid && $obj->recordingSid = $recordingSid;
+        null !== $recording_sid && $obj->recording_sid = $recording_sid;
         null !== $sid && $obj->sid = $sid;
         null !== $status && $obj['status'] = $status;
-        null !== $transcriptionText && $obj->transcriptionText = $transcriptionText;
+        null !== $transcription_text && $obj->transcription_text = $transcription_text;
         null !== $uri && $obj->uri = $uri;
 
         return $obj;
@@ -134,7 +134,7 @@ final class JsonGetRecordingTranscriptionSidJsonResponse implements BaseModel, R
     public function withAccountSid(string $accountSid): self
     {
         $obj = clone $this;
-        $obj->accountSid = $accountSid;
+        $obj->account_sid = $accountSid;
 
         return $obj;
     }
@@ -145,7 +145,7 @@ final class JsonGetRecordingTranscriptionSidJsonResponse implements BaseModel, R
     public function withAPIVersion(string $apiVersion): self
     {
         $obj = clone $this;
-        $obj->apiVersion = $apiVersion;
+        $obj->api_version = $apiVersion;
 
         return $obj;
     }
@@ -153,7 +153,7 @@ final class JsonGetRecordingTranscriptionSidJsonResponse implements BaseModel, R
     public function withCallSid(string $callSid): self
     {
         $obj = clone $this;
-        $obj->callSid = $callSid;
+        $obj->call_sid = $callSid;
 
         return $obj;
     }
@@ -161,7 +161,7 @@ final class JsonGetRecordingTranscriptionSidJsonResponse implements BaseModel, R
     public function withDateCreated(\DateTimeInterface $dateCreated): self
     {
         $obj = clone $this;
-        $obj->dateCreated = $dateCreated;
+        $obj->date_created = $dateCreated;
 
         return $obj;
     }
@@ -169,7 +169,7 @@ final class JsonGetRecordingTranscriptionSidJsonResponse implements BaseModel, R
     public function withDateUpdated(\DateTimeInterface $dateUpdated): self
     {
         $obj = clone $this;
-        $obj->dateUpdated = $dateUpdated;
+        $obj->date_updated = $dateUpdated;
 
         return $obj;
     }
@@ -191,7 +191,7 @@ final class JsonGetRecordingTranscriptionSidJsonResponse implements BaseModel, R
     public function withRecordingSid(string $recordingSid): self
     {
         $obj = clone $this;
-        $obj->recordingSid = $recordingSid;
+        $obj->recording_sid = $recordingSid;
 
         return $obj;
     }
@@ -226,7 +226,7 @@ final class JsonGetRecordingTranscriptionSidJsonResponse implements BaseModel, R
     public function withTranscriptionText(string $transcriptionText): self
     {
         $obj = clone $this;
-        $obj->transcriptionText = $transcriptionText;
+        $obj->transcription_text = $transcriptionText;
 
         return $obj;
     }

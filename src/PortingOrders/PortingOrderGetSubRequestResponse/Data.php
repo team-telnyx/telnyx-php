@@ -9,7 +9,9 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type DataShape = array{portRequestID?: string, subRequestID?: string}
+ * @phpstan-type DataShape = array{
+ *   port_request_id?: string|null, sub_request_id?: string|null
+ * }
  */
 final class Data implements BaseModel
 {
@@ -19,14 +21,14 @@ final class Data implements BaseModel
     /**
      * Identifies the Port Request associated with the Porting Order.
      */
-    #[Api('port_request_id', optional: true)]
-    public ?string $portRequestID;
+    #[Api(optional: true)]
+    public ?string $port_request_id;
 
     /**
      * Identifies the Sub Request associated with the Porting Order.
      */
-    #[Api('sub_request_id', optional: true)]
-    public ?string $subRequestID;
+    #[Api(optional: true)]
+    public ?string $sub_request_id;
 
     public function __construct()
     {
@@ -39,13 +41,13 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $portRequestID = null,
-        ?string $subRequestID = null
+        ?string $port_request_id = null,
+        ?string $sub_request_id = null
     ): self {
         $obj = new self;
 
-        null !== $portRequestID && $obj->portRequestID = $portRequestID;
-        null !== $subRequestID && $obj->subRequestID = $subRequestID;
+        null !== $port_request_id && $obj->port_request_id = $port_request_id;
+        null !== $sub_request_id && $obj->sub_request_id = $sub_request_id;
 
         return $obj;
     }
@@ -56,7 +58,7 @@ final class Data implements BaseModel
     public function withPortRequestID(string $portRequestID): self
     {
         $obj = clone $this;
-        $obj->portRequestID = $portRequestID;
+        $obj->port_request_id = $portRequestID;
 
         return $obj;
     }
@@ -67,7 +69,7 @@ final class Data implements BaseModel
     public function withSubRequestID(string $subRequestID): self
     {
         $obj = clone $this;
-        $obj->subRequestID = $subRequestID;
+        $obj->sub_request_id = $subRequestID;
 
         return $obj;
     }

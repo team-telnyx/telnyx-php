@@ -13,12 +13,12 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 /**
  * @phpstan-type OAuthIntrospectResponseShape = array{
  *   active: bool,
- *   aud?: string,
- *   clientID?: string,
- *   exp?: int,
- *   iat?: int,
- *   iss?: string,
- *   scope?: string,
+ *   aud?: string|null,
+ *   client_id?: string|null,
+ *   exp?: int|null,
+ *   iat?: int|null,
+ *   iss?: string|null,
+ *   scope?: string|null,
  * }
  */
 final class OAuthIntrospectResponse implements BaseModel, ResponseConverter
@@ -43,8 +43,8 @@ final class OAuthIntrospectResponse implements BaseModel, ResponseConverter
     /**
      * Client identifier.
      */
-    #[Api('client_id', optional: true)]
-    public ?string $clientID;
+    #[Api(optional: true)]
+    public ?string $client_id;
 
     /**
      * Expiration timestamp.
@@ -97,7 +97,7 @@ final class OAuthIntrospectResponse implements BaseModel, ResponseConverter
     public static function with(
         bool $active,
         ?string $aud = null,
-        ?string $clientID = null,
+        ?string $client_id = null,
         ?int $exp = null,
         ?int $iat = null,
         ?string $iss = null,
@@ -108,7 +108,7 @@ final class OAuthIntrospectResponse implements BaseModel, ResponseConverter
         $obj->active = $active;
 
         null !== $aud && $obj->aud = $aud;
-        null !== $clientID && $obj->clientID = $clientID;
+        null !== $client_id && $obj->client_id = $client_id;
         null !== $exp && $obj->exp = $exp;
         null !== $iat && $obj->iat = $iat;
         null !== $iss && $obj->iss = $iss;
@@ -145,7 +145,7 @@ final class OAuthIntrospectResponse implements BaseModel, ResponseConverter
     public function withClientID(string $clientID): self
     {
         $obj = clone $this;
-        $obj->clientID = $clientID;
+        $obj->client_id = $clientID;
 
         return $obj;
     }

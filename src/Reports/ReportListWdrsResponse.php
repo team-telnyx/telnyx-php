@@ -14,7 +14,7 @@ use Telnyx\Reports\ReportListWdrsResponse\Meta;
 
 /**
  * @phpstan-type ReportListWdrsResponseShape = array{
- *   data?: list<Data>, meta?: Meta
+ *   data?: list<Data>|null, meta?: Meta|null
  * }
  */
 final class ReportListWdrsResponse implements BaseModel, ResponseConverter

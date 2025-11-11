@@ -13,7 +13,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type GlobalIPAssignmentListResponseShape = array{
- *   data?: list<GlobalIPAssignment>, meta?: PaginationMeta
+ *   data?: list<GlobalIPAssignment>|null, meta?: PaginationMeta|null
  * }
  */
 final class GlobalIPAssignmentListResponse implements BaseModel, ResponseConverter

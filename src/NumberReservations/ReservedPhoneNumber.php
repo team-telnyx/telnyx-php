@@ -11,13 +11,13 @@ use Telnyx\NumberReservations\ReservedPhoneNumber\Status;
 
 /**
  * @phpstan-type ReservedPhoneNumberShape = array{
- *   id?: string,
- *   createdAt?: \DateTimeInterface,
- *   expiredAt?: \DateTimeInterface,
- *   phoneNumber?: string,
- *   recordType?: string,
- *   status?: value-of<Status>,
- *   updatedAt?: \DateTimeInterface,
+ *   id?: string|null,
+ *   created_at?: \DateTimeInterface|null,
+ *   expired_at?: \DateTimeInterface|null,
+ *   phone_number?: string|null,
+ *   record_type?: string|null,
+ *   status?: value-of<Status>|null,
+ *   updated_at?: \DateTimeInterface|null,
  * }
  */
 final class ReservedPhoneNumber implements BaseModel
@@ -31,20 +31,20 @@ final class ReservedPhoneNumber implements BaseModel
     /**
      * An ISO 8901 datetime string denoting when the individual number reservation was created.
      */
-    #[Api('created_at', optional: true)]
-    public ?\DateTimeInterface $createdAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $created_at;
 
     /**
      * An ISO 8901 datetime string for when the individual number reservation is going to expire.
      */
-    #[Api('expired_at', optional: true)]
-    public ?\DateTimeInterface $expiredAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $expired_at;
 
-    #[Api('phone_number', optional: true)]
-    public ?string $phoneNumber;
+    #[Api(optional: true)]
+    public ?string $phone_number;
 
-    #[Api('record_type', optional: true)]
-    public ?string $recordType;
+    #[Api(optional: true)]
+    public ?string $record_type;
 
     /**
      * The status of the phone number's reservation.
@@ -57,8 +57,8 @@ final class ReservedPhoneNumber implements BaseModel
     /**
      * An ISO 8901 datetime string for when the the individual number reservation was updated.
      */
-    #[Api('updated_at', optional: true)]
-    public ?\DateTimeInterface $updatedAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $updated_at;
 
     public function __construct()
     {
@@ -74,22 +74,22 @@ final class ReservedPhoneNumber implements BaseModel
      */
     public static function with(
         ?string $id = null,
-        ?\DateTimeInterface $createdAt = null,
-        ?\DateTimeInterface $expiredAt = null,
-        ?string $phoneNumber = null,
-        ?string $recordType = null,
+        ?\DateTimeInterface $created_at = null,
+        ?\DateTimeInterface $expired_at = null,
+        ?string $phone_number = null,
+        ?string $record_type = null,
         Status|string|null $status = null,
-        ?\DateTimeInterface $updatedAt = null,
+        ?\DateTimeInterface $updated_at = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj->id = $id;
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $expiredAt && $obj->expiredAt = $expiredAt;
-        null !== $phoneNumber && $obj->phoneNumber = $phoneNumber;
-        null !== $recordType && $obj->recordType = $recordType;
+        null !== $created_at && $obj->created_at = $created_at;
+        null !== $expired_at && $obj->expired_at = $expired_at;
+        null !== $phone_number && $obj->phone_number = $phone_number;
+        null !== $record_type && $obj->record_type = $record_type;
         null !== $status && $obj['status'] = $status;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
+        null !== $updated_at && $obj->updated_at = $updated_at;
 
         return $obj;
     }
@@ -108,7 +108,7 @@ final class ReservedPhoneNumber implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }
@@ -119,7 +119,7 @@ final class ReservedPhoneNumber implements BaseModel
     public function withExpiredAt(\DateTimeInterface $expiredAt): self
     {
         $obj = clone $this;
-        $obj->expiredAt = $expiredAt;
+        $obj->expired_at = $expiredAt;
 
         return $obj;
     }
@@ -127,7 +127,7 @@ final class ReservedPhoneNumber implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj->phoneNumber = $phoneNumber;
+        $obj->phone_number = $phoneNumber;
 
         return $obj;
     }
@@ -135,7 +135,7 @@ final class ReservedPhoneNumber implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType;
+        $obj->record_type = $recordType;
 
         return $obj;
     }
@@ -159,7 +159,7 @@ final class ReservedPhoneNumber implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $obj->updated_at = $updatedAt;
 
         return $obj;
     }

@@ -11,7 +11,7 @@ use Telnyx\Webhooks\CallConversationInsightsGeneratedWebhookEvent\Data;
 
 /**
  * @phpstan-type CallConversationInsightsGeneratedWebhookEventShape = array{
- *   data?: Data
+ *   data?: Data|null
  * }
  */
 final class CallConversationInsightsGeneratedWebhookEvent implements BaseModel

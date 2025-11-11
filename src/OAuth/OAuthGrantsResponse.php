@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type OAuthGrantsResponseShape = array{redirectUri: string}
+ * @phpstan-type OAuthGrantsResponseShape = array{redirect_uri: string}
  */
 final class OAuthGrantsResponse implements BaseModel, ResponseConverter
 {
@@ -23,15 +23,15 @@ final class OAuthGrantsResponse implements BaseModel, ResponseConverter
     /**
      * Redirect URI with authorization code or error.
      */
-    #[Api('redirect_uri')]
-    public string $redirectUri;
+    #[Api]
+    public string $redirect_uri;
 
     /**
      * `new OAuthGrantsResponse()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * OAuthGrantsResponse::with(redirectUri: ...)
+     * OAuthGrantsResponse::with(redirect_uri: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -50,11 +50,11 @@ final class OAuthGrantsResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(string $redirectUri): self
+    public static function with(string $redirect_uri): self
     {
         $obj = new self;
 
-        $obj->redirectUri = $redirectUri;
+        $obj->redirect_uri = $redirect_uri;
 
         return $obj;
     }
@@ -65,7 +65,7 @@ final class OAuthGrantsResponse implements BaseModel, ResponseConverter
     public function withRedirectUri(string $redirectUri): self
     {
         $obj = clone $this;
-        $obj->redirectUri = $redirectUri;
+        $obj->redirect_uri = $redirectUri;
 
         return $obj;
     }

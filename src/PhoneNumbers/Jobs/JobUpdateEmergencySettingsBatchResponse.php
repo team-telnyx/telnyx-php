@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type JobUpdateEmergencySettingsBatchResponseShape = array{
- *   data?: PhoneNumbersJob
+ *   data?: PhoneNumbersJob|null
  * }
  */
 final class JobUpdateEmergencySettingsBatchResponse implements BaseModel, ResponseConverter

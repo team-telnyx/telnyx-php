@@ -13,31 +13,31 @@ use Telnyx\VirtualCrossConnects\VirtualCrossConnectDeleteResponse\Data\Region;
 
 /**
  * @phpstan-type DataShape = array{
- *   id?: string,
- *   createdAt?: string,
- *   recordType?: string,
- *   updatedAt?: string,
- *   name?: string,
- *   networkID?: string,
- *   status?: value-of<InterfaceStatus>,
- *   regionCode?: string,
- *   bgpAsn: float,
- *   cloudProvider: value-of<CloudProvider>,
- *   cloudProviderRegion: string,
- *   primaryCloudAccountID: string,
- *   bandwidthMbps?: float,
- *   primaryBgpKey?: string,
- *   primaryCloudIP?: string,
- *   primaryEnabled?: bool,
- *   primaryRoutingAnnouncement?: bool,
- *   primaryTelnyxIP?: string,
- *   region?: Region,
- *   secondaryBgpKey?: string,
- *   secondaryCloudAccountID?: string,
- *   secondaryCloudIP?: string,
- *   secondaryEnabled?: bool,
- *   secondaryRoutingAnnouncement?: bool,
- *   secondaryTelnyxIP?: string,
+ *   id?: string|null,
+ *   created_at?: string|null,
+ *   record_type?: string|null,
+ *   updated_at?: string|null,
+ *   name?: string|null,
+ *   network_id?: string|null,
+ *   status?: value-of<InterfaceStatus>|null,
+ *   region_code?: string|null,
+ *   bgp_asn: float,
+ *   cloud_provider: value-of<CloudProvider>,
+ *   cloud_provider_region: string,
+ *   primary_cloud_account_id: string,
+ *   bandwidth_mbps?: float|null,
+ *   primary_bgp_key?: string|null,
+ *   primary_cloud_ip?: string|null,
+ *   primary_enabled?: bool|null,
+ *   primary_routing_announcement?: bool|null,
+ *   primary_telnyx_ip?: string|null,
+ *   region?: Region|null,
+ *   secondary_bgp_key?: string|null,
+ *   secondary_cloud_account_id?: string|null,
+ *   secondary_cloud_ip?: string|null,
+ *   secondary_enabled?: bool|null,
+ *   secondary_routing_announcement?: bool|null,
+ *   secondary_telnyx_ip?: string|null,
  * }
  */
 final class Data implements BaseModel
@@ -54,20 +54,20 @@ final class Data implements BaseModel
     /**
      * ISO 8601 formatted date-time indicating when the resource was created.
      */
-    #[Api('created_at', optional: true)]
-    public ?string $createdAt;
+    #[Api(optional: true)]
+    public ?string $created_at;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api('record_type', optional: true)]
-    public ?string $recordType;
+    #[Api(optional: true)]
+    public ?string $record_type;
 
     /**
      * ISO 8601 formatted date-time indicating when the resource was updated.
      */
-    #[Api('updated_at', optional: true)]
-    public ?string $updatedAt;
+    #[Api(optional: true)]
+    public ?string $updated_at;
 
     /**
      * A user specified name for the interface.
@@ -78,8 +78,8 @@ final class Data implements BaseModel
     /**
      * The id of the network associated with the interface.
      */
-    #[Api('network_id', optional: true)]
-    public ?string $networkID;
+    #[Api(optional: true)]
+    public ?string $network_id;
 
     /**
      * The current status of the interface deployment.
@@ -92,70 +92,70 @@ final class Data implements BaseModel
     /**
      * The region the interface should be deployed to.
      */
-    #[Api('region_code', optional: true)]
-    public ?string $regionCode;
+    #[Api(optional: true)]
+    public ?string $region_code;
 
     /**
      * The Border Gateway Protocol (BGP) Autonomous System Number (ASN). If null, value will be assigned by Telnyx.
      */
-    #[Api('bgp_asn')]
-    public float $bgpAsn;
+    #[Api]
+    public float $bgp_asn;
 
     /**
      * The Virtual Private Cloud with which you would like to establish a cross connect.
      *
-     * @var value-of<CloudProvider> $cloudProvider
+     * @var value-of<CloudProvider> $cloud_provider
      */
-    #[Api('cloud_provider', enum: CloudProvider::class)]
-    public string $cloudProvider;
+    #[Api(enum: CloudProvider::class)]
+    public string $cloud_provider;
 
     /**
      * The region where your Virtual Private Cloud hosts are located.<br /><br />The available regions can be found using the /virtual_cross_connect_regions endpoint.
      */
-    #[Api('cloud_provider_region')]
-    public string $cloudProviderRegion;
+    #[Api]
+    public string $cloud_provider_region;
 
     /**
      * The identifier for your Virtual Private Cloud. The number will be different based upon your Cloud provider.
      */
-    #[Api('primary_cloud_account_id')]
-    public string $primaryCloudAccountID;
+    #[Api]
+    public string $primary_cloud_account_id;
 
     /**
      * The desired throughput in Megabits per Second (Mbps) for your Virtual Cross Connect.<br /><br />The available bandwidths can be found using the /virtual_cross_connect_regions endpoint.
      */
-    #[Api('bandwidth_mbps', optional: true)]
-    public ?float $bandwidthMbps;
+    #[Api(optional: true)]
+    public ?float $bandwidth_mbps;
 
     /**
      * The authentication key for BGP peer configuration.
      */
-    #[Api('primary_bgp_key', optional: true)]
-    public ?string $primaryBgpKey;
+    #[Api(optional: true)]
+    public ?string $primary_bgp_key;
 
     /**
      * The IP address assigned for your side of the Virtual Cross Connect.<br /><br />If none is provided, one will be generated for you.<br /><br />This value can not be patched once the VXC has bene provisioned.
      */
-    #[Api('primary_cloud_ip', optional: true)]
-    public ?string $primaryCloudIP;
+    #[Api(optional: true)]
+    public ?string $primary_cloud_ip;
 
     /**
      * Indicates whether the primary circuit is enabled. Setting this to `false` will disable the circuit.
      */
-    #[Api('primary_enabled', optional: true)]
-    public ?bool $primaryEnabled;
+    #[Api(optional: true)]
+    public ?bool $primary_enabled;
 
     /**
      * Whether the primary BGP route is being announced.
      */
-    #[Api('primary_routing_announcement', optional: true)]
-    public ?bool $primaryRoutingAnnouncement;
+    #[Api(optional: true)]
+    public ?bool $primary_routing_announcement;
 
     /**
      * The IP address assigned to the Telnyx side of the Virtual Cross Connect.<br /><br />If none is provided, one will be generated for you.<br /><br />This value should be null for GCE as Google will only inform you of your assigned IP once the connection has been accepted.
      */
-    #[Api('primary_telnyx_ip', optional: true)]
-    public ?string $primaryTelnyxIP;
+    #[Api(optional: true)]
+    public ?string $primary_telnyx_ip;
 
     #[Api(optional: true)]
     public ?Region $region;
@@ -163,38 +163,38 @@ final class Data implements BaseModel
     /**
      * The authentication key for BGP peer configuration.
      */
-    #[Api('secondary_bgp_key', optional: true)]
-    public ?string $secondaryBgpKey;
+    #[Api(optional: true)]
+    public ?string $secondary_bgp_key;
 
     /**
      * The identifier for your Virtual Private Cloud. The number will be different based upon your Cloud provider.<br /><br />This attribute is only necessary for GCE.
      */
-    #[Api('secondary_cloud_account_id', optional: true)]
-    public ?string $secondaryCloudAccountID;
+    #[Api(optional: true)]
+    public ?string $secondary_cloud_account_id;
 
     /**
      * The IP address assigned for your side of the Virtual Cross Connect.<br /><br />If none is provided, one will be generated for you.<br /><br />This value can not be patched once the VXC has bene provisioned.
      */
-    #[Api('secondary_cloud_ip', optional: true)]
-    public ?string $secondaryCloudIP;
+    #[Api(optional: true)]
+    public ?string $secondary_cloud_ip;
 
     /**
      * Indicates whether the secondary circuit is enabled. Setting this to `false` will disable the circuit.
      */
-    #[Api('secondary_enabled', optional: true)]
-    public ?bool $secondaryEnabled;
+    #[Api(optional: true)]
+    public ?bool $secondary_enabled;
 
     /**
      * Whether the secondary BGP route is being announced.
      */
-    #[Api('secondary_routing_announcement', optional: true)]
-    public ?bool $secondaryRoutingAnnouncement;
+    #[Api(optional: true)]
+    public ?bool $secondary_routing_announcement;
 
     /**
      * The IP address assigned to the Telnyx side of the Virtual Cross Connect.<br /><br />If none is provided, one will be generated for you.<br /><br />This value should be null for GCE as Google will only inform you of your assigned IP once the connection has been accepted.
      */
-    #[Api('secondary_telnyx_ip', optional: true)]
-    public ?string $secondaryTelnyxIP;
+    #[Api(optional: true)]
+    public ?string $secondary_telnyx_ip;
 
     /**
      * `new Data()` is missing required properties by the API.
@@ -202,10 +202,10 @@ final class Data implements BaseModel
      * To enforce required parameters use
      * ```
      * Data::with(
-     *   bgpAsn: ...,
-     *   cloudProvider: ...,
-     *   cloudProviderRegion: ...,
-     *   primaryCloudAccountID: ...,
+     *   bgp_asn: ...,
+     *   cloud_provider: ...,
+     *   cloud_provider_region: ...,
+     *   primary_cloud_account_id: ...,
      * )
      * ```
      *
@@ -229,64 +229,64 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CloudProvider|value-of<CloudProvider> $cloudProvider
+     * @param CloudProvider|value-of<CloudProvider> $cloud_provider
      * @param InterfaceStatus|value-of<InterfaceStatus> $status
      */
     public static function with(
-        float $bgpAsn,
-        CloudProvider|string $cloudProvider,
-        string $cloudProviderRegion,
-        string $primaryCloudAccountID,
+        float $bgp_asn,
+        CloudProvider|string $cloud_provider,
+        string $cloud_provider_region,
+        string $primary_cloud_account_id,
         ?string $id = null,
-        ?string $createdAt = null,
-        ?string $recordType = null,
-        ?string $updatedAt = null,
+        ?string $created_at = null,
+        ?string $record_type = null,
+        ?string $updated_at = null,
         ?string $name = null,
-        ?string $networkID = null,
+        ?string $network_id = null,
         InterfaceStatus|string|null $status = null,
-        ?string $regionCode = null,
-        ?float $bandwidthMbps = null,
-        ?string $primaryBgpKey = null,
-        ?string $primaryCloudIP = null,
-        ?bool $primaryEnabled = null,
-        ?bool $primaryRoutingAnnouncement = null,
-        ?string $primaryTelnyxIP = null,
+        ?string $region_code = null,
+        ?float $bandwidth_mbps = null,
+        ?string $primary_bgp_key = null,
+        ?string $primary_cloud_ip = null,
+        ?bool $primary_enabled = null,
+        ?bool $primary_routing_announcement = null,
+        ?string $primary_telnyx_ip = null,
         ?Region $region = null,
-        ?string $secondaryBgpKey = null,
-        ?string $secondaryCloudAccountID = null,
-        ?string $secondaryCloudIP = null,
-        ?bool $secondaryEnabled = null,
-        ?bool $secondaryRoutingAnnouncement = null,
-        ?string $secondaryTelnyxIP = null,
+        ?string $secondary_bgp_key = null,
+        ?string $secondary_cloud_account_id = null,
+        ?string $secondary_cloud_ip = null,
+        ?bool $secondary_enabled = null,
+        ?bool $secondary_routing_announcement = null,
+        ?string $secondary_telnyx_ip = null,
     ): self {
         $obj = new self;
 
-        $obj->bgpAsn = $bgpAsn;
-        $obj['cloudProvider'] = $cloudProvider;
-        $obj->cloudProviderRegion = $cloudProviderRegion;
-        $obj->primaryCloudAccountID = $primaryCloudAccountID;
+        $obj->bgp_asn = $bgp_asn;
+        $obj['cloud_provider'] = $cloud_provider;
+        $obj->cloud_provider_region = $cloud_provider_region;
+        $obj->primary_cloud_account_id = $primary_cloud_account_id;
 
         null !== $id && $obj->id = $id;
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $recordType && $obj->recordType = $recordType;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
+        null !== $created_at && $obj->created_at = $created_at;
+        null !== $record_type && $obj->record_type = $record_type;
+        null !== $updated_at && $obj->updated_at = $updated_at;
         null !== $name && $obj->name = $name;
-        null !== $networkID && $obj->networkID = $networkID;
+        null !== $network_id && $obj->network_id = $network_id;
         null !== $status && $obj['status'] = $status;
-        null !== $regionCode && $obj->regionCode = $regionCode;
-        null !== $bandwidthMbps && $obj->bandwidthMbps = $bandwidthMbps;
-        null !== $primaryBgpKey && $obj->primaryBgpKey = $primaryBgpKey;
-        null !== $primaryCloudIP && $obj->primaryCloudIP = $primaryCloudIP;
-        null !== $primaryEnabled && $obj->primaryEnabled = $primaryEnabled;
-        null !== $primaryRoutingAnnouncement && $obj->primaryRoutingAnnouncement = $primaryRoutingAnnouncement;
-        null !== $primaryTelnyxIP && $obj->primaryTelnyxIP = $primaryTelnyxIP;
+        null !== $region_code && $obj->region_code = $region_code;
+        null !== $bandwidth_mbps && $obj->bandwidth_mbps = $bandwidth_mbps;
+        null !== $primary_bgp_key && $obj->primary_bgp_key = $primary_bgp_key;
+        null !== $primary_cloud_ip && $obj->primary_cloud_ip = $primary_cloud_ip;
+        null !== $primary_enabled && $obj->primary_enabled = $primary_enabled;
+        null !== $primary_routing_announcement && $obj->primary_routing_announcement = $primary_routing_announcement;
+        null !== $primary_telnyx_ip && $obj->primary_telnyx_ip = $primary_telnyx_ip;
         null !== $region && $obj->region = $region;
-        null !== $secondaryBgpKey && $obj->secondaryBgpKey = $secondaryBgpKey;
-        null !== $secondaryCloudAccountID && $obj->secondaryCloudAccountID = $secondaryCloudAccountID;
-        null !== $secondaryCloudIP && $obj->secondaryCloudIP = $secondaryCloudIP;
-        null !== $secondaryEnabled && $obj->secondaryEnabled = $secondaryEnabled;
-        null !== $secondaryRoutingAnnouncement && $obj->secondaryRoutingAnnouncement = $secondaryRoutingAnnouncement;
-        null !== $secondaryTelnyxIP && $obj->secondaryTelnyxIP = $secondaryTelnyxIP;
+        null !== $secondary_bgp_key && $obj->secondary_bgp_key = $secondary_bgp_key;
+        null !== $secondary_cloud_account_id && $obj->secondary_cloud_account_id = $secondary_cloud_account_id;
+        null !== $secondary_cloud_ip && $obj->secondary_cloud_ip = $secondary_cloud_ip;
+        null !== $secondary_enabled && $obj->secondary_enabled = $secondary_enabled;
+        null !== $secondary_routing_announcement && $obj->secondary_routing_announcement = $secondary_routing_announcement;
+        null !== $secondary_telnyx_ip && $obj->secondary_telnyx_ip = $secondary_telnyx_ip;
 
         return $obj;
     }
@@ -308,7 +308,7 @@ final class Data implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }
@@ -319,7 +319,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType;
+        $obj->record_type = $recordType;
 
         return $obj;
     }
@@ -330,7 +330,7 @@ final class Data implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $obj->updated_at = $updatedAt;
 
         return $obj;
     }
@@ -352,7 +352,7 @@ final class Data implements BaseModel
     public function withNetworkID(string $networkID): self
     {
         $obj = clone $this;
-        $obj->networkID = $networkID;
+        $obj->network_id = $networkID;
 
         return $obj;
     }
@@ -376,7 +376,7 @@ final class Data implements BaseModel
     public function withRegionCode(string $regionCode): self
     {
         $obj = clone $this;
-        $obj->regionCode = $regionCode;
+        $obj->region_code = $regionCode;
 
         return $obj;
     }
@@ -387,7 +387,7 @@ final class Data implements BaseModel
     public function withBgpAsn(float $bgpAsn): self
     {
         $obj = clone $this;
-        $obj->bgpAsn = $bgpAsn;
+        $obj->bgp_asn = $bgpAsn;
 
         return $obj;
     }
@@ -400,7 +400,7 @@ final class Data implements BaseModel
     public function withCloudProvider(CloudProvider|string $cloudProvider): self
     {
         $obj = clone $this;
-        $obj['cloudProvider'] = $cloudProvider;
+        $obj['cloud_provider'] = $cloudProvider;
 
         return $obj;
     }
@@ -411,7 +411,7 @@ final class Data implements BaseModel
     public function withCloudProviderRegion(string $cloudProviderRegion): self
     {
         $obj = clone $this;
-        $obj->cloudProviderRegion = $cloudProviderRegion;
+        $obj->cloud_provider_region = $cloudProviderRegion;
 
         return $obj;
     }
@@ -423,7 +423,7 @@ final class Data implements BaseModel
         string $primaryCloudAccountID
     ): self {
         $obj = clone $this;
-        $obj->primaryCloudAccountID = $primaryCloudAccountID;
+        $obj->primary_cloud_account_id = $primaryCloudAccountID;
 
         return $obj;
     }
@@ -434,7 +434,7 @@ final class Data implements BaseModel
     public function withBandwidthMbps(float $bandwidthMbps): self
     {
         $obj = clone $this;
-        $obj->bandwidthMbps = $bandwidthMbps;
+        $obj->bandwidth_mbps = $bandwidthMbps;
 
         return $obj;
     }
@@ -445,7 +445,7 @@ final class Data implements BaseModel
     public function withPrimaryBgpKey(string $primaryBgpKey): self
     {
         $obj = clone $this;
-        $obj->primaryBgpKey = $primaryBgpKey;
+        $obj->primary_bgp_key = $primaryBgpKey;
 
         return $obj;
     }
@@ -456,7 +456,7 @@ final class Data implements BaseModel
     public function withPrimaryCloudIP(string $primaryCloudIP): self
     {
         $obj = clone $this;
-        $obj->primaryCloudIP = $primaryCloudIP;
+        $obj->primary_cloud_ip = $primaryCloudIP;
 
         return $obj;
     }
@@ -467,7 +467,7 @@ final class Data implements BaseModel
     public function withPrimaryEnabled(bool $primaryEnabled): self
     {
         $obj = clone $this;
-        $obj->primaryEnabled = $primaryEnabled;
+        $obj->primary_enabled = $primaryEnabled;
 
         return $obj;
     }
@@ -479,7 +479,7 @@ final class Data implements BaseModel
         bool $primaryRoutingAnnouncement
     ): self {
         $obj = clone $this;
-        $obj->primaryRoutingAnnouncement = $primaryRoutingAnnouncement;
+        $obj->primary_routing_announcement = $primaryRoutingAnnouncement;
 
         return $obj;
     }
@@ -490,7 +490,7 @@ final class Data implements BaseModel
     public function withPrimaryTelnyxIP(string $primaryTelnyxIP): self
     {
         $obj = clone $this;
-        $obj->primaryTelnyxIP = $primaryTelnyxIP;
+        $obj->primary_telnyx_ip = $primaryTelnyxIP;
 
         return $obj;
     }
@@ -509,7 +509,7 @@ final class Data implements BaseModel
     public function withSecondaryBgpKey(string $secondaryBgpKey): self
     {
         $obj = clone $this;
-        $obj->secondaryBgpKey = $secondaryBgpKey;
+        $obj->secondary_bgp_key = $secondaryBgpKey;
 
         return $obj;
     }
@@ -521,7 +521,7 @@ final class Data implements BaseModel
         string $secondaryCloudAccountID
     ): self {
         $obj = clone $this;
-        $obj->secondaryCloudAccountID = $secondaryCloudAccountID;
+        $obj->secondary_cloud_account_id = $secondaryCloudAccountID;
 
         return $obj;
     }
@@ -532,7 +532,7 @@ final class Data implements BaseModel
     public function withSecondaryCloudIP(string $secondaryCloudIP): self
     {
         $obj = clone $this;
-        $obj->secondaryCloudIP = $secondaryCloudIP;
+        $obj->secondary_cloud_ip = $secondaryCloudIP;
 
         return $obj;
     }
@@ -543,7 +543,7 @@ final class Data implements BaseModel
     public function withSecondaryEnabled(bool $secondaryEnabled): self
     {
         $obj = clone $this;
-        $obj->secondaryEnabled = $secondaryEnabled;
+        $obj->secondary_enabled = $secondaryEnabled;
 
         return $obj;
     }
@@ -555,7 +555,7 @@ final class Data implements BaseModel
         bool $secondaryRoutingAnnouncement
     ): self {
         $obj = clone $this;
-        $obj->secondaryRoutingAnnouncement = $secondaryRoutingAnnouncement;
+        $obj->secondary_routing_announcement = $secondaryRoutingAnnouncement;
 
         return $obj;
     }
@@ -566,7 +566,7 @@ final class Data implements BaseModel
     public function withSecondaryTelnyxIP(string $secondaryTelnyxIP): self
     {
         $obj = clone $this;
-        $obj->secondaryTelnyxIP = $secondaryTelnyxIP;
+        $obj->secondary_telnyx_ip = $secondaryTelnyxIP;
 
         return $obj;
     }

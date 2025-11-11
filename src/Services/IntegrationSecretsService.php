@@ -7,16 +7,11 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\IntegrationSecrets\IntegrationSecretCreateParams;
-use Telnyx\IntegrationSecrets\IntegrationSecretCreateParams\Type;
 use Telnyx\IntegrationSecrets\IntegrationSecretListParams;
-use Telnyx\IntegrationSecrets\IntegrationSecretListParams\Filter;
-use Telnyx\IntegrationSecrets\IntegrationSecretListParams\Page;
 use Telnyx\IntegrationSecrets\IntegrationSecretListResponse;
 use Telnyx\IntegrationSecrets\IntegrationSecretNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\IntegrationSecretsContract;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class IntegrationSecretsService implements IntegrationSecretsContract
 {
@@ -30,47 +25,23 @@ final class IntegrationSecretsService implements IntegrationSecretsContract
      *
      * Create a new secret with an associated identifier that can be used to securely integrate with other services.
      *
-     * @param string $identifier the unique identifier of the secret
-     * @param Type|value-of<Type> $type the type of secret
-     * @param string $token The token for the secret. Required for bearer type secrets, ignored otherwise.
-     * @param string $password The password for the secret. Required for basic type secrets, ignored otherwise.
-     * @param string $username The username for the secret. Required for basic type secrets, ignored otherwise.
+     * @param array{
+     *   identifier: string,
+     *   type: "bearer"|"basic",
+     *   token?: string,
+     *   password?: string,
+     *   username?: string,
+     * }|IntegrationSecretCreateParams $params
      *
      * @throws APIException
      */
     public function create(
-        $identifier,
-        $type,
-        $token = omit,
-        $password = omit,
-        $username = omit,
+        array|IntegrationSecretCreateParams $params,
         ?RequestOptions $requestOptions = null,
-    ): IntegrationSecretNewResponse {
-        $params = [
-            'identifier' => $identifier,
-            'type' => $type,
-            'token' => $token,
-            'password' => $password,
-            'username' => $username,
-        ];
-
-        return $this->createRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): IntegrationSecretNewResponse {
         [$parsed, $options] = IntegrationSecretCreateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -88,35 +59,20 @@ final class IntegrationSecretsService implements IntegrationSecretsContract
      *
      * Retrieve a list of all integration secrets configured by the user.
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[type]
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param array{
+     *   filter?: array{type?: "bearer"|"basic"},
+     *   page?: array{number?: int, size?: int},
+     * }|IntegrationSecretListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): IntegrationSecretListResponse {
-        $params = ['filter' => $filter, 'page' => $page];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|IntegrationSecretListParams $params,
+        ?RequestOptions $requestOptions = null,
     ): IntegrationSecretListResponse {
         [$parsed, $options] = IntegrationSecretListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

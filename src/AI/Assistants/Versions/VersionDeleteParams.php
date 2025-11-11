@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\AI\Assistants\Versions->delete
  *
- * @phpstan-type VersionDeleteParamsShape = array{assistantID: string}
+ * @phpstan-type VersionDeleteParamsShape = array{assistant_id: string}
  */
 final class VersionDeleteParams implements BaseModel
 {
@@ -23,14 +23,14 @@ final class VersionDeleteParams implements BaseModel
     use SdkParams;
 
     #[Api]
-    public string $assistantID;
+    public string $assistant_id;
 
     /**
      * `new VersionDeleteParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * VersionDeleteParams::with(assistantID: ...)
+     * VersionDeleteParams::with(assistant_id: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -49,11 +49,11 @@ final class VersionDeleteParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(string $assistantID): self
+    public static function with(string $assistant_id): self
     {
         $obj = new self;
 
-        $obj->assistantID = $assistantID;
+        $obj->assistant_id = $assistant_id;
 
         return $obj;
     }
@@ -61,7 +61,7 @@ final class VersionDeleteParams implements BaseModel
     public function withAssistantID(string $assistantID): self
     {
         $obj = clone $this;
-        $obj->assistantID = $assistantID;
+        $obj->assistant_id = $assistantID;
 
         return $obj;
     }

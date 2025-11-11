@@ -19,16 +19,16 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  * after creating/updating tests.
  *
  * @phpstan-type AssistantTestShape = array{
- *   createdAt: \DateTimeInterface,
+ *   created_at: \DateTimeInterface,
  *   name: string,
  *   rubric: list<Rubric>,
- *   telnyxConversationChannel: value-of<TelnyxConversationChannel>,
- *   testID: string,
- *   description?: string,
- *   destination?: string,
- *   instructions?: string,
- *   maxDurationSeconds?: int,
- *   testSuite?: string,
+ *   telnyx_conversation_channel: value-of<TelnyxConversationChannel>,
+ *   test_id: string,
+ *   description?: string|null,
+ *   destination?: string|null,
+ *   instructions?: string|null,
+ *   max_duration_seconds?: int|null,
+ *   test_suite?: string|null,
  * }
  */
 final class AssistantTest implements BaseModel, ResponseConverter
@@ -41,8 +41,8 @@ final class AssistantTest implements BaseModel, ResponseConverter
     /**
      * Timestamp when the test was created.
      */
-    #[Api('created_at')]
-    public \DateTimeInterface $createdAt;
+    #[Api]
+    public \DateTimeInterface $created_at;
 
     /**
      * Human-readable name of the test.
@@ -61,16 +61,16 @@ final class AssistantTest implements BaseModel, ResponseConverter
     /**
      * Communication channel used for test execution.
      *
-     * @var value-of<TelnyxConversationChannel> $telnyxConversationChannel
+     * @var value-of<TelnyxConversationChannel> $telnyx_conversation_channel
      */
-    #[Api('telnyx_conversation_channel', enum: TelnyxConversationChannel::class)]
-    public string $telnyxConversationChannel;
+    #[Api(enum: TelnyxConversationChannel::class)]
+    public string $telnyx_conversation_channel;
 
     /**
      * Unique identifier for the assistant test.
      */
-    #[Api('test_id')]
-    public string $testID;
+    #[Api]
+    public string $test_id;
 
     /**
      * Detailed description of the test's purpose and scope.
@@ -93,14 +93,14 @@ final class AssistantTest implements BaseModel, ResponseConverter
     /**
      * Maximum allowed duration for test execution in seconds.
      */
-    #[Api('max_duration_seconds', optional: true)]
-    public ?int $maxDurationSeconds;
+    #[Api(optional: true)]
+    public ?int $max_duration_seconds;
 
     /**
      * Test suite grouping for organizational purposes.
      */
-    #[Api('test_suite', optional: true)]
-    public ?string $testSuite;
+    #[Api(optional: true)]
+    public ?string $test_suite;
 
     /**
      * `new AssistantTest()` is missing required properties by the API.
@@ -108,11 +108,11 @@ final class AssistantTest implements BaseModel, ResponseConverter
      * To enforce required parameters use
      * ```
      * AssistantTest::with(
-     *   createdAt: ...,
+     *   created_at: ...,
      *   name: ...,
      *   rubric: ...,
-     *   telnyxConversationChannel: ...,
-     *   testID: ...,
+     *   telnyx_conversation_channel: ...,
+     *   test_id: ...,
      * )
      * ```
      *
@@ -138,33 +138,33 @@ final class AssistantTest implements BaseModel, ResponseConverter
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<Rubric> $rubric
-     * @param TelnyxConversationChannel|value-of<TelnyxConversationChannel> $telnyxConversationChannel
+     * @param TelnyxConversationChannel|value-of<TelnyxConversationChannel> $telnyx_conversation_channel
      */
     public static function with(
-        \DateTimeInterface $createdAt,
+        \DateTimeInterface $created_at,
         string $name,
         array $rubric,
-        TelnyxConversationChannel|string $telnyxConversationChannel,
-        string $testID,
+        TelnyxConversationChannel|string $telnyx_conversation_channel,
+        string $test_id,
         ?string $description = null,
         ?string $destination = null,
         ?string $instructions = null,
-        ?int $maxDurationSeconds = null,
-        ?string $testSuite = null,
+        ?int $max_duration_seconds = null,
+        ?string $test_suite = null,
     ): self {
         $obj = new self;
 
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $created_at;
         $obj->name = $name;
         $obj->rubric = $rubric;
-        $obj['telnyxConversationChannel'] = $telnyxConversationChannel;
-        $obj->testID = $testID;
+        $obj['telnyx_conversation_channel'] = $telnyx_conversation_channel;
+        $obj->test_id = $test_id;
 
         null !== $description && $obj->description = $description;
         null !== $destination && $obj->destination = $destination;
         null !== $instructions && $obj->instructions = $instructions;
-        null !== $maxDurationSeconds && $obj->maxDurationSeconds = $maxDurationSeconds;
-        null !== $testSuite && $obj->testSuite = $testSuite;
+        null !== $max_duration_seconds && $obj->max_duration_seconds = $max_duration_seconds;
+        null !== $test_suite && $obj->test_suite = $test_suite;
 
         return $obj;
     }
@@ -175,7 +175,7 @@ final class AssistantTest implements BaseModel, ResponseConverter
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }
@@ -213,7 +213,7 @@ final class AssistantTest implements BaseModel, ResponseConverter
         TelnyxConversationChannel|string $telnyxConversationChannel
     ): self {
         $obj = clone $this;
-        $obj['telnyxConversationChannel'] = $telnyxConversationChannel;
+        $obj['telnyx_conversation_channel'] = $telnyxConversationChannel;
 
         return $obj;
     }
@@ -224,7 +224,7 @@ final class AssistantTest implements BaseModel, ResponseConverter
     public function withTestID(string $testID): self
     {
         $obj = clone $this;
-        $obj->testID = $testID;
+        $obj->test_id = $testID;
 
         return $obj;
     }
@@ -268,7 +268,7 @@ final class AssistantTest implements BaseModel, ResponseConverter
     public function withMaxDurationSeconds(int $maxDurationSeconds): self
     {
         $obj = clone $this;
-        $obj->maxDurationSeconds = $maxDurationSeconds;
+        $obj->max_duration_seconds = $maxDurationSeconds;
 
         return $obj;
     }
@@ -279,7 +279,7 @@ final class AssistantTest implements BaseModel, ResponseConverter
     public function withTestSuite(string $testSuite): self
     {
         $obj = clone $this;
-        $obj->testSuite = $testSuite;
+        $obj->test_suite = $testSuite;
 
         return $obj;
     }

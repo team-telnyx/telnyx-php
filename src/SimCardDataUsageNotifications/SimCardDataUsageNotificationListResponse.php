@@ -13,7 +13,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type SimCardDataUsageNotificationListResponseShape = array{
- *   data?: list<SimCardDataUsageNotification>, meta?: PaginationMeta
+ *   data?: list<SimCardDataUsageNotification>|null, meta?: PaginationMeta|null
  * }
  */
 final class SimCardDataUsageNotificationListResponse implements BaseModel, ResponseConverter

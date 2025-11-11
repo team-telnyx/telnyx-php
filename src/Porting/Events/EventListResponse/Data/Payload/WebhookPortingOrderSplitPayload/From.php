@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * The porting order that was split.
  *
- * @phpstan-type FromShape = array{id?: string}
+ * @phpstan-type FromShape = array{id?: string|null}
  */
 final class From implements BaseModel
 {

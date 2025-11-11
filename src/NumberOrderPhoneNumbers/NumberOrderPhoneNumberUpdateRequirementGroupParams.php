@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\NumberOrderPhoneNumbers->updateRequirementGroup
  *
  * @phpstan-type NumberOrderPhoneNumberUpdateRequirementGroupParamsShape = array{
- *   requirementGroupID: string
+ *   requirement_group_id: string
  * }
  */
 final class NumberOrderPhoneNumberUpdateRequirementGroupParams implements BaseModel
@@ -27,8 +27,8 @@ final class NumberOrderPhoneNumberUpdateRequirementGroupParams implements BaseMo
     /**
      * The ID of the requirement group to associate.
      */
-    #[Api('requirement_group_id')]
-    public string $requirementGroupID;
+    #[Api]
+    public string $requirement_group_id;
 
     /**
      * `new NumberOrderPhoneNumberUpdateRequirementGroupParams()` is missing required properties by the API.
@@ -36,7 +36,7 @@ final class NumberOrderPhoneNumberUpdateRequirementGroupParams implements BaseMo
      * To enforce required parameters use
      * ```
      * NumberOrderPhoneNumberUpdateRequirementGroupParams::with(
-     *   requirementGroupID: ...
+     *   requirement_group_id: ...
      * )
      * ```
      *
@@ -57,11 +57,11 @@ final class NumberOrderPhoneNumberUpdateRequirementGroupParams implements BaseMo
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(string $requirementGroupID): self
+    public static function with(string $requirement_group_id): self
     {
         $obj = new self;
 
-        $obj->requirementGroupID = $requirementGroupID;
+        $obj->requirement_group_id = $requirement_group_id;
 
         return $obj;
     }
@@ -72,7 +72,7 @@ final class NumberOrderPhoneNumberUpdateRequirementGroupParams implements BaseMo
     public function withRequirementGroupID(string $requirementGroupID): self
     {
         $obj = clone $this;
-        $obj->requirementGroupID = $requirementGroupID;
+        $obj->requirement_group_id = $requirementGroupID;
 
         return $obj;
     }

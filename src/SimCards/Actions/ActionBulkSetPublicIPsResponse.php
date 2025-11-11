@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\SimCards\Actions\ActionBulkSetPublicIPsResponse\Data;
 
 /**
- * @phpstan-type ActionBulkSetPublicIPsResponseShape = array{data?: Data}
+ * @phpstan-type ActionBulkSetPublicIPsResponseShape = array{data?: Data|null}
  */
 final class ActionBulkSetPublicIPsResponse implements BaseModel, ResponseConverter
 {

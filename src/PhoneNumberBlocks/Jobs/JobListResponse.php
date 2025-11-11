@@ -13,7 +13,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type JobListResponseShape = array{
- *   data?: list<Job>, meta?: PaginationMeta
+ *   data?: list<Job>|null, meta?: PaginationMeta|null
  * }
  */
 final class JobListResponse implements BaseModel, ResponseConverter

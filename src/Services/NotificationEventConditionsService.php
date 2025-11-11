@@ -7,13 +7,9 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\NotificationEventConditions\NotificationEventConditionListParams;
-use Telnyx\NotificationEventConditions\NotificationEventConditionListParams\Filter;
-use Telnyx\NotificationEventConditions\NotificationEventConditionListParams\Page;
 use Telnyx\NotificationEventConditions\NotificationEventConditionListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\NotificationEventConditionsContract;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class NotificationEventConditionsService implements NotificationEventConditionsContract
 {
@@ -27,35 +23,29 @@ final class NotificationEventConditionsService implements NotificationEventCondi
      *
      * Returns a list of your notifications events conditions.
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[associated_record_type][eq], filter[channel_type_id][eq], filter[notification_profile_id][eq], filter[notification_channel][eq], filter[notification_event_condition_id][eq], filter[status][eq]
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param array{
+     *   filter?: array{
+     *     associated_record_type?: array{eq?: "account"|"phone_number"},
+     *     channel_type_id?: array{eq?: "webhook"|"sms"|"email"|"voice"},
+     *     notification_channel?: array{eq?: string},
+     *     notification_event_condition_id?: array{eq?: string},
+     *     notification_profile_id?: array{eq?: string},
+     *     status?: array{
+     *       eq?: "enabled"|"enable-received"|"enable-pending"|"enable-submtited"|"delete-received"|"delete-pending"|"delete-submitted"|"deleted",
+     *     },
+     *   },
+     *   page?: array{number?: int, size?: int},
+     * }|NotificationEventConditionListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): NotificationEventConditionListResponse {
-        $params = ['filter' => $filter, 'page' => $page];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|NotificationEventConditionListParams $params,
+        ?RequestOptions $requestOptions = null,
     ): NotificationEventConditionListResponse {
         [$parsed, $options] = NotificationEventConditionListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

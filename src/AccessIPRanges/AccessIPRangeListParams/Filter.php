@@ -14,8 +14,8 @@ use Telnyx\Core\Contracts\BaseModel;
  * Consolidated filter parameter (deepObject style). Originally: filter[cidr_block], filter[cidr_block][startswith], filter[cidr_block][endswith], filter[cidr_block][contains], filter[created_at]. Supports complex bracket operations for dynamic filtering.
  *
  * @phpstan-type FilterShape = array{
- *   cidrBlock?: string|CidrBlockPatternFilter,
- *   createdAt?: \DateTimeInterface|DateRangeFilter,
+ *   cidr_block?: string|null|CidrBlockPatternFilter,
+ *   created_at?: null|\DateTimeInterface|DateRangeFilter,
  * }
  */
 final class Filter implements BaseModel
@@ -26,14 +26,14 @@ final class Filter implements BaseModel
     /**
      * Filter by exact CIDR block match.
      */
-    #[Api('cidr_block', optional: true)]
-    public string|CidrBlockPatternFilter|null $cidrBlock;
+    #[Api(optional: true)]
+    public string|CidrBlockPatternFilter|null $cidr_block;
 
     /**
      * Filter by exact creation date-time.
      */
-    #[Api('created_at', optional: true)]
-    public \DateTimeInterface|DateRangeFilter|null $createdAt;
+    #[Api(optional: true)]
+    public \DateTimeInterface|DateRangeFilter|null $created_at;
 
     public function __construct()
     {
@@ -46,13 +46,13 @@ final class Filter implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        string|CidrBlockPatternFilter|null $cidrBlock = null,
-        \DateTimeInterface|DateRangeFilter|null $createdAt = null,
+        string|CidrBlockPatternFilter|null $cidr_block = null,
+        \DateTimeInterface|DateRangeFilter|null $created_at = null,
     ): self {
         $obj = new self;
 
-        null !== $cidrBlock && $obj->cidrBlock = $cidrBlock;
-        null !== $createdAt && $obj->createdAt = $createdAt;
+        null !== $cidr_block && $obj->cidr_block = $cidr_block;
+        null !== $created_at && $obj->created_at = $created_at;
 
         return $obj;
     }
@@ -64,7 +64,7 @@ final class Filter implements BaseModel
         string|CidrBlockPatternFilter $cidrBlock
     ): self {
         $obj = clone $this;
-        $obj->cidrBlock = $cidrBlock;
+        $obj->cidr_block = $cidrBlock;
 
         return $obj;
     }
@@ -76,7 +76,7 @@ final class Filter implements BaseModel
         \DateTimeInterface|DateRangeFilter $createdAt
     ): self {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }

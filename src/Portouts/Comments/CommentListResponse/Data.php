@@ -12,10 +12,10 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type DataShape = array{
  *   id: string,
  *   body: string,
- *   createdAt: string,
- *   userID: string,
- *   portoutID?: string,
- *   recordType?: string,
+ *   created_at: string,
+ *   user_id: string,
+ *   portout_id?: string|null,
+ *   record_type?: string|null,
  * }
  */
 final class Data implements BaseModel
@@ -35,33 +35,33 @@ final class Data implements BaseModel
     /**
      * Comment creation timestamp in ISO 8601 format.
      */
-    #[Api('created_at')]
-    public string $createdAt;
+    #[Api]
+    public string $created_at;
 
     /**
      * Identifies the user who created the comment. Will be null if created by Telnyx Admin.
      */
-    #[Api('user_id')]
-    public string $userID;
+    #[Api]
+    public string $user_id;
 
     /**
      * Identifies the associated port request.
      */
-    #[Api('portout_id', optional: true)]
-    public ?string $portoutID;
+    #[Api(optional: true)]
+    public ?string $portout_id;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api('record_type', optional: true)]
-    public ?string $recordType;
+    #[Api(optional: true)]
+    public ?string $record_type;
 
     /**
      * `new Data()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Data::with(id: ..., body: ..., createdAt: ..., userID: ...)
+     * Data::with(id: ..., body: ..., created_at: ..., user_id: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -83,20 +83,20 @@ final class Data implements BaseModel
     public static function with(
         string $id,
         string $body,
-        string $createdAt,
-        string $userID,
-        ?string $portoutID = null,
-        ?string $recordType = null,
+        string $created_at,
+        string $user_id,
+        ?string $portout_id = null,
+        ?string $record_type = null,
     ): self {
         $obj = new self;
 
         $obj->id = $id;
         $obj->body = $body;
-        $obj->createdAt = $createdAt;
-        $obj->userID = $userID;
+        $obj->created_at = $created_at;
+        $obj->user_id = $user_id;
 
-        null !== $portoutID && $obj->portoutID = $portoutID;
-        null !== $recordType && $obj->recordType = $recordType;
+        null !== $portout_id && $obj->portout_id = $portout_id;
+        null !== $record_type && $obj->record_type = $record_type;
 
         return $obj;
     }
@@ -126,7 +126,7 @@ final class Data implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }
@@ -137,7 +137,7 @@ final class Data implements BaseModel
     public function withUserID(string $userID): self
     {
         $obj = clone $this;
-        $obj->userID = $userID;
+        $obj->user_id = $userID;
 
         return $obj;
     }
@@ -148,7 +148,7 @@ final class Data implements BaseModel
     public function withPortoutID(string $portoutID): self
     {
         $obj = clone $this;
-        $obj->portoutID = $portoutID;
+        $obj->portout_id = $portoutID;
 
         return $obj;
     }
@@ -159,7 +159,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType;
+        $obj->record_type = $recordType;
 
         return $obj;
     }

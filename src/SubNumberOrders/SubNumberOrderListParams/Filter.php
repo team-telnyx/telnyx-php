@@ -12,11 +12,11 @@ use Telnyx\Core\Contracts\BaseModel;
  * Consolidated filter parameter (deepObject style). Originally: filter[status], filter[order_request_id], filter[country_code], filter[phone_number_type], filter[phone_numbers_count].
  *
  * @phpstan-type FilterShape = array{
- *   countryCode?: string,
- *   orderRequestID?: string,
- *   phoneNumberType?: string,
- *   phoneNumbersCount?: int,
- *   status?: string,
+ *   country_code?: string|null,
+ *   order_request_id?: string|null,
+ *   phone_number_type?: string|null,
+ *   phone_numbers_count?: int|null,
+ *   status?: string|null,
  * }
  */
 final class Filter implements BaseModel
@@ -27,26 +27,26 @@ final class Filter implements BaseModel
     /**
      * ISO alpha-2 country code.
      */
-    #[Api('country_code', optional: true)]
-    public ?string $countryCode;
+    #[Api(optional: true)]
+    public ?string $country_code;
 
     /**
      * ID of the number order the sub number order belongs to.
      */
-    #[Api('order_request_id', optional: true)]
-    public ?string $orderRequestID;
+    #[Api(optional: true)]
+    public ?string $order_request_id;
 
     /**
      * Phone Number Type.
      */
-    #[Api('phone_number_type', optional: true)]
-    public ?string $phoneNumberType;
+    #[Api(optional: true)]
+    public ?string $phone_number_type;
 
     /**
      * Amount of numbers in the sub number order.
      */
-    #[Api('phone_numbers_count', optional: true)]
-    public ?int $phoneNumbersCount;
+    #[Api(optional: true)]
+    public ?int $phone_numbers_count;
 
     /**
      * Filter sub number orders by status.
@@ -65,18 +65,18 @@ final class Filter implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $countryCode = null,
-        ?string $orderRequestID = null,
-        ?string $phoneNumberType = null,
-        ?int $phoneNumbersCount = null,
+        ?string $country_code = null,
+        ?string $order_request_id = null,
+        ?string $phone_number_type = null,
+        ?int $phone_numbers_count = null,
         ?string $status = null,
     ): self {
         $obj = new self;
 
-        null !== $countryCode && $obj->countryCode = $countryCode;
-        null !== $orderRequestID && $obj->orderRequestID = $orderRequestID;
-        null !== $phoneNumberType && $obj->phoneNumberType = $phoneNumberType;
-        null !== $phoneNumbersCount && $obj->phoneNumbersCount = $phoneNumbersCount;
+        null !== $country_code && $obj->country_code = $country_code;
+        null !== $order_request_id && $obj->order_request_id = $order_request_id;
+        null !== $phone_number_type && $obj->phone_number_type = $phone_number_type;
+        null !== $phone_numbers_count && $obj->phone_numbers_count = $phone_numbers_count;
         null !== $status && $obj->status = $status;
 
         return $obj;
@@ -88,7 +88,7 @@ final class Filter implements BaseModel
     public function withCountryCode(string $countryCode): self
     {
         $obj = clone $this;
-        $obj->countryCode = $countryCode;
+        $obj->country_code = $countryCode;
 
         return $obj;
     }
@@ -99,7 +99,7 @@ final class Filter implements BaseModel
     public function withOrderRequestID(string $orderRequestID): self
     {
         $obj = clone $this;
-        $obj->orderRequestID = $orderRequestID;
+        $obj->order_request_id = $orderRequestID;
 
         return $obj;
     }
@@ -110,7 +110,7 @@ final class Filter implements BaseModel
     public function withPhoneNumberType(string $phoneNumberType): self
     {
         $obj = clone $this;
-        $obj->phoneNumberType = $phoneNumberType;
+        $obj->phone_number_type = $phoneNumberType;
 
         return $obj;
     }
@@ -121,7 +121,7 @@ final class Filter implements BaseModel
     public function withPhoneNumbersCount(int $phoneNumbersCount): self
     {
         $obj = clone $this;
-        $obj->phoneNumbersCount = $phoneNumbersCount;
+        $obj->phone_numbers_count = $phoneNumbersCount;
 
         return $obj;
     }

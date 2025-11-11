@@ -13,12 +13,12 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * @phpstan-type InsightTemplateShape = array{
  *   id: string,
- *   createdAt: \DateTimeInterface,
+ *   created_at: \DateTimeInterface,
  *   instructions: string,
- *   insightType?: value-of<InsightType>,
- *   jsonSchema?: mixed|string,
- *   name?: string,
- *   webhook?: string,
+ *   insight_type?: value-of<InsightType>|null,
+ *   json_schema?: mixed|string|null,
+ *   name?: string|null,
+ *   webhook?: string|null,
  * }
  */
 final class InsightTemplate implements BaseModel
@@ -29,23 +29,23 @@ final class InsightTemplate implements BaseModel
     #[Api]
     public string $id;
 
-    #[Api('created_at')]
-    public \DateTimeInterface $createdAt;
+    #[Api]
+    public \DateTimeInterface $created_at;
 
     #[Api]
     public string $instructions;
 
-    /** @var value-of<InsightType>|null $insightType */
-    #[Api('insight_type', enum: InsightType::class, optional: true)]
-    public ?string $insightType;
+    /** @var value-of<InsightType>|null $insight_type */
+    #[Api(enum: InsightType::class, optional: true)]
+    public ?string $insight_type;
 
     /**
      * If specified, the output will follow the JSON schema.
      *
-     * @var mixed|string|null $jsonSchema
+     * @var mixed|string|null $json_schema
      */
-    #[Api('json_schema', union: JsonSchema::class, optional: true)]
-    public mixed $jsonSchema;
+    #[Api(union: JsonSchema::class, optional: true)]
+    public mixed $json_schema;
 
     #[Api(optional: true)]
     public ?string $name;
@@ -58,7 +58,7 @@ final class InsightTemplate implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * InsightTemplate::with(id: ..., createdAt: ..., instructions: ...)
+     * InsightTemplate::with(id: ..., created_at: ..., instructions: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -77,26 +77,26 @@ final class InsightTemplate implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param InsightType|value-of<InsightType> $insightType
-     * @param mixed|string $jsonSchema
+     * @param InsightType|value-of<InsightType> $insight_type
+     * @param mixed|string $json_schema
      */
     public static function with(
         string $id,
-        \DateTimeInterface $createdAt,
+        \DateTimeInterface $created_at,
         string $instructions,
-        InsightType|string|null $insightType = null,
-        mixed $jsonSchema = null,
+        InsightType|string|null $insight_type = null,
+        mixed $json_schema = null,
         ?string $name = null,
         ?string $webhook = null,
     ): self {
         $obj = new self;
 
         $obj->id = $id;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $created_at;
         $obj->instructions = $instructions;
 
-        null !== $insightType && $obj['insightType'] = $insightType;
-        null !== $jsonSchema && $obj->jsonSchema = $jsonSchema;
+        null !== $insight_type && $obj['insight_type'] = $insight_type;
+        null !== $json_schema && $obj->json_schema = $json_schema;
         null !== $name && $obj->name = $name;
         null !== $webhook && $obj->webhook = $webhook;
 
@@ -114,7 +114,7 @@ final class InsightTemplate implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }
@@ -133,7 +133,7 @@ final class InsightTemplate implements BaseModel
     public function withInsightType(InsightType|string $insightType): self
     {
         $obj = clone $this;
-        $obj['insightType'] = $insightType;
+        $obj['insight_type'] = $insightType;
 
         return $obj;
     }
@@ -146,7 +146,7 @@ final class InsightTemplate implements BaseModel
     public function withJsonSchema(mixed $jsonSchema): self
     {
         $obj = clone $this;
-        $obj->jsonSchema = $jsonSchema;
+        $obj->json_schema = $jsonSchema;
 
         return $obj;
     }

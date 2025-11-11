@@ -12,11 +12,11 @@ use Telnyx\Core\Contracts\BaseModel;
  * Inbound call quality statistics.
  *
  * @phpstan-type InboundShape = array{
- *   jitterMaxVariance?: string,
- *   jitterPacketCount?: string,
- *   mos?: string,
- *   packetCount?: string,
- *   skipPacketCount?: string,
+ *   jitter_max_variance?: string|null,
+ *   jitter_packet_count?: string|null,
+ *   mos?: string|null,
+ *   packet_count?: string|null,
+ *   skip_packet_count?: string|null,
  * }
  */
 final class Inbound implements BaseModel
@@ -27,14 +27,14 @@ final class Inbound implements BaseModel
     /**
      * Maximum jitter variance for inbound audio.
      */
-    #[Api('jitter_max_variance', optional: true)]
-    public ?string $jitterMaxVariance;
+    #[Api(optional: true)]
+    public ?string $jitter_max_variance;
 
     /**
      * Number of packets used for jitter calculation on inbound audio.
      */
-    #[Api('jitter_packet_count', optional: true)]
-    public ?string $jitterPacketCount;
+    #[Api(optional: true)]
+    public ?string $jitter_packet_count;
 
     /**
      * Mean Opinion Score (MOS) for inbound audio quality.
@@ -45,14 +45,14 @@ final class Inbound implements BaseModel
     /**
      * Total number of inbound audio packets.
      */
-    #[Api('packet_count', optional: true)]
-    public ?string $packetCount;
+    #[Api(optional: true)]
+    public ?string $packet_count;
 
     /**
      * Number of skipped inbound packets (packet loss).
      */
-    #[Api('skip_packet_count', optional: true)]
-    public ?string $skipPacketCount;
+    #[Api(optional: true)]
+    public ?string $skip_packet_count;
 
     public function __construct()
     {
@@ -65,19 +65,19 @@ final class Inbound implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $jitterMaxVariance = null,
-        ?string $jitterPacketCount = null,
+        ?string $jitter_max_variance = null,
+        ?string $jitter_packet_count = null,
         ?string $mos = null,
-        ?string $packetCount = null,
-        ?string $skipPacketCount = null,
+        ?string $packet_count = null,
+        ?string $skip_packet_count = null,
     ): self {
         $obj = new self;
 
-        null !== $jitterMaxVariance && $obj->jitterMaxVariance = $jitterMaxVariance;
-        null !== $jitterPacketCount && $obj->jitterPacketCount = $jitterPacketCount;
+        null !== $jitter_max_variance && $obj->jitter_max_variance = $jitter_max_variance;
+        null !== $jitter_packet_count && $obj->jitter_packet_count = $jitter_packet_count;
         null !== $mos && $obj->mos = $mos;
-        null !== $packetCount && $obj->packetCount = $packetCount;
-        null !== $skipPacketCount && $obj->skipPacketCount = $skipPacketCount;
+        null !== $packet_count && $obj->packet_count = $packet_count;
+        null !== $skip_packet_count && $obj->skip_packet_count = $skip_packet_count;
 
         return $obj;
     }
@@ -88,7 +88,7 @@ final class Inbound implements BaseModel
     public function withJitterMaxVariance(string $jitterMaxVariance): self
     {
         $obj = clone $this;
-        $obj->jitterMaxVariance = $jitterMaxVariance;
+        $obj->jitter_max_variance = $jitterMaxVariance;
 
         return $obj;
     }
@@ -99,7 +99,7 @@ final class Inbound implements BaseModel
     public function withJitterPacketCount(string $jitterPacketCount): self
     {
         $obj = clone $this;
-        $obj->jitterPacketCount = $jitterPacketCount;
+        $obj->jitter_packet_count = $jitterPacketCount;
 
         return $obj;
     }
@@ -121,7 +121,7 @@ final class Inbound implements BaseModel
     public function withPacketCount(string $packetCount): self
     {
         $obj = clone $this;
-        $obj->packetCount = $packetCount;
+        $obj->packet_count = $packetCount;
 
         return $obj;
     }
@@ -132,7 +132,7 @@ final class Inbound implements BaseModel
     public function withSkipPacketCount(string $skipPacketCount): self
     {
         $obj = clone $this;
-        $obj->skipPacketCount = $skipPacketCount;
+        $obj->skip_packet_count = $skipPacketCount;
 
         return $obj;
     }

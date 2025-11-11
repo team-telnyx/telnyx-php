@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type ActionSetStandbyResponseShape = array{data?: SimCardAction}
+ * @phpstan-type ActionSetStandbyResponseShape = array{data?: SimCardAction|null}
  */
 final class ActionSetStandbyResponse implements BaseModel, ResponseConverter
 {

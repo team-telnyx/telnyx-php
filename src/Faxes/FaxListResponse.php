@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type FaxListResponseShape = array{data?: list<Fax>, meta?: mixed}
+ * @phpstan-type FaxListResponseShape = array{data?: list<Fax>|null, meta?: mixed}
  */
 final class FaxListResponse implements BaseModel, ResponseConverter
 {

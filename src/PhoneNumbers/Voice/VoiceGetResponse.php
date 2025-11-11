@@ -12,7 +12,9 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PhoneNumbers\Actions\PhoneNumberWithVoiceSettings;
 
 /**
- * @phpstan-type VoiceGetResponseShape = array{data?: PhoneNumberWithVoiceSettings}
+ * @phpstan-type VoiceGetResponseShape = array{
+ *   data?: PhoneNumberWithVoiceSettings|null
+ * }
  */
 final class VoiceGetResponse implements BaseModel, ResponseConverter
 {

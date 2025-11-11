@@ -33,7 +33,7 @@ final class GlobalIPAssignmentsUsageTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->globalIPAssignmentsUsage->retrieve();
+        $result = $this->client->globalIPAssignmentsUsage->retrieve([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

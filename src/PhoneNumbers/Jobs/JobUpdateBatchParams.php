@@ -17,14 +17,14 @@ use Telnyx\PhoneNumbers\Voice\UpdateVoiceSettings;
  * @see Telnyx\PhoneNumbers\Jobs->updateBatch
  *
  * @phpstan-type JobUpdateBatchParamsShape = array{
- *   phoneNumbers: list<string>,
+ *   phone_numbers: list<string>,
  *   filter?: Filter,
- *   billingGroupID?: string,
- *   connectionID?: string,
- *   customerReference?: string,
- *   deletionLockEnabled?: bool,
- *   externalPin?: string,
- *   hdVoiceEnabled?: bool,
+ *   billing_group_id?: string,
+ *   connection_id?: string,
+ *   customer_reference?: string,
+ *   deletion_lock_enabled?: bool,
+ *   external_pin?: string,
+ *   hd_voice_enabled?: bool,
  *   tags?: list<string>,
  *   voice?: UpdateVoiceSettings,
  * }
@@ -38,10 +38,10 @@ final class JobUpdateBatchParams implements BaseModel
     /**
      * Array of phone number ids and/or phone numbers in E164 format to update. This parameter is required if no filter parameters are provided. If you want to update specific numbers rather than all numbers matching a filter, you must use this parameter. Each item must be either a valid phone number ID or a phone number in E164 format (e.g., '+13127367254').
      *
-     * @var list<string> $phoneNumbers
+     * @var list<string> $phone_numbers
      */
-    #[Api('phone_numbers', list: 'string')]
-    public array $phoneNumbers;
+    #[Api(list: 'string')]
+    public array $phone_numbers;
 
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[has_bundle], filter[tag], filter[connection_id], filter[phone_number], filter[status], filter[voice.connection_name], filter[voice.usage_payment_method], filter[billing_group_id], filter[emergency_address_id], filter[customer_reference].
@@ -52,38 +52,38 @@ final class JobUpdateBatchParams implements BaseModel
     /**
      * Identifies the billing group associated with the phone number.
      */
-    #[Api('billing_group_id', optional: true)]
-    public ?string $billingGroupID;
+    #[Api(optional: true)]
+    public ?string $billing_group_id;
 
     /**
      * Identifies the connection associated with the phone number.
      */
-    #[Api('connection_id', optional: true)]
-    public ?string $connectionID;
+    #[Api(optional: true)]
+    public ?string $connection_id;
 
     /**
      * A customer reference string for customer look ups.
      */
-    #[Api('customer_reference', optional: true)]
-    public ?string $customerReference;
+    #[Api(optional: true)]
+    public ?string $customer_reference;
 
     /**
      * Indicates whether to enable or disable the deletion lock on each phone number. When enabled, this prevents the phone number from being deleted via the API or Telnyx portal.
      */
-    #[Api('deletion_lock_enabled', optional: true)]
-    public ?bool $deletionLockEnabled;
+    #[Api(optional: true)]
+    public ?bool $deletion_lock_enabled;
 
     /**
      * If someone attempts to port your phone number away from Telnyx and your phone number has an external PIN set, we will attempt to verify that you provided the correct external PIN to the winning carrier. Note that not all carriers cooperate with this security mechanism.
      */
-    #[Api('external_pin', optional: true)]
-    public ?string $externalPin;
+    #[Api(optional: true)]
+    public ?string $external_pin;
 
     /**
      * Indicates whether to enable or disable HD Voice on each phone number. HD Voice is a paid feature and may not be available for all phone numbers, more details about it can be found in the Telnyx support documentation.
      */
-    #[Api('hd_voice_enabled', optional: true)]
-    public ?bool $hdVoiceEnabled;
+    #[Api(optional: true)]
+    public ?bool $hd_voice_enabled;
 
     /**
      * A list of user-assigned tags to help organize phone numbers.
@@ -101,7 +101,7 @@ final class JobUpdateBatchParams implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * JobUpdateBatchParams::with(phoneNumbers: ...)
+     * JobUpdateBatchParams::with(phone_numbers: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -120,32 +120,32 @@ final class JobUpdateBatchParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $phoneNumbers
+     * @param list<string> $phone_numbers
      * @param list<string> $tags
      */
     public static function with(
-        array $phoneNumbers,
+        array $phone_numbers,
         ?Filter $filter = null,
-        ?string $billingGroupID = null,
-        ?string $connectionID = null,
-        ?string $customerReference = null,
-        ?bool $deletionLockEnabled = null,
-        ?string $externalPin = null,
-        ?bool $hdVoiceEnabled = null,
+        ?string $billing_group_id = null,
+        ?string $connection_id = null,
+        ?string $customer_reference = null,
+        ?bool $deletion_lock_enabled = null,
+        ?string $external_pin = null,
+        ?bool $hd_voice_enabled = null,
         ?array $tags = null,
         ?UpdateVoiceSettings $voice = null,
     ): self {
         $obj = new self;
 
-        $obj->phoneNumbers = $phoneNumbers;
+        $obj->phone_numbers = $phone_numbers;
 
         null !== $filter && $obj->filter = $filter;
-        null !== $billingGroupID && $obj->billingGroupID = $billingGroupID;
-        null !== $connectionID && $obj->connectionID = $connectionID;
-        null !== $customerReference && $obj->customerReference = $customerReference;
-        null !== $deletionLockEnabled && $obj->deletionLockEnabled = $deletionLockEnabled;
-        null !== $externalPin && $obj->externalPin = $externalPin;
-        null !== $hdVoiceEnabled && $obj->hdVoiceEnabled = $hdVoiceEnabled;
+        null !== $billing_group_id && $obj->billing_group_id = $billing_group_id;
+        null !== $connection_id && $obj->connection_id = $connection_id;
+        null !== $customer_reference && $obj->customer_reference = $customer_reference;
+        null !== $deletion_lock_enabled && $obj->deletion_lock_enabled = $deletion_lock_enabled;
+        null !== $external_pin && $obj->external_pin = $external_pin;
+        null !== $hd_voice_enabled && $obj->hd_voice_enabled = $hd_voice_enabled;
         null !== $tags && $obj->tags = $tags;
         null !== $voice && $obj->voice = $voice;
 
@@ -160,7 +160,7 @@ final class JobUpdateBatchParams implements BaseModel
     public function withPhoneNumbers(array $phoneNumbers): self
     {
         $obj = clone $this;
-        $obj->phoneNumbers = $phoneNumbers;
+        $obj->phone_numbers = $phoneNumbers;
 
         return $obj;
     }
@@ -182,7 +182,7 @@ final class JobUpdateBatchParams implements BaseModel
     public function withBillingGroupID(string $billingGroupID): self
     {
         $obj = clone $this;
-        $obj->billingGroupID = $billingGroupID;
+        $obj->billing_group_id = $billingGroupID;
 
         return $obj;
     }
@@ -193,7 +193,7 @@ final class JobUpdateBatchParams implements BaseModel
     public function withConnectionID(string $connectionID): self
     {
         $obj = clone $this;
-        $obj->connectionID = $connectionID;
+        $obj->connection_id = $connectionID;
 
         return $obj;
     }
@@ -204,7 +204,7 @@ final class JobUpdateBatchParams implements BaseModel
     public function withCustomerReference(string $customerReference): self
     {
         $obj = clone $this;
-        $obj->customerReference = $customerReference;
+        $obj->customer_reference = $customerReference;
 
         return $obj;
     }
@@ -215,7 +215,7 @@ final class JobUpdateBatchParams implements BaseModel
     public function withDeletionLockEnabled(bool $deletionLockEnabled): self
     {
         $obj = clone $this;
-        $obj->deletionLockEnabled = $deletionLockEnabled;
+        $obj->deletion_lock_enabled = $deletionLockEnabled;
 
         return $obj;
     }
@@ -226,7 +226,7 @@ final class JobUpdateBatchParams implements BaseModel
     public function withExternalPin(string $externalPin): self
     {
         $obj = clone $this;
-        $obj->externalPin = $externalPin;
+        $obj->external_pin = $externalPin;
 
         return $obj;
     }
@@ -237,7 +237,7 @@ final class JobUpdateBatchParams implements BaseModel
     public function withHDVoiceEnabled(bool $hdVoiceEnabled): self
     {
         $obj = clone $this;
-        $obj->hdVoiceEnabled = $hdVoiceEnabled;
+        $obj->hd_voice_enabled = $hdVoiceEnabled;
 
         return $obj;
     }

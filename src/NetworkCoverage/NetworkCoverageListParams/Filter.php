@@ -12,10 +12,10 @@ use Telnyx\Core\Contracts\BaseModel;
  * Consolidated filter parameter (deepObject style). Originally: filter[location.region], filter[location.site], filter[location.pop], filter[location.code].
  *
  * @phpstan-type FilterShape = array{
- *   locationCode?: string,
- *   locationPop?: string,
- *   locationRegion?: string,
- *   locationSite?: string,
+ *   location_code?: string|null,
+ *   location_pop?: string|null,
+ *   location_region?: string|null,
+ *   location_site?: string|null,
  * }
  */
 final class Filter implements BaseModel
@@ -27,25 +27,25 @@ final class Filter implements BaseModel
      * The code of associated location to filter on.
      */
     #[Api('location.code', optional: true)]
-    public ?string $locationCode;
+    public ?string $location_code;
 
     /**
      * The POP of associated location to filter on.
      */
     #[Api('location.pop', optional: true)]
-    public ?string $locationPop;
+    public ?string $location_pop;
 
     /**
      * The region of associated location to filter on.
      */
     #[Api('location.region', optional: true)]
-    public ?string $locationRegion;
+    public ?string $location_region;
 
     /**
      * The site of associated location to filter on.
      */
     #[Api('location.site', optional: true)]
-    public ?string $locationSite;
+    public ?string $location_site;
 
     public function __construct()
     {
@@ -58,17 +58,17 @@ final class Filter implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $locationCode = null,
-        ?string $locationPop = null,
-        ?string $locationRegion = null,
-        ?string $locationSite = null,
+        ?string $location_code = null,
+        ?string $location_pop = null,
+        ?string $location_region = null,
+        ?string $location_site = null,
     ): self {
         $obj = new self;
 
-        null !== $locationCode && $obj->locationCode = $locationCode;
-        null !== $locationPop && $obj->locationPop = $locationPop;
-        null !== $locationRegion && $obj->locationRegion = $locationRegion;
-        null !== $locationSite && $obj->locationSite = $locationSite;
+        null !== $location_code && $obj->location_code = $location_code;
+        null !== $location_pop && $obj->location_pop = $location_pop;
+        null !== $location_region && $obj->location_region = $location_region;
+        null !== $location_site && $obj->location_site = $location_site;
 
         return $obj;
     }
@@ -79,7 +79,7 @@ final class Filter implements BaseModel
     public function withLocationCode(string $locationCode): self
     {
         $obj = clone $this;
-        $obj->locationCode = $locationCode;
+        $obj->location_code = $locationCode;
 
         return $obj;
     }
@@ -90,7 +90,7 @@ final class Filter implements BaseModel
     public function withLocationPop(string $locationPop): self
     {
         $obj = clone $this;
-        $obj->locationPop = $locationPop;
+        $obj->location_pop = $locationPop;
 
         return $obj;
     }
@@ -101,7 +101,7 @@ final class Filter implements BaseModel
     public function withLocationRegion(string $locationRegion): self
     {
         $obj = clone $this;
-        $obj->locationRegion = $locationRegion;
+        $obj->location_region = $locationRegion;
 
         return $obj;
     }
@@ -112,7 +112,7 @@ final class Filter implements BaseModel
     public function withLocationSite(string $locationSite): self
     {
         $obj = clone $this;
-        $obj->locationSite = $locationSite;
+        $obj->location_site = $locationSite;
 
         return $obj;
     }

@@ -12,7 +12,10 @@ use Telnyx\Core\Contracts\BaseModel;
  * Consolidated filter parameter (deepObject style). Originally: filter[connection_id], filter[fqdn], filter[port], filter[dns_record_type].
  *
  * @phpstan-type FilterShape = array{
- *   connectionID?: string, dnsRecordType?: string, fqdn?: string, port?: int
+ *   connection_id?: string|null,
+ *   dns_record_type?: string|null,
+ *   fqdn?: string|null,
+ *   port?: int|null,
  * }
  */
 final class Filter implements BaseModel
@@ -23,14 +26,14 @@ final class Filter implements BaseModel
     /**
      * ID of the FQDN connection to which the FQDN belongs.
      */
-    #[Api('connection_id', optional: true)]
-    public ?string $connectionID;
+    #[Api(optional: true)]
+    public ?string $connection_id;
 
     /**
      * DNS record type used by the FQDN.
      */
-    #[Api('dns_record_type', optional: true)]
-    public ?string $dnsRecordType;
+    #[Api(optional: true)]
+    public ?string $dns_record_type;
 
     /**
      * FQDN represented by the resource.
@@ -55,15 +58,15 @@ final class Filter implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $connectionID = null,
-        ?string $dnsRecordType = null,
+        ?string $connection_id = null,
+        ?string $dns_record_type = null,
         ?string $fqdn = null,
         ?int $port = null,
     ): self {
         $obj = new self;
 
-        null !== $connectionID && $obj->connectionID = $connectionID;
-        null !== $dnsRecordType && $obj->dnsRecordType = $dnsRecordType;
+        null !== $connection_id && $obj->connection_id = $connection_id;
+        null !== $dns_record_type && $obj->dns_record_type = $dns_record_type;
         null !== $fqdn && $obj->fqdn = $fqdn;
         null !== $port && $obj->port = $port;
 
@@ -76,7 +79,7 @@ final class Filter implements BaseModel
     public function withConnectionID(string $connectionID): self
     {
         $obj = clone $this;
-        $obj->connectionID = $connectionID;
+        $obj->connection_id = $connectionID;
 
         return $obj;
     }
@@ -87,7 +90,7 @@ final class Filter implements BaseModel
     public function withDNSRecordType(string $dnsRecordType): self
     {
         $obj = clone $this;
-        $obj->dnsRecordType = $dnsRecordType;
+        $obj->dns_record_type = $dnsRecordType;
 
         return $obj;
     }

@@ -12,8 +12,6 @@ use Telnyx\ManagedAccounts\Actions\ActionEnableResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ManagedAccounts\ActionsContract;
 
-use const Telnyx\Core\OMIT as omit;
-
 final class ActionsService implements ActionsContract
 {
     /**
@@ -46,35 +44,18 @@ final class ActionsService implements ActionsContract
      *
      * Enables a managed account and its sub-users to use Telnyx services.
      *
-     * @param bool $reenableAllConnections When true, all connections owned by this managed account will automatically be re-enabled. Note: Any connections that do not pass validations will not be re-enabled.
+     * @param array{reenable_all_connections?: bool}|ActionEnableParams $params
      *
      * @throws APIException
      */
     public function enable(
         string $id,
-        $reenableAllConnections = omit,
+        array|ActionEnableParams $params,
         ?RequestOptions $requestOptions = null,
-    ): ActionEnableResponse {
-        $params = ['reenableAllConnections' => $reenableAllConnections];
-
-        return $this->enableRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function enableRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): ActionEnableResponse {
         [$parsed, $options] = ActionEnableParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

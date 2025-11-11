@@ -21,8 +21,8 @@ use Telnyx\DetailRecords\DetailRecordListResponse\Meta;
 
 /**
  * @phpstan-type DetailRecordListResponseShape = array{
- *   data?: list<MessageDetailRecord|ConferenceDetailRecord|ConferenceParticipantDetailRecord|AmdDetailRecord|VerifyDetailRecord|SimCardUsageDetailRecord|MediaStorageDetailRecord>,
- *   meta?: Meta,
+ *   data?: list<MessageDetailRecord|ConferenceDetailRecord|ConferenceParticipantDetailRecord|AmdDetailRecord|VerifyDetailRecord|SimCardUsageDetailRecord|MediaStorageDetailRecord>|null,
+ *   meta?: Meta|null,
  * }
  */
 final class DetailRecordListResponse implements BaseModel, ResponseConverter

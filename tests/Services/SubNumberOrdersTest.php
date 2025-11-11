@@ -33,7 +33,10 @@ final class SubNumberOrdersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->subNumberOrders->retrieve('sub_number_order_id');
+        $result = $this->client->subNumberOrders->retrieve(
+            'sub_number_order_id',
+            []
+        );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -45,7 +48,7 @@ final class SubNumberOrdersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->subNumberOrders->update('sub_number_order_id');
+        $result = $this->client->subNumberOrders->update('sub_number_order_id', []);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -57,7 +60,7 @@ final class SubNumberOrdersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->subNumberOrders->list();
+        $result = $this->client->subNumberOrders->list([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -83,7 +86,7 @@ final class SubNumberOrdersTest extends TestCase
 
         $result = $this->client->subNumberOrders->updateRequirementGroup(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            'a4b201f9-8646-4e54-a7d2-b2e403eeaf8c',
+            ['requirement_group_id' => 'a4b201f9-8646-4e54-a7d2-b2e403eeaf8c'],
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -98,7 +101,7 @@ final class SubNumberOrdersTest extends TestCase
 
         $result = $this->client->subNumberOrders->updateRequirementGroup(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            'a4b201f9-8646-4e54-a7d2-b2e403eeaf8c',
+            ['requirement_group_id' => 'a4b201f9-8646-4e54-a7d2-b2e403eeaf8c'],
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType

@@ -10,8 +10,6 @@ use Telnyx\RequestOptions;
 use Telnyx\Rooms\Sessions\SessionGetParticipantsResponse;
 use Telnyx\Rooms\Sessions\SessionGetResponse;
 use Telnyx\Rooms\Sessions\SessionList0Params;
-use Telnyx\Rooms\Sessions\SessionList0Params\Filter;
-use Telnyx\Rooms\Sessions\SessionList0Params\Page;
 use Telnyx\Rooms\Sessions\SessionList0Response;
 use Telnyx\Rooms\Sessions\SessionList1Params;
 use Telnyx\Rooms\Sessions\SessionList1Response;
@@ -20,12 +18,10 @@ use Telnyx\Rooms\Sessions\SessionRetrieveParticipantsParams;
 use Telnyx\ServiceContracts\Rooms\SessionsContract;
 use Telnyx\Services\Rooms\Sessions\ActionsService;
 
-use const Telnyx\Core\OMIT as omit;
-
 final class SessionsService implements SessionsContract
 {
     /**
-     * @@api
+     * @api
      */
     public ActionsService $actions;
 
@@ -42,35 +38,18 @@ final class SessionsService implements SessionsContract
      *
      * View a room session.
      *
-     * @param bool $includeParticipants to decide if room participants should be included in the response
+     * @param array{include_participants?: bool}|SessionRetrieveParams $params
      *
      * @throws APIException
      */
     public function retrieve(
         string $roomSessionID,
-        $includeParticipants = omit,
+        array|SessionRetrieveParams $params,
         ?RequestOptions $requestOptions = null,
-    ): SessionGetResponse {
-        $params = ['includeParticipants' => $includeParticipants];
-
-        return $this->retrieveRaw($roomSessionID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $roomSessionID,
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): SessionGetResponse {
         [$parsed, $options] = SessionRetrieveParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -88,41 +67,39 @@ final class SessionsService implements SessionsContract
      *
      * View a list of room sessions.
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[date_created_at][eq], filter[date_created_at][gte], filter[date_created_at][lte], filter[date_updated_at][eq], filter[date_updated_at][gte], filter[date_updated_at][lte], filter[date_ended_at][eq], filter[date_ended_at][gte], filter[date_ended_at][lte], filter[room_id], filter[active]
-     * @param bool $includeParticipants to decide if room participants should be included in the response
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param array{
+     *   filter?: array{
+     *     active?: bool,
+     *     date_created_at?: array{
+     *       eq?: string|\DateTimeInterface,
+     *       gte?: string|\DateTimeInterface,
+     *       lte?: string|\DateTimeInterface,
+     *     },
+     *     date_ended_at?: array{
+     *       eq?: string|\DateTimeInterface,
+     *       gte?: string|\DateTimeInterface,
+     *       lte?: string|\DateTimeInterface,
+     *     },
+     *     date_updated_at?: array{
+     *       eq?: string|\DateTimeInterface,
+     *       gte?: string|\DateTimeInterface,
+     *       lte?: string|\DateTimeInterface,
+     *     },
+     *     room_id?: string,
+     *   },
+     *   include_participants?: bool,
+     *   page?: array{number?: int, size?: int},
+     * }|SessionList0Params $params
      *
      * @throws APIException
      */
     public function list0(
-        $filter = omit,
-        $includeParticipants = omit,
-        $page = omit,
-        ?RequestOptions $requestOptions = null,
-    ): SessionList0Response {
-        $params = [
-            'filter' => $filter,
-            'includeParticipants' => $includeParticipants,
-            'page' => $page,
-        ];
-
-        return $this->list0Raw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function list0Raw(
-        array $params,
+        array|SessionList0Params $params,
         ?RequestOptions $requestOptions = null
     ): SessionList0Response {
         [$parsed, $options] = SessionList0Params::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -140,43 +117,39 @@ final class SessionsService implements SessionsContract
      *
      * View a list of room sessions.
      *
-     * @param SessionList1Params\Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[date_created_at][eq], filter[date_created_at][gte], filter[date_created_at][lte], filter[date_updated_at][eq], filter[date_updated_at][gte], filter[date_updated_at][lte], filter[date_ended_at][eq], filter[date_ended_at][gte], filter[date_ended_at][lte], filter[active]
-     * @param bool $includeParticipants to decide if room participants should be included in the response
-     * @param SessionList1Params\Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param array{
+     *   filter?: array{
+     *     active?: bool,
+     *     date_created_at?: array{
+     *       eq?: string|\DateTimeInterface,
+     *       gte?: string|\DateTimeInterface,
+     *       lte?: string|\DateTimeInterface,
+     *     },
+     *     date_ended_at?: array{
+     *       eq?: string|\DateTimeInterface,
+     *       gte?: string|\DateTimeInterface,
+     *       lte?: string|\DateTimeInterface,
+     *     },
+     *     date_updated_at?: array{
+     *       eq?: string|\DateTimeInterface,
+     *       gte?: string|\DateTimeInterface,
+     *       lte?: string|\DateTimeInterface,
+     *     },
+     *   },
+     *   include_participants?: bool,
+     *   page?: array{number?: int, size?: int},
+     * }|SessionList1Params $params
      *
      * @throws APIException
      */
     public function list1(
         string $roomID,
-        $filter = omit,
-        $includeParticipants = omit,
-        $page = omit,
+        array|SessionList1Params $params,
         ?RequestOptions $requestOptions = null,
-    ): SessionList1Response {
-        $params = [
-            'filter' => $filter,
-            'includeParticipants' => $includeParticipants,
-            'page' => $page,
-        ];
-
-        return $this->list1Raw($roomID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function list1Raw(
-        string $roomID,
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): SessionList1Response {
         [$parsed, $options] = SessionList1Params::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -194,41 +167,38 @@ final class SessionsService implements SessionsContract
      *
      * View a list of room participants.
      *
-     * @param SessionRetrieveParticipantsParams\Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[date_joined_at][eq], filter[date_joined_at][gte], filter[date_joined_at][lte], filter[date_updated_at][eq], filter[date_updated_at][gte], filter[date_updated_at][lte], filter[date_left_at][eq], filter[date_left_at][gte], filter[date_left_at][lte], filter[context]
-     * @param SessionRetrieveParticipantsParams\Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param array{
+     *   filter?: array{
+     *     context?: string,
+     *     date_joined_at?: array{
+     *       eq?: string|\DateTimeInterface,
+     *       gte?: string|\DateTimeInterface,
+     *       lte?: string|\DateTimeInterface,
+     *     },
+     *     date_left_at?: array{
+     *       eq?: string|\DateTimeInterface,
+     *       gte?: string|\DateTimeInterface,
+     *       lte?: string|\DateTimeInterface,
+     *     },
+     *     date_updated_at?: array{
+     *       eq?: string|\DateTimeInterface,
+     *       gte?: string|\DateTimeInterface,
+     *       lte?: string|\DateTimeInterface,
+     *     },
+     *   },
+     *   page?: array{number?: int, size?: int},
+     * }|SessionRetrieveParticipantsParams $params
      *
      * @throws APIException
      */
     public function retrieveParticipants(
         string $roomSessionID,
-        $filter = omit,
-        $page = omit,
+        array|SessionRetrieveParticipantsParams $params,
         ?RequestOptions $requestOptions = null,
-    ): SessionGetParticipantsResponse {
-        $params = ['filter' => $filter, 'page' => $page];
-
-        return $this->retrieveParticipantsRaw(
-            $roomSessionID,
-            $params,
-            $requestOptions
-        );
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function retrieveParticipantsRaw(
-        string $roomSessionID,
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): SessionGetParticipantsResponse {
         [$parsed, $options] = SessionRetrieveParticipantsParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

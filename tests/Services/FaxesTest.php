@@ -33,11 +33,11 @@ final class FaxesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->faxes->create(
-            connectionID: '234423',
-            from: '+13125790015',
-            to: '+13127367276'
-        );
+        $result = $this->client->faxes->create([
+            'connection_id' => '234423',
+            'from' => '+13125790015',
+            'to' => '+13127367276',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -49,11 +49,11 @@ final class FaxesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->faxes->create(
-            connectionID: '234423',
-            from: '+13125790015',
-            to: '+13127367276'
-        );
+        $result = $this->client->faxes->create([
+            'connection_id' => '234423',
+            'from' => '+13125790015',
+            'to' => '+13127367276',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -79,7 +79,7 @@ final class FaxesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->faxes->list();
+        $result = $this->client->faxes->list([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

@@ -11,7 +11,7 @@ use Telnyx\Services\Texml\Accounts\Recordings\JsonService;
 final class RecordingsService implements RecordingsContract
 {
     /**
-     * @@api
+     * @api
      */
     public JsonService $json;
 

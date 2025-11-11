@@ -14,12 +14,12 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 /**
  * @phpstan-type AccessIPRangeShape = array{
  *   id: string,
- *   cidrBlock: string,
+ *   cidr_block: string,
  *   status: value-of<CloudflareSyncStatus>,
- *   userID: string,
- *   createdAt?: \DateTimeInterface,
- *   description?: string,
- *   updatedAt?: \DateTimeInterface,
+ *   user_id: string,
+ *   created_at?: \DateTimeInterface|null,
+ *   description?: string|null,
+ *   updated_at?: \DateTimeInterface|null,
  * }
  */
 final class AccessIPRange implements BaseModel, ResponseConverter
@@ -32,8 +32,8 @@ final class AccessIPRange implements BaseModel, ResponseConverter
     #[Api]
     public string $id;
 
-    #[Api('cidr_block')]
-    public string $cidrBlock;
+    #[Api]
+    public string $cidr_block;
 
     /**
      * An enumeration.
@@ -43,24 +43,24 @@ final class AccessIPRange implements BaseModel, ResponseConverter
     #[Api(enum: CloudflareSyncStatus::class)]
     public string $status;
 
-    #[Api('user_id')]
-    public string $userID;
+    #[Api]
+    public string $user_id;
 
-    #[Api('created_at', optional: true)]
-    public ?\DateTimeInterface $createdAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $created_at;
 
     #[Api(optional: true)]
     public ?string $description;
 
-    #[Api('updated_at', optional: true)]
-    public ?\DateTimeInterface $updatedAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $updated_at;
 
     /**
      * `new AccessIPRange()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * AccessIPRange::with(id: ..., cidrBlock: ..., status: ..., userID: ...)
+     * AccessIPRange::with(id: ..., cidr_block: ..., status: ..., user_id: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -87,23 +87,23 @@ final class AccessIPRange implements BaseModel, ResponseConverter
      */
     public static function with(
         string $id,
-        string $cidrBlock,
+        string $cidr_block,
         CloudflareSyncStatus|string $status,
-        string $userID,
-        ?\DateTimeInterface $createdAt = null,
+        string $user_id,
+        ?\DateTimeInterface $created_at = null,
         ?string $description = null,
-        ?\DateTimeInterface $updatedAt = null,
+        ?\DateTimeInterface $updated_at = null,
     ): self {
         $obj = new self;
 
         $obj->id = $id;
-        $obj->cidrBlock = $cidrBlock;
+        $obj->cidr_block = $cidr_block;
         $obj['status'] = $status;
-        $obj->userID = $userID;
+        $obj->user_id = $user_id;
 
-        null !== $createdAt && $obj->createdAt = $createdAt;
+        null !== $created_at && $obj->created_at = $created_at;
         null !== $description && $obj->description = $description;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
+        null !== $updated_at && $obj->updated_at = $updated_at;
 
         return $obj;
     }
@@ -119,7 +119,7 @@ final class AccessIPRange implements BaseModel, ResponseConverter
     public function withCidrBlock(string $cidrBlock): self
     {
         $obj = clone $this;
-        $obj->cidrBlock = $cidrBlock;
+        $obj->cidr_block = $cidrBlock;
 
         return $obj;
     }
@@ -140,7 +140,7 @@ final class AccessIPRange implements BaseModel, ResponseConverter
     public function withUserID(string $userID): self
     {
         $obj = clone $this;
-        $obj->userID = $userID;
+        $obj->user_id = $userID;
 
         return $obj;
     }
@@ -148,7 +148,7 @@ final class AccessIPRange implements BaseModel, ResponseConverter
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }
@@ -164,7 +164,7 @@ final class AccessIPRange implements BaseModel, ResponseConverter
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $obj->updated_at = $updatedAt;
 
         return $obj;
     }

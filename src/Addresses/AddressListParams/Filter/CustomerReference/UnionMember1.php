@@ -9,7 +9,9 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type UnionMember1Shape = array{contains?: string, eq?: string}
+ * @phpstan-type UnionMember1Shape = array{
+ *   contains?: string|null, eq?: string|null
+ * }
  */
 final class UnionMember1 implements BaseModel
 {

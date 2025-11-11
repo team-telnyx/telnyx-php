@@ -9,15 +9,10 @@ use Telnyx\Connections\ConnectionGetResponse;
 use Telnyx\Connections\ConnectionListActiveCallsParams;
 use Telnyx\Connections\ConnectionListActiveCallsResponse;
 use Telnyx\Connections\ConnectionListParams;
-use Telnyx\Connections\ConnectionListParams\Filter;
-use Telnyx\Connections\ConnectionListParams\Page;
-use Telnyx\Connections\ConnectionListParams\Sort;
 use Telnyx\Connections\ConnectionListResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ConnectionsContract;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class ConnectionsService implements ConnectionsContract
 {
@@ -51,48 +46,25 @@ final class ConnectionsService implements ConnectionsContract
      *
      * Returns a list of your connections irrespective of type.
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[connection_name], filter[fqdn], filter[outbound_voice_profile_id], filter[outbound.outbound_voice_profile_id]
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
-     * @param Sort|value-of<Sort> $sort Specifies the sort order for results. By default sorting direction is ascending. To have the results sorted in descending order add the <code> -</code> prefix.<br/><br/>
-     * That is: <ul>
-     *   <li>
-     *     <code>connection_name</code>: sorts the result by the
-     *     <code>connection_name</code> field in ascending order.
-     *   </li>
-     *
-     *   <li>
-     *     <code>-connection_name</code>: sorts the result by the
-     *     <code>connection_name</code> field in descending order.
-     *   </li>
-     * </ul> <br/> If not given, results are sorted by <code>created_at</code> in descending order.
+     * @param array{
+     *   filter?: array{
+     *     connection_name?: array{contains?: string},
+     *     fqdn?: string,
+     *     outbound_voice_profile_id?: string,
+     *   },
+     *   page?: array{number?: int, size?: int},
+     *   sort?: "created_at"|"connection_name"|"active",
+     * }|ConnectionListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
-        $sort = omit,
-        ?RequestOptions $requestOptions = null,
-    ): ConnectionListResponse {
-        $params = ['filter' => $filter, 'page' => $page, 'sort' => $sort];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
+        array|ConnectionListParams $params,
         ?RequestOptions $requestOptions = null
     ): ConnectionListResponse {
         [$parsed, $options] = ConnectionListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -110,35 +82,22 @@ final class ConnectionsService implements ConnectionsContract
      *
      * Lists all active calls for given connection. Acceptable connections are either SIP connections with webhook_url or xml_request_url, call control or texml. Returned results are cursor paginated.
      *
-     * @param ConnectionListActiveCallsParams\Page $page Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number]
+     * @param array{
+     *   page?: array{
+     *     after?: string, before?: string, limit?: int, number?: int, size?: int
+     *   },
+     * }|ConnectionListActiveCallsParams $params
      *
      * @throws APIException
      */
     public function listActiveCalls(
         string $connectionID,
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): ConnectionListActiveCallsResponse {
-        $params = ['page' => $page];
-
-        return $this->listActiveCallsRaw($connectionID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listActiveCallsRaw(
-        string $connectionID,
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|ConnectionListActiveCallsParams $params,
+        ?RequestOptions $requestOptions = null,
     ): ConnectionListActiveCallsResponse {
         [$parsed, $options] = ConnectionListActiveCallsParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

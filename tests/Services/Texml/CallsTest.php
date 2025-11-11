@@ -33,7 +33,7 @@ final class CallsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->texml->calls->update('call_sid');
+        $result = $this->client->texml->calls->update('call_sid', []);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -47,8 +47,7 @@ final class CallsTest extends TestCase
 
         $result = $this->client->texml->calls->initiate(
             'application_id',
-            from: '+13120001234',
-            to: '+13121230000'
+            ['From' => '+13120001234', 'To' => '+13121230000']
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -63,8 +62,7 @@ final class CallsTest extends TestCase
 
         $result = $this->client->texml->calls->initiate(
             'application_id',
-            from: '+13120001234',
-            to: '+13121230000'
+            ['From' => '+13120001234', 'To' => '+13121230000']
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType

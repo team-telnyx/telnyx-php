@@ -12,7 +12,9 @@ use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentListParams\Filter
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[document_type].
  *
- * @phpstan-type FilterShape = array{documentType?: list<value-of<DocumentType>>}
+ * @phpstan-type FilterShape = array{
+ *   document_type?: list<value-of<DocumentType>>|null
+ * }
  */
 final class Filter implements BaseModel
 {
@@ -22,10 +24,10 @@ final class Filter implements BaseModel
     /**
      * Filter additional documents by a list of document types.
      *
-     * @var list<value-of<DocumentType>>|null $documentType
+     * @var list<value-of<DocumentType>>|null $document_type
      */
-    #[Api('document_type', list: DocumentType::class, optional: true)]
-    public ?array $documentType;
+    #[Api(list: DocumentType::class, optional: true)]
+    public ?array $document_type;
 
     public function __construct()
     {
@@ -37,13 +39,13 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<DocumentType|value-of<DocumentType>> $documentType
+     * @param list<DocumentType|value-of<DocumentType>> $document_type
      */
-    public static function with(?array $documentType = null): self
+    public static function with(?array $document_type = null): self
     {
         $obj = new self;
 
-        null !== $documentType && $obj['documentType'] = $documentType;
+        null !== $document_type && $obj['document_type'] = $document_type;
 
         return $obj;
     }
@@ -56,7 +58,7 @@ final class Filter implements BaseModel
     public function withDocumentType(array $documentType): self
     {
         $obj = clone $this;
-        $obj['documentType'] = $documentType;
+        $obj['document_type'] = $documentType;
 
         return $obj;
     }

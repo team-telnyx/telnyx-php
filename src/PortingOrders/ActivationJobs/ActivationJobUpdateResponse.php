@@ -13,7 +13,7 @@ use Telnyx\PortingOrders\PortingOrdersActivationJob;
 
 /**
  * @phpstan-type ActivationJobUpdateResponseShape = array{
- *   data?: PortingOrdersActivationJob
+ *   data?: PortingOrdersActivationJob|null
  * }
  */
 final class ActivationJobUpdateResponse implements BaseModel, ResponseConverter

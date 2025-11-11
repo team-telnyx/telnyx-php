@@ -10,13 +10,13 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type DataShape = array{
- *   appSubdomain?: string,
- *   createdAt?: string,
- *   host?: string,
- *   name?: string,
- *   port?: int,
- *   recordType?: string,
- *   updatedAt?: string,
+ *   app_subdomain?: string|null,
+ *   created_at?: string|null,
+ *   host?: string|null,
+ *   name?: string|null,
+ *   port?: int|null,
+ *   record_type?: string|null,
+ *   updated_at?: string|null,
  * }
  */
 final class Data implements BaseModel
@@ -27,14 +27,14 @@ final class Data implements BaseModel
     /**
      * Subdomain to route calls when using Telnyx SRS (optional).
      */
-    #[Api('app_subdomain', optional: true)]
-    public ?string $appSubdomain;
+    #[Api(optional: true)]
+    public ?string $app_subdomain;
 
     /**
      * ISO 8601 formatted date/time of creation.
      */
-    #[Api('created_at', optional: true)]
-    public ?string $createdAt;
+    #[Api(optional: true)]
+    public ?string $created_at;
 
     /**
      * Hostname/IPv4 address of the SIPREC SRS.
@@ -54,14 +54,14 @@ final class Data implements BaseModel
     #[Api(optional: true)]
     public ?int $port;
 
-    #[Api('record_type', optional: true)]
-    public ?string $recordType;
+    #[Api(optional: true)]
+    public ?string $record_type;
 
     /**
      * ISO 8601 formatted date/time of last update.
      */
-    #[Api('updated_at', optional: true)]
-    public ?string $updatedAt;
+    #[Api(optional: true)]
+    public ?string $updated_at;
 
     public function __construct()
     {
@@ -74,23 +74,23 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $appSubdomain = null,
-        ?string $createdAt = null,
+        ?string $app_subdomain = null,
+        ?string $created_at = null,
         ?string $host = null,
         ?string $name = null,
         ?int $port = null,
-        ?string $recordType = null,
-        ?string $updatedAt = null,
+        ?string $record_type = null,
+        ?string $updated_at = null,
     ): self {
         $obj = new self;
 
-        null !== $appSubdomain && $obj->appSubdomain = $appSubdomain;
-        null !== $createdAt && $obj->createdAt = $createdAt;
+        null !== $app_subdomain && $obj->app_subdomain = $app_subdomain;
+        null !== $created_at && $obj->created_at = $created_at;
         null !== $host && $obj->host = $host;
         null !== $name && $obj->name = $name;
         null !== $port && $obj->port = $port;
-        null !== $recordType && $obj->recordType = $recordType;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
+        null !== $record_type && $obj->record_type = $record_type;
+        null !== $updated_at && $obj->updated_at = $updated_at;
 
         return $obj;
     }
@@ -101,7 +101,7 @@ final class Data implements BaseModel
     public function withAppSubdomain(string $appSubdomain): self
     {
         $obj = clone $this;
-        $obj->appSubdomain = $appSubdomain;
+        $obj->app_subdomain = $appSubdomain;
 
         return $obj;
     }
@@ -112,7 +112,7 @@ final class Data implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }
@@ -153,7 +153,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType;
+        $obj->record_type = $recordType;
 
         return $obj;
     }
@@ -164,7 +164,7 @@ final class Data implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $obj->updated_at = $updatedAt;
 
         return $obj;
     }

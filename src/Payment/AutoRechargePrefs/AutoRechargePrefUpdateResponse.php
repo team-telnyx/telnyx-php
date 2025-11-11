@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Payment\AutoRechargePrefs\AutoRechargePrefUpdateResponse\Data;
 
 /**
- * @phpstan-type AutoRechargePrefUpdateResponseShape = array{data?: Data}
+ * @phpstan-type AutoRechargePrefUpdateResponseShape = array{data?: Data|null}
  */
 final class AutoRechargePrefUpdateResponse implements BaseModel, ResponseConverter
 {

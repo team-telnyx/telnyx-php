@@ -6,7 +6,6 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\Storage\Buckets\Usage\UsageGetAPIUsageParams\Filter;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -36,10 +35,12 @@ final class UsageTest extends TestCase
 
         $result = $this->client->storage->buckets->usage->getAPIUsage(
             '',
-            Filter::with(
-                endTime: new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
-                startTime: new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
-            ),
+            [
+                'filter' => [
+                    'end_time' => '2019-12-27T18:11:19.117Z',
+                    'start_time' => '2019-12-27T18:11:19.117Z',
+                ],
+            ],
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -54,10 +55,12 @@ final class UsageTest extends TestCase
 
         $result = $this->client->storage->buckets->usage->getAPIUsage(
             '',
-            Filter::with(
-                endTime: new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
-                startTime: new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
-            ),
+            [
+                'filter' => [
+                    'end_time' => '2019-12-27T18:11:19.117Z',
+                    'start_time' => '2019-12-27T18:11:19.117Z',
+                ],
+            ],
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType

@@ -33,7 +33,7 @@ final class VirtualCrossConnectsCoverageTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->virtualCrossConnectsCoverage->list();
+        $result = $this->client->virtualCrossConnectsCoverage->list([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

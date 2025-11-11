@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Rooms\Actions\ActionRefreshClientTokenResponse\Data;
 
 /**
- * @phpstan-type ActionRefreshClientTokenResponseShape = array{data?: Data}
+ * @phpstan-type ActionRefreshClientTokenResponseShape = array{data?: Data|null}
  */
 final class ActionRefreshClientTokenResponse implements BaseModel, ResponseConverter
 {

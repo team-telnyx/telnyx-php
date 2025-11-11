@@ -11,8 +11,6 @@ use Telnyx\MessagingHostedNumberOrders\Actions\ActionUploadFileResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MessagingHostedNumberOrders\ActionsContract;
 
-use const Telnyx\Core\OMIT as omit;
-
 final class ActionsService implements ActionsContract
 {
     /**
@@ -25,37 +23,18 @@ final class ActionsService implements ActionsContract
      *
      * Upload file required for a messaging hosted number order
      *
-     * @param string $bill must be the last month's bill with proof of ownership of all of the numbers in the order in PDF format
-     * @param string $loa must be a signed LOA for the numbers in the order in PDF format
+     * @param array{bill?: string, loa?: string}|ActionUploadFileParams $params
      *
      * @throws APIException
      */
     public function uploadFile(
         string $id,
-        $bill = omit,
-        $loa = omit,
+        array|ActionUploadFileParams $params,
         ?RequestOptions $requestOptions = null,
-    ): ActionUploadFileResponse {
-        $params = ['bill' => $bill, 'loa' => $loa];
-
-        return $this->uploadFileRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function uploadFileRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): ActionUploadFileResponse {
         [$parsed, $options] = ActionUploadFileParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

@@ -35,7 +35,7 @@ final class InsightsTest extends TestCase
 
         $result = $this->client->ai->conversations->insightGroups->insights->assign(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+            ['group_id' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -50,7 +50,7 @@ final class InsightsTest extends TestCase
 
         $result = $this->client->ai->conversations->insightGroups->insights->assign(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+            ['group_id' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -71,7 +71,7 @@ final class InsightsTest extends TestCase
             ->insights
             ->deleteUnassign(
                 '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-                '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+                ['group_id' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
             )
         ;
 
@@ -93,7 +93,7 @@ final class InsightsTest extends TestCase
             ->insights
             ->deleteUnassign(
                 '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-                '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+                ['group_id' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
             )
         ;
 

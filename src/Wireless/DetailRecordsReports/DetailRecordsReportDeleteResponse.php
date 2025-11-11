@@ -11,7 +11,9 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type DetailRecordsReportDeleteResponseShape = array{data?: WdrReport}
+ * @phpstan-type DetailRecordsReportDeleteResponseShape = array{
+ *   data?: WdrReport|null
+ * }
  */
 final class DetailRecordsReportDeleteResponse implements BaseModel, ResponseConverter
 {

@@ -26,35 +26,19 @@ final class SpeechToTextService implements SpeechToTextContract
      *
      * Creates a new Speech to Text batch report request with the specified filters
      *
-     * @param \DateTimeInterface $endDate End date in ISO format with timezone (date range must be up to one month)
-     * @param \DateTimeInterface $startDate Start date in ISO format with timezone
+     * @param array{
+     *   end_date: string|\DateTimeInterface, start_date: string|\DateTimeInterface
+     * }|SpeechToTextCreateParams $params
      *
      * @throws APIException
      */
     public function create(
-        $endDate,
-        $startDate,
-        ?RequestOptions $requestOptions = null
-    ): SpeechToTextNewResponse {
-        $params = ['endDate' => $endDate, 'startDate' => $startDate];
-
-        return $this->createRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|SpeechToTextCreateParams $params,
+        ?RequestOptions $requestOptions = null,
     ): SpeechToTextNewResponse {
         [$parsed, $options] = SpeechToTextCreateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

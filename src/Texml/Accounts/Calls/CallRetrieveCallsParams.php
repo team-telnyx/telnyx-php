@@ -16,18 +16,18 @@ use Telnyx\Texml\Accounts\Calls\CallRetrieveCallsParams\Status;
  * @see Telnyx\Texml\Accounts\Calls->retrieveCalls
  *
  * @phpstan-type CallRetrieveCallsParamsShape = array{
- *   endTime?: string,
- *   endTimeGt?: string,
- *   endTimeLt?: string,
- *   from?: string,
- *   page?: int,
- *   pageSize?: int,
- *   pageToken?: string,
- *   startTime?: string,
- *   startTimeGt?: string,
- *   startTimeLt?: string,
- *   status?: Status|value-of<Status>,
- *   to?: string,
+ *   EndTime?: string,
+ *   EndTime_gt?: string,
+ *   EndTime_lt?: string,
+ *   From?: string,
+ *   Page?: int,
+ *   PageSize?: int,
+ *   PageToken?: string,
+ *   StartTime?: string,
+ *   StartTime_gt?: string,
+ *   StartTime_lt?: string,
+ *   Status?: \Telnyx\Texml\Accounts\Calls\CallRetrieveCallsParams\Status|value-of<\Telnyx\Texml\Accounts\Calls\CallRetrieveCallsParams\Status>,
+ *   To?: string,
  * }
  */
 final class CallRetrieveCallsParams implements BaseModel
@@ -40,75 +40,78 @@ final class CallRetrieveCallsParams implements BaseModel
      * Filters calls by their end date. Expected format is YYYY-MM-DD.
      */
     #[Api(optional: true)]
-    public ?string $endTime;
+    public ?string $EndTime;
 
     /**
      * Filters calls by their end date (after). Expected format is YYYY-MM-DD.
      */
     #[Api(optional: true)]
-    public ?string $endTimeGt;
+    public ?string $EndTime_gt;
 
     /**
      * Filters calls by their end date (before). Expected format is YYYY-MM-DD.
      */
     #[Api(optional: true)]
-    public ?string $endTimeLt;
+    public ?string $EndTime_lt;
 
     /**
      * Filters calls by the from number.
      */
     #[Api(optional: true)]
-    public ?string $from;
+    public ?string $From;
 
     /**
      * The number of the page to be displayed, zero-indexed, should be used in conjuction with PageToken.
      */
     #[Api(optional: true)]
-    public ?int $page;
+    public ?int $Page;
 
     /**
      * The number of records to be displayed on a page.
      */
     #[Api(optional: true)]
-    public ?int $pageSize;
+    public ?int $PageSize;
 
     /**
      * Used to request the next page of results.
      */
     #[Api(optional: true)]
-    public ?string $pageToken;
+    public ?string $PageToken;
 
     /**
      * Filters calls by their start date. Expected format is YYYY-MM-DD.
      */
     #[Api(optional: true)]
-    public ?string $startTime;
+    public ?string $StartTime;
 
     /**
      * Filters calls by their start date (after). Expected format is YYYY-MM-DD.
      */
     #[Api(optional: true)]
-    public ?string $startTimeGt;
+    public ?string $StartTime_gt;
 
     /**
      * Filters calls by their start date (before). Expected format is YYYY-MM-DD.
      */
     #[Api(optional: true)]
-    public ?string $startTimeLt;
+    public ?string $StartTime_lt;
 
     /**
      * Filters calls by status.
      *
-     * @var value-of<Status>|null $status
+     * @var value-of<Status>|null $Status
      */
-    #[Api(enum: Status::class, optional: true)]
-    public ?string $status;
+    #[Api(
+        enum: Status::class,
+        optional: true,
+    )]
+    public ?string $Status;
 
     /**
      * Filters calls by the to number.
      */
     #[Api(optional: true)]
-    public ?string $to;
+    public ?string $To;
 
     public function __construct()
     {
@@ -120,36 +123,36 @@ final class CallRetrieveCallsParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Status|value-of<Status> $status
+     * @param Status|value-of<Status> $Status
      */
     public static function with(
-        ?string $endTime = null,
-        ?string $endTimeGt = null,
-        ?string $endTimeLt = null,
-        ?string $from = null,
-        ?int $page = null,
-        ?int $pageSize = null,
-        ?string $pageToken = null,
-        ?string $startTime = null,
-        ?string $startTimeGt = null,
-        ?string $startTimeLt = null,
-        Status|string|null $status = null,
-        ?string $to = null,
+        ?string $EndTime = null,
+        ?string $EndTime_gt = null,
+        ?string $EndTime_lt = null,
+        ?string $From = null,
+        ?int $Page = null,
+        ?int $PageSize = null,
+        ?string $PageToken = null,
+        ?string $StartTime = null,
+        ?string $StartTime_gt = null,
+        ?string $StartTime_lt = null,
+        Status|string|null $Status = null,
+        ?string $To = null,
     ): self {
         $obj = new self;
 
-        null !== $endTime && $obj->endTime = $endTime;
-        null !== $endTimeGt && $obj->endTimeGt = $endTimeGt;
-        null !== $endTimeLt && $obj->endTimeLt = $endTimeLt;
-        null !== $from && $obj->from = $from;
-        null !== $page && $obj->page = $page;
-        null !== $pageSize && $obj->pageSize = $pageSize;
-        null !== $pageToken && $obj->pageToken = $pageToken;
-        null !== $startTime && $obj->startTime = $startTime;
-        null !== $startTimeGt && $obj->startTimeGt = $startTimeGt;
-        null !== $startTimeLt && $obj->startTimeLt = $startTimeLt;
-        null !== $status && $obj['status'] = $status;
-        null !== $to && $obj->to = $to;
+        null !== $EndTime && $obj->EndTime = $EndTime;
+        null !== $EndTime_gt && $obj->EndTime_gt = $EndTime_gt;
+        null !== $EndTime_lt && $obj->EndTime_lt = $EndTime_lt;
+        null !== $From && $obj->From = $From;
+        null !== $Page && $obj->Page = $Page;
+        null !== $PageSize && $obj->PageSize = $PageSize;
+        null !== $PageToken && $obj->PageToken = $PageToken;
+        null !== $StartTime && $obj->StartTime = $StartTime;
+        null !== $StartTime_gt && $obj->StartTime_gt = $StartTime_gt;
+        null !== $StartTime_lt && $obj->StartTime_lt = $StartTime_lt;
+        null !== $Status && $obj['Status'] = $Status;
+        null !== $To && $obj->To = $To;
 
         return $obj;
     }
@@ -160,7 +163,7 @@ final class CallRetrieveCallsParams implements BaseModel
     public function withEndTime(string $endTime): self
     {
         $obj = clone $this;
-        $obj->endTime = $endTime;
+        $obj->EndTime = $endTime;
 
         return $obj;
     }
@@ -171,7 +174,7 @@ final class CallRetrieveCallsParams implements BaseModel
     public function withEndTimeGt(string $endTimeGt): self
     {
         $obj = clone $this;
-        $obj->endTimeGt = $endTimeGt;
+        $obj->EndTime_gt = $endTimeGt;
 
         return $obj;
     }
@@ -182,7 +185,7 @@ final class CallRetrieveCallsParams implements BaseModel
     public function withEndTimeLt(string $endTimeLt): self
     {
         $obj = clone $this;
-        $obj->endTimeLt = $endTimeLt;
+        $obj->EndTime_lt = $endTimeLt;
 
         return $obj;
     }
@@ -193,7 +196,7 @@ final class CallRetrieveCallsParams implements BaseModel
     public function withFrom(string $from): self
     {
         $obj = clone $this;
-        $obj->from = $from;
+        $obj->From = $from;
 
         return $obj;
     }
@@ -204,7 +207,7 @@ final class CallRetrieveCallsParams implements BaseModel
     public function withPage(int $page): self
     {
         $obj = clone $this;
-        $obj->page = $page;
+        $obj->Page = $page;
 
         return $obj;
     }
@@ -215,7 +218,7 @@ final class CallRetrieveCallsParams implements BaseModel
     public function withPageSize(int $pageSize): self
     {
         $obj = clone $this;
-        $obj->pageSize = $pageSize;
+        $obj->PageSize = $pageSize;
 
         return $obj;
     }
@@ -226,7 +229,7 @@ final class CallRetrieveCallsParams implements BaseModel
     public function withPageToken(string $pageToken): self
     {
         $obj = clone $this;
-        $obj->pageToken = $pageToken;
+        $obj->PageToken = $pageToken;
 
         return $obj;
     }
@@ -237,7 +240,7 @@ final class CallRetrieveCallsParams implements BaseModel
     public function withStartTime(string $startTime): self
     {
         $obj = clone $this;
-        $obj->startTime = $startTime;
+        $obj->StartTime = $startTime;
 
         return $obj;
     }
@@ -248,7 +251,7 @@ final class CallRetrieveCallsParams implements BaseModel
     public function withStartTimeGt(string $startTimeGt): self
     {
         $obj = clone $this;
-        $obj->startTimeGt = $startTimeGt;
+        $obj->StartTime_gt = $startTimeGt;
 
         return $obj;
     }
@@ -259,7 +262,7 @@ final class CallRetrieveCallsParams implements BaseModel
     public function withStartTimeLt(string $startTimeLt): self
     {
         $obj = clone $this;
-        $obj->startTimeLt = $startTimeLt;
+        $obj->StartTime_lt = $startTimeLt;
 
         return $obj;
     }
@@ -269,10 +272,11 @@ final class CallRetrieveCallsParams implements BaseModel
      *
      * @param Status|value-of<Status> $status
      */
-    public function withStatus(Status|string $status): self
-    {
+    public function withStatus(
+        Status|string $status
+    ): self {
         $obj = clone $this;
-        $obj['status'] = $status;
+        $obj['Status'] = $status;
 
         return $obj;
     }
@@ -283,7 +287,7 @@ final class CallRetrieveCallsParams implements BaseModel
     public function withTo(string $to): self
     {
         $obj = clone $this;
-        $obj->to = $to;
+        $obj->To = $to;
 
         return $obj;
     }

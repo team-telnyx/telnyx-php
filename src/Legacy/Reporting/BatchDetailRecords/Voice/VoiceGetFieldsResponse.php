@@ -14,10 +14,10 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  * Available CDR report fields grouped by category.
  *
  * @phpstan-type VoiceGetFieldsResponseShape = array{
- *   billing?: list<string>,
- *   interactionData?: list<string>,
- *   numberInformation?: list<string>,
- *   telephonyData?: list<string>,
+ *   Billing?: list<string>|null,
+ *   Interaction_Data?: list<string>|null,
+ *   Number_Information?: list<string>|null,
+ *   Telephony_Data?: list<string>|null,
  * }
  */
 final class VoiceGetFieldsResponse implements BaseModel, ResponseConverter
@@ -30,34 +30,34 @@ final class VoiceGetFieldsResponse implements BaseModel, ResponseConverter
     /**
      * Cost and billing related information.
      *
-     * @var list<string>|null $billing
+     * @var list<string>|null $Billing
      */
-    #[Api('Billing', list: 'string', optional: true)]
-    public ?array $billing;
+    #[Api(list: 'string', optional: true)]
+    public ?array $Billing;
 
     /**
      * Fields related to call interaction and basic call information.
      *
-     * @var list<string>|null $interactionData
+     * @var list<string>|null $Interaction_Data
      */
     #[Api('Interaction Data', list: 'string', optional: true)]
-    public ?array $interactionData;
+    public ?array $Interaction_Data;
 
     /**
      * Geographic and routing information for phone numbers.
      *
-     * @var list<string>|null $numberInformation
+     * @var list<string>|null $Number_Information
      */
     #[Api('Number Information', list: 'string', optional: true)]
-    public ?array $numberInformation;
+    public ?array $Number_Information;
 
     /**
      * Technical telephony and call control information.
      *
-     * @var list<string>|null $telephonyData
+     * @var list<string>|null $Telephony_Data
      */
     #[Api('Telephony Data', list: 'string', optional: true)]
-    public ?array $telephonyData;
+    public ?array $Telephony_Data;
 
     public function __construct()
     {
@@ -69,23 +69,23 @@ final class VoiceGetFieldsResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $billing
-     * @param list<string> $interactionData
-     * @param list<string> $numberInformation
-     * @param list<string> $telephonyData
+     * @param list<string> $Billing
+     * @param list<string> $Interaction_Data
+     * @param list<string> $Number_Information
+     * @param list<string> $Telephony_Data
      */
     public static function with(
-        ?array $billing = null,
-        ?array $interactionData = null,
-        ?array $numberInformation = null,
-        ?array $telephonyData = null,
+        ?array $Billing = null,
+        ?array $Interaction_Data = null,
+        ?array $Number_Information = null,
+        ?array $Telephony_Data = null,
     ): self {
         $obj = new self;
 
-        null !== $billing && $obj->billing = $billing;
-        null !== $interactionData && $obj->interactionData = $interactionData;
-        null !== $numberInformation && $obj->numberInformation = $numberInformation;
-        null !== $telephonyData && $obj->telephonyData = $telephonyData;
+        null !== $Billing && $obj->Billing = $Billing;
+        null !== $Interaction_Data && $obj->Interaction_Data = $Interaction_Data;
+        null !== $Number_Information && $obj->Number_Information = $Number_Information;
+        null !== $Telephony_Data && $obj->Telephony_Data = $Telephony_Data;
 
         return $obj;
     }
@@ -98,7 +98,7 @@ final class VoiceGetFieldsResponse implements BaseModel, ResponseConverter
     public function withBilling(array $billing): self
     {
         $obj = clone $this;
-        $obj->billing = $billing;
+        $obj->Billing = $billing;
 
         return $obj;
     }
@@ -111,7 +111,7 @@ final class VoiceGetFieldsResponse implements BaseModel, ResponseConverter
     public function withInteractionData(array $interactionData): self
     {
         $obj = clone $this;
-        $obj->interactionData = $interactionData;
+        $obj->Interaction_Data = $interactionData;
 
         return $obj;
     }
@@ -124,7 +124,7 @@ final class VoiceGetFieldsResponse implements BaseModel, ResponseConverter
     public function withNumberInformation(array $numberInformation): self
     {
         $obj = clone $this;
-        $obj->numberInformation = $numberInformation;
+        $obj->Number_Information = $numberInformation;
 
         return $obj;
     }
@@ -137,7 +137,7 @@ final class VoiceGetFieldsResponse implements BaseModel, ResponseConverter
     public function withTelephonyData(array $telephonyData): self
     {
         $obj = clone $this;
-        $obj->telephonyData = $telephonyData;
+        $obj->Telephony_Data = $telephonyData;
 
         return $obj;
     }

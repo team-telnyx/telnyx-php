@@ -11,7 +11,7 @@ use Telnyx\Webhooks\CallMachinePremiumDetectionEndedWebhookEvent\Data;
 
 /**
  * @phpstan-type CallMachinePremiumDetectionEndedWebhookEventShape = array{
- *   data?: Data
+ *   data?: Data|null
  * }
  */
 final class CallMachinePremiumDetectionEndedWebhookEvent implements BaseModel

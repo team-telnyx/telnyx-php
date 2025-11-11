@@ -11,7 +11,9 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type SslCertificateDeleteResponseShape = array{data?: SslCertificate}
+ * @phpstan-type SslCertificateDeleteResponseShape = array{
+ *   data?: SslCertificate|null
+ * }
  */
 final class SslCertificateDeleteResponse implements BaseModel, ResponseConverter
 {

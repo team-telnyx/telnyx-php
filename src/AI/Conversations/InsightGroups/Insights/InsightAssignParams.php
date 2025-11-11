@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\AI\Conversations\InsightGroups\Insights->assign
  *
- * @phpstan-type InsightAssignParamsShape = array{groupID: string}
+ * @phpstan-type InsightAssignParamsShape = array{group_id: string}
  */
 final class InsightAssignParams implements BaseModel
 {
@@ -26,14 +26,14 @@ final class InsightAssignParams implements BaseModel
      * The ID of the insight group.
      */
     #[Api]
-    public string $groupID;
+    public string $group_id;
 
     /**
      * `new InsightAssignParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * InsightAssignParams::with(groupID: ...)
+     * InsightAssignParams::with(group_id: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -52,11 +52,11 @@ final class InsightAssignParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(string $groupID): self
+    public static function with(string $group_id): self
     {
         $obj = new self;
 
-        $obj->groupID = $groupID;
+        $obj->group_id = $group_id;
 
         return $obj;
     }
@@ -67,7 +67,7 @@ final class InsightAssignParams implements BaseModel
     public function withGroupID(string $groupID): self
     {
         $obj = clone $this;
-        $obj->groupID = $groupID;
+        $obj->group_id = $groupID;
 
         return $obj;
     }

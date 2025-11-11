@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\OtaUpdates\OtaUpdateGetResponse\Data;
 
 /**
- * @phpstan-type OtaUpdateGetResponseShape = array{data?: Data}
+ * @phpstan-type OtaUpdateGetResponseShape = array{data?: Data|null}
  */
 final class OtaUpdateGetResponse implements BaseModel, ResponseConverter
 {

@@ -33,7 +33,7 @@ final class PortingPhoneNumbersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->portingPhoneNumbers->list();
+        $result = $this->client->portingPhoneNumbers->list([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

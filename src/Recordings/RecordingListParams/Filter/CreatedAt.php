@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type CreatedAtShape = array{gte?: string, lte?: string}
+ * @phpstan-type CreatedAtShape = array{gte?: string|null, lte?: string|null}
  */
 final class CreatedAt implements BaseModel
 {

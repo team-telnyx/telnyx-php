@@ -12,16 +12,16 @@ use Telnyx\Networks\NetworkListInterfacesResponse\Data\Region;
 
 /**
  * @phpstan-type DataShape = array{
- *   id?: string,
- *   createdAt?: string,
- *   recordType?: string,
- *   updatedAt?: string,
- *   name?: string,
- *   networkID?: string,
- *   status?: value-of<InterfaceStatus>,
- *   region?: Region,
- *   regionCode?: string,
- *   type?: string,
+ *   id?: string|null,
+ *   created_at?: string|null,
+ *   record_type?: string|null,
+ *   updated_at?: string|null,
+ *   name?: string|null,
+ *   network_id?: string|null,
+ *   status?: value-of<InterfaceStatus>|null,
+ *   region?: Region|null,
+ *   region_code?: string|null,
+ *   type?: string|null,
  * }
  */
 final class Data implements BaseModel
@@ -38,20 +38,20 @@ final class Data implements BaseModel
     /**
      * ISO 8601 formatted date-time indicating when the resource was created.
      */
-    #[Api('created_at', optional: true)]
-    public ?string $createdAt;
+    #[Api(optional: true)]
+    public ?string $created_at;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api('record_type', optional: true)]
-    public ?string $recordType;
+    #[Api(optional: true)]
+    public ?string $record_type;
 
     /**
      * ISO 8601 formatted date-time indicating when the resource was updated.
      */
-    #[Api('updated_at', optional: true)]
-    public ?string $updatedAt;
+    #[Api(optional: true)]
+    public ?string $updated_at;
 
     /**
      * A user specified name for the interface.
@@ -62,8 +62,8 @@ final class Data implements BaseModel
     /**
      * The id of the network associated with the interface.
      */
-    #[Api('network_id', optional: true)]
-    public ?string $networkID;
+    #[Api(optional: true)]
+    public ?string $network_id;
 
     /**
      * The current status of the interface deployment.
@@ -79,8 +79,8 @@ final class Data implements BaseModel
     /**
      * The region interface is deployed to.
      */
-    #[Api('region_code', optional: true)]
-    public ?string $regionCode;
+    #[Api(optional: true)]
+    public ?string $region_code;
 
     /**
      * Identifies the type of the interface.
@@ -102,27 +102,27 @@ final class Data implements BaseModel
      */
     public static function with(
         ?string $id = null,
-        ?string $createdAt = null,
-        ?string $recordType = null,
-        ?string $updatedAt = null,
+        ?string $created_at = null,
+        ?string $record_type = null,
+        ?string $updated_at = null,
         ?string $name = null,
-        ?string $networkID = null,
+        ?string $network_id = null,
         InterfaceStatus|string|null $status = null,
         ?Region $region = null,
-        ?string $regionCode = null,
+        ?string $region_code = null,
         ?string $type = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj->id = $id;
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $recordType && $obj->recordType = $recordType;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
+        null !== $created_at && $obj->created_at = $created_at;
+        null !== $record_type && $obj->record_type = $record_type;
+        null !== $updated_at && $obj->updated_at = $updated_at;
         null !== $name && $obj->name = $name;
-        null !== $networkID && $obj->networkID = $networkID;
+        null !== $network_id && $obj->network_id = $network_id;
         null !== $status && $obj['status'] = $status;
         null !== $region && $obj->region = $region;
-        null !== $regionCode && $obj->regionCode = $regionCode;
+        null !== $region_code && $obj->region_code = $region_code;
         null !== $type && $obj->type = $type;
 
         return $obj;
@@ -145,7 +145,7 @@ final class Data implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }
@@ -156,7 +156,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType;
+        $obj->record_type = $recordType;
 
         return $obj;
     }
@@ -167,7 +167,7 @@ final class Data implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $obj->updated_at = $updatedAt;
 
         return $obj;
     }
@@ -189,7 +189,7 @@ final class Data implements BaseModel
     public function withNetworkID(string $networkID): self
     {
         $obj = clone $this;
-        $obj->networkID = $networkID;
+        $obj->network_id = $networkID;
 
         return $obj;
     }
@@ -221,7 +221,7 @@ final class Data implements BaseModel
     public function withRegionCode(string $regionCode): self
     {
         $obj = clone $this;
-        $obj->regionCode = $regionCode;
+        $obj->region_code = $regionCode;
 
         return $obj;
     }

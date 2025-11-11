@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Texml\Accounts\Recordings\Json->retrieveRecordingSidJson
  *
  * @phpstan-type JsonRetrieveRecordingSidJsonParamsShape = array{
- *   accountSid: string
+ *   account_sid: string
  * }
  */
 final class JsonRetrieveRecordingSidJsonParams implements BaseModel
@@ -25,14 +25,14 @@ final class JsonRetrieveRecordingSidJsonParams implements BaseModel
     use SdkParams;
 
     #[Api]
-    public string $accountSid;
+    public string $account_sid;
 
     /**
      * `new JsonRetrieveRecordingSidJsonParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * JsonRetrieveRecordingSidJsonParams::with(accountSid: ...)
+     * JsonRetrieveRecordingSidJsonParams::with(account_sid: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -51,11 +51,11 @@ final class JsonRetrieveRecordingSidJsonParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(string $accountSid): self
+    public static function with(string $account_sid): self
     {
         $obj = new self;
 
-        $obj->accountSid = $accountSid;
+        $obj->account_sid = $account_sid;
 
         return $obj;
     }
@@ -63,7 +63,7 @@ final class JsonRetrieveRecordingSidJsonParams implements BaseModel
     public function withAccountSid(string $accountSid): self
     {
         $obj = clone $this;
-        $obj->accountSid = $accountSid;
+        $obj->account_sid = $accountSid;
 
         return $obj;
     }

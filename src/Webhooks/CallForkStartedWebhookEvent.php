@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\CallForkStartedWebhookEvent\Data;
 
 /**
- * @phpstan-type CallForkStartedWebhookEventShape = array{data?: Data}
+ * @phpstan-type CallForkStartedWebhookEventShape = array{data?: Data|null}
  */
 final class CallForkStartedWebhookEvent implements BaseModel
 {

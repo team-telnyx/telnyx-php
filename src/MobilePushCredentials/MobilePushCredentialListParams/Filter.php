@@ -12,7 +12,9 @@ use Telnyx\MobilePushCredentials\MobilePushCredentialListParams\Filter\Type;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[type], filter[alias].
  *
- * @phpstan-type FilterShape = array{alias?: string, type?: value-of<Type>}
+ * @phpstan-type FilterShape = array{
+ *   alias?: string|null, type?: value-of<Type>|null
+ * }
  */
 final class Filter implements BaseModel
 {

@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\AI\Clusters->retrieve
  *
  * @phpstan-type ClusterRetrieveParamsShape = array{
- *   showSubclusters?: bool, topNNodes?: int
+ *   show_subclusters?: bool, top_n_nodes?: int
  * }
  */
 final class ClusterRetrieveParams implements BaseModel
@@ -28,13 +28,13 @@ final class ClusterRetrieveParams implements BaseModel
      * Whether or not to include subclusters and their nodes in the response.
      */
     #[Api(optional: true)]
-    public ?bool $showSubclusters;
+    public ?bool $show_subclusters;
 
     /**
      * The number of nodes in the cluster to return in the response. Nodes will be sorted by their centrality within the cluster.
      */
     #[Api(optional: true)]
-    public ?int $topNNodes;
+    public ?int $top_n_nodes;
 
     public function __construct()
     {
@@ -47,13 +47,13 @@ final class ClusterRetrieveParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?bool $showSubclusters = null,
-        ?int $topNNodes = null
+        ?bool $show_subclusters = null,
+        ?int $top_n_nodes = null
     ): self {
         $obj = new self;
 
-        null !== $showSubclusters && $obj->showSubclusters = $showSubclusters;
-        null !== $topNNodes && $obj->topNNodes = $topNNodes;
+        null !== $show_subclusters && $obj->show_subclusters = $show_subclusters;
+        null !== $top_n_nodes && $obj->top_n_nodes = $top_n_nodes;
 
         return $obj;
     }
@@ -64,7 +64,7 @@ final class ClusterRetrieveParams implements BaseModel
     public function withShowSubclusters(bool $showSubclusters): self
     {
         $obj = clone $this;
-        $obj->showSubclusters = $showSubclusters;
+        $obj->show_subclusters = $showSubclusters;
 
         return $obj;
     }
@@ -75,7 +75,7 @@ final class ClusterRetrieveParams implements BaseModel
     public function withTopNNodes(int $topNNodes): self
     {
         $obj = clone $this;
-        $obj->topNNodes = $topNNodes;
+        $obj->top_n_nodes = $topNNodes;
 
         return $obj;
     }

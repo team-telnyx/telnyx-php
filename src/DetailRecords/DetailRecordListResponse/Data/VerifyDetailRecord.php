@@ -11,20 +11,20 @@ use Telnyx\DetailRecords\DetailRecordListResponse\Data\VerifyDetailRecord\Verify
 
 /**
  * @phpstan-type VerifyDetailRecordShape = array{
- *   recordType: string,
- *   id?: string,
- *   createdAt?: \DateTimeInterface,
- *   currency?: string,
- *   deliveryStatus?: string,
- *   destinationPhoneNumber?: string,
- *   rate?: string,
- *   rateMeasuredIn?: string,
- *   updatedAt?: \DateTimeInterface,
- *   verificationStatus?: string,
- *   verifyChannelID?: string,
- *   verifyChannelType?: value-of<VerifyChannelType>,
- *   verifyProfileID?: string,
- *   verifyUsageFee?: string,
+ *   record_type: string,
+ *   id?: string|null,
+ *   created_at?: \DateTimeInterface|null,
+ *   currency?: string|null,
+ *   delivery_status?: string|null,
+ *   destination_phone_number?: string|null,
+ *   rate?: string|null,
+ *   rate_measured_in?: string|null,
+ *   updated_at?: \DateTimeInterface|null,
+ *   verification_status?: string|null,
+ *   verify_channel_id?: string|null,
+ *   verify_channel_type?: value-of<VerifyChannelType>|null,
+ *   verify_profile_id?: string|null,
+ *   verify_usage_fee?: string|null,
  * }
  */
 final class VerifyDetailRecord implements BaseModel
@@ -32,8 +32,8 @@ final class VerifyDetailRecord implements BaseModel
     /** @use SdkModel<VerifyDetailRecordShape> */
     use SdkModel;
 
-    #[Api('record_type')]
-    public string $recordType;
+    #[Api]
+    public string $record_type;
 
     /**
      * Unique ID of the verification.
@@ -41,8 +41,8 @@ final class VerifyDetailRecord implements BaseModel
     #[Api(optional: true)]
     public ?string $id;
 
-    #[Api('created_at', optional: true)]
-    public ?\DateTimeInterface $createdAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $created_at;
 
     /**
      * Telnyx account currency used to describe monetary values, including billing costs.
@@ -50,14 +50,14 @@ final class VerifyDetailRecord implements BaseModel
     #[Api(optional: true)]
     public ?string $currency;
 
-    #[Api('delivery_status', optional: true)]
-    public ?string $deliveryStatus;
+    #[Api(optional: true)]
+    public ?string $delivery_status;
 
     /**
      * E.164 formatted phone number.
      */
-    #[Api('destination_phone_number', optional: true)]
-    public ?string $destinationPhoneNumber;
+    #[Api(optional: true)]
+    public ?string $destination_phone_number;
 
     /**
      * Currency amount per billing unit used to calculate the Telnyx billing costs.
@@ -68,17 +68,17 @@ final class VerifyDetailRecord implements BaseModel
     /**
      * Billing unit used to calculate the Telnyx billing costs.
      */
-    #[Api('rate_measured_in', optional: true)]
-    public ?string $rateMeasuredIn;
+    #[Api(optional: true)]
+    public ?string $rate_measured_in;
 
-    #[Api('updated_at', optional: true)]
-    public ?\DateTimeInterface $updatedAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $updated_at;
 
-    #[Api('verification_status', optional: true)]
-    public ?string $verificationStatus;
+    #[Api(optional: true)]
+    public ?string $verification_status;
 
-    #[Api('verify_channel_id', optional: true)]
-    public ?string $verifyChannelID;
+    #[Api(optional: true)]
+    public ?string $verify_channel_id;
 
     /**
      * Depending on the type of verification, the `verify_channel_id`
@@ -90,26 +90,26 @@ final class VerifyDetailRecord implements BaseModel
      * call, flashcall     | call_control_id
      * ---.
      *
-     * @var value-of<VerifyChannelType>|null $verifyChannelType
+     * @var value-of<VerifyChannelType>|null $verify_channel_type
      */
-    #[Api('verify_channel_type', enum: VerifyChannelType::class, optional: true)]
-    public ?string $verifyChannelType;
+    #[Api(enum: VerifyChannelType::class, optional: true)]
+    public ?string $verify_channel_type;
 
-    #[Api('verify_profile_id', optional: true)]
-    public ?string $verifyProfileID;
+    #[Api(optional: true)]
+    public ?string $verify_profile_id;
 
     /**
      * Currency amount for Verify Usage Fee.
      */
-    #[Api('verify_usage_fee', optional: true)]
-    public ?string $verifyUsageFee;
+    #[Api(optional: true)]
+    public ?string $verify_usage_fee;
 
     /**
      * `new VerifyDetailRecord()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * VerifyDetailRecord::with(recordType: ...)
+     * VerifyDetailRecord::with(record_type: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -128,41 +128,41 @@ final class VerifyDetailRecord implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param VerifyChannelType|value-of<VerifyChannelType> $verifyChannelType
+     * @param VerifyChannelType|value-of<VerifyChannelType> $verify_channel_type
      */
     public static function with(
-        string $recordType = 'verification_detail_record',
+        string $record_type = 'verification_detail_record',
         ?string $id = null,
-        ?\DateTimeInterface $createdAt = null,
+        ?\DateTimeInterface $created_at = null,
         ?string $currency = null,
-        ?string $deliveryStatus = null,
-        ?string $destinationPhoneNumber = null,
+        ?string $delivery_status = null,
+        ?string $destination_phone_number = null,
         ?string $rate = null,
-        ?string $rateMeasuredIn = null,
-        ?\DateTimeInterface $updatedAt = null,
-        ?string $verificationStatus = null,
-        ?string $verifyChannelID = null,
-        VerifyChannelType|string|null $verifyChannelType = null,
-        ?string $verifyProfileID = null,
-        ?string $verifyUsageFee = null,
+        ?string $rate_measured_in = null,
+        ?\DateTimeInterface $updated_at = null,
+        ?string $verification_status = null,
+        ?string $verify_channel_id = null,
+        VerifyChannelType|string|null $verify_channel_type = null,
+        ?string $verify_profile_id = null,
+        ?string $verify_usage_fee = null,
     ): self {
         $obj = new self;
 
-        $obj->recordType = $recordType;
+        $obj->record_type = $record_type;
 
         null !== $id && $obj->id = $id;
-        null !== $createdAt && $obj->createdAt = $createdAt;
+        null !== $created_at && $obj->created_at = $created_at;
         null !== $currency && $obj->currency = $currency;
-        null !== $deliveryStatus && $obj->deliveryStatus = $deliveryStatus;
-        null !== $destinationPhoneNumber && $obj->destinationPhoneNumber = $destinationPhoneNumber;
+        null !== $delivery_status && $obj->delivery_status = $delivery_status;
+        null !== $destination_phone_number && $obj->destination_phone_number = $destination_phone_number;
         null !== $rate && $obj->rate = $rate;
-        null !== $rateMeasuredIn && $obj->rateMeasuredIn = $rateMeasuredIn;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
-        null !== $verificationStatus && $obj->verificationStatus = $verificationStatus;
-        null !== $verifyChannelID && $obj->verifyChannelID = $verifyChannelID;
-        null !== $verifyChannelType && $obj['verifyChannelType'] = $verifyChannelType;
-        null !== $verifyProfileID && $obj->verifyProfileID = $verifyProfileID;
-        null !== $verifyUsageFee && $obj->verifyUsageFee = $verifyUsageFee;
+        null !== $rate_measured_in && $obj->rate_measured_in = $rate_measured_in;
+        null !== $updated_at && $obj->updated_at = $updated_at;
+        null !== $verification_status && $obj->verification_status = $verification_status;
+        null !== $verify_channel_id && $obj->verify_channel_id = $verify_channel_id;
+        null !== $verify_channel_type && $obj['verify_channel_type'] = $verify_channel_type;
+        null !== $verify_profile_id && $obj->verify_profile_id = $verify_profile_id;
+        null !== $verify_usage_fee && $obj->verify_usage_fee = $verify_usage_fee;
 
         return $obj;
     }
@@ -170,7 +170,7 @@ final class VerifyDetailRecord implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType;
+        $obj->record_type = $recordType;
 
         return $obj;
     }
@@ -189,7 +189,7 @@ final class VerifyDetailRecord implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }
@@ -208,7 +208,7 @@ final class VerifyDetailRecord implements BaseModel
     public function withDeliveryStatus(string $deliveryStatus): self
     {
         $obj = clone $this;
-        $obj->deliveryStatus = $deliveryStatus;
+        $obj->delivery_status = $deliveryStatus;
 
         return $obj;
     }
@@ -220,7 +220,7 @@ final class VerifyDetailRecord implements BaseModel
         string $destinationPhoneNumber
     ): self {
         $obj = clone $this;
-        $obj->destinationPhoneNumber = $destinationPhoneNumber;
+        $obj->destination_phone_number = $destinationPhoneNumber;
 
         return $obj;
     }
@@ -242,7 +242,7 @@ final class VerifyDetailRecord implements BaseModel
     public function withRateMeasuredIn(string $rateMeasuredIn): self
     {
         $obj = clone $this;
-        $obj->rateMeasuredIn = $rateMeasuredIn;
+        $obj->rate_measured_in = $rateMeasuredIn;
 
         return $obj;
     }
@@ -250,7 +250,7 @@ final class VerifyDetailRecord implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $obj->updated_at = $updatedAt;
 
         return $obj;
     }
@@ -258,7 +258,7 @@ final class VerifyDetailRecord implements BaseModel
     public function withVerificationStatus(string $verificationStatus): self
     {
         $obj = clone $this;
-        $obj->verificationStatus = $verificationStatus;
+        $obj->verification_status = $verificationStatus;
 
         return $obj;
     }
@@ -266,7 +266,7 @@ final class VerifyDetailRecord implements BaseModel
     public function withVerifyChannelID(string $verifyChannelID): self
     {
         $obj = clone $this;
-        $obj->verifyChannelID = $verifyChannelID;
+        $obj->verify_channel_id = $verifyChannelID;
 
         return $obj;
     }
@@ -287,7 +287,7 @@ final class VerifyDetailRecord implements BaseModel
         VerifyChannelType|string $verifyChannelType
     ): self {
         $obj = clone $this;
-        $obj['verifyChannelType'] = $verifyChannelType;
+        $obj['verify_channel_type'] = $verifyChannelType;
 
         return $obj;
     }
@@ -295,7 +295,7 @@ final class VerifyDetailRecord implements BaseModel
     public function withVerifyProfileID(string $verifyProfileID): self
     {
         $obj = clone $this;
-        $obj->verifyProfileID = $verifyProfileID;
+        $obj->verify_profile_id = $verifyProfileID;
 
         return $obj;
     }
@@ -306,7 +306,7 @@ final class VerifyDetailRecord implements BaseModel
     public function withVerifyUsageFee(string $verifyUsageFee): self
     {
         $obj = clone $this;
-        $obj->verifyUsageFee = $verifyUsageFee;
+        $obj->verify_usage_fee = $verifyUsageFee;
 
         return $obj;
     }

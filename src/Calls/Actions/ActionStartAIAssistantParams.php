@@ -23,13 +23,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-type ActionStartAIAssistantParamsShape = array{
  *   assistant?: Assistant,
- *   clientState?: string,
- *   commandID?: string,
+ *   client_state?: string,
+ *   command_id?: string,
  *   greeting?: string,
- *   interruptionSettings?: InterruptionSettings,
+ *   interruption_settings?: InterruptionSettings,
  *   transcription?: TranscriptionConfig,
  *   voice?: string,
- *   voiceSettings?: mixed|ElevenLabsVoiceSettings|TelnyxVoiceSettings,
+ *   voice_settings?: mixed|ElevenLabsVoiceSettings|TelnyxVoiceSettings,
  * }
  */
 final class ActionStartAIAssistantParams implements BaseModel
@@ -47,14 +47,14 @@ final class ActionStartAIAssistantParams implements BaseModel
     /**
      * Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      */
-    #[Api('client_state', optional: true)]
-    public ?string $clientState;
+    #[Api(optional: true)]
+    public ?string $client_state;
 
     /**
      * Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      */
-    #[Api('command_id', optional: true)]
-    public ?string $commandID;
+    #[Api(optional: true)]
+    public ?string $command_id;
 
     /**
      * Text that will be played when the assistant starts, if none then nothing will be played when the assistant starts. The greeting can be text for any voice or SSML for `AWS.Polly.<voice_id>` voices. There is a 3,000 character limit.
@@ -65,8 +65,8 @@ final class ActionStartAIAssistantParams implements BaseModel
     /**
      * Settings for handling user interruptions during assistant speech.
      */
-    #[Api('interruption_settings', optional: true)]
-    public ?InterruptionSettings $interruptionSettings;
+    #[Api(optional: true)]
+    public ?InterruptionSettings $interruption_settings;
 
     /**
      * The settings associated with speech to text for the voice assistant. This is only relevant if the assistant uses a text-to-text language model. Any assistant using a model with native audio support (e.g. `fixie-ai/ultravox-v0_4`) will ignore this field.
@@ -89,10 +89,10 @@ final class ActionStartAIAssistantParams implements BaseModel
     /**
      * The settings associated with the voice selected.
      *
-     * @var mixed|ElevenLabsVoiceSettings|TelnyxVoiceSettings|null $voiceSettings
+     * @var mixed|ElevenLabsVoiceSettings|TelnyxVoiceSettings|null $voice_settings
      */
-    #[Api('voice_settings', union: VoiceSettings::class, optional: true)]
-    public mixed $voiceSettings;
+    #[Api(union: VoiceSettings::class, optional: true)]
+    public mixed $voice_settings;
 
     public function __construct()
     {
@@ -104,28 +104,28 @@ final class ActionStartAIAssistantParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param mixed|ElevenLabsVoiceSettings|TelnyxVoiceSettings $voiceSettings
+     * @param mixed|ElevenLabsVoiceSettings|TelnyxVoiceSettings $voice_settings
      */
     public static function with(
         ?Assistant $assistant = null,
-        ?string $clientState = null,
-        ?string $commandID = null,
+        ?string $client_state = null,
+        ?string $command_id = null,
         ?string $greeting = null,
-        ?InterruptionSettings $interruptionSettings = null,
+        ?InterruptionSettings $interruption_settings = null,
         ?TranscriptionConfig $transcription = null,
         ?string $voice = null,
-        mixed $voiceSettings = null,
+        mixed $voice_settings = null,
     ): self {
         $obj = new self;
 
         null !== $assistant && $obj->assistant = $assistant;
-        null !== $clientState && $obj->clientState = $clientState;
-        null !== $commandID && $obj->commandID = $commandID;
+        null !== $client_state && $obj->client_state = $client_state;
+        null !== $command_id && $obj->command_id = $command_id;
         null !== $greeting && $obj->greeting = $greeting;
-        null !== $interruptionSettings && $obj->interruptionSettings = $interruptionSettings;
+        null !== $interruption_settings && $obj->interruption_settings = $interruption_settings;
         null !== $transcription && $obj->transcription = $transcription;
         null !== $voice && $obj->voice = $voice;
-        null !== $voiceSettings && $obj->voiceSettings = $voiceSettings;
+        null !== $voice_settings && $obj->voice_settings = $voice_settings;
 
         return $obj;
     }
@@ -147,7 +147,7 @@ final class ActionStartAIAssistantParams implements BaseModel
     public function withClientState(string $clientState): self
     {
         $obj = clone $this;
-        $obj->clientState = $clientState;
+        $obj->client_state = $clientState;
 
         return $obj;
     }
@@ -158,7 +158,7 @@ final class ActionStartAIAssistantParams implements BaseModel
     public function withCommandID(string $commandID): self
     {
         $obj = clone $this;
-        $obj->commandID = $commandID;
+        $obj->command_id = $commandID;
 
         return $obj;
     }
@@ -181,7 +181,7 @@ final class ActionStartAIAssistantParams implements BaseModel
         InterruptionSettings $interruptionSettings
     ): self {
         $obj = clone $this;
-        $obj->interruptionSettings = $interruptionSettings;
+        $obj->interruption_settings = $interruptionSettings;
 
         return $obj;
     }
@@ -222,7 +222,7 @@ final class ActionStartAIAssistantParams implements BaseModel
     public function withVoiceSettings(mixed $voiceSettings): self
     {
         $obj = clone $this;
-        $obj->voiceSettings = $voiceSettings;
+        $obj->voice_settings = $voiceSettings;
 
         return $obj;
     }

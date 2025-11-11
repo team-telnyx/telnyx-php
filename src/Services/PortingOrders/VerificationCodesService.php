@@ -7,19 +7,12 @@ namespace Telnyx\Services\PortingOrders;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams;
-use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams\Filter;
-use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams\Page;
-use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams\Sort;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListResponse;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeSendParams;
-use Telnyx\PortingOrders\VerificationCodes\VerificationCodeSendParams\VerificationMethod;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeVerifyParams;
-use Telnyx\PortingOrders\VerificationCodes\VerificationCodeVerifyParams\VerificationCode;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeVerifyResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PortingOrders\VerificationCodesContract;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class VerificationCodesService implements VerificationCodesContract
 {
@@ -33,39 +26,22 @@ final class VerificationCodesService implements VerificationCodesContract
      *
      * Returns a list of verification codes for a porting order.
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[verified]
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
-     * @param Sort $sort Consolidated sort parameter (deepObject style). Originally: sort[value]
+     * @param array{
+     *   filter?: array{verified?: bool},
+     *   page?: array{number?: int, size?: int},
+     *   sort?: array{value?: "created_at"|"-created_at"},
+     * }|VerificationCodeListParams $params
      *
      * @throws APIException
      */
     public function list(
         string $id,
-        $filter = omit,
-        $page = omit,
-        $sort = omit,
+        array|VerificationCodeListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): VerificationCodeListResponse {
-        $params = ['filter' => $filter, 'page' => $page, 'sort' => $sort];
-
-        return $this->listRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): VerificationCodeListResponse {
         [$parsed, $options] = VerificationCodeListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -83,40 +59,20 @@ final class VerificationCodesService implements VerificationCodesContract
      *
      * Send the verification code for all porting phone numbers.
      *
-     * @param list<string> $phoneNumbers
-     * @param VerificationMethod|value-of<VerificationMethod> $verificationMethod
+     * @param array{
+     *   phone_numbers?: list<string>, verification_method?: "sms"|"call"
+     * }|VerificationCodeSendParams $params
      *
      * @throws APIException
      */
     public function send(
         string $id,
-        $phoneNumbers = omit,
-        $verificationMethod = omit,
+        array|VerificationCodeSendParams $params,
         ?RequestOptions $requestOptions = null,
-    ): mixed {
-        $params = [
-            'phoneNumbers' => $phoneNumbers,
-            'verificationMethod' => $verificationMethod,
-        ];
-
-        return $this->sendRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function sendRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): mixed {
         [$parsed, $options] = VerificationCodeSendParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -134,35 +90,20 @@ final class VerificationCodesService implements VerificationCodesContract
      *
      * Verifies the verification code for a list of phone numbers.
      *
-     * @param list<VerificationCode> $verificationCodes
+     * @param array{
+     *   verification_codes?: list<array{code?: string, phone_number?: string}>
+     * }|VerificationCodeVerifyParams $params
      *
      * @throws APIException
      */
     public function verify(
         string $id,
-        $verificationCodes = omit,
+        array|VerificationCodeVerifyParams $params,
         ?RequestOptions $requestOptions = null,
-    ): VerificationCodeVerifyResponse {
-        $params = ['verificationCodes' => $verificationCodes];
-
-        return $this->verifyRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function verifyRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): VerificationCodeVerifyResponse {
         [$parsed, $options] = VerificationCodeVerifyParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

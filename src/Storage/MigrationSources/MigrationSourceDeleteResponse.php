@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type MigrationSourceDeleteResponseShape = array{
- *   data?: MigrationSourceParams
+ *   data?: MigrationSourceParams|null
  * }
  */
 final class MigrationSourceDeleteResponse implements BaseModel, ResponseConverter

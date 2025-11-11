@@ -5,47 +5,28 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\Reports;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Reports\MdrUsageReports\MdrUsageReportCreateParams\AggregationType;
+use Telnyx\Reports\MdrUsageReports\MdrUsageReportCreateParams;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReportDeleteResponse;
+use Telnyx\Reports\MdrUsageReports\MdrUsageReportFetchSyncParams;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReportFetchSyncResponse;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReportGetResponse;
-use Telnyx\Reports\MdrUsageReports\MdrUsageReportListParams\Page;
+use Telnyx\Reports\MdrUsageReports\MdrUsageReportListParams;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReportListResponse;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReportNewResponse;
 use Telnyx\RequestOptions;
-
-use const Telnyx\Core\OMIT as omit;
 
 interface MdrUsageReportsContract
 {
     /**
      * @api
      *
-     * @param AggregationType|value-of<AggregationType> $aggregationType
-     * @param \DateTimeInterface $endDate
-     * @param \DateTimeInterface $startDate
-     * @param string $profiles
+     * @param array<mixed>|MdrUsageReportCreateParams $params
      *
      * @throws APIException
      */
     public function create(
-        $aggregationType,
-        $endDate,
-        $startDate,
-        $profiles = omit,
+        array|MdrUsageReportCreateParams $params,
         ?RequestOptions $requestOptions = null,
-    ): MdrUsageReportNewResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): MdrUsageReportNewResponse;
 
     /**
@@ -61,25 +42,13 @@ interface MdrUsageReportsContract
     /**
      * @api
      *
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param array<mixed>|MdrUsageReportListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): MdrUsageReportListResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|MdrUsageReportListParams $params,
+        ?RequestOptions $requestOptions = null,
     ): MdrUsageReportListResponse;
 
     /**
@@ -95,30 +64,12 @@ interface MdrUsageReportsContract
     /**
      * @api
      *
-     * @param \Telnyx\Reports\MdrUsageReports\MdrUsageReportFetchSyncParams\AggregationType|value-of<\Telnyx\Reports\MdrUsageReports\MdrUsageReportFetchSyncParams\AggregationType> $aggregationType
-     * @param \DateTimeInterface $endDate
-     * @param list<string> $profiles
-     * @param \DateTimeInterface $startDate
+     * @param array<mixed>|MdrUsageReportFetchSyncParams $params
      *
      * @throws APIException
      */
     public function fetchSync(
-        $aggregationType,
-        $endDate = omit,
-        $profiles = omit,
-        $startDate = omit,
+        array|MdrUsageReportFetchSyncParams $params,
         ?RequestOptions $requestOptions = null,
-    ): MdrUsageReportFetchSyncResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function fetchSyncRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): MdrUsageReportFetchSyncResponse;
 }

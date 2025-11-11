@@ -10,10 +10,10 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type AssignProfileToCampaignResponseShape = array{
- *   messagingProfileID: string,
- *   taskID: string,
- *   campaignID?: string,
- *   tcrCampaignID?: string,
+ *   messagingProfileId: string,
+ *   taskId: string,
+ *   campaignId?: string|null,
+ *   tcrCampaignId?: string|null,
  * }
  */
 final class AssignProfileToCampaignResponse implements BaseModel
@@ -24,33 +24,33 @@ final class AssignProfileToCampaignResponse implements BaseModel
     /**
      * The ID of the messaging profile that you want to link to the specified campaign.
      */
-    #[Api('messagingProfileId')]
-    public string $messagingProfileID;
+    #[Api]
+    public string $messagingProfileId;
 
     /**
      * The ID of the task associated with assigning a messaging profile to a campaign.
      */
-    #[Api('taskId')]
-    public string $taskID;
+    #[Api]
+    public string $taskId;
 
     /**
      * The ID of the campaign you want to link to the specified messaging profile. If you supply this ID in the request, do not also include a tcrCampaignId.
      */
-    #[Api('campaignId', optional: true)]
-    public ?string $campaignID;
+    #[Api(optional: true)]
+    public ?string $campaignId;
 
     /**
      * The TCR ID of the shared campaign you want to link to the specified messaging profile (for campaigns not created using Telnyx 10DLC services only). If you supply this ID in the request, do not also include a campaignId.
      */
-    #[Api('tcrCampaignId', optional: true)]
-    public ?string $tcrCampaignID;
+    #[Api(optional: true)]
+    public ?string $tcrCampaignId;
 
     /**
      * `new AssignProfileToCampaignResponse()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * AssignProfileToCampaignResponse::with(messagingProfileID: ..., taskID: ...)
+     * AssignProfileToCampaignResponse::with(messagingProfileId: ..., taskId: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -72,18 +72,18 @@ final class AssignProfileToCampaignResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        string $messagingProfileID,
-        string $taskID,
-        ?string $campaignID = null,
-        ?string $tcrCampaignID = null,
+        string $messagingProfileId,
+        string $taskId,
+        ?string $campaignId = null,
+        ?string $tcrCampaignId = null,
     ): self {
         $obj = new self;
 
-        $obj->messagingProfileID = $messagingProfileID;
-        $obj->taskID = $taskID;
+        $obj->messagingProfileId = $messagingProfileId;
+        $obj->taskId = $taskId;
 
-        null !== $campaignID && $obj->campaignID = $campaignID;
-        null !== $tcrCampaignID && $obj->tcrCampaignID = $tcrCampaignID;
+        null !== $campaignId && $obj->campaignId = $campaignId;
+        null !== $tcrCampaignId && $obj->tcrCampaignId = $tcrCampaignId;
 
         return $obj;
     }
@@ -94,7 +94,7 @@ final class AssignProfileToCampaignResponse implements BaseModel
     public function withMessagingProfileID(string $messagingProfileID): self
     {
         $obj = clone $this;
-        $obj->messagingProfileID = $messagingProfileID;
+        $obj->messagingProfileId = $messagingProfileID;
 
         return $obj;
     }
@@ -105,7 +105,7 @@ final class AssignProfileToCampaignResponse implements BaseModel
     public function withTaskID(string $taskID): self
     {
         $obj = clone $this;
-        $obj->taskID = $taskID;
+        $obj->taskId = $taskID;
 
         return $obj;
     }
@@ -116,7 +116,7 @@ final class AssignProfileToCampaignResponse implements BaseModel
     public function withCampaignID(string $campaignID): self
     {
         $obj = clone $this;
-        $obj->campaignID = $campaignID;
+        $obj->campaignId = $campaignID;
 
         return $obj;
     }
@@ -127,7 +127,7 @@ final class AssignProfileToCampaignResponse implements BaseModel
     public function withTcrCampaignID(string $tcrCampaignID): self
     {
         $obj = clone $this;
-        $obj->tcrCampaignID = $tcrCampaignID;
+        $obj->tcrCampaignId = $tcrCampaignID;
 
         return $obj;
     }

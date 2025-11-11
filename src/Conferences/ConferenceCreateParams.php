@@ -26,18 +26,18 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Conferences->create
  *
  * @phpstan-type ConferenceCreateParamsShape = array{
- *   callControlID: string,
+ *   call_control_id: string,
  *   name: string,
- *   beepEnabled?: BeepEnabled|value-of<BeepEnabled>,
- *   clientState?: string,
- *   comfortNoise?: bool,
- *   commandID?: string,
- *   durationMinutes?: int,
- *   holdAudioURL?: string,
- *   holdMediaName?: string,
- *   maxParticipants?: int,
+ *   beep_enabled?: BeepEnabled|value-of<BeepEnabled>,
+ *   client_state?: string,
+ *   comfort_noise?: bool,
+ *   command_id?: string,
+ *   duration_minutes?: int,
+ *   hold_audio_url?: string,
+ *   hold_media_name?: string,
+ *   max_participants?: int,
  *   region?: Region|value-of<Region>,
- *   startConferenceOnCreate?: bool,
+ *   start_conference_on_create?: bool,
  * }
  */
 final class ConferenceCreateParams implements BaseModel
@@ -49,8 +49,8 @@ final class ConferenceCreateParams implements BaseModel
     /**
      * Unique identifier and token for controlling the call.
      */
-    #[Api('call_control_id')]
-    public string $callControlID;
+    #[Api]
+    public string $call_control_id;
 
     /**
      * Name of the conference.
@@ -61,52 +61,52 @@ final class ConferenceCreateParams implements BaseModel
     /**
      * Whether a beep sound should be played when participants join and/or leave the conference.
      *
-     * @var value-of<BeepEnabled>|null $beepEnabled
+     * @var value-of<BeepEnabled>|null $beep_enabled
      */
-    #[Api('beep_enabled', enum: BeepEnabled::class, optional: true)]
-    public ?string $beepEnabled;
+    #[Api(enum: BeepEnabled::class, optional: true)]
+    public ?string $beep_enabled;
 
     /**
      * Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string. The client_state will be updated for the creator call leg and will be used for all webhooks related to the created conference.
      */
-    #[Api('client_state', optional: true)]
-    public ?string $clientState;
+    #[Api(optional: true)]
+    public ?string $client_state;
 
     /**
      * Toggle background comfort noise.
      */
-    #[Api('comfort_noise', optional: true)]
-    public ?bool $comfortNoise;
+    #[Api(optional: true)]
+    public ?bool $comfort_noise;
 
     /**
      * Use this field to avoid execution of duplicate commands. Telnyx will ignore subsequent commands with the same `command_id` as one that has already been executed.
      */
-    #[Api('command_id', optional: true)]
-    public ?string $commandID;
+    #[Api(optional: true)]
+    public ?string $command_id;
 
     /**
      * Time length (minutes) after which the conference will end.
      */
-    #[Api('duration_minutes', optional: true)]
-    public ?int $durationMinutes;
+    #[Api(optional: true)]
+    public ?int $duration_minutes;
 
     /**
      * The URL of a file to be played to participants joining the conference. The URL can point to either a WAV or MP3 file. hold_media_name and hold_audio_url cannot be used together in one request. Takes effect only when "start_conference_on_create" is set to "false".
      */
-    #[Api('hold_audio_url', optional: true)]
-    public ?string $holdAudioURL;
+    #[Api(optional: true)]
+    public ?string $hold_audio_url;
 
     /**
      * The media_name of a file to be played to participants joining the conference. The media_name must point to a file previously uploaded to api.telnyx.com/v2/media by the same user/organization. The file must either be a WAV or MP3 file. Takes effect only when "start_conference_on_create" is set to "false".
      */
-    #[Api('hold_media_name', optional: true)]
-    public ?string $holdMediaName;
+    #[Api(optional: true)]
+    public ?string $hold_media_name;
 
     /**
      * The maximum number of active conference participants to allow. Must be between 2 and 800. Defaults to 250.
      */
-    #[Api('max_participants', optional: true)]
-    public ?int $maxParticipants;
+    #[Api(optional: true)]
+    public ?int $max_participants;
 
     /**
      * Sets the region where the conference data will be hosted. Defaults to the region defined in user's data locality settings (Europe or US).
@@ -119,15 +119,15 @@ final class ConferenceCreateParams implements BaseModel
     /**
      * Whether the conference should be started on creation. If the conference isn't started all participants that join are automatically put on hold. Defaults to "true".
      */
-    #[Api('start_conference_on_create', optional: true)]
-    public ?bool $startConferenceOnCreate;
+    #[Api(optional: true)]
+    public ?bool $start_conference_on_create;
 
     /**
      * `new ConferenceCreateParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * ConferenceCreateParams::with(callControlID: ..., name: ...)
+     * ConferenceCreateParams::with(call_control_id: ..., name: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -146,38 +146,38 @@ final class ConferenceCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param BeepEnabled|value-of<BeepEnabled> $beepEnabled
+     * @param BeepEnabled|value-of<BeepEnabled> $beep_enabled
      * @param Region|value-of<Region> $region
      */
     public static function with(
-        string $callControlID,
+        string $call_control_id,
         string $name,
-        BeepEnabled|string|null $beepEnabled = null,
-        ?string $clientState = null,
-        ?bool $comfortNoise = null,
-        ?string $commandID = null,
-        ?int $durationMinutes = null,
-        ?string $holdAudioURL = null,
-        ?string $holdMediaName = null,
-        ?int $maxParticipants = null,
+        BeepEnabled|string|null $beep_enabled = null,
+        ?string $client_state = null,
+        ?bool $comfort_noise = null,
+        ?string $command_id = null,
+        ?int $duration_minutes = null,
+        ?string $hold_audio_url = null,
+        ?string $hold_media_name = null,
+        ?int $max_participants = null,
         Region|string|null $region = null,
-        ?bool $startConferenceOnCreate = null,
+        ?bool $start_conference_on_create = null,
     ): self {
         $obj = new self;
 
-        $obj->callControlID = $callControlID;
+        $obj->call_control_id = $call_control_id;
         $obj->name = $name;
 
-        null !== $beepEnabled && $obj['beepEnabled'] = $beepEnabled;
-        null !== $clientState && $obj->clientState = $clientState;
-        null !== $comfortNoise && $obj->comfortNoise = $comfortNoise;
-        null !== $commandID && $obj->commandID = $commandID;
-        null !== $durationMinutes && $obj->durationMinutes = $durationMinutes;
-        null !== $holdAudioURL && $obj->holdAudioURL = $holdAudioURL;
-        null !== $holdMediaName && $obj->holdMediaName = $holdMediaName;
-        null !== $maxParticipants && $obj->maxParticipants = $maxParticipants;
+        null !== $beep_enabled && $obj['beep_enabled'] = $beep_enabled;
+        null !== $client_state && $obj->client_state = $client_state;
+        null !== $comfort_noise && $obj->comfort_noise = $comfort_noise;
+        null !== $command_id && $obj->command_id = $command_id;
+        null !== $duration_minutes && $obj->duration_minutes = $duration_minutes;
+        null !== $hold_audio_url && $obj->hold_audio_url = $hold_audio_url;
+        null !== $hold_media_name && $obj->hold_media_name = $hold_media_name;
+        null !== $max_participants && $obj->max_participants = $max_participants;
         null !== $region && $obj['region'] = $region;
-        null !== $startConferenceOnCreate && $obj->startConferenceOnCreate = $startConferenceOnCreate;
+        null !== $start_conference_on_create && $obj->start_conference_on_create = $start_conference_on_create;
 
         return $obj;
     }
@@ -188,7 +188,7 @@ final class ConferenceCreateParams implements BaseModel
     public function withCallControlID(string $callControlID): self
     {
         $obj = clone $this;
-        $obj->callControlID = $callControlID;
+        $obj->call_control_id = $callControlID;
 
         return $obj;
     }
@@ -212,7 +212,7 @@ final class ConferenceCreateParams implements BaseModel
     public function withBeepEnabled(BeepEnabled|string $beepEnabled): self
     {
         $obj = clone $this;
-        $obj['beepEnabled'] = $beepEnabled;
+        $obj['beep_enabled'] = $beepEnabled;
 
         return $obj;
     }
@@ -223,7 +223,7 @@ final class ConferenceCreateParams implements BaseModel
     public function withClientState(string $clientState): self
     {
         $obj = clone $this;
-        $obj->clientState = $clientState;
+        $obj->client_state = $clientState;
 
         return $obj;
     }
@@ -234,7 +234,7 @@ final class ConferenceCreateParams implements BaseModel
     public function withComfortNoise(bool $comfortNoise): self
     {
         $obj = clone $this;
-        $obj->comfortNoise = $comfortNoise;
+        $obj->comfort_noise = $comfortNoise;
 
         return $obj;
     }
@@ -245,7 +245,7 @@ final class ConferenceCreateParams implements BaseModel
     public function withCommandID(string $commandID): self
     {
         $obj = clone $this;
-        $obj->commandID = $commandID;
+        $obj->command_id = $commandID;
 
         return $obj;
     }
@@ -256,7 +256,7 @@ final class ConferenceCreateParams implements BaseModel
     public function withDurationMinutes(int $durationMinutes): self
     {
         $obj = clone $this;
-        $obj->durationMinutes = $durationMinutes;
+        $obj->duration_minutes = $durationMinutes;
 
         return $obj;
     }
@@ -267,7 +267,7 @@ final class ConferenceCreateParams implements BaseModel
     public function withHoldAudioURL(string $holdAudioURL): self
     {
         $obj = clone $this;
-        $obj->holdAudioURL = $holdAudioURL;
+        $obj->hold_audio_url = $holdAudioURL;
 
         return $obj;
     }
@@ -278,7 +278,7 @@ final class ConferenceCreateParams implements BaseModel
     public function withHoldMediaName(string $holdMediaName): self
     {
         $obj = clone $this;
-        $obj->holdMediaName = $holdMediaName;
+        $obj->hold_media_name = $holdMediaName;
 
         return $obj;
     }
@@ -289,7 +289,7 @@ final class ConferenceCreateParams implements BaseModel
     public function withMaxParticipants(int $maxParticipants): self
     {
         $obj = clone $this;
-        $obj->maxParticipants = $maxParticipants;
+        $obj->max_participants = $maxParticipants;
 
         return $obj;
     }
@@ -314,7 +314,7 @@ final class ConferenceCreateParams implements BaseModel
         bool $startConferenceOnCreate
     ): self {
         $obj = clone $this;
-        $obj->startConferenceOnCreate = $startConferenceOnCreate;
+        $obj->start_conference_on_create = $startConferenceOnCreate;
 
         return $obj;
     }

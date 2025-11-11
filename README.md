@@ -47,19 +47,21 @@ use Telnyx\Client;
 
 $client = new Client(apiKey: getenv("TELNYX_API_KEY") ?: "My API Key");
 
-$response = $client->calls->dial(
-  connectionID: "conn12345", from: "+15557654321", to: "+15551234567"
-);
+$response = $client->calls->dial([
+  "connection_id" => "conn12345",
+  "from" => "+15557654321",
+  "to" => "+15551234567",
+]);
 
 var_dump($response->data);
 ```
 
 ### Value Objects
 
-It is recommended to use the static `with` constructor `HangupTool::with(hangup: [], ...)`
+It is recommended to use the static `with` constructor `HangupTool::with(hangup: (object)[], ...)`
 and named parameters to initialize value objects.
 
-However, builders are also provided `(new HangupTool)->withHangup([])`.
+However, builders are also provided `(new HangupTool)->withHangup((object)[])`.
 
 ### Handling errors
 
@@ -71,7 +73,7 @@ When the library is unable to connect to the API, or if the API returns a non-su
 use Telnyx\Core\Exceptions\APIConnectionException;
 
 try {
-  $numberOrder = $client->numberOrders->create();
+  $numberOrder = $client->numberOrders->create([]);
 } catch (APIConnectionException $e) {
   echo "The server could not be reached", PHP_EOL;
   var_dump($e->getPrevious());
@@ -118,7 +120,7 @@ $client = new Client(maxRetries: 0);
 
 // Or, configure per-request:
 $result = $client->numberOrders->create(
-  requestOptions: RequestOptions::with(maxRetries: 5)
+  [], RequestOptions::with(maxRetries: 5)
 );
 ```
 
@@ -138,14 +140,13 @@ Note: the `extra*` parameters of the same name overrides the documented paramete
 use Telnyx\RequestOptions;
 
 $numberOrder = $client->numberOrders->create(
-  requestOptions: RequestOptions::with(
+  [],
+  RequestOptions::with(
     extraQueryParams: ["my_query_parameter" => "value"],
     extraBodyParams: ["my_body_parameter" => "value"],
     extraHeaders: ["my-header" => "value"],
   ),
 );
-
-var_dump($numberOrder["my_undocumented_property"]);
 ```
 
 #### Undocumented request params

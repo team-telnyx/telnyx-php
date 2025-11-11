@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type MessageTemplateShape = array{
- *   data?: VerifyProfileMessageTemplateResponse
+ *   data?: VerifyProfileMessageTemplateResponse|null
  * }
  */
 final class MessageTemplate implements BaseModel, ResponseConverter

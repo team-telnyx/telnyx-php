@@ -14,7 +14,7 @@ use Telnyx\SimCards\SimCardListWirelessConnectivityLogsResponse\Data;
 
 /**
  * @phpstan-type SimCardListWirelessConnectivityLogsResponseShape = array{
- *   data?: list<Data>, meta?: PaginationMeta
+ *   data?: list<Data>|null, meta?: PaginationMeta|null
  * }
  */
 final class SimCardListWirelessConnectivityLogsResponse implements BaseModel, ResponseConverter

@@ -15,8 +15,8 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type DataShape = array{
  *   result: value-of<Result>,
  *   suggested: Suggested,
- *   errors?: list<APIError>,
- *   recordType?: string,
+ *   errors?: list<APIError>|null,
+ *   record_type?: string|null,
  * }
  */
 final class Data implements BaseModel
@@ -45,8 +45,8 @@ final class Data implements BaseModel
     /**
      * Identifies the type of the resource.
      */
-    #[Api('record_type', optional: true)]
-    public ?string $recordType;
+    #[Api(optional: true)]
+    public ?string $record_type;
 
     /**
      * `new Data()` is missing required properties by the API.
@@ -79,7 +79,7 @@ final class Data implements BaseModel
         Result|string $result,
         Suggested $suggested,
         ?array $errors = null,
-        ?string $recordType = null,
+        ?string $record_type = null,
     ): self {
         $obj = new self;
 
@@ -87,7 +87,7 @@ final class Data implements BaseModel
         $obj->suggested = $suggested;
 
         null !== $errors && $obj->errors = $errors;
-        null !== $recordType && $obj->recordType = $recordType;
+        null !== $record_type && $obj->record_type = $record_type;
 
         return $obj;
     }
@@ -133,7 +133,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType;
+        $obj->record_type = $recordType;
 
         return $obj;
     }

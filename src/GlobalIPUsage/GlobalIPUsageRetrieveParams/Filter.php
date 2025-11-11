@@ -12,7 +12,7 @@ use Telnyx\GlobalIPUsage\GlobalIPUsageRetrieveParams\Filter\GlobalIPID\In;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[global_ip_id][in].
  *
- * @phpstan-type FilterShape = array{globalIPID?: string|In}
+ * @phpstan-type FilterShape = array{global_ip_id?: string|null|In}
  */
 final class Filter implements BaseModel
 {
@@ -22,8 +22,8 @@ final class Filter implements BaseModel
     /**
      * Filter by exact Global IP ID.
      */
-    #[Api('global_ip_id', optional: true)]
-    public string|In|null $globalIPID;
+    #[Api(optional: true)]
+    public string|In|null $global_ip_id;
 
     public function __construct()
     {
@@ -35,11 +35,11 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(string|In|null $globalIPID = null): self
+    public static function with(string|In|null $global_ip_id = null): self
     {
         $obj = new self;
 
-        null !== $globalIPID && $obj->globalIPID = $globalIPID;
+        null !== $global_ip_id && $obj->global_ip_id = $global_ip_id;
 
         return $obj;
     }
@@ -50,7 +50,7 @@ final class Filter implements BaseModel
     public function withGlobalIPID(string|In $globalIPID): self
     {
         $obj = clone $this;
-        $obj->globalIPID = $globalIPID;
+        $obj->global_ip_id = $globalIPID;
 
         return $obj;
     }

@@ -14,7 +14,7 @@ use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListResponse\Data;
 
 /**
  * @phpstan-type VerificationCodeListResponseShape = array{
- *   data?: list<Data>, meta?: PaginationMeta
+ *   data?: list<Data>|null, meta?: PaginationMeta|null
  * }
  */
 final class VerificationCodeListResponse implements BaseModel, ResponseConverter

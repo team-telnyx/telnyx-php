@@ -15,13 +15,13 @@ use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter\FilterType;
  * Query filter criteria. Note: The first filter object must specify filter_type as 'and'. You cannot follow an 'or' with another 'and'.
  *
  * @phpstan-type FilterShape = array{
- *   billingGroup?: string,
- *   cld?: string,
- *   cldFilter?: value-of<CldFilter>,
- *   cli?: string,
- *   cliFilter?: value-of<CliFilter>,
- *   filterType?: value-of<FilterType>,
- *   tagsList?: string,
+ *   billing_group?: string|null,
+ *   cld?: string|null,
+ *   cld_filter?: value-of<CldFilter>|null,
+ *   cli?: string|null,
+ *   cli_filter?: value-of<CliFilter>|null,
+ *   filter_type?: value-of<FilterType>|null,
+ *   tags_list?: string|null,
  * }
  */
 final class Filter implements BaseModel
@@ -32,8 +32,8 @@ final class Filter implements BaseModel
     /**
      * Billing group UUID to filter by.
      */
-    #[Api('billing_group', optional: true)]
-    public ?string $billingGroup;
+    #[Api(optional: true)]
+    public ?string $billing_group;
 
     /**
      * Called line identification (destination number).
@@ -44,10 +44,10 @@ final class Filter implements BaseModel
     /**
      * Filter type for CLD matching.
      *
-     * @var value-of<CldFilter>|null $cldFilter
+     * @var value-of<CldFilter>|null $cld_filter
      */
-    #[Api('cld_filter', enum: CldFilter::class, optional: true)]
-    public ?string $cldFilter;
+    #[Api(enum: CldFilter::class, optional: true)]
+    public ?string $cld_filter;
 
     /**
      * Calling line identification (caller ID).
@@ -58,24 +58,24 @@ final class Filter implements BaseModel
     /**
      * Filter type for CLI matching.
      *
-     * @var value-of<CliFilter>|null $cliFilter
+     * @var value-of<CliFilter>|null $cli_filter
      */
-    #[Api('cli_filter', enum: CliFilter::class, optional: true)]
-    public ?string $cliFilter;
+    #[Api(enum: CliFilter::class, optional: true)]
+    public ?string $cli_filter;
 
     /**
      * Logical operator for combining filters.
      *
-     * @var value-of<FilterType>|null $filterType
+     * @var value-of<FilterType>|null $filter_type
      */
-    #[Api('filter_type', enum: FilterType::class, optional: true)]
-    public ?string $filterType;
+    #[Api(enum: FilterType::class, optional: true)]
+    public ?string $filter_type;
 
     /**
      * Tag name to filter by.
      */
-    #[Api('tags_list', optional: true)]
-    public ?string $tagsList;
+    #[Api(optional: true)]
+    public ?string $tags_list;
 
     public function __construct()
     {
@@ -87,28 +87,28 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CldFilter|value-of<CldFilter> $cldFilter
-     * @param CliFilter|value-of<CliFilter> $cliFilter
-     * @param FilterType|value-of<FilterType> $filterType
+     * @param CldFilter|value-of<CldFilter> $cld_filter
+     * @param CliFilter|value-of<CliFilter> $cli_filter
+     * @param FilterType|value-of<FilterType> $filter_type
      */
     public static function with(
-        ?string $billingGroup = null,
+        ?string $billing_group = null,
         ?string $cld = null,
-        CldFilter|string|null $cldFilter = null,
+        CldFilter|string|null $cld_filter = null,
         ?string $cli = null,
-        CliFilter|string|null $cliFilter = null,
-        FilterType|string|null $filterType = null,
-        ?string $tagsList = null,
+        CliFilter|string|null $cli_filter = null,
+        FilterType|string|null $filter_type = null,
+        ?string $tags_list = null,
     ): self {
         $obj = new self;
 
-        null !== $billingGroup && $obj->billingGroup = $billingGroup;
+        null !== $billing_group && $obj->billing_group = $billing_group;
         null !== $cld && $obj->cld = $cld;
-        null !== $cldFilter && $obj['cldFilter'] = $cldFilter;
+        null !== $cld_filter && $obj['cld_filter'] = $cld_filter;
         null !== $cli && $obj->cli = $cli;
-        null !== $cliFilter && $obj['cliFilter'] = $cliFilter;
-        null !== $filterType && $obj['filterType'] = $filterType;
-        null !== $tagsList && $obj->tagsList = $tagsList;
+        null !== $cli_filter && $obj['cli_filter'] = $cli_filter;
+        null !== $filter_type && $obj['filter_type'] = $filter_type;
+        null !== $tags_list && $obj->tags_list = $tags_list;
 
         return $obj;
     }
@@ -119,7 +119,7 @@ final class Filter implements BaseModel
     public function withBillingGroup(string $billingGroup): self
     {
         $obj = clone $this;
-        $obj->billingGroup = $billingGroup;
+        $obj->billing_group = $billingGroup;
 
         return $obj;
     }
@@ -143,7 +143,7 @@ final class Filter implements BaseModel
     public function withCldFilter(CldFilter|string $cldFilter): self
     {
         $obj = clone $this;
-        $obj['cldFilter'] = $cldFilter;
+        $obj['cld_filter'] = $cldFilter;
 
         return $obj;
     }
@@ -167,7 +167,7 @@ final class Filter implements BaseModel
     public function withCliFilter(CliFilter|string $cliFilter): self
     {
         $obj = clone $this;
-        $obj['cliFilter'] = $cliFilter;
+        $obj['cli_filter'] = $cliFilter;
 
         return $obj;
     }
@@ -180,7 +180,7 @@ final class Filter implements BaseModel
     public function withFilterType(FilterType|string $filterType): self
     {
         $obj = clone $this;
-        $obj['filterType'] = $filterType;
+        $obj['filter_type'] = $filterType;
 
         return $obj;
     }
@@ -191,7 +191,7 @@ final class Filter implements BaseModel
     public function withTagsList(string $tagsList): self
     {
         $obj = clone $this;
-        $obj->tagsList = $tagsList;
+        $obj->tags_list = $tagsList;
 
         return $obj;
     }

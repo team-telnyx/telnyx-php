@@ -6,14 +6,13 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Networks\InterfaceStatus;
 use Telnyx\Networks\NetworkCreateParams;
 use Telnyx\Networks\NetworkDeleteResponse;
 use Telnyx\Networks\NetworkGetResponse;
 use Telnyx\Networks\NetworkListInterfacesParams;
 use Telnyx\Networks\NetworkListInterfacesResponse;
 use Telnyx\Networks\NetworkListParams;
-use Telnyx\Networks\NetworkListParams\Filter;
-use Telnyx\Networks\NetworkListParams\Page;
 use Telnyx\Networks\NetworkListResponse;
 use Telnyx\Networks\NetworkNewResponse;
 use Telnyx\Networks\NetworkUpdateParams;
@@ -22,12 +21,10 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\NetworksContract;
 use Telnyx\Services\Networks\DefaultGatewayService;
 
-use const Telnyx\Core\OMIT as omit;
-
 final class NetworksService implements NetworksContract
 {
     /**
-     * @@api
+     * @api
      */
     public DefaultGatewayService $defaultGateway;
 
@@ -44,33 +41,17 @@ final class NetworksService implements NetworksContract
      *
      * Create a new Network.
      *
-     * @param string $name a user specified name for the network
+     * @param array{name: string}|NetworkCreateParams $params
      *
      * @throws APIException
      */
     public function create(
-        $name,
-        ?RequestOptions $requestOptions = null
-    ): NetworkNewResponse {
-        $params = ['name' => $name];
-
-        return $this->createRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
+        array|NetworkCreateParams $params,
         ?RequestOptions $requestOptions = null
     ): NetworkNewResponse {
         [$parsed, $options] = NetworkCreateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -108,35 +89,18 @@ final class NetworksService implements NetworksContract
      *
      * Update a Network.
      *
-     * @param string $name a user specified name for the network
+     * @param array{name: string}|NetworkUpdateParams $params
      *
      * @throws APIException
      */
     public function update(
         string $id,
-        $name,
-        ?RequestOptions $requestOptions = null
-    ): NetworkUpdateResponse {
-        $params = ['name' => $name];
-
-        return $this->updateRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|NetworkUpdateParams $params,
+        ?RequestOptions $requestOptions = null,
     ): NetworkUpdateResponse {
         [$parsed, $options] = NetworkUpdateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -154,35 +118,19 @@ final class NetworksService implements NetworksContract
      *
      * List all Networks.
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[name]
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param array{
+     *   filter?: array{name?: string}, page?: array{number?: int, size?: int}
+     * }|NetworkListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): NetworkListResponse {
-        $params = ['filter' => $filter, 'page' => $page];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
+        array|NetworkListParams $params,
         ?RequestOptions $requestOptions = null
     ): NetworkListResponse {
         [$parsed, $options] = NetworkListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -220,37 +168,25 @@ final class NetworksService implements NetworksContract
      *
      * List all Interfaces for a Network.
      *
-     * @param NetworkListInterfacesParams\Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[name], filter[type], filter[status]
-     * @param NetworkListInterfacesParams\Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param array{
+     *   filter?: array{
+     *     name?: string,
+     *     status?: "created"|"provisioning"|"provisioned"|"deleting"|InterfaceStatus,
+     *     type?: string,
+     *   },
+     *   page?: array{number?: int, size?: int},
+     * }|NetworkListInterfacesParams $params
      *
      * @throws APIException
      */
     public function listInterfaces(
         string $id,
-        $filter = omit,
-        $page = omit,
+        array|NetworkListInterfacesParams $params,
         ?RequestOptions $requestOptions = null,
-    ): NetworkListInterfacesResponse {
-        $params = ['filter' => $filter, 'page' => $page];
-
-        return $this->listInterfacesRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listInterfacesRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): NetworkListInterfacesResponse {
         [$parsed, $options] = NetworkListInterfacesParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

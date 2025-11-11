@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Porting\PortingListUkCarriersResponse\Data;
 
 /**
- * @phpstan-type PortingListUkCarriersResponseShape = array{data?: list<Data>}
+ * @phpstan-type PortingListUkCarriersResponseShape = array{data?: list<Data>|null}
  */
 final class PortingListUkCarriersResponse implements BaseModel, ResponseConverter
 {

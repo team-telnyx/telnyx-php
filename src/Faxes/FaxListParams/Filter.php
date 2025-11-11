@@ -16,7 +16,10 @@ use Telnyx\Faxes\FaxListParams\Filter\To;
  * Consolidated filter parameter (deepObject style). Originally: filter[created_at][gte], filter[created_at][gt], filter[created_at][lte], filter[created_at][lt], filter[direction][eq], filter[from][eq], filter[to][eq].
  *
  * @phpstan-type FilterShape = array{
- *   createdAt?: CreatedAt, direction?: Direction, from?: From, to?: To
+ *   created_at?: CreatedAt|null,
+ *   direction?: Direction|null,
+ *   from?: From|null,
+ *   to?: To|null,
  * }
  */
 final class Filter implements BaseModel
@@ -27,8 +30,8 @@ final class Filter implements BaseModel
     /**
      * Date range filtering operations for fax creation timestamp.
      */
-    #[Api('created_at', optional: true)]
-    public ?CreatedAt $createdAt;
+    #[Api(optional: true)]
+    public ?CreatedAt $created_at;
 
     /**
      * Direction filtering operations.
@@ -59,14 +62,14 @@ final class Filter implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?CreatedAt $createdAt = null,
+        ?CreatedAt $created_at = null,
         ?Direction $direction = null,
         ?From $from = null,
         ?To $to = null,
     ): self {
         $obj = new self;
 
-        null !== $createdAt && $obj->createdAt = $createdAt;
+        null !== $created_at && $obj->created_at = $created_at;
         null !== $direction && $obj->direction = $direction;
         null !== $from && $obj->from = $from;
         null !== $to && $obj->to = $to;
@@ -80,7 +83,7 @@ final class Filter implements BaseModel
     public function withCreatedAt(CreatedAt $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }

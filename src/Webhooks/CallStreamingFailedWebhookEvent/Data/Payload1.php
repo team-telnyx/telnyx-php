@@ -12,15 +12,15 @@ use Telnyx\Webhooks\CallStreamingFailedWebhookEvent\Data\Payload\StreamType;
 
 /**
  * @phpstan-type PayloadShape = array{
- *   callControlID?: string,
- *   callLegID?: string,
- *   callSessionID?: string,
- *   clientState?: string,
- *   connectionID?: string,
- *   failureReason?: string,
- *   streamID?: string,
- *   streamParams?: StreamParams,
- *   streamType?: value-of<StreamType>,
+ *   call_control_id?: string|null,
+ *   call_leg_id?: string|null,
+ *   call_session_id?: string|null,
+ *   client_state?: string|null,
+ *   connection_id?: string|null,
+ *   failure_reason?: string|null,
+ *   stream_id?: string|null,
+ *   stream_params?: StreamParams|null,
+ *   stream_type?: value-of<StreamType>|null,
  * }
  */
 final class Payload implements BaseModel
@@ -31,58 +31,58 @@ final class Payload implements BaseModel
     /**
      * Call ID used to issue commands via Call Control API.
      */
-    #[Api('call_control_id', optional: true)]
-    public ?string $callControlID;
+    #[Api(optional: true)]
+    public ?string $call_control_id;
 
     /**
      * ID that is unique to the call and can be used to correlate webhook events.
      */
-    #[Api('call_leg_id', optional: true)]
-    public ?string $callLegID;
+    #[Api(optional: true)]
+    public ?string $call_leg_id;
 
     /**
      * ID that is unique to the call session and can be used to correlate webhook events. Call session is a group of related call legs that logically belong to the same phone call, e.g. an inbound and outbound leg of a transferred call.
      */
-    #[Api('call_session_id', optional: true)]
-    public ?string $callSessionID;
+    #[Api(optional: true)]
+    public ?string $call_session_id;
 
     /**
      * State received from a command.
      */
-    #[Api('client_state', optional: true)]
-    public ?string $clientState;
+    #[Api(optional: true)]
+    public ?string $client_state;
 
     /**
      * Call Control App ID (formerly Telnyx connection ID) used in the call.
      */
-    #[Api('connection_id', optional: true)]
-    public ?string $connectionID;
+    #[Api(optional: true)]
+    public ?string $connection_id;
 
     /**
      * A short description explaning why the media streaming failed.
      */
-    #[Api('failure_reason', optional: true)]
-    public ?string $failureReason;
+    #[Api(optional: true)]
+    public ?string $failure_reason;
 
     /**
      * Identifies the streaming.
      */
-    #[Api('stream_id', optional: true)]
-    public ?string $streamID;
+    #[Api(optional: true)]
+    public ?string $stream_id;
 
     /**
      * Streaming parameters as they were originally given to the Call Control API.
      */
-    #[Api('stream_params', optional: true)]
-    public ?StreamParams $streamParams;
+    #[Api(optional: true)]
+    public ?StreamParams $stream_params;
 
     /**
      * The type of stream connection the stream is performing.
      *
-     * @var value-of<StreamType>|null $streamType
+     * @var value-of<StreamType>|null $stream_type
      */
-    #[Api('stream_type', enum: StreamType::class, optional: true)]
-    public ?string $streamType;
+    #[Api(enum: StreamType::class, optional: true)]
+    public ?string $stream_type;
 
     public function __construct()
     {
@@ -94,30 +94,30 @@ final class Payload implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param StreamType|value-of<StreamType> $streamType
+     * @param StreamType|value-of<StreamType> $stream_type
      */
     public static function with(
-        ?string $callControlID = null,
-        ?string $callLegID = null,
-        ?string $callSessionID = null,
-        ?string $clientState = null,
-        ?string $connectionID = null,
-        ?string $failureReason = null,
-        ?string $streamID = null,
-        ?StreamParams $streamParams = null,
-        StreamType|string|null $streamType = null,
+        ?string $call_control_id = null,
+        ?string $call_leg_id = null,
+        ?string $call_session_id = null,
+        ?string $client_state = null,
+        ?string $connection_id = null,
+        ?string $failure_reason = null,
+        ?string $stream_id = null,
+        ?StreamParams $stream_params = null,
+        StreamType|string|null $stream_type = null,
     ): self {
         $obj = new self;
 
-        null !== $callControlID && $obj->callControlID = $callControlID;
-        null !== $callLegID && $obj->callLegID = $callLegID;
-        null !== $callSessionID && $obj->callSessionID = $callSessionID;
-        null !== $clientState && $obj->clientState = $clientState;
-        null !== $connectionID && $obj->connectionID = $connectionID;
-        null !== $failureReason && $obj->failureReason = $failureReason;
-        null !== $streamID && $obj->streamID = $streamID;
-        null !== $streamParams && $obj->streamParams = $streamParams;
-        null !== $streamType && $obj['streamType'] = $streamType;
+        null !== $call_control_id && $obj->call_control_id = $call_control_id;
+        null !== $call_leg_id && $obj->call_leg_id = $call_leg_id;
+        null !== $call_session_id && $obj->call_session_id = $call_session_id;
+        null !== $client_state && $obj->client_state = $client_state;
+        null !== $connection_id && $obj->connection_id = $connection_id;
+        null !== $failure_reason && $obj->failure_reason = $failure_reason;
+        null !== $stream_id && $obj->stream_id = $stream_id;
+        null !== $stream_params && $obj->stream_params = $stream_params;
+        null !== $stream_type && $obj['stream_type'] = $stream_type;
 
         return $obj;
     }
@@ -128,7 +128,7 @@ final class Payload implements BaseModel
     public function withCallControlID(string $callControlID): self
     {
         $obj = clone $this;
-        $obj->callControlID = $callControlID;
+        $obj->call_control_id = $callControlID;
 
         return $obj;
     }
@@ -139,7 +139,7 @@ final class Payload implements BaseModel
     public function withCallLegID(string $callLegID): self
     {
         $obj = clone $this;
-        $obj->callLegID = $callLegID;
+        $obj->call_leg_id = $callLegID;
 
         return $obj;
     }
@@ -150,7 +150,7 @@ final class Payload implements BaseModel
     public function withCallSessionID(string $callSessionID): self
     {
         $obj = clone $this;
-        $obj->callSessionID = $callSessionID;
+        $obj->call_session_id = $callSessionID;
 
         return $obj;
     }
@@ -161,7 +161,7 @@ final class Payload implements BaseModel
     public function withClientState(string $clientState): self
     {
         $obj = clone $this;
-        $obj->clientState = $clientState;
+        $obj->client_state = $clientState;
 
         return $obj;
     }
@@ -172,7 +172,7 @@ final class Payload implements BaseModel
     public function withConnectionID(string $connectionID): self
     {
         $obj = clone $this;
-        $obj->connectionID = $connectionID;
+        $obj->connection_id = $connectionID;
 
         return $obj;
     }
@@ -183,7 +183,7 @@ final class Payload implements BaseModel
     public function withFailureReason(string $failureReason): self
     {
         $obj = clone $this;
-        $obj->failureReason = $failureReason;
+        $obj->failure_reason = $failureReason;
 
         return $obj;
     }
@@ -194,7 +194,7 @@ final class Payload implements BaseModel
     public function withStreamID(string $streamID): self
     {
         $obj = clone $this;
-        $obj->streamID = $streamID;
+        $obj->stream_id = $streamID;
 
         return $obj;
     }
@@ -205,7 +205,7 @@ final class Payload implements BaseModel
     public function withStreamParams(StreamParams $streamParams): self
     {
         $obj = clone $this;
-        $obj->streamParams = $streamParams;
+        $obj->stream_params = $streamParams;
 
         return $obj;
     }
@@ -218,7 +218,7 @@ final class Payload implements BaseModel
     public function withStreamType(StreamType|string $streamType): self
     {
         $obj = clone $this;
-        $obj['streamType'] = $streamType;
+        $obj['stream_type'] = $streamType;
 
         return $obj;
     }

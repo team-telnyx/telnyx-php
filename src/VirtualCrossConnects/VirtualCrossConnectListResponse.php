@@ -14,7 +14,7 @@ use Telnyx\VirtualCrossConnects\VirtualCrossConnectListResponse\Data;
 
 /**
  * @phpstan-type VirtualCrossConnectListResponseShape = array{
- *   data?: list<Data>, meta?: PaginationMeta
+ *   data?: list<Data>|null, meta?: PaginationMeta|null
  * }
  */
 final class VirtualCrossConnectListResponse implements BaseModel, ResponseConverter

@@ -9,7 +9,9 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type CustomerReferenceShape = array{eq?: string, in?: list<string>}
+ * @phpstan-type CustomerReferenceShape = array{
+ *   eq?: string|null, in?: list<string>|null
+ * }
  */
 final class CustomerReference implements BaseModel
 {

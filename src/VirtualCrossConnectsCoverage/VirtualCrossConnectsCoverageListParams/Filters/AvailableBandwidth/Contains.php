@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Available bandwidth filtering operations.
  *
- * @phpstan-type ContainsShape = array{contains?: int}
+ * @phpstan-type ContainsShape = array{contains?: int|null}
  */
 final class Contains implements BaseModel
 {

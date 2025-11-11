@@ -23,9 +23,9 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-type ActionRecordStartParamsShape = array{
  *   format: Format|value-of<Format>,
- *   commandID?: string,
- *   customFileName?: string,
- *   playBeep?: bool,
+ *   command_id?: string,
+ *   custom_file_name?: string,
+ *   play_beep?: bool,
  *   region?: Region|value-of<Region>,
  *   trim?: Trim|value-of<Trim>,
  * }
@@ -47,20 +47,20 @@ final class ActionRecordStartParams implements BaseModel
     /**
      * Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `conference_id`.
      */
-    #[Api('command_id', optional: true)]
-    public ?string $commandID;
+    #[Api(optional: true)]
+    public ?string $command_id;
 
     /**
      * The custom recording file name to be used instead of the default `call_leg_id`. Telnyx will still add a Unix timestamp suffix.
      */
-    #[Api('custom_file_name', optional: true)]
-    public ?string $customFileName;
+    #[Api(optional: true)]
+    public ?string $custom_file_name;
 
     /**
      * If enabled, a beep sound will be played at the start of a recording.
      */
-    #[Api('play_beep', optional: true)]
-    public ?bool $playBeep;
+    #[Api(optional: true)]
+    public ?bool $play_beep;
 
     /**
      * Region where the conference data is located. Defaults to the region defined in user's data locality settings (Europe or US).
@@ -108,9 +108,9 @@ final class ActionRecordStartParams implements BaseModel
      */
     public static function with(
         Format|string $format,
-        ?string $commandID = null,
-        ?string $customFileName = null,
-        ?bool $playBeep = null,
+        ?string $command_id = null,
+        ?string $custom_file_name = null,
+        ?bool $play_beep = null,
         Region|string|null $region = null,
         Trim|string|null $trim = null,
     ): self {
@@ -118,9 +118,9 @@ final class ActionRecordStartParams implements BaseModel
 
         $obj['format'] = $format;
 
-        null !== $commandID && $obj->commandID = $commandID;
-        null !== $customFileName && $obj->customFileName = $customFileName;
-        null !== $playBeep && $obj->playBeep = $playBeep;
+        null !== $command_id && $obj->command_id = $command_id;
+        null !== $custom_file_name && $obj->custom_file_name = $custom_file_name;
+        null !== $play_beep && $obj->play_beep = $play_beep;
         null !== $region && $obj['region'] = $region;
         null !== $trim && $obj['trim'] = $trim;
 
@@ -146,7 +146,7 @@ final class ActionRecordStartParams implements BaseModel
     public function withCommandID(string $commandID): self
     {
         $obj = clone $this;
-        $obj->commandID = $commandID;
+        $obj->command_id = $commandID;
 
         return $obj;
     }
@@ -157,7 +157,7 @@ final class ActionRecordStartParams implements BaseModel
     public function withCustomFileName(string $customFileName): self
     {
         $obj = clone $this;
-        $obj->customFileName = $customFileName;
+        $obj->custom_file_name = $customFileName;
 
         return $obj;
     }
@@ -168,7 +168,7 @@ final class ActionRecordStartParams implements BaseModel
     public function withPlayBeep(bool $playBeep): self
     {
         $obj = clone $this;
-        $obj->playBeep = $playBeep;
+        $obj->play_beep = $playBeep;
 
         return $obj;
     }

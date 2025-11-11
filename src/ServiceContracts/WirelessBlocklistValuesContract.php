@@ -6,7 +6,7 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
-use Telnyx\WirelessBlocklistValues\WirelessBlocklistValueListParams\Type;
+use Telnyx\WirelessBlocklistValues\WirelessBlocklistValueListParams;
 use Telnyx\WirelessBlocklistValues\WirelessBlocklistValueListResponse;
 
 interface WirelessBlocklistValuesContract
@@ -14,24 +14,12 @@ interface WirelessBlocklistValuesContract
     /**
      * @api
      *
-     * @param Type|value-of<Type> $type The Wireless Blocklist type for which to list possible values (e.g., `country`, `mcc`, `plmn`).
+     * @param array<mixed>|WirelessBlocklistValueListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $type,
-        ?RequestOptions $requestOptions = null
-    ): WirelessBlocklistValueListResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|WirelessBlocklistValueListParams $params,
+        ?RequestOptions $requestOptions = null,
     ): WirelessBlocklistValueListResponse;
 }

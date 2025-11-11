@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\NumbersFeatures\NumbersFeatureNewResponse\Data;
 
 /**
- * @phpstan-type NumbersFeatureNewResponseShape = array{data?: list<Data>}
+ * @phpstan-type NumbersFeatureNewResponseShape = array{data?: list<Data>|null}
  */
 final class NumbersFeatureNewResponse implements BaseModel, ResponseConverter
 {

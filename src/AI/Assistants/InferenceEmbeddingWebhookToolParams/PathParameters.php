@@ -13,9 +13,9 @@ use Telnyx\Core\Contracts\BaseModel;
  * The path parameters the webhook tool accepts, described as a JSON Schema object. These parameters will be passed to the webhook as the path of the request if the URL contains a placeholder for a value. See the [JSON Schema reference](https://json-schema.org/understanding-json-schema) for documentation about the format.
  *
  * @phpstan-type PathParametersShape = array{
- *   properties?: array<string, mixed>,
- *   required?: list<string>,
- *   type?: value-of<Type>,
+ *   properties?: array<string,mixed>|null,
+ *   required?: list<string>|null,
+ *   type?: value-of<Type>|null,
  * }
  */
 final class PathParameters implements BaseModel
@@ -26,7 +26,7 @@ final class PathParameters implements BaseModel
     /**
      * The properties of the path parameters.
      *
-     * @var array<string, mixed>|null $properties
+     * @var array<string,mixed>|null $properties
      */
     #[Api(map: 'mixed', optional: true)]
     public ?array $properties;
@@ -53,7 +53,7 @@ final class PathParameters implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param array<string, mixed> $properties
+     * @param array<string,mixed> $properties
      * @param list<string> $required
      * @param Type|value-of<Type> $type
      */
@@ -74,7 +74,7 @@ final class PathParameters implements BaseModel
     /**
      * The properties of the path parameters.
      *
-     * @param array<string, mixed> $properties
+     * @param array<string,mixed> $properties
      */
     public function withProperties(array $properties): self
     {

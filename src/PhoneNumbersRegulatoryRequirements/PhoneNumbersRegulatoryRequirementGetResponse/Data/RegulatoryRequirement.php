@@ -11,13 +11,13 @@ use Telnyx\PhoneNumbersRegulatoryRequirements\PhoneNumbersRegulatoryRequirementG
 
 /**
  * @phpstan-type RegulatoryRequirementShape = array{
- *   id?: string,
- *   acceptanceCriteria?: AcceptanceCriteria,
- *   description?: string,
- *   example?: string,
- *   fieldType?: string,
- *   label?: string,
- *   recordType?: string,
+ *   id?: string|null,
+ *   acceptance_criteria?: AcceptanceCriteria|null,
+ *   description?: string|null,
+ *   example?: string|null,
+ *   field_type?: string|null,
+ *   label?: string|null,
+ *   record_type?: string|null,
  * }
  */
 final class RegulatoryRequirement implements BaseModel
@@ -28,8 +28,8 @@ final class RegulatoryRequirement implements BaseModel
     #[Api(optional: true)]
     public ?string $id;
 
-    #[Api('acceptance_criteria', optional: true)]
-    public ?AcceptanceCriteria $acceptanceCriteria;
+    #[Api(optional: true)]
+    public ?AcceptanceCriteria $acceptance_criteria;
 
     #[Api(optional: true)]
     public ?string $description;
@@ -37,14 +37,14 @@ final class RegulatoryRequirement implements BaseModel
     #[Api(optional: true)]
     public ?string $example;
 
-    #[Api('field_type', optional: true)]
-    public ?string $fieldType;
+    #[Api(optional: true)]
+    public ?string $field_type;
 
     #[Api(optional: true)]
     public ?string $label;
 
-    #[Api('record_type', optional: true)]
-    public ?string $recordType;
+    #[Api(optional: true)]
+    public ?string $record_type;
 
     public function __construct()
     {
@@ -58,22 +58,22 @@ final class RegulatoryRequirement implements BaseModel
      */
     public static function with(
         ?string $id = null,
-        ?AcceptanceCriteria $acceptanceCriteria = null,
+        ?AcceptanceCriteria $acceptance_criteria = null,
         ?string $description = null,
         ?string $example = null,
-        ?string $fieldType = null,
+        ?string $field_type = null,
         ?string $label = null,
-        ?string $recordType = null,
+        ?string $record_type = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj->id = $id;
-        null !== $acceptanceCriteria && $obj->acceptanceCriteria = $acceptanceCriteria;
+        null !== $acceptance_criteria && $obj->acceptance_criteria = $acceptance_criteria;
         null !== $description && $obj->description = $description;
         null !== $example && $obj->example = $example;
-        null !== $fieldType && $obj->fieldType = $fieldType;
+        null !== $field_type && $obj->field_type = $field_type;
         null !== $label && $obj->label = $label;
-        null !== $recordType && $obj->recordType = $recordType;
+        null !== $record_type && $obj->record_type = $record_type;
 
         return $obj;
     }
@@ -90,7 +90,7 @@ final class RegulatoryRequirement implements BaseModel
         AcceptanceCriteria $acceptanceCriteria
     ): self {
         $obj = clone $this;
-        $obj->acceptanceCriteria = $acceptanceCriteria;
+        $obj->acceptance_criteria = $acceptanceCriteria;
 
         return $obj;
     }
@@ -114,7 +114,7 @@ final class RegulatoryRequirement implements BaseModel
     public function withFieldType(string $fieldType): self
     {
         $obj = clone $this;
-        $obj->fieldType = $fieldType;
+        $obj->field_type = $fieldType;
 
         return $obj;
     }
@@ -130,7 +130,7 @@ final class RegulatoryRequirement implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType;
+        $obj->record_type = $recordType;
 
         return $obj;
     }

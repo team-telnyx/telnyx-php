@@ -33,11 +33,11 @@ final class UsageReportsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->usageReports->list(
-            dimensions: ['string'],
-            metrics: ['string'],
-            product: 'product'
-        );
+        $result = $this->client->usageReports->list([
+            'dimensions' => ['string'],
+            'metrics' => ['string'],
+            'product' => 'product',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -49,11 +49,11 @@ final class UsageReportsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->usageReports->list(
-            dimensions: ['string'],
-            metrics: ['string'],
-            product: 'product'
-        );
+        $result = $this->client->usageReports->list([
+            'dimensions' => ['string'],
+            'metrics' => ['string'],
+            'product' => 'product',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -65,7 +65,7 @@ final class UsageReportsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->usageReports->getOptions();
+        $result = $this->client->usageReports->getOptions([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

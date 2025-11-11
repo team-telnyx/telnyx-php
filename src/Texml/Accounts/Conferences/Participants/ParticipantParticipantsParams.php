@@ -28,53 +28,53 @@ use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams
  * @see Telnyx\Texml\Accounts\Conferences\Participants->participants
  *
  * @phpstan-type ParticipantParticipantsParamsShape = array{
- *   accountSid: string,
- *   amdStatusCallback?: string,
- *   amdStatusCallbackMethod?: AmdStatusCallbackMethod|value-of<AmdStatusCallbackMethod>,
- *   beep?: Beep|value-of<Beep>,
- *   callerID?: string,
- *   callSidToCoach?: string,
- *   cancelPlaybackOnDetectMessageEnd?: bool,
- *   cancelPlaybackOnMachineDetection?: bool,
- *   coaching?: bool,
- *   conferenceRecord?: ConferenceRecord|value-of<ConferenceRecord>,
- *   conferenceRecordingStatusCallback?: string,
- *   conferenceRecordingStatusCallbackEvent?: string,
- *   conferenceRecordingStatusCallbackMethod?: ConferenceRecordingStatusCallbackMethod|value-of<ConferenceRecordingStatusCallbackMethod>,
- *   conferenceRecordingTimeout?: int,
- *   conferenceStatusCallback?: string,
- *   conferenceStatusCallbackEvent?: string,
- *   conferenceStatusCallbackMethod?: ConferenceStatusCallbackMethod|value-of<ConferenceStatusCallbackMethod>,
- *   conferenceTrim?: ConferenceTrim|value-of<ConferenceTrim>,
- *   customHeaders?: list<CustomHeader>,
- *   earlyMedia?: bool,
- *   endConferenceOnExit?: bool,
- *   from?: string,
- *   machineDetection?: MachineDetection|value-of<MachineDetection>,
- *   machineDetectionSilenceTimeout?: int,
- *   machineDetectionSpeechEndThreshold?: int,
- *   machineDetectionSpeechThreshold?: int,
- *   machineDetectionTimeout?: int,
- *   maxParticipants?: int,
- *   muted?: bool,
- *   preferredCodecs?: string,
- *   record?: bool,
- *   recordingChannels?: RecordingChannels|value-of<RecordingChannels>,
- *   recordingStatusCallback?: string,
- *   recordingStatusCallbackEvent?: string,
- *   recordingStatusCallbackMethod?: RecordingStatusCallbackMethod|value-of<RecordingStatusCallbackMethod>,
- *   recordingTrack?: RecordingTrack|value-of<RecordingTrack>,
- *   sipAuthPassword?: string,
- *   sipAuthUsername?: string,
- *   startConferenceOnEnter?: bool,
- *   statusCallback?: string,
- *   statusCallbackEvent?: string,
- *   statusCallbackMethod?: StatusCallbackMethod|value-of<StatusCallbackMethod>,
- *   timeLimit?: int,
- *   timeoutSeconds?: int,
- *   to?: string,
- *   trim?: Trim|value-of<Trim>,
- *   waitURL?: string,
+ *   account_sid: string,
+ *   AmdStatusCallback?: string,
+ *   AmdStatusCallbackMethod?: \Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\AmdStatusCallbackMethod|value-of<\Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\AmdStatusCallbackMethod>,
+ *   Beep?: \Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\Beep|value-of<\Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\Beep>,
+ *   CallerId?: string,
+ *   CallSidToCoach?: string,
+ *   CancelPlaybackOnDetectMessageEnd?: bool,
+ *   CancelPlaybackOnMachineDetection?: bool,
+ *   Coaching?: bool,
+ *   ConferenceRecord?: \Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\ConferenceRecord|value-of<\Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\ConferenceRecord>,
+ *   ConferenceRecordingStatusCallback?: string,
+ *   ConferenceRecordingStatusCallbackEvent?: string,
+ *   ConferenceRecordingStatusCallbackMethod?: \Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\ConferenceRecordingStatusCallbackMethod|value-of<\Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\ConferenceRecordingStatusCallbackMethod>,
+ *   ConferenceRecordingTimeout?: int,
+ *   ConferenceStatusCallback?: string,
+ *   ConferenceStatusCallbackEvent?: string,
+ *   ConferenceStatusCallbackMethod?: \Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\ConferenceStatusCallbackMethod|value-of<\Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\ConferenceStatusCallbackMethod>,
+ *   ConferenceTrim?: \Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\ConferenceTrim|value-of<\Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\ConferenceTrim>,
+ *   CustomHeaders?: list<CustomHeader>,
+ *   EarlyMedia?: bool,
+ *   EndConferenceOnExit?: bool,
+ *   From?: string,
+ *   MachineDetection?: \Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\MachineDetection|value-of<\Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\MachineDetection>,
+ *   MachineDetectionSilenceTimeout?: int,
+ *   MachineDetectionSpeechEndThreshold?: int,
+ *   MachineDetectionSpeechThreshold?: int,
+ *   MachineDetectionTimeout?: int,
+ *   MaxParticipants?: int,
+ *   Muted?: bool,
+ *   PreferredCodecs?: string,
+ *   Record?: bool,
+ *   RecordingChannels?: \Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\RecordingChannels|value-of<\Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\RecordingChannels>,
+ *   RecordingStatusCallback?: string,
+ *   RecordingStatusCallbackEvent?: string,
+ *   RecordingStatusCallbackMethod?: \Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\RecordingStatusCallbackMethod|value-of<\Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\RecordingStatusCallbackMethod>,
+ *   RecordingTrack?: \Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\RecordingTrack|value-of<\Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\RecordingTrack>,
+ *   SipAuthPassword?: string,
+ *   SipAuthUsername?: string,
+ *   StartConferenceOnEnter?: bool,
+ *   StatusCallback?: string,
+ *   StatusCallbackEvent?: string,
+ *   StatusCallbackMethod?: \Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\StatusCallbackMethod|value-of<\Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\StatusCallbackMethod>,
+ *   TimeLimit?: int,
+ *   timeout_seconds?: int,
+ *   To?: string,
+ *   Trim?: \Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\Trim|value-of<\Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\Trim>,
+ *   WaitUrl?: string,
  * }
  */
 final class ParticipantParticipantsParams implements BaseModel
@@ -84,336 +84,352 @@ final class ParticipantParticipantsParams implements BaseModel
     use SdkParams;
 
     #[Api]
-    public string $accountSid;
+    public string $account_sid;
 
     /**
      * The URL the result of answering machine detection will be sent to.
      */
-    #[Api('AmdStatusCallback', optional: true)]
-    public ?string $amdStatusCallback;
+    #[Api(optional: true)]
+    public ?string $AmdStatusCallback;
 
     /**
      * HTTP request type used for `AmdStatusCallback`. Defaults to `POST`.
      *
-     * @var value-of<AmdStatusCallbackMethod>|null $amdStatusCallbackMethod
+     * @var value-of<AmdStatusCallbackMethod>|null $AmdStatusCallbackMethod
      */
     #[Api(
-        'AmdStatusCallbackMethod',
         enum: AmdStatusCallbackMethod::class,
         optional: true,
     )]
-    public ?string $amdStatusCallbackMethod;
+    public ?string $AmdStatusCallbackMethod;
 
     /**
      * Whether to play a notification beep to the conference when the participant enters and exits.
      *
-     * @var value-of<Beep>|null $beep
+     * @var value-of<Beep>|null $Beep
      */
-    #[Api('Beep', enum: Beep::class, optional: true)]
-    public ?string $beep;
+    #[Api(
+        enum: Beep::class,
+        optional: true,
+    )]
+    public ?string $Beep;
 
     /**
      * To be used as the caller id name (SIP From Display Name) presented to the destination (`To` number). The string should have a maximum of 128 characters, containing only letters, numbers, spaces, and `-_~!.+` special characters. If ommited, the display name will be the same as the number in the `From` field.
      */
-    #[Api('CallerId', optional: true)]
-    public ?string $callerID;
+    #[Api(optional: true)]
+    public ?string $CallerId;
 
     /**
      * The SID of the participant who is being coached. The participant being coached is the only participant who can hear the participant who is coaching.
      */
-    #[Api('CallSidToCoach', optional: true)]
-    public ?string $callSidToCoach;
+    #[Api(optional: true)]
+    public ?string $CallSidToCoach;
 
     /**
      * Whether to cancel ongoing playback on `greeting ended` detection. Defaults to `true`.
      */
-    #[Api('CancelPlaybackOnDetectMessageEnd', optional: true)]
-    public ?bool $cancelPlaybackOnDetectMessageEnd;
+    #[Api(optional: true)]
+    public ?bool $CancelPlaybackOnDetectMessageEnd;
 
     /**
      * Whether to cancel ongoing playback on `machine` detection. Defaults to `true`.
      */
-    #[Api('CancelPlaybackOnMachineDetection', optional: true)]
-    public ?bool $cancelPlaybackOnMachineDetection;
+    #[Api(optional: true)]
+    public ?bool $CancelPlaybackOnMachineDetection;
 
     /**
      * Whether the participant is coaching another call. When `true`, `CallSidToCoach` has to be given.
      */
-    #[Api('Coaching', optional: true)]
-    public ?bool $coaching;
+    #[Api(optional: true)]
+    public ?bool $Coaching;
 
     /**
      * Whether to record the conference the participant is joining. Defualts to `do-not-record`. The boolean values `true` and `false` are synonymous with `record-from-start` and `do-not-record` respectively.
      *
-     * @var value-of<ConferenceRecord>|null $conferenceRecord
+     * @var value-of<ConferenceRecord>|null $ConferenceRecord
      */
-    #[Api('ConferenceRecord', enum: ConferenceRecord::class, optional: true)]
-    public ?string $conferenceRecord;
+    #[Api(
+        enum: ConferenceRecord::class,
+        optional: true,
+    )]
+    public ?string $ConferenceRecord;
 
     /**
      * The URL the conference recording callbacks will be sent to.
      */
-    #[Api('ConferenceRecordingStatusCallback', optional: true)]
-    public ?string $conferenceRecordingStatusCallback;
+    #[Api(optional: true)]
+    public ?string $ConferenceRecordingStatusCallback;
 
     /**
      * The changes to the conference recording's state that should generate a call to `RecoridngStatusCallback`. Can be: `in-progress`, `completed` and `absent`. Separate multiple values with a space. Defaults to `completed`. `failed` and `absent` are synonymous.
      */
-    #[Api('ConferenceRecordingStatusCallbackEvent', optional: true)]
-    public ?string $conferenceRecordingStatusCallbackEvent;
+    #[Api(optional: true)]
+    public ?string $ConferenceRecordingStatusCallbackEvent;
 
     /**
      * HTTP request type used for `ConferenceRecordingStatusCallback`. Defaults to `POST`.
      *
-     * @var value-of<ConferenceRecordingStatusCallbackMethod>|null $conferenceRecordingStatusCallbackMethod
+     * @var value-of<ConferenceRecordingStatusCallbackMethod>|null $ConferenceRecordingStatusCallbackMethod
      */
     #[Api(
-        'ConferenceRecordingStatusCallbackMethod',
         enum: ConferenceRecordingStatusCallbackMethod::class,
         optional: true,
     )]
-    public ?string $conferenceRecordingStatusCallbackMethod;
+    public ?string $ConferenceRecordingStatusCallbackMethod;
 
     /**
      * The number of seconds that Telnyx will wait for the recording to be stopped if silence is detected. The timer only starts when the speech is detected. Please note that the transcription is used to detect silence and the related charge will be applied. The minimum value is 0. The default value is 0 (infinite).
      */
-    #[Api('ConferenceRecordingTimeout', optional: true)]
-    public ?int $conferenceRecordingTimeout;
+    #[Api(optional: true)]
+    public ?int $ConferenceRecordingTimeout;
 
     /**
      * The URL the conference callbacks will be sent to.
      */
-    #[Api('ConferenceStatusCallback', optional: true)]
-    public ?string $conferenceStatusCallback;
+    #[Api(optional: true)]
+    public ?string $ConferenceStatusCallback;
 
     /**
      * The changes to the conference's state that should generate a call to `ConferenceStatusCallback`. Can be: `start`, `end`, `join` and `leave`. Separate multiple values with a space. By default no callbacks are sent.
      */
-    #[Api('ConferenceStatusCallbackEvent', optional: true)]
-    public ?string $conferenceStatusCallbackEvent;
+    #[Api(optional: true)]
+    public ?string $ConferenceStatusCallbackEvent;
 
     /**
      * HTTP request type used for `ConferenceStatusCallback`. Defaults to `POST`.
      *
-     * @var value-of<ConferenceStatusCallbackMethod>|null $conferenceStatusCallbackMethod
+     * @var value-of<ConferenceStatusCallbackMethod>|null $ConferenceStatusCallbackMethod
      */
     #[Api(
-        'ConferenceStatusCallbackMethod',
         enum: ConferenceStatusCallbackMethod::class,
         optional: true,
     )]
-    public ?string $conferenceStatusCallbackMethod;
+    public ?string $ConferenceStatusCallbackMethod;
 
     /**
      * Whether to trim any leading and trailing silence from the conference recording. Defaults to `trim-silence`.
      *
-     * @var value-of<ConferenceTrim>|null $conferenceTrim
+     * @var value-of<ConferenceTrim>|null $ConferenceTrim
      */
-    #[Api('ConferenceTrim', enum: ConferenceTrim::class, optional: true)]
-    public ?string $conferenceTrim;
+    #[Api(
+        enum: ConferenceTrim::class,
+        optional: true,
+    )]
+    public ?string $ConferenceTrim;
 
     /**
      * Custom HTTP headers to be sent with the call. Each header should be an object with 'name' and 'value' properties.
      *
-     * @var list<CustomHeader>|null $customHeaders
+     * @var list<CustomHeader>|null $CustomHeaders
      */
-    #[Api('CustomHeaders', list: CustomHeader::class, optional: true)]
-    public ?array $customHeaders;
+    #[Api(list: CustomHeader::class, optional: true)]
+    public ?array $CustomHeaders;
 
     /**
      * Whether participant shall be bridged to conference before the participant answers (from early media if available). Defaults to `false`.
      */
-    #[Api('EarlyMedia', optional: true)]
-    public ?bool $earlyMedia;
+    #[Api(optional: true)]
+    public ?bool $EarlyMedia;
 
     /**
      * Whether to end the conference when the participant leaves. Defaults to `false`.
      */
-    #[Api('EndConferenceOnExit', optional: true)]
-    public ?bool $endConferenceOnExit;
+    #[Api(optional: true)]
+    public ?bool $EndConferenceOnExit;
 
     /**
      * The phone number of the party that initiated the call. Phone numbers are formatted with a `+` and country code.
      */
-    #[Api('From', optional: true)]
-    public ?string $from;
+    #[Api(optional: true)]
+    public ?string $From;
 
     /**
      * Whether to detect if a human or an answering machine picked up the call. Use `Enable` if you would like to ne notified as soon as the called party is identified. Use `DetectMessageEnd`, if you would like to leave a message on an answering machine.
      *
-     * @var value-of<MachineDetection>|null $machineDetection
+     * @var value-of<MachineDetection>|null $MachineDetection
      */
-    #[Api('MachineDetection', enum: MachineDetection::class, optional: true)]
-    public ?string $machineDetection;
+    #[Api(
+        enum: MachineDetection::class,
+        optional: true,
+    )]
+    public ?string $MachineDetection;
 
     /**
      * If initial silence duration is greater than this value, consider it a machine. Ignored when `premium` detection is used.
      */
-    #[Api('MachineDetectionSilenceTimeout', optional: true)]
-    public ?int $machineDetectionSilenceTimeout;
+    #[Api(optional: true)]
+    public ?int $MachineDetectionSilenceTimeout;
 
     /**
      * Silence duration threshold after a greeting message or voice for it be considered human. Ignored when `premium` detection is used.
      */
-    #[Api('MachineDetectionSpeechEndThreshold', optional: true)]
-    public ?int $machineDetectionSpeechEndThreshold;
+    #[Api(optional: true)]
+    public ?int $MachineDetectionSpeechEndThreshold;
 
     /**
      * Maximum threshold of a human greeting. If greeting longer than this value, considered machine. Ignored when `premium` detection is used.
      */
-    #[Api('MachineDetectionSpeechThreshold', optional: true)]
-    public ?int $machineDetectionSpeechThreshold;
+    #[Api(optional: true)]
+    public ?int $MachineDetectionSpeechThreshold;
 
     /**
      * How long answering machine detection should go on for before sending an `Unknown` result. Given in milliseconds.
      */
-    #[Api('MachineDetectionTimeout', optional: true)]
-    public ?int $machineDetectionTimeout;
+    #[Api(optional: true)]
+    public ?int $MachineDetectionTimeout;
 
     /**
      * The maximum number of participants in the conference. Can be a positive integer from 2 to 800. The default value is 250.
      */
-    #[Api('MaxParticipants', optional: true)]
-    public ?int $maxParticipants;
+    #[Api(optional: true)]
+    public ?int $MaxParticipants;
 
     /**
      * Whether the participant should be muted.
      */
-    #[Api('Muted', optional: true)]
-    public ?bool $muted;
+    #[Api(optional: true)]
+    public ?bool $Muted;
 
     /**
      * The list of comma-separated codecs to be offered on a call.
      */
-    #[Api('PreferredCodecs', optional: true)]
-    public ?string $preferredCodecs;
+    #[Api(optional: true)]
+    public ?string $PreferredCodecs;
 
     /**
      * Whether to record the entire participant's call leg. Defaults to `false`.
      */
-    #[Api('Record', optional: true)]
-    public ?bool $record;
+    #[Api(optional: true)]
+    public ?bool $Record;
 
     /**
      * The number of channels in the final recording. Defaults to `mono`.
      *
-     * @var value-of<RecordingChannels>|null $recordingChannels
+     * @var value-of<RecordingChannels>|null $RecordingChannels
      */
-    #[Api('RecordingChannels', enum: RecordingChannels::class, optional: true)]
-    public ?string $recordingChannels;
+    #[Api(
+        enum: RecordingChannels::class,
+        optional: true,
+    )]
+    public ?string $RecordingChannels;
 
     /**
      * The URL the recording callbacks will be sent to.
      */
-    #[Api('RecordingStatusCallback', optional: true)]
-    public ?string $recordingStatusCallback;
+    #[Api(optional: true)]
+    public ?string $RecordingStatusCallback;
 
     /**
      * The changes to the recording's state that should generate a call to `RecoridngStatusCallback`. Can be: `in-progress`, `completed` and `absent`. Separate multiple values with a space. Defaults to `completed`.
      */
-    #[Api('RecordingStatusCallbackEvent', optional: true)]
-    public ?string $recordingStatusCallbackEvent;
+    #[Api(optional: true)]
+    public ?string $RecordingStatusCallbackEvent;
 
     /**
      * HTTP request type used for `RecordingStatusCallback`. Defaults to `POST`.
      *
-     * @var value-of<RecordingStatusCallbackMethod>|null $recordingStatusCallbackMethod
+     * @var value-of<RecordingStatusCallbackMethod>|null $RecordingStatusCallbackMethod
      */
     #[Api(
-        'RecordingStatusCallbackMethod',
         enum: RecordingStatusCallbackMethod::class,
         optional: true,
     )]
-    public ?string $recordingStatusCallbackMethod;
+    public ?string $RecordingStatusCallbackMethod;
 
     /**
      * The audio track to record for the call. The default is `both`.
      *
-     * @var value-of<RecordingTrack>|null $recordingTrack
+     * @var value-of<RecordingTrack>|null $RecordingTrack
      */
-    #[Api('RecordingTrack', enum: RecordingTrack::class, optional: true)]
-    public ?string $recordingTrack;
+    #[Api(
+        enum: RecordingTrack::class,
+        optional: true,
+    )]
+    public ?string $RecordingTrack;
 
     /**
      * The password to use for SIP authentication.
      */
-    #[Api('SipAuthPassword', optional: true)]
-    public ?string $sipAuthPassword;
+    #[Api(optional: true)]
+    public ?string $SipAuthPassword;
 
     /**
      * The username to use for SIP authentication.
      */
-    #[Api('SipAuthUsername', optional: true)]
-    public ?string $sipAuthUsername;
+    #[Api(optional: true)]
+    public ?string $SipAuthUsername;
 
     /**
      * Whether to start the conference when the participant enters. Defaults to `true`.
      */
-    #[Api('StartConferenceOnEnter', optional: true)]
-    public ?bool $startConferenceOnEnter;
+    #[Api(optional: true)]
+    public ?bool $StartConferenceOnEnter;
 
     /**
      * URL destination for Telnyx to send status callback events to for the call.
      */
-    #[Api('StatusCallback', optional: true)]
-    public ?string $statusCallback;
+    #[Api(optional: true)]
+    public ?string $StatusCallback;
 
     /**
      * The changes to the call's state that should generate a call to `StatusCallback`. Can be: `initiated`, `ringing`, `answered`, and `completed`. Separate multiple values with a space. The default value is `completed`.
      */
-    #[Api('StatusCallbackEvent', optional: true)]
-    public ?string $statusCallbackEvent;
+    #[Api(optional: true)]
+    public ?string $StatusCallbackEvent;
 
     /**
      * HTTP request type used for `StatusCallback`.
      *
-     * @var value-of<StatusCallbackMethod>|null $statusCallbackMethod
+     * @var value-of<StatusCallbackMethod>|null $StatusCallbackMethod
      */
     #[Api(
-        'StatusCallbackMethod',
         enum: StatusCallbackMethod::class,
-        optional: true
+        optional: true,
     )]
-    public ?string $statusCallbackMethod;
+    public ?string $StatusCallbackMethod;
 
     /**
      * The maximum duration of the call in seconds.
      */
-    #[Api('TimeLimit', optional: true)]
-    public ?int $timeLimit;
+    #[Api(optional: true)]
+    public ?int $TimeLimit;
 
     /**
      * The number of seconds that we should allow the phone to ring before assuming there is no answer. Can be an integer between 5 and 120, inclusive. The default value is 30.
      */
-    #[Api('Timeout', optional: true)]
-    public ?int $timeoutSeconds;
+    #[Api(optional: true)]
+    public ?int $timeout_seconds;
 
     /**
      * The phone number of the called party. Phone numbers are formatted with a `+` and country code.
      */
-    #[Api('To', optional: true)]
-    public ?string $to;
+    #[Api(optional: true)]
+    public ?string $To;
 
     /**
      * Whether to trim any leading and trailing silence from the recording. Defaults to `trim-silence`.
      *
-     * @var value-of<Trim>|null $trim
+     * @var value-of<Trim>|null $Trim
      */
-    #[Api('Trim', enum: Trim::class, optional: true)]
-    public ?string $trim;
+    #[Api(
+        enum: Trim::class,
+        optional: true,
+    )]
+    public ?string $Trim;
 
     /**
      * The URL to call for an audio file to play while the participant is waiting for the conference to start.
      */
-    #[Api('WaitUrl', optional: true)]
-    public ?string $waitURL;
+    #[Api(optional: true)]
+    public ?string $WaitUrl;
 
     /**
      * `new ParticipantParticipantsParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * ParticipantParticipantsParams::with(accountSid: ...)
+     * ParticipantParticipantsParams::with(account_sid: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -432,119 +448,119 @@ final class ParticipantParticipantsParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AmdStatusCallbackMethod|value-of<AmdStatusCallbackMethod> $amdStatusCallbackMethod
-     * @param Beep|value-of<Beep> $beep
-     * @param ConferenceRecord|value-of<ConferenceRecord> $conferenceRecord
-     * @param ConferenceRecordingStatusCallbackMethod|value-of<ConferenceRecordingStatusCallbackMethod> $conferenceRecordingStatusCallbackMethod
-     * @param ConferenceStatusCallbackMethod|value-of<ConferenceStatusCallbackMethod> $conferenceStatusCallbackMethod
-     * @param ConferenceTrim|value-of<ConferenceTrim> $conferenceTrim
-     * @param list<CustomHeader> $customHeaders
-     * @param MachineDetection|value-of<MachineDetection> $machineDetection
-     * @param RecordingChannels|value-of<RecordingChannels> $recordingChannels
-     * @param RecordingStatusCallbackMethod|value-of<RecordingStatusCallbackMethod> $recordingStatusCallbackMethod
-     * @param RecordingTrack|value-of<RecordingTrack> $recordingTrack
-     * @param StatusCallbackMethod|value-of<StatusCallbackMethod> $statusCallbackMethod
-     * @param Trim|value-of<Trim> $trim
+     * @param AmdStatusCallbackMethod|value-of<AmdStatusCallbackMethod> $AmdStatusCallbackMethod
+     * @param Beep|value-of<Beep> $Beep
+     * @param ConferenceRecord|value-of<ConferenceRecord> $ConferenceRecord
+     * @param ConferenceRecordingStatusCallbackMethod|value-of<ConferenceRecordingStatusCallbackMethod> $ConferenceRecordingStatusCallbackMethod
+     * @param ConferenceStatusCallbackMethod|value-of<ConferenceStatusCallbackMethod> $ConferenceStatusCallbackMethod
+     * @param ConferenceTrim|value-of<ConferenceTrim> $ConferenceTrim
+     * @param list<CustomHeader> $CustomHeaders
+     * @param MachineDetection|value-of<MachineDetection> $MachineDetection
+     * @param RecordingChannels|value-of<RecordingChannels> $RecordingChannels
+     * @param RecordingStatusCallbackMethod|value-of<RecordingStatusCallbackMethod> $RecordingStatusCallbackMethod
+     * @param RecordingTrack|value-of<RecordingTrack> $RecordingTrack
+     * @param StatusCallbackMethod|value-of<StatusCallbackMethod> $StatusCallbackMethod
+     * @param Trim|value-of<Trim> $Trim
      */
     public static function with(
-        string $accountSid,
-        ?string $amdStatusCallback = null,
-        AmdStatusCallbackMethod|string|null $amdStatusCallbackMethod = null,
-        Beep|string|null $beep = null,
-        ?string $callerID = null,
-        ?string $callSidToCoach = null,
-        ?bool $cancelPlaybackOnDetectMessageEnd = null,
-        ?bool $cancelPlaybackOnMachineDetection = null,
-        ?bool $coaching = null,
-        ConferenceRecord|string|null $conferenceRecord = null,
-        ?string $conferenceRecordingStatusCallback = null,
-        ?string $conferenceRecordingStatusCallbackEvent = null,
-        ConferenceRecordingStatusCallbackMethod|string|null $conferenceRecordingStatusCallbackMethod = null,
-        ?int $conferenceRecordingTimeout = null,
-        ?string $conferenceStatusCallback = null,
-        ?string $conferenceStatusCallbackEvent = null,
-        ConferenceStatusCallbackMethod|string|null $conferenceStatusCallbackMethod = null,
-        ConferenceTrim|string|null $conferenceTrim = null,
-        ?array $customHeaders = null,
-        ?bool $earlyMedia = null,
-        ?bool $endConferenceOnExit = null,
-        ?string $from = null,
-        MachineDetection|string|null $machineDetection = null,
-        ?int $machineDetectionSilenceTimeout = null,
-        ?int $machineDetectionSpeechEndThreshold = null,
-        ?int $machineDetectionSpeechThreshold = null,
-        ?int $machineDetectionTimeout = null,
-        ?int $maxParticipants = null,
-        ?bool $muted = null,
-        ?string $preferredCodecs = null,
-        ?bool $record = null,
-        RecordingChannels|string|null $recordingChannels = null,
-        ?string $recordingStatusCallback = null,
-        ?string $recordingStatusCallbackEvent = null,
-        RecordingStatusCallbackMethod|string|null $recordingStatusCallbackMethod = null,
-        RecordingTrack|string|null $recordingTrack = null,
-        ?string $sipAuthPassword = null,
-        ?string $sipAuthUsername = null,
-        ?bool $startConferenceOnEnter = null,
-        ?string $statusCallback = null,
-        ?string $statusCallbackEvent = null,
-        StatusCallbackMethod|string|null $statusCallbackMethod = null,
-        ?int $timeLimit = null,
-        ?int $timeoutSeconds = null,
-        ?string $to = null,
-        Trim|string|null $trim = null,
-        ?string $waitURL = null,
+        string $account_sid,
+        ?string $AmdStatusCallback = null,
+        AmdStatusCallbackMethod|string|null $AmdStatusCallbackMethod = null,
+        Beep|string|null $Beep = null,
+        ?string $CallerId = null,
+        ?string $CallSidToCoach = null,
+        ?bool $CancelPlaybackOnDetectMessageEnd = null,
+        ?bool $CancelPlaybackOnMachineDetection = null,
+        ?bool $Coaching = null,
+        ConferenceRecord|string|null $ConferenceRecord = null,
+        ?string $ConferenceRecordingStatusCallback = null,
+        ?string $ConferenceRecordingStatusCallbackEvent = null,
+        ConferenceRecordingStatusCallbackMethod|string|null $ConferenceRecordingStatusCallbackMethod = null,
+        ?int $ConferenceRecordingTimeout = null,
+        ?string $ConferenceStatusCallback = null,
+        ?string $ConferenceStatusCallbackEvent = null,
+        ConferenceStatusCallbackMethod|string|null $ConferenceStatusCallbackMethod = null,
+        ConferenceTrim|string|null $ConferenceTrim = null,
+        ?array $CustomHeaders = null,
+        ?bool $EarlyMedia = null,
+        ?bool $EndConferenceOnExit = null,
+        ?string $From = null,
+        MachineDetection|string|null $MachineDetection = null,
+        ?int $MachineDetectionSilenceTimeout = null,
+        ?int $MachineDetectionSpeechEndThreshold = null,
+        ?int $MachineDetectionSpeechThreshold = null,
+        ?int $MachineDetectionTimeout = null,
+        ?int $MaxParticipants = null,
+        ?bool $Muted = null,
+        ?string $PreferredCodecs = null,
+        ?bool $Record = null,
+        RecordingChannels|string|null $RecordingChannels = null,
+        ?string $RecordingStatusCallback = null,
+        ?string $RecordingStatusCallbackEvent = null,
+        RecordingStatusCallbackMethod|string|null $RecordingStatusCallbackMethod = null,
+        RecordingTrack|string|null $RecordingTrack = null,
+        ?string $SipAuthPassword = null,
+        ?string $SipAuthUsername = null,
+        ?bool $StartConferenceOnEnter = null,
+        ?string $StatusCallback = null,
+        ?string $StatusCallbackEvent = null,
+        StatusCallbackMethod|string|null $StatusCallbackMethod = null,
+        ?int $TimeLimit = null,
+        ?int $timeout_seconds = null,
+        ?string $To = null,
+        Trim|string|null $Trim = null,
+        ?string $WaitUrl = null,
     ): self {
         $obj = new self;
 
-        $obj->accountSid = $accountSid;
+        $obj->account_sid = $account_sid;
 
-        null !== $amdStatusCallback && $obj->amdStatusCallback = $amdStatusCallback;
-        null !== $amdStatusCallbackMethod && $obj['amdStatusCallbackMethod'] = $amdStatusCallbackMethod;
-        null !== $beep && $obj['beep'] = $beep;
-        null !== $callerID && $obj->callerID = $callerID;
-        null !== $callSidToCoach && $obj->callSidToCoach = $callSidToCoach;
-        null !== $cancelPlaybackOnDetectMessageEnd && $obj->cancelPlaybackOnDetectMessageEnd = $cancelPlaybackOnDetectMessageEnd;
-        null !== $cancelPlaybackOnMachineDetection && $obj->cancelPlaybackOnMachineDetection = $cancelPlaybackOnMachineDetection;
-        null !== $coaching && $obj->coaching = $coaching;
-        null !== $conferenceRecord && $obj['conferenceRecord'] = $conferenceRecord;
-        null !== $conferenceRecordingStatusCallback && $obj->conferenceRecordingStatusCallback = $conferenceRecordingStatusCallback;
-        null !== $conferenceRecordingStatusCallbackEvent && $obj->conferenceRecordingStatusCallbackEvent = $conferenceRecordingStatusCallbackEvent;
-        null !== $conferenceRecordingStatusCallbackMethod && $obj['conferenceRecordingStatusCallbackMethod'] = $conferenceRecordingStatusCallbackMethod;
-        null !== $conferenceRecordingTimeout && $obj->conferenceRecordingTimeout = $conferenceRecordingTimeout;
-        null !== $conferenceStatusCallback && $obj->conferenceStatusCallback = $conferenceStatusCallback;
-        null !== $conferenceStatusCallbackEvent && $obj->conferenceStatusCallbackEvent = $conferenceStatusCallbackEvent;
-        null !== $conferenceStatusCallbackMethod && $obj['conferenceStatusCallbackMethod'] = $conferenceStatusCallbackMethod;
-        null !== $conferenceTrim && $obj['conferenceTrim'] = $conferenceTrim;
-        null !== $customHeaders && $obj->customHeaders = $customHeaders;
-        null !== $earlyMedia && $obj->earlyMedia = $earlyMedia;
-        null !== $endConferenceOnExit && $obj->endConferenceOnExit = $endConferenceOnExit;
-        null !== $from && $obj->from = $from;
-        null !== $machineDetection && $obj['machineDetection'] = $machineDetection;
-        null !== $machineDetectionSilenceTimeout && $obj->machineDetectionSilenceTimeout = $machineDetectionSilenceTimeout;
-        null !== $machineDetectionSpeechEndThreshold && $obj->machineDetectionSpeechEndThreshold = $machineDetectionSpeechEndThreshold;
-        null !== $machineDetectionSpeechThreshold && $obj->machineDetectionSpeechThreshold = $machineDetectionSpeechThreshold;
-        null !== $machineDetectionTimeout && $obj->machineDetectionTimeout = $machineDetectionTimeout;
-        null !== $maxParticipants && $obj->maxParticipants = $maxParticipants;
-        null !== $muted && $obj->muted = $muted;
-        null !== $preferredCodecs && $obj->preferredCodecs = $preferredCodecs;
-        null !== $record && $obj->record = $record;
-        null !== $recordingChannels && $obj['recordingChannels'] = $recordingChannels;
-        null !== $recordingStatusCallback && $obj->recordingStatusCallback = $recordingStatusCallback;
-        null !== $recordingStatusCallbackEvent && $obj->recordingStatusCallbackEvent = $recordingStatusCallbackEvent;
-        null !== $recordingStatusCallbackMethod && $obj['recordingStatusCallbackMethod'] = $recordingStatusCallbackMethod;
-        null !== $recordingTrack && $obj['recordingTrack'] = $recordingTrack;
-        null !== $sipAuthPassword && $obj->sipAuthPassword = $sipAuthPassword;
-        null !== $sipAuthUsername && $obj->sipAuthUsername = $sipAuthUsername;
-        null !== $startConferenceOnEnter && $obj->startConferenceOnEnter = $startConferenceOnEnter;
-        null !== $statusCallback && $obj->statusCallback = $statusCallback;
-        null !== $statusCallbackEvent && $obj->statusCallbackEvent = $statusCallbackEvent;
-        null !== $statusCallbackMethod && $obj['statusCallbackMethod'] = $statusCallbackMethod;
-        null !== $timeLimit && $obj->timeLimit = $timeLimit;
-        null !== $timeoutSeconds && $obj->timeoutSeconds = $timeoutSeconds;
-        null !== $to && $obj->to = $to;
-        null !== $trim && $obj['trim'] = $trim;
-        null !== $waitURL && $obj->waitURL = $waitURL;
+        null !== $AmdStatusCallback && $obj->AmdStatusCallback = $AmdStatusCallback;
+        null !== $AmdStatusCallbackMethod && $obj['AmdStatusCallbackMethod'] = $AmdStatusCallbackMethod;
+        null !== $Beep && $obj['Beep'] = $Beep;
+        null !== $CallerId && $obj->CallerId = $CallerId;
+        null !== $CallSidToCoach && $obj->CallSidToCoach = $CallSidToCoach;
+        null !== $CancelPlaybackOnDetectMessageEnd && $obj->CancelPlaybackOnDetectMessageEnd = $CancelPlaybackOnDetectMessageEnd;
+        null !== $CancelPlaybackOnMachineDetection && $obj->CancelPlaybackOnMachineDetection = $CancelPlaybackOnMachineDetection;
+        null !== $Coaching && $obj->Coaching = $Coaching;
+        null !== $ConferenceRecord && $obj['ConferenceRecord'] = $ConferenceRecord;
+        null !== $ConferenceRecordingStatusCallback && $obj->ConferenceRecordingStatusCallback = $ConferenceRecordingStatusCallback;
+        null !== $ConferenceRecordingStatusCallbackEvent && $obj->ConferenceRecordingStatusCallbackEvent = $ConferenceRecordingStatusCallbackEvent;
+        null !== $ConferenceRecordingStatusCallbackMethod && $obj['ConferenceRecordingStatusCallbackMethod'] = $ConferenceRecordingStatusCallbackMethod;
+        null !== $ConferenceRecordingTimeout && $obj->ConferenceRecordingTimeout = $ConferenceRecordingTimeout;
+        null !== $ConferenceStatusCallback && $obj->ConferenceStatusCallback = $ConferenceStatusCallback;
+        null !== $ConferenceStatusCallbackEvent && $obj->ConferenceStatusCallbackEvent = $ConferenceStatusCallbackEvent;
+        null !== $ConferenceStatusCallbackMethod && $obj['ConferenceStatusCallbackMethod'] = $ConferenceStatusCallbackMethod;
+        null !== $ConferenceTrim && $obj['ConferenceTrim'] = $ConferenceTrim;
+        null !== $CustomHeaders && $obj->CustomHeaders = $CustomHeaders;
+        null !== $EarlyMedia && $obj->EarlyMedia = $EarlyMedia;
+        null !== $EndConferenceOnExit && $obj->EndConferenceOnExit = $EndConferenceOnExit;
+        null !== $From && $obj->From = $From;
+        null !== $MachineDetection && $obj['MachineDetection'] = $MachineDetection;
+        null !== $MachineDetectionSilenceTimeout && $obj->MachineDetectionSilenceTimeout = $MachineDetectionSilenceTimeout;
+        null !== $MachineDetectionSpeechEndThreshold && $obj->MachineDetectionSpeechEndThreshold = $MachineDetectionSpeechEndThreshold;
+        null !== $MachineDetectionSpeechThreshold && $obj->MachineDetectionSpeechThreshold = $MachineDetectionSpeechThreshold;
+        null !== $MachineDetectionTimeout && $obj->MachineDetectionTimeout = $MachineDetectionTimeout;
+        null !== $MaxParticipants && $obj->MaxParticipants = $MaxParticipants;
+        null !== $Muted && $obj->Muted = $Muted;
+        null !== $PreferredCodecs && $obj->PreferredCodecs = $PreferredCodecs;
+        null !== $Record && $obj->Record = $Record;
+        null !== $RecordingChannels && $obj['RecordingChannels'] = $RecordingChannels;
+        null !== $RecordingStatusCallback && $obj->RecordingStatusCallback = $RecordingStatusCallback;
+        null !== $RecordingStatusCallbackEvent && $obj->RecordingStatusCallbackEvent = $RecordingStatusCallbackEvent;
+        null !== $RecordingStatusCallbackMethod && $obj['RecordingStatusCallbackMethod'] = $RecordingStatusCallbackMethod;
+        null !== $RecordingTrack && $obj['RecordingTrack'] = $RecordingTrack;
+        null !== $SipAuthPassword && $obj->SipAuthPassword = $SipAuthPassword;
+        null !== $SipAuthUsername && $obj->SipAuthUsername = $SipAuthUsername;
+        null !== $StartConferenceOnEnter && $obj->StartConferenceOnEnter = $StartConferenceOnEnter;
+        null !== $StatusCallback && $obj->StatusCallback = $StatusCallback;
+        null !== $StatusCallbackEvent && $obj->StatusCallbackEvent = $StatusCallbackEvent;
+        null !== $StatusCallbackMethod && $obj['StatusCallbackMethod'] = $StatusCallbackMethod;
+        null !== $TimeLimit && $obj->TimeLimit = $TimeLimit;
+        null !== $timeout_seconds && $obj->timeout_seconds = $timeout_seconds;
+        null !== $To && $obj->To = $To;
+        null !== $Trim && $obj['Trim'] = $Trim;
+        null !== $WaitUrl && $obj->WaitUrl = $WaitUrl;
 
         return $obj;
     }
@@ -552,7 +568,7 @@ final class ParticipantParticipantsParams implements BaseModel
     public function withAccountSid(string $accountSid): self
     {
         $obj = clone $this;
-        $obj->accountSid = $accountSid;
+        $obj->account_sid = $accountSid;
 
         return $obj;
     }
@@ -563,7 +579,7 @@ final class ParticipantParticipantsParams implements BaseModel
     public function withAmdStatusCallback(string $amdStatusCallback): self
     {
         $obj = clone $this;
-        $obj->amdStatusCallback = $amdStatusCallback;
+        $obj->AmdStatusCallback = $amdStatusCallback;
 
         return $obj;
     }
@@ -574,10 +590,10 @@ final class ParticipantParticipantsParams implements BaseModel
      * @param AmdStatusCallbackMethod|value-of<AmdStatusCallbackMethod> $amdStatusCallbackMethod
      */
     public function withAmdStatusCallbackMethod(
-        AmdStatusCallbackMethod|string $amdStatusCallbackMethod
+        AmdStatusCallbackMethod|string $amdStatusCallbackMethod,
     ): self {
         $obj = clone $this;
-        $obj['amdStatusCallbackMethod'] = $amdStatusCallbackMethod;
+        $obj['AmdStatusCallbackMethod'] = $amdStatusCallbackMethod;
 
         return $obj;
     }
@@ -587,10 +603,11 @@ final class ParticipantParticipantsParams implements BaseModel
      *
      * @param Beep|value-of<Beep> $beep
      */
-    public function withBeep(Beep|string $beep): self
-    {
+    public function withBeep(
+        Beep|string $beep,
+    ): self {
         $obj = clone $this;
-        $obj['beep'] = $beep;
+        $obj['Beep'] = $beep;
 
         return $obj;
     }
@@ -601,7 +618,7 @@ final class ParticipantParticipantsParams implements BaseModel
     public function withCallerID(string $callerID): self
     {
         $obj = clone $this;
-        $obj->callerID = $callerID;
+        $obj->CallerId = $callerID;
 
         return $obj;
     }
@@ -612,7 +629,7 @@ final class ParticipantParticipantsParams implements BaseModel
     public function withCallSidToCoach(string $callSidToCoach): self
     {
         $obj = clone $this;
-        $obj->callSidToCoach = $callSidToCoach;
+        $obj->CallSidToCoach = $callSidToCoach;
 
         return $obj;
     }
@@ -624,7 +641,7 @@ final class ParticipantParticipantsParams implements BaseModel
         bool $cancelPlaybackOnDetectMessageEnd
     ): self {
         $obj = clone $this;
-        $obj->cancelPlaybackOnDetectMessageEnd = $cancelPlaybackOnDetectMessageEnd;
+        $obj->CancelPlaybackOnDetectMessageEnd = $cancelPlaybackOnDetectMessageEnd;
 
         return $obj;
     }
@@ -636,7 +653,7 @@ final class ParticipantParticipantsParams implements BaseModel
         bool $cancelPlaybackOnMachineDetection
     ): self {
         $obj = clone $this;
-        $obj->cancelPlaybackOnMachineDetection = $cancelPlaybackOnMachineDetection;
+        $obj->CancelPlaybackOnMachineDetection = $cancelPlaybackOnMachineDetection;
 
         return $obj;
     }
@@ -647,7 +664,7 @@ final class ParticipantParticipantsParams implements BaseModel
     public function withCoaching(bool $coaching): self
     {
         $obj = clone $this;
-        $obj->coaching = $coaching;
+        $obj->Coaching = $coaching;
 
         return $obj;
     }
@@ -658,10 +675,10 @@ final class ParticipantParticipantsParams implements BaseModel
      * @param ConferenceRecord|value-of<ConferenceRecord> $conferenceRecord
      */
     public function withConferenceRecord(
-        ConferenceRecord|string $conferenceRecord
+        ConferenceRecord|string $conferenceRecord,
     ): self {
         $obj = clone $this;
-        $obj['conferenceRecord'] = $conferenceRecord;
+        $obj['ConferenceRecord'] = $conferenceRecord;
 
         return $obj;
     }
@@ -673,7 +690,7 @@ final class ParticipantParticipantsParams implements BaseModel
         string $conferenceRecordingStatusCallback
     ): self {
         $obj = clone $this;
-        $obj->conferenceRecordingStatusCallback = $conferenceRecordingStatusCallback;
+        $obj->ConferenceRecordingStatusCallback = $conferenceRecordingStatusCallback;
 
         return $obj;
     }
@@ -685,7 +702,7 @@ final class ParticipantParticipantsParams implements BaseModel
         string $conferenceRecordingStatusCallbackEvent
     ): self {
         $obj = clone $this;
-        $obj->conferenceRecordingStatusCallbackEvent = $conferenceRecordingStatusCallbackEvent;
+        $obj->ConferenceRecordingStatusCallbackEvent = $conferenceRecordingStatusCallbackEvent;
 
         return $obj;
     }
@@ -699,7 +716,7 @@ final class ParticipantParticipantsParams implements BaseModel
         ConferenceRecordingStatusCallbackMethod|string $conferenceRecordingStatusCallbackMethod,
     ): self {
         $obj = clone $this;
-        $obj['conferenceRecordingStatusCallbackMethod'] = $conferenceRecordingStatusCallbackMethod;
+        $obj['ConferenceRecordingStatusCallbackMethod'] = $conferenceRecordingStatusCallbackMethod;
 
         return $obj;
     }
@@ -711,7 +728,7 @@ final class ParticipantParticipantsParams implements BaseModel
         int $conferenceRecordingTimeout
     ): self {
         $obj = clone $this;
-        $obj->conferenceRecordingTimeout = $conferenceRecordingTimeout;
+        $obj->ConferenceRecordingTimeout = $conferenceRecordingTimeout;
 
         return $obj;
     }
@@ -723,7 +740,7 @@ final class ParticipantParticipantsParams implements BaseModel
         string $conferenceStatusCallback
     ): self {
         $obj = clone $this;
-        $obj->conferenceStatusCallback = $conferenceStatusCallback;
+        $obj->ConferenceStatusCallback = $conferenceStatusCallback;
 
         return $obj;
     }
@@ -735,7 +752,7 @@ final class ParticipantParticipantsParams implements BaseModel
         string $conferenceStatusCallbackEvent
     ): self {
         $obj = clone $this;
-        $obj->conferenceStatusCallbackEvent = $conferenceStatusCallbackEvent;
+        $obj->ConferenceStatusCallbackEvent = $conferenceStatusCallbackEvent;
 
         return $obj;
     }
@@ -746,10 +763,10 @@ final class ParticipantParticipantsParams implements BaseModel
      * @param ConferenceStatusCallbackMethod|value-of<ConferenceStatusCallbackMethod> $conferenceStatusCallbackMethod
      */
     public function withConferenceStatusCallbackMethod(
-        ConferenceStatusCallbackMethod|string $conferenceStatusCallbackMethod
+        ConferenceStatusCallbackMethod|string $conferenceStatusCallbackMethod,
     ): self {
         $obj = clone $this;
-        $obj['conferenceStatusCallbackMethod'] = $conferenceStatusCallbackMethod;
+        $obj['ConferenceStatusCallbackMethod'] = $conferenceStatusCallbackMethod;
 
         return $obj;
     }
@@ -760,10 +777,10 @@ final class ParticipantParticipantsParams implements BaseModel
      * @param ConferenceTrim|value-of<ConferenceTrim> $conferenceTrim
      */
     public function withConferenceTrim(
-        ConferenceTrim|string $conferenceTrim
+        ConferenceTrim|string $conferenceTrim,
     ): self {
         $obj = clone $this;
-        $obj['conferenceTrim'] = $conferenceTrim;
+        $obj['ConferenceTrim'] = $conferenceTrim;
 
         return $obj;
     }
@@ -776,7 +793,7 @@ final class ParticipantParticipantsParams implements BaseModel
     public function withCustomHeaders(array $customHeaders): self
     {
         $obj = clone $this;
-        $obj->customHeaders = $customHeaders;
+        $obj->CustomHeaders = $customHeaders;
 
         return $obj;
     }
@@ -787,7 +804,7 @@ final class ParticipantParticipantsParams implements BaseModel
     public function withEarlyMedia(bool $earlyMedia): self
     {
         $obj = clone $this;
-        $obj->earlyMedia = $earlyMedia;
+        $obj->EarlyMedia = $earlyMedia;
 
         return $obj;
     }
@@ -798,7 +815,7 @@ final class ParticipantParticipantsParams implements BaseModel
     public function withEndConferenceOnExit(bool $endConferenceOnExit): self
     {
         $obj = clone $this;
-        $obj->endConferenceOnExit = $endConferenceOnExit;
+        $obj->EndConferenceOnExit = $endConferenceOnExit;
 
         return $obj;
     }
@@ -809,7 +826,7 @@ final class ParticipantParticipantsParams implements BaseModel
     public function withFrom(string $from): self
     {
         $obj = clone $this;
-        $obj->from = $from;
+        $obj->From = $from;
 
         return $obj;
     }
@@ -820,10 +837,10 @@ final class ParticipantParticipantsParams implements BaseModel
      * @param MachineDetection|value-of<MachineDetection> $machineDetection
      */
     public function withMachineDetection(
-        MachineDetection|string $machineDetection
+        MachineDetection|string $machineDetection,
     ): self {
         $obj = clone $this;
-        $obj['machineDetection'] = $machineDetection;
+        $obj['MachineDetection'] = $machineDetection;
 
         return $obj;
     }
@@ -835,7 +852,7 @@ final class ParticipantParticipantsParams implements BaseModel
         int $machineDetectionSilenceTimeout
     ): self {
         $obj = clone $this;
-        $obj->machineDetectionSilenceTimeout = $machineDetectionSilenceTimeout;
+        $obj->MachineDetectionSilenceTimeout = $machineDetectionSilenceTimeout;
 
         return $obj;
     }
@@ -847,7 +864,7 @@ final class ParticipantParticipantsParams implements BaseModel
         int $machineDetectionSpeechEndThreshold
     ): self {
         $obj = clone $this;
-        $obj->machineDetectionSpeechEndThreshold = $machineDetectionSpeechEndThreshold;
+        $obj->MachineDetectionSpeechEndThreshold = $machineDetectionSpeechEndThreshold;
 
         return $obj;
     }
@@ -859,7 +876,7 @@ final class ParticipantParticipantsParams implements BaseModel
         int $machineDetectionSpeechThreshold
     ): self {
         $obj = clone $this;
-        $obj->machineDetectionSpeechThreshold = $machineDetectionSpeechThreshold;
+        $obj->MachineDetectionSpeechThreshold = $machineDetectionSpeechThreshold;
 
         return $obj;
     }
@@ -871,7 +888,7 @@ final class ParticipantParticipantsParams implements BaseModel
         int $machineDetectionTimeout
     ): self {
         $obj = clone $this;
-        $obj->machineDetectionTimeout = $machineDetectionTimeout;
+        $obj->MachineDetectionTimeout = $machineDetectionTimeout;
 
         return $obj;
     }
@@ -882,7 +899,7 @@ final class ParticipantParticipantsParams implements BaseModel
     public function withMaxParticipants(int $maxParticipants): self
     {
         $obj = clone $this;
-        $obj->maxParticipants = $maxParticipants;
+        $obj->MaxParticipants = $maxParticipants;
 
         return $obj;
     }
@@ -893,7 +910,7 @@ final class ParticipantParticipantsParams implements BaseModel
     public function withMuted(bool $muted): self
     {
         $obj = clone $this;
-        $obj->muted = $muted;
+        $obj->Muted = $muted;
 
         return $obj;
     }
@@ -904,7 +921,7 @@ final class ParticipantParticipantsParams implements BaseModel
     public function withPreferredCodecs(string $preferredCodecs): self
     {
         $obj = clone $this;
-        $obj->preferredCodecs = $preferredCodecs;
+        $obj->PreferredCodecs = $preferredCodecs;
 
         return $obj;
     }
@@ -915,7 +932,7 @@ final class ParticipantParticipantsParams implements BaseModel
     public function withRecord(bool $record): self
     {
         $obj = clone $this;
-        $obj->record = $record;
+        $obj->Record = $record;
 
         return $obj;
     }
@@ -926,10 +943,10 @@ final class ParticipantParticipantsParams implements BaseModel
      * @param RecordingChannels|value-of<RecordingChannels> $recordingChannels
      */
     public function withRecordingChannels(
-        RecordingChannels|string $recordingChannels
+        RecordingChannels|string $recordingChannels,
     ): self {
         $obj = clone $this;
-        $obj['recordingChannels'] = $recordingChannels;
+        $obj['RecordingChannels'] = $recordingChannels;
 
         return $obj;
     }
@@ -941,7 +958,7 @@ final class ParticipantParticipantsParams implements BaseModel
         string $recordingStatusCallback
     ): self {
         $obj = clone $this;
-        $obj->recordingStatusCallback = $recordingStatusCallback;
+        $obj->RecordingStatusCallback = $recordingStatusCallback;
 
         return $obj;
     }
@@ -953,7 +970,7 @@ final class ParticipantParticipantsParams implements BaseModel
         string $recordingStatusCallbackEvent
     ): self {
         $obj = clone $this;
-        $obj->recordingStatusCallbackEvent = $recordingStatusCallbackEvent;
+        $obj->RecordingStatusCallbackEvent = $recordingStatusCallbackEvent;
 
         return $obj;
     }
@@ -964,10 +981,10 @@ final class ParticipantParticipantsParams implements BaseModel
      * @param RecordingStatusCallbackMethod|value-of<RecordingStatusCallbackMethod> $recordingStatusCallbackMethod
      */
     public function withRecordingStatusCallbackMethod(
-        RecordingStatusCallbackMethod|string $recordingStatusCallbackMethod
+        RecordingStatusCallbackMethod|string $recordingStatusCallbackMethod,
     ): self {
         $obj = clone $this;
-        $obj['recordingStatusCallbackMethod'] = $recordingStatusCallbackMethod;
+        $obj['RecordingStatusCallbackMethod'] = $recordingStatusCallbackMethod;
 
         return $obj;
     }
@@ -978,10 +995,10 @@ final class ParticipantParticipantsParams implements BaseModel
      * @param RecordingTrack|value-of<RecordingTrack> $recordingTrack
      */
     public function withRecordingTrack(
-        RecordingTrack|string $recordingTrack
+        RecordingTrack|string $recordingTrack,
     ): self {
         $obj = clone $this;
-        $obj['recordingTrack'] = $recordingTrack;
+        $obj['RecordingTrack'] = $recordingTrack;
 
         return $obj;
     }
@@ -992,7 +1009,7 @@ final class ParticipantParticipantsParams implements BaseModel
     public function withSipAuthPassword(string $sipAuthPassword): self
     {
         $obj = clone $this;
-        $obj->sipAuthPassword = $sipAuthPassword;
+        $obj->SipAuthPassword = $sipAuthPassword;
 
         return $obj;
     }
@@ -1003,7 +1020,7 @@ final class ParticipantParticipantsParams implements BaseModel
     public function withSipAuthUsername(string $sipAuthUsername): self
     {
         $obj = clone $this;
-        $obj->sipAuthUsername = $sipAuthUsername;
+        $obj->SipAuthUsername = $sipAuthUsername;
 
         return $obj;
     }
@@ -1015,7 +1032,7 @@ final class ParticipantParticipantsParams implements BaseModel
         bool $startConferenceOnEnter
     ): self {
         $obj = clone $this;
-        $obj->startConferenceOnEnter = $startConferenceOnEnter;
+        $obj->StartConferenceOnEnter = $startConferenceOnEnter;
 
         return $obj;
     }
@@ -1026,7 +1043,7 @@ final class ParticipantParticipantsParams implements BaseModel
     public function withStatusCallback(string $statusCallback): self
     {
         $obj = clone $this;
-        $obj->statusCallback = $statusCallback;
+        $obj->StatusCallback = $statusCallback;
 
         return $obj;
     }
@@ -1037,7 +1054,7 @@ final class ParticipantParticipantsParams implements BaseModel
     public function withStatusCallbackEvent(string $statusCallbackEvent): self
     {
         $obj = clone $this;
-        $obj->statusCallbackEvent = $statusCallbackEvent;
+        $obj->StatusCallbackEvent = $statusCallbackEvent;
 
         return $obj;
     }
@@ -1048,10 +1065,10 @@ final class ParticipantParticipantsParams implements BaseModel
      * @param StatusCallbackMethod|value-of<StatusCallbackMethod> $statusCallbackMethod
      */
     public function withStatusCallbackMethod(
-        StatusCallbackMethod|string $statusCallbackMethod
+        StatusCallbackMethod|string $statusCallbackMethod,
     ): self {
         $obj = clone $this;
-        $obj['statusCallbackMethod'] = $statusCallbackMethod;
+        $obj['StatusCallbackMethod'] = $statusCallbackMethod;
 
         return $obj;
     }
@@ -1062,7 +1079,7 @@ final class ParticipantParticipantsParams implements BaseModel
     public function withTimeLimit(int $timeLimit): self
     {
         $obj = clone $this;
-        $obj->timeLimit = $timeLimit;
+        $obj->TimeLimit = $timeLimit;
 
         return $obj;
     }
@@ -1073,7 +1090,7 @@ final class ParticipantParticipantsParams implements BaseModel
     public function withTimeoutSeconds(int $timeoutSeconds): self
     {
         $obj = clone $this;
-        $obj->timeoutSeconds = $timeoutSeconds;
+        $obj->timeout_seconds = $timeoutSeconds;
 
         return $obj;
     }
@@ -1084,7 +1101,7 @@ final class ParticipantParticipantsParams implements BaseModel
     public function withTo(string $to): self
     {
         $obj = clone $this;
-        $obj->to = $to;
+        $obj->To = $to;
 
         return $obj;
     }
@@ -1094,10 +1111,11 @@ final class ParticipantParticipantsParams implements BaseModel
      *
      * @param Trim|value-of<Trim> $trim
      */
-    public function withTrim(Trim|string $trim): self
-    {
+    public function withTrim(
+        Trim|string $trim,
+    ): self {
         $obj = clone $this;
-        $obj['trim'] = $trim;
+        $obj['Trim'] = $trim;
 
         return $obj;
     }
@@ -1108,7 +1126,7 @@ final class ParticipantParticipantsParams implements BaseModel
     public function withWaitURL(string $waitURL): self
     {
         $obj = clone $this;
-        $obj->waitURL = $waitURL;
+        $obj->WaitUrl = $waitURL;
 
         return $obj;
     }

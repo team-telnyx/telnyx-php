@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type UploadRefreshStatusResponseShape = array{success?: bool}
+ * @phpstan-type UploadRefreshStatusResponseShape = array{success?: bool|null}
  */
 final class UploadRefreshStatusResponse implements BaseModel, ResponseConverter
 {

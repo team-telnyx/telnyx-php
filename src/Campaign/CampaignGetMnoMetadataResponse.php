@@ -12,7 +12,9 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type CampaignGetMnoMetadataResponseShape = array{_10999?: mno_10999}
+ * @phpstan-type CampaignGetMnoMetadataResponseShape = array{
+ *   _10999?: mno_10999|null
+ * }
  */
 final class CampaignGetMnoMetadataResponse implements BaseModel, ResponseConverter
 {

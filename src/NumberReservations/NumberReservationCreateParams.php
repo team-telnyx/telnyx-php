@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\NumberReservations->create
  *
  * @phpstan-type NumberReservationCreateParamsShape = array{
- *   customerReference?: string, phoneNumbers?: list<ReservedPhoneNumber>
+ *   customer_reference?: string, phone_numbers?: list<ReservedPhoneNumber>
  * }
  */
 final class NumberReservationCreateParams implements BaseModel
@@ -27,12 +27,12 @@ final class NumberReservationCreateParams implements BaseModel
     /**
      * A customer reference string for customer look ups.
      */
-    #[Api('customer_reference', optional: true)]
-    public ?string $customerReference;
+    #[Api(optional: true)]
+    public ?string $customer_reference;
 
-    /** @var list<ReservedPhoneNumber>|null $phoneNumbers */
-    #[Api('phone_numbers', list: ReservedPhoneNumber::class, optional: true)]
-    public ?array $phoneNumbers;
+    /** @var list<ReservedPhoneNumber>|null $phone_numbers */
+    #[Api(list: ReservedPhoneNumber::class, optional: true)]
+    public ?array $phone_numbers;
 
     public function __construct()
     {
@@ -44,16 +44,16 @@ final class NumberReservationCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ReservedPhoneNumber> $phoneNumbers
+     * @param list<ReservedPhoneNumber> $phone_numbers
      */
     public static function with(
-        ?string $customerReference = null,
-        ?array $phoneNumbers = null
+        ?string $customer_reference = null,
+        ?array $phone_numbers = null
     ): self {
         $obj = new self;
 
-        null !== $customerReference && $obj->customerReference = $customerReference;
-        null !== $phoneNumbers && $obj->phoneNumbers = $phoneNumbers;
+        null !== $customer_reference && $obj->customer_reference = $customer_reference;
+        null !== $phone_numbers && $obj->phone_numbers = $phone_numbers;
 
         return $obj;
     }
@@ -64,7 +64,7 @@ final class NumberReservationCreateParams implements BaseModel
     public function withCustomerReference(string $customerReference): self
     {
         $obj = clone $this;
-        $obj->customerReference = $customerReference;
+        $obj->customer_reference = $customerReference;
 
         return $obj;
     }
@@ -75,7 +75,7 @@ final class NumberReservationCreateParams implements BaseModel
     public function withPhoneNumbers(array $phoneNumbers): self
     {
         $obj = clone $this;
-        $obj->phoneNumbers = $phoneNumbers;
+        $obj->phone_numbers = $phoneNumbers;
 
         return $obj;
     }

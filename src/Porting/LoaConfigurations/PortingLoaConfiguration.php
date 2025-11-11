@@ -13,16 +13,16 @@ use Telnyx\Porting\LoaConfigurations\PortingLoaConfiguration\Logo;
 
 /**
  * @phpstan-type PortingLoaConfigurationShape = array{
- *   id?: string,
- *   address?: Address,
- *   companyName?: string,
- *   contact?: Contact,
- *   createdAt?: \DateTimeInterface,
- *   logo?: Logo,
- *   name?: string,
- *   organizationID?: string,
- *   recordType?: string,
- *   updatedAt?: \DateTimeInterface,
+ *   id?: string|null,
+ *   address?: Address|null,
+ *   company_name?: string|null,
+ *   contact?: Contact|null,
+ *   created_at?: \DateTimeInterface|null,
+ *   logo?: Logo|null,
+ *   name?: string|null,
+ *   organization_id?: string|null,
+ *   record_type?: string|null,
+ *   updated_at?: \DateTimeInterface|null,
  * }
  */
 final class PortingLoaConfiguration implements BaseModel
@@ -45,8 +45,8 @@ final class PortingLoaConfiguration implements BaseModel
     /**
      * The name of the company.
      */
-    #[Api('company_name', optional: true)]
-    public ?string $companyName;
+    #[Api(optional: true)]
+    public ?string $company_name;
 
     /**
      * The contact information of the company.
@@ -57,8 +57,8 @@ final class PortingLoaConfiguration implements BaseModel
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Api('created_at', optional: true)]
-    public ?\DateTimeInterface $createdAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $created_at;
 
     /**
      * The logo to be used in the LOA.
@@ -75,20 +75,20 @@ final class PortingLoaConfiguration implements BaseModel
     /**
      * The organization that owns the LOA configuration.
      */
-    #[Api('organization_id', optional: true)]
-    public ?string $organizationID;
+    #[Api(optional: true)]
+    public ?string $organization_id;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api('record_type', optional: true)]
-    public ?string $recordType;
+    #[Api(optional: true)]
+    public ?string $record_type;
 
     /**
      * ISO 8601 formatted date indicating when the resource was updated.
      */
-    #[Api('updated_at', optional: true)]
-    public ?\DateTimeInterface $updatedAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $updated_at;
 
     public function __construct()
     {
@@ -103,27 +103,27 @@ final class PortingLoaConfiguration implements BaseModel
     public static function with(
         ?string $id = null,
         ?Address $address = null,
-        ?string $companyName = null,
+        ?string $company_name = null,
         ?Contact $contact = null,
-        ?\DateTimeInterface $createdAt = null,
+        ?\DateTimeInterface $created_at = null,
         ?Logo $logo = null,
         ?string $name = null,
-        ?string $organizationID = null,
-        ?string $recordType = null,
-        ?\DateTimeInterface $updatedAt = null,
+        ?string $organization_id = null,
+        ?string $record_type = null,
+        ?\DateTimeInterface $updated_at = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj->id = $id;
         null !== $address && $obj->address = $address;
-        null !== $companyName && $obj->companyName = $companyName;
+        null !== $company_name && $obj->company_name = $company_name;
         null !== $contact && $obj->contact = $contact;
-        null !== $createdAt && $obj->createdAt = $createdAt;
+        null !== $created_at && $obj->created_at = $created_at;
         null !== $logo && $obj->logo = $logo;
         null !== $name && $obj->name = $name;
-        null !== $organizationID && $obj->organizationID = $organizationID;
-        null !== $recordType && $obj->recordType = $recordType;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
+        null !== $organization_id && $obj->organization_id = $organization_id;
+        null !== $record_type && $obj->record_type = $record_type;
+        null !== $updated_at && $obj->updated_at = $updated_at;
 
         return $obj;
     }
@@ -156,7 +156,7 @@ final class PortingLoaConfiguration implements BaseModel
     public function withCompanyName(string $companyName): self
     {
         $obj = clone $this;
-        $obj->companyName = $companyName;
+        $obj->company_name = $companyName;
 
         return $obj;
     }
@@ -178,7 +178,7 @@ final class PortingLoaConfiguration implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }
@@ -211,7 +211,7 @@ final class PortingLoaConfiguration implements BaseModel
     public function withOrganizationID(string $organizationID): self
     {
         $obj = clone $this;
-        $obj->organizationID = $organizationID;
+        $obj->organization_id = $organizationID;
 
         return $obj;
     }
@@ -222,7 +222,7 @@ final class PortingLoaConfiguration implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType;
+        $obj->record_type = $recordType;
 
         return $obj;
     }
@@ -233,7 +233,7 @@ final class PortingLoaConfiguration implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $obj->updated_at = $updatedAt;
 
         return $obj;
     }

@@ -22,24 +22,24 @@ use Telnyx\IPConnections\IPConnectionUpdateParams\WebhookAPIVersion;
  *
  * @phpstan-type IPConnectionUpdateParamsShape = array{
  *   active?: bool,
- *   anchorsiteOverride?: AnchorsiteOverride|value-of<AnchorsiteOverride>,
- *   androidPushCredentialID?: string|null,
- *   connectionName?: string,
- *   defaultOnHoldComfortNoiseEnabled?: bool,
- *   dtmfType?: DtmfType|value-of<DtmfType>,
- *   encodeContactHeaderEnabled?: bool,
- *   encryptedMedia?: null|EncryptedMedia|value-of<EncryptedMedia>,
+ *   anchorsite_override?: AnchorsiteOverride|value-of<AnchorsiteOverride>,
+ *   android_push_credential_id?: string|null,
+ *   connection_name?: string,
+ *   default_on_hold_comfort_noise_enabled?: bool,
+ *   dtmf_type?: DtmfType|value-of<DtmfType>,
+ *   encode_contact_header_enabled?: bool,
+ *   encrypted_media?: null|EncryptedMedia|value-of<EncryptedMedia>,
  *   inbound?: InboundIP,
- *   iosPushCredentialID?: string|null,
- *   onnetT38PassthroughEnabled?: bool,
+ *   ios_push_credential_id?: string|null,
+ *   onnet_t38_passthrough_enabled?: bool,
  *   outbound?: OutboundIP,
- *   rtcpSettings?: ConnectionRtcpSettings,
+ *   rtcp_settings?: ConnectionRtcpSettings,
  *   tags?: list<string>,
- *   transportProtocol?: TransportProtocol|value-of<TransportProtocol>,
- *   webhookAPIVersion?: WebhookAPIVersion|value-of<WebhookAPIVersion>,
- *   webhookEventFailoverURL?: string|null,
- *   webhookEventURL?: string,
- *   webhookTimeoutSecs?: int|null,
+ *   transport_protocol?: TransportProtocol|value-of<TransportProtocol>,
+ *   webhook_api_version?: WebhookAPIVersion|value-of<WebhookAPIVersion>,
+ *   webhook_event_failover_url?: string|null,
+ *   webhook_event_url?: string,
+ *   webhook_timeout_secs?: int|null,
  * }
  */
 final class IPConnectionUpdateParams implements BaseModel
@@ -57,52 +57,47 @@ final class IPConnectionUpdateParams implements BaseModel
     /**
      * `Latency` directs Telnyx to route media through the site with the lowest round-trip time to the user's connection. Telnyx calculates this time using ICMP ping messages. This can be disabled by specifying a site to handle all media.
      *
-     * @var value-of<AnchorsiteOverride>|null $anchorsiteOverride
+     * @var value-of<AnchorsiteOverride>|null $anchorsite_override
      */
-    #[Api('anchorsite_override', enum: AnchorsiteOverride::class, optional: true)]
-    public ?string $anchorsiteOverride;
+    #[Api(enum: AnchorsiteOverride::class, optional: true)]
+    public ?string $anchorsite_override;
 
     /**
      * The uuid of the push credential for Android.
      */
-    #[Api('android_push_credential_id', nullable: true, optional: true)]
-    public ?string $androidPushCredentialID;
+    #[Api(nullable: true, optional: true)]
+    public ?string $android_push_credential_id;
 
-    #[Api('connection_name', optional: true)]
-    public ?string $connectionName;
+    #[Api(optional: true)]
+    public ?string $connection_name;
 
     /**
      * When enabled, Telnyx will generate comfort noise when you place the call on hold. If disabled, you will need to generate comfort noise or on hold music to avoid RTP timeout.
      */
-    #[Api('default_on_hold_comfort_noise_enabled', optional: true)]
-    public ?bool $defaultOnHoldComfortNoiseEnabled;
+    #[Api(optional: true)]
+    public ?bool $default_on_hold_comfort_noise_enabled;
 
     /**
      * Sets the type of DTMF digits sent from Telnyx to this Connection. Note that DTMF digits sent to Telnyx will be accepted in all formats.
      *
-     * @var value-of<DtmfType>|null $dtmfType
+     * @var value-of<DtmfType>|null $dtmf_type
      */
-    #[Api('dtmf_type', enum: DtmfType::class, optional: true)]
-    public ?string $dtmfType;
+    #[Api(enum: DtmfType::class, optional: true)]
+    public ?string $dtmf_type;
 
     /**
      * Encode the SIP contact header sent by Telnyx to avoid issues for NAT or ALG scenarios.
      */
-    #[Api('encode_contact_header_enabled', optional: true)]
-    public ?bool $encodeContactHeaderEnabled;
+    #[Api(optional: true)]
+    public ?bool $encode_contact_header_enabled;
 
     /**
      * Enable use of SRTP for encryption. Cannot be set if the transport_portocol is TLS.
      *
-     * @var value-of<EncryptedMedia>|null $encryptedMedia
+     * @var value-of<EncryptedMedia>|null $encrypted_media
      */
-    #[Api(
-        'encrypted_media',
-        enum: EncryptedMedia::class,
-        nullable: true,
-        optional: true,
-    )]
-    public ?string $encryptedMedia;
+    #[Api(enum: EncryptedMedia::class, nullable: true, optional: true)]
+    public ?string $encrypted_media;
 
     #[Api(optional: true)]
     public ?InboundIP $inbound;
@@ -110,20 +105,20 @@ final class IPConnectionUpdateParams implements BaseModel
     /**
      * The uuid of the push credential for Ios.
      */
-    #[Api('ios_push_credential_id', nullable: true, optional: true)]
-    public ?string $iosPushCredentialID;
+    #[Api(nullable: true, optional: true)]
+    public ?string $ios_push_credential_id;
 
     /**
      * Enable on-net T38 if you prefer the sender and receiver negotiating T38 directly if both are on the Telnyx network. If this is disabled, Telnyx will be able to use T38 on just one leg of the call depending on each leg's settings.
      */
-    #[Api('onnet_t38_passthrough_enabled', optional: true)]
-    public ?bool $onnetT38PassthroughEnabled;
+    #[Api(optional: true)]
+    public ?bool $onnet_t38_passthrough_enabled;
 
     #[Api(optional: true)]
     public ?OutboundIP $outbound;
 
-    #[Api('rtcp_settings', optional: true)]
-    public ?ConnectionRtcpSettings $rtcpSettings;
+    #[Api(optional: true)]
+    public ?ConnectionRtcpSettings $rtcp_settings;
 
     /**
      * Tags associated with the connection.
@@ -136,36 +131,36 @@ final class IPConnectionUpdateParams implements BaseModel
     /**
      * One of UDP, TLS, or TCP. Applies only to connections with IP authentication or FQDN authentication.
      *
-     * @var value-of<TransportProtocol>|null $transportProtocol
+     * @var value-of<TransportProtocol>|null $transport_protocol
      */
-    #[Api('transport_protocol', enum: TransportProtocol::class, optional: true)]
-    public ?string $transportProtocol;
+    #[Api(enum: TransportProtocol::class, optional: true)]
+    public ?string $transport_protocol;
 
     /**
      * Determines which webhook format will be used, Telnyx API v1 or v2.
      *
-     * @var value-of<WebhookAPIVersion>|null $webhookAPIVersion
+     * @var value-of<WebhookAPIVersion>|null $webhook_api_version
      */
-    #[Api('webhook_api_version', enum: WebhookAPIVersion::class, optional: true)]
-    public ?string $webhookAPIVersion;
+    #[Api(enum: WebhookAPIVersion::class, optional: true)]
+    public ?string $webhook_api_version;
 
     /**
      * The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      */
-    #[Api('webhook_event_failover_url', nullable: true, optional: true)]
-    public ?string $webhookEventFailoverURL;
+    #[Api(nullable: true, optional: true)]
+    public ?string $webhook_event_failover_url;
 
     /**
      * The URL where webhooks related to this connection will be sent. Must include a scheme, such as 'https'.
      */
-    #[Api('webhook_event_url', optional: true)]
-    public ?string $webhookEventURL;
+    #[Api(optional: true)]
+    public ?string $webhook_event_url;
 
     /**
      * Specifies how many seconds to wait before timing out a webhook.
      */
-    #[Api('webhook_timeout_secs', nullable: true, optional: true)]
-    public ?int $webhookTimeoutSecs;
+    #[Api(nullable: true, optional: true)]
+    public ?int $webhook_timeout_secs;
 
     public function __construct()
     {
@@ -177,55 +172,55 @@ final class IPConnectionUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AnchorsiteOverride|value-of<AnchorsiteOverride> $anchorsiteOverride
-     * @param DtmfType|value-of<DtmfType> $dtmfType
-     * @param EncryptedMedia|value-of<EncryptedMedia>|null $encryptedMedia
+     * @param AnchorsiteOverride|value-of<AnchorsiteOverride> $anchorsite_override
+     * @param DtmfType|value-of<DtmfType> $dtmf_type
+     * @param EncryptedMedia|value-of<EncryptedMedia>|null $encrypted_media
      * @param list<string> $tags
-     * @param TransportProtocol|value-of<TransportProtocol> $transportProtocol
-     * @param WebhookAPIVersion|value-of<WebhookAPIVersion> $webhookAPIVersion
+     * @param TransportProtocol|value-of<TransportProtocol> $transport_protocol
+     * @param WebhookAPIVersion|value-of<WebhookAPIVersion> $webhook_api_version
      */
     public static function with(
         ?bool $active = null,
-        AnchorsiteOverride|string|null $anchorsiteOverride = null,
-        ?string $androidPushCredentialID = null,
-        ?string $connectionName = null,
-        ?bool $defaultOnHoldComfortNoiseEnabled = null,
-        DtmfType|string|null $dtmfType = null,
-        ?bool $encodeContactHeaderEnabled = null,
-        EncryptedMedia|string|null $encryptedMedia = null,
+        AnchorsiteOverride|string|null $anchorsite_override = null,
+        ?string $android_push_credential_id = null,
+        ?string $connection_name = null,
+        ?bool $default_on_hold_comfort_noise_enabled = null,
+        DtmfType|string|null $dtmf_type = null,
+        ?bool $encode_contact_header_enabled = null,
+        EncryptedMedia|string|null $encrypted_media = null,
         ?InboundIP $inbound = null,
-        ?string $iosPushCredentialID = null,
-        ?bool $onnetT38PassthroughEnabled = null,
+        ?string $ios_push_credential_id = null,
+        ?bool $onnet_t38_passthrough_enabled = null,
         ?OutboundIP $outbound = null,
-        ?ConnectionRtcpSettings $rtcpSettings = null,
+        ?ConnectionRtcpSettings $rtcp_settings = null,
         ?array $tags = null,
-        TransportProtocol|string|null $transportProtocol = null,
-        WebhookAPIVersion|string|null $webhookAPIVersion = null,
-        ?string $webhookEventFailoverURL = null,
-        ?string $webhookEventURL = null,
-        ?int $webhookTimeoutSecs = null,
+        TransportProtocol|string|null $transport_protocol = null,
+        WebhookAPIVersion|string|null $webhook_api_version = null,
+        ?string $webhook_event_failover_url = null,
+        ?string $webhook_event_url = null,
+        ?int $webhook_timeout_secs = null,
     ): self {
         $obj = new self;
 
         null !== $active && $obj->active = $active;
-        null !== $anchorsiteOverride && $obj['anchorsiteOverride'] = $anchorsiteOverride;
-        null !== $androidPushCredentialID && $obj->androidPushCredentialID = $androidPushCredentialID;
-        null !== $connectionName && $obj->connectionName = $connectionName;
-        null !== $defaultOnHoldComfortNoiseEnabled && $obj->defaultOnHoldComfortNoiseEnabled = $defaultOnHoldComfortNoiseEnabled;
-        null !== $dtmfType && $obj['dtmfType'] = $dtmfType;
-        null !== $encodeContactHeaderEnabled && $obj->encodeContactHeaderEnabled = $encodeContactHeaderEnabled;
-        null !== $encryptedMedia && $obj['encryptedMedia'] = $encryptedMedia;
+        null !== $anchorsite_override && $obj['anchorsite_override'] = $anchorsite_override;
+        null !== $android_push_credential_id && $obj->android_push_credential_id = $android_push_credential_id;
+        null !== $connection_name && $obj->connection_name = $connection_name;
+        null !== $default_on_hold_comfort_noise_enabled && $obj->default_on_hold_comfort_noise_enabled = $default_on_hold_comfort_noise_enabled;
+        null !== $dtmf_type && $obj['dtmf_type'] = $dtmf_type;
+        null !== $encode_contact_header_enabled && $obj->encode_contact_header_enabled = $encode_contact_header_enabled;
+        null !== $encrypted_media && $obj['encrypted_media'] = $encrypted_media;
         null !== $inbound && $obj->inbound = $inbound;
-        null !== $iosPushCredentialID && $obj->iosPushCredentialID = $iosPushCredentialID;
-        null !== $onnetT38PassthroughEnabled && $obj->onnetT38PassthroughEnabled = $onnetT38PassthroughEnabled;
+        null !== $ios_push_credential_id && $obj->ios_push_credential_id = $ios_push_credential_id;
+        null !== $onnet_t38_passthrough_enabled && $obj->onnet_t38_passthrough_enabled = $onnet_t38_passthrough_enabled;
         null !== $outbound && $obj->outbound = $outbound;
-        null !== $rtcpSettings && $obj->rtcpSettings = $rtcpSettings;
+        null !== $rtcp_settings && $obj->rtcp_settings = $rtcp_settings;
         null !== $tags && $obj->tags = $tags;
-        null !== $transportProtocol && $obj['transportProtocol'] = $transportProtocol;
-        null !== $webhookAPIVersion && $obj['webhookAPIVersion'] = $webhookAPIVersion;
-        null !== $webhookEventFailoverURL && $obj->webhookEventFailoverURL = $webhookEventFailoverURL;
-        null !== $webhookEventURL && $obj->webhookEventURL = $webhookEventURL;
-        null !== $webhookTimeoutSecs && $obj->webhookTimeoutSecs = $webhookTimeoutSecs;
+        null !== $transport_protocol && $obj['transport_protocol'] = $transport_protocol;
+        null !== $webhook_api_version && $obj['webhook_api_version'] = $webhook_api_version;
+        null !== $webhook_event_failover_url && $obj->webhook_event_failover_url = $webhook_event_failover_url;
+        null !== $webhook_event_url && $obj->webhook_event_url = $webhook_event_url;
+        null !== $webhook_timeout_secs && $obj->webhook_timeout_secs = $webhook_timeout_secs;
 
         return $obj;
     }
@@ -250,7 +245,7 @@ final class IPConnectionUpdateParams implements BaseModel
         AnchorsiteOverride|string $anchorsiteOverride
     ): self {
         $obj = clone $this;
-        $obj['anchorsiteOverride'] = $anchorsiteOverride;
+        $obj['anchorsite_override'] = $anchorsiteOverride;
 
         return $obj;
     }
@@ -262,7 +257,7 @@ final class IPConnectionUpdateParams implements BaseModel
         ?string $androidPushCredentialID
     ): self {
         $obj = clone $this;
-        $obj->androidPushCredentialID = $androidPushCredentialID;
+        $obj->android_push_credential_id = $androidPushCredentialID;
 
         return $obj;
     }
@@ -270,7 +265,7 @@ final class IPConnectionUpdateParams implements BaseModel
     public function withConnectionName(string $connectionName): self
     {
         $obj = clone $this;
-        $obj->connectionName = $connectionName;
+        $obj->connection_name = $connectionName;
 
         return $obj;
     }
@@ -282,7 +277,7 @@ final class IPConnectionUpdateParams implements BaseModel
         bool $defaultOnHoldComfortNoiseEnabled
     ): self {
         $obj = clone $this;
-        $obj->defaultOnHoldComfortNoiseEnabled = $defaultOnHoldComfortNoiseEnabled;
+        $obj->default_on_hold_comfort_noise_enabled = $defaultOnHoldComfortNoiseEnabled;
 
         return $obj;
     }
@@ -295,7 +290,7 @@ final class IPConnectionUpdateParams implements BaseModel
     public function withDtmfType(DtmfType|string $dtmfType): self
     {
         $obj = clone $this;
-        $obj['dtmfType'] = $dtmfType;
+        $obj['dtmf_type'] = $dtmfType;
 
         return $obj;
     }
@@ -307,7 +302,7 @@ final class IPConnectionUpdateParams implements BaseModel
         bool $encodeContactHeaderEnabled
     ): self {
         $obj = clone $this;
-        $obj->encodeContactHeaderEnabled = $encodeContactHeaderEnabled;
+        $obj->encode_contact_header_enabled = $encodeContactHeaderEnabled;
 
         return $obj;
     }
@@ -321,7 +316,7 @@ final class IPConnectionUpdateParams implements BaseModel
         EncryptedMedia|string|null $encryptedMedia
     ): self {
         $obj = clone $this;
-        $obj['encryptedMedia'] = $encryptedMedia;
+        $obj['encrypted_media'] = $encryptedMedia;
 
         return $obj;
     }
@@ -340,7 +335,7 @@ final class IPConnectionUpdateParams implements BaseModel
     public function withIosPushCredentialID(?string $iosPushCredentialID): self
     {
         $obj = clone $this;
-        $obj->iosPushCredentialID = $iosPushCredentialID;
+        $obj->ios_push_credential_id = $iosPushCredentialID;
 
         return $obj;
     }
@@ -352,7 +347,7 @@ final class IPConnectionUpdateParams implements BaseModel
         bool $onnetT38PassthroughEnabled
     ): self {
         $obj = clone $this;
-        $obj->onnetT38PassthroughEnabled = $onnetT38PassthroughEnabled;
+        $obj->onnet_t38_passthrough_enabled = $onnetT38PassthroughEnabled;
 
         return $obj;
     }
@@ -368,7 +363,7 @@ final class IPConnectionUpdateParams implements BaseModel
     public function withRtcpSettings(ConnectionRtcpSettings $rtcpSettings): self
     {
         $obj = clone $this;
-        $obj->rtcpSettings = $rtcpSettings;
+        $obj->rtcp_settings = $rtcpSettings;
 
         return $obj;
     }
@@ -395,7 +390,7 @@ final class IPConnectionUpdateParams implements BaseModel
         TransportProtocol|string $transportProtocol
     ): self {
         $obj = clone $this;
-        $obj['transportProtocol'] = $transportProtocol;
+        $obj['transport_protocol'] = $transportProtocol;
 
         return $obj;
     }
@@ -409,7 +404,7 @@ final class IPConnectionUpdateParams implements BaseModel
         WebhookAPIVersion|string $webhookAPIVersion
     ): self {
         $obj = clone $this;
-        $obj['webhookAPIVersion'] = $webhookAPIVersion;
+        $obj['webhook_api_version'] = $webhookAPIVersion;
 
         return $obj;
     }
@@ -421,7 +416,7 @@ final class IPConnectionUpdateParams implements BaseModel
         ?string $webhookEventFailoverURL
     ): self {
         $obj = clone $this;
-        $obj->webhookEventFailoverURL = $webhookEventFailoverURL;
+        $obj->webhook_event_failover_url = $webhookEventFailoverURL;
 
         return $obj;
     }
@@ -432,7 +427,7 @@ final class IPConnectionUpdateParams implements BaseModel
     public function withWebhookEventURL(string $webhookEventURL): self
     {
         $obj = clone $this;
-        $obj->webhookEventURL = $webhookEventURL;
+        $obj->webhook_event_url = $webhookEventURL;
 
         return $obj;
     }
@@ -443,7 +438,7 @@ final class IPConnectionUpdateParams implements BaseModel
     public function withWebhookTimeoutSecs(?int $webhookTimeoutSecs): self
     {
         $obj = clone $this;
-        $obj->webhookTimeoutSecs = $webhookTimeoutSecs;
+        $obj->webhook_timeout_secs = $webhookTimeoutSecs;
 
         return $obj;
     }

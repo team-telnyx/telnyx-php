@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\MessagingProfiles\AutorespConfigs->delete
  *
- * @phpstan-type AutorespConfigDeleteParamsShape = array{profileID: string}
+ * @phpstan-type AutorespConfigDeleteParamsShape = array{profile_id: string}
  */
 final class AutorespConfigDeleteParams implements BaseModel
 {
@@ -23,14 +23,14 @@ final class AutorespConfigDeleteParams implements BaseModel
     use SdkParams;
 
     #[Api]
-    public string $profileID;
+    public string $profile_id;
 
     /**
      * `new AutorespConfigDeleteParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * AutorespConfigDeleteParams::with(profileID: ...)
+     * AutorespConfigDeleteParams::with(profile_id: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -49,11 +49,11 @@ final class AutorespConfigDeleteParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(string $profileID): self
+    public static function with(string $profile_id): self
     {
         $obj = new self;
 
-        $obj->profileID = $profileID;
+        $obj->profile_id = $profile_id;
 
         return $obj;
     }
@@ -61,7 +61,7 @@ final class AutorespConfigDeleteParams implements BaseModel
     public function withProfileID(string $profileID): self
     {
         $obj = clone $this;
-        $obj->profileID = $profileID;
+        $obj->profile_id = $profileID;
 
         return $obj;
     }

@@ -16,7 +16,7 @@ use Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateParams\Para
  * @see Telnyx\PortingOrders\ActionRequirements->initiate
  *
  * @phpstan-type ActionRequirementInitiateParamsShape = array{
- *   portingOrderID: string, params: Params
+ *   porting_order_id: string, params: Params
  * }
  */
 final class ActionRequirementInitiateParams implements BaseModel
@@ -26,7 +26,7 @@ final class ActionRequirementInitiateParams implements BaseModel
     use SdkParams;
 
     #[Api]
-    public string $portingOrderID;
+    public string $porting_order_id;
 
     /**
      * Required information for initiating the action requirement for AU ID verification.
@@ -39,7 +39,7 @@ final class ActionRequirementInitiateParams implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * ActionRequirementInitiateParams::with(portingOrderID: ..., params: ...)
+     * ActionRequirementInitiateParams::with(porting_order_id: ..., params: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -58,11 +58,11 @@ final class ActionRequirementInitiateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(string $portingOrderID, Params $params): self
+    public static function with(string $porting_order_id, Params $params): self
     {
         $obj = new self;
 
-        $obj->portingOrderID = $portingOrderID;
+        $obj->porting_order_id = $porting_order_id;
         $obj->params = $params;
 
         return $obj;
@@ -71,7 +71,7 @@ final class ActionRequirementInitiateParams implements BaseModel
     public function withPortingOrderID(string $portingOrderID): self
     {
         $obj = clone $this;
-        $obj->portingOrderID = $portingOrderID;
+        $obj->porting_order_id = $portingOrderID;
 
         return $obj;
     }

@@ -11,7 +11,10 @@ use Telnyx\PhoneNumbers\CsvDownloads\CsvDownload\Status;
 
 /**
  * @phpstan-type CsvDownloadShape = array{
- *   id?: string, recordType?: string, status?: value-of<Status>, url?: string
+ *   id?: string|null,
+ *   record_type?: string|null,
+ *   status?: value-of<Status>|null,
+ *   url?: string|null,
  * }
  */
 final class CsvDownload implements BaseModel
@@ -28,8 +31,8 @@ final class CsvDownload implements BaseModel
     /**
      * Identifies the type of the resource.
      */
-    #[Api('record_type', optional: true)]
-    public ?string $recordType;
+    #[Api(optional: true)]
+    public ?string $record_type;
 
     /**
      * Indicates the completion level of the CSV report. Only complete CSV download requests will be able to be retrieved.
@@ -59,14 +62,14 @@ final class CsvDownload implements BaseModel
      */
     public static function with(
         ?string $id = null,
-        ?string $recordType = null,
+        ?string $record_type = null,
         Status|string|null $status = null,
         ?string $url = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj->id = $id;
-        null !== $recordType && $obj->recordType = $recordType;
+        null !== $record_type && $obj->record_type = $record_type;
         null !== $status && $obj['status'] = $status;
         null !== $url && $obj->url = $url;
 
@@ -90,7 +93,7 @@ final class CsvDownload implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType;
+        $obj->record_type = $recordType;
 
         return $obj;
     }

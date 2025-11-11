@@ -22,7 +22,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\AI->summarize
  *
  * @phpstan-type AISummarizeParamsShape = array{
- *   bucket: string, filename: string, systemPrompt?: string
+ *   bucket: string, filename: string, system_prompt?: string
  * }
  */
 final class AISummarizeParams implements BaseModel
@@ -46,8 +46,8 @@ final class AISummarizeParams implements BaseModel
     /**
      * A system prompt to guide the summary generation.
      */
-    #[Api('system_prompt', optional: true)]
-    public ?string $systemPrompt;
+    #[Api(optional: true)]
+    public ?string $system_prompt;
 
     /**
      * `new AISummarizeParams()` is missing required properties by the API.
@@ -76,14 +76,14 @@ final class AISummarizeParams implements BaseModel
     public static function with(
         string $bucket,
         string $filename,
-        ?string $systemPrompt = null
+        ?string $system_prompt = null
     ): self {
         $obj = new self;
 
         $obj->bucket = $bucket;
         $obj->filename = $filename;
 
-        null !== $systemPrompt && $obj->systemPrompt = $systemPrompt;
+        null !== $system_prompt && $obj->system_prompt = $system_prompt;
 
         return $obj;
     }
@@ -116,7 +116,7 @@ final class AISummarizeParams implements BaseModel
     public function withSystemPrompt(string $systemPrompt): self
     {
         $obj = clone $this;
-        $obj->systemPrompt = $systemPrompt;
+        $obj->system_prompt = $systemPrompt;
 
         return $obj;
     }

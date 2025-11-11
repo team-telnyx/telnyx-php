@@ -7,20 +7,13 @@ namespace Telnyx\Services\PortingOrders;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberCreateParams;
-use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberCreateParams\Action;
-use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberCreateParams\PhoneNumberRange;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberDeleteParams;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberDeleteResponse;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberListParams;
-use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberListParams\Filter;
-use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberListParams\Page;
-use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberListParams\Sort;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberListResponse;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PortingOrders\AssociatedPhoneNumbersContract;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class AssociatedPhoneNumbersService implements AssociatedPhoneNumbersContract
 {
@@ -34,37 +27,21 @@ final class AssociatedPhoneNumbersService implements AssociatedPhoneNumbersContr
      *
      * Creates a new associated phone number for a porting order. This is used for partial porting in GB to specify which phone numbers should be kept or disconnected.
      *
-     * @param Action|value-of<Action> $action specifies the action to take with this phone number during partial porting
-     * @param PhoneNumberRange $phoneNumberRange
+     * @param array{
+     *   action: "keep"|"disconnect",
+     *   phone_number_range: array{end_at?: string, start_at?: string},
+     * }|AssociatedPhoneNumberCreateParams $params
      *
      * @throws APIException
      */
     public function create(
         string $portingOrderID,
-        $action,
-        $phoneNumberRange,
-        ?RequestOptions $requestOptions = null,
-    ): AssociatedPhoneNumberNewResponse {
-        $params = ['action' => $action, 'phoneNumberRange' => $phoneNumberRange];
-
-        return $this->createRaw($portingOrderID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        string $portingOrderID,
-        array $params,
+        array|AssociatedPhoneNumberCreateParams $params,
         ?RequestOptions $requestOptions = null,
     ): AssociatedPhoneNumberNewResponse {
         [$parsed, $options] = AssociatedPhoneNumberCreateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -82,39 +59,22 @@ final class AssociatedPhoneNumbersService implements AssociatedPhoneNumbersContr
      *
      * Returns a list of all associated phone numbers for a porting order. Associated phone numbers are used for partial porting in GB to specify which phone numbers should be kept or disconnected.
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[phone_number], filter[action]
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
-     * @param Sort $sort Consolidated sort parameter (deepObject style). Originally: sort[value]
+     * @param array{
+     *   filter?: array{action?: "keep"|"disconnect", phone_number?: string},
+     *   page?: array{number?: int, size?: int},
+     *   sort?: array{value?: "-created_at"|"created_at"},
+     * }|AssociatedPhoneNumberListParams $params
      *
      * @throws APIException
      */
     public function list(
         string $portingOrderID,
-        $filter = omit,
-        $page = omit,
-        $sort = omit,
-        ?RequestOptions $requestOptions = null,
-    ): AssociatedPhoneNumberListResponse {
-        $params = ['filter' => $filter, 'page' => $page, 'sort' => $sort];
-
-        return $this->listRaw($portingOrderID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        string $portingOrderID,
-        array $params,
+        array|AssociatedPhoneNumberListParams $params,
         ?RequestOptions $requestOptions = null,
     ): AssociatedPhoneNumberListResponse {
         [$parsed, $options] = AssociatedPhoneNumberListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -132,38 +92,21 @@ final class AssociatedPhoneNumbersService implements AssociatedPhoneNumbersContr
      *
      * Deletes an associated phone number from a porting order.
      *
-     * @param string $portingOrderID
+     * @param array{porting_order_id: string}|AssociatedPhoneNumberDeleteParams $params
      *
      * @throws APIException
      */
     public function delete(
         string $id,
-        $portingOrderID,
-        ?RequestOptions $requestOptions = null
-    ): AssociatedPhoneNumberDeleteResponse {
-        $params = ['portingOrderID' => $portingOrderID];
-
-        return $this->deleteRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|AssociatedPhoneNumberDeleteParams $params,
+        ?RequestOptions $requestOptions = null,
     ): AssociatedPhoneNumberDeleteResponse {
         [$parsed, $options] = AssociatedPhoneNumberDeleteParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
-        $portingOrderID = $parsed['portingOrderID'];
-        unset($parsed['portingOrderID']);
+        $portingOrderID = $parsed['porting_order_id'];
+        unset($parsed['porting_order_id']);
 
         // @phpstan-ignore-next-line;
         return $this->client->request(

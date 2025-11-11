@@ -34,21 +34,21 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  *   productionMessageContent: string,
  *   useCase: value-of<UseCaseCategories>,
  *   useCaseSummary: string,
- *   verificationRequestID: string,
- *   ageGatedContent?: bool,
- *   businessAddr2?: string,
- *   businessRegistrationCountry?: string,
- *   businessRegistrationNumber?: string,
- *   businessRegistrationType?: string,
- *   doingBusinessAs?: string,
- *   entityType?: value-of<TollFreeVerificationEntityType>,
- *   helpMessageResponse?: string,
- *   optInConfirmationResponse?: string,
- *   optInKeywords?: string,
- *   privacyPolicyURL?: string,
- *   termsAndConditionURL?: string,
- *   verificationStatus?: value-of<TfVerificationStatus>,
- *   webhookURL?: string,
+ *   verificationRequestId: string,
+ *   ageGatedContent?: bool|null,
+ *   businessAddr2?: string|null,
+ *   businessRegistrationCountry?: string|null,
+ *   businessRegistrationNumber?: string|null,
+ *   businessRegistrationType?: string|null,
+ *   doingBusinessAs?: string|null,
+ *   entityType?: value-of<TollFreeVerificationEntityType>|null,
+ *   helpMessageResponse?: string|null,
+ *   optInConfirmationResponse?: string|null,
+ *   optInKeywords?: string|null,
+ *   privacyPolicyURL?: string|null,
+ *   termsAndConditionURL?: string|null,
+ *   verificationStatus?: value-of<TfVerificationStatus>|null,
+ *   webhookUrl?: string|null,
  * }
  */
 final class VerificationRequestEgress implements BaseModel, ResponseConverter
@@ -130,8 +130,8 @@ final class VerificationRequestEgress implements BaseModel, ResponseConverter
     #[Api]
     public string $useCaseSummary;
 
-    #[Api('verificationRequestId')]
-    public string $verificationRequestID;
+    #[Api]
+    public string $verificationRequestId;
 
     #[Api(optional: true)]
     public ?bool $ageGatedContent;
@@ -182,8 +182,8 @@ final class VerificationRequestEgress implements BaseModel, ResponseConverter
     #[Api(enum: TfVerificationStatus::class, optional: true)]
     public ?string $verificationStatus;
 
-    #[Api('webhookUrl', optional: true)]
-    public ?string $webhookURL;
+    #[Api(optional: true)]
+    public ?string $webhookUrl;
 
     /**
      * `new VerificationRequestEgress()` is missing required properties by the API.
@@ -211,7 +211,7 @@ final class VerificationRequestEgress implements BaseModel, ResponseConverter
      *   productionMessageContent: ...,
      *   useCase: ...,
      *   useCaseSummary: ...,
-     *   verificationRequestID: ...,
+     *   verificationRequestId: ...,
      * )
      * ```
      *
@@ -280,7 +280,7 @@ final class VerificationRequestEgress implements BaseModel, ResponseConverter
         string $productionMessageContent,
         UseCaseCategories|string $useCase,
         string $useCaseSummary,
-        string $verificationRequestID,
+        string $verificationRequestId,
         ?bool $ageGatedContent = null,
         ?string $businessAddr2 = null,
         ?string $businessRegistrationCountry = null,
@@ -294,7 +294,7 @@ final class VerificationRequestEgress implements BaseModel, ResponseConverter
         ?string $privacyPolicyURL = null,
         ?string $termsAndConditionURL = null,
         TfVerificationStatus|string|null $verificationStatus = null,
-        ?string $webhookURL = null,
+        ?string $webhookUrl = null,
     ): self {
         $obj = new self;
 
@@ -318,7 +318,7 @@ final class VerificationRequestEgress implements BaseModel, ResponseConverter
         $obj->productionMessageContent = $productionMessageContent;
         $obj['useCase'] = $useCase;
         $obj->useCaseSummary = $useCaseSummary;
-        $obj->verificationRequestID = $verificationRequestID;
+        $obj->verificationRequestId = $verificationRequestId;
 
         null !== $ageGatedContent && $obj->ageGatedContent = $ageGatedContent;
         null !== $businessAddr2 && $obj->businessAddr2 = $businessAddr2;
@@ -333,7 +333,7 @@ final class VerificationRequestEgress implements BaseModel, ResponseConverter
         null !== $privacyPolicyURL && $obj->privacyPolicyURL = $privacyPolicyURL;
         null !== $termsAndConditionURL && $obj->termsAndConditionURL = $termsAndConditionURL;
         null !== $verificationStatus && $obj['verificationStatus'] = $verificationStatus;
-        null !== $webhookURL && $obj->webhookURL = $webhookURL;
+        null !== $webhookUrl && $obj->webhookUrl = $webhookUrl;
 
         return $obj;
     }
@@ -523,7 +523,7 @@ final class VerificationRequestEgress implements BaseModel, ResponseConverter
         string $verificationRequestID
     ): self {
         $obj = clone $this;
-        $obj->verificationRequestID = $verificationRequestID;
+        $obj->verificationRequestId = $verificationRequestID;
 
         return $obj;
     }
@@ -651,7 +651,7 @@ final class VerificationRequestEgress implements BaseModel, ResponseConverter
     public function withWebhookURL(string $webhookURL): self
     {
         $obj = clone $this;
-        $obj->webhookURL = $webhookURL;
+        $obj->webhookUrl = $webhookURL;
 
         return $obj;
     }

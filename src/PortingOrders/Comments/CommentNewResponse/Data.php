@@ -11,12 +11,12 @@ use Telnyx\PortingOrders\Comments\CommentNewResponse\Data\UserType;
 
 /**
  * @phpstan-type DataShape = array{
- *   id?: string,
- *   body?: string,
- *   createdAt?: \DateTimeInterface,
- *   portingOrderID?: string,
- *   recordType?: string,
- *   userType?: value-of<UserType>,
+ *   id?: string|null,
+ *   body?: string|null,
+ *   created_at?: \DateTimeInterface|null,
+ *   porting_order_id?: string|null,
+ *   record_type?: string|null,
+ *   user_type?: value-of<UserType>|null,
  * }
  */
 final class Data implements BaseModel
@@ -36,25 +36,25 @@ final class Data implements BaseModel
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Api('created_at', optional: true)]
-    public ?\DateTimeInterface $createdAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $created_at;
 
-    #[Api('porting_order_id', optional: true)]
-    public ?string $portingOrderID;
+    #[Api(optional: true)]
+    public ?string $porting_order_id;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api('record_type', optional: true)]
-    public ?string $recordType;
+    #[Api(optional: true)]
+    public ?string $record_type;
 
     /**
      * Indicates whether this comment was created by a Telnyx Admin, user, or system.
      *
-     * @var value-of<UserType>|null $userType
+     * @var value-of<UserType>|null $user_type
      */
-    #[Api('user_type', enum: UserType::class, optional: true)]
-    public ?string $userType;
+    #[Api(enum: UserType::class, optional: true)]
+    public ?string $user_type;
 
     public function __construct()
     {
@@ -66,24 +66,24 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param UserType|value-of<UserType> $userType
+     * @param UserType|value-of<UserType> $user_type
      */
     public static function with(
         ?string $id = null,
         ?string $body = null,
-        ?\DateTimeInterface $createdAt = null,
-        ?string $portingOrderID = null,
-        ?string $recordType = null,
-        UserType|string|null $userType = null,
+        ?\DateTimeInterface $created_at = null,
+        ?string $porting_order_id = null,
+        ?string $record_type = null,
+        UserType|string|null $user_type = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj->id = $id;
         null !== $body && $obj->body = $body;
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $portingOrderID && $obj->portingOrderID = $portingOrderID;
-        null !== $recordType && $obj->recordType = $recordType;
-        null !== $userType && $obj['userType'] = $userType;
+        null !== $created_at && $obj->created_at = $created_at;
+        null !== $porting_order_id && $obj->porting_order_id = $porting_order_id;
+        null !== $record_type && $obj->record_type = $record_type;
+        null !== $user_type && $obj['user_type'] = $user_type;
 
         return $obj;
     }
@@ -113,7 +113,7 @@ final class Data implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }
@@ -121,7 +121,7 @@ final class Data implements BaseModel
     public function withPortingOrderID(string $portingOrderID): self
     {
         $obj = clone $this;
-        $obj->portingOrderID = $portingOrderID;
+        $obj->porting_order_id = $portingOrderID;
 
         return $obj;
     }
@@ -132,7 +132,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType;
+        $obj->record_type = $recordType;
 
         return $obj;
     }
@@ -145,7 +145,7 @@ final class Data implements BaseModel
     public function withUserType(UserType|string $userType): self
     {
         $obj = clone $this;
-        $obj['userType'] = $userType;
+        $obj['user_type'] = $userType;
 
         return $obj;
     }

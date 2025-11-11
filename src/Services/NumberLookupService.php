@@ -8,11 +8,8 @@ use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\NumberLookup\NumberLookupGetResponse;
 use Telnyx\NumberLookup\NumberLookupRetrieveParams;
-use Telnyx\NumberLookup\NumberLookupRetrieveParams\Type;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\NumberLookupContract;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class NumberLookupService implements NumberLookupContract
 {
@@ -26,35 +23,18 @@ final class NumberLookupService implements NumberLookupContract
      *
      * Returns information about the provided phone number.
      *
-     * @param Type|value-of<Type> $type Specifies the type of number lookup to be performed
+     * @param array{type?: "carrier"|"caller-name"}|NumberLookupRetrieveParams $params
      *
      * @throws APIException
      */
     public function retrieve(
         string $phoneNumber,
-        $type = omit,
-        ?RequestOptions $requestOptions = null
-    ): NumberLookupGetResponse {
-        $params = ['type' => $type];
-
-        return $this->retrieveRaw($phoneNumber, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $phoneNumber,
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|NumberLookupRetrieveParams $params,
+        ?RequestOptions $requestOptions = null,
     ): NumberLookupGetResponse {
         [$parsed, $options] = NumberLookupRetrieveParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

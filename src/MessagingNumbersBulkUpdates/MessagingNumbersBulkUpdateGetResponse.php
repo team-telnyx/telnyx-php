@@ -12,7 +12,9 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\MessagingNumbersBulkUpdates\MessagingNumbersBulkUpdateGetResponse\Data;
 
 /**
- * @phpstan-type MessagingNumbersBulkUpdateGetResponseShape = array{data?: Data}
+ * @phpstan-type MessagingNumbersBulkUpdateGetResponseShape = array{
+ *   data?: Data|null
+ * }
  */
 final class MessagingNumbersBulkUpdateGetResponse implements BaseModel, ResponseConverter
 {

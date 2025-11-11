@@ -14,11 +14,11 @@ use Telnyx\WebhookDeliveries\WebhookDeliveryListResponse\Data\Attempt\Status;
  * Webhook delivery attempt details.
  *
  * @phpstan-type AttemptShape = array{
- *   errors?: list<int>,
- *   finishedAt?: \DateTimeInterface,
- *   http?: HTTP,
- *   startedAt?: \DateTimeInterface,
- *   status?: value-of<Status>,
+ *   errors?: list<int>|null,
+ *   finished_at?: \DateTimeInterface|null,
+ *   http?: HTTP|null,
+ *   started_at?: \DateTimeInterface|null,
+ *   status?: value-of<Status>|null,
  * }
  */
 final class Attempt implements BaseModel
@@ -37,8 +37,8 @@ final class Attempt implements BaseModel
     /**
      * ISO 8601 timestamp indicating when the attempt has finished.
      */
-    #[Api('finished_at', optional: true)]
-    public ?\DateTimeInterface $finishedAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $finished_at;
 
     /**
      * HTTP request and response information.
@@ -49,8 +49,8 @@ final class Attempt implements BaseModel
     /**
      * ISO 8601 timestamp indicating when the attempt was initiated.
      */
-    #[Api('started_at', optional: true)]
-    public ?\DateTimeInterface $startedAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $started_at;
 
     /** @var value-of<Status>|null $status */
     #[Api(enum: Status::class, optional: true)]
@@ -71,17 +71,17 @@ final class Attempt implements BaseModel
      */
     public static function with(
         ?array $errors = null,
-        ?\DateTimeInterface $finishedAt = null,
+        ?\DateTimeInterface $finished_at = null,
         ?HTTP $http = null,
-        ?\DateTimeInterface $startedAt = null,
+        ?\DateTimeInterface $started_at = null,
         Status|string|null $status = null,
     ): self {
         $obj = new self;
 
         null !== $errors && $obj->errors = $errors;
-        null !== $finishedAt && $obj->finishedAt = $finishedAt;
+        null !== $finished_at && $obj->finished_at = $finished_at;
         null !== $http && $obj->http = $http;
-        null !== $startedAt && $obj->startedAt = $startedAt;
+        null !== $started_at && $obj->started_at = $started_at;
         null !== $status && $obj['status'] = $status;
 
         return $obj;
@@ -106,7 +106,7 @@ final class Attempt implements BaseModel
     public function withFinishedAt(\DateTimeInterface $finishedAt): self
     {
         $obj = clone $this;
-        $obj->finishedAt = $finishedAt;
+        $obj->finished_at = $finishedAt;
 
         return $obj;
     }
@@ -128,7 +128,7 @@ final class Attempt implements BaseModel
     public function withStartedAt(\DateTimeInterface $startedAt): self
     {
         $obj = clone $this;
-        $obj->startedAt = $startedAt;
+        $obj->started_at = $startedAt;
 
         return $obj;
     }

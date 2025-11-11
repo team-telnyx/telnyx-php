@@ -10,7 +10,8 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type TelephonySettingsShape = array{
- *   defaultTexmlAppID?: string, supportsUnauthenticatedWebCalls?: bool
+ *   default_texml_app_id?: string|null,
+ *   supports_unauthenticated_web_calls?: bool|null,
  * }
  */
 final class TelephonySettings implements BaseModel
@@ -21,14 +22,14 @@ final class TelephonySettings implements BaseModel
     /**
      * Default Texml App used for voice calls with your assistant. This will be created automatically on assistant creation.
      */
-    #[Api('default_texml_app_id', optional: true)]
-    public ?string $defaultTexmlAppID;
+    #[Api(optional: true)]
+    public ?string $default_texml_app_id;
 
     /**
      * When enabled, allows users to interact with your AI assistant directly from your website without requiring authentication. This is required for FE widgets that work with assistants that have telephony enabled.
      */
-    #[Api('supports_unauthenticated_web_calls', optional: true)]
-    public ?bool $supportsUnauthenticatedWebCalls;
+    #[Api(optional: true)]
+    public ?bool $supports_unauthenticated_web_calls;
 
     public function __construct()
     {
@@ -41,13 +42,13 @@ final class TelephonySettings implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $defaultTexmlAppID = null,
-        ?bool $supportsUnauthenticatedWebCalls = null,
+        ?string $default_texml_app_id = null,
+        ?bool $supports_unauthenticated_web_calls = null,
     ): self {
         $obj = new self;
 
-        null !== $defaultTexmlAppID && $obj->defaultTexmlAppID = $defaultTexmlAppID;
-        null !== $supportsUnauthenticatedWebCalls && $obj->supportsUnauthenticatedWebCalls = $supportsUnauthenticatedWebCalls;
+        null !== $default_texml_app_id && $obj->default_texml_app_id = $default_texml_app_id;
+        null !== $supports_unauthenticated_web_calls && $obj->supports_unauthenticated_web_calls = $supports_unauthenticated_web_calls;
 
         return $obj;
     }
@@ -58,7 +59,7 @@ final class TelephonySettings implements BaseModel
     public function withDefaultTexmlAppID(string $defaultTexmlAppID): self
     {
         $obj = clone $this;
-        $obj->defaultTexmlAppID = $defaultTexmlAppID;
+        $obj->default_texml_app_id = $defaultTexmlAppID;
 
         return $obj;
     }
@@ -70,7 +71,7 @@ final class TelephonySettings implements BaseModel
         bool $supportsUnauthenticatedWebCalls
     ): self {
         $obj = clone $this;
-        $obj->supportsUnauthenticatedWebCalls = $supportsUnauthenticatedWebCalls;
+        $obj->supports_unauthenticated_web_calls = $supportsUnauthenticatedWebCalls;
 
         return $obj;
     }

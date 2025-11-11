@@ -18,7 +18,7 @@ use Telnyx\PortingOrders\PortingOrderListParams\Sort;
  * @see Telnyx\PortingOrders->list
  *
  * @phpstan-type PortingOrderListParamsShape = array{
- *   filter?: Filter, includePhoneNumbers?: bool, page?: Page, sort?: Sort
+ *   filter?: Filter, include_phone_numbers?: bool, page?: Page, sort?: Sort
  * }
  */
 final class PortingOrderListParams implements BaseModel
@@ -37,7 +37,7 @@ final class PortingOrderListParams implements BaseModel
      * Include the first 50 phone number objects in the results.
      */
     #[Api(optional: true)]
-    public ?bool $includePhoneNumbers;
+    public ?bool $include_phone_numbers;
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
@@ -63,14 +63,14 @@ final class PortingOrderListParams implements BaseModel
      */
     public static function with(
         ?Filter $filter = null,
-        ?bool $includePhoneNumbers = null,
+        ?bool $include_phone_numbers = null,
         ?Page $page = null,
         ?Sort $sort = null,
     ): self {
         $obj = new self;
 
         null !== $filter && $obj->filter = $filter;
-        null !== $includePhoneNumbers && $obj->includePhoneNumbers = $includePhoneNumbers;
+        null !== $include_phone_numbers && $obj->include_phone_numbers = $include_phone_numbers;
         null !== $page && $obj->page = $page;
         null !== $sort && $obj->sort = $sort;
 
@@ -94,7 +94,7 @@ final class PortingOrderListParams implements BaseModel
     public function withIncludePhoneNumbers(bool $includePhoneNumbers): self
     {
         $obj = clone $this;
-        $obj->includePhoneNumbers = $includePhoneNumbers;
+        $obj->include_phone_numbers = $includePhoneNumbers;
 
         return $obj;
     }

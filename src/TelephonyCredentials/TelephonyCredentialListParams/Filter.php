@@ -12,11 +12,11 @@ use Telnyx\Core\Contracts\BaseModel;
  * Consolidated filter parameter (deepObject style). Originally: filter[tag], filter[name], filter[status], filter[resource_id], filter[sip_username].
  *
  * @phpstan-type FilterShape = array{
- *   name?: string,
- *   resourceID?: string,
- *   sipUsername?: string,
- *   status?: string,
- *   tag?: string,
+ *   name?: string|null,
+ *   resource_id?: string|null,
+ *   sip_username?: string|null,
+ *   status?: string|null,
+ *   tag?: string|null,
  * }
  */
 final class Filter implements BaseModel
@@ -33,14 +33,14 @@ final class Filter implements BaseModel
     /**
      * Filter by resource_id.
      */
-    #[Api('resource_id', optional: true)]
-    public ?string $resourceID;
+    #[Api(optional: true)]
+    public ?string $resource_id;
 
     /**
      * Filter by sip_username.
      */
-    #[Api('sip_username', optional: true)]
-    public ?string $sipUsername;
+    #[Api(optional: true)]
+    public ?string $sip_username;
 
     /**
      * Filter by status.
@@ -66,16 +66,16 @@ final class Filter implements BaseModel
      */
     public static function with(
         ?string $name = null,
-        ?string $resourceID = null,
-        ?string $sipUsername = null,
+        ?string $resource_id = null,
+        ?string $sip_username = null,
         ?string $status = null,
         ?string $tag = null,
     ): self {
         $obj = new self;
 
         null !== $name && $obj->name = $name;
-        null !== $resourceID && $obj->resourceID = $resourceID;
-        null !== $sipUsername && $obj->sipUsername = $sipUsername;
+        null !== $resource_id && $obj->resource_id = $resource_id;
+        null !== $sip_username && $obj->sip_username = $sip_username;
         null !== $status && $obj->status = $status;
         null !== $tag && $obj->tag = $tag;
 
@@ -99,7 +99,7 @@ final class Filter implements BaseModel
     public function withResourceID(string $resourceID): self
     {
         $obj = clone $this;
-        $obj->resourceID = $resourceID;
+        $obj->resource_id = $resourceID;
 
         return $obj;
     }
@@ -110,7 +110,7 @@ final class Filter implements BaseModel
     public function withSipUsername(string $sipUsername): self
     {
         $obj = clone $this;
-        $obj->sipUsername = $sipUsername;
+        $obj->sip_username = $sipUsername;
 
         return $obj;
     }

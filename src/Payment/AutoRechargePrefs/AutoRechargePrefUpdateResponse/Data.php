@@ -11,13 +11,13 @@ use Telnyx\Payment\AutoRechargePrefs\AutoRechargePrefUpdateResponse\Data\Prefere
 
 /**
  * @phpstan-type DataShape = array{
- *   id?: string,
- *   enabled?: bool,
- *   invoiceEnabled?: bool,
- *   preference?: value-of<Preference>,
- *   rechargeAmount?: string,
- *   recordType?: string,
- *   thresholdAmount?: string,
+ *   id?: string|null,
+ *   enabled?: bool|null,
+ *   invoice_enabled?: bool|null,
+ *   preference?: value-of<Preference>|null,
+ *   recharge_amount?: string|null,
+ *   record_type?: string|null,
+ *   threshold_amount?: string|null,
  * }
  */
 final class Data implements BaseModel
@@ -37,8 +37,8 @@ final class Data implements BaseModel
     #[Api(optional: true)]
     public ?bool $enabled;
 
-    #[Api('invoice_enabled', optional: true)]
-    public ?bool $invoiceEnabled;
+    #[Api(optional: true)]
+    public ?bool $invoice_enabled;
 
     /**
      * The payment preference for auto recharge.
@@ -51,20 +51,20 @@ final class Data implements BaseModel
     /**
      * The amount to recharge the account, the actual recharge amount will be the amount necessary to reach the threshold amount plus the recharge amount.
      */
-    #[Api('recharge_amount', optional: true)]
-    public ?string $rechargeAmount;
+    #[Api(optional: true)]
+    public ?string $recharge_amount;
 
     /**
      * The record type.
      */
-    #[Api('record_type', optional: true)]
-    public ?string $recordType;
+    #[Api(optional: true)]
+    public ?string $record_type;
 
     /**
      * The threshold amount at which the account will be recharged.
      */
-    #[Api('threshold_amount', optional: true)]
-    public ?string $thresholdAmount;
+    #[Api(optional: true)]
+    public ?string $threshold_amount;
 
     public function __construct()
     {
@@ -81,21 +81,21 @@ final class Data implements BaseModel
     public static function with(
         ?string $id = null,
         ?bool $enabled = null,
-        ?bool $invoiceEnabled = null,
+        ?bool $invoice_enabled = null,
         Preference|string|null $preference = null,
-        ?string $rechargeAmount = null,
-        ?string $recordType = null,
-        ?string $thresholdAmount = null,
+        ?string $recharge_amount = null,
+        ?string $record_type = null,
+        ?string $threshold_amount = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj->id = $id;
         null !== $enabled && $obj->enabled = $enabled;
-        null !== $invoiceEnabled && $obj->invoiceEnabled = $invoiceEnabled;
+        null !== $invoice_enabled && $obj->invoice_enabled = $invoice_enabled;
         null !== $preference && $obj['preference'] = $preference;
-        null !== $rechargeAmount && $obj->rechargeAmount = $rechargeAmount;
-        null !== $recordType && $obj->recordType = $recordType;
-        null !== $thresholdAmount && $obj->thresholdAmount = $thresholdAmount;
+        null !== $recharge_amount && $obj->recharge_amount = $recharge_amount;
+        null !== $record_type && $obj->record_type = $record_type;
+        null !== $threshold_amount && $obj->threshold_amount = $threshold_amount;
 
         return $obj;
     }
@@ -125,7 +125,7 @@ final class Data implements BaseModel
     public function withInvoiceEnabled(bool $invoiceEnabled): self
     {
         $obj = clone $this;
-        $obj->invoiceEnabled = $invoiceEnabled;
+        $obj->invoice_enabled = $invoiceEnabled;
 
         return $obj;
     }
@@ -149,7 +149,7 @@ final class Data implements BaseModel
     public function withRechargeAmount(string $rechargeAmount): self
     {
         $obj = clone $this;
-        $obj->rechargeAmount = $rechargeAmount;
+        $obj->recharge_amount = $rechargeAmount;
 
         return $obj;
     }
@@ -160,7 +160,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType;
+        $obj->record_type = $recordType;
 
         return $obj;
     }
@@ -171,7 +171,7 @@ final class Data implements BaseModel
     public function withThresholdAmount(string $thresholdAmount): self
     {
         $obj = clone $this;
-        $obj->thresholdAmount = $thresholdAmount;
+        $obj->threshold_amount = $thresholdAmount;
 
         return $obj;
     }

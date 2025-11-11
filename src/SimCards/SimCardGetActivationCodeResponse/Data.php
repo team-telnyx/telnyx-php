@@ -9,7 +9,9 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type DataShape = array{activationCode?: string, recordType?: string}
+ * @phpstan-type DataShape = array{
+ *   activation_code?: string|null, record_type?: string|null
+ * }
  */
 final class Data implements BaseModel
 {
@@ -19,11 +21,11 @@ final class Data implements BaseModel
     /**
      * Contents of the eSIM activation QR code.
      */
-    #[Api('activation_code', optional: true)]
-    public ?string $activationCode;
+    #[Api(optional: true)]
+    public ?string $activation_code;
 
-    #[Api('record_type', optional: true)]
-    public ?string $recordType;
+    #[Api(optional: true)]
+    public ?string $record_type;
 
     public function __construct()
     {
@@ -36,13 +38,13 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $activationCode = null,
-        ?string $recordType = null
+        ?string $activation_code = null,
+        ?string $record_type = null
     ): self {
         $obj = new self;
 
-        null !== $activationCode && $obj->activationCode = $activationCode;
-        null !== $recordType && $obj->recordType = $recordType;
+        null !== $activation_code && $obj->activation_code = $activation_code;
+        null !== $record_type && $obj->record_type = $record_type;
 
         return $obj;
     }
@@ -53,7 +55,7 @@ final class Data implements BaseModel
     public function withActivationCode(string $activationCode): self
     {
         $obj = clone $this;
-        $obj->activationCode = $activationCode;
+        $obj->activation_code = $activationCode;
 
         return $obj;
     }
@@ -61,7 +63,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType;
+        $obj->record_type = $recordType;
 
         return $obj;
     }

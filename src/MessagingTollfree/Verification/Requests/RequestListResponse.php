@@ -14,7 +14,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  * A paginated response.
  *
  * @phpstan-type RequestListResponseShape = array{
- *   records?: list<VerificationRequestStatus>, totalRecords?: int
+ *   records?: list<VerificationRequestStatus>|null, total_records?: int|null
  * }
  */
 final class RequestListResponse implements BaseModel, ResponseConverter
@@ -35,8 +35,8 @@ final class RequestListResponse implements BaseModel, ResponseConverter
     /**
      * The total amount of records for these query parameters.
      */
-    #[Api('total_records', optional: true)]
-    public ?int $totalRecords;
+    #[Api(optional: true)]
+    public ?int $total_records;
 
     public function __construct()
     {
@@ -52,12 +52,12 @@ final class RequestListResponse implements BaseModel, ResponseConverter
      */
     public static function with(
         ?array $records = null,
-        ?int $totalRecords = null
+        ?int $total_records = null
     ): self {
         $obj = new self;
 
         null !== $records && $obj->records = $records;
-        null !== $totalRecords && $obj->totalRecords = $totalRecords;
+        null !== $total_records && $obj->total_records = $total_records;
 
         return $obj;
     }
@@ -81,7 +81,7 @@ final class RequestListResponse implements BaseModel, ResponseConverter
     public function withTotalRecords(int $totalRecords): self
     {
         $obj = clone $this;
-        $obj->totalRecords = $totalRecords;
+        $obj->total_records = $totalRecords;
 
         return $obj;
     }

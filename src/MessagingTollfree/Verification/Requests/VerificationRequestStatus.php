@@ -35,22 +35,22 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  *   useCase: value-of<UseCaseCategories>,
  *   useCaseSummary: string,
  *   verificationStatus: value-of<TfVerificationStatus>,
- *   ageGatedContent?: bool,
- *   businessAddr2?: string,
- *   businessRegistrationCountry?: string,
- *   businessRegistrationNumber?: string,
- *   businessRegistrationType?: string,
- *   createdAt?: \DateTimeInterface,
- *   doingBusinessAs?: string,
- *   entityType?: value-of<TollFreeVerificationEntityType>,
- *   helpMessageResponse?: string,
- *   optInConfirmationResponse?: string,
- *   optInKeywords?: string,
- *   privacyPolicyURL?: string,
- *   reason?: string,
- *   termsAndConditionURL?: string,
- *   updatedAt?: \DateTimeInterface,
- *   webhookURL?: string,
+ *   ageGatedContent?: bool|null,
+ *   businessAddr2?: string|null,
+ *   businessRegistrationCountry?: string|null,
+ *   businessRegistrationNumber?: string|null,
+ *   businessRegistrationType?: string|null,
+ *   createdAt?: \DateTimeInterface|null,
+ *   doingBusinessAs?: string|null,
+ *   entityType?: value-of<TollFreeVerificationEntityType>|null,
+ *   helpMessageResponse?: string|null,
+ *   optInConfirmationResponse?: string|null,
+ *   optInKeywords?: string|null,
+ *   privacyPolicyURL?: string|null,
+ *   reason?: string|null,
+ *   termsAndConditionURL?: string|null,
+ *   updatedAt?: \DateTimeInterface|null,
+ *   webhookUrl?: string|null,
  * }
  */
 final class VerificationRequestStatus implements BaseModel, ResponseConverter
@@ -190,8 +190,8 @@ final class VerificationRequestStatus implements BaseModel, ResponseConverter
     #[Api(optional: true)]
     public ?\DateTimeInterface $updatedAt;
 
-    #[Api('webhookUrl', optional: true)]
-    public ?string $webhookURL;
+    #[Api(optional: true)]
+    public ?string $webhookUrl;
 
     /**
      * `new VerificationRequestStatus()` is missing required properties by the API.
@@ -304,7 +304,7 @@ final class VerificationRequestStatus implements BaseModel, ResponseConverter
         ?string $reason = null,
         ?string $termsAndConditionURL = null,
         ?\DateTimeInterface $updatedAt = null,
-        ?string $webhookURL = null,
+        ?string $webhookUrl = null,
     ): self {
         $obj = new self;
 
@@ -345,7 +345,7 @@ final class VerificationRequestStatus implements BaseModel, ResponseConverter
         null !== $reason && $obj->reason = $reason;
         null !== $termsAndConditionURL && $obj->termsAndConditionURL = $termsAndConditionURL;
         null !== $updatedAt && $obj->updatedAt = $updatedAt;
-        null !== $webhookURL && $obj->webhookURL = $webhookURL;
+        null !== $webhookUrl && $obj->webhookUrl = $webhookUrl;
 
         return $obj;
     }
@@ -678,7 +678,7 @@ final class VerificationRequestStatus implements BaseModel, ResponseConverter
     public function withWebhookURL(string $webhookURL): self
     {
         $obj = clone $this;
-        $obj->webhookURL = $webhookURL;
+        $obj->webhookUrl = $webhookURL;
 
         return $obj;
     }

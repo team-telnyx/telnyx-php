@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type CustomHeaderShape = array{name?: string, value?: string}
+ * @phpstan-type CustomHeaderShape = array{name?: string|null, value?: string|null}
  */
 final class CustomHeader implements BaseModel
 {

@@ -34,7 +34,8 @@ final class DefaultGatewayTest extends TestCase
         }
 
         $result = $this->client->networks->defaultGateway->create(
-            '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
+            '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
+            []
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType

@@ -16,7 +16,7 @@ use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationCreateParam
  * @see Telnyx\SimCardDataUsageNotifications->create
  *
  * @phpstan-type SimCardDataUsageNotificationCreateParamsShape = array{
- *   simCardID: string, threshold: Threshold
+ *   sim_card_id: string, threshold: Threshold
  * }
  */
 final class SimCardDataUsageNotificationCreateParams implements BaseModel
@@ -28,8 +28,8 @@ final class SimCardDataUsageNotificationCreateParams implements BaseModel
     /**
      * The identification UUID of the related SIM card resource.
      */
-    #[Api('sim_card_id')]
-    public string $simCardID;
+    #[Api]
+    public string $sim_card_id;
 
     /**
      * Data usage threshold that will trigger the notification.
@@ -42,7 +42,7 @@ final class SimCardDataUsageNotificationCreateParams implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * SimCardDataUsageNotificationCreateParams::with(simCardID: ..., threshold: ...)
+     * SimCardDataUsageNotificationCreateParams::with(sim_card_id: ..., threshold: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -63,11 +63,11 @@ final class SimCardDataUsageNotificationCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(string $simCardID, Threshold $threshold): self
+    public static function with(string $sim_card_id, Threshold $threshold): self
     {
         $obj = new self;
 
-        $obj->simCardID = $simCardID;
+        $obj->sim_card_id = $sim_card_id;
         $obj->threshold = $threshold;
 
         return $obj;
@@ -79,7 +79,7 @@ final class SimCardDataUsageNotificationCreateParams implements BaseModel
     public function withSimCardID(string $simCardID): self
     {
         $obj = clone $this;
-        $obj->simCardID = $simCardID;
+        $obj->sim_card_id = $simCardID;
 
         return $obj;
     }

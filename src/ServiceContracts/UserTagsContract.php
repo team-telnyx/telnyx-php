@@ -6,34 +6,20 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
-use Telnyx\UserTags\UserTagListParams\Filter;
+use Telnyx\UserTags\UserTagListParams;
 use Telnyx\UserTags\UserTagListResponse;
-
-use const Telnyx\Core\OMIT as omit;
 
 interface UserTagsContract
 {
     /**
      * @api
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[starts_with]
+     * @param array<mixed>|UserTagListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        ?RequestOptions $requestOptions = null
-    ): UserTagListResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
+        array|UserTagListParams $params,
         ?RequestOptions $requestOptions = null
     ): UserTagListResponse;
 }

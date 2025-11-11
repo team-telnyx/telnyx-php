@@ -16,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Conferences\Actions->recordPause
  *
  * @phpstan-type ActionRecordPauseParamsShape = array{
- *   commandID?: string, recordingID?: string, region?: Region|value-of<Region>
+ *   command_id?: string, recording_id?: string, region?: Region|value-of<Region>
  * }
  */
 final class ActionRecordPauseParams implements BaseModel
@@ -28,14 +28,14 @@ final class ActionRecordPauseParams implements BaseModel
     /**
      * Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      */
-    #[Api('command_id', optional: true)]
-    public ?string $commandID;
+    #[Api(optional: true)]
+    public ?string $command_id;
 
     /**
      * Use this field to pause specific recording.
      */
-    #[Api('recording_id', optional: true)]
-    public ?string $recordingID;
+    #[Api(optional: true)]
+    public ?string $recording_id;
 
     /**
      * Region where the conference data is located. Defaults to the region defined in user's data locality settings (Europe or US).
@@ -58,14 +58,14 @@ final class ActionRecordPauseParams implements BaseModel
      * @param Region|value-of<Region> $region
      */
     public static function with(
-        ?string $commandID = null,
-        ?string $recordingID = null,
+        ?string $command_id = null,
+        ?string $recording_id = null,
         Region|string|null $region = null,
     ): self {
         $obj = new self;
 
-        null !== $commandID && $obj->commandID = $commandID;
-        null !== $recordingID && $obj->recordingID = $recordingID;
+        null !== $command_id && $obj->command_id = $command_id;
+        null !== $recording_id && $obj->recording_id = $recording_id;
         null !== $region && $obj['region'] = $region;
 
         return $obj;
@@ -77,7 +77,7 @@ final class ActionRecordPauseParams implements BaseModel
     public function withCommandID(string $commandID): self
     {
         $obj = clone $this;
-        $obj->commandID = $commandID;
+        $obj->command_id = $commandID;
 
         return $obj;
     }
@@ -88,7 +88,7 @@ final class ActionRecordPauseParams implements BaseModel
     public function withRecordingID(string $recordingID): self
     {
         $obj = clone $this;
-        $obj->recordingID = $recordingID;
+        $obj->recording_id = $recordingID;
 
         return $obj;
     }

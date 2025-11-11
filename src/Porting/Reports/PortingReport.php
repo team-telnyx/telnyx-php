@@ -12,14 +12,14 @@ use Telnyx\Porting\Reports\PortingReport\Status;
 
 /**
  * @phpstan-type PortingReportShape = array{
- *   id?: string,
- *   createdAt?: \DateTimeInterface,
- *   documentID?: string,
- *   params?: ExportPortingOrdersCsvReport,
- *   recordType?: string,
- *   reportType?: value-of<ReportType>,
- *   status?: value-of<Status>,
- *   updatedAt?: \DateTimeInterface,
+ *   id?: string|null,
+ *   created_at?: \DateTimeInterface|null,
+ *   document_id?: string|null,
+ *   params?: ExportPortingOrdersCsvReport|null,
+ *   record_type?: string|null,
+ *   report_type?: value-of<ReportType>|null,
+ *   status?: value-of<Status>|null,
+ *   updated_at?: \DateTimeInterface|null,
  * }
  */
 final class PortingReport implements BaseModel
@@ -36,14 +36,14 @@ final class PortingReport implements BaseModel
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Api('created_at', optional: true)]
-    public ?\DateTimeInterface $createdAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $created_at;
 
     /**
      * Identifies the document that was uploaded when report was generated. This field is only populated when the report is under completed status.
      */
-    #[Api('document_id', optional: true)]
-    public ?string $documentID;
+    #[Api(optional: true)]
+    public ?string $document_id;
 
     /**
      * The parameters for generating a porting orders CSV report.
@@ -54,16 +54,16 @@ final class PortingReport implements BaseModel
     /**
      * Identifies the type of the resource.
      */
-    #[Api('record_type', optional: true)]
-    public ?string $recordType;
+    #[Api(optional: true)]
+    public ?string $record_type;
 
     /**
      * Identifies the type of report.
      *
-     * @var value-of<ReportType>|null $reportType
+     * @var value-of<ReportType>|null $report_type
      */
-    #[Api('report_type', enum: ReportType::class, optional: true)]
-    public ?string $reportType;
+    #[Api(enum: ReportType::class, optional: true)]
+    public ?string $report_type;
 
     /**
      * The current status of the report generation.
@@ -76,8 +76,8 @@ final class PortingReport implements BaseModel
     /**
      * ISO 8601 formatted date indicating when the resource was updated.
      */
-    #[Api('updated_at', optional: true)]
-    public ?\DateTimeInterface $updatedAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $updated_at;
 
     public function __construct()
     {
@@ -89,29 +89,29 @@ final class PortingReport implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ReportType|value-of<ReportType> $reportType
+     * @param ReportType|value-of<ReportType> $report_type
      * @param Status|value-of<Status> $status
      */
     public static function with(
         ?string $id = null,
-        ?\DateTimeInterface $createdAt = null,
-        ?string $documentID = null,
+        ?\DateTimeInterface $created_at = null,
+        ?string $document_id = null,
         ?ExportPortingOrdersCsvReport $params = null,
-        ?string $recordType = null,
-        ReportType|string|null $reportType = null,
+        ?string $record_type = null,
+        ReportType|string|null $report_type = null,
         Status|string|null $status = null,
-        ?\DateTimeInterface $updatedAt = null,
+        ?\DateTimeInterface $updated_at = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj->id = $id;
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $documentID && $obj->documentID = $documentID;
+        null !== $created_at && $obj->created_at = $created_at;
+        null !== $document_id && $obj->document_id = $document_id;
         null !== $params && $obj->params = $params;
-        null !== $recordType && $obj->recordType = $recordType;
-        null !== $reportType && $obj['reportType'] = $reportType;
+        null !== $record_type && $obj->record_type = $record_type;
+        null !== $report_type && $obj['report_type'] = $report_type;
         null !== $status && $obj['status'] = $status;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
+        null !== $updated_at && $obj->updated_at = $updated_at;
 
         return $obj;
     }
@@ -133,7 +133,7 @@ final class PortingReport implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }
@@ -144,7 +144,7 @@ final class PortingReport implements BaseModel
     public function withDocumentID(string $documentID): self
     {
         $obj = clone $this;
-        $obj->documentID = $documentID;
+        $obj->document_id = $documentID;
 
         return $obj;
     }
@@ -166,7 +166,7 @@ final class PortingReport implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType;
+        $obj->record_type = $recordType;
 
         return $obj;
     }
@@ -179,7 +179,7 @@ final class PortingReport implements BaseModel
     public function withReportType(ReportType|string $reportType): self
     {
         $obj = clone $this;
-        $obj['reportType'] = $reportType;
+        $obj['report_type'] = $reportType;
 
         return $obj;
     }
@@ -203,7 +203,7 @@ final class PortingReport implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $obj->updated_at = $updatedAt;
 
         return $obj;
     }

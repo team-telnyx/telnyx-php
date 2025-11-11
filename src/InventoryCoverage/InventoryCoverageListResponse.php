@@ -14,7 +14,7 @@ use Telnyx\InventoryCoverage\InventoryCoverageListResponse\Meta;
 
 /**
  * @phpstan-type InventoryCoverageListResponseShape = array{
- *   data?: list<Data>, meta?: Meta
+ *   data?: list<Data>|null, meta?: Meta|null
  * }
  */
 final class InventoryCoverageListResponse implements BaseModel, ResponseConverter

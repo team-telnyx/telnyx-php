@@ -16,7 +16,7 @@ use Telnyx\PortingOrders\Actions\ActionShareParams\Permissions;
  * @see Telnyx\PortingOrders\Actions->share
  *
  * @phpstan-type ActionShareParamsShape = array{
- *   expiresInSeconds?: int, permissions?: Permissions|value-of<Permissions>
+ *   expires_in_seconds?: int, permissions?: Permissions|value-of<Permissions>
  * }
  */
 final class ActionShareParams implements BaseModel
@@ -28,8 +28,8 @@ final class ActionShareParams implements BaseModel
     /**
      * The number of seconds the token will be valid for.
      */
-    #[Api('expires_in_seconds', optional: true)]
-    public ?int $expiresInSeconds;
+    #[Api(optional: true)]
+    public ?int $expires_in_seconds;
 
     /**
      * The permissions the token will have.
@@ -52,12 +52,12 @@ final class ActionShareParams implements BaseModel
      * @param Permissions|value-of<Permissions> $permissions
      */
     public static function with(
-        ?int $expiresInSeconds = null,
+        ?int $expires_in_seconds = null,
         Permissions|string|null $permissions = null
     ): self {
         $obj = new self;
 
-        null !== $expiresInSeconds && $obj->expiresInSeconds = $expiresInSeconds;
+        null !== $expires_in_seconds && $obj->expires_in_seconds = $expires_in_seconds;
         null !== $permissions && $obj['permissions'] = $permissions;
 
         return $obj;
@@ -69,7 +69,7 @@ final class ActionShareParams implements BaseModel
     public function withExpiresInSeconds(int $expiresInSeconds): self
     {
         $obj = clone $this;
-        $obj->expiresInSeconds = $expiresInSeconds;
+        $obj->expires_in_seconds = $expiresInSeconds;
 
         return $obj;
     }

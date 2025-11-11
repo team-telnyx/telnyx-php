@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\BundlePricing\UserBundles->listResources
  *
  * @phpstan-type UserBundleListResourcesParamsShape = array{
- *   authorizationBearer?: string
+ *   authorization_bearer?: string
  * }
  */
 final class UserBundleListResourcesParams implements BaseModel
@@ -28,7 +28,7 @@ final class UserBundleListResourcesParams implements BaseModel
      * Authenticates the request with your Telnyx API V2 KEY.
      */
     #[Api(optional: true)]
-    public ?string $authorizationBearer;
+    public ?string $authorization_bearer;
 
     public function __construct()
     {
@@ -40,11 +40,11 @@ final class UserBundleListResourcesParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?string $authorizationBearer = null): self
+    public static function with(?string $authorization_bearer = null): self
     {
         $obj = new self;
 
-        null !== $authorizationBearer && $obj->authorizationBearer = $authorizationBearer;
+        null !== $authorization_bearer && $obj->authorization_bearer = $authorization_bearer;
 
         return $obj;
     }
@@ -55,7 +55,7 @@ final class UserBundleListResourcesParams implements BaseModel
     public function withAuthorizationBearer(string $authorizationBearer): self
     {
         $obj = clone $this;
-        $obj->authorizationBearer = $authorizationBearer;
+        $obj->authorization_bearer = $authorizationBearer;
 
         return $obj;
     }

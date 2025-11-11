@@ -35,7 +35,7 @@ final class RunsTest extends TestCase
 
         $result = $this->client->ai->assistants->tests->runs->retrieve(
             'run_id',
-            'test_id'
+            ['test_id' => 'test_id']
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -50,7 +50,7 @@ final class RunsTest extends TestCase
 
         $result = $this->client->ai->assistants->tests->runs->retrieve(
             'run_id',
-            'test_id'
+            ['test_id' => 'test_id']
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -63,7 +63,7 @@ final class RunsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ai->assistants->tests->runs->list('test_id');
+        $result = $this->client->ai->assistants->tests->runs->list('test_id', []);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -75,7 +75,10 @@ final class RunsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ai->assistants->tests->runs->trigger('test_id');
+        $result = $this->client->ai->assistants->tests->runs->trigger(
+            'test_id',
+            []
+        );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

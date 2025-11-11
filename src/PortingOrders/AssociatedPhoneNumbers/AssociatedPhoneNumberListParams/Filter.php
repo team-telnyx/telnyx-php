@@ -13,7 +13,7 @@ use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberListParams\
  * Consolidated filter parameter (deepObject style). Originally: filter[phone_number], filter[action].
  *
  * @phpstan-type FilterShape = array{
- *   action?: value-of<Action>, phoneNumber?: string
+ *   action?: value-of<Action>|null, phone_number?: string|null
  * }
  */
 final class Filter implements BaseModel
@@ -32,8 +32,8 @@ final class Filter implements BaseModel
     /**
      * Filter results by a phone number. It should be in E.164 format.
      */
-    #[Api('phone_number', optional: true)]
-    public ?string $phoneNumber;
+    #[Api(optional: true)]
+    public ?string $phone_number;
 
     public function __construct()
     {
@@ -49,12 +49,12 @@ final class Filter implements BaseModel
      */
     public static function with(
         Action|string|null $action = null,
-        ?string $phoneNumber = null
+        ?string $phone_number = null
     ): self {
         $obj = new self;
 
         null !== $action && $obj['action'] = $action;
-        null !== $phoneNumber && $obj->phoneNumber = $phoneNumber;
+        null !== $phone_number && $obj->phone_number = $phone_number;
 
         return $obj;
     }
@@ -78,7 +78,7 @@ final class Filter implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj->phoneNumber = $phoneNumber;
+        $obj->phone_number = $phoneNumber;
 
         return $obj;
     }

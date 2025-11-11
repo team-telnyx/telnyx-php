@@ -49,7 +49,7 @@ final class ShortCodesTest extends TestCase
 
         $result = $this->client->shortCodes->update(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            'abc85f64-5717-4562-b3fc-2c9600000000',
+            ['messaging_profile_id' => 'abc85f64-5717-4562-b3fc-2c9600000000'],
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -64,7 +64,7 @@ final class ShortCodesTest extends TestCase
 
         $result = $this->client->shortCodes->update(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            'abc85f64-5717-4562-b3fc-2c9600000000',
+            ['messaging_profile_id' => 'abc85f64-5717-4562-b3fc-2c9600000000'],
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -77,7 +77,7 @@ final class ShortCodesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->shortCodes->list();
+        $result = $this->client->shortCodes->list([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

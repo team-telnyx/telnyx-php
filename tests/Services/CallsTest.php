@@ -33,11 +33,11 @@ final class CallsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->calls->dial(
-            connectionID: '7267xxxxxxxxxxxxxx',
-            from: '+18005550101',
-            to: '+18005550100 or sip:username@sip.telnyx.com',
-        );
+        $result = $this->client->calls->dial([
+            'connection_id' => '7267xxxxxxxxxxxxxx',
+            'from' => '+18005550101',
+            'to' => '+18005550100 or sip:username@sip.telnyx.com',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -49,11 +49,11 @@ final class CallsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->calls->dial(
-            connectionID: '7267xxxxxxxxxxxxxx',
-            from: '+18005550101',
-            to: '+18005550100 or sip:username@sip.telnyx.com',
-        );
+        $result = $this->client->calls->dial([
+            'connection_id' => '7267xxxxxxxxxxxxxx',
+            'from' => '+18005550101',
+            'to' => '+18005550100 or sip:username@sip.telnyx.com',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

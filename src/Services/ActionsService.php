@@ -12,12 +12,12 @@ use Telnyx\Services\Actions\RegisterService;
 final class ActionsService implements ActionsContract
 {
     /**
-     * @@api
+     * @api
      */
     public PurchaseService $purchase;
 
     /**
-     * @@api
+     * @api
      */
     public RegisterService $register;
 

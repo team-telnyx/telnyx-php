@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type DataShape = array{channels?: int, recordType?: string}
+ * @phpstan-type DataShape = array{channels?: int|null, record_type?: string|null}
  */
 final class Data implements BaseModel
 {
@@ -25,8 +25,8 @@ final class Data implements BaseModel
     /**
      * Identifies the type of the response.
      */
-    #[Api('record_type', optional: true)]
-    public ?string $recordType;
+    #[Api(optional: true)]
+    public ?string $record_type;
 
     public function __construct()
     {
@@ -40,12 +40,12 @@ final class Data implements BaseModel
      */
     public static function with(
         ?int $channels = null,
-        ?string $recordType = null
+        ?string $record_type = null
     ): self {
         $obj = new self;
 
         null !== $channels && $obj->channels = $channels;
-        null !== $recordType && $obj->recordType = $recordType;
+        null !== $record_type && $obj->record_type = $record_type;
 
         return $obj;
     }
@@ -67,7 +67,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType;
+        $obj->record_type = $recordType;
 
         return $obj;
     }

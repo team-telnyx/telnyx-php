@@ -14,21 +14,21 @@ use Telnyx\Texml\Accounts\Calls\Recordings\RecordingRecordingSidJsonResponse\Tra
 
 /**
  * @phpstan-type RecordingRecordingSidJsonResponseShape = array{
- *   accountSid?: string,
- *   callSid?: string,
- *   channels?: 1|2,
- *   conferenceSid?: string|null,
- *   dateCreated?: \DateTimeInterface,
- *   dateUpdated?: \DateTimeInterface,
+ *   account_sid?: string|null,
+ *   call_sid?: string|null,
+ *   channels?: null|1|2,
+ *   conference_sid?: string|null,
+ *   date_created?: \DateTimeInterface|null,
+ *   date_updated?: \DateTimeInterface|null,
  *   duration?: string|null,
- *   errorCode?: string|null,
+ *   error_code?: string|null,
  *   price?: string|null,
- *   priceUnit?: string|null,
- *   sid?: string,
- *   source?: value-of<Source>,
- *   startTime?: \DateTimeInterface,
- *   track?: value-of<Track>,
- *   uri?: string,
+ *   price_unit?: string|null,
+ *   sid?: string|null,
+ *   source?: value-of<Source>|null,
+ *   start_time?: \DateTimeInterface|null,
+ *   track?: value-of<Track>|null,
+ *   uri?: string|null,
  * }
  */
 final class RecordingRecordingSidJsonResponse implements BaseModel, ResponseConverter
@@ -38,24 +38,24 @@ final class RecordingRecordingSidJsonResponse implements BaseModel, ResponseConv
 
     use SdkResponse;
 
-    #[Api('account_sid', optional: true)]
-    public ?string $accountSid;
+    #[Api(optional: true)]
+    public ?string $account_sid;
 
-    #[Api('call_sid', optional: true)]
-    public ?string $callSid;
+    #[Api(optional: true)]
+    public ?string $call_sid;
 
     /** @var 1|2|null $channels */
     #[Api(optional: true)]
     public ?int $channels;
 
-    #[Api('conference_sid', nullable: true, optional: true)]
-    public ?string $conferenceSid;
+    #[Api(nullable: true, optional: true)]
+    public ?string $conference_sid;
 
-    #[Api('date_created', optional: true)]
-    public ?\DateTimeInterface $dateCreated;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $date_created;
 
-    #[Api('date_updated', optional: true)]
-    public ?\DateTimeInterface $dateUpdated;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $date_updated;
 
     /**
      * The duration of this recording, given in seconds.
@@ -63,8 +63,8 @@ final class RecordingRecordingSidJsonResponse implements BaseModel, ResponseConv
     #[Api(nullable: true, optional: true)]
     public ?string $duration;
 
-    #[Api('error_code', nullable: true, optional: true)]
-    public ?string $errorCode;
+    #[Api(nullable: true, optional: true)]
+    public ?string $error_code;
 
     /**
      * The price of this recording, the currency is specified in the price_unit field.
@@ -75,8 +75,8 @@ final class RecordingRecordingSidJsonResponse implements BaseModel, ResponseConv
     /**
      * The unit in which the price is given.
      */
-    #[Api('price_unit', nullable: true, optional: true)]
-    public ?string $priceUnit;
+    #[Api(nullable: true, optional: true)]
+    public ?string $price_unit;
 
     /**
      * Identifier of a resource.
@@ -92,8 +92,8 @@ final class RecordingRecordingSidJsonResponse implements BaseModel, ResponseConv
     #[Api(enum: Source::class, optional: true)]
     public ?string $source;
 
-    #[Api('start_time', optional: true)]
-    public ?\DateTimeInterface $startTime;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $start_time;
 
     /**
      * The audio track to record for the call. The default is `both`.
@@ -124,37 +124,37 @@ final class RecordingRecordingSidJsonResponse implements BaseModel, ResponseConv
      * @param Track|value-of<Track> $track
      */
     public static function with(
-        ?string $accountSid = null,
-        ?string $callSid = null,
+        ?string $account_sid = null,
+        ?string $call_sid = null,
         ?int $channels = null,
-        ?string $conferenceSid = null,
-        ?\DateTimeInterface $dateCreated = null,
-        ?\DateTimeInterface $dateUpdated = null,
+        ?string $conference_sid = null,
+        ?\DateTimeInterface $date_created = null,
+        ?\DateTimeInterface $date_updated = null,
         ?string $duration = null,
-        ?string $errorCode = null,
+        ?string $error_code = null,
         ?string $price = null,
-        ?string $priceUnit = null,
+        ?string $price_unit = null,
         ?string $sid = null,
         Source|string|null $source = null,
-        ?\DateTimeInterface $startTime = null,
+        ?\DateTimeInterface $start_time = null,
         Track|string|null $track = null,
         ?string $uri = null,
     ): self {
         $obj = new self;
 
-        null !== $accountSid && $obj->accountSid = $accountSid;
-        null !== $callSid && $obj->callSid = $callSid;
+        null !== $account_sid && $obj->account_sid = $account_sid;
+        null !== $call_sid && $obj->call_sid = $call_sid;
         null !== $channels && $obj->channels = $channels;
-        null !== $conferenceSid && $obj->conferenceSid = $conferenceSid;
-        null !== $dateCreated && $obj->dateCreated = $dateCreated;
-        null !== $dateUpdated && $obj->dateUpdated = $dateUpdated;
+        null !== $conference_sid && $obj->conference_sid = $conference_sid;
+        null !== $date_created && $obj->date_created = $date_created;
+        null !== $date_updated && $obj->date_updated = $date_updated;
         null !== $duration && $obj->duration = $duration;
-        null !== $errorCode && $obj->errorCode = $errorCode;
+        null !== $error_code && $obj->error_code = $error_code;
         null !== $price && $obj->price = $price;
-        null !== $priceUnit && $obj->priceUnit = $priceUnit;
+        null !== $price_unit && $obj->price_unit = $price_unit;
         null !== $sid && $obj->sid = $sid;
         null !== $source && $obj['source'] = $source;
-        null !== $startTime && $obj->startTime = $startTime;
+        null !== $start_time && $obj->start_time = $start_time;
         null !== $track && $obj['track'] = $track;
         null !== $uri && $obj->uri = $uri;
 
@@ -164,7 +164,7 @@ final class RecordingRecordingSidJsonResponse implements BaseModel, ResponseConv
     public function withAccountSid(string $accountSid): self
     {
         $obj = clone $this;
-        $obj->accountSid = $accountSid;
+        $obj->account_sid = $accountSid;
 
         return $obj;
     }
@@ -172,7 +172,7 @@ final class RecordingRecordingSidJsonResponse implements BaseModel, ResponseConv
     public function withCallSid(string $callSid): self
     {
         $obj = clone $this;
-        $obj->callSid = $callSid;
+        $obj->call_sid = $callSid;
 
         return $obj;
     }
@@ -191,7 +191,7 @@ final class RecordingRecordingSidJsonResponse implements BaseModel, ResponseConv
     public function withConferenceSid(?string $conferenceSid): self
     {
         $obj = clone $this;
-        $obj->conferenceSid = $conferenceSid;
+        $obj->conference_sid = $conferenceSid;
 
         return $obj;
     }
@@ -199,7 +199,7 @@ final class RecordingRecordingSidJsonResponse implements BaseModel, ResponseConv
     public function withDateCreated(\DateTimeInterface $dateCreated): self
     {
         $obj = clone $this;
-        $obj->dateCreated = $dateCreated;
+        $obj->date_created = $dateCreated;
 
         return $obj;
     }
@@ -207,7 +207,7 @@ final class RecordingRecordingSidJsonResponse implements BaseModel, ResponseConv
     public function withDateUpdated(\DateTimeInterface $dateUpdated): self
     {
         $obj = clone $this;
-        $obj->dateUpdated = $dateUpdated;
+        $obj->date_updated = $dateUpdated;
 
         return $obj;
     }
@@ -226,7 +226,7 @@ final class RecordingRecordingSidJsonResponse implements BaseModel, ResponseConv
     public function withErrorCode(?string $errorCode): self
     {
         $obj = clone $this;
-        $obj->errorCode = $errorCode;
+        $obj->error_code = $errorCode;
 
         return $obj;
     }
@@ -248,7 +248,7 @@ final class RecordingRecordingSidJsonResponse implements BaseModel, ResponseConv
     public function withPriceUnit(?string $priceUnit): self
     {
         $obj = clone $this;
-        $obj->priceUnit = $priceUnit;
+        $obj->price_unit = $priceUnit;
 
         return $obj;
     }
@@ -280,7 +280,7 @@ final class RecordingRecordingSidJsonResponse implements BaseModel, ResponseConv
     public function withStartTime(\DateTimeInterface $startTime): self
     {
         $obj = clone $this;
-        $obj->startTime = $startTime;
+        $obj->start_time = $startTime;
 
         return $obj;
     }

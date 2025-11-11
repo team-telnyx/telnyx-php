@@ -10,20 +10,13 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\VerifyProfilesContract;
 use Telnyx\VerifyProfiles\MessageTemplate;
 use Telnyx\VerifyProfiles\VerifyProfileCreateParams;
-use Telnyx\VerifyProfiles\VerifyProfileCreateParams\Call;
-use Telnyx\VerifyProfiles\VerifyProfileCreateParams\Flashcall;
-use Telnyx\VerifyProfiles\VerifyProfileCreateParams\SMS;
 use Telnyx\VerifyProfiles\VerifyProfileCreateTemplateParams;
 use Telnyx\VerifyProfiles\VerifyProfileData;
 use Telnyx\VerifyProfiles\VerifyProfileGetTemplatesResponse;
 use Telnyx\VerifyProfiles\VerifyProfileListParams;
-use Telnyx\VerifyProfiles\VerifyProfileListParams\Filter;
-use Telnyx\VerifyProfiles\VerifyProfileListParams\Page;
 use Telnyx\VerifyProfiles\VerifyProfileListResponse;
 use Telnyx\VerifyProfiles\VerifyProfileUpdateParams;
 use Telnyx\VerifyProfiles\VerifyProfileUpdateTemplateParams;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class VerifyProfilesService implements VerifyProfilesContract
 {
@@ -37,53 +30,41 @@ final class VerifyProfilesService implements VerifyProfilesContract
      *
      * Creates a new Verify profile to associate verifications with.
      *
-     * @param string $name
-     * @param Call $call
-     * @param Flashcall $flashcall
-     * @param string $language
-     * @param SMS $sms
-     * @param string $webhookFailoverURL
-     * @param string $webhookURL
+     * @param array{
+     *   name: string,
+     *   call?: array{
+     *     app_name?: string,
+     *     code_length?: int,
+     *     default_verification_timeout_secs?: int,
+     *     messaging_template_id?: string,
+     *     whitelisted_destinations?: list<string>,
+     *   },
+     *   flashcall?: array{
+     *     default_verification_timeout_secs?: int,
+     *     whitelisted_destinations?: list<string>,
+     *   },
+     *   language?: string,
+     *   sms?: array{
+     *     whitelisted_destinations: list<string>,
+     *     alpha_sender?: string|null,
+     *     app_name?: string,
+     *     code_length?: int,
+     *     default_verification_timeout_secs?: int,
+     *     messaging_template_id?: string,
+     *   },
+     *   webhook_failover_url?: string,
+     *   webhook_url?: string,
+     * }|VerifyProfileCreateParams $params
      *
      * @throws APIException
      */
     public function create(
-        $name,
-        $call = omit,
-        $flashcall = omit,
-        $language = omit,
-        $sms = omit,
-        $webhookFailoverURL = omit,
-        $webhookURL = omit,
+        array|VerifyProfileCreateParams $params,
         ?RequestOptions $requestOptions = null,
-    ): VerifyProfileData {
-        $params = [
-            'name' => $name,
-            'call' => $call,
-            'flashcall' => $flashcall,
-            'language' => $language,
-            'sms' => $sms,
-            'webhookFailoverURL' => $webhookFailoverURL,
-            'webhookURL' => $webhookURL,
-        ];
-
-        return $this->createRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): VerifyProfileData {
         [$parsed, $options] = VerifyProfileCreateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -121,55 +102,42 @@ final class VerifyProfilesService implements VerifyProfilesContract
      *
      * Update Verify profile
      *
-     * @param VerifyProfileUpdateParams\Call $call
-     * @param VerifyProfileUpdateParams\Flashcall $flashcall
-     * @param string $language
-     * @param string $name
-     * @param VerifyProfileUpdateParams\SMS $sms
-     * @param string $webhookFailoverURL
-     * @param string $webhookURL
+     * @param array{
+     *   call?: array{
+     *     app_name?: string,
+     *     code_length?: int,
+     *     default_verification_timeout_secs?: int,
+     *     messaging_template_id?: string,
+     *     whitelisted_destinations?: list<string>,
+     *   },
+     *   flashcall?: array{
+     *     default_verification_timeout_secs?: int,
+     *     whitelisted_destinations?: list<string>,
+     *   },
+     *   language?: string,
+     *   name?: string,
+     *   sms?: array{
+     *     alpha_sender?: string|null,
+     *     app_name?: string,
+     *     code_length?: int,
+     *     default_verification_timeout_secs?: int,
+     *     messaging_template_id?: string,
+     *     whitelisted_destinations?: list<string>,
+     *   },
+     *   webhook_failover_url?: string,
+     *   webhook_url?: string,
+     * }|VerifyProfileUpdateParams $params
      *
      * @throws APIException
      */
     public function update(
         string $verifyProfileID,
-        $call = omit,
-        $flashcall = omit,
-        $language = omit,
-        $name = omit,
-        $sms = omit,
-        $webhookFailoverURL = omit,
-        $webhookURL = omit,
-        ?RequestOptions $requestOptions = null,
-    ): VerifyProfileData {
-        $params = [
-            'call' => $call,
-            'flashcall' => $flashcall,
-            'language' => $language,
-            'name' => $name,
-            'sms' => $sms,
-            'webhookFailoverURL' => $webhookFailoverURL,
-            'webhookURL' => $webhookURL,
-        ];
-
-        return $this->updateRaw($verifyProfileID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $verifyProfileID,
-        array $params,
+        array|VerifyProfileUpdateParams $params,
         ?RequestOptions $requestOptions = null,
     ): VerifyProfileData {
         [$parsed, $options] = VerifyProfileUpdateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -187,35 +155,19 @@ final class VerifyProfilesService implements VerifyProfilesContract
      *
      * Gets a paginated list of Verify profiles.
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[name]
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param array{
+     *   filter?: array{name?: string}, page?: array{number?: int, size?: int}
+     * }|VerifyProfileListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): VerifyProfileListResponse {
-        $params = ['filter' => $filter, 'page' => $page];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|VerifyProfileListParams $params,
+        ?RequestOptions $requestOptions = null,
     ): VerifyProfileListResponse {
         [$parsed, $options] = VerifyProfileListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -253,33 +205,17 @@ final class VerifyProfilesService implements VerifyProfilesContract
      *
      * Create a new Verify profile message template.
      *
-     * @param string $text the text content of the message template
+     * @param array{text: string}|VerifyProfileCreateTemplateParams $params
      *
      * @throws APIException
      */
     public function createTemplate(
-        $text,
-        ?RequestOptions $requestOptions = null
-    ): MessageTemplate {
-        $params = ['text' => $text];
-
-        return $this->createTemplateRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createTemplateRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|VerifyProfileCreateTemplateParams $params,
+        ?RequestOptions $requestOptions = null,
     ): MessageTemplate {
         [$parsed, $options] = VerifyProfileCreateTemplateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -316,35 +252,18 @@ final class VerifyProfilesService implements VerifyProfilesContract
      *
      * Update an existing Verify profile message template.
      *
-     * @param string $text the text content of the message template
+     * @param array{text: string}|VerifyProfileUpdateTemplateParams $params
      *
      * @throws APIException
      */
     public function updateTemplate(
         string $templateID,
-        $text,
-        ?RequestOptions $requestOptions = null
-    ): MessageTemplate {
-        $params = ['text' => $text];
-
-        return $this->updateTemplateRaw($templateID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateTemplateRaw(
-        string $templateID,
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|VerifyProfileUpdateTemplateParams $params,
+        ?RequestOptions $requestOptions = null,
     ): MessageTemplate {
         [$parsed, $options] = VerifyProfileUpdateTemplateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

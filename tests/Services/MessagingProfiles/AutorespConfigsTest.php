@@ -35,9 +35,11 @@ final class AutorespConfigsTest extends TestCase
 
         $result = $this->client->messagingProfiles->autorespConfigs->create(
             'profile_id',
-            countryCode: 'US',
-            keywords: ['keyword1', 'keyword2'],
-            op: 'start',
+            [
+                'country_code' => 'US',
+                'keywords' => ['keyword1', 'keyword2'],
+                'op' => 'start',
+            ],
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -52,9 +54,11 @@ final class AutorespConfigsTest extends TestCase
 
         $result = $this->client->messagingProfiles->autorespConfigs->create(
             'profile_id',
-            countryCode: 'US',
-            keywords: ['keyword1', 'keyword2'],
-            op: 'start',
+            [
+                'country_code' => 'US',
+                'keywords' => ['keyword1', 'keyword2'],
+                'op' => 'start',
+            ],
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -69,7 +73,7 @@ final class AutorespConfigsTest extends TestCase
 
         $result = $this->client->messagingProfiles->autorespConfigs->retrieve(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+            ['profile_id' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -84,7 +88,7 @@ final class AutorespConfigsTest extends TestCase
 
         $result = $this->client->messagingProfiles->autorespConfigs->retrieve(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+            ['profile_id' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -99,10 +103,12 @@ final class AutorespConfigsTest extends TestCase
 
         $result = $this->client->messagingProfiles->autorespConfigs->update(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            profileID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            countryCode: 'US',
-            keywords: ['keyword1', 'keyword2'],
-            op: 'start',
+            [
+                'profile_id' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+                'country_code' => 'US',
+                'keywords' => ['keyword1', 'keyword2'],
+                'op' => 'start',
+            ],
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -117,10 +123,12 @@ final class AutorespConfigsTest extends TestCase
 
         $result = $this->client->messagingProfiles->autorespConfigs->update(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            profileID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            countryCode: 'US',
-            keywords: ['keyword1', 'keyword2'],
-            op: 'start',
+            [
+                'profile_id' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+                'country_code' => 'US',
+                'keywords' => ['keyword1', 'keyword2'],
+                'op' => 'start',
+            ],
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -134,7 +142,8 @@ final class AutorespConfigsTest extends TestCase
         }
 
         $result = $this->client->messagingProfiles->autorespConfigs->list(
-            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
+            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+            []
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -149,7 +158,7 @@ final class AutorespConfigsTest extends TestCase
 
         $result = $this->client->messagingProfiles->autorespConfigs->delete(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+            ['profile_id' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -164,7 +173,7 @@ final class AutorespConfigsTest extends TestCase
 
         $result = $this->client->messagingProfiles->autorespConfigs->delete(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+            ['profile_id' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType

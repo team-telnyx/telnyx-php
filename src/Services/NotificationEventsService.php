@@ -7,12 +7,9 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\NotificationEvents\NotificationEventListParams;
-use Telnyx\NotificationEvents\NotificationEventListParams\Page;
 use Telnyx\NotificationEvents\NotificationEventListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\NotificationEventsContract;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class NotificationEventsService implements NotificationEventsContract
 {
@@ -26,33 +23,19 @@ final class NotificationEventsService implements NotificationEventsContract
      *
      * Returns a list of your notifications events.
      *
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param array{
+     *   page?: array{number?: int, size?: int}
+     * }|NotificationEventListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): NotificationEventListResponse {
-        $params = ['page' => $page];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|NotificationEventListParams $params,
+        ?RequestOptions $requestOptions = null,
     ): NotificationEventListResponse {
         [$parsed, $options] = NotificationEventListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

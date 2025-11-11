@@ -13,7 +13,7 @@ use Telnyx\Webhooks\CallStreamingFailedWebhookEvent\Data\Payload\StreamParams\Tr
  * Streaming parameters as they were originally given to the Call Control API.
  *
  * @phpstan-type StreamParamsShape = array{
- *   streamURL?: string, track?: value-of<Track>
+ *   stream_url?: string|null, track?: value-of<Track>|null
  * }
  */
 final class StreamParams implements BaseModel
@@ -24,8 +24,8 @@ final class StreamParams implements BaseModel
     /**
      * The destination WebSocket address where the stream is going to be delivered.
      */
-    #[Api('stream_url', optional: true)]
-    public ?string $streamURL;
+    #[Api(optional: true)]
+    public ?string $stream_url;
 
     /**
      * Specifies which track should be streamed.
@@ -48,12 +48,12 @@ final class StreamParams implements BaseModel
      * @param Track|value-of<Track> $track
      */
     public static function with(
-        ?string $streamURL = null,
+        ?string $stream_url = null,
         Track|string|null $track = null
     ): self {
         $obj = new self;
 
-        null !== $streamURL && $obj->streamURL = $streamURL;
+        null !== $stream_url && $obj->stream_url = $stream_url;
         null !== $track && $obj['track'] = $track;
 
         return $obj;
@@ -65,7 +65,7 @@ final class StreamParams implements BaseModel
     public function withStreamURL(string $streamURL): self
     {
         $obj = clone $this;
-        $obj->streamURL = $streamURL;
+        $obj->stream_url = $streamURL;
 
         return $obj;
     }

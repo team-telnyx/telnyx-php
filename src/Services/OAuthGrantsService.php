@@ -13,8 +13,6 @@ use Telnyx\OAuthGrants\OAuthGrantListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\OAuthGrantsContract;
 
-use const Telnyx\Core\OMIT as omit;
-
 final class OAuthGrantsService implements OAuthGrantsContract
 {
     /**
@@ -47,35 +45,17 @@ final class OAuthGrantsService implements OAuthGrantsContract
      *
      * Retrieve a paginated list of OAuth grants for the authenticated user
      *
-     * @param int $pageNumber Page number
-     * @param int $pageSize Number of results per page
+     * @param array{page_number_?: int, page_size_?: int}|OAuthGrantListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $pageNumber = omit,
-        $pageSize = omit,
-        ?RequestOptions $requestOptions = null
-    ): OAuthGrantListResponse {
-        $params = ['pageNumber' => $pageNumber, 'pageSize' => $pageSize];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
+        array|OAuthGrantListParams $params,
         ?RequestOptions $requestOptions = null
     ): OAuthGrantListResponse {
         [$parsed, $options] = OAuthGrantListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

@@ -12,18 +12,18 @@ use Telnyx\ManagedAccounts\ManagedAccount\RecordType;
 /**
  * @phpstan-type ManagedAccountShape = array{
  *   id: string,
- *   apiKey: string,
- *   apiToken: string,
- *   apiUser: string,
- *   createdAt: string,
+ *   api_key: string,
+ *   api_token: string,
+ *   api_user: string,
+ *   created_at: string,
  *   email: string,
- *   managerAccountID: string,
- *   recordType: value-of<RecordType>,
- *   updatedAt: string,
- *   balance?: ManagedAccountBalance,
- *   managedAccountAllowCustomPricing?: bool,
- *   organizationName?: string,
- *   rollupBilling?: bool,
+ *   manager_account_id: string,
+ *   record_type: value-of<RecordType>,
+ *   updated_at: string,
+ *   balance?: ManagedAccountBalance|null,
+ *   managed_account_allow_custom_pricing?: bool|null,
+ *   organization_name?: string|null,
+ *   rollup_billing?: bool|null,
  * }
  */
 final class ManagedAccount implements BaseModel
@@ -40,26 +40,26 @@ final class ManagedAccount implements BaseModel
     /**
      * The managed account's V2 API access key.
      */
-    #[Api('api_key')]
-    public string $apiKey;
+    #[Api]
+    public string $api_key;
 
     /**
      * The managed account's V1 API token.
      */
-    #[Api('api_token')]
-    public string $apiToken;
+    #[Api]
+    public string $api_token;
 
     /**
      * The manager account's email, which serves as the V1 API user identifier.
      */
-    #[Api('api_user')]
-    public string $apiUser;
+    #[Api]
+    public string $api_user;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Api('created_at')]
-    public string $createdAt;
+    #[Api]
+    public string $created_at;
 
     /**
      * The managed account's email.
@@ -70,22 +70,22 @@ final class ManagedAccount implements BaseModel
     /**
      * The ID of the manager account associated with the managed account.
      */
-    #[Api('manager_account_id')]
-    public string $managerAccountID;
+    #[Api]
+    public string $manager_account_id;
 
     /**
      * Identifies the type of the resource.
      *
-     * @var value-of<RecordType> $recordType
+     * @var value-of<RecordType> $record_type
      */
-    #[Api('record_type', enum: RecordType::class)]
-    public string $recordType;
+    #[Api(enum: RecordType::class)]
+    public string $record_type;
 
     /**
      * ISO 8601 formatted date indicating when the resource was updated.
      */
-    #[Api('updated_at')]
-    public string $updatedAt;
+    #[Api]
+    public string $updated_at;
 
     #[Api(optional: true)]
     public ?ManagedAccountBalance $balance;
@@ -93,20 +93,20 @@ final class ManagedAccount implements BaseModel
     /**
      * Boolean value that indicates if the managed account is able to have custom pricing set for it or not. If false, uses the pricing of the manager account. Defaults to false. There may be time lag between when the value is changed and pricing changes take effect.
      */
-    #[Api('managed_account_allow_custom_pricing', optional: true)]
-    public ?bool $managedAccountAllowCustomPricing;
+    #[Api(optional: true)]
+    public ?bool $managed_account_allow_custom_pricing;
 
     /**
      * The organization the managed account is associated with.
      */
-    #[Api('organization_name', optional: true)]
-    public ?string $organizationName;
+    #[Api(optional: true)]
+    public ?string $organization_name;
 
     /**
      * Boolean value that indicates if the billing information and charges to the managed account "roll up" to the manager account. If true, the managed account will not have its own balance and will use the shared balance with the manager account. This value cannot be changed after account creation without going through Telnyx support as changes require manual updates to the account ledger. Defaults to false.
      */
-    #[Api('rollup_billing', optional: true)]
-    public ?bool $rollupBilling;
+    #[Api(optional: true)]
+    public ?bool $rollup_billing;
 
     /**
      * `new ManagedAccount()` is missing required properties by the API.
@@ -115,14 +115,14 @@ final class ManagedAccount implements BaseModel
      * ```
      * ManagedAccount::with(
      *   id: ...,
-     *   apiKey: ...,
-     *   apiToken: ...,
-     *   apiUser: ...,
-     *   createdAt: ...,
+     *   api_key: ...,
+     *   api_token: ...,
+     *   api_user: ...,
+     *   created_at: ...,
      *   email: ...,
-     *   managerAccountID: ...,
-     *   recordType: ...,
-     *   updatedAt: ...,
+     *   manager_account_id: ...,
+     *   record_type: ...,
+     *   updated_at: ...,
      * )
      * ```
      *
@@ -151,39 +151,39 @@ final class ManagedAccount implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param RecordType|value-of<RecordType> $recordType
+     * @param RecordType|value-of<RecordType> $record_type
      */
     public static function with(
         string $id,
-        string $apiKey,
-        string $apiToken,
-        string $apiUser,
-        string $createdAt,
+        string $api_key,
+        string $api_token,
+        string $api_user,
+        string $created_at,
         string $email,
-        string $managerAccountID,
-        RecordType|string $recordType,
-        string $updatedAt,
+        string $manager_account_id,
+        RecordType|string $record_type,
+        string $updated_at,
         ?ManagedAccountBalance $balance = null,
-        ?bool $managedAccountAllowCustomPricing = null,
-        ?string $organizationName = null,
-        ?bool $rollupBilling = null,
+        ?bool $managed_account_allow_custom_pricing = null,
+        ?string $organization_name = null,
+        ?bool $rollup_billing = null,
     ): self {
         $obj = new self;
 
         $obj->id = $id;
-        $obj->apiKey = $apiKey;
-        $obj->apiToken = $apiToken;
-        $obj->apiUser = $apiUser;
-        $obj->createdAt = $createdAt;
+        $obj->api_key = $api_key;
+        $obj->api_token = $api_token;
+        $obj->api_user = $api_user;
+        $obj->created_at = $created_at;
         $obj->email = $email;
-        $obj->managerAccountID = $managerAccountID;
-        $obj['recordType'] = $recordType;
-        $obj->updatedAt = $updatedAt;
+        $obj->manager_account_id = $manager_account_id;
+        $obj['record_type'] = $record_type;
+        $obj->updated_at = $updated_at;
 
         null !== $balance && $obj->balance = $balance;
-        null !== $managedAccountAllowCustomPricing && $obj->managedAccountAllowCustomPricing = $managedAccountAllowCustomPricing;
-        null !== $organizationName && $obj->organizationName = $organizationName;
-        null !== $rollupBilling && $obj->rollupBilling = $rollupBilling;
+        null !== $managed_account_allow_custom_pricing && $obj->managed_account_allow_custom_pricing = $managed_account_allow_custom_pricing;
+        null !== $organization_name && $obj->organization_name = $organization_name;
+        null !== $rollup_billing && $obj->rollup_billing = $rollup_billing;
 
         return $obj;
     }
@@ -205,7 +205,7 @@ final class ManagedAccount implements BaseModel
     public function withAPIKey(string $apiKey): self
     {
         $obj = clone $this;
-        $obj->apiKey = $apiKey;
+        $obj->api_key = $apiKey;
 
         return $obj;
     }
@@ -216,7 +216,7 @@ final class ManagedAccount implements BaseModel
     public function withAPIToken(string $apiToken): self
     {
         $obj = clone $this;
-        $obj->apiToken = $apiToken;
+        $obj->api_token = $apiToken;
 
         return $obj;
     }
@@ -227,7 +227,7 @@ final class ManagedAccount implements BaseModel
     public function withAPIUser(string $apiUser): self
     {
         $obj = clone $this;
-        $obj->apiUser = $apiUser;
+        $obj->api_user = $apiUser;
 
         return $obj;
     }
@@ -238,7 +238,7 @@ final class ManagedAccount implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }
@@ -260,7 +260,7 @@ final class ManagedAccount implements BaseModel
     public function withManagerAccountID(string $managerAccountID): self
     {
         $obj = clone $this;
-        $obj->managerAccountID = $managerAccountID;
+        $obj->manager_account_id = $managerAccountID;
 
         return $obj;
     }
@@ -273,7 +273,7 @@ final class ManagedAccount implements BaseModel
     public function withRecordType(RecordType|string $recordType): self
     {
         $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
@@ -284,7 +284,7 @@ final class ManagedAccount implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $obj->updated_at = $updatedAt;
 
         return $obj;
     }
@@ -304,7 +304,7 @@ final class ManagedAccount implements BaseModel
         bool $managedAccountAllowCustomPricing
     ): self {
         $obj = clone $this;
-        $obj->managedAccountAllowCustomPricing = $managedAccountAllowCustomPricing;
+        $obj->managed_account_allow_custom_pricing = $managedAccountAllowCustomPricing;
 
         return $obj;
     }
@@ -315,7 +315,7 @@ final class ManagedAccount implements BaseModel
     public function withOrganizationName(string $organizationName): self
     {
         $obj = clone $this;
-        $obj->organizationName = $organizationName;
+        $obj->organization_name = $organizationName;
 
         return $obj;
     }
@@ -326,7 +326,7 @@ final class ManagedAccount implements BaseModel
     public function withRollupBilling(bool $rollupBilling): self
     {
         $obj = clone $this;
-        $obj->rollupBilling = $rollupBilling;
+        $obj->rollup_billing = $rollupBilling;
 
         return $obj;
     }

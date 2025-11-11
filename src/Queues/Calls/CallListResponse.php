@@ -14,7 +14,7 @@ use Telnyx\Queues\Calls\CallListResponse\Data;
 
 /**
  * @phpstan-type CallListResponseShape = array{
- *   data?: list<Data>, meta?: PaginationMeta
+ *   data?: list<Data>|null, meta?: PaginationMeta|null
  * }
  */
 final class CallListResponse implements BaseModel, ResponseConverter

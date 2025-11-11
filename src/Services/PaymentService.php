@@ -11,7 +11,7 @@ use Telnyx\Services\Payment\AutoRechargePrefsService;
 final class PaymentService implements PaymentContract
 {
     /**
-     * @@api
+     * @api
      */
     public AutoRechargePrefsService $autoRechargePrefs;
 

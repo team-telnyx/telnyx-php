@@ -45,7 +45,7 @@ final class MediaTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->media->update('media_name');
+        $result = $this->client->media->update('media_name', []);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -57,7 +57,7 @@ final class MediaTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->media->list();
+        $result = $this->client->media->list([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -93,9 +93,9 @@ final class MediaTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->media->upload(
-            mediaURL: 'http://www.example.com/audio.mp3'
-        );
+        $result = $this->client->media->upload([
+            'media_url' => 'http://www.example.com/audio.mp3',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -107,9 +107,9 @@ final class MediaTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->media->upload(
-            mediaURL: 'http://www.example.com/audio.mp3'
-        );
+        $result = $this->client->media->upload([
+            'media_url' => 'http://www.example.com/audio.mp3',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

@@ -33,7 +33,7 @@ final class MobileNetworkOperatorsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->mobileNetworkOperators->list();
+        $result = $this->client->mobileNetworkOperators->list([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

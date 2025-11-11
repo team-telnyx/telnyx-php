@@ -33,9 +33,9 @@ final class TelephonyCredentialsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->telephonyCredentials->create(
-            connectionID: '1234567890'
-        );
+        $result = $this->client->telephonyCredentials->create([
+            'connection_id' => '1234567890',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -47,9 +47,9 @@ final class TelephonyCredentialsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->telephonyCredentials->create(
-            connectionID: '1234567890'
-        );
+        $result = $this->client->telephonyCredentials->create([
+            'connection_id' => '1234567890',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -73,7 +73,7 @@ final class TelephonyCredentialsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->telephonyCredentials->update('id');
+        $result = $this->client->telephonyCredentials->update('id', []);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -85,7 +85,7 @@ final class TelephonyCredentialsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->telephonyCredentials->list();
+        $result = $this->client->telephonyCredentials->list([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

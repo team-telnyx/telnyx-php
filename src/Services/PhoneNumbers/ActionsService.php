@@ -27,35 +27,18 @@ final class ActionsService implements ActionsContract
      *
      * Change the bundle status for a phone number (set to being in a bundle or remove from a bundle)
      *
-     * @param string $bundleID The new bundle_id setting for the number. If you are assigning the number to a bundle, this is the unique ID of the bundle you wish to use. If you are removing the number from a bundle, this must be null. You cannot assign a number from one bundle to another directly. You must first remove it from a bundle, and then assign it to a new bundle.
+     * @param array{bundle_id: string}|ActionChangeBundleStatusParams $params
      *
      * @throws APIException
      */
     public function changeBundleStatus(
         string $id,
-        $bundleID,
-        ?RequestOptions $requestOptions = null
-    ): ActionChangeBundleStatusResponse {
-        $params = ['bundleID' => $bundleID];
-
-        return $this->changeBundleStatusRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function changeBundleStatusRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|ActionChangeBundleStatusParams $params,
+        ?RequestOptions $requestOptions = null,
     ): ActionChangeBundleStatusResponse {
         [$parsed, $options] = ActionChangeBundleStatusParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -73,40 +56,20 @@ final class ActionsService implements ActionsContract
      *
      * Enable emergency for a phone number
      *
-     * @param string $emergencyAddressID identifies the address to be used with emergency services
-     * @param bool $emergencyEnabled indicates whether to enable emergency services on this number
+     * @param array{
+     *   emergency_address_id: string, emergency_enabled: bool
+     * }|ActionEnableEmergencyParams $params
      *
      * @throws APIException
      */
     public function enableEmergency(
         string $id,
-        $emergencyAddressID,
-        $emergencyEnabled,
+        array|ActionEnableEmergencyParams $params,
         ?RequestOptions $requestOptions = null,
-    ): ActionEnableEmergencyResponse {
-        $params = [
-            'emergencyAddressID' => $emergencyAddressID,
-            'emergencyEnabled' => $emergencyEnabled,
-        ];
-
-        return $this->enableEmergencyRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function enableEmergencyRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): ActionEnableEmergencyResponse {
         [$parsed, $options] = ActionEnableEmergencyParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -124,33 +87,17 @@ final class ActionsService implements ActionsContract
      *
      * Verifies ownership of the provided phone numbers and returns a mapping of numbers to their IDs, plus a list of numbers not found in the account.
      *
-     * @param list<string> $phoneNumbers Array of phone numbers to verify ownership for
+     * @param array{phone_numbers: list<string>}|ActionVerifyOwnershipParams $params
      *
      * @throws APIException
      */
     public function verifyOwnership(
-        $phoneNumbers,
-        ?RequestOptions $requestOptions = null
-    ): ActionVerifyOwnershipResponse {
-        $params = ['phoneNumbers' => $phoneNumbers];
-
-        return $this->verifyOwnershipRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function verifyOwnershipRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|ActionVerifyOwnershipParams $params,
+        ?RequestOptions $requestOptions = null,
     ): ActionVerifyOwnershipResponse {
         [$parsed, $options] = ActionVerifyOwnershipParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

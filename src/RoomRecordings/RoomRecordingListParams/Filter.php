@@ -14,14 +14,14 @@ use Telnyx\RoomRecordings\RoomRecordingListParams\Filter\DateStartedAt;
  * Consolidated filter parameter (deepObject style). Originally: filter[date_ended_at][eq], filter[date_ended_at][gte], filter[date_ended_at][lte], filter[date_started_at][eq], filter[date_started_at][gte], filter[date_started_at][lte], filter[room_id], filter[participant_id], filter[session_id], filter[status], filter[type], filter[duration_secs].
  *
  * @phpstan-type FilterShape = array{
- *   dateEndedAt?: DateEndedAt,
- *   dateStartedAt?: DateStartedAt,
- *   durationSecs?: int,
- *   participantID?: string,
- *   roomID?: string,
- *   sessionID?: string,
- *   status?: string,
- *   type?: string,
+ *   date_ended_at?: DateEndedAt|null,
+ *   date_started_at?: DateStartedAt|null,
+ *   duration_secs?: int|null,
+ *   participant_id?: string|null,
+ *   room_id?: string|null,
+ *   session_id?: string|null,
+ *   status?: string|null,
+ *   type?: string|null,
  * }
  */
 final class Filter implements BaseModel
@@ -29,35 +29,35 @@ final class Filter implements BaseModel
     /** @use SdkModel<FilterShape> */
     use SdkModel;
 
-    #[Api('date_ended_at', optional: true)]
-    public ?DateEndedAt $dateEndedAt;
+    #[Api(optional: true)]
+    public ?DateEndedAt $date_ended_at;
 
-    #[Api('date_started_at', optional: true)]
-    public ?DateStartedAt $dateStartedAt;
+    #[Api(optional: true)]
+    public ?DateStartedAt $date_started_at;
 
     /**
      * duration_secs greater or equal for filtering room recordings.
      */
-    #[Api('duration_secs', optional: true)]
-    public ?int $durationSecs;
+    #[Api(optional: true)]
+    public ?int $duration_secs;
 
     /**
      * participant_id for filtering room recordings.
      */
-    #[Api('participant_id', optional: true)]
-    public ?string $participantID;
+    #[Api(optional: true)]
+    public ?string $participant_id;
 
     /**
      * room_id for filtering room recordings.
      */
-    #[Api('room_id', optional: true)]
-    public ?string $roomID;
+    #[Api(optional: true)]
+    public ?string $room_id;
 
     /**
      * session_id for filtering room recordings.
      */
-    #[Api('session_id', optional: true)]
-    public ?string $sessionID;
+    #[Api(optional: true)]
+    public ?string $session_id;
 
     /**
      * status for filtering room recordings.
@@ -82,23 +82,23 @@ final class Filter implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?DateEndedAt $dateEndedAt = null,
-        ?DateStartedAt $dateStartedAt = null,
-        ?int $durationSecs = null,
-        ?string $participantID = null,
-        ?string $roomID = null,
-        ?string $sessionID = null,
+        ?DateEndedAt $date_ended_at = null,
+        ?DateStartedAt $date_started_at = null,
+        ?int $duration_secs = null,
+        ?string $participant_id = null,
+        ?string $room_id = null,
+        ?string $session_id = null,
         ?string $status = null,
         ?string $type = null,
     ): self {
         $obj = new self;
 
-        null !== $dateEndedAt && $obj->dateEndedAt = $dateEndedAt;
-        null !== $dateStartedAt && $obj->dateStartedAt = $dateStartedAt;
-        null !== $durationSecs && $obj->durationSecs = $durationSecs;
-        null !== $participantID && $obj->participantID = $participantID;
-        null !== $roomID && $obj->roomID = $roomID;
-        null !== $sessionID && $obj->sessionID = $sessionID;
+        null !== $date_ended_at && $obj->date_ended_at = $date_ended_at;
+        null !== $date_started_at && $obj->date_started_at = $date_started_at;
+        null !== $duration_secs && $obj->duration_secs = $duration_secs;
+        null !== $participant_id && $obj->participant_id = $participant_id;
+        null !== $room_id && $obj->room_id = $room_id;
+        null !== $session_id && $obj->session_id = $session_id;
         null !== $status && $obj->status = $status;
         null !== $type && $obj->type = $type;
 
@@ -108,7 +108,7 @@ final class Filter implements BaseModel
     public function withDateEndedAt(DateEndedAt $dateEndedAt): self
     {
         $obj = clone $this;
-        $obj->dateEndedAt = $dateEndedAt;
+        $obj->date_ended_at = $dateEndedAt;
 
         return $obj;
     }
@@ -116,7 +116,7 @@ final class Filter implements BaseModel
     public function withDateStartedAt(DateStartedAt $dateStartedAt): self
     {
         $obj = clone $this;
-        $obj->dateStartedAt = $dateStartedAt;
+        $obj->date_started_at = $dateStartedAt;
 
         return $obj;
     }
@@ -127,7 +127,7 @@ final class Filter implements BaseModel
     public function withDurationSecs(int $durationSecs): self
     {
         $obj = clone $this;
-        $obj->durationSecs = $durationSecs;
+        $obj->duration_secs = $durationSecs;
 
         return $obj;
     }
@@ -138,7 +138,7 @@ final class Filter implements BaseModel
     public function withParticipantID(string $participantID): self
     {
         $obj = clone $this;
-        $obj->participantID = $participantID;
+        $obj->participant_id = $participantID;
 
         return $obj;
     }
@@ -149,7 +149,7 @@ final class Filter implements BaseModel
     public function withRoomID(string $roomID): self
     {
         $obj = clone $this;
-        $obj->roomID = $roomID;
+        $obj->room_id = $roomID;
 
         return $obj;
     }
@@ -160,7 +160,7 @@ final class Filter implements BaseModel
     public function withSessionID(string $sessionID): self
     {
         $obj = clone $this;
-        $obj->sessionID = $sessionID;
+        $obj->session_id = $sessionID;
 
         return $obj;
     }

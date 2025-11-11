@@ -8,13 +8,10 @@ use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\ExternalConnections\CivicAddresses\CivicAddressGetResponse;
 use Telnyx\ExternalConnections\CivicAddresses\CivicAddressListParams;
-use Telnyx\ExternalConnections\CivicAddresses\CivicAddressListParams\Filter;
 use Telnyx\ExternalConnections\CivicAddresses\CivicAddressListResponse;
 use Telnyx\ExternalConnections\CivicAddresses\CivicAddressRetrieveParams;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ExternalConnections\CivicAddressesContract;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class CivicAddressesService implements CivicAddressesContract
 {
@@ -28,35 +25,18 @@ final class CivicAddressesService implements CivicAddressesContract
      *
      * Return the details of an existing Civic Address with its Locations inside the 'data' attribute of the response.
      *
-     * @param string $id
+     * @param array{id: string}|CivicAddressRetrieveParams $params
      *
      * @throws APIException
      */
     public function retrieve(
         string $addressID,
-        $id,
-        ?RequestOptions $requestOptions = null
-    ): CivicAddressGetResponse {
-        $params = ['id' => $id];
-
-        return $this->retrieveRaw($addressID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $addressID,
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|CivicAddressRetrieveParams $params,
+        ?RequestOptions $requestOptions = null,
     ): CivicAddressGetResponse {
         [$parsed, $options] = CivicAddressRetrieveParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
         $id = $parsed['id'];
         unset($parsed['id']);
@@ -75,35 +55,20 @@ final class CivicAddressesService implements CivicAddressesContract
      *
      * Returns the civic addresses and locations from Microsoft Teams.
      *
-     * @param Filter $filter Filter parameter for civic addresses (deepObject style). Supports filtering by country.
+     * @param array{
+     *   filter?: array{country?: list<string>}
+     * }|CivicAddressListParams $params
      *
      * @throws APIException
      */
     public function list(
         string $id,
-        $filter = omit,
-        ?RequestOptions $requestOptions = null
-    ): CivicAddressListResponse {
-        $params = ['filter' => $filter];
-
-        return $this->listRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|CivicAddressListParams $params,
+        ?RequestOptions $requestOptions = null,
     ): CivicAddressListResponse {
         [$parsed, $options] = CivicAddressListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

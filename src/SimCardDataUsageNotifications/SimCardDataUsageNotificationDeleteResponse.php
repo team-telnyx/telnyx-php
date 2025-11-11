@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type SimCardDataUsageNotificationDeleteResponseShape = array{
- *   data?: SimCardDataUsageNotification
+ *   data?: SimCardDataUsageNotification|null
  * }
  */
 final class SimCardDataUsageNotificationDeleteResponse implements BaseModel, ResponseConverter

@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type OutboundVoiceProfileNewResponseShape = array{
- *   data?: OutboundVoiceProfile
+ *   data?: OutboundVoiceProfile|null
  * }
  */
 final class OutboundVoiceProfileNewResponse implements BaseModel, ResponseConverter

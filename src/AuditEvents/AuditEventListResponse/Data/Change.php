@@ -14,9 +14,9 @@ use Telnyx\Core\Contracts\BaseModel;
  * Details of the changes made to a resource.
  *
  * @phpstan-type ChangeShape = array{
- *   field?: string,
- *   from?: string|float|bool|null|list<mixed>|array<string, mixed>,
- *   to?: string|float|bool|null|list<mixed>|array<string, mixed>,
+ *   field?: string|null,
+ *   from?: string|float|bool|null|list<mixed>|array<string,mixed>,
+ *   to?: string|float|bool|null|list<mixed>|array<string,mixed>,
  * }
  */
 final class Change implements BaseModel
@@ -33,7 +33,7 @@ final class Change implements BaseModel
     /**
      * The previous value of the field. Can be any JSON type.
      *
-     * @var string|float|bool|list<mixed>|array<string, mixed>|null $from
+     * @var string|float|bool|list<mixed>|array<string,mixed>|null $from
      */
     #[Api(union: From::class, nullable: true, optional: true)]
     public string|float|bool|array|null $from;
@@ -41,7 +41,7 @@ final class Change implements BaseModel
     /**
      * The new value of the field. Can be any JSON type.
      *
-     * @var string|float|bool|list<mixed>|array<string, mixed>|null $to
+     * @var string|float|bool|list<mixed>|array<string,mixed>|null $to
      */
     #[Api(union: To::class, nullable: true, optional: true)]
     public string|float|bool|array|null $to;
@@ -56,8 +56,8 @@ final class Change implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param string|float|bool|list<mixed>|array<string, mixed>|null $from
-     * @param string|float|bool|list<mixed>|array<string, mixed>|null $to
+     * @param string|float|bool|list<mixed>|array<string,mixed>|null $from
+     * @param string|float|bool|list<mixed>|array<string,mixed>|null $to
      */
     public static function with(
         ?string $field = null,
@@ -87,7 +87,7 @@ final class Change implements BaseModel
     /**
      * The previous value of the field. Can be any JSON type.
      *
-     * @param string|float|bool|list<mixed>|array<string, mixed>|null $from
+     * @param string|float|bool|list<mixed>|array<string,mixed>|null $from
      */
     public function withFrom(string|float|bool|array|null $from): self
     {
@@ -100,7 +100,7 @@ final class Change implements BaseModel
     /**
      * The new value of the field. Can be any JSON type.
      *
-     * @param string|float|bool|list<mixed>|array<string, mixed>|null $to
+     * @param string|float|bool|list<mixed>|array<string,mixed>|null $to
      */
     public function withTo(string|float|bool|array|null $to): self
     {

@@ -33,7 +33,7 @@ final class SubNumberOrdersReportTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->subNumberOrdersReport->create();
+        $result = $this->client->subNumberOrdersReport->create([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

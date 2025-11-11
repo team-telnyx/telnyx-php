@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type RoomNewResponseShape = array{data?: Room}
+ * @phpstan-type RoomNewResponseShape = array{data?: Room|null}
  */
 final class RoomNewResponse implements BaseModel, ResponseConverter
 {

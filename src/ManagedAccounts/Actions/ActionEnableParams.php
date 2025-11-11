@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\ManagedAccounts\Actions->enable
  *
- * @phpstan-type ActionEnableParamsShape = array{reenableAllConnections?: bool}
+ * @phpstan-type ActionEnableParamsShape = array{reenable_all_connections?: bool}
  */
 final class ActionEnableParams implements BaseModel
 {
@@ -25,8 +25,8 @@ final class ActionEnableParams implements BaseModel
     /**
      * When true, all connections owned by this managed account will automatically be re-enabled. Note: Any connections that do not pass validations will not be re-enabled.
      */
-    #[Api('reenable_all_connections', optional: true)]
-    public ?bool $reenableAllConnections;
+    #[Api(optional: true)]
+    public ?bool $reenable_all_connections;
 
     public function __construct()
     {
@@ -38,11 +38,11 @@ final class ActionEnableParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?bool $reenableAllConnections = null): self
+    public static function with(?bool $reenable_all_connections = null): self
     {
         $obj = new self;
 
-        null !== $reenableAllConnections && $obj->reenableAllConnections = $reenableAllConnections;
+        null !== $reenable_all_connections && $obj->reenable_all_connections = $reenable_all_connections;
 
         return $obj;
     }
@@ -54,7 +54,7 @@ final class ActionEnableParams implements BaseModel
         bool $reenableAllConnections
     ): self {
         $obj = clone $this;
-        $obj->reenableAllConnections = $reenableAllConnections;
+        $obj->reenable_all_connections = $reenableAllConnections;
 
         return $obj;
     }

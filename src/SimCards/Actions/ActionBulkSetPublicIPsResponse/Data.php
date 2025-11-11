@@ -13,12 +13,12 @@ use Telnyx\SimCards\Actions\ActionBulkSetPublicIPsResponse\Data\ActionType;
  * This object represents a bulk SIM card action. It groups SIM card actions created through a bulk endpoint under a single resource for further lookup.
  *
  * @phpstan-type DataShape = array{
- *   id?: string,
- *   actionType?: value-of<ActionType>,
- *   createdAt?: string,
- *   recordType?: string,
- *   settings?: array<string, mixed>,
- *   updatedAt?: string,
+ *   id?: string|null,
+ *   action_type?: value-of<ActionType>|null,
+ *   created_at?: string|null,
+ *   record_type?: string|null,
+ *   settings?: array<string,mixed>|null,
+ *   updated_at?: string|null,
  * }
  */
 final class Data implements BaseModel
@@ -38,24 +38,24 @@ final class Data implements BaseModel
      * <li><code>bulk_set_public_ips</code> - set a public IP for each specified SIM card.</li>
      * </ul>.
      *
-     * @var value-of<ActionType>|null $actionType
+     * @var value-of<ActionType>|null $action_type
      */
-    #[Api('action_type', enum: ActionType::class, optional: true)]
-    public ?string $actionType;
+    #[Api(enum: ActionType::class, optional: true)]
+    public ?string $action_type;
 
     /**
      * ISO 8601 formatted date-time indicating when the resource was created.
      */
-    #[Api('created_at', optional: true)]
-    public ?string $createdAt;
+    #[Api(optional: true)]
+    public ?string $created_at;
 
-    #[Api('record_type', optional: true)]
-    public ?string $recordType;
+    #[Api(optional: true)]
+    public ?string $record_type;
 
     /**
      * A JSON object representation of the bulk action payload.
      *
-     * @var array<string, mixed>|null $settings
+     * @var array<string,mixed>|null $settings
      */
     #[Api(map: 'mixed', optional: true)]
     public ?array $settings;
@@ -63,8 +63,8 @@ final class Data implements BaseModel
     /**
      * ISO 8601 formatted date-time indicating when the resource was updated.
      */
-    #[Api('updated_at', optional: true)]
-    public ?string $updatedAt;
+    #[Api(optional: true)]
+    public ?string $updated_at;
 
     public function __construct()
     {
@@ -76,25 +76,25 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ActionType|value-of<ActionType> $actionType
-     * @param array<string, mixed> $settings
+     * @param ActionType|value-of<ActionType> $action_type
+     * @param array<string,mixed> $settings
      */
     public static function with(
         ?string $id = null,
-        ActionType|string|null $actionType = null,
-        ?string $createdAt = null,
-        ?string $recordType = null,
+        ActionType|string|null $action_type = null,
+        ?string $created_at = null,
+        ?string $record_type = null,
         ?array $settings = null,
-        ?string $updatedAt = null,
+        ?string $updated_at = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj->id = $id;
-        null !== $actionType && $obj['actionType'] = $actionType;
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $recordType && $obj->recordType = $recordType;
+        null !== $action_type && $obj['action_type'] = $action_type;
+        null !== $created_at && $obj->created_at = $created_at;
+        null !== $record_type && $obj->record_type = $record_type;
         null !== $settings && $obj->settings = $settings;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
+        null !== $updated_at && $obj->updated_at = $updated_at;
 
         return $obj;
     }
@@ -121,7 +121,7 @@ final class Data implements BaseModel
     public function withActionType(ActionType|string $actionType): self
     {
         $obj = clone $this;
-        $obj['actionType'] = $actionType;
+        $obj['action_type'] = $actionType;
 
         return $obj;
     }
@@ -132,7 +132,7 @@ final class Data implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }
@@ -140,7 +140,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType;
+        $obj->record_type = $recordType;
 
         return $obj;
     }
@@ -148,7 +148,7 @@ final class Data implements BaseModel
     /**
      * A JSON object representation of the bulk action payload.
      *
-     * @param array<string, mixed> $settings
+     * @param array<string,mixed> $settings
      */
     public function withSettings(array $settings): self
     {
@@ -164,7 +164,7 @@ final class Data implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $obj->updated_at = $updatedAt;
 
         return $obj;
     }

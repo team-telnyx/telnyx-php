@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type MdrUsageReportFetchSyncResponseShape = array{
- *   data?: MdrUsageReport
+ *   data?: MdrUsageReport|null
  * }
  */
 final class MdrUsageReportFetchSyncResponse implements BaseModel, ResponseConverter

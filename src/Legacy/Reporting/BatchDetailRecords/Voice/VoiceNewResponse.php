@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type VoiceNewResponseShape = array{data?: CdrDetailedReqResponse}
+ * @phpstan-type VoiceNewResponseShape = array{data?: CdrDetailedReqResponse|null}
  */
 final class VoiceNewResponse implements BaseModel, ResponseConverter
 {

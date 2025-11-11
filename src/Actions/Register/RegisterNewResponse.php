@@ -14,7 +14,7 @@ use Telnyx\SimpleSimCard;
 
 /**
  * @phpstan-type RegisterNewResponseShape = array{
- *   data?: list<SimpleSimCard>, errors?: list<Error>
+ *   data?: list<SimpleSimCard>|null, errors?: list<Error>|null
  * }
  */
 final class RegisterNewResponse implements BaseModel, ResponseConverter

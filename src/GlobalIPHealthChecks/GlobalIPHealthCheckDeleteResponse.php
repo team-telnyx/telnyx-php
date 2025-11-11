@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckDeleteResponse\Data;
 
 /**
- * @phpstan-type GlobalIPHealthCheckDeleteResponseShape = array{data?: Data}
+ * @phpstan-type GlobalIPHealthCheckDeleteResponseShape = array{data?: Data|null}
  */
 final class GlobalIPHealthCheckDeleteResponse implements BaseModel, ResponseConverter
 {

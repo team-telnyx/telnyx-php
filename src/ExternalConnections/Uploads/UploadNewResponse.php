@@ -11,7 +11,9 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type UploadNewResponseShape = array{success?: bool, ticketID?: string}
+ * @phpstan-type UploadNewResponseShape = array{
+ *   success?: bool|null, ticket_id?: string|null
+ * }
  */
 final class UploadNewResponse implements BaseModel, ResponseConverter
 {
@@ -29,8 +31,8 @@ final class UploadNewResponse implements BaseModel, ResponseConverter
     /**
      * Ticket id of the upload request.
      */
-    #[Api('ticket_id', optional: true)]
-    public ?string $ticketID;
+    #[Api(optional: true)]
+    public ?string $ticket_id;
 
     public function __construct()
     {
@@ -44,12 +46,12 @@ final class UploadNewResponse implements BaseModel, ResponseConverter
      */
     public static function with(
         ?bool $success = null,
-        ?string $ticketID = null
+        ?string $ticket_id = null
     ): self {
         $obj = new self;
 
         null !== $success && $obj->success = $success;
-        null !== $ticketID && $obj->ticketID = $ticketID;
+        null !== $ticket_id && $obj->ticket_id = $ticket_id;
 
         return $obj;
     }
@@ -71,7 +73,7 @@ final class UploadNewResponse implements BaseModel, ResponseConverter
     public function withTicketID(string $ticketID): self
     {
         $obj = clone $this;
-        $obj->ticketID = $ticketID;
+        $obj->ticket_id = $ticketID;
 
         return $obj;
     }

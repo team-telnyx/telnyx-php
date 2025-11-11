@@ -11,13 +11,13 @@ use Telnyx\SimCards\SimCardGetPublicIPResponse\Data\Type;
 
 /**
  * @phpstan-type DataShape = array{
- *   createdAt?: string,
- *   ip?: string,
- *   recordType?: string,
- *   regionCode?: string,
- *   simCardID?: string,
- *   type?: value-of<Type>,
- *   updatedAt?: string,
+ *   created_at?: string|null,
+ *   ip?: string|null,
+ *   record_type?: string|null,
+ *   region_code?: string|null,
+ *   sim_card_id?: string|null,
+ *   type?: value-of<Type>|null,
+ *   updated_at?: string|null,
  * }
  */
 final class Data implements BaseModel
@@ -28,8 +28,8 @@ final class Data implements BaseModel
     /**
      * ISO 8601 formatted date-time indicating when the resource was created.
      */
-    #[Api('created_at', optional: true)]
-    public ?string $createdAt;
+    #[Api(optional: true)]
+    public ?string $created_at;
 
     /**
      * The provisioned IP address. This attribute will only be available when underlying resource status is in a "provisioned" status.
@@ -37,14 +37,14 @@ final class Data implements BaseModel
     #[Api(optional: true)]
     public ?string $ip;
 
-    #[Api('record_type', optional: true)]
-    public ?string $recordType;
+    #[Api(optional: true)]
+    public ?string $record_type;
 
-    #[Api('region_code', optional: true)]
-    public ?string $regionCode;
+    #[Api(optional: true)]
+    public ?string $region_code;
 
-    #[Api('sim_card_id', optional: true)]
-    public ?string $simCardID;
+    #[Api(optional: true)]
+    public ?string $sim_card_id;
 
     /** @var value-of<Type>|null $type */
     #[Api(enum: Type::class, optional: true)]
@@ -53,8 +53,8 @@ final class Data implements BaseModel
     /**
      * ISO 8601 formatted date-time indicating when the resource was updated.
      */
-    #[Api('updated_at', optional: true)]
-    public ?string $updatedAt;
+    #[Api(optional: true)]
+    public ?string $updated_at;
 
     public function __construct()
     {
@@ -69,23 +69,23 @@ final class Data implements BaseModel
      * @param Type|value-of<Type> $type
      */
     public static function with(
-        ?string $createdAt = null,
+        ?string $created_at = null,
         ?string $ip = null,
-        ?string $recordType = null,
-        ?string $regionCode = null,
-        ?string $simCardID = null,
+        ?string $record_type = null,
+        ?string $region_code = null,
+        ?string $sim_card_id = null,
         Type|string|null $type = null,
-        ?string $updatedAt = null,
+        ?string $updated_at = null,
     ): self {
         $obj = new self;
 
-        null !== $createdAt && $obj->createdAt = $createdAt;
+        null !== $created_at && $obj->created_at = $created_at;
         null !== $ip && $obj->ip = $ip;
-        null !== $recordType && $obj->recordType = $recordType;
-        null !== $regionCode && $obj->regionCode = $regionCode;
-        null !== $simCardID && $obj->simCardID = $simCardID;
+        null !== $record_type && $obj->record_type = $record_type;
+        null !== $region_code && $obj->region_code = $region_code;
+        null !== $sim_card_id && $obj->sim_card_id = $sim_card_id;
         null !== $type && $obj['type'] = $type;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
+        null !== $updated_at && $obj->updated_at = $updated_at;
 
         return $obj;
     }
@@ -96,7 +96,7 @@ final class Data implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }
@@ -115,7 +115,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType;
+        $obj->record_type = $recordType;
 
         return $obj;
     }
@@ -123,7 +123,7 @@ final class Data implements BaseModel
     public function withRegionCode(string $regionCode): self
     {
         $obj = clone $this;
-        $obj->regionCode = $regionCode;
+        $obj->region_code = $regionCode;
 
         return $obj;
     }
@@ -131,7 +131,7 @@ final class Data implements BaseModel
     public function withSimCardID(string $simCardID): self
     {
         $obj = clone $this;
-        $obj->simCardID = $simCardID;
+        $obj->sim_card_id = $simCardID;
 
         return $obj;
     }
@@ -153,7 +153,7 @@ final class Data implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $obj->updated_at = $updatedAt;
 
         return $obj;
     }

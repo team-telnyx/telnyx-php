@@ -11,7 +11,9 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type VoicemailNewResponseShape = array{data?: VoicemailPrefResponse}
+ * @phpstan-type VoicemailNewResponseShape = array{
+ *   data?: VoicemailPrefResponse|null
+ * }
  */
 final class VoicemailNewResponse implements BaseModel, ResponseConverter
 {

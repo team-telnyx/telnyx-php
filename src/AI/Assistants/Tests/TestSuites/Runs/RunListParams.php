@@ -16,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\AI\Assistants\Tests\TestSuites\Runs->list
  *
  * @phpstan-type RunListParamsShape = array{
- *   page?: Page, status?: string, testSuiteRunID?: string
+ *   page?: Page, status?: string, test_suite_run_id?: string
  * }
  */
 final class RunListParams implements BaseModel
@@ -41,7 +41,7 @@ final class RunListParams implements BaseModel
      * Filter runs by specific suite execution batch ID.
      */
     #[Api(optional: true)]
-    public ?string $testSuiteRunID;
+    public ?string $test_suite_run_id;
 
     public function __construct()
     {
@@ -56,13 +56,13 @@ final class RunListParams implements BaseModel
     public static function with(
         ?Page $page = null,
         ?string $status = null,
-        ?string $testSuiteRunID = null
+        ?string $test_suite_run_id = null
     ): self {
         $obj = new self;
 
         null !== $page && $obj->page = $page;
         null !== $status && $obj->status = $status;
-        null !== $testSuiteRunID && $obj->testSuiteRunID = $testSuiteRunID;
+        null !== $test_suite_run_id && $obj->test_suite_run_id = $test_suite_run_id;
 
         return $obj;
     }
@@ -95,7 +95,7 @@ final class RunListParams implements BaseModel
     public function withTestSuiteRunID(string $testSuiteRunID): self
     {
         $obj = clone $this;
-        $obj->testSuiteRunID = $testSuiteRunID;
+        $obj->test_suite_run_id = $testSuiteRunID;
 
         return $obj;
     }

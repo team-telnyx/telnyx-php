@@ -8,11 +8,9 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\PortingOrders\Actions\ActionActivateResponse;
 use Telnyx\PortingOrders\Actions\ActionCancelResponse;
 use Telnyx\PortingOrders\Actions\ActionConfirmResponse;
-use Telnyx\PortingOrders\Actions\ActionShareParams\Permissions;
+use Telnyx\PortingOrders\Actions\ActionShareParams;
 use Telnyx\PortingOrders\Actions\ActionShareResponse;
 use Telnyx\RequestOptions;
-
-use const Telnyx\Core\OMIT as omit;
 
 interface ActionsContract
 {
@@ -49,28 +47,13 @@ interface ActionsContract
     /**
      * @api
      *
-     * @param int $expiresInSeconds The number of seconds the token will be valid for
-     * @param Permissions|value-of<Permissions> $permissions The permissions the token will have
+     * @param array<mixed>|ActionShareParams $params
      *
      * @throws APIException
      */
     public function share(
         string $id,
-        $expiresInSeconds = omit,
-        $permissions = omit,
+        array|ActionShareParams $params,
         ?RequestOptions $requestOptions = null,
-    ): ActionShareResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function shareRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): ActionShareResponse;
 }

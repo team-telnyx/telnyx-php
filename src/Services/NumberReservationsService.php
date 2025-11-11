@@ -9,8 +9,6 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\NumberReservations\NumberReservationCreateParams;
 use Telnyx\NumberReservations\NumberReservationGetResponse;
 use Telnyx\NumberReservations\NumberReservationListParams;
-use Telnyx\NumberReservations\NumberReservationListParams\Filter;
-use Telnyx\NumberReservations\NumberReservationListParams\Page;
 use Telnyx\NumberReservations\NumberReservationListResponse;
 use Telnyx\NumberReservations\NumberReservationNewResponse;
 use Telnyx\NumberReservations\ReservedPhoneNumber;
@@ -18,12 +16,10 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\NumberReservationsContract;
 use Telnyx\Services\NumberReservations\ActionsService;
 
-use const Telnyx\Core\OMIT as omit;
-
 final class NumberReservationsService implements NumberReservationsContract
 {
     /**
-     * @@api
+     * @api
      */
     public ActionsService $actions;
 
@@ -40,37 +36,28 @@ final class NumberReservationsService implements NumberReservationsContract
      *
      * Creates a Phone Number Reservation for multiple numbers.
      *
-     * @param string $customerReference a customer reference string for customer look ups
-     * @param list<ReservedPhoneNumber> $phoneNumbers
+     * @param array{
+     *   customer_reference?: string,
+     *   phone_numbers?: list<array{
+     *     id?: string,
+     *     created_at?: string|\DateTimeInterface,
+     *     expired_at?: string|\DateTimeInterface,
+     *     phone_number?: string,
+     *     record_type?: string,
+     *     status?: "pending"|"success"|"failure",
+     *     updated_at?: string|\DateTimeInterface,
+     *   }|ReservedPhoneNumber>,
+     * }|NumberReservationCreateParams $params
      *
      * @throws APIException
      */
     public function create(
-        $customerReference = omit,
-        $phoneNumbers = omit,
+        array|NumberReservationCreateParams $params,
         ?RequestOptions $requestOptions = null,
-    ): NumberReservationNewResponse {
-        $params = [
-            'customerReference' => $customerReference, 'phoneNumbers' => $phoneNumbers,
-        ];
-
-        return $this->createRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): NumberReservationNewResponse {
         [$parsed, $options] = NumberReservationCreateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -108,35 +95,25 @@ final class NumberReservationsService implements NumberReservationsContract
      *
      * Gets a paginated list of phone number reservations.
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[status], filter[created_at], filter[phone_numbers.phone_number], filter[customer_reference]
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param array{
+     *   filter?: array{
+     *     created_at?: array{gt?: string, lt?: string},
+     *     customer_reference?: string,
+     *     'phone_numbers.phone_number'?: string,
+     *     status?: string,
+     *   },
+     *   page?: array{number?: int, size?: int},
+     * }|NumberReservationListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): NumberReservationListResponse {
-        $params = ['filter' => $filter, 'page' => $page];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|NumberReservationListParams $params,
+        ?RequestOptions $requestOptions = null,
     ): NumberReservationListResponse {
         [$parsed, $options] = NumberReservationListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

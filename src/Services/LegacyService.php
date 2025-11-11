@@ -11,7 +11,7 @@ use Telnyx\Services\Legacy\ReportingService;
 final class LegacyService implements LegacyContract
 {
     /**
-     * @@api
+     * @api
      */
     public ReportingService $reporting;
 

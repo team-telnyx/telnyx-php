@@ -16,7 +16,7 @@ use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderValidateCodesPa
  * @see Telnyx\MessagingHostedNumberOrders->validateCodes
  *
  * @phpstan-type MessagingHostedNumberOrderValidateCodesParamsShape = array{
- *   verificationCodes: list<VerificationCode>
+ *   verification_codes: list<VerificationCode>
  * }
  */
 final class MessagingHostedNumberOrderValidateCodesParams implements BaseModel
@@ -25,16 +25,16 @@ final class MessagingHostedNumberOrderValidateCodesParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    /** @var list<VerificationCode> $verificationCodes */
-    #[Api('verification_codes', list: VerificationCode::class)]
-    public array $verificationCodes;
+    /** @var list<VerificationCode> $verification_codes */
+    #[Api(list: VerificationCode::class)]
+    public array $verification_codes;
 
     /**
      * `new MessagingHostedNumberOrderValidateCodesParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * MessagingHostedNumberOrderValidateCodesParams::with(verificationCodes: ...)
+     * MessagingHostedNumberOrderValidateCodesParams::with(verification_codes: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -53,13 +53,13 @@ final class MessagingHostedNumberOrderValidateCodesParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<VerificationCode> $verificationCodes
+     * @param list<VerificationCode> $verification_codes
      */
-    public static function with(array $verificationCodes): self
+    public static function with(array $verification_codes): self
     {
         $obj = new self;
 
-        $obj->verificationCodes = $verificationCodes;
+        $obj->verification_codes = $verification_codes;
 
         return $obj;
     }
@@ -70,7 +70,7 @@ final class MessagingHostedNumberOrderValidateCodesParams implements BaseModel
     public function withVerificationCodes(array $verificationCodes): self
     {
         $obj = clone $this;
-        $obj->verificationCodes = $verificationCodes;
+        $obj->verification_codes = $verificationCodes;
 
         return $obj;
     }

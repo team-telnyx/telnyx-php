@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type CredentialConnectionDeleteResponseShape = array{
- *   data?: CredentialConnection
+ *   data?: CredentialConnection|null
  * }
  */
 final class CredentialConnectionDeleteResponse implements BaseModel, ResponseConverter

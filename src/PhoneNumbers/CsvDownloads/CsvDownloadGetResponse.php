@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type CsvDownloadGetResponseShape = array{data?: list<CsvDownload>}
+ * @phpstan-type CsvDownloadGetResponseShape = array{data?: list<CsvDownload>|null}
  */
 final class CsvDownloadGetResponse implements BaseModel, ResponseConverter
 {

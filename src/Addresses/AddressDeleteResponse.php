@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type AddressDeleteResponseShape = array{data?: Address}
+ * @phpstan-type AddressDeleteResponseShape = array{data?: Address|null}
  */
 final class AddressDeleteResponse implements BaseModel, ResponseConverter
 {

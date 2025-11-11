@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type RecordShape = array{
- *   phoneNumber: string, status: string, taskID: string
+ *   phoneNumber: string, status: string, taskId: string
  * }
  */
 final class Record implements BaseModel
@@ -33,15 +33,15 @@ final class Record implements BaseModel
     /**
      * The ID of the task associated with the phone number.
      */
-    #[Api('taskId')]
-    public string $taskID;
+    #[Api]
+    public string $taskId;
 
     /**
      * `new Record()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Record::with(phoneNumber: ..., status: ..., taskID: ...)
+     * Record::with(phoneNumber: ..., status: ..., taskId: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -63,13 +63,13 @@ final class Record implements BaseModel
     public static function with(
         string $phoneNumber,
         string $status,
-        string $taskID
+        string $taskId
     ): self {
         $obj = new self;
 
         $obj->phoneNumber = $phoneNumber;
         $obj->status = $status;
-        $obj->taskID = $taskID;
+        $obj->taskId = $taskId;
 
         return $obj;
     }
@@ -102,7 +102,7 @@ final class Record implements BaseModel
     public function withTaskID(string $taskID): self
     {
         $obj = clone $this;
-        $obj->taskID = $taskID;
+        $obj->taskId = $taskID;
 
         return $obj;
     }

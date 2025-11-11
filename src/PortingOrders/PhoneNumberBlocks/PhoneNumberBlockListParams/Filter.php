@@ -18,12 +18,12 @@ use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter\Sup
  * Consolidated filter parameter (deepObject style). Originally: filter[porting_order_id], filter[support_key], filter[status], filter[phone_number], filter[activation_status], filter[portability_status].
  *
  * @phpstan-type FilterShape = array{
- *   activationStatus?: value-of<ActivationStatus>,
- *   phoneNumber?: list<string>,
- *   portabilityStatus?: value-of<PortabilityStatus>,
- *   portingOrderID?: list<string>,
- *   status?: list<value-of<UnionMember1>>|value-of<UnionMember0>,
- *   supportKey?: string|list<string>,
+ *   activation_status?: value-of<ActivationStatus>|null,
+ *   phone_number?: list<string>|null,
+ *   portability_status?: value-of<PortabilityStatus>|null,
+ *   porting_order_id?: list<string>|null,
+ *   status?: null|list<value-of<UnionMember1>>|value-of<UnionMember0>,
+ *   support_key?: string|null|list<string>,
  * }
  */
 final class Filter implements BaseModel
@@ -34,34 +34,34 @@ final class Filter implements BaseModel
     /**
      * Filter results by activation status.
      *
-     * @var value-of<ActivationStatus>|null $activationStatus
+     * @var value-of<ActivationStatus>|null $activation_status
      */
-    #[Api('activation_status', enum: ActivationStatus::class, optional: true)]
-    public ?string $activationStatus;
+    #[Api(enum: ActivationStatus::class, optional: true)]
+    public ?string $activation_status;
 
     /**
      * Filter results by a list of phone numbers.
      *
-     * @var list<string>|null $phoneNumber
+     * @var list<string>|null $phone_number
      */
-    #[Api('phone_number', list: 'string', optional: true)]
-    public ?array $phoneNumber;
+    #[Api(list: 'string', optional: true)]
+    public ?array $phone_number;
 
     /**
      * Filter results by portability status.
      *
-     * @var value-of<PortabilityStatus>|null $portabilityStatus
+     * @var value-of<PortabilityStatus>|null $portability_status
      */
-    #[Api('portability_status', enum: PortabilityStatus::class, optional: true)]
-    public ?string $portabilityStatus;
+    #[Api(enum: PortabilityStatus::class, optional: true)]
+    public ?string $portability_status;
 
     /**
      * Filter results by a list of porting order ids.
      *
-     * @var list<string>|null $portingOrderID
+     * @var list<string>|null $porting_order_id
      */
-    #[Api('porting_order_id', list: 'string', optional: true)]
-    public ?array $portingOrderID;
+    #[Api(list: 'string', optional: true)]
+    public ?array $porting_order_id;
 
     /**
      * Filter porting orders by status(es). Originally: filter[status], filter[status][in][].
@@ -74,10 +74,10 @@ final class Filter implements BaseModel
     /**
      * Filter results by support key(s). Originally: filter[support_key][eq], filter[support_key][in][].
      *
-     * @var string|list<string>|null $supportKey
+     * @var string|list<string>|null $support_key
      */
-    #[Api('support_key', union: SupportKey::class, optional: true)]
-    public string|array|null $supportKey;
+    #[Api(union: SupportKey::class, optional: true)]
+    public string|array|null $support_key;
 
     public function __construct()
     {
@@ -89,29 +89,29 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ActivationStatus|value-of<ActivationStatus> $activationStatus
-     * @param list<string> $phoneNumber
-     * @param PortabilityStatus|value-of<PortabilityStatus> $portabilityStatus
-     * @param list<string> $portingOrderID
+     * @param ActivationStatus|value-of<ActivationStatus> $activation_status
+     * @param list<string> $phone_number
+     * @param PortabilityStatus|value-of<PortabilityStatus> $portability_status
+     * @param list<string> $porting_order_id
      * @param UnionMember0|list<UnionMember1|value-of<UnionMember1>>|value-of<UnionMember0> $status
-     * @param string|list<string> $supportKey
+     * @param string|list<string> $support_key
      */
     public static function with(
-        ActivationStatus|string|null $activationStatus = null,
-        ?array $phoneNumber = null,
-        PortabilityStatus|string|null $portabilityStatus = null,
-        ?array $portingOrderID = null,
+        ActivationStatus|string|null $activation_status = null,
+        ?array $phone_number = null,
+        PortabilityStatus|string|null $portability_status = null,
+        ?array $porting_order_id = null,
         UnionMember0|array|string|null $status = null,
-        string|array|null $supportKey = null,
+        string|array|null $support_key = null,
     ): self {
         $obj = new self;
 
-        null !== $activationStatus && $obj['activationStatus'] = $activationStatus;
-        null !== $phoneNumber && $obj->phoneNumber = $phoneNumber;
-        null !== $portabilityStatus && $obj['portabilityStatus'] = $portabilityStatus;
-        null !== $portingOrderID && $obj->portingOrderID = $portingOrderID;
+        null !== $activation_status && $obj['activation_status'] = $activation_status;
+        null !== $phone_number && $obj->phone_number = $phone_number;
+        null !== $portability_status && $obj['portability_status'] = $portability_status;
+        null !== $porting_order_id && $obj->porting_order_id = $porting_order_id;
         null !== $status && $obj['status'] = $status;
-        null !== $supportKey && $obj->supportKey = $supportKey;
+        null !== $support_key && $obj->support_key = $support_key;
 
         return $obj;
     }
@@ -125,7 +125,7 @@ final class Filter implements BaseModel
         ActivationStatus|string $activationStatus
     ): self {
         $obj = clone $this;
-        $obj['activationStatus'] = $activationStatus;
+        $obj['activation_status'] = $activationStatus;
 
         return $obj;
     }
@@ -138,7 +138,7 @@ final class Filter implements BaseModel
     public function withPhoneNumber(array $phoneNumber): self
     {
         $obj = clone $this;
-        $obj->phoneNumber = $phoneNumber;
+        $obj->phone_number = $phoneNumber;
 
         return $obj;
     }
@@ -152,7 +152,7 @@ final class Filter implements BaseModel
         PortabilityStatus|string $portabilityStatus
     ): self {
         $obj = clone $this;
-        $obj['portabilityStatus'] = $portabilityStatus;
+        $obj['portability_status'] = $portabilityStatus;
 
         return $obj;
     }
@@ -165,7 +165,7 @@ final class Filter implements BaseModel
     public function withPortingOrderID(array $portingOrderID): self
     {
         $obj = clone $this;
-        $obj->portingOrderID = $portingOrderID;
+        $obj->porting_order_id = $portingOrderID;
 
         return $obj;
     }
@@ -191,7 +191,7 @@ final class Filter implements BaseModel
     public function withSupportKey(string|array $supportKey): self
     {
         $obj = clone $this;
-        $obj->supportKey = $supportKey;
+        $obj->support_key = $supportKey;
 
         return $obj;
     }

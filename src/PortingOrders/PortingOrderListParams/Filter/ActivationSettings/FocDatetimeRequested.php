@@ -11,7 +11,9 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * FOC datetime range filtering operations.
  *
- * @phpstan-type FocDatetimeRequestedShape = array{gt?: string, lt?: string}
+ * @phpstan-type FocDatetimeRequestedShape = array{
+ *   gt?: string|null, lt?: string|null
+ * }
  */
 final class FocDatetimeRequested implements BaseModel
 {

@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\RoomRecordings\RoomRecordingGetResponse\Data;
 
 /**
- * @phpstan-type RoomRecordingGetResponseShape = array{data?: Data}
+ * @phpstan-type RoomRecordingGetResponseShape = array{data?: Data|null}
  */
 final class RoomRecordingGetResponse implements BaseModel, ResponseConverter
 {

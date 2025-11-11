@@ -13,7 +13,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type IPConnectionListResponseShape = array{
- *   data?: list<IPConnection>, meta?: ConnectionsPaginationMeta
+ *   data?: list<IPConnection>|null, meta?: ConnectionsPaginationMeta|null
  * }
  */
 final class IPConnectionListResponse implements BaseModel, ResponseConverter

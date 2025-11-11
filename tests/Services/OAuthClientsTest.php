@@ -33,12 +33,12 @@ final class OAuthClientsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->oauthClients->create(
-            allowedGrantTypes: ['client_credentials'],
-            allowedScopes: ['admin'],
-            clientType: 'public',
-            name: 'My OAuth client',
-        );
+        $result = $this->client->oauthClients->create([
+            'allowed_grant_types' => ['client_credentials'],
+            'allowed_scopes' => ['admin'],
+            'client_type' => 'public',
+            'name' => 'My OAuth client',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -50,12 +50,12 @@ final class OAuthClientsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->oauthClients->create(
-            allowedGrantTypes: ['client_credentials'],
-            allowedScopes: ['admin'],
-            clientType: 'public',
-            name: 'My OAuth client',
-        );
+        $result = $this->client->oauthClients->create([
+            'allowed_grant_types' => ['client_credentials'],
+            'allowed_scopes' => ['admin'],
+            'client_type' => 'public',
+            'name' => 'My OAuth client',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -82,7 +82,8 @@ final class OAuthClientsTest extends TestCase
         }
 
         $result = $this->client->oauthClients->update(
-            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
+            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+            []
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -95,7 +96,7 @@ final class OAuthClientsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->oauthClients->list();
+        $result = $this->client->oauthClients->list([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

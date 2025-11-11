@@ -34,7 +34,8 @@ final class InvoicesTest extends TestCase
         }
 
         $result = $this->client->invoices->retrieve(
-            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
+            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+            []
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -47,7 +48,7 @@ final class InvoicesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->invoices->list();
+        $result = $this->client->invoices->list([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

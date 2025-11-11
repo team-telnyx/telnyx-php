@@ -14,7 +14,7 @@ use Telnyx\Reports\ReportListMdrsResponse\Data;
 
 /**
  * @phpstan-type ReportListMdrsResponseShape = array{
- *   data?: list<Data>, meta?: PaginationMetaReporting
+ *   data?: list<Data>|null, meta?: PaginationMetaReporting|null
  * }
  */
 final class ReportListMdrsResponse implements BaseModel, ResponseConverter

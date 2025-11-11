@@ -33,11 +33,11 @@ final class MdrUsageReportsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->reports->mdrUsageReports->create(
-            aggregationType: 'NO_AGGREGATION',
-            endDate: new \DateTimeImmutable('2020-07-01T00:00:00-06:00'),
-            startDate: new \DateTimeImmutable('2020-07-01T00:00:00-06:00'),
-        );
+        $result = $this->client->reports->mdrUsageReports->create([
+            'aggregation_type' => 'NO_AGGREGATION',
+            'end_date' => '2020-07-01T00:00:00-06:00',
+            'start_date' => '2020-07-01T00:00:00-06:00',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -49,11 +49,11 @@ final class MdrUsageReportsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->reports->mdrUsageReports->create(
-            aggregationType: 'NO_AGGREGATION',
-            endDate: new \DateTimeImmutable('2020-07-01T00:00:00-06:00'),
-            startDate: new \DateTimeImmutable('2020-07-01T00:00:00-06:00'),
-        );
+        $result = $this->client->reports->mdrUsageReports->create([
+            'aggregation_type' => 'NO_AGGREGATION',
+            'end_date' => '2020-07-01T00:00:00-06:00',
+            'start_date' => '2020-07-01T00:00:00-06:00',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -79,7 +79,7 @@ final class MdrUsageReportsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->reports->mdrUsageReports->list();
+        $result = $this->client->reports->mdrUsageReports->list([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -105,9 +105,9 @@ final class MdrUsageReportsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->reports->mdrUsageReports->fetchSync(
-            aggregationType: 'NO_AGGREGATION'
-        );
+        $result = $this->client->reports->mdrUsageReports->fetchSync([
+            'aggregation_type' => 'NO_AGGREGATION',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -119,9 +119,9 @@ final class MdrUsageReportsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->reports->mdrUsageReports->fetchSync(
-            aggregationType: 'NO_AGGREGATION'
-        );
+        $result = $this->client->reports->mdrUsageReports->fetchSync([
+            'aggregation_type' => 'NO_AGGREGATION',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

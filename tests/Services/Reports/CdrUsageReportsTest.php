@@ -33,10 +33,10 @@ final class CdrUsageReportsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->reports->cdrUsageReports->fetchSync(
-            aggregationType: 'NO_AGGREGATION',
-            productBreakdown: 'NO_BREAKDOWN'
-        );
+        $result = $this->client->reports->cdrUsageReports->fetchSync([
+            'aggregation_type' => 'NO_AGGREGATION',
+            'product_breakdown' => 'NO_BREAKDOWN',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -48,10 +48,10 @@ final class CdrUsageReportsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->reports->cdrUsageReports->fetchSync(
-            aggregationType: 'NO_AGGREGATION',
-            productBreakdown: 'NO_BREAKDOWN'
-        );
+        $result = $this->client->reports->cdrUsageReports->fetchSync([
+            'aggregation_type' => 'NO_AGGREGATION',
+            'product_breakdown' => 'NO_BREAKDOWN',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

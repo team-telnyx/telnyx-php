@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type ProviderAuthShape = array{
- *   accessKey?: string, secretAccessKey?: string
+ *   access_key?: string|null, secret_access_key?: string|null
  * }
  */
 final class ProviderAuth implements BaseModel
@@ -21,14 +21,14 @@ final class ProviderAuth implements BaseModel
     /**
      * AWS Access Key. For Telnyx-to-Telnyx migrations, use your Telnyx API key here.
      */
-    #[Api('access_key', optional: true)]
-    public ?string $accessKey;
+    #[Api(optional: true)]
+    public ?string $access_key;
 
     /**
      * AWS Secret Access Key. For Telnyx-to-Telnyx migrations, use your Telnyx API key here as well.
      */
-    #[Api('secret_access_key', optional: true)]
-    public ?string $secretAccessKey;
+    #[Api(optional: true)]
+    public ?string $secret_access_key;
 
     public function __construct()
     {
@@ -41,13 +41,13 @@ final class ProviderAuth implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $accessKey = null,
-        ?string $secretAccessKey = null
+        ?string $access_key = null,
+        ?string $secret_access_key = null
     ): self {
         $obj = new self;
 
-        null !== $accessKey && $obj->accessKey = $accessKey;
-        null !== $secretAccessKey && $obj->secretAccessKey = $secretAccessKey;
+        null !== $access_key && $obj->access_key = $access_key;
+        null !== $secret_access_key && $obj->secret_access_key = $secret_access_key;
 
         return $obj;
     }
@@ -58,7 +58,7 @@ final class ProviderAuth implements BaseModel
     public function withAccessKey(string $accessKey): self
     {
         $obj = clone $this;
-        $obj->accessKey = $accessKey;
+        $obj->access_key = $accessKey;
 
         return $obj;
     }
@@ -69,7 +69,7 @@ final class ProviderAuth implements BaseModel
     public function withSecretAccessKey(string $secretAccessKey): self
     {
         $obj = clone $this;
-        $obj->secretAccessKey = $secretAccessKey;
+        $obj->secret_access_key = $secretAccessKey;
 
         return $obj;
     }

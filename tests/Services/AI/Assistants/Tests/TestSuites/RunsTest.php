@@ -34,7 +34,8 @@ final class RunsTest extends TestCase
         }
 
         $result = $this->client->ai->assistants->tests->testSuites->runs->list(
-            'suite_name'
+            'suite_name',
+            []
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -48,7 +49,8 @@ final class RunsTest extends TestCase
         }
 
         $result = $this->client->ai->assistants->tests->testSuites->runs->trigger(
-            'suite_name'
+            'suite_name',
+            []
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType

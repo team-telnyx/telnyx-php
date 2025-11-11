@@ -31,8 +31,8 @@ use Telnyx\Core\Contracts\BaseModel;
  *   productionMessageContent: string,
  *   useCase: value-of<UseCaseCategories>,
  *   useCaseSummary: string,
- *   ageGatedContent?: bool,
- *   businessAddr2?: string,
+ *   ageGatedContent?: bool|null,
+ *   businessAddr2?: string|null,
  *   businessRegistrationCountry?: string|null,
  *   businessRegistrationNumber?: string|null,
  *   businessRegistrationType?: string|null,
@@ -43,7 +43,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   optInKeywords?: string|null,
  *   privacyPolicyURL?: string|null,
  *   termsAndConditionURL?: string|null,
- *   webhookURL?: string,
+ *   webhookUrl?: string|null,
  * }
  */
 final class TfVerificationRequest implements BaseModel
@@ -254,8 +254,8 @@ final class TfVerificationRequest implements BaseModel
     /**
      * URL that should receive webhooks relating to this verification request.
      */
-    #[Api('webhookUrl', optional: true)]
-    public ?string $webhookURL;
+    #[Api(optional: true)]
+    public ?string $webhookUrl;
 
     /**
      * `new TfVerificationRequest()` is missing required properties by the API.
@@ -358,7 +358,7 @@ final class TfVerificationRequest implements BaseModel
         ?string $optInKeywords = null,
         ?string $privacyPolicyURL = null,
         ?string $termsAndConditionURL = null,
-        ?string $webhookURL = null,
+        ?string $webhookUrl = null,
     ): self {
         $obj = new self;
 
@@ -394,7 +394,7 @@ final class TfVerificationRequest implements BaseModel
         null !== $optInKeywords && $obj->optInKeywords = $optInKeywords;
         null !== $privacyPolicyURL && $obj->privacyPolicyURL = $privacyPolicyURL;
         null !== $termsAndConditionURL && $obj->termsAndConditionURL = $termsAndConditionURL;
-        null !== $webhookURL && $obj->webhookURL = $webhookURL;
+        null !== $webhookUrl && $obj->webhookUrl = $webhookUrl;
 
         return $obj;
     }
@@ -767,7 +767,7 @@ final class TfVerificationRequest implements BaseModel
     public function withWebhookURL(string $webhookURL): self
     {
         $obj = clone $this;
-        $obj->webhookURL = $webhookURL;
+        $obj->webhookUrl = $webhookURL;
 
         return $obj;
     }

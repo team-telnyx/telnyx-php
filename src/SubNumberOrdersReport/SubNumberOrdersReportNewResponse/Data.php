@@ -12,13 +12,13 @@ use Telnyx\SubNumberOrdersReport\SubNumberOrdersReportNewResponse\Data\Status;
 
 /**
  * @phpstan-type DataShape = array{
- *   id?: string,
- *   createdAt?: \DateTimeInterface,
- *   filters?: Filters,
- *   orderType?: string,
- *   status?: value-of<Status>,
- *   updatedAt?: \DateTimeInterface,
- *   userID?: string,
+ *   id?: string|null,
+ *   created_at?: \DateTimeInterface|null,
+ *   filters?: Filters|null,
+ *   order_type?: string|null,
+ *   status?: value-of<Status>|null,
+ *   updated_at?: \DateTimeInterface|null,
+ *   user_id?: string|null,
  * }
  */
 final class Data implements BaseModel
@@ -35,8 +35,8 @@ final class Data implements BaseModel
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Api('created_at', optional: true)]
-    public ?\DateTimeInterface $createdAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $created_at;
 
     /**
      * The filters that were applied to generate this report.
@@ -47,8 +47,8 @@ final class Data implements BaseModel
     /**
      * The type of order report.
      */
-    #[Api('order_type', optional: true)]
-    public ?string $orderType;
+    #[Api(optional: true)]
+    public ?string $order_type;
 
     /**
      * Indicates the completion level of the sub number orders report. The report must have a status of 'success' before it can be downloaded.
@@ -61,14 +61,14 @@ final class Data implements BaseModel
     /**
      * ISO 8601 formatted date indicating when the resource was updated.
      */
-    #[Api('updated_at', optional: true)]
-    public ?\DateTimeInterface $updatedAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $updated_at;
 
     /**
      * The ID of the user who created the report.
      */
-    #[Api('user_id', optional: true)]
-    public ?string $userID;
+    #[Api(optional: true)]
+    public ?string $user_id;
 
     public function __construct()
     {
@@ -84,22 +84,22 @@ final class Data implements BaseModel
      */
     public static function with(
         ?string $id = null,
-        ?\DateTimeInterface $createdAt = null,
+        ?\DateTimeInterface $created_at = null,
         ?Filters $filters = null,
-        ?string $orderType = null,
+        ?string $order_type = null,
         Status|string|null $status = null,
-        ?\DateTimeInterface $updatedAt = null,
-        ?string $userID = null,
+        ?\DateTimeInterface $updated_at = null,
+        ?string $user_id = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj->id = $id;
-        null !== $createdAt && $obj->createdAt = $createdAt;
+        null !== $created_at && $obj->created_at = $created_at;
         null !== $filters && $obj->filters = $filters;
-        null !== $orderType && $obj->orderType = $orderType;
+        null !== $order_type && $obj->order_type = $order_type;
         null !== $status && $obj['status'] = $status;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
-        null !== $userID && $obj->userID = $userID;
+        null !== $updated_at && $obj->updated_at = $updated_at;
+        null !== $user_id && $obj->user_id = $user_id;
 
         return $obj;
     }
@@ -121,7 +121,7 @@ final class Data implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }
@@ -143,7 +143,7 @@ final class Data implements BaseModel
     public function withOrderType(string $orderType): self
     {
         $obj = clone $this;
-        $obj->orderType = $orderType;
+        $obj->order_type = $orderType;
 
         return $obj;
     }
@@ -167,7 +167,7 @@ final class Data implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $obj->updated_at = $updatedAt;
 
         return $obj;
     }
@@ -178,7 +178,7 @@ final class Data implements BaseModel
     public function withUserID(string $userID): self
     {
         $obj = clone $this;
-        $obj->userID = $userID;
+        $obj->user_id = $userID;
 
         return $obj;
     }

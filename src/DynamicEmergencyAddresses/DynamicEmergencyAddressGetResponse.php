@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type DynamicEmergencyAddressGetResponseShape = array{
- *   data?: DynamicEmergencyAddress
+ *   data?: DynamicEmergencyAddress|null
  * }
  */
 final class DynamicEmergencyAddressGetResponse implements BaseModel, ResponseConverter

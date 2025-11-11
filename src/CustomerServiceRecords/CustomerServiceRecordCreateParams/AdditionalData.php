@@ -10,16 +10,16 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type AdditionalDataShape = array{
- *   accountNumber?: string,
- *   addressLine1?: string,
- *   authorizedPersonName?: string,
- *   billingPhoneNumber?: string,
- *   city?: string,
- *   customerCode?: string,
- *   name?: string,
- *   pin?: string,
- *   state?: string,
- *   zipCode?: string,
+ *   account_number?: string|null,
+ *   address_line_1?: string|null,
+ *   authorized_person_name?: string|null,
+ *   billing_phone_number?: string|null,
+ *   city?: string|null,
+ *   customer_code?: string|null,
+ *   name?: string|null,
+ *   pin?: string|null,
+ *   state?: string|null,
+ *   zip_code?: string|null,
  * }
  */
 final class AdditionalData implements BaseModel
@@ -30,26 +30,26 @@ final class AdditionalData implements BaseModel
     /**
      * The account number of the customer service record.
      */
-    #[Api('account_number', optional: true)]
-    public ?string $accountNumber;
+    #[Api(optional: true)]
+    public ?string $account_number;
 
     /**
      * The first line of the address of the customer service record.
      */
-    #[Api('address_line_1', optional: true)]
-    public ?string $addressLine1;
+    #[Api(optional: true)]
+    public ?string $address_line_1;
 
     /**
      * The name of the authorized person.
      */
-    #[Api('authorized_person_name', optional: true)]
-    public ?string $authorizedPersonName;
+    #[Api(optional: true)]
+    public ?string $authorized_person_name;
 
     /**
      * The billing phone number of the customer service record.
      */
-    #[Api('billing_phone_number', optional: true)]
-    public ?string $billingPhoneNumber;
+    #[Api(optional: true)]
+    public ?string $billing_phone_number;
 
     /**
      * The city of the customer service record.
@@ -60,8 +60,8 @@ final class AdditionalData implements BaseModel
     /**
      * The customer code of the customer service record.
      */
-    #[Api('customer_code', optional: true)]
-    public ?string $customerCode;
+    #[Api(optional: true)]
+    public ?string $customer_code;
 
     /**
      * The name of the administrator of CSR.
@@ -84,8 +84,8 @@ final class AdditionalData implements BaseModel
     /**
      * The zip code of the customer service record.
      */
-    #[Api('zip_code', optional: true)]
-    public ?string $zipCode;
+    #[Api(optional: true)]
+    public ?string $zip_code;
 
     public function __construct()
     {
@@ -98,29 +98,29 @@ final class AdditionalData implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $accountNumber = null,
-        ?string $addressLine1 = null,
-        ?string $authorizedPersonName = null,
-        ?string $billingPhoneNumber = null,
+        ?string $account_number = null,
+        ?string $address_line_1 = null,
+        ?string $authorized_person_name = null,
+        ?string $billing_phone_number = null,
         ?string $city = null,
-        ?string $customerCode = null,
+        ?string $customer_code = null,
         ?string $name = null,
         ?string $pin = null,
         ?string $state = null,
-        ?string $zipCode = null,
+        ?string $zip_code = null,
     ): self {
         $obj = new self;
 
-        null !== $accountNumber && $obj->accountNumber = $accountNumber;
-        null !== $addressLine1 && $obj->addressLine1 = $addressLine1;
-        null !== $authorizedPersonName && $obj->authorizedPersonName = $authorizedPersonName;
-        null !== $billingPhoneNumber && $obj->billingPhoneNumber = $billingPhoneNumber;
+        null !== $account_number && $obj->account_number = $account_number;
+        null !== $address_line_1 && $obj->address_line_1 = $address_line_1;
+        null !== $authorized_person_name && $obj->authorized_person_name = $authorized_person_name;
+        null !== $billing_phone_number && $obj->billing_phone_number = $billing_phone_number;
         null !== $city && $obj->city = $city;
-        null !== $customerCode && $obj->customerCode = $customerCode;
+        null !== $customer_code && $obj->customer_code = $customer_code;
         null !== $name && $obj->name = $name;
         null !== $pin && $obj->pin = $pin;
         null !== $state && $obj->state = $state;
-        null !== $zipCode && $obj->zipCode = $zipCode;
+        null !== $zip_code && $obj->zip_code = $zip_code;
 
         return $obj;
     }
@@ -131,7 +131,7 @@ final class AdditionalData implements BaseModel
     public function withAccountNumber(string $accountNumber): self
     {
         $obj = clone $this;
-        $obj->accountNumber = $accountNumber;
+        $obj->account_number = $accountNumber;
 
         return $obj;
     }
@@ -142,7 +142,7 @@ final class AdditionalData implements BaseModel
     public function withAddressLine1(string $addressLine1): self
     {
         $obj = clone $this;
-        $obj->addressLine1 = $addressLine1;
+        $obj->address_line_1 = $addressLine1;
 
         return $obj;
     }
@@ -153,7 +153,7 @@ final class AdditionalData implements BaseModel
     public function withAuthorizedPersonName(string $authorizedPersonName): self
     {
         $obj = clone $this;
-        $obj->authorizedPersonName = $authorizedPersonName;
+        $obj->authorized_person_name = $authorizedPersonName;
 
         return $obj;
     }
@@ -164,7 +164,7 @@ final class AdditionalData implements BaseModel
     public function withBillingPhoneNumber(string $billingPhoneNumber): self
     {
         $obj = clone $this;
-        $obj->billingPhoneNumber = $billingPhoneNumber;
+        $obj->billing_phone_number = $billingPhoneNumber;
 
         return $obj;
     }
@@ -186,7 +186,7 @@ final class AdditionalData implements BaseModel
     public function withCustomerCode(string $customerCode): self
     {
         $obj = clone $this;
-        $obj->customerCode = $customerCode;
+        $obj->customer_code = $customerCode;
 
         return $obj;
     }
@@ -230,7 +230,7 @@ final class AdditionalData implements BaseModel
     public function withZipCode(string $zipCode): self
     {
         $obj = clone $this;
-        $obj->zipCode = $zipCode;
+        $obj->zip_code = $zipCode;
 
         return $obj;
     }

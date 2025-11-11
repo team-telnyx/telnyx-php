@@ -13,22 +13,22 @@ use Telnyx\OAuthClients\OAuthClient\RecordType;
 
 /**
  * @phpstan-type OAuthClientShape = array{
- *   clientID: string,
- *   clientType: value-of<ClientType>,
- *   createdAt: \DateTimeInterface,
+ *   client_id: string,
+ *   client_type: value-of<ClientType>,
+ *   created_at: \DateTimeInterface,
  *   name: string,
- *   orgID: string,
- *   recordType: value-of<RecordType>,
- *   requirePkce: bool,
- *   updatedAt: \DateTimeInterface,
- *   userID: string,
- *   allowedGrantTypes?: list<value-of<AllowedGrantType>>,
- *   allowedScopes?: list<string>,
- *   clientSecret?: string|null,
- *   logoUri?: string|null,
- *   policyUri?: string|null,
- *   redirectUris?: list<string>,
- *   tosUri?: string|null,
+ *   org_id: string,
+ *   record_type: value-of<RecordType>,
+ *   require_pkce: bool,
+ *   updated_at: \DateTimeInterface,
+ *   user_id: string,
+ *   allowed_grant_types?: list<value-of<AllowedGrantType>>|null,
+ *   allowed_scopes?: list<string>|null,
+ *   client_secret?: string|null,
+ *   logo_uri?: string|null,
+ *   policy_uri?: string|null,
+ *   redirect_uris?: list<string>|null,
+ *   tos_uri?: string|null,
  * }
  */
 final class OAuthClient implements BaseModel
@@ -39,22 +39,22 @@ final class OAuthClient implements BaseModel
     /**
      * OAuth client identifier.
      */
-    #[Api('client_id')]
-    public string $clientID;
+    #[Api]
+    public string $client_id;
 
     /**
      * OAuth client type.
      *
-     * @var value-of<ClientType> $clientType
+     * @var value-of<ClientType> $client_type
      */
-    #[Api('client_type', enum: ClientType::class)]
-    public string $clientType;
+    #[Api(enum: ClientType::class)]
+    public string $client_type;
 
     /**
      * Timestamp when the client was created.
      */
-    #[Api('created_at')]
-    public \DateTimeInterface $createdAt;
+    #[Api]
+    public \DateTimeInterface $created_at;
 
     /**
      * Human-readable name for the OAuth client.
@@ -65,82 +65,82 @@ final class OAuthClient implements BaseModel
     /**
      * Organization ID that owns this OAuth client.
      */
-    #[Api('org_id')]
-    public string $orgID;
+    #[Api]
+    public string $org_id;
 
     /**
      * Record type identifier.
      *
-     * @var value-of<RecordType> $recordType
+     * @var value-of<RecordType> $record_type
      */
-    #[Api('record_type', enum: RecordType::class)]
-    public string $recordType;
+    #[Api(enum: RecordType::class)]
+    public string $record_type;
 
     /**
      * Whether PKCE (Proof Key for Code Exchange) is required for this client.
      */
-    #[Api('require_pkce')]
-    public bool $requirePkce;
+    #[Api]
+    public bool $require_pkce;
 
     /**
      * Timestamp when the client was last updated.
      */
-    #[Api('updated_at')]
-    public \DateTimeInterface $updatedAt;
+    #[Api]
+    public \DateTimeInterface $updated_at;
 
     /**
      * User ID that created this OAuth client.
      */
-    #[Api('user_id')]
-    public string $userID;
+    #[Api]
+    public string $user_id;
 
     /**
      * List of allowed OAuth grant types.
      *
-     * @var list<value-of<AllowedGrantType>>|null $allowedGrantTypes
+     * @var list<value-of<AllowedGrantType>>|null $allowed_grant_types
      */
-    #[Api('allowed_grant_types', list: AllowedGrantType::class, optional: true)]
-    public ?array $allowedGrantTypes;
+    #[Api(list: AllowedGrantType::class, optional: true)]
+    public ?array $allowed_grant_types;
 
     /**
      * List of allowed OAuth scopes.
      *
-     * @var list<string>|null $allowedScopes
+     * @var list<string>|null $allowed_scopes
      */
-    #[Api('allowed_scopes', list: 'string', optional: true)]
-    public ?array $allowedScopes;
+    #[Api(list: 'string', optional: true)]
+    public ?array $allowed_scopes;
 
     /**
      * Client secret (only included when available, for confidential clients).
      */
-    #[Api('client_secret', nullable: true, optional: true)]
-    public ?string $clientSecret;
+    #[Api(nullable: true, optional: true)]
+    public ?string $client_secret;
 
     /**
      * URL of the client logo.
      */
-    #[Api('logo_uri', nullable: true, optional: true)]
-    public ?string $logoUri;
+    #[Api(nullable: true, optional: true)]
+    public ?string $logo_uri;
 
     /**
      * URL of the client's privacy policy.
      */
-    #[Api('policy_uri', nullable: true, optional: true)]
-    public ?string $policyUri;
+    #[Api(nullable: true, optional: true)]
+    public ?string $policy_uri;
 
     /**
      * List of allowed redirect URIs.
      *
-     * @var list<string>|null $redirectUris
+     * @var list<string>|null $redirect_uris
      */
-    #[Api('redirect_uris', list: 'string', optional: true)]
-    public ?array $redirectUris;
+    #[Api(list: 'string', optional: true)]
+    public ?array $redirect_uris;
 
     /**
      * URL of the client's terms of service.
      */
-    #[Api('tos_uri', nullable: true, optional: true)]
-    public ?string $tosUri;
+    #[Api(nullable: true, optional: true)]
+    public ?string $tos_uri;
 
     /**
      * `new OAuthClient()` is missing required properties by the API.
@@ -148,15 +148,15 @@ final class OAuthClient implements BaseModel
      * To enforce required parameters use
      * ```
      * OAuthClient::with(
-     *   clientID: ...,
-     *   clientType: ...,
-     *   createdAt: ...,
+     *   client_id: ...,
+     *   client_type: ...,
+     *   created_at: ...,
      *   name: ...,
-     *   orgID: ...,
-     *   recordType: ...,
-     *   requirePkce: ...,
-     *   updatedAt: ...,
-     *   userID: ...,
+     *   org_id: ...,
+     *   record_type: ...,
+     *   require_pkce: ...,
+     *   updated_at: ...,
+     *   user_id: ...,
      * )
      * ```
      *
@@ -185,49 +185,49 @@ final class OAuthClient implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ClientType|value-of<ClientType> $clientType
-     * @param RecordType|value-of<RecordType> $recordType
-     * @param list<AllowedGrantType|value-of<AllowedGrantType>> $allowedGrantTypes
-     * @param list<string> $allowedScopes
-     * @param list<string> $redirectUris
+     * @param ClientType|value-of<ClientType> $client_type
+     * @param RecordType|value-of<RecordType> $record_type
+     * @param list<AllowedGrantType|value-of<AllowedGrantType>> $allowed_grant_types
+     * @param list<string> $allowed_scopes
+     * @param list<string> $redirect_uris
      */
     public static function with(
-        string $clientID,
-        ClientType|string $clientType,
-        \DateTimeInterface $createdAt,
+        string $client_id,
+        ClientType|string $client_type,
+        \DateTimeInterface $created_at,
         string $name,
-        string $orgID,
-        RecordType|string $recordType,
-        bool $requirePkce,
-        \DateTimeInterface $updatedAt,
-        string $userID,
-        ?array $allowedGrantTypes = null,
-        ?array $allowedScopes = null,
-        ?string $clientSecret = null,
-        ?string $logoUri = null,
-        ?string $policyUri = null,
-        ?array $redirectUris = null,
-        ?string $tosUri = null,
+        string $org_id,
+        RecordType|string $record_type,
+        bool $require_pkce,
+        \DateTimeInterface $updated_at,
+        string $user_id,
+        ?array $allowed_grant_types = null,
+        ?array $allowed_scopes = null,
+        ?string $client_secret = null,
+        ?string $logo_uri = null,
+        ?string $policy_uri = null,
+        ?array $redirect_uris = null,
+        ?string $tos_uri = null,
     ): self {
         $obj = new self;
 
-        $obj->clientID = $clientID;
-        $obj['clientType'] = $clientType;
-        $obj->createdAt = $createdAt;
+        $obj->client_id = $client_id;
+        $obj['client_type'] = $client_type;
+        $obj->created_at = $created_at;
         $obj->name = $name;
-        $obj->orgID = $orgID;
-        $obj['recordType'] = $recordType;
-        $obj->requirePkce = $requirePkce;
-        $obj->updatedAt = $updatedAt;
-        $obj->userID = $userID;
+        $obj->org_id = $org_id;
+        $obj['record_type'] = $record_type;
+        $obj->require_pkce = $require_pkce;
+        $obj->updated_at = $updated_at;
+        $obj->user_id = $user_id;
 
-        null !== $allowedGrantTypes && $obj['allowedGrantTypes'] = $allowedGrantTypes;
-        null !== $allowedScopes && $obj->allowedScopes = $allowedScopes;
-        null !== $clientSecret && $obj->clientSecret = $clientSecret;
-        null !== $logoUri && $obj->logoUri = $logoUri;
-        null !== $policyUri && $obj->policyUri = $policyUri;
-        null !== $redirectUris && $obj->redirectUris = $redirectUris;
-        null !== $tosUri && $obj->tosUri = $tosUri;
+        null !== $allowed_grant_types && $obj['allowed_grant_types'] = $allowed_grant_types;
+        null !== $allowed_scopes && $obj->allowed_scopes = $allowed_scopes;
+        null !== $client_secret && $obj->client_secret = $client_secret;
+        null !== $logo_uri && $obj->logo_uri = $logo_uri;
+        null !== $policy_uri && $obj->policy_uri = $policy_uri;
+        null !== $redirect_uris && $obj->redirect_uris = $redirect_uris;
+        null !== $tos_uri && $obj->tos_uri = $tos_uri;
 
         return $obj;
     }
@@ -238,7 +238,7 @@ final class OAuthClient implements BaseModel
     public function withClientID(string $clientID): self
     {
         $obj = clone $this;
-        $obj->clientID = $clientID;
+        $obj->client_id = $clientID;
 
         return $obj;
     }
@@ -251,7 +251,7 @@ final class OAuthClient implements BaseModel
     public function withClientType(ClientType|string $clientType): self
     {
         $obj = clone $this;
-        $obj['clientType'] = $clientType;
+        $obj['client_type'] = $clientType;
 
         return $obj;
     }
@@ -262,7 +262,7 @@ final class OAuthClient implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }
@@ -284,7 +284,7 @@ final class OAuthClient implements BaseModel
     public function withOrgID(string $orgID): self
     {
         $obj = clone $this;
-        $obj->orgID = $orgID;
+        $obj->org_id = $orgID;
 
         return $obj;
     }
@@ -297,7 +297,7 @@ final class OAuthClient implements BaseModel
     public function withRecordType(RecordType|string $recordType): self
     {
         $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
@@ -308,7 +308,7 @@ final class OAuthClient implements BaseModel
     public function withRequirePkce(bool $requirePkce): self
     {
         $obj = clone $this;
-        $obj->requirePkce = $requirePkce;
+        $obj->require_pkce = $requirePkce;
 
         return $obj;
     }
@@ -319,7 +319,7 @@ final class OAuthClient implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $obj->updated_at = $updatedAt;
 
         return $obj;
     }
@@ -330,7 +330,7 @@ final class OAuthClient implements BaseModel
     public function withUserID(string $userID): self
     {
         $obj = clone $this;
-        $obj->userID = $userID;
+        $obj->user_id = $userID;
 
         return $obj;
     }
@@ -343,7 +343,7 @@ final class OAuthClient implements BaseModel
     public function withAllowedGrantTypes(array $allowedGrantTypes): self
     {
         $obj = clone $this;
-        $obj['allowedGrantTypes'] = $allowedGrantTypes;
+        $obj['allowed_grant_types'] = $allowedGrantTypes;
 
         return $obj;
     }
@@ -356,7 +356,7 @@ final class OAuthClient implements BaseModel
     public function withAllowedScopes(array $allowedScopes): self
     {
         $obj = clone $this;
-        $obj->allowedScopes = $allowedScopes;
+        $obj->allowed_scopes = $allowedScopes;
 
         return $obj;
     }
@@ -367,7 +367,7 @@ final class OAuthClient implements BaseModel
     public function withClientSecret(?string $clientSecret): self
     {
         $obj = clone $this;
-        $obj->clientSecret = $clientSecret;
+        $obj->client_secret = $clientSecret;
 
         return $obj;
     }
@@ -378,7 +378,7 @@ final class OAuthClient implements BaseModel
     public function withLogoUri(?string $logoUri): self
     {
         $obj = clone $this;
-        $obj->logoUri = $logoUri;
+        $obj->logo_uri = $logoUri;
 
         return $obj;
     }
@@ -389,7 +389,7 @@ final class OAuthClient implements BaseModel
     public function withPolicyUri(?string $policyUri): self
     {
         $obj = clone $this;
-        $obj->policyUri = $policyUri;
+        $obj->policy_uri = $policyUri;
 
         return $obj;
     }
@@ -402,7 +402,7 @@ final class OAuthClient implements BaseModel
     public function withRedirectUris(array $redirectUris): self
     {
         $obj = clone $this;
-        $obj->redirectUris = $redirectUris;
+        $obj->redirect_uris = $redirectUris;
 
         return $obj;
     }
@@ -413,7 +413,7 @@ final class OAuthClient implements BaseModel
     public function withTosUri(?string $tosUri): self
     {
         $obj = clone $this;
-        $obj->tosUri = $tosUri;
+        $obj->tos_uri = $tosUri;
 
         return $obj;
     }

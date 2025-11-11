@@ -33,12 +33,12 @@ final class ActionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->recordings->actions->delete(
-            [
+        $result = $this->client->recordings->actions->delete([
+            'ids' => [
                 '428c31b6-7af4-4bcb-b7f5-5013ef9657c1',
                 '428c31b6-7af4-4bcb-b7f5-5013ef9657c2',
             ],
-        );
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -50,12 +50,12 @@ final class ActionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->recordings->actions->delete(
-            [
+        $result = $this->client->recordings->actions->delete([
+            'ids' => [
                 '428c31b6-7af4-4bcb-b7f5-5013ef9657c1',
                 '428c31b6-7af4-4bcb-b7f5-5013ef9657c2',
             ],
-        );
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

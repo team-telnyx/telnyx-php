@@ -17,7 +17,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-type JobCreateParamsShape = array{
  *   model: string,
- *   trainingFile: string,
+ *   training_file: string,
  *   hyperparameters?: Hyperparameters,
  *   suffix?: string,
  * }
@@ -37,8 +37,8 @@ final class JobCreateParams implements BaseModel
     /**
      * The storage bucket or object used for training.
      */
-    #[Api('training_file')]
-    public string $trainingFile;
+    #[Api]
+    public string $training_file;
 
     /**
      * The hyperparameters used for the fine-tuning job.
@@ -57,7 +57,7 @@ final class JobCreateParams implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * JobCreateParams::with(model: ..., trainingFile: ...)
+     * JobCreateParams::with(model: ..., training_file: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -78,14 +78,14 @@ final class JobCreateParams implements BaseModel
      */
     public static function with(
         string $model,
-        string $trainingFile,
+        string $training_file,
         ?Hyperparameters $hyperparameters = null,
         ?string $suffix = null,
     ): self {
         $obj = new self;
 
         $obj->model = $model;
-        $obj->trainingFile = $trainingFile;
+        $obj->training_file = $training_file;
 
         null !== $hyperparameters && $obj->hyperparameters = $hyperparameters;
         null !== $suffix && $obj->suffix = $suffix;
@@ -110,7 +110,7 @@ final class JobCreateParams implements BaseModel
     public function withTrainingFile(string $trainingFile): self
     {
         $obj = clone $this;
-        $obj->trainingFile = $trainingFile;
+        $obj->training_file = $trainingFile;
 
         return $obj;
     }

@@ -6,7 +6,6 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberCreateParams\PhoneNumberRange;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -36,8 +35,7 @@ final class AssociatedPhoneNumbersTest extends TestCase
 
         $result = $this->client->portingOrders->associatedPhoneNumbers->create(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            action: 'keep',
-            phoneNumberRange: (new PhoneNumberRange),
+            ['action' => 'keep', 'phone_number_range' => []],
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -52,10 +50,12 @@ final class AssociatedPhoneNumbersTest extends TestCase
 
         $result = $this->client->portingOrders->associatedPhoneNumbers->create(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            action: 'keep',
-            phoneNumberRange: (new PhoneNumberRange)
-                ->withEndAt('+441234567899')
-                ->withStartAt('+441234567890'),
+            [
+                'action' => 'keep',
+                'phone_number_range' => [
+                    'end_at' => '+441234567899', 'start_at' => '+441234567890',
+                ],
+            ],
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -69,7 +69,8 @@ final class AssociatedPhoneNumbersTest extends TestCase
         }
 
         $result = $this->client->portingOrders->associatedPhoneNumbers->list(
-            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
+            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+            []
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -84,7 +85,7 @@ final class AssociatedPhoneNumbersTest extends TestCase
 
         $result = $this->client->portingOrders->associatedPhoneNumbers->delete(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+            ['porting_order_id' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -99,7 +100,7 @@ final class AssociatedPhoneNumbersTest extends TestCase
 
         $result = $this->client->portingOrders->associatedPhoneNumbers->delete(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+            ['porting_order_id' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType

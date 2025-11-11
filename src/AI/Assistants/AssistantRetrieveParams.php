@@ -15,8 +15,8 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\AI\Assistants->retrieve
  *
  * @phpstan-type AssistantRetrieveParamsShape = array{
- *   callControlID?: string,
- *   fetchDynamicVariablesFromWebhook?: bool,
+ *   call_control_id?: string,
+ *   fetch_dynamic_variables_from_webhook?: bool,
  *   from?: string,
  *   to?: string,
  * }
@@ -28,10 +28,10 @@ final class AssistantRetrieveParams implements BaseModel
     use SdkParams;
 
     #[Api(optional: true)]
-    public ?string $callControlID;
+    public ?string $call_control_id;
 
     #[Api(optional: true)]
-    public ?bool $fetchDynamicVariablesFromWebhook;
+    public ?bool $fetch_dynamic_variables_from_webhook;
 
     #[Api(optional: true)]
     public ?string $from;
@@ -50,15 +50,15 @@ final class AssistantRetrieveParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $callControlID = null,
-        ?bool $fetchDynamicVariablesFromWebhook = null,
+        ?string $call_control_id = null,
+        ?bool $fetch_dynamic_variables_from_webhook = null,
         ?string $from = null,
         ?string $to = null,
     ): self {
         $obj = new self;
 
-        null !== $callControlID && $obj->callControlID = $callControlID;
-        null !== $fetchDynamicVariablesFromWebhook && $obj->fetchDynamicVariablesFromWebhook = $fetchDynamicVariablesFromWebhook;
+        null !== $call_control_id && $obj->call_control_id = $call_control_id;
+        null !== $fetch_dynamic_variables_from_webhook && $obj->fetch_dynamic_variables_from_webhook = $fetch_dynamic_variables_from_webhook;
         null !== $from && $obj->from = $from;
         null !== $to && $obj->to = $to;
 
@@ -68,7 +68,7 @@ final class AssistantRetrieveParams implements BaseModel
     public function withCallControlID(string $callControlID): self
     {
         $obj = clone $this;
-        $obj->callControlID = $callControlID;
+        $obj->call_control_id = $callControlID;
 
         return $obj;
     }
@@ -77,7 +77,7 @@ final class AssistantRetrieveParams implements BaseModel
         bool $fetchDynamicVariablesFromWebhook
     ): self {
         $obj = clone $this;
-        $obj->fetchDynamicVariablesFromWebhook = $fetchDynamicVariablesFromWebhook;
+        $obj->fetch_dynamic_variables_from_webhook = $fetchDynamicVariablesFromWebhook;
 
         return $obj;
     }

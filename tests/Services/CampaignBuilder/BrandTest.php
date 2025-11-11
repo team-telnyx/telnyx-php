@@ -35,7 +35,7 @@ final class BrandTest extends TestCase
 
         $result = $this->client->campaignBuilder->brand->qualifyByUsecase(
             'usecase',
-            'brandId'
+            ['brandId' => 'brandId']
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -50,7 +50,7 @@ final class BrandTest extends TestCase
 
         $result = $this->client->campaignBuilder->brand->qualifyByUsecase(
             'usecase',
-            'brandId'
+            ['brandId' => 'brandId']
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType

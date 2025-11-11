@@ -11,7 +11,9 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Represents the amount of data consumed.
  *
- * @phpstan-type ConsumedDataShape = array{amount?: string, unit?: string}
+ * @phpstan-type ConsumedDataShape = array{
+ *   amount?: string|null, unit?: string|null
+ * }
  */
 final class ConsumedData implements BaseModel
 {

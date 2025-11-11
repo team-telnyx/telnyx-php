@@ -14,7 +14,7 @@ use Telnyx\RoomRecordings\RoomRecordingListResponse\Data;
 
 /**
  * @phpstan-type RoomRecordingListResponseShape = array{
- *   data?: list<Data>, meta?: PaginationMeta
+ *   data?: list<Data>|null, meta?: PaginationMeta|null
  * }
  */
 final class RoomRecordingListResponse implements BaseModel, ResponseConverter

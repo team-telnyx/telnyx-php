@@ -15,11 +15,11 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type TranscriptionStartRequestShape = array{
- *   clientState?: string,
- *   commandID?: string,
- *   transcriptionEngine?: value-of<TranscriptionEngine>,
- *   transcriptionEngineConfig?: Google|Telnyx|Deepgram|TranscriptionEngineAConfig|TranscriptionEngineBConfig,
- *   transcriptionTracks?: string,
+ *   client_state?: string|null,
+ *   command_id?: string|null,
+ *   transcription_engine?: value-of<TranscriptionEngine>|null,
+ *   transcription_engine_config?: null|Google|Telnyx|Deepgram|TranscriptionEngineAConfig|TranscriptionEngineBConfig,
+ *   transcription_tracks?: string|null,
  * }
  */
 final class TranscriptionStartRequest implements BaseModel
@@ -30,39 +30,31 @@ final class TranscriptionStartRequest implements BaseModel
     /**
      * Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      */
-    #[Api('client_state', optional: true)]
-    public ?string $clientState;
+    #[Api(optional: true)]
+    public ?string $client_state;
 
     /**
      * Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      */
-    #[Api('command_id', optional: true)]
-    public ?string $commandID;
+    #[Api(optional: true)]
+    public ?string $command_id;
 
     /**
      * Engine to use for speech recognition. Legacy values `A` - `Google`, `B` - `Telnyx` are supported for backward compatibility.
      *
-     * @var value-of<TranscriptionEngine>|null $transcriptionEngine
+     * @var value-of<TranscriptionEngine>|null $transcription_engine
      */
-    #[Api(
-        'transcription_engine',
-        enum: TranscriptionEngine::class,
-        optional: true
-    )]
-    public ?string $transcriptionEngine;
+    #[Api(enum: TranscriptionEngine::class, optional: true)]
+    public ?string $transcription_engine;
 
-    #[Api(
-        'transcription_engine_config',
-        union: TranscriptionEngineConfig::class,
-        optional: true,
-    )]
-    public Google|Telnyx|Deepgram|TranscriptionEngineAConfig|TranscriptionEngineBConfig|null $transcriptionEngineConfig;
+    #[Api(union: TranscriptionEngineConfig::class, optional: true)]
+    public Google|Telnyx|Deepgram|TranscriptionEngineAConfig|TranscriptionEngineBConfig|null $transcription_engine_config;
 
     /**
      * Indicates which leg of the call will be transcribed. Use `inbound` for the leg that requested the transcription, `outbound` for the other leg, and `both` for both legs of the call. Will default to `inbound`.
      */
-    #[Api('transcription_tracks', optional: true)]
-    public ?string $transcriptionTracks;
+    #[Api(optional: true)]
+    public ?string $transcription_tracks;
 
     public function __construct()
     {
@@ -74,22 +66,22 @@ final class TranscriptionStartRequest implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param TranscriptionEngine|value-of<TranscriptionEngine> $transcriptionEngine
+     * @param TranscriptionEngine|value-of<TranscriptionEngine> $transcription_engine
      */
     public static function with(
-        ?string $clientState = null,
-        ?string $commandID = null,
-        TranscriptionEngine|string|null $transcriptionEngine = null,
-        Google|Telnyx|Deepgram|TranscriptionEngineAConfig|TranscriptionEngineBConfig|null $transcriptionEngineConfig = null,
-        ?string $transcriptionTracks = null,
+        ?string $client_state = null,
+        ?string $command_id = null,
+        TranscriptionEngine|string|null $transcription_engine = null,
+        Google|Telnyx|Deepgram|TranscriptionEngineAConfig|TranscriptionEngineBConfig|null $transcription_engine_config = null,
+        ?string $transcription_tracks = null,
     ): self {
         $obj = new self;
 
-        null !== $clientState && $obj->clientState = $clientState;
-        null !== $commandID && $obj->commandID = $commandID;
-        null !== $transcriptionEngine && $obj['transcriptionEngine'] = $transcriptionEngine;
-        null !== $transcriptionEngineConfig && $obj->transcriptionEngineConfig = $transcriptionEngineConfig;
-        null !== $transcriptionTracks && $obj->transcriptionTracks = $transcriptionTracks;
+        null !== $client_state && $obj->client_state = $client_state;
+        null !== $command_id && $obj->command_id = $command_id;
+        null !== $transcription_engine && $obj['transcription_engine'] = $transcription_engine;
+        null !== $transcription_engine_config && $obj->transcription_engine_config = $transcription_engine_config;
+        null !== $transcription_tracks && $obj->transcription_tracks = $transcription_tracks;
 
         return $obj;
     }
@@ -100,7 +92,7 @@ final class TranscriptionStartRequest implements BaseModel
     public function withClientState(string $clientState): self
     {
         $obj = clone $this;
-        $obj->clientState = $clientState;
+        $obj->client_state = $clientState;
 
         return $obj;
     }
@@ -111,7 +103,7 @@ final class TranscriptionStartRequest implements BaseModel
     public function withCommandID(string $commandID): self
     {
         $obj = clone $this;
-        $obj->commandID = $commandID;
+        $obj->command_id = $commandID;
 
         return $obj;
     }
@@ -125,7 +117,7 @@ final class TranscriptionStartRequest implements BaseModel
         TranscriptionEngine|string $transcriptionEngine
     ): self {
         $obj = clone $this;
-        $obj['transcriptionEngine'] = $transcriptionEngine;
+        $obj['transcription_engine'] = $transcriptionEngine;
 
         return $obj;
     }
@@ -134,7 +126,7 @@ final class TranscriptionStartRequest implements BaseModel
         Google|Telnyx|Deepgram|TranscriptionEngineAConfig|TranscriptionEngineBConfig $transcriptionEngineConfig,
     ): self {
         $obj = clone $this;
-        $obj->transcriptionEngineConfig = $transcriptionEngineConfig;
+        $obj->transcription_engine_config = $transcriptionEngineConfig;
 
         return $obj;
     }
@@ -145,7 +137,7 @@ final class TranscriptionStartRequest implements BaseModel
     public function withTranscriptionTracks(string $transcriptionTracks): self
     {
         $obj = clone $this;
-        $obj->transcriptionTracks = $transcriptionTracks;
+        $obj->transcription_tracks = $transcriptionTracks;
 
         return $obj;
     }

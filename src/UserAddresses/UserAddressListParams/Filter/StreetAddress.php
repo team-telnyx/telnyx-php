@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Filter user addresses via street address. Supports partial matching (contains). Matching is not case-sensitive.
  *
- * @phpstan-type StreetAddressShape = array{contains?: string}
+ * @phpstan-type StreetAddressShape = array{contains?: string|null}
  */
 final class StreetAddress implements BaseModel
 {

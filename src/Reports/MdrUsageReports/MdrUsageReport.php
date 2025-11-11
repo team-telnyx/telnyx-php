@@ -13,18 +13,18 @@ use Telnyx\Reports\MdrUsageReports\MdrUsageReport\Status;
 
 /**
  * @phpstan-type MdrUsageReportShape = array{
- *   id?: string,
- *   aggregationType?: value-of<AggregationType>,
- *   connections?: list<int>,
- *   createdAt?: \DateTimeInterface,
- *   endDate?: \DateTimeInterface,
- *   profiles?: string,
- *   recordType?: string,
- *   reportURL?: string,
- *   result?: list<Result>,
- *   startDate?: \DateTimeInterface,
- *   status?: value-of<Status>,
- *   updatedAt?: \DateTimeInterface,
+ *   id?: string|null,
+ *   aggregation_type?: value-of<AggregationType>|null,
+ *   connections?: list<int>|null,
+ *   created_at?: \DateTimeInterface|null,
+ *   end_date?: \DateTimeInterface|null,
+ *   profiles?: string|null,
+ *   record_type?: string|null,
+ *   report_url?: string|null,
+ *   result?: list<Result>|null,
+ *   start_date?: \DateTimeInterface|null,
+ *   status?: value-of<Status>|null,
+ *   updated_at?: \DateTimeInterface|null,
  * }
  */
 final class MdrUsageReport implements BaseModel
@@ -38,42 +38,42 @@ final class MdrUsageReport implements BaseModel
     #[Api(optional: true)]
     public ?string $id;
 
-    /** @var value-of<AggregationType>|null $aggregationType */
-    #[Api('aggregation_type', enum: AggregationType::class, optional: true)]
-    public ?string $aggregationType;
+    /** @var value-of<AggregationType>|null $aggregation_type */
+    #[Api(enum: AggregationType::class, optional: true)]
+    public ?string $aggregation_type;
 
     /** @var list<int>|null $connections */
     #[Api(list: 'int', optional: true)]
     public ?array $connections;
 
-    #[Api('created_at', optional: true)]
-    public ?\DateTimeInterface $createdAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $created_at;
 
-    #[Api('end_date', optional: true)]
-    public ?\DateTimeInterface $endDate;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $end_date;
 
     #[Api(optional: true)]
     public ?string $profiles;
 
-    #[Api('record_type', optional: true)]
-    public ?string $recordType;
+    #[Api(optional: true)]
+    public ?string $record_type;
 
-    #[Api('report_url', optional: true)]
-    public ?string $reportURL;
+    #[Api(optional: true)]
+    public ?string $report_url;
 
     /** @var list<Result>|null $result */
     #[Api(list: Result::class, optional: true)]
     public ?array $result;
 
-    #[Api('start_date', optional: true)]
-    public ?\DateTimeInterface $startDate;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $start_date;
 
     /** @var value-of<Status>|null $status */
     #[Api(enum: Status::class, optional: true)]
     public ?string $status;
 
-    #[Api('updated_at', optional: true)]
-    public ?\DateTimeInterface $updatedAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $updated_at;
 
     public function __construct()
     {
@@ -85,39 +85,39 @@ final class MdrUsageReport implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AggregationType|value-of<AggregationType> $aggregationType
+     * @param AggregationType|value-of<AggregationType> $aggregation_type
      * @param list<int> $connections
      * @param list<Result> $result
      * @param Status|value-of<Status> $status
      */
     public static function with(
         ?string $id = null,
-        AggregationType|string|null $aggregationType = null,
+        AggregationType|string|null $aggregation_type = null,
         ?array $connections = null,
-        ?\DateTimeInterface $createdAt = null,
-        ?\DateTimeInterface $endDate = null,
+        ?\DateTimeInterface $created_at = null,
+        ?\DateTimeInterface $end_date = null,
         ?string $profiles = null,
-        ?string $recordType = null,
-        ?string $reportURL = null,
+        ?string $record_type = null,
+        ?string $report_url = null,
         ?array $result = null,
-        ?\DateTimeInterface $startDate = null,
+        ?\DateTimeInterface $start_date = null,
         Status|string|null $status = null,
-        ?\DateTimeInterface $updatedAt = null,
+        ?\DateTimeInterface $updated_at = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj->id = $id;
-        null !== $aggregationType && $obj['aggregationType'] = $aggregationType;
+        null !== $aggregation_type && $obj['aggregation_type'] = $aggregation_type;
         null !== $connections && $obj->connections = $connections;
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $endDate && $obj->endDate = $endDate;
+        null !== $created_at && $obj->created_at = $created_at;
+        null !== $end_date && $obj->end_date = $end_date;
         null !== $profiles && $obj->profiles = $profiles;
-        null !== $recordType && $obj->recordType = $recordType;
-        null !== $reportURL && $obj->reportURL = $reportURL;
+        null !== $record_type && $obj->record_type = $record_type;
+        null !== $report_url && $obj->report_url = $report_url;
         null !== $result && $obj->result = $result;
-        null !== $startDate && $obj->startDate = $startDate;
+        null !== $start_date && $obj->start_date = $start_date;
         null !== $status && $obj['status'] = $status;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
+        null !== $updated_at && $obj->updated_at = $updated_at;
 
         return $obj;
     }
@@ -140,7 +140,7 @@ final class MdrUsageReport implements BaseModel
         AggregationType|string $aggregationType
     ): self {
         $obj = clone $this;
-        $obj['aggregationType'] = $aggregationType;
+        $obj['aggregation_type'] = $aggregationType;
 
         return $obj;
     }
@@ -159,7 +159,7 @@ final class MdrUsageReport implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }
@@ -167,7 +167,7 @@ final class MdrUsageReport implements BaseModel
     public function withEndDate(\DateTimeInterface $endDate): self
     {
         $obj = clone $this;
-        $obj->endDate = $endDate;
+        $obj->end_date = $endDate;
 
         return $obj;
     }
@@ -183,7 +183,7 @@ final class MdrUsageReport implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType;
+        $obj->record_type = $recordType;
 
         return $obj;
     }
@@ -191,7 +191,7 @@ final class MdrUsageReport implements BaseModel
     public function withReportURL(string $reportURL): self
     {
         $obj = clone $this;
-        $obj->reportURL = $reportURL;
+        $obj->report_url = $reportURL;
 
         return $obj;
     }
@@ -210,7 +210,7 @@ final class MdrUsageReport implements BaseModel
     public function withStartDate(\DateTimeInterface $startDate): self
     {
         $obj = clone $this;
-        $obj->startDate = $startDate;
+        $obj->start_date = $startDate;
 
         return $obj;
     }
@@ -229,7 +229,7 @@ final class MdrUsageReport implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $obj->updated_at = $updatedAt;
 
         return $obj;
     }

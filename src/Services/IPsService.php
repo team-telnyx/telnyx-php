@@ -10,16 +10,12 @@ use Telnyx\IPs\IPCreateParams;
 use Telnyx\IPs\IPDeleteResponse;
 use Telnyx\IPs\IPGetResponse;
 use Telnyx\IPs\IPListParams;
-use Telnyx\IPs\IPListParams\Filter;
-use Telnyx\IPs\IPListParams\Page;
 use Telnyx\IPs\IPListResponse;
 use Telnyx\IPs\IPNewResponse;
 use Telnyx\IPs\IPUpdateParams;
 use Telnyx\IPs\IPUpdateResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\IPsContract;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class IPsService implements IPsContract
 {
@@ -33,41 +29,19 @@ final class IPsService implements IPsContract
      *
      * Create a new IP object.
      *
-     * @param string $ipAddress IP adddress represented by this resource
-     * @param string $connectionID ID of the IP Connection to which this IP should be attached
-     * @param int $port port to use when connecting to this IP
+     * @param array{
+     *   ip_address: string, connection_id?: string, port?: int
+     * }|IPCreateParams $params
      *
      * @throws APIException
      */
     public function create(
-        $ipAddress,
-        $connectionID = omit,
-        $port = omit,
-        ?RequestOptions $requestOptions = null,
-    ): IPNewResponse {
-        $params = [
-            'ipAddress' => $ipAddress,
-            'connectionID' => $connectionID,
-            'port' => $port,
-        ];
-
-        return $this->createRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
+        array|IPCreateParams $params,
         ?RequestOptions $requestOptions = null
     ): IPNewResponse {
         [$parsed, $options] = IPCreateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -105,43 +79,20 @@ final class IPsService implements IPsContract
      *
      * Update the details of a specific IP.
      *
-     * @param string $ipAddress IP adddress represented by this resource
-     * @param string $connectionID ID of the IP Connection to which this IP should be attached
-     * @param int $port port to use when connecting to this IP
+     * @param array{
+     *   ip_address: string, connection_id?: string, port?: int
+     * }|IPUpdateParams $params
      *
      * @throws APIException
      */
     public function update(
         string $id,
-        $ipAddress,
-        $connectionID = omit,
-        $port = omit,
+        array|IPUpdateParams $params,
         ?RequestOptions $requestOptions = null,
-    ): IPUpdateResponse {
-        $params = [
-            'ipAddress' => $ipAddress,
-            'connectionID' => $connectionID,
-            'port' => $port,
-        ];
-
-        return $this->updateRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): IPUpdateResponse {
         [$parsed, $options] = IPUpdateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -159,33 +110,21 @@ final class IPsService implements IPsContract
      *
      * Get all IPs belonging to the user that match the given filters.
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[connection_id], filter[ip_address], filter[port]
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param array{
+     *   filter?: array{connection_id?: string, ip_address?: string, port?: int},
+     *   page?: array{number?: int, size?: int},
+     * }|IPListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
+        array|IPListParams $params,
         ?RequestOptions $requestOptions = null
     ): IPListResponse {
-        $params = ['filter' => $filter, 'page' => $page];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): IPListResponse {
-        [$parsed, $options] = IPListParams::parseRequest($params, $requestOptions);
+        [$parsed, $options] = IPListParams::parseRequest(
+            $params,
+            $requestOptions,
+        );
 
         // @phpstan-ignore-next-line;
         return $this->client->request(

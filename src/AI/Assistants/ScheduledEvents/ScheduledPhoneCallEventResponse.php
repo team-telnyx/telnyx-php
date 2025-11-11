@@ -11,19 +11,19 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type ScheduledPhoneCallEventResponseShape = array{
- *   assistantID: string,
- *   scheduledAtFixedDatetime: \DateTimeInterface,
- *   telnyxAgentTarget: string,
- *   telnyxConversationChannel: value-of<ConversationChannelType>,
- *   telnyxEndUserTarget: string,
- *   conversationID?: string,
- *   conversationMetadata?: array<string, string|int|bool>,
- *   createdAt?: \DateTimeInterface,
- *   errors?: list<string>,
- *   retryAttempts?: int,
- *   retryCount?: int,
- *   scheduledEventID?: string,
- *   status?: value-of<EventStatus>,
+ *   assistant_id: string,
+ *   scheduled_at_fixed_datetime: \DateTimeInterface,
+ *   telnyx_agent_target: string,
+ *   telnyx_conversation_channel: value-of<ConversationChannelType>,
+ *   telnyx_end_user_target: string,
+ *   conversation_id?: string|null,
+ *   conversation_metadata?: array<string,string|int|bool>|null,
+ *   created_at?: \DateTimeInterface|null,
+ *   errors?: list<string>|null,
+ *   retry_attempts?: int|null,
+ *   retry_count?: int|null,
+ *   scheduled_event_id?: string|null,
+ *   status?: value-of<EventStatus>|null,
  * }
  */
 final class ScheduledPhoneCallEventResponse implements BaseModel
@@ -31,48 +31,44 @@ final class ScheduledPhoneCallEventResponse implements BaseModel
     /** @use SdkModel<ScheduledPhoneCallEventResponseShape> */
     use SdkModel;
 
-    #[Api('assistant_id')]
-    public string $assistantID;
+    #[Api]
+    public string $assistant_id;
 
-    #[Api('scheduled_at_fixed_datetime')]
-    public \DateTimeInterface $scheduledAtFixedDatetime;
+    #[Api]
+    public \DateTimeInterface $scheduled_at_fixed_datetime;
 
-    #[Api('telnyx_agent_target')]
-    public string $telnyxAgentTarget;
+    #[Api]
+    public string $telnyx_agent_target;
 
-    /** @var value-of<ConversationChannelType> $telnyxConversationChannel */
-    #[Api('telnyx_conversation_channel', enum: ConversationChannelType::class)]
-    public string $telnyxConversationChannel;
+    /** @var value-of<ConversationChannelType> $telnyx_conversation_channel */
+    #[Api(enum: ConversationChannelType::class)]
+    public string $telnyx_conversation_channel;
 
-    #[Api('telnyx_end_user_target')]
-    public string $telnyxEndUserTarget;
+    #[Api]
+    public string $telnyx_end_user_target;
 
-    #[Api('conversation_id', optional: true)]
-    public ?string $conversationID;
+    #[Api(optional: true)]
+    public ?string $conversation_id;
 
-    /** @var array<string, string|int|bool>|null $conversationMetadata */
-    #[Api(
-        'conversation_metadata',
-        map: ConversationMetadata::class,
-        optional: true
-    )]
-    public ?array $conversationMetadata;
+    /** @var array<string,string|int|bool>|null $conversation_metadata */
+    #[Api(map: ConversationMetadata::class, optional: true)]
+    public ?array $conversation_metadata;
 
-    #[Api('created_at', optional: true)]
-    public ?\DateTimeInterface $createdAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $created_at;
 
     /** @var list<string>|null $errors */
     #[Api(list: 'string', optional: true)]
     public ?array $errors;
 
-    #[Api('retry_attempts', optional: true)]
-    public ?int $retryAttempts;
+    #[Api(optional: true)]
+    public ?int $retry_attempts;
 
-    #[Api('retry_count', optional: true)]
-    public ?int $retryCount;
+    #[Api(optional: true)]
+    public ?int $retry_count;
 
-    #[Api('scheduled_event_id', optional: true)]
-    public ?string $scheduledEventID;
+    #[Api(optional: true)]
+    public ?string $scheduled_event_id;
 
     /** @var value-of<EventStatus>|null $status */
     #[Api(enum: EventStatus::class, optional: true)]
@@ -84,11 +80,11 @@ final class ScheduledPhoneCallEventResponse implements BaseModel
      * To enforce required parameters use
      * ```
      * ScheduledPhoneCallEventResponse::with(
-     *   assistantID: ...,
-     *   scheduledAtFixedDatetime: ...,
-     *   telnyxAgentTarget: ...,
-     *   telnyxConversationChannel: ...,
-     *   telnyxEndUserTarget: ...,
+     *   assistant_id: ...,
+     *   scheduled_at_fixed_datetime: ...,
+     *   telnyx_agent_target: ...,
+     *   telnyx_conversation_channel: ...,
+     *   telnyx_end_user_target: ...,
      * )
      * ```
      *
@@ -113,41 +109,41 @@ final class ScheduledPhoneCallEventResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ConversationChannelType|value-of<ConversationChannelType> $telnyxConversationChannel
-     * @param array<string, string|int|bool> $conversationMetadata
+     * @param ConversationChannelType|value-of<ConversationChannelType> $telnyx_conversation_channel
+     * @param array<string,string|int|bool> $conversation_metadata
      * @param list<string> $errors
      * @param EventStatus|value-of<EventStatus> $status
      */
     public static function with(
-        string $assistantID,
-        \DateTimeInterface $scheduledAtFixedDatetime,
-        string $telnyxAgentTarget,
-        ConversationChannelType|string $telnyxConversationChannel,
-        string $telnyxEndUserTarget,
-        ?string $conversationID = null,
-        ?array $conversationMetadata = null,
-        ?\DateTimeInterface $createdAt = null,
+        string $assistant_id,
+        \DateTimeInterface $scheduled_at_fixed_datetime,
+        string $telnyx_agent_target,
+        ConversationChannelType|string $telnyx_conversation_channel,
+        string $telnyx_end_user_target,
+        ?string $conversation_id = null,
+        ?array $conversation_metadata = null,
+        ?\DateTimeInterface $created_at = null,
         ?array $errors = null,
-        ?int $retryAttempts = null,
-        ?int $retryCount = null,
-        ?string $scheduledEventID = null,
+        ?int $retry_attempts = null,
+        ?int $retry_count = null,
+        ?string $scheduled_event_id = null,
         EventStatus|string|null $status = null,
     ): self {
         $obj = new self;
 
-        $obj->assistantID = $assistantID;
-        $obj->scheduledAtFixedDatetime = $scheduledAtFixedDatetime;
-        $obj->telnyxAgentTarget = $telnyxAgentTarget;
-        $obj['telnyxConversationChannel'] = $telnyxConversationChannel;
-        $obj->telnyxEndUserTarget = $telnyxEndUserTarget;
+        $obj->assistant_id = $assistant_id;
+        $obj->scheduled_at_fixed_datetime = $scheduled_at_fixed_datetime;
+        $obj->telnyx_agent_target = $telnyx_agent_target;
+        $obj['telnyx_conversation_channel'] = $telnyx_conversation_channel;
+        $obj->telnyx_end_user_target = $telnyx_end_user_target;
 
-        null !== $conversationID && $obj->conversationID = $conversationID;
-        null !== $conversationMetadata && $obj->conversationMetadata = $conversationMetadata;
-        null !== $createdAt && $obj->createdAt = $createdAt;
+        null !== $conversation_id && $obj->conversation_id = $conversation_id;
+        null !== $conversation_metadata && $obj->conversation_metadata = $conversation_metadata;
+        null !== $created_at && $obj->created_at = $created_at;
         null !== $errors && $obj->errors = $errors;
-        null !== $retryAttempts && $obj->retryAttempts = $retryAttempts;
-        null !== $retryCount && $obj->retryCount = $retryCount;
-        null !== $scheduledEventID && $obj->scheduledEventID = $scheduledEventID;
+        null !== $retry_attempts && $obj->retry_attempts = $retry_attempts;
+        null !== $retry_count && $obj->retry_count = $retry_count;
+        null !== $scheduled_event_id && $obj->scheduled_event_id = $scheduled_event_id;
         null !== $status && $obj['status'] = $status;
 
         return $obj;
@@ -156,7 +152,7 @@ final class ScheduledPhoneCallEventResponse implements BaseModel
     public function withAssistantID(string $assistantID): self
     {
         $obj = clone $this;
-        $obj->assistantID = $assistantID;
+        $obj->assistant_id = $assistantID;
 
         return $obj;
     }
@@ -165,7 +161,7 @@ final class ScheduledPhoneCallEventResponse implements BaseModel
         \DateTimeInterface $scheduledAtFixedDatetime
     ): self {
         $obj = clone $this;
-        $obj->scheduledAtFixedDatetime = $scheduledAtFixedDatetime;
+        $obj->scheduled_at_fixed_datetime = $scheduledAtFixedDatetime;
 
         return $obj;
     }
@@ -173,7 +169,7 @@ final class ScheduledPhoneCallEventResponse implements BaseModel
     public function withTelnyxAgentTarget(string $telnyxAgentTarget): self
     {
         $obj = clone $this;
-        $obj->telnyxAgentTarget = $telnyxAgentTarget;
+        $obj->telnyx_agent_target = $telnyxAgentTarget;
 
         return $obj;
     }
@@ -185,7 +181,7 @@ final class ScheduledPhoneCallEventResponse implements BaseModel
         ConversationChannelType|string $telnyxConversationChannel
     ): self {
         $obj = clone $this;
-        $obj['telnyxConversationChannel'] = $telnyxConversationChannel;
+        $obj['telnyx_conversation_channel'] = $telnyxConversationChannel;
 
         return $obj;
     }
@@ -193,7 +189,7 @@ final class ScheduledPhoneCallEventResponse implements BaseModel
     public function withTelnyxEndUserTarget(string $telnyxEndUserTarget): self
     {
         $obj = clone $this;
-        $obj->telnyxEndUserTarget = $telnyxEndUserTarget;
+        $obj->telnyx_end_user_target = $telnyxEndUserTarget;
 
         return $obj;
     }
@@ -201,18 +197,18 @@ final class ScheduledPhoneCallEventResponse implements BaseModel
     public function withConversationID(string $conversationID): self
     {
         $obj = clone $this;
-        $obj->conversationID = $conversationID;
+        $obj->conversation_id = $conversationID;
 
         return $obj;
     }
 
     /**
-     * @param array<string, string|int|bool> $conversationMetadata
+     * @param array<string,string|int|bool> $conversationMetadata
      */
     public function withConversationMetadata(array $conversationMetadata): self
     {
         $obj = clone $this;
-        $obj->conversationMetadata = $conversationMetadata;
+        $obj->conversation_metadata = $conversationMetadata;
 
         return $obj;
     }
@@ -220,7 +216,7 @@ final class ScheduledPhoneCallEventResponse implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }
@@ -239,7 +235,7 @@ final class ScheduledPhoneCallEventResponse implements BaseModel
     public function withRetryAttempts(int $retryAttempts): self
     {
         $obj = clone $this;
-        $obj->retryAttempts = $retryAttempts;
+        $obj->retry_attempts = $retryAttempts;
 
         return $obj;
     }
@@ -247,7 +243,7 @@ final class ScheduledPhoneCallEventResponse implements BaseModel
     public function withRetryCount(int $retryCount): self
     {
         $obj = clone $this;
-        $obj->retryCount = $retryCount;
+        $obj->retry_count = $retryCount;
 
         return $obj;
     }
@@ -255,7 +251,7 @@ final class ScheduledPhoneCallEventResponse implements BaseModel
     public function withScheduledEventID(string $scheduledEventID): self
     {
         $obj = clone $this;
-        $obj->scheduledEventID = $scheduledEventID;
+        $obj->scheduled_event_id = $scheduledEventID;
 
         return $obj;
     }

@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PortingOrders\PortingOrderGetSubRequestResponse\Data;
 
 /**
- * @phpstan-type PortingOrderGetSubRequestResponseShape = array{data?: Data}
+ * @phpstan-type PortingOrderGetSubRequestResponseShape = array{data?: Data|null}
  */
 final class PortingOrderGetSubRequestResponse implements BaseModel, ResponseConverter
 {

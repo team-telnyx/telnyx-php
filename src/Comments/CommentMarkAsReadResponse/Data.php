@@ -12,15 +12,15 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type DataShape = array{
- *   id?: string,
- *   body?: string,
- *   commentRecordID?: string,
- *   commentRecordType?: value-of<CommentRecordType>,
- *   commenter?: string,
- *   commenterType?: value-of<CommenterType>,
- *   createdAt?: \DateTimeInterface,
- *   readAt?: \DateTimeInterface,
- *   updatedAt?: \DateTimeInterface,
+ *   id?: string|null,
+ *   body?: string|null,
+ *   comment_record_id?: string|null,
+ *   comment_record_type?: value-of<CommentRecordType>|null,
+ *   commenter?: string|null,
+ *   commenter_type?: value-of<CommenterType>|null,
+ *   created_at?: \DateTimeInterface|null,
+ *   read_at?: \DateTimeInterface|null,
+ *   updated_at?: \DateTimeInterface|null,
  * }
  */
 final class Data implements BaseModel
@@ -34,37 +34,37 @@ final class Data implements BaseModel
     #[Api(optional: true)]
     public ?string $body;
 
-    #[Api('comment_record_id', optional: true)]
-    public ?string $commentRecordID;
+    #[Api(optional: true)]
+    public ?string $comment_record_id;
 
-    /** @var value-of<CommentRecordType>|null $commentRecordType */
-    #[Api('comment_record_type', enum: CommentRecordType::class, optional: true)]
-    public ?string $commentRecordType;
+    /** @var value-of<CommentRecordType>|null $comment_record_type */
+    #[Api(enum: CommentRecordType::class, optional: true)]
+    public ?string $comment_record_type;
 
     #[Api(optional: true)]
     public ?string $commenter;
 
-    /** @var value-of<CommenterType>|null $commenterType */
-    #[Api('commenter_type', enum: CommenterType::class, optional: true)]
-    public ?string $commenterType;
+    /** @var value-of<CommenterType>|null $commenter_type */
+    #[Api(enum: CommenterType::class, optional: true)]
+    public ?string $commenter_type;
 
     /**
      * An ISO 8901 datetime string denoting when the comment was created.
      */
-    #[Api('created_at', optional: true)]
-    public ?\DateTimeInterface $createdAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $created_at;
 
     /**
      * An ISO 8901 datetime string for when the comment was read.
      */
-    #[Api('read_at', optional: true)]
-    public ?\DateTimeInterface $readAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $read_at;
 
     /**
      * An ISO 8901 datetime string for when the comment was updated.
      */
-    #[Api('updated_at', optional: true)]
-    public ?\DateTimeInterface $updatedAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $updated_at;
 
     public function __construct()
     {
@@ -76,31 +76,31 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CommentRecordType|value-of<CommentRecordType> $commentRecordType
-     * @param CommenterType|value-of<CommenterType> $commenterType
+     * @param CommentRecordType|value-of<CommentRecordType> $comment_record_type
+     * @param CommenterType|value-of<CommenterType> $commenter_type
      */
     public static function with(
         ?string $id = null,
         ?string $body = null,
-        ?string $commentRecordID = null,
-        CommentRecordType|string|null $commentRecordType = null,
+        ?string $comment_record_id = null,
+        CommentRecordType|string|null $comment_record_type = null,
         ?string $commenter = null,
-        CommenterType|string|null $commenterType = null,
-        ?\DateTimeInterface $createdAt = null,
-        ?\DateTimeInterface $readAt = null,
-        ?\DateTimeInterface $updatedAt = null,
+        CommenterType|string|null $commenter_type = null,
+        ?\DateTimeInterface $created_at = null,
+        ?\DateTimeInterface $read_at = null,
+        ?\DateTimeInterface $updated_at = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj->id = $id;
         null !== $body && $obj->body = $body;
-        null !== $commentRecordID && $obj->commentRecordID = $commentRecordID;
-        null !== $commentRecordType && $obj['commentRecordType'] = $commentRecordType;
+        null !== $comment_record_id && $obj->comment_record_id = $comment_record_id;
+        null !== $comment_record_type && $obj['comment_record_type'] = $comment_record_type;
         null !== $commenter && $obj->commenter = $commenter;
-        null !== $commenterType && $obj['commenterType'] = $commenterType;
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $readAt && $obj->readAt = $readAt;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
+        null !== $commenter_type && $obj['commenter_type'] = $commenter_type;
+        null !== $created_at && $obj->created_at = $created_at;
+        null !== $read_at && $obj->read_at = $read_at;
+        null !== $updated_at && $obj->updated_at = $updated_at;
 
         return $obj;
     }
@@ -124,7 +124,7 @@ final class Data implements BaseModel
     public function withCommentRecordID(string $commentRecordID): self
     {
         $obj = clone $this;
-        $obj->commentRecordID = $commentRecordID;
+        $obj->comment_record_id = $commentRecordID;
 
         return $obj;
     }
@@ -136,7 +136,7 @@ final class Data implements BaseModel
         CommentRecordType|string $commentRecordType
     ): self {
         $obj = clone $this;
-        $obj['commentRecordType'] = $commentRecordType;
+        $obj['comment_record_type'] = $commentRecordType;
 
         return $obj;
     }
@@ -155,7 +155,7 @@ final class Data implements BaseModel
     public function withCommenterType(CommenterType|string $commenterType): self
     {
         $obj = clone $this;
-        $obj['commenterType'] = $commenterType;
+        $obj['commenter_type'] = $commenterType;
 
         return $obj;
     }
@@ -166,7 +166,7 @@ final class Data implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }
@@ -177,7 +177,7 @@ final class Data implements BaseModel
     public function withReadAt(\DateTimeInterface $readAt): self
     {
         $obj = clone $this;
-        $obj->readAt = $readAt;
+        $obj->read_at = $readAt;
 
         return $obj;
     }
@@ -188,7 +188,7 @@ final class Data implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $obj->updated_at = $updatedAt;
 
         return $obj;
     }

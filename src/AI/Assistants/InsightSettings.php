@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type InsightSettingsShape = array{insightGroupID?: string}
+ * @phpstan-type InsightSettingsShape = array{insight_group_id?: string|null}
  */
 final class InsightSettings implements BaseModel
 {
@@ -19,8 +19,8 @@ final class InsightSettings implements BaseModel
     /**
      * Reference to an Insight Group. Insights in this group will be run automatically for all the assistant's conversations.
      */
-    #[Api('insight_group_id', optional: true)]
-    public ?string $insightGroupID;
+    #[Api(optional: true)]
+    public ?string $insight_group_id;
 
     public function __construct()
     {
@@ -32,11 +32,11 @@ final class InsightSettings implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?string $insightGroupID = null): self
+    public static function with(?string $insight_group_id = null): self
     {
         $obj = new self;
 
-        null !== $insightGroupID && $obj->insightGroupID = $insightGroupID;
+        null !== $insight_group_id && $obj->insight_group_id = $insight_group_id;
 
         return $obj;
     }
@@ -47,7 +47,7 @@ final class InsightSettings implements BaseModel
     public function withInsightGroupID(string $insightGroupID): self
     {
         $obj = clone $this;
-        $obj->insightGroupID = $insightGroupID;
+        $obj->insight_group_id = $insightGroupID;
 
         return $obj;
     }

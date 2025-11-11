@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type VerifiedNumberDataWrapperShape = array{data?: VerifiedNumber}
+ * @phpstan-type VerifiedNumberDataWrapperShape = array{data?: VerifiedNumber|null}
  */
 final class VerifiedNumberDataWrapper implements BaseModel, ResponseConverter
 {

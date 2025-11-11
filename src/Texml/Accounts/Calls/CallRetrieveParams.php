@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Texml\Accounts\Calls->retrieve
  *
- * @phpstan-type CallRetrieveParamsShape = array{accountSid: string}
+ * @phpstan-type CallRetrieveParamsShape = array{account_sid: string}
  */
 final class CallRetrieveParams implements BaseModel
 {
@@ -23,14 +23,14 @@ final class CallRetrieveParams implements BaseModel
     use SdkParams;
 
     #[Api]
-    public string $accountSid;
+    public string $account_sid;
 
     /**
      * `new CallRetrieveParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * CallRetrieveParams::with(accountSid: ...)
+     * CallRetrieveParams::with(account_sid: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -49,11 +49,11 @@ final class CallRetrieveParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(string $accountSid): self
+    public static function with(string $account_sid): self
     {
         $obj = new self;
 
-        $obj->accountSid = $accountSid;
+        $obj->account_sid = $account_sid;
 
         return $obj;
     }
@@ -61,7 +61,7 @@ final class CallRetrieveParams implements BaseModel
     public function withAccountSid(string $accountSid): self
     {
         $obj = clone $this;
-        $obj->accountSid = $accountSid;
+        $obj->account_sid = $accountSid;
 
         return $obj;
     }

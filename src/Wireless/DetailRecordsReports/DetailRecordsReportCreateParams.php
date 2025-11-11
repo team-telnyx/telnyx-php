@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Wireless\DetailRecordsReports->create
  *
  * @phpstan-type DetailRecordsReportCreateParamsShape = array{
- *   endTime?: string, startTime?: string
+ *   end_time?: string, start_time?: string
  * }
  */
 final class DetailRecordsReportCreateParams implements BaseModel
@@ -27,14 +27,14 @@ final class DetailRecordsReportCreateParams implements BaseModel
     /**
      * ISO 8601 formatted date-time indicating the end time.
      */
-    #[Api('end_time', optional: true)]
-    public ?string $endTime;
+    #[Api(optional: true)]
+    public ?string $end_time;
 
     /**
      * ISO 8601 formatted date-time indicating the start time.
      */
-    #[Api('start_time', optional: true)]
-    public ?string $startTime;
+    #[Api(optional: true)]
+    public ?string $start_time;
 
     public function __construct()
     {
@@ -47,13 +47,13 @@ final class DetailRecordsReportCreateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $endTime = null,
-        ?string $startTime = null
+        ?string $end_time = null,
+        ?string $start_time = null
     ): self {
         $obj = new self;
 
-        null !== $endTime && $obj->endTime = $endTime;
-        null !== $startTime && $obj->startTime = $startTime;
+        null !== $end_time && $obj->end_time = $end_time;
+        null !== $start_time && $obj->start_time = $start_time;
 
         return $obj;
     }
@@ -64,7 +64,7 @@ final class DetailRecordsReportCreateParams implements BaseModel
     public function withEndTime(string $endTime): self
     {
         $obj = clone $this;
-        $obj->endTime = $endTime;
+        $obj->end_time = $endTime;
 
         return $obj;
     }
@@ -75,7 +75,7 @@ final class DetailRecordsReportCreateParams implements BaseModel
     public function withStartTime(string $startTime): self
     {
         $obj = clone $this;
-        $obj->startTime = $startTime;
+        $obj->start_time = $startTime;
 
         return $obj;
     }

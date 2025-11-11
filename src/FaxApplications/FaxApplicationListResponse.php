@@ -13,7 +13,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type FaxApplicationListResponseShape = array{
- *   data?: list<FaxApplication>, meta?: PaginationMeta
+ *   data?: list<FaxApplication>|null, meta?: PaginationMeta|null
  * }
  */
 final class FaxApplicationListResponse implements BaseModel, ResponseConverter

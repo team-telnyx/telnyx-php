@@ -33,7 +33,7 @@ final class InboundChannelsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->inboundChannels->update(7);
+        $result = $this->client->inboundChannels->update(['channels' => 7]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -45,7 +45,7 @@ final class InboundChannelsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->inboundChannels->update(7);
+        $result = $this->client->inboundChannels->update(['channels' => 7]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

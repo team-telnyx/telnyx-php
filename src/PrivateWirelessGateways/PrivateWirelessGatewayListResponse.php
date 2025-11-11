@@ -13,7 +13,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type PrivateWirelessGatewayListResponseShape = array{
- *   data?: list<PrivateWirelessGateway>, meta?: PaginationMeta
+ *   data?: list<PrivateWirelessGateway>|null, meta?: PaginationMeta|null
  * }
  */
 final class PrivateWirelessGatewayListResponse implements BaseModel, ResponseConverter

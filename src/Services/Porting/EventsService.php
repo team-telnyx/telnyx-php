@@ -8,13 +8,9 @@ use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Porting\Events\EventGetResponse;
 use Telnyx\Porting\Events\EventListParams;
-use Telnyx\Porting\Events\EventListParams\Filter;
-use Telnyx\Porting\Events\EventListParams\Page;
 use Telnyx\Porting\Events\EventListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Porting\EventsContract;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class EventsService implements EventsContract
 {
@@ -48,35 +44,26 @@ final class EventsService implements EventsContract
      *
      * Returns a list of all porting events.
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[type], filter[porting_order_id], filter[created_at][gte], filter[created_at][lte]
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param array{
+     *   filter?: array{
+     *     created_at?: array{
+     *       gte?: string|\DateTimeInterface, lte?: string|\DateTimeInterface
+     *     },
+     *     porting_order_id?: string,
+     *     type?: "porting_order.deleted"|"porting_order.loa_updated"|"porting_order.messaging_changed"|"porting_order.status_changed"|"porting_order.sharing_token_expired"|"porting_order.new_comment"|"porting_order.split",
+     *   },
+     *   page?: array{number?: int, size?: int},
+     * }|EventListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): EventListResponse {
-        $params = ['filter' => $filter, 'page' => $page];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
+        array|EventListParams $params,
         ?RequestOptions $requestOptions = null
     ): EventListResponse {
         [$parsed, $options] = EventListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

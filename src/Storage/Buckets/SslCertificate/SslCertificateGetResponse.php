@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type SslCertificateGetResponseShape = array{data?: SslCertificate}
+ * @phpstan-type SslCertificateGetResponseShape = array{data?: SslCertificate|null}
  */
 final class SslCertificateGetResponse implements BaseModel, ResponseConverter
 {

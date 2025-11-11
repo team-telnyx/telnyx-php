@@ -6,15 +6,14 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Portouts\PortoutGetResponse;
-use Telnyx\Portouts\PortoutListParams\Filter;
-use Telnyx\Portouts\PortoutListParams\Page;
+use Telnyx\Portouts\PortoutListParams;
+use Telnyx\Portouts\PortoutListRejectionCodesParams;
 use Telnyx\Portouts\PortoutListRejectionCodesResponse;
 use Telnyx\Portouts\PortoutListResponse;
+use Telnyx\Portouts\PortoutUpdateStatusParams;
 use Telnyx\Portouts\PortoutUpdateStatusParams\Status;
 use Telnyx\Portouts\PortoutUpdateStatusResponse;
 use Telnyx\RequestOptions;
-
-use const Telnyx\Core\OMIT as omit;
 
 interface PortoutsContract
 {
@@ -31,84 +30,39 @@ interface PortoutsContract
     /**
      * @api
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[carrier_name], filter[country_code], filter[country_code_in], filter[foc_date], filter[inserted_at], filter[phone_number], filter[pon], filter[ported_out_at], filter[spid], filter[status], filter[status_in], filter[support_key]
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param array<mixed>|PortoutListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
+        array|PortoutListParams $params,
         ?RequestOptions $requestOptions = null
     ): PortoutListResponse;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): PortoutListResponse;
-
-    /**
-     * @api
-     *
-     * @param \Telnyx\Portouts\PortoutListRejectionCodesParams\Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[code], filter[code][in]
+     * @param array<mixed>|PortoutListRejectionCodesParams $params
      *
      * @throws APIException
      */
     public function listRejectionCodes(
         string $portoutID,
-        $filter = omit,
+        array|PortoutListRejectionCodesParams $params,
         ?RequestOptions $requestOptions = null,
     ): PortoutListRejectionCodesResponse;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRejectionCodesRaw(
-        string $portoutID,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): PortoutListRejectionCodesResponse;
-
-    /**
-     * @api
-     *
      * @param Status|value-of<Status> $status
-     * @param string $id
-     * @param string $reason Provide a reason if rejecting the port out request
-     * @param bool $hostMessaging Indicates whether messaging services should be maintained with Telnyx after the port out completes
+     * @param array<mixed>|PortoutUpdateStatusParams $params
      *
      * @throws APIException
      */
     public function updateStatus(
         Status|string $status,
-        $id,
-        $reason,
-        $hostMessaging = omit,
-        ?RequestOptions $requestOptions = null,
-    ): PortoutUpdateStatusResponse;
-
-    /**
-     * @api
-     *
-     * @param Status|value-of<Status> $status
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateStatusRaw(
-        Status|string $status,
-        array $params,
+        array|PortoutUpdateStatusParams $params,
         ?RequestOptions $requestOptions = null,
     ): PortoutUpdateStatusResponse;
 }

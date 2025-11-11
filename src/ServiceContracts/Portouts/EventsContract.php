@@ -6,12 +6,9 @@ namespace Telnyx\ServiceContracts\Portouts;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Portouts\Events\EventGetResponse;
-use Telnyx\Portouts\Events\EventListParams\Filter;
-use Telnyx\Portouts\Events\EventListParams\Page;
+use Telnyx\Portouts\Events\EventListParams;
 use Telnyx\Portouts\Events\EventListResponse;
 use Telnyx\RequestOptions;
-
-use const Telnyx\Core\OMIT as omit;
 
 interface EventsContract
 {
@@ -28,26 +25,12 @@ interface EventsContract
     /**
      * @api
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[event_type], filter[portout_id], filter[created_at]
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param array<mixed>|EventListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): EventListResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
+        array|EventListParams $params,
         ?RequestOptions $requestOptions = null
     ): EventListResponse;
 

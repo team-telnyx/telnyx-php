@@ -61,7 +61,7 @@ final class MessagesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->messages->schedule(to: '+18445550001');
+        $result = $this->client->messages->schedule(['to' => '+18445550001']);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -73,7 +73,7 @@ final class MessagesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->messages->schedule(to: '+18445550001');
+        $result = $this->client->messages->schedule(['to' => '+18445550001']);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -85,7 +85,7 @@ final class MessagesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->messages->send(to: '+18445550001');
+        $result = $this->client->messages->send(['to' => '+18445550001']);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -97,7 +97,7 @@ final class MessagesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->messages->send(to: '+18445550001');
+        $result = $this->client->messages->send(['to' => '+18445550001']);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -109,10 +109,9 @@ final class MessagesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->messages->sendGroupMms(
-            from: '+13125551234',
-            to: ['+18655551234', '+14155551234']
-        );
+        $result = $this->client->messages->sendGroupMms([
+            'from' => '+13125551234', 'to' => ['+18655551234', '+14155551234'],
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -124,10 +123,9 @@ final class MessagesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->messages->sendGroupMms(
-            from: '+13125551234',
-            to: ['+18655551234', '+14155551234']
-        );
+        $result = $this->client->messages->sendGroupMms([
+            'from' => '+13125551234', 'to' => ['+18655551234', '+14155551234'],
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -139,10 +137,9 @@ final class MessagesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->messages->sendLongCode(
-            from: '+18445550001',
-            to: '+13125550002'
-        );
+        $result = $this->client->messages->sendLongCode([
+            'from' => '+18445550001', 'to' => '+13125550002',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -154,10 +151,9 @@ final class MessagesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->messages->sendLongCode(
-            from: '+18445550001',
-            to: '+13125550002'
-        );
+        $result = $this->client->messages->sendLongCode([
+            'from' => '+18445550001', 'to' => '+13125550002',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -169,10 +165,10 @@ final class MessagesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->messages->sendNumberPool(
-            messagingProfileID: 'abc85f64-5717-4562-b3fc-2c9600000000',
-            to: 'to'
-        );
+        $result = $this->client->messages->sendNumberPool([
+            'messaging_profile_id' => 'abc85f64-5717-4562-b3fc-2c9600000000',
+            'to' => 'to',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -184,10 +180,10 @@ final class MessagesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->messages->sendNumberPool(
-            messagingProfileID: 'abc85f64-5717-4562-b3fc-2c9600000000',
-            to: 'to'
-        );
+        $result = $this->client->messages->sendNumberPool([
+            'messaging_profile_id' => 'abc85f64-5717-4562-b3fc-2c9600000000',
+            'to' => 'to',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -199,10 +195,9 @@ final class MessagesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->messages->sendShortCode(
-            from: '+18445550001',
-            to: '+18445550001'
-        );
+        $result = $this->client->messages->sendShortCode([
+            'from' => '+18445550001', 'to' => '+18445550001',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -214,10 +209,9 @@ final class MessagesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->messages->sendShortCode(
-            from: '+18445550001',
-            to: '+18445550001'
-        );
+        $result = $this->client->messages->sendShortCode([
+            'from' => '+18445550001', 'to' => '+18445550001',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

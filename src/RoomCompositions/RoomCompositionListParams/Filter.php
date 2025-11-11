@@ -14,7 +14,9 @@ use Telnyx\RoomCompositions\RoomCompositionListParams\Filter\Status;
  * Consolidated filter parameter (deepObject style). Originally: filter[date_created_at][eq], filter[date_created_at][gte], filter[date_created_at][lte], filter[session_id], filter[status].
  *
  * @phpstan-type FilterShape = array{
- *   dateCreatedAt?: DateCreatedAt, sessionID?: string, status?: value-of<Status>
+ *   date_created_at?: DateCreatedAt|null,
+ *   session_id?: string|null,
+ *   status?: value-of<Status>|null,
  * }
  */
 final class Filter implements BaseModel
@@ -22,14 +24,14 @@ final class Filter implements BaseModel
     /** @use SdkModel<FilterShape> */
     use SdkModel;
 
-    #[Api('date_created_at', optional: true)]
-    public ?DateCreatedAt $dateCreatedAt;
+    #[Api(optional: true)]
+    public ?DateCreatedAt $date_created_at;
 
     /**
      * The session_id for filtering room compositions.
      */
-    #[Api('session_id', optional: true)]
-    public ?string $sessionID;
+    #[Api(optional: true)]
+    public ?string $session_id;
 
     /**
      * The status for filtering room compositions.
@@ -52,14 +54,14 @@ final class Filter implements BaseModel
      * @param Status|value-of<Status> $status
      */
     public static function with(
-        ?DateCreatedAt $dateCreatedAt = null,
-        ?string $sessionID = null,
+        ?DateCreatedAt $date_created_at = null,
+        ?string $session_id = null,
         Status|string|null $status = null,
     ): self {
         $obj = new self;
 
-        null !== $dateCreatedAt && $obj->dateCreatedAt = $dateCreatedAt;
-        null !== $sessionID && $obj->sessionID = $sessionID;
+        null !== $date_created_at && $obj->date_created_at = $date_created_at;
+        null !== $session_id && $obj->session_id = $session_id;
         null !== $status && $obj['status'] = $status;
 
         return $obj;
@@ -68,7 +70,7 @@ final class Filter implements BaseModel
     public function withDateCreatedAt(DateCreatedAt $dateCreatedAt): self
     {
         $obj = clone $this;
-        $obj->dateCreatedAt = $dateCreatedAt;
+        $obj->date_created_at = $dateCreatedAt;
 
         return $obj;
     }
@@ -79,7 +81,7 @@ final class Filter implements BaseModel
     public function withSessionID(string $sessionID): self
     {
         $obj = clone $this;
-        $obj->sessionID = $sessionID;
+        $obj->session_id = $sessionID;
 
         return $obj;
     }

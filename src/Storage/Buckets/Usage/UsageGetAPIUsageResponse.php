@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Storage\Buckets\Usage\UsageGetAPIUsageResponse\Data;
 
 /**
- * @phpstan-type UsageGetAPIUsageResponseShape = array{data?: list<Data>}
+ * @phpstan-type UsageGetAPIUsageResponseShape = array{data?: list<Data>|null}
  */
 final class UsageGetAPIUsageResponse implements BaseModel, ResponseConverter
 {

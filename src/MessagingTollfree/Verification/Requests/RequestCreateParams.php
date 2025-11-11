@@ -46,7 +46,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   optInKeywords?: string|null,
  *   privacyPolicyURL?: string|null,
  *   termsAndConditionURL?: string|null,
- *   webhookURL?: string,
+ *   webhookUrl?: string,
  * }
  */
 final class RequestCreateParams implements BaseModel
@@ -258,8 +258,8 @@ final class RequestCreateParams implements BaseModel
     /**
      * URL that should receive webhooks relating to this verification request.
      */
-    #[Api('webhookUrl', optional: true)]
-    public ?string $webhookURL;
+    #[Api(optional: true)]
+    public ?string $webhookUrl;
 
     /**
      * `new RequestCreateParams()` is missing required properties by the API.
@@ -362,7 +362,7 @@ final class RequestCreateParams implements BaseModel
         ?string $optInKeywords = null,
         ?string $privacyPolicyURL = null,
         ?string $termsAndConditionURL = null,
-        ?string $webhookURL = null,
+        ?string $webhookUrl = null,
     ): self {
         $obj = new self;
 
@@ -398,7 +398,7 @@ final class RequestCreateParams implements BaseModel
         null !== $optInKeywords && $obj->optInKeywords = $optInKeywords;
         null !== $privacyPolicyURL && $obj->privacyPolicyURL = $privacyPolicyURL;
         null !== $termsAndConditionURL && $obj->termsAndConditionURL = $termsAndConditionURL;
-        null !== $webhookURL && $obj->webhookURL = $webhookURL;
+        null !== $webhookUrl && $obj->webhookUrl = $webhookUrl;
 
         return $obj;
     }
@@ -771,7 +771,7 @@ final class RequestCreateParams implements BaseModel
     public function withWebhookURL(string $webhookURL): self
     {
         $obj = clone $this;
-        $obj->webhookURL = $webhookURL;
+        $obj->webhookUrl = $webhookURL;
 
         return $obj;
     }

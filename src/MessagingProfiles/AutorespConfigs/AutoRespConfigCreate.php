@@ -11,10 +11,10 @@ use Telnyx\MessagingProfiles\AutorespConfigs\AutoRespConfigCreate\Op;
 
 /**
  * @phpstan-type AutoRespConfigCreateShape = array{
- *   countryCode: string,
+ *   country_code: string,
  *   keywords: list<string>,
  *   op: value-of<Op>,
- *   respText?: string,
+ *   resp_text?: string|null,
  * }
  */
 final class AutoRespConfigCreate implements BaseModel
@@ -22,8 +22,8 @@ final class AutoRespConfigCreate implements BaseModel
     /** @use SdkModel<AutoRespConfigCreateShape> */
     use SdkModel;
 
-    #[Api('country_code')]
-    public string $countryCode;
+    #[Api]
+    public string $country_code;
 
     /** @var list<string> $keywords */
     #[Api(list: 'string')]
@@ -33,15 +33,15 @@ final class AutoRespConfigCreate implements BaseModel
     #[Api(enum: Op::class)]
     public string $op;
 
-    #[Api('resp_text', optional: true)]
-    public ?string $respText;
+    #[Api(optional: true)]
+    public ?string $resp_text;
 
     /**
      * `new AutoRespConfigCreate()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * AutoRespConfigCreate::with(countryCode: ..., keywords: ..., op: ...)
+     * AutoRespConfigCreate::with(country_code: ..., keywords: ..., op: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -64,18 +64,18 @@ final class AutoRespConfigCreate implements BaseModel
      * @param Op|value-of<Op> $op
      */
     public static function with(
-        string $countryCode,
+        string $country_code,
         array $keywords,
         Op|string $op,
-        ?string $respText = null
+        ?string $resp_text = null,
     ): self {
         $obj = new self;
 
-        $obj->countryCode = $countryCode;
+        $obj->country_code = $country_code;
         $obj->keywords = $keywords;
         $obj['op'] = $op;
 
-        null !== $respText && $obj->respText = $respText;
+        null !== $resp_text && $obj->resp_text = $resp_text;
 
         return $obj;
     }
@@ -83,7 +83,7 @@ final class AutoRespConfigCreate implements BaseModel
     public function withCountryCode(string $countryCode): self
     {
         $obj = clone $this;
-        $obj->countryCode = $countryCode;
+        $obj->country_code = $countryCode;
 
         return $obj;
     }
@@ -113,7 +113,7 @@ final class AutoRespConfigCreate implements BaseModel
     public function withRespText(string $respText): self
     {
         $obj = clone $this;
-        $obj->respText = $respText;
+        $obj->resp_text = $respText;
 
         return $obj;
     }

@@ -8,13 +8,9 @@ use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Portouts\Events\EventGetResponse;
 use Telnyx\Portouts\Events\EventListParams;
-use Telnyx\Portouts\Events\EventListParams\Filter;
-use Telnyx\Portouts\Events\EventListParams\Page;
 use Telnyx\Portouts\Events\EventListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Portouts\EventsContract;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class EventsService implements EventsContract
 {
@@ -48,35 +44,26 @@ final class EventsService implements EventsContract
      *
      * Returns a list of all port-out events.
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[event_type], filter[portout_id], filter[created_at]
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param array{
+     *   filter?: array{
+     *     created_at?: array{
+     *       gte?: string|\DateTimeInterface, lte?: string|\DateTimeInterface
+     *     },
+     *     event_type?: "portout.status_changed"|"portout.new_comment"|"portout.foc_date_changed",
+     *     portout_id?: string,
+     *   },
+     *   page?: array{number?: int, size?: int},
+     * }|EventListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): EventListResponse {
-        $params = ['filter' => $filter, 'page' => $page];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
+        array|EventListParams $params,
         ?RequestOptions $requestOptions = null
     ): EventListResponse {
         [$parsed, $options] = EventListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

@@ -13,7 +13,7 @@ use Telnyx\PartnerCampaigns\PartnerCampaignListSharedByMeResponse\Record;
 
 /**
  * @phpstan-type PartnerCampaignListSharedByMeResponseShape = array{
- *   page?: int, records?: list<Record>, totalRecords?: int
+ *   page?: int|null, records?: list<Record>|null, totalRecords?: int|null
  * }
  */
 final class PartnerCampaignListSharedByMeResponse implements BaseModel, ResponseConverter

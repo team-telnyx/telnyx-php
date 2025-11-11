@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Fqdns->create
  *
  * @phpstan-type FqdnCreateParamsShape = array{
- *   connectionID: string, dnsRecordType: string, fqdn: string, port?: int|null
+ *   connection_id: string, dns_record_type: string, fqdn: string, port?: int|null
  * }
  */
 final class FqdnCreateParams implements BaseModel
@@ -27,14 +27,14 @@ final class FqdnCreateParams implements BaseModel
     /**
      * ID of the FQDN connection to which this IP should be attached.
      */
-    #[Api('connection_id')]
-    public string $connectionID;
+    #[Api]
+    public string $connection_id;
 
     /**
      * The DNS record type for the FQDN. For cases where a port is not set, the DNS record type must be 'srv'. For cases where a port is set, the DNS record type must be 'a'. If the DNS record type is 'a' and a port is not specified, 5060 will be used.
      */
-    #[Api('dns_record_type')]
-    public string $dnsRecordType;
+    #[Api]
+    public string $dns_record_type;
 
     /**
      * FQDN represented by this resource.
@@ -53,7 +53,7 @@ final class FqdnCreateParams implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * FqdnCreateParams::with(connectionID: ..., dnsRecordType: ..., fqdn: ...)
+     * FqdnCreateParams::with(connection_id: ..., dns_record_type: ..., fqdn: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -76,15 +76,15 @@ final class FqdnCreateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        string $connectionID,
-        string $dnsRecordType,
+        string $connection_id,
+        string $dns_record_type,
         string $fqdn,
-        ?int $port = null
+        ?int $port = null,
     ): self {
         $obj = new self;
 
-        $obj->connectionID = $connectionID;
-        $obj->dnsRecordType = $dnsRecordType;
+        $obj->connection_id = $connection_id;
+        $obj->dns_record_type = $dns_record_type;
         $obj->fqdn = $fqdn;
 
         null !== $port && $obj->port = $port;
@@ -98,7 +98,7 @@ final class FqdnCreateParams implements BaseModel
     public function withConnectionID(string $connectionID): self
     {
         $obj = clone $this;
-        $obj->connectionID = $connectionID;
+        $obj->connection_id = $connectionID;
 
         return $obj;
     }
@@ -109,7 +109,7 @@ final class FqdnCreateParams implements BaseModel
     public function withDNSRecordType(string $dnsRecordType): self
     {
         $obj = clone $this;
-        $obj->dnsRecordType = $dnsRecordType;
+        $obj->dns_record_type = $dnsRecordType;
 
         return $obj;
     }

@@ -11,7 +11,7 @@ use Telnyx\RecordingTranscriptions\RecordingTranscriptionListResponse\Meta\Curso
 
 /**
  * @phpstan-type MetaShape = array{
- *   cursors?: Cursors, next?: string, previous?: string
+ *   cursors?: Cursors|null, next?: string|null, previous?: string|null
  * }
  */
 final class Meta implements BaseModel

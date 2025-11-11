@@ -15,9 +15,9 @@ use Telnyx\Documents\DocumentListParams\Filter\Filename;
  * Consolidated filter parameter for documents (deepObject style). Originally: filter[filename][contains], filter[customer_reference][eq], filter[customer_reference][in][], filter[created_at][gt], filter[created_at][lt].
  *
  * @phpstan-type FilterShape = array{
- *   createdAt?: CreatedAt,
- *   customerReference?: CustomerReference,
- *   filename?: Filename,
+ *   created_at?: CreatedAt|null,
+ *   customer_reference?: CustomerReference|null,
+ *   filename?: Filename|null,
  * }
  */
 final class Filter implements BaseModel
@@ -25,11 +25,11 @@ final class Filter implements BaseModel
     /** @use SdkModel<FilterShape> */
     use SdkModel;
 
-    #[Api('created_at', optional: true)]
-    public ?CreatedAt $createdAt;
+    #[Api(optional: true)]
+    public ?CreatedAt $created_at;
 
-    #[Api('customer_reference', optional: true)]
-    public ?CustomerReference $customerReference;
+    #[Api(optional: true)]
+    public ?CustomerReference $customer_reference;
 
     #[Api(optional: true)]
     public ?Filename $filename;
@@ -45,14 +45,14 @@ final class Filter implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?CreatedAt $createdAt = null,
-        ?CustomerReference $customerReference = null,
+        ?CreatedAt $created_at = null,
+        ?CustomerReference $customer_reference = null,
         ?Filename $filename = null,
     ): self {
         $obj = new self;
 
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $customerReference && $obj->customerReference = $customerReference;
+        null !== $created_at && $obj->created_at = $created_at;
+        null !== $customer_reference && $obj->customer_reference = $customer_reference;
         null !== $filename && $obj->filename = $filename;
 
         return $obj;
@@ -61,7 +61,7 @@ final class Filter implements BaseModel
     public function withCreatedAt(CreatedAt $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }
@@ -70,7 +70,7 @@ final class Filter implements BaseModel
         CustomerReference $customerReference
     ): self {
         $obj = clone $this;
-        $obj->customerReference = $customerReference;
+        $obj->customer_reference = $customerReference;
 
         return $obj;
     }

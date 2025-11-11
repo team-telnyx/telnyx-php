@@ -6,10 +6,6 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\MessagingTollfree\Verification\Requests\TfPhoneNumber;
-use Telnyx\MessagingTollfree\Verification\Requests\URL;
-use Telnyx\MessagingTollfree\Verification\Requests\UseCaseCategories;
-use Telnyx\MessagingTollfree\Verification\Requests\Volume;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -37,33 +33,32 @@ final class RequestsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->messagingTollfree->verification->requests->create(
-            additionalInformation: 'additionalInformation',
-            businessAddr1: '600 Congress Avenue',
-            businessCity: 'Austin',
-            businessContactEmail: 'email@example.com',
-            businessContactFirstName: 'John',
-            businessContactLastName: 'Doe',
-            businessContactPhone: '+18005550100',
-            businessName: 'Telnyx LLC',
-            businessState: 'Texas',
-            businessZip: '78701',
-            corporateWebsite: 'http://example.com',
-            isvReseller: 'isvReseller',
-            messageVolume: Volume::_100_000,
-            optInWorkflow: "User signs into the Telnyx portal, enters a number and is prompted to select whether they want to use 2FA verification for security purposes. If they've opted in a confirmation message is sent out to the handset",
-            optInWorkflowImageURLs: [
-                URL::with(url: 'https://telnyx.com/sign-up'),
-                URL::with(url: 'https://telnyx.com/company/data-privacy'),
+        $result = $this->client->messagingTollfree->verification->requests->create([
+            'additionalInformation' => 'additionalInformation',
+            'businessAddr1' => '600 Congress Avenue',
+            'businessCity' => 'Austin',
+            'businessContactEmail' => 'email@example.com',
+            'businessContactFirstName' => 'John',
+            'businessContactLastName' => 'Doe',
+            'businessContactPhone' => '+18005550100',
+            'businessName' => 'Telnyx LLC',
+            'businessState' => 'Texas',
+            'businessZip' => '78701',
+            'corporateWebsite' => 'http://example.com',
+            'isvReseller' => 'isvReseller',
+            'messageVolume' => '100,000',
+            'optInWorkflow' => "User signs into the Telnyx portal, enters a number and is prompted to select whether they want to use 2FA verification for security purposes. If they've opted in a confirmation message is sent out to the handset",
+            'optInWorkflowImageURLs' => [
+                ['url' => 'https://telnyx.com/sign-up'],
+                ['url' => 'https://telnyx.com/company/data-privacy'],
             ],
-            phoneNumbers: [
-                TfPhoneNumber::with(phoneNumber: '+18773554398'),
-                TfPhoneNumber::with(phoneNumber: '+18773554399'),
+            'phoneNumbers' => [
+                ['phoneNumber' => '+18773554398'], ['phoneNumber' => '+18773554399'],
             ],
-            productionMessageContent: 'Your Telnyx OTP is XXXX',
-            useCase: UseCaseCategories::_2_FA,
-            useCaseSummary: 'This is a use case where Telnyx sends out 2FA codes to portal users to verify their identity in order to sign into the portal',
-        );
+            'productionMessageContent' => 'Your Telnyx OTP is XXXX',
+            'useCase' => '2FA',
+            'useCaseSummary' => 'This is a use case where Telnyx sends out 2FA codes to portal users to verify their identity in order to sign into the portal',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -75,33 +70,32 @@ final class RequestsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->messagingTollfree->verification->requests->create(
-            additionalInformation: 'additionalInformation',
-            businessAddr1: '600 Congress Avenue',
-            businessCity: 'Austin',
-            businessContactEmail: 'email@example.com',
-            businessContactFirstName: 'John',
-            businessContactLastName: 'Doe',
-            businessContactPhone: '+18005550100',
-            businessName: 'Telnyx LLC',
-            businessState: 'Texas',
-            businessZip: '78701',
-            corporateWebsite: 'http://example.com',
-            isvReseller: 'isvReseller',
-            messageVolume: Volume::_100_000,
-            optInWorkflow: "User signs into the Telnyx portal, enters a number and is prompted to select whether they want to use 2FA verification for security purposes. If they've opted in a confirmation message is sent out to the handset",
-            optInWorkflowImageURLs: [
-                URL::with(url: 'https://telnyx.com/sign-up'),
-                URL::with(url: 'https://telnyx.com/company/data-privacy'),
+        $result = $this->client->messagingTollfree->verification->requests->create([
+            'additionalInformation' => 'additionalInformation',
+            'businessAddr1' => '600 Congress Avenue',
+            'businessCity' => 'Austin',
+            'businessContactEmail' => 'email@example.com',
+            'businessContactFirstName' => 'John',
+            'businessContactLastName' => 'Doe',
+            'businessContactPhone' => '+18005550100',
+            'businessName' => 'Telnyx LLC',
+            'businessState' => 'Texas',
+            'businessZip' => '78701',
+            'corporateWebsite' => 'http://example.com',
+            'isvReseller' => 'isvReseller',
+            'messageVolume' => '100,000',
+            'optInWorkflow' => "User signs into the Telnyx portal, enters a number and is prompted to select whether they want to use 2FA verification for security purposes. If they've opted in a confirmation message is sent out to the handset",
+            'optInWorkflowImageURLs' => [
+                ['url' => 'https://telnyx.com/sign-up'],
+                ['url' => 'https://telnyx.com/company/data-privacy'],
             ],
-            phoneNumbers: [
-                TfPhoneNumber::with(phoneNumber: '+18773554398'),
-                TfPhoneNumber::with(phoneNumber: '+18773554399'),
+            'phoneNumbers' => [
+                ['phoneNumber' => '+18773554398'], ['phoneNumber' => '+18773554399'],
             ],
-            productionMessageContent: 'Your Telnyx OTP is XXXX',
-            useCase: UseCaseCategories::_2_FA,
-            useCaseSummary: 'This is a use case where Telnyx sends out 2FA codes to portal users to verify their identity in order to sign into the portal',
-        );
+            'productionMessageContent' => 'Your Telnyx OTP is XXXX',
+            'useCase' => '2FA',
+            'useCaseSummary' => 'This is a use case where Telnyx sends out 2FA codes to portal users to verify their identity in order to sign into the portal',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -133,31 +127,32 @@ final class RequestsTest extends TestCase
 
         $result = $this->client->messagingTollfree->verification->requests->update(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            additionalInformation: 'additionalInformation',
-            businessAddr1: '600 Congress Avenue',
-            businessCity: 'Austin',
-            businessContactEmail: 'email@example.com',
-            businessContactFirstName: 'John',
-            businessContactLastName: 'Doe',
-            businessContactPhone: '+18005550100',
-            businessName: 'Telnyx LLC',
-            businessState: 'Texas',
-            businessZip: '78701',
-            corporateWebsite: 'http://example.com',
-            isvReseller: 'isvReseller',
-            messageVolume: Volume::_100_000,
-            optInWorkflow: "User signs into the Telnyx portal, enters a number and is prompted to select whether they want to use 2FA verification for security purposes. If they've opted in a confirmation message is sent out to the handset",
-            optInWorkflowImageURLs: [
-                URL::with(url: 'https://telnyx.com/sign-up'),
-                URL::with(url: 'https://telnyx.com/company/data-privacy'),
+            [
+                'additionalInformation' => 'additionalInformation',
+                'businessAddr1' => '600 Congress Avenue',
+                'businessCity' => 'Austin',
+                'businessContactEmail' => 'email@example.com',
+                'businessContactFirstName' => 'John',
+                'businessContactLastName' => 'Doe',
+                'businessContactPhone' => '+18005550100',
+                'businessName' => 'Telnyx LLC',
+                'businessState' => 'Texas',
+                'businessZip' => '78701',
+                'corporateWebsite' => 'http://example.com',
+                'isvReseller' => 'isvReseller',
+                'messageVolume' => '100,000',
+                'optInWorkflow' => "User signs into the Telnyx portal, enters a number and is prompted to select whether they want to use 2FA verification for security purposes. If they've opted in a confirmation message is sent out to the handset",
+                'optInWorkflowImageURLs' => [
+                    ['url' => 'https://telnyx.com/sign-up'],
+                    ['url' => 'https://telnyx.com/company/data-privacy'],
+                ],
+                'phoneNumbers' => [
+                    ['phoneNumber' => '+18773554398'], ['phoneNumber' => '+18773554399'],
+                ],
+                'productionMessageContent' => 'Your Telnyx OTP is XXXX',
+                'useCase' => '2FA',
+                'useCaseSummary' => 'This is a use case where Telnyx sends out 2FA codes to portal users to verify their identity in order to sign into the portal',
             ],
-            phoneNumbers: [
-                TfPhoneNumber::with(phoneNumber: '+18773554398'),
-                TfPhoneNumber::with(phoneNumber: '+18773554399'),
-            ],
-            productionMessageContent: 'Your Telnyx OTP is XXXX',
-            useCase: UseCaseCategories::_2_FA,
-            useCaseSummary: 'This is a use case where Telnyx sends out 2FA codes to portal users to verify their identity in order to sign into the portal',
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -172,31 +167,32 @@ final class RequestsTest extends TestCase
 
         $result = $this->client->messagingTollfree->verification->requests->update(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            additionalInformation: 'additionalInformation',
-            businessAddr1: '600 Congress Avenue',
-            businessCity: 'Austin',
-            businessContactEmail: 'email@example.com',
-            businessContactFirstName: 'John',
-            businessContactLastName: 'Doe',
-            businessContactPhone: '+18005550100',
-            businessName: 'Telnyx LLC',
-            businessState: 'Texas',
-            businessZip: '78701',
-            corporateWebsite: 'http://example.com',
-            isvReseller: 'isvReseller',
-            messageVolume: Volume::_100_000,
-            optInWorkflow: "User signs into the Telnyx portal, enters a number and is prompted to select whether they want to use 2FA verification for security purposes. If they've opted in a confirmation message is sent out to the handset",
-            optInWorkflowImageURLs: [
-                URL::with(url: 'https://telnyx.com/sign-up'),
-                URL::with(url: 'https://telnyx.com/company/data-privacy'),
+            [
+                'additionalInformation' => 'additionalInformation',
+                'businessAddr1' => '600 Congress Avenue',
+                'businessCity' => 'Austin',
+                'businessContactEmail' => 'email@example.com',
+                'businessContactFirstName' => 'John',
+                'businessContactLastName' => 'Doe',
+                'businessContactPhone' => '+18005550100',
+                'businessName' => 'Telnyx LLC',
+                'businessState' => 'Texas',
+                'businessZip' => '78701',
+                'corporateWebsite' => 'http://example.com',
+                'isvReseller' => 'isvReseller',
+                'messageVolume' => '100,000',
+                'optInWorkflow' => "User signs into the Telnyx portal, enters a number and is prompted to select whether they want to use 2FA verification for security purposes. If they've opted in a confirmation message is sent out to the handset",
+                'optInWorkflowImageURLs' => [
+                    ['url' => 'https://telnyx.com/sign-up'],
+                    ['url' => 'https://telnyx.com/company/data-privacy'],
+                ],
+                'phoneNumbers' => [
+                    ['phoneNumber' => '+18773554398'], ['phoneNumber' => '+18773554399'],
+                ],
+                'productionMessageContent' => 'Your Telnyx OTP is XXXX',
+                'useCase' => '2FA',
+                'useCaseSummary' => 'This is a use case where Telnyx sends out 2FA codes to portal users to verify their identity in order to sign into the portal',
             ],
-            phoneNumbers: [
-                TfPhoneNumber::with(phoneNumber: '+18773554398'),
-                TfPhoneNumber::with(phoneNumber: '+18773554399'),
-            ],
-            productionMessageContent: 'Your Telnyx OTP is XXXX',
-            useCase: UseCaseCategories::_2_FA,
-            useCaseSummary: 'This is a use case where Telnyx sends out 2FA codes to portal users to verify their identity in order to sign into the portal',
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -209,10 +205,9 @@ final class RequestsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->messagingTollfree->verification->requests->list(
-            page: 1,
-            pageSize: 1
-        );
+        $result = $this->client->messagingTollfree->verification->requests->list([
+            'page' => 1, 'page_size' => 1,
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -224,10 +219,9 @@ final class RequestsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->messagingTollfree->verification->requests->list(
-            page: 1,
-            pageSize: 1
-        );
+        $result = $this->client->messagingTollfree->verification->requests->list([
+            'page' => 1, 'page_size' => 1,
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

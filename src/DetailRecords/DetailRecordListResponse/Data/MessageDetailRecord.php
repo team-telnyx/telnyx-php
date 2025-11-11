@@ -13,37 +13,37 @@ use Telnyx\DetailRecords\DetailRecordListResponse\Data\MessageDetailRecord\Statu
 
 /**
  * @phpstan-type MessageDetailRecordShape = array{
- *   recordType: string,
- *   carrier?: string,
- *   carrierFee?: string,
- *   cld?: string,
- *   cli?: string,
- *   completedAt?: \DateTimeInterface,
- *   cost?: string,
- *   countryCode?: string,
- *   createdAt?: \DateTimeInterface,
- *   currency?: string,
- *   deliveryStatus?: string,
- *   deliveryStatusFailoverURL?: string,
- *   deliveryStatusWebhookURL?: string,
- *   direction?: value-of<Direction>,
- *   errors?: list<string>,
- *   fteu?: bool,
- *   mcc?: string,
- *   messageType?: value-of<MessageType>,
- *   mnc?: string,
- *   onNet?: bool,
- *   parts?: int,
- *   profileID?: string,
- *   profileName?: string,
- *   rate?: string,
- *   sentAt?: \DateTimeInterface,
- *   sourceCountryCode?: string,
- *   status?: value-of<Status>,
- *   tags?: string,
- *   updatedAt?: \DateTimeInterface,
- *   userID?: string,
- *   uuid?: string,
+ *   record_type: string,
+ *   carrier?: string|null,
+ *   carrier_fee?: string|null,
+ *   cld?: string|null,
+ *   cli?: string|null,
+ *   completed_at?: \DateTimeInterface|null,
+ *   cost?: string|null,
+ *   country_code?: string|null,
+ *   created_at?: \DateTimeInterface|null,
+ *   currency?: string|null,
+ *   delivery_status?: string|null,
+ *   delivery_status_failover_url?: string|null,
+ *   delivery_status_webhook_url?: string|null,
+ *   direction?: value-of<Direction>|null,
+ *   errors?: list<string>|null,
+ *   fteu?: bool|null,
+ *   mcc?: string|null,
+ *   message_type?: value-of<MessageType>|null,
+ *   mnc?: string|null,
+ *   on_net?: bool|null,
+ *   parts?: int|null,
+ *   profile_id?: string|null,
+ *   profile_name?: string|null,
+ *   rate?: string|null,
+ *   sent_at?: \DateTimeInterface|null,
+ *   source_country_code?: string|null,
+ *   status?: value-of<Status>|null,
+ *   tags?: string|null,
+ *   updated_at?: \DateTimeInterface|null,
+ *   user_id?: string|null,
+ *   uuid?: string|null,
  * }
  */
 final class MessageDetailRecord implements BaseModel
@@ -54,8 +54,8 @@ final class MessageDetailRecord implements BaseModel
     /**
      * Identifies the record schema.
      */
-    #[Api('record_type')]
-    public string $recordType;
+    #[Api]
+    public string $record_type;
 
     /**
      * Country-specific carrier used to send or receive the message.
@@ -66,8 +66,8 @@ final class MessageDetailRecord implements BaseModel
     /**
      * Fee charged by certain carriers in order to deliver certain message types. Telnyx passes this fee on to the customer according to our pricing table.
      */
-    #[Api('carrier_fee', optional: true)]
-    public ?string $carrierFee;
+    #[Api(optional: true)]
+    public ?string $carrier_fee;
 
     /**
      * The recipient of the message (to parameter in the Messaging API).
@@ -84,8 +84,8 @@ final class MessageDetailRecord implements BaseModel
     /**
      * Message completion time.
      */
-    #[Api('completed_at', optional: true)]
-    public ?\DateTimeInterface $completedAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $completed_at;
 
     /**
      * Amount, in the user currency, for the Telnyx billing cost.
@@ -96,14 +96,14 @@ final class MessageDetailRecord implements BaseModel
     /**
      * Two-letter representation of the country of the cld property using the ISO 3166-1 alpha-2 format.
      */
-    #[Api('country_code', optional: true)]
-    public ?string $countryCode;
+    #[Api(optional: true)]
+    public ?string $country_code;
 
     /**
      * Message creation time.
      */
-    #[Api('created_at', optional: true)]
-    public ?\DateTimeInterface $createdAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $created_at;
 
     /**
      * Telnyx account currency used to describe monetary values, including billing cost.
@@ -114,20 +114,20 @@ final class MessageDetailRecord implements BaseModel
     /**
      * Final webhook delivery status.
      */
-    #[Api('delivery_status', optional: true)]
-    public ?string $deliveryStatus;
+    #[Api(optional: true)]
+    public ?string $delivery_status;
 
     /**
      * Failover customer-provided URL which Telnyx posts delivery status webhooks to.
      */
-    #[Api('delivery_status_failover_url', optional: true)]
-    public ?string $deliveryStatusFailoverURL;
+    #[Api(optional: true)]
+    public ?string $delivery_status_failover_url;
 
     /**
      * Primary customer-provided URL which Telnyx posts delivery status webhooks to.
      */
-    #[Api('delivery_status_webhook_url', optional: true)]
-    public ?string $deliveryStatusWebhookURL;
+    #[Api(optional: true)]
+    public ?string $delivery_status_webhook_url;
 
     /**
      * Logical direction of the message from the Telnyx customer's perspective. It's inbound when the Telnyx customer receives the message, or outbound otherwise.
@@ -160,10 +160,10 @@ final class MessageDetailRecord implements BaseModel
     /**
      * Describes the Messaging service used to send the message. Available services are: Short Message Service (SMS), Multimedia Messaging Service (MMS), and Rich Communication Services (RCS).
      *
-     * @var value-of<MessageType>|null $messageType
+     * @var value-of<MessageType>|null $message_type
      */
-    #[Api('message_type', enum: MessageType::class, optional: true)]
-    public ?string $messageType;
+    #[Api(enum: MessageType::class, optional: true)]
+    public ?string $message_type;
 
     /**
      * Mobile network code. Only available for certain products, such as Global Outbound-Only from Alphanumeric Sender ID.
@@ -174,8 +174,8 @@ final class MessageDetailRecord implements BaseModel
     /**
      * Indicates whether both sender and recipient numbers are Telnyx-managed.
      */
-    #[Api('on_net', optional: true)]
-    public ?bool $onNet;
+    #[Api(optional: true)]
+    public ?bool $on_net;
 
     /**
      * Number of message parts. The message is broken down in multiple parts when its length surpasses the limit of 160 characters.
@@ -186,14 +186,14 @@ final class MessageDetailRecord implements BaseModel
     /**
      * Unique identifier of the Messaging Profile used to send or receive the message.
      */
-    #[Api('profile_id', optional: true)]
-    public ?string $profileID;
+    #[Api(optional: true)]
+    public ?string $profile_id;
 
     /**
      * Name of the Messaging Profile used to send or receive the message.
      */
-    #[Api('profile_name', optional: true)]
-    public ?string $profileName;
+    #[Api(optional: true)]
+    public ?string $profile_name;
 
     /**
      * Currency amount per billing unit used to calculate the Telnyx billing cost.
@@ -204,14 +204,14 @@ final class MessageDetailRecord implements BaseModel
     /**
      * Time when the message was sent.
      */
-    #[Api('sent_at', optional: true)]
-    public ?\DateTimeInterface $sentAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $sent_at;
 
     /**
      * Two-letter representation of the country of the cli property using the ISO 3166-1 alpha-2 format.
      */
-    #[Api('source_country_code', optional: true)]
-    public ?string $sourceCountryCode;
+    #[Api(optional: true)]
+    public ?string $source_country_code;
 
     /**
      * Final status of the message after the delivery attempt.
@@ -230,14 +230,14 @@ final class MessageDetailRecord implements BaseModel
     /**
      * Message updated time.
      */
-    #[Api('updated_at', optional: true)]
-    public ?\DateTimeInterface $updatedAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $updated_at;
 
     /**
      * Identifier of the Telnyx account who owns the message.
      */
-    #[Api('user_id', optional: true)]
-    public ?string $userID;
+    #[Api(optional: true)]
+    public ?string $user_id;
 
     /**
      * Unique identifier of the message.
@@ -250,7 +250,7 @@ final class MessageDetailRecord implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * MessageDetailRecord::with(recordType: ...)
+     * MessageDetailRecord::with(record_type: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -271,75 +271,75 @@ final class MessageDetailRecord implements BaseModel
      *
      * @param Direction|value-of<Direction> $direction
      * @param list<string> $errors
-     * @param MessageType|value-of<MessageType> $messageType
+     * @param MessageType|value-of<MessageType> $message_type
      * @param Status|value-of<Status> $status
      */
     public static function with(
-        string $recordType = 'message_detail_record',
+        string $record_type = 'message_detail_record',
         ?string $carrier = null,
-        ?string $carrierFee = null,
+        ?string $carrier_fee = null,
         ?string $cld = null,
         ?string $cli = null,
-        ?\DateTimeInterface $completedAt = null,
+        ?\DateTimeInterface $completed_at = null,
         ?string $cost = null,
-        ?string $countryCode = null,
-        ?\DateTimeInterface $createdAt = null,
+        ?string $country_code = null,
+        ?\DateTimeInterface $created_at = null,
         ?string $currency = null,
-        ?string $deliveryStatus = null,
-        ?string $deliveryStatusFailoverURL = null,
-        ?string $deliveryStatusWebhookURL = null,
+        ?string $delivery_status = null,
+        ?string $delivery_status_failover_url = null,
+        ?string $delivery_status_webhook_url = null,
         Direction|string|null $direction = null,
         ?array $errors = null,
         ?bool $fteu = null,
         ?string $mcc = null,
-        MessageType|string|null $messageType = null,
+        MessageType|string|null $message_type = null,
         ?string $mnc = null,
-        ?bool $onNet = null,
+        ?bool $on_net = null,
         ?int $parts = null,
-        ?string $profileID = null,
-        ?string $profileName = null,
+        ?string $profile_id = null,
+        ?string $profile_name = null,
         ?string $rate = null,
-        ?\DateTimeInterface $sentAt = null,
-        ?string $sourceCountryCode = null,
+        ?\DateTimeInterface $sent_at = null,
+        ?string $source_country_code = null,
         Status|string|null $status = null,
         ?string $tags = null,
-        ?\DateTimeInterface $updatedAt = null,
-        ?string $userID = null,
+        ?\DateTimeInterface $updated_at = null,
+        ?string $user_id = null,
         ?string $uuid = null,
     ): self {
         $obj = new self;
 
-        $obj->recordType = $recordType;
+        $obj->record_type = $record_type;
 
         null !== $carrier && $obj->carrier = $carrier;
-        null !== $carrierFee && $obj->carrierFee = $carrierFee;
+        null !== $carrier_fee && $obj->carrier_fee = $carrier_fee;
         null !== $cld && $obj->cld = $cld;
         null !== $cli && $obj->cli = $cli;
-        null !== $completedAt && $obj->completedAt = $completedAt;
+        null !== $completed_at && $obj->completed_at = $completed_at;
         null !== $cost && $obj->cost = $cost;
-        null !== $countryCode && $obj->countryCode = $countryCode;
-        null !== $createdAt && $obj->createdAt = $createdAt;
+        null !== $country_code && $obj->country_code = $country_code;
+        null !== $created_at && $obj->created_at = $created_at;
         null !== $currency && $obj->currency = $currency;
-        null !== $deliveryStatus && $obj->deliveryStatus = $deliveryStatus;
-        null !== $deliveryStatusFailoverURL && $obj->deliveryStatusFailoverURL = $deliveryStatusFailoverURL;
-        null !== $deliveryStatusWebhookURL && $obj->deliveryStatusWebhookURL = $deliveryStatusWebhookURL;
+        null !== $delivery_status && $obj->delivery_status = $delivery_status;
+        null !== $delivery_status_failover_url && $obj->delivery_status_failover_url = $delivery_status_failover_url;
+        null !== $delivery_status_webhook_url && $obj->delivery_status_webhook_url = $delivery_status_webhook_url;
         null !== $direction && $obj['direction'] = $direction;
         null !== $errors && $obj->errors = $errors;
         null !== $fteu && $obj->fteu = $fteu;
         null !== $mcc && $obj->mcc = $mcc;
-        null !== $messageType && $obj['messageType'] = $messageType;
+        null !== $message_type && $obj['message_type'] = $message_type;
         null !== $mnc && $obj->mnc = $mnc;
-        null !== $onNet && $obj->onNet = $onNet;
+        null !== $on_net && $obj->on_net = $on_net;
         null !== $parts && $obj->parts = $parts;
-        null !== $profileID && $obj->profileID = $profileID;
-        null !== $profileName && $obj->profileName = $profileName;
+        null !== $profile_id && $obj->profile_id = $profile_id;
+        null !== $profile_name && $obj->profile_name = $profile_name;
         null !== $rate && $obj->rate = $rate;
-        null !== $sentAt && $obj->sentAt = $sentAt;
-        null !== $sourceCountryCode && $obj->sourceCountryCode = $sourceCountryCode;
+        null !== $sent_at && $obj->sent_at = $sent_at;
+        null !== $source_country_code && $obj->source_country_code = $source_country_code;
         null !== $status && $obj['status'] = $status;
         null !== $tags && $obj->tags = $tags;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
-        null !== $userID && $obj->userID = $userID;
+        null !== $updated_at && $obj->updated_at = $updated_at;
+        null !== $user_id && $obj->user_id = $user_id;
         null !== $uuid && $obj->uuid = $uuid;
 
         return $obj;
@@ -351,7 +351,7 @@ final class MessageDetailRecord implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType;
+        $obj->record_type = $recordType;
 
         return $obj;
     }
@@ -373,7 +373,7 @@ final class MessageDetailRecord implements BaseModel
     public function withCarrierFee(string $carrierFee): self
     {
         $obj = clone $this;
-        $obj->carrierFee = $carrierFee;
+        $obj->carrier_fee = $carrierFee;
 
         return $obj;
     }
@@ -406,7 +406,7 @@ final class MessageDetailRecord implements BaseModel
     public function withCompletedAt(\DateTimeInterface $completedAt): self
     {
         $obj = clone $this;
-        $obj->completedAt = $completedAt;
+        $obj->completed_at = $completedAt;
 
         return $obj;
     }
@@ -428,7 +428,7 @@ final class MessageDetailRecord implements BaseModel
     public function withCountryCode(string $countryCode): self
     {
         $obj = clone $this;
-        $obj->countryCode = $countryCode;
+        $obj->country_code = $countryCode;
 
         return $obj;
     }
@@ -439,7 +439,7 @@ final class MessageDetailRecord implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }
@@ -461,7 +461,7 @@ final class MessageDetailRecord implements BaseModel
     public function withDeliveryStatus(string $deliveryStatus): self
     {
         $obj = clone $this;
-        $obj->deliveryStatus = $deliveryStatus;
+        $obj->delivery_status = $deliveryStatus;
 
         return $obj;
     }
@@ -473,7 +473,7 @@ final class MessageDetailRecord implements BaseModel
         string $deliveryStatusFailoverURL
     ): self {
         $obj = clone $this;
-        $obj->deliveryStatusFailoverURL = $deliveryStatusFailoverURL;
+        $obj->delivery_status_failover_url = $deliveryStatusFailoverURL;
 
         return $obj;
     }
@@ -485,7 +485,7 @@ final class MessageDetailRecord implements BaseModel
         string $deliveryStatusWebhookURL
     ): self {
         $obj = clone $this;
-        $obj->deliveryStatusWebhookURL = $deliveryStatusWebhookURL;
+        $obj->delivery_status_webhook_url = $deliveryStatusWebhookURL;
 
         return $obj;
     }
@@ -546,7 +546,7 @@ final class MessageDetailRecord implements BaseModel
     public function withMessageType(MessageType|string $messageType): self
     {
         $obj = clone $this;
-        $obj['messageType'] = $messageType;
+        $obj['message_type'] = $messageType;
 
         return $obj;
     }
@@ -568,7 +568,7 @@ final class MessageDetailRecord implements BaseModel
     public function withOnNet(bool $onNet): self
     {
         $obj = clone $this;
-        $obj->onNet = $onNet;
+        $obj->on_net = $onNet;
 
         return $obj;
     }
@@ -590,7 +590,7 @@ final class MessageDetailRecord implements BaseModel
     public function withProfileID(string $profileID): self
     {
         $obj = clone $this;
-        $obj->profileID = $profileID;
+        $obj->profile_id = $profileID;
 
         return $obj;
     }
@@ -601,7 +601,7 @@ final class MessageDetailRecord implements BaseModel
     public function withProfileName(string $profileName): self
     {
         $obj = clone $this;
-        $obj->profileName = $profileName;
+        $obj->profile_name = $profileName;
 
         return $obj;
     }
@@ -623,7 +623,7 @@ final class MessageDetailRecord implements BaseModel
     public function withSentAt(\DateTimeInterface $sentAt): self
     {
         $obj = clone $this;
-        $obj->sentAt = $sentAt;
+        $obj->sent_at = $sentAt;
 
         return $obj;
     }
@@ -634,7 +634,7 @@ final class MessageDetailRecord implements BaseModel
     public function withSourceCountryCode(string $sourceCountryCode): self
     {
         $obj = clone $this;
-        $obj->sourceCountryCode = $sourceCountryCode;
+        $obj->source_country_code = $sourceCountryCode;
 
         return $obj;
     }
@@ -669,7 +669,7 @@ final class MessageDetailRecord implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $obj->updated_at = $updatedAt;
 
         return $obj;
     }
@@ -680,7 +680,7 @@ final class MessageDetailRecord implements BaseModel
     public function withUserID(string $userID): self
     {
         $obj = clone $this;
-        $obj->userID = $userID;
+        $obj->user_id = $userID;
 
         return $obj;
     }

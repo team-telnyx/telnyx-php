@@ -12,16 +12,16 @@ use Telnyx\NotificationSettings\NotificationSetting\Status;
 
 /**
  * @phpstan-type NotificationSettingShape = array{
- *   id?: string,
- *   associatedRecordType?: string,
- *   associatedRecordTypeValue?: string,
- *   createdAt?: \DateTimeInterface,
- *   notificationChannelID?: string,
- *   notificationEventConditionID?: string,
- *   notificationProfileID?: string,
- *   parameters?: list<Parameter>,
- *   status?: value-of<Status>,
- *   updatedAt?: \DateTimeInterface,
+ *   id?: string|null,
+ *   associated_record_type?: string|null,
+ *   associated_record_type_value?: string|null,
+ *   created_at?: \DateTimeInterface|null,
+ *   notification_channel_id?: string|null,
+ *   notification_event_condition_id?: string|null,
+ *   notification_profile_id?: string|null,
+ *   parameters?: list<Parameter>|null,
+ *   status?: value-of<Status>|null,
+ *   updated_at?: \DateTimeInterface|null,
  * }
  */
 final class NotificationSetting implements BaseModel
@@ -35,35 +35,35 @@ final class NotificationSetting implements BaseModel
     #[Api(optional: true)]
     public ?string $id;
 
-    #[Api('associated_record_type', optional: true)]
-    public ?string $associatedRecordType;
+    #[Api(optional: true)]
+    public ?string $associated_record_type;
 
-    #[Api('associated_record_type_value', optional: true)]
-    public ?string $associatedRecordTypeValue;
+    #[Api(optional: true)]
+    public ?string $associated_record_type_value;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Api('created_at', optional: true)]
-    public ?\DateTimeInterface $createdAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $created_at;
 
     /**
      * A UUID reference to the associated Notification Channel.
      */
-    #[Api('notification_channel_id', optional: true)]
-    public ?string $notificationChannelID;
+    #[Api(optional: true)]
+    public ?string $notification_channel_id;
 
     /**
      * A UUID reference to the associated Notification Event Condition.
      */
-    #[Api('notification_event_condition_id', optional: true)]
-    public ?string $notificationEventConditionID;
+    #[Api(optional: true)]
+    public ?string $notification_event_condition_id;
 
     /**
      * A UUID reference to the associated Notification Profile.
      */
-    #[Api('notification_profile_id', optional: true)]
-    public ?string $notificationProfileID;
+    #[Api(optional: true)]
+    public ?string $notification_profile_id;
 
     /** @var list<Parameter>|null $parameters */
     #[Api(list: Parameter::class, optional: true)]
@@ -80,8 +80,8 @@ final class NotificationSetting implements BaseModel
     /**
      * ISO 8601 formatted date indicating when the resource was updated.
      */
-    #[Api('updated_at', optional: true)]
-    public ?\DateTimeInterface $updatedAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $updated_at;
 
     public function __construct()
     {
@@ -98,28 +98,28 @@ final class NotificationSetting implements BaseModel
      */
     public static function with(
         ?string $id = null,
-        ?string $associatedRecordType = null,
-        ?string $associatedRecordTypeValue = null,
-        ?\DateTimeInterface $createdAt = null,
-        ?string $notificationChannelID = null,
-        ?string $notificationEventConditionID = null,
-        ?string $notificationProfileID = null,
+        ?string $associated_record_type = null,
+        ?string $associated_record_type_value = null,
+        ?\DateTimeInterface $created_at = null,
+        ?string $notification_channel_id = null,
+        ?string $notification_event_condition_id = null,
+        ?string $notification_profile_id = null,
         ?array $parameters = null,
         Status|string|null $status = null,
-        ?\DateTimeInterface $updatedAt = null,
+        ?\DateTimeInterface $updated_at = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj->id = $id;
-        null !== $associatedRecordType && $obj->associatedRecordType = $associatedRecordType;
-        null !== $associatedRecordTypeValue && $obj->associatedRecordTypeValue = $associatedRecordTypeValue;
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $notificationChannelID && $obj->notificationChannelID = $notificationChannelID;
-        null !== $notificationEventConditionID && $obj->notificationEventConditionID = $notificationEventConditionID;
-        null !== $notificationProfileID && $obj->notificationProfileID = $notificationProfileID;
+        null !== $associated_record_type && $obj->associated_record_type = $associated_record_type;
+        null !== $associated_record_type_value && $obj->associated_record_type_value = $associated_record_type_value;
+        null !== $created_at && $obj->created_at = $created_at;
+        null !== $notification_channel_id && $obj->notification_channel_id = $notification_channel_id;
+        null !== $notification_event_condition_id && $obj->notification_event_condition_id = $notification_event_condition_id;
+        null !== $notification_profile_id && $obj->notification_profile_id = $notification_profile_id;
         null !== $parameters && $obj->parameters = $parameters;
         null !== $status && $obj['status'] = $status;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
+        null !== $updated_at && $obj->updated_at = $updated_at;
 
         return $obj;
     }
@@ -138,7 +138,7 @@ final class NotificationSetting implements BaseModel
     public function withAssociatedRecordType(string $associatedRecordType): self
     {
         $obj = clone $this;
-        $obj->associatedRecordType = $associatedRecordType;
+        $obj->associated_record_type = $associatedRecordType;
 
         return $obj;
     }
@@ -147,7 +147,7 @@ final class NotificationSetting implements BaseModel
         string $associatedRecordTypeValue
     ): self {
         $obj = clone $this;
-        $obj->associatedRecordTypeValue = $associatedRecordTypeValue;
+        $obj->associated_record_type_value = $associatedRecordTypeValue;
 
         return $obj;
     }
@@ -158,7 +158,7 @@ final class NotificationSetting implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }
@@ -170,7 +170,7 @@ final class NotificationSetting implements BaseModel
         string $notificationChannelID
     ): self {
         $obj = clone $this;
-        $obj->notificationChannelID = $notificationChannelID;
+        $obj->notification_channel_id = $notificationChannelID;
 
         return $obj;
     }
@@ -182,7 +182,7 @@ final class NotificationSetting implements BaseModel
         string $notificationEventConditionID
     ): self {
         $obj = clone $this;
-        $obj->notificationEventConditionID = $notificationEventConditionID;
+        $obj->notification_event_condition_id = $notificationEventConditionID;
 
         return $obj;
     }
@@ -194,7 +194,7 @@ final class NotificationSetting implements BaseModel
         string $notificationProfileID
     ): self {
         $obj = clone $this;
-        $obj->notificationProfileID = $notificationProfileID;
+        $obj->notification_profile_id = $notificationProfileID;
 
         return $obj;
     }
@@ -229,7 +229,7 @@ final class NotificationSetting implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $obj->updated_at = $updatedAt;
 
         return $obj;
     }

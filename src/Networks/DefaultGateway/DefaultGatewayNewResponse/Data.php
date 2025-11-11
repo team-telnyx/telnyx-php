@@ -11,13 +11,13 @@ use Telnyx\Networks\InterfaceStatus;
 
 /**
  * @phpstan-type DataShape = array{
- *   id?: string,
- *   createdAt?: string,
- *   recordType?: string,
- *   updatedAt?: string,
- *   networkID?: string,
- *   status?: value-of<InterfaceStatus>,
- *   wireguardPeerID?: string,
+ *   id?: string|null,
+ *   created_at?: string|null,
+ *   record_type?: string|null,
+ *   updated_at?: string|null,
+ *   network_id?: string|null,
+ *   status?: value-of<InterfaceStatus>|null,
+ *   wireguard_peer_id?: string|null,
  * }
  */
 final class Data implements BaseModel
@@ -34,26 +34,26 @@ final class Data implements BaseModel
     /**
      * ISO 8601 formatted date-time indicating when the resource was created.
      */
-    #[Api('created_at', optional: true)]
-    public ?string $createdAt;
+    #[Api(optional: true)]
+    public ?string $created_at;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api('record_type', optional: true)]
-    public ?string $recordType;
+    #[Api(optional: true)]
+    public ?string $record_type;
 
     /**
      * ISO 8601 formatted date-time indicating when the resource was updated.
      */
-    #[Api('updated_at', optional: true)]
-    public ?string $updatedAt;
+    #[Api(optional: true)]
+    public ?string $updated_at;
 
     /**
      * Network ID.
      */
-    #[Api('network_id', optional: true)]
-    public ?string $networkID;
+    #[Api(optional: true)]
+    public ?string $network_id;
 
     /**
      * The current status of the interface deployment.
@@ -66,8 +66,8 @@ final class Data implements BaseModel
     /**
      * Wireguard peer ID.
      */
-    #[Api('wireguard_peer_id', optional: true)]
-    public ?string $wireguardPeerID;
+    #[Api(optional: true)]
+    public ?string $wireguard_peer_id;
 
     public function __construct()
     {
@@ -83,22 +83,22 @@ final class Data implements BaseModel
      */
     public static function with(
         ?string $id = null,
-        ?string $createdAt = null,
-        ?string $recordType = null,
-        ?string $updatedAt = null,
-        ?string $networkID = null,
+        ?string $created_at = null,
+        ?string $record_type = null,
+        ?string $updated_at = null,
+        ?string $network_id = null,
         InterfaceStatus|string|null $status = null,
-        ?string $wireguardPeerID = null,
+        ?string $wireguard_peer_id = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj->id = $id;
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $recordType && $obj->recordType = $recordType;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
-        null !== $networkID && $obj->networkID = $networkID;
+        null !== $created_at && $obj->created_at = $created_at;
+        null !== $record_type && $obj->record_type = $record_type;
+        null !== $updated_at && $obj->updated_at = $updated_at;
+        null !== $network_id && $obj->network_id = $network_id;
         null !== $status && $obj['status'] = $status;
-        null !== $wireguardPeerID && $obj->wireguardPeerID = $wireguardPeerID;
+        null !== $wireguard_peer_id && $obj->wireguard_peer_id = $wireguard_peer_id;
 
         return $obj;
     }
@@ -120,7 +120,7 @@ final class Data implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }
@@ -131,7 +131,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType;
+        $obj->record_type = $recordType;
 
         return $obj;
     }
@@ -142,7 +142,7 @@ final class Data implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $obj->updated_at = $updatedAt;
 
         return $obj;
     }
@@ -153,7 +153,7 @@ final class Data implements BaseModel
     public function withNetworkID(string $networkID): self
     {
         $obj = clone $this;
-        $obj->networkID = $networkID;
+        $obj->network_id = $networkID;
 
         return $obj;
     }
@@ -177,7 +177,7 @@ final class Data implements BaseModel
     public function withWireguardPeerID(string $wireguardPeerID): self
     {
         $obj = clone $this;
-        $obj->wireguardPeerID = $wireguardPeerID;
+        $obj->wireguard_peer_id = $wireguardPeerID;
 
         return $obj;
     }

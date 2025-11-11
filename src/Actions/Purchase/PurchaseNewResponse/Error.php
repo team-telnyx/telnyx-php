@@ -13,9 +13,9 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type ErrorShape = array{
  *   code: string,
  *   title: string,
- *   detail?: string,
- *   meta?: array<string, mixed>,
- *   source?: Source,
+ *   detail?: string|null,
+ *   meta?: array<string,mixed>|null,
+ *   source?: Source|null,
  * }
  */
 final class Error implements BaseModel
@@ -32,7 +32,7 @@ final class Error implements BaseModel
     #[Api(optional: true)]
     public ?string $detail;
 
-    /** @var array<string, mixed>|null $meta */
+    /** @var array<string,mixed>|null $meta */
     #[Api(map: 'mixed', optional: true)]
     public ?array $meta;
 
@@ -63,7 +63,7 @@ final class Error implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param array<string, mixed> $meta
+     * @param array<string,mixed> $meta
      */
     public static function with(
         string $code,
@@ -109,7 +109,7 @@ final class Error implements BaseModel
     }
 
     /**
-     * @param array<string, mixed> $meta
+     * @param array<string,mixed> $meta
      */
     public function withMeta(array $meta): self
     {

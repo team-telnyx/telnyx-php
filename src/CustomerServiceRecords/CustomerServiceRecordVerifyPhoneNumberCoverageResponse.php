@@ -13,7 +13,7 @@ use Telnyx\CustomerServiceRecords\CustomerServiceRecordVerifyPhoneNumberCoverage
 
 /**
  * @phpstan-type CustomerServiceRecordVerifyPhoneNumberCoverageResponseShape = array{
- *   data?: list<Data>
+ *   data?: list<Data>|null
  * }
  */
 final class CustomerServiceRecordVerifyPhoneNumberCoverageResponse implements BaseModel, ResponseConverter

@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data;
 
 /**
- * @phpstan-type GlobalIPLatencyGetResponseShape = array{data?: list<Data>}
+ * @phpstan-type GlobalIPLatencyGetResponseShape = array{data?: list<Data>|null}
  */
 final class GlobalIPLatencyGetResponse implements BaseModel, ResponseConverter
 {

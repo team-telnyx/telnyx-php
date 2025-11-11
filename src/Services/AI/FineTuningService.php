@@ -11,7 +11,7 @@ use Telnyx\Services\AI\FineTuning\JobsService;
 final class FineTuningService implements FineTuningContract
 {
     /**
-     * @@api
+     * @api
      */
     public JobsService $jobs;
 

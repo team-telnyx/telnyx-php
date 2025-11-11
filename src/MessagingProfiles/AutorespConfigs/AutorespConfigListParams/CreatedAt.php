@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Consolidated created_at parameter (deepObject style). Originally: created_at[gte], created_at[lte].
  *
- * @phpstan-type CreatedAtShape = array{gte?: string, lte?: string}
+ * @phpstan-type CreatedAtShape = array{gte?: string|null, lte?: string|null}
  */
 final class CreatedAt implements BaseModel
 {

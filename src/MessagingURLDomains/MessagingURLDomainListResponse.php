@@ -14,7 +14,7 @@ use Telnyx\MessagingURLDomains\MessagingURLDomainListResponse\Data;
 
 /**
  * @phpstan-type MessagingURLDomainListResponseShape = array{
- *   data?: list<Data>, meta?: PaginationMeta
+ *   data?: list<Data>|null, meta?: PaginationMeta|null
  * }
  */
 final class MessagingURLDomainListResponse implements BaseModel, ResponseConverter

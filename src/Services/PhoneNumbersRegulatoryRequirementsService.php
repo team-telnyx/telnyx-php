@@ -8,11 +8,8 @@ use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\PhoneNumbersRegulatoryRequirements\PhoneNumbersRegulatoryRequirementGetResponse;
 use Telnyx\PhoneNumbersRegulatoryRequirements\PhoneNumbersRegulatoryRequirementRetrieveParams;
-use Telnyx\PhoneNumbersRegulatoryRequirements\PhoneNumbersRegulatoryRequirementRetrieveParams\Filter;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PhoneNumbersRegulatoryRequirementsContract;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class PhoneNumbersRegulatoryRequirementsService implements PhoneNumbersRegulatoryRequirementsContract
 {
@@ -26,35 +23,19 @@ final class PhoneNumbersRegulatoryRequirementsService implements PhoneNumbersReg
      *
      * Retrieve regulatory requirements for a list of phone numbers
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[phone_number]
+     * @param array{
+     *   filter?: array{phone_number?: string}
+     * }|PhoneNumbersRegulatoryRequirementRetrieveParams $params
      *
      * @throws APIException
      */
     public function retrieve(
-        $filter = omit,
-        ?RequestOptions $requestOptions = null
+        array|PhoneNumbersRegulatoryRequirementRetrieveParams $params,
+        ?RequestOptions $requestOptions = null,
     ): PhoneNumbersRegulatoryRequirementGetResponse {
-        $params = ['filter' => $filter];
-
-        return $this->retrieveRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): PhoneNumbersRegulatoryRequirementGetResponse {
-        [
-            $parsed, $options,
-        ] = PhoneNumbersRegulatoryRequirementRetrieveParams::parseRequest(
+        [$parsed, $options] = PhoneNumbersRegulatoryRequirementRetrieveParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

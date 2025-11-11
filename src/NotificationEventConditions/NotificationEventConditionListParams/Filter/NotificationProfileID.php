@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type NotificationProfileIDShape = array{eq?: string}
+ * @phpstan-type NotificationProfileIDShape = array{eq?: string|null}
  */
 final class NotificationProfileID implements BaseModel
 {

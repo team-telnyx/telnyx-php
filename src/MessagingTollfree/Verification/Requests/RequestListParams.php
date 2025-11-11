@@ -16,10 +16,10 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-type RequestListParamsShape = array{
  *   page: int,
- *   pageSize: int,
- *   dateEnd?: \DateTimeInterface,
- *   dateStart?: \DateTimeInterface,
- *   phoneNumber?: string,
+ *   page_size: int,
+ *   date_end?: \DateTimeInterface,
+ *   date_start?: \DateTimeInterface,
+ *   phone_number?: string,
  *   status?: TfVerificationStatus|value-of<TfVerificationStatus>,
  * }
  */
@@ -38,16 +38,16 @@ final class RequestListParams implements BaseModel
      *         This value is automatically clamped if the provided value is too large.
      */
     #[Api]
-    public int $pageSize;
+    public int $page_size;
 
     #[Api(optional: true)]
-    public ?\DateTimeInterface $dateEnd;
+    public ?\DateTimeInterface $date_end;
 
     #[Api(optional: true)]
-    public ?\DateTimeInterface $dateStart;
+    public ?\DateTimeInterface $date_start;
 
     #[Api(optional: true)]
-    public ?string $phoneNumber;
+    public ?string $phone_number;
 
     /**
      * Tollfree verification status.
@@ -62,7 +62,7 @@ final class RequestListParams implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * RequestListParams::with(page: ..., pageSize: ...)
+     * RequestListParams::with(page: ..., page_size: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -85,20 +85,20 @@ final class RequestListParams implements BaseModel
      */
     public static function with(
         int $page,
-        int $pageSize,
-        ?\DateTimeInterface $dateEnd = null,
-        ?\DateTimeInterface $dateStart = null,
-        ?string $phoneNumber = null,
+        int $page_size,
+        ?\DateTimeInterface $date_end = null,
+        ?\DateTimeInterface $date_start = null,
+        ?string $phone_number = null,
         TfVerificationStatus|string|null $status = null,
     ): self {
         $obj = new self;
 
         $obj->page = $page;
-        $obj->pageSize = $pageSize;
+        $obj->page_size = $page_size;
 
-        null !== $dateEnd && $obj->dateEnd = $dateEnd;
-        null !== $dateStart && $obj->dateStart = $dateStart;
-        null !== $phoneNumber && $obj->phoneNumber = $phoneNumber;
+        null !== $date_end && $obj->date_end = $date_end;
+        null !== $date_start && $obj->date_start = $date_start;
+        null !== $phone_number && $obj->phone_number = $phone_number;
         null !== $status && $obj['status'] = $status;
 
         return $obj;
@@ -120,7 +120,7 @@ final class RequestListParams implements BaseModel
     public function withPageSize(int $pageSize): self
     {
         $obj = clone $this;
-        $obj->pageSize = $pageSize;
+        $obj->page_size = $pageSize;
 
         return $obj;
     }
@@ -128,7 +128,7 @@ final class RequestListParams implements BaseModel
     public function withDateEnd(\DateTimeInterface $dateEnd): self
     {
         $obj = clone $this;
-        $obj->dateEnd = $dateEnd;
+        $obj->date_end = $dateEnd;
 
         return $obj;
     }
@@ -136,7 +136,7 @@ final class RequestListParams implements BaseModel
     public function withDateStart(\DateTimeInterface $dateStart): self
     {
         $obj = clone $this;
-        $obj->dateStart = $dateStart;
+        $obj->date_start = $dateStart;
 
         return $obj;
     }
@@ -144,7 +144,7 @@ final class RequestListParams implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj->phoneNumber = $phoneNumber;
+        $obj->phone_number = $phoneNumber;
 
         return $obj;
     }
