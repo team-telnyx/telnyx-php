@@ -33,7 +33,7 @@ final class NumberReservationsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->numberReservations->create();
+        $result = $this->client->numberReservations->create([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -59,7 +59,7 @@ final class NumberReservationsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->numberReservations->list();
+        $result = $this->client->numberReservations->list([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

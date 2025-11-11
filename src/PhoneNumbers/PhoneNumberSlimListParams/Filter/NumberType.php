@@ -12,7 +12,7 @@ use Telnyx\PhoneNumbers\PhoneNumberSlimListParams\Filter\NumberType\Eq;
 /**
  * Filter phone numbers by phone number type.
  *
- * @phpstan-type NumberTypeShape = array{eq?: value-of<Eq>}
+ * @phpstan-type NumberTypeShape = array{eq?: value-of<Eq>|null}
  */
 final class NumberType implements BaseModel
 {

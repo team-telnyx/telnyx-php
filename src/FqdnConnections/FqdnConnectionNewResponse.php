@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type FqdnConnectionNewResponseShape = array{data?: FqdnConnection}
+ * @phpstan-type FqdnConnectionNewResponseShape = array{data?: FqdnConnection|null}
  */
 final class FqdnConnectionNewResponse implements BaseModel, ResponseConverter
 {

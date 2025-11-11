@@ -6,8 +6,6 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\Portouts\Reports\ExportPortoutsCsvReport;
-use Telnyx\Portouts\Reports\ExportPortoutsCsvReport\Filters;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -35,10 +33,9 @@ final class ReportsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->portouts->reports->create(
-            params: ExportPortoutsCsvReport::with(filters: (new Filters)),
-            reportType: 'export_portouts_csv',
-        );
+        $result = $this->client->portouts->reports->create([
+            'params' => ['filters' => []], 'report_type' => 'export_portouts_csv',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -50,18 +47,19 @@ final class ReportsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->portouts->reports->create(
-            params: ExportPortoutsCsvReport::with(
-                filters: (new Filters)
-                    ->withCreatedAtGt(new \DateTimeImmutable('2019-12-27T18:11:19.117Z'))
-                    ->withCreatedAtLt(new \DateTimeImmutable('2019-12-27T18:11:19.117Z'))
-                    ->withCustomerReferenceIn(['my-customer-reference'])
-                    ->withEndUserName('McPortersen')
-                    ->withPhoneNumbersOverlaps(['+1234567890'])
-                    ->withStatusIn(['pending']),
-            ),
-            reportType: 'export_portouts_csv',
-        );
+        $result = $this->client->portouts->reports->create([
+            'params' => [
+                'filters' => [
+                    'created_at__gt' => '2019-12-27T18:11:19.117Z',
+                    'created_at__lt' => '2019-12-27T18:11:19.117Z',
+                    'customer_reference__in' => ['my-customer-reference'],
+                    'end_user_name' => 'McPortersen',
+                    'phone_numbers__overlaps' => ['+1234567890'],
+                    'status__in' => ['pending'],
+                ],
+            ],
+            'report_type' => 'export_portouts_csv',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -87,7 +85,7 @@ final class ReportsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->portouts->reports->list();
+        $result = $this->client->portouts->reports->list([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

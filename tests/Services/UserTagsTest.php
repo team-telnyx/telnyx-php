@@ -33,7 +33,7 @@ final class UserTagsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->userTags->list();
+        $result = $this->client->userTags->list([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

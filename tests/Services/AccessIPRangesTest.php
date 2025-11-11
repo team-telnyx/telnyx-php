@@ -33,7 +33,9 @@ final class AccessIPRangesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->accessIPRanges->create(cidrBlock: 'cidr_block');
+        $result = $this->client->accessIPRanges->create([
+            'cidr_block' => 'cidr_block',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -45,7 +47,9 @@ final class AccessIPRangesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->accessIPRanges->create(cidrBlock: 'cidr_block');
+        $result = $this->client->accessIPRanges->create([
+            'cidr_block' => 'cidr_block',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -57,7 +61,7 @@ final class AccessIPRangesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->accessIPRanges->list();
+        $result = $this->client->accessIPRanges->list([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

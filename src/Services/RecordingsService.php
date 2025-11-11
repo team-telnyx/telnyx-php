@@ -9,19 +9,15 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Recordings\RecordingDeleteResponse;
 use Telnyx\Recordings\RecordingGetResponse;
 use Telnyx\Recordings\RecordingListParams;
-use Telnyx\Recordings\RecordingListParams\Filter;
-use Telnyx\Recordings\RecordingListParams\Page;
 use Telnyx\Recordings\RecordingListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\RecordingsContract;
 use Telnyx\Services\Recordings\ActionsService;
 
-use const Telnyx\Core\OMIT as omit;
-
 final class RecordingsService implements RecordingsContract
 {
     /**
-     * @@api
+     * @api
      */
     public ActionsService $actions;
 
@@ -58,35 +54,29 @@ final class RecordingsService implements RecordingsContract
      *
      * Returns a list of your call recordings.
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[conference_id], filter[created_at][gte], filter[created_at][lte], filter[call_leg_id], filter[call_session_id], filter[from], filter[to], filter[connection_id], filter[sip_call_id]
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param array{
+     *   filter?: array{
+     *     call_leg_id?: string,
+     *     call_session_id?: string,
+     *     conference_id?: string,
+     *     connection_id?: string,
+     *     created_at?: array{gte?: string, lte?: string},
+     *     from?: string,
+     *     sip_call_id?: string,
+     *     to?: string,
+     *   },
+     *   page?: array{number?: int, size?: int},
+     * }|RecordingListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): RecordingListResponse {
-        $params = ['filter' => $filter, 'page' => $page];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
+        array|RecordingListParams $params,
         ?RequestOptions $requestOptions = null
     ): RecordingListResponse {
         [$parsed, $options] = RecordingListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

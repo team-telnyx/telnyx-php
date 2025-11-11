@@ -13,7 +13,7 @@ use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationNewRe
 
 /**
  * @phpstan-type PhoneNumberConfigurationNewResponseShape = array{
- *   data?: list<Data>
+ *   data?: list<Data>|null
  * }
  */
 final class PhoneNumberConfigurationNewResponse implements BaseModel, ResponseConverter

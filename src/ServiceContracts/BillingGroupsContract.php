@@ -4,41 +4,29 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\BillingGroups\BillingGroupCreateParams;
 use Telnyx\BillingGroups\BillingGroupDeleteResponse;
 use Telnyx\BillingGroups\BillingGroupGetResponse;
-use Telnyx\BillingGroups\BillingGroupListParams\Page;
+use Telnyx\BillingGroups\BillingGroupListParams;
 use Telnyx\BillingGroups\BillingGroupListResponse;
 use Telnyx\BillingGroups\BillingGroupNewResponse;
+use Telnyx\BillingGroups\BillingGroupUpdateParams;
 use Telnyx\BillingGroups\BillingGroupUpdateResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
-
-use const Telnyx\Core\OMIT as omit;
 
 interface BillingGroupsContract
 {
     /**
      * @api
      *
-     * @param string $name A name for the billing group
+     * @param array<mixed>|BillingGroupCreateParams $params
      *
      * @throws APIException
      */
     public function create(
-        $name = omit,
-        ?RequestOptions $requestOptions = null
-    ): BillingGroupNewResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|BillingGroupCreateParams $params,
+        ?RequestOptions $requestOptions = null,
     ): BillingGroupNewResponse;
 
     /**
@@ -54,51 +42,26 @@ interface BillingGroupsContract
     /**
      * @api
      *
-     * @param string $name A name for the billing group
+     * @param array<mixed>|BillingGroupUpdateParams $params
      *
      * @throws APIException
      */
     public function update(
         string $id,
-        $name = omit,
-        ?RequestOptions $requestOptions = null
+        array|BillingGroupUpdateParams $params,
+        ?RequestOptions $requestOptions = null,
     ): BillingGroupUpdateResponse;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): BillingGroupUpdateResponse;
-
-    /**
-     * @api
-     *
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param array<mixed>|BillingGroupListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): BillingGroupListResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|BillingGroupListParams $params,
+        ?RequestOptions $requestOptions = null,
     ): BillingGroupListResponse;
 
     /**

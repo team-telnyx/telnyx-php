@@ -12,9 +12,9 @@ use Telnyx\Core\Contracts\BaseModel;
  * The media features settings for a phone number.
  *
  * @phpstan-type MediaFeaturesShape = array{
- *   acceptAnyRtpPacketsEnabled?: bool,
- *   rtpAutoAdjustEnabled?: bool,
- *   t38FaxGatewayEnabled?: bool,
+ *   accept_any_rtp_packets_enabled?: bool|null,
+ *   rtp_auto_adjust_enabled?: bool|null,
+ *   t38_fax_gateway_enabled?: bool|null,
  * }
  */
 final class MediaFeatures implements BaseModel
@@ -25,20 +25,20 @@ final class MediaFeatures implements BaseModel
     /**
      * When enabled, Telnyx will accept RTP packets from any customer-side IP address and port, not just those to which Telnyx is sending RTP.
      */
-    #[Api('accept_any_rtp_packets_enabled', optional: true)]
-    public ?bool $acceptAnyRtpPacketsEnabled;
+    #[Api(optional: true)]
+    public ?bool $accept_any_rtp_packets_enabled;
 
     /**
      * When RTP Auto-Adjust is enabled, the destination RTP address port will be automatically changed to match the source of the incoming RTP packets.
      */
-    #[Api('rtp_auto_adjust_enabled', optional: true)]
-    public ?bool $rtpAutoAdjustEnabled;
+    #[Api(optional: true)]
+    public ?bool $rtp_auto_adjust_enabled;
 
     /**
      * Controls whether Telnyx will accept a T.38 re-INVITE for this phone number. Note that Telnyx will not send a T.38 re-INVITE; this option only controls whether one will be accepted.
      */
-    #[Api('t38_fax_gateway_enabled', optional: true)]
-    public ?bool $t38FaxGatewayEnabled;
+    #[Api(optional: true)]
+    public ?bool $t38_fax_gateway_enabled;
 
     public function __construct()
     {
@@ -51,15 +51,15 @@ final class MediaFeatures implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?bool $acceptAnyRtpPacketsEnabled = null,
-        ?bool $rtpAutoAdjustEnabled = null,
-        ?bool $t38FaxGatewayEnabled = null,
+        ?bool $accept_any_rtp_packets_enabled = null,
+        ?bool $rtp_auto_adjust_enabled = null,
+        ?bool $t38_fax_gateway_enabled = null,
     ): self {
         $obj = new self;
 
-        null !== $acceptAnyRtpPacketsEnabled && $obj->acceptAnyRtpPacketsEnabled = $acceptAnyRtpPacketsEnabled;
-        null !== $rtpAutoAdjustEnabled && $obj->rtpAutoAdjustEnabled = $rtpAutoAdjustEnabled;
-        null !== $t38FaxGatewayEnabled && $obj->t38FaxGatewayEnabled = $t38FaxGatewayEnabled;
+        null !== $accept_any_rtp_packets_enabled && $obj->accept_any_rtp_packets_enabled = $accept_any_rtp_packets_enabled;
+        null !== $rtp_auto_adjust_enabled && $obj->rtp_auto_adjust_enabled = $rtp_auto_adjust_enabled;
+        null !== $t38_fax_gateway_enabled && $obj->t38_fax_gateway_enabled = $t38_fax_gateway_enabled;
 
         return $obj;
     }
@@ -71,7 +71,7 @@ final class MediaFeatures implements BaseModel
         bool $acceptAnyRtpPacketsEnabled
     ): self {
         $obj = clone $this;
-        $obj->acceptAnyRtpPacketsEnabled = $acceptAnyRtpPacketsEnabled;
+        $obj->accept_any_rtp_packets_enabled = $acceptAnyRtpPacketsEnabled;
 
         return $obj;
     }
@@ -82,7 +82,7 @@ final class MediaFeatures implements BaseModel
     public function withRtpAutoAdjustEnabled(bool $rtpAutoAdjustEnabled): self
     {
         $obj = clone $this;
-        $obj->rtpAutoAdjustEnabled = $rtpAutoAdjustEnabled;
+        $obj->rtp_auto_adjust_enabled = $rtpAutoAdjustEnabled;
 
         return $obj;
     }
@@ -93,7 +93,7 @@ final class MediaFeatures implements BaseModel
     public function withT38FaxGatewayEnabled(bool $t38FaxGatewayEnabled): self
     {
         $obj = clone $this;
-        $obj->t38FaxGatewayEnabled = $t38FaxGatewayEnabled;
+        $obj->t38_fax_gateway_enabled = $t38FaxGatewayEnabled;
 
         return $obj;
     }

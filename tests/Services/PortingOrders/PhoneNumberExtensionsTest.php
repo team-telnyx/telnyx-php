@@ -6,8 +6,6 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionCreateParams\ActivationRange;
-use Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionCreateParams\ExtensionRange;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -37,9 +35,11 @@ final class PhoneNumberExtensionsTest extends TestCase
 
         $result = $this->client->portingOrders->phoneNumberExtensions->create(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            activationRanges: [ActivationRange::with(endAt: 10, startAt: 1)],
-            extensionRange: ExtensionRange::with(endAt: 10, startAt: 1),
-            portingPhoneNumberID: 'f24151b6-3389-41d3-8747-7dd8c681e5e2',
+            [
+                'activation_ranges' => [['end_at' => 10, 'start_at' => 1]],
+                'extension_range' => ['end_at' => 10, 'start_at' => 1],
+                'porting_phone_number_id' => 'f24151b6-3389-41d3-8747-7dd8c681e5e2',
+            ],
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -54,9 +54,11 @@ final class PhoneNumberExtensionsTest extends TestCase
 
         $result = $this->client->portingOrders->phoneNumberExtensions->create(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            activationRanges: [ActivationRange::with(endAt: 10, startAt: 1)],
-            extensionRange: ExtensionRange::with(endAt: 10, startAt: 1),
-            portingPhoneNumberID: 'f24151b6-3389-41d3-8747-7dd8c681e5e2',
+            [
+                'activation_ranges' => [['end_at' => 10, 'start_at' => 1]],
+                'extension_range' => ['end_at' => 10, 'start_at' => 1],
+                'porting_phone_number_id' => 'f24151b6-3389-41d3-8747-7dd8c681e5e2',
+            ],
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -70,7 +72,8 @@ final class PhoneNumberExtensionsTest extends TestCase
         }
 
         $result = $this->client->portingOrders->phoneNumberExtensions->list(
-            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
+            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+            []
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -85,7 +88,7 @@ final class PhoneNumberExtensionsTest extends TestCase
 
         $result = $this->client->portingOrders->phoneNumberExtensions->delete(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+            ['porting_order_id' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -100,7 +103,7 @@ final class PhoneNumberExtensionsTest extends TestCase
 
         $result = $this->client->portingOrders->phoneNumberExtensions->delete(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+            ['porting_order_id' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType

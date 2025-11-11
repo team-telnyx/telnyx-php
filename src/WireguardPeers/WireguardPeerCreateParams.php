@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\WireguardPeers->create
  *
  * @phpstan-type WireguardPeerCreateParamsShape = array{
- *   wireguardInterfaceID: string, publicKey?: string
+ *   wireguard_interface_id: string, public_key?: string
  * }
  */
 final class WireguardPeerCreateParams implements BaseModel
@@ -27,21 +27,21 @@ final class WireguardPeerCreateParams implements BaseModel
     /**
      * The id of the wireguard interface associated with the peer.
      */
-    #[Api('wireguard_interface_id')]
-    public string $wireguardInterfaceID;
+    #[Api]
+    public string $wireguard_interface_id;
 
     /**
      * The WireGuard `PublicKey`.<br /><br />If you do not provide a Public Key, a new Public and Private key pair will be generated for you.
      */
-    #[Api('public_key', optional: true)]
-    public ?string $publicKey;
+    #[Api(optional: true)]
+    public ?string $public_key;
 
     /**
      * `new WireguardPeerCreateParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * WireguardPeerCreateParams::with(wireguardInterfaceID: ...)
+     * WireguardPeerCreateParams::with(wireguard_interface_id: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -61,14 +61,14 @@ final class WireguardPeerCreateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        string $wireguardInterfaceID,
-        ?string $publicKey = null
+        string $wireguard_interface_id,
+        ?string $public_key = null
     ): self {
         $obj = new self;
 
-        $obj->wireguardInterfaceID = $wireguardInterfaceID;
+        $obj->wireguard_interface_id = $wireguard_interface_id;
 
-        null !== $publicKey && $obj->publicKey = $publicKey;
+        null !== $public_key && $obj->public_key = $public_key;
 
         return $obj;
     }
@@ -79,7 +79,7 @@ final class WireguardPeerCreateParams implements BaseModel
     public function withWireguardInterfaceID(string $wireguardInterfaceID): self
     {
         $obj = clone $this;
-        $obj->wireguardInterfaceID = $wireguardInterfaceID;
+        $obj->wireguard_interface_id = $wireguardInterfaceID;
 
         return $obj;
     }
@@ -90,7 +90,7 @@ final class WireguardPeerCreateParams implements BaseModel
     public function withPublicKey(string $publicKey): self
     {
         $obj = clone $this;
-        $obj->publicKey = $publicKey;
+        $obj->public_key = $publicKey;
 
         return $obj;
     }

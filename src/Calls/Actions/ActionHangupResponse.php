@@ -11,7 +11,9 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type ActionHangupResponseShape = array{data?: CallControlCommandResult}
+ * @phpstan-type ActionHangupResponseShape = array{
+ *   data?: CallControlCommandResult|null
+ * }
  */
 final class ActionHangupResponse implements BaseModel, ResponseConverter
 {

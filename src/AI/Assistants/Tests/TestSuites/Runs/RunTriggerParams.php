@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\AI\Assistants\Tests\TestSuites\Runs->trigger
  *
- * @phpstan-type RunTriggerParamsShape = array{destinationVersionID?: string}
+ * @phpstan-type RunTriggerParamsShape = array{destination_version_id?: string}
  */
 final class RunTriggerParams implements BaseModel
 {
@@ -25,8 +25,8 @@ final class RunTriggerParams implements BaseModel
     /**
      * Optional assistant version ID to use for all test runs in this suite. If provided, the version must exist or a 400 error will be returned. If not provided, test will run on main version.
      */
-    #[Api('destination_version_id', optional: true)]
-    public ?string $destinationVersionID;
+    #[Api(optional: true)]
+    public ?string $destination_version_id;
 
     public function __construct()
     {
@@ -38,11 +38,11 @@ final class RunTriggerParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?string $destinationVersionID = null): self
+    public static function with(?string $destination_version_id = null): self
     {
         $obj = new self;
 
-        null !== $destinationVersionID && $obj->destinationVersionID = $destinationVersionID;
+        null !== $destination_version_id && $obj->destination_version_id = $destination_version_id;
 
         return $obj;
     }
@@ -53,7 +53,7 @@ final class RunTriggerParams implements BaseModel
     public function withDestinationVersionID(string $destinationVersionID): self
     {
         $obj = clone $this;
-        $obj->destinationVersionID = $destinationVersionID;
+        $obj->destination_version_id = $destinationVersionID;
 
         return $obj;
     }

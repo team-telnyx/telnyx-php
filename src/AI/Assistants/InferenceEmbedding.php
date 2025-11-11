@@ -16,24 +16,24 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 /**
  * @phpstan-type InferenceEmbeddingShape = array{
  *   id: string,
- *   createdAt: \DateTimeInterface,
+ *   created_at: \DateTimeInterface,
  *   instructions: string,
  *   model: string,
  *   name: string,
- *   description?: string,
- *   dynamicVariables?: array<string, mixed>,
- *   dynamicVariablesWebhookURL?: string,
- *   enabledFeatures?: list<value-of<EnabledFeatures>>,
- *   greeting?: string,
- *   importMetadata?: ImportMetadata,
- *   insightSettings?: InsightSettings,
- *   llmAPIKeyRef?: string,
- *   messagingSettings?: MessagingSettings,
- *   privacySettings?: PrivacySettings,
- *   telephonySettings?: TelephonySettings,
- *   tools?: list<WebhookTool|RetrievalTool|HandoffTool|HangupTool|TransferTool|SipReferTool|DtmfTool>,
- *   transcription?: TranscriptionSettings,
- *   voiceSettings?: VoiceSettings,
+ *   description?: string|null,
+ *   dynamic_variables?: array<string,mixed>|null,
+ *   dynamic_variables_webhook_url?: string|null,
+ *   enabled_features?: list<value-of<EnabledFeatures>>|null,
+ *   greeting?: string|null,
+ *   import_metadata?: ImportMetadata|null,
+ *   insight_settings?: InsightSettings|null,
+ *   llm_api_key_ref?: string|null,
+ *   messaging_settings?: MessagingSettings|null,
+ *   privacy_settings?: PrivacySettings|null,
+ *   telephony_settings?: TelephonySettings|null,
+ *   tools?: list<WebhookTool|RetrievalTool|HandoffTool|HangupTool|TransferTool|SipReferTool|DtmfTool>|null,
+ *   transcription?: TranscriptionSettings|null,
+ *   voice_settings?: VoiceSettings|null,
  * }
  */
 final class InferenceEmbedding implements BaseModel, ResponseConverter
@@ -46,8 +46,8 @@ final class InferenceEmbedding implements BaseModel, ResponseConverter
     #[Api]
     public string $id;
 
-    #[Api('created_at')]
-    public \DateTimeInterface $createdAt;
+    #[Api]
+    public \DateTimeInterface $created_at;
 
     /**
      * System instructions for the assistant. These may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables).
@@ -70,20 +70,20 @@ final class InferenceEmbedding implements BaseModel, ResponseConverter
     /**
      * Map of dynamic variables and their values.
      *
-     * @var array<string, mixed>|null $dynamicVariables
+     * @var array<string,mixed>|null $dynamic_variables
      */
-    #[Api('dynamic_variables', map: 'mixed', optional: true)]
-    public ?array $dynamicVariables;
+    #[Api(map: 'mixed', optional: true)]
+    public ?array $dynamic_variables;
 
     /**
      * If the dynamic_variables_webhook_url is set for the assistant, we will send a request at the start of the conversation. See our [guide](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables) for more information.
      */
-    #[Api('dynamic_variables_webhook_url', optional: true)]
-    public ?string $dynamicVariablesWebhookURL;
+    #[Api(optional: true)]
+    public ?string $dynamic_variables_webhook_url;
 
-    /** @var list<value-of<EnabledFeatures>>|null $enabledFeatures */
-    #[Api('enabled_features', list: EnabledFeatures::class, optional: true)]
-    public ?array $enabledFeatures;
+    /** @var list<value-of<EnabledFeatures>>|null $enabled_features */
+    #[Api(list: EnabledFeatures::class, optional: true)]
+    public ?array $enabled_features;
 
     /**
      * Text that the assistant will use to start the conversation. This may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables).
@@ -91,26 +91,26 @@ final class InferenceEmbedding implements BaseModel, ResponseConverter
     #[Api(optional: true)]
     public ?string $greeting;
 
-    #[Api('import_metadata', optional: true)]
-    public ?ImportMetadata $importMetadata;
+    #[Api(optional: true)]
+    public ?ImportMetadata $import_metadata;
 
-    #[Api('insight_settings', optional: true)]
-    public ?InsightSettings $insightSettings;
+    #[Api(optional: true)]
+    public ?InsightSettings $insight_settings;
 
     /**
      * This is only needed when using third-party inference providers. The `identifier` for an integration secret [/v2/integration_secrets](https://developers.telnyx.com/api/secrets-manager/integration-secrets/create-integration-secret) that refers to your LLM provider's API key. Warning: Free plans are unlikely to work with this integration.
      */
-    #[Api('llm_api_key_ref', optional: true)]
-    public ?string $llmAPIKeyRef;
+    #[Api(optional: true)]
+    public ?string $llm_api_key_ref;
 
-    #[Api('messaging_settings', optional: true)]
-    public ?MessagingSettings $messagingSettings;
+    #[Api(optional: true)]
+    public ?MessagingSettings $messaging_settings;
 
-    #[Api('privacy_settings', optional: true)]
-    public ?PrivacySettings $privacySettings;
+    #[Api(optional: true)]
+    public ?PrivacySettings $privacy_settings;
 
-    #[Api('telephony_settings', optional: true)]
-    public ?TelephonySettings $telephonySettings;
+    #[Api(optional: true)]
+    public ?TelephonySettings $telephony_settings;
 
     /**
      * The tools that the assistant can use. These may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables).
@@ -123,8 +123,8 @@ final class InferenceEmbedding implements BaseModel, ResponseConverter
     #[Api(optional: true)]
     public ?TranscriptionSettings $transcription;
 
-    #[Api('voice_settings', optional: true)]
-    public ?VoiceSettings $voiceSettings;
+    #[Api(optional: true)]
+    public ?VoiceSettings $voice_settings;
 
     /**
      * `new InferenceEmbedding()` is missing required properties by the API.
@@ -132,7 +132,7 @@ final class InferenceEmbedding implements BaseModel, ResponseConverter
      * To enforce required parameters use
      * ```
      * InferenceEmbedding::with(
-     *   id: ..., createdAt: ..., instructions: ..., model: ..., name: ...
+     *   id: ..., created_at: ..., instructions: ..., model: ..., name: ...
      * )
      * ```
      *
@@ -157,53 +157,53 @@ final class InferenceEmbedding implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param array<string, mixed> $dynamicVariables
-     * @param list<EnabledFeatures|value-of<EnabledFeatures>> $enabledFeatures
+     * @param array<string,mixed> $dynamic_variables
+     * @param list<EnabledFeatures|value-of<EnabledFeatures>> $enabled_features
      * @param list<WebhookTool|RetrievalTool|HandoffTool|HangupTool|TransferTool|SipReferTool|DtmfTool> $tools
      */
     public static function with(
         string $id,
-        \DateTimeInterface $createdAt,
+        \DateTimeInterface $created_at,
         string $instructions,
         string $model,
         string $name,
         ?string $description = null,
-        ?array $dynamicVariables = null,
-        ?string $dynamicVariablesWebhookURL = null,
-        ?array $enabledFeatures = null,
+        ?array $dynamic_variables = null,
+        ?string $dynamic_variables_webhook_url = null,
+        ?array $enabled_features = null,
         ?string $greeting = null,
-        ?ImportMetadata $importMetadata = null,
-        ?InsightSettings $insightSettings = null,
-        ?string $llmAPIKeyRef = null,
-        ?MessagingSettings $messagingSettings = null,
-        ?PrivacySettings $privacySettings = null,
-        ?TelephonySettings $telephonySettings = null,
+        ?ImportMetadata $import_metadata = null,
+        ?InsightSettings $insight_settings = null,
+        ?string $llm_api_key_ref = null,
+        ?MessagingSettings $messaging_settings = null,
+        ?PrivacySettings $privacy_settings = null,
+        ?TelephonySettings $telephony_settings = null,
         ?array $tools = null,
         ?TranscriptionSettings $transcription = null,
-        ?VoiceSettings $voiceSettings = null,
+        ?VoiceSettings $voice_settings = null,
     ): self {
         $obj = new self;
 
         $obj->id = $id;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $created_at;
         $obj->instructions = $instructions;
         $obj->model = $model;
         $obj->name = $name;
 
         null !== $description && $obj->description = $description;
-        null !== $dynamicVariables && $obj->dynamicVariables = $dynamicVariables;
-        null !== $dynamicVariablesWebhookURL && $obj->dynamicVariablesWebhookURL = $dynamicVariablesWebhookURL;
-        null !== $enabledFeatures && $obj['enabledFeatures'] = $enabledFeatures;
+        null !== $dynamic_variables && $obj->dynamic_variables = $dynamic_variables;
+        null !== $dynamic_variables_webhook_url && $obj->dynamic_variables_webhook_url = $dynamic_variables_webhook_url;
+        null !== $enabled_features && $obj['enabled_features'] = $enabled_features;
         null !== $greeting && $obj->greeting = $greeting;
-        null !== $importMetadata && $obj->importMetadata = $importMetadata;
-        null !== $insightSettings && $obj->insightSettings = $insightSettings;
-        null !== $llmAPIKeyRef && $obj->llmAPIKeyRef = $llmAPIKeyRef;
-        null !== $messagingSettings && $obj->messagingSettings = $messagingSettings;
-        null !== $privacySettings && $obj->privacySettings = $privacySettings;
-        null !== $telephonySettings && $obj->telephonySettings = $telephonySettings;
+        null !== $import_metadata && $obj->import_metadata = $import_metadata;
+        null !== $insight_settings && $obj->insight_settings = $insight_settings;
+        null !== $llm_api_key_ref && $obj->llm_api_key_ref = $llm_api_key_ref;
+        null !== $messaging_settings && $obj->messaging_settings = $messaging_settings;
+        null !== $privacy_settings && $obj->privacy_settings = $privacy_settings;
+        null !== $telephony_settings && $obj->telephony_settings = $telephony_settings;
         null !== $tools && $obj->tools = $tools;
         null !== $transcription && $obj->transcription = $transcription;
-        null !== $voiceSettings && $obj->voiceSettings = $voiceSettings;
+        null !== $voice_settings && $obj->voice_settings = $voice_settings;
 
         return $obj;
     }
@@ -219,7 +219,7 @@ final class InferenceEmbedding implements BaseModel, ResponseConverter
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }
@@ -265,12 +265,12 @@ final class InferenceEmbedding implements BaseModel, ResponseConverter
     /**
      * Map of dynamic variables and their values.
      *
-     * @param array<string, mixed> $dynamicVariables
+     * @param array<string,mixed> $dynamicVariables
      */
     public function withDynamicVariables(array $dynamicVariables): self
     {
         $obj = clone $this;
-        $obj->dynamicVariables = $dynamicVariables;
+        $obj->dynamic_variables = $dynamicVariables;
 
         return $obj;
     }
@@ -282,7 +282,7 @@ final class InferenceEmbedding implements BaseModel, ResponseConverter
         string $dynamicVariablesWebhookURL
     ): self {
         $obj = clone $this;
-        $obj->dynamicVariablesWebhookURL = $dynamicVariablesWebhookURL;
+        $obj->dynamic_variables_webhook_url = $dynamicVariablesWebhookURL;
 
         return $obj;
     }
@@ -293,7 +293,7 @@ final class InferenceEmbedding implements BaseModel, ResponseConverter
     public function withEnabledFeatures(array $enabledFeatures): self
     {
         $obj = clone $this;
-        $obj['enabledFeatures'] = $enabledFeatures;
+        $obj['enabled_features'] = $enabledFeatures;
 
         return $obj;
     }
@@ -312,7 +312,7 @@ final class InferenceEmbedding implements BaseModel, ResponseConverter
     public function withImportMetadata(ImportMetadata $importMetadata): self
     {
         $obj = clone $this;
-        $obj->importMetadata = $importMetadata;
+        $obj->import_metadata = $importMetadata;
 
         return $obj;
     }
@@ -320,7 +320,7 @@ final class InferenceEmbedding implements BaseModel, ResponseConverter
     public function withInsightSettings(InsightSettings $insightSettings): self
     {
         $obj = clone $this;
-        $obj->insightSettings = $insightSettings;
+        $obj->insight_settings = $insightSettings;
 
         return $obj;
     }
@@ -331,7 +331,7 @@ final class InferenceEmbedding implements BaseModel, ResponseConverter
     public function withLlmAPIKeyRef(string $llmAPIKeyRef): self
     {
         $obj = clone $this;
-        $obj->llmAPIKeyRef = $llmAPIKeyRef;
+        $obj->llm_api_key_ref = $llmAPIKeyRef;
 
         return $obj;
     }
@@ -340,7 +340,7 @@ final class InferenceEmbedding implements BaseModel, ResponseConverter
         MessagingSettings $messagingSettings
     ): self {
         $obj = clone $this;
-        $obj->messagingSettings = $messagingSettings;
+        $obj->messaging_settings = $messagingSettings;
 
         return $obj;
     }
@@ -348,7 +348,7 @@ final class InferenceEmbedding implements BaseModel, ResponseConverter
     public function withPrivacySettings(PrivacySettings $privacySettings): self
     {
         $obj = clone $this;
-        $obj->privacySettings = $privacySettings;
+        $obj->privacy_settings = $privacySettings;
 
         return $obj;
     }
@@ -357,7 +357,7 @@ final class InferenceEmbedding implements BaseModel, ResponseConverter
         TelephonySettings $telephonySettings
     ): self {
         $obj = clone $this;
-        $obj->telephonySettings = $telephonySettings;
+        $obj->telephony_settings = $telephonySettings;
 
         return $obj;
     }
@@ -387,7 +387,7 @@ final class InferenceEmbedding implements BaseModel, ResponseConverter
     public function withVoiceSettings(VoiceSettings $voiceSettings): self
     {
         $obj = clone $this;
-        $obj->voiceSettings = $voiceSettings;
+        $obj->voice_settings = $voiceSettings;
 
         return $obj;
     }

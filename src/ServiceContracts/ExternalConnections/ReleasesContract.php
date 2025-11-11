@@ -6,66 +6,36 @@ namespace Telnyx\ServiceContracts\ExternalConnections;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\ExternalConnections\Releases\ReleaseGetResponse;
-use Telnyx\ExternalConnections\Releases\ReleaseListParams\Filter;
-use Telnyx\ExternalConnections\Releases\ReleaseListParams\Page;
+use Telnyx\ExternalConnections\Releases\ReleaseListParams;
 use Telnyx\ExternalConnections\Releases\ReleaseListResponse;
+use Telnyx\ExternalConnections\Releases\ReleaseRetrieveParams;
 use Telnyx\RequestOptions;
-
-use const Telnyx\Core\OMIT as omit;
 
 interface ReleasesContract
 {
     /**
      * @api
      *
-     * @param string $id
+     * @param array<mixed>|ReleaseRetrieveParams $params
      *
      * @throws APIException
      */
     public function retrieve(
         string $releaseID,
-        $id,
-        ?RequestOptions $requestOptions = null
+        array|ReleaseRetrieveParams $params,
+        ?RequestOptions $requestOptions = null,
     ): ReleaseGetResponse;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $releaseID,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): ReleaseGetResponse;
-
-    /**
-     * @api
-     *
-     * @param Filter $filter Filter parameter for releases (deepObject style). Supports filtering by status, civic_address_id, location_id, and phone_number with eq/contains operations.
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param array<mixed>|ReleaseListParams $params
      *
      * @throws APIException
      */
     public function list(
         string $id,
-        $filter = omit,
-        $page = omit,
+        array|ReleaseListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): ReleaseListResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): ReleaseListResponse;
 }

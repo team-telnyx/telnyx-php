@@ -16,7 +16,7 @@ use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentCreateParams\Addi
  * @see Telnyx\PortingOrders\AdditionalDocuments->create
  *
  * @phpstan-type AdditionalDocumentCreateParamsShape = array{
- *   additionalDocuments?: list<AdditionalDocument>
+ *   additional_documents?: list<AdditionalDocument>
  * }
  */
 final class AdditionalDocumentCreateParams implements BaseModel
@@ -25,13 +25,9 @@ final class AdditionalDocumentCreateParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    /** @var list<AdditionalDocument>|null $additionalDocuments */
-    #[Api(
-        'additional_documents',
-        list: AdditionalDocument::class,
-        optional: true
-    )]
-    public ?array $additionalDocuments;
+    /** @var list<AdditionalDocument>|null $additional_documents */
+    #[Api(list: AdditionalDocument::class, optional: true)]
+    public ?array $additional_documents;
 
     public function __construct()
     {
@@ -43,13 +39,13 @@ final class AdditionalDocumentCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<AdditionalDocument> $additionalDocuments
+     * @param list<AdditionalDocument> $additional_documents
      */
-    public static function with(?array $additionalDocuments = null): self
+    public static function with(?array $additional_documents = null): self
     {
         $obj = new self;
 
-        null !== $additionalDocuments && $obj->additionalDocuments = $additionalDocuments;
+        null !== $additional_documents && $obj->additional_documents = $additional_documents;
 
         return $obj;
     }
@@ -60,7 +56,7 @@ final class AdditionalDocumentCreateParams implements BaseModel
     public function withAdditionalDocuments(array $additionalDocuments): self
     {
         $obj = clone $this;
-        $obj->additionalDocuments = $additionalDocuments;
+        $obj->additional_documents = $additionalDocuments;
 
         return $obj;
     }

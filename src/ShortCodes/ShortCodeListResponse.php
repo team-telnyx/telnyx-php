@@ -14,7 +14,7 @@ use Telnyx\ShortCode;
 
 /**
  * @phpstan-type ShortCodeListResponseShape = array{
- *   data?: list<ShortCode>, meta?: PaginationMeta
+ *   data?: list<ShortCode>|null, meta?: PaginationMeta|null
  * }
  */
 final class ShortCodeListResponse implements BaseModel, ResponseConverter

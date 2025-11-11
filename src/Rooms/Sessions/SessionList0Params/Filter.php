@@ -15,11 +15,11 @@ use Telnyx\Rooms\Sessions\SessionList0Params\Filter\DateUpdatedAt;
  * Consolidated filter parameter (deepObject style). Originally: filter[date_created_at][eq], filter[date_created_at][gte], filter[date_created_at][lte], filter[date_updated_at][eq], filter[date_updated_at][gte], filter[date_updated_at][lte], filter[date_ended_at][eq], filter[date_ended_at][gte], filter[date_ended_at][lte], filter[room_id], filter[active].
  *
  * @phpstan-type FilterShape = array{
- *   active?: bool,
- *   dateCreatedAt?: DateCreatedAt,
- *   dateEndedAt?: DateEndedAt,
- *   dateUpdatedAt?: DateUpdatedAt,
- *   roomID?: string,
+ *   active?: bool|null,
+ *   date_created_at?: DateCreatedAt|null,
+ *   date_ended_at?: DateEndedAt|null,
+ *   date_updated_at?: DateUpdatedAt|null,
+ *   room_id?: string|null,
  * }
  */
 final class Filter implements BaseModel
@@ -33,20 +33,20 @@ final class Filter implements BaseModel
     #[Api(optional: true)]
     public ?bool $active;
 
-    #[Api('date_created_at', optional: true)]
-    public ?DateCreatedAt $dateCreatedAt;
+    #[Api(optional: true)]
+    public ?DateCreatedAt $date_created_at;
 
-    #[Api('date_ended_at', optional: true)]
-    public ?DateEndedAt $dateEndedAt;
+    #[Api(optional: true)]
+    public ?DateEndedAt $date_ended_at;
 
-    #[Api('date_updated_at', optional: true)]
-    public ?DateUpdatedAt $dateUpdatedAt;
+    #[Api(optional: true)]
+    public ?DateUpdatedAt $date_updated_at;
 
     /**
      * Room_id for filtering room sessions.
      */
-    #[Api('room_id', optional: true)]
-    public ?string $roomID;
+    #[Api(optional: true)]
+    public ?string $room_id;
 
     public function __construct()
     {
@@ -60,18 +60,18 @@ final class Filter implements BaseModel
      */
     public static function with(
         ?bool $active = null,
-        ?DateCreatedAt $dateCreatedAt = null,
-        ?DateEndedAt $dateEndedAt = null,
-        ?DateUpdatedAt $dateUpdatedAt = null,
-        ?string $roomID = null,
+        ?DateCreatedAt $date_created_at = null,
+        ?DateEndedAt $date_ended_at = null,
+        ?DateUpdatedAt $date_updated_at = null,
+        ?string $room_id = null,
     ): self {
         $obj = new self;
 
         null !== $active && $obj->active = $active;
-        null !== $dateCreatedAt && $obj->dateCreatedAt = $dateCreatedAt;
-        null !== $dateEndedAt && $obj->dateEndedAt = $dateEndedAt;
-        null !== $dateUpdatedAt && $obj->dateUpdatedAt = $dateUpdatedAt;
-        null !== $roomID && $obj->roomID = $roomID;
+        null !== $date_created_at && $obj->date_created_at = $date_created_at;
+        null !== $date_ended_at && $obj->date_ended_at = $date_ended_at;
+        null !== $date_updated_at && $obj->date_updated_at = $date_updated_at;
+        null !== $room_id && $obj->room_id = $room_id;
 
         return $obj;
     }
@@ -90,7 +90,7 @@ final class Filter implements BaseModel
     public function withDateCreatedAt(DateCreatedAt $dateCreatedAt): self
     {
         $obj = clone $this;
-        $obj->dateCreatedAt = $dateCreatedAt;
+        $obj->date_created_at = $dateCreatedAt;
 
         return $obj;
     }
@@ -98,7 +98,7 @@ final class Filter implements BaseModel
     public function withDateEndedAt(DateEndedAt $dateEndedAt): self
     {
         $obj = clone $this;
-        $obj->dateEndedAt = $dateEndedAt;
+        $obj->date_ended_at = $dateEndedAt;
 
         return $obj;
     }
@@ -106,7 +106,7 @@ final class Filter implements BaseModel
     public function withDateUpdatedAt(DateUpdatedAt $dateUpdatedAt): self
     {
         $obj = clone $this;
-        $obj->dateUpdatedAt = $dateUpdatedAt;
+        $obj->date_updated_at = $dateUpdatedAt;
 
         return $obj;
     }
@@ -117,7 +117,7 @@ final class Filter implements BaseModel
     public function withRoomID(string $roomID): self
     {
         $obj = clone $this;
-        $obj->roomID = $roomID;
+        $obj->room_id = $roomID;
 
         return $obj;
     }

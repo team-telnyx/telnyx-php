@@ -10,7 +10,9 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type DateStartedAtShape = array{
- *   eq?: \DateTimeInterface, gte?: \DateTimeInterface, lte?: \DateTimeInterface
+ *   eq?: \DateTimeInterface|null,
+ *   gte?: \DateTimeInterface|null,
+ *   lte?: \DateTimeInterface|null,
  * }
  */
 final class DateStartedAt implements BaseModel

@@ -11,11 +11,11 @@ use Telnyx\Messaging\Rcs\RcsCapabilities\RecordType;
 
 /**
  * @phpstan-type RcsCapabilitiesShape = array{
- *   agentID?: string,
- *   agentName?: string,
- *   features?: list<string>,
- *   phoneNumber?: string,
- *   recordType?: value-of<RecordType>,
+ *   agent_id?: string|null,
+ *   agent_name?: string|null,
+ *   features?: list<string>|null,
+ *   phone_number?: string|null,
+ *   record_type?: value-of<RecordType>|null,
  * }
  */
 final class RcsCapabilities implements BaseModel
@@ -26,14 +26,14 @@ final class RcsCapabilities implements BaseModel
     /**
      * RCS agent ID.
      */
-    #[Api('agent_id', optional: true)]
-    public ?string $agentID;
+    #[Api(optional: true)]
+    public ?string $agent_id;
 
     /**
      * RCS agent name.
      */
-    #[Api('agent_name', optional: true)]
-    public ?string $agentName;
+    #[Api(optional: true)]
+    public ?string $agent_name;
 
     /**
      * List of RCS capabilities.
@@ -46,16 +46,16 @@ final class RcsCapabilities implements BaseModel
     /**
      * Phone number.
      */
-    #[Api('phone_number', optional: true)]
-    public ?string $phoneNumber;
+    #[Api(optional: true)]
+    public ?string $phone_number;
 
     /**
      * Identifies the type of the resource.
      *
-     * @var value-of<RecordType>|null $recordType
+     * @var value-of<RecordType>|null $record_type
      */
-    #[Api('record_type', enum: RecordType::class, optional: true)]
-    public ?string $recordType;
+    #[Api(enum: RecordType::class, optional: true)]
+    public ?string $record_type;
 
     public function __construct()
     {
@@ -68,22 +68,22 @@ final class RcsCapabilities implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<string> $features
-     * @param RecordType|value-of<RecordType> $recordType
+     * @param RecordType|value-of<RecordType> $record_type
      */
     public static function with(
-        ?string $agentID = null,
-        ?string $agentName = null,
+        ?string $agent_id = null,
+        ?string $agent_name = null,
         ?array $features = null,
-        ?string $phoneNumber = null,
-        RecordType|string|null $recordType = null,
+        ?string $phone_number = null,
+        RecordType|string|null $record_type = null,
     ): self {
         $obj = new self;
 
-        null !== $agentID && $obj->agentID = $agentID;
-        null !== $agentName && $obj->agentName = $agentName;
+        null !== $agent_id && $obj->agent_id = $agent_id;
+        null !== $agent_name && $obj->agent_name = $agent_name;
         null !== $features && $obj->features = $features;
-        null !== $phoneNumber && $obj->phoneNumber = $phoneNumber;
-        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $phone_number && $obj->phone_number = $phone_number;
+        null !== $record_type && $obj['record_type'] = $record_type;
 
         return $obj;
     }
@@ -94,7 +94,7 @@ final class RcsCapabilities implements BaseModel
     public function withAgentID(string $agentID): self
     {
         $obj = clone $this;
-        $obj->agentID = $agentID;
+        $obj->agent_id = $agentID;
 
         return $obj;
     }
@@ -105,7 +105,7 @@ final class RcsCapabilities implements BaseModel
     public function withAgentName(string $agentName): self
     {
         $obj = clone $this;
-        $obj->agentName = $agentName;
+        $obj->agent_name = $agentName;
 
         return $obj;
     }
@@ -129,7 +129,7 @@ final class RcsCapabilities implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj->phoneNumber = $phoneNumber;
+        $obj->phone_number = $phoneNumber;
 
         return $obj;
     }
@@ -142,7 +142,7 @@ final class RcsCapabilities implements BaseModel
     public function withRecordType(RecordType|string $recordType): self
     {
         $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }

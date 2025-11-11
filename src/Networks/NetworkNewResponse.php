@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Networks\NetworkNewResponse\Data;
 
 /**
- * @phpstan-type NetworkNewResponseShape = array{data?: Data}
+ * @phpstan-type NetworkNewResponseShape = array{data?: Data|null}
  */
 final class NetworkNewResponse implements BaseModel, ResponseConverter
 {

@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type ActionEnableEmergencyResponseShape = array{
- *   data?: PhoneNumberWithVoiceSettings
+ *   data?: PhoneNumberWithVoiceSettings|null
  * }
  */
 final class ActionEnableEmergencyResponse implements BaseModel, ResponseConverter

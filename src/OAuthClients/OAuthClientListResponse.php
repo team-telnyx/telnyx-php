@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type OAuthClientListResponseShape = array{
- *   data?: list<OAuthClient>, meta?: PaginationMetaOAuth
+ *   data?: list<OAuthClient>|null, meta?: PaginationMetaOAuth|null
  * }
  */
 final class OAuthClientListResponse implements BaseModel, ResponseConverter

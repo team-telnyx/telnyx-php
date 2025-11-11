@@ -33,7 +33,7 @@ final class CsvDownloadsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->phoneNumbers->csvDownloads->create();
+        $result = $this->client->phoneNumbers->csvDownloads->create([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -57,7 +57,7 @@ final class CsvDownloadsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->phoneNumbers->csvDownloads->list();
+        $result = $this->client->phoneNumbers->csvDownloads->list([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

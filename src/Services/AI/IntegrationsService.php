@@ -15,7 +15,7 @@ use Telnyx\Services\AI\Integrations\ConnectionsService;
 final class IntegrationsService implements IntegrationsContract
 {
     /**
-     * @@api
+     * @api
      */
     public ConnectionsService $connections;
 

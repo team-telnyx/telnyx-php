@@ -13,10 +13,10 @@ use Telnyx\OutboundVoiceProfiles\OutboundCallRecording\CallRecordingType;
 
 /**
  * @phpstan-type OutboundCallRecordingShape = array{
- *   callRecordingCallerPhoneNumbers?: list<string>,
- *   callRecordingChannels?: value-of<CallRecordingChannels>,
- *   callRecordingFormat?: value-of<CallRecordingFormat>,
- *   callRecordingType?: value-of<CallRecordingType>,
+ *   call_recording_caller_phone_numbers?: list<string>|null,
+ *   call_recording_channels?: value-of<CallRecordingChannels>|null,
+ *   call_recording_format?: value-of<CallRecordingFormat>|null,
+ *   call_recording_type?: value-of<CallRecordingType>|null,
  * }
  */
 final class OutboundCallRecording implements BaseModel
@@ -27,42 +27,34 @@ final class OutboundCallRecording implements BaseModel
     /**
      * When call_recording_type is 'by_caller_phone_number', only outbound calls using one of these numbers will be recorded. Numbers must be specified in E164 format.
      *
-     * @var list<string>|null $callRecordingCallerPhoneNumbers
+     * @var list<string>|null $call_recording_caller_phone_numbers
      */
-    #[Api('call_recording_caller_phone_numbers', list: 'string', optional: true)]
-    public ?array $callRecordingCallerPhoneNumbers;
+    #[Api(list: 'string', optional: true)]
+    public ?array $call_recording_caller_phone_numbers;
 
     /**
      * When using 'dual' channels, the final audio file will be a stereo recording with the first leg on channel A, and the rest on channel B.
      *
-     * @var value-of<CallRecordingChannels>|null $callRecordingChannels
+     * @var value-of<CallRecordingChannels>|null $call_recording_channels
      */
-    #[Api(
-        'call_recording_channels',
-        enum: CallRecordingChannels::class,
-        optional: true,
-    )]
-    public ?string $callRecordingChannels;
+    #[Api(enum: CallRecordingChannels::class, optional: true)]
+    public ?string $call_recording_channels;
 
     /**
      * The audio file format for calls being recorded.
      *
-     * @var value-of<CallRecordingFormat>|null $callRecordingFormat
+     * @var value-of<CallRecordingFormat>|null $call_recording_format
      */
-    #[Api(
-        'call_recording_format',
-        enum: CallRecordingFormat::class,
-        optional: true
-    )]
-    public ?string $callRecordingFormat;
+    #[Api(enum: CallRecordingFormat::class, optional: true)]
+    public ?string $call_recording_format;
 
     /**
      * Specifies which calls are recorded.
      *
-     * @var value-of<CallRecordingType>|null $callRecordingType
+     * @var value-of<CallRecordingType>|null $call_recording_type
      */
-    #[Api('call_recording_type', enum: CallRecordingType::class, optional: true)]
-    public ?string $callRecordingType;
+    #[Api(enum: CallRecordingType::class, optional: true)]
+    public ?string $call_recording_type;
 
     public function __construct()
     {
@@ -74,23 +66,23 @@ final class OutboundCallRecording implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $callRecordingCallerPhoneNumbers
-     * @param CallRecordingChannels|value-of<CallRecordingChannels> $callRecordingChannels
-     * @param CallRecordingFormat|value-of<CallRecordingFormat> $callRecordingFormat
-     * @param CallRecordingType|value-of<CallRecordingType> $callRecordingType
+     * @param list<string> $call_recording_caller_phone_numbers
+     * @param CallRecordingChannels|value-of<CallRecordingChannels> $call_recording_channels
+     * @param CallRecordingFormat|value-of<CallRecordingFormat> $call_recording_format
+     * @param CallRecordingType|value-of<CallRecordingType> $call_recording_type
      */
     public static function with(
-        ?array $callRecordingCallerPhoneNumbers = null,
-        CallRecordingChannels|string|null $callRecordingChannels = null,
-        CallRecordingFormat|string|null $callRecordingFormat = null,
-        CallRecordingType|string|null $callRecordingType = null,
+        ?array $call_recording_caller_phone_numbers = null,
+        CallRecordingChannels|string|null $call_recording_channels = null,
+        CallRecordingFormat|string|null $call_recording_format = null,
+        CallRecordingType|string|null $call_recording_type = null,
     ): self {
         $obj = new self;
 
-        null !== $callRecordingCallerPhoneNumbers && $obj->callRecordingCallerPhoneNumbers = $callRecordingCallerPhoneNumbers;
-        null !== $callRecordingChannels && $obj['callRecordingChannels'] = $callRecordingChannels;
-        null !== $callRecordingFormat && $obj['callRecordingFormat'] = $callRecordingFormat;
-        null !== $callRecordingType && $obj['callRecordingType'] = $callRecordingType;
+        null !== $call_recording_caller_phone_numbers && $obj->call_recording_caller_phone_numbers = $call_recording_caller_phone_numbers;
+        null !== $call_recording_channels && $obj['call_recording_channels'] = $call_recording_channels;
+        null !== $call_recording_format && $obj['call_recording_format'] = $call_recording_format;
+        null !== $call_recording_type && $obj['call_recording_type'] = $call_recording_type;
 
         return $obj;
     }
@@ -104,7 +96,7 @@ final class OutboundCallRecording implements BaseModel
         array $callRecordingCallerPhoneNumbers
     ): self {
         $obj = clone $this;
-        $obj->callRecordingCallerPhoneNumbers = $callRecordingCallerPhoneNumbers;
+        $obj->call_recording_caller_phone_numbers = $callRecordingCallerPhoneNumbers;
 
         return $obj;
     }
@@ -118,7 +110,7 @@ final class OutboundCallRecording implements BaseModel
         CallRecordingChannels|string $callRecordingChannels
     ): self {
         $obj = clone $this;
-        $obj['callRecordingChannels'] = $callRecordingChannels;
+        $obj['call_recording_channels'] = $callRecordingChannels;
 
         return $obj;
     }
@@ -132,7 +124,7 @@ final class OutboundCallRecording implements BaseModel
         CallRecordingFormat|string $callRecordingFormat
     ): self {
         $obj = clone $this;
-        $obj['callRecordingFormat'] = $callRecordingFormat;
+        $obj['call_recording_format'] = $callRecordingFormat;
 
         return $obj;
     }
@@ -146,7 +138,7 @@ final class OutboundCallRecording implements BaseModel
         CallRecordingType|string $callRecordingType
     ): self {
         $obj = clone $this;
-        $obj['callRecordingType'] = $callRecordingType;
+        $obj['call_recording_type'] = $callRecordingType;
 
         return $obj;
     }

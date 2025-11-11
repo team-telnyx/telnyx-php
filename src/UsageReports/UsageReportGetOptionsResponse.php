@@ -14,7 +14,7 @@ use Telnyx\UsageReports\UsageReportGetOptionsResponse\Data;
 /**
  * An object following one of the schemas published in https://developers.telnyx.com/docs/api/v2/detail-records.
  *
- * @phpstan-type UsageReportGetOptionsResponseShape = array{data?: list<Data>}
+ * @phpstan-type UsageReportGetOptionsResponseShape = array{data?: list<Data>|null}
  */
 final class UsageReportGetOptionsResponse implements BaseModel, ResponseConverter
 {

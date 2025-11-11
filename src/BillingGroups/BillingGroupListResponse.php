@@ -13,7 +13,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type BillingGroupListResponseShape = array{
- *   data?: list<BillingGroup>, meta?: PaginationMeta
+ *   data?: list<BillingGroup>|null, meta?: PaginationMeta|null
  * }
  */
 final class BillingGroupListResponse implements BaseModel, ResponseConverter

@@ -11,7 +11,7 @@ use Telnyx\Services\OperatorConnect\ActionsService;
 final class OperatorConnectService implements OperatorConnectContract
 {
     /**
-     * @@api
+     * @api
      */
     public ActionsService $actions;
 

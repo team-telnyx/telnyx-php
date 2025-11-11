@@ -13,8 +13,8 @@ use Telnyx\ExternalConnections\ExternalVoiceIntegrationsPaginationMeta;
 
 /**
  * @phpstan-type PhoneNumberListResponseShape = array{
- *   data?: list<ExternalConnectionPhoneNumber>,
- *   meta?: ExternalVoiceIntegrationsPaginationMeta,
+ *   data?: list<ExternalConnectionPhoneNumber>|null,
+ *   meta?: ExternalVoiceIntegrationsPaginationMeta|null,
  * }
  */
 final class PhoneNumberListResponse implements BaseModel, ResponseConverter

@@ -39,7 +39,7 @@ final class NumberLookupTest extends TestCase
             ->reporting
             ->usageReports
             ->numberLookup
-            ->create()
+            ->create([])
         ;
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -77,7 +77,7 @@ final class NumberLookupTest extends TestCase
             ->reporting
             ->usageReports
             ->numberLookup
-            ->list()
+            ->list([])
         ;
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType

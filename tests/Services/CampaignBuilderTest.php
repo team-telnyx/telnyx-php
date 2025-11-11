@@ -33,11 +33,11 @@ final class CampaignBuilderTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->campaignBuilder->create(
-            brandID: 'brandId',
-            description: 'description',
-            usecase: 'usecase'
-        );
+        $result = $this->client->campaignBuilder->create([
+            'brandId' => 'brandId',
+            'description' => 'description',
+            'usecase' => 'usecase',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -49,11 +49,11 @@ final class CampaignBuilderTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->campaignBuilder->create(
-            brandID: 'brandId',
-            description: 'description',
-            usecase: 'usecase'
-        );
+        $result = $this->client->campaignBuilder->create([
+            'brandId' => 'brandId',
+            'description' => 'description',
+            'usecase' => 'usecase',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

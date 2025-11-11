@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type TargetShape = array{name?: string, to?: string}
+ * @phpstan-type TargetShape = array{name?: string|null, to?: string|null}
  */
 final class Target implements BaseModel
 {

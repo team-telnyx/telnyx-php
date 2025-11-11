@@ -11,15 +11,15 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type DataShape = array{
- *   callControlID: string,
- *   callLegID: string,
- *   callSessionID: string,
- *   isAlive: bool,
- *   recordType: value-of<RecordType>,
- *   callDuration?: int,
- *   clientState?: string,
- *   endTime?: string,
- *   startTime?: string,
+ *   call_control_id: string,
+ *   call_leg_id: string,
+ *   call_session_id: string,
+ *   is_alive: bool,
+ *   record_type: value-of<RecordType>,
+ *   call_duration?: int|null,
+ *   client_state?: string|null,
+ *   end_time?: string|null,
+ *   start_time?: string|null,
  * }
  */
 final class Data implements BaseModel
@@ -30,54 +30,54 @@ final class Data implements BaseModel
     /**
      * Unique identifier and token for controlling the call.
      */
-    #[Api('call_control_id')]
-    public string $callControlID;
+    #[Api]
+    public string $call_control_id;
 
     /**
      * ID that is unique to the call and can be used to correlate webhook events.
      */
-    #[Api('call_leg_id')]
-    public string $callLegID;
+    #[Api]
+    public string $call_leg_id;
 
     /**
      * ID that is unique to the call session and can be used to correlate webhook events. Call session is a group of related call legs that logically belong to the same phone call, e.g. an inbound and outbound leg of a transferred call.
      */
-    #[Api('call_session_id')]
-    public string $callSessionID;
+    #[Api]
+    public string $call_session_id;
 
     /**
      * Indicates whether the call is alive or not. For Dial command it will always be `false` (dialing is asynchronous).
      */
-    #[Api('is_alive')]
-    public bool $isAlive;
+    #[Api]
+    public bool $is_alive;
 
-    /** @var value-of<RecordType> $recordType */
-    #[Api('record_type', enum: RecordType::class)]
-    public string $recordType;
+    /** @var value-of<RecordType> $record_type */
+    #[Api(enum: RecordType::class)]
+    public string $record_type;
 
     /**
      * Indicates the duration of the call in seconds.
      */
-    #[Api('call_duration', optional: true)]
-    public ?int $callDuration;
+    #[Api(optional: true)]
+    public ?int $call_duration;
 
     /**
      * State received from a command.
      */
-    #[Api('client_state', optional: true)]
-    public ?string $clientState;
+    #[Api(optional: true)]
+    public ?string $client_state;
 
     /**
      * ISO 8601 formatted date indicating when the call ended. Only present when the call is not alive.
      */
-    #[Api('end_time', optional: true)]
-    public ?string $endTime;
+    #[Api(optional: true)]
+    public ?string $end_time;
 
     /**
      * ISO 8601 formatted date indicating when the call started.
      */
-    #[Api('start_time', optional: true)]
-    public ?string $startTime;
+    #[Api(optional: true)]
+    public ?string $start_time;
 
     /**
      * `new Data()` is missing required properties by the API.
@@ -85,11 +85,11 @@ final class Data implements BaseModel
      * To enforce required parameters use
      * ```
      * Data::with(
-     *   callControlID: ...,
-     *   callLegID: ...,
-     *   callSessionID: ...,
-     *   isAlive: ...,
-     *   recordType: ...,
+     *   call_control_id: ...,
+     *   call_leg_id: ...,
+     *   call_session_id: ...,
+     *   is_alive: ...,
+     *   record_type: ...,
      * )
      * ```
      *
@@ -114,31 +114,31 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param RecordType|value-of<RecordType> $recordType
+     * @param RecordType|value-of<RecordType> $record_type
      */
     public static function with(
-        string $callControlID,
-        string $callLegID,
-        string $callSessionID,
-        bool $isAlive,
-        RecordType|string $recordType,
-        ?int $callDuration = null,
-        ?string $clientState = null,
-        ?string $endTime = null,
-        ?string $startTime = null,
+        string $call_control_id,
+        string $call_leg_id,
+        string $call_session_id,
+        bool $is_alive,
+        RecordType|string $record_type,
+        ?int $call_duration = null,
+        ?string $client_state = null,
+        ?string $end_time = null,
+        ?string $start_time = null,
     ): self {
         $obj = new self;
 
-        $obj->callControlID = $callControlID;
-        $obj->callLegID = $callLegID;
-        $obj->callSessionID = $callSessionID;
-        $obj->isAlive = $isAlive;
-        $obj['recordType'] = $recordType;
+        $obj->call_control_id = $call_control_id;
+        $obj->call_leg_id = $call_leg_id;
+        $obj->call_session_id = $call_session_id;
+        $obj->is_alive = $is_alive;
+        $obj['record_type'] = $record_type;
 
-        null !== $callDuration && $obj->callDuration = $callDuration;
-        null !== $clientState && $obj->clientState = $clientState;
-        null !== $endTime && $obj->endTime = $endTime;
-        null !== $startTime && $obj->startTime = $startTime;
+        null !== $call_duration && $obj->call_duration = $call_duration;
+        null !== $client_state && $obj->client_state = $client_state;
+        null !== $end_time && $obj->end_time = $end_time;
+        null !== $start_time && $obj->start_time = $start_time;
 
         return $obj;
     }
@@ -149,7 +149,7 @@ final class Data implements BaseModel
     public function withCallControlID(string $callControlID): self
     {
         $obj = clone $this;
-        $obj->callControlID = $callControlID;
+        $obj->call_control_id = $callControlID;
 
         return $obj;
     }
@@ -160,7 +160,7 @@ final class Data implements BaseModel
     public function withCallLegID(string $callLegID): self
     {
         $obj = clone $this;
-        $obj->callLegID = $callLegID;
+        $obj->call_leg_id = $callLegID;
 
         return $obj;
     }
@@ -171,7 +171,7 @@ final class Data implements BaseModel
     public function withCallSessionID(string $callSessionID): self
     {
         $obj = clone $this;
-        $obj->callSessionID = $callSessionID;
+        $obj->call_session_id = $callSessionID;
 
         return $obj;
     }
@@ -182,7 +182,7 @@ final class Data implements BaseModel
     public function withIsAlive(bool $isAlive): self
     {
         $obj = clone $this;
-        $obj->isAlive = $isAlive;
+        $obj->is_alive = $isAlive;
 
         return $obj;
     }
@@ -193,7 +193,7 @@ final class Data implements BaseModel
     public function withRecordType(RecordType|string $recordType): self
     {
         $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
@@ -204,7 +204,7 @@ final class Data implements BaseModel
     public function withCallDuration(int $callDuration): self
     {
         $obj = clone $this;
-        $obj->callDuration = $callDuration;
+        $obj->call_duration = $callDuration;
 
         return $obj;
     }
@@ -215,7 +215,7 @@ final class Data implements BaseModel
     public function withClientState(string $clientState): self
     {
         $obj = clone $this;
-        $obj->clientState = $clientState;
+        $obj->client_state = $clientState;
 
         return $obj;
     }
@@ -226,7 +226,7 @@ final class Data implements BaseModel
     public function withEndTime(string $endTime): self
     {
         $obj = clone $this;
-        $obj->endTime = $endTime;
+        $obj->end_time = $endTime;
 
         return $obj;
     }
@@ -237,7 +237,7 @@ final class Data implements BaseModel
     public function withStartTime(string $startTime): self
     {
         $obj = clone $this;
-        $obj->startTime = $startTime;
+        $obj->start_time = $startTime;
 
         return $obj;
     }

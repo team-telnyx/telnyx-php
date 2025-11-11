@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\SubNumberOrdersReport\SubNumberOrdersReportGetResponse\Data;
 
 /**
- * @phpstan-type SubNumberOrdersReportGetResponseShape = array{data?: Data}
+ * @phpstan-type SubNumberOrdersReportGetResponseShape = array{data?: Data|null}
  */
 final class SubNumberOrdersReportGetResponse implements BaseModel, ResponseConverter
 {

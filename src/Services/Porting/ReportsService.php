@@ -8,17 +8,12 @@ use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Porting\Reports\ExportPortingOrdersCsvReport;
 use Telnyx\Porting\Reports\ReportCreateParams;
-use Telnyx\Porting\Reports\ReportCreateParams\ReportType;
 use Telnyx\Porting\Reports\ReportGetResponse;
 use Telnyx\Porting\Reports\ReportListParams;
-use Telnyx\Porting\Reports\ReportListParams\Filter;
-use Telnyx\Porting\Reports\ReportListParams\Page;
 use Telnyx\Porting\Reports\ReportListResponse;
 use Telnyx\Porting\Reports\ReportNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Porting\ReportsContract;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class ReportsService implements ReportsContract
 {
@@ -32,35 +27,27 @@ final class ReportsService implements ReportsContract
      *
      * Generate reports about porting operations.
      *
-     * @param ExportPortingOrdersCsvReport $params the parameters for generating a porting orders CSV report
-     * @param ReportType|value-of<ReportType> $reportType Identifies the type of report
+     * @param array{
+     *   params: array{
+     *     filters: array{
+     *       created_at__gt?: string|\DateTimeInterface,
+     *       created_at__lt?: string|\DateTimeInterface,
+     *       customer_reference__in?: list<string>,
+     *       status__in?: list<mixed>,
+     *     },
+     *   }|ExportPortingOrdersCsvReport,
+     *   report_type: "export_porting_orders_csv",
+     * }|ReportCreateParams $params
      *
      * @throws APIException
      */
     public function create(
-        $params,
-        $reportType,
-        ?RequestOptions $requestOptions = null
-    ): ReportNewResponse {
-        $params1 = ['params' => $params, 'reportType' => $reportType];
-
-        return $this->createRaw($params1, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
+        array|ReportCreateParams $params,
         ?RequestOptions $requestOptions = null
     ): ReportNewResponse {
         [$parsed, $options] = ReportCreateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -98,35 +85,22 @@ final class ReportsService implements ReportsContract
      *
      * List the reports generated about porting operations.
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[report_type], filter[status]
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param array{
+     *   filter?: array{
+     *     report_type?: "export_porting_orders_csv", status?: "pending"|"completed"
+     *   },
+     *   page?: array{number?: int, size?: int},
+     * }|ReportListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): ReportListResponse {
-        $params = ['filter' => $filter, 'page' => $page];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
+        array|ReportListParams $params,
         ?RequestOptions $requestOptions = null
     ): ReportListResponse {
         [$parsed, $options] = ReportListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

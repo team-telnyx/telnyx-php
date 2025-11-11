@@ -12,7 +12,7 @@ use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileListParams\Filter\Name;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[name][contains].
  *
- * @phpstan-type FilterShape = array{name?: Name}
+ * @phpstan-type FilterShape = array{name?: Name|null}
  */
 final class Filter implements BaseModel
 {

@@ -18,11 +18,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *   description: string,
  *   name: string,
  *   url: string,
- *   bodyParameters?: BodyParameters,
- *   headers?: list<Header>,
- *   method?: value-of<Method>,
- *   pathParameters?: PathParameters,
- *   queryParameters?: QueryParameters,
+ *   body_parameters?: BodyParameters|null,
+ *   headers?: list<Header>|null,
+ *   method?: value-of<Method>|null,
+ *   path_parameters?: PathParameters|null,
+ *   query_parameters?: QueryParameters|null,
  * }
  */
 final class InferenceEmbeddingWebhookToolParams implements BaseModel
@@ -51,8 +51,8 @@ final class InferenceEmbeddingWebhookToolParams implements BaseModel
     /**
      * The body parameters the webhook tool accepts, described as a JSON Schema object. These parameters will be passed to the webhook as the body of the request. See the [JSON Schema reference](https://json-schema.org/understanding-json-schema) for documentation about the format.
      */
-    #[Api('body_parameters', optional: true)]
-    public ?BodyParameters $bodyParameters;
+    #[Api(optional: true)]
+    public ?BodyParameters $body_parameters;
 
     /**
      * The headers to be sent to the external tool.
@@ -73,14 +73,14 @@ final class InferenceEmbeddingWebhookToolParams implements BaseModel
     /**
      * The path parameters the webhook tool accepts, described as a JSON Schema object. These parameters will be passed to the webhook as the path of the request if the URL contains a placeholder for a value. See the [JSON Schema reference](https://json-schema.org/understanding-json-schema) for documentation about the format.
      */
-    #[Api('path_parameters', optional: true)]
-    public ?PathParameters $pathParameters;
+    #[Api(optional: true)]
+    public ?PathParameters $path_parameters;
 
     /**
      * The query parameters the webhook tool accepts, described as a JSON Schema object. These parameters will be passed to the webhook as the query of the request. See the [JSON Schema reference](https://json-schema.org/understanding-json-schema) for documentation about the format.
      */
-    #[Api('query_parameters', optional: true)]
-    public ?QueryParameters $queryParameters;
+    #[Api(optional: true)]
+    public ?QueryParameters $query_parameters;
 
     /**
      * `new InferenceEmbeddingWebhookToolParams()` is missing required properties by the API.
@@ -116,11 +116,11 @@ final class InferenceEmbeddingWebhookToolParams implements BaseModel
         string $description,
         string $name,
         string $url,
-        ?BodyParameters $bodyParameters = null,
+        ?BodyParameters $body_parameters = null,
         ?array $headers = null,
         Method|string|null $method = null,
-        ?PathParameters $pathParameters = null,
-        ?QueryParameters $queryParameters = null,
+        ?PathParameters $path_parameters = null,
+        ?QueryParameters $query_parameters = null,
     ): self {
         $obj = new self;
 
@@ -128,11 +128,11 @@ final class InferenceEmbeddingWebhookToolParams implements BaseModel
         $obj->name = $name;
         $obj->url = $url;
 
-        null !== $bodyParameters && $obj->bodyParameters = $bodyParameters;
+        null !== $body_parameters && $obj->body_parameters = $body_parameters;
         null !== $headers && $obj->headers = $headers;
         null !== $method && $obj['method'] = $method;
-        null !== $pathParameters && $obj->pathParameters = $pathParameters;
-        null !== $queryParameters && $obj->queryParameters = $queryParameters;
+        null !== $path_parameters && $obj->path_parameters = $path_parameters;
+        null !== $query_parameters && $obj->query_parameters = $query_parameters;
 
         return $obj;
     }
@@ -176,7 +176,7 @@ final class InferenceEmbeddingWebhookToolParams implements BaseModel
     public function withBodyParameters(BodyParameters $bodyParameters): self
     {
         $obj = clone $this;
-        $obj->bodyParameters = $bodyParameters;
+        $obj->body_parameters = $bodyParameters;
 
         return $obj;
     }
@@ -213,7 +213,7 @@ final class InferenceEmbeddingWebhookToolParams implements BaseModel
     public function withPathParameters(PathParameters $pathParameters): self
     {
         $obj = clone $this;
-        $obj->pathParameters = $pathParameters;
+        $obj->path_parameters = $pathParameters;
 
         return $obj;
     }
@@ -224,7 +224,7 @@ final class InferenceEmbeddingWebhookToolParams implements BaseModel
     public function withQueryParameters(QueryParameters $queryParameters): self
     {
         $obj = clone $this;
-        $obj->queryParameters = $queryParameters;
+        $obj->query_parameters = $queryParameters;
 
         return $obj;
     }

@@ -8,22 +8,15 @@ use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\FaxApplications\FaxApplicationCreateParams;
-use Telnyx\FaxApplications\FaxApplicationCreateParams\Inbound;
-use Telnyx\FaxApplications\FaxApplicationCreateParams\Outbound;
 use Telnyx\FaxApplications\FaxApplicationDeleteResponse;
 use Telnyx\FaxApplications\FaxApplicationGetResponse;
 use Telnyx\FaxApplications\FaxApplicationListParams;
-use Telnyx\FaxApplications\FaxApplicationListParams\Filter;
-use Telnyx\FaxApplications\FaxApplicationListParams\Page;
-use Telnyx\FaxApplications\FaxApplicationListParams\Sort;
 use Telnyx\FaxApplications\FaxApplicationListResponse;
 use Telnyx\FaxApplications\FaxApplicationNewResponse;
 use Telnyx\FaxApplications\FaxApplicationUpdateParams;
 use Telnyx\FaxApplications\FaxApplicationUpdateResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\FaxApplicationsContract;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class FaxApplicationsService implements FaxApplicationsContract
 {
@@ -37,59 +30,31 @@ final class FaxApplicationsService implements FaxApplicationsContract
      *
      * Creates a new Fax Application based on the parameters sent in the request. The application name and webhook URL are required. Once created, you can assign phone numbers to your application using the `/phone_numbers` endpoint.
      *
-     * @param string $applicationName a user-assigned name to help manage the application
-     * @param string $webhookEventURL The URL where webhooks related to this connection will be sent. Must include a scheme, such as 'https'.
-     * @param bool $active specifies whether the connection can be used
-     * @param AnchorsiteOverride|value-of<AnchorsiteOverride> $anchorsiteOverride `Latency` directs Telnyx to route media through the site with the lowest round-trip time to the user's connection. Telnyx calculates this time using ICMP ping messages. This can be disabled by specifying a site to handle all media.
-     * @param Inbound $inbound
-     * @param Outbound $outbound
-     * @param list<string> $tags tags associated with the Fax Application
-     * @param string|null $webhookEventFailoverURL The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
-     * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
+     * @param array{
+     *   application_name: string,
+     *   webhook_event_url: string,
+     *   active?: bool,
+     *   anchorsite_override?: value-of<AnchorsiteOverride>,
+     *   inbound?: array{
+     *     channel_limit?: int,
+     *     sip_subdomain?: string,
+     *     sip_subdomain_receive_settings?: "only_my_connections"|"from_anyone",
+     *   },
+     *   outbound?: array{channel_limit?: int, outbound_voice_profile_id?: string},
+     *   tags?: list<string>,
+     *   webhook_event_failover_url?: string|null,
+     *   webhook_timeout_secs?: int|null,
+     * }|FaxApplicationCreateParams $params
      *
      * @throws APIException
      */
     public function create(
-        $applicationName,
-        $webhookEventURL,
-        $active = omit,
-        $anchorsiteOverride = omit,
-        $inbound = omit,
-        $outbound = omit,
-        $tags = omit,
-        $webhookEventFailoverURL = omit,
-        $webhookTimeoutSecs = omit,
+        array|FaxApplicationCreateParams $params,
         ?RequestOptions $requestOptions = null,
-    ): FaxApplicationNewResponse {
-        $params = [
-            'applicationName' => $applicationName,
-            'webhookEventURL' => $webhookEventURL,
-            'active' => $active,
-            'anchorsiteOverride' => $anchorsiteOverride,
-            'inbound' => $inbound,
-            'outbound' => $outbound,
-            'tags' => $tags,
-            'webhookEventFailoverURL' => $webhookEventFailoverURL,
-            'webhookTimeoutSecs' => $webhookTimeoutSecs,
-        ];
-
-        return $this->createRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): FaxApplicationNewResponse {
         [$parsed, $options] = FaxApplicationCreateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -127,64 +92,33 @@ final class FaxApplicationsService implements FaxApplicationsContract
      *
      * Updates settings of an existing Fax Application based on the parameters of the request.
      *
-     * @param string $applicationName a user-assigned name to help manage the application
-     * @param string $webhookEventURL The URL where webhooks related to this connection will be sent. Must include a scheme, such as 'https'.
-     * @param bool $active specifies whether the connection can be used
-     * @param AnchorsiteOverride|value-of<AnchorsiteOverride> $anchorsiteOverride `Latency` directs Telnyx to route media through the site with the lowest round-trip time to the user's connection. Telnyx calculates this time using ICMP ping messages. This can be disabled by specifying a site to handle all media.
-     * @param string|null $faxEmailRecipient Specifies an email address where faxes sent to this application will be forwarded to (as pdf or tiff attachments)
-     * @param FaxApplicationUpdateParams\Inbound $inbound
-     * @param FaxApplicationUpdateParams\Outbound $outbound
-     * @param list<string> $tags tags associated with the Fax Application
-     * @param string|null $webhookEventFailoverURL The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
-     * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
+     * @param array{
+     *   application_name: string,
+     *   webhook_event_url: string,
+     *   active?: bool,
+     *   anchorsite_override?: value-of<AnchorsiteOverride>,
+     *   fax_email_recipient?: string|null,
+     *   inbound?: array{
+     *     channel_limit?: int,
+     *     sip_subdomain?: string,
+     *     sip_subdomain_receive_settings?: "only_my_connections"|"from_anyone",
+     *   },
+     *   outbound?: array{channel_limit?: int, outbound_voice_profile_id?: string},
+     *   tags?: list<string>,
+     *   webhook_event_failover_url?: string|null,
+     *   webhook_timeout_secs?: int|null,
+     * }|FaxApplicationUpdateParams $params
      *
      * @throws APIException
      */
     public function update(
         string $id,
-        $applicationName,
-        $webhookEventURL,
-        $active = omit,
-        $anchorsiteOverride = omit,
-        $faxEmailRecipient = omit,
-        $inbound = omit,
-        $outbound = omit,
-        $tags = omit,
-        $webhookEventFailoverURL = omit,
-        $webhookTimeoutSecs = omit,
+        array|FaxApplicationUpdateParams $params,
         ?RequestOptions $requestOptions = null,
-    ): FaxApplicationUpdateResponse {
-        $params = [
-            'applicationName' => $applicationName,
-            'webhookEventURL' => $webhookEventURL,
-            'active' => $active,
-            'anchorsiteOverride' => $anchorsiteOverride,
-            'faxEmailRecipient' => $faxEmailRecipient,
-            'inbound' => $inbound,
-            'outbound' => $outbound,
-            'tags' => $tags,
-            'webhookEventFailoverURL' => $webhookEventFailoverURL,
-            'webhookTimeoutSecs' => $webhookTimeoutSecs,
-        ];
-
-        return $this->updateRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): FaxApplicationUpdateResponse {
         [$parsed, $options] = FaxApplicationUpdateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -202,48 +136,24 @@ final class FaxApplicationsService implements FaxApplicationsContract
      *
      * This endpoint returns a list of your Fax Applications inside the 'data' attribute of the response. You can adjust which applications are listed by using filters. Fax Applications are used to configure how you send and receive faxes using the Programmable Fax API with Telnyx.
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[application_name][contains], filter[outbound_voice_profile_id]
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
-     * @param Sort|value-of<Sort> $sort Specifies the sort order for results. By default sorting direction is ascending. To have the results sorted in descending order add the <code> -</code> prefix.<br/><br/>
-     * That is: <ul>
-     *   <li>
-     *     <code>application_name</code>: sorts the result by the
-     *     <code>application_name</code> field in ascending order.
-     *   </li>
-     *
-     *   <li>
-     *     <code>-application_name</code>: sorts the result by the
-     *     <code>application_name</code> field in descending order.
-     *   </li>
-     * </ul> <br/> If not given, results are sorted by <code>created_at</code> in descending order.
+     * @param array{
+     *   filter?: array{
+     *     application_name?: array{contains?: string},
+     *     outbound_voice_profile_id?: string,
+     *   },
+     *   page?: array{number?: int, size?: int},
+     *   sort?: "created_at"|"application_name"|"active",
+     * }|FaxApplicationListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
-        $sort = omit,
+        array|FaxApplicationListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): FaxApplicationListResponse {
-        $params = ['filter' => $filter, 'page' => $page, 'sort' => $sort];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): FaxApplicationListResponse {
         [$parsed, $options] = FaxApplicationListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

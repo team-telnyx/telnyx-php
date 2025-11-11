@@ -12,13 +12,13 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type BrandQualifyByUsecaseResponseShape = array{
- *   annualFee?: float,
- *   maxSubUsecases?: int,
- *   minSubUsecases?: int,
- *   mnoMetadata?: array<string, mixed>,
- *   monthlyFee?: float,
- *   quarterlyFee?: float,
- *   usecase?: string,
+ *   annualFee?: float|null,
+ *   maxSubUsecases?: int|null,
+ *   minSubUsecases?: int|null,
+ *   mnoMetadata?: array<string,mixed>|null,
+ *   monthlyFee?: float|null,
+ *   quarterlyFee?: float|null,
+ *   usecase?: string|null,
  * }
  */
 final class BrandQualifyByUsecaseResponse implements BaseModel, ResponseConverter
@@ -49,7 +49,7 @@ final class BrandQualifyByUsecaseResponse implements BaseModel, ResponseConverte
     /**
      * Map of usecase metadata for each MNO. Key is the network ID of the MNO (e.g. 10017), Value is the mno metadata for the usecase.
      *
-     * @var array<string, mixed>|null $mnoMetadata
+     * @var array<string,mixed>|null $mnoMetadata
      */
     #[Api(map: 'mixed', optional: true)]
     public ?array $mnoMetadata;
@@ -82,7 +82,7 @@ final class BrandQualifyByUsecaseResponse implements BaseModel, ResponseConverte
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param array<string, mixed> $mnoMetadata
+     * @param array<string,mixed> $mnoMetadata
      */
     public static function with(
         ?float $annualFee = null,
@@ -142,7 +142,7 @@ final class BrandQualifyByUsecaseResponse implements BaseModel, ResponseConverte
     /**
      * Map of usecase metadata for each MNO. Key is the network ID of the MNO (e.g. 10017), Value is the mno metadata for the usecase.
      *
-     * @param array<string, mixed> $mnoMetadata
+     * @param array<string,mixed> $mnoMetadata
      */
     public function withMnoMetadata(array $mnoMetadata): self
     {

@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type ActionSwitchSupervisorRoleResponseShape = array{
- *   data?: CallControlCommandResult
+ *   data?: CallControlCommandResult|null
  * }
  */
 final class ActionSwitchSupervisorRoleResponse implements BaseModel, ResponseConverter

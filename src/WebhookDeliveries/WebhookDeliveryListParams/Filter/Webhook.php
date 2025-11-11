@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type WebhookShape = array{contains?: string}
+ * @phpstan-type WebhookShape = array{contains?: string|null}
  */
 final class Webhook implements BaseModel
 {

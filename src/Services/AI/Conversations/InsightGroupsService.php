@@ -7,7 +7,6 @@ namespace Telnyx\Services\AI\Conversations;
 use Telnyx\AI\Conversations\InsightGroups\InsightGroupGetInsightGroupsResponse;
 use Telnyx\AI\Conversations\InsightGroups\InsightGroupInsightGroupsParams;
 use Telnyx\AI\Conversations\InsightGroups\InsightGroupRetrieveInsightGroupsParams;
-use Telnyx\AI\Conversations\InsightGroups\InsightGroupRetrieveInsightGroupsParams\Page;
 use Telnyx\AI\Conversations\InsightGroups\InsightGroupUpdateParams;
 use Telnyx\AI\Conversations\InsightGroups\InsightTemplateGroupDetail;
 use Telnyx\Client;
@@ -16,12 +15,10 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Conversations\InsightGroupsContract;
 use Telnyx\Services\AI\Conversations\InsightGroups\InsightsService;
 
-use const Telnyx\Core\OMIT as omit;
-
 final class InsightGroupsService implements InsightGroupsContract
 {
     /**
-     * @@api
+     * @api
      */
     public InsightsService $insights;
 
@@ -58,41 +55,20 @@ final class InsightGroupsService implements InsightGroupsContract
      *
      * Update an insight template group
      *
-     * @param string $description
-     * @param string $name
-     * @param string $webhook
+     * @param array{
+     *   description?: string, name?: string, webhook?: string
+     * }|InsightGroupUpdateParams $params
      *
      * @throws APIException
      */
     public function update(
         string $groupID,
-        $description = omit,
-        $name = omit,
-        $webhook = omit,
+        array|InsightGroupUpdateParams $params,
         ?RequestOptions $requestOptions = null,
-    ): InsightTemplateGroupDetail {
-        $params = [
-            'description' => $description, 'name' => $name, 'webhook' => $webhook,
-        ];
-
-        return $this->updateRaw($groupID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $groupID,
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): InsightTemplateGroupDetail {
         [$parsed, $options] = InsightGroupUpdateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -130,39 +106,19 @@ final class InsightGroupsService implements InsightGroupsContract
      *
      * Create a new insight group
      *
-     * @param string $name
-     * @param string $description
-     * @param string $webhook
+     * @param array{
+     *   name: string, description?: string, webhook?: string
+     * }|InsightGroupInsightGroupsParams $params
      *
      * @throws APIException
      */
     public function insightGroups(
-        $name,
-        $description = omit,
-        $webhook = omit,
+        array|InsightGroupInsightGroupsParams $params,
         ?RequestOptions $requestOptions = null,
-    ): InsightTemplateGroupDetail {
-        $params = [
-            'name' => $name, 'description' => $description, 'webhook' => $webhook,
-        ];
-
-        return $this->insightGroupsRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function insightGroupsRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): InsightTemplateGroupDetail {
         [$parsed, $options] = InsightGroupInsightGroupsParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -180,33 +136,19 @@ final class InsightGroupsService implements InsightGroupsContract
      *
      * Get all insight groups
      *
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param array{
+     *   page?: array{number?: int, size?: int}
+     * }|InsightGroupRetrieveInsightGroupsParams $params
      *
      * @throws APIException
      */
     public function retrieveInsightGroups(
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): InsightGroupGetInsightGroupsResponse {
-        $params = ['page' => $page];
-
-        return $this->retrieveInsightGroupsRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function retrieveInsightGroupsRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|InsightGroupRetrieveInsightGroupsParams $params,
+        ?RequestOptions $requestOptions = null,
     ): InsightGroupGetInsightGroupsResponse {
         [$parsed, $options] = InsightGroupRetrieveInsightGroupsParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

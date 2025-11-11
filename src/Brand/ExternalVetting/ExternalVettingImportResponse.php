@@ -12,13 +12,13 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type ExternalVettingImportResponseShape = array{
- *   createDate?: string,
- *   evpID?: string,
- *   vettedDate?: string,
- *   vettingClass?: string,
- *   vettingID?: string,
- *   vettingScore?: int,
- *   vettingToken?: string,
+ *   createDate?: string|null,
+ *   evpId?: string|null,
+ *   vettedDate?: string|null,
+ *   vettingClass?: string|null,
+ *   vettingId?: string|null,
+ *   vettingScore?: int|null,
+ *   vettingToken?: string|null,
  * }
  */
 final class ExternalVettingImportResponse implements BaseModel, ResponseConverter
@@ -37,8 +37,8 @@ final class ExternalVettingImportResponse implements BaseModel, ResponseConverte
     /**
      * External vetting provider ID for the brand.
      */
-    #[Api('evpId', optional: true)]
-    public ?string $evpID;
+    #[Api(optional: true)]
+    public ?string $evpId;
 
     /**
      * Vetting effective date. This is the date when vetting was completed, or the starting effective date in ISO 8601 format. If this date is missing, then the vetting was not complete or not valid.
@@ -55,8 +55,8 @@ final class ExternalVettingImportResponse implements BaseModel, ResponseConverte
     /**
      * Unique ID that identifies a vetting transaction performed by a vetting provider. This ID is provided by the vetting provider at time of vetting.
      */
-    #[Api('vettingId', optional: true)]
-    public ?string $vettingID;
+    #[Api(optional: true)]
+    public ?string $vettingId;
 
     /**
      * Vetting score ranging from 0-100.
@@ -82,20 +82,20 @@ final class ExternalVettingImportResponse implements BaseModel, ResponseConverte
      */
     public static function with(
         ?string $createDate = null,
-        ?string $evpID = null,
+        ?string $evpId = null,
         ?string $vettedDate = null,
         ?string $vettingClass = null,
-        ?string $vettingID = null,
+        ?string $vettingId = null,
         ?int $vettingScore = null,
         ?string $vettingToken = null,
     ): self {
         $obj = new self;
 
         null !== $createDate && $obj->createDate = $createDate;
-        null !== $evpID && $obj->evpID = $evpID;
+        null !== $evpId && $obj->evpId = $evpId;
         null !== $vettedDate && $obj->vettedDate = $vettedDate;
         null !== $vettingClass && $obj->vettingClass = $vettingClass;
-        null !== $vettingID && $obj->vettingID = $vettingID;
+        null !== $vettingId && $obj->vettingId = $vettingId;
         null !== $vettingScore && $obj->vettingScore = $vettingScore;
         null !== $vettingToken && $obj->vettingToken = $vettingToken;
 
@@ -119,7 +119,7 @@ final class ExternalVettingImportResponse implements BaseModel, ResponseConverte
     public function withEvpID(string $evpID): self
     {
         $obj = clone $this;
-        $obj->evpID = $evpID;
+        $obj->evpId = $evpID;
 
         return $obj;
     }
@@ -152,7 +152,7 @@ final class ExternalVettingImportResponse implements BaseModel, ResponseConverte
     public function withVettingID(string $vettingID): self
     {
         $obj = clone $this;
-        $obj->vettingID = $vettingID;
+        $obj->vettingId = $vettingID;
 
         return $obj;
     }

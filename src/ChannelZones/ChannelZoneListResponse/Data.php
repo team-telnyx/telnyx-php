@@ -15,9 +15,9 @@ use Telnyx\Core\Contracts\BaseModel;
  *   channels: int,
  *   countries: list<string>,
  *   name: string,
- *   recordType: value-of<RecordType>,
- *   createdAt?: string,
- *   updatedAt?: string,
+ *   record_type: value-of<RecordType>,
+ *   created_at?: string|null,
+ *   updated_at?: string|null,
  * }
  */
 final class Data implements BaseModel
@@ -42,28 +42,28 @@ final class Data implements BaseModel
     #[Api]
     public string $name;
 
-    /** @var value-of<RecordType> $recordType */
-    #[Api('record_type', enum: RecordType::class)]
-    public string $recordType;
+    /** @var value-of<RecordType> $record_type */
+    #[Api(enum: RecordType::class)]
+    public string $record_type;
 
     /**
      * ISO 8601 formatted date of when the channel zone was created.
      */
-    #[Api('created_at', optional: true)]
-    public ?string $createdAt;
+    #[Api(optional: true)]
+    public ?string $created_at;
 
     /**
      * ISO 8601 formatted date of when the channel zone was updated.
      */
-    #[Api('updated_at', optional: true)]
-    public ?string $updatedAt;
+    #[Api(optional: true)]
+    public ?string $updated_at;
 
     /**
      * `new Data()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Data::with(id: ..., channels: ..., countries: ..., name: ..., recordType: ...)
+     * Data::with(id: ..., channels: ..., countries: ..., name: ..., record_type: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -88,16 +88,16 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<string> $countries
-     * @param RecordType|value-of<RecordType> $recordType
+     * @param RecordType|value-of<RecordType> $record_type
      */
     public static function with(
         string $id,
         int $channels,
         array $countries,
         string $name,
-        RecordType|string $recordType,
-        ?string $createdAt = null,
-        ?string $updatedAt = null,
+        RecordType|string $record_type,
+        ?string $created_at = null,
+        ?string $updated_at = null,
     ): self {
         $obj = new self;
 
@@ -105,10 +105,10 @@ final class Data implements BaseModel
         $obj->channels = $channels;
         $obj->countries = $countries;
         $obj->name = $name;
-        $obj['recordType'] = $recordType;
+        $obj['record_type'] = $record_type;
 
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
+        null !== $created_at && $obj->created_at = $created_at;
+        null !== $updated_at && $obj->updated_at = $updated_at;
 
         return $obj;
     }
@@ -156,7 +156,7 @@ final class Data implements BaseModel
     public function withRecordType(RecordType|string $recordType): self
     {
         $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
@@ -167,7 +167,7 @@ final class Data implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }
@@ -178,7 +178,7 @@ final class Data implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $obj->updated_at = $updatedAt;
 
         return $obj;
     }

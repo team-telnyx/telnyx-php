@@ -14,7 +14,7 @@ use Telnyx\PhoneNumbersRegulatoryRequirements\PhoneNumbersRegulatoryRequirementG
 
 /**
  * @phpstan-type PhoneNumbersRegulatoryRequirementGetResponseShape = array{
- *   data?: list<Data>, meta?: PaginationMeta
+ *   data?: list<Data>|null, meta?: PaginationMeta|null
  * }
  */
 final class PhoneNumbersRegulatoryRequirementGetResponse implements BaseModel, ResponseConverter

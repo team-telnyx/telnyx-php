@@ -16,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\AI\Assistants->import
  *
  * @phpstan-type AssistantImportParamsShape = array{
- *   apiKeyRef: string, provider: Provider|value-of<Provider>
+ *   api_key_ref: string, provider: Provider|value-of<Provider>
  * }
  */
 final class AssistantImportParams implements BaseModel
@@ -28,8 +28,8 @@ final class AssistantImportParams implements BaseModel
     /**
      * Integration secret pointer that refers to the API key for the external provider. This should be an identifier for an integration secret created via /v2/integration_secrets.
      */
-    #[Api('api_key_ref')]
-    public string $apiKeyRef;
+    #[Api]
+    public string $api_key_ref;
 
     /**
      * The external provider to import assistants from.
@@ -44,7 +44,7 @@ final class AssistantImportParams implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * AssistantImportParams::with(apiKeyRef: ..., provider: ...)
+     * AssistantImportParams::with(api_key_ref: ..., provider: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -66,12 +66,12 @@ final class AssistantImportParams implements BaseModel
      * @param Provider|value-of<Provider> $provider
      */
     public static function with(
-        string $apiKeyRef,
+        string $api_key_ref,
         Provider|string $provider
     ): self {
         $obj = new self;
 
-        $obj->apiKeyRef = $apiKeyRef;
+        $obj->api_key_ref = $api_key_ref;
         $obj['provider'] = $provider;
 
         return $obj;
@@ -83,7 +83,7 @@ final class AssistantImportParams implements BaseModel
     public function withAPIKeyRef(string $apiKeyRef): self
     {
         $obj = clone $this;
-        $obj->apiKeyRef = $apiKeyRef;
+        $obj->api_key_ref = $apiKeyRef;
 
         return $obj;
     }

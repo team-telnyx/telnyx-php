@@ -13,7 +13,7 @@ use Telnyx\GlobalIPHealthCheckTypes\GlobalIPHealthCheckTypeListResponse\Data;
 
 /**
  * @phpstan-type GlobalIPHealthCheckTypeListResponseShape = array{
- *   data?: list<Data>
+ *   data?: list<Data>|null
  * }
  */
 final class GlobalIPHealthCheckTypeListResponse implements BaseModel, ResponseConverter

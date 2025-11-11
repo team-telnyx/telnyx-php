@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayGetResponse\Data;
 
 /**
- * @phpstan-type PublicInternetGatewayGetResponseShape = array{data?: Data}
+ * @phpstan-type PublicInternetGatewayGetResponseShape = array{data?: Data|null}
  */
 final class PublicInternetGatewayGetResponse implements BaseModel, ResponseConverter
 {

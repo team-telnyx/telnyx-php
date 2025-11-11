@@ -10,7 +10,9 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type DateJoinedAtShape = array{
- *   eq?: \DateTimeInterface, gte?: \DateTimeInterface, lte?: \DateTimeInterface
+ *   eq?: \DateTimeInterface|null,
+ *   gte?: \DateTimeInterface|null,
+ *   lte?: \DateTimeInterface|null,
  * }
  */
 final class DateJoinedAt implements BaseModel

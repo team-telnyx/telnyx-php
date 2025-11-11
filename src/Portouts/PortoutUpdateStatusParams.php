@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Portouts->updateStatus
  *
  * @phpstan-type PortoutUpdateStatusParamsShape = array{
- *   id: string, reason: string, hostMessaging?: bool
+ *   id: string, reason: string, host_messaging?: bool
  * }
  */
 final class PortoutUpdateStatusParams implements BaseModel
@@ -36,8 +36,8 @@ final class PortoutUpdateStatusParams implements BaseModel
     /**
      * Indicates whether messaging services should be maintained with Telnyx after the port out completes.
      */
-    #[Api('host_messaging', optional: true)]
-    public ?bool $hostMessaging;
+    #[Api(optional: true)]
+    public ?bool $host_messaging;
 
     /**
      * `new PortoutUpdateStatusParams()` is missing required properties by the API.
@@ -66,14 +66,14 @@ final class PortoutUpdateStatusParams implements BaseModel
     public static function with(
         string $id,
         string $reason,
-        ?bool $hostMessaging = null
+        ?bool $host_messaging = null
     ): self {
         $obj = new self;
 
         $obj->id = $id;
         $obj->reason = $reason;
 
-        null !== $hostMessaging && $obj->hostMessaging = $hostMessaging;
+        null !== $host_messaging && $obj->host_messaging = $host_messaging;
 
         return $obj;
     }
@@ -103,7 +103,7 @@ final class PortoutUpdateStatusParams implements BaseModel
     public function withHostMessaging(bool $hostMessaging): self
     {
         $obj = clone $this;
-        $obj->hostMessaging = $hostMessaging;
+        $obj->host_messaging = $hostMessaging;
 
         return $obj;
     }

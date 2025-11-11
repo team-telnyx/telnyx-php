@@ -15,9 +15,9 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\AI\Assistants\Tools->test
  *
  * @phpstan-type ToolTestParamsShape = array{
- *   assistantID: string,
- *   arguments?: array<string, mixed>,
- *   dynamicVariables?: array<string, mixed>,
+ *   assistant_id: string,
+ *   arguments?: array<string,mixed>,
+ *   dynamic_variables?: array<string,mixed>,
  * }
  */
 final class ToolTestParams implements BaseModel
@@ -27,12 +27,12 @@ final class ToolTestParams implements BaseModel
     use SdkParams;
 
     #[Api]
-    public string $assistantID;
+    public string $assistant_id;
 
     /**
      * Key-value arguments to use for the webhook test.
      *
-     * @var array<string, mixed>|null $arguments
+     * @var array<string,mixed>|null $arguments
      */
     #[Api(map: 'mixed', optional: true)]
     public ?array $arguments;
@@ -40,17 +40,17 @@ final class ToolTestParams implements BaseModel
     /**
      * Key-value dynamic variables to use for the webhook test.
      *
-     * @var array<string, mixed>|null $dynamicVariables
+     * @var array<string,mixed>|null $dynamic_variables
      */
-    #[Api('dynamic_variables', map: 'mixed', optional: true)]
-    public ?array $dynamicVariables;
+    #[Api(map: 'mixed', optional: true)]
+    public ?array $dynamic_variables;
 
     /**
      * `new ToolTestParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * ToolTestParams::with(assistantID: ...)
+     * ToolTestParams::with(assistant_id: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -69,20 +69,20 @@ final class ToolTestParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param array<string, mixed> $arguments
-     * @param array<string, mixed> $dynamicVariables
+     * @param array<string,mixed> $arguments
+     * @param array<string,mixed> $dynamic_variables
      */
     public static function with(
-        string $assistantID,
+        string $assistant_id,
         ?array $arguments = null,
-        ?array $dynamicVariables = null
+        ?array $dynamic_variables = null,
     ): self {
         $obj = new self;
 
-        $obj->assistantID = $assistantID;
+        $obj->assistant_id = $assistant_id;
 
         null !== $arguments && $obj->arguments = $arguments;
-        null !== $dynamicVariables && $obj->dynamicVariables = $dynamicVariables;
+        null !== $dynamic_variables && $obj->dynamic_variables = $dynamic_variables;
 
         return $obj;
     }
@@ -90,7 +90,7 @@ final class ToolTestParams implements BaseModel
     public function withAssistantID(string $assistantID): self
     {
         $obj = clone $this;
-        $obj->assistantID = $assistantID;
+        $obj->assistant_id = $assistantID;
 
         return $obj;
     }
@@ -98,7 +98,7 @@ final class ToolTestParams implements BaseModel
     /**
      * Key-value arguments to use for the webhook test.
      *
-     * @param array<string, mixed> $arguments
+     * @param array<string,mixed> $arguments
      */
     public function withArguments(array $arguments): self
     {
@@ -111,12 +111,12 @@ final class ToolTestParams implements BaseModel
     /**
      * Key-value dynamic variables to use for the webhook test.
      *
-     * @param array<string, mixed> $dynamicVariables
+     * @param array<string,mixed> $dynamicVariables
      */
     public function withDynamicVariables(array $dynamicVariables): self
     {
         $obj = clone $this;
-        $obj->dynamicVariables = $dynamicVariables;
+        $obj->dynamic_variables = $dynamicVariables;
 
         return $obj;
     }

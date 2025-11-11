@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type RcListBulkCapabilitiesResponseShape = array{
- *   data?: list<RcsCapabilities>
+ *   data?: list<RcsCapabilities>|null
  * }
  */
 final class RcListBulkCapabilitiesResponse implements BaseModel, ResponseConverter

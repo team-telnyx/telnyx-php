@@ -6,42 +6,24 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
+use Telnyx\SiprecConnectors\SiprecConnectorCreateParams;
 use Telnyx\SiprecConnectors\SiprecConnectorGetResponse;
 use Telnyx\SiprecConnectors\SiprecConnectorNewResponse;
+use Telnyx\SiprecConnectors\SiprecConnectorUpdateParams;
 use Telnyx\SiprecConnectors\SiprecConnectorUpdateResponse;
-
-use const Telnyx\Core\OMIT as omit;
 
 interface SiprecConnectorsContract
 {
     /**
      * @api
      *
-     * @param string $host hostname/IPv4 address of the SIPREC SRS
-     * @param string $name name for the SIPREC connector resource
-     * @param int $port port for the SIPREC SRS
-     * @param string $appSubdomain subdomain to route the call when using Telnyx SRS (optional for non-Telnyx SRS)
+     * @param array<mixed>|SiprecConnectorCreateParams $params
      *
      * @throws APIException
      */
     public function create(
-        $host,
-        $name,
-        $port,
-        $appSubdomain = omit,
+        array|SiprecConnectorCreateParams $params,
         ?RequestOptions $requestOptions = null,
-    ): SiprecConnectorNewResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): SiprecConnectorNewResponse;
 
     /**
@@ -57,32 +39,13 @@ interface SiprecConnectorsContract
     /**
      * @api
      *
-     * @param string $host hostname/IPv4 address of the SIPREC SRS
-     * @param string $name name for the SIPREC connector resource
-     * @param int $port port for the SIPREC SRS
-     * @param string $appSubdomain subdomain to route the call when using Telnyx SRS (optional for non-Telnyx SRS)
+     * @param array<mixed>|SiprecConnectorUpdateParams $params
      *
      * @throws APIException
      */
     public function update(
         string $connectorName,
-        $host,
-        $name,
-        $port,
-        $appSubdomain = omit,
-        ?RequestOptions $requestOptions = null,
-    ): SiprecConnectorUpdateResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $connectorName,
-        array $params,
+        array|SiprecConnectorUpdateParams $params,
         ?RequestOptions $requestOptions = null,
     ): SiprecConnectorUpdateResponse;
 

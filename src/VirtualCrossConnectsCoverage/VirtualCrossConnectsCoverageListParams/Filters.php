@@ -12,7 +12,7 @@ use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListParams\F
 /**
  * Consolidated filters parameter (deepObject style). Originally: filters[available_bandwidth][contains].
  *
- * @phpstan-type FiltersShape = array{availableBandwidth?: int|Contains}
+ * @phpstan-type FiltersShape = array{available_bandwidth?: int|null|Contains}
  */
 final class Filters implements BaseModel
 {
@@ -22,8 +22,8 @@ final class Filters implements BaseModel
     /**
      * Filter by exact available bandwidth match.
      */
-    #[Api('available_bandwidth', optional: true)]
-    public int|Contains|null $availableBandwidth;
+    #[Api(optional: true)]
+    public int|Contains|null $available_bandwidth;
 
     public function __construct()
     {
@@ -35,11 +35,11 @@ final class Filters implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(int|Contains|null $availableBandwidth = null): self
+    public static function with(int|Contains|null $available_bandwidth = null): self
     {
         $obj = new self;
 
-        null !== $availableBandwidth && $obj->availableBandwidth = $availableBandwidth;
+        null !== $available_bandwidth && $obj->available_bandwidth = $available_bandwidth;
 
         return $obj;
     }
@@ -51,7 +51,7 @@ final class Filters implements BaseModel
         int|Contains $availableBandwidth
     ): self {
         $obj = clone $this;
-        $obj->availableBandwidth = $availableBandwidth;
+        $obj->available_bandwidth = $availableBandwidth;
 
         return $obj;
     }

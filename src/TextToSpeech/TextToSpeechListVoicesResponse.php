@@ -12,7 +12,9 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\TextToSpeech\TextToSpeechListVoicesResponse\Voice;
 
 /**
- * @phpstan-type TextToSpeechListVoicesResponseShape = array{voices?: list<Voice>}
+ * @phpstan-type TextToSpeechListVoicesResponseShape = array{
+ *   voices?: list<Voice>|null
+ * }
  */
 final class TextToSpeechListVoicesResponse implements BaseModel, ResponseConverter
 {

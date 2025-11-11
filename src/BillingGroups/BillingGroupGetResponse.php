@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type BillingGroupGetResponseShape = array{data?: BillingGroup}
+ * @phpstan-type BillingGroupGetResponseShape = array{data?: BillingGroup|null}
  */
 final class BillingGroupGetResponse implements BaseModel, ResponseConverter
 {

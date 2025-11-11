@@ -47,7 +47,10 @@ final class VoiceTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->phoneNumbers->voice->update('1293384261075731499');
+        $result = $this->client->phoneNumbers->voice->update(
+            '1293384261075731499',
+            []
+        );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -59,7 +62,7 @@ final class VoiceTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->phoneNumbers->voice->list();
+        $result = $this->client->phoneNumbers->voice->list([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

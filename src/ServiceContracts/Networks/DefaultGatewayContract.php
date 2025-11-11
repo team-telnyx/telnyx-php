@@ -5,39 +5,25 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\Networks;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Networks\DefaultGateway\DefaultGatewayCreateParams;
 use Telnyx\Networks\DefaultGateway\DefaultGatewayDeleteResponse;
 use Telnyx\Networks\DefaultGateway\DefaultGatewayGetResponse;
 use Telnyx\Networks\DefaultGateway\DefaultGatewayNewResponse;
 use Telnyx\RequestOptions;
-
-use const Telnyx\Core\OMIT as omit;
 
 interface DefaultGatewayContract
 {
     /**
      * @api
      *
-     * @param string $wireguardPeerID wireguard peer ID
+     * @param array<mixed>|DefaultGatewayCreateParams $params
      *
      * @throws APIException
      */
     public function create(
         string $id,
-        $wireguardPeerID = omit,
+        array|DefaultGatewayCreateParams $params,
         ?RequestOptions $requestOptions = null,
-    ): DefaultGatewayNewResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): DefaultGatewayNewResponse;
 
     /**

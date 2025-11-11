@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type ActionRemovePrivateWirelessGatewayResponseShape = array{
- *   data?: SimCardGroupAction
+ *   data?: SimCardGroupAction|null
  * }
  */
 final class ActionRemovePrivateWirelessGatewayResponse implements BaseModel, ResponseConverter

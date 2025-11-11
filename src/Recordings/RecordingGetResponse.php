@@ -11,7 +11,9 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type RecordingGetResponseShape = array{data?: RecordingResponseData}
+ * @phpstan-type RecordingGetResponseShape = array{
+ *   data?: RecordingResponseData|null
+ * }
  */
 final class RecordingGetResponse implements BaseModel, ResponseConverter
 {

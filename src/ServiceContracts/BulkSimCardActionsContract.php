@@ -5,12 +5,10 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\BulkSimCardActions\BulkSimCardActionGetResponse;
-use Telnyx\BulkSimCardActions\BulkSimCardActionListParams\FilterActionType;
+use Telnyx\BulkSimCardActions\BulkSimCardActionListParams;
 use Telnyx\BulkSimCardActions\BulkSimCardActionListResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
-
-use const Telnyx\Core\OMIT as omit;
 
 interface BulkSimCardActionsContract
 {
@@ -27,28 +25,12 @@ interface BulkSimCardActionsContract
     /**
      * @api
      *
-     * @param FilterActionType|value-of<FilterActionType> $filterActionType filter by action type
-     * @param int $pageNumber the page number to load
-     * @param int $pageSize the size of the page
+     * @param array<mixed>|BulkSimCardActionListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $filterActionType = omit,
-        $pageNumber = omit,
-        $pageSize = omit,
+        array|BulkSimCardActionListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): BulkSimCardActionListResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): BulkSimCardActionListResponse;
 }

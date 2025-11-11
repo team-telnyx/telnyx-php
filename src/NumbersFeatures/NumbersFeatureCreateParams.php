@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\NumbersFeatures->create
  *
  * @phpstan-type NumbersFeatureCreateParamsShape = array{
- *   phoneNumbers: list<string>
+ *   phone_numbers: list<string>
  * }
  */
 final class NumbersFeatureCreateParams implements BaseModel
@@ -24,16 +24,16 @@ final class NumbersFeatureCreateParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    /** @var list<string> $phoneNumbers */
-    #[Api('phone_numbers', list: 'string')]
-    public array $phoneNumbers;
+    /** @var list<string> $phone_numbers */
+    #[Api(list: 'string')]
+    public array $phone_numbers;
 
     /**
      * `new NumbersFeatureCreateParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * NumbersFeatureCreateParams::with(phoneNumbers: ...)
+     * NumbersFeatureCreateParams::with(phone_numbers: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -52,13 +52,13 @@ final class NumbersFeatureCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $phoneNumbers
+     * @param list<string> $phone_numbers
      */
-    public static function with(array $phoneNumbers): self
+    public static function with(array $phone_numbers): self
     {
         $obj = new self;
 
-        $obj->phoneNumbers = $phoneNumbers;
+        $obj->phone_numbers = $phone_numbers;
 
         return $obj;
     }
@@ -69,7 +69,7 @@ final class NumbersFeatureCreateParams implements BaseModel
     public function withPhoneNumbers(array $phoneNumbers): self
     {
         $obj = clone $this;
-        $obj->phoneNumbers = $phoneNumbers;
+        $obj->phone_numbers = $phoneNumbers;
 
         return $obj;
     }

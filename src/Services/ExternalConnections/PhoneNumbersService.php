@@ -8,16 +8,12 @@ use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberGetResponse;
 use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberListParams;
-use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberListParams\Filter;
-use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberListParams\Page;
 use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberListResponse;
 use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberRetrieveParams;
 use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberUpdateParams;
 use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberUpdateResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ExternalConnections\PhoneNumbersContract;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class PhoneNumbersService implements PhoneNumbersContract
 {
@@ -31,35 +27,18 @@ final class PhoneNumbersService implements PhoneNumbersContract
      *
      * Return the details of a phone number associated with the given external connection.
      *
-     * @param string $id
+     * @param array{id: string}|PhoneNumberRetrieveParams $params
      *
      * @throws APIException
      */
     public function retrieve(
         string $phoneNumberID,
-        $id,
-        ?RequestOptions $requestOptions = null
-    ): PhoneNumberGetResponse {
-        $params = ['id' => $id];
-
-        return $this->retrieveRaw($phoneNumberID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $phoneNumberID,
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|PhoneNumberRetrieveParams $params,
+        ?RequestOptions $requestOptions = null,
     ): PhoneNumberGetResponse {
         [$parsed, $options] = PhoneNumberRetrieveParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
         $id = $parsed['id'];
         unset($parsed['id']);
@@ -80,37 +59,18 @@ final class PhoneNumbersService implements PhoneNumbersContract
      *
      * Asynchronously update settings of the phone number associated with the given external connection.
      *
-     * @param string $id
-     * @param string $locationID identifies the location to assign the phone number to
+     * @param array{id: string, location_id?: string}|PhoneNumberUpdateParams $params
      *
      * @throws APIException
      */
     public function update(
         string $phoneNumberID,
-        $id,
-        $locationID = omit,
+        array|PhoneNumberUpdateParams $params,
         ?RequestOptions $requestOptions = null,
-    ): PhoneNumberUpdateResponse {
-        $params = ['id' => $id, 'locationID' => $locationID];
-
-        return $this->updateRaw($phoneNumberID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $phoneNumberID,
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): PhoneNumberUpdateResponse {
         [$parsed, $options] = PhoneNumberUpdateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
         $id = $parsed['id'];
         unset($parsed['id']);
@@ -132,37 +92,25 @@ final class PhoneNumbersService implements PhoneNumbersContract
      *
      * Returns a list of all active phone numbers associated with the given external connection.
      *
-     * @param Filter $filter Filter parameter for phone numbers (deepObject style). Supports filtering by phone_number, civic_address_id, and location_id with eq/contains operations.
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param array{
+     *   filter?: array{
+     *     civic_address_id?: array{eq?: string},
+     *     location_id?: array{eq?: string},
+     *     phone_number?: array{contains?: string, eq?: string},
+     *   },
+     *   page?: array{number?: int, size?: int},
+     * }|PhoneNumberListParams $params
      *
      * @throws APIException
      */
     public function list(
         string $id,
-        $filter = omit,
-        $page = omit,
+        array|PhoneNumberListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): PhoneNumberListResponse {
-        $params = ['filter' => $filter, 'page' => $page];
-
-        return $this->listRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): PhoneNumberListResponse {
         [$parsed, $options] = PhoneNumberListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

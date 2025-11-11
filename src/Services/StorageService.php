@@ -16,17 +16,17 @@ use Telnyx\Storage\StorageListMigrationSourceCoverageResponse;
 final class StorageService implements StorageContract
 {
     /**
-     * @@api
+     * @api
      */
     public BucketsService $buckets;
 
     /**
-     * @@api
+     * @api
      */
     public MigrationSourcesService $migrationSources;
 
     /**
-     * @@api
+     * @api
      */
     public MigrationsService $migrations;
 

@@ -23,7 +23,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\AI\Embeddings->similaritySearch
  *
  * @phpstan-type EmbeddingSimilaritySearchParamsShape = array{
- *   bucketName: string, query: string, numOfDocs?: int
+ *   bucket_name: string, query: string, num_of_docs?: int
  * }
  */
 final class EmbeddingSimilaritySearchParams implements BaseModel
@@ -32,21 +32,21 @@ final class EmbeddingSimilaritySearchParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    #[Api('bucket_name')]
-    public string $bucketName;
+    #[Api]
+    public string $bucket_name;
 
     #[Api]
     public string $query;
 
-    #[Api('num_of_docs', optional: true)]
-    public ?int $numOfDocs;
+    #[Api(optional: true)]
+    public ?int $num_of_docs;
 
     /**
      * `new EmbeddingSimilaritySearchParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * EmbeddingSimilaritySearchParams::with(bucketName: ..., query: ...)
+     * EmbeddingSimilaritySearchParams::with(bucket_name: ..., query: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -66,16 +66,16 @@ final class EmbeddingSimilaritySearchParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        string $bucketName,
+        string $bucket_name,
         string $query,
-        ?int $numOfDocs = null
+        ?int $num_of_docs = null
     ): self {
         $obj = new self;
 
-        $obj->bucketName = $bucketName;
+        $obj->bucket_name = $bucket_name;
         $obj->query = $query;
 
-        null !== $numOfDocs && $obj->numOfDocs = $numOfDocs;
+        null !== $num_of_docs && $obj->num_of_docs = $num_of_docs;
 
         return $obj;
     }
@@ -83,7 +83,7 @@ final class EmbeddingSimilaritySearchParams implements BaseModel
     public function withBucketName(string $bucketName): self
     {
         $obj = clone $this;
-        $obj->bucketName = $bucketName;
+        $obj->bucket_name = $bucketName;
 
         return $obj;
     }
@@ -99,7 +99,7 @@ final class EmbeddingSimilaritySearchParams implements BaseModel
     public function withNumOfDocs(int $numOfDocs): self
     {
         $obj = clone $this;
-        $obj->numOfDocs = $numOfDocs;
+        $obj->num_of_docs = $numOfDocs;
 
         return $obj;
     }

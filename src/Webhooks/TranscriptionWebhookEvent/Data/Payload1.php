@@ -11,12 +11,12 @@ use Telnyx\Webhooks\TranscriptionWebhookEvent\Data\Payload\TranscriptionData;
 
 /**
  * @phpstan-type PayloadShape = array{
- *   callControlID?: string,
- *   callLegID?: string,
- *   callSessionID?: string,
- *   clientState?: string,
- *   connectionID?: string,
- *   transcriptionData?: TranscriptionData,
+ *   call_control_id?: string|null,
+ *   call_leg_id?: string|null,
+ *   call_session_id?: string|null,
+ *   client_state?: string|null,
+ *   connection_id?: string|null,
+ *   transcription_data?: TranscriptionData|null,
  * }
  */
 final class Payload implements BaseModel
@@ -27,35 +27,35 @@ final class Payload implements BaseModel
     /**
      * Unique identifier and token for controlling the call.
      */
-    #[Api('call_control_id', optional: true)]
-    public ?string $callControlID;
+    #[Api(optional: true)]
+    public ?string $call_control_id;
 
     /**
      * ID that is unique to the call and can be used to correlate webhook events.
      */
-    #[Api('call_leg_id', optional: true)]
-    public ?string $callLegID;
+    #[Api(optional: true)]
+    public ?string $call_leg_id;
 
     /**
      * ID that is unique to the call session and can be used to correlate webhook events. Call session is a group of related call legs that logically belong to the same phone call, e.g. an inbound and outbound leg of a transferred call.
      */
-    #[Api('call_session_id', optional: true)]
-    public ?string $callSessionID;
+    #[Api(optional: true)]
+    public ?string $call_session_id;
 
     /**
      * Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      */
-    #[Api('client_state', optional: true)]
-    public ?string $clientState;
+    #[Api(optional: true)]
+    public ?string $client_state;
 
     /**
      * Call Control App ID (formerly Telnyx connection ID) used in the call.
      */
-    #[Api('connection_id', optional: true)]
-    public ?string $connectionID;
+    #[Api(optional: true)]
+    public ?string $connection_id;
 
-    #[Api('transcription_data', optional: true)]
-    public ?TranscriptionData $transcriptionData;
+    #[Api(optional: true)]
+    public ?TranscriptionData $transcription_data;
 
     public function __construct()
     {
@@ -68,21 +68,21 @@ final class Payload implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $callControlID = null,
-        ?string $callLegID = null,
-        ?string $callSessionID = null,
-        ?string $clientState = null,
-        ?string $connectionID = null,
-        ?TranscriptionData $transcriptionData = null,
+        ?string $call_control_id = null,
+        ?string $call_leg_id = null,
+        ?string $call_session_id = null,
+        ?string $client_state = null,
+        ?string $connection_id = null,
+        ?TranscriptionData $transcription_data = null,
     ): self {
         $obj = new self;
 
-        null !== $callControlID && $obj->callControlID = $callControlID;
-        null !== $callLegID && $obj->callLegID = $callLegID;
-        null !== $callSessionID && $obj->callSessionID = $callSessionID;
-        null !== $clientState && $obj->clientState = $clientState;
-        null !== $connectionID && $obj->connectionID = $connectionID;
-        null !== $transcriptionData && $obj->transcriptionData = $transcriptionData;
+        null !== $call_control_id && $obj->call_control_id = $call_control_id;
+        null !== $call_leg_id && $obj->call_leg_id = $call_leg_id;
+        null !== $call_session_id && $obj->call_session_id = $call_session_id;
+        null !== $client_state && $obj->client_state = $client_state;
+        null !== $connection_id && $obj->connection_id = $connection_id;
+        null !== $transcription_data && $obj->transcription_data = $transcription_data;
 
         return $obj;
     }
@@ -93,7 +93,7 @@ final class Payload implements BaseModel
     public function withCallControlID(string $callControlID): self
     {
         $obj = clone $this;
-        $obj->callControlID = $callControlID;
+        $obj->call_control_id = $callControlID;
 
         return $obj;
     }
@@ -104,7 +104,7 @@ final class Payload implements BaseModel
     public function withCallLegID(string $callLegID): self
     {
         $obj = clone $this;
-        $obj->callLegID = $callLegID;
+        $obj->call_leg_id = $callLegID;
 
         return $obj;
     }
@@ -115,7 +115,7 @@ final class Payload implements BaseModel
     public function withCallSessionID(string $callSessionID): self
     {
         $obj = clone $this;
-        $obj->callSessionID = $callSessionID;
+        $obj->call_session_id = $callSessionID;
 
         return $obj;
     }
@@ -126,7 +126,7 @@ final class Payload implements BaseModel
     public function withClientState(string $clientState): self
     {
         $obj = clone $this;
-        $obj->clientState = $clientState;
+        $obj->client_state = $clientState;
 
         return $obj;
     }
@@ -137,7 +137,7 @@ final class Payload implements BaseModel
     public function withConnectionID(string $connectionID): self
     {
         $obj = clone $this;
-        $obj->connectionID = $connectionID;
+        $obj->connection_id = $connectionID;
 
         return $obj;
     }
@@ -146,7 +146,7 @@ final class Payload implements BaseModel
         TranscriptionData $transcriptionData
     ): self {
         $obj = clone $this;
-        $obj->transcriptionData = $transcriptionData;
+        $obj->transcription_data = $transcriptionData;
 
         return $obj;
     }

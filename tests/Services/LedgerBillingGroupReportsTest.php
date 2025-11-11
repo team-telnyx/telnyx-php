@@ -33,7 +33,7 @@ final class LedgerBillingGroupReportsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ledgerBillingGroupReports->create();
+        $result = $this->client->ledgerBillingGroupReports->create([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

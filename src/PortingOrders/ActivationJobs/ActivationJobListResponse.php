@@ -14,7 +14,7 @@ use Telnyx\PortingOrders\PortingOrdersActivationJob;
 
 /**
  * @phpstan-type ActivationJobListResponseShape = array{
- *   data?: list<PortingOrdersActivationJob>, meta?: PaginationMeta
+ *   data?: list<PortingOrdersActivationJob>|null, meta?: PaginationMeta|null
  * }
  */
 final class ActivationJobListResponse implements BaseModel, ResponseConverter

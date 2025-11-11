@@ -35,11 +35,13 @@ final class UploadsTest extends TestCase
 
         $result = $this->client->externalConnections->uploads->create(
             'id',
-            numberIDs: [
-                '3920457616934164700',
-                '3920457616934164701',
-                '3920457616934164702',
-                '3920457616934164703',
+            [
+                'number_ids' => [
+                    '3920457616934164700',
+                    '3920457616934164701',
+                    '3920457616934164702',
+                    '3920457616934164703',
+                ],
             ],
         );
 
@@ -55,11 +57,13 @@ final class UploadsTest extends TestCase
 
         $result = $this->client->externalConnections->uploads->create(
             'id',
-            numberIDs: [
-                '3920457616934164700',
-                '3920457616934164701',
-                '3920457616934164702',
-                '3920457616934164703',
+            [
+                'number_ids' => [
+                    '3920457616934164700',
+                    '3920457616934164701',
+                    '3920457616934164702',
+                    '3920457616934164703',
+                ],
             ],
         );
 
@@ -75,7 +79,7 @@ final class UploadsTest extends TestCase
 
         $result = $this->client->externalConnections->uploads->retrieve(
             '7b6a6449-b055-45a6-81f6-f6f0dffa4cc6',
-            'id'
+            ['id' => 'id']
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -90,7 +94,7 @@ final class UploadsTest extends TestCase
 
         $result = $this->client->externalConnections->uploads->retrieve(
             '7b6a6449-b055-45a6-81f6-f6f0dffa4cc6',
-            'id'
+            ['id' => 'id']
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -103,7 +107,7 @@ final class UploadsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->externalConnections->uploads->list('id');
+        $result = $this->client->externalConnections->uploads->list('id', []);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -141,7 +145,7 @@ final class UploadsTest extends TestCase
 
         $result = $this->client->externalConnections->uploads->retry(
             '7b6a6449-b055-45a6-81f6-f6f0dffa4cc6',
-            'id'
+            ['id' => 'id']
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -156,7 +160,7 @@ final class UploadsTest extends TestCase
 
         $result = $this->client->externalConnections->uploads->retry(
             '7b6a6449-b055-45a6-81f6-f6f0dffa4cc6',
-            'id'
+            ['id' => 'id']
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType

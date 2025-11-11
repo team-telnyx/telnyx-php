@@ -16,11 +16,11 @@ use Telnyx\Core\Contracts\BaseModel;
  * To disable this feature, set the object field to `null`.
  *
  * @phpstan-type NumberPoolSettingsShape = array{
- *   longCodeWeight: float,
- *   skipUnhealthy: bool,
- *   tollFreeWeight: float,
- *   geomatch?: bool,
- *   stickySender?: bool,
+ *   long_code_weight: float,
+ *   skip_unhealthy: bool,
+ *   toll_free_weight: float,
+ *   geomatch?: bool|null,
+ *   sticky_sender?: bool|null,
  * }
  */
 final class NumberPoolSettings implements BaseModel
@@ -34,8 +34,8 @@ final class NumberPoolSettings implements BaseModel
      * does not necessarily need to add to 100.  Weight must be a non-negative number, and when equal
      * to zero it will remove the number type from the pool.
      */
-    #[Api('long_code_weight')]
-    public float $longCodeWeight;
+    #[Api]
+    public float $long_code_weight;
 
     /**
      * If set to true all unhealthy numbers will be automatically excluded from the pool.
@@ -43,8 +43,8 @@ final class NumberPoolSettings implements BaseModel
      * rate and the amount of messages marked as spam by upstream carriers.
      * Numbers with a deliverability rate below 25% or spam ratio over 75% will be considered unhealthy.
      */
-    #[Api('skip_unhealthy')]
-    public bool $skipUnhealthy;
+    #[Api]
+    public bool $skip_unhealthy;
 
     /**
      * Defines the probability weight for a Toll Free number to be selected when sending a message.
@@ -52,8 +52,8 @@ final class NumberPoolSettings implements BaseModel
      * does not necessarily need to add to 100. Weight must be a non-negative number, and when equal
      * to zero it will remove the number type from the pool.
      */
-    #[Api('toll_free_weight')]
-    public float $tollFreeWeight;
+    #[Api]
+    public float $toll_free_weight;
 
     /**
      * If set to true, Number Pool will try to choose a sending number with the same area code as the destination
@@ -68,8 +68,8 @@ final class NumberPoolSettings implements BaseModel
      * recipient. If the sending number becomes unhealthy and `skip_unhealthy` is set to true, a new
      * number will be chosen.
      */
-    #[Api('sticky_sender', optional: true)]
-    public ?bool $stickySender;
+    #[Api(optional: true)]
+    public ?bool $sticky_sender;
 
     /**
      * `new NumberPoolSettings()` is missing required properties by the API.
@@ -77,7 +77,7 @@ final class NumberPoolSettings implements BaseModel
      * To enforce required parameters use
      * ```
      * NumberPoolSettings::with(
-     *   longCodeWeight: ..., skipUnhealthy: ..., tollFreeWeight: ...
+     *   long_code_weight: ..., skip_unhealthy: ..., toll_free_weight: ...
      * )
      * ```
      *
@@ -101,20 +101,20 @@ final class NumberPoolSettings implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        float $longCodeWeight,
-        bool $skipUnhealthy,
-        float $tollFreeWeight,
+        float $long_code_weight,
+        bool $skip_unhealthy,
+        float $toll_free_weight,
         ?bool $geomatch = null,
-        ?bool $stickySender = null,
+        ?bool $sticky_sender = null,
     ): self {
         $obj = new self;
 
-        $obj->longCodeWeight = $longCodeWeight;
-        $obj->skipUnhealthy = $skipUnhealthy;
-        $obj->tollFreeWeight = $tollFreeWeight;
+        $obj->long_code_weight = $long_code_weight;
+        $obj->skip_unhealthy = $skip_unhealthy;
+        $obj->toll_free_weight = $toll_free_weight;
 
         null !== $geomatch && $obj->geomatch = $geomatch;
-        null !== $stickySender && $obj->stickySender = $stickySender;
+        null !== $sticky_sender && $obj->sticky_sender = $sticky_sender;
 
         return $obj;
     }
@@ -128,7 +128,7 @@ final class NumberPoolSettings implements BaseModel
     public function withLongCodeWeight(float $longCodeWeight): self
     {
         $obj = clone $this;
-        $obj->longCodeWeight = $longCodeWeight;
+        $obj->long_code_weight = $longCodeWeight;
 
         return $obj;
     }
@@ -142,7 +142,7 @@ final class NumberPoolSettings implements BaseModel
     public function withSkipUnhealthy(bool $skipUnhealthy): self
     {
         $obj = clone $this;
-        $obj->skipUnhealthy = $skipUnhealthy;
+        $obj->skip_unhealthy = $skipUnhealthy;
 
         return $obj;
     }
@@ -156,7 +156,7 @@ final class NumberPoolSettings implements BaseModel
     public function withTollFreeWeight(float $tollFreeWeight): self
     {
         $obj = clone $this;
-        $obj->tollFreeWeight = $tollFreeWeight;
+        $obj->toll_free_weight = $tollFreeWeight;
 
         return $obj;
     }
@@ -182,7 +182,7 @@ final class NumberPoolSettings implements BaseModel
     public function withStickySender(bool $stickySender): self
     {
         $obj = clone $this;
-        $obj->stickySender = $stickySender;
+        $obj->sticky_sender = $stickySender;
 
         return $obj;
     }

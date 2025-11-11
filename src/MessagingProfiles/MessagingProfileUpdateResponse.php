@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type MessagingProfileUpdateResponseShape = array{
- *   data?: MessagingProfile
+ *   data?: MessagingProfile|null
  * }
  */
 final class MessagingProfileUpdateResponse implements BaseModel, ResponseConverter

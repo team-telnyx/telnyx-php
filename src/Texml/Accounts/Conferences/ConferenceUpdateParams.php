@@ -16,10 +16,10 @@ use Telnyx\Texml\Accounts\Conferences\ConferenceUpdateParams\AnnounceMethod;
  * @see Telnyx\Texml\Accounts\Conferences->update
  *
  * @phpstan-type ConferenceUpdateParamsShape = array{
- *   accountSid: string,
- *   announceMethod?: AnnounceMethod|value-of<AnnounceMethod>,
- *   announceURL?: string,
- *   status?: string,
+ *   account_sid: string,
+ *   AnnounceMethod?: \Telnyx\Texml\Accounts\Conferences\ConferenceUpdateParams\AnnounceMethod|value-of<\Telnyx\Texml\Accounts\Conferences\ConferenceUpdateParams\AnnounceMethod>,
+ *   AnnounceUrl?: string,
+ *   Status?: string,
  * }
  */
 final class ConferenceUpdateParams implements BaseModel
@@ -29,34 +29,37 @@ final class ConferenceUpdateParams implements BaseModel
     use SdkParams;
 
     #[Api]
-    public string $accountSid;
+    public string $account_sid;
 
     /**
      * The HTTP method used to call the `AnnounceUrl`. Defaults to `POST`.
      *
-     * @var value-of<AnnounceMethod>|null $announceMethod
+     * @var value-of<AnnounceMethod>|null $AnnounceMethod
      */
-    #[Api('AnnounceMethod', enum: AnnounceMethod::class, optional: true)]
-    public ?string $announceMethod;
+    #[Api(
+        enum: AnnounceMethod::class,
+        optional: true,
+    )]
+    public ?string $AnnounceMethod;
 
     /**
      * The URL we should call to announce something into the conference. The URL may return an MP3 file, a WAV file, or a TwiML document that contains `<Play>`, `<Say>`, `<Pause>`, or `<Redirect>` verbs.
      */
-    #[Api('AnnounceUrl', optional: true)]
-    public ?string $announceURL;
+    #[Api(optional: true)]
+    public ?string $AnnounceUrl;
 
     /**
      * The new status of the resource. Specifying `completed` will end the conference and hang up all participants.
      */
-    #[Api('Status', optional: true)]
-    public ?string $status;
+    #[Api(optional: true)]
+    public ?string $Status;
 
     /**
      * `new ConferenceUpdateParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * ConferenceUpdateParams::with(accountSid: ...)
+     * ConferenceUpdateParams::with(account_sid: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -75,21 +78,21 @@ final class ConferenceUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AnnounceMethod|value-of<AnnounceMethod> $announceMethod
+     * @param AnnounceMethod|value-of<AnnounceMethod> $AnnounceMethod
      */
     public static function with(
-        string $accountSid,
-        AnnounceMethod|string|null $announceMethod = null,
-        ?string $announceURL = null,
-        ?string $status = null,
+        string $account_sid,
+        AnnounceMethod|string|null $AnnounceMethod = null,
+        ?string $AnnounceUrl = null,
+        ?string $Status = null,
     ): self {
         $obj = new self;
 
-        $obj->accountSid = $accountSid;
+        $obj->account_sid = $account_sid;
 
-        null !== $announceMethod && $obj['announceMethod'] = $announceMethod;
-        null !== $announceURL && $obj->announceURL = $announceURL;
-        null !== $status && $obj->status = $status;
+        null !== $AnnounceMethod && $obj['AnnounceMethod'] = $AnnounceMethod;
+        null !== $AnnounceUrl && $obj->AnnounceUrl = $AnnounceUrl;
+        null !== $Status && $obj->Status = $Status;
 
         return $obj;
     }
@@ -97,7 +100,7 @@ final class ConferenceUpdateParams implements BaseModel
     public function withAccountSid(string $accountSid): self
     {
         $obj = clone $this;
-        $obj->accountSid = $accountSid;
+        $obj->account_sid = $accountSid;
 
         return $obj;
     }
@@ -108,10 +111,10 @@ final class ConferenceUpdateParams implements BaseModel
      * @param AnnounceMethod|value-of<AnnounceMethod> $announceMethod
      */
     public function withAnnounceMethod(
-        AnnounceMethod|string $announceMethod
+        AnnounceMethod|string $announceMethod,
     ): self {
         $obj = clone $this;
-        $obj['announceMethod'] = $announceMethod;
+        $obj['AnnounceMethod'] = $announceMethod;
 
         return $obj;
     }
@@ -122,7 +125,7 @@ final class ConferenceUpdateParams implements BaseModel
     public function withAnnounceURL(string $announceURL): self
     {
         $obj = clone $this;
-        $obj->announceURL = $announceURL;
+        $obj->AnnounceUrl = $announceURL;
 
         return $obj;
     }
@@ -133,7 +136,7 @@ final class ConferenceUpdateParams implements BaseModel
     public function withStatus(string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status;
+        $obj->Status = $status;
 
         return $obj;
     }

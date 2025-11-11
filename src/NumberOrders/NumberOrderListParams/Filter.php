@@ -13,11 +13,11 @@ use Telnyx\NumberOrders\NumberOrderListParams\Filter\CreatedAt;
  * Consolidated filter parameter (deepObject style). Originally: filter[status], filter[created_at], filter[phone_numbers_count], filter[customer_reference], filter[requirements_met].
  *
  * @phpstan-type FilterShape = array{
- *   createdAt?: CreatedAt,
- *   customerReference?: string,
- *   phoneNumbersCount?: string,
- *   requirementsMet?: bool,
- *   status?: string,
+ *   created_at?: CreatedAt|null,
+ *   customer_reference?: string|null,
+ *   phone_numbers_count?: string|null,
+ *   requirements_met?: bool|null,
+ *   status?: string|null,
  * }
  */
 final class Filter implements BaseModel
@@ -28,26 +28,26 @@ final class Filter implements BaseModel
     /**
      * Filter number orders by date range.
      */
-    #[Api('created_at', optional: true)]
-    public ?CreatedAt $createdAt;
+    #[Api(optional: true)]
+    public ?CreatedAt $created_at;
 
     /**
      * Filter number orders via the customer reference set.
      */
-    #[Api('customer_reference', optional: true)]
-    public ?string $customerReference;
+    #[Api(optional: true)]
+    public ?string $customer_reference;
 
     /**
      * Filter number order with this amount of numbers.
      */
-    #[Api('phone_numbers_count', optional: true)]
-    public ?string $phoneNumbersCount;
+    #[Api(optional: true)]
+    public ?string $phone_numbers_count;
 
     /**
      * Filter number orders by requirements met.
      */
-    #[Api('requirements_met', optional: true)]
-    public ?bool $requirementsMet;
+    #[Api(optional: true)]
+    public ?bool $requirements_met;
 
     /**
      * Filter number orders by status.
@@ -66,18 +66,18 @@ final class Filter implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?CreatedAt $createdAt = null,
-        ?string $customerReference = null,
-        ?string $phoneNumbersCount = null,
-        ?bool $requirementsMet = null,
+        ?CreatedAt $created_at = null,
+        ?string $customer_reference = null,
+        ?string $phone_numbers_count = null,
+        ?bool $requirements_met = null,
         ?string $status = null,
     ): self {
         $obj = new self;
 
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $customerReference && $obj->customerReference = $customerReference;
-        null !== $phoneNumbersCount && $obj->phoneNumbersCount = $phoneNumbersCount;
-        null !== $requirementsMet && $obj->requirementsMet = $requirementsMet;
+        null !== $created_at && $obj->created_at = $created_at;
+        null !== $customer_reference && $obj->customer_reference = $customer_reference;
+        null !== $phone_numbers_count && $obj->phone_numbers_count = $phone_numbers_count;
+        null !== $requirements_met && $obj->requirements_met = $requirements_met;
         null !== $status && $obj->status = $status;
 
         return $obj;
@@ -89,7 +89,7 @@ final class Filter implements BaseModel
     public function withCreatedAt(CreatedAt $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }
@@ -100,7 +100,7 @@ final class Filter implements BaseModel
     public function withCustomerReference(string $customerReference): self
     {
         $obj = clone $this;
-        $obj->customerReference = $customerReference;
+        $obj->customer_reference = $customerReference;
 
         return $obj;
     }
@@ -111,7 +111,7 @@ final class Filter implements BaseModel
     public function withPhoneNumbersCount(string $phoneNumbersCount): self
     {
         $obj = clone $this;
-        $obj->phoneNumbersCount = $phoneNumbersCount;
+        $obj->phone_numbers_count = $phoneNumbersCount;
 
         return $obj;
     }
@@ -122,7 +122,7 @@ final class Filter implements BaseModel
     public function withRequirementsMet(bool $requirementsMet): self
     {
         $obj = clone $this;
-        $obj->requirementsMet = $requirementsMet;
+        $obj->requirements_met = $requirementsMet;
 
         return $obj;
     }

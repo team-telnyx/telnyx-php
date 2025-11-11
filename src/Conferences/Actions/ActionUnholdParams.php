@@ -16,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Conferences\Actions->unhold
  *
  * @phpstan-type ActionUnholdParamsShape = array{
- *   callControlIDs: list<string>, region?: Region|value-of<Region>
+ *   call_control_ids: list<string>, region?: Region|value-of<Region>
  * }
  */
 final class ActionUnholdParams implements BaseModel
@@ -28,10 +28,10 @@ final class ActionUnholdParams implements BaseModel
     /**
      * List of unique identifiers and tokens for controlling the call. Enter each call control ID to be unheld.
      *
-     * @var list<string> $callControlIDs
+     * @var list<string> $call_control_ids
      */
-    #[Api('call_control_ids', list: 'string')]
-    public array $callControlIDs;
+    #[Api(list: 'string')]
+    public array $call_control_ids;
 
     /**
      * Region where the conference data is located. Defaults to the region defined in user's data locality settings (Europe or US).
@@ -46,7 +46,7 @@ final class ActionUnholdParams implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * ActionUnholdParams::with(callControlIDs: ...)
+     * ActionUnholdParams::with(call_control_ids: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -65,16 +65,16 @@ final class ActionUnholdParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $callControlIDs
+     * @param list<string> $call_control_ids
      * @param Region|value-of<Region> $region
      */
     public static function with(
-        array $callControlIDs,
+        array $call_control_ids,
         Region|string|null $region = null
     ): self {
         $obj = new self;
 
-        $obj->callControlIDs = $callControlIDs;
+        $obj->call_control_ids = $call_control_ids;
 
         null !== $region && $obj['region'] = $region;
 
@@ -89,7 +89,7 @@ final class ActionUnholdParams implements BaseModel
     public function withCallControlIDs(array $callControlIDs): self
     {
         $obj = clone $this;
-        $obj->callControlIDs = $callControlIDs;
+        $obj->call_control_ids = $callControlIDs;
 
         return $obj;
     }

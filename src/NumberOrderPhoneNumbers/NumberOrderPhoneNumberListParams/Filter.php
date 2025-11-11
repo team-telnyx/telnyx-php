@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[country_code].
  *
- * @phpstan-type FilterShape = array{countryCode?: string}
+ * @phpstan-type FilterShape = array{country_code?: string|null}
  */
 final class Filter implements BaseModel
 {
@@ -21,8 +21,8 @@ final class Filter implements BaseModel
     /**
      * Country code of the order phone number.
      */
-    #[Api('country_code', optional: true)]
-    public ?string $countryCode;
+    #[Api(optional: true)]
+    public ?string $country_code;
 
     public function __construct()
     {
@@ -34,11 +34,11 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?string $countryCode = null): self
+    public static function with(?string $country_code = null): self
     {
         $obj = new self;
 
-        null !== $countryCode && $obj->countryCode = $countryCode;
+        null !== $country_code && $obj->country_code = $country_code;
 
         return $obj;
     }
@@ -49,7 +49,7 @@ final class Filter implements BaseModel
     public function withCountryCode(string $countryCode): self
     {
         $obj = clone $this;
-        $obj->countryCode = $countryCode;
+        $obj->country_code = $countryCode;
 
         return $obj;
     }

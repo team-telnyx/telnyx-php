@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type TranscriptionSettingsShape = array{
- *   language?: string, model?: string
+ *   language?: string|null, model?: string|null
  * }
  */
 final class TranscriptionSettings implements BaseModel

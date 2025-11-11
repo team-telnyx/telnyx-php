@@ -47,7 +47,7 @@ final class NumberOrderPhoneNumbersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->numberOrderPhoneNumbers->list();
+        $result = $this->client->numberOrderPhoneNumbers->list([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -61,7 +61,7 @@ final class NumberOrderPhoneNumbersTest extends TestCase
 
         $result = $this->client->numberOrderPhoneNumbers->updateRequirementGroup(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+            ['requirement_group_id' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -76,7 +76,7 @@ final class NumberOrderPhoneNumbersTest extends TestCase
 
         $result = $this->client->numberOrderPhoneNumbers->updateRequirementGroup(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+            ['requirement_group_id' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -90,7 +90,8 @@ final class NumberOrderPhoneNumbersTest extends TestCase
         }
 
         $result = $this->client->numberOrderPhoneNumbers->updateRequirements(
-            'number_order_phone_number_id'
+            'number_order_phone_number_id',
+            []
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType

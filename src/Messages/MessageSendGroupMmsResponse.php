@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type MessageSendGroupMmsResponseShape = array{
- *   data?: OutboundMessagePayload
+ *   data?: OutboundMessagePayload|null
  * }
  */
 final class MessageSendGroupMmsResponse implements BaseModel, ResponseConverter

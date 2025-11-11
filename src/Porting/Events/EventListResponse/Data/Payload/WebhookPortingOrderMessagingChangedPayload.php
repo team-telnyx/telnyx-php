@@ -13,10 +13,10 @@ use Telnyx\Porting\Events\EventListResponse\Data\Payload\WebhookPortingOrderMess
  * The webhook payload for the porting_order.messaging_changed event.
  *
  * @phpstan-type WebhookPortingOrderMessagingChangedPayloadShape = array{
- *   id?: string,
- *   customerReference?: string,
- *   messaging?: Messaging,
- *   supportKey?: string,
+ *   id?: string|null,
+ *   customer_reference?: string|null,
+ *   messaging?: Messaging|null,
+ *   support_key?: string|null,
  * }
  */
 final class WebhookPortingOrderMessagingChangedPayload implements BaseModel
@@ -33,8 +33,8 @@ final class WebhookPortingOrderMessagingChangedPayload implements BaseModel
     /**
      * Identifies the customer reference associated with the porting order.
      */
-    #[Api('customer_reference', optional: true)]
-    public ?string $customerReference;
+    #[Api(optional: true)]
+    public ?string $customer_reference;
 
     /**
      * The messaging portability status of the porting order.
@@ -45,8 +45,8 @@ final class WebhookPortingOrderMessagingChangedPayload implements BaseModel
     /**
      * Identifies the support key associated with the porting order.
      */
-    #[Api('support_key', optional: true)]
-    public ?string $supportKey;
+    #[Api(optional: true)]
+    public ?string $support_key;
 
     public function __construct()
     {
@@ -60,16 +60,16 @@ final class WebhookPortingOrderMessagingChangedPayload implements BaseModel
      */
     public static function with(
         ?string $id = null,
-        ?string $customerReference = null,
+        ?string $customer_reference = null,
         ?Messaging $messaging = null,
-        ?string $supportKey = null,
+        ?string $support_key = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj->id = $id;
-        null !== $customerReference && $obj->customerReference = $customerReference;
+        null !== $customer_reference && $obj->customer_reference = $customer_reference;
         null !== $messaging && $obj->messaging = $messaging;
-        null !== $supportKey && $obj->supportKey = $supportKey;
+        null !== $support_key && $obj->support_key = $support_key;
 
         return $obj;
     }
@@ -91,7 +91,7 @@ final class WebhookPortingOrderMessagingChangedPayload implements BaseModel
     public function withCustomerReference(string $customerReference): self
     {
         $obj = clone $this;
-        $obj->customerReference = $customerReference;
+        $obj->customer_reference = $customerReference;
 
         return $obj;
     }
@@ -113,7 +113,7 @@ final class WebhookPortingOrderMessagingChangedPayload implements BaseModel
     public function withSupportKey(string $supportKey): self
     {
         $obj = clone $this;
-        $obj->supportKey = $supportKey;
+        $obj->support_key = $supportKey;
 
         return $obj;
     }

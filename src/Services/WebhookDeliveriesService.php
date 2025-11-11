@@ -10,11 +10,7 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\WebhookDeliveriesContract;
 use Telnyx\WebhookDeliveries\WebhookDeliveryGetResponse;
 use Telnyx\WebhookDeliveries\WebhookDeliveryListParams;
-use Telnyx\WebhookDeliveries\WebhookDeliveryListParams\Filter;
-use Telnyx\WebhookDeliveries\WebhookDeliveryListParams\Page;
 use Telnyx\WebhookDeliveries\WebhookDeliveryListResponse;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class WebhookDeliveriesService implements WebhookDeliveriesContract
 {
@@ -48,35 +44,27 @@ final class WebhookDeliveriesService implements WebhookDeliveriesContract
      *
      * Lists webhook_deliveries for the authenticated user
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[status][eq], filter[event_type], filter[webhook][contains], filter[attempts][contains], filter[started_at][gte], filter[started_at][lte], filter[finished_at][gte], filter[finished_at][lte]
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param array{
+     *   filter?: array{
+     *     attempts?: array{contains?: string},
+     *     event_type?: string,
+     *     finished_at?: array{gte?: string, lte?: string},
+     *     started_at?: array{gte?: string, lte?: string},
+     *     status?: array{eq?: "delivered"|"failed"},
+     *     webhook?: array{contains?: string},
+     *   },
+     *   page?: array{number?: int, size?: int},
+     * }|WebhookDeliveryListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): WebhookDeliveryListResponse {
-        $params = ['filter' => $filter, 'page' => $page];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|WebhookDeliveryListParams $params,
+        ?RequestOptions $requestOptions = null,
     ): WebhookDeliveryListResponse {
         [$parsed, $options] = WebhookDeliveryListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

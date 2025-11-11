@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PortingOrders\Actions\ActionShareResponse\Data;
 
 /**
- * @phpstan-type ActionShareResponseShape = array{data?: Data}
+ * @phpstan-type ActionShareResponseShape = array{data?: Data|null}
  */
 final class ActionShareResponse implements BaseModel, ResponseConverter
 {

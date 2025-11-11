@@ -12,7 +12,7 @@ use Telnyx\PhoneNumbers\Jobs\JobListParams\Filter\Type;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[type].
  *
- * @phpstan-type FilterShape = array{type?: value-of<Type>}
+ * @phpstan-type FilterShape = array{type?: value-of<Type>|null}
  */
 final class Filter implements BaseModel
 {

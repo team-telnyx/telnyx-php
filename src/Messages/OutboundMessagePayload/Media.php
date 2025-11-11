@@ -10,7 +10,10 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type MediaShape = array{
- *   contentType?: string|null, sha256?: string|null, size?: int|null, url?: string
+ *   content_type?: string|null,
+ *   sha256?: string|null,
+ *   size?: int|null,
+ *   url?: string|null,
  * }
  */
 final class Media implements BaseModel
@@ -21,8 +24,8 @@ final class Media implements BaseModel
     /**
      * The MIME type of the requested media.
      */
-    #[Api('content_type', nullable: true, optional: true)]
-    public ?string $contentType;
+    #[Api(nullable: true, optional: true)]
+    public ?string $content_type;
 
     /**
      * The SHA256 hash of the requested media.
@@ -53,14 +56,14 @@ final class Media implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $contentType = null,
+        ?string $content_type = null,
         ?string $sha256 = null,
         ?int $size = null,
         ?string $url = null,
     ): self {
         $obj = new self;
 
-        null !== $contentType && $obj->contentType = $contentType;
+        null !== $content_type && $obj->content_type = $content_type;
         null !== $sha256 && $obj->sha256 = $sha256;
         null !== $size && $obj->size = $size;
         null !== $url && $obj->url = $url;
@@ -74,7 +77,7 @@ final class Media implements BaseModel
     public function withContentType(?string $contentType): self
     {
         $obj = clone $this;
-        $obj->contentType = $contentType;
+        $obj->content_type = $contentType;
 
         return $obj;
     }

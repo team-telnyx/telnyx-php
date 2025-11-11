@@ -15,11 +15,11 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\PhoneNumbers->update
  *
  * @phpstan-type PhoneNumberUpdateParamsShape = array{
- *   billingGroupID?: string,
- *   connectionID?: string,
- *   customerReference?: string,
- *   externalPin?: string,
- *   hdVoiceEnabled?: bool,
+ *   billing_group_id?: string,
+ *   connection_id?: string,
+ *   customer_reference?: string,
+ *   external_pin?: string,
+ *   hd_voice_enabled?: bool,
  *   tags?: list<string>,
  * }
  */
@@ -32,32 +32,32 @@ final class PhoneNumberUpdateParams implements BaseModel
     /**
      * Identifies the billing group associated with the phone number.
      */
-    #[Api('billing_group_id', optional: true)]
-    public ?string $billingGroupID;
+    #[Api(optional: true)]
+    public ?string $billing_group_id;
 
     /**
      * Identifies the connection associated with the phone number.
      */
-    #[Api('connection_id', optional: true)]
-    public ?string $connectionID;
+    #[Api(optional: true)]
+    public ?string $connection_id;
 
     /**
      * A customer reference string for customer look ups.
      */
-    #[Api('customer_reference', optional: true)]
-    public ?string $customerReference;
+    #[Api(optional: true)]
+    public ?string $customer_reference;
 
     /**
      * If someone attempts to port your phone number away from Telnyx and your phone number has an external PIN set, we will attempt to verify that you provided the correct external PIN to the winning carrier. Note that not all carriers cooperate with this security mechanism.
      */
-    #[Api('external_pin', optional: true)]
-    public ?string $externalPin;
+    #[Api(optional: true)]
+    public ?string $external_pin;
 
     /**
      * Indicates whether HD voice is enabled for this number.
      */
-    #[Api('hd_voice_enabled', optional: true)]
-    public ?bool $hdVoiceEnabled;
+    #[Api(optional: true)]
+    public ?bool $hd_voice_enabled;
 
     /**
      * A list of user-assigned tags to help organize phone numbers.
@@ -80,20 +80,20 @@ final class PhoneNumberUpdateParams implements BaseModel
      * @param list<string> $tags
      */
     public static function with(
-        ?string $billingGroupID = null,
-        ?string $connectionID = null,
-        ?string $customerReference = null,
-        ?string $externalPin = null,
-        ?bool $hdVoiceEnabled = null,
+        ?string $billing_group_id = null,
+        ?string $connection_id = null,
+        ?string $customer_reference = null,
+        ?string $external_pin = null,
+        ?bool $hd_voice_enabled = null,
         ?array $tags = null,
     ): self {
         $obj = new self;
 
-        null !== $billingGroupID && $obj->billingGroupID = $billingGroupID;
-        null !== $connectionID && $obj->connectionID = $connectionID;
-        null !== $customerReference && $obj->customerReference = $customerReference;
-        null !== $externalPin && $obj->externalPin = $externalPin;
-        null !== $hdVoiceEnabled && $obj->hdVoiceEnabled = $hdVoiceEnabled;
+        null !== $billing_group_id && $obj->billing_group_id = $billing_group_id;
+        null !== $connection_id && $obj->connection_id = $connection_id;
+        null !== $customer_reference && $obj->customer_reference = $customer_reference;
+        null !== $external_pin && $obj->external_pin = $external_pin;
+        null !== $hd_voice_enabled && $obj->hd_voice_enabled = $hd_voice_enabled;
         null !== $tags && $obj->tags = $tags;
 
         return $obj;
@@ -105,7 +105,7 @@ final class PhoneNumberUpdateParams implements BaseModel
     public function withBillingGroupID(string $billingGroupID): self
     {
         $obj = clone $this;
-        $obj->billingGroupID = $billingGroupID;
+        $obj->billing_group_id = $billingGroupID;
 
         return $obj;
     }
@@ -116,7 +116,7 @@ final class PhoneNumberUpdateParams implements BaseModel
     public function withConnectionID(string $connectionID): self
     {
         $obj = clone $this;
-        $obj->connectionID = $connectionID;
+        $obj->connection_id = $connectionID;
 
         return $obj;
     }
@@ -127,7 +127,7 @@ final class PhoneNumberUpdateParams implements BaseModel
     public function withCustomerReference(string $customerReference): self
     {
         $obj = clone $this;
-        $obj->customerReference = $customerReference;
+        $obj->customer_reference = $customerReference;
 
         return $obj;
     }
@@ -138,7 +138,7 @@ final class PhoneNumberUpdateParams implements BaseModel
     public function withExternalPin(string $externalPin): self
     {
         $obj = clone $this;
-        $obj->externalPin = $externalPin;
+        $obj->external_pin = $externalPin;
 
         return $obj;
     }
@@ -149,7 +149,7 @@ final class PhoneNumberUpdateParams implements BaseModel
     public function withHDVoiceEnabled(bool $hdVoiceEnabled): self
     {
         $obj = clone $this;
-        $obj->hdVoiceEnabled = $hdVoiceEnabled;
+        $obj->hd_voice_enabled = $hdVoiceEnabled;
 
         return $obj;
     }

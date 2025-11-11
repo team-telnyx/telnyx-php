@@ -13,7 +13,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type AIGetModelsResponseShape = array{
- *   data: list<Data>, object1?: string
+ *   data: list<Data>, object1?: string|null
  * }
  */
 final class AIGetModelsResponse implements BaseModel, ResponseConverter

@@ -11,7 +11,7 @@ use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderValidateCodesRe
 
 /**
  * @phpstan-type DataShape = array{
- *   orderID: string, phoneNumbers: list<PhoneNumber>
+ *   order_id: string, phone_numbers: list<PhoneNumber>
  * }
  */
 final class Data implements BaseModel
@@ -19,19 +19,19 @@ final class Data implements BaseModel
     /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Api('order_id')]
-    public string $orderID;
+    #[Api]
+    public string $order_id;
 
-    /** @var list<PhoneNumber> $phoneNumbers */
-    #[Api('phone_numbers', list: PhoneNumber::class)]
-    public array $phoneNumbers;
+    /** @var list<PhoneNumber> $phone_numbers */
+    #[Api(list: PhoneNumber::class)]
+    public array $phone_numbers;
 
     /**
      * `new Data()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Data::with(orderID: ..., phoneNumbers: ...)
+     * Data::with(order_id: ..., phone_numbers: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -50,14 +50,14 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<PhoneNumber> $phoneNumbers
+     * @param list<PhoneNumber> $phone_numbers
      */
-    public static function with(string $orderID, array $phoneNumbers): self
+    public static function with(string $order_id, array $phone_numbers): self
     {
         $obj = new self;
 
-        $obj->orderID = $orderID;
-        $obj->phoneNumbers = $phoneNumbers;
+        $obj->order_id = $order_id;
+        $obj->phone_numbers = $phone_numbers;
 
         return $obj;
     }
@@ -65,7 +65,7 @@ final class Data implements BaseModel
     public function withOrderID(string $orderID): self
     {
         $obj = clone $this;
-        $obj->orderID = $orderID;
+        $obj->order_id = $orderID;
 
         return $obj;
     }
@@ -76,7 +76,7 @@ final class Data implements BaseModel
     public function withPhoneNumbers(array $phoneNumbers): self
     {
         $obj = clone $this;
-        $obj->phoneNumbers = $phoneNumbers;
+        $obj->phone_numbers = $phoneNumbers;
 
         return $obj;
     }

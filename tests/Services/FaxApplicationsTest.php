@@ -33,10 +33,10 @@ final class FaxApplicationsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->faxApplications->create(
-            applicationName: 'fax-router',
-            webhookEventURL: 'https://example.com'
-        );
+        $result = $this->client->faxApplications->create([
+            'application_name' => 'fax-router',
+            'webhook_event_url' => 'https://example.com',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -48,10 +48,10 @@ final class FaxApplicationsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->faxApplications->create(
-            applicationName: 'fax-router',
-            webhookEventURL: 'https://example.com'
-        );
+        $result = $this->client->faxApplications->create([
+            'application_name' => 'fax-router',
+            'webhook_event_url' => 'https://example.com',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -77,8 +77,10 @@ final class FaxApplicationsTest extends TestCase
 
         $result = $this->client->faxApplications->update(
             '1293384261075731499',
-            applicationName: 'fax-router',
-            webhookEventURL: 'https://example.com',
+            [
+                'application_name' => 'fax-router',
+                'webhook_event_url' => 'https://example.com',
+            ],
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -93,8 +95,10 @@ final class FaxApplicationsTest extends TestCase
 
         $result = $this->client->faxApplications->update(
             '1293384261075731499',
-            applicationName: 'fax-router',
-            webhookEventURL: 'https://example.com',
+            [
+                'application_name' => 'fax-router',
+                'webhook_event_url' => 'https://example.com',
+            ],
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -107,7 +111,7 @@ final class FaxApplicationsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->faxApplications->list();
+        $result = $this->client->faxApplications->list([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

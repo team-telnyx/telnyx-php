@@ -7,33 +7,19 @@ namespace Telnyx\ServiceContracts;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\Seti\SetiGetBlackBoxTestResultsResponse;
-use Telnyx\Seti\SetiRetrieveBlackBoxTestResultsParams\Filter;
-
-use const Telnyx\Core\OMIT as omit;
+use Telnyx\Seti\SetiRetrieveBlackBoxTestResultsParams;
 
 interface SetiContract
 {
     /**
      * @api
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[product]
+     * @param array<mixed>|SetiRetrieveBlackBoxTestResultsParams $params
      *
      * @throws APIException
      */
     public function retrieveBlackBoxTestResults(
-        $filter = omit,
-        ?RequestOptions $requestOptions = null
-    ): SetiGetBlackBoxTestResultsResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function retrieveBlackBoxTestResultsRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|SetiRetrieveBlackBoxTestResultsParams $params,
+        ?RequestOptions $requestOptions = null,
     ): SetiGetBlackBoxTestResultsResponse;
 }

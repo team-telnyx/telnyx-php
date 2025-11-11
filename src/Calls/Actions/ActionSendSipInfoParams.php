@@ -19,7 +19,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Calls\Actions->sendSipInfo
  *
  * @phpstan-type ActionSendSipInfoParamsShape = array{
- *   body: string, contentType: string, clientState?: string, commandID?: string
+ *   body: string, content_type: string, client_state?: string, command_id?: string
  * }
  */
 final class ActionSendSipInfoParams implements BaseModel
@@ -37,27 +37,27 @@ final class ActionSendSipInfoParams implements BaseModel
     /**
      * Content type of the INFO body. Must be MIME type compliant. There is a 1,400 bytes limit.
      */
-    #[Api('content_type')]
-    public string $contentType;
+    #[Api]
+    public string $content_type;
 
     /**
      * Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      */
-    #[Api('client_state', optional: true)]
-    public ?string $clientState;
+    #[Api(optional: true)]
+    public ?string $client_state;
 
     /**
      * Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      */
-    #[Api('command_id', optional: true)]
-    public ?string $commandID;
+    #[Api(optional: true)]
+    public ?string $command_id;
 
     /**
      * `new ActionSendSipInfoParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * ActionSendSipInfoParams::with(body: ..., contentType: ...)
+     * ActionSendSipInfoParams::with(body: ..., content_type: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -78,17 +78,17 @@ final class ActionSendSipInfoParams implements BaseModel
      */
     public static function with(
         string $body,
-        string $contentType,
-        ?string $clientState = null,
-        ?string $commandID = null,
+        string $content_type,
+        ?string $client_state = null,
+        ?string $command_id = null,
     ): self {
         $obj = new self;
 
         $obj->body = $body;
-        $obj->contentType = $contentType;
+        $obj->content_type = $content_type;
 
-        null !== $clientState && $obj->clientState = $clientState;
-        null !== $commandID && $obj->commandID = $commandID;
+        null !== $client_state && $obj->client_state = $client_state;
+        null !== $command_id && $obj->command_id = $command_id;
 
         return $obj;
     }
@@ -110,7 +110,7 @@ final class ActionSendSipInfoParams implements BaseModel
     public function withContentType(string $contentType): self
     {
         $obj = clone $this;
-        $obj->contentType = $contentType;
+        $obj->content_type = $contentType;
 
         return $obj;
     }
@@ -121,7 +121,7 @@ final class ActionSendSipInfoParams implements BaseModel
     public function withClientState(string $clientState): self
     {
         $obj = clone $this;
-        $obj->clientState = $clientState;
+        $obj->client_state = $clientState;
 
         return $obj;
     }
@@ -132,7 +132,7 @@ final class ActionSendSipInfoParams implements BaseModel
     public function withCommandID(string $commandID): self
     {
         $obj = clone $this;
-        $obj->commandID = $commandID;
+        $obj->command_id = $commandID;
 
         return $obj;
     }

@@ -24,10 +24,10 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Calls\Actions->startForking
  *
  * @phpstan-type ActionStartForkingParamsShape = array{
- *   clientState?: string,
- *   commandID?: string,
+ *   client_state?: string,
+ *   command_id?: string,
  *   rx?: string,
- *   streamType?: StreamType|value-of<StreamType>,
+ *   stream_type?: StreamType|value-of<StreamType>,
  *   tx?: string,
  * }
  */
@@ -40,14 +40,14 @@ final class ActionStartForkingParams implements BaseModel
     /**
      * Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      */
-    #[Api('client_state', optional: true)]
-    public ?string $clientState;
+    #[Api(optional: true)]
+    public ?string $client_state;
 
     /**
      * Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      */
-    #[Api('command_id', optional: true)]
-    public ?string $commandID;
+    #[Api(optional: true)]
+    public ?string $command_id;
 
     /**
      * The network target, <udp:ip_address:port>, where the call's incoming RTP media packets should be forwarded.
@@ -58,10 +58,10 @@ final class ActionStartForkingParams implements BaseModel
     /**
      * Optionally specify a media type to stream. If `decrypted` selected, Telnyx will decrypt incoming SIP media before forking to the target. `rx` and `tx` are required fields if `decrypted` selected.
      *
-     * @var value-of<StreamType>|null $streamType
+     * @var value-of<StreamType>|null $stream_type
      */
-    #[Api('stream_type', enum: StreamType::class, optional: true)]
-    public ?string $streamType;
+    #[Api(enum: StreamType::class, optional: true)]
+    public ?string $stream_type;
 
     /**
      * The network target, <udp:ip_address:port>, where the call's outgoing RTP media packets should be forwarded.
@@ -79,21 +79,21 @@ final class ActionStartForkingParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param StreamType|value-of<StreamType> $streamType
+     * @param StreamType|value-of<StreamType> $stream_type
      */
     public static function with(
-        ?string $clientState = null,
-        ?string $commandID = null,
+        ?string $client_state = null,
+        ?string $command_id = null,
         ?string $rx = null,
-        StreamType|string|null $streamType = null,
+        StreamType|string|null $stream_type = null,
         ?string $tx = null,
     ): self {
         $obj = new self;
 
-        null !== $clientState && $obj->clientState = $clientState;
-        null !== $commandID && $obj->commandID = $commandID;
+        null !== $client_state && $obj->client_state = $client_state;
+        null !== $command_id && $obj->command_id = $command_id;
         null !== $rx && $obj->rx = $rx;
-        null !== $streamType && $obj['streamType'] = $streamType;
+        null !== $stream_type && $obj['stream_type'] = $stream_type;
         null !== $tx && $obj->tx = $tx;
 
         return $obj;
@@ -105,7 +105,7 @@ final class ActionStartForkingParams implements BaseModel
     public function withClientState(string $clientState): self
     {
         $obj = clone $this;
-        $obj->clientState = $clientState;
+        $obj->client_state = $clientState;
 
         return $obj;
     }
@@ -116,7 +116,7 @@ final class ActionStartForkingParams implements BaseModel
     public function withCommandID(string $commandID): self
     {
         $obj = clone $this;
-        $obj->commandID = $commandID;
+        $obj->command_id = $commandID;
 
         return $obj;
     }
@@ -140,7 +140,7 @@ final class ActionStartForkingParams implements BaseModel
     public function withStreamType(StreamType|string $streamType): self
     {
         $obj = clone $this;
-        $obj['streamType'] = $streamType;
+        $obj['stream_type'] = $streamType;
 
         return $obj;
     }

@@ -13,7 +13,7 @@ use Telnyx\Metadata;
 
 /**
  * @phpstan-type DynamicEmergencyAddressListResponseShape = array{
- *   data?: list<DynamicEmergencyAddress>, meta?: Metadata
+ *   data?: list<DynamicEmergencyAddress>|null, meta?: Metadata|null
  * }
  */
 final class DynamicEmergencyAddressListResponse implements BaseModel, ResponseConverter

@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\OAuth\OAuthGetResponse\Data;
 
 /**
- * @phpstan-type OAuthGetResponseShape = array{data?: Data}
+ * @phpstan-type OAuthGetResponseShape = array{data?: Data|null}
  */
 final class OAuthGetResponse implements BaseModel, ResponseConverter
 {

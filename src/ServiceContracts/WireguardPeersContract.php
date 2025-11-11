@@ -6,42 +6,27 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
+use Telnyx\WireguardPeers\WireguardPeerCreateParams;
 use Telnyx\WireguardPeers\WireguardPeerDeleteResponse;
 use Telnyx\WireguardPeers\WireguardPeerGetResponse;
-use Telnyx\WireguardPeers\WireguardPeerListParams\Filter;
-use Telnyx\WireguardPeers\WireguardPeerListParams\Page;
+use Telnyx\WireguardPeers\WireguardPeerListParams;
 use Telnyx\WireguardPeers\WireguardPeerListResponse;
 use Telnyx\WireguardPeers\WireguardPeerNewResponse;
+use Telnyx\WireguardPeers\WireguardPeerUpdateParams;
 use Telnyx\WireguardPeers\WireguardPeerUpdateResponse;
-
-use const Telnyx\Core\OMIT as omit;
 
 interface WireguardPeersContract
 {
     /**
      * @api
      *
-     * @param string $wireguardInterfaceID the id of the wireguard interface associated with the peer
-     * @param string $publicKey The WireGuard `PublicKey`.<br /><br />If you do not provide a Public Key, a new Public and Private key pair will be generated for you.
+     * @param array<mixed>|WireguardPeerCreateParams $params
      *
      * @throws APIException
      */
     public function create(
-        $wireguardInterfaceID,
-        $publicKey = omit,
+        array|WireguardPeerCreateParams $params,
         ?RequestOptions $requestOptions = null,
-    ): WireguardPeerNewResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): WireguardPeerNewResponse;
 
     /**
@@ -57,53 +42,26 @@ interface WireguardPeersContract
     /**
      * @api
      *
-     * @param string $publicKey The WireGuard `PublicKey`.<br /><br />If you do not provide a Public Key, a new Public and Private key pair will be generated for you.
+     * @param array<mixed>|WireguardPeerUpdateParams $params
      *
      * @throws APIException
      */
     public function update(
         string $id,
-        $publicKey = omit,
-        ?RequestOptions $requestOptions = null
+        array|WireguardPeerUpdateParams $params,
+        ?RequestOptions $requestOptions = null,
     ): WireguardPeerUpdateResponse;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): WireguardPeerUpdateResponse;
-
-    /**
-     * @api
-     *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[wireguard_interface_id]
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param array<mixed>|WireguardPeerListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): WireguardPeerListResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|WireguardPeerListParams $params,
+        ?RequestOptions $requestOptions = null,
     ): WireguardPeerListResponse;
 
     /**

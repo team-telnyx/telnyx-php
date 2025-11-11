@@ -35,7 +35,7 @@ final class ToolsTest extends TestCase
 
         $result = $this->client->ai->assistants->tools->test(
             'tool_id',
-            assistantID: 'assistant_id'
+            ['assistant_id' => 'assistant_id']
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -50,7 +50,7 @@ final class ToolsTest extends TestCase
 
         $result = $this->client->ai->assistants->tools->test(
             'tool_id',
-            assistantID: 'assistant_id'
+            ['assistant_id' => 'assistant_id']
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType

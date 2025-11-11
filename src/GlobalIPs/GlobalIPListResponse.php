@@ -14,7 +14,7 @@ use Telnyx\GlobalIPs\GlobalIPListResponse\Data;
 
 /**
  * @phpstan-type GlobalIPListResponseShape = array{
- *   data?: list<Data>, meta?: PaginationMeta
+ *   data?: list<Data>|null, meta?: PaginationMeta|null
  * }
  */
 final class GlobalIPListResponse implements BaseModel, ResponseConverter

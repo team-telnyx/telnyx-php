@@ -5,67 +5,35 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\PortingOrders;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationCreateParams\PhoneNumberConfiguration;
-use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListParams\Filter;
-use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListParams\Page;
-use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListParams\Sort;
+use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationCreateParams;
+use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListParams;
 use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListResponse;
 use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationNewResponse;
 use Telnyx\RequestOptions;
-
-use const Telnyx\Core\OMIT as omit;
 
 interface PhoneNumberConfigurationsContract
 {
     /**
      * @api
      *
-     * @param list<PhoneNumberConfiguration> $phoneNumberConfigurations
+     * @param array<mixed>|PhoneNumberConfigurationCreateParams $params
      *
      * @throws APIException
      */
     public function create(
-        $phoneNumberConfigurations = omit,
+        array|PhoneNumberConfigurationCreateParams $params,
         ?RequestOptions $requestOptions = null,
     ): PhoneNumberConfigurationNewResponse;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): PhoneNumberConfigurationNewResponse;
-
-    /**
-     * @api
-     *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[porting_order.status][in][], filter[porting_phone_number][in][], filter[user_bundle_id][in][]
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
-     * @param Sort $sort Consolidated sort parameter (deepObject style). Originally: sort[value]
+     * @param array<mixed>|PhoneNumberConfigurationListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
-        $sort = omit,
+        array|PhoneNumberConfigurationListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): PhoneNumberConfigurationListResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): PhoneNumberConfigurationListResponse;
 }

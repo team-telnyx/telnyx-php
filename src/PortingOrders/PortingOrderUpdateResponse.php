@@ -13,7 +13,7 @@ use Telnyx\PortingOrders\PortingOrderUpdateResponse\Meta;
 
 /**
  * @phpstan-type PortingOrderUpdateResponseShape = array{
- *   data?: PortingOrder, meta?: Meta
+ *   data?: PortingOrder|null, meta?: Meta|null
  * }
  */
 final class PortingOrderUpdateResponse implements BaseModel, ResponseConverter

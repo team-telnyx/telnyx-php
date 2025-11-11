@@ -35,8 +35,10 @@ final class ActionsTest extends TestCase
 
         $result = $this->client->conferences->actions->update(
             'id',
-            callControlID: 'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
-            supervisorRole: 'whisper',
+            [
+                'call_control_id' => 'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
+                'supervisor_role' => 'whisper',
+            ],
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -51,8 +53,10 @@ final class ActionsTest extends TestCase
 
         $result = $this->client->conferences->actions->update(
             'id',
-            callControlID: 'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
-            supervisorRole: 'whisper',
+            [
+                'call_control_id' => 'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
+                'supervisor_role' => 'whisper',
+            ],
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -65,7 +69,7 @@ final class ActionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->conferences->actions->hold('id');
+        $result = $this->client->conferences->actions->hold('id', []);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -79,7 +83,9 @@ final class ActionsTest extends TestCase
 
         $result = $this->client->conferences->actions->join(
             'id',
-            callControlID: 'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
+            [
+                'call_control_id' => 'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
+            ],
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -94,7 +100,9 @@ final class ActionsTest extends TestCase
 
         $result = $this->client->conferences->actions->join(
             'id',
-            callControlID: 'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
+            [
+                'call_control_id' => 'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
+            ],
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -109,7 +117,7 @@ final class ActionsTest extends TestCase
 
         $result = $this->client->conferences->actions->leave(
             'id',
-            callControlID: 'c46e06d7-b78f-4b13-96b6-c576af9640ff'
+            ['call_control_id' => 'c46e06d7-b78f-4b13-96b6-c576af9640ff']
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -124,7 +132,7 @@ final class ActionsTest extends TestCase
 
         $result = $this->client->conferences->actions->leave(
             'id',
-            callControlID: 'c46e06d7-b78f-4b13-96b6-c576af9640ff'
+            ['call_control_id' => 'c46e06d7-b78f-4b13-96b6-c576af9640ff']
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -137,7 +145,7 @@ final class ActionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->conferences->actions->mute('id');
+        $result = $this->client->conferences->actions->mute('id', []);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -149,7 +157,7 @@ final class ActionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->conferences->actions->play('id');
+        $result = $this->client->conferences->actions->play('id', []);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -161,7 +169,7 @@ final class ActionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->conferences->actions->recordPause('id');
+        $result = $this->client->conferences->actions->recordPause('id', []);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -173,7 +181,7 @@ final class ActionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->conferences->actions->recordResume('id');
+        $result = $this->client->conferences->actions->recordResume('id', []);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -187,7 +195,7 @@ final class ActionsTest extends TestCase
 
         $result = $this->client->conferences->actions->recordStart(
             'id',
-            format: 'wav'
+            ['format' => 'wav']
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -202,7 +210,7 @@ final class ActionsTest extends TestCase
 
         $result = $this->client->conferences->actions->recordStart(
             'id',
-            format: 'wav'
+            ['format' => 'wav']
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -215,7 +223,7 @@ final class ActionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->conferences->actions->recordStop('id');
+        $result = $this->client->conferences->actions->recordStop('id', []);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -229,8 +237,7 @@ final class ActionsTest extends TestCase
 
         $result = $this->client->conferences->actions->speak(
             'id',
-            payload: 'Say this to participants',
-            voice: 'female'
+            ['payload' => 'Say this to participants', 'voice' => 'female']
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -245,8 +252,7 @@ final class ActionsTest extends TestCase
 
         $result = $this->client->conferences->actions->speak(
             'id',
-            payload: 'Say this to participants',
-            voice: 'female'
+            ['payload' => 'Say this to participants', 'voice' => 'female']
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -259,7 +265,7 @@ final class ActionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->conferences->actions->stop('id');
+        $result = $this->client->conferences->actions->stop('id', []);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -273,8 +279,10 @@ final class ActionsTest extends TestCase
 
         $result = $this->client->conferences->actions->unhold(
             'id',
-            callControlIDs: [
-                'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
+            [
+                'call_control_ids' => [
+                    'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
+                ],
             ],
         );
 
@@ -290,8 +298,10 @@ final class ActionsTest extends TestCase
 
         $result = $this->client->conferences->actions->unhold(
             'id',
-            callControlIDs: [
-                'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
+            [
+                'call_control_ids' => [
+                    'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
+                ],
             ],
         );
 
@@ -305,7 +315,7 @@ final class ActionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->conferences->actions->unmute('id');
+        $result = $this->client->conferences->actions->unmute('id', []);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

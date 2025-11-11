@@ -13,7 +13,7 @@ use Telnyx\PhoneNumberWithMessagingSettings;
 
 /**
  * @phpstan-type MessagingUpdateResponseShape = array{
- *   data?: PhoneNumberWithMessagingSettings
+ *   data?: PhoneNumberWithMessagingSettings|null
  * }
  */
 final class MessagingUpdateResponse implements BaseModel, ResponseConverter

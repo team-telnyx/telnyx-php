@@ -9,10 +9,7 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\Accounts\Calls\StreamsContract;
 use Telnyx\Texml\Accounts\Calls\Streams\StreamStreamingSidJsonParams;
-use Telnyx\Texml\Accounts\Calls\Streams\StreamStreamingSidJsonParams\Status;
 use Telnyx\Texml\Accounts\Calls\Streams\StreamStreamingSidJsonResponse;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class StreamsService implements StreamsContract
 {
@@ -26,46 +23,25 @@ final class StreamsService implements StreamsContract
      *
      * Updates streaming resource for particular call.
      *
-     * @param string $accountSid
-     * @param string $callSid
-     * @param Status|value-of<Status> $status the status of the Stream you wish to update
+     * @param array{
+     *   account_sid: string, call_sid: string, Status?: "stopped"
+     * }|StreamStreamingSidJsonParams $params
      *
      * @throws APIException
      */
     public function streamingSidJson(
         string $streamingSid,
-        $accountSid,
-        $callSid,
-        $status = omit,
+        array|StreamStreamingSidJsonParams $params,
         ?RequestOptions $requestOptions = null,
-    ): StreamStreamingSidJsonResponse {
-        $params = [
-            'accountSid' => $accountSid, 'callSid' => $callSid, 'status' => $status,
-        ];
-
-        return $this->streamingSidJsonRaw($streamingSid, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function streamingSidJsonRaw(
-        string $streamingSid,
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): StreamStreamingSidJsonResponse {
         [$parsed, $options] = StreamStreamingSidJsonParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
-        $accountSid = $parsed['accountSid'];
-        unset($parsed['accountSid']);
-        $callSid = $parsed['callSid'];
-        unset($parsed['callSid']);
+        $accountSid = $parsed['account_sid'];
+        unset($parsed['account_sid']);
+        $callSid = $parsed['call_sid'];
+        unset($parsed['call_sid']);
 
         // @phpstan-ignore-next-line;
         return $this->client->request(
@@ -79,7 +55,7 @@ final class StreamsService implements StreamsContract
             headers: ['Content-Type' => 'application/x-www-form-urlencoded'],
             body: (object) array_diff_key(
                 $parsed,
-                array_flip(['accountSid', 'callSid'])
+                array_flip(['account_sid', 'call_sid'])
             ),
             options: $options,
             convert: StreamStreamingSidJsonResponse::class,

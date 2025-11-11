@@ -14,9 +14,9 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  * Response model for canary deploy operations.
  *
  * @phpstan-type CanaryDeployResponseShape = array{
- *   assistantID: string,
- *   createdAt: \DateTimeInterface,
- *   updatedAt: \DateTimeInterface,
+ *   assistant_id: string,
+ *   created_at: \DateTimeInterface,
+ *   updated_at: \DateTimeInterface,
  *   versions: list<VersionConfig>,
  * }
  */
@@ -27,14 +27,14 @@ final class CanaryDeployResponse implements BaseModel, ResponseConverter
 
     use SdkResponse;
 
-    #[Api('assistant_id')]
-    public string $assistantID;
+    #[Api]
+    public string $assistant_id;
 
-    #[Api('created_at')]
-    public \DateTimeInterface $createdAt;
+    #[Api]
+    public \DateTimeInterface $created_at;
 
-    #[Api('updated_at')]
-    public \DateTimeInterface $updatedAt;
+    #[Api]
+    public \DateTimeInterface $updated_at;
 
     /** @var list<VersionConfig> $versions */
     #[Api(list: VersionConfig::class)]
@@ -46,7 +46,7 @@ final class CanaryDeployResponse implements BaseModel, ResponseConverter
      * To enforce required parameters use
      * ```
      * CanaryDeployResponse::with(
-     *   assistantID: ..., createdAt: ..., updatedAt: ..., versions: ...
+     *   assistant_id: ..., created_at: ..., updated_at: ..., versions: ...
      * )
      * ```
      *
@@ -73,16 +73,16 @@ final class CanaryDeployResponse implements BaseModel, ResponseConverter
      * @param list<VersionConfig> $versions
      */
     public static function with(
-        string $assistantID,
-        \DateTimeInterface $createdAt,
-        \DateTimeInterface $updatedAt,
+        string $assistant_id,
+        \DateTimeInterface $created_at,
+        \DateTimeInterface $updated_at,
         array $versions,
     ): self {
         $obj = new self;
 
-        $obj->assistantID = $assistantID;
-        $obj->createdAt = $createdAt;
-        $obj->updatedAt = $updatedAt;
+        $obj->assistant_id = $assistant_id;
+        $obj->created_at = $created_at;
+        $obj->updated_at = $updated_at;
         $obj->versions = $versions;
 
         return $obj;
@@ -91,7 +91,7 @@ final class CanaryDeployResponse implements BaseModel, ResponseConverter
     public function withAssistantID(string $assistantID): self
     {
         $obj = clone $this;
-        $obj->assistantID = $assistantID;
+        $obj->assistant_id = $assistantID;
 
         return $obj;
     }
@@ -99,7 +99,7 @@ final class CanaryDeployResponse implements BaseModel, ResponseConverter
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }
@@ -107,7 +107,7 @@ final class CanaryDeployResponse implements BaseModel, ResponseConverter
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $obj->updated_at = $updatedAt;
 
         return $obj;
     }

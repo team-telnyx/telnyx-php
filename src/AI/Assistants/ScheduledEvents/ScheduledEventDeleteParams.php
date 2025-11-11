@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\AI\Assistants\ScheduledEvents->delete
  *
- * @phpstan-type ScheduledEventDeleteParamsShape = array{assistantID: string}
+ * @phpstan-type ScheduledEventDeleteParamsShape = array{assistant_id: string}
  */
 final class ScheduledEventDeleteParams implements BaseModel
 {
@@ -23,14 +23,14 @@ final class ScheduledEventDeleteParams implements BaseModel
     use SdkParams;
 
     #[Api]
-    public string $assistantID;
+    public string $assistant_id;
 
     /**
      * `new ScheduledEventDeleteParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * ScheduledEventDeleteParams::with(assistantID: ...)
+     * ScheduledEventDeleteParams::with(assistant_id: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -49,11 +49,11 @@ final class ScheduledEventDeleteParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(string $assistantID): self
+    public static function with(string $assistant_id): self
     {
         $obj = new self;
 
-        $obj->assistantID = $assistantID;
+        $obj->assistant_id = $assistant_id;
 
         return $obj;
     }
@@ -61,7 +61,7 @@ final class ScheduledEventDeleteParams implements BaseModel
     public function withAssistantID(string $assistantID): self
     {
         $obj = clone $this;
-        $obj->assistantID = $assistantID;
+        $obj->assistant_id = $assistantID;
 
         return $obj;
     }

@@ -26,13 +26,13 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type ActionSpeakParamsShape = array{
  *   payload: string,
  *   voice: string,
- *   clientState?: string,
- *   commandID?: string,
+ *   client_state?: string,
+ *   command_id?: string,
  *   language?: Language|value-of<Language>,
- *   payloadType?: PayloadType|value-of<PayloadType>,
- *   serviceLevel?: ServiceLevel|value-of<ServiceLevel>,
+ *   payload_type?: PayloadType|value-of<PayloadType>,
+ *   service_level?: ServiceLevel|value-of<ServiceLevel>,
  *   stop?: string,
- *   voiceSettings?: mixed|ElevenLabsVoiceSettings|TelnyxVoiceSettings,
+ *   voice_settings?: mixed|ElevenLabsVoiceSettings|TelnyxVoiceSettings,
  * }
  */
 final class ActionSpeakParams implements BaseModel
@@ -66,14 +66,14 @@ final class ActionSpeakParams implements BaseModel
     /**
      * Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      */
-    #[Api('client_state', optional: true)]
-    public ?string $clientState;
+    #[Api(optional: true)]
+    public ?string $client_state;
 
     /**
      * Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      */
-    #[Api('command_id', optional: true)]
-    public ?string $commandID;
+    #[Api(optional: true)]
+    public ?string $command_id;
 
     /**
      * The language you want spoken. This parameter is ignored when a `Polly.*` voice is specified.
@@ -86,18 +86,18 @@ final class ActionSpeakParams implements BaseModel
     /**
      * The type of the provided payload. The payload can either be plain text, or Speech Synthesis Markup Language (SSML).
      *
-     * @var value-of<PayloadType>|null $payloadType
+     * @var value-of<PayloadType>|null $payload_type
      */
-    #[Api('payload_type', enum: PayloadType::class, optional: true)]
-    public ?string $payloadType;
+    #[Api(enum: PayloadType::class, optional: true)]
+    public ?string $payload_type;
 
     /**
      * This parameter impacts speech quality, language options and payload types. When using `basic`, only the `en-US` language and payload type `text` are allowed.
      *
-     * @var value-of<ServiceLevel>|null $serviceLevel
+     * @var value-of<ServiceLevel>|null $service_level
      */
-    #[Api('service_level', enum: ServiceLevel::class, optional: true)]
-    public ?string $serviceLevel;
+    #[Api(enum: ServiceLevel::class, optional: true)]
+    public ?string $service_level;
 
     /**
      * When specified, it stops the current audio being played. Specify `current` to stop the current audio being played, and to play the next file in the queue. Specify `all` to stop the current audio file being played and to also clear all audio files from the queue.
@@ -108,10 +108,10 @@ final class ActionSpeakParams implements BaseModel
     /**
      * The settings associated with the voice selected.
      *
-     * @var mixed|ElevenLabsVoiceSettings|TelnyxVoiceSettings|null $voiceSettings
+     * @var mixed|ElevenLabsVoiceSettings|TelnyxVoiceSettings|null $voice_settings
      */
-    #[Api('voice_settings', union: VoiceSettings::class, optional: true)]
-    public mixed $voiceSettings;
+    #[Api(union: VoiceSettings::class, optional: true)]
+    public mixed $voice_settings;
 
     /**
      * `new ActionSpeakParams()` is missing required properties by the API.
@@ -138,33 +138,33 @@ final class ActionSpeakParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Language|value-of<Language> $language
-     * @param PayloadType|value-of<PayloadType> $payloadType
-     * @param ServiceLevel|value-of<ServiceLevel> $serviceLevel
-     * @param mixed|ElevenLabsVoiceSettings|TelnyxVoiceSettings $voiceSettings
+     * @param PayloadType|value-of<PayloadType> $payload_type
+     * @param ServiceLevel|value-of<ServiceLevel> $service_level
+     * @param mixed|ElevenLabsVoiceSettings|TelnyxVoiceSettings $voice_settings
      */
     public static function with(
         string $payload,
         string $voice,
-        ?string $clientState = null,
-        ?string $commandID = null,
+        ?string $client_state = null,
+        ?string $command_id = null,
         Language|string|null $language = null,
-        PayloadType|string|null $payloadType = null,
-        ServiceLevel|string|null $serviceLevel = null,
+        PayloadType|string|null $payload_type = null,
+        ServiceLevel|string|null $service_level = null,
         ?string $stop = null,
-        mixed $voiceSettings = null,
+        mixed $voice_settings = null,
     ): self {
         $obj = new self;
 
         $obj->payload = $payload;
         $obj->voice = $voice;
 
-        null !== $clientState && $obj->clientState = $clientState;
-        null !== $commandID && $obj->commandID = $commandID;
+        null !== $client_state && $obj->client_state = $client_state;
+        null !== $command_id && $obj->command_id = $command_id;
         null !== $language && $obj['language'] = $language;
-        null !== $payloadType && $obj['payloadType'] = $payloadType;
-        null !== $serviceLevel && $obj['serviceLevel'] = $serviceLevel;
+        null !== $payload_type && $obj['payload_type'] = $payload_type;
+        null !== $service_level && $obj['service_level'] = $service_level;
         null !== $stop && $obj->stop = $stop;
-        null !== $voiceSettings && $obj->voiceSettings = $voiceSettings;
+        null !== $voice_settings && $obj->voice_settings = $voice_settings;
 
         return $obj;
     }
@@ -207,7 +207,7 @@ final class ActionSpeakParams implements BaseModel
     public function withClientState(string $clientState): self
     {
         $obj = clone $this;
-        $obj->clientState = $clientState;
+        $obj->client_state = $clientState;
 
         return $obj;
     }
@@ -218,7 +218,7 @@ final class ActionSpeakParams implements BaseModel
     public function withCommandID(string $commandID): self
     {
         $obj = clone $this;
-        $obj->commandID = $commandID;
+        $obj->command_id = $commandID;
 
         return $obj;
     }
@@ -244,7 +244,7 @@ final class ActionSpeakParams implements BaseModel
     public function withPayloadType(PayloadType|string $payloadType): self
     {
         $obj = clone $this;
-        $obj['payloadType'] = $payloadType;
+        $obj['payload_type'] = $payloadType;
 
         return $obj;
     }
@@ -257,7 +257,7 @@ final class ActionSpeakParams implements BaseModel
     public function withServiceLevel(ServiceLevel|string $serviceLevel): self
     {
         $obj = clone $this;
-        $obj['serviceLevel'] = $serviceLevel;
+        $obj['service_level'] = $serviceLevel;
 
         return $obj;
     }
@@ -281,7 +281,7 @@ final class ActionSpeakParams implements BaseModel
     public function withVoiceSettings(mixed $voiceSettings): self
     {
         $obj = clone $this;
-        $obj->voiceSettings = $voiceSettings;
+        $obj->voice_settings = $voiceSettings;
 
         return $obj;
     }

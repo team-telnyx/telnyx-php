@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type ActionGatherUsingAudioResponseShape = array{
- *   data?: CallControlCommandResult
+ *   data?: CallControlCommandResult|null
  * }
  */
 final class ActionGatherUsingAudioResponse implements BaseModel, ResponseConverter

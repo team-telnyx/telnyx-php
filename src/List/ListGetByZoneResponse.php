@@ -14,7 +14,7 @@ use Telnyx\List\ListGetByZoneResponse\Data;
 
 /**
  * @phpstan-type ListGetByZoneResponseShape = array{
- *   data?: list<Data>, meta?: PaginationMeta
+ *   data?: list<Data>|null, meta?: PaginationMeta|null
  * }
  */
 final class ListGetByZoneResponse implements BaseModel, ResponseConverter

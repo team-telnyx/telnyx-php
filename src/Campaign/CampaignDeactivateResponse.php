@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type CampaignDeactivateResponseShape = array{
- *   time: float, message?: string, recordType?: string
+ *   time: float, message?: string|null, record_type?: string|null
  * }
  */
 final class CampaignDeactivateResponse implements BaseModel, ResponseConverter
@@ -28,8 +28,8 @@ final class CampaignDeactivateResponse implements BaseModel, ResponseConverter
     #[Api(optional: true)]
     public ?string $message;
 
-    #[Api('record_type', optional: true)]
-    public ?string $recordType;
+    #[Api(optional: true)]
+    public ?string $record_type;
 
     /**
      * `new CampaignDeactivateResponse()` is missing required properties by the API.
@@ -58,14 +58,14 @@ final class CampaignDeactivateResponse implements BaseModel, ResponseConverter
     public static function with(
         float $time,
         ?string $message = null,
-        ?string $recordType = null
+        ?string $record_type = null
     ): self {
         $obj = new self;
 
         $obj->time = $time;
 
         null !== $message && $obj->message = $message;
-        null !== $recordType && $obj->recordType = $recordType;
+        null !== $record_type && $obj->record_type = $record_type;
 
         return $obj;
     }
@@ -89,7 +89,7 @@ final class CampaignDeactivateResponse implements BaseModel, ResponseConverter
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType;
+        $obj->record_type = $recordType;
 
         return $obj;
     }

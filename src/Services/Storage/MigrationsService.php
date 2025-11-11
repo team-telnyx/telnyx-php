@@ -14,12 +14,10 @@ use Telnyx\Storage\Migrations\MigrationGetResponse;
 use Telnyx\Storage\Migrations\MigrationListResponse;
 use Telnyx\Storage\Migrations\MigrationNewResponse;
 
-use const Telnyx\Core\OMIT as omit;
-
 final class MigrationsService implements MigrationsContract
 {
     /**
-     * @@api
+     * @api
      */
     public ActionsService $actions;
 
@@ -36,44 +34,22 @@ final class MigrationsService implements MigrationsContract
      *
      * Initiate a migration of data from an external provider into Telnyx Cloud Storage. Currently, only S3 is supported.
      *
-     * @param string $sourceID ID of the Migration Source from which to migrate data
-     * @param string $targetBucketName Bucket name to migrate the data into. Will default to the same name as the `source_bucket_name`.
-     * @param string $targetRegion telnyx Cloud Storage region to migrate the data to
-     * @param bool $refresh if true, will continue to poll the source bucket to ensure new data is continually migrated over
+     * @param array{
+     *   source_id: string,
+     *   target_bucket_name: string,
+     *   target_region: string,
+     *   refresh?: bool,
+     * }|MigrationCreateParams $params
      *
      * @throws APIException
      */
     public function create(
-        $sourceID,
-        $targetBucketName,
-        $targetRegion,
-        $refresh = omit,
-        ?RequestOptions $requestOptions = null,
-    ): MigrationNewResponse {
-        $params = [
-            'sourceID' => $sourceID,
-            'targetBucketName' => $targetBucketName,
-            'targetRegion' => $targetRegion,
-            'refresh' => $refresh,
-        ];
-
-        return $this->createRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
+        array|MigrationCreateParams $params,
         ?RequestOptions $requestOptions = null
     ): MigrationNewResponse {
         [$parsed, $options] = MigrationCreateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

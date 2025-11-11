@@ -12,7 +12,10 @@ use Telnyx\Core\Contracts\BaseModel;
  * The webhook payload for the portout.new_comment event.
  *
  * @phpstan-type WebhookPortoutNewCommentPayloadShape = array{
- *   id?: string, comment?: string, portoutID?: string, userID?: string
+ *   id?: string|null,
+ *   comment?: string|null,
+ *   portout_id?: string|null,
+ *   user_id?: string|null,
  * }
  */
 final class WebhookPortoutNewCommentPayload implements BaseModel
@@ -35,14 +38,14 @@ final class WebhookPortoutNewCommentPayload implements BaseModel
     /**
      * Identifies the port-out order that the comment was added to.
      */
-    #[Api('portout_id', optional: true)]
-    public ?string $portoutID;
+    #[Api(optional: true)]
+    public ?string $portout_id;
 
     /**
      * Identifies the user that added the comment.
      */
-    #[Api('user_id', optional: true)]
-    public ?string $userID;
+    #[Api(optional: true)]
+    public ?string $user_id;
 
     public function __construct()
     {
@@ -57,15 +60,15 @@ final class WebhookPortoutNewCommentPayload implements BaseModel
     public static function with(
         ?string $id = null,
         ?string $comment = null,
-        ?string $portoutID = null,
-        ?string $userID = null,
+        ?string $portout_id = null,
+        ?string $user_id = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj->id = $id;
         null !== $comment && $obj->comment = $comment;
-        null !== $portoutID && $obj->portoutID = $portoutID;
-        null !== $userID && $obj->userID = $userID;
+        null !== $portout_id && $obj->portout_id = $portout_id;
+        null !== $user_id && $obj->user_id = $user_id;
 
         return $obj;
     }
@@ -98,7 +101,7 @@ final class WebhookPortoutNewCommentPayload implements BaseModel
     public function withPortoutID(string $portoutID): self
     {
         $obj = clone $this;
-        $obj->portoutID = $portoutID;
+        $obj->portout_id = $portoutID;
 
         return $obj;
     }
@@ -109,7 +112,7 @@ final class WebhookPortoutNewCommentPayload implements BaseModel
     public function withUserID(string $userID): self
     {
         $obj = clone $this;
-        $obj->userID = $userID;
+        $obj->user_id = $userID;
 
         return $obj;
     }

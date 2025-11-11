@@ -24,19 +24,19 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Calls\Actions->gatherUsingAudio
  *
  * @phpstan-type ActionGatherUsingAudioParamsShape = array{
- *   audioURL?: string,
- *   clientState?: string,
- *   commandID?: string,
- *   interDigitTimeoutMillis?: int,
- *   invalidAudioURL?: string,
- *   invalidMediaName?: string,
- *   maximumDigits?: int,
- *   maximumTries?: int,
- *   mediaName?: string,
- *   minimumDigits?: int,
- *   terminatingDigit?: string,
- *   timeoutMillis?: int,
- *   validDigits?: string,
+ *   audio_url?: string,
+ *   client_state?: string,
+ *   command_id?: string,
+ *   inter_digit_timeout_millis?: int,
+ *   invalid_audio_url?: string,
+ *   invalid_media_name?: string,
+ *   maximum_digits?: int,
+ *   maximum_tries?: int,
+ *   media_name?: string,
+ *   minimum_digits?: int,
+ *   terminating_digit?: string,
+ *   timeout_millis?: int,
+ *   valid_digits?: string,
  * }
  */
 final class ActionGatherUsingAudioParams implements BaseModel
@@ -48,80 +48,80 @@ final class ActionGatherUsingAudioParams implements BaseModel
     /**
      * The URL of a file to be played back at the beginning of each prompt. The URL can point to either a WAV or MP3 file. media_name and audio_url cannot be used together in one request.
      */
-    #[Api('audio_url', optional: true)]
-    public ?string $audioURL;
+    #[Api(optional: true)]
+    public ?string $audio_url;
 
     /**
      * Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      */
-    #[Api('client_state', optional: true)]
-    public ?string $clientState;
+    #[Api(optional: true)]
+    public ?string $client_state;
 
     /**
      * Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      */
-    #[Api('command_id', optional: true)]
-    public ?string $commandID;
+    #[Api(optional: true)]
+    public ?string $command_id;
 
     /**
      * The number of milliseconds to wait for input between digits.
      */
-    #[Api('inter_digit_timeout_millis', optional: true)]
-    public ?int $interDigitTimeoutMillis;
+    #[Api(optional: true)]
+    public ?int $inter_digit_timeout_millis;
 
     /**
      * The URL of a file to play when digits don't match the `valid_digits` parameter or the number of digits is not between `min` and `max`. The URL can point to either a WAV or MP3 file. invalid_media_name and invalid_audio_url cannot be used together in one request.
      */
-    #[Api('invalid_audio_url', optional: true)]
-    public ?string $invalidAudioURL;
+    #[Api(optional: true)]
+    public ?string $invalid_audio_url;
 
     /**
      * The media_name of a file to be played back when digits don't match the `valid_digits` parameter or the number of digits is not between `min` and `max`. The media_name must point to a file previously uploaded to api.telnyx.com/v2/media by the same user/organization. The file must either be a WAV or MP3 file.
      */
-    #[Api('invalid_media_name', optional: true)]
-    public ?string $invalidMediaName;
+    #[Api(optional: true)]
+    public ?string $invalid_media_name;
 
     /**
      * The maximum number of digits to fetch. This parameter has a maximum value of 128.
      */
-    #[Api('maximum_digits', optional: true)]
-    public ?int $maximumDigits;
+    #[Api(optional: true)]
+    public ?int $maximum_digits;
 
     /**
      * The maximum number of times the file should be played if there is no input from the user on the call.
      */
-    #[Api('maximum_tries', optional: true)]
-    public ?int $maximumTries;
+    #[Api(optional: true)]
+    public ?int $maximum_tries;
 
     /**
      * The media_name of a file to be played back at the beginning of each prompt. The media_name must point to a file previously uploaded to api.telnyx.com/v2/media by the same user/organization. The file must either be a WAV or MP3 file.
      */
-    #[Api('media_name', optional: true)]
-    public ?string $mediaName;
+    #[Api(optional: true)]
+    public ?string $media_name;
 
     /**
      * The minimum number of digits to fetch. This parameter has a minimum value of 1.
      */
-    #[Api('minimum_digits', optional: true)]
-    public ?int $minimumDigits;
+    #[Api(optional: true)]
+    public ?int $minimum_digits;
 
     /**
      * The digit used to terminate input if fewer than `maximum_digits` digits have been gathered.
      */
-    #[Api('terminating_digit', optional: true)]
-    public ?string $terminatingDigit;
+    #[Api(optional: true)]
+    public ?string $terminating_digit;
 
     /**
      * The number of milliseconds to wait for a DTMF response after file playback ends before a replaying the sound file.
      */
-    #[Api('timeout_millis', optional: true)]
-    public ?int $timeoutMillis;
+    #[Api(optional: true)]
+    public ?int $timeout_millis;
 
     /**
      * A list of all digits accepted as valid.
      */
-    #[Api('valid_digits', optional: true)]
-    public ?string $validDigits;
+    #[Api(optional: true)]
+    public ?string $valid_digits;
 
     public function __construct()
     {
@@ -134,35 +134,35 @@ final class ActionGatherUsingAudioParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $audioURL = null,
-        ?string $clientState = null,
-        ?string $commandID = null,
-        ?int $interDigitTimeoutMillis = null,
-        ?string $invalidAudioURL = null,
-        ?string $invalidMediaName = null,
-        ?int $maximumDigits = null,
-        ?int $maximumTries = null,
-        ?string $mediaName = null,
-        ?int $minimumDigits = null,
-        ?string $terminatingDigit = null,
-        ?int $timeoutMillis = null,
-        ?string $validDigits = null,
+        ?string $audio_url = null,
+        ?string $client_state = null,
+        ?string $command_id = null,
+        ?int $inter_digit_timeout_millis = null,
+        ?string $invalid_audio_url = null,
+        ?string $invalid_media_name = null,
+        ?int $maximum_digits = null,
+        ?int $maximum_tries = null,
+        ?string $media_name = null,
+        ?int $minimum_digits = null,
+        ?string $terminating_digit = null,
+        ?int $timeout_millis = null,
+        ?string $valid_digits = null,
     ): self {
         $obj = new self;
 
-        null !== $audioURL && $obj->audioURL = $audioURL;
-        null !== $clientState && $obj->clientState = $clientState;
-        null !== $commandID && $obj->commandID = $commandID;
-        null !== $interDigitTimeoutMillis && $obj->interDigitTimeoutMillis = $interDigitTimeoutMillis;
-        null !== $invalidAudioURL && $obj->invalidAudioURL = $invalidAudioURL;
-        null !== $invalidMediaName && $obj->invalidMediaName = $invalidMediaName;
-        null !== $maximumDigits && $obj->maximumDigits = $maximumDigits;
-        null !== $maximumTries && $obj->maximumTries = $maximumTries;
-        null !== $mediaName && $obj->mediaName = $mediaName;
-        null !== $minimumDigits && $obj->minimumDigits = $minimumDigits;
-        null !== $terminatingDigit && $obj->terminatingDigit = $terminatingDigit;
-        null !== $timeoutMillis && $obj->timeoutMillis = $timeoutMillis;
-        null !== $validDigits && $obj->validDigits = $validDigits;
+        null !== $audio_url && $obj->audio_url = $audio_url;
+        null !== $client_state && $obj->client_state = $client_state;
+        null !== $command_id && $obj->command_id = $command_id;
+        null !== $inter_digit_timeout_millis && $obj->inter_digit_timeout_millis = $inter_digit_timeout_millis;
+        null !== $invalid_audio_url && $obj->invalid_audio_url = $invalid_audio_url;
+        null !== $invalid_media_name && $obj->invalid_media_name = $invalid_media_name;
+        null !== $maximum_digits && $obj->maximum_digits = $maximum_digits;
+        null !== $maximum_tries && $obj->maximum_tries = $maximum_tries;
+        null !== $media_name && $obj->media_name = $media_name;
+        null !== $minimum_digits && $obj->minimum_digits = $minimum_digits;
+        null !== $terminating_digit && $obj->terminating_digit = $terminating_digit;
+        null !== $timeout_millis && $obj->timeout_millis = $timeout_millis;
+        null !== $valid_digits && $obj->valid_digits = $valid_digits;
 
         return $obj;
     }
@@ -173,7 +173,7 @@ final class ActionGatherUsingAudioParams implements BaseModel
     public function withAudioURL(string $audioURL): self
     {
         $obj = clone $this;
-        $obj->audioURL = $audioURL;
+        $obj->audio_url = $audioURL;
 
         return $obj;
     }
@@ -184,7 +184,7 @@ final class ActionGatherUsingAudioParams implements BaseModel
     public function withClientState(string $clientState): self
     {
         $obj = clone $this;
-        $obj->clientState = $clientState;
+        $obj->client_state = $clientState;
 
         return $obj;
     }
@@ -195,7 +195,7 @@ final class ActionGatherUsingAudioParams implements BaseModel
     public function withCommandID(string $commandID): self
     {
         $obj = clone $this;
-        $obj->commandID = $commandID;
+        $obj->command_id = $commandID;
 
         return $obj;
     }
@@ -207,7 +207,7 @@ final class ActionGatherUsingAudioParams implements BaseModel
         int $interDigitTimeoutMillis
     ): self {
         $obj = clone $this;
-        $obj->interDigitTimeoutMillis = $interDigitTimeoutMillis;
+        $obj->inter_digit_timeout_millis = $interDigitTimeoutMillis;
 
         return $obj;
     }
@@ -218,7 +218,7 @@ final class ActionGatherUsingAudioParams implements BaseModel
     public function withInvalidAudioURL(string $invalidAudioURL): self
     {
         $obj = clone $this;
-        $obj->invalidAudioURL = $invalidAudioURL;
+        $obj->invalid_audio_url = $invalidAudioURL;
 
         return $obj;
     }
@@ -229,7 +229,7 @@ final class ActionGatherUsingAudioParams implements BaseModel
     public function withInvalidMediaName(string $invalidMediaName): self
     {
         $obj = clone $this;
-        $obj->invalidMediaName = $invalidMediaName;
+        $obj->invalid_media_name = $invalidMediaName;
 
         return $obj;
     }
@@ -240,7 +240,7 @@ final class ActionGatherUsingAudioParams implements BaseModel
     public function withMaximumDigits(int $maximumDigits): self
     {
         $obj = clone $this;
-        $obj->maximumDigits = $maximumDigits;
+        $obj->maximum_digits = $maximumDigits;
 
         return $obj;
     }
@@ -251,7 +251,7 @@ final class ActionGatherUsingAudioParams implements BaseModel
     public function withMaximumTries(int $maximumTries): self
     {
         $obj = clone $this;
-        $obj->maximumTries = $maximumTries;
+        $obj->maximum_tries = $maximumTries;
 
         return $obj;
     }
@@ -262,7 +262,7 @@ final class ActionGatherUsingAudioParams implements BaseModel
     public function withMediaName(string $mediaName): self
     {
         $obj = clone $this;
-        $obj->mediaName = $mediaName;
+        $obj->media_name = $mediaName;
 
         return $obj;
     }
@@ -273,7 +273,7 @@ final class ActionGatherUsingAudioParams implements BaseModel
     public function withMinimumDigits(int $minimumDigits): self
     {
         $obj = clone $this;
-        $obj->minimumDigits = $minimumDigits;
+        $obj->minimum_digits = $minimumDigits;
 
         return $obj;
     }
@@ -284,7 +284,7 @@ final class ActionGatherUsingAudioParams implements BaseModel
     public function withTerminatingDigit(string $terminatingDigit): self
     {
         $obj = clone $this;
-        $obj->terminatingDigit = $terminatingDigit;
+        $obj->terminating_digit = $terminatingDigit;
 
         return $obj;
     }
@@ -295,7 +295,7 @@ final class ActionGatherUsingAudioParams implements BaseModel
     public function withTimeoutMillis(int $timeoutMillis): self
     {
         $obj = clone $this;
-        $obj->timeoutMillis = $timeoutMillis;
+        $obj->timeout_millis = $timeoutMillis;
 
         return $obj;
     }
@@ -306,7 +306,7 @@ final class ActionGatherUsingAudioParams implements BaseModel
     public function withValidDigits(string $validDigits): self
     {
         $obj = clone $this;
-        $obj->validDigits = $validDigits;
+        $obj->valid_digits = $validDigits;
 
         return $obj;
     }

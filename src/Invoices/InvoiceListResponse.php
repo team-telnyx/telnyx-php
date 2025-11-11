@@ -13,7 +13,9 @@ use Telnyx\Invoices\InvoiceListResponse\Data;
 use Telnyx\Invoices\InvoiceListResponse\Meta;
 
 /**
- * @phpstan-type InvoiceListResponseShape = array{data?: list<Data>, meta?: Meta}
+ * @phpstan-type InvoiceListResponseShape = array{
+ *   data?: list<Data>|null, meta?: Meta|null
+ * }
  */
 final class InvoiceListResponse implements BaseModel, ResponseConverter
 {

@@ -12,7 +12,7 @@ use Telnyx\RequirementTypes\RequirementTypeListParams\Filter\Name;
 /**
  * Consolidated filter parameter for requirement types (deepObject style). Originally: filter[name].
  *
- * @phpstan-type FilterShape = array{name?: Name}
+ * @phpstan-type FilterShape = array{name?: Name|null}
  */
 final class Filter implements BaseModel
 {

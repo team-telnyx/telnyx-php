@@ -14,7 +14,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type ConnectionListActiveCallsResponseShape = array{
- *   data?: list<Data>, meta?: Meta
+ *   data?: list<Data>|null, meta?: Meta|null
  * }
  */
 final class ConnectionListActiveCallsResponse implements BaseModel, ResponseConverter

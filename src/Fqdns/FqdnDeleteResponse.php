@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type FqdnDeleteResponseShape = array{data?: Fqdn}
+ * @phpstan-type FqdnDeleteResponseShape = array{data?: Fqdn|null}
  */
 final class FqdnDeleteResponse implements BaseModel, ResponseConverter
 {

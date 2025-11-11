@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type SimCardOrderGetResponseShape = array{data?: SimCardOrder}
+ * @phpstan-type SimCardOrderGetResponseShape = array{data?: SimCardOrder|null}
  */
 final class SimCardOrderGetResponse implements BaseModel, ResponseConverter
 {

@@ -33,7 +33,7 @@ final class BillingGroupsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->billingGroups->create();
+        $result = $this->client->billingGroups->create([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -60,7 +60,8 @@ final class BillingGroupsTest extends TestCase
         }
 
         $result = $this->client->billingGroups->update(
-            'f5586561-8ff0-4291-a0ac-84fe544797bd'
+            'f5586561-8ff0-4291-a0ac-84fe544797bd',
+            []
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -73,7 +74,7 @@ final class BillingGroupsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->billingGroups->list();
+        $result = $this->client->billingGroups->list([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

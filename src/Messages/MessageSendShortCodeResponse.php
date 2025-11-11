@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type MessageSendShortCodeResponseShape = array{
- *   data?: OutboundMessagePayload
+ *   data?: OutboundMessagePayload|null
  * }
  */
 final class MessageSendShortCodeResponse implements BaseModel, ResponseConverter

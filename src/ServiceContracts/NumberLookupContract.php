@@ -6,36 +6,21 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\NumberLookup\NumberLookupGetResponse;
-use Telnyx\NumberLookup\NumberLookupRetrieveParams\Type;
+use Telnyx\NumberLookup\NumberLookupRetrieveParams;
 use Telnyx\RequestOptions;
-
-use const Telnyx\Core\OMIT as omit;
 
 interface NumberLookupContract
 {
     /**
      * @api
      *
-     * @param Type|value-of<Type> $type Specifies the type of number lookup to be performed
+     * @param array<mixed>|NumberLookupRetrieveParams $params
      *
      * @throws APIException
      */
     public function retrieve(
         string $phoneNumber,
-        $type = omit,
-        ?RequestOptions $requestOptions = null,
-    ): NumberLookupGetResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $phoneNumber,
-        array $params,
+        array|NumberLookupRetrieveParams $params,
         ?RequestOptions $requestOptions = null,
     ): NumberLookupGetResponse;
 }

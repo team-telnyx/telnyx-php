@@ -9,7 +9,9 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type AdminShape = array{authPersonName?: string, entityName?: string}
+ * @phpstan-type AdminShape = array{
+ *   auth_person_name?: string|null, entity_name?: string|null
+ * }
  */
 final class Admin implements BaseModel
 {
@@ -19,14 +21,14 @@ final class Admin implements BaseModel
     /**
      * Filter results by authorized person.
      */
-    #[Api('auth_person_name', optional: true)]
-    public ?string $authPersonName;
+    #[Api(optional: true)]
+    public ?string $auth_person_name;
 
     /**
      * Filter results by person or company name.
      */
-    #[Api('entity_name', optional: true)]
-    public ?string $entityName;
+    #[Api(optional: true)]
+    public ?string $entity_name;
 
     public function __construct()
     {
@@ -39,13 +41,13 @@ final class Admin implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $authPersonName = null,
-        ?string $entityName = null
+        ?string $auth_person_name = null,
+        ?string $entity_name = null
     ): self {
         $obj = new self;
 
-        null !== $authPersonName && $obj->authPersonName = $authPersonName;
-        null !== $entityName && $obj->entityName = $entityName;
+        null !== $auth_person_name && $obj->auth_person_name = $auth_person_name;
+        null !== $entity_name && $obj->entity_name = $entity_name;
 
         return $obj;
     }
@@ -56,7 +58,7 @@ final class Admin implements BaseModel
     public function withAuthPersonName(string $authPersonName): self
     {
         $obj = clone $this;
-        $obj->authPersonName = $authPersonName;
+        $obj->auth_person_name = $authPersonName;
 
         return $obj;
     }
@@ -67,7 +69,7 @@ final class Admin implements BaseModel
     public function withEntityName(string $entityName): self
     {
         $obj = clone $this;
-        $obj->entityName = $entityName;
+        $obj->entity_name = $entityName;
 
         return $obj;
     }

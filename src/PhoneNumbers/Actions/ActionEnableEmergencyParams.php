@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\PhoneNumbers\Actions->enableEmergency
  *
  * @phpstan-type ActionEnableEmergencyParamsShape = array{
- *   emergencyAddressID: string, emergencyEnabled: bool
+ *   emergency_address_id: string, emergency_enabled: bool
  * }
  */
 final class ActionEnableEmergencyParams implements BaseModel
@@ -27,14 +27,14 @@ final class ActionEnableEmergencyParams implements BaseModel
     /**
      * Identifies the address to be used with emergency services.
      */
-    #[Api('emergency_address_id')]
-    public string $emergencyAddressID;
+    #[Api]
+    public string $emergency_address_id;
 
     /**
      * Indicates whether to enable emergency services on this number.
      */
-    #[Api('emergency_enabled')]
-    public bool $emergencyEnabled;
+    #[Api]
+    public bool $emergency_enabled;
 
     /**
      * `new ActionEnableEmergencyParams()` is missing required properties by the API.
@@ -42,7 +42,7 @@ final class ActionEnableEmergencyParams implements BaseModel
      * To enforce required parameters use
      * ```
      * ActionEnableEmergencyParams::with(
-     *   emergencyAddressID: ..., emergencyEnabled: ...
+     *   emergency_address_id: ..., emergency_enabled: ...
      * )
      * ```
      *
@@ -65,13 +65,13 @@ final class ActionEnableEmergencyParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        string $emergencyAddressID,
-        bool $emergencyEnabled
+        string $emergency_address_id,
+        bool $emergency_enabled
     ): self {
         $obj = new self;
 
-        $obj->emergencyAddressID = $emergencyAddressID;
-        $obj->emergencyEnabled = $emergencyEnabled;
+        $obj->emergency_address_id = $emergency_address_id;
+        $obj->emergency_enabled = $emergency_enabled;
 
         return $obj;
     }
@@ -82,7 +82,7 @@ final class ActionEnableEmergencyParams implements BaseModel
     public function withEmergencyAddressID(string $emergencyAddressID): self
     {
         $obj = clone $this;
-        $obj->emergencyAddressID = $emergencyAddressID;
+        $obj->emergency_address_id = $emergencyAddressID;
 
         return $obj;
     }
@@ -93,7 +93,7 @@ final class ActionEnableEmergencyParams implements BaseModel
     public function withEmergencyEnabled(bool $emergencyEnabled): self
     {
         $obj = clone $this;
-        $obj->emergencyEnabled = $emergencyEnabled;
+        $obj->emergency_enabled = $emergencyEnabled;
 
         return $obj;
     }

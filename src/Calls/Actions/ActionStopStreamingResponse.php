@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type ActionStopStreamingResponseShape = array{
- *   data?: CallControlCommandResult
+ *   data?: CallControlCommandResult|null
  * }
  */
 final class ActionStopStreamingResponse implements BaseModel, ResponseConverter

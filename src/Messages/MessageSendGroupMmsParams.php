@@ -17,12 +17,12 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type MessageSendGroupMmsParamsShape = array{
  *   from: string,
  *   to: list<string>,
- *   mediaURLs?: list<string>,
+ *   media_urls?: list<string>,
  *   subject?: string,
  *   text?: string,
- *   useProfileWebhooks?: bool,
- *   webhookFailoverURL?: string,
- *   webhookURL?: string,
+ *   use_profile_webhooks?: bool,
+ *   webhook_failover_url?: string,
+ *   webhook_url?: string,
  * }
  */
 final class MessageSendGroupMmsParams implements BaseModel
@@ -48,10 +48,10 @@ final class MessageSendGroupMmsParams implements BaseModel
     /**
      * A list of media URLs. The total media size must be less than 1 MB.
      *
-     * @var list<string>|null $mediaURLs
+     * @var list<string>|null $media_urls
      */
-    #[Api('media_urls', list: 'string', optional: true)]
-    public ?array $mediaURLs;
+    #[Api(list: 'string', optional: true)]
+    public ?array $media_urls;
 
     /**
      * Subject of multimedia message.
@@ -68,20 +68,20 @@ final class MessageSendGroupMmsParams implements BaseModel
     /**
      * If the profile this number is associated with has webhooks, use them for delivery notifications. If webhooks are also specified on the message itself, they will be attempted first, then those on the profile.
      */
-    #[Api('use_profile_webhooks', optional: true)]
-    public ?bool $useProfileWebhooks;
+    #[Api(optional: true)]
+    public ?bool $use_profile_webhooks;
 
     /**
      * The failover URL where webhooks related to this message will be sent if sending to the primary URL fails.
      */
-    #[Api('webhook_failover_url', optional: true)]
-    public ?string $webhookFailoverURL;
+    #[Api(optional: true)]
+    public ?string $webhook_failover_url;
 
     /**
      * The URL where webhooks related to this message will be sent.
      */
-    #[Api('webhook_url', optional: true)]
-    public ?string $webhookURL;
+    #[Api(optional: true)]
+    public ?string $webhook_url;
 
     /**
      * `new MessageSendGroupMmsParams()` is missing required properties by the API.
@@ -108,29 +108,29 @@ final class MessageSendGroupMmsParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<string> $to
-     * @param list<string> $mediaURLs
+     * @param list<string> $media_urls
      */
     public static function with(
         string $from,
         array $to,
-        ?array $mediaURLs = null,
+        ?array $media_urls = null,
         ?string $subject = null,
         ?string $text = null,
-        ?bool $useProfileWebhooks = null,
-        ?string $webhookFailoverURL = null,
-        ?string $webhookURL = null,
+        ?bool $use_profile_webhooks = null,
+        ?string $webhook_failover_url = null,
+        ?string $webhook_url = null,
     ): self {
         $obj = new self;
 
         $obj->from = $from;
         $obj->to = $to;
 
-        null !== $mediaURLs && $obj->mediaURLs = $mediaURLs;
+        null !== $media_urls && $obj->media_urls = $media_urls;
         null !== $subject && $obj->subject = $subject;
         null !== $text && $obj->text = $text;
-        null !== $useProfileWebhooks && $obj->useProfileWebhooks = $useProfileWebhooks;
-        null !== $webhookFailoverURL && $obj->webhookFailoverURL = $webhookFailoverURL;
-        null !== $webhookURL && $obj->webhookURL = $webhookURL;
+        null !== $use_profile_webhooks && $obj->use_profile_webhooks = $use_profile_webhooks;
+        null !== $webhook_failover_url && $obj->webhook_failover_url = $webhook_failover_url;
+        null !== $webhook_url && $obj->webhook_url = $webhook_url;
 
         return $obj;
     }
@@ -167,7 +167,7 @@ final class MessageSendGroupMmsParams implements BaseModel
     public function withMediaURLs(array $mediaURLs): self
     {
         $obj = clone $this;
-        $obj->mediaURLs = $mediaURLs;
+        $obj->media_urls = $mediaURLs;
 
         return $obj;
     }
@@ -200,7 +200,7 @@ final class MessageSendGroupMmsParams implements BaseModel
     public function withUseProfileWebhooks(bool $useProfileWebhooks): self
     {
         $obj = clone $this;
-        $obj->useProfileWebhooks = $useProfileWebhooks;
+        $obj->use_profile_webhooks = $useProfileWebhooks;
 
         return $obj;
     }
@@ -211,7 +211,7 @@ final class MessageSendGroupMmsParams implements BaseModel
     public function withWebhookFailoverURL(string $webhookFailoverURL): self
     {
         $obj = clone $this;
-        $obj->webhookFailoverURL = $webhookFailoverURL;
+        $obj->webhook_failover_url = $webhookFailoverURL;
 
         return $obj;
     }
@@ -222,7 +222,7 @@ final class MessageSendGroupMmsParams implements BaseModel
     public function withWebhookURL(string $webhookURL): self
     {
         $obj = clone $this;
-        $obj->webhookURL = $webhookURL;
+        $obj->webhook_url = $webhookURL;
 
         return $obj;
     }

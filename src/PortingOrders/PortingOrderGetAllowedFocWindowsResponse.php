@@ -14,7 +14,7 @@ use Telnyx\PortingOrders\PortingOrderGetAllowedFocWindowsResponse\Data;
 
 /**
  * @phpstan-type PortingOrderGetAllowedFocWindowsResponseShape = array{
- *   data?: list<Data>, meta?: PaginationMeta
+ *   data?: list<Data>|null, meta?: PaginationMeta|null
  * }
  */
 final class PortingOrderGetAllowedFocWindowsResponse implements BaseModel, ResponseConverter

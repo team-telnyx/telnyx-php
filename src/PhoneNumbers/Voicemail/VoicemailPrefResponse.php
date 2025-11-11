@@ -9,7 +9,9 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type VoicemailPrefResponseShape = array{enabled?: bool, pin?: string}
+ * @phpstan-type VoicemailPrefResponseShape = array{
+ *   enabled?: bool|null, pin?: string|null
+ * }
  */
 final class VoicemailPrefResponse implements BaseModel
 {

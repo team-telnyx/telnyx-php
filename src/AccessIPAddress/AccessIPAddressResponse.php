@@ -13,13 +13,13 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 /**
  * @phpstan-type AccessIPAddressResponseShape = array{
  *   id: string,
- *   ipAddress: string,
+ *   ip_address: string,
  *   source: string,
  *   status: value-of<CloudflareSyncStatus>,
- *   userID: string,
- *   createdAt?: \DateTimeInterface,
- *   description?: string,
- *   updatedAt?: \DateTimeInterface,
+ *   user_id: string,
+ *   created_at?: \DateTimeInterface|null,
+ *   description?: string|null,
+ *   updated_at?: \DateTimeInterface|null,
  * }
  */
 final class AccessIPAddressResponse implements BaseModel, ResponseConverter
@@ -32,8 +32,8 @@ final class AccessIPAddressResponse implements BaseModel, ResponseConverter
     #[Api]
     public string $id;
 
-    #[Api('ip_address')]
-    public string $ipAddress;
+    #[Api]
+    public string $ip_address;
 
     #[Api]
     public string $source;
@@ -46,17 +46,17 @@ final class AccessIPAddressResponse implements BaseModel, ResponseConverter
     #[Api(enum: CloudflareSyncStatus::class)]
     public string $status;
 
-    #[Api('user_id')]
-    public string $userID;
+    #[Api]
+    public string $user_id;
 
-    #[Api('created_at', optional: true)]
-    public ?\DateTimeInterface $createdAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $created_at;
 
     #[Api(optional: true)]
     public ?string $description;
 
-    #[Api('updated_at', optional: true)]
-    public ?\DateTimeInterface $updatedAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $updated_at;
 
     /**
      * `new AccessIPAddressResponse()` is missing required properties by the API.
@@ -64,7 +64,7 @@ final class AccessIPAddressResponse implements BaseModel, ResponseConverter
      * To enforce required parameters use
      * ```
      * AccessIPAddressResponse::with(
-     *   id: ..., ipAddress: ..., source: ..., status: ..., userID: ...
+     *   id: ..., ip_address: ..., source: ..., status: ..., user_id: ...
      * )
      * ```
      *
@@ -93,25 +93,25 @@ final class AccessIPAddressResponse implements BaseModel, ResponseConverter
      */
     public static function with(
         string $id,
-        string $ipAddress,
+        string $ip_address,
         string $source,
         CloudflareSyncStatus|string $status,
-        string $userID,
-        ?\DateTimeInterface $createdAt = null,
+        string $user_id,
+        ?\DateTimeInterface $created_at = null,
         ?string $description = null,
-        ?\DateTimeInterface $updatedAt = null,
+        ?\DateTimeInterface $updated_at = null,
     ): self {
         $obj = new self;
 
         $obj->id = $id;
-        $obj->ipAddress = $ipAddress;
+        $obj->ip_address = $ip_address;
         $obj->source = $source;
         $obj['status'] = $status;
-        $obj->userID = $userID;
+        $obj->user_id = $user_id;
 
-        null !== $createdAt && $obj->createdAt = $createdAt;
+        null !== $created_at && $obj->created_at = $created_at;
         null !== $description && $obj->description = $description;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
+        null !== $updated_at && $obj->updated_at = $updated_at;
 
         return $obj;
     }
@@ -127,7 +127,7 @@ final class AccessIPAddressResponse implements BaseModel, ResponseConverter
     public function withIPAddress(string $ipAddress): self
     {
         $obj = clone $this;
-        $obj->ipAddress = $ipAddress;
+        $obj->ip_address = $ipAddress;
 
         return $obj;
     }
@@ -156,7 +156,7 @@ final class AccessIPAddressResponse implements BaseModel, ResponseConverter
     public function withUserID(string $userID): self
     {
         $obj = clone $this;
-        $obj->userID = $userID;
+        $obj->user_id = $userID;
 
         return $obj;
     }
@@ -164,7 +164,7 @@ final class AccessIPAddressResponse implements BaseModel, ResponseConverter
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }
@@ -180,7 +180,7 @@ final class AccessIPAddressResponse implements BaseModel, ResponseConverter
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $obj->updated_at = $updatedAt;
 
         return $obj;
     }

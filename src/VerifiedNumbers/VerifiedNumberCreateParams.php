@@ -16,8 +16,8 @@ use Telnyx\VerifiedNumbers\VerifiedNumberCreateParams\VerificationMethod;
  * @see Telnyx\VerifiedNumbers->create
  *
  * @phpstan-type VerifiedNumberCreateParamsShape = array{
- *   phoneNumber: string,
- *   verificationMethod: VerificationMethod|value-of<VerificationMethod>,
+ *   phone_number: string,
+ *   verification_method: VerificationMethod|value-of<VerificationMethod>,
  *   extension?: string|null,
  * }
  */
@@ -27,16 +27,16 @@ final class VerifiedNumberCreateParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    #[Api('phone_number')]
-    public string $phoneNumber;
+    #[Api]
+    public string $phone_number;
 
     /**
      * Verification method.
      *
-     * @var value-of<VerificationMethod> $verificationMethod
+     * @var value-of<VerificationMethod> $verification_method
      */
-    #[Api('verification_method', enum: VerificationMethod::class)]
-    public string $verificationMethod;
+    #[Api(enum: VerificationMethod::class)]
+    public string $verification_method;
 
     /**
      * Optional DTMF extension sequence to dial after the call is answered. This parameter enables verification of phone numbers behind IVR systems that require extension dialing. Valid characters: digits 0-9, letters A-D, symbols * and #. Pauses: w = 0.5 second pause, W = 1 second pause. Maximum length: 50 characters. Only works with 'call' verification method.
@@ -49,7 +49,7 @@ final class VerifiedNumberCreateParams implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * VerifiedNumberCreateParams::with(phoneNumber: ..., verificationMethod: ...)
+     * VerifiedNumberCreateParams::with(phone_number: ..., verification_method: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -70,17 +70,17 @@ final class VerifiedNumberCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param VerificationMethod|value-of<VerificationMethod> $verificationMethod
+     * @param VerificationMethod|value-of<VerificationMethod> $verification_method
      */
     public static function with(
-        string $phoneNumber,
-        VerificationMethod|string $verificationMethod,
+        string $phone_number,
+        VerificationMethod|string $verification_method,
         ?string $extension = null,
     ): self {
         $obj = new self;
 
-        $obj->phoneNumber = $phoneNumber;
-        $obj['verificationMethod'] = $verificationMethod;
+        $obj->phone_number = $phone_number;
+        $obj['verification_method'] = $verification_method;
 
         null !== $extension && $obj->extension = $extension;
 
@@ -90,7 +90,7 @@ final class VerifiedNumberCreateParams implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj->phoneNumber = $phoneNumber;
+        $obj->phone_number = $phoneNumber;
 
         return $obj;
     }
@@ -104,7 +104,7 @@ final class VerifiedNumberCreateParams implements BaseModel
         VerificationMethod|string $verificationMethod
     ): self {
         $obj = clone $this;
-        $obj['verificationMethod'] = $verificationMethod;
+        $obj['verification_method'] = $verificationMethod;
 
         return $obj;
     }

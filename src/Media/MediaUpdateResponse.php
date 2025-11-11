@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type MediaUpdateResponseShape = array{data?: MediaResource}
+ * @phpstan-type MediaUpdateResponseShape = array{data?: MediaResource|null}
  */
 final class MediaUpdateResponse implements BaseModel, ResponseConverter
 {

@@ -12,11 +12,11 @@ use Telnyx\PhoneNumbersRegulatoryRequirements\PhoneNumbersRegulatoryRequirementG
 
 /**
  * @phpstan-type DataShape = array{
- *   phoneNumber?: string,
- *   phoneNumberType?: string,
- *   recordType?: string,
- *   regionInformation?: list<RegionInformation>,
- *   regulatoryRequirements?: list<RegulatoryRequirement>,
+ *   phone_number?: string|null,
+ *   phone_number_type?: string|null,
+ *   record_type?: string|null,
+ *   region_information?: list<RegionInformation>|null,
+ *   regulatory_requirements?: list<RegulatoryRequirement>|null,
  * }
  */
 final class Data implements BaseModel
@@ -24,26 +24,22 @@ final class Data implements BaseModel
     /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Api('phone_number', optional: true)]
-    public ?string $phoneNumber;
+    #[Api(optional: true)]
+    public ?string $phone_number;
 
-    #[Api('phone_number_type', optional: true)]
-    public ?string $phoneNumberType;
+    #[Api(optional: true)]
+    public ?string $phone_number_type;
 
-    #[Api('record_type', optional: true)]
-    public ?string $recordType;
+    #[Api(optional: true)]
+    public ?string $record_type;
 
-    /** @var list<RegionInformation>|null $regionInformation */
-    #[Api('region_information', list: RegionInformation::class, optional: true)]
-    public ?array $regionInformation;
+    /** @var list<RegionInformation>|null $region_information */
+    #[Api(list: RegionInformation::class, optional: true)]
+    public ?array $region_information;
 
-    /** @var list<RegulatoryRequirement>|null $regulatoryRequirements */
-    #[Api(
-        'regulatory_requirements',
-        list: RegulatoryRequirement::class,
-        optional: true,
-    )]
-    public ?array $regulatoryRequirements;
+    /** @var list<RegulatoryRequirement>|null $regulatory_requirements */
+    #[Api(list: RegulatoryRequirement::class, optional: true)]
+    public ?array $regulatory_requirements;
 
     public function __construct()
     {
@@ -55,23 +51,23 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<RegionInformation> $regionInformation
-     * @param list<RegulatoryRequirement> $regulatoryRequirements
+     * @param list<RegionInformation> $region_information
+     * @param list<RegulatoryRequirement> $regulatory_requirements
      */
     public static function with(
-        ?string $phoneNumber = null,
-        ?string $phoneNumberType = null,
-        ?string $recordType = null,
-        ?array $regionInformation = null,
-        ?array $regulatoryRequirements = null,
+        ?string $phone_number = null,
+        ?string $phone_number_type = null,
+        ?string $record_type = null,
+        ?array $region_information = null,
+        ?array $regulatory_requirements = null,
     ): self {
         $obj = new self;
 
-        null !== $phoneNumber && $obj->phoneNumber = $phoneNumber;
-        null !== $phoneNumberType && $obj->phoneNumberType = $phoneNumberType;
-        null !== $recordType && $obj->recordType = $recordType;
-        null !== $regionInformation && $obj->regionInformation = $regionInformation;
-        null !== $regulatoryRequirements && $obj->regulatoryRequirements = $regulatoryRequirements;
+        null !== $phone_number && $obj->phone_number = $phone_number;
+        null !== $phone_number_type && $obj->phone_number_type = $phone_number_type;
+        null !== $record_type && $obj->record_type = $record_type;
+        null !== $region_information && $obj->region_information = $region_information;
+        null !== $regulatory_requirements && $obj->regulatory_requirements = $regulatory_requirements;
 
         return $obj;
     }
@@ -79,7 +75,7 @@ final class Data implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj->phoneNumber = $phoneNumber;
+        $obj->phone_number = $phoneNumber;
 
         return $obj;
     }
@@ -87,7 +83,7 @@ final class Data implements BaseModel
     public function withPhoneNumberType(string $phoneNumberType): self
     {
         $obj = clone $this;
-        $obj->phoneNumberType = $phoneNumberType;
+        $obj->phone_number_type = $phoneNumberType;
 
         return $obj;
     }
@@ -95,7 +91,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType;
+        $obj->record_type = $recordType;
 
         return $obj;
     }
@@ -106,7 +102,7 @@ final class Data implements BaseModel
     public function withRegionInformation(array $regionInformation): self
     {
         $obj = clone $this;
-        $obj->regionInformation = $regionInformation;
+        $obj->region_information = $regionInformation;
 
         return $obj;
     }
@@ -118,7 +114,7 @@ final class Data implements BaseModel
         array $regulatoryRequirements
     ): self {
         $obj = clone $this;
-        $obj->regulatoryRequirements = $regulatoryRequirements;
+        $obj->regulatory_requirements = $regulatoryRequirements;
 
         return $obj;
     }

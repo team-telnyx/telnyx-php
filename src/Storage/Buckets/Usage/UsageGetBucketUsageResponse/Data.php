@@ -10,7 +10,10 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type DataShape = array{
- *   numObjects?: int, size?: int, sizeKB?: int, timestamp?: \DateTimeInterface
+ *   num_objects?: int|null,
+ *   size?: int|null,
+ *   size_kb?: int|null,
+ *   timestamp?: \DateTimeInterface|null,
  * }
  */
 final class Data implements BaseModel
@@ -21,8 +24,8 @@ final class Data implements BaseModel
     /**
      * The number of objects in the bucket.
      */
-    #[Api('num_objects', optional: true)]
-    public ?int $numObjects;
+    #[Api(optional: true)]
+    public ?int $num_objects;
 
     /**
      * The size of the bucket in bytes.
@@ -33,8 +36,8 @@ final class Data implements BaseModel
     /**
      * The size of the bucket in kilobytes.
      */
-    #[Api('size_kb', optional: true)]
-    public ?int $sizeKB;
+    #[Api(optional: true)]
+    public ?int $size_kb;
 
     /**
      * The time the snapshot was taken.
@@ -53,16 +56,16 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?int $numObjects = null,
+        ?int $num_objects = null,
         ?int $size = null,
-        ?int $sizeKB = null,
+        ?int $size_kb = null,
         ?\DateTimeInterface $timestamp = null,
     ): self {
         $obj = new self;
 
-        null !== $numObjects && $obj->numObjects = $numObjects;
+        null !== $num_objects && $obj->num_objects = $num_objects;
         null !== $size && $obj->size = $size;
-        null !== $sizeKB && $obj->sizeKB = $sizeKB;
+        null !== $size_kb && $obj->size_kb = $size_kb;
         null !== $timestamp && $obj->timestamp = $timestamp;
 
         return $obj;
@@ -74,7 +77,7 @@ final class Data implements BaseModel
     public function withNumObjects(int $numObjects): self
     {
         $obj = clone $this;
-        $obj->numObjects = $numObjects;
+        $obj->num_objects = $numObjects;
 
         return $obj;
     }
@@ -96,7 +99,7 @@ final class Data implements BaseModel
     public function withSizeKB(int $sizeKB): self
     {
         $obj = clone $this;
-        $obj->sizeKB = $sizeKB;
+        $obj->size_kb = $sizeKB;
 
         return $obj;
     }

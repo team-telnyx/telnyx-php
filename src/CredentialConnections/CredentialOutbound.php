@@ -12,15 +12,15 @@ use Telnyx\CredentialConnections\CredentialOutbound\T38ReinviteSource;
 
 /**
  * @phpstan-type CredentialOutboundShape = array{
- *   aniOverride?: string,
- *   aniOverrideType?: value-of<AniOverrideType>,
- *   callParkingEnabled?: bool|null,
- *   channelLimit?: int,
- *   generateRingbackTone?: bool,
- *   instantRingbackEnabled?: bool,
- *   localization?: string,
- *   outboundVoiceProfileID?: string,
- *   t38ReinviteSource?: value-of<T38ReinviteSource>,
+ *   ani_override?: string|null,
+ *   ani_override_type?: value-of<AniOverrideType>|null,
+ *   call_parking_enabled?: bool|null,
+ *   channel_limit?: int|null,
+ *   generate_ringback_tone?: bool|null,
+ *   instant_ringback_enabled?: bool|null,
+ *   localization?: string|null,
+ *   outbound_voice_profile_id?: string|null,
+ *   t38_reinvite_source?: value-of<T38ReinviteSource>|null,
  * }
  */
 final class CredentialOutbound implements BaseModel
@@ -31,40 +31,40 @@ final class CredentialOutbound implements BaseModel
     /**
      * Set a phone number as the ani_override value to override caller id number on outbound calls.
      */
-    #[Api('ani_override', optional: true)]
-    public ?string $aniOverride;
+    #[Api(optional: true)]
+    public ?string $ani_override;
 
     /**
      * Specifies when we apply your ani_override setting. Only applies when ani_override is not blank.
      *
-     * @var value-of<AniOverrideType>|null $aniOverrideType
+     * @var value-of<AniOverrideType>|null $ani_override_type
      */
-    #[Api('ani_override_type', enum: AniOverrideType::class, optional: true)]
-    public ?string $aniOverrideType;
+    #[Api(enum: AniOverrideType::class, optional: true)]
+    public ?string $ani_override_type;
 
     /**
      * Forces all SIP calls originated on this connection to be "parked" instead of "bridged" to the destination specified on the URI. Parked calls will return ringback to the caller and will await for a Call Control command to define which action will be taken next.
      */
-    #[Api('call_parking_enabled', nullable: true, optional: true)]
-    public ?bool $callParkingEnabled;
+    #[Api(nullable: true, optional: true)]
+    public ?bool $call_parking_enabled;
 
     /**
      * When set, this will limit the total number of outbound calls to phone numbers associated with this connection.
      */
-    #[Api('channel_limit', optional: true)]
-    public ?int $channelLimit;
+    #[Api(optional: true)]
+    public ?int $channel_limit;
 
     /**
      * Generate ringback tone through 183 session progress message with early media.
      */
-    #[Api('generate_ringback_tone', optional: true)]
-    public ?bool $generateRingbackTone;
+    #[Api(optional: true)]
+    public ?bool $generate_ringback_tone;
 
     /**
      * When set, ringback will not wait for indication before sending ringback tone to calling party.
      */
-    #[Api('instant_ringback_enabled', optional: true)]
-    public ?bool $instantRingbackEnabled;
+    #[Api(optional: true)]
+    public ?bool $instant_ringback_enabled;
 
     /**
      * A 2-character country code specifying the country whose national dialing rules should be used. For example, if set to `US` then any US number can be dialed without preprending +1 to the number. When left blank, Telnyx will try US and GB dialing rules, in that order, by default.
@@ -75,16 +75,16 @@ final class CredentialOutbound implements BaseModel
     /**
      * Identifies the associated outbound voice profile.
      */
-    #[Api('outbound_voice_profile_id', optional: true)]
-    public ?string $outboundVoiceProfileID;
+    #[Api(optional: true)]
+    public ?string $outbound_voice_profile_id;
 
     /**
      * This setting only affects connections with Fax-type Outbound Voice Profiles. The setting dictates whether or not Telnyx sends a t.38 reinvite.<br/><br/> By default, Telnyx will send the re-invite. If set to `customer`, the caller is expected to send the t.38 reinvite.
      *
-     * @var value-of<T38ReinviteSource>|null $t38ReinviteSource
+     * @var value-of<T38ReinviteSource>|null $t38_reinvite_source
      */
-    #[Api('t38_reinvite_source', enum: T38ReinviteSource::class, optional: true)]
-    public ?string $t38ReinviteSource;
+    #[Api(enum: T38ReinviteSource::class, optional: true)]
+    public ?string $t38_reinvite_source;
 
     public function __construct()
     {
@@ -96,31 +96,31 @@ final class CredentialOutbound implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AniOverrideType|value-of<AniOverrideType> $aniOverrideType
-     * @param T38ReinviteSource|value-of<T38ReinviteSource> $t38ReinviteSource
+     * @param AniOverrideType|value-of<AniOverrideType> $ani_override_type
+     * @param T38ReinviteSource|value-of<T38ReinviteSource> $t38_reinvite_source
      */
     public static function with(
-        ?string $aniOverride = null,
-        AniOverrideType|string|null $aniOverrideType = null,
-        ?bool $callParkingEnabled = null,
-        ?int $channelLimit = null,
-        ?bool $generateRingbackTone = null,
-        ?bool $instantRingbackEnabled = null,
+        ?string $ani_override = null,
+        AniOverrideType|string|null $ani_override_type = null,
+        ?bool $call_parking_enabled = null,
+        ?int $channel_limit = null,
+        ?bool $generate_ringback_tone = null,
+        ?bool $instant_ringback_enabled = null,
         ?string $localization = null,
-        ?string $outboundVoiceProfileID = null,
-        T38ReinviteSource|string|null $t38ReinviteSource = null,
+        ?string $outbound_voice_profile_id = null,
+        T38ReinviteSource|string|null $t38_reinvite_source = null,
     ): self {
         $obj = new self;
 
-        null !== $aniOverride && $obj->aniOverride = $aniOverride;
-        null !== $aniOverrideType && $obj['aniOverrideType'] = $aniOverrideType;
-        null !== $callParkingEnabled && $obj->callParkingEnabled = $callParkingEnabled;
-        null !== $channelLimit && $obj->channelLimit = $channelLimit;
-        null !== $generateRingbackTone && $obj->generateRingbackTone = $generateRingbackTone;
-        null !== $instantRingbackEnabled && $obj->instantRingbackEnabled = $instantRingbackEnabled;
+        null !== $ani_override && $obj->ani_override = $ani_override;
+        null !== $ani_override_type && $obj['ani_override_type'] = $ani_override_type;
+        null !== $call_parking_enabled && $obj->call_parking_enabled = $call_parking_enabled;
+        null !== $channel_limit && $obj->channel_limit = $channel_limit;
+        null !== $generate_ringback_tone && $obj->generate_ringback_tone = $generate_ringback_tone;
+        null !== $instant_ringback_enabled && $obj->instant_ringback_enabled = $instant_ringback_enabled;
         null !== $localization && $obj->localization = $localization;
-        null !== $outboundVoiceProfileID && $obj->outboundVoiceProfileID = $outboundVoiceProfileID;
-        null !== $t38ReinviteSource && $obj['t38ReinviteSource'] = $t38ReinviteSource;
+        null !== $outbound_voice_profile_id && $obj->outbound_voice_profile_id = $outbound_voice_profile_id;
+        null !== $t38_reinvite_source && $obj['t38_reinvite_source'] = $t38_reinvite_source;
 
         return $obj;
     }
@@ -131,7 +131,7 @@ final class CredentialOutbound implements BaseModel
     public function withAniOverride(string $aniOverride): self
     {
         $obj = clone $this;
-        $obj->aniOverride = $aniOverride;
+        $obj->ani_override = $aniOverride;
 
         return $obj;
     }
@@ -145,7 +145,7 @@ final class CredentialOutbound implements BaseModel
         AniOverrideType|string $aniOverrideType
     ): self {
         $obj = clone $this;
-        $obj['aniOverrideType'] = $aniOverrideType;
+        $obj['ani_override_type'] = $aniOverrideType;
 
         return $obj;
     }
@@ -156,7 +156,7 @@ final class CredentialOutbound implements BaseModel
     public function withCallParkingEnabled(?bool $callParkingEnabled): self
     {
         $obj = clone $this;
-        $obj->callParkingEnabled = $callParkingEnabled;
+        $obj->call_parking_enabled = $callParkingEnabled;
 
         return $obj;
     }
@@ -167,7 +167,7 @@ final class CredentialOutbound implements BaseModel
     public function withChannelLimit(int $channelLimit): self
     {
         $obj = clone $this;
-        $obj->channelLimit = $channelLimit;
+        $obj->channel_limit = $channelLimit;
 
         return $obj;
     }
@@ -178,7 +178,7 @@ final class CredentialOutbound implements BaseModel
     public function withGenerateRingbackTone(bool $generateRingbackTone): self
     {
         $obj = clone $this;
-        $obj->generateRingbackTone = $generateRingbackTone;
+        $obj->generate_ringback_tone = $generateRingbackTone;
 
         return $obj;
     }
@@ -190,7 +190,7 @@ final class CredentialOutbound implements BaseModel
         bool $instantRingbackEnabled
     ): self {
         $obj = clone $this;
-        $obj->instantRingbackEnabled = $instantRingbackEnabled;
+        $obj->instant_ringback_enabled = $instantRingbackEnabled;
 
         return $obj;
     }
@@ -213,7 +213,7 @@ final class CredentialOutbound implements BaseModel
         string $outboundVoiceProfileID
     ): self {
         $obj = clone $this;
-        $obj->outboundVoiceProfileID = $outboundVoiceProfileID;
+        $obj->outbound_voice_profile_id = $outboundVoiceProfileID;
 
         return $obj;
     }
@@ -227,7 +227,7 @@ final class CredentialOutbound implements BaseModel
         T38ReinviteSource|string $t38ReinviteSource
     ): self {
         $obj = clone $this;
-        $obj['t38ReinviteSource'] = $t38ReinviteSource;
+        $obj['t38_reinvite_source'] = $t38ReinviteSource;
 
         return $obj;
     }

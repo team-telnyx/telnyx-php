@@ -10,10 +10,7 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\TextToSpeechContract;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams;
 use Telnyx\TextToSpeech\TextToSpeechListVoicesParams;
-use Telnyx\TextToSpeech\TextToSpeechListVoicesParams\Provider;
 use Telnyx\TextToSpeech\TextToSpeechListVoicesResponse;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class TextToSpeechService implements TextToSpeechContract
 {
@@ -27,43 +24,19 @@ final class TextToSpeechService implements TextToSpeechContract
      *
      * Converts the provided text to speech using the specified voice and returns audio data
      *
-     * @param string $text The text to convert to speech
-     * @param string $voice The voice ID in the format Provider.ModelId.VoiceId.
-     *
-     * Examples:
-     * - AWS.Polly.Joanna-Neural
-     * - Azure.en-US-AvaMultilingualNeural
-     * - ElevenLabs.eleven_multilingual_v2.Rachel
-     * - Telnyx.KokoroTTS.af
-     *
-     * Use the `GET /text-to-speech/voices` endpoint to get a complete list of available voices.
+     * @param array{
+     *   text: string, voice: string
+     * }|TextToSpeechGenerateSpeechParams $params
      *
      * @throws APIException
      */
     public function generateSpeech(
-        $text,
-        $voice,
-        ?RequestOptions $requestOptions = null
-    ): string {
-        $params = ['text' => $text, 'voice' => $voice];
-
-        return $this->generateSpeechRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function generateSpeechRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|TextToSpeechGenerateSpeechParams $params,
+        ?RequestOptions $requestOptions = null,
     ): string {
         [$parsed, $options] = TextToSpeechGenerateSpeechParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -82,37 +55,20 @@ final class TextToSpeechService implements TextToSpeechContract
      *
      * Returns a list of voices that can be used with the text to speech commands.
      *
-     * @param string $elevenlabsAPIKeyRef Reference to your ElevenLabs API key stored in the Telnyx Portal
-     * @param Provider|value-of<Provider> $provider Filter voices by provider
+     * @param array{
+     *   elevenlabs_api_key_ref?: string,
+     *   provider?: "aws"|"azure"|"elevenlabs"|"telnyx",
+     * }|TextToSpeechListVoicesParams $params
      *
      * @throws APIException
      */
     public function listVoices(
-        $elevenlabsAPIKeyRef = omit,
-        $provider = omit,
+        array|TextToSpeechListVoicesParams $params,
         ?RequestOptions $requestOptions = null,
-    ): TextToSpeechListVoicesResponse {
-        $params = [
-            'elevenlabsAPIKeyRef' => $elevenlabsAPIKeyRef, 'provider' => $provider,
-        ];
-
-        return $this->listVoicesRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listVoicesRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): TextToSpeechListVoicesResponse {
         [$parsed, $options] = TextToSpeechListVoicesParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

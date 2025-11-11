@@ -14,22 +14,20 @@ use Telnyx\Services\Legacy\Reporting\UsageReports\MessagingService;
 use Telnyx\Services\Legacy\Reporting\UsageReports\NumberLookupService;
 use Telnyx\Services\Legacy\Reporting\UsageReports\VoiceService;
 
-use const Telnyx\Core\OMIT as omit;
-
 final class UsageReportsService implements UsageReportsContract
 {
     /**
-     * @@api
+     * @api
      */
     public MessagingService $messaging;
 
     /**
-     * @@api
+     * @api
      */
     public NumberLookupService $numberLookup;
 
     /**
-     * @@api
+     * @api
      */
     public VoiceService $voice;
 
@@ -48,35 +46,19 @@ final class UsageReportsService implements UsageReportsContract
      *
      * Generate and fetch speech to text usage report synchronously. This endpoint will both generate and fetch the speech to text report over a specified time period.
      *
-     * @param \DateTimeInterface $endDate
-     * @param \DateTimeInterface $startDate
+     * @param array{
+     *   end_date?: string|\DateTimeInterface, start_date?: string|\DateTimeInterface
+     * }|UsageReportRetrieveSpeechToTextParams $params
      *
      * @throws APIException
      */
     public function retrieveSpeechToText(
-        $endDate = omit,
-        $startDate = omit,
-        ?RequestOptions $requestOptions = null
-    ): UsageReportGetSpeechToTextResponse {
-        $params = ['endDate' => $endDate, 'startDate' => $startDate];
-
-        return $this->retrieveSpeechToTextRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function retrieveSpeechToTextRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|UsageReportRetrieveSpeechToTextParams $params,
+        ?RequestOptions $requestOptions = null,
     ): UsageReportGetSpeechToTextResponse {
         [$parsed, $options] = UsageReportRetrieveSpeechToTextParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

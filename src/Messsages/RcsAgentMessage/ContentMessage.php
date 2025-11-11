@@ -13,10 +13,10 @@ use Telnyx\Messsages\RcsSuggestion;
 
 /**
  * @phpstan-type ContentMessageShape = array{
- *   contentInfo?: RcsContentInfo,
- *   richCard?: RichCard,
- *   suggestions?: list<RcsSuggestion>,
- *   text?: string,
+ *   content_info?: RcsContentInfo|null,
+ *   rich_card?: RichCard|null,
+ *   suggestions?: list<RcsSuggestion>|null,
+ *   text?: string|null,
  * }
  */
 final class ContentMessage implements BaseModel
@@ -24,11 +24,11 @@ final class ContentMessage implements BaseModel
     /** @use SdkModel<ContentMessageShape> */
     use SdkModel;
 
-    #[Api('content_info', optional: true)]
-    public ?RcsContentInfo $contentInfo;
+    #[Api(optional: true)]
+    public ?RcsContentInfo $content_info;
 
-    #[Api('rich_card', optional: true)]
-    public ?RichCard $richCard;
+    #[Api(optional: true)]
+    public ?RichCard $rich_card;
 
     /**
      * List of suggested actions and replies.
@@ -57,15 +57,15 @@ final class ContentMessage implements BaseModel
      * @param list<RcsSuggestion> $suggestions
      */
     public static function with(
-        ?RcsContentInfo $contentInfo = null,
-        ?RichCard $richCard = null,
+        ?RcsContentInfo $content_info = null,
+        ?RichCard $rich_card = null,
         ?array $suggestions = null,
         ?string $text = null,
     ): self {
         $obj = new self;
 
-        null !== $contentInfo && $obj->contentInfo = $contentInfo;
-        null !== $richCard && $obj->richCard = $richCard;
+        null !== $content_info && $obj->content_info = $content_info;
+        null !== $rich_card && $obj->rich_card = $rich_card;
         null !== $suggestions && $obj->suggestions = $suggestions;
         null !== $text && $obj->text = $text;
 
@@ -75,7 +75,7 @@ final class ContentMessage implements BaseModel
     public function withContentInfo(RcsContentInfo $contentInfo): self
     {
         $obj = clone $this;
-        $obj->contentInfo = $contentInfo;
+        $obj->content_info = $contentInfo;
 
         return $obj;
     }
@@ -83,7 +83,7 @@ final class ContentMessage implements BaseModel
     public function withRichCard(RichCard $richCard): self
     {
         $obj = clone $this;
-        $obj->richCard = $richCard;
+        $obj->rich_card = $richCard;
 
         return $obj;
     }

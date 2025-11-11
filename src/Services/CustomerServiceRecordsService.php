@@ -7,20 +7,14 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordCreateParams;
-use Telnyx\CustomerServiceRecords\CustomerServiceRecordCreateParams\AdditionalData;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordGetResponse;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams;
-use Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams\Filter;
-use Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams\Page;
-use Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams\Sort;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordListResponse;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordNewResponse;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordVerifyPhoneNumberCoverageParams;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordVerifyPhoneNumberCoverageResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\CustomerServiceRecordsContract;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class CustomerServiceRecordsService implements CustomerServiceRecordsContract
 {
@@ -34,41 +28,32 @@ final class CustomerServiceRecordsService implements CustomerServiceRecordsContr
      *
      * Create a new customer service record for the provided phone number.
      *
-     * @param string $phoneNumber a valid US phone number in E164 format
-     * @param AdditionalData $additionalData
-     * @param string $webhookURL callback URL to receive webhook notifications
+     * @param array{
+     *   phone_number: string,
+     *   additional_data?: array{
+     *     account_number?: string,
+     *     address_line_1?: string,
+     *     authorized_person_name?: string,
+     *     billing_phone_number?: string,
+     *     city?: string,
+     *     customer_code?: string,
+     *     name?: string,
+     *     pin?: string,
+     *     state?: string,
+     *     zip_code?: string,
+     *   },
+     *   webhook_url?: string,
+     * }|CustomerServiceRecordCreateParams $params
      *
      * @throws APIException
      */
     public function create(
-        $phoneNumber,
-        $additionalData = omit,
-        $webhookURL = omit,
+        array|CustomerServiceRecordCreateParams $params,
         ?RequestOptions $requestOptions = null,
-    ): CustomerServiceRecordNewResponse {
-        $params = [
-            'phoneNumber' => $phoneNumber,
-            'additionalData' => $additionalData,
-            'webhookURL' => $webhookURL,
-        ];
-
-        return $this->createRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): CustomerServiceRecordNewResponse {
         [$parsed, $options] = CustomerServiceRecordCreateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -106,37 +91,30 @@ final class CustomerServiceRecordsService implements CustomerServiceRecordsContr
      *
      * List customer service records.
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[phone_number][eq], filter[phone_number][in][], filter[status][eq], filter[status][in][], filter[created_at][lt], filter[created_at][gt]
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
-     * @param Sort $sort Consolidated sort parameter (deepObject style). Originally: sort[value]
+     * @param array{
+     *   filter?: array{
+     *     created_at?: array{
+     *       gt?: string|\DateTimeInterface, lt?: string|\DateTimeInterface
+     *     },
+     *     phone_number?: array{eq?: string, in?: list<string>},
+     *     status?: array{
+     *       eq?: "pending"|"completed"|"failed",
+     *       in?: list<"pending"|"completed"|"failed">,
+     *     },
+     *   },
+     *   page?: array{number?: int, size?: int},
+     *   sort?: array{value?: "created_at"|"-created_at"},
+     * }|CustomerServiceRecordListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
-        $sort = omit,
+        array|CustomerServiceRecordListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): CustomerServiceRecordListResponse {
-        $params = ['filter' => $filter, 'page' => $page, 'sort' => $sort];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): CustomerServiceRecordListResponse {
         [$parsed, $options] = CustomerServiceRecordListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -154,35 +132,19 @@ final class CustomerServiceRecordsService implements CustomerServiceRecordsContr
      *
      * Verify the coverage for a list of phone numbers.
      *
-     * @param list<string> $phoneNumbers the phone numbers list to be verified
+     * @param array{
+     *   phone_numbers: list<string>
+     * }|CustomerServiceRecordVerifyPhoneNumberCoverageParams $params
      *
      * @throws APIException
      */
     public function verifyPhoneNumberCoverage(
-        $phoneNumbers,
-        ?RequestOptions $requestOptions = null
+        array|CustomerServiceRecordVerifyPhoneNumberCoverageParams $params,
+        ?RequestOptions $requestOptions = null,
     ): CustomerServiceRecordVerifyPhoneNumberCoverageResponse {
-        $params = ['phoneNumbers' => $phoneNumbers];
-
-        return $this->verifyPhoneNumberCoverageRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function verifyPhoneNumberCoverageRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): CustomerServiceRecordVerifyPhoneNumberCoverageResponse {
-        [
-            $parsed, $options,
-        ] = CustomerServiceRecordVerifyPhoneNumberCoverageParams::parseRequest(
+        [$parsed, $options] = CustomerServiceRecordVerifyPhoneNumberCoverageParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

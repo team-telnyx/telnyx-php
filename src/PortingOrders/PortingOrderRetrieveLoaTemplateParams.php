@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\PortingOrders->retrieveLoaTemplate
  *
  * @phpstan-type PortingOrderRetrieveLoaTemplateParamsShape = array{
- *   loaConfigurationID?: string
+ *   loa_configuration_id?: string
  * }
  */
 final class PortingOrderRetrieveLoaTemplateParams implements BaseModel
@@ -28,7 +28,7 @@ final class PortingOrderRetrieveLoaTemplateParams implements BaseModel
      * The identifier of the LOA configuration to use for the template. If not provided, the default LOA configuration will be used.
      */
     #[Api(optional: true)]
-    public ?string $loaConfigurationID;
+    public ?string $loa_configuration_id;
 
     public function __construct()
     {
@@ -40,11 +40,11 @@ final class PortingOrderRetrieveLoaTemplateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?string $loaConfigurationID = null): self
+    public static function with(?string $loa_configuration_id = null): self
     {
         $obj = new self;
 
-        null !== $loaConfigurationID && $obj->loaConfigurationID = $loaConfigurationID;
+        null !== $loa_configuration_id && $obj->loa_configuration_id = $loa_configuration_id;
 
         return $obj;
     }
@@ -55,7 +55,7 @@ final class PortingOrderRetrieveLoaTemplateParams implements BaseModel
     public function withLoaConfigurationID(string $loaConfigurationID): self
     {
         $obj = clone $this;
-        $obj->loaConfigurationID = $loaConfigurationID;
+        $obj->loa_configuration_id = $loaConfigurationID;
 
         return $obj;
     }

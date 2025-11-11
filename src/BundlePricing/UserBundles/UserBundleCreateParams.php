@@ -16,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\BundlePricing\UserBundles->create
  *
  * @phpstan-type UserBundleCreateParamsShape = array{
- *   idempotencyKey?: string, items?: list<Item>, authorizationBearer?: string
+ *   idempotency_key?: string, items?: list<Item>, authorization_bearer?: string
  * }
  */
 final class UserBundleCreateParams implements BaseModel
@@ -28,8 +28,8 @@ final class UserBundleCreateParams implements BaseModel
     /**
      * Idempotency key for the request. Can be any UUID, but should always be unique for each request.
      */
-    #[Api('idempotency_key', optional: true)]
-    public ?string $idempotencyKey;
+    #[Api(optional: true)]
+    public ?string $idempotency_key;
 
     /** @var list<Item>|null $items */
     #[Api(list: Item::class, optional: true)]
@@ -39,7 +39,7 @@ final class UserBundleCreateParams implements BaseModel
      * Authenticates the request with your Telnyx API V2 KEY.
      */
     #[Api(optional: true)]
-    public ?string $authorizationBearer;
+    public ?string $authorization_bearer;
 
     public function __construct()
     {
@@ -54,15 +54,15 @@ final class UserBundleCreateParams implements BaseModel
      * @param list<Item> $items
      */
     public static function with(
-        ?string $idempotencyKey = null,
+        ?string $idempotency_key = null,
         ?array $items = null,
-        ?string $authorizationBearer = null,
+        ?string $authorization_bearer = null,
     ): self {
         $obj = new self;
 
-        null !== $idempotencyKey && $obj->idempotencyKey = $idempotencyKey;
+        null !== $idempotency_key && $obj->idempotency_key = $idempotency_key;
         null !== $items && $obj->items = $items;
-        null !== $authorizationBearer && $obj->authorizationBearer = $authorizationBearer;
+        null !== $authorization_bearer && $obj->authorization_bearer = $authorization_bearer;
 
         return $obj;
     }
@@ -73,7 +73,7 @@ final class UserBundleCreateParams implements BaseModel
     public function withIdempotencyKey(string $idempotencyKey): self
     {
         $obj = clone $this;
-        $obj->idempotencyKey = $idempotencyKey;
+        $obj->idempotency_key = $idempotencyKey;
 
         return $obj;
     }
@@ -95,7 +95,7 @@ final class UserBundleCreateParams implements BaseModel
     public function withAuthorizationBearer(string $authorizationBearer): self
     {
         $obj = clone $this;
-        $obj->authorizationBearer = $authorizationBearer;
+        $obj->authorization_bearer = $authorizationBearer;
 
         return $obj;
     }

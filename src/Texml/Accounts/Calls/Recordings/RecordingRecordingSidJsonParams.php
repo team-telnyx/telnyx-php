@@ -16,7 +16,9 @@ use Telnyx\Texml\Accounts\Calls\Recordings\RecordingRecordingSidJsonParams\Statu
  * @see Telnyx\Texml\Accounts\Calls\Recordings->recordingSidJson
  *
  * @phpstan-type RecordingRecordingSidJsonParamsShape = array{
- *   accountSid: string, callSid: string, status?: Status|value-of<Status>
+ *   account_sid: string,
+ *   call_sid: string,
+ *   Status?: \Telnyx\Texml\Accounts\Calls\Recordings\RecordingRecordingSidJsonParams\Status|value-of<\Telnyx\Texml\Accounts\Calls\Recordings\RecordingRecordingSidJsonParams\Status>,
  * }
  */
 final class RecordingRecordingSidJsonParams implements BaseModel
@@ -26,21 +28,26 @@ final class RecordingRecordingSidJsonParams implements BaseModel
     use SdkParams;
 
     #[Api]
-    public string $accountSid;
+    public string $account_sid;
 
     #[Api]
-    public string $callSid;
+    public string $call_sid;
 
-    /** @var value-of<Status>|null $status */
-    #[Api('Status', enum: Status::class, optional: true)]
-    public ?string $status;
+    /**
+     * @var value-of<Status>|null $Status
+     */
+    #[Api(
+        enum: Status::class,
+        optional: true,
+    )]
+    public ?string $Status;
 
     /**
      * `new RecordingRecordingSidJsonParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * RecordingRecordingSidJsonParams::with(accountSid: ..., callSid: ...)
+     * RecordingRecordingSidJsonParams::with(account_sid: ..., call_sid: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -59,19 +66,19 @@ final class RecordingRecordingSidJsonParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Status|value-of<Status> $status
+     * @param Status|value-of<Status> $Status
      */
     public static function with(
-        string $accountSid,
-        string $callSid,
-        Status|string|null $status = null
+        string $account_sid,
+        string $call_sid,
+        Status|string|null $Status = null,
     ): self {
         $obj = new self;
 
-        $obj->accountSid = $accountSid;
-        $obj->callSid = $callSid;
+        $obj->account_sid = $account_sid;
+        $obj->call_sid = $call_sid;
 
-        null !== $status && $obj['status'] = $status;
+        null !== $Status && $obj['Status'] = $Status;
 
         return $obj;
     }
@@ -79,7 +86,7 @@ final class RecordingRecordingSidJsonParams implements BaseModel
     public function withAccountSid(string $accountSid): self
     {
         $obj = clone $this;
-        $obj->accountSid = $accountSid;
+        $obj->account_sid = $accountSid;
 
         return $obj;
     }
@@ -87,7 +94,7 @@ final class RecordingRecordingSidJsonParams implements BaseModel
     public function withCallSid(string $callSid): self
     {
         $obj = clone $this;
-        $obj->callSid = $callSid;
+        $obj->call_sid = $callSid;
 
         return $obj;
     }
@@ -95,10 +102,11 @@ final class RecordingRecordingSidJsonParams implements BaseModel
     /**
      * @param Status|value-of<Status> $status
      */
-    public function withStatus(Status|string $status): self
-    {
+    public function withStatus(
+        Status|string $status,
+    ): self {
         $obj = clone $this;
-        $obj['status'] = $status;
+        $obj['Status'] = $status;
 
         return $obj;
     }

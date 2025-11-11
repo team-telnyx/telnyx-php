@@ -17,12 +17,12 @@ use Telnyx\WebhookDeliveries\WebhookDeliveryListParams\Filter\Webhook;
  * Consolidated filter parameter (deepObject style). Originally: filter[status][eq], filter[event_type], filter[webhook][contains], filter[attempts][contains], filter[started_at][gte], filter[started_at][lte], filter[finished_at][gte], filter[finished_at][lte].
  *
  * @phpstan-type FilterShape = array{
- *   attempts?: Attempts,
- *   eventType?: string,
- *   finishedAt?: FinishedAt,
- *   startedAt?: StartedAt,
- *   status?: Status,
- *   webhook?: Webhook,
+ *   attempts?: Attempts|null,
+ *   event_type?: string|null,
+ *   finished_at?: FinishedAt|null,
+ *   started_at?: StartedAt|null,
+ *   status?: Status|null,
+ *   webhook?: Webhook|null,
  * }
  */
 final class Filter implements BaseModel
@@ -36,14 +36,14 @@ final class Filter implements BaseModel
     /**
      * Return only webhook_deliveries matching the given value of `event_type`. Accepts multiple values separated by a `,`.
      */
-    #[Api('event_type', optional: true)]
-    public ?string $eventType;
+    #[Api(optional: true)]
+    public ?string $event_type;
 
-    #[Api('finished_at', optional: true)]
-    public ?FinishedAt $finishedAt;
+    #[Api(optional: true)]
+    public ?FinishedAt $finished_at;
 
-    #[Api('started_at', optional: true)]
-    public ?StartedAt $startedAt;
+    #[Api(optional: true)]
+    public ?StartedAt $started_at;
 
     #[Api(optional: true)]
     public ?Status $status;
@@ -63,18 +63,18 @@ final class Filter implements BaseModel
      */
     public static function with(
         ?Attempts $attempts = null,
-        ?string $eventType = null,
-        ?FinishedAt $finishedAt = null,
-        ?StartedAt $startedAt = null,
+        ?string $event_type = null,
+        ?FinishedAt $finished_at = null,
+        ?StartedAt $started_at = null,
         ?Status $status = null,
         ?Webhook $webhook = null,
     ): self {
         $obj = new self;
 
         null !== $attempts && $obj->attempts = $attempts;
-        null !== $eventType && $obj->eventType = $eventType;
-        null !== $finishedAt && $obj->finishedAt = $finishedAt;
-        null !== $startedAt && $obj->startedAt = $startedAt;
+        null !== $event_type && $obj->event_type = $event_type;
+        null !== $finished_at && $obj->finished_at = $finished_at;
+        null !== $started_at && $obj->started_at = $started_at;
         null !== $status && $obj->status = $status;
         null !== $webhook && $obj->webhook = $webhook;
 
@@ -95,7 +95,7 @@ final class Filter implements BaseModel
     public function withEventType(string $eventType): self
     {
         $obj = clone $this;
-        $obj->eventType = $eventType;
+        $obj->event_type = $eventType;
 
         return $obj;
     }
@@ -103,7 +103,7 @@ final class Filter implements BaseModel
     public function withFinishedAt(FinishedAt $finishedAt): self
     {
         $obj = clone $this;
-        $obj->finishedAt = $finishedAt;
+        $obj->finished_at = $finishedAt;
 
         return $obj;
     }
@@ -111,7 +111,7 @@ final class Filter implements BaseModel
     public function withStartedAt(StartedAt $startedAt): self
     {
         $obj = clone $this;
-        $obj->startedAt = $startedAt;
+        $obj->started_at = $startedAt;
 
         return $obj;
     }

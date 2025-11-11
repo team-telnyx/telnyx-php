@@ -6,14 +6,11 @@ namespace Telnyx\Services\AI\FineTuning;
 
 use Telnyx\AI\FineTuning\Jobs\FineTuningJob;
 use Telnyx\AI\FineTuning\Jobs\JobCreateParams;
-use Telnyx\AI\FineTuning\Jobs\JobCreateParams\Hyperparameters;
 use Telnyx\AI\FineTuning\Jobs\JobListResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\FineTuning\JobsContract;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class JobsService implements JobsContract
 {
@@ -27,44 +24,22 @@ final class JobsService implements JobsContract
      *
      * Create a new fine tuning job.
      *
-     * @param string $model the base model that is being fine-tuned
-     * @param string $trainingFile the storage bucket or object used for training
-     * @param Hyperparameters $hyperparameters the hyperparameters used for the fine-tuning job
-     * @param string $suffix optional suffix to append to the fine tuned model's name
+     * @param array{
+     *   model: string,
+     *   training_file: string,
+     *   hyperparameters?: array{n_epochs?: int},
+     *   suffix?: string,
+     * }|JobCreateParams $params
      *
      * @throws APIException
      */
     public function create(
-        $model,
-        $trainingFile,
-        $hyperparameters = omit,
-        $suffix = omit,
-        ?RequestOptions $requestOptions = null,
-    ): FineTuningJob {
-        $params = [
-            'model' => $model,
-            'trainingFile' => $trainingFile,
-            'hyperparameters' => $hyperparameters,
-            'suffix' => $suffix,
-        ];
-
-        return $this->createRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
+        array|JobCreateParams $params,
         ?RequestOptions $requestOptions = null
     ): FineTuningJob {
         [$parsed, $options] = JobCreateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

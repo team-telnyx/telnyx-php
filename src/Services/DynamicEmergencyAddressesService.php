@@ -7,18 +7,13 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressCreateParams;
-use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressCreateParams\CountryCode;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressDeleteResponse;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressGetResponse;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressListParams;
-use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressListParams\Filter;
-use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressListParams\Page;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressListResponse;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\DynamicEmergencyAddressesContract;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class DynamicEmergencyAddressesService implements DynamicEmergencyAddressesContract
 {
@@ -32,65 +27,29 @@ final class DynamicEmergencyAddressesService implements DynamicEmergencyAddresse
      *
      * Creates a dynamic emergency address.
      *
-     * @param string $administrativeArea
-     * @param CountryCode|value-of<CountryCode> $countryCode
-     * @param string $houseNumber
-     * @param string $locality
-     * @param string $postalCode
-     * @param string $streetName
-     * @param string $extendedAddress
-     * @param string $houseSuffix
-     * @param string $streetPostDirectional
-     * @param string $streetPreDirectional
-     * @param string $streetSuffix
+     * @param array{
+     *   administrative_area: string,
+     *   country_code: "US"|"CA"|"PR",
+     *   house_number: string,
+     *   locality: string,
+     *   postal_code: string,
+     *   street_name: string,
+     *   extended_address?: string,
+     *   house_suffix?: string,
+     *   street_post_directional?: string,
+     *   street_pre_directional?: string,
+     *   street_suffix?: string,
+     * }|DynamicEmergencyAddressCreateParams $params
      *
      * @throws APIException
      */
     public function create(
-        $administrativeArea,
-        $countryCode,
-        $houseNumber,
-        $locality,
-        $postalCode,
-        $streetName,
-        $extendedAddress = omit,
-        $houseSuffix = omit,
-        $streetPostDirectional = omit,
-        $streetPreDirectional = omit,
-        $streetSuffix = omit,
+        array|DynamicEmergencyAddressCreateParams $params,
         ?RequestOptions $requestOptions = null,
-    ): DynamicEmergencyAddressNewResponse {
-        $params = [
-            'administrativeArea' => $administrativeArea,
-            'countryCode' => $countryCode,
-            'houseNumber' => $houseNumber,
-            'locality' => $locality,
-            'postalCode' => $postalCode,
-            'streetName' => $streetName,
-            'extendedAddress' => $extendedAddress,
-            'houseSuffix' => $houseSuffix,
-            'streetPostDirectional' => $streetPostDirectional,
-            'streetPreDirectional' => $streetPreDirectional,
-            'streetSuffix' => $streetSuffix,
-        ];
-
-        return $this->createRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): DynamicEmergencyAddressNewResponse {
         [$parsed, $options] = DynamicEmergencyAddressCreateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -128,35 +87,22 @@ final class DynamicEmergencyAddressesService implements DynamicEmergencyAddresse
      *
      * Returns the dynamic emergency addresses according to filters
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[status], filter[country_code]
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param array{
+     *   filter?: array{
+     *     country_code?: string, status?: "pending"|"activated"|"rejected"
+     *   },
+     *   page?: array{number?: int, size?: int},
+     * }|DynamicEmergencyAddressListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): DynamicEmergencyAddressListResponse {
-        $params = ['filter' => $filter, 'page' => $page];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|DynamicEmergencyAddressListParams $params,
+        ?RequestOptions $requestOptions = null,
     ): DynamicEmergencyAddressListResponse {
         [$parsed, $options] = DynamicEmergencyAddressListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

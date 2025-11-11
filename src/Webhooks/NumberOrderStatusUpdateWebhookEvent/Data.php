@@ -12,10 +12,10 @@ use Telnyx\NumberOrders\NumberOrderWithPhoneNumbers;
 /**
  * @phpstan-type DataShape = array{
  *   id: string,
- *   eventType: string,
- *   occurredAt: \DateTimeInterface,
+ *   event_type: string,
+ *   occurred_at: \DateTimeInterface,
  *   payload: NumberOrderWithPhoneNumbers,
- *   recordType: string,
+ *   record_type: string,
  * }
  */
 final class Data implements BaseModel
@@ -32,14 +32,14 @@ final class Data implements BaseModel
     /**
      * The type of event being sent.
      */
-    #[Api('event_type')]
-    public string $eventType;
+    #[Api]
+    public string $event_type;
 
     /**
      * ISO 8601 timestamp of when the event occurred.
      */
-    #[Api('occurred_at')]
-    public \DateTimeInterface $occurredAt;
+    #[Api]
+    public \DateTimeInterface $occurred_at;
 
     #[Api]
     public NumberOrderWithPhoneNumbers $payload;
@@ -47,8 +47,8 @@ final class Data implements BaseModel
     /**
      * Type of record.
      */
-    #[Api('record_type')]
-    public string $recordType;
+    #[Api]
+    public string $record_type;
 
     /**
      * `new Data()` is missing required properties by the API.
@@ -56,7 +56,7 @@ final class Data implements BaseModel
      * To enforce required parameters use
      * ```
      * Data::with(
-     *   id: ..., eventType: ..., occurredAt: ..., payload: ..., recordType: ...
+     *   id: ..., event_type: ..., occurred_at: ..., payload: ..., record_type: ...
      * )
      * ```
      *
@@ -83,18 +83,18 @@ final class Data implements BaseModel
      */
     public static function with(
         string $id,
-        string $eventType,
-        \DateTimeInterface $occurredAt,
+        string $event_type,
+        \DateTimeInterface $occurred_at,
         NumberOrderWithPhoneNumbers $payload,
-        string $recordType,
+        string $record_type,
     ): self {
         $obj = new self;
 
         $obj->id = $id;
-        $obj->eventType = $eventType;
-        $obj->occurredAt = $occurredAt;
+        $obj->event_type = $event_type;
+        $obj->occurred_at = $occurred_at;
         $obj->payload = $payload;
-        $obj->recordType = $recordType;
+        $obj->record_type = $record_type;
 
         return $obj;
     }
@@ -116,7 +116,7 @@ final class Data implements BaseModel
     public function withEventType(string $eventType): self
     {
         $obj = clone $this;
-        $obj->eventType = $eventType;
+        $obj->event_type = $eventType;
 
         return $obj;
     }
@@ -127,7 +127,7 @@ final class Data implements BaseModel
     public function withOccurredAt(\DateTimeInterface $occurredAt): self
     {
         $obj = clone $this;
-        $obj->occurredAt = $occurredAt;
+        $obj->occurred_at = $occurredAt;
 
         return $obj;
     }
@@ -146,7 +146,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType;
+        $obj->record_type = $recordType;
 
         return $obj;
     }

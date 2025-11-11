@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type NotificationChannelGetResponseShape = array{
- *   data?: NotificationChannel
+ *   data?: NotificationChannel|null
  * }
  */
 final class NotificationChannelGetResponse implements BaseModel, ResponseConverter

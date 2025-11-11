@@ -45,7 +45,7 @@ final class JobsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->phoneNumbers->jobs->list();
+        $result = $this->client->phoneNumbers->jobs->list([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -57,9 +57,9 @@ final class JobsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->phoneNumbers->jobs->deleteBatch(
-            ['+19705555098', '+19715555098', '32873127836']
-        );
+        $result = $this->client->phoneNumbers->jobs->deleteBatch([
+            'phone_numbers' => ['+19705555098', '+19715555098', '32873127836'],
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -71,9 +71,9 @@ final class JobsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->phoneNumbers->jobs->deleteBatch(
-            ['+19705555098', '+19715555098', '32873127836']
-        );
+        $result = $this->client->phoneNumbers->jobs->deleteBatch([
+            'phone_numbers' => ['+19705555098', '+19715555098', '32873127836'],
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -85,9 +85,9 @@ final class JobsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->phoneNumbers->jobs->updateBatch(
-            phoneNumbers: ['1583466971586889004', '+13127367254']
-        );
+        $result = $this->client->phoneNumbers->jobs->updateBatch([
+            'phone_numbers' => ['1583466971586889004', '+13127367254'],
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -99,9 +99,9 @@ final class JobsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->phoneNumbers->jobs->updateBatch(
-            phoneNumbers: ['1583466971586889004', '+13127367254']
-        );
+        $result = $this->client->phoneNumbers->jobs->updateBatch([
+            'phone_numbers' => ['1583466971586889004', '+13127367254'],
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -113,10 +113,10 @@ final class JobsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->phoneNumbers->jobs->updateEmergencySettingsBatch(
-            emergencyEnabled: true,
-            phoneNumbers: ['+19705555098', '+19715555098', '32873127836'],
-        );
+        $result = $this->client->phoneNumbers->jobs->updateEmergencySettingsBatch([
+            'emergency_enabled' => true,
+            'phone_numbers' => ['+19705555098', '+19715555098', '32873127836'],
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -128,10 +128,10 @@ final class JobsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->phoneNumbers->jobs->updateEmergencySettingsBatch(
-            emergencyEnabled: true,
-            phoneNumbers: ['+19705555098', '+19715555098', '32873127836'],
-        );
+        $result = $this->client->phoneNumbers->jobs->updateEmergencySettingsBatch([
+            'emergency_enabled' => true,
+            'phone_numbers' => ['+19705555098', '+19715555098', '32873127836'],
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

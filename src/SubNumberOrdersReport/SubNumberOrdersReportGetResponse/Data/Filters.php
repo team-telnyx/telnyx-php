@@ -12,12 +12,12 @@ use Telnyx\Core\Contracts\BaseModel;
  * The filters that were applied to generate this report.
  *
  * @phpstan-type FiltersShape = array{
- *   countryCode?: string,
- *   createdAtGt?: \DateTimeInterface,
- *   createdAtLt?: \DateTimeInterface,
- *   customerReference?: string,
- *   orderRequestID?: string,
- *   status?: string,
+ *   country_code?: string|null,
+ *   created_at_gt?: \DateTimeInterface|null,
+ *   created_at_lt?: \DateTimeInterface|null,
+ *   customer_reference?: string|null,
+ *   order_request_id?: string|null,
+ *   status?: string|null,
  * }
  */
 final class Filters implements BaseModel
@@ -25,20 +25,20 @@ final class Filters implements BaseModel
     /** @use SdkModel<FiltersShape> */
     use SdkModel;
 
-    #[Api('country_code', optional: true)]
-    public ?string $countryCode;
+    #[Api(optional: true)]
+    public ?string $country_code;
 
-    #[Api('created_at_gt', optional: true)]
-    public ?\DateTimeInterface $createdAtGt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $created_at_gt;
 
-    #[Api('created_at_lt', optional: true)]
-    public ?\DateTimeInterface $createdAtLt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $created_at_lt;
 
-    #[Api('customer_reference', optional: true)]
-    public ?string $customerReference;
+    #[Api(optional: true)]
+    public ?string $customer_reference;
 
-    #[Api('order_request_id', optional: true)]
-    public ?string $orderRequestID;
+    #[Api(optional: true)]
+    public ?string $order_request_id;
 
     #[Api(optional: true)]
     public ?string $status;
@@ -54,20 +54,20 @@ final class Filters implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $countryCode = null,
-        ?\DateTimeInterface $createdAtGt = null,
-        ?\DateTimeInterface $createdAtLt = null,
-        ?string $customerReference = null,
-        ?string $orderRequestID = null,
+        ?string $country_code = null,
+        ?\DateTimeInterface $created_at_gt = null,
+        ?\DateTimeInterface $created_at_lt = null,
+        ?string $customer_reference = null,
+        ?string $order_request_id = null,
         ?string $status = null,
     ): self {
         $obj = new self;
 
-        null !== $countryCode && $obj->countryCode = $countryCode;
-        null !== $createdAtGt && $obj->createdAtGt = $createdAtGt;
-        null !== $createdAtLt && $obj->createdAtLt = $createdAtLt;
-        null !== $customerReference && $obj->customerReference = $customerReference;
-        null !== $orderRequestID && $obj->orderRequestID = $orderRequestID;
+        null !== $country_code && $obj->country_code = $country_code;
+        null !== $created_at_gt && $obj->created_at_gt = $created_at_gt;
+        null !== $created_at_lt && $obj->created_at_lt = $created_at_lt;
+        null !== $customer_reference && $obj->customer_reference = $customer_reference;
+        null !== $order_request_id && $obj->order_request_id = $order_request_id;
         null !== $status && $obj->status = $status;
 
         return $obj;
@@ -76,7 +76,7 @@ final class Filters implements BaseModel
     public function withCountryCode(string $countryCode): self
     {
         $obj = clone $this;
-        $obj->countryCode = $countryCode;
+        $obj->country_code = $countryCode;
 
         return $obj;
     }
@@ -84,7 +84,7 @@ final class Filters implements BaseModel
     public function withCreatedAtGt(\DateTimeInterface $createdAtGt): self
     {
         $obj = clone $this;
-        $obj->createdAtGt = $createdAtGt;
+        $obj->created_at_gt = $createdAtGt;
 
         return $obj;
     }
@@ -92,7 +92,7 @@ final class Filters implements BaseModel
     public function withCreatedAtLt(\DateTimeInterface $createdAtLt): self
     {
         $obj = clone $this;
-        $obj->createdAtLt = $createdAtLt;
+        $obj->created_at_lt = $createdAtLt;
 
         return $obj;
     }
@@ -100,7 +100,7 @@ final class Filters implements BaseModel
     public function withCustomerReference(string $customerReference): self
     {
         $obj = clone $this;
-        $obj->customerReference = $customerReference;
+        $obj->customer_reference = $customerReference;
 
         return $obj;
     }
@@ -108,7 +108,7 @@ final class Filters implements BaseModel
     public function withOrderRequestID(string $orderRequestID): self
     {
         $obj = clone $this;
-        $obj->orderRequestID = $orderRequestID;
+        $obj->order_request_id = $orderRequestID;
 
         return $obj;
     }

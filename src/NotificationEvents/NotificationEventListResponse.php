@@ -14,7 +14,7 @@ use Telnyx\NotificationEvents\NotificationEventListResponse\Data;
 
 /**
  * @phpstan-type NotificationEventListResponseShape = array{
- *   data?: list<Data>, meta?: PaginationMeta
+ *   data?: list<Data>|null, meta?: PaginationMeta|null
  * }
  */
 final class NotificationEventListResponse implements BaseModel, ResponseConverter

@@ -21,9 +21,7 @@ use Telnyx\Core\Contracts\BaseModel;
 final class PhoneNumberAssignmentByProfileRetrievePhoneNumberStatusParams implements BaseModel
 {
     /**
-     * @use SdkModel<
-     *   PhoneNumberAssignmentByProfileRetrievePhoneNumberStatusParamsShape
-     * >
+     * @use SdkModel<PhoneNumberAssignmentByProfileRetrievePhoneNumberStatusParamsShape,>
      */
     use SdkModel;
     use SdkParams;

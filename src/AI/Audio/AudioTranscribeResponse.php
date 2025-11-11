@@ -13,7 +13,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type AudioTranscribeResponseShape = array{
- *   text: string, duration?: float, segments?: list<Segment>
+ *   text: string, duration?: float|null, segments?: list<Segment>|null
  * }
  */
 final class AudioTranscribeResponse implements BaseModel, ResponseConverter

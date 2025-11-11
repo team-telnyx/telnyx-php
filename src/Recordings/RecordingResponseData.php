@@ -15,21 +15,21 @@ use Telnyx\Recordings\RecordingResponseData\Status;
 
 /**
  * @phpstan-type RecordingResponseDataShape = array{
- *   id?: string,
- *   callControlID?: string,
- *   callLegID?: string,
- *   callSessionID?: string,
- *   channels?: value-of<Channels>,
- *   conferenceID?: string,
- *   createdAt?: string,
- *   downloadURLs?: DownloadURLs,
- *   durationMillis?: int,
- *   recordType?: value-of<RecordType>,
- *   recordingEndedAt?: string,
- *   recordingStartedAt?: string,
- *   source?: value-of<Source>,
- *   status?: value-of<Status>,
- *   updatedAt?: string,
+ *   id?: string|null,
+ *   call_control_id?: string|null,
+ *   call_leg_id?: string|null,
+ *   call_session_id?: string|null,
+ *   channels?: value-of<Channels>|null,
+ *   conference_id?: string|null,
+ *   created_at?: string|null,
+ *   download_urls?: DownloadURLs|null,
+ *   duration_millis?: int|null,
+ *   record_type?: value-of<RecordType>|null,
+ *   recording_ended_at?: string|null,
+ *   recording_started_at?: string|null,
+ *   source?: value-of<Source>|null,
+ *   status?: value-of<Status>|null,
+ *   updated_at?: string|null,
  * }
  */
 final class RecordingResponseData implements BaseModel
@@ -46,20 +46,20 @@ final class RecordingResponseData implements BaseModel
     /**
      * Unique identifier and token for controlling the call.
      */
-    #[Api('call_control_id', optional: true)]
-    public ?string $callControlID;
+    #[Api(optional: true)]
+    public ?string $call_control_id;
 
     /**
      * ID unique to the call leg (used to correlate webhook events).
      */
-    #[Api('call_leg_id', optional: true)]
-    public ?string $callLegID;
+    #[Api(optional: true)]
+    public ?string $call_leg_id;
 
     /**
      * ID that is unique to the call session and can be used to correlate webhook events. Call session is a group of related call legs that logically belong to the same phone call, e.g. an inbound and outbound leg of a transferred call.
      */
-    #[Api('call_session_id', optional: true)]
-    public ?string $callSessionID;
+    #[Api(optional: true)]
+    public ?string $call_session_id;
 
     /**
      * When `dual`, the final audio file has the first leg on channel A, and the rest on channel B.
@@ -72,42 +72,42 @@ final class RecordingResponseData implements BaseModel
     /**
      * Uniquely identifies the conference.
      */
-    #[Api('conference_id', optional: true)]
-    public ?string $conferenceID;
+    #[Api(optional: true)]
+    public ?string $conference_id;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Api('created_at', optional: true)]
-    public ?string $createdAt;
+    #[Api(optional: true)]
+    public ?string $created_at;
 
     /**
      * Links to download the recording files.
      */
-    #[Api('download_urls', optional: true)]
-    public ?DownloadURLs $downloadURLs;
+    #[Api(optional: true)]
+    public ?DownloadURLs $download_urls;
 
     /**
      * The duration of the recording in milliseconds.
      */
-    #[Api('duration_millis', optional: true)]
-    public ?int $durationMillis;
+    #[Api(optional: true)]
+    public ?int $duration_millis;
 
-    /** @var value-of<RecordType>|null $recordType */
-    #[Api('record_type', enum: RecordType::class, optional: true)]
-    public ?string $recordType;
+    /** @var value-of<RecordType>|null $record_type */
+    #[Api(enum: RecordType::class, optional: true)]
+    public ?string $record_type;
 
     /**
      * ISO 8601 formatted date of when the recording ended.
      */
-    #[Api('recording_ended_at', optional: true)]
-    public ?string $recordingEndedAt;
+    #[Api(optional: true)]
+    public ?string $recording_ended_at;
 
     /**
      * ISO 8601 formatted date of when the recording started.
      */
-    #[Api('recording_started_at', optional: true)]
-    public ?string $recordingStartedAt;
+    #[Api(optional: true)]
+    public ?string $recording_started_at;
 
     /**
      * The kind of event that led to this recording being created.
@@ -128,8 +128,8 @@ final class RecordingResponseData implements BaseModel
     /**
      * ISO 8601 formatted date indicating when the resource was updated.
      */
-    #[Api('updated_at', optional: true)]
-    public ?string $updatedAt;
+    #[Api(optional: true)]
+    public ?string $updated_at;
 
     public function __construct()
     {
@@ -142,44 +142,44 @@ final class RecordingResponseData implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Channels|value-of<Channels> $channels
-     * @param RecordType|value-of<RecordType> $recordType
+     * @param RecordType|value-of<RecordType> $record_type
      * @param Source|value-of<Source> $source
      * @param Status|value-of<Status> $status
      */
     public static function with(
         ?string $id = null,
-        ?string $callControlID = null,
-        ?string $callLegID = null,
-        ?string $callSessionID = null,
+        ?string $call_control_id = null,
+        ?string $call_leg_id = null,
+        ?string $call_session_id = null,
         Channels|string|null $channels = null,
-        ?string $conferenceID = null,
-        ?string $createdAt = null,
-        ?DownloadURLs $downloadURLs = null,
-        ?int $durationMillis = null,
-        RecordType|string|null $recordType = null,
-        ?string $recordingEndedAt = null,
-        ?string $recordingStartedAt = null,
+        ?string $conference_id = null,
+        ?string $created_at = null,
+        ?DownloadURLs $download_urls = null,
+        ?int $duration_millis = null,
+        RecordType|string|null $record_type = null,
+        ?string $recording_ended_at = null,
+        ?string $recording_started_at = null,
         Source|string|null $source = null,
         Status|string|null $status = null,
-        ?string $updatedAt = null,
+        ?string $updated_at = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj->id = $id;
-        null !== $callControlID && $obj->callControlID = $callControlID;
-        null !== $callLegID && $obj->callLegID = $callLegID;
-        null !== $callSessionID && $obj->callSessionID = $callSessionID;
+        null !== $call_control_id && $obj->call_control_id = $call_control_id;
+        null !== $call_leg_id && $obj->call_leg_id = $call_leg_id;
+        null !== $call_session_id && $obj->call_session_id = $call_session_id;
         null !== $channels && $obj['channels'] = $channels;
-        null !== $conferenceID && $obj->conferenceID = $conferenceID;
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $downloadURLs && $obj->downloadURLs = $downloadURLs;
-        null !== $durationMillis && $obj->durationMillis = $durationMillis;
-        null !== $recordType && $obj['recordType'] = $recordType;
-        null !== $recordingEndedAt && $obj->recordingEndedAt = $recordingEndedAt;
-        null !== $recordingStartedAt && $obj->recordingStartedAt = $recordingStartedAt;
+        null !== $conference_id && $obj->conference_id = $conference_id;
+        null !== $created_at && $obj->created_at = $created_at;
+        null !== $download_urls && $obj->download_urls = $download_urls;
+        null !== $duration_millis && $obj->duration_millis = $duration_millis;
+        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $recording_ended_at && $obj->recording_ended_at = $recording_ended_at;
+        null !== $recording_started_at && $obj->recording_started_at = $recording_started_at;
         null !== $source && $obj['source'] = $source;
         null !== $status && $obj['status'] = $status;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
+        null !== $updated_at && $obj->updated_at = $updated_at;
 
         return $obj;
     }
@@ -201,7 +201,7 @@ final class RecordingResponseData implements BaseModel
     public function withCallControlID(string $callControlID): self
     {
         $obj = clone $this;
-        $obj->callControlID = $callControlID;
+        $obj->call_control_id = $callControlID;
 
         return $obj;
     }
@@ -212,7 +212,7 @@ final class RecordingResponseData implements BaseModel
     public function withCallLegID(string $callLegID): self
     {
         $obj = clone $this;
-        $obj->callLegID = $callLegID;
+        $obj->call_leg_id = $callLegID;
 
         return $obj;
     }
@@ -223,7 +223,7 @@ final class RecordingResponseData implements BaseModel
     public function withCallSessionID(string $callSessionID): self
     {
         $obj = clone $this;
-        $obj->callSessionID = $callSessionID;
+        $obj->call_session_id = $callSessionID;
 
         return $obj;
     }
@@ -247,7 +247,7 @@ final class RecordingResponseData implements BaseModel
     public function withConferenceID(string $conferenceID): self
     {
         $obj = clone $this;
-        $obj->conferenceID = $conferenceID;
+        $obj->conference_id = $conferenceID;
 
         return $obj;
     }
@@ -258,7 +258,7 @@ final class RecordingResponseData implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }
@@ -269,7 +269,7 @@ final class RecordingResponseData implements BaseModel
     public function withDownloadURLs(DownloadURLs $downloadURLs): self
     {
         $obj = clone $this;
-        $obj->downloadURLs = $downloadURLs;
+        $obj->download_urls = $downloadURLs;
 
         return $obj;
     }
@@ -280,7 +280,7 @@ final class RecordingResponseData implements BaseModel
     public function withDurationMillis(int $durationMillis): self
     {
         $obj = clone $this;
-        $obj->durationMillis = $durationMillis;
+        $obj->duration_millis = $durationMillis;
 
         return $obj;
     }
@@ -291,7 +291,7 @@ final class RecordingResponseData implements BaseModel
     public function withRecordType(RecordType|string $recordType): self
     {
         $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
@@ -302,7 +302,7 @@ final class RecordingResponseData implements BaseModel
     public function withRecordingEndedAt(string $recordingEndedAt): self
     {
         $obj = clone $this;
-        $obj->recordingEndedAt = $recordingEndedAt;
+        $obj->recording_ended_at = $recordingEndedAt;
 
         return $obj;
     }
@@ -313,7 +313,7 @@ final class RecordingResponseData implements BaseModel
     public function withRecordingStartedAt(string $recordingStartedAt): self
     {
         $obj = clone $this;
-        $obj->recordingStartedAt = $recordingStartedAt;
+        $obj->recording_started_at = $recordingStartedAt;
 
         return $obj;
     }
@@ -350,7 +350,7 @@ final class RecordingResponseData implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $obj->updated_at = $updatedAt;
 
         return $obj;
     }

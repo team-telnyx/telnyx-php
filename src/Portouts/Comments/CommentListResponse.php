@@ -14,7 +14,7 @@ use Telnyx\Portouts\Comments\CommentListResponse\Data;
 
 /**
  * @phpstan-type CommentListResponseShape = array{
- *   data?: list<Data>, meta?: Metadata
+ *   data?: list<Data>|null, meta?: Metadata|null
  * }
  */
 final class CommentListResponse implements BaseModel, ResponseConverter

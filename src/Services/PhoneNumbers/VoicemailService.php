@@ -14,8 +14,6 @@ use Telnyx\PhoneNumbers\Voicemail\VoicemailUpdateResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PhoneNumbers\VoicemailContract;
 
-use const Telnyx\Core\OMIT as omit;
-
 final class VoicemailService implements VoicemailContract
 {
     /**
@@ -28,37 +26,18 @@ final class VoicemailService implements VoicemailContract
      *
      * Create voicemail settings for a phone number
      *
-     * @param bool $enabled whether voicemail is enabled
-     * @param string $pin The pin used for voicemail
+     * @param array{enabled?: bool, pin?: string}|VoicemailCreateParams $params
      *
      * @throws APIException
      */
     public function create(
         string $phoneNumberID,
-        $enabled = omit,
-        $pin = omit,
+        array|VoicemailCreateParams $params,
         ?RequestOptions $requestOptions = null,
-    ): VoicemailNewResponse {
-        $params = ['enabled' => $enabled, 'pin' => $pin];
-
-        return $this->createRaw($phoneNumberID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        string $phoneNumberID,
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): VoicemailNewResponse {
         [$parsed, $options] = VoicemailCreateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -96,37 +75,18 @@ final class VoicemailService implements VoicemailContract
      *
      * Update voicemail settings for a phone number
      *
-     * @param bool $enabled whether voicemail is enabled
-     * @param string $pin The pin used for voicemail
+     * @param array{enabled?: bool, pin?: string}|VoicemailUpdateParams $params
      *
      * @throws APIException
      */
     public function update(
         string $phoneNumberID,
-        $enabled = omit,
-        $pin = omit,
+        array|VoicemailUpdateParams $params,
         ?RequestOptions $requestOptions = null,
-    ): VoicemailUpdateResponse {
-        $params = ['enabled' => $enabled, 'pin' => $pin];
-
-        return $this->updateRaw($phoneNumberID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $phoneNumberID,
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): VoicemailUpdateResponse {
         [$parsed, $options] = VoicemailUpdateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

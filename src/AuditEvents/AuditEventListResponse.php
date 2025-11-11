@@ -14,7 +14,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type AuditEventListResponseShape = array{
- *   data?: list<Data>, meta?: Meta
+ *   data?: list<Data>|null, meta?: Meta|null
  * }
  */
 final class AuditEventListResponse implements BaseModel, ResponseConverter

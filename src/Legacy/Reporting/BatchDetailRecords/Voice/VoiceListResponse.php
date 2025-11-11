@@ -13,7 +13,7 @@ use Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging\BatchCsvPaginationMeta;
 
 /**
  * @phpstan-type VoiceListResponseShape = array{
- *   data?: list<CdrDetailedReqResponse>, meta?: BatchCsvPaginationMeta
+ *   data?: list<CdrDetailedReqResponse>|null, meta?: BatchCsvPaginationMeta|null
  * }
  */
 final class VoiceListResponse implements BaseModel, ResponseConverter

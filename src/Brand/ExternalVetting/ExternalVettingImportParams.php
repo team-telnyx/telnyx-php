@@ -17,7 +17,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Brand\ExternalVetting->import
  *
  * @phpstan-type ExternalVettingImportParamsShape = array{
- *   evpID: string, vettingID: string, vettingToken?: string
+ *   evpId: string, vettingId: string, vettingToken?: string
  * }
  */
 final class ExternalVettingImportParams implements BaseModel
@@ -29,14 +29,14 @@ final class ExternalVettingImportParams implements BaseModel
     /**
      * External vetting provider ID for the brand.
      */
-    #[Api('evpId')]
-    public string $evpID;
+    #[Api]
+    public string $evpId;
 
     /**
      * Unique ID that identifies a vetting transaction performed by a vetting provider. This ID is provided by the vetting provider at time of vetting.
      */
-    #[Api('vettingId')]
-    public string $vettingID;
+    #[Api]
+    public string $vettingId;
 
     /**
      * Required by some providers for vetting record confirmation.
@@ -49,7 +49,7 @@ final class ExternalVettingImportParams implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * ExternalVettingImportParams::with(evpID: ..., vettingID: ...)
+     * ExternalVettingImportParams::with(evpId: ..., vettingId: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -69,14 +69,14 @@ final class ExternalVettingImportParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        string $evpID,
-        string $vettingID,
+        string $evpId,
+        string $vettingId,
         ?string $vettingToken = null
     ): self {
         $obj = new self;
 
-        $obj->evpID = $evpID;
-        $obj->vettingID = $vettingID;
+        $obj->evpId = $evpId;
+        $obj->vettingId = $vettingId;
 
         null !== $vettingToken && $obj->vettingToken = $vettingToken;
 
@@ -89,7 +89,7 @@ final class ExternalVettingImportParams implements BaseModel
     public function withEvpID(string $evpID): self
     {
         $obj = clone $this;
-        $obj->evpID = $evpID;
+        $obj->evpId = $evpID;
 
         return $obj;
     }
@@ -100,7 +100,7 @@ final class ExternalVettingImportParams implements BaseModel
     public function withVettingID(string $vettingID): self
     {
         $obj = clone $this;
-        $obj->vettingID = $vettingID;
+        $obj->vettingId = $vettingID;
 
         return $obj;
     }

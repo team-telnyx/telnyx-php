@@ -17,7 +17,7 @@ use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberCreateParam
  * @see Telnyx\PortingOrders\AssociatedPhoneNumbers->create
  *
  * @phpstan-type AssociatedPhoneNumberCreateParamsShape = array{
- *   action: Action|value-of<Action>, phoneNumberRange: PhoneNumberRange
+ *   action: Action|value-of<Action>, phone_number_range: PhoneNumberRange
  * }
  */
 final class AssociatedPhoneNumberCreateParams implements BaseModel
@@ -34,15 +34,15 @@ final class AssociatedPhoneNumberCreateParams implements BaseModel
     #[Api(enum: Action::class)]
     public string $action;
 
-    #[Api('phone_number_range')]
-    public PhoneNumberRange $phoneNumberRange;
+    #[Api]
+    public PhoneNumberRange $phone_number_range;
 
     /**
      * `new AssociatedPhoneNumberCreateParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * AssociatedPhoneNumberCreateParams::with(action: ..., phoneNumberRange: ...)
+     * AssociatedPhoneNumberCreateParams::with(action: ..., phone_number_range: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -67,12 +67,12 @@ final class AssociatedPhoneNumberCreateParams implements BaseModel
      */
     public static function with(
         Action|string $action,
-        PhoneNumberRange $phoneNumberRange
+        PhoneNumberRange $phone_number_range
     ): self {
         $obj = new self;
 
         $obj['action'] = $action;
-        $obj->phoneNumberRange = $phoneNumberRange;
+        $obj->phone_number_range = $phone_number_range;
 
         return $obj;
     }
@@ -94,7 +94,7 @@ final class AssociatedPhoneNumberCreateParams implements BaseModel
         PhoneNumberRange $phoneNumberRange
     ): self {
         $obj = clone $this;
-        $obj->phoneNumberRange = $phoneNumberRange;
+        $obj->phone_number_range = $phoneNumberRange;
 
         return $obj;
     }

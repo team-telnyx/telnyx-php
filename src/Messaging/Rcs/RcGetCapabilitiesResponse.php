@@ -11,7 +11,9 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type RcGetCapabilitiesResponseShape = array{data?: RcsCapabilities}
+ * @phpstan-type RcGetCapabilitiesResponseShape = array{
+ *   data?: RcsCapabilities|null
+ * }
  */
 final class RcGetCapabilitiesResponse implements BaseModel, ResponseConverter
 {

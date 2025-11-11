@@ -15,7 +15,9 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\DynamicEmergencyEndpoints->create
  *
  * @phpstan-type DynamicEmergencyEndpointCreateParamsShape = array{
- *   callbackNumber: string, callerName: string, dynamicEmergencyAddressID: string
+ *   callback_number: string,
+ *   caller_name: string,
+ *   dynamic_emergency_address_id: string,
  * }
  */
 final class DynamicEmergencyEndpointCreateParams implements BaseModel
@@ -24,17 +26,17 @@ final class DynamicEmergencyEndpointCreateParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    #[Api('callback_number')]
-    public string $callbackNumber;
+    #[Api]
+    public string $callback_number;
 
-    #[Api('caller_name')]
-    public string $callerName;
+    #[Api]
+    public string $caller_name;
 
     /**
      * An id of a currently active dynamic emergency location.
      */
-    #[Api('dynamic_emergency_address_id')]
-    public string $dynamicEmergencyAddressID;
+    #[Api]
+    public string $dynamic_emergency_address_id;
 
     /**
      * `new DynamicEmergencyEndpointCreateParams()` is missing required properties by the API.
@@ -42,7 +44,7 @@ final class DynamicEmergencyEndpointCreateParams implements BaseModel
      * To enforce required parameters use
      * ```
      * DynamicEmergencyEndpointCreateParams::with(
-     *   callbackNumber: ..., callerName: ..., dynamicEmergencyAddressID: ...
+     *   callback_number: ..., caller_name: ..., dynamic_emergency_address_id: ...
      * )
      * ```
      *
@@ -66,15 +68,15 @@ final class DynamicEmergencyEndpointCreateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        string $callbackNumber,
-        string $callerName,
-        string $dynamicEmergencyAddressID,
+        string $callback_number,
+        string $caller_name,
+        string $dynamic_emergency_address_id,
     ): self {
         $obj = new self;
 
-        $obj->callbackNumber = $callbackNumber;
-        $obj->callerName = $callerName;
-        $obj->dynamicEmergencyAddressID = $dynamicEmergencyAddressID;
+        $obj->callback_number = $callback_number;
+        $obj->caller_name = $caller_name;
+        $obj->dynamic_emergency_address_id = $dynamic_emergency_address_id;
 
         return $obj;
     }
@@ -82,7 +84,7 @@ final class DynamicEmergencyEndpointCreateParams implements BaseModel
     public function withCallbackNumber(string $callbackNumber): self
     {
         $obj = clone $this;
-        $obj->callbackNumber = $callbackNumber;
+        $obj->callback_number = $callbackNumber;
 
         return $obj;
     }
@@ -90,7 +92,7 @@ final class DynamicEmergencyEndpointCreateParams implements BaseModel
     public function withCallerName(string $callerName): self
     {
         $obj = clone $this;
-        $obj->callerName = $callerName;
+        $obj->caller_name = $callerName;
 
         return $obj;
     }
@@ -102,7 +104,7 @@ final class DynamicEmergencyEndpointCreateParams implements BaseModel
         string $dynamicEmergencyAddressID
     ): self {
         $obj = clone $this;
-        $obj->dynamicEmergencyAddressID = $dynamicEmergencyAddressID;
+        $obj->dynamic_emergency_address_id = $dynamicEmergencyAddressID;
 
         return $obj;
     }

@@ -10,8 +10,6 @@ use Telnyx\RequestOptions;
 use Telnyx\Rooms\RoomCreateParams;
 use Telnyx\Rooms\RoomGetResponse;
 use Telnyx\Rooms\RoomListParams;
-use Telnyx\Rooms\RoomListParams\Filter;
-use Telnyx\Rooms\RoomListParams\Page;
 use Telnyx\Rooms\RoomListResponse;
 use Telnyx\Rooms\RoomNewResponse;
 use Telnyx\Rooms\RoomRetrieveParams;
@@ -21,17 +19,15 @@ use Telnyx\ServiceContracts\RoomsContract;
 use Telnyx\Services\Rooms\ActionsService;
 use Telnyx\Services\Rooms\SessionsService;
 
-use const Telnyx\Core\OMIT as omit;
-
 final class RoomsService implements RoomsContract
 {
     /**
-     * @@api
+     * @api
      */
     public ActionsService $actions;
 
     /**
-     * @@api
+     * @api
      */
     public SessionsService $sessions;
 
@@ -49,50 +45,24 @@ final class RoomsService implements RoomsContract
      *
      * Synchronously create a Room.
      *
-     * @param bool $enableRecording enable or disable recording for that room
-     * @param int $maxParticipants The maximum amount of participants allowed in a room. If new participants try to join after that limit is reached, their request will be rejected.
-     * @param string $uniqueName the unique (within the Telnyx account scope) name of the room
-     * @param string|null $webhookEventFailoverURL The failover URL where webhooks related to this room will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
-     * @param string $webhookEventURL The URL where webhooks related to this room will be sent. Must include a scheme, such as 'https'.
-     * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
+     * @param array{
+     *   enable_recording?: bool,
+     *   max_participants?: int,
+     *   unique_name?: string,
+     *   webhook_event_failover_url?: string|null,
+     *   webhook_event_url?: string,
+     *   webhook_timeout_secs?: int|null,
+     * }|RoomCreateParams $params
      *
      * @throws APIException
      */
     public function create(
-        $enableRecording = omit,
-        $maxParticipants = omit,
-        $uniqueName = omit,
-        $webhookEventFailoverURL = omit,
-        $webhookEventURL = omit,
-        $webhookTimeoutSecs = omit,
-        ?RequestOptions $requestOptions = null,
-    ): RoomNewResponse {
-        $params = [
-            'enableRecording' => $enableRecording,
-            'maxParticipants' => $maxParticipants,
-            'uniqueName' => $uniqueName,
-            'webhookEventFailoverURL' => $webhookEventFailoverURL,
-            'webhookEventURL' => $webhookEventURL,
-            'webhookTimeoutSecs' => $webhookTimeoutSecs,
-        ];
-
-        return $this->createRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
+        array|RoomCreateParams $params,
         ?RequestOptions $requestOptions = null
     ): RoomNewResponse {
         [$parsed, $options] = RoomCreateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -110,35 +80,18 @@ final class RoomsService implements RoomsContract
      *
      * View a room.
      *
-     * @param bool $includeSessions to decide if room sessions should be included in the response
+     * @param array{include_sessions?: bool}|RoomRetrieveParams $params
      *
      * @throws APIException
      */
     public function retrieve(
         string $roomID,
-        $includeSessions = omit,
+        array|RoomRetrieveParams $params,
         ?RequestOptions $requestOptions = null,
-    ): RoomGetResponse {
-        $params = ['includeSessions' => $includeSessions];
-
-        return $this->retrieveRaw($roomID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $roomID,
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): RoomGetResponse {
         [$parsed, $options] = RoomRetrieveParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -156,52 +109,25 @@ final class RoomsService implements RoomsContract
      *
      * Synchronously update a Room.
      *
-     * @param bool $enableRecording enable or disable recording for that room
-     * @param int $maxParticipants The maximum amount of participants allowed in a room. If new participants try to join after that limit is reached, their request will be rejected.
-     * @param string $uniqueName the unique (within the Telnyx account scope) name of the room
-     * @param string|null $webhookEventFailoverURL The failover URL where webhooks related to this room will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
-     * @param string $webhookEventURL The URL where webhooks related to this room will be sent. Must include a scheme, such as 'https'.
-     * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
+     * @param array{
+     *   enable_recording?: bool,
+     *   max_participants?: int,
+     *   unique_name?: string,
+     *   webhook_event_failover_url?: string|null,
+     *   webhook_event_url?: string,
+     *   webhook_timeout_secs?: int|null,
+     * }|RoomUpdateParams $params
      *
      * @throws APIException
      */
     public function update(
         string $roomID,
-        $enableRecording = omit,
-        $maxParticipants = omit,
-        $uniqueName = omit,
-        $webhookEventFailoverURL = omit,
-        $webhookEventURL = omit,
-        $webhookTimeoutSecs = omit,
+        array|RoomUpdateParams $params,
         ?RequestOptions $requestOptions = null,
-    ): RoomUpdateResponse {
-        $params = [
-            'enableRecording' => $enableRecording,
-            'maxParticipants' => $maxParticipants,
-            'uniqueName' => $uniqueName,
-            'webhookEventFailoverURL' => $webhookEventFailoverURL,
-            'webhookEventURL' => $webhookEventURL,
-            'webhookTimeoutSecs' => $webhookTimeoutSecs,
-        ];
-
-        return $this->updateRaw($roomID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $roomID,
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): RoomUpdateResponse {
         [$parsed, $options] = RoomUpdateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -219,41 +145,33 @@ final class RoomsService implements RoomsContract
      *
      * View a list of rooms.
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[date_created_at][eq], filter[date_created_at][gte], filter[date_created_at][lte], filter[date_updated_at][eq], filter[date_updated_at][gte], filter[date_updated_at][lte], filter[unique_name]
-     * @param bool $includeSessions to decide if room sessions should be included in the response
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param array{
+     *   filter?: array{
+     *     date_created_at?: array{
+     *       eq?: string|\DateTimeInterface,
+     *       gte?: string|\DateTimeInterface,
+     *       lte?: string|\DateTimeInterface,
+     *     },
+     *     date_updated_at?: array{
+     *       eq?: string|\DateTimeInterface,
+     *       gte?: string|\DateTimeInterface,
+     *       lte?: string|\DateTimeInterface,
+     *     },
+     *     unique_name?: string,
+     *   },
+     *   include_sessions?: bool,
+     *   page?: array{number?: int, size?: int},
+     * }|RoomListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $includeSessions = omit,
-        $page = omit,
-        ?RequestOptions $requestOptions = null,
-    ): RoomListResponse {
-        $params = [
-            'filter' => $filter,
-            'includeSessions' => $includeSessions,
-            'page' => $page,
-        ];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
+        array|RoomListParams $params,
         ?RequestOptions $requestOptions = null
     ): RoomListResponse {
         [$parsed, $options] = RoomListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

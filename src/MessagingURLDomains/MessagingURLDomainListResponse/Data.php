@@ -10,7 +10,10 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type DataShape = array{
- *   id?: string, recordType?: string, urlDomain?: string, useCase?: string
+ *   id?: string|null,
+ *   record_type?: string|null,
+ *   url_domain?: string|null,
+ *   use_case?: string|null,
  * }
  */
 final class Data implements BaseModel
@@ -21,14 +24,14 @@ final class Data implements BaseModel
     #[Api(optional: true)]
     public ?string $id;
 
-    #[Api('record_type', optional: true)]
-    public ?string $recordType;
+    #[Api(optional: true)]
+    public ?string $record_type;
 
-    #[Api('url_domain', optional: true)]
-    public ?string $urlDomain;
+    #[Api(optional: true)]
+    public ?string $url_domain;
 
-    #[Api('use_case', optional: true)]
-    public ?string $useCase;
+    #[Api(optional: true)]
+    public ?string $use_case;
 
     public function __construct()
     {
@@ -42,16 +45,16 @@ final class Data implements BaseModel
      */
     public static function with(
         ?string $id = null,
-        ?string $recordType = null,
-        ?string $urlDomain = null,
-        ?string $useCase = null,
+        ?string $record_type = null,
+        ?string $url_domain = null,
+        ?string $use_case = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj->id = $id;
-        null !== $recordType && $obj->recordType = $recordType;
-        null !== $urlDomain && $obj->urlDomain = $urlDomain;
-        null !== $useCase && $obj->useCase = $useCase;
+        null !== $record_type && $obj->record_type = $record_type;
+        null !== $url_domain && $obj->url_domain = $url_domain;
+        null !== $use_case && $obj->use_case = $use_case;
 
         return $obj;
     }
@@ -67,7 +70,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType;
+        $obj->record_type = $recordType;
 
         return $obj;
     }
@@ -75,7 +78,7 @@ final class Data implements BaseModel
     public function withURLDomain(string $urlDomain): self
     {
         $obj = clone $this;
-        $obj->urlDomain = $urlDomain;
+        $obj->url_domain = $urlDomain;
 
         return $obj;
     }
@@ -83,7 +86,7 @@ final class Data implements BaseModel
     public function withUseCase(string $useCase): self
     {
         $obj = clone $this;
-        $obj->useCase = $useCase;
+        $obj->use_case = $useCase;
 
         return $obj;
     }

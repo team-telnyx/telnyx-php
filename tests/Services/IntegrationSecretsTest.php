@@ -33,10 +33,9 @@ final class IntegrationSecretsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->integrationSecrets->create(
-            identifier: 'my_secret',
-            type: 'bearer'
-        );
+        $result = $this->client->integrationSecrets->create([
+            'identifier' => 'my_secret', 'type' => 'bearer',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -48,10 +47,9 @@ final class IntegrationSecretsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->integrationSecrets->create(
-            identifier: 'my_secret',
-            type: 'bearer'
-        );
+        $result = $this->client->integrationSecrets->create([
+            'identifier' => 'my_secret', 'type' => 'bearer',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -63,7 +61,7 @@ final class IntegrationSecretsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->integrationSecrets->list();
+        $result = $this->client->integrationSecrets->list([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

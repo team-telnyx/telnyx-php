@@ -12,7 +12,7 @@ use Telnyx\Messsages\RcsAgentMessage\ContentMessage\RichCard\StandaloneCard;
 
 /**
  * @phpstan-type RichCardShape = array{
- *   carouselCard?: CarouselCard, standaloneCard?: StandaloneCard
+ *   carousel_card?: CarouselCard|null, standalone_card?: StandaloneCard|null
  * }
  */
 final class RichCard implements BaseModel
@@ -23,14 +23,14 @@ final class RichCard implements BaseModel
     /**
      * Carousel of cards.
      */
-    #[Api('carousel_card', optional: true)]
-    public ?CarouselCard $carouselCard;
+    #[Api(optional: true)]
+    public ?CarouselCard $carousel_card;
 
     /**
      * Standalone card.
      */
-    #[Api('standalone_card', optional: true)]
-    public ?StandaloneCard $standaloneCard;
+    #[Api(optional: true)]
+    public ?StandaloneCard $standalone_card;
 
     public function __construct()
     {
@@ -43,13 +43,13 @@ final class RichCard implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?CarouselCard $carouselCard = null,
-        ?StandaloneCard $standaloneCard = null
+        ?CarouselCard $carousel_card = null,
+        ?StandaloneCard $standalone_card = null
     ): self {
         $obj = new self;
 
-        null !== $carouselCard && $obj->carouselCard = $carouselCard;
-        null !== $standaloneCard && $obj->standaloneCard = $standaloneCard;
+        null !== $carousel_card && $obj->carousel_card = $carousel_card;
+        null !== $standalone_card && $obj->standalone_card = $standalone_card;
 
         return $obj;
     }
@@ -60,7 +60,7 @@ final class RichCard implements BaseModel
     public function withCarouselCard(CarouselCard $carouselCard): self
     {
         $obj = clone $this;
-        $obj->carouselCard = $carouselCard;
+        $obj->carousel_card = $carouselCard;
 
         return $obj;
     }
@@ -71,7 +71,7 @@ final class RichCard implements BaseModel
     public function withStandaloneCard(StandaloneCard $standaloneCard): self
     {
         $obj = clone $this;
-        $obj->standaloneCard = $standaloneCard;
+        $obj->standalone_card = $standaloneCard;
 
         return $obj;
     }

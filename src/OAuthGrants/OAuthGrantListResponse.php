@@ -13,7 +13,7 @@ use Telnyx\OAuthClients\PaginationMetaOAuth;
 
 /**
  * @phpstan-type OAuthGrantListResponseShape = array{
- *   data?: list<OAuthGrant>, meta?: PaginationMetaOAuth
+ *   data?: list<OAuthGrant>|null, meta?: PaginationMetaOAuth|null
  * }
  */
 final class OAuthGrantListResponse implements BaseModel, ResponseConverter

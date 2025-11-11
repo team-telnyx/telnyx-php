@@ -14,7 +14,7 @@ use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckListResponse\Data;
 
 /**
  * @phpstan-type GlobalIPHealthCheckListResponseShape = array{
- *   data?: list<Data>, meta?: PaginationMeta
+ *   data?: list<Data>|null, meta?: PaginationMeta|null
  * }
  */
 final class GlobalIPHealthCheckListResponse implements BaseModel, ResponseConverter

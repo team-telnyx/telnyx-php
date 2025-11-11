@@ -10,10 +10,10 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type BookAppointmentShape = array{
- *   apiKeyRef: string,
- *   eventTypeID: int,
- *   attendeeName?: string,
- *   attendeeTimezone?: string,
+ *   api_key_ref: string,
+ *   event_type_id: int,
+ *   attendee_name?: string|null,
+ *   attendee_timezone?: string|null,
  * }
  */
 final class BookAppointment implements BaseModel
@@ -24,33 +24,33 @@ final class BookAppointment implements BaseModel
     /**
      * Reference to an integration secret that contains your Cal.com API key. You would pass the `identifier` for an integration secret [/v2/integration_secrets](https://developers.telnyx.com/api/secrets-manager/integration-secrets/create-integration-secret) that refers to your Cal.com API key.
      */
-    #[Api('api_key_ref')]
-    public string $apiKeyRef;
+    #[Api]
+    public string $api_key_ref;
 
     /**
      * Event Type ID for which slots are being fetched. [cal.com](https://cal.com/docs/api-reference/v2/bookings/create-a-booking#body-event-type-id).
      */
-    #[Api('event_type_id')]
-    public int $eventTypeID;
+    #[Api]
+    public int $event_type_id;
 
     /**
      * The name of the attendee [cal.com](https://cal.com/docs/api-reference/v2/bookings/create-a-booking#body-attendee-name). If not provided, the assistant will ask for the attendee's name.
      */
-    #[Api('attendee_name', optional: true)]
-    public ?string $attendeeName;
+    #[Api(optional: true)]
+    public ?string $attendee_name;
 
     /**
      * The timezone of the attendee [cal.com](https://cal.com/docs/api-reference/v2/bookings/create-a-booking#body-attendee-timezone). If not provided, the assistant will ask for the attendee's timezone.
      */
-    #[Api('attendee_timezone', optional: true)]
-    public ?string $attendeeTimezone;
+    #[Api(optional: true)]
+    public ?string $attendee_timezone;
 
     /**
      * `new BookAppointment()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * BookAppointment::with(apiKeyRef: ..., eventTypeID: ...)
+     * BookAppointment::with(api_key_ref: ..., event_type_id: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -70,18 +70,18 @@ final class BookAppointment implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        string $apiKeyRef,
-        int $eventTypeID,
-        ?string $attendeeName = null,
-        ?string $attendeeTimezone = null,
+        string $api_key_ref,
+        int $event_type_id,
+        ?string $attendee_name = null,
+        ?string $attendee_timezone = null,
     ): self {
         $obj = new self;
 
-        $obj->apiKeyRef = $apiKeyRef;
-        $obj->eventTypeID = $eventTypeID;
+        $obj->api_key_ref = $api_key_ref;
+        $obj->event_type_id = $event_type_id;
 
-        null !== $attendeeName && $obj->attendeeName = $attendeeName;
-        null !== $attendeeTimezone && $obj->attendeeTimezone = $attendeeTimezone;
+        null !== $attendee_name && $obj->attendee_name = $attendee_name;
+        null !== $attendee_timezone && $obj->attendee_timezone = $attendee_timezone;
 
         return $obj;
     }
@@ -92,7 +92,7 @@ final class BookAppointment implements BaseModel
     public function withAPIKeyRef(string $apiKeyRef): self
     {
         $obj = clone $this;
-        $obj->apiKeyRef = $apiKeyRef;
+        $obj->api_key_ref = $apiKeyRef;
 
         return $obj;
     }
@@ -103,7 +103,7 @@ final class BookAppointment implements BaseModel
     public function withEventTypeID(int $eventTypeID): self
     {
         $obj = clone $this;
-        $obj->eventTypeID = $eventTypeID;
+        $obj->event_type_id = $eventTypeID;
 
         return $obj;
     }
@@ -114,7 +114,7 @@ final class BookAppointment implements BaseModel
     public function withAttendeeName(string $attendeeName): self
     {
         $obj = clone $this;
-        $obj->attendeeName = $attendeeName;
+        $obj->attendee_name = $attendeeName;
 
         return $obj;
     }
@@ -125,7 +125,7 @@ final class BookAppointment implements BaseModel
     public function withAttendeeTimezone(string $attendeeTimezone): self
     {
         $obj = clone $this;
-        $obj->attendeeTimezone = $attendeeTimezone;
+        $obj->attendee_timezone = $attendeeTimezone;
 
         return $obj;
     }

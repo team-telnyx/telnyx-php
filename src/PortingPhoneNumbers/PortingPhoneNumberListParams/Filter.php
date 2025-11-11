@@ -13,7 +13,7 @@ use Telnyx\PortingPhoneNumbers\PortingPhoneNumberListParams\Filter\PortingOrderS
  * Consolidated filter parameter (deepObject style). Originally: filter[porting_order_status].
  *
  * @phpstan-type FilterShape = array{
- *   portingOrderStatus?: value-of<PortingOrderStatus>
+ *   porting_order_status?: value-of<PortingOrderStatus>|null
  * }
  */
 final class Filter implements BaseModel
@@ -24,14 +24,10 @@ final class Filter implements BaseModel
     /**
      * Filter results by porting order status.
      *
-     * @var value-of<PortingOrderStatus>|null $portingOrderStatus
+     * @var value-of<PortingOrderStatus>|null $porting_order_status
      */
-    #[Api(
-        'porting_order_status',
-        enum: PortingOrderStatus::class,
-        optional: true
-    )]
-    public ?string $portingOrderStatus;
+    #[Api(enum: PortingOrderStatus::class, optional: true)]
+    public ?string $porting_order_status;
 
     public function __construct()
     {
@@ -43,14 +39,14 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param PortingOrderStatus|value-of<PortingOrderStatus> $portingOrderStatus
+     * @param PortingOrderStatus|value-of<PortingOrderStatus> $porting_order_status
      */
     public static function with(
-        PortingOrderStatus|string|null $portingOrderStatus = null
+        PortingOrderStatus|string|null $porting_order_status = null
     ): self {
         $obj = new self;
 
-        null !== $portingOrderStatus && $obj['portingOrderStatus'] = $portingOrderStatus;
+        null !== $porting_order_status && $obj['porting_order_status'] = $porting_order_status;
 
         return $obj;
     }
@@ -64,7 +60,7 @@ final class Filter implements BaseModel
         PortingOrderStatus|string $portingOrderStatus
     ): self {
         $obj = clone $this;
-        $obj['portingOrderStatus'] = $portingOrderStatus;
+        $obj['porting_order_status'] = $portingOrderStatus;
 
         return $obj;
     }

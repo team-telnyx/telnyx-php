@@ -12,14 +12,10 @@ use Telnyx\WireguardPeers\WireguardPeerCreateParams;
 use Telnyx\WireguardPeers\WireguardPeerDeleteResponse;
 use Telnyx\WireguardPeers\WireguardPeerGetResponse;
 use Telnyx\WireguardPeers\WireguardPeerListParams;
-use Telnyx\WireguardPeers\WireguardPeerListParams\Filter;
-use Telnyx\WireguardPeers\WireguardPeerListParams\Page;
 use Telnyx\WireguardPeers\WireguardPeerListResponse;
 use Telnyx\WireguardPeers\WireguardPeerNewResponse;
 use Telnyx\WireguardPeers\WireguardPeerUpdateParams;
 use Telnyx\WireguardPeers\WireguardPeerUpdateResponse;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class WireguardPeersService implements WireguardPeersContract
 {
@@ -33,37 +29,19 @@ final class WireguardPeersService implements WireguardPeersContract
      *
      * Create a new WireGuard Peer. Current limitation of 5 peers per interface can be created.
      *
-     * @param string $wireguardInterfaceID the id of the wireguard interface associated with the peer
-     * @param string $publicKey The WireGuard `PublicKey`.<br /><br />If you do not provide a Public Key, a new Public and Private key pair will be generated for you.
+     * @param array{
+     *   wireguard_interface_id: string, public_key?: string
+     * }|WireguardPeerCreateParams $params
      *
      * @throws APIException
      */
     public function create(
-        $wireguardInterfaceID,
-        $publicKey = omit,
+        array|WireguardPeerCreateParams $params,
         ?RequestOptions $requestOptions = null,
-    ): WireguardPeerNewResponse {
-        $params = [
-            'wireguardInterfaceID' => $wireguardInterfaceID, 'publicKey' => $publicKey,
-        ];
-
-        return $this->createRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): WireguardPeerNewResponse {
         [$parsed, $options] = WireguardPeerCreateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -101,35 +79,18 @@ final class WireguardPeersService implements WireguardPeersContract
      *
      * Update the WireGuard peer.
      *
-     * @param string $publicKey The WireGuard `PublicKey`.<br /><br />If you do not provide a Public Key, a new Public and Private key pair will be generated for you.
+     * @param array{public_key?: string}|WireguardPeerUpdateParams $params
      *
      * @throws APIException
      */
     public function update(
         string $id,
-        $publicKey = omit,
-        ?RequestOptions $requestOptions = null
-    ): WireguardPeerUpdateResponse {
-        $params = ['publicKey' => $publicKey];
-
-        return $this->updateRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|WireguardPeerUpdateParams $params,
+        ?RequestOptions $requestOptions = null,
     ): WireguardPeerUpdateResponse {
         [$parsed, $options] = WireguardPeerUpdateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -147,35 +108,20 @@ final class WireguardPeersService implements WireguardPeersContract
      *
      * List all WireGuard peers.
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[wireguard_interface_id]
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param array{
+     *   filter?: array{wireguard_interface_id?: string},
+     *   page?: array{number?: int, size?: int},
+     * }|WireguardPeerListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): WireguardPeerListResponse {
-        $params = ['filter' => $filter, 'page' => $page];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|WireguardPeerListParams $params,
+        ?RequestOptions $requestOptions = null,
     ): WireguardPeerListResponse {
         [$parsed, $options] = WireguardPeerListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\ShortCode;
 
 /**
- * @phpstan-type ShortCodeUpdateResponseShape = array{data?: ShortCode}
+ * @phpstan-type ShortCodeUpdateResponseShape = array{data?: ShortCode|null}
  */
 final class ShortCodeUpdateResponse implements BaseModel, ResponseConverter
 {

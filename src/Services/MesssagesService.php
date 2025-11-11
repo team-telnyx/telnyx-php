@@ -7,15 +7,11 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Messsages\MesssageRcsParams;
-use Telnyx\Messsages\MesssageRcsParams\MmsFallback;
-use Telnyx\Messsages\MesssageRcsParams\SMSFallback;
-use Telnyx\Messsages\MesssageRcsParams\Type;
 use Telnyx\Messsages\MesssageRcsResponse;
 use Telnyx\Messsages\RcsAgentMessage;
+use Telnyx\Messsages\RcsContentInfo;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MesssagesContract;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class MesssagesService implements MesssagesContract
 {
@@ -29,56 +25,38 @@ final class MesssagesService implements MesssagesContract
      *
      * Send an RCS message
      *
-     * @param string $agentID RCS Agent ID
-     * @param RcsAgentMessage $agentMessage
-     * @param string $messagingProfileID A valid messaging profile ID
-     * @param string $to Phone number in +E.164 format
-     * @param MmsFallback $mmsFallback
-     * @param SMSFallback $smsFallback
-     * @param Type|value-of<Type> $type Message type - must be set to "RCS"
-     * @param string $webhookURL the URL where webhooks related to this message will be sent
+     * @param array{
+     *   agent_id: string,
+     *   agent_message: array{
+     *     content_message?: array{
+     *       content_info?: array<mixed>|RcsContentInfo,
+     *       rich_card?: array<mixed>,
+     *       suggestions?: list<mixed>,
+     *       text?: string,
+     *     },
+     *     event?: array{event_type?: "TYPE_UNSPECIFIED"|"IS_TYPING"|"READ"},
+     *     expire_time?: string|\DateTimeInterface,
+     *     ttl?: string,
+     *   }|RcsAgentMessage,
+     *   messaging_profile_id: string,
+     *   to: string,
+     *   mms_fallback?: array{
+     *     from?: string, media_urls?: list<string>, subject?: string, text?: string
+     *   },
+     *   sms_fallback?: array{from?: string, text?: string},
+     *   type?: "RCS",
+     *   webhook_url?: string,
+     * }|MesssageRcsParams $params
      *
      * @throws APIException
      */
     public function rcs(
-        $agentID,
-        $agentMessage,
-        $messagingProfileID,
-        $to,
-        $mmsFallback = omit,
-        $smsFallback = omit,
-        $type = omit,
-        $webhookURL = omit,
-        ?RequestOptions $requestOptions = null,
-    ): MesssageRcsResponse {
-        $params = [
-            'agentID' => $agentID,
-            'agentMessage' => $agentMessage,
-            'messagingProfileID' => $messagingProfileID,
-            'to' => $to,
-            'mmsFallback' => $mmsFallback,
-            'smsFallback' => $smsFallback,
-            'type' => $type,
-            'webhookURL' => $webhookURL,
-        ];
-
-        return $this->rcsRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function rcsRaw(
-        array $params,
+        array|MesssageRcsParams $params,
         ?RequestOptions $requestOptions = null
     ): MesssageRcsResponse {
         [$parsed, $options] = MesssageRcsParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

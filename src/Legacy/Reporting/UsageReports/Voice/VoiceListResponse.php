@@ -13,7 +13,8 @@ use Telnyx\Legacy\Reporting\UsageReports\Messaging\StandardPaginationMeta;
 
 /**
  * @phpstan-type VoiceListResponseShape = array{
- *   data?: list<CdrUsageReportResponseLegacy>, meta?: StandardPaginationMeta
+ *   data?: list<CdrUsageReportResponseLegacy>|null,
+ *   meta?: StandardPaginationMeta|null,
  * }
  */
 final class VoiceListResponse implements BaseModel, ResponseConverter

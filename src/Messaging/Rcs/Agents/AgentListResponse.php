@@ -14,7 +14,7 @@ use Telnyx\RcsAgents\RcsAgent;
 
 /**
  * @phpstan-type AgentListResponseShape = array{
- *   data?: list<RcsAgent>, meta?: PaginationMeta
+ *   data?: list<RcsAgent>|null, meta?: PaginationMeta|null
  * }
  */
 final class AgentListResponse implements BaseModel, ResponseConverter

@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type KeyShape = array{
- *   alg?: string, kid?: string, kty?: string, use?: string
+ *   alg?: string|null, kid?: string|null, kty?: string|null, use?: string|null
  * }
  */
 final class Key implements BaseModel

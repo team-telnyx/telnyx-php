@@ -15,10 +15,10 @@ use Telnyx\Rooms\Sessions\SessionRetrieveParticipantsParams\Filter\DateUpdatedAt
  * Consolidated filter parameter (deepObject style). Originally: filter[date_joined_at][eq], filter[date_joined_at][gte], filter[date_joined_at][lte], filter[date_updated_at][eq], filter[date_updated_at][gte], filter[date_updated_at][lte], filter[date_left_at][eq], filter[date_left_at][gte], filter[date_left_at][lte], filter[context].
  *
  * @phpstan-type FilterShape = array{
- *   context?: string,
- *   dateJoinedAt?: DateJoinedAt,
- *   dateLeftAt?: DateLeftAt,
- *   dateUpdatedAt?: DateUpdatedAt,
+ *   context?: string|null,
+ *   date_joined_at?: DateJoinedAt|null,
+ *   date_left_at?: DateLeftAt|null,
+ *   date_updated_at?: DateUpdatedAt|null,
  * }
  */
 final class Filter implements BaseModel
@@ -32,14 +32,14 @@ final class Filter implements BaseModel
     #[Api(optional: true)]
     public ?string $context;
 
-    #[Api('date_joined_at', optional: true)]
-    public ?DateJoinedAt $dateJoinedAt;
+    #[Api(optional: true)]
+    public ?DateJoinedAt $date_joined_at;
 
-    #[Api('date_left_at', optional: true)]
-    public ?DateLeftAt $dateLeftAt;
+    #[Api(optional: true)]
+    public ?DateLeftAt $date_left_at;
 
-    #[Api('date_updated_at', optional: true)]
-    public ?DateUpdatedAt $dateUpdatedAt;
+    #[Api(optional: true)]
+    public ?DateUpdatedAt $date_updated_at;
 
     public function __construct()
     {
@@ -53,16 +53,16 @@ final class Filter implements BaseModel
      */
     public static function with(
         ?string $context = null,
-        ?DateJoinedAt $dateJoinedAt = null,
-        ?DateLeftAt $dateLeftAt = null,
-        ?DateUpdatedAt $dateUpdatedAt = null,
+        ?DateJoinedAt $date_joined_at = null,
+        ?DateLeftAt $date_left_at = null,
+        ?DateUpdatedAt $date_updated_at = null,
     ): self {
         $obj = new self;
 
         null !== $context && $obj->context = $context;
-        null !== $dateJoinedAt && $obj->dateJoinedAt = $dateJoinedAt;
-        null !== $dateLeftAt && $obj->dateLeftAt = $dateLeftAt;
-        null !== $dateUpdatedAt && $obj->dateUpdatedAt = $dateUpdatedAt;
+        null !== $date_joined_at && $obj->date_joined_at = $date_joined_at;
+        null !== $date_left_at && $obj->date_left_at = $date_left_at;
+        null !== $date_updated_at && $obj->date_updated_at = $date_updated_at;
 
         return $obj;
     }
@@ -81,7 +81,7 @@ final class Filter implements BaseModel
     public function withDateJoinedAt(DateJoinedAt $dateJoinedAt): self
     {
         $obj = clone $this;
-        $obj->dateJoinedAt = $dateJoinedAt;
+        $obj->date_joined_at = $dateJoinedAt;
 
         return $obj;
     }
@@ -89,7 +89,7 @@ final class Filter implements BaseModel
     public function withDateLeftAt(DateLeftAt $dateLeftAt): self
     {
         $obj = clone $this;
-        $obj->dateLeftAt = $dateLeftAt;
+        $obj->date_left_at = $dateLeftAt;
 
         return $obj;
     }
@@ -97,7 +97,7 @@ final class Filter implements BaseModel
     public function withDateUpdatedAt(DateUpdatedAt $dateUpdatedAt): self
     {
         $obj = clone $this;
-        $obj->dateUpdatedAt = $dateUpdatedAt;
+        $obj->date_updated_at = $dateUpdatedAt;
 
         return $obj;
     }

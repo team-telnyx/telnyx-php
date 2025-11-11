@@ -8,12 +8,9 @@ use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Payment\AutoRechargePrefs\AutoRechargePrefListResponse;
 use Telnyx\Payment\AutoRechargePrefs\AutoRechargePrefUpdateParams;
-use Telnyx\Payment\AutoRechargePrefs\AutoRechargePrefUpdateParams\Preference;
 use Telnyx\Payment\AutoRechargePrefs\AutoRechargePrefUpdateResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Payment\AutoRechargePrefsContract;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class AutoRechargePrefsService implements AutoRechargePrefsContract
 {
@@ -27,47 +24,23 @@ final class AutoRechargePrefsService implements AutoRechargePrefsContract
      *
      * Update payment auto recharge preferences.
      *
-     * @param bool $enabled whether auto recharge is enabled
-     * @param bool $invoiceEnabled
-     * @param Preference|value-of<Preference> $preference the payment preference for auto recharge
-     * @param string $rechargeAmount the amount to recharge the account, the actual recharge amount will be the amount necessary to reach the threshold amount plus the recharge amount
-     * @param string $thresholdAmount the threshold amount at which the account will be recharged
+     * @param array{
+     *   enabled?: bool,
+     *   invoice_enabled?: bool,
+     *   preference?: "credit_paypal"|"ach",
+     *   recharge_amount?: string,
+     *   threshold_amount?: string,
+     * }|AutoRechargePrefUpdateParams $params
      *
      * @throws APIException
      */
     public function update(
-        $enabled = omit,
-        $invoiceEnabled = omit,
-        $preference = omit,
-        $rechargeAmount = omit,
-        $thresholdAmount = omit,
+        array|AutoRechargePrefUpdateParams $params,
         ?RequestOptions $requestOptions = null,
-    ): AutoRechargePrefUpdateResponse {
-        $params = [
-            'enabled' => $enabled,
-            'invoiceEnabled' => $invoiceEnabled,
-            'preference' => $preference,
-            'rechargeAmount' => $rechargeAmount,
-            'thresholdAmount' => $thresholdAmount,
-        ];
-
-        return $this->updateRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): AutoRechargePrefUpdateResponse {
         [$parsed, $options] = AutoRechargePrefUpdateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

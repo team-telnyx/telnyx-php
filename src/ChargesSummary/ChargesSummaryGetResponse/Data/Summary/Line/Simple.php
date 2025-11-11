@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type SimpleShape = array{
- *   alias: string, amount: string, name: string, quantity: int, type: string
+ *   alias: string, amount: string, name: string, quantity: int, type: "simple"
  * }
  */
 final class Simple implements BaseModel
@@ -18,6 +18,7 @@ final class Simple implements BaseModel
     /** @use SdkModel<SimpleShape> */
     use SdkModel;
 
+    /** @var "simple" $type */
     #[Api]
     public string $type = 'simple';
 

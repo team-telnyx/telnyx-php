@@ -11,7 +11,9 @@ use Telnyx\Messsages\RcsSuggestion\Action;
 use Telnyx\Messsages\RcsSuggestion\Reply;
 
 /**
- * @phpstan-type RcsSuggestionShape = array{action?: Action, reply?: Reply}
+ * @phpstan-type RcsSuggestionShape = array{
+ *   action?: Action|null, reply?: Reply|null
+ * }
  */
 final class RcsSuggestion implements BaseModel
 {

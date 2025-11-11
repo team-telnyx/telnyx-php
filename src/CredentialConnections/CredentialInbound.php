@@ -12,17 +12,17 @@ use Telnyx\CredentialConnections\CredentialInbound\DnisNumberFormat;
 
 /**
  * @phpstan-type CredentialInboundShape = array{
- *   aniNumberFormat?: value-of<AniNumberFormat>,
- *   channelLimit?: int,
- *   codecs?: list<string>,
- *   dnisNumberFormat?: value-of<DnisNumberFormat>,
- *   generateRingbackTone?: bool,
- *   isupHeadersEnabled?: bool,
- *   prackEnabled?: bool,
- *   shakenStirEnabled?: bool,
- *   sipCompactHeadersEnabled?: bool,
- *   timeout1xxSecs?: int,
- *   timeout2xxSecs?: int,
+ *   ani_number_format?: value-of<AniNumberFormat>|null,
+ *   channel_limit?: int|null,
+ *   codecs?: list<string>|null,
+ *   dnis_number_format?: value-of<DnisNumberFormat>|null,
+ *   generate_ringback_tone?: bool|null,
+ *   isup_headers_enabled?: bool|null,
+ *   prack_enabled?: bool|null,
+ *   shaken_stir_enabled?: bool|null,
+ *   sip_compact_headers_enabled?: bool|null,
+ *   timeout_1xx_secs?: int|null,
+ *   timeout_2xx_secs?: int|null,
  * }
  */
 final class CredentialInbound implements BaseModel
@@ -33,16 +33,16 @@ final class CredentialInbound implements BaseModel
     /**
      * This setting allows you to set the format with which the caller's number (ANI) is sent for inbound phone calls.
      *
-     * @var value-of<AniNumberFormat>|null $aniNumberFormat
+     * @var value-of<AniNumberFormat>|null $ani_number_format
      */
-    #[Api('ani_number_format', enum: AniNumberFormat::class, optional: true)]
-    public ?string $aniNumberFormat;
+    #[Api(enum: AniNumberFormat::class, optional: true)]
+    public ?string $ani_number_format;
 
     /**
      * When set, this will limit the total number of inbound calls to phone numbers associated with this connection.
      */
-    #[Api('channel_limit', optional: true)]
-    public ?int $channelLimit;
+    #[Api(optional: true)]
+    public ?int $channel_limit;
 
     /**
      * Defines the list of codecs that Telnyx will send for inbound calls to a specific number on your portal account, in priority order. This only works when the Connection the number is assigned to uses Media Handling mode: default. OPUS and H.264 codecs are available only when using TCP or TLS transport for SIP.
@@ -52,51 +52,51 @@ final class CredentialInbound implements BaseModel
     #[Api(list: 'string', optional: true)]
     public ?array $codecs;
 
-    /** @var value-of<DnisNumberFormat>|null $dnisNumberFormat */
-    #[Api('dnis_number_format', enum: DnisNumberFormat::class, optional: true)]
-    public ?string $dnisNumberFormat;
+    /** @var value-of<DnisNumberFormat>|null $dnis_number_format */
+    #[Api(enum: DnisNumberFormat::class, optional: true)]
+    public ?string $dnis_number_format;
 
     /**
      * Generate ringback tone through 183 session progress message with early media.
      */
-    #[Api('generate_ringback_tone', optional: true)]
-    public ?bool $generateRingbackTone;
+    #[Api(optional: true)]
+    public ?bool $generate_ringback_tone;
 
     /**
      * When set, inbound phone calls will receive ISUP parameters via SIP headers. (Only when available and only when using TCP or TLS transport.).
      */
-    #[Api('isup_headers_enabled', optional: true)]
-    public ?bool $isupHeadersEnabled;
+    #[Api(optional: true)]
+    public ?bool $isup_headers_enabled;
 
     /**
      * Enable PRACK messages as defined in RFC3262.
      */
-    #[Api('prack_enabled', optional: true)]
-    public ?bool $prackEnabled;
+    #[Api(optional: true)]
+    public ?bool $prack_enabled;
 
     /**
      * When enabled the SIP Connection will receive the Identity header with Shaken/Stir data in the SIP INVITE message of inbound calls, even when using UDP transport.
      */
-    #[Api('shaken_stir_enabled', optional: true)]
-    public ?bool $shakenStirEnabled;
+    #[Api(optional: true)]
+    public ?bool $shaken_stir_enabled;
 
     /**
      * Defaults to true.
      */
-    #[Api('sip_compact_headers_enabled', optional: true)]
-    public ?bool $sipCompactHeadersEnabled;
+    #[Api(optional: true)]
+    public ?bool $sip_compact_headers_enabled;
 
     /**
      * Time(sec) before aborting if connection is not made.
      */
-    #[Api('timeout_1xx_secs', optional: true)]
-    public ?int $timeout1xxSecs;
+    #[Api(optional: true)]
+    public ?int $timeout_1xx_secs;
 
     /**
      * Time(sec) before aborting if call is unanswered (min: 1, max: 600).
      */
-    #[Api('timeout_2xx_secs', optional: true)]
-    public ?int $timeout2xxSecs;
+    #[Api(optional: true)]
+    public ?int $timeout_2xx_secs;
 
     public function __construct()
     {
@@ -108,36 +108,36 @@ final class CredentialInbound implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AniNumberFormat|value-of<AniNumberFormat> $aniNumberFormat
+     * @param AniNumberFormat|value-of<AniNumberFormat> $ani_number_format
      * @param list<string> $codecs
-     * @param DnisNumberFormat|value-of<DnisNumberFormat> $dnisNumberFormat
+     * @param DnisNumberFormat|value-of<DnisNumberFormat> $dnis_number_format
      */
     public static function with(
-        AniNumberFormat|string|null $aniNumberFormat = null,
-        ?int $channelLimit = null,
+        AniNumberFormat|string|null $ani_number_format = null,
+        ?int $channel_limit = null,
         ?array $codecs = null,
-        DnisNumberFormat|string|null $dnisNumberFormat = null,
-        ?bool $generateRingbackTone = null,
-        ?bool $isupHeadersEnabled = null,
-        ?bool $prackEnabled = null,
-        ?bool $shakenStirEnabled = null,
-        ?bool $sipCompactHeadersEnabled = null,
-        ?int $timeout1xxSecs = null,
-        ?int $timeout2xxSecs = null,
+        DnisNumberFormat|string|null $dnis_number_format = null,
+        ?bool $generate_ringback_tone = null,
+        ?bool $isup_headers_enabled = null,
+        ?bool $prack_enabled = null,
+        ?bool $shaken_stir_enabled = null,
+        ?bool $sip_compact_headers_enabled = null,
+        ?int $timeout_1xx_secs = null,
+        ?int $timeout_2xx_secs = null,
     ): self {
         $obj = new self;
 
-        null !== $aniNumberFormat && $obj['aniNumberFormat'] = $aniNumberFormat;
-        null !== $channelLimit && $obj->channelLimit = $channelLimit;
+        null !== $ani_number_format && $obj['ani_number_format'] = $ani_number_format;
+        null !== $channel_limit && $obj->channel_limit = $channel_limit;
         null !== $codecs && $obj->codecs = $codecs;
-        null !== $dnisNumberFormat && $obj['dnisNumberFormat'] = $dnisNumberFormat;
-        null !== $generateRingbackTone && $obj->generateRingbackTone = $generateRingbackTone;
-        null !== $isupHeadersEnabled && $obj->isupHeadersEnabled = $isupHeadersEnabled;
-        null !== $prackEnabled && $obj->prackEnabled = $prackEnabled;
-        null !== $shakenStirEnabled && $obj->shakenStirEnabled = $shakenStirEnabled;
-        null !== $sipCompactHeadersEnabled && $obj->sipCompactHeadersEnabled = $sipCompactHeadersEnabled;
-        null !== $timeout1xxSecs && $obj->timeout1xxSecs = $timeout1xxSecs;
-        null !== $timeout2xxSecs && $obj->timeout2xxSecs = $timeout2xxSecs;
+        null !== $dnis_number_format && $obj['dnis_number_format'] = $dnis_number_format;
+        null !== $generate_ringback_tone && $obj->generate_ringback_tone = $generate_ringback_tone;
+        null !== $isup_headers_enabled && $obj->isup_headers_enabled = $isup_headers_enabled;
+        null !== $prack_enabled && $obj->prack_enabled = $prack_enabled;
+        null !== $shaken_stir_enabled && $obj->shaken_stir_enabled = $shaken_stir_enabled;
+        null !== $sip_compact_headers_enabled && $obj->sip_compact_headers_enabled = $sip_compact_headers_enabled;
+        null !== $timeout_1xx_secs && $obj->timeout_1xx_secs = $timeout_1xx_secs;
+        null !== $timeout_2xx_secs && $obj->timeout_2xx_secs = $timeout_2xx_secs;
 
         return $obj;
     }
@@ -151,7 +151,7 @@ final class CredentialInbound implements BaseModel
         AniNumberFormat|string $aniNumberFormat
     ): self {
         $obj = clone $this;
-        $obj['aniNumberFormat'] = $aniNumberFormat;
+        $obj['ani_number_format'] = $aniNumberFormat;
 
         return $obj;
     }
@@ -162,7 +162,7 @@ final class CredentialInbound implements BaseModel
     public function withChannelLimit(int $channelLimit): self
     {
         $obj = clone $this;
-        $obj->channelLimit = $channelLimit;
+        $obj->channel_limit = $channelLimit;
 
         return $obj;
     }
@@ -187,7 +187,7 @@ final class CredentialInbound implements BaseModel
         DnisNumberFormat|string $dnisNumberFormat
     ): self {
         $obj = clone $this;
-        $obj['dnisNumberFormat'] = $dnisNumberFormat;
+        $obj['dnis_number_format'] = $dnisNumberFormat;
 
         return $obj;
     }
@@ -198,7 +198,7 @@ final class CredentialInbound implements BaseModel
     public function withGenerateRingbackTone(bool $generateRingbackTone): self
     {
         $obj = clone $this;
-        $obj->generateRingbackTone = $generateRingbackTone;
+        $obj->generate_ringback_tone = $generateRingbackTone;
 
         return $obj;
     }
@@ -209,7 +209,7 @@ final class CredentialInbound implements BaseModel
     public function withIsupHeadersEnabled(bool $isupHeadersEnabled): self
     {
         $obj = clone $this;
-        $obj->isupHeadersEnabled = $isupHeadersEnabled;
+        $obj->isup_headers_enabled = $isupHeadersEnabled;
 
         return $obj;
     }
@@ -220,7 +220,7 @@ final class CredentialInbound implements BaseModel
     public function withPrackEnabled(bool $prackEnabled): self
     {
         $obj = clone $this;
-        $obj->prackEnabled = $prackEnabled;
+        $obj->prack_enabled = $prackEnabled;
 
         return $obj;
     }
@@ -231,7 +231,7 @@ final class CredentialInbound implements BaseModel
     public function withShakenStirEnabled(bool $shakenStirEnabled): self
     {
         $obj = clone $this;
-        $obj->shakenStirEnabled = $shakenStirEnabled;
+        $obj->shaken_stir_enabled = $shakenStirEnabled;
 
         return $obj;
     }
@@ -243,7 +243,7 @@ final class CredentialInbound implements BaseModel
         bool $sipCompactHeadersEnabled
     ): self {
         $obj = clone $this;
-        $obj->sipCompactHeadersEnabled = $sipCompactHeadersEnabled;
+        $obj->sip_compact_headers_enabled = $sipCompactHeadersEnabled;
 
         return $obj;
     }
@@ -254,7 +254,7 @@ final class CredentialInbound implements BaseModel
     public function withTimeout1xxSecs(int $timeout1xxSecs): self
     {
         $obj = clone $this;
-        $obj->timeout1xxSecs = $timeout1xxSecs;
+        $obj->timeout_1xx_secs = $timeout1xxSecs;
 
         return $obj;
     }
@@ -265,7 +265,7 @@ final class CredentialInbound implements BaseModel
     public function withTimeout2xxSecs(int $timeout2xxSecs): self
     {
         $obj = clone $this;
-        $obj->timeout2xxSecs = $timeout2xxSecs;
+        $obj->timeout_2xx_secs = $timeout2xxSecs;
 
         return $obj;
     }

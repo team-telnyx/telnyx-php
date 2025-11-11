@@ -11,14 +11,14 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * @phpstan-type BillingBundleSummaryShape = array{
  *   id: string,
- *   costCode: string,
- *   createdAt: \DateTimeInterface,
- *   isPublic: bool,
+ *   cost_code: string,
+ *   created_at: \DateTimeInterface,
+ *   is_public: bool,
  *   name: string,
- *   currency?: string,
- *   mrcPrice?: float,
- *   slug?: string,
- *   specs?: list<string>,
+ *   currency?: string|null,
+ *   mrc_price?: float|null,
+ *   slug?: string|null,
+ *   specs?: list<string>|null,
  * }
  */
 final class BillingBundleSummary implements BaseModel
@@ -35,20 +35,20 @@ final class BillingBundleSummary implements BaseModel
     /**
      * Bundle's cost code, this is used to identify the bundle in the billing system.
      */
-    #[Api('cost_code')]
-    public string $costCode;
+    #[Api]
+    public string $cost_code;
 
     /**
      * Date the bundle was created.
      */
-    #[Api('created_at')]
-    public \DateTimeInterface $createdAt;
+    #[Api]
+    public \DateTimeInterface $created_at;
 
     /**
      * Available to all customers or only to specific customers.
      */
-    #[Api('is_public')]
-    public bool $isPublic;
+    #[Api]
+    public bool $is_public;
 
     /**
      * Bundle's name, this is used to identify the bundle in the UI.
@@ -65,8 +65,8 @@ final class BillingBundleSummary implements BaseModel
     /**
      * Monthly recurring charge price.
      */
-    #[Api('mrc_price', optional: true)]
-    public ?float $mrcPrice;
+    #[Api(optional: true)]
+    public ?float $mrc_price;
 
     /**
      * Slugified version of the bundle's name.
@@ -84,7 +84,7 @@ final class BillingBundleSummary implements BaseModel
      * To enforce required parameters use
      * ```
      * BillingBundleSummary::with(
-     *   id: ..., costCode: ..., createdAt: ..., isPublic: ..., name: ...
+     *   id: ..., cost_code: ..., created_at: ..., is_public: ..., name: ...
      * )
      * ```
      *
@@ -113,25 +113,25 @@ final class BillingBundleSummary implements BaseModel
      */
     public static function with(
         string $id,
-        string $costCode,
-        \DateTimeInterface $createdAt,
-        bool $isPublic,
+        string $cost_code,
+        \DateTimeInterface $created_at,
+        bool $is_public,
         string $name,
         ?string $currency = null,
-        ?float $mrcPrice = null,
+        ?float $mrc_price = null,
         ?string $slug = null,
         ?array $specs = null,
     ): self {
         $obj = new self;
 
         $obj->id = $id;
-        $obj->costCode = $costCode;
-        $obj->createdAt = $createdAt;
-        $obj->isPublic = $isPublic;
+        $obj->cost_code = $cost_code;
+        $obj->created_at = $created_at;
+        $obj->is_public = $is_public;
         $obj->name = $name;
 
         null !== $currency && $obj->currency = $currency;
-        null !== $mrcPrice && $obj->mrcPrice = $mrcPrice;
+        null !== $mrc_price && $obj->mrc_price = $mrc_price;
         null !== $slug && $obj->slug = $slug;
         null !== $specs && $obj->specs = $specs;
 
@@ -155,7 +155,7 @@ final class BillingBundleSummary implements BaseModel
     public function withCostCode(string $costCode): self
     {
         $obj = clone $this;
-        $obj->costCode = $costCode;
+        $obj->cost_code = $costCode;
 
         return $obj;
     }
@@ -166,7 +166,7 @@ final class BillingBundleSummary implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }
@@ -177,7 +177,7 @@ final class BillingBundleSummary implements BaseModel
     public function withIsPublic(bool $isPublic): self
     {
         $obj = clone $this;
-        $obj->isPublic = $isPublic;
+        $obj->is_public = $isPublic;
 
         return $obj;
     }
@@ -210,7 +210,7 @@ final class BillingBundleSummary implements BaseModel
     public function withMrcPrice(float $mrcPrice): self
     {
         $obj = clone $this;
-        $obj->mrcPrice = $mrcPrice;
+        $obj->mrc_price = $mrcPrice;
 
         return $obj;
     }

@@ -6,65 +6,35 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Invoices\InvoiceGetResponse;
-use Telnyx\Invoices\InvoiceListParams\Page;
-use Telnyx\Invoices\InvoiceListParams\Sort;
+use Telnyx\Invoices\InvoiceListParams;
 use Telnyx\Invoices\InvoiceListResponse;
-use Telnyx\Invoices\InvoiceRetrieveParams\Action;
+use Telnyx\Invoices\InvoiceRetrieveParams;
 use Telnyx\RequestOptions;
-
-use const Telnyx\Core\OMIT as omit;
 
 interface InvoicesContract
 {
     /**
      * @api
      *
-     * @param Action|value-of<Action> $action Invoice action
+     * @param array<mixed>|InvoiceRetrieveParams $params
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        $action = omit,
-        ?RequestOptions $requestOptions = null
+        array|InvoiceRetrieveParams $params,
+        ?RequestOptions $requestOptions = null,
     ): InvoiceGetResponse;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): InvoiceGetResponse;
-
-    /**
-     * @api
-     *
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
-     * @param Sort|value-of<Sort> $sort specifies the sort order for results
+     * @param array<mixed>|InvoiceListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $page = omit,
-        $sort = omit,
-        ?RequestOptions $requestOptions = null
-    ): InvoiceListResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
+        array|InvoiceListParams $params,
         ?RequestOptions $requestOptions = null
     ): InvoiceListResponse;
 }

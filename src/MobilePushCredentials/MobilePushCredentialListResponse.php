@@ -15,7 +15,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  * Mobile mobile push credentials.
  *
  * @phpstan-type MobilePushCredentialListResponseShape = array{
- *   data?: list<PushCredential>, meta?: PaginationMeta
+ *   data?: list<PushCredential>|null, meta?: PaginationMeta|null
  * }
  */
 final class MobilePushCredentialListResponse implements BaseModel, ResponseConverter

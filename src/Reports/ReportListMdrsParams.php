@@ -22,10 +22,10 @@ use Telnyx\Reports\ReportListMdrsParams\Status;
  *   cld?: string,
  *   cli?: string,
  *   direction?: Direction|value-of<Direction>,
- *   endDate?: string,
- *   messageType?: MessageType|value-of<MessageType>,
+ *   end_date?: string,
+ *   message_type?: MessageType|value-of<MessageType>,
  *   profile?: string,
- *   startDate?: string,
+ *   start_date?: string,
  *   status?: Status|value-of<Status>,
  * }
  */
@@ -65,15 +65,15 @@ final class ReportListMdrsParams implements BaseModel
      * Pagination end date.
      */
     #[Api(optional: true)]
-    public ?string $endDate;
+    public ?string $end_date;
 
     /**
      * Type of message.
      *
-     * @var value-of<MessageType>|null $messageType
+     * @var value-of<MessageType>|null $message_type
      */
     #[Api(enum: MessageType::class, optional: true)]
-    public ?string $messageType;
+    public ?string $message_type;
 
     /**
      * Name of the profile.
@@ -85,7 +85,7 @@ final class ReportListMdrsParams implements BaseModel
      * Pagination start date.
      */
     #[Api(optional: true)]
-    public ?string $startDate;
+    public ?string $start_date;
 
     /**
      * Message status.
@@ -106,7 +106,7 @@ final class ReportListMdrsParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Direction|value-of<Direction> $direction
-     * @param MessageType|value-of<MessageType> $messageType
+     * @param MessageType|value-of<MessageType> $message_type
      * @param Status|value-of<Status> $status
      */
     public static function with(
@@ -114,10 +114,10 @@ final class ReportListMdrsParams implements BaseModel
         ?string $cld = null,
         ?string $cli = null,
         Direction|string|null $direction = null,
-        ?string $endDate = null,
-        MessageType|string|null $messageType = null,
+        ?string $end_date = null,
+        MessageType|string|null $message_type = null,
         ?string $profile = null,
-        ?string $startDate = null,
+        ?string $start_date = null,
         Status|string|null $status = null,
     ): self {
         $obj = new self;
@@ -126,10 +126,10 @@ final class ReportListMdrsParams implements BaseModel
         null !== $cld && $obj->cld = $cld;
         null !== $cli && $obj->cli = $cli;
         null !== $direction && $obj['direction'] = $direction;
-        null !== $endDate && $obj->endDate = $endDate;
-        null !== $messageType && $obj['messageType'] = $messageType;
+        null !== $end_date && $obj->end_date = $end_date;
+        null !== $message_type && $obj['message_type'] = $message_type;
         null !== $profile && $obj->profile = $profile;
-        null !== $startDate && $obj->startDate = $startDate;
+        null !== $start_date && $obj->start_date = $start_date;
         null !== $status && $obj['status'] = $status;
 
         return $obj;
@@ -187,7 +187,7 @@ final class ReportListMdrsParams implements BaseModel
     public function withEndDate(string $endDate): self
     {
         $obj = clone $this;
-        $obj->endDate = $endDate;
+        $obj->end_date = $endDate;
 
         return $obj;
     }
@@ -200,7 +200,7 @@ final class ReportListMdrsParams implements BaseModel
     public function withMessageType(MessageType|string $messageType): self
     {
         $obj = clone $this;
-        $obj['messageType'] = $messageType;
+        $obj['message_type'] = $messageType;
 
         return $obj;
     }
@@ -222,7 +222,7 @@ final class ReportListMdrsParams implements BaseModel
     public function withStartDate(string $startDate): self
     {
         $obj = clone $this;
-        $obj->startDate = $startDate;
+        $obj->start_date = $startDate;
 
         return $obj;
     }

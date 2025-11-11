@@ -13,7 +13,9 @@ use Telnyx\PrivateWirelessGateways\PrivateWirelessGatewayStatus\Value;
  * The current status or failure details of the Private Wireless Gateway.
  *
  * @phpstan-type PrivateWirelessGatewayStatusShape = array{
- *   errorCode?: string, errorDescription?: string, value?: value-of<Value>
+ *   error_code?: string|null,
+ *   error_description?: string|null,
+ *   value?: value-of<Value>|null,
  * }
  */
 final class PrivateWirelessGatewayStatus implements BaseModel
@@ -24,14 +26,14 @@ final class PrivateWirelessGatewayStatus implements BaseModel
     /**
      * This attribute is an [error code](https://developers.telnyx.com/api/errors) related to the failure reason.
      */
-    #[Api('error_code', optional: true)]
-    public ?string $errorCode;
+    #[Api(optional: true)]
+    public ?string $error_code;
 
     /**
      * This attribute provides a human-readable explanation of why a failure happened.
      */
-    #[Api('error_description', optional: true)]
-    public ?string $errorDescription;
+    #[Api(optional: true)]
+    public ?string $error_description;
 
     /**
      * The current status or failure details of the Private Wireless Gateway. <ul>
@@ -60,14 +62,14 @@ final class PrivateWirelessGatewayStatus implements BaseModel
      * @param Value|value-of<Value> $value
      */
     public static function with(
-        ?string $errorCode = null,
-        ?string $errorDescription = null,
+        ?string $error_code = null,
+        ?string $error_description = null,
         Value|string|null $value = null,
     ): self {
         $obj = new self;
 
-        null !== $errorCode && $obj->errorCode = $errorCode;
-        null !== $errorDescription && $obj->errorDescription = $errorDescription;
+        null !== $error_code && $obj->error_code = $error_code;
+        null !== $error_description && $obj->error_description = $error_description;
         null !== $value && $obj['value'] = $value;
 
         return $obj;
@@ -79,7 +81,7 @@ final class PrivateWirelessGatewayStatus implements BaseModel
     public function withErrorCode(string $errorCode): self
     {
         $obj = clone $this;
-        $obj->errorCode = $errorCode;
+        $obj->error_code = $errorCode;
 
         return $obj;
     }
@@ -90,7 +92,7 @@ final class PrivateWirelessGatewayStatus implements BaseModel
     public function withErrorDescription(string $errorDescription): self
     {
         $obj = clone $this;
-        $obj->errorDescription = $errorDescription;
+        $obj->error_description = $errorDescription;
 
         return $obj;
     }

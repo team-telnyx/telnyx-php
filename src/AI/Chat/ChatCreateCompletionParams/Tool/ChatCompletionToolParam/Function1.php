@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type Function1Shape = array{
- *   name: string, description?: string, parameters?: array<string, mixed>
+ *   name: string, description?: string|null, parameters?: array<string,mixed>|null
  * }
  */
 final class Function1 implements BaseModel
@@ -24,7 +24,7 @@ final class Function1 implements BaseModel
     #[Api(optional: true)]
     public ?string $description;
 
-    /** @var array<string, mixed>|null $parameters */
+    /** @var array<string,mixed>|null $parameters */
     #[Api(map: 'mixed', optional: true)]
     public ?array $parameters;
 
@@ -52,7 +52,7 @@ final class Function1 implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param array<string, mixed> $parameters
+     * @param array<string,mixed> $parameters
      */
     public static function with(
         string $name,
@@ -86,7 +86,7 @@ final class Function1 implements BaseModel
     }
 
     /**
-     * @param array<string, mixed> $parameters
+     * @param array<string,mixed> $parameters
      */
     public function withParameters(array $parameters): self
     {

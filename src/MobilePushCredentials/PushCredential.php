@@ -13,12 +13,12 @@ use Telnyx\Core\Contracts\BaseModel;
  *   id: string,
  *   alias: string,
  *   certificate: string,
- *   createdAt: \DateTimeInterface,
- *   privateKey: string,
- *   projectAccountJsonFile: array<string, mixed>,
- *   recordType: string,
+ *   created_at: \DateTimeInterface,
+ *   private_key: string,
+ *   project_account_json_file: array<string,mixed>,
+ *   record_type: string,
  *   type: string,
- *   updatedAt: \DateTimeInterface,
+ *   updated_at: \DateTimeInterface,
  * }
  */
 final class PushCredential implements BaseModel
@@ -47,25 +47,25 @@ final class PushCredential implements BaseModel
     /**
      * ISO 8601 timestamp when the room was created.
      */
-    #[Api('created_at')]
-    public \DateTimeInterface $createdAt;
+    #[Api]
+    public \DateTimeInterface $created_at;
 
     /**
      * Apple private key for a given certificate for sending push notifications. For iOS only.
      */
-    #[Api('private_key')]
-    public string $privateKey;
+    #[Api]
+    public string $private_key;
 
     /**
      * Google server key for sending push notifications. For Android only.
      *
-     * @var array<string, mixed> $projectAccountJsonFile
+     * @var array<string,mixed> $project_account_json_file
      */
-    #[Api('project_account_json_file', map: 'mixed')]
-    public array $projectAccountJsonFile;
+    #[Api(map: 'mixed')]
+    public array $project_account_json_file;
 
-    #[Api('record_type')]
-    public string $recordType;
+    #[Api]
+    public string $record_type;
 
     /**
      * Type of mobile push credential. Either <code>ios</code> or <code>android</code>.
@@ -76,8 +76,8 @@ final class PushCredential implements BaseModel
     /**
      * ISO 8601 timestamp when the room was updated.
      */
-    #[Api('updated_at')]
-    public \DateTimeInterface $updatedAt;
+    #[Api]
+    public \DateTimeInterface $updated_at;
 
     /**
      * `new PushCredential()` is missing required properties by the API.
@@ -88,12 +88,12 @@ final class PushCredential implements BaseModel
      *   id: ...,
      *   alias: ...,
      *   certificate: ...,
-     *   createdAt: ...,
-     *   privateKey: ...,
-     *   projectAccountJsonFile: ...,
-     *   recordType: ...,
+     *   created_at: ...,
+     *   private_key: ...,
+     *   project_account_json_file: ...,
+     *   record_type: ...,
      *   type: ...,
-     *   updatedAt: ...,
+     *   updated_at: ...,
      * )
      * ```
      *
@@ -122,30 +122,30 @@ final class PushCredential implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param array<string, mixed> $projectAccountJsonFile
+     * @param array<string,mixed> $project_account_json_file
      */
     public static function with(
         string $id,
         string $alias,
         string $certificate,
-        \DateTimeInterface $createdAt,
-        string $privateKey,
-        array $projectAccountJsonFile,
-        string $recordType,
+        \DateTimeInterface $created_at,
+        string $private_key,
+        array $project_account_json_file,
+        string $record_type,
         string $type,
-        \DateTimeInterface $updatedAt,
+        \DateTimeInterface $updated_at,
     ): self {
         $obj = new self;
 
         $obj->id = $id;
         $obj->alias = $alias;
         $obj->certificate = $certificate;
-        $obj->createdAt = $createdAt;
-        $obj->privateKey = $privateKey;
-        $obj->projectAccountJsonFile = $projectAccountJsonFile;
-        $obj->recordType = $recordType;
+        $obj->created_at = $created_at;
+        $obj->private_key = $private_key;
+        $obj->project_account_json_file = $project_account_json_file;
+        $obj->record_type = $record_type;
         $obj->type = $type;
-        $obj->updatedAt = $updatedAt;
+        $obj->updated_at = $updated_at;
 
         return $obj;
     }
@@ -189,7 +189,7 @@ final class PushCredential implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }
@@ -200,7 +200,7 @@ final class PushCredential implements BaseModel
     public function withPrivateKey(string $privateKey): self
     {
         $obj = clone $this;
-        $obj->privateKey = $privateKey;
+        $obj->private_key = $privateKey;
 
         return $obj;
     }
@@ -208,13 +208,13 @@ final class PushCredential implements BaseModel
     /**
      * Google server key for sending push notifications. For Android only.
      *
-     * @param array<string, mixed> $projectAccountJsonFile
+     * @param array<string,mixed> $projectAccountJsonFile
      */
     public function withProjectAccountJsonFile(
         array $projectAccountJsonFile
     ): self {
         $obj = clone $this;
-        $obj->projectAccountJsonFile = $projectAccountJsonFile;
+        $obj->project_account_json_file = $projectAccountJsonFile;
 
         return $obj;
     }
@@ -222,7 +222,7 @@ final class PushCredential implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType;
+        $obj->record_type = $recordType;
 
         return $obj;
     }
@@ -244,7 +244,7 @@ final class PushCredential implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $obj->updated_at = $updatedAt;
 
         return $obj;
     }

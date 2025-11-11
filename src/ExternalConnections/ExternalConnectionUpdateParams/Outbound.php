@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type OutboundShape = array{
- *   outboundVoiceProfileID: string, channelLimit?: int
+ *   outbound_voice_profile_id: string, channel_limit?: int|null
  * }
  */
 final class Outbound implements BaseModel
@@ -21,21 +21,21 @@ final class Outbound implements BaseModel
     /**
      * Identifies the associated outbound voice profile.
      */
-    #[Api('outbound_voice_profile_id')]
-    public string $outboundVoiceProfileID;
+    #[Api]
+    public string $outbound_voice_profile_id;
 
     /**
      * When set, this will limit the number of concurrent outbound calls to phone numbers associated with this connection.
      */
-    #[Api('channel_limit', optional: true)]
-    public ?int $channelLimit;
+    #[Api(optional: true)]
+    public ?int $channel_limit;
 
     /**
      * `new Outbound()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Outbound::with(outboundVoiceProfileID: ...)
+     * Outbound::with(outbound_voice_profile_id: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -55,14 +55,14 @@ final class Outbound implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        string $outboundVoiceProfileID,
-        ?int $channelLimit = null
+        string $outbound_voice_profile_id,
+        ?int $channel_limit = null
     ): self {
         $obj = new self;
 
-        $obj->outboundVoiceProfileID = $outboundVoiceProfileID;
+        $obj->outbound_voice_profile_id = $outbound_voice_profile_id;
 
-        null !== $channelLimit && $obj->channelLimit = $channelLimit;
+        null !== $channel_limit && $obj->channel_limit = $channel_limit;
 
         return $obj;
     }
@@ -74,7 +74,7 @@ final class Outbound implements BaseModel
         string $outboundVoiceProfileID
     ): self {
         $obj = clone $this;
-        $obj->outboundVoiceProfileID = $outboundVoiceProfileID;
+        $obj->outbound_voice_profile_id = $outboundVoiceProfileID;
 
         return $obj;
     }
@@ -85,7 +85,7 @@ final class Outbound implements BaseModel
     public function withChannelLimit(int $channelLimit): self
     {
         $obj = clone $this;
-        $obj->channelLimit = $channelLimit;
+        $obj->channel_limit = $channelLimit;
 
         return $obj;
     }

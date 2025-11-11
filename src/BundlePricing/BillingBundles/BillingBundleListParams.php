@@ -17,7 +17,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\BundlePricing\BillingBundles->list
  *
  * @phpstan-type BillingBundleListParamsShape = array{
- *   filter?: Filter, page?: Page, authorizationBearer?: string
+ *   filter?: Filter, page?: Page, authorization_bearer?: string
  * }
  */
 final class BillingBundleListParams implements BaseModel
@@ -42,7 +42,7 @@ final class BillingBundleListParams implements BaseModel
      * Authenticates the request with your Telnyx API V2 KEY.
      */
     #[Api(optional: true)]
-    public ?string $authorizationBearer;
+    public ?string $authorization_bearer;
 
     public function __construct()
     {
@@ -57,13 +57,13 @@ final class BillingBundleListParams implements BaseModel
     public static function with(
         ?Filter $filter = null,
         ?Page $page = null,
-        ?string $authorizationBearer = null
+        ?string $authorization_bearer = null,
     ): self {
         $obj = new self;
 
         null !== $filter && $obj->filter = $filter;
         null !== $page && $obj->page = $page;
-        null !== $authorizationBearer && $obj->authorizationBearer = $authorizationBearer;
+        null !== $authorization_bearer && $obj->authorization_bearer = $authorization_bearer;
 
         return $obj;
     }
@@ -96,7 +96,7 @@ final class BillingBundleListParams implements BaseModel
     public function withAuthorizationBearer(string $authorizationBearer): self
     {
         $obj = clone $this;
-        $obj->authorizationBearer = $authorizationBearer;
+        $obj->authorization_bearer = $authorizationBearer;
 
         return $obj;
     }

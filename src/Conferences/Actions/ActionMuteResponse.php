@@ -11,7 +11,9 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type ActionMuteResponseShape = array{data?: ConferenceCommandResult}
+ * @phpstan-type ActionMuteResponseShape = array{
+ *   data?: ConferenceCommandResult|null
+ * }
  */
 final class ActionMuteResponse implements BaseModel, ResponseConverter
 {

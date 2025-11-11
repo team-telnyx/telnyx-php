@@ -11,10 +11,10 @@ use Telnyx\PortingOrders\PortingOrderRequirement\FieldType;
 
 /**
  * @phpstan-type PortingOrderRequirementShape = array{
- *   fieldType?: value-of<FieldType>,
- *   fieldValue?: string,
- *   recordType?: string,
- *   requirementTypeID?: string,
+ *   field_type?: value-of<FieldType>|null,
+ *   field_value?: string|null,
+ *   record_type?: string|null,
+ *   requirement_type_id?: string|null,
  * }
  */
 final class PortingOrderRequirement implements BaseModel
@@ -25,28 +25,28 @@ final class PortingOrderRequirement implements BaseModel
     /**
      * Type of value expected on field_value field.
      *
-     * @var value-of<FieldType>|null $fieldType
+     * @var value-of<FieldType>|null $field_type
      */
-    #[Api('field_type', enum: FieldType::class, optional: true)]
-    public ?string $fieldType;
+    #[Api(enum: FieldType::class, optional: true)]
+    public ?string $field_type;
 
     /**
      * identifies the document that satisfies this requirement.
      */
-    #[Api('field_value', optional: true)]
-    public ?string $fieldValue;
+    #[Api(optional: true)]
+    public ?string $field_value;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api('record_type', optional: true)]
-    public ?string $recordType;
+    #[Api(optional: true)]
+    public ?string $record_type;
 
     /**
      * Identifies the requirement type that meets this requirement.
      */
-    #[Api('requirement_type_id', optional: true)]
-    public ?string $requirementTypeID;
+    #[Api(optional: true)]
+    public ?string $requirement_type_id;
 
     public function __construct()
     {
@@ -58,20 +58,20 @@ final class PortingOrderRequirement implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param FieldType|value-of<FieldType> $fieldType
+     * @param FieldType|value-of<FieldType> $field_type
      */
     public static function with(
-        FieldType|string|null $fieldType = null,
-        ?string $fieldValue = null,
-        ?string $recordType = null,
-        ?string $requirementTypeID = null,
+        FieldType|string|null $field_type = null,
+        ?string $field_value = null,
+        ?string $record_type = null,
+        ?string $requirement_type_id = null,
     ): self {
         $obj = new self;
 
-        null !== $fieldType && $obj['fieldType'] = $fieldType;
-        null !== $fieldValue && $obj->fieldValue = $fieldValue;
-        null !== $recordType && $obj->recordType = $recordType;
-        null !== $requirementTypeID && $obj->requirementTypeID = $requirementTypeID;
+        null !== $field_type && $obj['field_type'] = $field_type;
+        null !== $field_value && $obj->field_value = $field_value;
+        null !== $record_type && $obj->record_type = $record_type;
+        null !== $requirement_type_id && $obj->requirement_type_id = $requirement_type_id;
 
         return $obj;
     }
@@ -84,7 +84,7 @@ final class PortingOrderRequirement implements BaseModel
     public function withFieldType(FieldType|string $fieldType): self
     {
         $obj = clone $this;
-        $obj['fieldType'] = $fieldType;
+        $obj['field_type'] = $fieldType;
 
         return $obj;
     }
@@ -95,7 +95,7 @@ final class PortingOrderRequirement implements BaseModel
     public function withFieldValue(string $fieldValue): self
     {
         $obj = clone $this;
-        $obj->fieldValue = $fieldValue;
+        $obj->field_value = $fieldValue;
 
         return $obj;
     }
@@ -106,7 +106,7 @@ final class PortingOrderRequirement implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType;
+        $obj->record_type = $recordType;
 
         return $obj;
     }
@@ -117,7 +117,7 @@ final class PortingOrderRequirement implements BaseModel
     public function withRequirementTypeID(string $requirementTypeID): self
     {
         $obj = clone $this;
-        $obj->requirementTypeID = $requirementTypeID;
+        $obj->requirement_type_id = $requirementTypeID;
 
         return $obj;
     }

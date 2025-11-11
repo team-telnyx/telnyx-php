@@ -11,7 +11,9 @@ use Telnyx\PhoneNumbers\Actions\ActionVerifyOwnershipResponse\Data\Found;
 
 /**
  * @phpstan-type DataShape = array{
- *   found?: list<Found>, notFound?: list<string>, recordType?: string
+ *   found?: list<Found>|null,
+ *   not_found?: list<string>|null,
+ *   record_type?: string|null,
  * }
  */
 final class Data implements BaseModel
@@ -30,16 +32,16 @@ final class Data implements BaseModel
     /**
      * Phone numbers that are not found in the account.
      *
-     * @var list<string>|null $notFound
+     * @var list<string>|null $not_found
      */
-    #[Api('not_found', list: 'string', optional: true)]
-    public ?array $notFound;
+    #[Api(list: 'string', optional: true)]
+    public ?array $not_found;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api('record_type', optional: true)]
-    public ?string $recordType;
+    #[Api(optional: true)]
+    public ?string $record_type;
 
     public function __construct()
     {
@@ -52,18 +54,18 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<Found> $found
-     * @param list<string> $notFound
+     * @param list<string> $not_found
      */
     public static function with(
         ?array $found = null,
-        ?array $notFound = null,
-        ?string $recordType = null
+        ?array $not_found = null,
+        ?string $record_type = null
     ): self {
         $obj = new self;
 
         null !== $found && $obj->found = $found;
-        null !== $notFound && $obj->notFound = $notFound;
-        null !== $recordType && $obj->recordType = $recordType;
+        null !== $not_found && $obj->not_found = $not_found;
+        null !== $record_type && $obj->record_type = $record_type;
 
         return $obj;
     }
@@ -89,7 +91,7 @@ final class Data implements BaseModel
     public function withNotFound(array $notFound): self
     {
         $obj = clone $this;
-        $obj->notFound = $notFound;
+        $obj->not_found = $notFound;
 
         return $obj;
     }
@@ -100,7 +102,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType;
+        $obj->record_type = $recordType;
 
         return $obj;
     }

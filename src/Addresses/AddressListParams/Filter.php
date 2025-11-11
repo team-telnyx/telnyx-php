@@ -15,10 +15,10 @@ use Telnyx\Core\Contracts\BaseModel;
  * Consolidated filter parameter (deepObject style). Originally: filter[customer_reference][eq], filter[customer_reference][contains], filter[used_as_emergency], filter[street_address][contains], filter[address_book][eq].
  *
  * @phpstan-type FilterShape = array{
- *   addressBook?: AddressBook,
- *   customerReference?: string|UnionMember1,
- *   streetAddress?: StreetAddress,
- *   usedAsEmergency?: string,
+ *   address_book?: AddressBook|null,
+ *   customer_reference?: string|null|UnionMember1,
+ *   street_address?: StreetAddress|null,
+ *   used_as_emergency?: string|null,
  * }
  */
 final class Filter implements BaseModel
@@ -26,23 +26,23 @@ final class Filter implements BaseModel
     /** @use SdkModel<FilterShape> */
     use SdkModel;
 
-    #[Api('address_book', optional: true)]
-    public ?AddressBook $addressBook;
+    #[Api(optional: true)]
+    public ?AddressBook $address_book;
 
     /**
      * If present, addresses with <code>customer_reference</code> containing the given value will be returned. Matching is not case-sensitive.
      */
-    #[Api('customer_reference', optional: true)]
-    public string|UnionMember1|null $customerReference;
+    #[Api(optional: true)]
+    public string|UnionMember1|null $customer_reference;
 
-    #[Api('street_address', optional: true)]
-    public ?StreetAddress $streetAddress;
+    #[Api(optional: true)]
+    public ?StreetAddress $street_address;
 
     /**
      * If set as 'true', only addresses used as the emergency address for at least one active phone-number will be returned. When set to 'false', the opposite happens: only addresses not used as the emergency address from phone-numbers will be returned.
      */
-    #[Api('used_as_emergency', optional: true)]
-    public ?string $usedAsEmergency;
+    #[Api(optional: true)]
+    public ?string $used_as_emergency;
 
     public function __construct()
     {
@@ -55,17 +55,17 @@ final class Filter implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?AddressBook $addressBook = null,
-        string|UnionMember1|null $customerReference = null,
-        ?StreetAddress $streetAddress = null,
-        ?string $usedAsEmergency = null,
+        ?AddressBook $address_book = null,
+        string|UnionMember1|null $customer_reference = null,
+        ?StreetAddress $street_address = null,
+        ?string $used_as_emergency = null,
     ): self {
         $obj = new self;
 
-        null !== $addressBook && $obj->addressBook = $addressBook;
-        null !== $customerReference && $obj->customerReference = $customerReference;
-        null !== $streetAddress && $obj->streetAddress = $streetAddress;
-        null !== $usedAsEmergency && $obj->usedAsEmergency = $usedAsEmergency;
+        null !== $address_book && $obj->address_book = $address_book;
+        null !== $customer_reference && $obj->customer_reference = $customer_reference;
+        null !== $street_address && $obj->street_address = $street_address;
+        null !== $used_as_emergency && $obj->used_as_emergency = $used_as_emergency;
 
         return $obj;
     }
@@ -73,7 +73,7 @@ final class Filter implements BaseModel
     public function withAddressBook(AddressBook $addressBook): self
     {
         $obj = clone $this;
-        $obj->addressBook = $addressBook;
+        $obj->address_book = $addressBook;
 
         return $obj;
     }
@@ -85,7 +85,7 @@ final class Filter implements BaseModel
         string|UnionMember1 $customerReference
     ): self {
         $obj = clone $this;
-        $obj->customerReference = $customerReference;
+        $obj->customer_reference = $customerReference;
 
         return $obj;
     }
@@ -93,7 +93,7 @@ final class Filter implements BaseModel
     public function withStreetAddress(StreetAddress $streetAddress): self
     {
         $obj = clone $this;
-        $obj->streetAddress = $streetAddress;
+        $obj->street_address = $streetAddress;
 
         return $obj;
     }
@@ -104,7 +104,7 @@ final class Filter implements BaseModel
     public function withUsedAsEmergency(string $usedAsEmergency): self
     {
         $obj = clone $this;
-        $obj->usedAsEmergency = $usedAsEmergency;
+        $obj->used_as_emergency = $usedAsEmergency;
 
         return $obj;
     }

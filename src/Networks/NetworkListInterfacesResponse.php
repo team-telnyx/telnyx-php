@@ -14,7 +14,7 @@ use Telnyx\Networks\NetworkListInterfacesResponse\Data;
 
 /**
  * @phpstan-type NetworkListInterfacesResponseShape = array{
- *   data?: list<Data>, meta?: PaginationMeta
+ *   data?: list<Data>|null, meta?: PaginationMeta|null
  * }
  */
 final class NetworkListInterfacesResponse implements BaseModel, ResponseConverter

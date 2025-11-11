@@ -14,7 +14,7 @@ use Telnyx\Rooms\RoomSession;
 
 /**
  * @phpstan-type SessionList1ResponseShape = array{
- *   data?: list<RoomSession>, meta?: PaginationMeta
+ *   data?: list<RoomSession>|null, meta?: PaginationMeta|null
  * }
  */
 final class SessionList1Response implements BaseModel, ResponseConverter

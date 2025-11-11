@@ -12,7 +12,8 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type CampaignGetSharingStatusResponseShape = array{
- *   sharedByMe?: CampaignSharingStatus, sharedWithMe?: CampaignSharingStatus
+ *   sharedByMe?: CampaignSharingStatus|null,
+ *   sharedWithMe?: CampaignSharingStatus|null,
  * }
  */
 final class CampaignGetSharingStatusResponse implements BaseModel, ResponseConverter

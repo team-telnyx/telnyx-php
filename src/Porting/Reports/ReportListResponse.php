@@ -13,7 +13,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type ReportListResponseShape = array{
- *   data?: list<PortingReport>, meta?: PaginationMeta
+ *   data?: list<PortingReport>|null, meta?: PaginationMeta|null
  * }
  */
 final class ReportListResponse implements BaseModel, ResponseConverter

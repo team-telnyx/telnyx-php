@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\PhoneNumberBlocks\Jobs->deletePhoneNumberBlock
  *
  * @phpstan-type JobDeletePhoneNumberBlockParamsShape = array{
- *   phoneNumberBlockID: string
+ *   phone_number_block_id: string
  * }
  */
 final class JobDeletePhoneNumberBlockParams implements BaseModel
@@ -24,15 +24,15 @@ final class JobDeletePhoneNumberBlockParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    #[Api('phone_number_block_id')]
-    public string $phoneNumberBlockID;
+    #[Api]
+    public string $phone_number_block_id;
 
     /**
      * `new JobDeletePhoneNumberBlockParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * JobDeletePhoneNumberBlockParams::with(phoneNumberBlockID: ...)
+     * JobDeletePhoneNumberBlockParams::with(phone_number_block_id: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -51,11 +51,11 @@ final class JobDeletePhoneNumberBlockParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(string $phoneNumberBlockID): self
+    public static function with(string $phone_number_block_id): self
     {
         $obj = new self;
 
-        $obj->phoneNumberBlockID = $phoneNumberBlockID;
+        $obj->phone_number_block_id = $phone_number_block_id;
 
         return $obj;
     }
@@ -63,7 +63,7 @@ final class JobDeletePhoneNumberBlockParams implements BaseModel
     public function withPhoneNumberBlockID(string $phoneNumberBlockID): self
     {
         $obj = clone $this;
-        $obj->phoneNumberBlockID = $phoneNumberBlockID;
+        $obj->phone_number_block_id = $phoneNumberBlockID;
 
         return $obj;
     }

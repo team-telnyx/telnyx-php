@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Portouts\SupportingDocuments\SupportingDocumentCreateParams\Document\Type;
 
 /**
- * @phpstan-type DocumentShape = array{documentID: string, type: value-of<Type>}
+ * @phpstan-type DocumentShape = array{document_id: string, type: value-of<Type>}
  */
 final class Document implements BaseModel
 {
@@ -20,8 +20,8 @@ final class Document implements BaseModel
     /**
      * Identifies the associated document.
      */
-    #[Api('document_id')]
-    public string $documentID;
+    #[Api]
+    public string $document_id;
 
     /**
      * Identifies the type of the document.
@@ -36,7 +36,7 @@ final class Document implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * Document::with(documentID: ..., type: ...)
+     * Document::with(document_id: ..., type: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -57,11 +57,11 @@ final class Document implements BaseModel
      *
      * @param Type|value-of<Type> $type
      */
-    public static function with(string $documentID, Type|string $type): self
+    public static function with(string $document_id, Type|string $type): self
     {
         $obj = new self;
 
-        $obj->documentID = $documentID;
+        $obj->document_id = $document_id;
         $obj['type'] = $type;
 
         return $obj;
@@ -73,7 +73,7 @@ final class Document implements BaseModel
     public function withDocumentID(string $documentID): self
     {
         $obj = clone $this;
-        $obj->documentID = $documentID;
+        $obj->document_id = $documentID;
 
         return $obj;
     }

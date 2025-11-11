@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type RequestedScopeShape = array{
- *   id?: string, description?: string, name?: string
+ *   id?: string|null, description?: string|null, name?: string|null
  * }
  */
 final class RequestedScope implements BaseModel

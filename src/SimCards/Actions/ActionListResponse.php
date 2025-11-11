@@ -13,7 +13,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type ActionListResponseShape = array{
- *   data?: list<SimCardAction>, meta?: PaginationMeta
+ *   data?: list<SimCardAction>|null, meta?: PaginationMeta|null
  * }
  */
 final class ActionListResponse implements BaseModel, ResponseConverter

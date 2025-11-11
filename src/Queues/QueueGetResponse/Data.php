@@ -12,13 +12,13 @@ use Telnyx\Queues\QueueGetResponse\Data\RecordType;
 /**
  * @phpstan-type DataShape = array{
  *   id: string,
- *   averageWaitTimeSecs: int,
- *   createdAt: string,
- *   currentSize: int,
- *   maxSize: int,
+ *   average_wait_time_secs: int,
+ *   created_at: string,
+ *   current_size: int,
+ *   max_size: int,
  *   name: string,
- *   recordType: value-of<RecordType>,
- *   updatedAt: string,
+ *   record_type: value-of<RecordType>,
+ *   updated_at: string,
  * }
  */
 final class Data implements BaseModel
@@ -35,26 +35,26 @@ final class Data implements BaseModel
     /**
      * The average time that the calls currently in the queue have spent waiting, given in seconds.
      */
-    #[Api('average_wait_time_secs')]
-    public int $averageWaitTimeSecs;
+    #[Api]
+    public int $average_wait_time_secs;
 
     /**
      * ISO 8601 formatted date of when the queue was created.
      */
-    #[Api('created_at')]
-    public string $createdAt;
+    #[Api]
+    public string $created_at;
 
     /**
      * The number of calls currently in the queue.
      */
-    #[Api('current_size')]
-    public int $currentSize;
+    #[Api]
+    public int $current_size;
 
     /**
      * The maximum number of calls allowed in the queue.
      */
-    #[Api('max_size')]
-    public int $maxSize;
+    #[Api]
+    public int $max_size;
 
     /**
      * Name of the queue.
@@ -62,15 +62,15 @@ final class Data implements BaseModel
     #[Api]
     public string $name;
 
-    /** @var value-of<RecordType> $recordType */
-    #[Api('record_type', enum: RecordType::class)]
-    public string $recordType;
+    /** @var value-of<RecordType> $record_type */
+    #[Api(enum: RecordType::class)]
+    public string $record_type;
 
     /**
      * ISO 8601 formatted date of when the queue was last updated.
      */
-    #[Api('updated_at')]
-    public string $updatedAt;
+    #[Api]
+    public string $updated_at;
 
     /**
      * `new Data()` is missing required properties by the API.
@@ -79,13 +79,13 @@ final class Data implements BaseModel
      * ```
      * Data::with(
      *   id: ...,
-     *   averageWaitTimeSecs: ...,
-     *   createdAt: ...,
-     *   currentSize: ...,
-     *   maxSize: ...,
+     *   average_wait_time_secs: ...,
+     *   created_at: ...,
+     *   current_size: ...,
+     *   max_size: ...,
      *   name: ...,
-     *   recordType: ...,
-     *   updatedAt: ...,
+     *   record_type: ...,
+     *   updated_at: ...,
      * )
      * ```
      *
@@ -113,28 +113,28 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param RecordType|value-of<RecordType> $recordType
+     * @param RecordType|value-of<RecordType> $record_type
      */
     public static function with(
         string $id,
-        int $averageWaitTimeSecs,
-        string $createdAt,
-        int $currentSize,
-        int $maxSize,
+        int $average_wait_time_secs,
+        string $created_at,
+        int $current_size,
+        int $max_size,
         string $name,
-        RecordType|string $recordType,
-        string $updatedAt,
+        RecordType|string $record_type,
+        string $updated_at,
     ): self {
         $obj = new self;
 
         $obj->id = $id;
-        $obj->averageWaitTimeSecs = $averageWaitTimeSecs;
-        $obj->createdAt = $createdAt;
-        $obj->currentSize = $currentSize;
-        $obj->maxSize = $maxSize;
+        $obj->average_wait_time_secs = $average_wait_time_secs;
+        $obj->created_at = $created_at;
+        $obj->current_size = $current_size;
+        $obj->max_size = $max_size;
         $obj->name = $name;
-        $obj['recordType'] = $recordType;
-        $obj->updatedAt = $updatedAt;
+        $obj['record_type'] = $record_type;
+        $obj->updated_at = $updated_at;
 
         return $obj;
     }
@@ -156,7 +156,7 @@ final class Data implements BaseModel
     public function withAverageWaitTimeSecs(int $averageWaitTimeSecs): self
     {
         $obj = clone $this;
-        $obj->averageWaitTimeSecs = $averageWaitTimeSecs;
+        $obj->average_wait_time_secs = $averageWaitTimeSecs;
 
         return $obj;
     }
@@ -167,7 +167,7 @@ final class Data implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }
@@ -178,7 +178,7 @@ final class Data implements BaseModel
     public function withCurrentSize(int $currentSize): self
     {
         $obj = clone $this;
-        $obj->currentSize = $currentSize;
+        $obj->current_size = $currentSize;
 
         return $obj;
     }
@@ -189,7 +189,7 @@ final class Data implements BaseModel
     public function withMaxSize(int $maxSize): self
     {
         $obj = clone $this;
-        $obj->maxSize = $maxSize;
+        $obj->max_size = $maxSize;
 
         return $obj;
     }
@@ -211,7 +211,7 @@ final class Data implements BaseModel
     public function withRecordType(RecordType|string $recordType): self
     {
         $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
@@ -222,7 +222,7 @@ final class Data implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $obj->updated_at = $updatedAt;
 
         return $obj;
     }

@@ -6,70 +6,33 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
-use Telnyx\TextToSpeech\TextToSpeechListVoicesParams\Provider;
+use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams;
+use Telnyx\TextToSpeech\TextToSpeechListVoicesParams;
 use Telnyx\TextToSpeech\TextToSpeechListVoicesResponse;
-
-use const Telnyx\Core\OMIT as omit;
 
 interface TextToSpeechContract
 {
     /**
      * @api
      *
-     * @param string $text The text to convert to speech
-     * @param string $voice The voice ID in the format Provider.ModelId.VoiceId.
-     *
-     * Examples:
-     * - AWS.Polly.Joanna-Neural
-     * - Azure.en-US-AvaMultilingualNeural
-     * - ElevenLabs.eleven_multilingual_v2.Rachel
-     * - Telnyx.KokoroTTS.af
-     *
-     * Use the `GET /text-to-speech/voices` endpoint to get a complete list of available voices.
+     * @param array<mixed>|TextToSpeechGenerateSpeechParams $params
      *
      * @throws APIException
      */
     public function generateSpeech(
-        $text,
-        $voice,
-        ?RequestOptions $requestOptions = null
+        array|TextToSpeechGenerateSpeechParams $params,
+        ?RequestOptions $requestOptions = null,
     ): string;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function generateSpeechRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): string;
-
-    /**
-     * @api
-     *
-     * @param string $elevenlabsAPIKeyRef Reference to your ElevenLabs API key stored in the Telnyx Portal
-     * @param Provider|value-of<Provider> $provider Filter voices by provider
+     * @param array<mixed>|TextToSpeechListVoicesParams $params
      *
      * @throws APIException
      */
     public function listVoices(
-        $elevenlabsAPIKeyRef = omit,
-        $provider = omit,
+        array|TextToSpeechListVoicesParams $params,
         ?RequestOptions $requestOptions = null,
-    ): TextToSpeechListVoicesResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listVoicesRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): TextToSpeechListVoicesResponse;
 }

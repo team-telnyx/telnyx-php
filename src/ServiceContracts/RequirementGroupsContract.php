@@ -7,45 +7,22 @@ namespace Telnyx\ServiceContracts;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\RequirementGroups\RequirementGroup;
-use Telnyx\RequirementGroups\RequirementGroupCreateParams\Action;
-use Telnyx\RequirementGroups\RequirementGroupCreateParams\PhoneNumberType;
-use Telnyx\RequirementGroups\RequirementGroupCreateParams\RegulatoryRequirement;
-use Telnyx\RequirementGroups\RequirementGroupListParams\Filter;
-
-use const Telnyx\Core\OMIT as omit;
+use Telnyx\RequirementGroups\RequirementGroupCreateParams;
+use Telnyx\RequirementGroups\RequirementGroupListParams;
+use Telnyx\RequirementGroups\RequirementGroupUpdateParams;
 
 interface RequirementGroupsContract
 {
     /**
      * @api
      *
-     * @param Action|value-of<Action> $action
-     * @param string $countryCode ISO alpha 2 country code
-     * @param PhoneNumberType|value-of<PhoneNumberType> $phoneNumberType
-     * @param string $customerReference
-     * @param list<RegulatoryRequirement> $regulatoryRequirements
+     * @param array<mixed>|RequirementGroupCreateParams $params
      *
      * @throws APIException
      */
     public function create(
-        $action,
-        $countryCode,
-        $phoneNumberType,
-        $customerReference = omit,
-        $regulatoryRequirements = omit,
+        array|RequirementGroupCreateParams $params,
         ?RequestOptions $requestOptions = null,
-    ): RequirementGroup;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): RequirementGroup;
 
     /**
@@ -61,57 +38,28 @@ interface RequirementGroupsContract
     /**
      * @api
      *
-     * @param string $customerReference Reference for the customer
-     * @param list<\Telnyx\RequirementGroups\RequirementGroupUpdateParams\RegulatoryRequirement> $regulatoryRequirements
+     * @param array<mixed>|RequirementGroupUpdateParams $params
      *
      * @throws APIException
      */
     public function update(
         string $id,
-        $customerReference = omit,
-        $regulatoryRequirements = omit,
+        array|RequirementGroupUpdateParams $params,
         ?RequestOptions $requestOptions = null,
     ): RequirementGroup;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): RequirementGroup;
-
-    /**
-     * @api
-     *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[country_code], filter[phone_number_type], filter[action], filter[status], filter[customer_reference]
+     * @param array<mixed>|RequirementGroupListParams $params
      *
      * @return list<RequirementGroup>
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        ?RequestOptions $requestOptions = null
-    ): array;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @return list<RequirementGroup>
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|RequirementGroupListParams $params,
+        ?RequestOptions $requestOptions = null,
     ): array;
 
     /**

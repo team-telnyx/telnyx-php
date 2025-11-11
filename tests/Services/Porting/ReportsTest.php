@@ -6,8 +6,6 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\Porting\Reports\ExportPortingOrdersCsvReport;
-use Telnyx\Porting\Reports\ExportPortingOrdersCsvReport\Filters;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -35,10 +33,10 @@ final class ReportsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->porting->reports->create(
-            params: ExportPortingOrdersCsvReport::with(filters: (new Filters)),
-            reportType: 'export_porting_orders_csv',
-        );
+        $result = $this->client->porting->reports->create([
+            'params' => ['filters' => []],
+            'report_type' => 'export_porting_orders_csv',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -50,16 +48,17 @@ final class ReportsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->porting->reports->create(
-            params: ExportPortingOrdersCsvReport::with(
-                filters: (new Filters)
-                    ->withCreatedAtGt(new \DateTimeImmutable('2019-12-27T18:11:19.117Z'))
-                    ->withCreatedAtLt(new \DateTimeImmutable('2019-12-27T18:11:19.117Z'))
-                    ->withCustomerReferenceIn(['my-customer-reference'])
-                    ->withStatusIn(['draft']),
-            ),
-            reportType: 'export_porting_orders_csv',
-        );
+        $result = $this->client->porting->reports->create([
+            'params' => [
+                'filters' => [
+                    'created_at__gt' => '2019-12-27T18:11:19.117Z',
+                    'created_at__lt' => '2019-12-27T18:11:19.117Z',
+                    'customer_reference__in' => ['my-customer-reference'],
+                    'status__in' => ['draft'],
+                ],
+            ],
+            'report_type' => 'export_porting_orders_csv',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -85,7 +84,7 @@ final class ReportsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->porting->reports->list();
+        $result = $this->client->porting->reports->list([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

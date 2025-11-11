@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type PortingOrderUserFeedbackShape = array{
- *   userComment?: string, userRating?: int
+ *   user_comment?: string|null, user_rating?: int|null
  * }
  */
 final class PortingOrderUserFeedback implements BaseModel
@@ -21,14 +21,14 @@ final class PortingOrderUserFeedback implements BaseModel
     /**
      * A comment related to the customer rating.
      */
-    #[Api('user_comment', optional: true)]
-    public ?string $userComment;
+    #[Api(optional: true)]
+    public ?string $user_comment;
 
     /**
      * Once an order is ported, cancellation is requested or the request is cancelled, the user may rate their experience.
      */
-    #[Api('user_rating', optional: true)]
-    public ?int $userRating;
+    #[Api(optional: true)]
+    public ?int $user_rating;
 
     public function __construct()
     {
@@ -41,13 +41,13 @@ final class PortingOrderUserFeedback implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $userComment = null,
-        ?int $userRating = null
+        ?string $user_comment = null,
+        ?int $user_rating = null
     ): self {
         $obj = new self;
 
-        null !== $userComment && $obj->userComment = $userComment;
-        null !== $userRating && $obj->userRating = $userRating;
+        null !== $user_comment && $obj->user_comment = $user_comment;
+        null !== $user_rating && $obj->user_rating = $user_rating;
 
         return $obj;
     }
@@ -58,7 +58,7 @@ final class PortingOrderUserFeedback implements BaseModel
     public function withUserComment(string $userComment): self
     {
         $obj = clone $this;
-        $obj->userComment = $userComment;
+        $obj->user_comment = $userComment;
 
         return $obj;
     }
@@ -69,7 +69,7 @@ final class PortingOrderUserFeedback implements BaseModel
     public function withUserRating(int $userRating): self
     {
         $obj = clone $this;
-        $obj->userRating = $userRating;
+        $obj->user_rating = $userRating;
 
         return $obj;
     }

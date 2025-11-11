@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type NumberOrderGetResponseShape = array{
- *   data?: NumberOrderWithPhoneNumbers
+ *   data?: NumberOrderWithPhoneNumbers|null
  * }
  */
 final class NumberOrderGetResponse implements BaseModel, ResponseConverter

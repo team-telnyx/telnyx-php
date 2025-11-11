@@ -6,23 +6,6 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\Messsages\RcsAgentMessage;
-use Telnyx\Messsages\RcsAgentMessage\ContentMessage;
-use Telnyx\Messsages\RcsAgentMessage\ContentMessage\RichCard;
-use Telnyx\Messsages\RcsAgentMessage\ContentMessage\RichCard\CarouselCard;
-use Telnyx\Messsages\RcsAgentMessage\ContentMessage\RichCard\StandaloneCard;
-use Telnyx\Messsages\RcsAgentMessage\Event;
-use Telnyx\Messsages\RcsCardContent;
-use Telnyx\Messsages\RcsCardContent\Media;
-use Telnyx\Messsages\RcsContentInfo;
-use Telnyx\Messsages\RcsSuggestion;
-use Telnyx\Messsages\RcsSuggestion\Action;
-use Telnyx\Messsages\RcsSuggestion\Action\CreateCalendarEventAction;
-use Telnyx\Messsages\RcsSuggestion\Action\DialAction;
-use Telnyx\Messsages\RcsSuggestion\Action\OpenURLAction;
-use Telnyx\Messsages\RcsSuggestion\Action\ViewLocationAction;
-use Telnyx\Messsages\RcsSuggestion\Action\ViewLocationAction\LatLong;
-use Telnyx\Messsages\RcsSuggestion\Reply;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -50,12 +33,12 @@ final class MesssagesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->messsages->rcs(
-            agentID: 'Agent007',
-            agentMessage: (new RcsAgentMessage),
-            messagingProfileID: 'messaging_profile_id',
-            to: '+13125551234',
-        );
+        $result = $this->client->messsages->rcs([
+            'agent_id' => 'Agent007',
+            'agent_message' => [],
+            'messaging_profile_id' => 'messaging_profile_id',
+            'to' => '+13125551234',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -67,201 +50,154 @@ final class MesssagesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->messsages->rcs(
-            agentID: 'Agent007',
-            agentMessage: (new RcsAgentMessage)
-                ->withContentMessage(
-                    (new ContentMessage)
-                        ->withContentInfo(
-                            RcsContentInfo::with(fileURL: 'https://example.com/elephant.jpg')
-                                ->withForceRefresh(true)
-                                ->withThumbnailURL('thumbnail_url'),
-                        )
-                        ->withRichCard(
-                            (new RichCard)
-                                ->withCarouselCard(
-                                    CarouselCard::with(
-                                        cardContents: [
-                                            (new RcsCardContent)
-                                                ->withDescription('description')
-                                                ->withMedia(
-                                                    (new Media)
-                                                        ->withContentInfo(
-                                                            RcsContentInfo::with(
-                                                                fileURL: 'https://example.com/elephant.jpg'
-                                                            )
-                                                                ->withForceRefresh(true)
-                                                                ->withThumbnailURL('thumbnail_url'),
-                                                        )
-                                                        ->withHeight('MEDIUM'),
-                                                )
-                                                ->withSuggestions(
-                                                    [
-                                                        (new RcsSuggestion)
-                                                            ->withAction(
-                                                                (new Action)
-                                                                    ->withCreateCalendarEventAction(
-                                                                        (new CreateCalendarEventAction)
-                                                                            ->withDescription('description')
-                                                                            ->withEndTime(
-                                                                                new \DateTimeImmutable('2024-10-02T15:02:31Z')
-                                                                            )
-                                                                            ->withStartTime(
-                                                                                new \DateTimeImmutable('2024-10-02T15:01:23Z')
-                                                                            )
-                                                                            ->withTitle('title'),
-                                                                    )
-                                                                    ->withDialAction(
-                                                                        DialAction::with(phoneNumber: '+13125551234')
-                                                                    )
-                                                                    ->withFallbackURL('fallback_url')
-                                                                    ->withOpenURLAction(
-                                                                        OpenURLAction::with(
-                                                                            application: 'BROWSER',
-                                                                            url: 'http://example.com',
-                                                                            webviewViewMode: 'HALF',
-                                                                        )
-                                                                            ->withDescription('description'),
-                                                                    )
-                                                                    ->withPostbackData('postback_data')
-                                                                    ->withShareLocationAction((object) [])
-                                                                    ->withText('Hello world')
-                                                                    ->withViewLocationAction(
-                                                                        (new ViewLocationAction)
-                                                                            ->withLabel('label')
-                                                                            ->withLatLong(
-                                                                                LatLong::with(latitude: 41.8, longitude: -87.6)
-                                                                            )
-                                                                            ->withQuery('query'),
-                                                                    ),
-                                                            )
-                                                            ->withReply(
-                                                                (new Reply)
-                                                                    ->withPostbackData('postback_data')
-                                                                    ->withText('text'),
-                                                            ),
-                                                    ],
-                                                )
-                                                ->withTitle('Elephant'),
+        $result = $this->client->messsages->rcs([
+            'agent_id' => 'Agent007',
+            'agent_message' => [
+                'content_message' => [
+                    'content_info' => [
+                        'file_url' => 'https://example.com/elephant.jpg',
+                        'force_refresh' => true,
+                        'thumbnail_url' => 'thumbnail_url',
+                    ],
+                    'rich_card' => [
+                        'carousel_card' => [
+                            'card_contents' => [
+                                [
+                                    'description' => 'description',
+                                    'media' => [
+                                        'content_info' => [
+                                            'file_url' => 'https://example.com/elephant.jpg',
+                                            'force_refresh' => true,
+                                            'thumbnail_url' => 'thumbnail_url',
                                         ],
-                                        cardWidth: 'SMALL',
-                                    ),
-                                )
-                                ->withStandaloneCard(
-                                    StandaloneCard::with(
-                                        cardContent: (new RcsCardContent)
-                                            ->withDescription('description')
-                                            ->withMedia(
-                                                (new Media)
-                                                    ->withContentInfo(
-                                                        RcsContentInfo::with(
-                                                            fileURL: 'https://example.com/elephant.jpg'
-                                                        )
-                                                            ->withForceRefresh(true)
-                                                            ->withThumbnailURL('thumbnail_url'),
-                                                    )
-                                                    ->withHeight('MEDIUM'),
-                                            )
-                                            ->withSuggestions(
-                                                [
-                                                    (new RcsSuggestion)
-                                                        ->withAction(
-                                                            (new Action)
-                                                                ->withCreateCalendarEventAction(
-                                                                    (new CreateCalendarEventAction)
-                                                                        ->withDescription('description')
-                                                                        ->withEndTime(
-                                                                            new \DateTimeImmutable('2024-10-02T15:02:31Z')
-                                                                        )
-                                                                        ->withStartTime(
-                                                                            new \DateTimeImmutable('2024-10-02T15:01:23Z')
-                                                                        )
-                                                                        ->withTitle('title'),
-                                                                )
-                                                                ->withDialAction(
-                                                                    DialAction::with(phoneNumber: '+13125551234')
-                                                                )
-                                                                ->withFallbackURL('fallback_url')
-                                                                ->withOpenURLAction(
-                                                                    OpenURLAction::with(
-                                                                        application: 'BROWSER',
-                                                                        url: 'http://example.com',
-                                                                        webviewViewMode: 'HALF',
-                                                                    )
-                                                                        ->withDescription('description'),
-                                                                )
-                                                                ->withPostbackData('postback_data')
-                                                                ->withShareLocationAction((object) [])
-                                                                ->withText('Hello world')
-                                                                ->withViewLocationAction(
-                                                                    (new ViewLocationAction)
-                                                                        ->withLabel('label')
-                                                                        ->withLatLong(
-                                                                            LatLong::with(latitude: 41.8, longitude: -87.6)
-                                                                        )
-                                                                        ->withQuery('query'),
-                                                                ),
-                                                        )
-                                                        ->withReply(
-                                                            (new Reply)
-                                                                ->withPostbackData('postback_data')
-                                                                ->withText('text'),
-                                                        ),
+                                        'height' => 'MEDIUM',
+                                    ],
+                                    'suggestions' => [
+                                        [
+                                            'action' => [
+                                                'create_calendar_event_action' => [
+                                                    'description' => 'description',
+                                                    'end_time' => '2024-10-02T15:02:31Z',
+                                                    'start_time' => '2024-10-02T15:01:23Z',
+                                                    'title' => 'title',
                                                 ],
-                                            )
-                                            ->withTitle('Elephant'),
-                                        cardOrientation: 'HORIZONTAL',
-                                        thumbnailImageAlignment: 'LEFT',
-                                    ),
-                                ),
-                        )
-                        ->withSuggestions(
-                            [
-                                (new RcsSuggestion)
-                                    ->withAction(
-                                        (new Action)
-                                            ->withCreateCalendarEventAction(
-                                                (new CreateCalendarEventAction)
-                                                    ->withDescription('description')
-                                                    ->withEndTime(new \DateTimeImmutable('2024-10-02T15:02:31Z'))
-                                                    ->withStartTime(
-                                                        new \DateTimeImmutable('2024-10-02T15:01:23Z')
-                                                    )
-                                                    ->withTitle('title'),
-                                            )
-                                            ->withDialAction(DialAction::with(phoneNumber: '+13125551234'))
-                                            ->withFallbackURL('fallback_url')
-                                            ->withOpenURLAction(
-                                                OpenURLAction::with(
-                                                    application: 'BROWSER',
-                                                    url: 'http://example.com',
-                                                    webviewViewMode: 'HALF',
-                                                )
-                                                    ->withDescription('description'),
-                                            )
-                                            ->withPostbackData('postback_data')
-                                            ->withShareLocationAction((object) [])
-                                            ->withText('Hello world')
-                                            ->withViewLocationAction(
-                                                (new ViewLocationAction)
-                                                    ->withLabel('label')
-                                                    ->withLatLong(LatLong::with(latitude: 41.8, longitude: -87.6))
-                                                    ->withQuery('query'),
-                                            ),
-                                    )
-                                    ->withReply(
-                                        (new Reply)->withPostbackData('postback_data')->withText('text')
-                                    ),
+                                                'dial_action' => ['phone_number' => '+13125551234'],
+                                                'fallback_url' => 'fallback_url',
+                                                'open_url_action' => [
+                                                    'application' => 'BROWSER',
+                                                    'url' => 'http://example.com',
+                                                    'webview_view_mode' => 'HALF',
+                                                    'description' => 'description',
+                                                ],
+                                                'postback_data' => 'postback_data',
+                                                'share_location_action' => [],
+                                                'text' => 'Hello world',
+                                                'view_location_action' => [
+                                                    'label' => 'label',
+                                                    'lat_long' => [
+                                                        'latitude' => 41.8, 'longitude' => -87.6,
+                                                    ],
+                                                    'query' => 'query',
+                                                ],
+                                            ],
+                                            'reply' => [
+                                                'postback_data' => 'postback_data', 'text' => 'text',
+                                            ],
+                                        ],
+                                    ],
+                                    'title' => 'Elephant',
+                                ],
                             ],
-                        )
-                        ->withText('Hello world!'),
-                )
-                ->withEvent((new Event)->withEventType('IS_TYPING'))
-                ->withExpireTime(new \DateTimeImmutable('2024-10-02T15:01:23Z'))
-                ->withTtl('10.5s'),
-            messagingProfileID: 'messaging_profile_id',
-            to: '+13125551234',
-        );
+                            'card_width' => 'SMALL',
+                        ],
+                        'standalone_card' => [
+                            'card_content' => [
+                                'description' => 'description',
+                                'media' => [
+                                    'content_info' => [
+                                        'file_url' => 'https://example.com/elephant.jpg',
+                                        'force_refresh' => true,
+                                        'thumbnail_url' => 'thumbnail_url',
+                                    ],
+                                    'height' => 'MEDIUM',
+                                ],
+                                'suggestions' => [
+                                    [
+                                        'action' => [
+                                            'create_calendar_event_action' => [
+                                                'description' => 'description',
+                                                'end_time' => '2024-10-02T15:02:31Z',
+                                                'start_time' => '2024-10-02T15:01:23Z',
+                                                'title' => 'title',
+                                            ],
+                                            'dial_action' => ['phone_number' => '+13125551234'],
+                                            'fallback_url' => 'fallback_url',
+                                            'open_url_action' => [
+                                                'application' => 'BROWSER',
+                                                'url' => 'http://example.com',
+                                                'webview_view_mode' => 'HALF',
+                                                'description' => 'description',
+                                            ],
+                                            'postback_data' => 'postback_data',
+                                            'share_location_action' => [],
+                                            'text' => 'Hello world',
+                                            'view_location_action' => [
+                                                'label' => 'label',
+                                                'lat_long' => [
+                                                    'latitude' => 41.8, 'longitude' => -87.6,
+                                                ],
+                                                'query' => 'query',
+                                            ],
+                                        ],
+                                        'reply' => [
+                                            'postback_data' => 'postback_data', 'text' => 'text',
+                                        ],
+                                    ],
+                                ],
+                                'title' => 'Elephant',
+                            ],
+                            'card_orientation' => 'HORIZONTAL',
+                            'thumbnail_image_alignment' => 'LEFT',
+                        ],
+                    ],
+                    'suggestions' => [
+                        [
+                            'action' => [
+                                'create_calendar_event_action' => [
+                                    'description' => 'description',
+                                    'end_time' => '2024-10-02T15:02:31Z',
+                                    'start_time' => '2024-10-02T15:01:23Z',
+                                    'title' => 'title',
+                                ],
+                                'dial_action' => ['phone_number' => '+13125551234'],
+                                'fallback_url' => 'fallback_url',
+                                'open_url_action' => [
+                                    'application' => 'BROWSER',
+                                    'url' => 'http://example.com',
+                                    'webview_view_mode' => 'HALF',
+                                    'description' => 'description',
+                                ],
+                                'postback_data' => 'postback_data',
+                                'share_location_action' => [],
+                                'text' => 'Hello world',
+                                'view_location_action' => [
+                                    'label' => 'label',
+                                    'lat_long' => ['latitude' => 41.8, 'longitude' => -87.6],
+                                    'query' => 'query',
+                                ],
+                            ],
+                            'reply' => ['postback_data' => 'postback_data', 'text' => 'text'],
+                        ],
+                    ],
+                    'text' => 'Hello world!',
+                ],
+                'event' => ['event_type' => 'IS_TYPING'],
+                'expire_time' => '2024-10-02T15:01:23Z',
+                'ttl' => '10.5s',
+            ],
+            'messaging_profile_id' => 'messaging_profile_id',
+            'to' => '+13125551234',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

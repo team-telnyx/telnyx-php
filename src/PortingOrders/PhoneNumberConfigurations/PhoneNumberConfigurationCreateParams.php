@@ -16,7 +16,7 @@ use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationCreat
  * @see Telnyx\PortingOrders\PhoneNumberConfigurations->create
  *
  * @phpstan-type PhoneNumberConfigurationCreateParamsShape = array{
- *   phoneNumberConfigurations?: list<PhoneNumberConfiguration>
+ *   phone_number_configurations?: list<PhoneNumberConfiguration>
  * }
  */
 final class PhoneNumberConfigurationCreateParams implements BaseModel
@@ -25,13 +25,9 @@ final class PhoneNumberConfigurationCreateParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    /** @var list<PhoneNumberConfiguration>|null $phoneNumberConfigurations */
-    #[Api(
-        'phone_number_configurations',
-        list: PhoneNumberConfiguration::class,
-        optional: true,
-    )]
-    public ?array $phoneNumberConfigurations;
+    /** @var list<PhoneNumberConfiguration>|null $phone_number_configurations */
+    #[Api(list: PhoneNumberConfiguration::class, optional: true)]
+    public ?array $phone_number_configurations;
 
     public function __construct()
     {
@@ -43,13 +39,13 @@ final class PhoneNumberConfigurationCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<PhoneNumberConfiguration> $phoneNumberConfigurations
+     * @param list<PhoneNumberConfiguration> $phone_number_configurations
      */
-    public static function with(?array $phoneNumberConfigurations = null): self
+    public static function with(?array $phone_number_configurations = null): self
     {
         $obj = new self;
 
-        null !== $phoneNumberConfigurations && $obj->phoneNumberConfigurations = $phoneNumberConfigurations;
+        null !== $phone_number_configurations && $obj->phone_number_configurations = $phone_number_configurations;
 
         return $obj;
     }
@@ -61,7 +57,7 @@ final class PhoneNumberConfigurationCreateParams implements BaseModel
         array $phoneNumberConfigurations
     ): self {
         $obj = clone $this;
-        $obj->phoneNumberConfigurations = $phoneNumberConfigurations;
+        $obj->phone_number_configurations = $phoneNumberConfigurations;
 
         return $obj;
     }

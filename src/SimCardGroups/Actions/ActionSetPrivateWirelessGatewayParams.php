@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\SimCardGroups\Actions->setPrivateWirelessGateway
  *
  * @phpstan-type ActionSetPrivateWirelessGatewayParamsShape = array{
- *   privateWirelessGatewayID: string
+ *   private_wireless_gateway_id: string
  * }
  */
 final class ActionSetPrivateWirelessGatewayParams implements BaseModel
@@ -27,15 +27,15 @@ final class ActionSetPrivateWirelessGatewayParams implements BaseModel
     /**
      * The identification of the related Private Wireless Gateway resource.
      */
-    #[Api('private_wireless_gateway_id')]
-    public string $privateWirelessGatewayID;
+    #[Api]
+    public string $private_wireless_gateway_id;
 
     /**
      * `new ActionSetPrivateWirelessGatewayParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * ActionSetPrivateWirelessGatewayParams::with(privateWirelessGatewayID: ...)
+     * ActionSetPrivateWirelessGatewayParams::with(private_wireless_gateway_id: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -54,11 +54,11 @@ final class ActionSetPrivateWirelessGatewayParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(string $privateWirelessGatewayID): self
+    public static function with(string $private_wireless_gateway_id): self
     {
         $obj = new self;
 
-        $obj->privateWirelessGatewayID = $privateWirelessGatewayID;
+        $obj->private_wireless_gateway_id = $private_wireless_gateway_id;
 
         return $obj;
     }
@@ -70,7 +70,7 @@ final class ActionSetPrivateWirelessGatewayParams implements BaseModel
         string $privateWirelessGatewayID
     ): self {
         $obj = clone $this;
-        $obj->privateWirelessGatewayID = $privateWirelessGatewayID;
+        $obj->private_wireless_gateway_id = $privateWirelessGatewayID;
 
         return $obj;
     }

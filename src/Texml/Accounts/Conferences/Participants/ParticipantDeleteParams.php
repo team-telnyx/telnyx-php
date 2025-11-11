@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Texml\Accounts\Conferences\Participants->delete
  *
  * @phpstan-type ParticipantDeleteParamsShape = array{
- *   accountSid: string, conferenceSid: string
+ *   account_sid: string, conference_sid: string
  * }
  */
 final class ParticipantDeleteParams implements BaseModel
@@ -25,17 +25,17 @@ final class ParticipantDeleteParams implements BaseModel
     use SdkParams;
 
     #[Api]
-    public string $accountSid;
+    public string $account_sid;
 
     #[Api]
-    public string $conferenceSid;
+    public string $conference_sid;
 
     /**
      * `new ParticipantDeleteParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * ParticipantDeleteParams::with(accountSid: ..., conferenceSid: ...)
+     * ParticipantDeleteParams::with(account_sid: ..., conference_sid: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -54,12 +54,14 @@ final class ParticipantDeleteParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(string $accountSid, string $conferenceSid): self
-    {
+    public static function with(
+        string $account_sid,
+        string $conference_sid
+    ): self {
         $obj = new self;
 
-        $obj->accountSid = $accountSid;
-        $obj->conferenceSid = $conferenceSid;
+        $obj->account_sid = $account_sid;
+        $obj->conference_sid = $conference_sid;
 
         return $obj;
     }
@@ -67,7 +69,7 @@ final class ParticipantDeleteParams implements BaseModel
     public function withAccountSid(string $accountSid): self
     {
         $obj = clone $this;
-        $obj->accountSid = $accountSid;
+        $obj->account_sid = $accountSid;
 
         return $obj;
     }
@@ -75,7 +77,7 @@ final class ParticipantDeleteParams implements BaseModel
     public function withConferenceSid(string $conferenceSid): self
     {
         $obj = clone $this;
-        $obj->conferenceSid = $conferenceSid;
+        $obj->conference_sid = $conferenceSid;
 
         return $obj;
     }

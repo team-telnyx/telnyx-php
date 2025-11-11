@@ -16,11 +16,11 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\AI\Assistants\ScheduledEvents->create
  *
  * @phpstan-type ScheduledEventCreateParamsShape = array{
- *   scheduledAtFixedDatetime: \DateTimeInterface,
- *   telnyxAgentTarget: string,
- *   telnyxConversationChannel: ConversationChannelType|value-of<ConversationChannelType>,
- *   telnyxEndUserTarget: string,
- *   conversationMetadata?: array<string, string|int|bool>,
+ *   scheduled_at_fixed_datetime: \DateTimeInterface,
+ *   telnyx_agent_target: string,
+ *   telnyx_conversation_channel: ConversationChannelType|value-of<ConversationChannelType>,
+ *   telnyx_end_user_target: string,
+ *   conversation_metadata?: array<string,string|int|bool>,
  *   text?: string,
  * }
  */
@@ -33,36 +33,32 @@ final class ScheduledEventCreateParams implements BaseModel
     /**
      * The datetime at which the event should be scheduled. Formatted as ISO 8601.
      */
-    #[Api('scheduled_at_fixed_datetime')]
-    public \DateTimeInterface $scheduledAtFixedDatetime;
+    #[Api]
+    public \DateTimeInterface $scheduled_at_fixed_datetime;
 
     /**
      * The phone number, SIP URI, to schedule the call or text from.
      */
-    #[Api('telnyx_agent_target')]
-    public string $telnyxAgentTarget;
+    #[Api]
+    public string $telnyx_agent_target;
 
-    /** @var value-of<ConversationChannelType> $telnyxConversationChannel */
-    #[Api('telnyx_conversation_channel', enum: ConversationChannelType::class)]
-    public string $telnyxConversationChannel;
+    /** @var value-of<ConversationChannelType> $telnyx_conversation_channel */
+    #[Api(enum: ConversationChannelType::class)]
+    public string $telnyx_conversation_channel;
 
     /**
      * The phone number, SIP URI, to schedule the call or text to.
      */
-    #[Api('telnyx_end_user_target')]
-    public string $telnyxEndUserTarget;
+    #[Api]
+    public string $telnyx_end_user_target;
 
     /**
      * Metadata associated with the conversation. Telnyx provides several pieces of metadata, but customers can also add their own.
      *
-     * @var array<string, string|int|bool>|null $conversationMetadata
+     * @var array<string,string|int|bool>|null $conversation_metadata
      */
-    #[Api(
-        'conversation_metadata',
-        map: ConversationMetadata::class,
-        optional: true
-    )]
-    public ?array $conversationMetadata;
+    #[Api(map: ConversationMetadata::class, optional: true)]
+    public ?array $conversation_metadata;
 
     /**
      * Required for sms scheduled events. The text to be sent to the end user.
@@ -76,10 +72,10 @@ final class ScheduledEventCreateParams implements BaseModel
      * To enforce required parameters use
      * ```
      * ScheduledEventCreateParams::with(
-     *   scheduledAtFixedDatetime: ...,
-     *   telnyxAgentTarget: ...,
-     *   telnyxConversationChannel: ...,
-     *   telnyxEndUserTarget: ...,
+     *   scheduled_at_fixed_datetime: ...,
+     *   telnyx_agent_target: ...,
+     *   telnyx_conversation_channel: ...,
+     *   telnyx_end_user_target: ...,
      * )
      * ```
      *
@@ -103,25 +99,25 @@ final class ScheduledEventCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ConversationChannelType|value-of<ConversationChannelType> $telnyxConversationChannel
-     * @param array<string, string|int|bool> $conversationMetadata
+     * @param ConversationChannelType|value-of<ConversationChannelType> $telnyx_conversation_channel
+     * @param array<string,string|int|bool> $conversation_metadata
      */
     public static function with(
-        \DateTimeInterface $scheduledAtFixedDatetime,
-        string $telnyxAgentTarget,
-        ConversationChannelType|string $telnyxConversationChannel,
-        string $telnyxEndUserTarget,
-        ?array $conversationMetadata = null,
+        \DateTimeInterface $scheduled_at_fixed_datetime,
+        string $telnyx_agent_target,
+        ConversationChannelType|string $telnyx_conversation_channel,
+        string $telnyx_end_user_target,
+        ?array $conversation_metadata = null,
         ?string $text = null,
     ): self {
         $obj = new self;
 
-        $obj->scheduledAtFixedDatetime = $scheduledAtFixedDatetime;
-        $obj->telnyxAgentTarget = $telnyxAgentTarget;
-        $obj['telnyxConversationChannel'] = $telnyxConversationChannel;
-        $obj->telnyxEndUserTarget = $telnyxEndUserTarget;
+        $obj->scheduled_at_fixed_datetime = $scheduled_at_fixed_datetime;
+        $obj->telnyx_agent_target = $telnyx_agent_target;
+        $obj['telnyx_conversation_channel'] = $telnyx_conversation_channel;
+        $obj->telnyx_end_user_target = $telnyx_end_user_target;
 
-        null !== $conversationMetadata && $obj->conversationMetadata = $conversationMetadata;
+        null !== $conversation_metadata && $obj->conversation_metadata = $conversation_metadata;
         null !== $text && $obj->text = $text;
 
         return $obj;
@@ -134,7 +130,7 @@ final class ScheduledEventCreateParams implements BaseModel
         \DateTimeInterface $scheduledAtFixedDatetime
     ): self {
         $obj = clone $this;
-        $obj->scheduledAtFixedDatetime = $scheduledAtFixedDatetime;
+        $obj->scheduled_at_fixed_datetime = $scheduledAtFixedDatetime;
 
         return $obj;
     }
@@ -145,7 +141,7 @@ final class ScheduledEventCreateParams implements BaseModel
     public function withTelnyxAgentTarget(string $telnyxAgentTarget): self
     {
         $obj = clone $this;
-        $obj->telnyxAgentTarget = $telnyxAgentTarget;
+        $obj->telnyx_agent_target = $telnyxAgentTarget;
 
         return $obj;
     }
@@ -157,7 +153,7 @@ final class ScheduledEventCreateParams implements BaseModel
         ConversationChannelType|string $telnyxConversationChannel
     ): self {
         $obj = clone $this;
-        $obj['telnyxConversationChannel'] = $telnyxConversationChannel;
+        $obj['telnyx_conversation_channel'] = $telnyxConversationChannel;
 
         return $obj;
     }
@@ -168,7 +164,7 @@ final class ScheduledEventCreateParams implements BaseModel
     public function withTelnyxEndUserTarget(string $telnyxEndUserTarget): self
     {
         $obj = clone $this;
-        $obj->telnyxEndUserTarget = $telnyxEndUserTarget;
+        $obj->telnyx_end_user_target = $telnyxEndUserTarget;
 
         return $obj;
     }
@@ -176,12 +172,12 @@ final class ScheduledEventCreateParams implements BaseModel
     /**
      * Metadata associated with the conversation. Telnyx provides several pieces of metadata, but customers can also add their own.
      *
-     * @param array<string, string|int|bool> $conversationMetadata
+     * @param array<string,string|int|bool> $conversationMetadata
      */
     public function withConversationMetadata(array $conversationMetadata): self
     {
         $obj = clone $this;
-        $obj->conversationMetadata = $conversationMetadata;
+        $obj->conversation_metadata = $conversationMetadata;
 
         return $obj;
     }

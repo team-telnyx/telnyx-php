@@ -10,12 +10,12 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type PortingOrderEndUserLocationShape = array{
- *   administrativeArea?: string,
- *   countryCode?: string,
- *   extendedAddress?: string,
- *   locality?: string,
- *   postalCode?: string,
- *   streetAddress?: string,
+ *   administrative_area?: string|null,
+ *   country_code?: string|null,
+ *   extended_address?: string|null,
+ *   locality?: string|null,
+ *   postal_code?: string|null,
+ *   street_address?: string|null,
  * }
  */
 final class PortingOrderEndUserLocation implements BaseModel
@@ -26,20 +26,20 @@ final class PortingOrderEndUserLocation implements BaseModel
     /**
      * State, province, or similar of billing address.
      */
-    #[Api('administrative_area', optional: true)]
-    public ?string $administrativeArea;
+    #[Api(optional: true)]
+    public ?string $administrative_area;
 
     /**
      * ISO3166-1 alpha-2 country code of billing address.
      */
-    #[Api('country_code', optional: true)]
-    public ?string $countryCode;
+    #[Api(optional: true)]
+    public ?string $country_code;
 
     /**
      * Second line of billing address.
      */
-    #[Api('extended_address', optional: true)]
-    public ?string $extendedAddress;
+    #[Api(optional: true)]
+    public ?string $extended_address;
 
     /**
      * City or municipality of billing address.
@@ -50,14 +50,14 @@ final class PortingOrderEndUserLocation implements BaseModel
     /**
      * Postal Code of billing address.
      */
-    #[Api('postal_code', optional: true)]
-    public ?string $postalCode;
+    #[Api(optional: true)]
+    public ?string $postal_code;
 
     /**
      * First line of billing address.
      */
-    #[Api('street_address', optional: true)]
-    public ?string $streetAddress;
+    #[Api(optional: true)]
+    public ?string $street_address;
 
     public function __construct()
     {
@@ -70,21 +70,21 @@ final class PortingOrderEndUserLocation implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $administrativeArea = null,
-        ?string $countryCode = null,
-        ?string $extendedAddress = null,
+        ?string $administrative_area = null,
+        ?string $country_code = null,
+        ?string $extended_address = null,
         ?string $locality = null,
-        ?string $postalCode = null,
-        ?string $streetAddress = null,
+        ?string $postal_code = null,
+        ?string $street_address = null,
     ): self {
         $obj = new self;
 
-        null !== $administrativeArea && $obj->administrativeArea = $administrativeArea;
-        null !== $countryCode && $obj->countryCode = $countryCode;
-        null !== $extendedAddress && $obj->extendedAddress = $extendedAddress;
+        null !== $administrative_area && $obj->administrative_area = $administrative_area;
+        null !== $country_code && $obj->country_code = $country_code;
+        null !== $extended_address && $obj->extended_address = $extended_address;
         null !== $locality && $obj->locality = $locality;
-        null !== $postalCode && $obj->postalCode = $postalCode;
-        null !== $streetAddress && $obj->streetAddress = $streetAddress;
+        null !== $postal_code && $obj->postal_code = $postal_code;
+        null !== $street_address && $obj->street_address = $street_address;
 
         return $obj;
     }
@@ -95,7 +95,7 @@ final class PortingOrderEndUserLocation implements BaseModel
     public function withAdministrativeArea(string $administrativeArea): self
     {
         $obj = clone $this;
-        $obj->administrativeArea = $administrativeArea;
+        $obj->administrative_area = $administrativeArea;
 
         return $obj;
     }
@@ -106,7 +106,7 @@ final class PortingOrderEndUserLocation implements BaseModel
     public function withCountryCode(string $countryCode): self
     {
         $obj = clone $this;
-        $obj->countryCode = $countryCode;
+        $obj->country_code = $countryCode;
 
         return $obj;
     }
@@ -117,7 +117,7 @@ final class PortingOrderEndUserLocation implements BaseModel
     public function withExtendedAddress(string $extendedAddress): self
     {
         $obj = clone $this;
-        $obj->extendedAddress = $extendedAddress;
+        $obj->extended_address = $extendedAddress;
 
         return $obj;
     }
@@ -139,7 +139,7 @@ final class PortingOrderEndUserLocation implements BaseModel
     public function withPostalCode(string $postalCode): self
     {
         $obj = clone $this;
-        $obj->postalCode = $postalCode;
+        $obj->postal_code = $postalCode;
 
         return $obj;
     }
@@ -150,7 +150,7 @@ final class PortingOrderEndUserLocation implements BaseModel
     public function withStreetAddress(string $streetAddress): self
     {
         $obj = clone $this;
-        $obj->streetAddress = $streetAddress;
+        $obj->street_address = $streetAddress;
 
         return $obj;
     }

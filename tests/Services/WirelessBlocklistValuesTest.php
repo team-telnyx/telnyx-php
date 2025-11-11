@@ -33,7 +33,9 @@ final class WirelessBlocklistValuesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->wirelessBlocklistValues->list('country');
+        $result = $this->client->wirelessBlocklistValues->list([
+            'type' => 'country',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -45,7 +47,9 @@ final class WirelessBlocklistValuesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->wirelessBlocklistValues->list('country');
+        $result = $this->client->wirelessBlocklistValues->list([
+            'type' => 'country',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

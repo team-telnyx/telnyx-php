@@ -7,14 +7,9 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\ExternalConnections\ExternalConnectionCreateParams;
-use Telnyx\ExternalConnections\ExternalConnectionCreateParams\ExternalSipConnection;
-use Telnyx\ExternalConnections\ExternalConnectionCreateParams\Inbound;
-use Telnyx\ExternalConnections\ExternalConnectionCreateParams\Outbound;
 use Telnyx\ExternalConnections\ExternalConnectionDeleteResponse;
 use Telnyx\ExternalConnections\ExternalConnectionGetResponse;
 use Telnyx\ExternalConnections\ExternalConnectionListParams;
-use Telnyx\ExternalConnections\ExternalConnectionListParams\Filter;
-use Telnyx\ExternalConnections\ExternalConnectionListParams\Page;
 use Telnyx\ExternalConnections\ExternalConnectionListResponse;
 use Telnyx\ExternalConnections\ExternalConnectionNewResponse;
 use Telnyx\ExternalConnections\ExternalConnectionUpdateLocationParams;
@@ -29,32 +24,30 @@ use Telnyx\Services\ExternalConnections\PhoneNumbersService;
 use Telnyx\Services\ExternalConnections\ReleasesService;
 use Telnyx\Services\ExternalConnections\UploadsService;
 
-use const Telnyx\Core\OMIT as omit;
-
 final class ExternalConnectionsService implements ExternalConnectionsContract
 {
     /**
-     * @@api
+     * @api
      */
     public LogMessagesService $logMessages;
 
     /**
-     * @@api
+     * @api
      */
     public CivicAddressesService $civicAddresses;
 
     /**
-     * @@api
+     * @api
      */
     public PhoneNumbersService $phoneNumbers;
 
     /**
-     * @@api
+     * @api
      */
     public ReleasesService $releases;
 
     /**
-     * @@api
+     * @api
      */
     public UploadsService $uploads;
 
@@ -75,56 +68,26 @@ final class ExternalConnectionsService implements ExternalConnectionsContract
      *
      * Creates a new External Connection based on the parameters sent in the request. The external_sip_connection and outbound voice profile id are required. Once created, you can assign phone numbers to your application using the `/phone_numbers` endpoint.
      *
-     * @param Outbound $outbound
-     * @param ExternalSipConnection|value-of<ExternalSipConnection> $externalSipConnection the service that will be consuming this connection
-     * @param bool $active specifies whether the connection can be used
-     * @param Inbound $inbound
-     * @param list<string> $tags tags associated with the connection
-     * @param string|null $webhookEventFailoverURL The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
-     * @param string $webhookEventURL The URL where webhooks related to this connection will be sent. Must include a scheme, such as 'https'.
-     * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
+     * @param array{
+     *   external_sip_connection: "zoom",
+     *   outbound: array{channel_limit?: int, outbound_voice_profile_id?: string},
+     *   active?: bool,
+     *   inbound?: array{channel_limit?: int},
+     *   tags?: list<string>,
+     *   webhook_event_failover_url?: string|null,
+     *   webhook_event_url?: string,
+     *   webhook_timeout_secs?: int|null,
+     * }|ExternalConnectionCreateParams $params
      *
      * @throws APIException
      */
     public function create(
-        $outbound,
-        $externalSipConnection = 'zoom',
-        $active = omit,
-        $inbound = omit,
-        $tags = omit,
-        $webhookEventFailoverURL = omit,
-        $webhookEventURL = omit,
-        $webhookTimeoutSecs = omit,
+        array|ExternalConnectionCreateParams $params,
         ?RequestOptions $requestOptions = null,
-    ): ExternalConnectionNewResponse {
-        $params = [
-            'externalSipConnection' => $externalSipConnection,
-            'outbound' => $outbound,
-            'active' => $active,
-            'inbound' => $inbound,
-            'tags' => $tags,
-            'webhookEventFailoverURL' => $webhookEventFailoverURL,
-            'webhookEventURL' => $webhookEventURL,
-            'webhookTimeoutSecs' => $webhookTimeoutSecs,
-        ];
-
-        return $this->createRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): ExternalConnectionNewResponse {
         [$parsed, $options] = ExternalConnectionCreateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -162,55 +125,26 @@ final class ExternalConnectionsService implements ExternalConnectionsContract
      *
      * Updates settings of an existing External Connection based on the parameters of the request.
      *
-     * @param ExternalConnectionUpdateParams\Outbound $outbound
-     * @param bool $active specifies whether the connection can be used
-     * @param ExternalConnectionUpdateParams\Inbound $inbound
-     * @param list<string> $tags tags associated with the connection
-     * @param string|null $webhookEventFailoverURL The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
-     * @param string $webhookEventURL The URL where webhooks related to this connection will be sent. Must include a scheme, such as 'https'.
-     * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
+     * @param array{
+     *   outbound: array{outbound_voice_profile_id: string, channel_limit?: int},
+     *   active?: bool,
+     *   inbound?: array{channel_limit?: int},
+     *   tags?: list<string>,
+     *   webhook_event_failover_url?: string|null,
+     *   webhook_event_url?: string,
+     *   webhook_timeout_secs?: int|null,
+     * }|ExternalConnectionUpdateParams $params
      *
      * @throws APIException
      */
     public function update(
         string $id,
-        $outbound,
-        $active = omit,
-        $inbound = omit,
-        $tags = omit,
-        $webhookEventFailoverURL = omit,
-        $webhookEventURL = omit,
-        $webhookTimeoutSecs = omit,
+        array|ExternalConnectionUpdateParams $params,
         ?RequestOptions $requestOptions = null,
-    ): ExternalConnectionUpdateResponse {
-        $params = [
-            'outbound' => $outbound,
-            'active' => $active,
-            'inbound' => $inbound,
-            'tags' => $tags,
-            'webhookEventFailoverURL' => $webhookEventFailoverURL,
-            'webhookEventURL' => $webhookEventURL,
-            'webhookTimeoutSecs' => $webhookTimeoutSecs,
-        ];
-
-        return $this->updateRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): ExternalConnectionUpdateResponse {
         [$parsed, $options] = ExternalConnectionUpdateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -228,35 +162,26 @@ final class ExternalConnectionsService implements ExternalConnectionsContract
      *
      * This endpoint returns a list of your External Connections inside the 'data' attribute of the response. External Connections are used by Telnyx customers to seamless configure SIP trunking integrations with Telnyx Partners, through External Voice Integrations in Mission Control Portal.
      *
-     * @param Filter $filter Filter parameter for external connections (deepObject style). Supports filtering by connection_name, external_sip_connection, id, created_at, and phone_number.
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param array{
+     *   filter?: array{
+     *     id?: string,
+     *     connection_name?: array{contains?: string},
+     *     created_at?: string,
+     *     external_sip_connection?: "zoom"|"operator_connect",
+     *     phone_number?: array{contains?: string},
+     *   },
+     *   page?: array{number?: int, size?: int},
+     * }|ExternalConnectionListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): ExternalConnectionListResponse {
-        $params = ['filter' => $filter, 'page' => $page];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|ExternalConnectionListParams $params,
+        ?RequestOptions $requestOptions = null,
     ): ExternalConnectionListResponse {
         [$parsed, $options] = ExternalConnectionListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -294,39 +219,20 @@ final class ExternalConnectionsService implements ExternalConnectionsContract
      *
      * Update a location's static emergency address
      *
-     * @param string $id
-     * @param string $staticEmergencyAddressID A new static emergency address ID to update the location with
+     * @param array{
+     *   id: string, static_emergency_address_id: string
+     * }|ExternalConnectionUpdateLocationParams $params
      *
      * @throws APIException
      */
     public function updateLocation(
         string $locationID,
-        $id,
-        $staticEmergencyAddressID,
+        array|ExternalConnectionUpdateLocationParams $params,
         ?RequestOptions $requestOptions = null,
-    ): ExternalConnectionUpdateLocationResponse {
-        $params = [
-            'id' => $id, 'staticEmergencyAddressID' => $staticEmergencyAddressID,
-        ];
-
-        return $this->updateLocationRaw($locationID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateLocationRaw(
-        string $locationID,
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): ExternalConnectionUpdateLocationResponse {
         [$parsed, $options] = ExternalConnectionUpdateLocationParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
         $id = $parsed['id'];
         unset($parsed['id']);

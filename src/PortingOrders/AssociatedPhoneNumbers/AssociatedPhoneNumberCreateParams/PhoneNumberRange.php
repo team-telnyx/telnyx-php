@@ -9,7 +9,9 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type PhoneNumberRangeShape = array{endAt?: string, startAt?: string}
+ * @phpstan-type PhoneNumberRangeShape = array{
+ *   end_at?: string|null, start_at?: string|null
+ * }
  */
 final class PhoneNumberRange implements BaseModel
 {
@@ -19,14 +21,14 @@ final class PhoneNumberRange implements BaseModel
     /**
      * Specifies the end of the phone number range for this associated phone number.
      */
-    #[Api('end_at', optional: true)]
-    public ?string $endAt;
+    #[Api(optional: true)]
+    public ?string $end_at;
 
     /**
      * Specifies the start of the phone number range for this associated phone number.
      */
-    #[Api('start_at', optional: true)]
-    public ?string $startAt;
+    #[Api(optional: true)]
+    public ?string $start_at;
 
     public function __construct()
     {
@@ -39,13 +41,13 @@ final class PhoneNumberRange implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $endAt = null,
-        ?string $startAt = null
+        ?string $end_at = null,
+        ?string $start_at = null
     ): self {
         $obj = new self;
 
-        null !== $endAt && $obj->endAt = $endAt;
-        null !== $startAt && $obj->startAt = $startAt;
+        null !== $end_at && $obj->end_at = $end_at;
+        null !== $start_at && $obj->start_at = $start_at;
 
         return $obj;
     }
@@ -56,7 +58,7 @@ final class PhoneNumberRange implements BaseModel
     public function withEndAt(string $endAt): self
     {
         $obj = clone $this;
-        $obj->endAt = $endAt;
+        $obj->end_at = $endAt;
 
         return $obj;
     }
@@ -67,7 +69,7 @@ final class PhoneNumberRange implements BaseModel
     public function withStartAt(string $startAt): self
     {
         $obj = clone $this;
-        $obj->startAt = $startAt;
+        $obj->start_at = $startAt;
 
         return $obj;
     }

@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\PortingOrders\ActivationJobs->update
  *
  * @phpstan-type ActivationJobUpdateParamsShape = array{
- *   id: string, activateAt?: \DateTimeInterface
+ *   id: string, activate_at?: \DateTimeInterface
  * }
  */
 final class ActivationJobUpdateParams implements BaseModel
@@ -30,8 +30,8 @@ final class ActivationJobUpdateParams implements BaseModel
     /**
      * The desired activation time. The activation time should be between any of the activation windows.
      */
-    #[Api('activate_at', optional: true)]
-    public ?\DateTimeInterface $activateAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $activate_at;
 
     /**
      * `new ActivationJobUpdateParams()` is missing required properties by the API.
@@ -59,13 +59,13 @@ final class ActivationJobUpdateParams implements BaseModel
      */
     public static function with(
         string $id,
-        ?\DateTimeInterface $activateAt = null
+        ?\DateTimeInterface $activate_at = null
     ): self {
         $obj = new self;
 
         $obj->id = $id;
 
-        null !== $activateAt && $obj->activateAt = $activateAt;
+        null !== $activate_at && $obj->activate_at = $activate_at;
 
         return $obj;
     }
@@ -84,7 +84,7 @@ final class ActivationJobUpdateParams implements BaseModel
     public function withActivateAt(\DateTimeInterface $activateAt): self
     {
         $obj = clone $this;
-        $obj->activateAt = $activateAt;
+        $obj->activate_at = $activateAt;
 
         return $obj;
     }

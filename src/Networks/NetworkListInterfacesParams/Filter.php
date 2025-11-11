@@ -13,7 +13,9 @@ use Telnyx\Networks\InterfaceStatus;
  * Consolidated filter parameter (deepObject style). Originally: filter[name], filter[type], filter[status].
  *
  * @phpstan-type FilterShape = array{
- *   name?: string, status?: value-of<InterfaceStatus>, type?: string
+ *   name?: string|null,
+ *   status?: value-of<InterfaceStatus>|null,
+ *   type?: string|null,
  * }
  */
 final class Filter implements BaseModel

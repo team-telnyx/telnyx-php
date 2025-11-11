@@ -10,12 +10,12 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type SMSShape = array{
- *   alphaSender?: string|null,
- *   appName?: string,
- *   codeLength?: int,
- *   defaultVerificationTimeoutSecs?: int,
- *   messagingTemplateID?: string,
- *   whitelistedDestinations?: list<string>,
+ *   alpha_sender?: string|null,
+ *   app_name?: string|null,
+ *   code_length?: int|null,
+ *   default_verification_timeout_secs?: int|null,
+ *   messaging_template_id?: string|null,
+ *   whitelisted_destinations?: list<string>|null,
  * }
  */
 final class SMS implements BaseModel
@@ -26,40 +26,40 @@ final class SMS implements BaseModel
     /**
      * The alphanumeric sender ID to use when sending to destinations that require an alphanumeric sender ID.
      */
-    #[Api('alpha_sender', nullable: true, optional: true)]
-    public ?string $alphaSender;
+    #[Api(nullable: true, optional: true)]
+    public ?string $alpha_sender;
 
     /**
      * The name that identifies the application requesting 2fa in the verification message.
      */
-    #[Api('app_name', optional: true)]
-    public ?string $appName;
+    #[Api(optional: true)]
+    public ?string $app_name;
 
     /**
      * The length of the verify code to generate.
      */
-    #[Api('code_length', optional: true)]
-    public ?int $codeLength;
+    #[Api(optional: true)]
+    public ?int $code_length;
 
     /**
      * For every request that is initiated via this Verify profile, this sets the number of seconds before a verification request code expires. Once the verification request expires, the user cannot use the code to verify their identity.
      */
-    #[Api('default_verification_timeout_secs', optional: true)]
-    public ?int $defaultVerificationTimeoutSecs;
+    #[Api(optional: true)]
+    public ?int $default_verification_timeout_secs;
 
     /**
      * The message template identifier selected from /verify_profiles/templates.
      */
-    #[Api('messaging_template_id', optional: true)]
-    public ?string $messagingTemplateID;
+    #[Api(optional: true)]
+    public ?string $messaging_template_id;
 
     /**
      * Enabled country destinations to send verification codes. The elements in the list must be valid ISO 3166-1 alpha-2 country codes. If set to `["*"]`, all destinations will be allowed.
      *
-     * @var list<string>|null $whitelistedDestinations
+     * @var list<string>|null $whitelisted_destinations
      */
-    #[Api('whitelisted_destinations', list: 'string', optional: true)]
-    public ?array $whitelistedDestinations;
+    #[Api(list: 'string', optional: true)]
+    public ?array $whitelisted_destinations;
 
     public function __construct()
     {
@@ -71,24 +71,24 @@ final class SMS implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $whitelistedDestinations
+     * @param list<string> $whitelisted_destinations
      */
     public static function with(
-        ?string $alphaSender = null,
-        ?string $appName = null,
-        ?int $codeLength = null,
-        ?int $defaultVerificationTimeoutSecs = null,
-        ?string $messagingTemplateID = null,
-        ?array $whitelistedDestinations = null,
+        ?string $alpha_sender = null,
+        ?string $app_name = null,
+        ?int $code_length = null,
+        ?int $default_verification_timeout_secs = null,
+        ?string $messaging_template_id = null,
+        ?array $whitelisted_destinations = null,
     ): self {
         $obj = new self;
 
-        null !== $alphaSender && $obj->alphaSender = $alphaSender;
-        null !== $appName && $obj->appName = $appName;
-        null !== $codeLength && $obj->codeLength = $codeLength;
-        null !== $defaultVerificationTimeoutSecs && $obj->defaultVerificationTimeoutSecs = $defaultVerificationTimeoutSecs;
-        null !== $messagingTemplateID && $obj->messagingTemplateID = $messagingTemplateID;
-        null !== $whitelistedDestinations && $obj->whitelistedDestinations = $whitelistedDestinations;
+        null !== $alpha_sender && $obj->alpha_sender = $alpha_sender;
+        null !== $app_name && $obj->app_name = $app_name;
+        null !== $code_length && $obj->code_length = $code_length;
+        null !== $default_verification_timeout_secs && $obj->default_verification_timeout_secs = $default_verification_timeout_secs;
+        null !== $messaging_template_id && $obj->messaging_template_id = $messaging_template_id;
+        null !== $whitelisted_destinations && $obj->whitelisted_destinations = $whitelisted_destinations;
 
         return $obj;
     }
@@ -99,7 +99,7 @@ final class SMS implements BaseModel
     public function withAlphaSender(?string $alphaSender): self
     {
         $obj = clone $this;
-        $obj->alphaSender = $alphaSender;
+        $obj->alpha_sender = $alphaSender;
 
         return $obj;
     }
@@ -110,7 +110,7 @@ final class SMS implements BaseModel
     public function withAppName(string $appName): self
     {
         $obj = clone $this;
-        $obj->appName = $appName;
+        $obj->app_name = $appName;
 
         return $obj;
     }
@@ -121,7 +121,7 @@ final class SMS implements BaseModel
     public function withCodeLength(int $codeLength): self
     {
         $obj = clone $this;
-        $obj->codeLength = $codeLength;
+        $obj->code_length = $codeLength;
 
         return $obj;
     }
@@ -133,7 +133,7 @@ final class SMS implements BaseModel
         int $defaultVerificationTimeoutSecs
     ): self {
         $obj = clone $this;
-        $obj->defaultVerificationTimeoutSecs = $defaultVerificationTimeoutSecs;
+        $obj->default_verification_timeout_secs = $defaultVerificationTimeoutSecs;
 
         return $obj;
     }
@@ -144,7 +144,7 @@ final class SMS implements BaseModel
     public function withMessagingTemplateID(string $messagingTemplateID): self
     {
         $obj = clone $this;
-        $obj->messagingTemplateID = $messagingTemplateID;
+        $obj->messaging_template_id = $messagingTemplateID;
 
         return $obj;
     }
@@ -158,7 +158,7 @@ final class SMS implements BaseModel
         array $whitelistedDestinations
     ): self {
         $obj = clone $this;
-        $obj->whitelistedDestinations = $whitelistedDestinations;
+        $obj->whitelisted_destinations = $whitelistedDestinations;
 
         return $obj;
     }

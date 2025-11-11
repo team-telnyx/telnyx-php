@@ -14,7 +14,7 @@ use Telnyx\WebhookDeliveries\WebhookDeliveryListResponse\Meta;
 
 /**
  * @phpstan-type WebhookDeliveryListResponseShape = array{
- *   data?: list<Data>, meta?: Meta
+ *   data?: list<Data>|null, meta?: Meta|null
  * }
  */
 final class WebhookDeliveryListResponse implements BaseModel, ResponseConverter

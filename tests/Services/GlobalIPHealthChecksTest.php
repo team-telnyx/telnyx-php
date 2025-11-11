@@ -33,7 +33,7 @@ final class GlobalIPHealthChecksTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->globalIPHealthChecks->create();
+        $result = $this->client->globalIPHealthChecks->create([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -59,7 +59,7 @@ final class GlobalIPHealthChecksTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->globalIPHealthChecks->list();
+        $result = $this->client->globalIPHealthChecks->list([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

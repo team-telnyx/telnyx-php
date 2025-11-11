@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type SpeechToTextDeleteResponseShape = array{
- *   data?: SttDetailReportResponse
+ *   data?: SttDetailReportResponse|null
  * }
  */
 final class SpeechToTextDeleteResponse implements BaseModel, ResponseConverter

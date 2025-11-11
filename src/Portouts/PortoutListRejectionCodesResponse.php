@@ -12,7 +12,9 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Portouts\PortoutListRejectionCodesResponse\Data;
 
 /**
- * @phpstan-type PortoutListRejectionCodesResponseShape = array{data?: list<Data>}
+ * @phpstan-type PortoutListRejectionCodesResponseShape = array{
+ *   data?: list<Data>|null
+ * }
  */
 final class PortoutListRejectionCodesResponse implements BaseModel, ResponseConverter
 {

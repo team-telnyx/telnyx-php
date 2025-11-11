@@ -12,7 +12,9 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Rooms\Actions\ActionGenerateJoinClientTokenResponse\Data;
 
 /**
- * @phpstan-type ActionGenerateJoinClientTokenResponseShape = array{data?: Data}
+ * @phpstan-type ActionGenerateJoinClientTokenResponseShape = array{
+ *   data?: Data|null
+ * }
  */
 final class ActionGenerateJoinClientTokenResponse implements BaseModel, ResponseConverter
 {

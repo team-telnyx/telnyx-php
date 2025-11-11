@@ -13,7 +13,7 @@ use Telnyx\PhoneNumbers\Actions\PhoneNumberWithVoiceSettings;
 
 /**
  * @phpstan-type VoiceUpdateResponseShape = array{
- *   data?: PhoneNumberWithVoiceSettings
+ *   data?: PhoneNumberWithVoiceSettings|null
  * }
  */
 final class VoiceUpdateResponse implements BaseModel, ResponseConverter

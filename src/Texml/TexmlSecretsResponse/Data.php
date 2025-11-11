@@ -10,7 +10,9 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Texml\TexmlSecretsResponse\Data\Value;
 
 /**
- * @phpstan-type DataShape = array{name?: string, value?: value-of<Value>}
+ * @phpstan-type DataShape = array{
+ *   name?: string|null, value?: value-of<Value>|null
+ * }
  */
 final class Data implements BaseModel
 {

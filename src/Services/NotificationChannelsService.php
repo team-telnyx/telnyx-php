@@ -7,20 +7,15 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\NotificationChannels\NotificationChannelCreateParams;
-use Telnyx\NotificationChannels\NotificationChannelCreateParams\ChannelTypeID;
 use Telnyx\NotificationChannels\NotificationChannelDeleteResponse;
 use Telnyx\NotificationChannels\NotificationChannelGetResponse;
 use Telnyx\NotificationChannels\NotificationChannelListParams;
-use Telnyx\NotificationChannels\NotificationChannelListParams\Filter;
-use Telnyx\NotificationChannels\NotificationChannelListParams\Page;
 use Telnyx\NotificationChannels\NotificationChannelListResponse;
 use Telnyx\NotificationChannels\NotificationChannelNewResponse;
 use Telnyx\NotificationChannels\NotificationChannelUpdateParams;
 use Telnyx\NotificationChannels\NotificationChannelUpdateResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\NotificationChannelsContract;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class NotificationChannelsService implements NotificationChannelsContract
 {
@@ -34,41 +29,21 @@ final class NotificationChannelsService implements NotificationChannelsContract
      *
      * Create a notification channel.
      *
-     * @param string $channelDestination the destination associated with the channel type
-     * @param ChannelTypeID|value-of<ChannelTypeID> $channelTypeID A Channel Type ID
-     * @param string $notificationProfileID a UUID reference to the associated Notification Profile
+     * @param array{
+     *   channel_destination?: string,
+     *   channel_type_id?: "sms"|"voice"|"email"|"webhook",
+     *   notification_profile_id?: string,
+     * }|NotificationChannelCreateParams $params
      *
      * @throws APIException
      */
     public function create(
-        $channelDestination = omit,
-        $channelTypeID = omit,
-        $notificationProfileID = omit,
+        array|NotificationChannelCreateParams $params,
         ?RequestOptions $requestOptions = null,
-    ): NotificationChannelNewResponse {
-        $params = [
-            'channelDestination' => $channelDestination,
-            'channelTypeID' => $channelTypeID,
-            'notificationProfileID' => $notificationProfileID,
-        ];
-
-        return $this->createRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): NotificationChannelNewResponse {
         [$parsed, $options] = NotificationChannelCreateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -106,43 +81,22 @@ final class NotificationChannelsService implements NotificationChannelsContract
      *
      * Update a notification channel.
      *
-     * @param string $channelDestination the destination associated with the channel type
-     * @param NotificationChannelUpdateParams\ChannelTypeID|value-of<NotificationChannelUpdateParams\ChannelTypeID> $channelTypeID A Channel Type ID
-     * @param string $notificationProfileID a UUID reference to the associated Notification Profile
+     * @param array{
+     *   channel_destination?: string,
+     *   channel_type_id?: "sms"|"voice"|"email"|"webhook",
+     *   notification_profile_id?: string,
+     * }|NotificationChannelUpdateParams $params
      *
      * @throws APIException
      */
     public function update(
         string $id,
-        $channelDestination = omit,
-        $channelTypeID = omit,
-        $notificationProfileID = omit,
+        array|NotificationChannelUpdateParams $params,
         ?RequestOptions $requestOptions = null,
-    ): NotificationChannelUpdateResponse {
-        $params = [
-            'channelDestination' => $channelDestination,
-            'channelTypeID' => $channelTypeID,
-            'notificationProfileID' => $notificationProfileID,
-        ];
-
-        return $this->updateRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): NotificationChannelUpdateResponse {
         [$parsed, $options] = NotificationChannelUpdateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -160,35 +114,29 @@ final class NotificationChannelsService implements NotificationChannelsContract
      *
      * List notification channels.
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[associated_record_type][eq], filter[channel_type_id][eq], filter[notification_profile_id][eq], filter[notification_channel][eq], filter[notification_event_condition_id][eq], filter[status][eq]
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param array{
+     *   filter?: array{
+     *     associated_record_type?: array{eq?: "account"|"phone_number"},
+     *     channel_type_id?: array{eq?: "webhook"|"sms"|"email"|"voice"},
+     *     notification_channel?: array{eq?: string},
+     *     notification_event_condition_id?: array{eq?: string},
+     *     notification_profile_id?: array{eq?: string},
+     *     status?: array{
+     *       eq?: "enabled"|"enable-received"|"enable-pending"|"enable-submtited"|"delete-received"|"delete-pending"|"delete-submitted"|"deleted",
+     *     },
+     *   },
+     *   page?: array{number?: int, size?: int},
+     * }|NotificationChannelListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): NotificationChannelListResponse {
-        $params = ['filter' => $filter, 'page' => $page];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|NotificationChannelListParams $params,
+        ?RequestOptions $requestOptions = null,
     ): NotificationChannelListResponse {
         [$parsed, $options] = NotificationChannelListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

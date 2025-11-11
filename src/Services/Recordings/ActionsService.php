@@ -22,31 +22,17 @@ final class ActionsService implements ActionsContract
      *
      * Permanently deletes a list of call recordings.
      *
-     * @param list<string> $ids list of call recording IDs to delete
+     * @param array{ids: list<string>}|ActionDeleteParams $params
      *
      * @throws APIException
      */
-    public function delete($ids, ?RequestOptions $requestOptions = null): mixed
-    {
-        $params = ['ids' => $ids];
-
-        return $this->deleteRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        array $params,
+    public function delete(
+        array|ActionDeleteParams $params,
         ?RequestOptions $requestOptions = null
     ): mixed {
         [$parsed, $options] = ActionDeleteParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

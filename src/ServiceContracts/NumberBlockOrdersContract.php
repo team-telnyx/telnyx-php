@@ -5,47 +5,25 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\NumberBlockOrders\NumberBlockOrderCreateParams;
 use Telnyx\NumberBlockOrders\NumberBlockOrderGetResponse;
-use Telnyx\NumberBlockOrders\NumberBlockOrderListParams\Filter;
-use Telnyx\NumberBlockOrders\NumberBlockOrderListParams\Page;
+use Telnyx\NumberBlockOrders\NumberBlockOrderListParams;
 use Telnyx\NumberBlockOrders\NumberBlockOrderListResponse;
 use Telnyx\NumberBlockOrders\NumberBlockOrderNewResponse;
 use Telnyx\RequestOptions;
-
-use const Telnyx\Core\OMIT as omit;
 
 interface NumberBlockOrdersContract
 {
     /**
      * @api
      *
-     * @param int $range the phone number range included in the block
-     * @param string $startingNumber Starting phone number block
-     * @param string $connectionID identifies the connection associated with this phone number
-     * @param string $customerReference a customer reference string for customer look ups
-     * @param string $messagingProfileID identifies the messaging profile associated with the phone number
+     * @param array<mixed>|NumberBlockOrderCreateParams $params
      *
      * @throws APIException
      */
     public function create(
-        $range,
-        $startingNumber,
-        $connectionID = omit,
-        $customerReference = omit,
-        $messagingProfileID = omit,
+        array|NumberBlockOrderCreateParams $params,
         ?RequestOptions $requestOptions = null,
-    ): NumberBlockOrderNewResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): NumberBlockOrderNewResponse;
 
     /**
@@ -61,26 +39,12 @@ interface NumberBlockOrdersContract
     /**
      * @api
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[status], filter[created_at], filter[phone_numbers.starting_number]
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param array<mixed>|NumberBlockOrderListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): NumberBlockOrderListResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|NumberBlockOrderListParams $params,
+        ?RequestOptions $requestOptions = null,
     ): NumberBlockOrderListResponse;
 }

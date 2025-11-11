@@ -9,12 +9,8 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\RequirementTypes\RequirementTypeGetResponse;
 use Telnyx\RequirementTypes\RequirementTypeListParams;
-use Telnyx\RequirementTypes\RequirementTypeListParams\Filter;
-use Telnyx\RequirementTypes\RequirementTypeListParams\Sort;
 use Telnyx\RequirementTypes\RequirementTypeListResponse;
 use Telnyx\ServiceContracts\RequirementTypesContract;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class RequirementTypesService implements RequirementTypesContract
 {
@@ -48,35 +44,20 @@ final class RequirementTypesService implements RequirementTypesContract
      *
      * List all requirement types ordered by created_at descending
      *
-     * @param Filter $filter Consolidated filter parameter for requirement types (deepObject style). Originally: filter[name]
-     * @param list<Sort|value-of<Sort>> $sort Consolidated sort parameter for requirement types (deepObject style). Originally: sort[]
+     * @param array{
+     *   filter?: array{name?: array{contains?: string}},
+     *   sort?: list<"name"|"created_at"|"updated_at"|"-name"|"-created_at"|"-updated_at">,
+     * }|RequirementTypeListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $sort = omit,
-        ?RequestOptions $requestOptions = null
-    ): RequirementTypeListResponse {
-        $params = ['filter' => $filter, 'sort' => $sort];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|RequirementTypeListParams $params,
+        ?RequestOptions $requestOptions = null,
     ): RequirementTypeListResponse {
         [$parsed, $options] = RequirementTypeListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Settings for handling user interruptions during assistant speech.
  *
- * @phpstan-type InterruptionSettingsShape = array{enable?: bool}
+ * @phpstan-type InterruptionSettingsShape = array{enable?: bool|null}
  */
 final class InterruptionSettings implements BaseModel
 {

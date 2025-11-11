@@ -14,17 +14,17 @@ use Telnyx\VerifyProfiles\VerifyProfile\SMS;
 
 /**
  * @phpstan-type VerifyProfileShape = array{
- *   id?: string,
- *   call?: Call,
- *   createdAt?: string,
- *   flashcall?: Flashcall,
- *   language?: string,
- *   name?: string,
- *   recordType?: value-of<RecordType>,
- *   sms?: SMS,
- *   updatedAt?: string,
- *   webhookFailoverURL?: string,
- *   webhookURL?: string,
+ *   id?: string|null,
+ *   call?: Call|null,
+ *   created_at?: string|null,
+ *   flashcall?: Flashcall|null,
+ *   language?: string|null,
+ *   name?: string|null,
+ *   record_type?: value-of<RecordType>|null,
+ *   sms?: SMS|null,
+ *   updated_at?: string|null,
+ *   webhook_failover_url?: string|null,
+ *   webhook_url?: string|null,
  * }
  */
 final class VerifyProfile implements BaseModel
@@ -38,8 +38,8 @@ final class VerifyProfile implements BaseModel
     #[Api(optional: true)]
     public ?Call $call;
 
-    #[Api('created_at', optional: true)]
-    public ?string $createdAt;
+    #[Api(optional: true)]
+    public ?string $created_at;
 
     #[Api(optional: true)]
     public ?Flashcall $flashcall;
@@ -53,22 +53,22 @@ final class VerifyProfile implements BaseModel
     /**
      * The possible verification profile record types.
      *
-     * @var value-of<RecordType>|null $recordType
+     * @var value-of<RecordType>|null $record_type
      */
-    #[Api('record_type', enum: RecordType::class, optional: true)]
-    public ?string $recordType;
+    #[Api(enum: RecordType::class, optional: true)]
+    public ?string $record_type;
 
     #[Api(optional: true)]
     public ?SMS $sms;
 
-    #[Api('updated_at', optional: true)]
-    public ?string $updatedAt;
+    #[Api(optional: true)]
+    public ?string $updated_at;
 
-    #[Api('webhook_failover_url', optional: true)]
-    public ?string $webhookFailoverURL;
+    #[Api(optional: true)]
+    public ?string $webhook_failover_url;
 
-    #[Api('webhook_url', optional: true)]
-    public ?string $webhookURL;
+    #[Api(optional: true)]
+    public ?string $webhook_url;
 
     public function __construct()
     {
@@ -80,34 +80,34 @@ final class VerifyProfile implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param RecordType|value-of<RecordType> $recordType
+     * @param RecordType|value-of<RecordType> $record_type
      */
     public static function with(
         ?string $id = null,
         ?Call $call = null,
-        ?string $createdAt = null,
+        ?string $created_at = null,
         ?Flashcall $flashcall = null,
         ?string $language = null,
         ?string $name = null,
-        RecordType|string|null $recordType = null,
+        RecordType|string|null $record_type = null,
         ?SMS $sms = null,
-        ?string $updatedAt = null,
-        ?string $webhookFailoverURL = null,
-        ?string $webhookURL = null,
+        ?string $updated_at = null,
+        ?string $webhook_failover_url = null,
+        ?string $webhook_url = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj->id = $id;
         null !== $call && $obj->call = $call;
-        null !== $createdAt && $obj->createdAt = $createdAt;
+        null !== $created_at && $obj->created_at = $created_at;
         null !== $flashcall && $obj->flashcall = $flashcall;
         null !== $language && $obj->language = $language;
         null !== $name && $obj->name = $name;
-        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $record_type && $obj['record_type'] = $record_type;
         null !== $sms && $obj->sms = $sms;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
-        null !== $webhookFailoverURL && $obj->webhookFailoverURL = $webhookFailoverURL;
-        null !== $webhookURL && $obj->webhookURL = $webhookURL;
+        null !== $updated_at && $obj->updated_at = $updated_at;
+        null !== $webhook_failover_url && $obj->webhook_failover_url = $webhook_failover_url;
+        null !== $webhook_url && $obj->webhook_url = $webhook_url;
 
         return $obj;
     }
@@ -131,7 +131,7 @@ final class VerifyProfile implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }
@@ -168,7 +168,7 @@ final class VerifyProfile implements BaseModel
     public function withRecordType(RecordType|string $recordType): self
     {
         $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
@@ -184,7 +184,7 @@ final class VerifyProfile implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $obj->updated_at = $updatedAt;
 
         return $obj;
     }
@@ -192,7 +192,7 @@ final class VerifyProfile implements BaseModel
     public function withWebhookFailoverURL(string $webhookFailoverURL): self
     {
         $obj = clone $this;
-        $obj->webhookFailoverURL = $webhookFailoverURL;
+        $obj->webhook_failover_url = $webhookFailoverURL;
 
         return $obj;
     }
@@ -200,7 +200,7 @@ final class VerifyProfile implements BaseModel
     public function withWebhookURL(string $webhookURL): self
     {
         $obj = clone $this;
-        $obj->webhookURL = $webhookURL;
+        $obj->webhook_url = $webhookURL;
 
         return $obj;
     }

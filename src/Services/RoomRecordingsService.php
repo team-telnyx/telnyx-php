@@ -11,12 +11,8 @@ use Telnyx\RoomRecordings\RoomRecordingDeleteBulkParams;
 use Telnyx\RoomRecordings\RoomRecordingDeleteBulkResponse;
 use Telnyx\RoomRecordings\RoomRecordingGetResponse;
 use Telnyx\RoomRecordings\RoomRecordingListParams;
-use Telnyx\RoomRecordings\RoomRecordingListParams\Filter;
-use Telnyx\RoomRecordings\RoomRecordingListParams\Page;
 use Telnyx\RoomRecordings\RoomRecordingListResponse;
 use Telnyx\ServiceContracts\RoomRecordingsContract;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class RoomRecordingsService implements RoomRecordingsContract
 {
@@ -50,35 +46,37 @@ final class RoomRecordingsService implements RoomRecordingsContract
      *
      * View a list of room recordings.
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[date_ended_at][eq], filter[date_ended_at][gte], filter[date_ended_at][lte], filter[date_started_at][eq], filter[date_started_at][gte], filter[date_started_at][lte], filter[room_id], filter[participant_id], filter[session_id], filter[status], filter[type], filter[duration_secs]
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param array{
+     *   filter?: array{
+     *     date_ended_at?: array{
+     *       eq?: string|\DateTimeInterface,
+     *       gte?: string|\DateTimeInterface,
+     *       lte?: string|\DateTimeInterface,
+     *     },
+     *     date_started_at?: array{
+     *       eq?: string|\DateTimeInterface,
+     *       gte?: string|\DateTimeInterface,
+     *       lte?: string|\DateTimeInterface,
+     *     },
+     *     duration_secs?: int,
+     *     participant_id?: string,
+     *     room_id?: string,
+     *     session_id?: string,
+     *     status?: string,
+     *     type?: string,
+     *   },
+     *   page?: array{number?: int, size?: int},
+     * }|RoomRecordingListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): RoomRecordingListResponse {
-        $params = ['filter' => $filter, 'page' => $page];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|RoomRecordingListParams $params,
+        ?RequestOptions $requestOptions = null,
     ): RoomRecordingListResponse {
         [$parsed, $options] = RoomRecordingListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -116,35 +114,37 @@ final class RoomRecordingsService implements RoomRecordingsContract
      *
      * Delete several room recordings in a bulk.
      *
-     * @param RoomRecordingDeleteBulkParams\Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[date_ended_at][eq], filter[date_ended_at][gte], filter[date_ended_at][lte], filter[date_started_at][eq], filter[date_started_at][gte], filter[date_started_at][lte], filter[room_id], filter[participant_id], filter[session_id], filter[status], filter[type], filter[duration_secs]
-     * @param RoomRecordingDeleteBulkParams\Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param array{
+     *   filter?: array{
+     *     date_ended_at?: array{
+     *       eq?: string|\DateTimeInterface,
+     *       gte?: string|\DateTimeInterface,
+     *       lte?: string|\DateTimeInterface,
+     *     },
+     *     date_started_at?: array{
+     *       eq?: string|\DateTimeInterface,
+     *       gte?: string|\DateTimeInterface,
+     *       lte?: string|\DateTimeInterface,
+     *     },
+     *     duration_secs?: int,
+     *     participant_id?: string,
+     *     room_id?: string,
+     *     session_id?: string,
+     *     status?: string,
+     *     type?: string,
+     *   },
+     *   page?: array{number?: int, size?: int},
+     * }|RoomRecordingDeleteBulkParams $params
      *
      * @throws APIException
      */
     public function deleteBulk(
-        $filter = omit,
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): RoomRecordingDeleteBulkResponse {
-        $params = ['filter' => $filter, 'page' => $page];
-
-        return $this->deleteBulkRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function deleteBulkRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|RoomRecordingDeleteBulkParams $params,
+        ?RequestOptions $requestOptions = null,
     ): RoomRecordingDeleteBulkResponse {
         [$parsed, $options] = RoomRecordingDeleteBulkParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

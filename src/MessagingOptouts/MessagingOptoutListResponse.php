@@ -14,7 +14,7 @@ use Telnyx\MessagingOptouts\MessagingOptoutListResponse\Data;
 
 /**
  * @phpstan-type MessagingOptoutListResponseShape = array{
- *   data?: list<Data>, meta?: PaginationMeta
+ *   data?: list<Data>|null, meta?: PaginationMeta|null
  * }
  */
 final class MessagingOptoutListResponse implements BaseModel, ResponseConverter

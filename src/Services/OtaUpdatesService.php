@@ -8,13 +8,9 @@ use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\OtaUpdates\OtaUpdateGetResponse;
 use Telnyx\OtaUpdates\OtaUpdateListParams;
-use Telnyx\OtaUpdates\OtaUpdateListParams\Filter;
-use Telnyx\OtaUpdates\OtaUpdateListParams\Page;
 use Telnyx\OtaUpdates\OtaUpdateListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\OtaUpdatesContract;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class OtaUpdatesService implements OtaUpdatesContract
 {
@@ -48,35 +44,24 @@ final class OtaUpdatesService implements OtaUpdatesContract
      *
      * List OTA updates
      *
-     * @param Filter $filter Consolidated filter parameter for OTA updates (deepObject style). Originally: filter[status], filter[sim_card_id], filter[type]
-     * @param Page $page Consolidated pagination parameter (deepObject style). Originally: page[number], page[size]
+     * @param array{
+     *   filter?: array{
+     *     sim_card_id?: string,
+     *     status?: "in-progress"|"completed"|"failed",
+     *     type?: "sim_card_network_preferences",
+     *   },
+     *   page?: array{number?: int, size?: int},
+     * }|OtaUpdateListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): OtaUpdateListResponse {
-        $params = ['filter' => $filter, 'page' => $page];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
+        array|OtaUpdateListParams $params,
         ?RequestOptions $requestOptions = null
     ): OtaUpdateListResponse {
         [$parsed, $options] = OtaUpdateListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

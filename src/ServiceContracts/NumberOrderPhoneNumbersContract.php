@@ -6,14 +6,13 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberGetResponse;
-use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberListParams\Filter;
+use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberListParams;
 use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberListResponse;
+use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberUpdateRequirementGroupParams;
 use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberUpdateRequirementGroupResponse;
+use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberUpdateRequirementsParams;
 use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberUpdateRequirementsResponse;
-use Telnyx\NumberOrderPhoneNumbers\UpdateRegulatoryRequirement;
 use Telnyx\RequestOptions;
-
-use const Telnyx\Core\OMIT as omit;
 
 interface NumberOrderPhoneNumbersContract
 {
@@ -30,76 +29,38 @@ interface NumberOrderPhoneNumbersContract
     /**
      * @api
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[country_code]
+     * @param array<mixed>|NumberOrderPhoneNumberListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        ?RequestOptions $requestOptions = null
+        array|NumberOrderPhoneNumberListParams $params,
+        ?RequestOptions $requestOptions = null,
     ): NumberOrderPhoneNumberListResponse;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): NumberOrderPhoneNumberListResponse;
-
-    /**
-     * @api
-     *
-     * @param string $requirementGroupID The ID of the requirement group to associate
+     * @param array<mixed>|NumberOrderPhoneNumberUpdateRequirementGroupParams $params
      *
      * @throws APIException
      */
     public function updateRequirementGroup(
         string $id,
-        $requirementGroupID,
-        ?RequestOptions $requestOptions = null
+        array|NumberOrderPhoneNumberUpdateRequirementGroupParams $params,
+        ?RequestOptions $requestOptions = null,
     ): NumberOrderPhoneNumberUpdateRequirementGroupResponse;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRequirementGroupRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): NumberOrderPhoneNumberUpdateRequirementGroupResponse;
-
-    /**
-     * @api
-     *
-     * @param list<UpdateRegulatoryRequirement> $regulatoryRequirements
+     * @param array<mixed>|NumberOrderPhoneNumberUpdateRequirementsParams $params
      *
      * @throws APIException
      */
     public function updateRequirements(
         string $numberOrderPhoneNumberID,
-        $regulatoryRequirements = omit,
-        ?RequestOptions $requestOptions = null,
-    ): NumberOrderPhoneNumberUpdateRequirementsResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRequirementsRaw(
-        string $numberOrderPhoneNumberID,
-        array $params,
+        array|NumberOrderPhoneNumberUpdateRequirementsParams $params,
         ?RequestOptions $requestOptions = null,
     ): NumberOrderPhoneNumberUpdateRequirementsResponse;
 }

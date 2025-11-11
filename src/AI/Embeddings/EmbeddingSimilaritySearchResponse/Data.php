@@ -25,7 +25,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * }.
  *
  * @phpstan-type DataShape = array{
- *   distance: float, documentChunk: string, metadata: Metadata
+ *   distance: float, document_chunk: string, metadata: Metadata
  * }
  */
 final class Data implements BaseModel
@@ -36,8 +36,8 @@ final class Data implements BaseModel
     #[Api]
     public float $distance;
 
-    #[Api('document_chunk')]
-    public string $documentChunk;
+    #[Api]
+    public string $document_chunk;
 
     #[Api]
     public Metadata $metadata;
@@ -47,7 +47,7 @@ final class Data implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * Data::with(distance: ..., documentChunk: ..., metadata: ...)
+     * Data::with(distance: ..., document_chunk: ..., metadata: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -68,13 +68,13 @@ final class Data implements BaseModel
      */
     public static function with(
         float $distance,
-        string $documentChunk,
+        string $document_chunk,
         Metadata $metadata
     ): self {
         $obj = new self;
 
         $obj->distance = $distance;
-        $obj->documentChunk = $documentChunk;
+        $obj->document_chunk = $document_chunk;
         $obj->metadata = $metadata;
 
         return $obj;
@@ -91,7 +91,7 @@ final class Data implements BaseModel
     public function withDocumentChunk(string $documentChunk): self
     {
         $obj = clone $this;
-        $obj->documentChunk = $documentChunk;
+        $obj->document_chunk = $documentChunk;
 
         return $obj;
     }

@@ -14,7 +14,7 @@ use Telnyx\PublicInternetGateways\PublicInternetGatewayListResponse\Data;
 
 /**
  * @phpstan-type PublicInternetGatewayListResponseShape = array{
- *   data?: list<Data>, meta?: PaginationMeta
+ *   data?: list<Data>|null, meta?: PaginationMeta|null
  * }
  */
 final class PublicInternetGatewayListResponse implements BaseModel, ResponseConverter

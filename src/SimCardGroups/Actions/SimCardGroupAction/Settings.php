@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * A JSON object representation of the action params.
  *
- * @phpstan-type SettingsShape = array{privateWirelessGatewayID?: string}
+ * @phpstan-type SettingsShape = array{private_wireless_gateway_id?: string|null}
  */
 final class Settings implements BaseModel
 {
@@ -21,8 +21,8 @@ final class Settings implements BaseModel
     /**
      * The identification of the related Private Wireless Gateway resource.
      */
-    #[Api('private_wireless_gateway_id', optional: true)]
-    public ?string $privateWirelessGatewayID;
+    #[Api(optional: true)]
+    public ?string $private_wireless_gateway_id;
 
     public function __construct()
     {
@@ -34,11 +34,12 @@ final class Settings implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?string $privateWirelessGatewayID = null): self
-    {
+    public static function with(
+        ?string $private_wireless_gateway_id = null
+    ): self {
         $obj = new self;
 
-        null !== $privateWirelessGatewayID && $obj->privateWirelessGatewayID = $privateWirelessGatewayID;
+        null !== $private_wireless_gateway_id && $obj->private_wireless_gateway_id = $private_wireless_gateway_id;
 
         return $obj;
     }
@@ -50,7 +51,7 @@ final class Settings implements BaseModel
         string $privateWirelessGatewayID
     ): self {
         $obj = clone $this;
-        $obj->privateWirelessGatewayID = $privateWirelessGatewayID;
+        $obj->private_wireless_gateway_id = $privateWirelessGatewayID;
 
         return $obj;
     }

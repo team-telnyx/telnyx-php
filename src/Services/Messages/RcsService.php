@@ -11,8 +11,6 @@ use Telnyx\Messages\Rcs\RcGenerateDeeplinkResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Messages\RcsContract;
 
-use const Telnyx\Core\OMIT as omit;
-
 final class RcsService implements RcsContract
 {
     /**
@@ -25,37 +23,20 @@ final class RcsService implements RcsContract
      *
      * Generate a deeplink URL that can be used to start an RCS conversation with a specific agent.
      *
-     * @param string $body Pre-filled message body (URL encoded)
-     * @param string $phoneNumber Phone number in E164 format (URL encoded)
+     * @param array{
+     *   body?: string, phone_number?: string
+     * }|RcGenerateDeeplinkParams $params
      *
      * @throws APIException
      */
     public function generateDeeplink(
         string $agentID,
-        $body = omit,
-        $phoneNumber = omit,
+        array|RcGenerateDeeplinkParams $params,
         ?RequestOptions $requestOptions = null,
-    ): RcGenerateDeeplinkResponse {
-        $params = ['body' => $body, 'phoneNumber' => $phoneNumber];
-
-        return $this->generateDeeplinkRaw($agentID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function generateDeeplinkRaw(
-        string $agentID,
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): RcGenerateDeeplinkResponse {
         [$parsed, $options] = RcGenerateDeeplinkParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

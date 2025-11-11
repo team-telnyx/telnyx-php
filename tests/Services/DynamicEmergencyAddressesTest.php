@@ -33,14 +33,14 @@ final class DynamicEmergencyAddressesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->dynamicEmergencyAddresses->create(
-            administrativeArea: 'TX',
-            countryCode: 'US',
-            houseNumber: 'house_number',
-            locality: 'Austin',
-            postalCode: '78701',
-            streetName: 'Congress',
-        );
+        $result = $this->client->dynamicEmergencyAddresses->create([
+            'administrative_area' => 'TX',
+            'country_code' => 'US',
+            'house_number' => 'house_number',
+            'locality' => 'Austin',
+            'postal_code' => '78701',
+            'street_name' => 'Congress',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -52,14 +52,14 @@ final class DynamicEmergencyAddressesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->dynamicEmergencyAddresses->create(
-            administrativeArea: 'TX',
-            countryCode: 'US',
-            houseNumber: 'house_number',
-            locality: 'Austin',
-            postalCode: '78701',
-            streetName: 'Congress',
-        );
+        $result = $this->client->dynamicEmergencyAddresses->create([
+            'administrative_area' => 'TX',
+            'country_code' => 'US',
+            'house_number' => 'house_number',
+            'locality' => 'Austin',
+            'postal_code' => '78701',
+            'street_name' => 'Congress',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -85,7 +85,7 @@ final class DynamicEmergencyAddressesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->dynamicEmergencyAddresses->list();
+        $result = $this->client->dynamicEmergencyAddresses->list([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type NameShape = array{contains?: string}
+ * @phpstan-type NameShape = array{contains?: string|null}
  */
 final class Name implements BaseModel
 {

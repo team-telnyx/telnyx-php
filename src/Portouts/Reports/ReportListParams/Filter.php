@@ -14,7 +14,7 @@ use Telnyx\Portouts\Reports\ReportListParams\Filter\Status;
  * Consolidated filter parameter (deepObject style). Originally: filter[report_type], filter[status].
  *
  * @phpstan-type FilterShape = array{
- *   reportType?: value-of<ReportType>, status?: value-of<Status>
+ *   report_type?: value-of<ReportType>|null, status?: value-of<Status>|null
  * }
  */
 final class Filter implements BaseModel
@@ -25,10 +25,10 @@ final class Filter implements BaseModel
     /**
      * Filter reports of a specific type.
      *
-     * @var value-of<ReportType>|null $reportType
+     * @var value-of<ReportType>|null $report_type
      */
-    #[Api('report_type', enum: ReportType::class, optional: true)]
-    public ?string $reportType;
+    #[Api(enum: ReportType::class, optional: true)]
+    public ?string $report_type;
 
     /**
      * Filter reports of a specific status.
@@ -48,16 +48,16 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ReportType|value-of<ReportType> $reportType
+     * @param ReportType|value-of<ReportType> $report_type
      * @param Status|value-of<Status> $status
      */
     public static function with(
-        ReportType|string|null $reportType = null,
+        ReportType|string|null $report_type = null,
         Status|string|null $status = null
     ): self {
         $obj = new self;
 
-        null !== $reportType && $obj['reportType'] = $reportType;
+        null !== $report_type && $obj['report_type'] = $report_type;
         null !== $status && $obj['status'] = $status;
 
         return $obj;
@@ -71,7 +71,7 @@ final class Filter implements BaseModel
     public function withReportType(ReportType|string $reportType): self
     {
         $obj = clone $this;
-        $obj['reportType'] = $reportType;
+        $obj['report_type'] = $reportType;
 
         return $obj;
     }

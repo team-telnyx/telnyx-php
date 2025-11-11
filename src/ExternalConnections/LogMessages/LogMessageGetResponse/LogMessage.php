@@ -12,7 +12,11 @@ use Telnyx\ExternalConnections\LogMessages\LogMessageGetResponse\LogMessage\Sour
 
 /**
  * @phpstan-type LogMessageShape = array{
- *   code: string, title: string, detail?: string, meta?: Meta, source?: Source
+ *   code: string,
+ *   title: string,
+ *   detail?: string|null,
+ *   meta?: Meta|null,
+ *   source?: Source|null,
  * }
  */
 final class LogMessage implements BaseModel

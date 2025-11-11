@@ -5,42 +5,25 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\NumberReservations\NumberReservationCreateParams;
 use Telnyx\NumberReservations\NumberReservationGetResponse;
-use Telnyx\NumberReservations\NumberReservationListParams\Filter;
-use Telnyx\NumberReservations\NumberReservationListParams\Page;
+use Telnyx\NumberReservations\NumberReservationListParams;
 use Telnyx\NumberReservations\NumberReservationListResponse;
 use Telnyx\NumberReservations\NumberReservationNewResponse;
-use Telnyx\NumberReservations\ReservedPhoneNumber;
 use Telnyx\RequestOptions;
-
-use const Telnyx\Core\OMIT as omit;
 
 interface NumberReservationsContract
 {
     /**
      * @api
      *
-     * @param string $customerReference a customer reference string for customer look ups
-     * @param list<ReservedPhoneNumber> $phoneNumbers
+     * @param array<mixed>|NumberReservationCreateParams $params
      *
      * @throws APIException
      */
     public function create(
-        $customerReference = omit,
-        $phoneNumbers = omit,
+        array|NumberReservationCreateParams $params,
         ?RequestOptions $requestOptions = null,
-    ): NumberReservationNewResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): NumberReservationNewResponse;
 
     /**
@@ -56,26 +39,12 @@ interface NumberReservationsContract
     /**
      * @api
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[status], filter[created_at], filter[phone_numbers.phone_number], filter[customer_reference]
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param array<mixed>|NumberReservationListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): NumberReservationListResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|NumberReservationListParams $params,
+        ?RequestOptions $requestOptions = null,
     ): NumberReservationListResponse;
 }

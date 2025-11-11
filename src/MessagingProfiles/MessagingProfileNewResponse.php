@@ -11,7 +11,9 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type MessagingProfileNewResponseShape = array{data?: MessagingProfile}
+ * @phpstan-type MessagingProfileNewResponseShape = array{
+ *   data?: MessagingProfile|null
+ * }
  */
 final class MessagingProfileNewResponse implements BaseModel, ResponseConverter
 {

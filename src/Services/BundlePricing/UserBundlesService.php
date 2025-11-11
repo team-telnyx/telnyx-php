@@ -5,13 +5,10 @@ declare(strict_types=1);
 namespace Telnyx\Services\BundlePricing;
 
 use Telnyx\BundlePricing\UserBundles\UserBundleCreateParams;
-use Telnyx\BundlePricing\UserBundles\UserBundleCreateParams\Item;
 use Telnyx\BundlePricing\UserBundles\UserBundleDeactivateParams;
 use Telnyx\BundlePricing\UserBundles\UserBundleDeactivateResponse;
 use Telnyx\BundlePricing\UserBundles\UserBundleGetResponse;
 use Telnyx\BundlePricing\UserBundles\UserBundleListParams;
-use Telnyx\BundlePricing\UserBundles\UserBundleListParams\Filter;
-use Telnyx\BundlePricing\UserBundles\UserBundleListParams\Page;
 use Telnyx\BundlePricing\UserBundles\UserBundleListResourcesParams;
 use Telnyx\BundlePricing\UserBundles\UserBundleListResourcesResponse;
 use Telnyx\BundlePricing\UserBundles\UserBundleListResponse;
@@ -23,8 +20,6 @@ use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\BundlePricing\UserBundlesContract;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class UserBundlesService implements UserBundlesContract
 {
@@ -38,41 +33,21 @@ final class UserBundlesService implements UserBundlesContract
      *
      * Creates multiple user bundles for the user.
      *
-     * @param string $idempotencyKey Idempotency key for the request. Can be any UUID, but should always be unique for each request.
-     * @param list<Item> $items
-     * @param string $authorizationBearer Authenticates the request with your Telnyx API V2 KEY
+     * @param array{
+     *   idempotency_key?: string,
+     *   items?: list<array{billing_bundle_id: string, quantity: int}>,
+     *   authorization_bearer?: string,
+     * }|UserBundleCreateParams $params
      *
      * @throws APIException
      */
     public function create(
-        $idempotencyKey = omit,
-        $items = omit,
-        $authorizationBearer = omit,
-        ?RequestOptions $requestOptions = null,
-    ): UserBundleNewResponse {
-        $params = [
-            'idempotencyKey' => $idempotencyKey,
-            'items' => $items,
-            'authorizationBearer' => $authorizationBearer,
-        ];
-
-        return $this->createRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
+        array|UserBundleCreateParams $params,
         ?RequestOptions $requestOptions = null
     ): UserBundleNewResponse {
         [$parsed, $options] = UserBundleCreateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
         $header_params = ['authorization_bearer' => 'authorization_bearer'];
 
@@ -92,35 +67,18 @@ final class UserBundlesService implements UserBundlesContract
      *
      * Retrieves a user bundle by its ID.
      *
-     * @param string $authorizationBearer Authenticates the request with your Telnyx API V2 KEY
+     * @param array{authorization_bearer?: string}|UserBundleRetrieveParams $params
      *
      * @throws APIException
      */
     public function retrieve(
         string $userBundleID,
-        $authorizationBearer = omit,
+        array|UserBundleRetrieveParams $params,
         ?RequestOptions $requestOptions = null,
-    ): UserBundleGetResponse {
-        $params = ['authorizationBearer' => $authorizationBearer];
-
-        return $this->retrieveRaw($userBundleID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $userBundleID,
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): UserBundleGetResponse {
         [$parsed, $options] = UserBundleRetrieveParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -138,45 +96,25 @@ final class UserBundlesService implements UserBundlesContract
      *
      * Get a paginated list of user bundles.
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Supports filtering by country_iso and resource. Examples: filter[country_iso]=US or filter[resource]=+15617819942
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
-     * @param string $authorizationBearer Authenticates the request with your Telnyx API V2 KEY
+     * @param array{
+     *   filter?: array{country_iso?: list<string>, resource?: list<string>},
+     *   page?: array{number?: int, size?: int},
+     *   authorization_bearer?: string,
+     * }|UserBundleListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
-        $authorizationBearer = omit,
-        ?RequestOptions $requestOptions = null,
-    ): UserBundleListResponse {
-        $params = [
-            'filter' => $filter,
-            'page' => $page,
-            'authorizationBearer' => $authorizationBearer,
-        ];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
+        array|UserBundleListParams $params,
         ?RequestOptions $requestOptions = null
     ): UserBundleListResponse {
         [$parsed, $options] = UserBundleListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
         $query_params = array_flip(['filter', 'page']);
 
-        /** @var array<string, string> */
+        /** @var array<string,string> */
         $header_params = array_diff_key($parsed, $query_params);
 
         // @phpstan-ignore-next-line;
@@ -195,35 +133,18 @@ final class UserBundlesService implements UserBundlesContract
      *
      * Deactivates a user bundle by its ID.
      *
-     * @param string $authorizationBearer Authenticates the request with your Telnyx API V2 KEY
+     * @param array{authorization_bearer?: string}|UserBundleDeactivateParams $params
      *
      * @throws APIException
      */
     public function deactivate(
         string $userBundleID,
-        $authorizationBearer = omit,
+        array|UserBundleDeactivateParams $params,
         ?RequestOptions $requestOptions = null,
-    ): UserBundleDeactivateResponse {
-        $params = ['authorizationBearer' => $authorizationBearer];
-
-        return $this->deactivateRaw($userBundleID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function deactivateRaw(
-        string $userBundleID,
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): UserBundleDeactivateResponse {
         [$parsed, $options] = UserBundleDeactivateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -241,35 +162,20 @@ final class UserBundlesService implements UserBundlesContract
      *
      * Retrieves the resources of a user bundle by its ID.
      *
-     * @param string $authorizationBearer Authenticates the request with your Telnyx API V2 KEY
+     * @param array{
+     *   authorization_bearer?: string
+     * }|UserBundleListResourcesParams $params
      *
      * @throws APIException
      */
     public function listResources(
         string $userBundleID,
-        $authorizationBearer = omit,
+        array|UserBundleListResourcesParams $params,
         ?RequestOptions $requestOptions = null,
-    ): UserBundleListResourcesResponse {
-        $params = ['authorizationBearer' => $authorizationBearer];
-
-        return $this->listResourcesRaw($userBundleID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listResourcesRaw(
-        string $userBundleID,
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): UserBundleListResourcesResponse {
         [$parsed, $options] = UserBundleListResourcesParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -287,41 +193,24 @@ final class UserBundlesService implements UserBundlesContract
      *
      * Returns all user bundles that aren't in use.
      *
-     * @param UserBundleListUnusedParams\Filter $filter Consolidated filter parameter (deepObject style). Supports filtering by country_iso and resource. Examples: filter[country_iso]=US or filter[resource]=+15617819942
-     * @param string $authorizationBearer Authenticates the request with your Telnyx API V2 KEY
+     * @param array{
+     *   filter?: array{country_iso?: list<string>, resource?: list<string>},
+     *   authorization_bearer?: string,
+     * }|UserBundleListUnusedParams $params
      *
      * @throws APIException
      */
     public function listUnused(
-        $filter = omit,
-        $authorizationBearer = omit,
+        array|UserBundleListUnusedParams $params,
         ?RequestOptions $requestOptions = null,
-    ): UserBundleListUnusedResponse {
-        $params = [
-            'filter' => $filter, 'authorizationBearer' => $authorizationBearer,
-        ];
-
-        return $this->listUnusedRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listUnusedRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): UserBundleListUnusedResponse {
         [$parsed, $options] = UserBundleListUnusedParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
         $query_params = ['filter'];
 
-        /** @var array<string, string> */
+        /** @var array<string,string> */
         $header_params = array_diff_key($parsed, $query_params);
 
         // @phpstan-ignore-next-line;

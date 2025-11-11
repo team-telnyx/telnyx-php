@@ -33,11 +33,11 @@ final class FqdnsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->fqdns->create(
-            connectionID: '1516447646313612565',
-            dnsRecordType: 'a',
-            fqdn: 'example.com',
-        );
+        $result = $this->client->fqdns->create([
+            'connection_id' => '1516447646313612565',
+            'dns_record_type' => 'a',
+            'fqdn' => 'example.com',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -49,11 +49,11 @@ final class FqdnsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->fqdns->create(
-            connectionID: '1516447646313612565',
-            dnsRecordType: 'a',
-            fqdn: 'example.com',
-        );
+        $result = $this->client->fqdns->create([
+            'connection_id' => '1516447646313612565',
+            'dns_record_type' => 'a',
+            'fqdn' => 'example.com',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -77,7 +77,7 @@ final class FqdnsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->fqdns->update('id');
+        $result = $this->client->fqdns->update('id', []);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -89,7 +89,7 @@ final class FqdnsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->fqdns->list();
+        $result = $this->client->fqdns->list([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

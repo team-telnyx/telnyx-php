@@ -10,7 +10,10 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type MediaShape = array{
- *   contentType?: string, hashSha256?: string, size?: int, url?: string
+ *   content_type?: string|null,
+ *   hash_sha256?: string|null,
+ *   size?: int|null,
+ *   url?: string|null,
  * }
  */
 final class Media implements BaseModel
@@ -21,14 +24,14 @@ final class Media implements BaseModel
     /**
      * The MIME type of the requested media.
      */
-    #[Api('content_type', optional: true)]
-    public ?string $contentType;
+    #[Api(optional: true)]
+    public ?string $content_type;
 
     /**
      * The SHA256 hash of the requested media.
      */
-    #[Api('hash_sha256', optional: true)]
-    public ?string $hashSha256;
+    #[Api(optional: true)]
+    public ?string $hash_sha256;
 
     /**
      * The size of the requested media.
@@ -53,15 +56,15 @@ final class Media implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $contentType = null,
-        ?string $hashSha256 = null,
+        ?string $content_type = null,
+        ?string $hash_sha256 = null,
         ?int $size = null,
         ?string $url = null,
     ): self {
         $obj = new self;
 
-        null !== $contentType && $obj->contentType = $contentType;
-        null !== $hashSha256 && $obj->hashSha256 = $hashSha256;
+        null !== $content_type && $obj->content_type = $content_type;
+        null !== $hash_sha256 && $obj->hash_sha256 = $hash_sha256;
         null !== $size && $obj->size = $size;
         null !== $url && $obj->url = $url;
 
@@ -74,7 +77,7 @@ final class Media implements BaseModel
     public function withContentType(string $contentType): self
     {
         $obj = clone $this;
-        $obj->contentType = $contentType;
+        $obj->content_type = $contentType;
 
         return $obj;
     }
@@ -85,7 +88,7 @@ final class Media implements BaseModel
     public function withHashSha256(string $hashSha256): self
     {
         $obj = clone $this;
-        $obj->hashSha256 = $hashSha256;
+        $obj->hash_sha256 = $hashSha256;
 
         return $obj;
     }

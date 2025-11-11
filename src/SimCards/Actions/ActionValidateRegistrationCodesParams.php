@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\SimCards\Actions->validateRegistrationCodes
  *
  * @phpstan-type ActionValidateRegistrationCodesParamsShape = array{
- *   registrationCodes?: list<string>
+ *   registration_codes?: list<string>
  * }
  */
 final class ActionValidateRegistrationCodesParams implements BaseModel
@@ -24,9 +24,9 @@ final class ActionValidateRegistrationCodesParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    /** @var list<string>|null $registrationCodes */
-    #[Api('registration_codes', list: 'string', optional: true)]
-    public ?array $registrationCodes;
+    /** @var list<string>|null $registration_codes */
+    #[Api(list: 'string', optional: true)]
+    public ?array $registration_codes;
 
     public function __construct()
     {
@@ -38,13 +38,13 @@ final class ActionValidateRegistrationCodesParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $registrationCodes
+     * @param list<string> $registration_codes
      */
-    public static function with(?array $registrationCodes = null): self
+    public static function with(?array $registration_codes = null): self
     {
         $obj = new self;
 
-        null !== $registrationCodes && $obj->registrationCodes = $registrationCodes;
+        null !== $registration_codes && $obj->registration_codes = $registration_codes;
 
         return $obj;
     }
@@ -55,7 +55,7 @@ final class ActionValidateRegistrationCodesParams implements BaseModel
     public function withRegistrationCodes(array $registrationCodes): self
     {
         $obj = clone $this;
-        $obj->registrationCodes = $registrationCodes;
+        $obj->registration_codes = $registrationCodes;
 
         return $obj;
     }

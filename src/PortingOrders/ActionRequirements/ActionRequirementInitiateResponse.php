@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateResponse\Data;
 
 /**
- * @phpstan-type ActionRequirementInitiateResponseShape = array{data?: Data}
+ * @phpstan-type ActionRequirementInitiateResponseShape = array{data?: Data|null}
  */
 final class ActionRequirementInitiateResponse implements BaseModel, ResponseConverter
 {

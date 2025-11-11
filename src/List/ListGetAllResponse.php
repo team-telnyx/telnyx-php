@@ -14,7 +14,7 @@ use Telnyx\List\ListGetAllResponse\Data;
 
 /**
  * @phpstan-type ListGetAllResponseShape = array{
- *   data?: list<Data>, meta?: PaginationMeta
+ *   data?: list<Data>|null, meta?: PaginationMeta|null
  * }
  */
 final class ListGetAllResponse implements BaseModel, ResponseConverter

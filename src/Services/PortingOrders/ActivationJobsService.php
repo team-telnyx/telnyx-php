@@ -8,15 +8,12 @@ use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\PortingOrders\ActivationJobs\ActivationJobGetResponse;
 use Telnyx\PortingOrders\ActivationJobs\ActivationJobListParams;
-use Telnyx\PortingOrders\ActivationJobs\ActivationJobListParams\Page;
 use Telnyx\PortingOrders\ActivationJobs\ActivationJobListResponse;
 use Telnyx\PortingOrders\ActivationJobs\ActivationJobRetrieveParams;
 use Telnyx\PortingOrders\ActivationJobs\ActivationJobUpdateParams;
 use Telnyx\PortingOrders\ActivationJobs\ActivationJobUpdateResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PortingOrders\ActivationJobsContract;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class ActivationJobsService implements ActivationJobsContract
 {
@@ -30,35 +27,18 @@ final class ActivationJobsService implements ActivationJobsContract
      *
      * Returns a porting activation job.
      *
-     * @param string $id
+     * @param array{id: string}|ActivationJobRetrieveParams $params
      *
      * @throws APIException
      */
     public function retrieve(
         string $activationJobID,
-        $id,
-        ?RequestOptions $requestOptions = null
-    ): ActivationJobGetResponse {
-        $params = ['id' => $id];
-
-        return $this->retrieveRaw($activationJobID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $activationJobID,
-        array $params,
+        array|ActivationJobRetrieveParams $params,
         ?RequestOptions $requestOptions = null,
     ): ActivationJobGetResponse {
         [$parsed, $options] = ActivationJobRetrieveParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
         $id = $parsed['id'];
         unset($parsed['id']);
@@ -77,37 +57,20 @@ final class ActivationJobsService implements ActivationJobsContract
      *
      * Updates the activation time of a porting activation job.
      *
-     * @param string $id
-     * @param \DateTimeInterface $activateAt The desired activation time. The activation time should be between any of the activation windows.
+     * @param array{
+     *   id: string, activate_at?: string|\DateTimeInterface
+     * }|ActivationJobUpdateParams $params
      *
      * @throws APIException
      */
     public function update(
         string $activationJobID,
-        $id,
-        $activateAt = omit,
-        ?RequestOptions $requestOptions = null,
-    ): ActivationJobUpdateResponse {
-        $params = ['id' => $id, 'activateAt' => $activateAt];
-
-        return $this->updateRaw($activationJobID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $activationJobID,
-        array $params,
+        array|ActivationJobUpdateParams $params,
         ?RequestOptions $requestOptions = null,
     ): ActivationJobUpdateResponse {
         [$parsed, $options] = ActivationJobUpdateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
         $id = $parsed['id'];
         unset($parsed['id']);
@@ -127,35 +90,20 @@ final class ActivationJobsService implements ActivationJobsContract
      *
      * Returns a list of your porting activation jobs.
      *
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param array{
+     *   page?: array{number?: int, size?: int}
+     * }|ActivationJobListParams $params
      *
      * @throws APIException
      */
     public function list(
         string $id,
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): ActivationJobListResponse {
-        $params = ['page' => $page];
-
-        return $this->listRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|ActivationJobListParams $params,
+        ?RequestOptions $requestOptions = null,
     ): ActivationJobListResponse {
         [$parsed, $options] = ActivationJobListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

@@ -17,8 +17,8 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type ClusterComputeParamsShape = array{
  *   bucket: string,
  *   files?: list<string>,
- *   minClusterSize?: int,
- *   minSubclusterSize?: int,
+ *   min_cluster_size?: int,
+ *   min_subcluster_size?: int,
  *   prefix?: string,
  * }
  */
@@ -45,14 +45,14 @@ final class ClusterComputeParams implements BaseModel
     /**
      * Smallest number of related text chunks to qualify as a cluster. Top-level clusters should be thought of as identifying broad themes in your data.
      */
-    #[Api('min_cluster_size', optional: true)]
-    public ?int $minClusterSize;
+    #[Api(optional: true)]
+    public ?int $min_cluster_size;
 
     /**
      * Smallest number of related text chunks to qualify as a sub-cluster. Sub-clusters should be thought of as identifying more specific topics within a broader theme.
      */
-    #[Api('min_subcluster_size', optional: true)]
-    public ?int $minSubclusterSize;
+    #[Api(optional: true)]
+    public ?int $min_subcluster_size;
 
     /**
      * Prefix to filter whcih files in the buckets are included.
@@ -89,8 +89,8 @@ final class ClusterComputeParams implements BaseModel
     public static function with(
         string $bucket,
         ?array $files = null,
-        ?int $minClusterSize = null,
-        ?int $minSubclusterSize = null,
+        ?int $min_cluster_size = null,
+        ?int $min_subcluster_size = null,
         ?string $prefix = null,
     ): self {
         $obj = new self;
@@ -98,8 +98,8 @@ final class ClusterComputeParams implements BaseModel
         $obj->bucket = $bucket;
 
         null !== $files && $obj->files = $files;
-        null !== $minClusterSize && $obj->minClusterSize = $minClusterSize;
-        null !== $minSubclusterSize && $obj->minSubclusterSize = $minSubclusterSize;
+        null !== $min_cluster_size && $obj->min_cluster_size = $min_cluster_size;
+        null !== $min_subcluster_size && $obj->min_subcluster_size = $min_subcluster_size;
         null !== $prefix && $obj->prefix = $prefix;
 
         return $obj;
@@ -135,7 +135,7 @@ final class ClusterComputeParams implements BaseModel
     public function withMinClusterSize(int $minClusterSize): self
     {
         $obj = clone $this;
-        $obj->minClusterSize = $minClusterSize;
+        $obj->min_cluster_size = $minClusterSize;
 
         return $obj;
     }
@@ -146,7 +146,7 @@ final class ClusterComputeParams implements BaseModel
     public function withMinSubclusterSize(int $minSubclusterSize): self
     {
         $obj = clone $this;
-        $obj->minSubclusterSize = $minSubclusterSize;
+        $obj->min_subcluster_size = $minSubclusterSize;
 
         return $obj;
     }

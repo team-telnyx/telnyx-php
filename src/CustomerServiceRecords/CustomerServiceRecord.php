@@ -12,14 +12,14 @@ use Telnyx\CustomerServiceRecords\CustomerServiceRecord\Status;
 
 /**
  * @phpstan-type CustomerServiceRecordShape = array{
- *   id?: string,
- *   createdAt?: \DateTimeInterface,
- *   errorMessage?: string,
- *   phoneNumber?: string,
- *   recordType?: string,
- *   result?: Result,
- *   status?: value-of<Status>,
- *   updatedAt?: \DateTimeInterface,
+ *   id?: string|null,
+ *   created_at?: \DateTimeInterface|null,
+ *   error_message?: string|null,
+ *   phone_number?: string|null,
+ *   record_type?: string|null,
+ *   result?: Result|null,
+ *   status?: value-of<Status>|null,
+ *   updated_at?: \DateTimeInterface|null,
  * }
  */
 final class CustomerServiceRecord implements BaseModel
@@ -36,26 +36,26 @@ final class CustomerServiceRecord implements BaseModel
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Api('created_at', optional: true)]
-    public ?\DateTimeInterface $createdAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $created_at;
 
     /**
      * The error message in case status is `failed`. This field would be null in case of `pending` or `completed` status.
      */
-    #[Api('error_message', optional: true)]
-    public ?string $errorMessage;
+    #[Api(optional: true)]
+    public ?string $error_message;
 
     /**
      * The phone number of the customer service record.
      */
-    #[Api('phone_number', optional: true)]
-    public ?string $phoneNumber;
+    #[Api(optional: true)]
+    public ?string $phone_number;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api('record_type', optional: true)]
-    public ?string $recordType;
+    #[Api(optional: true)]
+    public ?string $record_type;
 
     /**
      * The result of the CSR request. This field would be null in case of `pending` or `failed` status.
@@ -74,8 +74,8 @@ final class CustomerServiceRecord implements BaseModel
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Api('updated_at', optional: true)]
-    public ?\DateTimeInterface $updatedAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $updated_at;
 
     public function __construct()
     {
@@ -91,24 +91,24 @@ final class CustomerServiceRecord implements BaseModel
      */
     public static function with(
         ?string $id = null,
-        ?\DateTimeInterface $createdAt = null,
-        ?string $errorMessage = null,
-        ?string $phoneNumber = null,
-        ?string $recordType = null,
+        ?\DateTimeInterface $created_at = null,
+        ?string $error_message = null,
+        ?string $phone_number = null,
+        ?string $record_type = null,
         ?Result $result = null,
         Status|string|null $status = null,
-        ?\DateTimeInterface $updatedAt = null,
+        ?\DateTimeInterface $updated_at = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj->id = $id;
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $errorMessage && $obj->errorMessage = $errorMessage;
-        null !== $phoneNumber && $obj->phoneNumber = $phoneNumber;
-        null !== $recordType && $obj->recordType = $recordType;
+        null !== $created_at && $obj->created_at = $created_at;
+        null !== $error_message && $obj->error_message = $error_message;
+        null !== $phone_number && $obj->phone_number = $phone_number;
+        null !== $record_type && $obj->record_type = $record_type;
         null !== $result && $obj->result = $result;
         null !== $status && $obj['status'] = $status;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
+        null !== $updated_at && $obj->updated_at = $updated_at;
 
         return $obj;
     }
@@ -130,7 +130,7 @@ final class CustomerServiceRecord implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }
@@ -141,7 +141,7 @@ final class CustomerServiceRecord implements BaseModel
     public function withErrorMessage(string $errorMessage): self
     {
         $obj = clone $this;
-        $obj->errorMessage = $errorMessage;
+        $obj->error_message = $errorMessage;
 
         return $obj;
     }
@@ -152,7 +152,7 @@ final class CustomerServiceRecord implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj->phoneNumber = $phoneNumber;
+        $obj->phone_number = $phoneNumber;
 
         return $obj;
     }
@@ -163,7 +163,7 @@ final class CustomerServiceRecord implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType;
+        $obj->record_type = $recordType;
 
         return $obj;
     }
@@ -198,7 +198,7 @@ final class CustomerServiceRecord implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $obj->updated_at = $updatedAt;
 
         return $obj;
     }

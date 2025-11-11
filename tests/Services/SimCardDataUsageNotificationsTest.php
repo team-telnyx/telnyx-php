@@ -6,7 +6,6 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationCreateParams\Threshold;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -34,10 +33,9 @@ final class SimCardDataUsageNotificationsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->simCardDataUsageNotifications->create(
-            simCardID: '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
-            threshold: (new Threshold),
-        );
+        $result = $this->client->simCardDataUsageNotifications->create([
+            'sim_card_id' => '6a09cdc3-8948-47f0-aa62-74ac943d6c58', 'threshold' => [],
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -49,10 +47,10 @@ final class SimCardDataUsageNotificationsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->simCardDataUsageNotifications->create(
-            simCardID: '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
-            threshold: (new Threshold)->withAmount('2048.1')->withUnit('MB'),
-        );
+        $result = $this->client->simCardDataUsageNotifications->create([
+            'sim_card_id' => '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
+            'threshold' => ['amount' => '2048.1', 'unit' => 'MB'],
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -79,7 +77,8 @@ final class SimCardDataUsageNotificationsTest extends TestCase
         }
 
         $result = $this->client->simCardDataUsageNotifications->update(
-            '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
+            '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
+            []
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -92,7 +91,7 @@ final class SimCardDataUsageNotificationsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->simCardDataUsageNotifications->list();
+        $result = $this->client->simCardDataUsageNotifications->list([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

@@ -10,7 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type LocationShape = array{
- *   code?: string, name?: string, pop?: string, region?: string, site?: string
+ *   code?: string|null,
+ *   name?: string|null,
+ *   pop?: string|null,
+ *   region?: string|null,
+ *   site?: string|null,
  * }
  */
 final class Location implements BaseModel

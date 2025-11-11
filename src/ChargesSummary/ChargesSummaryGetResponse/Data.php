@@ -13,12 +13,12 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * @phpstan-type DataShape = array{
  *   currency: string,
- *   endDate: \DateTimeInterface,
- *   startDate: \DateTimeInterface,
+ *   end_date: \DateTimeInterface,
+ *   start_date: \DateTimeInterface,
  *   summary: Summary,
  *   total: Total,
- *   userEmail: string,
- *   userID: string,
+ *   user_email: string,
+ *   user_id: string,
  * }
  */
 final class Data implements BaseModel
@@ -35,14 +35,14 @@ final class Data implements BaseModel
     /**
      * End date of the summary period.
      */
-    #[Api('end_date')]
-    public \DateTimeInterface $endDate;
+    #[Api]
+    public \DateTimeInterface $end_date;
 
     /**
      * Start date of the summary period.
      */
-    #[Api('start_date')]
-    public \DateTimeInterface $startDate;
+    #[Api]
+    public \DateTimeInterface $start_date;
 
     #[Api]
     public Summary $summary;
@@ -53,14 +53,14 @@ final class Data implements BaseModel
     /**
      * User email address.
      */
-    #[Api('user_email')]
-    public string $userEmail;
+    #[Api]
+    public string $user_email;
 
     /**
      * User identifier.
      */
-    #[Api('user_id')]
-    public string $userID;
+    #[Api]
+    public string $user_id;
 
     /**
      * `new Data()` is missing required properties by the API.
@@ -69,12 +69,12 @@ final class Data implements BaseModel
      * ```
      * Data::with(
      *   currency: ...,
-     *   endDate: ...,
-     *   startDate: ...,
+     *   end_date: ...,
+     *   start_date: ...,
      *   summary: ...,
      *   total: ...,
-     *   userEmail: ...,
-     *   userID: ...,
+     *   user_email: ...,
+     *   user_id: ...,
      * )
      * ```
      *
@@ -103,22 +103,22 @@ final class Data implements BaseModel
      */
     public static function with(
         string $currency,
-        \DateTimeInterface $endDate,
-        \DateTimeInterface $startDate,
+        \DateTimeInterface $end_date,
+        \DateTimeInterface $start_date,
         Summary $summary,
         Total $total,
-        string $userEmail,
-        string $userID,
+        string $user_email,
+        string $user_id,
     ): self {
         $obj = new self;
 
         $obj->currency = $currency;
-        $obj->endDate = $endDate;
-        $obj->startDate = $startDate;
+        $obj->end_date = $end_date;
+        $obj->start_date = $start_date;
         $obj->summary = $summary;
         $obj->total = $total;
-        $obj->userEmail = $userEmail;
-        $obj->userID = $userID;
+        $obj->user_email = $user_email;
+        $obj->user_id = $user_id;
 
         return $obj;
     }
@@ -140,7 +140,7 @@ final class Data implements BaseModel
     public function withEndDate(\DateTimeInterface $endDate): self
     {
         $obj = clone $this;
-        $obj->endDate = $endDate;
+        $obj->end_date = $endDate;
 
         return $obj;
     }
@@ -151,7 +151,7 @@ final class Data implements BaseModel
     public function withStartDate(\DateTimeInterface $startDate): self
     {
         $obj = clone $this;
-        $obj->startDate = $startDate;
+        $obj->start_date = $startDate;
 
         return $obj;
     }
@@ -178,7 +178,7 @@ final class Data implements BaseModel
     public function withUserEmail(string $userEmail): self
     {
         $obj = clone $this;
-        $obj->userEmail = $userEmail;
+        $obj->user_email = $userEmail;
 
         return $obj;
     }
@@ -189,7 +189,7 @@ final class Data implements BaseModel
     public function withUserID(string $userID): self
     {
         $obj = clone $this;
-        $obj->userID = $userID;
+        $obj->user_id = $userID;
 
         return $obj;
     }

@@ -16,8 +16,6 @@ use Telnyx\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileRetrieve
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PhoneNumberAssignmentByProfileContract;
 
-use const Telnyx\Core\OMIT as omit;
-
 final class PhoneNumberAssignmentByProfileService implements PhoneNumberAssignmentByProfileContract
 {
     /**
@@ -30,43 +28,19 @@ final class PhoneNumberAssignmentByProfileService implements PhoneNumberAssignme
      *
      * This endpoint allows you to link all phone numbers associated with a Messaging Profile to a campaign. **Please note:** if you want to assign phone numbers to a campaign that you did not create with Telnyx 10DLC services, this endpoint allows that provided that you've shared the campaign with Telnyx. In this case, only provide the parameter, `tcrCampaignId`, and not `campaignId`. In all other cases (where the campaign you're assigning was created with Telnyx 10DLC services), only provide `campaignId`, not `tcrCampaignId`.
      *
-     * @param string $messagingProfileID the ID of the messaging profile that you want to link to the specified campaign
-     * @param string $campaignID The ID of the campaign you want to link to the specified messaging profile. If you supply this ID in the request, do not also include a tcrCampaignId.
-     * @param string $tcrCampaignID The TCR ID of the shared campaign you want to link to the specified messaging profile (for campaigns not created using Telnyx 10DLC services only). If you supply this ID in the request, do not also include a campaignId.
+     * @param array{
+     *   messagingProfileId: string, campaignId?: string, tcrCampaignId?: string
+     * }|PhoneNumberAssignmentByProfileAssignParams $params
      *
      * @throws APIException
      */
     public function assign(
-        $messagingProfileID,
-        $campaignID = omit,
-        $tcrCampaignID = omit,
+        array|PhoneNumberAssignmentByProfileAssignParams $params,
         ?RequestOptions $requestOptions = null,
     ): AssignProfileToCampaignResponse|SettingsDataErrorMessage {
-        $params = [
-            'messagingProfileID' => $messagingProfileID,
-            'campaignID' => $campaignID,
-            'tcrCampaignID' => $tcrCampaignID,
-        ];
-
-        return $this->assignRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function assignRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): AssignProfileToCampaignResponse|SettingsDataErrorMessage {
-        [
-            $parsed, $options,
-        ] = PhoneNumberAssignmentByProfileAssignParams::parseRequest(
+        [$parsed, $options] = PhoneNumberAssignmentByProfileAssignParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -84,43 +58,20 @@ final class PhoneNumberAssignmentByProfileService implements PhoneNumberAssignme
      *
      * Check the status of the individual phone number/campaign assignments associated with the supplied `taskId`.
      *
-     * @param int $page
-     * @param int $recordsPerPage
+     * @param array{
+     *   page?: int, recordsPerPage?: int
+     * }|PhoneNumberAssignmentByProfileRetrievePhoneNumberStatusParams $params
      *
      * @throws APIException
      */
     public function retrievePhoneNumberStatus(
         string $taskID,
-        $page = omit,
-        $recordsPerPage = omit,
+        array|PhoneNumberAssignmentByProfileRetrievePhoneNumberStatusParams $params,
         ?RequestOptions $requestOptions = null,
     ): PhoneNumberAssignmentByProfileGetPhoneNumberStatusResponse {
-        $params = ['page' => $page, 'recordsPerPage' => $recordsPerPage];
-
-        return $this->retrievePhoneNumberStatusRaw(
-            $taskID,
+        [$parsed, $options] = PhoneNumberAssignmentByProfileRetrievePhoneNumberStatusParams::parseRequest(
             $params,
-            $requestOptions
-        );
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function retrievePhoneNumberStatusRaw(
-        string $taskID,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): PhoneNumberAssignmentByProfileGetPhoneNumberStatusResponse {
-        [
-            $parsed, $options,
-        ] = PhoneNumberAssignmentByProfileRetrievePhoneNumberStatusParams::parseRequest(
-            $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

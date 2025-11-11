@@ -14,7 +14,7 @@ use Telnyx\PhoneNumberWithMessagingSettings;
 
 /**
  * @phpstan-type MessagingProfileListPhoneNumbersResponseShape = array{
- *   data?: list<PhoneNumberWithMessagingSettings>, meta?: PaginationMeta
+ *   data?: list<PhoneNumberWithMessagingSettings>|null, meta?: PaginationMeta|null
  * }
  */
 final class MessagingProfileListPhoneNumbersResponse implements BaseModel, ResponseConverter

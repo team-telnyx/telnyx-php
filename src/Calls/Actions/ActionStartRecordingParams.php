@@ -28,20 +28,20 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type ActionStartRecordingParamsShape = array{
  *   channels: Channels|value-of<Channels>,
  *   format: Format|value-of<Format>,
- *   clientState?: string,
- *   commandID?: string,
- *   customFileName?: string,
- *   maxLength?: int,
- *   playBeep?: bool,
- *   recordingTrack?: RecordingTrack|value-of<RecordingTrack>,
- *   timeoutSecs?: int,
+ *   client_state?: string,
+ *   command_id?: string,
+ *   custom_file_name?: string,
+ *   max_length?: int,
+ *   play_beep?: bool,
+ *   recording_track?: RecordingTrack|value-of<RecordingTrack>,
+ *   timeout_secs?: int,
  *   transcription?: bool,
- *   transcriptionEngine?: string,
- *   transcriptionLanguage?: TranscriptionLanguage|value-of<TranscriptionLanguage>,
- *   transcriptionMaxSpeakerCount?: int,
- *   transcriptionMinSpeakerCount?: int,
- *   transcriptionProfanityFilter?: bool,
- *   transcriptionSpeakerDiarization?: bool,
+ *   transcription_engine?: string,
+ *   transcription_language?: TranscriptionLanguage|value-of<TranscriptionLanguage>,
+ *   transcription_max_speaker_count?: int,
+ *   transcription_min_speaker_count?: int,
+ *   transcription_profanity_filter?: bool,
+ *   transcription_speaker_diarization?: bool,
  *   trim?: Trim|value-of<Trim>,
  * }
  */
@@ -70,46 +70,46 @@ final class ActionStartRecordingParams implements BaseModel
     /**
      * Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      */
-    #[Api('client_state', optional: true)]
-    public ?string $clientState;
+    #[Api(optional: true)]
+    public ?string $client_state;
 
     /**
      * Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      */
-    #[Api('command_id', optional: true)]
-    public ?string $commandID;
+    #[Api(optional: true)]
+    public ?string $command_id;
 
     /**
      * The custom recording file name to be used instead of the default `call_leg_id`. Telnyx will still add a Unix timestamp suffix.
      */
-    #[Api('custom_file_name', optional: true)]
-    public ?string $customFileName;
+    #[Api(optional: true)]
+    public ?string $custom_file_name;
 
     /**
      * Defines the maximum length for the recording in seconds. The minimum value is 0. The maximum value is 14400. The default value is 0 (infinite).
      */
-    #[Api('max_length', optional: true)]
-    public ?int $maxLength;
+    #[Api(optional: true)]
+    public ?int $max_length;
 
     /**
      * If enabled, a beep sound will be played at the start of a recording.
      */
-    #[Api('play_beep', optional: true)]
-    public ?bool $playBeep;
+    #[Api(optional: true)]
+    public ?bool $play_beep;
 
     /**
      * The audio track to be recorded. Can be either `both`, `inbound` or `outbound`. If only single track is specified (`inbound`, `outbound`), `channels` configuration is ignored and it will be recorded as mono (single channel).
      *
-     * @var value-of<RecordingTrack>|null $recordingTrack
+     * @var value-of<RecordingTrack>|null $recording_track
      */
-    #[Api('recording_track', enum: RecordingTrack::class, optional: true)]
-    public ?string $recordingTrack;
+    #[Api(enum: RecordingTrack::class, optional: true)]
+    public ?string $recording_track;
 
     /**
      * The number of seconds that Telnyx will wait for the recording to be stopped if silence is detected. The timer only starts when the speech is detected. Please note that call transcription is used to detect silence and the related charge will be applied. The minimum value is 0. The default value is 0 (infinite).
      */
-    #[Api('timeout_secs', optional: true)]
-    public ?int $timeoutSecs;
+    #[Api(optional: true)]
+    public ?int $timeout_secs;
 
     /**
      * Enable post recording transcription. The default value is false.
@@ -120,44 +120,40 @@ final class ActionStartRecordingParams implements BaseModel
     /**
      * Engine to use for speech recognition. `A` - `Google`.
      */
-    #[Api('transcription_engine', optional: true)]
-    public ?string $transcriptionEngine;
+    #[Api(optional: true)]
+    public ?string $transcription_engine;
 
     /**
      * Language to use for speech recognition.
      *
-     * @var value-of<TranscriptionLanguage>|null $transcriptionLanguage
+     * @var value-of<TranscriptionLanguage>|null $transcription_language
      */
-    #[Api(
-        'transcription_language',
-        enum: TranscriptionLanguage::class,
-        optional: true
-    )]
-    public ?string $transcriptionLanguage;
+    #[Api(enum: TranscriptionLanguage::class, optional: true)]
+    public ?string $transcription_language;
 
     /**
      * Defines maximum number of speakers in the conversation. Applies to `google` engine only.
      */
-    #[Api('transcription_max_speaker_count', optional: true)]
-    public ?int $transcriptionMaxSpeakerCount;
+    #[Api(optional: true)]
+    public ?int $transcription_max_speaker_count;
 
     /**
      * Defines minimum number of speakers in the conversation. Applies to `google` engine only.
      */
-    #[Api('transcription_min_speaker_count', optional: true)]
-    public ?int $transcriptionMinSpeakerCount;
+    #[Api(optional: true)]
+    public ?int $transcription_min_speaker_count;
 
     /**
      * Enables profanity_filter. Applies to `google` engine only.
      */
-    #[Api('transcription_profanity_filter', optional: true)]
-    public ?bool $transcriptionProfanityFilter;
+    #[Api(optional: true)]
+    public ?bool $transcription_profanity_filter;
 
     /**
      * Enables speaker diarization. Applies to `google` engine only.
      */
-    #[Api('transcription_speaker_diarization', optional: true)]
-    public ?bool $transcriptionSpeakerDiarization;
+    #[Api(optional: true)]
+    public ?bool $transcription_speaker_diarization;
 
     /**
      * When set to `trim-silence`, silence will be removed from the beginning and end of the recording.
@@ -193,27 +189,27 @@ final class ActionStartRecordingParams implements BaseModel
      *
      * @param Channels|value-of<Channels> $channels
      * @param Format|value-of<Format> $format
-     * @param RecordingTrack|value-of<RecordingTrack> $recordingTrack
-     * @param TranscriptionLanguage|value-of<TranscriptionLanguage> $transcriptionLanguage
+     * @param RecordingTrack|value-of<RecordingTrack> $recording_track
+     * @param TranscriptionLanguage|value-of<TranscriptionLanguage> $transcription_language
      * @param Trim|value-of<Trim> $trim
      */
     public static function with(
         Channels|string $channels,
         Format|string $format,
-        ?string $clientState = null,
-        ?string $commandID = null,
-        ?string $customFileName = null,
-        ?int $maxLength = null,
-        ?bool $playBeep = null,
-        RecordingTrack|string|null $recordingTrack = null,
-        ?int $timeoutSecs = null,
+        ?string $client_state = null,
+        ?string $command_id = null,
+        ?string $custom_file_name = null,
+        ?int $max_length = null,
+        ?bool $play_beep = null,
+        RecordingTrack|string|null $recording_track = null,
+        ?int $timeout_secs = null,
         ?bool $transcription = null,
-        ?string $transcriptionEngine = null,
-        TranscriptionLanguage|string|null $transcriptionLanguage = null,
-        ?int $transcriptionMaxSpeakerCount = null,
-        ?int $transcriptionMinSpeakerCount = null,
-        ?bool $transcriptionProfanityFilter = null,
-        ?bool $transcriptionSpeakerDiarization = null,
+        ?string $transcription_engine = null,
+        TranscriptionLanguage|string|null $transcription_language = null,
+        ?int $transcription_max_speaker_count = null,
+        ?int $transcription_min_speaker_count = null,
+        ?bool $transcription_profanity_filter = null,
+        ?bool $transcription_speaker_diarization = null,
         Trim|string|null $trim = null,
     ): self {
         $obj = new self;
@@ -221,20 +217,20 @@ final class ActionStartRecordingParams implements BaseModel
         $obj['channels'] = $channels;
         $obj['format'] = $format;
 
-        null !== $clientState && $obj->clientState = $clientState;
-        null !== $commandID && $obj->commandID = $commandID;
-        null !== $customFileName && $obj->customFileName = $customFileName;
-        null !== $maxLength && $obj->maxLength = $maxLength;
-        null !== $playBeep && $obj->playBeep = $playBeep;
-        null !== $recordingTrack && $obj['recordingTrack'] = $recordingTrack;
-        null !== $timeoutSecs && $obj->timeoutSecs = $timeoutSecs;
+        null !== $client_state && $obj->client_state = $client_state;
+        null !== $command_id && $obj->command_id = $command_id;
+        null !== $custom_file_name && $obj->custom_file_name = $custom_file_name;
+        null !== $max_length && $obj->max_length = $max_length;
+        null !== $play_beep && $obj->play_beep = $play_beep;
+        null !== $recording_track && $obj['recording_track'] = $recording_track;
+        null !== $timeout_secs && $obj->timeout_secs = $timeout_secs;
         null !== $transcription && $obj->transcription = $transcription;
-        null !== $transcriptionEngine && $obj->transcriptionEngine = $transcriptionEngine;
-        null !== $transcriptionLanguage && $obj['transcriptionLanguage'] = $transcriptionLanguage;
-        null !== $transcriptionMaxSpeakerCount && $obj->transcriptionMaxSpeakerCount = $transcriptionMaxSpeakerCount;
-        null !== $transcriptionMinSpeakerCount && $obj->transcriptionMinSpeakerCount = $transcriptionMinSpeakerCount;
-        null !== $transcriptionProfanityFilter && $obj->transcriptionProfanityFilter = $transcriptionProfanityFilter;
-        null !== $transcriptionSpeakerDiarization && $obj->transcriptionSpeakerDiarization = $transcriptionSpeakerDiarization;
+        null !== $transcription_engine && $obj->transcription_engine = $transcription_engine;
+        null !== $transcription_language && $obj['transcription_language'] = $transcription_language;
+        null !== $transcription_max_speaker_count && $obj->transcription_max_speaker_count = $transcription_max_speaker_count;
+        null !== $transcription_min_speaker_count && $obj->transcription_min_speaker_count = $transcription_min_speaker_count;
+        null !== $transcription_profanity_filter && $obj->transcription_profanity_filter = $transcription_profanity_filter;
+        null !== $transcription_speaker_diarization && $obj->transcription_speaker_diarization = $transcription_speaker_diarization;
         null !== $trim && $obj['trim'] = $trim;
 
         return $obj;
@@ -272,7 +268,7 @@ final class ActionStartRecordingParams implements BaseModel
     public function withClientState(string $clientState): self
     {
         $obj = clone $this;
-        $obj->clientState = $clientState;
+        $obj->client_state = $clientState;
 
         return $obj;
     }
@@ -283,7 +279,7 @@ final class ActionStartRecordingParams implements BaseModel
     public function withCommandID(string $commandID): self
     {
         $obj = clone $this;
-        $obj->commandID = $commandID;
+        $obj->command_id = $commandID;
 
         return $obj;
     }
@@ -294,7 +290,7 @@ final class ActionStartRecordingParams implements BaseModel
     public function withCustomFileName(string $customFileName): self
     {
         $obj = clone $this;
-        $obj->customFileName = $customFileName;
+        $obj->custom_file_name = $customFileName;
 
         return $obj;
     }
@@ -305,7 +301,7 @@ final class ActionStartRecordingParams implements BaseModel
     public function withMaxLength(int $maxLength): self
     {
         $obj = clone $this;
-        $obj->maxLength = $maxLength;
+        $obj->max_length = $maxLength;
 
         return $obj;
     }
@@ -316,7 +312,7 @@ final class ActionStartRecordingParams implements BaseModel
     public function withPlayBeep(bool $playBeep): self
     {
         $obj = clone $this;
-        $obj->playBeep = $playBeep;
+        $obj->play_beep = $playBeep;
 
         return $obj;
     }
@@ -330,7 +326,7 @@ final class ActionStartRecordingParams implements BaseModel
         RecordingTrack|string $recordingTrack
     ): self {
         $obj = clone $this;
-        $obj['recordingTrack'] = $recordingTrack;
+        $obj['recording_track'] = $recordingTrack;
 
         return $obj;
     }
@@ -341,7 +337,7 @@ final class ActionStartRecordingParams implements BaseModel
     public function withTimeoutSecs(int $timeoutSecs): self
     {
         $obj = clone $this;
-        $obj->timeoutSecs = $timeoutSecs;
+        $obj->timeout_secs = $timeoutSecs;
 
         return $obj;
     }
@@ -363,7 +359,7 @@ final class ActionStartRecordingParams implements BaseModel
     public function withTranscriptionEngine(string $transcriptionEngine): self
     {
         $obj = clone $this;
-        $obj->transcriptionEngine = $transcriptionEngine;
+        $obj->transcription_engine = $transcriptionEngine;
 
         return $obj;
     }
@@ -377,7 +373,7 @@ final class ActionStartRecordingParams implements BaseModel
         TranscriptionLanguage|string $transcriptionLanguage
     ): self {
         $obj = clone $this;
-        $obj['transcriptionLanguage'] = $transcriptionLanguage;
+        $obj['transcription_language'] = $transcriptionLanguage;
 
         return $obj;
     }
@@ -389,7 +385,7 @@ final class ActionStartRecordingParams implements BaseModel
         int $transcriptionMaxSpeakerCount
     ): self {
         $obj = clone $this;
-        $obj->transcriptionMaxSpeakerCount = $transcriptionMaxSpeakerCount;
+        $obj->transcription_max_speaker_count = $transcriptionMaxSpeakerCount;
 
         return $obj;
     }
@@ -401,7 +397,7 @@ final class ActionStartRecordingParams implements BaseModel
         int $transcriptionMinSpeakerCount
     ): self {
         $obj = clone $this;
-        $obj->transcriptionMinSpeakerCount = $transcriptionMinSpeakerCount;
+        $obj->transcription_min_speaker_count = $transcriptionMinSpeakerCount;
 
         return $obj;
     }
@@ -413,7 +409,7 @@ final class ActionStartRecordingParams implements BaseModel
         bool $transcriptionProfanityFilter
     ): self {
         $obj = clone $this;
-        $obj->transcriptionProfanityFilter = $transcriptionProfanityFilter;
+        $obj->transcription_profanity_filter = $transcriptionProfanityFilter;
 
         return $obj;
     }
@@ -425,7 +421,7 @@ final class ActionStartRecordingParams implements BaseModel
         bool $transcriptionSpeakerDiarization
     ): self {
         $obj = clone $this;
-        $obj->transcriptionSpeakerDiarization = $transcriptionSpeakerDiarization;
+        $obj->transcription_speaker_diarization = $transcriptionSpeakerDiarization;
 
         return $obj;
     }

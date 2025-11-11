@@ -13,7 +13,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type MediaListResponseShape = array{
- *   data?: list<MediaResource>, meta?: PaginationMeta
+ *   data?: list<MediaResource>|null, meta?: PaginationMeta|null
  * }
  */
 final class MediaListResponse implements BaseModel, ResponseConverter

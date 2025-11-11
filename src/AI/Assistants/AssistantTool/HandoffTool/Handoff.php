@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type HandoffShape = array{
- *   aiAssistants: list<AIAssistant>, voiceMode?: value-of<VoiceMode>
+ *   ai_assistants: list<AIAssistant>, voice_mode?: value-of<VoiceMode>|null
  * }
  */
 final class Handoff implements BaseModel
@@ -23,25 +23,25 @@ final class Handoff implements BaseModel
     /**
      * List of possible assistants that can receive a handoff.
      *
-     * @var list<AIAssistant> $aiAssistants
+     * @var list<AIAssistant> $ai_assistants
      */
-    #[Api('ai_assistants', list: AIAssistant::class)]
-    public array $aiAssistants;
+    #[Api(list: AIAssistant::class)]
+    public array $ai_assistants;
 
     /**
      * With the unified voice mode all assistants share the same voice, making the handoff transparent to the user. With the distinct voice mode all assistants retain their voice configuration, providing the experience of a conference call with a team of assistants.
      *
-     * @var value-of<VoiceMode>|null $voiceMode
+     * @var value-of<VoiceMode>|null $voice_mode
      */
-    #[Api('voice_mode', enum: VoiceMode::class, optional: true)]
-    public ?string $voiceMode;
+    #[Api(enum: VoiceMode::class, optional: true)]
+    public ?string $voice_mode;
 
     /**
      * `new Handoff()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Handoff::with(aiAssistants: ...)
+     * Handoff::with(ai_assistants: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -60,18 +60,18 @@ final class Handoff implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<AIAssistant> $aiAssistants
-     * @param VoiceMode|value-of<VoiceMode> $voiceMode
+     * @param list<AIAssistant> $ai_assistants
+     * @param VoiceMode|value-of<VoiceMode> $voice_mode
      */
     public static function with(
-        array $aiAssistants,
-        VoiceMode|string|null $voiceMode = null
+        array $ai_assistants,
+        VoiceMode|string|null $voice_mode = null
     ): self {
         $obj = new self;
 
-        $obj->aiAssistants = $aiAssistants;
+        $obj->ai_assistants = $ai_assistants;
 
-        null !== $voiceMode && $obj['voiceMode'] = $voiceMode;
+        null !== $voice_mode && $obj['voice_mode'] = $voice_mode;
 
         return $obj;
     }
@@ -84,7 +84,7 @@ final class Handoff implements BaseModel
     public function withAIAssistants(array $aiAssistants): self
     {
         $obj = clone $this;
-        $obj->aiAssistants = $aiAssistants;
+        $obj->ai_assistants = $aiAssistants;
 
         return $obj;
     }
@@ -97,7 +97,7 @@ final class Handoff implements BaseModel
     public function withVoiceMode(VoiceMode|string $voiceMode): self
     {
         $obj = clone $this;
-        $obj['voiceMode'] = $voiceMode;
+        $obj['voice_mode'] = $voiceMode;
 
         return $obj;
     }

@@ -9,7 +9,6 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Storage\Buckets\UsageContract;
 use Telnyx\Storage\Buckets\Usage\UsageGetAPIUsageParams;
-use Telnyx\Storage\Buckets\Usage\UsageGetAPIUsageParams\Filter;
 use Telnyx\Storage\Buckets\Usage\UsageGetAPIUsageResponse;
 use Telnyx\Storage\Buckets\Usage\UsageGetBucketUsageResponse;
 
@@ -25,35 +24,22 @@ final class UsageService implements UsageContract
      *
      * Returns the detail on API usage on a bucket of a particular time period, group by method category.
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[start_time], filter[end_time]
+     * @param array{
+     *   filter: array{
+     *     end_time: string|\DateTimeInterface, start_time: string|\DateTimeInterface
+     *   },
+     * }|UsageGetAPIUsageParams $params
      *
      * @throws APIException
      */
     public function getAPIUsage(
         string $bucketName,
-        $filter,
-        ?RequestOptions $requestOptions = null
-    ): UsageGetAPIUsageResponse {
-        $params = ['filter' => $filter];
-
-        return $this->getAPIUsageRaw($bucketName, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function getAPIUsageRaw(
-        string $bucketName,
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|UsageGetAPIUsageParams $params,
+        ?RequestOptions $requestOptions = null,
     ): UsageGetAPIUsageResponse {
         [$parsed, $options] = UsageGetAPIUsageParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

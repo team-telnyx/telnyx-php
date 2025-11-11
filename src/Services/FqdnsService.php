@@ -10,16 +10,12 @@ use Telnyx\Fqdns\FqdnCreateParams;
 use Telnyx\Fqdns\FqdnDeleteResponse;
 use Telnyx\Fqdns\FqdnGetResponse;
 use Telnyx\Fqdns\FqdnListParams;
-use Telnyx\Fqdns\FqdnListParams\Filter;
-use Telnyx\Fqdns\FqdnListParams\Page;
 use Telnyx\Fqdns\FqdnListResponse;
 use Telnyx\Fqdns\FqdnNewResponse;
 use Telnyx\Fqdns\FqdnUpdateParams;
 use Telnyx\Fqdns\FqdnUpdateResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\FqdnsContract;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class FqdnsService implements FqdnsContract
 {
@@ -33,44 +29,19 @@ final class FqdnsService implements FqdnsContract
      *
      * Create a new FQDN object.
      *
-     * @param string $connectionID ID of the FQDN connection to which this IP should be attached
-     * @param string $dnsRecordType The DNS record type for the FQDN. For cases where a port is not set, the DNS record type must be 'srv'. For cases where a port is set, the DNS record type must be 'a'. If the DNS record type is 'a' and a port is not specified, 5060 will be used.
-     * @param string $fqdn FQDN represented by this resource
-     * @param int|null $port port to use when connecting to this FQDN
+     * @param array{
+     *   connection_id: string, dns_record_type: string, fqdn: string, port?: int|null
+     * }|FqdnCreateParams $params
      *
      * @throws APIException
      */
     public function create(
-        $connectionID,
-        $dnsRecordType,
-        $fqdn,
-        $port = omit,
-        ?RequestOptions $requestOptions = null,
-    ): FqdnNewResponse {
-        $params = [
-            'connectionID' => $connectionID,
-            'dnsRecordType' => $dnsRecordType,
-            'fqdn' => $fqdn,
-            'port' => $port,
-        ];
-
-        return $this->createRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
+        array|FqdnCreateParams $params,
         ?RequestOptions $requestOptions = null
     ): FqdnNewResponse {
         [$parsed, $options] = FqdnCreateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -108,46 +79,23 @@ final class FqdnsService implements FqdnsContract
      *
      * Update the details of a specific FQDN.
      *
-     * @param string $connectionID ID of the FQDN connection to which this IP should be attached
-     * @param string $dnsRecordType The DNS record type for the FQDN. For cases where a port is not set, the DNS record type must be 'srv'. For cases where a port is set, the DNS record type must be 'a'. If the DNS record type is 'a' and a port is not specified, 5060 will be used.
-     * @param string $fqdn FQDN represented by this resource
-     * @param int|null $port port to use when connecting to this FQDN
+     * @param array{
+     *   connection_id?: string,
+     *   dns_record_type?: string,
+     *   fqdn?: string,
+     *   port?: int|null,
+     * }|FqdnUpdateParams $params
      *
      * @throws APIException
      */
     public function update(
         string $id,
-        $connectionID = omit,
-        $dnsRecordType = omit,
-        $fqdn = omit,
-        $port = omit,
+        array|FqdnUpdateParams $params,
         ?RequestOptions $requestOptions = null,
-    ): FqdnUpdateResponse {
-        $params = [
-            'connectionID' => $connectionID,
-            'dnsRecordType' => $dnsRecordType,
-            'fqdn' => $fqdn,
-            'port' => $port,
-        ];
-
-        return $this->updateRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): FqdnUpdateResponse {
         [$parsed, $options] = FqdnUpdateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -165,35 +113,22 @@ final class FqdnsService implements FqdnsContract
      *
      * Get all FQDNs belonging to the user that match the given filters.
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[connection_id], filter[fqdn], filter[port], filter[dns_record_type]
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param array{
+     *   filter?: array{
+     *     connection_id?: string, dns_record_type?: string, fqdn?: string, port?: int
+     *   },
+     *   page?: array{number?: int, size?: int},
+     * }|FqdnListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): FqdnListResponse {
-        $params = ['filter' => $filter, 'page' => $page];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
+        array|FqdnListParams $params,
         ?RequestOptions $requestOptions = null
     ): FqdnListResponse {
         [$parsed, $options] = FqdnListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

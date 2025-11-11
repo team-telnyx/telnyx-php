@@ -13,7 +13,7 @@ use Telnyx\GlobalIPAssignmentsUsage\GlobalIPAssignmentsUsageGetResponse\Data;
 
 /**
  * @phpstan-type GlobalIPAssignmentsUsageGetResponseShape = array{
- *   data?: list<Data>
+ *   data?: list<Data>|null
  * }
  */
 final class GlobalIPAssignmentsUsageGetResponse implements BaseModel, ResponseConverter

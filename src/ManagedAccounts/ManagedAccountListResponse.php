@@ -14,7 +14,7 @@ use Telnyx\ManagedAccounts\ManagedAccountListResponse\Data;
 
 /**
  * @phpstan-type ManagedAccountListResponseShape = array{
- *   data?: list<Data>, meta?: PaginationMeta
+ *   data?: list<Data>|null, meta?: PaginationMeta|null
  * }
  */
 final class ManagedAccountListResponse implements BaseModel, ResponseConverter

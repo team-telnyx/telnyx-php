@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type AzureConfigurationDataShape = array{
- *   accountKey?: string, accountName?: string, bucket?: string
+ *   account_key?: string|null, account_name?: string|null, bucket?: string|null
  * }
  */
 final class AzureConfigurationData implements BaseModel
@@ -21,14 +21,14 @@ final class AzureConfigurationData implements BaseModel
     /**
      * Azure Blob Storage account key.
      */
-    #[Api('account_key', optional: true)]
-    public ?string $accountKey;
+    #[Api(optional: true)]
+    public ?string $account_key;
 
     /**
      * Azure Blob Storage account name.
      */
-    #[Api('account_name', optional: true)]
-    public ?string $accountName;
+    #[Api(optional: true)]
+    public ?string $account_name;
 
     /**
      * Name of the bucket to be used to store recording files.
@@ -47,14 +47,14 @@ final class AzureConfigurationData implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $accountKey = null,
-        ?string $accountName = null,
-        ?string $bucket = null
+        ?string $account_key = null,
+        ?string $account_name = null,
+        ?string $bucket = null,
     ): self {
         $obj = new self;
 
-        null !== $accountKey && $obj->accountKey = $accountKey;
-        null !== $accountName && $obj->accountName = $accountName;
+        null !== $account_key && $obj->account_key = $account_key;
+        null !== $account_name && $obj->account_name = $account_name;
         null !== $bucket && $obj->bucket = $bucket;
 
         return $obj;
@@ -66,7 +66,7 @@ final class AzureConfigurationData implements BaseModel
     public function withAccountKey(string $accountKey): self
     {
         $obj = clone $this;
-        $obj->accountKey = $accountKey;
+        $obj->account_key = $accountKey;
 
         return $obj;
     }
@@ -77,7 +77,7 @@ final class AzureConfigurationData implements BaseModel
     public function withAccountName(string $accountName): self
     {
         $obj = clone $this;
-        $obj->accountName = $accountName;
+        $obj->account_name = $accountName;
 
         return $obj;
     }

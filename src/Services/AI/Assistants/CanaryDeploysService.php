@@ -28,35 +28,20 @@ final class CanaryDeploysService implements CanaryDeploysContract
      * Creates a new canary deploy configuration with multiple version IDs and their traffic
      * percentages for A/B testing or gradual rollouts of assistant versions.
      *
-     * @param list<VersionConfig> $versions List of version configurations
+     * @param array{
+     *   versions: list<array{percentage: float, version_id: string}|VersionConfig>
+     * }|CanaryDeployCreateParams $params
      *
      * @throws APIException
      */
     public function create(
         string $assistantID,
-        $versions,
-        ?RequestOptions $requestOptions = null
-    ): CanaryDeployResponse {
-        $params = ['versions' => $versions];
-
-        return $this->createRaw($assistantID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        string $assistantID,
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|CanaryDeployCreateParams $params,
+        ?RequestOptions $requestOptions = null,
     ): CanaryDeployResponse {
         [$parsed, $options] = CanaryDeployCreateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -100,35 +85,20 @@ final class CanaryDeploysService implements CanaryDeploysContract
      * Updates the existing canary deploy configuration with new version IDs and percentages.
      *   All old versions and percentages are replaces by new ones from this request.
      *
-     * @param list<VersionConfig> $versions List of version configurations
+     * @param array{
+     *   versions: list<array{percentage: float, version_id: string}|VersionConfig>
+     * }|CanaryDeployUpdateParams $params
      *
      * @throws APIException
      */
     public function update(
         string $assistantID,
-        $versions,
-        ?RequestOptions $requestOptions = null
-    ): CanaryDeployResponse {
-        $params = ['versions' => $versions];
-
-        return $this->updateRaw($assistantID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $assistantID,
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|CanaryDeployUpdateParams $params,
+        ?RequestOptions $requestOptions = null,
     ): CanaryDeployResponse {
         [$parsed, $options] = CanaryDeployUpdateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

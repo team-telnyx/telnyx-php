@@ -17,8 +17,6 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\McpServersContract;
 
-use const Telnyx\Core\OMIT as omit;
-
 final class McpServersService implements McpServersContract
 {
     /**
@@ -31,47 +29,23 @@ final class McpServersService implements McpServersContract
      *
      * Create a new MCP server.
      *
-     * @param string $name
-     * @param string $type
-     * @param string $url
-     * @param list<string>|null $allowedTools
-     * @param string|null $apiKeyRef
+     * @param array{
+     *   name: string,
+     *   type: string,
+     *   url: string,
+     *   allowed_tools?: list<string>|null,
+     *   api_key_ref?: string|null,
+     * }|McpServerCreateParams $params
      *
      * @throws APIException
      */
     public function create(
-        $name,
-        $type,
-        $url,
-        $allowedTools = omit,
-        $apiKeyRef = omit,
-        ?RequestOptions $requestOptions = null,
-    ): McpServerNewResponse {
-        $params = [
-            'name' => $name,
-            'type' => $type,
-            'url' => $url,
-            'allowedTools' => $allowedTools,
-            'apiKeyRef' => $apiKeyRef,
-        ];
-
-        return $this->createRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
+        array|McpServerCreateParams $params,
         ?RequestOptions $requestOptions = null
     ): McpServerNewResponse {
         [$parsed, $options] = McpServerCreateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -109,55 +83,26 @@ final class McpServersService implements McpServersContract
      *
      * Update an existing MCP server.
      *
-     * @param string $id
-     * @param list<string>|null $allowedTools
-     * @param string|null $apiKeyRef
-     * @param \DateTimeInterface $createdAt
-     * @param string $name
-     * @param string $type
-     * @param string $url
+     * @param array{
+     *   id?: string,
+     *   allowed_tools?: list<string>|null,
+     *   api_key_ref?: string|null,
+     *   created_at?: string|\DateTimeInterface,
+     *   name?: string,
+     *   type?: string,
+     *   url?: string,
+     * }|McpServerUpdateParams $params
      *
      * @throws APIException
      */
     public function update(
         string $mcpServerID,
-        $id = omit,
-        $allowedTools = omit,
-        $apiKeyRef = omit,
-        $createdAt = omit,
-        $name = omit,
-        $type = omit,
-        $url = omit,
+        array|McpServerUpdateParams $params,
         ?RequestOptions $requestOptions = null,
-    ): McpServerUpdateResponse {
-        $params = [
-            'id' => $id,
-            'allowedTools' => $allowedTools,
-            'apiKeyRef' => $apiKeyRef,
-            'createdAt' => $createdAt,
-            'name' => $name,
-            'type' => $type,
-            'url' => $url,
-        ];
-
-        return $this->updateRaw($mcpServerID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $mcpServerID,
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): McpServerUpdateResponse {
         [$parsed, $options] = McpServerUpdateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -175,48 +120,21 @@ final class McpServersService implements McpServersContract
      *
      * Retrieve a list of MCP servers.
      *
-     * @param int $pageNumber
-     * @param int $pageSize
-     * @param string $type
-     * @param string $url
+     * @param array{
+     *   page_number_?: int, page_size_?: int, type?: string, url?: string
+     * }|McpServerListParams $params
      *
      * @return list<McpServerListResponseItem>
      *
      * @throws APIException
      */
     public function list(
-        $pageNumber = omit,
-        $pageSize = omit,
-        $type = omit,
-        $url = omit,
-        ?RequestOptions $requestOptions = null,
-    ): array {
-        $params = [
-            'pageNumber' => $pageNumber,
-            'pageSize' => $pageSize,
-            'type' => $type,
-            'url' => $url,
-        ];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @return list<McpServerListResponseItem>
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
+        array|McpServerListParams $params,
         ?RequestOptions $requestOptions = null
     ): array {
         [$parsed, $options] = McpServerListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

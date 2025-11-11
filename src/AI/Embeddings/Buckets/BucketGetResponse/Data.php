@@ -10,12 +10,12 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type DataShape = array{
- *   createdAt: \DateTimeInterface,
+ *   created_at: \DateTimeInterface,
  *   filename: string,
  *   status: string,
- *   errorReason?: string,
- *   lastEmbeddedAt?: \DateTimeInterface,
- *   updatedAt?: \DateTimeInterface,
+ *   error_reason?: string|null,
+ *   last_embedded_at?: \DateTimeInterface|null,
+ *   updated_at?: \DateTimeInterface|null,
  * }
  */
 final class Data implements BaseModel
@@ -23,8 +23,8 @@ final class Data implements BaseModel
     /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Api('created_at')]
-    public \DateTimeInterface $createdAt;
+    #[Api]
+    public \DateTimeInterface $created_at;
 
     #[Api]
     public string $filename;
@@ -32,21 +32,21 @@ final class Data implements BaseModel
     #[Api]
     public string $status;
 
-    #[Api('error_reason', optional: true)]
-    public ?string $errorReason;
+    #[Api(optional: true)]
+    public ?string $error_reason;
 
-    #[Api('last_embedded_at', optional: true)]
-    public ?\DateTimeInterface $lastEmbeddedAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $last_embedded_at;
 
-    #[Api('updated_at', optional: true)]
-    public ?\DateTimeInterface $updatedAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $updated_at;
 
     /**
      * `new Data()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Data::with(createdAt: ..., filename: ..., status: ...)
+     * Data::with(created_at: ..., filename: ..., status: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -66,22 +66,22 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        \DateTimeInterface $createdAt,
+        \DateTimeInterface $created_at,
         string $filename,
         string $status,
-        ?string $errorReason = null,
-        ?\DateTimeInterface $lastEmbeddedAt = null,
-        ?\DateTimeInterface $updatedAt = null,
+        ?string $error_reason = null,
+        ?\DateTimeInterface $last_embedded_at = null,
+        ?\DateTimeInterface $updated_at = null,
     ): self {
         $obj = new self;
 
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $created_at;
         $obj->filename = $filename;
         $obj->status = $status;
 
-        null !== $errorReason && $obj->errorReason = $errorReason;
-        null !== $lastEmbeddedAt && $obj->lastEmbeddedAt = $lastEmbeddedAt;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
+        null !== $error_reason && $obj->error_reason = $error_reason;
+        null !== $last_embedded_at && $obj->last_embedded_at = $last_embedded_at;
+        null !== $updated_at && $obj->updated_at = $updated_at;
 
         return $obj;
     }
@@ -89,7 +89,7 @@ final class Data implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }
@@ -113,7 +113,7 @@ final class Data implements BaseModel
     public function withErrorReason(string $errorReason): self
     {
         $obj = clone $this;
-        $obj->errorReason = $errorReason;
+        $obj->error_reason = $errorReason;
 
         return $obj;
     }
@@ -121,7 +121,7 @@ final class Data implements BaseModel
     public function withLastEmbeddedAt(\DateTimeInterface $lastEmbeddedAt): self
     {
         $obj = clone $this;
-        $obj->lastEmbeddedAt = $lastEmbeddedAt;
+        $obj->last_embedded_at = $lastEmbeddedAt;
 
         return $obj;
     }
@@ -129,7 +129,7 @@ final class Data implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $obj->updated_at = $updatedAt;
 
         return $obj;
     }

@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type DataShape = array{
- *   billingBundle: BillingBundleSummary, userBundleIDs: list<string>
+ *   billing_bundle: BillingBundleSummary, user_bundle_ids: list<string>
  * }
  */
 final class Data implements BaseModel
@@ -19,23 +19,23 @@ final class Data implements BaseModel
     /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Api('billing_bundle')]
-    public BillingBundleSummary $billingBundle;
+    #[Api]
+    public BillingBundleSummary $billing_bundle;
 
     /**
      * List of user bundle IDs for given bundle.
      *
-     * @var list<string> $userBundleIDs
+     * @var list<string> $user_bundle_ids
      */
-    #[Api('user_bundle_ids', list: 'string')]
-    public array $userBundleIDs;
+    #[Api(list: 'string')]
+    public array $user_bundle_ids;
 
     /**
      * `new Data()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Data::with(billingBundle: ..., userBundleIDs: ...)
+     * Data::with(billing_bundle: ..., user_bundle_ids: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -54,16 +54,16 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $userBundleIDs
+     * @param list<string> $user_bundle_ids
      */
     public static function with(
-        BillingBundleSummary $billingBundle,
-        array $userBundleIDs
+        BillingBundleSummary $billing_bundle,
+        array $user_bundle_ids
     ): self {
         $obj = new self;
 
-        $obj->billingBundle = $billingBundle;
-        $obj->userBundleIDs = $userBundleIDs;
+        $obj->billing_bundle = $billing_bundle;
+        $obj->user_bundle_ids = $user_bundle_ids;
 
         return $obj;
     }
@@ -71,7 +71,7 @@ final class Data implements BaseModel
     public function withBillingBundle(BillingBundleSummary $billingBundle): self
     {
         $obj = clone $this;
-        $obj->billingBundle = $billingBundle;
+        $obj->billing_bundle = $billingBundle;
 
         return $obj;
     }
@@ -84,7 +84,7 @@ final class Data implements BaseModel
     public function withUserBundleIDs(array $userBundleIDs): self
     {
         $obj = clone $this;
-        $obj->userBundleIDs = $userBundleIDs;
+        $obj->user_bundle_ids = $userBundleIDs;
 
         return $obj;
     }

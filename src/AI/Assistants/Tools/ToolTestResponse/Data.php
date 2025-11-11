@@ -12,10 +12,10 @@ use Telnyx\Core\Contracts\BaseModel;
  * Response model for webhook tool test results.
  *
  * @phpstan-type DataShape = array{
- *   contentType: string,
- *   request: array<string, mixed>,
+ *   content_type: string,
+ *   request: array<string,mixed>,
  *   response: string,
- *   statusCode: int,
+ *   status_code: int,
  *   success: bool,
  * }
  */
@@ -24,18 +24,18 @@ final class Data implements BaseModel
     /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Api('content_type')]
-    public string $contentType;
+    #[Api]
+    public string $content_type;
 
-    /** @var array<string, mixed> $request */
+    /** @var array<string,mixed> $request */
     #[Api(map: 'mixed')]
     public array $request;
 
     #[Api]
     public string $response;
 
-    #[Api('status_code')]
-    public int $statusCode;
+    #[Api]
+    public int $status_code;
 
     #[Api]
     public bool $success;
@@ -46,7 +46,7 @@ final class Data implements BaseModel
      * To enforce required parameters use
      * ```
      * Data::with(
-     *   contentType: ..., request: ..., response: ..., statusCode: ..., success: ...
+     *   content_type: ..., request: ..., response: ..., status_code: ..., success: ...
      * )
      * ```
      *
@@ -71,21 +71,21 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param array<string, mixed> $request
+     * @param array<string,mixed> $request
      */
     public static function with(
-        string $contentType,
+        string $content_type,
         array $request,
         string $response,
-        int $statusCode,
+        int $status_code,
         bool $success,
     ): self {
         $obj = new self;
 
-        $obj->contentType = $contentType;
+        $obj->content_type = $content_type;
         $obj->request = $request;
         $obj->response = $response;
-        $obj->statusCode = $statusCode;
+        $obj->status_code = $status_code;
         $obj->success = $success;
 
         return $obj;
@@ -94,13 +94,13 @@ final class Data implements BaseModel
     public function withContentType(string $contentType): self
     {
         $obj = clone $this;
-        $obj->contentType = $contentType;
+        $obj->content_type = $contentType;
 
         return $obj;
     }
 
     /**
-     * @param array<string, mixed> $request
+     * @param array<string,mixed> $request
      */
     public function withRequest(array $request): self
     {
@@ -121,7 +121,7 @@ final class Data implements BaseModel
     public function withStatusCode(int $statusCode): self
     {
         $obj = clone $this;
-        $obj->statusCode = $statusCode;
+        $obj->status_code = $statusCode;
 
         return $obj;
     }

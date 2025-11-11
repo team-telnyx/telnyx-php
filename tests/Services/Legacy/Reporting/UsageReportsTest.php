@@ -38,7 +38,7 @@ final class UsageReportsTest extends TestCase
             ->legacy
             ->reporting
             ->usageReports
-            ->retrieveSpeechToText()
+            ->retrieveSpeechToText([])
         ;
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType

@@ -14,12 +14,12 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type DataShape = array{
- *   costInformation?: CostInformation,
- *   features?: list<Feature>,
- *   range?: int,
- *   recordType?: value-of<RecordType>,
- *   regionInformation?: list<RegionInformation>,
- *   startingNumber?: string,
+ *   cost_information?: CostInformation|null,
+ *   features?: list<Feature>|null,
+ *   range?: int|null,
+ *   record_type?: value-of<RecordType>|null,
+ *   region_information?: list<RegionInformation>|null,
+ *   starting_number?: string|null,
  * }
  */
 final class Data implements BaseModel
@@ -27,8 +27,8 @@ final class Data implements BaseModel
     /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Api('cost_information', optional: true)]
-    public ?CostInformation $costInformation;
+    #[Api(optional: true)]
+    public ?CostInformation $cost_information;
 
     /** @var list<Feature>|null $features */
     #[Api(list: Feature::class, optional: true)]
@@ -37,16 +37,16 @@ final class Data implements BaseModel
     #[Api(optional: true)]
     public ?int $range;
 
-    /** @var value-of<RecordType>|null $recordType */
-    #[Api('record_type', enum: RecordType::class, optional: true)]
-    public ?string $recordType;
+    /** @var value-of<RecordType>|null $record_type */
+    #[Api(enum: RecordType::class, optional: true)]
+    public ?string $record_type;
 
-    /** @var list<RegionInformation>|null $regionInformation */
-    #[Api('region_information', list: RegionInformation::class, optional: true)]
-    public ?array $regionInformation;
+    /** @var list<RegionInformation>|null $region_information */
+    #[Api(list: RegionInformation::class, optional: true)]
+    public ?array $region_information;
 
-    #[Api('starting_number', optional: true)]
-    public ?string $startingNumber;
+    #[Api(optional: true)]
+    public ?string $starting_number;
 
     public function __construct()
     {
@@ -59,25 +59,25 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<Feature> $features
-     * @param RecordType|value-of<RecordType> $recordType
-     * @param list<RegionInformation> $regionInformation
+     * @param RecordType|value-of<RecordType> $record_type
+     * @param list<RegionInformation> $region_information
      */
     public static function with(
-        ?CostInformation $costInformation = null,
+        ?CostInformation $cost_information = null,
         ?array $features = null,
         ?int $range = null,
-        RecordType|string|null $recordType = null,
-        ?array $regionInformation = null,
-        ?string $startingNumber = null,
+        RecordType|string|null $record_type = null,
+        ?array $region_information = null,
+        ?string $starting_number = null,
     ): self {
         $obj = new self;
 
-        null !== $costInformation && $obj->costInformation = $costInformation;
+        null !== $cost_information && $obj->cost_information = $cost_information;
         null !== $features && $obj->features = $features;
         null !== $range && $obj->range = $range;
-        null !== $recordType && $obj['recordType'] = $recordType;
-        null !== $regionInformation && $obj->regionInformation = $regionInformation;
-        null !== $startingNumber && $obj->startingNumber = $startingNumber;
+        null !== $record_type && $obj['record_type'] = $record_type;
+        null !== $region_information && $obj->region_information = $region_information;
+        null !== $starting_number && $obj->starting_number = $starting_number;
 
         return $obj;
     }
@@ -85,7 +85,7 @@ final class Data implements BaseModel
     public function withCostInformation(CostInformation $costInformation): self
     {
         $obj = clone $this;
-        $obj->costInformation = $costInformation;
+        $obj->cost_information = $costInformation;
 
         return $obj;
     }
@@ -115,7 +115,7 @@ final class Data implements BaseModel
     public function withRecordType(RecordType|string $recordType): self
     {
         $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }
@@ -126,7 +126,7 @@ final class Data implements BaseModel
     public function withRegionInformation(array $regionInformation): self
     {
         $obj = clone $this;
-        $obj->regionInformation = $regionInformation;
+        $obj->region_information = $regionInformation;
 
         return $obj;
     }
@@ -134,7 +134,7 @@ final class Data implements BaseModel
     public function withStartingNumber(string $startingNumber): self
     {
         $obj = clone $this;
-        $obj->startingNumber = $startingNumber;
+        $obj->starting_number = $startingNumber;
 
         return $obj;
     }

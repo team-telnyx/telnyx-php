@@ -10,13 +10,13 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type DataShape = array{
- *   downloadURL?: string,
- *   fileID?: string,
- *   invoiceID?: string,
- *   paid?: bool,
- *   periodEnd?: \DateTimeInterface,
- *   periodStart?: \DateTimeInterface,
- *   url?: string,
+ *   download_url?: string|null,
+ *   file_id?: string|null,
+ *   invoice_id?: string|null,
+ *   paid?: bool|null,
+ *   period_end?: \DateTimeInterface|null,
+ *   period_start?: \DateTimeInterface|null,
+ *   url?: string|null,
  * }
  */
 final class Data implements BaseModel
@@ -27,23 +27,23 @@ final class Data implements BaseModel
     /**
      * Present only if the query parameter `action=link` is set.
      */
-    #[Api('download_url', optional: true)]
-    public ?string $downloadURL;
+    #[Api(optional: true)]
+    public ?string $download_url;
 
-    #[Api('file_id', optional: true)]
-    public ?string $fileID;
+    #[Api(optional: true)]
+    public ?string $file_id;
 
-    #[Api('invoice_id', optional: true)]
-    public ?string $invoiceID;
+    #[Api(optional: true)]
+    public ?string $invoice_id;
 
     #[Api(optional: true)]
     public ?bool $paid;
 
-    #[Api('period_end', optional: true)]
-    public ?\DateTimeInterface $periodEnd;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $period_end;
 
-    #[Api('period_start', optional: true)]
-    public ?\DateTimeInterface $periodStart;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $period_start;
 
     #[Api(optional: true)]
     public ?string $url;
@@ -59,22 +59,22 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $downloadURL = null,
-        ?string $fileID = null,
-        ?string $invoiceID = null,
+        ?string $download_url = null,
+        ?string $file_id = null,
+        ?string $invoice_id = null,
         ?bool $paid = null,
-        ?\DateTimeInterface $periodEnd = null,
-        ?\DateTimeInterface $periodStart = null,
+        ?\DateTimeInterface $period_end = null,
+        ?\DateTimeInterface $period_start = null,
         ?string $url = null,
     ): self {
         $obj = new self;
 
-        null !== $downloadURL && $obj->downloadURL = $downloadURL;
-        null !== $fileID && $obj->fileID = $fileID;
-        null !== $invoiceID && $obj->invoiceID = $invoiceID;
+        null !== $download_url && $obj->download_url = $download_url;
+        null !== $file_id && $obj->file_id = $file_id;
+        null !== $invoice_id && $obj->invoice_id = $invoice_id;
         null !== $paid && $obj->paid = $paid;
-        null !== $periodEnd && $obj->periodEnd = $periodEnd;
-        null !== $periodStart && $obj->periodStart = $periodStart;
+        null !== $period_end && $obj->period_end = $period_end;
+        null !== $period_start && $obj->period_start = $period_start;
         null !== $url && $obj->url = $url;
 
         return $obj;
@@ -86,7 +86,7 @@ final class Data implements BaseModel
     public function withDownloadURL(string $downloadURL): self
     {
         $obj = clone $this;
-        $obj->downloadURL = $downloadURL;
+        $obj->download_url = $downloadURL;
 
         return $obj;
     }
@@ -94,7 +94,7 @@ final class Data implements BaseModel
     public function withFileID(string $fileID): self
     {
         $obj = clone $this;
-        $obj->fileID = $fileID;
+        $obj->file_id = $fileID;
 
         return $obj;
     }
@@ -102,7 +102,7 @@ final class Data implements BaseModel
     public function withInvoiceID(string $invoiceID): self
     {
         $obj = clone $this;
-        $obj->invoiceID = $invoiceID;
+        $obj->invoice_id = $invoiceID;
 
         return $obj;
     }
@@ -118,7 +118,7 @@ final class Data implements BaseModel
     public function withPeriodEnd(\DateTimeInterface $periodEnd): self
     {
         $obj = clone $this;
-        $obj->periodEnd = $periodEnd;
+        $obj->period_end = $periodEnd;
 
         return $obj;
     }
@@ -126,7 +126,7 @@ final class Data implements BaseModel
     public function withPeriodStart(\DateTimeInterface $periodStart): self
     {
         $obj = clone $this;
-        $obj->periodStart = $periodStart;
+        $obj->period_start = $periodStart;
 
         return $obj;
     }

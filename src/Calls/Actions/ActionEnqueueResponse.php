@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type ActionEnqueueResponseShape = array{
- *   data?: CallControlCommandResult
+ *   data?: CallControlCommandResult|null
  * }
  */
 final class ActionEnqueueResponse implements BaseModel, ResponseConverter

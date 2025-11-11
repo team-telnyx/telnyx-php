@@ -10,9 +10,6 @@ use Telnyx\Documents\DocumentDeleteResponse;
 use Telnyx\Documents\DocumentGenerateDownloadLinkResponse;
 use Telnyx\Documents\DocumentGetResponse;
 use Telnyx\Documents\DocumentListParams;
-use Telnyx\Documents\DocumentListParams\Filter;
-use Telnyx\Documents\DocumentListParams\Page;
-use Telnyx\Documents\DocumentListParams\Sort;
 use Telnyx\Documents\DocumentListResponse;
 use Telnyx\Documents\DocumentUpdateParams;
 use Telnyx\Documents\DocumentUpdateResponse;
@@ -22,8 +19,6 @@ use Telnyx\Documents\DocumentUploadParams;
 use Telnyx\Documents\DocumentUploadResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\DocumentsContract;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class DocumentsService implements DocumentsContract
 {
@@ -57,39 +52,20 @@ final class DocumentsService implements DocumentsContract
      *
      * Update a document.
      *
-     * @param string $customerReference optional reference string for customer tracking
-     * @param string $filename the filename of the document
+     * @param array{
+     *   customer_reference?: string, filename?: string
+     * }|DocumentUpdateParams $params
      *
      * @throws APIException
      */
     public function update(
         string $id,
-        $customerReference = omit,
-        $filename = omit,
+        array|DocumentUpdateParams $params,
         ?RequestOptions $requestOptions = null,
-    ): DocumentUpdateResponse {
-        $params = [
-            'customerReference' => $customerReference, 'filename' => $filename,
-        ];
-
-        return $this->updateRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): DocumentUpdateResponse {
         [$parsed, $options] = DocumentUpdateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -107,37 +83,27 @@ final class DocumentsService implements DocumentsContract
      *
      * List all documents ordered by created_at descending.
      *
-     * @param Filter $filter Consolidated filter parameter for documents (deepObject style). Originally: filter[filename][contains], filter[customer_reference][eq], filter[customer_reference][in][], filter[created_at][gt], filter[created_at][lt]
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
-     * @param list<Sort|value-of<Sort>> $sort Consolidated sort parameter for documents (deepObject style). Originally: sort[]
+     * @param array{
+     *   filter?: array{
+     *     created_at?: array{
+     *       gt?: string|\DateTimeInterface, lt?: string|\DateTimeInterface
+     *     },
+     *     customer_reference?: array{eq?: string, in?: list<string>},
+     *     filename?: array{contains?: string},
+     *   },
+     *   page?: array{number?: int, size?: int},
+     *   sort?: list<"filename"|"created_at"|"updated_at"|"-filename"|"-created_at"|"-updated_at">,
+     * }|DocumentListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
-        $sort = omit,
-        ?RequestOptions $requestOptions = null,
-    ): DocumentListResponse {
-        $params = ['filter' => $filter, 'page' => $page, 'sort' => $sort];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
+        array|DocumentListParams $params,
         ?RequestOptions $requestOptions = null
     ): DocumentListResponse {
         [$parsed, $options] = DocumentListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -216,44 +182,15 @@ final class DocumentsService implements DocumentsContract
      *
      * Upload a document.<br /><br />Uploaded files must be linked to a service within 30 minutes or they will be automatically deleted.
      *
-     * @param string $url if the file is already hosted publicly, you can provide a URL and have the documents service fetch it for you
-     * @param string $file the Base64 encoded contents of the file you are uploading
-     * @param string $customerReference a customer reference string for customer look ups
-     * @param string $filename the filename of the document
-     *
      * @throws APIException
      */
     public function upload(
-        $url,
-        $file,
-        $customerReference = omit,
-        $filename = omit,
-        ?RequestOptions $requestOptions = null,
-    ): DocumentUploadResponse {
-        $params = [
-            'url' => $url,
-            'customerReference' => $customerReference,
-            'filename' => $filename,
-            'file' => $file,
-        ];
-
-        return $this->uploadRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function uploadRaw(
-        array $params,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): DocumentUploadResponse {
         [$parsed, $options] = DocumentUploadParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -271,44 +208,15 @@ final class DocumentsService implements DocumentsContract
      *
      * Upload a document.<br /><br />Uploaded files must be linked to a service within 30 minutes or they will be automatically deleted.
      *
-     * @param string $url if the file is already hosted publicly, you can provide a URL and have the documents service fetch it for you
-     * @param string $file the Base64 encoded contents of the file you are uploading
-     * @param string $customerReference a customer reference string for customer look ups
-     * @param string $filename the filename of the document
-     *
      * @throws APIException
      */
     public function uploadJson(
-        $url,
-        $file,
-        $customerReference = omit,
-        $filename = omit,
-        ?RequestOptions $requestOptions = null,
-    ): DocumentUploadJsonResponse {
-        $params = [
-            'url' => $url,
-            'customerReference' => $customerReference,
-            'filename' => $filename,
-            'file' => $file,
-        ];
-
-        return $this->uploadJsonRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function uploadJsonRaw(
-        array $params,
+        mixed $params,
         ?RequestOptions $requestOptions = null
     ): DocumentUploadJsonResponse {
         [$parsed, $options] = DocumentUploadJsonParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

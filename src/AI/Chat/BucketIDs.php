@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type BucketIDsShape = array{
- *   bucketIDs: list<string>, maxNumResults?: int
+ *   bucket_ids: list<string>, max_num_results?: int|null
  * }
  */
 final class BucketIDs implements BaseModel
@@ -18,22 +18,22 @@ final class BucketIDs implements BaseModel
     /** @use SdkModel<BucketIDsShape> */
     use SdkModel;
 
-    /** @var list<string> $bucketIDs */
-    #[Api('bucket_ids', list: 'string')]
-    public array $bucketIDs;
+    /** @var list<string> $bucket_ids */
+    #[Api(list: 'string')]
+    public array $bucket_ids;
 
     /**
      * The maximum number of results to retrieve as context for the language model.
      */
-    #[Api('max_num_results', optional: true)]
-    public ?int $maxNumResults;
+    #[Api(optional: true)]
+    public ?int $max_num_results;
 
     /**
      * `new BucketIDs()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * BucketIDs::with(bucketIDs: ...)
+     * BucketIDs::with(bucket_ids: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -52,17 +52,17 @@ final class BucketIDs implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $bucketIDs
+     * @param list<string> $bucket_ids
      */
     public static function with(
-        array $bucketIDs,
-        ?int $maxNumResults = null
+        array $bucket_ids,
+        ?int $max_num_results = null
     ): self {
         $obj = new self;
 
-        $obj->bucketIDs = $bucketIDs;
+        $obj->bucket_ids = $bucket_ids;
 
-        null !== $maxNumResults && $obj->maxNumResults = $maxNumResults;
+        null !== $max_num_results && $obj->max_num_results = $max_num_results;
 
         return $obj;
     }
@@ -73,7 +73,7 @@ final class BucketIDs implements BaseModel
     public function withBucketIDs(array $bucketIDs): self
     {
         $obj = clone $this;
-        $obj->bucketIDs = $bucketIDs;
+        $obj->bucket_ids = $bucketIDs;
 
         return $obj;
     }
@@ -84,7 +84,7 @@ final class BucketIDs implements BaseModel
     public function withMaxNumResults(int $maxNumResults): self
     {
         $obj = clone $this;
-        $obj->maxNumResults = $maxNumResults;
+        $obj->max_num_results = $maxNumResults;
 
         return $obj;
     }

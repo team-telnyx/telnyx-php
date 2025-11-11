@@ -45,7 +45,7 @@ final class PartnerCampaignsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->partnerCampaigns->update('campaignId');
+        $result = $this->client->partnerCampaigns->update('campaignId', []);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -57,7 +57,7 @@ final class PartnerCampaignsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->partnerCampaigns->list();
+        $result = $this->client->partnerCampaigns->list([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -69,7 +69,7 @@ final class PartnerCampaignsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->partnerCampaigns->listSharedByMe();
+        $result = $this->client->partnerCampaigns->listSharedByMe([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

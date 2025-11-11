@@ -33,7 +33,9 @@ final class AccessIPAddressTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->accessIPAddress->create(ipAddress: 'ip_address');
+        $result = $this->client->accessIPAddress->create([
+            'ip_address' => 'ip_address',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -45,7 +47,9 @@ final class AccessIPAddressTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->accessIPAddress->create(ipAddress: 'ip_address');
+        $result = $this->client->accessIPAddress->create([
+            'ip_address' => 'ip_address',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -69,7 +73,7 @@ final class AccessIPAddressTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->accessIPAddress->list();
+        $result = $this->client->accessIPAddress->list([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

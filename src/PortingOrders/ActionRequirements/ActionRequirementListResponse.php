@@ -14,7 +14,7 @@ use Telnyx\PortingOrders\ActionRequirements\ActionRequirementListResponse\Data;
 
 /**
  * @phpstan-type ActionRequirementListResponseShape = array{
- *   data?: list<Data>, meta?: PaginationMeta
+ *   data?: list<Data>|null, meta?: PaginationMeta|null
  * }
  */
 final class ActionRequirementListResponse implements BaseModel, ResponseConverter

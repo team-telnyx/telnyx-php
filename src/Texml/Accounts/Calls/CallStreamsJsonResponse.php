@@ -13,13 +13,13 @@ use Telnyx\Texml\Accounts\Calls\CallStreamsJsonResponse\Status;
 
 /**
  * @phpstan-type CallStreamsJsonResponseShape = array{
- *   accountSid?: string,
- *   callSid?: string,
- *   dateUpdated?: \DateTimeInterface,
- *   name?: string,
- *   sid?: string,
- *   status?: value-of<Status>,
- *   uri?: string,
+ *   account_sid?: string|null,
+ *   call_sid?: string|null,
+ *   date_updated?: \DateTimeInterface|null,
+ *   name?: string|null,
+ *   sid?: string|null,
+ *   status?: value-of<Status>|null,
+ *   uri?: string|null,
  * }
  */
 final class CallStreamsJsonResponse implements BaseModel, ResponseConverter
@@ -29,14 +29,14 @@ final class CallStreamsJsonResponse implements BaseModel, ResponseConverter
 
     use SdkResponse;
 
-    #[Api('account_sid', optional: true)]
-    public ?string $accountSid;
+    #[Api(optional: true)]
+    public ?string $account_sid;
 
-    #[Api('call_sid', optional: true)]
-    public ?string $callSid;
+    #[Api(optional: true)]
+    public ?string $call_sid;
 
-    #[Api('date_updated', optional: true)]
-    public ?\DateTimeInterface $dateUpdated;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $date_updated;
 
     /**
      * The user specified name of Stream.
@@ -77,9 +77,9 @@ final class CallStreamsJsonResponse implements BaseModel, ResponseConverter
      * @param Status|value-of<Status> $status
      */
     public static function with(
-        ?string $accountSid = null,
-        ?string $callSid = null,
-        ?\DateTimeInterface $dateUpdated = null,
+        ?string $account_sid = null,
+        ?string $call_sid = null,
+        ?\DateTimeInterface $date_updated = null,
         ?string $name = null,
         ?string $sid = null,
         Status|string|null $status = null,
@@ -87,9 +87,9 @@ final class CallStreamsJsonResponse implements BaseModel, ResponseConverter
     ): self {
         $obj = new self;
 
-        null !== $accountSid && $obj->accountSid = $accountSid;
-        null !== $callSid && $obj->callSid = $callSid;
-        null !== $dateUpdated && $obj->dateUpdated = $dateUpdated;
+        null !== $account_sid && $obj->account_sid = $account_sid;
+        null !== $call_sid && $obj->call_sid = $call_sid;
+        null !== $date_updated && $obj->date_updated = $date_updated;
         null !== $name && $obj->name = $name;
         null !== $sid && $obj->sid = $sid;
         null !== $status && $obj['status'] = $status;
@@ -101,7 +101,7 @@ final class CallStreamsJsonResponse implements BaseModel, ResponseConverter
     public function withAccountSid(string $accountSid): self
     {
         $obj = clone $this;
-        $obj->accountSid = $accountSid;
+        $obj->account_sid = $accountSid;
 
         return $obj;
     }
@@ -109,7 +109,7 @@ final class CallStreamsJsonResponse implements BaseModel, ResponseConverter
     public function withCallSid(string $callSid): self
     {
         $obj = clone $this;
-        $obj->callSid = $callSid;
+        $obj->call_sid = $callSid;
 
         return $obj;
     }
@@ -117,7 +117,7 @@ final class CallStreamsJsonResponse implements BaseModel, ResponseConverter
     public function withDateUpdated(\DateTimeInterface $dateUpdated): self
     {
         $obj = clone $this;
-        $obj->dateUpdated = $dateUpdated;
+        $obj->date_updated = $dateUpdated;
 
         return $obj;
     }

@@ -34,7 +34,8 @@ final class ActionsTest extends TestCase
         }
 
         $result = $this->client->addresses->actions->acceptSuggestions(
-            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
+            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+            []
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -47,11 +48,11 @@ final class ActionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->addresses->actions->validate(
-            countryCode: 'US',
-            postalCode: '78701',
-            streetAddress: '600 Congress Avenue',
-        );
+        $result = $this->client->addresses->actions->validate([
+            'country_code' => 'US',
+            'postal_code' => '78701',
+            'street_address' => '600 Congress Avenue',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -63,11 +64,11 @@ final class ActionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->addresses->actions->validate(
-            countryCode: 'US',
-            postalCode: '78701',
-            streetAddress: '600 Congress Avenue',
-        );
+        $result = $this->client->addresses->actions->validate([
+            'country_code' => 'US',
+            'postal_code' => '78701',
+            'street_address' => '600 Congress Avenue',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

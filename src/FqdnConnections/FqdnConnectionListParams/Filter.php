@@ -13,9 +13,9 @@ use Telnyx\FqdnConnections\FqdnConnectionListParams\Filter\ConnectionName;
  * Consolidated filter parameter (deepObject style). Originally: filter[connection_name], filter[fqdn], filter[outbound_voice_profile_id], filter[outbound.outbound_voice_profile_id].
  *
  * @phpstan-type FilterShape = array{
- *   connectionName?: ConnectionName,
- *   fqdn?: string,
- *   outboundVoiceProfileID?: string,
+ *   connection_name?: ConnectionName|null,
+ *   fqdn?: string|null,
+ *   outbound_voice_profile_id?: string|null,
  * }
  */
 final class Filter implements BaseModel
@@ -26,8 +26,8 @@ final class Filter implements BaseModel
     /**
      * Filter by connection_name using nested operations.
      */
-    #[Api('connection_name', optional: true)]
-    public ?ConnectionName $connectionName;
+    #[Api(optional: true)]
+    public ?ConnectionName $connection_name;
 
     /**
      * If present, connections with an `fqdn` that equals the given value will be returned. Matching is case-sensitive, and the full string must match.
@@ -38,8 +38,8 @@ final class Filter implements BaseModel
     /**
      * Identifies the associated outbound voice profile.
      */
-    #[Api('outbound_voice_profile_id', optional: true)]
-    public ?string $outboundVoiceProfileID;
+    #[Api(optional: true)]
+    public ?string $outbound_voice_profile_id;
 
     public function __construct()
     {
@@ -52,15 +52,15 @@ final class Filter implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?ConnectionName $connectionName = null,
+        ?ConnectionName $connection_name = null,
         ?string $fqdn = null,
-        ?string $outboundVoiceProfileID = null,
+        ?string $outbound_voice_profile_id = null,
     ): self {
         $obj = new self;
 
-        null !== $connectionName && $obj->connectionName = $connectionName;
+        null !== $connection_name && $obj->connection_name = $connection_name;
         null !== $fqdn && $obj->fqdn = $fqdn;
-        null !== $outboundVoiceProfileID && $obj->outboundVoiceProfileID = $outboundVoiceProfileID;
+        null !== $outbound_voice_profile_id && $obj->outbound_voice_profile_id = $outbound_voice_profile_id;
 
         return $obj;
     }
@@ -71,7 +71,7 @@ final class Filter implements BaseModel
     public function withConnectionName(ConnectionName $connectionName): self
     {
         $obj = clone $this;
-        $obj->connectionName = $connectionName;
+        $obj->connection_name = $connectionName;
 
         return $obj;
     }
@@ -94,7 +94,7 @@ final class Filter implements BaseModel
         string $outboundVoiceProfileID
     ): self {
         $obj = clone $this;
-        $obj->outboundVoiceProfileID = $outboundVoiceProfileID;
+        $obj->outbound_voice_profile_id = $outboundVoiceProfileID;
 
         return $obj;
     }

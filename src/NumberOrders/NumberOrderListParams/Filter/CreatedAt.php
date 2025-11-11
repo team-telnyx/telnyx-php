@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Filter number orders by date range.
  *
- * @phpstan-type CreatedAtShape = array{gt?: string, lt?: string}
+ * @phpstan-type CreatedAtShape = array{gt?: string|null, lt?: string|null}
  */
 final class CreatedAt implements BaseModel
 {

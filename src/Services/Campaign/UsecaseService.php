@@ -23,33 +23,17 @@ final class UsecaseService implements UsecaseContract
      *
      * Get Campaign Cost
      *
-     * @param string $usecase
+     * @param array{usecase: string}|UsecaseGetCostParams $params
      *
      * @throws APIException
      */
     public function getCost(
-        $usecase,
-        ?RequestOptions $requestOptions = null
-    ): UsecaseGetCostResponse {
-        $params = ['usecase' => $usecase];
-
-        return $this->getCostRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function getCostRaw(
-        array $params,
+        array|UsecaseGetCostParams $params,
         ?RequestOptions $requestOptions = null
     ): UsecaseGetCostResponse {
         [$parsed, $options] = UsecaseGetCostParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

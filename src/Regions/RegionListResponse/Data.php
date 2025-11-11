@@ -10,12 +10,12 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type DataShape = array{
- *   code?: string,
- *   createdAt?: string,
- *   name?: string,
- *   recordType?: string,
- *   supportedInterfaces?: list<string>,
- *   updatedAt?: string,
+ *   code?: string|null,
+ *   created_at?: string|null,
+ *   name?: string|null,
+ *   record_type?: string|null,
+ *   supported_interfaces?: list<string>|null,
+ *   updated_at?: string|null,
  * }
  */
 final class Data implements BaseModel
@@ -32,8 +32,8 @@ final class Data implements BaseModel
     /**
      * ISO 8601 formatted date-time indicating when the resource was created.
      */
-    #[Api('created_at', optional: true)]
-    public ?string $createdAt;
+    #[Api(optional: true)]
+    public ?string $created_at;
 
     /**
      * A name for the region.
@@ -44,22 +44,22 @@ final class Data implements BaseModel
     /**
      * Identifies the type of the resource.
      */
-    #[Api('record_type', optional: true)]
-    public ?string $recordType;
+    #[Api(optional: true)]
+    public ?string $record_type;
 
     /**
      * List of interface types supported in this region.
      *
-     * @var list<string>|null $supportedInterfaces
+     * @var list<string>|null $supported_interfaces
      */
-    #[Api('supported_interfaces', list: 'string', optional: true)]
-    public ?array $supportedInterfaces;
+    #[Api(list: 'string', optional: true)]
+    public ?array $supported_interfaces;
 
     /**
      * ISO 8601 formatted date-time indicating when the resource was updated.
      */
-    #[Api('updated_at', optional: true)]
-    public ?string $updatedAt;
+    #[Api(optional: true)]
+    public ?string $updated_at;
 
     public function __construct()
     {
@@ -71,24 +71,24 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $supportedInterfaces
+     * @param list<string> $supported_interfaces
      */
     public static function with(
         ?string $code = null,
-        ?string $createdAt = null,
+        ?string $created_at = null,
         ?string $name = null,
-        ?string $recordType = null,
-        ?array $supportedInterfaces = null,
-        ?string $updatedAt = null,
+        ?string $record_type = null,
+        ?array $supported_interfaces = null,
+        ?string $updated_at = null,
     ): self {
         $obj = new self;
 
         null !== $code && $obj->code = $code;
-        null !== $createdAt && $obj->createdAt = $createdAt;
+        null !== $created_at && $obj->created_at = $created_at;
         null !== $name && $obj->name = $name;
-        null !== $recordType && $obj->recordType = $recordType;
-        null !== $supportedInterfaces && $obj->supportedInterfaces = $supportedInterfaces;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
+        null !== $record_type && $obj->record_type = $record_type;
+        null !== $supported_interfaces && $obj->supported_interfaces = $supported_interfaces;
+        null !== $updated_at && $obj->updated_at = $updated_at;
 
         return $obj;
     }
@@ -110,7 +110,7 @@ final class Data implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }
@@ -132,7 +132,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType;
+        $obj->record_type = $recordType;
 
         return $obj;
     }
@@ -145,7 +145,7 @@ final class Data implements BaseModel
     public function withSupportedInterfaces(array $supportedInterfaces): self
     {
         $obj = clone $this;
-        $obj->supportedInterfaces = $supportedInterfaces;
+        $obj->supported_interfaces = $supportedInterfaces;
 
         return $obj;
     }
@@ -156,7 +156,7 @@ final class Data implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $obj->updated_at = $updatedAt;
 
         return $obj;
     }

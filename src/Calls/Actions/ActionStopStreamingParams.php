@@ -19,7 +19,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Calls\Actions->stopStreaming
  *
  * @phpstan-type ActionStopStreamingParamsShape = array{
- *   clientState?: string, commandID?: string, streamID?: string
+ *   client_state?: string, command_id?: string, stream_id?: string
  * }
  */
 final class ActionStopStreamingParams implements BaseModel
@@ -31,20 +31,20 @@ final class ActionStopStreamingParams implements BaseModel
     /**
      * Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      */
-    #[Api('client_state', optional: true)]
-    public ?string $clientState;
+    #[Api(optional: true)]
+    public ?string $client_state;
 
     /**
      * Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      */
-    #[Api('command_id', optional: true)]
-    public ?string $commandID;
+    #[Api(optional: true)]
+    public ?string $command_id;
 
     /**
      * Identifies the stream. If the `stream_id` is not provided the command stops all streams associated with a given `call_control_id`.
      */
-    #[Api('stream_id', optional: true)]
-    public ?string $streamID;
+    #[Api(optional: true)]
+    public ?string $stream_id;
 
     public function __construct()
     {
@@ -57,15 +57,15 @@ final class ActionStopStreamingParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $clientState = null,
-        ?string $commandID = null,
-        ?string $streamID = null,
+        ?string $client_state = null,
+        ?string $command_id = null,
+        ?string $stream_id = null,
     ): self {
         $obj = new self;
 
-        null !== $clientState && $obj->clientState = $clientState;
-        null !== $commandID && $obj->commandID = $commandID;
-        null !== $streamID && $obj->streamID = $streamID;
+        null !== $client_state && $obj->client_state = $client_state;
+        null !== $command_id && $obj->command_id = $command_id;
+        null !== $stream_id && $obj->stream_id = $stream_id;
 
         return $obj;
     }
@@ -76,7 +76,7 @@ final class ActionStopStreamingParams implements BaseModel
     public function withClientState(string $clientState): self
     {
         $obj = clone $this;
-        $obj->clientState = $clientState;
+        $obj->client_state = $clientState;
 
         return $obj;
     }
@@ -87,7 +87,7 @@ final class ActionStopStreamingParams implements BaseModel
     public function withCommandID(string $commandID): self
     {
         $obj = clone $this;
-        $obj->commandID = $commandID;
+        $obj->command_id = $commandID;
 
         return $obj;
     }
@@ -98,7 +98,7 @@ final class ActionStopStreamingParams implements BaseModel
     public function withStreamID(string $streamID): self
     {
         $obj = clone $this;
-        $obj->streamID = $streamID;
+        $obj->stream_id = $streamID;
 
         return $obj;
     }

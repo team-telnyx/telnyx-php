@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type VerifyProfileMessageTemplateResponseShape = array{
- *   id?: string, text?: string
+ *   id?: string|null, text?: string|null
  * }
  */
 final class VerifyProfileMessageTemplateResponse implements BaseModel

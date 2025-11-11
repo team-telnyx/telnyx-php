@@ -13,10 +13,10 @@ use Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthGetResponse\Data\Hea
 
 /**
  * @phpstan-type DataShape = array{
- *   globalIP?: GlobalIP,
- *   globalIPAssignment?: GlobalIPAssignment,
- *   health?: Health,
- *   timestamp?: \DateTimeInterface,
+ *   global_ip?: GlobalIP|null,
+ *   global_ip_assignment?: GlobalIPAssignment|null,
+ *   health?: Health|null,
+ *   timestamp?: \DateTimeInterface|null,
  * }
  */
 final class Data implements BaseModel
@@ -24,11 +24,11 @@ final class Data implements BaseModel
     /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Api('global_ip', optional: true)]
-    public ?GlobalIP $globalIP;
+    #[Api(optional: true)]
+    public ?GlobalIP $global_ip;
 
-    #[Api('global_ip_assignment', optional: true)]
-    public ?GlobalIPAssignment $globalIPAssignment;
+    #[Api(optional: true)]
+    public ?GlobalIPAssignment $global_ip_assignment;
 
     #[Api(optional: true)]
     public ?Health $health;
@@ -50,15 +50,15 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?GlobalIP $globalIP = null,
-        ?GlobalIPAssignment $globalIPAssignment = null,
+        ?GlobalIP $global_ip = null,
+        ?GlobalIPAssignment $global_ip_assignment = null,
         ?Health $health = null,
         ?\DateTimeInterface $timestamp = null,
     ): self {
         $obj = new self;
 
-        null !== $globalIP && $obj->globalIP = $globalIP;
-        null !== $globalIPAssignment && $obj->globalIPAssignment = $globalIPAssignment;
+        null !== $global_ip && $obj->global_ip = $global_ip;
+        null !== $global_ip_assignment && $obj->global_ip_assignment = $global_ip_assignment;
         null !== $health && $obj->health = $health;
         null !== $timestamp && $obj->timestamp = $timestamp;
 
@@ -68,7 +68,7 @@ final class Data implements BaseModel
     public function withGlobalIP(GlobalIP $globalIP): self
     {
         $obj = clone $this;
-        $obj->globalIP = $globalIP;
+        $obj->global_ip = $globalIP;
 
         return $obj;
     }
@@ -77,7 +77,7 @@ final class Data implements BaseModel
         GlobalIPAssignment $globalIPAssignment
     ): self {
         $obj = clone $this;
-        $obj->globalIPAssignment = $globalIPAssignment;
+        $obj->global_ip_assignment = $globalIPAssignment;
 
         return $obj;
     }

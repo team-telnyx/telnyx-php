@@ -39,7 +39,7 @@ final class RecordingsJsonTest extends TestCase
             ->accounts
             ->calls
             ->recordingsJson
-            ->recordingsJson('call_sid', accountSid: 'account_sid')
+            ->recordingsJson('call_sid', ['account_sid' => 'account_sid'])
         ;
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -58,7 +58,7 @@ final class RecordingsJsonTest extends TestCase
             ->accounts
             ->calls
             ->recordingsJson
-            ->recordingsJson('call_sid', accountSid: 'account_sid')
+            ->recordingsJson('call_sid', ['account_sid' => 'account_sid'])
         ;
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -77,7 +77,7 @@ final class RecordingsJsonTest extends TestCase
             ->accounts
             ->calls
             ->recordingsJson
-            ->retrieveRecordingsJson('call_sid', 'account_sid')
+            ->retrieveRecordingsJson('call_sid', ['account_sid' => 'account_sid'])
         ;
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -96,7 +96,7 @@ final class RecordingsJsonTest extends TestCase
             ->accounts
             ->calls
             ->recordingsJson
-            ->retrieveRecordingsJson('call_sid', 'account_sid')
+            ->retrieveRecordingsJson('call_sid', ['account_sid' => 'account_sid'])
         ;
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType

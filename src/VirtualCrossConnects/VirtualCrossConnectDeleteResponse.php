@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectDeleteResponse\Data;
 
 /**
- * @phpstan-type VirtualCrossConnectDeleteResponseShape = array{data?: Data}
+ * @phpstan-type VirtualCrossConnectDeleteResponseShape = array{data?: Data|null}
  */
 final class VirtualCrossConnectDeleteResponse implements BaseModel, ResponseConverter
 {

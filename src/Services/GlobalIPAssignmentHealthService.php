@@ -8,11 +8,8 @@ use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthGetResponse;
 use Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthRetrieveParams;
-use Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthRetrieveParams\Filter;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\GlobalIPAssignmentHealthContract;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class GlobalIPAssignmentHealthService implements GlobalIPAssignmentHealthContract
 {
@@ -26,33 +23,22 @@ final class GlobalIPAssignmentHealthService implements GlobalIPAssignmentHealthC
      *
      * Global IP Assignment Health Check Metrics
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[global_ip_id][in], filter[global_ip_assignment_id][in]
+     * @param array{
+     *   filter?: array{
+     *     global_ip_assignment_id?: string|array{in?: string},
+     *     global_ip_id?: string|array{in?: string},
+     *   },
+     * }|GlobalIPAssignmentHealthRetrieveParams $params
      *
      * @throws APIException
      */
     public function retrieve(
-        $filter = omit,
-        ?RequestOptions $requestOptions = null
-    ): GlobalIPAssignmentHealthGetResponse {
-        $params = ['filter' => $filter];
-
-        return $this->retrieveRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|GlobalIPAssignmentHealthRetrieveParams $params,
+        ?RequestOptions $requestOptions = null,
     ): GlobalIPAssignmentHealthGetResponse {
         [$parsed, $options] = GlobalIPAssignmentHealthRetrieveParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

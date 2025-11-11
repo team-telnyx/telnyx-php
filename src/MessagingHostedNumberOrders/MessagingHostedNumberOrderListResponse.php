@@ -14,7 +14,7 @@ use Telnyx\MessagingHostedNumberOrder;
 
 /**
  * @phpstan-type MessagingHostedNumberOrderListResponseShape = array{
- *   data?: list<MessagingHostedNumberOrder>, meta?: PaginationMeta
+ *   data?: list<MessagingHostedNumberOrder>|null, meta?: PaginationMeta|null
  * }
  */
 final class MessagingHostedNumberOrderListResponse implements BaseModel, ResponseConverter

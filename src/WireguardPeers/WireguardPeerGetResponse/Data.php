@@ -10,14 +10,14 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type DataShape = array{
- *   id?: string,
- *   createdAt?: string,
- *   recordType?: string,
- *   updatedAt?: string,
- *   publicKey?: string,
- *   lastSeen?: string,
- *   privateKey?: string,
- *   wireguardInterfaceID?: string,
+ *   id?: string|null,
+ *   created_at?: string|null,
+ *   record_type?: string|null,
+ *   updated_at?: string|null,
+ *   public_key?: string|null,
+ *   last_seen?: string|null,
+ *   private_key?: string|null,
+ *   wireguard_interface_id?: string|null,
  * }
  */
 final class Data implements BaseModel
@@ -34,44 +34,44 @@ final class Data implements BaseModel
     /**
      * ISO 8601 formatted date-time indicating when the resource was created.
      */
-    #[Api('created_at', optional: true)]
-    public ?string $createdAt;
+    #[Api(optional: true)]
+    public ?string $created_at;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api('record_type', optional: true)]
-    public ?string $recordType;
+    #[Api(optional: true)]
+    public ?string $record_type;
 
     /**
      * ISO 8601 formatted date-time indicating when the resource was updated.
      */
-    #[Api('updated_at', optional: true)]
-    public ?string $updatedAt;
+    #[Api(optional: true)]
+    public ?string $updated_at;
 
     /**
      * The WireGuard `PublicKey`.<br /><br />If you do not provide a Public Key, a new Public and Private key pair will be generated for you.
      */
-    #[Api('public_key', optional: true)]
-    public ?string $publicKey;
+    #[Api(optional: true)]
+    public ?string $public_key;
 
     /**
      * ISO 8601 formatted date-time indicating when peer sent traffic last time.
      */
-    #[Api('last_seen', optional: true)]
-    public ?string $lastSeen;
+    #[Api(optional: true)]
+    public ?string $last_seen;
 
     /**
      * Your WireGuard `Interface.PrivateKey`.<br /><br />This attribute is only ever utlised if, on POST, you do NOT provide your own `public_key`. In which case, a new Public and Private key pair will be generated for you. When your `private_key` is returned, you must save this immediately as we do not save it within Telnyx. If you lose your Private Key, it can not be recovered.
      */
-    #[Api('private_key', optional: true)]
-    public ?string $privateKey;
+    #[Api(optional: true)]
+    public ?string $private_key;
 
     /**
      * The id of the wireguard interface associated with the peer.
      */
-    #[Api('wireguard_interface_id', optional: true)]
-    public ?string $wireguardInterfaceID;
+    #[Api(optional: true)]
+    public ?string $wireguard_interface_id;
 
     public function __construct()
     {
@@ -85,24 +85,24 @@ final class Data implements BaseModel
      */
     public static function with(
         ?string $id = null,
-        ?string $createdAt = null,
-        ?string $recordType = null,
-        ?string $updatedAt = null,
-        ?string $publicKey = null,
-        ?string $lastSeen = null,
-        ?string $privateKey = null,
-        ?string $wireguardInterfaceID = null,
+        ?string $created_at = null,
+        ?string $record_type = null,
+        ?string $updated_at = null,
+        ?string $public_key = null,
+        ?string $last_seen = null,
+        ?string $private_key = null,
+        ?string $wireguard_interface_id = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj->id = $id;
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $recordType && $obj->recordType = $recordType;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
-        null !== $publicKey && $obj->publicKey = $publicKey;
-        null !== $lastSeen && $obj->lastSeen = $lastSeen;
-        null !== $privateKey && $obj->privateKey = $privateKey;
-        null !== $wireguardInterfaceID && $obj->wireguardInterfaceID = $wireguardInterfaceID;
+        null !== $created_at && $obj->created_at = $created_at;
+        null !== $record_type && $obj->record_type = $record_type;
+        null !== $updated_at && $obj->updated_at = $updated_at;
+        null !== $public_key && $obj->public_key = $public_key;
+        null !== $last_seen && $obj->last_seen = $last_seen;
+        null !== $private_key && $obj->private_key = $private_key;
+        null !== $wireguard_interface_id && $obj->wireguard_interface_id = $wireguard_interface_id;
 
         return $obj;
     }
@@ -124,7 +124,7 @@ final class Data implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }
@@ -135,7 +135,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType;
+        $obj->record_type = $recordType;
 
         return $obj;
     }
@@ -146,7 +146,7 @@ final class Data implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $obj->updated_at = $updatedAt;
 
         return $obj;
     }
@@ -157,7 +157,7 @@ final class Data implements BaseModel
     public function withPublicKey(string $publicKey): self
     {
         $obj = clone $this;
-        $obj->publicKey = $publicKey;
+        $obj->public_key = $publicKey;
 
         return $obj;
     }
@@ -168,7 +168,7 @@ final class Data implements BaseModel
     public function withLastSeen(string $lastSeen): self
     {
         $obj = clone $this;
-        $obj->lastSeen = $lastSeen;
+        $obj->last_seen = $lastSeen;
 
         return $obj;
     }
@@ -179,7 +179,7 @@ final class Data implements BaseModel
     public function withPrivateKey(string $privateKey): self
     {
         $obj = clone $this;
-        $obj->privateKey = $privateKey;
+        $obj->private_key = $privateKey;
 
         return $obj;
     }
@@ -190,7 +190,7 @@ final class Data implements BaseModel
     public function withWireguardInterfaceID(string $wireguardInterfaceID): self
     {
         $obj = clone $this;
-        $obj->wireguardInterfaceID = $wireguardInterfaceID;
+        $obj->wireguard_interface_id = $wireguardInterfaceID;
 
         return $obj;
     }

@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type DataShape = array{
- *   id: string, allowedTools: list<string>, integrationID: string
+ *   id: string, allowed_tools: list<string>, integration_id: string
  * }
  */
 final class Data implements BaseModel
@@ -21,19 +21,19 @@ final class Data implements BaseModel
     #[Api]
     public string $id;
 
-    /** @var list<string> $allowedTools */
-    #[Api('allowed_tools', list: 'string')]
-    public array $allowedTools;
+    /** @var list<string> $allowed_tools */
+    #[Api(list: 'string')]
+    public array $allowed_tools;
 
-    #[Api('integration_id')]
-    public string $integrationID;
+    #[Api]
+    public string $integration_id;
 
     /**
      * `new Data()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Data::with(id: ..., allowedTools: ..., integrationID: ...)
+     * Data::with(id: ..., allowed_tools: ..., integration_id: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -52,18 +52,18 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $allowedTools
+     * @param list<string> $allowed_tools
      */
     public static function with(
         string $id,
-        array $allowedTools,
-        string $integrationID
+        array $allowed_tools,
+        string $integration_id
     ): self {
         $obj = new self;
 
         $obj->id = $id;
-        $obj->allowedTools = $allowedTools;
-        $obj->integrationID = $integrationID;
+        $obj->allowed_tools = $allowed_tools;
+        $obj->integration_id = $integration_id;
 
         return $obj;
     }
@@ -82,7 +82,7 @@ final class Data implements BaseModel
     public function withAllowedTools(array $allowedTools): self
     {
         $obj = clone $this;
-        $obj->allowedTools = $allowedTools;
+        $obj->allowed_tools = $allowedTools;
 
         return $obj;
     }
@@ -90,7 +90,7 @@ final class Data implements BaseModel
     public function withIntegrationID(string $integrationID): self
     {
         $obj = clone $this;
-        $obj->integrationID = $integrationID;
+        $obj->integration_id = $integrationID;
 
         return $obj;
     }

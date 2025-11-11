@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Messages\Rcs->generateDeeplink
  *
  * @phpstan-type RcGenerateDeeplinkParamsShape = array{
- *   body?: string, phoneNumber?: string
+ *   body?: string, phone_number?: string
  * }
  */
 final class RcGenerateDeeplinkParams implements BaseModel
@@ -34,7 +34,7 @@ final class RcGenerateDeeplinkParams implements BaseModel
      * Phone number in E164 format (URL encoded).
      */
     #[Api(optional: true)]
-    public ?string $phoneNumber;
+    public ?string $phone_number;
 
     public function __construct()
     {
@@ -48,12 +48,12 @@ final class RcGenerateDeeplinkParams implements BaseModel
      */
     public static function with(
         ?string $body = null,
-        ?string $phoneNumber = null
+        ?string $phone_number = null
     ): self {
         $obj = new self;
 
         null !== $body && $obj->body = $body;
-        null !== $phoneNumber && $obj->phoneNumber = $phoneNumber;
+        null !== $phone_number && $obj->phone_number = $phone_number;
 
         return $obj;
     }
@@ -75,7 +75,7 @@ final class RcGenerateDeeplinkParams implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj->phoneNumber = $phoneNumber;
+        $obj->phone_number = $phoneNumber;
 
         return $obj;
     }

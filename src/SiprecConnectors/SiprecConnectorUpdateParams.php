@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\SiprecConnectors->update
  *
  * @phpstan-type SiprecConnectorUpdateParamsShape = array{
- *   host: string, name: string, port: int, appSubdomain?: string
+ *   host: string, name: string, port: int, app_subdomain?: string
  * }
  */
 final class SiprecConnectorUpdateParams implements BaseModel
@@ -45,8 +45,8 @@ final class SiprecConnectorUpdateParams implements BaseModel
     /**
      * Subdomain to route the call when using Telnyx SRS (optional for non-Telnyx SRS).
      */
-    #[Api('app_subdomain', optional: true)]
-    public ?string $appSubdomain;
+    #[Api(optional: true)]
+    public ?string $app_subdomain;
 
     /**
      * `new SiprecConnectorUpdateParams()` is missing required properties by the API.
@@ -76,7 +76,7 @@ final class SiprecConnectorUpdateParams implements BaseModel
         string $host,
         string $name,
         int $port,
-        ?string $appSubdomain = null
+        ?string $app_subdomain = null
     ): self {
         $obj = new self;
 
@@ -84,7 +84,7 @@ final class SiprecConnectorUpdateParams implements BaseModel
         $obj->name = $name;
         $obj->port = $port;
 
-        null !== $appSubdomain && $obj->appSubdomain = $appSubdomain;
+        null !== $app_subdomain && $obj->app_subdomain = $app_subdomain;
 
         return $obj;
     }
@@ -128,7 +128,7 @@ final class SiprecConnectorUpdateParams implements BaseModel
     public function withAppSubdomain(string $appSubdomain): self
     {
         $obj = clone $this;
-        $obj->appSubdomain = $appSubdomain;
+        $obj->app_subdomain = $appSubdomain;
 
         return $obj;
     }

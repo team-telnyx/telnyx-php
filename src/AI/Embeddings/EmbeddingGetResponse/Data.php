@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type DataShape = array{
- *   createdAt?: string,
- *   finishedAt?: string,
- *   status?: value-of<BackgroundTaskStatus>,
- *   taskID?: string,
- *   taskName?: string,
+ *   created_at?: string|null,
+ *   finished_at?: string|null,
+ *   status?: value-of<BackgroundTaskStatus>|null,
+ *   task_id?: string|null,
+ *   task_name?: string|null,
  * }
  */
 final class Data implements BaseModel
@@ -23,11 +23,11 @@ final class Data implements BaseModel
     /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Api('created_at', optional: true)]
-    public ?string $createdAt;
+    #[Api(optional: true)]
+    public ?string $created_at;
 
-    #[Api('finished_at', optional: true)]
-    public ?string $finishedAt;
+    #[Api(optional: true)]
+    public ?string $finished_at;
 
     /**
      * Status of an embeddings task.
@@ -37,11 +37,11 @@ final class Data implements BaseModel
     #[Api(enum: BackgroundTaskStatus::class, optional: true)]
     public ?string $status;
 
-    #[Api('task_id', optional: true)]
-    public ?string $taskID;
+    #[Api(optional: true)]
+    public ?string $task_id;
 
-    #[Api('task_name', optional: true)]
-    public ?string $taskName;
+    #[Api(optional: true)]
+    public ?string $task_name;
 
     public function __construct()
     {
@@ -56,19 +56,19 @@ final class Data implements BaseModel
      * @param BackgroundTaskStatus|value-of<BackgroundTaskStatus> $status
      */
     public static function with(
-        ?string $createdAt = null,
-        ?string $finishedAt = null,
+        ?string $created_at = null,
+        ?string $finished_at = null,
         BackgroundTaskStatus|string|null $status = null,
-        ?string $taskID = null,
-        ?string $taskName = null,
+        ?string $task_id = null,
+        ?string $task_name = null,
     ): self {
         $obj = new self;
 
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $finishedAt && $obj->finishedAt = $finishedAt;
+        null !== $created_at && $obj->created_at = $created_at;
+        null !== $finished_at && $obj->finished_at = $finished_at;
         null !== $status && $obj['status'] = $status;
-        null !== $taskID && $obj->taskID = $taskID;
-        null !== $taskName && $obj->taskName = $taskName;
+        null !== $task_id && $obj->task_id = $task_id;
+        null !== $task_name && $obj->task_name = $task_name;
 
         return $obj;
     }
@@ -76,7 +76,7 @@ final class Data implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }
@@ -84,7 +84,7 @@ final class Data implements BaseModel
     public function withFinishedAt(string $finishedAt): self
     {
         $obj = clone $this;
-        $obj->finishedAt = $finishedAt;
+        $obj->finished_at = $finishedAt;
 
         return $obj;
     }
@@ -105,7 +105,7 @@ final class Data implements BaseModel
     public function withTaskID(string $taskID): self
     {
         $obj = clone $this;
-        $obj->taskID = $taskID;
+        $obj->task_id = $taskID;
 
         return $obj;
     }
@@ -113,7 +113,7 @@ final class Data implements BaseModel
     public function withTaskName(string $taskName): self
     {
         $obj = clone $this;
-        $obj->taskName = $taskName;
+        $obj->task_name = $taskName;
 
         return $obj;
     }

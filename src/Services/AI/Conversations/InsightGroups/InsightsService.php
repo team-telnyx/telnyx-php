@@ -23,38 +23,21 @@ final class InsightsService implements InsightsContract
      *
      * Assign an insight to a group
      *
-     * @param string $groupID The ID of the insight group
+     * @param array{group_id: string}|InsightAssignParams $params
      *
      * @throws APIException
      */
     public function assign(
         string $insightID,
-        $groupID,
-        ?RequestOptions $requestOptions = null
-    ): mixed {
-        $params = ['groupID' => $groupID];
-
-        return $this->assignRaw($insightID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function assignRaw(
-        string $insightID,
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|InsightAssignParams $params,
+        ?RequestOptions $requestOptions = null,
     ): mixed {
         [$parsed, $options] = InsightAssignParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
-        $groupID = $parsed['groupID'];
-        unset($parsed['groupID']);
+        $groupID = $parsed['group_id'];
+        unset($parsed['group_id']);
 
         // @phpstan-ignore-next-line;
         return $this->client->request(
@@ -74,38 +57,21 @@ final class InsightsService implements InsightsContract
      *
      * Remove an insight from a group
      *
-     * @param string $groupID The ID of the insight group
+     * @param array{group_id: string}|InsightDeleteUnassignParams $params
      *
      * @throws APIException
      */
     public function deleteUnassign(
         string $insightID,
-        $groupID,
-        ?RequestOptions $requestOptions = null
-    ): mixed {
-        $params = ['groupID' => $groupID];
-
-        return $this->deleteUnassignRaw($insightID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function deleteUnassignRaw(
-        string $insightID,
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|InsightDeleteUnassignParams $params,
+        ?RequestOptions $requestOptions = null,
     ): mixed {
         [$parsed, $options] = InsightDeleteUnassignParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
-        $groupID = $parsed['groupID'];
-        unset($parsed['groupID']);
+        $groupID = $parsed['group_id'];
+        unset($parsed['group_id']);
 
         // @phpstan-ignore-next-line;
         return $this->client->request(

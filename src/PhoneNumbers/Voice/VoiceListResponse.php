@@ -14,7 +14,7 @@ use Telnyx\PhoneNumbers\Actions\PhoneNumberWithVoiceSettings;
 
 /**
  * @phpstan-type VoiceListResponseShape = array{
- *   data?: list<PhoneNumberWithVoiceSettings>, meta?: PaginationMeta
+ *   data?: list<PhoneNumberWithVoiceSettings>|null, meta?: PaginationMeta|null
  * }
  */
 final class VoiceListResponse implements BaseModel, ResponseConverter

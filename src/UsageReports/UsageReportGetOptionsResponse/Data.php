@@ -13,10 +13,10 @@ use Telnyx\UsageReports\UsageReportGetOptionsResponse\Data\RecordType;
  * An object following one of the schemas published in https://developers.telnyx.com/docs/api/v2/detail-records.
  *
  * @phpstan-type DataShape = array{
- *   product?: string,
- *   productDimensions?: list<string>,
- *   productMetrics?: list<string>,
- *   recordTypes?: list<RecordType>,
+ *   product?: string|null,
+ *   product_dimensions?: list<string>|null,
+ *   product_metrics?: list<string>|null,
+ *   record_types?: list<RecordType>|null,
  * }
  */
 final class Data implements BaseModel
@@ -33,26 +33,26 @@ final class Data implements BaseModel
     /**
      * Telnyx Product Dimensions.
      *
-     * @var list<string>|null $productDimensions
+     * @var list<string>|null $product_dimensions
      */
-    #[Api('product_dimensions', list: 'string', optional: true)]
-    public ?array $productDimensions;
+    #[Api(list: 'string', optional: true)]
+    public ?array $product_dimensions;
 
     /**
      * Telnyx Product Metrics.
      *
-     * @var list<string>|null $productMetrics
+     * @var list<string>|null $product_metrics
      */
-    #[Api('product_metrics', list: 'string', optional: true)]
-    public ?array $productMetrics;
+    #[Api(list: 'string', optional: true)]
+    public ?array $product_metrics;
 
     /**
      * Subproducts if applicable.
      *
-     * @var list<RecordType>|null $recordTypes
+     * @var list<RecordType>|null $record_types
      */
-    #[Api('record_types', list: RecordType::class, optional: true)]
-    public ?array $recordTypes;
+    #[Api(list: RecordType::class, optional: true)]
+    public ?array $record_types;
 
     public function __construct()
     {
@@ -64,22 +64,22 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $productDimensions
-     * @param list<string> $productMetrics
-     * @param list<RecordType> $recordTypes
+     * @param list<string> $product_dimensions
+     * @param list<string> $product_metrics
+     * @param list<RecordType> $record_types
      */
     public static function with(
         ?string $product = null,
-        ?array $productDimensions = null,
-        ?array $productMetrics = null,
-        ?array $recordTypes = null,
+        ?array $product_dimensions = null,
+        ?array $product_metrics = null,
+        ?array $record_types = null,
     ): self {
         $obj = new self;
 
         null !== $product && $obj->product = $product;
-        null !== $productDimensions && $obj->productDimensions = $productDimensions;
-        null !== $productMetrics && $obj->productMetrics = $productMetrics;
-        null !== $recordTypes && $obj->recordTypes = $recordTypes;
+        null !== $product_dimensions && $obj->product_dimensions = $product_dimensions;
+        null !== $product_metrics && $obj->product_metrics = $product_metrics;
+        null !== $record_types && $obj->record_types = $record_types;
 
         return $obj;
     }
@@ -103,7 +103,7 @@ final class Data implements BaseModel
     public function withProductDimensions(array $productDimensions): self
     {
         $obj = clone $this;
-        $obj->productDimensions = $productDimensions;
+        $obj->product_dimensions = $productDimensions;
 
         return $obj;
     }
@@ -116,7 +116,7 @@ final class Data implements BaseModel
     public function withProductMetrics(array $productMetrics): self
     {
         $obj = clone $this;
-        $obj->productMetrics = $productMetrics;
+        $obj->product_metrics = $productMetrics;
 
         return $obj;
     }
@@ -129,7 +129,7 @@ final class Data implements BaseModel
     public function withRecordTypes(array $recordTypes): self
     {
         $obj = clone $this;
-        $obj->recordTypes = $recordTypes;
+        $obj->record_types = $recordTypes;
 
         return $obj;
     }

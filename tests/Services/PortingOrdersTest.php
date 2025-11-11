@@ -33,9 +33,9 @@ final class PortingOrdersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->portingOrders->create(
-            phoneNumbers: ['+13035550000', '+13035550001', '+13035550002']
-        );
+        $result = $this->client->portingOrders->create([
+            'phone_numbers' => ['+13035550000', '+13035550001', '+13035550002'],
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -47,9 +47,9 @@ final class PortingOrdersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->portingOrders->create(
-            phoneNumbers: ['+13035550000', '+13035550001', '+13035550002']
-        );
+        $result = $this->client->portingOrders->create([
+            'phone_numbers' => ['+13035550000', '+13035550001', '+13035550002'],
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -62,7 +62,8 @@ final class PortingOrdersTest extends TestCase
         }
 
         $result = $this->client->portingOrders->retrieve(
-            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
+            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+            []
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -76,7 +77,8 @@ final class PortingOrdersTest extends TestCase
         }
 
         $result = $this->client->portingOrders->update(
-            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
+            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+            []
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -89,7 +91,7 @@ final class PortingOrdersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->portingOrders->list();
+        $result = $this->client->portingOrders->list([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -142,7 +144,8 @@ final class PortingOrdersTest extends TestCase
         }
 
         $result = $this->client->portingOrders->retrieveLoaTemplate(
-            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
+            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+            []
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -156,7 +159,8 @@ final class PortingOrdersTest extends TestCase
         }
 
         $result = $this->client->portingOrders->retrieveRequirements(
-            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
+            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+            []
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType

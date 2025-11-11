@@ -35,7 +35,7 @@ final class PhoneNumbersTest extends TestCase
 
         $result = $this->client->externalConnections->phoneNumbers->retrieve(
             '1234567889',
-            'id'
+            ['id' => 'id']
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -50,7 +50,7 @@ final class PhoneNumbersTest extends TestCase
 
         $result = $this->client->externalConnections->phoneNumbers->retrieve(
             '1234567889',
-            'id'
+            ['id' => 'id']
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -65,7 +65,7 @@ final class PhoneNumbersTest extends TestCase
 
         $result = $this->client->externalConnections->phoneNumbers->update(
             '1234567889',
-            id: 'id'
+            ['id' => 'id']
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -80,7 +80,7 @@ final class PhoneNumbersTest extends TestCase
 
         $result = $this->client->externalConnections->phoneNumbers->update(
             '1234567889',
-            id: 'id'
+            ['id' => 'id']
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -93,7 +93,7 @@ final class PhoneNumbersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->externalConnections->phoneNumbers->list('id');
+        $result = $this->client->externalConnections->phoneNumbers->list('id', []);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

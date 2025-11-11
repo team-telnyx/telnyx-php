@@ -11,13 +11,13 @@ use Telnyx\RequirementGroups\RequirementGroup\RegulatoryRequirement\Status;
 
 /**
  * @phpstan-type RegulatoryRequirementShape = array{
- *   createdAt?: \DateTimeInterface,
- *   expiresAt?: \DateTimeInterface,
- *   fieldType?: string,
- *   fieldValue?: string,
- *   requirementID?: string,
- *   status?: value-of<Status>,
- *   updatedAt?: \DateTimeInterface,
+ *   created_at?: \DateTimeInterface|null,
+ *   expires_at?: \DateTimeInterface|null,
+ *   field_type?: string|null,
+ *   field_value?: string|null,
+ *   requirement_id?: string|null,
+ *   status?: value-of<Status>|null,
+ *   updated_at?: \DateTimeInterface|null,
  * }
  */
 final class RegulatoryRequirement implements BaseModel
@@ -25,27 +25,27 @@ final class RegulatoryRequirement implements BaseModel
     /** @use SdkModel<RegulatoryRequirementShape> */
     use SdkModel;
 
-    #[Api('created_at', optional: true)]
-    public ?\DateTimeInterface $createdAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $created_at;
 
-    #[Api('expires_at', optional: true)]
-    public ?\DateTimeInterface $expiresAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $expires_at;
 
-    #[Api('field_type', optional: true)]
-    public ?string $fieldType;
+    #[Api(optional: true)]
+    public ?string $field_type;
 
-    #[Api('field_value', optional: true)]
-    public ?string $fieldValue;
+    #[Api(optional: true)]
+    public ?string $field_value;
 
-    #[Api('requirement_id', optional: true)]
-    public ?string $requirementID;
+    #[Api(optional: true)]
+    public ?string $requirement_id;
 
     /** @var value-of<Status>|null $status */
     #[Api(enum: Status::class, optional: true)]
     public ?string $status;
 
-    #[Api('updated_at', optional: true)]
-    public ?\DateTimeInterface $updatedAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $updated_at;
 
     public function __construct()
     {
@@ -60,23 +60,23 @@ final class RegulatoryRequirement implements BaseModel
      * @param Status|value-of<Status> $status
      */
     public static function with(
-        ?\DateTimeInterface $createdAt = null,
-        ?\DateTimeInterface $expiresAt = null,
-        ?string $fieldType = null,
-        ?string $fieldValue = null,
-        ?string $requirementID = null,
+        ?\DateTimeInterface $created_at = null,
+        ?\DateTimeInterface $expires_at = null,
+        ?string $field_type = null,
+        ?string $field_value = null,
+        ?string $requirement_id = null,
         Status|string|null $status = null,
-        ?\DateTimeInterface $updatedAt = null,
+        ?\DateTimeInterface $updated_at = null,
     ): self {
         $obj = new self;
 
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $expiresAt && $obj->expiresAt = $expiresAt;
-        null !== $fieldType && $obj->fieldType = $fieldType;
-        null !== $fieldValue && $obj->fieldValue = $fieldValue;
-        null !== $requirementID && $obj->requirementID = $requirementID;
+        null !== $created_at && $obj->created_at = $created_at;
+        null !== $expires_at && $obj->expires_at = $expires_at;
+        null !== $field_type && $obj->field_type = $field_type;
+        null !== $field_value && $obj->field_value = $field_value;
+        null !== $requirement_id && $obj->requirement_id = $requirement_id;
         null !== $status && $obj['status'] = $status;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
+        null !== $updated_at && $obj->updated_at = $updated_at;
 
         return $obj;
     }
@@ -84,7 +84,7 @@ final class RegulatoryRequirement implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }
@@ -92,7 +92,7 @@ final class RegulatoryRequirement implements BaseModel
     public function withExpiresAt(\DateTimeInterface $expiresAt): self
     {
         $obj = clone $this;
-        $obj->expiresAt = $expiresAt;
+        $obj->expires_at = $expiresAt;
 
         return $obj;
     }
@@ -100,7 +100,7 @@ final class RegulatoryRequirement implements BaseModel
     public function withFieldType(string $fieldType): self
     {
         $obj = clone $this;
-        $obj->fieldType = $fieldType;
+        $obj->field_type = $fieldType;
 
         return $obj;
     }
@@ -108,7 +108,7 @@ final class RegulatoryRequirement implements BaseModel
     public function withFieldValue(string $fieldValue): self
     {
         $obj = clone $this;
-        $obj->fieldValue = $fieldValue;
+        $obj->field_value = $fieldValue;
 
         return $obj;
     }
@@ -116,7 +116,7 @@ final class RegulatoryRequirement implements BaseModel
     public function withRequirementID(string $requirementID): self
     {
         $obj = clone $this;
-        $obj->requirementID = $requirementID;
+        $obj->requirement_id = $requirementID;
 
         return $obj;
     }
@@ -135,7 +135,7 @@ final class RegulatoryRequirement implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $obj->updated_at = $updatedAt;
 
         return $obj;
     }

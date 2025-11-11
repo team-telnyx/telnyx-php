@@ -33,11 +33,9 @@ final class McpServersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ai->mcpServers->create(
-            name: 'name',
-            type: 'type',
-            url: 'url'
-        );
+        $result = $this->client->ai->mcpServers->create([
+            'name' => 'name', 'type' => 'type', 'url' => 'url',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -49,11 +47,9 @@ final class McpServersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ai->mcpServers->create(
-            name: 'name',
-            type: 'type',
-            url: 'url'
-        );
+        $result = $this->client->ai->mcpServers->create([
+            'name' => 'name', 'type' => 'type', 'url' => 'url',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -77,7 +73,7 @@ final class McpServersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ai->mcpServers->update('mcp_server_id');
+        $result = $this->client->ai->mcpServers->update('mcp_server_id', []);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -89,7 +85,7 @@ final class McpServersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ai->mcpServers->list();
+        $result = $this->client->ai->mcpServers->list([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

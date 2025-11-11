@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type ReportNewResponseShape = array{data?: PortingReport}
+ * @phpstan-type ReportNewResponseShape = array{data?: PortingReport|null}
  */
 final class ReportNewResponse implements BaseModel, ResponseConverter
 {

@@ -6,39 +6,25 @@ namespace Telnyx\ServiceContracts\Wireless;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
+use Telnyx\Wireless\DetailRecordsReports\DetailRecordsReportCreateParams;
 use Telnyx\Wireless\DetailRecordsReports\DetailRecordsReportDeleteResponse;
 use Telnyx\Wireless\DetailRecordsReports\DetailRecordsReportGetResponse;
+use Telnyx\Wireless\DetailRecordsReports\DetailRecordsReportListParams;
 use Telnyx\Wireless\DetailRecordsReports\DetailRecordsReportListResponse;
 use Telnyx\Wireless\DetailRecordsReports\DetailRecordsReportNewResponse;
-
-use const Telnyx\Core\OMIT as omit;
 
 interface DetailRecordsReportsContract
 {
     /**
      * @api
      *
-     * @param string $endTime ISO 8601 formatted date-time indicating the end time
-     * @param string $startTime ISO 8601 formatted date-time indicating the start time
+     * @param array<mixed>|DetailRecordsReportCreateParams $params
      *
      * @throws APIException
      */
     public function create(
-        $endTime = omit,
-        $startTime = omit,
+        array|DetailRecordsReportCreateParams $params,
         ?RequestOptions $requestOptions = null,
-    ): DetailRecordsReportNewResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): DetailRecordsReportNewResponse;
 
     /**
@@ -54,27 +40,13 @@ interface DetailRecordsReportsContract
     /**
      * @api
      *
-     * @param int $pageNumber the page number to load
-     * @param int $pageSize the size of the page
+     * @param array<mixed>|DetailRecordsReportListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $pageNumber = omit,
-        $pageSize = omit,
+        array|DetailRecordsReportListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): DetailRecordsReportListResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): DetailRecordsReportListResponse;
 
     /**

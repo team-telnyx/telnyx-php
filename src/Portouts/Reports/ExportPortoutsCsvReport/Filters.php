@@ -13,12 +13,12 @@ use Telnyx\Portouts\Reports\ExportPortoutsCsvReport\Filters\StatusIn;
  * The filters to apply to the export port-out CSV report.
  *
  * @phpstan-type FiltersShape = array{
- *   createdAtGt?: \DateTimeInterface,
- *   createdAtLt?: \DateTimeInterface,
- *   customerReferenceIn?: list<string>,
- *   endUserName?: string,
- *   phoneNumbersOverlaps?: list<string>,
- *   statusIn?: list<value-of<StatusIn>>,
+ *   created_at__gt?: \DateTimeInterface|null,
+ *   created_at__lt?: \DateTimeInterface|null,
+ *   customer_reference__in?: list<string>|null,
+ *   end_user_name?: string|null,
+ *   phone_numbers__overlaps?: list<string>|null,
+ *   status__in?: list<value-of<StatusIn>>|null,
  * }
  */
 final class Filters implements BaseModel
@@ -29,44 +29,44 @@ final class Filters implements BaseModel
     /**
      * The date and time the port-out was created after.
      */
-    #[Api('created_at__gt', optional: true)]
-    public ?\DateTimeInterface $createdAtGt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $created_at__gt;
 
     /**
      * The date and time the port-out was created before.
      */
-    #[Api('created_at__lt', optional: true)]
-    public ?\DateTimeInterface $createdAtLt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $created_at__lt;
 
     /**
      * The customer reference of the port-outs to include in the report.
      *
-     * @var list<string>|null $customerReferenceIn
+     * @var list<string>|null $customer_reference__in
      */
-    #[Api('customer_reference__in', list: 'string', optional: true)]
-    public ?array $customerReferenceIn;
+    #[Api(list: 'string', optional: true)]
+    public ?array $customer_reference__in;
 
     /**
      * The end user name of the port-outs to include in the report.
      */
-    #[Api('end_user_name', optional: true)]
-    public ?string $endUserName;
+    #[Api(optional: true)]
+    public ?string $end_user_name;
 
     /**
      * A list of phone numbers that the port-outs phone numbers must overlap with.
      *
-     * @var list<string>|null $phoneNumbersOverlaps
+     * @var list<string>|null $phone_numbers__overlaps
      */
-    #[Api('phone_numbers__overlaps', list: 'string', optional: true)]
-    public ?array $phoneNumbersOverlaps;
+    #[Api(list: 'string', optional: true)]
+    public ?array $phone_numbers__overlaps;
 
     /**
      * The status of the port-outs to include in the report.
      *
-     * @var list<value-of<StatusIn>>|null $statusIn
+     * @var list<value-of<StatusIn>>|null $status__in
      */
-    #[Api('status__in', list: StatusIn::class, optional: true)]
-    public ?array $statusIn;
+    #[Api(list: StatusIn::class, optional: true)]
+    public ?array $status__in;
 
     public function __construct()
     {
@@ -78,26 +78,26 @@ final class Filters implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $customerReferenceIn
-     * @param list<string> $phoneNumbersOverlaps
-     * @param list<StatusIn|value-of<StatusIn>> $statusIn
+     * @param list<string> $customer_reference__in
+     * @param list<string> $phone_numbers__overlaps
+     * @param list<StatusIn|value-of<StatusIn>> $status__in
      */
     public static function with(
-        ?\DateTimeInterface $createdAtGt = null,
-        ?\DateTimeInterface $createdAtLt = null,
-        ?array $customerReferenceIn = null,
-        ?string $endUserName = null,
-        ?array $phoneNumbersOverlaps = null,
-        ?array $statusIn = null,
+        ?\DateTimeInterface $created_at__gt = null,
+        ?\DateTimeInterface $created_at__lt = null,
+        ?array $customer_reference__in = null,
+        ?string $end_user_name = null,
+        ?array $phone_numbers__overlaps = null,
+        ?array $status__in = null,
     ): self {
         $obj = new self;
 
-        null !== $createdAtGt && $obj->createdAtGt = $createdAtGt;
-        null !== $createdAtLt && $obj->createdAtLt = $createdAtLt;
-        null !== $customerReferenceIn && $obj->customerReferenceIn = $customerReferenceIn;
-        null !== $endUserName && $obj->endUserName = $endUserName;
-        null !== $phoneNumbersOverlaps && $obj->phoneNumbersOverlaps = $phoneNumbersOverlaps;
-        null !== $statusIn && $obj['statusIn'] = $statusIn;
+        null !== $created_at__gt && $obj->created_at__gt = $created_at__gt;
+        null !== $created_at__lt && $obj->created_at__lt = $created_at__lt;
+        null !== $customer_reference__in && $obj->customer_reference__in = $customer_reference__in;
+        null !== $end_user_name && $obj->end_user_name = $end_user_name;
+        null !== $phone_numbers__overlaps && $obj->phone_numbers__overlaps = $phone_numbers__overlaps;
+        null !== $status__in && $obj['status__in'] = $status__in;
 
         return $obj;
     }
@@ -108,7 +108,7 @@ final class Filters implements BaseModel
     public function withCreatedAtGt(\DateTimeInterface $createdAtGt): self
     {
         $obj = clone $this;
-        $obj->createdAtGt = $createdAtGt;
+        $obj->created_at__gt = $createdAtGt;
 
         return $obj;
     }
@@ -119,7 +119,7 @@ final class Filters implements BaseModel
     public function withCreatedAtLt(\DateTimeInterface $createdAtLt): self
     {
         $obj = clone $this;
-        $obj->createdAtLt = $createdAtLt;
+        $obj->created_at__lt = $createdAtLt;
 
         return $obj;
     }
@@ -132,7 +132,7 @@ final class Filters implements BaseModel
     public function withCustomerReferenceIn(array $customerReferenceIn): self
     {
         $obj = clone $this;
-        $obj->customerReferenceIn = $customerReferenceIn;
+        $obj->customer_reference__in = $customerReferenceIn;
 
         return $obj;
     }
@@ -143,7 +143,7 @@ final class Filters implements BaseModel
     public function withEndUserName(string $endUserName): self
     {
         $obj = clone $this;
-        $obj->endUserName = $endUserName;
+        $obj->end_user_name = $endUserName;
 
         return $obj;
     }
@@ -156,7 +156,7 @@ final class Filters implements BaseModel
     public function withPhoneNumbersOverlaps(array $phoneNumbersOverlaps): self
     {
         $obj = clone $this;
-        $obj->phoneNumbersOverlaps = $phoneNumbersOverlaps;
+        $obj->phone_numbers__overlaps = $phoneNumbersOverlaps;
 
         return $obj;
     }
@@ -169,7 +169,7 @@ final class Filters implements BaseModel
     public function withStatusIn(array $statusIn): self
     {
         $obj = clone $this;
-        $obj['statusIn'] = $statusIn;
+        $obj['status__in'] = $statusIn;
 
         return $obj;
     }

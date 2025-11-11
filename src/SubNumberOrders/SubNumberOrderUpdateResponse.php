@@ -11,7 +11,9 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type SubNumberOrderUpdateResponseShape = array{data?: SubNumberOrder}
+ * @phpstan-type SubNumberOrderUpdateResponseShape = array{
+ *   data?: SubNumberOrder|null
+ * }
  */
 final class SubNumberOrderUpdateResponse implements BaseModel, ResponseConverter
 {

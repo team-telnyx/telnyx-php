@@ -14,7 +14,7 @@ use Telnyx\PortingOrders\PortingOrderGetRequirementsResponse\Data;
 
 /**
  * @phpstan-type PortingOrderGetRequirementsResponseShape = array{
- *   data?: list<Data>, meta?: PaginationMeta
+ *   data?: list<Data>|null, meta?: PaginationMeta|null
  * }
  */
 final class PortingOrderGetRequirementsResponse implements BaseModel, ResponseConverter

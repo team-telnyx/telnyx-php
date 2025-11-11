@@ -11,7 +11,9 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type DocumentUploadJsonResponseShape = array{data?: DocServiceDocument}
+ * @phpstan-type DocumentUploadJsonResponseShape = array{
+ *   data?: DocServiceDocument|null
+ * }
  */
 final class DocumentUploadJsonResponse implements BaseModel, ResponseConverter
 {

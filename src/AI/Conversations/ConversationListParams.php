@@ -16,14 +16,14 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-type ConversationListParamsShape = array{
  *   id?: string,
- *   createdAt?: string,
- *   lastMessageAt?: string,
+ *   created_at?: string,
+ *   last_message_at?: string,
  *   limit?: int,
- *   metadataAssistantID?: string,
- *   metadataCallControlID?: string,
- *   metadataTelnyxAgentTarget?: string,
- *   metadataTelnyxConversationChannel?: string,
- *   metadataTelnyxEndUserTarget?: string,
+ *   metadata__assistant_id?: string,
+ *   metadata__call_control_id?: string,
+ *   metadata__telnyx_agent_target?: string,
+ *   metadata__telnyx_conversation_channel?: string,
+ *   metadata__telnyx_end_user_target?: string,
  *   name?: string,
  *   or?: string,
  *   order?: string,
@@ -45,13 +45,13 @@ final class ConversationListParams implements BaseModel
      * Filter by creation datetime (e.g., `created_at=gte.2025-01-01`).
      */
     #[Api(optional: true)]
-    public ?string $createdAt;
+    public ?string $created_at;
 
     /**
      * Filter by last message datetime (e.g., `last_message_at=lte.2025-06-01`).
      */
     #[Api(optional: true)]
-    public ?string $lastMessageAt;
+    public ?string $last_message_at;
 
     /**
      * Limit the number of returned conversations (e.g., `limit=10`).
@@ -63,31 +63,31 @@ final class ConversationListParams implements BaseModel
      * Filter by assistant ID (e.g., `metadata->assistant_id=eq.assistant-123`).
      */
     #[Api(optional: true)]
-    public ?string $metadataAssistantID;
+    public ?string $metadata__assistant_id;
 
     /**
      * Filter by call control ID (e.g., `metadata->call_control_id=eq.v3:123`).
      */
     #[Api(optional: true)]
-    public ?string $metadataCallControlID;
+    public ?string $metadata__call_control_id;
 
     /**
      * Filter by the phone number, SIP URI, or other identifier for the agent (e.g., `metadata->telnyx_agent_target=eq.+13128675309`).
      */
     #[Api(optional: true)]
-    public ?string $metadataTelnyxAgentTarget;
+    public ?string $metadata__telnyx_agent_target;
 
     /**
      * Filter by conversation channel (e.g., `metadata->telnyx_conversation_channel=eq.phone_call`).
      */
     #[Api(optional: true)]
-    public ?string $metadataTelnyxConversationChannel;
+    public ?string $metadata__telnyx_conversation_channel;
 
     /**
      * Filter by the phone number, SIP URI, or other identifier for the end user (e.g., `metadata->telnyx_end_user_target=eq.+13128675309`).
      */
     #[Api(optional: true)]
-    public ?string $metadataTelnyxEndUserTarget;
+    public ?string $metadata__telnyx_end_user_target;
 
     /**
      * Filter by conversation Name (e.g. `name=like.Voice%`).
@@ -119,14 +119,14 @@ final class ConversationListParams implements BaseModel
      */
     public static function with(
         ?string $id = null,
-        ?string $createdAt = null,
-        ?string $lastMessageAt = null,
+        ?string $created_at = null,
+        ?string $last_message_at = null,
         ?int $limit = null,
-        ?string $metadataAssistantID = null,
-        ?string $metadataCallControlID = null,
-        ?string $metadataTelnyxAgentTarget = null,
-        ?string $metadataTelnyxConversationChannel = null,
-        ?string $metadataTelnyxEndUserTarget = null,
+        ?string $metadata__assistant_id = null,
+        ?string $metadata__call_control_id = null,
+        ?string $metadata__telnyx_agent_target = null,
+        ?string $metadata__telnyx_conversation_channel = null,
+        ?string $metadata__telnyx_end_user_target = null,
         ?string $name = null,
         ?string $or = null,
         ?string $order = null,
@@ -134,14 +134,14 @@ final class ConversationListParams implements BaseModel
         $obj = new self;
 
         null !== $id && $obj->id = $id;
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $lastMessageAt && $obj->lastMessageAt = $lastMessageAt;
+        null !== $created_at && $obj->created_at = $created_at;
+        null !== $last_message_at && $obj->last_message_at = $last_message_at;
         null !== $limit && $obj->limit = $limit;
-        null !== $metadataAssistantID && $obj->metadataAssistantID = $metadataAssistantID;
-        null !== $metadataCallControlID && $obj->metadataCallControlID = $metadataCallControlID;
-        null !== $metadataTelnyxAgentTarget && $obj->metadataTelnyxAgentTarget = $metadataTelnyxAgentTarget;
-        null !== $metadataTelnyxConversationChannel && $obj->metadataTelnyxConversationChannel = $metadataTelnyxConversationChannel;
-        null !== $metadataTelnyxEndUserTarget && $obj->metadataTelnyxEndUserTarget = $metadataTelnyxEndUserTarget;
+        null !== $metadata__assistant_id && $obj->metadata__assistant_id = $metadata__assistant_id;
+        null !== $metadata__call_control_id && $obj->metadata__call_control_id = $metadata__call_control_id;
+        null !== $metadata__telnyx_agent_target && $obj->metadata__telnyx_agent_target = $metadata__telnyx_agent_target;
+        null !== $metadata__telnyx_conversation_channel && $obj->metadata__telnyx_conversation_channel = $metadata__telnyx_conversation_channel;
+        null !== $metadata__telnyx_end_user_target && $obj->metadata__telnyx_end_user_target = $metadata__telnyx_end_user_target;
         null !== $name && $obj->name = $name;
         null !== $or && $obj->or = $or;
         null !== $order && $obj->order = $order;
@@ -166,7 +166,7 @@ final class ConversationListParams implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }
@@ -177,7 +177,7 @@ final class ConversationListParams implements BaseModel
     public function withLastMessageAt(string $lastMessageAt): self
     {
         $obj = clone $this;
-        $obj->lastMessageAt = $lastMessageAt;
+        $obj->last_message_at = $lastMessageAt;
 
         return $obj;
     }
@@ -199,7 +199,7 @@ final class ConversationListParams implements BaseModel
     public function withMetadataAssistantID(string $metadataAssistantID): self
     {
         $obj = clone $this;
-        $obj->metadataAssistantID = $metadataAssistantID;
+        $obj->metadata__assistant_id = $metadataAssistantID;
 
         return $obj;
     }
@@ -211,7 +211,7 @@ final class ConversationListParams implements BaseModel
         string $metadataCallControlID
     ): self {
         $obj = clone $this;
-        $obj->metadataCallControlID = $metadataCallControlID;
+        $obj->metadata__call_control_id = $metadataCallControlID;
 
         return $obj;
     }
@@ -223,7 +223,7 @@ final class ConversationListParams implements BaseModel
         string $metadataTelnyxAgentTarget
     ): self {
         $obj = clone $this;
-        $obj->metadataTelnyxAgentTarget = $metadataTelnyxAgentTarget;
+        $obj->metadata__telnyx_agent_target = $metadataTelnyxAgentTarget;
 
         return $obj;
     }
@@ -235,7 +235,7 @@ final class ConversationListParams implements BaseModel
         string $metadataTelnyxConversationChannel
     ): self {
         $obj = clone $this;
-        $obj->metadataTelnyxConversationChannel = $metadataTelnyxConversationChannel;
+        $obj->metadata__telnyx_conversation_channel = $metadataTelnyxConversationChannel;
 
         return $obj;
     }
@@ -247,7 +247,7 @@ final class ConversationListParams implements BaseModel
         string $metadataTelnyxEndUserTarget
     ): self {
         $obj = clone $this;
-        $obj->metadataTelnyxEndUserTarget = $metadataTelnyxEndUserTarget;
+        $obj->metadata__telnyx_end_user_target = $metadataTelnyxEndUserTarget;
 
         return $obj;
     }

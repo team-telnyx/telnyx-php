@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\WireguardInterfaces\WireguardInterfaceDeleteResponse\Data;
 
 /**
- * @phpstan-type WireguardInterfaceDeleteResponseShape = array{data?: Data}
+ * @phpstan-type WireguardInterfaceDeleteResponseShape = array{data?: Data|null}
  */
 final class WireguardInterfaceDeleteResponse implements BaseModel, ResponseConverter
 {

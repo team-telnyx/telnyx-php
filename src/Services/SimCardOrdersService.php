@@ -11,12 +11,8 @@ use Telnyx\ServiceContracts\SimCardOrdersContract;
 use Telnyx\SimCardOrders\SimCardOrderCreateParams;
 use Telnyx\SimCardOrders\SimCardOrderGetResponse;
 use Telnyx\SimCardOrders\SimCardOrderListParams;
-use Telnyx\SimCardOrders\SimCardOrderListParams\Filter;
-use Telnyx\SimCardOrders\SimCardOrderListParams\Page;
 use Telnyx\SimCardOrders\SimCardOrderListResponse;
 use Telnyx\SimCardOrders\SimCardOrderNewResponse;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class SimCardOrdersService implements SimCardOrdersContract
 {
@@ -30,35 +26,17 @@ final class SimCardOrdersService implements SimCardOrdersContract
      *
      * Creates a new order for SIM cards.
      *
-     * @param string $addressID uniquely identifies the address for the order
-     * @param int $quantity the amount of SIM cards to order
+     * @param array{address_id: string, quantity: int}|SimCardOrderCreateParams $params
      *
      * @throws APIException
      */
     public function create(
-        $addressID,
-        $quantity,
-        ?RequestOptions $requestOptions = null
-    ): SimCardOrderNewResponse {
-        $params = ['addressID' => $addressID, 'quantity' => $quantity];
-
-        return $this->createRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|SimCardOrderCreateParams $params,
+        ?RequestOptions $requestOptions = null,
     ): SimCardOrderNewResponse {
         [$parsed, $options] = SimCardOrderCreateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -96,35 +74,34 @@ final class SimCardOrdersService implements SimCardOrdersContract
      *
      * Get all SIM card orders according to filters.
      *
-     * @param Filter $filter Consolidated filter parameter for SIM card orders (deepObject style). Originally: filter[created_at], filter[updated_at], filter[quantity], filter[cost.amount], filter[cost.currency], filter[address.id], filter[address.street_address], filter[address.extended_address], filter[address.locality], filter[address.administrative_area], filter[address.country_code], filter[address.postal_code]
-     * @param Page $page Consolidated pagination parameter (deepObject style). Originally: page[number], page[size]
+     * @param array{
+     *   filter?: array{
+     *     address?: array{
+     *       id?: string,
+     *       administrative_area?: string,
+     *       country_code?: string,
+     *       extended_address?: string,
+     *       locality?: string,
+     *       postal_code?: string,
+     *       street_address?: string,
+     *     },
+     *     cost?: array{amount?: string, currency?: string},
+     *     created_at?: string|\DateTimeInterface,
+     *     quantity?: int,
+     *     updated_at?: string|\DateTimeInterface,
+     *   },
+     *   page?: array{number?: int, size?: int},
+     * }|SimCardOrderListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): SimCardOrderListResponse {
-        $params = ['filter' => $filter, 'page' => $page];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
+        array|SimCardOrderListParams $params,
         ?RequestOptions $requestOptions = null
     ): SimCardOrderListResponse {
         [$parsed, $options] = SimCardOrderListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

@@ -45,7 +45,7 @@ final class AgentsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->messaging->rcs->agents->update('id');
+        $result = $this->client->messaging->rcs->agents->update('id', []);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -57,7 +57,7 @@ final class AgentsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->messaging->rcs->agents->list();
+        $result = $this->client->messaging->rcs->agents->list([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

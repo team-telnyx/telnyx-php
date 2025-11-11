@@ -13,11 +13,11 @@ use Telnyx\Porting\Events\EventGetResponse\Data\Payload\WebhookPortingOrderNewCo
  * The comment that was added to the porting order.
  *
  * @phpstan-type CommentShape = array{
- *   id?: string,
- *   body?: string,
- *   insertedAt?: \DateTimeInterface,
- *   userID?: string,
- *   userType?: value-of<UserType>,
+ *   id?: string|null,
+ *   body?: string|null,
+ *   inserted_at?: \DateTimeInterface|null,
+ *   user_id?: string|null,
+ *   user_type?: value-of<UserType>|null,
  * }
  */
 final class Comment implements BaseModel
@@ -40,22 +40,22 @@ final class Comment implements BaseModel
     /**
      * ISO 8601 formatted date indicating when the comment was created.
      */
-    #[Api('inserted_at', optional: true)]
-    public ?\DateTimeInterface $insertedAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $inserted_at;
 
     /**
      * Identifies the user that create the comment.
      */
-    #[Api('user_id', optional: true)]
-    public ?string $userID;
+    #[Api(optional: true)]
+    public ?string $user_id;
 
     /**
      * Identifies the type of the user that created the comment.
      *
-     * @var value-of<UserType>|null $userType
+     * @var value-of<UserType>|null $user_type
      */
-    #[Api('user_type', enum: UserType::class, optional: true)]
-    public ?string $userType;
+    #[Api(enum: UserType::class, optional: true)]
+    public ?string $user_type;
 
     public function __construct()
     {
@@ -67,22 +67,22 @@ final class Comment implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param UserType|value-of<UserType> $userType
+     * @param UserType|value-of<UserType> $user_type
      */
     public static function with(
         ?string $id = null,
         ?string $body = null,
-        ?\DateTimeInterface $insertedAt = null,
-        ?string $userID = null,
-        UserType|string|null $userType = null,
+        ?\DateTimeInterface $inserted_at = null,
+        ?string $user_id = null,
+        UserType|string|null $user_type = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj->id = $id;
         null !== $body && $obj->body = $body;
-        null !== $insertedAt && $obj->insertedAt = $insertedAt;
-        null !== $userID && $obj->userID = $userID;
-        null !== $userType && $obj['userType'] = $userType;
+        null !== $inserted_at && $obj->inserted_at = $inserted_at;
+        null !== $user_id && $obj->user_id = $user_id;
+        null !== $user_type && $obj['user_type'] = $user_type;
 
         return $obj;
     }
@@ -115,7 +115,7 @@ final class Comment implements BaseModel
     public function withInsertedAt(\DateTimeInterface $insertedAt): self
     {
         $obj = clone $this;
-        $obj->insertedAt = $insertedAt;
+        $obj->inserted_at = $insertedAt;
 
         return $obj;
     }
@@ -126,7 +126,7 @@ final class Comment implements BaseModel
     public function withUserID(string $userID): self
     {
         $obj = clone $this;
-        $obj->userID = $userID;
+        $obj->user_id = $userID;
 
         return $obj;
     }
@@ -139,7 +139,7 @@ final class Comment implements BaseModel
     public function withUserType(UserType|string $userType): self
     {
         $obj = clone $this;
-        $obj['userType'] = $userType;
+        $obj['user_type'] = $userType;
 
         return $obj;
     }

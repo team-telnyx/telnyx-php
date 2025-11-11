@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Filter by connection name pattern matching.
  *
- * @phpstan-type ConnectionNameShape = array{contains?: string}
+ * @phpstan-type ConnectionNameShape = array{contains?: string|null}
  */
 final class ConnectionName implements BaseModel
 {

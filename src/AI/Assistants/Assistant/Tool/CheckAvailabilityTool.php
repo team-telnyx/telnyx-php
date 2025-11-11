@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type CheckAvailabilityToolShape = array{
- *   checkAvailability: CheckAvailability, type: value-of<Type>
+ *   check_availability: CheckAvailability, type: value-of<Type>
  * }
  */
 final class CheckAvailabilityTool implements BaseModel
@@ -20,8 +20,8 @@ final class CheckAvailabilityTool implements BaseModel
     /** @use SdkModel<CheckAvailabilityToolShape> */
     use SdkModel;
 
-    #[Api('check_availability')]
-    public CheckAvailability $checkAvailability;
+    #[Api]
+    public CheckAvailability $check_availability;
 
     /** @var value-of<Type> $type */
     #[Api(enum: Type::class)]
@@ -32,7 +32,7 @@ final class CheckAvailabilityTool implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * CheckAvailabilityTool::with(checkAvailability: ..., type: ...)
+     * CheckAvailabilityTool::with(check_availability: ..., type: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -54,12 +54,12 @@ final class CheckAvailabilityTool implements BaseModel
      * @param Type|value-of<Type> $type
      */
     public static function with(
-        CheckAvailability $checkAvailability,
+        CheckAvailability $check_availability,
         Type|string $type
     ): self {
         $obj = new self;
 
-        $obj->checkAvailability = $checkAvailability;
+        $obj->check_availability = $check_availability;
         $obj['type'] = $type;
 
         return $obj;
@@ -69,7 +69,7 @@ final class CheckAvailabilityTool implements BaseModel
         CheckAvailability $checkAvailability
     ): self {
         $obj = clone $this;
-        $obj->checkAvailability = $checkAvailability;
+        $obj->check_availability = $checkAvailability;
 
         return $obj;
     }

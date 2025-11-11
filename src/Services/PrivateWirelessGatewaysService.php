@@ -15,8 +15,6 @@ use Telnyx\PrivateWirelessGateways\PrivateWirelessGatewayNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PrivateWirelessGatewaysContract;
 
-use const Telnyx\Core\OMIT as omit;
-
 final class PrivateWirelessGatewaysService implements PrivateWirelessGatewaysContract
 {
     /**
@@ -29,39 +27,19 @@ final class PrivateWirelessGatewaysService implements PrivateWirelessGatewaysCon
      *
      * Asynchronously create a Private Wireless Gateway for SIM cards for a previously created network. This operation may take several minutes so you can check the Private Wireless Gateway status at the section Get a Private Wireless Gateway.
      *
-     * @param string $name the private wireless gateway name
-     * @param string $networkID the identification of the related network resource
-     * @param string $regionCode The code of the region where the private wireless gateway will be assigned. A list of available regions can be found at the regions endpoint
+     * @param array{
+     *   name: string, network_id: string, region_code?: string
+     * }|PrivateWirelessGatewayCreateParams $params
      *
      * @throws APIException
      */
     public function create(
-        $name,
-        $networkID,
-        $regionCode = omit,
+        array|PrivateWirelessGatewayCreateParams $params,
         ?RequestOptions $requestOptions = null,
-    ): PrivateWirelessGatewayNewResponse {
-        $params = [
-            'name' => $name, 'networkID' => $networkID, 'regionCode' => $regionCode,
-        ];
-
-        return $this->createRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): PrivateWirelessGatewayNewResponse {
         [$parsed, $options] = PrivateWirelessGatewayCreateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -99,53 +77,25 @@ final class PrivateWirelessGatewaysService implements PrivateWirelessGatewaysCon
      *
      * Get all Private Wireless Gateways belonging to the user.
      *
-     * @param string $filterCreatedAt private Wireless Gateway resource creation date
-     * @param string $filterIPRange the IP address range of the Private Wireless Gateway
-     * @param string $filterName the name of the Private Wireless Gateway
-     * @param string $filterRegionCode the name of the region where the Private Wireless Gateway is deployed
-     * @param string $filterUpdatedAt when the Private Wireless Gateway was last updated
-     * @param int $pageNumber the page number to load
-     * @param int $pageSize the size of the page
+     * @param array{
+     *   filter_created_at_?: string,
+     *   filter_ip_range_?: string,
+     *   filter_name_?: string,
+     *   filter_region_code_?: string,
+     *   filter_updated_at_?: string,
+     *   page_number_?: int,
+     *   page_size_?: int,
+     * }|PrivateWirelessGatewayListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $filterCreatedAt = omit,
-        $filterIPRange = omit,
-        $filterName = omit,
-        $filterRegionCode = omit,
-        $filterUpdatedAt = omit,
-        $pageNumber = omit,
-        $pageSize = omit,
+        array|PrivateWirelessGatewayListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): PrivateWirelessGatewayListResponse {
-        $params = [
-            'filterCreatedAt' => $filterCreatedAt,
-            'filterIPRange' => $filterIPRange,
-            'filterName' => $filterName,
-            'filterRegionCode' => $filterRegionCode,
-            'filterUpdatedAt' => $filterUpdatedAt,
-            'pageNumber' => $pageNumber,
-            'pageSize' => $pageSize,
-        ];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): PrivateWirelessGatewayListResponse {
         [$parsed, $options] = PrivateWirelessGatewayListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

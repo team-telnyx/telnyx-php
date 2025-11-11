@@ -13,7 +13,7 @@ use Telnyx\Messages\MessageGetResponse\Data\InboundMessagePayload;
 
 /**
  * @phpstan-type MessageGetResponseShape = array{
- *   data?: OutboundMessagePayload|InboundMessagePayload
+ *   data?: null|OutboundMessagePayload|InboundMessagePayload
  * }
  */
 final class MessageGetResponse implements BaseModel, ResponseConverter

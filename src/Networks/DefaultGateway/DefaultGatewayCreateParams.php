@@ -14,7 +14,9 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Networks\DefaultGateway->create
  *
- * @phpstan-type DefaultGatewayCreateParamsShape = array{wireguardPeerID?: string}
+ * @phpstan-type DefaultGatewayCreateParamsShape = array{
+ *   wireguard_peer_id?: string
+ * }
  */
 final class DefaultGatewayCreateParams implements BaseModel
 {
@@ -25,8 +27,8 @@ final class DefaultGatewayCreateParams implements BaseModel
     /**
      * Wireguard peer ID.
      */
-    #[Api('wireguard_peer_id', optional: true)]
-    public ?string $wireguardPeerID;
+    #[Api(optional: true)]
+    public ?string $wireguard_peer_id;
 
     public function __construct()
     {
@@ -38,11 +40,11 @@ final class DefaultGatewayCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?string $wireguardPeerID = null): self
+    public static function with(?string $wireguard_peer_id = null): self
     {
         $obj = new self;
 
-        null !== $wireguardPeerID && $obj->wireguardPeerID = $wireguardPeerID;
+        null !== $wireguard_peer_id && $obj->wireguard_peer_id = $wireguard_peer_id;
 
         return $obj;
     }
@@ -53,7 +55,7 @@ final class DefaultGatewayCreateParams implements BaseModel
     public function withWireguardPeerID(string $wireguardPeerID): self
     {
         $obj = clone $this;
-        $obj->wireguardPeerID = $wireguardPeerID;
+        $obj->wireguard_peer_id = $wireguardPeerID;
 
         return $obj;
     }

@@ -12,10 +12,10 @@ use Telnyx\Core\Contracts\BaseModel;
  * Opens the user's default calendar app and starts the new calendar event flow with the agent-specified event data pre-filled.
  *
  * @phpstan-type CreateCalendarEventActionShape = array{
- *   description?: string,
- *   endTime?: \DateTimeInterface,
- *   startTime?: \DateTimeInterface,
- *   title?: string,
+ *   description?: string|null,
+ *   end_time?: \DateTimeInterface|null,
+ *   start_time?: \DateTimeInterface|null,
+ *   title?: string|null,
  * }
  */
 final class CreateCalendarEventAction implements BaseModel
@@ -29,11 +29,11 @@ final class CreateCalendarEventAction implements BaseModel
     #[Api(optional: true)]
     public ?string $description;
 
-    #[Api('end_time', optional: true)]
-    public ?\DateTimeInterface $endTime;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $end_time;
 
-    #[Api('start_time', optional: true)]
-    public ?\DateTimeInterface $startTime;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $start_time;
 
     /**
      * Event title. Maximum 100 characters.
@@ -53,15 +53,15 @@ final class CreateCalendarEventAction implements BaseModel
      */
     public static function with(
         ?string $description = null,
-        ?\DateTimeInterface $endTime = null,
-        ?\DateTimeInterface $startTime = null,
+        ?\DateTimeInterface $end_time = null,
+        ?\DateTimeInterface $start_time = null,
         ?string $title = null,
     ): self {
         $obj = new self;
 
         null !== $description && $obj->description = $description;
-        null !== $endTime && $obj->endTime = $endTime;
-        null !== $startTime && $obj->startTime = $startTime;
+        null !== $end_time && $obj->end_time = $end_time;
+        null !== $start_time && $obj->start_time = $start_time;
         null !== $title && $obj->title = $title;
 
         return $obj;
@@ -81,7 +81,7 @@ final class CreateCalendarEventAction implements BaseModel
     public function withEndTime(\DateTimeInterface $endTime): self
     {
         $obj = clone $this;
-        $obj->endTime = $endTime;
+        $obj->end_time = $endTime;
 
         return $obj;
     }
@@ -89,7 +89,7 @@ final class CreateCalendarEventAction implements BaseModel
     public function withStartTime(\DateTimeInterface $startTime): self
     {
         $obj = clone $this;
-        $obj->startTime = $startTime;
+        $obj->start_time = $startTime;
 
         return $obj;
     }

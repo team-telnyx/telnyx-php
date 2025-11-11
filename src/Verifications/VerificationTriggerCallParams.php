@@ -15,11 +15,11 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Verifications->triggerCall
  *
  * @phpstan-type VerificationTriggerCallParamsShape = array{
- *   phoneNumber: string,
- *   verifyProfileID: string,
- *   customCode?: string|null,
+ *   phone_number: string,
+ *   verify_profile_id: string,
+ *   custom_code?: string|null,
  *   extension?: string|null,
- *   timeoutSecs?: int,
+ *   timeout_secs?: int,
  * }
  */
 final class VerificationTriggerCallParams implements BaseModel
@@ -31,20 +31,20 @@ final class VerificationTriggerCallParams implements BaseModel
     /**
      * +E164 formatted phone number.
      */
-    #[Api('phone_number')]
-    public string $phoneNumber;
+    #[Api]
+    public string $phone_number;
 
     /**
      * The identifier of the associated Verify profile.
      */
-    #[Api('verify_profile_id')]
-    public string $verifyProfileID;
+    #[Api]
+    public string $verify_profile_id;
 
     /**
      * Send a self-generated numeric code to the end-user.
      */
-    #[Api('custom_code', nullable: true, optional: true)]
-    public ?string $customCode;
+    #[Api(nullable: true, optional: true)]
+    public ?string $custom_code;
 
     /**
      * Optional extension to dial after call is answered using DTMF digits. Valid digits are 0-9, A-D, *, and #. Pauses can be added using w (0.5s) and W (1s).
@@ -55,15 +55,15 @@ final class VerificationTriggerCallParams implements BaseModel
     /**
      * The number of seconds the verification code is valid for.
      */
-    #[Api('timeout_secs', optional: true)]
-    public ?int $timeoutSecs;
+    #[Api(optional: true)]
+    public ?int $timeout_secs;
 
     /**
      * `new VerificationTriggerCallParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * VerificationTriggerCallParams::with(phoneNumber: ..., verifyProfileID: ...)
+     * VerificationTriggerCallParams::with(phone_number: ..., verify_profile_id: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -85,20 +85,20 @@ final class VerificationTriggerCallParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        string $phoneNumber,
-        string $verifyProfileID,
-        ?string $customCode = null,
+        string $phone_number,
+        string $verify_profile_id,
+        ?string $custom_code = null,
         ?string $extension = null,
-        ?int $timeoutSecs = null,
+        ?int $timeout_secs = null,
     ): self {
         $obj = new self;
 
-        $obj->phoneNumber = $phoneNumber;
-        $obj->verifyProfileID = $verifyProfileID;
+        $obj->phone_number = $phone_number;
+        $obj->verify_profile_id = $verify_profile_id;
 
-        null !== $customCode && $obj->customCode = $customCode;
+        null !== $custom_code && $obj->custom_code = $custom_code;
         null !== $extension && $obj->extension = $extension;
-        null !== $timeoutSecs && $obj->timeoutSecs = $timeoutSecs;
+        null !== $timeout_secs && $obj->timeout_secs = $timeout_secs;
 
         return $obj;
     }
@@ -109,7 +109,7 @@ final class VerificationTriggerCallParams implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj->phoneNumber = $phoneNumber;
+        $obj->phone_number = $phoneNumber;
 
         return $obj;
     }
@@ -120,7 +120,7 @@ final class VerificationTriggerCallParams implements BaseModel
     public function withVerifyProfileID(string $verifyProfileID): self
     {
         $obj = clone $this;
-        $obj->verifyProfileID = $verifyProfileID;
+        $obj->verify_profile_id = $verifyProfileID;
 
         return $obj;
     }
@@ -131,7 +131,7 @@ final class VerificationTriggerCallParams implements BaseModel
     public function withCustomCode(?string $customCode): self
     {
         $obj = clone $this;
-        $obj->customCode = $customCode;
+        $obj->custom_code = $customCode;
 
         return $obj;
     }
@@ -153,7 +153,7 @@ final class VerificationTriggerCallParams implements BaseModel
     public function withTimeoutSecs(int $timeoutSecs): self
     {
         $obj = clone $this;
-        $obj->timeoutSecs = $timeoutSecs;
+        $obj->timeout_secs = $timeoutSecs;
 
         return $obj;
     }

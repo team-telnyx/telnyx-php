@@ -17,7 +17,7 @@ use Telnyx\Rooms\Sessions\SessionList1Params\Page;
  * @see Telnyx\Rooms\Sessions->list1
  *
  * @phpstan-type SessionList1ParamsShape = array{
- *   filter?: Filter, includeParticipants?: bool, page?: Page
+ *   filter?: Filter, include_participants?: bool, page?: Page
  * }
  */
 final class SessionList1Params implements BaseModel
@@ -36,7 +36,7 @@ final class SessionList1Params implements BaseModel
      * To decide if room participants should be included in the response.
      */
     #[Api(optional: true)]
-    public ?bool $includeParticipants;
+    public ?bool $include_participants;
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
@@ -56,13 +56,13 @@ final class SessionList1Params implements BaseModel
      */
     public static function with(
         ?Filter $filter = null,
-        ?bool $includeParticipants = null,
+        ?bool $include_participants = null,
         ?Page $page = null
     ): self {
         $obj = new self;
 
         null !== $filter && $obj->filter = $filter;
-        null !== $includeParticipants && $obj->includeParticipants = $includeParticipants;
+        null !== $include_participants && $obj->include_participants = $include_participants;
         null !== $page && $obj->page = $page;
 
         return $obj;
@@ -85,7 +85,7 @@ final class SessionList1Params implements BaseModel
     public function withIncludeParticipants(bool $includeParticipants): self
     {
         $obj = clone $this;
-        $obj->includeParticipants = $includeParticipants;
+        $obj->include_participants = $includeParticipants;
 
         return $obj;
     }

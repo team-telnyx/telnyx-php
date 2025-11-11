@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type GlobalIPAssignmentDeleteResponseShape = array{
- *   data?: GlobalIPAssignment
+ *   data?: GlobalIPAssignment|null
  * }
  */
 final class GlobalIPAssignmentDeleteResponse implements BaseModel, ResponseConverter

@@ -12,7 +12,9 @@ use Telnyx\Core\Conversion\ListOf;
 /**
  * Request details.
  *
- * @phpstan-type RequestShape = array{headers?: list<list<string>>, url?: string}
+ * @phpstan-type RequestShape = array{
+ *   headers?: list<list<string>>|null, url?: string|null
+ * }
  */
 final class Request implements BaseModel
 {

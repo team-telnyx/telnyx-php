@@ -15,7 +15,7 @@ use Telnyx\Wireless\WirelessRetrieveRegionsParams;
 final class WirelessService implements WirelessContract
 {
     /**
-     * @@api
+     * @api
      */
     public DetailRecordsReportsService $detailRecordsReports;
 
@@ -32,33 +32,17 @@ final class WirelessService implements WirelessContract
      *
      * Retrieve all wireless regions for the given product.
      *
-     * @param string $product The product for which to list regions (e.g., 'public_ips', 'private_wireless_gateways').
+     * @param array{product: string}|WirelessRetrieveRegionsParams $params
      *
      * @throws APIException
      */
     public function retrieveRegions(
-        $product,
-        ?RequestOptions $requestOptions = null
-    ): WirelessGetRegionsResponse {
-        $params = ['product' => $product];
-
-        return $this->retrieveRegionsRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function retrieveRegionsRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|WirelessRetrieveRegionsParams $params,
+        ?RequestOptions $requestOptions = null,
     ): WirelessGetRegionsResponse {
         [$parsed, $options] = WirelessRetrieveRegionsParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type BalanceGetResponseShape = array{data?: Data}
+ * @phpstan-type BalanceGetResponseShape = array{data?: Data|null}
  */
 final class BalanceGetResponse implements BaseModel, ResponseConverter
 {

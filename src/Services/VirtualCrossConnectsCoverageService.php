@@ -9,12 +9,7 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\VirtualCrossConnectsCoverageContract;
 use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListParams;
-use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListParams\Filter;
-use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListParams\Filters;
-use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListParams\Page;
 use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListResponse;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class VirtualCrossConnectsCoverageService implements VirtualCrossConnectsCoverageContract
 {
@@ -28,37 +23,28 @@ final class VirtualCrossConnectsCoverageService implements VirtualCrossConnectsC
      *
      * List Virtual Cross Connects Cloud Coverage.<br /><br />This endpoint shows which cloud regions are available for the `location_code` your Virtual Cross Connect will be provisioned in.
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[cloud_provider], filter[cloud_provider_region], filter[location.region], filter[location.site], filter[location.pop], filter[location.code]
-     * @param Filters $filters Consolidated filters parameter (deepObject style). Originally: filters[available_bandwidth][contains]
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param array{
+     *   filter?: array{
+     *     cloud_provider?: "aws"|"azure"|"gce",
+     *     cloud_provider_region?: string,
+     *     'location.code'?: string,
+     *     'location.pop'?: string,
+     *     'location.region'?: string,
+     *     'location.site'?: string,
+     *   },
+     *   filters?: array{available_bandwidth?: int|array{contains?: int}},
+     *   page?: array{number?: int, size?: int},
+     * }|VirtualCrossConnectsCoverageListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $filters = omit,
-        $page = omit,
+        array|VirtualCrossConnectsCoverageListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): VirtualCrossConnectsCoverageListResponse {
-        $params = ['filter' => $filter, 'filters' => $filters, 'page' => $page];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): VirtualCrossConnectsCoverageListResponse {
         [$parsed, $options] = VirtualCrossConnectsCoverageListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

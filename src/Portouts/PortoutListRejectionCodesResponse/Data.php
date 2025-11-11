@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type DataShape = array{
- *   code?: int, description?: string, reasonRequired?: bool
+ *   code?: int|null, description?: string|null, reason_required?: bool|null
  * }
  */
 final class Data implements BaseModel
@@ -24,8 +24,8 @@ final class Data implements BaseModel
     #[Api(optional: true)]
     public ?string $description;
 
-    #[Api('reason_required', optional: true)]
-    public ?bool $reasonRequired;
+    #[Api(optional: true)]
+    public ?bool $reason_required;
 
     public function __construct()
     {
@@ -40,13 +40,13 @@ final class Data implements BaseModel
     public static function with(
         ?int $code = null,
         ?string $description = null,
-        ?bool $reasonRequired = null
+        ?bool $reason_required = null
     ): self {
         $obj = new self;
 
         null !== $code && $obj->code = $code;
         null !== $description && $obj->description = $description;
-        null !== $reasonRequired && $obj->reasonRequired = $reasonRequired;
+        null !== $reason_required && $obj->reason_required = $reason_required;
 
         return $obj;
     }
@@ -70,7 +70,7 @@ final class Data implements BaseModel
     public function withReasonRequired(bool $reasonRequired): self
     {
         $obj = clone $this;
-        $obj->reasonRequired = $reasonRequired;
+        $obj->reason_required = $reasonRequired;
 
         return $obj;
     }

@@ -23,37 +23,18 @@ final class ActionsService implements ActionsContract
      *
      * Verify verification code by phone number
      *
-     * @param string $code this is the code the user submits for verification
-     * @param string $verifyProfileID the identifier of the associated Verify profile
+     * @param array{code: string, verify_profile_id: string}|ActionVerifyParams $params
      *
      * @throws APIException
      */
     public function verify(
         string $phoneNumber,
-        $code,
-        $verifyProfileID,
+        array|ActionVerifyParams $params,
         ?RequestOptions $requestOptions = null,
-    ): VerifyVerificationCodeResponse {
-        $params = ['code' => $code, 'verifyProfileID' => $verifyProfileID];
-
-        return $this->verifyRaw($phoneNumber, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function verifyRaw(
-        string $phoneNumber,
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): VerifyVerificationCodeResponse {
         [$parsed, $options] = ActionVerifyParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

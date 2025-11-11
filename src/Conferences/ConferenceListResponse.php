@@ -13,7 +13,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type ConferenceListResponseShape = array{
- *   data?: list<Conference>, meta?: PaginationMeta
+ *   data?: list<Conference>|null, meta?: PaginationMeta|null
  * }
  */
 final class ConferenceListResponse implements BaseModel, ResponseConverter

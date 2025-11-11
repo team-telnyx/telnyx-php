@@ -14,7 +14,7 @@ use Telnyx\UsageReports\UsageReportListResponse\Meta;
 
 /**
  * @phpstan-type UsageReportListResponseShape = array{
- *   data?: list<array<string, mixed>>, meta?: Meta
+ *   data?: list<array<string,mixed>>|null, meta?: Meta|null
  * }
  */
 final class UsageReportListResponse implements BaseModel, ResponseConverter
@@ -24,7 +24,7 @@ final class UsageReportListResponse implements BaseModel, ResponseConverter
 
     use SdkResponse;
 
-    /** @var list<array<string, mixed>>|null $data */
+    /** @var list<array<string,mixed>>|null $data */
     #[Api(list: new MapOf('mixed'), optional: true)]
     public ?array $data;
 
@@ -41,7 +41,7 @@ final class UsageReportListResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<array<string, mixed>> $data
+     * @param list<array<string,mixed>> $data
      */
     public static function with(?array $data = null, ?Meta $meta = null): self
     {
@@ -54,7 +54,7 @@ final class UsageReportListResponse implements BaseModel, ResponseConverter
     }
 
     /**
-     * @param list<array<string, mixed>> $data
+     * @param list<array<string,mixed>> $data
      */
     public function withData(array $data): self
     {

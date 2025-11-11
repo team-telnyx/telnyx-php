@@ -33,10 +33,9 @@ final class InsightsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ai->conversations->insights->create(
-            instructions: 'instructions',
-            name: 'name'
-        );
+        $result = $this->client->ai->conversations->insights->create([
+            'instructions' => 'instructions', 'name' => 'name',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -48,10 +47,9 @@ final class InsightsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ai->conversations->insights->create(
-            instructions: 'instructions',
-            name: 'name'
-        );
+        $result = $this->client->ai->conversations->insights->create([
+            'instructions' => 'instructions', 'name' => 'name',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -78,7 +76,8 @@ final class InsightsTest extends TestCase
         }
 
         $result = $this->client->ai->conversations->insights->update(
-            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
+            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+            []
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -91,7 +90,7 @@ final class InsightsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ai->conversations->insights->list();
+        $result = $this->client->ai->conversations->insights->list([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

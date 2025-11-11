@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Opens the user's default dialer app with the agent-specified phone number filled in.
  *
- * @phpstan-type DialActionShape = array{phoneNumber: string}
+ * @phpstan-type DialActionShape = array{phone_number: string}
  */
 final class DialAction implements BaseModel
 {
@@ -21,15 +21,15 @@ final class DialAction implements BaseModel
     /**
      * Phone number in +E.164 format.
      */
-    #[Api('phone_number')]
-    public string $phoneNumber;
+    #[Api]
+    public string $phone_number;
 
     /**
      * `new DialAction()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * DialAction::with(phoneNumber: ...)
+     * DialAction::with(phone_number: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -48,11 +48,11 @@ final class DialAction implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(string $phoneNumber): self
+    public static function with(string $phone_number): self
     {
         $obj = new self;
 
-        $obj->phoneNumber = $phoneNumber;
+        $obj->phone_number = $phone_number;
 
         return $obj;
     }
@@ -63,7 +63,7 @@ final class DialAction implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj->phoneNumber = $phoneNumber;
+        $obj->phone_number = $phoneNumber;
 
         return $obj;
     }

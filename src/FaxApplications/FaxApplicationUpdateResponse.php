@@ -11,7 +11,9 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type FaxApplicationUpdateResponseShape = array{data?: FaxApplication}
+ * @phpstan-type FaxApplicationUpdateResponseShape = array{
+ *   data?: FaxApplication|null
+ * }
  */
 final class FaxApplicationUpdateResponse implements BaseModel, ResponseConverter
 {

@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\ExternalConnections\Releases\ReleaseGetResponse\Data;
 
 /**
- * @phpstan-type ReleaseGetResponseShape = array{data?: Data}
+ * @phpstan-type ReleaseGetResponseShape = array{data?: Data|null}
  */
 final class ReleaseGetResponse implements BaseModel, ResponseConverter
 {

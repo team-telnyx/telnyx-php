@@ -33,7 +33,9 @@ final class FqdnConnectionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->fqdnConnections->create(connectionName: 'string');
+        $result = $this->client->fqdnConnections->create([
+            'connection_name' => 'string',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -45,7 +47,9 @@ final class FqdnConnectionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->fqdnConnections->create(connectionName: 'string');
+        $result = $this->client->fqdnConnections->create([
+            'connection_name' => 'string',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -69,7 +73,7 @@ final class FqdnConnectionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->fqdnConnections->update('id');
+        $result = $this->client->fqdnConnections->update('id', []);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -81,7 +85,7 @@ final class FqdnConnectionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->fqdnConnections->list();
+        $result = $this->client->fqdnConnections->list([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

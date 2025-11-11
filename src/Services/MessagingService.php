@@ -11,7 +11,7 @@ use Telnyx\Services\Messaging\RcsService;
 final class MessagingService implements MessagingContract
 {
     /**
-     * @@api
+     * @api
      */
     public RcsService $rcs;
 

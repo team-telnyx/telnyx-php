@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Queues\Calls->retrieve
  *
- * @phpstan-type CallRetrieveParamsShape = array{queueName: string}
+ * @phpstan-type CallRetrieveParamsShape = array{queue_name: string}
  */
 final class CallRetrieveParams implements BaseModel
 {
@@ -23,14 +23,14 @@ final class CallRetrieveParams implements BaseModel
     use SdkParams;
 
     #[Api]
-    public string $queueName;
+    public string $queue_name;
 
     /**
      * `new CallRetrieveParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * CallRetrieveParams::with(queueName: ...)
+     * CallRetrieveParams::with(queue_name: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -49,11 +49,11 @@ final class CallRetrieveParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(string $queueName): self
+    public static function with(string $queue_name): self
     {
         $obj = new self;
 
-        $obj->queueName = $queueName;
+        $obj->queue_name = $queue_name;
 
         return $obj;
     }
@@ -61,7 +61,7 @@ final class CallRetrieveParams implements BaseModel
     public function withQueueName(string $queueName): self
     {
         $obj = clone $this;
-        $obj->queueName = $queueName;
+        $obj->queue_name = $queueName;
 
         return $obj;
     }

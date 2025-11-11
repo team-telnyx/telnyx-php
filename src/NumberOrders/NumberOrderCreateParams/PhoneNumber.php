@@ -10,7 +10,9 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type PhoneNumberShape = array{
- *   phoneNumber: string, bundleID?: string, requirementGroupID?: string
+ *   phone_number: string,
+ *   bundle_id?: string|null,
+ *   requirement_group_id?: string|null,
  * }
  */
 final class PhoneNumber implements BaseModel
@@ -21,27 +23,27 @@ final class PhoneNumber implements BaseModel
     /**
      * e164_phone_number.
      */
-    #[Api('phone_number')]
-    public string $phoneNumber;
+    #[Api]
+    public string $phone_number;
 
     /**
      * ID of bundle to associate the number to.
      */
-    #[Api('bundle_id', optional: true)]
-    public ?string $bundleID;
+    #[Api(optional: true)]
+    public ?string $bundle_id;
 
     /**
      * ID of requirement group to use to satisfy number requirements.
      */
-    #[Api('requirement_group_id', optional: true)]
-    public ?string $requirementGroupID;
+    #[Api(optional: true)]
+    public ?string $requirement_group_id;
 
     /**
      * `new PhoneNumber()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * PhoneNumber::with(phoneNumber: ...)
+     * PhoneNumber::with(phone_number: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -61,16 +63,16 @@ final class PhoneNumber implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        string $phoneNumber,
-        ?string $bundleID = null,
-        ?string $requirementGroupID = null,
+        string $phone_number,
+        ?string $bundle_id = null,
+        ?string $requirement_group_id = null,
     ): self {
         $obj = new self;
 
-        $obj->phoneNumber = $phoneNumber;
+        $obj->phone_number = $phone_number;
 
-        null !== $bundleID && $obj->bundleID = $bundleID;
-        null !== $requirementGroupID && $obj->requirementGroupID = $requirementGroupID;
+        null !== $bundle_id && $obj->bundle_id = $bundle_id;
+        null !== $requirement_group_id && $obj->requirement_group_id = $requirement_group_id;
 
         return $obj;
     }
@@ -81,7 +83,7 @@ final class PhoneNumber implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj->phoneNumber = $phoneNumber;
+        $obj->phone_number = $phoneNumber;
 
         return $obj;
     }
@@ -92,7 +94,7 @@ final class PhoneNumber implements BaseModel
     public function withBundleID(string $bundleID): self
     {
         $obj = clone $this;
-        $obj->bundleID = $bundleID;
+        $obj->bundle_id = $bundleID;
 
         return $obj;
     }
@@ -103,7 +105,7 @@ final class PhoneNumber implements BaseModel
     public function withRequirementGroupID(string $requirementGroupID): self
     {
         $obj = clone $this;
-        $obj->requirementGroupID = $requirementGroupID;
+        $obj->requirement_group_id = $requirementGroupID;
 
         return $obj;
     }

@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\IPs->update
  *
  * @phpstan-type IPUpdateParamsShape = array{
- *   ipAddress: string, connectionID?: string, port?: int
+ *   ip_address: string, connection_id?: string, port?: int
  * }
  */
 final class IPUpdateParams implements BaseModel
@@ -27,14 +27,14 @@ final class IPUpdateParams implements BaseModel
     /**
      * IP adddress represented by this resource.
      */
-    #[Api('ip_address')]
-    public string $ipAddress;
+    #[Api]
+    public string $ip_address;
 
     /**
      * ID of the IP Connection to which this IP should be attached.
      */
-    #[Api('connection_id', optional: true)]
-    public ?string $connectionID;
+    #[Api(optional: true)]
+    public ?string $connection_id;
 
     /**
      * Port to use when connecting to this IP.
@@ -47,7 +47,7 @@ final class IPUpdateParams implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * IPUpdateParams::with(ipAddress: ...)
+     * IPUpdateParams::with(ip_address: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -67,15 +67,15 @@ final class IPUpdateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        string $ipAddress,
-        ?string $connectionID = null,
+        string $ip_address,
+        ?string $connection_id = null,
         ?int $port = null
     ): self {
         $obj = new self;
 
-        $obj->ipAddress = $ipAddress;
+        $obj->ip_address = $ip_address;
 
-        null !== $connectionID && $obj->connectionID = $connectionID;
+        null !== $connection_id && $obj->connection_id = $connection_id;
         null !== $port && $obj->port = $port;
 
         return $obj;
@@ -87,7 +87,7 @@ final class IPUpdateParams implements BaseModel
     public function withIPAddress(string $ipAddress): self
     {
         $obj = clone $this;
-        $obj->ipAddress = $ipAddress;
+        $obj->ip_address = $ipAddress;
 
         return $obj;
     }
@@ -98,7 +98,7 @@ final class IPUpdateParams implements BaseModel
     public function withConnectionID(string $connectionID): self
     {
         $obj = clone $this;
-        $obj->connectionID = $connectionID;
+        $obj->connection_id = $connectionID;
 
         return $obj;
     }

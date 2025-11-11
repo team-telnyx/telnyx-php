@@ -14,7 +14,7 @@ use Telnyx\Requirements\RequirementListResponse\Data;
 
 /**
  * @phpstan-type RequirementListResponseShape = array{
- *   data?: list<Data>, meta?: PaginationMeta
+ *   data?: list<Data>|null, meta?: PaginationMeta|null
  * }
  */
 final class RequirementListResponse implements BaseModel, ResponseConverter

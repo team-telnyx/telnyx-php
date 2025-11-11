@@ -33,7 +33,7 @@ final class MessagingURLDomainsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->messagingURLDomains->list();
+        $result = $this->client->messagingURLDomains->list([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

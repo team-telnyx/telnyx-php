@@ -11,22 +11,22 @@ use Telnyx\Webhooks\CallConversationEndedWebhookEvent\Data\Payload\CallingPartyT
 
 /**
  * @phpstan-type PayloadShape = array{
- *   assistantID?: string,
- *   callControlID?: string,
- *   callLegID?: string,
- *   callSessionID?: string,
- *   callingPartyType?: value-of<CallingPartyType>,
- *   clientState?: string,
- *   connectionID?: string,
- *   conversationID?: string,
- *   durationSec?: int,
- *   from?: string,
- *   llmModel?: string,
- *   sttModel?: string,
- *   to?: string,
- *   ttsModelID?: string,
- *   ttsProvider?: string,
- *   ttsVoiceID?: string,
+ *   assistant_id?: string|null,
+ *   call_control_id?: string|null,
+ *   call_leg_id?: string|null,
+ *   call_session_id?: string|null,
+ *   calling_party_type?: value-of<CallingPartyType>|null,
+ *   client_state?: string|null,
+ *   connection_id?: string|null,
+ *   conversation_id?: string|null,
+ *   duration_sec?: int|null,
+ *   from?: string|null,
+ *   llm_model?: string|null,
+ *   stt_model?: string|null,
+ *   to?: string|null,
+ *   tts_model_id?: string|null,
+ *   tts_provider?: string|null,
+ *   tts_voice_id?: string|null,
  * }
  */
 final class Payload implements BaseModel
@@ -37,58 +37,58 @@ final class Payload implements BaseModel
     /**
      * Unique identifier of the assistant involved in the call.
      */
-    #[Api('assistant_id', optional: true)]
-    public ?string $assistantID;
+    #[Api(optional: true)]
+    public ?string $assistant_id;
 
     /**
      * Call ID used to issue commands via Call Control API.
      */
-    #[Api('call_control_id', optional: true)]
-    public ?string $callControlID;
+    #[Api(optional: true)]
+    public ?string $call_control_id;
 
     /**
      * ID that is unique to the call leg.
      */
-    #[Api('call_leg_id', optional: true)]
-    public ?string $callLegID;
+    #[Api(optional: true)]
+    public ?string $call_leg_id;
 
     /**
      * ID that is unique to the call session (group of related call legs).
      */
-    #[Api('call_session_id', optional: true)]
-    public ?string $callSessionID;
+    #[Api(optional: true)]
+    public ?string $call_session_id;
 
     /**
      * The type of calling party connection.
      *
-     * @var value-of<CallingPartyType>|null $callingPartyType
+     * @var value-of<CallingPartyType>|null $calling_party_type
      */
-    #[Api('calling_party_type', enum: CallingPartyType::class, optional: true)]
-    public ?string $callingPartyType;
+    #[Api(enum: CallingPartyType::class, optional: true)]
+    public ?string $calling_party_type;
 
     /**
      * Base64-encoded state received from a command.
      */
-    #[Api('client_state', optional: true)]
-    public ?string $clientState;
+    #[Api(optional: true)]
+    public ?string $client_state;
 
     /**
      * Call Control App ID (formerly Telnyx connection ID) used in the call.
      */
-    #[Api('connection_id', optional: true)]
-    public ?string $connectionID;
+    #[Api(optional: true)]
+    public ?string $connection_id;
 
     /**
      * ID unique to the conversation or insight group generated for the call.
      */
-    #[Api('conversation_id', optional: true)]
-    public ?string $conversationID;
+    #[Api(optional: true)]
+    public ?string $conversation_id;
 
     /**
      * Duration of the conversation in seconds.
      */
-    #[Api('duration_sec', optional: true)]
-    public ?int $durationSec;
+    #[Api(optional: true)]
+    public ?int $duration_sec;
 
     /**
      * The caller's number or identifier.
@@ -99,14 +99,14 @@ final class Payload implements BaseModel
     /**
      * The large language model used during the conversation.
      */
-    #[Api('llm_model', optional: true)]
-    public ?string $llmModel;
+    #[Api(optional: true)]
+    public ?string $llm_model;
 
     /**
      * The speech-to-text model used in the conversation.
      */
-    #[Api('stt_model', optional: true)]
-    public ?string $sttModel;
+    #[Api(optional: true)]
+    public ?string $stt_model;
 
     /**
      * The callee's number or SIP address.
@@ -117,20 +117,20 @@ final class Payload implements BaseModel
     /**
      * The model ID used for text-to-speech synthesis.
      */
-    #[Api('tts_model_id', optional: true)]
-    public ?string $ttsModelID;
+    #[Api(optional: true)]
+    public ?string $tts_model_id;
 
     /**
      * The text-to-speech provider used in the call.
      */
-    #[Api('tts_provider', optional: true)]
-    public ?string $ttsProvider;
+    #[Api(optional: true)]
+    public ?string $tts_provider;
 
     /**
      * Voice ID used for TTS.
      */
-    #[Api('tts_voice_id', optional: true)]
-    public ?string $ttsVoiceID;
+    #[Api(optional: true)]
+    public ?string $tts_voice_id;
 
     public function __construct()
     {
@@ -142,44 +142,44 @@ final class Payload implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CallingPartyType|value-of<CallingPartyType> $callingPartyType
+     * @param CallingPartyType|value-of<CallingPartyType> $calling_party_type
      */
     public static function with(
-        ?string $assistantID = null,
-        ?string $callControlID = null,
-        ?string $callLegID = null,
-        ?string $callSessionID = null,
-        CallingPartyType|string|null $callingPartyType = null,
-        ?string $clientState = null,
-        ?string $connectionID = null,
-        ?string $conversationID = null,
-        ?int $durationSec = null,
+        ?string $assistant_id = null,
+        ?string $call_control_id = null,
+        ?string $call_leg_id = null,
+        ?string $call_session_id = null,
+        CallingPartyType|string|null $calling_party_type = null,
+        ?string $client_state = null,
+        ?string $connection_id = null,
+        ?string $conversation_id = null,
+        ?int $duration_sec = null,
         ?string $from = null,
-        ?string $llmModel = null,
-        ?string $sttModel = null,
+        ?string $llm_model = null,
+        ?string $stt_model = null,
         ?string $to = null,
-        ?string $ttsModelID = null,
-        ?string $ttsProvider = null,
-        ?string $ttsVoiceID = null,
+        ?string $tts_model_id = null,
+        ?string $tts_provider = null,
+        ?string $tts_voice_id = null,
     ): self {
         $obj = new self;
 
-        null !== $assistantID && $obj->assistantID = $assistantID;
-        null !== $callControlID && $obj->callControlID = $callControlID;
-        null !== $callLegID && $obj->callLegID = $callLegID;
-        null !== $callSessionID && $obj->callSessionID = $callSessionID;
-        null !== $callingPartyType && $obj['callingPartyType'] = $callingPartyType;
-        null !== $clientState && $obj->clientState = $clientState;
-        null !== $connectionID && $obj->connectionID = $connectionID;
-        null !== $conversationID && $obj->conversationID = $conversationID;
-        null !== $durationSec && $obj->durationSec = $durationSec;
+        null !== $assistant_id && $obj->assistant_id = $assistant_id;
+        null !== $call_control_id && $obj->call_control_id = $call_control_id;
+        null !== $call_leg_id && $obj->call_leg_id = $call_leg_id;
+        null !== $call_session_id && $obj->call_session_id = $call_session_id;
+        null !== $calling_party_type && $obj['calling_party_type'] = $calling_party_type;
+        null !== $client_state && $obj->client_state = $client_state;
+        null !== $connection_id && $obj->connection_id = $connection_id;
+        null !== $conversation_id && $obj->conversation_id = $conversation_id;
+        null !== $duration_sec && $obj->duration_sec = $duration_sec;
         null !== $from && $obj->from = $from;
-        null !== $llmModel && $obj->llmModel = $llmModel;
-        null !== $sttModel && $obj->sttModel = $sttModel;
+        null !== $llm_model && $obj->llm_model = $llm_model;
+        null !== $stt_model && $obj->stt_model = $stt_model;
         null !== $to && $obj->to = $to;
-        null !== $ttsModelID && $obj->ttsModelID = $ttsModelID;
-        null !== $ttsProvider && $obj->ttsProvider = $ttsProvider;
-        null !== $ttsVoiceID && $obj->ttsVoiceID = $ttsVoiceID;
+        null !== $tts_model_id && $obj->tts_model_id = $tts_model_id;
+        null !== $tts_provider && $obj->tts_provider = $tts_provider;
+        null !== $tts_voice_id && $obj->tts_voice_id = $tts_voice_id;
 
         return $obj;
     }
@@ -190,7 +190,7 @@ final class Payload implements BaseModel
     public function withAssistantID(string $assistantID): self
     {
         $obj = clone $this;
-        $obj->assistantID = $assistantID;
+        $obj->assistant_id = $assistantID;
 
         return $obj;
     }
@@ -201,7 +201,7 @@ final class Payload implements BaseModel
     public function withCallControlID(string $callControlID): self
     {
         $obj = clone $this;
-        $obj->callControlID = $callControlID;
+        $obj->call_control_id = $callControlID;
 
         return $obj;
     }
@@ -212,7 +212,7 @@ final class Payload implements BaseModel
     public function withCallLegID(string $callLegID): self
     {
         $obj = clone $this;
-        $obj->callLegID = $callLegID;
+        $obj->call_leg_id = $callLegID;
 
         return $obj;
     }
@@ -223,7 +223,7 @@ final class Payload implements BaseModel
     public function withCallSessionID(string $callSessionID): self
     {
         $obj = clone $this;
-        $obj->callSessionID = $callSessionID;
+        $obj->call_session_id = $callSessionID;
 
         return $obj;
     }
@@ -237,7 +237,7 @@ final class Payload implements BaseModel
         CallingPartyType|string $callingPartyType
     ): self {
         $obj = clone $this;
-        $obj['callingPartyType'] = $callingPartyType;
+        $obj['calling_party_type'] = $callingPartyType;
 
         return $obj;
     }
@@ -248,7 +248,7 @@ final class Payload implements BaseModel
     public function withClientState(string $clientState): self
     {
         $obj = clone $this;
-        $obj->clientState = $clientState;
+        $obj->client_state = $clientState;
 
         return $obj;
     }
@@ -259,7 +259,7 @@ final class Payload implements BaseModel
     public function withConnectionID(string $connectionID): self
     {
         $obj = clone $this;
-        $obj->connectionID = $connectionID;
+        $obj->connection_id = $connectionID;
 
         return $obj;
     }
@@ -270,7 +270,7 @@ final class Payload implements BaseModel
     public function withConversationID(string $conversationID): self
     {
         $obj = clone $this;
-        $obj->conversationID = $conversationID;
+        $obj->conversation_id = $conversationID;
 
         return $obj;
     }
@@ -281,7 +281,7 @@ final class Payload implements BaseModel
     public function withDurationSec(int $durationSec): self
     {
         $obj = clone $this;
-        $obj->durationSec = $durationSec;
+        $obj->duration_sec = $durationSec;
 
         return $obj;
     }
@@ -303,7 +303,7 @@ final class Payload implements BaseModel
     public function withLlmModel(string $llmModel): self
     {
         $obj = clone $this;
-        $obj->llmModel = $llmModel;
+        $obj->llm_model = $llmModel;
 
         return $obj;
     }
@@ -314,7 +314,7 @@ final class Payload implements BaseModel
     public function withSttModel(string $sttModel): self
     {
         $obj = clone $this;
-        $obj->sttModel = $sttModel;
+        $obj->stt_model = $sttModel;
 
         return $obj;
     }
@@ -336,7 +336,7 @@ final class Payload implements BaseModel
     public function withTtsModelID(string $ttsModelID): self
     {
         $obj = clone $this;
-        $obj->ttsModelID = $ttsModelID;
+        $obj->tts_model_id = $ttsModelID;
 
         return $obj;
     }
@@ -347,7 +347,7 @@ final class Payload implements BaseModel
     public function withTtsProvider(string $ttsProvider): self
     {
         $obj = clone $this;
-        $obj->ttsProvider = $ttsProvider;
+        $obj->tts_provider = $ttsProvider;
 
         return $obj;
     }
@@ -358,7 +358,7 @@ final class Payload implements BaseModel
     public function withTtsVoiceID(string $ttsVoiceID): self
     {
         $obj = clone $this;
-        $obj->ttsVoiceID = $ttsVoiceID;
+        $obj->tts_voice_id = $ttsVoiceID;
 
         return $obj;
     }

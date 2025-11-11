@@ -13,7 +13,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type LoaConfigurationListResponseShape = array{
- *   data?: list<PortingLoaConfiguration>, meta?: PaginationMeta
+ *   data?: list<PortingLoaConfiguration>|null, meta?: PaginationMeta|null
  * }
  */
 final class LoaConfigurationListResponse implements BaseModel, ResponseConverter

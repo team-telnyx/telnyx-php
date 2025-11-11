@@ -14,7 +14,7 @@ use Telnyx\Webhooks\CallHangupWebhookEvent\Data\Payload\CallQualityStats\Outboun
  * Call quality statistics aggregated from the CHANNEL_HANGUP_COMPLETE event. Only includes metrics that are available (filters out nil values). Returns nil if no metrics are available.
  *
  * @phpstan-type CallQualityStatsShape = array{
- *   inbound?: Inbound, outbound?: Outbound
+ *   inbound?: Inbound|null, outbound?: Outbound|null
  * }
  */
 final class CallQualityStats implements BaseModel

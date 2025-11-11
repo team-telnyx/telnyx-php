@@ -12,8 +12,8 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type ExternalConnectionListResponseShape = array{
- *   data?: list<ExternalConnection>,
- *   meta?: ExternalVoiceIntegrationsPaginationMeta,
+ *   data?: list<ExternalConnection>|null,
+ *   meta?: ExternalVoiceIntegrationsPaginationMeta|null,
  * }
  */
 final class ExternalConnectionListResponse implements BaseModel, ResponseConverter

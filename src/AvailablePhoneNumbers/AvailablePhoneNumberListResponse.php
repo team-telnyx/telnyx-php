@@ -14,7 +14,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type AvailablePhoneNumberListResponseShape = array{
- *   data?: list<Data>, meta?: Meta
+ *   data?: list<Data>|null, meta?: Meta|null
  * }
  */
 final class AvailablePhoneNumberListResponse implements BaseModel, ResponseConverter

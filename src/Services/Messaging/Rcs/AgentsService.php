@@ -7,14 +7,11 @@ namespace Telnyx\Services\Messaging\Rcs;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Messaging\Rcs\Agents\AgentListParams;
-use Telnyx\Messaging\Rcs\Agents\AgentListParams\Page;
 use Telnyx\Messaging\Rcs\Agents\AgentListResponse;
 use Telnyx\Messaging\Rcs\Agents\AgentUpdateParams;
 use Telnyx\RcsAgents\RcsAgentResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Messaging\Rcs\AgentsContract;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class AgentsService implements AgentsContract
 {
@@ -48,43 +45,22 @@ final class AgentsService implements AgentsContract
      *
      * Modify an RCS agent
      *
-     * @param string|null $profileID Messaging profile ID associated with the RCS Agent
-     * @param string|null $webhookFailoverURL Failover URL to receive RCS events
-     * @param string|null $webhookURL URL to receive RCS events
+     * @param array{
+     *   profile_id?: string|null,
+     *   webhook_failover_url?: string|null,
+     *   webhook_url?: string|null,
+     * }|AgentUpdateParams $params
      *
      * @throws APIException
      */
     public function update(
         string $id,
-        $profileID = omit,
-        $webhookFailoverURL = omit,
-        $webhookURL = omit,
+        array|AgentUpdateParams $params,
         ?RequestOptions $requestOptions = null,
-    ): RcsAgentResponse {
-        $params = [
-            'profileID' => $profileID,
-            'webhookFailoverURL' => $webhookFailoverURL,
-            'webhookURL' => $webhookURL,
-        ];
-
-        return $this->updateRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): RcsAgentResponse {
         [$parsed, $options] = AgentUpdateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -102,33 +78,17 @@ final class AgentsService implements AgentsContract
      *
      * List all RCS agents
      *
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param array{page?: array{number?: int, size?: int}}|AgentListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): AgentListResponse {
-        $params = ['page' => $page];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
+        array|AgentListParams $params,
         ?RequestOptions $requestOptions = null
     ): AgentListResponse {
         [$parsed, $options] = AgentListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

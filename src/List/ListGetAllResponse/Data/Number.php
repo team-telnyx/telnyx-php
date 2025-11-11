@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type NumberShape = array{country?: string, number?: string}
+ * @phpstan-type NumberShape = array{country?: string|null, number?: string|null}
  */
 final class Number implements BaseModel
 {

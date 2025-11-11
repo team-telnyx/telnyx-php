@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Filtering operations.
  *
- * @phpstan-type InShape = array{in?: string}
+ * @phpstan-type InShape = array{in?: string|null}
  */
 final class In implements BaseModel
 {

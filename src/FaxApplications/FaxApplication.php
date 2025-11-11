@@ -13,19 +13,19 @@ use Telnyx\FaxApplications\FaxApplication\Outbound;
 
 /**
  * @phpstan-type FaxApplicationShape = array{
- *   id?: string,
- *   active?: bool,
- *   anchorsiteOverride?: value-of<AnchorsiteOverride>,
- *   applicationName?: string,
- *   createdAt?: string,
- *   inbound?: Inbound,
- *   outbound?: Outbound,
- *   recordType?: string,
- *   tags?: list<string>,
- *   updatedAt?: string,
- *   webhookEventFailoverURL?: string|null,
- *   webhookEventURL?: string,
- *   webhookTimeoutSecs?: int|null,
+ *   id?: string|null,
+ *   active?: bool|null,
+ *   anchorsite_override?: value-of<AnchorsiteOverride>|null,
+ *   application_name?: string|null,
+ *   created_at?: string|null,
+ *   inbound?: Inbound|null,
+ *   outbound?: Outbound|null,
+ *   record_type?: string|null,
+ *   tags?: list<string>|null,
+ *   updated_at?: string|null,
+ *   webhook_event_failover_url?: string|null,
+ *   webhook_event_url?: string|null,
+ *   webhook_timeout_secs?: int|null,
  * }
  */
 final class FaxApplication implements BaseModel
@@ -48,22 +48,22 @@ final class FaxApplication implements BaseModel
     /**
      * `Latency` directs Telnyx to route media through the site with the lowest round-trip time to the user's connection. Telnyx calculates this time using ICMP ping messages. This can be disabled by specifying a site to handle all media.
      *
-     * @var value-of<AnchorsiteOverride>|null $anchorsiteOverride
+     * @var value-of<AnchorsiteOverride>|null $anchorsite_override
      */
-    #[Api('anchorsite_override', enum: AnchorsiteOverride::class, optional: true)]
-    public ?string $anchorsiteOverride;
+    #[Api(enum: AnchorsiteOverride::class, optional: true)]
+    public ?string $anchorsite_override;
 
     /**
      * A user-assigned name to help manage the application.
      */
-    #[Api('application_name', optional: true)]
-    public ?string $applicationName;
+    #[Api(optional: true)]
+    public ?string $application_name;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Api('created_at', optional: true)]
-    public ?string $createdAt;
+    #[Api(optional: true)]
+    public ?string $created_at;
 
     #[Api(optional: true)]
     public ?Inbound $inbound;
@@ -74,8 +74,8 @@ final class FaxApplication implements BaseModel
     /**
      * Identifies the type of the resource.
      */
-    #[Api('record_type', optional: true)]
-    public ?string $recordType;
+    #[Api(optional: true)]
+    public ?string $record_type;
 
     /**
      * Tags associated with the Fax Application.
@@ -88,26 +88,26 @@ final class FaxApplication implements BaseModel
     /**
      * ISO 8601 formatted date indicating when the resource was updated.
      */
-    #[Api('updated_at', optional: true)]
-    public ?string $updatedAt;
+    #[Api(optional: true)]
+    public ?string $updated_at;
 
     /**
      * The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      */
-    #[Api('webhook_event_failover_url', nullable: true, optional: true)]
-    public ?string $webhookEventFailoverURL;
+    #[Api(nullable: true, optional: true)]
+    public ?string $webhook_event_failover_url;
 
     /**
      * The URL where webhooks related to this connection will be sent. Must include a scheme, such as 'https'.
      */
-    #[Api('webhook_event_url', optional: true)]
-    public ?string $webhookEventURL;
+    #[Api(optional: true)]
+    public ?string $webhook_event_url;
 
     /**
      * Specifies how many seconds to wait before timing out a webhook.
      */
-    #[Api('webhook_timeout_secs', nullable: true, optional: true)]
-    public ?int $webhookTimeoutSecs;
+    #[Api(nullable: true, optional: true)]
+    public ?int $webhook_timeout_secs;
 
     public function __construct()
     {
@@ -119,39 +119,39 @@ final class FaxApplication implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AnchorsiteOverride|value-of<AnchorsiteOverride> $anchorsiteOverride
+     * @param AnchorsiteOverride|value-of<AnchorsiteOverride> $anchorsite_override
      * @param list<string> $tags
      */
     public static function with(
         ?string $id = null,
         ?bool $active = null,
-        AnchorsiteOverride|string|null $anchorsiteOverride = null,
-        ?string $applicationName = null,
-        ?string $createdAt = null,
+        AnchorsiteOverride|string|null $anchorsite_override = null,
+        ?string $application_name = null,
+        ?string $created_at = null,
         ?Inbound $inbound = null,
         ?Outbound $outbound = null,
-        ?string $recordType = null,
+        ?string $record_type = null,
         ?array $tags = null,
-        ?string $updatedAt = null,
-        ?string $webhookEventFailoverURL = null,
-        ?string $webhookEventURL = null,
-        ?int $webhookTimeoutSecs = null,
+        ?string $updated_at = null,
+        ?string $webhook_event_failover_url = null,
+        ?string $webhook_event_url = null,
+        ?int $webhook_timeout_secs = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj->id = $id;
         null !== $active && $obj->active = $active;
-        null !== $anchorsiteOverride && $obj['anchorsiteOverride'] = $anchorsiteOverride;
-        null !== $applicationName && $obj->applicationName = $applicationName;
-        null !== $createdAt && $obj->createdAt = $createdAt;
+        null !== $anchorsite_override && $obj['anchorsite_override'] = $anchorsite_override;
+        null !== $application_name && $obj->application_name = $application_name;
+        null !== $created_at && $obj->created_at = $created_at;
         null !== $inbound && $obj->inbound = $inbound;
         null !== $outbound && $obj->outbound = $outbound;
-        null !== $recordType && $obj->recordType = $recordType;
+        null !== $record_type && $obj->record_type = $record_type;
         null !== $tags && $obj->tags = $tags;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
-        null !== $webhookEventFailoverURL && $obj->webhookEventFailoverURL = $webhookEventFailoverURL;
-        null !== $webhookEventURL && $obj->webhookEventURL = $webhookEventURL;
-        null !== $webhookTimeoutSecs && $obj->webhookTimeoutSecs = $webhookTimeoutSecs;
+        null !== $updated_at && $obj->updated_at = $updated_at;
+        null !== $webhook_event_failover_url && $obj->webhook_event_failover_url = $webhook_event_failover_url;
+        null !== $webhook_event_url && $obj->webhook_event_url = $webhook_event_url;
+        null !== $webhook_timeout_secs && $obj->webhook_timeout_secs = $webhook_timeout_secs;
 
         return $obj;
     }
@@ -187,7 +187,7 @@ final class FaxApplication implements BaseModel
         AnchorsiteOverride|string $anchorsiteOverride
     ): self {
         $obj = clone $this;
-        $obj['anchorsiteOverride'] = $anchorsiteOverride;
+        $obj['anchorsite_override'] = $anchorsiteOverride;
 
         return $obj;
     }
@@ -198,7 +198,7 @@ final class FaxApplication implements BaseModel
     public function withApplicationName(string $applicationName): self
     {
         $obj = clone $this;
-        $obj->applicationName = $applicationName;
+        $obj->application_name = $applicationName;
 
         return $obj;
     }
@@ -209,7 +209,7 @@ final class FaxApplication implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }
@@ -236,7 +236,7 @@ final class FaxApplication implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType;
+        $obj->record_type = $recordType;
 
         return $obj;
     }
@@ -260,7 +260,7 @@ final class FaxApplication implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $obj->updated_at = $updatedAt;
 
         return $obj;
     }
@@ -272,7 +272,7 @@ final class FaxApplication implements BaseModel
         ?string $webhookEventFailoverURL
     ): self {
         $obj = clone $this;
-        $obj->webhookEventFailoverURL = $webhookEventFailoverURL;
+        $obj->webhook_event_failover_url = $webhookEventFailoverURL;
 
         return $obj;
     }
@@ -283,7 +283,7 @@ final class FaxApplication implements BaseModel
     public function withWebhookEventURL(string $webhookEventURL): self
     {
         $obj = clone $this;
-        $obj->webhookEventURL = $webhookEventURL;
+        $obj->webhook_event_url = $webhookEventURL;
 
         return $obj;
     }
@@ -294,7 +294,7 @@ final class FaxApplication implements BaseModel
     public function withWebhookTimeoutSecs(?int $webhookTimeoutSecs): self
     {
         $obj = clone $this;
-        $obj->webhookTimeoutSecs = $webhookTimeoutSecs;
+        $obj->webhook_timeout_secs = $webhookTimeoutSecs;
 
         return $obj;
     }

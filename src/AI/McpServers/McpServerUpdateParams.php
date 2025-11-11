@@ -16,9 +16,9 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-type McpServerUpdateParamsShape = array{
  *   id?: string,
- *   allowedTools?: list<string>|null,
- *   apiKeyRef?: string|null,
- *   createdAt?: \DateTimeInterface,
+ *   allowed_tools?: list<string>|null,
+ *   api_key_ref?: string|null,
+ *   created_at?: \DateTimeInterface,
  *   name?: string,
  *   type?: string,
  *   url?: string,
@@ -33,15 +33,15 @@ final class McpServerUpdateParams implements BaseModel
     #[Api(optional: true)]
     public ?string $id;
 
-    /** @var list<string>|null $allowedTools */
-    #[Api('allowed_tools', list: 'string', nullable: true, optional: true)]
-    public ?array $allowedTools;
+    /** @var list<string>|null $allowed_tools */
+    #[Api(list: 'string', nullable: true, optional: true)]
+    public ?array $allowed_tools;
 
-    #[Api('api_key_ref', nullable: true, optional: true)]
-    public ?string $apiKeyRef;
+    #[Api(nullable: true, optional: true)]
+    public ?string $api_key_ref;
 
-    #[Api('created_at', optional: true)]
-    public ?\DateTimeInterface $createdAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $created_at;
 
     #[Api(optional: true)]
     public ?string $name;
@@ -62,13 +62,13 @@ final class McpServerUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string>|null $allowedTools
+     * @param list<string>|null $allowed_tools
      */
     public static function with(
         ?string $id = null,
-        ?array $allowedTools = null,
-        ?string $apiKeyRef = null,
-        ?\DateTimeInterface $createdAt = null,
+        ?array $allowed_tools = null,
+        ?string $api_key_ref = null,
+        ?\DateTimeInterface $created_at = null,
         ?string $name = null,
         ?string $type = null,
         ?string $url = null,
@@ -76,9 +76,9 @@ final class McpServerUpdateParams implements BaseModel
         $obj = new self;
 
         null !== $id && $obj->id = $id;
-        null !== $allowedTools && $obj->allowedTools = $allowedTools;
-        null !== $apiKeyRef && $obj->apiKeyRef = $apiKeyRef;
-        null !== $createdAt && $obj->createdAt = $createdAt;
+        null !== $allowed_tools && $obj->allowed_tools = $allowed_tools;
+        null !== $api_key_ref && $obj->api_key_ref = $api_key_ref;
+        null !== $created_at && $obj->created_at = $created_at;
         null !== $name && $obj->name = $name;
         null !== $type && $obj->type = $type;
         null !== $url && $obj->url = $url;
@@ -100,7 +100,7 @@ final class McpServerUpdateParams implements BaseModel
     public function withAllowedTools(?array $allowedTools): self
     {
         $obj = clone $this;
-        $obj->allowedTools = $allowedTools;
+        $obj->allowed_tools = $allowedTools;
 
         return $obj;
     }
@@ -108,7 +108,7 @@ final class McpServerUpdateParams implements BaseModel
     public function withAPIKeyRef(?string $apiKeyRef): self
     {
         $obj = clone $this;
-        $obj->apiKeyRef = $apiKeyRef;
+        $obj->api_key_ref = $apiKeyRef;
 
         return $obj;
     }
@@ -116,7 +116,7 @@ final class McpServerUpdateParams implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }

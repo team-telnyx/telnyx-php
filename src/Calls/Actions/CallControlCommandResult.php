@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type CallControlCommandResultShape = array{result?: string}
+ * @phpstan-type CallControlCommandResultShape = array{result?: string|null}
  */
 final class CallControlCommandResult implements BaseModel
 {

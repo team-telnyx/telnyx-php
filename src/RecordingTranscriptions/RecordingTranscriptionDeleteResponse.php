@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type RecordingTranscriptionDeleteResponseShape = array{
- *   data?: RecordingTranscription
+ *   data?: RecordingTranscription|null
  * }
  */
 final class RecordingTranscriptionDeleteResponse implements BaseModel, ResponseConverter

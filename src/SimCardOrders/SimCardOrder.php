@@ -13,15 +13,15 @@ use Telnyx\SimCardOrders\SimCardOrder\Status;
 
 /**
  * @phpstan-type SimCardOrderShape = array{
- *   id?: string,
- *   cost?: Cost,
- *   createdAt?: string,
- *   orderAddress?: OrderAddress,
- *   quantity?: int,
- *   recordType?: string,
- *   status?: value-of<Status>,
- *   trackingURL?: string,
- *   updatedAt?: string,
+ *   id?: string|null,
+ *   cost?: Cost|null,
+ *   created_at?: string|null,
+ *   order_address?: OrderAddress|null,
+ *   quantity?: int|null,
+ *   record_type?: string|null,
+ *   status?: value-of<Status>|null,
+ *   tracking_url?: string|null,
+ *   updated_at?: string|null,
  * }
  */
 final class SimCardOrder implements BaseModel
@@ -44,14 +44,14 @@ final class SimCardOrder implements BaseModel
     /**
      * ISO 8601 formatted date-time indicating when the resource was last created.
      */
-    #[Api('created_at', optional: true)]
-    public ?string $createdAt;
+    #[Api(optional: true)]
+    public ?string $created_at;
 
     /**
      * An object representing the address information from when the order was submitted.
      */
-    #[Api('order_address', optional: true)]
-    public ?OrderAddress $orderAddress;
+    #[Api(optional: true)]
+    public ?OrderAddress $order_address;
 
     /**
      * The amount of SIM cards requested in the SIM card order.
@@ -62,8 +62,8 @@ final class SimCardOrder implements BaseModel
     /**
      * Identifies the type of the resource.
      */
-    #[Api('record_type', optional: true)]
-    public ?string $recordType;
+    #[Api(optional: true)]
+    public ?string $record_type;
 
     /**
      * The current status of the SIM Card order.<ul> <li><code>pending</code> - the order is waiting to be processed.</li> <li><code>processing</code> - the order is currently being processed.</li> <li><code>ready_to_ship</code> - the order is ready to be shipped to the specified <b>address</b>.</li> <li><code>shipped</code> - the order was shipped and is on its way to be delivered to the specified <b>address</b>.</li> <li><code>delivered</code> - the order was delivered to the specified <b>address</b>.</li> <li><code>canceled</code> - the order was canceled.</li> </ul>.
@@ -76,14 +76,14 @@ final class SimCardOrder implements BaseModel
     /**
      * The URL used to get tracking information about the order.
      */
-    #[Api('tracking_url', optional: true)]
-    public ?string $trackingURL;
+    #[Api(optional: true)]
+    public ?string $tracking_url;
 
     /**
      * ISO 8601 formatted date-time indicating when the resource was last updated.
      */
-    #[Api('updated_at', optional: true)]
-    public ?string $updatedAt;
+    #[Api(optional: true)]
+    public ?string $updated_at;
 
     public function __construct()
     {
@@ -100,25 +100,25 @@ final class SimCardOrder implements BaseModel
     public static function with(
         ?string $id = null,
         ?Cost $cost = null,
-        ?string $createdAt = null,
-        ?OrderAddress $orderAddress = null,
+        ?string $created_at = null,
+        ?OrderAddress $order_address = null,
         ?int $quantity = null,
-        ?string $recordType = null,
+        ?string $record_type = null,
         Status|string|null $status = null,
-        ?string $trackingURL = null,
-        ?string $updatedAt = null,
+        ?string $tracking_url = null,
+        ?string $updated_at = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj->id = $id;
         null !== $cost && $obj->cost = $cost;
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $orderAddress && $obj->orderAddress = $orderAddress;
+        null !== $created_at && $obj->created_at = $created_at;
+        null !== $order_address && $obj->order_address = $order_address;
         null !== $quantity && $obj->quantity = $quantity;
-        null !== $recordType && $obj->recordType = $recordType;
+        null !== $record_type && $obj->record_type = $record_type;
         null !== $status && $obj['status'] = $status;
-        null !== $trackingURL && $obj->trackingURL = $trackingURL;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
+        null !== $tracking_url && $obj->tracking_url = $tracking_url;
+        null !== $updated_at && $obj->updated_at = $updated_at;
 
         return $obj;
     }
@@ -151,7 +151,7 @@ final class SimCardOrder implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }
@@ -162,7 +162,7 @@ final class SimCardOrder implements BaseModel
     public function withOrderAddress(OrderAddress $orderAddress): self
     {
         $obj = clone $this;
-        $obj->orderAddress = $orderAddress;
+        $obj->order_address = $orderAddress;
 
         return $obj;
     }
@@ -184,7 +184,7 @@ final class SimCardOrder implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType;
+        $obj->record_type = $recordType;
 
         return $obj;
     }
@@ -208,7 +208,7 @@ final class SimCardOrder implements BaseModel
     public function withTrackingURL(string $trackingURL): self
     {
         $obj = clone $this;
-        $obj->trackingURL = $trackingURL;
+        $obj->tracking_url = $trackingURL;
 
         return $obj;
     }
@@ -219,7 +219,7 @@ final class SimCardOrder implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $obj->updated_at = $updatedAt;
 
         return $obj;
     }

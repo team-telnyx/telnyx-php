@@ -13,8 +13,8 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * @phpstan-type DataShape = array{
  *   id: string,
- *   conversationInsights: list<ConversationInsight>,
- *   createdAt: \DateTimeInterface,
+ *   conversation_insights: list<ConversationInsight>,
+ *   created_at: \DateTimeInterface,
  *   status: value-of<Status>,
  * }
  */
@@ -32,16 +32,16 @@ final class Data implements BaseModel
     /**
      * List of insights extracted from the conversation.
      *
-     * @var list<ConversationInsight> $conversationInsights
+     * @var list<ConversationInsight> $conversation_insights
      */
-    #[Api('conversation_insights', list: ConversationInsight::class)]
-    public array $conversationInsights;
+    #[Api(list: ConversationInsight::class)]
+    public array $conversation_insights;
 
     /**
      * Timestamp of when the object was created.
      */
-    #[Api('created_at')]
-    public \DateTimeInterface $createdAt;
+    #[Api]
+    public \DateTimeInterface $created_at;
 
     /**
      * Current status of the insight generation for the conversation.
@@ -56,7 +56,7 @@ final class Data implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * Data::with(id: ..., conversationInsights: ..., createdAt: ..., status: ...)
+     * Data::with(id: ..., conversation_insights: ..., created_at: ..., status: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -79,20 +79,20 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ConversationInsight> $conversationInsights
+     * @param list<ConversationInsight> $conversation_insights
      * @param Status|value-of<Status> $status
      */
     public static function with(
         string $id,
-        array $conversationInsights,
-        \DateTimeInterface $createdAt,
+        array $conversation_insights,
+        \DateTimeInterface $created_at,
         Status|string $status,
     ): self {
         $obj = new self;
 
         $obj->id = $id;
-        $obj->conversationInsights = $conversationInsights;
-        $obj->createdAt = $createdAt;
+        $obj->conversation_insights = $conversation_insights;
+        $obj->created_at = $created_at;
         $obj['status'] = $status;
 
         return $obj;
@@ -117,7 +117,7 @@ final class Data implements BaseModel
     public function withConversationInsights(array $conversationInsights): self
     {
         $obj = clone $this;
-        $obj->conversationInsights = $conversationInsights;
+        $obj->conversation_insights = $conversationInsights;
 
         return $obj;
     }
@@ -128,7 +128,7 @@ final class Data implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }

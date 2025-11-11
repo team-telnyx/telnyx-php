@@ -23,39 +23,20 @@ final class ActionsService implements ActionsContract
      *
      * Submit verification code
      *
-     * @param string $verificationCode
+     * @param array{
+     *   verification_code: string
+     * }|ActionSubmitVerificationCodeParams $params
      *
      * @throws APIException
      */
     public function submitVerificationCode(
         string $phoneNumber,
-        $verificationCode,
+        array|ActionSubmitVerificationCodeParams $params,
         ?RequestOptions $requestOptions = null,
-    ): VerifiedNumberDataWrapper {
-        $params = ['verificationCode' => $verificationCode];
-
-        return $this->submitVerificationCodeRaw(
-            $phoneNumber,
-            $params,
-            $requestOptions
-        );
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function submitVerificationCodeRaw(
-        string $phoneNumber,
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): VerifiedNumberDataWrapper {
         [$parsed, $options] = ActionSubmitVerificationCodeParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

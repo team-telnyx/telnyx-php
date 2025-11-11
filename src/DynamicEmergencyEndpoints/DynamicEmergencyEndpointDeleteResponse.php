@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type DynamicEmergencyEndpointDeleteResponseShape = array{
- *   data?: DynamicEmergencyEndpoint
+ *   data?: DynamicEmergencyEndpoint|null
  * }
  */
 final class DynamicEmergencyEndpointDeleteResponse implements BaseModel, ResponseConverter

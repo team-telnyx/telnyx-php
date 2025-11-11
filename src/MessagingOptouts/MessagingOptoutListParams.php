@@ -18,7 +18,10 @@ use Telnyx\MessagingOptouts\MessagingOptoutListParams\Page;
  * @see Telnyx\MessagingOptouts->list
  *
  * @phpstan-type MessagingOptoutListParamsShape = array{
- *   createdAt?: CreatedAt, filter?: Filter, page?: Page, redactionEnabled?: string
+ *   created_at?: CreatedAt,
+ *   filter?: Filter,
+ *   page?: Page,
+ *   redaction_enabled?: string,
  * }
  */
 final class MessagingOptoutListParams implements BaseModel
@@ -31,7 +34,7 @@ final class MessagingOptoutListParams implements BaseModel
      * Consolidated created_at parameter (deepObject style). Originally: created_at[gte], created_at[lte].
      */
     #[Api(optional: true)]
-    public ?CreatedAt $createdAt;
+    public ?CreatedAt $created_at;
 
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[messaging_profile_id], filter[from].
@@ -49,7 +52,7 @@ final class MessagingOptoutListParams implements BaseModel
      * If receiving address (+E.164 formatted phone number) should be redacted.
      */
     #[Api(optional: true)]
-    public ?string $redactionEnabled;
+    public ?string $redaction_enabled;
 
     public function __construct()
     {
@@ -62,17 +65,17 @@ final class MessagingOptoutListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?CreatedAt $createdAt = null,
+        ?CreatedAt $created_at = null,
         ?Filter $filter = null,
         ?Page $page = null,
-        ?string $redactionEnabled = null,
+        ?string $redaction_enabled = null,
     ): self {
         $obj = new self;
 
-        null !== $createdAt && $obj->createdAt = $createdAt;
+        null !== $created_at && $obj->created_at = $created_at;
         null !== $filter && $obj->filter = $filter;
         null !== $page && $obj->page = $page;
-        null !== $redactionEnabled && $obj->redactionEnabled = $redactionEnabled;
+        null !== $redaction_enabled && $obj->redaction_enabled = $redaction_enabled;
 
         return $obj;
     }
@@ -83,7 +86,7 @@ final class MessagingOptoutListParams implements BaseModel
     public function withCreatedAt(CreatedAt $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }
@@ -116,7 +119,7 @@ final class MessagingOptoutListParams implements BaseModel
     public function withRedactionEnabled(string $redactionEnabled): self
     {
         $obj = clone $this;
-        $obj->redactionEnabled = $redactionEnabled;
+        $obj->redaction_enabled = $redactionEnabled;
 
         return $obj;
     }

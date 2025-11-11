@@ -10,13 +10,13 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type PortingOrderEndUserAdminShape = array{
- *   accountNumber?: string,
- *   authPersonName?: string,
- *   billingPhoneNumber?: string,
- *   businessIdentifier?: string,
- *   entityName?: string,
- *   pinPasscode?: string,
- *   taxIdentifier?: string,
+ *   account_number?: string|null,
+ *   auth_person_name?: string|null,
+ *   billing_phone_number?: string|null,
+ *   business_identifier?: string|null,
+ *   entity_name?: string|null,
+ *   pin_passcode?: string|null,
+ *   tax_identifier?: string|null,
  * }
  */
 final class PortingOrderEndUserAdmin implements BaseModel
@@ -27,44 +27,44 @@ final class PortingOrderEndUserAdmin implements BaseModel
     /**
      * The authorized person's account number with the current service provider.
      */
-    #[Api('account_number', optional: true)]
-    public ?string $accountNumber;
+    #[Api(optional: true)]
+    public ?string $account_number;
 
     /**
      * Name of person authorizing the porting order.
      */
-    #[Api('auth_person_name', optional: true)]
-    public ?string $authPersonName;
+    #[Api(optional: true)]
+    public ?string $auth_person_name;
 
     /**
      * Billing phone number associated with these phone numbers.
      */
-    #[Api('billing_phone_number', optional: true)]
-    public ?string $billingPhoneNumber;
+    #[Api(optional: true)]
+    public ?string $billing_phone_number;
 
     /**
      * European business identification number. Applicable only in the European Union.
      */
-    #[Api('business_identifier', optional: true)]
-    public ?string $businessIdentifier;
+    #[Api(optional: true)]
+    public ?string $business_identifier;
 
     /**
      * Person Name or Company name requesting the port.
      */
-    #[Api('entity_name', optional: true)]
-    public ?string $entityName;
+    #[Api(optional: true)]
+    public ?string $entity_name;
 
     /**
      * PIN/passcode possibly required by the old service provider for extra verification.
      */
-    #[Api('pin_passcode', optional: true)]
-    public ?string $pinPasscode;
+    #[Api(optional: true)]
+    public ?string $pin_passcode;
 
     /**
      * European tax identification number. Applicable only in the European Union.
      */
-    #[Api('tax_identifier', optional: true)]
-    public ?string $taxIdentifier;
+    #[Api(optional: true)]
+    public ?string $tax_identifier;
 
     public function __construct()
     {
@@ -77,23 +77,23 @@ final class PortingOrderEndUserAdmin implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $accountNumber = null,
-        ?string $authPersonName = null,
-        ?string $billingPhoneNumber = null,
-        ?string $businessIdentifier = null,
-        ?string $entityName = null,
-        ?string $pinPasscode = null,
-        ?string $taxIdentifier = null,
+        ?string $account_number = null,
+        ?string $auth_person_name = null,
+        ?string $billing_phone_number = null,
+        ?string $business_identifier = null,
+        ?string $entity_name = null,
+        ?string $pin_passcode = null,
+        ?string $tax_identifier = null,
     ): self {
         $obj = new self;
 
-        null !== $accountNumber && $obj->accountNumber = $accountNumber;
-        null !== $authPersonName && $obj->authPersonName = $authPersonName;
-        null !== $billingPhoneNumber && $obj->billingPhoneNumber = $billingPhoneNumber;
-        null !== $businessIdentifier && $obj->businessIdentifier = $businessIdentifier;
-        null !== $entityName && $obj->entityName = $entityName;
-        null !== $pinPasscode && $obj->pinPasscode = $pinPasscode;
-        null !== $taxIdentifier && $obj->taxIdentifier = $taxIdentifier;
+        null !== $account_number && $obj->account_number = $account_number;
+        null !== $auth_person_name && $obj->auth_person_name = $auth_person_name;
+        null !== $billing_phone_number && $obj->billing_phone_number = $billing_phone_number;
+        null !== $business_identifier && $obj->business_identifier = $business_identifier;
+        null !== $entity_name && $obj->entity_name = $entity_name;
+        null !== $pin_passcode && $obj->pin_passcode = $pin_passcode;
+        null !== $tax_identifier && $obj->tax_identifier = $tax_identifier;
 
         return $obj;
     }
@@ -104,7 +104,7 @@ final class PortingOrderEndUserAdmin implements BaseModel
     public function withAccountNumber(string $accountNumber): self
     {
         $obj = clone $this;
-        $obj->accountNumber = $accountNumber;
+        $obj->account_number = $accountNumber;
 
         return $obj;
     }
@@ -115,7 +115,7 @@ final class PortingOrderEndUserAdmin implements BaseModel
     public function withAuthPersonName(string $authPersonName): self
     {
         $obj = clone $this;
-        $obj->authPersonName = $authPersonName;
+        $obj->auth_person_name = $authPersonName;
 
         return $obj;
     }
@@ -126,7 +126,7 @@ final class PortingOrderEndUserAdmin implements BaseModel
     public function withBillingPhoneNumber(string $billingPhoneNumber): self
     {
         $obj = clone $this;
-        $obj->billingPhoneNumber = $billingPhoneNumber;
+        $obj->billing_phone_number = $billingPhoneNumber;
 
         return $obj;
     }
@@ -137,7 +137,7 @@ final class PortingOrderEndUserAdmin implements BaseModel
     public function withBusinessIdentifier(string $businessIdentifier): self
     {
         $obj = clone $this;
-        $obj->businessIdentifier = $businessIdentifier;
+        $obj->business_identifier = $businessIdentifier;
 
         return $obj;
     }
@@ -148,7 +148,7 @@ final class PortingOrderEndUserAdmin implements BaseModel
     public function withEntityName(string $entityName): self
     {
         $obj = clone $this;
-        $obj->entityName = $entityName;
+        $obj->entity_name = $entityName;
 
         return $obj;
     }
@@ -159,7 +159,7 @@ final class PortingOrderEndUserAdmin implements BaseModel
     public function withPinPasscode(string $pinPasscode): self
     {
         $obj = clone $this;
-        $obj->pinPasscode = $pinPasscode;
+        $obj->pin_passcode = $pinPasscode;
 
         return $obj;
     }
@@ -170,7 +170,7 @@ final class PortingOrderEndUserAdmin implements BaseModel
     public function withTaxIdentifier(string $taxIdentifier): self
     {
         $obj = clone $this;
-        $obj->taxIdentifier = $taxIdentifier;
+        $obj->tax_identifier = $taxIdentifier;
 
         return $obj;
     }

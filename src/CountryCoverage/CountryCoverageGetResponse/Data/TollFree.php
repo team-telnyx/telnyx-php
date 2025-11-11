@@ -10,12 +10,12 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type TollFreeShape = array{
- *   features?: list<string>,
- *   fullPstnReplacement?: bool,
- *   internationalSMS?: bool,
- *   p2p?: bool,
- *   quickship?: bool,
- *   reservable?: bool,
+ *   features?: list<string>|null,
+ *   full_pstn_replacement?: bool|null,
+ *   international_sms?: bool|null,
+ *   p2p?: bool|null,
+ *   quickship?: bool|null,
+ *   reservable?: bool|null,
  * }
  */
 final class TollFree implements BaseModel
@@ -27,11 +27,11 @@ final class TollFree implements BaseModel
     #[Api(list: 'string', optional: true)]
     public ?array $features;
 
-    #[Api('full_pstn_replacement', optional: true)]
-    public ?bool $fullPstnReplacement;
+    #[Api(optional: true)]
+    public ?bool $full_pstn_replacement;
 
-    #[Api('international_sms', optional: true)]
-    public ?bool $internationalSMS;
+    #[Api(optional: true)]
+    public ?bool $international_sms;
 
     #[Api(optional: true)]
     public ?bool $p2p;
@@ -56,8 +56,8 @@ final class TollFree implements BaseModel
      */
     public static function with(
         ?array $features = null,
-        ?bool $fullPstnReplacement = null,
-        ?bool $internationalSMS = null,
+        ?bool $full_pstn_replacement = null,
+        ?bool $international_sms = null,
         ?bool $p2p = null,
         ?bool $quickship = null,
         ?bool $reservable = null,
@@ -65,8 +65,8 @@ final class TollFree implements BaseModel
         $obj = new self;
 
         null !== $features && $obj->features = $features;
-        null !== $fullPstnReplacement && $obj->fullPstnReplacement = $fullPstnReplacement;
-        null !== $internationalSMS && $obj->internationalSMS = $internationalSMS;
+        null !== $full_pstn_replacement && $obj->full_pstn_replacement = $full_pstn_replacement;
+        null !== $international_sms && $obj->international_sms = $international_sms;
         null !== $p2p && $obj->p2p = $p2p;
         null !== $quickship && $obj->quickship = $quickship;
         null !== $reservable && $obj->reservable = $reservable;
@@ -88,7 +88,7 @@ final class TollFree implements BaseModel
     public function withFullPstnReplacement(bool $fullPstnReplacement): self
     {
         $obj = clone $this;
-        $obj->fullPstnReplacement = $fullPstnReplacement;
+        $obj->full_pstn_replacement = $fullPstnReplacement;
 
         return $obj;
     }
@@ -96,7 +96,7 @@ final class TollFree implements BaseModel
     public function withInternationalSMS(bool $internationalSMS): self
     {
         $obj = clone $this;
-        $obj->internationalSMS = $internationalSMS;
+        $obj->international_sms = $internationalSMS;
 
         return $obj;
     }

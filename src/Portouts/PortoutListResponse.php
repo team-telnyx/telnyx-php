@@ -13,7 +13,7 @@ use Telnyx\Metadata;
 
 /**
  * @phpstan-type PortoutListResponseShape = array{
- *   data?: list<PortoutDetails>, meta?: Metadata
+ *   data?: list<PortoutDetails>|null, meta?: Metadata|null
  * }
  */
 final class PortoutListResponse implements BaseModel, ResponseConverter

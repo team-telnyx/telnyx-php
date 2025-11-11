@@ -10,23 +10,23 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type ConferenceParticipantDetailRecordShape = array{
- *   recordType: string,
- *   id?: string,
- *   billedSec?: int,
- *   callLegID?: string,
- *   callSec?: int,
- *   callSessionID?: string,
- *   conferenceID?: string,
- *   cost?: string,
- *   currency?: string,
- *   destinationNumber?: string,
- *   isTelnyxBillable?: bool,
- *   joinedAt?: \DateTimeInterface,
- *   leftAt?: \DateTimeInterface,
- *   originatingNumber?: string,
- *   rate?: string,
- *   rateMeasuredIn?: string,
- *   userID?: string,
+ *   record_type: string,
+ *   id?: string|null,
+ *   billed_sec?: int|null,
+ *   call_leg_id?: string|null,
+ *   call_sec?: int|null,
+ *   call_session_id?: string|null,
+ *   conference_id?: string|null,
+ *   cost?: string|null,
+ *   currency?: string|null,
+ *   destination_number?: string|null,
+ *   is_telnyx_billable?: bool|null,
+ *   joined_at?: \DateTimeInterface|null,
+ *   left_at?: \DateTimeInterface|null,
+ *   originating_number?: string|null,
+ *   rate?: string|null,
+ *   rate_measured_in?: string|null,
+ *   user_id?: string|null,
  * }
  */
 final class ConferenceParticipantDetailRecord implements BaseModel
@@ -34,8 +34,8 @@ final class ConferenceParticipantDetailRecord implements BaseModel
     /** @use SdkModel<ConferenceParticipantDetailRecordShape> */
     use SdkModel;
 
-    #[Api('record_type')]
-    public string $recordType;
+    #[Api]
+    public string $record_type;
 
     /**
      * Participant id.
@@ -46,32 +46,32 @@ final class ConferenceParticipantDetailRecord implements BaseModel
     /**
      * Duration of the conference call for billing purposes.
      */
-    #[Api('billed_sec', optional: true)]
-    public ?int $billedSec;
+    #[Api(optional: true)]
+    public ?int $billed_sec;
 
     /**
      * Telnyx UUID that identifies the conference call leg.
      */
-    #[Api('call_leg_id', optional: true)]
-    public ?string $callLegID;
+    #[Api(optional: true)]
+    public ?string $call_leg_id;
 
     /**
      * Duration of the conference call in seconds.
      */
-    #[Api('call_sec', optional: true)]
-    public ?int $callSec;
+    #[Api(optional: true)]
+    public ?int $call_sec;
 
     /**
      * Telnyx UUID that identifies with conference call session.
      */
-    #[Api('call_session_id', optional: true)]
-    public ?string $callSessionID;
+    #[Api(optional: true)]
+    public ?string $call_session_id;
 
     /**
      * Conference id.
      */
-    #[Api('conference_id', optional: true)]
-    public ?string $conferenceID;
+    #[Api(optional: true)]
+    public ?string $conference_id;
 
     /**
      * Currency amount for Telnyx billing cost.
@@ -88,32 +88,32 @@ final class ConferenceParticipantDetailRecord implements BaseModel
     /**
      * Number called by the participant to join the conference.
      */
-    #[Api('destination_number', optional: true)]
-    public ?string $destinationNumber;
+    #[Api(optional: true)]
+    public ?string $destination_number;
 
     /**
      * Indicates whether Telnyx billing charges might be applicable.
      */
-    #[Api('is_telnyx_billable', optional: true)]
-    public ?bool $isTelnyxBillable;
+    #[Api(optional: true)]
+    public ?bool $is_telnyx_billable;
 
     /**
      * Participant join time.
      */
-    #[Api('joined_at', optional: true)]
-    public ?\DateTimeInterface $joinedAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $joined_at;
 
     /**
      * Participant leave time.
      */
-    #[Api('left_at', optional: true)]
-    public ?\DateTimeInterface $leftAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $left_at;
 
     /**
      * Participant origin number used in the conference call.
      */
-    #[Api('originating_number', optional: true)]
-    public ?string $originatingNumber;
+    #[Api(optional: true)]
+    public ?string $originating_number;
 
     /**
      * Currency amount per billing unit used to calculate the Telnyx billing cost.
@@ -124,21 +124,21 @@ final class ConferenceParticipantDetailRecord implements BaseModel
     /**
      * Billing unit used to calculate the Telnyx billing cost.
      */
-    #[Api('rate_measured_in', optional: true)]
-    public ?string $rateMeasuredIn;
+    #[Api(optional: true)]
+    public ?string $rate_measured_in;
 
     /**
      * User id.
      */
-    #[Api('user_id', optional: true)]
-    public ?string $userID;
+    #[Api(optional: true)]
+    public ?string $user_id;
 
     /**
      * `new ConferenceParticipantDetailRecord()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * ConferenceParticipantDetailRecord::with(recordType: ...)
+     * ConferenceParticipantDetailRecord::with(record_type: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -158,44 +158,44 @@ final class ConferenceParticipantDetailRecord implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        string $recordType = 'conference_participant_detail_record',
+        string $record_type = 'conference_participant_detail_record',
         ?string $id = null,
-        ?int $billedSec = null,
-        ?string $callLegID = null,
-        ?int $callSec = null,
-        ?string $callSessionID = null,
-        ?string $conferenceID = null,
+        ?int $billed_sec = null,
+        ?string $call_leg_id = null,
+        ?int $call_sec = null,
+        ?string $call_session_id = null,
+        ?string $conference_id = null,
         ?string $cost = null,
         ?string $currency = null,
-        ?string $destinationNumber = null,
-        ?bool $isTelnyxBillable = null,
-        ?\DateTimeInterface $joinedAt = null,
-        ?\DateTimeInterface $leftAt = null,
-        ?string $originatingNumber = null,
+        ?string $destination_number = null,
+        ?bool $is_telnyx_billable = null,
+        ?\DateTimeInterface $joined_at = null,
+        ?\DateTimeInterface $left_at = null,
+        ?string $originating_number = null,
         ?string $rate = null,
-        ?string $rateMeasuredIn = null,
-        ?string $userID = null,
+        ?string $rate_measured_in = null,
+        ?string $user_id = null,
     ): self {
         $obj = new self;
 
-        $obj->recordType = $recordType;
+        $obj->record_type = $record_type;
 
         null !== $id && $obj->id = $id;
-        null !== $billedSec && $obj->billedSec = $billedSec;
-        null !== $callLegID && $obj->callLegID = $callLegID;
-        null !== $callSec && $obj->callSec = $callSec;
-        null !== $callSessionID && $obj->callSessionID = $callSessionID;
-        null !== $conferenceID && $obj->conferenceID = $conferenceID;
+        null !== $billed_sec && $obj->billed_sec = $billed_sec;
+        null !== $call_leg_id && $obj->call_leg_id = $call_leg_id;
+        null !== $call_sec && $obj->call_sec = $call_sec;
+        null !== $call_session_id && $obj->call_session_id = $call_session_id;
+        null !== $conference_id && $obj->conference_id = $conference_id;
         null !== $cost && $obj->cost = $cost;
         null !== $currency && $obj->currency = $currency;
-        null !== $destinationNumber && $obj->destinationNumber = $destinationNumber;
-        null !== $isTelnyxBillable && $obj->isTelnyxBillable = $isTelnyxBillable;
-        null !== $joinedAt && $obj->joinedAt = $joinedAt;
-        null !== $leftAt && $obj->leftAt = $leftAt;
-        null !== $originatingNumber && $obj->originatingNumber = $originatingNumber;
+        null !== $destination_number && $obj->destination_number = $destination_number;
+        null !== $is_telnyx_billable && $obj->is_telnyx_billable = $is_telnyx_billable;
+        null !== $joined_at && $obj->joined_at = $joined_at;
+        null !== $left_at && $obj->left_at = $left_at;
+        null !== $originating_number && $obj->originating_number = $originating_number;
         null !== $rate && $obj->rate = $rate;
-        null !== $rateMeasuredIn && $obj->rateMeasuredIn = $rateMeasuredIn;
-        null !== $userID && $obj->userID = $userID;
+        null !== $rate_measured_in && $obj->rate_measured_in = $rate_measured_in;
+        null !== $user_id && $obj->user_id = $user_id;
 
         return $obj;
     }
@@ -203,7 +203,7 @@ final class ConferenceParticipantDetailRecord implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType;
+        $obj->record_type = $recordType;
 
         return $obj;
     }
@@ -225,7 +225,7 @@ final class ConferenceParticipantDetailRecord implements BaseModel
     public function withBilledSec(int $billedSec): self
     {
         $obj = clone $this;
-        $obj->billedSec = $billedSec;
+        $obj->billed_sec = $billedSec;
 
         return $obj;
     }
@@ -236,7 +236,7 @@ final class ConferenceParticipantDetailRecord implements BaseModel
     public function withCallLegID(string $callLegID): self
     {
         $obj = clone $this;
-        $obj->callLegID = $callLegID;
+        $obj->call_leg_id = $callLegID;
 
         return $obj;
     }
@@ -247,7 +247,7 @@ final class ConferenceParticipantDetailRecord implements BaseModel
     public function withCallSec(int $callSec): self
     {
         $obj = clone $this;
-        $obj->callSec = $callSec;
+        $obj->call_sec = $callSec;
 
         return $obj;
     }
@@ -258,7 +258,7 @@ final class ConferenceParticipantDetailRecord implements BaseModel
     public function withCallSessionID(string $callSessionID): self
     {
         $obj = clone $this;
-        $obj->callSessionID = $callSessionID;
+        $obj->call_session_id = $callSessionID;
 
         return $obj;
     }
@@ -269,7 +269,7 @@ final class ConferenceParticipantDetailRecord implements BaseModel
     public function withConferenceID(string $conferenceID): self
     {
         $obj = clone $this;
-        $obj->conferenceID = $conferenceID;
+        $obj->conference_id = $conferenceID;
 
         return $obj;
     }
@@ -302,7 +302,7 @@ final class ConferenceParticipantDetailRecord implements BaseModel
     public function withDestinationNumber(string $destinationNumber): self
     {
         $obj = clone $this;
-        $obj->destinationNumber = $destinationNumber;
+        $obj->destination_number = $destinationNumber;
 
         return $obj;
     }
@@ -313,7 +313,7 @@ final class ConferenceParticipantDetailRecord implements BaseModel
     public function withIsTelnyxBillable(bool $isTelnyxBillable): self
     {
         $obj = clone $this;
-        $obj->isTelnyxBillable = $isTelnyxBillable;
+        $obj->is_telnyx_billable = $isTelnyxBillable;
 
         return $obj;
     }
@@ -324,7 +324,7 @@ final class ConferenceParticipantDetailRecord implements BaseModel
     public function withJoinedAt(\DateTimeInterface $joinedAt): self
     {
         $obj = clone $this;
-        $obj->joinedAt = $joinedAt;
+        $obj->joined_at = $joinedAt;
 
         return $obj;
     }
@@ -335,7 +335,7 @@ final class ConferenceParticipantDetailRecord implements BaseModel
     public function withLeftAt(\DateTimeInterface $leftAt): self
     {
         $obj = clone $this;
-        $obj->leftAt = $leftAt;
+        $obj->left_at = $leftAt;
 
         return $obj;
     }
@@ -346,7 +346,7 @@ final class ConferenceParticipantDetailRecord implements BaseModel
     public function withOriginatingNumber(string $originatingNumber): self
     {
         $obj = clone $this;
-        $obj->originatingNumber = $originatingNumber;
+        $obj->originating_number = $originatingNumber;
 
         return $obj;
     }
@@ -368,7 +368,7 @@ final class ConferenceParticipantDetailRecord implements BaseModel
     public function withRateMeasuredIn(string $rateMeasuredIn): self
     {
         $obj = clone $this;
-        $obj->rateMeasuredIn = $rateMeasuredIn;
+        $obj->rate_measured_in = $rateMeasuredIn;
 
         return $obj;
     }
@@ -379,7 +379,7 @@ final class ConferenceParticipantDetailRecord implements BaseModel
     public function withUserID(string $userID): self
     {
         $obj = clone $this;
-        $obj->userID = $userID;
+        $obj->user_id = $userID;
 
         return $obj;
     }

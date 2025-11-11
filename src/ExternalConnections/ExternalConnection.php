@@ -14,20 +14,20 @@ use Telnyx\ExternalConnections\ExternalConnection\WebhookAPIVersion;
 
 /**
  * @phpstan-type ExternalConnectionShape = array{
- *   id?: string,
- *   active?: bool,
- *   createdAt?: string,
- *   credentialActive?: bool,
- *   externalSipConnection?: value-of<ExternalSipConnection>,
- *   inbound?: Inbound,
- *   outbound?: Outbound,
- *   recordType?: string,
- *   tags?: list<string>,
- *   updatedAt?: string,
- *   webhookAPIVersion?: value-of<WebhookAPIVersion>,
- *   webhookEventFailoverURL?: string|null,
- *   webhookEventURL?: string,
- *   webhookTimeoutSecs?: int|null,
+ *   id?: string|null,
+ *   active?: bool|null,
+ *   created_at?: string|null,
+ *   credential_active?: bool|null,
+ *   external_sip_connection?: value-of<ExternalSipConnection>|null,
+ *   inbound?: Inbound|null,
+ *   outbound?: Outbound|null,
+ *   record_type?: string|null,
+ *   tags?: list<string>|null,
+ *   updated_at?: string|null,
+ *   webhook_api_version?: value-of<WebhookAPIVersion>|null,
+ *   webhook_event_failover_url?: string|null,
+ *   webhook_event_url?: string|null,
+ *   webhook_timeout_secs?: int|null,
  * }
  */
 final class ExternalConnection implements BaseModel
@@ -50,26 +50,22 @@ final class ExternalConnection implements BaseModel
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Api('created_at', optional: true)]
-    public ?string $createdAt;
+    #[Api(optional: true)]
+    public ?string $created_at;
 
     /**
      * If the credential associated with this service is active.
      */
-    #[Api('credential_active', optional: true)]
-    public ?bool $credentialActive;
+    #[Api(optional: true)]
+    public ?bool $credential_active;
 
     /**
      * The service that will be consuming this connection.
      *
-     * @var value-of<ExternalSipConnection>|null $externalSipConnection
+     * @var value-of<ExternalSipConnection>|null $external_sip_connection
      */
-    #[Api(
-        'external_sip_connection',
-        enum: ExternalSipConnection::class,
-        optional: true,
-    )]
-    public ?string $externalSipConnection;
+    #[Api(enum: ExternalSipConnection::class, optional: true)]
+    public ?string $external_sip_connection;
 
     #[Api(optional: true)]
     public ?Inbound $inbound;
@@ -80,8 +76,8 @@ final class ExternalConnection implements BaseModel
     /**
      * Identifies the type of the resource.
      */
-    #[Api('record_type', optional: true)]
-    public ?string $recordType;
+    #[Api(optional: true)]
+    public ?string $record_type;
 
     /**
      * Tags associated with the connection.
@@ -94,34 +90,34 @@ final class ExternalConnection implements BaseModel
     /**
      * ISO 8601 formatted date indicating when the resource was updated.
      */
-    #[Api('updated_at', optional: true)]
-    public ?string $updatedAt;
+    #[Api(optional: true)]
+    public ?string $updated_at;
 
     /**
      * Determines which webhook format will be used, Telnyx API v1 or v2.
      *
-     * @var value-of<WebhookAPIVersion>|null $webhookAPIVersion
+     * @var value-of<WebhookAPIVersion>|null $webhook_api_version
      */
-    #[Api('webhook_api_version', enum: WebhookAPIVersion::class, optional: true)]
-    public ?string $webhookAPIVersion;
+    #[Api(enum: WebhookAPIVersion::class, optional: true)]
+    public ?string $webhook_api_version;
 
     /**
      * The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      */
-    #[Api('webhook_event_failover_url', nullable: true, optional: true)]
-    public ?string $webhookEventFailoverURL;
+    #[Api(nullable: true, optional: true)]
+    public ?string $webhook_event_failover_url;
 
     /**
      * The URL where webhooks related to this connection will be sent. Must include a scheme, such as 'https'.
      */
-    #[Api('webhook_event_url', optional: true)]
-    public ?string $webhookEventURL;
+    #[Api(optional: true)]
+    public ?string $webhook_event_url;
 
     /**
      * Specifies how many seconds to wait before timing out a webhook.
      */
-    #[Api('webhook_timeout_secs', nullable: true, optional: true)]
-    public ?int $webhookTimeoutSecs;
+    #[Api(nullable: true, optional: true)]
+    public ?int $webhook_timeout_secs;
 
     public function __construct()
     {
@@ -133,42 +129,42 @@ final class ExternalConnection implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ExternalSipConnection|value-of<ExternalSipConnection> $externalSipConnection
+     * @param ExternalSipConnection|value-of<ExternalSipConnection> $external_sip_connection
      * @param list<string> $tags
-     * @param WebhookAPIVersion|value-of<WebhookAPIVersion> $webhookAPIVersion
+     * @param WebhookAPIVersion|value-of<WebhookAPIVersion> $webhook_api_version
      */
     public static function with(
         ?string $id = null,
         ?bool $active = null,
-        ?string $createdAt = null,
-        ?bool $credentialActive = null,
-        ExternalSipConnection|string|null $externalSipConnection = null,
+        ?string $created_at = null,
+        ?bool $credential_active = null,
+        ExternalSipConnection|string|null $external_sip_connection = null,
         ?Inbound $inbound = null,
         ?Outbound $outbound = null,
-        ?string $recordType = null,
+        ?string $record_type = null,
         ?array $tags = null,
-        ?string $updatedAt = null,
-        WebhookAPIVersion|string|null $webhookAPIVersion = null,
-        ?string $webhookEventFailoverURL = null,
-        ?string $webhookEventURL = null,
-        ?int $webhookTimeoutSecs = null,
+        ?string $updated_at = null,
+        WebhookAPIVersion|string|null $webhook_api_version = null,
+        ?string $webhook_event_failover_url = null,
+        ?string $webhook_event_url = null,
+        ?int $webhook_timeout_secs = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj->id = $id;
         null !== $active && $obj->active = $active;
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $credentialActive && $obj->credentialActive = $credentialActive;
-        null !== $externalSipConnection && $obj['externalSipConnection'] = $externalSipConnection;
+        null !== $created_at && $obj->created_at = $created_at;
+        null !== $credential_active && $obj->credential_active = $credential_active;
+        null !== $external_sip_connection && $obj['external_sip_connection'] = $external_sip_connection;
         null !== $inbound && $obj->inbound = $inbound;
         null !== $outbound && $obj->outbound = $outbound;
-        null !== $recordType && $obj->recordType = $recordType;
+        null !== $record_type && $obj->record_type = $record_type;
         null !== $tags && $obj->tags = $tags;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
-        null !== $webhookAPIVersion && $obj['webhookAPIVersion'] = $webhookAPIVersion;
-        null !== $webhookEventFailoverURL && $obj->webhookEventFailoverURL = $webhookEventFailoverURL;
-        null !== $webhookEventURL && $obj->webhookEventURL = $webhookEventURL;
-        null !== $webhookTimeoutSecs && $obj->webhookTimeoutSecs = $webhookTimeoutSecs;
+        null !== $updated_at && $obj->updated_at = $updated_at;
+        null !== $webhook_api_version && $obj['webhook_api_version'] = $webhook_api_version;
+        null !== $webhook_event_failover_url && $obj->webhook_event_failover_url = $webhook_event_failover_url;
+        null !== $webhook_event_url && $obj->webhook_event_url = $webhook_event_url;
+        null !== $webhook_timeout_secs && $obj->webhook_timeout_secs = $webhook_timeout_secs;
 
         return $obj;
     }
@@ -201,7 +197,7 @@ final class ExternalConnection implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }
@@ -212,7 +208,7 @@ final class ExternalConnection implements BaseModel
     public function withCredentialActive(bool $credentialActive): self
     {
         $obj = clone $this;
-        $obj->credentialActive = $credentialActive;
+        $obj->credential_active = $credentialActive;
 
         return $obj;
     }
@@ -226,7 +222,7 @@ final class ExternalConnection implements BaseModel
         ExternalSipConnection|string $externalSipConnection
     ): self {
         $obj = clone $this;
-        $obj['externalSipConnection'] = $externalSipConnection;
+        $obj['external_sip_connection'] = $externalSipConnection;
 
         return $obj;
     }
@@ -253,7 +249,7 @@ final class ExternalConnection implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType;
+        $obj->record_type = $recordType;
 
         return $obj;
     }
@@ -277,7 +273,7 @@ final class ExternalConnection implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $obj->updated_at = $updatedAt;
 
         return $obj;
     }
@@ -291,7 +287,7 @@ final class ExternalConnection implements BaseModel
         WebhookAPIVersion|string $webhookAPIVersion
     ): self {
         $obj = clone $this;
-        $obj['webhookAPIVersion'] = $webhookAPIVersion;
+        $obj['webhook_api_version'] = $webhookAPIVersion;
 
         return $obj;
     }
@@ -303,7 +299,7 @@ final class ExternalConnection implements BaseModel
         ?string $webhookEventFailoverURL
     ): self {
         $obj = clone $this;
-        $obj->webhookEventFailoverURL = $webhookEventFailoverURL;
+        $obj->webhook_event_failover_url = $webhookEventFailoverURL;
 
         return $obj;
     }
@@ -314,7 +310,7 @@ final class ExternalConnection implements BaseModel
     public function withWebhookEventURL(string $webhookEventURL): self
     {
         $obj = clone $this;
-        $obj->webhookEventURL = $webhookEventURL;
+        $obj->webhook_event_url = $webhookEventURL;
 
         return $obj;
     }
@@ -325,7 +321,7 @@ final class ExternalConnection implements BaseModel
     public function withWebhookTimeoutSecs(?int $webhookTimeoutSecs): self
     {
         $obj = clone $this;
-        $obj->webhookTimeoutSecs = $webhookTimeoutSecs;
+        $obj->webhook_timeout_secs = $webhookTimeoutSecs;
 
         return $obj;
     }

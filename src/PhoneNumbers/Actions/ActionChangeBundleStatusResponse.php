@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type ActionChangeBundleStatusResponseShape = array{
- *   data?: PhoneNumberWithVoiceSettings
+ *   data?: PhoneNumberWithVoiceSettings|null
  * }
  */
 final class ActionChangeBundleStatusResponse implements BaseModel, ResponseConverter

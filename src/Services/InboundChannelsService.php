@@ -24,33 +24,17 @@ final class InboundChannelsService implements InboundChannelsContract
      *
      * Update the number of Voice Channels for the US Zone. This allows your account to handle multiple simultaneous inbound calls to US numbers. Use this endpoint to increase or decrease your capacity based on expected call volume.
      *
-     * @param int $channels The new number of concurrent channels for the account
+     * @param array{channels: int}|InboundChannelUpdateParams $params
      *
      * @throws APIException
      */
     public function update(
-        $channels,
-        ?RequestOptions $requestOptions = null
-    ): InboundChannelUpdateResponse {
-        $params = ['channels' => $channels];
-
-        return $this->updateRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|InboundChannelUpdateParams $params,
+        ?RequestOptions $requestOptions = null,
     ): InboundChannelUpdateResponse {
         [$parsed, $options] = InboundChannelUpdateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

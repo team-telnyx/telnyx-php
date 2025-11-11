@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type WirelessBlocklistGetResponseShape = array{
- *   data?: WirelessBlocklist
+ *   data?: WirelessBlocklist|null
  * }
  */
 final class WirelessBlocklistGetResponse implements BaseModel, ResponseConverter

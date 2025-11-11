@@ -11,7 +11,9 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Filter user addresses via the customer reference. Supports both exact matching (eq) and partial matching (contains). Matching is not case-sensitive.
  *
- * @phpstan-type CustomerReferenceShape = array{contains?: string, eq?: string}
+ * @phpstan-type CustomerReferenceShape = array{
+ *   contains?: string|null, eq?: string|null
+ * }
  */
 final class CustomerReference implements BaseModel
 {

@@ -12,16 +12,16 @@ use Telnyx\Webhooks\CallRecordingTranscriptionSavedWebhookEvent\Data\Payload\Sta
 
 /**
  * @phpstan-type PayloadShape = array{
- *   callControlID?: string,
- *   callLegID?: string,
- *   callSessionID?: string,
- *   callingPartyType?: value-of<CallingPartyType>,
- *   clientState?: string,
- *   connectionID?: string,
- *   recordingID?: string,
- *   recordingTranscriptionID?: string,
- *   status?: value-of<Status>,
- *   transcriptionText?: string,
+ *   call_control_id?: string|null,
+ *   call_leg_id?: string|null,
+ *   call_session_id?: string|null,
+ *   calling_party_type?: value-of<CallingPartyType>|null,
+ *   client_state?: string|null,
+ *   connection_id?: string|null,
+ *   recording_id?: string|null,
+ *   recording_transcription_id?: string|null,
+ *   status?: value-of<Status>|null,
+ *   transcription_text?: string|null,
  * }
  */
 final class Payload implements BaseModel
@@ -32,52 +32,52 @@ final class Payload implements BaseModel
     /**
      * Call ID used to issue commands via Call Control API.
      */
-    #[Api('call_control_id', optional: true)]
-    public ?string $callControlID;
+    #[Api(optional: true)]
+    public ?string $call_control_id;
 
     /**
      * ID that is unique to the call and can be used to correlate webhook events.
      */
-    #[Api('call_leg_id', optional: true)]
-    public ?string $callLegID;
+    #[Api(optional: true)]
+    public ?string $call_leg_id;
 
     /**
      * ID that is unique to the call session and can be used to correlate webhook events. Call session is a group of related call legs that logically belong to the same phone call, e.g. an inbound and outbound leg of a transferred call.
      */
-    #[Api('call_session_id', optional: true)]
-    public ?string $callSessionID;
+    #[Api(optional: true)]
+    public ?string $call_session_id;
 
     /**
      * The type of calling party connection.
      *
-     * @var value-of<CallingPartyType>|null $callingPartyType
+     * @var value-of<CallingPartyType>|null $calling_party_type
      */
-    #[Api('calling_party_type', enum: CallingPartyType::class, optional: true)]
-    public ?string $callingPartyType;
+    #[Api(enum: CallingPartyType::class, optional: true)]
+    public ?string $calling_party_type;
 
     /**
      * State received from a command.
      */
-    #[Api('client_state', optional: true)]
-    public ?string $clientState;
+    #[Api(optional: true)]
+    public ?string $client_state;
 
     /**
      * Call Control App ID (formerly Telnyx connection ID) used in the call.
      */
-    #[Api('connection_id', optional: true)]
-    public ?string $connectionID;
+    #[Api(optional: true)]
+    public ?string $connection_id;
 
     /**
      * ID that is unique to the recording session and can be used to correlate webhook events.
      */
-    #[Api('recording_id', optional: true)]
-    public ?string $recordingID;
+    #[Api(optional: true)]
+    public ?string $recording_id;
 
     /**
      * ID that is unique to the transcription process and can be used to correlate webhook events.
      */
-    #[Api('recording_transcription_id', optional: true)]
-    public ?string $recordingTranscriptionID;
+    #[Api(optional: true)]
+    public ?string $recording_transcription_id;
 
     /**
      * The transcription status.
@@ -90,8 +90,8 @@ final class Payload implements BaseModel
     /**
      * The transcribed text.
      */
-    #[Api('transcription_text', optional: true)]
-    public ?string $transcriptionText;
+    #[Api(optional: true)]
+    public ?string $transcription_text;
 
     public function __construct()
     {
@@ -103,33 +103,33 @@ final class Payload implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CallingPartyType|value-of<CallingPartyType> $callingPartyType
+     * @param CallingPartyType|value-of<CallingPartyType> $calling_party_type
      * @param Status|value-of<Status> $status
      */
     public static function with(
-        ?string $callControlID = null,
-        ?string $callLegID = null,
-        ?string $callSessionID = null,
-        CallingPartyType|string|null $callingPartyType = null,
-        ?string $clientState = null,
-        ?string $connectionID = null,
-        ?string $recordingID = null,
-        ?string $recordingTranscriptionID = null,
+        ?string $call_control_id = null,
+        ?string $call_leg_id = null,
+        ?string $call_session_id = null,
+        CallingPartyType|string|null $calling_party_type = null,
+        ?string $client_state = null,
+        ?string $connection_id = null,
+        ?string $recording_id = null,
+        ?string $recording_transcription_id = null,
         Status|string|null $status = null,
-        ?string $transcriptionText = null,
+        ?string $transcription_text = null,
     ): self {
         $obj = new self;
 
-        null !== $callControlID && $obj->callControlID = $callControlID;
-        null !== $callLegID && $obj->callLegID = $callLegID;
-        null !== $callSessionID && $obj->callSessionID = $callSessionID;
-        null !== $callingPartyType && $obj['callingPartyType'] = $callingPartyType;
-        null !== $clientState && $obj->clientState = $clientState;
-        null !== $connectionID && $obj->connectionID = $connectionID;
-        null !== $recordingID && $obj->recordingID = $recordingID;
-        null !== $recordingTranscriptionID && $obj->recordingTranscriptionID = $recordingTranscriptionID;
+        null !== $call_control_id && $obj->call_control_id = $call_control_id;
+        null !== $call_leg_id && $obj->call_leg_id = $call_leg_id;
+        null !== $call_session_id && $obj->call_session_id = $call_session_id;
+        null !== $calling_party_type && $obj['calling_party_type'] = $calling_party_type;
+        null !== $client_state && $obj->client_state = $client_state;
+        null !== $connection_id && $obj->connection_id = $connection_id;
+        null !== $recording_id && $obj->recording_id = $recording_id;
+        null !== $recording_transcription_id && $obj->recording_transcription_id = $recording_transcription_id;
         null !== $status && $obj['status'] = $status;
-        null !== $transcriptionText && $obj->transcriptionText = $transcriptionText;
+        null !== $transcription_text && $obj->transcription_text = $transcription_text;
 
         return $obj;
     }
@@ -140,7 +140,7 @@ final class Payload implements BaseModel
     public function withCallControlID(string $callControlID): self
     {
         $obj = clone $this;
-        $obj->callControlID = $callControlID;
+        $obj->call_control_id = $callControlID;
 
         return $obj;
     }
@@ -151,7 +151,7 @@ final class Payload implements BaseModel
     public function withCallLegID(string $callLegID): self
     {
         $obj = clone $this;
-        $obj->callLegID = $callLegID;
+        $obj->call_leg_id = $callLegID;
 
         return $obj;
     }
@@ -162,7 +162,7 @@ final class Payload implements BaseModel
     public function withCallSessionID(string $callSessionID): self
     {
         $obj = clone $this;
-        $obj->callSessionID = $callSessionID;
+        $obj->call_session_id = $callSessionID;
 
         return $obj;
     }
@@ -176,7 +176,7 @@ final class Payload implements BaseModel
         CallingPartyType|string $callingPartyType
     ): self {
         $obj = clone $this;
-        $obj['callingPartyType'] = $callingPartyType;
+        $obj['calling_party_type'] = $callingPartyType;
 
         return $obj;
     }
@@ -187,7 +187,7 @@ final class Payload implements BaseModel
     public function withClientState(string $clientState): self
     {
         $obj = clone $this;
-        $obj->clientState = $clientState;
+        $obj->client_state = $clientState;
 
         return $obj;
     }
@@ -198,7 +198,7 @@ final class Payload implements BaseModel
     public function withConnectionID(string $connectionID): self
     {
         $obj = clone $this;
-        $obj->connectionID = $connectionID;
+        $obj->connection_id = $connectionID;
 
         return $obj;
     }
@@ -209,7 +209,7 @@ final class Payload implements BaseModel
     public function withRecordingID(string $recordingID): self
     {
         $obj = clone $this;
-        $obj->recordingID = $recordingID;
+        $obj->recording_id = $recordingID;
 
         return $obj;
     }
@@ -221,7 +221,7 @@ final class Payload implements BaseModel
         string $recordingTranscriptionID
     ): self {
         $obj = clone $this;
-        $obj->recordingTranscriptionID = $recordingTranscriptionID;
+        $obj->recording_transcription_id = $recordingTranscriptionID;
 
         return $obj;
     }
@@ -245,7 +245,7 @@ final class Payload implements BaseModel
     public function withTranscriptionText(string $transcriptionText): self
     {
         $obj = clone $this;
-        $obj->transcriptionText = $transcriptionText;
+        $obj->transcription_text = $transcriptionText;
 
         return $obj;
     }

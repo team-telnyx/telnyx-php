@@ -5,38 +5,22 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\MessagingHostedNumberOrders;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\MessagingHostedNumberOrders\Actions\ActionUploadFileParams;
 use Telnyx\MessagingHostedNumberOrders\Actions\ActionUploadFileResponse;
 use Telnyx\RequestOptions;
-
-use const Telnyx\Core\OMIT as omit;
 
 interface ActionsContract
 {
     /**
      * @api
      *
-     * @param string $bill must be the last month's bill with proof of ownership of all of the numbers in the order in PDF format
-     * @param string $loa must be a signed LOA for the numbers in the order in PDF format
+     * @param array<mixed>|ActionUploadFileParams $params
      *
      * @throws APIException
      */
     public function uploadFile(
         string $id,
-        $bill = omit,
-        $loa = omit,
+        array|ActionUploadFileParams $params,
         ?RequestOptions $requestOptions = null,
-    ): ActionUploadFileResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function uploadFileRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): ActionUploadFileResponse;
 }

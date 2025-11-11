@@ -10,7 +10,10 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type MmsFallbackShape = array{
- *   from?: string, mediaURLs?: list<string>, subject?: string, text?: string
+ *   from?: string|null,
+ *   media_urls?: list<string>|null,
+ *   subject?: string|null,
+ *   text?: string|null,
  * }
  */
 final class MmsFallback implements BaseModel
@@ -27,10 +30,10 @@ final class MmsFallback implements BaseModel
     /**
      * List of media URLs.
      *
-     * @var list<string>|null $mediaURLs
+     * @var list<string>|null $media_urls
      */
-    #[Api('media_urls', list: 'string', optional: true)]
-    public ?array $mediaURLs;
+    #[Api(list: 'string', optional: true)]
+    public ?array $media_urls;
 
     /**
      * Subject of the message.
@@ -54,18 +57,18 @@ final class MmsFallback implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $mediaURLs
+     * @param list<string> $media_urls
      */
     public static function with(
         ?string $from = null,
-        ?array $mediaURLs = null,
+        ?array $media_urls = null,
         ?string $subject = null,
         ?string $text = null,
     ): self {
         $obj = new self;
 
         null !== $from && $obj->from = $from;
-        null !== $mediaURLs && $obj->mediaURLs = $mediaURLs;
+        null !== $media_urls && $obj->media_urls = $media_urls;
         null !== $subject && $obj->subject = $subject;
         null !== $text && $obj->text = $text;
 
@@ -91,7 +94,7 @@ final class MmsFallback implements BaseModel
     public function withMediaURLs(array $mediaURLs): self
     {
         $obj = clone $this;
-        $obj->mediaURLs = $mediaURLs;
+        $obj->media_urls = $mediaURLs;
 
         return $obj;
     }

@@ -10,18 +10,18 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type RoomShape = array{
- *   id?: string,
- *   activeSessionID?: string,
- *   createdAt?: \DateTimeInterface,
- *   enableRecording?: bool,
- *   maxParticipants?: int,
- *   recordType?: string,
- *   sessions?: list<RoomSession>,
- *   uniqueName?: string,
- *   updatedAt?: \DateTimeInterface,
- *   webhookEventFailoverURL?: string|null,
- *   webhookEventURL?: string,
- *   webhookTimeoutSecs?: int|null,
+ *   id?: string|null,
+ *   active_session_id?: string|null,
+ *   created_at?: \DateTimeInterface|null,
+ *   enable_recording?: bool|null,
+ *   max_participants?: int|null,
+ *   record_type?: string|null,
+ *   sessions?: list<RoomSession>|null,
+ *   unique_name?: string|null,
+ *   updated_at?: \DateTimeInterface|null,
+ *   webhook_event_failover_url?: string|null,
+ *   webhook_event_url?: string|null,
+ *   webhook_timeout_secs?: int|null,
  * }
  */
 final class Room implements BaseModel
@@ -38,29 +38,29 @@ final class Room implements BaseModel
     /**
      * The identifier of the active room session if any.
      */
-    #[Api('active_session_id', optional: true)]
-    public ?string $activeSessionID;
+    #[Api(optional: true)]
+    public ?string $active_session_id;
 
     /**
      * ISO 8601 timestamp when the room was created.
      */
-    #[Api('created_at', optional: true)]
-    public ?\DateTimeInterface $createdAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $created_at;
 
     /**
      * Enable or disable recording for that room.
      */
-    #[Api('enable_recording', optional: true)]
-    public ?bool $enableRecording;
+    #[Api(optional: true)]
+    public ?bool $enable_recording;
 
     /**
      * Maximum participants allowed in the room.
      */
-    #[Api('max_participants', optional: true)]
-    public ?int $maxParticipants;
+    #[Api(optional: true)]
+    public ?int $max_participants;
 
-    #[Api('record_type', optional: true)]
-    public ?string $recordType;
+    #[Api(optional: true)]
+    public ?string $record_type;
 
     /** @var list<RoomSession>|null $sessions */
     #[Api(list: RoomSession::class, optional: true)]
@@ -69,32 +69,32 @@ final class Room implements BaseModel
     /**
      * The unique (within the Telnyx account scope) name of the room.
      */
-    #[Api('unique_name', optional: true)]
-    public ?string $uniqueName;
+    #[Api(optional: true)]
+    public ?string $unique_name;
 
     /**
      * ISO 8601 timestamp when the room was updated.
      */
-    #[Api('updated_at', optional: true)]
-    public ?\DateTimeInterface $updatedAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $updated_at;
 
     /**
      * The failover URL where webhooks related to this room will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      */
-    #[Api('webhook_event_failover_url', nullable: true, optional: true)]
-    public ?string $webhookEventFailoverURL;
+    #[Api(nullable: true, optional: true)]
+    public ?string $webhook_event_failover_url;
 
     /**
      * The URL where webhooks related to this room will be sent. Must include a scheme, such as 'https'.
      */
-    #[Api('webhook_event_url', optional: true)]
-    public ?string $webhookEventURL;
+    #[Api(optional: true)]
+    public ?string $webhook_event_url;
 
     /**
      * Specifies how many seconds to wait before timing out a webhook.
      */
-    #[Api('webhook_timeout_secs', nullable: true, optional: true)]
-    public ?int $webhookTimeoutSecs;
+    #[Api(nullable: true, optional: true)]
+    public ?int $webhook_timeout_secs;
 
     public function __construct()
     {
@@ -110,32 +110,32 @@ final class Room implements BaseModel
      */
     public static function with(
         ?string $id = null,
-        ?string $activeSessionID = null,
-        ?\DateTimeInterface $createdAt = null,
-        ?bool $enableRecording = null,
-        ?int $maxParticipants = null,
-        ?string $recordType = null,
+        ?string $active_session_id = null,
+        ?\DateTimeInterface $created_at = null,
+        ?bool $enable_recording = null,
+        ?int $max_participants = null,
+        ?string $record_type = null,
         ?array $sessions = null,
-        ?string $uniqueName = null,
-        ?\DateTimeInterface $updatedAt = null,
-        ?string $webhookEventFailoverURL = null,
-        ?string $webhookEventURL = null,
-        ?int $webhookTimeoutSecs = null,
+        ?string $unique_name = null,
+        ?\DateTimeInterface $updated_at = null,
+        ?string $webhook_event_failover_url = null,
+        ?string $webhook_event_url = null,
+        ?int $webhook_timeout_secs = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj->id = $id;
-        null !== $activeSessionID && $obj->activeSessionID = $activeSessionID;
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $enableRecording && $obj->enableRecording = $enableRecording;
-        null !== $maxParticipants && $obj->maxParticipants = $maxParticipants;
-        null !== $recordType && $obj->recordType = $recordType;
+        null !== $active_session_id && $obj->active_session_id = $active_session_id;
+        null !== $created_at && $obj->created_at = $created_at;
+        null !== $enable_recording && $obj->enable_recording = $enable_recording;
+        null !== $max_participants && $obj->max_participants = $max_participants;
+        null !== $record_type && $obj->record_type = $record_type;
         null !== $sessions && $obj->sessions = $sessions;
-        null !== $uniqueName && $obj->uniqueName = $uniqueName;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
-        null !== $webhookEventFailoverURL && $obj->webhookEventFailoverURL = $webhookEventFailoverURL;
-        null !== $webhookEventURL && $obj->webhookEventURL = $webhookEventURL;
-        null !== $webhookTimeoutSecs && $obj->webhookTimeoutSecs = $webhookTimeoutSecs;
+        null !== $unique_name && $obj->unique_name = $unique_name;
+        null !== $updated_at && $obj->updated_at = $updated_at;
+        null !== $webhook_event_failover_url && $obj->webhook_event_failover_url = $webhook_event_failover_url;
+        null !== $webhook_event_url && $obj->webhook_event_url = $webhook_event_url;
+        null !== $webhook_timeout_secs && $obj->webhook_timeout_secs = $webhook_timeout_secs;
 
         return $obj;
     }
@@ -157,7 +157,7 @@ final class Room implements BaseModel
     public function withActiveSessionID(string $activeSessionID): self
     {
         $obj = clone $this;
-        $obj->activeSessionID = $activeSessionID;
+        $obj->active_session_id = $activeSessionID;
 
         return $obj;
     }
@@ -168,7 +168,7 @@ final class Room implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }
@@ -179,7 +179,7 @@ final class Room implements BaseModel
     public function withEnableRecording(bool $enableRecording): self
     {
         $obj = clone $this;
-        $obj->enableRecording = $enableRecording;
+        $obj->enable_recording = $enableRecording;
 
         return $obj;
     }
@@ -190,7 +190,7 @@ final class Room implements BaseModel
     public function withMaxParticipants(int $maxParticipants): self
     {
         $obj = clone $this;
-        $obj->maxParticipants = $maxParticipants;
+        $obj->max_participants = $maxParticipants;
 
         return $obj;
     }
@@ -198,7 +198,7 @@ final class Room implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType;
+        $obj->record_type = $recordType;
 
         return $obj;
     }
@@ -220,7 +220,7 @@ final class Room implements BaseModel
     public function withUniqueName(string $uniqueName): self
     {
         $obj = clone $this;
-        $obj->uniqueName = $uniqueName;
+        $obj->unique_name = $uniqueName;
 
         return $obj;
     }
@@ -231,7 +231,7 @@ final class Room implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $obj->updated_at = $updatedAt;
 
         return $obj;
     }
@@ -243,7 +243,7 @@ final class Room implements BaseModel
         ?string $webhookEventFailoverURL
     ): self {
         $obj = clone $this;
-        $obj->webhookEventFailoverURL = $webhookEventFailoverURL;
+        $obj->webhook_event_failover_url = $webhookEventFailoverURL;
 
         return $obj;
     }
@@ -254,7 +254,7 @@ final class Room implements BaseModel
     public function withWebhookEventURL(string $webhookEventURL): self
     {
         $obj = clone $this;
-        $obj->webhookEventURL = $webhookEventURL;
+        $obj->webhook_event_url = $webhookEventURL;
 
         return $obj;
     }
@@ -265,7 +265,7 @@ final class Room implements BaseModel
     public function withWebhookTimeoutSecs(?int $webhookTimeoutSecs): self
     {
         $obj = clone $this;
-        $obj->webhookTimeoutSecs = $webhookTimeoutSecs;
+        $obj->webhook_timeout_secs = $webhookTimeoutSecs;
 
         return $obj;
     }

@@ -13,7 +13,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type CsvDownloadListResponseShape = array{
- *   data?: list<CsvDownload>, meta?: PaginationMeta
+ *   data?: list<CsvDownload>|null, meta?: PaginationMeta|null
  * }
  */
 final class CsvDownloadListResponse implements BaseModel, ResponseConverter

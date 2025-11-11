@@ -9,14 +9,10 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\PhoneNumberCampaigns\PhoneNumberCampaign;
 use Telnyx\PhoneNumberCampaigns\PhoneNumberCampaignCreateParams;
 use Telnyx\PhoneNumberCampaigns\PhoneNumberCampaignListParams;
-use Telnyx\PhoneNumberCampaigns\PhoneNumberCampaignListParams\Filter;
-use Telnyx\PhoneNumberCampaigns\PhoneNumberCampaignListParams\Sort;
 use Telnyx\PhoneNumberCampaigns\PhoneNumberCampaignListResponse;
 use Telnyx\PhoneNumberCampaigns\PhoneNumberCampaignUpdateParams;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PhoneNumberCampaignsContract;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class PhoneNumberCampaignsService implements PhoneNumberCampaignsContract
 {
@@ -30,35 +26,19 @@ final class PhoneNumberCampaignsService implements PhoneNumberCampaignsContract
      *
      * Create New Phone Number Campaign
      *
-     * @param string $campaignID the ID of the campaign you want to link to the specified phone number
-     * @param string $phoneNumber the phone number you want to link to a specified campaign
+     * @param array{
+     *   campaignId: string, phoneNumber: string
+     * }|PhoneNumberCampaignCreateParams $params
      *
      * @throws APIException
      */
     public function create(
-        $campaignID,
-        $phoneNumber,
-        ?RequestOptions $requestOptions = null
-    ): PhoneNumberCampaign {
-        $params = ['campaignID' => $campaignID, 'phoneNumber' => $phoneNumber];
-
-        return $this->createRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|PhoneNumberCampaignCreateParams $params,
+        ?RequestOptions $requestOptions = null,
     ): PhoneNumberCampaign {
         [$parsed, $options] = PhoneNumberCampaignCreateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -96,37 +76,20 @@ final class PhoneNumberCampaignsService implements PhoneNumberCampaignsContract
      *
      * Create New Phone Number Campaign
      *
-     * @param string $campaignID the ID of the campaign you want to link to the specified phone number
-     * @param string $phoneNumber1 the phone number you want to link to a specified campaign
+     * @param array{
+     *   campaignId: string, phoneNumber: string
+     * }|PhoneNumberCampaignUpdateParams $params
      *
      * @throws APIException
      */
     public function update(
         string $phoneNumber,
-        $campaignID,
-        $phoneNumber1,
+        array|PhoneNumberCampaignUpdateParams $params,
         ?RequestOptions $requestOptions = null,
-    ): PhoneNumberCampaign {
-        $params = ['campaignID' => $campaignID, 'phoneNumber' => $phoneNumber1];
-
-        return $this->updateRaw($phoneNumber, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $phoneNumber,
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): PhoneNumberCampaign {
         [$parsed, $options] = PhoneNumberCampaignUpdateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -142,46 +105,31 @@ final class PhoneNumberCampaignsService implements PhoneNumberCampaignsContract
     /**
      * @api
      *
+     * @phpstan-type Sort = "assignmentStatus"|"-assignmentStatus"|"createdAt"|"-createdAt"|"phoneNumber"|"-phoneNumber"
+     *
      * Retrieve All Phone Number Campaigns
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[telnyx_campaign_id], filter[telnyx_brand_id], filter[tcr_campaign_id], filter[tcr_brand_id]
-     * @param int $page
-     * @param int $recordsPerPage
-     * @param Sort|value-of<Sort> $sort Specifies the sort order for results. If not given, results are sorted by createdAt in descending order.
+     * @param array{
+     *   filter?: array{
+     *     tcr_brand_id?: string,
+     *     tcr_campaign_id?: string,
+     *     telnyx_brand_id?: string,
+     *     telnyx_campaign_id?: string,
+     *   },
+     *   page?: int,
+     *   recordsPerPage?: int,
+     *   sort?: Sort,
+     * }|PhoneNumberCampaignListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
-        $recordsPerPage = omit,
-        $sort = omit,
+        array|PhoneNumberCampaignListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): PhoneNumberCampaignListResponse {
-        $params = [
-            'filter' => $filter,
-            'page' => $page,
-            'recordsPerPage' => $recordsPerPage,
-            'sort' => $sort,
-        ];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): PhoneNumberCampaignListResponse {
         [$parsed, $options] = PhoneNumberCampaignListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

@@ -7,13 +7,9 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DocumentLinks\DocumentLinkListParams;
-use Telnyx\DocumentLinks\DocumentLinkListParams\Filter;
-use Telnyx\DocumentLinks\DocumentLinkListParams\Page;
 use Telnyx\DocumentLinks\DocumentLinkListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\DocumentLinksContract;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class DocumentLinksService implements DocumentLinksContract
 {
@@ -27,35 +23,20 @@ final class DocumentLinksService implements DocumentLinksContract
      *
      * List all documents links ordered by created_at descending.
      *
-     * @param Filter $filter Consolidated filter parameter for document links (deepObject style). Originally: filter[linked_record_type], filter[linked_resource_id]
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param array{
+     *   filter?: array{linked_record_type?: string, linked_resource_id?: string},
+     *   page?: array{number?: int, size?: int},
+     * }|DocumentLinkListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): DocumentLinkListResponse {
-        $params = ['filter' => $filter, 'page' => $page];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
+        array|DocumentLinkListParams $params,
         ?RequestOptions $requestOptions = null
     ): DocumentLinkListResponse {
         [$parsed, $options] = DocumentLinkListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

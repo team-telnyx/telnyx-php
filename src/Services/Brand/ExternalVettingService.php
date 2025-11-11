@@ -12,8 +12,6 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Brand\ExternalVettingContract;
 
-use const Telnyx\Core\OMIT as omit;
-
 final class ExternalVettingService implements ExternalVettingContract
 {
     /**
@@ -48,43 +46,20 @@ final class ExternalVettingService implements ExternalVettingContract
      * vetting provider. If the vetting provider confirms validity of the record, it will be
      * saved with the brand and will be considered for future campaign qualification.
      *
-     * @param string $evpID external vetting provider ID for the brand
-     * @param string $vettingID Unique ID that identifies a vetting transaction performed by a vetting provider. This ID is provided by the vetting provider at time of vetting.
-     * @param string $vettingToken required by some providers for vetting record confirmation
+     * @param array{
+     *   evpId: string, vettingId: string, vettingToken?: string
+     * }|ExternalVettingImportParams $params
      *
      * @throws APIException
      */
     public function import(
         string $brandID,
-        $evpID,
-        $vettingID,
-        $vettingToken = omit,
+        array|ExternalVettingImportParams $params,
         ?RequestOptions $requestOptions = null,
-    ): ExternalVettingImportResponse {
-        $params = [
-            'evpID' => $evpID,
-            'vettingID' => $vettingID,
-            'vettingToken' => $vettingToken,
-        ];
-
-        return $this->importRaw($brandID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function importRaw(
-        string $brandID,
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): ExternalVettingImportResponse {
         [$parsed, $options] = ExternalVettingImportParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -102,37 +77,20 @@ final class ExternalVettingService implements ExternalVettingContract
      *
      * Order new external vetting for a brand
      *
-     * @param string $evpID external vetting provider ID for the brand
-     * @param string $vettingClass identifies the vetting classification
+     * @param array{
+     *   evpId: string, vettingClass: string
+     * }|ExternalVettingOrderParams $params
      *
      * @throws APIException
      */
     public function order(
         string $brandID,
-        $evpID,
-        $vettingClass,
+        array|ExternalVettingOrderParams $params,
         ?RequestOptions $requestOptions = null,
-    ): mixed {
-        $params = ['evpID' => $evpID, 'vettingClass' => $vettingClass];
-
-        return $this->orderRaw($brandID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function orderRaw(
-        string $brandID,
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): mixed {
         [$parsed, $options] = ExternalVettingOrderParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

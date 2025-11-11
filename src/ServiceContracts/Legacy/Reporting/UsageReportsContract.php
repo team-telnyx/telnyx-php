@@ -6,35 +6,20 @@ namespace Telnyx\ServiceContracts\Legacy\Reporting;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Legacy\Reporting\UsageReports\UsageReportGetSpeechToTextResponse;
+use Telnyx\Legacy\Reporting\UsageReports\UsageReportRetrieveSpeechToTextParams;
 use Telnyx\RequestOptions;
-
-use const Telnyx\Core\OMIT as omit;
 
 interface UsageReportsContract
 {
     /**
      * @api
      *
-     * @param \DateTimeInterface $endDate
-     * @param \DateTimeInterface $startDate
+     * @param array<mixed>|UsageReportRetrieveSpeechToTextParams $params
      *
      * @throws APIException
      */
     public function retrieveSpeechToText(
-        $endDate = omit,
-        $startDate = omit,
+        array|UsageReportRetrieveSpeechToTextParams $params,
         ?RequestOptions $requestOptions = null,
-    ): UsageReportGetSpeechToTextResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function retrieveSpeechToTextRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): UsageReportGetSpeechToTextResponse;
 }

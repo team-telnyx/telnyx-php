@@ -11,7 +11,9 @@ use Telnyx\GlobalIPAssignmentsUsage\GlobalIPAssignmentsUsageGetResponse\Data\Glo
 
 /**
  * @phpstan-type GlobalIPAssignmentShape = array{
- *   id?: string, wireguardPeer?: WireguardPeer, wireguardPeerID?: string
+ *   id?: string|null,
+ *   wireguard_peer?: WireguardPeer|null,
+ *   wireguard_peer_id?: string|null,
  * }
  */
 final class GlobalIPAssignment implements BaseModel
@@ -25,14 +27,14 @@ final class GlobalIPAssignment implements BaseModel
     #[Api(optional: true)]
     public ?string $id;
 
-    #[Api('wireguard_peer', optional: true)]
-    public ?WireguardPeer $wireguardPeer;
+    #[Api(optional: true)]
+    public ?WireguardPeer $wireguard_peer;
 
     /**
      * Wireguard peer ID.
      */
-    #[Api('wireguard_peer_id', optional: true)]
-    public ?string $wireguardPeerID;
+    #[Api(optional: true)]
+    public ?string $wireguard_peer_id;
 
     public function __construct()
     {
@@ -46,14 +48,14 @@ final class GlobalIPAssignment implements BaseModel
      */
     public static function with(
         ?string $id = null,
-        ?WireguardPeer $wireguardPeer = null,
-        ?string $wireguardPeerID = null,
+        ?WireguardPeer $wireguard_peer = null,
+        ?string $wireguard_peer_id = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj->id = $id;
-        null !== $wireguardPeer && $obj->wireguardPeer = $wireguardPeer;
-        null !== $wireguardPeerID && $obj->wireguardPeerID = $wireguardPeerID;
+        null !== $wireguard_peer && $obj->wireguard_peer = $wireguard_peer;
+        null !== $wireguard_peer_id && $obj->wireguard_peer_id = $wireguard_peer_id;
 
         return $obj;
     }
@@ -72,7 +74,7 @@ final class GlobalIPAssignment implements BaseModel
     public function withWireguardPeer(WireguardPeer $wireguardPeer): self
     {
         $obj = clone $this;
-        $obj->wireguardPeer = $wireguardPeer;
+        $obj->wireguard_peer = $wireguardPeer;
 
         return $obj;
     }
@@ -83,7 +85,7 @@ final class GlobalIPAssignment implements BaseModel
     public function withWireguardPeerID(string $wireguardPeerID): self
     {
         $obj = clone $this;
-        $obj->wireguardPeerID = $wireguardPeerID;
+        $obj->wireguard_peer_id = $wireguardPeerID;
 
         return $obj;
     }

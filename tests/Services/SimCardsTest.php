@@ -34,7 +34,8 @@ final class SimCardsTest extends TestCase
         }
 
         $result = $this->client->simCards->retrieve(
-            '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
+            '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
+            []
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -48,7 +49,8 @@ final class SimCardsTest extends TestCase
         }
 
         $result = $this->client->simCards->update(
-            '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
+            '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
+            []
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -61,7 +63,7 @@ final class SimCardsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->simCards->list();
+        $result = $this->client->simCards->list([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -74,7 +76,8 @@ final class SimCardsTest extends TestCase
         }
 
         $result = $this->client->simCards->delete(
-            '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
+            '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
+            []
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -130,7 +133,8 @@ final class SimCardsTest extends TestCase
         }
 
         $result = $this->client->simCards->listWirelessConnectivityLogs(
-            '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
+            '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
+            []
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType

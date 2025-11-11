@@ -33,10 +33,9 @@ final class JobsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ai->fineTuning->jobs->create(
-            model: 'model',
-            trainingFile: 'training_file'
-        );
+        $result = $this->client->ai->fineTuning->jobs->create([
+            'model' => 'model', 'training_file' => 'training_file',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -48,10 +47,9 @@ final class JobsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ai->fineTuning->jobs->create(
-            model: 'model',
-            trainingFile: 'training_file'
-        );
+        $result = $this->client->ai->fineTuning->jobs->create([
+            'model' => 'model', 'training_file' => 'training_file',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

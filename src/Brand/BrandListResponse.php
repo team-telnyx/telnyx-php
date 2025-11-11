@@ -13,7 +13,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type BrandListResponseShape = array{
- *   page?: int, records?: list<Record>, totalRecords?: int
+ *   page?: int|null, records?: list<Record>|null, totalRecords?: int|null
  * }
  */
 final class BrandListResponse implements BaseModel, ResponseConverter

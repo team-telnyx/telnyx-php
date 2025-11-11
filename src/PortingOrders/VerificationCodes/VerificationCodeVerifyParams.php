@@ -16,7 +16,7 @@ use Telnyx\PortingOrders\VerificationCodes\VerificationCodeVerifyParams\Verifica
  * @see Telnyx\PortingOrders\VerificationCodes->verify
  *
  * @phpstan-type VerificationCodeVerifyParamsShape = array{
- *   verificationCodes?: list<VerificationCode>
+ *   verification_codes?: list<VerificationCode>
  * }
  */
 final class VerificationCodeVerifyParams implements BaseModel
@@ -25,9 +25,9 @@ final class VerificationCodeVerifyParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    /** @var list<VerificationCode>|null $verificationCodes */
-    #[Api('verification_codes', list: VerificationCode::class, optional: true)]
-    public ?array $verificationCodes;
+    /** @var list<VerificationCode>|null $verification_codes */
+    #[Api(list: VerificationCode::class, optional: true)]
+    public ?array $verification_codes;
 
     public function __construct()
     {
@@ -39,13 +39,13 @@ final class VerificationCodeVerifyParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<VerificationCode> $verificationCodes
+     * @param list<VerificationCode> $verification_codes
      */
-    public static function with(?array $verificationCodes = null): self
+    public static function with(?array $verification_codes = null): self
     {
         $obj = new self;
 
-        null !== $verificationCodes && $obj->verificationCodes = $verificationCodes;
+        null !== $verification_codes && $obj->verification_codes = $verification_codes;
 
         return $obj;
     }
@@ -56,7 +56,7 @@ final class VerificationCodeVerifyParams implements BaseModel
     public function withVerificationCodes(array $verificationCodes): self
     {
         $obj = clone $this;
-        $obj->verificationCodes = $verificationCodes;
+        $obj->verification_codes = $verificationCodes;
 
         return $obj;
     }

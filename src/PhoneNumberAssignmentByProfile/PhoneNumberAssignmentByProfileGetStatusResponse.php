@@ -14,9 +14,9 @@ use Telnyx\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileGetStatu
 /**
  * @phpstan-type PhoneNumberAssignmentByProfileGetStatusResponseShape = array{
  *   status: value-of<Status>,
- *   taskID: string,
- *   createdAt?: \DateTimeInterface,
- *   updatedAt?: \DateTimeInterface,
+ *   taskId: string,
+ *   createdAt?: \DateTimeInterface|null,
+ *   updatedAt?: \DateTimeInterface|null,
  * }
  */
 final class PhoneNumberAssignmentByProfileGetStatusResponse implements BaseModel, ResponseConverter
@@ -34,8 +34,8 @@ final class PhoneNumberAssignmentByProfileGetStatusResponse implements BaseModel
     #[Api(enum: Status::class)]
     public string $status;
 
-    #[Api('taskId')]
-    public string $taskID;
+    #[Api]
+    public string $taskId;
 
     #[Api(optional: true)]
     public ?\DateTimeInterface $createdAt;
@@ -48,7 +48,7 @@ final class PhoneNumberAssignmentByProfileGetStatusResponse implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * PhoneNumberAssignmentByProfileGetStatusResponse::with(status: ..., taskID: ...)
+     * PhoneNumberAssignmentByProfileGetStatusResponse::with(status: ..., taskId: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -73,14 +73,14 @@ final class PhoneNumberAssignmentByProfileGetStatusResponse implements BaseModel
      */
     public static function with(
         Status|string $status,
-        string $taskID,
+        string $taskId,
         ?\DateTimeInterface $createdAt = null,
         ?\DateTimeInterface $updatedAt = null,
     ): self {
         $obj = new self;
 
         $obj['status'] = $status;
-        $obj->taskID = $taskID;
+        $obj->taskId = $taskId;
 
         null !== $createdAt && $obj->createdAt = $createdAt;
         null !== $updatedAt && $obj->updatedAt = $updatedAt;
@@ -104,7 +104,7 @@ final class PhoneNumberAssignmentByProfileGetStatusResponse implements BaseModel
     public function withTaskID(string $taskID): self
     {
         $obj = clone $this;
-        $obj->taskID = $taskID;
+        $obj->taskId = $taskID;
 
         return $obj;
     }

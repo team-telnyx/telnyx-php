@@ -33,7 +33,7 @@ final class PublicInternetGatewaysTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->publicInternetGateways->create();
+        $result = $this->client->publicInternetGateways->create([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -59,7 +59,7 @@ final class PublicInternetGatewaysTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->publicInternetGateways->list();
+        $result = $this->client->publicInternetGateways->list([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

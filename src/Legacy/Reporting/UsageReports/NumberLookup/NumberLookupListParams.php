@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Legacy\Reporting\UsageReports\NumberLookup->list
  *
- * @phpstan-type NumberLookupListParamsShape = array{page?: int, perPage?: int}
+ * @phpstan-type NumberLookupListParamsShape = array{page?: int, per_page?: int}
  */
 final class NumberLookupListParams implements BaseModel
 {
@@ -26,7 +26,7 @@ final class NumberLookupListParams implements BaseModel
     public ?int $page;
 
     #[Api(optional: true)]
-    public ?int $perPage;
+    public ?int $per_page;
 
     public function __construct()
     {
@@ -38,12 +38,12 @@ final class NumberLookupListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?int $page = null, ?int $perPage = null): self
+    public static function with(?int $page = null, ?int $per_page = null): self
     {
         $obj = new self;
 
         null !== $page && $obj->page = $page;
-        null !== $perPage && $obj->perPage = $perPage;
+        null !== $per_page && $obj->per_page = $per_page;
 
         return $obj;
     }
@@ -59,7 +59,7 @@ final class NumberLookupListParams implements BaseModel
     public function withPerPage(int $perPage): self
     {
         $obj = clone $this;
-        $obj->perPage = $perPage;
+        $obj->per_page = $perPage;
 
         return $obj;
     }

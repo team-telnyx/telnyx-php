@@ -13,7 +13,7 @@ use Telnyx\TexmlApplications\TexmlApplicationListResponse\Meta;
 
 /**
  * @phpstan-type TexmlApplicationListResponseShape = array{
- *   data?: list<TexmlApplication>, meta?: Meta
+ *   data?: list<TexmlApplication>|null, meta?: Meta|null
  * }
  */
 final class TexmlApplicationListResponse implements BaseModel, ResponseConverter

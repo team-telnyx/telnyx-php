@@ -33,11 +33,11 @@ final class CredentialConnectionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->credentialConnections->create(
-            connectionName: 'my name',
-            password: 'my123secure456password789',
-            userName: 'myusername123',
-        );
+        $result = $this->client->credentialConnections->create([
+            'connection_name' => 'my name',
+            'password' => 'my123secure456password789',
+            'user_name' => 'myusername123',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -49,11 +49,11 @@ final class CredentialConnectionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->credentialConnections->create(
-            connectionName: 'my name',
-            password: 'my123secure456password789',
-            userName: 'myusername123',
-        );
+        $result = $this->client->credentialConnections->create([
+            'connection_name' => 'my name',
+            'password' => 'my123secure456password789',
+            'user_name' => 'myusername123',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -77,7 +77,7 @@ final class CredentialConnectionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->credentialConnections->update('id');
+        $result = $this->client->credentialConnections->update('id', []);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -89,7 +89,7 @@ final class CredentialConnectionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->credentialConnections->list();
+        $result = $this->client->credentialConnections->list([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

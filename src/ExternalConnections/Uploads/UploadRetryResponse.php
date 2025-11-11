@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type UploadRetryResponseShape = array{data?: Upload}
+ * @phpstan-type UploadRetryResponseShape = array{data?: Upload|null}
  */
 final class UploadRetryResponse implements BaseModel, ResponseConverter
 {

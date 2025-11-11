@@ -33,7 +33,10 @@ final class VoicemailTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->phoneNumbers->voicemail->create('123455678900');
+        $result = $this->client->phoneNumbers->voicemail->create(
+            '123455678900',
+            []
+        );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -57,7 +60,10 @@ final class VoicemailTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->phoneNumbers->voicemail->update('123455678900');
+        $result = $this->client->phoneNumbers->voicemail->update(
+            '123455678900',
+            []
+        );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

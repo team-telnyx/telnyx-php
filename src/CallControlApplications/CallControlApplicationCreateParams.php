@@ -18,19 +18,19 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\CallControlApplications->create
  *
  * @phpstan-type CallControlApplicationCreateParamsShape = array{
- *   applicationName: string,
- *   webhookEventURL: string,
+ *   application_name: string,
+ *   webhook_event_url: string,
  *   active?: bool,
- *   anchorsiteOverride?: AnchorsiteOverride|value-of<AnchorsiteOverride>,
- *   dtmfType?: DtmfType|value-of<DtmfType>,
- *   firstCommandTimeout?: bool,
- *   firstCommandTimeoutSecs?: int,
+ *   anchorsite_override?: AnchorsiteOverride|value-of<AnchorsiteOverride>,
+ *   dtmf_type?: DtmfType|value-of<DtmfType>,
+ *   first_command_timeout?: bool,
+ *   first_command_timeout_secs?: int,
  *   inbound?: CallControlApplicationInbound,
  *   outbound?: CallControlApplicationOutbound,
- *   redactDtmfDebugLogging?: bool,
- *   webhookAPIVersion?: WebhookAPIVersion|value-of<WebhookAPIVersion>,
- *   webhookEventFailoverURL?: string|null,
- *   webhookTimeoutSecs?: int|null,
+ *   redact_dtmf_debug_logging?: bool,
+ *   webhook_api_version?: WebhookAPIVersion|value-of<WebhookAPIVersion>,
+ *   webhook_event_failover_url?: string|null,
+ *   webhook_timeout_secs?: int|null,
  * }
  */
 final class CallControlApplicationCreateParams implements BaseModel
@@ -42,14 +42,14 @@ final class CallControlApplicationCreateParams implements BaseModel
     /**
      * A user-assigned name to help manage the application.
      */
-    #[Api('application_name')]
-    public string $applicationName;
+    #[Api]
+    public string $application_name;
 
     /**
      * The URL where webhooks related to this connection will be sent. Must include a scheme, such as 'https'.
      */
-    #[Api('webhook_event_url')]
-    public string $webhookEventURL;
+    #[Api]
+    public string $webhook_event_url;
 
     /**
      * Specifies whether the connection can be used.
@@ -60,30 +60,30 @@ final class CallControlApplicationCreateParams implements BaseModel
     /**
      * <code>Latency</code> directs Telnyx to route media through the site with the lowest round-trip time to the user's connection. Telnyx calculates this time using ICMP ping messages. This can be disabled by specifying a site to handle all media.
      *
-     * @var value-of<AnchorsiteOverride>|null $anchorsiteOverride
+     * @var value-of<AnchorsiteOverride>|null $anchorsite_override
      */
-    #[Api('anchorsite_override', enum: AnchorsiteOverride::class, optional: true)]
-    public ?string $anchorsiteOverride;
+    #[Api(enum: AnchorsiteOverride::class, optional: true)]
+    public ?string $anchorsite_override;
 
     /**
      * Sets the type of DTMF digits sent from Telnyx to this Connection. Note that DTMF digits sent to Telnyx will be accepted in all formats.
      *
-     * @var value-of<DtmfType>|null $dtmfType
+     * @var value-of<DtmfType>|null $dtmf_type
      */
-    #[Api('dtmf_type', enum: DtmfType::class, optional: true)]
-    public ?string $dtmfType;
+    #[Api(enum: DtmfType::class, optional: true)]
+    public ?string $dtmf_type;
 
     /**
      * Specifies whether calls to phone numbers associated with this connection should hangup after timing out.
      */
-    #[Api('first_command_timeout', optional: true)]
-    public ?bool $firstCommandTimeout;
+    #[Api(optional: true)]
+    public ?bool $first_command_timeout;
 
     /**
      * Specifies how many seconds to wait before timing out a dial command.
      */
-    #[Api('first_command_timeout_secs', optional: true)]
-    public ?int $firstCommandTimeoutSecs;
+    #[Api(optional: true)]
+    public ?int $first_command_timeout_secs;
 
     #[Api(optional: true)]
     public ?CallControlApplicationInbound $inbound;
@@ -94,28 +94,28 @@ final class CallControlApplicationCreateParams implements BaseModel
     /**
      * When enabled, DTMF digits entered by users will be redacted in debug logs to protect PII data entered through IVR interactions.
      */
-    #[Api('redact_dtmf_debug_logging', optional: true)]
-    public ?bool $redactDtmfDebugLogging;
+    #[Api(optional: true)]
+    public ?bool $redact_dtmf_debug_logging;
 
     /**
      * Determines which webhook format will be used, Telnyx API v1 or v2.
      *
-     * @var value-of<WebhookAPIVersion>|null $webhookAPIVersion
+     * @var value-of<WebhookAPIVersion>|null $webhook_api_version
      */
-    #[Api('webhook_api_version', enum: WebhookAPIVersion::class, optional: true)]
-    public ?string $webhookAPIVersion;
+    #[Api(enum: WebhookAPIVersion::class, optional: true)]
+    public ?string $webhook_api_version;
 
     /**
      * The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      */
-    #[Api('webhook_event_failover_url', nullable: true, optional: true)]
-    public ?string $webhookEventFailoverURL;
+    #[Api(nullable: true, optional: true)]
+    public ?string $webhook_event_failover_url;
 
     /**
      * Specifies how many seconds to wait before timing out a webhook.
      */
-    #[Api('webhook_timeout_secs', nullable: true, optional: true)]
-    public ?int $webhookTimeoutSecs;
+    #[Api(nullable: true, optional: true)]
+    public ?int $webhook_timeout_secs;
 
     /**
      * `new CallControlApplicationCreateParams()` is missing required properties by the API.
@@ -123,7 +123,7 @@ final class CallControlApplicationCreateParams implements BaseModel
      * To enforce required parameters use
      * ```
      * CallControlApplicationCreateParams::with(
-     *   applicationName: ..., webhookEventURL: ...
+     *   application_name: ..., webhook_event_url: ...
      * )
      * ```
      *
@@ -145,41 +145,41 @@ final class CallControlApplicationCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AnchorsiteOverride|value-of<AnchorsiteOverride> $anchorsiteOverride
-     * @param DtmfType|value-of<DtmfType> $dtmfType
-     * @param WebhookAPIVersion|value-of<WebhookAPIVersion> $webhookAPIVersion
+     * @param AnchorsiteOverride|value-of<AnchorsiteOverride> $anchorsite_override
+     * @param DtmfType|value-of<DtmfType> $dtmf_type
+     * @param WebhookAPIVersion|value-of<WebhookAPIVersion> $webhook_api_version
      */
     public static function with(
-        string $applicationName,
-        string $webhookEventURL,
+        string $application_name,
+        string $webhook_event_url,
         ?bool $active = null,
-        AnchorsiteOverride|string|null $anchorsiteOverride = null,
-        DtmfType|string|null $dtmfType = null,
-        ?bool $firstCommandTimeout = null,
-        ?int $firstCommandTimeoutSecs = null,
+        AnchorsiteOverride|string|null $anchorsite_override = null,
+        DtmfType|string|null $dtmf_type = null,
+        ?bool $first_command_timeout = null,
+        ?int $first_command_timeout_secs = null,
         ?CallControlApplicationInbound $inbound = null,
         ?CallControlApplicationOutbound $outbound = null,
-        ?bool $redactDtmfDebugLogging = null,
-        WebhookAPIVersion|string|null $webhookAPIVersion = null,
-        ?string $webhookEventFailoverURL = null,
-        ?int $webhookTimeoutSecs = null,
+        ?bool $redact_dtmf_debug_logging = null,
+        WebhookAPIVersion|string|null $webhook_api_version = null,
+        ?string $webhook_event_failover_url = null,
+        ?int $webhook_timeout_secs = null,
     ): self {
         $obj = new self;
 
-        $obj->applicationName = $applicationName;
-        $obj->webhookEventURL = $webhookEventURL;
+        $obj->application_name = $application_name;
+        $obj->webhook_event_url = $webhook_event_url;
 
         null !== $active && $obj->active = $active;
-        null !== $anchorsiteOverride && $obj['anchorsiteOverride'] = $anchorsiteOverride;
-        null !== $dtmfType && $obj['dtmfType'] = $dtmfType;
-        null !== $firstCommandTimeout && $obj->firstCommandTimeout = $firstCommandTimeout;
-        null !== $firstCommandTimeoutSecs && $obj->firstCommandTimeoutSecs = $firstCommandTimeoutSecs;
+        null !== $anchorsite_override && $obj['anchorsite_override'] = $anchorsite_override;
+        null !== $dtmf_type && $obj['dtmf_type'] = $dtmf_type;
+        null !== $first_command_timeout && $obj->first_command_timeout = $first_command_timeout;
+        null !== $first_command_timeout_secs && $obj->first_command_timeout_secs = $first_command_timeout_secs;
         null !== $inbound && $obj->inbound = $inbound;
         null !== $outbound && $obj->outbound = $outbound;
-        null !== $redactDtmfDebugLogging && $obj->redactDtmfDebugLogging = $redactDtmfDebugLogging;
-        null !== $webhookAPIVersion && $obj['webhookAPIVersion'] = $webhookAPIVersion;
-        null !== $webhookEventFailoverURL && $obj->webhookEventFailoverURL = $webhookEventFailoverURL;
-        null !== $webhookTimeoutSecs && $obj->webhookTimeoutSecs = $webhookTimeoutSecs;
+        null !== $redact_dtmf_debug_logging && $obj->redact_dtmf_debug_logging = $redact_dtmf_debug_logging;
+        null !== $webhook_api_version && $obj['webhook_api_version'] = $webhook_api_version;
+        null !== $webhook_event_failover_url && $obj->webhook_event_failover_url = $webhook_event_failover_url;
+        null !== $webhook_timeout_secs && $obj->webhook_timeout_secs = $webhook_timeout_secs;
 
         return $obj;
     }
@@ -190,7 +190,7 @@ final class CallControlApplicationCreateParams implements BaseModel
     public function withApplicationName(string $applicationName): self
     {
         $obj = clone $this;
-        $obj->applicationName = $applicationName;
+        $obj->application_name = $applicationName;
 
         return $obj;
     }
@@ -201,7 +201,7 @@ final class CallControlApplicationCreateParams implements BaseModel
     public function withWebhookEventURL(string $webhookEventURL): self
     {
         $obj = clone $this;
-        $obj->webhookEventURL = $webhookEventURL;
+        $obj->webhook_event_url = $webhookEventURL;
 
         return $obj;
     }
@@ -226,7 +226,7 @@ final class CallControlApplicationCreateParams implements BaseModel
         AnchorsiteOverride|string $anchorsiteOverride
     ): self {
         $obj = clone $this;
-        $obj['anchorsiteOverride'] = $anchorsiteOverride;
+        $obj['anchorsite_override'] = $anchorsiteOverride;
 
         return $obj;
     }
@@ -239,7 +239,7 @@ final class CallControlApplicationCreateParams implements BaseModel
     public function withDtmfType(DtmfType|string $dtmfType): self
     {
         $obj = clone $this;
-        $obj['dtmfType'] = $dtmfType;
+        $obj['dtmf_type'] = $dtmfType;
 
         return $obj;
     }
@@ -250,7 +250,7 @@ final class CallControlApplicationCreateParams implements BaseModel
     public function withFirstCommandTimeout(bool $firstCommandTimeout): self
     {
         $obj = clone $this;
-        $obj->firstCommandTimeout = $firstCommandTimeout;
+        $obj->first_command_timeout = $firstCommandTimeout;
 
         return $obj;
     }
@@ -262,7 +262,7 @@ final class CallControlApplicationCreateParams implements BaseModel
         int $firstCommandTimeoutSecs
     ): self {
         $obj = clone $this;
-        $obj->firstCommandTimeoutSecs = $firstCommandTimeoutSecs;
+        $obj->first_command_timeout_secs = $firstCommandTimeoutSecs;
 
         return $obj;
     }
@@ -290,7 +290,7 @@ final class CallControlApplicationCreateParams implements BaseModel
         bool $redactDtmfDebugLogging
     ): self {
         $obj = clone $this;
-        $obj->redactDtmfDebugLogging = $redactDtmfDebugLogging;
+        $obj->redact_dtmf_debug_logging = $redactDtmfDebugLogging;
 
         return $obj;
     }
@@ -304,7 +304,7 @@ final class CallControlApplicationCreateParams implements BaseModel
         WebhookAPIVersion|string $webhookAPIVersion
     ): self {
         $obj = clone $this;
-        $obj['webhookAPIVersion'] = $webhookAPIVersion;
+        $obj['webhook_api_version'] = $webhookAPIVersion;
 
         return $obj;
     }
@@ -316,7 +316,7 @@ final class CallControlApplicationCreateParams implements BaseModel
         ?string $webhookEventFailoverURL
     ): self {
         $obj = clone $this;
-        $obj->webhookEventFailoverURL = $webhookEventFailoverURL;
+        $obj->webhook_event_failover_url = $webhookEventFailoverURL;
 
         return $obj;
     }
@@ -327,7 +327,7 @@ final class CallControlApplicationCreateParams implements BaseModel
     public function withWebhookTimeoutSecs(?int $webhookTimeoutSecs): self
     {
         $obj = clone $this;
-        $obj->webhookTimeoutSecs = $webhookTimeoutSecs;
+        $obj->webhook_timeout_secs = $webhookTimeoutSecs;
 
         return $obj;
     }

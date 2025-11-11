@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Storage\Migrations\MigrationParams;
 
 /**
- * @phpstan-type ActionStopResponseShape = array{data?: MigrationParams}
+ * @phpstan-type ActionStopResponseShape = array{data?: MigrationParams|null}
  */
 final class ActionStopResponse implements BaseModel, ResponseConverter
 {

@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type CivicAddressIDShape = array{eq?: string}
+ * @phpstan-type CivicAddressIDShape = array{eq?: string|null}
  */
 final class CivicAddressID implements BaseModel
 {

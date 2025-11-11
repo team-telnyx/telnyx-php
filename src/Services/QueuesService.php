@@ -14,7 +14,7 @@ use Telnyx\Services\Queues\CallsService;
 final class QueuesService implements QueuesContract
 {
     /**
-     * @@api
+     * @api
      */
     public CallsService $calls;
 

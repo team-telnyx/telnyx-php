@@ -23,35 +23,19 @@ final class ChargesSummaryService implements ChargesSummaryContract
      *
      * Retrieve a summary of monthly charges for a specified date range. The date range cannot exceed 31 days.
      *
-     * @param \DateTimeInterface $endDate End date for the charges summary in ISO date format (YYYY-MM-DD). The date is exclusive, data for the end_date itself is not included in the report. The interval between start_date and end_date cannot exceed 31 days.
-     * @param \DateTimeInterface $startDate Start date for the charges summary in ISO date format (YYYY-MM-DD)
+     * @param array{
+     *   end_date: string|\DateTimeInterface, start_date: string|\DateTimeInterface
+     * }|ChargesSummaryRetrieveParams $params
      *
      * @throws APIException
      */
     public function retrieve(
-        $endDate,
-        $startDate,
-        ?RequestOptions $requestOptions = null
-    ): ChargesSummaryGetResponse {
-        $params = ['endDate' => $endDate, 'startDate' => $startDate];
-
-        return $this->retrieveRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|ChargesSummaryRetrieveParams $params,
+        ?RequestOptions $requestOptions = null,
     ): ChargesSummaryGetResponse {
         [$parsed, $options] = ChargesSummaryRetrieveParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

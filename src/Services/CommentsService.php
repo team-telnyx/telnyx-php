@@ -6,18 +6,14 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Comments\CommentCreateParams;
-use Telnyx\Comments\CommentCreateParams\CommentRecordType;
 use Telnyx\Comments\CommentGetResponse;
 use Telnyx\Comments\CommentListParams;
-use Telnyx\Comments\CommentListParams\Filter;
 use Telnyx\Comments\CommentListResponse;
 use Telnyx\Comments\CommentMarkAsReadResponse;
 use Telnyx\Comments\CommentNewResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\CommentsContract;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class CommentsService implements CommentsContract
 {
@@ -31,41 +27,21 @@ final class CommentsService implements CommentsContract
      *
      * Create a comment
      *
-     * @param string $body
-     * @param string $commentRecordID
-     * @param CommentRecordType|value-of<CommentRecordType> $commentRecordType
+     * @param array{
+     *   body?: string,
+     *   comment_record_id?: string,
+     *   comment_record_type?: "sub_number_order"|"requirement_group",
+     * }|CommentCreateParams $params
      *
      * @throws APIException
      */
     public function create(
-        $body = omit,
-        $commentRecordID = omit,
-        $commentRecordType = omit,
-        ?RequestOptions $requestOptions = null,
-    ): CommentNewResponse {
-        $params = [
-            'body' => $body,
-            'commentRecordID' => $commentRecordID,
-            'commentRecordType' => $commentRecordType,
-        ];
-
-        return $this->createRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
+        array|CommentCreateParams $params,
         ?RequestOptions $requestOptions = null
     ): CommentNewResponse {
         [$parsed, $options] = CommentCreateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -103,33 +79,22 @@ final class CommentsService implements CommentsContract
      *
      * Retrieve all comments
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[comment_record_type], filter[comment_record_id]
+     * @param array{
+     *   filter?: array{
+     *     comment_record_id?: string,
+     *     comment_record_type?: "sub_number_order"|"requirement_group",
+     *   },
+     * }|CommentListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        ?RequestOptions $requestOptions = null
-    ): CommentListResponse {
-        $params = ['filter' => $filter];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
+        array|CommentListParams $params,
         ?RequestOptions $requestOptions = null
     ): CommentListResponse {
         [$parsed, $options] = CommentListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

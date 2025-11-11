@@ -14,14 +14,14 @@ use Telnyx\SimCards\Actions\SimCardAction\Status;
  * This object represents a SIM card action. It allows tracking the current status of an operation that impacts the SIM card.
  *
  * @phpstan-type SimCardActionShape = array{
- *   id?: string,
- *   actionType?: value-of<ActionType>,
- *   createdAt?: string,
- *   recordType?: string,
- *   settings?: array<string, mixed>|null,
- *   simCardID?: string,
- *   status?: Status,
- *   updatedAt?: string,
+ *   id?: string|null,
+ *   action_type?: value-of<ActionType>|null,
+ *   created_at?: string|null,
+ *   record_type?: string|null,
+ *   settings?: array<string,mixed>|null,
+ *   sim_card_id?: string|null,
+ *   status?: Status|null,
+ *   updated_at?: string|null,
  * }
  */
 final class SimCardAction implements BaseModel
@@ -44,24 +44,24 @@ final class SimCardAction implements BaseModel
      *  <li><code>set_standby</code> - move the SIM card to the <code>standby</code> status</li>
      *  </ul>.
      *
-     * @var value-of<ActionType>|null $actionType
+     * @var value-of<ActionType>|null $action_type
      */
-    #[Api('action_type', enum: ActionType::class, optional: true)]
-    public ?string $actionType;
+    #[Api(enum: ActionType::class, optional: true)]
+    public ?string $action_type;
 
     /**
      * ISO 8601 formatted date-time indicating when the resource was created.
      */
-    #[Api('created_at', optional: true)]
-    public ?string $createdAt;
+    #[Api(optional: true)]
+    public ?string $created_at;
 
-    #[Api('record_type', optional: true)]
-    public ?string $recordType;
+    #[Api(optional: true)]
+    public ?string $record_type;
 
     /**
      * A JSON object representation of the action params.
      *
-     * @var array<string, mixed>|null $settings
+     * @var array<string,mixed>|null $settings
      */
     #[Api(map: 'mixed', nullable: true, optional: true)]
     public ?array $settings;
@@ -69,8 +69,8 @@ final class SimCardAction implements BaseModel
     /**
      * The related SIM card identifier.
      */
-    #[Api('sim_card_id', optional: true)]
-    public ?string $simCardID;
+    #[Api(optional: true)]
+    public ?string $sim_card_id;
 
     #[Api(optional: true)]
     public ?Status $status;
@@ -78,8 +78,8 @@ final class SimCardAction implements BaseModel
     /**
      * ISO 8601 formatted date-time indicating when the resource was updated.
      */
-    #[Api('updated_at', optional: true)]
-    public ?string $updatedAt;
+    #[Api(optional: true)]
+    public ?string $updated_at;
 
     public function __construct()
     {
@@ -91,29 +91,29 @@ final class SimCardAction implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ActionType|value-of<ActionType> $actionType
-     * @param array<string, mixed>|null $settings
+     * @param ActionType|value-of<ActionType> $action_type
+     * @param array<string,mixed>|null $settings
      */
     public static function with(
         ?string $id = null,
-        ActionType|string|null $actionType = null,
-        ?string $createdAt = null,
-        ?string $recordType = null,
+        ActionType|string|null $action_type = null,
+        ?string $created_at = null,
+        ?string $record_type = null,
         ?array $settings = null,
-        ?string $simCardID = null,
+        ?string $sim_card_id = null,
         ?Status $status = null,
-        ?string $updatedAt = null,
+        ?string $updated_at = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj->id = $id;
-        null !== $actionType && $obj['actionType'] = $actionType;
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $recordType && $obj->recordType = $recordType;
+        null !== $action_type && $obj['action_type'] = $action_type;
+        null !== $created_at && $obj->created_at = $created_at;
+        null !== $record_type && $obj->record_type = $record_type;
         null !== $settings && $obj->settings = $settings;
-        null !== $simCardID && $obj->simCardID = $simCardID;
+        null !== $sim_card_id && $obj->sim_card_id = $sim_card_id;
         null !== $status && $obj->status = $status;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
+        null !== $updated_at && $obj->updated_at = $updated_at;
 
         return $obj;
     }
@@ -143,7 +143,7 @@ final class SimCardAction implements BaseModel
     public function withActionType(ActionType|string $actionType): self
     {
         $obj = clone $this;
-        $obj['actionType'] = $actionType;
+        $obj['action_type'] = $actionType;
 
         return $obj;
     }
@@ -154,7 +154,7 @@ final class SimCardAction implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }
@@ -162,7 +162,7 @@ final class SimCardAction implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType;
+        $obj->record_type = $recordType;
 
         return $obj;
     }
@@ -170,7 +170,7 @@ final class SimCardAction implements BaseModel
     /**
      * A JSON object representation of the action params.
      *
-     * @param array<string, mixed>|null $settings
+     * @param array<string,mixed>|null $settings
      */
     public function withSettings(?array $settings): self
     {
@@ -186,7 +186,7 @@ final class SimCardAction implements BaseModel
     public function withSimCardID(string $simCardID): self
     {
         $obj = clone $this;
-        $obj->simCardID = $simCardID;
+        $obj->sim_card_id = $simCardID;
 
         return $obj;
     }
@@ -205,7 +205,7 @@ final class SimCardAction implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $obj->updated_at = $updatedAt;
 
         return $obj;
     }

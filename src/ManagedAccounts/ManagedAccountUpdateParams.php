@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\ManagedAccounts->update
  *
  * @phpstan-type ManagedAccountUpdateParamsShape = array{
- *   managedAccountAllowCustomPricing?: bool
+ *   managed_account_allow_custom_pricing?: bool
  * }
  */
 final class ManagedAccountUpdateParams implements BaseModel
@@ -27,8 +27,8 @@ final class ManagedAccountUpdateParams implements BaseModel
     /**
      * Boolean value that indicates if the managed account is able to have custom pricing set for it or not. If false, uses the pricing of the manager account. Defaults to false. This value may be changed, but there may be time lag between when the value is changed and pricing changes take effect.
      */
-    #[Api('managed_account_allow_custom_pricing', optional: true)]
-    public ?bool $managedAccountAllowCustomPricing;
+    #[Api(optional: true)]
+    public ?bool $managed_account_allow_custom_pricing;
 
     public function __construct()
     {
@@ -41,11 +41,11 @@ final class ManagedAccountUpdateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?bool $managedAccountAllowCustomPricing = null
+        ?bool $managed_account_allow_custom_pricing = null
     ): self {
         $obj = new self;
 
-        null !== $managedAccountAllowCustomPricing && $obj->managedAccountAllowCustomPricing = $managedAccountAllowCustomPricing;
+        null !== $managed_account_allow_custom_pricing && $obj->managed_account_allow_custom_pricing = $managed_account_allow_custom_pricing;
 
         return $obj;
     }
@@ -57,7 +57,7 @@ final class ManagedAccountUpdateParams implements BaseModel
         bool $managedAccountAllowCustomPricing
     ): self {
         $obj = clone $this;
-        $obj->managedAccountAllowCustomPricing = $managedAccountAllowCustomPricing;
+        $obj->managed_account_allow_custom_pricing = $managedAccountAllowCustomPricing;
 
         return $obj;
     }

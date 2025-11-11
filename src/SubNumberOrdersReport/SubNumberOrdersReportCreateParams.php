@@ -16,11 +16,11 @@ use Telnyx\SubNumberOrdersReport\SubNumberOrdersReportCreateParams\Status;
  * @see Telnyx\SubNumberOrdersReport->create
  *
  * @phpstan-type SubNumberOrdersReportCreateParamsShape = array{
- *   countryCode?: string,
- *   createdAtGt?: \DateTimeInterface,
- *   createdAtLt?: \DateTimeInterface,
- *   customerReference?: string,
- *   orderRequestID?: string,
+ *   country_code?: string,
+ *   created_at_gt?: \DateTimeInterface,
+ *   created_at_lt?: \DateTimeInterface,
+ *   customer_reference?: string,
+ *   order_request_id?: string,
  *   status?: Status|value-of<Status>,
  * }
  */
@@ -33,32 +33,32 @@ final class SubNumberOrdersReportCreateParams implements BaseModel
     /**
      * Filter by country code.
      */
-    #[Api('country_code', optional: true)]
-    public ?string $countryCode;
+    #[Api(optional: true)]
+    public ?string $country_code;
 
     /**
      * Filter for orders created after this date.
      */
-    #[Api('created_at_gt', optional: true)]
-    public ?\DateTimeInterface $createdAtGt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $created_at_gt;
 
     /**
      * Filter for orders created before this date.
      */
-    #[Api('created_at_lt', optional: true)]
-    public ?\DateTimeInterface $createdAtLt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $created_at_lt;
 
     /**
      * Filter by customer reference.
      */
-    #[Api('customer_reference', optional: true)]
-    public ?string $customerReference;
+    #[Api(optional: true)]
+    public ?string $customer_reference;
 
     /**
      * Filter by specific order request ID.
      */
-    #[Api('order_request_id', optional: true)]
-    public ?string $orderRequestID;
+    #[Api(optional: true)]
+    public ?string $order_request_id;
 
     /**
      * Filter by order status.
@@ -81,20 +81,20 @@ final class SubNumberOrdersReportCreateParams implements BaseModel
      * @param Status|value-of<Status> $status
      */
     public static function with(
-        ?string $countryCode = null,
-        ?\DateTimeInterface $createdAtGt = null,
-        ?\DateTimeInterface $createdAtLt = null,
-        ?string $customerReference = null,
-        ?string $orderRequestID = null,
+        ?string $country_code = null,
+        ?\DateTimeInterface $created_at_gt = null,
+        ?\DateTimeInterface $created_at_lt = null,
+        ?string $customer_reference = null,
+        ?string $order_request_id = null,
         Status|string|null $status = null,
     ): self {
         $obj = new self;
 
-        null !== $countryCode && $obj->countryCode = $countryCode;
-        null !== $createdAtGt && $obj->createdAtGt = $createdAtGt;
-        null !== $createdAtLt && $obj->createdAtLt = $createdAtLt;
-        null !== $customerReference && $obj->customerReference = $customerReference;
-        null !== $orderRequestID && $obj->orderRequestID = $orderRequestID;
+        null !== $country_code && $obj->country_code = $country_code;
+        null !== $created_at_gt && $obj->created_at_gt = $created_at_gt;
+        null !== $created_at_lt && $obj->created_at_lt = $created_at_lt;
+        null !== $customer_reference && $obj->customer_reference = $customer_reference;
+        null !== $order_request_id && $obj->order_request_id = $order_request_id;
         null !== $status && $obj['status'] = $status;
 
         return $obj;
@@ -106,7 +106,7 @@ final class SubNumberOrdersReportCreateParams implements BaseModel
     public function withCountryCode(string $countryCode): self
     {
         $obj = clone $this;
-        $obj->countryCode = $countryCode;
+        $obj->country_code = $countryCode;
 
         return $obj;
     }
@@ -117,7 +117,7 @@ final class SubNumberOrdersReportCreateParams implements BaseModel
     public function withCreatedAtGt(\DateTimeInterface $createdAtGt): self
     {
         $obj = clone $this;
-        $obj->createdAtGt = $createdAtGt;
+        $obj->created_at_gt = $createdAtGt;
 
         return $obj;
     }
@@ -128,7 +128,7 @@ final class SubNumberOrdersReportCreateParams implements BaseModel
     public function withCreatedAtLt(\DateTimeInterface $createdAtLt): self
     {
         $obj = clone $this;
-        $obj->createdAtLt = $createdAtLt;
+        $obj->created_at_lt = $createdAtLt;
 
         return $obj;
     }
@@ -139,7 +139,7 @@ final class SubNumberOrdersReportCreateParams implements BaseModel
     public function withCustomerReference(string $customerReference): self
     {
         $obj = clone $this;
-        $obj->customerReference = $customerReference;
+        $obj->customer_reference = $customerReference;
 
         return $obj;
     }
@@ -150,7 +150,7 @@ final class SubNumberOrdersReportCreateParams implements BaseModel
     public function withOrderRequestID(string $orderRequestID): self
     {
         $obj = clone $this;
-        $obj->orderRequestID = $orderRequestID;
+        $obj->order_request_id = $orderRequestID;
 
         return $obj;
     }

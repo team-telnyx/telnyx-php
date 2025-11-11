@@ -12,10 +12,10 @@ use Telnyx\Messsages\RcsAgentMessage\Event;
 
 /**
  * @phpstan-type RcsAgentMessageShape = array{
- *   contentMessage?: ContentMessage,
- *   event?: Event,
- *   expireTime?: \DateTimeInterface,
- *   ttl?: string,
+ *   content_message?: ContentMessage|null,
+ *   event?: Event|null,
+ *   expire_time?: \DateTimeInterface|null,
+ *   ttl?: string|null,
  * }
  */
 final class RcsAgentMessage implements BaseModel
@@ -23,8 +23,8 @@ final class RcsAgentMessage implements BaseModel
     /** @use SdkModel<RcsAgentMessageShape> */
     use SdkModel;
 
-    #[Api('content_message', optional: true)]
-    public ?ContentMessage $contentMessage;
+    #[Api(optional: true)]
+    public ?ContentMessage $content_message;
 
     /**
      * RCS Event to send to the recipient.
@@ -35,8 +35,8 @@ final class RcsAgentMessage implements BaseModel
     /**
      * Timestamp in UTC of when this message is considered expired.
      */
-    #[Api('expire_time', optional: true)]
-    public ?\DateTimeInterface $expireTime;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $expire_time;
 
     /**
      * Duration in seconds ending with 's'.
@@ -55,16 +55,16 @@ final class RcsAgentMessage implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?ContentMessage $contentMessage = null,
+        ?ContentMessage $content_message = null,
         ?Event $event = null,
-        ?\DateTimeInterface $expireTime = null,
+        ?\DateTimeInterface $expire_time = null,
         ?string $ttl = null,
     ): self {
         $obj = new self;
 
-        null !== $contentMessage && $obj->contentMessage = $contentMessage;
+        null !== $content_message && $obj->content_message = $content_message;
         null !== $event && $obj->event = $event;
-        null !== $expireTime && $obj->expireTime = $expireTime;
+        null !== $expire_time && $obj->expire_time = $expire_time;
         null !== $ttl && $obj->ttl = $ttl;
 
         return $obj;
@@ -73,7 +73,7 @@ final class RcsAgentMessage implements BaseModel
     public function withContentMessage(ContentMessage $contentMessage): self
     {
         $obj = clone $this;
-        $obj->contentMessage = $contentMessage;
+        $obj->content_message = $contentMessage;
 
         return $obj;
     }
@@ -95,7 +95,7 @@ final class RcsAgentMessage implements BaseModel
     public function withExpireTime(\DateTimeInterface $expireTime): self
     {
         $obj = clone $this;
-        $obj->expireTime = $expireTime;
+        $obj->expire_time = $expireTime;
 
         return $obj;
     }

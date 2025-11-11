@@ -11,10 +11,10 @@ use Telnyx\Messaging\Rcs\RcInviteTestNumberResponse\Data\RecordType;
 
 /**
  * @phpstan-type DataShape = array{
- *   agentID?: string,
- *   phoneNumber?: string,
- *   recordType?: value-of<RecordType>,
- *   status?: string,
+ *   agent_id?: string|null,
+ *   phone_number?: string|null,
+ *   record_type?: value-of<RecordType>|null,
+ *   status?: string|null,
  * }
  */
 final class Data implements BaseModel
@@ -25,22 +25,22 @@ final class Data implements BaseModel
     /**
      * RCS agent ID.
      */
-    #[Api('agent_id', optional: true)]
-    public ?string $agentID;
+    #[Api(optional: true)]
+    public ?string $agent_id;
 
     /**
      * Phone number that was invited for testing.
      */
-    #[Api('phone_number', optional: true)]
-    public ?string $phoneNumber;
+    #[Api(optional: true)]
+    public ?string $phone_number;
 
     /**
      * Identifies the type of the resource.
      *
-     * @var value-of<RecordType>|null $recordType
+     * @var value-of<RecordType>|null $record_type
      */
-    #[Api('record_type', enum: RecordType::class, optional: true)]
-    public ?string $recordType;
+    #[Api(enum: RecordType::class, optional: true)]
+    public ?string $record_type;
 
     /**
      * Status of the test number invitation.
@@ -58,19 +58,19 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param RecordType|value-of<RecordType> $recordType
+     * @param RecordType|value-of<RecordType> $record_type
      */
     public static function with(
-        ?string $agentID = null,
-        ?string $phoneNumber = null,
-        RecordType|string|null $recordType = null,
+        ?string $agent_id = null,
+        ?string $phone_number = null,
+        RecordType|string|null $record_type = null,
         ?string $status = null,
     ): self {
         $obj = new self;
 
-        null !== $agentID && $obj->agentID = $agentID;
-        null !== $phoneNumber && $obj->phoneNumber = $phoneNumber;
-        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $agent_id && $obj->agent_id = $agent_id;
+        null !== $phone_number && $obj->phone_number = $phone_number;
+        null !== $record_type && $obj['record_type'] = $record_type;
         null !== $status && $obj->status = $status;
 
         return $obj;
@@ -82,7 +82,7 @@ final class Data implements BaseModel
     public function withAgentID(string $agentID): self
     {
         $obj = clone $this;
-        $obj->agentID = $agentID;
+        $obj->agent_id = $agentID;
 
         return $obj;
     }
@@ -93,7 +93,7 @@ final class Data implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj->phoneNumber = $phoneNumber;
+        $obj->phone_number = $phoneNumber;
 
         return $obj;
     }
@@ -106,7 +106,7 @@ final class Data implements BaseModel
     public function withRecordType(RecordType|string $recordType): self
     {
         $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }

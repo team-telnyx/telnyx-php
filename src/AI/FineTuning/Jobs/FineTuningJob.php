@@ -17,14 +17,14 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  *
  * @phpstan-type FineTuningJobShape = array{
  *   id: string,
- *   createdAt: int,
- *   finishedAt: int|null,
+ *   created_at: int,
+ *   finished_at: int|null,
  *   hyperparameters: Hyperparameters,
  *   model: string,
- *   organizationID: string,
+ *   organization_id: string,
  *   status: value-of<Status>,
- *   trainedTokens: int|null,
- *   trainingFile: string,
+ *   trained_tokens: int|null,
+ *   training_file: string,
  * }
  */
 final class FineTuningJob implements BaseModel, ResponseConverter
@@ -43,14 +43,14 @@ final class FineTuningJob implements BaseModel, ResponseConverter
     /**
      * The Unix timestamp (in seconds) for when the fine-tuning job was created.
      */
-    #[Api('created_at')]
-    public int $createdAt;
+    #[Api]
+    public int $created_at;
 
     /**
      * The Unix timestamp (in seconds) for when the fine-tuning job was finished. The value will be null if the fine-tuning job is still running.
      */
-    #[Api('finished_at')]
-    public ?int $finishedAt;
+    #[Api]
+    public ?int $finished_at;
 
     /**
      * The hyperparameters used for the fine-tuning job.
@@ -67,8 +67,8 @@ final class FineTuningJob implements BaseModel, ResponseConverter
     /**
      * The organization that owns the fine-tuning job.
      */
-    #[Api('organization_id')]
-    public string $organizationID;
+    #[Api]
+    public string $organization_id;
 
     /**
      * The current status of the fine-tuning job.
@@ -81,14 +81,14 @@ final class FineTuningJob implements BaseModel, ResponseConverter
     /**
      * The total number of billable tokens processed by this fine-tuning job. The value will be null if the fine-tuning job is still running.
      */
-    #[Api('trained_tokens')]
-    public ?int $trainedTokens;
+    #[Api]
+    public ?int $trained_tokens;
 
     /**
      * The storage bucket or object used for training.
      */
-    #[Api('training_file')]
-    public string $trainingFile;
+    #[Api]
+    public string $training_file;
 
     /**
      * `new FineTuningJob()` is missing required properties by the API.
@@ -97,14 +97,14 @@ final class FineTuningJob implements BaseModel, ResponseConverter
      * ```
      * FineTuningJob::with(
      *   id: ...,
-     *   createdAt: ...,
-     *   finishedAt: ...,
+     *   created_at: ...,
+     *   finished_at: ...,
      *   hyperparameters: ...,
      *   model: ...,
-     *   organizationID: ...,
+     *   organization_id: ...,
      *   status: ...,
-     *   trainedTokens: ...,
-     *   trainingFile: ...,
+     *   trained_tokens: ...,
+     *   training_file: ...,
      * )
      * ```
      *
@@ -137,26 +137,26 @@ final class FineTuningJob implements BaseModel, ResponseConverter
      */
     public static function with(
         string $id,
-        int $createdAt,
-        ?int $finishedAt,
+        int $created_at,
+        ?int $finished_at,
         Hyperparameters $hyperparameters,
         string $model,
-        string $organizationID,
+        string $organization_id,
         Status|string $status,
-        ?int $trainedTokens,
-        string $trainingFile,
+        ?int $trained_tokens,
+        string $training_file,
     ): self {
         $obj = new self;
 
         $obj->id = $id;
-        $obj->createdAt = $createdAt;
-        $obj->finishedAt = $finishedAt;
+        $obj->created_at = $created_at;
+        $obj->finished_at = $finished_at;
         $obj->hyperparameters = $hyperparameters;
         $obj->model = $model;
-        $obj->organizationID = $organizationID;
+        $obj->organization_id = $organization_id;
         $obj['status'] = $status;
-        $obj->trainedTokens = $trainedTokens;
-        $obj->trainingFile = $trainingFile;
+        $obj->trained_tokens = $trained_tokens;
+        $obj->training_file = $training_file;
 
         return $obj;
     }
@@ -178,7 +178,7 @@ final class FineTuningJob implements BaseModel, ResponseConverter
     public function withCreatedAt(int $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }
@@ -189,7 +189,7 @@ final class FineTuningJob implements BaseModel, ResponseConverter
     public function withFinishedAt(?int $finishedAt): self
     {
         $obj = clone $this;
-        $obj->finishedAt = $finishedAt;
+        $obj->finished_at = $finishedAt;
 
         return $obj;
     }
@@ -222,7 +222,7 @@ final class FineTuningJob implements BaseModel, ResponseConverter
     public function withOrganizationID(string $organizationID): self
     {
         $obj = clone $this;
-        $obj->organizationID = $organizationID;
+        $obj->organization_id = $organizationID;
 
         return $obj;
     }
@@ -246,7 +246,7 @@ final class FineTuningJob implements BaseModel, ResponseConverter
     public function withTrainedTokens(?int $trainedTokens): self
     {
         $obj = clone $this;
-        $obj->trainedTokens = $trainedTokens;
+        $obj->trained_tokens = $trainedTokens;
 
         return $obj;
     }
@@ -257,7 +257,7 @@ final class FineTuningJob implements BaseModel, ResponseConverter
     public function withTrainingFile(string $trainingFile): self
     {
         $obj = clone $this;
-        $obj->trainingFile = $trainingFile;
+        $obj->training_file = $trainingFile;
 
         return $obj;
     }

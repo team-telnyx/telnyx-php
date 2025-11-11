@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type TelephoneNumberShape = array{
- *   numberID?: string, phoneNumber?: string
+ *   number_id?: string|null, phone_number?: string|null
  * }
  */
 final class TelephoneNumber implements BaseModel
@@ -21,14 +21,14 @@ final class TelephoneNumber implements BaseModel
     /**
      * Phone number ID from the Telnyx API.
      */
-    #[Api('number_id', optional: true)]
-    public ?string $numberID;
+    #[Api(optional: true)]
+    public ?string $number_id;
 
     /**
      * Phone number in E164 format.
      */
-    #[Api('phone_number', optional: true)]
-    public ?string $phoneNumber;
+    #[Api(optional: true)]
+    public ?string $phone_number;
 
     public function __construct()
     {
@@ -41,13 +41,13 @@ final class TelephoneNumber implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $numberID = null,
-        ?string $phoneNumber = null
+        ?string $number_id = null,
+        ?string $phone_number = null
     ): self {
         $obj = new self;
 
-        null !== $numberID && $obj->numberID = $numberID;
-        null !== $phoneNumber && $obj->phoneNumber = $phoneNumber;
+        null !== $number_id && $obj->number_id = $number_id;
+        null !== $phone_number && $obj->phone_number = $phone_number;
 
         return $obj;
     }
@@ -58,7 +58,7 @@ final class TelephoneNumber implements BaseModel
     public function withNumberID(string $numberID): self
     {
         $obj = clone $this;
-        $obj->numberID = $numberID;
+        $obj->number_id = $numberID;
 
         return $obj;
     }
@@ -69,7 +69,7 @@ final class TelephoneNumber implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj->phoneNumber = $phoneNumber;
+        $obj->phone_number = $phoneNumber;
 
         return $obj;
     }

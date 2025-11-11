@@ -14,7 +14,7 @@ use Telnyx\Storage\StorageListMigrationSourceCoverageResponse\Data;
 
 /**
  * @phpstan-type StorageListMigrationSourceCoverageResponseShape = array{
- *   data?: list<Data>, meta?: PaginationMetaSimple
+ *   data?: list<Data>|null, meta?: PaginationMetaSimple|null
  * }
  */
 final class StorageListMigrationSourceCoverageResponse implements BaseModel, ResponseConverter

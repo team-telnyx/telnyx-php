@@ -14,41 +14,41 @@ use Telnyx\CredentialConnections\EncryptedMedia;
 
 /**
  * @phpstan-type FqdnConnectionShape = array{
- *   connectionName: string,
- *   id?: string,
- *   active?: bool,
- *   adjustDtmfTimestamp?: bool,
- *   anchorsiteOverride?: value-of<AnchorsiteOverride>,
- *   callCostEnabled?: bool,
- *   createdAt?: string,
- *   defaultOnHoldComfortNoiseEnabled?: bool,
- *   dtmfType?: value-of<DtmfType>,
- *   encodeContactHeaderEnabled?: bool,
- *   encryptedMedia?: value-of<EncryptedMedia>|null,
- *   ignoreDtmfDuration?: bool,
- *   ignoreMarkBit?: bool,
- *   inbound?: InboundFqdn,
- *   microsoftTeamsSbc?: bool,
- *   noiseSuppression?: bool,
- *   onnetT38PassthroughEnabled?: bool,
- *   outbound?: OutboundFqdn,
- *   password?: string,
- *   recordType?: string,
- *   rtcpSettings?: ConnectionRtcpSettings,
- *   rtpPassCodecsOnStreamChange?: bool,
- *   sendNormalizedTimestamps?: bool,
- *   tags?: list<string>,
- *   thirdPartyControlEnabled?: bool,
- *   transportProtocol?: value-of<TransportProtocol>,
- *   txtName?: string,
- *   txtTtl?: int,
- *   txtValue?: string,
- *   updatedAt?: string,
- *   userName?: string,
- *   webhookAPIVersion?: value-of<WebhookAPIVersion>,
- *   webhookEventFailoverURL?: string|null,
- *   webhookEventURL?: string,
- *   webhookTimeoutSecs?: int|null,
+ *   connection_name: string,
+ *   id?: string|null,
+ *   active?: bool|null,
+ *   adjust_dtmf_timestamp?: bool|null,
+ *   anchorsite_override?: value-of<AnchorsiteOverride>|null,
+ *   call_cost_enabled?: bool|null,
+ *   created_at?: string|null,
+ *   default_on_hold_comfort_noise_enabled?: bool|null,
+ *   dtmf_type?: value-of<DtmfType>|null,
+ *   encode_contact_header_enabled?: bool|null,
+ *   encrypted_media?: value-of<EncryptedMedia>|null,
+ *   ignore_dtmf_duration?: bool|null,
+ *   ignore_mark_bit?: bool|null,
+ *   inbound?: InboundFqdn|null,
+ *   microsoft_teams_sbc?: bool|null,
+ *   noise_suppression?: bool|null,
+ *   onnet_t38_passthrough_enabled?: bool|null,
+ *   outbound?: OutboundFqdn|null,
+ *   password?: string|null,
+ *   record_type?: string|null,
+ *   rtcp_settings?: ConnectionRtcpSettings|null,
+ *   rtp_pass_codecs_on_stream_change?: bool|null,
+ *   send_normalized_timestamps?: bool|null,
+ *   tags?: list<string>|null,
+ *   third_party_control_enabled?: bool|null,
+ *   transport_protocol?: value-of<TransportProtocol>|null,
+ *   txt_name?: string|null,
+ *   txt_ttl?: int|null,
+ *   txt_value?: string|null,
+ *   updated_at?: string|null,
+ *   user_name?: string|null,
+ *   webhook_api_version?: value-of<WebhookAPIVersion>|null,
+ *   webhook_event_failover_url?: string|null,
+ *   webhook_event_url?: string|null,
+ *   webhook_timeout_secs?: int|null,
  * }
  */
 final class FqdnConnection implements BaseModel
@@ -59,8 +59,8 @@ final class FqdnConnection implements BaseModel
     /**
      * A user-assigned name to help manage the connection.
      */
-    #[Api('connection_name')]
-    public string $connectionName;
+    #[Api]
+    public string $connection_name;
 
     /**
      * Identifies the resource.
@@ -77,73 +77,68 @@ final class FqdnConnection implements BaseModel
     /**
      * Indicates whether DTMF timestamp adjustment is enabled.
      */
-    #[Api('adjust_dtmf_timestamp', optional: true)]
-    public ?bool $adjustDtmfTimestamp;
+    #[Api(optional: true)]
+    public ?bool $adjust_dtmf_timestamp;
 
     /**
      * `Latency` directs Telnyx to route media through the site with the lowest round-trip time to the user's connection. Telnyx calculates this time using ICMP ping messages. This can be disabled by specifying a site to handle all media.
      *
-     * @var value-of<AnchorsiteOverride>|null $anchorsiteOverride
+     * @var value-of<AnchorsiteOverride>|null $anchorsite_override
      */
-    #[Api('anchorsite_override', enum: AnchorsiteOverride::class, optional: true)]
-    public ?string $anchorsiteOverride;
+    #[Api(enum: AnchorsiteOverride::class, optional: true)]
+    public ?string $anchorsite_override;
 
     /**
      * Indicates whether call cost calculation is enabled.
      */
-    #[Api('call_cost_enabled', optional: true)]
-    public ?bool $callCostEnabled;
+    #[Api(optional: true)]
+    public ?bool $call_cost_enabled;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Api('created_at', optional: true)]
-    public ?string $createdAt;
+    #[Api(optional: true)]
+    public ?string $created_at;
 
     /**
      * When enabled, Telnyx will generate comfort noise when you place the call on hold. If disabled, you will need to generate comfort noise or on hold music to avoid RTP timeout.
      */
-    #[Api('default_on_hold_comfort_noise_enabled', optional: true)]
-    public ?bool $defaultOnHoldComfortNoiseEnabled;
+    #[Api(optional: true)]
+    public ?bool $default_on_hold_comfort_noise_enabled;
 
     /**
      * Sets the type of DTMF digits sent from Telnyx to this Connection. Note that DTMF digits sent to Telnyx will be accepted in all formats.
      *
-     * @var value-of<DtmfType>|null $dtmfType
+     * @var value-of<DtmfType>|null $dtmf_type
      */
-    #[Api('dtmf_type', enum: DtmfType::class, optional: true)]
-    public ?string $dtmfType;
+    #[Api(enum: DtmfType::class, optional: true)]
+    public ?string $dtmf_type;
 
     /**
      * Encode the SIP contact header sent by Telnyx to avoid issues for NAT or ALG scenarios.
      */
-    #[Api('encode_contact_header_enabled', optional: true)]
-    public ?bool $encodeContactHeaderEnabled;
+    #[Api(optional: true)]
+    public ?bool $encode_contact_header_enabled;
 
     /**
      * Enable use of SRTP for encryption. Cannot be set if the transport_portocol is TLS.
      *
-     * @var value-of<EncryptedMedia>|null $encryptedMedia
+     * @var value-of<EncryptedMedia>|null $encrypted_media
      */
-    #[Api(
-        'encrypted_media',
-        enum: EncryptedMedia::class,
-        nullable: true,
-        optional: true,
-    )]
-    public ?string $encryptedMedia;
+    #[Api(enum: EncryptedMedia::class, nullable: true, optional: true)]
+    public ?string $encrypted_media;
 
     /**
      * Indicates whether DTMF duration should be ignored.
      */
-    #[Api('ignore_dtmf_duration', optional: true)]
-    public ?bool $ignoreDtmfDuration;
+    #[Api(optional: true)]
+    public ?bool $ignore_dtmf_duration;
 
     /**
      * Indicates whether the mark bit should be ignored.
      */
-    #[Api('ignore_mark_bit', optional: true)]
-    public ?bool $ignoreMarkBit;
+    #[Api(optional: true)]
+    public ?bool $ignore_mark_bit;
 
     #[Api(optional: true)]
     public ?InboundFqdn $inbound;
@@ -151,20 +146,20 @@ final class FqdnConnection implements BaseModel
     /**
      * The connection is enabled for Microsoft Teams Direct Routing.
      */
-    #[Api('microsoft_teams_sbc', optional: true)]
-    public ?bool $microsoftTeamsSbc;
+    #[Api(optional: true)]
+    public ?bool $microsoft_teams_sbc;
 
     /**
      * Indicates whether noise suppression is enabled.
      */
-    #[Api('noise_suppression', optional: true)]
-    public ?bool $noiseSuppression;
+    #[Api(optional: true)]
+    public ?bool $noise_suppression;
 
     /**
      * Enable on-net T38 if you prefer that the sender and receiver negotiate T38 directly when both are on the Telnyx network. If this is disabled, Telnyx will be able to use T38 on just one leg of the call according to each leg's settings.
      */
-    #[Api('onnet_t38_passthrough_enabled', optional: true)]
-    public ?bool $onnetT38PassthroughEnabled;
+    #[Api(optional: true)]
+    public ?bool $onnet_t38_passthrough_enabled;
 
     #[Api(optional: true)]
     public ?OutboundFqdn $outbound;
@@ -178,23 +173,23 @@ final class FqdnConnection implements BaseModel
     /**
      * Identifies the type of the resource.
      */
-    #[Api('record_type', optional: true)]
-    public ?string $recordType;
+    #[Api(optional: true)]
+    public ?string $record_type;
 
-    #[Api('rtcp_settings', optional: true)]
-    public ?ConnectionRtcpSettings $rtcpSettings;
+    #[Api(optional: true)]
+    public ?ConnectionRtcpSettings $rtcp_settings;
 
     /**
      * Defines if codecs should be passed on stream change.
      */
-    #[Api('rtp_pass_codecs_on_stream_change', optional: true)]
-    public ?bool $rtpPassCodecsOnStreamChange;
+    #[Api(optional: true)]
+    public ?bool $rtp_pass_codecs_on_stream_change;
 
     /**
      * Indicates whether normalized timestamps should be sent.
      */
-    #[Api('send_normalized_timestamps', optional: true)]
-    public ?bool $sendNormalizedTimestamps;
+    #[Api(optional: true)]
+    public ?bool $send_normalized_timestamps;
 
     /**
      * Tags associated with the connection.
@@ -207,79 +202,79 @@ final class FqdnConnection implements BaseModel
     /**
      * Indicates whether third-party control is enabled.
      */
-    #[Api('third_party_control_enabled', optional: true)]
-    public ?bool $thirdPartyControlEnabled;
+    #[Api(optional: true)]
+    public ?bool $third_party_control_enabled;
 
     /**
      * One of UDP, TLS, or TCP. Applies only to connections with IP authentication or FQDN authentication.
      *
-     * @var value-of<TransportProtocol>|null $transportProtocol
+     * @var value-of<TransportProtocol>|null $transport_protocol
      */
-    #[Api('transport_protocol', enum: TransportProtocol::class, optional: true)]
-    public ?string $transportProtocol;
+    #[Api(enum: TransportProtocol::class, optional: true)]
+    public ?string $transport_protocol;
 
     /**
      * The name for the TXT record associated with the FQDN connection.
      */
-    #[Api('txt_name', optional: true)]
-    public ?string $txtName;
+    #[Api(optional: true)]
+    public ?string $txt_name;
 
     /**
      * The time to live for the TXT record associated with the FQDN connection.
      */
-    #[Api('txt_ttl', optional: true)]
-    public ?int $txtTtl;
+    #[Api(optional: true)]
+    public ?int $txt_ttl;
 
     /**
      * The value for the TXT record associated with the FQDN connection.
      */
-    #[Api('txt_value', optional: true)]
-    public ?string $txtValue;
+    #[Api(optional: true)]
+    public ?string $txt_value;
 
     /**
      * ISO 8601 formatted date indicating when the resource was updated.
      */
-    #[Api('updated_at', optional: true)]
-    public ?string $updatedAt;
+    #[Api(optional: true)]
+    public ?string $updated_at;
 
     /**
      * The username for the FQDN connection.
      */
-    #[Api('user_name', optional: true)]
-    public ?string $userName;
+    #[Api(optional: true)]
+    public ?string $user_name;
 
     /**
      * Determines which webhook format will be used, Telnyx API v1 or v2.
      *
-     * @var value-of<WebhookAPIVersion>|null $webhookAPIVersion
+     * @var value-of<WebhookAPIVersion>|null $webhook_api_version
      */
-    #[Api('webhook_api_version', enum: WebhookAPIVersion::class, optional: true)]
-    public ?string $webhookAPIVersion;
+    #[Api(enum: WebhookAPIVersion::class, optional: true)]
+    public ?string $webhook_api_version;
 
     /**
      * The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      */
-    #[Api('webhook_event_failover_url', nullable: true, optional: true)]
-    public ?string $webhookEventFailoverURL;
+    #[Api(nullable: true, optional: true)]
+    public ?string $webhook_event_failover_url;
 
     /**
      * The URL where webhooks related to this connection will be sent. Must include a scheme, such as 'https'.
      */
-    #[Api('webhook_event_url', optional: true)]
-    public ?string $webhookEventURL;
+    #[Api(optional: true)]
+    public ?string $webhook_event_url;
 
     /**
      * Specifies how many seconds to wait before timing out a webhook.
      */
-    #[Api('webhook_timeout_secs', nullable: true, optional: true)]
-    public ?int $webhookTimeoutSecs;
+    #[Api(nullable: true, optional: true)]
+    public ?int $webhook_timeout_secs;
 
     /**
      * `new FqdnConnection()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * FqdnConnection::with(connectionName: ...)
+     * FqdnConnection::with(connection_name: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -298,88 +293,88 @@ final class FqdnConnection implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AnchorsiteOverride|value-of<AnchorsiteOverride> $anchorsiteOverride
-     * @param DtmfType|value-of<DtmfType> $dtmfType
-     * @param EncryptedMedia|value-of<EncryptedMedia>|null $encryptedMedia
+     * @param AnchorsiteOverride|value-of<AnchorsiteOverride> $anchorsite_override
+     * @param DtmfType|value-of<DtmfType> $dtmf_type
+     * @param EncryptedMedia|value-of<EncryptedMedia>|null $encrypted_media
      * @param list<string> $tags
-     * @param TransportProtocol|value-of<TransportProtocol> $transportProtocol
-     * @param WebhookAPIVersion|value-of<WebhookAPIVersion> $webhookAPIVersion
+     * @param TransportProtocol|value-of<TransportProtocol> $transport_protocol
+     * @param WebhookAPIVersion|value-of<WebhookAPIVersion> $webhook_api_version
      */
     public static function with(
-        string $connectionName,
+        string $connection_name,
         ?string $id = null,
         ?bool $active = null,
-        ?bool $adjustDtmfTimestamp = null,
-        AnchorsiteOverride|string|null $anchorsiteOverride = null,
-        ?bool $callCostEnabled = null,
-        ?string $createdAt = null,
-        ?bool $defaultOnHoldComfortNoiseEnabled = null,
-        DtmfType|string|null $dtmfType = null,
-        ?bool $encodeContactHeaderEnabled = null,
-        EncryptedMedia|string|null $encryptedMedia = null,
-        ?bool $ignoreDtmfDuration = null,
-        ?bool $ignoreMarkBit = null,
+        ?bool $adjust_dtmf_timestamp = null,
+        AnchorsiteOverride|string|null $anchorsite_override = null,
+        ?bool $call_cost_enabled = null,
+        ?string $created_at = null,
+        ?bool $default_on_hold_comfort_noise_enabled = null,
+        DtmfType|string|null $dtmf_type = null,
+        ?bool $encode_contact_header_enabled = null,
+        EncryptedMedia|string|null $encrypted_media = null,
+        ?bool $ignore_dtmf_duration = null,
+        ?bool $ignore_mark_bit = null,
         ?InboundFqdn $inbound = null,
-        ?bool $microsoftTeamsSbc = null,
-        ?bool $noiseSuppression = null,
-        ?bool $onnetT38PassthroughEnabled = null,
+        ?bool $microsoft_teams_sbc = null,
+        ?bool $noise_suppression = null,
+        ?bool $onnet_t38_passthrough_enabled = null,
         ?OutboundFqdn $outbound = null,
         ?string $password = null,
-        ?string $recordType = null,
-        ?ConnectionRtcpSettings $rtcpSettings = null,
-        ?bool $rtpPassCodecsOnStreamChange = null,
-        ?bool $sendNormalizedTimestamps = null,
+        ?string $record_type = null,
+        ?ConnectionRtcpSettings $rtcp_settings = null,
+        ?bool $rtp_pass_codecs_on_stream_change = null,
+        ?bool $send_normalized_timestamps = null,
         ?array $tags = null,
-        ?bool $thirdPartyControlEnabled = null,
-        TransportProtocol|string|null $transportProtocol = null,
-        ?string $txtName = null,
-        ?int $txtTtl = null,
-        ?string $txtValue = null,
-        ?string $updatedAt = null,
-        ?string $userName = null,
-        WebhookAPIVersion|string|null $webhookAPIVersion = null,
-        ?string $webhookEventFailoverURL = null,
-        ?string $webhookEventURL = null,
-        ?int $webhookTimeoutSecs = null,
+        ?bool $third_party_control_enabled = null,
+        TransportProtocol|string|null $transport_protocol = null,
+        ?string $txt_name = null,
+        ?int $txt_ttl = null,
+        ?string $txt_value = null,
+        ?string $updated_at = null,
+        ?string $user_name = null,
+        WebhookAPIVersion|string|null $webhook_api_version = null,
+        ?string $webhook_event_failover_url = null,
+        ?string $webhook_event_url = null,
+        ?int $webhook_timeout_secs = null,
     ): self {
         $obj = new self;
 
-        $obj->connectionName = $connectionName;
+        $obj->connection_name = $connection_name;
 
         null !== $id && $obj->id = $id;
         null !== $active && $obj->active = $active;
-        null !== $adjustDtmfTimestamp && $obj->adjustDtmfTimestamp = $adjustDtmfTimestamp;
-        null !== $anchorsiteOverride && $obj['anchorsiteOverride'] = $anchorsiteOverride;
-        null !== $callCostEnabled && $obj->callCostEnabled = $callCostEnabled;
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $defaultOnHoldComfortNoiseEnabled && $obj->defaultOnHoldComfortNoiseEnabled = $defaultOnHoldComfortNoiseEnabled;
-        null !== $dtmfType && $obj['dtmfType'] = $dtmfType;
-        null !== $encodeContactHeaderEnabled && $obj->encodeContactHeaderEnabled = $encodeContactHeaderEnabled;
-        null !== $encryptedMedia && $obj['encryptedMedia'] = $encryptedMedia;
-        null !== $ignoreDtmfDuration && $obj->ignoreDtmfDuration = $ignoreDtmfDuration;
-        null !== $ignoreMarkBit && $obj->ignoreMarkBit = $ignoreMarkBit;
+        null !== $adjust_dtmf_timestamp && $obj->adjust_dtmf_timestamp = $adjust_dtmf_timestamp;
+        null !== $anchorsite_override && $obj['anchorsite_override'] = $anchorsite_override;
+        null !== $call_cost_enabled && $obj->call_cost_enabled = $call_cost_enabled;
+        null !== $created_at && $obj->created_at = $created_at;
+        null !== $default_on_hold_comfort_noise_enabled && $obj->default_on_hold_comfort_noise_enabled = $default_on_hold_comfort_noise_enabled;
+        null !== $dtmf_type && $obj['dtmf_type'] = $dtmf_type;
+        null !== $encode_contact_header_enabled && $obj->encode_contact_header_enabled = $encode_contact_header_enabled;
+        null !== $encrypted_media && $obj['encrypted_media'] = $encrypted_media;
+        null !== $ignore_dtmf_duration && $obj->ignore_dtmf_duration = $ignore_dtmf_duration;
+        null !== $ignore_mark_bit && $obj->ignore_mark_bit = $ignore_mark_bit;
         null !== $inbound && $obj->inbound = $inbound;
-        null !== $microsoftTeamsSbc && $obj->microsoftTeamsSbc = $microsoftTeamsSbc;
-        null !== $noiseSuppression && $obj->noiseSuppression = $noiseSuppression;
-        null !== $onnetT38PassthroughEnabled && $obj->onnetT38PassthroughEnabled = $onnetT38PassthroughEnabled;
+        null !== $microsoft_teams_sbc && $obj->microsoft_teams_sbc = $microsoft_teams_sbc;
+        null !== $noise_suppression && $obj->noise_suppression = $noise_suppression;
+        null !== $onnet_t38_passthrough_enabled && $obj->onnet_t38_passthrough_enabled = $onnet_t38_passthrough_enabled;
         null !== $outbound && $obj->outbound = $outbound;
         null !== $password && $obj->password = $password;
-        null !== $recordType && $obj->recordType = $recordType;
-        null !== $rtcpSettings && $obj->rtcpSettings = $rtcpSettings;
-        null !== $rtpPassCodecsOnStreamChange && $obj->rtpPassCodecsOnStreamChange = $rtpPassCodecsOnStreamChange;
-        null !== $sendNormalizedTimestamps && $obj->sendNormalizedTimestamps = $sendNormalizedTimestamps;
+        null !== $record_type && $obj->record_type = $record_type;
+        null !== $rtcp_settings && $obj->rtcp_settings = $rtcp_settings;
+        null !== $rtp_pass_codecs_on_stream_change && $obj->rtp_pass_codecs_on_stream_change = $rtp_pass_codecs_on_stream_change;
+        null !== $send_normalized_timestamps && $obj->send_normalized_timestamps = $send_normalized_timestamps;
         null !== $tags && $obj->tags = $tags;
-        null !== $thirdPartyControlEnabled && $obj->thirdPartyControlEnabled = $thirdPartyControlEnabled;
-        null !== $transportProtocol && $obj['transportProtocol'] = $transportProtocol;
-        null !== $txtName && $obj->txtName = $txtName;
-        null !== $txtTtl && $obj->txtTtl = $txtTtl;
-        null !== $txtValue && $obj->txtValue = $txtValue;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
-        null !== $userName && $obj->userName = $userName;
-        null !== $webhookAPIVersion && $obj['webhookAPIVersion'] = $webhookAPIVersion;
-        null !== $webhookEventFailoverURL && $obj->webhookEventFailoverURL = $webhookEventFailoverURL;
-        null !== $webhookEventURL && $obj->webhookEventURL = $webhookEventURL;
-        null !== $webhookTimeoutSecs && $obj->webhookTimeoutSecs = $webhookTimeoutSecs;
+        null !== $third_party_control_enabled && $obj->third_party_control_enabled = $third_party_control_enabled;
+        null !== $transport_protocol && $obj['transport_protocol'] = $transport_protocol;
+        null !== $txt_name && $obj->txt_name = $txt_name;
+        null !== $txt_ttl && $obj->txt_ttl = $txt_ttl;
+        null !== $txt_value && $obj->txt_value = $txt_value;
+        null !== $updated_at && $obj->updated_at = $updated_at;
+        null !== $user_name && $obj->user_name = $user_name;
+        null !== $webhook_api_version && $obj['webhook_api_version'] = $webhook_api_version;
+        null !== $webhook_event_failover_url && $obj->webhook_event_failover_url = $webhook_event_failover_url;
+        null !== $webhook_event_url && $obj->webhook_event_url = $webhook_event_url;
+        null !== $webhook_timeout_secs && $obj->webhook_timeout_secs = $webhook_timeout_secs;
 
         return $obj;
     }
@@ -390,7 +385,7 @@ final class FqdnConnection implements BaseModel
     public function withConnectionName(string $connectionName): self
     {
         $obj = clone $this;
-        $obj->connectionName = $connectionName;
+        $obj->connection_name = $connectionName;
 
         return $obj;
     }
@@ -423,7 +418,7 @@ final class FqdnConnection implements BaseModel
     public function withAdjustDtmfTimestamp(bool $adjustDtmfTimestamp): self
     {
         $obj = clone $this;
-        $obj->adjustDtmfTimestamp = $adjustDtmfTimestamp;
+        $obj->adjust_dtmf_timestamp = $adjustDtmfTimestamp;
 
         return $obj;
     }
@@ -437,7 +432,7 @@ final class FqdnConnection implements BaseModel
         AnchorsiteOverride|string $anchorsiteOverride
     ): self {
         $obj = clone $this;
-        $obj['anchorsiteOverride'] = $anchorsiteOverride;
+        $obj['anchorsite_override'] = $anchorsiteOverride;
 
         return $obj;
     }
@@ -448,7 +443,7 @@ final class FqdnConnection implements BaseModel
     public function withCallCostEnabled(bool $callCostEnabled): self
     {
         $obj = clone $this;
-        $obj->callCostEnabled = $callCostEnabled;
+        $obj->call_cost_enabled = $callCostEnabled;
 
         return $obj;
     }
@@ -459,7 +454,7 @@ final class FqdnConnection implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }
@@ -471,7 +466,7 @@ final class FqdnConnection implements BaseModel
         bool $defaultOnHoldComfortNoiseEnabled
     ): self {
         $obj = clone $this;
-        $obj->defaultOnHoldComfortNoiseEnabled = $defaultOnHoldComfortNoiseEnabled;
+        $obj->default_on_hold_comfort_noise_enabled = $defaultOnHoldComfortNoiseEnabled;
 
         return $obj;
     }
@@ -484,7 +479,7 @@ final class FqdnConnection implements BaseModel
     public function withDtmfType(DtmfType|string $dtmfType): self
     {
         $obj = clone $this;
-        $obj['dtmfType'] = $dtmfType;
+        $obj['dtmf_type'] = $dtmfType;
 
         return $obj;
     }
@@ -496,7 +491,7 @@ final class FqdnConnection implements BaseModel
         bool $encodeContactHeaderEnabled
     ): self {
         $obj = clone $this;
-        $obj->encodeContactHeaderEnabled = $encodeContactHeaderEnabled;
+        $obj->encode_contact_header_enabled = $encodeContactHeaderEnabled;
 
         return $obj;
     }
@@ -510,7 +505,7 @@ final class FqdnConnection implements BaseModel
         EncryptedMedia|string|null $encryptedMedia
     ): self {
         $obj = clone $this;
-        $obj['encryptedMedia'] = $encryptedMedia;
+        $obj['encrypted_media'] = $encryptedMedia;
 
         return $obj;
     }
@@ -521,7 +516,7 @@ final class FqdnConnection implements BaseModel
     public function withIgnoreDtmfDuration(bool $ignoreDtmfDuration): self
     {
         $obj = clone $this;
-        $obj->ignoreDtmfDuration = $ignoreDtmfDuration;
+        $obj->ignore_dtmf_duration = $ignoreDtmfDuration;
 
         return $obj;
     }
@@ -532,7 +527,7 @@ final class FqdnConnection implements BaseModel
     public function withIgnoreMarkBit(bool $ignoreMarkBit): self
     {
         $obj = clone $this;
-        $obj->ignoreMarkBit = $ignoreMarkBit;
+        $obj->ignore_mark_bit = $ignoreMarkBit;
 
         return $obj;
     }
@@ -551,7 +546,7 @@ final class FqdnConnection implements BaseModel
     public function withMicrosoftTeamsSbc(bool $microsoftTeamsSbc): self
     {
         $obj = clone $this;
-        $obj->microsoftTeamsSbc = $microsoftTeamsSbc;
+        $obj->microsoft_teams_sbc = $microsoftTeamsSbc;
 
         return $obj;
     }
@@ -562,7 +557,7 @@ final class FqdnConnection implements BaseModel
     public function withNoiseSuppression(bool $noiseSuppression): self
     {
         $obj = clone $this;
-        $obj->noiseSuppression = $noiseSuppression;
+        $obj->noise_suppression = $noiseSuppression;
 
         return $obj;
     }
@@ -574,7 +569,7 @@ final class FqdnConnection implements BaseModel
         bool $onnetT38PassthroughEnabled
     ): self {
         $obj = clone $this;
-        $obj->onnetT38PassthroughEnabled = $onnetT38PassthroughEnabled;
+        $obj->onnet_t38_passthrough_enabled = $onnetT38PassthroughEnabled;
 
         return $obj;
     }
@@ -604,7 +599,7 @@ final class FqdnConnection implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType;
+        $obj->record_type = $recordType;
 
         return $obj;
     }
@@ -612,7 +607,7 @@ final class FqdnConnection implements BaseModel
     public function withRtcpSettings(ConnectionRtcpSettings $rtcpSettings): self
     {
         $obj = clone $this;
-        $obj->rtcpSettings = $rtcpSettings;
+        $obj->rtcp_settings = $rtcpSettings;
 
         return $obj;
     }
@@ -624,7 +619,7 @@ final class FqdnConnection implements BaseModel
         bool $rtpPassCodecsOnStreamChange
     ): self {
         $obj = clone $this;
-        $obj->rtpPassCodecsOnStreamChange = $rtpPassCodecsOnStreamChange;
+        $obj->rtp_pass_codecs_on_stream_change = $rtpPassCodecsOnStreamChange;
 
         return $obj;
     }
@@ -636,7 +631,7 @@ final class FqdnConnection implements BaseModel
         bool $sendNormalizedTimestamps
     ): self {
         $obj = clone $this;
-        $obj->sendNormalizedTimestamps = $sendNormalizedTimestamps;
+        $obj->send_normalized_timestamps = $sendNormalizedTimestamps;
 
         return $obj;
     }
@@ -661,7 +656,7 @@ final class FqdnConnection implements BaseModel
         bool $thirdPartyControlEnabled
     ): self {
         $obj = clone $this;
-        $obj->thirdPartyControlEnabled = $thirdPartyControlEnabled;
+        $obj->third_party_control_enabled = $thirdPartyControlEnabled;
 
         return $obj;
     }
@@ -675,7 +670,7 @@ final class FqdnConnection implements BaseModel
         TransportProtocol|string $transportProtocol
     ): self {
         $obj = clone $this;
-        $obj['transportProtocol'] = $transportProtocol;
+        $obj['transport_protocol'] = $transportProtocol;
 
         return $obj;
     }
@@ -686,7 +681,7 @@ final class FqdnConnection implements BaseModel
     public function withTxtName(string $txtName): self
     {
         $obj = clone $this;
-        $obj->txtName = $txtName;
+        $obj->txt_name = $txtName;
 
         return $obj;
     }
@@ -697,7 +692,7 @@ final class FqdnConnection implements BaseModel
     public function withTxtTtl(int $txtTtl): self
     {
         $obj = clone $this;
-        $obj->txtTtl = $txtTtl;
+        $obj->txt_ttl = $txtTtl;
 
         return $obj;
     }
@@ -708,7 +703,7 @@ final class FqdnConnection implements BaseModel
     public function withTxtValue(string $txtValue): self
     {
         $obj = clone $this;
-        $obj->txtValue = $txtValue;
+        $obj->txt_value = $txtValue;
 
         return $obj;
     }
@@ -719,7 +714,7 @@ final class FqdnConnection implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $obj->updated_at = $updatedAt;
 
         return $obj;
     }
@@ -730,7 +725,7 @@ final class FqdnConnection implements BaseModel
     public function withUserName(string $userName): self
     {
         $obj = clone $this;
-        $obj->userName = $userName;
+        $obj->user_name = $userName;
 
         return $obj;
     }
@@ -744,7 +739,7 @@ final class FqdnConnection implements BaseModel
         WebhookAPIVersion|string $webhookAPIVersion
     ): self {
         $obj = clone $this;
-        $obj['webhookAPIVersion'] = $webhookAPIVersion;
+        $obj['webhook_api_version'] = $webhookAPIVersion;
 
         return $obj;
     }
@@ -756,7 +751,7 @@ final class FqdnConnection implements BaseModel
         ?string $webhookEventFailoverURL
     ): self {
         $obj = clone $this;
-        $obj->webhookEventFailoverURL = $webhookEventFailoverURL;
+        $obj->webhook_event_failover_url = $webhookEventFailoverURL;
 
         return $obj;
     }
@@ -767,7 +762,7 @@ final class FqdnConnection implements BaseModel
     public function withWebhookEventURL(string $webhookEventURL): self
     {
         $obj = clone $this;
-        $obj->webhookEventURL = $webhookEventURL;
+        $obj->webhook_event_url = $webhookEventURL;
 
         return $obj;
     }
@@ -778,7 +773,7 @@ final class FqdnConnection implements BaseModel
     public function withWebhookTimeoutSecs(?int $webhookTimeoutSecs): self
     {
         $obj = clone $this;
-        $obj->webhookTimeoutSecs = $webhookTimeoutSecs;
+        $obj->webhook_timeout_secs = $webhookTimeoutSecs;
 
         return $obj;
     }

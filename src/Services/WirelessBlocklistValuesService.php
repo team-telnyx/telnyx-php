@@ -9,7 +9,6 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\WirelessBlocklistValuesContract;
 use Telnyx\WirelessBlocklistValues\WirelessBlocklistValueListParams;
-use Telnyx\WirelessBlocklistValues\WirelessBlocklistValueListParams\Type;
 use Telnyx\WirelessBlocklistValues\WirelessBlocklistValueListResponse;
 
 final class WirelessBlocklistValuesService implements WirelessBlocklistValuesContract
@@ -24,33 +23,19 @@ final class WirelessBlocklistValuesService implements WirelessBlocklistValuesCon
      *
      * Retrieve all wireless blocklist values for a given blocklist type.
      *
-     * @param Type|value-of<Type> $type The Wireless Blocklist type for which to list possible values (e.g., `country`, `mcc`, `plmn`).
+     * @param array{
+     *   type: "country"|"mcc"|"plmn"
+     * }|WirelessBlocklistValueListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $type,
-        ?RequestOptions $requestOptions = null
-    ): WirelessBlocklistValueListResponse {
-        $params = ['type' => $type];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|WirelessBlocklistValueListParams $params,
+        ?RequestOptions $requestOptions = null,
     ): WirelessBlocklistValueListResponse {
         [$parsed, $options] = WirelessBlocklistValueListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

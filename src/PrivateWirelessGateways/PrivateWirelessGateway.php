@@ -10,16 +10,16 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type PrivateWirelessGatewayShape = array{
- *   id?: string,
- *   assignedResources?: list<PwgAssignedResourcesSummary>,
- *   createdAt?: string,
- *   ipRange?: string,
- *   name?: string,
- *   networkID?: string,
- *   recordType?: string,
- *   regionCode?: string,
- *   status?: PrivateWirelessGatewayStatus,
- *   updatedAt?: string,
+ *   id?: string|null,
+ *   assigned_resources?: list<PwgAssignedResourcesSummary>|null,
+ *   created_at?: string|null,
+ *   ip_range?: string|null,
+ *   name?: string|null,
+ *   network_id?: string|null,
+ *   record_type?: string|null,
+ *   region_code?: string|null,
+ *   status?: PrivateWirelessGatewayStatus|null,
+ *   updated_at?: string|null,
  * }
  */
 final class PrivateWirelessGateway implements BaseModel
@@ -36,26 +36,22 @@ final class PrivateWirelessGateway implements BaseModel
     /**
      * A list of the resources that have been assigned to the Private Wireless Gateway.
      *
-     * @var list<PwgAssignedResourcesSummary>|null $assignedResources
+     * @var list<PwgAssignedResourcesSummary>|null $assigned_resources
      */
-    #[Api(
-        'assigned_resources',
-        list: PwgAssignedResourcesSummary::class,
-        optional: true,
-    )]
-    public ?array $assignedResources;
+    #[Api(list: PwgAssignedResourcesSummary::class, optional: true)]
+    public ?array $assigned_resources;
 
     /**
      * ISO 8601 formatted date-time indicating when the resource was created.
      */
-    #[Api('created_at', optional: true)]
-    public ?string $createdAt;
+    #[Api(optional: true)]
+    public ?string $created_at;
 
     /**
      * IP block used to assign IPs to the SIM cards in the Private Wireless Gateway.
      */
-    #[Api('ip_range', optional: true)]
-    public ?string $ipRange;
+    #[Api(optional: true)]
+    public ?string $ip_range;
 
     /**
      * The private wireless gateway name.
@@ -66,17 +62,17 @@ final class PrivateWirelessGateway implements BaseModel
     /**
      * The identification of the related network resource.
      */
-    #[Api('network_id', optional: true)]
-    public ?string $networkID;
+    #[Api(optional: true)]
+    public ?string $network_id;
 
-    #[Api('record_type', optional: true)]
-    public ?string $recordType;
+    #[Api(optional: true)]
+    public ?string $record_type;
 
     /**
      * The name of the region where the Private Wireless Gateway is deployed.
      */
-    #[Api('region_code', optional: true)]
-    public ?string $regionCode;
+    #[Api(optional: true)]
+    public ?string $region_code;
 
     /**
      * The current status or failure details of the Private Wireless Gateway.
@@ -87,8 +83,8 @@ final class PrivateWirelessGateway implements BaseModel
     /**
      * ISO 8601 formatted date-time indicating when the resource was updated.
      */
-    #[Api('updated_at', optional: true)]
-    public ?string $updatedAt;
+    #[Api(optional: true)]
+    public ?string $updated_at;
 
     public function __construct()
     {
@@ -100,32 +96,32 @@ final class PrivateWirelessGateway implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<PwgAssignedResourcesSummary> $assignedResources
+     * @param list<PwgAssignedResourcesSummary> $assigned_resources
      */
     public static function with(
         ?string $id = null,
-        ?array $assignedResources = null,
-        ?string $createdAt = null,
-        ?string $ipRange = null,
+        ?array $assigned_resources = null,
+        ?string $created_at = null,
+        ?string $ip_range = null,
         ?string $name = null,
-        ?string $networkID = null,
-        ?string $recordType = null,
-        ?string $regionCode = null,
+        ?string $network_id = null,
+        ?string $record_type = null,
+        ?string $region_code = null,
         ?PrivateWirelessGatewayStatus $status = null,
-        ?string $updatedAt = null,
+        ?string $updated_at = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj->id = $id;
-        null !== $assignedResources && $obj->assignedResources = $assignedResources;
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $ipRange && $obj->ipRange = $ipRange;
+        null !== $assigned_resources && $obj->assigned_resources = $assigned_resources;
+        null !== $created_at && $obj->created_at = $created_at;
+        null !== $ip_range && $obj->ip_range = $ip_range;
         null !== $name && $obj->name = $name;
-        null !== $networkID && $obj->networkID = $networkID;
-        null !== $recordType && $obj->recordType = $recordType;
-        null !== $regionCode && $obj->regionCode = $regionCode;
+        null !== $network_id && $obj->network_id = $network_id;
+        null !== $record_type && $obj->record_type = $record_type;
+        null !== $region_code && $obj->region_code = $region_code;
         null !== $status && $obj->status = $status;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
+        null !== $updated_at && $obj->updated_at = $updated_at;
 
         return $obj;
     }
@@ -149,7 +145,7 @@ final class PrivateWirelessGateway implements BaseModel
     public function withAssignedResources(array $assignedResources): self
     {
         $obj = clone $this;
-        $obj->assignedResources = $assignedResources;
+        $obj->assigned_resources = $assignedResources;
 
         return $obj;
     }
@@ -160,7 +156,7 @@ final class PrivateWirelessGateway implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }
@@ -171,7 +167,7 @@ final class PrivateWirelessGateway implements BaseModel
     public function withIPRange(string $ipRange): self
     {
         $obj = clone $this;
-        $obj->ipRange = $ipRange;
+        $obj->ip_range = $ipRange;
 
         return $obj;
     }
@@ -193,7 +189,7 @@ final class PrivateWirelessGateway implements BaseModel
     public function withNetworkID(string $networkID): self
     {
         $obj = clone $this;
-        $obj->networkID = $networkID;
+        $obj->network_id = $networkID;
 
         return $obj;
     }
@@ -201,7 +197,7 @@ final class PrivateWirelessGateway implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType;
+        $obj->record_type = $recordType;
 
         return $obj;
     }
@@ -212,7 +208,7 @@ final class PrivateWirelessGateway implements BaseModel
     public function withRegionCode(string $regionCode): self
     {
         $obj = clone $this;
-        $obj->regionCode = $regionCode;
+        $obj->region_code = $regionCode;
 
         return $obj;
     }
@@ -234,7 +230,7 @@ final class PrivateWirelessGateway implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $obj->updated_at = $updatedAt;
 
         return $obj;
     }

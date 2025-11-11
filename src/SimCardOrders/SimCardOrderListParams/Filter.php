@@ -14,11 +14,11 @@ use Telnyx\SimCardOrders\SimCardOrderListParams\Filter\Cost;
  * Consolidated filter parameter for SIM card orders (deepObject style). Originally: filter[created_at], filter[updated_at], filter[quantity], filter[cost.amount], filter[cost.currency], filter[address.id], filter[address.street_address], filter[address.extended_address], filter[address.locality], filter[address.administrative_area], filter[address.country_code], filter[address.postal_code].
  *
  * @phpstan-type FilterShape = array{
- *   address?: Address,
- *   cost?: Cost,
- *   createdAt?: \DateTimeInterface,
- *   quantity?: int,
- *   updatedAt?: \DateTimeInterface,
+ *   address?: Address|null,
+ *   cost?: Cost|null,
+ *   created_at?: \DateTimeInterface|null,
+ *   quantity?: int|null,
+ *   updated_at?: \DateTimeInterface|null,
  * }
  */
 final class Filter implements BaseModel
@@ -35,8 +35,8 @@ final class Filter implements BaseModel
     /**
      * Filter by ISO 8601 formatted date-time string matching resource creation date-time.
      */
-    #[Api('created_at', optional: true)]
-    public ?\DateTimeInterface $createdAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $created_at;
 
     /**
      * Filter orders by how many SIM cards were ordered.
@@ -47,8 +47,8 @@ final class Filter implements BaseModel
     /**
      * Filter by ISO 8601 formatted date-time string matching resource last update date-time.
      */
-    #[Api('updated_at', optional: true)]
-    public ?\DateTimeInterface $updatedAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $updated_at;
 
     public function __construct()
     {
@@ -63,17 +63,17 @@ final class Filter implements BaseModel
     public static function with(
         ?Address $address = null,
         ?Cost $cost = null,
-        ?\DateTimeInterface $createdAt = null,
+        ?\DateTimeInterface $created_at = null,
         ?int $quantity = null,
-        ?\DateTimeInterface $updatedAt = null,
+        ?\DateTimeInterface $updated_at = null,
     ): self {
         $obj = new self;
 
         null !== $address && $obj->address = $address;
         null !== $cost && $obj->cost = $cost;
-        null !== $createdAt && $obj->createdAt = $createdAt;
+        null !== $created_at && $obj->created_at = $created_at;
         null !== $quantity && $obj->quantity = $quantity;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
+        null !== $updated_at && $obj->updated_at = $updated_at;
 
         return $obj;
     }
@@ -100,7 +100,7 @@ final class Filter implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }
@@ -122,7 +122,7 @@ final class Filter implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $obj->updated_at = $updatedAt;
 
         return $obj;
     }

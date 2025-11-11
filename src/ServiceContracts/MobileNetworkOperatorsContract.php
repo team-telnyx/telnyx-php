@@ -5,38 +5,21 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\MobileNetworkOperators\MobileNetworkOperatorListParams\Filter;
-use Telnyx\MobileNetworkOperators\MobileNetworkOperatorListParams\Page;
+use Telnyx\MobileNetworkOperators\MobileNetworkOperatorListParams;
 use Telnyx\MobileNetworkOperators\MobileNetworkOperatorListResponse;
 use Telnyx\RequestOptions;
-
-use const Telnyx\Core\OMIT as omit;
 
 interface MobileNetworkOperatorsContract
 {
     /**
      * @api
      *
-     * @param Filter $filter Consolidated filter parameter for mobile network operators (deepObject style). Originally: filter[name][starts_with], filter[name][contains], filter[name][ends_with], filter[country_code], filter[mcc], filter[mnc], filter[tadig], filter[network_preferences_enabled]
-     * @param Page $page Consolidated pagination parameter (deepObject style). Originally: page[number], page[size]
+     * @param array<mixed>|MobileNetworkOperatorListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): MobileNetworkOperatorListResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|MobileNetworkOperatorListParams $params,
+        ?RequestOptions $requestOptions = null,
     ): MobileNetworkOperatorListResponse;
 }

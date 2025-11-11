@@ -23,38 +23,38 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  *   email: string,
  *   entityType: value-of<EntityType>,
  *   vertical: string,
- *   altBusinessID?: string,
- *   altBusinessIDType?: value-of<AltBusinessIDType>,
- *   brandID?: string,
- *   businessContactEmail?: string,
- *   city?: string,
- *   companyName?: string,
- *   createdAt?: string,
- *   cspID?: string,
- *   ein?: string,
- *   failureReasons?: string,
- *   firstName?: string,
- *   identityStatus?: value-of<BrandIdentityStatus>,
- *   ipAddress?: string,
- *   isReseller?: bool,
- *   lastName?: string,
- *   mobilePhone?: string,
- *   mock?: bool,
- *   optionalAttributes?: OptionalAttributes,
- *   phone?: string,
- *   postalCode?: string,
- *   referenceID?: string,
- *   state?: string,
- *   status?: value-of<Status>,
- *   stockExchange?: value-of<StockExchange>,
- *   stockSymbol?: string,
- *   street?: string,
- *   tcrBrandID?: string,
- *   universalEin?: string,
- *   updatedAt?: string,
- *   webhookFailoverURL?: string,
- *   webhookURL?: string,
- *   website?: string,
+ *   altBusinessId?: string|null,
+ *   altBusinessIdType?: value-of<AltBusinessIDType>|null,
+ *   brandId?: string|null,
+ *   businessContactEmail?: string|null,
+ *   city?: string|null,
+ *   companyName?: string|null,
+ *   createdAt?: string|null,
+ *   cspId?: string|null,
+ *   ein?: string|null,
+ *   failureReasons?: string|null,
+ *   firstName?: string|null,
+ *   identityStatus?: value-of<BrandIdentityStatus>|null,
+ *   ipAddress?: string|null,
+ *   isReseller?: bool|null,
+ *   lastName?: string|null,
+ *   mobilePhone?: string|null,
+ *   mock?: bool|null,
+ *   optionalAttributes?: OptionalAttributes|null,
+ *   phone?: string|null,
+ *   postalCode?: string|null,
+ *   referenceId?: string|null,
+ *   state?: string|null,
+ *   status?: value-of<Status>|null,
+ *   stockExchange?: value-of<StockExchange>|null,
+ *   stockSymbol?: string|null,
+ *   street?: string|null,
+ *   tcrBrandId?: string|null,
+ *   universalEin?: string|null,
+ *   updatedAt?: string|null,
+ *   webhookFailoverURL?: string|null,
+ *   webhookURL?: string|null,
+ *   website?: string|null,
  * }
  */
 final class TelnyxBrand implements BaseModel, ResponseConverter
@@ -107,22 +107,22 @@ final class TelnyxBrand implements BaseModel, ResponseConverter
     /**
      * Alternate business identifier such as DUNS, LEI, or GIIN.
      */
-    #[Api('altBusinessId', optional: true)]
-    public ?string $altBusinessID;
+    #[Api(optional: true)]
+    public ?string $altBusinessId;
 
     /**
      * An enumeration.
      *
-     * @var value-of<AltBusinessIDType>|null $altBusinessIDType
+     * @var value-of<AltBusinessIDType>|null $altBusinessIdType
      */
-    #[Api('altBusinessIdType', enum: AltBusinessIDType::class, optional: true)]
-    public ?string $altBusinessIDType;
+    #[Api(enum: AltBusinessIDType::class, optional: true)]
+    public ?string $altBusinessIdType;
 
     /**
      * Unique identifier assigned to the brand.
      */
-    #[Api('brandId', optional: true)]
-    public ?string $brandID;
+    #[Api(optional: true)]
+    public ?string $brandId;
 
     /**
      * Business contact email.
@@ -153,8 +153,8 @@ final class TelnyxBrand implements BaseModel, ResponseConverter
     /**
      * Unique identifier assigned to the csp by the registry.
      */
-    #[Api('cspId', optional: true)]
-    public ?string $cspID;
+    #[Api(optional: true)]
+    public ?string $cspId;
 
     /**
      * (Required for Non-profit) Government assigned corporate tax ID. EIN is 9-digits in U.S.
@@ -230,8 +230,8 @@ final class TelnyxBrand implements BaseModel, ResponseConverter
     /**
      * Unique identifier Telnyx assigned to the brand - the brandId.
      */
-    #[Api('referenceId', optional: true)]
-    public ?string $referenceID;
+    #[Api(optional: true)]
+    public ?string $referenceId;
 
     /**
      * State. Must be 2 letters code for United States.
@@ -270,8 +270,8 @@ final class TelnyxBrand implements BaseModel, ResponseConverter
     /**
      * Unique identifier assigned to the brand by the registry.
      */
-    #[Api('tcrBrandId', optional: true)]
-    public ?string $tcrBrandID;
+    #[Api(optional: true)]
+    public ?string $tcrBrandId;
 
     /**
      * Universal EIN of Brand, Read Only.
@@ -342,7 +342,7 @@ final class TelnyxBrand implements BaseModel, ResponseConverter
      *
      * @param BrandRelationship|value-of<BrandRelationship> $brandRelationship
      * @param EntityType|value-of<EntityType> $entityType
-     * @param AltBusinessIDType|value-of<AltBusinessIDType> $altBusinessIDType
+     * @param AltBusinessIDType|value-of<AltBusinessIDType> $altBusinessIdType
      * @param BrandIdentityStatus|value-of<BrandIdentityStatus> $identityStatus
      * @param Status|value-of<Status> $status
      * @param StockExchange|value-of<StockExchange> $stockExchange
@@ -354,14 +354,14 @@ final class TelnyxBrand implements BaseModel, ResponseConverter
         string $email,
         EntityType|string $entityType,
         string $vertical,
-        ?string $altBusinessID = null,
-        AltBusinessIDType|string|null $altBusinessIDType = null,
-        ?string $brandID = null,
+        ?string $altBusinessId = null,
+        AltBusinessIDType|string|null $altBusinessIdType = null,
+        ?string $brandId = null,
         ?string $businessContactEmail = null,
         ?string $city = null,
         ?string $companyName = null,
         ?string $createdAt = null,
-        ?string $cspID = null,
+        ?string $cspId = null,
         ?string $ein = null,
         ?string $failureReasons = null,
         ?string $firstName = null,
@@ -374,13 +374,13 @@ final class TelnyxBrand implements BaseModel, ResponseConverter
         ?OptionalAttributes $optionalAttributes = null,
         ?string $phone = null,
         ?string $postalCode = null,
-        ?string $referenceID = null,
+        ?string $referenceId = null,
         ?string $state = null,
         Status|string|null $status = null,
         StockExchange|string|null $stockExchange = null,
         ?string $stockSymbol = null,
         ?string $street = null,
-        ?string $tcrBrandID = null,
+        ?string $tcrBrandId = null,
         ?string $universalEin = null,
         ?string $updatedAt = null,
         ?string $webhookFailoverURL = null,
@@ -396,14 +396,14 @@ final class TelnyxBrand implements BaseModel, ResponseConverter
         $obj['entityType'] = $entityType;
         $obj->vertical = $vertical;
 
-        null !== $altBusinessID && $obj->altBusinessID = $altBusinessID;
-        null !== $altBusinessIDType && $obj['altBusinessIDType'] = $altBusinessIDType;
-        null !== $brandID && $obj->brandID = $brandID;
+        null !== $altBusinessId && $obj->altBusinessId = $altBusinessId;
+        null !== $altBusinessIdType && $obj['altBusinessIdType'] = $altBusinessIdType;
+        null !== $brandId && $obj->brandId = $brandId;
         null !== $businessContactEmail && $obj->businessContactEmail = $businessContactEmail;
         null !== $city && $obj->city = $city;
         null !== $companyName && $obj->companyName = $companyName;
         null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $cspID && $obj->cspID = $cspID;
+        null !== $cspId && $obj->cspId = $cspId;
         null !== $ein && $obj->ein = $ein;
         null !== $failureReasons && $obj->failureReasons = $failureReasons;
         null !== $firstName && $obj->firstName = $firstName;
@@ -416,13 +416,13 @@ final class TelnyxBrand implements BaseModel, ResponseConverter
         null !== $optionalAttributes && $obj->optionalAttributes = $optionalAttributes;
         null !== $phone && $obj->phone = $phone;
         null !== $postalCode && $obj->postalCode = $postalCode;
-        null !== $referenceID && $obj->referenceID = $referenceID;
+        null !== $referenceId && $obj->referenceId = $referenceId;
         null !== $state && $obj->state = $state;
         null !== $status && $obj['status'] = $status;
         null !== $stockExchange && $obj['stockExchange'] = $stockExchange;
         null !== $stockSymbol && $obj->stockSymbol = $stockSymbol;
         null !== $street && $obj->street = $street;
-        null !== $tcrBrandID && $obj->tcrBrandID = $tcrBrandID;
+        null !== $tcrBrandId && $obj->tcrBrandId = $tcrBrandId;
         null !== $universalEin && $obj->universalEin = $universalEin;
         null !== $updatedAt && $obj->updatedAt = $updatedAt;
         null !== $webhookFailoverURL && $obj->webhookFailoverURL = $webhookFailoverURL;
@@ -509,7 +509,7 @@ final class TelnyxBrand implements BaseModel, ResponseConverter
     public function withAltBusinessID(string $altBusinessID): self
     {
         $obj = clone $this;
-        $obj->altBusinessID = $altBusinessID;
+        $obj->altBusinessId = $altBusinessID;
 
         return $obj;
     }
@@ -523,7 +523,7 @@ final class TelnyxBrand implements BaseModel, ResponseConverter
         AltBusinessIDType|string $altBusinessIDType
     ): self {
         $obj = clone $this;
-        $obj['altBusinessIDType'] = $altBusinessIDType;
+        $obj['altBusinessIdType'] = $altBusinessIDType;
 
         return $obj;
     }
@@ -534,7 +534,7 @@ final class TelnyxBrand implements BaseModel, ResponseConverter
     public function withBrandID(string $brandID): self
     {
         $obj = clone $this;
-        $obj->brandID = $brandID;
+        $obj->brandId = $brandID;
 
         return $obj;
     }
@@ -591,7 +591,7 @@ final class TelnyxBrand implements BaseModel, ResponseConverter
     public function withCspID(string $cspID): self
     {
         $obj = clone $this;
-        $obj->cspID = $cspID;
+        $obj->cspId = $cspID;
 
         return $obj;
     }
@@ -735,7 +735,7 @@ final class TelnyxBrand implements BaseModel, ResponseConverter
     public function withReferenceID(string $referenceID): self
     {
         $obj = clone $this;
-        $obj->referenceID = $referenceID;
+        $obj->referenceId = $referenceID;
 
         return $obj;
     }
@@ -805,7 +805,7 @@ final class TelnyxBrand implements BaseModel, ResponseConverter
     public function withTcrBrandID(string $tcrBrandID): self
     {
         $obj = clone $this;
-        $obj->tcrBrandID = $tcrBrandID;
+        $obj->tcrBrandId = $tcrBrandID;
 
         return $obj;
     }

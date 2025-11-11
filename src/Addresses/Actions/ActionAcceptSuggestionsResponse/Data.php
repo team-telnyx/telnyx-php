@@ -11,7 +11,9 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type DataShape = array{
- *   id?: string, accepted?: bool, recordType?: value-of<RecordType>
+ *   id?: string|null,
+ *   accepted?: bool|null,
+ *   record_type?: value-of<RecordType>|null,
  * }
  */
 final class Data implements BaseModel
@@ -31,9 +33,9 @@ final class Data implements BaseModel
     #[Api(optional: true)]
     public ?bool $accepted;
 
-    /** @var value-of<RecordType>|null $recordType */
-    #[Api('record_type', enum: RecordType::class, optional: true)]
-    public ?string $recordType;
+    /** @var value-of<RecordType>|null $record_type */
+    #[Api(enum: RecordType::class, optional: true)]
+    public ?string $record_type;
 
     public function __construct()
     {
@@ -45,18 +47,18 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param RecordType|value-of<RecordType> $recordType
+     * @param RecordType|value-of<RecordType> $record_type
      */
     public static function with(
         ?string $id = null,
         ?bool $accepted = null,
-        RecordType|string|null $recordType = null,
+        RecordType|string|null $record_type = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj->id = $id;
         null !== $accepted && $obj->accepted = $accepted;
-        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $record_type && $obj['record_type'] = $record_type;
 
         return $obj;
     }
@@ -89,7 +91,7 @@ final class Data implements BaseModel
     public function withRecordType(RecordType|string $recordType): self
     {
         $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }

@@ -8,17 +8,13 @@ use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberGetResponse;
 use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberListParams;
-use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberListParams\Filter;
 use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberListResponse;
 use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberUpdateRequirementGroupParams;
 use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberUpdateRequirementGroupResponse;
 use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberUpdateRequirementsParams;
 use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberUpdateRequirementsResponse;
-use Telnyx\NumberOrderPhoneNumbers\UpdateRegulatoryRequirement;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\NumberOrderPhoneNumbersContract;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class NumberOrderPhoneNumbersService implements NumberOrderPhoneNumbersContract
 {
@@ -52,33 +48,19 @@ final class NumberOrderPhoneNumbersService implements NumberOrderPhoneNumbersCon
      *
      * Get a list of phone numbers associated to orders.
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[country_code]
+     * @param array{
+     *   filter?: array{country_code?: string}
+     * }|NumberOrderPhoneNumberListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        ?RequestOptions $requestOptions = null
-    ): NumberOrderPhoneNumberListResponse {
-        $params = ['filter' => $filter];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|NumberOrderPhoneNumberListParams $params,
+        ?RequestOptions $requestOptions = null,
     ): NumberOrderPhoneNumberListResponse {
         [$parsed, $options] = NumberOrderPhoneNumberListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -96,37 +78,20 @@ final class NumberOrderPhoneNumbersService implements NumberOrderPhoneNumbersCon
      *
      * Update requirement group for a phone number order
      *
-     * @param string $requirementGroupID The ID of the requirement group to associate
+     * @param array{
+     *   requirement_group_id: string
+     * }|NumberOrderPhoneNumberUpdateRequirementGroupParams $params
      *
      * @throws APIException
      */
     public function updateRequirementGroup(
         string $id,
-        $requirementGroupID,
-        ?RequestOptions $requestOptions = null
+        array|NumberOrderPhoneNumberUpdateRequirementGroupParams $params,
+        ?RequestOptions $requestOptions = null,
     ): NumberOrderPhoneNumberUpdateRequirementGroupResponse {
-        $params = ['requirementGroupID' => $requirementGroupID];
-
-        return $this->updateRequirementGroupRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRequirementGroupRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): NumberOrderPhoneNumberUpdateRequirementGroupResponse {
-        [
-            $parsed, $options,
-        ] = NumberOrderPhoneNumberUpdateRequirementGroupParams::parseRequest(
+        [$parsed, $options] = NumberOrderPhoneNumberUpdateRequirementGroupParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -144,41 +109,22 @@ final class NumberOrderPhoneNumbersService implements NumberOrderPhoneNumbersCon
      *
      * Updates requirements for a single phone number within a number order.
      *
-     * @param list<UpdateRegulatoryRequirement> $regulatoryRequirements
+     * @param array{
+     *   regulatory_requirements?: list<array{
+     *     field_value?: string, requirement_id?: string
+     *   }>,
+     * }|NumberOrderPhoneNumberUpdateRequirementsParams $params
      *
      * @throws APIException
      */
     public function updateRequirements(
         string $numberOrderPhoneNumberID,
-        $regulatoryRequirements = omit,
+        array|NumberOrderPhoneNumberUpdateRequirementsParams $params,
         ?RequestOptions $requestOptions = null,
     ): NumberOrderPhoneNumberUpdateRequirementsResponse {
-        $params = ['regulatoryRequirements' => $regulatoryRequirements];
-
-        return $this->updateRequirementsRaw(
-            $numberOrderPhoneNumberID,
+        [$parsed, $options] = NumberOrderPhoneNumberUpdateRequirementsParams::parseRequest(
             $params,
-            $requestOptions
-        );
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRequirementsRaw(
-        string $numberOrderPhoneNumberID,
-        array $params,
-        ?RequestOptions $requestOptions = null,
-    ): NumberOrderPhoneNumberUpdateRequirementsResponse {
-        [
-            $parsed, $options,
-        ] = NumberOrderPhoneNumberUpdateRequirementsParams::parseRequest(
-            $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

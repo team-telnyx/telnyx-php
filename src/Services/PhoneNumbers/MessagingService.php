@@ -8,14 +8,11 @@ use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\PhoneNumbers\Messaging\MessagingGetResponse;
 use Telnyx\PhoneNumbers\Messaging\MessagingListParams;
-use Telnyx\PhoneNumbers\Messaging\MessagingListParams\Page;
 use Telnyx\PhoneNumbers\Messaging\MessagingListResponse;
 use Telnyx\PhoneNumbers\Messaging\MessagingUpdateParams;
 use Telnyx\PhoneNumbers\Messaging\MessagingUpdateResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PhoneNumbers\MessagingContract;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class MessagingService implements MessagingContract
 {
@@ -49,47 +46,20 @@ final class MessagingService implements MessagingContract
      *
      * Update the messaging profile and/or messaging product of a phone number
      *
-     * @param string $messagingProduct Configure the messaging product for this number:
-     *
-     * * Omit this field or set its value to `null` to keep the current value.
-     * * Set this field to a quoted product ID to set this phone number to that product
-     * @param string $messagingProfileID Configure the messaging profile this phone number is assigned to:
-     *
-     * * Omit this field or set its value to `null` to keep the current value.
-     * * Set this field to `""` to unassign the number from its messaging profile
-     * * Set this field to a quoted UUID of a messaging profile to assign this number to that messaging profile
+     * @param array{
+     *   messaging_product?: string, messaging_profile_id?: string
+     * }|MessagingUpdateParams $params
      *
      * @throws APIException
      */
     public function update(
         string $id,
-        $messagingProduct = omit,
-        $messagingProfileID = omit,
+        array|MessagingUpdateParams $params,
         ?RequestOptions $requestOptions = null,
-    ): MessagingUpdateResponse {
-        $params = [
-            'messagingProduct' => $messagingProduct,
-            'messagingProfileID' => $messagingProfileID,
-        ];
-
-        return $this->updateRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): MessagingUpdateResponse {
         [$parsed, $options] = MessagingUpdateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -107,33 +77,17 @@ final class MessagingService implements MessagingContract
      *
      * List phone numbers with messaging settings
      *
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param array{page?: array{number?: int, size?: int}}|MessagingListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): MessagingListResponse {
-        $params = ['page' => $page];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
+        array|MessagingListParams $params,
         ?RequestOptions $requestOptions = null
     ): MessagingListResponse {
         [$parsed, $options] = MessagingListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

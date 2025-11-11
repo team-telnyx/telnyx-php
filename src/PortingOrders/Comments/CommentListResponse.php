@@ -14,7 +14,7 @@ use Telnyx\PortingOrders\Comments\CommentListResponse\Data;
 
 /**
  * @phpstan-type CommentListResponseShape = array{
- *   data?: list<Data>, meta?: PaginationMeta
+ *   data?: list<Data>|null, meta?: PaginationMeta|null
  * }
  */
 final class CommentListResponse implements BaseModel, ResponseConverter

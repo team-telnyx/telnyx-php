@@ -13,13 +13,13 @@ use Telnyx\Core\Contracts\BaseModel;
  * The settings associated with the authentication provider.
  *
  * @phpstan-type SettingsShape = array{
- *   assertionConsumerServiceURL?: string,
- *   idpCertFingerprint?: string,
- *   idpCertFingerprintAlgorithm?: value-of<IdpCertFingerprintAlgorithm>,
- *   idpEntityID?: string,
- *   idpSSOTargetURL?: string,
- *   nameIdentifierFormat?: string,
- *   serviceProviderEntityID?: string,
+ *   assertion_consumer_service_url?: string|null,
+ *   idp_cert_fingerprint?: string|null,
+ *   idp_cert_fingerprint_algorithm?: value-of<IdpCertFingerprintAlgorithm>|null,
+ *   idp_entity_id?: string|null,
+ *   idp_sso_target_url?: string|null,
+ *   name_identifier_format?: string|null,
+ *   service_provider_entity_id?: string|null,
  * }
  */
 final class Settings implements BaseModel
@@ -30,50 +30,46 @@ final class Settings implements BaseModel
     /**
      * The Assertion Consumer Service URL for the service provider (Telnyx).
      */
-    #[Api('assertion_consumer_service_url', optional: true)]
-    public ?string $assertionConsumerServiceURL;
+    #[Api(optional: true)]
+    public ?string $assertion_consumer_service_url;
 
     /**
      * The certificate fingerprint for the identity provider (IdP).
      */
-    #[Api('idp_cert_fingerprint', optional: true)]
-    public ?string $idpCertFingerprint;
+    #[Api(optional: true)]
+    public ?string $idp_cert_fingerprint;
 
     /**
      * The algorithm used to generate the identity provider's (IdP) certificate fingerprint.
      *
-     * @var value-of<IdpCertFingerprintAlgorithm>|null $idpCertFingerprintAlgorithm
+     * @var value-of<IdpCertFingerprintAlgorithm>|null $idp_cert_fingerprint_algorithm
      */
-    #[Api(
-        'idp_cert_fingerprint_algorithm',
-        enum: IdpCertFingerprintAlgorithm::class,
-        optional: true,
-    )]
-    public ?string $idpCertFingerprintAlgorithm;
+    #[Api(enum: IdpCertFingerprintAlgorithm::class, optional: true)]
+    public ?string $idp_cert_fingerprint_algorithm;
 
     /**
      * The Entity ID for the identity provider (IdP).
      */
-    #[Api('idp_entity_id', optional: true)]
-    public ?string $idpEntityID;
+    #[Api(optional: true)]
+    public ?string $idp_entity_id;
 
     /**
      * The SSO target url for the identity provider (IdP).
      */
-    #[Api('idp_sso_target_url', optional: true)]
-    public ?string $idpSSOTargetURL;
+    #[Api(optional: true)]
+    public ?string $idp_sso_target_url;
 
     /**
      * The name identifier format associated with the authentication provider. This must be the same for both the Identity Provider (IdP) and the service provider (Telnyx).
      */
-    #[Api('name_identifier_format', optional: true)]
-    public ?string $nameIdentifierFormat;
+    #[Api(optional: true)]
+    public ?string $name_identifier_format;
 
     /**
      * The Entity ID for the service provider (Telnyx).
      */
-    #[Api('service_provider_entity_id', optional: true)]
-    public ?string $serviceProviderEntityID;
+    #[Api(optional: true)]
+    public ?string $service_provider_entity_id;
 
     public function __construct()
     {
@@ -85,26 +81,26 @@ final class Settings implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param IdpCertFingerprintAlgorithm|value-of<IdpCertFingerprintAlgorithm> $idpCertFingerprintAlgorithm
+     * @param IdpCertFingerprintAlgorithm|value-of<IdpCertFingerprintAlgorithm> $idp_cert_fingerprint_algorithm
      */
     public static function with(
-        ?string $assertionConsumerServiceURL = null,
-        ?string $idpCertFingerprint = null,
-        IdpCertFingerprintAlgorithm|string|null $idpCertFingerprintAlgorithm = null,
-        ?string $idpEntityID = null,
-        ?string $idpSSOTargetURL = null,
-        ?string $nameIdentifierFormat = null,
-        ?string $serviceProviderEntityID = null,
+        ?string $assertion_consumer_service_url = null,
+        ?string $idp_cert_fingerprint = null,
+        IdpCertFingerprintAlgorithm|string|null $idp_cert_fingerprint_algorithm = null,
+        ?string $idp_entity_id = null,
+        ?string $idp_sso_target_url = null,
+        ?string $name_identifier_format = null,
+        ?string $service_provider_entity_id = null,
     ): self {
         $obj = new self;
 
-        null !== $assertionConsumerServiceURL && $obj->assertionConsumerServiceURL = $assertionConsumerServiceURL;
-        null !== $idpCertFingerprint && $obj->idpCertFingerprint = $idpCertFingerprint;
-        null !== $idpCertFingerprintAlgorithm && $obj['idpCertFingerprintAlgorithm'] = $idpCertFingerprintAlgorithm;
-        null !== $idpEntityID && $obj->idpEntityID = $idpEntityID;
-        null !== $idpSSOTargetURL && $obj->idpSSOTargetURL = $idpSSOTargetURL;
-        null !== $nameIdentifierFormat && $obj->nameIdentifierFormat = $nameIdentifierFormat;
-        null !== $serviceProviderEntityID && $obj->serviceProviderEntityID = $serviceProviderEntityID;
+        null !== $assertion_consumer_service_url && $obj->assertion_consumer_service_url = $assertion_consumer_service_url;
+        null !== $idp_cert_fingerprint && $obj->idp_cert_fingerprint = $idp_cert_fingerprint;
+        null !== $idp_cert_fingerprint_algorithm && $obj['idp_cert_fingerprint_algorithm'] = $idp_cert_fingerprint_algorithm;
+        null !== $idp_entity_id && $obj->idp_entity_id = $idp_entity_id;
+        null !== $idp_sso_target_url && $obj->idp_sso_target_url = $idp_sso_target_url;
+        null !== $name_identifier_format && $obj->name_identifier_format = $name_identifier_format;
+        null !== $service_provider_entity_id && $obj->service_provider_entity_id = $service_provider_entity_id;
 
         return $obj;
     }
@@ -116,7 +112,7 @@ final class Settings implements BaseModel
         string $assertionConsumerServiceURL
     ): self {
         $obj = clone $this;
-        $obj->assertionConsumerServiceURL = $assertionConsumerServiceURL;
+        $obj->assertion_consumer_service_url = $assertionConsumerServiceURL;
 
         return $obj;
     }
@@ -127,7 +123,7 @@ final class Settings implements BaseModel
     public function withIdpCertFingerprint(string $idpCertFingerprint): self
     {
         $obj = clone $this;
-        $obj->idpCertFingerprint = $idpCertFingerprint;
+        $obj->idp_cert_fingerprint = $idpCertFingerprint;
 
         return $obj;
     }
@@ -141,7 +137,7 @@ final class Settings implements BaseModel
         IdpCertFingerprintAlgorithm|string $idpCertFingerprintAlgorithm
     ): self {
         $obj = clone $this;
-        $obj['idpCertFingerprintAlgorithm'] = $idpCertFingerprintAlgorithm;
+        $obj['idp_cert_fingerprint_algorithm'] = $idpCertFingerprintAlgorithm;
 
         return $obj;
     }
@@ -152,7 +148,7 @@ final class Settings implements BaseModel
     public function withIdpEntityID(string $idpEntityID): self
     {
         $obj = clone $this;
-        $obj->idpEntityID = $idpEntityID;
+        $obj->idp_entity_id = $idpEntityID;
 
         return $obj;
     }
@@ -163,7 +159,7 @@ final class Settings implements BaseModel
     public function withIdpSSOTargetURL(string $idpSSOTargetURL): self
     {
         $obj = clone $this;
-        $obj->idpSSOTargetURL = $idpSSOTargetURL;
+        $obj->idp_sso_target_url = $idpSSOTargetURL;
 
         return $obj;
     }
@@ -174,7 +170,7 @@ final class Settings implements BaseModel
     public function withNameIdentifierFormat(string $nameIdentifierFormat): self
     {
         $obj = clone $this;
-        $obj->nameIdentifierFormat = $nameIdentifierFormat;
+        $obj->name_identifier_format = $nameIdentifierFormat;
 
         return $obj;
     }
@@ -186,7 +182,7 @@ final class Settings implements BaseModel
         string $serviceProviderEntityID
     ): self {
         $obj = clone $this;
-        $obj->serviceProviderEntityID = $serviceProviderEntityID;
+        $obj->service_provider_entity_id = $serviceProviderEntityID;
 
         return $obj;
     }

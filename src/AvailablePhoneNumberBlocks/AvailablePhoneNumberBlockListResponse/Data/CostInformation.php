@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type CostInformationShape = array{
- *   currency?: string, monthlyCost?: string, upfrontCost?: string
+ *   currency?: string|null, monthly_cost?: string|null, upfront_cost?: string|null
  * }
  */
 final class CostInformation implements BaseModel
@@ -24,11 +24,11 @@ final class CostInformation implements BaseModel
     #[Api(optional: true)]
     public ?string $currency;
 
-    #[Api('monthly_cost', optional: true)]
-    public ?string $monthlyCost;
+    #[Api(optional: true)]
+    public ?string $monthly_cost;
 
-    #[Api('upfront_cost', optional: true)]
-    public ?string $upfrontCost;
+    #[Api(optional: true)]
+    public ?string $upfront_cost;
 
     public function __construct()
     {
@@ -42,14 +42,14 @@ final class CostInformation implements BaseModel
      */
     public static function with(
         ?string $currency = null,
-        ?string $monthlyCost = null,
-        ?string $upfrontCost = null,
+        ?string $monthly_cost = null,
+        ?string $upfront_cost = null,
     ): self {
         $obj = new self;
 
         null !== $currency && $obj->currency = $currency;
-        null !== $monthlyCost && $obj->monthlyCost = $monthlyCost;
-        null !== $upfrontCost && $obj->upfrontCost = $upfrontCost;
+        null !== $monthly_cost && $obj->monthly_cost = $monthly_cost;
+        null !== $upfront_cost && $obj->upfront_cost = $upfront_cost;
 
         return $obj;
     }
@@ -68,7 +68,7 @@ final class CostInformation implements BaseModel
     public function withMonthlyCost(string $monthlyCost): self
     {
         $obj = clone $this;
-        $obj->monthlyCost = $monthlyCost;
+        $obj->monthly_cost = $monthlyCost;
 
         return $obj;
     }
@@ -76,7 +76,7 @@ final class CostInformation implements BaseModel
     public function withUpfrontCost(string $upfrontCost): self
     {
         $obj = clone $this;
-        $obj->upfrontCost = $upfrontCost;
+        $obj->upfront_cost = $upfrontCost;
 
         return $obj;
     }

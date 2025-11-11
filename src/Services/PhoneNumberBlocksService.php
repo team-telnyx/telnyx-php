@@ -11,7 +11,7 @@ use Telnyx\Services\PhoneNumberBlocks\JobsService;
 final class PhoneNumberBlocksService implements PhoneNumberBlocksContract
 {
     /**
-     * @@api
+     * @api
      */
     public JobsService $jobs;
 

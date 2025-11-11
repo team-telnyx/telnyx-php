@@ -14,7 +14,7 @@ use Telnyx\Services\AI\Assistants\Tests\TestSuites\RunsService;
 final class TestSuitesService implements TestSuitesContract
 {
     /**
-     * @@api
+     * @api
      */
     public RunsService $runs;
 

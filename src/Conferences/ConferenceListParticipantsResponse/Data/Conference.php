@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Info about the conference that the participant is in.
  *
- * @phpstan-type ConferenceShape = array{id?: string, name?: string}
+ * @phpstan-type ConferenceShape = array{id?: string|null, name?: string|null}
  */
 final class Conference implements BaseModel
 {

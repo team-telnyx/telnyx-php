@@ -16,14 +16,14 @@ use Telnyx\Messsages\RcsSuggestion\Action\ViewLocationAction;
  * When tapped, initiates the corresponding native action on the device.
  *
  * @phpstan-type ActionShape = array{
- *   createCalendarEventAction?: CreateCalendarEventAction,
- *   dialAction?: DialAction,
- *   fallbackURL?: string,
- *   openURLAction?: OpenURLAction,
- *   postbackData?: string,
- *   shareLocationAction?: mixed,
- *   text?: string,
- *   viewLocationAction?: ViewLocationAction,
+ *   create_calendar_event_action?: CreateCalendarEventAction|null,
+ *   dial_action?: DialAction|null,
+ *   fallback_url?: string|null,
+ *   open_url_action?: OpenURLAction|null,
+ *   postback_data?: string|null,
+ *   share_location_action?: mixed,
+ *   text?: string|null,
+ *   view_location_action?: ViewLocationAction|null,
  * }
  */
 final class Action implements BaseModel
@@ -34,38 +34,38 @@ final class Action implements BaseModel
     /**
      * Opens the user's default calendar app and starts the new calendar event flow with the agent-specified event data pre-filled.
      */
-    #[Api('create_calendar_event_action', optional: true)]
-    public ?CreateCalendarEventAction $createCalendarEventAction;
+    #[Api(optional: true)]
+    public ?CreateCalendarEventAction $create_calendar_event_action;
 
     /**
      * Opens the user's default dialer app with the agent-specified phone number filled in.
      */
-    #[Api('dial_action', optional: true)]
-    public ?DialAction $dialAction;
+    #[Api(optional: true)]
+    public ?DialAction $dial_action;
 
     /**
      * Fallback URL to use if a client doesn't support a suggested action. Fallback URLs open in new browser windows. Maximum 2048 characters.
      */
-    #[Api('fallback_url', optional: true)]
-    public ?string $fallbackURL;
+    #[Api(optional: true)]
+    public ?string $fallback_url;
 
     /**
      * Opens the user's default web browser app to the specified URL.
      */
-    #[Api('open_url_action', optional: true)]
-    public ?OpenURLAction $openURLAction;
+    #[Api(optional: true)]
+    public ?OpenURLAction $open_url_action;
 
     /**
      * Payload (base64 encoded) that will be sent to the agent in the user event that results when the user taps the suggested action. Maximum 2048 characters.
      */
-    #[Api('postback_data', optional: true)]
-    public ?string $postbackData;
+    #[Api(optional: true)]
+    public ?string $postback_data;
 
     /**
      * Opens the RCS app's location chooser so the user can pick a location to send back to the agent.
      */
-    #[Api('share_location_action', optional: true)]
-    public mixed $shareLocationAction;
+    #[Api(optional: true)]
+    public mixed $share_location_action;
 
     /**
      * Text that is shown in the suggested action. Maximum 25 characters.
@@ -76,8 +76,8 @@ final class Action implements BaseModel
     /**
      * Opens the user's default map app and selects the agent-specified location.
      */
-    #[Api('view_location_action', optional: true)]
-    public ?ViewLocationAction $viewLocationAction;
+    #[Api(optional: true)]
+    public ?ViewLocationAction $view_location_action;
 
     public function __construct()
     {
@@ -90,25 +90,25 @@ final class Action implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?CreateCalendarEventAction $createCalendarEventAction = null,
-        ?DialAction $dialAction = null,
-        ?string $fallbackURL = null,
-        ?OpenURLAction $openURLAction = null,
-        ?string $postbackData = null,
-        mixed $shareLocationAction = null,
+        ?CreateCalendarEventAction $create_calendar_event_action = null,
+        ?DialAction $dial_action = null,
+        ?string $fallback_url = null,
+        ?OpenURLAction $open_url_action = null,
+        ?string $postback_data = null,
+        mixed $share_location_action = null,
         ?string $text = null,
-        ?ViewLocationAction $viewLocationAction = null,
+        ?ViewLocationAction $view_location_action = null,
     ): self {
         $obj = new self;
 
-        null !== $createCalendarEventAction && $obj->createCalendarEventAction = $createCalendarEventAction;
-        null !== $dialAction && $obj->dialAction = $dialAction;
-        null !== $fallbackURL && $obj->fallbackURL = $fallbackURL;
-        null !== $openURLAction && $obj->openURLAction = $openURLAction;
-        null !== $postbackData && $obj->postbackData = $postbackData;
-        null !== $shareLocationAction && $obj->shareLocationAction = $shareLocationAction;
+        null !== $create_calendar_event_action && $obj->create_calendar_event_action = $create_calendar_event_action;
+        null !== $dial_action && $obj->dial_action = $dial_action;
+        null !== $fallback_url && $obj->fallback_url = $fallback_url;
+        null !== $open_url_action && $obj->open_url_action = $open_url_action;
+        null !== $postback_data && $obj->postback_data = $postback_data;
+        null !== $share_location_action && $obj->share_location_action = $share_location_action;
         null !== $text && $obj->text = $text;
-        null !== $viewLocationAction && $obj->viewLocationAction = $viewLocationAction;
+        null !== $view_location_action && $obj->view_location_action = $view_location_action;
 
         return $obj;
     }
@@ -120,7 +120,7 @@ final class Action implements BaseModel
         CreateCalendarEventAction $createCalendarEventAction
     ): self {
         $obj = clone $this;
-        $obj->createCalendarEventAction = $createCalendarEventAction;
+        $obj->create_calendar_event_action = $createCalendarEventAction;
 
         return $obj;
     }
@@ -131,7 +131,7 @@ final class Action implements BaseModel
     public function withDialAction(DialAction $dialAction): self
     {
         $obj = clone $this;
-        $obj->dialAction = $dialAction;
+        $obj->dial_action = $dialAction;
 
         return $obj;
     }
@@ -142,7 +142,7 @@ final class Action implements BaseModel
     public function withFallbackURL(string $fallbackURL): self
     {
         $obj = clone $this;
-        $obj->fallbackURL = $fallbackURL;
+        $obj->fallback_url = $fallbackURL;
 
         return $obj;
     }
@@ -153,7 +153,7 @@ final class Action implements BaseModel
     public function withOpenURLAction(OpenURLAction $openURLAction): self
     {
         $obj = clone $this;
-        $obj->openURLAction = $openURLAction;
+        $obj->open_url_action = $openURLAction;
 
         return $obj;
     }
@@ -164,7 +164,7 @@ final class Action implements BaseModel
     public function withPostbackData(string $postbackData): self
     {
         $obj = clone $this;
-        $obj->postbackData = $postbackData;
+        $obj->postback_data = $postbackData;
 
         return $obj;
     }
@@ -175,7 +175,7 @@ final class Action implements BaseModel
     public function withShareLocationAction(mixed $shareLocationAction): self
     {
         $obj = clone $this;
-        $obj->shareLocationAction = $shareLocationAction;
+        $obj->share_location_action = $shareLocationAction;
 
         return $obj;
     }
@@ -198,7 +198,7 @@ final class Action implements BaseModel
         ViewLocationAction $viewLocationAction
     ): self {
         $obj = clone $this;
-        $obj->viewLocationAction = $viewLocationAction;
+        $obj->view_location_action = $viewLocationAction;
 
         return $obj;
     }

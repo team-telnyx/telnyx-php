@@ -6,15 +6,11 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\NetworkCoverage\AvailableService;
 use Telnyx\NetworkCoverage\NetworkCoverageListParams;
-use Telnyx\NetworkCoverage\NetworkCoverageListParams\Filter;
-use Telnyx\NetworkCoverage\NetworkCoverageListParams\Filters;
-use Telnyx\NetworkCoverage\NetworkCoverageListParams\Page;
 use Telnyx\NetworkCoverage\NetworkCoverageListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\NetworkCoverageContract;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class NetworkCoverageService implements NetworkCoverageContract
 {
@@ -28,37 +24,30 @@ final class NetworkCoverageService implements NetworkCoverageContract
      *
      * List all locations and the interfaces that region supports
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[location.region], filter[location.site], filter[location.pop], filter[location.code]
-     * @param Filters $filters Consolidated filters parameter (deepObject style). Originally: filters[available_services][contains]
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param array{
+     *   filter?: array{
+     *     'location.code'?: string,
+     *     'location.pop'?: string,
+     *     'location.region'?: string,
+     *     'location.site'?: string,
+     *   },
+     *   filters?: array{
+     *     available_services?: "cloud_vpn"|"private_wireless_gateway"|"virtual_cross_connect"|AvailableService|array{
+     *       contains?: "cloud_vpn"|"private_wireless_gateway"|"virtual_cross_connect"|AvailableService,
+     *     },
+     *   },
+     *   page?: array{number?: int, size?: int},
+     * }|NetworkCoverageListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $filters = omit,
-        $page = omit,
+        array|NetworkCoverageListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): NetworkCoverageListResponse {
-        $params = ['filter' => $filter, 'filters' => $filters, 'page' => $page];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): NetworkCoverageListResponse {
         [$parsed, $options] = NetworkCoverageListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

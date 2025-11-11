@@ -34,7 +34,8 @@ final class ActionsTest extends TestCase
         }
 
         $result = $this->client->verifications->actions->verify(
-            '12ade33a-21c0-473b-b055-b3c836e1c292'
+            '12ade33a-21c0-473b-b055-b3c836e1c292',
+            []
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType

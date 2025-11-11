@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\UserTags\UserTagListResponse\Data;
 
 /**
- * @phpstan-type UserTagListResponseShape = array{data?: Data}
+ * @phpstan-type UserTagListResponseShape = array{data?: Data|null}
  */
 final class UserTagListResponse implements BaseModel, ResponseConverter
 {

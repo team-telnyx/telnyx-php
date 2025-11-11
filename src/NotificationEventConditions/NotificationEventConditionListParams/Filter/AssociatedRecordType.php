@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NotificationEventConditions\NotificationEventConditionListParams\Filter\AssociatedRecordType\Eq;
 
 /**
- * @phpstan-type AssociatedRecordTypeShape = array{eq?: value-of<Eq>}
+ * @phpstan-type AssociatedRecordTypeShape = array{eq?: value-of<Eq>|null}
  */
 final class AssociatedRecordType implements BaseModel
 {

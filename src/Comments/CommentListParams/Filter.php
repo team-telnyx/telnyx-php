@@ -13,7 +13,8 @@ use Telnyx\Core\Contracts\BaseModel;
  * Consolidated filter parameter (deepObject style). Originally: filter[comment_record_type], filter[comment_record_id].
  *
  * @phpstan-type FilterShape = array{
- *   commentRecordID?: string, commentRecordType?: value-of<CommentRecordType>
+ *   comment_record_id?: string|null,
+ *   comment_record_type?: value-of<CommentRecordType>|null,
  * }
  */
 final class Filter implements BaseModel
@@ -24,16 +25,16 @@ final class Filter implements BaseModel
     /**
      * ID of the record the comments relate to.
      */
-    #[Api('comment_record_id', optional: true)]
-    public ?string $commentRecordID;
+    #[Api(optional: true)]
+    public ?string $comment_record_id;
 
     /**
      * Record type that the comment relates to.
      *
-     * @var value-of<CommentRecordType>|null $commentRecordType
+     * @var value-of<CommentRecordType>|null $comment_record_type
      */
-    #[Api('comment_record_type', enum: CommentRecordType::class, optional: true)]
-    public ?string $commentRecordType;
+    #[Api(enum: CommentRecordType::class, optional: true)]
+    public ?string $comment_record_type;
 
     public function __construct()
     {
@@ -45,16 +46,16 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CommentRecordType|value-of<CommentRecordType> $commentRecordType
+     * @param CommentRecordType|value-of<CommentRecordType> $comment_record_type
      */
     public static function with(
-        ?string $commentRecordID = null,
-        CommentRecordType|string|null $commentRecordType = null,
+        ?string $comment_record_id = null,
+        CommentRecordType|string|null $comment_record_type = null,
     ): self {
         $obj = new self;
 
-        null !== $commentRecordID && $obj->commentRecordID = $commentRecordID;
-        null !== $commentRecordType && $obj['commentRecordType'] = $commentRecordType;
+        null !== $comment_record_id && $obj->comment_record_id = $comment_record_id;
+        null !== $comment_record_type && $obj['comment_record_type'] = $comment_record_type;
 
         return $obj;
     }
@@ -65,7 +66,7 @@ final class Filter implements BaseModel
     public function withCommentRecordID(string $commentRecordID): self
     {
         $obj = clone $this;
-        $obj->commentRecordID = $commentRecordID;
+        $obj->comment_record_id = $commentRecordID;
 
         return $obj;
     }
@@ -79,7 +80,7 @@ final class Filter implements BaseModel
         CommentRecordType|string $commentRecordType
     ): self {
         $obj = clone $this;
-        $obj['commentRecordType'] = $commentRecordType;
+        $obj['comment_record_type'] = $commentRecordType;
 
         return $obj;
     }

@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type DetailRecordsReportGetResponseShape = array{data?: WdrReport}
+ * @phpstan-type DetailRecordsReportGetResponseShape = array{data?: WdrReport|null}
  */
 final class DetailRecordsReportGetResponse implements BaseModel, ResponseConverter
 {

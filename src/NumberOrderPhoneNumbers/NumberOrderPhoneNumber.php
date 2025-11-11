@@ -14,21 +14,21 @@ use Telnyx\SubNumberOrderRegulatoryRequirementWithValue;
 
 /**
  * @phpstan-type NumberOrderPhoneNumberShape = array{
- *   id?: string,
- *   bundleID?: string,
- *   countryCode?: string,
- *   deadline?: \DateTimeInterface,
- *   isBlockNumber?: bool,
- *   locality?: string,
- *   orderRequestID?: string,
- *   phoneNumber?: string,
- *   phoneNumberType?: value-of<PhoneNumberType>,
- *   recordType?: string,
- *   regulatoryRequirements?: list<SubNumberOrderRegulatoryRequirementWithValue>,
- *   requirementsMet?: bool,
- *   requirementsStatus?: value-of<RequirementsStatus>,
- *   status?: value-of<Status>,
- *   subNumberOrderID?: string,
+ *   id?: string|null,
+ *   bundle_id?: string|null,
+ *   country_code?: string|null,
+ *   deadline?: \DateTimeInterface|null,
+ *   is_block_number?: bool|null,
+ *   locality?: string|null,
+ *   order_request_id?: string|null,
+ *   phone_number?: string|null,
+ *   phone_number_type?: value-of<PhoneNumberType>|null,
+ *   record_type?: string|null,
+ *   regulatory_requirements?: list<SubNumberOrderRegulatoryRequirementWithValue>|null,
+ *   requirements_met?: bool|null,
+ *   requirements_status?: value-of<RequirementsStatus>|null,
+ *   status?: value-of<Status>|null,
+ *   sub_number_order_id?: string|null,
  * }
  */
 final class NumberOrderPhoneNumber implements BaseModel
@@ -39,57 +39,56 @@ final class NumberOrderPhoneNumber implements BaseModel
     #[Api(optional: true)]
     public ?string $id;
 
-    #[Api('bundle_id', optional: true)]
-    public ?string $bundleID;
+    #[Api(optional: true)]
+    public ?string $bundle_id;
 
-    #[Api('country_code', optional: true)]
-    public ?string $countryCode;
+    #[Api(optional: true)]
+    public ?string $country_code;
 
     #[Api(optional: true)]
     public ?\DateTimeInterface $deadline;
 
-    #[Api('is_block_number', optional: true)]
-    public ?bool $isBlockNumber;
+    #[Api(optional: true)]
+    public ?bool $is_block_number;
 
     #[Api(optional: true)]
     public ?string $locality;
 
-    #[Api('order_request_id', optional: true)]
-    public ?string $orderRequestID;
+    #[Api(optional: true)]
+    public ?string $order_request_id;
 
-    #[Api('phone_number', optional: true)]
-    public ?string $phoneNumber;
+    #[Api(optional: true)]
+    public ?string $phone_number;
 
-    /** @var value-of<PhoneNumberType>|null $phoneNumberType */
-    #[Api('phone_number_type', enum: PhoneNumberType::class, optional: true)]
-    public ?string $phoneNumberType;
+    /** @var value-of<PhoneNumberType>|null $phone_number_type */
+    #[Api(enum: PhoneNumberType::class, optional: true)]
+    public ?string $phone_number_type;
 
-    #[Api('record_type', optional: true)]
-    public ?string $recordType;
+    #[Api(optional: true)]
+    public ?string $record_type;
 
     /**
-     * @var list<SubNumberOrderRegulatoryRequirementWithValue>|null $regulatoryRequirements
+     * @var list<SubNumberOrderRegulatoryRequirementWithValue>|null $regulatory_requirements
      */
     #[Api(
-        'regulatory_requirements',
         list: SubNumberOrderRegulatoryRequirementWithValue::class,
-        optional: true,
+        optional: true
     )]
-    public ?array $regulatoryRequirements;
+    public ?array $regulatory_requirements;
 
     /**
      * True if all requirements are met for a phone number, false otherwise.
      */
-    #[Api('requirements_met', optional: true)]
-    public ?bool $requirementsMet;
+    #[Api(optional: true)]
+    public ?bool $requirements_met;
 
     /**
      * Status of requirements (if applicable).
      *
-     * @var value-of<RequirementsStatus>|null $requirementsStatus
+     * @var value-of<RequirementsStatus>|null $requirements_status
      */
-    #[Api('requirements_status', enum: RequirementsStatus::class, optional: true)]
-    public ?string $requirementsStatus;
+    #[Api(enum: RequirementsStatus::class, optional: true)]
+    public ?string $requirements_status;
 
     /**
      * The status of the phone number in the order.
@@ -99,8 +98,8 @@ final class NumberOrderPhoneNumber implements BaseModel
     #[Api(enum: Status::class, optional: true)]
     public ?string $status;
 
-    #[Api('sub_number_order_id', optional: true)]
-    public ?string $subNumberOrderID;
+    #[Api(optional: true)]
+    public ?string $sub_number_order_id;
 
     public function __construct()
     {
@@ -112,45 +111,45 @@ final class NumberOrderPhoneNumber implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param PhoneNumberType|value-of<PhoneNumberType> $phoneNumberType
-     * @param list<SubNumberOrderRegulatoryRequirementWithValue> $regulatoryRequirements
-     * @param RequirementsStatus|value-of<RequirementsStatus> $requirementsStatus
+     * @param PhoneNumberType|value-of<PhoneNumberType> $phone_number_type
+     * @param list<SubNumberOrderRegulatoryRequirementWithValue> $regulatory_requirements
+     * @param RequirementsStatus|value-of<RequirementsStatus> $requirements_status
      * @param Status|value-of<Status> $status
      */
     public static function with(
         ?string $id = null,
-        ?string $bundleID = null,
-        ?string $countryCode = null,
+        ?string $bundle_id = null,
+        ?string $country_code = null,
         ?\DateTimeInterface $deadline = null,
-        ?bool $isBlockNumber = null,
+        ?bool $is_block_number = null,
         ?string $locality = null,
-        ?string $orderRequestID = null,
-        ?string $phoneNumber = null,
-        PhoneNumberType|string|null $phoneNumberType = null,
-        ?string $recordType = null,
-        ?array $regulatoryRequirements = null,
-        ?bool $requirementsMet = null,
-        RequirementsStatus|string|null $requirementsStatus = null,
+        ?string $order_request_id = null,
+        ?string $phone_number = null,
+        PhoneNumberType|string|null $phone_number_type = null,
+        ?string $record_type = null,
+        ?array $regulatory_requirements = null,
+        ?bool $requirements_met = null,
+        RequirementsStatus|string|null $requirements_status = null,
         Status|string|null $status = null,
-        ?string $subNumberOrderID = null,
+        ?string $sub_number_order_id = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj->id = $id;
-        null !== $bundleID && $obj->bundleID = $bundleID;
-        null !== $countryCode && $obj->countryCode = $countryCode;
+        null !== $bundle_id && $obj->bundle_id = $bundle_id;
+        null !== $country_code && $obj->country_code = $country_code;
         null !== $deadline && $obj->deadline = $deadline;
-        null !== $isBlockNumber && $obj->isBlockNumber = $isBlockNumber;
+        null !== $is_block_number && $obj->is_block_number = $is_block_number;
         null !== $locality && $obj->locality = $locality;
-        null !== $orderRequestID && $obj->orderRequestID = $orderRequestID;
-        null !== $phoneNumber && $obj->phoneNumber = $phoneNumber;
-        null !== $phoneNumberType && $obj['phoneNumberType'] = $phoneNumberType;
-        null !== $recordType && $obj->recordType = $recordType;
-        null !== $regulatoryRequirements && $obj->regulatoryRequirements = $regulatoryRequirements;
-        null !== $requirementsMet && $obj->requirementsMet = $requirementsMet;
-        null !== $requirementsStatus && $obj['requirementsStatus'] = $requirementsStatus;
+        null !== $order_request_id && $obj->order_request_id = $order_request_id;
+        null !== $phone_number && $obj->phone_number = $phone_number;
+        null !== $phone_number_type && $obj['phone_number_type'] = $phone_number_type;
+        null !== $record_type && $obj->record_type = $record_type;
+        null !== $regulatory_requirements && $obj->regulatory_requirements = $regulatory_requirements;
+        null !== $requirements_met && $obj->requirements_met = $requirements_met;
+        null !== $requirements_status && $obj['requirements_status'] = $requirements_status;
         null !== $status && $obj['status'] = $status;
-        null !== $subNumberOrderID && $obj->subNumberOrderID = $subNumberOrderID;
+        null !== $sub_number_order_id && $obj->sub_number_order_id = $sub_number_order_id;
 
         return $obj;
     }
@@ -166,7 +165,7 @@ final class NumberOrderPhoneNumber implements BaseModel
     public function withBundleID(string $bundleID): self
     {
         $obj = clone $this;
-        $obj->bundleID = $bundleID;
+        $obj->bundle_id = $bundleID;
 
         return $obj;
     }
@@ -174,7 +173,7 @@ final class NumberOrderPhoneNumber implements BaseModel
     public function withCountryCode(string $countryCode): self
     {
         $obj = clone $this;
-        $obj->countryCode = $countryCode;
+        $obj->country_code = $countryCode;
 
         return $obj;
     }
@@ -190,7 +189,7 @@ final class NumberOrderPhoneNumber implements BaseModel
     public function withIsBlockNumber(bool $isBlockNumber): self
     {
         $obj = clone $this;
-        $obj->isBlockNumber = $isBlockNumber;
+        $obj->is_block_number = $isBlockNumber;
 
         return $obj;
     }
@@ -206,7 +205,7 @@ final class NumberOrderPhoneNumber implements BaseModel
     public function withOrderRequestID(string $orderRequestID): self
     {
         $obj = clone $this;
-        $obj->orderRequestID = $orderRequestID;
+        $obj->order_request_id = $orderRequestID;
 
         return $obj;
     }
@@ -214,7 +213,7 @@ final class NumberOrderPhoneNumber implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj->phoneNumber = $phoneNumber;
+        $obj->phone_number = $phoneNumber;
 
         return $obj;
     }
@@ -226,7 +225,7 @@ final class NumberOrderPhoneNumber implements BaseModel
         PhoneNumberType|string $phoneNumberType
     ): self {
         $obj = clone $this;
-        $obj['phoneNumberType'] = $phoneNumberType;
+        $obj['phone_number_type'] = $phoneNumberType;
 
         return $obj;
     }
@@ -234,7 +233,7 @@ final class NumberOrderPhoneNumber implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType;
+        $obj->record_type = $recordType;
 
         return $obj;
     }
@@ -246,7 +245,7 @@ final class NumberOrderPhoneNumber implements BaseModel
         array $regulatoryRequirements
     ): self {
         $obj = clone $this;
-        $obj->regulatoryRequirements = $regulatoryRequirements;
+        $obj->regulatory_requirements = $regulatoryRequirements;
 
         return $obj;
     }
@@ -257,7 +256,7 @@ final class NumberOrderPhoneNumber implements BaseModel
     public function withRequirementsMet(bool $requirementsMet): self
     {
         $obj = clone $this;
-        $obj->requirementsMet = $requirementsMet;
+        $obj->requirements_met = $requirementsMet;
 
         return $obj;
     }
@@ -271,7 +270,7 @@ final class NumberOrderPhoneNumber implements BaseModel
         RequirementsStatus|string $requirementsStatus
     ): self {
         $obj = clone $this;
-        $obj['requirementsStatus'] = $requirementsStatus;
+        $obj['requirements_status'] = $requirementsStatus;
 
         return $obj;
     }
@@ -292,7 +291,7 @@ final class NumberOrderPhoneNumber implements BaseModel
     public function withSubNumberOrderID(string $subNumberOrderID): self
     {
         $obj = clone $this;
-        $obj->subNumberOrderID = $subNumberOrderID;
+        $obj->sub_number_order_id = $subNumberOrderID;
 
         return $obj;
     }

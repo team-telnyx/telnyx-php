@@ -10,16 +10,16 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type PayloadShape = array{
- *   callControlID?: string,
- *   callLegID?: string,
- *   callSessionID?: string,
- *   clientState?: string,
- *   conferenceID?: string,
- *   connectionID?: string,
- *   creatorCallSessionID?: string,
- *   mediaName?: string,
- *   mediaURL?: string,
- *   occurredAt?: \DateTimeInterface,
+ *   call_control_id?: string|null,
+ *   call_leg_id?: string|null,
+ *   call_session_id?: string|null,
+ *   client_state?: string|null,
+ *   conference_id?: string|null,
+ *   connection_id?: string|null,
+ *   creator_call_session_id?: string|null,
+ *   media_name?: string|null,
+ *   media_url?: string|null,
+ *   occurred_at?: \DateTimeInterface|null,
  * }
  */
 final class Payload implements BaseModel
@@ -30,62 +30,62 @@ final class Payload implements BaseModel
     /**
      * Participant's call ID used to issue commands via Call Control API.
      */
-    #[Api('call_control_id', optional: true)]
-    public ?string $callControlID;
+    #[Api(optional: true)]
+    public ?string $call_control_id;
 
     /**
      * ID that is unique to the call and can be used to correlate webhook events.
      */
-    #[Api('call_leg_id', optional: true)]
-    public ?string $callLegID;
+    #[Api(optional: true)]
+    public ?string $call_leg_id;
 
     /**
      * ID that is unique to the call session and can be used to correlate webhook events. Call session is a group of related call legs that logically belong to the same phone call, e.g. an inbound and outbound leg of a transferred call.
      */
-    #[Api('call_session_id', optional: true)]
-    public ?string $callSessionID;
+    #[Api(optional: true)]
+    public ?string $call_session_id;
 
     /**
      * State received from a command.
      */
-    #[Api('client_state', optional: true)]
-    public ?string $clientState;
+    #[Api(optional: true)]
+    public ?string $client_state;
 
     /**
      * ID of the conference the text was spoken in.
      */
-    #[Api('conference_id', optional: true)]
-    public ?string $conferenceID;
+    #[Api(optional: true)]
+    public ?string $conference_id;
 
     /**
      * Call Control App ID (formerly Telnyx connection ID) used in the call.
      */
-    #[Api('connection_id', optional: true)]
-    public ?string $connectionID;
+    #[Api(optional: true)]
+    public ?string $connection_id;
 
     /**
      * ID that is unique to the call session that started the conference.
      */
-    #[Api('creator_call_session_id', optional: true)]
-    public ?string $creatorCallSessionID;
+    #[Api(optional: true)]
+    public ?string $creator_call_session_id;
 
     /**
      * The name of the audio media file being played back, if media_name has been used to start.
      */
-    #[Api('media_name', optional: true)]
-    public ?string $mediaName;
+    #[Api(optional: true)]
+    public ?string $media_name;
 
     /**
      * The audio URL being played back, if audio_url has been used to start.
      */
-    #[Api('media_url', optional: true)]
-    public ?string $mediaURL;
+    #[Api(optional: true)]
+    public ?string $media_url;
 
     /**
      * ISO 8601 datetime of when the event occurred.
      */
-    #[Api('occurred_at', optional: true)]
-    public ?\DateTimeInterface $occurredAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $occurred_at;
 
     public function __construct()
     {
@@ -98,29 +98,29 @@ final class Payload implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $callControlID = null,
-        ?string $callLegID = null,
-        ?string $callSessionID = null,
-        ?string $clientState = null,
-        ?string $conferenceID = null,
-        ?string $connectionID = null,
-        ?string $creatorCallSessionID = null,
-        ?string $mediaName = null,
-        ?string $mediaURL = null,
-        ?\DateTimeInterface $occurredAt = null,
+        ?string $call_control_id = null,
+        ?string $call_leg_id = null,
+        ?string $call_session_id = null,
+        ?string $client_state = null,
+        ?string $conference_id = null,
+        ?string $connection_id = null,
+        ?string $creator_call_session_id = null,
+        ?string $media_name = null,
+        ?string $media_url = null,
+        ?\DateTimeInterface $occurred_at = null,
     ): self {
         $obj = new self;
 
-        null !== $callControlID && $obj->callControlID = $callControlID;
-        null !== $callLegID && $obj->callLegID = $callLegID;
-        null !== $callSessionID && $obj->callSessionID = $callSessionID;
-        null !== $clientState && $obj->clientState = $clientState;
-        null !== $conferenceID && $obj->conferenceID = $conferenceID;
-        null !== $connectionID && $obj->connectionID = $connectionID;
-        null !== $creatorCallSessionID && $obj->creatorCallSessionID = $creatorCallSessionID;
-        null !== $mediaName && $obj->mediaName = $mediaName;
-        null !== $mediaURL && $obj->mediaURL = $mediaURL;
-        null !== $occurredAt && $obj->occurredAt = $occurredAt;
+        null !== $call_control_id && $obj->call_control_id = $call_control_id;
+        null !== $call_leg_id && $obj->call_leg_id = $call_leg_id;
+        null !== $call_session_id && $obj->call_session_id = $call_session_id;
+        null !== $client_state && $obj->client_state = $client_state;
+        null !== $conference_id && $obj->conference_id = $conference_id;
+        null !== $connection_id && $obj->connection_id = $connection_id;
+        null !== $creator_call_session_id && $obj->creator_call_session_id = $creator_call_session_id;
+        null !== $media_name && $obj->media_name = $media_name;
+        null !== $media_url && $obj->media_url = $media_url;
+        null !== $occurred_at && $obj->occurred_at = $occurred_at;
 
         return $obj;
     }
@@ -131,7 +131,7 @@ final class Payload implements BaseModel
     public function withCallControlID(string $callControlID): self
     {
         $obj = clone $this;
-        $obj->callControlID = $callControlID;
+        $obj->call_control_id = $callControlID;
 
         return $obj;
     }
@@ -142,7 +142,7 @@ final class Payload implements BaseModel
     public function withCallLegID(string $callLegID): self
     {
         $obj = clone $this;
-        $obj->callLegID = $callLegID;
+        $obj->call_leg_id = $callLegID;
 
         return $obj;
     }
@@ -153,7 +153,7 @@ final class Payload implements BaseModel
     public function withCallSessionID(string $callSessionID): self
     {
         $obj = clone $this;
-        $obj->callSessionID = $callSessionID;
+        $obj->call_session_id = $callSessionID;
 
         return $obj;
     }
@@ -164,7 +164,7 @@ final class Payload implements BaseModel
     public function withClientState(string $clientState): self
     {
         $obj = clone $this;
-        $obj->clientState = $clientState;
+        $obj->client_state = $clientState;
 
         return $obj;
     }
@@ -175,7 +175,7 @@ final class Payload implements BaseModel
     public function withConferenceID(string $conferenceID): self
     {
         $obj = clone $this;
-        $obj->conferenceID = $conferenceID;
+        $obj->conference_id = $conferenceID;
 
         return $obj;
     }
@@ -186,7 +186,7 @@ final class Payload implements BaseModel
     public function withConnectionID(string $connectionID): self
     {
         $obj = clone $this;
-        $obj->connectionID = $connectionID;
+        $obj->connection_id = $connectionID;
 
         return $obj;
     }
@@ -197,7 +197,7 @@ final class Payload implements BaseModel
     public function withCreatorCallSessionID(string $creatorCallSessionID): self
     {
         $obj = clone $this;
-        $obj->creatorCallSessionID = $creatorCallSessionID;
+        $obj->creator_call_session_id = $creatorCallSessionID;
 
         return $obj;
     }
@@ -208,7 +208,7 @@ final class Payload implements BaseModel
     public function withMediaName(string $mediaName): self
     {
         $obj = clone $this;
-        $obj->mediaName = $mediaName;
+        $obj->media_name = $mediaName;
 
         return $obj;
     }
@@ -219,7 +219,7 @@ final class Payload implements BaseModel
     public function withMediaURL(string $mediaURL): self
     {
         $obj = clone $this;
-        $obj->mediaURL = $mediaURL;
+        $obj->media_url = $mediaURL;
 
         return $obj;
     }
@@ -230,7 +230,7 @@ final class Payload implements BaseModel
     public function withOccurredAt(\DateTimeInterface $occurredAt): self
     {
         $obj = clone $this;
-        $obj->occurredAt = $occurredAt;
+        $obj->occurred_at = $occurredAt;
 
         return $obj;
     }

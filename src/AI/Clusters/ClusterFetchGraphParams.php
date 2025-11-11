@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\AI\Clusters->fetchGraph
  *
- * @phpstan-type ClusterFetchGraphParamsShape = array{clusterID?: int}
+ * @phpstan-type ClusterFetchGraphParamsShape = array{cluster_id?: int}
  */
 final class ClusterFetchGraphParams implements BaseModel
 {
@@ -23,7 +23,7 @@ final class ClusterFetchGraphParams implements BaseModel
     use SdkParams;
 
     #[Api(optional: true)]
-    public ?int $clusterID;
+    public ?int $cluster_id;
 
     public function __construct()
     {
@@ -35,11 +35,11 @@ final class ClusterFetchGraphParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?int $clusterID = null): self
+    public static function with(?int $cluster_id = null): self
     {
         $obj = new self;
 
-        null !== $clusterID && $obj->clusterID = $clusterID;
+        null !== $cluster_id && $obj->cluster_id = $cluster_id;
 
         return $obj;
     }
@@ -47,7 +47,7 @@ final class ClusterFetchGraphParams implements BaseModel
     public function withClusterID(int $clusterID): self
     {
         $obj = clone $this;
-        $obj->clusterID = $clusterID;
+        $obj->cluster_id = $clusterID;
 
         return $obj;
     }

@@ -35,8 +35,7 @@ final class StreamsTest extends TestCase
 
         $result = $this->client->texml->accounts->calls->streams->streamingSidJson(
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
-            accountSid: 'account_sid',
-            callSid: 'call_sid',
+            ['account_sid' => 'account_sid', 'call_sid' => 'call_sid'],
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -51,8 +50,7 @@ final class StreamsTest extends TestCase
 
         $result = $this->client->texml->accounts->calls->streams->streamingSidJson(
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
-            accountSid: 'account_sid',
-            callSid: 'call_sid',
+            ['account_sid' => 'account_sid', 'call_sid' => 'call_sid'],
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType

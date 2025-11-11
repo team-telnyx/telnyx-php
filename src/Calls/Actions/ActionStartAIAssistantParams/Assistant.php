@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * AI Assistant configuration.
  *
  * @phpstan-type AssistantShape = array{
- *   id?: string, instructions?: string, openaiAPIKeyRef?: string
+ *   id?: string|null, instructions?: string|null, openai_api_key_ref?: string|null
  * }
  */
 final class Assistant implements BaseModel
@@ -35,8 +35,8 @@ final class Assistant implements BaseModel
     /**
      * Reference to the OpenAI API key. Required only when using OpenAI models.
      */
-    #[Api('openai_api_key_ref', optional: true)]
-    public ?string $openaiAPIKeyRef;
+    #[Api(optional: true)]
+    public ?string $openai_api_key_ref;
 
     public function __construct()
     {
@@ -51,13 +51,13 @@ final class Assistant implements BaseModel
     public static function with(
         ?string $id = null,
         ?string $instructions = null,
-        ?string $openaiAPIKeyRef = null,
+        ?string $openai_api_key_ref = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj->id = $id;
         null !== $instructions && $obj->instructions = $instructions;
-        null !== $openaiAPIKeyRef && $obj->openaiAPIKeyRef = $openaiAPIKeyRef;
+        null !== $openai_api_key_ref && $obj->openai_api_key_ref = $openai_api_key_ref;
 
         return $obj;
     }
@@ -90,7 +90,7 @@ final class Assistant implements BaseModel
     public function withOpenAIAPIKeyRef(string $openaiAPIKeyRef): self
     {
         $obj = clone $this;
-        $obj->openaiAPIKeyRef = $openaiAPIKeyRef;
+        $obj->openai_api_key_ref = $openaiAPIKeyRef;
 
         return $obj;
     }

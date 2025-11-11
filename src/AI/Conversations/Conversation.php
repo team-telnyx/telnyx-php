@@ -13,10 +13,10 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 /**
  * @phpstan-type ConversationShape = array{
  *   id: string,
- *   createdAt: \DateTimeInterface,
- *   lastMessageAt: \DateTimeInterface,
- *   metadata: array<string, string>,
- *   name?: string,
+ *   created_at: \DateTimeInterface,
+ *   last_message_at: \DateTimeInterface,
+ *   metadata: array<string,string>,
+ *   name?: string|null,
  * }
  */
 final class Conversation implements BaseModel, ResponseConverter
@@ -32,19 +32,19 @@ final class Conversation implements BaseModel, ResponseConverter
     /**
      * The datetime the conversation was created.
      */
-    #[Api('created_at')]
-    public \DateTimeInterface $createdAt;
+    #[Api]
+    public \DateTimeInterface $created_at;
 
     /**
      * The datetime of the latest message in the conversation.
      */
-    #[Api('last_message_at')]
-    public \DateTimeInterface $lastMessageAt;
+    #[Api]
+    public \DateTimeInterface $last_message_at;
 
     /**
      * Metadata associated with the conversation. Telnyx provides several pieces of metadata, but customers can also add their own.
      *
-     * @var array<string, string> $metadata
+     * @var array<string,string> $metadata
      */
     #[Api(map: 'string')]
     public array $metadata;
@@ -57,7 +57,9 @@ final class Conversation implements BaseModel, ResponseConverter
      *
      * To enforce required parameters use
      * ```
-     * Conversation::with(id: ..., createdAt: ..., lastMessageAt: ..., metadata: ...)
+     * Conversation::with(
+     *   id: ..., created_at: ..., last_message_at: ..., metadata: ...
+     * )
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -80,20 +82,20 @@ final class Conversation implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param array<string, string> $metadata
+     * @param array<string,string> $metadata
      */
     public static function with(
         string $id,
-        \DateTimeInterface $createdAt,
-        \DateTimeInterface $lastMessageAt,
+        \DateTimeInterface $created_at,
+        \DateTimeInterface $last_message_at,
         array $metadata,
         ?string $name = null,
     ): self {
         $obj = new self;
 
         $obj->id = $id;
-        $obj->createdAt = $createdAt;
-        $obj->lastMessageAt = $lastMessageAt;
+        $obj->created_at = $created_at;
+        $obj->last_message_at = $last_message_at;
         $obj->metadata = $metadata;
 
         null !== $name && $obj->name = $name;
@@ -115,7 +117,7 @@ final class Conversation implements BaseModel, ResponseConverter
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }
@@ -126,7 +128,7 @@ final class Conversation implements BaseModel, ResponseConverter
     public function withLastMessageAt(\DateTimeInterface $lastMessageAt): self
     {
         $obj = clone $this;
-        $obj->lastMessageAt = $lastMessageAt;
+        $obj->last_message_at = $lastMessageAt;
 
         return $obj;
     }
@@ -134,7 +136,7 @@ final class Conversation implements BaseModel, ResponseConverter
     /**
      * Metadata associated with the conversation. Telnyx provides several pieces of metadata, but customers can also add their own.
      *
-     * @param array<string, string> $metadata
+     * @param array<string,string> $metadata
      */
     public function withMetadata(array $metadata): self
     {

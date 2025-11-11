@@ -14,7 +14,7 @@ use Telnyx\MobileNetworkOperators\MobileNetworkOperatorListResponse\Data;
 
 /**
  * @phpstan-type MobileNetworkOperatorListResponseShape = array{
- *   data?: list<Data>, meta?: PaginationMeta
+ *   data?: list<Data>|null, meta?: PaginationMeta|null
  * }
  */
 final class MobileNetworkOperatorListResponse implements BaseModel, ResponseConverter

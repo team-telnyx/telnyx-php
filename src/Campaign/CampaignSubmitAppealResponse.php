@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type CampaignSubmitAppealResponseShape = array{
- *   appealedAt?: \DateTimeInterface
+ *   appealed_at?: \DateTimeInterface|null
  * }
  */
 final class CampaignSubmitAppealResponse implements BaseModel, ResponseConverter
@@ -25,8 +25,8 @@ final class CampaignSubmitAppealResponse implements BaseModel, ResponseConverter
     /**
      * Timestamp when the appeal was submitted.
      */
-    #[Api('appealed_at', optional: true)]
-    public ?\DateTimeInterface $appealedAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $appealed_at;
 
     public function __construct()
     {
@@ -38,11 +38,11 @@ final class CampaignSubmitAppealResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?\DateTimeInterface $appealedAt = null): self
+    public static function with(?\DateTimeInterface $appealed_at = null): self
     {
         $obj = new self;
 
-        null !== $appealedAt && $obj->appealedAt = $appealedAt;
+        null !== $appealed_at && $obj->appealed_at = $appealed_at;
 
         return $obj;
     }
@@ -53,7 +53,7 @@ final class CampaignSubmitAppealResponse implements BaseModel, ResponseConverter
     public function withAppealedAt(\DateTimeInterface $appealedAt): self
     {
         $obj = clone $this;
-        $obj->appealedAt = $appealedAt;
+        $obj->appealed_at = $appealedAt;
 
         return $obj;
     }

@@ -14,7 +14,7 @@ use Telnyx\PhoneNumbers\PhoneNumberSlimListResponse\Data;
 
 /**
  * @phpstan-type PhoneNumberSlimListResponseShape = array{
- *   data?: list<Data>, meta?: PaginationMeta
+ *   data?: list<Data>|null, meta?: PaginationMeta|null
  * }
  */
 final class PhoneNumberSlimListResponse implements BaseModel, ResponseConverter

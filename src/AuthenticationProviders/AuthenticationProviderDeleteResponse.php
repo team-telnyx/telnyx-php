@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type AuthenticationProviderDeleteResponseShape = array{
- *   data?: AuthenticationProvider
+ *   data?: AuthenticationProvider|null
  * }
  */
 final class AuthenticationProviderDeleteResponse implements BaseModel, ResponseConverter

@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type AddressNewResponseShape = array{data?: Address}
+ * @phpstan-type AddressNewResponseShape = array{data?: Address|null}
  */
 final class AddressNewResponse implements BaseModel, ResponseConverter
 {

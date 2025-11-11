@@ -12,7 +12,9 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\RoomParticipant;
 
 /**
- * @phpstan-type RoomParticipantGetResponseShape = array{data?: RoomParticipant}
+ * @phpstan-type RoomParticipantGetResponseShape = array{
+ *   data?: RoomParticipant|null
+ * }
  */
 final class RoomParticipantGetResponse implements BaseModel, ResponseConverter
 {

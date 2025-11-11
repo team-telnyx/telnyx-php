@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type ItemShape = array{billingBundleID: string, quantity: int}
+ * @phpstan-type ItemShape = array{billing_bundle_id: string, quantity: int}
  */
 final class Item implements BaseModel
 {
@@ -19,8 +19,8 @@ final class Item implements BaseModel
     /**
      * Quantity of user bundles to order.
      */
-    #[Api('billing_bundle_id')]
-    public string $billingBundleID;
+    #[Api]
+    public string $billing_bundle_id;
 
     /**
      * Quantity of user bundles to order.
@@ -33,7 +33,7 @@ final class Item implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * Item::with(billingBundleID: ..., quantity: ...)
+     * Item::with(billing_bundle_id: ..., quantity: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -52,11 +52,11 @@ final class Item implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(string $billingBundleID, int $quantity): self
+    public static function with(string $billing_bundle_id, int $quantity): self
     {
         $obj = new self;
 
-        $obj->billingBundleID = $billingBundleID;
+        $obj->billing_bundle_id = $billing_bundle_id;
         $obj->quantity = $quantity;
 
         return $obj;
@@ -68,7 +68,7 @@ final class Item implements BaseModel
     public function withBillingBundleID(string $billingBundleID): self
     {
         $obj = clone $this;
-        $obj->billingBundleID = $billingBundleID;
+        $obj->billing_bundle_id = $billingBundleID;
 
         return $obj;
     }

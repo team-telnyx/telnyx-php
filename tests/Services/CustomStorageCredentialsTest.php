@@ -6,7 +6,6 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\CustomStorageCredentials\GcsConfigurationData;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -36,8 +35,7 @@ final class CustomStorageCredentialsTest extends TestCase
 
         $result = $this->client->customStorageCredentials->create(
             'connection_id',
-            backend: 'gcs',
-            configuration: (new GcsConfigurationData)
+            ['backend' => 'gcs', 'configuration' => []]
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -52,10 +50,13 @@ final class CustomStorageCredentialsTest extends TestCase
 
         $result = $this->client->customStorageCredentials->create(
             'connection_id',
-            backend: 'gcs',
-            configuration: (new GcsConfigurationData)
-                ->withBucket('example-bucket')
-                ->withCredentials('OPAQUE_CREDENTIALS_TOKEN'),
+            [
+                'backend' => 'gcs',
+                'configuration' => [
+                    'bucket' => 'example-bucket',
+                    'credentials' => 'OPAQUE_CREDENTIALS_TOKEN',
+                ],
+            ],
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -84,8 +85,7 @@ final class CustomStorageCredentialsTest extends TestCase
 
         $result = $this->client->customStorageCredentials->update(
             'connection_id',
-            backend: 'gcs',
-            configuration: (new GcsConfigurationData)
+            ['backend' => 'gcs', 'configuration' => []]
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -100,10 +100,13 @@ final class CustomStorageCredentialsTest extends TestCase
 
         $result = $this->client->customStorageCredentials->update(
             'connection_id',
-            backend: 'gcs',
-            configuration: (new GcsConfigurationData)
-                ->withBucket('example-bucket')
-                ->withCredentials('OPAQUE_CREDENTIALS_TOKEN'),
+            [
+                'backend' => 'gcs',
+                'configuration' => [
+                    'bucket' => 'example-bucket',
+                    'credentials' => 'OPAQUE_CREDENTIALS_TOKEN',
+                ],
+            ],
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType

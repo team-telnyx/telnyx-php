@@ -7,12 +7,9 @@ namespace Telnyx\Services\Legacy\Reporting\UsageReports;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupCreateParams;
-use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupCreateParams\AggregationType;
 use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupListParams;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Legacy\Reporting\UsageReports\NumberLookupContract;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class NumberLookupService implements NumberLookupContract
 {
@@ -26,44 +23,22 @@ final class NumberLookupService implements NumberLookupContract
      *
      * Submit a new telco data usage report
      *
-     * @param AggregationType|value-of<AggregationType> $aggregationType Type of aggregation for the report
-     * @param \DateTimeInterface $endDate End date for the usage report
-     * @param list<string> $managedAccounts List of managed accounts to include in the report
-     * @param \DateTimeInterface $startDate Start date for the usage report
+     * @param array{
+     *   aggregationType?: "ALL"|"BY_ORGANIZATION_MEMBER",
+     *   endDate?: string|\DateTimeInterface,
+     *   managedAccounts?: list<string>,
+     *   startDate?: string|\DateTimeInterface,
+     * }|NumberLookupCreateParams $params
      *
      * @throws APIException
      */
     public function create(
-        $aggregationType = omit,
-        $endDate = omit,
-        $managedAccounts = omit,
-        $startDate = omit,
+        array|NumberLookupCreateParams $params,
         ?RequestOptions $requestOptions = null,
-    ): mixed {
-        $params = [
-            'aggregationType' => $aggregationType,
-            'endDate' => $endDate,
-            'managedAccounts' => $managedAccounts,
-            'startDate' => $startDate,
-        ];
-
-        return $this->createRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): mixed {
         [$parsed, $options] = NumberLookupCreateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -102,35 +77,17 @@ final class NumberLookupService implements NumberLookupContract
      *
      * Retrieve a paginated list of telco data usage reports
      *
-     * @param int $page
-     * @param int $perPage
+     * @param array{page?: int, per_page?: int}|NumberLookupListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $page = omit,
-        $perPage = omit,
-        ?RequestOptions $requestOptions = null
-    ): mixed {
-        $params = ['page' => $page, 'perPage' => $perPage];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
+        array|NumberLookupListParams $params,
         ?RequestOptions $requestOptions = null
     ): mixed {
         [$parsed, $options] = NumberLookupListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

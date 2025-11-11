@@ -11,7 +11,9 @@ use Telnyx\Messages\MessageCancelScheduledResponse\From\LineType;
 
 /**
  * @phpstan-type FromShape = array{
- *   carrier?: string, lineType?: value-of<LineType>, phoneNumber?: string
+ *   carrier?: string|null,
+ *   line_type?: value-of<LineType>|null,
+ *   phone_number?: string|null,
  * }
  */
 final class From implements BaseModel
@@ -28,16 +30,16 @@ final class From implements BaseModel
     /**
      * The line-type of the receiver.
      *
-     * @var value-of<LineType>|null $lineType
+     * @var value-of<LineType>|null $line_type
      */
-    #[Api('line_type', enum: LineType::class, optional: true)]
-    public ?string $lineType;
+    #[Api(enum: LineType::class, optional: true)]
+    public ?string $line_type;
 
     /**
      * Sending address (+E.164 formatted phone number, alphanumeric sender ID, or short code).
      */
-    #[Api('phone_number', optional: true)]
-    public ?string $phoneNumber;
+    #[Api(optional: true)]
+    public ?string $phone_number;
 
     public function __construct()
     {
@@ -49,18 +51,18 @@ final class From implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param LineType|value-of<LineType> $lineType
+     * @param LineType|value-of<LineType> $line_type
      */
     public static function with(
         ?string $carrier = null,
-        LineType|string|null $lineType = null,
-        ?string $phoneNumber = null,
+        LineType|string|null $line_type = null,
+        ?string $phone_number = null,
     ): self {
         $obj = new self;
 
         null !== $carrier && $obj->carrier = $carrier;
-        null !== $lineType && $obj['lineType'] = $lineType;
-        null !== $phoneNumber && $obj->phoneNumber = $phoneNumber;
+        null !== $line_type && $obj['line_type'] = $line_type;
+        null !== $phone_number && $obj->phone_number = $phone_number;
 
         return $obj;
     }
@@ -84,7 +86,7 @@ final class From implements BaseModel
     public function withLineType(LineType|string $lineType): self
     {
         $obj = clone $this;
-        $obj['lineType'] = $lineType;
+        $obj['line_type'] = $lineType;
 
         return $obj;
     }
@@ -95,7 +97,7 @@ final class From implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj->phoneNumber = $phoneNumber;
+        $obj->phone_number = $phoneNumber;
 
         return $obj;
     }

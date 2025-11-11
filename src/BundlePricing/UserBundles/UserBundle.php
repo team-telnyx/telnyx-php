@@ -13,11 +13,11 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type UserBundleShape = array{
  *   id: string,
  *   active: bool,
- *   billingBundle: BillingBundleSummary,
- *   createdAt: \DateTimeInterface,
+ *   billing_bundle: BillingBundleSummary,
+ *   created_at: \DateTimeInterface,
  *   resources: list<UserBundleResource>,
- *   userID: string,
- *   updatedAt?: \DateTimeInterface|null,
+ *   user_id: string,
+ *   updated_at?: \DateTimeInterface|null,
  * }
  */
 final class UserBundle implements BaseModel
@@ -37,14 +37,14 @@ final class UserBundle implements BaseModel
     #[Api]
     public bool $active;
 
-    #[Api('billing_bundle')]
-    public BillingBundleSummary $billingBundle;
+    #[Api]
+    public BillingBundleSummary $billing_bundle;
 
     /**
      * Date the user bundle was created.
      */
-    #[Api('created_at')]
-    public \DateTimeInterface $createdAt;
+    #[Api]
+    public \DateTimeInterface $created_at;
 
     /** @var list<UserBundleResource> $resources */
     #[Api(list: UserBundleResource::class)]
@@ -53,14 +53,14 @@ final class UserBundle implements BaseModel
     /**
      * The customer's ID that owns this user bundle.
      */
-    #[Api('user_id')]
-    public string $userID;
+    #[Api]
+    public string $user_id;
 
     /**
      * Date the user bundle was last updated.
      */
-    #[Api('updated_at', nullable: true, optional: true)]
-    public ?\DateTimeInterface $updatedAt;
+    #[Api(nullable: true, optional: true)]
+    public ?\DateTimeInterface $updated_at;
 
     /**
      * `new UserBundle()` is missing required properties by the API.
@@ -70,10 +70,10 @@ final class UserBundle implements BaseModel
      * UserBundle::with(
      *   id: ...,
      *   active: ...,
-     *   billingBundle: ...,
-     *   createdAt: ...,
+     *   billing_bundle: ...,
+     *   created_at: ...,
      *   resources: ...,
-     *   userID: ...,
+     *   user_id: ...,
      * )
      * ```
      *
@@ -104,22 +104,22 @@ final class UserBundle implements BaseModel
     public static function with(
         string $id,
         bool $active,
-        BillingBundleSummary $billingBundle,
-        \DateTimeInterface $createdAt,
+        BillingBundleSummary $billing_bundle,
+        \DateTimeInterface $created_at,
         array $resources,
-        string $userID,
-        ?\DateTimeInterface $updatedAt = null,
+        string $user_id,
+        ?\DateTimeInterface $updated_at = null,
     ): self {
         $obj = new self;
 
         $obj->id = $id;
         $obj->active = $active;
-        $obj->billingBundle = $billingBundle;
-        $obj->createdAt = $createdAt;
+        $obj->billing_bundle = $billing_bundle;
+        $obj->created_at = $created_at;
         $obj->resources = $resources;
-        $obj->userID = $userID;
+        $obj->user_id = $user_id;
 
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
+        null !== $updated_at && $obj->updated_at = $updated_at;
 
         return $obj;
     }
@@ -149,7 +149,7 @@ final class UserBundle implements BaseModel
     public function withBillingBundle(BillingBundleSummary $billingBundle): self
     {
         $obj = clone $this;
-        $obj->billingBundle = $billingBundle;
+        $obj->billing_bundle = $billingBundle;
 
         return $obj;
     }
@@ -160,7 +160,7 @@ final class UserBundle implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }
@@ -182,7 +182,7 @@ final class UserBundle implements BaseModel
     public function withUserID(string $userID): self
     {
         $obj = clone $this;
-        $obj->userID = $userID;
+        $obj->user_id = $userID;
 
         return $obj;
     }
@@ -193,7 +193,7 @@ final class UserBundle implements BaseModel
     public function withUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $obj->updated_at = $updatedAt;
 
         return $obj;
     }

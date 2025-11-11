@@ -23,8 +23,8 @@ use Telnyx\VerifyProfiles\VerifyProfileUpdateParams\SMS;
  *   language?: string,
  *   name?: string,
  *   sms?: SMS,
- *   webhookFailoverURL?: string,
- *   webhookURL?: string,
+ *   webhook_failover_url?: string,
+ *   webhook_url?: string,
  * }
  */
 final class VerifyProfileUpdateParams implements BaseModel
@@ -48,11 +48,11 @@ final class VerifyProfileUpdateParams implements BaseModel
     #[Api(optional: true)]
     public ?SMS $sms;
 
-    #[Api('webhook_failover_url', optional: true)]
-    public ?string $webhookFailoverURL;
+    #[Api(optional: true)]
+    public ?string $webhook_failover_url;
 
-    #[Api('webhook_url', optional: true)]
-    public ?string $webhookURL;
+    #[Api(optional: true)]
+    public ?string $webhook_url;
 
     public function __construct()
     {
@@ -70,8 +70,8 @@ final class VerifyProfileUpdateParams implements BaseModel
         ?string $language = null,
         ?string $name = null,
         ?SMS $sms = null,
-        ?string $webhookFailoverURL = null,
-        ?string $webhookURL = null,
+        ?string $webhook_failover_url = null,
+        ?string $webhook_url = null,
     ): self {
         $obj = new self;
 
@@ -80,8 +80,8 @@ final class VerifyProfileUpdateParams implements BaseModel
         null !== $language && $obj->language = $language;
         null !== $name && $obj->name = $name;
         null !== $sms && $obj->sms = $sms;
-        null !== $webhookFailoverURL && $obj->webhookFailoverURL = $webhookFailoverURL;
-        null !== $webhookURL && $obj->webhookURL = $webhookURL;
+        null !== $webhook_failover_url && $obj->webhook_failover_url = $webhook_failover_url;
+        null !== $webhook_url && $obj->webhook_url = $webhook_url;
 
         return $obj;
     }
@@ -129,7 +129,7 @@ final class VerifyProfileUpdateParams implements BaseModel
     public function withWebhookFailoverURL(string $webhookFailoverURL): self
     {
         $obj = clone $this;
-        $obj->webhookFailoverURL = $webhookFailoverURL;
+        $obj->webhook_failover_url = $webhookFailoverURL;
 
         return $obj;
     }
@@ -137,7 +137,7 @@ final class VerifyProfileUpdateParams implements BaseModel
     public function withWebhookURL(string $webhookURL): self
     {
         $obj = clone $this;
-        $obj->webhookURL = $webhookURL;
+        $obj->webhook_url = $webhookURL;
 
         return $obj;
     }

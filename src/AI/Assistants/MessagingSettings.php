@@ -10,7 +10,8 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type MessagingSettingsShape = array{
- *   defaultMessagingProfileID?: string, deliveryStatusWebhookURL?: string
+ *   default_messaging_profile_id?: string|null,
+ *   delivery_status_webhook_url?: string|null,
  * }
  */
 final class MessagingSettings implements BaseModel
@@ -21,14 +22,14 @@ final class MessagingSettings implements BaseModel
     /**
      * Default Messaging Profile used for messaging exchanges with your assistant. This will be created automatically on assistant creation.
      */
-    #[Api('default_messaging_profile_id', optional: true)]
-    public ?string $defaultMessagingProfileID;
+    #[Api(optional: true)]
+    public ?string $default_messaging_profile_id;
 
     /**
      * The URL where webhooks related to delivery statused for assistant messages will be sent.
      */
-    #[Api('delivery_status_webhook_url', optional: true)]
-    public ?string $deliveryStatusWebhookURL;
+    #[Api(optional: true)]
+    public ?string $delivery_status_webhook_url;
 
     public function __construct()
     {
@@ -41,13 +42,13 @@ final class MessagingSettings implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $defaultMessagingProfileID = null,
-        ?string $deliveryStatusWebhookURL = null,
+        ?string $default_messaging_profile_id = null,
+        ?string $delivery_status_webhook_url = null,
     ): self {
         $obj = new self;
 
-        null !== $defaultMessagingProfileID && $obj->defaultMessagingProfileID = $defaultMessagingProfileID;
-        null !== $deliveryStatusWebhookURL && $obj->deliveryStatusWebhookURL = $deliveryStatusWebhookURL;
+        null !== $default_messaging_profile_id && $obj->default_messaging_profile_id = $default_messaging_profile_id;
+        null !== $delivery_status_webhook_url && $obj->delivery_status_webhook_url = $delivery_status_webhook_url;
 
         return $obj;
     }
@@ -59,7 +60,7 @@ final class MessagingSettings implements BaseModel
         string $defaultMessagingProfileID
     ): self {
         $obj = clone $this;
-        $obj->defaultMessagingProfileID = $defaultMessagingProfileID;
+        $obj->default_messaging_profile_id = $defaultMessagingProfileID;
 
         return $obj;
     }
@@ -71,7 +72,7 @@ final class MessagingSettings implements BaseModel
         string $deliveryStatusWebhookURL
     ): self {
         $obj = clone $this;
-        $obj->deliveryStatusWebhookURL = $deliveryStatusWebhookURL;
+        $obj->delivery_status_webhook_url = $deliveryStatusWebhookURL;
 
         return $obj;
     }

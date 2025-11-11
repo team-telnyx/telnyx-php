@@ -33,7 +33,7 @@ final class CallEventsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->callEvents->list();
+        $result = $this->client->callEvents->list([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

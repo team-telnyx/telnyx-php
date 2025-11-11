@@ -45,7 +45,7 @@ final class CampaignTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->campaign->update('campaignId');
+        $result = $this->client->campaign->update('campaignId', []);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -57,7 +57,7 @@ final class CampaignTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->campaign->list(brandID: 'brandId');
+        $result = $this->client->campaign->list(['brandId' => 'brandId']);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -69,7 +69,7 @@ final class CampaignTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->campaign->list(brandID: 'brandId');
+        $result = $this->client->campaign->list(['brandId' => 'brandId']);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -143,7 +143,9 @@ final class CampaignTest extends TestCase
 
         $result = $this->client->campaign->submitAppeal(
             '5eb13888-32b7-4cab-95e6-d834dde21d64',
-            'The website has been updated to include the required privacy policy and terms of service.',
+            [
+                'appeal_reason' => 'The website has been updated to include the required privacy policy and terms of service.',
+            ],
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -158,7 +160,9 @@ final class CampaignTest extends TestCase
 
         $result = $this->client->campaign->submitAppeal(
             '5eb13888-32b7-4cab-95e6-d834dde21d64',
-            'The website has been updated to include the required privacy policy and terms of service.',
+            [
+                'appeal_reason' => 'The website has been updated to include the required privacy policy and terms of service.',
+            ],
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType

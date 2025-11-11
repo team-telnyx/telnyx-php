@@ -8,11 +8,8 @@ use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\GlobalIPUsage\GlobalIPUsageGetResponse;
 use Telnyx\GlobalIPUsage\GlobalIPUsageRetrieveParams;
-use Telnyx\GlobalIPUsage\GlobalIPUsageRetrieveParams\Filter;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\GlobalIPUsageContract;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class GlobalIPUsageService implements GlobalIPUsageContract
 {
@@ -26,33 +23,19 @@ final class GlobalIPUsageService implements GlobalIPUsageContract
      *
      * Global IP Usage Metrics
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[global_ip_id][in]
+     * @param array{
+     *   filter?: array{global_ip_id?: string|array{in?: string}}
+     * }|GlobalIPUsageRetrieveParams $params
      *
      * @throws APIException
      */
     public function retrieve(
-        $filter = omit,
-        ?RequestOptions $requestOptions = null
-    ): GlobalIPUsageGetResponse {
-        $params = ['filter' => $filter];
-
-        return $this->retrieveRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|GlobalIPUsageRetrieveParams $params,
+        ?RequestOptions $requestOptions = null,
     ): GlobalIPUsageGetResponse {
         [$parsed, $options] = GlobalIPUsageRetrieveParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

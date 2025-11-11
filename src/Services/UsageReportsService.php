@@ -11,11 +11,7 @@ use Telnyx\ServiceContracts\UsageReportsContract;
 use Telnyx\UsageReports\UsageReportGetOptionsParams;
 use Telnyx\UsageReports\UsageReportGetOptionsResponse;
 use Telnyx\UsageReports\UsageReportListParams;
-use Telnyx\UsageReports\UsageReportListParams\Format;
-use Telnyx\UsageReports\UsageReportListParams\Page;
 use Telnyx\UsageReports\UsageReportListResponse;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class UsageReportsService implements UsageReportsContract
 {
@@ -29,68 +25,30 @@ final class UsageReportsService implements UsageReportsContract
      *
      * Get Telnyx usage data by product, broken out by the specified dimensions
      *
-     * @param list<string> $dimensions Breakout by specified product dimensions
-     * @param list<string> $metrics Specified product usage values
-     * @param string $product Telnyx product
-     * @param string $dateRange A more user-friendly way to specify the timespan you want to filter by. More options can be found in the Telnyx API Reference docs.
-     * @param string $endDate The end date for the time range you are interested in. The maximum time range is 31 days. Format: YYYY-MM-DDTHH:mm:ssZ
-     * @param string $filter Filter records on dimensions
-     * @param Format|value-of<Format> $format Specify the response format (csv or json). JSON is returned by default, even if not specified.
-     * @param bool $managedAccounts return the aggregations for all Managed Accounts under the user making the request
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
-     * @param list<string> $sort Specifies the sort order for results
-     * @param string $startDate The start date for the time range you are interested in. The maximum time range is 31 days. Format: YYYY-MM-DDTHH:mm:ssZ
-     * @param string $authorizationBearer Authenticates the request with your Telnyx API V2 KEY
+     * @param array{
+     *   dimensions: list<string>,
+     *   metrics: list<string>,
+     *   product: string,
+     *   date_range?: string,
+     *   end_date?: string,
+     *   filter?: string,
+     *   format?: "csv"|"json",
+     *   managed_accounts?: bool,
+     *   page?: array{number?: int, size?: int},
+     *   sort?: list<string>,
+     *   start_date?: string,
+     *   authorization_bearer?: string,
+     * }|UsageReportListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $dimensions,
-        $metrics,
-        $product,
-        $dateRange = omit,
-        $endDate = omit,
-        $filter = omit,
-        $format = omit,
-        $managedAccounts = omit,
-        $page = omit,
-        $sort = omit,
-        $startDate = omit,
-        $authorizationBearer = omit,
-        ?RequestOptions $requestOptions = null,
-    ): UsageReportListResponse {
-        $params = [
-            'dimensions' => $dimensions,
-            'metrics' => $metrics,
-            'product' => $product,
-            'dateRange' => $dateRange,
-            'endDate' => $endDate,
-            'filter' => $filter,
-            'format' => $format,
-            'managedAccounts' => $managedAccounts,
-            'page' => $page,
-            'sort' => $sort,
-            'startDate' => $startDate,
-            'authorizationBearer' => $authorizationBearer,
-        ];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
+        array|UsageReportListParams $params,
         ?RequestOptions $requestOptions = null
     ): UsageReportListResponse {
         [$parsed, $options] = UsageReportListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
         $query_params = array_flip(
             [
@@ -108,7 +66,7 @@ final class UsageReportsService implements UsageReportsContract
             ],
         );
 
-        /** @var array<string, string> */
+        /** @var array<string,string> */
         $header_params = array_diff_key($parsed, $query_params);
 
         // @phpstan-ignore-next-line;
@@ -127,41 +85,23 @@ final class UsageReportsService implements UsageReportsContract
      *
      * Get the Usage Reports options for querying usage, including the products available and their respective metrics and dimensions
      *
-     * @param string $product Options (dimensions and metrics) for a given product. If none specified, all products will be returned.
-     * @param string $authorizationBearer Authenticates the request with your Telnyx API V2 KEY
+     * @param array{
+     *   product?: string, authorization_bearer?: string
+     * }|UsageReportGetOptionsParams $params
      *
      * @throws APIException
      */
     public function getOptions(
-        $product = omit,
-        $authorizationBearer = omit,
+        array|UsageReportGetOptionsParams $params,
         ?RequestOptions $requestOptions = null,
-    ): UsageReportGetOptionsResponse {
-        $params = [
-            'product' => $product, 'authorizationBearer' => $authorizationBearer,
-        ];
-
-        return $this->getOptionsRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function getOptionsRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): UsageReportGetOptionsResponse {
         [$parsed, $options] = UsageReportGetOptionsParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
         $query_params = ['product'];
 
-        /** @var array<string, string> */
+        /** @var array<string,string> */
         $header_params = array_diff_key($parsed, $query_params);
 
         // @phpstan-ignore-next-line;

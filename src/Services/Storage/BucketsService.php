@@ -13,17 +13,15 @@ use Telnyx\Services\Storage\Buckets\UsageService;
 use Telnyx\Storage\Buckets\BucketCreatePresignedURLParams;
 use Telnyx\Storage\Buckets\BucketNewPresignedURLResponse;
 
-use const Telnyx\Core\OMIT as omit;
-
 final class BucketsService implements BucketsContract
 {
     /**
-     * @@api
+     * @api
      */
     public SslCertificateService $sslCertificate;
 
     /**
-     * @@api
+     * @api
      */
     public UsageService $usage;
 
@@ -43,37 +41,20 @@ final class BucketsService implements BucketsContract
      *
      * Refer to: https://developers.telnyx.com/docs/cloud-storage/presigned-urls
      *
-     * @param string $bucketName
-     * @param int $ttl The time to live of the token in seconds
+     * @param array{
+     *   bucketName: string, ttl?: int
+     * }|BucketCreatePresignedURLParams $params
      *
      * @throws APIException
      */
     public function createPresignedURL(
         string $objectName,
-        $bucketName,
-        $ttl = omit,
+        array|BucketCreatePresignedURLParams $params,
         ?RequestOptions $requestOptions = null,
-    ): BucketNewPresignedURLResponse {
-        $params = ['bucketName' => $bucketName, 'ttl' => $ttl];
-
-        return $this->createPresignedURLRaw($objectName, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createPresignedURLRaw(
-        string $objectName,
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): BucketNewPresignedURLResponse {
         [$parsed, $options] = BucketCreatePresignedURLParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
         $bucketName = $parsed['bucketName'];
         unset($parsed['bucketName']);

@@ -9,7 +9,9 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type SourceShape = array{parameter?: string, pointer?: string}
+ * @phpstan-type SourceShape = array{
+ *   parameter?: string|null, pointer?: string|null
+ * }
  */
 final class Source implements BaseModel
 {

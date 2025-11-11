@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type DataShape = array{
- *   numberTags?: list<string>, outboundProfileTags?: list<string>
+ *   number_tags?: list<string>|null, outbound_profile_tags?: list<string>|null
  * }
  */
 final class Data implements BaseModel
@@ -21,18 +21,18 @@ final class Data implements BaseModel
     /**
      * A list of your tags on the given resource type. NOTE: The casing of the tags returned will not necessarily match the casing of the tags when they were added to a resource. This is because the tags will have the casing of the first time they were used within the Telnyx system regardless of source.
      *
-     * @var list<string>|null $numberTags
+     * @var list<string>|null $number_tags
      */
-    #[Api('number_tags', list: 'string', optional: true)]
-    public ?array $numberTags;
+    #[Api(list: 'string', optional: true)]
+    public ?array $number_tags;
 
     /**
      * A list of your tags on the given resource type. NOTE: The casing of the tags returned will not necessarily match the casing of the tags when they were added to a resource. This is because the tags will have the casing of the first time they were used within the Telnyx system regardless of source.
      *
-     * @var list<string>|null $outboundProfileTags
+     * @var list<string>|null $outbound_profile_tags
      */
-    #[Api('outbound_profile_tags', list: 'string', optional: true)]
-    public ?array $outboundProfileTags;
+    #[Api(list: 'string', optional: true)]
+    public ?array $outbound_profile_tags;
 
     public function __construct()
     {
@@ -44,17 +44,17 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $numberTags
-     * @param list<string> $outboundProfileTags
+     * @param list<string> $number_tags
+     * @param list<string> $outbound_profile_tags
      */
     public static function with(
-        ?array $numberTags = null,
-        ?array $outboundProfileTags = null
+        ?array $number_tags = null,
+        ?array $outbound_profile_tags = null
     ): self {
         $obj = new self;
 
-        null !== $numberTags && $obj->numberTags = $numberTags;
-        null !== $outboundProfileTags && $obj->outboundProfileTags = $outboundProfileTags;
+        null !== $number_tags && $obj->number_tags = $number_tags;
+        null !== $outbound_profile_tags && $obj->outbound_profile_tags = $outbound_profile_tags;
 
         return $obj;
     }
@@ -67,7 +67,7 @@ final class Data implements BaseModel
     public function withNumberTags(array $numberTags): self
     {
         $obj = clone $this;
-        $obj->numberTags = $numberTags;
+        $obj->number_tags = $numberTags;
 
         return $obj;
     }
@@ -80,7 +80,7 @@ final class Data implements BaseModel
     public function withOutboundProfileTags(array $outboundProfileTags): self
     {
         $obj = clone $this;
-        $obj->outboundProfileTags = $outboundProfileTags;
+        $obj->outbound_profile_tags = $outboundProfileTags;
 
         return $obj;
     }

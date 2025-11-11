@@ -10,7 +10,6 @@ use Telnyx\GlobalIPAssignments\GlobalIPAssignmentCreateParams;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentDeleteResponse;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentGetResponse;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentListParams;
-use Telnyx\GlobalIPAssignments\GlobalIPAssignmentListParams\Page;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentListResponse;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentNewResponse;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentUpdateParams;
@@ -18,8 +17,6 @@ use Telnyx\GlobalIPAssignments\GlobalIPAssignmentUpdateParams\Body;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentUpdateResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\GlobalIPAssignmentsContract;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class GlobalIPAssignmentsService implements GlobalIPAssignmentsContract
 {
@@ -33,41 +30,19 @@ final class GlobalIPAssignmentsService implements GlobalIPAssignmentsContract
      *
      * Create a Global IP assignment.
      *
-     * @param string $globalIPID global IP ID
-     * @param bool $isInMaintenance enable/disable BGP announcement
-     * @param string $wireguardPeerID wireguard peer ID
+     * @param array{
+     *   global_ip_id?: string, is_in_maintenance?: bool, wireguard_peer_id?: string
+     * }|GlobalIPAssignmentCreateParams $params
      *
      * @throws APIException
      */
     public function create(
-        $globalIPID = omit,
-        $isInMaintenance = omit,
-        $wireguardPeerID = omit,
+        array|GlobalIPAssignmentCreateParams $params,
         ?RequestOptions $requestOptions = null,
-    ): GlobalIPAssignmentNewResponse {
-        $params = [
-            'globalIPID' => $globalIPID,
-            'isInMaintenance' => $isInMaintenance,
-            'wireguardPeerID' => $wireguardPeerID,
-        ];
-
-        return $this->createRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): GlobalIPAssignmentNewResponse {
         [$parsed, $options] = GlobalIPAssignmentCreateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -105,35 +80,16 @@ final class GlobalIPAssignmentsService implements GlobalIPAssignmentsContract
      *
      * Update a Global IP assignment.
      *
-     * @param Body $body
-     *
      * @throws APIException
      */
     public function update(
         string $id,
-        $body,
-        ?RequestOptions $requestOptions = null
-    ): GlobalIPAssignmentUpdateResponse {
-        $params = ['body' => $body];
-
-        return $this->updateRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $id,
-        array $params,
+        Body $params,
         ?RequestOptions $requestOptions = null
     ): GlobalIPAssignmentUpdateResponse {
         [$parsed, $options] = GlobalIPAssignmentUpdateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -151,33 +107,19 @@ final class GlobalIPAssignmentsService implements GlobalIPAssignmentsContract
      *
      * List all Global IP assignments.
      *
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param array{
+     *   page?: array{number?: int, size?: int}
+     * }|GlobalIPAssignmentListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): GlobalIPAssignmentListResponse {
-        $params = ['page' => $page];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|GlobalIPAssignmentListParams $params,
+        ?RequestOptions $requestOptions = null,
     ): GlobalIPAssignmentListResponse {
         [$parsed, $options] = GlobalIPAssignmentListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

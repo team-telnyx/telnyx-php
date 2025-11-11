@@ -13,7 +13,7 @@ use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderCheckEligibilit
 
 /**
  * @phpstan-type MessagingHostedNumberOrderCheckEligibilityResponseShape = array{
- *   phoneNumbers?: list<PhoneNumber>
+ *   phone_numbers?: list<PhoneNumber>|null
  * }
  */
 final class MessagingHostedNumberOrderCheckEligibilityResponse implements BaseModel, ResponseConverter
@@ -26,10 +26,10 @@ final class MessagingHostedNumberOrderCheckEligibilityResponse implements BaseMo
     /**
      * List of phone numbers with their eligibility status.
      *
-     * @var list<PhoneNumber>|null $phoneNumbers
+     * @var list<PhoneNumber>|null $phone_numbers
      */
-    #[Api('phone_numbers', list: PhoneNumber::class, optional: true)]
-    public ?array $phoneNumbers;
+    #[Api(list: PhoneNumber::class, optional: true)]
+    public ?array $phone_numbers;
 
     public function __construct()
     {
@@ -41,13 +41,13 @@ final class MessagingHostedNumberOrderCheckEligibilityResponse implements BaseMo
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<PhoneNumber> $phoneNumbers
+     * @param list<PhoneNumber> $phone_numbers
      */
-    public static function with(?array $phoneNumbers = null): self
+    public static function with(?array $phone_numbers = null): self
     {
         $obj = new self;
 
-        null !== $phoneNumbers && $obj->phoneNumbers = $phoneNumbers;
+        null !== $phone_numbers && $obj->phone_numbers = $phone_numbers;
 
         return $obj;
     }
@@ -60,7 +60,7 @@ final class MessagingHostedNumberOrderCheckEligibilityResponse implements BaseMo
     public function withPhoneNumbers(array $phoneNumbers): self
     {
         $obj = clone $this;
-        $obj->phoneNumbers = $phoneNumbers;
+        $obj->phone_numbers = $phoneNumbers;
 
         return $obj;
     }

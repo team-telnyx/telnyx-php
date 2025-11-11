@@ -12,57 +12,57 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type RecordShape = array{
- *   ageGated?: bool,
- *   assignedPhoneNumbersCount?: float,
- *   autoRenewal?: bool,
- *   billedDate?: string,
- *   brandDisplayName?: string,
- *   brandID?: string,
- *   campaignID?: string,
- *   campaignStatus?: value-of<CampaignStatus>,
- *   createDate?: string,
- *   cspID?: string,
- *   description?: string,
- *   directLending?: bool,
- *   embeddedLink?: bool,
- *   embeddedLinkSample?: string,
- *   embeddedPhone?: bool,
- *   failureReasons?: string,
- *   helpKeywords?: string,
- *   helpMessage?: string,
- *   isTMobileNumberPoolingEnabled?: bool,
- *   isTMobileRegistered?: bool,
- *   isTMobileSuspended?: bool,
- *   messageFlow?: string,
- *   mock?: bool,
- *   nextRenewalOrExpirationDate?: string,
- *   numberPool?: bool,
- *   optinKeywords?: string,
- *   optinMessage?: string,
- *   optoutKeywords?: string,
- *   optoutMessage?: string,
- *   privacyPolicyLink?: string,
- *   referenceID?: string,
- *   resellerID?: string,
- *   sample1?: string,
- *   sample2?: string,
- *   sample3?: string,
- *   sample4?: string,
- *   sample5?: string,
- *   status?: string,
- *   submissionStatus?: value-of<SubmissionStatus>,
- *   subscriberHelp?: bool,
- *   subscriberOptin?: bool,
- *   subscriberOptout?: bool,
- *   subUsecases?: list<string>,
- *   tcrBrandID?: string,
- *   tcrCampaignID?: string,
- *   termsAndConditions?: bool,
- *   termsAndConditionsLink?: string,
- *   usecase?: string,
- *   vertical?: string,
- *   webhookFailoverURL?: string,
- *   webhookURL?: string,
+ *   ageGated?: bool|null,
+ *   assignedPhoneNumbersCount?: float|null,
+ *   autoRenewal?: bool|null,
+ *   billedDate?: string|null,
+ *   brandDisplayName?: string|null,
+ *   brandId?: string|null,
+ *   campaignId?: string|null,
+ *   campaignStatus?: value-of<CampaignStatus>|null,
+ *   createDate?: string|null,
+ *   cspId?: string|null,
+ *   description?: string|null,
+ *   directLending?: bool|null,
+ *   embeddedLink?: bool|null,
+ *   embeddedLinkSample?: string|null,
+ *   embeddedPhone?: bool|null,
+ *   failureReasons?: string|null,
+ *   helpKeywords?: string|null,
+ *   helpMessage?: string|null,
+ *   isTMobileNumberPoolingEnabled?: bool|null,
+ *   isTMobileRegistered?: bool|null,
+ *   isTMobileSuspended?: bool|null,
+ *   messageFlow?: string|null,
+ *   mock?: bool|null,
+ *   nextRenewalOrExpirationDate?: string|null,
+ *   numberPool?: bool|null,
+ *   optinKeywords?: string|null,
+ *   optinMessage?: string|null,
+ *   optoutKeywords?: string|null,
+ *   optoutMessage?: string|null,
+ *   privacyPolicyLink?: string|null,
+ *   referenceId?: string|null,
+ *   resellerId?: string|null,
+ *   sample1?: string|null,
+ *   sample2?: string|null,
+ *   sample3?: string|null,
+ *   sample4?: string|null,
+ *   sample5?: string|null,
+ *   status?: string|null,
+ *   submissionStatus?: value-of<SubmissionStatus>|null,
+ *   subscriberHelp?: bool|null,
+ *   subscriberOptin?: bool|null,
+ *   subscriberOptout?: bool|null,
+ *   subUsecases?: list<string>|null,
+ *   tcrBrandId?: string|null,
+ *   tcrCampaignId?: string|null,
+ *   termsAndConditions?: bool|null,
+ *   termsAndConditionsLink?: string|null,
+ *   usecase?: string|null,
+ *   vertical?: string|null,
+ *   webhookFailoverURL?: string|null,
+ *   webhookURL?: string|null,
  * }
  */
 final class Record implements BaseModel
@@ -103,14 +103,14 @@ final class Record implements BaseModel
     /**
      * Unique identifier assigned to the brand.
      */
-    #[Api('brandId', optional: true)]
-    public ?string $brandID;
+    #[Api(optional: true)]
+    public ?string $brandId;
 
     /**
      * Unique identifier for a campaign.
      */
-    #[Api('campaignId', optional: true)]
-    public ?string $campaignID;
+    #[Api(optional: true)]
+    public ?string $campaignId;
 
     /**
      * Campaign status.
@@ -129,8 +129,8 @@ final class Record implements BaseModel
     /**
      * Alphanumeric identifier of the CSP associated with this campaign.
      */
-    #[Api('cspId', optional: true)]
-    public ?string $cspID;
+    #[Api(optional: true)]
+    public ?string $cspId;
 
     /**
      * Summary description of this campaign.
@@ -252,14 +252,14 @@ final class Record implements BaseModel
     /**
      * Caller supplied campaign reference ID. If supplied, the value must be unique across all submitted campaigns. Can be used to prevent duplicate campaign registrations.
      */
-    #[Api('referenceId', optional: true)]
-    public ?string $referenceID;
+    #[Api(optional: true)]
+    public ?string $referenceId;
 
     /**
      * Alphanumeric identifier of the reseller that you want to associate with this campaign.
      */
-    #[Api('resellerId', optional: true)]
-    public ?string $resellerID;
+    #[Api(optional: true)]
+    public ?string $resellerId;
 
     /**
      * Message sample. Some campaign tiers require 1 or more message samples.
@@ -334,14 +334,14 @@ final class Record implements BaseModel
     /**
      * Unique identifier assigned to the brand by the registry.
      */
-    #[Api('tcrBrandId', optional: true)]
-    public ?string $tcrBrandID;
+    #[Api(optional: true)]
+    public ?string $tcrBrandId;
 
     /**
      * Unique identifier assigned to the campaign by the registry.
      */
-    #[Api('tcrCampaignId', optional: true)]
-    public ?string $tcrCampaignID;
+    #[Api(optional: true)]
+    public ?string $tcrCampaignId;
 
     /**
      * Is terms & conditions accepted?
@@ -403,11 +403,11 @@ final class Record implements BaseModel
         ?bool $autoRenewal = null,
         ?string $billedDate = null,
         ?string $brandDisplayName = null,
-        ?string $brandID = null,
-        ?string $campaignID = null,
+        ?string $brandId = null,
+        ?string $campaignId = null,
         CampaignStatus|string|null $campaignStatus = null,
         ?string $createDate = null,
-        ?string $cspID = null,
+        ?string $cspId = null,
         ?string $description = null,
         ?bool $directLending = null,
         ?bool $embeddedLink = null,
@@ -428,8 +428,8 @@ final class Record implements BaseModel
         ?string $optoutKeywords = null,
         ?string $optoutMessage = null,
         ?string $privacyPolicyLink = null,
-        ?string $referenceID = null,
-        ?string $resellerID = null,
+        ?string $referenceId = null,
+        ?string $resellerId = null,
         ?string $sample1 = null,
         ?string $sample2 = null,
         ?string $sample3 = null,
@@ -441,8 +441,8 @@ final class Record implements BaseModel
         ?bool $subscriberOptin = null,
         ?bool $subscriberOptout = null,
         ?array $subUsecases = null,
-        ?string $tcrBrandID = null,
-        ?string $tcrCampaignID = null,
+        ?string $tcrBrandId = null,
+        ?string $tcrCampaignId = null,
         ?bool $termsAndConditions = null,
         ?string $termsAndConditionsLink = null,
         ?string $usecase = null,
@@ -457,11 +457,11 @@ final class Record implements BaseModel
         null !== $autoRenewal && $obj->autoRenewal = $autoRenewal;
         null !== $billedDate && $obj->billedDate = $billedDate;
         null !== $brandDisplayName && $obj->brandDisplayName = $brandDisplayName;
-        null !== $brandID && $obj->brandID = $brandID;
-        null !== $campaignID && $obj->campaignID = $campaignID;
+        null !== $brandId && $obj->brandId = $brandId;
+        null !== $campaignId && $obj->campaignId = $campaignId;
         null !== $campaignStatus && $obj['campaignStatus'] = $campaignStatus;
         null !== $createDate && $obj->createDate = $createDate;
-        null !== $cspID && $obj->cspID = $cspID;
+        null !== $cspId && $obj->cspId = $cspId;
         null !== $description && $obj->description = $description;
         null !== $directLending && $obj->directLending = $directLending;
         null !== $embeddedLink && $obj->embeddedLink = $embeddedLink;
@@ -482,8 +482,8 @@ final class Record implements BaseModel
         null !== $optoutKeywords && $obj->optoutKeywords = $optoutKeywords;
         null !== $optoutMessage && $obj->optoutMessage = $optoutMessage;
         null !== $privacyPolicyLink && $obj->privacyPolicyLink = $privacyPolicyLink;
-        null !== $referenceID && $obj->referenceID = $referenceID;
-        null !== $resellerID && $obj->resellerID = $resellerID;
+        null !== $referenceId && $obj->referenceId = $referenceId;
+        null !== $resellerId && $obj->resellerId = $resellerId;
         null !== $sample1 && $obj->sample1 = $sample1;
         null !== $sample2 && $obj->sample2 = $sample2;
         null !== $sample3 && $obj->sample3 = $sample3;
@@ -495,8 +495,8 @@ final class Record implements BaseModel
         null !== $subscriberOptin && $obj->subscriberOptin = $subscriberOptin;
         null !== $subscriberOptout && $obj->subscriberOptout = $subscriberOptout;
         null !== $subUsecases && $obj->subUsecases = $subUsecases;
-        null !== $tcrBrandID && $obj->tcrBrandID = $tcrBrandID;
-        null !== $tcrCampaignID && $obj->tcrCampaignID = $tcrCampaignID;
+        null !== $tcrBrandId && $obj->tcrBrandId = $tcrBrandId;
+        null !== $tcrCampaignId && $obj->tcrCampaignId = $tcrCampaignId;
         null !== $termsAndConditions && $obj->termsAndConditions = $termsAndConditions;
         null !== $termsAndConditionsLink && $obj->termsAndConditionsLink = $termsAndConditionsLink;
         null !== $usecase && $obj->usecase = $usecase;
@@ -569,7 +569,7 @@ final class Record implements BaseModel
     public function withBrandID(string $brandID): self
     {
         $obj = clone $this;
-        $obj->brandID = $brandID;
+        $obj->brandId = $brandID;
 
         return $obj;
     }
@@ -580,7 +580,7 @@ final class Record implements BaseModel
     public function withCampaignID(string $campaignID): self
     {
         $obj = clone $this;
-        $obj->campaignID = $campaignID;
+        $obj->campaignId = $campaignID;
 
         return $obj;
     }
@@ -616,7 +616,7 @@ final class Record implements BaseModel
     public function withCspID(string $cspID): self
     {
         $obj = clone $this;
-        $obj->cspID = $cspID;
+        $obj->cspId = $cspID;
 
         return $obj;
     }
@@ -846,7 +846,7 @@ final class Record implements BaseModel
     public function withReferenceID(string $referenceID): self
     {
         $obj = clone $this;
-        $obj->referenceID = $referenceID;
+        $obj->referenceId = $referenceID;
 
         return $obj;
     }
@@ -857,7 +857,7 @@ final class Record implements BaseModel
     public function withResellerID(string $resellerID): self
     {
         $obj = clone $this;
-        $obj->resellerID = $resellerID;
+        $obj->resellerId = $resellerID;
 
         return $obj;
     }
@@ -994,7 +994,7 @@ final class Record implements BaseModel
     public function withTcrBrandID(string $tcrBrandID): self
     {
         $obj = clone $this;
-        $obj->tcrBrandID = $tcrBrandID;
+        $obj->tcrBrandId = $tcrBrandID;
 
         return $obj;
     }
@@ -1005,7 +1005,7 @@ final class Record implements BaseModel
     public function withTcrCampaignID(string $tcrCampaignID): self
     {
         $obj = clone $this;
-        $obj->tcrCampaignID = $tcrCampaignID;
+        $obj->tcrCampaignId = $tcrCampaignID;
 
         return $obj;
     }

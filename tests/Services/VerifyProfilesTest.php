@@ -33,7 +33,7 @@ final class VerifyProfilesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->verifyProfiles->create(name: 'Test Profile');
+        $result = $this->client->verifyProfiles->create(['name' => 'Test Profile']);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -45,7 +45,7 @@ final class VerifyProfilesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->verifyProfiles->create(name: 'Test Profile');
+        $result = $this->client->verifyProfiles->create(['name' => 'Test Profile']);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -72,7 +72,8 @@ final class VerifyProfilesTest extends TestCase
         }
 
         $result = $this->client->verifyProfiles->update(
-            '12ade33a-21c0-473b-b055-b3c836e1c292'
+            '12ade33a-21c0-473b-b055-b3c836e1c292',
+            []
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -85,7 +86,7 @@ final class VerifyProfilesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->verifyProfiles->list();
+        $result = $this->client->verifyProfiles->list([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -111,9 +112,9 @@ final class VerifyProfilesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->verifyProfiles->createTemplate(
-            'Your {{app_name}} verification code is: {{code}}.'
-        );
+        $result = $this->client->verifyProfiles->createTemplate([
+            'text' => 'Your {{app_name}} verification code is: {{code}}.',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -125,9 +126,9 @@ final class VerifyProfilesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->verifyProfiles->createTemplate(
-            'Your {{app_name}} verification code is: {{code}}.'
-        );
+        $result = $this->client->verifyProfiles->createTemplate([
+            'text' => 'Your {{app_name}} verification code is: {{code}}.',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -153,7 +154,7 @@ final class VerifyProfilesTest extends TestCase
 
         $result = $this->client->verifyProfiles->updateTemplate(
             '12ade33a-21c0-473b-b055-b3c836e1c292',
-            'Your {{app_name}} verification code is: {{code}}.',
+            ['text' => 'Your {{app_name}} verification code is: {{code}}.'],
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -168,7 +169,7 @@ final class VerifyProfilesTest extends TestCase
 
         $result = $this->client->verifyProfiles->updateTemplate(
             '12ade33a-21c0-473b-b055-b3c836e1c292',
-            'Your {{app_name}} verification code is: {{code}}.',
+            ['text' => 'Your {{app_name}} verification code is: {{code}}.'],
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType

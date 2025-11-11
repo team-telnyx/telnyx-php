@@ -45,7 +45,7 @@ final class ActionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->managedAccounts->actions->enable('id');
+        $result = $this->client->managedAccounts->actions->enable('id', []);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

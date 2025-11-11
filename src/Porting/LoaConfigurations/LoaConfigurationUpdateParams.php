@@ -19,7 +19,7 @@ use Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Logo;
  *
  * @phpstan-type LoaConfigurationUpdateParamsShape = array{
  *   address: Address,
- *   companyName: string,
+ *   company_name: string,
  *   contact: Contact,
  *   logo: Logo,
  *   name: string,
@@ -40,8 +40,8 @@ final class LoaConfigurationUpdateParams implements BaseModel
     /**
      * The name of the company.
      */
-    #[Api('company_name')]
-    public string $companyName;
+    #[Api]
+    public string $company_name;
 
     /**
      * The contact information of the company.
@@ -67,7 +67,7 @@ final class LoaConfigurationUpdateParams implements BaseModel
      * To enforce required parameters use
      * ```
      * LoaConfigurationUpdateParams::with(
-     *   address: ..., companyName: ..., contact: ..., logo: ..., name: ...
+     *   address: ..., company_name: ..., contact: ..., logo: ..., name: ...
      * )
      * ```
      *
@@ -94,7 +94,7 @@ final class LoaConfigurationUpdateParams implements BaseModel
      */
     public static function with(
         Address $address,
-        string $companyName,
+        string $company_name,
         Contact $contact,
         Logo $logo,
         string $name,
@@ -102,7 +102,7 @@ final class LoaConfigurationUpdateParams implements BaseModel
         $obj = new self;
 
         $obj->address = $address;
-        $obj->companyName = $companyName;
+        $obj->company_name = $company_name;
         $obj->contact = $contact;
         $obj->logo = $logo;
         $obj->name = $name;
@@ -127,7 +127,7 @@ final class LoaConfigurationUpdateParams implements BaseModel
     public function withCompanyName(string $companyName): self
     {
         $obj = clone $this;
-        $obj->companyName = $companyName;
+        $obj->company_name = $companyName;
 
         return $obj;
     }

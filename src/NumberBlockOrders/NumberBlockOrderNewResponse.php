@@ -11,7 +11,9 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type NumberBlockOrderNewResponseShape = array{data?: NumberBlockOrder}
+ * @phpstan-type NumberBlockOrderNewResponseShape = array{
+ *   data?: NumberBlockOrder|null
+ * }
  */
 final class NumberBlockOrderNewResponse implements BaseModel, ResponseConverter
 {

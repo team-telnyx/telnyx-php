@@ -6,7 +6,6 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderValidateCodesParams\VerificationCode;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -34,7 +33,7 @@ final class MessagingHostedNumberOrdersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->messagingHostedNumberOrders->create();
+        $result = $this->client->messagingHostedNumberOrders->create([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -58,7 +57,7 @@ final class MessagingHostedNumberOrdersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->messagingHostedNumberOrders->list();
+        $result = $this->client->messagingHostedNumberOrders->list([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -82,9 +81,9 @@ final class MessagingHostedNumberOrdersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->messagingHostedNumberOrders->checkEligibility(
-            ['string']
-        );
+        $result = $this->client->messagingHostedNumberOrders->checkEligibility([
+            'phone_numbers' => ['string'],
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -96,9 +95,9 @@ final class MessagingHostedNumberOrdersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->messagingHostedNumberOrders->checkEligibility(
-            ['string']
-        );
+        $result = $this->client->messagingHostedNumberOrders->checkEligibility([
+            'phone_numbers' => ['string'],
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -115,8 +114,7 @@ final class MessagingHostedNumberOrdersTest extends TestCase
             ->messagingHostedNumberOrders
             ->createVerificationCodes(
                 'id',
-                phoneNumbers: ['string'],
-                verificationMethod: 'sms'
+                ['phone_numbers' => ['string'], 'verification_method' => 'sms']
             )
         ;
 
@@ -135,8 +133,7 @@ final class MessagingHostedNumberOrdersTest extends TestCase
             ->messagingHostedNumberOrders
             ->createVerificationCodes(
                 'id',
-                phoneNumbers: ['string'],
-                verificationMethod: 'sms'
+                ['phone_numbers' => ['string'], 'verification_method' => 'sms']
             )
         ;
 
@@ -152,7 +149,11 @@ final class MessagingHostedNumberOrdersTest extends TestCase
 
         $result = $this->client->messagingHostedNumberOrders->validateCodes(
             'id',
-            [VerificationCode::with(code: 'code', phoneNumber: 'phone_number')]
+            [
+                'verification_codes' => [
+                    ['code' => 'code', 'phone_number' => 'phone_number'],
+                ],
+            ],
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -167,7 +168,11 @@ final class MessagingHostedNumberOrdersTest extends TestCase
 
         $result = $this->client->messagingHostedNumberOrders->validateCodes(
             'id',
-            [VerificationCode::with(code: 'code', phoneNumber: 'phone_number')]
+            [
+                'verification_codes' => [
+                    ['code' => 'code', 'phone_number' => 'phone_number'],
+                ],
+            ],
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType

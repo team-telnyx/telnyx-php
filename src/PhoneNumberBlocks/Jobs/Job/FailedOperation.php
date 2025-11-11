@@ -11,7 +11,7 @@ use Telnyx\PhoneNumberBlocks\Jobs\JobError;
 
 /**
  * @phpstan-type FailedOperationShape = array{
- *   id?: string, errors?: list<JobError>, phoneNumber?: string
+ *   id?: string|null, errors?: list<JobError>|null, phone_number?: string|null
  * }
  */
 final class FailedOperation implements BaseModel
@@ -32,8 +32,8 @@ final class FailedOperation implements BaseModel
     /**
      * The phone number in e164 format.
      */
-    #[Api('phone_number', optional: true)]
-    public ?string $phoneNumber;
+    #[Api(optional: true)]
+    public ?string $phone_number;
 
     public function __construct()
     {
@@ -50,13 +50,13 @@ final class FailedOperation implements BaseModel
     public static function with(
         ?string $id = null,
         ?array $errors = null,
-        ?string $phoneNumber = null
+        ?string $phone_number = null
     ): self {
         $obj = new self;
 
         null !== $id && $obj->id = $id;
         null !== $errors && $obj->errors = $errors;
-        null !== $phoneNumber && $obj->phoneNumber = $phoneNumber;
+        null !== $phone_number && $obj->phone_number = $phone_number;
 
         return $obj;
     }
@@ -89,7 +89,7 @@ final class FailedOperation implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj->phoneNumber = $phoneNumber;
+        $obj->phone_number = $phoneNumber;
 
         return $obj;
     }

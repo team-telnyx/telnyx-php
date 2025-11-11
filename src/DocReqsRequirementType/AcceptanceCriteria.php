@@ -12,12 +12,12 @@ use Telnyx\Core\Contracts\BaseModel;
  * Specifies objective criteria for acceptance.
  *
  * @phpstan-type AcceptanceCriteriaShape = array{
- *   acceptableCharacters?: string,
- *   acceptableValues?: list<string>,
- *   localityLimit?: string,
- *   maxLength?: int,
- *   minLength?: int,
- *   timeLimit?: string,
+ *   acceptable_characters?: string|null,
+ *   acceptable_values?: list<string>|null,
+ *   locality_limit?: string|null,
+ *   max_length?: int|null,
+ *   min_length?: int|null,
+ *   time_limit?: string|null,
  * }
  */
 final class AcceptanceCriteria implements BaseModel
@@ -28,40 +28,40 @@ final class AcceptanceCriteria implements BaseModel
     /**
      * Specifies the allowed characters as a string.
      */
-    #[Api('acceptable_characters', optional: true)]
-    public ?string $acceptableCharacters;
+    #[Api(optional: true)]
+    public ?string $acceptable_characters;
 
     /**
      * Specifies the list of strictly possible values for the requirement. Ignored when empty.
      *
-     * @var list<string>|null $acceptableValues
+     * @var list<string>|null $acceptable_values
      */
-    #[Api('acceptable_values', list: 'string', optional: true)]
-    public ?array $acceptableValues;
+    #[Api(list: 'string', optional: true)]
+    public ?array $acceptable_values;
 
     /**
      * Specifies geography-based acceptance criteria.
      */
-    #[Api('locality_limit', optional: true)]
-    public ?string $localityLimit;
+    #[Api(optional: true)]
+    public ?string $locality_limit;
 
     /**
      * Maximum length allowed for the value.
      */
-    #[Api('max_length', optional: true)]
-    public ?int $maxLength;
+    #[Api(optional: true)]
+    public ?int $max_length;
 
     /**
      * Minimum length allowed for the value.
      */
-    #[Api('min_length', optional: true)]
-    public ?int $minLength;
+    #[Api(optional: true)]
+    public ?int $min_length;
 
     /**
      * Specifies time-based acceptance criteria.
      */
-    #[Api('time_limit', optional: true)]
-    public ?string $timeLimit;
+    #[Api(optional: true)]
+    public ?string $time_limit;
 
     public function __construct()
     {
@@ -73,24 +73,24 @@ final class AcceptanceCriteria implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $acceptableValues
+     * @param list<string> $acceptable_values
      */
     public static function with(
-        ?string $acceptableCharacters = null,
-        ?array $acceptableValues = null,
-        ?string $localityLimit = null,
-        ?int $maxLength = null,
-        ?int $minLength = null,
-        ?string $timeLimit = null,
+        ?string $acceptable_characters = null,
+        ?array $acceptable_values = null,
+        ?string $locality_limit = null,
+        ?int $max_length = null,
+        ?int $min_length = null,
+        ?string $time_limit = null,
     ): self {
         $obj = new self;
 
-        null !== $acceptableCharacters && $obj->acceptableCharacters = $acceptableCharacters;
-        null !== $acceptableValues && $obj->acceptableValues = $acceptableValues;
-        null !== $localityLimit && $obj->localityLimit = $localityLimit;
-        null !== $maxLength && $obj->maxLength = $maxLength;
-        null !== $minLength && $obj->minLength = $minLength;
-        null !== $timeLimit && $obj->timeLimit = $timeLimit;
+        null !== $acceptable_characters && $obj->acceptable_characters = $acceptable_characters;
+        null !== $acceptable_values && $obj->acceptable_values = $acceptable_values;
+        null !== $locality_limit && $obj->locality_limit = $locality_limit;
+        null !== $max_length && $obj->max_length = $max_length;
+        null !== $min_length && $obj->min_length = $min_length;
+        null !== $time_limit && $obj->time_limit = $time_limit;
 
         return $obj;
     }
@@ -101,7 +101,7 @@ final class AcceptanceCriteria implements BaseModel
     public function withAcceptableCharacters(string $acceptableCharacters): self
     {
         $obj = clone $this;
-        $obj->acceptableCharacters = $acceptableCharacters;
+        $obj->acceptable_characters = $acceptableCharacters;
 
         return $obj;
     }
@@ -114,7 +114,7 @@ final class AcceptanceCriteria implements BaseModel
     public function withAcceptableValues(array $acceptableValues): self
     {
         $obj = clone $this;
-        $obj->acceptableValues = $acceptableValues;
+        $obj->acceptable_values = $acceptableValues;
 
         return $obj;
     }
@@ -125,7 +125,7 @@ final class AcceptanceCriteria implements BaseModel
     public function withLocalityLimit(string $localityLimit): self
     {
         $obj = clone $this;
-        $obj->localityLimit = $localityLimit;
+        $obj->locality_limit = $localityLimit;
 
         return $obj;
     }
@@ -136,7 +136,7 @@ final class AcceptanceCriteria implements BaseModel
     public function withMaxLength(int $maxLength): self
     {
         $obj = clone $this;
-        $obj->maxLength = $maxLength;
+        $obj->max_length = $maxLength;
 
         return $obj;
     }
@@ -147,7 +147,7 @@ final class AcceptanceCriteria implements BaseModel
     public function withMinLength(int $minLength): self
     {
         $obj = clone $this;
-        $obj->minLength = $minLength;
+        $obj->min_length = $minLength;
 
         return $obj;
     }
@@ -158,7 +158,7 @@ final class AcceptanceCriteria implements BaseModel
     public function withTimeLimit(string $timeLimit): self
     {
         $obj = clone $this;
-        $obj->timeLimit = $timeLimit;
+        $obj->time_limit = $timeLimit;
 
         return $obj;
     }

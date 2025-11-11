@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type ActionSetWirelessBlocklistResponseShape = array{
- *   data?: SimCardGroupAction
+ *   data?: SimCardGroupAction|null
  * }
  */
 final class ActionSetWirelessBlocklistResponse implements BaseModel, ResponseConverter

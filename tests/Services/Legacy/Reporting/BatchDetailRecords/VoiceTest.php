@@ -39,10 +39,10 @@ final class VoiceTest extends TestCase
             ->reporting
             ->batchDetailRecords
             ->voice
-            ->create(
-                endTime: new \DateTimeImmutable('2024-02-12T23:59:59Z'),
-                startTime: new \DateTimeImmutable('2024-02-01T00:00:00Z'),
-            )
+            ->create([
+                'end_time' => '2024-02-12T23:59:59Z',
+                'start_time' => '2024-02-01T00:00:00Z',
+            ])
         ;
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -61,10 +61,10 @@ final class VoiceTest extends TestCase
             ->reporting
             ->batchDetailRecords
             ->voice
-            ->create(
-                endTime: new \DateTimeImmutable('2024-02-12T23:59:59Z'),
-                startTime: new \DateTimeImmutable('2024-02-01T00:00:00Z'),
-            )
+            ->create([
+                'end_time' => '2024-02-12T23:59:59Z',
+                'start_time' => '2024-02-01T00:00:00Z',
+            ])
         ;
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -96,8 +96,14 @@ final class VoiceTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->legacy->reporting->batchDetailRecords->voice->list(
-        );
+        $result = $this
+            ->client
+            ->legacy
+            ->reporting
+            ->batchDetailRecords
+            ->voice
+            ->list()
+        ;
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

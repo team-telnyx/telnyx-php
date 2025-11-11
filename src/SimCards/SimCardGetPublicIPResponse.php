@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\SimCards\SimCardGetPublicIPResponse\Data;
 
 /**
- * @phpstan-type SimCardGetPublicIPResponseShape = array{data?: Data}
+ * @phpstan-type SimCardGetPublicIPResponseShape = array{data?: Data|null}
  */
 final class SimCardGetPublicIPResponse implements BaseModel, ResponseConverter
 {

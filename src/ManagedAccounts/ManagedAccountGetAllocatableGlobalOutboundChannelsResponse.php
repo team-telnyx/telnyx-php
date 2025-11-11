@@ -13,7 +13,7 @@ use Telnyx\ManagedAccounts\ManagedAccountGetAllocatableGlobalOutboundChannelsRes
 
 /**
  * @phpstan-type ManagedAccountGetAllocatableGlobalOutboundChannelsResponseShape = array{
- *   data?: Data
+ *   data?: Data|null
  * }
  */
 final class ManagedAccountGetAllocatableGlobalOutboundChannelsResponse implements BaseModel, ResponseConverter

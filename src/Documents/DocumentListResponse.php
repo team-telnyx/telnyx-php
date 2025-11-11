@@ -13,7 +13,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type DocumentListResponseShape = array{
- *   data?: list<DocServiceDocument>, meta?: PaginationMeta
+ *   data?: list<DocServiceDocument>|null, meta?: PaginationMeta|null
  * }
  */
 final class DocumentListResponse implements BaseModel, ResponseConverter

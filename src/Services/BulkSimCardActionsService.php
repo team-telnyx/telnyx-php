@@ -6,14 +6,11 @@ namespace Telnyx\Services;
 
 use Telnyx\BulkSimCardActions\BulkSimCardActionGetResponse;
 use Telnyx\BulkSimCardActions\BulkSimCardActionListParams;
-use Telnyx\BulkSimCardActions\BulkSimCardActionListParams\FilterActionType;
 use Telnyx\BulkSimCardActions\BulkSimCardActionListResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\BulkSimCardActionsContract;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class BulkSimCardActionsService implements BulkSimCardActionsContract
 {
@@ -47,41 +44,21 @@ final class BulkSimCardActionsService implements BulkSimCardActionsContract
      *
      * This API lists a paginated collection of bulk SIM card actions. A bulk SIM card action contains details about a collection of individual SIM card actions.
      *
-     * @param FilterActionType|value-of<FilterActionType> $filterActionType filter by action type
-     * @param int $pageNumber the page number to load
-     * @param int $pageSize the size of the page
+     * @param array{
+     *   filter_action_type_?: "bulk_set_public_ips",
+     *   page_number_?: int,
+     *   page_size_?: int,
+     * }|BulkSimCardActionListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $filterActionType = omit,
-        $pageNumber = omit,
-        $pageSize = omit,
+        array|BulkSimCardActionListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): BulkSimCardActionListResponse {
-        $params = [
-            'filterActionType' => $filterActionType,
-            'pageNumber' => $pageNumber,
-            'pageSize' => $pageSize,
-        ];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): BulkSimCardActionListResponse {
         [$parsed, $options] = BulkSimCardActionListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

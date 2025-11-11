@@ -12,11 +12,11 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * @phpstan-type InsightTemplateGroupShape = array{
  *   id: string,
- *   createdAt: \DateTimeInterface,
+ *   created_at: \DateTimeInterface,
  *   name: string,
- *   description?: string,
- *   insights?: list<InsightTemplate>,
- *   webhook?: string,
+ *   description?: string|null,
+ *   insights?: list<InsightTemplate>|null,
+ *   webhook?: string|null,
  * }
  */
 final class InsightTemplateGroup implements BaseModel
@@ -27,8 +27,8 @@ final class InsightTemplateGroup implements BaseModel
     #[Api]
     public string $id;
 
-    #[Api('created_at')]
-    public \DateTimeInterface $createdAt;
+    #[Api]
+    public \DateTimeInterface $created_at;
 
     #[Api]
     public string $name;
@@ -48,7 +48,7 @@ final class InsightTemplateGroup implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * InsightTemplateGroup::with(id: ..., createdAt: ..., name: ...)
+     * InsightTemplateGroup::with(id: ..., created_at: ..., name: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -71,7 +71,7 @@ final class InsightTemplateGroup implements BaseModel
      */
     public static function with(
         string $id,
-        \DateTimeInterface $createdAt,
+        \DateTimeInterface $created_at,
         string $name,
         ?string $description = null,
         ?array $insights = null,
@@ -80,7 +80,7 @@ final class InsightTemplateGroup implements BaseModel
         $obj = new self;
 
         $obj->id = $id;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $created_at;
         $obj->name = $name;
 
         null !== $description && $obj->description = $description;
@@ -101,7 +101,7 @@ final class InsightTemplateGroup implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }

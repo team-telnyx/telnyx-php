@@ -33,10 +33,9 @@ final class NumberBlockOrdersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->numberBlockOrders->create(
-            range: 10,
-            startingNumber: '+19705555000'
-        );
+        $result = $this->client->numberBlockOrders->create([
+            'range' => 10, 'starting_number' => '+19705555000',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -48,10 +47,9 @@ final class NumberBlockOrdersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->numberBlockOrders->create(
-            range: 10,
-            startingNumber: '+19705555000'
-        );
+        $result = $this->client->numberBlockOrders->create([
+            'range' => 10, 'starting_number' => '+19705555000',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -77,7 +75,7 @@ final class NumberBlockOrdersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->numberBlockOrders->list();
+        $result = $this->client->numberBlockOrders->list([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

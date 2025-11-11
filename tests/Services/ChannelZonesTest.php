@@ -33,7 +33,10 @@ final class ChannelZonesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->channelZones->update('channel_zone_id', 0);
+        $result = $this->client->channelZones->update(
+            'channel_zone_id',
+            ['channels' => 0]
+        );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -45,7 +48,10 @@ final class ChannelZonesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->channelZones->update('channel_zone_id', 0);
+        $result = $this->client->channelZones->update(
+            'channel_zone_id',
+            ['channels' => 0]
+        );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -57,7 +63,7 @@ final class ChannelZonesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->channelZones->list();
+        $result = $this->client->channelZones->list([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

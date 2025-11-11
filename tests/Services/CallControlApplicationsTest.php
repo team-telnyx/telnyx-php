@@ -33,10 +33,10 @@ final class CallControlApplicationsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->callControlApplications->create(
-            applicationName: 'call-router',
-            webhookEventURL: 'https://example.com'
-        );
+        $result = $this->client->callControlApplications->create([
+            'application_name' => 'call-router',
+            'webhook_event_url' => 'https://example.com',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -48,10 +48,10 @@ final class CallControlApplicationsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->callControlApplications->create(
-            applicationName: 'call-router',
-            webhookEventURL: 'https://example.com'
-        );
+        $result = $this->client->callControlApplications->create([
+            'application_name' => 'call-router',
+            'webhook_event_url' => 'https://example.com',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -77,8 +77,10 @@ final class CallControlApplicationsTest extends TestCase
 
         $result = $this->client->callControlApplications->update(
             'id',
-            applicationName: 'call-router',
-            webhookEventURL: 'https://example.com',
+            [
+                'application_name' => 'call-router',
+                'webhook_event_url' => 'https://example.com',
+            ],
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -93,8 +95,10 @@ final class CallControlApplicationsTest extends TestCase
 
         $result = $this->client->callControlApplications->update(
             'id',
-            applicationName: 'call-router',
-            webhookEventURL: 'https://example.com',
+            [
+                'application_name' => 'call-router',
+                'webhook_event_url' => 'https://example.com',
+            ],
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -107,7 +111,7 @@ final class CallControlApplicationsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->callControlApplications->list();
+        $result = $this->client->callControlApplications->list([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * The SIM card consumption so far in the current billing cycle.
  *
  * @phpstan-type CurrentBillingPeriodConsumedDataShape = array{
- *   amount?: string, unit?: string
+ *   amount?: string|null, unit?: string|null
  * }
  */
 final class CurrentBillingPeriodConsumedData implements BaseModel

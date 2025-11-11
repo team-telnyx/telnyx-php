@@ -11,12 +11,12 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type RecursiveClusterShape = array{
- *   clusterID: string,
- *   clusterSummary: string,
- *   totalNumberOfNodes: int,
- *   clusterHeader?: string,
- *   nodes?: list<Node>,
- *   subclusters?: list<RecursiveCluster>,
+ *   cluster_id: string,
+ *   cluster_summary: string,
+ *   total_number_of_nodes: int,
+ *   cluster_header?: string|null,
+ *   nodes?: list<Node>|null,
+ *   subclusters?: list<RecursiveCluster>|null,
  * }
  */
 final class RecursiveCluster implements BaseModel
@@ -24,17 +24,17 @@ final class RecursiveCluster implements BaseModel
     /** @use SdkModel<RecursiveClusterShape> */
     use SdkModel;
 
-    #[Api('cluster_id')]
-    public string $clusterID;
+    #[Api]
+    public string $cluster_id;
 
-    #[Api('cluster_summary')]
-    public string $clusterSummary;
+    #[Api]
+    public string $cluster_summary;
 
-    #[Api('total_number_of_nodes')]
-    public int $totalNumberOfNodes;
+    #[Api]
+    public int $total_number_of_nodes;
 
-    #[Api('cluster_header', optional: true)]
-    public ?string $clusterHeader;
+    #[Api(optional: true)]
+    public ?string $cluster_header;
 
     /** @var list<Node>|null $nodes */
     #[Api(list: Node::class, optional: true)]
@@ -50,7 +50,7 @@ final class RecursiveCluster implements BaseModel
      * To enforce required parameters use
      * ```
      * RecursiveCluster::with(
-     *   clusterID: ..., clusterSummary: ..., totalNumberOfNodes: ...
+     *   cluster_id: ..., cluster_summary: ..., total_number_of_nodes: ...
      * )
      * ```
      *
@@ -77,20 +77,20 @@ final class RecursiveCluster implements BaseModel
      * @param list<RecursiveCluster> $subclusters
      */
     public static function with(
-        string $clusterID,
-        string $clusterSummary,
-        int $totalNumberOfNodes,
-        ?string $clusterHeader = null,
+        string $cluster_id,
+        string $cluster_summary,
+        int $total_number_of_nodes,
+        ?string $cluster_header = null,
         ?array $nodes = null,
         ?array $subclusters = null,
     ): self {
         $obj = new self;
 
-        $obj->clusterID = $clusterID;
-        $obj->clusterSummary = $clusterSummary;
-        $obj->totalNumberOfNodes = $totalNumberOfNodes;
+        $obj->cluster_id = $cluster_id;
+        $obj->cluster_summary = $cluster_summary;
+        $obj->total_number_of_nodes = $total_number_of_nodes;
 
-        null !== $clusterHeader && $obj->clusterHeader = $clusterHeader;
+        null !== $cluster_header && $obj->cluster_header = $cluster_header;
         null !== $nodes && $obj->nodes = $nodes;
         null !== $subclusters && $obj->subclusters = $subclusters;
 
@@ -100,7 +100,7 @@ final class RecursiveCluster implements BaseModel
     public function withClusterID(string $clusterID): self
     {
         $obj = clone $this;
-        $obj->clusterID = $clusterID;
+        $obj->cluster_id = $clusterID;
 
         return $obj;
     }
@@ -108,7 +108,7 @@ final class RecursiveCluster implements BaseModel
     public function withClusterSummary(string $clusterSummary): self
     {
         $obj = clone $this;
-        $obj->clusterSummary = $clusterSummary;
+        $obj->cluster_summary = $clusterSummary;
 
         return $obj;
     }
@@ -116,7 +116,7 @@ final class RecursiveCluster implements BaseModel
     public function withTotalNumberOfNodes(int $totalNumberOfNodes): self
     {
         $obj = clone $this;
-        $obj->totalNumberOfNodes = $totalNumberOfNodes;
+        $obj->total_number_of_nodes = $totalNumberOfNodes;
 
         return $obj;
     }
@@ -124,7 +124,7 @@ final class RecursiveCluster implements BaseModel
     public function withClusterHeader(string $clusterHeader): self
     {
         $obj = clone $this;
-        $obj->clusterHeader = $clusterHeader;
+        $obj->cluster_header = $clusterHeader;
 
         return $obj;
     }

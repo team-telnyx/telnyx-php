@@ -23,33 +23,17 @@ final class NumbersFeaturesService implements NumbersFeaturesContract
      *
      * Retrieve the features for a list of numbers
      *
-     * @param list<string> $phoneNumbers
+     * @param array{phone_numbers: list<string>}|NumbersFeatureCreateParams $params
      *
      * @throws APIException
      */
     public function create(
-        $phoneNumbers,
-        ?RequestOptions $requestOptions = null
-    ): NumbersFeatureNewResponse {
-        $params = ['phoneNumbers' => $phoneNumbers];
-
-        return $this->createRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|NumbersFeatureCreateParams $params,
+        ?RequestOptions $requestOptions = null,
     ): NumbersFeatureNewResponse {
         [$parsed, $options] = NumbersFeatureCreateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

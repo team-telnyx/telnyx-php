@@ -33,7 +33,12 @@ final class PhoneNumberConfigurationsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->portingOrders->phoneNumberConfigurations->create();
+        $result = $this
+            ->client
+            ->portingOrders
+            ->phoneNumberConfigurations
+            ->create([])
+        ;
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -45,7 +50,7 @@ final class PhoneNumberConfigurationsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->portingOrders->phoneNumberConfigurations->list();
+        $result = $this->client->portingOrders->phoneNumberConfigurations->list([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

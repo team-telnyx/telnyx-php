@@ -13,8 +13,6 @@ use Telnyx\Networks\DefaultGateway\DefaultGatewayNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Networks\DefaultGatewayContract;
 
-use const Telnyx\Core\OMIT as omit;
-
 final class DefaultGatewayService implements DefaultGatewayContract
 {
     /**
@@ -27,35 +25,18 @@ final class DefaultGatewayService implements DefaultGatewayContract
      *
      * Create Default Gateway.
      *
-     * @param string $wireguardPeerID wireguard peer ID
+     * @param array{wireguard_peer_id?: string}|DefaultGatewayCreateParams $params
      *
      * @throws APIException
      */
     public function create(
         string $id,
-        $wireguardPeerID = omit,
-        ?RequestOptions $requestOptions = null
-    ): DefaultGatewayNewResponse {
-        $params = ['wireguardPeerID' => $wireguardPeerID];
-
-        return $this->createRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|DefaultGatewayCreateParams $params,
+        ?RequestOptions $requestOptions = null,
     ): DefaultGatewayNewResponse {
         [$parsed, $options] = DefaultGatewayCreateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

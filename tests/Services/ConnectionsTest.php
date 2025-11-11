@@ -45,7 +45,7 @@ final class ConnectionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->connections->list();
+        $result = $this->client->connections->list([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -58,7 +58,8 @@ final class ConnectionsTest extends TestCase
         }
 
         $result = $this->client->connections->listActiveCalls(
-            '1293384261075731461'
+            '1293384261075731461',
+            []
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType

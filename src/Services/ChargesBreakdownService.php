@@ -6,13 +6,10 @@ namespace Telnyx\Services;
 
 use Telnyx\ChargesBreakdown\ChargesBreakdownGetResponse;
 use Telnyx\ChargesBreakdown\ChargesBreakdownRetrieveParams;
-use Telnyx\ChargesBreakdown\ChargesBreakdownRetrieveParams\Format;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ChargesBreakdownContract;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class ChargesBreakdownService implements ChargesBreakdownContract
 {
@@ -26,39 +23,21 @@ final class ChargesBreakdownService implements ChargesBreakdownContract
      *
      * Retrieve a detailed breakdown of monthly charges for phone numbers in a specified date range. The date range cannot exceed 31 days.
      *
-     * @param \DateTimeInterface $startDate Start date for the charges breakdown in ISO date format (YYYY-MM-DD)
-     * @param \DateTimeInterface $endDate End date for the charges breakdown in ISO date format (YYYY-MM-DD). If not provided, defaults to start_date + 1 month. The date is exclusive, data for the end_date itself is not included in the report. The interval between start_date and end_date cannot exceed 31 days.
-     * @param Format|value-of<Format> $format Response format
+     * @param array{
+     *   start_date: string|\DateTimeInterface,
+     *   end_date?: string|\DateTimeInterface,
+     *   format?: "json"|"csv",
+     * }|ChargesBreakdownRetrieveParams $params
      *
      * @throws APIException
      */
     public function retrieve(
-        $startDate,
-        $endDate = omit,
-        $format = omit,
+        array|ChargesBreakdownRetrieveParams $params,
         ?RequestOptions $requestOptions = null,
-    ): ChargesBreakdownGetResponse {
-        $params = [
-            'startDate' => $startDate, 'endDate' => $endDate, 'format' => $format,
-        ];
-
-        return $this->retrieveRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): ChargesBreakdownGetResponse {
         [$parsed, $options] = ChargesBreakdownRetrieveParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

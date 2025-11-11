@@ -33,10 +33,9 @@ final class MessagingProfilesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->messagingProfiles->create(
-            name: 'My name',
-            whitelistedDestinations: ['US']
-        );
+        $result = $this->client->messagingProfiles->create([
+            'name' => 'My name', 'whitelisted_destinations' => ['US'],
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -48,10 +47,9 @@ final class MessagingProfilesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->messagingProfiles->create(
-            name: 'My name',
-            whitelistedDestinations: ['US']
-        );
+        $result = $this->client->messagingProfiles->create([
+            'name' => 'My name', 'whitelisted_destinations' => ['US'],
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -78,7 +76,8 @@ final class MessagingProfilesTest extends TestCase
         }
 
         $result = $this->client->messagingProfiles->update(
-            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
+            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+            []
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -91,7 +90,7 @@ final class MessagingProfilesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->messagingProfiles->list();
+        $result = $this->client->messagingProfiles->list([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -118,7 +117,8 @@ final class MessagingProfilesTest extends TestCase
         }
 
         $result = $this->client->messagingProfiles->listPhoneNumbers(
-            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
+            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+            []
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -132,7 +132,8 @@ final class MessagingProfilesTest extends TestCase
         }
 
         $result = $this->client->messagingProfiles->listShortCodes(
-            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
+            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+            []
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType

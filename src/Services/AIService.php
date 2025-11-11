@@ -21,52 +21,50 @@ use Telnyx\Services\AI\FineTuningService;
 use Telnyx\Services\AI\IntegrationsService;
 use Telnyx\Services\AI\McpServersService;
 
-use const Telnyx\Core\OMIT as omit;
-
 final class AIService implements AIContract
 {
     /**
-     * @@api
+     * @api
      */
     public AssistantsService $assistants;
 
     /**
-     * @@api
+     * @api
      */
     public AudioService $audio;
 
     /**
-     * @@api
+     * @api
      */
     public ChatService $chat;
 
     /**
-     * @@api
+     * @api
      */
     public ClustersService $clusters;
 
     /**
-     * @@api
+     * @api
      */
     public ConversationsService $conversations;
 
     /**
-     * @@api
+     * @api
      */
     public EmbeddingsService $embeddings;
 
     /**
-     * @@api
+     * @api
      */
     public FineTuningService $fineTuning;
 
     /**
-     * @@api
+     * @api
      */
     public IntegrationsService $integrations;
 
     /**
-     * @@api
+     * @api
      */
     public McpServersService $mcpServers;
 
@@ -117,41 +115,19 @@ final class AIService implements AIContract
      * - flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm
      * - Up to 100 MB
      *
-     * @param string $bucket the name of the bucket that contains the file to be summarized
-     * @param string $filename the name of the file to be summarized
-     * @param string $systemPrompt a system prompt to guide the summary generation
+     * @param array{
+     *   bucket: string, filename: string, system_prompt?: string
+     * }|AISummarizeParams $params
      *
      * @throws APIException
      */
     public function summarize(
-        $bucket,
-        $filename,
-        $systemPrompt = omit,
-        ?RequestOptions $requestOptions = null,
-    ): AISummarizeResponse {
-        $params = [
-            'bucket' => $bucket,
-            'filename' => $filename,
-            'systemPrompt' => $systemPrompt,
-        ];
-
-        return $this->summarizeRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function summarizeRaw(
-        array $params,
+        array|AISummarizeParams $params,
         ?RequestOptions $requestOptions = null
     ): AISummarizeResponse {
         [$parsed, $options] = AISummarizeParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

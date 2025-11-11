@@ -11,8 +11,6 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\ToolsContract;
 
-use const Telnyx\Core\OMIT as omit;
-
 final class ToolsService implements ToolsContract
 {
     /**
@@ -25,54 +23,31 @@ final class ToolsService implements ToolsContract
      *
      * Test a webhook tool for an assistant
      *
-     * @param string $assistantID
-     * @param array<string,
-     * mixed,> $arguments Key-value arguments to use for the webhook test
-     * @param array<string,
-     * mixed,> $dynamicVariables Key-value dynamic variables to use for the webhook test
+     * @param array{
+     *   assistant_id: string,
+     *   arguments?: array<string,mixed>,
+     *   dynamic_variables?: array<string,mixed>,
+     * }|ToolTestParams $params
      *
      * @throws APIException
      */
     public function test(
         string $toolID,
-        $assistantID,
-        $arguments = omit,
-        $dynamicVariables = omit,
+        array|ToolTestParams $params,
         ?RequestOptions $requestOptions = null,
-    ): ToolTestResponse {
-        $params = [
-            'assistantID' => $assistantID,
-            'arguments' => $arguments,
-            'dynamicVariables' => $dynamicVariables,
-        ];
-
-        return $this->testRaw($toolID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function testRaw(
-        string $toolID,
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): ToolTestResponse {
         [$parsed, $options] = ToolTestParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
-        $assistantID = $parsed['assistantID'];
-        unset($parsed['assistantID']);
+        $assistantID = $parsed['assistant_id'];
+        unset($parsed['assistant_id']);
 
         // @phpstan-ignore-next-line;
         return $this->client->request(
             method: 'post',
             path: ['ai/assistants/%1$s/tools/%2$s/test', $assistantID, $toolID],
-            body: (object) array_diff_key($parsed, ['assistantID']),
+            body: (object) array_diff_key($parsed, ['assistant_id']),
             options: $options,
             convert: ToolTestResponse::class,
         );

@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Regions\RegionListResponse\Data;
 
 /**
- * @phpstan-type RegionListResponseShape = array{data?: list<Data>}
+ * @phpstan-type RegionListResponseShape = array{data?: list<Data>|null}
  */
 final class RegionListResponse implements BaseModel, ResponseConverter
 {

@@ -5,40 +5,25 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\PhoneNumbers;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\PhoneNumbers\Voicemail\VoicemailCreateParams;
 use Telnyx\PhoneNumbers\Voicemail\VoicemailGetResponse;
 use Telnyx\PhoneNumbers\Voicemail\VoicemailNewResponse;
+use Telnyx\PhoneNumbers\Voicemail\VoicemailUpdateParams;
 use Telnyx\PhoneNumbers\Voicemail\VoicemailUpdateResponse;
 use Telnyx\RequestOptions;
-
-use const Telnyx\Core\OMIT as omit;
 
 interface VoicemailContract
 {
     /**
      * @api
      *
-     * @param bool $enabled whether voicemail is enabled
-     * @param string $pin The pin used for voicemail
+     * @param array<mixed>|VoicemailCreateParams $params
      *
      * @throws APIException
      */
     public function create(
         string $phoneNumberID,
-        $enabled = omit,
-        $pin = omit,
-        ?RequestOptions $requestOptions = null,
-    ): VoicemailNewResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        string $phoneNumberID,
-        array $params,
+        array|VoicemailCreateParams $params,
         ?RequestOptions $requestOptions = null,
     ): VoicemailNewResponse;
 
@@ -55,28 +40,13 @@ interface VoicemailContract
     /**
      * @api
      *
-     * @param bool $enabled whether voicemail is enabled
-     * @param string $pin The pin used for voicemail
+     * @param array<mixed>|VoicemailUpdateParams $params
      *
      * @throws APIException
      */
     public function update(
         string $phoneNumberID,
-        $enabled = omit,
-        $pin = omit,
-        ?RequestOptions $requestOptions = null,
-    ): VoicemailUpdateResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $phoneNumberID,
-        array $params,
+        array|VoicemailUpdateParams $params,
         ?RequestOptions $requestOptions = null,
     ): VoicemailUpdateResponse;
 }

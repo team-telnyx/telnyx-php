@@ -45,10 +45,9 @@ final class AITest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ai->summarize(
-            bucket: 'bucket',
-            filename: 'filename'
-        );
+        $result = $this->client->ai->summarize([
+            'bucket' => 'bucket', 'filename' => 'filename',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -60,10 +59,9 @@ final class AITest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ai->summarize(
-            bucket: 'bucket',
-            filename: 'filename'
-        );
+        $result = $this->client->ai->summarize([
+            'bucket' => 'bucket', 'filename' => 'filename',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

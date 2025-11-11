@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[messaging_profile_id].
  *
- * @phpstan-type FilterShape = array{messagingProfileID?: string}
+ * @phpstan-type FilterShape = array{messaging_profile_id?: string|null}
  */
 final class Filter implements BaseModel
 {
@@ -21,8 +21,8 @@ final class Filter implements BaseModel
     /**
      * Filter by Messaging Profile ID. Use the string `null` for phone numbers without assigned profiles. A synonym for the `/messaging_profiles/{id}/short_codes` endpoint when querying about an extant profile.
      */
-    #[Api('messaging_profile_id', optional: true)]
-    public ?string $messagingProfileID;
+    #[Api(optional: true)]
+    public ?string $messaging_profile_id;
 
     public function __construct()
     {
@@ -34,11 +34,11 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?string $messagingProfileID = null): self
+    public static function with(?string $messaging_profile_id = null): self
     {
         $obj = new self;
 
-        null !== $messagingProfileID && $obj->messagingProfileID = $messagingProfileID;
+        null !== $messaging_profile_id && $obj->messaging_profile_id = $messaging_profile_id;
 
         return $obj;
     }
@@ -49,7 +49,7 @@ final class Filter implements BaseModel
     public function withMessagingProfileID(string $messagingProfileID): self
     {
         $obj = clone $this;
-        $obj->messagingProfileID = $messagingProfileID;
+        $obj->messaging_profile_id = $messagingProfileID;
 
         return $obj;
     }

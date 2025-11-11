@@ -13,24 +13,24 @@ use Telnyx\SimCards\SimCardListWirelessConnectivityLogsResponse\Data\LogType;
  * This object represents a wireless connectivity session log that happened through a SIM card. It aids in finding out potential problems when the SIM is not able to attach properly.
  *
  * @phpstan-type DataShape = array{
- *   id?: int,
- *   apn?: string,
- *   cellID?: string,
- *   createdAt?: string,
- *   imei?: string,
- *   imsi?: string,
- *   ipv4?: string,
- *   ipv6?: string,
- *   lastSeen?: string,
- *   logType?: value-of<LogType>,
- *   mobileCountryCode?: string,
- *   mobileNetworkCode?: string,
- *   radioAccessTechnology?: string,
- *   recordType?: string,
- *   simCardID?: string,
- *   startTime?: string,
- *   state?: string,
- *   stopTime?: string,
+ *   id?: int|null,
+ *   apn?: string|null,
+ *   cell_id?: string|null,
+ *   created_at?: string|null,
+ *   imei?: string|null,
+ *   imsi?: string|null,
+ *   ipv4?: string|null,
+ *   ipv6?: string|null,
+ *   last_seen?: string|null,
+ *   log_type?: value-of<LogType>|null,
+ *   mobile_country_code?: string|null,
+ *   mobile_network_code?: string|null,
+ *   radio_access_technology?: string|null,
+ *   record_type?: string|null,
+ *   sim_card_id?: string|null,
+ *   start_time?: string|null,
+ *   state?: string|null,
+ *   stop_time?: string|null,
  * }
  */
 final class Data implements BaseModel
@@ -53,14 +53,14 @@ final class Data implements BaseModel
     /**
      * The cell ID to which the SIM connected.
      */
-    #[Api('cell_id', optional: true)]
-    public ?string $cellID;
+    #[Api(optional: true)]
+    public ?string $cell_id;
 
     /**
      * ISO 8601 formatted date-time indicating when the record was created.
      */
-    #[Api('created_at', optional: true)]
-    public ?string $createdAt;
+    #[Api(optional: true)]
+    public ?string $created_at;
 
     /**
      * The International Mobile Equipment Identity (or IMEI) is a number, usually unique, that identifies the device currently being used connect to the network.
@@ -90,51 +90,51 @@ final class Data implements BaseModel
     /**
      * ISO 8601 formatted date-time indicating when the last heartbeat to the device was successfully recorded.
      */
-    #[Api('last_seen', optional: true)]
-    public ?string $lastSeen;
+    #[Api(optional: true)]
+    public ?string $last_seen;
 
     /**
      * The type of the session, 'registration' being the initial authentication session and 'data' the actual data transfer sessions.
      *
-     * @var value-of<LogType>|null $logType
+     * @var value-of<LogType>|null $log_type
      */
-    #[Api('log_type', enum: LogType::class, optional: true)]
-    public ?string $logType;
+    #[Api(enum: LogType::class, optional: true)]
+    public ?string $log_type;
 
     /**
      * It's a three decimal digit that identifies a country.<br/><br/>
      * This code is commonly seen joined with a Mobile Network Code (MNC) in a tuple that allows identifying a carrier known as PLMN (Public Land Mobile Network) code.
      */
-    #[Api('mobile_country_code', optional: true)]
-    public ?string $mobileCountryCode;
+    #[Api(optional: true)]
+    public ?string $mobile_country_code;
 
     /**
      * It's a two to three decimal digits that identify a network.<br/><br/>
      *  This code is commonly seen joined with a Mobile Country Code (MCC) in a tuple that allows identifying a carrier known as PLMN (Public Land Mobile Network) code.
      */
-    #[Api('mobile_network_code', optional: true)]
-    public ?string $mobileNetworkCode;
+    #[Api(optional: true)]
+    public ?string $mobile_network_code;
 
     /**
      * The radio technology the SIM card used during the session.
      */
-    #[Api('radio_access_technology', optional: true)]
-    public ?string $radioAccessTechnology;
+    #[Api(optional: true)]
+    public ?string $radio_access_technology;
 
-    #[Api('record_type', optional: true)]
-    public ?string $recordType;
+    #[Api(optional: true)]
+    public ?string $record_type;
 
     /**
      * The identification UUID of the related SIM card resource.
      */
-    #[Api('sim_card_id', optional: true)]
-    public ?string $simCardID;
+    #[Api(optional: true)]
+    public ?string $sim_card_id;
 
     /**
      * ISO 8601 formatted date-time indicating when the session started.
      */
-    #[Api('start_time', optional: true)]
-    public ?string $startTime;
+    #[Api(optional: true)]
+    public ?string $start_time;
 
     /**
      * The state of the SIM card after when the session happened.
@@ -145,8 +145,8 @@ final class Data implements BaseModel
     /**
      * ISO 8601 formatted date-time indicating when the session ended.
      */
-    #[Api('stop_time', optional: true)]
-    public ?string $stopTime;
+    #[Api(optional: true)]
+    public ?string $stop_time;
 
     public function __construct()
     {
@@ -158,48 +158,48 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param LogType|value-of<LogType> $logType
+     * @param LogType|value-of<LogType> $log_type
      */
     public static function with(
         ?int $id = null,
         ?string $apn = null,
-        ?string $cellID = null,
-        ?string $createdAt = null,
+        ?string $cell_id = null,
+        ?string $created_at = null,
         ?string $imei = null,
         ?string $imsi = null,
         ?string $ipv4 = null,
         ?string $ipv6 = null,
-        ?string $lastSeen = null,
-        LogType|string|null $logType = null,
-        ?string $mobileCountryCode = null,
-        ?string $mobileNetworkCode = null,
-        ?string $radioAccessTechnology = null,
-        ?string $recordType = null,
-        ?string $simCardID = null,
-        ?string $startTime = null,
+        ?string $last_seen = null,
+        LogType|string|null $log_type = null,
+        ?string $mobile_country_code = null,
+        ?string $mobile_network_code = null,
+        ?string $radio_access_technology = null,
+        ?string $record_type = null,
+        ?string $sim_card_id = null,
+        ?string $start_time = null,
         ?string $state = null,
-        ?string $stopTime = null,
+        ?string $stop_time = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj->id = $id;
         null !== $apn && $obj->apn = $apn;
-        null !== $cellID && $obj->cellID = $cellID;
-        null !== $createdAt && $obj->createdAt = $createdAt;
+        null !== $cell_id && $obj->cell_id = $cell_id;
+        null !== $created_at && $obj->created_at = $created_at;
         null !== $imei && $obj->imei = $imei;
         null !== $imsi && $obj->imsi = $imsi;
         null !== $ipv4 && $obj->ipv4 = $ipv4;
         null !== $ipv6 && $obj->ipv6 = $ipv6;
-        null !== $lastSeen && $obj->lastSeen = $lastSeen;
-        null !== $logType && $obj['logType'] = $logType;
-        null !== $mobileCountryCode && $obj->mobileCountryCode = $mobileCountryCode;
-        null !== $mobileNetworkCode && $obj->mobileNetworkCode = $mobileNetworkCode;
-        null !== $radioAccessTechnology && $obj->radioAccessTechnology = $radioAccessTechnology;
-        null !== $recordType && $obj->recordType = $recordType;
-        null !== $simCardID && $obj->simCardID = $simCardID;
-        null !== $startTime && $obj->startTime = $startTime;
+        null !== $last_seen && $obj->last_seen = $last_seen;
+        null !== $log_type && $obj['log_type'] = $log_type;
+        null !== $mobile_country_code && $obj->mobile_country_code = $mobile_country_code;
+        null !== $mobile_network_code && $obj->mobile_network_code = $mobile_network_code;
+        null !== $radio_access_technology && $obj->radio_access_technology = $radio_access_technology;
+        null !== $record_type && $obj->record_type = $record_type;
+        null !== $sim_card_id && $obj->sim_card_id = $sim_card_id;
+        null !== $start_time && $obj->start_time = $start_time;
         null !== $state && $obj->state = $state;
-        null !== $stopTime && $obj->stopTime = $stopTime;
+        null !== $stop_time && $obj->stop_time = $stop_time;
 
         return $obj;
     }
@@ -232,7 +232,7 @@ final class Data implements BaseModel
     public function withCellID(string $cellID): self
     {
         $obj = clone $this;
-        $obj->cellID = $cellID;
+        $obj->cell_id = $cellID;
 
         return $obj;
     }
@@ -243,7 +243,7 @@ final class Data implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }
@@ -299,7 +299,7 @@ final class Data implements BaseModel
     public function withLastSeen(string $lastSeen): self
     {
         $obj = clone $this;
-        $obj->lastSeen = $lastSeen;
+        $obj->last_seen = $lastSeen;
 
         return $obj;
     }
@@ -312,7 +312,7 @@ final class Data implements BaseModel
     public function withLogType(LogType|string $logType): self
     {
         $obj = clone $this;
-        $obj['logType'] = $logType;
+        $obj['log_type'] = $logType;
 
         return $obj;
     }
@@ -324,7 +324,7 @@ final class Data implements BaseModel
     public function withMobileCountryCode(string $mobileCountryCode): self
     {
         $obj = clone $this;
-        $obj->mobileCountryCode = $mobileCountryCode;
+        $obj->mobile_country_code = $mobileCountryCode;
 
         return $obj;
     }
@@ -336,7 +336,7 @@ final class Data implements BaseModel
     public function withMobileNetworkCode(string $mobileNetworkCode): self
     {
         $obj = clone $this;
-        $obj->mobileNetworkCode = $mobileNetworkCode;
+        $obj->mobile_network_code = $mobileNetworkCode;
 
         return $obj;
     }
@@ -348,7 +348,7 @@ final class Data implements BaseModel
         string $radioAccessTechnology
     ): self {
         $obj = clone $this;
-        $obj->radioAccessTechnology = $radioAccessTechnology;
+        $obj->radio_access_technology = $radioAccessTechnology;
 
         return $obj;
     }
@@ -356,7 +356,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType;
+        $obj->record_type = $recordType;
 
         return $obj;
     }
@@ -367,7 +367,7 @@ final class Data implements BaseModel
     public function withSimCardID(string $simCardID): self
     {
         $obj = clone $this;
-        $obj->simCardID = $simCardID;
+        $obj->sim_card_id = $simCardID;
 
         return $obj;
     }
@@ -378,7 +378,7 @@ final class Data implements BaseModel
     public function withStartTime(string $startTime): self
     {
         $obj = clone $this;
-        $obj->startTime = $startTime;
+        $obj->start_time = $startTime;
 
         return $obj;
     }
@@ -400,7 +400,7 @@ final class Data implements BaseModel
     public function withStopTime(string $stopTime): self
     {
         $obj = clone $this;
-        $obj->stopTime = $stopTime;
+        $obj->stop_time = $stopTime;
 
         return $obj;
     }

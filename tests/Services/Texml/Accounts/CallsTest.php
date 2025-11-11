@@ -35,7 +35,7 @@ final class CallsTest extends TestCase
 
         $result = $this->client->texml->accounts->calls->retrieve(
             'call_sid',
-            'account_sid'
+            ['account_sid' => 'account_sid']
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -50,7 +50,7 @@ final class CallsTest extends TestCase
 
         $result = $this->client->texml->accounts->calls->retrieve(
             'call_sid',
-            'account_sid'
+            ['account_sid' => 'account_sid']
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -65,7 +65,7 @@ final class CallsTest extends TestCase
 
         $result = $this->client->texml->accounts->calls->update(
             'call_sid',
-            accountSid: 'account_sid'
+            ['account_sid' => 'account_sid']
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -80,7 +80,7 @@ final class CallsTest extends TestCase
 
         $result = $this->client->texml->accounts->calls->update(
             'call_sid',
-            accountSid: 'account_sid'
+            ['account_sid' => 'account_sid']
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -95,9 +95,11 @@ final class CallsTest extends TestCase
 
         $result = $this->client->texml->accounts->calls->calls(
             'account_sid',
-            applicationSid: 'ApplicationSid',
-            from: '+13120001234',
-            to: '+13121230000',
+            [
+                'ApplicationSid' => 'ApplicationSid',
+                'From' => '+13120001234',
+                'To' => '+13121230000',
+            ],
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -112,9 +114,11 @@ final class CallsTest extends TestCase
 
         $result = $this->client->texml->accounts->calls->calls(
             'account_sid',
-            applicationSid: 'ApplicationSid',
-            from: '+13120001234',
-            to: '+13121230000',
+            [
+                'ApplicationSid' => 'ApplicationSid',
+                'From' => '+13120001234',
+                'To' => '+13121230000',
+            ],
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -128,7 +132,8 @@ final class CallsTest extends TestCase
         }
 
         $result = $this->client->texml->accounts->calls->retrieveCalls(
-            'account_sid'
+            'account_sid',
+            []
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -143,7 +148,7 @@ final class CallsTest extends TestCase
 
         $result = $this->client->texml->accounts->calls->siprecJson(
             'call_sid',
-            accountSid: 'account_sid'
+            ['account_sid' => 'account_sid']
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -158,7 +163,7 @@ final class CallsTest extends TestCase
 
         $result = $this->client->texml->accounts->calls->siprecJson(
             'call_sid',
-            accountSid: 'account_sid'
+            ['account_sid' => 'account_sid']
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -173,7 +178,7 @@ final class CallsTest extends TestCase
 
         $result = $this->client->texml->accounts->calls->streamsJson(
             'call_sid',
-            accountSid: 'account_sid'
+            ['account_sid' => 'account_sid']
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -188,7 +193,7 @@ final class CallsTest extends TestCase
 
         $result = $this->client->texml->accounts->calls->streamsJson(
             'call_sid',
-            accountSid: 'account_sid'
+            ['account_sid' => 'account_sid']
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType

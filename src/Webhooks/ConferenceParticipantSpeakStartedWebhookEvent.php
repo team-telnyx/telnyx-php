@@ -11,7 +11,7 @@ use Telnyx\Webhooks\ConferenceParticipantSpeakStartedWebhookEvent\Data;
 
 /**
  * @phpstan-type ConferenceParticipantSpeakStartedWebhookEventShape = array{
- *   data?: Data
+ *   data?: Data|null
  * }
  */
 final class ConferenceParticipantSpeakStartedWebhookEvent implements BaseModel

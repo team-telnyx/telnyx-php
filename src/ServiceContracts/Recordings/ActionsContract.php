@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\Recordings;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Recordings\Actions\ActionDeleteParams;
 use Telnyx\RequestOptions;
 
 interface ActionsContract
@@ -12,24 +13,12 @@ interface ActionsContract
     /**
      * @api
      *
-     * @param list<string> $ids list of call recording IDs to delete
+     * @param array<mixed>|ActionDeleteParams $params
      *
      * @throws APIException
      */
     public function delete(
-        $ids,
-        ?RequestOptions $requestOptions = null
-    ): mixed;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        array $params,
+        array|ActionDeleteParams $params,
         ?RequestOptions $requestOptions = null
     ): mixed;
 }

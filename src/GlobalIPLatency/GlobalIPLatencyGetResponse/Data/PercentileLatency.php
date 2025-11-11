@@ -17,7 +17,13 @@ use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency\v99
 
 /**
  * @phpstan-type PercentileLatencyShape = array{
- *   p0?: v0, p100?: v100, p25?: v25, p50?: v50, p75?: v75, p90?: v90, p99?: v99
+ *   p0?: v0|null,
+ *   p100?: v100|null,
+ *   p25?: v25|null,
+ *   p50?: v50|null,
+ *   p75?: v75|null,
+ *   p90?: v90|null,
+ *   p99?: v99|null,
  * }
  */
 final class PercentileLatency implements BaseModel
@@ -25,25 +31,25 @@ final class PercentileLatency implements BaseModel
     /** @use SdkModel<PercentileLatencyShape> */
     use SdkModel;
 
-    #[Api('0', optional: true)]
+    #[Api(optional: true)]
     public ?v0 $p0;
 
-    #[Api('100', optional: true)]
+    #[Api(optional: true)]
     public ?v100 $p100;
 
-    #[Api('25', optional: true)]
+    #[Api(optional: true)]
     public ?v25 $p25;
 
-    #[Api('50', optional: true)]
+    #[Api(optional: true)]
     public ?v50 $p50;
 
-    #[Api('75', optional: true)]
+    #[Api(optional: true)]
     public ?v75 $p75;
 
-    #[Api('90', optional: true)]
+    #[Api(optional: true)]
     public ?v90 $p90;
 
-    #[Api('99', optional: true)]
+    #[Api(optional: true)]
     public ?v99 $p99;
 
     public function __construct()

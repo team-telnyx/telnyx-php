@@ -35,7 +35,7 @@ final class ConferencesTest extends TestCase
 
         $result = $this->client->texml->accounts->conferences->retrieve(
             'conference_sid',
-            'account_sid'
+            ['account_sid' => 'account_sid']
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -50,7 +50,7 @@ final class ConferencesTest extends TestCase
 
         $result = $this->client->texml->accounts->conferences->retrieve(
             'conference_sid',
-            'account_sid'
+            ['account_sid' => 'account_sid']
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -65,7 +65,7 @@ final class ConferencesTest extends TestCase
 
         $result = $this->client->texml->accounts->conferences->update(
             'conference_sid',
-            accountSid: 'account_sid'
+            ['account_sid' => 'account_sid']
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -80,7 +80,7 @@ final class ConferencesTest extends TestCase
 
         $result = $this->client->texml->accounts->conferences->update(
             'conference_sid',
-            accountSid: 'account_sid'
+            ['account_sid' => 'account_sid']
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -94,7 +94,8 @@ final class ConferencesTest extends TestCase
         }
 
         $result = $this->client->texml->accounts->conferences->retrieveConferences(
-            'account_sid'
+            'account_sid',
+            []
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -109,7 +110,7 @@ final class ConferencesTest extends TestCase
 
         $result = $this->client->texml->accounts->conferences->retrieveRecordings(
             'conference_sid',
-            'account_sid'
+            ['account_sid' => 'account_sid']
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -124,7 +125,7 @@ final class ConferencesTest extends TestCase
 
         $result = $this->client->texml->accounts->conferences->retrieveRecordings(
             'conference_sid',
-            'account_sid'
+            ['account_sid' => 'account_sid']
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -142,7 +143,10 @@ final class ConferencesTest extends TestCase
             ->texml
             ->accounts
             ->conferences
-            ->retrieveRecordingsJson('conference_sid', 'account_sid')
+            ->retrieveRecordingsJson(
+                'conference_sid',
+                ['account_sid' => 'account_sid']
+            )
         ;
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -160,7 +164,10 @@ final class ConferencesTest extends TestCase
             ->texml
             ->accounts
             ->conferences
-            ->retrieveRecordingsJson('conference_sid', 'account_sid')
+            ->retrieveRecordingsJson(
+                'conference_sid',
+                ['account_sid' => 'account_sid']
+            )
         ;
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType

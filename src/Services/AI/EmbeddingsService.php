@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\Services\AI;
 
 use Telnyx\AI\Embeddings\EmbeddingCreateParams;
-use Telnyx\AI\Embeddings\EmbeddingCreateParams\EmbeddingModel;
-use Telnyx\AI\Embeddings\EmbeddingCreateParams\Loader;
 use Telnyx\AI\Embeddings\EmbeddingGetResponse;
 use Telnyx\AI\Embeddings\EmbeddingListParams;
 use Telnyx\AI\Embeddings\EmbeddingListResponse;
@@ -20,12 +18,10 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\EmbeddingsContract;
 use Telnyx\Services\AI\Embeddings\BucketsService;
 
-use const Telnyx\Core\OMIT as omit;
-
 final class EmbeddingsService implements EmbeddingsContract
 {
     /**
-     * @@api
+     * @api
      */
     public BucketsService $buckets;
 
@@ -61,47 +57,23 @@ final class EmbeddingsService implements EmbeddingsContract
      * This loader will split each article into paragraphs and save additional parameters relevant to Intercom docs, such as
      * `article_url` and `heading`. These values will be returned by the `/v2/ai/embeddings/similarity-search` endpoint in the `loader_metadata` field.
      *
-     * @param string $bucketName
-     * @param int $documentChunkOverlapSize
-     * @param int $documentChunkSize
-     * @param EmbeddingModel|value-of<EmbeddingModel> $embeddingModel supported models to vectorize and embed documents
-     * @param Loader|value-of<Loader> $loader supported types of custom document loaders for embeddings
+     * @param array{
+     *   bucket_name: string,
+     *   document_chunk_overlap_size?: int,
+     *   document_chunk_size?: int,
+     *   embedding_model?: "thenlper/gte-large"|"intfloat/multilingual-e5-large",
+     *   loader?: "default"|"intercom",
+     * }|EmbeddingCreateParams $params
      *
      * @throws APIException
      */
     public function create(
-        $bucketName,
-        $documentChunkOverlapSize = omit,
-        $documentChunkSize = omit,
-        $embeddingModel = omit,
-        $loader = omit,
-        ?RequestOptions $requestOptions = null,
-    ): EmbeddingResponse {
-        $params = [
-            'bucketName' => $bucketName,
-            'documentChunkOverlapSize' => $documentChunkOverlapSize,
-            'documentChunkSize' => $documentChunkSize,
-            'embeddingModel' => $embeddingModel,
-            'loader' => $loader,
-        ];
-
-        return $this->createRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
+        array|EmbeddingCreateParams $params,
         ?RequestOptions $requestOptions = null
     ): EmbeddingResponse {
         [$parsed, $options] = EmbeddingCreateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -144,33 +116,17 @@ final class EmbeddingsService implements EmbeddingsContract
      *
      * Retrieve tasks for the user that are either `queued`, `processing`, `failed`, `success` or `partial_success` based on the query string. Defaults to `queued` and `processing`.
      *
-     * @param list<string> $status List of task statuses i.e. `status=queued&status=processing`
+     * @param array{status?: list<string>}|EmbeddingListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $status = omit,
-        ?RequestOptions $requestOptions = null
-    ): EmbeddingListResponse {
-        $params = ['status' => $status];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
+        array|EmbeddingListParams $params,
         ?RequestOptions $requestOptions = null
     ): EmbeddingListResponse {
         [$parsed, $options] = EmbeddingListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -196,39 +152,19 @@ final class EmbeddingsService implements EmbeddingsContract
      * If a bucket was embedded using a custom loader, such as `intercom`, the additional metadata will be returned in the
      * `loader_metadata` field.
      *
-     * @param string $bucketName
-     * @param string $query
-     * @param int $numOfDocs
+     * @param array{
+     *   bucket_name: string, query: string, num_of_docs?: int
+     * }|EmbeddingSimilaritySearchParams $params
      *
      * @throws APIException
      */
     public function similaritySearch(
-        $bucketName,
-        $query,
-        $numOfDocs = omit,
+        array|EmbeddingSimilaritySearchParams $params,
         ?RequestOptions $requestOptions = null,
-    ): EmbeddingSimilaritySearchResponse {
-        $params = [
-            'bucketName' => $bucketName, 'query' => $query, 'numOfDocs' => $numOfDocs,
-        ];
-
-        return $this->similaritySearchRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function similaritySearchRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): EmbeddingSimilaritySearchResponse {
         [$parsed, $options] = EmbeddingSimilaritySearchParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -246,35 +182,17 @@ final class EmbeddingsService implements EmbeddingsContract
      *
      * Embed website content from a specified URL, including child pages up to 5 levels deep within the same domain. The process crawls and loads content from the main URL and its linked pages into a Telnyx Cloud Storage bucket. As soon as each webpage is added to the bucket, its content is immediately processed for embeddings, that can be used for [similarity search](https://developers.telnyx.com/api/inference/inference-embedding/post-embedding-similarity-search) and [clustering](https://developers.telnyx.com/docs/inference/clusters).
      *
-     * @param string $bucketName Name of the bucket to store the embeddings. This bucket must already exist.
-     * @param string $url The URL of the webpage to embed
+     * @param array{bucket_name: string, url: string}|EmbeddingURLParams $params
      *
      * @throws APIException
      */
     public function url(
-        $bucketName,
-        $url,
-        ?RequestOptions $requestOptions = null
-    ): EmbeddingResponse {
-        $params = ['bucketName' => $bucketName, 'url' => $url];
-
-        return $this->urlRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function urlRaw(
-        array $params,
+        array|EmbeddingURLParams $params,
         ?RequestOptions $requestOptions = null
     ): EmbeddingResponse {
         [$parsed, $options] = EmbeddingURLParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

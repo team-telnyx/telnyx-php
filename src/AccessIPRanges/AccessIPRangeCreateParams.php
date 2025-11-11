@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\AccessIPRanges->create
  *
  * @phpstan-type AccessIPRangeCreateParamsShape = array{
- *   cidrBlock: string, description?: string
+ *   cidr_block: string, description?: string
  * }
  */
 final class AccessIPRangeCreateParams implements BaseModel
@@ -24,8 +24,8 @@ final class AccessIPRangeCreateParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    #[Api('cidr_block')]
-    public string $cidrBlock;
+    #[Api]
+    public string $cidr_block;
 
     #[Api(optional: true)]
     public ?string $description;
@@ -35,7 +35,7 @@ final class AccessIPRangeCreateParams implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * AccessIPRangeCreateParams::with(cidrBlock: ...)
+     * AccessIPRangeCreateParams::with(cidr_block: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -55,12 +55,12 @@ final class AccessIPRangeCreateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        string $cidrBlock,
+        string $cidr_block,
         ?string $description = null
     ): self {
         $obj = new self;
 
-        $obj->cidrBlock = $cidrBlock;
+        $obj->cidr_block = $cidr_block;
 
         null !== $description && $obj->description = $description;
 
@@ -70,7 +70,7 @@ final class AccessIPRangeCreateParams implements BaseModel
     public function withCidrBlock(string $cidrBlock): self
     {
         $obj = clone $this;
-        $obj->cidrBlock = $cidrBlock;
+        $obj->cidr_block = $cidrBlock;
 
         return $obj;
     }

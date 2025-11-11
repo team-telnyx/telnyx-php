@@ -14,20 +14,20 @@ use Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging\MdrDetailReportResponse
 
 /**
  * @phpstan-type MdrDetailReportResponseShape = array{
- *   id?: string,
- *   connections?: list<int>,
- *   createdAt?: \DateTimeInterface,
- *   directions?: list<value-of<Direction>>,
- *   endDate?: \DateTimeInterface,
- *   filters?: list<Filter>,
- *   profiles?: list<string>,
- *   recordType?: string,
- *   recordTypes?: list<value-of<RecordType>>,
- *   reportName?: string,
- *   reportURL?: string,
- *   startDate?: \DateTimeInterface,
- *   status?: value-of<Status>,
- *   updatedAt?: \DateTimeInterface,
+ *   id?: string|null,
+ *   connections?: list<int>|null,
+ *   created_at?: \DateTimeInterface|null,
+ *   directions?: list<value-of<Direction>>|null,
+ *   end_date?: \DateTimeInterface|null,
+ *   filters?: list<Filter>|null,
+ *   profiles?: list<string>|null,
+ *   record_type?: string|null,
+ *   record_types?: list<value-of<RecordType>>|null,
+ *   report_name?: string|null,
+ *   report_url?: string|null,
+ *   start_date?: \DateTimeInterface|null,
+ *   status?: value-of<Status>|null,
+ *   updated_at?: \DateTimeInterface|null,
  * }
  */
 final class MdrDetailReportResponse implements BaseModel
@@ -45,15 +45,15 @@ final class MdrDetailReportResponse implements BaseModel
     #[Api(list: 'int', optional: true)]
     public ?array $connections;
 
-    #[Api('created_at', optional: true)]
-    public ?\DateTimeInterface $createdAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $created_at;
 
     /** @var list<value-of<Direction>>|null $directions */
     #[Api(list: Direction::class, optional: true)]
     public ?array $directions;
 
-    #[Api('end_date', optional: true)]
-    public ?\DateTimeInterface $endDate;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $end_date;
 
     /** @var list<Filter>|null $filters */
     #[Api(list: Filter::class, optional: true)]
@@ -67,28 +67,28 @@ final class MdrDetailReportResponse implements BaseModel
     #[Api(list: 'string', optional: true)]
     public ?array $profiles;
 
-    #[Api('record_type', optional: true)]
-    public ?string $recordType;
+    #[Api(optional: true)]
+    public ?string $record_type;
 
-    /** @var list<value-of<RecordType>>|null $recordTypes */
-    #[Api('record_types', list: RecordType::class, optional: true)]
-    public ?array $recordTypes;
+    /** @var list<value-of<RecordType>>|null $record_types */
+    #[Api(list: RecordType::class, optional: true)]
+    public ?array $record_types;
 
-    #[Api('report_name', optional: true)]
-    public ?string $reportName;
+    #[Api(optional: true)]
+    public ?string $report_name;
 
-    #[Api('report_url', optional: true)]
-    public ?string $reportURL;
+    #[Api(optional: true)]
+    public ?string $report_url;
 
-    #[Api('start_date', optional: true)]
-    public ?\DateTimeInterface $startDate;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $start_date;
 
     /** @var value-of<Status>|null $status */
     #[Api(enum: Status::class, optional: true)]
     public ?string $status;
 
-    #[Api('updated_at', optional: true)]
-    public ?\DateTimeInterface $updatedAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $updated_at;
 
     public function __construct()
     {
@@ -104,41 +104,41 @@ final class MdrDetailReportResponse implements BaseModel
      * @param list<Direction|value-of<Direction>> $directions
      * @param list<Filter> $filters
      * @param list<string> $profiles
-     * @param list<RecordType|value-of<RecordType>> $recordTypes
+     * @param list<RecordType|value-of<RecordType>> $record_types
      * @param Status|value-of<Status> $status
      */
     public static function with(
         ?string $id = null,
         ?array $connections = null,
-        ?\DateTimeInterface $createdAt = null,
+        ?\DateTimeInterface $created_at = null,
         ?array $directions = null,
-        ?\DateTimeInterface $endDate = null,
+        ?\DateTimeInterface $end_date = null,
         ?array $filters = null,
         ?array $profiles = null,
-        ?string $recordType = null,
-        ?array $recordTypes = null,
-        ?string $reportName = null,
-        ?string $reportURL = null,
-        ?\DateTimeInterface $startDate = null,
+        ?string $record_type = null,
+        ?array $record_types = null,
+        ?string $report_name = null,
+        ?string $report_url = null,
+        ?\DateTimeInterface $start_date = null,
         Status|string|null $status = null,
-        ?\DateTimeInterface $updatedAt = null,
+        ?\DateTimeInterface $updated_at = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj->id = $id;
         null !== $connections && $obj->connections = $connections;
-        null !== $createdAt && $obj->createdAt = $createdAt;
+        null !== $created_at && $obj->created_at = $created_at;
         null !== $directions && $obj['directions'] = $directions;
-        null !== $endDate && $obj->endDate = $endDate;
+        null !== $end_date && $obj->end_date = $end_date;
         null !== $filters && $obj->filters = $filters;
         null !== $profiles && $obj->profiles = $profiles;
-        null !== $recordType && $obj->recordType = $recordType;
-        null !== $recordTypes && $obj['recordTypes'] = $recordTypes;
-        null !== $reportName && $obj->reportName = $reportName;
-        null !== $reportURL && $obj->reportURL = $reportURL;
-        null !== $startDate && $obj->startDate = $startDate;
+        null !== $record_type && $obj->record_type = $record_type;
+        null !== $record_types && $obj['record_types'] = $record_types;
+        null !== $report_name && $obj->report_name = $report_name;
+        null !== $report_url && $obj->report_url = $report_url;
+        null !== $start_date && $obj->start_date = $start_date;
         null !== $status && $obj['status'] = $status;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
+        null !== $updated_at && $obj->updated_at = $updated_at;
 
         return $obj;
     }
@@ -168,7 +168,7 @@ final class MdrDetailReportResponse implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }
@@ -187,7 +187,7 @@ final class MdrDetailReportResponse implements BaseModel
     public function withEndDate(\DateTimeInterface $endDate): self
     {
         $obj = clone $this;
-        $obj->endDate = $endDate;
+        $obj->end_date = $endDate;
 
         return $obj;
     }
@@ -219,7 +219,7 @@ final class MdrDetailReportResponse implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType;
+        $obj->record_type = $recordType;
 
         return $obj;
     }
@@ -230,7 +230,7 @@ final class MdrDetailReportResponse implements BaseModel
     public function withRecordTypes(array $recordTypes): self
     {
         $obj = clone $this;
-        $obj['recordTypes'] = $recordTypes;
+        $obj['record_types'] = $recordTypes;
 
         return $obj;
     }
@@ -238,7 +238,7 @@ final class MdrDetailReportResponse implements BaseModel
     public function withReportName(string $reportName): self
     {
         $obj = clone $this;
-        $obj->reportName = $reportName;
+        $obj->report_name = $reportName;
 
         return $obj;
     }
@@ -246,7 +246,7 @@ final class MdrDetailReportResponse implements BaseModel
     public function withReportURL(string $reportURL): self
     {
         $obj = clone $this;
-        $obj->reportURL = $reportURL;
+        $obj->report_url = $reportURL;
 
         return $obj;
     }
@@ -254,7 +254,7 @@ final class MdrDetailReportResponse implements BaseModel
     public function withStartDate(\DateTimeInterface $startDate): self
     {
         $obj = clone $this;
-        $obj->startDate = $startDate;
+        $obj->start_date = $startDate;
 
         return $obj;
     }
@@ -273,7 +273,7 @@ final class MdrDetailReportResponse implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $obj->updated_at = $updatedAt;
 
         return $obj;
     }

@@ -11,7 +11,9 @@ use Telnyx\Seti\SetiGetBlackBoxTestResultsResponse\Data\BlackBoxTest;
 
 /**
  * @phpstan-type DataShape = array{
- *   blackBoxTests?: list<BlackBoxTest>, product?: string, recordType?: string
+ *   black_box_tests?: list<BlackBoxTest>|null,
+ *   product?: string|null,
+ *   record_type?: string|null,
  * }
  */
 final class Data implements BaseModel
@@ -19,9 +21,9 @@ final class Data implements BaseModel
     /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    /** @var list<BlackBoxTest>|null $blackBoxTests */
-    #[Api('black_box_tests', list: BlackBoxTest::class, optional: true)]
-    public ?array $blackBoxTests;
+    /** @var list<BlackBoxTest>|null $black_box_tests */
+    #[Api(list: BlackBoxTest::class, optional: true)]
+    public ?array $black_box_tests;
 
     /**
      * The product associated with the black box test group.
@@ -29,8 +31,8 @@ final class Data implements BaseModel
     #[Api(optional: true)]
     public ?string $product;
 
-    #[Api('record_type', optional: true)]
-    public ?string $recordType;
+    #[Api(optional: true)]
+    public ?string $record_type;
 
     public function __construct()
     {
@@ -42,18 +44,18 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<BlackBoxTest> $blackBoxTests
+     * @param list<BlackBoxTest> $black_box_tests
      */
     public static function with(
-        ?array $blackBoxTests = null,
+        ?array $black_box_tests = null,
         ?string $product = null,
-        ?string $recordType = null,
+        ?string $record_type = null,
     ): self {
         $obj = new self;
 
-        null !== $blackBoxTests && $obj->blackBoxTests = $blackBoxTests;
+        null !== $black_box_tests && $obj->black_box_tests = $black_box_tests;
         null !== $product && $obj->product = $product;
-        null !== $recordType && $obj->recordType = $recordType;
+        null !== $record_type && $obj->record_type = $record_type;
 
         return $obj;
     }
@@ -64,7 +66,7 @@ final class Data implements BaseModel
     public function withBlackBoxTests(array $blackBoxTests): self
     {
         $obj = clone $this;
-        $obj->blackBoxTests = $blackBoxTests;
+        $obj->black_box_tests = $blackBoxTests;
 
         return $obj;
     }
@@ -83,7 +85,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType;
+        $obj->record_type = $recordType;
 
         return $obj;
     }

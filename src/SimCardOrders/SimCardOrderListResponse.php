@@ -13,7 +13,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type SimCardOrderListResponseShape = array{
- *   data?: list<SimCardOrder>, meta?: PaginationMeta
+ *   data?: list<SimCardOrder>|null, meta?: PaginationMeta|null
  * }
  */
 final class SimCardOrderListResponse implements BaseModel, ResponseConverter

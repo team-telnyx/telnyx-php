@@ -18,15 +18,15 @@ use Telnyx\Texml\Accounts\Calls\CallUpdateParams\StatusCallbackMethod;
  * @see Telnyx\Texml\Accounts\Calls->update
  *
  * @phpstan-type CallUpdateParamsShape = array{
- *   accountSid: string,
- *   fallbackMethod?: FallbackMethod|value-of<FallbackMethod>,
- *   fallbackURL?: string,
- *   method?: Method|value-of<Method>,
- *   status?: string,
- *   statusCallback?: string,
- *   statusCallbackMethod?: StatusCallbackMethod|value-of<StatusCallbackMethod>,
- *   texml?: string,
- *   url?: string,
+ *   account_sid: string,
+ *   FallbackMethod?: \Telnyx\Texml\Accounts\Calls\CallUpdateParams\FallbackMethod|value-of<\Telnyx\Texml\Accounts\Calls\CallUpdateParams\FallbackMethod>,
+ *   FallbackUrl?: string,
+ *   Method?: \Telnyx\Texml\Accounts\Calls\CallUpdateParams\Method|value-of<\Telnyx\Texml\Accounts\Calls\CallUpdateParams\Method>,
+ *   Status?: string,
+ *   StatusCallback?: string,
+ *   StatusCallbackMethod?: \Telnyx\Texml\Accounts\Calls\CallUpdateParams\StatusCallbackMethod|value-of<\Telnyx\Texml\Accounts\Calls\CallUpdateParams\StatusCallbackMethod>,
+ *   Texml?: string,
+ *   Url?: string,
  * }
  */
 final class CallUpdateParams implements BaseModel
@@ -36,72 +36,77 @@ final class CallUpdateParams implements BaseModel
     use SdkParams;
 
     #[Api]
-    public string $accountSid;
+    public string $account_sid;
 
     /**
      * HTTP request type used for `FallbackUrl`.
      *
-     * @var value-of<FallbackMethod>|null $fallbackMethod
+     * @var value-of<FallbackMethod>|null $FallbackMethod
      */
-    #[Api('FallbackMethod', enum: FallbackMethod::class, optional: true)]
-    public ?string $fallbackMethod;
+    #[Api(
+        enum: FallbackMethod::class,
+        optional: true,
+    )]
+    public ?string $FallbackMethod;
 
     /**
      * A failover URL for which Telnyx will retrieve the TeXML call instructions if the Url is not responding.
      */
-    #[Api('FallbackUrl', optional: true)]
-    public ?string $fallbackURL;
+    #[Api(optional: true)]
+    public ?string $FallbackUrl;
 
     /**
      * HTTP request type used for `Url`.
      *
-     * @var value-of<Method>|null $method
+     * @var value-of<Method>|null $Method
      */
-    #[Api('Method', enum: Method::class, optional: true)]
-    public ?string $method;
+    #[Api(
+        enum: Method::class,
+        optional: true,
+    )]
+    public ?string $Method;
 
     /**
      * The value to set the call status to. Setting the status to completed ends the call.
      */
-    #[Api('Status', optional: true)]
-    public ?string $status;
+    #[Api(optional: true)]
+    public ?string $Status;
 
     /**
      * URL destination for Telnyx to send status callback events to for the call.
      */
-    #[Api('StatusCallback', optional: true)]
-    public ?string $statusCallback;
+    #[Api(optional: true)]
+    public ?string $StatusCallback;
 
     /**
      * HTTP request type used for `StatusCallback`.
      *
-     * @var value-of<StatusCallbackMethod>|null $statusCallbackMethod
+     * @var value-of<StatusCallbackMethod>|null $StatusCallbackMethod
      */
     #[Api(
-        'StatusCallbackMethod',
         enum: StatusCallbackMethod::class,
-        optional: true
+        optional: true,
     )]
-    public ?string $statusCallbackMethod;
+    public ?string $StatusCallbackMethod;
 
     /**
      * TeXML to replace the current one with.
      */
-    #[Api('Texml', optional: true)]
-    public ?string $texml;
+    #[Api(optional: true)]
+    public ?string $Texml;
 
     /**
      * The URL where TeXML will make a request to retrieve a new set of TeXML instructions to continue the call flow.
      */
-    #[Api('Url', optional: true)]
-    public ?string $url;
+    #[Api(optional: true)]
+    public ?string $Url;
 
     /**
      * `new CallUpdateParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * CallUpdateParams::with(accountSid: ...)
+     * CallUpdateParams::with(account_sid: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -120,33 +125,33 @@ final class CallUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param FallbackMethod|value-of<FallbackMethod> $fallbackMethod
-     * @param Method|value-of<Method> $method
-     * @param StatusCallbackMethod|value-of<StatusCallbackMethod> $statusCallbackMethod
+     * @param FallbackMethod|value-of<FallbackMethod> $FallbackMethod
+     * @param Method|value-of<Method> $Method
+     * @param StatusCallbackMethod|value-of<StatusCallbackMethod> $StatusCallbackMethod
      */
     public static function with(
-        string $accountSid,
-        FallbackMethod|string|null $fallbackMethod = null,
-        ?string $fallbackURL = null,
-        Method|string|null $method = null,
-        ?string $status = null,
-        ?string $statusCallback = null,
-        StatusCallbackMethod|string|null $statusCallbackMethod = null,
-        ?string $texml = null,
-        ?string $url = null,
+        string $account_sid,
+        FallbackMethod|string|null $FallbackMethod = null,
+        ?string $FallbackUrl = null,
+        Method|string|null $Method = null,
+        ?string $Status = null,
+        ?string $StatusCallback = null,
+        StatusCallbackMethod|string|null $StatusCallbackMethod = null,
+        ?string $Texml = null,
+        ?string $Url = null,
     ): self {
         $obj = new self;
 
-        $obj->accountSid = $accountSid;
+        $obj->account_sid = $account_sid;
 
-        null !== $fallbackMethod && $obj['fallbackMethod'] = $fallbackMethod;
-        null !== $fallbackURL && $obj->fallbackURL = $fallbackURL;
-        null !== $method && $obj['method'] = $method;
-        null !== $status && $obj->status = $status;
-        null !== $statusCallback && $obj->statusCallback = $statusCallback;
-        null !== $statusCallbackMethod && $obj['statusCallbackMethod'] = $statusCallbackMethod;
-        null !== $texml && $obj->texml = $texml;
-        null !== $url && $obj->url = $url;
+        null !== $FallbackMethod && $obj['FallbackMethod'] = $FallbackMethod;
+        null !== $FallbackUrl && $obj->FallbackUrl = $FallbackUrl;
+        null !== $Method && $obj['Method'] = $Method;
+        null !== $Status && $obj->Status = $Status;
+        null !== $StatusCallback && $obj->StatusCallback = $StatusCallback;
+        null !== $StatusCallbackMethod && $obj['StatusCallbackMethod'] = $StatusCallbackMethod;
+        null !== $Texml && $obj->Texml = $Texml;
+        null !== $Url && $obj->Url = $Url;
 
         return $obj;
     }
@@ -154,7 +159,7 @@ final class CallUpdateParams implements BaseModel
     public function withAccountSid(string $accountSid): self
     {
         $obj = clone $this;
-        $obj->accountSid = $accountSid;
+        $obj->account_sid = $accountSid;
 
         return $obj;
     }
@@ -165,10 +170,10 @@ final class CallUpdateParams implements BaseModel
      * @param FallbackMethod|value-of<FallbackMethod> $fallbackMethod
      */
     public function withFallbackMethod(
-        FallbackMethod|string $fallbackMethod
+        FallbackMethod|string $fallbackMethod,
     ): self {
         $obj = clone $this;
-        $obj['fallbackMethod'] = $fallbackMethod;
+        $obj['FallbackMethod'] = $fallbackMethod;
 
         return $obj;
     }
@@ -179,7 +184,7 @@ final class CallUpdateParams implements BaseModel
     public function withFallbackURL(string $fallbackURL): self
     {
         $obj = clone $this;
-        $obj->fallbackURL = $fallbackURL;
+        $obj->FallbackUrl = $fallbackURL;
 
         return $obj;
     }
@@ -189,10 +194,11 @@ final class CallUpdateParams implements BaseModel
      *
      * @param Method|value-of<Method> $method
      */
-    public function withMethod(Method|string $method): self
-    {
+    public function withMethod(
+        Method|string $method
+    ): self {
         $obj = clone $this;
-        $obj['method'] = $method;
+        $obj['Method'] = $method;
 
         return $obj;
     }
@@ -203,7 +209,7 @@ final class CallUpdateParams implements BaseModel
     public function withStatus(string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status;
+        $obj->Status = $status;
 
         return $obj;
     }
@@ -214,7 +220,7 @@ final class CallUpdateParams implements BaseModel
     public function withStatusCallback(string $statusCallback): self
     {
         $obj = clone $this;
-        $obj->statusCallback = $statusCallback;
+        $obj->StatusCallback = $statusCallback;
 
         return $obj;
     }
@@ -225,10 +231,10 @@ final class CallUpdateParams implements BaseModel
      * @param StatusCallbackMethod|value-of<StatusCallbackMethod> $statusCallbackMethod
      */
     public function withStatusCallbackMethod(
-        StatusCallbackMethod|string $statusCallbackMethod
+        StatusCallbackMethod|string $statusCallbackMethod,
     ): self {
         $obj = clone $this;
-        $obj['statusCallbackMethod'] = $statusCallbackMethod;
+        $obj['StatusCallbackMethod'] = $statusCallbackMethod;
 
         return $obj;
     }
@@ -239,7 +245,7 @@ final class CallUpdateParams implements BaseModel
     public function withTexml(string $texml): self
     {
         $obj = clone $this;
-        $obj->texml = $texml;
+        $obj->Texml = $texml;
 
         return $obj;
     }
@@ -250,7 +256,7 @@ final class CallUpdateParams implements BaseModel
     public function withURL(string $url): self
     {
         $obj = clone $this;
-        $obj->url = $url;
+        $obj->Url = $url;
 
         return $obj;
     }

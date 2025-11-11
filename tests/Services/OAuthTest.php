@@ -45,10 +45,9 @@ final class OAuthTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->oauth->grants(
-            allowed: true,
-            consentToken: 'consent_token'
-        );
+        $result = $this->client->oauth->grants([
+            'allowed' => true, 'consent_token' => 'consent_token',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -60,10 +59,9 @@ final class OAuthTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->oauth->grants(
-            allowed: true,
-            consentToken: 'consent_token'
-        );
+        $result = $this->client->oauth->grants([
+            'allowed' => true, 'consent_token' => 'consent_token',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -75,7 +73,7 @@ final class OAuthTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->oauth->introspect('token');
+        $result = $this->client->oauth->introspect(['token' => 'token']);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -87,7 +85,7 @@ final class OAuthTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->oauth->introspect('token');
+        $result = $this->client->oauth->introspect(['token' => 'token']);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -99,7 +97,7 @@ final class OAuthTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->oauth->register();
+        $result = $this->client->oauth->register([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -111,11 +109,11 @@ final class OAuthTest extends TestCase
             $this->markTestSkipped("Prism doesn't properly handle redirects");
         }
 
-        $result = $this->client->oauth->retrieveAuthorize(
-            clientID: 'client_id',
-            redirectUri: 'https://example.com',
-            responseType: 'code',
-        );
+        $result = $this->client->oauth->retrieveAuthorize([
+            'client_id' => 'client_id',
+            'redirect_uri' => 'https://example.com',
+            'response_type' => 'code',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -127,11 +125,11 @@ final class OAuthTest extends TestCase
             $this->markTestSkipped("Prism doesn't properly handle redirects");
         }
 
-        $result = $this->client->oauth->retrieveAuthorize(
-            clientID: 'client_id',
-            redirectUri: 'https://example.com',
-            responseType: 'code',
-        );
+        $result = $this->client->oauth->retrieveAuthorize([
+            'client_id' => 'client_id',
+            'redirect_uri' => 'https://example.com',
+            'response_type' => 'code',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -155,7 +153,9 @@ final class OAuthTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->oauth->token(grantType: 'client_credentials');
+        $result = $this->client->oauth->token([
+            'grant_type' => 'client_credentials',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -167,7 +167,9 @@ final class OAuthTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->oauth->token(grantType: 'client_credentials');
+        $result = $this->client->oauth->token([
+            'grant_type' => 'client_credentials',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

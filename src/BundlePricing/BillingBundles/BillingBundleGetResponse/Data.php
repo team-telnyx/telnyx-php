@@ -13,12 +13,12 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type DataShape = array{
  *   id: string,
  *   active: bool,
- *   bundleLimits: list<BundleLimit>,
- *   costCode: string,
- *   createdAt: \DateTimeInterface,
- *   isPublic: bool,
+ *   bundle_limits: list<BundleLimit>,
+ *   cost_code: string,
+ *   created_at: \DateTimeInterface,
+ *   is_public: bool,
  *   name: string,
- *   slug?: string,
+ *   slug?: string|null,
  * }
  */
 final class Data implements BaseModel
@@ -38,27 +38,27 @@ final class Data implements BaseModel
     #[Api]
     public bool $active;
 
-    /** @var list<BundleLimit> $bundleLimits */
-    #[Api('bundle_limits', list: BundleLimit::class)]
-    public array $bundleLimits;
+    /** @var list<BundleLimit> $bundle_limits */
+    #[Api(list: BundleLimit::class)]
+    public array $bundle_limits;
 
     /**
      * Bundle's cost code, this is used to identify the bundle in the billing system.
      */
-    #[Api('cost_code')]
-    public string $costCode;
+    #[Api]
+    public string $cost_code;
 
     /**
      * Date the bundle was created.
      */
-    #[Api('created_at')]
-    public \DateTimeInterface $createdAt;
+    #[Api]
+    public \DateTimeInterface $created_at;
 
     /**
      * Available to all customers or only to specific customers.
      */
-    #[Api('is_public')]
-    public bool $isPublic;
+    #[Api]
+    public bool $is_public;
 
     /**
      * Bundle's name, this is used to identify the bundle in the UI.
@@ -80,10 +80,10 @@ final class Data implements BaseModel
      * Data::with(
      *   id: ...,
      *   active: ...,
-     *   bundleLimits: ...,
-     *   costCode: ...,
-     *   createdAt: ...,
-     *   isPublic: ...,
+     *   bundle_limits: ...,
+     *   cost_code: ...,
+     *   created_at: ...,
+     *   is_public: ...,
      *   name: ...,
      * )
      * ```
@@ -111,15 +111,15 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<BundleLimit> $bundleLimits
+     * @param list<BundleLimit> $bundle_limits
      */
     public static function with(
         string $id,
         bool $active,
-        array $bundleLimits,
-        string $costCode,
-        \DateTimeInterface $createdAt,
-        bool $isPublic,
+        array $bundle_limits,
+        string $cost_code,
+        \DateTimeInterface $created_at,
+        bool $is_public,
         string $name,
         ?string $slug = null,
     ): self {
@@ -127,10 +127,10 @@ final class Data implements BaseModel
 
         $obj->id = $id;
         $obj->active = $active;
-        $obj->bundleLimits = $bundleLimits;
-        $obj->costCode = $costCode;
-        $obj->createdAt = $createdAt;
-        $obj->isPublic = $isPublic;
+        $obj->bundle_limits = $bundle_limits;
+        $obj->cost_code = $cost_code;
+        $obj->created_at = $created_at;
+        $obj->is_public = $is_public;
         $obj->name = $name;
 
         null !== $slug && $obj->slug = $slug;
@@ -166,7 +166,7 @@ final class Data implements BaseModel
     public function withBundleLimits(array $bundleLimits): self
     {
         $obj = clone $this;
-        $obj->bundleLimits = $bundleLimits;
+        $obj->bundle_limits = $bundleLimits;
 
         return $obj;
     }
@@ -177,7 +177,7 @@ final class Data implements BaseModel
     public function withCostCode(string $costCode): self
     {
         $obj = clone $this;
-        $obj->costCode = $costCode;
+        $obj->cost_code = $costCode;
 
         return $obj;
     }
@@ -188,7 +188,7 @@ final class Data implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }
@@ -199,7 +199,7 @@ final class Data implements BaseModel
     public function withIsPublic(bool $isPublic): self
     {
         $obj = clone $this;
-        $obj->isPublic = $isPublic;
+        $obj->is_public = $isPublic;
 
         return $obj;
     }

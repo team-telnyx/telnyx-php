@@ -11,16 +11,16 @@ use Telnyx\Networks\InterfaceStatus;
 
 /**
  * @phpstan-type BodyShape = array{
- *   id?: string,
- *   createdAt?: string,
- *   recordType?: string,
- *   updatedAt?: string,
- *   globalIPID?: string,
- *   isAnnounced?: bool,
- *   isConnected?: bool,
- *   isInMaintenance?: bool,
- *   status?: value-of<InterfaceStatus>,
- *   wireguardPeerID?: string,
+ *   id?: string|null,
+ *   created_at?: string|null,
+ *   record_type?: string|null,
+ *   updated_at?: string|null,
+ *   global_ip_id?: string|null,
+ *   is_announced?: bool|null,
+ *   is_connected?: bool|null,
+ *   is_in_maintenance?: bool|null,
+ *   status?: value-of<InterfaceStatus>|null,
+ *   wireguard_peer_id?: string|null,
  * }
  */
 final class Body implements BaseModel
@@ -37,44 +37,44 @@ final class Body implements BaseModel
     /**
      * ISO 8601 formatted date-time indicating when the resource was created.
      */
-    #[Api('created_at', optional: true)]
-    public ?string $createdAt;
+    #[Api(optional: true)]
+    public ?string $created_at;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api('record_type', optional: true)]
-    public ?string $recordType;
+    #[Api(optional: true)]
+    public ?string $record_type;
 
     /**
      * ISO 8601 formatted date-time indicating when the resource was updated.
      */
-    #[Api('updated_at', optional: true)]
-    public ?string $updatedAt;
+    #[Api(optional: true)]
+    public ?string $updated_at;
 
     /**
      * Global IP ID.
      */
-    #[Api('global_ip_id', optional: true)]
-    public ?string $globalIPID;
+    #[Api(optional: true)]
+    public ?string $global_ip_id;
 
     /**
      * Status of BGP announcement.
      */
-    #[Api('is_announced', optional: true)]
-    public ?bool $isAnnounced;
+    #[Api(optional: true)]
+    public ?bool $is_announced;
 
     /**
      * Wireguard peer is connected.
      */
-    #[Api('is_connected', optional: true)]
-    public ?bool $isConnected;
+    #[Api(optional: true)]
+    public ?bool $is_connected;
 
     /**
      * Enable/disable BGP announcement.
      */
-    #[Api('is_in_maintenance', optional: true)]
-    public ?bool $isInMaintenance;
+    #[Api(optional: true)]
+    public ?bool $is_in_maintenance;
 
     /**
      * The current status of the interface deployment.
@@ -87,8 +87,8 @@ final class Body implements BaseModel
     /**
      * Wireguard peer ID.
      */
-    #[Api('wireguard_peer_id', optional: true)]
-    public ?string $wireguardPeerID;
+    #[Api(optional: true)]
+    public ?string $wireguard_peer_id;
 
     public function __construct()
     {
@@ -104,28 +104,28 @@ final class Body implements BaseModel
      */
     public static function with(
         ?string $id = null,
-        ?string $createdAt = null,
-        ?string $recordType = null,
-        ?string $updatedAt = null,
-        ?string $globalIPID = null,
-        ?bool $isAnnounced = null,
-        ?bool $isConnected = null,
-        ?bool $isInMaintenance = null,
+        ?string $created_at = null,
+        ?string $record_type = null,
+        ?string $updated_at = null,
+        ?string $global_ip_id = null,
+        ?bool $is_announced = null,
+        ?bool $is_connected = null,
+        ?bool $is_in_maintenance = null,
         InterfaceStatus|string|null $status = null,
-        ?string $wireguardPeerID = null,
+        ?string $wireguard_peer_id = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj->id = $id;
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $recordType && $obj->recordType = $recordType;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
-        null !== $globalIPID && $obj->globalIPID = $globalIPID;
-        null !== $isAnnounced && $obj->isAnnounced = $isAnnounced;
-        null !== $isConnected && $obj->isConnected = $isConnected;
-        null !== $isInMaintenance && $obj->isInMaintenance = $isInMaintenance;
+        null !== $created_at && $obj->created_at = $created_at;
+        null !== $record_type && $obj->record_type = $record_type;
+        null !== $updated_at && $obj->updated_at = $updated_at;
+        null !== $global_ip_id && $obj->global_ip_id = $global_ip_id;
+        null !== $is_announced && $obj->is_announced = $is_announced;
+        null !== $is_connected && $obj->is_connected = $is_connected;
+        null !== $is_in_maintenance && $obj->is_in_maintenance = $is_in_maintenance;
         null !== $status && $obj['status'] = $status;
-        null !== $wireguardPeerID && $obj->wireguardPeerID = $wireguardPeerID;
+        null !== $wireguard_peer_id && $obj->wireguard_peer_id = $wireguard_peer_id;
 
         return $obj;
     }
@@ -147,7 +147,7 @@ final class Body implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }
@@ -158,7 +158,7 @@ final class Body implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType;
+        $obj->record_type = $recordType;
 
         return $obj;
     }
@@ -169,7 +169,7 @@ final class Body implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $obj->updated_at = $updatedAt;
 
         return $obj;
     }
@@ -180,7 +180,7 @@ final class Body implements BaseModel
     public function withGlobalIPID(string $globalIPID): self
     {
         $obj = clone $this;
-        $obj->globalIPID = $globalIPID;
+        $obj->global_ip_id = $globalIPID;
 
         return $obj;
     }
@@ -191,7 +191,7 @@ final class Body implements BaseModel
     public function withIsAnnounced(bool $isAnnounced): self
     {
         $obj = clone $this;
-        $obj->isAnnounced = $isAnnounced;
+        $obj->is_announced = $isAnnounced;
 
         return $obj;
     }
@@ -202,7 +202,7 @@ final class Body implements BaseModel
     public function withIsConnected(bool $isConnected): self
     {
         $obj = clone $this;
-        $obj->isConnected = $isConnected;
+        $obj->is_connected = $isConnected;
 
         return $obj;
     }
@@ -213,7 +213,7 @@ final class Body implements BaseModel
     public function withIsInMaintenance(bool $isInMaintenance): self
     {
         $obj = clone $this;
-        $obj->isInMaintenance = $isInMaintenance;
+        $obj->is_in_maintenance = $isInMaintenance;
 
         return $obj;
     }
@@ -237,7 +237,7 @@ final class Body implements BaseModel
     public function withWireguardPeerID(string $wireguardPeerID): self
     {
         $obj = clone $this;
-        $obj->wireguardPeerID = $wireguardPeerID;
+        $obj->wireguard_peer_id = $wireguardPeerID;
 
         return $obj;
     }

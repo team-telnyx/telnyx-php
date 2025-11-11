@@ -16,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\BundlePricing\UserBundles->listUnused
  *
  * @phpstan-type UserBundleListUnusedParamsShape = array{
- *   filter?: Filter, authorizationBearer?: string
+ *   filter?: Filter, authorization_bearer?: string
  * }
  */
 final class UserBundleListUnusedParams implements BaseModel
@@ -35,7 +35,7 @@ final class UserBundleListUnusedParams implements BaseModel
      * Authenticates the request with your Telnyx API V2 KEY.
      */
     #[Api(optional: true)]
-    public ?string $authorizationBearer;
+    public ?string $authorization_bearer;
 
     public function __construct()
     {
@@ -49,12 +49,12 @@ final class UserBundleListUnusedParams implements BaseModel
      */
     public static function with(
         ?Filter $filter = null,
-        ?string $authorizationBearer = null
+        ?string $authorization_bearer = null
     ): self {
         $obj = new self;
 
         null !== $filter && $obj->filter = $filter;
-        null !== $authorizationBearer && $obj->authorizationBearer = $authorizationBearer;
+        null !== $authorization_bearer && $obj->authorization_bearer = $authorization_bearer;
 
         return $obj;
     }
@@ -76,7 +76,7 @@ final class UserBundleListUnusedParams implements BaseModel
     public function withAuthorizationBearer(string $authorizationBearer): self
     {
         $obj = clone $this;
-        $obj->authorizationBearer = $authorizationBearer;
+        $obj->authorization_bearer = $authorizationBearer;
 
         return $obj;
     }

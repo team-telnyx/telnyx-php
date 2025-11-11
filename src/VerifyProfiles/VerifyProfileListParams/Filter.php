@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[name].
  *
- * @phpstan-type FilterShape = array{name?: string}
+ * @phpstan-type FilterShape = array{name?: string|null}
  */
 final class Filter implements BaseModel
 {

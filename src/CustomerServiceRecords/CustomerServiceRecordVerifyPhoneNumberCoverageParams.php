@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\CustomerServiceRecords->verifyPhoneNumberCoverage
  *
  * @phpstan-type CustomerServiceRecordVerifyPhoneNumberCoverageParamsShape = array{
- *   phoneNumbers: list<string>
+ *   phone_numbers: list<string>
  * }
  */
 final class CustomerServiceRecordVerifyPhoneNumberCoverageParams implements BaseModel
@@ -27,17 +27,17 @@ final class CustomerServiceRecordVerifyPhoneNumberCoverageParams implements Base
     /**
      * The phone numbers list to be verified.
      *
-     * @var list<string> $phoneNumbers
+     * @var list<string> $phone_numbers
      */
-    #[Api('phone_numbers', list: 'string')]
-    public array $phoneNumbers;
+    #[Api(list: 'string')]
+    public array $phone_numbers;
 
     /**
      * `new CustomerServiceRecordVerifyPhoneNumberCoverageParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * CustomerServiceRecordVerifyPhoneNumberCoverageParams::with(phoneNumbers: ...)
+     * CustomerServiceRecordVerifyPhoneNumberCoverageParams::with(phone_numbers: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -57,13 +57,13 @@ final class CustomerServiceRecordVerifyPhoneNumberCoverageParams implements Base
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $phoneNumbers
+     * @param list<string> $phone_numbers
      */
-    public static function with(array $phoneNumbers): self
+    public static function with(array $phone_numbers): self
     {
         $obj = new self;
 
-        $obj->phoneNumbers = $phoneNumbers;
+        $obj->phone_numbers = $phone_numbers;
 
         return $obj;
     }
@@ -76,7 +76,7 @@ final class CustomerServiceRecordVerifyPhoneNumberCoverageParams implements Base
     public function withPhoneNumbers(array $phoneNumbers): self
     {
         $obj = clone $this;
-        $obj->phoneNumbers = $phoneNumbers;
+        $obj->phone_numbers = $phoneNumbers;
 
         return $obj;
     }

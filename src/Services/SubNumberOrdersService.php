@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\NumberOrderPhoneNumbers\UpdateRegulatoryRequirement;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SubNumberOrdersContract;
 use Telnyx\SubNumberOrders\SubNumberOrderCancelResponse;
@@ -14,13 +13,10 @@ use Telnyx\SubNumberOrders\SubNumberOrderGetResponse;
 use Telnyx\SubNumberOrders\SubNumberOrderListParams;
 use Telnyx\SubNumberOrders\SubNumberOrderListResponse;
 use Telnyx\SubNumberOrders\SubNumberOrderRetrieveParams;
-use Telnyx\SubNumberOrders\SubNumberOrderRetrieveParams\Filter;
 use Telnyx\SubNumberOrders\SubNumberOrderUpdateParams;
 use Telnyx\SubNumberOrders\SubNumberOrderUpdateRequirementGroupParams;
 use Telnyx\SubNumberOrders\SubNumberOrderUpdateRequirementGroupResponse;
 use Telnyx\SubNumberOrders\SubNumberOrderUpdateResponse;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class SubNumberOrdersService implements SubNumberOrdersContract
 {
@@ -34,35 +30,20 @@ final class SubNumberOrdersService implements SubNumberOrdersContract
      *
      * Get an existing sub number order.
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[include_phone_numbers]
+     * @param array{
+     *   filter?: array{include_phone_numbers?: bool}
+     * }|SubNumberOrderRetrieveParams $params
      *
      * @throws APIException
      */
     public function retrieve(
         string $subNumberOrderID,
-        $filter = omit,
-        ?RequestOptions $requestOptions = null,
-    ): SubNumberOrderGetResponse {
-        $params = ['filter' => $filter];
-
-        return $this->retrieveRaw($subNumberOrderID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $subNumberOrderID,
-        array $params,
+        array|SubNumberOrderRetrieveParams $params,
         ?RequestOptions $requestOptions = null,
     ): SubNumberOrderGetResponse {
         [$parsed, $options] = SubNumberOrderRetrieveParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -80,35 +61,22 @@ final class SubNumberOrdersService implements SubNumberOrdersContract
      *
      * Updates a sub number order.
      *
-     * @param list<UpdateRegulatoryRequirement> $regulatoryRequirements
+     * @param array{
+     *   regulatory_requirements?: list<array{
+     *     field_value?: string, requirement_id?: string
+     *   }>,
+     * }|SubNumberOrderUpdateParams $params
      *
      * @throws APIException
      */
     public function update(
         string $subNumberOrderID,
-        $regulatoryRequirements = omit,
-        ?RequestOptions $requestOptions = null,
-    ): SubNumberOrderUpdateResponse {
-        $params = ['regulatoryRequirements' => $regulatoryRequirements];
-
-        return $this->updateRaw($subNumberOrderID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $subNumberOrderID,
-        array $params,
+        array|SubNumberOrderUpdateParams $params,
         ?RequestOptions $requestOptions = null,
     ): SubNumberOrderUpdateResponse {
         [$parsed, $options] = SubNumberOrderUpdateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -126,33 +94,25 @@ final class SubNumberOrdersService implements SubNumberOrdersContract
      *
      * Get a paginated list of sub number orders.
      *
-     * @param SubNumberOrderListParams\Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[status], filter[order_request_id], filter[country_code], filter[phone_number_type], filter[phone_numbers_count]
+     * @param array{
+     *   filter?: array{
+     *     country_code?: string,
+     *     order_request_id?: string,
+     *     phone_number_type?: string,
+     *     phone_numbers_count?: int,
+     *     status?: string,
+     *   },
+     * }|SubNumberOrderListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        ?RequestOptions $requestOptions = null
-    ): SubNumberOrderListResponse {
-        $params = ['filter' => $filter];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|SubNumberOrderListParams $params,
+        ?RequestOptions $requestOptions = null,
     ): SubNumberOrderListResponse {
         [$parsed, $options] = SubNumberOrderListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -190,37 +150,20 @@ final class SubNumberOrdersService implements SubNumberOrdersContract
      *
      * Update requirement group for a sub number order
      *
-     * @param string $requirementGroupID The ID of the requirement group to associate
+     * @param array{
+     *   requirement_group_id: string
+     * }|SubNumberOrderUpdateRequirementGroupParams $params
      *
      * @throws APIException
      */
     public function updateRequirementGroup(
         string $id,
-        $requirementGroupID,
-        ?RequestOptions $requestOptions = null
+        array|SubNumberOrderUpdateRequirementGroupParams $params,
+        ?RequestOptions $requestOptions = null,
     ): SubNumberOrderUpdateRequirementGroupResponse {
-        $params = ['requirementGroupID' => $requirementGroupID];
-
-        return $this->updateRequirementGroupRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRequirementGroupRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): SubNumberOrderUpdateRequirementGroupResponse {
-        [
-            $parsed, $options,
-        ] = SubNumberOrderUpdateRequirementGroupParams::parseRequest(
+        [$parsed, $options] = SubNumberOrderUpdateRequirementGroupParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

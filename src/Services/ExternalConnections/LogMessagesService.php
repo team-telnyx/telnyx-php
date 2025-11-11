@@ -9,13 +9,9 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\ExternalConnections\LogMessages\LogMessageDismissResponse;
 use Telnyx\ExternalConnections\LogMessages\LogMessageGetResponse;
 use Telnyx\ExternalConnections\LogMessages\LogMessageListParams;
-use Telnyx\ExternalConnections\LogMessages\LogMessageListParams\Filter;
-use Telnyx\ExternalConnections\LogMessages\LogMessageListParams\Page;
 use Telnyx\ExternalConnections\LogMessages\LogMessageListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ExternalConnections\LogMessagesContract;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class LogMessagesService implements LogMessagesContract
 {
@@ -49,35 +45,23 @@ final class LogMessagesService implements LogMessagesContract
      *
      * Retrieve a list of log messages for all external connections associated with your account.
      *
-     * @param Filter $filter Filter parameter for log messages (deepObject style). Supports filtering by external_connection_id and telephone_number with eq/contains operations.
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param array{
+     *   filter?: array{
+     *     external_connection_id?: string,
+     *     telephone_number?: array{contains?: string, eq?: string},
+     *   },
+     *   page?: array{number?: int, size?: int},
+     * }|LogMessageListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): LogMessageListResponse {
-        $params = ['filter' => $filter, 'page' => $page];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
+        array|LogMessageListParams $params,
         ?RequestOptions $requestOptions = null
     ): LogMessageListResponse {
         [$parsed, $options] = LogMessageListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

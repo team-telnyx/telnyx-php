@@ -13,7 +13,7 @@ use Telnyx\Messsages\RcsSuggestion\Action\ViewLocationAction\LatLong;
  * Opens the user's default map app and selects the agent-specified location.
  *
  * @phpstan-type ViewLocationActionShape = array{
- *   label?: string, latLong?: LatLong, query?: string
+ *   label?: string|null, lat_long?: LatLong|null, query?: string|null
  * }
  */
 final class ViewLocationAction implements BaseModel
@@ -27,8 +27,8 @@ final class ViewLocationAction implements BaseModel
     #[Api(optional: true)]
     public ?string $label;
 
-    #[Api('lat_long', optional: true)]
-    public ?LatLong $latLong;
+    #[Api(optional: true)]
+    public ?LatLong $lat_long;
 
     /**
      * query string (Android only).
@@ -48,13 +48,13 @@ final class ViewLocationAction implements BaseModel
      */
     public static function with(
         ?string $label = null,
-        ?LatLong $latLong = null,
+        ?LatLong $lat_long = null,
         ?string $query = null
     ): self {
         $obj = new self;
 
         null !== $label && $obj->label = $label;
-        null !== $latLong && $obj->latLong = $latLong;
+        null !== $lat_long && $obj->lat_long = $lat_long;
         null !== $query && $obj->query = $query;
 
         return $obj;
@@ -74,7 +74,7 @@ final class ViewLocationAction implements BaseModel
     public function withLatLong(LatLong $latLong): self
     {
         $obj = clone $this;
-        $obj->latLong = $latLong;
+        $obj->lat_long = $latLong;
 
         return $obj;
     }

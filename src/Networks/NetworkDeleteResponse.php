@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Networks\NetworkDeleteResponse\Data;
 
 /**
- * @phpstan-type NetworkDeleteResponseShape = array{data?: Data}
+ * @phpstan-type NetworkDeleteResponseShape = array{data?: Data|null}
  */
 final class NetworkDeleteResponse implements BaseModel, ResponseConverter
 {

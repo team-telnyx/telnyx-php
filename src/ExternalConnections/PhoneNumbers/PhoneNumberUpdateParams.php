@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\ExternalConnections\PhoneNumbers->update
  *
  * @phpstan-type PhoneNumberUpdateParamsShape = array{
- *   id: string, locationID?: string
+ *   id: string, location_id?: string
  * }
  */
 final class PhoneNumberUpdateParams implements BaseModel
@@ -30,8 +30,8 @@ final class PhoneNumberUpdateParams implements BaseModel
     /**
      * Identifies the location to assign the phone number to.
      */
-    #[Api('location_id', optional: true)]
-    public ?string $locationID;
+    #[Api(optional: true)]
+    public ?string $location_id;
 
     /**
      * `new PhoneNumberUpdateParams()` is missing required properties by the API.
@@ -57,13 +57,13 @@ final class PhoneNumberUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(string $id, ?string $locationID = null): self
+    public static function with(string $id, ?string $location_id = null): self
     {
         $obj = new self;
 
         $obj->id = $id;
 
-        null !== $locationID && $obj->locationID = $locationID;
+        null !== $location_id && $obj->location_id = $location_id;
 
         return $obj;
     }
@@ -82,7 +82,7 @@ final class PhoneNumberUpdateParams implements BaseModel
     public function withLocationID(string $locationID): self
     {
         $obj = clone $this;
-        $obj->locationID = $locationID;
+        $obj->location_id = $locationID;
 
         return $obj;
     }

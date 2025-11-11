@@ -5,41 +5,22 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\Legacy\Reporting\UsageReports;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupCreateParams\AggregationType;
+use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupCreateParams;
+use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupListParams;
 use Telnyx\RequestOptions;
-
-use const Telnyx\Core\OMIT as omit;
 
 interface NumberLookupContract
 {
     /**
      * @api
      *
-     * @param AggregationType|value-of<AggregationType> $aggregationType Type of aggregation for the report
-     * @param \DateTimeInterface $endDate End date for the usage report
-     * @param list<string> $managedAccounts List of managed accounts to include in the report
-     * @param \DateTimeInterface $startDate Start date for the usage report
+     * @param array<mixed>|NumberLookupCreateParams $params
      *
      * @throws APIException
      */
     public function create(
-        $aggregationType = omit,
-        $endDate = omit,
-        $managedAccounts = omit,
-        $startDate = omit,
+        array|NumberLookupCreateParams $params,
         ?RequestOptions $requestOptions = null,
-    ): mixed;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): mixed;
 
     /**
@@ -55,27 +36,13 @@ interface NumberLookupContract
     /**
      * @api
      *
-     * @param int $page
-     * @param int $perPage
+     * @param array<mixed>|NumberLookupListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $page = omit,
-        $perPage = omit,
-        ?RequestOptions $requestOptions = null
-    ): mixed;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|NumberLookupListParams $params,
+        ?RequestOptions $requestOptions = null,
     ): mixed;
 
     /**

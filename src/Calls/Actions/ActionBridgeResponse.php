@@ -11,7 +11,9 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type ActionBridgeResponseShape = array{data?: CallControlCommandResult}
+ * @phpstan-type ActionBridgeResponseShape = array{
+ *   data?: CallControlCommandResult|null
+ * }
  */
 final class ActionBridgeResponse implements BaseModel, ResponseConverter
 {

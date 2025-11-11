@@ -12,16 +12,16 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type DataShape = array{
- *   id?: string,
- *   alternateResourceID?: string|null,
- *   changeMadeBy?: value-of<ChangeMadeBy>,
- *   changeType?: string,
+ *   id?: string|null,
+ *   alternate_resource_id?: string|null,
+ *   change_made_by?: value-of<ChangeMadeBy>|null,
+ *   change_type?: string|null,
  *   changes?: list<Change>|null,
- *   createdAt?: \DateTimeInterface,
- *   organizationID?: string,
- *   recordType?: string,
- *   resourceID?: string,
- *   userID?: string,
+ *   created_at?: \DateTimeInterface|null,
+ *   organization_id?: string|null,
+ *   record_type?: string|null,
+ *   resource_id?: string|null,
+ *   user_id?: string|null,
  * }
  */
 final class Data implements BaseModel
@@ -38,22 +38,22 @@ final class Data implements BaseModel
     /**
      * An alternate identifier for a resource which may be considered unique enough to identify the resource but is not the primary identifier for the resource. For example, this field could be used to store the phone number value for a phone number when the primary database identifier is a separate distinct value.
      */
-    #[Api('alternate_resource_id', nullable: true, optional: true)]
-    public ?string $alternateResourceID;
+    #[Api(nullable: true, optional: true)]
+    public ?string $alternate_resource_id;
 
     /**
      * Indicates if the change was made by Telnyx on your behalf, the organization owner, a member of your organization, or in the case of managed accounts, the account manager.
      *
-     * @var value-of<ChangeMadeBy>|null $changeMadeBy
+     * @var value-of<ChangeMadeBy>|null $change_made_by
      */
-    #[Api('change_made_by', enum: ChangeMadeBy::class, optional: true)]
-    public ?string $changeMadeBy;
+    #[Api(enum: ChangeMadeBy::class, optional: true)]
+    public ?string $change_made_by;
 
     /**
      * The type of change that occurred.
      */
-    #[Api('change_type', optional: true)]
-    public ?string $changeType;
+    #[Api(optional: true)]
+    public ?string $change_type;
 
     /**
      * Details of the changes made to the resource.
@@ -66,32 +66,32 @@ final class Data implements BaseModel
     /**
      * ISO 8601 formatted date indicating when the change occurred.
      */
-    #[Api('created_at', optional: true)]
-    public ?\DateTimeInterface $createdAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $created_at;
 
     /**
      * Unique identifier for the organization that owns the resource.
      */
-    #[Api('organization_id', optional: true)]
-    public ?string $organizationID;
+    #[Api(optional: true)]
+    public ?string $organization_id;
 
     /**
      * The type of the resource being audited.
      */
-    #[Api('record_type', optional: true)]
-    public ?string $recordType;
+    #[Api(optional: true)]
+    public ?string $record_type;
 
     /**
      * Unique identifier for the resource that was changed.
      */
-    #[Api('resource_id', optional: true)]
-    public ?string $resourceID;
+    #[Api(optional: true)]
+    public ?string $resource_id;
 
     /**
      * Unique identifier for the user who made the change.
      */
-    #[Api('user_id', optional: true)]
-    public ?string $userID;
+    #[Api(optional: true)]
+    public ?string $user_id;
 
     public function __construct()
     {
@@ -103,33 +103,33 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ChangeMadeBy|value-of<ChangeMadeBy> $changeMadeBy
+     * @param ChangeMadeBy|value-of<ChangeMadeBy> $change_made_by
      * @param list<Change>|null $changes
      */
     public static function with(
         ?string $id = null,
-        ?string $alternateResourceID = null,
-        ChangeMadeBy|string|null $changeMadeBy = null,
-        ?string $changeType = null,
+        ?string $alternate_resource_id = null,
+        ChangeMadeBy|string|null $change_made_by = null,
+        ?string $change_type = null,
         ?array $changes = null,
-        ?\DateTimeInterface $createdAt = null,
-        ?string $organizationID = null,
-        ?string $recordType = null,
-        ?string $resourceID = null,
-        ?string $userID = null,
+        ?\DateTimeInterface $created_at = null,
+        ?string $organization_id = null,
+        ?string $record_type = null,
+        ?string $resource_id = null,
+        ?string $user_id = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj->id = $id;
-        null !== $alternateResourceID && $obj->alternateResourceID = $alternateResourceID;
-        null !== $changeMadeBy && $obj['changeMadeBy'] = $changeMadeBy;
-        null !== $changeType && $obj->changeType = $changeType;
+        null !== $alternate_resource_id && $obj->alternate_resource_id = $alternate_resource_id;
+        null !== $change_made_by && $obj['change_made_by'] = $change_made_by;
+        null !== $change_type && $obj->change_type = $change_type;
         null !== $changes && $obj->changes = $changes;
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $organizationID && $obj->organizationID = $organizationID;
-        null !== $recordType && $obj->recordType = $recordType;
-        null !== $resourceID && $obj->resourceID = $resourceID;
-        null !== $userID && $obj->userID = $userID;
+        null !== $created_at && $obj->created_at = $created_at;
+        null !== $organization_id && $obj->organization_id = $organization_id;
+        null !== $record_type && $obj->record_type = $record_type;
+        null !== $resource_id && $obj->resource_id = $resource_id;
+        null !== $user_id && $obj->user_id = $user_id;
 
         return $obj;
     }
@@ -151,7 +151,7 @@ final class Data implements BaseModel
     public function withAlternateResourceID(?string $alternateResourceID): self
     {
         $obj = clone $this;
-        $obj->alternateResourceID = $alternateResourceID;
+        $obj->alternate_resource_id = $alternateResourceID;
 
         return $obj;
     }
@@ -164,7 +164,7 @@ final class Data implements BaseModel
     public function withChangeMadeBy(ChangeMadeBy|string $changeMadeBy): self
     {
         $obj = clone $this;
-        $obj['changeMadeBy'] = $changeMadeBy;
+        $obj['change_made_by'] = $changeMadeBy;
 
         return $obj;
     }
@@ -175,7 +175,7 @@ final class Data implements BaseModel
     public function withChangeType(string $changeType): self
     {
         $obj = clone $this;
-        $obj->changeType = $changeType;
+        $obj->change_type = $changeType;
 
         return $obj;
     }
@@ -199,7 +199,7 @@ final class Data implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }
@@ -210,7 +210,7 @@ final class Data implements BaseModel
     public function withOrganizationID(string $organizationID): self
     {
         $obj = clone $this;
-        $obj->organizationID = $organizationID;
+        $obj->organization_id = $organizationID;
 
         return $obj;
     }
@@ -221,7 +221,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType;
+        $obj->record_type = $recordType;
 
         return $obj;
     }
@@ -232,7 +232,7 @@ final class Data implements BaseModel
     public function withResourceID(string $resourceID): self
     {
         $obj = clone $this;
-        $obj->resourceID = $resourceID;
+        $obj->resource_id = $resourceID;
 
         return $obj;
     }
@@ -243,7 +243,7 @@ final class Data implements BaseModel
     public function withUserID(string $userID): self
     {
         $obj = clone $this;
-        $obj->userID = $userID;
+        $obj->user_id = $userID;
 
         return $obj;
     }

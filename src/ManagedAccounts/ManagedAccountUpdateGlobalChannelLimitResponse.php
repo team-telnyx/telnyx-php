@@ -13,7 +13,7 @@ use Telnyx\ManagedAccounts\ManagedAccountUpdateGlobalChannelLimitResponse\Data;
 
 /**
  * @phpstan-type ManagedAccountUpdateGlobalChannelLimitResponseShape = array{
- *   data?: Data
+ *   data?: Data|null
  * }
  */
 final class ManagedAccountUpdateGlobalChannelLimitResponse implements BaseModel, ResponseConverter

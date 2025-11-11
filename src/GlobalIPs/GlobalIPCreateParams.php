@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\GlobalIPs->create
  *
  * @phpstan-type GlobalIPCreateParamsShape = array{
- *   description?: string, name?: string, ports?: array<string, mixed>
+ *   description?: string, name?: string, ports?: array<string,mixed>
  * }
  */
 final class GlobalIPCreateParams implements BaseModel
@@ -39,7 +39,7 @@ final class GlobalIPCreateParams implements BaseModel
     /**
      * A Global IP ports grouped by protocol code.
      *
-     * @var array<string, mixed>|null $ports
+     * @var array<string,mixed>|null $ports
      */
     #[Api(map: 'mixed', optional: true)]
     public ?array $ports;
@@ -54,7 +54,7 @@ final class GlobalIPCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param array<string, mixed> $ports
+     * @param array<string,mixed> $ports
      */
     public static function with(
         ?string $description = null,
@@ -95,7 +95,7 @@ final class GlobalIPCreateParams implements BaseModel
     /**
      * A Global IP ports grouped by protocol code.
      *
-     * @param array<string, mixed> $ports
+     * @param array<string,mixed> $ports
      */
     public function withPorts(array $ports): self
     {

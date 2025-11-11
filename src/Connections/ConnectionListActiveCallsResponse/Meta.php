@@ -11,7 +11,10 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type MetaShape = array{
- *   cursors?: Cursors, next?: string, previous?: string, totalItems?: int
+ *   cursors?: Cursors|null,
+ *   next?: string|null,
+ *   previous?: string|null,
+ *   total_items?: int|null,
  * }
  */
 final class Meta implements BaseModel
@@ -34,8 +37,8 @@ final class Meta implements BaseModel
     #[Api(optional: true)]
     public ?string $previous;
 
-    #[Api('total_items', optional: true)]
-    public ?int $totalItems;
+    #[Api(optional: true)]
+    public ?int $total_items;
 
     public function __construct()
     {
@@ -51,14 +54,14 @@ final class Meta implements BaseModel
         ?Cursors $cursors = null,
         ?string $next = null,
         ?string $previous = null,
-        ?int $totalItems = null,
+        ?int $total_items = null,
     ): self {
         $obj = new self;
 
         null !== $cursors && $obj->cursors = $cursors;
         null !== $next && $obj->next = $next;
         null !== $previous && $obj->previous = $previous;
-        null !== $totalItems && $obj->totalItems = $totalItems;
+        null !== $total_items && $obj->total_items = $total_items;
 
         return $obj;
     }
@@ -96,7 +99,7 @@ final class Meta implements BaseModel
     public function withTotalItems(int $totalItems): self
     {
         $obj = clone $this;
-        $obj->totalItems = $totalItems;
+        $obj->total_items = $totalItems;
 
         return $obj;
     }

@@ -9,9 +9,6 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\PhoneNumbers\PhoneNumberDeleteResponse;
 use Telnyx\PhoneNumbers\PhoneNumberGetResponse;
 use Telnyx\PhoneNumbers\PhoneNumberListParams;
-use Telnyx\PhoneNumbers\PhoneNumberListParams\Filter;
-use Telnyx\PhoneNumbers\PhoneNumberListParams\Page;
-use Telnyx\PhoneNumbers\PhoneNumberListParams\Sort;
 use Telnyx\PhoneNumbers\PhoneNumberListResponse;
 use Telnyx\PhoneNumbers\PhoneNumberSlimListParams;
 use Telnyx\PhoneNumbers\PhoneNumberSlimListResponse;
@@ -26,37 +23,35 @@ use Telnyx\Services\PhoneNumbers\MessagingService;
 use Telnyx\Services\PhoneNumbers\VoicemailService;
 use Telnyx\Services\PhoneNumbers\VoiceService;
 
-use const Telnyx\Core\OMIT as omit;
-
 final class PhoneNumbersService implements PhoneNumbersContract
 {
     /**
-     * @@api
+     * @api
      */
     public ActionsService $actions;
 
     /**
-     * @@api
+     * @api
      */
     public CsvDownloadsService $csvDownloads;
 
     /**
-     * @@api
+     * @api
      */
     public JobsService $jobs;
 
     /**
-     * @@api
+     * @api
      */
     public MessagingService $messaging;
 
     /**
-     * @@api
+     * @api
      */
     public VoiceService $voice;
 
     /**
-     * @@api
+     * @api
      */
     public VoicemailService $voicemail;
 
@@ -98,52 +93,25 @@ final class PhoneNumbersService implements PhoneNumbersContract
      *
      * Update a phone number
      *
-     * @param string $billingGroupID identifies the billing group associated with the phone number
-     * @param string $connectionID identifies the connection associated with the phone number
-     * @param string $customerReference a customer reference string for customer look ups
-     * @param string $externalPin If someone attempts to port your phone number away from Telnyx and your phone number has an external PIN set, we will attempt to verify that you provided the correct external PIN to the winning carrier. Note that not all carriers cooperate with this security mechanism.
-     * @param bool $hdVoiceEnabled indicates whether HD voice is enabled for this number
-     * @param list<string> $tags a list of user-assigned tags to help organize phone numbers
+     * @param array{
+     *   billing_group_id?: string,
+     *   connection_id?: string,
+     *   customer_reference?: string,
+     *   external_pin?: string,
+     *   hd_voice_enabled?: bool,
+     *   tags?: list<string>,
+     * }|PhoneNumberUpdateParams $params
      *
      * @throws APIException
      */
     public function update(
         string $id,
-        $billingGroupID = omit,
-        $connectionID = omit,
-        $customerReference = omit,
-        $externalPin = omit,
-        $hdVoiceEnabled = omit,
-        $tags = omit,
+        array|PhoneNumberUpdateParams $params,
         ?RequestOptions $requestOptions = null,
-    ): PhoneNumberUpdateResponse {
-        $params = [
-            'billingGroupID' => $billingGroupID,
-            'connectionID' => $connectionID,
-            'customerReference' => $customerReference,
-            'externalPin' => $externalPin,
-            'hdVoiceEnabled' => $hdVoiceEnabled,
-            'tags' => $tags,
-        ];
-
-        return $this->updateRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): PhoneNumberUpdateResponse {
         [$parsed, $options] = PhoneNumberUpdateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -161,37 +129,39 @@ final class PhoneNumbersService implements PhoneNumbersContract
      *
      * List phone numbers
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[tag], filter[phone_number], filter[status], filter[country_iso_alpha2], filter[connection_id], filter[voice.connection_name], filter[voice.usage_payment_method], filter[billing_group_id], filter[emergency_address_id], filter[customer_reference], filter[number_type], filter[source]
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
-     * @param Sort|value-of<Sort> $sort Specifies the sort order for results. If not given, results are sorted by created_at in descending order.
+     * @param array{
+     *   filter?: array{
+     *     billing_group_id?: string,
+     *     connection_id?: string,
+     *     country_iso_alpha2?: string|list<string>,
+     *     customer_reference?: string,
+     *     emergency_address_id?: string,
+     *     number_type?: array{
+     *       eq?: "local"|"national"|"toll_free"|"mobile"|"shared_cost"
+     *     },
+     *     phone_number?: string,
+     *     source?: "ported"|"purchased",
+     *     status?: "purchase-pending"|"purchase-failed"|"port-pending"|"active"|"deleted"|"port-failed"|"emergency-only"|"ported-out"|"port-out-pending",
+     *     tag?: string,
+     *     'voice.connection_name'?: array{
+     *       contains?: string, ends_with?: string, eq?: string, starts_with?: string
+     *     },
+     *     'voice.usage_payment_method'?: "pay-per-minute"|"channel",
+     *     without_tags?: "true"|"false",
+     *   },
+     *   page?: array{number?: int, size?: int},
+     *   sort?: "purchased_at"|"phone_number"|"connection_name"|"usage_payment_method",
+     * }|PhoneNumberListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
-        $sort = omit,
-        ?RequestOptions $requestOptions = null,
-    ): PhoneNumberListResponse {
-        $params = ['filter' => $filter, 'page' => $page, 'sort' => $sort];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
+        array|PhoneNumberListParams $params,
         ?RequestOptions $requestOptions = null
     ): PhoneNumberListResponse {
         [$parsed, $options] = PhoneNumberListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -229,47 +199,40 @@ final class PhoneNumbersService implements PhoneNumbersContract
      *
      * List phone numbers, This endpoint is a lighter version of the /phone_numbers endpoint having higher performance and rate limit.
      *
-     * @param PhoneNumberSlimListParams\Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[tag], filter[phone_number], filter[status], filter[country_iso_alpha2], filter[connection_id], filter[voice.connection_name], filter[voice.usage_payment_method], filter[billing_group_id], filter[emergency_address_id], filter[customer_reference], filter[number_type], filter[source]
-     * @param bool $includeConnection include the connection associated with the phone number
-     * @param bool $includeTags include the tags associated with the phone number
-     * @param PhoneNumberSlimListParams\Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
-     * @param PhoneNumberSlimListParams\Sort|value-of<PhoneNumberSlimListParams\Sort> $sort Specifies the sort order for results. If not given, results are sorted by created_at in descending order.
+     * @param array{
+     *   filter?: array{
+     *     billing_group_id?: string,
+     *     connection_id?: string,
+     *     country_iso_alpha2?: string|list<string>,
+     *     customer_reference?: string,
+     *     emergency_address_id?: string,
+     *     number_type?: array{
+     *       eq?: "local"|"national"|"toll_free"|"mobile"|"shared_cost"
+     *     },
+     *     phone_number?: string,
+     *     source?: "ported"|"purchased",
+     *     status?: "purchase-pending"|"purchase-failed"|"port_pending"|"active"|"deleted"|"port-failed"|"emergency-only"|"ported-out"|"port-out-pending",
+     *     tag?: string,
+     *     'voice.connection_name'?: array{
+     *       contains?: string, ends_with?: string, eq?: string, starts_with?: string
+     *     },
+     *     'voice.usage_payment_method'?: "pay-per-minute"|"channel",
+     *   },
+     *   include_connection?: bool,
+     *   include_tags?: bool,
+     *   page?: array{number?: int, size?: int},
+     *   sort?: "purchased_at"|"phone_number"|"connection_name"|"usage_payment_method",
+     * }|PhoneNumberSlimListParams $params
      *
      * @throws APIException
      */
     public function slimList(
-        $filter = omit,
-        $includeConnection = omit,
-        $includeTags = omit,
-        $page = omit,
-        $sort = omit,
+        array|PhoneNumberSlimListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): PhoneNumberSlimListResponse {
-        $params = [
-            'filter' => $filter,
-            'includeConnection' => $includeConnection,
-            'includeTags' => $includeTags,
-            'page' => $page,
-            'sort' => $sort,
-        ];
-
-        return $this->slimListRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function slimListRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): PhoneNumberSlimListResponse {
         [$parsed, $options] = PhoneNumberSlimListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

@@ -13,7 +13,7 @@ use Telnyx\DocReqsRequirementType;
 
 /**
  * @phpstan-type RequirementTypeGetResponseShape = array{
- *   data?: DocReqsRequirementType
+ *   data?: DocReqsRequirementType|null
  * }
  */
 final class RequirementTypeGetResponse implements BaseModel, ResponseConverter

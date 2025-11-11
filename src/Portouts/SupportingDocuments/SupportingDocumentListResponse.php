@@ -12,7 +12,9 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Portouts\SupportingDocuments\SupportingDocumentListResponse\Data;
 
 /**
- * @phpstan-type SupportingDocumentListResponseShape = array{data?: list<Data>}
+ * @phpstan-type SupportingDocumentListResponseShape = array{
+ *   data?: list<Data>|null
+ * }
  */
 final class SupportingDocumentListResponse implements BaseModel, ResponseConverter
 {

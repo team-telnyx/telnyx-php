@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type PortoutGetResponseShape = array{data?: PortoutDetails}
+ * @phpstan-type PortoutGetResponseShape = array{data?: PortoutDetails|null}
  */
 final class PortoutGetResponse implements BaseModel, ResponseConverter
 {

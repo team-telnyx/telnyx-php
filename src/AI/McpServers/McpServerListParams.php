@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\AI\McpServers->list
  *
  * @phpstan-type McpServerListParamsShape = array{
- *   pageNumber?: int, pageSize?: int, type?: string, url?: string
+ *   page_number_?: int, page_size_?: int, type?: string, url?: string
  * }
  */
 final class McpServerListParams implements BaseModel
@@ -25,10 +25,10 @@ final class McpServerListParams implements BaseModel
     use SdkParams;
 
     #[Api(optional: true)]
-    public ?int $pageNumber;
+    public ?int $page_number_;
 
     #[Api(optional: true)]
-    public ?int $pageSize;
+    public ?int $page_size_;
 
     #[Api(optional: true)]
     public ?string $type;
@@ -47,15 +47,15 @@ final class McpServerListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?int $pageNumber = null,
-        ?int $pageSize = null,
+        ?int $page_number_ = null,
+        ?int $page_size_ = null,
         ?string $type = null,
         ?string $url = null,
     ): self {
         $obj = new self;
 
-        null !== $pageNumber && $obj->pageNumber = $pageNumber;
-        null !== $pageSize && $obj->pageSize = $pageSize;
+        null !== $page_number_ && $obj->page_number_ = $page_number_;
+        null !== $page_size_ && $obj->page_size_ = $page_size_;
         null !== $type && $obj->type = $type;
         null !== $url && $obj->url = $url;
 
@@ -65,7 +65,7 @@ final class McpServerListParams implements BaseModel
     public function withPageNumber(int $pageNumber): self
     {
         $obj = clone $this;
-        $obj->pageNumber = $pageNumber;
+        $obj->page_number_ = $pageNumber;
 
         return $obj;
     }
@@ -73,7 +73,7 @@ final class McpServerListParams implements BaseModel
     public function withPageSize(int $pageSize): self
     {
         $obj = clone $this;
-        $obj->pageSize = $pageSize;
+        $obj->page_size_ = $pageSize;
 
         return $obj;
     }

@@ -18,18 +18,18 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  * status, timing, logs, and detailed evaluation results.
  *
  * @phpstan-type TestRunResponseShape = array{
- *   createdAt: \DateTimeInterface,
- *   runID: string,
+ *   created_at: \DateTimeInterface,
+ *   run_id: string,
  *   status: value-of<TestStatus>,
- *   testID: string,
- *   triggeredBy: string,
- *   completedAt?: \DateTimeInterface,
- *   conversationID?: string,
- *   conversationInsightsID?: string,
- *   detailStatus?: list<DetailStatus>,
- *   logs?: string,
- *   testSuiteRunID?: string,
- *   updatedAt?: \DateTimeInterface,
+ *   test_id: string,
+ *   triggered_by: string,
+ *   completed_at?: \DateTimeInterface|null,
+ *   conversation_id?: string|null,
+ *   conversation_insights_id?: string|null,
+ *   detail_status?: list<DetailStatus>|null,
+ *   logs?: string|null,
+ *   test_suite_run_id?: string|null,
+ *   updated_at?: \DateTimeInterface|null,
  * }
  */
 final class TestRunResponse implements BaseModel, ResponseConverter
@@ -42,14 +42,14 @@ final class TestRunResponse implements BaseModel, ResponseConverter
     /**
      * Timestamp when the test run was created and queued.
      */
-    #[Api('created_at')]
-    public \DateTimeInterface $createdAt;
+    #[Api]
+    public \DateTimeInterface $created_at;
 
     /**
      * Unique identifier for this specific test run execution.
      */
-    #[Api('run_id')]
-    public string $runID;
+    #[Api]
+    public string $run_id;
 
     /**
      * Represents the lifecycle of a test:
@@ -68,40 +68,40 @@ final class TestRunResponse implements BaseModel, ResponseConverter
     /**
      * Identifier of the assistant test that was executed.
      */
-    #[Api('test_id')]
-    public string $testID;
+    #[Api]
+    public string $test_id;
 
     /**
      * How this test run was initiated (manual, scheduled, or API).
      */
-    #[Api('triggered_by')]
-    public string $triggeredBy;
+    #[Api]
+    public string $triggered_by;
 
     /**
      * Timestamp when the test run finished execution.
      */
-    #[Api('completed_at', optional: true)]
-    public ?\DateTimeInterface $completedAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $completed_at;
 
     /**
      * Identifier of the conversation created during test execution.
      */
-    #[Api('conversation_id', optional: true)]
-    public ?string $conversationID;
+    #[Api(optional: true)]
+    public ?string $conversation_id;
 
     /**
      * Identifier for conversation analysis and insights data.
      */
-    #[Api('conversation_insights_id', optional: true)]
-    public ?string $conversationInsightsID;
+    #[Api(optional: true)]
+    public ?string $conversation_insights_id;
 
     /**
      * Detailed evaluation results for each rubric criteria. Name is name of the criteria from the rubric and status is the result of the evaluation. This list will have a result for every criteria in the rubric section.
      *
-     * @var list<DetailStatus>|null $detailStatus
+     * @var list<DetailStatus>|null $detail_status
      */
-    #[Api('detail_status', list: DetailStatus::class, optional: true)]
-    public ?array $detailStatus;
+    #[Api(list: DetailStatus::class, optional: true)]
+    public ?array $detail_status;
 
     /**
      * Detailed execution logs and debug information.
@@ -112,14 +112,14 @@ final class TestRunResponse implements BaseModel, ResponseConverter
     /**
      * Identifier linking this run to a test suite execution batch.
      */
-    #[Api('test_suite_run_id', optional: true)]
-    public ?string $testSuiteRunID;
+    #[Api(optional: true)]
+    public ?string $test_suite_run_id;
 
     /**
      * Timestamp of the last update to this test run.
      */
-    #[Api('updated_at', optional: true)]
-    public ?\DateTimeInterface $updatedAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $updated_at;
 
     /**
      * `new TestRunResponse()` is missing required properties by the API.
@@ -127,7 +127,7 @@ final class TestRunResponse implements BaseModel, ResponseConverter
      * To enforce required parameters use
      * ```
      * TestRunResponse::with(
-     *   createdAt: ..., runID: ..., status: ..., testID: ..., triggeredBy: ...
+     *   created_at: ..., run_id: ..., status: ..., test_id: ..., triggered_by: ...
      * )
      * ```
      *
@@ -153,37 +153,37 @@ final class TestRunResponse implements BaseModel, ResponseConverter
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param TestStatus|value-of<TestStatus> $status
-     * @param list<DetailStatus> $detailStatus
+     * @param list<DetailStatus> $detail_status
      */
     public static function with(
-        \DateTimeInterface $createdAt,
-        string $runID,
+        \DateTimeInterface $created_at,
+        string $run_id,
         TestStatus|string $status,
-        string $testID,
-        string $triggeredBy,
-        ?\DateTimeInterface $completedAt = null,
-        ?string $conversationID = null,
-        ?string $conversationInsightsID = null,
-        ?array $detailStatus = null,
+        string $test_id,
+        string $triggered_by,
+        ?\DateTimeInterface $completed_at = null,
+        ?string $conversation_id = null,
+        ?string $conversation_insights_id = null,
+        ?array $detail_status = null,
         ?string $logs = null,
-        ?string $testSuiteRunID = null,
-        ?\DateTimeInterface $updatedAt = null,
+        ?string $test_suite_run_id = null,
+        ?\DateTimeInterface $updated_at = null,
     ): self {
         $obj = new self;
 
-        $obj->createdAt = $createdAt;
-        $obj->runID = $runID;
+        $obj->created_at = $created_at;
+        $obj->run_id = $run_id;
         $obj['status'] = $status;
-        $obj->testID = $testID;
-        $obj->triggeredBy = $triggeredBy;
+        $obj->test_id = $test_id;
+        $obj->triggered_by = $triggered_by;
 
-        null !== $completedAt && $obj->completedAt = $completedAt;
-        null !== $conversationID && $obj->conversationID = $conversationID;
-        null !== $conversationInsightsID && $obj->conversationInsightsID = $conversationInsightsID;
-        null !== $detailStatus && $obj->detailStatus = $detailStatus;
+        null !== $completed_at && $obj->completed_at = $completed_at;
+        null !== $conversation_id && $obj->conversation_id = $conversation_id;
+        null !== $conversation_insights_id && $obj->conversation_insights_id = $conversation_insights_id;
+        null !== $detail_status && $obj->detail_status = $detail_status;
         null !== $logs && $obj->logs = $logs;
-        null !== $testSuiteRunID && $obj->testSuiteRunID = $testSuiteRunID;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
+        null !== $test_suite_run_id && $obj->test_suite_run_id = $test_suite_run_id;
+        null !== $updated_at && $obj->updated_at = $updated_at;
 
         return $obj;
     }
@@ -194,7 +194,7 @@ final class TestRunResponse implements BaseModel, ResponseConverter
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }
@@ -205,7 +205,7 @@ final class TestRunResponse implements BaseModel, ResponseConverter
     public function withRunID(string $runID): self
     {
         $obj = clone $this;
-        $obj->runID = $runID;
+        $obj->run_id = $runID;
 
         return $obj;
     }
@@ -235,7 +235,7 @@ final class TestRunResponse implements BaseModel, ResponseConverter
     public function withTestID(string $testID): self
     {
         $obj = clone $this;
-        $obj->testID = $testID;
+        $obj->test_id = $testID;
 
         return $obj;
     }
@@ -246,7 +246,7 @@ final class TestRunResponse implements BaseModel, ResponseConverter
     public function withTriggeredBy(string $triggeredBy): self
     {
         $obj = clone $this;
-        $obj->triggeredBy = $triggeredBy;
+        $obj->triggered_by = $triggeredBy;
 
         return $obj;
     }
@@ -257,7 +257,7 @@ final class TestRunResponse implements BaseModel, ResponseConverter
     public function withCompletedAt(\DateTimeInterface $completedAt): self
     {
         $obj = clone $this;
-        $obj->completedAt = $completedAt;
+        $obj->completed_at = $completedAt;
 
         return $obj;
     }
@@ -268,7 +268,7 @@ final class TestRunResponse implements BaseModel, ResponseConverter
     public function withConversationID(string $conversationID): self
     {
         $obj = clone $this;
-        $obj->conversationID = $conversationID;
+        $obj->conversation_id = $conversationID;
 
         return $obj;
     }
@@ -280,7 +280,7 @@ final class TestRunResponse implements BaseModel, ResponseConverter
         string $conversationInsightsID
     ): self {
         $obj = clone $this;
-        $obj->conversationInsightsID = $conversationInsightsID;
+        $obj->conversation_insights_id = $conversationInsightsID;
 
         return $obj;
     }
@@ -293,7 +293,7 @@ final class TestRunResponse implements BaseModel, ResponseConverter
     public function withDetailStatus(array $detailStatus): self
     {
         $obj = clone $this;
-        $obj->detailStatus = $detailStatus;
+        $obj->detail_status = $detailStatus;
 
         return $obj;
     }
@@ -315,7 +315,7 @@ final class TestRunResponse implements BaseModel, ResponseConverter
     public function withTestSuiteRunID(string $testSuiteRunID): self
     {
         $obj = clone $this;
-        $obj->testSuiteRunID = $testSuiteRunID;
+        $obj->test_suite_run_id = $testSuiteRunID;
 
         return $obj;
     }
@@ -326,7 +326,7 @@ final class TestRunResponse implements BaseModel, ResponseConverter
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $obj->updated_at = $updatedAt;
 
         return $obj;
     }

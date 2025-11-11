@@ -14,7 +14,7 @@ use Telnyx\Networks\DefaultGateway\DefaultGatewayDeleteResponse\Data;
 
 /**
  * @phpstan-type DefaultGatewayDeleteResponseShape = array{
- *   data?: list<Data>, meta?: PaginationMeta
+ *   data?: list<Data>|null, meta?: PaginationMeta|null
  * }
  */
 final class DefaultGatewayDeleteResponse implements BaseModel, ResponseConverter

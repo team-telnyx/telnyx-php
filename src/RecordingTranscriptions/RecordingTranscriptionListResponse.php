@@ -13,7 +13,7 @@ use Telnyx\RecordingTranscriptions\RecordingTranscriptionListResponse\Meta;
 
 /**
  * @phpstan-type RecordingTranscriptionListResponseShape = array{
- *   data?: list<RecordingTranscription>, meta?: Meta
+ *   data?: list<RecordingTranscription>|null, meta?: Meta|null
  * }
  */
 final class RecordingTranscriptionListResponse implements BaseModel, ResponseConverter

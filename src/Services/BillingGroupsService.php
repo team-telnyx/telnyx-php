@@ -8,7 +8,6 @@ use Telnyx\BillingGroups\BillingGroupCreateParams;
 use Telnyx\BillingGroups\BillingGroupDeleteResponse;
 use Telnyx\BillingGroups\BillingGroupGetResponse;
 use Telnyx\BillingGroups\BillingGroupListParams;
-use Telnyx\BillingGroups\BillingGroupListParams\Page;
 use Telnyx\BillingGroups\BillingGroupListResponse;
 use Telnyx\BillingGroups\BillingGroupNewResponse;
 use Telnyx\BillingGroups\BillingGroupUpdateParams;
@@ -17,8 +16,6 @@ use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\BillingGroupsContract;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class BillingGroupsService implements BillingGroupsContract
 {
@@ -32,33 +29,17 @@ final class BillingGroupsService implements BillingGroupsContract
      *
      * Create a billing group
      *
-     * @param string $name A name for the billing group
+     * @param array{name?: string}|BillingGroupCreateParams $params
      *
      * @throws APIException
      */
     public function create(
-        $name = omit,
-        ?RequestOptions $requestOptions = null
-    ): BillingGroupNewResponse {
-        $params = ['name' => $name];
-
-        return $this->createRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|BillingGroupCreateParams $params,
+        ?RequestOptions $requestOptions = null,
     ): BillingGroupNewResponse {
         [$parsed, $options] = BillingGroupCreateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -96,35 +77,18 @@ final class BillingGroupsService implements BillingGroupsContract
      *
      * Update a billing group
      *
-     * @param string $name A name for the billing group
+     * @param array{name?: string}|BillingGroupUpdateParams $params
      *
      * @throws APIException
      */
     public function update(
         string $id,
-        $name = omit,
-        ?RequestOptions $requestOptions = null
-    ): BillingGroupUpdateResponse {
-        $params = ['name' => $name];
-
-        return $this->updateRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|BillingGroupUpdateParams $params,
+        ?RequestOptions $requestOptions = null,
     ): BillingGroupUpdateResponse {
         [$parsed, $options] = BillingGroupUpdateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -142,33 +106,19 @@ final class BillingGroupsService implements BillingGroupsContract
      *
      * List all billing groups
      *
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param array{
+     *   page?: array{number?: int, size?: int}
+     * }|BillingGroupListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): BillingGroupListResponse {
-        $params = ['page' => $page];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
+        array|BillingGroupListParams $params,
         ?RequestOptions $requestOptions = null
     ): BillingGroupListResponse {
         [$parsed, $options] = BillingGroupListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

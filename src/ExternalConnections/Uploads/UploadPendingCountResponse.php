@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\ExternalConnections\Uploads\UploadPendingCountResponse\Data;
 
 /**
- * @phpstan-type UploadPendingCountResponseShape = array{data?: Data}
+ * @phpstan-type UploadPendingCountResponseShape = array{data?: Data|null}
  */
 final class UploadPendingCountResponse implements BaseModel, ResponseConverter
 {

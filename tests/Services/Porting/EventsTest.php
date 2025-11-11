@@ -47,7 +47,7 @@ final class EventsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->porting->events->list();
+        $result = $this->client->porting->events->list([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

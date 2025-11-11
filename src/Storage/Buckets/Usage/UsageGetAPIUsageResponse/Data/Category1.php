@@ -11,11 +11,11 @@ use Telnyx\Storage\Buckets\Usage\UsageGetAPIUsageResponse\Data\Category1\Categor
 
 /**
  * @phpstan-type Category1Shape = array{
- *   bytesReceived?: int,
- *   bytesSent?: int,
- *   category?: value-of<Category>,
- *   ops?: int,
- *   successfulOps?: int,
+ *   bytes_received?: int|null,
+ *   bytes_sent?: int|null,
+ *   category?: value-of<Category>|null,
+ *   ops?: int|null,
+ *   successful_ops?: int|null,
  * }
  */
 final class Category1 implements BaseModel
@@ -26,14 +26,14 @@ final class Category1 implements BaseModel
     /**
      * The number of bytes received.
      */
-    #[Api('bytes_received', optional: true)]
-    public ?int $bytesReceived;
+    #[Api(optional: true)]
+    public ?int $bytes_received;
 
     /**
      * The number of bytes sent.
      */
-    #[Api('bytes_sent', optional: true)]
-    public ?int $bytesSent;
+    #[Api(optional: true)]
+    public ?int $bytes_sent;
 
     /**
      * The category of the bucket operation.
@@ -52,8 +52,8 @@ final class Category1 implements BaseModel
     /**
      * The number of successful operations.
      */
-    #[Api('successful_ops', optional: true)]
-    public ?int $successfulOps;
+    #[Api(optional: true)]
+    public ?int $successful_ops;
 
     public function __construct()
     {
@@ -68,19 +68,19 @@ final class Category1 implements BaseModel
      * @param Category|value-of<Category> $category
      */
     public static function with(
-        ?int $bytesReceived = null,
-        ?int $bytesSent = null,
+        ?int $bytes_received = null,
+        ?int $bytes_sent = null,
         Category|string|null $category = null,
         ?int $ops = null,
-        ?int $successfulOps = null,
+        ?int $successful_ops = null,
     ): self {
         $obj = new self;
 
-        null !== $bytesReceived && $obj->bytesReceived = $bytesReceived;
-        null !== $bytesSent && $obj->bytesSent = $bytesSent;
+        null !== $bytes_received && $obj->bytes_received = $bytes_received;
+        null !== $bytes_sent && $obj->bytes_sent = $bytes_sent;
         null !== $category && $obj['category'] = $category;
         null !== $ops && $obj->ops = $ops;
-        null !== $successfulOps && $obj->successfulOps = $successfulOps;
+        null !== $successful_ops && $obj->successful_ops = $successful_ops;
 
         return $obj;
     }
@@ -91,7 +91,7 @@ final class Category1 implements BaseModel
     public function withBytesReceived(int $bytesReceived): self
     {
         $obj = clone $this;
-        $obj->bytesReceived = $bytesReceived;
+        $obj->bytes_received = $bytesReceived;
 
         return $obj;
     }
@@ -102,7 +102,7 @@ final class Category1 implements BaseModel
     public function withBytesSent(int $bytesSent): self
     {
         $obj = clone $this;
-        $obj->bytesSent = $bytesSent;
+        $obj->bytes_sent = $bytesSent;
 
         return $obj;
     }
@@ -137,7 +137,7 @@ final class Category1 implements BaseModel
     public function withSuccessfulOps(int $successfulOps): self
     {
         $obj = clone $this;
-        $obj->successfulOps = $successfulOps;
+        $obj->successful_ops = $successfulOps;
 
         return $obj;
     }

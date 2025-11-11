@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type AttemptsShape = array{contains?: string}
+ * @phpstan-type AttemptsShape = array{contains?: string|null}
  */
 final class Attempts implements BaseModel
 {

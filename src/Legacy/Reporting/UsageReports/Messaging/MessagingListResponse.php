@@ -12,7 +12,8 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type MessagingListResponseShape = array{
- *   data?: list<MdrUsageReportResponseLegacy>, meta?: StandardPaginationMeta
+ *   data?: list<MdrUsageReportResponseLegacy>|null,
+ *   meta?: StandardPaginationMeta|null,
  * }
  */
 final class MessagingListResponse implements BaseModel, ResponseConverter

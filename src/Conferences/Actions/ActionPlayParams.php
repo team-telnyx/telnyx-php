@@ -16,10 +16,10 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Conferences\Actions->play
  *
  * @phpstan-type ActionPlayParamsShape = array{
- *   audioURL?: string,
- *   callControlIDs?: list<string>,
+ *   audio_url?: string,
+ *   call_control_ids?: list<string>,
  *   loop?: string|int,
- *   mediaName?: string,
+ *   media_name?: string,
  *   region?: Region|value-of<Region>,
  * }
  */
@@ -32,16 +32,16 @@ final class ActionPlayParams implements BaseModel
     /**
      * The URL of a file to be played back in the conference. media_name and audio_url cannot be used together in one request.
      */
-    #[Api('audio_url', optional: true)]
-    public ?string $audioURL;
+    #[Api(optional: true)]
+    public ?string $audio_url;
 
     /**
      * List of call control ids identifying participants the audio file should be played to. If not given, the audio file will be played to the entire conference.
      *
-     * @var list<string>|null $callControlIDs
+     * @var list<string>|null $call_control_ids
      */
-    #[Api('call_control_ids', list: 'string', optional: true)]
-    public ?array $callControlIDs;
+    #[Api(list: 'string', optional: true)]
+    public ?array $call_control_ids;
 
     /**
      * The number of times the audio file should be played. If supplied, the value must be an integer between 1 and 100, or the special string `infinity` for an endless loop.
@@ -52,8 +52,8 @@ final class ActionPlayParams implements BaseModel
     /**
      * The media_name of a file to be played back in the conference. The media_name must point to a file previously uploaded to api.telnyx.com/v2/media by the same user/organization. The file must either be a WAV or MP3 file.
      */
-    #[Api('media_name', optional: true)]
-    public ?string $mediaName;
+    #[Api(optional: true)]
+    public ?string $media_name;
 
     /**
      * Region where the conference data is located. Defaults to the region defined in user's data locality settings (Europe or US).
@@ -73,22 +73,22 @@ final class ActionPlayParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $callControlIDs
+     * @param list<string> $call_control_ids
      * @param Region|value-of<Region> $region
      */
     public static function with(
-        ?string $audioURL = null,
-        ?array $callControlIDs = null,
+        ?string $audio_url = null,
+        ?array $call_control_ids = null,
         string|int|null $loop = null,
-        ?string $mediaName = null,
+        ?string $media_name = null,
         Region|string|null $region = null,
     ): self {
         $obj = new self;
 
-        null !== $audioURL && $obj->audioURL = $audioURL;
-        null !== $callControlIDs && $obj->callControlIDs = $callControlIDs;
+        null !== $audio_url && $obj->audio_url = $audio_url;
+        null !== $call_control_ids && $obj->call_control_ids = $call_control_ids;
         null !== $loop && $obj->loop = $loop;
-        null !== $mediaName && $obj->mediaName = $mediaName;
+        null !== $media_name && $obj->media_name = $media_name;
         null !== $region && $obj['region'] = $region;
 
         return $obj;
@@ -100,7 +100,7 @@ final class ActionPlayParams implements BaseModel
     public function withAudioURL(string $audioURL): self
     {
         $obj = clone $this;
-        $obj->audioURL = $audioURL;
+        $obj->audio_url = $audioURL;
 
         return $obj;
     }
@@ -113,7 +113,7 @@ final class ActionPlayParams implements BaseModel
     public function withCallControlIDs(array $callControlIDs): self
     {
         $obj = clone $this;
-        $obj->callControlIDs = $callControlIDs;
+        $obj->call_control_ids = $callControlIDs;
 
         return $obj;
     }
@@ -135,7 +135,7 @@ final class ActionPlayParams implements BaseModel
     public function withMediaName(string $mediaName): self
     {
         $obj = clone $this;
-        $obj->mediaName = $mediaName;
+        $obj->media_name = $mediaName;
 
         return $obj;
     }

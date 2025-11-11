@@ -10,7 +10,9 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Reports\ReportListWdrsResponse\Data\Rate\Currency;
 
 /**
- * @phpstan-type RateShape = array{amount?: string, currency?: value-of<Currency>}
+ * @phpstan-type RateShape = array{
+ *   amount?: string|null, currency?: value-of<Currency>|null
+ * }
  */
 final class Rate implements BaseModel
 {

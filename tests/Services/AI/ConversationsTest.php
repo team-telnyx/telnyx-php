@@ -33,7 +33,7 @@ final class ConversationsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ai->conversations->create();
+        $result = $this->client->ai->conversations->create([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -57,7 +57,7 @@ final class ConversationsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ai->conversations->update('conversation_id');
+        $result = $this->client->ai->conversations->update('conversation_id', []);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -69,7 +69,7 @@ final class ConversationsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ai->conversations->list();
+        $result = $this->client->ai->conversations->list([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -95,7 +95,7 @@ final class ConversationsTest extends TestCase
 
         $result = $this->client->ai->conversations->addMessage(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            role: 'role'
+            ['role' => 'role']
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -110,7 +110,7 @@ final class ConversationsTest extends TestCase
 
         $result = $this->client->ai->conversations->addMessage(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            role: 'role'
+            ['role' => 'role']
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType

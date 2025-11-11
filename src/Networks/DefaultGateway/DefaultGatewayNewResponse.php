@@ -14,7 +14,7 @@ use Telnyx\Networks\DefaultGateway\DefaultGatewayNewResponse\Data;
 
 /**
  * @phpstan-type DefaultGatewayNewResponseShape = array{
- *   data?: list<Data>, meta?: PaginationMeta
+ *   data?: list<Data>|null, meta?: PaginationMeta|null
  * }
  */
 final class DefaultGatewayNewResponse implements BaseModel, ResponseConverter

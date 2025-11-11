@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type PrivateWirelessGatewayDeleteResponseShape = array{
- *   data?: PrivateWirelessGateway
+ *   data?: PrivateWirelessGateway|null
  * }
  */
 final class PrivateWirelessGatewayDeleteResponse implements BaseModel, ResponseConverter

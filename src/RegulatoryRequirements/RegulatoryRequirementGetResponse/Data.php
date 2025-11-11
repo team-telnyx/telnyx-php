@@ -11,10 +11,10 @@ use Telnyx\RegulatoryRequirements\RegulatoryRequirementGetResponse\Data\Regulato
 
 /**
  * @phpstan-type DataShape = array{
- *   action?: string,
- *   countryCode?: string,
- *   phoneNumberType?: string,
- *   regulatoryRequirements?: list<RegulatoryRequirement>,
+ *   action?: string|null,
+ *   country_code?: string|null,
+ *   phone_number_type?: string|null,
+ *   regulatory_requirements?: list<RegulatoryRequirement>|null,
  * }
  */
 final class Data implements BaseModel
@@ -25,19 +25,15 @@ final class Data implements BaseModel
     #[Api(optional: true)]
     public ?string $action;
 
-    #[Api('country_code', optional: true)]
-    public ?string $countryCode;
+    #[Api(optional: true)]
+    public ?string $country_code;
 
-    #[Api('phone_number_type', optional: true)]
-    public ?string $phoneNumberType;
+    #[Api(optional: true)]
+    public ?string $phone_number_type;
 
-    /** @var list<RegulatoryRequirement>|null $regulatoryRequirements */
-    #[Api(
-        'regulatory_requirements',
-        list: RegulatoryRequirement::class,
-        optional: true,
-    )]
-    public ?array $regulatoryRequirements;
+    /** @var list<RegulatoryRequirement>|null $regulatory_requirements */
+    #[Api(list: RegulatoryRequirement::class, optional: true)]
+    public ?array $regulatory_requirements;
 
     public function __construct()
     {
@@ -49,20 +45,20 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<RegulatoryRequirement> $regulatoryRequirements
+     * @param list<RegulatoryRequirement> $regulatory_requirements
      */
     public static function with(
         ?string $action = null,
-        ?string $countryCode = null,
-        ?string $phoneNumberType = null,
-        ?array $regulatoryRequirements = null,
+        ?string $country_code = null,
+        ?string $phone_number_type = null,
+        ?array $regulatory_requirements = null,
     ): self {
         $obj = new self;
 
         null !== $action && $obj->action = $action;
-        null !== $countryCode && $obj->countryCode = $countryCode;
-        null !== $phoneNumberType && $obj->phoneNumberType = $phoneNumberType;
-        null !== $regulatoryRequirements && $obj->regulatoryRequirements = $regulatoryRequirements;
+        null !== $country_code && $obj->country_code = $country_code;
+        null !== $phone_number_type && $obj->phone_number_type = $phone_number_type;
+        null !== $regulatory_requirements && $obj->regulatory_requirements = $regulatory_requirements;
 
         return $obj;
     }
@@ -78,7 +74,7 @@ final class Data implements BaseModel
     public function withCountryCode(string $countryCode): self
     {
         $obj = clone $this;
-        $obj->countryCode = $countryCode;
+        $obj->country_code = $countryCode;
 
         return $obj;
     }
@@ -86,7 +82,7 @@ final class Data implements BaseModel
     public function withPhoneNumberType(string $phoneNumberType): self
     {
         $obj = clone $this;
-        $obj->phoneNumberType = $phoneNumberType;
+        $obj->phone_number_type = $phoneNumberType;
 
         return $obj;
     }
@@ -98,7 +94,7 @@ final class Data implements BaseModel
         array $regulatoryRequirements
     ): self {
         $obj = clone $this;
-        $obj->regulatoryRequirements = $regulatoryRequirements;
+        $obj->regulatory_requirements = $regulatoryRequirements;
 
         return $obj;
     }

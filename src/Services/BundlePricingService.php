@@ -12,12 +12,12 @@ use Telnyx\Services\BundlePricing\UserBundlesService;
 final class BundlePricingService implements BundlePricingContract
 {
     /**
-     * @@api
+     * @api
      */
     public BillingBundlesService $billingBundles;
 
     /**
-     * @@api
+     * @api
      */
     public UserBundlesService $userBundles;
 

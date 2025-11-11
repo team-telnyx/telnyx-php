@@ -13,7 +13,7 @@ use Telnyx\SubNumberOrders\SubNumberOrderUpdateRequirementGroupResponse\Data;
 
 /**
  * @phpstan-type SubNumberOrderUpdateRequirementGroupResponseShape = array{
- *   data?: Data
+ *   data?: Data|null
  * }
  */
 final class SubNumberOrderUpdateRequirementGroupResponse implements BaseModel, ResponseConverter

@@ -15,8 +15,6 @@ use Telnyx\Legacy\Reporting\UsageReports\Voice\VoiceNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Legacy\Reporting\UsageReports\VoiceContract;
 
-use const Telnyx\Core\OMIT as omit;
-
 final class VoiceService implements VoiceContract
 {
     /**
@@ -29,53 +27,25 @@ final class VoiceService implements VoiceContract
      *
      * Creates a new legacy usage V2 CDR report request with the specified filters
      *
-     * @param \DateTimeInterface $endTime End time in ISO format
-     * @param \DateTimeInterface $startTime Start time in ISO format
-     * @param int $aggregationType Aggregation type: All = 0, By Connections = 1, By Tags = 2, By Billing Group = 3
-     * @param list<int> $connections List of connections to filter by
-     * @param list<string> $managedAccounts List of managed accounts to include
-     * @param int $productBreakdown Product breakdown type: No breakdown = 0, DID vs Toll-free = 1, Country = 2, DID vs Toll-free per Country = 3
-     * @param bool $selectAllManagedAccounts Whether to select all managed accounts
+     * @param array{
+     *   end_time: string|\DateTimeInterface,
+     *   start_time: string|\DateTimeInterface,
+     *   aggregation_type?: int,
+     *   connections?: list<int>,
+     *   managed_accounts?: list<string>,
+     *   product_breakdown?: int,
+     *   select_all_managed_accounts?: bool,
+     * }|VoiceCreateParams $params
      *
      * @throws APIException
      */
     public function create(
-        $endTime,
-        $startTime,
-        $aggregationType = omit,
-        $connections = omit,
-        $managedAccounts = omit,
-        $productBreakdown = omit,
-        $selectAllManagedAccounts = omit,
-        ?RequestOptions $requestOptions = null,
-    ): VoiceNewResponse {
-        $params = [
-            'endTime' => $endTime,
-            'startTime' => $startTime,
-            'aggregationType' => $aggregationType,
-            'connections' => $connections,
-            'managedAccounts' => $managedAccounts,
-            'productBreakdown' => $productBreakdown,
-            'selectAllManagedAccounts' => $selectAllManagedAccounts,
-        ];
-
-        return $this->createRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
+        array|VoiceCreateParams $params,
         ?RequestOptions $requestOptions = null
     ): VoiceNewResponse {
         [$parsed, $options] = VoiceCreateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -114,35 +84,17 @@ final class VoiceService implements VoiceContract
      *
      * Fetch all previous requests for cdr usage reports.
      *
-     * @param int $page Page number
-     * @param int $perPage Size of the page
+     * @param array{page?: int, per_page?: int}|VoiceListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $page = omit,
-        $perPage = omit,
-        ?RequestOptions $requestOptions = null
-    ): VoiceListResponse {
-        $params = ['page' => $page, 'perPage' => $perPage];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
+        array|VoiceListParams $params,
         ?RequestOptions $requestOptions = null
     ): VoiceListResponse {
         [$parsed, $options] = VoiceListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

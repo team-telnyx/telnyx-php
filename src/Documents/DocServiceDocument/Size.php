@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Indicates the document's filesize.
  *
- * @phpstan-type SizeShape = array{amount?: int, unit?: string}
+ * @phpstan-type SizeShape = array{amount?: int|null, unit?: string|null}
  */
 final class Size implements BaseModel
 {

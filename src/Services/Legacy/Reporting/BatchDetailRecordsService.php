@@ -13,17 +13,17 @@ use Telnyx\Services\Legacy\Reporting\BatchDetailRecords\VoiceService;
 final class BatchDetailRecordsService implements BatchDetailRecordsContract
 {
     /**
-     * @@api
+     * @api
      */
     public MessagingService $messaging;
 
     /**
-     * @@api
+     * @api
      */
     public SpeechToTextService $speechToText;
 
     /**
-     * @@api
+     * @api
      */
     public VoiceService $voice;
 

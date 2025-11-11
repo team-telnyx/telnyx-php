@@ -10,7 +10,10 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type MetaShape = array{
- *   pageNumber?: int, pageSize?: int, totalPages?: int, totalResults?: int
+ *   page_number?: int|null,
+ *   page_size?: int|null,
+ *   total_pages?: int|null,
+ *   total_results?: int|null,
  * }
  */
 final class Meta implements BaseModel
@@ -21,26 +24,26 @@ final class Meta implements BaseModel
     /**
      * Selected page number.
      */
-    #[Api('page_number', optional: true)]
-    public ?int $pageNumber;
+    #[Api(optional: true)]
+    public ?int $page_number;
 
     /**
      * Records per single page.
      */
-    #[Api('page_size', optional: true)]
-    public ?int $pageSize;
+    #[Api(optional: true)]
+    public ?int $page_size;
 
     /**
      * Total number of pages.
      */
-    #[Api('total_pages', optional: true)]
-    public ?int $totalPages;
+    #[Api(optional: true)]
+    public ?int $total_pages;
 
     /**
      * Total number of results.
      */
-    #[Api('total_results', optional: true)]
-    public ?int $totalResults;
+    #[Api(optional: true)]
+    public ?int $total_results;
 
     public function __construct()
     {
@@ -53,17 +56,17 @@ final class Meta implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?int $pageNumber = null,
-        ?int $pageSize = null,
-        ?int $totalPages = null,
-        ?int $totalResults = null,
+        ?int $page_number = null,
+        ?int $page_size = null,
+        ?int $total_pages = null,
+        ?int $total_results = null,
     ): self {
         $obj = new self;
 
-        null !== $pageNumber && $obj->pageNumber = $pageNumber;
-        null !== $pageSize && $obj->pageSize = $pageSize;
-        null !== $totalPages && $obj->totalPages = $totalPages;
-        null !== $totalResults && $obj->totalResults = $totalResults;
+        null !== $page_number && $obj->page_number = $page_number;
+        null !== $page_size && $obj->page_size = $page_size;
+        null !== $total_pages && $obj->total_pages = $total_pages;
+        null !== $total_results && $obj->total_results = $total_results;
 
         return $obj;
     }
@@ -74,7 +77,7 @@ final class Meta implements BaseModel
     public function withPageNumber(int $pageNumber): self
     {
         $obj = clone $this;
-        $obj->pageNumber = $pageNumber;
+        $obj->page_number = $pageNumber;
 
         return $obj;
     }
@@ -85,7 +88,7 @@ final class Meta implements BaseModel
     public function withPageSize(int $pageSize): self
     {
         $obj = clone $this;
-        $obj->pageSize = $pageSize;
+        $obj->page_size = $pageSize;
 
         return $obj;
     }
@@ -96,7 +99,7 @@ final class Meta implements BaseModel
     public function withTotalPages(int $totalPages): self
     {
         $obj = clone $this;
-        $obj->totalPages = $totalPages;
+        $obj->total_pages = $totalPages;
 
         return $obj;
     }
@@ -107,7 +110,7 @@ final class Meta implements BaseModel
     public function withTotalResults(int $totalResults): self
     {
         $obj = clone $this;
-        $obj->totalResults = $totalResults;
+        $obj->total_results = $totalResults;
 
         return $obj;
     }

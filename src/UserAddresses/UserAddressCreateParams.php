@@ -15,20 +15,20 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\UserAddresses->create
  *
  * @phpstan-type UserAddressCreateParamsShape = array{
- *   businessName: string,
- *   countryCode: string,
- *   firstName: string,
- *   lastName: string,
+ *   business_name: string,
+ *   country_code: string,
+ *   first_name: string,
+ *   last_name: string,
  *   locality: string,
- *   streetAddress: string,
- *   administrativeArea?: string,
+ *   street_address: string,
+ *   administrative_area?: string,
  *   borough?: string,
- *   customerReference?: string,
- *   extendedAddress?: string,
+ *   customer_reference?: string,
+ *   extended_address?: string,
  *   neighborhood?: string,
- *   phoneNumber?: string,
- *   postalCode?: string,
- *   skipAddressVerification?: string,
+ *   phone_number?: string,
+ *   postal_code?: string,
+ *   skip_address_verification?: string,
  * }
  */
 final class UserAddressCreateParams implements BaseModel
@@ -40,26 +40,26 @@ final class UserAddressCreateParams implements BaseModel
     /**
      * The business name associated with the user address.
      */
-    #[Api('business_name')]
-    public string $businessName;
+    #[Api]
+    public string $business_name;
 
     /**
      * The two-character (ISO 3166-1 alpha-2) country code of the user address.
      */
-    #[Api('country_code')]
-    public string $countryCode;
+    #[Api]
+    public string $country_code;
 
     /**
      * The first name associated with the user address.
      */
-    #[Api('first_name')]
-    public string $firstName;
+    #[Api]
+    public string $first_name;
 
     /**
      * The last name associated with the user address.
      */
-    #[Api('last_name')]
-    public string $lastName;
+    #[Api]
+    public string $last_name;
 
     /**
      * The locality of the user address. For US addresses, this corresponds to the city of the address.
@@ -70,14 +70,14 @@ final class UserAddressCreateParams implements BaseModel
     /**
      * The primary street address information about the user address.
      */
-    #[Api('street_address')]
-    public string $streetAddress;
+    #[Api]
+    public string $street_address;
 
     /**
      * The locality of the user address. For US addresses, this corresponds to the state of the address.
      */
-    #[Api('administrative_area', optional: true)]
-    public ?string $administrativeArea;
+    #[Api(optional: true)]
+    public ?string $administrative_area;
 
     /**
      * The borough of the user address. This field is not used for addresses in the US but is used for some international addresses.
@@ -88,14 +88,14 @@ final class UserAddressCreateParams implements BaseModel
     /**
      * A customer reference string for customer look ups.
      */
-    #[Api('customer_reference', optional: true)]
-    public ?string $customerReference;
+    #[Api(optional: true)]
+    public ?string $customer_reference;
 
     /**
      * Additional street address information about the user address such as, but not limited to, unit number or apartment number.
      */
-    #[Api('extended_address', optional: true)]
-    public ?string $extendedAddress;
+    #[Api(optional: true)]
+    public ?string $extended_address;
 
     /**
      * The neighborhood of the user address. This field is not used for addresses in the US but is used for some international addresses.
@@ -106,20 +106,20 @@ final class UserAddressCreateParams implements BaseModel
     /**
      * The phone number associated with the user address.
      */
-    #[Api('phone_number', optional: true)]
-    public ?string $phoneNumber;
+    #[Api(optional: true)]
+    public ?string $phone_number;
 
     /**
      * The postal code of the user address.
      */
-    #[Api('postal_code', optional: true)]
-    public ?string $postalCode;
+    #[Api(optional: true)]
+    public ?string $postal_code;
 
     /**
      * An optional boolean value specifying if verification of the address should be skipped or not. UserAddresses are generally used for shipping addresses, and failure to validate your shipping address will likely result in a failure to deliver SIM cards or other items ordered from Telnyx. Do not use this parameter unless you are sure that the address is correct even though it cannot be validated. If this is set to any value other than true, verification of the address will be attempted, and the user address will not be allowed if verification fails. If verification fails but suggested values are available that might make the address correct, they will be present in the response as well. If this value is set to true, then the verification will not be attempted. Defaults to false (verification will be performed).
      */
-    #[Api('skip_address_verification', optional: true)]
-    public ?string $skipAddressVerification;
+    #[Api(optional: true)]
+    public ?string $skip_address_verification;
 
     /**
      * `new UserAddressCreateParams()` is missing required properties by the API.
@@ -127,12 +127,12 @@ final class UserAddressCreateParams implements BaseModel
      * To enforce required parameters use
      * ```
      * UserAddressCreateParams::with(
-     *   businessName: ...,
-     *   countryCode: ...,
-     *   firstName: ...,
-     *   lastName: ...,
+     *   business_name: ...,
+     *   country_code: ...,
+     *   first_name: ...,
+     *   last_name: ...,
      *   locality: ...,
-     *   streetAddress: ...,
+     *   street_address: ...,
      * )
      * ```
      *
@@ -159,38 +159,38 @@ final class UserAddressCreateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        string $businessName,
-        string $countryCode,
-        string $firstName,
-        string $lastName,
+        string $business_name,
+        string $country_code,
+        string $first_name,
+        string $last_name,
         string $locality,
-        string $streetAddress,
-        ?string $administrativeArea = null,
+        string $street_address,
+        ?string $administrative_area = null,
         ?string $borough = null,
-        ?string $customerReference = null,
-        ?string $extendedAddress = null,
+        ?string $customer_reference = null,
+        ?string $extended_address = null,
         ?string $neighborhood = null,
-        ?string $phoneNumber = null,
-        ?string $postalCode = null,
-        ?string $skipAddressVerification = null,
+        ?string $phone_number = null,
+        ?string $postal_code = null,
+        ?string $skip_address_verification = null,
     ): self {
         $obj = new self;
 
-        $obj->businessName = $businessName;
-        $obj->countryCode = $countryCode;
-        $obj->firstName = $firstName;
-        $obj->lastName = $lastName;
+        $obj->business_name = $business_name;
+        $obj->country_code = $country_code;
+        $obj->first_name = $first_name;
+        $obj->last_name = $last_name;
         $obj->locality = $locality;
-        $obj->streetAddress = $streetAddress;
+        $obj->street_address = $street_address;
 
-        null !== $administrativeArea && $obj->administrativeArea = $administrativeArea;
+        null !== $administrative_area && $obj->administrative_area = $administrative_area;
         null !== $borough && $obj->borough = $borough;
-        null !== $customerReference && $obj->customerReference = $customerReference;
-        null !== $extendedAddress && $obj->extendedAddress = $extendedAddress;
+        null !== $customer_reference && $obj->customer_reference = $customer_reference;
+        null !== $extended_address && $obj->extended_address = $extended_address;
         null !== $neighborhood && $obj->neighborhood = $neighborhood;
-        null !== $phoneNumber && $obj->phoneNumber = $phoneNumber;
-        null !== $postalCode && $obj->postalCode = $postalCode;
-        null !== $skipAddressVerification && $obj->skipAddressVerification = $skipAddressVerification;
+        null !== $phone_number && $obj->phone_number = $phone_number;
+        null !== $postal_code && $obj->postal_code = $postal_code;
+        null !== $skip_address_verification && $obj->skip_address_verification = $skip_address_verification;
 
         return $obj;
     }
@@ -201,7 +201,7 @@ final class UserAddressCreateParams implements BaseModel
     public function withBusinessName(string $businessName): self
     {
         $obj = clone $this;
-        $obj->businessName = $businessName;
+        $obj->business_name = $businessName;
 
         return $obj;
     }
@@ -212,7 +212,7 @@ final class UserAddressCreateParams implements BaseModel
     public function withCountryCode(string $countryCode): self
     {
         $obj = clone $this;
-        $obj->countryCode = $countryCode;
+        $obj->country_code = $countryCode;
 
         return $obj;
     }
@@ -223,7 +223,7 @@ final class UserAddressCreateParams implements BaseModel
     public function withFirstName(string $firstName): self
     {
         $obj = clone $this;
-        $obj->firstName = $firstName;
+        $obj->first_name = $firstName;
 
         return $obj;
     }
@@ -234,7 +234,7 @@ final class UserAddressCreateParams implements BaseModel
     public function withLastName(string $lastName): self
     {
         $obj = clone $this;
-        $obj->lastName = $lastName;
+        $obj->last_name = $lastName;
 
         return $obj;
     }
@@ -256,7 +256,7 @@ final class UserAddressCreateParams implements BaseModel
     public function withStreetAddress(string $streetAddress): self
     {
         $obj = clone $this;
-        $obj->streetAddress = $streetAddress;
+        $obj->street_address = $streetAddress;
 
         return $obj;
     }
@@ -267,7 +267,7 @@ final class UserAddressCreateParams implements BaseModel
     public function withAdministrativeArea(string $administrativeArea): self
     {
         $obj = clone $this;
-        $obj->administrativeArea = $administrativeArea;
+        $obj->administrative_area = $administrativeArea;
 
         return $obj;
     }
@@ -289,7 +289,7 @@ final class UserAddressCreateParams implements BaseModel
     public function withCustomerReference(string $customerReference): self
     {
         $obj = clone $this;
-        $obj->customerReference = $customerReference;
+        $obj->customer_reference = $customerReference;
 
         return $obj;
     }
@@ -300,7 +300,7 @@ final class UserAddressCreateParams implements BaseModel
     public function withExtendedAddress(string $extendedAddress): self
     {
         $obj = clone $this;
-        $obj->extendedAddress = $extendedAddress;
+        $obj->extended_address = $extendedAddress;
 
         return $obj;
     }
@@ -322,7 +322,7 @@ final class UserAddressCreateParams implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj->phoneNumber = $phoneNumber;
+        $obj->phone_number = $phoneNumber;
 
         return $obj;
     }
@@ -333,7 +333,7 @@ final class UserAddressCreateParams implements BaseModel
     public function withPostalCode(string $postalCode): self
     {
         $obj = clone $this;
-        $obj->postalCode = $postalCode;
+        $obj->postal_code = $postalCode;
 
         return $obj;
     }
@@ -345,7 +345,7 @@ final class UserAddressCreateParams implements BaseModel
         string $skipAddressVerification
     ): self {
         $obj = clone $this;
-        $obj->skipAddressVerification = $skipAddressVerification;
+        $obj->skip_address_verification = $skipAddressVerification;
 
         return $obj;
     }

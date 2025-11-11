@@ -5,61 +5,26 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressCreateParams\CountryCode;
+use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressCreateParams;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressDeleteResponse;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressGetResponse;
-use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressListParams\Filter;
-use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressListParams\Page;
+use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressListParams;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressListResponse;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressNewResponse;
 use Telnyx\RequestOptions;
-
-use const Telnyx\Core\OMIT as omit;
 
 interface DynamicEmergencyAddressesContract
 {
     /**
      * @api
      *
-     * @param string $administrativeArea
-     * @param CountryCode|value-of<CountryCode> $countryCode
-     * @param string $houseNumber
-     * @param string $locality
-     * @param string $postalCode
-     * @param string $streetName
-     * @param string $extendedAddress
-     * @param string $houseSuffix
-     * @param string $streetPostDirectional
-     * @param string $streetPreDirectional
-     * @param string $streetSuffix
+     * @param array<mixed>|DynamicEmergencyAddressCreateParams $params
      *
      * @throws APIException
      */
     public function create(
-        $administrativeArea,
-        $countryCode,
-        $houseNumber,
-        $locality,
-        $postalCode,
-        $streetName,
-        $extendedAddress = omit,
-        $houseSuffix = omit,
-        $streetPostDirectional = omit,
-        $streetPreDirectional = omit,
-        $streetSuffix = omit,
+        array|DynamicEmergencyAddressCreateParams $params,
         ?RequestOptions $requestOptions = null,
-    ): DynamicEmergencyAddressNewResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): DynamicEmergencyAddressNewResponse;
 
     /**
@@ -75,27 +40,13 @@ interface DynamicEmergencyAddressesContract
     /**
      * @api
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[status], filter[country_code]
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param array<mixed>|DynamicEmergencyAddressListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): DynamicEmergencyAddressListResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|DynamicEmergencyAddressListParams $params,
+        ?RequestOptions $requestOptions = null,
     ): DynamicEmergencyAddressListResponse;
 
     /**

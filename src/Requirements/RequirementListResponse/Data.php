@@ -13,15 +13,15 @@ use Telnyx\Requirements\RequirementListResponse\Data\PhoneNumberType;
 
 /**
  * @phpstan-type DataShape = array{
- *   id?: string,
- *   action?: value-of<Action>,
- *   countryCode?: string,
- *   createdAt?: string,
- *   locality?: string,
- *   phoneNumberType?: value-of<PhoneNumberType>,
- *   recordType?: string,
- *   requirementsTypes?: list<DocReqsRequirementType>,
- *   updatedAt?: string,
+ *   id?: string|null,
+ *   action?: value-of<Action>|null,
+ *   country_code?: string|null,
+ *   created_at?: string|null,
+ *   locality?: string|null,
+ *   phone_number_type?: value-of<PhoneNumberType>|null,
+ *   record_type?: string|null,
+ *   requirements_types?: list<DocReqsRequirementType>|null,
+ *   updated_at?: string|null,
  * }
  */
 final class Data implements BaseModel
@@ -46,14 +46,14 @@ final class Data implements BaseModel
     /**
      * The 2-character (ISO 3166-1 alpha-2) country code where this requirement applies.
      */
-    #[Api('country_code', optional: true)]
-    public ?string $countryCode;
+    #[Api(optional: true)]
+    public ?string $country_code;
 
     /**
      * ISO 8601 formatted date-time indicating when the resource was created.
      */
-    #[Api('created_at', optional: true)]
-    public ?string $createdAt;
+    #[Api(optional: true)]
+    public ?string $created_at;
 
     /**
      * The locality where this requirement applies.
@@ -64,34 +64,30 @@ final class Data implements BaseModel
     /**
      * Indicates the phone_number_type this requirement applies to. Leave blank if this requirement applies to all number_types.
      *
-     * @var value-of<PhoneNumberType>|null $phoneNumberType
+     * @var value-of<PhoneNumberType>|null $phone_number_type
      */
-    #[Api('phone_number_type', enum: PhoneNumberType::class, optional: true)]
-    public ?string $phoneNumberType;
+    #[Api(enum: PhoneNumberType::class, optional: true)]
+    public ?string $phone_number_type;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api('record_type', optional: true)]
-    public ?string $recordType;
+    #[Api(optional: true)]
+    public ?string $record_type;
 
     /**
      * Lists the requirement types necessary to fulfill this requirement.
      *
-     * @var list<DocReqsRequirementType>|null $requirementsTypes
+     * @var list<DocReqsRequirementType>|null $requirements_types
      */
-    #[Api(
-        'requirements_types',
-        list: DocReqsRequirementType::class,
-        optional: true
-    )]
-    public ?array $requirementsTypes;
+    #[Api(list: DocReqsRequirementType::class, optional: true)]
+    public ?array $requirements_types;
 
     /**
      * ISO 8601 formatted date-time indicating when the resource was last updated.
      */
-    #[Api('updated_at', optional: true)]
-    public ?string $updatedAt;
+    #[Api(optional: true)]
+    public ?string $updated_at;
 
     public function __construct()
     {
@@ -104,31 +100,31 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Action|value-of<Action> $action
-     * @param PhoneNumberType|value-of<PhoneNumberType> $phoneNumberType
-     * @param list<DocReqsRequirementType> $requirementsTypes
+     * @param PhoneNumberType|value-of<PhoneNumberType> $phone_number_type
+     * @param list<DocReqsRequirementType> $requirements_types
      */
     public static function with(
         ?string $id = null,
         Action|string|null $action = null,
-        ?string $countryCode = null,
-        ?string $createdAt = null,
+        ?string $country_code = null,
+        ?string $created_at = null,
         ?string $locality = null,
-        PhoneNumberType|string|null $phoneNumberType = null,
-        ?string $recordType = null,
-        ?array $requirementsTypes = null,
-        ?string $updatedAt = null,
+        PhoneNumberType|string|null $phone_number_type = null,
+        ?string $record_type = null,
+        ?array $requirements_types = null,
+        ?string $updated_at = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj->id = $id;
         null !== $action && $obj['action'] = $action;
-        null !== $countryCode && $obj->countryCode = $countryCode;
-        null !== $createdAt && $obj->createdAt = $createdAt;
+        null !== $country_code && $obj->country_code = $country_code;
+        null !== $created_at && $obj->created_at = $created_at;
         null !== $locality && $obj->locality = $locality;
-        null !== $phoneNumberType && $obj['phoneNumberType'] = $phoneNumberType;
-        null !== $recordType && $obj->recordType = $recordType;
-        null !== $requirementsTypes && $obj->requirementsTypes = $requirementsTypes;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
+        null !== $phone_number_type && $obj['phone_number_type'] = $phone_number_type;
+        null !== $record_type && $obj->record_type = $record_type;
+        null !== $requirements_types && $obj->requirements_types = $requirements_types;
+        null !== $updated_at && $obj->updated_at = $updated_at;
 
         return $obj;
     }
@@ -163,7 +159,7 @@ final class Data implements BaseModel
     public function withCountryCode(string $countryCode): self
     {
         $obj = clone $this;
-        $obj->countryCode = $countryCode;
+        $obj->country_code = $countryCode;
 
         return $obj;
     }
@@ -174,7 +170,7 @@ final class Data implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $obj->created_at = $createdAt;
 
         return $obj;
     }
@@ -199,7 +195,7 @@ final class Data implements BaseModel
         PhoneNumberType|string $phoneNumberType
     ): self {
         $obj = clone $this;
-        $obj['phoneNumberType'] = $phoneNumberType;
+        $obj['phone_number_type'] = $phoneNumberType;
 
         return $obj;
     }
@@ -210,7 +206,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType;
+        $obj->record_type = $recordType;
 
         return $obj;
     }
@@ -223,7 +219,7 @@ final class Data implements BaseModel
     public function withRequirementsTypes(array $requirementsTypes): self
     {
         $obj = clone $this;
-        $obj->requirementsTypes = $requirementsTypes;
+        $obj->requirements_types = $requirementsTypes;
 
         return $obj;
     }
@@ -234,7 +230,7 @@ final class Data implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $obj->updated_at = $updatedAt;
 
         return $obj;
     }

@@ -9,10 +9,7 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\Accounts\Calls\SiprecContract;
 use Telnyx\Texml\Accounts\Calls\Siprec\SiprecSiprecSidJsonParams;
-use Telnyx\Texml\Accounts\Calls\Siprec\SiprecSiprecSidJsonParams\Status;
 use Telnyx\Texml\Accounts\Calls\Siprec\SiprecSiprecSidJsonResponse;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class SiprecService implements SiprecContract
 {
@@ -26,46 +23,25 @@ final class SiprecService implements SiprecContract
      *
      * Updates siprec session identified by siprec_sid.
      *
-     * @param string $accountSid
-     * @param string $callSid
-     * @param Status|value-of<Status> $status The new status of the resource. Specifying `stopped` will end the siprec session.
+     * @param array{
+     *   account_sid: string, call_sid: string, Status?: "stopped"
+     * }|SiprecSiprecSidJsonParams $params
      *
      * @throws APIException
      */
     public function siprecSidJson(
         string $siprecSid,
-        $accountSid,
-        $callSid,
-        $status = omit,
+        array|SiprecSiprecSidJsonParams $params,
         ?RequestOptions $requestOptions = null,
-    ): SiprecSiprecSidJsonResponse {
-        $params = [
-            'accountSid' => $accountSid, 'callSid' => $callSid, 'status' => $status,
-        ];
-
-        return $this->siprecSidJsonRaw($siprecSid, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function siprecSidJsonRaw(
-        string $siprecSid,
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): SiprecSiprecSidJsonResponse {
         [$parsed, $options] = SiprecSiprecSidJsonParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
-        $accountSid = $parsed['accountSid'];
-        unset($parsed['accountSid']);
-        $callSid = $parsed['callSid'];
-        unset($parsed['callSid']);
+        $accountSid = $parsed['account_sid'];
+        unset($parsed['account_sid']);
+        $callSid = $parsed['call_sid'];
+        unset($parsed['call_sid']);
 
         // @phpstan-ignore-next-line;
         return $this->client->request(
@@ -79,7 +55,7 @@ final class SiprecService implements SiprecContract
             headers: ['Content-Type' => 'application/x-www-form-urlencoded'],
             body: (object) array_diff_key(
                 $parsed,
-                array_flip(['accountSid', 'callSid'])
+                array_flip(['account_sid', 'call_sid'])
             ),
             options: $options,
             convert: SiprecSiprecSidJsonResponse::class,

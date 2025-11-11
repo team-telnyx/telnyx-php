@@ -33,11 +33,11 @@ final class RequirementGroupsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->requirementGroups->create(
-            action: 'ordering',
-            countryCode: 'US',
-            phoneNumberType: 'local'
-        );
+        $result = $this->client->requirementGroups->create([
+            'action' => 'ordering',
+            'country_code' => 'US',
+            'phone_number_type' => 'local',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -49,11 +49,11 @@ final class RequirementGroupsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->requirementGroups->create(
-            action: 'ordering',
-            countryCode: 'US',
-            phoneNumberType: 'local'
-        );
+        $result = $this->client->requirementGroups->create([
+            'action' => 'ordering',
+            'country_code' => 'US',
+            'phone_number_type' => 'local',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -77,7 +77,7 @@ final class RequirementGroupsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->requirementGroups->update('id');
+        $result = $this->client->requirementGroups->update('id', []);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -89,7 +89,7 @@ final class RequirementGroupsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->requirementGroups->list();
+        $result = $this->client->requirementGroups->list([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

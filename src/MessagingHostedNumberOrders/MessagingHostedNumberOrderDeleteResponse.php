@@ -13,7 +13,7 @@ use Telnyx\MessagingHostedNumberOrder;
 
 /**
  * @phpstan-type MessagingHostedNumberOrderDeleteResponseShape = array{
- *   data?: MessagingHostedNumberOrder
+ *   data?: MessagingHostedNumberOrder|null
  * }
  */
 final class MessagingHostedNumberOrderDeleteResponse implements BaseModel, ResponseConverter

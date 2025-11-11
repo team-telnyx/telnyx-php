@@ -10,13 +10,10 @@ use Telnyx\GlobalIPs\GlobalIPCreateParams;
 use Telnyx\GlobalIPs\GlobalIPDeleteResponse;
 use Telnyx\GlobalIPs\GlobalIPGetResponse;
 use Telnyx\GlobalIPs\GlobalIPListParams;
-use Telnyx\GlobalIPs\GlobalIPListParams\Page;
 use Telnyx\GlobalIPs\GlobalIPListResponse;
 use Telnyx\GlobalIPs\GlobalIPNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\GlobalIPsContract;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class GlobalIPsService implements GlobalIPsContract
 {
@@ -30,39 +27,19 @@ final class GlobalIPsService implements GlobalIPsContract
      *
      * Create a Global IP.
      *
-     * @param string $description a user specified description for the address
-     * @param string $name a user specified name for the address
-     * @param array<string, mixed> $ports a Global IP ports grouped by protocol code
+     * @param array{
+     *   description?: string, name?: string, ports?: array<string,mixed>
+     * }|GlobalIPCreateParams $params
      *
      * @throws APIException
      */
     public function create(
-        $description = omit,
-        $name = omit,
-        $ports = omit,
-        ?RequestOptions $requestOptions = null,
-    ): GlobalIPNewResponse {
-        $params = [
-            'description' => $description, 'name' => $name, 'ports' => $ports,
-        ];
-
-        return $this->createRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
+        array|GlobalIPCreateParams $params,
         ?RequestOptions $requestOptions = null
     ): GlobalIPNewResponse {
         [$parsed, $options] = GlobalIPCreateParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -100,33 +77,17 @@ final class GlobalIPsService implements GlobalIPsContract
      *
      * List all Global IPs.
      *
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param array{page?: array{number?: int, size?: int}}|GlobalIPListParams $params
      *
      * @throws APIException
      */
     public function list(
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): GlobalIPListResponse {
-        $params = ['page' => $page];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
+        array|GlobalIPListParams $params,
         ?RequestOptions $requestOptions = null
     ): GlobalIPListResponse {
         [$parsed, $options] = GlobalIPListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

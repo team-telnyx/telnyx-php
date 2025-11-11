@@ -14,7 +14,7 @@ use Telnyx\Verifications\ByPhoneNumber\ByPhoneNumberListResponse;
 final class ByPhoneNumberService implements ByPhoneNumberContract
 {
     /**
-     * @@api
+     * @api
      */
     public ActionsService $actions;
 

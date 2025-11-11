@@ -9,7 +9,9 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type SimCardsCostShape = array{amount?: string, currency?: string}
+ * @phpstan-type SimCardsCostShape = array{
+ *   amount?: string|null, currency?: string|null
+ * }
  */
 final class SimCardsCost implements BaseModel
 {

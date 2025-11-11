@@ -33,10 +33,9 @@ final class TexmlTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->texml->secrets(
-            name: 'My Secret Name',
-            value: 'My Secret Value'
-        );
+        $result = $this->client->texml->secrets([
+            'name' => 'My Secret Name', 'value' => 'My Secret Value',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -48,10 +47,9 @@ final class TexmlTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->texml->secrets(
-            name: 'My Secret Name',
-            value: 'My Secret Value'
-        );
+        $result = $this->client->texml->secrets([
+            'name' => 'My Secret Name', 'value' => 'My Secret Value',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

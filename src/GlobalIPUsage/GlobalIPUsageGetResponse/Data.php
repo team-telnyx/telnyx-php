@@ -13,10 +13,10 @@ use Telnyx\GlobalIPUsage\GlobalIPUsageGetResponse\Data\Transmitted;
 
 /**
  * @phpstan-type DataShape = array{
- *   globalIP?: GlobalIP,
- *   received?: Received,
- *   timestamp?: \DateTimeInterface,
- *   transmitted?: Transmitted,
+ *   global_ip?: GlobalIP|null,
+ *   received?: Received|null,
+ *   timestamp?: \DateTimeInterface|null,
+ *   transmitted?: Transmitted|null,
  * }
  */
 final class Data implements BaseModel
@@ -24,8 +24,8 @@ final class Data implements BaseModel
     /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Api('global_ip', optional: true)]
-    public ?GlobalIP $globalIP;
+    #[Api(optional: true)]
+    public ?GlobalIP $global_ip;
 
     #[Api(optional: true)]
     public ?Received $received;
@@ -50,14 +50,14 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?GlobalIP $globalIP = null,
+        ?GlobalIP $global_ip = null,
         ?Received $received = null,
         ?\DateTimeInterface $timestamp = null,
         ?Transmitted $transmitted = null,
     ): self {
         $obj = new self;
 
-        null !== $globalIP && $obj->globalIP = $globalIP;
+        null !== $global_ip && $obj->global_ip = $global_ip;
         null !== $received && $obj->received = $received;
         null !== $timestamp && $obj->timestamp = $timestamp;
         null !== $transmitted && $obj->transmitted = $transmitted;
@@ -68,7 +68,7 @@ final class Data implements BaseModel
     public function withGlobalIP(GlobalIP $globalIP): self
     {
         $obj = clone $this;
-        $obj->globalIP = $globalIP;
+        $obj->global_ip = $globalIP;
 
         return $obj;
     }

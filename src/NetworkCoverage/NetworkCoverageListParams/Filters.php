@@ -15,7 +15,7 @@ use Telnyx\NetworkCoverage\NetworkCoverageListParams\Filters\AvailableServices\C
  * Consolidated filters parameter (deepObject style). Originally: filters[available_services][contains].
  *
  * @phpstan-type FiltersShape = array{
- *   availableServices?: Contains|value-of<AvailableService>
+ *   available_services?: null|Contains|value-of<AvailableService>
  * }
  */
 final class Filters implements BaseModel
@@ -26,10 +26,10 @@ final class Filters implements BaseModel
     /**
      * Filter by exact available service match.
      *
-     * @var Contains|value-of<AvailableService>|null $availableServices
+     * @var Contains|value-of<AvailableService>|null $available_services
      */
-    #[Api('available_services', union: AvailableServices::class, optional: true)]
-    public Contains|string|null $availableServices;
+    #[Api(union: AvailableServices::class, optional: true)]
+    public Contains|string|null $available_services;
 
     public function __construct()
     {
@@ -41,14 +41,14 @@ final class Filters implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AvailableService|Contains|value-of<AvailableService> $availableServices
+     * @param AvailableService|Contains|value-of<AvailableService> $available_services
      */
     public static function with(
-        AvailableService|Contains|string|null $availableServices = null
+        AvailableService|Contains|string|null $available_services = null
     ): self {
         $obj = new self;
 
-        null !== $availableServices && $obj['availableServices'] = $availableServices;
+        null !== $available_services && $obj['available_services'] = $available_services;
 
         return $obj;
     }
@@ -62,7 +62,7 @@ final class Filters implements BaseModel
         AvailableService|Contains|string $availableServices
     ): self {
         $obj = clone $this;
-        $obj['availableServices'] = $availableServices;
+        $obj['available_services'] = $availableServices;
 
         return $obj;
     }

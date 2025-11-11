@@ -18,16 +18,16 @@ use Telnyx\Texml\Accounts\Calls\CallSiprecJsonParams\Track;
  * @see Telnyx\Texml\Accounts\Calls->siprecJson
  *
  * @phpstan-type CallSiprecJsonParamsShape = array{
- *   accountSid: string,
- *   connectorName?: string,
- *   includeMetadataCustomHeaders?: bool,
- *   name?: string,
- *   secure?: bool,
- *   sessionTimeoutSecs?: int,
- *   sipTransport?: SipTransport|value-of<SipTransport>,
- *   statusCallback?: string,
- *   statusCallbackMethod?: StatusCallbackMethod|value-of<StatusCallbackMethod>,
- *   track?: Track|value-of<Track>,
+ *   account_sid: string,
+ *   ConnectorName?: string,
+ *   IncludeMetadataCustomHeaders?: bool,
+ *   Name?: string,
+ *   Secure?: bool,
+ *   SessionTimeoutSecs?: int,
+ *   SipTransport?: \Telnyx\Texml\Accounts\Calls\CallSiprecJsonParams\SipTransport|value-of<\Telnyx\Texml\Accounts\Calls\CallSiprecJsonParams\SipTransport>,
+ *   StatusCallback?: string,
+ *   StatusCallbackMethod?: \Telnyx\Texml\Accounts\Calls\CallSiprecJsonParams\StatusCallbackMethod|value-of<\Telnyx\Texml\Accounts\Calls\CallSiprecJsonParams\StatusCallbackMethod>,
+ *   Track?: \Telnyx\Texml\Accounts\Calls\CallSiprecJsonParams\Track|value-of<\Telnyx\Texml\Accounts\Calls\CallSiprecJsonParams\Track>,
  * }
  */
 final class CallSiprecJsonParams implements BaseModel
@@ -37,78 +37,83 @@ final class CallSiprecJsonParams implements BaseModel
     use SdkParams;
 
     #[Api]
-    public string $accountSid;
+    public string $account_sid;
 
     /**
      * The name of the connector to use for the SIPREC session.
      */
-    #[Api('ConnectorName', optional: true)]
-    public ?string $connectorName;
+    #[Api(optional: true)]
+    public ?string $ConnectorName;
 
     /**
      * When set, custom parameters will be added as metadata (recording.session.ExtensionParameters). Otherwise, they’ll be added to sip headers.
      */
-    #[Api('IncludeMetadataCustomHeaders', optional: true)]
-    public ?bool $includeMetadataCustomHeaders;
+    #[Api(optional: true)]
+    public ?bool $IncludeMetadataCustomHeaders;
 
     /**
      * Name of the SIPREC session. May be used to stop the SIPREC session from TeXML instruction.
      */
-    #[Api('Name', optional: true)]
-    public ?string $name;
+    #[Api(optional: true)]
+    public ?string $Name;
 
     /**
      * Controls whether to encrypt media sent to your SRS using SRTP and TLS. When set you need to configure SRS port in your connector to 5061.
      */
-    #[Api('Secure', optional: true)]
-    public ?bool $secure;
+    #[Api(optional: true)]
+    public ?bool $Secure;
 
     /**
      * Sets `Session-Expires` header to the INVITE. A reinvite is sent every half the value set. Usefull for session keep alive. Minimum value is 90, set to 0 to disable.
      */
-    #[Api('SessionTimeoutSecs', optional: true)]
-    public ?int $sessionTimeoutSecs;
+    #[Api(optional: true)]
+    public ?int $SessionTimeoutSecs;
 
     /**
      * Specifies SIP transport protocol.
      *
-     * @var value-of<SipTransport>|null $sipTransport
+     * @var value-of<SipTransport>|null $SipTransport
      */
-    #[Api('SipTransport', enum: SipTransport::class, optional: true)]
-    public ?string $sipTransport;
+    #[Api(
+        enum: SipTransport::class,
+        optional: true,
+    )]
+    public ?string $SipTransport;
 
     /**
      * URL destination for Telnyx to send status callback events to for the siprec session.
      */
-    #[Api('StatusCallback', optional: true)]
-    public ?string $statusCallback;
+    #[Api(optional: true)]
+    public ?string $StatusCallback;
 
     /**
      * HTTP request type used for `StatusCallback`.
      *
-     * @var value-of<StatusCallbackMethod>|null $statusCallbackMethod
+     * @var value-of<StatusCallbackMethod>|null $StatusCallbackMethod
      */
     #[Api(
-        'StatusCallbackMethod',
         enum: StatusCallbackMethod::class,
-        optional: true
+        optional: true,
     )]
-    public ?string $statusCallbackMethod;
+    public ?string $StatusCallbackMethod;
 
     /**
      * The track to be used for siprec session. Can be `both_tracks`, `inbound_track` or `outbound_track`. Defaults to `both_tracks`.
      *
-     * @var value-of<Track>|null $track
+     * @var value-of<Track>|null $Track
      */
-    #[Api('Track', enum: Track::class, optional: true)]
-    public ?string $track;
+    #[Api(
+        enum: Track::class,
+        optional: true,
+    )]
+    public ?string $Track;
 
     /**
      * `new CallSiprecJsonParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * CallSiprecJsonParams::with(accountSid: ...)
+     * CallSiprecJsonParams::with(account_sid: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -127,35 +132,35 @@ final class CallSiprecJsonParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param SipTransport|value-of<SipTransport> $sipTransport
-     * @param StatusCallbackMethod|value-of<StatusCallbackMethod> $statusCallbackMethod
-     * @param Track|value-of<Track> $track
+     * @param SipTransport|value-of<SipTransport> $SipTransport
+     * @param StatusCallbackMethod|value-of<StatusCallbackMethod> $StatusCallbackMethod
+     * @param Track|value-of<Track> $Track
      */
     public static function with(
-        string $accountSid,
-        ?string $connectorName = null,
-        ?bool $includeMetadataCustomHeaders = null,
-        ?string $name = null,
-        ?bool $secure = null,
-        ?int $sessionTimeoutSecs = null,
-        SipTransport|string|null $sipTransport = null,
-        ?string $statusCallback = null,
-        StatusCallbackMethod|string|null $statusCallbackMethod = null,
-        Track|string|null $track = null,
+        string $account_sid,
+        ?string $ConnectorName = null,
+        ?bool $IncludeMetadataCustomHeaders = null,
+        ?string $Name = null,
+        ?bool $Secure = null,
+        ?int $SessionTimeoutSecs = null,
+        SipTransport|string|null $SipTransport = null,
+        ?string $StatusCallback = null,
+        StatusCallbackMethod|string|null $StatusCallbackMethod = null,
+        Track|string|null $Track = null,
     ): self {
         $obj = new self;
 
-        $obj->accountSid = $accountSid;
+        $obj->account_sid = $account_sid;
 
-        null !== $connectorName && $obj->connectorName = $connectorName;
-        null !== $includeMetadataCustomHeaders && $obj->includeMetadataCustomHeaders = $includeMetadataCustomHeaders;
-        null !== $name && $obj->name = $name;
-        null !== $secure && $obj->secure = $secure;
-        null !== $sessionTimeoutSecs && $obj->sessionTimeoutSecs = $sessionTimeoutSecs;
-        null !== $sipTransport && $obj['sipTransport'] = $sipTransport;
-        null !== $statusCallback && $obj->statusCallback = $statusCallback;
-        null !== $statusCallbackMethod && $obj['statusCallbackMethod'] = $statusCallbackMethod;
-        null !== $track && $obj['track'] = $track;
+        null !== $ConnectorName && $obj->ConnectorName = $ConnectorName;
+        null !== $IncludeMetadataCustomHeaders && $obj->IncludeMetadataCustomHeaders = $IncludeMetadataCustomHeaders;
+        null !== $Name && $obj->Name = $Name;
+        null !== $Secure && $obj->Secure = $Secure;
+        null !== $SessionTimeoutSecs && $obj->SessionTimeoutSecs = $SessionTimeoutSecs;
+        null !== $SipTransport && $obj['SipTransport'] = $SipTransport;
+        null !== $StatusCallback && $obj->StatusCallback = $StatusCallback;
+        null !== $StatusCallbackMethod && $obj['StatusCallbackMethod'] = $StatusCallbackMethod;
+        null !== $Track && $obj['Track'] = $Track;
 
         return $obj;
     }
@@ -163,7 +168,7 @@ final class CallSiprecJsonParams implements BaseModel
     public function withAccountSid(string $accountSid): self
     {
         $obj = clone $this;
-        $obj->accountSid = $accountSid;
+        $obj->account_sid = $accountSid;
 
         return $obj;
     }
@@ -174,7 +179,7 @@ final class CallSiprecJsonParams implements BaseModel
     public function withConnectorName(string $connectorName): self
     {
         $obj = clone $this;
-        $obj->connectorName = $connectorName;
+        $obj->ConnectorName = $connectorName;
 
         return $obj;
     }
@@ -186,7 +191,7 @@ final class CallSiprecJsonParams implements BaseModel
         bool $includeMetadataCustomHeaders
     ): self {
         $obj = clone $this;
-        $obj->includeMetadataCustomHeaders = $includeMetadataCustomHeaders;
+        $obj->IncludeMetadataCustomHeaders = $includeMetadataCustomHeaders;
 
         return $obj;
     }
@@ -197,7 +202,7 @@ final class CallSiprecJsonParams implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj->Name = $name;
 
         return $obj;
     }
@@ -208,7 +213,7 @@ final class CallSiprecJsonParams implements BaseModel
     public function withSecure(bool $secure): self
     {
         $obj = clone $this;
-        $obj->secure = $secure;
+        $obj->Secure = $secure;
 
         return $obj;
     }
@@ -219,7 +224,7 @@ final class CallSiprecJsonParams implements BaseModel
     public function withSessionTimeoutSecs(int $sessionTimeoutSecs): self
     {
         $obj = clone $this;
-        $obj->sessionTimeoutSecs = $sessionTimeoutSecs;
+        $obj->SessionTimeoutSecs = $sessionTimeoutSecs;
 
         return $obj;
     }
@@ -229,10 +234,11 @@ final class CallSiprecJsonParams implements BaseModel
      *
      * @param SipTransport|value-of<SipTransport> $sipTransport
      */
-    public function withSipTransport(SipTransport|string $sipTransport): self
-    {
+    public function withSipTransport(
+        SipTransport|string $sipTransport,
+    ): self {
         $obj = clone $this;
-        $obj['sipTransport'] = $sipTransport;
+        $obj['SipTransport'] = $sipTransport;
 
         return $obj;
     }
@@ -243,7 +249,7 @@ final class CallSiprecJsonParams implements BaseModel
     public function withStatusCallback(string $statusCallback): self
     {
         $obj = clone $this;
-        $obj->statusCallback = $statusCallback;
+        $obj->StatusCallback = $statusCallback;
 
         return $obj;
     }
@@ -254,10 +260,10 @@ final class CallSiprecJsonParams implements BaseModel
      * @param StatusCallbackMethod|value-of<StatusCallbackMethod> $statusCallbackMethod
      */
     public function withStatusCallbackMethod(
-        StatusCallbackMethod|string $statusCallbackMethod
+        StatusCallbackMethod|string $statusCallbackMethod,
     ): self {
         $obj = clone $this;
-        $obj['statusCallbackMethod'] = $statusCallbackMethod;
+        $obj['StatusCallbackMethod'] = $statusCallbackMethod;
 
         return $obj;
     }
@@ -267,10 +273,11 @@ final class CallSiprecJsonParams implements BaseModel
      *
      * @param Track|value-of<Track> $track
      */
-    public function withTrack(Track|string $track): self
-    {
+    public function withTrack(
+        Track|string $track
+    ): self {
         $obj = clone $this;
-        $obj['track'] = $track;
+        $obj['Track'] = $track;
 
         return $obj;
     }

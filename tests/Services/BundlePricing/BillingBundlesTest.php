@@ -34,7 +34,8 @@ final class BillingBundlesTest extends TestCase
         }
 
         $result = $this->client->bundlePricing->billingBundles->retrieve(
-            '8661948c-a386-4385-837f-af00f40f111a'
+            '8661948c-a386-4385-837f-af00f40f111a',
+            []
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -47,7 +48,7 @@ final class BillingBundlesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->bundlePricing->billingBundles->list();
+        $result = $this->client->bundlePricing->billingBundles->list([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

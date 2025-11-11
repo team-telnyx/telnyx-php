@@ -9,10 +9,7 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\Accounts\Calls\RecordingsContract;
 use Telnyx\Texml\Accounts\Calls\Recordings\RecordingRecordingSidJsonParams;
-use Telnyx\Texml\Accounts\Calls\Recordings\RecordingRecordingSidJsonParams\Status;
 use Telnyx\Texml\Accounts\Calls\Recordings\RecordingRecordingSidJsonResponse;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class RecordingsService implements RecordingsContract
 {
@@ -26,46 +23,27 @@ final class RecordingsService implements RecordingsContract
      *
      * Updates recording resource for particular call.
      *
-     * @param string $accountSid
-     * @param string $callSid
-     * @param Status|value-of<Status> $status
+     * @param array{
+     *   account_sid: string,
+     *   call_sid: string,
+     *   Status?: "in-progress"|"paused"|"stopped",
+     * }|RecordingRecordingSidJsonParams $params
      *
      * @throws APIException
      */
     public function recordingSidJson(
         string $recordingSid,
-        $accountSid,
-        $callSid,
-        $status = omit,
+        array|RecordingRecordingSidJsonParams $params,
         ?RequestOptions $requestOptions = null,
-    ): RecordingRecordingSidJsonResponse {
-        $params = [
-            'accountSid' => $accountSid, 'callSid' => $callSid, 'status' => $status,
-        ];
-
-        return $this->recordingSidJsonRaw($recordingSid, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function recordingSidJsonRaw(
-        string $recordingSid,
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): RecordingRecordingSidJsonResponse {
         [$parsed, $options] = RecordingRecordingSidJsonParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
-        $accountSid = $parsed['accountSid'];
-        unset($parsed['accountSid']);
-        $callSid = $parsed['callSid'];
-        unset($parsed['callSid']);
+        $accountSid = $parsed['account_sid'];
+        unset($parsed['account_sid']);
+        $callSid = $parsed['call_sid'];
+        unset($parsed['call_sid']);
 
         // @phpstan-ignore-next-line;
         return $this->client->request(
@@ -79,7 +57,7 @@ final class RecordingsService implements RecordingsContract
             headers: ['Content-Type' => 'application/x-www-form-urlencoded'],
             body: (object) array_diff_key(
                 $parsed,
-                array_flip(['accountSid', 'callSid'])
+                array_flip(['account_sid', 'call_sid'])
             ),
             options: $options,
             convert: RecordingRecordingSidJsonResponse::class,

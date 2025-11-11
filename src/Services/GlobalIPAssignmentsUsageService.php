@@ -8,11 +8,8 @@ use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\GlobalIPAssignmentsUsage\GlobalIPAssignmentsUsageGetResponse;
 use Telnyx\GlobalIPAssignmentsUsage\GlobalIPAssignmentsUsageRetrieveParams;
-use Telnyx\GlobalIPAssignmentsUsage\GlobalIPAssignmentsUsageRetrieveParams\Filter;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\GlobalIPAssignmentsUsageContract;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class GlobalIPAssignmentsUsageService implements GlobalIPAssignmentsUsageContract
 {
@@ -26,33 +23,22 @@ final class GlobalIPAssignmentsUsageService implements GlobalIPAssignmentsUsageC
      *
      * Global IP Assignment Usage Metrics
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[global_ip_assignment_id][in], filter[global_ip_id][in]
+     * @param array{
+     *   filter?: array{
+     *     global_ip_assignment_id?: string|array{in?: string},
+     *     global_ip_id?: string|array{in?: string},
+     *   },
+     * }|GlobalIPAssignmentsUsageRetrieveParams $params
      *
      * @throws APIException
      */
     public function retrieve(
-        $filter = omit,
-        ?RequestOptions $requestOptions = null
-    ): GlobalIPAssignmentsUsageGetResponse {
-        $params = ['filter' => $filter];
-
-        return $this->retrieveRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|GlobalIPAssignmentsUsageRetrieveParams $params,
+        ?RequestOptions $requestOptions = null,
     ): GlobalIPAssignmentsUsageGetResponse {
         [$parsed, $options] = GlobalIPAssignmentsUsageRetrieveParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

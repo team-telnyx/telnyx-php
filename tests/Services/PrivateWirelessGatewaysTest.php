@@ -33,10 +33,10 @@ final class PrivateWirelessGatewaysTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->privateWirelessGateways->create(
-            name: 'My private wireless gateway',
-            networkID: '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
-        );
+        $result = $this->client->privateWirelessGateways->create([
+            'name' => 'My private wireless gateway',
+            'network_id' => '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -48,10 +48,10 @@ final class PrivateWirelessGatewaysTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->privateWirelessGateways->create(
-            name: 'My private wireless gateway',
-            networkID: '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
-        );
+        $result = $this->client->privateWirelessGateways->create([
+            'name' => 'My private wireless gateway',
+            'network_id' => '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -77,7 +77,7 @@ final class PrivateWirelessGatewaysTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->privateWirelessGateways->list();
+        $result = $this->client->privateWirelessGateways->list([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

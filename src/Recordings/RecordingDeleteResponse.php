@@ -11,7 +11,9 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type RecordingDeleteResponseShape = array{data?: RecordingResponseData}
+ * @phpstan-type RecordingDeleteResponseShape = array{
+ *   data?: RecordingResponseData|null
+ * }
  */
 final class RecordingDeleteResponse implements BaseModel, ResponseConverter
 {

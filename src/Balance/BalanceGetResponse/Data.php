@@ -11,12 +11,12 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type DataShape = array{
- *   availableCredit?: string,
- *   balance?: string,
- *   creditLimit?: string,
- *   currency?: string,
- *   pending?: string,
- *   recordType?: value-of<RecordType>,
+ *   available_credit?: string|null,
+ *   balance?: string|null,
+ *   credit_limit?: string|null,
+ *   currency?: string|null,
+ *   pending?: string|null,
+ *   record_type?: value-of<RecordType>|null,
  * }
  */
 final class Data implements BaseModel
@@ -27,8 +27,8 @@ final class Data implements BaseModel
     /**
      * Available amount to spend (balance + credit limit).
      */
-    #[Api('available_credit', optional: true)]
-    public ?string $availableCredit;
+    #[Api(optional: true)]
+    public ?string $available_credit;
 
     /**
      * The account's current balance.
@@ -39,8 +39,8 @@ final class Data implements BaseModel
     /**
      * The account's credit limit.
      */
-    #[Api('credit_limit', optional: true)]
-    public ?string $creditLimit;
+    #[Api(optional: true)]
+    public ?string $credit_limit;
 
     /**
      * The ISO 4217 currency identifier.
@@ -57,10 +57,10 @@ final class Data implements BaseModel
     /**
      * Identifies the type of the resource.
      *
-     * @var value-of<RecordType>|null $recordType
+     * @var value-of<RecordType>|null $record_type
      */
-    #[Api('record_type', enum: RecordType::class, optional: true)]
-    public ?string $recordType;
+    #[Api(enum: RecordType::class, optional: true)]
+    public ?string $record_type;
 
     public function __construct()
     {
@@ -72,24 +72,24 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param RecordType|value-of<RecordType> $recordType
+     * @param RecordType|value-of<RecordType> $record_type
      */
     public static function with(
-        ?string $availableCredit = null,
+        ?string $available_credit = null,
         ?string $balance = null,
-        ?string $creditLimit = null,
+        ?string $credit_limit = null,
         ?string $currency = null,
         ?string $pending = null,
-        RecordType|string|null $recordType = null,
+        RecordType|string|null $record_type = null,
     ): self {
         $obj = new self;
 
-        null !== $availableCredit && $obj->availableCredit = $availableCredit;
+        null !== $available_credit && $obj->available_credit = $available_credit;
         null !== $balance && $obj->balance = $balance;
-        null !== $creditLimit && $obj->creditLimit = $creditLimit;
+        null !== $credit_limit && $obj->credit_limit = $credit_limit;
         null !== $currency && $obj->currency = $currency;
         null !== $pending && $obj->pending = $pending;
-        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $record_type && $obj['record_type'] = $record_type;
 
         return $obj;
     }
@@ -100,7 +100,7 @@ final class Data implements BaseModel
     public function withAvailableCredit(string $availableCredit): self
     {
         $obj = clone $this;
-        $obj->availableCredit = $availableCredit;
+        $obj->available_credit = $availableCredit;
 
         return $obj;
     }
@@ -122,7 +122,7 @@ final class Data implements BaseModel
     public function withCreditLimit(string $creditLimit): self
     {
         $obj = clone $this;
-        $obj->creditLimit = $creditLimit;
+        $obj->credit_limit = $creditLimit;
 
         return $obj;
     }
@@ -157,7 +157,7 @@ final class Data implements BaseModel
     public function withRecordType(RecordType|string $recordType): self
     {
         $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $obj['record_type'] = $recordType;
 
         return $obj;
     }

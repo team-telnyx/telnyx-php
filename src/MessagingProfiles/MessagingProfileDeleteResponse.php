@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type MessagingProfileDeleteResponseShape = array{
- *   data?: MessagingProfile
+ *   data?: MessagingProfile|null
  * }
  */
 final class MessagingProfileDeleteResponse implements BaseModel, ResponseConverter

@@ -12,7 +12,9 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeVerifyResponse\Data;
 
 /**
- * @phpstan-type VerificationCodeVerifyResponseShape = array{data?: list<Data>}
+ * @phpstan-type VerificationCodeVerifyResponseShape = array{
+ *   data?: list<Data>|null
+ * }
  */
 final class VerificationCodeVerifyResponse implements BaseModel, ResponseConverter
 {

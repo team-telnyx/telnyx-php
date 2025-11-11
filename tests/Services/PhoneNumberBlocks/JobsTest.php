@@ -45,7 +45,7 @@ final class JobsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->phoneNumberBlocks->jobs->list();
+        $result = $this->client->phoneNumberBlocks->jobs->list([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -57,9 +57,9 @@ final class JobsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->phoneNumberBlocks->jobs->deletePhoneNumberBlock(
-            'f3946371-7199-4261-9c3d-81a0d7935146'
-        );
+        $result = $this->client->phoneNumberBlocks->jobs->deletePhoneNumberBlock([
+            'phone_number_block_id' => 'f3946371-7199-4261-9c3d-81a0d7935146',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -71,9 +71,9 @@ final class JobsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->phoneNumberBlocks->jobs->deletePhoneNumberBlock(
-            'f3946371-7199-4261-9c3d-81a0d7935146'
-        );
+        $result = $this->client->phoneNumberBlocks->jobs->deletePhoneNumberBlock([
+            'phone_number_block_id' => 'f3946371-7199-4261-9c3d-81a0d7935146',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

@@ -12,7 +12,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type AssociatedPhoneNumberDeleteResponseShape = array{
- *   data?: PortingAssociatedPhoneNumber
+ *   data?: PortingAssociatedPhoneNumber|null
  * }
  */
 final class AssociatedPhoneNumberDeleteResponse implements BaseModel, ResponseConverter

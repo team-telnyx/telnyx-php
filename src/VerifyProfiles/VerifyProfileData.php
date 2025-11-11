@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type VerifyProfileDataShape = array{data?: VerifyProfile}
+ * @phpstan-type VerifyProfileDataShape = array{data?: VerifyProfile|null}
  */
 final class VerifyProfileData implements BaseModel, ResponseConverter
 {

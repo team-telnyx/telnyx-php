@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * Consolidated filter parameter (deepObject style). Originally: filter[muted], filter[on_hold], filter[whispering].
  *
  * @phpstan-type FilterShape = array{
- *   muted?: bool, onHold?: bool, whispering?: bool
+ *   muted?: bool|null, on_hold?: bool|null, whispering?: bool|null
  * }
  */
 final class Filter implements BaseModel
@@ -29,8 +29,8 @@ final class Filter implements BaseModel
     /**
      * If present, participants will be filtered to those who are/are not put on hold.
      */
-    #[Api('on_hold', optional: true)]
-    public ?bool $onHold;
+    #[Api(optional: true)]
+    public ?bool $on_hold;
 
     /**
      * If present, participants will be filtered to those who are whispering or are not.
@@ -50,13 +50,13 @@ final class Filter implements BaseModel
      */
     public static function with(
         ?bool $muted = null,
-        ?bool $onHold = null,
+        ?bool $on_hold = null,
         ?bool $whispering = null
     ): self {
         $obj = new self;
 
         null !== $muted && $obj->muted = $muted;
-        null !== $onHold && $obj->onHold = $onHold;
+        null !== $on_hold && $obj->on_hold = $on_hold;
         null !== $whispering && $obj->whispering = $whispering;
 
         return $obj;
@@ -79,7 +79,7 @@ final class Filter implements BaseModel
     public function withOnHold(bool $onHold): self
     {
         $obj = clone $this;
-        $obj->onHold = $onHold;
+        $obj->on_hold = $onHold;
 
         return $obj;
     }

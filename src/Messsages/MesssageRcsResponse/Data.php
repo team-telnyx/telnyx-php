@@ -13,17 +13,17 @@ use Telnyx\Messsages\RcsAgentMessage;
 
 /**
  * @phpstan-type DataShape = array{
- *   id?: string,
- *   body?: RcsAgentMessage,
- *   direction?: string,
- *   encoding?: string,
- *   from?: From,
- *   messagingProfileID?: string,
- *   organizationID?: string,
- *   receivedAt?: \DateTimeInterface,
- *   recordType?: string,
- *   to?: list<To>,
- *   type?: string,
+ *   id?: string|null,
+ *   body?: RcsAgentMessage|null,
+ *   direction?: string|null,
+ *   encoding?: string|null,
+ *   from?: From|null,
+ *   messaging_profile_id?: string|null,
+ *   organization_id?: string|null,
+ *   received_at?: \DateTimeInterface|null,
+ *   record_type?: string|null,
+ *   to?: list<To>|null,
+ *   type?: string|null,
  * }
  */
 final class Data implements BaseModel
@@ -49,17 +49,17 @@ final class Data implements BaseModel
     #[Api(optional: true)]
     public ?From $from;
 
-    #[Api('messaging_profile_id', optional: true)]
-    public ?string $messagingProfileID;
+    #[Api(optional: true)]
+    public ?string $messaging_profile_id;
 
-    #[Api('organization_id', optional: true)]
-    public ?string $organizationID;
+    #[Api(optional: true)]
+    public ?string $organization_id;
 
-    #[Api('received_at', optional: true)]
-    public ?\DateTimeInterface $receivedAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $received_at;
 
-    #[Api('record_type', optional: true)]
-    public ?string $recordType;
+    #[Api(optional: true)]
+    public ?string $record_type;
 
     /** @var list<To>|null $to */
     #[Api(list: To::class, optional: true)]
@@ -86,10 +86,10 @@ final class Data implements BaseModel
         ?string $direction = null,
         ?string $encoding = null,
         ?From $from = null,
-        ?string $messagingProfileID = null,
-        ?string $organizationID = null,
-        ?\DateTimeInterface $receivedAt = null,
-        ?string $recordType = null,
+        ?string $messaging_profile_id = null,
+        ?string $organization_id = null,
+        ?\DateTimeInterface $received_at = null,
+        ?string $record_type = null,
         ?array $to = null,
         ?string $type = null,
     ): self {
@@ -100,10 +100,10 @@ final class Data implements BaseModel
         null !== $direction && $obj->direction = $direction;
         null !== $encoding && $obj->encoding = $encoding;
         null !== $from && $obj->from = $from;
-        null !== $messagingProfileID && $obj->messagingProfileID = $messagingProfileID;
-        null !== $organizationID && $obj->organizationID = $organizationID;
-        null !== $receivedAt && $obj->receivedAt = $receivedAt;
-        null !== $recordType && $obj->recordType = $recordType;
+        null !== $messaging_profile_id && $obj->messaging_profile_id = $messaging_profile_id;
+        null !== $organization_id && $obj->organization_id = $organization_id;
+        null !== $received_at && $obj->received_at = $received_at;
+        null !== $record_type && $obj->record_type = $record_type;
         null !== $to && $obj->to = $to;
         null !== $type && $obj->type = $type;
 
@@ -156,7 +156,7 @@ final class Data implements BaseModel
     public function withMessagingProfileID(string $messagingProfileID): self
     {
         $obj = clone $this;
-        $obj->messagingProfileID = $messagingProfileID;
+        $obj->messaging_profile_id = $messagingProfileID;
 
         return $obj;
     }
@@ -164,7 +164,7 @@ final class Data implements BaseModel
     public function withOrganizationID(string $organizationID): self
     {
         $obj = clone $this;
-        $obj->organizationID = $organizationID;
+        $obj->organization_id = $organizationID;
 
         return $obj;
     }
@@ -172,7 +172,7 @@ final class Data implements BaseModel
     public function withReceivedAt(\DateTimeInterface $receivedAt): self
     {
         $obj = clone $this;
-        $obj->receivedAt = $receivedAt;
+        $obj->received_at = $receivedAt;
 
         return $obj;
     }
@@ -180,7 +180,7 @@ final class Data implements BaseModel
     public function withRecordType(string $recordType): self
     {
         $obj = clone $this;
-        $obj->recordType = $recordType;
+        $obj->record_type = $recordType;
 
         return $obj;
     }

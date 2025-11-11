@@ -14,7 +14,7 @@ use Telnyx\Messsages\RcsContentInfo;
  * A media file within a rich card.
  *
  * @phpstan-type MediaShape = array{
- *   contentInfo?: RcsContentInfo, height?: value-of<Height>
+ *   content_info?: RcsContentInfo|null, height?: value-of<Height>|null
  * }
  */
 final class Media implements BaseModel
@@ -22,8 +22,8 @@ final class Media implements BaseModel
     /** @use SdkModel<MediaShape> */
     use SdkModel;
 
-    #[Api('content_info', optional: true)]
-    public ?RcsContentInfo $contentInfo;
+    #[Api(optional: true)]
+    public ?RcsContentInfo $content_info;
 
     /**
      * The height of the media within a rich card with a vertical layout. For a standalone card with horizontal layout, height is not customizable, and this field is ignored.
@@ -46,12 +46,12 @@ final class Media implements BaseModel
      * @param Height|value-of<Height> $height
      */
     public static function with(
-        ?RcsContentInfo $contentInfo = null,
+        ?RcsContentInfo $content_info = null,
         Height|string|null $height = null
     ): self {
         $obj = new self;
 
-        null !== $contentInfo && $obj->contentInfo = $contentInfo;
+        null !== $content_info && $obj->content_info = $content_info;
         null !== $height && $obj['height'] = $height;
 
         return $obj;
@@ -60,7 +60,7 @@ final class Media implements BaseModel
     public function withContentInfo(RcsContentInfo $contentInfo): self
     {
         $obj = clone $this;
-        $obj->contentInfo = $contentInfo;
+        $obj->content_info = $contentInfo;
 
         return $obj;
     }

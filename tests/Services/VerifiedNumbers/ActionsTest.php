@@ -35,7 +35,7 @@ final class ActionsTest extends TestCase
 
         $result = $this->client->verifiedNumbers->actions->submitVerificationCode(
             '+15551234567',
-            '123456'
+            ['verification_code' => '123456']
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -50,7 +50,7 @@ final class ActionsTest extends TestCase
 
         $result = $this->client->verifiedNumbers->actions->submitVerificationCode(
             '+15551234567',
-            '123456'
+            ['verification_code' => '123456']
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType

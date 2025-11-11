@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type ActionSetPublicIPResponseShape = array{data?: SimCardAction}
+ * @phpstan-type ActionSetPublicIPResponseShape = array{data?: SimCardAction|null}
  */
 final class ActionSetPublicIPResponse implements BaseModel, ResponseConverter
 {

@@ -10,9 +10,6 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SetiContract;
 use Telnyx\Seti\SetiGetBlackBoxTestResultsResponse;
 use Telnyx\Seti\SetiRetrieveBlackBoxTestResultsParams;
-use Telnyx\Seti\SetiRetrieveBlackBoxTestResultsParams\Filter;
-
-use const Telnyx\Core\OMIT as omit;
 
 final class SetiService implements SetiContract
 {
@@ -26,33 +23,19 @@ final class SetiService implements SetiContract
      *
      * Returns the results of the various black box tests
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[product]
+     * @param array{
+     *   filter?: array{product?: string}
+     * }|SetiRetrieveBlackBoxTestResultsParams $params
      *
      * @throws APIException
      */
     public function retrieveBlackBoxTestResults(
-        $filter = omit,
-        ?RequestOptions $requestOptions = null
-    ): SetiGetBlackBoxTestResultsResponse {
-        $params = ['filter' => $filter];
-
-        return $this->retrieveBlackBoxTestResultsRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function retrieveBlackBoxTestResultsRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|SetiRetrieveBlackBoxTestResultsParams $params,
+        ?RequestOptions $requestOptions = null,
     ): SetiGetBlackBoxTestResultsResponse {
         [$parsed, $options] = SetiRetrieveBlackBoxTestResultsParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

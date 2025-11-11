@@ -16,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Conferences\Actions->unmute
  *
  * @phpstan-type ActionUnmuteParamsShape = array{
- *   callControlIDs?: list<string>, region?: Region|value-of<Region>
+ *   call_control_ids?: list<string>, region?: Region|value-of<Region>
  * }
  */
 final class ActionUnmuteParams implements BaseModel
@@ -28,10 +28,10 @@ final class ActionUnmuteParams implements BaseModel
     /**
      * List of unique identifiers and tokens for controlling the call. Enter each call control ID to be unmuted. When empty all participants will be unmuted.
      *
-     * @var list<string>|null $callControlIDs
+     * @var list<string>|null $call_control_ids
      */
-    #[Api('call_control_ids', list: 'string', optional: true)]
-    public ?array $callControlIDs;
+    #[Api(list: 'string', optional: true)]
+    public ?array $call_control_ids;
 
     /**
      * Region where the conference data is located. Defaults to the region defined in user's data locality settings (Europe or US).
@@ -51,16 +51,16 @@ final class ActionUnmuteParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $callControlIDs
+     * @param list<string> $call_control_ids
      * @param Region|value-of<Region> $region
      */
     public static function with(
-        ?array $callControlIDs = null,
+        ?array $call_control_ids = null,
         Region|string|null $region = null
     ): self {
         $obj = new self;
 
-        null !== $callControlIDs && $obj->callControlIDs = $callControlIDs;
+        null !== $call_control_ids && $obj->call_control_ids = $call_control_ids;
         null !== $region && $obj['region'] = $region;
 
         return $obj;
@@ -74,7 +74,7 @@ final class ActionUnmuteParams implements BaseModel
     public function withCallControlIDs(array $callControlIDs): self
     {
         $obj = clone $this;
-        $obj->callControlIDs = $callControlIDs;
+        $obj->call_control_ids = $callControlIDs;
 
         return $obj;
     }
