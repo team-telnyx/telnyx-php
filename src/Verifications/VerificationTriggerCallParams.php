@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Trigger Call verification.
  *
- * @see Telnyx\VerificationsService::triggerCall()
+ * @see Telnyx\Services\VerificationsService::triggerCall()
  *
  * @phpstan-type VerificationTriggerCallParamsShape = array{
  *   phone_number: string,

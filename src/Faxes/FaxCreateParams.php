@@ -22,7 +22,7 @@ use Telnyx\Faxes\FaxCreateParams\Quality;
  * - `fax.delivered`
  * - `fax.failed`
  *
- * @see Telnyx\FaxesService::create()
+ * @see Telnyx\Services\FaxesService::create()
  *
  * @phpstan-type FaxCreateParamsShape = array{
  *   connection_id: string,

@@ -14,7 +14,7 @@ use Telnyx\PhoneNumbers\Voice\VoiceUpdateParams\UsagePaymentMethod;
 /**
  * Update a phone number with voice settings.
  *
- * @see Telnyx\STAINLESS_FIXME_PhoneNumbers\VoiceService::update()
+ * @see Telnyx\Services\PhoneNumbers\VoiceService::update()
  *
  * @phpstan-type VoiceUpdateParamsShape = array{
  *   call_forwarding?: CallForwarding,

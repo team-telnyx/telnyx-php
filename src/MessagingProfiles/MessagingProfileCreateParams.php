@@ -13,7 +13,7 @@ use Telnyx\MessagingProfiles\MessagingProfileCreateParams\WebhookAPIVersion;
 /**
  * Create a messaging profile.
  *
- * @see Telnyx\MessagingProfilesService::create()
+ * @see Telnyx\Services\MessagingProfilesService::create()
  *
  * @phpstan-type MessagingProfileCreateParamsShape = array{
  *   name: string,

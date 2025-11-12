@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Create a new Network.
  *
- * @see Telnyx\NetworksService::create()
+ * @see Telnyx\Services\NetworksService::create()
  *
  * @phpstan-type NetworkCreateParamsShape = array{name: string}
  */

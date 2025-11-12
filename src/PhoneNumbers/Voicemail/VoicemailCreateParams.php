@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Create voicemail settings for a phone number.
  *
- * @see Telnyx\STAINLESS_FIXME_PhoneNumbers\VoicemailService::create()
+ * @see Telnyx\Services\PhoneNumbers\VoicemailService::create()
  *
  * @phpstan-type VoicemailCreateParamsShape = array{enabled?: bool, pin?: string}
  */

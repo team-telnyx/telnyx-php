@@ -14,7 +14,7 @@ use Telnyx\VerifyProfiles\VerifyProfileListParams\Page;
 /**
  * Gets a paginated list of Verify profiles.
  *
- * @see Telnyx\VerifyProfilesService::list()
+ * @see Telnyx\Services\VerifyProfilesService::list()
  *
  * @phpstan-type VerifyProfileListParamsShape = array{filter?: Filter, page?: Page}
  */

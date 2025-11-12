@@ -13,7 +13,7 @@ use Telnyx\Invoices\InvoiceRetrieveParams\Action;
 /**
  * Retrieve a single invoice by its unique identifier.
  *
- * @see Telnyx\InvoicesService::retrieve()
+ * @see Telnyx\Services\InvoicesService::retrieve()
  *
  * @phpstan-type InvoiceRetrieveParamsShape = array{
  *   action?: Action|value-of<Action>

@@ -14,7 +14,7 @@ use Telnyx\IntegrationSecrets\IntegrationSecretListParams\Page;
 /**
  * Retrieve a list of all integration secrets configured by the user.
  *
- * @see Telnyx\IntegrationSecretsService::list()
+ * @see Telnyx\Services\IntegrationSecretsService::list()
  *
  * @phpstan-type IntegrationSecretListParamsShape = array{
  *   filter?: Filter, page?: Page

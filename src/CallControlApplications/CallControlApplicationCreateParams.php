@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Create a call control application.
  *
- * @see Telnyx\CallControlApplicationsService::create()
+ * @see Telnyx\Services\CallControlApplicationsService::create()
  *
  * @phpstan-type CallControlApplicationCreateParamsShape = array{
  *   application_name: string,

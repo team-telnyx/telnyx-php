@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Get all SIM card groups belonging to the user that match the given filters.
  *
- * @see Telnyx\SimCardGroupsService::list()
+ * @see Telnyx\Services\SimCardGroupsService::list()
  *
  * @phpstan-type SimCardGroupListParamsShape = array{
  *   filter_name_?: string,

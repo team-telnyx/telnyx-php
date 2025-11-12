@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Returns a list of your addresses.
  *
- * @see Telnyx\AddressesService::list()
+ * @see Telnyx\Services\AddressesService::list()
  *
  * @phpstan-type AddressListParamsShape = array{
  *   filter?: Filter, page?: Page, sort?: Sort|value-of<Sort>

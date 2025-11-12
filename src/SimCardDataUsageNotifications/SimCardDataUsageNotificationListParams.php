@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Lists a paginated collection of SIM card data usage notifications. It enables exploring the collection using specific filters.
  *
- * @see Telnyx\SimCardDataUsageNotificationsService::list()
+ * @see Telnyx\Services\SimCardDataUsageNotificationsService::list()
  *
  * @phpstan-type SimCardDataUsageNotificationListParamsShape = array{
  *   filter_sim_card_id_?: string, page_number_?: int, page_size_?: int

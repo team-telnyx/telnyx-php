@@ -16,7 +16,7 @@ use Telnyx\CredentialConnections\EncryptedMedia;
 /**
  * Updates settings of an existing FQDN connection.
  *
- * @see Telnyx\FqdnConnectionsService::update()
+ * @see Telnyx\Services\FqdnConnectionsService::update()
  *
  * @phpstan-type FqdnConnectionUpdateParamsShape = array{
  *   active?: bool,

@@ -13,7 +13,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Unmute a list of participants in a conference call.
  *
- * @see Telnyx\STAINLESS_FIXME_Conferences\ActionsService::unmute()
+ * @see Telnyx\Services\Conferences\ActionsService::unmute()
  *
  * @phpstan-type ActionUnmuteParamsShape = array{
  *   call_control_ids?: list<string>, region?: Region|value-of<Region>

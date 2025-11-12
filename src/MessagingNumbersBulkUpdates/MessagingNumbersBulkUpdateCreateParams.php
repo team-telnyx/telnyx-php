@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Update the messaging profile of multiple phone numbers.
  *
- * @see Telnyx\MessagingNumbersBulkUpdatesService::create()
+ * @see Telnyx\Services\MessagingNumbersBulkUpdatesService::create()
  *
  * @phpstan-type MessagingNumbersBulkUpdateCreateParamsShape = array{
  *   messaging_profile_id: string, numbers: list<string>

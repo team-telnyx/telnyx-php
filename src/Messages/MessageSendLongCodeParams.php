@@ -13,7 +13,7 @@ use Telnyx\Messages\MessageSendLongCodeParams\Type;
 /**
  * Send a long code message.
  *
- * @see Telnyx\MessagesService::sendLongCode()
+ * @see Telnyx\Services\MessagesService::sendLongCode()
  *
  * @phpstan-type MessageSendLongCodeParamsShape = array{
  *   from: string,

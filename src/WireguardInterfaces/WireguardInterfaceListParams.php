@@ -14,7 +14,7 @@ use Telnyx\WireguardInterfaces\WireguardInterfaceListParams\Page;
 /**
  * List all WireGuard Interfaces.
  *
- * @see Telnyx\WireguardInterfacesService::list()
+ * @see Telnyx\Services\WireguardInterfacesService::list()
  *
  * @phpstan-type WireguardInterfaceListParamsShape = array{
  *   filter?: Filter, page?: Page

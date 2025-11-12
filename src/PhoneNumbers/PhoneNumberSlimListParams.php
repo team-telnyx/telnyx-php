@@ -15,7 +15,7 @@ use Telnyx\PhoneNumbers\PhoneNumberSlimListParams\Sort;
 /**
  * List phone numbers, This endpoint is a lighter version of the /phone_numbers endpoint having higher performance and rate limit.
  *
- * @see Telnyx\PhoneNumbersService::slimList()
+ * @see Telnyx\Services\PhoneNumbersService::slimList()
  *
  * @phpstan-type PhoneNumberSlimListParamsShape = array{
  *   filter?: Filter,

@@ -15,7 +15,7 @@ use Telnyx\SimCards\SimCardListParams\Sort;
 /**
  * Get all SIM cards belonging to the user that match the given filters.
  *
- * @see Telnyx\SimCardsService::list()
+ * @see Telnyx\Services\SimCardsService::list()
  *
  * @phpstan-type SimCardListParamsShape = array{
  *   filter?: Filter,

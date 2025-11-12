@@ -15,7 +15,7 @@ use Telnyx\VerifyProfiles\VerifyProfileCreateParams\SMS;
 /**
  * Creates a new Verify profile to associate verifications with.
  *
- * @see Telnyx\VerifyProfilesService::create()
+ * @see Telnyx\Services\VerifyProfilesService::create()
  *
  * @phpstan-type VerifyProfileCreateParamsShape = array{
  *   name: string,

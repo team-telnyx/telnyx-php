@@ -14,7 +14,7 @@ use Telnyx\Storage\MigrationSources\MigrationSourceCreateParams\ProviderAuth;
 /**
  * Create a source from which data can be migrated from.
  *
- * @see Telnyx\STAINLESS_FIXME_Storage\MigrationSourcesService::create()
+ * @see Telnyx\Services\Storage\MigrationSourcesService::create()
  *
  * @phpstan-type MigrationSourceCreateParamsShape = array{
  *   bucket_name: string,

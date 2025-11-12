@@ -21,7 +21,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * - `call.speak.started`
  * - `call.speak.ended`
  *
- * @see Telnyx\STAINLESS_FIXME_Calls\ActionsService::speak()
+ * @see Telnyx\Services\Calls\ActionsService::speak()
  *
  * @phpstan-type ActionSpeakParamsShape = array{
  *   payload: string,

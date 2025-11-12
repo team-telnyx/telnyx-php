@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Returns a list of your SSO authentication providers.
  *
- * @see Telnyx\AuthenticationProvidersService::list()
+ * @see Telnyx\Services\AuthenticationProvidersService::list()
  *
  * @phpstan-type AuthenticationProviderListParamsShape = array{
  *   page?: Page, sort?: Sort|value-of<Sort>

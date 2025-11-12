@@ -15,7 +15,7 @@ use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListParams\P
 /**
  * List Virtual Cross Connects Cloud Coverage.<br /><br />This endpoint shows which cloud regions are available for the `location_code` your Virtual Cross Connect will be provisioned in.
  *
- * @see Telnyx\VirtualCrossConnectsCoverageService::list()
+ * @see Telnyx\Services\VirtualCrossConnectsCoverageService::list()
  *
  * @phpstan-type VirtualCrossConnectsCoverageListParamsShape = array{
  *   filter?: Filter, filters?: Filters, page?: Page

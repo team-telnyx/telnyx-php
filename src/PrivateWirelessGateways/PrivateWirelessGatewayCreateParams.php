@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Asynchronously create a Private Wireless Gateway for SIM cards for a previously created network. This operation may take several minutes so you can check the Private Wireless Gateway status at the section Get a Private Wireless Gateway.
  *
- * @see Telnyx\PrivateWirelessGatewaysService::create()
+ * @see Telnyx\Services\PrivateWirelessGatewaysService::create()
  *
  * @phpstan-type PrivateWirelessGatewayCreateParamsShape = array{
  *   name: string, network_id: string, region_code?: string

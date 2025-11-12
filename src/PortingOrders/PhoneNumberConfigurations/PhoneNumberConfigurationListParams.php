@@ -15,7 +15,7 @@ use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListP
 /**
  * Returns a list of phone number configurations paginated.
  *
- * @see Telnyx\STAINLESS_FIXME_PortingOrders\PhoneNumberConfigurationsService::list()
+ * @see Telnyx\Services\PortingOrders\PhoneNumberConfigurationsService::list()
  *
  * @phpstan-type PhoneNumberConfigurationListParamsShape = array{
  *   filter?: Filter, page?: Page, sort?: Sort

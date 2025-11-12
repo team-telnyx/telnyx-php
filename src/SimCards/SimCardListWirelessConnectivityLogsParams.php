@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * This API allows listing a paginated collection of Wireless Connectivity Logs associated with a SIM Card, for troubleshooting purposes.
  *
- * @see Telnyx\SimCardsService::listWirelessConnectivityLogs()
+ * @see Telnyx\Services\SimCardsService::listWirelessConnectivityLogs()
  *
  * @phpstan-type SimCardListWirelessConnectivityLogsParamsShape = array{
  *   page_number_?: int, page_size_?: int

@@ -14,7 +14,7 @@ use Telnyx\MobilePushCredentials\MobilePushCredentialListParams\Page;
 /**
  * List mobile push credentials.
  *
- * @see Telnyx\MobilePushCredentialsService::list()
+ * @see Telnyx\Services\MobilePushCredentialsService::list()
  *
  * @phpstan-type MobilePushCredentialListParamsShape = array{
  *   filter?: Filter, page?: Page

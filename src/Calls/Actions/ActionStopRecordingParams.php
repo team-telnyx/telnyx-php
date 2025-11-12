@@ -16,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * - `call.recording.saved`
  *
- * @see Telnyx\STAINLESS_FIXME_Calls\ActionsService::stopRecording()
+ * @see Telnyx\Services\Calls\ActionsService::stopRecording()
  *
  * @phpstan-type ActionStopRecordingParamsShape = array{
  *   client_state?: string, command_id?: string, recording_id?: string

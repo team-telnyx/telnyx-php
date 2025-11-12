@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Assign an insight to a group.
  *
- * @see Telnyx\STAINLESS_FIXME_AI\STAINLESS_FIXME_Conversations\STAINLESS_FIXME_InsightGroups\InsightsService::assign()
+ * @see Telnyx\Services\AI\Conversations\InsightGroups\InsightsService::assign()
  *
  * @phpstan-type InsightAssignParamsShape = array{group_id: string}
  */

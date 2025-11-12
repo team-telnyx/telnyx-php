@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Returns recordings for a conference identified by conference_sid.
  *
- * @see Telnyx\STAINLESS_FIXME_Texml\STAINLESS_FIXME_Accounts\ConferencesService::retrieveRecordingsJson()
+ * @see Telnyx\Services\Texml\Accounts\ConferencesService::retrieveRecordingsJson()
  *
  * @phpstan-type ConferenceRetrieveRecordingsJsonParamsShape = array{
  *   account_sid: string

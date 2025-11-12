@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Create a new IP object.
  *
- * @see Telnyx\IPsService::create()
+ * @see Telnyx\Services\IPsService::create()
  *
  * @phpstan-type IPCreateParamsShape = array{
  *   ip_address: string, connection_id?: string, port?: int

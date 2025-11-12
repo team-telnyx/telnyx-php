@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Updates a stored SIPREC connector configuration.
  *
- * @see Telnyx\SiprecConnectorsService::update()
+ * @see Telnyx\Services\SiprecConnectorsService::update()
  *
  * @phpstan-type SiprecConnectorUpdateParamsShape = array{
  *   host: string, name: string, port: int, app_subdomain?: string

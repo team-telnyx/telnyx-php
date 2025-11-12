@@ -13,7 +13,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Create a new fine tuning job.
  *
- * @see Telnyx\STAINLESS_FIXME_AI\STAINLESS_FIXME_FineTuning\JobsService::create()
+ * @see Telnyx\Services\AI\FineTuning\JobsService::create()
  *
  * @phpstan-type JobCreateParamsShape = array{
  *   model: string,

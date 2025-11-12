@@ -13,7 +13,7 @@ use Telnyx\Texml\Accounts\Calls\CallRetrieveCallsParams\Status;
 /**
  * Returns multiple call resouces for an account. This endpoint is eventually consistent.
  *
- * @see Telnyx\STAINLESS_FIXME_Texml\STAINLESS_FIXME_Accounts\CallsService::retrieveCalls()
+ * @see Telnyx\Services\Texml\Accounts\CallsService::retrieveCalls()
  *
  * @phpstan-type CallRetrieveCallsParamsShape = array{
  *   EndTime?: string,

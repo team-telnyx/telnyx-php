@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Creates a dynamic emergency endpoints.
  *
- * @see Telnyx\DynamicEmergencyEndpointsService::create()
+ * @see Telnyx\Services\DynamicEmergencyEndpointsService::create()
  *
  * @phpstan-type DynamicEmergencyEndpointCreateParamsShape = array{
  *   callback_number: string,

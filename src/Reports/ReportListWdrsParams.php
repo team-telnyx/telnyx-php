@@ -13,7 +13,7 @@ use Telnyx\Reports\ReportListWdrsParams\Page;
 /**
  * Fetch all Wdr records.
  *
- * @see Telnyx\ReportsService::listWdrs()
+ * @see Telnyx\Services\ReportsService::listWdrs()
  *
  * @phpstan-type ReportListWdrsParamsShape = array{
  *   id?: string,

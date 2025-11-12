@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Create a Global IP.
  *
- * @see Telnyx\GlobalIPsService::create()
+ * @see Telnyx\Services\GlobalIPsService::create()
  *
  * @phpstan-type GlobalIPCreateParamsShape = array{
  *   description?: string, name?: string, ports?: array<string,mixed>

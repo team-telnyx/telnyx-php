@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Update a campaign's properties by `campaignId`. **Please note:** only sample messages are editable.
  *
- * @see Telnyx\CampaignService::update()
+ * @see Telnyx\Services\CampaignService::update()
  *
  * @phpstan-type CampaignUpdateParamsShape = array{
  *   autoRenewal?: bool,

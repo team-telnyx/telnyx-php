@@ -15,7 +15,7 @@ use Telnyx\PhoneNumbers\PhoneNumberListParams\Sort;
 /**
  * List phone numbers.
  *
- * @see Telnyx\PhoneNumbersService::list()
+ * @see Telnyx\Services\PhoneNumbersService::list()
  *
  * @phpstan-type PhoneNumberListParamsShape = array{
  *   filter?: Filter, page?: Page, sort?: Sort|value-of<Sort>

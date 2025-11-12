@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Get a single bundle by ID.
  *
- * @see Telnyx\STAINLESS_FIXME_BundlePricing\BillingBundlesService::retrieve()
+ * @see Telnyx\Services\BundlePricing\BillingBundlesService::retrieve()
  *
  * @phpstan-type BillingBundleRetrieveParamsShape = array{
  *   authorization_bearer?: string

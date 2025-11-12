@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Removes the call from a queue.
  *
- * @see Telnyx\STAINLESS_FIXME_Calls\ActionsService::leaveQueue()
+ * @see Telnyx\Services\Calls\ActionsService::leaveQueue()
  *
  * @phpstan-type ActionLeaveQueueParamsShape = array{
  *   client_state?: string, command_id?: string

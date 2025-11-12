@@ -13,7 +13,7 @@ use Telnyx\NotificationEvents\NotificationEventListParams\Page;
 /**
  * Returns a list of your notifications events.
  *
- * @see Telnyx\NotificationEventsService::list()
+ * @see Telnyx\Services\NotificationEventsService::list()
  *
  * @phpstan-type NotificationEventListParamsShape = array{page?: Page}
  */

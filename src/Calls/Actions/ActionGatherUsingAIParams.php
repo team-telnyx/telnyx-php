@@ -24,7 +24,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * - `call.ai_gather.partial_results` (if `send_partial_results` is set to `true`)
  * - `call.ai_gather.message_history_updated` (if `send_message_history_updates` is set to `true`)
  *
- * @see Telnyx\STAINLESS_FIXME_Calls\ActionsService::gatherUsingAI()
+ * @see Telnyx\Services\Calls\ActionsService::gatherUsingAI()
  *
  * @phpstan-type ActionGatherUsingAIParamsShape = array{
  *   parameters: mixed,

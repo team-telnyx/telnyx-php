@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * This action will asynchronously assign a Wireless Blocklist to all the SIMs in the SIM card group.
  *
- * @see Telnyx\STAINLESS_FIXME_SimCardGroups\ActionsService::setWirelessBlocklist()
+ * @see Telnyx\Services\SimCardGroups\ActionsService::setWirelessBlocklist()
  *
  * @phpstan-type ActionSetWirelessBlocklistParamsShape = array{
  *   wireless_blocklist_id: string

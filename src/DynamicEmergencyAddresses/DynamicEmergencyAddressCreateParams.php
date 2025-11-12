@@ -13,7 +13,7 @@ use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressCreateParams\Country
 /**
  * Creates a dynamic emergency address.
  *
- * @see Telnyx\DynamicEmergencyAddressesService::create()
+ * @see Telnyx\Services\DynamicEmergencyAddressesService::create()
  *
  * @phpstan-type DynamicEmergencyAddressCreateParamsShape = array{
  *   administrative_area: string,

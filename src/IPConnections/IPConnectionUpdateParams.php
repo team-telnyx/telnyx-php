@@ -18,7 +18,7 @@ use Telnyx\IPConnections\IPConnectionUpdateParams\WebhookAPIVersion;
 /**
  * Updates settings of an existing IP connection.
  *
- * @see Telnyx\IPConnectionsService::update()
+ * @see Telnyx\Services\IPConnectionsService::update()
  *
  * @phpstan-type IPConnectionUpdateParamsShape = array{
  *   active?: bool,

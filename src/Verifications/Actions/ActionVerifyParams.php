@@ -13,7 +13,7 @@ use Telnyx\Verifications\Actions\ActionVerifyParams\Status;
 /**
  * Verify verification code by ID.
  *
- * @see Telnyx\STAINLESS_FIXME_Verifications\ActionsService::verify()
+ * @see Telnyx\Services\Verifications\ActionsService::verify()
  *
  * @phpstan-type ActionVerifyParamsShape = array{
  *   code?: string, status?: Status|value-of<Status>

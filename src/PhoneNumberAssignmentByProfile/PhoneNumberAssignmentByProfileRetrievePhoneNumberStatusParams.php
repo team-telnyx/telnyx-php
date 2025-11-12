@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Check the status of the individual phone number/campaign assignments associated with the supplied `taskId`.
  *
- * @see Telnyx\PhoneNumberAssignmentByProfileService::retrievePhoneNumberStatus()
+ * @see Telnyx\Services\PhoneNumberAssignmentByProfileService::retrievePhoneNumberStatus()
  *
  * @phpstan-type PhoneNumberAssignmentByProfileRetrievePhoneNumberStatusParamsShape = array{
  *   page?: int, recordsPerPage?: int

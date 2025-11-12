@@ -24,7 +24,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * - `call.bridged` for Leg A
  * - `call.bridged` for Leg B
  *
- * @see Telnyx\STAINLESS_FIXME_Calls\ActionsService::bridge()
+ * @see Telnyx\Services\Calls\ActionsService::bridge()
  *
  * @phpstan-type ActionBridgeParamsShape = array{
  *   call_control_id: string,

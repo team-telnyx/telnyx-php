@@ -14,7 +14,7 @@ use Telnyx\NumberOrders\NumberOrderListParams\Page;
 /**
  * Get a paginated list of number orders.
  *
- * @see Telnyx\NumberOrdersService::list()
+ * @see Telnyx\Services\NumberOrdersService::list()
  *
  * @phpstan-type NumberOrderListParamsShape = array{filter?: Filter, page?: Page}
  */

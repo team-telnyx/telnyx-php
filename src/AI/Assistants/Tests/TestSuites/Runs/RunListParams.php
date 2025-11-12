@@ -13,7 +13,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Retrieves paginated history of test runs for a specific test suite with filtering options.
  *
- * @see Telnyx\STAINLESS_FIXME_AI\STAINLESS_FIXME_Assistants\STAINLESS_FIXME_Tests\STAINLESS_FIXME_TestSuites\RunsService::list()
+ * @see Telnyx\Services\AI\Assistants\Tests\TestSuites\RunsService::list()
  *
  * @phpstan-type RunListParamsShape = array{
  *   page?: Page, status?: string, test_suite_run_id?: string

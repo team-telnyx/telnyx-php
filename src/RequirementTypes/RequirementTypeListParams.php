@@ -14,7 +14,7 @@ use Telnyx\RequirementTypes\RequirementTypeListParams\Sort;
 /**
  * List all requirement types ordered by created_at descending.
  *
- * @see Telnyx\RequirementTypesService::list()
+ * @see Telnyx\Services\RequirementTypesService::list()
  *
  * @phpstan-type RequirementTypeListParamsShape = array{
  *   filter?: Filter, sort?: list<Sort|value-of<Sort>>

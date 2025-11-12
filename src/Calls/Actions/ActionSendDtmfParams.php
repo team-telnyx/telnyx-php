@@ -16,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * There are no webhooks associated with this command.
  *
- * @see Telnyx\STAINLESS_FIXME_Calls\ActionsService::sendDtmf()
+ * @see Telnyx\Services\Calls\ActionsService::sendDtmf()
  *
  * @phpstan-type ActionSendDtmfParamsShape = array{
  *   digits: string,

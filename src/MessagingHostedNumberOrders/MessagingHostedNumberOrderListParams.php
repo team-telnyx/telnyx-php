@@ -13,7 +13,7 @@ use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderListParams\Page
 /**
  * List messaging hosted number orders.
  *
- * @see Telnyx\MessagingHostedNumberOrdersService::list()
+ * @see Telnyx\Services\MessagingHostedNumberOrdersService::list()
  *
  * @phpstan-type MessagingHostedNumberOrderListParamsShape = array{page?: Page}
  */

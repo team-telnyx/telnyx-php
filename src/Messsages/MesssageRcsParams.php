@@ -15,7 +15,7 @@ use Telnyx\Messsages\MesssageRcsParams\Type;
 /**
  * Send an RCS message.
  *
- * @see Telnyx\MesssagesService::rcs()
+ * @see Telnyx\Services\MesssagesService::rcs()
  *
  * @phpstan-type MesssageRcsParamsShape = array{
  *   agent_id: string,

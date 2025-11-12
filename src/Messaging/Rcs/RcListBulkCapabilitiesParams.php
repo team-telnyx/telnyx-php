@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * List RCS capabilities of a given batch of phone numbers.
  *
- * @see Telnyx\STAINLESS_FIXME_Messaging\RcsService::listBulkCapabilities()
+ * @see Telnyx\Services\Messaging\RcsService::listBulkCapabilities()
  *
  * @phpstan-type RcListBulkCapabilitiesParamsShape = array{
  *   agent_id: string, phone_numbers: list<string>

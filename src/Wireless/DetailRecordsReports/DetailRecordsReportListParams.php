@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Returns the WDR Reports that match the given parameters.
  *
- * @see Telnyx\STAINLESS_FIXME_Wireless\DetailRecordsReportsService::list()
+ * @see Telnyx\Services\Wireless\DetailRecordsReportsService::list()
  *
  * @phpstan-type DetailRecordsReportListParamsShape = array{
  *   page_number_?: int, page_size_?: int

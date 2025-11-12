@@ -13,7 +13,7 @@ use Telnyx\OAuthClients\OAuthClientUpdateParams\AllowedGrantType;
 /**
  * Update an existing OAuth client.
  *
- * @see Telnyx\OAuthClientsService::update()
+ * @see Telnyx\Services\OAuthClientsService::update()
  *
  * @phpstan-type OAuthClientUpdateParamsShape = array{
  *   allowed_grant_types?: list<AllowedGrantType|value-of<AllowedGrantType>>,

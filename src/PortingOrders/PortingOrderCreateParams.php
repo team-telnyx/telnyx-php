@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Creates a new porting order object.
  *
- * @see Telnyx\PortingOrdersService::create()
+ * @see Telnyx\Services\PortingOrdersService::create()
  *
  * @phpstan-type PortingOrderCreateParamsShape = array{
  *   phone_numbers: list<string>,

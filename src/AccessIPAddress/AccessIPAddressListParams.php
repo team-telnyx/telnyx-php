@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * List all Access IP Addresses.
  *
- * @see Telnyx\AccessIPAddressService::list()
+ * @see Telnyx\Services\AccessIPAddressService::list()
  *
  * @phpstan-type AccessIPAddressListParamsShape = array{
  *   filter?: Filter, page?: Page

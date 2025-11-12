@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Retrieves a specific version of an assistant by assistant_id and version_id.
  *
- * @see Telnyx\STAINLESS_FIXME_AI\STAINLESS_FIXME_Assistants\VersionsService::retrieve()
+ * @see Telnyx\Services\AI\Assistants\VersionsService::retrieve()
  *
  * @phpstan-type VersionRetrieveParamsShape = array{
  *   assistant_id: string, include_mcp_servers?: bool

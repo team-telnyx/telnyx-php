@@ -13,7 +13,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * List available phone number blocks.
  *
- * @see Telnyx\AvailablePhoneNumberBlocksService::list()
+ * @see Telnyx\Services\AvailablePhoneNumberBlocksService::list()
  *
  * @phpstan-type AvailablePhoneNumberBlockListParamsShape = array{filter?: Filter}
  */

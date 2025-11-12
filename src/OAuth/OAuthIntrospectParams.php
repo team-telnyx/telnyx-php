@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Introspect an OAuth access token to check its validity and metadata.
  *
- * @see Telnyx\OAuthService::introspect()
+ * @see Telnyx\Services\OAuthService::introspect()
  *
  * @phpstan-type OAuthIntrospectParamsShape = array{token: string}
  */

@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Returns the details regarding a specific SIM card group.
  *
- * @see Telnyx\SimCardGroupsService::retrieve()
+ * @see Telnyx\Services\SimCardGroupsService::retrieve()
  *
  * @phpstan-type SimCardGroupRetrieveParamsShape = array{include_iccids?: bool}
  */

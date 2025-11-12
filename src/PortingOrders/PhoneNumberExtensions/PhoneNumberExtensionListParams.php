@@ -15,7 +15,7 @@ use Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionListParams\So
 /**
  * Returns a list of all phone number extensions of a porting order.
  *
- * @see Telnyx\STAINLESS_FIXME_PortingOrders\PhoneNumberExtensionsService::list()
+ * @see Telnyx\Services\PortingOrders\PhoneNumberExtensionsService::list()
  *
  * @phpstan-type PhoneNumberExtensionListParamsShape = array{
  *   filter?: Filter, page?: Page, sort?: Sort

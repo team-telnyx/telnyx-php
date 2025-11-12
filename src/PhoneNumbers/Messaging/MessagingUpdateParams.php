@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Update the messaging profile and/or messaging product of a phone number.
  *
- * @see Telnyx\STAINLESS_FIXME_PhoneNumbers\MessagingService::update()
+ * @see Telnyx\Services\PhoneNumbers\MessagingService::update()
  *
  * @phpstan-type MessagingUpdateParamsShape = array{
  *   messaging_product?: string, messaging_profile_id?: string

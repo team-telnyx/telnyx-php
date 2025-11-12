@@ -13,7 +13,7 @@ use Telnyx\Reports\MdrUsageReports\MdrUsageReportListParams\Page;
 /**
  * Fetch all messaging usage reports. Usage reports are aggregated messaging data for specified time period and breakdown.
  *
- * @see Telnyx\STAINLESS_FIXME_Reports\MdrUsageReportsService::list()
+ * @see Telnyx\Services\Reports\MdrUsageReportsService::list()
  *
  * @phpstan-type MdrUsageReportListParamsShape = array{page?: Page}
  */

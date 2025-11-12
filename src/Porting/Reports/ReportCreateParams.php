@@ -13,7 +13,7 @@ use Telnyx\Porting\Reports\ReportCreateParams\ReportType;
 /**
  * Generate reports about porting operations.
  *
- * @see Telnyx\STAINLESS_FIXME_Porting\ReportsService::create()
+ * @see Telnyx\Services\Porting\ReportsService::create()
  *
  * @phpstan-type ReportCreateParamsShape = array{
  *   params: ExportPortingOrdersCsvReport,

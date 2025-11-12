@@ -19,7 +19,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * - `call.dtmf.received` (you may receive many of these webhooks)
  * - `call.gather.ended`
  *
- * @see Telnyx\STAINLESS_FIXME_Calls\ActionsService::gather()
+ * @see Telnyx\Services\Calls\ActionsService::gather()
  *
  * @phpstan-type ActionGatherParamsShape = array{
  *   client_state?: string,

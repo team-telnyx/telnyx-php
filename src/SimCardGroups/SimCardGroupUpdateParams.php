@@ -13,7 +13,7 @@ use Telnyx\SimCardGroups\SimCardGroupUpdateParams\DataLimit;
 /**
  * Updates a SIM card group.
  *
- * @see Telnyx\SimCardGroupsService::update()
+ * @see Telnyx\Services\SimCardGroupsService::update()
  *
  * @phpstan-type SimCardGroupUpdateParamsShape = array{
  *   data_limit?: DataLimit, name?: string

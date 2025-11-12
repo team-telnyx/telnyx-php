@@ -14,7 +14,7 @@ use Telnyx\OAuth\OAuthRegisterParams\TokenEndpointAuthMethod;
 /**
  * Register a new OAuth client dynamically (RFC 7591).
  *
- * @see Telnyx\OAuthService::register()
+ * @see Telnyx\Services\OAuthService::register()
  *
  * @phpstan-type OAuthRegisterParamsShape = array{
  *   client_name?: string,

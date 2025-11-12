@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Lists conference participants.
  *
- * @see Telnyx\ConferencesService::listParticipants()
+ * @see Telnyx\Services\ConferencesService::listParticipants()
  *
  * @phpstan-type ConferenceListParticipantsParamsShape = array{
  *   filter?: Filter, page?: Page, region?: Region|value-of<Region>

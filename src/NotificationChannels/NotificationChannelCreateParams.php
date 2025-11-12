@@ -13,7 +13,7 @@ use Telnyx\NotificationChannels\NotificationChannelCreateParams\ChannelTypeID;
 /**
  * Create a notification channel.
  *
- * @see Telnyx\NotificationChannelsService::create()
+ * @see Telnyx\Services\NotificationChannelsService::create()
  *
  * @phpstan-type NotificationChannelCreateParamsShape = array{
  *   channel_destination?: string,

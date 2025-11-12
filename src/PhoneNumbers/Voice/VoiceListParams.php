@@ -15,7 +15,7 @@ use Telnyx\PhoneNumbers\Voice\VoiceListParams\Sort;
 /**
  * List phone numbers with voice settings.
  *
- * @see Telnyx\STAINLESS_FIXME_PhoneNumbers\VoiceService::list()
+ * @see Telnyx\Services\PhoneNumbers\VoiceService::list()
  *
  * @phpstan-type VoiceListParamsShape = array{
  *   filter?: Filter, page?: Page, sort?: Sort|value-of<Sort>

@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Get a list of previously-submitted tollfree verification requests.
  *
- * @see Telnyx\STAINLESS_FIXME_MessagingTollfree\STAINLESS_FIXME_Verification\RequestsService::list()
+ * @see Telnyx\Services\MessagingTollfree\Verification\RequestsService::list()
  *
  * @phpstan-type RequestListParamsShape = array{
  *   page: int,

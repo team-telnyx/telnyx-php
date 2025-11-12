@@ -17,7 +17,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * - `call.fork.stopped`
  *
- * @see Telnyx\STAINLESS_FIXME_Calls\ActionsService::stopForking()
+ * @see Telnyx\Services\Calls\ActionsService::stopForking()
  *
  * @phpstan-type ActionStopForkingParamsShape = array{
  *   client_state?: string,

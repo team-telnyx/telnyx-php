@@ -13,7 +13,7 @@ use Telnyx\Reports\MdrUsageReports\MdrUsageReportCreateParams\AggregationType;
 /**
  * Submit request for new new messaging usage report. This endpoint will pull and aggregate messaging data in specified time period.
  *
- * @see Telnyx\STAINLESS_FIXME_Reports\MdrUsageReportsService::create()
+ * @see Telnyx\Services\Reports\MdrUsageReportsService::create()
  *
  * @phpstan-type MdrUsageReportCreateParamsShape = array{
  *   aggregation_type: AggregationType|value-of<AggregationType>,

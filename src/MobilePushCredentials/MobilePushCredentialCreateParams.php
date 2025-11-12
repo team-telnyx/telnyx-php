@@ -13,7 +13,7 @@ use Telnyx\MobilePushCredentials\MobilePushCredentialCreateParams\Type;
 /**
  * Creates a new mobile push credential.
  *
- * @see Telnyx\MobilePushCredentialsService::create()
+ * @see Telnyx\Services\MobilePushCredentialsService::create()
  *
  * @phpstan-type MobilePushCredentialCreateParamsShape = array{
  *   alias: string,

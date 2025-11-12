@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Creates a new background job to delete a batch of numbers. At most one thousand numbers can be updated per API call.
  *
- * @see Telnyx\STAINLESS_FIXME_PhoneNumbers\JobsService::deleteBatch()
+ * @see Telnyx\Services\PhoneNumbers\JobsService::deleteBatch()
  *
  * @phpstan-type JobDeleteBatchParamsShape = array{phone_numbers: list<string>}
  */

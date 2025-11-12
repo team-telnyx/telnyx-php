@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Get the Usage Reports options for querying usage, including the products available and their respective metrics and dimensions.
  *
- * @see Telnyx\UsageReportsService::getOptions()
+ * @see Telnyx\Services\UsageReportsService::getOptions()
  *
  * @phpstan-type UsageReportGetOptionsParamsShape = array{
  *   product?: string, authorization_bearer?: string

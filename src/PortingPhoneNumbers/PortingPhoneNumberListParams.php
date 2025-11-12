@@ -14,7 +14,7 @@ use Telnyx\PortingPhoneNumbers\PortingPhoneNumberListParams\Page;
 /**
  * Returns a list of your porting phone numbers.
  *
- * @see Telnyx\PortingPhoneNumbersService::list()
+ * @see Telnyx\Services\PortingPhoneNumbersService::list()
  *
  * @phpstan-type PortingPhoneNumberListParamsShape = array{
  *   filter?: Filter, page?: Page

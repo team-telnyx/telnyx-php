@@ -14,7 +14,7 @@ use Telnyx\CredentialConnections\CredentialConnectionCreateParams\WebhookAPIVers
 /**
  * Creates a credential connection.
  *
- * @see Telnyx\CredentialConnectionsService::create()
+ * @see Telnyx\Services\CredentialConnectionsService::create()
  *
  * @phpstan-type CredentialConnectionCreateParamsShape = array{
  *   connection_name: string,

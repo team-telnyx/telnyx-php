@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Get Campaign Cost.
  *
- * @see Telnyx\STAINLESS_FIXME_Campaign\UsecaseService::getCost()
+ * @see Telnyx\Services\Campaign\UsecaseService::getCost()
  *
  * @phpstan-type UsecaseGetCostParamsShape = array{usecase: string}
  */

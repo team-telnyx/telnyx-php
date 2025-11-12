@@ -18,7 +18,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * - `conference.participant.left`
  *
- * @see Telnyx\STAINLESS_FIXME_Conferences\ActionsService::leave()
+ * @see Telnyx\Services\Conferences\ActionsService::leave()
  *
  * @phpstan-type ActionLeaveParamsShape = array{
  *   call_control_id: string,

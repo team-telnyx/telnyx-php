@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Retrieve an AI Assistant configuration by `assistant_id`.
  *
- * @see Telnyx\STAINLESS_FIXME_AI\AssistantsService::retrieve()
+ * @see Telnyx\Services\AI\AssistantsService::retrieve()
  *
  * @phpstan-type AssistantRetrieveParamsShape = array{
  *   call_control_id?: string,

@@ -14,7 +14,7 @@ use Telnyx\OAuthClients\OAuthClientListParams\FilterClientType;
 /**
  * Retrieve a paginated list of OAuth clients for the authenticated user.
  *
- * @see Telnyx\OAuthClientsService::list()
+ * @see Telnyx\Services\OAuthClientsService::list()
  *
  * @phpstan-type OAuthClientListParamsShape = array{
  *   filter_allowed_grant_types__contains_?: FilterAllowedGrantTypesContains|value-of<FilterAllowedGrantTypesContains>,

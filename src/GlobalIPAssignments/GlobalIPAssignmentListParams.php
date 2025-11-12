@@ -13,7 +13,7 @@ use Telnyx\GlobalIPAssignments\GlobalIPAssignmentListParams\Page;
 /**
  * List all Global IP assignments.
  *
- * @see Telnyx\GlobalIPAssignmentsService::list()
+ * @see Telnyx\Services\GlobalIPAssignmentsService::list()
  *
  * @phpstan-type GlobalIPAssignmentListParamsShape = array{page?: Page}
  */

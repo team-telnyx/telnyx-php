@@ -37,7 +37,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * - `call.machine.premium.detection.ended` if `answering_machine_detection=premium` was requested
  * - `call.machine.premium.greeting.ended` if `answering_machine_detection=premium` was requested and a beep was detected
  *
- * @see Telnyx\STAINLESS_FIXME_Calls\ActionsService::transfer()
+ * @see Telnyx\Services\Calls\ActionsService::transfer()
  *
  * @phpstan-type ActionTransferParamsShape = array{
  *   to: string,

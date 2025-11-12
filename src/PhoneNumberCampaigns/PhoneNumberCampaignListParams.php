@@ -14,7 +14,7 @@ use Telnyx\PhoneNumberCampaigns\PhoneNumberCampaignListParams\Sort;
 /**
  * Retrieve All Phone Number Campaigns.
  *
- * @see Telnyx\PhoneNumberCampaignsService::list()
+ * @see Telnyx\Services\PhoneNumberCampaignsService::list()
  *
  * @phpstan-type PhoneNumberCampaignListParamsShape = array{
  *   filter?: Filter, page?: int, recordsPerPage?: int, sort?: Sort|value-of<Sort>

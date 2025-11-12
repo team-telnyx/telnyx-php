@@ -15,7 +15,7 @@ use Telnyx\Texml\Accounts\Calls\CallSiprecJsonParams\Track;
 /**
  * Starts siprec session with specified parameters for call idientified by call_sid.
  *
- * @see Telnyx\STAINLESS_FIXME_Texml\STAINLESS_FIXME_Accounts\CallsService::siprecJson()
+ * @see Telnyx\Services\Texml\Accounts\CallsService::siprecJson()
  *
  * @phpstan-type CallSiprecJsonParamsShape = array{
  *   account_sid: string,

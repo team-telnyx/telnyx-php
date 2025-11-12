@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Return the details of an Upload request and its phone numbers.
  *
- * @see Telnyx\STAINLESS_FIXME_ExternalConnections\UploadsService::retrieve()
+ * @see Telnyx\Services\ExternalConnections\UploadsService::retrieve()
  *
  * @phpstan-type UploadRetrieveParamsShape = array{id: string}
  */

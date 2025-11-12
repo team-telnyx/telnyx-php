@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Updates requirements for a single phone number within a number order.
  *
- * @see Telnyx\NumberOrderPhoneNumbersService::updateRequirements()
+ * @see Telnyx\Services\NumberOrderPhoneNumbersService::updateRequirements()
  *
  * @phpstan-type NumberOrderPhoneNumberUpdateRequirementsParamsShape = array{
  *   regulatory_requirements?: list<UpdateRegulatoryRequirement>

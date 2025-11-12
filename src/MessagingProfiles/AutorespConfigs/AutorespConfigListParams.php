@@ -14,7 +14,7 @@ use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigListParams\UpdatedAt;
 /**
  * List Auto-Response Settings.
  *
- * @see Telnyx\STAINLESS_FIXME_MessagingProfiles\AutorespConfigsService::list()
+ * @see Telnyx\Services\MessagingProfiles\AutorespConfigsService::list()
  *
  * @phpstan-type AutorespConfigListParamsShape = array{
  *   country_code?: string, created_at?: CreatedAt, updated_at?: UpdatedAt

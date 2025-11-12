@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Create a new managed account owned by the authenticated user. You need to be explictly approved by Telnyx in order to become a manager account.
  *
- * @see Telnyx\ManagedAccountsService::create()
+ * @see Telnyx\Services\ManagedAccountsService::create()
  *
  * @phpstan-type ManagedAccountCreateParamsShape = array{
  *   business_name: string,

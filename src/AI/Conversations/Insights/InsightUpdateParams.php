@@ -13,7 +13,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Update an insight template.
  *
- * @see Telnyx\STAINLESS_FIXME_AI\STAINLESS_FIXME_Conversations\InsightsService::update()
+ * @see Telnyx\Services\AI\Conversations\InsightsService::update()
  *
  * @phpstan-type InsightUpdateParamsShape = array{
  *   instructions?: string,

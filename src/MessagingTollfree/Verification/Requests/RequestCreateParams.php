@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Submit a new tollfree verification request.
  *
- * @see Telnyx\STAINLESS_FIXME_MessagingTollfree\STAINLESS_FIXME_Verification\RequestsService::create()
+ * @see Telnyx\Services\MessagingTollfree\Verification\RequestsService::create()
  *
  * @phpstan-type RequestCreateParamsShape = array{
  *   additionalInformation: string,

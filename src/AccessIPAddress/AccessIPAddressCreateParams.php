@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Create new Access IP Address.
  *
- * @see Telnyx\AccessIPAddressService::create()
+ * @see Telnyx\Services\AccessIPAddressService::create()
  *
  * @phpstan-type AccessIPAddressCreateParamsShape = array{
  *   ip_address: string, description?: string

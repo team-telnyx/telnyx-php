@@ -14,7 +14,7 @@ use Telnyx\RoomRecordings\RoomRecordingListParams\Page;
 /**
  * View a list of room recordings.
  *
- * @see Telnyx\RoomRecordingsService::list()
+ * @see Telnyx\Services\RoomRecordingsService::list()
  *
  * @phpstan-type RoomRecordingListParamsShape = array{filter?: Filter, page?: Page}
  */

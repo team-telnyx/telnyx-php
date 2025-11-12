@@ -15,7 +15,7 @@ use Telnyx\Porting\LoaConfigurations\LoaConfigurationCreateParams\Logo;
 /**
  * Create a LOA configuration.
  *
- * @see Telnyx\STAINLESS_FIXME_Porting\LoaConfigurationsService::create()
+ * @see Telnyx\Services\Porting\LoaConfigurationsService::create()
  *
  * @phpstan-type LoaConfigurationCreateParamsShape = array{
  *   address: Address,

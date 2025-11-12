@@ -13,7 +13,7 @@ use Telnyx\CustomStorageCredentials\CustomStorageCredentialUpdateParams\Backend;
 /**
  * Updates a stored custom credentials configuration.
  *
- * @see Telnyx\CustomStorageCredentialsService::update()
+ * @see Telnyx\Services\CustomStorageCredentialsService::update()
  *
  * @phpstan-type CustomStorageCredentialUpdateParamsShape = array{
  *   backend: Backend|value-of<Backend>,

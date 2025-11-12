@@ -15,7 +15,7 @@ use Telnyx\NetworkCoverage\NetworkCoverageListParams\Page;
 /**
  * List all locations and the interfaces that region supports.
  *
- * @see Telnyx\NetworkCoverageService::list()
+ * @see Telnyx\Services\NetworkCoverageService::list()
  *
  * @phpstan-type NetworkCoverageListParamsShape = array{
  *   filter?: Filter, filters?: Filters, page?: Page

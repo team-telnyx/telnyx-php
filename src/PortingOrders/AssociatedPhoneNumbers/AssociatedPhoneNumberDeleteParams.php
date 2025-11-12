@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Deletes an associated phone number from a porting order.
  *
- * @see Telnyx\STAINLESS_FIXME_PortingOrders\AssociatedPhoneNumbersService::delete()
+ * @see Telnyx\Services\PortingOrders\AssociatedPhoneNumbersService::delete()
  *
  * @phpstan-type AssociatedPhoneNumberDeleteParamsShape = array{
  *   porting_order_id: string

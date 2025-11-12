@@ -14,7 +14,7 @@ use Telnyx\Rooms\Sessions\SessionList0Params\Page;
 /**
  * View a list of room sessions.
  *
- * @see Telnyx\STAINLESS_FIXME_Rooms\SessionsService::list0()
+ * @see Telnyx\Services\Rooms\SessionsService::list0()
  *
  * @phpstan-type SessionList0ParamsShape = array{
  *   filter?: Filter, include_participants?: bool, page?: Page

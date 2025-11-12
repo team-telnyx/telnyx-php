@@ -13,7 +13,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Resume conference recording.
  *
- * @see Telnyx\STAINLESS_FIXME_Conferences\ActionsService::recordResume()
+ * @see Telnyx\Services\Conferences\ActionsService::recordResume()
  *
  * @phpstan-type ActionRecordResumeParamsShape = array{
  *   command_id?: string, recording_id?: string, region?: Region|value-of<Region>

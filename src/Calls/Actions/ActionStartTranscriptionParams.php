@@ -21,7 +21,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * - `call.transcription`
  *
- * @see Telnyx\STAINLESS_FIXME_Calls\ActionsService::startTranscription()
+ * @see Telnyx\Services\Calls\ActionsService::startTranscription()
  *
  * @phpstan-type ActionStartTranscriptionParamsShape = array{
  *   client_state?: string,

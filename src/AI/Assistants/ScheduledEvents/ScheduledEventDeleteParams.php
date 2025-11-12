@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * If the event is pending, this will cancel the event. Otherwise, this will simply remove the record of the event.
  *
- * @see Telnyx\STAINLESS_FIXME_AI\STAINLESS_FIXME_Assistants\ScheduledEventsService::delete()
+ * @see Telnyx\Services\AI\Assistants\ScheduledEventsService::delete()
  *
  * @phpstan-type ScheduledEventDeleteParamsShape = array{assistant_id: string}
  */

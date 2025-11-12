@@ -16,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * has accepted. In other words, shared but pending campaigns are currently omitted
  * from the response from this endpoint.
  *
- * @see Telnyx\PartnerCampaignsService::listSharedByMe()
+ * @see Telnyx\Services\PartnerCampaignsService::listSharedByMe()
  *
  * @phpstan-type PartnerCampaignListSharedByMeParamsShape = array{
  *   page?: int, recordsPerPage?: int

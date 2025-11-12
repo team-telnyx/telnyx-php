@@ -13,7 +13,7 @@ use Telnyx\WirelessBlocklistValues\WirelessBlocklistValueListParams\Type;
 /**
  * Retrieve all wireless blocklist values for a given blocklist type.
  *
- * @see Telnyx\WirelessBlocklistValuesService::list()
+ * @see Telnyx\Services\WirelessBlocklistValuesService::list()
  *
  * @phpstan-type WirelessBlocklistValueListParamsShape = array{
  *   type: Type|value-of<Type>

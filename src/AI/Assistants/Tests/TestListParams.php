@@ -13,7 +13,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Retrieves a paginated list of assistant tests with optional filtering capabilities.
  *
- * @see Telnyx\STAINLESS_FIXME_AI\STAINLESS_FIXME_Assistants\TestsService::list()
+ * @see Telnyx\Services\AI\Assistants\TestsService::list()
  *
  * @phpstan-type TestListParamsShape = array{
  *   destination?: string,

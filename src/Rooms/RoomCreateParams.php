@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Synchronously create a Room.
  *
- * @see Telnyx\RoomsService::create()
+ * @see Telnyx\Services\RoomsService::create()
  *
  * @phpstan-type RoomCreateParamsShape = array{
  *   enable_recording?: bool,

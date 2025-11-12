@@ -13,7 +13,7 @@ use Telnyx\PortingOrders\Actions\ActionShareParams\Permissions;
 /**
  * Creates a sharing token for a porting order. The token can be used to share the porting order with non-Telnyx users.
  *
- * @see Telnyx\STAINLESS_FIXME_PortingOrders\ActionsService::share()
+ * @see Telnyx\Services\PortingOrders\ActionsService::share()
  *
  * @phpstan-type ActionShareParamsShape = array{
  *   expires_in_seconds?: int, permissions?: Permissions|value-of<Permissions>

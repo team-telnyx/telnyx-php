@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Updates settings of an existing call control application.
  *
- * @see Telnyx\CallControlApplicationsService::update()
+ * @see Telnyx\Services\CallControlApplicationsService::update()
  *
  * @phpstan-type CallControlApplicationUpdateParamsShape = array{
  *   application_name: string,

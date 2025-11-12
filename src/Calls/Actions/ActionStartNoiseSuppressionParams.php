@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Noise Suppression Start (BETA).
  *
- * @see Telnyx\STAINLESS_FIXME_Calls\ActionsService::startNoiseSuppression()
+ * @see Telnyx\Services\Calls\ActionsService::startNoiseSuppression()
  *
  * @phpstan-type ActionStartNoiseSuppressionParamsShape = array{
  *   client_state?: string,

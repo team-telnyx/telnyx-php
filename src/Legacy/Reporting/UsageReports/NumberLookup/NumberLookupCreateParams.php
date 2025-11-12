@@ -13,7 +13,7 @@ use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupCreateParams\A
 /**
  * Submit a new telco data usage report.
  *
- * @see Telnyx\STAINLESS_FIXME_Legacy\STAINLESS_FIXME_Reporting\STAINLESS_FIXME_UsageReports\NumberLookupService::create()
+ * @see Telnyx\Services\Legacy\Reporting\UsageReports\NumberLookupService::create()
  *
  * @phpstan-type NumberLookupCreateParamsShape = array{
  *   aggregationType?: AggregationType|value-of<AggregationType>,

@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Create a credential.
  *
- * @see Telnyx\TelephonyCredentialsService::create()
+ * @see Telnyx\Services\TelephonyCredentialsService::create()
  *
  * @phpstan-type TelephonyCredentialCreateParamsShape = array{
  *   connection_id: string, expires_at?: string, name?: string, tag?: string

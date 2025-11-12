@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Adds a test phone number to an RCS agent for testing purposes.
  *
- * @see Telnyx\STAINLESS_FIXME_Messaging\RcsService::inviteTestNumber()
+ * @see Telnyx\Services\Messaging\RcsService::inviteTestNumber()
  *
  * @phpstan-type RcInviteTestNumberParamsShape = array{id: string}
  */

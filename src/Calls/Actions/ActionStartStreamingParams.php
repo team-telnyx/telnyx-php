@@ -21,7 +21,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * Please find more details about media streaming messages specification under the [link](https://developers.telnyx.com/docs/voice/programmable-voice/media-streaming).
  *
- * @see Telnyx\STAINLESS_FIXME_Calls\ActionsService::startStreaming()
+ * @see Telnyx\Services\Calls\ActionsService::startStreaming()
  *
  * @phpstan-type ActionStartStreamingParamsShape = array{
  *   client_state?: string,

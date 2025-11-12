@@ -15,7 +15,7 @@ use Telnyx\FaxApplications\FaxApplicationListParams\Sort;
 /**
  * This endpoint returns a list of your Fax Applications inside the 'data' attribute of the response. You can adjust which applications are listed by using filters. Fax Applications are used to configure how you send and receive faxes using the Programmable Fax API with Telnyx.
  *
- * @see Telnyx\FaxApplicationsService::list()
+ * @see Telnyx\Services\FaxApplicationsService::list()
  *
  * @phpstan-type FaxApplicationListParamsShape = array{
  *   filter?: Filter, page?: Page, sort?: Sort|value-of<Sort>

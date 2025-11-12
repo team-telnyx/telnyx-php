@@ -15,7 +15,7 @@ use Telnyx\TexmlApplications\TexmlApplicationListParams\Sort;
 /**
  * Returns a list of your TeXML Applications.
  *
- * @see Telnyx\TexmlApplicationsService::list()
+ * @see Telnyx\Services\TexmlApplicationsService::list()
  *
  * @phpstan-type TexmlApplicationListParamsShape = array{
  *   filter?: Filter, page?: Page, sort?: Sort|value-of<Sort>

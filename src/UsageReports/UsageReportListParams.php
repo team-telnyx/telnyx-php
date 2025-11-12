@@ -14,7 +14,7 @@ use Telnyx\UsageReports\UsageReportListParams\Page;
 /**
  * Get Telnyx usage data by product, broken out by the specified dimensions.
  *
- * @see Telnyx\UsageReportsService::list()
+ * @see Telnyx\Services\UsageReportsService::list()
  *
  * @phpstan-type UsageReportListParamsShape = array{
  *   dimensions: list<string>,

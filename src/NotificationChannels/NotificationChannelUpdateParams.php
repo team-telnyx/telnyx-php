@@ -13,7 +13,7 @@ use Telnyx\NotificationChannels\NotificationChannelUpdateParams\ChannelTypeID;
 /**
  * Update a notification channel.
  *
- * @see Telnyx\NotificationChannelsService::update()
+ * @see Telnyx\Services\NotificationChannelsService::update()
  *
  * @phpstan-type NotificationChannelUpdateParamsShape = array{
  *   channel_destination?: string,

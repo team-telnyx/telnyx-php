@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Promotes a specific version to be the main/current version of the assistant. This will delete any existing canary deploy configuration and send all live production traffic to this version.
  *
- * @see Telnyx\STAINLESS_FIXME_AI\STAINLESS_FIXME_Assistants\VersionsService::promote()
+ * @see Telnyx\Services\AI\Assistants\VersionsService::promote()
  *
  * @phpstan-type VersionPromoteParamsShape = array{assistant_id: string}
  */

@@ -13,7 +13,7 @@ use Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateParams\Para
 /**
  * Initiates a specific action requirement for a porting order.
  *
- * @see Telnyx\STAINLESS_FIXME_PortingOrders\ActionRequirementsService::initiate()
+ * @see Telnyx\Services\PortingOrders\ActionRequirementsService::initiate()
  *
  * @phpstan-type ActionRequirementInitiateParamsShape = array{
  *   porting_order_id: string, params: Params

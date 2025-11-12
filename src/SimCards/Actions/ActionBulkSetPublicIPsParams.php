@@ -13,7 +13,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * This API triggers an asynchronous operation to set a public IP for each of the specified SIM cards.<br/>
  * For each SIM Card a SIM Card Action will be generated. The status of the SIM Card Action can be followed through the [List SIM Card Action](https://developers.telnyx.com/api/wireless/list-sim-card-actions) API.
  *
- * @see Telnyx\STAINLESS_FIXME_SimCards\ActionsService::bulkSetPublicIPs()
+ * @see Telnyx\Services\SimCards\ActionsService::bulkSetPublicIPs()
  *
  * @phpstan-type ActionBulkSetPublicIPsParamsShape = array{
  *   sim_card_ids: list<string>

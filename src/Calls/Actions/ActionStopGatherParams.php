@@ -16,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * - `call.gather.ended`
  *
- * @see Telnyx\STAINLESS_FIXME_Calls\ActionsService::stopGather()
+ * @see Telnyx\Services\Calls\ActionsService::stopGather()
  *
  * @phpstan-type ActionStopGatherParamsShape = array{
  *   client_state?: string, command_id?: string

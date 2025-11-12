@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Creates a new order for SIM cards.
  *
- * @see Telnyx\SimCardOrdersService::create()
+ * @see Telnyx\Services\SimCardOrdersService::create()
  *
  * @phpstan-type SimCardOrderCreateParamsShape = array{
  *   address_id: string, quantity: int

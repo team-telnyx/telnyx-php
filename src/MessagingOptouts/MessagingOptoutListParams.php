@@ -15,7 +15,7 @@ use Telnyx\MessagingOptouts\MessagingOptoutListParams\Page;
 /**
  * Retrieve a list of opt-out blocks.
  *
- * @see Telnyx\MessagingOptoutsService::list()
+ * @see Telnyx\Services\MessagingOptoutsService::list()
  *
  * @phpstan-type MessagingOptoutListParamsShape = array{
  *   created_at?: CreatedAt,

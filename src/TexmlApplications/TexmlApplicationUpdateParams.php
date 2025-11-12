@@ -18,7 +18,7 @@ use Telnyx\TexmlApplications\TexmlApplicationUpdateParams\VoiceMethod;
 /**
  * Updates settings of an existing TeXML Application.
  *
- * @see Telnyx\TexmlApplicationsService::update()
+ * @see Telnyx\Services\TexmlApplicationsService::update()
  *
  * @phpstan-type TexmlApplicationUpdateParamsShape = array{
  *   friendly_name: string,

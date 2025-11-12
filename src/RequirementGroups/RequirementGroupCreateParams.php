@@ -15,7 +15,7 @@ use Telnyx\RequirementGroups\RequirementGroupCreateParams\RegulatoryRequirement;
 /**
  * Create a new requirement group.
  *
- * @see Telnyx\RequirementGroupsService::create()
+ * @see Telnyx\Services\RequirementGroupsService::create()
  *
  * @phpstan-type RequirementGroupCreateParamsShape = array{
  *   action: Action|value-of<Action>,

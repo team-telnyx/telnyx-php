@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Return the details of an existing Civic Address with its Locations inside the 'data' attribute of the response.
  *
- * @see Telnyx\STAINLESS_FIXME_ExternalConnections\CivicAddressesService::retrieve()
+ * @see Telnyx\Services\ExternalConnections\CivicAddressesService::retrieve()
  *
  * @phpstan-type CivicAddressRetrieveParamsShape = array{id: string}
  */
