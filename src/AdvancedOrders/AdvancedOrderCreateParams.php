@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Create Advanced Order.
  *
- * @see Telnyx\AdvancedOrdersService::create()
+ * @see Telnyx\Services\AdvancedOrdersService::create()
  *
  * @phpstan-type AdvancedOrderCreateParamsShape = array{
  *   area_code?: string,

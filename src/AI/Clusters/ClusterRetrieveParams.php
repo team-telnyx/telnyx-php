@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Fetch a cluster.
  *
- * @see Telnyx\STAINLESS_FIXME_AI\ClustersService::retrieve()
+ * @see Telnyx\Services\AI\ClustersService::retrieve()
  *
  * @phpstan-type ClusterRetrieveParamsShape = array{
  *   show_subclusters?: bool, top_n_nodes?: int

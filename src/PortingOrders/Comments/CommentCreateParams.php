@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Creates a new comment for a porting order.
  *
- * @see Telnyx\STAINLESS_FIXME_PortingOrders\CommentsService::create()
+ * @see Telnyx\Services\PortingOrders\CommentsService::create()
  *
  * @phpstan-type CommentCreateParamsShape = array{body?: string}
  */

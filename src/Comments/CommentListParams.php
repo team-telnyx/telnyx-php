@@ -13,7 +13,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Retrieve all comments.
  *
- * @see Telnyx\CommentsService::list()
+ * @see Telnyx\Services\CommentsService::list()
  *
  * @phpstan-type CommentListParamsShape = array{filter?: Filter}
  */

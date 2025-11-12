@@ -13,7 +13,7 @@ use Telnyx\SubNumberOrders\SubNumberOrderListParams\Filter;
 /**
  * Get a paginated list of sub number orders.
  *
- * @see Telnyx\SubNumberOrdersService::list()
+ * @see Telnyx\Services\SubNumberOrdersService::list()
  *
  * @phpstan-type SubNumberOrderListParamsShape = array{filter?: Filter}
  */

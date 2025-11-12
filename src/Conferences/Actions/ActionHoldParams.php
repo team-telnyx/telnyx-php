@@ -13,7 +13,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Hold a list of participants in a conference call.
  *
- * @see Telnyx\STAINLESS_FIXME_Conferences\ActionsService::hold()
+ * @see Telnyx\Services\Conferences\ActionsService::hold()
  *
  * @phpstan-type ActionHoldParamsShape = array{
  *   audio_url?: string,

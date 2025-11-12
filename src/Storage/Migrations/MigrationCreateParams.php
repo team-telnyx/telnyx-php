@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Initiate a migration of data from an external provider into Telnyx Cloud Storage. Currently, only S3 is supported.
  *
- * @see Telnyx\STAINLESS_FIXME_Storage\MigrationsService::create()
+ * @see Telnyx\Services\Storage\MigrationsService::create()
  *
  * @phpstan-type MigrationCreateParamsShape = array{
  *   source_id: string,

@@ -13,7 +13,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Create a scheduled event for an assistant.
  *
- * @see Telnyx\STAINLESS_FIXME_AI\STAINLESS_FIXME_Assistants\ScheduledEventsService::create()
+ * @see Telnyx\Services\AI\Assistants\ScheduledEventsService::create()
  *
  * @phpstan-type ScheduledEventCreateParamsShape = array{
  *   scheduled_at_fixed_datetime: \DateTimeInterface,

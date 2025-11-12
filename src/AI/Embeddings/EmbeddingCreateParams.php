@@ -33,7 +33,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * This loader will split each article into paragraphs and save additional parameters relevant to Intercom docs, such as
  * `article_url` and `heading`. These values will be returned by the `/v2/ai/embeddings/similarity-search` endpoint in the `loader_metadata` field.
  *
- * @see Telnyx\STAINLESS_FIXME_AI\EmbeddingsService::create()
+ * @see Telnyx\Services\AI\EmbeddingsService::create()
  *
  * @phpstan-type EmbeddingCreateParamsShape = array{
  *   bucket_name: string,

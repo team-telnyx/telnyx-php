@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Update requirement group for a sub number order.
  *
- * @see Telnyx\SubNumberOrdersService::updateRequirementGroup()
+ * @see Telnyx\Services\SubNumberOrdersService::updateRequirementGroup()
  *
  * @phpstan-type SubNumberOrderUpdateRequirementGroupParamsShape = array{
  *   requirement_group_id: string

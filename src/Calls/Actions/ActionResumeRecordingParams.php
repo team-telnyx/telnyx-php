@@ -16,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * There are no webhooks associated with this command.
  *
- * @see Telnyx\STAINLESS_FIXME_Calls\ActionsService::resumeRecording()
+ * @see Telnyx\Services\Calls\ActionsService::resumeRecording()
  *
  * @phpstan-type ActionResumeRecordingParamsShape = array{
  *   client_state?: string, command_id?: string, recording_id?: string

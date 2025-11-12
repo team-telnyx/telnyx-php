@@ -15,7 +15,7 @@ use Telnyx\VerifyProfiles\VerifyProfileUpdateParams\SMS;
 /**
  * Update Verify profile.
  *
- * @see Telnyx\VerifyProfilesService::update()
+ * @see Telnyx\Services\VerifyProfilesService::update()
  *
  * @phpstan-type VerifyProfileUpdateParamsShape = array{
  *   call?: Call,

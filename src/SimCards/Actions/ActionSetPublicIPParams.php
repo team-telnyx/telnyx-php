@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *  The API will trigger an asynchronous operation called a SIM Card Action. The status of the SIM Card Action can be followed through the [List SIM Card Action](https://developers.telnyx.com/api/wireless/list-sim-card-actions) API. <br/><br/>
  *  Setting a Public IP to a SIM Card incurs a charge and will only succeed if the account has sufficient funds.
  *
- * @see Telnyx\STAINLESS_FIXME_SimCards\ActionsService::setPublicIP()
+ * @see Telnyx\Services\SimCards\ActionsService::setPublicIP()
  *
  * @phpstan-type ActionSetPublicIPParamsShape = array{region_code?: string}
  */

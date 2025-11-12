@@ -19,7 +19,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * - `conference.recording.saved`
  *
- * @see Telnyx\STAINLESS_FIXME_Conferences\ActionsService::recordStart()
+ * @see Telnyx\Services\Conferences\ActionsService::recordStart()
  *
  * @phpstan-type ActionRecordStartParamsShape = array{
  *   format: Format|value-of<Format>,

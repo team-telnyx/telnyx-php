@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Retrieves the details of an existing porting order.
  *
- * @see Telnyx\PortingOrdersService::retrieve()
+ * @see Telnyx\Services\PortingOrdersService::retrieve()
  *
  * @phpstan-type PortingOrderRetrieveParamsShape = array{
  *   include_phone_numbers?: bool

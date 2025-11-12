@@ -40,7 +40,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * When the `record` parameter is set to `record-from-answer`, the response will include a `recording_id` field.
  *
- * @see Telnyx\CallsService::dial()
+ * @see Telnyx\Services\CallsService::dial()
  *
  * @phpstan-type CallDialParamsShape = array{
  *   connection_id: string,

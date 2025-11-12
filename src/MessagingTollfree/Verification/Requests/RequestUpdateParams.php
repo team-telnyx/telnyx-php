@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Update an existing tollfree verification request. This is particularly useful when there are pending customer actions to be taken.
  *
- * @see Telnyx\STAINLESS_FIXME_MessagingTollfree\STAINLESS_FIXME_Verification\RequestsService::update()
+ * @see Telnyx\Services\MessagingTollfree\Verification\RequestsService::update()
  *
  * @phpstan-type RequestUpdateParamsShape = array{
  *   additionalInformation: string,

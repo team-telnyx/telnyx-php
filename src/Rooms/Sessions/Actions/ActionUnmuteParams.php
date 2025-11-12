@@ -14,7 +14,7 @@ use Telnyx\Rooms\Sessions\Actions\ActionUnmuteParams\Participants\UnionMember0;
 /**
  * Unmute participants in room session.
  *
- * @see Telnyx\STAINLESS_FIXME_Rooms\STAINLESS_FIXME_Sessions\ActionsService::unmute()
+ * @see Telnyx\Services\Rooms\Sessions\ActionsService::unmute()
  *
  * @phpstan-type ActionUnmuteParamsShape = array{
  *   exclude?: list<string>,

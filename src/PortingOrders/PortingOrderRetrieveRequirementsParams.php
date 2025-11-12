@@ -13,7 +13,7 @@ use Telnyx\PortingOrders\PortingOrderRetrieveRequirementsParams\Page;
 /**
  * Returns a list of all requirements based on country/number type for this porting order.
  *
- * @see Telnyx\PortingOrdersService::retrieveRequirements()
+ * @see Telnyx\Services\PortingOrdersService::retrieveRequirements()
  *
  * @phpstan-type PortingOrderRetrieveRequirementsParamsShape = array{page?: Page}
  */

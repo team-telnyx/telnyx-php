@@ -24,7 +24,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * - `call.playback.started`
  * - `call.playback.ended`
  *
- * @see Telnyx\STAINLESS_FIXME_Calls\ActionsService::startPlayback()
+ * @see Telnyx\Services\Calls\ActionsService::startPlayback()
  *
  * @phpstan-type ActionStartPlaybackParamsShape = array{
  *   audio_type?: AudioType|value-of<AudioType>,

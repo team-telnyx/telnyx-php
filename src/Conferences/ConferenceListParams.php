@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Lists conferences. Conferences are created on demand, and will expire after all participants have left the conference or after 4 hours regardless of the number of active participants. Conferences are listed in descending order by `expires_at`.
  *
- * @see Telnyx\ConferencesService::list()
+ * @see Telnyx\Services\ConferencesService::list()
  *
  * @phpstan-type ConferenceListParamsShape = array{
  *   filter?: Filter, page?: Page, region?: Region|value-of<Region>

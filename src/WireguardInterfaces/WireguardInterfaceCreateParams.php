@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Create a new WireGuard Interface. Current limitation of 10 interfaces per user can be created.
  *
- * @see Telnyx\WireguardInterfacesService::create()
+ * @see Telnyx\Services\WireguardInterfacesService::create()
  *
  * @phpstan-type WireguardInterfaceCreateParamsShape = array{
  *   network_id: string,

@@ -15,7 +15,7 @@ use Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams\Sort;
 /**
  * List customer service records.
  *
- * @see Telnyx\CustomerServiceRecordsService::list()
+ * @see Telnyx\Services\CustomerServiceRecordsService::list()
  *
  * @phpstan-type CustomerServiceRecordListParamsShape = array{
  *   filter?: Filter, page?: Page, sort?: Sort

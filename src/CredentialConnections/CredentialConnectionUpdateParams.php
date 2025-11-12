@@ -14,7 +14,7 @@ use Telnyx\CredentialConnections\CredentialConnectionUpdateParams\WebhookAPIVers
 /**
  * Updates settings of an existing credential connection.
  *
- * @see Telnyx\CredentialConnectionsService::update()
+ * @see Telnyx\Services\CredentialConnectionsService::update()
  *
  * @phpstan-type CredentialConnectionUpdateParamsShape = array{
  *   active?: bool,

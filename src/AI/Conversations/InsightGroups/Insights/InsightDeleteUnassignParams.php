@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Remove an insight from a group.
  *
- * @see Telnyx\STAINLESS_FIXME_AI\STAINLESS_FIXME_Conversations\STAINLESS_FIXME_InsightGroups\InsightsService::deleteUnassign()
+ * @see Telnyx\Services\AI\Conversations\InsightGroups\InsightsService::deleteUnassign()
  *
  * @phpstan-type InsightDeleteUnassignParamsShape = array{group_id: string}
  */

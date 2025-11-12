@@ -16,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * **Note**: Only one `filter[occurred_at]` can be passed.
  *
- * @see Telnyx\CallEventsService::list()
+ * @see Telnyx\Services\CallEventsService::list()
  *
  * @phpstan-type CallEventListParamsShape = array{filter?: Filter, page?: Page}
  */

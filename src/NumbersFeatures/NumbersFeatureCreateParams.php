@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Retrieve the features for a list of numbers.
  *
- * @see Telnyx\NumbersFeaturesService::create()
+ * @see Telnyx\Services\NumbersFeaturesService::create()
  *
  * @phpstan-type NumbersFeatureCreateParamsShape = array{
  *   phone_numbers: list<string>

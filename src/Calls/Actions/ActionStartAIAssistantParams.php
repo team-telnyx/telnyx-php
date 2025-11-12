@@ -19,7 +19,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * - `call.conversation.ended`
  * - `call.conversation_insights.generated`
  *
- * @see Telnyx\STAINLESS_FIXME_Calls\ActionsService::startAIAssistant()
+ * @see Telnyx\Services\Calls\ActionsService::startAIAssistant()
  *
  * @phpstan-type ActionStartAIAssistantParamsShape = array{
  *   assistant?: Assistant,

@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Download a porting order loa template.
  *
- * @see Telnyx\PortingOrdersService::retrieveLoaTemplate()
+ * @see Telnyx\Services\PortingOrdersService::retrieveLoaTemplate()
  *
  * @phpstan-type PortingOrderRetrieveLoaTemplateParamsShape = array{
  *   loa_configuration_id?: string

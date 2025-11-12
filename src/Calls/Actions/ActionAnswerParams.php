@@ -34,7 +34,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * When the `record` parameter is set to `record-from-answer`, the response will include a `recording_id` field.
  *
- * @see Telnyx\STAINLESS_FIXME_Calls\ActionsService::answer()
+ * @see Telnyx\Services\Calls\ActionsService::answer()
  *
  * @phpstan-type ActionAnswerParamsShape = array{
  *   billing_group_id?: string,

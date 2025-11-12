@@ -14,7 +14,7 @@ use Telnyx\RoomCompositions\RoomCompositionListParams\Page;
 /**
  * View a list of room compositions.
  *
- * @see Telnyx\RoomCompositionsService::list()
+ * @see Telnyx\Services\RoomCompositionsService::list()
  *
  * @phpstan-type RoomCompositionListParamsShape = array{
  *   filter?: Filter, page?: Page

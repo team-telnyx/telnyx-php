@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Converts the provided text to speech using the specified voice and returns audio data.
  *
- * @see Telnyx\TextToSpeechService::generateSpeech()
+ * @see Telnyx\Services\TextToSpeechService::generateSpeech()
  *
  * @phpstan-type TextToSpeechGenerateSpeechParamsShape = array{
  *   text: string, voice: string

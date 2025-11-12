@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Trigger Flash call verification.
  *
- * @see Telnyx\VerificationsService::triggerFlashcall()
+ * @see Telnyx\Services\VerificationsService::triggerFlashcall()
  *
  * @phpstan-type VerificationTriggerFlashcallParamsShape = array{
  *   phone_number: string, verify_profile_id: string, timeout_secs?: int

@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Submit verification code.
  *
- * @see Telnyx\STAINLESS_FIXME_VerifiedNumbers\ActionsService::submitVerificationCode()
+ * @see Telnyx\Services\VerifiedNumbers\ActionsService::submitVerificationCode()
  *
  * @phpstan-type ActionSubmitVerificationCodeParamsShape = array{
  *   verification_code: string

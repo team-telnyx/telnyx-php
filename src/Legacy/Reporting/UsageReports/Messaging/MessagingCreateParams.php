@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Creates a new legacy usage V2 MDR report request with the specified filters.
  *
- * @see Telnyx\STAINLESS_FIXME_Legacy\STAINLESS_FIXME_Reporting\STAINLESS_FIXME_UsageReports\MessagingService::create()
+ * @see Telnyx\Services\Legacy\Reporting\UsageReports\MessagingService::create()
  *
  * @phpstan-type MessagingCreateParamsShape = array{
  *   aggregation_type: int,

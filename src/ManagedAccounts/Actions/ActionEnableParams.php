@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Enables a managed account and its sub-users to use Telnyx services.
  *
- * @see Telnyx\STAINLESS_FIXME_ManagedAccounts\ActionsService::enable()
+ * @see Telnyx\Services\ManagedAccounts\ActionsService::enable()
  *
  * @phpstan-type ActionEnableParamsShape = array{reenable_all_connections?: bool}
  */

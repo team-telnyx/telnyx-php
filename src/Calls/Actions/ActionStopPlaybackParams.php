@@ -16,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * - `call.playback.ended` or `call.speak.ended`
  *
- * @see Telnyx\STAINLESS_FIXME_Calls\ActionsService::stopPlayback()
+ * @see Telnyx\Services\Calls\ActionsService::stopPlayback()
  *
  * @phpstan-type ActionStopPlaybackParamsShape = array{
  *   client_state?: string, command_id?: string, overlay?: bool, stop?: string

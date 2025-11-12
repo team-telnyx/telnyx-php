@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Update the amount of allocatable global outbound channels allocated to a specific managed account.
  *
- * @see Telnyx\ManagedAccountsService::updateGlobalChannelLimit()
+ * @see Telnyx\Services\ManagedAccountsService::updateGlobalChannelLimit()
  *
  * @phpstan-type ManagedAccountUpdateGlobalChannelLimitParamsShape = array{
  *   channel_limit?: int

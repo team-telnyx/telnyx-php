@@ -15,7 +15,7 @@ use Telnyx\Reports\ReportListMdrsParams\Status;
 /**
  * Fetch all Mdr records.
  *
- * @see Telnyx\ReportsService::listMdrs()
+ * @see Telnyx\Services\ReportsService::listMdrs()
  *
  * @phpstan-type ReportListMdrsParamsShape = array{
  *   id?: string,

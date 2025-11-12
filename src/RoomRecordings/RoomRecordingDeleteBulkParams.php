@@ -14,7 +14,7 @@ use Telnyx\RoomRecordings\RoomRecordingDeleteBulkParams\Page;
 /**
  * Delete several room recordings in a bulk.
  *
- * @see Telnyx\RoomRecordingsService::deleteBulk()
+ * @see Telnyx\Services\RoomRecordingsService::deleteBulk()
  *
  * @phpstan-type RoomRecordingDeleteBulkParamsShape = array{
  *   filter?: Filter, page?: Page

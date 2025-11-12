@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Deletes an additional document for a porting order.
  *
- * @see Telnyx\STAINLESS_FIXME_PortingOrders\AdditionalDocumentsService::delete()
+ * @see Telnyx\Services\PortingOrders\AdditionalDocumentsService::delete()
  *
  * @phpstan-type AdditionalDocumentDeleteParamsShape = array{id: string}
  */

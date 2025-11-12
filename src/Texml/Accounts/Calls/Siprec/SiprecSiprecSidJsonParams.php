@@ -13,7 +13,7 @@ use Telnyx\Texml\Accounts\Calls\Siprec\SiprecSiprecSidJsonParams\Status;
 /**
  * Updates siprec session identified by siprec_sid.
  *
- * @see Telnyx\STAINLESS_FIXME_Texml\STAINLESS_FIXME_Accounts\STAINLESS_FIXME_Calls\SiprecService::siprecSidJson()
+ * @see Telnyx\Services\Texml\Accounts\Calls\SiprecService::siprecSidJson()
  *
  * @phpstan-type SiprecSiprecSidJsonParamsShape = array{
  *   account_sid: string,

@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Create a notification profile.
  *
- * @see Telnyx\NotificationProfilesService::create()
+ * @see Telnyx\Services\NotificationProfilesService::create()
  *
  * @phpstan-type NotificationProfileCreateParamsShape = array{name?: string}
  */

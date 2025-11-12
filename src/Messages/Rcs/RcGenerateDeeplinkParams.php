@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Generate a deeplink URL that can be used to start an RCS conversation with a specific agent.
  *
- * @see Telnyx\STAINLESS_FIXME_Messages\RcsService::generateDeeplink()
+ * @see Telnyx\Services\Messages\RcsService::generateDeeplink()
  *
  * @phpstan-type RcGenerateDeeplinkParamsShape = array{
  *   body?: string, phone_number?: string

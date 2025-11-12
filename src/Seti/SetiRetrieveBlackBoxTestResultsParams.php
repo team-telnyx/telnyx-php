@@ -13,7 +13,7 @@ use Telnyx\Seti\SetiRetrieveBlackBoxTestResultsParams\Filter;
 /**
  * Returns the results of the various black box tests.
  *
- * @see Telnyx\SetiService::retrieveBlackBoxTestResults()
+ * @see Telnyx\Services\SetiService::retrieveBlackBoxTestResults()
  *
  * @phpstan-type SetiRetrieveBlackBoxTestResultsParamsShape = array{
  *   filter?: Filter

@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Permanently deletes a recording transcription.
  *
- * @see Telnyx\STAINLESS_FIXME_Texml\STAINLESS_FIXME_Accounts\STAINLESS_FIXME_Transcriptions\JsonService::deleteRecordingTranscriptionSidJson()
+ * @see Telnyx\Services\Texml\Accounts\Transcriptions\JsonService::deleteRecordingTranscriptionSidJson()
  *
  * @phpstan-type JsonDeleteRecordingTranscriptionSidJsonParamsShape = array{
  *   account_sid: string

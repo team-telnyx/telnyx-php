@@ -20,7 +20,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * If a bucket was embedded using a custom loader, such as `intercom`, the additional metadata will be returned in the
  * `loader_metadata` field.
  *
- * @see Telnyx\STAINLESS_FIXME_AI\EmbeddingsService::similaritySearch()
+ * @see Telnyx\Services\AI\EmbeddingsService::similaritySearch()
  *
  * @phpstan-type EmbeddingSimilaritySearchParamsShape = array{
  *   bucket_name: string, query: string, num_of_docs?: int

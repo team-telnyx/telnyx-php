@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Transcribe speech to text. This endpoint is consistent with the [OpenAI Transcription API](https://platform.openai.com/docs/api-reference/audio/createTranscription) and may be used with the OpenAI JS or Python SDK.
  *
- * @see Telnyx\STAINLESS_FIXME_AI\AudioService::transcribe()
+ * @see Telnyx\Services\AI\AudioService::transcribe()
  *
  * @phpstan-type AudioTranscribeParamsShape = array{
  *   model: Model|value-of<Model>,

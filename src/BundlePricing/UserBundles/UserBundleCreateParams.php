@@ -13,7 +13,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Creates multiple user bundles for the user.
  *
- * @see Telnyx\STAINLESS_FIXME_BundlePricing\UserBundlesService::create()
+ * @see Telnyx\Services\BundlePricing\UserBundlesService::create()
  *
  * @phpstan-type UserBundleCreateParamsShape = array{
  *   idempotency_key?: string, items?: list<Item>, authorization_bearer?: string

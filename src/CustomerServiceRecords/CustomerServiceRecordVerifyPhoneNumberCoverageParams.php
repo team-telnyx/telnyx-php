@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Verify the coverage for a list of phone numbers.
  *
- * @see Telnyx\CustomerServiceRecordsService::verifyPhoneNumberCoverage()
+ * @see Telnyx\Services\CustomerServiceRecordsService::verifyPhoneNumberCoverage()
  *
  * @phpstan-type CustomerServiceRecordVerifyPhoneNumberCoverageParamsShape = array{
  *   phone_numbers: list<string>

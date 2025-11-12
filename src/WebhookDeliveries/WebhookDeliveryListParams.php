@@ -14,7 +14,7 @@ use Telnyx\WebhookDeliveries\WebhookDeliveryListParams\Page;
 /**
  * Lists webhook_deliveries for the authenticated user.
  *
- * @see Telnyx\WebhookDeliveriesService::list()
+ * @see Telnyx\Services\WebhookDeliveriesService::list()
  *
  * @phpstan-type WebhookDeliveryListParamsShape = array{
  *   filter?: Filter, page?: Page

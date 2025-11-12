@@ -13,7 +13,7 @@ use Telnyx\Media\MediaListParams\Filter;
 /**
  * Returns a list of stored media files.
  *
- * @see Telnyx\MediaService::list()
+ * @see Telnyx\Services\MediaService::list()
  *
  * @phpstan-type MediaListParamsShape = array{filter?: Filter}
  */

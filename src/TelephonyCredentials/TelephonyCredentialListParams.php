@@ -14,7 +14,7 @@ use Telnyx\TelephonyCredentials\TelephonyCredentialListParams\Page;
 /**
  * List all On-demand Credentials.
  *
- * @see Telnyx\TelephonyCredentialsService::list()
+ * @see Telnyx\Services\TelephonyCredentialsService::list()
  *
  * @phpstan-type TelephonyCredentialListParamsShape = array{
  *   filter?: Filter, page?: Page

@@ -13,7 +13,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * List all billing groups.
  *
- * @see Telnyx\BillingGroupsService::list()
+ * @see Telnyx\Services\BillingGroupsService::list()
  *
  * @phpstan-type BillingGroupListParamsShape = array{page?: Page}
  */

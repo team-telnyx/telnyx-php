@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Create a new insight group.
  *
- * @see Telnyx\STAINLESS_FIXME_AI\STAINLESS_FIXME_Conversations\InsightGroupsService::insightGroups()
+ * @see Telnyx\Services\AI\Conversations\InsightGroupsService::insightGroups()
  *
  * @phpstan-type InsightGroupInsightGroupsParamsShape = array{
  *   name: string, description?: string, webhook?: string

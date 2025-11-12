@@ -13,7 +13,7 @@ use Telnyx\NumberOrders\NumberOrderCreateParams\PhoneNumber;
 /**
  * Creates a phone number order.
  *
- * @see Telnyx\NumberOrdersService::create()
+ * @see Telnyx\Services\NumberOrdersService::create()
  *
  * @phpstan-type NumberOrderCreateParamsShape = array{
  *   billing_group_id?: string,

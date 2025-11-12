@@ -13,7 +13,7 @@ use Telnyx\MessagingURLDomains\MessagingURLDomainListParams\Page;
 /**
  * List messaging URL domains.
  *
- * @see Telnyx\MessagingURLDomainsService::list()
+ * @see Telnyx\Services\MessagingURLDomainsService::list()
  *
  * @phpstan-type MessagingURLDomainListParamsShape = array{page?: Page}
  */

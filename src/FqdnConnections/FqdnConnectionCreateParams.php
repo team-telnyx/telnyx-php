@@ -16,7 +16,7 @@ use Telnyx\CredentialConnections\EncryptedMedia;
 /**
  * Creates a FQDN connection.
  *
- * @see Telnyx\FqdnConnectionsService::create()
+ * @see Telnyx\Services\FqdnConnectionsService::create()
  *
  * @phpstan-type FqdnConnectionCreateParamsShape = array{
  *   connection_name: string,

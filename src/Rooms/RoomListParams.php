@@ -14,7 +14,7 @@ use Telnyx\Rooms\RoomListParams\Page;
 /**
  * View a list of rooms.
  *
- * @see Telnyx\RoomsService::list()
+ * @see Telnyx\Services\RoomsService::list()
  *
  * @phpstan-type RoomListParamsShape = array{
  *   filter?: Filter, include_sessions?: bool, page?: Page

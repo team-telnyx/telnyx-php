@@ -14,7 +14,7 @@ use Telnyx\ShortCodes\ShortCodeListParams\Page;
 /**
  * List short codes.
  *
- * @see Telnyx\ShortCodesService::list()
+ * @see Telnyx\Services\ShortCodesService::list()
  *
  * @phpstan-type ShortCodeListParamsShape = array{filter?: Filter, page?: Page}
  */

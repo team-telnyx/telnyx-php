@@ -14,7 +14,7 @@ use Telnyx\Portouts\Events\EventListParams\Page;
 /**
  * Returns a list of all port-out events.
  *
- * @see Telnyx\STAINLESS_FIXME_Portouts\EventsService::list()
+ * @see Telnyx\Services\Portouts\EventsService::list()
  *
  * @phpstan-type EventListParamsShape = array{filter?: Filter, page?: Page}
  */

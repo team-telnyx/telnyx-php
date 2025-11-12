@@ -15,7 +15,7 @@ use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileListParams\Sort;
 /**
  * Get all outbound voice profiles belonging to the user that match the given filters.
  *
- * @see Telnyx\OutboundVoiceProfilesService::list()
+ * @see Telnyx\Services\OutboundVoiceProfilesService::list()
  *
  * @phpstan-type OutboundVoiceProfileListParamsShape = array{
  *   filter?: Filter, page?: Page, sort?: Sort|value-of<Sort>

@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Retrieve a paginated list of OAuth grants for the authenticated user.
  *
- * @see Telnyx\OAuthGrantsService::list()
+ * @see Telnyx\Services\OAuthGrantsService::list()
  *
  * @phpstan-type OAuthGrantListParamsShape = array{
  *   page_number_?: int, page_size_?: int

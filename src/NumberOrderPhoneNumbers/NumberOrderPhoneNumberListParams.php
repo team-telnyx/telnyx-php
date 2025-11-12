@@ -13,7 +13,7 @@ use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberListParams\Filter;
 /**
  * Get a list of phone numbers associated to orders.
  *
- * @see Telnyx\NumberOrderPhoneNumbersService::list()
+ * @see Telnyx\Services\NumberOrderPhoneNumbersService::list()
  *
  * @phpstan-type NumberOrderPhoneNumberListParamsShape = array{filter?: Filter}
  */

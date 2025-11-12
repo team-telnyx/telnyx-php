@@ -14,7 +14,7 @@ use Telnyx\OAuthClients\OAuthClientCreateParams\ClientType;
 /**
  * Create a new OAuth client.
  *
- * @see Telnyx\OAuthClientsService::create()
+ * @see Telnyx\Services\OAuthClientsService::create()
  *
  * @phpstan-type OAuthClientCreateParamsShape = array{
  *   allowed_grant_types: list<AllowedGrantType|value-of<AllowedGrantType>>,

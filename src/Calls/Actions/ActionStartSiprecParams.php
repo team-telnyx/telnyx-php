@@ -20,7 +20,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * - `siprec.stopped`
  * - `siprec.failed`
  *
- * @see Telnyx\STAINLESS_FIXME_Calls\ActionsService::startSiprec()
+ * @see Telnyx\Services\Calls\ActionsService::startSiprec()
  *
  * @phpstan-type ActionStartSiprecParamsShape = array{
  *   client_state?: string,

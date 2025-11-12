@@ -14,7 +14,7 @@ use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointListParams\Page;
 /**
  * Returns the dynamic emergency endpoints according to filters.
  *
- * @see Telnyx\DynamicEmergencyEndpointsService::list()
+ * @see Telnyx\Services\DynamicEmergencyEndpointsService::list()
  *
  * @phpstan-type DynamicEmergencyEndpointListParamsShape = array{
  *   filter?: Filter, page?: Page

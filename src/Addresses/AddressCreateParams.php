@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Creates an address.
  *
- * @see Telnyx\AddressesService::create()
+ * @see Telnyx\Services\AddressesService::create()
  *
  * @phpstan-type AddressCreateParamsShape = array{
  *   business_name: string,

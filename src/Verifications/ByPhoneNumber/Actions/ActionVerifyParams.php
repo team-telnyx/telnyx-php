@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Verify verification code by phone number.
  *
- * @see Telnyx\STAINLESS_FIXME_Verifications\STAINLESS_FIXME_ByPhoneNumber\ActionsService::verify()
+ * @see Telnyx\Services\Verifications\ByPhoneNumber\ActionsService::verify()
  *
  * @phpstan-type ActionVerifyParamsShape = array{
  *   code: string, verify_profile_id: string

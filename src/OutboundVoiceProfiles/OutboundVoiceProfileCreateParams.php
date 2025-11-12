@@ -13,7 +13,7 @@ use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileCreateParams\CallingWindow;
 /**
  * Create an outbound voice profile.
  *
- * @see Telnyx\OutboundVoiceProfilesService::create()
+ * @see Telnyx\Services\OutboundVoiceProfilesService::create()
  *
  * @phpstan-type OutboundVoiceProfileCreateParamsShape = array{
  *   name: string,

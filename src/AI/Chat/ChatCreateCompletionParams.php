@@ -18,7 +18,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Chat with a language model. This endpoint is consistent with the [OpenAI Chat Completions API](https://platform.openai.com/docs/api-reference/chat) and may be used with the OpenAI JS or Python SDK.
  *
- * @see Telnyx\STAINLESS_FIXME_AI\ChatService::createCompletion()
+ * @see Telnyx\Services\AI\ChatService::createCompletion()
  *
  * @phpstan-type ChatCreateCompletionParamsShape = array{
  *   messages: list<Message>,

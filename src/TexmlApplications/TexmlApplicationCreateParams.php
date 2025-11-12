@@ -18,7 +18,7 @@ use Telnyx\TexmlApplications\TexmlApplicationCreateParams\VoiceMethod;
 /**
  * Creates a TeXML Application.
  *
- * @see Telnyx\TexmlApplicationsService::create()
+ * @see Telnyx\Services\TexmlApplicationsService::create()
  *
  * @phpstan-type TexmlApplicationCreateParamsShape = array{
  *   friendly_name: string,

@@ -14,7 +14,7 @@ use Telnyx\Portouts\PortoutListParams\Page;
 /**
  * Returns the portout requests according to filters.
  *
- * @see Telnyx\PortoutsService::list()
+ * @see Telnyx\Services\PortoutsService::list()
  *
  * @phpstan-type PortoutListParamsShape = array{filter?: Filter, page?: Page}
  */

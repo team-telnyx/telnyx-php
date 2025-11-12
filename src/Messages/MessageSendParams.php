@@ -17,7 +17,7 @@ use Telnyx\Messages\MessageSendParams\Type;
  * Current messaging resources include: long-code, short-code, number-pool, and
  * alphanumeric-sender-id.
  *
- * @see Telnyx\MessagesService::send()
+ * @see Telnyx\Services\MessagesService::send()
  *
  * @phpstan-type MessageSendParamsShape = array{
  *   to: string,

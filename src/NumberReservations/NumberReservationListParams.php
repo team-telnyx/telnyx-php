@@ -14,7 +14,7 @@ use Telnyx\NumberReservations\NumberReservationListParams\Page;
 /**
  * Gets a paginated list of phone number reservations.
  *
- * @see Telnyx\NumberReservationsService::list()
+ * @see Telnyx\Services\NumberReservationsService::list()
  *
  * @phpstan-type NumberReservationListParamsShape = array{
  *   filter?: Filter, page?: Page

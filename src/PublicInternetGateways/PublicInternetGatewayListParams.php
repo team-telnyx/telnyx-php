@@ -14,7 +14,7 @@ use Telnyx\PublicInternetGateways\PublicInternetGatewayListParams\Page;
 /**
  * List all Public Internet Gateways.
  *
- * @see Telnyx\PublicInternetGatewaysService::list()
+ * @see Telnyx\Services\PublicInternetGatewaysService::list()
  *
  * @phpstan-type PublicInternetGatewayListParamsShape = array{
  *   filter?: Filter, page?: Page

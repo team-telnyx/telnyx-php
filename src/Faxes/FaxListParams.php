@@ -14,7 +14,7 @@ use Telnyx\Faxes\FaxListParams\Page;
 /**
  * View a list of faxes.
  *
- * @see Telnyx\FaxesService::list()
+ * @see Telnyx\Services\FaxesService::list()
  *
  * @phpstan-type FaxListParamsShape = array{filter?: Filter, page?: Page}
  */

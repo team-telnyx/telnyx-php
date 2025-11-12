@@ -14,7 +14,7 @@ use Telnyx\ExternalConnections\ExternalConnectionListParams\Page;
 /**
  * This endpoint returns a list of your External Connections inside the 'data' attribute of the response. External Connections are used by Telnyx customers to seamless configure SIP trunking integrations with Telnyx Partners, through External Voice Integrations in Mission Control Portal.
  *
- * @see Telnyx\ExternalConnectionsService::list()
+ * @see Telnyx\Services\ExternalConnectionsService::list()
  *
  * @phpstan-type ExternalConnectionListParamsShape = array{
  *   filter?: Filter, page?: Page

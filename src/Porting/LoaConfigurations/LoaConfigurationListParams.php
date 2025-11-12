@@ -13,7 +13,7 @@ use Telnyx\Porting\LoaConfigurations\LoaConfigurationListParams\Page;
 /**
  * List the LOA configurations.
  *
- * @see Telnyx\STAINLESS_FIXME_Porting\LoaConfigurationsService::list()
+ * @see Telnyx\Services\Porting\LoaConfigurationsService::list()
  *
  * @phpstan-type LoaConfigurationListParamsShape = array{page?: Page}
  */

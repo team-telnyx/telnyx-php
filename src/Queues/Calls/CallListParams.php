@@ -13,7 +13,7 @@ use Telnyx\Queues\Calls\CallListParams\Page;
 /**
  * Retrieve the list of calls in an existing queue.
  *
- * @see Telnyx\STAINLESS_FIXME_Queues\CallsService::list()
+ * @see Telnyx\Services\Queues\CallsService::list()
  *
  * @phpstan-type CallListParamsShape = array{page?: Page}
  */

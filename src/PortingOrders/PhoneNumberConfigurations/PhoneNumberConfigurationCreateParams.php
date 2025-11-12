@@ -13,7 +13,7 @@ use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationCreat
 /**
  * Creates a list of phone number configurations.
  *
- * @see Telnyx\STAINLESS_FIXME_PortingOrders\PhoneNumberConfigurationsService::create()
+ * @see Telnyx\Services\PortingOrders\PhoneNumberConfigurationsService::create()
  *
  * @phpstan-type PhoneNumberConfigurationCreateParamsShape = array{
  *   phone_number_configurations?: list<PhoneNumberConfiguration>

@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Retrieve a scheduled event by event ID.
  *
- * @see Telnyx\STAINLESS_FIXME_AI\STAINLESS_FIXME_Assistants\ScheduledEventsService::retrieve()
+ * @see Telnyx\Services\AI\Assistants\ScheduledEventsService::retrieve()
  *
  * @phpstan-type ScheduledEventRetrieveParamsShape = array{assistant_id: string}
  */

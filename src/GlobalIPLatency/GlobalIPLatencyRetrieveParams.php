@@ -13,7 +13,7 @@ use Telnyx\GlobalIPLatency\GlobalIPLatencyRetrieveParams\Filter;
 /**
  * Global IP Latency Metrics.
  *
- * @see Telnyx\GlobalIPLatencyService::retrieve()
+ * @see Telnyx\Services\GlobalIPLatencyService::retrieve()
  *
  * @phpstan-type GlobalIPLatencyRetrieveParamsShape = array{filter?: Filter}
  */

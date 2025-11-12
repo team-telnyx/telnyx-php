@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Permanently removes a specific version of an assistant. Can not delete main version.
  *
- * @see Telnyx\STAINLESS_FIXME_AI\STAINLESS_FIXME_Assistants\VersionsService::delete()
+ * @see Telnyx\Services\AI\Assistants\VersionsService::delete()
  *
  * @phpstan-type VersionDeleteParamsShape = array{assistant_id: string}
  */

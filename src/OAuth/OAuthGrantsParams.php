@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Create an OAuth authorization grant.
  *
- * @see Telnyx\OAuthService::grants()
+ * @see Telnyx\Services\OAuthService::grants()
  *
  * @phpstan-type OAuthGrantsParamsShape = array{
  *   allowed: bool, consent_token: string

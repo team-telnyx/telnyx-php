@@ -13,7 +13,7 @@ use Telnyx\PortingOrders\ActivationJobs\ActivationJobListParams\Page;
 /**
  * Returns a list of your porting activation jobs.
  *
- * @see Telnyx\STAINLESS_FIXME_PortingOrders\ActivationJobsService::list()
+ * @see Telnyx\Services\PortingOrders\ActivationJobsService::list()
  *
  * @phpstan-type ActivationJobListParamsShape = array{page?: Page}
  */

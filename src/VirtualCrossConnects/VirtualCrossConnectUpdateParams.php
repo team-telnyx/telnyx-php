@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Update the Virtual Cross Connect.<br /><br />Cloud IPs can only be patched during the `created` state, as GCE will only inform you of your generated IP once the pending connection requested has been accepted. Once the Virtual Cross Connect has moved to `provisioning`, the IPs can no longer be patched.<br /><br />Once the Virtual Cross Connect has moved to `provisioned` and you are ready to enable routing, you can toggle the routing announcements to `true`.
  *
- * @see Telnyx\VirtualCrossConnectsService::update()
+ * @see Telnyx\Services\VirtualCrossConnectsService::update()
  *
  * @phpstan-type VirtualCrossConnectUpdateParamsShape = array{
  *   primary_cloud_ip?: string,

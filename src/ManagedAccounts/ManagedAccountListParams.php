@@ -15,7 +15,7 @@ use Telnyx\ManagedAccounts\ManagedAccountListParams\Sort;
 /**
  * Lists the accounts managed by the current user. Users need to be explictly approved by Telnyx in order to become manager accounts.
  *
- * @see Telnyx\ManagedAccountsService::list()
+ * @see Telnyx\Services\ManagedAccountsService::list()
  *
  * @phpstan-type ManagedAccountListParamsShape = array{
  *   filter?: Filter,

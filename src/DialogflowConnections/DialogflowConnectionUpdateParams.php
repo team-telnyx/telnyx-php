@@ -13,7 +13,7 @@ use Telnyx\DialogflowConnections\DialogflowConnectionUpdateParams\DialogflowAPI;
 /**
  * Updates a stored Dialogflow Connection.
  *
- * @see Telnyx\DialogflowConnectionsService::update()
+ * @see Telnyx\Services\DialogflowConnectionsService::update()
  *
  * @phpstan-type DialogflowConnectionUpdateParamsShape = array{
  *   service_account: array<string,mixed>,

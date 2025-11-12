@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Synchronously update a Room.
  *
- * @see Telnyx\RoomsService::update()
+ * @see Telnyx\Services\RoomsService::update()
  *
  * @phpstan-type RoomUpdateParamsShape = array{
  *   enable_recording?: bool,

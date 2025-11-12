@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * Register the SIM cards associated with the provided registration codes to the current user's account.<br/><br/>
  * If <code>sim_card_group_id</code> is provided, the SIM cards will be associated with that group. Otherwise, the default group for the current user will be used.<br/><br/>.
  *
- * @see Telnyx\STAINLESS_FIXME_Actions\RegisterService::create()
+ * @see Telnyx\Services\Actions\RegisterService::create()
  *
  * @phpstan-type RegisterCreateParamsShape = array{
  *   registration_codes: list<string>,

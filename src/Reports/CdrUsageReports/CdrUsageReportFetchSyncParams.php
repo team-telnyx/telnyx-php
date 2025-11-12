@@ -14,7 +14,7 @@ use Telnyx\Reports\CdrUsageReports\CdrUsageReportFetchSyncParams\ProductBreakdow
 /**
  * Generate and fetch voice usage report synchronously. This endpoint will both generate and fetch the voice report over a specified time period. No polling is necessary but the response may take up to a couple of minutes.
  *
- * @see Telnyx\STAINLESS_FIXME_Reports\CdrUsageReportsService::fetchSync()
+ * @see Telnyx\Services\Reports\CdrUsageReportsService::fetchSync()
  *
  * @phpstan-type CdrUsageReportFetchSyncParamsShape = array{
  *   aggregation_type: AggregationType|value-of<AggregationType>,

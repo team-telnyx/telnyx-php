@@ -15,7 +15,7 @@ use Telnyx\PartnerCampaigns\PartnerCampaignListParams\Sort;
  *
  * This endpoint is currently limited to only returning shared campaigns that Telnyx has accepted. In other words, shared but pending campaigns are currently omitted from the response from this endpoint.
  *
- * @see Telnyx\PartnerCampaignsService::list()
+ * @see Telnyx\Services\PartnerCampaignsService::list()
  *
  * @phpstan-type PartnerCampaignListParamsShape = array{
  *   page?: int, recordsPerPage?: int, sort?: Sort|value-of<Sort>

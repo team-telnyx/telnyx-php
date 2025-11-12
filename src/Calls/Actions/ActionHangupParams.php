@@ -17,7 +17,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * - `call.hangup`
  * - `call.recording.saved`
  *
- * @see Telnyx\STAINLESS_FIXME_Calls\ActionsService::hangup()
+ * @see Telnyx\Services\Calls\ActionsService::hangup()
  *
  * @phpstan-type ActionHangupParamsShape = array{
  *   client_state?: string, command_id?: string

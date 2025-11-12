@@ -15,7 +15,7 @@ use Telnyx\Texml\Calls\CallUpdateParams\StatusCallbackMethod;
 /**
  * Update TeXML call. Please note that the keys present in the payload MUST BE formatted in CamelCase as specified in the example.
  *
- * @see Telnyx\STAINLESS_FIXME_Texml\CallsService::update()
+ * @see Telnyx\Services\Texml\CallsService::update()
  *
  * @phpstan-type CallUpdateParamsShape = array{
  *   FallbackMethod?: \Telnyx\Texml\Calls\CallUpdateParams\FallbackMethod|value-of<\Telnyx\Texml\Calls\CallUpdateParams\FallbackMethod>,

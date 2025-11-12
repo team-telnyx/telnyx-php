@@ -14,7 +14,7 @@ use Telnyx\ExternalConnections\ExternalConnectionUpdateParams\Outbound;
 /**
  * Updates settings of an existing External Connection based on the parameters of the request.
  *
- * @see Telnyx\ExternalConnectionsService::update()
+ * @see Telnyx\Services\ExternalConnectionsService::update()
  *
  * @phpstan-type ExternalConnectionUpdateParamsShape = array{
  *   outbound: Outbound,

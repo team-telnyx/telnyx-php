@@ -15,7 +15,7 @@ use Telnyx\FaxApplications\FaxApplicationUpdateParams\Outbound;
 /**
  * Updates settings of an existing Fax Application based on the parameters of the request.
  *
- * @see Telnyx\FaxApplicationsService::update()
+ * @see Telnyx\Services\FaxApplicationsService::update()
  *
  * @phpstan-type FaxApplicationUpdateParamsShape = array{
  *   application_name: string,

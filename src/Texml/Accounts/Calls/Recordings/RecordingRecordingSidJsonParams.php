@@ -13,7 +13,7 @@ use Telnyx\Texml\Accounts\Calls\Recordings\RecordingRecordingSidJsonParams\Statu
 /**
  * Updates recording resource for particular call.
  *
- * @see Telnyx\STAINLESS_FIXME_Texml\STAINLESS_FIXME_Accounts\STAINLESS_FIXME_Calls\RecordingsService::recordingSidJson()
+ * @see Telnyx\Services\Texml\Accounts\Calls\RecordingsService::recordingSidJson()
  *
  * @phpstan-type RecordingRecordingSidJsonParamsShape = array{
  *   account_sid: string,

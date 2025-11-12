@@ -13,7 +13,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * This API lists a paginated collection of bulk SIM card actions. A bulk SIM card action contains details about a collection of individual SIM card actions.
  *
- * @see Telnyx\BulkSimCardActionsService::list()
+ * @see Telnyx\Services\BulkSimCardActionsService::list()
  *
  * @phpstan-type BulkSimCardActionListParamsShape = array{
  *   filter_action_type_?: FilterActionType|value-of<FilterActionType>,

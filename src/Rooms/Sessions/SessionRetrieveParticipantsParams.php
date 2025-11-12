@@ -14,7 +14,7 @@ use Telnyx\Rooms\Sessions\SessionRetrieveParticipantsParams\Page;
 /**
  * View a list of room participants.
  *
- * @see Telnyx\STAINLESS_FIXME_Rooms\SessionsService::retrieveParticipants()
+ * @see Telnyx\Services\Rooms\SessionsService::retrieveParticipants()
  *
  * @phpstan-type SessionRetrieveParticipantsParamsShape = array{
  *   filter?: Filter, page?: Page

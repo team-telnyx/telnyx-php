@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Retrieve all wireless regions for the given product.
  *
- * @see Telnyx\WirelessService::retrieveRegions()
+ * @see Telnyx\Services\WirelessService::retrieveRegions()
  *
  * @phpstan-type WirelessRetrieveRegionsParamsShape = array{product: string}
  */

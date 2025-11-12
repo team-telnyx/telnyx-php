@@ -13,7 +13,7 @@ use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter;
 /**
  * Creates a new MDR detailed report request with the specified filters.
  *
- * @see Telnyx\STAINLESS_FIXME_Legacy\STAINLESS_FIXME_Reporting\STAINLESS_FIXME_BatchDetailRecords\MessagingService::create()
+ * @see Telnyx\Services\Legacy\Reporting\BatchDetailRecords\MessagingService::create()
  *
  * @phpstan-type MessagingCreateParamsShape = array{
  *   end_time: \DateTimeInterface,

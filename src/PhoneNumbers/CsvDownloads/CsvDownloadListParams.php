@@ -13,7 +13,7 @@ use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadListParams\Page;
 /**
  * List CSV downloads.
  *
- * @see Telnyx\STAINLESS_FIXME_PhoneNumbers\CsvDownloadsService::list()
+ * @see Telnyx\Services\PhoneNumbers\CsvDownloadsService::list()
  *
  * @phpstan-type CsvDownloadListParamsShape = array{page?: Page}
  */

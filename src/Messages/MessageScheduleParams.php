@@ -17,7 +17,7 @@ use Telnyx\Messages\MessageScheduleParams\Type;
  * Current messaging resources include: long-code, short-code, number-pool, and
  * alphanumeric-sender-id.
  *
- * @see Telnyx\MessagesService::schedule()
+ * @see Telnyx\Services\MessagesService::schedule()
  *
  * @phpstan-type MessageScheduleParamsShape = array{
  *   to: string,

@@ -13,7 +13,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Retrieve a detailed breakdown of monthly charges for phone numbers in a specified date range. The date range cannot exceed 31 days.
  *
- * @see Telnyx\ChargesBreakdownService::retrieve()
+ * @see Telnyx\Services\ChargesBreakdownService::retrieve()
  *
  * @phpstan-type ChargesBreakdownRetrieveParamsShape = array{
  *   start_date: \DateTimeInterface,

@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Creates a phone number block order.
  *
- * @see Telnyx\NumberBlockOrdersService::create()
+ * @see Telnyx\Services\NumberBlockOrdersService::create()
  *
  * @phpstan-type NumberBlockOrderCreateParamsShape = array{
  *   range: int,

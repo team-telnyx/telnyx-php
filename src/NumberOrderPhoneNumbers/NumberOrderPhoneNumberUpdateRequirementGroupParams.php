@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Update requirement group for a phone number order.
  *
- * @see Telnyx\NumberOrderPhoneNumbersService::updateRequirementGroup()
+ * @see Telnyx\Services\NumberOrderPhoneNumbersService::updateRequirementGroup()
  *
  * @phpstan-type NumberOrderPhoneNumberUpdateRequirementGroupParamsShape = array{
  *   requirement_group_id: string

@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Stop real-time transcription.
  *
- * @see Telnyx\STAINLESS_FIXME_Calls\ActionsService::stopTranscription()
+ * @see Telnyx\Services\Calls\ActionsService::stopTranscription()
  *
  * @phpstan-type ActionStopTranscriptionParamsShape = array{
  *   client_state?: string, command_id?: string

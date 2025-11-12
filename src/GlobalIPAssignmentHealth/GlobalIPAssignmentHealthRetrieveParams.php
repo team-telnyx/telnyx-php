@@ -13,7 +13,7 @@ use Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthRetrieveParams\Filte
 /**
  * Global IP Assignment Health Check Metrics.
  *
- * @see Telnyx\GlobalIPAssignmentHealthService::retrieve()
+ * @see Telnyx\Services\GlobalIPAssignmentHealthService::retrieve()
  *
  * @phpstan-type GlobalIPAssignmentHealthRetrieveParamsShape = array{
  *   filter?: Filter

@@ -14,7 +14,7 @@ use Telnyx\MobileNetworkOperators\MobileNetworkOperatorListParams\Page;
 /**
  * Telnyx has a set of GSM mobile operators partners that are available through our mobile network roaming. This resource is entirely managed by Telnyx and may change over time. That means that this resource won't allow any write operations for it. Still, it's available so it can be used as a support resource that can be related to other resources or become a configuration option.
  *
- * @see Telnyx\MobileNetworkOperatorsService::list()
+ * @see Telnyx\Services\MobileNetworkOperatorsService::list()
  *
  * @phpstan-type MobileNetworkOperatorListParamsShape = array{
  *   filter?: Filter, page?: Page

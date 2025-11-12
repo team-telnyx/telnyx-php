@@ -15,7 +15,7 @@ use Telnyx\ExternalConnections\ExternalConnectionCreateParams\Outbound;
 /**
  * Creates a new External Connection based on the parameters sent in the request. The external_sip_connection and outbound voice profile id are required. Once created, you can assign phone numbers to your application using the `/phone_numbers` endpoint.
  *
- * @see Telnyx\ExternalConnectionsService::create()
+ * @see Telnyx\Services\ExternalConnectionsService::create()
  *
  * @phpstan-type ExternalConnectionCreateParamsShape = array{
  *   external_sip_connection: ExternalSipConnection|value-of<ExternalSipConnection>,

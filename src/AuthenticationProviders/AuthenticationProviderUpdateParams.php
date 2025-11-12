@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Updates settings of an existing authentication provider.
  *
- * @see Telnyx\AuthenticationProvidersService::update()
+ * @see Telnyx\Services\AuthenticationProvidersService::update()
  *
  * @phpstan-type AuthenticationProviderUpdateParamsShape = array{
  *   active?: bool,

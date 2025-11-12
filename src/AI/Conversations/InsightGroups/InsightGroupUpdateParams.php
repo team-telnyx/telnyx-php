@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Update an insight template group.
  *
- * @see Telnyx\STAINLESS_FIXME_AI\STAINLESS_FIXME_Conversations\InsightGroupsService::update()
+ * @see Telnyx\Services\AI\Conversations\InsightGroupsService::update()
  *
  * @phpstan-type InsightGroupUpdateParamsShape = array{
  *   description?: string, name?: string, webhook?: string

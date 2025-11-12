@@ -14,7 +14,7 @@ use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberCreateParam
 /**
  * Creates a new associated phone number for a porting order. This is used for partial porting in GB to specify which phone numbers should be kept or disconnected.
  *
- * @see Telnyx\STAINLESS_FIXME_PortingOrders\AssociatedPhoneNumbersService::create()
+ * @see Telnyx\Services\PortingOrders\AssociatedPhoneNumbersService::create()
  *
  * @phpstan-type AssociatedPhoneNumberCreateParamsShape = array{
  *   action: Action|value-of<Action>, phone_number_range: PhoneNumberRange

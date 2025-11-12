@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Returns a list of your connections irrespective of type.
  *
- * @see Telnyx\ConnectionsService::list()
+ * @see Telnyx\Services\ConnectionsService::list()
  *
  * @phpstan-type ConnectionListParamsShape = array{
  *   filter?: Filter, page?: Page, sort?: Sort|value-of<Sort>

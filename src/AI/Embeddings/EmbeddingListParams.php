@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Retrieve tasks for the user that are either `queued`, `processing`, `failed`, `success` or `partial_success` based on the query string. Defaults to `queued` and `processing`.
  *
- * @see Telnyx\STAINLESS_FIXME_AI\EmbeddingsService::list()
+ * @see Telnyx\Services\AI\EmbeddingsService::list()
  *
  * @phpstan-type EmbeddingListParamsShape = array{status?: list<string>}
  */

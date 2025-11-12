@@ -13,7 +13,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Returns all user bundles that aren't in use.
  *
- * @see Telnyx\STAINLESS_FIXME_BundlePricing\UserBundlesService::listUnused()
+ * @see Telnyx\Services\BundlePricing\UserBundlesService::listUnused()
  *
  * @phpstan-type UserBundleListUnusedParamsShape = array{
  *   filter?: Filter, authorization_bearer?: string

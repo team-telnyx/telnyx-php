@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Return a list of call control applications.
  *
- * @see Telnyx\CallControlApplicationsService::list()
+ * @see Telnyx\Services\CallControlApplicationsService::list()
  *
  * @phpstan-type CallControlApplicationListParamsShape = array{
  *   filter?: Filter, page?: Page, sort?: Sort|value-of<Sort>

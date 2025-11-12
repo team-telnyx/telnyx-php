@@ -14,7 +14,7 @@ use Telnyx\NotificationChannels\NotificationChannelListParams\Page;
 /**
  * List notification channels.
  *
- * @see Telnyx\NotificationChannelsService::list()
+ * @see Telnyx\Services\NotificationChannelsService::list()
  *
  * @phpstan-type NotificationChannelListParamsShape = array{
  *   filter?: Filter, page?: Page

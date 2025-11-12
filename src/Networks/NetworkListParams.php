@@ -14,7 +14,7 @@ use Telnyx\Networks\NetworkListParams\Page;
 /**
  * List all Networks.
  *
- * @see Telnyx\NetworksService::list()
+ * @see Telnyx\Services\NetworksService::list()
  *
  * @phpstan-type NetworkListParamsShape = array{filter?: Filter, page?: Page}
  */

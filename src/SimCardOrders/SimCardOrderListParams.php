@@ -14,7 +14,7 @@ use Telnyx\SimCardOrders\SimCardOrderListParams\Page;
 /**
  * Get all SIM card orders according to filters.
  *
- * @see Telnyx\SimCardOrdersService::list()
+ * @see Telnyx\Services\SimCardOrdersService::list()
  *
  * @phpstan-type SimCardOrderListParamsShape = array{filter?: Filter, page?: Page}
  */

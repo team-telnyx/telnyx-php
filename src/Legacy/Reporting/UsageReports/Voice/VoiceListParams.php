@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Fetch all previous requests for cdr usage reports.
  *
- * @see Telnyx\STAINLESS_FIXME_Legacy\STAINLESS_FIXME_Reporting\STAINLESS_FIXME_UsageReports\VoiceService::list()
+ * @see Telnyx\Services\Legacy\Reporting\UsageReports\VoiceService::list()
  *
  * @phpstan-type VoiceListParamsShape = array{page?: int, per_page?: int}
  */

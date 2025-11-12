@@ -13,7 +13,7 @@ use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigUpdateParams\Op;
 /**
  * Update Auto-Response Setting.
  *
- * @see Telnyx\STAINLESS_FIXME_MessagingProfiles\AutorespConfigsService::update()
+ * @see Telnyx\Services\MessagingProfiles\AutorespConfigsService::update()
  *
  * @phpstan-type AutorespConfigUpdateParamsShape = array{
  *   profile_id: string,

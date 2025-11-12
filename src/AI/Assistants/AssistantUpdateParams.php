@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Update an AI Assistant's attributes.
  *
- * @see Telnyx\STAINLESS_FIXME_AI\AssistantsService::update()
+ * @see Telnyx\Services\AI\AssistantsService::update()
  *
  * @phpstan-type AssistantUpdateParamsShape = array{
  *   description?: string,

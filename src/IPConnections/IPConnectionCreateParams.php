@@ -19,7 +19,7 @@ use Telnyx\IPConnections\IPConnectionCreateParams\WebhookAPIVersion;
 /**
  * Creates an IP connection.
  *
- * @see Telnyx\IPConnectionsService::create()
+ * @see Telnyx\Services\IPConnectionsService::create()
  *
  * @phpstan-type IPConnectionCreateParamsShape = array{
  *   active?: bool,

@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Get a paginated list of user bundles.
  *
- * @see Telnyx\STAINLESS_FIXME_BundlePricing\UserBundlesService::list()
+ * @see Telnyx\Services\BundlePricing\UserBundlesService::list()
  *
  * @phpstan-type UserBundleListParamsShape = array{
  *   filter?: Filter, page?: Page, authorization_bearer?: string

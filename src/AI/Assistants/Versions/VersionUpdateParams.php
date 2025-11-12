@@ -27,7 +27,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Updates the configuration of a specific assistant version. Can not update main version.
  *
- * @see Telnyx\STAINLESS_FIXME_AI\STAINLESS_FIXME_Assistants\VersionsService::update()
+ * @see Telnyx\Services\AI\Assistants\VersionsService::update()
  *
  * @phpstan-type VersionUpdateParamsShape = array{
  *   assistant_id: string,

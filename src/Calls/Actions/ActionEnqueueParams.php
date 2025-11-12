@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Put the call in a queue.
  *
- * @see Telnyx\STAINLESS_FIXME_Calls\ActionsService::enqueue()
+ * @see Telnyx\Services\Calls\ActionsService::enqueue()
  *
  * @phpstan-type ActionEnqueueParamsShape = array{
  *   queue_name: string,

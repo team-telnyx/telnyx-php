@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Update voicemail settings for a phone number.
  *
- * @see Telnyx\STAINLESS_FIXME_PhoneNumbers\VoicemailService::update()
+ * @see Telnyx\Services\PhoneNumbers\VoicemailService::update()
  *
  * @phpstan-type VoicemailUpdateParamsShape = array{enabled?: bool, pin?: string}
  */

@@ -13,7 +13,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Get scheduled events for an assistant with pagination and filtering.
  *
- * @see Telnyx\STAINLESS_FIXME_AI\STAINLESS_FIXME_Assistants\ScheduledEventsService::list()
+ * @see Telnyx\Services\AI\Assistants\ScheduledEventsService::list()
  *
  * @phpstan-type ScheduledEventListParamsShape = array{
  *   conversation_channel?: ConversationChannelType|value-of<ConversationChannelType>,

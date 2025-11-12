@@ -13,7 +13,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Unhold a list of participants in a conference call.
  *
- * @see Telnyx\STAINLESS_FIXME_Conferences\ActionsService::unhold()
+ * @see Telnyx\Services\Conferences\ActionsService::unhold()
  *
  * @phpstan-type ActionUnholdParamsShape = array{
  *   call_control_ids: list<string>, region?: Region|value-of<Region>

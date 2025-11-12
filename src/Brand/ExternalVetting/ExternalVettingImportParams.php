@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * vetting provider. If the vetting provider confirms validity of the record, it will be
  * saved with the brand and will be considered for future campaign qualification.
  *
- * @see Telnyx\STAINLESS_FIXME_Brand\ExternalVettingService::import()
+ * @see Telnyx\Services\Brand\ExternalVettingService::import()
  *
  * @phpstan-type ExternalVettingImportParamsShape = array{
  *   evpId: string, vettingId: string, vettingToken?: string

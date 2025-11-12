@@ -13,7 +13,7 @@ use Telnyx\PortingOrders\VerificationCodes\VerificationCodeVerifyParams\Verifica
 /**
  * Verifies the verification code for a list of phone numbers.
  *
- * @see Telnyx\STAINLESS_FIXME_PortingOrders\VerificationCodesService::verify()
+ * @see Telnyx\Services\PortingOrders\VerificationCodesService::verify()
  *
  * @phpstan-type VerificationCodeVerifyParamsShape = array{
  *   verification_codes?: list<VerificationCode>

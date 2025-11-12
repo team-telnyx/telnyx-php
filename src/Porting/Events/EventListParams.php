@@ -14,7 +14,7 @@ use Telnyx\Porting\Events\EventListParams\Page;
 /**
  * Returns a list of all porting events.
  *
- * @see Telnyx\STAINLESS_FIXME_Porting\EventsService::list()
+ * @see Telnyx\Services\Porting\EventsService::list()
  *
  * @phpstan-type EventListParamsShape = array{filter?: Filter, page?: Page}
  */

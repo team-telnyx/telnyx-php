@@ -13,7 +13,7 @@ use Telnyx\MessagingProfiles\MessagingProfileListShortCodesParams\Page;
 /**
  * List short codes associated with a messaging profile.
  *
- * @see Telnyx\MessagingProfilesService::listShortCodes()
+ * @see Telnyx\Services\MessagingProfilesService::listShortCodes()
  *
  * @phpstan-type MessagingProfileListShortCodesParamsShape = array{page?: Page}
  */

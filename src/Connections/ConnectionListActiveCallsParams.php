@@ -13,7 +13,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Lists all active calls for given connection. Acceptable connections are either SIP connections with webhook_url or xml_request_url, call control or texml. Returned results are cursor paginated.
  *
- * @see Telnyx\ConnectionsService::listActiveCalls()
+ * @see Telnyx\Services\ConnectionsService::listActiveCalls()
  *
  * @phpstan-type ConnectionListActiveCallsParamsShape = array{page?: Page}
  */

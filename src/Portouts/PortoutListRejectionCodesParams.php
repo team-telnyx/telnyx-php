@@ -13,7 +13,7 @@ use Telnyx\Portouts\PortoutListRejectionCodesParams\Filter;
 /**
  * Given a port-out ID, list rejection codes that are eligible for that port-out.
  *
- * @see Telnyx\PortoutsService::listRejectionCodes()
+ * @see Telnyx\Services\PortoutsService::listRejectionCodes()
  *
  * @phpstan-type PortoutListRejectionCodesParamsShape = array{filter?: Filter}
  */

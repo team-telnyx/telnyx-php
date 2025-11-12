@@ -13,7 +13,7 @@ use Telnyx\TextToSpeech\TextToSpeechListVoicesParams\Provider;
 /**
  * Returns a list of voices that can be used with the text to speech commands.
  *
- * @see Telnyx\TextToSpeechService::listVoices()
+ * @see Telnyx\Services\TextToSpeechService::listVoices()
  *
  * @phpstan-type TextToSpeechListVoicesParamsShape = array{
  *   elevenlabs_api_key_ref?: string, provider?: Provider|value-of<Provider>

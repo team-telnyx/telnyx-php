@@ -14,7 +14,7 @@ use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressListParams\Page;
 /**
  * Returns the dynamic emergency addresses according to filters.
  *
- * @see Telnyx\DynamicEmergencyAddressesService::list()
+ * @see Telnyx\Services\DynamicEmergencyAddressesService::list()
  *
  * @phpstan-type DynamicEmergencyAddressListParamsShape = array{
  *   filter?: Filter, page?: Page

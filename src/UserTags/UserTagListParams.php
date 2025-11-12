@@ -13,7 +13,7 @@ use Telnyx\UserTags\UserTagListParams\Filter;
 /**
  * List all user tags.
  *
- * @see Telnyx\UserTagsService::list()
+ * @see Telnyx\Services\UserTagsService::list()
  *
  * @phpstan-type UserTagListParamsShape = array{filter?: Filter}
  */

@@ -13,7 +13,7 @@ use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationUpdateParam
 /**
  * Updates information for a SIM Card Data Usage Notification.
  *
- * @see Telnyx\SimCardDataUsageNotificationsService::update()
+ * @see Telnyx\Services\SimCardDataUsageNotificationsService::update()
  *
  * @phpstan-type SimCardDataUsageNotificationUpdateParamsShape = array{
  *   sim_card_id?: string, threshold?: Threshold

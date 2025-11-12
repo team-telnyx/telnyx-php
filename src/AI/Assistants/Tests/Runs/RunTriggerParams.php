@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Initiates immediate execution of a specific assistant test.
  *
- * @see Telnyx\STAINLESS_FIXME_AI\STAINLESS_FIXME_Assistants\STAINLESS_FIXME_Tests\RunsService::trigger()
+ * @see Telnyx\Services\AI\Assistants\Tests\RunsService::trigger()
  *
  * @phpstan-type RunTriggerParamsShape = array{destination_version_id?: string}
  */

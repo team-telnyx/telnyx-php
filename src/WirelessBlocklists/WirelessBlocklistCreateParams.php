@@ -13,7 +13,7 @@ use Telnyx\WirelessBlocklists\WirelessBlocklistCreateParams\Type;
 /**
  * Create a Wireless Blocklist to prevent SIMs from connecting to certain networks.
  *
- * @see Telnyx\WirelessBlocklistsService::create()
+ * @see Telnyx\Services\WirelessBlocklistsService::create()
  *
  * @phpstan-type WirelessBlocklistCreateParamsShape = array{
  *   name: string, type: Type|value-of<Type>, values: list<string>

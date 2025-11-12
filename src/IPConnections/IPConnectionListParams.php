@@ -15,7 +15,7 @@ use Telnyx\IPConnections\IPConnectionListParams\Sort;
 /**
  * Returns a list of your IP connections.
  *
- * @see Telnyx\IPConnectionsService::list()
+ * @see Telnyx\Services\IPConnectionsService::list()
  *
  * @phpstan-type IPConnectionListParamsShape = array{
  *   filter?: Filter, page?: Page, sort?: Sort|value-of<Sort>

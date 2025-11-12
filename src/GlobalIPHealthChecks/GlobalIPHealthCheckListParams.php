@@ -13,7 +13,7 @@ use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckListParams\Page;
 /**
  * List all Global IP health checks.
  *
- * @see Telnyx\GlobalIPHealthChecksService::list()
+ * @see Telnyx\Services\GlobalIPHealthChecksService::list()
  *
  * @phpstan-type GlobalIPHealthCheckListParamsShape = array{page?: Page}
  */

@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Update the details of a specific FQDN.
  *
- * @see Telnyx\FqdnsService::update()
+ * @see Telnyx\Services\FqdnsService::update()
  *
  * @phpstan-type FqdnUpdateParamsShape = array{
  *   connection_id?: string,

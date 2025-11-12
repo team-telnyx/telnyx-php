@@ -13,7 +13,7 @@ use Telnyx\NumberLookup\NumberLookupRetrieveParams\Type;
 /**
  * Returns information about the provided phone number.
  *
- * @see Telnyx\NumberLookupService::retrieve()
+ * @see Telnyx\Services\NumberLookupService::retrieve()
  *
  * @phpstan-type NumberLookupRetrieveParamsShape = array{
  *   type?: Type|value-of<Type>
