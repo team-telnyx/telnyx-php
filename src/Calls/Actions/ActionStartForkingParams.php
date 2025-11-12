@@ -21,7 +21,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * - `call.fork.started`
  * - `call.fork.stopped`
  *
- * @see Telnyx\Calls\Actions->startForking
+ * @see Telnyx\STAINLESS_FIXME_Calls\ActionsService::startForking()
  *
  * @phpstan-type ActionStartForkingParamsShape = array{
  *   client_state?: string,

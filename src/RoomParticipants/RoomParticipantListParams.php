@@ -14,7 +14,7 @@ use Telnyx\RoomParticipants\RoomParticipantListParams\Page;
 /**
  * View a list of room participants.
  *
- * @see Telnyx\RoomParticipants->list
+ * @see Telnyx\RoomParticipantsService::list()
  *
  * @phpstan-type RoomParticipantListParamsShape = array{
  *   filter?: Filter, page?: Page

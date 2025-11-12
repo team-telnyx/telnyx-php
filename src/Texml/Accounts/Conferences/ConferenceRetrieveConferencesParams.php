@@ -13,7 +13,7 @@ use Telnyx\Texml\Accounts\Conferences\ConferenceRetrieveConferencesParams\Status
 /**
  * Lists conference resources.
  *
- * @see Telnyx\Texml\Accounts\Conferences->retrieveConferences
+ * @see Telnyx\STAINLESS_FIXME_Texml\STAINLESS_FIXME_Accounts\ConferencesService::retrieveConferences()
  *
  * @phpstan-type ConferenceRetrieveConferencesParamsShape = array{
  *   DateCreated?: string,

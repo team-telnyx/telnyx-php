@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Upload file required for a messaging hosted number order.
  *
- * @see Telnyx\MessagingHostedNumberOrders\Actions->uploadFile
+ * @see Telnyx\STAINLESS_FIXME_MessagingHostedNumberOrders\ActionsService::uploadFile()
  *
  * @phpstan-type ActionUploadFileParamsShape = array{bill?: string, loa?: string}
  */

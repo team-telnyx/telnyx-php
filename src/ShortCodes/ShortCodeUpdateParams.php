@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Update the settings for a specific short code. To unbind a short code from a profile, set the `messaging_profile_id` to `null` or an empty string.
  *
- * @see Telnyx\ShortCodes->update
+ * @see Telnyx\ShortCodesService::update()
  *
  * @phpstan-type ShortCodeUpdateParamsShape = array{messaging_profile_id: string}
  */

@@ -14,7 +14,7 @@ use Telnyx\OAuth\OAuthRetrieveAuthorizeParams\ResponseType;
 /**
  * OAuth 2.0 authorization endpoint for the authorization code flow.
  *
- * @see Telnyx\OAuth->retrieveAuthorize
+ * @see Telnyx\OAuthService::retrieveAuthorize()
  *
  * @phpstan-type OAuthRetrieveAuthorizeParamsShape = array{
  *   client_id: string,

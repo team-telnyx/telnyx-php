@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Runs a portability check, returning the results immediately.
  *
- * @see Telnyx\PortabilityChecks->run
+ * @see Telnyx\PortabilityChecksService::run()
  *
  * @phpstan-type PortabilityCheckRunParamsShape = array{
  *   phone_numbers?: list<string>

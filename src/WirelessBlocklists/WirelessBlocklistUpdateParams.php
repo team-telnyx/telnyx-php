@@ -13,7 +13,7 @@ use Telnyx\WirelessBlocklists\WirelessBlocklistUpdateParams\Type;
 /**
  * Update a Wireless Blocklist.
  *
- * @see Telnyx\WirelessBlocklists->update
+ * @see Telnyx\WirelessBlocklistsService::update()
  *
  * @phpstan-type WirelessBlocklistUpdateParamsShape = array{
  *   name?: string, type?: Type|value-of<Type>, values?: list<string>

@@ -13,7 +13,7 @@ use Telnyx\GlobalIPs\GlobalIPListParams\Page;
 /**
  * List all Global IPs.
  *
- * @see Telnyx\GlobalIPs->list
+ * @see Telnyx\GlobalIPsService::list()
  *
  * @phpstan-type GlobalIPListParamsShape = array{page?: Page}
  */

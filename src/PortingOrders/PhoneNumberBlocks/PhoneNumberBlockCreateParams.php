@@ -14,7 +14,7 @@ use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockCreateParams\PhoneNum
 /**
  * Creates a new phone number block.
  *
- * @see Telnyx\PortingOrders\PhoneNumberBlocks->create
+ * @see Telnyx\STAINLESS_FIXME_PortingOrders\PhoneNumberBlocksService::create()
  *
  * @phpstan-type PhoneNumberBlockCreateParamsShape = array{
  *   activation_ranges: list<ActivationRange>, phone_number_range: PhoneNumberRange

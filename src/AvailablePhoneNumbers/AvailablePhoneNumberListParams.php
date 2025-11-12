@@ -13,7 +13,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * List available phone numbers.
  *
- * @see Telnyx\AvailablePhoneNumbers->list
+ * @see Telnyx\AvailablePhoneNumbersService::list()
  *
  * @phpstan-type AvailablePhoneNumberListParamsShape = array{filter?: Filter}
  */

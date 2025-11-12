@@ -15,7 +15,7 @@ use Telnyx\FqdnConnections\FqdnConnectionListParams\Sort;
 /**
  * Returns a list of your FQDN connections.
  *
- * @see Telnyx\FqdnConnections->list
+ * @see Telnyx\FqdnConnectionsService::list()
  *
  * @phpstan-type FqdnConnectionListParamsShape = array{
  *   filter?: Filter, page?: Page, sort?: Sort|value-of<Sort>

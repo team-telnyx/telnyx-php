@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Returns the details regarding a specific SIM card.
  *
- * @see Telnyx\SimCards->retrieve
+ * @see Telnyx\SimCardsService::retrieve()
  *
  * @phpstan-type SimCardRetrieveParamsShape = array{
  *   include_pin_puk_codes?: bool, include_sim_card_group?: bool

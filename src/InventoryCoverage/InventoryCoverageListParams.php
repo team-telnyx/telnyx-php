@@ -13,7 +13,7 @@ use Telnyx\InventoryCoverage\InventoryCoverageListParams\Filter;
 /**
  * Creates an inventory coverage request. If locality, npa or national_destination_code is used in groupBy, and no region or locality filters are used, the whole paginated set is returned.
  *
- * @see Telnyx\InventoryCoverage->list
+ * @see Telnyx\InventoryCoverageService::list()
  *
  * @phpstan-type InventoryCoverageListParamsShape = array{filter?: Filter}
  */

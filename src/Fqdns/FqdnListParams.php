@@ -14,7 +14,7 @@ use Telnyx\Fqdns\FqdnListParams\Page;
 /**
  * Get all FQDNs belonging to the user that match the given filters.
  *
- * @see Telnyx\Fqdns->list
+ * @see Telnyx\FqdnsService::list()
  *
  * @phpstan-type FqdnListParamsShape = array{filter?: Filter, page?: Page}
  */

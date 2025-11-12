@@ -14,7 +14,7 @@ use Telnyx\Porting\Reports\ReportListParams\Page;
 /**
  * List the reports generated about porting operations.
  *
- * @see Telnyx\Porting\Reports->list
+ * @see Telnyx\STAINLESS_FIXME_Porting\ReportsService::list()
  *
  * @phpstan-type ReportListParamsShape = array{filter?: Filter, page?: Page}
  */

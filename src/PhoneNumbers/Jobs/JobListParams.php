@@ -15,7 +15,7 @@ use Telnyx\PhoneNumbers\Jobs\JobListParams\Sort;
 /**
  * Lists the phone numbers jobs.
  *
- * @see Telnyx\PhoneNumbers\Jobs->list
+ * @see Telnyx\STAINLESS_FIXME_PhoneNumbers\JobsService::list()
  *
  * @phpstan-type JobListParamsShape = array{
  *   filter?: Filter, page?: Page, sort?: Sort|value-of<Sort>

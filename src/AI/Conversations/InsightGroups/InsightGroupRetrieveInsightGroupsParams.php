@@ -13,7 +13,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Get all insight groups.
  *
- * @see Telnyx\AI\Conversations\InsightGroups->retrieveInsightGroups
+ * @see Telnyx\STAINLESS_FIXME_AI\STAINLESS_FIXME_Conversations\InsightGroupsService::retrieveInsightGroups()
  *
  * @phpstan-type InsightGroupRetrieveInsightGroupsParamsShape = array{page?: Page}
  */

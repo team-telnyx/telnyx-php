@@ -14,7 +14,7 @@ use Telnyx\NotificationEventConditions\NotificationEventConditionListParams\Page
 /**
  * Returns a list of your notifications events conditions.
  *
- * @see Telnyx\NotificationEventConditions->list
+ * @see Telnyx\NotificationEventConditionsService::list()
  *
  * @phpstan-type NotificationEventConditionListParamsShape = array{
  *   filter?: Filter, page?: Page

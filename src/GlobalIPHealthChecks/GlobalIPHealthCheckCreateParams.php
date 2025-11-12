@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Create a Global IP health check.
  *
- * @see Telnyx\GlobalIPHealthChecks->create
+ * @see Telnyx\GlobalIPHealthChecksService::create()
  *
  * @phpstan-type GlobalIPHealthCheckCreateParamsShape = array{
  *   global_ip_id?: string,

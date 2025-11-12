@@ -13,7 +13,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Create a comment.
  *
- * @see Telnyx\Comments->create
+ * @see Telnyx\CommentsService::create()
  *
  * @phpstan-type CommentCreateParamsShape = array{
  *   body?: string,

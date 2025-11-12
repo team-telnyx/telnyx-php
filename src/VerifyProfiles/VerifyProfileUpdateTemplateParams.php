@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Update an existing Verify profile message template.
  *
- * @see Telnyx\VerifyProfiles->updateTemplate
+ * @see Telnyx\VerifyProfilesService::updateTemplate()
  *
  * @phpstan-type VerifyProfileUpdateTemplateParamsShape = array{text: string}
  */

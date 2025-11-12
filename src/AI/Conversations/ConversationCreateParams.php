@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Create a new AI Conversation.
  *
- * @see Telnyx\AI\Conversations->create
+ * @see Telnyx\STAINLESS_FIXME_AI\ConversationsService::create()
  *
  * @phpstan-type ConversationCreateParamsShape = array{
  *   metadata?: array<string,string>, name?: string

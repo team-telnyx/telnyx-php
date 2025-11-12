@@ -16,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * - `streaming.stopped`
  *
- * @see Telnyx\Calls\Actions->stopStreaming
+ * @see Telnyx\STAINLESS_FIXME_Calls\ActionsService::stopStreaming()
  *
  * @phpstan-type ActionStopStreamingParamsShape = array{
  *   client_state?: string, command_id?: string, stream_id?: string

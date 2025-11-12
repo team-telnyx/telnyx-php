@@ -13,7 +13,7 @@ use Telnyx\ExternalConnections\CivicAddresses\CivicAddressListParams\Filter;
 /**
  * Returns the civic addresses and locations from Microsoft Teams.
  *
- * @see Telnyx\ExternalConnections\CivicAddresses->list
+ * @see Telnyx\STAINLESS_FIXME_ExternalConnections\CivicAddressesService::list()
  *
  * @phpstan-type CivicAddressListParamsShape = array{filter?: Filter}
  */

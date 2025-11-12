@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * Refer to: https://developers.telnyx.com/docs/cloud-storage/presigned-urls
  *
- * @see Telnyx\Storage\Buckets->createPresignedURL
+ * @see Telnyx\STAINLESS_FIXME_Storage\BucketsService::createPresignedURL()
  *
  * @phpstan-type BucketCreatePresignedURLParamsShape = array{
  *   bucketName: string, ttl?: int

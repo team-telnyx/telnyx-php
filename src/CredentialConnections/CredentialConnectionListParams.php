@@ -15,7 +15,7 @@ use Telnyx\CredentialConnections\CredentialConnectionListParams\Sort;
 /**
  * Returns a list of your credential connections.
  *
- * @see Telnyx\CredentialConnections->list
+ * @see Telnyx\CredentialConnectionsService::list()
  *
  * @phpstan-type CredentialConnectionListParamsShape = array{
  *   filter?: Filter, page?: Page, sort?: Sort|value-of<Sort>

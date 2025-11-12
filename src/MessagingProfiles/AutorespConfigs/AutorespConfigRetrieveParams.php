@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Get Auto-Response Setting.
  *
- * @see Telnyx\MessagingProfiles\AutorespConfigs->retrieve
+ * @see Telnyx\STAINLESS_FIXME_MessagingProfiles\AutorespConfigsService::retrieve()
  *
  * @phpstan-type AutorespConfigRetrieveParamsShape = array{profile_id: string}
  */

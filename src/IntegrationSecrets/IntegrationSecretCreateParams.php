@@ -13,7 +13,7 @@ use Telnyx\IntegrationSecrets\IntegrationSecretCreateParams\Type;
 /**
  * Create a new secret with an associated identifier that can be used to securely integrate with other services.
  *
- * @see Telnyx\IntegrationSecrets->create
+ * @see Telnyx\IntegrationSecretsService::create()
  *
  * @phpstan-type IntegrationSecretCreateParamsShape = array{
  *   identifier: string,

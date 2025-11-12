@@ -15,7 +15,7 @@ use Telnyx\FaxApplications\FaxApplicationCreateParams\Outbound;
 /**
  * Creates a new Fax Application based on the parameters sent in the request. The application name and webhook URL are required. Once created, you can assign phone numbers to your application using the `/phone_numbers` endpoint.
  *
- * @see Telnyx\FaxApplications->create
+ * @see Telnyx\FaxApplicationsService::create()
  *
  * @phpstan-type FaxApplicationCreateParamsShape = array{
  *   application_name: string,

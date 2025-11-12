@@ -13,7 +13,7 @@ use Telnyx\Texml\Accounts\Calls\Streams\StreamStreamingSidJsonParams\Status;
 /**
  * Updates streaming resource for particular call.
  *
- * @see Telnyx\Texml\Accounts\Calls\Streams->streamingSidJson
+ * @see Telnyx\STAINLESS_FIXME_Texml\STAINLESS_FIXME_Accounts\STAINLESS_FIXME_Calls\StreamsService::streamingSidJson()
  *
  * @phpstan-type StreamStreamingSidJsonParamsShape = array{
  *   account_sid: string,

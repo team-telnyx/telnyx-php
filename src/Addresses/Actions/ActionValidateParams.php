@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Validates an address for emergency services.
  *
- * @see Telnyx\Addresses\Actions->validate
+ * @see Telnyx\STAINLESS_FIXME_Addresses\ActionsService::validate()
  *
  * @phpstan-type ActionValidateParamsShape = array{
  *   country_code: string,

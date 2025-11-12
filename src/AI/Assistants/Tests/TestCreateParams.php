@@ -13,7 +13,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Creates a comprehensive test configuration for evaluating AI assistant performance.
  *
- * @see Telnyx\AI\Assistants\Tests->create
+ * @see Telnyx\STAINLESS_FIXME_AI\STAINLESS_FIXME_Assistants\TestsService::create()
  *
  * @phpstan-type TestCreateParamsShape = array{
  *   destination: string,

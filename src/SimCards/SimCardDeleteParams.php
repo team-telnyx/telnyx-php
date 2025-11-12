@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * Transitioning to the disabled state may take a period of time.
  * Until the transition is completed, the SIM card status will be disabling <code>disabling</code>.<br />In order to re-enable the SIM card, you will need to re-register it.
  *
- * @see Telnyx\SimCards->delete
+ * @see Telnyx\SimCardsService::delete()
  *
  * @phpstan-type SimCardDeleteParamsShape = array{report_lost?: bool}
  */

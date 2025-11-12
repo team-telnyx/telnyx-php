@@ -13,7 +13,7 @@ use Telnyx\SubNumberOrders\SubNumberOrderRetrieveParams\Filter;
 /**
  * Get an existing sub number order.
  *
- * @see Telnyx\SubNumberOrders->retrieve
+ * @see Telnyx\SubNumberOrdersService::retrieve()
  *
  * @phpstan-type SubNumberOrderRetrieveParamsShape = array{filter?: Filter}
  */

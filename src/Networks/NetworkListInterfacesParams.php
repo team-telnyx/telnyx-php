@@ -14,7 +14,7 @@ use Telnyx\Networks\NetworkListInterfacesParams\Page;
 /**
  * List all Interfaces for a Network.
  *
- * @see Telnyx\Networks->listInterfaces
+ * @see Telnyx\NetworksService::listInterfaces()
  *
  * @phpstan-type NetworkListInterfacesParamsShape = array{
  *   filter?: Filter, page?: Page

@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Create a new AI Assistant.
  *
- * @see Telnyx\AI\Assistants->create
+ * @see Telnyx\STAINLESS_FIXME_AI\AssistantsService::create()
  *
  * @phpstan-type AssistantCreateParamsShape = array{
  *   instructions: string,

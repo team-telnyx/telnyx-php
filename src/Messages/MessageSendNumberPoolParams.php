@@ -13,7 +13,7 @@ use Telnyx\Messages\MessageSendNumberPoolParams\Type;
 /**
  * Send a message using number pool.
  *
- * @see Telnyx\Messages->sendNumberPool
+ * @see Telnyx\MessagesService::sendNumberPool()
  *
  * @phpstan-type MessageSendNumberPoolParamsShape = array{
  *   messaging_profile_id: string,

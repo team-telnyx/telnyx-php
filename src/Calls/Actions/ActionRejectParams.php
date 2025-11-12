@@ -17,7 +17,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * - `call.hangup`
  *
- * @see Telnyx\Calls\Actions->reject
+ * @see Telnyx\STAINLESS_FIXME_Calls\ActionsService::reject()
  *
  * @phpstan-type ActionRejectParamsShape = array{
  *   cause: Cause|value-of<Cause>, client_state?: string, command_id?: string

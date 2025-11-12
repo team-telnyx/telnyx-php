@@ -13,7 +13,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Retrieve a list of campaigns associated with a supplied `brandId`.
  *
- * @see Telnyx\Campaign->list
+ * @see Telnyx\CampaignService::list()
  *
  * @phpstan-type CampaignListParamsShape = array{
  *   brandId: string, page?: int, recordsPerPage?: int, sort?: Sort|value-of<Sort>

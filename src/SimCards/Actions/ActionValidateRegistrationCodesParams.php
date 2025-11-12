@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * It validates whether SIM card registration codes are valid or not.
  *
- * @see Telnyx\SimCards\Actions->validateRegistrationCodes
+ * @see Telnyx\STAINLESS_FIXME_SimCards\ActionsService::validateRegistrationCodes()
  *
  * @phpstan-type ActionValidateRegistrationCodesParamsShape = array{
  *   registration_codes?: list<string>

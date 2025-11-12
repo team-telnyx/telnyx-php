@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Update an existing credential.
  *
- * @see Telnyx\TelephonyCredentials->update
+ * @see Telnyx\TelephonyCredentialsService::update()
  *
  * @phpstan-type TelephonyCredentialUpdateParamsShape = array{
  *   connection_id?: string, expires_at?: string, name?: string, tag?: string

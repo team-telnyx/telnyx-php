@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Order new external vetting for a brand.
  *
- * @see Telnyx\Brand\ExternalVetting->order
+ * @see Telnyx\STAINLESS_FIXME_Brand\ExternalVettingService::order()
  *
  * @phpstan-type ExternalVettingOrderParamsShape = array{
  *   evpId: string, vettingClass: string

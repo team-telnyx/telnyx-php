@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Asynchronously create a report containing Wireless Detail Records (WDRs) for the SIM cards that consumed wireless data in the given time period.
  *
- * @see Telnyx\Wireless\DetailRecordsReports->create
+ * @see Telnyx\STAINLESS_FIXME_Wireless\DetailRecordsReportsService::create()
  *
  * @phpstan-type DetailRecordsReportCreateParamsShape = array{
  *   end_time?: string, start_time?: string

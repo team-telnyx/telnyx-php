@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Creates an authentication provider.
  *
- * @see Telnyx\AuthenticationProviders->create
+ * @see Telnyx\AuthenticationProvidersService::create()
  *
  * @phpstan-type AuthenticationProviderCreateParamsShape = array{
  *   name: string,

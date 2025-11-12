@@ -15,7 +15,7 @@ use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentListParams\Sort;
 /**
  * Returns a list of additional documents for a porting order.
  *
- * @see Telnyx\PortingOrders\AdditionalDocuments->list
+ * @see Telnyx\STAINLESS_FIXME_PortingOrders\AdditionalDocumentsService::list()
  *
  * @phpstan-type AdditionalDocumentListParamsShape = array{
  *   filter?: Filter, page?: Page, sort?: Sort

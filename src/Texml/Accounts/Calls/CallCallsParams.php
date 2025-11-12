@@ -24,7 +24,7 @@ use Telnyx\Texml\Accounts\Calls\CallCallsParams\URLMethod;
 /**
  * Initiate an outbound TeXML call. Telnyx will request TeXML from the XML Request URL configured for the connection in the Mission Control Portal.
  *
- * @see Telnyx\Texml\Accounts\Calls->calls
+ * @see Telnyx\STAINLESS_FIXME_Texml\STAINLESS_FIXME_Accounts\CallsService::calls()
  *
  * @phpstan-type CallCallsParamsShape = array{
  *   ApplicationSid: string,

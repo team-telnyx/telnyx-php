@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Creates a background job to update the emergency settings of a collection of phone numbers. At most one thousand numbers can be updated per API call.
  *
- * @see Telnyx\PhoneNumbers\Jobs->updateEmergencySettingsBatch
+ * @see Telnyx\STAINLESS_FIXME_PhoneNumbers\JobsService::updateEmergencySettingsBatch()
  *
  * @phpstan-type JobUpdateEmergencySettingsBatchParamsShape = array{
  *   emergency_enabled: bool,

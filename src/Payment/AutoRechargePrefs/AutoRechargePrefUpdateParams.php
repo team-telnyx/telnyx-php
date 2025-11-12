@@ -13,7 +13,7 @@ use Telnyx\Payment\AutoRechargePrefs\AutoRechargePrefUpdateParams\Preference;
 /**
  * Update payment auto recharge preferences.
  *
- * @see Telnyx\Payment\AutoRechargePrefs->update
+ * @see Telnyx\STAINLESS_FIXME_Payment\AutoRechargePrefsService::update()
  *
  * @phpstan-type AutoRechargePrefUpdateParamsShape = array{
  *   enabled?: bool,

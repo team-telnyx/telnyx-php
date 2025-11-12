@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * This action will asynchronously assign a provisioned Private Wireless Gateway to the SIM card group. Completing this operation defines that all SIM cards in the SIM card group will get their traffic controlled by the associated Private Wireless Gateway. This operation will also imply that new SIM cards assigned to a group will inherit its network definitions. If it's moved to a different group that doesn't have a Private Wireless Gateway, it'll use Telnyx's default mobile network configuration.
  *
- * @see Telnyx\SimCardGroups\Actions->setPrivateWirelessGateway
+ * @see Telnyx\STAINLESS_FIXME_SimCardGroups\ActionsService::setPrivateWirelessGateway()
  *
  * @phpstan-type ActionSetPrivateWirelessGatewayParamsShape = array{
  *   private_wireless_gateway_id: string

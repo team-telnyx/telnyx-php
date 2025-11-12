@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Create New Phone Number Campaign.
  *
- * @see Telnyx\PhoneNumberCampaigns->update
+ * @see Telnyx\PhoneNumberCampaignsService::update()
  *
  * @phpstan-type PhoneNumberCampaignUpdateParamsShape = array{
  *   campaignId: string, phoneNumber: string

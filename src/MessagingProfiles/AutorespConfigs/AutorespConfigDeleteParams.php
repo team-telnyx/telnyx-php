@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Delete Auto-Response Setting.
  *
- * @see Telnyx\MessagingProfiles\AutorespConfigs->delete
+ * @see Telnyx\STAINLESS_FIXME_MessagingProfiles\AutorespConfigsService::delete()
  *
  * @phpstan-type AutorespConfigDeleteParamsShape = array{profile_id: string}
  */

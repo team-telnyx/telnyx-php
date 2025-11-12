@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Creates a new legacy usage V2 CDR report request with the specified filters.
  *
- * @see Telnyx\Legacy\Reporting\UsageReports\Voice->create
+ * @see Telnyx\STAINLESS_FIXME_Legacy\STAINLESS_FIXME_Reporting\STAINLESS_FIXME_UsageReports\VoiceService::create()
  *
  * @phpstan-type VoiceCreateParamsShape = array{
  *   end_time: \DateTimeInterface,

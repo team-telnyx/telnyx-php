@@ -13,7 +13,7 @@ use Telnyx\Portouts\SupportingDocuments\SupportingDocumentCreateParams\Document;
 /**
  * Creates a list of supporting documents on a portout request.
  *
- * @see Telnyx\Portouts\SupportingDocuments->create
+ * @see Telnyx\STAINLESS_FIXME_Portouts\SupportingDocumentsService::create()
  *
  * @phpstan-type SupportingDocumentCreateParamsShape = array{
  *   documents?: list<Document>

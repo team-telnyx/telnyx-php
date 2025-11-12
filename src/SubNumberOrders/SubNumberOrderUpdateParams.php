@@ -13,7 +13,7 @@ use Telnyx\NumberOrderPhoneNumbers\UpdateRegulatoryRequirement;
 /**
  * Updates a sub number order.
  *
- * @see Telnyx\SubNumberOrders->update
+ * @see Telnyx\SubNumberOrdersService::update()
  *
  * @phpstan-type SubNumberOrderUpdateParamsShape = array{
  *   regulatory_requirements?: list<UpdateRegulatoryRequirement>

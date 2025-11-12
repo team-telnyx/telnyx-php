@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * This endpoint is used to create a new brand. A brand is an entity created by The Campaign Registry (TCR) that represents an organization or a company. It is this entity that TCR created campaigns will be associated with. Each brand creation will entail an upfront, non-refundable $4 expense.
  *
- * @see Telnyx\Brand->create
+ * @see Telnyx\BrandService::create()
  *
  * @phpstan-type BrandCreateParamsShape = array{
  *   country: string,

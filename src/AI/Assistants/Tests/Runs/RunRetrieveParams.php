@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Retrieves detailed information about a specific test run execution.
  *
- * @see Telnyx\AI\Assistants\Tests\Runs->retrieve
+ * @see Telnyx\STAINLESS_FIXME_AI\STAINLESS_FIXME_Assistants\STAINLESS_FIXME_Tests\RunsService::retrieve()
  *
  * @phpstan-type RunRetrieveParamsShape = array{test_id: string}
  */

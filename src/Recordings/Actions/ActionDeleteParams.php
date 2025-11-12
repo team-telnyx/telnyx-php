@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Permanently deletes a list of call recordings.
  *
- * @see Telnyx\Recordings\Actions->delete
+ * @see Telnyx\STAINLESS_FIXME_Recordings\ActionsService::delete()
  *
  * @phpstan-type ActionDeleteParamsShape = array{ids: list<string>}
  */

@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Create a TeXML secret which can be later used as a Dynamic Parameter for TeXML when using Mustache Templates in your TeXML. In your TeXML you will be able to use your secret name, and this name will be replaced by the actual secret value when processing the TeXML on Telnyx side.  The secrets are not visible in any logs.
  *
- * @see Telnyx\Texml->secrets
+ * @see Telnyx\TexmlService::secrets()
  *
  * @phpstan-type TexmlSecretsParamsShape = array{name: string, value: string}
  */

@@ -13,7 +13,7 @@ use Telnyx\Messages\MessageSendShortCodeParams\Type;
 /**
  * Send a short code message.
  *
- * @see Telnyx\Messages->sendShortCode
+ * @see Telnyx\MessagesService::sendShortCode()
  *
  * @phpstan-type MessageSendShortCodeParamsShape = array{
  *   from: string,

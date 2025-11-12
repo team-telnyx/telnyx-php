@@ -14,7 +14,7 @@ use Telnyx\OtaUpdates\OtaUpdateListParams\Page;
 /**
  * List OTA updates.
  *
- * @see Telnyx\OtaUpdates->list
+ * @see Telnyx\OtaUpdatesService::list()
  *
  * @phpstan-type OtaUpdateListParamsShape = array{filter?: Filter, page?: Page}
  */

@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Fetch a cluster visualization.
  *
- * @see Telnyx\AI\Clusters->fetchGraph
+ * @see Telnyx\STAINLESS_FIXME_AI\ClustersService::fetchGraph()
  *
  * @phpstan-type ClusterFetchGraphParamsShape = array{cluster_id?: int}
  */

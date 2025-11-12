@@ -13,7 +13,7 @@ use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderCreateVerificat
 /**
  * Create verification codes to validate numbers of the hosted order. The verification codes will be sent to the numbers of the hosted order.
  *
- * @see Telnyx\MessagingHostedNumberOrders->createVerificationCodes
+ * @see Telnyx\MessagingHostedNumberOrdersService::createVerificationCodes()
  *
  * @phpstan-type MessagingHostedNumberOrderCreateVerificationCodesParamsShape = array{
  *   phone_numbers: list<string>,

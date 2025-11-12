@@ -13,7 +13,7 @@ use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileUpdateParams\CallingWindow;
 /**
  * Updates an existing outbound voice profile.
  *
- * @see Telnyx\OutboundVoiceProfiles->update
+ * @see Telnyx\OutboundVoiceProfilesService::update()
  *
  * @phpstan-type OutboundVoiceProfileUpdateParamsShape = array{
  *   name: string,

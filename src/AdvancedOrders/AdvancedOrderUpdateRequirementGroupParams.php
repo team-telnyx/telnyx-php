@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Update Advanced Order.
  *
- * @see Telnyx\AdvancedOrders->updateRequirementGroup
+ * @see Telnyx\AdvancedOrdersService::updateRequirementGroup()
  *
  * @phpstan-type AdvancedOrderUpdateRequirementGroupParamsShape = array{
  *   area_code?: string,

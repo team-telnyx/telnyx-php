@@ -13,7 +13,7 @@ use Telnyx\Messaging\Rcs\Agents\AgentListParams\Page;
 /**
  * List all RCS agents.
  *
- * @see Telnyx\Messaging\Rcs\Agents->list
+ * @see Telnyx\STAINLESS_FIXME_Messaging\STAINLESS_FIXME_Rcs\AgentsService::list()
  *
  * @phpstan-type AgentListParamsShape = array{page?: Page}
  */

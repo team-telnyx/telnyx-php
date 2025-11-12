@@ -20,7 +20,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * - `call.refer.completed`
  * - `call.refer.failed`
  *
- * @see Telnyx\Calls\Actions->refer
+ * @see Telnyx\STAINLESS_FIXME_Calls\ActionsService::refer()
  *
  * @phpstan-type ActionReferParamsShape = array{
  *   sip_address: string,

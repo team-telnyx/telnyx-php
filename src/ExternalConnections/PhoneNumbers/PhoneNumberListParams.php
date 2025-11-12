@@ -14,7 +14,7 @@ use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberListParams\Page;
 /**
  * Returns a list of all active phone numbers associated with the given external connection.
  *
- * @see Telnyx\ExternalConnections\PhoneNumbers->list
+ * @see Telnyx\STAINLESS_FIXME_ExternalConnections\PhoneNumbersService::list()
  *
  * @phpstan-type PhoneNumberListParamsShape = array{filter?: Filter, page?: Page}
  */

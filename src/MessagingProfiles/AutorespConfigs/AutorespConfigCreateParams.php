@@ -13,7 +13,7 @@ use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigCreateParams\Op;
 /**
  * Create Auto-Reponse Setting.
  *
- * @see Telnyx\MessagingProfiles\AutorespConfigs->create
+ * @see Telnyx\STAINLESS_FIXME_MessagingProfiles\AutorespConfigsService::create()
  *
  * @phpstan-type AutorespConfigCreateParamsShape = array{
  *   country_code: string,

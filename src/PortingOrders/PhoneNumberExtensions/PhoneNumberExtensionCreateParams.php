@@ -14,7 +14,7 @@ use Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionCreateParams\
 /**
  * Creates a new phone number extension.
  *
- * @see Telnyx\PortingOrders\PhoneNumberExtensions->create
+ * @see Telnyx\STAINLESS_FIXME_PortingOrders\PhoneNumberExtensionsService::create()
  *
  * @phpstan-type PhoneNumberExtensionCreateParamsShape = array{
  *   activation_ranges: list<ActivationRange>,

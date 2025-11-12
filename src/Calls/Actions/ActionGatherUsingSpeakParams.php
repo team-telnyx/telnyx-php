@@ -23,7 +23,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * - `call.dtmf.received` (you may receive many of these webhooks)
  * - `call.gather.ended`
  *
- * @see Telnyx\Calls\Actions->gatherUsingSpeak
+ * @see Telnyx\STAINLESS_FIXME_Calls\ActionsService::gatherUsingSpeak()
  *
  * @phpstan-type ActionGatherUsingSpeakParamsShape = array{
  *   payload: string,

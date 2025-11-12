@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Submits an appeal for rejected native campaigns in TELNYX_FAILED or MNO_REJECTED status. The appeal is recorded for manual compliance team review and the campaign status is reset to TCR_ACCEPTED. Note: Appeal forwarding is handled manually to allow proper review before incurring upstream charges.
  *
- * @see Telnyx\Campaign->submitAppeal
+ * @see Telnyx\CampaignService::submitAppeal()
  *
  * @phpstan-type CampaignSubmitAppealParamsShape = array{appeal_reason: string}
  */

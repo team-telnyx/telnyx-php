@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Create a billing group.
  *
- * @see Telnyx\BillingGroups->create
+ * @see Telnyx\BillingGroupsService::create()
  *
  * @phpstan-type BillingGroupCreateParamsShape = array{name?: string}
  */

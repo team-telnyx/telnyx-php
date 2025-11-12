@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Removes an inactive call from a queue. If the call is no longer active, use this command to remove it from the queue.
  *
- * @see Telnyx\Queues\Calls->remove
+ * @see Telnyx\STAINLESS_FIXME_Queues\CallsService::remove()
  *
  * @phpstan-type CallRemoveParamsShape = array{queue_name: string}
  */

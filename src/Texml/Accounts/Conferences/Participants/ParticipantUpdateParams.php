@@ -14,7 +14,7 @@ use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantUpdateParams\HoldM
 /**
  * Updates a conference participant.
  *
- * @see Telnyx\Texml\Accounts\Conferences\Participants->update
+ * @see Telnyx\STAINLESS_FIXME_Texml\STAINLESS_FIXME_Accounts\STAINLESS_FIXME_Conferences\ParticipantsService::update()
  *
  * @phpstan-type ParticipantUpdateParamsShape = array{
  *   account_sid: string,

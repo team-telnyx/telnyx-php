@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * List RCS capabilities of a phone number.
  *
- * @see Telnyx\Messaging\Rcs->retrieveCapabilities
+ * @see Telnyx\STAINLESS_FIXME_Messaging\RcsService::retrieveCapabilities()
  *
  * @phpstan-type RcRetrieveCapabilitiesParamsShape = array{agent_id: string}
  */

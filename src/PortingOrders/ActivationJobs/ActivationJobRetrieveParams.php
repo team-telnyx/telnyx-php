@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Returns a porting activation job.
  *
- * @see Telnyx\PortingOrders\ActivationJobs->retrieve
+ * @see Telnyx\STAINLESS_FIXME_PortingOrders\ActivationJobsService::retrieve()
  *
  * @phpstan-type ActivationJobRetrieveParamsShape = array{id: string}
  */

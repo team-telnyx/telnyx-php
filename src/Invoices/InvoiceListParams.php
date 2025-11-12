@@ -14,7 +14,7 @@ use Telnyx\Invoices\InvoiceListParams\Sort;
 /**
  * Retrieve a paginated list of invoices.
  *
- * @see Telnyx\Invoices->list
+ * @see Telnyx\InvoicesService::list()
  *
  * @phpstan-type InvoiceListParamsShape = array{
  *   page?: Page, sort?: Sort|value-of<Sort>

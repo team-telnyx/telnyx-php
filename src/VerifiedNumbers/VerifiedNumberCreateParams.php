@@ -13,7 +13,7 @@ use Telnyx\VerifiedNumbers\VerifiedNumberCreateParams\VerificationMethod;
 /**
  * Initiates phone number verification procedure. Supports DTMF extension dialing for voice calls to numbers behind IVR systems.
  *
- * @see Telnyx\VerifiedNumbers->create
+ * @see Telnyx\VerifiedNumbersService::create()
  *
  * @phpstan-type VerifiedNumberCreateParamsShape = array{
  *   phone_number: string,

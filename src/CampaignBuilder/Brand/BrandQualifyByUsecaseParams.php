@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * This endpoint allows you to see whether or not the supplied brand is suitable for your desired campaign use case.
  *
- * @see Telnyx\CampaignBuilder\Brand->qualifyByUsecase
+ * @see Telnyx\STAINLESS_FIXME_CampaignBuilder\BrandService::qualifyByUsecase()
  *
  * @phpstan-type BrandQualifyByUsecaseParamsShape = array{brandId: string}
  */

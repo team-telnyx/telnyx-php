@@ -23,7 +23,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * - `call.recording.transcription.saved`
  * - `call.recording.error`
  *
- * @see Telnyx\Calls\Actions->startRecording
+ * @see Telnyx\STAINLESS_FIXME_Calls\ActionsService::startRecording()
  *
  * @phpstan-type ActionStartRecordingParamsShape = array{
  *   channels: Channels|value-of<Channels>,

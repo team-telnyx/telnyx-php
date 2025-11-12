@@ -14,7 +14,7 @@ use Telnyx\SimCards\Actions\ActionListParams\Page;
 /**
  * This API lists a paginated collection of SIM card actions. It enables exploring a collection of existing asynchronous operations using specific filters.
  *
- * @see Telnyx\SimCards\Actions->list
+ * @see Telnyx\STAINLESS_FIXME_SimCards\ActionsService::list()
  *
  * @phpstan-type ActionListParamsShape = array{filter?: Filter, page?: Page}
  */

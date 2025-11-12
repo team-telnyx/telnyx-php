@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Upload a document.<br /><br />Uploaded files must be linked to a service within 30 minutes or they will be automatically deleted.
  *
- * @see Telnyx\Documents->upload
+ * @see Telnyx\DocumentsService::upload()
  *
  * @phpstan-type DocumentUploadParamsShape = array{
  *   url: string, customer_reference?: string, filename?: string, file: string

@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Creates a new Speech to Text batch report request with the specified filters.
  *
- * @see Telnyx\Legacy\Reporting\BatchDetailRecords\SpeechToText->create
+ * @see Telnyx\STAINLESS_FIXME_Legacy\STAINLESS_FIXME_Reporting\STAINLESS_FIXME_BatchDetailRecords\SpeechToTextService::create()
  *
  * @phpstan-type SpeechToTextCreateParamsShape = array{
  *   end_date: \DateTimeInterface, start_date: \DateTimeInterface

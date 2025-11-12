@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Deactivates a user bundle by its ID.
  *
- * @see Telnyx\BundlePricing\UserBundles->deactivate
+ * @see Telnyx\STAINLESS_FIXME_BundlePricing\UserBundlesService::deactivate()
  *
  * @phpstan-type UserBundleDeactivateParamsShape = array{
  *   authorization_bearer?: string

@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Create a new MCP server.
  *
- * @see Telnyx\AI\McpServers->create
+ * @see Telnyx\STAINLESS_FIXME_AI\McpServersService::create()
  *
  * @phpstan-type McpServerCreateParamsShape = array{
  *   name: string,

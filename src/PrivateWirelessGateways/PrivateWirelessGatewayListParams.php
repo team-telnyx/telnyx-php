@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Get all Private Wireless Gateways belonging to the user.
  *
- * @see Telnyx\PrivateWirelessGateways->list
+ * @see Telnyx\PrivateWirelessGatewaysService::list()
  *
  * @phpstan-type PrivateWirelessGatewayListParamsShape = array{
  *   filter_created_at_?: string,

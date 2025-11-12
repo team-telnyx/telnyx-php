@@ -13,7 +13,7 @@ use Telnyx\NotificationProfiles\NotificationProfileListParams\Page;
 /**
  * Returns a list of your notifications profiles.
  *
- * @see Telnyx\NotificationProfiles->list
+ * @see Telnyx\NotificationProfilesService::list()
  *
  * @phpstan-type NotificationProfileListParamsShape = array{page?: Page}
  */

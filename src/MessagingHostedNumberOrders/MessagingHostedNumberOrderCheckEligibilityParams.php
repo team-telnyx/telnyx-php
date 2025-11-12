@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Check eligibility of phone numbers for hosted messaging.
  *
- * @see Telnyx\MessagingHostedNumberOrders->checkEligibility
+ * @see Telnyx\MessagingHostedNumberOrdersService::checkEligibility()
  *
  * @phpstan-type MessagingHostedNumberOrderCheckEligibilityParamsShape = array{
  *   phone_numbers: list<string>

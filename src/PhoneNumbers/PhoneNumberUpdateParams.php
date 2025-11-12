@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Update a phone number.
  *
- * @see Telnyx\PhoneNumbers->update
+ * @see Telnyx\PhoneNumbersService::update()
  *
  * @phpstan-type PhoneNumberUpdateParamsShape = array{
  *   billing_group_id?: string,

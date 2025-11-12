@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Return the details of a phone number associated with the given external connection.
  *
- * @see Telnyx\ExternalConnections\PhoneNumbers->retrieve
+ * @see Telnyx\STAINLESS_FIXME_ExternalConnections\PhoneNumbersService::retrieve()
  *
  * @phpstan-type PhoneNumberRetrieveParamsShape = array{id: string}
  */

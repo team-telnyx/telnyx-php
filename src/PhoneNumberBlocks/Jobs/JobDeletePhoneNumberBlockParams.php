@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Creates a new background job to delete all the phone numbers associated with the given block. We will only consider the phone number block as deleted after all phone numbers associated with it are removed, so multiple executions of this job may be necessary in case some of the phone numbers present errors during the deletion process.
  *
- * @see Telnyx\PhoneNumberBlocks\Jobs->deletePhoneNumberBlock
+ * @see Telnyx\STAINLESS_FIXME_PhoneNumberBlocks\JobsService::deletePhoneNumberBlock()
  *
  * @phpstan-type JobDeletePhoneNumberBlockParamsShape = array{
  *   phone_number_block_id: string

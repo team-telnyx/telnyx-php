@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Return the details of a Release request and its phone numbers.
  *
- * @see Telnyx\ExternalConnections\Releases->retrieve
+ * @see Telnyx\STAINLESS_FIXME_ExternalConnections\ReleasesService::retrieve()
  *
  * @phpstan-type ReleaseRetrieveParamsShape = array{id: string}
  */

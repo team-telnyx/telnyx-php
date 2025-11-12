@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Returns multiple recording transcription resources for an account.
  *
- * @see Telnyx\Texml\Accounts->retrieveTranscriptionsJson
+ * @see Telnyx\STAINLESS_FIXME_Texml\AccountsService::retrieveTranscriptionsJson()
  *
  * @phpstan-type AccountRetrieveTranscriptionsJsonParamsShape = array{
  *   PageSize?: int, PageToken?: string

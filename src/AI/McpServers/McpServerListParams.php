@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Retrieve a list of MCP servers.
  *
- * @see Telnyx\AI\McpServers->list
+ * @see Telnyx\STAINLESS_FIXME_AI\McpServersService::list()
  *
  * @phpstan-type McpServerListParamsShape = array{
  *   page_number_?: int, page_size_?: int, type?: string, url?: string

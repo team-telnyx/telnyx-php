@@ -13,7 +13,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Get all insights.
  *
- * @see Telnyx\AI\Conversations\Insights->list
+ * @see Telnyx\STAINLESS_FIXME_AI\STAINLESS_FIXME_Conversations\InsightsService::list()
  *
  * @phpstan-type InsightListParamsShape = array{page?: Page}
  */

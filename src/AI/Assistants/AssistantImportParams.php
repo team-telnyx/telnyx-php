@@ -13,7 +13,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Import assistants from external providers. Any assistant that has already been imported will be overwritten with its latest version from the importing provider.
  *
- * @see Telnyx\AI\Assistants->import
+ * @see Telnyx\STAINLESS_FIXME_AI\AssistantsService::import()
  *
  * @phpstan-type AssistantImportParamsShape = array{
  *   api_key_ref: string, provider: Provider|value-of<Provider>

@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Uploads an SSL certificate and its matching secret so that you can use Telnyx’s storage as your CDN.
  *
- * @see Telnyx\Storage\Buckets\SslCertificate->create
+ * @see Telnyx\STAINLESS_FIXME_Storage\STAINLESS_FIXME_Buckets\SslCertificateService::create()
  *
  * @phpstan-type SslCertificateCreateParamsShape = array{
  *   certificate?: string, private_key?: string

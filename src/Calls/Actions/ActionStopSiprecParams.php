@@ -16,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * - `siprec.stopped`
  *
- * @see Telnyx\Calls\Actions->stopSiprec
+ * @see Telnyx\STAINLESS_FIXME_Calls\ActionsService::stopSiprec()
  *
  * @phpstan-type ActionStopSiprecParamsShape = array{
  *   client_state?: string, command_id?: string

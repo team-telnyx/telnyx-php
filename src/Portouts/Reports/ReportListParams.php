@@ -14,7 +14,7 @@ use Telnyx\Portouts\Reports\ReportListParams\Page;
 /**
  * List the reports generated about port-out operations.
  *
- * @see Telnyx\Portouts\Reports->list
+ * @see Telnyx\STAINLESS_FIXME_Portouts\ReportsService::list()
  *
  * @phpstan-type ReportListParamsShape = array{filter?: Filter, page?: Page}
  */

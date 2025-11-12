@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Creates a Phone Number Reservation for multiple numbers.
  *
- * @see Telnyx\NumberReservations->create
+ * @see Telnyx\NumberReservationsService::create()
  *
  * @phpstan-type NumberReservationCreateParamsShape = array{
  *   customer_reference?: string, phone_numbers?: list<ReservedPhoneNumber>

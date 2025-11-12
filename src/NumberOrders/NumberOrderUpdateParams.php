@@ -13,7 +13,7 @@ use Telnyx\NumberOrderPhoneNumbers\UpdateRegulatoryRequirement;
 /**
  * Updates a phone number order.
  *
- * @see Telnyx\NumberOrders->update
+ * @see Telnyx\NumberOrdersService::update()
  *
  * @phpstan-type NumberOrderUpdateParamsShape = array{
  *   customer_reference?: string,

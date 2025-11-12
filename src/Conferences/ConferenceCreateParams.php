@@ -23,7 +23,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * - `conference.recording.saved`
  * - `conference.floor.changed`
  *
- * @see Telnyx\Conferences->create
+ * @see Telnyx\ConferencesService::create()
  *
  * @phpstan-type ConferenceCreateParamsShape = array{
  *   call_control_id: string,

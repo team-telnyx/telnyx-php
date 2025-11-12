@@ -15,7 +15,7 @@ use Telnyx\Texml\Accounts\Calls\RecordingsJson\RecordingsJsonRecordingsJsonParam
 /**
  * Starts recording with specified parameters for call idientified by call_sid.
  *
- * @see Telnyx\Texml\Accounts\Calls\RecordingsJson->recordingsJson
+ * @see Telnyx\STAINLESS_FIXME_Texml\STAINLESS_FIXME_Accounts\STAINLESS_FIXME_Calls\RecordingsJsonService::recordingsJson()
  *
  * @phpstan-type RecordingsJsonRecordingsJsonParamsShape = array{
  *   account_sid: string,

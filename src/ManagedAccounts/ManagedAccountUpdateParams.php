@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Update a single managed account.
  *
- * @see Telnyx\ManagedAccounts->update
+ * @see Telnyx\ManagedAccountsService::update()
  *
  * @phpstan-type ManagedAccountUpdateParamsShape = array{
  *   managed_account_allow_custom_pricing?: bool

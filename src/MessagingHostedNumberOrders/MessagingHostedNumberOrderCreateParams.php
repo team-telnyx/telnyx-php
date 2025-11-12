@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Create a messaging hosted number order.
  *
- * @see Telnyx\MessagingHostedNumberOrders->create
+ * @see Telnyx\MessagingHostedNumberOrdersService::create()
  *
  * @phpstan-type MessagingHostedNumberOrderCreateParamsShape = array{
  *   messaging_profile_id?: string, phone_numbers?: list<string>

@@ -15,7 +15,7 @@ use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Sort;
 /**
  * Returns a list of all phone number blocks of a porting order.
  *
- * @see Telnyx\PortingOrders\PhoneNumberBlocks->list
+ * @see Telnyx\STAINLESS_FIXME_PortingOrders\PhoneNumberBlocksService::list()
  *
  * @phpstan-type PhoneNumberBlockListParamsShape = array{
  *   filter?: Filter, page?: Page, sort?: Sort

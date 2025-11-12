@@ -15,7 +15,7 @@ use Telnyx\UserAddresses\UserAddressListParams\Sort;
 /**
  * Returns a list of your user addresses.
  *
- * @see Telnyx\UserAddresses->list
+ * @see Telnyx\UserAddressesService::list()
  *
  * @phpstan-type UserAddressListParamsShape = array{
  *   filter?: Filter, page?: Page, sort?: Sort|value-of<Sort>

@@ -15,7 +15,7 @@ use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams\Sort;
 /**
  * Returns a list of verification codes for a porting order.
  *
- * @see Telnyx\PortingOrders\VerificationCodes->list
+ * @see Telnyx\STAINLESS_FIXME_PortingOrders\VerificationCodesService::list()
  *
  * @phpstan-type VerificationCodeListParamsShape = array{
  *   filter?: Filter, page?: Page, sort?: Sort

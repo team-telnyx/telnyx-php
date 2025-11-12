@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * Updates the existing canary deploy configuration with new version IDs and percentages.
  *   All old versions and percentages are replaces by new ones from this request.
  *
- * @see Telnyx\AI\Assistants\CanaryDeploys->update
+ * @see Telnyx\STAINLESS_FIXME_AI\STAINLESS_FIXME_Assistants\CanaryDeploysService::update()
  *
  * @phpstan-type CanaryDeployUpdateParamsShape = array{
  *   versions: list<VersionConfig>

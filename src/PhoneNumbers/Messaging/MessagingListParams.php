@@ -13,7 +13,7 @@ use Telnyx\PhoneNumbers\Messaging\MessagingListParams\Page;
 /**
  * List phone numbers with messaging settings.
  *
- * @see Telnyx\PhoneNumbers\Messaging->list
+ * @see Telnyx\STAINLESS_FIXME_PhoneNumbers\MessagingService::list()
  *
  * @phpstan-type MessagingListParamsShape = array{page?: Page}
  */

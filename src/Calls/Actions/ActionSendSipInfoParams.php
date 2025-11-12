@@ -16,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * - `call.sip_info.received` (to be received on the target call leg)
  *
- * @see Telnyx\Calls\Actions->sendSipInfo
+ * @see Telnyx\STAINLESS_FIXME_Calls\ActionsService::sendSipInfo()
  *
  * @phpstan-type ActionSendSipInfoParamsShape = array{
  *   body: string, content_type: string, client_state?: string, command_id?: string

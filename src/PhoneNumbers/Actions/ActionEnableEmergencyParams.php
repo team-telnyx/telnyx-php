@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Enable emergency for a phone number.
  *
- * @see Telnyx\PhoneNumbers\Actions->enableEmergency
+ * @see Telnyx\STAINLESS_FIXME_PhoneNumbers\ActionsService::enableEmergency()
  *
  * @phpstan-type ActionEnableEmergencyParamsShape = array{
  *   emergency_address_id: string, emergency_enabled: bool

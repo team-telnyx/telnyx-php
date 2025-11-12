@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Updates client state.
  *
- * @see Telnyx\Calls\Actions->updateClientState
+ * @see Telnyx\STAINLESS_FIXME_Calls\ActionsService::updateClientState()
  *
  * @phpstan-type ActionUpdateClientStateParamsShape = array{client_state: string}
  */

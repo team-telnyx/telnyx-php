@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Deletes a phone number block.
  *
- * @see Telnyx\PortingOrders\PhoneNumberBlocks->delete
+ * @see Telnyx\STAINLESS_FIXME_PortingOrders\PhoneNumberBlocksService::delete()
  *
  * @phpstan-type PhoneNumberBlockDeleteParamsShape = array{
  *   porting_order_id: string

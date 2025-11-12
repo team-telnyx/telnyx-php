@@ -14,7 +14,7 @@ use Telnyx\NotificationSettings\NotificationSettingListParams\Page;
 /**
  * List notification settings.
  *
- * @see Telnyx\NotificationSettings->list
+ * @see Telnyx\NotificationSettingsService::list()
  *
  * @phpstan-type NotificationSettingListParamsShape = array{
  *   filter?: Filter, page?: Page

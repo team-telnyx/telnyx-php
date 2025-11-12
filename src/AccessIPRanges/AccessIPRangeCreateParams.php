@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Create new Access IP Range.
  *
- * @see Telnyx\AccessIPRanges->create
+ * @see Telnyx\AccessIPRangesService::create()
  *
  * @phpstan-type AccessIPRangeCreateParamsShape = array{
  *   cidr_block: string, description?: string

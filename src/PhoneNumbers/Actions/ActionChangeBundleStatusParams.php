@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Change the bundle status for a phone number (set to being in a bundle or remove from a bundle).
  *
- * @see Telnyx\PhoneNumbers\Actions->changeBundleStatus
+ * @see Telnyx\STAINLESS_FIXME_PhoneNumbers\ActionsService::changeBundleStatus()
  *
  * @phpstan-type ActionChangeBundleStatusParamsShape = array{bundle_id: string}
  */

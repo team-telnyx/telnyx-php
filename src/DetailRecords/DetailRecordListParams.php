@@ -14,7 +14,7 @@ use Telnyx\DetailRecords\DetailRecordListParams\Page;
 /**
  * Search for any detail record across the Telnyx Platform.
  *
- * @see Telnyx\DetailRecords->list
+ * @see Telnyx\DetailRecordsService::list()
  *
  * @phpstan-type DetailRecordListParamsShape = array{
  *   filter?: Filter, page?: Page, sort?: list<string>

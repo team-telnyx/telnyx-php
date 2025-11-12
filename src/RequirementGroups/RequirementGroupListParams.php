@@ -13,7 +13,7 @@ use Telnyx\RequirementGroups\RequirementGroupListParams\Filter;
 /**
  * List requirement groups.
  *
- * @see Telnyx\RequirementGroups->list
+ * @see Telnyx\RequirementGroupsService::list()
  *
  * @phpstan-type RequirementGroupListParamsShape = array{filter?: Filter}
  */

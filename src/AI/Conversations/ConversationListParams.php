@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Retrieve a list of all AI conversations configured by the user. Supports [PostgREST-style query parameters](https://postgrest.org/en/stable/api.html#horizontal-filtering-rows) for filtering. Examples are included for the standard metadata fields, but you can filter on any field in the metadata JSON object. For example, to filter by a custom field `metadata->custom_field`, use `metadata->custom_field=eq.value`.
  *
- * @see Telnyx\AI\Conversations->list
+ * @see Telnyx\STAINLESS_FIXME_AI\ConversationsService::list()
  *
  * @phpstan-type ConversationListParamsShape = array{
  *   id?: string,

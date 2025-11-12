@@ -14,7 +14,7 @@ use Telnyx\Rooms\Sessions\Actions\ActionMuteParams\Participants\UnionMember0;
 /**
  * Mute participants in room session.
  *
- * @see Telnyx\Rooms\Sessions\Actions->mute
+ * @see Telnyx\STAINLESS_FIXME_Rooms\STAINLESS_FIXME_Sessions\ActionsService::mute()
  *
  * @phpstan-type ActionMuteParamsShape = array{
  *   exclude?: list<string>,

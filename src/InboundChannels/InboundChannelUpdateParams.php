@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Update the number of Voice Channels for the US Zone. This allows your account to handle multiple simultaneous inbound calls to US numbers. Use this endpoint to increase or decrease your capacity based on expected call volume.
  *
- * @see Telnyx\InboundChannels->update
+ * @see Telnyx\InboundChannelsService::update()
  *
  * @phpstan-type InboundChannelUpdateParamsShape = array{channels: int}
  */

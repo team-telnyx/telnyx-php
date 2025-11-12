@@ -13,7 +13,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Retrieves paginated execution history for a specific assistant test with filtering options.
  *
- * @see Telnyx\AI\Assistants\Tests\Runs->list
+ * @see Telnyx\STAINLESS_FIXME_AI\STAINLESS_FIXME_Assistants\STAINLESS_FIXME_Tests\RunsService::list()
  *
  * @phpstan-type RunListParamsShape = array{page?: Page, status?: string}
  */

@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Starts a background task to compute how the data in an [embedded storage bucket](https://developers.telnyx.com/api/inference/inference-embedding/post-embedding) is clustered. This helps identify common themes and patterns in the data.
  *
- * @see Telnyx\AI\Clusters->compute
+ * @see Telnyx\STAINLESS_FIXME_AI\ClustersService::compute()
  *
  * @phpstan-type ClusterComputeParamsShape = array{
  *   bucket: string,

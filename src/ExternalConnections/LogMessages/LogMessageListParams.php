@@ -14,7 +14,7 @@ use Telnyx\ExternalConnections\LogMessages\LogMessageListParams\Page;
 /**
  * Retrieve a list of log messages for all external connections associated with your account.
  *
- * @see Telnyx\ExternalConnections\LogMessages->list
+ * @see Telnyx\STAINLESS_FIXME_ExternalConnections\LogMessagesService::list()
  *
  * @phpstan-type LogMessageListParamsShape = array{filter?: Filter, page?: Page}
  */
