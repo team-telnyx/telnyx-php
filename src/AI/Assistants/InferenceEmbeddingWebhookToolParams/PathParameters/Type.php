@@ -6,5 +6,5 @@ namespace Telnyx\AI\Assistants\InferenceEmbeddingWebhookToolParams\PathParameter
 
 enum Type: string
 {
-    case OBJECT1 = 'object';
+    case OBJECT = 'object';
 }

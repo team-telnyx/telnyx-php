@@ -15,7 +15,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  * https://platform.openai.com/docs/api-reference/assistants/deleteAssistant
  *
  * @phpstan-type AssistantDeleteResponseShape = array{
- *   id: string, deleted: bool, object1: string
+ *   id: string, deleted: bool, object: string
  * }
  */
 final class AssistantDeleteResponse implements BaseModel, ResponseConverter
@@ -32,14 +32,14 @@ final class AssistantDeleteResponse implements BaseModel, ResponseConverter
     public bool $deleted;
 
     #[Api]
-    public string $object1;
+    public string $object;
 
     /**
      * `new AssistantDeleteResponse()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * AssistantDeleteResponse::with(id: ..., deleted: ..., object1: ...)
+     * AssistantDeleteResponse::with(id: ..., deleted: ..., object: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -58,16 +58,13 @@ final class AssistantDeleteResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(
-        string $id,
-        bool $deleted,
-        string $object1
-    ): self {
+    public static function with(string $id, bool $deleted, string $object): self
+    {
         $obj = new self;
 
         $obj->id = $id;
         $obj->deleted = $deleted;
-        $obj->object1 = $object1;
+        $obj->object = $object;
 
         return $obj;
     }
@@ -88,10 +85,10 @@ final class AssistantDeleteResponse implements BaseModel, ResponseConverter
         return $obj;
     }
 
-    public function withObject(string $object1): self
+    public function withObject(string $object): self
     {
         $obj = clone $this;
-        $obj->object1 = $object1;
+        $obj->object = $object;
 
         return $obj;
     }

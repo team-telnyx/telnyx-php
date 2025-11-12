@@ -11,7 +11,7 @@ enum BeepEnabled: string
 {
     case ALWAYS = 'always';
 
-    case NEVER1 = 'never';
+    case NEVER = 'never';
 
     case ON_ENTER = 'on_enter';
 

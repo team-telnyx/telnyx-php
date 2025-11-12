@@ -10,6 +10,7 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SimCardGroups\ActionsContract;
 use Telnyx\SimCardGroups\Actions\ActionGetResponse;
 use Telnyx\SimCardGroups\Actions\ActionListParams;
+use Telnyx\SimCardGroups\Actions\ActionListParams\FilterType;
 use Telnyx\SimCardGroups\Actions\ActionListResponse;
 use Telnyx\SimCardGroups\Actions\ActionRemovePrivateWirelessGatewayResponse;
 use Telnyx\SimCardGroups\Actions\ActionRemoveWirelessBlocklistResponse;
@@ -48,14 +49,12 @@ final class ActionsService implements ActionsContract
     /**
      * @api
      *
-     * @phpstan-type FilterType = "set_private_wireless_gateway"|"remove_private_wireless_gateway"|"set_wireless_blocklist"|"remove_wireless_blocklist"
-     *
      * This API allows listing a paginated collection a SIM card group actions. It allows to explore a collection of existing asynchronous operation using specific filters.
      *
      * @param array{
      *   filter_sim_card_group_id_?: string,
      *   filter_status_?: "in-progress"|"completed"|"failed",
-     *   filter_type_?: FilterType,
+     *   filter_type_?: value-of<FilterType>,
      *   page_number_?: int,
      *   page_size_?: int,
      * }|ActionListParams $params

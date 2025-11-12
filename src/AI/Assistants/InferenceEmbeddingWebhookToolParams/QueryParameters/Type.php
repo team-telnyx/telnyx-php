@@ -6,5 +6,5 @@ namespace Telnyx\AI\Assistants\InferenceEmbeddingWebhookToolParams\QueryParamete
 
 enum Type: string
 {
-    case OBJECT1 = 'object';
+    case OBJECT = 'object';
 }

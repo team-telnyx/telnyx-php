@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type ChatCompletionToolParamShape = array{
- *   function1: Function1, type: value-of<Type>
+ *   function: Function1, type: value-of<Type>
  * }
  */
 final class ChatCompletionToolParam implements BaseModel
@@ -21,7 +21,7 @@ final class ChatCompletionToolParam implements BaseModel
     use SdkModel;
 
     #[Api]
-    public Function1 $function1;
+    public Function1 $function;
 
     /** @var value-of<Type> $type */
     #[Api(enum: Type::class)]
@@ -32,7 +32,7 @@ final class ChatCompletionToolParam implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * ChatCompletionToolParam::with(function1: ..., type: ...)
+     * ChatCompletionToolParam::with(function: ..., type: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -53,20 +53,20 @@ final class ChatCompletionToolParam implements BaseModel
      *
      * @param Type|value-of<Type> $type
      */
-    public static function with(Function1 $function1, Type|string $type): self
+    public static function with(Function1 $function, Type|string $type): self
     {
         $obj = new self;
 
-        $obj->function1 = $function1;
+        $obj->function = $function;
         $obj['type'] = $type;
 
         return $obj;
     }
 
-    public function withFunction(Function1 $function1): self
+    public function withFunction(Function1 $function): self
     {
         $obj = clone $this;
-        $obj->function1 = $function1;
+        $obj->function = $function;
 
         return $obj;
     }

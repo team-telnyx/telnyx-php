@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type ToolCallShape = array{
- *   id: string, function1: Function1, type: value-of<Type>
+ *   id: string, function: Function1, type: value-of<Type>
  * }
  */
 final class ToolCall implements BaseModel
@@ -27,7 +27,7 @@ final class ToolCall implements BaseModel
     public string $id;
 
     #[Api]
-    public Function1 $function1;
+    public Function1 $function;
 
     /**
      * Type of the tool call.
@@ -42,7 +42,7 @@ final class ToolCall implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * ToolCall::with(id: ..., function1: ..., type: ...)
+     * ToolCall::with(id: ..., function: ..., type: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -65,13 +65,13 @@ final class ToolCall implements BaseModel
      */
     public static function with(
         string $id,
-        Function1 $function1,
+        Function1 $function,
         Type|string $type
     ): self {
         $obj = new self;
 
         $obj->id = $id;
-        $obj->function1 = $function1;
+        $obj->function = $function;
         $obj['type'] = $type;
 
         return $obj;
@@ -88,10 +88,10 @@ final class ToolCall implements BaseModel
         return $obj;
     }
 
-    public function withFunction(Function1 $function1): self
+    public function withFunction(Function1 $function): self
     {
         $obj = clone $this;
-        $obj->function1 = $function1;
+        $obj->function = $function;
 
         return $obj;
     }
