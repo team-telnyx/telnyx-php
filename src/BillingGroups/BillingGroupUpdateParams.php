@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Update a billing group.
  *
- * @see Telnyx\BillingGroups->update
+ * @see Telnyx\BillingGroupsService::update()
  *
  * @phpstan-type BillingGroupUpdateParamsShape = array{name?: string}
  */

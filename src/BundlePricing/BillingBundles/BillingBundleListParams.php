@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Get all allowed bundles.
  *
- * @see Telnyx\BundlePricing\BillingBundles->list
+ * @see Telnyx\STAINLESS_FIXME_BundlePricing\BillingBundlesService::list()
  *
  * @phpstan-type BillingBundleListParamsShape = array{
  *   filter?: Filter, page?: Page, authorization_bearer?: string

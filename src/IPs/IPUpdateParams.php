@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Update the details of a specific IP.
  *
- * @see Telnyx\IPs->update
+ * @see Telnyx\IPsService::update()
  *
  * @phpstan-type IPUpdateParamsShape = array{
  *   ip_address: string, connection_id?: string, port?: int

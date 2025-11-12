@@ -13,7 +13,7 @@ use Telnyx\PortingOrders\VerificationCodes\VerificationCodeSendParams\Verificati
 /**
  * Send the verification code for all porting phone numbers.
  *
- * @see Telnyx\PortingOrders\VerificationCodes->send
+ * @see Telnyx\STAINLESS_FIXME_PortingOrders\VerificationCodesService::send()
  *
  * @phpstan-type VerificationCodeSendParamsShape = array{
  *   phone_numbers?: list<string>,

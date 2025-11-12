@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Returns recordings for a call identified by call_sid.
  *
- * @see Telnyx\Texml\Accounts\Calls\RecordingsJson->retrieveRecordingsJson
+ * @see Telnyx\STAINLESS_FIXME_Texml\STAINLESS_FIXME_Accounts\STAINLESS_FIXME_Calls\RecordingsJsonService::retrieveRecordingsJson()
  *
  * @phpstan-type RecordingsJsonRetrieveRecordingsJsonParamsShape = array{
  *   account_sid: string

@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Generate and fetch speech to text usage report synchronously. This endpoint will both generate and fetch the speech to text report over a specified time period.
  *
- * @see Telnyx\Legacy\Reporting\UsageReports->retrieveSpeechToText
+ * @see Telnyx\STAINLESS_FIXME_Legacy\STAINLESS_FIXME_Reporting\UsageReportsService::retrieveSpeechToText()
  *
  * @phpstan-type UsageReportRetrieveSpeechToTextParamsShape = array{
  *   end_date?: \DateTimeInterface, start_date?: \DateTimeInterface

@@ -13,7 +13,7 @@ use Telnyx\MessagingProfiles\MessagingProfileUpdateParams\WebhookAPIVersion;
 /**
  * Update a messaging profile.
  *
- * @see Telnyx\MessagingProfiles->update
+ * @see Telnyx\MessagingProfilesService::update()
  *
  * @phpstan-type MessagingProfileUpdateParamsShape = array{
  *   alpha_sender?: string|null,

@@ -13,7 +13,7 @@ use Telnyx\NotificationSettings\NotificationSettingCreateParams\Parameter;
 /**
  * Add a notification setting.
  *
- * @see Telnyx\NotificationSettings->create
+ * @see Telnyx\NotificationSettingsService::create()
  *
  * @phpstan-type NotificationSettingCreateParamsShape = array{
  *   notification_channel_id?: string,

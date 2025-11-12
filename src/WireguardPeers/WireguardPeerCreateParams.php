@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Create a new WireGuard Peer. Current limitation of 5 peers per interface can be created.
  *
- * @see Telnyx\WireguardPeers->create
+ * @see Telnyx\WireguardPeersService::create()
  *
  * @phpstan-type WireguardPeerCreateParamsShape = array{
  *   wireguard_interface_id: string, public_key?: string

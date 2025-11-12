@@ -15,7 +15,7 @@ use Telnyx\Core\Conversion\MapOf;
 /**
  * Add a new message to the conversation. Used to insert a new messages to a conversation manually ( without using chat endpoint ).
  *
- * @see Telnyx\AI\Conversations->addMessage
+ * @see Telnyx\STAINLESS_FIXME_AI\ConversationsService::addMessage()
  *
  * @phpstan-type ConversationAddMessageParamsShape = array{
  *   role: string,

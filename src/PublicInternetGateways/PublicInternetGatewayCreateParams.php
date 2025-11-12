@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Create a new Public Internet Gateway.
  *
- * @see Telnyx\PublicInternetGateways->create
+ * @see Telnyx\PublicInternetGatewaysService::create()
  *
  * @phpstan-type PublicInternetGatewayCreateParamsShape = array{
  *   name?: string, network_id?: string, region_code?: string

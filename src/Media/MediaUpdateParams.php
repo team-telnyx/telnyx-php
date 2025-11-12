@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Updates a stored media file.
  *
- * @see Telnyx\Media->update
+ * @see Telnyx\MediaService::update()
  *
  * @phpstan-type MediaUpdateParamsShape = array{media_url?: string, ttl_secs?: int}
  */

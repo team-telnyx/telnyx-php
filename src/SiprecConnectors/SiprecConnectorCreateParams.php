@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Creates a new SIPREC connector configuration.
  *
- * @see Telnyx\SiprecConnectors->create
+ * @see Telnyx\SiprecConnectorsService::create()
  *
  * @phpstan-type SiprecConnectorCreateParamsShape = array{
  *   host: string, name: string, port: int, app_subdomain?: string

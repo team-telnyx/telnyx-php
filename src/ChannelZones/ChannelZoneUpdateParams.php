@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Update the number of Voice Channels for the Non-US Zones. This allows your account to handle multiple simultaneous inbound calls to Non-US numbers. Use this endpoint to increase or decrease your capacity based on expected call volume.
  *
- * @see Telnyx\ChannelZones->update
+ * @see Telnyx\ChannelZonesService::update()
  *
  * @phpstan-type ChannelZoneUpdateParamsShape = array{channels: int}
  */

@@ -13,7 +13,7 @@ use Telnyx\RegulatoryRequirements\RegulatoryRequirementRetrieveParams\Filter;
 /**
  * Retrieve regulatory requirements.
  *
- * @see Telnyx\RegulatoryRequirements->retrieve
+ * @see Telnyx\RegulatoryRequirementsService::retrieve()
  *
  * @phpstan-type RegulatoryRequirementRetrieveParamsShape = array{filter?: Filter}
  */

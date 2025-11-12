@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Fetch all previous requests for MDR usage reports.
  *
- * @see Telnyx\Legacy\Reporting\UsageReports\Messaging->list
+ * @see Telnyx\STAINLESS_FIXME_Legacy\STAINLESS_FIXME_Reporting\STAINLESS_FIXME_UsageReports\MessagingService::list()
  *
  * @phpstan-type MessagingListParamsShape = array{page?: int, per_page?: int}
  */

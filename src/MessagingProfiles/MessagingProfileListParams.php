@@ -14,7 +14,7 @@ use Telnyx\MessagingProfiles\MessagingProfileListParams\Page;
 /**
  * List messaging profiles.
  *
- * @see Telnyx\MessagingProfiles->list
+ * @see Telnyx\MessagingProfilesService::list()
  *
  * @phpstan-type MessagingProfileListParamsShape = array{
  *   filter?: Filter, page?: Page

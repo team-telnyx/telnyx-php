@@ -13,7 +13,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Updates an existing assistant test configuration with new settings.
  *
- * @see Telnyx\AI\Assistants\Tests->update
+ * @see Telnyx\STAINLESS_FIXME_AI\STAINLESS_FIXME_Assistants\TestsService::update()
  *
  * @phpstan-type TestUpdateParamsShape = array{
  *   description?: string,

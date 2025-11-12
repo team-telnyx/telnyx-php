@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Noise Suppression Stop (BETA).
  *
- * @see Telnyx\Calls\Actions->stopNoiseSuppression
+ * @see Telnyx\STAINLESS_FIXME_Calls\ActionsService::stopNoiseSuppression()
  *
  * @phpstan-type ActionStopNoiseSuppressionParamsShape = array{
  *   client_state?: string, command_id?: string

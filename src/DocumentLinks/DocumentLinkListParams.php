@@ -14,7 +14,7 @@ use Telnyx\DocumentLinks\DocumentLinkListParams\Page;
 /**
  * List all documents links ordered by created_at descending.
  *
- * @see Telnyx\DocumentLinks->list
+ * @see Telnyx\DocumentLinksService::list()
  *
  * @phpstan-type DocumentLinkListParamsShape = array{filter?: Filter, page?: Page}
  */

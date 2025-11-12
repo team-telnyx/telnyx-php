@@ -19,7 +19,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * - flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm
  * - Up to 100 MB
  *
- * @see Telnyx\AI->summarize
+ * @see Telnyx\AIService::summarize()
  *
  * @phpstan-type AISummarizeParamsShape = array{
  *   bucket: string, filename: string, system_prompt?: string

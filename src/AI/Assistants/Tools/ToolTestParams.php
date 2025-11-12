@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Test a webhook tool for an assistant.
  *
- * @see Telnyx\AI\Assistants\Tools->test
+ * @see Telnyx\STAINLESS_FIXME_AI\STAINLESS_FIXME_Assistants\ToolsService::test()
  *
  * @phpstan-type ToolTestParamsShape = array{
  *   assistant_id: string,

@@ -13,7 +13,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * List all clusters.
  *
- * @see Telnyx\AI\Clusters->list
+ * @see Telnyx\STAINLESS_FIXME_AI\ClustersService::list()
  *
  * @phpstan-type ClusterListParamsShape = array{page?: Page}
  */

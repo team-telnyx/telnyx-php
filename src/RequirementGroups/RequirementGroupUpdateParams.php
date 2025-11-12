@@ -13,7 +13,7 @@ use Telnyx\RequirementGroups\RequirementGroupUpdateParams\RegulatoryRequirement;
 /**
  * Update requirement values in requirement group.
  *
- * @see Telnyx\RequirementGroups->update
+ * @see Telnyx\RequirementGroupsService::update()
  *
  * @phpstan-type RequirementGroupUpdateParamsShape = array{
  *   customer_reference?: string,

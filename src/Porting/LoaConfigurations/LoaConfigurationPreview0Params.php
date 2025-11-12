@@ -15,7 +15,7 @@ use Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Logo;
 /**
  * Preview the LOA template that would be generated without need to create LOA configuration.
  *
- * @see Telnyx\Porting\LoaConfigurations->preview0
+ * @see Telnyx\STAINLESS_FIXME_Porting\LoaConfigurationsService::preview0()
  *
  * @phpstan-type LoaConfigurationPreview0ParamsShape = array{
  *   address: Address,

@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Update a location's static emergency address.
  *
- * @see Telnyx\ExternalConnections->updateLocation
+ * @see Telnyx\ExternalConnectionsService::updateLocation()
  *
  * @phpstan-type ExternalConnectionUpdateLocationParamsShape = array{
  *   id: string, static_emergency_address_id: string

@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Update an existing MCP server.
  *
- * @see Telnyx\AI\McpServers->update
+ * @see Telnyx\STAINLESS_FIXME_AI\McpServersService::update()
  *
  * @phpstan-type McpServerUpdateParamsShape = array{
  *   id?: string,

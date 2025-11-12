@@ -15,7 +15,7 @@ use Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Logo;
 /**
  * Update a specific LOA configuration.
  *
- * @see Telnyx\Porting\LoaConfigurations->update
+ * @see Telnyx\STAINLESS_FIXME_Porting\LoaConfigurationsService::update()
  *
  * @phpstan-type LoaConfigurationUpdateParamsShape = array{
  *   address: Address,

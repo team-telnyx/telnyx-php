@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Retrieve a paginated list of telco data usage reports.
  *
- * @see Telnyx\Legacy\Reporting\UsageReports\NumberLookup->list
+ * @see Telnyx\STAINLESS_FIXME_Legacy\STAINLESS_FIXME_Reporting\STAINLESS_FIXME_UsageReports\NumberLookupService::list()
  *
  * @phpstan-type NumberLookupListParamsShape = array{page?: int, per_page?: int}
  */

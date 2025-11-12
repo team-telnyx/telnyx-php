@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Retrieve a summary of monthly charges for a specified date range. The date range cannot exceed 31 days.
  *
- * @see Telnyx\ChargesSummary->retrieve
+ * @see Telnyx\ChargesSummaryService::retrieve()
  *
  * @phpstan-type ChargesSummaryRetrieveParamsShape = array{
  *   end_date: \DateTimeInterface, start_date: \DateTimeInterface

@@ -25,7 +25,7 @@ use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams
 /**
  * Dials a new conference participant.
  *
- * @see Telnyx\Texml\Accounts\Conferences\Participants->participants
+ * @see Telnyx\STAINLESS_FIXME_Texml\STAINLESS_FIXME_Accounts\STAINLESS_FIXME_Conferences\ParticipantsService::participants()
  *
  * @phpstan-type ParticipantParticipantsParamsShape = array{
  *   account_sid: string,

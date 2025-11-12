@@ -14,7 +14,7 @@ use Telnyx\IPs\IPListParams\Page;
 /**
  * Get all IPs belonging to the user that match the given filters.
  *
- * @see Telnyx\IPs->list
+ * @see Telnyx\IPsService::list()
  *
  * @phpstan-type IPListParamsShape = array{filter?: Filter, page?: Page}
  */

@@ -15,7 +15,7 @@ use Telnyx\PortingOrders\PortingOrderListParams\Sort;
 /**
  * Returns a list of your porting order.
  *
- * @see Telnyx\PortingOrders->list
+ * @see Telnyx\PortingOrdersService::list()
  *
  * @phpstan-type PortingOrderListParamsShape = array{
  *   filter?: Filter, include_phone_numbers?: bool, page?: Page, sort?: Sort

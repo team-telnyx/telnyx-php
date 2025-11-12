@@ -13,7 +13,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Create a new insight.
  *
- * @see Telnyx\AI\Conversations\Insights->create
+ * @see Telnyx\STAINLESS_FIXME_AI\STAINLESS_FIXME_Conversations\InsightsService::create()
  *
  * @phpstan-type InsightCreateParamsShape = array{
  *   instructions: string,

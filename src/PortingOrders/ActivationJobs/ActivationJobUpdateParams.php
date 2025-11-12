@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Updates the activation time of a porting activation job.
  *
- * @see Telnyx\PortingOrders\ActivationJobs->update
+ * @see Telnyx\STAINLESS_FIXME_PortingOrders\ActivationJobsService::update()
  *
  * @phpstan-type ActivationJobUpdateParamsShape = array{
  *   id: string, activate_at?: \DateTimeInterface

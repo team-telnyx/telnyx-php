@@ -15,7 +15,7 @@ use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberListParams\
 /**
  * Returns a list of all associated phone numbers for a porting order. Associated phone numbers are used for partial porting in GB to specify which phone numbers should be kept or disconnected.
  *
- * @see Telnyx\PortingOrders\AssociatedPhoneNumbers->list
+ * @see Telnyx\STAINLESS_FIXME_PortingOrders\AssociatedPhoneNumbersService::list()
  *
  * @phpstan-type AssociatedPhoneNumberListParamsShape = array{
  *   filter?: Filter, page?: Page, sort?: Sort

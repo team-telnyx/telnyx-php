@@ -13,7 +13,7 @@ use Telnyx\SimCardGroups\SimCardGroupCreateParams\DataLimit;
 /**
  * Creates a new SIM card group object.
  *
- * @see Telnyx\SimCardGroups->create
+ * @see Telnyx\SimCardGroupsService::create()
  *
  * @phpstan-type SimCardGroupCreateParamsShape = array{
  *   name: string, data_limit?: DataLimit

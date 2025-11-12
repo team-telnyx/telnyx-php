@@ -16,7 +16,7 @@ use Telnyx\Texml\Accounts\Calls\CallStreamsJsonParams\Track;
 /**
  * Starts streaming media from a call to a specific WebSocket address.
  *
- * @see Telnyx\Texml\Accounts\Calls->streamsJson
+ * @see Telnyx\STAINLESS_FIXME_Texml\STAINLESS_FIXME_Accounts\CallsService::streamsJson()
  *
  * @phpstan-type CallStreamsJsonParamsShape = array{
  *   account_sid: string,

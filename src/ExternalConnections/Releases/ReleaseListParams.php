@@ -14,7 +14,7 @@ use Telnyx\ExternalConnections\Releases\ReleaseListParams\Page;
 /**
  * Returns a list of your Releases for the given external connection. These are automatically created when you change the `connection_id` of a phone number that is currently on Microsoft Teams.
  *
- * @see Telnyx\ExternalConnections\Releases->list
+ * @see Telnyx\STAINLESS_FIXME_ExternalConnections\ReleasesService::list()
  *
  * @phpstan-type ReleaseListParamsShape = array{filter?: Filter, page?: Page}
  */

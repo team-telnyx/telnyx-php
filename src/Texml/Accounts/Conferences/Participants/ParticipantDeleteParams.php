@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Deletes a conference participant.
  *
- * @see Telnyx\Texml\Accounts\Conferences\Participants->delete
+ * @see Telnyx\STAINLESS_FIXME_Texml\STAINLESS_FIXME_Accounts\STAINLESS_FIXME_Conferences\ParticipantsService::delete()
  *
  * @phpstan-type ParticipantDeleteParamsShape = array{
  *   account_sid: string, conference_sid: string

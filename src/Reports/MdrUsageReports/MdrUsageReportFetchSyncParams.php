@@ -13,7 +13,7 @@ use Telnyx\Reports\MdrUsageReports\MdrUsageReportFetchSyncParams\AggregationType
 /**
  * Generate and fetch messaging usage report synchronously. This endpoint will both generate and fetch the messaging report over a specified time period. No polling is necessary but the response may take up to a couple of minutes.
  *
- * @see Telnyx\Reports\MdrUsageReports->fetchSync
+ * @see Telnyx\STAINLESS_FIXME_Reports\MdrUsageReportsService::fetchSync()
  *
  * @phpstan-type MdrUsageReportFetchSyncParamsShape = array{
  *   aggregation_type: AggregationType|value-of<AggregationType>,

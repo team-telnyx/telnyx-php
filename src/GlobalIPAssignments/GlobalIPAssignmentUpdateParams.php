@@ -13,7 +13,7 @@ use Telnyx\GlobalIPAssignments\GlobalIPAssignmentUpdateParams\Body;
 /**
  * Update a Global IP assignment.
  *
- * @see Telnyx\GlobalIPAssignments->update
+ * @see Telnyx\GlobalIPAssignmentsService::update()
  *
  * @phpstan-type GlobalIPAssignmentUpdateParamsShape = array{body: Body}
  */

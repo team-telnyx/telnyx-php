@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Update metadata for a specific conversation.
  *
- * @see Telnyx\AI\Conversations->update
+ * @see Telnyx\STAINLESS_FIXME_AI\ConversationsService::update()
  *
  * @phpstan-type ConversationUpdateParamsShape = array{
  *   metadata?: array<string,string>

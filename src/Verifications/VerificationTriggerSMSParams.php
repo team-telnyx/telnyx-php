@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Trigger SMS verification.
  *
- * @see Telnyx\Verifications->triggerSMS
+ * @see Telnyx\VerificationsService::triggerSMS()
  *
  * @phpstan-type VerificationTriggerSMSParamsShape = array{
  *   phone_number: string,

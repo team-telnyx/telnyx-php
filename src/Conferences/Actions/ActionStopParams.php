@@ -13,7 +13,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Stop audio being played to all or some participants on a conference call.
  *
- * @see Telnyx\Conferences\Actions->stop
+ * @see Telnyx\STAINLESS_FIXME_Conferences\ActionsService::stop()
  *
  * @phpstan-type ActionStopParamsShape = array{
  *   call_control_ids?: list<string>, region?: Region|value-of<Region>

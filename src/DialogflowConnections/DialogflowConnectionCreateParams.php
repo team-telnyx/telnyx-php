@@ -13,7 +13,7 @@ use Telnyx\DialogflowConnections\DialogflowConnectionCreateParams\DialogflowAPI;
 /**
  * Save Dialogflow Credentiails to Telnyx, so it can be used with other Telnyx services.
  *
- * @see Telnyx\DialogflowConnections->create
+ * @see Telnyx\DialogflowConnectionsService::create()
  *
  * @phpstan-type DialogflowConnectionCreateParamsShape = array{
  *   service_account: array<string,mixed>,

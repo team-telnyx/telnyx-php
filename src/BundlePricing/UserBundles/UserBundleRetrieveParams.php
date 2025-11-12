@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Retrieves a user bundle by its ID.
  *
- * @see Telnyx\BundlePricing\UserBundles->retrieve
+ * @see Telnyx\STAINLESS_FIXME_BundlePricing\UserBundlesService::retrieve()
  *
  * @phpstan-type UserBundleRetrieveParamsShape = array{
  *   authorization_bearer?: string

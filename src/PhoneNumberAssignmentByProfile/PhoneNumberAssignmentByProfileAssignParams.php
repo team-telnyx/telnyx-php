@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * This endpoint allows you to link all phone numbers associated with a Messaging Profile to a campaign. **Please note:** if you want to assign phone numbers to a campaign that you did not create with Telnyx 10DLC services, this endpoint allows that provided that you've shared the campaign with Telnyx. In this case, only provide the parameter, `tcrCampaignId`, and not `campaignId`. In all other cases (where the campaign you're assigning was created with Telnyx 10DLC services), only provide `campaignId`, not `tcrCampaignId`.
  *
- * @see Telnyx\PhoneNumberAssignmentByProfile->assign
+ * @see Telnyx\PhoneNumberAssignmentByProfileService::assign()
  *
  * @phpstan-type PhoneNumberAssignmentByProfileAssignParamsShape = array{
  *   messagingProfileId: string, campaignId?: string, tcrCampaignId?: string

@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Create a ledger billing group report.
  *
- * @see Telnyx\LedgerBillingGroupReports->create
+ * @see Telnyx\LedgerBillingGroupReportsService::create()
  *
  * @phpstan-type LedgerBillingGroupReportCreateParamsShape = array{
  *   month?: int, year?: int

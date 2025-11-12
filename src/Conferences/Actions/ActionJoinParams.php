@@ -20,7 +20,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * - `conference.participant.joined`
  * - `conference.participant.left`
  *
- * @see Telnyx\Conferences\Actions->join
+ * @see Telnyx\STAINLESS_FIXME_Conferences\ActionsService::join()
  *
  * @phpstan-type ActionJoinParamsShape = array{
  *   call_control_id: string,

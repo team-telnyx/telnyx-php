@@ -13,7 +13,7 @@ use Telnyx\CustomerServiceRecords\CustomerServiceRecordCreateParams\AdditionalDa
 /**
  * Create a new customer service record for the provided phone number.
  *
- * @see Telnyx\CustomerServiceRecords->create
+ * @see Telnyx\CustomerServiceRecordsService::create()
  *
  * @phpstan-type CustomerServiceRecordCreateParamsShape = array{
  *   phone_number: string, additional_data?: AdditionalData, webhook_url?: string

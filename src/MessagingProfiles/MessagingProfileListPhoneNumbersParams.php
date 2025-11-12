@@ -13,7 +13,7 @@ use Telnyx\MessagingProfiles\MessagingProfileListPhoneNumbersParams\Page;
 /**
  * List phone numbers associated with a messaging profile.
  *
- * @see Telnyx\MessagingProfiles->listPhoneNumbers
+ * @see Telnyx\MessagingProfilesService::listPhoneNumbers()
  *
  * @phpstan-type MessagingProfileListPhoneNumbersParamsShape = array{page?: Page}
  */

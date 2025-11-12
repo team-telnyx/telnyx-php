@@ -15,7 +15,7 @@ use Telnyx\Requirements\RequirementListParams\Sort;
 /**
  * List all requirements with filtering, sorting, and pagination.
  *
- * @see Telnyx\Requirements->list
+ * @see Telnyx\RequirementsService::list()
  *
  * @phpstan-type RequirementListParamsShape = array{
  *   filter?: Filter, page?: Page, sort?: list<Sort|value-of<Sort>>

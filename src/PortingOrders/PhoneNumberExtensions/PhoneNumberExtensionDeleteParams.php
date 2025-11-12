@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Deletes a phone number extension.
  *
- * @see Telnyx\PortingOrders\PhoneNumberExtensions->delete
+ * @see Telnyx\STAINLESS_FIXME_PortingOrders\PhoneNumberExtensionsService::delete()
  *
  * @phpstan-type PhoneNumberExtensionDeleteParamsShape = array{
  *   porting_order_id: string

@@ -15,7 +15,7 @@ use Telnyx\Texml\Accounts\Calls\CallUpdateParams\StatusCallbackMethod;
 /**
  * Update TeXML call. Please note that the keys present in the payload MUST BE formatted in CamelCase as specified in the example.
  *
- * @see Telnyx\Texml\Accounts\Calls->update
+ * @see Telnyx\STAINLESS_FIXME_Texml\STAINLESS_FIXME_Accounts\CallsService::update()
  *
  * @phpstan-type CallUpdateParamsShape = array{
  *   account_sid: string,

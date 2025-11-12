@@ -13,7 +13,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Returns the non-US voice channels for your account. voice channels allow you to use Channel Billing for calls to your Telnyx phone numbers. Please check the <a href="https://support.telnyx.com/en/articles/8428806-global-channel-billing">Telnyx Support Articles</a> section for full information and examples of how to utilize Channel Billing.
  *
- * @see Telnyx\ChannelZones->list
+ * @see Telnyx\ChannelZonesService::list()
  *
  * @phpstan-type ChannelZoneListParamsShape = array{page?: Page}
  */

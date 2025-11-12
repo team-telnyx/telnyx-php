@@ -13,7 +13,7 @@ use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter;
 /**
  * Creates a new CDR report request with the specified filters.
  *
- * @see Telnyx\Legacy\Reporting\BatchDetailRecords\Voice->create
+ * @see Telnyx\STAINLESS_FIXME_Legacy\STAINLESS_FIXME_Reporting\STAINLESS_FIXME_BatchDetailRecords\VoiceService::create()
  *
  * @phpstan-type VoiceCreateParamsShape = array{
  *   end_time: \DateTimeInterface,

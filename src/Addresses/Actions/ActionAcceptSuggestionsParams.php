@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Accepts this address suggestion as a new emergency address for Operator Connect and finishes the uploads of the numbers associated with it to Microsoft.
  *
- * @see Telnyx\Addresses\Actions->acceptSuggestions
+ * @see Telnyx\STAINLESS_FIXME_Addresses\ActionsService::acceptSuggestions()
  *
  * @phpstan-type ActionAcceptSuggestionsParamsShape = array{id?: string}
  */

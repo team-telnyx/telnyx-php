@@ -13,7 +13,7 @@ use Telnyx\CustomStorageCredentials\CustomStorageCredentialCreateParams\Backend;
 /**
  * Creates a custom storage credentials configuration.
  *
- * @see Telnyx\CustomStorageCredentials->create
+ * @see Telnyx\CustomStorageCredentialsService::create()
  *
  * @phpstan-type CustomStorageCredentialCreateParamsShape = array{
  *   backend: Backend|value-of<Backend>,

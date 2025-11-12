@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Update the WireGuard peer.
  *
- * @see Telnyx\WireguardPeers->update
+ * @see Telnyx\WireguardPeersService::update()
  *
  * @phpstan-type WireguardPeerUpdateParamsShape = array{public_key?: string}
  */

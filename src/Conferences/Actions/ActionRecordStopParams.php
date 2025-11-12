@@ -17,7 +17,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * - `conference.recording.saved`
  *
- * @see Telnyx\Conferences\Actions->recordStop
+ * @see Telnyx\STAINLESS_FIXME_Conferences\ActionsService::recordStop()
  *
  * @phpstan-type ActionRecordStopParamsShape = array{
  *   client_state?: string,

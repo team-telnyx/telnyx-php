@@ -13,7 +13,7 @@ use Telnyx\Texml\Accounts\Conferences\ConferenceUpdateParams\AnnounceMethod;
 /**
  * Updates a conference resource.
  *
- * @see Telnyx\Texml\Accounts\Conferences->update
+ * @see Telnyx\STAINLESS_FIXME_Texml\STAINLESS_FIXME_Accounts\ConferencesService::update()
  *
  * @phpstan-type ConferenceUpdateParamsShape = array{
  *   account_sid: string,

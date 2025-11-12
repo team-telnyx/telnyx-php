@@ -14,7 +14,7 @@ use Telnyx\VirtualCrossConnects\VirtualCrossConnectListParams\Page;
 /**
  * List all Virtual Cross Connects.
  *
- * @see Telnyx\VirtualCrossConnects->list
+ * @see Telnyx\VirtualCrossConnectsService::list()
  *
  * @phpstan-type VirtualCrossConnectListParamsShape = array{
  *   filter?: Filter, page?: Page

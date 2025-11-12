@@ -13,7 +13,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Pause conference recording.
  *
- * @see Telnyx\Conferences\Actions->recordPause
+ * @see Telnyx\STAINLESS_FIXME_Conferences\ActionsService::recordPause()
  *
  * @phpstan-type ActionRecordPauseParamsShape = array{
  *   command_id?: string, recording_id?: string, region?: Region|value-of<Region>

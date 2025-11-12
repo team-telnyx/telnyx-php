@@ -14,7 +14,7 @@ use Telnyx\ExternalConnections\Uploads\UploadListParams\Page;
 /**
  * Returns a list of your Upload requests for the given external connection.
  *
- * @see Telnyx\ExternalConnections\Uploads->list
+ * @see Telnyx\STAINLESS_FIXME_ExternalConnections\UploadsService::list()
  *
  * @phpstan-type UploadListParamsShape = array{filter?: Filter, page?: Page}
  */

@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Update a document.
  *
- * @see Telnyx\Documents->update
+ * @see Telnyx\DocumentsService::update()
  *
  * @phpstan-type DocumentUpdateParamsShape = array{
  *   customer_reference?: string, filename?: string

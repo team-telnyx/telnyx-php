@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Update queued call's keep_after_hangup flag.
  *
- * @see Telnyx\Queues\Calls->update
+ * @see Telnyx\STAINLESS_FIXME_Queues\CallsService::update()
  *
  * @phpstan-type CallUpdateParamsShape = array{
  *   queue_name: string, keep_after_hangup?: bool

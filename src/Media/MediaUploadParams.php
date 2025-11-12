@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Upload media file to Telnyx so it can be used with other Telnyx services.
  *
- * @see Telnyx\Media->upload
+ * @see Telnyx\MediaService::upload()
  *
  * @phpstan-type MediaUploadParamsShape = array{
  *   media_url: string, media_name?: string, ttl_secs?: int

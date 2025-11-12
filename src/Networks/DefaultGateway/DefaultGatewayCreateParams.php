@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Create Default Gateway.
  *
- * @see Telnyx\Networks\DefaultGateway->create
+ * @see Telnyx\STAINLESS_FIXME_Networks\DefaultGatewayService::create()
  *
  * @phpstan-type DefaultGatewayCreateParamsShape = array{
  *   wireguard_peer_id?: string

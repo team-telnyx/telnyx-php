@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Send a group MMS message.
  *
- * @see Telnyx\Messages->sendGroupMms
+ * @see Telnyx\MessagesService::sendGroupMms()
  *
  * @phpstan-type MessageSendGroupMmsParamsShape = array{
  *   from: string,

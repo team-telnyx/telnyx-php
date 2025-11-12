@@ -13,7 +13,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Play audio to all or some participants on a conference call.
  *
- * @see Telnyx\Conferences\Actions->play
+ * @see Telnyx\STAINLESS_FIXME_Conferences\ActionsService::play()
  *
  * @phpstan-type ActionPlayParamsShape = array{
  *   audio_url?: string,

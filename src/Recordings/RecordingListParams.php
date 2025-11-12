@@ -14,7 +14,7 @@ use Telnyx\Recordings\RecordingListParams\Page;
 /**
  * Returns a list of your call recordings.
  *
- * @see Telnyx\Recordings->list
+ * @see Telnyx\RecordingsService::list()
  *
  * @phpstan-type RecordingListParamsShape = array{filter?: Filter, page?: Page}
  */

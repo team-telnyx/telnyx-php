@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Returns the recording transcription resource identified by its ID.
  *
- * @see Telnyx\Texml\Accounts\Transcriptions\Json->retrieveRecordingTranscriptionSidJson
+ * @see Telnyx\STAINLESS_FIXME_Texml\STAINLESS_FIXME_Accounts\STAINLESS_FIXME_Transcriptions\JsonService::retrieveRecordingTranscriptionSidJson()
  *
  * @phpstan-type JsonRetrieveRecordingTranscriptionSidJsonParamsShape = array{
  *   account_sid: string

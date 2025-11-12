@@ -14,7 +14,7 @@ use Telnyx\ExternalConnections\Uploads\UploadCreateParams\Usage;
 /**
  * Creates a new Upload request to Microsoft teams with the included phone numbers. Only one of civic_address_id or location_id must be provided, not both. The maximum allowed phone numbers for the numbers_ids array is 1000.
  *
- * @see Telnyx\ExternalConnections\Uploads->create
+ * @see Telnyx\STAINLESS_FIXME_ExternalConnections\UploadsService::create()
  *
  * @phpstan-type UploadCreateParamsShape = array{
  *   number_ids: list<string>,

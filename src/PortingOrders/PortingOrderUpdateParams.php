@@ -19,7 +19,7 @@ use Telnyx\PortingOrders\PortingOrderUpdateParams\Requirement;
  *
  * If a request does not include all of the attributes for a resource, the system will interpret the missing attributes as if they were included with their current values. To explicitly set something to null, it must be included in the request with a null value.
  *
- * @see Telnyx\PortingOrders->update
+ * @see Telnyx\PortingOrdersService::update()
  *
  * @phpstan-type PortingOrderUpdateParamsShape = array{
  *   activation_settings?: ActivationSettings,

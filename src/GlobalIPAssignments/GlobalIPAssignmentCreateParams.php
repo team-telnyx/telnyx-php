@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Create a Global IP assignment.
  *
- * @see Telnyx\GlobalIPAssignments->create
+ * @see Telnyx\GlobalIPAssignmentsService::create()
  *
  * @phpstan-type GlobalIPAssignmentCreateParamsShape = array{
  *   global_ip_id?: string, is_in_maintenance?: bool, wireguard_peer_id?: string

@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Deletes recording resource identified by recording id.
  *
- * @see Telnyx\Texml\Accounts\Recordings\Json->deleteRecordingSidJson
+ * @see Telnyx\STAINLESS_FIXME_Texml\STAINLESS_FIXME_Accounts\STAINLESS_FIXME_Recordings\JsonService::deleteRecordingSidJson()
  *
  * @phpstan-type JsonDeleteRecordingSidJsonParamsShape = array{account_sid: string}
  */

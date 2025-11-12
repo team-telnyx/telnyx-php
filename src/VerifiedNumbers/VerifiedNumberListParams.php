@@ -13,7 +13,7 @@ use Telnyx\VerifiedNumbers\VerifiedNumberListParams\Page;
 /**
  * Gets a paginated list of Verified Numbers.
  *
- * @see Telnyx\VerifiedNumbers->list
+ * @see Telnyx\VerifiedNumbersService::list()
  *
  * @phpstan-type VerifiedNumberListParamsShape = array{page?: Page}
  */

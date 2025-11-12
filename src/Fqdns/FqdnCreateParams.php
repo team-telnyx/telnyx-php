@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Create a new FQDN object.
  *
- * @see Telnyx\Fqdns->create
+ * @see Telnyx\FqdnsService::create()
  *
  * @phpstan-type FqdnCreateParamsShape = array{
  *   connection_id: string, dns_record_type: string, fqdn: string, port?: int|null

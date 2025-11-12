@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Retrieve an existing call from an existing queue.
  *
- * @see Telnyx\Queues\Calls->retrieve
+ * @see Telnyx\STAINLESS_FIXME_Queues\CallsService::retrieve()
  *
  * @phpstan-type CallRetrieveParamsShape = array{queue_name: string}
  */

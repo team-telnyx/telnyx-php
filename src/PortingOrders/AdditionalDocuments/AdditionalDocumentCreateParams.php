@@ -13,7 +13,7 @@ use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentCreateParams\Addi
 /**
  * Creates a list of additional documents for a porting order.
  *
- * @see Telnyx\PortingOrders\AdditionalDocuments->create
+ * @see Telnyx\STAINLESS_FIXME_PortingOrders\AdditionalDocumentsService::create()
  *
  * @phpstan-type AdditionalDocumentCreateParamsShape = array{
  *   additional_documents?: list<AdditionalDocument>

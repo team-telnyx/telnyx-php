@@ -13,7 +13,7 @@ use Telnyx\PortingOrders\Comments\CommentListParams\Page;
 /**
  * Returns a list of all comments of a porting order.
  *
- * @see Telnyx\PortingOrders\Comments->list
+ * @see Telnyx\STAINLESS_FIXME_PortingOrders\CommentsService::list()
  *
  * @phpstan-type CommentListParamsShape = array{page?: Page}
  */

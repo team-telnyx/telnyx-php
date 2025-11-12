@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Returns a conference resource.
  *
- * @see Telnyx\Texml\Accounts\Conferences->retrieve
+ * @see Telnyx\STAINLESS_FIXME_Texml\STAINLESS_FIXME_Accounts\ConferencesService::retrieve()
  *
  * @phpstan-type ConferenceRetrieveParamsShape = array{account_sid: string}
  */

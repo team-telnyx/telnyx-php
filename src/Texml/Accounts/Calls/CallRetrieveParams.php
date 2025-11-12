@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Returns an individual call identified by its CallSid. This endpoint is eventually consistent.
  *
- * @see Telnyx\Texml\Accounts\Calls->retrieve
+ * @see Telnyx\STAINLESS_FIXME_Texml\STAINLESS_FIXME_Accounts\CallsService::retrieve()
  *
  * @phpstan-type CallRetrieveParamsShape = array{account_sid: string}
  */

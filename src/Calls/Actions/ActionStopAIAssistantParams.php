@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Stop an AI assistant on the call.
  *
- * @see Telnyx\Calls\Actions->stopAIAssistant
+ * @see Telnyx\STAINLESS_FIXME_Calls\ActionsService::stopAIAssistant()
  *
  * @phpstan-type ActionStopAIAssistantParamsShape = array{
  *   client_state?: string, command_id?: string

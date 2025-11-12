@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Get all Wireless Blocklists belonging to the user.
  *
- * @see Telnyx\WirelessBlocklists->list
+ * @see Telnyx\WirelessBlocklistsService::list()
  *
  * @phpstan-type WirelessBlocklistListParamsShape = array{
  *   filter_name_?: string,

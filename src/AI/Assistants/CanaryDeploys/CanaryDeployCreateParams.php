@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * Creates a new canary deploy configuration with multiple version IDs and their traffic
  * percentages for A/B testing or gradual rollouts of assistant versions.
  *
- * @see Telnyx\AI\Assistants\CanaryDeploys->create
+ * @see Telnyx\STAINLESS_FIXME_AI\STAINLESS_FIXME_Assistants\CanaryDeploysService::create()
  *
  * @phpstan-type CanaryDeployCreateParamsShape = array{
  *   versions: list<VersionConfig>

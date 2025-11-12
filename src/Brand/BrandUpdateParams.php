@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Update a brand's attributes by `brandId`.
  *
- * @see Telnyx\Brand->update
+ * @see Telnyx\BrandService::update()
  *
  * @phpstan-type BrandUpdateParamsShape = array{
  *   country: string,

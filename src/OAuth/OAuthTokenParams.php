@@ -13,7 +13,7 @@ use Telnyx\OAuth\OAuthTokenParams\GrantType;
 /**
  * Exchange authorization code, client credentials, or refresh token for access token.
  *
- * @see Telnyx\OAuth->token
+ * @see Telnyx\OAuthService::token()
  *
  * @phpstan-type OAuthTokenParamsShape = array{
  *   grant_type: GrantType|value-of<GrantType>,

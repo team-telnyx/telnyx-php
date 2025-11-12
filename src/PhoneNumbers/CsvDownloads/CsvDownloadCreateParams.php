@@ -14,7 +14,7 @@ use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadCreateParams\Filter;
 /**
  * Create a CSV download.
  *
- * @see Telnyx\PhoneNumbers\CsvDownloads->create
+ * @see Telnyx\STAINLESS_FIXME_PhoneNumbers\CsvDownloadsService::create()
  *
  * @phpstan-type CsvDownloadCreateParamsShape = array{
  *   csv_format?: CsvFormat|value-of<CsvFormat>, filter?: Filter

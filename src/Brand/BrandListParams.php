@@ -13,7 +13,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * This endpoint is used to list all brands associated with your organization.
  *
- * @see Telnyx\Brand->list
+ * @see Telnyx\BrandService::list()
  *
  * @phpstan-type BrandListParamsShape = array{
  *   brandId?: string,

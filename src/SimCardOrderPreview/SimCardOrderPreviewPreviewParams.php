@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Preview SIM card order purchases.
  *
- * @see Telnyx\SimCardOrderPreview->preview
+ * @see Telnyx\SimCardOrderPreviewService::preview()
  *
  * @phpstan-type SimCardOrderPreviewPreviewParamsShape = array{
  *   address_id: string, quantity: int

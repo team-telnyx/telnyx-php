@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Authorize or reject portout request.
  *
- * @see Telnyx\Portouts->updateStatus
+ * @see Telnyx\PortoutsService::updateStatus()
  *
  * @phpstan-type PortoutUpdateStatusParamsShape = array{
  *   id: string, reason: string, host_messaging?: bool

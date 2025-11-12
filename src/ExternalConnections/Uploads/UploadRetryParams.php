@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * If there were any errors during the upload process, this endpoint will retry the upload request. In some cases this will reattempt the existing upload request, in other cases it may create a new upload request. Please check the ticket_id in the response to determine if a new upload request was created.
  *
- * @see Telnyx\ExternalConnections\Uploads->retry
+ * @see Telnyx\STAINLESS_FIXME_ExternalConnections\UploadsService::retry()
  *
  * @phpstan-type UploadRetryParamsShape = array{id: string}
  */

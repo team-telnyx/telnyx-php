@@ -13,7 +13,7 @@ use Telnyx\PhoneNumbersRegulatoryRequirements\PhoneNumbersRegulatoryRequirementR
 /**
  * Retrieve regulatory requirements for a list of phone numbers.
  *
- * @see Telnyx\PhoneNumbersRegulatoryRequirements->retrieve
+ * @see Telnyx\PhoneNumbersRegulatoryRequirementsService::retrieve()
  *
  * @phpstan-type PhoneNumbersRegulatoryRequirementRetrieveParamsShape = array{
  *   filter?: Filter

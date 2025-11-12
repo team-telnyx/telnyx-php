@@ -15,7 +15,7 @@ use Telnyx\PortingOrders\ActionRequirements\ActionRequirementListParams\Sort;
 /**
  * Returns a list of action requirements for a specific porting order.
  *
- * @see Telnyx\PortingOrders\ActionRequirements->list
+ * @see Telnyx\STAINLESS_FIXME_PortingOrders\ActionRequirementsService::list()
  *
  * @phpstan-type ActionRequirementListParamsShape = array{
  *   filter?: Filter, page?: Page, sort?: Sort

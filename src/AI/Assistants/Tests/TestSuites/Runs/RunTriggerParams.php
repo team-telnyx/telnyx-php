@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Executes all tests within a specific test suite as a batch operation.
  *
- * @see Telnyx\AI\Assistants\Tests\TestSuites\Runs->trigger
+ * @see Telnyx\STAINLESS_FIXME_AI\STAINLESS_FIXME_Assistants\STAINLESS_FIXME_Tests\STAINLESS_FIXME_TestSuites\RunsService::trigger()
  *
  * @phpstan-type RunTriggerParamsShape = array{destination_version_id?: string}
  */

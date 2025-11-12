@@ -13,7 +13,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Retrieve an existing conference.
  *
- * @see Telnyx\Conferences->retrieve
+ * @see Telnyx\ConferencesService::retrieve()
  *
  * @phpstan-type ConferenceRetrieveParamsShape = array{
  *   region?: Region|value-of<Region>

@@ -14,7 +14,7 @@ use Telnyx\Rooms\Sessions\Actions\ActionKickParams\Participants\UnionMember0;
 /**
  * Kick participants from a room session.
  *
- * @see Telnyx\Rooms\Sessions\Actions->kick
+ * @see Telnyx\STAINLESS_FIXME_Rooms\STAINLESS_FIXME_Sessions\ActionsService::kick()
  *
  * @phpstan-type ActionKickParamsShape = array{
  *   exclude?: list<string>,

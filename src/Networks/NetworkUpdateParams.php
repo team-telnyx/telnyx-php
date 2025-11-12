@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Update a Network.
  *
- * @see Telnyx\Networks->update
+ * @see Telnyx\NetworksService::update()
  *
  * @phpstan-type NetworkUpdateParamsShape = array{name: string}
  */

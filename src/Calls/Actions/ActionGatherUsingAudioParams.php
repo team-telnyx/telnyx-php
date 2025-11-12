@@ -21,7 +21,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * - `call.dtmf.received` (you may receive many of these webhooks)
  * - `call.gather.ended`
  *
- * @see Telnyx\Calls\Actions->gatherUsingAudio
+ * @see Telnyx\STAINLESS_FIXME_Calls\ActionsService::gatherUsingAudio()
  *
  * @phpstan-type ActionGatherUsingAudioParamsShape = array{
  *   audio_url?: string,

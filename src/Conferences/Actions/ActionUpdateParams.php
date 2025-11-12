@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Update conference participant supervisor_role.
  *
- * @see Telnyx\Conferences\Actions->update
+ * @see Telnyx\STAINLESS_FIXME_Conferences\ActionsService::update()
  *
  * @phpstan-type ActionUpdateParamsShape = array{
  *   call_control_id: string,

@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * View a room session.
  *
- * @see Telnyx\Rooms\Sessions->retrieve
+ * @see Telnyx\STAINLESS_FIXME_Rooms\SessionsService::retrieve()
  *
  * @phpstan-type SessionRetrieveParamsShape = array{include_participants?: bool}
  */

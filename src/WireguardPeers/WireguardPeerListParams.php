@@ -14,7 +14,7 @@ use Telnyx\WireguardPeers\WireguardPeerListParams\Page;
 /**
  * List all WireGuard peers.
  *
- * @see Telnyx\WireguardPeers->list
+ * @see Telnyx\WireguardPeersService::list()
  *
  * @phpstan-type WireguardPeerListParamsShape = array{filter?: Filter, page?: Page}
  */

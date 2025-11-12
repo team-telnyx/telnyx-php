@@ -15,7 +15,7 @@ use Telnyx\Documents\DocumentListParams\Sort;
 /**
  * List all documents ordered by created_at descending.
  *
- * @see Telnyx\Documents->list
+ * @see Telnyx\DocumentsService::list()
  *
  * @phpstan-type DocumentListParamsShape = array{
  *   filter?: Filter, page?: Page, sort?: list<Sort|value-of<Sort>>

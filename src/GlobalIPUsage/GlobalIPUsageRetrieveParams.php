@@ -13,7 +13,7 @@ use Telnyx\GlobalIPUsage\GlobalIPUsageRetrieveParams\Filter;
 /**
  * Global IP Usage Metrics.
  *
- * @see Telnyx\GlobalIPUsage->retrieve
+ * @see Telnyx\GlobalIPUsageService::retrieve()
  *
  * @phpstan-type GlobalIPUsageRetrieveParamsShape = array{filter?: Filter}
  */

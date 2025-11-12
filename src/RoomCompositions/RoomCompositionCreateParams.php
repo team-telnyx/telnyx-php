@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Asynchronously create a room composition.
  *
- * @see Telnyx\RoomCompositions->create
+ * @see Telnyx\RoomCompositionsService::create()
  *
  * @phpstan-type RoomCompositionCreateParamsShape = array{
  *   format?: string|null,

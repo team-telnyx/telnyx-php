@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Modify an RCS agent.
  *
- * @see Telnyx\Messaging\Rcs\Agents->update
+ * @see Telnyx\STAINLESS_FIXME_Messaging\STAINLESS_FIXME_Rcs\AgentsService::update()
  *
  * @phpstan-type AgentUpdateParamsShape = array{
  *   profile_id?: string|null,

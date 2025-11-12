@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Synchronously refresh an Client Token to join a Room. Client Token is necessary to join a Telnyx Room. Client Token will expire after `token_ttl_secs`.
  *
- * @see Telnyx\Rooms\Actions->refreshClientToken
+ * @see Telnyx\STAINLESS_FIXME_Rooms\ActionsService::refreshClientToken()
  *
  * @phpstan-type ActionRefreshClientTokenParamsShape = array{
  *   refresh_token: string, token_ttl_secs?: int

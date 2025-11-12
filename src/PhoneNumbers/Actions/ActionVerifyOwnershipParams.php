@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Verifies ownership of the provided phone numbers and returns a mapping of numbers to their IDs, plus a list of numbers not found in the account.
  *
- * @see Telnyx\PhoneNumbers\Actions->verifyOwnership
+ * @see Telnyx\STAINLESS_FIXME_PhoneNumbers\ActionsService::verifyOwnership()
  *
  * @phpstan-type ActionVerifyOwnershipParamsShape = array{
  *   phone_numbers: list<string>

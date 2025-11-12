@@ -13,7 +13,7 @@ use Telnyx\Storage\Buckets\Usage\UsageGetAPIUsageParams\Filter;
 /**
  * Returns the detail on API usage on a bucket of a particular time period, group by method category.
  *
- * @see Telnyx\Storage\Buckets\Usage->getAPIUsage
+ * @see Telnyx\STAINLESS_FIXME_Storage\STAINLESS_FIXME_Buckets\UsageService::getAPIUsage()
  *
  * @phpstan-type UsageGetAPIUsageParamsShape = array{filter: Filter}
  */

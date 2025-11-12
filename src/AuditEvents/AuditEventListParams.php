@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Retrieve a list of audit log entries. Audit logs are a best-effort, eventually consistent record of significant account-related changes.
  *
- * @see Telnyx\AuditEvents->list
+ * @see Telnyx\AuditEventsService::list()
  *
  * @phpstan-type AuditEventListParamsShape = array{
  *   filter?: Filter, page?: Page, sort?: Sort|value-of<Sort>

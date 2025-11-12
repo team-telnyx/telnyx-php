@@ -13,7 +13,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Switch the supervisor role for a bridged call. This allows switching between different supervisor modes during an active call.
  *
- * @see Telnyx\Calls\Actions->switchSupervisorRole
+ * @see Telnyx\STAINLESS_FIXME_Calls\ActionsService::switchSupervisorRole()
  *
  * @phpstan-type ActionSwitchSupervisorRoleParamsShape = array{
  *   role: Role|value-of<Role>

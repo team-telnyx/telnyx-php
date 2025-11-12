@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Creates a comment on a portout request.
  *
- * @see Telnyx\Portouts\Comments->create
+ * @see Telnyx\STAINLESS_FIXME_Portouts\CommentsService::create()
  *
  * @phpstan-type CommentCreateParamsShape = array{body?: string}
  */

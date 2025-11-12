@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Returns multiple recording resources for an account.
  *
- * @see Telnyx\Texml\Accounts->retrieveRecordingsJson
+ * @see Telnyx\STAINLESS_FIXME_Texml\AccountsService::retrieveRecordingsJson()
  *
  * @phpstan-type AccountRetrieveRecordingsJsonParamsShape = array{
  *   DateCreated?: \DateTimeInterface, Page?: int, PageSize?: int

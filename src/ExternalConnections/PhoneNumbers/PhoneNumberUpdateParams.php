@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Asynchronously update settings of the phone number associated with the given external connection.
  *
- * @see Telnyx\ExternalConnections\PhoneNumbers->update
+ * @see Telnyx\STAINLESS_FIXME_ExternalConnections\PhoneNumbersService::update()
  *
  * @phpstan-type PhoneNumberUpdateParamsShape = array{
  *   id: string, location_id?: string

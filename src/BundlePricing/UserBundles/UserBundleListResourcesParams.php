@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Retrieves the resources of a user bundle by its ID.
  *
- * @see Telnyx\BundlePricing\UserBundles->listResources
+ * @see Telnyx\STAINLESS_FIXME_BundlePricing\UserBundlesService::listResources()
  *
  * @phpstan-type UserBundleListResourcesParamsShape = array{
  *   authorization_bearer?: string

@@ -14,7 +14,7 @@ use Telnyx\SimCardStatus;
 /**
  * Updates SIM card data.
  *
- * @see Telnyx\SimCards->update
+ * @see Telnyx\SimCardsService::update()
  *
  * @phpstan-type SimCardUpdateParamsShape = array{
  *   authorized_imeis?: list<string>|null,

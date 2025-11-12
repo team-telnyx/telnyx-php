@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * List all Access IP Ranges.
  *
- * @see Telnyx\AccessIPRanges->list
+ * @see Telnyx\AccessIPRangesService::list()
  *
  * @phpstan-type AccessIPRangeListParamsShape = array{filter?: Filter, page?: Page}
  */

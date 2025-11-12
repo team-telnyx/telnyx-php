@@ -18,7 +18,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Convert text to speech and play it to all or some participants.
  *
- * @see Telnyx\Conferences\Actions->speak
+ * @see Telnyx\STAINLESS_FIXME_Conferences\ActionsService::speak()
  *
  * @phpstan-type ActionSpeakParamsShape = array{
  *   payload: string,
