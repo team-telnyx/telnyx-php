@@ -7,6 +7,7 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Reports\ReportListMdrsParams;
+use Telnyx\Reports\ReportListMdrsParams\Status;
 use Telnyx\Reports\ReportListMdrsResponse;
 use Telnyx\Reports\ReportListWdrsParams;
 use Telnyx\Reports\ReportListWdrsResponse;
@@ -39,8 +40,6 @@ final class ReportsService implements ReportsContract
     /**
      * @api
      *
-     * @phpstan-type Status = "GW_TIMEOUT"|"DELIVERED"|"DLR_UNCONFIRMED"|"DLR_TIMEOUT"|"RECEIVED"|"GW_REJECT"|"FAILED"
-     *
      * Fetch all Mdr records
      *
      * @param array{
@@ -52,7 +51,7 @@ final class ReportsService implements ReportsContract
      *   message_type?: "SMS"|"MMS",
      *   profile?: string,
      *   start_date?: string,
-     *   status?: Status,
+     *   status?: value-of<Status>,
      * }|ReportListMdrsParams $params
      *
      * @throws APIException

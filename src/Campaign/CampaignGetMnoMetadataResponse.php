@@ -45,10 +45,10 @@ final class CampaignGetMnoMetadataResponse implements BaseModel, ResponseConvert
         return $obj;
     }
 
-    public function with10999(mno_10999 $v10999): self
+    public function with10999(mno_10999 $_10999): self
     {
         $obj = clone $this;
-        $obj->_10999 = $v10999;
+        $obj->_10999 = $_10999;
 
         return $obj;
     }

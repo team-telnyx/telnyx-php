@@ -13,7 +13,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type AIGetModelsResponseShape = array{
- *   data: list<Data>, object1?: string|null
+ *   data: list<Data>, object?: string|null
  * }
  */
 final class AIGetModelsResponse implements BaseModel, ResponseConverter
@@ -28,7 +28,7 @@ final class AIGetModelsResponse implements BaseModel, ResponseConverter
     public array $data;
 
     #[Api(optional: true)]
-    public ?string $object1;
+    public ?string $object;
 
     /**
      * `new AIGetModelsResponse()` is missing required properties by the API.
@@ -56,13 +56,13 @@ final class AIGetModelsResponse implements BaseModel, ResponseConverter
      *
      * @param list<Data> $data
      */
-    public static function with(array $data, ?string $object1 = null): self
+    public static function with(array $data, ?string $object = null): self
     {
         $obj = new self;
 
         $obj->data = $data;
 
-        null !== $object1 && $obj->object1 = $object1;
+        null !== $object && $obj->object = $object;
 
         return $obj;
     }
@@ -78,10 +78,10 @@ final class AIGetModelsResponse implements BaseModel, ResponseConverter
         return $obj;
     }
 
-    public function withObject(string $object1): self
+    public function withObject(string $object): self
     {
         $obj = clone $this;
-        $obj->object1 = $object1;
+        $obj->object = $object;
 
         return $obj;
     }

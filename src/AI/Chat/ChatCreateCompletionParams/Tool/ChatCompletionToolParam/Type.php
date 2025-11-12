@@ -6,5 +6,5 @@ namespace Telnyx\AI\Chat\ChatCreateCompletionParams\Tool\ChatCompletionToolParam
 
 enum Type: string
 {
-    case FUNCTION1 = 'function';
+    case FUNCTION = 'function';
 }

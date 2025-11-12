@@ -9,5 +9,5 @@ namespace Telnyx\AI\Conversations\Messages\MessageListResponse\Data\ToolCall;
  */
 enum Type: string
 {
-    case FUNCTION1 = 'function';
+    case FUNCTION = 'function';
 }

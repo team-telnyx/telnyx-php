@@ -9,21 +9,21 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type V99Shape = array{amount?: float|null, unit?: string|null}
+ * @phpstan-type _100Shape = array{amount?: float|null, unit?: string|null}
  */
-final class v99 implements BaseModel
+final class _100 implements BaseModel
 {
-    /** @use SdkModel<V99Shape> */
+    /** @use SdkModel<_100Shape> */
     use SdkModel;
 
     /**
-     * The 99th percentile latency.
+     * The maximum latency.
      */
     #[Api(optional: true)]
     public ?float $amount;
 
     /**
-     * The unit of the 99th percentile latency.
+     * The unit of the maximum latency.
      */
     #[Api(optional: true)]
     public ?string $unit;
@@ -49,7 +49,7 @@ final class v99 implements BaseModel
     }
 
     /**
-     * The 99th percentile latency.
+     * The maximum latency.
      */
     public function withAmount(float $amount): self
     {
@@ -60,7 +60,7 @@ final class v99 implements BaseModel
     }
 
     /**
-     * The unit of the 99th percentile latency.
+     * The unit of the maximum latency.
      */
     public function withUnit(string $unit): self
     {

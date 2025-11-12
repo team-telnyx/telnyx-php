@@ -9,6 +9,7 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\PhoneNumberCampaigns\PhoneNumberCampaign;
 use Telnyx\PhoneNumberCampaigns\PhoneNumberCampaignCreateParams;
 use Telnyx\PhoneNumberCampaigns\PhoneNumberCampaignListParams;
+use Telnyx\PhoneNumberCampaigns\PhoneNumberCampaignListParams\Sort;
 use Telnyx\PhoneNumberCampaigns\PhoneNumberCampaignListResponse;
 use Telnyx\PhoneNumberCampaigns\PhoneNumberCampaignUpdateParams;
 use Telnyx\RequestOptions;
@@ -105,8 +106,6 @@ final class PhoneNumberCampaignsService implements PhoneNumberCampaignsContract
     /**
      * @api
      *
-     * @phpstan-type Sort = "assignmentStatus"|"-assignmentStatus"|"createdAt"|"-createdAt"|"phoneNumber"|"-phoneNumber"
-     *
      * Retrieve All Phone Number Campaigns
      *
      * @param array{
@@ -118,7 +117,7 @@ final class PhoneNumberCampaignsService implements PhoneNumberCampaignsContract
      *   },
      *   page?: int,
      *   recordsPerPage?: int,
-     *   sort?: Sort,
+     *   sort?: value-of<Sort>,
      * }|PhoneNumberCampaignListParams $params
      *
      * @throws APIException

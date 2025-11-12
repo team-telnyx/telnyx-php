@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type DataShape = array{
- *   id: string, created: int, owned_by: string, object1?: string|null
+ *   id: string, created: int, owned_by: string, object?: string|null
  * }
  */
 final class Data implements BaseModel
@@ -28,7 +28,7 @@ final class Data implements BaseModel
     public string $owned_by;
 
     #[Api(optional: true)]
-    public ?string $object1;
+    public ?string $object;
 
     /**
      * `new Data()` is missing required properties by the API.
@@ -58,7 +58,7 @@ final class Data implements BaseModel
         string $id,
         int $created,
         string $owned_by,
-        ?string $object1 = null
+        ?string $object = null
     ): self {
         $obj = new self;
 
@@ -66,7 +66,7 @@ final class Data implements BaseModel
         $obj->created = $created;
         $obj->owned_by = $owned_by;
 
-        null !== $object1 && $obj->object1 = $object1;
+        null !== $object && $obj->object = $object;
 
         return $obj;
     }
@@ -95,10 +95,10 @@ final class Data implements BaseModel
         return $obj;
     }
 
-    public function withObject(string $object1): self
+    public function withObject(string $object): self
     {
         $obj = clone $this;
-        $obj->object1 = $object1;
+        $obj->object = $object;
 
         return $obj;
     }

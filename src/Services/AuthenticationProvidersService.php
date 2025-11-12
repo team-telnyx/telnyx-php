@@ -8,6 +8,7 @@ use Telnyx\AuthenticationProviders\AuthenticationProviderCreateParams;
 use Telnyx\AuthenticationProviders\AuthenticationProviderDeleteResponse;
 use Telnyx\AuthenticationProviders\AuthenticationProviderGetResponse;
 use Telnyx\AuthenticationProviders\AuthenticationProviderListParams;
+use Telnyx\AuthenticationProviders\AuthenticationProviderListParams\Sort;
 use Telnyx\AuthenticationProviders\AuthenticationProviderListResponse;
 use Telnyx\AuthenticationProviders\AuthenticationProviderNewResponse;
 use Telnyx\AuthenticationProviders\AuthenticationProviderUpdateParams;
@@ -126,12 +127,10 @@ final class AuthenticationProvidersService implements AuthenticationProvidersCon
     /**
      * @api
      *
-     * @phpstan-type Sort = "name"|"-name"|"short_name"|"-short_name"|"active"|"-active"|"created_at"|"-created_at"|"updated_at"|"-updated_at"
-     *
      * Returns a list of your SSO authentication providers.
      *
      * @param array{
-     *   page?: array{number?: int, size?: int}, sort?: Sort
+     *   page?: array{number?: int, size?: int}, sort?: value-of<Sort>
      * }|AuthenticationProviderListParams $params
      *
      * @throws APIException
