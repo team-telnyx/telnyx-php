@@ -23,6 +23,7 @@ use Telnyx\CredentialConnections\CredentialConnectionCreateParams\WebhookAPIVers
  *   active?: bool,
  *   anchorsite_override?: AnchorsiteOverride|value-of<AnchorsiteOverride>,
  *   android_push_credential_id?: string|null,
+ *   call_cost_in_webhooks?: bool,
  *   default_on_hold_comfort_noise_enabled?: bool,
  *   dtmf_type?: DtmfType|value-of<DtmfType>,
  *   encode_contact_header_enabled?: bool,
@@ -83,6 +84,12 @@ final class CredentialConnectionCreateParams implements BaseModel
      */
     #[Api(nullable: true, optional: true)]
     public ?string $android_push_credential_id;
+
+    /**
+     * Specifies if call cost webhooks should be sent for this connection.
+     */
+    #[Api(optional: true)]
+    public ?bool $call_cost_in_webhooks;
 
     /**
      * When enabled, Telnyx will generate comfort noise when you place the call on hold. If disabled, you will need to generate comfort noise or on hold music to avoid RTP timeout.
@@ -218,6 +225,7 @@ final class CredentialConnectionCreateParams implements BaseModel
         ?bool $active = null,
         AnchorsiteOverride|string|null $anchorsite_override = null,
         ?string $android_push_credential_id = null,
+        ?bool $call_cost_in_webhooks = null,
         ?bool $default_on_hold_comfort_noise_enabled = null,
         DtmfType|string|null $dtmf_type = null,
         ?bool $encode_contact_header_enabled = null,
@@ -243,6 +251,7 @@ final class CredentialConnectionCreateParams implements BaseModel
         null !== $active && $obj->active = $active;
         null !== $anchorsite_override && $obj['anchorsite_override'] = $anchorsite_override;
         null !== $android_push_credential_id && $obj->android_push_credential_id = $android_push_credential_id;
+        null !== $call_cost_in_webhooks && $obj->call_cost_in_webhooks = $call_cost_in_webhooks;
         null !== $default_on_hold_comfort_noise_enabled && $obj->default_on_hold_comfort_noise_enabled = $default_on_hold_comfort_noise_enabled;
         null !== $dtmf_type && $obj['dtmf_type'] = $dtmf_type;
         null !== $encode_contact_header_enabled && $obj->encode_contact_header_enabled = $encode_contact_header_enabled;
@@ -328,6 +337,17 @@ final class CredentialConnectionCreateParams implements BaseModel
     ): self {
         $obj = clone $this;
         $obj->android_push_credential_id = $androidPushCredentialID;
+
+        return $obj;
+    }
+
+    /**
+     * Specifies if call cost webhooks should be sent for this connection.
+     */
+    public function withCallCostInWebhooks(bool $callCostInWebhooks): self
+    {
+        $obj = clone $this;
+        $obj->call_cost_in_webhooks = $callCostInWebhooks;
 
         return $obj;
     }

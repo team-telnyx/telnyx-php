@@ -19,6 +19,7 @@ use Telnyx\TexmlApplications\TexmlApplication\VoiceMethod;
  *   id?: string|null,
  *   active?: bool|null,
  *   anchorsite_override?: value-of<AnchorsiteOverride>|null,
+ *   call_cost_in_webhooks?: bool|null,
  *   created_at?: string|null,
  *   dtmf_type?: value-of<DtmfType>|null,
  *   first_command_timeout?: bool|null,
@@ -60,6 +61,12 @@ final class TexmlApplication implements BaseModel
      */
     #[Api(enum: AnchorsiteOverride::class, optional: true)]
     public ?string $anchorsite_override;
+
+    /**
+     * Specifies if call cost webhooks should be sent for this TeXML Application.
+     */
+    #[Api(optional: true)]
+    public ?bool $call_cost_in_webhooks;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
@@ -173,6 +180,7 @@ final class TexmlApplication implements BaseModel
         ?string $id = null,
         ?bool $active = null,
         AnchorsiteOverride|string|null $anchorsite_override = null,
+        ?bool $call_cost_in_webhooks = null,
         ?string $created_at = null,
         DtmfType|string|null $dtmf_type = null,
         ?bool $first_command_timeout = null,
@@ -194,6 +202,7 @@ final class TexmlApplication implements BaseModel
         null !== $id && $obj->id = $id;
         null !== $active && $obj->active = $active;
         null !== $anchorsite_override && $obj['anchorsite_override'] = $anchorsite_override;
+        null !== $call_cost_in_webhooks && $obj->call_cost_in_webhooks = $call_cost_in_webhooks;
         null !== $created_at && $obj->created_at = $created_at;
         null !== $dtmf_type && $obj['dtmf_type'] = $dtmf_type;
         null !== $first_command_timeout && $obj->first_command_timeout = $first_command_timeout;
@@ -245,6 +254,17 @@ final class TexmlApplication implements BaseModel
     ): self {
         $obj = clone $this;
         $obj['anchorsite_override'] = $anchorsiteOverride;
+
+        return $obj;
+    }
+
+    /**
+     * Specifies if call cost webhooks should be sent for this TeXML Application.
+     */
+    public function withCallCostInWebhooks(bool $callCostInWebhooks): self
+    {
+        $obj = clone $this;
+        $obj->call_cost_in_webhooks = $callCostInWebhooks;
 
         return $obj;
     }

@@ -7,12 +7,14 @@ namespace Telnyx\Documents;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Documents\DocServiceDocument\AvScanStatus;
 use Telnyx\Documents\DocServiceDocument\Size;
 use Telnyx\Documents\DocServiceDocument\Status;
 
 /**
  * @phpstan-type DocServiceDocumentShape = array{
  *   id?: string|null,
+ *   av_scan_status?: value-of<AvScanStatus>|null,
  *   content_type?: string|null,
  *   created_at?: string|null,
  *   customer_reference?: string|null,
@@ -34,6 +36,14 @@ final class DocServiceDocument implements BaseModel
      */
     #[Api(optional: true)]
     public ?string $id;
+
+    /**
+     * The antivirus scan status of the document.
+     *
+     * @var value-of<AvScanStatus>|null $av_scan_status
+     */
+    #[Api(enum: AvScanStatus::class, optional: true)]
+    public ?string $av_scan_status;
 
     /**
      * The document's content_type.
@@ -101,10 +111,12 @@ final class DocServiceDocument implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param AvScanStatus|value-of<AvScanStatus> $av_scan_status
      * @param Status|value-of<Status> $status
      */
     public static function with(
         ?string $id = null,
+        AvScanStatus|string|null $av_scan_status = null,
         ?string $content_type = null,
         ?string $created_at = null,
         ?string $customer_reference = null,
@@ -118,6 +130,7 @@ final class DocServiceDocument implements BaseModel
         $obj = new self;
 
         null !== $id && $obj->id = $id;
+        null !== $av_scan_status && $obj['av_scan_status'] = $av_scan_status;
         null !== $content_type && $obj->content_type = $content_type;
         null !== $created_at && $obj->created_at = $created_at;
         null !== $customer_reference && $obj->customer_reference = $customer_reference;
@@ -138,6 +151,19 @@ final class DocServiceDocument implements BaseModel
     {
         $obj = clone $this;
         $obj->id = $id;
+
+        return $obj;
+    }
+
+    /**
+     * The antivirus scan status of the document.
+     *
+     * @param AvScanStatus|value-of<AvScanStatus> $avScanStatus
+     */
+    public function withAvScanStatus(AvScanStatus|string $avScanStatus): self
+    {
+        $obj = clone $this;
+        $obj['av_scan_status'] = $avScanStatus;
 
         return $obj;
     }

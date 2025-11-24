@@ -19,6 +19,7 @@ use Telnyx\IPConnections\IPConnection\WebhookAPIVersion;
  *   id?: string|null,
  *   active?: bool|null,
  *   anchorsite_override?: value-of<AnchorsiteOverride>|null,
+ *   call_cost_in_webhooks?: bool|null,
  *   connection_name?: string|null,
  *   created_at?: string|null,
  *   default_on_hold_comfort_noise_enabled?: bool|null,
@@ -63,6 +64,12 @@ final class IPConnection implements BaseModel
      */
     #[Api(enum: AnchorsiteOverride::class, optional: true)]
     public ?string $anchorsite_override;
+
+    /**
+     * Specifies if call cost webhooks should be sent for this connection.
+     */
+    #[Api(optional: true)]
+    public ?bool $call_cost_in_webhooks;
 
     #[Api(optional: true)]
     public ?string $connection_name;
@@ -191,6 +198,7 @@ final class IPConnection implements BaseModel
         ?string $id = null,
         ?bool $active = null,
         AnchorsiteOverride|string|null $anchorsite_override = null,
+        ?bool $call_cost_in_webhooks = null,
         ?string $connection_name = null,
         ?string $created_at = null,
         ?bool $default_on_hold_comfort_noise_enabled = null,
@@ -215,6 +223,7 @@ final class IPConnection implements BaseModel
         null !== $id && $obj->id = $id;
         null !== $active && $obj->active = $active;
         null !== $anchorsite_override && $obj['anchorsite_override'] = $anchorsite_override;
+        null !== $call_cost_in_webhooks && $obj->call_cost_in_webhooks = $call_cost_in_webhooks;
         null !== $connection_name && $obj->connection_name = $connection_name;
         null !== $created_at && $obj->created_at = $created_at;
         null !== $default_on_hold_comfort_noise_enabled && $obj->default_on_hold_comfort_noise_enabled = $default_on_hold_comfort_noise_enabled;
@@ -269,6 +278,17 @@ final class IPConnection implements BaseModel
     ): self {
         $obj = clone $this;
         $obj['anchorsite_override'] = $anchorsiteOverride;
+
+        return $obj;
+    }
+
+    /**
+     * Specifies if call cost webhooks should be sent for this connection.
+     */
+    public function withCallCostInWebhooks(bool $callCostInWebhooks): self
+    {
+        $obj = clone $this;
+        $obj->call_cost_in_webhooks = $callCostInWebhooks;
 
         return $obj;
     }

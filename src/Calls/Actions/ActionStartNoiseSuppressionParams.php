@@ -6,6 +6,7 @@ namespace Telnyx\Calls\Actions;
 
 use Telnyx\Calls\Actions\ActionStartNoiseSuppressionParams\Direction;
 use Telnyx\Calls\Actions\ActionStartNoiseSuppressionParams\NoiseSuppressionEngine;
+use Telnyx\Calls\Actions\ActionStartNoiseSuppressionParams\NoiseSuppressionEngineConfig;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
@@ -21,6 +22,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   command_id?: string,
  *   direction?: Direction|value-of<Direction>,
  *   noise_suppression_engine?: NoiseSuppressionEngine|value-of<NoiseSuppressionEngine>,
+ *   noise_suppression_engine_config?: NoiseSuppressionEngineConfig,
  * }
  */
 final class ActionStartNoiseSuppressionParams implements BaseModel
@@ -51,13 +53,20 @@ final class ActionStartNoiseSuppressionParams implements BaseModel
 
     /**
      * The engine to use for noise suppression.
-     * A - rnnoise engine
-     * B - deepfilter engine.
+     * For backward compatibility, engines A and B are also supported, but are deprecated:
+     *  A - Denoiser
+     *  B - DeepFilterNet.
      *
      * @var value-of<NoiseSuppressionEngine>|null $noise_suppression_engine
      */
     #[Api(enum: NoiseSuppressionEngine::class, optional: true)]
     public ?string $noise_suppression_engine;
+
+    /**
+     * Configuration parameters for noise suppression engines.
+     */
+    #[Api(optional: true)]
+    public ?NoiseSuppressionEngineConfig $noise_suppression_engine_config;
 
     public function __construct()
     {
@@ -77,6 +86,7 @@ final class ActionStartNoiseSuppressionParams implements BaseModel
         ?string $command_id = null,
         Direction|string|null $direction = null,
         NoiseSuppressionEngine|string|null $noise_suppression_engine = null,
+        ?NoiseSuppressionEngineConfig $noise_suppression_engine_config = null,
     ): self {
         $obj = new self;
 
@@ -84,6 +94,7 @@ final class ActionStartNoiseSuppressionParams implements BaseModel
         null !== $command_id && $obj->command_id = $command_id;
         null !== $direction && $obj['direction'] = $direction;
         null !== $noise_suppression_engine && $obj['noise_suppression_engine'] = $noise_suppression_engine;
+        null !== $noise_suppression_engine_config && $obj->noise_suppression_engine_config = $noise_suppression_engine_config;
 
         return $obj;
     }
@@ -125,8 +136,9 @@ final class ActionStartNoiseSuppressionParams implements BaseModel
 
     /**
      * The engine to use for noise suppression.
-     * A - rnnoise engine
-     * B - deepfilter engine.
+     * For backward compatibility, engines A and B are also supported, but are deprecated:
+     *  A - Denoiser
+     *  B - DeepFilterNet.
      *
      * @param NoiseSuppressionEngine|value-of<NoiseSuppressionEngine> $noiseSuppressionEngine
      */
@@ -135,6 +147,18 @@ final class ActionStartNoiseSuppressionParams implements BaseModel
     ): self {
         $obj = clone $this;
         $obj['noise_suppression_engine'] = $noiseSuppressionEngine;
+
+        return $obj;
+    }
+
+    /**
+     * Configuration parameters for noise suppression engines.
+     */
+    public function withNoiseSuppressionEngineConfig(
+        NoiseSuppressionEngineConfig $noiseSuppressionEngineConfig
+    ): self {
+        $obj = clone $this;
+        $obj->noise_suppression_engine_config = $noiseSuppressionEngineConfig;
 
         return $obj;
     }

@@ -10,6 +10,8 @@ use Telnyx\AI\Assistants\AssistantCreateParams;
 use Telnyx\AI\Assistants\AssistantDeleteResponse;
 use Telnyx\AI\Assistants\AssistantImportParams;
 use Telnyx\AI\Assistants\AssistantRetrieveParams;
+use Telnyx\AI\Assistants\AssistantSendSMSParams;
+use Telnyx\AI\Assistants\AssistantSendSMSResponse;
 use Telnyx\AI\Assistants\AssistantsList;
 use Telnyx\AI\Assistants\AssistantTool;
 use Telnyx\AI\Assistants\AssistantUpdateParams;
@@ -95,7 +97,15 @@ final class AssistantsService implements AssistantsContract
      *   }|TelephonySettings,
      *   tools?: list<AssistantTool|array<string,mixed>>,
      *   transcription?: array{
-     *     language?: string, model?: string
+     *     language?: string,
+     *     model?: "deepgram/flux"|"deepgram/nova-3"|"deepgram/nova-2"|"azure/fast"|"distil-whisper/distil-large-v2"|"openai/whisper-large-v3-turbo",
+     *     region?: string,
+     *     settings?: array{
+     *       eot_threshold?: float,
+     *       eot_timeout_ms?: int,
+     *       numerals?: bool,
+     *       smart_format?: bool,
+     *     },
      *   }|TranscriptionSettings,
      *   voice_settings?: array{
      *     voice: string,
@@ -186,7 +196,15 @@ final class AssistantsService implements AssistantsContract
      *   }|TelephonySettings,
      *   tools?: list<AssistantTool|array<string,mixed>>,
      *   transcription?: array{
-     *     language?: string, model?: string
+     *     language?: string,
+     *     model?: "deepgram/flux"|"deepgram/nova-3"|"deepgram/nova-2"|"azure/fast"|"distil-whisper/distil-large-v2"|"openai/whisper-large-v3-turbo",
+     *     region?: string,
+     *     settings?: array{
+     *       eot_threshold?: float,
+     *       eot_timeout_ms?: int,
+     *       numerals?: bool,
+     *       smart_format?: bool,
+     *     },
      *   }|TranscriptionSettings,
      *   voice_settings?: array{
      *     voice: string,
@@ -354,6 +372,46 @@ final class AssistantsService implements AssistantsContract
             body: (object) $parsed,
             options: $options,
             convert: AssistantsList::class,
+        );
+    }
+
+    /**
+     * @api
+     *
+     * Send an SMS message for an assistant. This endpoint:
+     * 1. Validates the assistant exists and has messaging profile configured
+     * 2. If should_create_conversation is true, creates a new conversation with metadata
+     * 3. Sends the SMS message (If `text` is set, this will be sent. Otherwise, if this is the first message in the conversation and the assistant has a `greeting` configured, this will be sent. Otherwise the assistant will generate the text to send.)
+     * 4. Updates conversation metadata if provided
+     * 5. Returns the conversation ID
+     *
+     * @param array{
+     *   from: string,
+     *   text: string,
+     *   to: string,
+     *   conversation_metadata?: array<string,string|int|bool>,
+     *   should_create_conversation?: bool,
+     * }|AssistantSendSMSParams $params
+     *
+     * @throws APIException
+     */
+    public function sendSMS(
+        string $assistantID,
+        array|AssistantSendSMSParams $params,
+        ?RequestOptions $requestOptions = null,
+    ): AssistantSendSMSResponse {
+        [$parsed, $options] = AssistantSendSMSParams::parseRequest(
+            $params,
+            $requestOptions,
+        );
+
+        // @phpstan-ignore-next-line;
+        return $this->client->request(
+            method: 'post',
+            path: ['ai/assistants/%1$s/chat/sms', $assistantID],
+            body: (object) $parsed,
+            options: $options,
+            convert: AssistantSendSMSResponse::class,
         );
     }
 }

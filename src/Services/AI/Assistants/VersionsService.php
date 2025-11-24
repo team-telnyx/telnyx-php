@@ -89,7 +89,15 @@ final class VersionsService implements VersionsContract
      *   }|TelephonySettings,
      *   tools?: list<AssistantTool|array<string,mixed>>,
      *   transcription?: array{
-     *     language?: string, model?: string
+     *     language?: string,
+     *     model?: "deepgram/flux"|"deepgram/nova-3"|"deepgram/nova-2"|"azure/fast"|"distil-whisper/distil-large-v2"|"openai/whisper-large-v3-turbo",
+     *     region?: string,
+     *     settings?: array{
+     *       eot_threshold?: float,
+     *       eot_timeout_ms?: int,
+     *       numerals?: bool,
+     *       smart_format?: bool,
+     *     },
      *   }|TranscriptionSettings,
      *   voice_settings?: array{
      *     voice: string,

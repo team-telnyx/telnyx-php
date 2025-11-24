@@ -18,6 +18,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   active?: bool|null,
  *   anchorsite_override?: value-of<AnchorsiteOverride>|null,
  *   application_name?: string|null,
+ *   call_cost_in_webhooks?: bool|null,
  *   created_at?: string|null,
  *   dtmf_type?: value-of<DtmfType>|null,
  *   first_command_timeout?: bool|null,
@@ -61,6 +62,12 @@ final class CallControlApplication implements BaseModel
      */
     #[Api(optional: true)]
     public ?string $application_name;
+
+    /**
+     * Specifies if call cost webhooks should be sent for this Call Control Application.
+     */
+    #[Api(optional: true)]
+    public ?bool $call_cost_in_webhooks;
 
     /**
      * ISO 8601 formatted date of when the resource was created.
@@ -162,6 +169,7 @@ final class CallControlApplication implements BaseModel
         ?bool $active = null,
         AnchorsiteOverride|string|null $anchorsite_override = null,
         ?string $application_name = null,
+        ?bool $call_cost_in_webhooks = null,
         ?string $created_at = null,
         DtmfType|string|null $dtmf_type = null,
         ?bool $first_command_timeout = null,
@@ -183,6 +191,7 @@ final class CallControlApplication implements BaseModel
         null !== $active && $obj->active = $active;
         null !== $anchorsite_override && $obj['anchorsite_override'] = $anchorsite_override;
         null !== $application_name && $obj->application_name = $application_name;
+        null !== $call_cost_in_webhooks && $obj->call_cost_in_webhooks = $call_cost_in_webhooks;
         null !== $created_at && $obj->created_at = $created_at;
         null !== $dtmf_type && $obj['dtmf_type'] = $dtmf_type;
         null !== $first_command_timeout && $obj->first_command_timeout = $first_command_timeout;
@@ -241,6 +250,17 @@ final class CallControlApplication implements BaseModel
     {
         $obj = clone $this;
         $obj->application_name = $applicationName;
+
+        return $obj;
+    }
+
+    /**
+     * Specifies if call cost webhooks should be sent for this Call Control Application.
+     */
+    public function withCallCostInWebhooks(bool $callCostInWebhooks): self
+    {
+        $obj = clone $this;
+        $obj->call_cost_in_webhooks = $callCostInWebhooks;
 
         return $obj;
     }

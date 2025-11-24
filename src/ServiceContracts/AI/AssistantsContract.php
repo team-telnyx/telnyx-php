@@ -10,6 +10,8 @@ use Telnyx\AI\Assistants\AssistantCreateParams;
 use Telnyx\AI\Assistants\AssistantDeleteResponse;
 use Telnyx\AI\Assistants\AssistantImportParams;
 use Telnyx\AI\Assistants\AssistantRetrieveParams;
+use Telnyx\AI\Assistants\AssistantSendSMSParams;
+use Telnyx\AI\Assistants\AssistantSendSMSResponse;
 use Telnyx\AI\Assistants\AssistantsList;
 use Telnyx\AI\Assistants\AssistantUpdateParams;
 use Telnyx\AI\Assistants\InferenceEmbedding;
@@ -119,4 +121,17 @@ interface AssistantsContract
         array|AssistantImportParams $params,
         ?RequestOptions $requestOptions = null,
     ): AssistantsList;
+
+    /**
+     * @api
+     *
+     * @param array<mixed>|AssistantSendSMSParams $params
+     *
+     * @throws APIException
+     */
+    public function sendSMS(
+        string $assistantID,
+        array|AssistantSendSMSParams $params,
+        ?RequestOptions $requestOptions = null,
+    ): AssistantSendSMSResponse;
 }
