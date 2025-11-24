@@ -893,7 +893,8 @@ final class ActionsService implements ActionsContract
      *   client_state?: string,
      *   command_id?: string,
      *   direction?: "inbound"|"outbound"|"both",
-     *   noise_suppression_engine?: "A"|"B",
+     *   noise_suppression_engine?: "Denoiser"|"DeepFilterNet",
+     *   noise_suppression_engine_config?: array{attenuation_limit?: int},
      * }|ActionStartNoiseSuppressionParams $params
      *
      * @throws APIException

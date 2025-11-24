@@ -189,4 +189,34 @@ final class AssistantsTest extends TestCase
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
+
+    #[Test]
+    public function testSendSMS(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
+        $result = $this->client->ai->assistants->sendSMS(
+            'assistant_id',
+            ['from' => 'from', 'text' => 'text', 'to' => 'to']
+        );
+
+        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+    }
+
+    #[Test]
+    public function testSendSMSWithOptionalParams(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
+        $result = $this->client->ai->assistants->sendSMS(
+            'assistant_id',
+            ['from' => 'from', 'text' => 'text', 'to' => 'to']
+        );
+
+        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+    }
 }

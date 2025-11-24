@@ -22,6 +22,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   webhook_event_url: string,
  *   active?: bool,
  *   anchorsite_override?: AnchorsiteOverride|value-of<AnchorsiteOverride>,
+ *   call_cost_in_webhooks?: bool,
  *   dtmf_type?: DtmfType|value-of<DtmfType>,
  *   first_command_timeout?: bool,
  *   first_command_timeout_secs?: int,
@@ -65,6 +66,12 @@ final class CallControlApplicationUpdateParams implements BaseModel
      */
     #[Api(enum: AnchorsiteOverride::class, optional: true)]
     public ?string $anchorsite_override;
+
+    /**
+     * Specifies if call cost webhooks should be sent for this Call Control Application.
+     */
+    #[Api(optional: true)]
+    public ?bool $call_cost_in_webhooks;
 
     /**
      * Sets the type of DTMF digits sent from Telnyx to this Connection. Note that DTMF digits sent to Telnyx will be accepted in all formats.
@@ -164,6 +171,7 @@ final class CallControlApplicationUpdateParams implements BaseModel
         string $webhook_event_url,
         ?bool $active = null,
         AnchorsiteOverride|string|null $anchorsite_override = null,
+        ?bool $call_cost_in_webhooks = null,
         DtmfType|string|null $dtmf_type = null,
         ?bool $first_command_timeout = null,
         ?int $first_command_timeout_secs = null,
@@ -182,6 +190,7 @@ final class CallControlApplicationUpdateParams implements BaseModel
 
         null !== $active && $obj->active = $active;
         null !== $anchorsite_override && $obj['anchorsite_override'] = $anchorsite_override;
+        null !== $call_cost_in_webhooks && $obj->call_cost_in_webhooks = $call_cost_in_webhooks;
         null !== $dtmf_type && $obj['dtmf_type'] = $dtmf_type;
         null !== $first_command_timeout && $obj->first_command_timeout = $first_command_timeout;
         null !== $first_command_timeout_secs && $obj->first_command_timeout_secs = $first_command_timeout_secs;
@@ -239,6 +248,17 @@ final class CallControlApplicationUpdateParams implements BaseModel
     ): self {
         $obj = clone $this;
         $obj['anchorsite_override'] = $anchorsiteOverride;
+
+        return $obj;
+    }
+
+    /**
+     * Specifies if call cost webhooks should be sent for this Call Control Application.
+     */
+    public function withCallCostInWebhooks(bool $callCostInWebhooks): self
+    {
+        $obj = clone $this;
+        $obj->call_cost_in_webhooks = $callCostInWebhooks;
 
         return $obj;
     }

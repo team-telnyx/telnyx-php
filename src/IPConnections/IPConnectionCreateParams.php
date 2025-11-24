@@ -25,6 +25,7 @@ use Telnyx\IPConnections\IPConnectionCreateParams\WebhookAPIVersion;
  *   active?: bool,
  *   anchorsite_override?: AnchorsiteOverride|value-of<AnchorsiteOverride>,
  *   android_push_credential_id?: string|null,
+ *   call_cost_in_webhooks?: bool,
  *   connection_name?: string,
  *   default_on_hold_comfort_noise_enabled?: bool,
  *   dtmf_type?: DtmfType|value-of<DtmfType>,
@@ -68,6 +69,12 @@ final class IPConnectionCreateParams implements BaseModel
      */
     #[Api(nullable: true, optional: true)]
     public ?string $android_push_credential_id;
+
+    /**
+     * Specifies if call cost webhooks should be sent for this connection.
+     */
+    #[Api(optional: true)]
+    public ?bool $call_cost_in_webhooks;
 
     #[Api(optional: true)]
     public ?string $connection_name;
@@ -184,6 +191,7 @@ final class IPConnectionCreateParams implements BaseModel
         ?bool $active = null,
         AnchorsiteOverride|string|null $anchorsite_override = null,
         ?string $android_push_credential_id = null,
+        ?bool $call_cost_in_webhooks = null,
         ?string $connection_name = null,
         ?bool $default_on_hold_comfort_noise_enabled = null,
         DtmfType|string|null $dtmf_type = null,
@@ -206,6 +214,7 @@ final class IPConnectionCreateParams implements BaseModel
         null !== $active && $obj->active = $active;
         null !== $anchorsite_override && $obj['anchorsite_override'] = $anchorsite_override;
         null !== $android_push_credential_id && $obj->android_push_credential_id = $android_push_credential_id;
+        null !== $call_cost_in_webhooks && $obj->call_cost_in_webhooks = $call_cost_in_webhooks;
         null !== $connection_name && $obj->connection_name = $connection_name;
         null !== $default_on_hold_comfort_noise_enabled && $obj->default_on_hold_comfort_noise_enabled = $default_on_hold_comfort_noise_enabled;
         null !== $dtmf_type && $obj['dtmf_type'] = $dtmf_type;
@@ -259,6 +268,17 @@ final class IPConnectionCreateParams implements BaseModel
     ): self {
         $obj = clone $this;
         $obj->android_push_credential_id = $androidPushCredentialID;
+
+        return $obj;
+    }
+
+    /**
+     * Specifies if call cost webhooks should be sent for this connection.
+     */
+    public function withCallCostInWebhooks(bool $callCostInWebhooks): self
+    {
+        $obj = clone $this;
+        $obj->call_cost_in_webhooks = $callCostInWebhooks;
 
         return $obj;
     }

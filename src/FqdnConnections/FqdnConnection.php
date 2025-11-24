@@ -20,6 +20,7 @@ use Telnyx\CredentialConnections\EncryptedMedia;
  *   adjust_dtmf_timestamp?: bool|null,
  *   anchorsite_override?: value-of<AnchorsiteOverride>|null,
  *   call_cost_enabled?: bool|null,
+ *   call_cost_in_webhooks?: bool|null,
  *   created_at?: string|null,
  *   default_on_hold_comfort_noise_enabled?: bool|null,
  *   dtmf_type?: value-of<DtmfType>|null,
@@ -93,6 +94,12 @@ final class FqdnConnection implements BaseModel
      */
     #[Api(optional: true)]
     public ?bool $call_cost_enabled;
+
+    /**
+     * Specifies if call cost webhooks should be sent for this connection.
+     */
+    #[Api(optional: true)]
+    public ?bool $call_cost_in_webhooks;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
@@ -307,6 +314,7 @@ final class FqdnConnection implements BaseModel
         ?bool $adjust_dtmf_timestamp = null,
         AnchorsiteOverride|string|null $anchorsite_override = null,
         ?bool $call_cost_enabled = null,
+        ?bool $call_cost_in_webhooks = null,
         ?string $created_at = null,
         ?bool $default_on_hold_comfort_noise_enabled = null,
         DtmfType|string|null $dtmf_type = null,
@@ -346,6 +354,7 @@ final class FqdnConnection implements BaseModel
         null !== $adjust_dtmf_timestamp && $obj->adjust_dtmf_timestamp = $adjust_dtmf_timestamp;
         null !== $anchorsite_override && $obj['anchorsite_override'] = $anchorsite_override;
         null !== $call_cost_enabled && $obj->call_cost_enabled = $call_cost_enabled;
+        null !== $call_cost_in_webhooks && $obj->call_cost_in_webhooks = $call_cost_in_webhooks;
         null !== $created_at && $obj->created_at = $created_at;
         null !== $default_on_hold_comfort_noise_enabled && $obj->default_on_hold_comfort_noise_enabled = $default_on_hold_comfort_noise_enabled;
         null !== $dtmf_type && $obj['dtmf_type'] = $dtmf_type;
@@ -444,6 +453,17 @@ final class FqdnConnection implements BaseModel
     {
         $obj = clone $this;
         $obj->call_cost_enabled = $callCostEnabled;
+
+        return $obj;
+    }
+
+    /**
+     * Specifies if call cost webhooks should be sent for this connection.
+     */
+    public function withCallCostInWebhooks(bool $callCostInWebhooks): self
+    {
+        $obj = clone $this;
+        $obj->call_cost_in_webhooks = $callCostInWebhooks;
 
         return $obj;
     }

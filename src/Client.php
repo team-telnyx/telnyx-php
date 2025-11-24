@@ -60,6 +60,7 @@ use Telnyx\Services\GlobalIPProtocolsService;
 use Telnyx\Services\GlobalIPsService;
 use Telnyx\Services\GlobalIPUsageService;
 use Telnyx\Services\InboundChannelsService;
+use Telnyx\Services\InexplicitNumberOrdersService;
 use Telnyx\Services\IntegrationSecretsService;
 use Telnyx\Services\InventoryCoverageService;
 use Telnyx\Services\InvoicesService;
@@ -934,6 +935,11 @@ class Client extends BaseClient
      */
     public WellKnownService $wellKnown;
 
+    /**
+     * @api
+     */
+    public InexplicitNumberOrdersService $inexplicitNumberOrders;
+
     public function __construct(
         ?string $apiKey = null,
         ?string $publicKey = null,
@@ -1124,6 +1130,7 @@ class Client extends BaseClient
         $this->wirelessBlocklists = new WirelessBlocklistsService($this);
         $this->partnerCampaigns = new PartnerCampaignsService($this);
         $this->wellKnown = new WellKnownService($this);
+        $this->inexplicitNumberOrders = new InexplicitNumberOrdersService($this);
     }
 
     /** @return array<string,string> */
