@@ -106,7 +106,7 @@ final class OAuthTest extends TestCase
     public function testRetrieveAuthorize(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped("Prism doesn't properly handle redirects");
+            $this->markTestSkipped('Prism tests are disabled');
         }
 
         $result = $this->client->oauth->retrieveAuthorize([
@@ -122,7 +122,7 @@ final class OAuthTest extends TestCase
     public function testRetrieveAuthorizeWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped("Prism doesn't properly handle redirects");
+            $this->markTestSkipped('Prism tests are disabled');
         }
 
         $result = $this->client->oauth->retrieveAuthorize([
