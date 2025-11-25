@@ -72,7 +72,7 @@ final class ExternalConnectionsService implements ExternalConnectionsContract
      *   external_sip_connection: "zoom",
      *   outbound: array{channel_limit?: int, outbound_voice_profile_id?: string},
      *   active?: bool,
-     *   inbound?: array{channel_limit?: int},
+     *   inbound?: array{outbound_voice_profile_id: string, channel_limit?: int},
      *   tags?: list<string>,
      *   webhook_event_failover_url?: string|null,
      *   webhook_event_url?: string,
