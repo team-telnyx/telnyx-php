@@ -34,10 +34,19 @@ final class TestsTest extends TestCase
         }
 
         $result = $this->client->ai->assistants->tests->create([
-            'destination' => 'x',
-            'instructions' => 'x',
-            'name' => 'x',
-            'rubric' => [['criteria' => 'criteria', 'name' => 'name']],
+            'destination' => '+15551234567',
+            'instructions' => 'Act as a frustrated customer who received a damaged product. Ask for a refund and escalate if not satisfied with the initial response.',
+            'name' => 'Customer Support Bot Test',
+            'rubric' => [
+                [
+                    'criteria' => 'Assistant responds within 30 seconds',
+                    'name' => 'Response Time',
+                ],
+                [
+                    'criteria' => 'Provides correct product information',
+                    'name' => 'Accuracy',
+                ],
+            ],
         ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -51,10 +60,19 @@ final class TestsTest extends TestCase
         }
 
         $result = $this->client->ai->assistants->tests->create([
-            'destination' => 'x',
-            'instructions' => 'x',
-            'name' => 'x',
-            'rubric' => [['criteria' => 'criteria', 'name' => 'name']],
+            'destination' => '+15551234567',
+            'instructions' => 'Act as a frustrated customer who received a damaged product. Ask for a refund and escalate if not satisfied with the initial response.',
+            'name' => 'Customer Support Bot Test',
+            'rubric' => [
+                [
+                    'criteria' => 'Assistant responds within 30 seconds',
+                    'name' => 'Response Time',
+                ],
+                [
+                    'criteria' => 'Provides correct product information',
+                    'name' => 'Accuracy',
+                ],
+            ],
         ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
