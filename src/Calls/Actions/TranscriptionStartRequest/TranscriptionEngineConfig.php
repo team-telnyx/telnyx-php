@@ -6,6 +6,7 @@ namespace Telnyx\Calls\Actions\TranscriptionStartRequest;
 
 use Telnyx\Calls\Actions\TranscriptionEngineAConfig;
 use Telnyx\Calls\Actions\TranscriptionEngineBConfig;
+use Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConfig\Azure;
 use Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConfig\Deepgram;
 use Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConfig\Google;
 use Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConfig\Telnyx;
@@ -31,6 +32,7 @@ final class TranscriptionEngineConfig implements ConverterSource
             'Google' => Google::class,
             'Telnyx' => Telnyx::class,
             'Deepgram' => Deepgram::class,
+            'Azure' => Azure::class,
             'A' => TranscriptionEngineAConfig::class,
             'B' => TranscriptionEngineBConfig::class,
         ];

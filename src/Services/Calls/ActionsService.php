@@ -135,7 +135,7 @@ final class ActionsService implements ActionsContract
      *   transcription_config?: array{
      *     client_state?: string,
      *     command_id?: string,
-     *     transcription_engine?: 'Google'|'Telnyx'|'Deepgram'|'A'|'B',
+     *     transcription_engine?: 'Google'|'Telnyx'|'Deepgram'|'Azure'|'A'|'B',
      *     transcription_engine_config?: array<string,mixed>,
      *     transcription_tracks?: string,
      *   },
@@ -1124,7 +1124,7 @@ final class ActionsService implements ActionsContract
      * @param array{
      *   client_state?: string,
      *   command_id?: string,
-     *   transcription_engine?: 'Google'|'Telnyx'|'Deepgram'|'A'|'B',
+     *   transcription_engine?: 'Google'|'Telnyx'|'Deepgram'|'Azure'|'A'|'B',
      *   transcription_engine_config?: array<string,mixed>,
      *   transcription_tracks?: string,
      * }|ActionStartTranscriptionParams $params
