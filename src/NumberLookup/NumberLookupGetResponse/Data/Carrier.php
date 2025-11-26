@@ -27,7 +27,7 @@ final class Carrier implements BaseModel
     /**
      * Unused.
      */
-    #[Api(optional: true)]
+    #[Api(nullable: true, optional: true)]
     public ?string $error_code;
 
     /**
@@ -97,7 +97,7 @@ final class Carrier implements BaseModel
     /**
      * Unused.
      */
-    public function withErrorCode(string $errorCode): self
+    public function withErrorCode(?string $errorCode): self
     {
         $obj = clone $this;
         $obj->error_code = $errorCode;

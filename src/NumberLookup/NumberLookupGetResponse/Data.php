@@ -43,7 +43,7 @@ final class Data implements BaseModel
     /**
      * Unused.
      */
-    #[Api(optional: true)]
+    #[Api(nullable: true, optional: true)]
     public ?string $fraud;
 
     /**
@@ -131,7 +131,7 @@ final class Data implements BaseModel
     /**
      * Unused.
      */
-    public function withFraud(string $fraud): self
+    public function withFraud(?string $fraud): self
     {
         $obj = clone $this;
         $obj->fraud = $fraud;
