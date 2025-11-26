@@ -33,7 +33,7 @@ final class ScheduledEventsService implements ScheduledEventsContract
      * @param array{
      *   scheduled_at_fixed_datetime: string|\DateTimeInterface,
      *   telnyx_agent_target: string,
-     *   telnyx_conversation_channel: "phone_call"|"sms_chat"|ConversationChannelType,
+     *   telnyx_conversation_channel: 'phone_call'|'sms_chat'|ConversationChannelType,
      *   telnyx_end_user_target: string,
      *   conversation_metadata?: array<string,string|int|bool>,
      *   text?: string,
@@ -99,7 +99,7 @@ final class ScheduledEventsService implements ScheduledEventsContract
      * Get scheduled events for an assistant with pagination and filtering
      *
      * @param array{
-     *   conversation_channel?: "phone_call"|"sms_chat"|ConversationChannelType,
+     *   conversation_channel?: 'phone_call'|'sms_chat'|ConversationChannelType,
      *   from_date?: string|\DateTimeInterface,
      *   page?: array{number?: int, size?: int},
      *   to_date?: string|\DateTimeInterface,

@@ -132,7 +132,7 @@ final class ManagedAccountsService implements ManagedAccountsContract
      *   },
      *   include_cancelled_accounts?: bool,
      *   page?: array{number?: int, size?: int},
-     *   sort?: "created_at"|"email",
+     *   sort?: 'created_at'|'email',
      * }|ManagedAccountListParams $params
      *
      * @throws APIException

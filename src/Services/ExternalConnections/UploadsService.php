@@ -33,10 +33,10 @@ final class UploadsService implements UploadsContract
      *
      * @param array{
      *   number_ids: list<string>,
-     *   additional_usages?: list<"calling_user_assignment"|"first_party_app_assignment">,
+     *   additional_usages?: list<'calling_user_assignment'|'first_party_app_assignment'>,
      *   civic_address_id?: string,
      *   location_id?: string,
-     *   usage?: "calling_user_assignment"|"first_party_app_assignment",
+     *   usage?: 'calling_user_assignment'|'first_party_app_assignment',
      * }|UploadCreateParams $params
      *
      * @throws APIException
@@ -102,7 +102,7 @@ final class UploadsService implements UploadsContract
      *     location_id?: array{eq?: string},
      *     phone_number?: array{contains?: string, eq?: string},
      *     status?: array{
-     *       eq?: list<"pending_upload"|"pending"|"in_progress"|"success"|"error">
+     *       eq?: list<'pending_upload'|'pending'|'in_progress'|'success'|'error'>
      *     },
      *   },
      *   page?: array{number?: int, size?: int},

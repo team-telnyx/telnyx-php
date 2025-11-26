@@ -25,7 +25,7 @@ final class SupportingDocumentsService implements SupportingDocumentsContract
      * Creates a list of supporting documents on a portout request.
      *
      * @param array{
-     *   documents?: list<array{document_id: string, type: "loa"|"invoice"}>
+     *   documents?: list<array{document_id: string, type: 'loa'|'invoice'}>
      * }|SupportingDocumentCreateParams $params
      *
      * @throws APIException

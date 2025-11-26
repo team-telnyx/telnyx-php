@@ -171,7 +171,7 @@ final class NetworksService implements NetworksContract
      * @param array{
      *   filter?: array{
      *     name?: string,
-     *     status?: "created"|"provisioning"|"provisioned"|"deleting"|InterfaceStatus,
+     *     status?: 'created'|'provisioning'|'provisioned'|'deleting'|InterfaceStatus,
      *     type?: string,
      *   },
      *   page?: array{number?: int, size?: int},

@@ -88,7 +88,7 @@ final class ActionsService implements ActionsContract
      *
      * @param array{
      *   expires_in_seconds?: int,
-     *   permissions?: "porting_order.document.read"|"porting_order.document.update",
+     *   permissions?: 'porting_order.document.read'|'porting_order.document.update',
      * }|ActionShareParams $params
      *
      * @throws APIException

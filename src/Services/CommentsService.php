@@ -30,7 +30,7 @@ final class CommentsService implements CommentsContract
      * @param array{
      *   body?: string,
      *   comment_record_id?: string,
-     *   comment_record_type?: "sub_number_order"|"requirement_group",
+     *   comment_record_type?: 'sub_number_order'|'requirement_group',
      * }|CommentCreateParams $params
      *
      * @throws APIException
@@ -82,7 +82,7 @@ final class CommentsService implements CommentsContract
      * @param array{
      *   filter?: array{
      *     comment_record_id?: string,
-     *     comment_record_type?: "sub_number_order"|"requirement_group",
+     *     comment_record_type?: 'sub_number_order'|'requirement_group',
      *   },
      * }|CommentListParams $params
      *

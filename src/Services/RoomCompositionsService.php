@@ -100,7 +100,7 @@ final class RoomCompositionsService implements RoomCompositionsContract
      *       lte?: string|\DateTimeInterface,
      *     },
      *     session_id?: string,
-     *     status?: "completed"|"processing"|"enqueued",
+     *     status?: 'completed'|'processing'|'enqueued',
      *   },
      *   page?: array{number?: int, size?: int},
      * }|RoomCompositionListParams $params

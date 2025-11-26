@@ -31,7 +31,7 @@ final class NotificationChannelsService implements NotificationChannelsContract
      *
      * @param array{
      *   channel_destination?: string,
-     *   channel_type_id?: "sms"|"voice"|"email"|"webhook",
+     *   channel_type_id?: 'sms'|'voice'|'email'|'webhook',
      *   notification_profile_id?: string,
      * }|NotificationChannelCreateParams $params
      *
@@ -83,7 +83,7 @@ final class NotificationChannelsService implements NotificationChannelsContract
      *
      * @param array{
      *   channel_destination?: string,
-     *   channel_type_id?: "sms"|"voice"|"email"|"webhook",
+     *   channel_type_id?: 'sms'|'voice'|'email'|'webhook',
      *   notification_profile_id?: string,
      * }|NotificationChannelUpdateParams $params
      *
@@ -116,13 +116,13 @@ final class NotificationChannelsService implements NotificationChannelsContract
      *
      * @param array{
      *   filter?: array{
-     *     associated_record_type?: array{eq?: "account"|"phone_number"},
-     *     channel_type_id?: array{eq?: "webhook"|"sms"|"email"|"voice"},
+     *     associated_record_type?: array{eq?: 'account'|'phone_number'},
+     *     channel_type_id?: array{eq?: 'webhook'|'sms'|'email'|'voice'},
      *     notification_channel?: array{eq?: string},
      *     notification_event_condition_id?: array{eq?: string},
      *     notification_profile_id?: array{eq?: string},
      *     status?: array{
-     *       eq?: "enabled"|"enable-received"|"enable-pending"|"enable-submtited"|"delete-received"|"delete-pending"|"delete-submitted"|"deleted",
+     *       eq?: 'enabled'|'enable-received'|'enable-pending'|'enable-submtited'|'delete-received'|'delete-pending'|'delete-submitted'|'deleted',
      *     },
      *   },
      *   page?: array{number?: int, size?: int},

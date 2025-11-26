@@ -20,9 +20,7 @@ use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderNewVerification
  */
 final class MessagingHostedNumberOrderNewVerificationCodesResponse implements BaseModel, ResponseConverter
 {
-    /**
-     * @use SdkModel<MessagingHostedNumberOrderNewVerificationCodesResponseShape>
-     */
+    /** @use SdkModel<MessagingHostedNumberOrderNewVerificationCodesResponseShape> */
     use SdkModel;
 
     use SdkResponse;

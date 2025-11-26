@@ -29,9 +29,9 @@ final class OAuthClientsService implements OAuthClientsContract
      * Create a new OAuth client
      *
      * @param array{
-     *   allowed_grant_types: list<"client_credentials"|"authorization_code"|"refresh_token">,
+     *   allowed_grant_types: list<'client_credentials'|'authorization_code'|'refresh_token'>,
      *   allowed_scopes: list<string>,
-     *   client_type: "public"|"confidential",
+     *   client_type: 'public'|'confidential',
      *   name: string,
      *   logo_uri?: string,
      *   policy_uri?: string,
@@ -87,7 +87,7 @@ final class OAuthClientsService implements OAuthClientsContract
      * Update an existing OAuth client
      *
      * @param array{
-     *   allowed_grant_types?: list<"client_credentials"|"authorization_code"|"refresh_token">,
+     *   allowed_grant_types?: list<'client_credentials'|'authorization_code'|'refresh_token'>,
      *   allowed_scopes?: list<string>,
      *   logo_uri?: string,
      *   name?: string,
@@ -125,9 +125,9 @@ final class OAuthClientsService implements OAuthClientsContract
      * Retrieve a paginated list of OAuth clients for the authenticated user
      *
      * @param array{
-     *   filter_allowed_grant_types__contains_?: "client_credentials"|"authorization_code"|"refresh_token",
+     *   filter_allowed_grant_types__contains_?: 'client_credentials'|'authorization_code'|'refresh_token',
      *   filter_client_id_?: string,
-     *   filter_client_type_?: "confidential"|"public",
+     *   filter_client_type_?: 'confidential'|'public',
      *   filter_name_?: string,
      *   filter_name__contains_?: string,
      *   filter_verified_?: bool,

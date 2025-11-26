@@ -27,9 +27,9 @@ final class RequirementGroupsService implements RequirementGroupsContract
      * Create a new requirement group
      *
      * @param array{
-     *   action: "ordering"|"porting",
+     *   action: 'ordering'|'porting',
      *   country_code: string,
-     *   phone_number_type: "local"|"toll_free"|"mobile"|"national"|"shared_cost",
+     *   phone_number_type: 'local'|'toll_free'|'mobile'|'national'|'shared_cost',
      *   customer_reference?: string,
      *   regulatory_requirements?: list<array{
      *     field_value?: string, requirement_id?: string
@@ -118,11 +118,11 @@ final class RequirementGroupsService implements RequirementGroupsContract
      *
      * @param array{
      *   filter?: array{
-     *     action?: "ordering"|"porting"|"action",
+     *     action?: 'ordering'|'porting'|'action',
      *     country_code?: string,
      *     customer_reference?: string,
-     *     phone_number_type?: "local"|"toll_free"|"mobile"|"national"|"shared_cost",
-     *     status?: "approved"|"unapproved"|"pending-approval"|"declined"|"expired",
+     *     phone_number_type?: 'local'|'toll_free'|'mobile'|'national'|'shared_cost',
+     *     status?: 'approved'|'unapproved'|'pending-approval'|'declined'|'expired',
      *   },
      * }|RequirementGroupListParams $params
      *

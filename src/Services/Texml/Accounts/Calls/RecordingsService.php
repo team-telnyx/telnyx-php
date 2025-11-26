@@ -26,7 +26,7 @@ final class RecordingsService implements RecordingsContract
      * @param array{
      *   account_sid: string,
      *   call_sid: string,
-     *   Status?: "in-progress"|"paused"|"stopped",
+     *   Status?: 'in-progress'|'paused'|'stopped',
      * }|RecordingRecordingSidJsonParams $params
      *
      * @throws APIException

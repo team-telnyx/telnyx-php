@@ -50,7 +50,7 @@ final class WebhookDeliveriesService implements WebhookDeliveriesContract
      *     event_type?: string,
      *     finished_at?: array{gte?: string, lte?: string},
      *     started_at?: array{gte?: string, lte?: string},
-     *     status?: array{eq?: "delivered"|"failed"},
+     *     status?: array{eq?: 'delivered'|'failed'},
      *     webhook?: array{contains?: string},
      *   },
      *   page?: array{number?: int, size?: int},

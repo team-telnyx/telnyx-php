@@ -38,7 +38,7 @@ final class FaxApplicationsService implements FaxApplicationsContract
      *   inbound?: array{
      *     channel_limit?: int,
      *     sip_subdomain?: string,
-     *     sip_subdomain_receive_settings?: "only_my_connections"|"from_anyone",
+     *     sip_subdomain_receive_settings?: 'only_my_connections'|'from_anyone',
      *   },
      *   outbound?: array{channel_limit?: int, outbound_voice_profile_id?: string},
      *   tags?: list<string>,
@@ -101,7 +101,7 @@ final class FaxApplicationsService implements FaxApplicationsContract
      *   inbound?: array{
      *     channel_limit?: int,
      *     sip_subdomain?: string,
-     *     sip_subdomain_receive_settings?: "only_my_connections"|"from_anyone",
+     *     sip_subdomain_receive_settings?: 'only_my_connections'|'from_anyone',
      *   },
      *   outbound?: array{channel_limit?: int, outbound_voice_profile_id?: string},
      *   tags?: list<string>,
@@ -142,7 +142,7 @@ final class FaxApplicationsService implements FaxApplicationsContract
      *     outbound_voice_profile_id?: string,
      *   },
      *   page?: array{number?: int, size?: int},
-     *   sort?: "created_at"|"application_name"|"active",
+     *   sort?: 'created_at'|'application_name'|'active',
      * }|FaxApplicationListParams $params
      *
      * @throws APIException

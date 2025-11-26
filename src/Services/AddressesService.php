@@ -108,7 +108,7 @@ final class AddressesService implements AddressesContract
      *     used_as_emergency?: string,
      *   },
      *   page?: array{number?: int, size?: int},
-     *   sort?: "created_at"|"first_name"|"last_name"|"business_name"|"street_address",
+     *   sort?: 'created_at'|'first_name'|'last_name'|'business_name'|'street_address',
      * }|AddressListParams $params
      *
      * @throws APIException

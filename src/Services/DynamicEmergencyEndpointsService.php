@@ -81,7 +81,7 @@ final class DynamicEmergencyEndpointsService implements DynamicEmergencyEndpoint
      *
      * @param array{
      *   filter?: array{
-     *     country_code?: string, status?: "pending"|"activated"|"rejected"
+     *     country_code?: string, status?: 'pending'|'activated'|'rejected'
      *   },
      *   page?: array{number?: int, size?: int},
      * }|DynamicEmergencyEndpointListParams $params

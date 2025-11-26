@@ -182,7 +182,7 @@ final class LoaConfigurationsTest extends TestCase
     public function testPreview0(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped("Prism doesn't support application/pdf responses");
+            $this->markTestSkipped('Prism doesn\'t support application/pdf responses');
         }
 
         $result = $this->client->porting->loaConfigurations->preview0([
@@ -208,7 +208,7 @@ final class LoaConfigurationsTest extends TestCase
     public function testPreview0WithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped("Prism doesn't support application/pdf responses");
+            $this->markTestSkipped('Prism doesn\'t support application/pdf responses');
         }
 
         $result = $this->client->porting->loaConfigurations->preview0([
@@ -235,7 +235,7 @@ final class LoaConfigurationsTest extends TestCase
     public function testPreview1(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped("Prism doesn't support application/pdf responses");
+            $this->markTestSkipped('Prism doesn\'t support application/pdf responses');
         }
 
         $result = $this->client->porting->loaConfigurations->preview1(

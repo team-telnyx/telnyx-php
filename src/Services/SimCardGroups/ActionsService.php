@@ -53,7 +53,7 @@ final class ActionsService implements ActionsContract
      *
      * @param array{
      *   filter_sim_card_group_id_?: string,
-     *   filter_status_?: "in-progress"|"completed"|"failed",
+     *   filter_status_?: 'in-progress'|'completed'|'failed',
      *   filter_type_?: value-of<FilterType>,
      *   page_number_?: int,
      *   page_size_?: int,

@@ -56,10 +56,10 @@ final class ActionsService implements ActionsContract
      *
      * @param array{
      *   filter?: array{
-     *     action_type?: "enable"|"enable_standby_sim_card"|"disable"|"set_standby"|"remove_public_ip"|"set_public_ip",
+     *     action_type?: 'enable'|'enable_standby_sim_card'|'disable'|'set_standby'|'remove_public_ip'|'set_public_ip',
      *     bulk_sim_card_action_id?: string,
      *     sim_card_id?: string,
-     *     status?: "in-progress"|"completed"|"failed",
+     *     status?: 'in-progress'|'completed'|'failed',
      *   },
      *   page?: array{number?: int, size?: int},
      * }|ActionListParams $params

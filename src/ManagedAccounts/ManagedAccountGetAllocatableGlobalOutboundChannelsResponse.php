@@ -18,9 +18,7 @@ use Telnyx\ManagedAccounts\ManagedAccountGetAllocatableGlobalOutboundChannelsRes
  */
 final class ManagedAccountGetAllocatableGlobalOutboundChannelsResponse implements BaseModel, ResponseConverter
 {
-    /**
-     * @use SdkModel<ManagedAccountGetAllocatableGlobalOutboundChannelsResponseShape>
-     */
+    /** @use SdkModel<ManagedAccountGetAllocatableGlobalOutboundChannelsResponseShape> */
     use SdkModel;
 
     use SdkResponse;

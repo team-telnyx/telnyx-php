@@ -34,7 +34,7 @@ final class ManagedAccountsTest extends TestCase
         }
 
         $result = $this->client->managedAccounts->create([
-            'business_name' => "Larry's Cat Food Inc",
+            'business_name' => 'Larry\'s Cat Food Inc',
         ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -48,7 +48,7 @@ final class ManagedAccountsTest extends TestCase
         }
 
         $result = $this->client->managedAccounts->create([
-            'business_name' => "Larry's Cat Food Inc",
+            'business_name' => 'Larry\'s Cat Food Inc',
         ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType

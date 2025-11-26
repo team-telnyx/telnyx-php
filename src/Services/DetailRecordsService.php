@@ -25,8 +25,8 @@ final class DetailRecordsService implements DetailRecordsContract
      *
      * @param array{
      *   filter?: array{
-     *     record_type: "ai-voice-assistant"|"amd"|"call-control"|"conference"|"conference-participant"|"embedding"|"fax"|"inference"|"inference-speech-to-text"|"media_storage"|"media-streaming"|"messaging"|"noise-suppression"|"recording"|"sip-trunking"|"siprec-client"|"stt"|"tts"|"verify"|"webrtc"|"wireless",
-     *     date_range?: "yesterday"|"today"|"tomorrow"|"last_week"|"this_week"|"next_week"|"last_month"|"this_month"|"next_month",
+     *     record_type: 'ai-voice-assistant'|'amd'|'call-control'|'conference'|'conference-participant'|'embedding'|'fax'|'inference'|'inference-speech-to-text'|'media_storage'|'media-streaming'|'messaging'|'noise-suppression'|'recording'|'sip-trunking'|'siprec-client'|'stt'|'tts'|'verify'|'webrtc'|'wireless',
+     *     date_range?: 'yesterday'|'today'|'tomorrow'|'last_week'|'this_week'|'next_week'|'last_month'|'this_month'|'next_month',
      *   },
      *   page?: array{number?: int, size?: int},
      *   sort?: list<string>,

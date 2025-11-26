@@ -74,7 +74,7 @@ final class ConferencesService implements ConferencesContract
      *
      * @param array{
      *   account_sid: string,
-     *   AnnounceMethod?: "GET"|"POST",
+     *   AnnounceMethod?: 'GET'|'POST',
      *   AnnounceUrl?: string,
      *   Status?: string,
      * }|ConferenceUpdateParams $params
@@ -118,7 +118,7 @@ final class ConferencesService implements ConferencesContract
      *   Page?: int,
      *   PageSize?: int,
      *   PageToken?: string,
-     *   Status?: "init"|"in-progress"|"completed",
+     *   Status?: 'init'|'in-progress'|'completed',
      * }|ConferenceRetrieveConferencesParams $params
      *
      * @throws APIException

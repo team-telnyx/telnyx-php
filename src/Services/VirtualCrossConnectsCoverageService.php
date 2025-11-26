@@ -25,7 +25,7 @@ final class VirtualCrossConnectsCoverageService implements VirtualCrossConnectsC
      *
      * @param array{
      *   filter?: array{
-     *     cloud_provider?: "aws"|"azure"|"gce",
+     *     cloud_provider?: 'aws'|'azure'|'gce',
      *     cloud_provider_region?: string,
      *     'location.code'?: string,
      *     'location.pop'?: string,

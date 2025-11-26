@@ -67,7 +67,7 @@ final class MessagingProfilesService implements MessagingProfilesContract
      *     replace_blacklist_only?: bool,
      *     send_webhooks?: bool,
      *   }|URLShortenerSettings|null,
-     *   webhook_api_version?: "1"|"2"|"2010-04-01",
+     *   webhook_api_version?: '1'|'2'|'2010-04-01',
      *   webhook_failover_url?: string|null,
      *   webhook_url?: string|null,
      * }|MessagingProfileCreateParams $params
@@ -141,7 +141,7 @@ final class MessagingProfilesService implements MessagingProfilesContract
      *     send_webhooks?: bool,
      *   }|URLShortenerSettings|null,
      *   v1_secret?: string,
-     *   webhook_api_version?: "1"|"2"|"2010-04-01",
+     *   webhook_api_version?: '1'|'2'|'2010-04-01',
      *   webhook_failover_url?: string|null,
      *   webhook_url?: string|null,
      *   whitelisted_destinations?: list<string>,

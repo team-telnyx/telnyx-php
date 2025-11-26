@@ -27,7 +27,7 @@ final class IntegrationSecretsService implements IntegrationSecretsContract
      *
      * @param array{
      *   identifier: string,
-     *   type: "bearer"|"basic",
+     *   type: 'bearer'|'basic',
      *   token?: string,
      *   password?: string,
      *   username?: string,
@@ -60,7 +60,7 @@ final class IntegrationSecretsService implements IntegrationSecretsContract
      * Retrieve a list of all integration secrets configured by the user.
      *
      * @param array{
-     *   filter?: array{type?: "bearer"|"basic"},
+     *   filter?: array{type?: 'bearer'|'basic'},
      *   page?: array{number?: int, size?: int},
      * }|IntegrationSecretListParams $params
      *

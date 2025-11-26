@@ -24,7 +24,7 @@ final class WirelessBlocklistValuesService implements WirelessBlocklistValuesCon
      * Retrieve all wireless blocklist values for a given blocklist type.
      *
      * @param array{
-     *   type: "country"|"mcc"|"plmn"
+     *   type: 'country'|'mcc'|'plmn'
      * }|WirelessBlocklistValueListParams $params
      *
      * @throws APIException

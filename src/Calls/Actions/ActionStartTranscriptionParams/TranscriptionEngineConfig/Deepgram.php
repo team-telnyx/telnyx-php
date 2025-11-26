@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type DeepgramShape = array{
- *   transcription_engine: "Deepgram",
+ *   transcription_engine: 'Deepgram',
  *   transcription_model: value-of<TranscriptionModel>,
  *   language?: value-of<Language>|null,
  * }
@@ -25,7 +25,7 @@ final class Deepgram implements BaseModel
     /**
      * Engine identifier for Deepgram transcription service.
      *
-     * @var "Deepgram" $transcription_engine
+     * @var 'Deepgram' $transcription_engine
      */
     #[Api]
     public string $transcription_engine = 'Deepgram';

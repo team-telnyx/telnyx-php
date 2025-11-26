@@ -35,22 +35,22 @@ final class CallControlApplicationsService implements CallControlApplicationsCon
      *   application_name: string,
      *   webhook_event_url: string,
      *   active?: bool,
-     *   anchorsite_override?: "\"Latency\""|"\"Chicago, IL\""|"\"Ashburn, VA\""|"\"San Jose, CA\"",
+     *   anchorsite_override?: '"Latency"'|'"Chicago, IL"'|'"Ashburn, VA"'|'"San Jose, CA"',
      *   call_cost_in_webhooks?: bool,
-     *   dtmf_type?: "RFC 2833"|"Inband"|"SIP INFO",
+     *   dtmf_type?: 'RFC 2833'|'Inband'|'SIP INFO',
      *   first_command_timeout?: bool,
      *   first_command_timeout_secs?: int,
      *   inbound?: array{
      *     channel_limit?: int,
      *     shaken_stir_enabled?: bool,
      *     sip_subdomain?: string,
-     *     sip_subdomain_receive_settings?: "only_my_connections"|"from_anyone",
+     *     sip_subdomain_receive_settings?: 'only_my_connections'|'from_anyone',
      *   }|CallControlApplicationInbound,
      *   outbound?: array{
      *     channel_limit?: int, outbound_voice_profile_id?: string
      *   }|CallControlApplicationOutbound,
      *   redact_dtmf_debug_logging?: bool,
-     *   webhook_api_version?: "1"|"2",
+     *   webhook_api_version?: '1'|'2',
      *   webhook_event_failover_url?: string|null,
      *   webhook_timeout_secs?: int|null,
      * }|CallControlApplicationCreateParams $params
@@ -105,23 +105,23 @@ final class CallControlApplicationsService implements CallControlApplicationsCon
      *   application_name: string,
      *   webhook_event_url: string,
      *   active?: bool,
-     *   anchorsite_override?: "\"Latency\""|"\"Chicago, IL\""|"\"Ashburn, VA\""|"\"San Jose, CA\"",
+     *   anchorsite_override?: '"Latency"'|'"Chicago, IL"'|'"Ashburn, VA"'|'"San Jose, CA"',
      *   call_cost_in_webhooks?: bool,
-     *   dtmf_type?: "RFC 2833"|"Inband"|"SIP INFO",
+     *   dtmf_type?: 'RFC 2833'|'Inband'|'SIP INFO',
      *   first_command_timeout?: bool,
      *   first_command_timeout_secs?: int,
      *   inbound?: array{
      *     channel_limit?: int,
      *     shaken_stir_enabled?: bool,
      *     sip_subdomain?: string,
-     *     sip_subdomain_receive_settings?: "only_my_connections"|"from_anyone",
+     *     sip_subdomain_receive_settings?: 'only_my_connections'|'from_anyone',
      *   }|CallControlApplicationInbound,
      *   outbound?: array{
      *     channel_limit?: int, outbound_voice_profile_id?: string
      *   }|CallControlApplicationOutbound,
      *   redact_dtmf_debug_logging?: bool,
      *   tags?: list<string>,
-     *   webhook_api_version?: "1"|"2",
+     *   webhook_api_version?: '1'|'2',
      *   webhook_event_failover_url?: string|null,
      *   webhook_timeout_secs?: int|null,
      * }|CallControlApplicationUpdateParams $params
@@ -166,15 +166,15 @@ final class CallControlApplicationsService implements CallControlApplicationsCon
      *       eq?: string, gt?: string, gte?: string, lt?: string, lte?: string
      *     },
      *     'outbound.outbound_voice_profile_id'?: string,
-     *     product?: "call_control"|"fax"|"texml",
-     *     status?: "init"|"in_progress"|"completed",
+     *     product?: 'call_control'|'fax'|'texml',
+     *     status?: 'init'|'in_progress'|'completed',
      *     to?: string,
-     *     type?: "command"|"webhook",
+     *     type?: 'command'|'webhook',
      *   },
      *   page?: array{
      *     after?: string, before?: string, limit?: int, number?: int, size?: int
      *   },
-     *   sort?: "created_at"|"connection_name"|"active",
+     *   sort?: 'created_at'|'connection_name'|'active',
      * }|CallControlApplicationListParams $params
      *
      * @throws APIException

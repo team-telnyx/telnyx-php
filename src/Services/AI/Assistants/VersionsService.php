@@ -73,7 +73,7 @@ final class VersionsService implements VersionsContract
      *   description?: string,
      *   dynamic_variables?: array<string,mixed>,
      *   dynamic_variables_webhook_url?: string,
-     *   enabled_features?: list<"telephony"|"messaging"|EnabledFeatures>,
+     *   enabled_features?: list<'telephony'|'messaging'|EnabledFeatures>,
      *   greeting?: string,
      *   insight_settings?: array{insight_group_id?: string}|InsightSettings,
      *   instructions?: string,
@@ -90,7 +90,7 @@ final class VersionsService implements VersionsContract
      *   tools?: list<AssistantTool|array<string,mixed>>,
      *   transcription?: array{
      *     language?: string,
-     *     model?: "deepgram/flux"|"deepgram/nova-3"|"deepgram/nova-2"|"azure/fast"|"distil-whisper/distil-large-v2"|"openai/whisper-large-v3-turbo",
+     *     model?: 'deepgram/flux'|'deepgram/nova-3'|'deepgram/nova-2'|'azure/fast'|'distil-whisper/distil-large-v2'|'openai/whisper-large-v3-turbo',
      *     region?: string,
      *     settings?: array{
      *       eot_threshold?: float,

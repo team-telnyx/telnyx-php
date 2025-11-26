@@ -23,7 +23,7 @@ final class NumberLookupService implements NumberLookupContract
      *
      * Returns information about the provided phone number.
      *
-     * @param array{type?: "carrier"|"caller-name"}|NumberLookupRetrieveParams $params
+     * @param array{type?: 'carrier'|'caller-name'}|NumberLookupRetrieveParams $params
      *
      * @throws APIException
      */

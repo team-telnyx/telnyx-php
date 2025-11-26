@@ -29,7 +29,7 @@ final class VerificationCodesService implements VerificationCodesContract
      * @param array{
      *   filter?: array{verified?: bool},
      *   page?: array{number?: int, size?: int},
-     *   sort?: array{value?: "created_at"|"-created_at"},
+     *   sort?: array{value?: 'created_at'|'-created_at'},
      * }|VerificationCodeListParams $params
      *
      * @throws APIException
@@ -60,7 +60,7 @@ final class VerificationCodesService implements VerificationCodesContract
      * Send the verification code for all porting phone numbers.
      *
      * @param array{
-     *   phone_numbers?: list<string>, verification_method?: "sms"|"call"
+     *   phone_numbers?: list<string>, verification_method?: 'sms'|'call'
      * }|VerificationCodeSendParams $params
      *
      * @throws APIException

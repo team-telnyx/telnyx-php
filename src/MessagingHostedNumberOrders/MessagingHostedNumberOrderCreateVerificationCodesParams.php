@@ -22,9 +22,7 @@ use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderCreateVerificat
  */
 final class MessagingHostedNumberOrderCreateVerificationCodesParams implements BaseModel
 {
-    /**
-     * @use SdkModel<MessagingHostedNumberOrderCreateVerificationCodesParamsShape>
-     */
+    /** @use SdkModel<MessagingHostedNumberOrderCreateVerificationCodesParamsShape> */
     use SdkModel;
     use SdkParams;
 

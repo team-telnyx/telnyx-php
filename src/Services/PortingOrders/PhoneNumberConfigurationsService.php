@@ -60,13 +60,13 @@ final class PhoneNumberConfigurationsService implements PhoneNumberConfiguration
      * @param array{
      *   filter?: array{
      *     porting_order?: array{
-     *       status?: list<"activation-in-progress"|"cancel-pending"|"cancelled"|"draft"|"exception"|"foc-date-confirmed"|"in-process"|"ported"|"submitted">,
+     *       status?: list<'activation-in-progress'|'cancel-pending'|'cancelled'|'draft'|'exception'|'foc-date-confirmed'|'in-process'|'ported'|'submitted'>,
      *     },
      *     porting_phone_number?: list<string>,
      *     user_bundle_id?: list<string>,
      *   },
      *   page?: array{number?: int, size?: int},
-     *   sort?: array{value?: "created_at"|"-created_at"},
+     *   sort?: array{value?: 'created_at'|'-created_at'},
      * }|PhoneNumberConfigurationListParams $params
      *
      * @throws APIException

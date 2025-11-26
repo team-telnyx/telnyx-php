@@ -32,8 +32,8 @@ final class NetworkCoverageService implements NetworkCoverageContract
      *     'location.site'?: string,
      *   },
      *   filters?: array{
-     *     available_services?: "cloud_vpn"|"private_wireless_gateway"|"virtual_cross_connect"|AvailableService|array{
-     *       contains?: "cloud_vpn"|"private_wireless_gateway"|"virtual_cross_connect"|AvailableService,
+     *     available_services?: 'cloud_vpn'|'private_wireless_gateway'|'virtual_cross_connect'|AvailableService|array{
+     *       contains?: 'cloud_vpn'|'private_wireless_gateway'|'virtual_cross_connect'|AvailableService,
      *     },
      *   },
      *   page?: array{number?: int, size?: int},

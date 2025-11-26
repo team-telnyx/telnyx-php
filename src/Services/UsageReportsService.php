@@ -32,7 +32,7 @@ final class UsageReportsService implements UsageReportsContract
      *   date_range?: string,
      *   end_date?: string,
      *   filter?: string,
-     *   format?: "csv"|"json",
+     *   format?: 'csv'|'json',
      *   managed_accounts?: bool,
      *   page?: array{number?: int, size?: int},
      *   sort?: list<string>,

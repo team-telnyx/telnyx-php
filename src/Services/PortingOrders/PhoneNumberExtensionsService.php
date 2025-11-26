@@ -63,7 +63,7 @@ final class PhoneNumberExtensionsService implements PhoneNumberExtensionsContrac
      * @param array{
      *   filter?: array{porting_phone_number_id?: string},
      *   page?: array{number?: int, size?: int},
-     *   sort?: array{value?: "-created_at"|"created_at"},
+     *   sort?: array{value?: '-created_at'|'created_at'},
      * }|PhoneNumberExtensionListParams $params
      *
      * @throws APIException

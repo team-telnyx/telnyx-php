@@ -28,12 +28,12 @@ final class ActionRequirementsService implements ActionRequirementsContract
      * @param array{
      *   filter?: array{
      *     id?: list<string>,
-     *     action_type?: "au_id_verification",
+     *     action_type?: 'au_id_verification',
      *     requirement_type_id?: string,
-     *     status?: "created"|"pending"|"completed"|"cancelled"|"failed",
+     *     status?: 'created'|'pending'|'completed'|'cancelled'|'failed',
      *   },
      *   page?: array{number?: int, size?: int},
-     *   sort?: array{value?: "created_at"|"-created_at"|"updated_at"|"-updated_at"},
+     *   sort?: array{value?: 'created_at'|'-created_at'|'updated_at'|'-updated_at'},
      * }|ActionRequirementListParams $params
      *
      * @throws APIException

@@ -53,7 +53,7 @@ final class ConnectionsService implements ConnectionsContract
      *     outbound_voice_profile_id?: string,
      *   },
      *   page?: array{number?: int, size?: int},
-     *   sort?: "created_at"|"connection_name"|"active",
+     *   sort?: 'created_at'|'connection_name'|'active',
      * }|ConnectionListParams $params
      *
      * @throws APIException

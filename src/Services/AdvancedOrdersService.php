@@ -28,8 +28,8 @@ final class AdvancedOrdersService implements AdvancedOrdersContract
      *   comments?: string,
      *   country_code?: string,
      *   customer_reference?: string,
-     *   features?: list<"sms"|"mms"|"voice"|"fax"|"emergency">,
-     *   phone_number_type?: "local"|"mobile"|"toll_free"|"shared_cost"|"national"|"landline",
+     *   features?: list<'sms'|'mms'|'voice'|'fax'|'emergency'>,
+     *   phone_number_type?: 'local'|'mobile'|'toll_free'|'shared_cost'|'national'|'landline',
      *   quantity?: int,
      *   requirement_group_id?: string,
      * }|AdvancedOrderCreateParams $params
@@ -103,8 +103,8 @@ final class AdvancedOrdersService implements AdvancedOrdersContract
      *   comments?: string,
      *   country_code?: string,
      *   customer_reference?: string,
-     *   features?: list<"sms"|"mms"|"voice"|"fax"|"emergency">,
-     *   phone_number_type?: "local"|"mobile"|"toll_free"|"shared_cost"|"national"|"landline",
+     *   features?: list<'sms'|'mms'|'voice'|'fax'|'emergency'>,
+     *   phone_number_type?: 'local'|'mobile'|'toll_free'|'shared_cost'|'national'|'landline',
      *   quantity?: int,
      *   requirement_group_id?: string,
      * }|AdvancedOrderUpdateRequirementGroupParams $params

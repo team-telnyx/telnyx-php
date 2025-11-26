@@ -34,7 +34,7 @@ final class UserAddressesTest extends TestCase
         }
 
         $result = $this->client->userAddresses->create([
-            'business_name' => "Toy-O'Kon",
+            'business_name' => 'Toy-O\'Kon',
             'country_code' => 'US',
             'first_name' => 'Alfred',
             'last_name' => 'Foster',
@@ -53,7 +53,7 @@ final class UserAddressesTest extends TestCase
         }
 
         $result = $this->client->userAddresses->create([
-            'business_name' => "Toy-O'Kon",
+            'business_name' => 'Toy-O\'Kon',
             'country_code' => 'US',
             'first_name' => 'Alfred',
             'last_name' => 'Foster',

@@ -38,10 +38,10 @@ final class CallEventsService implements CallEventsContract
      *       eq?: string, gt?: string, gte?: string, lt?: string, lte?: string
      *     },
      *     'outbound.outbound_voice_profile_id'?: string,
-     *     product?: "call_control"|"fax"|"texml",
-     *     status?: "init"|"in_progress"|"completed",
+     *     product?: 'call_control'|'fax'|'texml',
+     *     status?: 'init'|'in_progress'|'completed',
      *     to?: string,
-     *     type?: "command"|"webhook",
+     *     type?: 'command'|'webhook',
      *   },
      *   page?: array{
      *     after?: string, before?: string, limit?: int, number?: int, size?: int

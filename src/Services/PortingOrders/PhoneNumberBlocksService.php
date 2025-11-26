@@ -61,15 +61,15 @@ final class PhoneNumberBlocksService implements PhoneNumberBlocksContract
      *
      * @param array{
      *   filter?: array{
-     *     activation_status?: "New"|"Pending"|"Conflict"|"Cancel Pending"|"Failed"|"Concurred"|"Activate RDY"|"Disconnect Pending"|"Concurrence Sent"|"Old"|"Sending"|"Active"|"Cancelled",
+     *     activation_status?: 'New'|'Pending'|'Conflict'|'Cancel Pending'|'Failed'|'Concurred'|'Activate RDY'|'Disconnect Pending'|'Concurrence Sent'|'Old'|'Sending'|'Active'|'Cancelled',
      *     phone_number?: list<string>,
-     *     portability_status?: "pending"|"confirmed"|"provisional",
+     *     portability_status?: 'pending'|'confirmed'|'provisional',
      *     porting_order_id?: list<string>,
-     *     status?: "draft"|"in-process"|"submitted"|"exception"|"foc-date-confirmed"|"cancel-pending"|"ported"|"cancelled"|list<"draft"|"in-process"|"submitted"|"exception"|"foc-date-confirmed"|"cancel-pending"|"ported"|"cancelled">,
+     *     status?: 'draft'|'in-process'|'submitted'|'exception'|'foc-date-confirmed'|'cancel-pending'|'ported'|'cancelled'|list<'draft'|'in-process'|'submitted'|'exception'|'foc-date-confirmed'|'cancel-pending'|'ported'|'cancelled'>,
      *     support_key?: string|list<string>,
      *   },
      *   page?: array{number?: int, size?: int},
-     *   sort?: array{value?: "-created_at"|"created_at"},
+     *   sort?: array{value?: '-created_at'|'created_at'},
      * }|PhoneNumberBlockListParams $params
      *
      * @throws APIException

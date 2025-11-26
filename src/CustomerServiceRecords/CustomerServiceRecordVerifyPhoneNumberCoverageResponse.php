@@ -18,9 +18,7 @@ use Telnyx\CustomerServiceRecords\CustomerServiceRecordVerifyPhoneNumberCoverage
  */
 final class CustomerServiceRecordVerifyPhoneNumberCoverageResponse implements BaseModel, ResponseConverter
 {
-    /**
-     * @use SdkModel<CustomerServiceRecordVerifyPhoneNumberCoverageResponseShape>
-     */
+    /** @use SdkModel<CustomerServiceRecordVerifyPhoneNumberCoverageResponseShape> */
     use SdkModel;
 
     use SdkResponse;

@@ -27,12 +27,12 @@ final class InventoryCoverageService implements InventoryCoverageContract
      *   filter?: array{
      *     administrative_area?: string,
      *     count?: bool,
-     *     country_code?: "AT"|"AU"|"BE"|"BG"|"CA"|"CH"|"CN"|"CY"|"CZ"|"DE"|"DK"|"EE"|"ES"|"FI"|"FR"|"GB"|"GR"|"HU"|"HR"|"IE"|"IT"|"LT"|"LU"|"LV"|"NL"|"NZ"|"MX"|"NO"|"PL"|"PT"|"RO"|"SE"|"SG"|"SI"|"SK"|"US",
-     *     features?: list<"sms"|"mms"|"voice"|"fax"|"emergency">,
-     *     groupBy?: "locality"|"npa"|"national_destination_code",
+     *     country_code?: 'AT'|'AU'|'BE'|'BG'|'CA'|'CH'|'CN'|'CY'|'CZ'|'DE'|'DK'|'EE'|'ES'|'FI'|'FR'|'GB'|'GR'|'HU'|'HR'|'IE'|'IT'|'LT'|'LU'|'LV'|'NL'|'NZ'|'MX'|'NO'|'PL'|'PT'|'RO'|'SE'|'SG'|'SI'|'SK'|'US',
+     *     features?: list<'sms'|'mms'|'voice'|'fax'|'emergency'>,
+     *     groupBy?: 'locality'|'npa'|'national_destination_code',
      *     npa?: int,
      *     nxx?: int,
-     *     phone_number_type?: "local"|"toll_free"|"national"|"mobile"|"landline"|"shared_cost",
+     *     phone_number_type?: 'local'|'toll_free'|'national'|'mobile'|'landline'|'shared_cost',
      *   },
      * }|InventoryCoverageListParams $params
      *

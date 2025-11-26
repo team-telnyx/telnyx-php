@@ -61,7 +61,7 @@ final class ReleasesService implements ReleasesContract
      *     location_id?: array{eq?: string},
      *     phone_number?: array{contains?: string, eq?: string},
      *     status?: array{
-     *       eq?: list<"pending_upload"|"pending"|"in_progress"|"complete"|"failed"|"expired"|"unknown">,
+     *       eq?: list<'pending_upload'|'pending'|'in_progress'|'complete'|'failed'|'expired'|'unknown'>,
      *     },
      *   },
      *   page?: array{number?: int, size?: int},

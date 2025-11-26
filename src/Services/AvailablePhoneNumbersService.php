@@ -29,14 +29,14 @@ final class AvailablePhoneNumbersService implements AvailablePhoneNumbersContrac
      *     best_effort?: bool,
      *     country_code?: string,
      *     exclude_held_numbers?: bool,
-     *     features?: list<"sms"|"mms"|"voice"|"fax"|"emergency"|"hd_voice"|"international_sms"|"local_calling">,
+     *     features?: list<'sms'|'mms'|'voice'|'fax'|'emergency'|'hd_voice'|'international_sms'|'local_calling'>,
      *     limit?: int,
      *     locality?: string,
      *     national_destination_code?: string,
      *     phone_number?: array{
      *       contains?: string, ends_with?: string, starts_with?: string
      *     },
-     *     phone_number_type?: "local"|"toll_free"|"mobile"|"national"|"shared_cost",
+     *     phone_number_type?: 'local'|'toll_free'|'mobile'|'national'|'shared_cost',
      *     quickship?: bool,
      *     rate_center?: string,
      *     reservable?: bool,

@@ -50,7 +50,7 @@ final class EventsService implements EventsContract
      *       gte?: string|\DateTimeInterface, lte?: string|\DateTimeInterface
      *     },
      *     porting_order_id?: string,
-     *     type?: "porting_order.deleted"|"porting_order.loa_updated"|"porting_order.messaging_changed"|"porting_order.status_changed"|"porting_order.sharing_token_expired"|"porting_order.new_comment"|"porting_order.split",
+     *     type?: 'porting_order.deleted'|'porting_order.loa_updated'|'porting_order.messaging_changed'|'porting_order.status_changed'|'porting_order.sharing_token_expired'|'porting_order.new_comment'|'porting_order.split',
      *   },
      *   page?: array{number?: int, size?: int},
      * }|EventListParams $params

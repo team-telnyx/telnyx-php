@@ -29,7 +29,7 @@ final class DialogflowConnectionsService implements DialogflowConnectionsContrac
      * @param array{
      *   service_account: array<string,mixed>,
      *   conversation_profile_id?: string,
-     *   dialogflow_api?: "cx"|"es",
+     *   dialogflow_api?: 'cx'|'es',
      *   environment?: string,
      *   location?: string,
      * }|DialogflowConnectionCreateParams $params
@@ -84,7 +84,7 @@ final class DialogflowConnectionsService implements DialogflowConnectionsContrac
      * @param array{
      *   service_account: array<string,mixed>,
      *   conversation_profile_id?: string,
-     *   dialogflow_api?: "cx"|"es",
+     *   dialogflow_api?: 'cx'|'es',
      *   environment?: string,
      *   location?: string,
      * }|DialogflowConnectionUpdateParams $params

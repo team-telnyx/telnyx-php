@@ -39,9 +39,9 @@ final class OutboundVoiceProfilesService implements OutboundVoiceProfilesContrac
      *   billing_group_id?: string|null,
      *   call_recording?: array{
      *     call_recording_caller_phone_numbers?: list<string>,
-     *     call_recording_channels?: "single"|"dual",
-     *     call_recording_format?: "wav"|"mp3",
-     *     call_recording_type?: "all"|"none"|"by_caller_phone_number",
+     *     call_recording_channels?: 'single'|'dual',
+     *     call_recording_format?: 'wav'|'mp3',
+     *     call_recording_type?: 'all'|'none'|'by_caller_phone_number',
      *   }|OutboundCallRecording,
      *   calling_window?: array{
      *     calls_per_cld?: int, end_time?: string, start_time?: string
@@ -51,10 +51,10 @@ final class OutboundVoiceProfilesService implements OutboundVoiceProfilesContrac
      *   daily_spend_limit_enabled?: bool,
      *   enabled?: bool,
      *   max_destination_rate?: float,
-     *   service_plan?: "global"|ServicePlan,
+     *   service_plan?: 'global'|ServicePlan,
      *   tags?: list<string>,
-     *   traffic_type?: "conversational"|TrafficType,
-     *   usage_payment_method?: "rate-deck"|UsagePaymentMethod,
+     *   traffic_type?: 'conversational'|TrafficType,
+     *   usage_payment_method?: 'rate-deck'|UsagePaymentMethod,
      *   whitelisted_destinations?: list<string>,
      * }|OutboundVoiceProfileCreateParams $params
      *
@@ -109,9 +109,9 @@ final class OutboundVoiceProfilesService implements OutboundVoiceProfilesContrac
      *   billing_group_id?: string|null,
      *   call_recording?: array{
      *     call_recording_caller_phone_numbers?: list<string>,
-     *     call_recording_channels?: "single"|"dual",
-     *     call_recording_format?: "wav"|"mp3",
-     *     call_recording_type?: "all"|"none"|"by_caller_phone_number",
+     *     call_recording_channels?: 'single'|'dual',
+     *     call_recording_format?: 'wav'|'mp3',
+     *     call_recording_type?: 'all'|'none'|'by_caller_phone_number',
      *   }|OutboundCallRecording,
      *   calling_window?: array{
      *     calls_per_cld?: int, end_time?: string, start_time?: string
@@ -121,10 +121,10 @@ final class OutboundVoiceProfilesService implements OutboundVoiceProfilesContrac
      *   daily_spend_limit_enabled?: bool,
      *   enabled?: bool,
      *   max_destination_rate?: float,
-     *   service_plan?: "global"|ServicePlan,
+     *   service_plan?: 'global'|ServicePlan,
      *   tags?: list<string>,
-     *   traffic_type?: "conversational"|TrafficType,
-     *   usage_payment_method?: "rate-deck"|UsagePaymentMethod,
+     *   traffic_type?: 'conversational'|TrafficType,
+     *   usage_payment_method?: 'rate-deck'|UsagePaymentMethod,
      *   whitelisted_destinations?: list<string>,
      * }|OutboundVoiceProfileUpdateParams $params
      *

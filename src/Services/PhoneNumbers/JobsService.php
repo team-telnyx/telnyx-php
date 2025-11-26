@@ -56,10 +56,10 @@ final class JobsService implements JobsContract
      *
      * @param array{
      *   filter?: array{
-     *     type?: "update_emergency_settings"|"delete_phone_numbers"|"update_phone_numbers",
+     *     type?: 'update_emergency_settings'|'delete_phone_numbers'|'update_phone_numbers',
      *   },
      *   page?: array{number?: int, size?: int},
-     *   sort?: "created_at",
+     *   sort?: 'created_at',
      * }|JobListParams $params
      *
      * @throws APIException
@@ -125,12 +125,12 @@ final class JobsService implements JobsContract
      *     emergency_address_id?: string,
      *     has_bundle?: string,
      *     phone_number?: string,
-     *     status?: "purchase-pending"|"purchase-failed"|"port-pending"|"active"|"deleted"|"port-failed"|"emergency-only"|"ported-out"|"port-out-pending",
+     *     status?: 'purchase-pending'|'purchase-failed'|'port-pending'|'active'|'deleted'|'port-failed'|'emergency-only'|'ported-out'|'port-out-pending',
      *     tag?: string,
      *     'voice.connection_name'?: array{
      *       contains?: string, ends_with?: string, eq?: string, starts_with?: string
      *     },
-     *     'voice.usage_payment_method'?: "pay-per-minute"|"channel",
+     *     'voice.usage_payment_method'?: 'pay-per-minute'|'channel',
      *   },
      *   billing_group_id?: string,
      *   connection_id?: string,
@@ -142,19 +142,19 @@ final class JobsService implements JobsContract
      *   voice?: array{
      *     call_forwarding?: array{
      *       call_forwarding_enabled?: bool,
-     *       forwarding_type?: "always"|"on-failure",
+     *       forwarding_type?: 'always'|'on-failure',
      *       forwards_to?: string,
      *     }|CallForwarding,
      *     call_recording?: array{
-     *       inbound_call_recording_channels?: "single"|"dual",
+     *       inbound_call_recording_channels?: 'single'|'dual',
      *       inbound_call_recording_enabled?: bool,
-     *       inbound_call_recording_format?: "wav"|"mp3",
+     *       inbound_call_recording_format?: 'wav'|'mp3',
      *     }|CallRecording,
      *     caller_id_name_enabled?: bool,
      *     cnam_listing?: array{
      *       cnam_listing_details?: string, cnam_listing_enabled?: bool
      *     }|CnamListing,
-     *     inbound_call_screening?: "disabled"|"reject_calls"|"flag_calls",
+     *     inbound_call_screening?: 'disabled'|'reject_calls'|'flag_calls',
      *     media_features?: array{
      *       accept_any_rtp_packets_enabled?: bool,
      *       rtp_auto_adjust_enabled?: bool,
@@ -162,7 +162,7 @@ final class JobsService implements JobsContract
      *     }|MediaFeatures,
      *     tech_prefix_enabled?: bool,
      *     translated_number?: string,
-     *     usage_payment_method?: "pay-per-minute"|"channel",
+     *     usage_payment_method?: 'pay-per-minute'|'channel',
      *   },
      * }|JobUpdateBatchParams $params
      *

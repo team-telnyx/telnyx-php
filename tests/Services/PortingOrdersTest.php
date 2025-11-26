@@ -140,7 +140,7 @@ final class PortingOrdersTest extends TestCase
     public function testRetrieveLoaTemplate(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped("Prism doesn't support application/pdf responses");
+            $this->markTestSkipped('Prism doesn\'t support application/pdf responses');
         }
 
         $result = $this->client->portingOrders->retrieveLoaTemplate(

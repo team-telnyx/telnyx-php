@@ -73,9 +73,7 @@ final class SubNumberOrder implements BaseModel
     #[Api(optional: true)]
     public ?string $record_type;
 
-    /**
-     * @var list<SubNumberOrderRegulatoryRequirement>|null $regulatory_requirements
-     */
+    /** @var list<SubNumberOrderRegulatoryRequirement>|null $regulatory_requirements */
     #[Api(list: SubNumberOrderRegulatoryRequirement::class, optional: true)]
     public ?array $regulatory_requirements;
 

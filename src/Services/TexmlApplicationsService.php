@@ -37,21 +37,21 @@ final class TexmlApplicationsService implements TexmlApplicationsContract
      *   active?: bool,
      *   anchorsite_override?: value-of<AnchorsiteOverride>,
      *   call_cost_in_webhooks?: bool,
-     *   dtmf_type?: "RFC 2833"|"Inband"|"SIP INFO"|DtmfType,
+     *   dtmf_type?: 'RFC 2833'|'Inband'|'SIP INFO'|DtmfType,
      *   first_command_timeout?: bool,
      *   first_command_timeout_secs?: int,
      *   inbound?: array{
      *     channel_limit?: int,
      *     shaken_stir_enabled?: bool,
      *     sip_subdomain?: string,
-     *     sip_subdomain_receive_settings?: "only_my_connections"|"from_anyone",
+     *     sip_subdomain_receive_settings?: 'only_my_connections'|'from_anyone',
      *   },
      *   outbound?: array{channel_limit?: int, outbound_voice_profile_id?: string},
      *   status_callback?: string,
-     *   status_callback_method?: "get"|"post",
+     *   status_callback_method?: 'get'|'post',
      *   tags?: list<string>,
      *   voice_fallback_url?: string,
-     *   voice_method?: "get"|"post",
+     *   voice_method?: 'get'|'post',
      * }|TexmlApplicationCreateParams $params
      *
      * @throws APIException
@@ -106,21 +106,21 @@ final class TexmlApplicationsService implements TexmlApplicationsContract
      *   active?: bool,
      *   anchorsite_override?: value-of<AnchorsiteOverride>,
      *   call_cost_in_webhooks?: bool,
-     *   dtmf_type?: "RFC 2833"|"Inband"|"SIP INFO"|DtmfType,
+     *   dtmf_type?: 'RFC 2833'|'Inband'|'SIP INFO'|DtmfType,
      *   first_command_timeout?: bool,
      *   first_command_timeout_secs?: int,
      *   inbound?: array{
      *     channel_limit?: int,
      *     shaken_stir_enabled?: bool,
      *     sip_subdomain?: string,
-     *     sip_subdomain_receive_settings?: "only_my_connections"|"from_anyone",
+     *     sip_subdomain_receive_settings?: 'only_my_connections'|'from_anyone',
      *   },
      *   outbound?: array{channel_limit?: int, outbound_voice_profile_id?: string},
      *   status_callback?: string,
-     *   status_callback_method?: "get"|"post",
+     *   status_callback_method?: 'get'|'post',
      *   tags?: list<string>,
      *   voice_fallback_url?: string,
-     *   voice_method?: "get"|"post",
+     *   voice_method?: 'get'|'post',
      * }|TexmlApplicationUpdateParams $params
      *
      * @throws APIException
@@ -153,7 +153,7 @@ final class TexmlApplicationsService implements TexmlApplicationsContract
      * @param array{
      *   filter?: array{friendly_name?: string, outbound_voice_profile_id?: string},
      *   page?: array{number?: int, size?: int},
-     *   sort?: "created_at"|"friendly_name"|"active",
+     *   sort?: 'created_at'|'friendly_name'|'active',
      * }|TexmlApplicationListParams $params
      *
      * @throws APIException

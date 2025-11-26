@@ -194,8 +194,8 @@ final class PortingOrdersService implements PortingOrdersContract
      *   messaging?: array{enable_messaging?: bool},
      *   misc?: array{
      *     new_billing_phone_number?: string,
-     *     remaining_numbers_action?: "keep"|"disconnect",
-     *     type?: "full"|"partial"|PortingOrderType,
+     *     remaining_numbers_action?: 'keep'|'disconnect',
+     *     type?: 'full'|'partial'|PortingOrderType,
      *   }|PortingOrderMisc,
      *   phone_number_configuration?: array{
      *     billing_group_id?: string,
@@ -250,7 +250,7 @@ final class PortingOrdersService implements PortingOrdersContract
      *     end_user?: array{
      *       admin?: array{auth_person_name?: string, entity_name?: string}
      *     },
-     *     misc?: array{type?: "full"|"partial"|PortingOrderType},
+     *     misc?: array{type?: 'full'|'partial'|PortingOrderType},
      *     parent_support_key?: string,
      *     phone_numbers?: array{
      *       carrier_name?: string,
@@ -261,7 +261,7 @@ final class PortingOrdersService implements PortingOrdersContract
      *   include_phone_numbers?: bool,
      *   page?: array{number?: int, size?: int},
      *   sort?: array{
-     *     value?: "created_at"|"-created_at"|"activation_settings.foc_datetime_requested"|"-activation_settings.foc_datetime_requested",
+     *     value?: 'created_at'|'-created_at'|'activation_settings.foc_datetime_requested'|'-activation_settings.foc_datetime_requested',
      *   },
      * }|PortingOrderListParams $params
      *

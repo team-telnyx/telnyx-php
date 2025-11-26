@@ -25,9 +25,7 @@ final class ScheduledEventListResponse implements BaseModel, ResponseConverter
 
     use SdkResponse;
 
-    /**
-     * @var list<ScheduledPhoneCallEventResponse|ScheduledSMSEventResponse> $data
-     */
+    /** @var list<ScheduledPhoneCallEventResponse|ScheduledSMSEventResponse> $data */
     #[Api(list: Data::class)]
     public array $data;
 

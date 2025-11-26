@@ -37,10 +37,10 @@ final class VoiceService implements VoiceContract
      *   filters?: list<array{
      *     billing_group?: string,
      *     cld?: string,
-     *     cld_filter?: "contains"|"starts_with"|"ends_with",
+     *     cld_filter?: 'contains'|'starts_with'|'ends_with',
      *     cli?: string,
-     *     cli_filter?: "contains"|"starts_with"|"ends_with",
-     *     filter_type?: "and"|"or",
+     *     cli_filter?: 'contains'|'starts_with'|'ends_with',
+     *     filter_type?: 'and'|'or',
      *     tags_list?: string,
      *   }|Filter>,
      *   include_all_metadata?: bool,

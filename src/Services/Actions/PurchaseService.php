@@ -28,7 +28,7 @@ final class PurchaseService implements PurchaseContract
      *   amount: int,
      *   product?: string,
      *   sim_card_group_id?: string,
-     *   status?: "enabled"|"disabled"|"standby",
+     *   status?: 'enabled'|'disabled'|'standby',
      *   tags?: list<string>,
      *   whitelabel_name?: string,
      * }|PurchaseCreateParams $params

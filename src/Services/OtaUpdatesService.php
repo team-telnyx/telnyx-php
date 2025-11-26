@@ -47,8 +47,8 @@ final class OtaUpdatesService implements OtaUpdatesContract
      * @param array{
      *   filter?: array{
      *     sim_card_id?: string,
-     *     status?: "in-progress"|"completed"|"failed",
-     *     type?: "sim_card_network_preferences",
+     *     status?: 'in-progress'|'completed'|'failed',
+     *     type?: 'sim_card_network_preferences',
      *   },
      *   page?: array{number?: int, size?: int},
      * }|OtaUpdateListParams $params
