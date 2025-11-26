@@ -5,6 +5,8 @@ namespace Tests\Services;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Telnyx\ChannelZones\ChannelZoneListResponse;
+use Telnyx\ChannelZones\ChannelZoneUpdateResponse;
 use Telnyx\Client;
 use Tests\UnsupportedMockTests;
 
@@ -38,7 +40,8 @@ final class ChannelZonesTest extends TestCase
             ['channels' => 0]
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ChannelZoneUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -53,7 +56,8 @@ final class ChannelZonesTest extends TestCase
             ['channels' => 0]
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ChannelZoneUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -65,6 +69,7 @@ final class ChannelZonesTest extends TestCase
 
         $result = $this->client->channelZones->list([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ChannelZoneListResponse::class, $result);
     }
 }

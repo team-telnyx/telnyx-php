@@ -6,6 +6,9 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\PartnerCampaigns\PartnerCampaignListResponse;
+use Telnyx\PartnerCampaigns\PartnerCampaignListSharedByMeResponse;
+use Telnyx\PartnerCampaigns\TelnyxDownstreamCampaign;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -35,7 +38,8 @@ final class PartnerCampaignsTest extends TestCase
 
         $result = $this->client->partnerCampaigns->retrieve('campaignId');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(TelnyxDownstreamCampaign::class, $result);
     }
 
     #[Test]
@@ -47,7 +51,8 @@ final class PartnerCampaignsTest extends TestCase
 
         $result = $this->client->partnerCampaigns->update('campaignId', []);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(TelnyxDownstreamCampaign::class, $result);
     }
 
     #[Test]
@@ -59,7 +64,8 @@ final class PartnerCampaignsTest extends TestCase
 
         $result = $this->client->partnerCampaigns->list([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(PartnerCampaignListResponse::class, $result);
     }
 
     #[Test]
@@ -71,7 +77,11 @@ final class PartnerCampaignsTest extends TestCase
 
         $result = $this->client->partnerCampaigns->listSharedByMe([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            PartnerCampaignListSharedByMeResponse::class,
+            $result
+        );
     }
 
     #[Test]
@@ -85,6 +95,7 @@ final class PartnerCampaignsTest extends TestCase
             'campaignId'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertIsArray($result);
     }
 }

@@ -5,6 +5,9 @@ namespace Tests\Services\AI;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Telnyx\AI\Clusters\ClusterComputeResponse;
+use Telnyx\AI\Clusters\ClusterGetResponse;
+use Telnyx\AI\Clusters\ClusterListResponse;
 use Telnyx\Client;
 use Tests\UnsupportedMockTests;
 
@@ -35,7 +38,8 @@ final class ClustersTest extends TestCase
 
         $result = $this->client->ai->clusters->retrieve('task_id', []);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ClusterGetResponse::class, $result);
     }
 
     #[Test]
@@ -47,7 +51,8 @@ final class ClustersTest extends TestCase
 
         $result = $this->client->ai->clusters->list([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ClusterListResponse::class, $result);
     }
 
     #[Test]
@@ -59,7 +64,8 @@ final class ClustersTest extends TestCase
 
         $result = $this->client->ai->clusters->delete('task_id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertNull($result);
     }
 
     #[Test]
@@ -71,7 +77,8 @@ final class ClustersTest extends TestCase
 
         $result = $this->client->ai->clusters->compute(['bucket' => 'bucket']);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ClusterComputeResponse::class, $result);
     }
 
     #[Test]
@@ -81,9 +88,16 @@ final class ClustersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ai->clusters->compute(['bucket' => 'bucket']);
+        $result = $this->client->ai->clusters->compute([
+            'bucket' => 'bucket',
+            'files' => ['string'],
+            'min_cluster_size' => 0,
+            'min_subcluster_size' => 0,
+            'prefix' => 'prefix',
+        ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ClusterComputeResponse::class, $result);
     }
 
     #[Test]
@@ -95,6 +109,7 @@ final class ClustersTest extends TestCase
 
         $result = $this->client->ai->clusters->fetchGraph('task_id', []);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertTrue($result);
     }
 }

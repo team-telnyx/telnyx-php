@@ -6,6 +6,10 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\Legacy\Reporting\BatchDetailRecords\SpeechToText\SpeechToTextDeleteResponse;
+use Telnyx\Legacy\Reporting\BatchDetailRecords\SpeechToText\SpeechToTextGetResponse;
+use Telnyx\Legacy\Reporting\BatchDetailRecords\SpeechToText\SpeechToTextListResponse;
+use Telnyx\Legacy\Reporting\BatchDetailRecords\SpeechToText\SpeechToTextNewResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -45,7 +49,8 @@ final class SpeechToTextTest extends TestCase
             ])
         ;
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(SpeechToTextNewResponse::class, $result);
     }
 
     #[Test]
@@ -67,7 +72,8 @@ final class SpeechToTextTest extends TestCase
             ])
         ;
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(SpeechToTextNewResponse::class, $result);
     }
 
     #[Test]
@@ -86,7 +92,8 @@ final class SpeechToTextTest extends TestCase
             ->retrieve('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e')
         ;
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(SpeechToTextGetResponse::class, $result);
     }
 
     #[Test]
@@ -105,7 +112,8 @@ final class SpeechToTextTest extends TestCase
             ->list()
         ;
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(SpeechToTextListResponse::class, $result);
     }
 
     #[Test]
@@ -124,6 +132,7 @@ final class SpeechToTextTest extends TestCase
             ->delete('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e')
         ;
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(SpeechToTextDeleteResponse::class, $result);
     }
 }

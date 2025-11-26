@@ -6,6 +6,10 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\CustomerServiceRecords\CustomerServiceRecordGetResponse;
+use Telnyx\CustomerServiceRecords\CustomerServiceRecordListResponse;
+use Telnyx\CustomerServiceRecords\CustomerServiceRecordNewResponse;
+use Telnyx\CustomerServiceRecords\CustomerServiceRecordVerifyPhoneNumberCoverageResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -37,7 +41,8 @@ final class CustomerServiceRecordsTest extends TestCase
             'phone_number' => '+1234567890',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CustomerServiceRecordNewResponse::class, $result);
     }
 
     #[Test]
@@ -49,9 +54,23 @@ final class CustomerServiceRecordsTest extends TestCase
 
         $result = $this->client->customerServiceRecords->create([
             'phone_number' => '+1234567890',
+            'additional_data' => [
+                'account_number' => '123456789',
+                'address_line_1' => '123 Main St',
+                'authorized_person_name' => 'John Doe',
+                'billing_phone_number' => '+12065551212',
+                'city' => 'New York',
+                'customer_code' => '123456789',
+                'name' => 'Entity Inc.',
+                'pin' => '1234',
+                'state' => 'NY',
+                'zip_code' => '10001',
+            ],
+            'webhook_url' => 'https://example.com/webhook',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CustomerServiceRecordNewResponse::class, $result);
     }
 
     #[Test]
@@ -65,7 +84,8 @@ final class CustomerServiceRecordsTest extends TestCase
             'customer_service_record_id'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CustomerServiceRecordGetResponse::class, $result);
     }
 
     #[Test]
@@ -77,7 +97,8 @@ final class CustomerServiceRecordsTest extends TestCase
 
         $result = $this->client->customerServiceRecords->list([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CustomerServiceRecordListResponse::class, $result);
     }
 
     #[Test]
@@ -91,7 +112,11 @@ final class CustomerServiceRecordsTest extends TestCase
             'phone_numbers' => ['+1234567890'],
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            CustomerServiceRecordVerifyPhoneNumberCoverageResponse::class,
+            $result
+        );
     }
 
     #[Test]
@@ -105,6 +130,10 @@ final class CustomerServiceRecordsTest extends TestCase
             'phone_numbers' => ['+1234567890'],
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            CustomerServiceRecordVerifyPhoneNumberCoverageResponse::class,
+            $result
+        );
     }
 }

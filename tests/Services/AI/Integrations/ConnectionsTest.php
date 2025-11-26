@@ -5,6 +5,8 @@ namespace Tests\Services\AI\Integrations;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Telnyx\AI\Integrations\Connections\ConnectionGetResponse;
+use Telnyx\AI\Integrations\Connections\ConnectionListResponse;
 use Telnyx\Client;
 use Tests\UnsupportedMockTests;
 
@@ -37,7 +39,8 @@ final class ConnectionsTest extends TestCase
             'user_connection_id'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ConnectionGetResponse::class, $result);
     }
 
     #[Test]
@@ -49,7 +52,8 @@ final class ConnectionsTest extends TestCase
 
         $result = $this->client->ai->integrations->connections->list();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ConnectionListResponse::class, $result);
     }
 
     #[Test]
@@ -63,6 +67,7 @@ final class ConnectionsTest extends TestCase
             'user_connection_id'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertNull($result);
     }
 }

@@ -6,6 +6,13 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\Documents\DocumentDeleteResponse;
+use Telnyx\Documents\DocumentGenerateDownloadLinkResponse;
+use Telnyx\Documents\DocumentGetResponse;
+use Telnyx\Documents\DocumentListResponse;
+use Telnyx\Documents\DocumentUpdateResponse;
+use Telnyx\Documents\DocumentUploadJsonResponse;
+use Telnyx\Documents\DocumentUploadResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -37,7 +44,8 @@ final class DocumentsTest extends TestCase
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DocumentGetResponse::class, $result);
     }
 
     #[Test]
@@ -52,7 +60,8 @@ final class DocumentsTest extends TestCase
             []
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DocumentUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -64,7 +73,8 @@ final class DocumentsTest extends TestCase
 
         $result = $this->client->documents->list([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DocumentListResponse::class, $result);
     }
 
     #[Test]
@@ -78,7 +88,8 @@ final class DocumentsTest extends TestCase
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DocumentDeleteResponse::class, $result);
     }
 
     #[Test]
@@ -92,7 +103,8 @@ final class DocumentsTest extends TestCase
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertIsString($result);
     }
 
     #[Test]
@@ -106,7 +118,11 @@ final class DocumentsTest extends TestCase
             '550e8400-e29b-41d4-a716-446655440000'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            DocumentGenerateDownloadLinkResponse::class,
+            $result
+        );
     }
 
     #[Test]
@@ -117,11 +133,11 @@ final class DocumentsTest extends TestCase
         }
 
         $result = $this->client->documents->upload([
-            'url' => 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
-            'file' => 'U3RhaW5sZXNzIHJvY2tz',
+            'STAINLESS_FIXME_url' => 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DocumentUploadResponse::class, $result);
     }
 
     #[Test]
@@ -132,11 +148,13 @@ final class DocumentsTest extends TestCase
         }
 
         $result = $this->client->documents->upload([
-            'url' => 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
-            'file' => 'U3RhaW5sZXNzIHJvY2tz',
+            'STAINLESS_FIXME_url' => 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
+            'STAINLESS_FIXME_customer_reference' => 'MY REF 001',
+            'STAINLESS_FIXME_filename' => 'test-document.pdf',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DocumentUploadResponse::class, $result);
     }
 
     #[Test]
@@ -147,11 +165,11 @@ final class DocumentsTest extends TestCase
         }
 
         $result = $this->client->documents->uploadJson([
-            'url' => 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
-            'file' => 'U3RhaW5sZXNzIHJvY2tz',
+            'STAINLESS_FIXME_url' => 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DocumentUploadJsonResponse::class, $result);
     }
 
     #[Test]
@@ -162,10 +180,12 @@ final class DocumentsTest extends TestCase
         }
 
         $result = $this->client->documents->uploadJson([
-            'url' => 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
-            'file' => 'U3RhaW5sZXNzIHJvY2tz',
+            'STAINLESS_FIXME_url' => 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
+            'STAINLESS_FIXME_customer_reference' => 'MY REF 001',
+            'STAINLESS_FIXME_filename' => 'test-document.pdf',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DocumentUploadJsonResponse::class, $result);
     }
 }

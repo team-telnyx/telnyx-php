@@ -6,6 +6,8 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\Storage\Buckets\Usage\UsageGetAPIUsageResponse;
+use Telnyx\Storage\Buckets\Usage\UsageGetBucketUsageResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -43,7 +45,8 @@ final class UsageTest extends TestCase
             ],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(UsageGetAPIUsageResponse::class, $result);
     }
 
     #[Test]
@@ -63,7 +66,8 @@ final class UsageTest extends TestCase
             ],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(UsageGetAPIUsageResponse::class, $result);
     }
 
     #[Test]
@@ -75,6 +79,7 @@ final class UsageTest extends TestCase
 
         $result = $this->client->storage->buckets->usage->getBucketUsage('');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(UsageGetBucketUsageResponse::class, $result);
     }
 }

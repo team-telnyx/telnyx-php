@@ -6,6 +6,8 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\WebhookDeliveries\WebhookDeliveryGetResponse;
+use Telnyx\WebhookDeliveries\WebhookDeliveryListResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -37,7 +39,8 @@ final class WebhookDeliveriesTest extends TestCase
             'C9C0797E-901D-4349-A33C-C2C8F31A92C2'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(WebhookDeliveryGetResponse::class, $result);
     }
 
     #[Test]
@@ -49,6 +52,7 @@ final class WebhookDeliveriesTest extends TestCase
 
         $result = $this->client->webhookDeliveries->list([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(WebhookDeliveryListResponse::class, $result);
     }
 }

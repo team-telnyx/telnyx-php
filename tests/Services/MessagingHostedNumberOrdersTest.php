@@ -6,6 +6,13 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderCheckEligibilityResponse;
+use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderDeleteResponse;
+use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderGetResponse;
+use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderListResponse;
+use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderNewResponse;
+use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderNewVerificationCodesResponse;
+use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderValidateCodesResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -35,7 +42,11 @@ final class MessagingHostedNumberOrdersTest extends TestCase
 
         $result = $this->client->messagingHostedNumberOrders->create([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            MessagingHostedNumberOrderNewResponse::class,
+            $result
+        );
     }
 
     #[Test]
@@ -47,7 +58,11 @@ final class MessagingHostedNumberOrdersTest extends TestCase
 
         $result = $this->client->messagingHostedNumberOrders->retrieve('id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            MessagingHostedNumberOrderGetResponse::class,
+            $result
+        );
     }
 
     #[Test]
@@ -59,7 +74,11 @@ final class MessagingHostedNumberOrdersTest extends TestCase
 
         $result = $this->client->messagingHostedNumberOrders->list([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            MessagingHostedNumberOrderListResponse::class,
+            $result
+        );
     }
 
     #[Test]
@@ -71,7 +90,11 @@ final class MessagingHostedNumberOrdersTest extends TestCase
 
         $result = $this->client->messagingHostedNumberOrders->delete('id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            MessagingHostedNumberOrderDeleteResponse::class,
+            $result
+        );
     }
 
     #[Test]
@@ -85,7 +108,11 @@ final class MessagingHostedNumberOrdersTest extends TestCase
             'phone_numbers' => ['string'],
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            MessagingHostedNumberOrderCheckEligibilityResponse::class,
+            $result
+        );
     }
 
     #[Test]
@@ -99,7 +126,11 @@ final class MessagingHostedNumberOrdersTest extends TestCase
             'phone_numbers' => ['string'],
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            MessagingHostedNumberOrderCheckEligibilityResponse::class,
+            $result
+        );
     }
 
     #[Test]
@@ -118,7 +149,11 @@ final class MessagingHostedNumberOrdersTest extends TestCase
             )
         ;
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            MessagingHostedNumberOrderNewVerificationCodesResponse::class,
+            $result
+        );
     }
 
     #[Test]
@@ -137,7 +172,11 @@ final class MessagingHostedNumberOrdersTest extends TestCase
             )
         ;
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            MessagingHostedNumberOrderNewVerificationCodesResponse::class,
+            $result
+        );
     }
 
     #[Test]
@@ -156,7 +195,11 @@ final class MessagingHostedNumberOrdersTest extends TestCase
             ],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            MessagingHostedNumberOrderValidateCodesResponse::class,
+            $result
+        );
     }
 
     #[Test]
@@ -175,6 +218,10 @@ final class MessagingHostedNumberOrdersTest extends TestCase
             ],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            MessagingHostedNumberOrderValidateCodesResponse::class,
+            $result
+        );
     }
 }

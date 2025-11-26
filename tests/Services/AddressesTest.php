@@ -5,6 +5,10 @@ namespace Tests\Services;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Telnyx\Addresses\AddressDeleteResponse;
+use Telnyx\Addresses\AddressGetResponse;
+use Telnyx\Addresses\AddressListResponse;
+use Telnyx\Addresses\AddressNewResponse;
 use Telnyx\Client;
 use Tests\UnsupportedMockTests;
 
@@ -42,7 +46,8 @@ final class AddressesTest extends TestCase
             'street_address' => '600 Congress Avenue',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(AddressNewResponse::class, $result);
     }
 
     #[Test]
@@ -59,9 +64,19 @@ final class AddressesTest extends TestCase
             'last_name' => 'Foster',
             'locality' => 'Austin',
             'street_address' => '600 Congress Avenue',
+            'address_book' => false,
+            'administrative_area' => 'TX',
+            'borough' => 'Guadalajara',
+            'customer_reference' => 'MY REF 001',
+            'extended_address' => '14th Floor',
+            'neighborhood' => 'Ciudad de los deportes',
+            'phone_number' => '+12125559000',
+            'postal_code' => '78701',
+            'validate_address' => true,
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(AddressNewResponse::class, $result);
     }
 
     #[Test]
@@ -73,7 +88,8 @@ final class AddressesTest extends TestCase
 
         $result = $this->client->addresses->retrieve('id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(AddressGetResponse::class, $result);
     }
 
     #[Test]
@@ -85,7 +101,8 @@ final class AddressesTest extends TestCase
 
         $result = $this->client->addresses->list([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(AddressListResponse::class, $result);
     }
 
     #[Test]
@@ -97,6 +114,7 @@ final class AddressesTest extends TestCase
 
         $result = $this->client->addresses->delete('id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(AddressDeleteResponse::class, $result);
     }
 }

@@ -6,6 +6,10 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\WireguardInterfaces\WireguardInterfaceDeleteResponse;
+use Telnyx\WireguardInterfaces\WireguardInterfaceGetResponse;
+use Telnyx\WireguardInterfaces\WireguardInterfaceListResponse;
+use Telnyx\WireguardInterfaces\WireguardInterfaceNewResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -38,7 +42,8 @@ final class WireguardInterfacesTest extends TestCase
             'region_code' => 'ashburn-va',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(WireguardInterfaceNewResponse::class, $result);
     }
 
     #[Test]
@@ -51,9 +56,12 @@ final class WireguardInterfacesTest extends TestCase
         $result = $this->client->wireguardInterfaces->create([
             'network_id' => '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
             'region_code' => 'ashburn-va',
+            'enable_sip_trunking' => false,
+            'name' => 'test interface',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(WireguardInterfaceNewResponse::class, $result);
     }
 
     #[Test]
@@ -67,7 +75,8 @@ final class WireguardInterfacesTest extends TestCase
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(WireguardInterfaceGetResponse::class, $result);
     }
 
     #[Test]
@@ -79,7 +88,8 @@ final class WireguardInterfacesTest extends TestCase
 
         $result = $this->client->wireguardInterfaces->list([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(WireguardInterfaceListResponse::class, $result);
     }
 
     #[Test]
@@ -93,6 +103,7 @@ final class WireguardInterfacesTest extends TestCase
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(WireguardInterfaceDeleteResponse::class, $result);
     }
 }

@@ -6,6 +6,8 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\ExternalConnections\CivicAddresses\CivicAddressGetResponse;
+use Telnyx\ExternalConnections\CivicAddresses\CivicAddressListResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -38,7 +40,8 @@ final class CivicAddressesTest extends TestCase
             ['id' => 'id']
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CivicAddressGetResponse::class, $result);
     }
 
     #[Test]
@@ -53,7 +56,8 @@ final class CivicAddressesTest extends TestCase
             ['id' => 'id']
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CivicAddressGetResponse::class, $result);
     }
 
     #[Test]
@@ -68,6 +72,7 @@ final class CivicAddressesTest extends TestCase
             []
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CivicAddressListResponse::class, $result);
     }
 }

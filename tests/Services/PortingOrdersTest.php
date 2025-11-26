@@ -6,6 +6,14 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\PortingOrders\PortingOrderGetAllowedFocWindowsResponse;
+use Telnyx\PortingOrders\PortingOrderGetExceptionTypesResponse;
+use Telnyx\PortingOrders\PortingOrderGetRequirementsResponse;
+use Telnyx\PortingOrders\PortingOrderGetResponse;
+use Telnyx\PortingOrders\PortingOrderGetSubRequestResponse;
+use Telnyx\PortingOrders\PortingOrderListResponse;
+use Telnyx\PortingOrders\PortingOrderNewResponse;
+use Telnyx\PortingOrders\PortingOrderUpdateResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -37,7 +45,8 @@ final class PortingOrdersTest extends TestCase
             'phone_numbers' => ['+13035550000', '+13035550001', '+13035550002'],
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(PortingOrderNewResponse::class, $result);
     }
 
     #[Test]
@@ -49,9 +58,12 @@ final class PortingOrdersTest extends TestCase
 
         $result = $this->client->portingOrders->create([
             'phone_numbers' => ['+13035550000', '+13035550001', '+13035550002'],
+            'customer_group_reference' => 'Group-456',
+            'customer_reference' => 'Acct 123abc',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(PortingOrderNewResponse::class, $result);
     }
 
     #[Test]
@@ -66,7 +78,8 @@ final class PortingOrdersTest extends TestCase
             []
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(PortingOrderGetResponse::class, $result);
     }
 
     #[Test]
@@ -81,7 +94,8 @@ final class PortingOrdersTest extends TestCase
             []
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(PortingOrderUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -93,7 +107,8 @@ final class PortingOrdersTest extends TestCase
 
         $result = $this->client->portingOrders->list([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(PortingOrderListResponse::class, $result);
     }
 
     #[Test]
@@ -107,7 +122,8 @@ final class PortingOrdersTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertNull($result);
     }
 
     #[Test]
@@ -121,7 +137,11 @@ final class PortingOrdersTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            PortingOrderGetAllowedFocWindowsResponse::class,
+            $result
+        );
     }
 
     #[Test]
@@ -133,7 +153,11 @@ final class PortingOrdersTest extends TestCase
 
         $result = $this->client->portingOrders->retrieveExceptionTypes();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            PortingOrderGetExceptionTypesResponse::class,
+            $result
+        );
     }
 
     #[Test]
@@ -148,7 +172,8 @@ final class PortingOrdersTest extends TestCase
             []
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertIsString($result);
     }
 
     #[Test]
@@ -163,7 +188,11 @@ final class PortingOrdersTest extends TestCase
             []
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            PortingOrderGetRequirementsResponse::class,
+            $result
+        );
     }
 
     #[Test]
@@ -177,6 +206,7 @@ final class PortingOrdersTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(PortingOrderGetSubRequestResponse::class, $result);
     }
 }

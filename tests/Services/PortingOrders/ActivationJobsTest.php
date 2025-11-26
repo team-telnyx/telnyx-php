@@ -6,6 +6,9 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\PortingOrders\ActivationJobs\ActivationJobGetResponse;
+use Telnyx\PortingOrders\ActivationJobs\ActivationJobListResponse;
+use Telnyx\PortingOrders\ActivationJobs\ActivationJobUpdateResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -38,7 +41,8 @@ final class ActivationJobsTest extends TestCase
             ['id' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ActivationJobGetResponse::class, $result);
     }
 
     #[Test]
@@ -53,7 +57,8 @@ final class ActivationJobsTest extends TestCase
             ['id' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ActivationJobGetResponse::class, $result);
     }
 
     #[Test]
@@ -68,7 +73,8 @@ final class ActivationJobsTest extends TestCase
             ['id' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ActivationJobUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -80,10 +86,14 @@ final class ActivationJobsTest extends TestCase
 
         $result = $this->client->portingOrders->activationJobs->update(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            ['id' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
+            [
+                'id' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+                'activate_at' => '2019-01-01T00:00:00Z',
+            ],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ActivationJobUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -98,6 +108,7 @@ final class ActivationJobsTest extends TestCase
             []
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ActivationJobListResponse::class, $result);
     }
 }

@@ -6,6 +6,8 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\LedgerBillingGroupReports\LedgerBillingGroupReportGetResponse;
+use Telnyx\LedgerBillingGroupReports\LedgerBillingGroupReportNewResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -35,7 +37,11 @@ final class LedgerBillingGroupReportsTest extends TestCase
 
         $result = $this->client->ledgerBillingGroupReports->create([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            LedgerBillingGroupReportNewResponse::class,
+            $result
+        );
     }
 
     #[Test]
@@ -49,6 +55,10 @@ final class LedgerBillingGroupReportsTest extends TestCase
             'f5586561-8ff0-4291-a0ac-84fe544797bd'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            LedgerBillingGroupReportGetResponse::class,
+            $result
+        );
     }
 }

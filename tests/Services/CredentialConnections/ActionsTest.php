@@ -6,6 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\CredentialConnections\Actions\ActionCheckRegistrationStatusResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -40,6 +41,10 @@ final class ActionsTest extends TestCase
             ->checkRegistrationStatus('id')
         ;
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            ActionCheckRegistrationStatusResponse::class,
+            $result
+        );
     }
 }

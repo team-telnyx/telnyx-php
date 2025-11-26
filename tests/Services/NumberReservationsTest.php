@@ -6,6 +6,9 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\NumberReservations\NumberReservationGetResponse;
+use Telnyx\NumberReservations\NumberReservationListResponse;
+use Telnyx\NumberReservations\NumberReservationNewResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -35,7 +38,8 @@ final class NumberReservationsTest extends TestCase
 
         $result = $this->client->numberReservations->create([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(NumberReservationNewResponse::class, $result);
     }
 
     #[Test]
@@ -49,7 +53,8 @@ final class NumberReservationsTest extends TestCase
             'number_reservation_id'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(NumberReservationGetResponse::class, $result);
     }
 
     #[Test]
@@ -61,6 +66,7 @@ final class NumberReservationsTest extends TestCase
 
         $result = $this->client->numberReservations->list([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(NumberReservationListResponse::class, $result);
     }
 }

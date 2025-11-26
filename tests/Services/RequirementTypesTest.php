@@ -6,6 +6,8 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\RequirementTypes\RequirementTypeGetResponse;
+use Telnyx\RequirementTypes\RequirementTypeListResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -37,7 +39,8 @@ final class RequirementTypesTest extends TestCase
             'a38c217a-8019-48f8-bff6-0fdd9939075b'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(RequirementTypeGetResponse::class, $result);
     }
 
     #[Test]
@@ -49,6 +52,7 @@ final class RequirementTypesTest extends TestCase
 
         $result = $this->client->requirementTypes->list([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(RequirementTypeListResponse::class, $result);
     }
 }

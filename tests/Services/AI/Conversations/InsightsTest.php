@@ -5,6 +5,8 @@ namespace Tests\Services\AI\Conversations;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Telnyx\AI\Conversations\Insights\InsightListResponse;
+use Telnyx\AI\Conversations\Insights\InsightTemplateDetail;
 use Telnyx\Client;
 use Tests\UnsupportedMockTests;
 
@@ -37,7 +39,8 @@ final class InsightsTest extends TestCase
             'instructions' => 'instructions', 'name' => 'name',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(InsightTemplateDetail::class, $result);
     }
 
     #[Test]
@@ -48,10 +51,14 @@ final class InsightsTest extends TestCase
         }
 
         $result = $this->client->ai->conversations->insights->create([
-            'instructions' => 'instructions', 'name' => 'name',
+            'instructions' => 'instructions',
+            'name' => 'name',
+            'json_schema' => 'string',
+            'webhook' => 'webhook',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(InsightTemplateDetail::class, $result);
     }
 
     #[Test]
@@ -65,7 +72,8 @@ final class InsightsTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(InsightTemplateDetail::class, $result);
     }
 
     #[Test]
@@ -80,7 +88,8 @@ final class InsightsTest extends TestCase
             []
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(InsightTemplateDetail::class, $result);
     }
 
     #[Test]
@@ -92,7 +101,8 @@ final class InsightsTest extends TestCase
 
         $result = $this->client->ai->conversations->insights->list([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(InsightListResponse::class, $result);
     }
 
     #[Test]
@@ -106,6 +116,7 @@ final class InsightsTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertTrue($result);
     }
 }

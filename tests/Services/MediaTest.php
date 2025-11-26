@@ -6,6 +6,10 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\Media\MediaGetResponse;
+use Telnyx\Media\MediaListResponse;
+use Telnyx\Media\MediaUpdateResponse;
+use Telnyx\Media\MediaUploadResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -35,7 +39,8 @@ final class MediaTest extends TestCase
 
         $result = $this->client->media->retrieve('media_name');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(MediaGetResponse::class, $result);
     }
 
     #[Test]
@@ -47,7 +52,8 @@ final class MediaTest extends TestCase
 
         $result = $this->client->media->update('media_name', []);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(MediaUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -59,7 +65,8 @@ final class MediaTest extends TestCase
 
         $result = $this->client->media->list([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(MediaListResponse::class, $result);
     }
 
     #[Test]
@@ -71,7 +78,8 @@ final class MediaTest extends TestCase
 
         $result = $this->client->media->delete('media_name');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertNull($result);
     }
 
     #[Test]
@@ -83,7 +91,8 @@ final class MediaTest extends TestCase
 
         $result = $this->client->media->download('media_name');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertIsString($result);
     }
 
     #[Test]
@@ -97,7 +106,8 @@ final class MediaTest extends TestCase
             'media_url' => 'http://www.example.com/audio.mp3',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(MediaUploadResponse::class, $result);
     }
 
     #[Test]
@@ -109,8 +119,11 @@ final class MediaTest extends TestCase
 
         $result = $this->client->media->upload([
             'media_url' => 'http://www.example.com/audio.mp3',
+            'media_name' => 'my-file',
+            'ttl_secs' => 86400,
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(MediaUploadResponse::class, $result);
     }
 }

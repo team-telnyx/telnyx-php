@@ -5,6 +5,7 @@ namespace Tests\Services\Brand;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Telnyx\Brand\ExternalVetting\ExternalVettingImportResponse;
 use Telnyx\Client;
 use Tests\UnsupportedMockTests;
 
@@ -35,7 +36,8 @@ final class ExternalVettingTest extends TestCase
 
         $result = $this->client->brand->externalVetting->list('brandId');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertTrue($result);
     }
 
     #[Test]
@@ -50,7 +52,8 @@ final class ExternalVettingTest extends TestCase
             ['evpId' => 'evpId', 'vettingId' => 'vettingId']
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ExternalVettingImportResponse::class, $result);
     }
 
     #[Test]
@@ -62,10 +65,15 @@ final class ExternalVettingTest extends TestCase
 
         $result = $this->client->brand->externalVetting->import(
             'brandId',
-            ['evpId' => 'evpId', 'vettingId' => 'vettingId']
+            [
+                'evpId' => 'evpId',
+                'vettingId' => 'vettingId',
+                'vettingToken' => 'vettingToken',
+            ],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ExternalVettingImportResponse::class, $result);
     }
 
     #[Test]
@@ -80,7 +88,8 @@ final class ExternalVettingTest extends TestCase
             ['evpId' => 'evpId', 'vettingClass' => 'vettingClass']
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertTrue($result);
     }
 
     #[Test]
@@ -95,6 +104,7 @@ final class ExternalVettingTest extends TestCase
             ['evpId' => 'evpId', 'vettingClass' => 'vettingClass']
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertTrue($result);
     }
 }

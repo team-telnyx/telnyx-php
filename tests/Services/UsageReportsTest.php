@@ -6,6 +6,8 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\UsageReports\UsageReportGetOptionsResponse;
+use Telnyx\UsageReports\UsageReportListResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -39,7 +41,8 @@ final class UsageReportsTest extends TestCase
             'product' => 'product',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(UsageReportListResponse::class, $result);
     }
 
     #[Test]
@@ -53,9 +56,19 @@ final class UsageReportsTest extends TestCase
             'dimensions' => ['string'],
             'metrics' => ['string'],
             'product' => 'product',
+            'date_range' => 'date_range',
+            'end_date' => 'end_date',
+            'filter' => 'filter',
+            'format' => 'csv',
+            'managed_accounts' => true,
+            'page' => ['number' => 1, 'size' => 5000],
+            'sort' => ['string'],
+            'start_date' => 'start_date',
+            'authorization_bearer' => 'authorization_bearer',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(UsageReportListResponse::class, $result);
     }
 
     #[Test]
@@ -67,6 +80,7 @@ final class UsageReportsTest extends TestCase
 
         $result = $this->client->usageReports->getOptions([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(UsageReportGetOptionsResponse::class, $result);
     }
 }

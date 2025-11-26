@@ -6,6 +6,8 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigListResponse;
+use Telnyx\MessagingProfiles\AutorespConfigs\AutoRespConfigResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -42,7 +44,8 @@ final class AutorespConfigsTest extends TestCase
             ],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(AutoRespConfigResponse::class, $result);
     }
 
     #[Test]
@@ -58,10 +61,12 @@ final class AutorespConfigsTest extends TestCase
                 'country_code' => 'US',
                 'keywords' => ['keyword1', 'keyword2'],
                 'op' => 'start',
+                'resp_text' => 'Thank you for your message',
             ],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(AutoRespConfigResponse::class, $result);
     }
 
     #[Test]
@@ -76,7 +81,8 @@ final class AutorespConfigsTest extends TestCase
             ['profile_id' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(AutoRespConfigResponse::class, $result);
     }
 
     #[Test]
@@ -91,7 +97,8 @@ final class AutorespConfigsTest extends TestCase
             ['profile_id' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(AutoRespConfigResponse::class, $result);
     }
 
     #[Test]
@@ -111,7 +118,8 @@ final class AutorespConfigsTest extends TestCase
             ],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(AutoRespConfigResponse::class, $result);
     }
 
     #[Test]
@@ -128,10 +136,12 @@ final class AutorespConfigsTest extends TestCase
                 'country_code' => 'US',
                 'keywords' => ['keyword1', 'keyword2'],
                 'op' => 'start',
+                'resp_text' => 'Thank you for your message',
             ],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(AutoRespConfigResponse::class, $result);
     }
 
     #[Test]
@@ -146,7 +156,8 @@ final class AutorespConfigsTest extends TestCase
             []
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(AutorespConfigListResponse::class, $result);
     }
 
     #[Test]
@@ -161,7 +172,8 @@ final class AutorespConfigsTest extends TestCase
             ['profile_id' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertTrue($result);
     }
 
     #[Test]
@@ -176,6 +188,7 @@ final class AutorespConfigsTest extends TestCase
             ['profile_id' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertTrue($result);
     }
 }

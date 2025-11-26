@@ -6,6 +6,8 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\Messaging\Rcs\Agents\AgentListResponse;
+use Telnyx\RcsAgents\RcsAgentResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -35,7 +37,8 @@ final class AgentsTest extends TestCase
 
         $result = $this->client->messaging->rcs->agents->retrieve('id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(RcsAgentResponse::class, $result);
     }
 
     #[Test]
@@ -47,7 +50,8 @@ final class AgentsTest extends TestCase
 
         $result = $this->client->messaging->rcs->agents->update('id', []);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(RcsAgentResponse::class, $result);
     }
 
     #[Test]
@@ -59,6 +63,7 @@ final class AgentsTest extends TestCase
 
         $result = $this->client->messaging->rcs->agents->list([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(AgentListResponse::class, $result);
     }
 }

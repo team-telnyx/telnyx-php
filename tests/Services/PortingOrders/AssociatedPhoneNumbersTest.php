@@ -6,6 +6,9 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberDeleteResponse;
+use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberListResponse;
+use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberNewResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -38,7 +41,8 @@ final class AssociatedPhoneNumbersTest extends TestCase
             ['action' => 'keep', 'phone_number_range' => []],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(AssociatedPhoneNumberNewResponse::class, $result);
     }
 
     #[Test]
@@ -58,7 +62,8 @@ final class AssociatedPhoneNumbersTest extends TestCase
             ],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(AssociatedPhoneNumberNewResponse::class, $result);
     }
 
     #[Test]
@@ -73,7 +78,8 @@ final class AssociatedPhoneNumbersTest extends TestCase
             []
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(AssociatedPhoneNumberListResponse::class, $result);
     }
 
     #[Test]
@@ -88,7 +94,11 @@ final class AssociatedPhoneNumbersTest extends TestCase
             ['porting_order_id' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            AssociatedPhoneNumberDeleteResponse::class,
+            $result
+        );
     }
 
     #[Test]
@@ -103,6 +113,10 @@ final class AssociatedPhoneNumbersTest extends TestCase
             ['porting_order_id' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            AssociatedPhoneNumberDeleteResponse::class,
+            $result
+        );
     }
 }

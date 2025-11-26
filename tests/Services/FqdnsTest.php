@@ -6,6 +6,11 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\Fqdns\FqdnDeleteResponse;
+use Telnyx\Fqdns\FqdnGetResponse;
+use Telnyx\Fqdns\FqdnListResponse;
+use Telnyx\Fqdns\FqdnNewResponse;
+use Telnyx\Fqdns\FqdnUpdateResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -39,7 +44,8 @@ final class FqdnsTest extends TestCase
             'fqdn' => 'example.com',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(FqdnNewResponse::class, $result);
     }
 
     #[Test]
@@ -53,9 +59,11 @@ final class FqdnsTest extends TestCase
             'connection_id' => '1516447646313612565',
             'dns_record_type' => 'a',
             'fqdn' => 'example.com',
+            'port' => 8080,
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(FqdnNewResponse::class, $result);
     }
 
     #[Test]
@@ -67,7 +75,8 @@ final class FqdnsTest extends TestCase
 
         $result = $this->client->fqdns->retrieve('id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(FqdnGetResponse::class, $result);
     }
 
     #[Test]
@@ -79,7 +88,8 @@ final class FqdnsTest extends TestCase
 
         $result = $this->client->fqdns->update('id', []);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(FqdnUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -91,7 +101,8 @@ final class FqdnsTest extends TestCase
 
         $result = $this->client->fqdns->list([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(FqdnListResponse::class, $result);
     }
 
     #[Test]
@@ -103,6 +114,7 @@ final class FqdnsTest extends TestCase
 
         $result = $this->client->fqdns->delete('id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(FqdnDeleteResponse::class, $result);
     }
 }

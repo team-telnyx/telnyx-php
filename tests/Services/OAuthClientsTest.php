@@ -6,6 +6,10 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\OAuthClients\OAuthClientGetResponse;
+use Telnyx\OAuthClients\OAuthClientListResponse;
+use Telnyx\OAuthClients\OAuthClientNewResponse;
+use Telnyx\OAuthClients\OAuthClientUpdateResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -40,7 +44,8 @@ final class OAuthClientsTest extends TestCase
             'name' => 'My OAuth client',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(OAuthClientNewResponse::class, $result);
     }
 
     #[Test]
@@ -55,9 +60,15 @@ final class OAuthClientsTest extends TestCase
             'allowed_scopes' => ['admin'],
             'client_type' => 'public',
             'name' => 'My OAuth client',
+            'logo_uri' => 'https://example.com',
+            'policy_uri' => 'https://example.com',
+            'redirect_uris' => ['https://example.com'],
+            'require_pkce' => true,
+            'tos_uri' => 'https://example.com',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(OAuthClientNewResponse::class, $result);
     }
 
     #[Test]
@@ -71,7 +82,8 @@ final class OAuthClientsTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(OAuthClientGetResponse::class, $result);
     }
 
     #[Test]
@@ -86,7 +98,8 @@ final class OAuthClientsTest extends TestCase
             []
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(OAuthClientUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -98,7 +111,8 @@ final class OAuthClientsTest extends TestCase
 
         $result = $this->client->oauthClients->list([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(OAuthClientListResponse::class, $result);
     }
 
     #[Test]
@@ -112,6 +126,7 @@ final class OAuthClientsTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertNull($result);
     }
 }

@@ -6,6 +6,9 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\NumberBlockOrders\NumberBlockOrderGetResponse;
+use Telnyx\NumberBlockOrders\NumberBlockOrderListResponse;
+use Telnyx\NumberBlockOrders\NumberBlockOrderNewResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -37,7 +40,8 @@ final class NumberBlockOrdersTest extends TestCase
             'range' => 10, 'starting_number' => '+19705555000',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(NumberBlockOrderNewResponse::class, $result);
     }
 
     #[Test]
@@ -48,10 +52,15 @@ final class NumberBlockOrdersTest extends TestCase
         }
 
         $result = $this->client->numberBlockOrders->create([
-            'range' => 10, 'starting_number' => '+19705555000',
+            'range' => 10,
+            'starting_number' => '+19705555000',
+            'connection_id' => '346789098765567',
+            'customer_reference' => 'MY REF 001',
+            'messaging_profile_id' => 'abc85f64-5717-4562-b3fc-2c9600',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(NumberBlockOrderNewResponse::class, $result);
     }
 
     #[Test]
@@ -65,7 +74,8 @@ final class NumberBlockOrdersTest extends TestCase
             'number_block_order_id'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(NumberBlockOrderGetResponse::class, $result);
     }
 
     #[Test]
@@ -77,6 +87,7 @@ final class NumberBlockOrdersTest extends TestCase
 
         $result = $this->client->numberBlockOrders->list([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(NumberBlockOrderListResponse::class, $result);
     }
 }

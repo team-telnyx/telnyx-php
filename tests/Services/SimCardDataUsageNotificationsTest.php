@@ -6,6 +6,11 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationDeleteResponse;
+use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationGetResponse;
+use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationListResponse;
+use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationNewResponse;
+use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationUpdateResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -37,7 +42,11 @@ final class SimCardDataUsageNotificationsTest extends TestCase
             'sim_card_id' => '6a09cdc3-8948-47f0-aa62-74ac943d6c58', 'threshold' => [],
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            SimCardDataUsageNotificationNewResponse::class,
+            $result
+        );
     }
 
     #[Test]
@@ -52,7 +61,11 @@ final class SimCardDataUsageNotificationsTest extends TestCase
             'threshold' => ['amount' => '2048.1', 'unit' => 'MB'],
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            SimCardDataUsageNotificationNewResponse::class,
+            $result
+        );
     }
 
     #[Test]
@@ -66,7 +79,11 @@ final class SimCardDataUsageNotificationsTest extends TestCase
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            SimCardDataUsageNotificationGetResponse::class,
+            $result
+        );
     }
 
     #[Test]
@@ -81,7 +98,11 @@ final class SimCardDataUsageNotificationsTest extends TestCase
             []
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            SimCardDataUsageNotificationUpdateResponse::class,
+            $result
+        );
     }
 
     #[Test]
@@ -93,7 +114,11 @@ final class SimCardDataUsageNotificationsTest extends TestCase
 
         $result = $this->client->simCardDataUsageNotifications->list([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            SimCardDataUsageNotificationListResponse::class,
+            $result
+        );
     }
 
     #[Test]
@@ -107,6 +132,10 @@ final class SimCardDataUsageNotificationsTest extends TestCase
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            SimCardDataUsageNotificationDeleteResponse::class,
+            $result
+        );
     }
 }

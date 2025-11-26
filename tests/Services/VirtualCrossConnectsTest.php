@@ -6,6 +6,11 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\VirtualCrossConnects\VirtualCrossConnectDeleteResponse;
+use Telnyx\VirtualCrossConnects\VirtualCrossConnectGetResponse;
+use Telnyx\VirtualCrossConnects\VirtualCrossConnectListResponse;
+use Telnyx\VirtualCrossConnects\VirtualCrossConnectNewResponse;
+use Telnyx\VirtualCrossConnects\VirtualCrossConnectUpdateResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -42,7 +47,8 @@ final class VirtualCrossConnectsTest extends TestCase
             'region_code' => 'ashburn-va',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(VirtualCrossConnectNewResponse::class, $result);
     }
 
     #[Test]
@@ -59,9 +65,19 @@ final class VirtualCrossConnectsTest extends TestCase
             'network_id' => '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
             'primary_cloud_account_id' => '123456789012',
             'region_code' => 'ashburn-va',
+            'bandwidth_mbps' => 50,
+            'name' => 'test interface',
+            'primary_bgp_key' => 'yFV4wEPtPVPfDUGLWiyQzwga',
+            'primary_cloud_ip' => '169.254.0.2',
+            'primary_telnyx_ip' => '169.254.0.1',
+            'secondary_bgp_key' => 'ge1lONeK9RcA83uuWaw9DvZy',
+            'secondary_cloud_account_id' => '',
+            'secondary_cloud_ip' => '169.254.0.4',
+            'secondary_telnyx_ip' => '169.254.0.3',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(VirtualCrossConnectNewResponse::class, $result);
     }
 
     #[Test]
@@ -75,7 +91,8 @@ final class VirtualCrossConnectsTest extends TestCase
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(VirtualCrossConnectGetResponse::class, $result);
     }
 
     #[Test]
@@ -90,7 +107,8 @@ final class VirtualCrossConnectsTest extends TestCase
             []
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(VirtualCrossConnectUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -102,7 +120,8 @@ final class VirtualCrossConnectsTest extends TestCase
 
         $result = $this->client->virtualCrossConnects->list([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(VirtualCrossConnectListResponse::class, $result);
     }
 
     #[Test]
@@ -116,6 +135,7 @@ final class VirtualCrossConnectsTest extends TestCase
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(VirtualCrossConnectDeleteResponse::class, $result);
     }
 }

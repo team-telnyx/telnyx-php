@@ -5,6 +5,11 @@ namespace Tests\Services\AI;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Telnyx\AI\Conversations\Conversation;
+use Telnyx\AI\Conversations\ConversationGetConversationsInsightsResponse;
+use Telnyx\AI\Conversations\ConversationGetResponse;
+use Telnyx\AI\Conversations\ConversationListResponse;
+use Telnyx\AI\Conversations\ConversationUpdateResponse;
 use Telnyx\Client;
 use Tests\UnsupportedMockTests;
 
@@ -35,7 +40,8 @@ final class ConversationsTest extends TestCase
 
         $result = $this->client->ai->conversations->create([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(Conversation::class, $result);
     }
 
     #[Test]
@@ -47,7 +53,8 @@ final class ConversationsTest extends TestCase
 
         $result = $this->client->ai->conversations->retrieve('conversation_id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ConversationGetResponse::class, $result);
     }
 
     #[Test]
@@ -59,7 +66,8 @@ final class ConversationsTest extends TestCase
 
         $result = $this->client->ai->conversations->update('conversation_id', []);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ConversationUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -71,7 +79,8 @@ final class ConversationsTest extends TestCase
 
         $result = $this->client->ai->conversations->list([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ConversationListResponse::class, $result);
     }
 
     #[Test]
@@ -83,7 +92,8 @@ final class ConversationsTest extends TestCase
 
         $result = $this->client->ai->conversations->delete('conversation_id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertNull($result);
     }
 
     #[Test]
@@ -98,7 +108,8 @@ final class ConversationsTest extends TestCase
             ['role' => 'role']
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertTrue($result);
     }
 
     #[Test]
@@ -110,10 +121,20 @@ final class ConversationsTest extends TestCase
 
         $result = $this->client->ai->conversations->addMessage(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            ['role' => 'role']
+            [
+                'role' => 'role',
+                'content' => 'content',
+                'metadata' => ['foo' => 'string'],
+                'name' => 'name',
+                'sent_at' => '2019-12-27T18:11:19.117Z',
+                'tool_call_id' => 'tool_call_id',
+                'tool_calls' => [['foo' => 'bar']],
+                'tool_choice' => 'string',
+            ],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertTrue($result);
     }
 
     #[Test]
@@ -127,6 +148,10 @@ final class ConversationsTest extends TestCase
             'conversation_id'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            ConversationGetConversationsInsightsResponse::class,
+            $result
+        );
     }
 }

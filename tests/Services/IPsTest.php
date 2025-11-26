@@ -6,6 +6,11 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\IPs\IPDeleteResponse;
+use Telnyx\IPs\IPGetResponse;
+use Telnyx\IPs\IPListResponse;
+use Telnyx\IPs\IPNewResponse;
+use Telnyx\IPs\IPUpdateResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -35,7 +40,8 @@ final class IPsTest extends TestCase
 
         $result = $this->client->ips->create(['ip_address' => '192.168.0.0']);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(IPNewResponse::class, $result);
     }
 
     #[Test]
@@ -45,9 +51,14 @@ final class IPsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ips->create(['ip_address' => '192.168.0.0']);
+        $result = $this->client->ips->create([
+            'ip_address' => '192.168.0.0',
+            'connection_id' => '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
+            'port' => 5060,
+        ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(IPNewResponse::class, $result);
     }
 
     #[Test]
@@ -61,7 +72,8 @@ final class IPsTest extends TestCase
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(IPGetResponse::class, $result);
     }
 
     #[Test]
@@ -76,7 +88,8 @@ final class IPsTest extends TestCase
             ['ip_address' => '192.168.0.0']
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(IPUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -88,10 +101,15 @@ final class IPsTest extends TestCase
 
         $result = $this->client->ips->update(
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
-            ['ip_address' => '192.168.0.0']
+            [
+                'ip_address' => '192.168.0.0',
+                'connection_id' => '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
+                'port' => 5060,
+            ],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(IPUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -103,7 +121,8 @@ final class IPsTest extends TestCase
 
         $result = $this->client->ips->list([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(IPListResponse::class, $result);
     }
 
     #[Test]
@@ -117,6 +136,7 @@ final class IPsTest extends TestCase
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(IPDeleteResponse::class, $result);
     }
 }

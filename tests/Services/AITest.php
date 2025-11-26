@@ -5,6 +5,8 @@ namespace Tests\Services;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Telnyx\AI\AIGetModelsResponse;
+use Telnyx\AI\AISummarizeResponse;
 use Telnyx\Client;
 use Tests\UnsupportedMockTests;
 
@@ -35,7 +37,8 @@ final class AITest extends TestCase
 
         $result = $this->client->ai->retrieveModels();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(AIGetModelsResponse::class, $result);
     }
 
     #[Test]
@@ -49,7 +52,8 @@ final class AITest extends TestCase
             'bucket' => 'bucket', 'filename' => 'filename',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(AISummarizeResponse::class, $result);
     }
 
     #[Test]
@@ -60,9 +64,12 @@ final class AITest extends TestCase
         }
 
         $result = $this->client->ai->summarize([
-            'bucket' => 'bucket', 'filename' => 'filename',
+            'bucket' => 'bucket',
+            'filename' => 'filename',
+            'system_prompt' => 'system_prompt',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(AISummarizeResponse::class, $result);
     }
 }

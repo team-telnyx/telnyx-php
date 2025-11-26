@@ -6,6 +6,8 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentListResponse;
+use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentNewResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -38,7 +40,8 @@ final class AdditionalDocumentsTest extends TestCase
             []
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(AdditionalDocumentNewResponse::class, $result);
     }
 
     #[Test]
@@ -53,7 +56,8 @@ final class AdditionalDocumentsTest extends TestCase
             []
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(AdditionalDocumentListResponse::class, $result);
     }
 
     #[Test]
@@ -68,7 +72,8 @@ final class AdditionalDocumentsTest extends TestCase
             ['id' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertNull($result);
     }
 
     #[Test]
@@ -83,6 +88,7 @@ final class AdditionalDocumentsTest extends TestCase
             ['id' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertNull($result);
     }
 }

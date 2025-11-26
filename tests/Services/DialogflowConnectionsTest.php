@@ -6,6 +6,9 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\DialogflowConnections\DialogflowConnectionGetResponse;
+use Telnyx\DialogflowConnections\DialogflowConnectionNewResponse;
+use Telnyx\DialogflowConnections\DialogflowConnectionUpdateResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -441,7 +444,8 @@ final class DialogflowConnectionsTest extends TestCase
             ],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DialogflowConnectionNewResponse::class, $result);
     }
 
     #[Test]
@@ -856,10 +860,15 @@ final class DialogflowConnectionsTest extends TestCase
                     '398' => 'bar',
                     '399' => 'bar',
                 ],
+                'conversation_profile_id' => 'a-VMHLWzTmKjiJw5S6O0-w',
+                'dialogflow_api' => 'cx',
+                'environment' => 'development',
+                'location' => 'global',
             ],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DialogflowConnectionNewResponse::class, $result);
     }
 
     #[Test]
@@ -871,7 +880,8 @@ final class DialogflowConnectionsTest extends TestCase
 
         $result = $this->client->dialogflowConnections->retrieve('connection_id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DialogflowConnectionGetResponse::class, $result);
     }
 
     #[Test]
@@ -1289,7 +1299,8 @@ final class DialogflowConnectionsTest extends TestCase
             ],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DialogflowConnectionUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -1704,10 +1715,15 @@ final class DialogflowConnectionsTest extends TestCase
                     '398' => 'bar',
                     '399' => 'bar',
                 ],
+                'conversation_profile_id' => 'a-VMHLWzTmKjiJw5S6O0-w',
+                'dialogflow_api' => 'cx',
+                'environment' => 'development',
+                'location' => 'global',
             ],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DialogflowConnectionUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -1719,6 +1735,7 @@ final class DialogflowConnectionsTest extends TestCase
 
         $result = $this->client->dialogflowConnections->delete('connection_id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertNull($result);
     }
 }

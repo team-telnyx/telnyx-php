@@ -6,6 +6,8 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileGetPhoneNumberStatusResponse;
+use Telnyx\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileGetStatusResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -37,7 +39,8 @@ final class PhoneNumberAssignmentByProfileTest extends TestCase
             'messagingProfileId' => '4001767e-ce0f-4cae-9d5f-0d5e636e7809',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertNotNull($result);
     }
 
     #[Test]
@@ -49,9 +52,12 @@ final class PhoneNumberAssignmentByProfileTest extends TestCase
 
         $result = $this->client->phoneNumberAssignmentByProfile->assign([
             'messagingProfileId' => '4001767e-ce0f-4cae-9d5f-0d5e636e7809',
+            'campaignId' => '4b300178-131c-d902-d54e-72d90ba1620j',
+            'tcrCampaignId' => 'CWZTFH1',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertNotNull($result);
     }
 
     #[Test]
@@ -67,7 +73,11 @@ final class PhoneNumberAssignmentByProfileTest extends TestCase
             ->retrievePhoneNumberStatus('taskId', [])
         ;
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            PhoneNumberAssignmentByProfileGetPhoneNumberStatusResponse::class,
+            $result
+        );
     }
 
     #[Test]
@@ -81,6 +91,10 @@ final class PhoneNumberAssignmentByProfileTest extends TestCase
             'taskId'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            PhoneNumberAssignmentByProfileGetStatusResponse::class,
+            $result
+        );
     }
 }

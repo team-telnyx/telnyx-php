@@ -5,6 +5,11 @@ namespace Tests\Services;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Telnyx\CallControlApplications\CallControlApplicationDeleteResponse;
+use Telnyx\CallControlApplications\CallControlApplicationGetResponse;
+use Telnyx\CallControlApplications\CallControlApplicationListResponse;
+use Telnyx\CallControlApplications\CallControlApplicationNewResponse;
+use Telnyx\CallControlApplications\CallControlApplicationUpdateResponse;
 use Telnyx\Client;
 use Tests\UnsupportedMockTests;
 
@@ -38,7 +43,8 @@ final class CallControlApplicationsTest extends TestCase
             'webhook_event_url' => 'https://example.com',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CallControlApplicationNewResponse::class, $result);
     }
 
     #[Test]
@@ -51,9 +57,30 @@ final class CallControlApplicationsTest extends TestCase
         $result = $this->client->callControlApplications->create([
             'application_name' => 'call-router',
             'webhook_event_url' => 'https://example.com',
+            'active' => false,
+            'anchorsite_override' => '"Latency"',
+            'call_cost_in_webhooks' => true,
+            'dtmf_type' => 'Inband',
+            'first_command_timeout' => true,
+            'first_command_timeout_secs' => 10,
+            'inbound' => [
+                'channel_limit' => 10,
+                'shaken_stir_enabled' => true,
+                'sip_subdomain' => 'example',
+                'sip_subdomain_receive_settings' => 'only_my_connections',
+            ],
+            'outbound' => [
+                'channel_limit' => 10,
+                'outbound_voice_profile_id' => 'outbound_voice_profile_id',
+            ],
+            'redact_dtmf_debug_logging' => true,
+            'webhook_api_version' => '1',
+            'webhook_event_failover_url' => 'https://failover.example.com',
+            'webhook_timeout_secs' => 25,
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CallControlApplicationNewResponse::class, $result);
     }
 
     #[Test]
@@ -65,7 +92,8 @@ final class CallControlApplicationsTest extends TestCase
 
         $result = $this->client->callControlApplications->retrieve('id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CallControlApplicationGetResponse::class, $result);
     }
 
     #[Test]
@@ -83,7 +111,11 @@ final class CallControlApplicationsTest extends TestCase
             ],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            CallControlApplicationUpdateResponse::class,
+            $result
+        );
     }
 
     #[Test]
@@ -98,10 +130,35 @@ final class CallControlApplicationsTest extends TestCase
             [
                 'application_name' => 'call-router',
                 'webhook_event_url' => 'https://example.com',
+                'active' => false,
+                'anchorsite_override' => '"Latency"',
+                'call_cost_in_webhooks' => true,
+                'dtmf_type' => 'Inband',
+                'first_command_timeout' => true,
+                'first_command_timeout_secs' => 10,
+                'inbound' => [
+                    'channel_limit' => 10,
+                    'shaken_stir_enabled' => true,
+                    'sip_subdomain' => 'example',
+                    'sip_subdomain_receive_settings' => 'only_my_connections',
+                ],
+                'outbound' => [
+                    'channel_limit' => 10,
+                    'outbound_voice_profile_id' => 'outbound_voice_profile_id',
+                ],
+                'redact_dtmf_debug_logging' => true,
+                'tags' => ['tag1', 'tag2'],
+                'webhook_api_version' => '1',
+                'webhook_event_failover_url' => 'https://failover.example.com',
+                'webhook_timeout_secs' => 25,
             ],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            CallControlApplicationUpdateResponse::class,
+            $result
+        );
     }
 
     #[Test]
@@ -113,7 +170,8 @@ final class CallControlApplicationsTest extends TestCase
 
         $result = $this->client->callControlApplications->list([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CallControlApplicationListResponse::class, $result);
     }
 
     #[Test]
@@ -125,6 +183,10 @@ final class CallControlApplicationsTest extends TestCase
 
         $result = $this->client->callControlApplications->delete('id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            CallControlApplicationDeleteResponse::class,
+            $result
+        );
     }
 }

@@ -6,6 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\Texml\TexmlSecretsResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -37,7 +38,8 @@ final class TexmlTest extends TestCase
             'name' => 'My Secret Name', 'value' => 'My Secret Value',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(TexmlSecretsResponse::class, $result);
     }
 
     #[Test]
@@ -51,6 +53,7 @@ final class TexmlTest extends TestCase
             'name' => 'My Secret Name', 'value' => 'My Secret Value',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(TexmlSecretsResponse::class, $result);
     }
 }

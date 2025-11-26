@@ -6,6 +6,8 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\CountryCoverage\CountryCoverageGetCountryResponse;
+use Telnyx\CountryCoverage\CountryCoverageGetResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -35,7 +37,8 @@ final class CountryCoverageTest extends TestCase
 
         $result = $this->client->countryCoverage->retrieve();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CountryCoverageGetResponse::class, $result);
     }
 
     #[Test]
@@ -47,6 +50,7 @@ final class CountryCoverageTest extends TestCase
 
         $result = $this->client->countryCoverage->retrieveCountry('US');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CountryCoverageGetCountryResponse::class, $result);
     }
 }

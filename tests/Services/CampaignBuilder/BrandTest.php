@@ -5,6 +5,7 @@ namespace Tests\Services\CampaignBuilder;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Telnyx\CampaignBuilder\Brand\BrandQualifyByUsecaseResponse;
 use Telnyx\Client;
 use Tests\UnsupportedMockTests;
 
@@ -38,7 +39,8 @@ final class BrandTest extends TestCase
             ['brandId' => 'brandId']
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(BrandQualifyByUsecaseResponse::class, $result);
     }
 
     #[Test]
@@ -53,6 +55,7 @@ final class BrandTest extends TestCase
             ['brandId' => 'brandId']
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(BrandQualifyByUsecaseResponse::class, $result);
     }
 }

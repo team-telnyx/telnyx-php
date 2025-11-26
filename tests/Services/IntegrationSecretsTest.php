@@ -6,6 +6,8 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\IntegrationSecrets\IntegrationSecretListResponse;
+use Telnyx\IntegrationSecrets\IntegrationSecretNewResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -37,7 +39,8 @@ final class IntegrationSecretsTest extends TestCase
             'identifier' => 'my_secret', 'type' => 'bearer',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(IntegrationSecretNewResponse::class, $result);
     }
 
     #[Test]
@@ -48,10 +51,15 @@ final class IntegrationSecretsTest extends TestCase
         }
 
         $result = $this->client->integrationSecrets->create([
-            'identifier' => 'my_secret', 'type' => 'bearer',
+            'identifier' => 'my_secret',
+            'type' => 'bearer',
+            'token' => 'my_secret_value',
+            'password' => 'password',
+            'username' => 'username',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(IntegrationSecretNewResponse::class, $result);
     }
 
     #[Test]
@@ -63,7 +71,8 @@ final class IntegrationSecretsTest extends TestCase
 
         $result = $this->client->integrationSecrets->list([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(IntegrationSecretListResponse::class, $result);
     }
 
     #[Test]
@@ -75,6 +84,7 @@ final class IntegrationSecretsTest extends TestCase
 
         $result = $this->client->integrationSecrets->delete('id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertNull($result);
     }
 }

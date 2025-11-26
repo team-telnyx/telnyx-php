@@ -6,6 +6,10 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberGetResponse;
+use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberListResponse;
+use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberUpdateRequirementGroupResponse;
+use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberUpdateRequirementsResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -37,7 +41,8 @@ final class NumberOrderPhoneNumbersTest extends TestCase
             'number_order_phone_number_id'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(NumberOrderPhoneNumberGetResponse::class, $result);
     }
 
     #[Test]
@@ -49,7 +54,8 @@ final class NumberOrderPhoneNumbersTest extends TestCase
 
         $result = $this->client->numberOrderPhoneNumbers->list([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(NumberOrderPhoneNumberListResponse::class, $result);
     }
 
     #[Test]
@@ -64,7 +70,11 @@ final class NumberOrderPhoneNumbersTest extends TestCase
             ['requirement_group_id' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            NumberOrderPhoneNumberUpdateRequirementGroupResponse::class,
+            $result
+        );
     }
 
     #[Test]
@@ -79,7 +89,11 @@ final class NumberOrderPhoneNumbersTest extends TestCase
             ['requirement_group_id' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            NumberOrderPhoneNumberUpdateRequirementGroupResponse::class,
+            $result
+        );
     }
 
     #[Test]
@@ -94,6 +108,10 @@ final class NumberOrderPhoneNumbersTest extends TestCase
             []
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            NumberOrderPhoneNumberUpdateRequirementsResponse::class,
+            $result
+        );
     }
 }

@@ -6,6 +6,12 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\Texml\Accounts\Calls\CallCallsResponse;
+use Telnyx\Texml\Accounts\Calls\CallGetCallsResponse;
+use Telnyx\Texml\Accounts\Calls\CallGetResponse;
+use Telnyx\Texml\Accounts\Calls\CallSiprecJsonResponse;
+use Telnyx\Texml\Accounts\Calls\CallStreamsJsonResponse;
+use Telnyx\Texml\Accounts\Calls\CallUpdateResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -38,7 +44,8 @@ final class CallsTest extends TestCase
             ['account_sid' => 'account_sid']
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CallGetResponse::class, $result);
     }
 
     #[Test]
@@ -53,7 +60,8 @@ final class CallsTest extends TestCase
             ['account_sid' => 'account_sid']
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CallGetResponse::class, $result);
     }
 
     #[Test]
@@ -68,7 +76,8 @@ final class CallsTest extends TestCase
             ['account_sid' => 'account_sid']
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CallUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -80,10 +89,21 @@ final class CallsTest extends TestCase
 
         $result = $this->client->texml->accounts->calls->update(
             'call_sid',
-            ['account_sid' => 'account_sid']
+            [
+                'account_sid' => 'account_sid',
+                'FallbackMethod' => 'GET',
+                'FallbackUrl' => 'https://www.example.com/intruction-c.xml',
+                'Method' => 'GET',
+                'Status' => 'completed',
+                'StatusCallback' => 'https://www.example.com/callback',
+                'StatusCallbackMethod' => 'GET',
+                'Texml' => '<?xml version="1.0" encoding="UTF-8"?><Response><Say>Hello</Say></Response>',
+                'Url' => 'https://www.example.com/intruction-b.xml',
+            ],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CallUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -102,7 +122,8 @@ final class CallsTest extends TestCase
             ],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CallCallsResponse::class, $result);
     }
 
     #[Test]
@@ -118,10 +139,45 @@ final class CallsTest extends TestCase
                 'ApplicationSid' => 'ApplicationSid',
                 'From' => '+13120001234',
                 'To' => '+13121230000',
+                'AsyncAmd' => true,
+                'AsyncAmdStatusCallback' => 'https://www.example.com/callback',
+                'AsyncAmdStatusCallbackMethod' => 'GET',
+                'CallerId' => 'Info',
+                'CancelPlaybackOnDetectMessageEnd' => false,
+                'CancelPlaybackOnMachineDetection' => false,
+                'CustomHeaders' => [
+                    ['name' => 'X-Custom-Header', 'value' => 'custom-value'],
+                ],
+                'DetectionMode' => 'Premium',
+                'FallbackUrl' => 'https://www.example.com/instructions-fallback.xml',
+                'MachineDetection' => 'Enable',
+                'MachineDetectionSilenceTimeout' => 2000,
+                'MachineDetectionSpeechEndThreshold' => 2000,
+                'MachineDetectionSpeechThreshold' => 2000,
+                'MachineDetectionTimeout' => 5000,
+                'PreferredCodecs' => 'PCMA,PCMU',
+                'Record' => false,
+                'RecordingChannels' => 'dual',
+                'RecordingStatusCallback' => 'https://example.com/recording_status_callback',
+                'RecordingStatusCallbackEvent' => 'in-progress completed absent',
+                'RecordingStatusCallbackMethod' => 'GET',
+                'RecordingTimeout' => 5,
+                'RecordingTrack' => 'inbound',
+                'SendRecordingUrl' => false,
+                'SipAuthPassword' => '1234',
+                'SipAuthUsername' => 'user',
+                'SipRegion' => 'Canada',
+                'StatusCallback' => 'https://www.example.com/statuscallback-listener',
+                'StatusCallbackEvent' => 'initiated',
+                'StatusCallbackMethod' => 'GET',
+                'Trim' => 'trim-silence',
+                'Url' => 'https://www.example.com/texml.xml',
+                'UrlMethod' => 'GET',
             ],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CallCallsResponse::class, $result);
     }
 
     #[Test]
@@ -136,7 +192,8 @@ final class CallsTest extends TestCase
             []
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CallGetCallsResponse::class, $result);
     }
 
     #[Test]
@@ -151,7 +208,8 @@ final class CallsTest extends TestCase
             ['account_sid' => 'account_sid']
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CallSiprecJsonResponse::class, $result);
     }
 
     #[Test]
@@ -163,10 +221,22 @@ final class CallsTest extends TestCase
 
         $result = $this->client->texml->accounts->calls->siprecJson(
             'call_sid',
-            ['account_sid' => 'account_sid']
+            [
+                'account_sid' => 'account_sid',
+                'ConnectorName' => 'my_connector',
+                'IncludeMetadataCustomHeaders' => true,
+                'Name' => 'my_siprec_session',
+                'Secure' => true,
+                'SessionTimeoutSecs' => 900,
+                'SipTransport' => 'tcp',
+                'StatusCallback' => 'https://www.example.com/callback',
+                'StatusCallbackMethod' => 'GET',
+                'Track' => 'both_tracks',
+            ],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CallSiprecJsonResponse::class, $result);
     }
 
     #[Test]
@@ -181,7 +251,8 @@ final class CallsTest extends TestCase
             ['account_sid' => 'account_sid']
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CallStreamsJsonResponse::class, $result);
     }
 
     #[Test]
@@ -193,9 +264,19 @@ final class CallsTest extends TestCase
 
         $result = $this->client->texml->accounts->calls->streamsJson(
             'call_sid',
-            ['account_sid' => 'account_sid']
+            [
+                'account_sid' => 'account_sid',
+                'BidirectionalCodec' => 'G722',
+                'BidirectionalMode' => 'rtp',
+                'Name' => 'My stream',
+                'StatusCallback' => 'http://webhook.com/callback',
+                'StatusCallbackMethod' => 'GET',
+                'Track' => 'both_tracks',
+                'Url' => 'wss://www.example.com/websocket',
+            ],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CallStreamsJsonResponse::class, $result);
     }
 }

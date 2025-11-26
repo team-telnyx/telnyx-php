@@ -6,6 +6,10 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantGetParticipantsResponse;
+use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantGetResponse;
+use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsResponse;
+use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantUpdateResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -45,7 +49,8 @@ final class ParticipantsTest extends TestCase
             )
         ;
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ParticipantGetResponse::class, $result);
     }
 
     #[Test]
@@ -67,7 +72,8 @@ final class ParticipantsTest extends TestCase
             )
         ;
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ParticipantGetResponse::class, $result);
     }
 
     #[Test]
@@ -82,7 +88,8 @@ final class ParticipantsTest extends TestCase
             ['account_sid' => 'account_sid', 'conference_sid' => 'conference_sid'],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ParticipantUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -94,10 +101,25 @@ final class ParticipantsTest extends TestCase
 
         $result = $this->client->texml->accounts->conferences->participants->update(
             'call_sid_or_participant_label',
-            ['account_sid' => 'account_sid', 'conference_sid' => 'conference_sid'],
+            [
+                'account_sid' => 'account_sid',
+                'conference_sid' => 'conference_sid',
+                'AnnounceMethod' => 'GET',
+                'AnnounceUrl' => 'https://www.example.com/announce.xml',
+                'BeepOnExit' => false,
+                'CallSidToCoach' => 'v3:9X2vxPDFY2RHSJ1EdMS0RHRksMTg7ldNxdjWbVr9zBjbGjGsSe-aiQ',
+                'Coaching' => false,
+                'EndConferenceOnExit' => false,
+                'Hold' => true,
+                'HoldMethod' => 'POST',
+                'HoldUrl' => 'HoldUrl',
+                'Muted' => true,
+                'WaitUrl' => 'https://www.example.com/wait_music.mp3',
+            ],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ParticipantUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -112,7 +134,8 @@ final class ParticipantsTest extends TestCase
             ['account_sid' => 'account_sid', 'conference_sid' => 'conference_sid'],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertNull($result);
     }
 
     #[Test]
@@ -127,7 +150,8 @@ final class ParticipantsTest extends TestCase
             ['account_sid' => 'account_sid', 'conference_sid' => 'conference_sid'],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertNull($result);
     }
 
     #[Test]
@@ -146,7 +170,8 @@ final class ParticipantsTest extends TestCase
             ->participants('conference_sid', ['account_sid' => 'account_sid'])
         ;
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ParticipantParticipantsResponse::class, $result);
     }
 
     #[Test]
@@ -162,10 +187,64 @@ final class ParticipantsTest extends TestCase
             ->accounts
             ->conferences
             ->participants
-            ->participants('conference_sid', ['account_sid' => 'account_sid'])
+            ->participants(
+                'conference_sid',
+                [
+                    'account_sid' => 'account_sid',
+                    'AmdStatusCallback' => 'https://www.example.com/amd_result',
+                    'AmdStatusCallbackMethod' => 'GET',
+                    'Beep' => 'onExit',
+                    'CallerId' => 'Info',
+                    'CallSidToCoach' => 'v3:9X2vxPDFY2RHSJ1EdMS0RHRksMTg7ldNxdjWbVr9zBjbGjGsSe-aiQ',
+                    'CancelPlaybackOnDetectMessageEnd' => false,
+                    'CancelPlaybackOnMachineDetection' => false,
+                    'Coaching' => false,
+                    'ConferenceRecord' => 'record-from-start',
+                    'ConferenceRecordingStatusCallback' => 'https://example.com/conference_recording_status_callback',
+                    'ConferenceRecordingStatusCallbackEvent' => 'in-progress completed failed absent',
+                    'ConferenceRecordingStatusCallbackMethod' => 'GET',
+                    'ConferenceRecordingTimeout' => 5,
+                    'ConferenceStatusCallback' => 'https://example.com/conference_status_callback',
+                    'ConferenceStatusCallbackEvent' => 'start end join leave',
+                    'ConferenceStatusCallbackMethod' => 'GET',
+                    'ConferenceTrim' => 'trim-silence',
+                    'CustomHeaders' => [
+                        ['name' => 'X-Custom-Header', 'value' => 'custom-value'],
+                    ],
+                    'EarlyMedia' => true,
+                    'EndConferenceOnExit' => true,
+                    'From' => '+12065550200',
+                    'MachineDetection' => 'Enable',
+                    'MachineDetectionSilenceTimeout' => 2000,
+                    'MachineDetectionSpeechEndThreshold' => 2000,
+                    'MachineDetectionSpeechThreshold' => 2000,
+                    'MachineDetectionTimeout' => 1000,
+                    'MaxParticipants' => 30,
+                    'Muted' => true,
+                    'PreferredCodecs' => 'PCMA,PCMU',
+                    'Record' => false,
+                    'RecordingChannels' => 'dual',
+                    'RecordingStatusCallback' => 'https://example.com/recording_status_callback',
+                    'RecordingStatusCallbackEvent' => 'in-progress completed absent',
+                    'RecordingStatusCallbackMethod' => 'GET',
+                    'RecordingTrack' => 'inbound',
+                    'SipAuthPassword' => '1234',
+                    'SipAuthUsername' => 'user',
+                    'StartConferenceOnEnter' => false,
+                    'StatusCallback' => 'https://www.example.com/callback',
+                    'StatusCallbackEvent' => 'answered completed',
+                    'StatusCallbackMethod' => 'GET',
+                    'TimeLimit' => 30,
+                    'timeout_seconds' => 30,
+                    'To' => '+12065550100',
+                    'Trim' => 'trim-silence',
+                    'WaitUrl' => 'https://www.example.com/wait_music.mp3',
+                ],
+            )
         ;
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ParticipantParticipantsResponse::class, $result);
     }
 
     #[Test]
@@ -187,7 +266,8 @@ final class ParticipantsTest extends TestCase
             )
         ;
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ParticipantGetParticipantsResponse::class, $result);
     }
 
     #[Test]
@@ -209,6 +289,7 @@ final class ParticipantsTest extends TestCase
             )
         ;
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ParticipantGetParticipantsResponse::class, $result);
     }
 }

@@ -5,6 +5,9 @@ namespace Tests\Services\AI;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Telnyx\AI\McpServers\McpServerGetResponse;
+use Telnyx\AI\McpServers\McpServerNewResponse;
+use Telnyx\AI\McpServers\McpServerUpdateResponse;
 use Telnyx\Client;
 use Tests\UnsupportedMockTests;
 
@@ -37,7 +40,8 @@ final class McpServersTest extends TestCase
             'name' => 'name', 'type' => 'type', 'url' => 'url',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(McpServerNewResponse::class, $result);
     }
 
     #[Test]
@@ -48,10 +52,15 @@ final class McpServersTest extends TestCase
         }
 
         $result = $this->client->ai->mcpServers->create([
-            'name' => 'name', 'type' => 'type', 'url' => 'url',
+            'name' => 'name',
+            'type' => 'type',
+            'url' => 'url',
+            'allowed_tools' => ['string'],
+            'api_key_ref' => 'api_key_ref',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(McpServerNewResponse::class, $result);
     }
 
     #[Test]
@@ -63,7 +72,8 @@ final class McpServersTest extends TestCase
 
         $result = $this->client->ai->mcpServers->retrieve('mcp_server_id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(McpServerGetResponse::class, $result);
     }
 
     #[Test]
@@ -75,7 +85,8 @@ final class McpServersTest extends TestCase
 
         $result = $this->client->ai->mcpServers->update('mcp_server_id', []);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(McpServerUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -87,7 +98,8 @@ final class McpServersTest extends TestCase
 
         $result = $this->client->ai->mcpServers->list([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertIsList($result);
     }
 
     #[Test]
@@ -99,6 +111,7 @@ final class McpServersTest extends TestCase
 
         $result = $this->client->ai->mcpServers->delete('mcp_server_id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertTrue($result);
     }
 }

@@ -6,6 +6,9 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\PhoneNumbers\Actions\ActionChangeBundleStatusResponse;
+use Telnyx\PhoneNumbers\Actions\ActionEnableEmergencyResponse;
+use Telnyx\PhoneNumbers\Actions\ActionVerifyOwnershipResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -38,7 +41,8 @@ final class ActionsTest extends TestCase
             ['bundle_id' => '5194d8fc-87e6-4188-baa9-1c434bbe861b'],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ActionChangeBundleStatusResponse::class, $result);
     }
 
     #[Test]
@@ -53,7 +57,8 @@ final class ActionsTest extends TestCase
             ['bundle_id' => '5194d8fc-87e6-4188-baa9-1c434bbe861b'],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ActionChangeBundleStatusResponse::class, $result);
     }
 
     #[Test]
@@ -68,7 +73,8 @@ final class ActionsTest extends TestCase
             ['emergency_address_id' => '53829456729313', 'emergency_enabled' => true],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ActionEnableEmergencyResponse::class, $result);
     }
 
     #[Test]
@@ -83,7 +89,8 @@ final class ActionsTest extends TestCase
             ['emergency_address_id' => '53829456729313', 'emergency_enabled' => true],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ActionEnableEmergencyResponse::class, $result);
     }
 
     #[Test]
@@ -97,7 +104,8 @@ final class ActionsTest extends TestCase
             'phone_numbers' => ['+15551234567'],
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ActionVerifyOwnershipResponse::class, $result);
     }
 
     #[Test]
@@ -111,6 +119,7 @@ final class ActionsTest extends TestCase
             'phone_numbers' => ['+15551234567'],
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ActionVerifyOwnershipResponse::class, $result);
     }
 }

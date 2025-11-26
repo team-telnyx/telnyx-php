@@ -6,6 +6,11 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\Reports\MdrUsageReports\MdrUsageReportDeleteResponse;
+use Telnyx\Reports\MdrUsageReports\MdrUsageReportFetchSyncResponse;
+use Telnyx\Reports\MdrUsageReports\MdrUsageReportGetResponse;
+use Telnyx\Reports\MdrUsageReports\MdrUsageReportListResponse;
+use Telnyx\Reports\MdrUsageReports\MdrUsageReportNewResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -39,7 +44,8 @@ final class MdrUsageReportsTest extends TestCase
             'start_date' => '2020-07-01T00:00:00-06:00',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(MdrUsageReportNewResponse::class, $result);
     }
 
     #[Test]
@@ -53,9 +59,11 @@ final class MdrUsageReportsTest extends TestCase
             'aggregation_type' => 'NO_AGGREGATION',
             'end_date' => '2020-07-01T00:00:00-06:00',
             'start_date' => '2020-07-01T00:00:00-06:00',
+            'profiles' => 'My profile',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(MdrUsageReportNewResponse::class, $result);
     }
 
     #[Test]
@@ -69,7 +77,8 @@ final class MdrUsageReportsTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(MdrUsageReportGetResponse::class, $result);
     }
 
     #[Test]
@@ -81,7 +90,8 @@ final class MdrUsageReportsTest extends TestCase
 
         $result = $this->client->reports->mdrUsageReports->list([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(MdrUsageReportListResponse::class, $result);
     }
 
     #[Test]
@@ -95,7 +105,8 @@ final class MdrUsageReportsTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(MdrUsageReportDeleteResponse::class, $result);
     }
 
     #[Test]
@@ -109,7 +120,8 @@ final class MdrUsageReportsTest extends TestCase
             'aggregation_type' => 'PROFILE',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(MdrUsageReportFetchSyncResponse::class, $result);
     }
 
     #[Test]
@@ -121,8 +133,12 @@ final class MdrUsageReportsTest extends TestCase
 
         $result = $this->client->reports->mdrUsageReports->fetchSync([
             'aggregation_type' => 'PROFILE',
+            'end_date' => '2020-07-01T00:00:00-06:00',
+            'profiles' => ['My profile'],
+            'start_date' => '2020-07-01T00:00:00-06:00',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(MdrUsageReportFetchSyncResponse::class, $result);
     }
 }

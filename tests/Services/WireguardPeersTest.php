@@ -6,6 +6,11 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\WireguardPeers\WireguardPeerDeleteResponse;
+use Telnyx\WireguardPeers\WireguardPeerGetResponse;
+use Telnyx\WireguardPeers\WireguardPeerListResponse;
+use Telnyx\WireguardPeers\WireguardPeerNewResponse;
+use Telnyx\WireguardPeers\WireguardPeerUpdateResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -37,7 +42,8 @@ final class WireguardPeersTest extends TestCase
             'wireguard_interface_id' => '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(WireguardPeerNewResponse::class, $result);
     }
 
     #[Test]
@@ -49,9 +55,11 @@ final class WireguardPeersTest extends TestCase
 
         $result = $this->client->wireguardPeers->create([
             'wireguard_interface_id' => '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
+            'public_key' => 'qF4EqlZq+5JL2IKYY8ij49daYyfKVhevJrcDxdqC8GU=',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(WireguardPeerNewResponse::class, $result);
     }
 
     #[Test]
@@ -65,7 +73,8 @@ final class WireguardPeersTest extends TestCase
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(WireguardPeerGetResponse::class, $result);
     }
 
     #[Test]
@@ -80,7 +89,8 @@ final class WireguardPeersTest extends TestCase
             []
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(WireguardPeerUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -92,7 +102,8 @@ final class WireguardPeersTest extends TestCase
 
         $result = $this->client->wireguardPeers->list([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(WireguardPeerListResponse::class, $result);
     }
 
     #[Test]
@@ -106,7 +117,8 @@ final class WireguardPeersTest extends TestCase
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(WireguardPeerDeleteResponse::class, $result);
     }
 
     #[Test]
@@ -120,6 +132,7 @@ final class WireguardPeersTest extends TestCase
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertIsString($result);
     }
 }

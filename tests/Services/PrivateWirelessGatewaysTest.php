@@ -6,6 +6,10 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\PrivateWirelessGateways\PrivateWirelessGatewayDeleteResponse;
+use Telnyx\PrivateWirelessGateways\PrivateWirelessGatewayGetResponse;
+use Telnyx\PrivateWirelessGateways\PrivateWirelessGatewayListResponse;
+use Telnyx\PrivateWirelessGateways\PrivateWirelessGatewayNewResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -38,7 +42,8 @@ final class PrivateWirelessGatewaysTest extends TestCase
             'network_id' => '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(PrivateWirelessGatewayNewResponse::class, $result);
     }
 
     #[Test]
@@ -51,9 +56,11 @@ final class PrivateWirelessGatewaysTest extends TestCase
         $result = $this->client->privateWirelessGateways->create([
             'name' => 'My private wireless gateway',
             'network_id' => '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
+            'region_code' => 'dc2',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(PrivateWirelessGatewayNewResponse::class, $result);
     }
 
     #[Test]
@@ -67,7 +74,8 @@ final class PrivateWirelessGatewaysTest extends TestCase
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(PrivateWirelessGatewayGetResponse::class, $result);
     }
 
     #[Test]
@@ -79,7 +87,8 @@ final class PrivateWirelessGatewaysTest extends TestCase
 
         $result = $this->client->privateWirelessGateways->list([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(PrivateWirelessGatewayListResponse::class, $result);
     }
 
     #[Test]
@@ -93,6 +102,10 @@ final class PrivateWirelessGatewaysTest extends TestCase
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            PrivateWirelessGatewayDeleteResponse::class,
+            $result
+        );
     }
 }

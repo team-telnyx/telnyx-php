@@ -6,6 +6,12 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\OAuth\OAuthGetJwksResponse;
+use Telnyx\OAuth\OAuthGetResponse;
+use Telnyx\OAuth\OAuthGrantsResponse;
+use Telnyx\OAuth\OAuthIntrospectResponse;
+use Telnyx\OAuth\OAuthRegisterResponse;
+use Telnyx\OAuth\OAuthTokenResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -35,7 +41,8 @@ final class OAuthTest extends TestCase
 
         $result = $this->client->oauth->retrieve('consent_token');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(OAuthGetResponse::class, $result);
     }
 
     #[Test]
@@ -49,7 +56,8 @@ final class OAuthTest extends TestCase
             'allowed' => true, 'consent_token' => 'consent_token',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(OAuthGrantsResponse::class, $result);
     }
 
     #[Test]
@@ -63,7 +71,8 @@ final class OAuthTest extends TestCase
             'allowed' => true, 'consent_token' => 'consent_token',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(OAuthGrantsResponse::class, $result);
     }
 
     #[Test]
@@ -75,7 +84,8 @@ final class OAuthTest extends TestCase
 
         $result = $this->client->oauth->introspect(['token' => 'token']);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(OAuthIntrospectResponse::class, $result);
     }
 
     #[Test]
@@ -87,7 +97,8 @@ final class OAuthTest extends TestCase
 
         $result = $this->client->oauth->introspect(['token' => 'token']);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(OAuthIntrospectResponse::class, $result);
     }
 
     #[Test]
@@ -99,7 +110,8 @@ final class OAuthTest extends TestCase
 
         $result = $this->client->oauth->register([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(OAuthRegisterResponse::class, $result);
     }
 
     #[Test]
@@ -115,7 +127,8 @@ final class OAuthTest extends TestCase
             'response_type' => 'code',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertNull($result);
     }
 
     #[Test]
@@ -129,9 +142,14 @@ final class OAuthTest extends TestCase
             'client_id' => 'client_id',
             'redirect_uri' => 'https://example.com',
             'response_type' => 'code',
+            'code_challenge' => 'code_challenge',
+            'code_challenge_method' => 'plain',
+            'scope' => 'scope',
+            'state' => 'state',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertNull($result);
     }
 
     #[Test]
@@ -143,7 +161,8 @@ final class OAuthTest extends TestCase
 
         $result = $this->client->oauth->retrieveJwks();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(OAuthGetJwksResponse::class, $result);
     }
 
     #[Test]
@@ -157,7 +176,8 @@ final class OAuthTest extends TestCase
             'grant_type' => 'client_credentials',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(OAuthTokenResponse::class, $result);
     }
 
     #[Test]
@@ -169,8 +189,16 @@ final class OAuthTest extends TestCase
 
         $result = $this->client->oauth->token([
             'grant_type' => 'client_credentials',
+            'client_id' => 'client_id',
+            'client_secret' => 'client_secret',
+            'code' => 'code',
+            'code_verifier' => 'code_verifier',
+            'redirect_uri' => 'https://example.com',
+            'refresh_token' => 'refresh_token',
+            'scope' => 'admin',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(OAuthTokenResponse::class, $result);
     }
 }

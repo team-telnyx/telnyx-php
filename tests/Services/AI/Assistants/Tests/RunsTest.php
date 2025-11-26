@@ -5,6 +5,8 @@ namespace Tests\Services\AI\Assistants\Tests;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Telnyx\AI\Assistants\Tests\Runs\TestRunResponse;
+use Telnyx\AI\Assistants\Tests\TestSuites\Runs\PaginatedTestRunList;
 use Telnyx\Client;
 use Tests\UnsupportedMockTests;
 
@@ -38,7 +40,8 @@ final class RunsTest extends TestCase
             ['test_id' => 'test_id']
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(TestRunResponse::class, $result);
     }
 
     #[Test]
@@ -53,7 +56,8 @@ final class RunsTest extends TestCase
             ['test_id' => 'test_id']
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(TestRunResponse::class, $result);
     }
 
     #[Test]
@@ -65,7 +69,8 @@ final class RunsTest extends TestCase
 
         $result = $this->client->ai->assistants->tests->runs->list('test_id', []);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(PaginatedTestRunList::class, $result);
     }
 
     #[Test]
@@ -80,6 +85,7 @@ final class RunsTest extends TestCase
             []
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(TestRunResponse::class, $result);
     }
 }

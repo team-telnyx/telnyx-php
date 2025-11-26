@@ -6,6 +6,8 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\ExternalConnections\Releases\ReleaseGetResponse;
+use Telnyx\ExternalConnections\Releases\ReleaseListResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -38,7 +40,8 @@ final class ReleasesTest extends TestCase
             ['id' => 'id']
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ReleaseGetResponse::class, $result);
     }
 
     #[Test]
@@ -53,7 +56,8 @@ final class ReleasesTest extends TestCase
             ['id' => 'id']
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ReleaseGetResponse::class, $result);
     }
 
     #[Test]
@@ -65,6 +69,7 @@ final class ReleasesTest extends TestCase
 
         $result = $this->client->externalConnections->releases->list('id', []);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ReleaseListResponse::class, $result);
     }
 }

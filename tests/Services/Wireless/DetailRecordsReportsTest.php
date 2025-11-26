@@ -6,6 +6,10 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\Wireless\DetailRecordsReports\DetailRecordsReportDeleteResponse;
+use Telnyx\Wireless\DetailRecordsReports\DetailRecordsReportGetResponse;
+use Telnyx\Wireless\DetailRecordsReports\DetailRecordsReportListResponse;
+use Telnyx\Wireless\DetailRecordsReports\DetailRecordsReportNewResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -35,7 +39,8 @@ final class DetailRecordsReportsTest extends TestCase
 
         $result = $this->client->wireless->detailRecordsReports->create([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DetailRecordsReportNewResponse::class, $result);
     }
 
     #[Test]
@@ -49,7 +54,8 @@ final class DetailRecordsReportsTest extends TestCase
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DetailRecordsReportGetResponse::class, $result);
     }
 
     #[Test]
@@ -61,7 +67,8 @@ final class DetailRecordsReportsTest extends TestCase
 
         $result = $this->client->wireless->detailRecordsReports->list([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DetailRecordsReportListResponse::class, $result);
     }
 
     #[Test]
@@ -75,6 +82,7 @@ final class DetailRecordsReportsTest extends TestCase
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DetailRecordsReportDeleteResponse::class, $result);
     }
 }

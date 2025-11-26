@@ -6,6 +6,11 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\GlobalIPAssignments\GlobalIPAssignmentDeleteResponse;
+use Telnyx\GlobalIPAssignments\GlobalIPAssignmentGetResponse;
+use Telnyx\GlobalIPAssignments\GlobalIPAssignmentListResponse;
+use Telnyx\GlobalIPAssignments\GlobalIPAssignmentNewResponse;
+use Telnyx\GlobalIPAssignments\GlobalIPAssignmentUpdateResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -35,7 +40,8 @@ final class GlobalIPAssignmentsTest extends TestCase
 
         $result = $this->client->globalIPAssignments->create([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(GlobalIPAssignmentNewResponse::class, $result);
     }
 
     #[Test]
@@ -49,7 +55,8 @@ final class GlobalIPAssignmentsTest extends TestCase
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(GlobalIPAssignmentGetResponse::class, $result);
     }
 
     #[Test]
@@ -61,10 +68,11 @@ final class GlobalIPAssignmentsTest extends TestCase
 
         $result = $this->client->globalIPAssignments->update(
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
-            ['body' => []]
+            []
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(GlobalIPAssignmentUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -77,15 +85,13 @@ final class GlobalIPAssignmentsTest extends TestCase
         $result = $this->client->globalIPAssignments->update(
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
             [
-                'body' => [
-                    'global_ip_id' => 'a836125b-20b6-452e-9c03-2653f09c7ed7',
-                    'is_in_maintenance' => true,
-                    'wireguard_peer_id' => 'e66c496d-4a85-423b-8b2a-8e63fac20320',
-                ],
+                'global_ip_id' => 'a836125b-20b6-452e-9c03-2653f09c7ed7',
+                'wireguard_peer_id' => 'e66c496d-4a85-423b-8b2a-8e63fac20320',
             ],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(GlobalIPAssignmentUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -97,7 +103,8 @@ final class GlobalIPAssignmentsTest extends TestCase
 
         $result = $this->client->globalIPAssignments->list([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(GlobalIPAssignmentListResponse::class, $result);
     }
 
     #[Test]
@@ -111,6 +118,7 @@ final class GlobalIPAssignmentsTest extends TestCase
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(GlobalIPAssignmentDeleteResponse::class, $result);
     }
 }

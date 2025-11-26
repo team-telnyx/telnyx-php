@@ -6,6 +6,9 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\Networks\DefaultGateway\DefaultGatewayDeleteResponse;
+use Telnyx\Networks\DefaultGateway\DefaultGatewayGetResponse;
+use Telnyx\Networks\DefaultGateway\DefaultGatewayNewResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -38,7 +41,8 @@ final class DefaultGatewayTest extends TestCase
             []
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DefaultGatewayNewResponse::class, $result);
     }
 
     #[Test]
@@ -52,7 +56,8 @@ final class DefaultGatewayTest extends TestCase
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DefaultGatewayGetResponse::class, $result);
     }
 
     #[Test]
@@ -66,6 +71,7 @@ final class DefaultGatewayTest extends TestCase
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DefaultGatewayDeleteResponse::class, $result);
     }
 }

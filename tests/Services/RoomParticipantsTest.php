@@ -6,6 +6,8 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\RoomParticipants\RoomParticipantGetResponse;
+use Telnyx\RoomParticipants\RoomParticipantListResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -37,7 +39,8 @@ final class RoomParticipantsTest extends TestCase
             '0ccc7b54-4df3-4bca-a65a-3da1ecc777f0'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(RoomParticipantGetResponse::class, $result);
     }
 
     #[Test]
@@ -49,6 +52,7 @@ final class RoomParticipantsTest extends TestCase
 
         $result = $this->client->roomParticipants->list([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(RoomParticipantListResponse::class, $result);
     }
 }

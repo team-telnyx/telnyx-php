@@ -6,6 +6,10 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\Legacy\Reporting\UsageReports\Voice\VoiceDeleteResponse;
+use Telnyx\Legacy\Reporting\UsageReports\Voice\VoiceGetResponse;
+use Telnyx\Legacy\Reporting\UsageReports\Voice\VoiceListResponse;
+use Telnyx\Legacy\Reporting\UsageReports\Voice\VoiceNewResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -38,7 +42,8 @@ final class VoiceTest extends TestCase
             'start_time' => '2024-02-01T00:00:00Z',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(VoiceNewResponse::class, $result);
     }
 
     #[Test]
@@ -51,9 +56,18 @@ final class VoiceTest extends TestCase
         $result = $this->client->legacy->reporting->usageReports->voice->create([
             'end_time' => '2024-02-01T00:00:00Z',
             'start_time' => '2024-02-01T00:00:00Z',
+            'aggregation_type' => 0,
+            'connections' => [123, 456],
+            'managed_accounts' => [
+                'f47ac10b-58cc-4372-a567-0e02b2c3d479',
+                '6ba7b810-9dad-11d1-80b4-00c04fd430c8',
+            ],
+            'product_breakdown' => 0,
+            'select_all_managed_accounts' => false,
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(VoiceNewResponse::class, $result);
     }
 
     #[Test]
@@ -67,7 +81,8 @@ final class VoiceTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(VoiceGetResponse::class, $result);
     }
 
     #[Test]
@@ -79,7 +94,8 @@ final class VoiceTest extends TestCase
 
         $result = $this->client->legacy->reporting->usageReports->voice->list([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(VoiceListResponse::class, $result);
     }
 
     #[Test]
@@ -93,6 +109,7 @@ final class VoiceTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(VoiceDeleteResponse::class, $result);
     }
 }

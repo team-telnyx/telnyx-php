@@ -6,6 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\Texml\Accounts\Calls\Recordings\RecordingRecordingSidJsonResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -45,7 +46,8 @@ final class RecordingsTest extends TestCase
             )
         ;
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(RecordingRecordingSidJsonResponse::class, $result);
     }
 
     #[Test]
@@ -63,10 +65,15 @@ final class RecordingsTest extends TestCase
             ->recordings
             ->recordingSidJson(
                 '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
-                ['account_sid' => 'account_sid', 'call_sid' => 'call_sid'],
+                [
+                    'account_sid' => 'account_sid',
+                    'call_sid' => 'call_sid',
+                    'Status' => 'paused',
+                ],
             )
         ;
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(RecordingRecordingSidJsonResponse::class, $result);
     }
 }

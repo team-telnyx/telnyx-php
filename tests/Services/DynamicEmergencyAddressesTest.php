@@ -6,6 +6,10 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressDeleteResponse;
+use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressGetResponse;
+use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressListResponse;
+use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressNewResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -42,7 +46,8 @@ final class DynamicEmergencyAddressesTest extends TestCase
             'street_name' => 'Congress',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DynamicEmergencyAddressNewResponse::class, $result);
     }
 
     #[Test]
@@ -59,9 +64,15 @@ final class DynamicEmergencyAddressesTest extends TestCase
             'locality' => 'Austin',
             'postal_code' => '78701',
             'street_name' => 'Congress',
+            'extended_address' => 'extended_address',
+            'house_suffix' => 'house_suffix',
+            'street_post_directional' => 'street_post_directional',
+            'street_pre_directional' => 'street_pre_directional',
+            'street_suffix' => 'St',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DynamicEmergencyAddressNewResponse::class, $result);
     }
 
     #[Test]
@@ -75,7 +86,8 @@ final class DynamicEmergencyAddressesTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DynamicEmergencyAddressGetResponse::class, $result);
     }
 
     #[Test]
@@ -87,7 +99,11 @@ final class DynamicEmergencyAddressesTest extends TestCase
 
         $result = $this->client->dynamicEmergencyAddresses->list([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            DynamicEmergencyAddressListResponse::class,
+            $result
+        );
     }
 
     #[Test]
@@ -101,6 +117,10 @@ final class DynamicEmergencyAddressesTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            DynamicEmergencyAddressDeleteResponse::class,
+            $result
+        );
     }
 }

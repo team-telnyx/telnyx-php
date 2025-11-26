@@ -6,6 +6,10 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\Comments\CommentGetResponse;
+use Telnyx\Comments\CommentListResponse;
+use Telnyx\Comments\CommentMarkAsReadResponse;
+use Telnyx\Comments\CommentNewResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -35,7 +39,8 @@ final class CommentsTest extends TestCase
 
         $result = $this->client->comments->create([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CommentNewResponse::class, $result);
     }
 
     #[Test]
@@ -47,7 +52,8 @@ final class CommentsTest extends TestCase
 
         $result = $this->client->comments->retrieve('id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CommentGetResponse::class, $result);
     }
 
     #[Test]
@@ -59,7 +65,8 @@ final class CommentsTest extends TestCase
 
         $result = $this->client->comments->list([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CommentListResponse::class, $result);
     }
 
     #[Test]
@@ -71,6 +78,7 @@ final class CommentsTest extends TestCase
 
         $result = $this->client->comments->markAsRead('id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CommentMarkAsReadResponse::class, $result);
     }
 }
