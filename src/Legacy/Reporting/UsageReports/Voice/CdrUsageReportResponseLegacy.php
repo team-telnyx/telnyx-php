@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type CdrUsageReportResponseLegacyShape = array{
  *   id?: string|null,
  *   aggregation_type?: int|null,
- *   connections?: list<int>|null,
+ *   connections?: list<string>|null,
  *   created_at?: \DateTimeInterface|null,
  *   end_time?: \DateTimeInterface|null,
  *   product_breakdown?: int|null,
@@ -43,8 +43,8 @@ final class CdrUsageReportResponseLegacy implements BaseModel
     #[Api(optional: true)]
     public ?int $aggregation_type;
 
-    /** @var list<int>|null $connections */
-    #[Api(list: 'int', optional: true)]
+    /** @var list<string>|null $connections */
+    #[Api(list: 'string', optional: true)]
     public ?array $connections;
 
     #[Api(optional: true)]
@@ -90,7 +90,7 @@ final class CdrUsageReportResponseLegacy implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<int> $connections
+     * @param list<string> $connections
      */
     public static function with(
         ?string $id = null,
@@ -147,7 +147,7 @@ final class CdrUsageReportResponseLegacy implements BaseModel
     }
 
     /**
-     * @param list<int> $connections
+     * @param list<string> $connections
      */
     public function withConnections(array $connections): self
     {
