@@ -31,7 +31,7 @@ final class AutorespConfigsService implements AutorespConfigsContract
      * @param array{
      *   country_code: string,
      *   keywords: list<string>,
-     *   op: "start"|"stop"|"info",
+     *   op: 'start'|'stop'|'info',
      *   resp_text?: string,
      * }|AutorespConfigCreateParams $params
      *
@@ -100,7 +100,7 @@ final class AutorespConfigsService implements AutorespConfigsContract
      *   profile_id: string,
      *   country_code: string,
      *   keywords: list<string>,
-     *   op: "start"|"stop"|"info",
+     *   op: 'start'|'stop'|'info',
      *   resp_text?: string,
      * }|AutorespConfigUpdateParams $params
      *

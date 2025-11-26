@@ -24,7 +24,7 @@ final class NumberLookupService implements NumberLookupContract
      * Submit a new telco data usage report
      *
      * @param array{
-     *   aggregationType?: "ALL"|"BY_ORGANIZATION_MEMBER",
+     *   aggregationType?: 'ALL'|'BY_ORGANIZATION_MEMBER',
      *   endDate?: string|\DateTimeInterface,
      *   managedAccounts?: list<string>,
      *   startDate?: string|\DateTimeInterface,

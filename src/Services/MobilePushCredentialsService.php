@@ -72,7 +72,7 @@ final class MobilePushCredentialsService implements MobilePushCredentialsContrac
      * List mobile push credentials
      *
      * @param array{
-     *   filter?: array{alias?: string, type?: "ios"|"android"},
+     *   filter?: array{alias?: string, type?: 'ios'|'android'},
      *   page?: array{number?: int, size?: int},
      * }|MobilePushCredentialListParams $params
      *

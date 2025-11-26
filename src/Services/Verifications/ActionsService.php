@@ -24,7 +24,7 @@ final class ActionsService implements ActionsContract
      * Verify verification code by ID
      *
      * @param array{
-     *   code?: string, status?: "accepted"|"rejected"
+     *   code?: string, status?: 'accepted'|'rejected'
      * }|ActionVerifyParams $params
      *
      * @throws APIException

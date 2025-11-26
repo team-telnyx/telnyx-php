@@ -98,12 +98,12 @@ final class CustomerServiceRecordsService implements CustomerServiceRecordsContr
      *     },
      *     phone_number?: array{eq?: string, in?: list<string>},
      *     status?: array{
-     *       eq?: "pending"|"completed"|"failed",
-     *       in?: list<"pending"|"completed"|"failed">,
+     *       eq?: 'pending'|'completed'|'failed',
+     *       in?: list<'pending'|'completed'|'failed'>,
      *     },
      *   },
      *   page?: array{number?: int, size?: int},
-     *   sort?: array{value?: "created_at"|"-created_at"},
+     *   sort?: array{value?: 'created_at'|'-created_at'},
      * }|CustomerServiceRecordListParams $params
      *
      * @throws APIException

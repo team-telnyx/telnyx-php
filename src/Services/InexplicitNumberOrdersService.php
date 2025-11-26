@@ -29,7 +29,7 @@ final class InexplicitNumberOrdersService implements InexplicitNumberOrdersContr
      * @param array{
      *   ordering_groups: list<array{
      *     count_requested: string,
-     *     country_iso: "US"|"CA",
+     *     country_iso: 'US'|'CA',
      *     phone_number_type: string,
      *     administrative_area?: string,
      *     features?: list<string>,
@@ -38,7 +38,7 @@ final class InexplicitNumberOrdersService implements InexplicitNumberOrdersContr
      *     phone_number?: array{
      *       contains?: string, ends_with?: string, starts_with?: string
      *     },
-     *     strategy?: "always"|"never",
+     *     strategy?: 'always'|'never',
      *   }>,
      *   billing_group_id?: string,
      *   connection_id?: string,

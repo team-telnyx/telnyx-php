@@ -29,7 +29,7 @@ final class AuditEventsService implements AuditEventsContract
      *     created_before?: string|\DateTimeInterface,
      *   },
      *   page?: array{number?: int, size?: int},
-     *   sort?: "asc"|"desc",
+     *   sort?: 'asc'|'desc',
      * }|AuditEventListParams $params
      *
      * @throws APIException

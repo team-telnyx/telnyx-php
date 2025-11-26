@@ -24,7 +24,7 @@ final class StreamsService implements StreamsContract
      * Updates streaming resource for particular call.
      *
      * @param array{
-     *   account_sid: string, call_sid: string, Status?: "stopped"
+     *   account_sid: string, call_sid: string, Status?: 'stopped'
      * }|StreamStreamingSidJsonParams $params
      *
      * @throws APIException

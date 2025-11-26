@@ -30,7 +30,7 @@ final class MdrUsageReportsService implements MdrUsageReportsContract
      * Submit request for new new messaging usage report. This endpoint will pull and aggregate messaging data in specified time period.
      *
      * @param array{
-     *   aggregation_type: "NO_AGGREGATION"|"PROFILE"|"TAGS",
+     *   aggregation_type: 'NO_AGGREGATION'|'PROFILE'|'TAGS',
      *   end_date: string|\DateTimeInterface,
      *   start_date: string|\DateTimeInterface,
      *   profiles?: string,
@@ -134,7 +134,7 @@ final class MdrUsageReportsService implements MdrUsageReportsContract
      * Generate and fetch messaging usage report synchronously. This endpoint will both generate and fetch the messaging report over a specified time period. No polling is necessary but the response may take up to a couple of minutes.
      *
      * @param array{
-     *   aggregation_type: "NO_AGGREGATION"|"PROFILE"|"TAGS",
+     *   aggregation_type: 'NO_AGGREGATION'|'PROFILE'|'TAGS',
      *   end_date?: string|\DateTimeInterface,
      *   profiles?: list<string>,
      *   start_date?: string|\DateTimeInterface,

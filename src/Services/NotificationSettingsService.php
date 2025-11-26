@@ -82,13 +82,13 @@ final class NotificationSettingsService implements NotificationSettingsContract
      *
      * @param array{
      *   filter?: array{
-     *     associated_record_type?: array{eq?: "account"|"phone_number"},
-     *     channel_type_id?: array{eq?: "webhook"|"sms"|"email"|"voice"},
+     *     associated_record_type?: array{eq?: 'account'|'phone_number'},
+     *     channel_type_id?: array{eq?: 'webhook'|'sms'|'email'|'voice'},
      *     notification_channel?: array{eq?: string},
      *     notification_event_condition_id?: array{eq?: string},
      *     notification_profile_id?: array{eq?: string},
      *     status?: array{
-     *       eq?: "enabled"|"enable-received"|"enable-pending"|"enable-submtited"|"delete-received"|"delete-pending"|"delete-submitted"|"deleted",
+     *       eq?: 'enabled'|'enable-received'|'enable-pending'|'enable-submtited'|'delete-received'|'delete-pending'|'delete-submitted'|'deleted',
      *     },
      *   },
      *   page?: array{number?: int, size?: int},

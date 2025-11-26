@@ -28,7 +28,7 @@ final class AssociatedPhoneNumbersService implements AssociatedPhoneNumbersContr
      * Creates a new associated phone number for a porting order. This is used for partial porting in GB to specify which phone numbers should be kept or disconnected.
      *
      * @param array{
-     *   action: "keep"|"disconnect",
+     *   action: 'keep'|'disconnect',
      *   phone_number_range: array{end_at?: string, start_at?: string},
      * }|AssociatedPhoneNumberCreateParams $params
      *
@@ -60,9 +60,9 @@ final class AssociatedPhoneNumbersService implements AssociatedPhoneNumbersContr
      * Returns a list of all associated phone numbers for a porting order. Associated phone numbers are used for partial porting in GB to specify which phone numbers should be kept or disconnected.
      *
      * @param array{
-     *   filter?: array{action?: "keep"|"disconnect", phone_number?: string},
+     *   filter?: array{action?: 'keep'|'disconnect', phone_number?: string},
      *   page?: array{number?: int, size?: int},
-     *   sort?: array{value?: "-created_at"|"created_at"},
+     *   sort?: array{value?: '-created_at'|'created_at'},
      * }|AssociatedPhoneNumberListParams $params
      *
      * @throws APIException

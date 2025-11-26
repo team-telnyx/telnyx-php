@@ -85,7 +85,7 @@ final class DocumentsTest extends TestCase
     public function testDownload(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped("Prism doesn't support * responses");
+            $this->markTestSkipped('Prism doesn\'t support * responses');
         }
 
         $result = $this->client->documents->download(

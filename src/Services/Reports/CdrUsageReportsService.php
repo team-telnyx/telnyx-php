@@ -24,8 +24,8 @@ final class CdrUsageReportsService implements CdrUsageReportsContract
      * Generate and fetch voice usage report synchronously. This endpoint will both generate and fetch the voice report over a specified time period. No polling is necessary but the response may take up to a couple of minutes.
      *
      * @param array{
-     *   aggregation_type: "NO_AGGREGATION"|"CONNECTION"|"TAG"|"BILLING_GROUP",
-     *   product_breakdown: "NO_BREAKDOWN"|"DID_VS_TOLL_FREE"|"COUNTRY"|"DID_VS_TOLL_FREE_PER_COUNTRY",
+     *   aggregation_type: 'NO_AGGREGATION'|'CONNECTION'|'TAG'|'BILLING_GROUP',
+     *   product_breakdown: 'NO_BREAKDOWN'|'DID_VS_TOLL_FREE'|'COUNTRY'|'DID_VS_TOLL_FREE_PER_COUNTRY',
      *   connections?: list<float>,
      *   end_date?: string|\DateTimeInterface,
      *   start_date?: string|\DateTimeInterface,

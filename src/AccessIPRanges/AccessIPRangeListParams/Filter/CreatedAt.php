@@ -21,6 +21,6 @@ final class CreatedAt implements ConverterSource
      */
     public static function variants(): array
     {
-        return ['\\DateTimeInterface', DateRangeFilter::class];
+        return ['\DateTimeInterface', DateRangeFilter::class];
     }
 }

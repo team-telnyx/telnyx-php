@@ -47,7 +47,7 @@ final class RequestsTest extends TestCase
             'corporateWebsite' => 'http://example.com',
             'isvReseller' => 'isvReseller',
             'messageVolume' => '100,000',
-            'optInWorkflow' => "User signs into the Telnyx portal, enters a number and is prompted to select whether they want to use 2FA verification for security purposes. If they've opted in a confirmation message is sent out to the handset",
+            'optInWorkflow' => 'User signs into the Telnyx portal, enters a number and is prompted to select whether they want to use 2FA verification for security purposes. If they\'ve opted in a confirmation message is sent out to the handset',
             'optInWorkflowImageURLs' => [
                 ['url' => 'https://telnyx.com/sign-up'],
                 ['url' => 'https://telnyx.com/company/data-privacy'],
@@ -84,7 +84,7 @@ final class RequestsTest extends TestCase
             'corporateWebsite' => 'http://example.com',
             'isvReseller' => 'isvReseller',
             'messageVolume' => '100,000',
-            'optInWorkflow' => "User signs into the Telnyx portal, enters a number and is prompted to select whether they want to use 2FA verification for security purposes. If they've opted in a confirmation message is sent out to the handset",
+            'optInWorkflow' => 'User signs into the Telnyx portal, enters a number and is prompted to select whether they want to use 2FA verification for security purposes. If they\'ve opted in a confirmation message is sent out to the handset',
             'optInWorkflowImageURLs' => [
                 ['url' => 'https://telnyx.com/sign-up'],
                 ['url' => 'https://telnyx.com/company/data-privacy'],
@@ -141,7 +141,7 @@ final class RequestsTest extends TestCase
                 'corporateWebsite' => 'http://example.com',
                 'isvReseller' => 'isvReseller',
                 'messageVolume' => '100,000',
-                'optInWorkflow' => "User signs into the Telnyx portal, enters a number and is prompted to select whether they want to use 2FA verification for security purposes. If they've opted in a confirmation message is sent out to the handset",
+                'optInWorkflow' => 'User signs into the Telnyx portal, enters a number and is prompted to select whether they want to use 2FA verification for security purposes. If they\'ve opted in a confirmation message is sent out to the handset',
                 'optInWorkflowImageURLs' => [
                     ['url' => 'https://telnyx.com/sign-up'],
                     ['url' => 'https://telnyx.com/company/data-privacy'],
@@ -181,7 +181,7 @@ final class RequestsTest extends TestCase
                 'corporateWebsite' => 'http://example.com',
                 'isvReseller' => 'isvReseller',
                 'messageVolume' => '100,000',
-                'optInWorkflow' => "User signs into the Telnyx portal, enters a number and is prompted to select whether they want to use 2FA verification for security purposes. If they've opted in a confirmation message is sent out to the handset",
+                'optInWorkflow' => 'User signs into the Telnyx portal, enters a number and is prompted to select whether they want to use 2FA verification for security purposes. If they\'ve opted in a confirmation message is sent out to the handset',
                 'optInWorkflowImageURLs' => [
                     ['url' => 'https://telnyx.com/sign-up'],
                     ['url' => 'https://telnyx.com/company/data-privacy'],

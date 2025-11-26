@@ -48,11 +48,11 @@ final class JobsService implements JobsContract
      *
      * @param array{
      *   filter?: array{
-     *     status?: "pending"|"in_progress"|"completed"|"failed",
-     *     type?: "delete_phone_number_block",
+     *     status?: 'pending'|'in_progress'|'completed'|'failed',
+     *     type?: 'delete_phone_number_block',
      *   },
      *   page?: array{number?: int, size?: int},
-     *   sort?: "created_at",
+     *   sort?: 'created_at',
      * }|JobListParams $params
      *
      * @throws APIException

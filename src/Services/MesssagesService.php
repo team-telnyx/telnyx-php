@@ -34,7 +34,7 @@ final class MesssagesService implements MesssagesContract
      *       suggestions?: list<mixed>,
      *       text?: string,
      *     },
-     *     event?: array{event_type?: "TYPE_UNSPECIFIED"|"IS_TYPING"|"READ"},
+     *     event?: array{event_type?: 'TYPE_UNSPECIFIED'|'IS_TYPING'|'READ'},
      *     expire_time?: string|\DateTimeInterface,
      *     ttl?: string,
      *   }|RcsAgentMessage,
@@ -44,7 +44,7 @@ final class MesssagesService implements MesssagesContract
      *     from?: string, media_urls?: list<string>, subject?: string, text?: string
      *   },
      *   sms_fallback?: array{from?: string, text?: string},
-     *   type?: "RCS",
+     *   type?: 'RCS',
      *   webhook_url?: string,
      * }|MesssageRcsParams $params
      *

@@ -50,7 +50,7 @@ final class TestsService implements TestsContract
      *   rubric: list<array{criteria: string, name: string}>,
      *   description?: string,
      *   max_duration_seconds?: int,
-     *   telnyx_conversation_channel?: "phone_call"|"web_call"|"sms_chat"|"web_chat"|TelnyxConversationChannel,
+     *   telnyx_conversation_channel?: 'phone_call'|'web_call'|'sms_chat'|'web_chat'|TelnyxConversationChannel,
      *   test_suite?: string,
      * }|TestCreateParams $params
      *
@@ -107,7 +107,7 @@ final class TestsService implements TestsContract
      *   max_duration_seconds?: int,
      *   name?: string,
      *   rubric?: list<array{criteria: string, name: string}>,
-     *   telnyx_conversation_channel?: "phone_call"|"web_call"|"sms_chat"|"web_chat"|TelnyxConversationChannel,
+     *   telnyx_conversation_channel?: 'phone_call'|'web_call'|'sms_chat'|'web_chat'|TelnyxConversationChannel,
      *   test_suite?: string,
      * }|TestUpdateParams $params
      *

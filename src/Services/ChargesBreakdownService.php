@@ -26,7 +26,7 @@ final class ChargesBreakdownService implements ChargesBreakdownContract
      * @param array{
      *   start_date: string|\DateTimeInterface,
      *   end_date?: string|\DateTimeInterface,
-     *   format?: "json"|"csv",
+     *   format?: 'json'|'csv',
      * }|ChargesBreakdownRetrieveParams $params
      *
      * @throws APIException

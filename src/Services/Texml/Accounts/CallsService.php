@@ -95,12 +95,12 @@ final class CallsService implements CallsContract
      *
      * @param array{
      *   account_sid: string,
-     *   FallbackMethod?: "GET"|"POST",
+     *   FallbackMethod?: 'GET'|'POST',
      *   FallbackUrl?: string,
-     *   Method?: "GET"|"POST",
+     *   Method?: 'GET'|'POST',
      *   Status?: string,
      *   StatusCallback?: string,
-     *   StatusCallbackMethod?: "GET"|"POST",
+     *   StatusCallbackMethod?: 'GET'|'POST',
      *   Texml?: string,
      *   Url?: string,
      * }|CallUpdateParams $params
@@ -141,36 +141,36 @@ final class CallsService implements CallsContract
      *   To: string,
      *   AsyncAmd?: bool,
      *   AsyncAmdStatusCallback?: string,
-     *   AsyncAmdStatusCallbackMethod?: "GET"|"POST",
+     *   AsyncAmdStatusCallbackMethod?: 'GET'|'POST',
      *   CallerId?: string,
      *   CancelPlaybackOnDetectMessageEnd?: bool,
      *   CancelPlaybackOnMachineDetection?: bool,
      *   CustomHeaders?: list<array{name: string, value: string}>,
-     *   DetectionMode?: "Premium"|"Regular",
+     *   DetectionMode?: 'Premium'|'Regular',
      *   FallbackUrl?: string,
-     *   MachineDetection?: "Enable"|"Disable"|"DetectMessageEnd",
+     *   MachineDetection?: 'Enable'|'Disable'|'DetectMessageEnd',
      *   MachineDetectionSilenceTimeout?: int,
      *   MachineDetectionSpeechEndThreshold?: int,
      *   MachineDetectionSpeechThreshold?: int,
      *   MachineDetectionTimeout?: int,
      *   PreferredCodecs?: string,
      *   Record?: bool,
-     *   RecordingChannels?: "mono"|"dual",
+     *   RecordingChannels?: 'mono'|'dual',
      *   RecordingStatusCallback?: string,
      *   RecordingStatusCallbackEvent?: string,
-     *   RecordingStatusCallbackMethod?: "GET"|"POST",
+     *   RecordingStatusCallbackMethod?: 'GET'|'POST',
      *   RecordingTimeout?: int,
-     *   RecordingTrack?: "inbound"|"outbound"|"both",
+     *   RecordingTrack?: 'inbound'|'outbound'|'both',
      *   SendRecordingUrl?: bool,
      *   SipAuthPassword?: string,
      *   SipAuthUsername?: string,
-     *   SipRegion?: "US"|"Europe"|"Canada"|"Australia"|"Middle East",
+     *   SipRegion?: 'US'|'Europe'|'Canada'|'Australia'|'Middle East',
      *   StatusCallback?: string,
-     *   StatusCallbackEvent?: "initiated"|"ringing"|"answered"|"completed",
-     *   StatusCallbackMethod?: "GET"|"POST",
-     *   Trim?: "trim-silence"|"do-not-trim",
+     *   StatusCallbackEvent?: 'initiated'|'ringing'|'answered'|'completed',
+     *   StatusCallbackMethod?: 'GET'|'POST',
+     *   Trim?: 'trim-silence'|'do-not-trim',
      *   Url?: string,
-     *   UrlMethod?: "GET"|"POST",
+     *   UrlMethod?: 'GET'|'POST',
      * }|CallCallsParams $params
      *
      * @throws APIException
@@ -211,7 +211,7 @@ final class CallsService implements CallsContract
      *   StartTime?: string,
      *   StartTime_gt?: string,
      *   StartTime_lt?: string,
-     *   Status?: "canceled"|"completed"|"failed"|"busy"|"no-answer",
+     *   Status?: 'canceled'|'completed'|'failed'|'busy'|'no-answer',
      *   To?: string,
      * }|CallRetrieveCallsParams $params
      *
@@ -249,10 +249,10 @@ final class CallsService implements CallsContract
      *   Name?: string,
      *   Secure?: bool,
      *   SessionTimeoutSecs?: int,
-     *   SipTransport?: "udp"|"tcp"|"tls",
+     *   SipTransport?: 'udp'|'tcp'|'tls',
      *   StatusCallback?: string,
-     *   StatusCallbackMethod?: "GET"|"POST",
-     *   Track?: "both_tracks"|"inbound_track"|"outbound_track",
+     *   StatusCallbackMethod?: 'GET'|'POST',
+     *   Track?: 'both_tracks'|'inbound_track'|'outbound_track',
      * }|CallSiprecJsonParams $params
      *
      * @throws APIException
@@ -289,12 +289,12 @@ final class CallsService implements CallsContract
      *
      * @param array{
      *   account_sid: string,
-     *   BidirectionalCodec?: "PCMU"|"PCMA"|"G722",
-     *   BidirectionalMode?: "mp3"|"rtp",
+     *   BidirectionalCodec?: 'PCMU'|'PCMA'|'G722',
+     *   BidirectionalMode?: 'mp3'|'rtp',
      *   Name?: string,
      *   StatusCallback?: string,
-     *   StatusCallbackMethod?: "GET"|"POST",
-     *   Track?: "inbound_track"|"outbound_track"|"both_tracks",
+     *   StatusCallbackMethod?: 'GET'|'POST',
+     *   Track?: 'inbound_track'|'outbound_track'|'both_tracks',
      *   Url?: string,
      * }|CallStreamsJsonParams $params
      *

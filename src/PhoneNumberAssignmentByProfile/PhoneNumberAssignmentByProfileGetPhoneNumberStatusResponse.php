@@ -18,9 +18,7 @@ use Telnyx\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileGetPhone
  */
 final class PhoneNumberAssignmentByProfileGetPhoneNumberStatusResponse implements BaseModel, ResponseConverter
 {
-    /**
-     * @use SdkModel<PhoneNumberAssignmentByProfileGetPhoneNumberStatusResponseShape>
-     */
+    /** @use SdkModel<PhoneNumberAssignmentByProfileGetPhoneNumberStatusResponseShape> */
     use SdkModel;
 
     use SdkResponse;

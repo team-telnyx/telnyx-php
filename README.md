@@ -45,12 +45,12 @@ Parameters with a default value must be set by name.
 
 use Telnyx\Client;
 
-$client = new Client(apiKey: getenv("TELNYX_API_KEY") ?: "My API Key");
+$client = new Client(apiKey: getenv('TELNYX_API_KEY') ?: 'My API Key');
 
 $response = $client->calls->dial([
-  "connection_id" => "conn12345",
-  "from" => "+15557654321",
-  "to" => "+15551234567",
+  'connection_id' => 'conn12345',
+  'from' => '+15557654321',
+  'to' => '+15551234567',
 ]);
 
 var_dump($response->data);
@@ -142,9 +142,9 @@ use Telnyx\RequestOptions;
 $numberOrder = $client->numberOrders->create(
   [],
   RequestOptions::with(
-    extraQueryParams: ["my_query_parameter" => "value"],
-    extraBodyParams: ["my_body_parameter" => "value"],
-    extraHeaders: ["my-header" => "value"],
+    extraQueryParams: ['my_query_parameter' => 'value'],
+    extraBodyParams: ['my_body_parameter' => 'value'],
+    extraHeaders: ['my-header' => 'value'],
   ),
 );
 ```

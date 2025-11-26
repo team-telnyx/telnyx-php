@@ -30,7 +30,7 @@ final class WirelessBlocklistsService implements WirelessBlocklistsContract
      * Create a Wireless Blocklist to prevent SIMs from connecting to certain networks.
      *
      * @param array{
-     *   name: string, type: "country"|"mcc"|"plmn", values: list<string>
+     *   name: string, type: 'country'|'mcc'|'plmn', values: list<string>
      * }|WirelessBlocklistCreateParams $params
      *
      * @throws APIException
@@ -80,7 +80,7 @@ final class WirelessBlocklistsService implements WirelessBlocklistsContract
      * Update a Wireless Blocklist.
      *
      * @param array{
-     *   name?: string, type?: "country"|"mcc"|"plmn", values?: list<string>
+     *   name?: string, type?: 'country'|'mcc'|'plmn', values?: list<string>
      * }|WirelessBlocklistUpdateParams $params
      *
      * @throws APIException

@@ -38,7 +38,7 @@ final class ReportsService implements ReportsContract
      *       status__in?: list<mixed>,
      *     },
      *   }|ExportPortoutsCsvReport,
-     *   report_type: "export_portouts_csv",
+     *   report_type: 'export_portouts_csv',
      * }|ReportCreateParams $params
      *
      * @throws APIException
@@ -89,7 +89,7 @@ final class ReportsService implements ReportsContract
      *
      * @param array{
      *   filter?: array{
-     *     report_type?: "export_portouts_csv", status?: "pending"|"completed"
+     *     report_type?: 'export_portouts_csv', status?: 'pending'|'completed'
      *   },
      *   page?: array{number?: int, size?: int},
      * }|ReportListParams $params

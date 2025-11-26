@@ -137,20 +137,20 @@ final class PhoneNumbersService implements PhoneNumbersContract
      *     customer_reference?: string,
      *     emergency_address_id?: string,
      *     number_type?: array{
-     *       eq?: "local"|"national"|"toll_free"|"mobile"|"shared_cost"
+     *       eq?: 'local'|'national'|'toll_free'|'mobile'|'shared_cost'
      *     },
      *     phone_number?: string,
-     *     source?: "ported"|"purchased",
-     *     status?: "purchase-pending"|"purchase-failed"|"port-pending"|"active"|"deleted"|"port-failed"|"emergency-only"|"ported-out"|"port-out-pending",
+     *     source?: 'ported'|'purchased',
+     *     status?: 'purchase-pending'|'purchase-failed'|'port-pending'|'active'|'deleted'|'port-failed'|'emergency-only'|'ported-out'|'port-out-pending',
      *     tag?: string,
      *     'voice.connection_name'?: array{
      *       contains?: string, ends_with?: string, eq?: string, starts_with?: string
      *     },
-     *     'voice.usage_payment_method'?: "pay-per-minute"|"channel",
-     *     without_tags?: "true"|"false",
+     *     'voice.usage_payment_method'?: 'pay-per-minute'|'channel',
+     *     without_tags?: 'true'|'false',
      *   },
      *   page?: array{number?: int, size?: int},
-     *   sort?: "purchased_at"|"phone_number"|"connection_name"|"usage_payment_method",
+     *   sort?: 'purchased_at'|'phone_number'|'connection_name'|'usage_payment_method',
      * }|PhoneNumberListParams $params
      *
      * @throws APIException
@@ -207,21 +207,21 @@ final class PhoneNumbersService implements PhoneNumbersContract
      *     customer_reference?: string,
      *     emergency_address_id?: string,
      *     number_type?: array{
-     *       eq?: "local"|"national"|"toll_free"|"mobile"|"shared_cost"
+     *       eq?: 'local'|'national'|'toll_free'|'mobile'|'shared_cost'
      *     },
      *     phone_number?: string,
-     *     source?: "ported"|"purchased",
-     *     status?: "purchase-pending"|"purchase-failed"|"port_pending"|"active"|"deleted"|"port-failed"|"emergency-only"|"ported-out"|"port-out-pending",
+     *     source?: 'ported'|'purchased',
+     *     status?: 'purchase-pending'|'purchase-failed'|'port_pending'|'active'|'deleted'|'port-failed'|'emergency-only'|'ported-out'|'port-out-pending',
      *     tag?: string,
      *     'voice.connection_name'?: array{
      *       contains?: string, ends_with?: string, eq?: string, starts_with?: string
      *     },
-     *     'voice.usage_payment_method'?: "pay-per-minute"|"channel",
+     *     'voice.usage_payment_method'?: 'pay-per-minute'|'channel',
      *   },
      *   include_connection?: bool,
      *   include_tags?: bool,
      *   page?: array{number?: int, size?: int},
-     *   sort?: "purchased_at"|"phone_number"|"connection_name"|"usage_payment_method",
+     *   sort?: 'purchased_at'|'phone_number'|'connection_name'|'usage_payment_method',
      * }|PhoneNumberSlimListParams $params
      *
      * @throws APIException

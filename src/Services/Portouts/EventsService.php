@@ -49,7 +49,7 @@ final class EventsService implements EventsContract
      *     created_at?: array{
      *       gte?: string|\DateTimeInterface, lte?: string|\DateTimeInterface
      *     },
-     *     event_type?: "portout.status_changed"|"portout.new_comment"|"portout.foc_date_changed",
+     *     event_type?: 'portout.status_changed'|'portout.new_comment'|'portout.foc_date_changed',
      *     portout_id?: string,
      *   },
      *   page?: array{number?: int, size?: int},

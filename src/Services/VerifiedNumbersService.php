@@ -37,7 +37,7 @@ final class VerifiedNumbersService implements VerifiedNumbersContract
      *
      * @param array{
      *   phone_number: string,
-     *   verification_method: "sms"|"call",
+     *   verification_method: 'sms'|'call',
      *   extension?: string|null,
      * }|VerifiedNumberCreateParams $params
      *

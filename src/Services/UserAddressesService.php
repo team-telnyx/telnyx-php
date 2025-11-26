@@ -95,7 +95,7 @@ final class UserAddressesService implements UserAddressesContract
      *     street_address?: array{contains?: string},
      *   },
      *   page?: array{number?: int, size?: int},
-     *   sort?: "created_at"|"first_name"|"last_name"|"business_name"|"street_address",
+     *   sort?: 'created_at'|'first_name'|'last_name'|'business_name'|'street_address',
      * }|UserAddressListParams $params
      *
      * @throws APIException

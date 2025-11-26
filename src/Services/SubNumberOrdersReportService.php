@@ -30,7 +30,7 @@ final class SubNumberOrdersReportService implements SubNumberOrdersReportContrac
      *   created_at_lt?: string|\DateTimeInterface,
      *   customer_reference?: string,
      *   order_request_id?: string,
-     *   status?: "pending"|"success"|"failure",
+     *   status?: 'pending'|'success'|'failure',
      * }|SubNumberOrdersReportCreateParams $params
      *
      * @throws APIException

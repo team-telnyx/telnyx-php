@@ -24,7 +24,7 @@ final class ChatService implements ChatContract
      *
      * @param array{
      *   messages: list<array{
-     *     content: string|list<array<mixed>>, role: "system"|"user"|"assistant"|"tool"
+     *     content: string|list<array<mixed>>, role: 'system'|'user'|'assistant'|'tool'
      *   }>,
      *   api_key_ref?: string,
      *   best_of?: int,
@@ -40,10 +40,10 @@ final class ChatService implements ChatContract
      *   model?: string,
      *   n?: float,
      *   presence_penalty?: float,
-     *   response_format?: array{type: "text"|"json_object"},
+     *   response_format?: array{type: 'text'|'json_object'},
      *   stream?: bool,
      *   temperature?: float,
-     *   tool_choice?: "none"|"auto"|"required",
+     *   tool_choice?: 'none'|'auto'|'required',
      *   tools?: list<array<string,mixed>>,
      *   top_logprobs?: int,
      *   top_p?: float,

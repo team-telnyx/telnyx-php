@@ -92,7 +92,7 @@ final class DocumentsService implements DocumentsContract
      *     filename?: array{contains?: string},
      *   },
      *   page?: array{number?: int, size?: int},
-     *   sort?: list<"filename"|"created_at"|"updated_at"|"-filename"|"-created_at"|"-updated_at">,
+     *   sort?: list<'filename'|'created_at'|'updated_at'|'-filename'|'-created_at'|'-updated_at'>,
      * }|DocumentListParams $params
      *
      * @throws APIException

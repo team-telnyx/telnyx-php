@@ -27,7 +27,7 @@ final class CustomStorageCredentialsService implements CustomStorageCredentialsC
      * Creates a custom storage credentials configuration.
      *
      * @param array{
-     *   backend: "gcs"|"s3"|"azure", configuration: array<string,mixed>
+     *   backend: 'gcs'|'s3'|'azure', configuration: array<string,mixed>
      * }|CustomStorageCredentialCreateParams $params
      *
      * @throws APIException
@@ -78,7 +78,7 @@ final class CustomStorageCredentialsService implements CustomStorageCredentialsC
      * Updates a stored custom credentials configuration.
      *
      * @param array{
-     *   backend: "gcs"|"s3"|"azure", configuration: array<string,mixed>
+     *   backend: 'gcs'|'s3'|'azure', configuration: array<string,mixed>
      * }|CustomStorageCredentialUpdateParams $params
      *
      * @throws APIException

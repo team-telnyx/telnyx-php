@@ -49,7 +49,7 @@ final class ActionsService implements ActionsContract
      * Kick participants from a room session.
      *
      * @param array{
-     *   exclude?: list<string>, participants?: "all"|list<string>
+     *   exclude?: list<string>, participants?: 'all'|list<string>
      * }|ActionKickParams $params
      *
      * @throws APIException
@@ -80,7 +80,7 @@ final class ActionsService implements ActionsContract
      * Mute participants in room session.
      *
      * @param array{
-     *   exclude?: list<string>, participants?: "all"|list<string>
+     *   exclude?: list<string>, participants?: 'all'|list<string>
      * }|ActionMuteParams $params
      *
      * @throws APIException
@@ -111,7 +111,7 @@ final class ActionsService implements ActionsContract
      * Unmute participants in room session.
      *
      * @param array{
-     *   exclude?: list<string>, participants?: "all"|list<string>
+     *   exclude?: list<string>, participants?: 'all'|list<string>
      * }|ActionUnmuteParams $params
      *
      * @throws APIException

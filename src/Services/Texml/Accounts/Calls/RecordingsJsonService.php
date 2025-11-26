@@ -28,11 +28,11 @@ final class RecordingsJsonService implements RecordingsJsonContract
      * @param array{
      *   account_sid: string,
      *   PlayBeep?: bool,
-     *   RecordingChannels?: "single"|"dual",
+     *   RecordingChannels?: 'single'|'dual',
      *   RecordingStatusCallback?: string,
      *   RecordingStatusCallbackEvent?: string,
-     *   RecordingStatusCallbackMethod?: "GET"|"POST",
-     *   RecordingTrack?: "inbound"|"outbound"|"both",
+     *   RecordingStatusCallbackMethod?: 'GET'|'POST',
+     *   RecordingTrack?: 'inbound'|'outbound'|'both',
      *   SendRecordingUrl?: bool,
      * }|RecordingsJsonRecordingsJsonParams $params
      *

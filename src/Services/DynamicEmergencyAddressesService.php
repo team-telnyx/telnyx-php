@@ -29,7 +29,7 @@ final class DynamicEmergencyAddressesService implements DynamicEmergencyAddresse
      *
      * @param array{
      *   administrative_area: string,
-     *   country_code: "US"|"CA"|"PR",
+     *   country_code: 'US'|'CA'|'PR',
      *   house_number: string,
      *   locality: string,
      *   postal_code: string,
@@ -89,7 +89,7 @@ final class DynamicEmergencyAddressesService implements DynamicEmergencyAddresse
      *
      * @param array{
      *   filter?: array{
-     *     country_code?: string, status?: "pending"|"activated"|"rejected"
+     *     country_code?: string, status?: 'pending'|'activated'|'rejected'
      *   },
      *   page?: array{number?: int, size?: int},
      * }|DynamicEmergencyAddressListParams $params

@@ -24,11 +24,11 @@ final class AudioService implements AudioContract
      * Transcribe speech to text. This endpoint is consistent with the [OpenAI Transcription API](https://platform.openai.com/docs/api-reference/audio/createTranscription) and may be used with the OpenAI JS or Python SDK.
      *
      * @param array{
-     *   model: "distil-whisper/distil-large-v2"|"openai/whisper-large-v3-turbo",
+     *   model: 'distil-whisper/distil-large-v2'|'openai/whisper-large-v3-turbo',
      *   file?: string,
      *   file_url?: string,
-     *   response_format?: "json"|"verbose_json",
-     *   timestamp_granularities__?: "segment",
+     *   response_format?: 'json'|'verbose_json',
+     *   timestamp_granularities__?: 'segment',
      * }|AudioTranscribeParams $params
      *
      * @throws APIException

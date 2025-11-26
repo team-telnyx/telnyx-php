@@ -27,7 +27,7 @@ final class RegisterService implements RegisterContract
      * @param array{
      *   registration_codes: list<string>,
      *   sim_card_group_id?: string,
-     *   status?: "enabled"|"disabled"|"standby",
+     *   status?: 'enabled'|'disabled'|'standby',
      *   tags?: list<string>,
      * }|RegisterCreateParams $params
      *

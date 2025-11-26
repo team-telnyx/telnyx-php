@@ -27,7 +27,7 @@ final class CsvDownloadsService implements CsvDownloadsContract
      * Create a CSV download
      *
      * @param array{
-     *   csv_format?: "V1"|"V2",
+     *   csv_format?: 'V1'|'V2',
      *   filter?: array{
      *     billing_group_id?: string,
      *     connection_id?: string,
@@ -35,12 +35,12 @@ final class CsvDownloadsService implements CsvDownloadsContract
      *     emergency_address_id?: string,
      *     has_bundle?: string,
      *     phone_number?: string,
-     *     status?: "purchase-pending"|"purchase-failed"|"port-pending"|"active"|"deleted"|"port-failed"|"emergency-only"|"ported-out"|"port-out-pending",
+     *     status?: 'purchase-pending'|'purchase-failed'|'port-pending'|'active'|'deleted'|'port-failed'|'emergency-only'|'ported-out'|'port-out-pending',
      *     tag?: string,
      *     'voice.connection_name'?: array{
      *       contains?: string, ends_with?: string, eq?: string, starts_with?: string
      *     },
-     *     'voice.usage_payment_method'?: "pay-per-minute"|"channel",
+     *     'voice.usage_payment_method'?: 'pay-per-minute'|'channel',
      *   },
      * }|CsvDownloadCreateParams $params
      *

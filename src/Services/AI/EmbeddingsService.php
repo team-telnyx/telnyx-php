@@ -61,8 +61,8 @@ final class EmbeddingsService implements EmbeddingsContract
      *   bucket_name: string,
      *   document_chunk_overlap_size?: int,
      *   document_chunk_size?: int,
-     *   embedding_model?: "thenlper/gte-large"|"intfloat/multilingual-e5-large",
-     *   loader?: "default"|"intercom",
+     *   embedding_model?: 'thenlper/gte-large'|'intfloat/multilingual-e5-large',
+     *   loader?: 'default'|'intercom',
      * }|EmbeddingCreateParams $params
      *
      * @throws APIException

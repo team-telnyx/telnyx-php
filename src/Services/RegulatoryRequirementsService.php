@@ -25,10 +25,10 @@ final class RegulatoryRequirementsService implements RegulatoryRequirementsContr
      *
      * @param array{
      *   filter?: array{
-     *     action?: "ordering"|"porting"|"action",
+     *     action?: 'ordering'|'porting'|'action',
      *     country_code?: string,
      *     phone_number?: string,
-     *     phone_number_type?: "local"|"toll_free"|"mobile"|"national"|"shared_cost",
+     *     phone_number_type?: 'local'|'toll_free'|'mobile'|'national'|'shared_cost',
      *     requirement_group_id?: string,
      *   },
      * }|RegulatoryRequirementRetrieveParams $params

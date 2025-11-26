@@ -94,8 +94,8 @@ final class PortoutsService implements PortoutsContract
      *       gte?: string|\DateTimeInterface, lte?: string|\DateTimeInterface
      *     },
      *     spid?: string,
-     *     status?: "pending"|"authorized"|"ported"|"rejected"|"rejected-pending"|"canceled",
-     *     status_in?: list<"pending"|"authorized"|"ported"|"rejected"|"rejected-pending"|"canceled">,
+     *     status?: 'pending'|'authorized'|'ported'|'rejected'|'rejected-pending'|'canceled',
+     *     status_in?: list<'pending'|'authorized'|'ported'|'rejected'|'rejected-pending'|'canceled'>,
      *     support_key?: string,
      *   },
      *   page?: array{number?: int, size?: int},

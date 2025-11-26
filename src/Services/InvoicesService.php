@@ -25,7 +25,7 @@ final class InvoicesService implements InvoicesContract
      *
      * Retrieve a single invoice by its unique identifier.
      *
-     * @param array{action?: "json"|"link"}|InvoiceRetrieveParams $params
+     * @param array{action?: 'json'|'link'}|InvoiceRetrieveParams $params
      *
      * @throws APIException
      */
@@ -55,7 +55,7 @@ final class InvoicesService implements InvoicesContract
      * Retrieve a paginated list of invoices.
      *
      * @param array{
-     *   page?: array{number?: int, size?: int}, sort?: "period_start"|"-period_start"
+     *   page?: array{number?: int, size?: int}, sort?: 'period_start'|'-period_start'
      * }|InvoiceListParams $params
      *
      * @throws APIException

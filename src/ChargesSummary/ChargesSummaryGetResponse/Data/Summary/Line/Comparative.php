@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   existing_this_month: MonthDetail,
  *   name: string,
  *   new_this_month: MonthDetail,
- *   type: "comparative",
+ *   type: 'comparative',
  * }
  */
 final class Comparative implements BaseModel
@@ -23,7 +23,7 @@ final class Comparative implements BaseModel
     /** @use SdkModel<ComparativeShape> */
     use SdkModel;
 
-    /** @var "comparative" $type */
+    /** @var 'comparative' $type */
     #[Api]
     public string $type = 'comparative';
 

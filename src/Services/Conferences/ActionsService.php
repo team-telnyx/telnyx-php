@@ -52,9 +52,9 @@ final class ActionsService implements ActionsContract
      *
      * @param array{
      *   call_control_id: string,
-     *   supervisor_role: "barge"|"monitor"|"none"|"whisper",
+     *   supervisor_role: 'barge'|'monitor'|'none'|'whisper',
      *   command_id?: string,
-     *   region?: "Australia"|"Europe"|"Middle East"|"US",
+     *   region?: 'Australia'|'Europe'|'Middle East'|'US',
      *   whisper_call_control_ids?: list<string>,
      * }|ActionUpdateParams $params
      *
@@ -89,7 +89,7 @@ final class ActionsService implements ActionsContract
      *   audio_url?: string,
      *   call_control_ids?: list<string>,
      *   media_name?: string,
-     *   region?: "Australia"|"Europe"|"Middle East"|"US",
+     *   region?: 'Australia'|'Europe'|'Middle East'|'US',
      * }|ActionHoldParams $params
      *
      * @throws APIException
@@ -126,7 +126,7 @@ final class ActionsService implements ActionsContract
      *
      * @param array{
      *   call_control_id: string,
-     *   beep_enabled?: "always"|"never"|"on_enter"|"on_exit",
+     *   beep_enabled?: 'always'|'never'|'on_enter'|'on_exit',
      *   client_state?: string,
      *   command_id?: string,
      *   end_conference_on_exit?: bool,
@@ -134,10 +134,10 @@ final class ActionsService implements ActionsContract
      *   hold_audio_url?: string,
      *   hold_media_name?: string,
      *   mute?: bool,
-     *   region?: "Australia"|"Europe"|"Middle East"|"US",
+     *   region?: 'Australia'|'Europe'|'Middle East'|'US',
      *   soft_end_conference_on_exit?: bool,
      *   start_conference_on_enter?: bool,
-     *   supervisor_role?: "barge"|"monitor"|"none"|"whisper",
+     *   supervisor_role?: 'barge'|'monitor'|'none'|'whisper',
      *   whisper_call_control_ids?: list<string>,
      * }|ActionJoinParams $params
      *
@@ -174,9 +174,9 @@ final class ActionsService implements ActionsContract
      *
      * @param array{
      *   call_control_id: string,
-     *   beep_enabled?: "always"|"never"|"on_enter"|"on_exit",
+     *   beep_enabled?: 'always'|'never'|'on_enter'|'on_exit',
      *   command_id?: string,
-     *   region?: "Australia"|"Europe"|"Middle East"|"US",
+     *   region?: 'Australia'|'Europe'|'Middle East'|'US',
      * }|ActionLeaveParams $params
      *
      * @throws APIException
@@ -208,7 +208,7 @@ final class ActionsService implements ActionsContract
      *
      * @param array{
      *   call_control_ids?: list<string>,
-     *   region?: "Australia"|"Europe"|"Middle East"|"US",
+     *   region?: 'Australia'|'Europe'|'Middle East'|'US',
      * }|ActionMuteParams $params
      *
      * @throws APIException
@@ -243,7 +243,7 @@ final class ActionsService implements ActionsContract
      *   call_control_ids?: list<string>,
      *   loop?: string|int,
      *   media_name?: string,
-     *   region?: "Australia"|"Europe"|"Middle East"|"US",
+     *   region?: 'Australia'|'Europe'|'Middle East'|'US',
      * }|ActionPlayParams $params
      *
      * @throws APIException
@@ -276,7 +276,7 @@ final class ActionsService implements ActionsContract
      * @param array{
      *   command_id?: string,
      *   recording_id?: string,
-     *   region?: "Australia"|"Europe"|"Middle East"|"US",
+     *   region?: 'Australia'|'Europe'|'Middle East'|'US',
      * }|ActionRecordPauseParams $params
      *
      * @throws APIException
@@ -309,7 +309,7 @@ final class ActionsService implements ActionsContract
      * @param array{
      *   command_id?: string,
      *   recording_id?: string,
-     *   region?: "Australia"|"Europe"|"Middle East"|"US",
+     *   region?: 'Australia'|'Europe'|'Middle East'|'US',
      * }|ActionRecordResumeParams $params
      *
      * @throws APIException
@@ -344,12 +344,12 @@ final class ActionsService implements ActionsContract
      * - `conference.recording.saved`
      *
      * @param array{
-     *   format: "wav"|"mp3",
+     *   format: 'wav'|'mp3',
      *   command_id?: string,
      *   custom_file_name?: string,
      *   play_beep?: bool,
-     *   region?: "Australia"|"Europe"|"Middle East"|"US",
-     *   trim?: "trim-silence",
+     *   region?: 'Australia'|'Europe'|'Middle East'|'US',
+     *   trim?: 'trim-silence',
      * }|ActionRecordStartParams $params
      *
      * @throws APIException
@@ -387,7 +387,7 @@ final class ActionsService implements ActionsContract
      *   client_state?: string,
      *   command_id?: string,
      *   recording_id?: string,
-     *   region?: "Australia"|"Europe"|"Middle East"|"US",
+     *   region?: 'Australia'|'Europe'|'Middle East'|'US',
      * }|ActionRecordStopParams $params
      *
      * @throws APIException
@@ -423,8 +423,8 @@ final class ActionsService implements ActionsContract
      *   call_control_ids?: list<string>,
      *   command_id?: string,
      *   language?: value-of<Language>,
-     *   payload_type?: "text"|"ssml",
-     *   region?: "Australia"|"Europe"|"Middle East"|"US",
+     *   payload_type?: 'text'|'ssml',
+     *   region?: 'Australia'|'Europe'|'Middle East'|'US',
      *   voice_settings?: mixed|array{api_key_ref?: string}|array{voice_speed?: float},
      * }|ActionSpeakParams $params
      *
@@ -457,7 +457,7 @@ final class ActionsService implements ActionsContract
      *
      * @param array{
      *   call_control_ids?: list<string>,
-     *   region?: "Australia"|"Europe"|"Middle East"|"US",
+     *   region?: 'Australia'|'Europe'|'Middle East'|'US',
      * }|ActionStopParams $params
      *
      * @throws APIException
@@ -489,7 +489,7 @@ final class ActionsService implements ActionsContract
      *
      * @param array{
      *   call_control_ids: list<string>,
-     *   region?: "Australia"|"Europe"|"Middle East"|"US",
+     *   region?: 'Australia'|'Europe'|'Middle East'|'US',
      * }|ActionUnholdParams $params
      *
      * @throws APIException
@@ -521,7 +521,7 @@ final class ActionsService implements ActionsContract
      *
      * @param array{
      *   call_control_ids?: list<string>,
-     *   region?: "Australia"|"Europe"|"Middle East"|"US",
+     *   region?: 'Australia'|'Europe'|'Middle East'|'US',
      * }|ActionUnmuteParams $params
      *
      * @throws APIException

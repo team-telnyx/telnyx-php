@@ -57,7 +57,7 @@ final class TextToSpeechService implements TextToSpeechContract
      *
      * @param array{
      *   elevenlabs_api_key_ref?: string,
-     *   provider?: "aws"|"azure"|"elevenlabs"|"telnyx",
+     *   provider?: 'aws'|'azure'|'elevenlabs'|'telnyx',
      * }|TextToSpeechListVoicesParams $params
      *
      * @throws APIException

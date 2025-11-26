@@ -28,7 +28,7 @@ final class AdditionalDocumentsService implements AdditionalDocumentsContract
      *
      * @param array{
      *   additional_documents?: list<array{
-     *     document_id?: string, document_type?: "loa"|"invoice"|"csr"|"other"
+     *     document_id?: string, document_type?: 'loa'|'invoice'|'csr'|'other'
      *   }>,
      * }|AdditionalDocumentCreateParams $params
      *
@@ -60,9 +60,9 @@ final class AdditionalDocumentsService implements AdditionalDocumentsContract
      * Returns a list of additional documents for a porting order.
      *
      * @param array{
-     *   filter?: array{document_type?: list<"loa"|"invoice"|"csr"|"other">},
+     *   filter?: array{document_type?: list<'loa'|'invoice'|'csr'|'other'>},
      *   page?: array{number?: int, size?: int},
-     *   sort?: array{value?: "created_at"|"-created_at"},
+     *   sort?: array{value?: 'created_at'|'-created_at'},
      * }|AdditionalDocumentListParams $params
      *
      * @throws APIException

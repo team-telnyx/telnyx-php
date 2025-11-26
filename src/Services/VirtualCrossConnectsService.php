@@ -31,7 +31,7 @@ final class VirtualCrossConnectsService implements VirtualCrossConnectsContract
      *
      * @param array{
      *   bgp_asn: float,
-     *   cloud_provider: "aws"|"azure"|"gce",
+     *   cloud_provider: 'aws'|'azure'|'gce',
      *   cloud_provider_region: string,
      *   network_id: string,
      *   primary_cloud_account_id: string,

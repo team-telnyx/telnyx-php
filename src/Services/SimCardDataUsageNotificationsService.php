@@ -30,7 +30,7 @@ final class SimCardDataUsageNotificationsService implements SimCardDataUsageNoti
      * Creates a new SIM card data usage notification.
      *
      * @param array{
-     *   sim_card_id: string, threshold: array{amount?: string, unit?: "MB"|"GB"}
+     *   sim_card_id: string, threshold: array{amount?: string, unit?: 'MB'|'GB'}
      * }|SimCardDataUsageNotificationCreateParams $params
      *
      * @throws APIException
@@ -80,7 +80,7 @@ final class SimCardDataUsageNotificationsService implements SimCardDataUsageNoti
      * Updates information for a SIM Card Data Usage Notification.
      *
      * @param array{
-     *   sim_card_id?: string, threshold?: array{amount?: string, unit?: "MB"|"GB"}
+     *   sim_card_id?: string, threshold?: array{amount?: string, unit?: 'MB'|'GB'}
      * }|SimCardDataUsageNotificationUpdateParams $params
      *
      * @throws APIException

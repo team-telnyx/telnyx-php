@@ -28,7 +28,7 @@ final class MigrationSourcesService implements MigrationSourcesContract
      *
      * @param array{
      *   bucket_name: string,
-     *   provider: "aws"|"telnyx",
+     *   provider: 'aws'|'telnyx',
      *   provider_auth: array{access_key?: string, secret_access_key?: string},
      *   source_region?: string,
      * }|MigrationSourceCreateParams $params

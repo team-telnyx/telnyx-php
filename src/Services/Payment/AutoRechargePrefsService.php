@@ -27,7 +27,7 @@ final class AutoRechargePrefsService implements AutoRechargePrefsContract
      * @param array{
      *   enabled?: bool,
      *   invoice_enabled?: bool,
-     *   preference?: "credit_paypal"|"ach",
+     *   preference?: 'credit_paypal'|'ach',
      *   recharge_amount?: string,
      *   threshold_amount?: string,
      * }|AutoRechargePrefUpdateParams $params

@@ -24,7 +24,7 @@ final class SiprecService implements SiprecContract
      * Updates siprec session identified by siprec_sid.
      *
      * @param array{
-     *   account_sid: string, call_sid: string, Status?: "stopped"
+     *   account_sid: string, call_sid: string, Status?: 'stopped'
      * }|SiprecSiprecSidJsonParams $params
      *
      * @throws APIException

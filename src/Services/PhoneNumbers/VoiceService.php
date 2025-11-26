@@ -53,19 +53,19 @@ final class VoiceService implements VoiceContract
      * @param array{
      *   call_forwarding?: array{
      *     call_forwarding_enabled?: bool,
-     *     forwarding_type?: "always"|"on-failure",
+     *     forwarding_type?: 'always'|'on-failure',
      *     forwards_to?: string,
      *   }|CallForwarding,
      *   call_recording?: array{
-     *     inbound_call_recording_channels?: "single"|"dual",
+     *     inbound_call_recording_channels?: 'single'|'dual',
      *     inbound_call_recording_enabled?: bool,
-     *     inbound_call_recording_format?: "wav"|"mp3",
+     *     inbound_call_recording_format?: 'wav'|'mp3',
      *   }|CallRecording,
      *   caller_id_name_enabled?: bool,
      *   cnam_listing?: array{
      *     cnam_listing_details?: string, cnam_listing_enabled?: bool
      *   }|CnamListing,
-     *   inbound_call_screening?: "disabled"|"reject_calls"|"flag_calls",
+     *   inbound_call_screening?: 'disabled'|'reject_calls'|'flag_calls',
      *   media_features?: array{
      *     accept_any_rtp_packets_enabled?: bool,
      *     rtp_auto_adjust_enabled?: bool,
@@ -73,7 +73,7 @@ final class VoiceService implements VoiceContract
      *   }|MediaFeatures,
      *   tech_prefix_enabled?: bool,
      *   translated_number?: string,
-     *   usage_payment_method?: "pay-per-minute"|"channel",
+     *   usage_payment_method?: 'pay-per-minute'|'channel',
      * }|VoiceUpdateParams $params
      *
      * @throws APIException
@@ -108,10 +108,10 @@ final class VoiceService implements VoiceContract
      *     connection_name?: array{contains?: string},
      *     customer_reference?: string,
      *     phone_number?: string,
-     *     'voice.usage_payment_method'?: "pay-per-minute"|"channel",
+     *     'voice.usage_payment_method'?: 'pay-per-minute'|'channel',
      *   },
      *   page?: array{number?: int, size?: int},
-     *   sort?: "purchased_at"|"phone_number"|"connection_name"|"usage_payment_method",
+     *   sort?: 'purchased_at'|'phone_number'|'connection_name'|'usage_payment_method',
      * }|VoiceListParams $params
      *
      * @throws APIException
