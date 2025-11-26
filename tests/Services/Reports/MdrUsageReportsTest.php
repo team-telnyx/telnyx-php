@@ -106,7 +106,7 @@ final class MdrUsageReportsTest extends TestCase
         }
 
         $result = $this->client->reports->mdrUsageReports->fetchSync([
-            'aggregation_type' => 'NO_AGGREGATION',
+            'aggregation_type' => 'PROFILE',
         ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -120,7 +120,7 @@ final class MdrUsageReportsTest extends TestCase
         }
 
         $result = $this->client->reports->mdrUsageReports->fetchSync([
-            'aggregation_type' => 'NO_AGGREGATION',
+            'aggregation_type' => 'PROFILE',
         ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
