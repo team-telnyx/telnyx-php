@@ -6,6 +6,10 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\NotificationSettings\NotificationSettingDeleteResponse;
+use Telnyx\NotificationSettings\NotificationSettingGetResponse;
+use Telnyx\NotificationSettings\NotificationSettingListResponse;
+use Telnyx\NotificationSettings\NotificationSettingNewResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -35,7 +39,8 @@ final class NotificationSettingsTest extends TestCase
 
         $result = $this->client->notificationSettings->create([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(NotificationSettingNewResponse::class, $result);
     }
 
     #[Test]
@@ -49,7 +54,8 @@ final class NotificationSettingsTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(NotificationSettingGetResponse::class, $result);
     }
 
     #[Test]
@@ -61,7 +67,8 @@ final class NotificationSettingsTest extends TestCase
 
         $result = $this->client->notificationSettings->list([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(NotificationSettingListResponse::class, $result);
     }
 
     #[Test]
@@ -75,6 +82,7 @@ final class NotificationSettingsTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(NotificationSettingDeleteResponse::class, $result);
     }
 }

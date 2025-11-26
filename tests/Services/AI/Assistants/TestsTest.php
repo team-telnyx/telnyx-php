@@ -5,6 +5,8 @@ namespace Tests\Services\AI\Assistants;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Telnyx\AI\Assistants\Tests\AssistantTest;
+use Telnyx\AI\Assistants\Tests\TestListResponse;
 use Telnyx\Client;
 use Tests\UnsupportedMockTests;
 
@@ -49,7 +51,8 @@ final class TestsTest extends TestCase
             ],
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(AssistantTest::class, $result);
     }
 
     #[Test]
@@ -73,9 +76,14 @@ final class TestsTest extends TestCase
                     'name' => 'Accuracy',
                 ],
             ],
+            'description' => 'description',
+            'max_duration_seconds' => 1,
+            'telnyx_conversation_channel' => 'web_chat',
+            'test_suite' => 'test_suite',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(AssistantTest::class, $result);
     }
 
     #[Test]
@@ -87,7 +95,8 @@ final class TestsTest extends TestCase
 
         $result = $this->client->ai->assistants->tests->retrieve('test_id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(AssistantTest::class, $result);
     }
 
     #[Test]
@@ -99,7 +108,8 @@ final class TestsTest extends TestCase
 
         $result = $this->client->ai->assistants->tests->update('test_id', []);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(AssistantTest::class, $result);
     }
 
     #[Test]
@@ -111,7 +121,8 @@ final class TestsTest extends TestCase
 
         $result = $this->client->ai->assistants->tests->list([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(TestListResponse::class, $result);
     }
 
     #[Test]
@@ -123,6 +134,7 @@ final class TestsTest extends TestCase
 
         $result = $this->client->ai->assistants->tests->delete('test_id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertTrue($result);
     }
 }

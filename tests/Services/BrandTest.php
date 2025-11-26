@@ -5,6 +5,10 @@ namespace Tests\Services;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Telnyx\Brand\BrandGetFeedbackResponse;
+use Telnyx\Brand\BrandGetResponse;
+use Telnyx\Brand\BrandListResponse;
+use Telnyx\Brand\TelnyxBrand;
 use Telnyx\Client;
 use Tests\UnsupportedMockTests;
 
@@ -41,7 +45,8 @@ final class BrandTest extends TestCase
             'vertical' => 'TECHNOLOGY',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(TelnyxBrand::class, $result);
     }
 
     #[Test]
@@ -57,9 +62,29 @@ final class BrandTest extends TestCase
             'email' => 'email',
             'entityType' => 'PRIVATE_PROFIT',
             'vertical' => 'TECHNOLOGY',
+            'businessContactEmail' => 'name@example.com',
+            'city' => 'New York',
+            'companyName' => 'ABC Inc.',
+            'ein' => '111111111',
+            'firstName' => 'John',
+            'ipAddress' => 'ipAddress',
+            'isReseller' => true,
+            'lastName' => 'Smith',
+            'mobilePhone' => '+12024567890',
+            'mock' => true,
+            'phone' => '+12024567890',
+            'postalCode' => '10001',
+            'state' => 'NY',
+            'stockExchange' => 'NASDAQ',
+            'stockSymbol' => 'ABC',
+            'street' => '123',
+            'webhookFailoverURL' => 'https://webhook.com/9010a453-4df8-4be6-a551-1070892888d6',
+            'webhookURL' => 'https://webhook.com/67ea78a8-9f32-4d04-b62d-f9502e8e5f93',
+            'website' => 'http://www.abcmobile.com',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(TelnyxBrand::class, $result);
     }
 
     #[Test]
@@ -71,7 +96,8 @@ final class BrandTest extends TestCase
 
         $result = $this->client->brand->retrieve('brandId');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(BrandGetResponse::class, $result);
     }
 
     #[Test]
@@ -92,7 +118,8 @@ final class BrandTest extends TestCase
             ],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(TelnyxBrand::class, $result);
     }
 
     #[Test]
@@ -110,10 +137,31 @@ final class BrandTest extends TestCase
                 'email' => 'email',
                 'entityType' => 'PRIVATE_PROFIT',
                 'vertical' => 'TECHNOLOGY',
+                'altBusiness_id' => 'altBusiness_id',
+                'altBusinessIdType' => 'NONE',
+                'businessContactEmail' => 'name@example.com',
+                'city' => 'New York',
+                'companyName' => 'ABC Inc.',
+                'ein' => '111111111',
+                'firstName' => 'John',
+                'identityStatus' => 'VERIFIED',
+                'ipAddress' => 'ipAddress',
+                'isReseller' => true,
+                'lastName' => 'Smith',
+                'phone' => '+12024567890',
+                'postalCode' => '10001',
+                'state' => 'NY',
+                'stockExchange' => 'NASDAQ',
+                'stockSymbol' => 'ABC',
+                'street' => '123',
+                'webhookFailoverURL' => 'https://webhook.com/9010a453-4df8-4be6-a551-1070892888d6',
+                'webhookURL' => 'https://webhook.com/67ea78a8-9f32-4d04-b62d-f9502e8e5f93',
+                'website' => 'http://www.abcmobile.com',
             ],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(TelnyxBrand::class, $result);
     }
 
     #[Test]
@@ -125,7 +173,8 @@ final class BrandTest extends TestCase
 
         $result = $this->client->brand->list([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(BrandListResponse::class, $result);
     }
 
     #[Test]
@@ -137,7 +186,8 @@ final class BrandTest extends TestCase
 
         $result = $this->client->brand->delete('brandId');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertTrue($result);
     }
 
     #[Test]
@@ -149,7 +199,8 @@ final class BrandTest extends TestCase
 
         $result = $this->client->brand->getFeedback('brandId');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(BrandGetFeedbackResponse::class, $result);
     }
 
     #[Test]
@@ -161,7 +212,8 @@ final class BrandTest extends TestCase
 
         $result = $this->client->brand->resend2faEmail('brandId');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertNull($result);
     }
 
     #[Test]
@@ -173,6 +225,7 @@ final class BrandTest extends TestCase
 
         $result = $this->client->brand->revet('brandId');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertTrue($result);
     }
 }

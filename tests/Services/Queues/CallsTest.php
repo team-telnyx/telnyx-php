@@ -6,6 +6,8 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\Queues\Calls\CallGetResponse;
+use Telnyx\Queues\Calls\CallListResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -38,7 +40,8 @@ final class CallsTest extends TestCase
             ['queue_name' => 'queue_name']
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CallGetResponse::class, $result);
     }
 
     #[Test]
@@ -53,7 +56,8 @@ final class CallsTest extends TestCase
             ['queue_name' => 'queue_name']
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CallGetResponse::class, $result);
     }
 
     #[Test]
@@ -68,7 +72,8 @@ final class CallsTest extends TestCase
             ['queue_name' => 'queue_name']
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertNull($result);
     }
 
     #[Test]
@@ -80,10 +85,11 @@ final class CallsTest extends TestCase
 
         $result = $this->client->queues->calls->update(
             'call_control_id',
-            ['queue_name' => 'queue_name']
+            ['queue_name' => 'queue_name', 'keep_after_hangup' => true],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertNull($result);
     }
 
     #[Test]
@@ -95,7 +101,8 @@ final class CallsTest extends TestCase
 
         $result = $this->client->queues->calls->list('queue_name', []);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CallListResponse::class, $result);
     }
 
     #[Test]
@@ -110,7 +117,8 @@ final class CallsTest extends TestCase
             ['queue_name' => 'queue_name']
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertNull($result);
     }
 
     #[Test]
@@ -125,6 +133,7 @@ final class CallsTest extends TestCase
             ['queue_name' => 'queue_name']
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertNull($result);
     }
 }

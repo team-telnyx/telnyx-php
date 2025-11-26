@@ -35,6 +35,7 @@ final class EnumTest extends TestCase
 
         $result = $this->client->enum->retrieve('mno');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertNotNull($result);
     }
 }

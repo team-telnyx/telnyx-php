@@ -6,6 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\SimCardOrderPreview\SimCardOrderPreviewPreviewResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -37,7 +38,8 @@ final class SimCardOrderPreviewTest extends TestCase
             'address_id' => '1293384261075731499', 'quantity' => 21,
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(SimCardOrderPreviewPreviewResponse::class, $result);
     }
 
     #[Test]
@@ -51,6 +53,7 @@ final class SimCardOrderPreviewTest extends TestCase
             'address_id' => '1293384261075731499', 'quantity' => 21,
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(SimCardOrderPreviewPreviewResponse::class, $result);
     }
 }

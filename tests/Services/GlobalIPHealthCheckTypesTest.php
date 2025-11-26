@@ -6,6 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\GlobalIPHealthCheckTypes\GlobalIPHealthCheckTypeListResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -35,6 +36,10 @@ final class GlobalIPHealthCheckTypesTest extends TestCase
 
         $result = $this->client->globalIPHealthCheckTypes->list();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            GlobalIPHealthCheckTypeListResponse::class,
+            $result
+        );
     }
 }

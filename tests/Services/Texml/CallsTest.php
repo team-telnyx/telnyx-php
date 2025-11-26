@@ -6,6 +6,8 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\Texml\Calls\CallInitiateResponse;
+use Telnyx\Texml\Calls\CallUpdateResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -35,7 +37,8 @@ final class CallsTest extends TestCase
 
         $result = $this->client->texml->calls->update('call_sid', []);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CallUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -50,7 +53,8 @@ final class CallsTest extends TestCase
             ['From' => '+13120001234', 'To' => '+13121230000']
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CallInitiateResponse::class, $result);
     }
 
     #[Test]
@@ -62,9 +66,42 @@ final class CallsTest extends TestCase
 
         $result = $this->client->texml->calls->initiate(
             'application_id',
-            ['From' => '+13120001234', 'To' => '+13121230000']
+            [
+                'From' => '+13120001234',
+                'To' => '+13121230000',
+                'AsyncAmd' => true,
+                'AsyncAmdStatusCallback' => 'https://www.example.com/callback',
+                'AsyncAmdStatusCallbackMethod' => 'GET',
+                'CallerId' => 'Info',
+                'CancelPlaybackOnDetectMessageEnd' => false,
+                'CancelPlaybackOnMachineDetection' => false,
+                'DetectionMode' => 'Premium',
+                'FallbackUrl' => 'https://www.example.com/instructions-fallback.xml',
+                'MachineDetection' => 'Enable',
+                'MachineDetectionSilenceTimeout' => 2000,
+                'MachineDetectionSpeechEndThreshold' => 2000,
+                'MachineDetectionSpeechThreshold' => 2000,
+                'MachineDetectionTimeout' => 5000,
+                'PreferredCodecs' => 'PCMA,PCMU',
+                'Record' => false,
+                'RecordingChannels' => 'dual',
+                'RecordingStatusCallback' => 'https://example.com/recording_status_callback',
+                'RecordingStatusCallbackEvent' => 'in-progress completed absent',
+                'RecordingStatusCallbackMethod' => 'GET',
+                'RecordingTimeout' => 5,
+                'RecordingTrack' => 'inbound',
+                'SipAuthPassword' => '1234',
+                'SipAuthUsername' => 'user',
+                'StatusCallback' => 'https://www.example.com/statuscallback-listener',
+                'StatusCallbackEvent' => 'initiated',
+                'StatusCallbackMethod' => 'GET',
+                'Trim' => 'trim-silence',
+                'Url' => 'https://www.example.com/texml.xml',
+                'UrlMethod' => 'GET',
+            ],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CallInitiateResponse::class, $result);
     }
 }

@@ -6,6 +6,9 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberGetResponse;
+use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberListResponse;
+use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberUpdateResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -38,7 +41,8 @@ final class PhoneNumbersTest extends TestCase
             ['id' => 'id']
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(PhoneNumberGetResponse::class, $result);
     }
 
     #[Test]
@@ -53,7 +57,8 @@ final class PhoneNumbersTest extends TestCase
             ['id' => 'id']
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(PhoneNumberGetResponse::class, $result);
     }
 
     #[Test]
@@ -68,7 +73,8 @@ final class PhoneNumbersTest extends TestCase
             ['id' => 'id']
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(PhoneNumberUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -80,10 +86,11 @@ final class PhoneNumbersTest extends TestCase
 
         $result = $this->client->externalConnections->phoneNumbers->update(
             '1234567889',
-            ['id' => 'id']
+            ['id' => 'id', 'location_id' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(PhoneNumberUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -95,6 +102,7 @@ final class PhoneNumbersTest extends TestCase
 
         $result = $this->client->externalConnections->phoneNumbers->list('id', []);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(PhoneNumberListResponse::class, $result);
     }
 }

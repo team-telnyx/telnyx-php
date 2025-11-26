@@ -35,7 +35,8 @@ final class AdvancedOrdersTest extends TestCase
 
         $result = $this->client->advancedOrders->create([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertTrue($result);
     }
 
     #[Test]
@@ -49,7 +50,8 @@ final class AdvancedOrdersTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertTrue($result);
     }
 
     #[Test]
@@ -61,7 +63,8 @@ final class AdvancedOrdersTest extends TestCase
 
         $result = $this->client->advancedOrders->list();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertTrue($result);
     }
 
     #[Test]
@@ -76,6 +79,7 @@ final class AdvancedOrdersTest extends TestCase
             []
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertTrue($result);
     }
 }

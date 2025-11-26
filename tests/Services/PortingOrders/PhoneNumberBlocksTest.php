@@ -6,6 +6,9 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockDeleteResponse;
+use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListResponse;
+use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockNewResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -45,7 +48,8 @@ final class PhoneNumberBlocksTest extends TestCase
             ],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(PhoneNumberBlockNewResponse::class, $result);
     }
 
     #[Test]
@@ -67,7 +71,8 @@ final class PhoneNumberBlocksTest extends TestCase
             ],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(PhoneNumberBlockNewResponse::class, $result);
     }
 
     #[Test]
@@ -82,7 +87,8 @@ final class PhoneNumberBlocksTest extends TestCase
             []
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(PhoneNumberBlockListResponse::class, $result);
     }
 
     #[Test]
@@ -97,7 +103,8 @@ final class PhoneNumberBlocksTest extends TestCase
             ['porting_order_id' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(PhoneNumberBlockDeleteResponse::class, $result);
     }
 
     #[Test]
@@ -112,6 +119,7 @@ final class PhoneNumberBlocksTest extends TestCase
             ['porting_order_id' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(PhoneNumberBlockDeleteResponse::class, $result);
     }
 }

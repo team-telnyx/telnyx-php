@@ -6,6 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\RegulatoryRequirements\RegulatoryRequirementGetResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -35,6 +36,7 @@ final class RegulatoryRequirementsTest extends TestCase
 
         $result = $this->client->regulatoryRequirements->retrieve([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(RegulatoryRequirementGetResponse::class, $result);
     }
 }

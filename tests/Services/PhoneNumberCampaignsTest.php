@@ -6,6 +6,8 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\PhoneNumberCampaigns\PhoneNumberCampaign;
+use Telnyx\PhoneNumberCampaigns\PhoneNumberCampaignListResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -38,7 +40,8 @@ final class PhoneNumberCampaignsTest extends TestCase
             'phoneNumber' => '+18005550199',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(PhoneNumberCampaign::class, $result);
     }
 
     #[Test]
@@ -53,7 +56,8 @@ final class PhoneNumberCampaignsTest extends TestCase
             'phoneNumber' => '+18005550199',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(PhoneNumberCampaign::class, $result);
     }
 
     #[Test]
@@ -65,7 +69,8 @@ final class PhoneNumberCampaignsTest extends TestCase
 
         $result = $this->client->phoneNumberCampaigns->retrieve('phoneNumber');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(PhoneNumberCampaign::class, $result);
     }
 
     #[Test]
@@ -83,7 +88,8 @@ final class PhoneNumberCampaignsTest extends TestCase
             ],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(PhoneNumberCampaign::class, $result);
     }
 
     #[Test]
@@ -101,7 +107,8 @@ final class PhoneNumberCampaignsTest extends TestCase
             ],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(PhoneNumberCampaign::class, $result);
     }
 
     #[Test]
@@ -113,7 +120,8 @@ final class PhoneNumberCampaignsTest extends TestCase
 
         $result = $this->client->phoneNumberCampaigns->list([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(PhoneNumberCampaignListResponse::class, $result);
     }
 
     #[Test]
@@ -125,6 +133,7 @@ final class PhoneNumberCampaignsTest extends TestCase
 
         $result = $this->client->phoneNumberCampaigns->delete('phoneNumber');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(PhoneNumberCampaign::class, $result);
     }
 }

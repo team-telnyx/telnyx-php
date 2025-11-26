@@ -6,6 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\Reports\CdrUsageReports\CdrUsageReportFetchSyncResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -38,7 +39,8 @@ final class CdrUsageReportsTest extends TestCase
             'product_breakdown' => 'NO_BREAKDOWN',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CdrUsageReportFetchSyncResponse::class, $result);
     }
 
     #[Test]
@@ -51,8 +53,12 @@ final class CdrUsageReportsTest extends TestCase
         $result = $this->client->reports->cdrUsageReports->fetchSync([
             'aggregation_type' => 'NO_AGGREGATION',
             'product_breakdown' => 'NO_BREAKDOWN',
+            'connections' => [1234567890123],
+            'end_date' => '2020-07-01T00:00:00-06:00',
+            'start_date' => '2020-07-01T00:00:00-06:00',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CdrUsageReportFetchSyncResponse::class, $result);
     }
 }

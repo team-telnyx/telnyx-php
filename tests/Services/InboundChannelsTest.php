@@ -6,6 +6,8 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\InboundChannels\InboundChannelListResponse;
+use Telnyx\InboundChannels\InboundChannelUpdateResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -35,7 +37,8 @@ final class InboundChannelsTest extends TestCase
 
         $result = $this->client->inboundChannels->update(['channels' => 7]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(InboundChannelUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -47,7 +50,8 @@ final class InboundChannelsTest extends TestCase
 
         $result = $this->client->inboundChannels->update(['channels' => 7]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(InboundChannelUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -59,6 +63,7 @@ final class InboundChannelsTest extends TestCase
 
         $result = $this->client->inboundChannels->list();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(InboundChannelListResponse::class, $result);
     }
 }

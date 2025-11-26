@@ -6,6 +6,12 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\SimCardGroups\Actions\ActionGetResponse;
+use Telnyx\SimCardGroups\Actions\ActionListResponse;
+use Telnyx\SimCardGroups\Actions\ActionRemovePrivateWirelessGatewayResponse;
+use Telnyx\SimCardGroups\Actions\ActionRemoveWirelessBlocklistResponse;
+use Telnyx\SimCardGroups\Actions\ActionSetPrivateWirelessGatewayResponse;
+use Telnyx\SimCardGroups\Actions\ActionSetWirelessBlocklistResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -37,7 +43,8 @@ final class ActionsTest extends TestCase
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ActionGetResponse::class, $result);
     }
 
     #[Test]
@@ -49,7 +56,8 @@ final class ActionsTest extends TestCase
 
         $result = $this->client->simCardGroups->actions->list([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ActionListResponse::class, $result);
     }
 
     #[Test]
@@ -66,7 +74,11 @@ final class ActionsTest extends TestCase
             ->removePrivateWirelessGateway('6a09cdc3-8948-47f0-aa62-74ac943d6c58')
         ;
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            ActionRemovePrivateWirelessGatewayResponse::class,
+            $result
+        );
     }
 
     #[Test]
@@ -80,7 +92,11 @@ final class ActionsTest extends TestCase
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            ActionRemoveWirelessBlocklistResponse::class,
+            $result
+        );
     }
 
     #[Test]
@@ -95,7 +111,11 @@ final class ActionsTest extends TestCase
             ['private_wireless_gateway_id' => '6a09cdc3-8948-47f0-aa62-74ac943d6c58'],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            ActionSetPrivateWirelessGatewayResponse::class,
+            $result
+        );
     }
 
     #[Test]
@@ -110,7 +130,11 @@ final class ActionsTest extends TestCase
             ['private_wireless_gateway_id' => '6a09cdc3-8948-47f0-aa62-74ac943d6c58'],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            ActionSetPrivateWirelessGatewayResponse::class,
+            $result
+        );
     }
 
     #[Test]
@@ -125,7 +149,8 @@ final class ActionsTest extends TestCase
             ['wireless_blocklist_id' => '6a09cdc3-8948-47f0-aa62-74ac943d6c58'],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ActionSetWirelessBlocklistResponse::class, $result);
     }
 
     #[Test]
@@ -140,6 +165,7 @@ final class ActionsTest extends TestCase
             ['wireless_blocklist_id' => '6a09cdc3-8948-47f0-aa62-74ac943d6c58'],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ActionSetWirelessBlocklistResponse::class, $result);
     }
 }

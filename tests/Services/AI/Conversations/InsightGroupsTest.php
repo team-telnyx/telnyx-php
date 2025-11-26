@@ -5,6 +5,8 @@ namespace Tests\Services\AI\Conversations;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Telnyx\AI\Conversations\InsightGroups\InsightGroupGetInsightGroupsResponse;
+use Telnyx\AI\Conversations\InsightGroups\InsightTemplateGroupDetail;
 use Telnyx\Client;
 use Tests\UnsupportedMockTests;
 
@@ -37,7 +39,8 @@ final class InsightGroupsTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(InsightTemplateGroupDetail::class, $result);
     }
 
     #[Test]
@@ -52,7 +55,8 @@ final class InsightGroupsTest extends TestCase
             []
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(InsightTemplateGroupDetail::class, $result);
     }
 
     #[Test]
@@ -66,7 +70,8 @@ final class InsightGroupsTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertTrue($result);
     }
 
     #[Test]
@@ -80,7 +85,8 @@ final class InsightGroupsTest extends TestCase
             'name' => 'name',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(InsightTemplateGroupDetail::class, $result);
     }
 
     #[Test]
@@ -91,10 +97,11 @@ final class InsightGroupsTest extends TestCase
         }
 
         $result = $this->client->ai->conversations->insightGroups->insightGroups([
-            'name' => 'name',
+            'name' => 'name', 'description' => 'description', 'webhook' => 'webhook',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(InsightTemplateGroupDetail::class, $result);
     }
 
     #[Test]
@@ -112,6 +119,10 @@ final class InsightGroupsTest extends TestCase
             ->retrieveInsightGroups([])
         ;
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            InsightGroupGetInsightGroupsResponse::class,
+            $result
+        );
     }
 }

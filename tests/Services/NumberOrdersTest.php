@@ -6,6 +6,10 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\NumberOrders\NumberOrderGetResponse;
+use Telnyx\NumberOrders\NumberOrderListResponse;
+use Telnyx\NumberOrders\NumberOrderNewResponse;
+use Telnyx\NumberOrders\NumberOrderUpdateResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -35,7 +39,8 @@ final class NumberOrdersTest extends TestCase
 
         $result = $this->client->numberOrders->create([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(NumberOrderNewResponse::class, $result);
     }
 
     #[Test]
@@ -47,7 +52,8 @@ final class NumberOrdersTest extends TestCase
 
         $result = $this->client->numberOrders->retrieve('number_order_id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(NumberOrderGetResponse::class, $result);
     }
 
     #[Test]
@@ -59,7 +65,8 @@ final class NumberOrdersTest extends TestCase
 
         $result = $this->client->numberOrders->update('number_order_id', []);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(NumberOrderUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -71,6 +78,7 @@ final class NumberOrdersTest extends TestCase
 
         $result = $this->client->numberOrders->list([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(NumberOrderListResponse::class, $result);
     }
 }

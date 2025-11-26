@@ -6,6 +6,10 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\Portouts\PortoutGetResponse;
+use Telnyx\Portouts\PortoutListRejectionCodesResponse;
+use Telnyx\Portouts\PortoutListResponse;
+use Telnyx\Portouts\PortoutUpdateStatusResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -37,7 +41,8 @@ final class PortoutsTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(PortoutGetResponse::class, $result);
     }
 
     #[Test]
@@ -49,7 +54,8 @@ final class PortoutsTest extends TestCase
 
         $result = $this->client->portouts->list([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(PortoutListResponse::class, $result);
     }
 
     #[Test]
@@ -64,7 +70,8 @@ final class PortoutsTest extends TestCase
             []
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(PortoutListRejectionCodesResponse::class, $result);
     }
 
     #[Test]
@@ -82,7 +89,8 @@ final class PortoutsTest extends TestCase
             ],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(PortoutUpdateStatusResponse::class, $result);
     }
 
     #[Test]
@@ -97,9 +105,11 @@ final class PortoutsTest extends TestCase
             [
                 'id' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
                 'reason' => 'I do not recognize this transaction',
+                'host_messaging' => false,
             ],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(PortoutUpdateStatusResponse::class, $result);
     }
 }

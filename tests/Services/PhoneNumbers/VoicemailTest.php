@@ -6,6 +6,9 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\PhoneNumbers\Voicemail\VoicemailGetResponse;
+use Telnyx\PhoneNumbers\Voicemail\VoicemailNewResponse;
+use Telnyx\PhoneNumbers\Voicemail\VoicemailUpdateResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -38,7 +41,8 @@ final class VoicemailTest extends TestCase
             []
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(VoicemailNewResponse::class, $result);
     }
 
     #[Test]
@@ -50,7 +54,8 @@ final class VoicemailTest extends TestCase
 
         $result = $this->client->phoneNumbers->voicemail->retrieve('123455678900');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(VoicemailGetResponse::class, $result);
     }
 
     #[Test]
@@ -65,6 +70,7 @@ final class VoicemailTest extends TestCase
             []
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(VoicemailUpdateResponse::class, $result);
     }
 }

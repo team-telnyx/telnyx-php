@@ -5,6 +5,8 @@ namespace Tests\Services\AI\Embeddings;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Telnyx\AI\Embeddings\Buckets\BucketGetResponse;
+use Telnyx\AI\Embeddings\Buckets\BucketListResponse;
 use Telnyx\Client;
 use Tests\UnsupportedMockTests;
 
@@ -35,7 +37,8 @@ final class BucketsTest extends TestCase
 
         $result = $this->client->ai->embeddings->buckets->retrieve('bucket_name');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(BucketGetResponse::class, $result);
     }
 
     #[Test]
@@ -47,7 +50,8 @@ final class BucketsTest extends TestCase
 
         $result = $this->client->ai->embeddings->buckets->list();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(BucketListResponse::class, $result);
     }
 
     #[Test]
@@ -59,6 +63,7 @@ final class BucketsTest extends TestCase
 
         $result = $this->client->ai->embeddings->buckets->delete('bucket_name');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertNull($result);
     }
 }

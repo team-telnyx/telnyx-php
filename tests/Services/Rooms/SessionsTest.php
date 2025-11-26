@@ -6,6 +6,10 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\Rooms\Sessions\SessionGetParticipantsResponse;
+use Telnyx\Rooms\Sessions\SessionGetResponse;
+use Telnyx\Rooms\Sessions\SessionList0Response;
+use Telnyx\Rooms\Sessions\SessionList1Response;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -38,7 +42,8 @@ final class SessionsTest extends TestCase
             []
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(SessionGetResponse::class, $result);
     }
 
     #[Test]
@@ -50,7 +55,8 @@ final class SessionsTest extends TestCase
 
         $result = $this->client->rooms->sessions->list0([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(SessionList0Response::class, $result);
     }
 
     #[Test]
@@ -65,7 +71,8 @@ final class SessionsTest extends TestCase
             []
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(SessionList1Response::class, $result);
     }
 
     #[Test]
@@ -80,6 +87,7 @@ final class SessionsTest extends TestCase
             []
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(SessionGetParticipantsResponse::class, $result);
     }
 }

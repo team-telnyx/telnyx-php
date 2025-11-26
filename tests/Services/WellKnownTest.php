@@ -6,6 +6,8 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\WellKnown\WellKnownGetAuthorizationServerMetadataResponse;
+use Telnyx\WellKnown\WellKnownGetProtectedResourceMetadataResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -35,7 +37,11 @@ final class WellKnownTest extends TestCase
 
         $result = $this->client->wellKnown->retrieveAuthorizationServerMetadata();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            WellKnownGetAuthorizationServerMetadataResponse::class,
+            $result
+        );
     }
 
     #[Test]
@@ -47,6 +53,10 @@ final class WellKnownTest extends TestCase
 
         $result = $this->client->wellKnown->retrieveProtectedResourceMetadata();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            WellKnownGetProtectedResourceMetadataResponse::class,
+            $result
+        );
     }
 }

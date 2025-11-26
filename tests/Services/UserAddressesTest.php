@@ -6,6 +6,9 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\UserAddresses\UserAddressGetResponse;
+use Telnyx\UserAddresses\UserAddressListResponse;
+use Telnyx\UserAddresses\UserAddressNewResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -42,7 +45,8 @@ final class UserAddressesTest extends TestCase
             'street_address' => '600 Congress Avenue',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(UserAddressNewResponse::class, $result);
     }
 
     #[Test]
@@ -59,9 +63,18 @@ final class UserAddressesTest extends TestCase
             'last_name' => 'Foster',
             'locality' => 'Austin',
             'street_address' => '600 Congress Avenue',
+            'administrative_area' => 'TX',
+            'borough' => 'Guadalajara',
+            'customer_reference' => 'MY REF 001',
+            'extended_address' => '14th Floor',
+            'neighborhood' => 'Ciudad de los deportes',
+            'phone_number' => '+12125559000',
+            'postal_code' => '78701',
+            'skip_address_verification' => 'skip_address_verification',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(UserAddressNewResponse::class, $result);
     }
 
     #[Test]
@@ -73,7 +86,8 @@ final class UserAddressesTest extends TestCase
 
         $result = $this->client->userAddresses->retrieve('id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(UserAddressGetResponse::class, $result);
     }
 
     #[Test]
@@ -85,6 +99,7 @@ final class UserAddressesTest extends TestCase
 
         $result = $this->client->userAddresses->list([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(UserAddressListResponse::class, $result);
     }
 }

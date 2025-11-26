@@ -6,6 +6,9 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\VerifiedNumbers\VerifiedNumberDataWrapper;
+use Telnyx\VerifiedNumbers\VerifiedNumberListResponse;
+use Telnyx\VerifiedNumbers\VerifiedNumberNewResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -37,7 +40,8 @@ final class VerifiedNumbersTest extends TestCase
             'phone_number' => '+15551234567', 'verification_method' => 'sms',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(VerifiedNumberNewResponse::class, $result);
     }
 
     #[Test]
@@ -48,10 +52,13 @@ final class VerifiedNumbersTest extends TestCase
         }
 
         $result = $this->client->verifiedNumbers->create([
-            'phone_number' => '+15551234567', 'verification_method' => 'sms',
+            'phone_number' => '+15551234567',
+            'verification_method' => 'sms',
+            'extension' => 'ww243w1',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(VerifiedNumberNewResponse::class, $result);
     }
 
     #[Test]
@@ -63,7 +70,8 @@ final class VerifiedNumbersTest extends TestCase
 
         $result = $this->client->verifiedNumbers->retrieve('+15551234567');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(VerifiedNumberDataWrapper::class, $result);
     }
 
     #[Test]
@@ -75,7 +83,8 @@ final class VerifiedNumbersTest extends TestCase
 
         $result = $this->client->verifiedNumbers->list([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(VerifiedNumberListResponse::class, $result);
     }
 
     #[Test]
@@ -87,6 +96,7 @@ final class VerifiedNumbersTest extends TestCase
 
         $result = $this->client->verifiedNumbers->delete('+15551234567');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(VerifiedNumberDataWrapper::class, $result);
     }
 }

@@ -5,6 +5,7 @@ namespace Tests\Services;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Telnyx\AvailablePhoneNumbers\AvailablePhoneNumberListResponse;
 use Telnyx\Client;
 use Tests\UnsupportedMockTests;
 
@@ -35,6 +36,7 @@ final class AvailablePhoneNumbersTest extends TestCase
 
         $result = $this->client->availablePhoneNumbers->list([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(AvailablePhoneNumberListResponse::class, $result);
     }
 }

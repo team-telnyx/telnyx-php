@@ -6,6 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\Texml\Accounts\Calls\Siprec\SiprecSiprecSidJsonResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -38,7 +39,8 @@ final class SiprecTest extends TestCase
             ['account_sid' => 'account_sid', 'call_sid' => 'call_sid']
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(SiprecSiprecSidJsonResponse::class, $result);
     }
 
     #[Test]
@@ -50,9 +52,14 @@ final class SiprecTest extends TestCase
 
         $result = $this->client->texml->accounts->calls->siprec->siprecSidJson(
             'siprec_sid',
-            ['account_sid' => 'account_sid', 'call_sid' => 'call_sid']
+            [
+                'account_sid' => 'account_sid',
+                'call_sid' => 'call_sid',
+                'Status' => 'stopped',
+            ],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(SiprecSiprecSidJsonResponse::class, $result);
     }
 }

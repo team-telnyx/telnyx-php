@@ -6,6 +6,10 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\Porting\LoaConfigurations\LoaConfigurationGetResponse;
+use Telnyx\Porting\LoaConfigurations\LoaConfigurationListResponse;
+use Telnyx\Porting\LoaConfigurations\LoaConfigurationNewResponse;
+use Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -49,7 +53,8 @@ final class LoaConfigurationsTest extends TestCase
             'name' => 'My LOA Configuration',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(LoaConfigurationNewResponse::class, $result);
     }
 
     #[Test]
@@ -76,7 +81,8 @@ final class LoaConfigurationsTest extends TestCase
             'name' => 'My LOA Configuration',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(LoaConfigurationNewResponse::class, $result);
     }
 
     #[Test]
@@ -90,7 +96,8 @@ final class LoaConfigurationsTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(LoaConfigurationGetResponse::class, $result);
     }
 
     #[Test]
@@ -119,7 +126,8 @@ final class LoaConfigurationsTest extends TestCase
             ],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(LoaConfigurationUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -149,7 +157,8 @@ final class LoaConfigurationsTest extends TestCase
             ],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(LoaConfigurationUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -161,7 +170,8 @@ final class LoaConfigurationsTest extends TestCase
 
         $result = $this->client->porting->loaConfigurations->list([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(LoaConfigurationListResponse::class, $result);
     }
 
     #[Test]
@@ -175,7 +185,8 @@ final class LoaConfigurationsTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertNull($result);
     }
 
     #[Test]
@@ -201,7 +212,8 @@ final class LoaConfigurationsTest extends TestCase
             'name' => 'My LOA Configuration',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertIsString($result);
     }
 
     #[Test]
@@ -228,7 +240,8 @@ final class LoaConfigurationsTest extends TestCase
             'name' => 'My LOA Configuration',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertIsString($result);
     }
 
     #[Test]
@@ -242,6 +255,7 @@ final class LoaConfigurationsTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertIsString($result);
     }
 }

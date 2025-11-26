@@ -6,6 +6,9 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\RoomRecordings\RoomRecordingDeleteBulkResponse;
+use Telnyx\RoomRecordings\RoomRecordingGetResponse;
+use Telnyx\RoomRecordings\RoomRecordingListResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -37,7 +40,8 @@ final class RoomRecordingsTest extends TestCase
             '0ccc7b54-4df3-4bca-a65a-3da1ecc777f0'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(RoomRecordingGetResponse::class, $result);
     }
 
     #[Test]
@@ -49,7 +53,8 @@ final class RoomRecordingsTest extends TestCase
 
         $result = $this->client->roomRecordings->list([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(RoomRecordingListResponse::class, $result);
     }
 
     #[Test]
@@ -63,7 +68,8 @@ final class RoomRecordingsTest extends TestCase
             '0ccc7b54-4df3-4bca-a65a-3da1ecc777f0'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertNull($result);
     }
 
     #[Test]
@@ -75,6 +81,7 @@ final class RoomRecordingsTest extends TestCase
 
         $result = $this->client->roomRecordings->deleteBulk([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(RoomRecordingDeleteBulkResponse::class, $result);
     }
 }

@@ -5,6 +5,7 @@ namespace Tests\Services\AI\Assistants;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Telnyx\AI\Assistants\ScheduledEvents\ScheduledEventListResponse;
 use Telnyx\Client;
 use Tests\UnsupportedMockTests;
 
@@ -43,7 +44,8 @@ final class ScheduledEventsTest extends TestCase
             ],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertNotNull($result);
     }
 
     #[Test]
@@ -60,10 +62,13 @@ final class ScheduledEventsTest extends TestCase
                 'telnyx_agent_target' => 'telnyx_agent_target',
                 'telnyx_conversation_channel' => 'phone_call',
                 'telnyx_end_user_target' => 'telnyx_end_user_target',
+                'conversation_metadata' => ['foo' => 'string'],
+                'text' => 'text',
             ],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertNotNull($result);
     }
 
     #[Test]
@@ -78,7 +83,8 @@ final class ScheduledEventsTest extends TestCase
             ['assistant_id' => 'assistant_id']
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertNotNull($result);
     }
 
     #[Test]
@@ -93,7 +99,8 @@ final class ScheduledEventsTest extends TestCase
             ['assistant_id' => 'assistant_id']
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertNotNull($result);
     }
 
     #[Test]
@@ -108,7 +115,8 @@ final class ScheduledEventsTest extends TestCase
             []
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ScheduledEventListResponse::class, $result);
     }
 
     #[Test]
@@ -123,7 +131,8 @@ final class ScheduledEventsTest extends TestCase
             ['assistant_id' => 'assistant_id']
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertTrue($result);
     }
 
     #[Test]
@@ -138,6 +147,7 @@ final class ScheduledEventsTest extends TestCase
             ['assistant_id' => 'assistant_id']
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertTrue($result);
     }
 }

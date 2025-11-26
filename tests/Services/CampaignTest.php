@@ -5,6 +5,12 @@ namespace Tests\Services;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Telnyx\Campaign\CampaignDeactivateResponse;
+use Telnyx\Campaign\CampaignGetMnoMetadataResponse;
+use Telnyx\Campaign\CampaignGetSharingStatusResponse;
+use Telnyx\Campaign\CampaignListResponse;
+use Telnyx\Campaign\CampaignSubmitAppealResponse;
+use Telnyx\Campaign\TelnyxCampaignCsp;
 use Telnyx\Client;
 use Tests\UnsupportedMockTests;
 
@@ -35,7 +41,8 @@ final class CampaignTest extends TestCase
 
         $result = $this->client->campaign->retrieve('campaignId');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(TelnyxCampaignCsp::class, $result);
     }
 
     #[Test]
@@ -47,7 +54,8 @@ final class CampaignTest extends TestCase
 
         $result = $this->client->campaign->update('campaignId', []);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(TelnyxCampaignCsp::class, $result);
     }
 
     #[Test]
@@ -59,7 +67,8 @@ final class CampaignTest extends TestCase
 
         $result = $this->client->campaign->list(['brandId' => 'brandId']);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CampaignListResponse::class, $result);
     }
 
     #[Test]
@@ -69,9 +78,15 @@ final class CampaignTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->campaign->list(['brandId' => 'brandId']);
+        $result = $this->client->campaign->list([
+            'brandId' => 'brandId',
+            'page' => 0,
+            'recordsPerPage' => 0,
+            'sort' => 'assignedPhoneNumbersCount',
+        ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CampaignListResponse::class, $result);
     }
 
     #[Test]
@@ -83,7 +98,8 @@ final class CampaignTest extends TestCase
 
         $result = $this->client->campaign->acceptSharing('C26F1KLZN');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertTrue($result);
     }
 
     #[Test]
@@ -95,7 +111,8 @@ final class CampaignTest extends TestCase
 
         $result = $this->client->campaign->deactivate('campaignId');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CampaignDeactivateResponse::class, $result);
     }
 
     #[Test]
@@ -107,7 +124,8 @@ final class CampaignTest extends TestCase
 
         $result = $this->client->campaign->getMnoMetadata('campaignId');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CampaignGetMnoMetadataResponse::class, $result);
     }
 
     #[Test]
@@ -119,7 +137,8 @@ final class CampaignTest extends TestCase
 
         $result = $this->client->campaign->getOperationStatus('campaignId');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertTrue($result);
     }
 
     #[Test]
@@ -131,7 +150,8 @@ final class CampaignTest extends TestCase
 
         $result = $this->client->campaign->getSharingStatus('campaignId');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CampaignGetSharingStatusResponse::class, $result);
     }
 
     #[Test]
@@ -148,7 +168,8 @@ final class CampaignTest extends TestCase
             ],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CampaignSubmitAppealResponse::class, $result);
     }
 
     #[Test]
@@ -165,6 +186,7 @@ final class CampaignTest extends TestCase
             ],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CampaignSubmitAppealResponse::class, $result);
     }
 }

@@ -6,6 +6,10 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointDeleteResponse;
+use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointGetResponse;
+use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointListResponse;
+use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointNewResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -39,7 +43,11 @@ final class DynamicEmergencyEndpointsTest extends TestCase
             'dynamic_emergency_address_id' => '0ccc7b54-4df3-4bca-a65a-3da1ecc777f0',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            DynamicEmergencyEndpointNewResponse::class,
+            $result
+        );
     }
 
     #[Test]
@@ -55,7 +63,11 @@ final class DynamicEmergencyEndpointsTest extends TestCase
             'dynamic_emergency_address_id' => '0ccc7b54-4df3-4bca-a65a-3da1ecc777f0',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            DynamicEmergencyEndpointNewResponse::class,
+            $result
+        );
     }
 
     #[Test]
@@ -69,7 +81,11 @@ final class DynamicEmergencyEndpointsTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            DynamicEmergencyEndpointGetResponse::class,
+            $result
+        );
     }
 
     #[Test]
@@ -81,7 +97,11 @@ final class DynamicEmergencyEndpointsTest extends TestCase
 
         $result = $this->client->dynamicEmergencyEndpoints->list([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            DynamicEmergencyEndpointListResponse::class,
+            $result
+        );
     }
 
     #[Test]
@@ -95,6 +115,10 @@ final class DynamicEmergencyEndpointsTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            DynamicEmergencyEndpointDeleteResponse::class,
+            $result
+        );
     }
 }

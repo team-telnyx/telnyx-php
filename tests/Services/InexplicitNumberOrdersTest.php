@@ -6,6 +6,9 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderGetResponse;
+use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderListResponse;
+use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderNewResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -43,7 +46,8 @@ final class InexplicitNumberOrdersTest extends TestCase
             ],
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(InexplicitNumberOrderNewResponse::class, $result);
     }
 
     #[Test]
@@ -71,9 +75,14 @@ final class InexplicitNumberOrdersTest extends TestCase
                     'strategy' => 'always',
                 ],
             ],
+            'billing_group_id' => 'billing_group_id',
+            'connection_id' => 'connection_id',
+            'customer_reference' => 'customer_reference',
+            'messaging_profile_id' => 'messaging_profile_id',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(InexplicitNumberOrderNewResponse::class, $result);
     }
 
     #[Test]
@@ -87,7 +96,8 @@ final class InexplicitNumberOrdersTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(InexplicitNumberOrderGetResponse::class, $result);
     }
 
     #[Test]
@@ -99,6 +109,7 @@ final class InexplicitNumberOrdersTest extends TestCase
 
         $result = $this->client->inexplicitNumberOrders->list([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(InexplicitNumberOrderListResponse::class, $result);
     }
 }

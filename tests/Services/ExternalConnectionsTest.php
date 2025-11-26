@@ -6,6 +6,12 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\ExternalConnections\ExternalConnectionDeleteResponse;
+use Telnyx\ExternalConnections\ExternalConnectionGetResponse;
+use Telnyx\ExternalConnections\ExternalConnectionListResponse;
+use Telnyx\ExternalConnections\ExternalConnectionNewResponse;
+use Telnyx\ExternalConnections\ExternalConnectionUpdateLocationResponse;
+use Telnyx\ExternalConnections\ExternalConnectionUpdateResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -37,7 +43,8 @@ final class ExternalConnectionsTest extends TestCase
             'external_sip_connection' => 'zoom', 'outbound' => [],
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ExternalConnectionNewResponse::class, $result);
     }
 
     #[Test]
@@ -53,9 +60,19 @@ final class ExternalConnectionsTest extends TestCase
                 'channel_limit' => 10,
                 'outbound_voice_profile_id' => 'outbound_voice_profile_id',
             ],
+            'active' => false,
+            'inbound' => [
+                'outbound_voice_profile_id' => '12345678-1234-1234-1234-123456789012',
+                'channel_limit' => 10,
+            ],
+            'tags' => ['tag1', 'tag2'],
+            'webhook_event_failover_url' => 'https://failover.example.com',
+            'webhook_event_url' => 'https://example.com',
+            'webhook_timeout_secs' => 25,
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ExternalConnectionNewResponse::class, $result);
     }
 
     #[Test]
@@ -67,7 +84,8 @@ final class ExternalConnectionsTest extends TestCase
 
         $result = $this->client->externalConnections->retrieve('id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ExternalConnectionGetResponse::class, $result);
     }
 
     #[Test]
@@ -86,7 +104,8 @@ final class ExternalConnectionsTest extends TestCase
             ],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ExternalConnectionUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -103,10 +122,17 @@ final class ExternalConnectionsTest extends TestCase
                     'outbound_voice_profile_id' => 'outbound_voice_profile_id',
                     'channel_limit' => 10,
                 ],
+                'active' => false,
+                'inbound' => ['channel_limit' => 10],
+                'tags' => ['tag1', 'tag2'],
+                'webhook_event_failover_url' => 'https://failover.example.com',
+                'webhook_event_url' => 'https://example.com',
+                'webhook_timeout_secs' => 25,
             ],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ExternalConnectionUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -118,7 +144,8 @@ final class ExternalConnectionsTest extends TestCase
 
         $result = $this->client->externalConnections->list([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ExternalConnectionListResponse::class, $result);
     }
 
     #[Test]
@@ -130,7 +157,8 @@ final class ExternalConnectionsTest extends TestCase
 
         $result = $this->client->externalConnections->delete('id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ExternalConnectionDeleteResponse::class, $result);
     }
 
     #[Test]
@@ -148,7 +176,11 @@ final class ExternalConnectionsTest extends TestCase
             ],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            ExternalConnectionUpdateLocationResponse::class,
+            $result
+        );
     }
 
     #[Test]
@@ -166,6 +198,10 @@ final class ExternalConnectionsTest extends TestCase
             ],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            ExternalConnectionUpdateLocationResponse::class,
+            $result
+        );
     }
 }

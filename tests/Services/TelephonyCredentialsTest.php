@@ -6,6 +6,11 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\TelephonyCredentials\TelephonyCredentialDeleteResponse;
+use Telnyx\TelephonyCredentials\TelephonyCredentialGetResponse;
+use Telnyx\TelephonyCredentials\TelephonyCredentialListResponse;
+use Telnyx\TelephonyCredentials\TelephonyCredentialNewResponse;
+use Telnyx\TelephonyCredentials\TelephonyCredentialUpdateResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -37,7 +42,8 @@ final class TelephonyCredentialsTest extends TestCase
             'connection_id' => '1234567890',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(TelephonyCredentialNewResponse::class, $result);
     }
 
     #[Test]
@@ -49,9 +55,13 @@ final class TelephonyCredentialsTest extends TestCase
 
         $result = $this->client->telephonyCredentials->create([
             'connection_id' => '1234567890',
+            'expires_at' => '2018-02-02T22:25:27.521Z',
+            'name' => 'My-new-credential',
+            'tag' => 'some_tag',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(TelephonyCredentialNewResponse::class, $result);
     }
 
     #[Test]
@@ -63,7 +73,8 @@ final class TelephonyCredentialsTest extends TestCase
 
         $result = $this->client->telephonyCredentials->retrieve('id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(TelephonyCredentialGetResponse::class, $result);
     }
 
     #[Test]
@@ -75,7 +86,8 @@ final class TelephonyCredentialsTest extends TestCase
 
         $result = $this->client->telephonyCredentials->update('id', []);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(TelephonyCredentialUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -87,7 +99,8 @@ final class TelephonyCredentialsTest extends TestCase
 
         $result = $this->client->telephonyCredentials->list([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(TelephonyCredentialListResponse::class, $result);
     }
 
     #[Test]
@@ -99,7 +112,8 @@ final class TelephonyCredentialsTest extends TestCase
 
         $result = $this->client->telephonyCredentials->delete('id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(TelephonyCredentialDeleteResponse::class, $result);
     }
 
     #[Test]
@@ -111,6 +125,7 @@ final class TelephonyCredentialsTest extends TestCase
 
         $result = $this->client->telephonyCredentials->createToken('id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertIsString($result);
     }
 }

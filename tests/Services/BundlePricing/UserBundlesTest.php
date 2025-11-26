@@ -5,6 +5,12 @@ namespace Tests\Services\BundlePricing;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Telnyx\BundlePricing\UserBundles\UserBundleDeactivateResponse;
+use Telnyx\BundlePricing\UserBundles\UserBundleGetResponse;
+use Telnyx\BundlePricing\UserBundles\UserBundleListResourcesResponse;
+use Telnyx\BundlePricing\UserBundles\UserBundleListResponse;
+use Telnyx\BundlePricing\UserBundles\UserBundleListUnusedResponse;
+use Telnyx\BundlePricing\UserBundles\UserBundleNewResponse;
 use Telnyx\Client;
 use Tests\UnsupportedMockTests;
 
@@ -35,7 +41,8 @@ final class UserBundlesTest extends TestCase
 
         $result = $this->client->bundlePricing->userBundles->create([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(UserBundleNewResponse::class, $result);
     }
 
     #[Test]
@@ -50,7 +57,8 @@ final class UserBundlesTest extends TestCase
             []
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(UserBundleGetResponse::class, $result);
     }
 
     #[Test]
@@ -62,7 +70,8 @@ final class UserBundlesTest extends TestCase
 
         $result = $this->client->bundlePricing->userBundles->list([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(UserBundleListResponse::class, $result);
     }
 
     #[Test]
@@ -77,7 +86,8 @@ final class UserBundlesTest extends TestCase
             []
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(UserBundleDeactivateResponse::class, $result);
     }
 
     #[Test]
@@ -92,7 +102,8 @@ final class UserBundlesTest extends TestCase
             []
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(UserBundleListResourcesResponse::class, $result);
     }
 
     #[Test]
@@ -104,6 +115,7 @@ final class UserBundlesTest extends TestCase
 
         $result = $this->client->bundlePricing->userBundles->listUnused([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(UserBundleListUnusedResponse::class, $result);
     }
 }

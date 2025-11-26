@@ -5,6 +5,7 @@ namespace Tests\Services\Actions;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Telnyx\Actions\Purchase\PurchaseNewResponse;
 use Telnyx\Client;
 use Tests\UnsupportedMockTests;
 
@@ -35,7 +36,8 @@ final class PurchaseTest extends TestCase
 
         $result = $this->client->actions->purchase->create(['amount' => 10]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(PurchaseNewResponse::class, $result);
     }
 
     #[Test]
@@ -45,8 +47,16 @@ final class PurchaseTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->actions->purchase->create(['amount' => 10]);
+        $result = $this->client->actions->purchase->create([
+            'amount' => 10,
+            'product' => 'whitelabel',
+            'sim_card_group_id' => '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
+            'status' => 'standby',
+            'tags' => ['personal', 'customers', 'active-customers'],
+            'whitelabel_name' => 'Custom SPN',
+        ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(PurchaseNewResponse::class, $result);
     }
 }

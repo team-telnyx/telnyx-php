@@ -6,6 +6,9 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\Portouts\Reports\ReportGetResponse;
+use Telnyx\Portouts\Reports\ReportListResponse;
+use Telnyx\Portouts\Reports\ReportNewResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -37,7 +40,8 @@ final class ReportsTest extends TestCase
             'params' => ['filters' => []], 'report_type' => 'export_portouts_csv',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ReportNewResponse::class, $result);
     }
 
     #[Test]
@@ -61,7 +65,8 @@ final class ReportsTest extends TestCase
             'report_type' => 'export_portouts_csv',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ReportNewResponse::class, $result);
     }
 
     #[Test]
@@ -75,7 +80,8 @@ final class ReportsTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ReportGetResponse::class, $result);
     }
 
     #[Test]
@@ -87,6 +93,7 @@ final class ReportsTest extends TestCase
 
         $result = $this->client->portouts->reports->list([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ReportListResponse::class, $result);
     }
 }

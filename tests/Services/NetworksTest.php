@@ -6,6 +6,12 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\Networks\NetworkDeleteResponse;
+use Telnyx\Networks\NetworkGetResponse;
+use Telnyx\Networks\NetworkListInterfacesResponse;
+use Telnyx\Networks\NetworkListResponse;
+use Telnyx\Networks\NetworkNewResponse;
+use Telnyx\Networks\NetworkUpdateResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -35,7 +41,8 @@ final class NetworksTest extends TestCase
 
         $result = $this->client->networks->create(['name' => 'test network']);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(NetworkNewResponse::class, $result);
     }
 
     #[Test]
@@ -47,7 +54,8 @@ final class NetworksTest extends TestCase
 
         $result = $this->client->networks->create(['name' => 'test network']);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(NetworkNewResponse::class, $result);
     }
 
     #[Test]
@@ -61,7 +69,8 @@ final class NetworksTest extends TestCase
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(NetworkGetResponse::class, $result);
     }
 
     #[Test]
@@ -76,7 +85,8 @@ final class NetworksTest extends TestCase
             ['name' => 'test network']
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(NetworkUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -91,7 +101,8 @@ final class NetworksTest extends TestCase
             ['name' => 'test network']
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(NetworkUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -103,7 +114,8 @@ final class NetworksTest extends TestCase
 
         $result = $this->client->networks->list([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(NetworkListResponse::class, $result);
     }
 
     #[Test]
@@ -117,7 +129,8 @@ final class NetworksTest extends TestCase
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(NetworkDeleteResponse::class, $result);
     }
 
     #[Test]
@@ -132,6 +145,7 @@ final class NetworksTest extends TestCase
             []
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(NetworkListInterfacesResponse::class, $result);
     }
 }

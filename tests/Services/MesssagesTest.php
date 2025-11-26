@@ -6,6 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\Messsages\MesssageRcsResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -40,7 +41,8 @@ final class MesssagesTest extends TestCase
             'to' => '+13125551234',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(MesssageRcsResponse::class, $result);
     }
 
     #[Test]
@@ -197,8 +199,18 @@ final class MesssagesTest extends TestCase
             ],
             'messaging_profile_id' => 'messaging_profile_id',
             'to' => '+13125551234',
+            'mms_fallback' => [
+                'from' => '+13125551234',
+                'media_urls' => ['string'],
+                'subject' => 'Test Message',
+                'text' => 'Hello world!',
+            ],
+            'sms_fallback' => ['from' => '+13125551234', 'text' => 'Hello world!'],
+            'type' => 'RCS',
+            'webhook_url' => 'webhook_url',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(MesssageRcsResponse::class, $result);
     }
 }

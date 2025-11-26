@@ -6,6 +6,11 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\Texml\Accounts\Conferences\ConferenceGetConferencesResponse;
+use Telnyx\Texml\Accounts\Conferences\ConferenceGetRecordingsJsonResponse;
+use Telnyx\Texml\Accounts\Conferences\ConferenceGetRecordingsResponse;
+use Telnyx\Texml\Accounts\Conferences\ConferenceGetResponse;
+use Telnyx\Texml\Accounts\Conferences\ConferenceUpdateResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -38,7 +43,8 @@ final class ConferencesTest extends TestCase
             ['account_sid' => 'account_sid']
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ConferenceGetResponse::class, $result);
     }
 
     #[Test]
@@ -53,7 +59,8 @@ final class ConferencesTest extends TestCase
             ['account_sid' => 'account_sid']
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ConferenceGetResponse::class, $result);
     }
 
     #[Test]
@@ -68,7 +75,8 @@ final class ConferencesTest extends TestCase
             ['account_sid' => 'account_sid']
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ConferenceUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -80,10 +88,16 @@ final class ConferencesTest extends TestCase
 
         $result = $this->client->texml->accounts->conferences->update(
             'conference_sid',
-            ['account_sid' => 'account_sid']
+            [
+                'account_sid' => 'account_sid',
+                'AnnounceMethod' => 'GET',
+                'AnnounceUrl' => 'https://www.example.com/announce.xml',
+                'Status' => 'completed',
+            ],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ConferenceUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -98,7 +112,8 @@ final class ConferencesTest extends TestCase
             []
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ConferenceGetConferencesResponse::class, $result);
     }
 
     #[Test]
@@ -113,7 +128,8 @@ final class ConferencesTest extends TestCase
             ['account_sid' => 'account_sid']
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ConferenceGetRecordingsResponse::class, $result);
     }
 
     #[Test]
@@ -128,7 +144,8 @@ final class ConferencesTest extends TestCase
             ['account_sid' => 'account_sid']
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ConferenceGetRecordingsResponse::class, $result);
     }
 
     #[Test]
@@ -149,7 +166,11 @@ final class ConferencesTest extends TestCase
             )
         ;
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            ConferenceGetRecordingsJsonResponse::class,
+            $result
+        );
     }
 
     #[Test]
@@ -170,6 +191,10 @@ final class ConferencesTest extends TestCase
             )
         ;
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            ConferenceGetRecordingsJsonResponse::class,
+            $result
+        );
     }
 }

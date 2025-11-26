@@ -6,6 +6,10 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckDeleteResponse;
+use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckGetResponse;
+use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckListResponse;
+use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckNewResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -35,7 +39,8 @@ final class GlobalIPHealthChecksTest extends TestCase
 
         $result = $this->client->globalIPHealthChecks->create([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(GlobalIPHealthCheckNewResponse::class, $result);
     }
 
     #[Test]
@@ -49,7 +54,8 @@ final class GlobalIPHealthChecksTest extends TestCase
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(GlobalIPHealthCheckGetResponse::class, $result);
     }
 
     #[Test]
@@ -61,7 +67,8 @@ final class GlobalIPHealthChecksTest extends TestCase
 
         $result = $this->client->globalIPHealthChecks->list([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(GlobalIPHealthCheckListResponse::class, $result);
     }
 
     #[Test]
@@ -75,6 +82,7 @@ final class GlobalIPHealthChecksTest extends TestCase
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(GlobalIPHealthCheckDeleteResponse::class, $result);
     }
 }

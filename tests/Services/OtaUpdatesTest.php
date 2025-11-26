@@ -6,6 +6,8 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\OtaUpdates\OtaUpdateGetResponse;
+use Telnyx\OtaUpdates\OtaUpdateListResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -37,7 +39,8 @@ final class OtaUpdatesTest extends TestCase
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(OtaUpdateGetResponse::class, $result);
     }
 
     #[Test]
@@ -49,6 +52,7 @@ final class OtaUpdatesTest extends TestCase
 
         $result = $this->client->otaUpdates->list([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(OtaUpdateListResponse::class, $result);
     }
 }

@@ -6,6 +6,8 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\Porting\Events\EventGetResponse;
+use Telnyx\Porting\Events\EventListResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -37,7 +39,8 @@ final class EventsTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(EventGetResponse::class, $result);
     }
 
     #[Test]
@@ -49,7 +52,8 @@ final class EventsTest extends TestCase
 
         $result = $this->client->porting->events->list([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(EventListResponse::class, $result);
     }
 
     #[Test]
@@ -63,6 +67,7 @@ final class EventsTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertNull($result);
     }
 }

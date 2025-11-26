@@ -5,6 +5,8 @@ namespace Tests\Services;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Telnyx\AccessIPRanges\AccessIPRange;
+use Telnyx\AccessIPRanges\AccessIPRangeListResponse;
 use Telnyx\Client;
 use Tests\UnsupportedMockTests;
 
@@ -37,7 +39,8 @@ final class AccessIPRangesTest extends TestCase
             'cidr_block' => 'cidr_block',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(AccessIPRange::class, $result);
     }
 
     #[Test]
@@ -48,10 +51,11 @@ final class AccessIPRangesTest extends TestCase
         }
 
         $result = $this->client->accessIPRanges->create([
-            'cidr_block' => 'cidr_block',
+            'cidr_block' => 'cidr_block', 'description' => 'description',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(AccessIPRange::class, $result);
     }
 
     #[Test]
@@ -63,7 +67,8 @@ final class AccessIPRangesTest extends TestCase
 
         $result = $this->client->accessIPRanges->list([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(AccessIPRangeListResponse::class, $result);
     }
 
     #[Test]
@@ -75,6 +80,7 @@ final class AccessIPRangesTest extends TestCase
 
         $result = $this->client->accessIPRanges->delete('access_ip_range_id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(AccessIPRange::class, $result);
     }
 }

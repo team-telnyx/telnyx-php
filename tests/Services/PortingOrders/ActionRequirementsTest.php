@@ -6,6 +6,8 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateResponse;
+use Telnyx\PortingOrders\ActionRequirements\ActionRequirementListResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -38,7 +40,8 @@ final class ActionRequirementsTest extends TestCase
             []
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ActionRequirementListResponse::class, $result);
     }
 
     #[Test]
@@ -56,7 +59,8 @@ final class ActionRequirementsTest extends TestCase
             ],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ActionRequirementInitiateResponse::class, $result);
     }
 
     #[Test]
@@ -74,6 +78,7 @@ final class ActionRequirementsTest extends TestCase
             ],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ActionRequirementInitiateResponse::class, $result);
     }
 }

@@ -6,6 +6,9 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\MessagingTollfree\Verification\Requests\RequestListResponse;
+use Telnyx\MessagingTollfree\Verification\Requests\VerificationRequestEgress;
+use Telnyx\MessagingTollfree\Verification\Requests\VerificationRequestStatus;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -60,7 +63,8 @@ final class RequestsTest extends TestCase
             'useCaseSummary' => 'This is a use case where Telnyx sends out 2FA codes to portal users to verify their identity in order to sign into the portal',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(VerificationRequestEgress::class, $result);
     }
 
     #[Test]
@@ -95,9 +99,23 @@ final class RequestsTest extends TestCase
             'productionMessageContent' => 'Your Telnyx OTP is XXXX',
             'useCase' => '2FA',
             'useCaseSummary' => 'This is a use case where Telnyx sends out 2FA codes to portal users to verify their identity in order to sign into the portal',
+            'ageGatedContent' => true,
+            'businessAddr2' => '14th Floor',
+            'businessRegistrationCountry' => 'US',
+            'businessRegistrationNumber' => '12-3456789',
+            'businessRegistrationType' => 'EIN',
+            'doingBusinessAs' => 'Acme Services',
+            'entityType' => 'SOLE_PROPRIETOR',
+            'helpMessageResponse' => 'Reply HELP for assistance or STOP to unsubscribe. Contact: support@example.com',
+            'optInConfirmationResponse' => 'You have successfully opted in to receive messages from Acme Corp',
+            'optInKeywords' => 'START, YES, SUBSCRIBE',
+            'privacyPolicyURL' => 'https://example.com/privacy',
+            'termsAndConditionURL' => 'https://example.com/terms',
+            'webhookUrl' => 'http://example-webhook.com',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(VerificationRequestEgress::class, $result);
     }
 
     #[Test]
@@ -115,7 +133,8 @@ final class RequestsTest extends TestCase
             ->retrieve('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e')
         ;
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(VerificationRequestStatus::class, $result);
     }
 
     #[Test]
@@ -155,7 +174,8 @@ final class RequestsTest extends TestCase
             ],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(VerificationRequestEgress::class, $result);
     }
 
     #[Test]
@@ -192,10 +212,24 @@ final class RequestsTest extends TestCase
                 'productionMessageContent' => 'Your Telnyx OTP is XXXX',
                 'useCase' => '2FA',
                 'useCaseSummary' => 'This is a use case where Telnyx sends out 2FA codes to portal users to verify their identity in order to sign into the portal',
+                'ageGatedContent' => true,
+                'businessAddr2' => '14th Floor',
+                'businessRegistrationCountry' => 'US',
+                'businessRegistrationNumber' => '12-3456789',
+                'businessRegistrationType' => 'EIN',
+                'doingBusinessAs' => 'Acme Services',
+                'entityType' => 'SOLE_PROPRIETOR',
+                'helpMessageResponse' => 'Reply HELP for assistance or STOP to unsubscribe. Contact: support@example.com',
+                'optInConfirmationResponse' => 'You have successfully opted in to receive messages from Acme Corp',
+                'optInKeywords' => 'START, YES, SUBSCRIBE',
+                'privacyPolicyURL' => 'https://example.com/privacy',
+                'termsAndConditionURL' => 'https://example.com/terms',
+                'webhookUrl' => 'http://example-webhook.com',
             ],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(VerificationRequestEgress::class, $result);
     }
 
     #[Test]
@@ -209,7 +243,8 @@ final class RequestsTest extends TestCase
             'page' => 1, 'page_size' => 1,
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(RequestListResponse::class, $result);
     }
 
     #[Test]
@@ -220,10 +255,16 @@ final class RequestsTest extends TestCase
         }
 
         $result = $this->client->messagingTollfree->verification->requests->list([
-            'page' => 1, 'page_size' => 1,
+            'page' => 1,
+            'page_size' => 1,
+            'date_end' => '2019-12-27T18:11:19.117Z',
+            'date_start' => '2019-12-27T18:11:19.117Z',
+            'phone_number' => 'phone_number',
+            'status' => 'Verified',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(RequestListResponse::class, $result);
     }
 
     #[Test]
@@ -237,6 +278,7 @@ final class RequestsTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertTrue($result);
     }
 }

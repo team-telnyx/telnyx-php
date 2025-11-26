@@ -6,6 +6,8 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\Payment\AutoRechargePrefs\AutoRechargePrefListResponse;
+use Telnyx\Payment\AutoRechargePrefs\AutoRechargePrefUpdateResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -35,7 +37,8 @@ final class AutoRechargePrefsTest extends TestCase
 
         $result = $this->client->payment->autoRechargePrefs->update([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(AutoRechargePrefUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -47,6 +50,7 @@ final class AutoRechargePrefsTest extends TestCase
 
         $result = $this->client->payment->autoRechargePrefs->list();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(AutoRechargePrefListResponse::class, $result);
     }
 }

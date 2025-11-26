@@ -6,6 +6,9 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\Faxes\FaxGetResponse;
+use Telnyx\Faxes\FaxListResponse;
+use Telnyx\Faxes\FaxNewResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -39,7 +42,8 @@ final class FaxesTest extends TestCase
             'to' => '+13127367276',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(FaxNewResponse::class, $result);
     }
 
     #[Test]
@@ -53,9 +57,21 @@ final class FaxesTest extends TestCase
             'connection_id' => '234423',
             'from' => '+13125790015',
             'to' => '+13127367276',
+            'client_state' => 'aGF2ZSBhIG5pY2UgZGF5ID1d',
+            'from_display_name' => 'Company Name',
+            'media_name' => 'my_media_uploaded_to_media_storage_api',
+            'media_url' => 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
+            'monochrome' => true,
+            'preview_format' => 'pdf',
+            'quality' => 'high',
+            'store_media' => true,
+            'store_preview' => true,
+            't38_enabled' => true,
+            'webhook_url' => 'https://www.example.com/server-b/',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(FaxNewResponse::class, $result);
     }
 
     #[Test]
@@ -69,7 +85,8 @@ final class FaxesTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(FaxGetResponse::class, $result);
     }
 
     #[Test]
@@ -81,7 +98,8 @@ final class FaxesTest extends TestCase
 
         $result = $this->client->faxes->list([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(FaxListResponse::class, $result);
     }
 
     #[Test]
@@ -95,6 +113,7 @@ final class FaxesTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertNull($result);
     }
 }

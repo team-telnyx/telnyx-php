@@ -5,6 +5,7 @@ namespace Tests\Services\Campaign;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Telnyx\Campaign\Usecase\UsecaseGetCostResponse;
 use Telnyx\Client;
 use Tests\UnsupportedMockTests;
 
@@ -37,7 +38,8 @@ final class UsecaseTest extends TestCase
             'usecase' => 'usecase',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(UsecaseGetCostResponse::class, $result);
     }
 
     #[Test]
@@ -51,6 +53,7 @@ final class UsecaseTest extends TestCase
             'usecase' => 'usecase',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(UsecaseGetCostResponse::class, $result);
     }
 }

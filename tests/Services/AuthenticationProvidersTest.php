@@ -5,6 +5,11 @@ namespace Tests\Services;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Telnyx\AuthenticationProviders\AuthenticationProviderDeleteResponse;
+use Telnyx\AuthenticationProviders\AuthenticationProviderGetResponse;
+use Telnyx\AuthenticationProviders\AuthenticationProviderListResponse;
+use Telnyx\AuthenticationProviders\AuthenticationProviderNewResponse;
+use Telnyx\AuthenticationProviders\AuthenticationProviderUpdateResponse;
 use Telnyx\Client;
 use Tests\UnsupportedMockTests;
 
@@ -43,7 +48,8 @@ final class AuthenticationProvidersTest extends TestCase
             'short_name' => 'myorg',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(AuthenticationProviderNewResponse::class, $result);
     }
 
     #[Test]
@@ -62,9 +68,12 @@ final class AuthenticationProvidersTest extends TestCase
                 'idp_cert_fingerprint_algorithm' => 'sha256',
             ],
             'short_name' => 'myorg',
+            'active' => true,
+            'settings_url' => 'https://myorg.myidp.com/saml/metadata',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(AuthenticationProviderNewResponse::class, $result);
     }
 
     #[Test]
@@ -76,7 +85,8 @@ final class AuthenticationProvidersTest extends TestCase
 
         $result = $this->client->authenticationProviders->retrieve('id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(AuthenticationProviderGetResponse::class, $result);
     }
 
     #[Test]
@@ -88,7 +98,11 @@ final class AuthenticationProvidersTest extends TestCase
 
         $result = $this->client->authenticationProviders->update('id', []);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            AuthenticationProviderUpdateResponse::class,
+            $result
+        );
     }
 
     #[Test]
@@ -100,7 +114,8 @@ final class AuthenticationProvidersTest extends TestCase
 
         $result = $this->client->authenticationProviders->list([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(AuthenticationProviderListResponse::class, $result);
     }
 
     #[Test]
@@ -112,6 +127,10 @@ final class AuthenticationProvidersTest extends TestCase
 
         $result = $this->client->authenticationProviders->delete('id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            AuthenticationProviderDeleteResponse::class,
+            $result
+        );
     }
 }

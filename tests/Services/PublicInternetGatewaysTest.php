@@ -6,6 +6,10 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\PublicInternetGateways\PublicInternetGatewayDeleteResponse;
+use Telnyx\PublicInternetGateways\PublicInternetGatewayGetResponse;
+use Telnyx\PublicInternetGateways\PublicInternetGatewayListResponse;
+use Telnyx\PublicInternetGateways\PublicInternetGatewayNewResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -35,7 +39,8 @@ final class PublicInternetGatewaysTest extends TestCase
 
         $result = $this->client->publicInternetGateways->create([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(PublicInternetGatewayNewResponse::class, $result);
     }
 
     #[Test]
@@ -49,7 +54,8 @@ final class PublicInternetGatewaysTest extends TestCase
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(PublicInternetGatewayGetResponse::class, $result);
     }
 
     #[Test]
@@ -61,7 +67,8 @@ final class PublicInternetGatewaysTest extends TestCase
 
         $result = $this->client->publicInternetGateways->list([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(PublicInternetGatewayListResponse::class, $result);
     }
 
     #[Test]
@@ -75,6 +82,10 @@ final class PublicInternetGatewaysTest extends TestCase
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            PublicInternetGatewayDeleteResponse::class,
+            $result
+        );
     }
 }

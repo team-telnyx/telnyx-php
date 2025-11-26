@@ -6,6 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\NumberReservations\Actions\ActionExtendResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -37,6 +38,7 @@ final class ActionsTest extends TestCase
             'number_reservation_id'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ActionExtendResponse::class, $result);
     }
 }

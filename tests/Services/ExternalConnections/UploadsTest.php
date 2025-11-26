@@ -6,6 +6,12 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\ExternalConnections\Uploads\UploadGetResponse;
+use Telnyx\ExternalConnections\Uploads\UploadListResponse;
+use Telnyx\ExternalConnections\Uploads\UploadNewResponse;
+use Telnyx\ExternalConnections\Uploads\UploadPendingCountResponse;
+use Telnyx\ExternalConnections\Uploads\UploadRefreshStatusResponse;
+use Telnyx\ExternalConnections\Uploads\UploadRetryResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -45,7 +51,8 @@ final class UploadsTest extends TestCase
             ],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(UploadNewResponse::class, $result);
     }
 
     #[Test]
@@ -64,10 +71,15 @@ final class UploadsTest extends TestCase
                     '3920457616934164702',
                     '3920457616934164703',
                 ],
+                'additional_usages' => ['calling_user_assignment'],
+                'civic_address_id' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+                'location_id' => '67ea7693-9cd5-4a68-8c76-abb3aa5bf5d2',
+                'usage' => 'first_party_app_assignment',
             ],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(UploadNewResponse::class, $result);
     }
 
     #[Test]
@@ -82,7 +94,8 @@ final class UploadsTest extends TestCase
             ['id' => 'id']
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(UploadGetResponse::class, $result);
     }
 
     #[Test]
@@ -97,7 +110,8 @@ final class UploadsTest extends TestCase
             ['id' => 'id']
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(UploadGetResponse::class, $result);
     }
 
     #[Test]
@@ -109,7 +123,8 @@ final class UploadsTest extends TestCase
 
         $result = $this->client->externalConnections->uploads->list('id', []);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(UploadListResponse::class, $result);
     }
 
     #[Test]
@@ -121,7 +136,8 @@ final class UploadsTest extends TestCase
 
         $result = $this->client->externalConnections->uploads->pendingCount('id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(UploadPendingCountResponse::class, $result);
     }
 
     #[Test]
@@ -133,7 +149,8 @@ final class UploadsTest extends TestCase
 
         $result = $this->client->externalConnections->uploads->refreshStatus('id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(UploadRefreshStatusResponse::class, $result);
     }
 
     #[Test]
@@ -148,7 +165,8 @@ final class UploadsTest extends TestCase
             ['id' => 'id']
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(UploadRetryResponse::class, $result);
     }
 
     #[Test]
@@ -163,6 +181,7 @@ final class UploadsTest extends TestCase
             ['id' => 'id']
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(UploadRetryResponse::class, $result);
     }
 }

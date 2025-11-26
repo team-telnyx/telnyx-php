@@ -5,6 +5,7 @@ namespace Tests\Services\AI\Assistants;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Telnyx\AI\Assistants\Tools\ToolTestResponse;
 use Telnyx\Client;
 use Tests\UnsupportedMockTests;
 
@@ -38,7 +39,8 @@ final class ToolsTest extends TestCase
             ['assistant_id' => 'assistant_id']
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ToolTestResponse::class, $result);
     }
 
     #[Test]
@@ -50,9 +52,14 @@ final class ToolsTest extends TestCase
 
         $result = $this->client->ai->assistants->tools->test(
             'tool_id',
-            ['assistant_id' => 'assistant_id']
+            [
+                'assistant_id' => 'assistant_id',
+                'arguments' => ['foo' => 'bar'],
+                'dynamic_variables' => ['foo' => 'bar'],
+            ],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ToolTestResponse::class, $result);
     }
 }

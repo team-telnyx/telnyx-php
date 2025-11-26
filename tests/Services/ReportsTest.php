@@ -6,6 +6,8 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\Reports\ReportListMdrsResponse;
+use Telnyx\Reports\ReportListWdrsResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -35,7 +37,8 @@ final class ReportsTest extends TestCase
 
         $result = $this->client->reports->listMdrs([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ReportListMdrsResponse::class, $result);
     }
 
     #[Test]
@@ -47,6 +50,7 @@ final class ReportsTest extends TestCase
 
         $result = $this->client->reports->listWdrs([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ReportListWdrsResponse::class, $result);
     }
 }

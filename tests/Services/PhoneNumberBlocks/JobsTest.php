@@ -6,6 +6,9 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\PhoneNumberBlocks\Jobs\JobDeletePhoneNumberBlockResponse;
+use Telnyx\PhoneNumberBlocks\Jobs\JobGetResponse;
+use Telnyx\PhoneNumberBlocks\Jobs\JobListResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -35,7 +38,8 @@ final class JobsTest extends TestCase
 
         $result = $this->client->phoneNumberBlocks->jobs->retrieve('id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(JobGetResponse::class, $result);
     }
 
     #[Test]
@@ -47,7 +51,8 @@ final class JobsTest extends TestCase
 
         $result = $this->client->phoneNumberBlocks->jobs->list([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(JobListResponse::class, $result);
     }
 
     #[Test]
@@ -61,7 +66,8 @@ final class JobsTest extends TestCase
             'phone_number_block_id' => 'f3946371-7199-4261-9c3d-81a0d7935146',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(JobDeletePhoneNumberBlockResponse::class, $result);
     }
 
     #[Test]
@@ -75,6 +81,7 @@ final class JobsTest extends TestCase
             'phone_number_block_id' => 'f3946371-7199-4261-9c3d-81a0d7935146',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(JobDeletePhoneNumberBlockResponse::class, $result);
     }
 }

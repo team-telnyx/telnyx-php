@@ -6,6 +6,9 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\Messaging\Rcs\RcGetCapabilitiesResponse;
+use Telnyx\Messaging\Rcs\RcInviteTestNumberResponse;
+use Telnyx\Messaging\Rcs\RcListBulkCapabilitiesResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -38,7 +41,8 @@ final class RcsTest extends TestCase
             ['id' => 'id']
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(RcInviteTestNumberResponse::class, $result);
     }
 
     #[Test]
@@ -53,7 +57,8 @@ final class RcsTest extends TestCase
             ['id' => 'id']
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(RcInviteTestNumberResponse::class, $result);
     }
 
     #[Test]
@@ -67,7 +72,8 @@ final class RcsTest extends TestCase
             'agent_id' => 'TestAgent', 'phone_numbers' => ['+13125551234'],
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(RcListBulkCapabilitiesResponse::class, $result);
     }
 
     #[Test]
@@ -81,7 +87,8 @@ final class RcsTest extends TestCase
             'agent_id' => 'TestAgent', 'phone_numbers' => ['+13125551234'],
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(RcListBulkCapabilitiesResponse::class, $result);
     }
 
     #[Test]
@@ -96,7 +103,8 @@ final class RcsTest extends TestCase
             ['agent_id' => 'agent_id']
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(RcGetCapabilitiesResponse::class, $result);
     }
 
     #[Test]
@@ -111,6 +119,7 @@ final class RcsTest extends TestCase
             ['agent_id' => 'agent_id']
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(RcGetCapabilitiesResponse::class, $result);
     }
 }

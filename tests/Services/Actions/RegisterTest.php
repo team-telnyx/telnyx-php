@@ -5,6 +5,7 @@ namespace Tests\Services\Actions;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Telnyx\Actions\Register\RegisterNewResponse;
 use Telnyx\Client;
 use Tests\UnsupportedMockTests;
 
@@ -37,7 +38,8 @@ final class RegisterTest extends TestCase
             'registration_codes' => ['0000000001', '0000000002', '0000000003'],
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(RegisterNewResponse::class, $result);
     }
 
     #[Test]
@@ -49,8 +51,12 @@ final class RegisterTest extends TestCase
 
         $result = $this->client->actions->register->create([
             'registration_codes' => ['0000000001', '0000000002', '0000000003'],
+            'sim_card_group_id' => '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
+            'status' => 'standby',
+            'tags' => ['personal', 'customers', 'active-customers'],
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(RegisterNewResponse::class, $result);
     }
 }

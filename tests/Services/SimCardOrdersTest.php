@@ -6,6 +6,9 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\SimCardOrders\SimCardOrderGetResponse;
+use Telnyx\SimCardOrders\SimCardOrderListResponse;
+use Telnyx\SimCardOrders\SimCardOrderNewResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -37,7 +40,8 @@ final class SimCardOrdersTest extends TestCase
             'address_id' => '1293384261075731499', 'quantity' => 23,
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(SimCardOrderNewResponse::class, $result);
     }
 
     #[Test]
@@ -51,7 +55,8 @@ final class SimCardOrdersTest extends TestCase
             'address_id' => '1293384261075731499', 'quantity' => 23,
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(SimCardOrderNewResponse::class, $result);
     }
 
     #[Test]
@@ -65,7 +70,8 @@ final class SimCardOrdersTest extends TestCase
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(SimCardOrderGetResponse::class, $result);
     }
 
     #[Test]
@@ -77,6 +83,7 @@ final class SimCardOrdersTest extends TestCase
 
         $result = $this->client->simCardOrders->list([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(SimCardOrderListResponse::class, $result);
     }
 }

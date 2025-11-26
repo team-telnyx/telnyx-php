@@ -6,6 +6,11 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\SubNumberOrders\SubNumberOrderCancelResponse;
+use Telnyx\SubNumberOrders\SubNumberOrderGetResponse;
+use Telnyx\SubNumberOrders\SubNumberOrderListResponse;
+use Telnyx\SubNumberOrders\SubNumberOrderUpdateRequirementGroupResponse;
+use Telnyx\SubNumberOrders\SubNumberOrderUpdateResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -38,7 +43,8 @@ final class SubNumberOrdersTest extends TestCase
             []
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(SubNumberOrderGetResponse::class, $result);
     }
 
     #[Test]
@@ -50,7 +56,8 @@ final class SubNumberOrdersTest extends TestCase
 
         $result = $this->client->subNumberOrders->update('sub_number_order_id', []);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(SubNumberOrderUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -62,7 +69,8 @@ final class SubNumberOrdersTest extends TestCase
 
         $result = $this->client->subNumberOrders->list([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(SubNumberOrderListResponse::class, $result);
     }
 
     #[Test]
@@ -74,7 +82,8 @@ final class SubNumberOrdersTest extends TestCase
 
         $result = $this->client->subNumberOrders->cancel('sub_number_order_id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(SubNumberOrderCancelResponse::class, $result);
     }
 
     #[Test]
@@ -89,7 +98,11 @@ final class SubNumberOrdersTest extends TestCase
             ['requirement_group_id' => 'a4b201f9-8646-4e54-a7d2-b2e403eeaf8c'],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            SubNumberOrderUpdateRequirementGroupResponse::class,
+            $result
+        );
     }
 
     #[Test]
@@ -104,6 +117,10 @@ final class SubNumberOrdersTest extends TestCase
             ['requirement_group_id' => 'a4b201f9-8646-4e54-a7d2-b2e403eeaf8c'],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            SubNumberOrderUpdateRequirementGroupResponse::class,
+            $result
+        );
     }
 }

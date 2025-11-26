@@ -6,6 +6,9 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionDeleteResponse;
+use Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionListResponse;
+use Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionNewResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -42,7 +45,8 @@ final class PhoneNumberExtensionsTest extends TestCase
             ],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(PhoneNumberExtensionNewResponse::class, $result);
     }
 
     #[Test]
@@ -61,7 +65,8 @@ final class PhoneNumberExtensionsTest extends TestCase
             ],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(PhoneNumberExtensionNewResponse::class, $result);
     }
 
     #[Test]
@@ -76,7 +81,8 @@ final class PhoneNumberExtensionsTest extends TestCase
             []
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(PhoneNumberExtensionListResponse::class, $result);
     }
 
     #[Test]
@@ -91,7 +97,8 @@ final class PhoneNumberExtensionsTest extends TestCase
             ['porting_order_id' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(PhoneNumberExtensionDeleteResponse::class, $result);
     }
 
     #[Test]
@@ -106,6 +113,7 @@ final class PhoneNumberExtensionsTest extends TestCase
             ['porting_order_id' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(PhoneNumberExtensionDeleteResponse::class, $result);
     }
 }

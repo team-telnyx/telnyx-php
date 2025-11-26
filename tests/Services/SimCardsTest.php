@@ -6,6 +6,14 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\SimCards\SimCardDeleteResponse;
+use Telnyx\SimCards\SimCardGetActivationCodeResponse;
+use Telnyx\SimCards\SimCardGetDeviceDetailsResponse;
+use Telnyx\SimCards\SimCardGetPublicIPResponse;
+use Telnyx\SimCards\SimCardGetResponse;
+use Telnyx\SimCards\SimCardListResponse;
+use Telnyx\SimCards\SimCardListWirelessConnectivityLogsResponse;
+use Telnyx\SimCards\SimCardUpdateResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -38,7 +46,8 @@ final class SimCardsTest extends TestCase
             []
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(SimCardGetResponse::class, $result);
     }
 
     #[Test]
@@ -53,7 +62,8 @@ final class SimCardsTest extends TestCase
             []
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(SimCardUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -65,7 +75,8 @@ final class SimCardsTest extends TestCase
 
         $result = $this->client->simCards->list([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(SimCardListResponse::class, $result);
     }
 
     #[Test]
@@ -80,7 +91,8 @@ final class SimCardsTest extends TestCase
             []
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(SimCardDeleteResponse::class, $result);
     }
 
     #[Test]
@@ -94,7 +106,8 @@ final class SimCardsTest extends TestCase
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(SimCardGetActivationCodeResponse::class, $result);
     }
 
     #[Test]
@@ -108,7 +121,8 @@ final class SimCardsTest extends TestCase
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(SimCardGetDeviceDetailsResponse::class, $result);
     }
 
     #[Test]
@@ -122,7 +136,8 @@ final class SimCardsTest extends TestCase
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(SimCardGetPublicIPResponse::class, $result);
     }
 
     #[Test]
@@ -137,6 +152,10 @@ final class SimCardsTest extends TestCase
             []
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            SimCardListWirelessConnectivityLogsResponse::class,
+            $result
+        );
     }
 }
