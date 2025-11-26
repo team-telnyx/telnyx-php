@@ -16,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   total_number_of_nodes: int,
  *   cluster_header?: string|null,
  *   nodes?: list<Node>|null,
- *   subclusters?: list<RecursiveCluster>|null,
+ *   subclusters?: list<mixed>|null,
  * }
  */
 final class RecursiveCluster implements BaseModel
@@ -40,7 +40,7 @@ final class RecursiveCluster implements BaseModel
     #[Api(list: Node::class, optional: true)]
     public ?array $nodes;
 
-    /** @var list<RecursiveCluster>|null $subclusters */
+    /** @var list<mixed>|null $subclusters */
     #[Api(list: RecursiveCluster::class, optional: true)]
     public ?array $subclusters;
 
@@ -74,7 +74,7 @@ final class RecursiveCluster implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<Node> $nodes
-     * @param list<RecursiveCluster> $subclusters
+     * @param list<mixed> $subclusters
      */
     public static function with(
         string $cluster_id,
@@ -141,7 +141,7 @@ final class RecursiveCluster implements BaseModel
     }
 
     /**
-     * @param list<RecursiveCluster> $subclusters
+     * @param list<mixed> $subclusters
      */
     public function withSubclusters(array $subclusters): self
     {

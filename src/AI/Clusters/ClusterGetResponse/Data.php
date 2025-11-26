@@ -12,7 +12,7 @@ use Telnyx\PhoneNumberAssignmentByProfile\TaskStatus;
 
 /**
  * @phpstan-type DataShape = array{
- *   bucket: string, clusters: list<RecursiveCluster>, status: value-of<TaskStatus>
+ *   bucket: string, clusters: list<mixed>, status: value-of<TaskStatus>
  * }
  */
 final class Data implements BaseModel
@@ -23,7 +23,7 @@ final class Data implements BaseModel
     #[Api]
     public string $bucket;
 
-    /** @var list<RecursiveCluster> $clusters */
+    /** @var list<mixed> $clusters */
     #[Api(list: RecursiveCluster::class)]
     public array $clusters;
 
@@ -55,7 +55,7 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<RecursiveCluster> $clusters
+     * @param list<mixed> $clusters
      * @param TaskStatus|value-of<TaskStatus> $status
      */
     public static function with(
@@ -81,7 +81,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param list<RecursiveCluster> $clusters
+     * @param list<mixed> $clusters
      */
     public function withClusters(array $clusters): self
     {
