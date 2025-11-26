@@ -6,6 +6,7 @@ namespace Telnyx\Calls\Actions;
 
 use Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngine;
 use Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConfig;
+use Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConfig\Azure;
 use Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConfig\Deepgram;
 use Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConfig\Google;
 use Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConfig\Telnyx;
@@ -18,7 +19,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   client_state?: string|null,
  *   command_id?: string|null,
  *   transcription_engine?: value-of<TranscriptionEngine>|null,
- *   transcription_engine_config?: null|Google|Telnyx|Deepgram|TranscriptionEngineAConfig|TranscriptionEngineBConfig,
+ *   transcription_engine_config?: null|Google|Telnyx|Deepgram|Azure|TranscriptionEngineAConfig|TranscriptionEngineBConfig,
  *   transcription_tracks?: string|null,
  * }
  */
@@ -48,7 +49,7 @@ final class TranscriptionStartRequest implements BaseModel
     public ?string $transcription_engine;
 
     #[Api(union: TranscriptionEngineConfig::class, optional: true)]
-    public Google|Telnyx|Deepgram|TranscriptionEngineAConfig|TranscriptionEngineBConfig|null $transcription_engine_config;
+    public Google|Telnyx|Deepgram|Azure|TranscriptionEngineAConfig|TranscriptionEngineBConfig|null $transcription_engine_config;
 
     /**
      * Indicates which leg of the call will be transcribed. Use `inbound` for the leg that requested the transcription, `outbound` for the other leg, and `both` for both legs of the call. Will default to `inbound`.
@@ -72,7 +73,7 @@ final class TranscriptionStartRequest implements BaseModel
         ?string $client_state = null,
         ?string $command_id = null,
         TranscriptionEngine|string|null $transcription_engine = null,
-        Google|Telnyx|Deepgram|TranscriptionEngineAConfig|TranscriptionEngineBConfig|null $transcription_engine_config = null,
+        Google|Telnyx|Deepgram|Azure|TranscriptionEngineAConfig|TranscriptionEngineBConfig|null $transcription_engine_config = null,
         ?string $transcription_tracks = null,
     ): self {
         $obj = new self;
@@ -123,7 +124,7 @@ final class TranscriptionStartRequest implements BaseModel
     }
 
     public function withTranscriptionEngineConfig(
-        Google|Telnyx|Deepgram|TranscriptionEngineAConfig|TranscriptionEngineBConfig $transcriptionEngineConfig,
+        Google|Telnyx|Deepgram|Azure|TranscriptionEngineAConfig|TranscriptionEngineBConfig $transcriptionEngineConfig,
     ): self {
         $obj = clone $this;
         $obj->transcription_engine_config = $transcriptionEngineConfig;

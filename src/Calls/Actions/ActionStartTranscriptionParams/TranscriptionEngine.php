@@ -15,6 +15,8 @@ enum TranscriptionEngine: string
 
     case DEEPGRAM = 'Deepgram';
 
+    case AZURE = 'Azure';
+
     case A = 'A';
 
     case B = 'B';
