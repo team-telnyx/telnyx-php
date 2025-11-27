@@ -123,7 +123,7 @@ final class CallsTest extends TestCase
             'sip_region' => 'Canada',
             'sip_transport_protocol' => 'TLS',
             'sound_modifications' => [
-                'octaves' => 0.1, 'pitch' => 0, 'semitone' => -2, 'track' => 'both',
+                'octaves' => 0.1, 'pitch' => 0.8, 'semitone' => -2, 'track' => 'both',
             ],
             'stream_bidirectional_codec' => 'G722',
             'stream_bidirectional_mode' => 'rtp',
