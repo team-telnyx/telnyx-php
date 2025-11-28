@@ -82,7 +82,9 @@ use Telnyx\Services\MessagingTollfreeService;
 use Telnyx\Services\MessagingURLDomainsService;
 use Telnyx\Services\MesssagesService;
 use Telnyx\Services\MobileNetworkOperatorsService;
+use Telnyx\Services\MobilePhoneNumbersService;
 use Telnyx\Services\MobilePushCredentialsService;
+use Telnyx\Services\MobileVoiceConnectionsService;
 use Telnyx\Services\NetworkCoverageService;
 use Telnyx\Services\NetworksService;
 use Telnyx\Services\NotificationChannelsService;
@@ -940,6 +942,16 @@ class Client extends BaseClient
      */
     public InexplicitNumberOrdersService $inexplicitNumberOrders;
 
+    /**
+     * @api
+     */
+    public MobilePhoneNumbersService $mobilePhoneNumbers;
+
+    /**
+     * @api
+     */
+    public MobileVoiceConnectionsService $mobileVoiceConnections;
+
     public function __construct(
         ?string $apiKey = null,
         ?string $publicKey = null,
@@ -1131,6 +1143,8 @@ class Client extends BaseClient
         $this->partnerCampaigns = new PartnerCampaignsService($this);
         $this->wellKnown = new WellKnownService($this);
         $this->inexplicitNumberOrders = new InexplicitNumberOrdersService($this);
+        $this->mobilePhoneNumbers = new MobilePhoneNumbersService($this);
+        $this->mobileVoiceConnections = new MobileVoiceConnectionsService($this);
     }
 
     /** @return array<string,string> */

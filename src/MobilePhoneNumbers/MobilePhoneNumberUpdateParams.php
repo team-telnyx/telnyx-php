@@ -1,0 +1,215 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Telnyx\MobilePhoneNumbers;
+
+use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkParams;
+use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams\CallForwarding;
+use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams\CallRecording;
+use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams\CnamListing;
+use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams\Inbound;
+use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams\InboundCallScreening;
+use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams\Outbound;
+
+/**
+ * Update a Mobile Phone Number.
+ *
+ * @see Telnyx\Services\MobilePhoneNumbersService::update()
+ *
+ * @phpstan-type MobilePhoneNumberUpdateParamsShape = array{
+ *   call_forwarding?: CallForwarding,
+ *   call_recording?: CallRecording,
+ *   caller_id_name_enabled?: bool,
+ *   cnam_listing?: CnamListing,
+ *   connection_id?: string|null,
+ *   customer_reference?: string|null,
+ *   inbound?: Inbound,
+ *   inbound_call_screening?: InboundCallScreening|value-of<InboundCallScreening>,
+ *   noise_suppression?: bool,
+ *   outbound?: Outbound,
+ *   tags?: list<string>,
+ * }
+ */
+final class MobilePhoneNumberUpdateParams implements BaseModel
+{
+    /** @use SdkModel<MobilePhoneNumberUpdateParamsShape> */
+    use SdkModel;
+    use SdkParams;
+
+    #[Api(optional: true)]
+    public ?CallForwarding $call_forwarding;
+
+    #[Api(optional: true)]
+    public ?CallRecording $call_recording;
+
+    #[Api(optional: true)]
+    public ?bool $caller_id_name_enabled;
+
+    #[Api(optional: true)]
+    public ?CnamListing $cnam_listing;
+
+    #[Api(nullable: true, optional: true)]
+    public ?string $connection_id;
+
+    #[Api(nullable: true, optional: true)]
+    public ?string $customer_reference;
+
+    #[Api(optional: true)]
+    public ?Inbound $inbound;
+
+    /** @var value-of<InboundCallScreening>|null $inbound_call_screening */
+    #[Api(enum: InboundCallScreening::class, optional: true)]
+    public ?string $inbound_call_screening;
+
+    #[Api(optional: true)]
+    public ?bool $noise_suppression;
+
+    #[Api(optional: true)]
+    public ?Outbound $outbound;
+
+    /** @var list<string>|null $tags */
+    #[Api(list: 'string', optional: true)]
+    public ?array $tags;
+
+    public function __construct()
+    {
+        $this->initialize();
+    }
+
+    /**
+     * Construct an instance from the required parameters.
+     *
+     * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param InboundCallScreening|value-of<InboundCallScreening> $inbound_call_screening
+     * @param list<string> $tags
+     */
+    public static function with(
+        ?CallForwarding $call_forwarding = null,
+        ?CallRecording $call_recording = null,
+        ?bool $caller_id_name_enabled = null,
+        ?CnamListing $cnam_listing = null,
+        ?string $connection_id = null,
+        ?string $customer_reference = null,
+        ?Inbound $inbound = null,
+        InboundCallScreening|string|null $inbound_call_screening = null,
+        ?bool $noise_suppression = null,
+        ?Outbound $outbound = null,
+        ?array $tags = null,
+    ): self {
+        $obj = new self;
+
+        null !== $call_forwarding && $obj->call_forwarding = $call_forwarding;
+        null !== $call_recording && $obj->call_recording = $call_recording;
+        null !== $caller_id_name_enabled && $obj->caller_id_name_enabled = $caller_id_name_enabled;
+        null !== $cnam_listing && $obj->cnam_listing = $cnam_listing;
+        null !== $connection_id && $obj->connection_id = $connection_id;
+        null !== $customer_reference && $obj->customer_reference = $customer_reference;
+        null !== $inbound && $obj->inbound = $inbound;
+        null !== $inbound_call_screening && $obj['inbound_call_screening'] = $inbound_call_screening;
+        null !== $noise_suppression && $obj->noise_suppression = $noise_suppression;
+        null !== $outbound && $obj->outbound = $outbound;
+        null !== $tags && $obj->tags = $tags;
+
+        return $obj;
+    }
+
+    public function withCallForwarding(CallForwarding $callForwarding): self
+    {
+        $obj = clone $this;
+        $obj->call_forwarding = $callForwarding;
+
+        return $obj;
+    }
+
+    public function withCallRecording(CallRecording $callRecording): self
+    {
+        $obj = clone $this;
+        $obj->call_recording = $callRecording;
+
+        return $obj;
+    }
+
+    public function withCallerIDNameEnabled(bool $callerIDNameEnabled): self
+    {
+        $obj = clone $this;
+        $obj->caller_id_name_enabled = $callerIDNameEnabled;
+
+        return $obj;
+    }
+
+    public function withCnamListing(CnamListing $cnamListing): self
+    {
+        $obj = clone $this;
+        $obj->cnam_listing = $cnamListing;
+
+        return $obj;
+    }
+
+    public function withConnectionID(?string $connectionID): self
+    {
+        $obj = clone $this;
+        $obj->connection_id = $connectionID;
+
+        return $obj;
+    }
+
+    public function withCustomerReference(?string $customerReference): self
+    {
+        $obj = clone $this;
+        $obj->customer_reference = $customerReference;
+
+        return $obj;
+    }
+
+    public function withInbound(Inbound $inbound): self
+    {
+        $obj = clone $this;
+        $obj->inbound = $inbound;
+
+        return $obj;
+    }
+
+    /**
+     * @param InboundCallScreening|value-of<InboundCallScreening> $inboundCallScreening
+     */
+    public function withInboundCallScreening(
+        InboundCallScreening|string $inboundCallScreening
+    ): self {
+        $obj = clone $this;
+        $obj['inbound_call_screening'] = $inboundCallScreening;
+
+        return $obj;
+    }
+
+    public function withNoiseSuppression(bool $noiseSuppression): self
+    {
+        $obj = clone $this;
+        $obj->noise_suppression = $noiseSuppression;
+
+        return $obj;
+    }
+
+    public function withOutbound(Outbound $outbound): self
+    {
+        $obj = clone $this;
+        $obj->outbound = $outbound;
+
+        return $obj;
+    }
+
+    /**
+     * @param list<string> $tags
+     */
+    public function withTags(array $tags): self
+    {
+        $obj = clone $this;
+        $obj->tags = $tags;
+
+        return $obj;
+    }
+}
