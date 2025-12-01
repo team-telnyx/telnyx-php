@@ -71,13 +71,13 @@ final class PortingOrder implements BaseModel
     /**
      * A customer-specified group reference for customer bookkeeping purposes.
      */
-    #[Api(optional: true)]
+    #[Api(nullable: true, optional: true)]
     public ?string $customer_group_reference;
 
     /**
      * A customer-specified reference number for customer bookkeeping purposes.
      */
-    #[Api(optional: true)]
+    #[Api(nullable: true, optional: true)]
     public ?string $customer_reference;
 
     /**
@@ -101,7 +101,7 @@ final class PortingOrder implements BaseModel
     #[Api(optional: true)]
     public ?PortingOrderMessaging $messaging;
 
-    #[Api(optional: true)]
+    #[Api(nullable: true, optional: true)]
     public ?PortingOrderMisc $misc;
 
     /**
@@ -113,7 +113,7 @@ final class PortingOrder implements BaseModel
     /**
      * A key to reference for the porting order group when contacting Telnyx customer support. This information is not available for porting orders in `draft` state.
      */
-    #[Api(optional: true)]
+    #[Api(nullable: true, optional: true)]
     public ?string $parent_support_key;
 
     #[Api(optional: true)]
@@ -162,7 +162,7 @@ final class PortingOrder implements BaseModel
     /**
      * A key to reference this porting order when contacting Telnyx customer support. This information is not available in draft porting orders.
      */
-    #[Api(optional: true)]
+    #[Api(nullable: true, optional: true)]
     public ?string $support_key;
 
     /**
@@ -180,7 +180,7 @@ final class PortingOrder implements BaseModel
     #[Api(optional: true)]
     public ?string $user_id;
 
-    #[Api(optional: true)]
+    #[Api(nullable: true, optional: true)]
     public ?string $webhook_url;
 
     public function __construct()
@@ -303,7 +303,7 @@ final class PortingOrder implements BaseModel
      * A customer-specified group reference for customer bookkeeping purposes.
      */
     public function withCustomerGroupReference(
-        string $customerGroupReference
+        ?string $customerGroupReference
     ): self {
         $obj = clone $this;
         $obj->customer_group_reference = $customerGroupReference;
@@ -314,7 +314,7 @@ final class PortingOrder implements BaseModel
     /**
      * A customer-specified reference number for customer bookkeeping purposes.
      */
-    public function withCustomerReference(string $customerReference): self
+    public function withCustomerReference(?string $customerReference): self
     {
         $obj = clone $this;
         $obj->customer_reference = $customerReference;
@@ -363,7 +363,7 @@ final class PortingOrder implements BaseModel
         return $obj;
     }
 
-    public function withMisc(PortingOrderMisc $misc): self
+    public function withMisc(?PortingOrderMisc $misc): self
     {
         $obj = clone $this;
         $obj->misc = $misc;
@@ -386,7 +386,7 @@ final class PortingOrder implements BaseModel
     /**
      * A key to reference for the porting order group when contacting Telnyx customer support. This information is not available for porting orders in `draft` state.
      */
-    public function withParentSupportKey(string $parentSupportKey): self
+    public function withParentSupportKey(?string $parentSupportKey): self
     {
         $obj = clone $this;
         $obj->parent_support_key = $parentSupportKey;
@@ -478,7 +478,7 @@ final class PortingOrder implements BaseModel
     /**
      * A key to reference this porting order when contacting Telnyx customer support. This information is not available in draft porting orders.
      */
-    public function withSupportKey(string $supportKey): self
+    public function withSupportKey(?string $supportKey): self
     {
         $obj = clone $this;
         $obj->support_key = $supportKey;
@@ -517,7 +517,7 @@ final class PortingOrder implements BaseModel
         return $obj;
     }
 
-    public function withWebhookURL(string $webhookURL): self
+    public function withWebhookURL(?string $webhookURL): self
     {
         $obj = clone $this;
         $obj->webhook_url = $webhookURL;

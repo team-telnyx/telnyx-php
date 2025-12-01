@@ -24,7 +24,7 @@ final class PortingOrderMisc implements BaseModel
     /**
      * New billing phone number for the remaining numbers. Used in case the current billing phone number is being ported to Telnyx. This will be set on your account with your current service provider and should be one of the numbers remaining on that account.
      */
-    #[Api(optional: true)]
+    #[Api(nullable: true, optional: true)]
     public ?string $new_billing_phone_number;
 
     /**
@@ -32,7 +32,7 @@ final class PortingOrderMisc implements BaseModel
      *
      * @var value-of<RemainingNumbersAction>|null $remaining_numbers_action
      */
-    #[Api(enum: RemainingNumbersAction::class, optional: true)]
+    #[Api(enum: RemainingNumbersAction::class, nullable: true, optional: true)]
     public ?string $remaining_numbers_action;
 
     /**
@@ -53,7 +53,7 @@ final class PortingOrderMisc implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param RemainingNumbersAction|value-of<RemainingNumbersAction> $remaining_numbers_action
+     * @param RemainingNumbersAction|value-of<RemainingNumbersAction>|null $remaining_numbers_action
      * @param PortingOrderType|value-of<PortingOrderType> $type
      */
     public static function with(
@@ -74,7 +74,7 @@ final class PortingOrderMisc implements BaseModel
      * New billing phone number for the remaining numbers. Used in case the current billing phone number is being ported to Telnyx. This will be set on your account with your current service provider and should be one of the numbers remaining on that account.
      */
     public function withNewBillingPhoneNumber(
-        string $newBillingPhoneNumber
+        ?string $newBillingPhoneNumber
     ): self {
         $obj = clone $this;
         $obj->new_billing_phone_number = $newBillingPhoneNumber;
@@ -85,10 +85,10 @@ final class PortingOrderMisc implements BaseModel
     /**
      * Remaining numbers can be either kept with their current service provider or disconnected. 'new_billing_telephone_number' is required when 'remaining_numbers_action' is 'keep'.
      *
-     * @param RemainingNumbersAction|value-of<RemainingNumbersAction> $remainingNumbersAction
+     * @param RemainingNumbersAction|value-of<RemainingNumbersAction>|null $remainingNumbersAction
      */
     public function withRemainingNumbersAction(
-        RemainingNumbersAction|string $remainingNumbersAction
+        RemainingNumbersAction|string|null $remainingNumbersAction
     ): self {
         $obj = clone $this;
         $obj['remaining_numbers_action'] = $remainingNumbersAction;

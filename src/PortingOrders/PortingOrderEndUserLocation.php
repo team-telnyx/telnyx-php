@@ -26,37 +26,37 @@ final class PortingOrderEndUserLocation implements BaseModel
     /**
      * State, province, or similar of billing address.
      */
-    #[Api(optional: true)]
+    #[Api(nullable: true, optional: true)]
     public ?string $administrative_area;
 
     /**
      * ISO3166-1 alpha-2 country code of billing address.
      */
-    #[Api(optional: true)]
+    #[Api(nullable: true, optional: true)]
     public ?string $country_code;
 
     /**
      * Second line of billing address.
      */
-    #[Api(optional: true)]
+    #[Api(nullable: true, optional: true)]
     public ?string $extended_address;
 
     /**
      * City or municipality of billing address.
      */
-    #[Api(optional: true)]
+    #[Api(nullable: true, optional: true)]
     public ?string $locality;
 
     /**
      * Postal Code of billing address.
      */
-    #[Api(optional: true)]
+    #[Api(nullable: true, optional: true)]
     public ?string $postal_code;
 
     /**
      * First line of billing address.
      */
-    #[Api(optional: true)]
+    #[Api(nullable: true, optional: true)]
     public ?string $street_address;
 
     public function __construct()
@@ -92,7 +92,7 @@ final class PortingOrderEndUserLocation implements BaseModel
     /**
      * State, province, or similar of billing address.
      */
-    public function withAdministrativeArea(string $administrativeArea): self
+    public function withAdministrativeArea(?string $administrativeArea): self
     {
         $obj = clone $this;
         $obj->administrative_area = $administrativeArea;
@@ -103,7 +103,7 @@ final class PortingOrderEndUserLocation implements BaseModel
     /**
      * ISO3166-1 alpha-2 country code of billing address.
      */
-    public function withCountryCode(string $countryCode): self
+    public function withCountryCode(?string $countryCode): self
     {
         $obj = clone $this;
         $obj->country_code = $countryCode;
@@ -114,7 +114,7 @@ final class PortingOrderEndUserLocation implements BaseModel
     /**
      * Second line of billing address.
      */
-    public function withExtendedAddress(string $extendedAddress): self
+    public function withExtendedAddress(?string $extendedAddress): self
     {
         $obj = clone $this;
         $obj->extended_address = $extendedAddress;
@@ -125,7 +125,7 @@ final class PortingOrderEndUserLocation implements BaseModel
     /**
      * City or municipality of billing address.
      */
-    public function withLocality(string $locality): self
+    public function withLocality(?string $locality): self
     {
         $obj = clone $this;
         $obj->locality = $locality;
@@ -136,7 +136,7 @@ final class PortingOrderEndUserLocation implements BaseModel
     /**
      * Postal Code of billing address.
      */
-    public function withPostalCode(string $postalCode): self
+    public function withPostalCode(?string $postalCode): self
     {
         $obj = clone $this;
         $obj->postal_code = $postalCode;
@@ -147,7 +147,7 @@ final class PortingOrderEndUserLocation implements BaseModel
     /**
      * First line of billing address.
      */
-    public function withStreetAddress(string $streetAddress): self
+    public function withStreetAddress(?string $streetAddress): self
     {
         $obj = clone $this;
         $obj->street_address = $streetAddress;

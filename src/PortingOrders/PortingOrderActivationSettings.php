@@ -27,7 +27,7 @@ final class PortingOrderActivationSettings implements BaseModel
      *
      * @var value-of<ActivationStatus>|null $activation_status
      */
-    #[Api(enum: ActivationStatus::class, optional: true)]
+    #[Api(enum: ActivationStatus::class, nullable: true, optional: true)]
     public ?string $activation_status;
 
     /**
@@ -39,13 +39,13 @@ final class PortingOrderActivationSettings implements BaseModel
     /**
      * ISO 8601 formatted Date/Time of the FOC date.
      */
-    #[Api(optional: true)]
+    #[Api(nullable: true, optional: true)]
     public ?\DateTimeInterface $foc_datetime_actual;
 
     /**
      * ISO 8601 formatted Date/Time requested for the FOC date.
      */
-    #[Api(optional: true)]
+    #[Api(nullable: true, optional: true)]
     public ?\DateTimeInterface $foc_datetime_requested;
 
     public function __construct()
@@ -58,7 +58,7 @@ final class PortingOrderActivationSettings implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ActivationStatus|value-of<ActivationStatus> $activation_status
+     * @param ActivationStatus|value-of<ActivationStatus>|null $activation_status
      */
     public static function with(
         ActivationStatus|string|null $activation_status = null,
@@ -79,10 +79,10 @@ final class PortingOrderActivationSettings implements BaseModel
     /**
      * Activation status.
      *
-     * @param ActivationStatus|value-of<ActivationStatus> $activationStatus
+     * @param ActivationStatus|value-of<ActivationStatus>|null $activationStatus
      */
     public function withActivationStatus(
-        ActivationStatus|string $activationStatus
+        ActivationStatus|string|null $activationStatus
     ): self {
         $obj = clone $this;
         $obj['activation_status'] = $activationStatus;
@@ -105,7 +105,7 @@ final class PortingOrderActivationSettings implements BaseModel
      * ISO 8601 formatted Date/Time of the FOC date.
      */
     public function withFocDatetimeActual(
-        \DateTimeInterface $focDatetimeActual
+        ?\DateTimeInterface $focDatetimeActual
     ): self {
         $obj = clone $this;
         $obj->foc_datetime_actual = $focDatetimeActual;
@@ -117,7 +117,7 @@ final class PortingOrderActivationSettings implements BaseModel
      * ISO 8601 formatted Date/Time requested for the FOC date.
      */
     public function withFocDatetimeRequested(
-        \DateTimeInterface $focDatetimeRequested
+        ?\DateTimeInterface $focDatetimeRequested
     ): self {
         $obj = clone $this;
         $obj->foc_datetime_requested = $focDatetimeRequested;

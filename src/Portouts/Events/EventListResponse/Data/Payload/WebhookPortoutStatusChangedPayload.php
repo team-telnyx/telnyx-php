@@ -58,7 +58,7 @@ final class WebhookPortoutStatusChangedPayload implements BaseModel
     /**
      * The reason why the order is being rejected by the user. If the order is authorized, this field can be left null.
      */
-    #[Api(optional: true)]
+    #[Api(nullable: true, optional: true)]
     public ?string $rejection_reason;
 
     /**
@@ -175,7 +175,7 @@ final class WebhookPortoutStatusChangedPayload implements BaseModel
     /**
      * The reason why the order is being rejected by the user. If the order is authorized, this field can be left null.
      */
-    public function withRejectionReason(string $rejectionReason): self
+    public function withRejectionReason(?string $rejectionReason): self
     {
         $obj = clone $this;
         $obj->rejection_reason = $rejectionReason;

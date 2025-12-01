@@ -42,7 +42,7 @@ final class CustomerServiceRecord implements BaseModel
     /**
      * The error message in case status is `failed`. This field would be null in case of `pending` or `completed` status.
      */
-    #[Api(optional: true)]
+    #[Api(nullable: true, optional: true)]
     public ?string $error_message;
 
     /**
@@ -60,7 +60,7 @@ final class CustomerServiceRecord implements BaseModel
     /**
      * The result of the CSR request. This field would be null in case of `pending` or `failed` status.
      */
-    #[Api(optional: true)]
+    #[Api(nullable: true, optional: true)]
     public ?Result $result;
 
     /**
@@ -138,7 +138,7 @@ final class CustomerServiceRecord implements BaseModel
     /**
      * The error message in case status is `failed`. This field would be null in case of `pending` or `completed` status.
      */
-    public function withErrorMessage(string $errorMessage): self
+    public function withErrorMessage(?string $errorMessage): self
     {
         $obj = clone $this;
         $obj->error_message = $errorMessage;
@@ -171,7 +171,7 @@ final class CustomerServiceRecord implements BaseModel
     /**
      * The result of the CSR request. This field would be null in case of `pending` or `failed` status.
      */
-    public function withResult(Result $result): self
+    public function withResult(?Result $result): self
     {
         $obj = clone $this;
         $obj->result = $result;

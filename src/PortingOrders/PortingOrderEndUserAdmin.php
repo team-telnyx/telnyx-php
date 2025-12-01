@@ -27,43 +27,43 @@ final class PortingOrderEndUserAdmin implements BaseModel
     /**
      * The authorized person's account number with the current service provider.
      */
-    #[Api(optional: true)]
+    #[Api(nullable: true, optional: true)]
     public ?string $account_number;
 
     /**
      * Name of person authorizing the porting order.
      */
-    #[Api(optional: true)]
+    #[Api(nullable: true, optional: true)]
     public ?string $auth_person_name;
 
     /**
      * Billing phone number associated with these phone numbers.
      */
-    #[Api(optional: true)]
+    #[Api(nullable: true, optional: true)]
     public ?string $billing_phone_number;
 
     /**
      * European business identification number. Applicable only in the European Union.
      */
-    #[Api(optional: true)]
+    #[Api(nullable: true, optional: true)]
     public ?string $business_identifier;
 
     /**
      * Person Name or Company name requesting the port.
      */
-    #[Api(optional: true)]
+    #[Api(nullable: true, optional: true)]
     public ?string $entity_name;
 
     /**
      * PIN/passcode possibly required by the old service provider for extra verification.
      */
-    #[Api(optional: true)]
+    #[Api(nullable: true, optional: true)]
     public ?string $pin_passcode;
 
     /**
      * European tax identification number. Applicable only in the European Union.
      */
-    #[Api(optional: true)]
+    #[Api(nullable: true, optional: true)]
     public ?string $tax_identifier;
 
     public function __construct()
@@ -101,7 +101,7 @@ final class PortingOrderEndUserAdmin implements BaseModel
     /**
      * The authorized person's account number with the current service provider.
      */
-    public function withAccountNumber(string $accountNumber): self
+    public function withAccountNumber(?string $accountNumber): self
     {
         $obj = clone $this;
         $obj->account_number = $accountNumber;
@@ -112,7 +112,7 @@ final class PortingOrderEndUserAdmin implements BaseModel
     /**
      * Name of person authorizing the porting order.
      */
-    public function withAuthPersonName(string $authPersonName): self
+    public function withAuthPersonName(?string $authPersonName): self
     {
         $obj = clone $this;
         $obj->auth_person_name = $authPersonName;
@@ -123,7 +123,7 @@ final class PortingOrderEndUserAdmin implements BaseModel
     /**
      * Billing phone number associated with these phone numbers.
      */
-    public function withBillingPhoneNumber(string $billingPhoneNumber): self
+    public function withBillingPhoneNumber(?string $billingPhoneNumber): self
     {
         $obj = clone $this;
         $obj->billing_phone_number = $billingPhoneNumber;
@@ -134,7 +134,7 @@ final class PortingOrderEndUserAdmin implements BaseModel
     /**
      * European business identification number. Applicable only in the European Union.
      */
-    public function withBusinessIdentifier(string $businessIdentifier): self
+    public function withBusinessIdentifier(?string $businessIdentifier): self
     {
         $obj = clone $this;
         $obj->business_identifier = $businessIdentifier;
@@ -145,7 +145,7 @@ final class PortingOrderEndUserAdmin implements BaseModel
     /**
      * Person Name or Company name requesting the port.
      */
-    public function withEntityName(string $entityName): self
+    public function withEntityName(?string $entityName): self
     {
         $obj = clone $this;
         $obj->entity_name = $entityName;
@@ -156,7 +156,7 @@ final class PortingOrderEndUserAdmin implements BaseModel
     /**
      * PIN/passcode possibly required by the old service provider for extra verification.
      */
-    public function withPinPasscode(string $pinPasscode): self
+    public function withPinPasscode(?string $pinPasscode): self
     {
         $obj = clone $this;
         $obj->pin_passcode = $pinPasscode;
@@ -167,7 +167,7 @@ final class PortingOrderEndUserAdmin implements BaseModel
     /**
      * European tax identification number. Applicable only in the European Union.
      */
-    public function withTaxIdentifier(string $taxIdentifier): self
+    public function withTaxIdentifier(?string $taxIdentifier): self
     {
         $obj = clone $this;
         $obj->tax_identifier = $taxIdentifier;

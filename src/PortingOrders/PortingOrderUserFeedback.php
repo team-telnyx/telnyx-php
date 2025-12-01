@@ -21,13 +21,13 @@ final class PortingOrderUserFeedback implements BaseModel
     /**
      * A comment related to the customer rating.
      */
-    #[Api(optional: true)]
+    #[Api(nullable: true, optional: true)]
     public ?string $user_comment;
 
     /**
      * Once an order is ported, cancellation is requested or the request is cancelled, the user may rate their experience.
      */
-    #[Api(optional: true)]
+    #[Api(nullable: true, optional: true)]
     public ?int $user_rating;
 
     public function __construct()
@@ -55,7 +55,7 @@ final class PortingOrderUserFeedback implements BaseModel
     /**
      * A comment related to the customer rating.
      */
-    public function withUserComment(string $userComment): self
+    public function withUserComment(?string $userComment): self
     {
         $obj = clone $this;
         $obj->user_comment = $userComment;
@@ -66,7 +66,7 @@ final class PortingOrderUserFeedback implements BaseModel
     /**
      * Once an order is ported, cancellation is requested or the request is cancelled, the user may rate their experience.
      */
-    public function withUserRating(int $userRating): self
+    public function withUserRating(?int $userRating): self
     {
         $obj = clone $this;
         $obj->user_rating = $userRating;
