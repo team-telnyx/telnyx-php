@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Webhooks\CampaignStatusUpdateWebhookEvent\CampaignSuspendedEvent;
+namespace Telnyx\Webhooks\CampaignSuspendedEvent;
 
 /**
  * The status of the campaign.

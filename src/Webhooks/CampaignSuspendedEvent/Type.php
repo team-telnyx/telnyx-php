@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Webhooks\UnsafeUnwrapWebhookEvent\CampaignSuspendedEvent;
+namespace Telnyx\Webhooks\CampaignSuspendedEvent;
 
 enum Type: string
 {
