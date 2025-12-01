@@ -155,7 +155,7 @@ final class ScheduledEventsService implements ScheduledEventsContract
                 'ai/assistants/%1$s/scheduled_events/%2$s', $assistantID, $eventID,
             ],
             options: $options,
-            convert: 'mixed',
+            convert: null,
         );
     }
 }

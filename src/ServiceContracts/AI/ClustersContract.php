@@ -74,5 +74,5 @@ interface ClustersContract
         string $taskID,
         array|ClusterFetchGraphParams $params,
         ?RequestOptions $requestOptions = null,
-    ): mixed;
+    ): string;
 }

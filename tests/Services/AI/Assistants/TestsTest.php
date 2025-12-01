@@ -135,6 +135,6 @@ final class TestsTest extends TestCase
         $result = $this->client->ai->assistants->tests->delete('test_id');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertTrue($result);
+        $this->assertNull($result);
     }
 }

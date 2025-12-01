@@ -48,7 +48,7 @@ final class InsightsService implements InsightsContract
                 $insightID,
             ],
             options: $options,
-            convert: 'mixed',
+            convert: null,
         );
     }
 
@@ -82,7 +82,7 @@ final class InsightsService implements InsightsContract
                 $insightID,
             ],
             options: $options,
-            convert: 'mixed',
+            convert: null,
         );
     }
 }

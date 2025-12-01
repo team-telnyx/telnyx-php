@@ -222,7 +222,7 @@ final class ConversationsService implements ConversationsContract
             path: ['ai/conversations/%1$s/message', $conversationID],
             body: (object) $parsed,
             options: $options,
-            convert: 'mixed',
+            convert: null,
         );
     }
 

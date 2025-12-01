@@ -56,7 +56,7 @@ interface AssistantsContract
         string $assistantID,
         array|AssistantUpdateParams $params,
         ?RequestOptions $requestOptions = null,
-    ): mixed;
+    ): InferenceEmbedding;
 
     /**
      * @api

@@ -220,7 +220,7 @@ final class AssistantsService implements AssistantsContract
         string $assistantID,
         array|AssistantUpdateParams $params,
         ?RequestOptions $requestOptions = null,
-    ): mixed {
+    ): InferenceEmbedding {
         [$parsed, $options] = AssistantUpdateParams::parseRequest(
             $params,
             $requestOptions,
@@ -232,7 +232,7 @@ final class AssistantsService implements AssistantsContract
             path: ['ai/assistants/%1$s', $assistantID],
             body: (object) $parsed,
             options: $options,
-            convert: 'mixed',
+            convert: InferenceEmbedding::class,
         );
     }
 

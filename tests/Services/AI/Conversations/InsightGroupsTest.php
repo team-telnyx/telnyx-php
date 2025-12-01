@@ -71,7 +71,7 @@ final class InsightGroupsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertTrue($result);
+        $this->assertNull($result);
     }
 
     #[Test]

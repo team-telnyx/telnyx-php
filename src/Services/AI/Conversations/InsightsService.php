@@ -152,7 +152,7 @@ final class InsightsService implements InsightsContract
             method: 'delete',
             path: ['ai/conversations/insights/%1$s', $insightID],
             options: $requestOptions,
-            convert: 'mixed',
+            convert: null,
         );
     }
 }
