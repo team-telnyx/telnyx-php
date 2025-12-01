@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\CallControlApplications\CallControlApplicationCreateParams;
+use Telnyx\CallControlApplications\CallControlApplicationCreateParams\AnchorsiteOverride;
 use Telnyx\CallControlApplications\CallControlApplicationDeleteResponse;
 use Telnyx\CallControlApplications\CallControlApplicationGetResponse;
 use Telnyx\CallControlApplications\CallControlApplicationInbound;
@@ -35,7 +36,7 @@ final class CallControlApplicationsService implements CallControlApplicationsCon
      *   application_name: string,
      *   webhook_event_url: string,
      *   active?: bool,
-     *   anchorsite_override?: '"Latency"'|'"Chicago, IL"'|'"Ashburn, VA"'|'"San Jose, CA"',
+     *   anchorsite_override?: value-of<AnchorsiteOverride>,
      *   call_cost_in_webhooks?: bool,
      *   dtmf_type?: 'RFC 2833'|'Inband'|'SIP INFO',
      *   first_command_timeout?: bool,
@@ -105,7 +106,7 @@ final class CallControlApplicationsService implements CallControlApplicationsCon
      *   application_name: string,
      *   webhook_event_url: string,
      *   active?: bool,
-     *   anchorsite_override?: '"Latency"'|'"Chicago, IL"'|'"Ashburn, VA"'|'"San Jose, CA"',
+     *   anchorsite_override?: value-of<CallControlApplicationUpdateParams\AnchorsiteOverride>,
      *   call_cost_in_webhooks?: bool,
      *   dtmf_type?: 'RFC 2833'|'Inband'|'SIP INFO',
      *   first_command_timeout?: bool,
