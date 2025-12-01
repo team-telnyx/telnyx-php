@@ -28,7 +28,7 @@ use Telnyx\PortingOrders\PortingOrderUpdateParams\Requirement;
  *   documents?: PortingOrderDocuments,
  *   end_user?: PortingOrderEndUser,
  *   messaging?: Messaging,
- *   misc?: PortingOrderMisc,
+ *   misc?: PortingOrderMisc|null,
  *   phone_number_configuration?: PortingOrderPhoneNumberConfiguration,
  *   requirement_group_id?: string,
  *   requirements?: list<Requirement>,
@@ -63,7 +63,7 @@ final class PortingOrderUpdateParams implements BaseModel
     #[Api(optional: true)]
     public ?Messaging $messaging;
 
-    #[Api(optional: true)]
+    #[Api(nullable: true, optional: true)]
     public ?PortingOrderMisc $misc;
 
     #[Api(optional: true)]
@@ -186,7 +186,7 @@ final class PortingOrderUpdateParams implements BaseModel
         return $obj;
     }
 
-    public function withMisc(PortingOrderMisc $misc): self
+    public function withMisc(?PortingOrderMisc $misc): self
     {
         $obj = clone $this;
         $obj->misc = $misc;

@@ -17,7 +17,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type PortingOrderCreateParamsShape = array{
  *   phone_numbers: list<string>,
  *   customer_group_reference?: string,
- *   customer_reference?: string,
+ *   customer_reference?: string|null,
  * }
  */
 final class PortingOrderCreateParams implements BaseModel
@@ -43,7 +43,7 @@ final class PortingOrderCreateParams implements BaseModel
     /**
      * A customer-specified reference number for customer bookkeeping purposes.
      */
-    #[Api(optional: true)]
+    #[Api(nullable: true, optional: true)]
     public ?string $customer_reference;
 
     /**
@@ -115,7 +115,7 @@ final class PortingOrderCreateParams implements BaseModel
     /**
      * A customer-specified reference number for customer bookkeeping purposes.
      */
-    public function withCustomerReference(string $customerReference): self
+    public function withCustomerReference(?string $customerReference): self
     {
         $obj = clone $this;
         $obj->customer_reference = $customerReference;

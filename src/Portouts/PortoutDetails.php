@@ -133,7 +133,7 @@ final class PortoutDetails implements BaseModel
     /**
      * The reason why the order is being rejected by the user. If the order is authorized, this field can be left null.
      */
-    #[Api(optional: true)]
+    #[Api(nullable: true, optional: true)]
     public ?string $reason;
 
     /**
@@ -444,7 +444,7 @@ final class PortoutDetails implements BaseModel
     /**
      * The reason why the order is being rejected by the user. If the order is authorized, this field can be left null.
      */
-    public function withReason(string $reason): self
+    public function withReason(?string $reason): self
     {
         $obj = clone $this;
         $obj->reason = $reason;

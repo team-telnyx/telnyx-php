@@ -118,7 +118,7 @@ final class PortingOrdersService implements PortingOrdersContract
      * @param array{
      *   phone_numbers: list<string>,
      *   customer_group_reference?: string,
-     *   customer_reference?: string,
+     *   customer_reference?: string|null,
      * }|PortingOrderCreateParams $params
      *
      * @throws APIException
@@ -186,28 +186,30 @@ final class PortingOrdersService implements PortingOrdersContract
      *   },
      *   customer_group_reference?: string,
      *   customer_reference?: string,
-     *   documents?: array{invoice?: string, loa?: string}|PortingOrderDocuments,
+     *   documents?: array{
+     *     invoice?: string|null, loa?: string|null
+     *   }|PortingOrderDocuments,
      *   end_user?: array{
      *     admin?: array<mixed>|PortingOrderEndUserAdmin,
      *     location?: array<mixed>|PortingOrderEndUserLocation,
      *   }|PortingOrderEndUser,
      *   messaging?: array{enable_messaging?: bool},
      *   misc?: array{
-     *     new_billing_phone_number?: string,
-     *     remaining_numbers_action?: 'keep'|'disconnect',
+     *     new_billing_phone_number?: string|null,
+     *     remaining_numbers_action?: 'keep'|'disconnect'|null,
      *     type?: 'full'|'partial'|PortingOrderType,
-     *   }|PortingOrderMisc,
+     *   }|PortingOrderMisc|null,
      *   phone_number_configuration?: array{
-     *     billing_group_id?: string,
-     *     connection_id?: string,
-     *     emergency_address_id?: string,
-     *     messaging_profile_id?: string,
+     *     billing_group_id?: string|null,
+     *     connection_id?: string|null,
+     *     emergency_address_id?: string|null,
+     *     messaging_profile_id?: string|null,
      *     tags?: list<string>,
      *   }|PortingOrderPhoneNumberConfiguration,
      *   requirement_group_id?: string,
      *   requirements?: list<array{field_value: string, requirement_type_id: string}>,
      *   user_feedback?: array{
-     *     user_comment?: string, user_rating?: int
+     *     user_comment?: string|null, user_rating?: int|null
      *   }|PortingOrderUserFeedback,
      *   webhook_url?: string,
      * }|PortingOrderUpdateParams $params

@@ -25,25 +25,25 @@ final class PortingOrderPhoneNumberConfiguration implements BaseModel
     /**
      * identifies the billing group to set on the numbers when ported.
      */
-    #[Api(optional: true)]
+    #[Api(nullable: true, optional: true)]
     public ?string $billing_group_id;
 
     /**
      * identifies the connection to set on the numbers when ported.
      */
-    #[Api(optional: true)]
+    #[Api(nullable: true, optional: true)]
     public ?string $connection_id;
 
     /**
      * identifies the emergency address to set on the numbers when ported.
      */
-    #[Api(optional: true)]
+    #[Api(nullable: true, optional: true)]
     public ?string $emergency_address_id;
 
     /**
      * identifies the messaging profile to set on the numbers when ported.
      */
-    #[Api(optional: true)]
+    #[Api(nullable: true, optional: true)]
     public ?string $messaging_profile_id;
 
     /** @var list<string>|null $tags */
@@ -83,7 +83,7 @@ final class PortingOrderPhoneNumberConfiguration implements BaseModel
     /**
      * identifies the billing group to set on the numbers when ported.
      */
-    public function withBillingGroupID(string $billingGroupID): self
+    public function withBillingGroupID(?string $billingGroupID): self
     {
         $obj = clone $this;
         $obj->billing_group_id = $billingGroupID;
@@ -94,7 +94,7 @@ final class PortingOrderPhoneNumberConfiguration implements BaseModel
     /**
      * identifies the connection to set on the numbers when ported.
      */
-    public function withConnectionID(string $connectionID): self
+    public function withConnectionID(?string $connectionID): self
     {
         $obj = clone $this;
         $obj->connection_id = $connectionID;
@@ -105,7 +105,7 @@ final class PortingOrderPhoneNumberConfiguration implements BaseModel
     /**
      * identifies the emergency address to set on the numbers when ported.
      */
-    public function withEmergencyAddressID(string $emergencyAddressID): self
+    public function withEmergencyAddressID(?string $emergencyAddressID): self
     {
         $obj = clone $this;
         $obj->emergency_address_id = $emergencyAddressID;
@@ -116,7 +116,7 @@ final class PortingOrderPhoneNumberConfiguration implements BaseModel
     /**
      * identifies the messaging profile to set on the numbers when ported.
      */
-    public function withMessagingProfileID(string $messagingProfileID): self
+    public function withMessagingProfileID(?string $messagingProfileID): self
     {
         $obj = clone $this;
         $obj->messaging_profile_id = $messagingProfileID;

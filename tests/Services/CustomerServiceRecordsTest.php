@@ -38,7 +38,7 @@ final class CustomerServiceRecordsTest extends TestCase
         }
 
         $result = $this->client->customerServiceRecords->create([
-            'phone_number' => '+1234567890',
+            'phone_number' => '+13035553000',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -53,7 +53,7 @@ final class CustomerServiceRecordsTest extends TestCase
         }
 
         $result = $this->client->customerServiceRecords->create([
-            'phone_number' => '+1234567890',
+            'phone_number' => '+13035553000',
             'additional_data' => [
                 'account_number' => '123456789',
                 'address_line_1' => '123 Main St',
@@ -109,7 +109,7 @@ final class CustomerServiceRecordsTest extends TestCase
         }
 
         $result = $this->client->customerServiceRecords->verifyPhoneNumberCoverage([
-            'phone_numbers' => ['+1234567890'],
+            'phone_numbers' => ['+13035553000'],
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -127,7 +127,7 @@ final class CustomerServiceRecordsTest extends TestCase
         }
 
         $result = $this->client->customerServiceRecords->verifyPhoneNumberCoverage([
-            'phone_numbers' => ['+1234567890'],
+            'phone_numbers' => ['+13035553000'],
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

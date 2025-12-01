@@ -23,13 +23,13 @@ final class PortingOrderDocuments implements BaseModel
     /**
      * Returned ID of the submitted Invoice via the Documents endpoint.
      */
-    #[Api(optional: true)]
+    #[Api(nullable: true, optional: true)]
     public ?string $invoice;
 
     /**
      * Returned ID of the submitted LOA via the Documents endpoint.
      */
-    #[Api(optional: true)]
+    #[Api(nullable: true, optional: true)]
     public ?string $loa;
 
     public function __construct()
@@ -57,7 +57,7 @@ final class PortingOrderDocuments implements BaseModel
     /**
      * Returned ID of the submitted Invoice via the Documents endpoint.
      */
-    public function withInvoice(string $invoice): self
+    public function withInvoice(?string $invoice): self
     {
         $obj = clone $this;
         $obj->invoice = $invoice;
@@ -68,7 +68,7 @@ final class PortingOrderDocuments implements BaseModel
     /**
      * Returned ID of the submitted LOA via the Documents endpoint.
      */
-    public function withLoa(string $loa): self
+    public function withLoa(?string $loa): self
     {
         $obj = clone $this;
         $obj->loa = $loa;
