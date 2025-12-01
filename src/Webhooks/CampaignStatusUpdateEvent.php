@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Webhooks\CampaignStatusUpdateWebhookEvent;
+namespace Telnyx\Webhooks;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
