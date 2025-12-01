@@ -50,7 +50,7 @@ final class CallControlApplication implements BaseModel
     public ?bool $active;
 
     /**
-     * `Latency` directs Telnyx to route media through the site with the lowest round-trip time to the user's connection. Telnyx calculates this time using ICMP ping messages. This can be disabled by specifying a site to handle all media.
+     * <code>Latency</code> directs Telnyx to route media through the site with the lowest round-trip time to the user's connection. Telnyx calculates this time using ICMP ping messages. This can be disabled by specifying a site to handle all media.
      *
      * @var value-of<AnchorsiteOverride>|null $anchorsite_override
      */
@@ -230,7 +230,7 @@ final class CallControlApplication implements BaseModel
     }
 
     /**
-     * `Latency` directs Telnyx to route media through the site with the lowest round-trip time to the user's connection. Telnyx calculates this time using ICMP ping messages. This can be disabled by specifying a site to handle all media.
+     * <code>Latency</code> directs Telnyx to route media through the site with the lowest round-trip time to the user's connection. Telnyx calculates this time using ICMP ping messages. This can be disabled by specifying a site to handle all media.
      *
      * @param AnchorsiteOverride|value-of<AnchorsiteOverride> $anchorsiteOverride
      */
