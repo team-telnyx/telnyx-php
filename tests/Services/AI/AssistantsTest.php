@@ -148,7 +148,7 @@ final class AssistantsTest extends TestCase
         $result = $this->client->ai->assistants->update('assistant_id', []);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertTrue($result);
+        $this->assertInstanceOf(InferenceEmbedding::class, $result);
     }
 
     #[Test]

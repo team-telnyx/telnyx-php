@@ -149,7 +149,7 @@ final class ClustersService implements ClustersContract
         string $taskID,
         array|ClusterFetchGraphParams $params,
         ?RequestOptions $requestOptions = null,
-    ): mixed {
+    ): string {
         [$parsed, $options] = ClusterFetchGraphParams::parseRequest(
             $params,
             $requestOptions,
@@ -160,8 +160,9 @@ final class ClustersService implements ClustersContract
             method: 'get',
             path: ['ai/clusters/%1$s/graph', $taskID],
             query: $parsed,
+            headers: ['Accept' => 'image/png'],
             options: $options,
-            convert: 'mixed',
+            convert: 'string',
         );
     }
 }

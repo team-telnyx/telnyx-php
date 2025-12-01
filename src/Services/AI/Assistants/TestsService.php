@@ -182,7 +182,7 @@ final class TestsService implements TestsContract
             method: 'delete',
             path: ['ai/assistants/tests/%1$s', $testID],
             options: $requestOptions,
-            convert: 'mixed',
+            convert: null,
         );
     }
 }

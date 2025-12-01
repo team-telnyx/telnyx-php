@@ -104,12 +104,12 @@ final class ClustersTest extends TestCase
     public function testFetchGraph(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Prism doesn\'t support image/png responses');
         }
 
         $result = $this->client->ai->clusters->fetchGraph('task_id', []);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertTrue($result);
+        $this->assertIsString($result);
     }
 }

@@ -97,7 +97,7 @@ final class InsightGroupsService implements InsightGroupsContract
             method: 'delete',
             path: ['ai/conversations/insight-groups/%1$s', $groupID],
             options: $requestOptions,
-            convert: 'mixed',
+            convert: null,
         );
     }
 

@@ -112,6 +112,6 @@ final class McpServersTest extends TestCase
         $result = $this->client->ai->mcpServers->delete('mcp_server_id');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertTrue($result);
+        $this->assertNull($result);
     }
 }

@@ -163,7 +163,7 @@ final class McpServersService implements McpServersContract
             method: 'delete',
             path: ['ai/mcp_servers/%1$s', $mcpServerID],
             options: $requestOptions,
-            convert: 'mixed',
+            convert: null,
         );
     }
 }
