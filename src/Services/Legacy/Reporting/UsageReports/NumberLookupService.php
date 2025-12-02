@@ -7,7 +7,9 @@ namespace Telnyx\Services\Legacy\Reporting\UsageReports;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupCreateParams;
-use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupListParams;
+use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupGetResponse;
+use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupListResponse;
+use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Legacy\Reporting\UsageReports\NumberLookupContract;
 
@@ -35,7 +37,7 @@ final class NumberLookupService implements NumberLookupContract
     public function create(
         array|NumberLookupCreateParams $params,
         ?RequestOptions $requestOptions = null,
-    ): mixed {
+    ): NumberLookupNewResponse {
         [$parsed, $options] = NumberLookupCreateParams::parseRequest(
             $params,
             $requestOptions,
@@ -48,7 +50,7 @@ final class NumberLookupService implements NumberLookupContract
             headers: ['Content-Type' => '*/*'],
             body: (object) $parsed,
             options: $options,
-            convert: null,
+            convert: NumberLookupNewResponse::class,
         );
     }
 
@@ -62,13 +64,13 @@ final class NumberLookupService implements NumberLookupContract
     public function retrieve(
         string $id,
         ?RequestOptions $requestOptions = null
-    ): mixed {
+    ): NumberLookupGetResponse {
         // @phpstan-ignore-next-line;
         return $this->client->request(
             method: 'get',
             path: ['legacy/reporting/usage_reports/number_lookup/%1$s', $id],
             options: $requestOptions,
-            convert: null,
+            convert: NumberLookupGetResponse::class,
         );
     }
 
@@ -77,26 +79,17 @@ final class NumberLookupService implements NumberLookupContract
      *
      * Retrieve a paginated list of telco data usage reports
      *
-     * @param array{page?: int, per_page?: int}|NumberLookupListParams $params
-     *
      * @throws APIException
      */
     public function list(
-        array|NumberLookupListParams $params,
         ?RequestOptions $requestOptions = null
-    ): mixed {
-        [$parsed, $options] = NumberLookupListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
-
+    ): NumberLookupListResponse {
         // @phpstan-ignore-next-line;
         return $this->client->request(
             method: 'get',
             path: 'legacy/reporting/usage_reports/number_lookup',
-            query: $parsed,
-            options: $options,
-            convert: null,
+            options: $requestOptions,
+            convert: NumberLookupListResponse::class,
         );
     }
 

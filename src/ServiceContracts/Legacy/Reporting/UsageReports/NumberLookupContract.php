@@ -6,7 +6,9 @@ namespace Telnyx\ServiceContracts\Legacy\Reporting\UsageReports;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupCreateParams;
-use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupListParams;
+use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupGetResponse;
+use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupListResponse;
+use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupNewResponse;
 use Telnyx\RequestOptions;
 
 interface NumberLookupContract
@@ -21,7 +23,7 @@ interface NumberLookupContract
     public function create(
         array|NumberLookupCreateParams $params,
         ?RequestOptions $requestOptions = null,
-    ): mixed;
+    ): NumberLookupNewResponse;
 
     /**
      * @api
@@ -31,19 +33,16 @@ interface NumberLookupContract
     public function retrieve(
         string $id,
         ?RequestOptions $requestOptions = null
-    ): mixed;
+    ): NumberLookupGetResponse;
 
     /**
      * @api
      *
-     * @param array<mixed>|NumberLookupListParams $params
-     *
      * @throws APIException
      */
     public function list(
-        array|NumberLookupListParams $params,
-        ?RequestOptions $requestOptions = null,
-    ): mixed;
+        ?RequestOptions $requestOptions = null
+    ): NumberLookupListResponse;
 
     /**
      * @api
