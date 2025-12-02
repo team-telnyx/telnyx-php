@@ -22,7 +22,7 @@ interface ReportsContract
      */
     public function listMdrs(
         array|ReportListMdrsParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?RequestOptions $requestOptions = null
     ): ReportListMdrsResponse;
 
     /**
@@ -34,6 +34,6 @@ interface ReportsContract
      */
     public function listWdrs(
         array|ReportListWdrsParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?RequestOptions $requestOptions = null
     ): ReportListWdrsResponse;
 }

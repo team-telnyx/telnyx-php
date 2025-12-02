@@ -60,7 +60,7 @@ interface ClustersContract
      */
     public function compute(
         array|ClusterComputeParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?RequestOptions $requestOptions = null
     ): ClusterComputeResponse;
 
     /**

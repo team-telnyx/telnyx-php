@@ -24,7 +24,7 @@ interface CommentsContract
      */
     public function create(
         array|CommentCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?RequestOptions $requestOptions = null
     ): CommentNewResponse;
 
     /**

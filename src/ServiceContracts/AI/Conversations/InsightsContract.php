@@ -23,7 +23,7 @@ interface InsightsContract
      */
     public function create(
         array|InsightCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?RequestOptions $requestOptions = null
     ): InsightTemplateDetail;
 
     /**

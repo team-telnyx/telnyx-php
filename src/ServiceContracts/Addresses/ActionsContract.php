@@ -35,6 +35,6 @@ interface ActionsContract
      */
     public function validate(
         array|ActionValidateParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?RequestOptions $requestOptions = null
     ): ActionValidateResponse;
 }

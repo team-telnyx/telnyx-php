@@ -33,7 +33,7 @@ interface ConnectionsContract
      */
     public function list(
         array|ConnectionListParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?RequestOptions $requestOptions = null
     ): ConnectionListResponse;
 
     /**

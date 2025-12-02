@@ -46,7 +46,7 @@ interface MessagingContract
      */
     public function list(
         array|MessagingListParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?RequestOptions $requestOptions = null
     ): MessagingListResponse;
 
     /**

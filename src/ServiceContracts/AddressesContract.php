@@ -24,7 +24,7 @@ interface AddressesContract
      */
     public function create(
         array|AddressCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?RequestOptions $requestOptions = null
     ): AddressNewResponse;
 
     /**

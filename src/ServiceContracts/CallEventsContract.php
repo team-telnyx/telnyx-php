@@ -20,6 +20,6 @@ interface CallEventsContract
      */
     public function list(
         array|CallEventListParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?RequestOptions $requestOptions = null
     ): CallEventListResponse;
 }

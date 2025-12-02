@@ -62,7 +62,7 @@ interface McpServersContract
      */
     public function list(
         array|McpServerListParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?RequestOptions $requestOptions = null
     ): array;
 
     /**

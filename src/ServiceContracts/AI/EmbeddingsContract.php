@@ -48,7 +48,7 @@ interface EmbeddingsContract
      */
     public function list(
         array|EmbeddingListParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?RequestOptions $requestOptions = null
     ): EmbeddingListResponse;
 
     /**

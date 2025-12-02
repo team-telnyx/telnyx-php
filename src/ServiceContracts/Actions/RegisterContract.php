@@ -20,6 +20,6 @@ interface RegisterContract
      */
     public function create(
         array|RegisterCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?RequestOptions $requestOptions = null
     ): RegisterNewResponse;
 }

@@ -51,7 +51,7 @@ interface ConferencesContract
      */
     public function list(
         array|ConferenceListParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?RequestOptions $requestOptions = null
     ): ConferenceListResponse;
 
     /**

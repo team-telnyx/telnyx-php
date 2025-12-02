@@ -28,7 +28,7 @@ interface NetworksContract
      */
     public function create(
         array|NetworkCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?RequestOptions $requestOptions = null
     ): NetworkNewResponse;
 
     /**
