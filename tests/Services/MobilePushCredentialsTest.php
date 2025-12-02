@@ -36,10 +36,10 @@ final class MobilePushCredentialsTest extends TestCase
         }
 
         $result = $this->client->mobilePushCredentials->create([
-            'STAINLESS_FIXME_alias' => 'LucyIosCredential',
-            'STAINLESS_FIXME_certificate' => '-----BEGIN CERTIFICATE----- MIIGVDCCBTKCAQEAsNlRJVZn9ZvXcECQm65czs... -----END CERTIFICATE-----',
-            'STAINLESS_FIXME_private_key' => '-----BEGIN RSA PRIVATE KEY----- MIIEpQIBAAKCAQEAsNlRJVZn9ZvXcECQm65czs... -----END RSA PRIVATE KEY-----',
-            'STAINLESS_FIXME_type' => 'ios',
+            'alias' => 'LucyIosCredential',
+            'certificate' => '-----BEGIN CERTIFICATE----- MIIGVDCCBTKCAQEAsNlRJVZn9ZvXcECQm65czs... -----END CERTIFICATE-----',
+            'private_key' => '-----BEGIN RSA PRIVATE KEY----- MIIEpQIBAAKCAQEAsNlRJVZn9ZvXcECQm65czs... -----END RSA PRIVATE KEY-----',
+            'type' => 'ios',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -54,10 +54,10 @@ final class MobilePushCredentialsTest extends TestCase
         }
 
         $result = $this->client->mobilePushCredentials->create([
-            'STAINLESS_FIXME_alias' => 'LucyIosCredential',
-            'STAINLESS_FIXME_certificate' => '-----BEGIN CERTIFICATE----- MIIGVDCCBTKCAQEAsNlRJVZn9ZvXcECQm65czs... -----END CERTIFICATE-----',
-            'STAINLESS_FIXME_private_key' => '-----BEGIN RSA PRIVATE KEY----- MIIEpQIBAAKCAQEAsNlRJVZn9ZvXcECQm65czs... -----END RSA PRIVATE KEY-----',
-            'STAINLESS_FIXME_type' => 'ios',
+            'alias' => 'LucyIosCredential',
+            'certificate' => '-----BEGIN CERTIFICATE----- MIIGVDCCBTKCAQEAsNlRJVZn9ZvXcECQm65czs... -----END CERTIFICATE-----',
+            'private_key' => '-----BEGIN RSA PRIVATE KEY----- MIIEpQIBAAKCAQEAsNlRJVZn9ZvXcECQm65czs... -----END RSA PRIVATE KEY-----',
+            'type' => 'ios',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

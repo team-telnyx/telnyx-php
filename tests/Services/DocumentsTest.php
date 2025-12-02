@@ -133,7 +133,7 @@ final class DocumentsTest extends TestCase
         }
 
         $result = $this->client->documents->upload([
-            'STAINLESS_FIXME_url' => 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
+            'url' => 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -148,9 +148,9 @@ final class DocumentsTest extends TestCase
         }
 
         $result = $this->client->documents->upload([
-            'STAINLESS_FIXME_url' => 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
-            'STAINLESS_FIXME_customer_reference' => 'MY REF 001',
-            'STAINLESS_FIXME_filename' => 'test-document.pdf',
+            'url' => 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
+            'customer_reference' => 'MY REF 001',
+            'filename' => 'test-document.pdf',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -165,7 +165,7 @@ final class DocumentsTest extends TestCase
         }
 
         $result = $this->client->documents->uploadJson([
-            'STAINLESS_FIXME_url' => 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
+            'url' => 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -180,9 +180,9 @@ final class DocumentsTest extends TestCase
         }
 
         $result = $this->client->documents->uploadJson([
-            'STAINLESS_FIXME_url' => 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
-            'STAINLESS_FIXME_customer_reference' => 'MY REF 001',
-            'STAINLESS_FIXME_filename' => 'test-document.pdf',
+            'url' => 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
+            'customer_reference' => 'MY REF 001',
+            'filename' => 'test-document.pdf',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
