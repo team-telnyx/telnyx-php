@@ -5,6 +5,7 @@ namespace Tests\Services;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Telnyx\Campaign\TelnyxCampaignCsp;
 use Telnyx\Client;
 use Tests\UnsupportedMockTests;
 
@@ -40,7 +41,7 @@ final class CampaignBuilderTest extends TestCase
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertNotNull($result);
+        $this->assertInstanceOf(TelnyxCampaignCsp::class, $result);
     }
 
     #[Test]
@@ -89,6 +90,6 @@ final class CampaignBuilderTest extends TestCase
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertNotNull($result);
+        $this->assertInstanceOf(TelnyxCampaignCsp::class, $result);
     }
 }

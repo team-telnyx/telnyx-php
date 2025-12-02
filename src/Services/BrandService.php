@@ -220,7 +220,7 @@ final class BrandService implements BrandContract
             method: 'delete',
             path: ['brand/%1$s', $brandID],
             options: $requestOptions,
-            convert: 'mixed',
+            convert: null,
         );
     }
 
@@ -286,13 +286,13 @@ final class BrandService implements BrandContract
     public function revet(
         string $brandID,
         ?RequestOptions $requestOptions = null
-    ): mixed {
+    ): TelnyxBrand {
         // @phpstan-ignore-next-line;
         return $this->client->request(
             method: 'put',
             path: ['brand/%1$s/revet', $brandID],
             options: $requestOptions,
-            convert: 'mixed',
+            convert: TelnyxBrand::class,
         );
     }
 }

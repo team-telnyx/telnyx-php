@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Campaign\TelnyxCampaignCsp;
 use Telnyx\CampaignBuilder\CampaignBuilderCreateParams;
-use Telnyx\CampaignBuilder\CampaignBuilderNewResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
@@ -71,14 +70,12 @@ final class CampaignBuilderService implements CampaignBuilderContract
      *   webhookURL?: string,
      * }|CampaignBuilderCreateParams $params
      *
-     * @return mixed|TelnyxCampaignCsp
-     *
      * @throws APIException
      */
     public function create(
         array|CampaignBuilderCreateParams $params,
         ?RequestOptions $requestOptions = null,
-    ): mixed {
+    ): TelnyxCampaignCsp {
         [$parsed, $options] = CampaignBuilderCreateParams::parseRequest(
             $params,
             $requestOptions,
@@ -90,7 +87,7 @@ final class CampaignBuilderService implements CampaignBuilderContract
             path: 'campaignBuilder',
             body: (object) $parsed,
             options: $options,
-            convert: CampaignBuilderNewResponse::class,
+            convert: TelnyxCampaignCsp::class,
         );
     }
 }

@@ -101,5 +101,5 @@ interface BrandContract
     public function revet(
         string $brandID,
         ?RequestOptions $requestOptions = null
-    ): mixed;
+    ): TelnyxBrand;
 }

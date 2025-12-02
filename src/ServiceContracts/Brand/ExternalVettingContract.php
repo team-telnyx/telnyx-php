@@ -6,7 +6,9 @@ namespace Telnyx\ServiceContracts\Brand;
 
 use Telnyx\Brand\ExternalVetting\ExternalVettingImportParams;
 use Telnyx\Brand\ExternalVetting\ExternalVettingImportResponse;
+use Telnyx\Brand\ExternalVetting\ExternalVettingListResponseItem;
 use Telnyx\Brand\ExternalVetting\ExternalVettingOrderParams;
+use Telnyx\Brand\ExternalVetting\ExternalVettingOrderResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 
@@ -15,12 +17,14 @@ interface ExternalVettingContract
     /**
      * @api
      *
+     * @return list<ExternalVettingListResponseItem>
+     *
      * @throws APIException
      */
     public function list(
         string $brandID,
         ?RequestOptions $requestOptions = null
-    ): mixed;
+    ): array;
 
     /**
      * @api
@@ -46,5 +50,5 @@ interface ExternalVettingContract
         string $brandID,
         array|ExternalVettingOrderParams $params,
         ?RequestOptions $requestOptions = null,
-    ): mixed;
+    ): ExternalVettingOrderResponse;
 }

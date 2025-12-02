@@ -99,7 +99,7 @@ final class CampaignTest extends TestCase
         $result = $this->client->campaign->acceptSharing('C26F1KLZN');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertTrue($result);
+        $this->assertIsArray($result);
     }
 
     #[Test]
@@ -138,7 +138,7 @@ final class CampaignTest extends TestCase
         $result = $this->client->campaign->getOperationStatus('campaignId');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertTrue($result);
+        $this->assertIsArray($result);
     }
 
     #[Test]

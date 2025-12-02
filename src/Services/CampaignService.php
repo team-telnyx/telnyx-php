@@ -15,6 +15,7 @@ use Telnyx\Campaign\CampaignSubmitAppealResponse;
 use Telnyx\Campaign\CampaignUpdateParams;
 use Telnyx\Campaign\TelnyxCampaignCsp;
 use Telnyx\Client;
+use Telnyx\Core\Conversion\MapOf;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\CampaignContract;
@@ -138,18 +139,20 @@ final class CampaignService implements CampaignContract
      *
      * Manually accept a campaign shared with Telnyx
      *
+     * @return array<string,mixed>
+     *
      * @throws APIException
      */
     public function acceptSharing(
         string $campaignID,
         ?RequestOptions $requestOptions = null
-    ): mixed {
+    ): array {
         // @phpstan-ignore-next-line;
         return $this->client->request(
             method: 'post',
             path: ['campaign/acceptSharing/%1$s', $campaignID],
             options: $requestOptions,
-            convert: 'mixed',
+            convert: new MapOf('mixed'),
         );
     }
 
@@ -198,18 +201,20 @@ final class CampaignService implements CampaignContract
      *
      * Retrieve campaign's operation status at MNO level.
      *
+     * @return array<string,mixed>
+     *
      * @throws APIException
      */
     public function getOperationStatus(
         string $campaignID,
         ?RequestOptions $requestOptions = null
-    ): mixed {
+    ): array {
         // @phpstan-ignore-next-line;
         return $this->client->request(
             method: 'get',
             path: ['campaign/%1$s/operationStatus', $campaignID],
             options: $requestOptions,
-            convert: 'mixed',
+            convert: new MapOf('mixed'),
         );
     }
 

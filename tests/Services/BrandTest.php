@@ -187,7 +187,7 @@ final class BrandTest extends TestCase
         $result = $this->client->brand->delete('brandId');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertTrue($result);
+        $this->assertNull($result);
     }
 
     #[Test]
@@ -226,6 +226,6 @@ final class BrandTest extends TestCase
         $result = $this->client->brand->revet('brandId');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertTrue($result);
+        $this->assertInstanceOf(TelnyxBrand::class, $result);
     }
 }
