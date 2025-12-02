@@ -17,10 +17,12 @@ use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderCreateParams\OrderingGrou
  *   country_iso: value-of<CountryISO>,
  *   phone_number_type: string,
  *   administrative_area?: string|null,
+ *   exclude_held_numbers?: bool|null,
  *   features?: list<string>|null,
  *   locality?: string|null,
  *   national_destination_code?: string|null,
  *   phone_number?: PhoneNumber|null,
+ *   quickship?: bool|null,
  *   strategy?: value-of<Strategy>|null,
  * }
  */
@@ -56,6 +58,12 @@ final class OrderingGroup implements BaseModel
     public ?string $administrative_area;
 
     /**
+     * Filter to exclude phone numbers that are currently on hold/reserved for your account.
+     */
+    #[Api(optional: true)]
+    public ?bool $exclude_held_numbers;
+
+    /**
      * Filter for phone numbers that have the features to satisfy your use case (e.g., ["voice"]).
      *
      * @var list<string>|null $features
@@ -80,6 +88,12 @@ final class OrderingGroup implements BaseModel
      */
     #[Api(optional: true)]
     public ?PhoneNumber $phone_number;
+
+    /**
+     * Filter to exclude phone numbers that need additional time after to purchase to activate. Only applicable for +1 toll_free numbers.
+     */
+    #[Api(optional: true)]
+    public ?bool $quickship;
 
     /**
      * Ordering strategy. Define what action should be taken if we don't have enough phone numbers to fulfill your request. Allowable values are: always = proceed with ordering phone numbers, regardless of current inventory levels; never = do not place any orders unless there are enough phone numbers to satisfy the request. If not specified, the always strategy will be enforced.
@@ -127,10 +141,12 @@ final class OrderingGroup implements BaseModel
         CountryISO|string $country_iso,
         string $phone_number_type,
         ?string $administrative_area = null,
+        ?bool $exclude_held_numbers = null,
         ?array $features = null,
         ?string $locality = null,
         ?string $national_destination_code = null,
         ?PhoneNumber $phone_number = null,
+        ?bool $quickship = null,
         Strategy|string|null $strategy = null,
     ): self {
         $obj = new self;
@@ -140,10 +156,12 @@ final class OrderingGroup implements BaseModel
         $obj->phone_number_type = $phone_number_type;
 
         null !== $administrative_area && $obj->administrative_area = $administrative_area;
+        null !== $exclude_held_numbers && $obj->exclude_held_numbers = $exclude_held_numbers;
         null !== $features && $obj->features = $features;
         null !== $locality && $obj->locality = $locality;
         null !== $national_destination_code && $obj->national_destination_code = $national_destination_code;
         null !== $phone_number && $obj->phone_number = $phone_number;
+        null !== $quickship && $obj->quickship = $quickship;
         null !== $strategy && $obj['strategy'] = $strategy;
 
         return $obj;
@@ -196,6 +214,17 @@ final class OrderingGroup implements BaseModel
     }
 
     /**
+     * Filter to exclude phone numbers that are currently on hold/reserved for your account.
+     */
+    public function withExcludeHeldNumbers(bool $excludeHeldNumbers): self
+    {
+        $obj = clone $this;
+        $obj->exclude_held_numbers = $excludeHeldNumbers;
+
+        return $obj;
+    }
+
+    /**
      * Filter for phone numbers that have the features to satisfy your use case (e.g., ["voice"]).
      *
      * @param list<string> $features
@@ -238,6 +267,17 @@ final class OrderingGroup implements BaseModel
     {
         $obj = clone $this;
         $obj->phone_number = $phoneNumber;
+
+        return $obj;
+    }
+
+    /**
+     * Filter to exclude phone numbers that need additional time after to purchase to activate. Only applicable for +1 toll_free numbers.
+     */
+    public function withQuickship(bool $quickship): self
+    {
+        $obj = clone $this;
+        $obj->quickship = $quickship;
 
         return $obj;
     }
