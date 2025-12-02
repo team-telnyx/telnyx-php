@@ -178,7 +178,7 @@ final class AutorespConfigsService implements AutorespConfigsContract
         string $autorespCfgID,
         array|AutorespConfigDeleteParams $params,
         ?RequestOptions $requestOptions = null,
-    ): mixed {
+    ): string {
         [$parsed, $options] = AutorespConfigDeleteParams::parseRequest(
             $params,
             $requestOptions,
@@ -195,7 +195,7 @@ final class AutorespConfigsService implements AutorespConfigsContract
                 $autorespCfgID,
             ],
             options: $options,
-            convert: 'mixed',
+            convert: 'string',
         );
     }
 }

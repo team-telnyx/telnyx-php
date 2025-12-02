@@ -79,5 +79,5 @@ interface AutorespConfigsContract
         string $autorespCfgID,
         array|AutorespConfigDeleteParams $params,
         ?RequestOptions $requestOptions = null,
-    ): mixed;
+    ): string;
 }

@@ -56,12 +56,14 @@ interface CampaignContract
     /**
      * @api
      *
+     * @return array<string,mixed>
+     *
      * @throws APIException
      */
     public function acceptSharing(
         string $campaignID,
         ?RequestOptions $requestOptions = null
-    ): mixed;
+    ): array;
 
     /**
      * @api
@@ -86,12 +88,14 @@ interface CampaignContract
     /**
      * @api
      *
+     * @return array<string,mixed>
+     *
      * @throws APIException
      */
     public function getOperationStatus(
         string $campaignID,
         ?RequestOptions $requestOptions = null
-    ): mixed;
+    ): array;
 
     /**
      * @api

@@ -6,6 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Brand\ExternalVetting\ExternalVettingImportResponse;
+use Telnyx\Brand\ExternalVetting\ExternalVettingOrderResponse;
 use Telnyx\Client;
 use Tests\UnsupportedMockTests;
 
@@ -37,7 +38,7 @@ final class ExternalVettingTest extends TestCase
         $result = $this->client->brand->externalVetting->list('brandId');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertTrue($result);
+        $this->assertIsList($result);
     }
 
     #[Test]
@@ -89,7 +90,7 @@ final class ExternalVettingTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertTrue($result);
+        $this->assertInstanceOf(ExternalVettingOrderResponse::class, $result);
     }
 
     #[Test]
@@ -105,6 +106,6 @@ final class ExternalVettingTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertTrue($result);
+        $this->assertInstanceOf(ExternalVettingOrderResponse::class, $result);
     }
 }

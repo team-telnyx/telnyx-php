@@ -6,8 +6,11 @@ namespace Telnyx\Services\Brand;
 
 use Telnyx\Brand\ExternalVetting\ExternalVettingImportParams;
 use Telnyx\Brand\ExternalVetting\ExternalVettingImportResponse;
+use Telnyx\Brand\ExternalVetting\ExternalVettingListResponseItem;
 use Telnyx\Brand\ExternalVetting\ExternalVettingOrderParams;
+use Telnyx\Brand\ExternalVetting\ExternalVettingOrderResponse;
 use Telnyx\Client;
+use Telnyx\Core\Conversion\ListOf;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Brand\ExternalVettingContract;
@@ -24,18 +27,20 @@ final class ExternalVettingService implements ExternalVettingContract
      *
      * Get list of valid external vetting record for a given brand
      *
+     * @return list<ExternalVettingListResponseItem>
+     *
      * @throws APIException
      */
     public function list(
         string $brandID,
         ?RequestOptions $requestOptions = null
-    ): mixed {
+    ): array {
         // @phpstan-ignore-next-line;
         return $this->client->request(
             method: 'get',
             path: ['brand/%1$s/externalVetting', $brandID],
             options: $requestOptions,
-            convert: 'mixed',
+            convert: new ListOf(ExternalVettingListResponseItem::class),
         );
     }
 
@@ -87,7 +92,7 @@ final class ExternalVettingService implements ExternalVettingContract
         string $brandID,
         array|ExternalVettingOrderParams $params,
         ?RequestOptions $requestOptions = null,
-    ): mixed {
+    ): ExternalVettingOrderResponse {
         [$parsed, $options] = ExternalVettingOrderParams::parseRequest(
             $params,
             $requestOptions,
@@ -99,7 +104,7 @@ final class ExternalVettingService implements ExternalVettingContract
             path: ['brand/%1$s/externalVetting', $brandID],
             body: (object) $parsed,
             options: $options,
-            convert: 'mixed',
+            convert: ExternalVettingOrderResponse::class,
         );
     }
 }

@@ -36,6 +36,6 @@ final class OsrTest extends TestCase
         $result = $this->client->campaign->osr->getAttributes('campaignId');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertTrue($result);
+        $this->assertIsArray($result);
     }
 }

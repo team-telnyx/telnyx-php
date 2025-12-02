@@ -12,10 +12,12 @@ interface OsrContract
     /**
      * @api
      *
+     * @return array<string,mixed>
+     *
      * @throws APIException
      */
     public function getAttributes(
         string $campaignID,
         ?RequestOptions $requestOptions = null
-    ): mixed;
+    ): array;
 }

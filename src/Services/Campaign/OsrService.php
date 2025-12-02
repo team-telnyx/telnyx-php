@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Campaign;
 
 use Telnyx\Client;
+use Telnyx\Core\Conversion\MapOf;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Campaign\OsrContract;
@@ -21,18 +22,20 @@ final class OsrService implements OsrContract
      *
      * Get My Osr Campaign Attributes
      *
+     * @return array<string,mixed>
+     *
      * @throws APIException
      */
     public function getAttributes(
         string $campaignID,
         ?RequestOptions $requestOptions = null
-    ): mixed {
+    ): array {
         // @phpstan-ignore-next-line;
         return $this->client->request(
             method: 'get',
             path: ['campaign/%1$s/osr/attributes', $campaignID],
             options: $requestOptions,
-            convert: 'mixed',
+            convert: new MapOf('mixed'),
         );
     }
 }

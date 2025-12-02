@@ -173,7 +173,7 @@ final class AutorespConfigsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertTrue($result);
+        $this->assertIsString($result);
     }
 
     #[Test]
@@ -189,6 +189,6 @@ final class AutorespConfigsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertTrue($result);
+        $this->assertIsString($result);
     }
 }

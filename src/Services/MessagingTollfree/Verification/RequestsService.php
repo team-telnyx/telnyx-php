@@ -228,7 +228,7 @@ final class RequestsService implements RequestsContract
             method: 'delete',
             path: ['messaging_tollfree/verification/requests/%1$s', $id],
             options: $requestOptions,
-            convert: 'mixed',
+            convert: null,
         );
     }
 }

@@ -16,12 +16,10 @@ interface CampaignBuilderContract
      *
      * @param array<mixed>|CampaignBuilderCreateParams $params
      *
-     * @return mixed|TelnyxCampaignCsp
-     *
      * @throws APIException
      */
     public function create(
         array|CampaignBuilderCreateParams $params,
         ?RequestOptions $requestOptions = null,
-    ): mixed;
+    ): TelnyxCampaignCsp;
 }
