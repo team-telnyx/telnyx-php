@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\IPs;
 
+use Telnyx\ConnectionsPaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkResponse;
@@ -11,7 +12,9 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type IPListResponseShape = array{data?: list<IP>|null}
+ * @phpstan-type IPListResponseShape = array{
+ *   data?: list<IP>|null, meta?: ConnectionsPaginationMeta|null
+ * }
  */
 final class IPListResponse implements BaseModel, ResponseConverter
 {
@@ -23,6 +26,9 @@ final class IPListResponse implements BaseModel, ResponseConverter
     /** @var list<IP>|null $data */
     #[Api(list: IP::class, optional: true)]
     public ?array $data;
+
+    #[Api(optional: true)]
+    public ?ConnectionsPaginationMeta $meta;
 
     public function __construct()
     {
@@ -36,11 +42,14 @@ final class IPListResponse implements BaseModel, ResponseConverter
      *
      * @param list<IP> $data
      */
-    public static function with(?array $data = null): self
-    {
+    public static function with(
+        ?array $data = null,
+        ?ConnectionsPaginationMeta $meta = null
+    ): self {
         $obj = new self;
 
         null !== $data && $obj->data = $data;
+        null !== $meta && $obj->meta = $meta;
 
         return $obj;
     }
@@ -52,6 +61,14 @@ final class IPListResponse implements BaseModel, ResponseConverter
     {
         $obj = clone $this;
         $obj->data = $data;
+
+        return $obj;
+    }
+
+    public function withMeta(ConnectionsPaginationMeta $meta): self
+    {
+        $obj = clone $this;
+        $obj->meta = $meta;
 
         return $obj;
     }
