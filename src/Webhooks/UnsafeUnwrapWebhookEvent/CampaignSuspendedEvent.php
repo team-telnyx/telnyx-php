@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Webhooks;
+namespace Telnyx\Webhooks\UnsafeUnwrapWebhookEvent;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Webhooks\CampaignSuspendedEvent\Status;
-use Telnyx\Webhooks\CampaignSuspendedEvent\Type;
+use Telnyx\Webhooks\UnsafeUnwrapWebhookEvent\CampaignSuspendedEvent\Status;
+use Telnyx\Webhooks\UnsafeUnwrapWebhookEvent\CampaignSuspendedEvent\Type;
 
 /**
  * @phpstan-type CampaignSuspendedEventShape = array{
