@@ -32,12 +32,14 @@ final class InexplicitNumberOrdersService implements InexplicitNumberOrdersContr
      *     country_iso: 'US'|'CA',
      *     phone_number_type: string,
      *     administrative_area?: string,
+     *     exclude_held_numbers?: bool,
      *     features?: list<string>,
      *     locality?: string,
      *     national_destination_code?: string,
      *     phone_number?: array{
      *       contains?: string, ends_with?: string, starts_with?: string
      *     },
+     *     quickship?: bool,
      *     strategy?: 'always'|'never',
      *   }>,
      *   billing_group_id?: string,
