@@ -32,7 +32,7 @@ interface OAuthGrantsContract
      */
     public function list(
         array|OAuthGrantListParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?RequestOptions $requestOptions = null
     ): OAuthGrantListResponse;
 
     /**

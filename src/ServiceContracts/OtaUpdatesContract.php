@@ -31,6 +31,6 @@ interface OtaUpdatesContract
      */
     public function list(
         array|OtaUpdateListParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?RequestOptions $requestOptions = null
     ): OtaUpdateListResponse;
 }

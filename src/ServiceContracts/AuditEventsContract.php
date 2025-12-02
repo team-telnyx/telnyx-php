@@ -20,6 +20,6 @@ interface AuditEventsContract
      */
     public function list(
         array|AuditEventListParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?RequestOptions $requestOptions = null
     ): AuditEventListResponse;
 }

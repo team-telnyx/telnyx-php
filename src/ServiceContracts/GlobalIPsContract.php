@@ -24,7 +24,7 @@ interface GlobalIPsContract
      */
     public function create(
         array|GlobalIPCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?RequestOptions $requestOptions = null
     ): GlobalIPNewResponse;
 
     /**

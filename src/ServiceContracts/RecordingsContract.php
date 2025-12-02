@@ -32,7 +32,7 @@ interface RecordingsContract
      */
     public function list(
         array|RecordingListParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?RequestOptions $requestOptions = null
     ): RecordingListResponse;
 
     /**

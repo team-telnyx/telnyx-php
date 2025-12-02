@@ -20,6 +20,6 @@ interface UsecaseContract
      */
     public function getCost(
         array|UsecaseGetCostParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?RequestOptions $requestOptions = null
     ): UsecaseGetCostResponse;
 }

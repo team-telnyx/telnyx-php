@@ -55,7 +55,7 @@ interface UserBundlesContract
      */
     public function list(
         array|UserBundleListParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?RequestOptions $requestOptions = null
     ): UserBundleListResponse;
 
     /**

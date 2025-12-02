@@ -63,7 +63,7 @@ interface OAuthContract
      */
     public function register(
         array|OAuthRegisterParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?RequestOptions $requestOptions = null
     ): OAuthRegisterResponse;
 
     /**

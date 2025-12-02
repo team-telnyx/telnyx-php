@@ -49,7 +49,7 @@ interface JobsContract
      */
     public function deleteBatch(
         array|JobDeleteBatchParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?RequestOptions $requestOptions = null
     ): JobDeleteBatchResponse;
 
     /**
@@ -61,7 +61,7 @@ interface JobsContract
      */
     public function updateBatch(
         array|JobUpdateBatchParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?RequestOptions $requestOptions = null
     ): JobUpdateBatchResponse;
 
     /**

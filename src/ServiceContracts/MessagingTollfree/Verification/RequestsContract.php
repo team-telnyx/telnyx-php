@@ -24,7 +24,7 @@ interface RequestsContract
      */
     public function create(
         array|RequestCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?RequestOptions $requestOptions = null
     ): VerificationRequestEgress;
 
     /**

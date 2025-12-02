@@ -32,7 +32,7 @@ interface LogMessagesContract
      */
     public function list(
         array|LogMessageListParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?RequestOptions $requestOptions = null
     ): LogMessageListResponse;
 
     /**

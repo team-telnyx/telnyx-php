@@ -46,6 +46,6 @@ interface ShortCodesContract
      */
     public function list(
         array|ShortCodeListParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?RequestOptions $requestOptions = null
     ): ShortCodeListResponse;
 }
