@@ -6,7 +6,9 @@ namespace Telnyx\Recordings;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Recordings\RecordingResponseData\Channels;
 use Telnyx\Recordings\RecordingResponseData\DownloadURLs;
 use Telnyx\Recordings\RecordingResponseData\RecordType;
@@ -32,10 +34,12 @@ use Telnyx\Recordings\RecordingResponseData\Status;
  *   updated_at?: string|null,
  * }
  */
-final class RecordingResponseData implements BaseModel
+final class RecordingResponseData implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<RecordingResponseDataShape> */
     use SdkModel;
+
+    use SdkResponse;
 
     /**
      * Uniquely identifies the recording.

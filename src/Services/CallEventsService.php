@@ -8,6 +8,7 @@ use Telnyx\CallEvents\CallEventListParams;
 use Telnyx\CallEvents\CallEventListResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\CallEventsContract;
 
@@ -48,12 +49,14 @@ final class CallEventsService implements CallEventsContract
      *   },
      * }|CallEventListParams $params
      *
+     * @return DefaultPagination<CallEventListResponse>
+     *
      * @throws APIException
      */
     public function list(
         array|CallEventListParams $params,
         ?RequestOptions $requestOptions = null
-    ): CallEventListResponse {
+    ): DefaultPagination {
         [$parsed, $options] = CallEventListParams::parseRequest(
             $params,
             $requestOptions,
@@ -66,6 +69,7 @@ final class CallEventsService implements CallEventsContract
             query: $parsed,
             options: $options,
             convert: CallEventListResponse::class,
+            page: DefaultPagination::class,
         );
     }
 }

@@ -6,9 +6,9 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\DefaultPagination;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressDeleteResponse;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressGetResponse;
-use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressListResponse;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressNewResponse;
 use Tests\UnsupportedMockTests;
 
@@ -100,10 +100,7 @@ final class DynamicEmergencyAddressesTest extends TestCase
         $result = $this->client->dynamicEmergencyAddresses->list([]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(
-            DynamicEmergencyAddressListResponse::class,
-            $result
-        );
+        $this->assertInstanceOf(DefaultPagination::class, $result);
     }
 
     #[Test]

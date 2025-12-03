@@ -5,11 +5,12 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
+use Telnyx\RoomCompositions\RoomComposition;
 use Telnyx\RoomCompositions\RoomCompositionCreateParams;
 use Telnyx\RoomCompositions\RoomCompositionGetResponse;
 use Telnyx\RoomCompositions\RoomCompositionListParams;
-use Telnyx\RoomCompositions\RoomCompositionListResponse;
 use Telnyx\RoomCompositions\RoomCompositionNewResponse;
 
 interface RoomCompositionsContract
@@ -41,12 +42,14 @@ interface RoomCompositionsContract
      *
      * @param array<mixed>|RoomCompositionListParams $params
      *
+     * @return DefaultPagination<RoomComposition>
+     *
      * @throws APIException
      */
     public function list(
         array|RoomCompositionListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): RoomCompositionListResponse;
+    ): DefaultPagination;
 
     /**
      * @api

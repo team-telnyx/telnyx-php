@@ -6,11 +6,12 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
+use Telnyx\ExternalConnections\ExternalConnection;
 use Telnyx\ExternalConnections\ExternalConnectionCreateParams;
 use Telnyx\ExternalConnections\ExternalConnectionDeleteResponse;
 use Telnyx\ExternalConnections\ExternalConnectionGetResponse;
 use Telnyx\ExternalConnections\ExternalConnectionListParams;
-use Telnyx\ExternalConnections\ExternalConnectionListResponse;
 use Telnyx\ExternalConnections\ExternalConnectionNewResponse;
 use Telnyx\ExternalConnections\ExternalConnectionUpdateLocationParams;
 use Telnyx\ExternalConnections\ExternalConnectionUpdateLocationResponse;
@@ -173,12 +174,14 @@ final class ExternalConnectionsService implements ExternalConnectionsContract
      *   page?: array{number?: int, size?: int},
      * }|ExternalConnectionListParams $params
      *
+     * @return DefaultPagination<ExternalConnection>
+     *
      * @throws APIException
      */
     public function list(
         array|ExternalConnectionListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): ExternalConnectionListResponse {
+    ): DefaultPagination {
         [$parsed, $options] = ExternalConnectionListParams::parseRequest(
             $params,
             $requestOptions,
@@ -190,7 +193,8 @@ final class ExternalConnectionsService implements ExternalConnectionsContract
             path: 'external_connections',
             query: $parsed,
             options: $options,
-            convert: ExternalConnectionListResponse::class,
+            convert: ExternalConnection::class,
+            page: DefaultPagination::class,
         );
     }
 

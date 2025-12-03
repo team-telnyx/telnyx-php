@@ -5,11 +5,12 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\PhoneNumbers;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\PhoneNumbers\Messaging\MessagingGetResponse;
 use Telnyx\PhoneNumbers\Messaging\MessagingListParams;
-use Telnyx\PhoneNumbers\Messaging\MessagingListResponse;
 use Telnyx\PhoneNumbers\Messaging\MessagingUpdateParams;
 use Telnyx\PhoneNumbers\Messaging\MessagingUpdateResponse;
+use Telnyx\PhoneNumberWithMessagingSettings;
 use Telnyx\RequestOptions;
 
 interface MessagingContract
@@ -42,10 +43,12 @@ interface MessagingContract
      *
      * @param array<mixed>|MessagingListParams $params
      *
+     * @return DefaultPagination<PhoneNumberWithMessagingSettings>
+     *
      * @throws APIException
      */
     public function list(
         array|MessagingListParams $params,
         ?RequestOptions $requestOptions = null
-    ): MessagingListResponse;
+    ): DefaultPagination;
 }

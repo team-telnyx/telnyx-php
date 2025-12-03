@@ -176,7 +176,7 @@ final class ActionsService implements ActionsContract
      * - `call.bridged` for Leg B
      *
      * @param array{
-     *   call_control_id: string,
+     *   call_control_id_to_bridge_with: string,
      *   client_state?: string,
      *   command_id?: string,
      *   mute_dtmf?: 'none'|'both'|'self'|'opposite',
@@ -199,7 +199,7 @@ final class ActionsService implements ActionsContract
      * @throws APIException
      */
     public function bridge(
-        string $callControlID,
+        string $callControlIDToBridge,
         array|ActionBridgeParams $params,
         ?RequestOptions $requestOptions = null,
     ): ActionBridgeResponse {
@@ -211,7 +211,7 @@ final class ActionsService implements ActionsContract
         // @phpstan-ignore-next-line;
         return $this->client->request(
             method: 'post',
-            path: ['calls/%1$s/actions/bridge', $callControlID],
+            path: ['calls/%1$s/actions/bridge', $callControlIDToBridge],
             body: (object) $parsed,
             options: $options,
             convert: ActionBridgeResponse::class,
@@ -316,7 +316,7 @@ final class ActionsService implements ActionsContract
      * - `call.ai_gather.message_history_updated` (if `send_message_history_updates` is set to `true`)
      *
      * @param array{
-     *   parameters: mixed,
+     *   parameters: array<string,mixed>,
      *   assistant?: array{
      *     instructions?: string,
      *     model?: string,
@@ -334,7 +334,9 @@ final class ActionsService implements ActionsContract
      *   transcription?: array{model?: string},
      *   user_response_timeout_ms?: int,
      *   voice?: string,
-     *   voice_settings?: mixed|array{api_key_ref?: string}|array{voice_speed?: float},
+     *   voice_settings?: array{api_key_ref?: string}|array{
+     *     voice_speed?: float
+     *   }|array<string,mixed>,
      * }|ActionGatherUsingAIParams $params
      *
      * @throws APIException
@@ -439,7 +441,9 @@ final class ActionsService implements ActionsContract
      *   terminating_digit?: string,
      *   timeout_millis?: int,
      *   valid_digits?: string,
-     *   voice_settings?: mixed|array{api_key_ref?: string}|array{voice_speed?: float},
+     *   voice_settings?: array{api_key_ref?: string}|array{
+     *     voice_speed?: float
+     *   }|array<string,mixed>,
      * }|ActionGatherUsingSpeakParams $params
      *
      * @throws APIException
@@ -771,7 +775,9 @@ final class ActionsService implements ActionsContract
      *   payload_type?: 'text'|'ssml',
      *   service_level?: 'basic'|'premium',
      *   stop?: string,
-     *   voice_settings?: mixed|array{api_key_ref?: string}|array{voice_speed?: float},
+     *   voice_settings?: array{api_key_ref?: string}|array{
+     *     voice_speed?: float
+     *   }|array<string,mixed>,
      * }|ActionSpeakParams $params
      *
      * @throws APIException
@@ -816,7 +822,9 @@ final class ActionsService implements ActionsContract
      *   interruption_settings?: array{enable?: bool},
      *   transcription?: array{model?: string},
      *   voice?: string,
-     *   voice_settings?: mixed|array{api_key_ref?: string}|array{voice_speed?: float},
+     *   voice_settings?: array{api_key_ref?: string}|array{
+     *     voice_speed?: float
+     *   }|array<string,mixed>,
      * }|ActionStartAIAssistantParams $params
      *
      * @throws APIException

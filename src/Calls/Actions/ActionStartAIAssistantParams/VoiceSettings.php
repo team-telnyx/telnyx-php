@@ -9,6 +9,7 @@ use Telnyx\Calls\Actions\TelnyxVoiceSettings;
 use Telnyx\Core\Concerns\SdkUnion;
 use Telnyx\Core\Conversion\Contracts\Converter;
 use Telnyx\Core\Conversion\Contracts\ConverterSource;
+use Telnyx\Core\Conversion\MapOf;
 
 /**
  * The settings associated with the voice selected.
@@ -23,7 +24,9 @@ final class VoiceSettings implements ConverterSource
     public static function variants(): array
     {
         return [
-            ElevenLabsVoiceSettings::class, TelnyxVoiceSettings::class, 'mixed',
+            ElevenLabsVoiceSettings::class,
+            TelnyxVoiceSettings::class,
+            new MapOf('mixed'),
         ];
     }
 }

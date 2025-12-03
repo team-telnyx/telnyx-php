@@ -5,11 +5,12 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
+use Telnyx\FqdnConnections\FqdnConnection;
 use Telnyx\FqdnConnections\FqdnConnectionCreateParams;
 use Telnyx\FqdnConnections\FqdnConnectionDeleteResponse;
 use Telnyx\FqdnConnections\FqdnConnectionGetResponse;
 use Telnyx\FqdnConnections\FqdnConnectionListParams;
-use Telnyx\FqdnConnections\FqdnConnectionListResponse;
 use Telnyx\FqdnConnections\FqdnConnectionNewResponse;
 use Telnyx\FqdnConnections\FqdnConnectionUpdateParams;
 use Telnyx\FqdnConnections\FqdnConnectionUpdateResponse;
@@ -57,12 +58,14 @@ interface FqdnConnectionsContract
      *
      * @param array<mixed>|FqdnConnectionListParams $params
      *
+     * @return DefaultPagination<FqdnConnection>
+     *
      * @throws APIException
      */
     public function list(
         array|FqdnConnectionListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): FqdnConnectionListResponse;
+    ): DefaultPagination;
 
     /**
      * @api

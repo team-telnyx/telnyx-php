@@ -6,23 +6,24 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
+use Telnyx\MessagingProfiles\MessagingProfile;
 use Telnyx\MessagingProfiles\MessagingProfileCreateParams;
 use Telnyx\MessagingProfiles\MessagingProfileDeleteResponse;
 use Telnyx\MessagingProfiles\MessagingProfileGetResponse;
 use Telnyx\MessagingProfiles\MessagingProfileListParams;
 use Telnyx\MessagingProfiles\MessagingProfileListPhoneNumbersParams;
-use Telnyx\MessagingProfiles\MessagingProfileListPhoneNumbersResponse;
-use Telnyx\MessagingProfiles\MessagingProfileListResponse;
 use Telnyx\MessagingProfiles\MessagingProfileListShortCodesParams;
-use Telnyx\MessagingProfiles\MessagingProfileListShortCodesResponse;
 use Telnyx\MessagingProfiles\MessagingProfileNewResponse;
 use Telnyx\MessagingProfiles\MessagingProfileUpdateParams;
 use Telnyx\MessagingProfiles\MessagingProfileUpdateResponse;
 use Telnyx\MessagingProfiles\NumberPoolSettings;
 use Telnyx\MessagingProfiles\URLShortenerSettings;
+use Telnyx\PhoneNumberWithMessagingSettings;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MessagingProfilesContract;
 use Telnyx\Services\MessagingProfiles\AutorespConfigsService;
+use Telnyx\ShortCode;
 
 final class MessagingProfilesService implements MessagingProfilesContract
 {
@@ -101,13 +102,13 @@ final class MessagingProfilesService implements MessagingProfilesContract
      * @throws APIException
      */
     public function retrieve(
-        string $id,
+        string $messagingProfileID,
         ?RequestOptions $requestOptions = null
     ): MessagingProfileGetResponse {
         // @phpstan-ignore-next-line;
         return $this->client->request(
             method: 'get',
-            path: ['messaging_profiles/%1$s', $id],
+            path: ['messaging_profiles/%1$s', $messagingProfileID],
             options: $requestOptions,
             convert: MessagingProfileGetResponse::class,
         );
@@ -150,7 +151,7 @@ final class MessagingProfilesService implements MessagingProfilesContract
      * @throws APIException
      */
     public function update(
-        string $id,
+        string $messagingProfileID,
         array|MessagingProfileUpdateParams $params,
         ?RequestOptions $requestOptions = null,
     ): MessagingProfileUpdateResponse {
@@ -162,7 +163,7 @@ final class MessagingProfilesService implements MessagingProfilesContract
         // @phpstan-ignore-next-line;
         return $this->client->request(
             method: 'patch',
-            path: ['messaging_profiles/%1$s', $id],
+            path: ['messaging_profiles/%1$s', $messagingProfileID],
             body: (object) $parsed,
             options: $options,
             convert: MessagingProfileUpdateResponse::class,
@@ -178,12 +179,14 @@ final class MessagingProfilesService implements MessagingProfilesContract
      *   filter?: array{name?: string}, page?: array{number?: int, size?: int}
      * }|MessagingProfileListParams $params
      *
+     * @return DefaultPagination<MessagingProfile>
+     *
      * @throws APIException
      */
     public function list(
         array|MessagingProfileListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): MessagingProfileListResponse {
+    ): DefaultPagination {
         [$parsed, $options] = MessagingProfileListParams::parseRequest(
             $params,
             $requestOptions,
@@ -195,7 +198,8 @@ final class MessagingProfilesService implements MessagingProfilesContract
             path: 'messaging_profiles',
             query: $parsed,
             options: $options,
-            convert: MessagingProfileListResponse::class,
+            convert: MessagingProfile::class,
+            page: DefaultPagination::class,
         );
     }
 
@@ -207,13 +211,13 @@ final class MessagingProfilesService implements MessagingProfilesContract
      * @throws APIException
      */
     public function delete(
-        string $id,
+        string $messagingProfileID,
         ?RequestOptions $requestOptions = null
     ): MessagingProfileDeleteResponse {
         // @phpstan-ignore-next-line;
         return $this->client->request(
             method: 'delete',
-            path: ['messaging_profiles/%1$s', $id],
+            path: ['messaging_profiles/%1$s', $messagingProfileID],
             options: $requestOptions,
             convert: MessagingProfileDeleteResponse::class,
         );
@@ -228,13 +232,15 @@ final class MessagingProfilesService implements MessagingProfilesContract
      *   page?: array{number?: int, size?: int}
      * }|MessagingProfileListPhoneNumbersParams $params
      *
+     * @return DefaultPagination<PhoneNumberWithMessagingSettings>
+     *
      * @throws APIException
      */
     public function listPhoneNumbers(
-        string $id,
+        string $messagingProfileID,
         array|MessagingProfileListPhoneNumbersParams $params,
         ?RequestOptions $requestOptions = null,
-    ): MessagingProfileListPhoneNumbersResponse {
+    ): DefaultPagination {
         [$parsed, $options] = MessagingProfileListPhoneNumbersParams::parseRequest(
             $params,
             $requestOptions,
@@ -243,10 +249,11 @@ final class MessagingProfilesService implements MessagingProfilesContract
         // @phpstan-ignore-next-line;
         return $this->client->request(
             method: 'get',
-            path: ['messaging_profiles/%1$s/phone_numbers', $id],
+            path: ['messaging_profiles/%1$s/phone_numbers', $messagingProfileID],
             query: $parsed,
             options: $options,
-            convert: MessagingProfileListPhoneNumbersResponse::class,
+            convert: PhoneNumberWithMessagingSettings::class,
+            page: DefaultPagination::class,
         );
     }
 
@@ -259,13 +266,15 @@ final class MessagingProfilesService implements MessagingProfilesContract
      *   page?: array{number?: int, size?: int}
      * }|MessagingProfileListShortCodesParams $params
      *
+     * @return DefaultPagination<ShortCode>
+     *
      * @throws APIException
      */
     public function listShortCodes(
-        string $id,
+        string $messagingProfileID,
         array|MessagingProfileListShortCodesParams $params,
         ?RequestOptions $requestOptions = null,
-    ): MessagingProfileListShortCodesResponse {
+    ): DefaultPagination {
         [$parsed, $options] = MessagingProfileListShortCodesParams::parseRequest(
             $params,
             $requestOptions,
@@ -274,10 +283,11 @@ final class MessagingProfilesService implements MessagingProfilesContract
         // @phpstan-ignore-next-line;
         return $this->client->request(
             method: 'get',
-            path: ['messaging_profiles/%1$s/short_codes', $id],
+            path: ['messaging_profiles/%1$s/short_codes', $messagingProfileID],
             query: $parsed,
             options: $options,
-            convert: MessagingProfileListShortCodesResponse::class,
+            convert: ShortCode::class,
+            page: DefaultPagination::class,
         );
     }
 }

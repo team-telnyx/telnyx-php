@@ -7,11 +7,12 @@ namespace Telnyx\ServiceContracts\AI;
 use Telnyx\AI\McpServers\McpServerCreateParams;
 use Telnyx\AI\McpServers\McpServerGetResponse;
 use Telnyx\AI\McpServers\McpServerListParams;
-use Telnyx\AI\McpServers\McpServerListResponseItem;
+use Telnyx\AI\McpServers\McpServerListResponse;
 use Telnyx\AI\McpServers\McpServerNewResponse;
 use Telnyx\AI\McpServers\McpServerUpdateParams;
 use Telnyx\AI\McpServers\McpServerUpdateResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultFlatPaginationTopLevelArray;
 use Telnyx\RequestOptions;
 
 interface McpServersContract
@@ -56,14 +57,14 @@ interface McpServersContract
      *
      * @param array<mixed>|McpServerListParams $params
      *
-     * @return list<McpServerListResponseItem>
+     * @return DefaultFlatPaginationTopLevelArray<McpServerListResponse>
      *
      * @throws APIException
      */
     public function list(
         array|McpServerListParams $params,
         ?RequestOptions $requestOptions = null
-    ): array;
+    ): DefaultFlatPaginationTopLevelArray;
 
     /**
      * @api

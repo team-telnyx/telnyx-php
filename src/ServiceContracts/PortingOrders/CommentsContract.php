@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\PortingOrders;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\PortingOrders\Comments\CommentCreateParams;
 use Telnyx\PortingOrders\Comments\CommentListParams;
 use Telnyx\PortingOrders\Comments\CommentListResponse;
@@ -31,11 +32,13 @@ interface CommentsContract
      *
      * @param array<mixed>|CommentListParams $params
      *
+     * @return DefaultPagination<CommentListResponse>
+     *
      * @throws APIException
      */
     public function list(
         string $id,
         array|CommentListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): CommentListResponse;
+    ): DefaultPagination;
 }

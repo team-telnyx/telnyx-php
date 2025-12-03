@@ -6,7 +6,9 @@ namespace Telnyx\CustomerServiceRecords;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecord\Result;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecord\Status;
 
@@ -22,10 +24,12 @@ use Telnyx\CustomerServiceRecords\CustomerServiceRecord\Status;
  *   updated_at?: \DateTimeInterface|null,
  * }
  */
-final class CustomerServiceRecord implements BaseModel
+final class CustomerServiceRecord implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<CustomerServiceRecordShape> */
     use SdkModel;
+
+    use SdkResponse;
 
     /**
      * Uniquely identifies this customer service record.

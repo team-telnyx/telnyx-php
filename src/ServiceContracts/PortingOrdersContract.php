@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
+use Telnyx\PortingOrders\PortingOrder;
 use Telnyx\PortingOrders\PortingOrderCreateParams;
 use Telnyx\PortingOrders\PortingOrderGetAllowedFocWindowsResponse;
 use Telnyx\PortingOrders\PortingOrderGetExceptionTypesResponse;
@@ -12,7 +14,6 @@ use Telnyx\PortingOrders\PortingOrderGetRequirementsResponse;
 use Telnyx\PortingOrders\PortingOrderGetResponse;
 use Telnyx\PortingOrders\PortingOrderGetSubRequestResponse;
 use Telnyx\PortingOrders\PortingOrderListParams;
-use Telnyx\PortingOrders\PortingOrderListResponse;
 use Telnyx\PortingOrders\PortingOrderNewResponse;
 use Telnyx\PortingOrders\PortingOrderRetrieveLoaTemplateParams;
 use Telnyx\PortingOrders\PortingOrderRetrieveParams;
@@ -66,12 +67,14 @@ interface PortingOrdersContract
      *
      * @param array<mixed>|PortingOrderListParams $params
      *
+     * @return DefaultPagination<PortingOrder>
+     *
      * @throws APIException
      */
     public function list(
         array|PortingOrderListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): PortingOrderListResponse;
+    ): DefaultPagination;
 
     /**
      * @api
@@ -120,13 +123,15 @@ interface PortingOrdersContract
      *
      * @param array<mixed>|PortingOrderRetrieveRequirementsParams $params
      *
+     * @return DefaultPagination<PortingOrderGetRequirementsResponse>
+     *
      * @throws APIException
      */
     public function retrieveRequirements(
         string $id,
         array|PortingOrderRetrieveRequirementsParams $params,
         ?RequestOptions $requestOptions = null,
-    ): PortingOrderGetRequirementsResponse;
+    ): DefaultPagination;
 
     /**
      * @api

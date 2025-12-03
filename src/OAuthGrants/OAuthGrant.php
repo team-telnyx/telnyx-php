@@ -6,7 +6,9 @@ namespace Telnyx\OAuthGrants;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\OAuthGrants\OAuthGrant\RecordType;
 
 /**
@@ -19,10 +21,12 @@ use Telnyx\OAuthGrants\OAuthGrant\RecordType;
  *   last_used_at?: \DateTimeInterface|null,
  * }
  */
-final class OAuthGrant implements BaseModel
+final class OAuthGrant implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<OAuthGrantShape> */
     use SdkModel;
+
+    use SdkResponse;
 
     /**
      * Unique identifier for the OAuth grant.

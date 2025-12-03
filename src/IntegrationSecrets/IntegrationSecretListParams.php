@@ -9,7 +9,6 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\IntegrationSecrets\IntegrationSecretListParams\Filter;
-use Telnyx\IntegrationSecrets\IntegrationSecretListParams\Page;
 
 /**
  * Retrieve a list of all integration secrets configured by the user.
@@ -17,7 +16,7 @@ use Telnyx\IntegrationSecrets\IntegrationSecretListParams\Page;
  * @see Telnyx\Services\IntegrationSecretsService::list()
  *
  * @phpstan-type IntegrationSecretListParamsShape = array{
- *   filter?: Filter, page?: Page
+ *   filter?: Filter, page_number_?: int, page_size_?: int
  * }
  */
 final class IntegrationSecretListParams implements BaseModel
@@ -32,11 +31,11 @@ final class IntegrationSecretListParams implements BaseModel
     #[Api(optional: true)]
     public ?Filter $filter;
 
-    /**
-     * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
-     */
     #[Api(optional: true)]
-    public ?Page $page;
+    public ?int $page_number_;
+
+    #[Api(optional: true)]
+    public ?int $page_size_;
 
     public function __construct()
     {
@@ -48,12 +47,16 @@ final class IntegrationSecretListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?Filter $filter = null, ?Page $page = null): self
-    {
+    public static function with(
+        ?Filter $filter = null,
+        ?int $page_number_ = null,
+        ?int $page_size_ = null
+    ): self {
         $obj = new self;
 
         null !== $filter && $obj->filter = $filter;
-        null !== $page && $obj->page = $page;
+        null !== $page_number_ && $obj->page_number_ = $page_number_;
+        null !== $page_size_ && $obj->page_size_ = $page_size_;
 
         return $obj;
     }
@@ -69,13 +72,18 @@ final class IntegrationSecretListParams implements BaseModel
         return $obj;
     }
 
-    /**
-     * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
-     */
-    public function withPage(Page $page): self
+    public function withPageNumber(int $pageNumber): self
     {
         $obj = clone $this;
-        $obj->page = $page;
+        $obj->page_number_ = $pageNumber;
+
+        return $obj;
+    }
+
+    public function withPageSize(int $pageSize): self
+    {
+        $obj = clone $this;
+        $obj->page_size_ = $pageSize;
 
         return $obj;
     }

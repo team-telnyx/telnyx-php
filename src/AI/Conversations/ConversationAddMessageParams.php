@@ -25,7 +25,7 @@ use Telnyx\Core\Conversion\MapOf;
  *   sent_at?: \DateTimeInterface,
  *   tool_call_id?: string,
  *   tool_calls?: list<array<string,mixed>>,
- *   tool_choice?: mixed|string,
+ *   tool_choice?: string|array<string,mixed>,
  * }
  */
 final class ConversationAddMessageParams implements BaseModel
@@ -57,9 +57,9 @@ final class ConversationAddMessageParams implements BaseModel
     #[Api(list: new MapOf('mixed'), optional: true)]
     public ?array $tool_calls;
 
-    /** @var mixed|string|null $tool_choice */
+    /** @var string|array<string,mixed>|null $tool_choice */
     #[Api(union: ToolChoice::class, optional: true)]
-    public mixed $tool_choice;
+    public string|array|null $tool_choice;
 
     /**
      * `new ConversationAddMessageParams()` is missing required properties by the API.
@@ -87,7 +87,7 @@ final class ConversationAddMessageParams implements BaseModel
      *
      * @param array<string,string|int|bool|list<string|int|bool>> $metadata
      * @param list<array<string,mixed>> $tool_calls
-     * @param mixed|string $tool_choice
+     * @param string|array<string,mixed> $tool_choice
      */
     public static function with(
         string $role,
@@ -97,7 +97,7 @@ final class ConversationAddMessageParams implements BaseModel
         ?\DateTimeInterface $sent_at = null,
         ?string $tool_call_id = null,
         ?array $tool_calls = null,
-        mixed $tool_choice = null,
+        string|array|null $tool_choice = null,
     ): self {
         $obj = new self;
 
@@ -177,9 +177,9 @@ final class ConversationAddMessageParams implements BaseModel
     }
 
     /**
-     * @param mixed|string $toolChoice
+     * @param string|array<string,mixed> $toolChoice
      */
-    public function withToolChoice(mixed $toolChoice): self
+    public function withToolChoice(string|array $toolChoice): self
     {
         $obj = clone $this;
         $obj->tool_choice = $toolChoice;

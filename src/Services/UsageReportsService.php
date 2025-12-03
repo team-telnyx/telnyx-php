@@ -5,13 +5,14 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\Core\Conversion\MapOf;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\UsageReportsContract;
 use Telnyx\UsageReports\UsageReportGetOptionsParams;
 use Telnyx\UsageReports\UsageReportGetOptionsResponse;
 use Telnyx\UsageReports\UsageReportListParams;
-use Telnyx\UsageReports\UsageReportListResponse;
 
 final class UsageReportsService implements UsageReportsContract
 {
@@ -34,18 +35,21 @@ final class UsageReportsService implements UsageReportsContract
      *   filter?: string,
      *   format?: 'csv'|'json',
      *   managed_accounts?: bool,
-     *   page?: array{number?: int, size?: int},
+     *   page_number_?: int,
+     *   page_size_?: int,
      *   sort?: list<string>,
      *   start_date?: string,
      *   authorization_bearer?: string,
      * }|UsageReportListParams $params
+     *
+     * @return DefaultFlatPagination<array<string,mixed>>
      *
      * @throws APIException
      */
     public function list(
         array|UsageReportListParams $params,
         ?RequestOptions $requestOptions = null
-    ): UsageReportListResponse {
+    ): DefaultFlatPagination {
         [$parsed, $options] = UsageReportListParams::parseRequest(
             $params,
             $requestOptions,
@@ -60,7 +64,8 @@ final class UsageReportsService implements UsageReportsContract
                 'filter',
                 'format',
                 'managed_accounts',
-                'page',
+                'page[number]',
+                'page[size]',
                 'sort',
                 'start_date',
             ],
@@ -76,7 +81,8 @@ final class UsageReportsService implements UsageReportsContract
             query: array_intersect_key($parsed, $query_params),
             headers: $header_params,
             options: $options,
-            convert: UsageReportListResponse::class,
+            convert: new MapOf('mixed'),
+            page: DefaultFlatPagination::class,
         );
     }
 

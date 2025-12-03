@@ -6,7 +6,9 @@ namespace Telnyx\PortingOrders\PhoneNumberBlocks;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PortingPhoneNumberBlock\ActivationRange;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PortingPhoneNumberBlock\PhoneNumberRange;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PortingPhoneNumberBlock\PhoneNumberType;
@@ -23,10 +25,12 @@ use Telnyx\PortingOrders\PhoneNumberBlocks\PortingPhoneNumberBlock\PhoneNumberTy
  *   updated_at?: \DateTimeInterface|null,
  * }
  */
-final class PortingPhoneNumberBlock implements BaseModel
+final class PortingPhoneNumberBlock implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<PortingPhoneNumberBlockShape> */
     use SdkModel;
+
+    use SdkResponse;
 
     /**
      * Uniquely identifies this porting phone number block.

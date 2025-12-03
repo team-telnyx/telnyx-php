@@ -6,6 +6,7 @@ namespace Telnyx\Services\PortingOrders;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentCreateParams;
 use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentDeleteParams;
 use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentListParams;
@@ -65,13 +66,15 @@ final class AdditionalDocumentsService implements AdditionalDocumentsContract
      *   sort?: array{value?: 'created_at'|'-created_at'},
      * }|AdditionalDocumentListParams $params
      *
+     * @return DefaultPagination<AdditionalDocumentListResponse>
+     *
      * @throws APIException
      */
     public function list(
         string $id,
         array|AdditionalDocumentListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): AdditionalDocumentListResponse {
+    ): DefaultPagination {
         [$parsed, $options] = AdditionalDocumentListParams::parseRequest(
             $params,
             $requestOptions,
@@ -84,6 +87,7 @@ final class AdditionalDocumentsService implements AdditionalDocumentsContract
             query: $parsed,
             options: $options,
             convert: AdditionalDocumentListResponse::class,
+            page: DefaultPagination::class,
         );
     }
 

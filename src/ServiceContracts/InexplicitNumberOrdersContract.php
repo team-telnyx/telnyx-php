@@ -5,11 +5,12 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultFlatPaginationForInexplicitNumberOrders;
 use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderCreateParams;
 use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderGetResponse;
 use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderListParams;
-use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderListResponse;
 use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderNewResponse;
+use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderResponse;
 use Telnyx\RequestOptions;
 
 interface InexplicitNumberOrdersContract
@@ -41,10 +42,12 @@ interface InexplicitNumberOrdersContract
      *
      * @param array<mixed>|InexplicitNumberOrderListParams $params
      *
+     * @return DefaultFlatPaginationForInexplicitNumberOrders<InexplicitNumberOrderResponse,>
+     *
      * @throws APIException
      */
     public function list(
         array|InexplicitNumberOrderListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): InexplicitNumberOrderListResponse;
+    ): DefaultFlatPaginationForInexplicitNumberOrders;
 }

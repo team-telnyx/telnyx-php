@@ -5,10 +5,11 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
+use Telnyx\NumberReservations\NumberReservation;
 use Telnyx\NumberReservations\NumberReservationCreateParams;
 use Telnyx\NumberReservations\NumberReservationGetResponse;
 use Telnyx\NumberReservations\NumberReservationListParams;
-use Telnyx\NumberReservations\NumberReservationListResponse;
 use Telnyx\NumberReservations\NumberReservationNewResponse;
 use Telnyx\RequestOptions;
 
@@ -41,10 +42,12 @@ interface NumberReservationsContract
      *
      * @param array<mixed>|NumberReservationListParams $params
      *
+     * @return DefaultPagination<NumberReservation>
+     *
      * @throws APIException
      */
     public function list(
         array|NumberReservationListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): NumberReservationListResponse;
+    ): DefaultPagination;
 }

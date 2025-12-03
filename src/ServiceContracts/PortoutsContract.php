@@ -5,11 +5,12 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
+use Telnyx\Portouts\PortoutDetails;
 use Telnyx\Portouts\PortoutGetResponse;
 use Telnyx\Portouts\PortoutListParams;
 use Telnyx\Portouts\PortoutListRejectionCodesParams;
 use Telnyx\Portouts\PortoutListRejectionCodesResponse;
-use Telnyx\Portouts\PortoutListResponse;
 use Telnyx\Portouts\PortoutUpdateStatusParams;
 use Telnyx\Portouts\PortoutUpdateStatusParams\Status;
 use Telnyx\Portouts\PortoutUpdateStatusResponse;
@@ -32,12 +33,14 @@ interface PortoutsContract
      *
      * @param array<mixed>|PortoutListParams $params
      *
+     * @return DefaultPagination<PortoutDetails>
+     *
      * @throws APIException
      */
     public function list(
         array|PortoutListParams $params,
         ?RequestOptions $requestOptions = null
-    ): PortoutListResponse;
+    ): DefaultPagination;
 
     /**
      * @api

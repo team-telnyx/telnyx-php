@@ -4,17 +4,20 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\PhoneNumberConfigurations;
 
-use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
-use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListResponse\Data;
 
 /**
  * @phpstan-type PhoneNumberConfigurationListResponseShape = array{
- *   data?: list<Data>|null, meta?: PaginationMeta|null
+ *   id?: string|null,
+ *   created_at?: \DateTimeInterface|null,
+ *   porting_phone_number_id?: string|null,
+ *   record_type?: string|null,
+ *   updated_at?: \DateTimeInterface|null,
+ *   user_bundle_id?: string|null,
  * }
  */
 final class PhoneNumberConfigurationListResponse implements BaseModel, ResponseConverter
@@ -24,12 +27,41 @@ final class PhoneNumberConfigurationListResponse implements BaseModel, ResponseC
 
     use SdkResponse;
 
-    /** @var list<Data>|null $data */
-    #[Api(list: Data::class, optional: true)]
-    public ?array $data;
-
+    /**
+     * Uniquely identifies this phone number configuration.
+     */
     #[Api(optional: true)]
-    public ?PaginationMeta $meta;
+    public ?string $id;
+
+    /**
+     * ISO 8601 formatted date indicating when the resource was created.
+     */
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $created_at;
+
+    /**
+     * Identifies the associated porting phone number.
+     */
+    #[Api(optional: true)]
+    public ?string $porting_phone_number_id;
+
+    /**
+     * Identifies the type of the resource.
+     */
+    #[Api(optional: true)]
+    public ?string $record_type;
+
+    /**
+     * ISO 8601 formatted date indicating when the resource was updated.
+     */
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $updated_at;
+
+    /**
+     * Identifies the associated user bundle.
+     */
+    #[Api(optional: true)]
+    public ?string $user_bundle_id;
 
     public function __construct()
     {
@@ -40,36 +72,89 @@ final class PhoneNumberConfigurationListResponse implements BaseModel, ResponseC
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
-     *
-     * @param list<Data> $data
      */
     public static function with(
-        ?array $data = null,
-        ?PaginationMeta $meta = null
+        ?string $id = null,
+        ?\DateTimeInterface $created_at = null,
+        ?string $porting_phone_number_id = null,
+        ?string $record_type = null,
+        ?\DateTimeInterface $updated_at = null,
+        ?string $user_bundle_id = null,
     ): self {
         $obj = new self;
 
-        null !== $data && $obj->data = $data;
-        null !== $meta && $obj->meta = $meta;
+        null !== $id && $obj->id = $id;
+        null !== $created_at && $obj->created_at = $created_at;
+        null !== $porting_phone_number_id && $obj->porting_phone_number_id = $porting_phone_number_id;
+        null !== $record_type && $obj->record_type = $record_type;
+        null !== $updated_at && $obj->updated_at = $updated_at;
+        null !== $user_bundle_id && $obj->user_bundle_id = $user_bundle_id;
 
         return $obj;
     }
 
     /**
-     * @param list<Data> $data
+     * Uniquely identifies this phone number configuration.
      */
-    public function withData(array $data): self
+    public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->data = $data;
+        $obj->id = $id;
 
         return $obj;
     }
 
-    public function withMeta(PaginationMeta $meta): self
+    /**
+     * ISO 8601 formatted date indicating when the resource was created.
+     */
+    public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->meta = $meta;
+        $obj->created_at = $createdAt;
+
+        return $obj;
+    }
+
+    /**
+     * Identifies the associated porting phone number.
+     */
+    public function withPortingPhoneNumberID(string $portingPhoneNumberID): self
+    {
+        $obj = clone $this;
+        $obj->porting_phone_number_id = $portingPhoneNumberID;
+
+        return $obj;
+    }
+
+    /**
+     * Identifies the type of the resource.
+     */
+    public function withRecordType(string $recordType): self
+    {
+        $obj = clone $this;
+        $obj->record_type = $recordType;
+
+        return $obj;
+    }
+
+    /**
+     * ISO 8601 formatted date indicating when the resource was updated.
+     */
+    public function withUpdatedAt(\DateTimeInterface $updatedAt): self
+    {
+        $obj = clone $this;
+        $obj->updated_at = $updatedAt;
+
+        return $obj;
+    }
+
+    /**
+     * Identifies the associated user bundle.
+     */
+    public function withUserBundleID(string $userBundleID): self
+    {
+        $obj = clone $this;
+        $obj->user_bundle_id = $userBundleID;
 
         return $obj;
     }

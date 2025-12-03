@@ -7,11 +7,11 @@ namespace Telnyx\ServiceContracts\AI\Assistants;
 use Telnyx\AI\Assistants\ScheduledEvents\ScheduledEventCreateParams;
 use Telnyx\AI\Assistants\ScheduledEvents\ScheduledEventDeleteParams;
 use Telnyx\AI\Assistants\ScheduledEvents\ScheduledEventListParams;
-use Telnyx\AI\Assistants\ScheduledEvents\ScheduledEventListResponse;
 use Telnyx\AI\Assistants\ScheduledEvents\ScheduledEventRetrieveParams;
 use Telnyx\AI\Assistants\ScheduledEvents\ScheduledPhoneCallEventResponse;
 use Telnyx\AI\Assistants\ScheduledEvents\ScheduledSMSEventResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 
 interface ScheduledEventsContract
@@ -47,13 +47,15 @@ interface ScheduledEventsContract
      *
      * @param array<mixed>|ScheduledEventListParams $params
      *
+     * @return DefaultFlatPagination<ScheduledPhoneCallEventResponse|ScheduledSMSEventResponse,>
+     *
      * @throws APIException
      */
     public function list(
         string $assistantID,
         array|ScheduledEventListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): ScheduledEventListResponse;
+    ): DefaultFlatPagination;
 
     /**
      * @api

@@ -6,6 +6,7 @@ namespace Telnyx\Services\SimCards;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SimCards\ActionsContract;
 use Telnyx\SimCards\Actions\ActionBulkSetPublicIPsParams;
@@ -14,13 +15,13 @@ use Telnyx\SimCards\Actions\ActionDisableResponse;
 use Telnyx\SimCards\Actions\ActionEnableResponse;
 use Telnyx\SimCards\Actions\ActionGetResponse;
 use Telnyx\SimCards\Actions\ActionListParams;
-use Telnyx\SimCards\Actions\ActionListResponse;
 use Telnyx\SimCards\Actions\ActionRemovePublicIPResponse;
 use Telnyx\SimCards\Actions\ActionSetPublicIPParams;
 use Telnyx\SimCards\Actions\ActionSetPublicIPResponse;
 use Telnyx\SimCards\Actions\ActionSetStandbyResponse;
 use Telnyx\SimCards\Actions\ActionValidateRegistrationCodesParams;
 use Telnyx\SimCards\Actions\ActionValidateRegistrationCodesResponse;
+use Telnyx\SimCards\Actions\SimCardAction;
 
 final class ActionsService implements ActionsContract
 {
@@ -64,12 +65,14 @@ final class ActionsService implements ActionsContract
      *   page?: array{number?: int, size?: int},
      * }|ActionListParams $params
      *
+     * @return DefaultPagination<SimCardAction>
+     *
      * @throws APIException
      */
     public function list(
         array|ActionListParams $params,
         ?RequestOptions $requestOptions = null
-    ): ActionListResponse {
+    ): DefaultPagination {
         [$parsed, $options] = ActionListParams::parseRequest(
             $params,
             $requestOptions,
@@ -81,7 +84,8 @@ final class ActionsService implements ActionsContract
             path: 'sim_card_actions',
             query: $parsed,
             options: $options,
-            convert: ActionListResponse::class,
+            convert: SimCardAction::class,
+            page: DefaultPagination::class,
         );
     }
 

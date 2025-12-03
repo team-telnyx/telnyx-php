@@ -10,7 +10,9 @@ use Telnyx\CallControlApplications\CallControlApplication\RecordType;
 use Telnyx\CallControlApplications\CallControlApplication\WebhookAPIVersion;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type CallControlApplicationShape = array{
@@ -35,10 +37,12 @@ use Telnyx\Core\Contracts\BaseModel;
  *   webhook_timeout_secs?: int|null,
  * }
  */
-final class CallControlApplication implements BaseModel
+final class CallControlApplication implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<CallControlApplicationShape> */
     use SdkModel;
+
+    use SdkResponse;
 
     #[Api(optional: true)]
     public ?string $id;

@@ -6,6 +6,7 @@ namespace Telnyx\Services\PortingOrders;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateParams;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateResponse;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementListParams;
@@ -36,13 +37,15 @@ final class ActionRequirementsService implements ActionRequirementsContract
      *   sort?: array{value?: 'created_at'|'-created_at'|'updated_at'|'-updated_at'},
      * }|ActionRequirementListParams $params
      *
+     * @return DefaultPagination<ActionRequirementListResponse>
+     *
      * @throws APIException
      */
     public function list(
         string $portingOrderID,
         array|ActionRequirementListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): ActionRequirementListResponse {
+    ): DefaultPagination {
         [$parsed, $options] = ActionRequirementListParams::parseRequest(
             $params,
             $requestOptions,
@@ -55,6 +58,7 @@ final class ActionRequirementsService implements ActionRequirementsContract
             query: $parsed,
             options: $options,
             convert: ActionRequirementListResponse::class,
+            page: DefaultPagination::class,
         );
     }
 

@@ -6,7 +6,9 @@ namespace Telnyx\PortingOrders;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PortingOrders\PortingOrder\AdditionalStep;
 use Telnyx\PortingOrders\PortingOrder\PhoneNumberType;
 use Telnyx\PortingOrderStatus;
@@ -40,10 +42,12 @@ use Telnyx\PortingOrderStatus;
  *   webhook_url?: string|null,
  * }
  */
-final class PortingOrder implements BaseModel
+final class PortingOrder implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<PortingOrderShape> */
     use SdkModel;
+
+    use SdkResponse;
 
     /**
      * Uniquely identifies this porting order.

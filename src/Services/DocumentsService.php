@@ -6,11 +6,12 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
+use Telnyx\Documents\DocServiceDocument;
 use Telnyx\Documents\DocumentDeleteResponse;
 use Telnyx\Documents\DocumentGenerateDownloadLinkResponse;
 use Telnyx\Documents\DocumentGetResponse;
 use Telnyx\Documents\DocumentListParams;
-use Telnyx\Documents\DocumentListResponse;
 use Telnyx\Documents\DocumentUpdateParams;
 use Telnyx\Documents\DocumentUpdateResponse;
 use Telnyx\Documents\DocumentUploadJsonParams;
@@ -59,7 +60,7 @@ final class DocumentsService implements DocumentsContract
      * @throws APIException
      */
     public function update(
-        string $id,
+        string $documentID,
         array|DocumentUpdateParams $params,
         ?RequestOptions $requestOptions = null,
     ): DocumentUpdateResponse {
@@ -71,7 +72,7 @@ final class DocumentsService implements DocumentsContract
         // @phpstan-ignore-next-line;
         return $this->client->request(
             method: 'patch',
-            path: ['documents/%1$s', $id],
+            path: ['documents/%1$s', $documentID],
             body: (object) $parsed,
             options: $options,
             convert: DocumentUpdateResponse::class,
@@ -95,12 +96,14 @@ final class DocumentsService implements DocumentsContract
      *   sort?: list<'filename'|'created_at'|'updated_at'|'-filename'|'-created_at'|'-updated_at'>,
      * }|DocumentListParams $params
      *
+     * @return DefaultPagination<DocServiceDocument>
+     *
      * @throws APIException
      */
     public function list(
         array|DocumentListParams $params,
         ?RequestOptions $requestOptions = null
-    ): DocumentListResponse {
+    ): DefaultPagination {
         [$parsed, $options] = DocumentListParams::parseRequest(
             $params,
             $requestOptions,
@@ -112,7 +115,8 @@ final class DocumentsService implements DocumentsContract
             path: 'documents',
             query: $parsed,
             options: $options,
-            convert: DocumentListResponse::class,
+            convert: DocServiceDocument::class,
+            page: DefaultPagination::class,
         );
     }
 
@@ -151,7 +155,7 @@ final class DocumentsService implements DocumentsContract
         return $this->client->request(
             method: 'get',
             path: ['documents/%1$s/download', $id],
-            headers: ['Accept' => '*'],
+            headers: ['Accept' => 'application/octet-stream'],
             options: $requestOptions,
             convert: 'string',
         );
@@ -197,7 +201,7 @@ final class DocumentsService implements DocumentsContract
         return $this->client->request(
             method: 'post',
             path: 'documents?content-type=multipart',
-            body: (object) $parsed,
+            body: (object) $parsed['document'],
             options: $options,
             convert: DocumentUploadResponse::class,
         );
@@ -223,7 +227,7 @@ final class DocumentsService implements DocumentsContract
         return $this->client->request(
             method: 'post',
             path: 'documents',
-            body: (object) $parsed,
+            body: (object) $parsed['document'],
             options: $options,
             convert: DocumentUploadJsonResponse::class,
         );

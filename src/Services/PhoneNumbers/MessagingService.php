@@ -6,11 +6,12 @@ namespace Telnyx\Services\PhoneNumbers;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\PhoneNumbers\Messaging\MessagingGetResponse;
 use Telnyx\PhoneNumbers\Messaging\MessagingListParams;
-use Telnyx\PhoneNumbers\Messaging\MessagingListResponse;
 use Telnyx\PhoneNumbers\Messaging\MessagingUpdateParams;
 use Telnyx\PhoneNumbers\Messaging\MessagingUpdateResponse;
+use Telnyx\PhoneNumberWithMessagingSettings;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PhoneNumbers\MessagingContract;
 
@@ -79,12 +80,14 @@ final class MessagingService implements MessagingContract
      *
      * @param array{page?: array{number?: int, size?: int}}|MessagingListParams $params
      *
+     * @return DefaultPagination<PhoneNumberWithMessagingSettings>
+     *
      * @throws APIException
      */
     public function list(
         array|MessagingListParams $params,
         ?RequestOptions $requestOptions = null
-    ): MessagingListResponse {
+    ): DefaultPagination {
         [$parsed, $options] = MessagingListParams::parseRequest(
             $params,
             $requestOptions,
@@ -96,7 +99,8 @@ final class MessagingService implements MessagingContract
             path: 'phone_numbers/messaging',
             query: $parsed,
             options: $options,
-            convert: MessagingListResponse::class,
+            convert: PhoneNumberWithMessagingSettings::class,
+            page: DefaultPagination::class,
         );
     }
 }

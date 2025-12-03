@@ -6,6 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\NetworkCoverage\AvailableService;
 use Telnyx\NetworkCoverage\NetworkCoverageListParams;
 use Telnyx\NetworkCoverage\NetworkCoverageListResponse;
@@ -39,12 +40,14 @@ final class NetworkCoverageService implements NetworkCoverageContract
      *   page?: array{number?: int, size?: int},
      * }|NetworkCoverageListParams $params
      *
+     * @return DefaultPagination<NetworkCoverageListResponse>
+     *
      * @throws APIException
      */
     public function list(
         array|NetworkCoverageListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): NetworkCoverageListResponse {
+    ): DefaultPagination {
         [$parsed, $options] = NetworkCoverageListParams::parseRequest(
             $params,
             $requestOptions,
@@ -57,6 +60,7 @@ final class NetworkCoverageService implements NetworkCoverageContract
             query: $parsed,
             options: $options,
             convert: NetworkCoverageListResponse::class,
+            page: DefaultPagination::class,
         );
     }
 }

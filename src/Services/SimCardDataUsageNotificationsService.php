@@ -6,13 +6,14 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SimCardDataUsageNotificationsContract;
+use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotification;
 use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationCreateParams;
 use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationDeleteResponse;
 use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationGetResponse;
 use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationListParams;
-use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationListResponse;
 use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationNewResponse;
 use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationUpdateParams;
 use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationUpdateResponse;
@@ -86,7 +87,7 @@ final class SimCardDataUsageNotificationsService implements SimCardDataUsageNoti
      * @throws APIException
      */
     public function update(
-        string $id,
+        string $simCardDataUsageNotificationID,
         array|SimCardDataUsageNotificationUpdateParams $params,
         ?RequestOptions $requestOptions = null,
     ): SimCardDataUsageNotificationUpdateResponse {
@@ -98,7 +99,10 @@ final class SimCardDataUsageNotificationsService implements SimCardDataUsageNoti
         // @phpstan-ignore-next-line;
         return $this->client->request(
             method: 'patch',
-            path: ['sim_card_data_usage_notifications/%1$s', $id],
+            path: [
+                'sim_card_data_usage_notifications/%1$s',
+                $simCardDataUsageNotificationID,
+            ],
             body: (object) $parsed,
             options: $options,
             convert: SimCardDataUsageNotificationUpdateResponse::class,
@@ -114,12 +118,14 @@ final class SimCardDataUsageNotificationsService implements SimCardDataUsageNoti
      *   filter_sim_card_id_?: string, page_number_?: int, page_size_?: int
      * }|SimCardDataUsageNotificationListParams $params
      *
+     * @return DefaultFlatPagination<SimCardDataUsageNotification>
+     *
      * @throws APIException
      */
     public function list(
         array|SimCardDataUsageNotificationListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): SimCardDataUsageNotificationListResponse {
+    ): DefaultFlatPagination {
         [$parsed, $options] = SimCardDataUsageNotificationListParams::parseRequest(
             $params,
             $requestOptions,
@@ -131,7 +137,8 @@ final class SimCardDataUsageNotificationsService implements SimCardDataUsageNoti
             path: 'sim_card_data_usage_notifications',
             query: $parsed,
             options: $options,
-            convert: SimCardDataUsageNotificationListResponse::class,
+            convert: SimCardDataUsageNotification::class,
+            page: DefaultFlatPagination::class,
         );
     }
 

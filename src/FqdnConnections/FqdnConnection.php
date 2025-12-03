@@ -6,7 +6,9 @@ namespace Telnyx\FqdnConnections;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\CredentialConnections\ConnectionRtcpSettings;
 use Telnyx\CredentialConnections\DtmfType;
@@ -52,10 +54,12 @@ use Telnyx\CredentialConnections\EncryptedMedia;
  *   webhook_timeout_secs?: int|null,
  * }
  */
-final class FqdnConnection implements BaseModel
+final class FqdnConnection implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<FqdnConnectionShape> */
     use SdkModel;
+
+    use SdkResponse;
 
     /**
      * A user-assigned name to help manage the connection.

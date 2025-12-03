@@ -361,7 +361,7 @@ final class TelnyxCampaignCsp implements BaseModel, ResponseConverter
     public ?string $termsAndConditionsLink;
 
     /**
-     * @deprecated
+     * @deprecated This field is deprecated and will be removed soon
      *
      * Business/industry segment of this campaign (Deprecated). Must be of defined valid types. Use `/registry/enum/vertical` operation to retrieve verticals available for given brand, vertical combination.
      *

@@ -21,12 +21,12 @@ use Telnyx\VirtualCrossConnects\VirtualCrossConnectGetResponse\Data\Region;
  *   network_id?: string|null,
  *   status?: value-of<InterfaceStatus>|null,
  *   region_code?: string|null,
- *   bgp_asn: float,
- *   cloud_provider: value-of<CloudProvider>,
- *   cloud_provider_region: string,
- *   primary_cloud_account_id: string,
  *   bandwidth_mbps?: float|null,
+ *   bgp_asn?: float|null,
+ *   cloud_provider?: value-of<CloudProvider>|null,
+ *   cloud_provider_region?: string|null,
  *   primary_bgp_key?: string|null,
+ *   primary_cloud_account_id?: string|null,
  *   primary_cloud_ip?: string|null,
  *   primary_enabled?: bool|null,
  *   primary_routing_announcement?: bool|null,
@@ -96,42 +96,42 @@ final class Data implements BaseModel
     public ?string $region_code;
 
     /**
-     * The Border Gateway Protocol (BGP) Autonomous System Number (ASN). If null, value will be assigned by Telnyx.
-     */
-    #[Api]
-    public float $bgp_asn;
-
-    /**
-     * The Virtual Private Cloud with which you would like to establish a cross connect.
-     *
-     * @var value-of<CloudProvider> $cloud_provider
-     */
-    #[Api(enum: CloudProvider::class)]
-    public string $cloud_provider;
-
-    /**
-     * The region where your Virtual Private Cloud hosts are located.<br /><br />The available regions can be found using the /virtual_cross_connect_regions endpoint.
-     */
-    #[Api]
-    public string $cloud_provider_region;
-
-    /**
-     * The identifier for your Virtual Private Cloud. The number will be different based upon your Cloud provider.
-     */
-    #[Api]
-    public string $primary_cloud_account_id;
-
-    /**
      * The desired throughput in Megabits per Second (Mbps) for your Virtual Cross Connect.<br /><br />The available bandwidths can be found using the /virtual_cross_connect_regions endpoint.
      */
     #[Api(optional: true)]
     public ?float $bandwidth_mbps;
 
     /**
+     * The Border Gateway Protocol (BGP) Autonomous System Number (ASN). If null, value will be assigned by Telnyx.
+     */
+    #[Api(optional: true)]
+    public ?float $bgp_asn;
+
+    /**
+     * The Virtual Private Cloud with which you would like to establish a cross connect.
+     *
+     * @var value-of<CloudProvider>|null $cloud_provider
+     */
+    #[Api(enum: CloudProvider::class, optional: true)]
+    public ?string $cloud_provider;
+
+    /**
+     * The region where your Virtual Private Cloud hosts are located.<br /><br />The available regions can be found using the /virtual_cross_connect_regions endpoint.
+     */
+    #[Api(optional: true)]
+    public ?string $cloud_provider_region;
+
+    /**
      * The authentication key for BGP peer configuration.
      */
     #[Api(optional: true)]
     public ?string $primary_bgp_key;
+
+    /**
+     * The identifier for your Virtual Private Cloud. The number will be different based upon your Cloud provider.
+     */
+    #[Api(optional: true)]
+    public ?string $primary_cloud_account_id;
 
     /**
      * The IP address assigned for your side of the Virtual Cross Connect.<br /><br />If none is provided, one will be generated for you.<br /><br />This value can not be patched once the VXC has bene provisioned.
@@ -196,29 +196,6 @@ final class Data implements BaseModel
     #[Api(optional: true)]
     public ?string $secondary_telnyx_ip;
 
-    /**
-     * `new Data()` is missing required properties by the API.
-     *
-     * To enforce required parameters use
-     * ```
-     * Data::with(
-     *   bgp_asn: ...,
-     *   cloud_provider: ...,
-     *   cloud_provider_region: ...,
-     *   primary_cloud_account_id: ...,
-     * )
-     * ```
-     *
-     * Otherwise ensure the following setters are called
-     *
-     * ```
-     * (new Data)
-     *   ->withBgpAsn(...)
-     *   ->withCloudProvider(...)
-     *   ->withCloudProviderRegion(...)
-     *   ->withPrimaryCloudAccountID(...)
-     * ```
-     */
     public function __construct()
     {
         $this->initialize();
@@ -229,14 +206,10 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CloudProvider|value-of<CloudProvider> $cloud_provider
      * @param InterfaceStatus|value-of<InterfaceStatus> $status
+     * @param CloudProvider|value-of<CloudProvider> $cloud_provider
      */
     public static function with(
-        float $bgp_asn,
-        CloudProvider|string $cloud_provider,
-        string $cloud_provider_region,
-        string $primary_cloud_account_id,
         ?string $id = null,
         ?string $created_at = null,
         ?string $record_type = null,
@@ -246,7 +219,11 @@ final class Data implements BaseModel
         InterfaceStatus|string|null $status = null,
         ?string $region_code = null,
         ?float $bandwidth_mbps = null,
+        ?float $bgp_asn = null,
+        CloudProvider|string|null $cloud_provider = null,
+        ?string $cloud_provider_region = null,
         ?string $primary_bgp_key = null,
+        ?string $primary_cloud_account_id = null,
         ?string $primary_cloud_ip = null,
         ?bool $primary_enabled = null,
         ?bool $primary_routing_announcement = null,
@@ -261,11 +238,6 @@ final class Data implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->bgp_asn = $bgp_asn;
-        $obj['cloud_provider'] = $cloud_provider;
-        $obj->cloud_provider_region = $cloud_provider_region;
-        $obj->primary_cloud_account_id = $primary_cloud_account_id;
-
         null !== $id && $obj->id = $id;
         null !== $created_at && $obj->created_at = $created_at;
         null !== $record_type && $obj->record_type = $record_type;
@@ -275,7 +247,11 @@ final class Data implements BaseModel
         null !== $status && $obj['status'] = $status;
         null !== $region_code && $obj->region_code = $region_code;
         null !== $bandwidth_mbps && $obj->bandwidth_mbps = $bandwidth_mbps;
+        null !== $bgp_asn && $obj->bgp_asn = $bgp_asn;
+        null !== $cloud_provider && $obj['cloud_provider'] = $cloud_provider;
+        null !== $cloud_provider_region && $obj->cloud_provider_region = $cloud_provider_region;
         null !== $primary_bgp_key && $obj->primary_bgp_key = $primary_bgp_key;
+        null !== $primary_cloud_account_id && $obj->primary_cloud_account_id = $primary_cloud_account_id;
         null !== $primary_cloud_ip && $obj->primary_cloud_ip = $primary_cloud_ip;
         null !== $primary_enabled && $obj->primary_enabled = $primary_enabled;
         null !== $primary_routing_announcement && $obj->primary_routing_announcement = $primary_routing_announcement;
@@ -382,6 +358,17 @@ final class Data implements BaseModel
     }
 
     /**
+     * The desired throughput in Megabits per Second (Mbps) for your Virtual Cross Connect.<br /><br />The available bandwidths can be found using the /virtual_cross_connect_regions endpoint.
+     */
+    public function withBandwidthMbps(float $bandwidthMbps): self
+    {
+        $obj = clone $this;
+        $obj->bandwidth_mbps = $bandwidthMbps;
+
+        return $obj;
+    }
+
+    /**
      * The Border Gateway Protocol (BGP) Autonomous System Number (ASN). If null, value will be assigned by Telnyx.
      */
     public function withBgpAsn(float $bgpAsn): self
@@ -417,6 +404,17 @@ final class Data implements BaseModel
     }
 
     /**
+     * The authentication key for BGP peer configuration.
+     */
+    public function withPrimaryBgpKey(string $primaryBgpKey): self
+    {
+        $obj = clone $this;
+        $obj->primary_bgp_key = $primaryBgpKey;
+
+        return $obj;
+    }
+
+    /**
      * The identifier for your Virtual Private Cloud. The number will be different based upon your Cloud provider.
      */
     public function withPrimaryCloudAccountID(
@@ -424,28 +422,6 @@ final class Data implements BaseModel
     ): self {
         $obj = clone $this;
         $obj->primary_cloud_account_id = $primaryCloudAccountID;
-
-        return $obj;
-    }
-
-    /**
-     * The desired throughput in Megabits per Second (Mbps) for your Virtual Cross Connect.<br /><br />The available bandwidths can be found using the /virtual_cross_connect_regions endpoint.
-     */
-    public function withBandwidthMbps(float $bandwidthMbps): self
-    {
-        $obj = clone $this;
-        $obj->bandwidth_mbps = $bandwidthMbps;
-
-        return $obj;
-    }
-
-    /**
-     * The authentication key for BGP peer configuration.
-     */
-    public function withPrimaryBgpKey(string $primaryBgpKey): self
-    {
-        $obj = clone $this;
-        $obj->primary_bgp_key = $primaryBgpKey;
 
         return $obj;
     }

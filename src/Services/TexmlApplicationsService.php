@@ -8,13 +8,14 @@ use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\CredentialConnections\DtmfType;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\TexmlApplicationsContract;
+use Telnyx\TexmlApplications\TexmlApplication;
 use Telnyx\TexmlApplications\TexmlApplicationCreateParams;
 use Telnyx\TexmlApplications\TexmlApplicationDeleteResponse;
 use Telnyx\TexmlApplications\TexmlApplicationGetResponse;
 use Telnyx\TexmlApplications\TexmlApplicationListParams;
-use Telnyx\TexmlApplications\TexmlApplicationListResponse;
 use Telnyx\TexmlApplications\TexmlApplicationNewResponse;
 use Telnyx\TexmlApplications\TexmlApplicationUpdateParams;
 use Telnyx\TexmlApplications\TexmlApplicationUpdateResponse;
@@ -156,12 +157,14 @@ final class TexmlApplicationsService implements TexmlApplicationsContract
      *   sort?: 'created_at'|'friendly_name'|'active',
      * }|TexmlApplicationListParams $params
      *
+     * @return DefaultPagination<TexmlApplication>
+     *
      * @throws APIException
      */
     public function list(
         array|TexmlApplicationListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): TexmlApplicationListResponse {
+    ): DefaultPagination {
         [$parsed, $options] = TexmlApplicationListParams::parseRequest(
             $params,
             $requestOptions,
@@ -173,7 +176,8 @@ final class TexmlApplicationsService implements TexmlApplicationsContract
             path: 'texml_applications',
             query: $parsed,
             options: $options,
-            convert: TexmlApplicationListResponse::class,
+            convert: TexmlApplication::class,
+            page: DefaultPagination::class,
         );
     }
 

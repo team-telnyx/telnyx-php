@@ -102,7 +102,7 @@ interface ActionsContract
      * @throws APIException
      */
     public function bridge(
-        string $callControlID,
+        string $callControlIDToBridge,
         array|ActionBridgeParams $params,
         ?RequestOptions $requestOptions = null,
     ): ActionBridgeResponse;

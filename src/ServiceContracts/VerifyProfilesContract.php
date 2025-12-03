@@ -5,14 +5,15 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\VerifyProfiles\MessageTemplate;
+use Telnyx\VerifyProfiles\VerifyProfile;
 use Telnyx\VerifyProfiles\VerifyProfileCreateParams;
 use Telnyx\VerifyProfiles\VerifyProfileCreateTemplateParams;
 use Telnyx\VerifyProfiles\VerifyProfileData;
 use Telnyx\VerifyProfiles\VerifyProfileGetTemplatesResponse;
 use Telnyx\VerifyProfiles\VerifyProfileListParams;
-use Telnyx\VerifyProfiles\VerifyProfileListResponse;
 use Telnyx\VerifyProfiles\VerifyProfileUpdateParams;
 use Telnyx\VerifyProfiles\VerifyProfileUpdateTemplateParams;
 
@@ -58,12 +59,14 @@ interface VerifyProfilesContract
      *
      * @param array<mixed>|VerifyProfileListParams $params
      *
+     * @return DefaultFlatPagination<VerifyProfile>
+     *
      * @throws APIException
      */
     public function list(
         array|VerifyProfileListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): VerifyProfileListResponse;
+    ): DefaultFlatPagination;
 
     /**
      * @api

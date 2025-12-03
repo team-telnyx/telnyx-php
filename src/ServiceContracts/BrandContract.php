@@ -12,6 +12,7 @@ use Telnyx\Brand\BrandListResponse;
 use Telnyx\Brand\BrandUpdateParams;
 use Telnyx\Brand\TelnyxBrand;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\PerPagePaginationV2;
 use Telnyx\RequestOptions;
 
 interface BrandContract
@@ -56,12 +57,14 @@ interface BrandContract
      *
      * @param array<mixed>|BrandListParams $params
      *
+     * @return PerPagePaginationV2<BrandListResponse>
+     *
      * @throws APIException
      */
     public function list(
         array|BrandListParams $params,
         ?RequestOptions $requestOptions = null
-    ): BrandListResponse;
+    ): PerPagePaginationV2;
 
     /**
      * @api

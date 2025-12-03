@@ -6,10 +6,11 @@ namespace Telnyx\Services\ExternalConnections;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
+use Telnyx\ExternalConnections\Uploads\Upload;
 use Telnyx\ExternalConnections\Uploads\UploadCreateParams;
 use Telnyx\ExternalConnections\Uploads\UploadGetResponse;
 use Telnyx\ExternalConnections\Uploads\UploadListParams;
-use Telnyx\ExternalConnections\Uploads\UploadListResponse;
 use Telnyx\ExternalConnections\Uploads\UploadNewResponse;
 use Telnyx\ExternalConnections\Uploads\UploadPendingCountResponse;
 use Telnyx\ExternalConnections\Uploads\UploadRefreshStatusResponse;
@@ -108,13 +109,15 @@ final class UploadsService implements UploadsContract
      *   page?: array{number?: int, size?: int},
      * }|UploadListParams $params
      *
+     * @return DefaultPagination<Upload>
+     *
      * @throws APIException
      */
     public function list(
         string $id,
         array|UploadListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): UploadListResponse {
+    ): DefaultPagination {
         [$parsed, $options] = UploadListParams::parseRequest(
             $params,
             $requestOptions,
@@ -126,7 +129,8 @@ final class UploadsService implements UploadsContract
             path: ['external_connections/%1$s/uploads', $id],
             query: $parsed,
             options: $options,
-            convert: UploadListResponse::class,
+            convert: Upload::class,
+            page: DefaultPagination::class,
         );
     }
 

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\PortingOrders;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateParams;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateResponse;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementListParams;
@@ -18,13 +19,15 @@ interface ActionRequirementsContract
      *
      * @param array<mixed>|ActionRequirementListParams $params
      *
+     * @return DefaultPagination<ActionRequirementListResponse>
+     *
      * @throws APIException
      */
     public function list(
         string $portingOrderID,
         array|ActionRequirementListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): ActionRequirementListResponse;
+    ): DefaultPagination;
 
     /**
      * @api

@@ -6,7 +6,9 @@ namespace Telnyx\PhoneNumbers\Jobs;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PhoneNumbers\Jobs\PhoneNumbersJob\FailedOperation;
 use Telnyx\PhoneNumbers\Jobs\PhoneNumbersJob\PendingOperation;
 use Telnyx\PhoneNumbers\Jobs\PhoneNumbersJob\PhoneNumber;
@@ -29,10 +31,12 @@ use Telnyx\PhoneNumbers\Jobs\PhoneNumbersJob\Type;
  *   updated_at?: string|null,
  * }
  */
-final class PhoneNumbersJob implements BaseModel
+final class PhoneNumbersJob implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<PhoneNumbersJobShape> */
     use SdkModel;
+
+    use SdkResponse;
 
     /**
      * Identifies the resource.

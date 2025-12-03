@@ -6,8 +6,8 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\BundlePricing\BillingBundles\BillingBundleGetResponse;
-use Telnyx\BundlePricing\BillingBundles\BillingBundleListResponse;
 use Telnyx\Client;
+use Telnyx\DefaultPagination;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -54,6 +54,6 @@ final class BillingBundlesTest extends TestCase
         $result = $this->client->bundlePricing->billingBundles->list([]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(BillingBundleListResponse::class, $result);
+        $this->assertInstanceOf(DefaultPagination::class, $result);
     }
 }

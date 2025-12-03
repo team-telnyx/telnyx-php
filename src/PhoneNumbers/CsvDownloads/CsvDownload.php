@@ -6,7 +6,9 @@ namespace Telnyx\PhoneNumbers\CsvDownloads;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PhoneNumbers\CsvDownloads\CsvDownload\Status;
 
 /**
@@ -17,10 +19,12 @@ use Telnyx\PhoneNumbers\CsvDownloads\CsvDownload\Status;
  *   url?: string|null,
  * }
  */
-final class CsvDownload implements BaseModel
+final class CsvDownload implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<CsvDownloadShape> */
     use SdkModel;
+
+    use SdkResponse;
 
     /**
      * Identifies the resource.

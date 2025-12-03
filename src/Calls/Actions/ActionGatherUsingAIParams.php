@@ -27,7 +27,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\Calls\ActionsService::gatherUsingAI()
  *
  * @phpstan-type ActionGatherUsingAIParamsShape = array{
- *   parameters: mixed,
+ *   parameters: array<string,mixed>,
  *   assistant?: Assistant,
  *   client_state?: string,
  *   command_id?: string,
@@ -40,7 +40,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   transcription?: TranscriptionConfig,
  *   user_response_timeout_ms?: int,
  *   voice?: string,
- *   voice_settings?: mixed|ElevenLabsVoiceSettings|TelnyxVoiceSettings,
+ *   voice_settings?: ElevenLabsVoiceSettings|TelnyxVoiceSettings|array<string,mixed>,
  * }
  */
 final class ActionGatherUsingAIParams implements BaseModel
@@ -51,9 +51,11 @@ final class ActionGatherUsingAIParams implements BaseModel
 
     /**
      * The parameters described as a JSON Schema object that needs to be gathered by the voice assistant. See the [JSON Schema reference](https://json-schema.org/understanding-json-schema) for documentation about the format.
+     *
+     * @var array<string,mixed> $parameters
      */
-    #[Api]
-    public mixed $parameters;
+    #[Api(map: 'mixed')]
+    public array $parameters;
 
     /**
      * Assistant configuration including choice of LLM, custom instructions, and tools.
@@ -140,10 +142,10 @@ final class ActionGatherUsingAIParams implements BaseModel
     /**
      * The settings associated with the voice selected.
      *
-     * @var mixed|ElevenLabsVoiceSettings|TelnyxVoiceSettings|null $voice_settings
+     * @var ElevenLabsVoiceSettings|TelnyxVoiceSettings|array<string,mixed>|null $voice_settings
      */
     #[Api(union: VoiceSettings::class, optional: true)]
-    public mixed $voice_settings;
+    public ElevenLabsVoiceSettings|TelnyxVoiceSettings|array|null $voice_settings;
 
     /**
      * `new ActionGatherUsingAIParams()` is missing required properties by the API.
@@ -169,12 +171,13 @@ final class ActionGatherUsingAIParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param array<string,mixed> $parameters
      * @param GoogleTranscriptionLanguage|value-of<GoogleTranscriptionLanguage> $language
      * @param list<MessageHistory> $message_history
-     * @param mixed|ElevenLabsVoiceSettings|TelnyxVoiceSettings $voice_settings
+     * @param ElevenLabsVoiceSettings|TelnyxVoiceSettings|array<string,mixed> $voice_settings
      */
     public static function with(
-        mixed $parameters,
+        array $parameters,
         ?Assistant $assistant = null,
         ?string $client_state = null,
         ?string $command_id = null,
@@ -187,7 +190,7 @@ final class ActionGatherUsingAIParams implements BaseModel
         ?TranscriptionConfig $transcription = null,
         ?int $user_response_timeout_ms = null,
         ?string $voice = null,
-        mixed $voice_settings = null,
+        ElevenLabsVoiceSettings|TelnyxVoiceSettings|array|null $voice_settings = null,
     ): self {
         $obj = new self;
 
@@ -212,8 +215,10 @@ final class ActionGatherUsingAIParams implements BaseModel
 
     /**
      * The parameters described as a JSON Schema object that needs to be gathered by the voice assistant. See the [JSON Schema reference](https://json-schema.org/understanding-json-schema) for documentation about the format.
+     *
+     * @param array<string,mixed> $parameters
      */
-    public function withParameters(mixed $parameters): self
+    public function withParameters(array $parameters): self
     {
         $obj = clone $this;
         $obj->parameters = $parameters;
@@ -369,10 +374,11 @@ final class ActionGatherUsingAIParams implements BaseModel
     /**
      * The settings associated with the voice selected.
      *
-     * @param mixed|ElevenLabsVoiceSettings|TelnyxVoiceSettings $voiceSettings
+     * @param ElevenLabsVoiceSettings|TelnyxVoiceSettings|array<string,mixed> $voiceSettings
      */
-    public function withVoiceSettings(mixed $voiceSettings): self
-    {
+    public function withVoiceSettings(
+        ElevenLabsVoiceSettings|TelnyxVoiceSettings|array $voiceSettings
+    ): self {
         $obj = clone $this;
         $obj->voice_settings = $voiceSettings;
 

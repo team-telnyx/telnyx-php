@@ -6,7 +6,9 @@ namespace Telnyx\Portouts\Reports;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Portouts\Reports\PortoutReport\ReportType;
 use Telnyx\Portouts\Reports\PortoutReport\Status;
 
@@ -22,10 +24,12 @@ use Telnyx\Portouts\Reports\PortoutReport\Status;
  *   updated_at?: \DateTimeInterface|null,
  * }
  */
-final class PortoutReport implements BaseModel
+final class PortoutReport implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<PortoutReportShape> */
     use SdkModel;
+
+    use SdkResponse;
 
     /**
      * Uniquely identifies the report.

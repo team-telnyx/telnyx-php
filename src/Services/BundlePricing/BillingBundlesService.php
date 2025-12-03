@@ -6,10 +6,11 @@ namespace Telnyx\Services\BundlePricing;
 
 use Telnyx\BundlePricing\BillingBundles\BillingBundleGetResponse;
 use Telnyx\BundlePricing\BillingBundles\BillingBundleListParams;
-use Telnyx\BundlePricing\BillingBundles\BillingBundleListResponse;
 use Telnyx\BundlePricing\BillingBundles\BillingBundleRetrieveParams;
+use Telnyx\BundlePricing\BillingBundles\BillingBundleSummary;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\BundlePricing\BillingBundlesContract;
 
@@ -60,12 +61,14 @@ final class BillingBundlesService implements BillingBundlesContract
      *   authorization_bearer?: string,
      * }|BillingBundleListParams $params
      *
+     * @return DefaultPagination<BillingBundleSummary>
+     *
      * @throws APIException
      */
     public function list(
         array|BillingBundleListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): BillingBundleListResponse {
+    ): DefaultPagination {
         [$parsed, $options] = BillingBundleListParams::parseRequest(
             $params,
             $requestOptions,
@@ -82,7 +85,8 @@ final class BillingBundlesService implements BillingBundlesContract
             query: array_intersect_key($parsed, $query_params),
             headers: $header_params,
             options: $options,
-            convert: BillingBundleListResponse::class,
+            convert: BillingBundleSummary::class,
+            page: DefaultPagination::class,
         );
     }
 }

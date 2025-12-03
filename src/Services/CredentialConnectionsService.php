@@ -8,11 +8,11 @@ use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\CredentialConnections\ConnectionRtcpSettings;
+use Telnyx\CredentialConnections\CredentialConnection;
 use Telnyx\CredentialConnections\CredentialConnectionCreateParams;
 use Telnyx\CredentialConnections\CredentialConnectionDeleteResponse;
 use Telnyx\CredentialConnections\CredentialConnectionGetResponse;
 use Telnyx\CredentialConnections\CredentialConnectionListParams;
-use Telnyx\CredentialConnections\CredentialConnectionListResponse;
 use Telnyx\CredentialConnections\CredentialConnectionNewResponse;
 use Telnyx\CredentialConnections\CredentialConnectionUpdateParams;
 use Telnyx\CredentialConnections\CredentialConnectionUpdateResponse;
@@ -20,6 +20,7 @@ use Telnyx\CredentialConnections\CredentialInbound;
 use Telnyx\CredentialConnections\CredentialOutbound;
 use Telnyx\CredentialConnections\DtmfType;
 use Telnyx\CredentialConnections\EncryptedMedia;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\CredentialConnectionsContract;
 use Telnyx\Services\CredentialConnections\ActionsService;
@@ -229,12 +230,14 @@ final class CredentialConnectionsService implements CredentialConnectionsContrac
      *   sort?: 'created_at'|'connection_name'|'active',
      * }|CredentialConnectionListParams $params
      *
+     * @return DefaultPagination<CredentialConnection>
+     *
      * @throws APIException
      */
     public function list(
         array|CredentialConnectionListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): CredentialConnectionListResponse {
+    ): DefaultPagination {
         [$parsed, $options] = CredentialConnectionListParams::parseRequest(
             $params,
             $requestOptions,
@@ -246,7 +249,8 @@ final class CredentialConnectionsService implements CredentialConnectionsContrac
             path: 'credential_connections',
             query: $parsed,
             options: $options,
-            convert: CredentialConnectionListResponse::class,
+            convert: CredentialConnection::class,
+            page: DefaultPagination::class,
         );
     }
 

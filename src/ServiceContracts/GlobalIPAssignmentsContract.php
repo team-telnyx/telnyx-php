@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\GlobalIPAssignments\GlobalIPAssignmentCreateParams;
+use Telnyx\DefaultPagination;
+use Telnyx\GlobalIPAssignments\GlobalIPAssignment;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentDeleteResponse;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentGetResponse;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentListParams;
-use Telnyx\GlobalIPAssignments\GlobalIPAssignmentListResponse;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentNewResponse;
-use Telnyx\GlobalIPAssignments\GlobalIPAssignmentUpdateParams\Body;
+use Telnyx\GlobalIPAssignments\GlobalIPAssignmentUpdateParams\GlobalIPAssignmentUpdateRequest;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentUpdateResponse;
 use Telnyx\RequestOptions;
 
@@ -20,13 +20,10 @@ interface GlobalIPAssignmentsContract
     /**
      * @api
      *
-     * @param array<mixed>|GlobalIPAssignmentCreateParams $params
-     *
      * @throws APIException
      */
     public function create(
-        array|GlobalIPAssignmentCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?RequestOptions $requestOptions = null
     ): GlobalIPAssignmentNewResponse;
 
     /**
@@ -45,9 +42,9 @@ interface GlobalIPAssignmentsContract
      * @throws APIException
      */
     public function update(
-        string $id,
-        Body $params,
-        ?RequestOptions $requestOptions = null
+        string $globalIPAssignmentID,
+        GlobalIPAssignmentUpdateRequest $params,
+        ?RequestOptions $requestOptions = null,
     ): GlobalIPAssignmentUpdateResponse;
 
     /**
@@ -55,12 +52,14 @@ interface GlobalIPAssignmentsContract
      *
      * @param array<mixed>|GlobalIPAssignmentListParams $params
      *
+     * @return DefaultPagination<GlobalIPAssignment>
+     *
      * @throws APIException
      */
     public function list(
         array|GlobalIPAssignmentListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): GlobalIPAssignmentListResponse;
+    ): DefaultPagination;
 
     /**
      * @api

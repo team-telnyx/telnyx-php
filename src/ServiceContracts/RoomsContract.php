@@ -5,11 +5,12 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
+use Telnyx\Rooms\Room;
 use Telnyx\Rooms\RoomCreateParams;
 use Telnyx\Rooms\RoomGetResponse;
 use Telnyx\Rooms\RoomListParams;
-use Telnyx\Rooms\RoomListResponse;
 use Telnyx\Rooms\RoomNewResponse;
 use Telnyx\Rooms\RoomRetrieveParams;
 use Telnyx\Rooms\RoomUpdateParams;
@@ -60,12 +61,14 @@ interface RoomsContract
      *
      * @param array<mixed>|RoomListParams $params
      *
+     * @return DefaultPagination<Room>
+     *
      * @throws APIException
      */
     public function list(
         array|RoomListParams $params,
         ?RequestOptions $requestOptions = null
-    ): RoomListResponse;
+    ): DefaultPagination;
 
     /**
      * @api

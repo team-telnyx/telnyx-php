@@ -5,7 +5,11 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\AdvancedOrders\AdvancedOrderCreateParams;
+use Telnyx\AdvancedOrders\AdvancedOrderGetResponse;
+use Telnyx\AdvancedOrders\AdvancedOrderListResponse;
+use Telnyx\AdvancedOrders\AdvancedOrderNewResponse;
 use Telnyx\AdvancedOrders\AdvancedOrderUpdateRequirementGroupParams;
+use Telnyx\AdvancedOrders\AdvancedOrderUpdateRequirementGroupResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
@@ -39,7 +43,7 @@ final class AdvancedOrdersService implements AdvancedOrdersContract
     public function create(
         array|AdvancedOrderCreateParams $params,
         ?RequestOptions $requestOptions = null,
-    ): mixed {
+    ): AdvancedOrderNewResponse {
         [$parsed, $options] = AdvancedOrderCreateParams::parseRequest(
             $params,
             $requestOptions,
@@ -51,7 +55,7 @@ final class AdvancedOrdersService implements AdvancedOrdersContract
             path: 'advanced_orders',
             body: (object) $parsed,
             options: $options,
-            convert: 'mixed',
+            convert: AdvancedOrderNewResponse::class,
         );
     }
 
@@ -65,13 +69,13 @@ final class AdvancedOrdersService implements AdvancedOrdersContract
     public function retrieve(
         string $orderID,
         ?RequestOptions $requestOptions = null
-    ): mixed {
+    ): AdvancedOrderGetResponse {
         // @phpstan-ignore-next-line;
         return $this->client->request(
             method: 'get',
             path: ['advanced_orders/%1$s', $orderID],
             options: $requestOptions,
-            convert: 'mixed',
+            convert: AdvancedOrderGetResponse::class,
         );
     }
 
@@ -82,14 +86,15 @@ final class AdvancedOrdersService implements AdvancedOrdersContract
      *
      * @throws APIException
      */
-    public function list(?RequestOptions $requestOptions = null): mixed
-    {
+    public function list(
+        ?RequestOptions $requestOptions = null
+    ): AdvancedOrderListResponse {
         // @phpstan-ignore-next-line;
         return $this->client->request(
             method: 'get',
             path: 'advanced_orders',
             options: $requestOptions,
-            convert: 'mixed',
+            convert: AdvancedOrderListResponse::class,
         );
     }
 
@@ -115,7 +120,7 @@ final class AdvancedOrdersService implements AdvancedOrdersContract
         string $advancedOrderID,
         array|AdvancedOrderUpdateRequirementGroupParams $params,
         ?RequestOptions $requestOptions = null,
-    ): mixed {
+    ): AdvancedOrderUpdateRequirementGroupResponse {
         [$parsed, $options] = AdvancedOrderUpdateRequirementGroupParams::parseRequest(
             $params,
             $requestOptions,
@@ -127,7 +132,7 @@ final class AdvancedOrdersService implements AdvancedOrdersContract
             path: ['advanced_orders/%1$s/requirement_group', $advancedOrderID],
             body: (object) $parsed,
             options: $options,
-            convert: 'mixed',
+            convert: AdvancedOrderUpdateRequirementGroupResponse::class,
         );
     }
 }

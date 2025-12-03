@@ -6,12 +6,13 @@ namespace Telnyx\Services\PortingOrders;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockCreateParams;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockDeleteParams;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockDeleteResponse;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams;
-use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListResponse;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockNewResponse;
+use Telnyx\PortingOrders\PhoneNumberBlocks\PortingPhoneNumberBlock;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PortingOrders\PhoneNumberBlocksContract;
 
@@ -72,13 +73,15 @@ final class PhoneNumberBlocksService implements PhoneNumberBlocksContract
      *   sort?: array{value?: '-created_at'|'created_at'},
      * }|PhoneNumberBlockListParams $params
      *
+     * @return DefaultPagination<PortingPhoneNumberBlock>
+     *
      * @throws APIException
      */
     public function list(
         string $portingOrderID,
         array|PhoneNumberBlockListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): PhoneNumberBlockListResponse {
+    ): DefaultPagination {
         [$parsed, $options] = PhoneNumberBlockListParams::parseRequest(
             $params,
             $requestOptions,
@@ -90,7 +93,8 @@ final class PhoneNumberBlocksService implements PhoneNumberBlocksContract
             path: ['porting_orders/%1$s/phone_number_blocks', $portingOrderID],
             query: $parsed,
             options: $options,
-            convert: PhoneNumberBlockListResponse::class,
+            convert: PortingPhoneNumberBlock::class,
+            page: DefaultPagination::class,
         );
     }
 

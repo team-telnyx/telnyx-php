@@ -5,11 +5,12 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
+use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpoint;
 use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointCreateParams;
 use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointDeleteResponse;
 use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointGetResponse;
 use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointListParams;
-use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointListResponse;
 use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointNewResponse;
 use Telnyx\RequestOptions;
 
@@ -42,12 +43,14 @@ interface DynamicEmergencyEndpointsContract
      *
      * @param array<mixed>|DynamicEmergencyEndpointListParams $params
      *
+     * @return DefaultPagination<DynamicEmergencyEndpoint>
+     *
      * @throws APIException
      */
     public function list(
         array|DynamicEmergencyEndpointListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): DynamicEmergencyEndpointListResponse;
+    ): DefaultPagination;
 
     /**
      * @api

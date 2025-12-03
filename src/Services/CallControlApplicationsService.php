@@ -4,19 +4,20 @@ declare(strict_types=1);
 
 namespace Telnyx\Services;
 
+use Telnyx\CallControlApplications\CallControlApplication;
 use Telnyx\CallControlApplications\CallControlApplicationCreateParams;
 use Telnyx\CallControlApplications\CallControlApplicationCreateParams\AnchorsiteOverride;
 use Telnyx\CallControlApplications\CallControlApplicationDeleteResponse;
 use Telnyx\CallControlApplications\CallControlApplicationGetResponse;
 use Telnyx\CallControlApplications\CallControlApplicationInbound;
 use Telnyx\CallControlApplications\CallControlApplicationListParams;
-use Telnyx\CallControlApplications\CallControlApplicationListResponse;
 use Telnyx\CallControlApplications\CallControlApplicationNewResponse;
 use Telnyx\CallControlApplications\CallControlApplicationOutbound;
 use Telnyx\CallControlApplications\CallControlApplicationUpdateParams;
 use Telnyx\CallControlApplications\CallControlApplicationUpdateResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\CallControlApplicationsContract;
 
@@ -178,12 +179,14 @@ final class CallControlApplicationsService implements CallControlApplicationsCon
      *   sort?: 'created_at'|'connection_name'|'active',
      * }|CallControlApplicationListParams $params
      *
+     * @return DefaultPagination<CallControlApplication>
+     *
      * @throws APIException
      */
     public function list(
         array|CallControlApplicationListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): CallControlApplicationListResponse {
+    ): DefaultPagination {
         [$parsed, $options] = CallControlApplicationListParams::parseRequest(
             $params,
             $requestOptions,
@@ -195,7 +198,8 @@ final class CallControlApplicationsService implements CallControlApplicationsCon
             path: 'call_control_applications',
             query: $parsed,
             options: $options,
-            convert: CallControlApplicationListResponse::class,
+            convert: CallControlApplication::class,
+            page: DefaultPagination::class,
         );
     }
 

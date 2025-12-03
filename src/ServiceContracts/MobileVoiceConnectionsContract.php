@@ -5,11 +5,12 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultFlatPagination;
+use Telnyx\MobileVoiceConnections\MobileVoiceConnection;
 use Telnyx\MobileVoiceConnections\MobileVoiceConnectionCreateParams;
 use Telnyx\MobileVoiceConnections\MobileVoiceConnectionDeleteResponse;
 use Telnyx\MobileVoiceConnections\MobileVoiceConnectionGetResponse;
 use Telnyx\MobileVoiceConnections\MobileVoiceConnectionListParams;
-use Telnyx\MobileVoiceConnections\MobileVoiceConnectionListResponse;
 use Telnyx\MobileVoiceConnections\MobileVoiceConnectionNewResponse;
 use Telnyx\MobileVoiceConnections\MobileVoiceConnectionUpdateParams;
 use Telnyx\MobileVoiceConnections\MobileVoiceConnectionUpdateResponse;
@@ -57,12 +58,14 @@ interface MobileVoiceConnectionsContract
      *
      * @param array<mixed>|MobileVoiceConnectionListParams $params
      *
+     * @return DefaultFlatPagination<MobileVoiceConnection>
+     *
      * @throws APIException
      */
     public function list(
         array|MobileVoiceConnectionListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): MobileVoiceConnectionListResponse;
+    ): DefaultFlatPagination;
 
     /**
      * @api

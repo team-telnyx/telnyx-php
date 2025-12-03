@@ -6,10 +6,10 @@ namespace Telnyx\Services;
 
 use Telnyx\AccessIPAddress\AccessIPAddressCreateParams;
 use Telnyx\AccessIPAddress\AccessIPAddressListParams;
-use Telnyx\AccessIPAddress\AccessIPAddressListResponse;
 use Telnyx\AccessIPAddress\AccessIPAddressResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AccessIPAddressContract;
 
@@ -86,15 +86,18 @@ final class AccessIPAddressService implements AccessIPAddressContract
      *     ip_address?: string,
      *     ip_source?: string,
      *   },
-     *   page?: array{number?: int, size?: int},
+     *   page_number_?: int,
+     *   page_size_?: int,
      * }|AccessIPAddressListParams $params
+     *
+     * @return DefaultFlatPagination<AccessIPAddressResponse>
      *
      * @throws APIException
      */
     public function list(
         array|AccessIPAddressListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): AccessIPAddressListResponse {
+    ): DefaultFlatPagination {
         [$parsed, $options] = AccessIPAddressListParams::parseRequest(
             $params,
             $requestOptions,
@@ -106,7 +109,8 @@ final class AccessIPAddressService implements AccessIPAddressContract
             path: 'access_ip_address',
             query: $parsed,
             options: $options,
-            convert: AccessIPAddressListResponse::class,
+            convert: AccessIPAddressResponse::class,
+            page: DefaultFlatPagination::class,
         );
     }
 

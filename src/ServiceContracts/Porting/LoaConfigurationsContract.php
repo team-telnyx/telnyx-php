@@ -5,14 +5,15 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\Porting;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationCreateParams;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationGetResponse;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationListParams;
-use Telnyx\Porting\LoaConfigurations\LoaConfigurationListResponse;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationNewResponse;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateResponse;
+use Telnyx\Porting\LoaConfigurations\PortingLoaConfiguration;
 use Telnyx\RequestOptions;
 
 interface LoaConfigurationsContract
@@ -57,12 +58,14 @@ interface LoaConfigurationsContract
      *
      * @param array<mixed>|LoaConfigurationListParams $params
      *
+     * @return DefaultPagination<PortingLoaConfiguration>
+     *
      * @throws APIException
      */
     public function list(
         array|LoaConfigurationListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): LoaConfigurationListResponse;
+    ): DefaultPagination;
 
     /**
      * @api

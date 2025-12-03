@@ -6,6 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\GlobalIPs\GlobalIPCreateParams;
 use Telnyx\GlobalIPs\GlobalIPDeleteResponse;
 use Telnyx\GlobalIPs\GlobalIPGetResponse;
@@ -79,12 +80,14 @@ final class GlobalIPsService implements GlobalIPsContract
      *
      * @param array{page?: array{number?: int, size?: int}}|GlobalIPListParams $params
      *
+     * @return DefaultPagination<GlobalIPListResponse>
+     *
      * @throws APIException
      */
     public function list(
         array|GlobalIPListParams $params,
         ?RequestOptions $requestOptions = null
-    ): GlobalIPListResponse {
+    ): DefaultPagination {
         [$parsed, $options] = GlobalIPListParams::parseRequest(
             $params,
             $requestOptions,
@@ -97,6 +100,7 @@ final class GlobalIPsService implements GlobalIPsContract
             query: $parsed,
             options: $options,
             convert: GlobalIPListResponse::class,
+            page: DefaultPagination::class,
         );
     }
 

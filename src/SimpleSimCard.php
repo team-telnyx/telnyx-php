@@ -7,6 +7,7 @@ namespace Telnyx;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\MapOf;
 use Telnyx\SimpleSimCard\CurrentBillingPeriodConsumedData;
 use Telnyx\SimpleSimCard\DataLimit;
 use Telnyx\SimpleSimCard\EsimInstallationStatus;
@@ -26,7 +27,7 @@ use Telnyx\SimpleSimCard\Type;
  *   imsi?: string|null,
  *   msisdn?: string|null,
  *   record_type?: string|null,
- *   resources_with_in_progress_actions?: list<mixed>|null,
+ *   resources_with_in_progress_actions?: list<array<string,mixed>>|null,
  *   sim_card_group_id?: string|null,
  *   status?: SimCardStatus|null,
  *   tags?: list<string>|null,
@@ -118,9 +119,9 @@ final class SimpleSimCard implements BaseModel
     /**
      * List of resources with actions in progress.
      *
-     * @var list<mixed>|null $resources_with_in_progress_actions
+     * @var list<array<string,mixed>>|null $resources_with_in_progress_actions
      */
-    #[Api(list: 'mixed', optional: true)]
+    #[Api(list: new MapOf('mixed'), optional: true)]
     public ?array $resources_with_in_progress_actions;
 
     /**
@@ -172,7 +173,7 @@ final class SimpleSimCard implements BaseModel
      *
      * @param list<string>|null $authorized_imeis
      * @param EsimInstallationStatus|value-of<EsimInstallationStatus>|null $esim_installation_status
-     * @param list<mixed> $resources_with_in_progress_actions
+     * @param list<array<string,mixed>> $resources_with_in_progress_actions
      * @param list<string> $tags
      * @param Type|value-of<Type> $type
      */
@@ -362,7 +363,7 @@ final class SimpleSimCard implements BaseModel
     /**
      * List of resources with actions in progress.
      *
-     * @param list<mixed> $resourcesWithInProgressActions
+     * @param list<array<string,mixed>> $resourcesWithInProgressActions
      */
     public function withResourcesWithInProgressActions(
         array $resourcesWithInProgressActions

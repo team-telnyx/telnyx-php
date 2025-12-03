@@ -6,11 +6,12 @@ namespace Telnyx\Services\Porting;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\Porting\Reports\ExportPortingOrdersCsvReport;
+use Telnyx\Porting\Reports\PortingReport;
 use Telnyx\Porting\Reports\ReportCreateParams;
 use Telnyx\Porting\Reports\ReportGetResponse;
 use Telnyx\Porting\Reports\ReportListParams;
-use Telnyx\Porting\Reports\ReportListResponse;
 use Telnyx\Porting\Reports\ReportNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Porting\ReportsContract;
@@ -92,12 +93,14 @@ final class ReportsService implements ReportsContract
      *   page?: array{number?: int, size?: int},
      * }|ReportListParams $params
      *
+     * @return DefaultPagination<PortingReport>
+     *
      * @throws APIException
      */
     public function list(
         array|ReportListParams $params,
         ?RequestOptions $requestOptions = null
-    ): ReportListResponse {
+    ): DefaultPagination {
         [$parsed, $options] = ReportListParams::parseRequest(
             $params,
             $requestOptions,
@@ -109,7 +112,8 @@ final class ReportsService implements ReportsContract
             path: 'porting/reports',
             query: $parsed,
             options: $options,
-            convert: ReportListResponse::class,
+            convert: PortingReport::class,
+            page: DefaultPagination::class,
         );
     }
 }

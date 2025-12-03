@@ -6,6 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\PortingPhoneNumbers\PortingPhoneNumberListParams;
 use Telnyx\PortingPhoneNumbers\PortingPhoneNumberListResponse;
 use Telnyx\RequestOptions;
@@ -30,12 +31,14 @@ final class PortingPhoneNumbersService implements PortingPhoneNumbersContract
      *   page?: array{number?: int, size?: int},
      * }|PortingPhoneNumberListParams $params
      *
+     * @return DefaultPagination<PortingPhoneNumberListResponse>
+     *
      * @throws APIException
      */
     public function list(
         array|PortingPhoneNumberListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): PortingPhoneNumberListResponse {
+    ): DefaultPagination {
         [$parsed, $options] = PortingPhoneNumberListParams::parseRequest(
             $params,
             $requestOptions,
@@ -48,6 +51,7 @@ final class PortingPhoneNumbersService implements PortingPhoneNumbersContract
             query: $parsed,
             options: $options,
             convert: PortingPhoneNumberListResponse::class,
+            page: DefaultPagination::class,
         );
     }
 }

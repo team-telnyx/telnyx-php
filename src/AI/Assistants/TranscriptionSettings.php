@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\AI\Assistants;
 
 use Telnyx\AI\Assistants\TranscriptionSettings\Model;
-use Telnyx\AI\Assistants\TranscriptionSettings\Settings;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
@@ -15,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   language?: string|null,
  *   model?: value-of<Model>|null,
  *   region?: string|null,
- *   settings?: Settings|null,
+ *   settings?: TranscriptionSettingsConfig|null,
  * }
  */
 final class TranscriptionSettings implements BaseModel
@@ -47,7 +46,7 @@ final class TranscriptionSettings implements BaseModel
     public ?string $region;
 
     #[Api(optional: true)]
-    public ?Settings $settings;
+    public ?TranscriptionSettingsConfig $settings;
 
     public function __construct()
     {
@@ -65,7 +64,7 @@ final class TranscriptionSettings implements BaseModel
         ?string $language = null,
         Model|string|null $model = null,
         ?string $region = null,
-        ?Settings $settings = null,
+        ?TranscriptionSettingsConfig $settings = null,
     ): self {
         $obj = new self;
 
@@ -115,7 +114,7 @@ final class TranscriptionSettings implements BaseModel
         return $obj;
     }
 
-    public function withSettings(Settings $settings): self
+    public function withSettings(TranscriptionSettingsConfig $settings): self
     {
         $obj = clone $this;
         $obj->settings = $settings;

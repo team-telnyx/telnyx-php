@@ -6,7 +6,9 @@ namespace Telnyx\CredentialConnections;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\CredentialConnections\CredentialConnection\SipUriCallingPreference;
 use Telnyx\CredentialConnections\CredentialConnection\WebhookAPIVersion;
 
@@ -38,10 +40,12 @@ use Telnyx\CredentialConnections\CredentialConnection\WebhookAPIVersion;
  *   webhook_timeout_secs?: int|null,
  * }
  */
-final class CredentialConnection implements BaseModel
+final class CredentialConnection implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<CredentialConnectionShape> */
     use SdkModel;
+
+    use SdkResponse;
 
     /**
      * Identifies the type of resource.

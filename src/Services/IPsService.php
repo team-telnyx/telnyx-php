@@ -6,11 +6,12 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
+use Telnyx\IPs\IP;
 use Telnyx\IPs\IPCreateParams;
 use Telnyx\IPs\IPDeleteResponse;
 use Telnyx\IPs\IPGetResponse;
 use Telnyx\IPs\IPListParams;
-use Telnyx\IPs\IPListResponse;
 use Telnyx\IPs\IPNewResponse;
 use Telnyx\IPs\IPUpdateParams;
 use Telnyx\IPs\IPUpdateResponse;
@@ -115,12 +116,14 @@ final class IPsService implements IPsContract
      *   page?: array{number?: int, size?: int},
      * }|IPListParams $params
      *
+     * @return DefaultPagination<IP>
+     *
      * @throws APIException
      */
     public function list(
         array|IPListParams $params,
         ?RequestOptions $requestOptions = null
-    ): IPListResponse {
+    ): DefaultPagination {
         [$parsed, $options] = IPListParams::parseRequest(
             $params,
             $requestOptions,
@@ -132,7 +135,8 @@ final class IPsService implements IPsContract
             path: 'ips',
             query: $parsed,
             options: $options,
-            convert: IPListResponse::class,
+            convert: IP::class,
+            page: DefaultPagination::class,
         );
     }
 

@@ -10,12 +10,13 @@ use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\CredentialConnections\ConnectionRtcpSettings;
 use Telnyx\CredentialConnections\DtmfType;
 use Telnyx\CredentialConnections\EncryptedMedia;
+use Telnyx\DefaultPagination;
 use Telnyx\IPConnections\InboundIP;
+use Telnyx\IPConnections\IPConnection;
 use Telnyx\IPConnections\IPConnectionCreateParams;
 use Telnyx\IPConnections\IPConnectionDeleteResponse;
 use Telnyx\IPConnections\IPConnectionGetResponse;
 use Telnyx\IPConnections\IPConnectionListParams;
-use Telnyx\IPConnections\IPConnectionListResponse;
 use Telnyx\IPConnections\IPConnectionNewResponse;
 use Telnyx\IPConnections\IPConnectionUpdateParams;
 use Telnyx\IPConnections\IPConnectionUpdateResponse;
@@ -233,12 +234,14 @@ final class IPConnectionsService implements IPConnectionsContract
      *   sort?: 'created_at'|'connection_name'|'active',
      * }|IPConnectionListParams $params
      *
+     * @return DefaultPagination<IPConnection>
+     *
      * @throws APIException
      */
     public function list(
         array|IPConnectionListParams $params,
         ?RequestOptions $requestOptions = null
-    ): IPConnectionListResponse {
+    ): DefaultPagination {
         [$parsed, $options] = IPConnectionListParams::parseRequest(
             $params,
             $requestOptions,
@@ -250,7 +253,8 @@ final class IPConnectionsService implements IPConnectionsContract
             path: 'ip_connections',
             query: $parsed,
             options: $options,
-            convert: IPConnectionListResponse::class,
+            convert: IPConnection::class,
+            page: DefaultPagination::class,
         );
     }
 

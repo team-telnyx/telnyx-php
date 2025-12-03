@@ -5,12 +5,13 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\Legacy\Reporting\UsageReports;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Legacy\Reporting\UsageReports\Voice\CdrUsageReportResponseLegacy;
 use Telnyx\Legacy\Reporting\UsageReports\Voice\VoiceCreateParams;
 use Telnyx\Legacy\Reporting\UsageReports\Voice\VoiceDeleteResponse;
 use Telnyx\Legacy\Reporting\UsageReports\Voice\VoiceGetResponse;
 use Telnyx\Legacy\Reporting\UsageReports\Voice\VoiceListParams;
-use Telnyx\Legacy\Reporting\UsageReports\Voice\VoiceListResponse;
 use Telnyx\Legacy\Reporting\UsageReports\Voice\VoiceNewResponse;
+use Telnyx\PerPagePagination;
 use Telnyx\RequestOptions;
 
 interface VoiceContract
@@ -42,12 +43,14 @@ interface VoiceContract
      *
      * @param array<mixed>|VoiceListParams $params
      *
+     * @return PerPagePagination<CdrUsageReportResponseLegacy>
+     *
      * @throws APIException
      */
     public function list(
         array|VoiceListParams $params,
         ?RequestOptions $requestOptions = null
-    ): VoiceListResponse;
+    ): PerPagePagination;
 
     /**
      * @api

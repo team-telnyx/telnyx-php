@@ -6,6 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\WireguardInterfacesContract;
 use Telnyx\WireguardInterfaces\WireguardInterfaceCreateParams;
@@ -28,10 +29,10 @@ final class WireguardInterfacesService implements WireguardInterfacesContract
      * Create a new WireGuard Interface. Current limitation of 10 interfaces per user can be created.
      *
      * @param array{
-     *   network_id: string,
      *   region_code: string,
      *   enable_sip_trunking?: bool,
      *   name?: string,
+     *   network_id?: string,
      * }|WireguardInterfaceCreateParams $params
      *
      * @throws APIException
@@ -84,12 +85,14 @@ final class WireguardInterfacesService implements WireguardInterfacesContract
      *   filter?: array{network_id?: string}, page?: array{number?: int, size?: int}
      * }|WireguardInterfaceListParams $params
      *
+     * @return DefaultPagination<WireguardInterfaceListResponse>
+     *
      * @throws APIException
      */
     public function list(
         array|WireguardInterfaceListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): WireguardInterfaceListResponse {
+    ): DefaultPagination {
         [$parsed, $options] = WireguardInterfaceListParams::parseRequest(
             $params,
             $requestOptions,
@@ -102,6 +105,7 @@ final class WireguardInterfacesService implements WireguardInterfacesContract
             query: $parsed,
             options: $options,
             convert: WireguardInterfaceListResponse::class,
+            page: DefaultPagination::class,
         );
     }
 

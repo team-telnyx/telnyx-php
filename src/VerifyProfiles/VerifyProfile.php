@@ -6,7 +6,9 @@ namespace Telnyx\VerifyProfiles;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\VerifyProfiles\VerifyProfile\Call;
 use Telnyx\VerifyProfiles\VerifyProfile\Flashcall;
 use Telnyx\VerifyProfiles\VerifyProfile\RecordType;
@@ -27,10 +29,12 @@ use Telnyx\VerifyProfiles\VerifyProfile\SMS;
  *   webhook_url?: string|null,
  * }
  */
-final class VerifyProfile implements BaseModel
+final class VerifyProfile implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<VerifyProfileShape> */
     use SdkModel;
+
+    use SdkResponse;
 
     #[Api(optional: true)]
     public ?string $id;

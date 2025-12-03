@@ -6,7 +6,9 @@ namespace Telnyx\Legacy\Reporting\UsageReports\Voice;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * Legacy V2 CDR usage report response.
@@ -20,16 +22,18 @@ use Telnyx\Core\Contracts\BaseModel;
  *   product_breakdown?: int|null,
  *   record_type?: string|null,
  *   report_url?: string|null,
- *   result?: mixed,
+ *   result?: array<string,mixed>|null,
  *   start_time?: \DateTimeInterface|null,
  *   status?: int|null,
  *   updated_at?: \DateTimeInterface|null,
  * }
  */
-final class CdrUsageReportResponseLegacy implements BaseModel
+final class CdrUsageReportResponseLegacy implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<CdrUsageReportResponseLegacyShape> */
     use SdkModel;
+
+    use SdkResponse;
 
     /**
      * Identifies the resource.
@@ -65,8 +69,9 @@ final class CdrUsageReportResponseLegacy implements BaseModel
     #[Api(optional: true)]
     public ?string $report_url;
 
-    #[Api(optional: true)]
-    public mixed $result;
+    /** @var array<string,mixed>|null $result */
+    #[Api(map: 'mixed', optional: true)]
+    public ?array $result;
 
     #[Api(optional: true)]
     public ?\DateTimeInterface $start_time;
@@ -91,6 +96,7 @@ final class CdrUsageReportResponseLegacy implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<string> $connections
+     * @param array<string,mixed> $result
      */
     public static function with(
         ?string $id = null,
@@ -101,7 +107,7 @@ final class CdrUsageReportResponseLegacy implements BaseModel
         ?int $product_breakdown = null,
         ?string $record_type = null,
         ?string $report_url = null,
-        mixed $result = null,
+        ?array $result = null,
         ?\DateTimeInterface $start_time = null,
         ?int $status = null,
         ?\DateTimeInterface $updated_at = null,
@@ -200,7 +206,10 @@ final class CdrUsageReportResponseLegacy implements BaseModel
         return $obj;
     }
 
-    public function withResult(mixed $result): self
+    /**
+     * @param array<string,mixed> $result
+     */
+    public function withResult(array $result): self
     {
         $obj = clone $this;
         $obj->result = $result;

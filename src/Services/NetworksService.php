@@ -6,6 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\Networks\InterfaceStatus;
 use Telnyx\Networks\NetworkCreateParams;
 use Telnyx\Networks\NetworkDeleteResponse;
@@ -94,7 +95,7 @@ final class NetworksService implements NetworksContract
      * @throws APIException
      */
     public function update(
-        string $id,
+        string $networkID,
         array|NetworkUpdateParams $params,
         ?RequestOptions $requestOptions = null,
     ): NetworkUpdateResponse {
@@ -106,7 +107,7 @@ final class NetworksService implements NetworksContract
         // @phpstan-ignore-next-line;
         return $this->client->request(
             method: 'patch',
-            path: ['networks/%1$s', $id],
+            path: ['networks/%1$s', $networkID],
             body: (object) $parsed,
             options: $options,
             convert: NetworkUpdateResponse::class,
@@ -122,12 +123,14 @@ final class NetworksService implements NetworksContract
      *   filter?: array{name?: string}, page?: array{number?: int, size?: int}
      * }|NetworkListParams $params
      *
+     * @return DefaultPagination<NetworkListResponse>
+     *
      * @throws APIException
      */
     public function list(
         array|NetworkListParams $params,
         ?RequestOptions $requestOptions = null
-    ): NetworkListResponse {
+    ): DefaultPagination {
         [$parsed, $options] = NetworkListParams::parseRequest(
             $params,
             $requestOptions,
@@ -140,6 +143,7 @@ final class NetworksService implements NetworksContract
             query: $parsed,
             options: $options,
             convert: NetworkListResponse::class,
+            page: DefaultPagination::class,
         );
     }
 
@@ -177,13 +181,15 @@ final class NetworksService implements NetworksContract
      *   page?: array{number?: int, size?: int},
      * }|NetworkListInterfacesParams $params
      *
+     * @return DefaultPagination<NetworkListInterfacesResponse>
+     *
      * @throws APIException
      */
     public function listInterfaces(
         string $id,
         array|NetworkListInterfacesParams $params,
         ?RequestOptions $requestOptions = null,
-    ): NetworkListInterfacesResponse {
+    ): DefaultPagination {
         [$parsed, $options] = NetworkListInterfacesParams::parseRequest(
             $params,
             $requestOptions,
@@ -196,6 +202,7 @@ final class NetworksService implements NetworksContract
             query: $parsed,
             options: $options,
             convert: NetworkListInterfacesResponse::class,
+            page: DefaultPagination::class,
         );
     }
 }

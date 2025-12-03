@@ -6,7 +6,9 @@ namespace Telnyx\SimCardDataUsageNotifications;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotification\Threshold;
 
 /**
@@ -21,10 +23,12 @@ use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotification\Threshold;
  *   updated_at?: string|null,
  * }
  */
-final class SimCardDataUsageNotification implements BaseModel
+final class SimCardDataUsageNotification implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<SimCardDataUsageNotificationShape> */
     use SdkModel;
+
+    use SdkResponse;
 
     /**
      * Identifies the resource.

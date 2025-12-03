@@ -8,7 +8,6 @@ use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Invoices\InvoiceListParams\Page;
 use Telnyx\Invoices\InvoiceListParams\Sort;
 
 /**
@@ -17,7 +16,7 @@ use Telnyx\Invoices\InvoiceListParams\Sort;
  * @see Telnyx\Services\InvoicesService::list()
  *
  * @phpstan-type InvoiceListParamsShape = array{
- *   page?: Page, sort?: Sort|value-of<Sort>
+ *   page_number_?: int, page_size_?: int, sort?: Sort|value-of<Sort>
  * }
  */
 final class InvoiceListParams implements BaseModel
@@ -26,11 +25,11 @@ final class InvoiceListParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    /**
-     * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
-     */
     #[Api(optional: true)]
-    public ?Page $page;
+    public ?int $page_number_;
+
+    #[Api(optional: true)]
+    public ?int $page_size_;
 
     /**
      * Specifies the sort order for results.
@@ -53,24 +52,31 @@ final class InvoiceListParams implements BaseModel
      * @param Sort|value-of<Sort> $sort
      */
     public static function with(
-        ?Page $page = null,
+        ?int $page_number_ = null,
+        ?int $page_size_ = null,
         Sort|string|null $sort = null
     ): self {
         $obj = new self;
 
-        null !== $page && $obj->page = $page;
+        null !== $page_number_ && $obj->page_number_ = $page_number_;
+        null !== $page_size_ && $obj->page_size_ = $page_size_;
         null !== $sort && $obj['sort'] = $sort;
 
         return $obj;
     }
 
-    /**
-     * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
-     */
-    public function withPage(Page $page): self
+    public function withPageNumber(int $pageNumber): self
     {
         $obj = clone $this;
-        $obj->page = $page;
+        $obj->page_number_ = $pageNumber;
+
+        return $obj;
+    }
+
+    public function withPageSize(int $pageSize): self
+    {
+        $obj = clone $this;
+        $obj->page_size_ = $pageSize;
 
         return $obj;
     }

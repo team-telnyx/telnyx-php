@@ -5,11 +5,12 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
+use Telnyx\FaxApplications\FaxApplication;
 use Telnyx\FaxApplications\FaxApplicationCreateParams;
 use Telnyx\FaxApplications\FaxApplicationDeleteResponse;
 use Telnyx\FaxApplications\FaxApplicationGetResponse;
 use Telnyx\FaxApplications\FaxApplicationListParams;
-use Telnyx\FaxApplications\FaxApplicationListResponse;
 use Telnyx\FaxApplications\FaxApplicationNewResponse;
 use Telnyx\FaxApplications\FaxApplicationUpdateParams;
 use Telnyx\FaxApplications\FaxApplicationUpdateResponse;
@@ -57,12 +58,14 @@ interface FaxApplicationsContract
      *
      * @param array<mixed>|FaxApplicationListParams $params
      *
+     * @return DefaultPagination<FaxApplication>
+     *
      * @throws APIException
      */
     public function list(
         array|FaxApplicationListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): FaxApplicationListResponse;
+    ): DefaultPagination;
 
     /**
      * @api

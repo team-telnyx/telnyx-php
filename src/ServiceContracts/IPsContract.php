@@ -5,11 +5,12 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
+use Telnyx\IPs\IP;
 use Telnyx\IPs\IPCreateParams;
 use Telnyx\IPs\IPDeleteResponse;
 use Telnyx\IPs\IPGetResponse;
 use Telnyx\IPs\IPListParams;
-use Telnyx\IPs\IPListResponse;
 use Telnyx\IPs\IPNewResponse;
 use Telnyx\IPs\IPUpdateParams;
 use Telnyx\IPs\IPUpdateResponse;
@@ -57,12 +58,14 @@ interface IPsContract
      *
      * @param array<mixed>|IPListParams $params
      *
+     * @return DefaultPagination<IP>
+     *
      * @throws APIException
      */
     public function list(
         array|IPListParams $params,
         ?RequestOptions $requestOptions = null
-    ): IPListResponse;
+    ): DefaultPagination;
 
     /**
      * @api

@@ -6,6 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\WebhookDeliveriesContract;
 use Telnyx\WebhookDeliveries\WebhookDeliveryGetResponse;
@@ -56,12 +57,14 @@ final class WebhookDeliveriesService implements WebhookDeliveriesContract
      *   page?: array{number?: int, size?: int},
      * }|WebhookDeliveryListParams $params
      *
+     * @return DefaultPagination<WebhookDeliveryListResponse>
+     *
      * @throws APIException
      */
     public function list(
         array|WebhookDeliveryListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): WebhookDeliveryListResponse {
+    ): DefaultPagination {
         [$parsed, $options] = WebhookDeliveryListParams::parseRequest(
             $params,
             $requestOptions,
@@ -74,6 +77,7 @@ final class WebhookDeliveriesService implements WebhookDeliveriesContract
             query: $parsed,
             options: $options,
             convert: WebhookDeliveryListResponse::class,
+            page: DefaultPagination::class,
         );
     }
 }

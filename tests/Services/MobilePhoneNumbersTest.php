@@ -6,8 +6,8 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\MobilePhoneNumbers\MobilePhoneNumberGetResponse;
-use Telnyx\MobilePhoneNumbers\MobilePhoneNumberListResponse;
 use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateResponse;
 use Tests\UnsupportedMockTests;
 
@@ -65,6 +65,6 @@ final class MobilePhoneNumbersTest extends TestCase
         $result = $this->client->mobilePhoneNumbers->list([]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(MobilePhoneNumberListResponse::class, $result);
+        $this->assertInstanceOf(DefaultFlatPagination::class, $result);
     }
 }

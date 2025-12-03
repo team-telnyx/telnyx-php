@@ -6,12 +6,13 @@ namespace Telnyx\Services\Legacy\Reporting\UsageReports;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Legacy\Reporting\UsageReports\Voice\CdrUsageReportResponseLegacy;
 use Telnyx\Legacy\Reporting\UsageReports\Voice\VoiceCreateParams;
 use Telnyx\Legacy\Reporting\UsageReports\Voice\VoiceDeleteResponse;
 use Telnyx\Legacy\Reporting\UsageReports\Voice\VoiceGetResponse;
 use Telnyx\Legacy\Reporting\UsageReports\Voice\VoiceListParams;
-use Telnyx\Legacy\Reporting\UsageReports\Voice\VoiceListResponse;
 use Telnyx\Legacy\Reporting\UsageReports\Voice\VoiceNewResponse;
+use Telnyx\PerPagePagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Legacy\Reporting\UsageReports\VoiceContract;
 
@@ -86,12 +87,14 @@ final class VoiceService implements VoiceContract
      *
      * @param array{page?: int, per_page?: int}|VoiceListParams $params
      *
+     * @return PerPagePagination<CdrUsageReportResponseLegacy>
+     *
      * @throws APIException
      */
     public function list(
         array|VoiceListParams $params,
         ?RequestOptions $requestOptions = null
-    ): VoiceListResponse {
+    ): PerPagePagination {
         [$parsed, $options] = VoiceListParams::parseRequest(
             $params,
             $requestOptions,
@@ -103,7 +106,8 @@ final class VoiceService implements VoiceContract
             path: 'legacy/reporting/usage_reports/voice',
             query: $parsed,
             options: $options,
-            convert: VoiceListResponse::class,
+            convert: CdrUsageReportResponseLegacy::class,
+            page: PerPagePagination::class,
         );
     }
 
