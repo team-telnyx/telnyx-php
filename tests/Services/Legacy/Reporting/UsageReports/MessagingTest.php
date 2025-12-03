@@ -110,14 +110,8 @@ final class MessagingTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this
-            ->client
-            ->legacy
-            ->reporting
-            ->usageReports
-            ->messaging
-            ->list([])
-        ;
+        $result = $this->client->legacy->reporting->usageReports->messaging->list([
+        ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(MessagingListResponse::class, $result);

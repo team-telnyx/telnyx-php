@@ -51,7 +51,7 @@ final class AudioTest extends TestCase
 
         $result = $this->client->ai->audio->transcribe([
             'model' => 'distil-whisper/distil-large-v2',
-            'file' => null,
+            'file' => file_get_contents(__FILE__) ?: '',
             'file_url' => 'https://example.com/file.mp3',
             'response_format' => 'json',
             'timestamp_granularities__' => 'segment',
