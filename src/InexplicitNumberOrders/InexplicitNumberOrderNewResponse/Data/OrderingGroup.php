@@ -19,12 +19,14 @@ use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderNewResponse\Data\Ordering
  *   country_iso?: string|null,
  *   created_at?: \DateTimeInterface|null,
  *   error_reason?: string|null,
+ *   exclude_held_numbers?: bool|null,
  *   national_destination_code?: string|null,
  *   orders?: list<Order>|null,
  *   phone_number_type?: string|null,
  *   phone_number_contains_?: string|null,
  *   phone_number_ends_with_?: string|null,
  *   phone_number_starts_with_?: string|null,
+ *   quickship?: bool|null,
  *   status?: value-of<Status>|null,
  *   strategy?: value-of<Strategy>|null,
  *   updated_at?: \DateTimeInterface|null,
@@ -72,6 +74,12 @@ final class OrderingGroup implements BaseModel
     public ?string $error_reason;
 
     /**
+     * Filter to exclude phone numbers that are currently on hold/reserved for your account.
+     */
+    #[Api(optional: true)]
+    public ?bool $exclude_held_numbers;
+
+    /**
      * Filter by area code.
      */
     #[Api(optional: true)]
@@ -108,6 +116,12 @@ final class OrderingGroup implements BaseModel
      */
     #[Api('phone_number[starts_with]', optional: true)]
     public ?string $phone_number_starts_with_;
+
+    /**
+     * Filter to exclude phone numbers that need additional time after to purchase to activate. Only applicable for +1 toll_free numbers.
+     */
+    #[Api(optional: true)]
+    public ?bool $quickship;
 
     /**
      * Status of the ordering group.
@@ -152,12 +166,14 @@ final class OrderingGroup implements BaseModel
         ?string $country_iso = null,
         ?\DateTimeInterface $created_at = null,
         ?string $error_reason = null,
+        ?bool $exclude_held_numbers = null,
         ?string $national_destination_code = null,
         ?array $orders = null,
         ?string $phone_number_type = null,
         ?string $phone_number_contains_ = null,
         ?string $phone_number_ends_with_ = null,
         ?string $phone_number_starts_with_ = null,
+        ?bool $quickship = null,
         Status|string|null $status = null,
         Strategy|string|null $strategy = null,
         ?\DateTimeInterface $updated_at = null,
@@ -170,12 +186,14 @@ final class OrderingGroup implements BaseModel
         null !== $country_iso && $obj->country_iso = $country_iso;
         null !== $created_at && $obj->created_at = $created_at;
         null !== $error_reason && $obj->error_reason = $error_reason;
+        null !== $exclude_held_numbers && $obj->exclude_held_numbers = $exclude_held_numbers;
         null !== $national_destination_code && $obj->national_destination_code = $national_destination_code;
         null !== $orders && $obj->orders = $orders;
         null !== $phone_number_type && $obj->phone_number_type = $phone_number_type;
         null !== $phone_number_contains_ && $obj->phone_number_contains_ = $phone_number_contains_;
         null !== $phone_number_ends_with_ && $obj->phone_number_ends_with_ = $phone_number_ends_with_;
         null !== $phone_number_starts_with_ && $obj->phone_number_starts_with_ = $phone_number_starts_with_;
+        null !== $quickship && $obj->quickship = $quickship;
         null !== $status && $obj['status'] = $status;
         null !== $strategy && $obj['strategy'] = $strategy;
         null !== $updated_at && $obj->updated_at = $updated_at;
@@ -250,6 +268,17 @@ final class OrderingGroup implements BaseModel
     }
 
     /**
+     * Filter to exclude phone numbers that are currently on hold/reserved for your account.
+     */
+    public function withExcludeHeldNumbers(bool $excludeHeldNumbers): self
+    {
+        $obj = clone $this;
+        $obj->exclude_held_numbers = $excludeHeldNumbers;
+
+        return $obj;
+    }
+
+    /**
      * Filter by area code.
      */
     public function withNationalDestinationCode(
@@ -315,6 +344,17 @@ final class OrderingGroup implements BaseModel
     ): self {
         $obj = clone $this;
         $obj->phone_number_starts_with_ = $phoneNumberStartsWith;
+
+        return $obj;
+    }
+
+    /**
+     * Filter to exclude phone numbers that need additional time after to purchase to activate. Only applicable for +1 toll_free numbers.
+     */
+    public function withQuickship(bool $quickship): self
+    {
+        $obj = clone $this;
+        $obj->quickship = $quickship;
 
         return $obj;
     }
