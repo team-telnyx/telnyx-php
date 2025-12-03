@@ -2,29 +2,27 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\CountryCoverage;
+namespace Telnyx\AdvancedOrders;
 
+use Telnyx\AdvancedOrders\AdvancedOrderListResponse\Data;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
-use Telnyx\CountryCoverage\CountryCoverageGetResponse\Data;
 
 /**
- * @phpstan-type CountryCoverageGetResponseShape = array{
- *   data?: array<string,Data>|null
- * }
+ * @phpstan-type AdvancedOrderListResponseShape = array{data?: list<Data>|null}
  */
-final class CountryCoverageGetResponse implements BaseModel, ResponseConverter
+final class AdvancedOrderListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<CountryCoverageGetResponseShape> */
+    /** @use SdkModel<AdvancedOrderListResponseShape> */
     use SdkModel;
 
     use SdkResponse;
 
-    /** @var array<string,Data>|null $data */
-    #[Api(map: Data::class, optional: true)]
+    /** @var list<Data>|null $data */
+    #[Api(list: Data::class, optional: true)]
     public ?array $data;
 
     public function __construct()
@@ -37,7 +35,7 @@ final class CountryCoverageGetResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param array<string,Data> $data
+     * @param list<Data> $data
      */
     public static function with(?array $data = null): self
     {
@@ -49,7 +47,7 @@ final class CountryCoverageGetResponse implements BaseModel, ResponseConverter
     }
 
     /**
-     * @param array<string,Data> $data
+     * @param list<Data> $data
      */
     public function withData(array $data): self
     {
