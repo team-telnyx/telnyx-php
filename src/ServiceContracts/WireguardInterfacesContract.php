@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\WireguardInterfaces\WireguardInterfaceCreateParams;
 use Telnyx\WireguardInterfaces\WireguardInterfaceDeleteResponse;
@@ -43,14 +42,12 @@ interface WireguardInterfacesContract
      *
      * @param array<mixed>|WireguardInterfaceListParams $params
      *
-     * @return DefaultPagination<WireguardInterfaceListResponse>
-     *
      * @throws APIException
      */
     public function list(
         array|WireguardInterfaceListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): DefaultPagination;
+    ): WireguardInterfaceListResponse;
 
     /**
      * @api

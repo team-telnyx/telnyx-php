@@ -6,9 +6,9 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\DefaultPagination;
 use Telnyx\Portouts\PortoutGetResponse;
 use Telnyx\Portouts\PortoutListRejectionCodesResponse;
+use Telnyx\Portouts\PortoutListResponse;
 use Telnyx\Portouts\PortoutUpdateStatusResponse;
 use Tests\UnsupportedMockTests;
 
@@ -55,7 +55,7 @@ final class PortoutsTest extends TestCase
         $result = $this->client->portouts->list([]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultPagination::class, $result);
+        $this->assertInstanceOf(PortoutListResponse::class, $result);
     }
 
     #[Test]

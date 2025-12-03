@@ -6,9 +6,7 @@ namespace Telnyx\Porting\LoaConfigurations;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Porting\LoaConfigurations\PortingLoaConfiguration\Address;
 use Telnyx\Porting\LoaConfigurations\PortingLoaConfiguration\Contact;
 use Telnyx\Porting\LoaConfigurations\PortingLoaConfiguration\Logo;
@@ -27,12 +25,10 @@ use Telnyx\Porting\LoaConfigurations\PortingLoaConfiguration\Logo;
  *   updated_at?: \DateTimeInterface|null,
  * }
  */
-final class PortingLoaConfiguration implements BaseModel, ResponseConverter
+final class PortingLoaConfiguration implements BaseModel
 {
     /** @use SdkModel<PortingLoaConfigurationShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * Uniquely identifies the LOA configuration.

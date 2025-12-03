@@ -6,11 +6,10 @@ namespace Telnyx\Services\PhoneNumbers;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
-use Telnyx\PhoneNumbers\CsvDownloads\CsvDownload;
 use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadCreateParams;
 use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadGetResponse;
 use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadListParams;
+use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadListResponse;
 use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PhoneNumbers\CsvDownloadsContract;
@@ -95,14 +94,12 @@ final class CsvDownloadsService implements CsvDownloadsContract
      *   page?: array{number?: int, size?: int}
      * }|CsvDownloadListParams $params
      *
-     * @return DefaultPagination<CsvDownload>
-     *
      * @throws APIException
      */
     public function list(
         array|CsvDownloadListParams $params,
         ?RequestOptions $requestOptions = null
-    ): DefaultPagination {
+    ): CsvDownloadListResponse {
         [$parsed, $options] = CsvDownloadListParams::parseRequest(
             $params,
             $requestOptions,
@@ -114,8 +111,7 @@ final class CsvDownloadsService implements CsvDownloadsContract
             path: 'phone_numbers/csv_downloads',
             query: $parsed,
             options: $options,
-            convert: CsvDownload::class,
-            page: DefaultPagination::class,
+            convert: CsvDownloadListResponse::class,
         );
     }
 }

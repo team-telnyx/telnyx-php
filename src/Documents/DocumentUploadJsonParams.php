@@ -8,8 +8,6 @@ use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Documents\DocumentUploadJsonParams\Document\DocServiceDocumentUploadInline;
-use Telnyx\Documents\DocumentUploadJsonParams\Document\DocServiceDocumentUploadURL;
 
 /**
  * Upload a document.<br /><br />Uploaded files must be linked to a service within 30 minutes or they will be automatically deleted.
@@ -17,7 +15,7 @@ use Telnyx\Documents\DocumentUploadJsonParams\Document\DocServiceDocumentUploadU
  * @see Telnyx\Services\DocumentsService::uploadJson()
  *
  * @phpstan-type DocumentUploadJsonParamsShape = array{
- *   document: DocServiceDocumentUploadURL|DocServiceDocumentUploadInline
+ *   url: string, customer_reference?: string, filename?: string, file: string
  * }
  */
 final class DocumentUploadJsonParams implements BaseModel
@@ -26,21 +24,42 @@ final class DocumentUploadJsonParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
+    /**
+     * If the file is already hosted publicly, you can provide a URL and have the documents service fetch it for you.
+     */
     #[Api]
-    public DocServiceDocumentUploadURL|DocServiceDocumentUploadInline $document;
+    public string $url;
+
+    /**
+     * A customer reference string for customer look ups.
+     */
+    #[Api(optional: true)]
+    public ?string $customer_reference;
+
+    /**
+     * The filename of the document.
+     */
+    #[Api(optional: true)]
+    public ?string $filename;
+
+    /**
+     * The Base64 encoded contents of the file you are uploading.
+     */
+    #[Api]
+    public string $file;
 
     /**
      * `new DocumentUploadJsonParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * DocumentUploadJsonParams::with(document: ...)
+     * DocumentUploadJsonParams::with(url: ..., file: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new DocumentUploadJsonParams)->withDocument(...)
+     * (new DocumentUploadJsonParams)->withURL(...)->withFile(...)
      * ```
      */
     public function __construct()
@@ -54,20 +73,62 @@ final class DocumentUploadJsonParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        DocServiceDocumentUploadURL|DocServiceDocumentUploadInline $document
+        string $url,
+        string $file,
+        ?string $customer_reference = null,
+        ?string $filename = null,
     ): self {
         $obj = new self;
 
-        $obj->document = $document;
+        $obj->url = $url;
+        $obj->file = $file;
+
+        null !== $customer_reference && $obj->customer_reference = $customer_reference;
+        null !== $filename && $obj->filename = $filename;
 
         return $obj;
     }
 
-    public function withDocument(
-        DocServiceDocumentUploadURL|DocServiceDocumentUploadInline $document
-    ): self {
+    /**
+     * If the file is already hosted publicly, you can provide a URL and have the documents service fetch it for you.
+     */
+    public function withURL(string $url): self
+    {
         $obj = clone $this;
-        $obj->document = $document;
+        $obj->url = $url;
+
+        return $obj;
+    }
+
+    /**
+     * A customer reference string for customer look ups.
+     */
+    public function withCustomerReference(string $customerReference): self
+    {
+        $obj = clone $this;
+        $obj->customer_reference = $customerReference;
+
+        return $obj;
+    }
+
+    /**
+     * The filename of the document.
+     */
+    public function withFilename(string $filename): self
+    {
+        $obj = clone $this;
+        $obj->filename = $filename;
+
+        return $obj;
+    }
+
+    /**
+     * The Base64 encoded contents of the file you are uploading.
+     */
+    public function withFile(string $file): self
+    {
+        $obj = clone $this;
+        $obj->file = $file;
 
         return $obj;
     }

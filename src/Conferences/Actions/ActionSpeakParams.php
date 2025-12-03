@@ -28,7 +28,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   language?: Language|value-of<Language>,
  *   payload_type?: PayloadType|value-of<PayloadType>,
  *   region?: Region|value-of<Region>,
- *   voice_settings?: ElevenLabsVoiceSettings|TelnyxVoiceSettings|array<string,mixed>,
+ *   voice_settings?: mixed|ElevenLabsVoiceSettings|TelnyxVoiceSettings,
  * }
  */
 final class ActionSpeakParams implements BaseModel
@@ -100,10 +100,10 @@ final class ActionSpeakParams implements BaseModel
     /**
      * The settings associated with the voice selected.
      *
-     * @var ElevenLabsVoiceSettings|TelnyxVoiceSettings|array<string,mixed>|null $voice_settings
+     * @var mixed|ElevenLabsVoiceSettings|TelnyxVoiceSettings|null $voice_settings
      */
     #[Api(union: VoiceSettings::class, optional: true)]
-    public ElevenLabsVoiceSettings|TelnyxVoiceSettings|array|null $voice_settings;
+    public mixed $voice_settings;
 
     /**
      * `new ActionSpeakParams()` is missing required properties by the API.
@@ -133,7 +133,7 @@ final class ActionSpeakParams implements BaseModel
      * @param Language|value-of<Language> $language
      * @param PayloadType|value-of<PayloadType> $payload_type
      * @param Region|value-of<Region> $region
-     * @param ElevenLabsVoiceSettings|TelnyxVoiceSettings|array<string,mixed> $voice_settings
+     * @param mixed|ElevenLabsVoiceSettings|TelnyxVoiceSettings $voice_settings
      */
     public static function with(
         string $payload,
@@ -143,7 +143,7 @@ final class ActionSpeakParams implements BaseModel
         Language|string|null $language = null,
         PayloadType|string|null $payload_type = null,
         Region|string|null $region = null,
-        ElevenLabsVoiceSettings|TelnyxVoiceSettings|array|null $voice_settings = null,
+        mixed $voice_settings = null,
     ): self {
         $obj = new self;
 
@@ -258,11 +258,10 @@ final class ActionSpeakParams implements BaseModel
     /**
      * The settings associated with the voice selected.
      *
-     * @param ElevenLabsVoiceSettings|TelnyxVoiceSettings|array<string,mixed> $voiceSettings
+     * @param mixed|ElevenLabsVoiceSettings|TelnyxVoiceSettings $voiceSettings
      */
-    public function withVoiceSettings(
-        ElevenLabsVoiceSettings|TelnyxVoiceSettings|array $voiceSettings
-    ): self {
+    public function withVoiceSettings(mixed $voiceSettings): self
+    {
         $obj = clone $this;
         $obj->voice_settings = $voiceSettings;
 

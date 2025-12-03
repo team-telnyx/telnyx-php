@@ -8,7 +8,6 @@ use Telnyx\AuditEvents\AuditEventListParams;
 use Telnyx\AuditEvents\AuditEventListResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AuditEventsContract;
 
@@ -33,14 +32,12 @@ final class AuditEventsService implements AuditEventsContract
      *   sort?: 'asc'|'desc',
      * }|AuditEventListParams $params
      *
-     * @return DefaultPagination<AuditEventListResponse>
-     *
      * @throws APIException
      */
     public function list(
         array|AuditEventListParams $params,
         ?RequestOptions $requestOptions = null
-    ): DefaultPagination {
+    ): AuditEventListResponse {
         [$parsed, $options] = AuditEventListParams::parseRequest(
             $params,
             $requestOptions,
@@ -53,7 +50,6 @@ final class AuditEventsService implements AuditEventsContract
             query: $parsed,
             options: $options,
             convert: AuditEventListResponse::class,
-            page: DefaultPagination::class,
         );
     }
 }

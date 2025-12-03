@@ -6,12 +6,11 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultFlatPaginationForInexplicitNumberOrders;
 use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderCreateParams;
 use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderGetResponse;
 use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderListParams;
+use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderListResponse;
 use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderNewResponse;
-use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\InexplicitNumberOrdersContract;
 
@@ -99,14 +98,12 @@ final class InexplicitNumberOrdersService implements InexplicitNumberOrdersContr
      *   page_number?: int, page_size?: int
      * }|InexplicitNumberOrderListParams $params
      *
-     * @return DefaultFlatPaginationForInexplicitNumberOrders<InexplicitNumberOrderResponse,>
-     *
      * @throws APIException
      */
     public function list(
         array|InexplicitNumberOrderListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): DefaultFlatPaginationForInexplicitNumberOrders {
+    ): InexplicitNumberOrderListResponse {
         [$parsed, $options] = InexplicitNumberOrderListParams::parseRequest(
             $params,
             $requestOptions,
@@ -118,8 +115,7 @@ final class InexplicitNumberOrdersService implements InexplicitNumberOrdersContr
             path: 'inexplicit_number_orders',
             query: $parsed,
             options: $options,
-            convert: InexplicitNumberOrderResponse::class,
-            page: DefaultFlatPaginationForInexplicitNumberOrders::class,
+            convert: InexplicitNumberOrderListResponse::class,
         );
     }
 }

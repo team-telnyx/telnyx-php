@@ -6,13 +6,13 @@ namespace Telnyx\Services\Rooms;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
-use Telnyx\RoomParticipant;
-use Telnyx\Rooms\RoomSession;
+use Telnyx\Rooms\Sessions\SessionGetParticipantsResponse;
 use Telnyx\Rooms\Sessions\SessionGetResponse;
 use Telnyx\Rooms\Sessions\SessionList0Params;
+use Telnyx\Rooms\Sessions\SessionList0Response;
 use Telnyx\Rooms\Sessions\SessionList1Params;
+use Telnyx\Rooms\Sessions\SessionList1Response;
 use Telnyx\Rooms\Sessions\SessionRetrieveParams;
 use Telnyx\Rooms\Sessions\SessionRetrieveParticipantsParams;
 use Telnyx\ServiceContracts\Rooms\SessionsContract;
@@ -91,14 +91,12 @@ final class SessionsService implements SessionsContract
      *   page?: array{number?: int, size?: int},
      * }|SessionList0Params $params
      *
-     * @return DefaultPagination<RoomSession>
-     *
      * @throws APIException
      */
     public function list0(
         array|SessionList0Params $params,
         ?RequestOptions $requestOptions = null
-    ): DefaultPagination {
+    ): SessionList0Response {
         [$parsed, $options] = SessionList0Params::parseRequest(
             $params,
             $requestOptions,
@@ -110,8 +108,7 @@ final class SessionsService implements SessionsContract
             path: 'room_sessions',
             query: $parsed,
             options: $options,
-            convert: RoomSession::class,
-            page: DefaultPagination::class,
+            convert: SessionList0Response::class,
         );
     }
 
@@ -143,15 +140,13 @@ final class SessionsService implements SessionsContract
      *   page?: array{number?: int, size?: int},
      * }|SessionList1Params $params
      *
-     * @return DefaultPagination<RoomSession>
-     *
      * @throws APIException
      */
     public function list1(
         string $roomID,
         array|SessionList1Params $params,
         ?RequestOptions $requestOptions = null,
-    ): DefaultPagination {
+    ): SessionList1Response {
         [$parsed, $options] = SessionList1Params::parseRequest(
             $params,
             $requestOptions,
@@ -163,8 +158,7 @@ final class SessionsService implements SessionsContract
             path: ['rooms/%1$s/sessions', $roomID],
             query: $parsed,
             options: $options,
-            convert: RoomSession::class,
-            page: DefaultPagination::class,
+            convert: SessionList1Response::class,
         );
     }
 
@@ -195,15 +189,13 @@ final class SessionsService implements SessionsContract
      *   page?: array{number?: int, size?: int},
      * }|SessionRetrieveParticipantsParams $params
      *
-     * @return DefaultPagination<RoomParticipant>
-     *
      * @throws APIException
      */
     public function retrieveParticipants(
         string $roomSessionID,
         array|SessionRetrieveParticipantsParams $params,
         ?RequestOptions $requestOptions = null,
-    ): DefaultPagination {
+    ): SessionGetParticipantsResponse {
         [$parsed, $options] = SessionRetrieveParticipantsParams::parseRequest(
             $params,
             $requestOptions,
@@ -215,8 +207,7 @@ final class SessionsService implements SessionsContract
             path: ['room_sessions/%1$s/participants', $roomSessionID],
             query: $parsed,
             options: $options,
-            convert: RoomParticipant::class,
-            page: DefaultPagination::class,
+            convert: SessionGetParticipantsResponse::class,
         );
     }
 }

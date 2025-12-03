@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\MobileNetworkOperators\MobileNetworkOperatorListParams;
 use Telnyx\MobileNetworkOperators\MobileNetworkOperatorListResponse;
 use Telnyx\RequestOptions;
@@ -36,14 +35,12 @@ final class MobileNetworkOperatorsService implements MobileNetworkOperatorsContr
      *   page?: array{number?: int, size?: int},
      * }|MobileNetworkOperatorListParams $params
      *
-     * @return DefaultPagination<MobileNetworkOperatorListResponse>
-     *
      * @throws APIException
      */
     public function list(
         array|MobileNetworkOperatorListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): DefaultPagination {
+    ): MobileNetworkOperatorListResponse {
         [$parsed, $options] = MobileNetworkOperatorListParams::parseRequest(
             $params,
             $requestOptions,
@@ -56,7 +53,6 @@ final class MobileNetworkOperatorsService implements MobileNetworkOperatorsContr
             query: $parsed,
             options: $options,
             convert: MobileNetworkOperatorListResponse::class,
-            page: DefaultPagination::class,
         );
     }
 }

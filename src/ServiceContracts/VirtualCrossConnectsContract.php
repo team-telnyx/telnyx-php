@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectCreateParams;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectDeleteResponse;
@@ -58,14 +57,12 @@ interface VirtualCrossConnectsContract
      *
      * @param array<mixed>|VirtualCrossConnectListParams $params
      *
-     * @return DefaultPagination<VirtualCrossConnectListResponse>
-     *
      * @throws APIException
      */
     public function list(
         array|VirtualCrossConnectListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): DefaultPagination;
+    ): VirtualCrossConnectListResponse;
 
     /**
      * @api

@@ -6,10 +6,10 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\DefaultFlatPagination;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReportDeleteResponse;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReportFetchSyncResponse;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReportGetResponse;
+use Telnyx\Reports\MdrUsageReports\MdrUsageReportListResponse;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReportNewResponse;
 use Tests\UnsupportedMockTests;
 
@@ -91,7 +91,7 @@ final class MdrUsageReportsTest extends TestCase
         $result = $this->client->reports->mdrUsageReports->list([]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultFlatPagination::class, $result);
+        $this->assertInstanceOf(MdrUsageReportListResponse::class, $result);
     }
 
     #[Test]

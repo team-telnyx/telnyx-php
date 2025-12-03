@@ -6,11 +6,10 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\PhoneNumbers\PhoneNumberDeleteResponse;
-use Telnyx\PhoneNumbers\PhoneNumberDetailed;
 use Telnyx\PhoneNumbers\PhoneNumberGetResponse;
 use Telnyx\PhoneNumbers\PhoneNumberListParams;
+use Telnyx\PhoneNumbers\PhoneNumberListResponse;
 use Telnyx\PhoneNumbers\PhoneNumberSlimListParams;
 use Telnyx\PhoneNumbers\PhoneNumberSlimListResponse;
 use Telnyx\PhoneNumbers\PhoneNumberUpdateParams;
@@ -106,7 +105,7 @@ final class PhoneNumbersService implements PhoneNumbersContract
      * @throws APIException
      */
     public function update(
-        string $phoneNumberID,
+        string $id,
         array|PhoneNumberUpdateParams $params,
         ?RequestOptions $requestOptions = null,
     ): PhoneNumberUpdateResponse {
@@ -118,7 +117,7 @@ final class PhoneNumbersService implements PhoneNumbersContract
         // @phpstan-ignore-next-line;
         return $this->client->request(
             method: 'patch',
-            path: ['phone_numbers/%1$s', $phoneNumberID],
+            path: ['phone_numbers/%1$s', $id],
             body: (object) $parsed,
             options: $options,
             convert: PhoneNumberUpdateResponse::class,
@@ -154,14 +153,12 @@ final class PhoneNumbersService implements PhoneNumbersContract
      *   sort?: 'purchased_at'|'phone_number'|'connection_name'|'usage_payment_method',
      * }|PhoneNumberListParams $params
      *
-     * @return DefaultPagination<PhoneNumberDetailed>
-     *
      * @throws APIException
      */
     public function list(
         array|PhoneNumberListParams $params,
         ?RequestOptions $requestOptions = null
-    ): DefaultPagination {
+    ): PhoneNumberListResponse {
         [$parsed, $options] = PhoneNumberListParams::parseRequest(
             $params,
             $requestOptions,
@@ -173,8 +170,7 @@ final class PhoneNumbersService implements PhoneNumbersContract
             path: 'phone_numbers',
             query: $parsed,
             options: $options,
-            convert: PhoneNumberDetailed::class,
-            page: DefaultPagination::class,
+            convert: PhoneNumberListResponse::class,
         );
     }
 
@@ -228,14 +224,12 @@ final class PhoneNumbersService implements PhoneNumbersContract
      *   sort?: 'purchased_at'|'phone_number'|'connection_name'|'usage_payment_method',
      * }|PhoneNumberSlimListParams $params
      *
-     * @return DefaultPagination<PhoneNumberSlimListResponse>
-     *
      * @throws APIException
      */
     public function slimList(
         array|PhoneNumberSlimListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): DefaultPagination {
+    ): PhoneNumberSlimListResponse {
         [$parsed, $options] = PhoneNumberSlimListParams::parseRequest(
             $params,
             $requestOptions,
@@ -248,7 +242,6 @@ final class PhoneNumbersService implements PhoneNumbersContract
             query: $parsed,
             options: $options,
             convert: PhoneNumberSlimListResponse::class,
-            page: DefaultPagination::class,
         );
     }
 }

@@ -6,7 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\DefaultPaginationForMessagingTollfree;
+use Telnyx\MessagingTollfree\Verification\Requests\RequestListResponse;
 use Telnyx\MessagingTollfree\Verification\Requests\VerificationRequestEgress;
 use Telnyx\MessagingTollfree\Verification\Requests\VerificationRequestStatus;
 use Tests\UnsupportedMockTests;
@@ -244,10 +244,7 @@ final class RequestsTest extends TestCase
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(
-            DefaultPaginationForMessagingTollfree::class,
-            $result
-        );
+        $this->assertInstanceOf(RequestListResponse::class, $result);
     }
 
     #[Test]
@@ -267,10 +264,7 @@ final class RequestsTest extends TestCase
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(
-            DefaultPaginationForMessagingTollfree::class,
-            $result
-        );
+        $this->assertInstanceOf(RequestListResponse::class, $result);
     }
 
     #[Test]

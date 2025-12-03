@@ -6,7 +6,6 @@ namespace Telnyx\Services\Queues;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\Queues\Calls\CallGetResponse;
 use Telnyx\Queues\Calls\CallListParams;
 use Telnyx\Queues\Calls\CallListResponse;
@@ -97,15 +96,13 @@ final class CallsService implements CallsContract
      *   },
      * }|CallListParams $params
      *
-     * @return DefaultPagination<CallListResponse>
-     *
      * @throws APIException
      */
     public function list(
         string $queueName,
         array|CallListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): DefaultPagination {
+    ): CallListResponse {
         [$parsed, $options] = CallListParams::parseRequest(
             $params,
             $requestOptions,
@@ -118,7 +115,6 @@ final class CallsService implements CallsContract
             query: $parsed,
             options: $options,
             convert: CallListResponse::class,
-            page: DefaultPagination::class,
         );
     }
 

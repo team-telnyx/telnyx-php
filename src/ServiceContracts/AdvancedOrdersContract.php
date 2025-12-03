@@ -5,11 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\AdvancedOrders\AdvancedOrderCreateParams;
-use Telnyx\AdvancedOrders\AdvancedOrderGetResponse;
-use Telnyx\AdvancedOrders\AdvancedOrderListResponse;
-use Telnyx\AdvancedOrders\AdvancedOrderNewResponse;
 use Telnyx\AdvancedOrders\AdvancedOrderUpdateRequirementGroupParams;
-use Telnyx\AdvancedOrders\AdvancedOrderUpdateRequirementGroupResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 
@@ -25,7 +21,7 @@ interface AdvancedOrdersContract
     public function create(
         array|AdvancedOrderCreateParams $params,
         ?RequestOptions $requestOptions = null,
-    ): AdvancedOrderNewResponse;
+    ): mixed;
 
     /**
      * @api
@@ -35,16 +31,14 @@ interface AdvancedOrdersContract
     public function retrieve(
         string $orderID,
         ?RequestOptions $requestOptions = null
-    ): AdvancedOrderGetResponse;
+    ): mixed;
 
     /**
      * @api
      *
      * @throws APIException
      */
-    public function list(
-        ?RequestOptions $requestOptions = null
-    ): AdvancedOrderListResponse;
+    public function list(?RequestOptions $requestOptions = null): mixed;
 
     /**
      * @api
@@ -57,5 +51,5 @@ interface AdvancedOrdersContract
         string $advancedOrderID,
         array|AdvancedOrderUpdateRequirementGroupParams $params,
         ?RequestOptions $requestOptions = null,
-    ): AdvancedOrderUpdateRequirementGroupResponse;
+    ): mixed;
 }

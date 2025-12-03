@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\MessagingOptouts\MessagingOptoutListParams;
 use Telnyx\MessagingOptouts\MessagingOptoutListResponse;
 use Telnyx\RequestOptions;
@@ -33,14 +32,12 @@ final class MessagingOptoutsService implements MessagingOptoutsContract
      *   redaction_enabled?: string,
      * }|MessagingOptoutListParams $params
      *
-     * @return DefaultPagination<MessagingOptoutListResponse>
-     *
      * @throws APIException
      */
     public function list(
         array|MessagingOptoutListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): DefaultPagination {
+    ): MessagingOptoutListResponse {
         [$parsed, $options] = MessagingOptoutListParams::parseRequest(
             $params,
             $requestOptions,
@@ -53,7 +50,6 @@ final class MessagingOptoutsService implements MessagingOptoutsContract
             query: $parsed,
             options: $options,
             convert: MessagingOptoutListResponse::class,
-            page: DefaultPagination::class,
         );
     }
 }

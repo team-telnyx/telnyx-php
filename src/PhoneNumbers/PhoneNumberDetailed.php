@@ -6,9 +6,7 @@ namespace Telnyx\PhoneNumbers;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PhoneNumbers\PhoneNumberDetailed\EmergencyStatus;
 use Telnyx\PhoneNumbers\PhoneNumberDetailed\InboundCallScreening;
 use Telnyx\PhoneNumbers\PhoneNumberDetailed\PhoneNumberType;
@@ -46,12 +44,10 @@ use Telnyx\PhoneNumbers\PhoneNumberDetailed\Status;
  *   tags?: list<string>|null,
  * }
  */
-final class PhoneNumberDetailed implements BaseModel, ResponseConverter
+final class PhoneNumberDetailed implements BaseModel
 {
     /** @use SdkModel<PhoneNumberDetailedShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * Identifies the resource.

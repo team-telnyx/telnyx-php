@@ -6,14 +6,14 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
-use Telnyx\GlobalIPAssignments\GlobalIPAssignment;
+use Telnyx\GlobalIPAssignments\GlobalIPAssignmentCreateParams;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentDeleteResponse;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentGetResponse;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentListParams;
+use Telnyx\GlobalIPAssignments\GlobalIPAssignmentListResponse;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentNewResponse;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentUpdateParams;
-use Telnyx\GlobalIPAssignments\GlobalIPAssignmentUpdateParams\GlobalIPAssignmentUpdateRequest;
+use Telnyx\GlobalIPAssignments\GlobalIPAssignmentUpdateParams\Body;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentUpdateResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\GlobalIPAssignmentsContract;
@@ -30,16 +30,27 @@ final class GlobalIPAssignmentsService implements GlobalIPAssignmentsContract
      *
      * Create a Global IP assignment.
      *
+     * @param array{
+     *   global_ip_id?: string, is_in_maintenance?: bool, wireguard_peer_id?: string
+     * }|GlobalIPAssignmentCreateParams $params
+     *
      * @throws APIException
      */
     public function create(
-        ?RequestOptions $requestOptions = null
+        array|GlobalIPAssignmentCreateParams $params,
+        ?RequestOptions $requestOptions = null,
     ): GlobalIPAssignmentNewResponse {
+        [$parsed, $options] = GlobalIPAssignmentCreateParams::parseRequest(
+            $params,
+            $requestOptions,
+        );
+
         // @phpstan-ignore-next-line;
         return $this->client->request(
             method: 'post',
             path: 'global_ip_assignments',
-            options: $requestOptions,
+            body: (object) $parsed,
+            options: $options,
             convert: GlobalIPAssignmentNewResponse::class,
         );
     }
@@ -72,9 +83,9 @@ final class GlobalIPAssignmentsService implements GlobalIPAssignmentsContract
      * @throws APIException
      */
     public function update(
-        string $globalIPAssignmentID,
-        GlobalIPAssignmentUpdateRequest $params,
-        ?RequestOptions $requestOptions = null,
+        string $id,
+        Body $params,
+        ?RequestOptions $requestOptions = null
     ): GlobalIPAssignmentUpdateResponse {
         [$parsed, $options] = GlobalIPAssignmentUpdateParams::parseRequest(
             $params,
@@ -84,8 +95,8 @@ final class GlobalIPAssignmentsService implements GlobalIPAssignmentsContract
         // @phpstan-ignore-next-line;
         return $this->client->request(
             method: 'patch',
-            path: ['global_ip_assignments/%1$s', $globalIPAssignmentID],
-            body: (object) $parsed['globalIpAssignmentUpdateRequest'],
+            path: ['global_ip_assignments/%1$s', $id],
+            body: (object) $parsed['body'],
             options: $options,
             convert: GlobalIPAssignmentUpdateResponse::class,
         );
@@ -100,14 +111,12 @@ final class GlobalIPAssignmentsService implements GlobalIPAssignmentsContract
      *   page?: array{number?: int, size?: int}
      * }|GlobalIPAssignmentListParams $params
      *
-     * @return DefaultPagination<GlobalIPAssignment>
-     *
      * @throws APIException
      */
     public function list(
         array|GlobalIPAssignmentListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): DefaultPagination {
+    ): GlobalIPAssignmentListResponse {
         [$parsed, $options] = GlobalIPAssignmentListParams::parseRequest(
             $params,
             $requestOptions,
@@ -119,8 +128,7 @@ final class GlobalIPAssignmentsService implements GlobalIPAssignmentsContract
             path: 'global_ip_assignments',
             query: $parsed,
             options: $options,
-            convert: GlobalIPAssignment::class,
-            page: DefaultPagination::class,
+            convert: GlobalIPAssignmentListResponse::class,
         );
     }
 

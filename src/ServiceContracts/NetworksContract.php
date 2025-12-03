@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\Networks\NetworkCreateParams;
 use Telnyx\Networks\NetworkDeleteResponse;
 use Telnyx\Networks\NetworkGetResponse;
@@ -50,7 +49,7 @@ interface NetworksContract
      * @throws APIException
      */
     public function update(
-        string $networkID,
+        string $id,
         array|NetworkUpdateParams $params,
         ?RequestOptions $requestOptions = null,
     ): NetworkUpdateResponse;
@@ -60,14 +59,12 @@ interface NetworksContract
      *
      * @param array<mixed>|NetworkListParams $params
      *
-     * @return DefaultPagination<NetworkListResponse>
-     *
      * @throws APIException
      */
     public function list(
         array|NetworkListParams $params,
         ?RequestOptions $requestOptions = null
-    ): DefaultPagination;
+    ): NetworkListResponse;
 
     /**
      * @api
@@ -84,13 +81,11 @@ interface NetworksContract
      *
      * @param array<mixed>|NetworkListInterfacesParams $params
      *
-     * @return DefaultPagination<NetworkListInterfacesResponse>
-     *
      * @throws APIException
      */
     public function listInterfaces(
         string $id,
         array|NetworkListInterfacesParams $params,
         ?RequestOptions $requestOptions = null,
-    ): DefaultPagination;
+    ): NetworkListInterfacesResponse;
 }

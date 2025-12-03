@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants\Tests;
 
+use Telnyx\AI\Assistants\Tests\TestListParams\Page;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
@@ -16,8 +17,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-type TestListParamsShape = array{
  *   destination?: string,
- *   page_number_?: int,
- *   page_size_?: int,
+ *   page?: Page,
  *   telnyx_conversation_channel?: string,
  *   test_suite?: string,
  * }
@@ -34,11 +34,11 @@ final class TestListParams implements BaseModel
     #[Api(optional: true)]
     public ?string $destination;
 
+    /**
+     * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
+     */
     #[Api(optional: true)]
-    public ?int $page_number_;
-
-    #[Api(optional: true)]
-    public ?int $page_size_;
+    public ?Page $page;
 
     /**
      * Filter tests by communication channel (e.g., 'web_chat', 'sms').
@@ -64,16 +64,14 @@ final class TestListParams implements BaseModel
      */
     public static function with(
         ?string $destination = null,
-        ?int $page_number_ = null,
-        ?int $page_size_ = null,
+        ?Page $page = null,
         ?string $telnyx_conversation_channel = null,
         ?string $test_suite = null,
     ): self {
         $obj = new self;
 
         null !== $destination && $obj->destination = $destination;
-        null !== $page_number_ && $obj->page_number_ = $page_number_;
-        null !== $page_size_ && $obj->page_size_ = $page_size_;
+        null !== $page && $obj->page = $page;
         null !== $telnyx_conversation_channel && $obj->telnyx_conversation_channel = $telnyx_conversation_channel;
         null !== $test_suite && $obj->test_suite = $test_suite;
 
@@ -91,18 +89,13 @@ final class TestListParams implements BaseModel
         return $obj;
     }
 
-    public function withPageNumber(int $pageNumber): self
+    /**
+     * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
+     */
+    public function withPage(Page $page): self
     {
         $obj = clone $this;
-        $obj->page_number_ = $pageNumber;
-
-        return $obj;
-    }
-
-    public function withPageSize(int $pageSize): self
-    {
-        $obj = clone $this;
-        $obj->page_size_ = $pageSize;
+        $obj->page = $page;
 
         return $obj;
     }

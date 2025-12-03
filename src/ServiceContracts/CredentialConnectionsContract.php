@@ -5,15 +5,14 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\CredentialConnections\CredentialConnection;
 use Telnyx\CredentialConnections\CredentialConnectionCreateParams;
 use Telnyx\CredentialConnections\CredentialConnectionDeleteResponse;
 use Telnyx\CredentialConnections\CredentialConnectionGetResponse;
 use Telnyx\CredentialConnections\CredentialConnectionListParams;
+use Telnyx\CredentialConnections\CredentialConnectionListResponse;
 use Telnyx\CredentialConnections\CredentialConnectionNewResponse;
 use Telnyx\CredentialConnections\CredentialConnectionUpdateParams;
 use Telnyx\CredentialConnections\CredentialConnectionUpdateResponse;
-use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 
 interface CredentialConnectionsContract
@@ -58,14 +57,12 @@ interface CredentialConnectionsContract
      *
      * @param array<mixed>|CredentialConnectionListParams $params
      *
-     * @return DefaultPagination<CredentialConnection>
-     *
      * @throws APIException
      */
     public function list(
         array|CredentialConnectionListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): DefaultPagination;
+    ): CredentialConnectionListResponse;
 
     /**
      * @api

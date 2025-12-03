@@ -6,13 +6,12 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SimCardOrdersContract;
-use Telnyx\SimCardOrders\SimCardOrder;
 use Telnyx\SimCardOrders\SimCardOrderCreateParams;
 use Telnyx\SimCardOrders\SimCardOrderGetResponse;
 use Telnyx\SimCardOrders\SimCardOrderListParams;
+use Telnyx\SimCardOrders\SimCardOrderListResponse;
 use Telnyx\SimCardOrders\SimCardOrderNewResponse;
 
 final class SimCardOrdersService implements SimCardOrdersContract
@@ -94,14 +93,12 @@ final class SimCardOrdersService implements SimCardOrdersContract
      *   page?: array{number?: int, size?: int},
      * }|SimCardOrderListParams $params
      *
-     * @return DefaultPagination<SimCardOrder>
-     *
      * @throws APIException
      */
     public function list(
         array|SimCardOrderListParams $params,
         ?RequestOptions $requestOptions = null
-    ): DefaultPagination {
+    ): SimCardOrderListResponse {
         [$parsed, $options] = SimCardOrderListParams::parseRequest(
             $params,
             $requestOptions,
@@ -113,8 +110,7 @@ final class SimCardOrdersService implements SimCardOrdersContract
             path: 'sim_card_orders',
             query: $parsed,
             options: $options,
-            convert: SimCardOrder::class,
-            page: DefaultPagination::class,
+            convert: SimCardOrderListResponse::class,
         );
     }
 }

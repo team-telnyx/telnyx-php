@@ -6,14 +6,13 @@ namespace Telnyx\Services\Reports;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultFlatPagination;
-use Telnyx\Reports\MdrUsageReports\MdrUsageReport;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReportCreateParams;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReportDeleteResponse;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReportFetchSyncParams;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReportFetchSyncResponse;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReportGetResponse;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReportListParams;
+use Telnyx\Reports\MdrUsageReports\MdrUsageReportListResponse;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReportNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Reports\MdrUsageReportsContract;
@@ -85,17 +84,15 @@ final class MdrUsageReportsService implements MdrUsageReportsContract
      * Fetch all messaging usage reports. Usage reports are aggregated messaging data for specified time period and breakdown
      *
      * @param array{
-     *   page_number_?: int, page_size_?: int
+     *   page?: array{number?: int, size?: int}
      * }|MdrUsageReportListParams $params
-     *
-     * @return DefaultFlatPagination<MdrUsageReport>
      *
      * @throws APIException
      */
     public function list(
         array|MdrUsageReportListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): DefaultFlatPagination {
+    ): MdrUsageReportListResponse {
         [$parsed, $options] = MdrUsageReportListParams::parseRequest(
             $params,
             $requestOptions,
@@ -107,8 +104,7 @@ final class MdrUsageReportsService implements MdrUsageReportsContract
             path: 'reports/mdr_usage_reports',
             query: $parsed,
             options: $options,
-            convert: MdrUsageReport::class,
-            page: DefaultFlatPagination::class,
+            convert: MdrUsageReportListResponse::class,
         );
     }
 

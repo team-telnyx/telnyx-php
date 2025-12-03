@@ -5,12 +5,11 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\PhoneNumberBlocks;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
-use Telnyx\PhoneNumberBlocks\Jobs\Job;
 use Telnyx\PhoneNumberBlocks\Jobs\JobDeletePhoneNumberBlockParams;
 use Telnyx\PhoneNumberBlocks\Jobs\JobDeletePhoneNumberBlockResponse;
 use Telnyx\PhoneNumberBlocks\Jobs\JobGetResponse;
 use Telnyx\PhoneNumberBlocks\Jobs\JobListParams;
+use Telnyx\PhoneNumberBlocks\Jobs\JobListResponse;
 use Telnyx\RequestOptions;
 
 interface JobsContract
@@ -30,14 +29,12 @@ interface JobsContract
      *
      * @param array<mixed>|JobListParams $params
      *
-     * @return DefaultPagination<Job>
-     *
      * @throws APIException
      */
     public function list(
         array|JobListParams $params,
         ?RequestOptions $requestOptions = null
-    ): DefaultPagination;
+    ): JobListResponse;
 
     /**
      * @api

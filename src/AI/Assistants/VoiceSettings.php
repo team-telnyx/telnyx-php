@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants;
 
-use Telnyx\AI\Assistants\VoiceSettings\BackgroundAudio;
-use Telnyx\AI\Assistants\VoiceSettings\BackgroundAudio\MediaName;
-use Telnyx\AI\Assistants\VoiceSettings\BackgroundAudio\MediaURL;
-use Telnyx\AI\Assistants\VoiceSettings\BackgroundAudio\PredefinedMedia;
+use Telnyx\AI\Assistants\VoiceSettings\BackgroundAudio\UnionMember0;
+use Telnyx\AI\Assistants\VoiceSettings\BackgroundAudio\UnionMember1;
+use Telnyx\AI\Assistants\VoiceSettings\BackgroundAudio\UnionMember2;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
@@ -16,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type VoiceSettingsShape = array{
  *   voice: string,
  *   api_key_ref?: string|null,
- *   background_audio?: null|PredefinedMedia|MediaURL|MediaName,
+ *   background_audio?: null|UnionMember0|UnionMember1|UnionMember2,
  *   voice_speed?: float|null,
  * }
  */
@@ -41,8 +40,8 @@ final class VoiceSettings implements BaseModel
     /**
      * Optional background audio to play on the call. Use a predefined media bed, or supply a looped MP3 URL. If a media URL is chosen in the portal, customers can preview it before saving.
      */
-    #[Api(union: BackgroundAudio::class, optional: true)]
-    public PredefinedMedia|MediaURL|MediaName|null $background_audio;
+    #[Api(optional: true)]
+    public UnionMember0|UnionMember1|UnionMember2|null $background_audio;
 
     /**
      * The speed of the voice in the range [0.25, 2.0]. 1.0 is deafult speed. Larger numbers make the voice faster, smaller numbers make it slower. This is only applicable for Telnyx Natural voices.
@@ -77,7 +76,7 @@ final class VoiceSettings implements BaseModel
     public static function with(
         string $voice,
         ?string $api_key_ref = null,
-        PredefinedMedia|MediaURL|MediaName|null $background_audio = null,
+        UnionMember0|UnionMember1|UnionMember2|null $background_audio = null,
         ?float $voice_speed = null,
     ): self {
         $obj = new self;
@@ -118,7 +117,7 @@ final class VoiceSettings implements BaseModel
      * Optional background audio to play on the call. Use a predefined media bed, or supply a looped MP3 URL. If a media URL is chosen in the portal, customers can preview it before saving.
      */
     public function withBackgroundAudio(
-        PredefinedMedia|MediaURL|MediaName $backgroundAudio
+        UnionMember0|UnionMember1|UnionMember2 $backgroundAudio
     ): self {
         $obj = clone $this;
         $obj->background_audio = $backgroundAudio;

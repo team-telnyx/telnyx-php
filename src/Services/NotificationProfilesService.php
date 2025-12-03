@@ -6,12 +6,11 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
-use Telnyx\NotificationProfiles\NotificationProfile;
 use Telnyx\NotificationProfiles\NotificationProfileCreateParams;
 use Telnyx\NotificationProfiles\NotificationProfileDeleteResponse;
 use Telnyx\NotificationProfiles\NotificationProfileGetResponse;
 use Telnyx\NotificationProfiles\NotificationProfileListParams;
+use Telnyx\NotificationProfiles\NotificationProfileListResponse;
 use Telnyx\NotificationProfiles\NotificationProfileNewResponse;
 use Telnyx\NotificationProfiles\NotificationProfileUpdateParams;
 use Telnyx\NotificationProfiles\NotificationProfileUpdateResponse;
@@ -83,7 +82,7 @@ final class NotificationProfilesService implements NotificationProfilesContract
      * @throws APIException
      */
     public function update(
-        string $notificationProfileID,
+        string $id,
         array|NotificationProfileUpdateParams $params,
         ?RequestOptions $requestOptions = null,
     ): NotificationProfileUpdateResponse {
@@ -95,7 +94,7 @@ final class NotificationProfilesService implements NotificationProfilesContract
         // @phpstan-ignore-next-line;
         return $this->client->request(
             method: 'patch',
-            path: ['notification_profiles/%1$s', $notificationProfileID],
+            path: ['notification_profiles/%1$s', $id],
             body: (object) $parsed,
             options: $options,
             convert: NotificationProfileUpdateResponse::class,
@@ -111,14 +110,12 @@ final class NotificationProfilesService implements NotificationProfilesContract
      *   page?: array{number?: int, size?: int}
      * }|NotificationProfileListParams $params
      *
-     * @return DefaultPagination<NotificationProfile>
-     *
      * @throws APIException
      */
     public function list(
         array|NotificationProfileListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): DefaultPagination {
+    ): NotificationProfileListResponse {
         [$parsed, $options] = NotificationProfileListParams::parseRequest(
             $params,
             $requestOptions,
@@ -130,8 +127,7 @@ final class NotificationProfilesService implements NotificationProfilesContract
             path: 'notification_profiles',
             query: $parsed,
             options: $options,
-            convert: NotificationProfile::class,
-            page: DefaultPagination::class,
+            convert: NotificationProfileListResponse::class,
         );
     }
 

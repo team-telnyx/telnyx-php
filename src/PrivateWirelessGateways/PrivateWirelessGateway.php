@@ -6,9 +6,7 @@ namespace Telnyx\PrivateWirelessGateways;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type PrivateWirelessGatewayShape = array{
@@ -24,12 +22,10 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  *   updated_at?: string|null,
  * }
  */
-final class PrivateWirelessGateway implements BaseModel, ResponseConverter
+final class PrivateWirelessGateway implements BaseModel
 {
     /** @use SdkModel<PrivateWirelessGatewayShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * Identifies the resource.

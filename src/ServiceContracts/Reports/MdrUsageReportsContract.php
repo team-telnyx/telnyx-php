@@ -5,14 +5,13 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\Reports;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultFlatPagination;
-use Telnyx\Reports\MdrUsageReports\MdrUsageReport;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReportCreateParams;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReportDeleteResponse;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReportFetchSyncParams;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReportFetchSyncResponse;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReportGetResponse;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReportListParams;
+use Telnyx\Reports\MdrUsageReports\MdrUsageReportListResponse;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReportNewResponse;
 use Telnyx\RequestOptions;
 
@@ -45,14 +44,12 @@ interface MdrUsageReportsContract
      *
      * @param array<mixed>|MdrUsageReportListParams $params
      *
-     * @return DefaultFlatPagination<MdrUsageReport>
-     *
      * @throws APIException
      */
     public function list(
         array|MdrUsageReportListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): DefaultFlatPagination;
+    ): MdrUsageReportListResponse;
 
     /**
      * @api

@@ -6,9 +6,7 @@ namespace Telnyx\NotificationProfiles;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * A Collection of Notification Channels.
@@ -20,12 +18,10 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  *   updated_at?: \DateTimeInterface|null,
  * }
  */
-final class NotificationProfile implements BaseModel, ResponseConverter
+final class NotificationProfile implements BaseModel
 {
     /** @use SdkModel<NotificationProfileShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * A UUID.

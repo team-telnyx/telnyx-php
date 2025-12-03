@@ -9,6 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\DetailRecords\DetailRecordListParams\Filter;
+use Telnyx\DetailRecords\DetailRecordListParams\Page;
 
 /**
  * Search for any detail record across the Telnyx Platform.
@@ -16,7 +17,7 @@ use Telnyx\DetailRecords\DetailRecordListParams\Filter;
  * @see Telnyx\Services\DetailRecordsService::list()
  *
  * @phpstan-type DetailRecordListParamsShape = array{
- *   filter?: Filter, page_number_?: int, page_size_?: int, sort?: list<string>
+ *   filter?: Filter, page?: Page, sort?: list<string>
  * }
  */
 final class DetailRecordListParams implements BaseModel
@@ -31,11 +32,11 @@ final class DetailRecordListParams implements BaseModel
     #[Api(optional: true)]
     public ?Filter $filter;
 
+    /**
+     * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
+     */
     #[Api(optional: true)]
-    public ?int $page_number_;
-
-    #[Api(optional: true)]
-    public ?int $page_size_;
+    public ?Page $page;
 
     /**
      * Specifies the sort order for results. <br/>Example: sort=-created_at.
@@ -59,15 +60,13 @@ final class DetailRecordListParams implements BaseModel
      */
     public static function with(
         ?Filter $filter = null,
-        ?int $page_number_ = null,
-        ?int $page_size_ = null,
-        ?array $sort = null,
+        ?Page $page = null,
+        ?array $sort = null
     ): self {
         $obj = new self;
 
         null !== $filter && $obj->filter = $filter;
-        null !== $page_number_ && $obj->page_number_ = $page_number_;
-        null !== $page_size_ && $obj->page_size_ = $page_size_;
+        null !== $page && $obj->page = $page;
         null !== $sort && $obj->sort = $sort;
 
         return $obj;
@@ -84,18 +83,13 @@ final class DetailRecordListParams implements BaseModel
         return $obj;
     }
 
-    public function withPageNumber(int $pageNumber): self
+    /**
+     * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
+     */
+    public function withPage(Page $page): self
     {
         $obj = clone $this;
-        $obj->page_number_ = $pageNumber;
-
-        return $obj;
-    }
-
-    public function withPageSize(int $pageSize): self
-    {
-        $obj = clone $this;
-        $obj->page_size_ = $pageSize;
+        $obj->page = $page;
 
         return $obj;
     }

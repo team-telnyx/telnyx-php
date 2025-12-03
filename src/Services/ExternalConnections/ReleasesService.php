@@ -6,7 +6,6 @@ namespace Telnyx\Services\ExternalConnections;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\ExternalConnections\Releases\ReleaseGetResponse;
 use Telnyx\ExternalConnections\Releases\ReleaseListParams;
 use Telnyx\ExternalConnections\Releases\ReleaseListResponse;
@@ -68,15 +67,13 @@ final class ReleasesService implements ReleasesContract
      *   page?: array{number?: int, size?: int},
      * }|ReleaseListParams $params
      *
-     * @return DefaultPagination<ReleaseListResponse>
-     *
      * @throws APIException
      */
     public function list(
         string $id,
         array|ReleaseListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): DefaultPagination {
+    ): ReleaseListResponse {
         [$parsed, $options] = ReleaseListParams::parseRequest(
             $params,
             $requestOptions,
@@ -89,7 +86,6 @@ final class ReleasesService implements ReleasesContract
             query: $parsed,
             options: $options,
             convert: ReleaseListResponse::class,
-            page: DefaultPagination::class,
         );
     }
 }

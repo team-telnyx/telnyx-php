@@ -4,21 +4,17 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\VerificationCodes;
 
+use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
+use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListResponse\Data;
 
 /**
  * @phpstan-type VerificationCodeListResponseShape = array{
- *   id?: string|null,
- *   created_at?: \DateTimeInterface|null,
- *   phone_number?: string|null,
- *   porting_order_id?: string|null,
- *   record_type?: string|null,
- *   updated_at?: \DateTimeInterface|null,
- *   verified?: bool|null,
+ *   data?: list<Data>|null, meta?: PaginationMeta|null
  * }
  */
 final class VerificationCodeListResponse implements BaseModel, ResponseConverter
@@ -28,47 +24,12 @@ final class VerificationCodeListResponse implements BaseModel, ResponseConverter
 
     use SdkResponse;
 
-    /**
-     * Uniquely identifies this porting verification code.
-     */
-    #[Api(optional: true)]
-    public ?string $id;
+    /** @var list<Data>|null $data */
+    #[Api(list: Data::class, optional: true)]
+    public ?array $data;
 
-    /**
-     * ISO 8601 formatted date indicating when the resource was created.
-     */
     #[Api(optional: true)]
-    public ?\DateTimeInterface $created_at;
-
-    /**
-     * E164 formatted phone number.
-     */
-    #[Api(optional: true)]
-    public ?string $phone_number;
-
-    /**
-     * Identifies the associated porting order.
-     */
-    #[Api(optional: true)]
-    public ?string $porting_order_id;
-
-    /**
-     * Identifies the type of the resource.
-     */
-    #[Api(optional: true)]
-    public ?string $record_type;
-
-    /**
-     * ISO 8601 formatted date indicating when the resource was updated.
-     */
-    #[Api(optional: true)]
-    public ?\DateTimeInterface $updated_at;
-
-    /**
-     * Indicates whether the verification code has been verified.
-     */
-    #[Api(optional: true)]
-    public ?bool $verified;
+    public ?PaginationMeta $meta;
 
     public function __construct()
     {
@@ -79,102 +40,36 @@ final class VerificationCodeListResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param list<Data> $data
      */
     public static function with(
-        ?string $id = null,
-        ?\DateTimeInterface $created_at = null,
-        ?string $phone_number = null,
-        ?string $porting_order_id = null,
-        ?string $record_type = null,
-        ?\DateTimeInterface $updated_at = null,
-        ?bool $verified = null,
+        ?array $data = null,
+        ?PaginationMeta $meta = null
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $phone_number && $obj->phone_number = $phone_number;
-        null !== $porting_order_id && $obj->porting_order_id = $porting_order_id;
-        null !== $record_type && $obj->record_type = $record_type;
-        null !== $updated_at && $obj->updated_at = $updated_at;
-        null !== $verified && $obj->verified = $verified;
+        null !== $data && $obj->data = $data;
+        null !== $meta && $obj->meta = $meta;
 
         return $obj;
     }
 
     /**
-     * Uniquely identifies this porting verification code.
+     * @param list<Data> $data
      */
-    public function withID(string $id): self
+    public function withData(array $data): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj->data = $data;
 
         return $obj;
     }
 
-    /**
-     * ISO 8601 formatted date indicating when the resource was created.
-     */
-    public function withCreatedAt(\DateTimeInterface $createdAt): self
+    public function withMeta(PaginationMeta $meta): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
-
-        return $obj;
-    }
-
-    /**
-     * E164 formatted phone number.
-     */
-    public function withPhoneNumber(string $phoneNumber): self
-    {
-        $obj = clone $this;
-        $obj->phone_number = $phoneNumber;
-
-        return $obj;
-    }
-
-    /**
-     * Identifies the associated porting order.
-     */
-    public function withPortingOrderID(string $portingOrderID): self
-    {
-        $obj = clone $this;
-        $obj->porting_order_id = $portingOrderID;
-
-        return $obj;
-    }
-
-    /**
-     * Identifies the type of the resource.
-     */
-    public function withRecordType(string $recordType): self
-    {
-        $obj = clone $this;
-        $obj->record_type = $recordType;
-
-        return $obj;
-    }
-
-    /**
-     * ISO 8601 formatted date indicating when the resource was updated.
-     */
-    public function withUpdatedAt(\DateTimeInterface $updatedAt): self
-    {
-        $obj = clone $this;
-        $obj->updated_at = $updatedAt;
-
-        return $obj;
-    }
-
-    /**
-     * Indicates whether the verification code has been verified.
-     */
-    public function withVerified(bool $verified): self
-    {
-        $obj = clone $this;
-        $obj->verified = $verified;
+        $obj->meta = $meta;
 
         return $obj;
     }

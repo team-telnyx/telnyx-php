@@ -13,7 +13,6 @@ use Telnyx\AI\Assistants\MessagingSettings;
 use Telnyx\AI\Assistants\PrivacySettings;
 use Telnyx\AI\Assistants\TelephonySettings;
 use Telnyx\AI\Assistants\TranscriptionSettings;
-use Telnyx\AI\Assistants\TranscriptionSettingsConfig;
 use Telnyx\AI\Assistants\Versions\VersionDeleteParams;
 use Telnyx\AI\Assistants\Versions\VersionPromoteParams;
 use Telnyx\AI\Assistants\Versions\VersionRetrieveParams;
@@ -93,7 +92,12 @@ final class VersionsService implements VersionsContract
      *     language?: string,
      *     model?: 'deepgram/flux'|'deepgram/nova-3'|'deepgram/nova-2'|'azure/fast'|'distil-whisper/distil-large-v2'|'openai/whisper-large-v3-turbo',
      *     region?: string,
-     *     settings?: array<mixed>|TranscriptionSettingsConfig,
+     *     settings?: array{
+     *       eot_threshold?: float,
+     *       eot_timeout_ms?: int,
+     *       numerals?: bool,
+     *       smart_format?: bool,
+     *     },
      *   }|TranscriptionSettings,
      *   voice_settings?: array{
      *     voice: string,

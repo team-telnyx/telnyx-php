@@ -21,7 +21,7 @@ interface ActionsContract
      * @throws APIException
      */
     public function acceptSuggestions(
-        string $addressUuid,
+        string $id,
         array|ActionAcceptSuggestionsParams $params,
         ?RequestOptions $requestOptions = null,
     ): ActionAcceptSuggestionsResponse;

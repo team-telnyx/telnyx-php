@@ -5,11 +5,10 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
-use Telnyx\NumberBlockOrders\NumberBlockOrder;
 use Telnyx\NumberBlockOrders\NumberBlockOrderCreateParams;
 use Telnyx\NumberBlockOrders\NumberBlockOrderGetResponse;
 use Telnyx\NumberBlockOrders\NumberBlockOrderListParams;
+use Telnyx\NumberBlockOrders\NumberBlockOrderListResponse;
 use Telnyx\NumberBlockOrders\NumberBlockOrderNewResponse;
 use Telnyx\RequestOptions;
 
@@ -42,12 +41,10 @@ interface NumberBlockOrdersContract
      *
      * @param array<mixed>|NumberBlockOrderListParams $params
      *
-     * @return DefaultPagination<NumberBlockOrder>
-     *
      * @throws APIException
      */
     public function list(
         array|NumberBlockOrderListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): DefaultPagination;
+    ): NumberBlockOrderListResponse;
 }

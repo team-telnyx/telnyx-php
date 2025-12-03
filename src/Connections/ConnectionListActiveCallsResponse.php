@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\Connections;
 
-use Telnyx\Connections\ConnectionListActiveCallsResponse\RecordType;
+use Telnyx\Connections\ConnectionListActiveCallsResponse\Data;
+use Telnyx\Connections\ConnectionListActiveCallsResponse\Meta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkResponse;
@@ -13,12 +14,7 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type ConnectionListActiveCallsResponseShape = array{
- *   call_control_id: string,
- *   call_duration: int,
- *   call_leg_id: string,
- *   call_session_id: string,
- *   client_state: string,
- *   record_type: value-of<RecordType>,
+ *   data?: list<Data>|null, meta?: Meta|null
  * }
  */
 final class ConnectionListActiveCallsResponse implements BaseModel, ResponseConverter
@@ -28,67 +24,13 @@ final class ConnectionListActiveCallsResponse implements BaseModel, ResponseConv
 
     use SdkResponse;
 
-    /**
-     * Unique identifier and token for controlling the call.
-     */
-    #[Api]
-    public string $call_control_id;
+    /** @var list<Data>|null $data */
+    #[Api(list: Data::class, optional: true)]
+    public ?array $data;
 
-    /**
-     * Indicates the duration of the call in seconds.
-     */
-    #[Api]
-    public int $call_duration;
+    #[Api(optional: true)]
+    public ?Meta $meta;
 
-    /**
-     * ID that is unique to the call and can be used to correlate webhook events.
-     */
-    #[Api]
-    public string $call_leg_id;
-
-    /**
-     * ID that is unique to the call session and can be used to correlate webhook events. Call session is a group of related call legs that logically belong to the same phone call, e.g. an inbound and outbound leg of a transferred call.
-     */
-    #[Api]
-    public string $call_session_id;
-
-    /**
-     * State received from a command.
-     */
-    #[Api]
-    public string $client_state;
-
-    /** @var value-of<RecordType> $record_type */
-    #[Api(enum: RecordType::class)]
-    public string $record_type;
-
-    /**
-     * `new ConnectionListActiveCallsResponse()` is missing required properties by the API.
-     *
-     * To enforce required parameters use
-     * ```
-     * ConnectionListActiveCallsResponse::with(
-     *   call_control_id: ...,
-     *   call_duration: ...,
-     *   call_leg_id: ...,
-     *   call_session_id: ...,
-     *   client_state: ...,
-     *   record_type: ...,
-     * )
-     * ```
-     *
-     * Otherwise ensure the following setters are called
-     *
-     * ```
-     * (new ConnectionListActiveCallsResponse)
-     *   ->withCallControlID(...)
-     *   ->withCallDuration(...)
-     *   ->withCallLegID(...)
-     *   ->withCallSessionID(...)
-     *   ->withClientState(...)
-     *   ->withRecordType(...)
-     * ```
-     */
     public function __construct()
     {
         $this->initialize();
@@ -99,90 +41,33 @@ final class ConnectionListActiveCallsResponse implements BaseModel, ResponseConv
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param RecordType|value-of<RecordType> $record_type
+     * @param list<Data> $data
      */
-    public static function with(
-        string $call_control_id,
-        int $call_duration,
-        string $call_leg_id,
-        string $call_session_id,
-        string $client_state,
-        RecordType|string $record_type,
-    ): self {
+    public static function with(?array $data = null, ?Meta $meta = null): self
+    {
         $obj = new self;
 
-        $obj->call_control_id = $call_control_id;
-        $obj->call_duration = $call_duration;
-        $obj->call_leg_id = $call_leg_id;
-        $obj->call_session_id = $call_session_id;
-        $obj->client_state = $client_state;
-        $obj['record_type'] = $record_type;
+        null !== $data && $obj->data = $data;
+        null !== $meta && $obj->meta = $meta;
 
         return $obj;
     }
 
     /**
-     * Unique identifier and token for controlling the call.
+     * @param list<Data> $data
      */
-    public function withCallControlID(string $callControlID): self
+    public function withData(array $data): self
     {
         $obj = clone $this;
-        $obj->call_control_id = $callControlID;
+        $obj->data = $data;
 
         return $obj;
     }
 
-    /**
-     * Indicates the duration of the call in seconds.
-     */
-    public function withCallDuration(int $callDuration): self
+    public function withMeta(Meta $meta): self
     {
         $obj = clone $this;
-        $obj->call_duration = $callDuration;
-
-        return $obj;
-    }
-
-    /**
-     * ID that is unique to the call and can be used to correlate webhook events.
-     */
-    public function withCallLegID(string $callLegID): self
-    {
-        $obj = clone $this;
-        $obj->call_leg_id = $callLegID;
-
-        return $obj;
-    }
-
-    /**
-     * ID that is unique to the call session and can be used to correlate webhook events. Call session is a group of related call legs that logically belong to the same phone call, e.g. an inbound and outbound leg of a transferred call.
-     */
-    public function withCallSessionID(string $callSessionID): self
-    {
-        $obj = clone $this;
-        $obj->call_session_id = $callSessionID;
-
-        return $obj;
-    }
-
-    /**
-     * State received from a command.
-     */
-    public function withClientState(string $clientState): self
-    {
-        $obj = clone $this;
-        $obj->client_state = $clientState;
-
-        return $obj;
-    }
-
-    /**
-     * @param RecordType|value-of<RecordType> $recordType
-     */
-    public function withRecordType(RecordType|string $recordType): self
-    {
-        $obj = clone $this;
-        $obj['record_type'] = $recordType;
+        $obj->meta = $meta;
 
         return $obj;
     }

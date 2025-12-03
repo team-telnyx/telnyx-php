@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\MessagingTollfree\Verification;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPaginationForMessagingTollfree;
 use Telnyx\MessagingTollfree\Verification\Requests\RequestCreateParams;
 use Telnyx\MessagingTollfree\Verification\Requests\RequestListParams;
+use Telnyx\MessagingTollfree\Verification\Requests\RequestListResponse;
 use Telnyx\MessagingTollfree\Verification\Requests\RequestUpdateParams;
 use Telnyx\MessagingTollfree\Verification\Requests\VerificationRequestEgress;
 use Telnyx\MessagingTollfree\Verification\Requests\VerificationRequestStatus;
@@ -55,14 +55,12 @@ interface RequestsContract
      *
      * @param array<mixed>|RequestListParams $params
      *
-     * @return DefaultPaginationForMessagingTollfree<VerificationRequestStatus>
-     *
      * @throws APIException
      */
     public function list(
         array|RequestListParams $params,
         ?RequestOptions $requestOptions = null
-    ): DefaultPaginationForMessagingTollfree;
+    ): RequestListResponse;
 
     /**
      * @api

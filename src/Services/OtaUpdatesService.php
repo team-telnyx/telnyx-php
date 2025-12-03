@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\OtaUpdates\OtaUpdateGetResponse;
 use Telnyx\OtaUpdates\OtaUpdateListParams;
 use Telnyx\OtaUpdates\OtaUpdateListResponse;
@@ -54,14 +53,12 @@ final class OtaUpdatesService implements OtaUpdatesContract
      *   page?: array{number?: int, size?: int},
      * }|OtaUpdateListParams $params
      *
-     * @return DefaultPagination<OtaUpdateListResponse>
-     *
      * @throws APIException
      */
     public function list(
         array|OtaUpdateListParams $params,
         ?RequestOptions $requestOptions = null
-    ): DefaultPagination {
+    ): OtaUpdateListResponse {
         [$parsed, $options] = OtaUpdateListParams::parseRequest(
             $params,
             $requestOptions,
@@ -74,7 +71,6 @@ final class OtaUpdatesService implements OtaUpdatesContract
             query: $parsed,
             options: $options,
             convert: OtaUpdateListResponse::class,
-            page: DefaultPagination::class,
         );
     }
 }

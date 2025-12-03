@@ -1,0 +1,110 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Telnyx\IntegrationSecrets\IntegrationSecretListResponse;
+
+use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Contracts\BaseModel;
+
+/**
+ * @phpstan-type MetaShape = array{
+ *   page_number: int, page_size: int, total_pages: int, total_results: int
+ * }
+ */
+final class Meta implements BaseModel
+{
+    /** @use SdkModel<MetaShape> */
+    use SdkModel;
+
+    #[Api]
+    public int $page_number;
+
+    #[Api]
+    public int $page_size;
+
+    #[Api]
+    public int $total_pages;
+
+    #[Api]
+    public int $total_results;
+
+    /**
+     * `new Meta()` is missing required properties by the API.
+     *
+     * To enforce required parameters use
+     * ```
+     * Meta::with(
+     *   page_number: ..., page_size: ..., total_pages: ..., total_results: ...
+     * )
+     * ```
+     *
+     * Otherwise ensure the following setters are called
+     *
+     * ```
+     * (new Meta)
+     *   ->withPageNumber(...)
+     *   ->withPageSize(...)
+     *   ->withTotalPages(...)
+     *   ->withTotalResults(...)
+     * ```
+     */
+    public function __construct()
+    {
+        $this->initialize();
+    }
+
+    /**
+     * Construct an instance from the required parameters.
+     *
+     * You must use named parameters to construct any parameters with a default value.
+     */
+    public static function with(
+        int $page_number,
+        int $page_size,
+        int $total_pages,
+        int $total_results
+    ): self {
+        $obj = new self;
+
+        $obj->page_number = $page_number;
+        $obj->page_size = $page_size;
+        $obj->total_pages = $total_pages;
+        $obj->total_results = $total_results;
+
+        return $obj;
+    }
+
+    public function withPageNumber(int $pageNumber): self
+    {
+        $obj = clone $this;
+        $obj->page_number = $pageNumber;
+
+        return $obj;
+    }
+
+    public function withPageSize(int $pageSize): self
+    {
+        $obj = clone $this;
+        $obj->page_size = $pageSize;
+
+        return $obj;
+    }
+
+    public function withTotalPages(int $totalPages): self
+    {
+        $obj = clone $this;
+        $obj->total_pages = $totalPages;
+
+        return $obj;
+    }
+
+    public function withTotalResults(int $totalResults): self
+    {
+        $obj = clone $this;
+        $obj->total_results = $totalResults;
+
+        return $obj;
+    }
+}

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\Portouts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\Portouts\Events\EventGetResponse;
 use Telnyx\Portouts\Events\EventListParams;
 use Telnyx\Portouts\Events\EventListResponse;
@@ -28,14 +27,12 @@ interface EventsContract
      *
      * @param array<mixed>|EventListParams $params
      *
-     * @return DefaultPagination<EventListResponse>
-     *
      * @throws APIException
      */
     public function list(
         array|EventListParams $params,
         ?RequestOptions $requestOptions = null
-    ): DefaultPagination;
+    ): EventListResponse;
 
     /**
      * @api

@@ -6,12 +6,11 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
-use Telnyx\Portouts\PortoutDetails;
 use Telnyx\Portouts\PortoutGetResponse;
 use Telnyx\Portouts\PortoutListParams;
 use Telnyx\Portouts\PortoutListRejectionCodesParams;
 use Telnyx\Portouts\PortoutListRejectionCodesResponse;
+use Telnyx\Portouts\PortoutListResponse;
 use Telnyx\Portouts\PortoutUpdateStatusParams;
 use Telnyx\Portouts\PortoutUpdateStatusParams\Status;
 use Telnyx\Portouts\PortoutUpdateStatusResponse;
@@ -102,14 +101,12 @@ final class PortoutsService implements PortoutsContract
      *   page?: array{number?: int, size?: int},
      * }|PortoutListParams $params
      *
-     * @return DefaultPagination<PortoutDetails>
-     *
      * @throws APIException
      */
     public function list(
         array|PortoutListParams $params,
         ?RequestOptions $requestOptions = null
-    ): DefaultPagination {
+    ): PortoutListResponse {
         [$parsed, $options] = PortoutListParams::parseRequest(
             $params,
             $requestOptions,
@@ -121,8 +118,7 @@ final class PortoutsService implements PortoutsContract
             path: 'portouts',
             query: $parsed,
             options: $options,
-            convert: PortoutDetails::class,
-            page: DefaultPagination::class,
+            convert: PortoutListResponse::class,
         );
     }
 

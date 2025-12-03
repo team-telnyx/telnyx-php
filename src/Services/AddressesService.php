@@ -4,15 +4,14 @@ declare(strict_types=1);
 
 namespace Telnyx\Services;
 
-use Telnyx\Addresses\Address;
 use Telnyx\Addresses\AddressCreateParams;
 use Telnyx\Addresses\AddressDeleteResponse;
 use Telnyx\Addresses\AddressGetResponse;
 use Telnyx\Addresses\AddressListParams;
+use Telnyx\Addresses\AddressListResponse;
 use Telnyx\Addresses\AddressNewResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AddressesContract;
 use Telnyx\Services\Addresses\ActionsService;
@@ -112,14 +111,12 @@ final class AddressesService implements AddressesContract
      *   sort?: 'created_at'|'first_name'|'last_name'|'business_name'|'street_address',
      * }|AddressListParams $params
      *
-     * @return DefaultPagination<Address>
-     *
      * @throws APIException
      */
     public function list(
         array|AddressListParams $params,
         ?RequestOptions $requestOptions = null
-    ): DefaultPagination {
+    ): AddressListResponse {
         [$parsed, $options] = AddressListParams::parseRequest(
             $params,
             $requestOptions,
@@ -131,8 +128,7 @@ final class AddressesService implements AddressesContract
             path: 'addresses',
             query: $parsed,
             options: $options,
-            convert: Address::class,
-            page: DefaultPagination::class,
+            convert: AddressListResponse::class,
         );
     }
 

@@ -6,7 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\DefaultPagination;
+use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListResponse;
 use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationNewResponse;
 use Tests\UnsupportedMockTests;
 
@@ -59,6 +59,9 @@ final class PhoneNumberConfigurationsTest extends TestCase
         $result = $this->client->portingOrders->phoneNumberConfigurations->list([]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultPagination::class, $result);
+        $this->assertInstanceOf(
+            PhoneNumberConfigurationListResponse::class,
+            $result
+        );
     }
 }

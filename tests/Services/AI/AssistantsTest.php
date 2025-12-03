@@ -243,13 +243,13 @@ final class AssistantsTest extends TestCase
     }
 
     #[Test]
-    public function testImports(): void
+    public function testImport(): void
     {
         if (UnsupportedMockTests::$skip) {
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ai->assistants->imports([
+        $result = $this->client->ai->assistants->import([
             'api_key_ref' => 'api_key_ref', 'provider' => 'elevenlabs',
         ]);
 
@@ -258,13 +258,13 @@ final class AssistantsTest extends TestCase
     }
 
     #[Test]
-    public function testImportsWithOptionalParams(): void
+    public function testImportWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ai->assistants->imports([
+        $result = $this->client->ai->assistants->import([
             'api_key_ref' => 'api_key_ref', 'provider' => 'elevenlabs',
         ]);
 

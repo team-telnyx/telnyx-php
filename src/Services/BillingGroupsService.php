@@ -4,17 +4,16 @@ declare(strict_types=1);
 
 namespace Telnyx\Services;
 
-use Telnyx\BillingGroups\BillingGroup;
 use Telnyx\BillingGroups\BillingGroupCreateParams;
 use Telnyx\BillingGroups\BillingGroupDeleteResponse;
 use Telnyx\BillingGroups\BillingGroupGetResponse;
 use Telnyx\BillingGroups\BillingGroupListParams;
+use Telnyx\BillingGroups\BillingGroupListResponse;
 use Telnyx\BillingGroups\BillingGroupNewResponse;
 use Telnyx\BillingGroups\BillingGroupUpdateParams;
 use Telnyx\BillingGroups\BillingGroupUpdateResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\BillingGroupsContract;
 
@@ -108,17 +107,15 @@ final class BillingGroupsService implements BillingGroupsContract
      * List all billing groups
      *
      * @param array{
-     *   page_number_?: int, page_size_?: int
+     *   page?: array{number?: int, size?: int}
      * }|BillingGroupListParams $params
-     *
-     * @return DefaultFlatPagination<BillingGroup>
      *
      * @throws APIException
      */
     public function list(
         array|BillingGroupListParams $params,
         ?RequestOptions $requestOptions = null
-    ): DefaultFlatPagination {
+    ): BillingGroupListResponse {
         [$parsed, $options] = BillingGroupListParams::parseRequest(
             $params,
             $requestOptions,
@@ -130,8 +127,7 @@ final class BillingGroupsService implements BillingGroupsContract
             path: 'billing_groups',
             query: $parsed,
             options: $options,
-            convert: BillingGroup::class,
-            page: DefaultFlatPagination::class,
+            convert: BillingGroupListResponse::class,
         );
     }
 

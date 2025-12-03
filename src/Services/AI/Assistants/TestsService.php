@@ -8,10 +8,10 @@ use Telnyx\AI\Assistants\Tests\AssistantTest;
 use Telnyx\AI\Assistants\Tests\TelnyxConversationChannel;
 use Telnyx\AI\Assistants\Tests\TestCreateParams;
 use Telnyx\AI\Assistants\Tests\TestListParams;
+use Telnyx\AI\Assistants\Tests\TestListResponse;
 use Telnyx\AI\Assistants\Tests\TestUpdateParams;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\TestsContract;
 use Telnyx\Services\AI\Assistants\Tests\RunsService;
@@ -140,20 +140,17 @@ final class TestsService implements TestsContract
      *
      * @param array{
      *   destination?: string,
-     *   page_number_?: int,
-     *   page_size_?: int,
+     *   page?: array{number?: int, size?: int},
      *   telnyx_conversation_channel?: string,
      *   test_suite?: string,
      * }|TestListParams $params
-     *
-     * @return DefaultFlatPagination<AssistantTest>
      *
      * @throws APIException
      */
     public function list(
         array|TestListParams $params,
         ?RequestOptions $requestOptions = null
-    ): DefaultFlatPagination {
+    ): TestListResponse {
         [$parsed, $options] = TestListParams::parseRequest(
             $params,
             $requestOptions,
@@ -165,8 +162,7 @@ final class TestsService implements TestsContract
             path: 'ai/assistants/tests',
             query: $parsed,
             options: $options,
-            convert: AssistantTest::class,
-            page: DefaultFlatPagination::class,
+            convert: TestListResponse::class,
         );
     }
 

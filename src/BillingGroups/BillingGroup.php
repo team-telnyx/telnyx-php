@@ -7,9 +7,7 @@ namespace Telnyx\BillingGroups;
 use Telnyx\BillingGroups\BillingGroup\RecordType;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type BillingGroupShape = array{
@@ -22,12 +20,10 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  *   updated_at?: \DateTimeInterface|null,
  * }
  */
-final class BillingGroup implements BaseModel, ResponseConverter
+final class BillingGroup implements BaseModel
 {
     /** @use SdkModel<BillingGroupShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * Identifies the type of resource.

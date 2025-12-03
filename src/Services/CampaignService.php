@@ -17,7 +17,6 @@ use Telnyx\Campaign\TelnyxCampaignCsp;
 use Telnyx\Client;
 use Telnyx\Core\Conversion\MapOf;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\PerPagePaginationV2;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\CampaignContract;
 use Telnyx\Services\Campaign\OsrService;
@@ -114,14 +113,12 @@ final class CampaignService implements CampaignContract
      *   brandId: string, page?: int, recordsPerPage?: int, sort?: value-of<Sort>
      * }|CampaignListParams $params
      *
-     * @return PerPagePaginationV2<CampaignListResponse>
-     *
      * @throws APIException
      */
     public function list(
         array|CampaignListParams $params,
         ?RequestOptions $requestOptions = null
-    ): PerPagePaginationV2 {
+    ): CampaignListResponse {
         [$parsed, $options] = CampaignListParams::parseRequest(
             $params,
             $requestOptions,
@@ -134,7 +131,6 @@ final class CampaignService implements CampaignContract
             query: $parsed,
             options: $options,
             convert: CampaignListResponse::class,
-            page: PerPagePaginationV2::class,
         );
     }
 

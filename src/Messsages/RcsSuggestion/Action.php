@@ -21,7 +21,7 @@ use Telnyx\Messsages\RcsSuggestion\Action\ViewLocationAction;
  *   fallback_url?: string|null,
  *   open_url_action?: OpenURLAction|null,
  *   postback_data?: string|null,
- *   share_location_action?: array<string,mixed>|null,
+ *   share_location_action?: mixed,
  *   text?: string|null,
  *   view_location_action?: ViewLocationAction|null,
  * }
@@ -63,11 +63,9 @@ final class Action implements BaseModel
 
     /**
      * Opens the RCS app's location chooser so the user can pick a location to send back to the agent.
-     *
-     * @var array<string,mixed>|null $share_location_action
      */
-    #[Api(map: 'mixed', optional: true)]
-    public ?array $share_location_action;
+    #[Api(optional: true)]
+    public mixed $share_location_action;
 
     /**
      * Text that is shown in the suggested action. Maximum 25 characters.
@@ -90,8 +88,6 @@ final class Action implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
-     *
-     * @param array<string,mixed> $share_location_action
      */
     public static function with(
         ?CreateCalendarEventAction $create_calendar_event_action = null,
@@ -99,7 +95,7 @@ final class Action implements BaseModel
         ?string $fallback_url = null,
         ?OpenURLAction $open_url_action = null,
         ?string $postback_data = null,
-        ?array $share_location_action = null,
+        mixed $share_location_action = null,
         ?string $text = null,
         ?ViewLocationAction $view_location_action = null,
     ): self {
@@ -175,10 +171,8 @@ final class Action implements BaseModel
 
     /**
      * Opens the RCS app's location chooser so the user can pick a location to send back to the agent.
-     *
-     * @param array<string,mixed> $shareLocationAction
      */
-    public function withShareLocationAction(array $shareLocationAction): self
+    public function withShareLocationAction(mixed $shareLocationAction): self
     {
         $obj = clone $this;
         $obj->share_location_action = $shareLocationAction;

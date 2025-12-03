@@ -6,16 +6,15 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\VerifyProfilesContract;
 use Telnyx\VerifyProfiles\MessageTemplate;
-use Telnyx\VerifyProfiles\VerifyProfile;
 use Telnyx\VerifyProfiles\VerifyProfileCreateParams;
 use Telnyx\VerifyProfiles\VerifyProfileCreateTemplateParams;
 use Telnyx\VerifyProfiles\VerifyProfileData;
 use Telnyx\VerifyProfiles\VerifyProfileGetTemplatesResponse;
 use Telnyx\VerifyProfiles\VerifyProfileListParams;
+use Telnyx\VerifyProfiles\VerifyProfileListResponse;
 use Telnyx\VerifyProfiles\VerifyProfileUpdateParams;
 use Telnyx\VerifyProfiles\VerifyProfileUpdateTemplateParams;
 
@@ -157,17 +156,15 @@ final class VerifyProfilesService implements VerifyProfilesContract
      * Gets a paginated list of Verify profiles.
      *
      * @param array{
-     *   filter?: array{name?: string}, page_number_?: int, page_size_?: int
+     *   filter?: array{name?: string}, page?: array{number?: int, size?: int}
      * }|VerifyProfileListParams $params
-     *
-     * @return DefaultFlatPagination<VerifyProfile>
      *
      * @throws APIException
      */
     public function list(
         array|VerifyProfileListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): DefaultFlatPagination {
+    ): VerifyProfileListResponse {
         [$parsed, $options] = VerifyProfileListParams::parseRequest(
             $params,
             $requestOptions,
@@ -179,8 +176,7 @@ final class VerifyProfilesService implements VerifyProfilesContract
             path: 'verify_profiles',
             query: $parsed,
             options: $options,
-            convert: VerifyProfile::class,
-            page: DefaultFlatPagination::class,
+            convert: VerifyProfileListResponse::class,
         );
     }
 

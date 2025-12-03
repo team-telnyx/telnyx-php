@@ -6,11 +6,11 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\PerPagePaginationV2;
 use Telnyx\PhoneNumberCampaigns\PhoneNumberCampaign;
 use Telnyx\PhoneNumberCampaigns\PhoneNumberCampaignCreateParams;
 use Telnyx\PhoneNumberCampaigns\PhoneNumberCampaignListParams;
 use Telnyx\PhoneNumberCampaigns\PhoneNumberCampaignListParams\Sort;
+use Telnyx\PhoneNumberCampaigns\PhoneNumberCampaignListResponse;
 use Telnyx\PhoneNumberCampaigns\PhoneNumberCampaignUpdateParams;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PhoneNumberCampaignsContract;
@@ -84,7 +84,7 @@ final class PhoneNumberCampaignsService implements PhoneNumberCampaignsContract
      * @throws APIException
      */
     public function update(
-        string $campaignPhoneNumber,
+        string $phoneNumber,
         array|PhoneNumberCampaignUpdateParams $params,
         ?RequestOptions $requestOptions = null,
     ): PhoneNumberCampaign {
@@ -96,7 +96,7 @@ final class PhoneNumberCampaignsService implements PhoneNumberCampaignsContract
         // @phpstan-ignore-next-line;
         return $this->client->request(
             method: 'put',
-            path: ['phone_number_campaigns/%1$s', $campaignPhoneNumber],
+            path: ['phone_number_campaigns/%1$s', $phoneNumber],
             body: (object) $parsed,
             options: $options,
             convert: PhoneNumberCampaign::class,
@@ -120,14 +120,12 @@ final class PhoneNumberCampaignsService implements PhoneNumberCampaignsContract
      *   sort?: value-of<Sort>,
      * }|PhoneNumberCampaignListParams $params
      *
-     * @return PerPagePaginationV2<PhoneNumberCampaign>
-     *
      * @throws APIException
      */
     public function list(
         array|PhoneNumberCampaignListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): PerPagePaginationV2 {
+    ): PhoneNumberCampaignListResponse {
         [$parsed, $options] = PhoneNumberCampaignListParams::parseRequest(
             $params,
             $requestOptions,
@@ -139,8 +137,7 @@ final class PhoneNumberCampaignsService implements PhoneNumberCampaignsContract
             path: 'phone_number_campaigns',
             query: $parsed,
             options: $options,
-            convert: PhoneNumberCampaign::class,
-            page: PerPagePaginationV2::class,
+            convert: PhoneNumberCampaignListResponse::class,
         );
     }
 

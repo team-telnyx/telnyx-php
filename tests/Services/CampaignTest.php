@@ -8,10 +8,10 @@ use PHPUnit\Framework\TestCase;
 use Telnyx\Campaign\CampaignDeactivateResponse;
 use Telnyx\Campaign\CampaignGetMnoMetadataResponse;
 use Telnyx\Campaign\CampaignGetSharingStatusResponse;
+use Telnyx\Campaign\CampaignListResponse;
 use Telnyx\Campaign\CampaignSubmitAppealResponse;
 use Telnyx\Campaign\TelnyxCampaignCsp;
 use Telnyx\Client;
-use Telnyx\PerPagePaginationV2;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -68,7 +68,7 @@ final class CampaignTest extends TestCase
         $result = $this->client->campaign->list(['brandId' => 'brandId']);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(PerPagePaginationV2::class, $result);
+        $this->assertInstanceOf(CampaignListResponse::class, $result);
     }
 
     #[Test]
@@ -86,7 +86,7 @@ final class CampaignTest extends TestCase
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(PerPagePaginationV2::class, $result);
+        $this->assertInstanceOf(CampaignListResponse::class, $result);
     }
 
     #[Test]

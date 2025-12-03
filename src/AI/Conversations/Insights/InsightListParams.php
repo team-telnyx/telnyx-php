@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Conversations\Insights;
 
+use Telnyx\AI\Conversations\Insights\InsightListParams\Page;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
@@ -14,9 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\AI\Conversations\InsightsService::list()
  *
- * @phpstan-type InsightListParamsShape = array{
- *   page_number_?: int, page_size_?: int
- * }
+ * @phpstan-type InsightListParamsShape = array{page?: Page}
  */
 final class InsightListParams implements BaseModel
 {
@@ -24,11 +23,11 @@ final class InsightListParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
+    /**
+     * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
+     */
     #[Api(optional: true)]
-    public ?int $page_number_;
-
-    #[Api(optional: true)]
-    public ?int $page_size_;
+    public ?Page $page;
 
     public function __construct()
     {
@@ -40,30 +39,22 @@ final class InsightListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(
-        ?int $page_number_ = null,
-        ?int $page_size_ = null
-    ): self {
+    public static function with(?Page $page = null): self
+    {
         $obj = new self;
 
-        null !== $page_number_ && $obj->page_number_ = $page_number_;
-        null !== $page_size_ && $obj->page_size_ = $page_size_;
+        null !== $page && $obj->page = $page;
 
         return $obj;
     }
 
-    public function withPageNumber(int $pageNumber): self
+    /**
+     * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
+     */
+    public function withPage(Page $page): self
     {
         $obj = clone $this;
-        $obj->page_number_ = $pageNumber;
-
-        return $obj;
-    }
-
-    public function withPageSize(int $pageSize): self
-    {
-        $obj = clone $this;
-        $obj->page_size_ = $pageSize;
+        $obj->page = $page;
 
         return $obj;
     }

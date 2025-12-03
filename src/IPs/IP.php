@@ -6,9 +6,7 @@ namespace Telnyx\IPs;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type IPShape = array{
@@ -21,12 +19,10 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  *   updated_at?: string|null,
  * }
  */
-final class IP implements BaseModel, ResponseConverter
+final class IP implements BaseModel
 {
     /** @use SdkModel<IPShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * Identifies the type of resource.

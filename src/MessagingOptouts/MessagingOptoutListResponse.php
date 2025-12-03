@@ -4,19 +4,17 @@ declare(strict_types=1);
 
 namespace Telnyx\MessagingOptouts;
 
+use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\Contracts\ResponseConverter;
+use Telnyx\MessagingOptouts\MessagingOptoutListResponse\Data;
 
 /**
  * @phpstan-type MessagingOptoutListResponseShape = array{
- *   created_at?: \DateTimeInterface|null,
- *   from?: string|null,
- *   keyword?: string|null,
- *   messaging_profile_id?: string|null,
- *   to?: string|null,
+ *   data?: list<Data>|null, meta?: PaginationMeta|null
  * }
  */
 final class MessagingOptoutListResponse implements BaseModel, ResponseConverter
@@ -26,35 +24,12 @@ final class MessagingOptoutListResponse implements BaseModel, ResponseConverter
 
     use SdkResponse;
 
-    /**
-     * The timestamp when the opt-out was created.
-     */
+    /** @var list<Data>|null $data */
+    #[Api(list: Data::class, optional: true)]
+    public ?array $data;
+
     #[Api(optional: true)]
-    public ?\DateTimeInterface $created_at;
-
-    /**
-     * Sending address (+E.164 formatted phone number, alphanumeric sender ID, or short code).
-     */
-    #[Api(optional: true)]
-    public ?string $from;
-
-    /**
-     * The keyword that triggered the opt-out.
-     */
-    #[Api(nullable: true, optional: true)]
-    public ?string $keyword;
-
-    /**
-     * Unique identifier for a messaging profile.
-     */
-    #[Api(nullable: true, optional: true)]
-    public ?string $messaging_profile_id;
-
-    /**
-     * Receiving address (+E.164 formatted phone number or short code).
-     */
-    #[Api(optional: true)]
-    public ?string $to;
+    public ?PaginationMeta $meta;
 
     public function __construct()
     {
@@ -65,76 +40,36 @@ final class MessagingOptoutListResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param list<Data> $data
      */
     public static function with(
-        ?\DateTimeInterface $created_at = null,
-        ?string $from = null,
-        ?string $keyword = null,
-        ?string $messaging_profile_id = null,
-        ?string $to = null,
+        ?array $data = null,
+        ?PaginationMeta $meta = null
     ): self {
         $obj = new self;
 
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $from && $obj->from = $from;
-        null !== $keyword && $obj->keyword = $keyword;
-        null !== $messaging_profile_id && $obj->messaging_profile_id = $messaging_profile_id;
-        null !== $to && $obj->to = $to;
+        null !== $data && $obj->data = $data;
+        null !== $meta && $obj->meta = $meta;
 
         return $obj;
     }
 
     /**
-     * The timestamp when the opt-out was created.
+     * @param list<Data> $data
      */
-    public function withCreatedAt(\DateTimeInterface $createdAt): self
+    public function withData(array $data): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj->data = $data;
 
         return $obj;
     }
 
-    /**
-     * Sending address (+E.164 formatted phone number, alphanumeric sender ID, or short code).
-     */
-    public function withFrom(string $from): self
+    public function withMeta(PaginationMeta $meta): self
     {
         $obj = clone $this;
-        $obj->from = $from;
-
-        return $obj;
-    }
-
-    /**
-     * The keyword that triggered the opt-out.
-     */
-    public function withKeyword(?string $keyword): self
-    {
-        $obj = clone $this;
-        $obj->keyword = $keyword;
-
-        return $obj;
-    }
-
-    /**
-     * Unique identifier for a messaging profile.
-     */
-    public function withMessagingProfileID(?string $messagingProfileID): self
-    {
-        $obj = clone $this;
-        $obj->messaging_profile_id = $messagingProfileID;
-
-        return $obj;
-    }
-
-    /**
-     * Receiving address (+E.164 formatted phone number or short code).
-     */
-    public function withTo(string $to): self
-    {
-        $obj = clone $this;
-        $obj->to = $to;
+        $obj->meta = $meta;
 
         return $obj;
     }

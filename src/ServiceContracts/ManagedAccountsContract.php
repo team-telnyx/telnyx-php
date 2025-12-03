@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\ManagedAccounts\ManagedAccountCreateParams;
 use Telnyx\ManagedAccounts\ManagedAccountGetAllocatableGlobalOutboundChannelsResponse;
 use Telnyx\ManagedAccounts\ManagedAccountGetResponse;
@@ -60,14 +59,12 @@ interface ManagedAccountsContract
      *
      * @param array<mixed>|ManagedAccountListParams $params
      *
-     * @return DefaultPagination<ManagedAccountListResponse>
-     *
      * @throws APIException
      */
     public function list(
         array|ManagedAccountListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): DefaultPagination;
+    ): ManagedAccountListResponse;
 
     /**
      * @api

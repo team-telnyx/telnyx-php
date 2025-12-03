@@ -5,12 +5,11 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
-use Telnyx\VerifiedNumbers\VerifiedNumber;
 use Telnyx\VerifiedNumbers\VerifiedNumberCreateParams;
 use Telnyx\VerifiedNumbers\VerifiedNumberDataWrapper;
 use Telnyx\VerifiedNumbers\VerifiedNumberListParams;
+use Telnyx\VerifiedNumbers\VerifiedNumberListResponse;
 use Telnyx\VerifiedNumbers\VerifiedNumberNewResponse;
 
 interface VerifiedNumbersContract
@@ -42,14 +41,12 @@ interface VerifiedNumbersContract
      *
      * @param array<mixed>|VerifiedNumberListParams $params
      *
-     * @return DefaultFlatPagination<VerifiedNumber>
-     *
      * @throws APIException
      */
     public function list(
         array|VerifiedNumberListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): DefaultFlatPagination;
+    ): VerifiedNumberListResponse;
 
     /**
      * @api

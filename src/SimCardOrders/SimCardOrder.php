@@ -6,9 +6,7 @@ namespace Telnyx\SimCardOrders;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\SimCardOrders\SimCardOrder\Cost;
 use Telnyx\SimCardOrders\SimCardOrder\OrderAddress;
 use Telnyx\SimCardOrders\SimCardOrder\Status;
@@ -26,12 +24,10 @@ use Telnyx\SimCardOrders\SimCardOrder\Status;
  *   updated_at?: string|null,
  * }
  */
-final class SimCardOrder implements BaseModel, ResponseConverter
+final class SimCardOrder implements BaseModel
 {
     /** @use SdkModel<SimCardOrderShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * Identifies the resource.

@@ -6,11 +6,10 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultFlatPagination;
-use Telnyx\OAuthGrants\OAuthGrant;
 use Telnyx\OAuthGrants\OAuthGrantDeleteResponse;
 use Telnyx\OAuthGrants\OAuthGrantGetResponse;
 use Telnyx\OAuthGrants\OAuthGrantListParams;
+use Telnyx\OAuthGrants\OAuthGrantListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\OAuthGrantsContract;
 
@@ -48,14 +47,12 @@ final class OAuthGrantsService implements OAuthGrantsContract
      *
      * @param array{page_number_?: int, page_size_?: int}|OAuthGrantListParams $params
      *
-     * @return DefaultFlatPagination<OAuthGrant>
-     *
      * @throws APIException
      */
     public function list(
         array|OAuthGrantListParams $params,
         ?RequestOptions $requestOptions = null
-    ): DefaultFlatPagination {
+    ): OAuthGrantListResponse {
         [$parsed, $options] = OAuthGrantListParams::parseRequest(
             $params,
             $requestOptions,
@@ -67,8 +64,7 @@ final class OAuthGrantsService implements OAuthGrantsContract
             path: 'oauth_grants',
             query: $parsed,
             options: $options,
-            convert: OAuthGrant::class,
-            page: DefaultFlatPagination::class,
+            convert: OAuthGrantListResponse::class,
         );
     }
 

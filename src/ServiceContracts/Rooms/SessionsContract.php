@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\Rooms;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
-use Telnyx\RoomParticipant;
-use Telnyx\Rooms\RoomSession;
+use Telnyx\Rooms\Sessions\SessionGetParticipantsResponse;
 use Telnyx\Rooms\Sessions\SessionGetResponse;
 use Telnyx\Rooms\Sessions\SessionList0Params;
+use Telnyx\Rooms\Sessions\SessionList0Response;
 use Telnyx\Rooms\Sessions\SessionList1Params;
+use Telnyx\Rooms\Sessions\SessionList1Response;
 use Telnyx\Rooms\Sessions\SessionRetrieveParams;
 use Telnyx\Rooms\Sessions\SessionRetrieveParticipantsParams;
 
@@ -35,21 +35,17 @@ interface SessionsContract
      *
      * @param array<mixed>|SessionList0Params $params
      *
-     * @return DefaultPagination<RoomSession>
-     *
      * @throws APIException
      */
     public function list0(
         array|SessionList0Params $params,
         ?RequestOptions $requestOptions = null
-    ): DefaultPagination;
+    ): SessionList0Response;
 
     /**
      * @api
      *
      * @param array<mixed>|SessionList1Params $params
-     *
-     * @return DefaultPagination<RoomSession>
      *
      * @throws APIException
      */
@@ -57,14 +53,12 @@ interface SessionsContract
         string $roomID,
         array|SessionList1Params $params,
         ?RequestOptions $requestOptions = null,
-    ): DefaultPagination;
+    ): SessionList1Response;
 
     /**
      * @api
      *
      * @param array<mixed>|SessionRetrieveParticipantsParams $params
-     *
-     * @return DefaultPagination<RoomParticipant>
      *
      * @throws APIException
      */
@@ -72,5 +66,5 @@ interface SessionsContract
         string $roomSessionID,
         array|SessionRetrieveParticipantsParams $params,
         ?RequestOptions $requestOptions = null,
-    ): DefaultPagination;
+    ): SessionGetParticipantsResponse;
 }

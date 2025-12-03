@@ -6,9 +6,9 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\AccessIPAddress\AccessIPAddressCreateParams;
 use Telnyx\AccessIPAddress\AccessIPAddressListParams;
+use Telnyx\AccessIPAddress\AccessIPAddressListResponse;
 use Telnyx\AccessIPAddress\AccessIPAddressResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 
 interface AccessIPAddressContract
@@ -40,14 +40,12 @@ interface AccessIPAddressContract
      *
      * @param array<mixed>|AccessIPAddressListParams $params
      *
-     * @return DefaultFlatPagination<AccessIPAddressResponse>
-     *
      * @throws APIException
      */
     public function list(
         array|AccessIPAddressListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): DefaultFlatPagination;
+    ): AccessIPAddressListResponse;
 
     /**
      * @api

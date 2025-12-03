@@ -6,13 +6,12 @@ namespace Telnyx\Services\PortingOrders;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\PortingOrders\ActivationJobs\ActivationJobGetResponse;
 use Telnyx\PortingOrders\ActivationJobs\ActivationJobListParams;
+use Telnyx\PortingOrders\ActivationJobs\ActivationJobListResponse;
 use Telnyx\PortingOrders\ActivationJobs\ActivationJobRetrieveParams;
 use Telnyx\PortingOrders\ActivationJobs\ActivationJobUpdateParams;
 use Telnyx\PortingOrders\ActivationJobs\ActivationJobUpdateResponse;
-use Telnyx\PortingOrders\PortingOrdersActivationJob;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PortingOrders\ActivationJobsContract;
 
@@ -95,15 +94,13 @@ final class ActivationJobsService implements ActivationJobsContract
      *   page?: array{number?: int, size?: int}
      * }|ActivationJobListParams $params
      *
-     * @return DefaultPagination<PortingOrdersActivationJob>
-     *
      * @throws APIException
      */
     public function list(
         string $id,
         array|ActivationJobListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): DefaultPagination {
+    ): ActivationJobListResponse {
         [$parsed, $options] = ActivationJobListParams::parseRequest(
             $params,
             $requestOptions,
@@ -115,8 +112,7 @@ final class ActivationJobsService implements ActivationJobsContract
             path: ['porting_orders/%1$s/activation_jobs', $id],
             query: $parsed,
             options: $options,
-            convert: PortingOrdersActivationJob::class,
-            page: DefaultPagination::class,
+            convert: ActivationJobListResponse::class,
         );
     }
 }

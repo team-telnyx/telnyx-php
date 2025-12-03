@@ -6,8 +6,10 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\DefaultPagination;
+use Telnyx\Rooms\Sessions\SessionGetParticipantsResponse;
 use Telnyx\Rooms\Sessions\SessionGetResponse;
+use Telnyx\Rooms\Sessions\SessionList0Response;
+use Telnyx\Rooms\Sessions\SessionList1Response;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -54,7 +56,7 @@ final class SessionsTest extends TestCase
         $result = $this->client->rooms->sessions->list0([]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultPagination::class, $result);
+        $this->assertInstanceOf(SessionList0Response::class, $result);
     }
 
     #[Test]
@@ -70,7 +72,7 @@ final class SessionsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultPagination::class, $result);
+        $this->assertInstanceOf(SessionList1Response::class, $result);
     }
 
     #[Test]
@@ -86,6 +88,6 @@ final class SessionsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultPagination::class, $result);
+        $this->assertInstanceOf(SessionGetParticipantsResponse::class, $result);
     }
 }

@@ -8,16 +8,14 @@ use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\GlobalIPAssignments\GlobalIPAssignmentUpdateParams\GlobalIPAssignmentUpdateRequest;
+use Telnyx\GlobalIPAssignments\GlobalIPAssignmentUpdateParams\Body;
 
 /**
  * Update a Global IP assignment.
  *
  * @see Telnyx\Services\GlobalIPAssignmentsService::update()
  *
- * @phpstan-type GlobalIPAssignmentUpdateParamsShape = array{
- *   globalIpAssignmentUpdateRequest: GlobalIPAssignmentUpdateRequest
- * }
+ * @phpstan-type GlobalIPAssignmentUpdateParamsShape = array{body: Body}
  */
 final class GlobalIPAssignmentUpdateParams implements BaseModel
 {
@@ -26,20 +24,20 @@ final class GlobalIPAssignmentUpdateParams implements BaseModel
     use SdkParams;
 
     #[Api]
-    public GlobalIPAssignmentUpdateRequest $globalIpAssignmentUpdateRequest;
+    public Body $body;
 
     /**
      * `new GlobalIPAssignmentUpdateParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * GlobalIPAssignmentUpdateParams::with(globalIpAssignmentUpdateRequest: ...)
+     * GlobalIPAssignmentUpdateParams::with(body: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new GlobalIPAssignmentUpdateParams)->withGlobalIPAssignmentUpdateRequest(...)
+     * (new GlobalIPAssignmentUpdateParams)->withBody(...)
      * ```
      */
     public function __construct()
@@ -52,21 +50,19 @@ final class GlobalIPAssignmentUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(
-        GlobalIPAssignmentUpdateRequest $globalIpAssignmentUpdateRequest
-    ): self {
+    public static function with(Body $body): self
+    {
         $obj = new self;
 
-        $obj->globalIpAssignmentUpdateRequest = $globalIpAssignmentUpdateRequest;
+        $obj->body = $body;
 
         return $obj;
     }
 
-    public function withGlobalIPAssignmentUpdateRequest(
-        GlobalIPAssignmentUpdateRequest $globalIPAssignmentUpdateRequest
-    ): self {
+    public function withBody(Body $body): self
+    {
         $obj = clone $this;
-        $obj->globalIpAssignmentUpdateRequest = $globalIPAssignmentUpdateRequest;
+        $obj->body = $body;
 
         return $obj;
     }

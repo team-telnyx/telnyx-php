@@ -6,12 +6,11 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultFlatPagination;
-use Telnyx\MobileVoiceConnections\MobileVoiceConnection;
 use Telnyx\MobileVoiceConnections\MobileVoiceConnectionCreateParams;
 use Telnyx\MobileVoiceConnections\MobileVoiceConnectionDeleteResponse;
 use Telnyx\MobileVoiceConnections\MobileVoiceConnectionGetResponse;
 use Telnyx\MobileVoiceConnections\MobileVoiceConnectionListParams;
+use Telnyx\MobileVoiceConnections\MobileVoiceConnectionListResponse;
 use Telnyx\MobileVoiceConnections\MobileVoiceConnectionNewResponse;
 use Telnyx\MobileVoiceConnections\MobileVoiceConnectionUpdateParams;
 use Telnyx\MobileVoiceConnections\MobileVoiceConnectionUpdateResponse;
@@ -134,14 +133,12 @@ final class MobileVoiceConnectionsService implements MobileVoiceConnectionsContr
      *   sort?: string,
      * }|MobileVoiceConnectionListParams $params
      *
-     * @return DefaultFlatPagination<MobileVoiceConnection>
-     *
      * @throws APIException
      */
     public function list(
         array|MobileVoiceConnectionListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): DefaultFlatPagination {
+    ): MobileVoiceConnectionListResponse {
         [$parsed, $options] = MobileVoiceConnectionListParams::parseRequest(
             $params,
             $requestOptions,
@@ -153,8 +150,7 @@ final class MobileVoiceConnectionsService implements MobileVoiceConnectionsContr
             path: 'v2/mobile_voice_connections',
             query: $parsed,
             options: $options,
-            convert: MobileVoiceConnection::class,
-            page: DefaultFlatPagination::class,
+            convert: MobileVoiceConnectionListResponse::class,
         );
     }
 

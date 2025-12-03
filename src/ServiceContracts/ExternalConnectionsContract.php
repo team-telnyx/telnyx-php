@@ -5,12 +5,11 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
-use Telnyx\ExternalConnections\ExternalConnection;
 use Telnyx\ExternalConnections\ExternalConnectionCreateParams;
 use Telnyx\ExternalConnections\ExternalConnectionDeleteResponse;
 use Telnyx\ExternalConnections\ExternalConnectionGetResponse;
 use Telnyx\ExternalConnections\ExternalConnectionListParams;
+use Telnyx\ExternalConnections\ExternalConnectionListResponse;
 use Telnyx\ExternalConnections\ExternalConnectionNewResponse;
 use Telnyx\ExternalConnections\ExternalConnectionUpdateLocationParams;
 use Telnyx\ExternalConnections\ExternalConnectionUpdateLocationResponse;
@@ -60,14 +59,12 @@ interface ExternalConnectionsContract
      *
      * @param array<mixed>|ExternalConnectionListParams $params
      *
-     * @return DefaultPagination<ExternalConnection>
-     *
      * @throws APIException
      */
     public function list(
         array|ExternalConnectionListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): DefaultPagination;
+    ): ExternalConnectionListResponse;
 
     /**
      * @api

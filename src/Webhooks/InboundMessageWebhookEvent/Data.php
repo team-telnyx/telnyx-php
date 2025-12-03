@@ -7,8 +7,8 @@ namespace Telnyx\Webhooks\InboundMessageWebhookEvent;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\InboundMessagePayload;
 use Telnyx\Webhooks\InboundMessageWebhookEvent\Data\EventType;
+use Telnyx\Webhooks\InboundMessageWebhookEvent\Data\Payload;
 use Telnyx\Webhooks\InboundMessageWebhookEvent\Data\RecordType;
 
 /**
@@ -16,7 +16,7 @@ use Telnyx\Webhooks\InboundMessageWebhookEvent\Data\RecordType;
  *   id?: string|null,
  *   event_type?: value-of<EventType>|null,
  *   occurred_at?: \DateTimeInterface|null,
- *   payload?: InboundMessagePayload|null,
+ *   payload?: Payload|null,
  *   record_type?: value-of<RecordType>|null,
  * }
  */
@@ -46,7 +46,7 @@ final class Data implements BaseModel
     public ?\DateTimeInterface $occurred_at;
 
     #[Api(optional: true)]
-    public ?InboundMessagePayload $payload;
+    public ?Payload $payload;
 
     /**
      * Identifies the type of the resource.
@@ -73,7 +73,7 @@ final class Data implements BaseModel
         ?string $id = null,
         EventType|string|null $event_type = null,
         ?\DateTimeInterface $occurred_at = null,
-        ?InboundMessagePayload $payload = null,
+        ?Payload $payload = null,
         RecordType|string|null $record_type = null,
     ): self {
         $obj = new self;
@@ -122,7 +122,7 @@ final class Data implements BaseModel
         return $obj;
     }
 
-    public function withPayload(InboundMessagePayload $payload): self
+    public function withPayload(Payload $payload): self
     {
         $obj = clone $this;
         $obj->payload = $payload;

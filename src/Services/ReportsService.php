@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultFlatPagination;
 use Telnyx\Reports\ReportListMdrsParams;
 use Telnyx\Reports\ReportListMdrsParams\Status;
 use Telnyx\Reports\ReportListMdrsResponse;
@@ -87,8 +86,7 @@ final class ReportsService implements ReportsContract
      *   imsi?: string,
      *   mcc?: string,
      *   mnc?: string,
-     *   page_number_?: int,
-     *   page_size_?: int,
+     *   page?: array{number?: int, size?: int},
      *   phone_number?: string,
      *   sim_card_id?: string,
      *   sim_group_id?: string,
@@ -97,14 +95,12 @@ final class ReportsService implements ReportsContract
      *   start_date?: string,
      * }|ReportListWdrsParams $params
      *
-     * @return DefaultFlatPagination<ReportListWdrsResponse>
-     *
      * @throws APIException
      */
     public function listWdrs(
         array|ReportListWdrsParams $params,
         ?RequestOptions $requestOptions = null
-    ): DefaultFlatPagination {
+    ): ReportListWdrsResponse {
         [$parsed, $options] = ReportListWdrsParams::parseRequest(
             $params,
             $requestOptions,
@@ -117,7 +113,6 @@ final class ReportsService implements ReportsContract
             query: $parsed,
             options: $options,
             convert: ReportListWdrsResponse::class,
-            page: DefaultFlatPagination::class,
         );
     }
 }

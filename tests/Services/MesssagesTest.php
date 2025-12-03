@@ -92,7 +92,7 @@ final class MesssagesTest extends TestCase
                                                     'description' => 'description',
                                                 ],
                                                 'postback_data' => 'postback_data',
-                                                'share_location_action' => ['foo' => 'bar'],
+                                                'share_location_action' => [],
                                                 'text' => 'Hello world',
                                                 'view_location_action' => [
                                                     'label' => 'label',
@@ -141,7 +141,7 @@ final class MesssagesTest extends TestCase
                                                 'description' => 'description',
                                             ],
                                             'postback_data' => 'postback_data',
-                                            'share_location_action' => ['foo' => 'bar'],
+                                            'share_location_action' => [],
                                             'text' => 'Hello world',
                                             'view_location_action' => [
                                                 'label' => 'label',
@@ -180,7 +180,7 @@ final class MesssagesTest extends TestCase
                                     'description' => 'description',
                                 ],
                                 'postback_data' => 'postback_data',
-                                'share_location_action' => ['foo' => 'bar'],
+                                'share_location_action' => [],
                                 'text' => 'Hello world',
                                 'view_location_action' => [
                                     'label' => 'label',

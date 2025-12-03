@@ -4,37 +4,81 @@ declare(strict_types=1);
 
 namespace Telnyx\DetailRecords;
 
-use Telnyx\Core\Concerns\SdkUnion;
-use Telnyx\Core\Conversion\Contracts\Converter;
-use Telnyx\Core\Conversion\Contracts\ConverterSource;
-use Telnyx\DetailRecords\DetailRecordListResponse\AmdDetailRecord;
-use Telnyx\DetailRecords\DetailRecordListResponse\ConferenceDetailRecord;
-use Telnyx\DetailRecords\DetailRecordListResponse\ConferenceParticipantDetailRecord;
-use Telnyx\DetailRecords\DetailRecordListResponse\MediaStorageDetailRecord;
-use Telnyx\DetailRecords\DetailRecordListResponse\MessageDetailRecord;
-use Telnyx\DetailRecords\DetailRecordListResponse\SimCardUsageDetailRecord;
-use Telnyx\DetailRecords\DetailRecordListResponse\VerifyDetailRecord;
+use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Concerns\SdkResponse;
+use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\Contracts\ResponseConverter;
+use Telnyx\DetailRecords\DetailRecordListResponse\Data;
+use Telnyx\DetailRecords\DetailRecordListResponse\Data\AmdDetailRecord;
+use Telnyx\DetailRecords\DetailRecordListResponse\Data\ConferenceDetailRecord;
+use Telnyx\DetailRecords\DetailRecordListResponse\Data\ConferenceParticipantDetailRecord;
+use Telnyx\DetailRecords\DetailRecordListResponse\Data\MediaStorageDetailRecord;
+use Telnyx\DetailRecords\DetailRecordListResponse\Data\MessageDetailRecord;
+use Telnyx\DetailRecords\DetailRecordListResponse\Data\SimCardUsageDetailRecord;
+use Telnyx\DetailRecords\DetailRecordListResponse\Data\VerifyDetailRecord;
+use Telnyx\DetailRecords\DetailRecordListResponse\Meta;
 
 /**
- * An object following one of the schemas published in https://developers.telnyx.com/docs/api/v2/detail-records.
+ * @phpstan-type DetailRecordListResponseShape = array{
+ *   data?: list<MessageDetailRecord|ConferenceDetailRecord|ConferenceParticipantDetailRecord|AmdDetailRecord|VerifyDetailRecord|SimCardUsageDetailRecord|MediaStorageDetailRecord>|null,
+ *   meta?: Meta|null,
+ * }
  */
-final class DetailRecordListResponse implements ConverterSource
+final class DetailRecordListResponse implements BaseModel, ResponseConverter
 {
-    use SdkUnion;
+    /** @use SdkModel<DetailRecordListResponseShape> */
+    use SdkModel;
+
+    use SdkResponse;
 
     /**
-     * @return list<string|Converter|ConverterSource>|array<string,string|Converter|ConverterSource>
+     * @var list<MessageDetailRecord|ConferenceDetailRecord|ConferenceParticipantDetailRecord|AmdDetailRecord|VerifyDetailRecord|SimCardUsageDetailRecord|MediaStorageDetailRecord>|null $data
      */
-    public static function variants(): array
+    #[Api(list: Data::class, optional: true)]
+    public ?array $data;
+
+    #[Api(optional: true)]
+    public ?Meta $meta;
+
+    public function __construct()
     {
-        return [
-            MessageDetailRecord::class,
-            ConferenceDetailRecord::class,
-            ConferenceParticipantDetailRecord::class,
-            AmdDetailRecord::class,
-            VerifyDetailRecord::class,
-            SimCardUsageDetailRecord::class,
-            MediaStorageDetailRecord::class,
-        ];
+        $this->initialize();
+    }
+
+    /**
+     * Construct an instance from the required parameters.
+     *
+     * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param list<MessageDetailRecord|ConferenceDetailRecord|ConferenceParticipantDetailRecord|AmdDetailRecord|VerifyDetailRecord|SimCardUsageDetailRecord|MediaStorageDetailRecord> $data
+     */
+    public static function with(?array $data = null, ?Meta $meta = null): self
+    {
+        $obj = new self;
+
+        null !== $data && $obj->data = $data;
+        null !== $meta && $obj->meta = $meta;
+
+        return $obj;
+    }
+
+    /**
+     * @param list<MessageDetailRecord|ConferenceDetailRecord|ConferenceParticipantDetailRecord|AmdDetailRecord|VerifyDetailRecord|SimCardUsageDetailRecord|MediaStorageDetailRecord> $data
+     */
+    public function withData(array $data): self
+    {
+        $obj = clone $this;
+        $obj->data = $data;
+
+        return $obj;
+    }
+
+    public function withMeta(Meta $meta): self
+    {
+        $obj = clone $this;
+        $obj->meta = $meta;
+
+        return $obj;
     }
 }

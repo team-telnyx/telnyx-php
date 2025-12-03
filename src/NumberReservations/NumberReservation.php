@@ -6,9 +6,7 @@ namespace Telnyx\NumberReservations;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\NumberReservations\NumberReservation\Status;
 
 /**
@@ -22,12 +20,10 @@ use Telnyx\NumberReservations\NumberReservation\Status;
  *   updated_at?: \DateTimeInterface|null,
  * }
  */
-final class NumberReservation implements BaseModel, ResponseConverter
+final class NumberReservation implements BaseModel
 {
     /** @use SdkModel<NumberReservationShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?string $id;

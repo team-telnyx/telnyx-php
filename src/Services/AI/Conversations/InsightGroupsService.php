@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace Telnyx\Services\AI\Conversations;
 
+use Telnyx\AI\Conversations\InsightGroups\InsightGroupGetInsightGroupsResponse;
 use Telnyx\AI\Conversations\InsightGroups\InsightGroupInsightGroupsParams;
 use Telnyx\AI\Conversations\InsightGroups\InsightGroupRetrieveInsightGroupsParams;
 use Telnyx\AI\Conversations\InsightGroups\InsightGroupUpdateParams;
-use Telnyx\AI\Conversations\InsightGroups\InsightTemplateGroup;
 use Telnyx\AI\Conversations\InsightGroups\InsightTemplateGroupDetail;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Conversations\InsightGroupsContract;
 use Telnyx\Services\AI\Conversations\InsightGroups\InsightsService;
@@ -138,17 +137,15 @@ final class InsightGroupsService implements InsightGroupsContract
      * Get all insight groups
      *
      * @param array{
-     *   page_number_?: int, page_size_?: int
+     *   page?: array{number?: int, size?: int}
      * }|InsightGroupRetrieveInsightGroupsParams $params
-     *
-     * @return DefaultFlatPagination<InsightTemplateGroup>
      *
      * @throws APIException
      */
     public function retrieveInsightGroups(
         array|InsightGroupRetrieveInsightGroupsParams $params,
         ?RequestOptions $requestOptions = null,
-    ): DefaultFlatPagination {
+    ): InsightGroupGetInsightGroupsResponse {
         [$parsed, $options] = InsightGroupRetrieveInsightGroupsParams::parseRequest(
             $params,
             $requestOptions,
@@ -160,8 +157,7 @@ final class InsightGroupsService implements InsightGroupsContract
             path: 'ai/conversations/insight-groups',
             query: $parsed,
             options: $options,
-            convert: InsightTemplateGroup::class,
-            page: DefaultFlatPagination::class,
+            convert: InsightGroupGetInsightGroupsResponse::class,
         );
     }
 }

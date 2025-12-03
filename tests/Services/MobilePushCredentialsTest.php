@@ -6,7 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\DefaultPagination;
+use Telnyx\MobilePushCredentials\MobilePushCredentialListResponse;
 use Telnyx\MobilePushCredentials\PushCredentialResponse;
 use Tests\UnsupportedMockTests;
 
@@ -39,6 +39,7 @@ final class MobilePushCredentialsTest extends TestCase
             'alias' => 'LucyIosCredential',
             'certificate' => '-----BEGIN CERTIFICATE----- MIIGVDCCBTKCAQEAsNlRJVZn9ZvXcECQm65czs... -----END CERTIFICATE-----',
             'private_key' => '-----BEGIN RSA PRIVATE KEY----- MIIEpQIBAAKCAQEAsNlRJVZn9ZvXcECQm65czs... -----END RSA PRIVATE KEY-----',
+            'type' => 'ios',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -56,6 +57,7 @@ final class MobilePushCredentialsTest extends TestCase
             'alias' => 'LucyIosCredential',
             'certificate' => '-----BEGIN CERTIFICATE----- MIIGVDCCBTKCAQEAsNlRJVZn9ZvXcECQm65czs... -----END CERTIFICATE-----',
             'private_key' => '-----BEGIN RSA PRIVATE KEY----- MIIEpQIBAAKCAQEAsNlRJVZn9ZvXcECQm65czs... -----END RSA PRIVATE KEY-----',
+            'type' => 'ios',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -87,7 +89,7 @@ final class MobilePushCredentialsTest extends TestCase
         $result = $this->client->mobilePushCredentials->list([]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultPagination::class, $result);
+        $this->assertInstanceOf(MobilePushCredentialListResponse::class, $result);
     }
 
     #[Test]

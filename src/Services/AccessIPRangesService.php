@@ -7,9 +7,9 @@ namespace Telnyx\Services;
 use Telnyx\AccessIPRanges\AccessIPRange;
 use Telnyx\AccessIPRanges\AccessIPRangeCreateParams;
 use Telnyx\AccessIPRanges\AccessIPRangeListParams;
+use Telnyx\AccessIPRanges\AccessIPRangeListResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AccessIPRangesContract;
 
@@ -67,18 +67,15 @@ final class AccessIPRangesService implements AccessIPRangesContract
      *       lte?: string|\DateTimeInterface,
      *     },
      *   },
-     *   page_number_?: int,
-     *   page_size_?: int,
+     *   page?: array{number?: int, size?: int},
      * }|AccessIPRangeListParams $params
-     *
-     * @return DefaultFlatPagination<AccessIPRange>
      *
      * @throws APIException
      */
     public function list(
         array|AccessIPRangeListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): DefaultFlatPagination {
+    ): AccessIPRangeListResponse {
         [$parsed, $options] = AccessIPRangeListParams::parseRequest(
             $params,
             $requestOptions,
@@ -90,8 +87,7 @@ final class AccessIPRangesService implements AccessIPRangesContract
             path: 'access_ip_ranges',
             query: $parsed,
             options: $options,
-            convert: AccessIPRange::class,
-            page: DefaultFlatPagination::class,
+            convert: AccessIPRangeListResponse::class,
         );
     }
 

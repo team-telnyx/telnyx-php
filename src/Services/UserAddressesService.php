@@ -6,13 +6,12 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\UserAddressesContract;
-use Telnyx\UserAddresses\UserAddress;
 use Telnyx\UserAddresses\UserAddressCreateParams;
 use Telnyx\UserAddresses\UserAddressGetResponse;
 use Telnyx\UserAddresses\UserAddressListParams;
+use Telnyx\UserAddresses\UserAddressListResponse;
 use Telnyx\UserAddresses\UserAddressNewResponse;
 
 final class UserAddressesService implements UserAddressesContract
@@ -99,14 +98,12 @@ final class UserAddressesService implements UserAddressesContract
      *   sort?: 'created_at'|'first_name'|'last_name'|'business_name'|'street_address',
      * }|UserAddressListParams $params
      *
-     * @return DefaultPagination<UserAddress>
-     *
      * @throws APIException
      */
     public function list(
         array|UserAddressListParams $params,
         ?RequestOptions $requestOptions = null
-    ): DefaultPagination {
+    ): UserAddressListResponse {
         [$parsed, $options] = UserAddressListParams::parseRequest(
             $params,
             $requestOptions,
@@ -118,8 +115,7 @@ final class UserAddressesService implements UserAddressesContract
             path: 'user_addresses',
             query: $parsed,
             options: $options,
-            convert: UserAddress::class,
-            page: DefaultPagination::class,
+            convert: UserAddressListResponse::class,
         );
     }
 }

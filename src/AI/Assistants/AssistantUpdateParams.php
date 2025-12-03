@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants;
 
-use Telnyx\AI\Assistants\AssistantTool\Handoff;
-use Telnyx\AI\Assistants\AssistantTool\Refer;
-use Telnyx\AI\Assistants\AssistantTool\SendDtmf;
+use Telnyx\AI\Assistants\AssistantTool\DtmfTool;
+use Telnyx\AI\Assistants\AssistantTool\HandoffTool;
+use Telnyx\AI\Assistants\AssistantTool\SipReferTool;
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
@@ -32,7 +32,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   privacy_settings?: PrivacySettings,
  *   promote_to_main?: bool,
  *   telephony_settings?: TelephonySettings,
- *   tools?: list<WebhookTool|RetrievalTool|Handoff|HangupTool|TransferTool|Refer|SendDtmf>,
+ *   tools?: list<WebhookTool|RetrievalTool|HandoffTool|HangupTool|TransferTool|SipReferTool|DtmfTool>,
  *   transcription?: TranscriptionSettings,
  *   voice_settings?: VoiceSettings,
  * }
@@ -112,7 +112,7 @@ final class AssistantUpdateParams implements BaseModel
     /**
      * The tools that the assistant can use. These may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables).
      *
-     * @var list<WebhookTool|RetrievalTool|Handoff|HangupTool|TransferTool|Refer|SendDtmf>|null $tools
+     * @var list<WebhookTool|RetrievalTool|HandoffTool|HangupTool|TransferTool|SipReferTool|DtmfTool>|null $tools
      */
     #[Api(list: AssistantTool::class, optional: true)]
     public ?array $tools;
@@ -135,7 +135,7 @@ final class AssistantUpdateParams implements BaseModel
      *
      * @param array<string,mixed> $dynamic_variables
      * @param list<EnabledFeatures|value-of<EnabledFeatures>> $enabled_features
-     * @param list<WebhookTool|RetrievalTool|Handoff|HangupTool|TransferTool|Refer|SendDtmf> $tools
+     * @param list<WebhookTool|RetrievalTool|HandoffTool|HangupTool|TransferTool|SipReferTool|DtmfTool> $tools
      */
     public static function with(
         ?string $description = null,
@@ -323,7 +323,7 @@ final class AssistantUpdateParams implements BaseModel
     /**
      * The tools that the assistant can use. These may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables).
      *
-     * @param list<WebhookTool|RetrievalTool|Handoff|HangupTool|TransferTool|Refer|SendDtmf> $tools
+     * @param list<WebhookTool|RetrievalTool|HandoffTool|HangupTool|TransferTool|SipReferTool|DtmfTool> $tools
      */
     public function withTools(array $tools): self
     {

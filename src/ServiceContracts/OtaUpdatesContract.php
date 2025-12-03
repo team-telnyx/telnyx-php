@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\OtaUpdates\OtaUpdateGetResponse;
 use Telnyx\OtaUpdates\OtaUpdateListParams;
 use Telnyx\OtaUpdates\OtaUpdateListResponse;
@@ -28,12 +27,10 @@ interface OtaUpdatesContract
      *
      * @param array<mixed>|OtaUpdateListParams $params
      *
-     * @return DefaultPagination<OtaUpdateListResponse>
-     *
      * @throws APIException
      */
     public function list(
         array|OtaUpdateListParams $params,
         ?RequestOptions $requestOptions = null
-    ): DefaultPagination;
+    ): OtaUpdateListResponse;
 }

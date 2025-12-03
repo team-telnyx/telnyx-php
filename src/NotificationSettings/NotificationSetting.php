@@ -6,9 +6,7 @@ namespace Telnyx\NotificationSettings;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\NotificationSettings\NotificationSetting\Parameter;
 use Telnyx\NotificationSettings\NotificationSetting\Status;
 
@@ -26,12 +24,10 @@ use Telnyx\NotificationSettings\NotificationSetting\Status;
  *   updated_at?: \DateTimeInterface|null,
  * }
  */
-final class NotificationSetting implements BaseModel, ResponseConverter
+final class NotificationSetting implements BaseModel
 {
     /** @use SdkModel<NotificationSettingShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * A UUID.

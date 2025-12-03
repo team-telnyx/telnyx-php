@@ -6,9 +6,7 @@ namespace Telnyx\SimCardGroups\Actions;
 
 use Telnyx\Core\Attributes\Api;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\SimCardGroups\Actions\SimCardGroupAction\Settings;
 use Telnyx\SimCardGroups\Actions\SimCardGroupAction\Status;
 use Telnyx\SimCardGroups\Actions\SimCardGroupAction\Type;
@@ -27,12 +25,10 @@ use Telnyx\SimCardGroups\Actions\SimCardGroupAction\Type;
  *   updated_at?: string|null,
  * }
  */
-final class SimCardGroupAction implements BaseModel, ResponseConverter
+final class SimCardGroupAction implements BaseModel
 {
     /** @use SdkModel<SimCardGroupActionShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * Identifies the resource.

@@ -6,14 +6,13 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\OutboundVoiceProfiles\OutboundCallRecording;
-use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfile;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileCreateParams;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileDeleteResponse;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileGetResponse;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileListParams;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileListParams\Sort;
+use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileListResponse;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileNewResponse;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileUpdateParams;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileUpdateResponse;
@@ -162,14 +161,12 @@ final class OutboundVoiceProfilesService implements OutboundVoiceProfilesContrac
      *   sort?: value-of<Sort>,
      * }|OutboundVoiceProfileListParams $params
      *
-     * @return DefaultPagination<OutboundVoiceProfile>
-     *
      * @throws APIException
      */
     public function list(
         array|OutboundVoiceProfileListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): DefaultPagination {
+    ): OutboundVoiceProfileListResponse {
         [$parsed, $options] = OutboundVoiceProfileListParams::parseRequest(
             $params,
             $requestOptions,
@@ -181,8 +178,7 @@ final class OutboundVoiceProfilesService implements OutboundVoiceProfilesContrac
             path: 'outbound_voice_profiles',
             query: $parsed,
             options: $options,
-            convert: OutboundVoiceProfile::class,
-            page: DefaultPagination::class,
+            convert: OutboundVoiceProfileListResponse::class,
         );
     }
 

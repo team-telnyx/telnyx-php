@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\SimCards;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\SimCards\Actions\ActionBulkSetPublicIPsParams;
 use Telnyx\SimCards\Actions\ActionBulkSetPublicIPsResponse;
@@ -13,13 +12,13 @@ use Telnyx\SimCards\Actions\ActionDisableResponse;
 use Telnyx\SimCards\Actions\ActionEnableResponse;
 use Telnyx\SimCards\Actions\ActionGetResponse;
 use Telnyx\SimCards\Actions\ActionListParams;
+use Telnyx\SimCards\Actions\ActionListResponse;
 use Telnyx\SimCards\Actions\ActionRemovePublicIPResponse;
 use Telnyx\SimCards\Actions\ActionSetPublicIPParams;
 use Telnyx\SimCards\Actions\ActionSetPublicIPResponse;
 use Telnyx\SimCards\Actions\ActionSetStandbyResponse;
 use Telnyx\SimCards\Actions\ActionValidateRegistrationCodesParams;
 use Telnyx\SimCards\Actions\ActionValidateRegistrationCodesResponse;
-use Telnyx\SimCards\Actions\SimCardAction;
 
 interface ActionsContract
 {
@@ -38,14 +37,12 @@ interface ActionsContract
      *
      * @param array<mixed>|ActionListParams $params
      *
-     * @return DefaultPagination<SimCardAction>
-     *
      * @throws APIException
      */
     public function list(
         array|ActionListParams $params,
         ?RequestOptions $requestOptions = null
-    ): DefaultPagination;
+    ): ActionListResponse;
 
     /**
      * @api

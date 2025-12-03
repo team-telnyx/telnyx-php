@@ -6,12 +6,11 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
-use Telnyx\NotificationChannels\NotificationChannel;
 use Telnyx\NotificationChannels\NotificationChannelCreateParams;
 use Telnyx\NotificationChannels\NotificationChannelDeleteResponse;
 use Telnyx\NotificationChannels\NotificationChannelGetResponse;
 use Telnyx\NotificationChannels\NotificationChannelListParams;
+use Telnyx\NotificationChannels\NotificationChannelListResponse;
 use Telnyx\NotificationChannels\NotificationChannelNewResponse;
 use Telnyx\NotificationChannels\NotificationChannelUpdateParams;
 use Telnyx\NotificationChannels\NotificationChannelUpdateResponse;
@@ -91,7 +90,7 @@ final class NotificationChannelsService implements NotificationChannelsContract
      * @throws APIException
      */
     public function update(
-        string $notificationChannelID,
+        string $id,
         array|NotificationChannelUpdateParams $params,
         ?RequestOptions $requestOptions = null,
     ): NotificationChannelUpdateResponse {
@@ -103,7 +102,7 @@ final class NotificationChannelsService implements NotificationChannelsContract
         // @phpstan-ignore-next-line;
         return $this->client->request(
             method: 'patch',
-            path: ['notification_channels/%1$s', $notificationChannelID],
+            path: ['notification_channels/%1$s', $id],
             body: (object) $parsed,
             options: $options,
             convert: NotificationChannelUpdateResponse::class,
@@ -129,14 +128,12 @@ final class NotificationChannelsService implements NotificationChannelsContract
      *   page?: array{number?: int, size?: int},
      * }|NotificationChannelListParams $params
      *
-     * @return DefaultPagination<NotificationChannel>
-     *
      * @throws APIException
      */
     public function list(
         array|NotificationChannelListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): DefaultPagination {
+    ): NotificationChannelListResponse {
         [$parsed, $options] = NotificationChannelListParams::parseRequest(
             $params,
             $requestOptions,
@@ -148,8 +145,7 @@ final class NotificationChannelsService implements NotificationChannelsContract
             path: 'notification_channels',
             query: $parsed,
             options: $options,
-            convert: NotificationChannel::class,
-            page: DefaultPagination::class,
+            convert: NotificationChannelListResponse::class,
         );
     }
 

@@ -6,13 +6,12 @@ namespace Telnyx\Services\PortingOrders;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberCreateParams;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberDeleteParams;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberDeleteResponse;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberListParams;
+use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberListResponse;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberNewResponse;
-use Telnyx\PortingOrders\AssociatedPhoneNumbers\PortingAssociatedPhoneNumber;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PortingOrders\AssociatedPhoneNumbersContract;
 
@@ -66,15 +65,13 @@ final class AssociatedPhoneNumbersService implements AssociatedPhoneNumbersContr
      *   sort?: array{value?: '-created_at'|'created_at'},
      * }|AssociatedPhoneNumberListParams $params
      *
-     * @return DefaultPagination<PortingAssociatedPhoneNumber>
-     *
      * @throws APIException
      */
     public function list(
         string $portingOrderID,
         array|AssociatedPhoneNumberListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): DefaultPagination {
+    ): AssociatedPhoneNumberListResponse {
         [$parsed, $options] = AssociatedPhoneNumberListParams::parseRequest(
             $params,
             $requestOptions,
@@ -86,8 +83,7 @@ final class AssociatedPhoneNumbersService implements AssociatedPhoneNumbersContr
             path: ['porting_orders/%1$s/associated_phone_numbers', $portingOrderID],
             query: $parsed,
             options: $options,
-            convert: PortingAssociatedPhoneNumber::class,
-            page: DefaultPagination::class,
+            convert: AssociatedPhoneNumberListResponse::class,
         );
     }
 

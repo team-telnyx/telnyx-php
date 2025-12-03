@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayCreateParams;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayDeleteResponse;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayGetResponse;
@@ -82,14 +81,12 @@ final class PublicInternetGatewaysService implements PublicInternetGatewaysContr
      *   filter?: array{network_id?: string}, page?: array{number?: int, size?: int}
      * }|PublicInternetGatewayListParams $params
      *
-     * @return DefaultPagination<PublicInternetGatewayListResponse>
-     *
      * @throws APIException
      */
     public function list(
         array|PublicInternetGatewayListParams $params,
         ?RequestOptions $requestOptions = null,
-    ): DefaultPagination {
+    ): PublicInternetGatewayListResponse {
         [$parsed, $options] = PublicInternetGatewayListParams::parseRequest(
             $params,
             $requestOptions,
@@ -102,7 +99,6 @@ final class PublicInternetGatewaysService implements PublicInternetGatewaysContr
             query: $parsed,
             options: $options,
             convert: PublicInternetGatewayListResponse::class,
-            page: DefaultPagination::class,
         );
     }
 

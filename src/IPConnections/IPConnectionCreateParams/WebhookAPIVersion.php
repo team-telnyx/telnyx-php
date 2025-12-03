@@ -9,7 +9,7 @@ namespace Telnyx\IPConnections\IPConnectionCreateParams;
  */
 enum WebhookAPIVersion: string
 {
-    case V1 = '1';
+    case _1 = '1';
 
-    case V2 = '2';
+    case _2 = '2';
 }
